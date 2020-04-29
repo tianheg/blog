@@ -1,1 +1,7 @@
-+++ title = "{{ replace .Name "-" " " | title }}" date = "{{ .Date }}" tags = [] slug = "" +++
++++
+title = "{{ replace .Name "-" " " | title }}"
+date = "{{ .Date }}"
+tags = []
+slug = ""
++++
+
