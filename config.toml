@@ -12,7 +12,7 @@ copyright = "[CC BY-NC-SA 4.0](https://creativecommons.org/licenses/by-nc-sa/4.0
 theme = "meme"
 
 # `hugo new` 新建文章自动打开的文本编辑器
-newContentEditor = "gedit"
+newContentEditor = "Typora"
 
 # i18n
 defaultContentLanguage = "zh"
@@ -34,7 +34,7 @@ footnoteReturnLinkContents = "↩"
 enableGitInfo = true
 
 # 是否生成 robots.txt 文件
-enableRobotsTXT = false
+enableRobotsTXT = true
 
 # 每一分页的文章数（仅对「文章摘要」首页布局有效）
 paginate = 5
@@ -46,12 +46,12 @@ uglyURLs = false
 
 # URL 结构
 [permalinks]
-    #categories = "/categories/:slug/"
+    categories = "/categories/:slug/"
     tags = "/tags/:slug/"
 
 # 类别
 [taxonomies]
-    #category = "categories"
+    category = "categories"
     tag = "tags"
 
 # 修改时间
@@ -79,9 +79,9 @@ uglyURLs = false
             unsafe = true
             xHTML = false
     [markup.highlight]
-        codeFences = false
+        codeFences = true
         guessSyntax = false
-        lineNos = false
+        lineNos = true
         lineNumbersInTable = true
         noClasses = false
     [markup.tableOfContents]
@@ -96,7 +96,7 @@ uglyURLs = false
     # 邮箱
     email = "19855812775@163.com"
     # 座右铭或简介
-    motto = "Viva La Vida"
+    motto = "Study hard, work hard, enjoy it!"
     # 头像
     avatar = "/icons/apple-touch-icon.png"
     # 网站（默认值：baseURL）
@@ -109,9 +109,9 @@ uglyURLs = false
     threshold = 80
     includeNewer = true
     toLower = true
-    # [[related.indices]]
-    #     name = "categories"
-    #     weight = 100
+    [[related.indices]]
+        name = "categories"
+        weight = 100
     [[related.indices]]
         name = "tags"
         weight = 95
@@ -174,104 +174,43 @@ uglyURLs = false
 #               `lang-switcher`）
 
 [menu]
-    ## 菜单栏
+    # # 菜单栏
     # [[menu.main]]
     #     url = "/"
     #     name = "首页"
     #     weight = 1
     #     pre = "internal"
     #     post = "home"
-    # [[menu.main]]
-    #     url = "/posts/"
-    #     name = "文章"
-    #     weight = 2
-    #     pre = "internal"
-    #     post = "archive"
-    # [[menu.main]]
-    #     url = "/categories/"
-    #     name = "分类"
-    #     weight = 3
-    #     pre = "internal"
-    #     post = "th"
-    # [[menu.main]]
-    #     url = "/tags/"
-    #     name = "标签"
-    #     weight = 4
-    #     pre = "internal"
-    #     post = "tags"
-    # [[menu.main]]
-    #     url = "/about/"
-    #     name = "关于"
-    #     weight = 5
-    #     pre = "internal"
-    #     post = "user-circle"
-    # [[menu.main]]
-    #     weight = 6
-    #     identifier = "theme-switcher"
-    # [[menu.main]]
-    #     weight = 7
-    #     identifier = "lang-switcher"
-
-    # 自定义的菜单栏
     [[menu.main]]
-        url = "/home/"
-        name = "首页"
-        weight = 1
-        pre = "internal"
-        post = "home"
-    [[menu.main]]
-        url = "/original/"
-        name = "想法"
+        url = "/posts/"
+        name = "文章"
         weight = 2
         pre = "internal"
-        post = "pagelines"
+        post = "archive"
     [[menu.main]]
-        url = "/poetry/"
-        name = "诗作"
+        url = "/categories/"
+        name = "分类"
         weight = 3
         pre = "internal"
-        post = "leaf"
+        post = "th"
     [[menu.main]]
-        url = "/aphorism/"
-        name = "格言"
+        url = "/tags/"
+        name = "标签"
         weight = 4
         pre = "internal"
-        post = "balance-scale"
-    [[menu.main]]
-        url = "/notes/"
-        name = "笔记"
-        weight = 5
-        pre = "internal"
-        post = "envira"
-    [[menu.main]]
-        url = "/excerpt/"
-        name = "摘录"
-        weight = 6
-        pre = "internal"
-        post = "link"
+        post = "tags"
     [[menu.main]]
         url = "/about/"
         name = "关于"
-        weight = 7
+        weight = 5
         pre = "internal"
         post = "user-circle"
-
-    # 首页的底部链接
-    [[menu.home]]
-        url = "/home/"
-        name = "Home"
-        weight = 1
-        pre = "internal"
-    # [[menu.home]]
-    #     url = "https://t.me/yixiuer"
-    #     name = "Telegram"
-    #     weight = 2
-    #     pre = "external"
-    [[menu.home]]
-        url = "/atom.xml"
-        name = "Feed"
-        weight = 3
-        pre = "external"
+    [[menu.main]]
+        weight = 6
+        identifier = "theme-switcher"
+    [[menu.main]]
+        weight = 7
+        identifier = "lang-switcher"
 
 
 
@@ -286,15 +225,15 @@ uglyURLs = false
     enableHeader = true
 
     # 是否在首页显示
-    displayHeaderInHome = false
+    displayHeaderInHome = true
     # 说明：对弹性布局的顶栏无效
 
     # 背景
-    headerBackground = "hsl(0, 0%, 0%)"
+    headerBackground = "linear-gradient(90deg, #f795331a 0, #f370551a 15%, #ef4e7b1a 30%, #a166ab1a 44%, #5073b81a 58%, #1098ad1a 72%, #07b39b1a 86%, #6dba821a 100%)"
     # 说明：https://developer.mozilla.org/zh-CN/docs/Web/CSS/background
 
     # 顶栏布局
-    headerLayout = "center"
+    headerLayout = "flex"
     # 说明：居中布局（center）或弹性布局（flex）
 
     # 顶栏宽度的回退值
@@ -337,11 +276,11 @@ uglyURLs = false
     # 说明：对弹性布局的顶栏无效
 
     # 是否在首页显示
-    displayMenuInHome = false
+    displayMenuInHome = true
     # 说明：对弹性布局的顶栏无效
 
     # 是否按文章分区高亮当前菜单项
-    activeInSection = true
+    activeInSection = false
     # 说明：如果开启，那么当某一文章的分区名是某
     #      一菜单项中的 `url` 时，该文章页面中
     #      的该菜单项也会被高亮
@@ -356,7 +295,7 @@ uglyURLs = false
     # 3. posts     文章摘要
     # 4. page      普通页面
 
-    homeLayout = "footage"
+    homeLayout = "posts"
 
     ## 「诗意人生」
     # 诗句，支持 Markdown
@@ -365,16 +304,16 @@ uglyURLs = false
     homeLinksPadding = 1
 
     ## 「视频片段」
-    homePoster = "./images/reflection-of-tree-at-night-10s-720p.jpg"
-    homeVideoWebm = "https://gateway.pinata.cloud/ipns/yixiuer.me/videos/reflection-of-tree-at-night-10s-720p.webm"
-    homeVideoMp4 = "https://gateway.pinata.cloud/ipns/yixiuer.me/videos/reflection-of-tree-at-night-10s-720p.mp4"
-    homeLogo = "/icons/android-chrome-512x512.png"
-    homeLogoLink = "/home/"
-    homeTitle = "YIDAJIABEI"
-    homeMotto = "Study and Enjoy"
-    homeDescription = "我的个人博客，记录所学所思所想"
-    homeKeywords = "关键词：技术、生活"
-    homeLinksDelimiter = "·"
+    homePoster = ""
+    homeVideoWebm = ""
+    homeVideoMp4 = ""
+    homeLogo = ""
+    homeLogoLink = ""
+    homeTitle = ""
+    homeMotto = ""
+    homeDescription = ""
+    homeKeywords = ""
+    homeLinksDelimiter = ""
 
 
     ######################################
@@ -415,7 +354,7 @@ uglyURLs = false
     # 的树状分类，故如需保留树状分类，建议适应
     # Hugo 的设计理念——分区。
 
-    categoryBy = "sections"
+    categoryBy = "categories"
     # 注意：如果你设置为 `sections`，请务必将
     #      此配置文件中的类别（taxonomies）中
     #      的 `categories` 删除，不然分类页
@@ -461,7 +400,7 @@ uglyURLs = false
     #      单位：em
 
     # 是否显示列表标题
-    displayListTitle = false
+    displayListTitle = true
 
     # 日期的格式
     listDateFormat = "1 月 2 日"
@@ -472,7 +411,7 @@ uglyURLs = false
     # 说明：left（左边）或 right（右边）
 
     # 是否按月份分隔列表
-    groupByMonth = false
+    groupByMonth = true
 
     # 是否开启十二生肖
     chineseZodiac = true
@@ -502,7 +441,7 @@ uglyURLs = false
     # 说明：分区的名字即站点的 content 目录下
     #      的文件夹的名字。
 
-    mainSections = ["original", "poetry", "aphorism", "notes", "excerpt"]
+    # mainSections = ["posts"]
 
 
     ######################################
@@ -562,9 +501,9 @@ uglyURLs = false
     #      manifest.json，并检查和修改相关内容
     #      （图标的路径）。
 
-    themeColor = "#000"
-    # themeColorDark = "#16171d"
-    safariMaskColor = "#000"
+    themeColor = "#fff"
+    themeColorDark = "#16171d"
+    safariMaskColor = "#2a6df4"
     msApplicationTileColor = "#fff"
 
 
@@ -573,7 +512,7 @@ uglyURLs = false
 
     jsonLD = true
     openGraph = true
-    twitterCards = false
+    twitterCards = true
     # 注意：如果你设置 twitterCards 为 `true`，
     #      请务必开启 openGraph。否则，网页的
     #      Twitter Cards 信息将会不完整。
