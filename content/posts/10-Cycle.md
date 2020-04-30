@@ -4,6 +4,7 @@ toc: true
 date: 2020-04-08T20:12:42+08:00
 categories: ["技术"]
 tags: ["循环", "Python"]
+series: ["Python"]
 ---
 
 for ... in  while  break  continue

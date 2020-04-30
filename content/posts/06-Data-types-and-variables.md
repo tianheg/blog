@@ -4,6 +4,7 @@ toc: true
 date: 2020-03-29T18:16:03+08:00
 categories: ["技术"]
 tags: ["Python", "数据类型"]
+series: ["Python"]
 ---
 
 #### 数据类型

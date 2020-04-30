@@ -4,6 +4,7 @@ toc: false
 date: 2020-04-10T23:59:17+08:00
 categories: ["技术"]
 tags: ["切片", "Python"]
+series: ["Python"]
 ---
 
 > 在 Python 中，代码不是越多越好，而是越少越好。代码不是越复杂越好，而是越简单越好。
