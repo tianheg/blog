@@ -4,6 +4,7 @@ categories: ["技术"]
 toc: true
 date: 2020-03-28T18:44:08+08:00
 tags: ["缩进", "Python"]
+series: ["Python"]
 ---
 
 #### Python基础
