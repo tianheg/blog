@@ -51,8 +51,9 @@ uglyURLs = false
 
 # 类别
 [taxonomies]
-    # category = "categories"
+    category = "categories"
     tag = "tags"
+    series = "series"
 
 # 修改时间
 [frontmatter]
@@ -175,30 +176,30 @@ uglyURLs = false
 
 [menu]
     # # 菜单栏
-    # [[menu.main]]
-    #     url = "/"
-    #     name = "首页"
-    #     weight = 1
-    #     pre = "internal"
-    #     post = "home"
+    [[menu.main]]
+        url = "/"
+        name = "首页"
+        weight = 1
+        pre = "internal"
+        post = "home"
     [[menu.main]]
         url = "/posts/"
-        name = "文章"
-        weight = 2
-        pre = "internal"
-        post = "archive"
-    # [[menu.main]]
-    #     url = "/categories/"
-    #     name = "分类"
-    #     weight = 3
-    #     pre = "internal"
-    #     post = "th"
-    [[menu.main]]
-        url = "/tags/"
-        name = "标签"
+        name = "归档"
         weight = 4
         pre = "internal"
-        post = "tags"
+        post = "archive"
+    [[menu.main]]
+        url = "/categories/"
+        name = "技术文章"
+        weight = 2
+        pre = "internal"
+        post = "series"
+    [[menu.main]]
+        url = "/series/"
+        name = "系列"
+        weight = 3
+        pre = "internal"
+        post = "series"
     [[menu.main]]
         url = "/about/"
         name = "关于"
@@ -369,7 +370,7 @@ uglyURLs = false
     # 的树状分类，故如需保留树状分类，建议适应
     # Hugo 的设计理念——分区。
 
-    categoryBy = "sections"
+    categoryBy = "categories"
     # 注意：如果你设置为 `sections`，请务必将
     #      此配置文件中的类别（taxonomies）中
     #      的 `categories` 删除，不然分类页
