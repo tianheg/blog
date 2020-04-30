@@ -4,6 +4,7 @@ toc: true
 date: 2020-03-31T20:31:29+08:00
 categories: ["技术"]
 tags: ["Python"]
+series: ["Python"]
 ---
 
 #### list

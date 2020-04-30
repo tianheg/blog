@@ -4,6 +4,7 @@ toc: true
 date: 2020-03-30T22:37:00+08:00
 categories: ["技术"]
 tags: ["Python", "字符编码"]
+series: ["Python"]
 ---
 
 #### 字符编码

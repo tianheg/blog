@@ -4,6 +4,7 @@ toc: true
 date: 2020-04-08T20:14:00+08:00
 categories: ["技术"]
 tags: ["位置参数", "默认参数", "可变参数", "Python"]
+series: ["Python"]
 ---
 #### 位置参数
 

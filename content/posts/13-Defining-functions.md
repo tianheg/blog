@@ -4,6 +4,7 @@ toc: true
 date: 2020-04-08T20:13:45+08:00
 categories: ["技术"]
 tags: ["空函数", "参数检查", "Python"]
+series: ["Python"]
 ---
 
 pass  返回多个值

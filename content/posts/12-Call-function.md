@@ -4,6 +4,7 @@ toc: true
 date: 2020-04-08T20:13:32+08:00
 categories: ["技术"]
 tags: ["abs", "max", "Python"]
+series: ["Python"]
 ---
 
 抽象  调用函数  数据类型转换
