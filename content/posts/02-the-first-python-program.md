@@ -4,6 +4,7 @@ categories: ["技术"]
 toc: true
 date: 2020-03-24T22:19:03+08:00
 tags: ["命令行", "交互", "Python"]
+series: ["Python"]
 ---
 
 #### 复习

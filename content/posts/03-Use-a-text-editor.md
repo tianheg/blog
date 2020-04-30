@@ -4,6 +4,7 @@ categories: ["技术"]
 toc: true
 date: 2020-03-25T23:24:44+08:00
 tags: ["VSCode", "Python", "编辑器"]
+series: ["Python"]
 ---
 
 #### Visual Studio Code

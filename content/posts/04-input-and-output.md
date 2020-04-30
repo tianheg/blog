@@ -4,6 +4,7 @@ categories: ["技术"]
 toc: true
 date: 2020-03-27T20:19:58+08:00
 tags: ["输入", "输出", "Python"]
+series: ["Python"]
 ---
 
 #### 输出
