@@ -4,6 +4,7 @@ toc: false
 date: 2020-04-11T21:58:40+08:00
 categories: ["技术"]
 tags: ["学习", "Python"]
+series: ["Python"]
 ---
 
 1. 如果给定一个 list 或 tuple ，我们可以通过 `for` 循环来遍历这个 list 或 tuple ，这种遍历我们称为迭代（ Iteration ）。

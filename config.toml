@@ -12,7 +12,7 @@ copyright = "在保留本文作者及本文链接的前提下，非商业用途�
 theme = "meme"
 
 # `hugo new` 新建文章自动打开的文本编辑器
-newContentEditor = "type"
+newContentEditor = "typora"
 
 # i18n
 defaultContentLanguage = "zh"
@@ -190,10 +190,10 @@ uglyURLs = false
         post = "archive"
     [[menu.main]]
         url = "/categories/"
-        name = "技术文章"
+        name = "文章"
         weight = 2
         pre = "internal"
-        post = "series"
+        post = "categories"
     [[menu.main]]
         url = "/series/"
         name = "系列"
@@ -201,16 +201,22 @@ uglyURLs = false
         pre = "internal"
         post = "series"
     [[menu.main]]
+        url = "/tags/"
+        name = "标签"
+        weight = 5
+        pre = "internal"
+        post = "tags"
+    [[menu.main]]
         url = "/about/"
         name = "关于"
-        weight = 5
+        weight = 6
         pre = "internal"
         post = "user-circle"
     [[menu.main]]
-        weight = 6
+        weight = 7
         identifier = "theme-switcher"
     [[menu.main]]
-        weight = 7
+        weight = 8
         identifier = "lang-switcher"
 
     ## 社交栏
@@ -219,7 +225,8 @@ uglyURLs = false
         name = "GitHub"
         weight = 1
         pre = "external"
-## 链接栏
+    
+    ## 链接栏
     [[menu.links]]
         url = "/"
         name = "Home"
@@ -457,7 +464,7 @@ uglyURLs = false
     # 说明：分区的名字即站点的 content 目录下
     #      的文件夹的名字。
 
-    mainSections = ["posts", "tags", "about"]
+    mainSections = ["about", "categories", "home", "posts", "series", "tags"]
 
 
     ######################################

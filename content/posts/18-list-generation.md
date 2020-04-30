@@ -4,6 +4,7 @@ toc: false
 date: 2020-04-12T23:02:17+08:00
 categories: ["技术"]
 tags: ["list", "Python"]
+series: ["Python"]
 ---
 列表生成式即 List Comprehensions，是 Python 内置的非常简单却强大的可以用来创建 list 生成式。
 
