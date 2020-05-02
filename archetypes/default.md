@@ -5,6 +5,6 @@ tags = []
 categories = []
 series = []
 keywords = []
-description = []
+description = ""
 +++
 
