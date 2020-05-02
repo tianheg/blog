@@ -12,7 +12,7 @@ copyright = "在保留本文作者及本文链接的前提下，非商业用途�
 theme = "meme"
 
 # `hugo new` 新建文章自动打开的文本编辑器
-newContentEditor = "typora"
+# newContentEditor = "typora"
 
 # i18n
 defaultContentLanguage = "zh"
@@ -25,7 +25,7 @@ pluralizeListTitles = false
 summaryLength = 42
 
 # 是否开启 GitHub 风格的 Emoji 书写方式
-enableEmoji = false
+enableEmoji = true
 
 # 脚注的返回链接中的文本
 footnoteReturnLinkContents = "↩"
@@ -193,13 +193,13 @@ uglyURLs = false
         name = "文章"
         weight = 2
         pre = "internal"
-        post = "categories"
+        post = "calendar-alt"
     [[menu.main]]
         url = "/series/"
         name = "系列"
         weight = 3
         pre = "internal"
-        post = "series"
+        post = "python"
     [[menu.main]]
         url = "/tags/"
         name = "标签"
@@ -326,19 +326,6 @@ uglyURLs = false
     # 底部链接的内间距，单位：em
     homeLinksPadding = 1
 
-    ## 「视频片段」
-    homePoster = ""
-    homeVideoWebm = ""
-    homeVideoMp4 = ""
-    homeLogo = ""
-    homeLogoLink = ""
-    homeTitle = ""
-    homeMotto = ""
-    homeDescription = ""
-    homeKeywords = ""
-    homeLinksDelimiter = ""
-
-
     ######################################
     # 站点信息
 
@@ -354,11 +341,6 @@ uglyURLs = false
     # 站点的创建时间
     siteCreatedTime = "2018-12-23T00:00:00+08:00"
     # 注意：请保持此格式，更改数字
-
-    # 站点的推特帐号
-    # siteTwitter = "reuixiy"
-    # 说明：用于 Twitter Cards
-
 
     ######################################
     # 分类方式
@@ -535,7 +517,7 @@ uglyURLs = false
 
     jsonLD = true
     openGraph = true
-    twitterCards = true
+    twitterCards = false
     # 注意：如果你设置 twitterCards 为 `true`，
     #      请务必开启 openGraph。否则，网页的
     #      Twitter Cards 信息将会不完整。
@@ -546,16 +528,6 @@ uglyURLs = false
     #      Matter 中手动指定 `images`，不然，
     #      你在社交网络或 APP 上分享的链接将无
     #      法显示带大图的摘要视图。
-
-
-    ######################################
-    # Service Worker
-
-    # 说明：仅在生产环境（production）下渲染
-
-    enableServiceWorker = false
-    # 说明：需要第三方支持，暂见：
-    #      https://io-oi.me/tech/pwa-via-workbox/
 
 
     ######################################
@@ -586,50 +558,6 @@ uglyURLs = false
     enableMermaid = false
     # 说明：文章的 Front Matter 中的 `mermaid`
     #      的优先级高于此处
-
-
-    ######################################
-    # 评论
-
-    # 说明：仅在生产环境（production）下渲染
-
-    # 是否开启（全局设置）
-    enableComments = false
-    # 说明：文章的 Front Matter 中的 `comments`
-    #      的优先级高于此处
-
-    ## Disqus
-    enableDisqus = false
-    disqusShortname = ""
-
-    ## Valine
-    enableValine = false
-    valineAppId = ""
-    valineAppKey = ""
-    valinePlaceholder = "Just go go"
-    valineNotify = false
-    valineVerify = false
-    valinePath = ""
-    valineAvatar = "mm"
-    valineMeta = ["nick", "mail", "link"]
-    valinePageSize = 10
-    valineLang = "zh-cn"
-    valineVisitor = false
-    valineHighlight = true
-    avatarForce = false
-    valineRecordIP = false
-    valineServerURLs = ""
-    # 说明：https://valine.js.org/
-
-    ## Utterances
-    enableUtterances = false
-    utterancesRepo = ""
-    utterancesIssueTerm = "pathname"
-    utterancesTheme = "github-light"
-    utterancesThemeDark = "photon-dark"
-    utterancesLabel = ""
-    # 说明：https://utteranc.es/
-
 
     ######################################
     # Google Analytics
@@ -701,7 +629,7 @@ uglyURLs = false
     # 文章元信息
 
     # 是否开启（全局设置）
-    enablePostMeta = false
+    enablePostMeta = true
     # 说明：文章的 Front Matter 中的 `meta`
     #      的优先级高于此处
 
@@ -747,7 +675,7 @@ uglyURLs = false
     readingTimeIcon = "clock"
 
     # 是否显示不蒜子页面浏览量
-    displayBusuanziPagePV = false
+    displayBusuanziPagePV = true
     # 不蒜子页面浏览量的图标
     busuanziPagePVIcon = "eye"
     # 说明：仅在生产环境（production）下渲染
@@ -766,7 +694,7 @@ uglyURLs = false
     # 文章目录
 
     # 是否开启（全局设置）
-    enableTOC = false
+    enableTOC = true
     # 说明：文章的 Front Matter 中的 `toc`
     #      的优先级高于此处
 
@@ -1007,7 +935,7 @@ uglyURLs = false
     enablePostCopyright = true
 
     # 是否显示（全局设置）
-    displayPostCopyright = false
+    displayPostCopyright = true
     # 说明：文章的 Front Matter 中的 `displayCopyright`
     #      的优先级高于此处
 
@@ -1019,7 +947,7 @@ uglyURLs = false
     enablePostUpdatedBadge = true
 
     # 是否显示（全局设置）
-    displayUpdatedBadge = false
+    displayUpdatedBadge = true
     # 说明：文章的 Front Matter 中的 `badge`
     #      的优先级高于此处
 
@@ -1036,7 +964,7 @@ uglyURLs = false
     enablePostGitInfo = true
 
     # 是否显示（全局设置）
-    displayPostGitInfo = false
+    displayPostGitInfo = true
     # 说明：文章的 Front Matter 中的 `gitinfo`
     #      的优先级高于此处
 
@@ -1099,10 +1027,10 @@ uglyURLs = false
     # 相关文章
 
     # 是否开启
-    enableRelatedPosts = false
+    enableRelatedPosts = true
 
     # 是否显示（全局设置）
-    displayRelatedPosts = false
+    displayRelatedPosts = true
     # 说明：文章的 Front Matter 中的 `related`
     #      的优先级高于此处
 
@@ -1134,7 +1062,7 @@ uglyURLs = false
     #      的是一篇更旧的文章。
 
     # 是否开启
-    enablePostNav = false
+    enablePostNav = true
 
     # 是否仅限于相同的文章分区
     postNavInSection = true
@@ -1201,7 +1129,7 @@ uglyURLs = false
     # 自定义页脚（支持 Markdown）
     customFooter = "[CC BY-NC-SA 4.0](https://creativecommons.org/licenses/by-nc-sa/4.0/deed.zh)"
 
-    displayBusuanziSiteUVAndPV = false
+    displayBusuanziSiteUVAndPV = true
     busuanziSiteUVText = "本站访客数"
     busuanziSiteUVIcon = "user"
     busuanziSitePVText = "本站访问量"
