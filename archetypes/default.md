@@ -4,5 +4,7 @@ date = "{{ .Date }}"
 tags = []
 categories = []
 series = []
+keywords = []
+description = []
 +++
 
