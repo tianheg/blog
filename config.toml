@@ -102,17 +102,15 @@ uglyURLs = false
     avatar = "/icons/apple-touch-icon.png"
     # 网站（默认值：baseURL）
     website = "https://www.yidajiabei.xyz"
-    # 推特
-    #twitter = "reuixiy"
 
 # 相关文章
 [related]
     threshold = 80
     includeNewer = true
     toLower = true
-    # [[related.indices]]
-    #     name = "categories"
-    #     weight = 100
+    [[related.indices]]
+        name = "categories"
+        weight = 100
     [[related.indices]]
         name = "tags"
         weight = 95
@@ -555,7 +553,7 @@ uglyURLs = false
     # Mermaid (https://github.com/mermaid-js/mermaid)
 
     # 是否开启（全局设置）
-    enableMermaid = false
+    enableMermaid = true
     # 说明：文章的 Front Matter 中的 `mermaid`
     #      的优先级高于此处
 
@@ -961,10 +959,10 @@ uglyURLs = false
     # 文章的 Git 版本信息
 
     # 是否开启
-    enablePostGitInfo = true
+    enablePostGitInfo = false
 
     # 是否显示（全局设置）
-    displayPostGitInfo = true
+    displayPostGitInfo = false
     # 说明：文章的 Front Matter 中的 `gitinfo`
     #      的优先级高于此处
 
@@ -1127,16 +1125,20 @@ uglyURLs = false
     displaySiteCopyright = false
 
     # 自定义页脚（支持 Markdown）
-    customFooter = "[CC BY-NC-SA 4.0](https://creativecommons.org/licenses/by-nc-sa/4.0/deed.zh)"
+    customFooter = "[CC BY-NC-SA 4.0](https://creativecommons.org/licenses/by-nc-sa/4.0/deed.zh) [皖ICP备20002237号-1](http://www.beian.miit.gov.cn/)"
 
     displayBusuanziSiteUVAndPV = true
-    busuanziSiteUVText = "本站访客数"
+    busuanziSiteUVText = "UV"
     busuanziSiteUVIcon = "user"
-    busuanziSitePVText = "本站访问量"
+    busuanziSitePVText = "PV"
     busuanziSitePVIcon = "eye"
     # 说明：仅在生产环境（production）下渲染
     #      文本或图标，留空（""）则无
     #      https://busuanzi.ibruce.info/
+
+    # 社交链接
+    enableSocials = true
+    # 说明：见 data/Socials.toml
 
 
     ######################################
@@ -1148,8 +1150,25 @@ uglyURLs = false
     # 是否在首页隐藏多语言按钮
     hideLangToggleInHome = false
 
+    ##########################################
+    # Configure Multilingual Mode
+
+    # # zh
+    # [languages.zh]
+    #     languageName = "Chinese"
+    #     weight = 1
+    #     languageCode = "zh"
+    #     contentDir = "content/zh"
+
+    # # en
+    # [languages.en]
+    #     languageName = "English"
+    #     weight = 2
+    #     languageCode = "en-US"
+    #     contentDir = "content/en"
+
     # 是否自动隐藏多语言按钮
-    autoHideLangToggle = true
+    autoHideLangToggle = false
     # 说明：即仅当该文章有相应的翻译版本时才显
     #      示按钮
 
