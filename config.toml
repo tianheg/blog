@@ -51,7 +51,7 @@ uglyURLs = false
 
 # 类别
 [taxonomies]
-    category = "categories"
+    # category = "categories"
     tag = "tags"
     series = "series"
 
@@ -108,9 +108,9 @@ uglyURLs = false
     threshold = 80
     includeNewer = true
     toLower = true
-    [[related.indices]]
-        name = "categories"
-        weight = 100
+    # [[related.indices]]
+    #     name = "categories"
+    #     weight = 100
     [[related.indices]]
         name = "tags"
         weight = 95
@@ -174,41 +174,36 @@ uglyURLs = false
 
 [menu]
     # # 菜单栏
-    [[menu.main]]
+[[menu.main]]
         url = "/"
         name = "首页"
         weight = 1
         pre = "internal"
         post = "home"
-        identifier = "home"
-    [[menu.main]]
-        url = "/posts/"
-        name = "归档"
-        weight = 4
-        pre = "internal"
-        post = "archive"
-        identifier = "posts"
     [[menu.main]]
         url = "/categories/"
         name = "文章"
         weight = 2
         pre = "internal"
-        post = "calendar-alt"
-        identifier = "categories"
+        post = "th"
     [[menu.main]]
         url = "/series/"
         name = "系列"
         weight = 3
         pre = "internal"
         post = "python"
-        identifier = "series"
+    [[menu.main]]
+        url = "/posts/"
+        name = "归档"
+        weight = 4
+        pre = "internal"
+        post = "archive"
     [[menu.main]]
         url = "/tags/"
         name = "标签"
         weight = 5
         pre = "internal"
         post = "tags"
-        identifier = "tags"
     [[menu.main]]
         url = "/about/"
         name = "关于"
@@ -330,6 +325,19 @@ uglyURLs = false
     # 底部链接的内间距，单位：em
     homeLinksPadding = 1
 
+## 「视频片段」
+    homePoster = ""
+    homeVideoWebm = ""
+    homeVideoMp4 = ""
+    homeLogo = ""
+    homeLogoLink = ""
+    homeTitle = ""
+    homeMotto = ""
+    homeDescription = ""
+    homeKeywords = ""
+    homeLinksDelimiter = ""
+
+
     ######################################
     # 站点信息
 
@@ -363,7 +371,7 @@ uglyURLs = false
     # 的树状分类，故如需保留树状分类，建议适应
     # Hugo 的设计理念——分区。
 
-    categoryBy = "categories"
+    categoryBy = "sections"
     # 注意：如果你设置为 `sections`，请务必将
     #      此配置文件中的类别（taxonomies）中
     #      的 `categories` 删除，不然分类页
@@ -450,7 +458,7 @@ uglyURLs = false
     # 说明：分区的名字即站点的 content 目录下
     #      的文件夹的名字。
 
-    mainSections = ["about", "categories", "home", "posts", "series", "tags"]
+    mainSections = ["zh","en"]#"categories", "home", "posts", "series", "tags"
 
 
     ######################################
@@ -559,7 +567,7 @@ uglyURLs = false
     # Mermaid (https://github.com/mermaid-js/mermaid)
 
     # 是否开启（全局设置）
-    enableMermaid = true
+    enableMermaid = false
     # 说明：文章的 Front Matter 中的 `mermaid`
     #      的优先级高于此处
 
@@ -1156,25 +1164,8 @@ uglyURLs = false
     # 是否在首页隐藏多语言按钮
     hideLangToggleInHome = false
 
-    ##########################################
-    # Configure Multilingual Mode
-
-    # # zh
-    # [languages.zh]
-    #     languageName = "Chinese"
-    #     weight = 1
-    #     languageCode = "zh"
-    #     contentDir = "content/zh"
-
-    # # en
-    # [languages.en]
-    #     languageName = "English"
-    #     weight = 2
-    #     languageCode = "en-US"
-    #     contentDir = "content/en"
-
-    # 是否自动隐藏多语言按钮
-    autoHideLangToggle = false
+# 是否自动隐藏多语言按钮
+    autoHideLangToggle = true
     # 说明：即仅当该文章有相应的翻译版本时才显
     #      示按钮
 
@@ -1249,3 +1240,57 @@ uglyURLs = false
     fofVideoWebm = ""
     fofVideoMp4 = ""
     # 说明：视频地址可留空（""）
+##########################################
+# 自行添加的多语言站点配置
+
+# 中文
+[languages.zh]
+    languageName = "🇨🇳"
+    contentDir = "content/zh"
+    weight = 1
+
+# 英文
+[languages.en]
+    languageName = "🇺🇸"
+    contentDir = "content/en"
+    weight = 2
+    languageCode = "en-US"
+    hasCJKLanguage = false
+    copyright = "[CC BY-NC-SA 4.0](https://creativecommons.org/licenses/by-nc-sa/4.0/deed.en)"
+[languages.en.taxonomies]
+    # category = "categories"
+    # tag = "tags"
+[languages.en.menu]
+    # [[languages.en.menu.home]]
+    #     url = "/en/about/"
+    #     weight = 3
+    #     pre = "internal"
+    #     post = "user-circle"
+    #     identifier = "about"
+    [[languages.en.menu.main]]
+        url = "/en/about/"
+        name = "about"
+        weight = 1
+        pre = "internal"
+        post = "user-circle"
+        identifier = "about"
+    [[languages.en.menu.main]]
+        weight = 2
+        identifier = "theme-switcher"
+    [[languages.en.menu.main]]
+        weight = 3
+        identifier = "lang-switcher"
+[languages.en.params]
+    homePoetry = ["In the dark night", "Longing for a light of care", "In the daylight", "Desiring for the swallow of a black hole", "’Cause curiosity—seeks for what it’s in the darkness"]
+    siteDescription = "Blog of reuixiy in English."
+    listDateFormat = "January 2"
+    fontFamilyTitle = "'Amstelvar', serif"
+    fontFamilyHeadings = "'Amstelvar', serif"
+    fontFamilyBody = "'Amstelvar', serif"
+    fontsLink = "https://fonts.googleapis.com/css2?family=Source+Code+Pro:ital,wght@0,400;0,700;1,400;1,700&display=swap"
+    lineHeight = 1.618
+    enableJustify = false
+    enableSmallCaps = true
+    enableEmphasisPoint = false
+    enableChinesePunctuationGlyphCorrection = false
+    customFooter = "[CC BY-NC-SA 4.0](https://creativecommons.org/licenses/by-nc-sa/4.0/deed.en)"
