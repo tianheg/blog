@@ -4,4 +4,4 @@
 > 
 > I'm glad to help you.
 
-You can visit https://www.yidajiabei.xyz to watch my site.
+You can visit https://gaotianhe.github.io to watch my site.
