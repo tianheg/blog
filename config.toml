@@ -217,6 +217,60 @@ uglyURLs = false
     [[menu.main]]
         weight = 8
         identifier = "lang-switcher"
+##########################################
+# 自行添加的多语言站点配置
+
+# 中文
+[languages.zh]
+    languageName = "🇨🇳"
+    contentDir = "content/zh"
+    weight = 1
+
+# 英文
+[languages.en]
+    languageName = "🇺🇸"
+    contentDir = "content/en"
+    weight = 2
+    languageCode = "en-US"
+    hasCJKLanguage = false
+    copyright = "[CC BY-NC-SA 4.0](https://creativecommons.org/licenses/by-nc-sa/4.0/deed.en)"
+[languages.en.taxonomies]
+    # category = "categories"
+    # tag = "tags"
+[languages.en.menu]
+    # [[languages.en.menu.home]]
+    #     url = "/en/about/"
+    #     weight = 3
+    #     pre = "internal"
+    #     post = "user-circle"
+    #     identifier = "about"
+    [[languages.en.menu.main]]
+        url = "/en/about/"
+        name = "About"
+        weight = 1
+        pre = "internal"
+        post = "user-circle"
+        identifier = "about"
+    [[languages.en.menu.main]]
+        weight = 2
+        identifier = "theme-switcher"
+    [[languages.en.menu.main]]
+        weight = 3
+        identifier = "lang-switcher"
+[languages.en.params]
+    homePoetry = ["In the dark night", "Longing for a light of care", "In the daylight", "Desiring for the swallow of a black hole", "’Cause curiosity—seeks for what it’s in the darkness"]
+    siteDescription = "Blog of reuixiy in English."
+    listDateFormat = "January 2"
+    fontFamilyTitle = "'Amstelvar', serif"
+    fontFamilyHeadings = "'Amstelvar', serif"
+    fontFamilyBody = "'Amstelvar', serif"
+    fontsLink = "https://fonts.googleapis.com/css2?family=Source+Code+Pro:ital,wght@0,400;0,700;1,400;1,700&display=swap"
+    lineHeight = 1.618
+    enableJustify = false
+    enableSmallCaps = true
+    enableEmphasisPoint = false
+    enableChinesePunctuationGlyphCorrection = false
+    customFooter = "[CC BY-NC-SA 4.0](https://creativecommons.org/licenses/by-nc-sa/4.0/deed.en)"
 
     ## 社交栏
     [[menu.socials]]
@@ -1240,57 +1294,3 @@ uglyURLs = false
     fofVideoWebm = ""
     fofVideoMp4 = ""
     # 说明：视频地址可留空（""）
-##########################################
-# 自行添加的多语言站点配置
-
-# 中文
-[languages.zh]
-    languageName = "🇨🇳"
-    contentDir = "content/zh"
-    weight = 1
-
-# 英文
-[languages.en]
-    languageName = "🇺🇸"
-    contentDir = "content/en"
-    weight = 2
-    languageCode = "en-US"
-    hasCJKLanguage = false
-    copyright = "[CC BY-NC-SA 4.0](https://creativecommons.org/licenses/by-nc-sa/4.0/deed.en)"
-[languages.en.taxonomies]
-    # category = "categories"
-    # tag = "tags"
-[languages.en.menu]
-    # [[languages.en.menu.home]]
-    #     url = "/en/about/"
-    #     weight = 3
-    #     pre = "internal"
-    #     post = "user-circle"
-    #     identifier = "about"
-    [[languages.en.menu.main]]
-        url = "/en/about/"
-        name = "about"
-        weight = 1
-        pre = "internal"
-        post = "user-circle"
-        identifier = "about"
-    [[languages.en.menu.main]]
-        weight = 2
-        identifier = "theme-switcher"
-    [[languages.en.menu.main]]
-        weight = 3
-        identifier = "lang-switcher"
-[languages.en.params]
-    homePoetry = ["In the dark night", "Longing for a light of care", "In the daylight", "Desiring for the swallow of a black hole", "’Cause curiosity—seeks for what it’s in the darkness"]
-    siteDescription = "Blog of reuixiy in English."
-    listDateFormat = "January 2"
-    fontFamilyTitle = "'Amstelvar', serif"
-    fontFamilyHeadings = "'Amstelvar', serif"
-    fontFamilyBody = "'Amstelvar', serif"
-    fontsLink = "https://fonts.googleapis.com/css2?family=Source+Code+Pro:ital,wght@0,400;0,700;1,400;1,700&display=swap"
-    lineHeight = 1.618
-    enableJustify = false
-    enableSmallCaps = true
-    enableEmphasisPoint = false
-    enableChinesePunctuationGlyphCorrection = false
-    customFooter = "[CC BY-NC-SA 4.0](https://creativecommons.org/licenses/by-nc-sa/4.0/deed.en)"
