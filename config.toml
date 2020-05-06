@@ -245,17 +245,23 @@ uglyURLs = false
     #     post = "user-circle"
     #     identifier = "about"
     [[languages.en.menu.main]]
+        url = "/en/posts/"
+        name = "Posts"
+        weight = 1
+        pre = "internal"
+        post = "archive"
+    [[languages.en.menu.main]]
         url = "/en/about/"
         name = "About"
-        weight = 1
+        weight = 2
         pre = "internal"
         post = "user-circle"
         identifier = "about"
     [[languages.en.menu.main]]
-        weight = 2
+        weight = 3
         identifier = "theme-switcher"
     [[languages.en.menu.main]]
-        weight = 3
+        weight = 4
         identifier = "lang-switcher"
 [languages.en.params]
     homePoetry = ["Don’t just say what you think, think twice about everything.","Friends who know each other well, should use a steel ring to hoop your soul, but don’t abuse your friendship with every new friend.","Listen to everyone's opinion, but only express your opinion to a very few people; accept everyone's criticism, but retain your own judgment.","Above all, you must be true to yourself; just as night is made by day, so you can be true to yourself and not be false to others."]
@@ -270,7 +276,7 @@ uglyURLs = false
     enableSmallCaps = true
     enableEmphasisPoint = false
     enableChinesePunctuationGlyphCorrection = false
-    customFooter = "[CC BY-NC-SA 4.0](https://creativecommons.org/licenses/by-nc-sa/4.0/deed.en) [皖ICP备20002237号](http://www.beian.miit.gov.cn/)"
+    customFooter = "[CC BY-NC-SA 4.0](https://creativecommons.org/licenses/by-nc-sa/4.0/deed.en)"
 
     ## 社交栏
     [[menu.socials]]
@@ -1218,7 +1224,7 @@ uglyURLs = false
     # 是否在首页隐藏多语言按钮
     hideLangToggleInHome = false
 
-# 是否自动隐藏多语言按钮
+    # 是否自动隐藏多语言按钮
     autoHideLangToggle = true
     # 说明：即仅当该文章有相应的翻译版本时才显
     #      示按钮
