@@ -3,7 +3,7 @@ title: 09条件判断
 toc: false
 date: 2020-04-01T21:06:07+08:00
 categories: ["技术"]
-tags: ["条件判断", "Python"]
+tags: ["条件判断"]
 series: ["Python"]
 ---
 

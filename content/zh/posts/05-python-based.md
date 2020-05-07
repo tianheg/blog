@@ -3,7 +3,7 @@ title: 05Python基础
 categories: ["技术"]
 toc: true
 date: 2020-03-28T18:44:08+08:00
-tags: ["缩进", "Python"]
+tags: ["缩进"]
 series: ["Python"]
 ---
 

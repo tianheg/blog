@@ -4,7 +4,7 @@ toc: true
 date: 2020-04-06T13:52:14+08:00
 lastmod: 2020-04-07T20:13:00+08:00
 categories: ["技术"]
-tags: ["pyenv", "Win10", "Python"]
+tags: ["pyenv", "Win10"]
 ---
 20200406
 
