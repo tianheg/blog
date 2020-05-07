@@ -3,7 +3,7 @@ title: 12调用函数
 toc: true
 date: 2020-04-08T20:13:32+08:00
 categories: ["技术"]
-tags: ["abs", "max", "Python"]
+tags: ["abs", "max"]
 series: ["Python"]
 ---
 

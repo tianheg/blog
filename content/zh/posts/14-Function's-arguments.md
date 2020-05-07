@@ -3,7 +3,7 @@ title: 14函数的参数
 toc: true
 date: 2020-04-08T20:14:00+08:00
 categories: ["技术"]
-tags: ["位置参数", "默认参数", "可变参数", "Python"]
+tags: ["参数"]
 series: ["Python"]
 ---
 #### 位置参数

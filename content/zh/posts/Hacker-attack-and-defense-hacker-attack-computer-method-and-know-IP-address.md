@@ -4,6 +4,7 @@ categories: ["技术"]
 toc: true
 date: 2020-03-16T17:53:09+08:00
 tags: ["IP", "攻击电脑", "Hacker", "基础"]
+slug: attack method
 ---
 
 听说过黑客，没见过黑客，从最基础的开始学习，让我能在互联网中保护自己的隐私安全和信息安全。

@@ -3,7 +3,7 @@ title: 17迭代
 toc: false
 date: 2020-04-11T21:58:40+08:00
 categories: ["技术"]
-tags: ["学习", "Python"]
+tags: ["学习"]
 series: ["Python"]
 ---
 

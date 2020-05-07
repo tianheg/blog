@@ -4,6 +4,7 @@ toc: true
 date: 2019-12-27T22:43:28+08:00
 categories: ["生活"]
 tags: ["交流", "满足", "积累", "作业"]
+slug: four things
 ---
 记录今天的所思所想。
 

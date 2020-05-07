@@ -4,6 +4,7 @@ categories: ["生活"]
 toc: true
 date: 2020-02-24T19:53:16+08:00
 tags: ["父母", "换位", "理解"]
+slug: think about parents
 ---
 
 ### 事情

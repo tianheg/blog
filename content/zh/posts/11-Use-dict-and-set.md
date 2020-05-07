@@ -3,7 +3,7 @@ title: 11使用dict和set
 toc: true
 date: 2020-04-08T20:13:13+08:00
 categories: ["技术"]
-tags: ["dict", "set", "Python"]
+tags: ["dict", "set"]
 series: ["Python"]
 ---
 
