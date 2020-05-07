@@ -3,7 +3,7 @@ title: 13定义函数
 toc: true
 date: 2020-04-08T20:13:45+08:00
 categories: ["技术"]
-tags: ["空函数", "参数检查", "Python"]
+tags: ["空函数", "参数"]
 series: ["Python"]
 ---
 

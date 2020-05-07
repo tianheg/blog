@@ -3,7 +3,7 @@ title: 读《Python 简明教程》
 toc: true
 date: 2020-04-12T23:02:17+08:00
 categories: ["技术"]
-tags: ["Python"]
+tags: [""]
 ---
 
 目录

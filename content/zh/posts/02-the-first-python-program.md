@@ -3,7 +3,7 @@ title: 02第一个python程序
 categories: ["技术"]
 toc: true
 date: 2020-03-24T22:19:03+08:00
-tags: ["命令行", "交互", "Python"]
+tags: ["命令行", "交互"]
 series: ["Python"]
 ---
 

@@ -58,8 +58,9 @@
         <noscript><link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Noto&#43;Serif&#43;SC:wght@400;500;700&amp;family=Source&#43;Code&#43;Pro:ital,wght@0,400;0,700;1,400;1,700&amp;family=Cinzel&#43;Decorative:wght@700&amp;display=swap" /></noscript>
 
     <meta name="author" content="一大加贝" />
-    <meta name="description" content="https://zcdll.github.io/2018/01/27/proxy-on-windows-terminal/
-" />
+    
+    
+    <meta name="description" content="给 Win10 终端配置代理这个问题，以前遇到过几次，但都略过了。就连这篇文章都拖了很久。我把参……" />
 
     <link rel="shortcut icon" href="../../favicon.ico" type="image/x-icon" />
     <link rel="mask-icon" href="../../icons/safari-pinned-tab.svg" color="#2a6df4" />
@@ -90,7 +91,7 @@
         "dateModified": "2020-05-05T00:20:43+08:00",
         "url": "https://www.yidajiabei.xyz/posts/configure-proxy-for-windows-terminal/",
         "name": "给Windows的终端配置代理",
-        "description": "https://zcdll.github.io/2018/01/27/proxy-on-windows-terminal/\n",
+        "description": "给 Win10 终端配置代理这个问题，以前遇到过几次，但都略过了。就连这篇文章都拖了很久。我把参……",
         "image": "https://www.yidajiabei.xyz/icons/apple-touch-icon.png",
         "license": "在保留本文作者及本文链接的前提下，非商业用途随意转载分享。",
         "publisher": {
@@ -117,8 +118,7 @@
 
 
 <meta property="og:title" content="给Windows的终端配置代理" />
-<meta property="og:description" content="https://zcdll.github.io/2018/01/27/proxy-on-windows-terminal/
-" />
+<meta property="og:description" content="给 Win10 终端配置代理这个问题，以前遇到过几次，但都略过了。就连这篇文章都拖了很久。我把参……" />
 <meta property="og:url" content="https://www.yidajiabei.xyz/posts/configure-proxy-for-windows-terminal/" />
 <meta property="og:site_name" content="YIDAJIABEI" />
 <meta property="og:locale" content="zh" /><meta property="og:image" content="https://www.yidajiabei.xyz/icons/apple-touch-icon.png" />
@@ -300,7 +300,7 @@
     
     
         
-        <span class="post-meta-item wordcount"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512" class="icon post-meta-icon"><path d="M497.9 142.1l-46.1 46.1c-4.7 4.7-12.3 4.7-17 0l-111-111c-4.7-4.7-4.7-12.3 0-17l46.1-46.1c18.7-18.7 49.1-18.7 67.9 0l60.1 60.1c18.8 18.7 18.8 49.1 0 67.9zM284.2 99.8L21.6 362.4.4 483.9c-2.9 16.4 11.4 30.6 27.8 27.8l121.5-21.3 262.6-262.6c4.7-4.7 4.7-12.3 0-17l-111-111c-4.8-4.7-12.4-4.7-17.1 0zM124.1 339.9c-5.5-5.5-5.5-14.3 0-19.8l154-154c5.5-5.5 14.3-5.5 19.8 0s5.5 14.3 0 19.8l-154 154c-5.5 5.5-14.3 5.5-19.8 0zM88 424h48v36.3l-64.5 11.3-31.1-31.1L51.7 376H88v48z"/></svg>&nbsp;1</span>
+        <span class="post-meta-item wordcount"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512" class="icon post-meta-icon"><path d="M497.9 142.1l-46.1 46.1c-4.7 4.7-12.3 4.7-17 0l-111-111c-4.7-4.7-4.7-12.3 0-17l46.1-46.1c18.7-18.7 49.1-18.7 67.9 0l60.1 60.1c18.8 18.7 18.8 49.1 0 67.9zM284.2 99.8L21.6 362.4.4 483.9c-2.9 16.4 11.4 30.6 27.8 27.8l121.5-21.3 262.6-262.6c4.7-4.7 4.7-12.3 0-17l-111-111c-4.8-4.7-12.4-4.7-17.1 0zM124.1 339.9c-5.5-5.5-5.5-14.3 0-19.8l154-154c5.5-5.5 14.3-5.5 19.8 0s5.5 14.3 0 19.8l-154 154c-5.5 5.5-14.3 5.5-19.8 0zM88 424h48v36.3l-64.5 11.3-31.1-31.1L51.7 376H88v48z"/></svg>&nbsp;327</span>
     
     
         
@@ -316,7 +316,74 @@
             
 
             
-                <nav class="contents"></nav><div class="post-body"><p><a href="https://zcdll.github.io/2018/01/27/proxy-on-windows-terminal/" target="_blank" rel="noopener">https://zcdll.github.io/2018/01/27/proxy-on-windows-terminal/</a></p></div>
+                <nav class="contents">
+  <h2 id="contents" class="contents-title">目录</h2><ol class="toc">
+    <li>
+      <ol>
+        <li><a id="contents:要点" href="#要点">要点</a></li>
+        <li><a id="contents:ping-还是不行的原因" href="#ping-还是不行的原因">ping 还是不行的原因</a></li>
+        <li><a id="contents:验证方式" href="#验证方式">验证方式</a></li>
+      </ol>
+    </li>
+  </ol>
+</nav><div class="post-body"><p>给 Win10 终端配置代理这个问题，以前遇到过几次，但都略过了。就连这篇文章都拖了很久。我把参考链接那篇文章总结下来，我觉得自己以后一定会用到。</p>
+<p>命令和 <strong>Linux</strong> 下没什么区别。</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span><span class="lnt">14
+</span><span class="lnt">15
+</span><span class="lnt">16
+</span><span class="lnt">17
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-bash" data-lang="bash"><span class="nb">set</span> <span class="nv">http_proxy</span><span class="o">=</span>http://127.0.0.1:1080
+
+<span class="nb">set</span> <span class="nv">https_proxy</span><span class="o">=</span>http://127.0.0.1:1080
+
+<span class="nb">set</span> <span class="nv">http_proxy_user</span><span class="o">=</span>user
+<span class="nb">set</span> <span class="nv">http_proxy_pass</span><span class="o">=</span>pass
+
+<span class="nb">set</span> <span class="nv">https_proxy_user</span><span class="o">=</span>user
+<span class="nb">set</span> <span class="nv">https_proxy_pass</span><span class="o">=</span>pass
+
+<span class="c1"># 恢复</span>
+<span class="nb">set</span> <span class="nv">http_proxy</span><span class="o">=</span>
+
+<span class="nb">set</span> <span class="nv">https_proxy</span><span class="o">=</span>
+
+<span class="c1"># Ubuntu 下命令为 export</span>
+<span class="c1"># export http_proxy=http://127.0.0.1:1080</span>
+</code></pre></td></tr></table>
+</div>
+</div></br>
+<h3 id="要点"><a href="#要点" class="anchor-link"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512" class="icon anchor-icon"><path d="M326.612 185.391c59.747 59.809 58.927 155.698.36 214.59-.11.12-.24.25-.36.37l-67.2 67.2c-59.27 59.27-155.699 59.262-214.96 0-59.27-59.26-59.27-155.7 0-214.96l37.106-37.106c9.84-9.84 26.786-3.3 27.294 10.606.648 17.722 3.826 35.527 9.69 52.721 1.986 5.822.567 12.262-3.783 16.612l-13.087 13.087c-28.026 28.026-28.905 73.66-1.155 101.96 28.024 28.579 74.086 28.749 102.325.51l67.2-67.19c28.191-28.191 28.073-73.757 0-101.83-3.701-3.694-7.429-6.564-10.341-8.569a16.037 16.037 0 0 1-6.947-12.606c-.396-10.567 3.348-21.456 11.698-29.806l21.054-21.055c5.521-5.521 14.182-6.199 20.584-1.731a152.482 152.482 0 0 1 20.522 17.197zM467.547 44.449c-59.261-59.262-155.69-59.27-214.96 0l-67.2 67.2c-.12.12-.25.25-.36.37-58.566 58.892-59.387 154.781.36 214.59a152.454 152.454 0 0 0 20.521 17.196c6.402 4.468 15.064 3.789 20.584-1.731l21.054-21.055c8.35-8.35 12.094-19.239 11.698-29.806a16.037 16.037 0 0 0-6.947-12.606c-2.912-2.005-6.64-4.875-10.341-8.569-28.073-28.073-28.191-73.639 0-101.83l67.2-67.19c28.239-28.239 74.3-28.069 102.325.51 27.75 28.3 26.872 73.934-1.155 101.96l-13.087 13.087c-4.35 4.35-5.769 10.79-3.783 16.612 5.864 17.194 9.042 34.999 9.69 52.721.509 13.906 17.454 20.446 27.294 10.606l37.106-37.106c59.271-59.259 59.271-155.699.001-214.959z"/></svg></a><a href="#contents:要点" class="headings">要点</a></h3>
+<ol>
+<li>一定要加 <code>http://</code>，直接写域名或者 IP 不行。</li>
+<li><strong>http</strong> 和 <strong>https</strong> 都要设置。</li>
+</ol>
+<p>然后如果想验证是否成功配置了代理的话，用 <code>ping</code> 命令是不可以的</p>
+<h3 id="ping-还是不行的原因"><a href="#ping-还是不行的原因" class="anchor-link"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512" class="icon anchor-icon"><path d="M326.612 185.391c59.747 59.809 58.927 155.698.36 214.59-.11.12-.24.25-.36.37l-67.2 67.2c-59.27 59.27-155.699 59.262-214.96 0-59.27-59.26-59.27-155.7 0-214.96l37.106-37.106c9.84-9.84 26.786-3.3 27.294 10.606.648 17.722 3.826 35.527 9.69 52.721 1.986 5.822.567 12.262-3.783 16.612l-13.087 13.087c-28.026 28.026-28.905 73.66-1.155 101.96 28.024 28.579 74.086 28.749 102.325.51l67.2-67.19c28.191-28.191 28.073-73.757 0-101.83-3.701-3.694-7.429-6.564-10.341-8.569a16.037 16.037 0 0 1-6.947-12.606c-.396-10.567 3.348-21.456 11.698-29.806l21.054-21.055c5.521-5.521 14.182-6.199 20.584-1.731a152.482 152.482 0 0 1 20.522 17.197zM467.547 44.449c-59.261-59.262-155.69-59.27-214.96 0l-67.2 67.2c-.12.12-.25.25-.36.37-58.566 58.892-59.387 154.781.36 214.59a152.454 152.454 0 0 0 20.521 17.196c6.402 4.468 15.064 3.789 20.584-1.731l21.054-21.055c8.35-8.35 12.094-19.239 11.698-29.806a16.037 16.037 0 0 0-6.947-12.606c-2.912-2.005-6.64-4.875-10.341-8.569-28.073-28.073-28.191-73.639 0-101.83l67.2-67.19c28.239-28.239 74.3-28.069 102.325.51 27.75 28.3 26.872 73.934-1.155 101.96l-13.087 13.087c-4.35 4.35-5.769 10.79-3.783 16.612 5.864 17.194 9.042 34.999 9.69 52.721.509 13.906 17.454 20.446 27.294 10.606l37.106-37.106c59.271-59.259 59.271-155.699.001-214.959z"/></svg></a><a href="#contents:ping-还是不行的原因" class="headings">ping 还是不行的原因</a></h3>
+<p>ping 的协议不是 http，也不是 https，是 ICMP 协议。</p>
+<h3 id="验证方式"><a href="#验证方式" class="anchor-link"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512" class="icon anchor-icon"><path d="M326.612 185.391c59.747 59.809 58.927 155.698.36 214.59-.11.12-.24.25-.36.37l-67.2 67.2c-59.27 59.27-155.699 59.262-214.96 0-59.27-59.26-59.27-155.7 0-214.96l37.106-37.106c9.84-9.84 26.786-3.3 27.294 10.606.648 17.722 3.826 35.527 9.69 52.721 1.986 5.822.567 12.262-3.783 16.612l-13.087 13.087c-28.026 28.026-28.905 73.66-1.155 101.96 28.024 28.579 74.086 28.749 102.325.51l67.2-67.19c28.191-28.191 28.073-73.757 0-101.83-3.701-3.694-7.429-6.564-10.341-8.569a16.037 16.037 0 0 1-6.947-12.606c-.396-10.567 3.348-21.456 11.698-29.806l21.054-21.055c5.521-5.521 14.182-6.199 20.584-1.731a152.482 152.482 0 0 1 20.522 17.197zM467.547 44.449c-59.261-59.262-155.69-59.27-214.96 0l-67.2 67.2c-.12.12-.25.25-.36.37-58.566 58.892-59.387 154.781.36 214.59a152.454 152.454 0 0 0 20.521 17.196c6.402 4.468 15.064 3.789 20.584-1.731l21.054-21.055c8.35-8.35 12.094-19.239 11.698-29.806a16.037 16.037 0 0 0-6.947-12.606c-2.912-2.005-6.64-4.875-10.341-8.569-28.073-28.073-28.191-73.639 0-101.83l67.2-67.19c28.239-28.239 74.3-28.069 102.325.51 27.75 28.3 26.872 73.934-1.155 101.96l-13.087 13.087c-4.35 4.35-5.769 10.79-3.783 16.612 5.864 17.194 9.042 34.999 9.69 52.721.509 13.906 17.454 20.446 27.294 10.606l37.106-37.106c59.271-59.259 59.271-155.699.001-214.959z"/></svg></a><a href="#contents:验证方式" class="headings">验证方式</a></h3>
+<p>使用 <code>curl -vv http://www.google.com</code> 验证，如果返回如下结果表示代理设置成功。</p>
+<p>未完待续</p>
+<hr>
+<p>参考链接：</p>
+<p>给 Windows 的终端配置代理：<a href="https://zcdll.github.io/2018/01/27/proxy-on-windows-terminal/" target="_blank" rel="noopener">https://zcdll.github.io/2018/01/27/proxy-on-windows-terminal/</a></p>
+</div>
 
         </article>
 

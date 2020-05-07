@@ -3,7 +3,7 @@ title: 08使用list和tuple
 toc: true
 date: 2020-03-31T20:31:29+08:00
 categories: ["技术"]
-tags: ["Python"]
+tags: [""]
 series: ["Python"]
 ---
 

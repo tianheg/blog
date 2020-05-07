@@ -3,7 +3,7 @@ title: 16切片
 toc: false
 date: 2020-04-10T23:59:17+08:00
 categories: ["技术"]
-tags: ["切片", "Python"]
+tags: ["切片"]
 series: ["Python"]
 ---
 
