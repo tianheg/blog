@@ -3,7 +3,7 @@ title: 07字符串和编码
 toc: true
 date: 2020-03-30T22:37:00+08:00
 categories: ["技术"]
-tags: ["Python", "字符编码"]
+tags: []
 series: ["Python"]
 ---
 

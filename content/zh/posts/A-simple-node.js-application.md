@@ -4,6 +4,7 @@ toc: false
 date: 2020-04-03T17:52:09+08:00
 categories: ["技术"]
 tags: ["node"]
+slug: node application
 ---
 Hello World
 

@@ -3,7 +3,7 @@ title: 01python解释器
 categories: ["技术"]
 toc: true
 date: 2020-03-23T21:31:05+08:00
-tags: ["解释器", "Python"]
+tags: ["解释器"]
 series: ["Python"]
 ---
 

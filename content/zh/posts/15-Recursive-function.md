@@ -3,7 +3,7 @@ title: 15递归函数
 toc: false
 date: 2020-04-09T23:23:25+08:00
 categories: ["技术"]
-tags: ["尾递归", "Python"]
+tags: ["递归"]
 series: ["Python"]
 ---
 

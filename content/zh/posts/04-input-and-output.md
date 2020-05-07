@@ -3,7 +3,7 @@ title: 04输入和输出
 categories: ["技术"]
 toc: true
 date: 2020-03-27T20:19:58+08:00
-tags: ["输入", "输出", "Python"]
+tags: ["输入", "输出"]
 series: ["Python"]
 ---
 
