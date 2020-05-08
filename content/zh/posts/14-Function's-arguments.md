@@ -31,8 +31,6 @@ TypeError: power() missing 1 required positional argument: 'n'
 
 Python的错误信息很明确：调用函数power()缺少了一个位置参数n。
 
-<!--more-->
-
 #### 默认参数
 
 这个时候，默认参数就派上用场了。由于我们经常计算x2，所以，完全可以把第二个参数n的默认值设定为2：

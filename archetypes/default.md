@@ -4,6 +4,7 @@ date: {{ .Date }}
 tags: []
 categories: []
 series: []
+slug: 
 keywords: []
 description: ""
 ---

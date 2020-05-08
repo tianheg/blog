@@ -11,8 +11,6 @@ series: ["Python"]
 
 由C语言开发，为python原装解释器
 
-<!--more-->
-
 #### IPython
 
 跟CPython相比仅在交互方式上有所增强，其他方面与Cpython并无区别。CPython用`>>>`作为提示符，而IPython用`In [序号]:`作为提示符。

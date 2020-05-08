@@ -11,8 +11,6 @@ series: ["Python"]
 
 用`print()`在括号中加上字符串，就可以向屏幕上输出指定的文字。比如输出`'hello world'`，用代码实现如下：
 
-<!--more-->
-
 ```python
 >>> print('hello world')
 ```

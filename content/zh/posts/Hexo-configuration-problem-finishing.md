@@ -18,5 +18,3 @@ npm install hexo-generator-tag --save
 npm install hexo-deployer-git --save
 npm install hexo-generator-sitemap --save
 ```
-
-<!--more-->
