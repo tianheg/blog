@@ -7,10 +7,6 @@ tags: ["循环"]
 series: ["Python"]
 ---
 
-for ... in  while  break  continue
-
-<!--more-->
-
 #### for ... in
 
 依次把list或tuple中的每个元素迭代出来
