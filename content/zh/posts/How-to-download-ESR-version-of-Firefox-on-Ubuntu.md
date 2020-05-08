@@ -8,8 +8,6 @@ tags: ["Ubuntu", "Firefox"]
 
 Ubuntu是Linux操作系统的桌面类系统的一个发行版，因为网站后台是Linux操作系统，所以想着在虚拟机上装个Ubuntu系统学习一下。看了[编程随想](https://program-think.blogspot.com/2017/03/Why-Linux-Is-More-Secure-Than-Windows-and-macOS.html)有关于浏览器的选择问题，Ta 推荐Firefox。原因有以下几点：
 
-<!--more-->
-
 1. Firefox是开源软件，是由非营利组织的专门维护，这样就保证了Firefox的开发团队不会因为商业利益而拼了老命收集用户的隐私数据。与此截然相反的就是Google，因为他们是商业公司，商业公司必然要盈利，所以Google会为了商业利益而收集用户隐私进而投放更为精准的广告。
 
 2. 因为Firefox是开源软件，任何人都可以阅读Firefox的源代码，也就是说Firefox这个软件是完全公开的，任何人只要你有能力，都能参与到Firefox的开发中。当然这样能够带来一个好处就是：发现bug的速度很快。因为只要有人发现软件有bug，就可以把它提交，促进软件的稳定使用。它不像闭源软件，有没有bug只有自己内部的开发人员才知道并进行修改，大部分用户就算发现了bug也不能进行修改，因为不知到软件的源代码。

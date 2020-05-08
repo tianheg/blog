@@ -8,8 +8,6 @@ series: ["Python"]
 ---
 列表生成式即 List Comprehensions，是 Python 内置的非常简单却强大的可以用来创建 list 生成式。
 
-<!--more-->
-
 举个例子，要生成 list `[1, 2, 3, 4, 5, 6, 7, 8, 9, 10]` 可以用 `list(range(1, 11))`：
 
 ```

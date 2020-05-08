@@ -7,10 +7,6 @@ tags: ["dict", "set"]
 series: ["Python"]
 ---
 
-dict  set  不可变对象
-
-<!--more-->
-
 #### dict
 
 ```
