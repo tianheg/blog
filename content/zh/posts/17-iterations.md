@@ -9,8 +9,6 @@ series: ["Python"]
 
 1. 如果给定一个 list 或 tuple ，我们可以通过 `for` 循环来遍历这个 list 或 tuple ，这种遍历我们称为迭代（ Iteration ）。
 
-<!--more-->
-
 2. 在 Python 中，迭代是通过 `for ... in` 来完成的。
 
 3. Python 的 `for` 循环不仅可以用在 list 或 tuple 上，还可以作用在其他可迭代对象上。

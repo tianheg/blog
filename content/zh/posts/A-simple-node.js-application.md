@@ -6,9 +6,6 @@ categories: ["技术"]
 tags: ["node"]
 slug: node application
 ---
-Hello World
-
-<!--more-->
 
 一个node.js应用由哪几部分组成：
 

@@ -1,12 +1,12 @@
-+++
-title = "编程路漫漫"
-date = "2020-05-02T22:13:48+08:00"
-tags = ["编程", "Hugo", "Hexo"]
-categories = ["生活"]
-series = []
-keywords = ["编程, hugo"]
-description = "写了自己最近有关编程的感想"
-+++
+---
+title: "编程路漫漫"
+date: "2020-05-02T22:13:48+08:00"
+tags: ["编程", "Hugo", "Hexo"]
+categories: ["生活"]
+series: []
+keywords: ["编程, hugo"]
+description: "写了自己最近有关编程的感想"
+---
 
 有一段时间没写博客，突然就没话说。心里还是有些话要讲出来的。欢迎听我唠嗑！:kissing_heart:
 

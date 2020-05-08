@@ -11,8 +11,6 @@ tags: ["Terminal", "PyCharm"]
 
 PyCharm 打开命令行失败，点击 Terminal 显示如下内容：
 
-<!--more-->
-
 ```no
 Cannot open Local Terminal
 Failed to start [cmd.exe] in E:\PyCharmProject
