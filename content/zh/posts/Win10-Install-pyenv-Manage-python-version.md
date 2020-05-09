@@ -1,16 +1,15 @@
 ---
 title: Win10安装pyenv管理python版本
-toc: true
 date: 2020-04-06T13:52:14+08:00
-lastmod: 2020-04-07T20:13:00+08:00
-categories: ["技术"]
 tags: ["pyenv", "Win10"]
+categories: ["技术"]
+series: []
+slug: 
+keywords: []
+description: ""
 ---
-20200406
 
 逛B站时，听过一个up主讲过实际开发中的python虚拟环境，不同项目要求使用不同python版本时，可以通过创建虚拟环境的方式进行调用，要用到virtualenv包。说到软件的话，PyCharm可以很轻松地管理python版本，有兴趣的同学可以尝试一下。
-
-<!--more-->
 
 #### 初试pyenv
 

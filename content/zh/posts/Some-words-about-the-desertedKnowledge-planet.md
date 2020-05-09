@@ -1,13 +1,15 @@
 ---
 title: 知识星球逐渐冷清有感
-toc: false
 date: 2020-01-31T23:15:39+08:00
-categories: ["生活"]
 tags: ["坚持"]
+categories: ["生活"]
+series: []
+slug: words about knowledge planet
+keywords: []
+description: ""
 ---
-写在 **知识星球** 社区—— **阿海的圈子**
 
-<!--more-->
+写在 **知识星球** 社区—— **阿海的圈子**
 
 题外话：圈子里小伙伴们都哪去了？每天在家，时间应该很充足呀。这个正是应该好好学习积极分享的时候。
 

@@ -1,10 +1,12 @@
 ---
 title: 焦虑使人进步，我安慰自己道
-toc: false
 date: 2019-12-19T16:36:01+08:00
+tags: [""]
 categories: ["生活"]
-tags: ["焦虑"]
+series: []
 slug: Anxious person
+keywords: []
+description: ""
 ---
 
 1. 今天记了五个单词（英语解释和汉语意思及应用）。

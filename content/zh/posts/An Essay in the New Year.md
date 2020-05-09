@@ -1,9 +1,10 @@
 ---
 title: 新年随笔
 date: 2019-02-05T20:24:45+08:00
-tags: ["新年","孤独"]
+tags: []
 categories: ["生活"]
 series: []
+slug: 
 keywords: ["新年","孤独"]
 description: "前一部分是有关新年的一些抱怨，后一部分是《皮囊》的摘录"
 ---

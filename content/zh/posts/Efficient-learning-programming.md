@@ -1,9 +1,12 @@
 ---
 title: 高效学习编程
-categories: ["技术"]
-toc: true
 date: 2020-03-21T21:58:15+08:00
-tags: ["方法", "编程"]
+tags: ["", ""]
+categories: ["技术"]
+series: []
+slug: 
+keywords: []
+description: ""
 ---
 
 #### 选择目标

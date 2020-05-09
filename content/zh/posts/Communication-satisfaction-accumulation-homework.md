@@ -1,11 +1,14 @@
 ---
 title: 交流，满足，积累，作业
-toc: true
 date: 2019-12-27T22:43:28+08:00
+tags: []
 categories: ["生活"]
-tags: ["交流", "满足", "积累", "作业"]
-slug: four things
+series: []
+slug: four things about communication
+keywords: []
+description: ""
 ---
+
 记录今天的所思所想。
 
 ### 一、到什么山唱什么歌：

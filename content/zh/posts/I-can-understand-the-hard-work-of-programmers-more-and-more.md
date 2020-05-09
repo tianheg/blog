@@ -1,10 +1,14 @@
 ---
 title: 越来越能体会程序员的辛苦
-toc: false
 date: 2020-01-30T21:34:47+08:00
-categories: ["生活"]
-tags: ["服务器"]
+tags: [""]
+categories: ["技术"]
+series: []
+slug: understand programmers
+keywords: []
+description: ""
 ---
+
 > 国泰民安，百姓安居乐业，生活真的很美好啊。——《武林外传》邢捕头
 
 今天坐在床上，在我支付的范围内，买了一个3个月时长的阿里云服务器和两个1年时长的域名。总共花了我不到一百大洋，没办法，我很穷。就这还跟同学借了30。
