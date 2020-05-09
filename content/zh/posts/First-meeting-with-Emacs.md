@@ -1,9 +1,12 @@
 ---
 title: 和Emacs的第一次见面
-categories: ["技术"]
-toc: true
 date: 2020-02-26T20:33:41+08:00
-tags: ["Emacs", "折腾"]
+tags: []
+categories: ["技术"]
+series: []
+slug: 
+keywords: []
+description: ""
 ---
 
 #### 技术之外

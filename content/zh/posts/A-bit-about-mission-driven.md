@@ -1,9 +1,12 @@
 ---
 title: 有关于任务驱动的一点看法
-categories: ["技术"]
 date: 2020-02-15T21:23:20+08:00
-tags: ["效率", "思", "任务"]
+tags: []
+categories: ["生活"]
+series: []
 slug: mission driven
+keywords: []
+description: ""
 ---
 
 任务驱动， Google 翻译翻译为 Task driven。我理解为为了某一个任务而进行的努力，采取一些可行的办法，和不同的人进行技术交流。然而朗文词典给我关于 task 的解释却并不是这样，它的解释是这样的：*a piece of work that must be done, especially one that is difficult or unpleasant or that must be done regularly*。大意为：一种必须要做的工作，尤其是当这种工作是困难的或者不那么令人愉快的或者是必须按照事先安排的那样做。而我的理解很浅陋，特别像是盗用别人的说法，没有这种正规词典翻译的那种规范合理性。

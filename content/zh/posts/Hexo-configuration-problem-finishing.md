@@ -1,10 +1,14 @@
 ---
 title: hexo配置问题整理
-toc: false
 date: 2020-04-05T11:09:31+08:00
-categories: ["技术"]
 tags: ["npm", "Hexo"]
+categories: ["技术"]
+series: []
+slug: 
+keywords: []
+description: ""
 ---
+
 ```
 $ cd <folder>
 $ npm install

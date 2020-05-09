@@ -1,8 +1,12 @@
 ---
 title: 再读《梁漱溟：学问的八层境界》
 date: 2020-02-08T22:34:10+08:00
-categories: ["生活"]
-tags: ["学问", "决心"]
+tags: [""]
+categories: ["读书"]
+series: []
+slug: 
+keywords: []
+description: ""
 ---
 
 ### 由浅入深便能以简御繁

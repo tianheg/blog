@@ -1,9 +1,12 @@
 ---
 title: 如何用宝塔面板在本地搭建 wordpress 博客环境
-categories: ["技术"]
-toc: true
 date: 2020-02-28T22:08:44+08:00
-tags: ["宝塔", "WordPress", "建站"]
+tags: []
+categories: ["技术"]
+series: []
+slug: build wordpress blog locally with baota
+keywords: []
+description: ""
 ---
 
 我要事先说明：我的本地操作系统是 Windows10。之所以想在本地搭建一个 wordpress 框架是因为我的服务器上运行的就是由宝塔软件生成的 wordpress 程序，因为刚开始建站，什么都不知道，一不小心 wordpress 网站后台就让我弄崩溃了。于是，我想自己可以先在本地折腾，把这一套流程都弄懂弄明白了再来进行实际网站的部署。这是我的云端网站http://www.yidajiabei.xyz/ 。各种主题什么的都没有，只有一个框架，勉强能访问。

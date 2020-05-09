@@ -1,15 +1,17 @@
 ---
 title: 总结npm使用
-toc: true
 date: 2020-04-04T11:14:30+08:00
-categories: ["技术"]
 tags: ["npm"]
+categories: ["技术"]
+series: []
+slug: 
+keywords: []
+description: ""
 ---
+
 #### 一、
 
 更新单个本地包版本：使用`npm update <package>`
-
-<!--more-->
 
 更新全部本地安装的包：
 

@@ -1,11 +1,13 @@
 ---
 title: 有愿景，有路线，大事可成
-toc: true
 date: 2020-02-05T14:54:56+08:00
+tags: [""]
 categories: ["生活"]
-tags: ["理想"]
+series: []
+slug: have something accomplish thing
+keywords: []
+description: ""
 ---
-自我激励，持续努力。
 
 ### 有愿景
 

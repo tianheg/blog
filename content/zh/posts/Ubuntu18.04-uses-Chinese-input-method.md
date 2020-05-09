@@ -1,14 +1,15 @@
 ---
 title: Ubuntu18.04使用中文输入法
-categories: ["技术"]
-toc: false
 date: 2020-03-04T21:14:25+08:00
 tags: ["Ubuntu"]
+categories: ["技术"]
+series: []
+slug: 
+keywords: []
+description: ""
 ---
 
 关于方法，我是按照[https://blog.csdn.net/qq_27211927/article/details/80877684](https://blog.csdn.net/qq_27211927/article/details/80877684)给的方法设置的，还好没有什么错误，我高兴地在 Ubuntu 文档里打下了 “ 你好，这是我改好输入法后输入的文字。”。下面把更改方法写出来。
-
-<!--more-->
 
 1.点击设置，进入设置界面
 

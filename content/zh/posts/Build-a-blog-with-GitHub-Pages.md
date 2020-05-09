@@ -1,9 +1,12 @@
 ---
-title: 人生在世，做好自己
+title: 用 GitHub Pages 搭建个人博客
 date: 2020-02-09T22:35:01+08:00
+tags: []
 categories: ["生活"]
-tags: ["思", "人生"]
+series: []
 slug: blog with GitHub
+keywords: []
+description: ""
 ---
 
 昨天，试验了云服务器和域名相关的东西，通过这种方式可以为我自己建一个网站。但是，这样的方式耗时长还不好维护。于是我打算自己建立一个以GitHub Pages为基础的静态博客网站。

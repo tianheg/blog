@@ -1,9 +1,12 @@
 ---
 title: 恐惧能使人死亡
-categories: ["生活"]
-toc: false
 date: 2020-02-20T22:16:24+08:00
-tags: ["生命", "心态"]
+tags: ["", ""]
+categories: ["生活"]
+series: []
+slug: 
+keywords: []
+description: ""
 ---
 
 我先说明：这篇文章语调并不凝重，我只是试图向你证明：糟糕的心态只会让事情变得更加糟糕。
