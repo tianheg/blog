@@ -1,10 +1,12 @@
 ---
 title: 孩子，你应该为你的身边人想想
-categories: ["生活"]
-toc: true
 date: 2020-02-24T19:53:16+08:00
-tags: ["父母", "换位", "理解"]
+tags: []
+categories: ["生活"]
+series: []
 slug: think about parents
+keywords: []
+description: ""
 ---
 
 ### 事情

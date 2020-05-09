@@ -1,9 +1,12 @@
 ---
 title: 如何成为优秀的开发人员（一）
-categories: ["技术"]
-toc: true
 date: 2020-02-16T21:50:40+08:00
-tags: ["方法"]
+tags: [""]
+categories: ["技术"]
+series: []
+slug: be an excellent developer 1
+keywords: []
+description: ""
 ---
 
 今天把前两天看博客记的笔记放到这里，对自己算是一次巩固，对于你来说可能是一种方法。

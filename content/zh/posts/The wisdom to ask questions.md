@@ -1,8 +1,12 @@
 ---
 title: "提问的智慧"
 date: "2020-04-30T13:23:13+08:00"
-tags: ["素质"]
+tags: [""]
 categories: ["生活"]
+series: []
+slug: 
+keywords: []
+description: ""
 ---
 
 好的问题一般具有以下几个特点：

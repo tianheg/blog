@@ -1,11 +1,14 @@
 ---
 title: 每一个人都是一个多面手
-toc: false
 date: 2019-12-08T18:01:15+08:00
+tags: [""]
 categories: ["生活"]
-tags: ["沟通"]
-series:
+series: []
+slug: 
+keywords: []
+description: ""
 ---
+
 我不想去探究“多面手”的出处以及它的真正含义，我只想借它来表达我的意思。
 
 

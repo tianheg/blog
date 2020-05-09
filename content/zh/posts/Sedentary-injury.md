@@ -1,13 +1,15 @@
 ---
 title: 久坐伤身
-toc: false
 date: 2020-04-05T22:10:07+08:00
+tags: [""]
 categories: ["生活"]
-tags: ["健康"]
+series: []
+slug: 
+keywords: []
+description: ""
 ---
-久坐伤身，直到今天早晨醒来的时候，才体会得那样真切。
 
-<!--more-->
+久坐伤身，直到今天早晨醒来的时候，才体会得那样真切。
 
 描述一下当时的情况：
 

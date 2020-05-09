@@ -1,9 +1,12 @@
 ---
 title: 凡事都会以美好结局
-toc: true
 date: 2019-12-29T00:26:14+08:00
+tags: ["", ""]
 categories: ["生活"]
-tags: ["快乐", "认知"]
+series: []
+slug: 
+keywords: []
+description: ""
 ---
 
 一切事情都会以美好结局，如果不是，说明它还没结束。记不得是从哪里，寻觅得这一佳句，印象极深刻。

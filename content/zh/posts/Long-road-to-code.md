@@ -1,8 +1,8 @@
 ---
 title: "编程路漫漫"
-date: "2020-05-02T22:13:48+08:00"
-tags: ["编程", "Hugo", "Hexo"]
-categories: ["生活"]
+date: 2020-05-02T22:13:48+08:00
+tags: ["Hugo", "Hexo"]
+categories: ["技术"]
 series: []
 keywords: ["编程, hugo"]
 description: "写了自己最近有关编程的感想"
