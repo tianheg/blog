@@ -1,10 +1,12 @@
 ---
 title: 一个node.js简单应用
-toc: false
 date: 2020-04-03T17:52:09+08:00
+tags: []
 categories: ["技术"]
-tags: ["node"]
+series: []
 slug: node application
+keywords: []
+description: ""
 ---
 
 一个node.js应用由哪几部分组成：

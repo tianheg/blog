@@ -1,13 +1,13 @@
 ---
 title: 大多数人在还不会游泳之前都不会想游泳
-toc: false
 date: 2019-12-04T18:23:49+08:00
-categories: ["生活"]
 tags: ["金韩一"]
+categories: ["生活"]
+series: []
+slug: people not do before they can
+keywords: []
+description: ""
 ---
-愚自少读书，有所得辄记之。其有不合，时复改定。或古人先我而有者，则遂削之。积三十余年，乃成一编，取子夏之言，名曰《日知录》，以正后之君子。
-
-<!--more-->
 
 昨天太累了，晚上十点睡觉，定闹钟晚上十一点半起床写作业，结果今天早晨五点醒。
 

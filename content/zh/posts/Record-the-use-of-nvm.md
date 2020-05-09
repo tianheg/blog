@@ -1,14 +1,15 @@
 ---
 title: 记录使用nvm
-toc: false
 date: 2020-04-04T07:56:10+08:00
-categories: ["技术"]
 tags: ["nvm", "npm", "nodejs"]
+categories: ["技术"]
+series: []
+slug: record use nvm
+keywords: []
+description: ""
 ---
 
 一、nvm和nodejs的安装路径不能有空格，否则会报错：
-
-<!--more-->
 
 nvm use 出问题 $ nvm use 7.2.0 exit status 1: 'D:\My
 

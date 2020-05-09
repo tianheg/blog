@@ -1,9 +1,12 @@
 ---
 title: 给Windows的终端配置代理
-toc: true
 date: 2020-04-03T22:34:17+08:00
+tags: []
 categories: ["技术"]
-tags: ["Win10"]
+series: []
+slug: 
+keywords: []
+description: ""
 ---
 
 给 Win10 终端配置代理这个问题，以前遇到过几次，但都略过了。就连这篇文章都拖了很久。我把参考链接那篇文章总结下来，我觉得自己以后一定会用到。

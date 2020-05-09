@@ -1,12 +1,15 @@
 ---
 title: 网络觅食两三事
-categories: ["生活"]
-toc: true
 date: 2020-02-13T21:14:59+08:00
-tags: ["YouTube", "虚拟主机", "域名", "法律"]
+tags: [""]
+categories: ["生活"]
+series: []
+slug: 
+keywords: []
+description: ""
 ---
 
-### 跟着大佬建YouTube镜像网站
+### 跟着别人建YouTube镜像网站
 
 这个大佬的 GitHub 项目已经删除殆尽，我从残灰中fork了一条分支——https://github.com/Gaotianhe/youtube-video-proxy-script ，进行接下来的操作。我不太清楚这种做法是否涉嫌侵犯版权法律，实际上因为大佬的删除，我觉得这可能已经触犯到法律边缘。所以，当我接近成功时，实际上是我的镜像网站确实建立完毕，然而它却无法播放 YouTube 视频。我认为还是在版权上出了问题，不过对于目前的我来说，只是用它来练手，做个小项目而已。另外，说一句，除了时间成本，我还投进去8块钱买了个域名。现在域名也就闲着了。
 

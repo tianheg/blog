@@ -1,9 +1,10 @@
 ---
 title: 雪临有感
 date: 2018-12-23T20:12:41+08:00
-tags: ["雪","理想"]
+tags: []
 categories: ["生活"]
 series: ["雪"]
+slug: 
 keywords: ["理想","风景"]
 description: "雪天漫步，写些感想"
 ---
