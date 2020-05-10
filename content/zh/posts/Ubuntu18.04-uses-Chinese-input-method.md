@@ -1,9 +1,9 @@
 ---
 title: Ubuntu18.04使用中文输入法
 date: 2020-03-04T21:14:25+08:00
-tags: ["Ubuntu"]
+tags: []
 categories: ["技术"]
-series: []
+series: ["Ubuntu"]
 slug: 
 keywords: []
 description: ""
