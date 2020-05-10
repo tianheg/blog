@@ -1,9 +1,9 @@
 ---
 title: Win10安装pyenv管理python版本
 date: 2020-04-06T13:52:14+08:00
-tags: ["pyenv", "Win10"]
+tags: []
 categories: ["技术"]
-series: []
+series: ["Python"]
 slug: 
 keywords: []
 description: ""
