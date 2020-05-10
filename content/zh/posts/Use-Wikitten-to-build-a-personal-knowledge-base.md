@@ -1,7 +1,7 @@
 ---
 title: 使用Wikitten建立个人知识库
 date: 2020-04-02T21:47:53+08:00
-tags: ["Wikitten"]
+tags: []
 categories: ["技术"]
 series: []
 slug: build a knowledgebase with Wikitten
