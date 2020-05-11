@@ -67,4 +67,4 @@ $ sudo apt upgrade
 
 ---
 
-参考链接：https://linuxize.com/post/how-to-install-google-chrome-web-browser-on-debian-9/
+参考链接：[https://linuxize.com/post/how-to-install-google-chrome-web-browser-on-debian-9/](https://linuxize.com/post/how-to-install-google-chrome-web-browser-on-debian-9/)
