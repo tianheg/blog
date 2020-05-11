@@ -23,3 +23,13 @@ fatal: index-pack failed
 ```
 
 ## repo URL: 'master' must be absolute or begin with ./|../
+
+## 在使用gitpush推送至远程时，如果本地分支名错误，会报错：
+
+```bash
+E:\>git push origin master
+error: src refspec master does not match any
+error: failed to push some refs to 'git@github.com:Name/repo.git'
+```
+
+在该例子中，我的本地分支实际上是 `gh-pages`，所以正确的命令为：`git push origin gh-pages`
