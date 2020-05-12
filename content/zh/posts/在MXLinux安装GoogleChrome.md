@@ -17,6 +17,7 @@ MXLinux 属于 Debian 大类，所以在 MXLinux 上安装 GoogleChrome 亦即�
 ### 系统环境：
 
 Debian version: 10
+
 MXLinux version: MX-19.1_x64
 
 ### 下载 Google Chrome
