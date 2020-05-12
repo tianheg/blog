@@ -1,5 +1,5 @@
 ---
-title: MXLinux - VBox安装MXLinux
+title: MXLinux VBox安装MXLinux
 date: 2020-05-11T16:08:21+08:00
 categories: ["技术"]
 series: ["MXLinux"]
