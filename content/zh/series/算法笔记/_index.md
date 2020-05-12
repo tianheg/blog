@@ -1,3 +1,0 @@
-+++
-slug = "Algorithm notes"
-+++

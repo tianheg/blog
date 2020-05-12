@@ -1,9 +1,9 @@
 ---
-title: 算法笔记-读书笔记 - 第2章 C/C++快速入门
+title: 算法笔记-第二章C/C++快速入门
 date: 2020-05-10T18:43:44+08:00
 tags: []
 categories: ["技术"]
-series: ["算法笔记"]
+series: ["读书笔记"]
 slug: Algorithm notes read notes C C++
 keywords: ["Algorithm notes","C","C++"]
 description: ""
