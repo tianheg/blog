@@ -1,5 +1,5 @@
 ---
-title: 在 MXLinux 安装GoogleChrome
+title: MXLinux 安装 Google Chrome
 date: 2020-05-11T20:26:53+08:00
 categories: ["技术"]
 series: ["MXLinux"]
