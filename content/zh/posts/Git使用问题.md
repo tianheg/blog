@@ -6,10 +6,12 @@ categories: ["技术"]
 series: ["Git"]
 slug: Git use problems
 keywords: ["Git"]
-description: ""
+description: "记录使用 Git 过程中出现的错误，以及解决的过程"
 ---
 
-## git pull 报错
+## 当 git pull 失败时
+
+报错：
 
 ```bash
 λ git pull
@@ -22,9 +24,19 @@ fatal: early EOF
 fatal: index-pack failed
 ```
 
-## repo URL: 'master' must be absolute or begin with ./|../
+## 当添加子模块连接有问题时
 
-## 在使用gitpush推送至远程时，如果本地分支名错误，会报错：
+报错：
+
+```
+repo URL: 'master' must be absolute or begin with ./|../
+```
+
+这一错误出现在 **我添加子模块** 时，以后再复现，解决
+
+## 当本地分支推送至远程本地名称输入错误时
+
+报错：
 
 ```bash
 E:\>git push origin master
@@ -33,3 +45,16 @@ error: failed to push some refs to 'git@github.com:Name/repo.git'
 ```
 
 在该例子中，我的本地分支实际上是 `gh-pages`，所以正确的命令为：`git push origin gh-pages`
+
+## 当 https 连接被误以为 ssh 连接时
+
+报错：
+
+```
+git push
+fatal: HttpRequestException encountered
+输入 GitHub 用户名
+输入 GitHub 密码
+成功推送
+```
+
