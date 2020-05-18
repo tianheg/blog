@@ -2,11 +2,17 @@
 title = "关于" 
 date = "2020-04-29T10:30:12+08:00" 
 +++
- <meting-js
-            server="netease"
-            type="playlist"
-            id="967686417">
-        </meting-js>
+
+<!-- require APlayer -->
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/aplayer/dist/APlayer.min.css">
+<script src="https://cdn.jsdelivr.net/npm/aplayer/dist/APlayer.min.js"></script>
+<!-- require MetingJS -->
+<script src="https://cdn.jsdelivr.net/npm/meting@2/dist/Meting.min.js"></script>
+<meting-js
+server="netease"
+type="playlist"
+id="967686417">
+</meting-js>
 
 </br>
 
