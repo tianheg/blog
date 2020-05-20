@@ -32,7 +32,7 @@ int main()
 
 `stdio` 的全称是 `standard input output`，`h` 就是 `head` 的缩写，`.h` 是头文件的文件格式。还有一些头文件，它们虽然和 `stdio.h` 的功能各不相同，但是也是 C 程序里不可分割的一部分。例如， `math.h` 负责一些数学函数，`string.h` 负责和字符串有关的函数。
 
-此外，在 C++ 标准中， `stdio.h` 更推荐使用等价写法： `cstdio`。
+此外，在 **C++ 标准**中， `stdio.h` 更推荐使用等价写法： `cstdio`。
 
 2. 主函数
 
@@ -219,7 +219,26 @@ int main()
    
 3. 字符串常量
 
-   字符常量
+   字符常量：单个使用单引号标记的字符。
+   
+   字符串常量：由**双引号**标记的字符集，例子`"WoAiRenRenBuAiWo"`。
+   
+   **字符串常量可以作为初值赋给字符数组，并使用%s的格式输出**。
+   
+   程序：
+   
+   ```c
+   #include<stdio.h>
+   int main() //这个 main 和 () 之间可以有空格吗
+   {
+       char str1[25] = "WoAiRenRenBuAiWo";
+       char str2[25] = "SoSadAStory";
+       printf("%s, %s", str1, str2);
+       return 0;
+   }
+   ```
+   
+   
 
 ### 强制类型转换
 
