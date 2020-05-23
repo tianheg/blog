@@ -34,7 +34,7 @@ footnoteReturnLinkContents = "↩"
 enableGitInfo = true
 
 # 是否生成 robots.txt 文件
-enableRobotsTXT = false
+enableRobotsTXT = true
 
 # 每一分页的文章数（仅对「文章摘要」首页布局有效）
 paginate = 5
@@ -109,12 +109,12 @@ uglyURLs = false
     threshold = 80
     includeNewer = true
     toLower = true
-    # [[related.indices]]
-    #     name = "categories"
-    #     weight = 100
     [[related.indices]]
-        name = "tags"
-        weight = 95
+        name = "categories"
+        weight = 100
+    # [[related.indices]]
+    #     name = "tags"
+    #     weight = 95
     [[related.indices]]
         name = "date"
         weight = 10
@@ -134,10 +134,15 @@ uglyURLs = false
     mediaType = "application/rss+xml"
     baseName = "rss"
 
+# lunr.js 的搜索索引
+[outputFormats.SearchIndex]
+    mediaType = "application/json"
+    baseName = "search"
+
 # Hugo 的输出控制
 [outputs]
     page = ["HTML"]
-    home = ["HTML", "SectionsAtom", "SectionsRSS"]
+    home = ["HTML", "SectionsAtom", "SectionsRSS", "SearchIndex"]
     section = ["HTML"]
     # 类别
     taxonomyTerm = ["HTML"]
@@ -169,13 +174,13 @@ uglyURLs = false
 # pre           内链（internal）或外链（external）
 # post          图标（留空（""）则无）
 # identifier    图标的 Class 名
-#               （对于弹性布局的顶栏有两个特殊
+#               （对于弹性布局的顶栏有三个特殊
 #               的值：`theme-switcher`、
-#               `lang-switcher`）
+#               `lang-switcher`、`search`）
 
 [menu]
-    # # 菜单栏
-[[menu.main]]
+    ## 菜单栏
+    [[menu.main]]
         url = "/"
         name = "首页"
         weight = 1
@@ -218,7 +223,10 @@ uglyURLs = false
     [[menu.main]]
         weight = 8
         identifier = "lang-switcher"
-
+    # [[menu.main]]
+    #     weight = 9
+    #     identifier = "search"
+    #     post = "search"
 ##########################################
 # 自行添加的多语言站点配置
 
@@ -265,6 +273,10 @@ uglyURLs = false
     [[languages.en.menu.main]]
         weight = 4
         identifier = "lang-switcher"
+    # [[languages.en.menu.main]]
+    #     weight = 5
+    #     identifier = "search"
+    #     post = "search"
         
 [languages.en.params]
     homePoetry = ["Don’t just say what you think, think twice about everything.","Friends who know each other well, should use a steel ring to hoop your soul, but don’t abuse your friendship with every new friend.","Listen to everyone's opinion, but only express your opinion to a very few people; accept everyone's criticism, but retain your own judgment.","Above all, you must be true to yourself; just as night is made by day, so you can be true to yourself and not be false to others."]
@@ -294,11 +306,11 @@ uglyURLs = false
         name = "Home"
         weight = 1
         pre = "internal"
-    [[menu.links]]
-        url = "/tags/"
-        name = "Tags"
-        weight = 2
-        pre = "internal"
+    # [[menu.links]]
+    #     url = "/tags/"
+    #     name = "Tags"
+    #     weight = 2
+    #     pre = "internal"
 ##########################################
 # 主题配置
 
@@ -349,7 +361,7 @@ uglyURLs = false
     # 如果否，则会使用你的站点标题作为默认值，并
     # 以文字的形式显示，下方可配置字号和字色。字
     # 体请到底部的字体部分配置。单位：em。
-    siteBrandFontSize = 2
+    siteBrandFontSize = 1
     siteBrandFontColor = "var(--color-contrast-high)"
 
 
@@ -357,11 +369,11 @@ uglyURLs = false
     # 菜单栏
 
     # 是否开启
-    enableMenu = false
+    enableMenu = true
     # 说明：对弹性布局的顶栏无效
 
     # 是否在首页显示
-    displayMenuInHome = false
+    displayMenuInHome = true
     # 说明：对弹性布局的顶栏无效
 
     # 是否按文章分区高亮当前菜单项
@@ -478,15 +490,15 @@ uglyURLs = false
     # 说明：left（左边）或 right（右边）
 
     # 是否按月份分隔列表
-    groupByMonth = false
+    groupByMonth = true
 
     # 是否开启十二生肖
     chineseZodiac = true
 
     # 是否翻译年份（仅对年份标题有效）
-    i18nYear = false
+    i18nYear = true
     # 是否翻译月份（仅对月份标题有效）
-    i18nMonth = false
+    i18nMonth = true
 
 
     ######################################
@@ -500,6 +512,9 @@ uglyURLs = false
 
     # 是否显示每一类别项下的文章数
     displayTaxonomyTermCount = true
+
+    # 设置一个非负数来限制每一类别项下展示的文章数
+    limitEntriesLimit = -1
 
 
     ######################################
@@ -622,6 +637,49 @@ uglyURLs = false
     #      的优先级高于此处
 
     ######################################
+    # 评论
+
+    # 说明：仅在生产环境（production）下渲染
+
+    # 是否开启（全局设置）
+    enableComments = true
+    # 说明：文章的 Front Matter 中的 `comments`
+    #      的优先级高于此处
+
+    ## Disqus
+    enableDisqus = false
+    disqusShortname = ""
+
+    ## Valine
+    enableValine = true
+    valineAppId = "yT7EMJDIlS52DLWRpSO8iLuM-gzGzoHsz"
+    valineAppKey = "HhlFI703Th1j4qNORwJvfNum"
+    valinePlaceholder = "Just go go"
+    valineNotify = false
+    valineVerify = false
+    valinePath = ""
+    valineAvatar = "mm"
+    valineMeta = ["nick", "mail", "link"]
+    valinePageSize = 10
+    valineLang = "zh-cn"
+    valineVisitor = false
+    valineHighlight = true
+    avatarForce = false
+    valineRecordIP = false
+    valineServerURLs = ""
+    # 说明：https://valine.js.org/
+
+    ## Utterances
+    enableUtterances = false
+    utterancesRepo = ""
+    utterancesIssueTerm = "pathname"
+    utterancesTheme = "github-light"
+    utterancesThemeDark = "photon-dark"
+    utterancesLabel = ""
+    # 说明：https://utteranc.es/
+
+
+    ######################################
     # Google Analytics
 
     # 说明：仅在生产环境（production）下渲染
@@ -669,7 +727,7 @@ uglyURLs = false
     # 注意：只支持 HSL 颜色值
 
     # 文章的内容宽度
-    postWidth = 42
+    postWidth = 36
     # 说明：如果留空（""），则用 42 作为默认值
     #      单位：em
 
@@ -882,9 +940,9 @@ uglyURLs = false
     # 菜单栏
     fontFamilyMenu = ""
     # 文章标题、文章副标题、列表标题、列表的年份和月份标题、相关文章标题、文章上下篇标题、表格的表头、定义列表中的术语
-    fontFamilyTitle = "'Noto Serif SC', 'Amstelvar', serif"
+    fontFamilyTitle = "'Noto Serif SC', 'EB Garamond', serif"
     # 分节标题、目录标题
-    fontFamilyHeadings = "'Noto Serif SC', 'Amstelvar', serif"
+    fontFamilyHeadings = "'Noto Serif SC', 'EB Garamond', serif"
     # 代码、上标、文章元信息、文章更新徽章、文章的 Git 版本信息、极简页脚、不蒜子站点浏览计数
     fontFamilyCode = "'Source Code Pro', 'Noto Serif SC', monospace"
     # 引用
@@ -896,10 +954,10 @@ uglyURLs = false
     # 页脚
     fontFamilyFooter = "'Source Code Pro', 'Noto Serif SC', monospace"
     # 主体
-    fontFamilyBody = "'Amstelvar', 'Noto Serif SC', serif"
+    fontFamilyBody = "'EB Garamond', 'Noto Serif SC', serif"
 
     # 网络字体链接
-    fontsLink = "https://fonts.googleapis.com/css2?family=Noto+Serif+SC:wght@400;500;700&family=Source+Code+Pro:ital,wght@0,400;0,700;1,400;1,700&family=Cinzel+Decorative:wght@700&display=swap"
+    fontsLink = "https://fonts.googleapis.com/css2?family=EB+Garamond:ital,wght@0,400;0,500;0,700;1,400;1,700&family=Noto+Serif+SC:wght@400;500;700&family=Source+Code+Pro:ital,wght@0,400;0,700;1,400;1,700&display=swap"
     # 说明：要想读者一定体验到你设置的字体，最好
     #      采用网络字体。MemE 主题目前仅支持
     #      Google Fonts 的链接，请前往
@@ -1278,6 +1336,15 @@ uglyURLs = false
 
     enableInstantPage = true
     # 说明：https://github.com/instantpage/instant.page
+
+    
+    ######################################
+    # Lunr 搜索（暂不支持中文）
+
+    # 说明：需要开启 `SearchIndex` 的输出
+
+    enableLunrSearch = false
+    # 说明：https://lunrjs.com/
 
 
     ######################################
