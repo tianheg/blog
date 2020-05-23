@@ -21,3 +21,10 @@ original = false
 3. 站点简介
 
 我不在意其他的排名，只要你认为自己的博客有价值，就可以添加友链
+
+---
+
+常访问链接：
+
+1. [Home - 阳志平的网志](https://www.yangzhiping.com)
+2. 
