@@ -134,15 +134,10 @@ uglyURLs = false
     mediaType = "application/rss+xml"
     baseName = "rss"
 
-# lunr.js 的搜索索引
-[outputFormats.SearchIndex]
-    mediaType = "application/json"
-    baseName = "search"
-
 # Hugo 的输出控制
 [outputs]
     page = ["HTML"]
-    home = ["HTML", "SectionsAtom", "SectionsRSS", "SearchIndex"]
+    home = ["HTML", "SectionsAtom", "SectionsRSS"]
     section = ["HTML"]
     # 类别
     taxonomyTerm = ["HTML"]
@@ -1338,14 +1333,7 @@ uglyURLs = false
     # 说明：https://github.com/instantpage/instant.page
 
     
-    ######################################
-    # Lunr 搜索（暂不支持中文）
-
-    # 说明：需要开启 `SearchIndex` 的输出
-
-    enableLunrSearch = false
-    # 说明：https://lunrjs.com/
-
+    
 
     ######################################
     # 404 页面
