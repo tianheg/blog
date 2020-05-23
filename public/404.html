@@ -6,27 +6,13 @@
     <meta name="generator" content="Hugo 0.71.0" /><meta name="theme-color" content="#fff" />
         <script>
             const userPrefers = localStorage.getItem('theme');
-            const darkModeMediaQuery = window.matchMedia('(prefers-color-scheme: dark)');
-            const lightModeMediaQuery = window.matchMedia('(prefers-color-scheme: light)');
             if (userPrefers === 'dark') {
                 changeModeMeta('dark');
             } else if (userPrefers === 'light') {
                 changeModeMeta('light');
-            } else if (darkModeMediaQuery.matches) {
-                changeModeMeta('dark');
-            } else if (lightModeMediaQuery.matches) {
-                changeModeMeta('light');
             }
             function changeModeMeta(theme) {
                 document.documentElement.setAttribute('data-theme', theme);
-                if (theme === 'dark') {
-                    changeThemeColor('#16171d');
-                } else {
-                    changeThemeColor('#fff');
-                }
-            }
-            function changeThemeColor(themeColor) {
-                document.querySelector('meta[name="theme-color"]').setAttribute('content', themeColor);
             }
         </script>
 
@@ -50,12 +36,12 @@
 
     <title>404 Page not found | YIDAJIABEI</title>
 
-    <link rel="stylesheet" href="./css/meme.min.d0536c85dc66fdd545cfb790992281d44b2e500d5358766e0edc6650b054be1b.css" integrity="sha256-0FNshdxm/dVFz7eQmSKB1EsuUA1TWHZuDtxmULBUvhs=" />
+    <link rel="stylesheet" href="./css/meme.min.37f6bcd0d3be88eae67958f53d014e6aeebfb7af74eda49867b2a84665e604b2.css" integrity="sha256-N/a80NO&#43;iOrmeVj1PQFOau6/t6907aSYZ7KoRmXmBLI=" />
 
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
 
-        <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Noto&#43;Serif&#43;SC:wght@400;500;700&amp;family=Source&#43;Code&#43;Pro:ital,wght@0,400;0,700;1,400;1,700&amp;family=Cinzel&#43;Decorative:wght@700&amp;display=swap" media="print" onload="this.media='all'" />
-        <noscript><link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Noto&#43;Serif&#43;SC:wght@400;500;700&amp;family=Source&#43;Code&#43;Pro:ital,wght@0,400;0,700;1,400;1,700&amp;family=Cinzel&#43;Decorative:wght@700&amp;display=swap" /></noscript>
+        <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=EB&#43;Garamond:ital,wght@0,400;0,500;0,700;1,400;1,700&amp;family=Noto&#43;Serif&#43;SC:wght@400;500;700&amp;family=Source&#43;Code&#43;Pro:ital,wght@0,400;0,700;1,400;1,700&amp;display=swap" media="print" onload="this.media='all'" />
+        <noscript><link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=EB&#43;Garamond:ital,wght@0,400;0,500;0,700;1,400;1,700&amp;family=Noto&#43;Serif&#43;SC:wght@400;500;700&amp;family=Source&#43;Code&#43;Pro:ital,wght@0,400;0,700;1,400;1,700&amp;display=swap" /></noscript>
 
     <meta name="author" content="一大加贝" /><meta name="description" content="一个个人生活技术博客。记录所学所思所想，关注Python、web以及我感兴趣的技术，热爱生活" />
 
@@ -77,8 +63,6 @@
 
     
     <link rel="canonical" href="https://www.yidajiabei.xyz/404.html" />
-
-
 
 <script type="application/ld+json">
     {
@@ -109,8 +93,6 @@
 
     
     
-
-
 
 
 
