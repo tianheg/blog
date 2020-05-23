@@ -6,13 +6,27 @@
     <meta name="generator" content="Hugo 0.71.0" /><meta name="theme-color" content="#fff" />
         <script>
             const userPrefers = localStorage.getItem('theme');
+            const darkModeMediaQuery = window.matchMedia('(prefers-color-scheme: dark)');
+            const lightModeMediaQuery = window.matchMedia('(prefers-color-scheme: light)');
             if (userPrefers === 'dark') {
                 changeModeMeta('dark');
             } else if (userPrefers === 'light') {
                 changeModeMeta('light');
+            } else if (darkModeMediaQuery.matches) {
+                changeModeMeta('dark');
+            } else if (lightModeMediaQuery.matches) {
+                changeModeMeta('light');
             }
             function changeModeMeta(theme) {
                 document.documentElement.setAttribute('data-theme', theme);
+                if (theme === 'dark') {
+                    changeThemeColor('#16171d');
+                } else {
+                    changeThemeColor('#fff');
+                }
+            }
+            function changeThemeColor(themeColor) {
+                document.querySelector('meta[name="theme-color"]').setAttribute('content', themeColor);
             }
         </script>
 
@@ -36,7 +50,7 @@
 
     <title>404 Page not found | YIDAJIABEI</title>
 
-    <link rel="stylesheet" href="./css/meme.min.37f6bcd0d3be88eae67958f53d014e6aeebfb7af74eda49867b2a84665e604b2.css" integrity="sha256-N/a80NO&#43;iOrmeVj1PQFOau6/t6907aSYZ7KoRmXmBLI=" />
+    <link rel="stylesheet" href="./css/meme.min.cc57dcc6f28a946d9a63082d9111be8f62c5466f010efe9776613ae55ebf4a4d.css" integrity="sha256-zFfcxvKKlG2aYwgtkRG&#43;j2LFRm8BDv6XdmE65V6/Sk0=" />
 
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
 
@@ -63,6 +77,8 @@
 
     
     <link rel="canonical" href="https://www.yidajiabei.xyz/404.html" />
+
+
 
 <script type="application/ld+json">
     {
@@ -93,6 +109,8 @@
 
     
     
+
+
 
 
 
