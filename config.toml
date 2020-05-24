@@ -11,9 +11,6 @@ copyright = "在保留本文作者及本文链接的前提下，非商业用途�
 # 主题选择
 theme = "meme"
 
-# `hugo new` 新建文章自动打开的文本编辑器
-# newContentEditor = "typora"
-
 # i18n
 defaultContentLanguage = "zh"
 defaultContentLanguageInSubdir = false
@@ -47,13 +44,11 @@ uglyURLs = false
 # URL 结构
 [permalinks]
     categories = "/categories/:slug/"
-    tags = "/tags/:slug/"
     series = "/series/:slug/"
 
 # 类别
 [taxonomies]
     category = "categories"
-    tag = "tags"
     series = "series"
 
 # 修改时间
@@ -112,9 +107,6 @@ uglyURLs = false
     [[related.indices]]
         name = "categories"
         weight = 100
-    # [[related.indices]]
-    #     name = "tags"
-    #     weight = 95
     [[related.indices]]
         name = "date"
         weight = 10
@@ -218,10 +210,7 @@ uglyURLs = false
     [[menu.main]]
         weight = 8
         identifier = "lang-switcher"
-    # [[menu.main]]
-    #     weight = 9
-    #     identifier = "search"
-    #     post = "search"
+
 ##########################################
 # 自行添加的多语言站点配置
 
@@ -268,10 +257,7 @@ uglyURLs = false
     [[languages.en.menu.main]]
         weight = 4
         identifier = "lang-switcher"
-    # [[languages.en.menu.main]]
-    #     weight = 5
-    #     identifier = "search"
-    #     post = "search"
+
         
 [languages.en.params]
     homePoetry = ["Don’t just say what you think, think twice about everything.","Friends who know each other well, should use a steel ring to hoop your soul, but don’t abuse your friendship with every new friend.","Listen to everyone's opinion, but only express your opinion to a very few people; accept everyone's criticism, but retain your own judgment.","Above all, you must be true to yourself; just as night is made by day, so you can be true to yourself and not be false to others."]
@@ -301,11 +287,7 @@ uglyURLs = false
         name = "Home"
         weight = 1
         pre = "internal"
-    # [[menu.links]]
-    #     url = "/tags/"
-    #     name = "Tags"
-    #     weight = 2
-    #     pre = "internal"
+    
 ##########################################
 # 主题配置
 
@@ -632,49 +614,6 @@ uglyURLs = false
     #      的优先级高于此处
 
     ######################################
-    # 评论
-
-    # 说明：仅在生产环境（production）下渲染
-
-    # 是否开启（全局设置）
-    enableComments = true
-    # 说明：文章的 Front Matter 中的 `comments`
-    #      的优先级高于此处
-
-    ## Disqus
-    enableDisqus = false
-    disqusShortname = ""
-
-    ## Valine
-    enableValine = true
-    valineAppId = "yT7EMJDIlS52DLWRpSO8iLuM-gzGzoHsz"
-    valineAppKey = "HhlFI703Th1j4qNORwJvfNum"
-    valinePlaceholder = "Just go go"
-    valineNotify = false
-    valineVerify = false
-    valinePath = ""
-    valineAvatar = "mm"
-    valineMeta = ["nick", "mail", "link"]
-    valinePageSize = 10
-    valineLang = "zh-cn"
-    valineVisitor = false
-    valineHighlight = true
-    avatarForce = false
-    valineRecordIP = false
-    valineServerURLs = ""
-    # 说明：https://valine.js.org/
-
-    ## Utterances
-    enableUtterances = false
-    utterancesRepo = ""
-    utterancesIssueTerm = "pathname"
-    utterancesTheme = "github-light"
-    utterancesThemeDark = "photon-dark"
-    utterancesLabel = ""
-    # 说明：https://utteranc.es/
-
-
-    ######################################
     # Google Analytics
 
     # 说明：仅在生产环境（production）下渲染
@@ -879,25 +818,6 @@ uglyURLs = false
 
     # 是否将 HTML 的头部元数据中的图片链接也替换为外链
     headAlso = false
-
-
-    ######################################
-    # 视频外链
-
-    # 说明：仅在生产环境（production）下渲染
-    #
-    #      只支持相对于网站根目录的绝对链接
-    #      比如：/videos/meme.mp4
-    #
-    #      且你添加的 HTML 代码必需以以下开头：
-    #      `<video src="`
-
-    # 是否开启
-    enableVideoHost = false
-
-    # 视频外链地址
-    videoHostURL = "https://example.com/"
-
 
     ######################################
     # 脚注
@@ -1155,17 +1075,6 @@ uglyURLs = false
     # 相关文章标题右边的图标
     relatedPostsIcon = "plus-circle"
 
-
-    ######################################
-    # 文章的标签
-
-    # 是否开启
-    enablePostTags = true
-
-    # 标签的图标
-    postTagsIcon = "tag"
-
-
     ######################################
     # 文章上下篇
 
@@ -1187,8 +1096,8 @@ uglyURLs = false
     # 极简页脚
 
     # 是否开启
-    enableMinimalFooter = true
-    enableVerticalBarStructure = true
+    enableMinimalFooter = false
+    enableVerticalBarStructure = false
     # 说明：如果开启此项，显示在右边的部类或分区
     #      将会包含全部的第一级部类或分区，并且
     #      以竖线（|）分隔开来。

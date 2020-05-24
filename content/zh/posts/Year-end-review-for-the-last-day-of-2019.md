@@ -1,7 +1,6 @@
 ---
 title: 最后一天的年终总结
 date: 2019-12-31T00:19:50+08:00
-tags: []
 categories: ["生活"]
 series: []
 slug: 
