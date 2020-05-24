@@ -1,7 +1,6 @@
 ---
 title: 一荤一素与恋爱长跑指北
 date: 2020-02-18T20:25:31+08:00
-tags: ["恋爱"]
 categories: ["生活"]
 series: []
 slug: meat vegetarian and love

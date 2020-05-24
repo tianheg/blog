@@ -1,7 +1,6 @@
 ---
 title: 给Windows的终端配置代理
 date: 2020-04-03T22:34:17+08:00
-tags: []
 categories: ["技术"]
 series: []
 slug: 

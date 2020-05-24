@@ -1,7 +1,6 @@
 ---
 title: 时常以局外人的角度观察自己
 date: 2019-12-06T18:15:16+08:00
-tags: [""]
 categories: ["生活"]
 series: []
 slug: often observe yourself

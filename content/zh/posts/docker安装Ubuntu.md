@@ -1,7 +1,6 @@
 ---
 title: Docker安装Ubuntu
 date: 2020-05-10T10:19:26+08:00
-tags: []
 categories: ["技术"]
 series: ["Docker"]
 slug: docker install ubuntu

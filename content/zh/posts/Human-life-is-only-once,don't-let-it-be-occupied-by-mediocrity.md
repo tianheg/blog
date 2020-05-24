@@ -1,7 +1,6 @@
 ---
 title: 人的生命只有一次，你不要让它被平庸占据
 date: 2019-12-12T17:44:04+08:00
-tags: [""]
 categories: ["生活"]
 series: []
 slug: human life is only once

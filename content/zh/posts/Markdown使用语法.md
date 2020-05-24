@@ -1,7 +1,6 @@
 ---
 title: Markdown使用语法
 date: 2020-05-10T17:39:28+08:00
-tags: []
 categories: ["技术"]
 series: ["Markdown"]
 slug: Markdown uses syntax
