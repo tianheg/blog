@@ -1,7 +1,6 @@
 ---
 title: 记录第一次在晚上玩轮滑
 date: 2019-11-24T13:57:40+08:00
-tags: ["轮滑"]
 categories: ["生活"]
 series: []
 slug: 

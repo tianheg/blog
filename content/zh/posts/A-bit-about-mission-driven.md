@@ -1,7 +1,6 @@
 ---
 title: 有关于任务驱动的一点看法
 date: 2020-02-15T21:23:20+08:00
-tags: []
 categories: ["生活"]
 series: []
 slug: mission driven

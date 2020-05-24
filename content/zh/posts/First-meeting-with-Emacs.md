@@ -1,7 +1,6 @@
 ---
 title: 和Emacs的第一次见面
 date: 2020-02-26T20:33:41+08:00
-tags: []
 categories: ["技术"]
 series: ["Emacs"]
 slug: 

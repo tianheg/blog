@@ -1,7 +1,6 @@
 ---
 title: Hexo本地渲染一切正常，传到github上js,css404更换主题无法解决
 date: 2020-05-10T17:47:03+08:00
-tags: []
 categories: ["技术"]
 series: ["Hexo"]
 slug: Hexo local rendering everything is normal

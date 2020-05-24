@@ -1,7 +1,6 @@
 ---
 title: 谈谈批判性思考
 date: 2020-03-14T21:42:59+08:00
-tags: ["思", ""]
 categories: ["生活"]
 series: []
 slug: 

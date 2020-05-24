@@ -1,7 +1,6 @@
 ---
 title: 头痛反复，反复头痛
 date: 2020-02-07T00:15:23+08:00
-tags: ["思"]
 categories: ["生活"]
 series: []
 slug: repeated headache

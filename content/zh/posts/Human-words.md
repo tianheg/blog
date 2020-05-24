@@ -1,7 +1,6 @@
 ---
 title: 人话
 date: 2020-02-02T21:14:35+08:00
-tags: [""]
 categories: ["生活"]
 series: []
 slug: 

@@ -1,7 +1,6 @@
 ---
 title: 孩子，你应该为你的身边人想想
 date: 2020-02-24T19:53:16+08:00
-tags: []
 categories: ["生活"]
 series: []
 slug: think about parents

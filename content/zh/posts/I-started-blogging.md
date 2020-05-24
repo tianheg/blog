@@ -1,7 +1,6 @@
 ---
 title: 我开始写博客了
 date: 2019-12-22T23:31:37+08:00
-tags: ["博客", "阮一峰"]
 categories: ["生活"]
 series: []
 slug: 

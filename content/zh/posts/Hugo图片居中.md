@@ -1,7 +1,6 @@
 ---
 title: Hugo图片居中
 date: 2020-05-10T17:49:41+08:00
-tags: []
 categories: ["技术"]
 series: ["Hugo"]
 slug: Hugo center picture

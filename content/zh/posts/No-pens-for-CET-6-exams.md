@@ -1,7 +1,6 @@
 ---
 title: 六级考试没带涂卡笔
 date: 2019-12-14T16:55:17+08:00
-tags: [""]
 categories: ["生活"]
 series: []
 slug: no pens for cet six

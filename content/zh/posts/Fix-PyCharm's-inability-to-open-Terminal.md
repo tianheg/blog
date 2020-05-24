@@ -1,7 +1,6 @@
 ---
 title: 解决PyCharm无法打开Terminal问题
 date: 2020-04-12T11:12:06+08:00
-tags: ["", ""]
 categories: ["技术"]
 series: []
 slug: 
