@@ -1,7 +1,6 @@
 ---
 title: 如果一个孩子摔倒了就不再学走路，他将永远不会走路
 date: 2019-12-20T16:29:52+08:00
-tags: ["", ""]
 categories: ["生活"]
 series: []
 slug: if a child falls down

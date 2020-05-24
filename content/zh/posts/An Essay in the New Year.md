@@ -1,7 +1,6 @@
 ---
 title: 新年随笔
 date: 2019-02-05T20:24:45+08:00
-tags: []
 categories: ["生活"]
 series: []
 slug: 

@@ -1,7 +1,6 @@
 ---
 title: 别人的夸奖可能是致命的
 date: 2019-12-26T23:18:53+08:00
-tags: []
 categories: ["生活"]
 series: []
 slug: 

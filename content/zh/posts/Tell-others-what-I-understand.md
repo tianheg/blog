@@ -1,7 +1,6 @@
 ---
 title: 把自己理解的东西讲给别人听
 date: 2019-12-17T16:42:11+08:00
-tags: [""]
 categories: ["生活"]
 series: []
 slug: 
