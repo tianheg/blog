@@ -2,8 +2,8 @@
 title = "关于" 
 share = false
 meta = false
-displayCopyright = false
 gitinfo = false
+displayCopyright = false
 +++
 
 <!-- require APlayer -->
