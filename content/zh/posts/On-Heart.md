@@ -1,7 +1,6 @@
 ---
 title: 论心
 date: 2020-02-19T20:39:33+08:00
-tags: [""]
 categories: ["生活"]
 series: []
 slug: 

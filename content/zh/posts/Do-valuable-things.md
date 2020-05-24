@@ -1,7 +1,6 @@
 ---
 title: 做有价值的事情
 date: 2019-12-13T17:41:17+08:00
-tags: [""]
 categories: ["生活"]
 series: []
 slug: 

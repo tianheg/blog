@@ -1,7 +1,6 @@
 ---
 title: Git - 放弃本地修改，强制拉取更新
 date: 2020-05-10T18:54:45+08:00
-tags: []
 categories: ["技术"]
 series: ["Git"]
 slug: Abandon local modifications and force pull updates

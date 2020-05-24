@@ -1,7 +1,6 @@
 ---
 title: 自我否定会降低成就感
 date: 2019-12-10T17:50:46+08:00
-tags: ["思"]
 categories: ["生活"]
 series: []
 slug: 

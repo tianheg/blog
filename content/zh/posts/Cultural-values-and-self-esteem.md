@@ -1,7 +1,6 @@
 ---
 title: 文化价值观和自尊
 date: 2019-12-21T16:23:09+08:00
-tags: [""]
 categories: ["生活"]
 series: []
 slug: 

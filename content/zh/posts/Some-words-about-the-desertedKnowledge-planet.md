@@ -1,7 +1,6 @@
 ---
 title: 知识星球逐渐冷清有感
 date: 2020-01-31T23:15:39+08:00
-tags: ["坚持"]
 categories: ["生活"]
 series: []
 slug: words about knowledge planet

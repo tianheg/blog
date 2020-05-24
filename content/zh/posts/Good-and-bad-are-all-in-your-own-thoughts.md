@@ -1,7 +1,6 @@
 ---
 title: 好与坏全在于自己的想法
 date: 2020-01-29T21:38:48+08:00
-tags: ["思"]
 categories: ["生活"]
 series: []
 slug: 

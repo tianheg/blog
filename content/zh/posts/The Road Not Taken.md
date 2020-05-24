@@ -1,7 +1,6 @@
 ---
 title: 未选择的路
 date: 2020-05-05T18:51:58+08:00
-tags: ["路"]
 categories: ["生活"]
 series: []
 slug: 

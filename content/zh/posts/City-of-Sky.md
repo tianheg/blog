@@ -1,7 +1,6 @@
 ---
 title: 天空之城
 date: 2019-12-30T00:23:40+08:00
-tags: []
 categories: ["生活"]
 series: []
 slug: 

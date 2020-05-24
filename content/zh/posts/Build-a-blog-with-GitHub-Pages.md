@@ -1,7 +1,6 @@
 ---
 title: 用 GitHub Pages 搭建个人博客
 date: 2020-02-09T22:35:01+08:00
-tags: []
 categories: ["生活"]
 series: []
 slug: blog with GitHub
