@@ -1,7 +1,6 @@
 ---
 title: 过于喧嚣的孤独
 date: 2019-12-01T18:12:31+08:00
-tags: ["孤独"]
 categories: ["生活"]
 series: []
 slug: 

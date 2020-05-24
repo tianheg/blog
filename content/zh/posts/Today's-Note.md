@@ -1,7 +1,6 @@
 ---
 title: 今日记事
 date: 2020-02-21T22:27:19+08:00
-tags: [""]
 categories: ["生活"]
 series: []
 slug: 

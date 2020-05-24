@@ -1,7 +1,6 @@
 ---
 title: 写下顾虑，并把它说给自己听
 date: 2019-12-18T16:39:21+08:00
-tags: [""]
 categories: ["生活"]
 series: []
 slug: 
