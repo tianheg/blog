@@ -1,7 +1,9 @@
 +++
 title = "友链"
 share = false
-original = false
+meta = false
+gitinfo = false
+displayCopyright = false
 +++
 
 站点名称：廖灿博客
