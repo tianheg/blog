@@ -1,7 +1,9 @@
 +++
 title = "关于" 
-date = "2020-04-29T10:30:12+08:00" 
 share = false
+meta = false
+displayCopyright = false
+gitinfo = false
 +++
 
 <!-- require APlayer -->
@@ -14,6 +16,13 @@ server="netease"
 type="playlist"
 id="967686417">
 </meting-js>
+
+---
+
+常访问链接：
+
+1. [Home - 阳志平的网志](https://www.yangzhiping.com)
+2. [阮一峰的个人网站](http://www.ruanyifeng.com/home.html)
 
 ---
 

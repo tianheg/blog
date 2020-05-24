@@ -1,7 +1,6 @@
 ---
 title: “因为你的善行，这些生命得以传承下去”
 date: 2020-02-14T21:13:51+08:00
-tags: ["思"]
 categories: ["电影"]
 series: []
 slug: 

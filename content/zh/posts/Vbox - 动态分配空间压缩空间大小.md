@@ -1,7 +1,6 @@
 ---
 title: VBox - 解决动态分配空间占用物理内存过大问题
 date: 2020-05-10T18:16:07+08:00
-tags: []
 categories: ["技术"]
 series: ["VBox"]
 slug: VBox dynamically allocating space
