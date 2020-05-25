@@ -1,14 +1,10 @@
 ---
 title: About Technology
-categories: ["生活"]
-toc: false
 date: 2020-02-26T22:23:08+08:00
-tags: ["study"]
+categories: ["Life"]
 ---
 
 Reading those English documents is very difficult. 
-
-<!--more-->
 
 When studying programing, I had known that English can't be my weakness. I would like to read these English books.
 
