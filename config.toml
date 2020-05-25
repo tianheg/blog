@@ -229,7 +229,7 @@ uglyURLs = false
     hasCJKLanguage = true
     copyright = "[CC BY-NC-SA 4.0](https://creativecommons.org/licenses/by-nc-sa/4.0/deed.en)"
 [languages.en.taxonomies]
-    # category = "categories"
+    category = "categories"
     # tag = "tags"
 [languages.en.menu]
     # [[languages.en.menu.home]]
@@ -239,23 +239,29 @@ uglyURLs = false
     #     post = "user-circle"
     #     identifier = "about"
     [[languages.en.menu.main]]
+        url = "/en/categories/"
+        name = "Categories"
+        weight = 1
+        pre = "internal"
+        post = "th"
+    [[languages.en.menu.main]]
         url = "/en/posts/"
         name = "Posts"
-        weight = 1
+        weight = 2
         pre = "internal"
         post = "archive"
     [[languages.en.menu.main]]
         url = "/en/about/"
         name = "About"
-        weight = 2
+        weight = 3
         pre = "internal"
         post = "user-circle"
         identifier = "about"
     [[languages.en.menu.main]]
-        weight = 3
+        weight = 4
         identifier = "theme-switcher"
     [[languages.en.menu.main]]
-        weight = 4
+        weight = 5
         identifier = "lang-switcher"
 
         
