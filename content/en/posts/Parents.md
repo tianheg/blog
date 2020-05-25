@@ -1,14 +1,10 @@
 ---
 title: Parents
-categories: ["生活"]
-toc: false
 date: 2020-02-24T20:57:07+08:00
-tags: ["relationship"]
+categories: ["Life"]
 ---
 
 I had a quarrel with my father today. I can't do what he ask and I'm ashamed. I'm unable to make money because I don't know what can I do. I want to make money through programing, but I'm not good at it now. 
-
-<!--more-->
 
 Every time I find myself worthless, I sink into deep despair. I'm not an absolute optimist.
 

@@ -1,14 +1,10 @@
 ---
 title: Many a Little Makes a Mickle
-categories: ["生活"]
-toc: false
 date: 2020-02-23T21:31:07+08:00
-tags: ["begin"]
+categories: ["Life"]
 ---
 
 Many a little makes a mickle
-
-<!--more-->
 
 I'm very glad that you read my diary.There are too many errors that I can't correct all of them, and I am supposed that I should write it as much as possible. 
 
