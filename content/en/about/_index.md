@@ -1,12 +1,11 @@
 +++
 title = "ABOUT" 
-date = "2020-04-29T10:30:12+08:00" 
+share = false
+meta = false
+gitinfo = false
+displayCopyright = false
 +++
 
-Hello,
+—2020-05-25T08:23:46
 
-This is my blog.
-
-You can find me in GitHub(https://github.com/Gaotianhe)
-
-I like programing, I love this feeling.
+> The biggest lie in this world is that someone tells you that this world is beautiful.
