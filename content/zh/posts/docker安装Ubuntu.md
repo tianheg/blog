@@ -1,8 +1,8 @@
 ---
-title: Docker安装Ubuntu
+title: Docker 安装 Ubuntu
 date: 2020-05-10T10:19:26+08:00
 categories: ["技术"]
-series: ["Docker"]
+tech: ["Docker"]
 slug: docker install ubuntu
 keywords: ["docker", "Ubuntu"]
 description: "介绍在Docker上安装Ubuntu，制作镜像并打包"

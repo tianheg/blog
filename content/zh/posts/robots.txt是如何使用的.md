@@ -2,7 +2,7 @@
 title: 如何使用 robots.txt 进行 SEO 优化
 date: 2020-05-17T10:33:48+08:00
 categories: ["技术"]
-series: ["SEO"]
+tech: ["SEO"]
 slug: How to use robots for SEO optimization
 keywords: ["SEO","robots","Site","网站"]
 description: "记录如何对 robots.txt 的内容进行设置，期望提高网站的 SEO"

@@ -1,8 +1,8 @@
 ---
-title: Python中list没有add属性
+title: Python 中 list 没有 add 属性
 date: 2020-05-18T14:29:41+08:00
 categories: ["技术"]
-series: ["Python"]
+tech: ["Python"]
 slug: Python's list no add
 keywords: ["Python","list"]
 description: "记录使用 Python 时遇到的 list 没有 add 属性的问题"

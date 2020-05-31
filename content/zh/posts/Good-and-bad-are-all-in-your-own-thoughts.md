@@ -1,8 +1,8 @@
 ---
 title: 好与坏全在于自己的想法
 date: 2020-01-29T21:38:48+08:00
-categories: ["生活"]
-series: []
+categories: ["生活","随笔"]
+life: ["随笔"]
 slug: 
 keywords: []
 description: ""

@@ -1,8 +1,8 @@
 ---
 title: 凡事都会以美好结局
 date: 2019-12-29T00:26:14+08:00
-categories: ["生活"]
-series: []
+categories: ["生活","随笔"]
+life: ["随笔"]
 slug: 
 keywords: []
 description: ""

@@ -1,8 +1,8 @@
 ---
 title: 最真实的事情往往很残酷
 date: 2020-02-12T01:26:18+08:00
-categories: ["电影"]
-series: []
+categories: ["生活","电影"]
+life: ["电影"]
 slug: 
 keywords: []
 description: ""

@@ -1,8 +1,8 @@
 ---
-title: Markdown使用语法
+title: Markdown 使用语法
 date: 2020-05-10T17:39:28+08:00
 categories: ["技术"]
-series: ["Markdown"]
+tech: ["Markdown"]
 slug: Markdown uses syntax
 keywords: ["Markdown"]
 description: "总结Markdown的使用语法"

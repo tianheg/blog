@@ -1,8 +1,8 @@
 ---
-title: Emacs快捷键总结及别人的学习Emacs的方法
+title: Emacs 快捷键总结及别人的学习 Emacs 的方法
 date: 2020-05-18T14:06:58+08:00
 categories: ["技术"]
-series: ["Emacs"]
+tech: ["Emacs"]
 slug: Emacs Shortcuts and way to learn
 keywords: ["Emacs","way","shortcut"]
 description: "把以前总结好的已经忘记的 Emacs 笔记拿过来"

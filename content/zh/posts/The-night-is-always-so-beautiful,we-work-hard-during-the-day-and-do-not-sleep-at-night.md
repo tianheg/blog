@@ -1,8 +1,8 @@
 ---
 title: 夜晚总是如此美好，白天努力工作的我们不舍入眠
 date: 2019-11-29T18:35:06+08:00
-categories: ["生活"]
-series: []
+categories: ["生活","随笔"]
+life: ["随笔"]
 slug: the night is beautiful
 keywords: []
 description: ""

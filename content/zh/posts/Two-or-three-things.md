@@ -1,8 +1,8 @@
 ---
 title: 网络觅食两三事
 date: 2020-02-13T21:14:59+08:00
-categories: ["生活"]
-series: []
+categories: ["生活","随笔"]
+life: ["随笔"]
 slug: 
 keywords: []
 description: ""

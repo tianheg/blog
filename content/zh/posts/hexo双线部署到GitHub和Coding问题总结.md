@@ -1,8 +1,8 @@
 ---
-title: Hexo双线部署到GitHub和Coding问题总结
+title: Hexo 双线部署到 GitHub 和 Coding 问题总结
 date: 2020-05-18T14:25:57+08:00
 categories: ["技术"]
-series: ["Hexo"]
+tech: ["Hexo"]
 slug: hexo deploy GitHub and Coding
 keywords: ["deploy","hexo","blog"]
 description: "记录了部署到 GitHub 和 Coding 的部分过程"

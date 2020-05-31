@@ -1,8 +1,8 @@
 ---
 title: 求同存异
 date: 2020-02-29T22:54:01+08:00
-categories: ["生活"]
-series: []
+categories: ["生活","随笔"]
+life: ["随笔"]
 slug: 
 keywords: []
 description: ""

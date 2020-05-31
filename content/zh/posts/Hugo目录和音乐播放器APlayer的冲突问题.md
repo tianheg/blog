@@ -1,8 +1,8 @@
 ---
-title: Hugo目录和音乐播放器APlayer的冲突问题
+title: Hugo 目录和音乐播放器 APlayer 的冲突问题
 date: 2020-05-18T21:39:49+08:00
 categories: ["技术"]
-series: ["Hugo"]
+tech: ["Hugo"]
 slug: Hugo toc conflicts with APlayer
 keywords: ["APlayer"]
 description: "记录解决 目录点击失效 和 插入音乐播放器APlayer 的过程"

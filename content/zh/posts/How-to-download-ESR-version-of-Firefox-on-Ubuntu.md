@@ -1,8 +1,8 @@
 ---
-title: 如何在Ubuntu上下载Firefox的ESR版本
+title: 如何在 Ubuntu 上下载 Firefox 的 ESR 版本
 date: 2020-02-27T22:17:09+08:00
 categories: ["技术"]
-series: []
+tech: ["Ubuntu"]
 slug: download esr firefox on ubuntu
 keywords: []
 description: ""

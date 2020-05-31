@@ -1,8 +1,8 @@
 ---
 title: 文字运用改良
 date: 2020-02-04T15:26:40+08:00
-categories: ["生活"]
-series: []
+categories: ["生活","随笔"]
+life: ["随笔"]
 slug: 
 keywords: []
 description: ""

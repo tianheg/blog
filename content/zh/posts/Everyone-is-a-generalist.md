@@ -1,8 +1,8 @@
 ---
 title: 每一个人都是一个多面手
 date: 2019-12-08T18:01:15+08:00
-categories: ["生活"]
-series: []
+categories: ["生活","随笔"]
+life: ["随笔"]
 slug: 
 keywords: []
 description: ""

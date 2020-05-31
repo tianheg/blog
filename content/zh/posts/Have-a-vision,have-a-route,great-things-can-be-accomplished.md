@@ -1,8 +1,8 @@
 ---
 title: 有愿景，有路线，大事可成
 date: 2020-02-05T14:54:56+08:00
-categories: ["生活"]
-series: []
+categories: ["生活","随笔"]
+life: ["随笔"]
 slug: have something accomplish thing
 keywords: []
 description: ""

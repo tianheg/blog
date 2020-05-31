@@ -2,7 +2,7 @@
 title: MXLinux 安装 Node.js 和 npm
 date: 2020-05-12T15:59:49+08:00
 categories: ["技术"]
-series: ["Nodejs","MXLinux"]
+tech: ["Node.js","MXLinux"]
 slug: install nodejs and npm on MXLinux
 keywords: ["MXLinux","Nodejs","npm"]
 description: "记录在 MXLinux 上安装 Nodejs 和 npm 的过程"
