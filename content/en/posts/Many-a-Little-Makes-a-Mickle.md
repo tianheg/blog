@@ -2,6 +2,7 @@
 title: Many a Little Makes a Mickle
 date: 2020-02-23T21:31:07+08:00
 categories: ["Life"]
+life: ["Essay"]
 ---
 
 Many a little makes a mickle

@@ -2,6 +2,7 @@
 title: About Technology
 date: 2020-02-26T22:23:08+08:00
 categories: ["Life"]
+life: ["Essay"]
 ---
 
 Reading those English documents is very difficult. 
