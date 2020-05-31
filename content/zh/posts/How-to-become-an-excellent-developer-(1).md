@@ -2,7 +2,7 @@
 title: 如何成为优秀的开发人员（一）
 date: 2020-02-16T21:50:40+08:00
 categories: ["技术"]
-series: []
+tech: ["编程"]
 slug: be an excellent developer 1
 keywords: []
 description: ""

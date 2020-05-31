@@ -1,8 +1,8 @@
 ---
 title: 读《梁漱溟：学问的八层境界》
 date: 2020-02-07T16:51:27+08:00
-categories: ["读书"]
-series: []
+categories: ["生活","读书"]
+life: ["读书"]
 slug: 
 keywords: []
 description: ""

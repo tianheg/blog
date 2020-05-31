@@ -2,7 +2,7 @@
 title: 越来越能体会程序员的辛苦
 date: 2020-01-30T21:34:47+08:00
 categories: ["技术"]
-series: []
+tech: ["编程"]
 slug: understand programmers
 keywords: []
 description: ""

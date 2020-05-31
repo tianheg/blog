@@ -1,8 +1,8 @@
 ---
 title: 记录第一次在晚上玩轮滑
 date: 2019-11-24T13:57:40+08:00
-categories: ["生活"]
-series: []
+categories: ["生活","随笔"]
+life: ["随笔"]
 slug: 
 keywords: []
 description: ""

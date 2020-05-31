@@ -1,8 +1,8 @@
 ---
 title: 过于喧嚣的孤独
 date: 2019-12-01T18:12:31+08:00
-categories: ["生活"]
-series: []
+categories: ["生活","随笔"]
+life: ["随笔"]
 slug: 
 keywords: []
 description: ""

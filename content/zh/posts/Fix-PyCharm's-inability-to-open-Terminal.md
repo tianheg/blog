@@ -1,11 +1,11 @@
 ---
-title: 解决PyCharm无法打开Terminal问题
+title: 解决 PyCharm 无法打开 Terminal 问题
 date: 2020-04-12T11:12:06+08:00
 categories: ["技术"]
-series: []
+tech: ["Python"]
 slug: 
 keywords: []
-description: ""
+description: "这个问题尚未解决"
 ---
 
 #### 问题描述

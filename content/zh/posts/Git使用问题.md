@@ -2,7 +2,7 @@
 title: Git - 使用问题
 date: 2020-05-10T18:56:56+08:00
 categories: ["技术"]
-series: ["Git"]
+tech: ["Git"]
 slug: Git use problems
 keywords: ["Git"]
 description: "记录使用 Git 过程中出现的错误，以及解决的过程"

@@ -1,8 +1,8 @@
 ---
 title: 天空之城
 date: 2019-12-30T00:23:40+08:00
-categories: ["生活"]
-series: []
+categories: ["生活","随笔"]
+life: ["随笔"]
 slug: 
 keywords: []
 description: ""

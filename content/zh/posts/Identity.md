@@ -1,8 +1,8 @@
 ---
 title: 身份认同
 date: 2019-12-03T18:28:02+08:00
-categories: ["生活"]
-series: []
+categories: ["生活","随笔"]
+life: ["随笔"]
 slug: 
 keywords: []
 desciption: ""

@@ -1,8 +1,8 @@
 ---
 title: 一个人可以成为一个他想要成为的人，前提是他真的想这么做
 date: 2019-12-16T16:45:30+08:00
-categories: ["生活"]
-series: []
+categories: ["生活","随笔"]
+life: ["随笔"]
 slug: want to be
 keywords: []
 description: ""

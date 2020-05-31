@@ -1,8 +1,8 @@
 ---
-title: 如何使用Notion提高生产力
+title: 如何使用 Notion 提高生产力
 date: 2020-05-25T12:03:33+08:00
 categories: ["技术"]
-series: ["Notion"]
+tech: ["Notion"]
 slug: how to use Notion
 keywords: ["Notion"]
 description: "总结自己使用Notion的方法"
