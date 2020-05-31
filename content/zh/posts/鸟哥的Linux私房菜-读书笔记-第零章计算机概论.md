@@ -1,8 +1,8 @@
 ---
-title: 鸟哥的Linux私房菜-第零章计算机概论
+title: 鸟哥的 Linux 私房菜-第零章计算机概论
 date: 2020-05-12T17:55:02+08:00
 categories: ["技术"]
-series: ["读书笔记"]
+tech: ["读书笔记"]
 slug: Bird Linux 0 introduction to computer
 keywords: ["Linux","computer"]
 description: "人与人学习方式有很大差异，这取决于每个人的成长环境，我原想按照目录的结构设计学习这本 Linux 书。现在发现，这样学习没有趣味。我理解的学习应该是充满趣味的、成就满满的，而不是枯燥乏味的。"

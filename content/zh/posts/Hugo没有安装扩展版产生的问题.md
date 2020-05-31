@@ -1,8 +1,8 @@
 ---
-title: Hugo没有安装扩展版产生的问题
+title: Hugo 没有安装扩展版产生的问题
 date: 2020-05-10T17:51:21+08:00
 categories: ["技术"]
-series: ["Hugo"]
+tech: ["Hugo"]
 slug: Hugo problems with no extended
 keywords: ["Hugo","extended"]
 description: ""

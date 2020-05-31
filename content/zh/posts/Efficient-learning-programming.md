@@ -2,7 +2,7 @@
 title: 高效学习编程
 date: 2020-03-21T21:58:15+08:00
 categories: ["技术"]
-series: []
+tech: ["编程"]
 slug: 
 keywords: []
 description: ""

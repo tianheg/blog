@@ -1,8 +1,8 @@
 ---
 title: 离新年到来还有16天，这个数字挺吉利的
 date: 2019-12-15T16:52:25+08:00
-categories: ["生活"]
-series: []
+categories: ["生活","随笔"]
+life: ["随笔"]
 slug: sixteen days before new year
 keywords: []
 description: ""

@@ -1,8 +1,8 @@
 ---
-title: Hexo博客上传百度谷歌搜索引擎
+title: Hexo 博客上传百度谷歌搜索引擎
 date: 2020-05-18T14:22:54+08:00
 categories: ["技术"]
-series: ["Hexo"]
+tech: ["Hexo"]
 slug: Hexo blog allow googlebot and baiduspider
 keywords: ["SEO","hexo"]
 description: "部分记录了把网站添加到百度和谷歌的搜索列表的步骤"

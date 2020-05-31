@@ -2,7 +2,7 @@
 title: MXLinux 安装 Emacs
 date: 2020-05-13T13:38:01+08:00
 categories: ["技术"]
-series: ["MXLinux","Emacs"]
+tech: ["MXLinux","Emacs"]
 slug: install emacs on mxlinux
 keywords: ["Emacs","MXLinux"]
 description: "记录在 MXLinux 上安装 Emacs 的过程"

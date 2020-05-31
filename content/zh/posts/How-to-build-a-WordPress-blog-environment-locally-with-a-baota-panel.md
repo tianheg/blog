@@ -2,7 +2,7 @@
 title: 如何用宝塔面板在本地搭建 wordpress 博客环境
 date: 2020-02-28T22:08:44+08:00
 categories: ["技术"]
-series: []
+tech: ["博客"]
 slug: build wordpress blog locally with baota
 keywords: []
 description: ""

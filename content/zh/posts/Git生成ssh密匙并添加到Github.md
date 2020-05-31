@@ -2,7 +2,7 @@
 title: Git - 生成 ssh 密匙并添加到 Github
 date: 2020-05-13T21:55:40+08:00
 categories: ["技术"]
-series: ["Git"]
+tech: ["Git"]
 slug: git generate ssh add to github
 tocNum: false
 keywords: ["Git","ssh","GitHub"]

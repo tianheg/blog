@@ -1,8 +1,8 @@
 ---
-title: Win10终端常用命令
+title: Win10 终端常用命令
 date: 2020-05-18T14:12:27+08:00
 categories: ["技术"]
-series: ["Win10"]
+tech: ["Win10"]
 slug: Win10 terminal order
 keywords: ["order","命令"]
 description: "总结在 Win10 终端常用的命令"

@@ -1,8 +1,8 @@
 ---
 title: 今日学习总结与编程方向规划
 date: 2020-03-03T20:38:09+08:00
-categories: ["生活"]
-series: []
+categories: ["生活","随笔"]
+life: ["随笔"]
 slug: 
 keywords: []
 description: ""

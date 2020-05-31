@@ -1,8 +1,8 @@
 ---
-title: Hugo主题及多语言图标不能在LinuxChrome中正常显示
+title: Hugo 主题及多语言图标不能在 Linux Chrome 中正常显示
 date: 2020-05-17T10:11:26+08:00
 categories: ["技术"]
-series: ["Hugo"]
+tech: ["Hugo"]
 slug: hugo theme and multilingual can't display on Chrome of linux
 keywords: ["Linux","Hugo","Chrome"]
 description: "记录解决 Hugo 主题和多语言图标不能在 Linux 中的 Chrome 中显示的问题"

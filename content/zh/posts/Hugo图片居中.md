@@ -1,8 +1,8 @@
 ---
-title: Hugo图片居中
+title: Hugo 图片居中
 date: 2020-05-10T17:49:41+08:00
 categories: ["技术"]
-series: ["Hugo"]
+tech: ["Hugo"]
 slug: Hugo center picture
 keywords: ["Hugo","center","picture"]
 description: ""

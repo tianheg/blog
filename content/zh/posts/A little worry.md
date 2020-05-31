@@ -1,9 +1,9 @@
 ---
 title: 些许烦忧
 date: 2019-12-19T16:36:01+08:00
-categories: ["生活"]
-series: []
-slug: 
+categories: ["生活","随笔"]
+life: ["随笔"]
+slug:
 keywords: []
 description: ""
 ---

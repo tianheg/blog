@@ -1,8 +1,8 @@
 ---
-title: Hexo缺失文档头而报错
+title: Hexo 缺失文档头而报错
 date: 2020-05-18T14:32:31+08:00
 categories: ["技术"]
-series: ["Hexo"]
+tech: ["Hexo"]
 slug: hexo no doc head error
 keywords: ["Hexo"]
 description: "记录当 Hexo 博客的 md 文档没有文档头时会产生的错误"

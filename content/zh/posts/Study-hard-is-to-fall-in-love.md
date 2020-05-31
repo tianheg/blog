@@ -1,8 +1,8 @@
 ---
 title: 好好学习就是为了谈恋爱
 date: 2019-12-28T00:28:16+08:00
-categories: ["生活"]
-series: []
+categories: ["生活","随笔"]
+life: ["随笔"]
 slug: 
 keywords: []
 description: ""

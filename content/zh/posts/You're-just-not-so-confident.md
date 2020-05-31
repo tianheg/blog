@@ -1,8 +1,8 @@
 ---
 title: 你只是没那么自信而已
 date: 2019-11-27T18:45:02+08:00
-categories: ["生活"]
-series: []
+categories: ["生活","随笔"]
+life: ["随笔"]
 slug: 
 keywords: []
 description: ""

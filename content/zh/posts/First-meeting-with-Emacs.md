@@ -1,8 +1,8 @@
 ---
-title: 和Emacs的第一次见面
+title: 和 Emacs 的第一次见面
 date: 2020-02-26T20:33:41+08:00
 categories: ["技术"]
-series: ["Emacs"]
+tech: ["Emacs"]
 slug: 
 keywords: []
 description: ""

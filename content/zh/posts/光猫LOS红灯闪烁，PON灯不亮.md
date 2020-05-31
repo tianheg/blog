@@ -1,8 +1,8 @@
 ---
-title: 光猫LOS红灯闪烁，PON灯不亮
+title: 光猫 LOS 红灯闪烁，PON 灯不亮
 date: 2020-05-20T09:12:46+08:00
 categories: ["技术"]
-series: []
+tech: ["网络"]
 slug: Light cat LOS red light flashes
 keywords: ["Light cat","光猫"]
 description: "记录家庭使用的光猫出现问题的解决过程"

@@ -1,8 +1,8 @@
 ---
 title: 动画做得最好的就是吉卜力工作室
 date: 2020-02-03T21:18:40+08:00
-categories: ["生活"]
-series: []
+categories: ["生活","电影"]
+life: ["电影"]
 slug: 
 keywords: []
 description: ""

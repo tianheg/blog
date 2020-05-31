@@ -1,8 +1,8 @@
 ---
 title: 不必因为贪玩而后悔
 date: 2019-12-07T18:17:58+08:00
-categories: ["生活"]
-series: []
+categories: ["生活","随笔"]
+life: ["随笔"]
 slug: 
 keywords: []
 description: ""

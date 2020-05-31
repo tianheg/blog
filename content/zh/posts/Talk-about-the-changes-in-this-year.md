@@ -1,8 +1,8 @@
 ---
 title: 谈谈这一年的变化
 date: 2019-12-23T16:10:24+08:00
-categories: ["生活"]
-series: []
+categories: ["生活","随笔"]
+life: ["随笔"]
 slug: 
 keywords: []
 description: ""
