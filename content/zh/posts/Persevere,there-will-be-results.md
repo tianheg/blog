@@ -1,8 +1,8 @@
 ---
 title: 坚持下来，一定会有结果
 date: 2020-03-08T21:42:57+08:00
-categories: ["生活"]
-series: []
+categories: ["生活","随笔"]
+life: ["随笔"]
 slug: 
 keywords: []
 description: ""

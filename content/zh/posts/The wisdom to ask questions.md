@@ -2,7 +2,7 @@
 title: 提问的智慧
 date: 2020-04-30T13:23:13+08:00
 categories: ["技术"]
-series: ["Ask"]
+tech: ["Ask"]
 slug: How To Ask Questions The Smart Way
 keywords: ["提问"]
 description: "这个话题值得反复讨论，所以这篇文章会持续更新，每当我对于“提问”有新的见解时，都会记录在这里"

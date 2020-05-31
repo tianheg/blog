@@ -44,12 +44,14 @@ uglyURLs = false
 # URL 结构
 [permalinks]
     categories = "/categories/:slug/"
-    series = "/series/:slug/"
+    tech = "/tech/:slug/"
+    life = "/life/:slug/"
 
 # 类别
 [taxonomies]
     category = "categories"
-    series = "series"
+    tech = "tech"
+    life = "life"
 
 # 修改时间
 [frontmatter]
@@ -174,21 +176,27 @@ uglyURLs = false
         pre = "internal"
         post = "home"
     [[menu.main]]
-        url = "/categories/"
-        name = "分类"
+        url = "/life/"
+        name = "生活"
         weight = 2
         pre = "internal"
-        post = "th"
+        post = "folder"
     [[menu.main]]
-        url = "/series/"
+        url = "/tech/"
         name = "技术"
         weight = 3
         pre = "internal"
         post = "code"    #folder
     [[menu.main]]
+        url = "/categories/"
+        name = "分类"
+        weight = 4
+        pre = "internal"
+        post = "th"
+    [[menu.main]]
         url = "/posts/"
         name = "归档"
-        weight = 4
+        weight = 5
         pre = "internal"
         post = "archive"
     [[menu.main]]

@@ -1,8 +1,8 @@
 ---
-title: Git - 把hexo的所有配置文件放在hexo-blog-backups仓库报错
+title: Git - 把 hexo 的所有配置文件放在 hexo-blog-backups 仓库报错
 date: 2020-05-10T19:03:30+08:00
 categories: ["技术"]
-series: ["Git"]
+tech: ["Git"]
 slug: Git error place docs to repo
 keywords: []
 description: ""

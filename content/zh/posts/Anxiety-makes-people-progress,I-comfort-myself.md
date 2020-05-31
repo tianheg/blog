@@ -1,8 +1,8 @@
 ---
 title: 焦虑使人进步，我安慰自己道
 date: 2019-12-19T16:36:01+08:00
-categories: ["生活"]
-series: []
+categories: ["生活","随笔"]
+life: ["随笔"]
 slug: Anxious person
 keywords: []
 description: ""

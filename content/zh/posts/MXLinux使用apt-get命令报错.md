@@ -2,7 +2,7 @@
 title: MXLinux 使用 apt-get 命令报错
 date: 2020-05-12T23:36:09+08:00
 categories: ["技术"]
-series: ["MXLinux"]
+tech: ["MXLinux"]
 slug: MXLinux error about apt
 keywords: ["apt","MXLinux"]
 description: "记录解决使用 apt-get 命令报错的问题"

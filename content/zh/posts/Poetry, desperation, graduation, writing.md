@@ -1,8 +1,8 @@
 ---
 title: 诗，绝境，毕业，文字
 date: 2019-05-05T21:06:37+08:00
-categories: ["生活"]
-series: []
+categories: ["生活","随笔"]
+life: ["随笔"]
 slug: 
 keywords: ["诗","绝境","毕业","文字"]
 description: "当阵痛袭来时，你会做什么？我会记录下来"

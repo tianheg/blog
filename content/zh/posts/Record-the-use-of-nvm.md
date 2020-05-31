@@ -1,8 +1,8 @@
 ---
-title: 记录使用nvm
+title: 记录使用 nvm
 date: 2020-04-04T07:56:10+08:00
 categories: ["技术"]
-series: ["Nodejs"]
+tech: ["Node.js"]
 slug: record use nvm
 keywords: []
 description: ""

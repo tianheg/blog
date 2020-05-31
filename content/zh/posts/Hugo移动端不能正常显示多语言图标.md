@@ -1,8 +1,8 @@
 ---
-title: Hugo移动端不能正常显示多语言图标
+title: Hugo 移动端不能正常显示多语言图标
 date: 2020-05-10T17:58:56+08:00
 categories: ["技术"]
-series: ["Hugo"]
+tech: ["Hugo"]
 slug: multilingual icon cant be displayed
 keywords: ["multilingual"]
 description: ""

@@ -1,8 +1,8 @@
 ---
 title: “因为你的善行，这些生命得以传承下去”
 date: 2020-02-14T21:13:51+08:00
-categories: ["电影"]
-series: []
+categories: ["生活","电影"]
+life: ["电影"]
 slug: 
 keywords: []
 description: ""

@@ -2,7 +2,7 @@
 title: Git - 使用子模块
 date: 2020-05-10T18:59:25+08:00
 categories: ["技术"]
-series: ["Git"]
+tech: ["Git"]
 slug: Git use submodule
 keywords: ["Git","submodule"]
 description: ""

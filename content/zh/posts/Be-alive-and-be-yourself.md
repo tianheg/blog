@@ -1,8 +1,8 @@
 ---
 title: 人生在世，做好自己
 date: 2020-02-09T22:35:01+08:00
-categories: ["生活"]
-series: []
+categories: ["生活","随笔"]
+life: ["随笔"]
 slug: 
 keywords: []
 description: ""

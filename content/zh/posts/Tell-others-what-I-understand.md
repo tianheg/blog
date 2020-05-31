@@ -1,8 +1,8 @@
 ---
 title: 把自己理解的东西讲给别人听
 date: 2019-12-17T16:42:11+08:00
-categories: ["生活"]
-series: []
+categories: ["生活","随笔"]
+life: ["随笔"]
 slug: 
 keywords: []
 description: ""

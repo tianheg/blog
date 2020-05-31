@@ -1,8 +1,8 @@
 ---
-title: 用 GitHub Pages 搭建个人博客
+title: 用 GitHub Pages 和 Hexo 搭建个人博客
 date: 2020-02-09T22:35:01+08:00
-categories: ["生活"]
-series: []
+categories: ["技术"]
+tech: ["Hexo"]
 slug: blog with GitHub
 keywords: []
 description: ""

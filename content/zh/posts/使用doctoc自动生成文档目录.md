@@ -1,8 +1,8 @@
 ---
-title: 使用DocToc自动生成文档目录
+title: 使用 DocToc 自动生成文档目录
 date: 2020-05-11T19:05:46+08:00
 categories: ["技术"]
-series: ["Nodejs"]
+tech: ["Node.js"]
 slug: use doctoc generate toc
 keywords: ["Nodejs","DocToc"]
 description: "记录DocToc的使用方法"
