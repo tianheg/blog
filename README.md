@@ -10,6 +10,10 @@ You can visit these link to watch my site:
 1. https://www.yidajiabei.xyz
 2. https://yidajiabei-xyz.netlify.app/
 
-[![Netlify Status](https://api.netlify.com/api/v1/badges/e6eb07cb-33a4-4694-b6dc-6b675e9984c2/deploy-status)](https://app.netlify.com/sites/yidajiabei-xyz/deploys)
+
+
+[![Netlify Status](https://api.netlify.com/api/v1/badges/97b3c50b-ef38-4cf3-9d47-7072043dba30/deploy-status)](https://app.netlify.com/sites/yidajiabei-xyz/deploys)
+
+
 
 <a rel="license" href="http://creativecommons.org/licenses/by-nc-sa/4.0/"><img style="border-width:0" src="https://i.creativecommons.org/l/by-nc-sa/4.0/88x31.png" /></a>
