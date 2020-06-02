@@ -24,7 +24,7 @@ description = "感谢你的关注与支持 ~"
 网站标志：<a href="../icons/android-chrome-512x512.png" target="_blank">https://www.yidajiabei.xyz/icons/android-chrome-512x512.png</a><br>
 网站描述：一个个人生活技术博客。记录所学所思所想，关注 Python、web 以及我感兴趣的技术，热爱生活</p>
 
-+ 将你的网站信息按照上述格式在 [..这里..](https://github.com/Gaotianhe/yidajiabei.xyz/issues/1) 留言，审核通过后将会添加至该页面中。
++ 将你的网站信息按照上述格式在 [..这里..](https://github.com/Gaotianhe/yidajiabei.xyz/issues/1) 或我的邮箱:burgessnasa2019@gmail.com 留言，审核通过后将会添加至该页面中。
 
 <style>
 .note-default {
