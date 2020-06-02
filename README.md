@@ -7,7 +7,7 @@
 
 You can visit these link to watch my site:
 
-1. https://www.yidajiabei.xyz
+1. https://www.yidajiabei.xyz/
 2. https://yidajiabei-xyz.netlify.app/
 
 
