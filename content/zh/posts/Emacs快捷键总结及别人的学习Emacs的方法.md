@@ -4,6 +4,8 @@ date: 2020-05-18T14:06:58+08:00
 categories: ["技术"]
 tech: ["Emacs"]
 slug: Emacs Shortcuts and way to learn
+toc: true
+tocNum: true
 keywords: ["Emacs","way","shortcut"]
 description: "把以前总结好的已经忘记的 Emacs 笔记拿过来"
 ---
@@ -12,7 +14,7 @@ C - <chr> : Ctrl + chr || M - <chr> : Alt + chr
 
 ESC key and then type <chr>. We write <ESC> for the ESC key.
 
-#### Important note:
+## Important note:
 
 To end the Emacs session -- type C-x C-c
 
@@ -22,7 +24,7 @@ To stop the tutorial, type C-x k, then <Return> at the prompt
 
 The characters ">>" at the left margin indicate directions for you to try using a command.
 
-#### keyboard shortcuts
+## keyboard shortcuts
 
 C - v : view next screen
 
@@ -66,7 +68,7 @@ kill移除的东西可以被重新插入（在任何位置），delete删除的�
 输入C-<SPC>（空格），Emacs应该会在屏幕下方显示一个“Mark set”的消息【如果C-<SPC>热键被锁定，则改用C-@，这时注意要同时按住shift键】
 输入C-w，从“你”开始到“端”之前的文字被全部移除。
 
-#### 以你多年的经验，请写出一个新手学习emacs的路线建议。
+## 以你多年的经验，请写出一个新手学习emacs的路线建议
 
 学习Emacs有几条曲线:
 先会用基本的快捷键, 安装各种简单的插件, 抄各种各样的配置, 先体验一下Emacs的强大功能。
@@ -80,10 +82,6 @@ kill移除的东西可以被重新插入（在任何位置），delete删除的�
 4. 如果还不满足, 可以像我这样造点有趣的轮子: My Emacs Plugins 30 , 如果你自己会写Elisp插件, 你会发现Emacs其实是越用越简单的, 因为包括正则表达式, 语法高亮, 模式, 异步子进程, hook, overlay, advice 这些代码你写熟悉以后, 你会发现所有插件的唯一差别就是复杂度和想象力的区别, 不存在想得出来写不出来的东西.
 5. 到了这个阶段, 唯一可以让你学习到更多知识的就是去 IRC #emacs 和那些古老的黑客们交流, 或者去扒Github Emacser, 我知道很多日本牛逼哄哄的Emacs开发者都把插件放到 ftp 上 (比如当年的 color-moccur.el ), 学点 Google 语法就可以定向搜索. 这些人都是你会写Emacs插件后, 需要学习和进阶的榜样, 这时候你再看Elisp代码, 你的注意力会放在他们Elisp编程的一些细节上, 比如代码写的更简洁, 方法用的妙, 架构设计上等等, 这是完全不同阶段的探索体验.
 6. 如果你还不满足, 好好学习C语言, 然后再找个赚钱的工作, 把自己和家人照顾好. 业余时间直接用C或Elisp给Emacs底层做贡献, 把你的代码贡献固化到Emacs中, 然后你的名字可以像我一样写到 Emacs AUTHORS 里面去装逼: Emacs AUTHORS 89
-
-
-
-
 
 感觉我自己其实上手时, 一个很大的动力, 就是因为我发现这是 我知道的第一个 可以随意更改快捷键的编辑器, 真的没有任何限制 …, 而我, 我非常想要一个随心所欲, 操作(主要是移动光标) 不需要该死的鼠标的编辑器.
 

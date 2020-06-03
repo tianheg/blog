@@ -4,11 +4,13 @@ date: 2020-04-04T11:14:30+08:00
 categories: ["技术"]
 tech: ["Node.js"]
 slug: 
+toc: true
+tocNum: true
 keywords: []
 description: ""
 ---
 
-#### 一、
+## 一、
 
 更新单个本地包版本：使用`npm update <package>`
 
@@ -17,7 +19,7 @@ description: ""
 1. 在`package.json`文件所在的目录中执行`npm update`命令。
 2. 执行`npm outdated`命令，没有输出。
 
-#### 二、
+## 二、
 
 执行以下操作，需要npm版本大于等于2.6.1，具体细节请访问：https://www.npmjs.cn/getting-started/updating-global-packages/
 
@@ -29,7 +31,7 @@ description: ""
 
 待整理网址：[npm升级所有可更新包](https://segmentfault.com/a/1190000005857342)
 
-#### 三、问题
+## 三、问题
 
 ```powershell
 npm WARN deprecated bcrypt-nodejs@0.0.3: bcrypt-nodejs is no longer actively maintained. Please use bcrypt or bcryptjs. See https://github.com/kelektiv/node.bcrypt.js/wiki/bcrypt-vs-brypt.js to learn more about these two options
@@ -53,7 +55,7 @@ npm WARN notsup SKIPPING OPTIONAL DEPENDENCY: Unsupported platform for fsevents@
 
 其余错误，待到真正需要解决时再解决。
 
-#### 四、查看特定包版本：
+## 四、查看特定包版本：
 
 举例：
 
@@ -175,7 +177,7 @@ npm WARN notsup SKIPPING OPTIONAL DEPENDENCY: Unsupported platform for fsevents@
 
    主要介绍了服务器端和本地的npm包版本信息的查看，有不同情况结果的操作展示，可以详细地了解npm包版本的相关信息。
 
-#### 五、npm安装指定版本的包（以vue为例）
+## 五、npm安装指定版本的包（以vue为例）
 
 1. `npm info vue`查看vue信息：
 

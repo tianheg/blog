@@ -4,6 +4,8 @@ date: 2020-05-10T18:59:25+08:00
 categories: ["技术"]
 tech: ["Git"]
 slug: Git use submodule
+toc: true
+tocNum: true
 keywords: ["Git","submodule"]
 description: ""
 ---

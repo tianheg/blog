@@ -4,6 +4,8 @@ date: 2020-05-11T16:08:21+08:00
 categories: ["技术"]
 tech: ["MXLinux"]
 slug: use VBox install MXLinux
+toc: true
+tocNum: true
 keywords: ["MXLinux"]
 description: "记录MXLinux的安装过程"
 ---
