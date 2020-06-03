@@ -4,6 +4,8 @@ date: 2020-05-11T19:05:46+08:00
 categories: ["技术"]
 tech: ["Node.js"]
 slug: use doctoc generate toc
+toc: true
+tocNum: true
 keywords: ["Nodejs","DocToc"]
 description: "记录DocToc的使用方法"
 ---

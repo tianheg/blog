@@ -4,6 +4,8 @@ date: 2020-05-12T17:55:02+08:00
 categories: ["技术"]
 tech: ["读书笔记"]
 slug: Bird Linux 0 introduction to computer
+toc: true
+tocNum: true
 keywords: ["Linux","computer"]
 description: "人与人学习方式有很大差异，这取决于每个人的成长环境，我原想按照目录的结构设计学习这本 Linux 书。现在发现，这样学习没有趣味。我理解的学习应该是充满趣味的、成就满满的，而不是枯燥乏味的。"
 ---
