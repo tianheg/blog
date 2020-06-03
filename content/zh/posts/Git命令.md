@@ -4,6 +4,8 @@ date: 2020-05-10T19:05:18+08:00
 categories: ["技术"]
 tech: ["Git"]
 slug: Git order
+toc: true
+tocNum: false
 keywords: ["Git"]
 description: ""
 ---

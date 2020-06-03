@@ -4,11 +4,13 @@ date: 2020-05-10T17:39:28+08:00
 categories: ["技术"]
 tech: ["Markdown"]
 slug: Markdown uses syntax
+toc: true
+tocNum: true
 keywords: ["Markdown"]
 description: "总结Markdown的使用语法"
 ---
 
-### 添加任务列表
+## 添加任务列表
 
 - [ ] 「请帮我列出解决此问题的完整步骤」
 
@@ -29,13 +31,13 @@ description: "总结Markdown的使用语法"
 - [x] 「我应该查阅哪个文章或者哪个网站？」（大致指个方向都会对我有很大帮助）
 ```
 
-### 添加换行符
+## 添加换行符
 
 在 markdown 中，无法多次按 Enter 键，并不能形成多个空行，需要使用 HTML 语法
 
 使用 `<br/>` 形成空行
 
-### 添加脚注
+## 添加脚注
 
 ```markdown
 以前曾经学过《未选择的路》[^1]

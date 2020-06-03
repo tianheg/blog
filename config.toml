@@ -180,13 +180,14 @@ uglyURLs = false
         name = "生活"
         weight = 2
         pre = "internal"
-        post = "folder"
+        post = "grav"
+        identifier = "life"
     [[menu.main]]
         url = "/tech/"
         name = "技术"
         weight = 3
-        pre = "internal"
-        post = "code"    #folder
+        post = "wpexplorer"
+        identifier = "tech"
     [[menu.main]]
         url = "/categories/"
         name = "分类"
@@ -204,7 +205,8 @@ uglyURLs = false
         name = "友链"
         weight = 6
         pre = "internal"
-        post = "link"
+        post = "pagelines"
+        identifier = "friends"
     [[menu.main]]
         url = "/about/"
         name = "关于"
@@ -259,13 +261,15 @@ uglyURLs = false
         name = "Life"
         weight = 2
         pre = "internal"
-        post = "folder"
+        post = "grav"
+        identifier = "life"
     [[languages.en.menu.main]]
         url = "/en/tech/"
         name = "Tech"
         weight = 3
         pre = "internal"
-        post = "code"
+        post = "wpexplorer"
+        identifier = "tech"
     [[languages.en.menu.main]]
         url = "/en/categories/"
         name = "Categories"
@@ -507,9 +511,9 @@ uglyURLs = false
     chineseZodiac = true
 
     # 是否翻译年份（仅对年份标题有效）
-    i18nYear = true
+    i18nYear = false
     # 是否翻译月份（仅对月份标题有效）
-    i18nMonth = true
+    i18nMonth = false
 
 
     ######################################
@@ -791,7 +795,7 @@ uglyURLs = false
     # 文章目录
 
     # 是否开启（全局设置）
-    enableTOC = true
+    enableTOC = false
     # 说明：文章的 Front Matter 中的 `toc`
     #      的优先级高于此处
 
@@ -902,7 +906,7 @@ uglyURLs = false
     # 分节标题、目录标题
     fontFamilyHeadings = "'Noto Serif SC', 'EB Garamond', serif"
     # 代码、上标、文章元信息、文章更新徽章、文章的 Git 版本信息、极简页脚、不蒜子站点浏览计数
-    fontFamilyCode = "'Source Code Pro', 'Noto Serif SC', monospace"
+    fontFamilyCode = "'JetBrains Mono', 'Noto Serif SC', monospace"
     # 引用
     fontFamilyQuote = ""
     # 文章目录
@@ -1232,9 +1236,9 @@ uglyURLs = false
     enableHighlight = true
 
     # 是否开启竖直滚动
-    enableOverflowY = true
+    enableOverflowY = false
     # 最大高度
-    maxHeight = 20
+    maxHeight = 43
     # 单位：em
 
     # 是否开启复制
@@ -1297,3 +1301,11 @@ uglyURLs = false
     fofVideoWebm = ""
     fofVideoMp4 = ""
     # 说明：视频地址可留空（""）
+
+
+    ######################################
+    # 自定义页脚微信订阅功能
+    
+    footerSubscription = true
+    subscriptionIcon = "wechat-brands"
+    subscriptionQrCode = "/images/wechat-official-accounts.svg"
