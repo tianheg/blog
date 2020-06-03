@@ -32,8 +32,34 @@ id="5043861211">
 
 你可以在 GitHub 上找到我：[Gaotianhe](https://github.com/Gaotianhe)。
 
-test
+---
+
+### 测试 shortcodes
 
 {{<notice notice-warning>}}
 内容
 {{</notice>}}
+
+{{<notice notice-tip>}}
+内容
+{{</notice>}}
+
+{{<notice notice-info>}}
+内容
+{{</notice>}}
+
+{{<notice notice-note>}}
+内容
+{{</notice>}}
+
+{{< gist Gaotianhe cd6d8a915c96e54a0faa1c93f51c9593 >}}
+
+<script type="application/javascript" src="https://gist.github.com/spf13/7896402.js"></script>
+
+<script src="https://gist.github.com/Gaotianhe/cd6d8a915c96e54a0faa1c93f51c9593.js"></script>
+
+{{< year >}}
+
+<mark>highlighted text</mark>
+
+{{< gallery dir="/images/friends/" />}} {{< load-photoswipe >}}
