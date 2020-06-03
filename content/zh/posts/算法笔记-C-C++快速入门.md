@@ -4,6 +4,8 @@ date: 2020-05-10T18:43:44+08:00
 categories: ["技术"]
 tech: ["读书笔记"]
 slug: Algorithm notes read notes C C++
+toc: true
+tocNum: true
 keywords: ["Algorithm notes","C","C++"]
 description: "这一章介绍 C 和 C++ 的一些基础知识，为后续的使用这两种语言进行算法描述打下基础。"
 ---

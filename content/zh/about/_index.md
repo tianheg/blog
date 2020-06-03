@@ -33,3 +33,7 @@ id="5043861211">
 你可以在 GitHub 上找到我：[Gaotianhe](https://github.com/Gaotianhe)。
 
 test
+
+{{<notice notice-warning>}}
+内容
+{{</notice>}}

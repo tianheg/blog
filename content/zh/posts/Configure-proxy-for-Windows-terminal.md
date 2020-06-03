@@ -4,6 +4,8 @@ date: 2020-04-03T22:34:17+08:00
 categories: ["技术"]
 tech: ["Win10"]
 slug: 
+toc: true
+tocNum: true
 keywords: []
 description: ""
 ---
@@ -34,18 +36,18 @@ set https_proxy=
 
 </br>
 
-### 要点
+## 要点
 
 1. 一定要加 `http://`，直接写域名或者 IP 不行。
 2. **http** 和 **https** 都要设置。
 
 然后如果想验证是否成功配置了代理的话，用 `ping` 命令是不可以的
 
-### ping 还是不行的原因
+## ping 还是不行的原因
 
 ping 的协议不是 http，也不是 https，是 ICMP 协议。
 
-### 验证方式
+## 验证方式
 
 使用 `curl -vv http://www.google.com` 验证，如果返回如下结果表示代理设置成功。
 

@@ -4,6 +4,8 @@ date: 2020-02-28T22:08:44+08:00
 categories: ["技术"]
 tech: ["博客"]
 slug: build wordpress blog locally with baota
+toc: true
+tocNum: true
 keywords: []
 description: ""
 ---
@@ -12,7 +14,7 @@ description: ""
 
 接下来，就开始正式的本地部署了。
 
-#### 配置宝塔面板
+## 配置宝塔面板
 
 先在[宝塔官网](https://www.bt.cn/)下载软件，我下的是Windows版，之后双击解压 BtSoft.zip 之后文件夹里的 BtSoft.exe。然后就能够开始安装了，选择安装路径时建议装在除 C 盘（系统磁盘，不明白的谷歌或必应，百度是垃圾）以外的地方，这样不会影响系统运行。**一定要注意！因为宝塔面板实际上是安装在服务器上的，虽然自己的电脑也能被称为服务器，但是自己的电脑里有很多重要东西，在操作宝塔面板时一定要注意，不要误操作把本地的重要文件删除了。**
 
@@ -28,7 +30,7 @@ description: ""
 
 然后就是在宝塔面板的网站那里新建网站，域名填 127.0.0.1。这是本地主机地址。根目录不要放在 C 盘，创建 FTP 和数据库，然后提交。现在，宝塔面板的设置告一段落。
 
-#### 配置 WordPress
+## 配置 WordPress
 
 WordPress 程序可以到[wordpress中文官网](https://cn.wordpress.org/download/)下载，把下载后得到的 wordpress-5.3.2-zh_CN.zip 解压，双击打开看到 wordpress 文件夹，再双击打开，你会看到很多 *.php 类型的文件。这里的所有文件（包括文件夹），复制粘贴到新建网站的目录下，这是我的：D:\baotawwwroot\127.0.0.1\。
 
@@ -44,8 +46,8 @@ WordPress 程序可以到[wordpress中文官网](https://cn.wordpress.org/downlo
 
 这样的话，就可以在 WordPress 上写写文章，折腾折腾。
 
+---
 
-
-#### 参考
+参考链接：
 
 [服务器搭建网站完整教程(宝塔面板+ wordpress)](https://www.zhujibiji.com/2018/04/how-to-use-bandwagonhost-build-a-website/)

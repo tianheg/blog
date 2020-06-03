@@ -4,13 +4,15 @@ date: 2020-04-06T13:52:14+08:00
 categories: ["技术"]
 tech: ["Python","Win10"]
 slug: 
+toc: true
+tocNum: true
 keywords: []
 description: ""
 ---
 
 逛B站时，听过一个up主讲过实际开发中的python虚拟环境，不同项目要求使用不同python版本时，可以通过创建虚拟环境的方式进行调用，要用到virtualenv包。说到软件的话，PyCharm可以很轻松地管理python版本，有兴趣的同学可以尝试一下。
 
-#### 初试pyenv
+## 初试pyenv
 
 pyenv（https://github.com/pyenv/pyenv ）是一款python版本控制工具，通过它可以很好地、同时将python的多个版本安装在电脑上。它支持mac、linux。但是，不支持win10。
 
@@ -18,7 +20,7 @@ pyenv（https://github.com/pyenv/pyenv ）是一款python版本控制工具，�
 
 简述官方提供安装步骤：
 
-##### Get pyenv-win
+### Get pyenv-win
 
 Get pyenv-win via one of the following methods.(Note: examples are in command prompt. For Powershell, replace `%USERPROFILE%` with `$env:USERPROFILE`. For Git Bash, replace with `$HOME`.)
 
@@ -32,7 +34,7 @@ Get pyenv-win via one of the following methods.(Note: examples are in command pr
 * **With Git**
   * `git clone https://github.com/pyenv-win/pyenv-win.git %USERPROFILE%/.pyenv`
 
-##### Finish the installation
+### Finish the installation
 
 1. Add a new variable under System variables in ENVIRONMENT with 
 
@@ -47,7 +49,7 @@ Get pyenv-win via one of the following methods.(Note: examples are in command pr
 
 
 
-#### 简述我的安装方法：
+## 简述我的安装方法
 
 1. 一开始按照官方顺序，选择 pip 安装，添加环境变量，在命令提示符中输入 `pyenv --version` 显示
 

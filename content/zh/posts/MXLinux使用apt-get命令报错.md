@@ -56,7 +56,7 @@ sudo rm /var/lib/dpkg/lock
 E: Could not get lock /var/lib/dpkg/lock - open (11: Resource temporarily unavailable) 
 E: Unable to lock the administration directory (/var/lib/dpkg/), is another process using it? 
 
-### 1、找到并且杀掉所有的apt-get 和apt进程
+## 找到并且杀掉所有的apt-get 和apt进程
 
 运行下面的命令来生成所有含有 apt 的进程列表，你可以使用ps和grep命令并用管道组合来得到含有apt或者apt-get的进程。
 
@@ -79,7 +79,7 @@ $ #或者
 $ sudo kill -SIGKILL 进程ID
 ```
 
-### 2、删除锁定文件
+## 删除锁定文件
 
 锁定的文件会阻止 Linux 系统中某些文件或者数据的访问，这个概念也存在于 Windows 或者其他的操作系统中。
 
