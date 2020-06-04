@@ -43,7 +43,7 @@
                 {{- $raw := . -}}
                 {{- partial "utils/markdownify.html" (dict "Deliver" $Deliver "raw" $raw "isContent" false) -}}
                 {{- $Content := $Deliver.Scratch.Get "Content" -}}
-                <div class="custom-footer">{{ $Content | safeHTML }} &nbsp &nbsp <a href="https://www.foreverblog.cn/" target="_blank" > <img src="https://img.foreverblog.cn/logo_en_default.png" alt="十年之约" rel="noopener" style="width:auto;height:16px;"> </a></div>
+                <div class="custom-footer">{{ $Content | safeHTML }} &nbsp <a href="https://www.foreverblog.cn/" target="_blank" > <img src="https://img.foreverblog.cn/logo_en_default.png" alt="十年之约" rel="noopener" style="width:auto;height:16px;"> </a></div>
             {{- end }}
 
             {{- if and .Site.Params.displayBusuanziSiteUVAndPV (eq hugo.Environment "production") }}
