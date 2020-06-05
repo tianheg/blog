@@ -5,7 +5,7 @@ categories: ["Life"]
 life: ["Essay"]
 ---
 
-Reading those English documents is very difficult. 
+> *Reading those English documents is very difficult.*
 
 When studying programing, I had known that English can't be my weakness. I would like to read these English books.
 
