@@ -17,7 +17,10 @@ description: "你好，世界"
 
 ### 测试 shortcodes
 
-{{< gallery dir="/images/friends/" />}} {{< load-photoswipe >}}
+```html
+{{</* gallery dir="/images/friends/" />}} {{< load-photoswipe */>}}
+# 这是添加组合图片的短代码
+```
 
 {{<notice notice-warning>}}
 内容
@@ -51,3 +54,13 @@ description: "你好，世界"
 {{< quote-center >}}
 十里青山远，潮平路带沙<br>数声啼鸟怨年华<br>又是凄凉时候，在天涯<br>白露收残月，清风散晓霞<br>绿杨堤畔问荷花<br>记得年时沽酒，那人家
 {{< /quote-center >}}
+
+{{< wp tag="Wikipedia:历史上的今天" lang="zh" title="历史上的今天" >}}
+
+https://www.bilibili.com/video/BV1kt4y1C712
+
+```html
+{{</* bili aid="625811282" cid="197006223" */>}}
+```
+
+{{< bili aid="625811282" cid="197006223" >}}
