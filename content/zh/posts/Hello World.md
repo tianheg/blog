@@ -57,10 +57,8 @@ description: "你好，世界"
 
 {{< wp tag="Wikipedia:历史上的今天" lang="zh" title="历史上的今天" >}}
 
-https://www.bilibili.com/video/BV1kt4y1C712
-
 ```html
 {{</* bili aid="625811282" cid="197006223" */>}}
+# aid 和 cid 可以通过页面的源码获得(按 Ctrl+U 打开页面源码)
 ```
 
-{{< bili aid="625811282" cid="197006223" >}}
