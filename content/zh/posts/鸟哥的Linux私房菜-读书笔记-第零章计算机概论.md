@@ -2,7 +2,7 @@
 title: 鸟哥的 Linux 私房菜-第零章计算机概论
 date: 2020-05-12T17:55:02+08:00
 categories: ["技术"]
-tech: ["读书笔记"]
+tech: ["笔记"]
 slug: Bird Linux 0 introduction to computer
 toc: true
 tocNum: true
