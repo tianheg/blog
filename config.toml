@@ -215,10 +215,17 @@ uglyURLs = false
         post = "user-circle"
         identifier = "about"
     [[menu.main]]
+        url = "/search/"
+        name = "百度"
         weight = 8
-        identifier = "theme-switcher"
+        pre = "internal"
+        post = "search"
+        identifier = "search"
     [[menu.main]]
         weight = 9
+        identifier = "theme-switcher"
+    [[menu.main]]
+        weight = 10
         identifier = "lang-switcher"
 
 ##########################################
@@ -403,7 +410,7 @@ uglyURLs = false
     # 说明：对弹性布局的顶栏无效
 
     # 是否按文章分区高亮当前菜单项
-    activeInSection = false
+    activeInSection = true
     # 说明：如果开启，那么当某一文章的分区名是某
     #      一菜单项中的 `url` 时，该文章页面中
     #      的该菜单项也会被高亮
@@ -1147,7 +1154,7 @@ uglyURLs = false
     enablePostNav = true
 
     # 是否仅限于相同的文章分区
-    postNavInSection = false
+    postNavInSection = true
 
 
     ######################################
