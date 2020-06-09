@@ -8,17 +8,7 @@ displayCopyright = false
 
 My favorite music:
 
-<!-- require APlayer -->
-<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/aplayer/dist/APlayer.min.css">
-
-<script src="https://cdn.jsdelivr.net/npm/aplayer/dist/APlayer.min.js"></script>
-<!-- require MetingJS -->
-<script src="https://cdn.jsdelivr.net/npm/meting@2/dist/Meting.min.js"></script>
-<meting-js
-server="netease"
-type="playlist"
-id="5043775974">
-</meting-js>
+{{< music auto="https://music.163.com/#/playlist?id=5043775974">}}
 
 ---
 
@@ -32,3 +22,7 @@ I'm not a qualified programmer yet. But I have confidence in programing well.
 
 You can find me on GitHub, id: [Gaotianhe](https://github.com/Gaotianhe).
 
+---
+
+My GitHub Chart:
+![GitHub Chart](https://ghchart.rshah.org/Gaotianhe)

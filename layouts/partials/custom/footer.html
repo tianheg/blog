@@ -10,7 +10,7 @@
 
 {{ if .Site.Language.Lang }}
 {{ len (where .Site.RegularPages "Section" "posts") }} posts in total
-
+|
 {{$scratch := newScratch}}
 {{ range (where .Site.Pages "Kind" "page" )}}
     {{$scratch.Add "total" .WordCount}}
