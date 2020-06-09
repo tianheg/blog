@@ -129,6 +129,10 @@ var t1 = Date.UTC(2020, 01, 01, 00, 00, 00)
 
 运行时间<span id="sitetime" style="color:#fb7312"></span>
 
+## 字体配置
+
+[添加 Google Fonts 思源宋体](https://immmmm.com/noto-serif-sc-by-google-fonts/)
+
 ---
 
 参考链接：

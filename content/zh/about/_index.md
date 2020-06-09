@@ -8,17 +8,7 @@ displayCopyright = false
 
 我喜欢的音乐：
 
-<!-- require APlayer -->
-<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/aplayer/dist/APlayer.min.css">
-
-<script src="https://cdn.jsdelivr.net/npm/aplayer/dist/APlayer.min.js"></script>
-<!-- require MetingJS -->
-<script src="https://cdn.jsdelivr.net/npm/meting@2/dist/Meting.min.js"></script>
-<meting-js
-server="netease"
-type="playlist"
-id="5043861211">
-</meting-js>
+{{< music auto="https://music.163.com/#/playlist?id=5043861211">}}
 
 ---
 
@@ -31,5 +21,10 @@ id="5043861211">
 我不是一个合格的码农。但我有信心追寻。
 
 你可以在 GitHub 上找到我。
+
+---
+
+我的 GitHub 贡献：
+![GitHub Chart](https://ghchart.rshah.org/Gaotianhe)
 
 <img align="left" src="/images/about-arrow.png" width="50" height="50" alt="一个向下的箭头"></br></br>
