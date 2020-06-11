@@ -4,8 +4,6 @@ date: 2019-12-10T17:50:46+08:00
 categories: ["生活","随笔"]
 life: ["随笔"]
 slug: 
-keywords: []
-description: ""
 ---
 
 自我否定会降低成就感。

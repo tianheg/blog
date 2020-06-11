@@ -4,8 +4,6 @@ date: 2020-05-13T16:04:22+08:00
 categories: ["技术"]
 tech: ["Hugo"]
 slug: hugo set shortcode
-keywords: ["Hugo","shortcode"]
-description: "记录我使用 Hugo 中的 shortcode 遇到的问题"
 ---
 
 ## align

@@ -6,8 +6,6 @@ tech: ["Node.js","MXLinux"]
 slug: install nodejs and npm on MXLinux
 toc: true
 tocNum: true
-keywords: ["MXLinux","Nodejs","npm"]
-description: "记录在 MXLinux 上安装 Nodejs 和 npm 的过程"
 ---
 
 以下方式能够下载 Nodejs 和 npm ：

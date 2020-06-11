@@ -4,8 +4,6 @@ date: 2019-12-19T16:36:01+08:00
 categories: ["生活","随笔"]
 life: ["随笔"]
 slug: Anxious person
-keywords: []
-description: ""
 ---
 
 1. 今天记了五个单词（英语解释和汉语意思及应用）。

@@ -4,8 +4,6 @@ date: 2019-11-27T18:45:02+08:00
 categories: ["生活","随笔"]
 life: ["随笔"]
 slug: 
-keywords: []
-description: ""
 ---
 
 我以为自己足够自信，直到和别人比较；

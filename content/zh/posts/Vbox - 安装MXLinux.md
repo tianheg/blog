@@ -6,8 +6,6 @@ tech: ["MXLinux"]
 slug: use VBox install MXLinux
 toc: true
 tocNum: true
-keywords: ["MXLinux"]
-description: "记录MXLinux的安装过程"
 ---
 
 这是 [官网](https://mxlinux.org/)，可以从 [这里](https://mxlinux.org/wiki/system/iso-download-mirrors/) 下载到 iso 镜像。接下来就可以在 Vbox 进行安装。

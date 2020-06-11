@@ -6,8 +6,6 @@ tech: ["SEO"]
 slug: How to use robots for SEO optimization
 toc: true
 tocNum: true
-keywords: ["SEO","robots","Site","网站"]
-description: "记录如何对 robots.txt 的内容进行设置，期望提高网站的 SEO"
 ---
 
 ## robots.txt 文件是什么

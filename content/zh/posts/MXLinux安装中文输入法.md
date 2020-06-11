@@ -4,8 +4,6 @@ date: 2020-05-17T16:03:04+08:00
 categories: ["技术"]
 tech: ["MXLinux"]
 slug: install Chinese input method on MXLinux
-keywords: ["MXLinux","input method"]
-description: "记录在 MXLinux 上安装中文输入法的过程"
 ---
 
 ## 安装中文输入法

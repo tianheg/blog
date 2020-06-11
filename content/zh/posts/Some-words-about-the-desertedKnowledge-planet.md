@@ -4,8 +4,6 @@ date: 2020-01-31T23:15:39+08:00
 categories: ["生活","随笔"]
 life: ["随笔"]
 slug: words about knowledge planet
-keywords: []
-description: ""
 ---
 
 写在 **知识星球** 社区—— **阿海的圈子**

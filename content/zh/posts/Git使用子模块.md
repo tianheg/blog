@@ -6,8 +6,6 @@ tech: ["Git"]
 slug: Git use submodule
 toc: true
 tocNum: true
-keywords: ["Git","submodule"]
-description: ""
 ---
 
 ## git-submodule(1) Manual Page

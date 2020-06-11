@@ -6,8 +6,6 @@ tech: ["Node.js"]
 slug: use doctoc generate toc
 toc: true
 tocNum: true
-keywords: ["Nodejs","DocToc"]
-description: "记录DocToc的使用方法"
 ---
 
 DocToc 为本地 git 存储库中的 markdown 文件生成目录。生成的目录可以正常显示在包括 GitHub 在内的代码托管网站上。

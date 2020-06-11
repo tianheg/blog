@@ -4,8 +4,6 @@ date: 2019-12-25T23:23:43+08:00
 categories: ["生活","随笔"]
 life: ["随笔"]
 slug: 
-keywords: []
-description: ""
 ---
 
 绝大多数的生产，其实发生在闲聊之前的研究、探索与思考。

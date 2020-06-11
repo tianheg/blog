@@ -6,8 +6,6 @@ tech: ["Git"]
 slug: Git use problems
 toc: true
 tocNum: true
-keywords: ["Git"]
-description: "记录使用 Git 过程中出现的错误，以及解决的过程"
 ---
 
 ## 当 git pull 失败时

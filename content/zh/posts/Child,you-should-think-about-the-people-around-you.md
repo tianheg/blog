@@ -4,8 +4,6 @@ date: 2020-02-24T19:53:16+08:00
 categories: ["生活","随笔"]
 life: ["随笔"]
 slug: think about parents
-keywords: []
-description: ""
 ---
 
 ### 事情

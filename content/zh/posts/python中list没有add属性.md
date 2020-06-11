@@ -4,8 +4,6 @@ date: 2020-05-18T14:29:41+08:00
 categories: ["技术"]
 tech: ["Python"]
 slug: Python's list no add
-keywords: ["Python","list"]
-description: "记录使用 Python 时遇到的 list 没有 add 属性的问题"
 ---
 
 为以下输入时，报错：

@@ -4,8 +4,6 @@ date: 2020-05-18T21:39:49+08:00
 categories: ["技术"]
 tech: ["Hugo"]
 slug: Hugo toc conflicts with APlayer
-keywords: ["APlayer"]
-description: "记录解决 目录点击失效 和 插入音乐播放器APlayer 的过程"
 ---
 
 我是今天刚刚弄好 “关于” 页面的音乐播放器，然后突然发现：目录锚点失效了。
