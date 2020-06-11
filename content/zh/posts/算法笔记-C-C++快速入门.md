@@ -6,8 +6,6 @@ tech: ["笔记"]
 slug: Algorithm notes read notes C C++
 toc: true
 tocNum: true
-keywords: ["Algorithm notes","C","C++"]
-description: "这一章介绍 C 和 C++ 的一些基础知识，为后续的使用这两种语言进行算法描述打下基础。"
 ---
 
 在学习算法之前，我们需要用一种语言表示算法，因为 C 是最接近操作系统的语言，它的执行效率最高、速度最快。所以，选择它作为学习算法的语言。C++ 和 C 类似但又不完全一样，而 C++ 中有一些很实用的语法特性，在学习 C 的基本知识时会顺带引出 C++ 的部分特性。

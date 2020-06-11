@@ -4,8 +4,6 @@ date: 2019-12-20T16:29:52+08:00
 categories: ["生活","随笔"]
 life: ["随笔"]
 slug: if a child falls down
-keywords: []
-description: ""
 ---
 
 > #2019的第18本书#《幸福的陷阱》。

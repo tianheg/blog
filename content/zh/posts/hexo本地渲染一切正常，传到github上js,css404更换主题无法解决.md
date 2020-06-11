@@ -4,8 +4,6 @@ date: 2020-05-10T17:47:03+08:00
 categories: ["技术"]
 tech: ["Hexo"]
 slug: Hexo local rendering everything is normal
-keywords: ["Hexo"]
-description: ""
 ---
 
 这是因为 hexo 本地的 url 设置不正确，如果 GitHub 仓库名不是 username.github.io，而是 abc，那么在生成 Git Pages 生成的静态网址即为 `htttps://username.github.io/abc`。

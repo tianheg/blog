@@ -4,8 +4,6 @@ date: 2020-05-10T19:03:30+08:00
 categories: ["技术"]
 tech: ["Git"]
 slug: Git error place docs to repo
-keywords: []
-description: ""
 ---
 
 错误信息：

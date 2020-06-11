@@ -4,8 +4,6 @@ date: 2020-01-29T21:38:48+08:00
 categories: ["生活","随笔"]
 life: ["随笔"]
 slug: 
-keywords: []
-description: ""
 ---
 
 > 那时候，未来遥远而没有形状，梦想还不知道该叫什麽名字。

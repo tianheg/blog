@@ -4,8 +4,6 @@ date: 2019-12-19T16:36:01+08:00
 categories: ["生活","随笔"]
 life: ["随笔"]
 slug: a little worry
-keywords: []
-description: ""
 ---
 
 海龟先生的《男孩别哭》具有疗愈作用，尤其是当我的心情处于低谷的时候。

@@ -4,8 +4,6 @@ date: 2019-12-07T18:17:58+08:00
 categories: ["生活","随笔"]
 life: ["随笔"]
 slug: 
-keywords: []
-description: ""
 ---
 
 昨天一整天做了很少的事情，看了几部很喜欢的电影。

@@ -4,8 +4,6 @@ date: 2019-12-27T22:43:28+08:00
 categories: ["生活","随笔"]
 life: ["随笔"]
 slug: four things about communication
-keywords: []
-description: ""
 ---
 
 记录今天的所思所想。

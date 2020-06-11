@@ -4,8 +4,6 @@ date: 2020-02-07T00:15:23+08:00
 categories: ["生活","随笔"]
 life: ["随笔"]
 slug: repeated headache
-keywords: []
-description: ""
 ---
 
 忽然想到一句广告词：咳嗽反复，反复咳嗽，就用……想到自己今天所做的事情，就造了这个题目。

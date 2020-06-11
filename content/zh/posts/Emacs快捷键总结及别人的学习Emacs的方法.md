@@ -6,8 +6,6 @@ tech: ["Emacs"]
 slug: Emacs Shortcuts and way to learn
 toc: true
 tocNum: true
-keywords: ["Emacs","way","shortcut"]
-description: "把以前总结好的已经忘记的 Emacs 笔记拿过来"
 ---
 
 C - <chr> : Ctrl + chr || M - <chr> : Alt + chr

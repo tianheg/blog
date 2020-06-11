@@ -6,8 +6,6 @@ tech: ["MXLinux"]
 slug: install google chrome on MXLinux
 toc: true
 tocNum: true
-keywords: ["Chrome"]
-description: "记录在MXLinux上安装 Google Chrome"
 ---
 
 MXLinux 属于 Debian 大类，所以在 MXLinux 上安装 GoogleChrome 亦即在 Debian 上安装。在搜索资料时，直接搜索 Debian 相关的即可。

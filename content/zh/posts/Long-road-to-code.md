@@ -3,8 +3,6 @@ title: 编程路漫漫
 date: 2020-05-02T22:13:48+08:00
 categories: ["技术"]
 tech: ["编程"]
-keywords: ["编程"]
-description: "写了自己最近有关编程的感想"
 ---
 
 有一段时间没写博客，突然就没话说。心里还是有些话要讲出来的。欢迎听我唠嗑！:kissing_heart:

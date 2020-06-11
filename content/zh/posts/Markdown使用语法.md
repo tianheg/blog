@@ -6,8 +6,6 @@ tech: ["Markdown"]
 slug: Markdown uses syntax
 toc: true
 tocNum: true
-keywords: ["Markdown"]
-description: "总结Markdown的使用语法"
 ---
 
 ## 添加任务列表

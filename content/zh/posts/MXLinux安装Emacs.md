@@ -6,8 +6,6 @@ tech: ["MXLinux","Emacs"]
 slug: install emacs on mxlinux
 toc: true
 tocNum: true
-keywords: ["Emacs","MXLinux"]
-description: "记录在 MXLinux 上安装 Emacs 的过程"
 ---
 
 ## 安装步骤

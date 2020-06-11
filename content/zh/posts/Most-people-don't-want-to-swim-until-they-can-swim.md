@@ -4,8 +4,6 @@ date: 2019-12-04T18:23:49+08:00
 categories: ["生活","随笔"]
 life: ["随笔"]
 slug: people not do before they can
-keywords: []
-description: ""
 ---
 
 昨天太累了，晚上十点睡觉，定闹钟晚上十一点半起床写作业，结果今天早晨五点醒。

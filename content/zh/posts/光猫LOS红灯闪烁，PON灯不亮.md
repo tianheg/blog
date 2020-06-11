@@ -4,8 +4,6 @@ date: 2020-05-20T09:12:46+08:00
 categories: ["技术"]
 tech: ["上网"]
 slug: Light cat LOS red light flashes
-keywords: ["Light cat","光猫"]
-description: "记录家庭使用的光猫出现问题的解决过程"
 ---
 
 我家光猫出现如下几个问题：
