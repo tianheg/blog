@@ -4,8 +4,6 @@ date: 2019-12-30T00:23:40+08:00
 categories: ["生活","随笔"]
 life: ["随笔"]
 slug: 
-keywords: []
-description: ""
 ---
 
 > 远处闪耀着光辉的地平线

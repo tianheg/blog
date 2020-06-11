@@ -4,8 +4,6 @@ date: 2020-02-14T21:13:51+08:00
 categories: ["生活","电影"]
 life: ["电影"]
 slug: 
-keywords: []
-description: ""
 ---
 
 辛德勒是个好人。

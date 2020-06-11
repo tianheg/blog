@@ -4,8 +4,6 @@ date: 2020-05-18T14:32:31+08:00
 categories: ["技术"]
 tech: ["Hexo"]
 slug: hexo no doc head error
-keywords: ["Hexo"]
-description: "记录当 Hexo 博客的 md 文档没有文档头时会产生的错误"
 ---
 
 如果一个 hexo 文档，没有

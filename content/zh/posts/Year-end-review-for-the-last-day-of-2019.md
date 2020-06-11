@@ -4,8 +4,6 @@ date: 2019-12-31T00:19:50+08:00
 categories: ["生活","随笔"]
 life: ["随笔"]
 slug: 
-keywords: []
-description: ""
 ---
 
 > 你是真的活了一万多天

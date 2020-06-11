@@ -4,8 +4,6 @@ date: 2020-05-05T18:51:58+08:00
 categories: ["生活","随笔"]
 life: ["随笔"]
 slug: 
-keywords: ["road","choose"]
-description: "这是一篇讲述选择的故事"
 ---
 
 以前曾经学过《未选择的路》[^1] ，这些年见过数次，印象甚为深刻。

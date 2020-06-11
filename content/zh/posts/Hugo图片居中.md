@@ -4,8 +4,6 @@ date: 2020-05-10T17:49:41+08:00
 categories: ["技术"]
 tech: ["Hugo"]
 slug: Hugo center picture
-keywords: ["Hugo","center","picture"]
-description: ""
 ---
 
 一般插入图片使用这样的格式： `![]()`

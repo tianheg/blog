@@ -4,8 +4,6 @@ date: 2020-05-18T14:22:54+08:00
 categories: ["技术"]
 tech: ["Hexo"]
 slug: Hexo blog allow googlebot and baiduspider
-keywords: ["SEO","hexo"]
-description: "部分记录了把网站添加到百度和谷歌的搜索列表的步骤"
 ---
 
 针对 hexo 主题 even 来说，它的文件结构如下所示：

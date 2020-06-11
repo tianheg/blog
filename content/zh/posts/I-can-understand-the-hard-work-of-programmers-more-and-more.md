@@ -4,8 +4,6 @@ date: 2020-01-30T21:34:47+08:00
 categories: ["技术"]
 tech: ["编程"]
 slug: understand programmers
-keywords: []
-description: ""
 ---
 
 > 国泰民安，百姓安居乐业，生活真的很美好啊。——《武林外传》邢捕头

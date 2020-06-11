@@ -4,8 +4,6 @@ date: 2020-02-27T22:17:09+08:00
 categories: ["技术"]
 tech: ["Ubuntu"]
 slug: download esr firefox on ubuntu
-keywords: []
-description: ""
 ---
 
 Ubuntu是Linux操作系统的桌面类系统的一个发行版，因为网站后台是Linux操作系统，所以想着在虚拟机上装个Ubuntu系统学习一下。看了[编程随想](https://program-think.blogspot.com/2017/03/Why-Linux-Is-More-Secure-Than-Windows-and-macOS.html)有关于浏览器的选择问题，Ta 推荐Firefox。原因有以下几点：

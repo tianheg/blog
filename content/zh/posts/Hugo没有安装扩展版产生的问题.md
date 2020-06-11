@@ -4,8 +4,6 @@ date: 2020-05-10T17:51:21+08:00
 categories: ["技术"]
 tech: ["Hugo"]
 slug: Hugo problems with no extended
-keywords: ["Hugo","extended"]
-description: ""
 ---
 
 如果没有安装 Hugo 扩展版，在执行 `hugo server` 命令时，会报如下错误：

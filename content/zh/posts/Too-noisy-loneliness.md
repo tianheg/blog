@@ -4,8 +4,6 @@ date: 2019-12-01T18:12:31+08:00
 categories: ["生活","读书"]
 life: ["读书"]
 slug: too noisy loneliness
-keywords: ["lonely","book"]
-description: "孤独，是什么样的呢？"
 ---
 
 要认知自己，只有身处孤独之境，因为孤独是回归自我、否定权威、建立自主权的力量。

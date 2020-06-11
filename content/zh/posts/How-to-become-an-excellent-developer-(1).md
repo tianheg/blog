@@ -6,8 +6,6 @@ tech: ["编程"]
 slug: be an excellent developer 1
 toc: true
 tocNum: true
-keywords: []
-description: ""
 ---
 
 今天把前两天看博客记的笔记放到这里，对自己算是一次巩固，对于你来说可能是一种方法。
