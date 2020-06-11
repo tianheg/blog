@@ -6,8 +6,6 @@ tech: ["编程"]
 slug: build a knowledgebase with Wikitten
 toc: true
 tocNum: true
-keywords: []
-description: ""
 ---
 
 我是在逛 V2EX( https://www.v2ex.com/ ) 的时候，看到有人询问有关如何找一个合适的个人知识库管理程序。我一时好奇，再加上自己也有类似的需求，就决定自己试验一下。自己手头有阿里云的1台轻量应用服务器和 1 台 ECS 云服务器，前一个是我掏钱买的，后一个是因为疫情的原因，阿里云赠送学生的。不过它需要自己去抢，抢到服务器的那天把我给高兴坏了。而且，我还告诉玩得好的同学，如果他们感兴趣的话就会去抢了。

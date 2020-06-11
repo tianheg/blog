@@ -4,8 +4,6 @@ date: 2019-12-06T18:15:16+08:00
 categories: ["生活","随笔"]
 life: ["随笔"]
 slug: often observe yourself
-keywords: []
-description: ""
 ---
 
 我们不是完人，所以我们免不了要犯错。犯了错误就要改正，这样才会有进步。

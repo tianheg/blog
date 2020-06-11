@@ -4,8 +4,6 @@ date: 2020-04-03T17:52:09+08:00
 categories: ["技术"]
 tech: ["Node.js"]
 slug: node application
-keywords: []
-description: ""
 ---
 
 一个node.js应用由哪几部分组成：

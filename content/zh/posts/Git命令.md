@@ -6,8 +6,6 @@ tech: ["Git"]
 slug: Git order
 toc: true
 tocNum: false
-keywords: ["Git"]
-description: ""
 ---
 
 ## 命令

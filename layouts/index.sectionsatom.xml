@@ -1,0 +1,42 @@
+{{- printf `<?xml version="1.0" encoding="utf-8"?>` | safeHTML }}
+<!-- Reference: https://tools.ietf.org/html/rfc4287 -->
+<!-- Reference: https://github.com/kaushalmodi/hugo-atom-feed/blob/master/layouts/_default/list.atom.xml -->
+<!-- Reference: https://github.com/gohugoio/hugo/blob/master/tpl/tplimpl/embedded/templates/_default/rss.xml -->
+{{- $pages := .Site.RegularPages -}}
+{{- $limit := .Site.Config.Services.RSS.Limit -}}
+{{- if ge $limit 1 -}}
+{{- $pages = $pages | first $limit -}}
+{{- end -}}
+<feed xmlns="http://www.w3.org/2005/Atom" xml:lang="{{ .Site.LanguageCode }}">
+
+    <channel>
+    <title type="text">{{ .Site.Title }}</title>
+    <updated>{{ now.Format "2006-01-02T15:04:05-07:00" | safeHTML }}</updated>
+    <id>{{ .Permalink }}</id>
+    <link>{{ .Permalink }}</link>
+    {{- with .OutputFormats.Get "ATOM" -}}
+      {{ printf "<atom:link href=%q rel=\"self\" type=%q />" .Permalink .MediaType | safeHTML }}
+    {{ end -}}
+    <description>{{ .Title | default site.Title }}</description>
+    <generator>Hugo {{ hugo.Version }} https://gohugo.io/</generator>
+    {{- with site.LanguageCode }}<language>{{.}}</language>{{end -}}
+    {{- with site.Copyright }}<copyright>{{ replace (replace . "{year}" now.Year) "&copy;" "©" | plainify }}</copyright>{{end -}}
+    {{- if not .Date.IsZero }}<lastBuildDate>{{ .Date.Format "Mon, 02 Jan 2006 15:04:05 -0700" | safeHTML }}</lastBuildDate>{{ end -}}
+    {{- if .Scratch.Get "og_image" }}
+    <image>
+      <url>{{ .Scratch.Get "og_image" }}</url>
+      <title>{{ .Title | default site.Title }}</title>
+      <link>{{ .Permalink }}</link>
+    </image>
+    {{end -}}
+    {{ range $pages }}
+    <item>
+      <title>{{ .Title }}</title>
+      <link>{{ .Permalink }}</link>
+      <pubDate>{{ .Date.Format "Mon, 02 Jan 2006 15:04:05 -0700" | safeHTML }}</pubDate>
+      <guid>{{ .Permalink }}</guid>
+      <description>{{ .Content | html }}</description>
+    </item>
+    {{ end }}
+  </channel>
+</feed>

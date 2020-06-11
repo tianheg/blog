@@ -6,8 +6,6 @@ tech: ["Emacs"]
 slug: 
 toc: true
 tocNum: true
-keywords: []
-description: ""
 ---
 
 ## 技术之外

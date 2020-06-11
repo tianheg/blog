@@ -4,8 +4,6 @@ date: 2019-12-28T00:28:16+08:00
 categories: ["生活","随笔"]
 life: ["随笔"]
 slug: 
-keywords: []
-description: ""
 ---
 
 一次恋爱的感觉能有多久，我的答案是一天不到。

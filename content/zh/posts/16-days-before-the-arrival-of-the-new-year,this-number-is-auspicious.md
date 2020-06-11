@@ -4,8 +4,6 @@ date: 2019-12-15T16:52:25+08:00
 categories: ["生活","随笔"]
 life: ["随笔"]
 slug: sixteen days before new year
-keywords: []
-description: ""
 ---
 
 我喜欢一切有秩序的东西，这几天深夜才休息，所以直接躺床上就进入梦乡。床上堆满了书，但是也就这样睡了，我大部分时候不太在乎是否整齐，尤其是当我沉迷于某事时。

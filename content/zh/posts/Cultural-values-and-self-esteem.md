@@ -4,8 +4,6 @@ date: 2019-12-21T16:23:09+08:00
 categories: ["生活","随笔"]
 life: ["随笔"]
 slug: 
-keywords: []
-description: ""
 ---
 
 1. 文化所赋予的意义让我们不再惧怕死亡

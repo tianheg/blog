@@ -4,8 +4,6 @@ date: 2020-02-19T20:39:33+08:00
 categories: ["生活","随笔"]
 life: ["随笔"]
 slug: 
-keywords: []
-description: ""
 ---
 
 > 我把QQ下回去，我又把它删去了。QQ 尼玛的，你真是世界上最他妈恶心的东西。

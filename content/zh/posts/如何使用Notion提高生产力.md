@@ -4,8 +4,6 @@ date: 2020-05-25T12:03:33+08:00
 categories: ["技术"]
 tech: ["Notion"]
 slug: how to use Notion
-keywords: ["Notion"]
-description: "总结自己使用Notion的方法"
 ---
 
 1. 看板（可以从 Trello 导入）

@@ -6,8 +6,6 @@ tech: ["Git"]
 slug: git generate ssh add to github
 tocNum: false
 toc: true
-keywords: ["Git","ssh","GitHub"]
-description: "记录在 Linux 上生成 ssh 密匙，并添加至 GitHub 的过程"
 ---
 
 ## 生成新 SSH 密钥并添加到 ssh-agent

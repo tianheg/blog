@@ -4,8 +4,6 @@ date: 2020-05-10T10:19:26+08:00
 categories: ["技术"]
 tech: ["Docker"]
 slug: docker install ubuntu
-keywords: ["docker", "Ubuntu"]
-description: "介绍在Docker上安装Ubuntu，制作镜像并打包"
 ---
 
 ```bash

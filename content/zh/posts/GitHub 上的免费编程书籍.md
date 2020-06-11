@@ -4,10 +4,6 @@ date: 2020-05-29T22:37:19+08:00
 categories: ["技术"]
 tech: ["Resource"]
 slug: some free program books on GitHub
-toc: false
-original: false
-keywords: ["resource"]
-description: "GitHub 上的免费编程书"
 ---
 ## 目录
 
