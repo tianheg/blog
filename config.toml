@@ -18,8 +18,6 @@ defaultContentLanguageInSubdir = false
 # 是否复数化列表页面的标题
 pluralizeListTitles = false
 
-# 摘要的字数限制
-summaryLength = 42
 
 # 是否开启 GitHub 风格的 Emoji 书写方式
 enableEmoji = true
@@ -169,11 +167,6 @@ uglyURLs = false
 
 [menu]
     ## 菜单栏
-    [[menu.main]]
-        url = "/"
-        name = "首页"
-        weight = 1
-        pre = "internal"
     [[menu.main]]
         url = "/life/"
         name = "生活"
@@ -461,20 +454,6 @@ uglyURLs = false
 
     # 是否显示每一分类下的文章数
     displayPostsCount = true
-
-
-    ######################################
-    # 标签页面
-
-    # 是否开启标签云
-    enableTagCloud = true
-    # 字号单位
-    fontUnit = "em"
-    # 最大字号
-    largestFontSize = 2.5
-    # 最小字号
-    smallestFontSize = 1
-
 
     ######################################
     # 列表页面
@@ -839,24 +818,7 @@ uglyURLs = false
     captionPrefix = "◎ "
 
 
-    ######################################
-    # 图片外链
-
-    # 说明：仅在生产环境（production）下渲染
-    #
-    #      只支持相对于网站根目录的绝对链接
-    #      比如：/images/meme.jpg
-    #      (~/blog/static/images/meme.jpg)
-
-    # 是否开启
-    enableImageHost = false
-
-    # 图片外链地址
-    imageHostURL = "https://example.com/"
-
-    # 是否将 HTML 的头部元数据中的图片链接也替换为外链
-    headAlso = false
-
+    
     ######################################
     # 脚注
 
@@ -956,24 +918,6 @@ uglyURLs = false
     # 是否开启（全局设置）
     enableJustify = true
     # 说明：文章的 Front Matter 中的 `align`
-    #      的优先级高于此处
-
-    ######################################
-    ## 首字下沉
-
-    # 是否开启（全局设置）
-    enableDropCap = false
-    # 说明：文章的 Front Matter 中的 `dropCap`
-    #      的优先级高于此处
-
-    # 是否在每一分隔线之后首字下沉（全局设置）
-    enableDropCapAfterHr = false
-    # 说明：文章的 Front Matter 中的 `dropCapAfterHr`
-    #      的优先级高于此处
-
-    # 是否删除首字下沉前的分隔线（全局设置）
-    deleteHrBeforeDropCap = false
-    # 说明：文章的 Front Matter 中的 `deleteHrBeforeDropCap`
     #      的优先级高于此处
 
     ######################################
