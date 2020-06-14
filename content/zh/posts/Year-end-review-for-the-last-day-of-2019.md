@@ -1,9 +1,9 @@
 ---
 title: 最后一天的年终总结
 date: 2019-12-31T00:19:50+08:00
-categories: ["生活","随笔"]
-life: ["随笔"]
-slug: 
+categories: ["生活","Summary"]
+life: ["Summary"]
+slug: Year-end-review-for-the-last-day-of-2019
 ---
 
 > 你是真的活了一万多天
