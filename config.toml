@@ -53,7 +53,7 @@ uglyURLs = false
 
 # 修改时间
 [frontmatter]
-    lastmod = ["lastmod", ":git", ":default",":fileModTime"]
+    lastmod = ["lastmod", ":git", ":fileModTime", ":default"]
 
 # Markdown 渲染器
 [markup]
@@ -89,7 +89,7 @@ uglyURLs = false
 # 作者信息
 [author]
     # 名字
-    name = "一大加贝"
+    name = "yidajiabei"
     # 邮箱
     email = "burgessnasa2019@gmail.com"
     # 座右铭或简介
@@ -291,12 +291,6 @@ uglyURLs = false
         name = "DouBan"
         weight = 2
         pre = "external"
-    [[menu.socials]]
-        url = "https://www.zhihu.com/people/yidajiabei"
-        name = "ZhiHu"
-        weight = 3
-        pre = "external"
-
     
     ## 链接栏
     [[menu.links]]
@@ -308,7 +302,7 @@ uglyURLs = false
         url = "/rss.xml"
         name = "RSS"
         weight = 2
-        pre = "internal"
+        pre = "external"
 
 ##########################################
 # 主题配置
@@ -343,7 +337,7 @@ uglyURLs = false
     # 在窄视图下隐藏菜单栏并显示一个按钮？
     enableNavToggle = true
 
-    navHeight = "12em"
+    navHeight = "9em"
     # 说明：菜单栏展开时的高度
 
 
@@ -524,7 +518,7 @@ uglyURLs = false
     # Atom & RSS
 
     # 是否包括全文内容
-    includeContent = false
+    includeContent = true
     # 说明：如果否，则只会包含文章的摘要。关于摘
     #      要，Hugo 能按你设置的字数限制自动截
     #      取，你也可以在文章中通过
@@ -855,9 +849,9 @@ uglyURLs = false
     # 菜单栏
     fontFamilyMenu = ""
     # 文章标题、文章副标题、列表标题、列表的年份和月份标题、相关文章标题、文章上下篇标题、表格的表头、定义列表中的术语
-    fontFamilyTitle = "'Noto Serif SC', 'Amstelvar', serif"
+    fontFamilyTitle = "'Amstelvar', 'Noto Serif SC', serif"
     # 分节标题、目录标题
-    fontFamilyHeadings = "'Noto Serif SC', 'Amstelvar', serif"
+    fontFamilyHeadings = "'Amstelvar', 'Noto Serif SC', serif"
     # 代码、上标、文章元信息、文章更新徽章、文章的 Git 版本信息、极简页脚、不蒜子站点浏览计数
     fontFamilyCode = "'JetBrains Mono', 'Noto Serif SC', monospace"
     # 引用
@@ -1071,7 +1065,7 @@ uglyURLs = false
     enablePostNav = true
 
     # 是否仅限于相同的文章分区
-    postNavInSection = true
+    postNavInSection = false
 
 
     ######################################
