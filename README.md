@@ -4,7 +4,6 @@
 [![Theme is MemE](https://img.shields.io/badge/Theme%20is-MemE-2a6df4)](https://github.com/reuixiy/hugo-theme-meme)
 [![Source on GitHub](https://img.shields.io/badge/Source%20on-GitHub-181717?&logo=github)](https://github.com/Gaotianhe/yidajiabei.xyz)
 [![Built on Netlify](https://img.shields.io/badge/Built%20on-Netlify-00c7b7?&logo=netlify)](https://www.netlify.com/)
-[![Codacy Badge](https://app.codacy.com/project/badge/Grade/3868a101aefb47ae9a9f0d92d5b46830)](https://www.codacy.com/manual/Gaotianhe/yidajiabei.xyz?utm_source=github.com&amp;utm_medium=referral&amp;utm_content=Gaotianhe/yidajiabei.xyz&amp;utm_campaign=Badge_Grade)
 
 You can visit these link to watch my site:
 
