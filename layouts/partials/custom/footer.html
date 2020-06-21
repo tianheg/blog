@@ -8,13 +8,11 @@
     </div>
 {{ end }}
 
-{{ if .Site.Language.Lang }}
-{{ len (where .Site.RegularPages "Section" "posts") }} posts in total
+{{ len (where .Site.RegularPages "Section" "posts") }}{{ i18n "posts" }}
 |
 {{$scratch := newScratch}}
 {{ range (where .Site.Pages "Kind" "page" )}}
     {{$scratch.Add "total" .WordCount}}
 {{ end }}
-{{$scratch.Get "total" }} words
-
-{{ end }}
+{{ $scratch.Get "total" }}
+{{ i18n "WordCount" }}

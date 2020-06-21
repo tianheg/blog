@@ -5,7 +5,7 @@ meta = false
 gitinfo = false
 displayCopyright = false
 +++
-
+运行时间：<span id="sitetime" style="color:#888888"></span>
 我喜欢的音乐：
 
 {{< music auto="https://music.163.com/#/playlist?id=5043861211">}}

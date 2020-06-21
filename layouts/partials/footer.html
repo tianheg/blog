@@ -39,6 +39,8 @@
               <div class="site-copyright">{{ $Content | safeHTML }}</div>
           {{- end }}
 
+          {{ partial "custom/footer.html" . }}
+          
             {{- with .Site.Params.customFooter }}
                 {{- $raw := . -}}
                 {{- partial "utils/markdownify.html" (dict "Deliver" $Deliver "raw" $raw "isContent" false) -}}
@@ -86,9 +88,6 @@
 
             {{ partial "components/socials.html" . }}
 
-            {{ partial "custom/footer.html" . }}
-            <br/>
-            运行时间：<span id="sitetime" style="color:#CACACB"></span>
         </div>
     </footer>
 {{ end }}
