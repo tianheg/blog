@@ -5,7 +5,7 @@ meta = false
 gitinfo = false
 displayCopyright = false
 +++
-运行时间：<span id="sitetime" style="color:#888888"></span>
+
 我喜欢的音乐：
 
 {{< music auto="https://music.163.com/#/playlist?id=5043861211">}}
@@ -24,7 +24,11 @@ displayCopyright = false
 
 ---
 
+网站运行时间：<span id="sitetime" style="color:#888888"></span>
+
+---
+
 我的 GitHub 贡献：
 ![GitHub Chart](https://ghchart.rshah.org/Gaotianhe)
 
-<img align="left" src="/images/about-arrow.png" width="50" height="50" alt="一个向下的箭头"></br></br>
+<img align="left" src="/images/about-arrow.png" width="50" height="50" alt="一个向下的箭头"><br><br>
