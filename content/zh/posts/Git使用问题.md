@@ -77,3 +77,13 @@ git pull origin master --allow-unrelated-histories
 ```
 
 More information can be found [here, ](https://github.com/git/git/blob/master/Documentation/RelNotes/2.9.0.txt#L58-L68) on Git’s official documentation.
+
+## `git push origin master` 后出现：
+
+```bash
+$ git push origin master
+kex_exchange_identification: read: Connection reset by peer
+Connection reset by 192.30.255.112 port 22
+fatal: Could not read from remote repository.
+```
+
