@@ -1,34 +1,34 @@
-English | 
-[简体中文](https://github.com/reuixiy/hugo-theme-meme/blob/master/README.zh-cn.md)
+简体中文 | 
+[English](https://github.com/reuixiy/hugo-theme-meme/blob/master/README.md)
 
 <div align="center"><img src="https://raw.githubusercontent.com/reuixiy/hugo-theme-meme/master/static/icons/apple-touch-icon.png" /></div>
 
 # <div align="center">MemE</div>
 
-## Description
+## 简介
 
-MemE is a powerful and highly customizable [GoHugo](https://github.com/gohugoio/hugo) theme for personal blogs. MemE focuses on elegance, simplicity, modernity, and code correctness. Also, I hope you would enjoy MemE like a meme and share MemE like a meme! Just like what your blog and articles do! 😝
+MemE 是一个强大且可高度定制的 [GoHugo](https://github.com/gohugoio/hugo) 博客主题，专为个人博客设计。MemE 主题专注于优雅、简约、现代，以及代码的正确性。同时，希望你将像欣赏一个模因一样欣赏 MemE，希望你将像分享一个模因一样分享 MemE，就像你的博客和文章所做的那样😝！
 
-## Preview
+## 预览
 
 ![tn.png](https://raw.githubusercontent.com/reuixiy/hugo-theme-meme/master/images/tn.png)
 
-## Quick Start
+## 快速开始
 
 https://gohugo.io/getting-started/quick-start/
 
-### Install Hugo (`extended` version)
+### 安装 Hugo（`extended` 扩展版）
 
-For Arch Linux users:
+对于 Arch Linux 的用户：
 
 ```sh
 ~ $ sudo pacman -S hugo
 ~ $ hugo new site blog
 ```
 
-For users of other systems, see: https://gohugo.io/getting-started/installing/
+对于其它系统的用户，请查看：https://gohugo.io/getting-started/installing/
 
-### Install MemE
+### 安装 MemE
 
 ```sh
 ~ $ cd blog
@@ -36,59 +36,59 @@ For users of other systems, see: https://gohugo.io/getting-started/installing/
 ~/blog $ git submodule add --depth 1 https://github.com/reuixiy/hugo-theme-meme.git themes/meme
 ```
 
-### Blogging
+### 开始写作
 
-1. Replace `config.toml` with [config examples](https://github.com/reuixiy/hugo-theme-meme/blob/master/config-examples/en/config.toml).
+1. 将 `config.toml` 替换为[示例配置](https://github.com/reuixiy/hugo-theme-meme/blob/master/config-examples/zh-cn/config.toml)。
    ```sh
-   ~/blog $ rm config.toml && cp themes/meme/config-examples/en/config.toml config.toml
+   ~/blog $ rm config.toml && cp themes/meme/config-examples/zh-cn/config.toml config.toml
    ```
 
-2. Create a new post and the about page:
+2. 新建一篇文章和一个关于页面：
    ```sh
    ~/blog $ hugo new "posts/hello-world.md"
    ~/blog $ hugo new "about/_index.md"
    ```
 
-3. Now:
+3. 现在：
    ```sh
    ~/blog $ hugo server -D
    ```
 
-## Customize MemE
+## 定制 MemE
 
-MemE uses SCSS via [Hugo Pipes](https://gohugo.io/hugo-pipes/introduction/) to generate CSS instead of static CSS file and provides a [`_custom.scss`](https://github.com/reuixiy/hugo-theme-meme/blob/master/assets/scss/custom/_custom.scss) for customization.
+MemE 通过 Hugo 管道实现使用 SCSS 生成 CSS，而非静态的 CSS 文件，同时提供一个 [`_custom.scss`](https://github.com/reuixiy/hugo-theme-meme/blob/master/assets/scss/custom/_custom.scss) 文件以供用户定制。
 
-Just create a `~/blog/assets/scss/custom/_custom.scss` and add your own styles into this file. Your `_custom.scss` will override `~/blog/themes/meme/assets/scss/custom/_custom.scss` and your custom CSS will be applied correctly.
+直接新建一个 `~/blog/assets/scss/custom/_custom.scss` 并将你自己的样式加入其中，就能覆盖主题的 `~/blog/themes/meme/assets/scss/custom/_custom.scss` 文件，且其会正确地被应用。
 
-Actually, you can override any template of theme in Hugo, see this *unofficial mirror* page: https://gohugobrasil.netlify.com/themes/customizing/
+事实上，在 Hugo 中你可以覆盖主题的任何模板，见这个非官方的镜像网页：<https://gohugobrasil.netlify.com/themes/customizing/>
 
-## Update MemE
+## 更新 MemE
 
 ```sh
 ~/blog $ git submodule update --rebase --remote
 ```
 
-If failed, try:
+如果失败了，请尝试：
 
-1. Delete `meme` folder, e.g.
+1. 删除 `meme` 文件夹，比如
    ```sh
    ~/blog $ rm -rf themes/meme
    ```
 
-2. Clone MemE again
+2. 重新克隆 MemE
    ```sh
    ~/blog $ git clone --depth 1 https://github.com/reuixiy/hugo-theme-meme.git themes/meme
    ```
 
-**Note that** MemE makes some brand new features or *breaking changes* sometimes, so please be sure to check [the modification history of `config.toml`](https://github.com/reuixiy/hugo-theme-meme/commits/master/config-examples) and update the related items after the update!
+**特别注意**：MemE 主题有时会新增一些全新功能或一些毁灭改动，所以在你更新完后，请务必检查 [`config.toml` 的改动历史](https://github.com/reuixiy/hugo-theme-meme/commits/master/config-examples)并将相应内容也更新！
 
 ## Awesome MemE
 
-See [#2](https://github.com/reuixiy/hugo-theme-meme/issues/2).
+请看 [#2](https://github.com/reuixiy/hugo-theme-meme/issues/2)。
 
-## Supported Front Matter
+## 支持的 Front Matter
 
-Name | Description | Notes
+名字 | 描述 | 说明
 ---|---|---
 title | * | string
 linkTitle | * | string

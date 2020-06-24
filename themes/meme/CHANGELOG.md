@@ -1,15 +1,3 @@
-## 1.0.0 (2020-06-13)
-
-I'm going to use my own config, so I forked it.
-
-The above log is my own changelog.
-
----
-The below log is the origin changelog until v4.3.1.
-
-<br>
-<br>
-
 ## [4.3.1](https://github.com/reuixiy/hugo-theme-meme/compare/v4.3.0...v4.3.1) (2020-04-03)
 
 
