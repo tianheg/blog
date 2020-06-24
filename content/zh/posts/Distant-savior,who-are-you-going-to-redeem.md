@@ -1,7 +1,7 @@
 ---
 title: 遥远的救世主，你要救赎谁
 date: 2019-12-24T23:27:07+08:00
-categories: ["生活","读书"]
+categories: ["生活"]
 life: ["读书"]
 slug: 
 ---

@@ -1,7 +1,7 @@
 ---
 title: 做有价值的事情
 date: 2019-12-13T17:41:17+08:00
-categories: ["生活","随笔"]
+categories: ["生活"]
 life: ["随笔"]
 slug: 
 ---

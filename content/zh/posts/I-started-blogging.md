@@ -1,7 +1,7 @@
 ---
 title: 我开始写博客了
 date: 2019-12-22T23:31:37+08:00
-categories: ["生活","随笔"]
+categories: ["生活"]
 life: ["随笔"]
 slug: I started blogging
 ---

@@ -1,7 +1,7 @@
 ---
 title: 雪临有感
 date: 2018-12-23T20:12:41+08:00
-categories: ["生活","随笔"]
+categories: ["生活"]
 life: ["随笔"]
 slug: feelings-with-snow
 ---

@@ -1,7 +1,7 @@
 ---
 title: 群聊是毫无必要的
 date: 2019-12-25T23:23:43+08:00
-categories: ["生活","随笔"]
+categories: ["生活"]
 life: ["随笔"]
 slug: 
 ---
