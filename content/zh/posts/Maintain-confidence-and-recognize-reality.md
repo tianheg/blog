@@ -1,7 +1,7 @@
 ---
 title: 保持信心，认清现实
 date: 2019-12-09T17:58:37+08:00
-categories: ["生活","随笔"]
+categories: ["生活"]
 life: ["随笔"]
 slug: 
 ---

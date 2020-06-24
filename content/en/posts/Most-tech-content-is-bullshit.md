@@ -4,7 +4,6 @@ date: 2020-06-10T21:40:35+08:00
 categories: ["Tech"]
 tech: ["HackerNews"]
 slug: Most tech content is bullshit
-
 ---
 
 This post is coming from the Hacker News.

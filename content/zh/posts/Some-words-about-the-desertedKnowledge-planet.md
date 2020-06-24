@@ -1,7 +1,7 @@
 ---
 title: 知识星球逐渐冷清有感
 date: 2020-01-31T23:15:39+08:00
-categories: ["生活","随笔"]
+categories: ["生活"]
 life: ["随笔"]
 slug: words about knowledge planet
 ---

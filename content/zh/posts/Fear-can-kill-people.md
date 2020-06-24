@@ -1,7 +1,7 @@
 ---
 title: 恐惧能使人死亡
 date: 2020-02-20T22:16:24+08:00
-categories: ["生活","随笔"]
+categories: ["生活"]
 life: ["随笔"]
 slug: 
 ---

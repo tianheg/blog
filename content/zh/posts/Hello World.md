@@ -1,7 +1,7 @@
 ---
 title: Hello World
 date: 2018-12-23T02:12:41+08:00
-categories: ["生活","随笔"]
+categories: ["生活"]
 life: ["随笔"]
 slug: hello-world
 ---
