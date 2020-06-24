@@ -4,7 +4,6 @@ date: 2020-06-10T08:48:56+08:00
 categories: ["Tech"]
 tech: ["XML"]
 slug: learn xml
-description: "These are notes with learning XML"
 ---
 
 ## Introduction to XML

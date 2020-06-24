@@ -1,7 +1,7 @@
 ---
 title: 最后一天的年终总结
 date: 2019-12-31T00:19:50+08:00
-categories: ["生活","Summary"]
+categories: ["生活"]
 life: ["Summary"]
 slug: Year-end-review-for-the-last-day-of-2019
 ---

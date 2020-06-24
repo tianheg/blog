@@ -1,7 +1,7 @@
 ---
 title: 不要对自己期待过高
 date: 2019-12-02T18:32:24+08:00
-categories: ["生活","随笔"]
+categories: ["生活"]
 life: ["随笔"]
 slug: 
 ---

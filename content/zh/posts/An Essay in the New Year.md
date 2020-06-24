@@ -1,7 +1,7 @@
 ---
 title: 新年随笔
 date: 2019-02-05T20:24:45+08:00
-categories: ["生活","随笔"]
+categories: ["生活"]
 life: ["随笔"]
 slug: 
 ---

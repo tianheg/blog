@@ -1,7 +1,7 @@
 ---
 title: 大多数人在还不会游泳之前都不会想游泳
 date: 2019-12-04T18:23:49+08:00
-categories: ["生活","随笔"]
+categories: ["生活"]
 life: ["随笔"]
 slug: people not do before they can
 ---

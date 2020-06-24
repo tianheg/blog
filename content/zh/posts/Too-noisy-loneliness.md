@@ -1,7 +1,7 @@
 ---
 title: 读《过于喧嚣的孤独》
 date: 2019-12-01T18:12:31+08:00
-categories: ["生活","读书"]
+categories: ["生活"]
 life: ["读书"]
 slug: too noisy loneliness
 ---

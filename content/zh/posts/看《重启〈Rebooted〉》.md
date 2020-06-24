@@ -1,7 +1,7 @@
 ---
 title: 看《重启〈Rebooted〉》
 date: 2020-06-11T08:24:04+08:00
-categories: ["生活","电影"]
+categories: ["生活"]
 life: ["电影"]
 slug: watch Rebooted
 ---
