@@ -1,7 +1,7 @@
 ---
 title: 阶段感悟
 date: 2019-12-11T17:47:56+08:00
-categories: ["生活","随笔"]
+categories: ["生活"]
 life: ["随笔"]
 slug: 
 ---

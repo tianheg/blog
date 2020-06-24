@@ -1,7 +1,7 @@
 ---
 title: 自我本我超我
 date: 2020-03-06T22:36:10+08:00
-categories: ["生活","随笔"]
+categories: ["生活"]
 life: ["随笔"]
 slug:
 ---

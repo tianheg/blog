@@ -1,7 +1,7 @@
 ---
 title: 交流，满足，积累，作业
 date: 2019-12-27T22:43:28+08:00
-categories: ["生活","随笔"]
+categories: ["生活"]
 life: ["随笔"]
 slug: four things about communication
 ---

@@ -1,7 +1,7 @@
 ---
 title: 记下困惑
 date: 2020-02-22T21:03:28+08:00
-categories: ["生活","随笔"]
+categories: ["生活"]
 life: ["随笔"]
 slug: 
 ---

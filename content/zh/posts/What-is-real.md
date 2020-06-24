@@ -1,7 +1,7 @@
 ---
 title: 究竟什么才是真实
 date: 2020-02-23T21:45:46+08:00
-categories: ["生活","随笔"]
+categories: ["生活"]
 life: ["随笔"]
 slug: 
 ---

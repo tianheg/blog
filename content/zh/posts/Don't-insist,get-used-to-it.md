@@ -1,7 +1,7 @@
 ---
 title: 不要坚持，要习惯
 date: 2019-11-28T18:42:16+08:00
-categories: ["生活","随笔"]
+categories: ["生活"]
 life: ["随笔"]
 slug: 
 ---

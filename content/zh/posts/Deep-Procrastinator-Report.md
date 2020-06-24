@@ -1,7 +1,7 @@
 ---
 title: 深度拖延者报道
 date: 2019-12-05T18:20:46+08:00
-categories: ["生活","随笔"]
+categories: ["生活"]
 life: ["随笔"]
 slug: 
 ---

@@ -1,7 +1,7 @@
 ---
 title: 今日记事
 date: 2020-02-21T22:27:19+08:00
-categories: ["生活","随笔"]
+categories: ["生活"]
 life: ["随笔"]
 slug: 
 ---

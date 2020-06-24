@@ -1,7 +1,7 @@
 ---
 title: 读《你的第一本哲学书》
 date: 2019-12-03T18:28:02+08:00
-categories: ["生活","读书"]
+categories: ["生活"]
 life: ["读书"]
 slug: identity
 ---

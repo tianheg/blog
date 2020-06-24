@@ -1,7 +1,7 @@
 ---
 title: 不必彷徨，放手去做
 date: 2020-04-21T21:54:59+08:00
-categories: ["生活","随笔"]
+categories: ["生活"]
 life: ["随笔"]
 slug: 
 ---
