@@ -4,19 +4,15 @@
         {{ partial "pages/home-poetry.html" . }}
     {{ end }}
     <!-- Layout Footage -->
-    {{ if eq .Site.Params.homeLayout "footage" }}
+    <!-- {{ if eq .Site.Params.homeLayout "footage" }}
         {{ partial "pages/home-footage.html" . }}
-    {{ end }}
+    {{ end }} -->
     <!-- Layout Posts -->
-    {{ if eq .Site.Params.homeLayout "posts" }}
+    <!-- {{ if eq .Site.Params.homeLayout "posts" }}
         {{ partial "pages/home-posts.html" . }}
-    {{ end }}
+    {{ end }} -->
     <!-- Layout Page -->
-    {{ if eq .Site.Params.homeLayout "page" }}
+    <!-- {{ if eq .Site.Params.homeLayout "page" }}
         {{ partial "pages/post.html" . }}
-    {{ end }}
-
-    {{ if and .Site.Params.enableGoogleAdUnits (eq hugo.Environment "production") -}}
-            {{ partial "third-party/google-adsense-unit.html" . }}
-    {{- end }}
+    {{ end }} -->
 {{ end }}
