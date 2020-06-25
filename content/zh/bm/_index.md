@@ -2,6 +2,7 @@
 title = "📚🎥书影"
 share = false
 meta = false
+
 +++
 
 # 书
@@ -98,3 +99,14 @@ meta = false
 
 ---
 
+<script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
+<ins class="adsbygoogle"
+     style="display:block"
+     data-ad-format="fluid"
+     data-ad-layout-key="-gw-3+1f-3d+2z"
+     data-ad-client="ca-pub-8163003938382682"
+     data-ad-slot="3730022211"></ins>
+
+<script>
+     (adsbygoogle = window.adsbygoogle || []).push({});
+</script>
