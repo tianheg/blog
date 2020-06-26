@@ -2,44 +2,44 @@
 {{ if or (and .IsHome .Site.Params.displayFooterInHome) (and (not .IsHome) .Site.Params.enableFooter) }}
     <footer id="footer" class="footer">
         <div class="footer-inner">
-              {{- if .Site.Params.displayCopyrightSymbol -}}
-              {{- .Scratch.Set "siteInfoCopyright" "©&nbsp;" -}}
-              {{- else -}}
-                  {{- .Scratch.Set "siteInfoCopyright" "" -}}
-              {{- end -}}
+            {{- if .Site.Params.displayCopyrightSymbol -}}
+                {{- .Scratch.Set "siteInfoCopyright" "©&nbsp;" -}}
+            {{- else -}}
+                {{- .Scratch.Set "siteInfoCopyright" "" -}}
+            {{- end -}}
             {{- $siteInfoCopyright := .Scratch.Get "siteInfoCopyright" -}}
 
-              {{- if .Site.Params.displaySiteCreatedYear -}}
-              {{- .Scratch.Set "siteInfoCreatedYear" (printf `%s–%s` (dateFormat "2006" (time .Site.Params.siteCreatedTime)) (now.Format "2006")) -}}
-              {{- else -}}
-                  {{- .Scratch.Set "siteInfoCreatedYear" (now.Format "2006") -}}
-              {{- end -}}
-              {{- $siteInfoCreatedYear := .Scratch.Get "siteInfoCreatedYear" -}}
+            {{- if .Site.Params.displaySiteCreatedYear -}}
+                {{- .Scratch.Set "siteInfoCreatedYear" (printf `%s–%s` (dateFormat "2006" (time .Site.Params.siteCreatedTime)) (now.Format "2006")) -}}
+            {{- else -}}
+                {{- .Scratch.Set "siteInfoCreatedYear" (now.Format "2006") -}}
+            {{- end -}}
+            {{- $siteInfoCreatedYear := .Scratch.Get "siteInfoCreatedYear" -}}
 
-              {{- with .Site.Params.iconBetweenYearAndAuthor -}}
-              {{- $.Scratch.Set "siteInfoIcon" (printf `&nbsp;%s&nbsp;` (replace (index $.Site.Data.SVG .) "icon" "icon footer-icon")) -}}
-          {{- else -}}
-              {{- $.Scratch.Set "siteInfoIcon" "&nbsp;" -}}
-          {{- end -}}
-          {{- $siteInfoIcon := .Scratch.Get "siteInfoIcon" -}}
+            {{- with .Site.Params.iconBetweenYearAndAuthor -}}
+                {{- $.Scratch.Set "siteInfoIcon" (printf `&nbsp;%s&nbsp;` (replace (index $.Site.Data.SVG .) "icon" "icon footer-icon")) -}}
+            {{- else -}}
+                {{- $.Scratch.Set "siteInfoIcon" "&nbsp;" -}}
+            {{- end -}}
+            {{- $siteInfoIcon := .Scratch.Get "siteInfoIcon" -}}
 
-          <div class="site-info">{{ printf `%s%s%s%s` $siteInfoCopyright $siteInfoCreatedYear $siteInfoIcon .Site.Author.name | safeHTML }}</div>
+            <div class="site-info">{{ printf `%s%s%s%s` $siteInfoCopyright $siteInfoCreatedYear $siteInfoIcon .Site.Author.name | safeHTML }}</div>
 
-          {{- if .Site.Params.displayPoweredBy }}
-              {{- $raw := `Powered by [Hugo](https://github.com/gohugoio/hugo) | Theme is [MemE](https://github.com/reuixiy/hugo-theme-meme)` -}}
-              {{- partial "utils/markdownify.html" (dict "Deliver" $Deliver "raw" $raw "isContent" false) -}}
-              {{- $Content := .Scratch.Get "Content" -}}
-              <div class="powered-by">{{ $Content | safeHTML }}</div>
-          {{- end }}
+            {{- if .Site.Params.displayPoweredBy }}
+                {{- $raw := `Powered by [Hugo](https://github.com/gohugoio/hugo) | Theme is [MemE](https://github.com/reuixiy/hugo-theme-meme)` -}}
+                {{- partial "utils/markdownify.html" (dict "Deliver" $Deliver "raw" $raw "isContent" false) -}}
+                {{- $Content := .Scratch.Get "Content" -}}
+                <div class="powered-by">{{ $Content | safeHTML }}</div>
+            {{- end }}
 
-          {{- if .Site.Params.displaySiteCopyright }}
-              {{- $raw := .Site.Copyright -}}
-              {{- partial "utils/markdownify.html" (dict "Deliver" $Deliver "raw" $raw "isContent" false) -}}
-              {{- $Content := .Scratch.Get "Content" -}}
-              <div class="site-copyright">{{ $Content | safeHTML }}</div>
-          {{- end }}
+            {{- if .Site.Params.displaySiteCopyright }}
+                {{- $raw := .Site.Copyright -}}
+                {{- partial "utils/markdownify.html" (dict "Deliver" $Deliver "raw" $raw "isContent" false) -}}
+                {{- $Content := .Scratch.Get "Content" -}}
+                <div class="site-copyright">{{ $Content | safeHTML }}</div>
+            {{- end }}
 
-          {{ partial "custom/footer.html" . }}
+            {{ partial "custom/footer.html" . }}
           
             {{- with .Site.Params.customFooter }}
                 {{- $raw := . -}}
