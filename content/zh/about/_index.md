@@ -24,10 +24,6 @@ displayCopyright = false
 
 ---
 
-网站运行时间：<span id="sitetime" style="color:#888888"></span>
-
----
-
 我的 GitHub 贡献：
 ![GitHub Chart](https://ghchart.rshah.org/Gaotianhe)
 
