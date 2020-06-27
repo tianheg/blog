@@ -127,7 +127,7 @@ var t1 = Date.UTC(2020, 01, 01, 00, 00, 00)
 运行时间<span id="sitetime" style="color:#fb7312"></span>
 ```
 
-运行时间<span id="sitetime" style="color:#fb7312"></span>
+不再使用该功能
 
 ## 字体配置
 
