@@ -55,7 +55,7 @@ meta = false
 
 √ 《外婆的道歉信》 瑞典 弗雷德里克 · 巴克曼 著 孟汇一 译 ？？~2019.12.27
 
-[√ 《过于喧嚣的孤独》](https://www.yidajiabei.xyz/posts/too-noisy-loneliness/) 捷克 博胡米尔 · 赫拉巴尔 著 杨乐云 译 ？？~2019.12.10
+[√ 《过于喧嚣的孤独》](https://www.yidajiabei.xyz/blog/posts/too-noisy-loneliness/) 捷克 博胡米尔 · 赫拉巴尔 著 杨乐云 译 ？？~2019.12.10
 
 √ 《好兵帅克》 捷克 雅 · 哈谢克 著 萧乾 译 ？？~2019.12.03
 
