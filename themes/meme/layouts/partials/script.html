@@ -6,7 +6,6 @@
 {{- $lang := resources.Get "js/multilingual.js" | resources.ExecuteAsTemplate (printf "%s/js/multilingual-rendered.js" .Lang) . -}}
 {{- $wrapTable := resources.Get "js/wrap-table.js" | resources.ExecuteAsTemplate (printf "%s/js/wrap-table-rendered.js" .Lang) . -}}
 {{- $copy := resources.Get "js/copy.js" | resources.ExecuteAsTemplate (printf "%s/js/copy-rendered.js" .Lang) . -}}
-{{- $comments := resources.Get "js/comments.js" | resources.ExecuteAsTemplate (printf "%s/js/comments-rendered.js" .Lang) . -}}
 {{- $custom := resources.Get "js/custom.js" | resources.ExecuteAsTemplate (printf "%s/js/custom-rendered.js" .Lang) . -}}
 
 {{- .Scratch.Set "script" (slice $main) -}}
@@ -35,10 +34,6 @@
 
 {{- if .Site.Params.enableCopy -}}
     {{- .Scratch.Add "script" (slice $copy) -}}
-{{- end -}}
-
-{{- if and .Site.Params.enableComments (eq hugo.Environment "production") -}}
-    {{- .Scratch.Add "script" (slice $comments) -}}
 {{- end -}}
 
 {{- .Scratch.Add "script" (slice $custom) -}}
