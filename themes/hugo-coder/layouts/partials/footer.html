@@ -1,26 +1,39 @@
-{{ if not .Site.Params.hideFooter | default false }}
-  <footer class="footer">
-    <section class="container">
-      {{ with .Site.Params.footercontent | safeHTML }}
-        <p>{{ . }}</p>
-      {{ end }}
-      {{ if not .Site.Params.hideCopyright }}
-        ©
-        {{ if (and (.Site.Params.since) (lt .Site.Params.since now.Year)) }}
-          {{ .Site.Params.since }} -
-        {{ end }}
-        {{ now.Year }}
-        {{ with .Site.Params.Author }} {{ . }} {{ end }}
-      {{ end }}
-      {{ if not .Site.Params.hideCredits }}
-        {{ if not .Site.Params.hideCopyright }} · {{ end }}
-        {{ i18n "powered_by" }} <a href="https://gohugo.io/">Hugo</a> & <a href="https://github.com/luizdepra/hugo-coder/">Coder</a>.
-      {{ end }}
-      {{ if .Site.Params.commit }}
-        {{ if .GitInfo }}
-          [<a href="{{ .Site.Params.commit }}/{{ .GitInfo.Hash }}">{{ .GitInfo.AbbreviatedHash }}</a>]
-        {{ end }}
-      {{ end }}
-    </section>
-  </footer>
-{{ end }}
+<footer class="footer">
+  <div class="footer-taxonomy">
+    <div style="margin-bottom: 10px;">
+      <a href="https://wiki.bmpi.dev/" rel="nofollow">Wiki</a>
+      ⚔️
+      <a href="https://talk.bmpi.dev/" rel="nofollow">Talk</a>
+      ⚔️
+      <a href="https://www.notion.so/mdw/e0ed086e701a4d0aaa4839d2c7aa62ea" rel="nofollow">Portfolio</a>
+    </div>
+    <div>
+      <a href= {{ relLangURL "affiliate" }} >Affiliate</a>
+      ⚡️
+      <a href= {{ relLangURL "tool" }} >Tool</a>
+      ⚡️
+      <a href= {{ relLangURL "link" }} >Link</a>
+    </div>
+  </div>
+  <div class="footer-taxonomy">
+    <a href= {{ relLangURL "life" }} style="color: #B36D61;">Life</a>
+    👈
+    <a href= {{ relLangURL "categories" }} style="color: #FF8C31;">Categories</a>
+    👉
+    <a href= {{ relLangURL "tech" }} style="color: #519A73;">Tech</a>
+  </div>
+  <section class="container">
+    {{ with .Site.Params.footercontent | safeHTML }}
+      <p>{{.}}</p>
+    {{ end }}
+    {{ if not .Site.Params.hideCopyright }} © 2018 - {{ now.Format "2006" }}{{ end }}
+    {{ if not .Site.Params.hideCredits }}
+      {{ if not .Site.Params.hideCopyright }} · {{ end }}
+      {{ i18n "powered_by" }} <a href="https://gohugo.io/">Hugo</a> & <a href="https://github.com/luizdepra/hugo-coder/">Coder</a>.
+    {{ end }}
+    {{ if .Site.Params.commit }}
+      {{ if or (not .Site.Params.hideCredits) (not .Site.Params.hideCopyright) }} · {{ end }}
+      [<a href="{{ .Site.Params.commit }}{{ getenv "GIT_COMMIT_SHA" }}">{{ getenv "GIT_COMMIT_SHA_SHORT" }}</a>]
+    {{ end }}
+  </section>
+</footer>
