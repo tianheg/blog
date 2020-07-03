@@ -3,7 +3,6 @@
     <a class="navigation-title" href="{{ .Site.BaseURL | relLangURL }}">
       {{ .Site.Title }}
     </a>
-    {{ if or .Site.Menus.main .Site.IsMultiLingual }}
     <input type="checkbox" id="menu-toggle" />
     <label class="menu-button float-right" for="menu-toggle"><i class="fas fa-bars"></i></label>
     <ul class="navigation-list">
@@ -17,7 +16,7 @@
       {{ if .Site.IsMultiLingual }}
         {{ $node := . }}
         {{ .Scratch.Set "separator" true }}
-        {{ range (default .Site.Home.AllTranslations .Translations) }}
+        {{ range .Site.Home.AllTranslations }}
           {{ if ne $.Site.Language .Language }}
             {{ if $node.Scratch.Get "separator" }}
               <li class="navigation-item menu-separator">
@@ -32,6 +31,5 @@
         {{ end }}
       {{ end }}
     </ul>
-    {{ end }}
   </section>
 </nav>
