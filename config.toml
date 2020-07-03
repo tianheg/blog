@@ -1,4 +1,4 @@
-baseurl = "https://www.yidajiabei.xyz"
+baseurl = "https://www.yidajiabei.xyz/zh"
 title = "一大加贝"
 theme = ["hugo-notice","hugo-coder"]
 languagecode = "zh-cn"
@@ -31,6 +31,12 @@ FootnoteReturnLinkContents = "↑"
   category = "categories"
   tech = "tech"
   life = "life"
+
+# URL 结构
+[permalinks]
+    categories = "/categories/:slug/"
+    tech = "/tech/:slug/"
+    life = "/life/:slug/"
 
 [params]
     author = "Tianhe Gao"
@@ -146,19 +152,19 @@ FootnoteReturnLinkContents = "↑"
             [[languages.zh-cn.menu.main]]
                 name = "关于"
                 weight = 1
-                url = "/about/"
+                url = "zh/about/"
             [[languages.zh-cn.menu.main]]
                 name = "技术"
                 weight = 2
-                url  = "/tech/"
+                url  = "zh/tech/"
             [[languages.zh-cn.menu.main]]
                 name = "生活"
                 weight = 3
-                url  = "/life/"
+                url  = "zh/life/"
             [[languages.zh-cn.menu.main]]
                 name = "归档"
                 weight = 4
-                url  = "/posts/"
+                url  = "zh/posts/"
             [[languages.zh-cn.menu.main]]
                 name = "项目"
                 weight = 5
@@ -170,7 +176,7 @@ FootnoteReturnLinkContents = "↑"
             [[languages.zh-cn.menu.main]]
                 name = "分类"
                 weight = 7
-                url  = "/categories/"
+                url  = "zh/categories/"
     
     [languages.en]
         languagename = "English"
@@ -181,19 +187,19 @@ FootnoteReturnLinkContents = "↑"
             [[languages.en.menu.main]]
                 name = "About"
                 weight = 1
-                url = "/about/"
+                url = "en/about/"
             [[languages.en.menu.main]]
                 name = "Tech"
                 weight = 2
-                url  = "/tech/"
+                url  = "en/tech/"
             [[languages.en.menu.main]]
-                name = "Dev"
+                name = "Life"
                 weight = 3
-                url  = "/dev/"
+                url  = "en/life/"
             [[languages.en.menu.main]]
-                name = "Money"
+                name = "Posts"
                 weight = 4
-                url  = "/money/"
+                url  = "en/posts/"
             [[languages.en.menu.main]]
                 name = "Project"
                 weight = 5
