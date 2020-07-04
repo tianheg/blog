@@ -1,6 +1,7 @@
 <footer class="footer">
   <div class="footer-taxonomy">
     <div style="margin-bottom: 10px;">
+      
       <a href="https://wiki.yidajiabei.xyz" rel="nofollow">Wiki</a>
       ⚔️
       <a href="https://talk.yidajiabei.xyz" rel="nofollow">Talk</a>
@@ -23,6 +24,15 @@
     <a href= {{ relLangURL "tech" }} style="color: #519A73;">Tech</a>
   </div>
   <section class="container">
+    {{ len (where .Site.RegularPages "Section" "posts") }}{{ i18n "posts" }}
+    |
+    {{$scratch := newScratch}}
+    {{ range (where .Site.Pages "Kind" "page" )}}
+    {{$scratch.Add "total" .WordCount}}
+    {{ end }}
+    {{ $scratch.Get "total" }}
+    {{ i18n "WordCount" }}
+    <br>
     {{ with .Site.Params.footercontent | safeHTML }}
       <p>{{.}}</p>
     {{ end }}
