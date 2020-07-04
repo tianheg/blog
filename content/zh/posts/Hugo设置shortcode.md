@@ -118,7 +118,7 @@ repository = '<svg xmlns="http://www.w3.org/2000/svg" class="icon" viewBox="0 0 
 {{</* github name="yidajiabei.xyz" link="https://github.com/Gaotianhe/yidajiabei.xyz" description="Blog of mine with Hugo https://www.yidajiabei.xyz/" color="#E34C26" language="HTML" */>}}
 ```
 
-{{< github name="yidajiabei.xyz" link="https://github.com/Gaotianhe/yidajiabei.xyz" description="Blog of mine with Hugo https://www.yidajiabei.xyz/" color="#E34C26" language="HTML" >}}
+{{< github name="yidajiabei.xyz" link="https://github.com/Gaotianhe/yidajiabei.xyz" description="Blog of mine with Hugo https://www.yidajiabei.xyz/" color="#E34C26" language="HTML">}}
 
 ## gallery
 
@@ -130,7 +130,7 @@ repository = '<svg xmlns="http://www.w3.org/2000/svg" class="icon" viewBox="0 0 
 ## notice
 
 {{<notice notice-warning>}}
-内容
+some
 {{</notice>}}
 
 ```html
@@ -246,10 +246,12 @@ print('hello world')
 {{< /quote */>}}
 ```
 
-
+<br>
 
 {{< quote-center >}}
-毕竟西湖六月中<br>风光不与四时同<br>接天莲叶无穷碧<br>映日荷花别样红{{< /quote-center >}}
+毕竟西湖六月中<br>风光不与四时同<br>接天莲叶无穷碧<br>映日荷花别样红
+
+{{< /quote-center >}}
 
 ```html
 {{</* quote-center >}}
@@ -267,6 +269,9 @@ print('hello world')
 {{</* bili aid="625811282" cid="197006223" */>}}
 # aid 和 cid 可以通过页面的源码获得(按 Ctrl+U 打开页面源码)
 ```
+
+## admonition
+
 
 
 ## myshortcode
