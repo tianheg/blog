@@ -1,5 +1,7 @@
 +++
-title = "关于" 
+title = "关于"
+description = "关于我"
+keywords = "关于我"
 +++
 
 我喜欢的音乐：
