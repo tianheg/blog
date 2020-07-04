@@ -1,9 +1,10 @@
-baseurl = "https://www.yidajiabei.xyz/zh"
+baseurl = "https://www.yidajiabei.xyz"
 title = "一大加贝"
 theme = ["hugo-notice","hugo-coder"]
-languagecode = "zh-cn"
-defaultcontentlanguage = "zh-cn"
 
+languagecode = "zh"
+defaultcontentlanguage = "zh"
+hasCJKLanguage = true
 enableRobotsTXT = true
 canonifyURLs = true
 
@@ -39,7 +40,7 @@ FootnoteReturnLinkContents = "↑"
     life = "/life/:slug/"
 
 [params]
-    author = "Tianhe Gao"
+    author = "一大加贝"
     info = "self 🐶 dev"
     description = "Self-management + IT technology = build my passive income"
     keywords = "life,dev,developer,Self-management,IT technology"
@@ -60,9 +61,8 @@ FootnoteReturnLinkContents = "↑"
     hidecredits = true
     hidecopyright = false
 
+    siteLogo = "images/me.png"
     series = true
-
-    rtl = false
 
     # Specify light/dark colorscheme
     # Supported values:
@@ -72,7 +72,7 @@ FootnoteReturnLinkContents = "↑"
     colorscheme = "auto"
 
     # Series see also post count
-    maxSeeAlsoItems = 5
+    maxSeeAlsoItems = 100
 
     math = true
     custom_css = ["/css/main.css"]
@@ -135,76 +135,214 @@ FootnoteReturnLinkContents = "↑"
     weight = 8
     url = "index.xml"
 
-[languages]
-    [languages.zh-cn]
-        languagename = "Chinese"
-        title = "一大加贝"
 
-        [languages.zh-cn.params]
-            author = "高天贺"
-            info = "self 🐶 dev"
-            description = "一个个人博客"
-            keywords = "自我管理、时间管理、GTD、写作、笔记管理、知识管理、财务管理、全栈开发、SEO"
-            # footercontent = "self/dev/money"
+[menu]
+    ## 菜单栏
+    [[menu.main]]
+        url = "/about/"
+        name = "关于"
+        weight = 1
+        pre = "internal"
+    [[menu.main]]
+        url = "https://www.yidajiabei.xyz/wiki/"
+        name = "维基"
+        weight = 2
+        pre = "internal"
+    [[menu.main]]
+        url = "/bm/"
+        name = "书影"
+        weight = 3
+        pre = "internal"
+    [[menu.main]]
+        url = "/life/"
+        name = "生活"
+        weight = 4
+        pre = "internal"
+    [[menu.main]]
+        url = "/tech/"
+        name = "技术"
+        weight = 5
+        pre = "internal"
+    [[menu.main]]
+        url = "/categories/"
+        name = "分类"
+        weight = 6
+        pre = "internal"
+    [[menu.main]]
+        url = "/posts/"
+        name = "归档"
+        weight = 7
+        pre = "internal"
+    [[menu.main]]
+        url = "/blogroll/"
+        name = "友链"
+        weight = 8
+        pre = "internal"
+    [[menu.main]]
+        weight = 10
+        identifier = "theme-switcher"
+    [[menu.main]]
+        weight = 11
+        identifier = "lang-switcher"
 
-        [languages.zh-cn.menu]
+##########################################
+# 自行添加的多语言站点配置
 
-            [[languages.zh-cn.menu.main]]
-                name = "关于"
-                weight = 1
-                url = "zh/about/"
-            [[languages.zh-cn.menu.main]]
-                name = "技术"
-                weight = 2
-                url  = "zh/tech/"
-            [[languages.zh-cn.menu.main]]
-                name = "生活"
-                weight = 3
-                url  = "zh/life/"
-            [[languages.zh-cn.menu.main]]
-                name = "归档"
-                weight = 4
-                url  = "zh/posts/"
-            [[languages.zh-cn.menu.main]]
-                name = "项目"
-                weight = 5
-                url  = "/project/"
-            [[languages.zh-cn.menu.main]]
-                name = "目标"
-                weight = 6
-                url  = "/goal/"
-            [[languages.zh-cn.menu.main]]
-                name = "分类"
-                weight = 7
-                url  = "zh/categories/"
+# 中文
+[languages.zh]
+    languageName = "Chinese"
+    contentDir = "content/zh"
+    weight = 1
+    title = "一大加贝"
+
+# 英文
+[languages.en]
+    languageName = "English"
+    contentDir = "content/en"
+    weight = 2
+    languageCode = "en-US"
+    hasCJKLanguage = true
+    title = "YIDAJIABEI"
+[languages.en.taxonomies]
+    category = "categories"
+    tech = "tech"
+    life = "life"
+
+[languages.en.menu]
+    [[languages.en.menu.main]]
+        url = "https://www.yidajiabei.xyz/"
+        name = "Home"
+        weight = 1
+        pre = "internal"
+    [[languages.en.menu.main]]
+        url = "https://www.yidajiabei.xyz/wiki/#/"
+        name = "Wiki"
+        weight = 2
+        pre = "internal"
+    [[languages.en.menu.main]]
+        url = "/en/life/"
+        name = "Life"
+        weight = 3
+        pre = "internal"
+    [[languages.en.menu.main]]
+        url = "/en/tech/"
+        name = "Tech"
+        weight = 4
+        pre = "internal"
+    [[languages.en.menu.main]]
+        url = "/en/categories/"
+        name = "Categories"
+        weight = 5
+        pre = "internal"
+    [[languages.en.menu.main]]
+        url = "/en/posts/"
+        name = "Posts"
+        weight = 6
+        pre = "internal"
+    [[languages.en.menu.main]]
+        url = "/en/about/"
+        name = "About"
+        weight = 7
+        pre = "internal"
+    [[languages.en.menu.main]]
+        weight = 8
+        identifier = "lang-switcher"
+
+        
+[languages.en.params]
+    author = "YIDAJIABEI"
+    info = "self 🐶 dev"
+    description = "Self-management + IT technology = build my passive income"
+    keywords = "life,dev,developer,Self-management,IT technology"
+    avatarurl = "images/me.png"
+    logoImg = "images/me.png"
+    header = "YIDAJIABEI.xyz"
+
+
+
+######################################
+# 分类方式
+
+categoryBy = "categories"
+# [languages]
     
-    [languages.en]
-        languagename = "English"
-        title = "YIDAJIABEI"
+#         weight = 1
+#         languagename = "Chinese"
+#         
 
-        [languages.en.menu]
+#         [languages.zh.params]
+#             author = "高天贺"
+#             info = "self 🐶 dev"
+#             description = "一个个人博客"
+#             keywords = "自我管理、时间管理、GTD、写作、笔记管理、知识管理、财务管理、全栈开发、SEO"
+#             # footercontent = "self/dev/money"
 
-            [[languages.en.menu.main]]
-                name = "About"
-                weight = 1
-                url = "en/about/"
-            [[languages.en.menu.main]]
-                name = "Tech"
-                weight = 2
-                url  = "en/tech/"
-            [[languages.en.menu.main]]
-                name = "Life"
-                weight = 3
-                url  = "en/life/"
-            [[languages.en.menu.main]]
-                name = "Posts"
-                weight = 4
-                url  = "en/posts/"
-            [[languages.en.menu.main]]
-                name = "Project"
-                weight = 5
-                url  = "/project/"
-            [[languages.en.menu.main]]
-                name = "Goal"
-                weight = 6
-                url  = "/goal/"
+#         [languages.zh.menu]
+
+#             [[languages.zh.menu.main]]
+#                 name = "关于"
+#                 weight = 1
+#                 url = "zh/about/"
+#             [[languages.zh.menu.main]]
+#                 name = "技术"
+#                 weight = 2
+#                 url  = "zh/tech/"
+#             [[languages.zh.menu.main]]
+#                 name = "生活"
+#                 weight = 3
+#                 url  = "zh/life/"
+#             [[languages.zh.menu.main]]
+#                 name = "归档"
+#                 weight = 4
+#                 url  = "zh/posts/"
+#             [[languages.zh.menu.main]]
+#                 name = "项目"
+#                 weight = 5
+#                 url  = "/project/"
+#             [[languages.zh.menu.main]]
+#                 name = "目标"
+#                 weight = 6
+#                 url  = "/goal/"
+#             [[languages.zh.menu.main]]
+#                 name = "分类"
+#                 weight = 7
+#                 url  = "zh/categories/"
+    
+    
+        # weight = 2
+        # languagename = "English"
+        # 
+
+        # [languages.en.params]
+        #     author = "Tianhe Gao"
+        #     info = "self 🐶 dev"
+        #     description = "a personal blog"
+        #     keywords = "self-management、time-management、GTD、writing、notes、knowledge、full-stack"
+        #     # footercontent = "self/dev/money"
+
+        # [languages.en.menu]
+
+        #     [[languages.en.menu.main]]
+        #         name = "About"
+        #         weight = 1
+        #         url = "en/about/"
+        #     [[languages.en.menu.main]]
+        #         name = "Tech"
+        #         weight = 2
+        #         url  = "en/tech/"
+        #     [[languages.en.menu.main]]
+        #         name = "Life"
+        #         weight = 3
+        #         url  = "en/life/"
+        #     [[languages.en.menu.main]]
+        #         name = "Posts"
+        #         weight = 4
+        #         url  = "en/posts/"
+        #     [[languages.en.menu.main]]
+        #         name = "Project"
+        #         weight = 5
+        #         url  = "/project/"
+        #     [[languages.en.menu.main]]
+        #         name = "Goal"
+        #         weight = 6
+        #         url  = "/goal/"
