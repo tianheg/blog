@@ -2,7 +2,7 @@ baseurl = "https://www.yidajiabei.xyz"
 title = "一大加贝"
 theme = ["hugo-notice","hugo-coder"]
 
-languagecode = "zh-CN"
+languagecode = "zh"
 defaultcontentlanguage = "zh"
 hasCJKLanguage = true
 enableRobotsTXT = true
@@ -55,6 +55,15 @@ FootnoteReturnLinkContents = "↑"
 
     favicon_32 = "images/f/favicon-32x32.png"
     favicon_16 = "images/f/favicon-16x16.png"
+
+    ######################################
+    # 文章分区范围
+
+    # 说明：分区的名字即站点的 content 目录下
+    #      的文件夹的名字。
+
+    # mainSections = ["zh","en"]
+
 
     # footercontent = "self/dev/money"
 
@@ -144,7 +153,7 @@ FootnoteReturnLinkContents = "↑"
         weight = 1
         pre = "internal"
     [[menu.main]]
-        url = "https://www.yidajiabei.xyz/wiki/"
+        url = "https://wiki.yidajiabei.xyz/"
         name = "维基"
         weight = 2
         pre = "internal"
@@ -154,14 +163,19 @@ FootnoteReturnLinkContents = "↑"
         weight = 3
         pre = "internal"
     [[menu.main]]
+        url = "/project/"
+        name = "项目"
+        weight = 4
+        pre = "internal"
+    [[menu.main]]
+        url = "/goal/"
+        name = "目标"
+        weight = 5
+        pre = "internal"
+    [[menu.main]]
         url = "/posts/"
         name = "归档"
         weight = 7
-        pre = "internal"
-    [[menu.main]]
-        url = "/blogroll/"
-        name = "友链"
-        weight = 8
         pre = "internal"
     [[menu.main]]
         weight = 11
