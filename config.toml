@@ -2,7 +2,7 @@ baseurl = "https://www.yidajiabei.xyz"
 title = "一大加贝"
 theme = ["hugo-notice","hugo-coder"]
 
-languagecode = "zh"
+languagecode = "zh-CN"
 defaultcontentlanguage = "zh"
 hasCJKLanguage = true
 enableRobotsTXT = true
@@ -34,10 +34,10 @@ FootnoteReturnLinkContents = "↑"
   life = "life"
 
 # URL 结构
-[permalinks]
-    categories = "/categories/:slug/"
-    tech = "/tech/:slug/"
-    life = "/life/:slug/"
+# [permalinks]
+#     categories = "/categories/:slug/"
+#     tech = "/tech/:slug/"
+#     life = "/life/:slug/"
 
 [params]
     author = "一大加贝"
@@ -62,7 +62,7 @@ FootnoteReturnLinkContents = "↑"
     hidecopyright = false
 
     siteLogo = "images/me.png"
-    series = true
+    # series = true
 
     # Specify light/dark colorscheme
     # Supported values:
@@ -72,7 +72,7 @@ FootnoteReturnLinkContents = "↑"
     colorscheme = "auto"
 
     # Series see also post count
-    maxSeeAlsoItems = 100
+    # maxSeeAlsoItems = 100
 
     math = true
     custom_css = ["/css/main.css"]
@@ -81,17 +81,17 @@ FootnoteReturnLinkContents = "↑"
     dateFormat = "2006-01-02"
 
     # AMP
-    amp = true
+    amp = false
     ampElements = ["amp-ad","amp-analytics"]
     themeColor = "#000000"
     adsensePublisher = "ca-pub-8163003938382682"
     googleAnalytics = "UA-162698097-1"
 
 # Comments on github issue
-#[params.utteranc]
-    # repo = "bmpi-dev/bmpi.dev"
-    # issue-term = "pathname"
-    # theme = "github-light"
+[params.utteranc]
+    repo = "yidajiabei/www.yidajiabei.xyz"
+    issue-term = "pathname"
+    theme = "github-light"
 
 # Social links
 [[params.social]]
@@ -154,21 +154,6 @@ FootnoteReturnLinkContents = "↑"
         weight = 3
         pre = "internal"
     [[menu.main]]
-        url = "/life/"
-        name = "生活"
-        weight = 4
-        pre = "internal"
-    [[menu.main]]
-        url = "/tech/"
-        name = "技术"
-        weight = 5
-        pre = "internal"
-    [[menu.main]]
-        url = "/categories/"
-        name = "分类"
-        weight = 6
-        pre = "internal"
-    [[menu.main]]
         url = "/posts/"
         name = "归档"
         weight = 7
@@ -178,9 +163,6 @@ FootnoteReturnLinkContents = "↑"
         name = "友链"
         weight = 8
         pre = "internal"
-    [[menu.main]]
-        weight = 10
-        identifier = "theme-switcher"
     [[menu.main]]
         weight = 11
         identifier = "lang-switcher"
@@ -210,8 +192,8 @@ FootnoteReturnLinkContents = "↑"
 
 [languages.en.menu]
     [[languages.en.menu.main]]
-        url = "https://www.yidajiabei.xyz/"
-        name = "Home"
+        url = "/about/"
+        name = "About"
         weight = 1
         pre = "internal"
     [[languages.en.menu.main]]
@@ -220,29 +202,9 @@ FootnoteReturnLinkContents = "↑"
         weight = 2
         pre = "internal"
     [[languages.en.menu.main]]
-        url = "/en/life/"
-        name = "Life"
-        weight = 3
-        pre = "internal"
-    [[languages.en.menu.main]]
-        url = "/en/tech/"
-        name = "Tech"
-        weight = 4
-        pre = "internal"
-    [[languages.en.menu.main]]
-        url = "/en/categories/"
-        name = "Categories"
-        weight = 5
-        pre = "internal"
-    [[languages.en.menu.main]]
-        url = "/en/posts/"
+        url = "/posts/"
         name = "Posts"
         weight = 6
-        pre = "internal"
-    [[languages.en.menu.main]]
-        url = "/en/about/"
-        name = "About"
-        weight = 7
         pre = "internal"
     [[languages.en.menu.main]]
         weight = 8
