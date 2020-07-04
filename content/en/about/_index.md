@@ -1,9 +1,7 @@
 +++
-title = "ABOUT" 
-share = false
-meta = false
-gitinfo = false
-displayCopyright = false
+title = "ABOUT"
+description = "About me"
+keywords = "about me"
 +++
 
 My favorite music:
