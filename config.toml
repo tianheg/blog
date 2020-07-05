@@ -137,7 +137,7 @@ FootnoteReturnLinkContents = "↑"
     name = "Newsletter"
     icon = "fas fa-envelope"
     weight = 7
-    url = "https://tinyletter.com/yidajiabei"
+    url = "mailto:burgessnasa2019@gmail.com"
 [[params.social]]
     name = "RSS"
     icon = "fas fa-rss"
@@ -175,10 +175,15 @@ FootnoteReturnLinkContents = "↑"
     [[menu.main]]
         url = "/posts/"
         name = "归档"
+        weight = 6
+        pre = "internal"
+    [[menu.main]]
+        url = "/feed/"
+        name = "订阅"
         weight = 7
         pre = "internal"
     [[menu.main]]
-        weight = 11
+        weight = 8
         identifier = "lang-switcher"
 
 ##########################################
@@ -218,10 +223,15 @@ FootnoteReturnLinkContents = "↑"
     [[languages.en.menu.main]]
         url = "/posts/"
         name = "Posts"
-        weight = 6
+        weight = 3
         pre = "internal"
     [[languages.en.menu.main]]
-        weight = 8
+        url = "/feed/"
+        name = "Feed"
+        weight = 4
+        pre = "internal"
+    [[languages.en.menu.main]]
+        weight = 5
         identifier = "lang-switcher"
 
         
