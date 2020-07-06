@@ -61,7 +61,7 @@ fatal: HttpRequestException encountered
 
 The "fatal: refusing to merge unrelated histories" Git error occurs when two *unrelated* projects are merged (i.e., projects that are not aware of each other’s existence and have mismatching commit histories).
 
-![](/images/refusing-to-merge.png "understandable image")
+![](https://static.yidajiabei.xyz/img/refusing-to-merge.png)
 
 Consider the following two cases that throw this error:
 
