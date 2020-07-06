@@ -45,6 +45,8 @@ console.log('Server running at http://127.0.0.1:8080/');
 
 注：该`server.js`文件以括号（`{}`、`()`）进行分块，直观上的美观与否并不影响程序运行（已测试）。
 
+{{< ad_embed_post >}}
+
 使用node命令执行以上代码，结果如下：
 
 ```
