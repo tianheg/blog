@@ -1,27 +1,27 @@
 {{ define "title" }}
   {{ .Title }}
   {{ if eq .Site.Language.Lang "zh" }}
-    分类
+    标签
   {{ else }}
-    Category
+    Tag
   {{ end }}
    ·
   {{ .Site.Title }}
 {{ end }}
 {{ define "description" }}
   {{ if eq .Site.Language.Lang "zh" }}
-    {{ .Title }}分类文章
+    和{{ .Title }}相关的文章
   {{ else }}
-    {{ .Title }} category articles
+    {{ .Title }} related articles
   {{ end }}
 {{ end }}
 {{ define "content" }}
   <section class="container list">
-    <h1 class="title">{{- .Title -}}
+    <h1 class="title">{{ .Title }}
       {{ if eq .Site.Language.Lang "zh" }}
-        分类
+        标签
       {{ else }}
-        Category
+        Tag
       {{ end }}
     </h1>
     <ul>
