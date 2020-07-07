@@ -1,8 +1,7 @@
 [build]
-  command = "hugo"
+  command = "hugo --gc && node _tools/newpostcheck.js"
   publish = "public"
 
-[build.environment]
+[context.production.environment]
   HUGO_VERSION = "0.73.0"
-  HUGO_ENV = "production"
-  HUGO_ENABLEGITINFO = "true"
+
