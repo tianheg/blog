@@ -3,6 +3,7 @@ title: Learn XML
 date: 2020-06-10T08:48:56+08:00
 categories: ["Tech"]
 tech: ["XML"]
+tags: ["xml","测试"]
 slug: learn xml
 ---
 

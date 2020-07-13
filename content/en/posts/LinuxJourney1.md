@@ -3,6 +3,7 @@ title: LinuxJourney - Getting Started
 date: 2020-06-07T08:30:41+08:00
 categories: ["Tech"]
 tech: ["Linux"]
+tags: ["Linux"]
 slug: LinuxJourney getting started
 ---
 
