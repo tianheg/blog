@@ -3,6 +3,7 @@ title: Effective learning:Twenty Rules of formulating knowledge
 date: 2020-06-12T08:35:07+08:00
 categories: ["Tech"]
 tech: ["Program"]
+tags: ["Learn"]
 slug: Twenty rules of formulating knowledge
 ---
 
