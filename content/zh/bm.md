@@ -1,6 +1,5 @@
 +++
 title = "📚🎥书影"
-
 +++
 
 # 书
@@ -9,7 +8,7 @@ title = "📚🎥书影"
 
 ---
 
-<span style="text-decoration: underline;"><span style="color: #ff0000;">在读：</span></span>
+<span style="text-decoration: underline;"><span >在读：</span></span>
 
 / 《一九八四》 英 乔治 · 奥威尔 著 | 傅霞 译 2020.06.18~？？
 
@@ -216,3 +215,5 @@ title = "📚🎥书影"
 <span style="text-decoration: underline; color: #ff0000;">看过：</span>
 
 √ 《黑水(Dark Waters)》【2019】 2020.06.25
+
+√ 《夏日大作战(サマーウォーズ)》【2009】 2020.07.14

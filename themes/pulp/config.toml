@@ -1,6 +1,6 @@
 baseURL = "https://www.yidajiabei.xyz"
 title = "一大加贝"
-theme = "hugo-coder" # meme 
+theme = "pulp" # meme hugo-coder 
 
 languagecode = "zh"
 defaultcontentlanguage = "zh"
@@ -23,76 +23,19 @@ FootnoteReturnLinkContents = "↑"
     unsafe= true
 
 [outputs]
-  page     = ["HTML", "AMP"]
-  home     = ["HTML", "RSS"]
-  section  = ["HTML"]
-  taxonomyTerm = ["HTML"]
-  taxonomy = ["HTML"]
+    section = ["JSON", "HTML"]
+    taxonomy = ["JSON", "HTML"]
 
-[taxonomies]
-  category = "categories"
-  tech = "tech"
-  life = "life"
-  tag = "tags"
-
-# URL 结构
-# [permalinks]
-#     categories = "/categories/:slug/"
-#     tech = "/tech/:slug/"
-#     life = "/life/:slug/"
-#     tags = "/tags/:slug/"
 
 [params]
     author = "一大加贝"
     info = "self 🐶 dev"
     description = "Self-management + IT technology = build myself"
     keywords = "life,dev,developer,Self-management,IT technology"
-    avatarurl = "images/me.png"
-    logoImg = "images/me.png"
-    header = "YIDAJIABEI.xyz"
-    disable_comments = false
-    twitter = "yidajiabei"
-    github = "Gaotianhe"
-    telegram = "yidajiabei"
-    zhihu = "yidajiabei"
+    avatar = "images/me.png"
 
-    favicon_32 = "images/f/favicon-32x32.png"
-    favicon_16 = "images/f/favicon-16x16.png"
-    
-    
-    ######################################
-    # 仅在生产环境下渲染
-
-    enableGoogleTagManagerWebPushr = true
-
-
-    ######################################
-    # 文章分区范围
-
-    # 说明：分区的名字即站点的 content 目录下
-    #      的文件夹的名字。
-
-    # mainSections = ["zh","en"]
-
-
-    # footercontent = "self/dev/money"
-
-    hidecredits = true
-    hidecopyright = false
-
-    siteLogo = "images/me.png"
-    # series = true
-
-    # Specify light/dark colorscheme
-    # Supported values:
-    # "auto" (use preference set by browser)
-    # "dark" (dark background, light foreground)
-    # "light" (light background, dark foreground) (default)
-    colorscheme = "auto"
-
-    # Series see also post count
-    # maxSeeAlsoItems = 100
-
+    favicon = "images/f/favicon-32x32.png"
+    publicationYear = "2018"
     math = true
     custom_css = ["/css/main.css"]
     custom_js = ["/js/lazysizes.min.js"]
