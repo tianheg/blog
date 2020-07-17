@@ -5,13 +5,12 @@ keywords = "工具"
 outputs = "html"
 +++
 
-## Inbox
+## 收纳箱
+
+[Vs Code](https://code.visualstudio.com/)
 
 [Notion](https://www.notion.so)
+
 [TiddlyWiki](https://tiddlywiki.com/)
 
-## 微信Markdown排版工具
-
-| | |
-| -- | -- |
-| 工具链接 | [微信Markdown排版工具](https://mdnice.com/) |
+[微信Markdown排版工具](https://mdnice.com/)
