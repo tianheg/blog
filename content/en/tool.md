@@ -5,10 +5,6 @@ keywords = "tool"
 outputs = "html"
 +++
 
-## My GTD Tool
+## VS Code
 
-| | |
-| -- | -- |
-| Post | [My GTD Tool](/en/self/gtd-tools-i-used/) |
-| Mail Notify Starter | [todo_starter](https://github.com/bmpi-dev/todo_starter) |
-| VSCode Extension | [Todo++](https://marketplace.visualstudio.com/items?itemName=mdw.vscode-todo-plus-plus) |
+## TiddlyWiki
