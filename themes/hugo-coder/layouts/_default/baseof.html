@@ -17,27 +17,29 @@
     <div class="content">
       {{ block "content" . }}{{ end }}
     </div>
-
+    
+    {{ partial "components/back-to-top.html" . }}
     {{ partial "footer.html" . }}
     
   </main>
+
   <div>
-  {{ if and .Site.Params.enableGoogleTagManagerWebPushr (eq hugo.Environment "production") -}}
-        <!-- Global site tag (gtag.js) - Google Analytics -->
-  <script async src="https://www.googletagmanager.com/gtag/js?id=UA-162698097-1"></script>
-  <script>
-    window.dataLayer = window.dataLayer || [];
-    function gtag(){dataLayer.push(arguments);}
-    gtag('js', new Date());
+      {{ if and .Site.Params.enableGoogleTagManagerWebPushr (eq hugo.Environment "production") -}}
+            <!-- Global site tag (gtag.js) - Google Analytics -->
+      <script async src="https://www.googletagmanager.com/gtag/js?id=UA-162698097-1"></script>
+      <script>
+        window.dataLayer = window.dataLayer || [];
+        function gtag(){dataLayer.push(arguments);}
+        gtag('js', new Date());
 
-    gtag('config', 'UA-162698097-1');
-  </script>
-  <!-- Global site tag (gtag.js) - Google Analytics -->
+        gtag('config', 'UA-162698097-1');
+      </script>
+      <!-- Global site tag (gtag.js) - Google Analytics -->
 
-  <!-- start webpushr code --> 
-  <script>(function(w,d, s, id) {if(typeof(w.webpushr)!=='undefined') return;w.webpushr=w.webpushr||function(){(w.webpushr.q=w.webpushr.q||[]).push(arguments)};var js, fjs = d.getElementsByTagName(s)[0];js = d.createElement(s); js.id = id;js.src = "https://cdn.webpushr.com/app.min.js";fjs.parentNode.appendChild(js);}(window,document, 'script', 'webpushr-jssdk'));webpushr('setup',{'key':'BDagSJSZfeV_NlwQlAp_fxpx-bUUyj2koZDanYT23FHTtPjc88AU0_pcg8IQBt5SMwgIoNO908wkTq9LdJqjF-U' });</script>
-  <!-- end webpushr code -->
-  {{- end }}
+      <!-- start webpushr code --> 
+      <script>(function(w,d, s, id) {if(typeof(w.webpushr)!=='undefined') return;w.webpushr=w.webpushr||function(){(w.webpushr.q=w.webpushr.q||[]).push(arguments)};var js, fjs = d.getElementsByTagName(s)[0];js = d.createElement(s); js.id = id;js.src = "https://cdn.webpushr.com/app.min.js";fjs.parentNode.appendChild(js);}(window,document, 'script', 'webpushr-jssdk'));webpushr('setup',{'key':'BDagSJSZfeV_NlwQlAp_fxpx-bUUyj2koZDanYT23FHTtPjc88AU0_pcg8IQBt5SMwgIoNO908wkTq9LdJqjF-U' });</script>
+      <!-- end webpushr code -->
+      {{- end }}
   </div>
   
   

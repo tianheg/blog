@@ -77,6 +77,22 @@ FootnoteReturnLinkContents = "↑"
     # Series see also post count
     # maxSeeAlsoItems = 100
 
+    
+    ######################################
+    # 返回顶部按钮
+
+    # 是否开启
+    enableBackToTop = true
+
+    # 是否开启自动隐藏
+    enableBackToTopAutoHide = true
+
+    # 是否在首页显示
+    displayBackToTopInHome = true
+
+    # 按钮图标
+    backToTopIcon = "arrow-up"
+
     math = true
     custom_css = ["/css/main.css"]
     custom_js = ["/js/lazysizes.min.js"]
@@ -181,7 +197,12 @@ FootnoteReturnLinkContents = "↑"
         weight = 9
         pre = "internal"
     [[menu.main]]
+        url = "/link/"
+        name = "友链"
         weight = 10
+        pre = "internal"
+    [[menu.main]]
+        weight = 11
         identifier = "lang-switcher"
 
 ##########################################
@@ -239,7 +260,12 @@ FootnoteReturnLinkContents = "↑"
         weight = 6
         pre = "internal"
     [[languages.en.menu.main]]
+        url = "/link/"
+        name = "Link"
         weight = 7
+        pre = "internal"
+    [[languages.en.menu.main]]
+        weight = 8
         identifier = "lang-switcher"
 
         
@@ -247,3 +273,5 @@ FootnoteReturnLinkContents = "↑"
     author = "YIDAJIABEI"
     description = "life + tech = me"
     keywords = "life, tech"
+
+
