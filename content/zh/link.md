@@ -15,9 +15,9 @@ description = "感谢你的关注与支持 ~"
 
 |                                            |                            |
 | ------------------------------------------ | -------------------------- |
-| [构建我的被动收入](https://www.bmpi.dev/)  | 网站优化，个人管理         |
+| [构建我的被动收入](https://www.bmpi.dev/) | 网站优化，个人管理 |
 | [酷 壳 – CoolShell](https://coolshell.cn/) | 享受编程和技术所带来的快乐 |
-|                                            |                            |
+| [Corkine's BlOG](https://blog.mazhangjing.com/) | 知行合一 |
 
 ## 博客库
 
