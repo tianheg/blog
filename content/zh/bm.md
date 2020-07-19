@@ -10,7 +10,7 @@ title = "📚🎥书影"
 
 <span style="text-decoration: underline;"><span >在读：</span></span>
 
-/ 《一九八四》 英 乔治 · 奥威尔 著 | 傅霞 译 2020.06.18~2020.07.18
+/ [《程序员修炼之道》](https://www.yidajiabei.xyz/posts/read-the-pragmatic-programmer2/) 2020.07.14
 
 ---
 
@@ -29,6 +29,10 @@ title = "📚🎥书影"
 ---
 
 <span style="text-decoration: underline; color: #ff0000;">读过：</span>
+
+√ 《天年》 何夕 2020.07.19~2020.07.19
+
+[√ 《一九八四》](https://www.yidajiabei.xyz/posts/read-yijiubasi/) 英 乔治 · 奥威尔 著 | 傅霞 译 2020.06.18~2020.07.18
 
 √ 《三体全集》 刘慈欣 ？？~2020.05.23
 
