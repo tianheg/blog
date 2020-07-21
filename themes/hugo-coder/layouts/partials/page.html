@@ -1,3 +1,6 @@
+{{- $Deliver := . -}}
+{{- $raw := .Content -}}
+{{- partial "utils/markdownify.html" (dict "Deliver" . "raw" $raw "isContent" true) -}}
 <section class="container page">
   <article>
     <header>
