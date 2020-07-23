@@ -44,10 +44,16 @@ FootnoteReturnLinkContents = "↑"
 #     life = "/life/:slug/"
 #     tags = "/tags/:slug/"
 
+
+##########################################
+# 主题配置
+
 [params]
     author = "一大加贝"
+    info = "一名前端开发者"
     description = "学习技术，热爱生活"
     keywords = "life, tech"
+    avatarurl = "images/logo.png"
     disable_comments = true
     twitter = "yidajiabei"
     github = "Gaotianhe"
@@ -101,6 +107,35 @@ FootnoteReturnLinkContents = "↑"
 
 
     math = true
+    ######################################
+    # KaTeX 公式支持（包括化学方程式）
+
+    # 是否开启（全局设置）
+    enableKaTeX = true
+    # 说明：文章的 Front Matter 中的 `katex`
+    #      的优先级高于此处
+
+
+    ######################################
+    # MathJax 公式支持（包括化学方程式）
+
+    # 是否开启（全局设置）
+    enableMathJax = true
+    # 说明：文章的 Front Matter 中的 `mathjax`
+    #      的优先级高于此处
+
+    # 是否禁用 MathJax 的右键菜单
+    disableMathJaxMenu = false
+
+
+    ######################################
+    # Mermaid (https://github.com/mermaid-js/mermaid)
+
+    # 是否开启（全局设置）
+    enableMermaid = true
+    # 说明：文章的 Front Matter 中的 `mermaid`
+    #      的优先级高于此处
+
     custom_css = ["/css/main.css"]
     custom_js = ["/js/lazysizes.min.js"]
 
@@ -278,6 +313,7 @@ FootnoteReturnLinkContents = "↑"
         
 [languages.en.params]
     author = "YIDAJIABEI"
+    info = "A Frontend Developer"
     description = "life + tech = me"
     keywords = "life, tech"
 
