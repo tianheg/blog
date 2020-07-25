@@ -19,7 +19,13 @@
     {{ with .Site.Params.footercontent | safeHTML }}
       <p>{{.}}</p>
     {{ end }}
-    <a href="http://www.beian.miit.gov.cn/" target="_blank">皖ICP备20002237号-1</a><br>
+
+    {{ if eq .Site.Language.Lang "zh" }}
+    <a href="http://www.beian.miit.gov.cn/" target="_blank">皖ICP备20002237号-1</a>&nbsp;&nbsp;
+    {{ else }}
+    
+    {{ end }}
+
     {{ if not .Site.Params.hideCopyright }} © 2018 - {{ now.Format "2006" }}{{ end }}
     
     {{ if not .Site.Params.hideCredits }}
