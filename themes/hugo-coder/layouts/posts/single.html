@@ -32,16 +32,6 @@
         {{ end }}
         {{ .Content }}
       </div>
-
-
-      <div style="text-align: center;color: darkgray;">
-        {{ if eq .Site.Language.Lang "zh" }}
-        <a href= {{ relLangURL "uncopyright" }} style="color: darkgray;">无版权</a>
-        {{ else }}
-        <a href= {{ relLangURL "uncopyright" }} style="color: darkgray;">Uncopyright</a>
-        {{ end }}
-      </div>
-      
       <footer>
         {{ partial "posts/commento.html" . }}
         
