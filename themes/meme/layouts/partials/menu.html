@@ -18,7 +18,7 @@
                 {{ if and $.Site.IsMultiLingual $.Site.Params.enableLangToggle }}
                     {{ if eq $.Site.Params.headerLayout "flex" }}
                         <li class="menu-item">
-                            {{ partial "components/multilingual.html" $ctx }}
+                            <a href="{{ .RelPermalink }}" >{{ .Language.LanguageName }}</a>
                         </li>
                     {{ end }}
                 {{ end }}
