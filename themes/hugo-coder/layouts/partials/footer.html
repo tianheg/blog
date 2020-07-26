@@ -1,40 +1,21 @@
 <footer class="footer">
-  <div class="footer-taxonomy">
-    <a href= {{ relLangURL "life" }} style="color: #349fa3;">Life</a>
-    👈
-    <a href= {{ relLangURL "tags" }} style="color: #B36D61;">Tags</a>
-    👉
-    <a href= {{ relLangURL "tech" }} style="color: #519A73;">Tech</a>
-  </div>
-  <section class="container">
-    {{ len (where .Site.RegularPages "Section" "posts") }}{{ i18n "posts" }}
-    |
-    {{$scratch := newScratch}}
-    {{ range (where .Site.Pages "Kind" "page" )}}
-    {{$scratch.Add "total" .WordCount}}
-    {{ end }}
-    {{ $scratch.Get "total" }}
-    {{ i18n "WordCount" }}
-    <br>
-    {{ with .Site.Params.footercontent | safeHTML }}
-      <p>{{.}}</p>
-    {{ end }}
-
+  <div class="footer-taxonomy" style="text-align: center;color: darkgray;">
     {{ if eq .Site.Language.Lang "zh" }}
-    <a href="http://www.beian.miit.gov.cn/" target="_blank">皖ICP备20002237号-1</a>&nbsp;&nbsp;
+    <a href= {{ relLangURL "life" }} style="text-align: center;color: darkgray;">生活</a>
+    
+    <a href= {{ relLangURL "tags" }} style="text-align: center;color: darkgray;">标签</a>
+    
+    <a href= {{ relLangURL "tech" }} style="text-align: center;color: darkgray;">技术</a>
+    <br><br>
+    <a href= {{ relLangURL "uncopyright" }} style="color: darkgray;">无版权</a>
     {{ else }}
+    <a href= {{ relLangURL "life" }} style="text-align: center;color: darkgray;">Life</a>
     
-    {{ end }}
-
-    {{ if not .Site.Params.hideCopyright }} © 2018 - {{ now.Format "2006" }}{{ end }}
+    <a href= {{ relLangURL "tags" }} style="text-align: center;color: darkgray;">Tags</a>
     
-    {{ if not .Site.Params.hideCredits }}
-      {{ if not .Site.Params.hideCopyright }} · {{ end }}
-      {{ i18n "powered_by" }} <a href="https://gohugo.io/">Hugo</a> & <a href="https://github.com/luizdepra/hugo-coder/">Coder</a>.
+    <a href= {{ relLangURL "tech" }} style="text-align: center;color: darkgray;">Tech</a>
+    <br><br>
+    <a href= {{ relLangURL "uncopyright" }} style="color: darkgray;">Uncopyright</a>
     {{ end }}
-    {{ if .Site.Params.commit }}
-      {{ if or (not .Site.Params.hideCredits) (not .Site.Params.hideCopyright) }} · {{ end }}
-      [<a href="{{ .Site.Params.commit }}{{ getenv "GIT_COMMIT_SHA" }}">{{ getenv "GIT_COMMIT_SHA_SHORT" }}</a>]
-    {{ end }}
-  </section>
+  </div>
 </footer>
