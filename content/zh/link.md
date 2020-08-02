@@ -23,7 +23,7 @@ description = "感谢你的关注与支持 ~"
 
 以下资料来源于：
 
-<a href="https://github.com/Gaotianhe/chinese-independent-blogs">
+<a href="https://github.com/Gaotianhe/chinese-independent-blogs" target="_blank">
   <img align="center" src="https://github-readme-stats-yidajiabei.vercel.app/api/pin/?username=Gaotianhe&repo=chinese-independent-blogs" />
 </a>
 
