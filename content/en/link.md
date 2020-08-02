@@ -18,7 +18,7 @@ outputs = "html"
 
 The following information comes from:
 
-<a href="https://github.com/Gaotianhe/english-blogs">
+<a href="https://github.com/Gaotianhe/english-blogs" target="_blank">
   <img align="center" src="https://github-readme-stats-yidajiabei.vercel.app/api/pin/?username=Gaotianhe&repo=english-blogs" />
 </a>
 
