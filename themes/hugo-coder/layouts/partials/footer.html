@@ -5,5 +5,11 @@
     {{ else }}
     This site's blog posts use <a href="https://creativecommons.org/licenses/by-nc/4.0" target="_blank" style="color: darkgray;"> CC BY-NC 4.0 </a> for permission
     {{ end }}
+    <br>
+    {{ if eq .Site.Language.Lang "zh" }}
+    <a href="http://www.beian.miit.gov.cn/" target="_blank" style="color: darkgray;">皖ICP备20002237号-1</a>&nbsp;&nbsp;
+    {{ else }}
+    {{ end }}
   </div>
+  
 </footer>
