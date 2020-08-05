@@ -96,5 +96,6 @@
     {{ $tag_sass := resources.Get "scss/tagcloud.scss" }}
     {{ $tag_style := $tag_sass | toCSS }}
     <link rel="stylesheet" href="{{ $tag_style.RelPermalink }}" media="screen" />
-  
+
+    <link href="/css/all.css" rel="stylesheet"> <!--load all styles -->
 </head>
