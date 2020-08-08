@@ -10,17 +10,17 @@
 {{ $csClass = "colorscheme-auto" }}
 {{ end }}
 
-<body>
+<body class="cn">
   <main class="wrapper">
     {{ partial "header.html" . }}
 
     <div class="content">
       {{ block "content" . }}{{ end }}
     </div>
-    
+
     {{ partial "components/back-to-top.html" . }}
     {{ partial "footer.html" . }}
-    
+
   </main>
 </body>
 
