@@ -4,10 +4,28 @@
 {{ define "content" }}
   <section class="container list">
     <h1 class="title"> {{ title (i18n (lower .Title)) | default .Title }} </h1>
-    <ul>
+    <!-- <ul>
       {{- range .Paginator.Pages -}}
         {{- .Render "li" -}}
       {{- end -}}
+    </ul> -->
+    {{ $prev := 3000}}
+    {{range .Site.RegularPages}}
+    {{if .Date}}
+    {{if gt $prev (.Date.Format "2006")}}
+    {{if ne $prev 3000}}
+    {{ end }}
+
+    <h2>{{ .Date.Format "2006" }}</h2>
+    <ul>
+      {{ end }}
+      <ul>
+        <li>{{.Date.Format "2006-01-02"}}</li>
+        <li><a href="{{ .Permalink }}">{{ .Title }}</a></li>
+      </ul>
+      {{ $prev = .Date.Format "2006"}}
+      {{end}}
+      {{end}}
     </ul>
 
     {{ partial "pagination.html" . }}
