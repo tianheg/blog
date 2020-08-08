@@ -14,7 +14,6 @@ body {
   background-color: $bg-color; //#efefef or $bg-color
 	font-family: $text-font-family;
 	font-size: 18px;
-	font-weight: 300;
   line-height: 1.8em;
   @media only screen and (max-width : 768px) {
     font-size: 16px;
@@ -23,12 +22,12 @@ body {
 }
 
 a {
-  font-weight: 300;
-  color: $link-color;
+	font-weight: 300;
+	color: $link-color;
   text-decoration: none;
   &:focus,
   &:hover {
-    text-decoration: underline;
+    text-decoration: none;
   }
 }
 
@@ -105,7 +104,7 @@ b, strong {
 pre {
   display: block;
   font-family: $code-font-family;
-  font-size: 1.6rem;
+  font-size: .95em;
   font-weight: 400;
   line-height: 2.6rem;
   margin: 2.0rem 0 2.0rem 0;
@@ -120,7 +119,7 @@ pre {
 
 code {
   font-family: $code-font-family;
-  font-size: 1.6rem;
+  font-size: .95em;
   font-weight: 400;
   background-color: $alt-bg-color;
   color: $fg-color;
@@ -128,13 +127,19 @@ code {
 }
 
 blockquote {
-  border-left: 2px solid $alt-bg-color;
-  padding-left: 2.0rem;
-  line-height: 2.2rem;
-  font-weight: 400;
-  font-style: normal;
+	margin: 1em 0;
+  border-left: 3px solid $alt-bg-color;
+  padding: 0 2em;
+	font-family: 'Palatino Linotype', 'Book Antiqua', Palatino, 'STKaiti', 'KaiTi', '楷体', 'SimKai', 'DFKai-SB', 'NSimSun', serif;
 }
-
+.cn {
+	blockquote {
+		margin: 1em 0;
+	  border-left: 3px solid $alt-bg-color;
+	  padding: 0 2em;
+		font-family: 'Palatino Linotype', 'Book Antiqua', Palatino, 'STKaiti', 'KaiTi', '楷体', 'SimKai', 'DFKai-SB', 'NSimSun', serif;
+	}
+}
 th, td {
   padding: 1.6rem;
 }
@@ -203,14 +208,7 @@ img {
   font-weight: 900;
 }
 
-.footer .container {
-  color: #666666;
-  font-size: small;
-  @media only screen and (max-width : 768px) {
-    font-size: 16px;
-    line-height: 1.6em;
-  }
-}
+
 
 // hr {
 //   border: 0.5px LightGrey solid;
