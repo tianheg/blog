@@ -6,6 +6,8 @@ tech: ["Git"]
 slug: Git for multiple GitHub accounts
 ---
 
+重要参考：[使用 SSH 连接到 GitHub（多帐号）](https://io-oi.me/tech/ssh-with-multiple-github-accounts/)
+
 ```bash
 solve the hexo deploy problem:
 
