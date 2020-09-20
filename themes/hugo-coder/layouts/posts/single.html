@@ -32,21 +32,9 @@
         {{ end }}
         {{ .Content }}
       </div>
-      <div style="text-align: center;color: darkgray;">
-        {{ if eq .Site.Language.Lang "zh" }}
-        打开微信扫一扫或者输入“代码者”即可订阅博客
-        <img src="/images/WeChat-public-account-QR-code.png">
-        {{ else }}
-        Open WeChat and scan or enter 'yidajiabei00' to subscribe to the blog
-        <img src="/images/WeChat-public-account-QR-code.png">
-        {{ end }}
-      </div>
 
       <footer>
         {{ partial "posts/utteranc.html" . }}
-        <br>
-        <hr>
-        <br>
       </footer>
     </article>
 
