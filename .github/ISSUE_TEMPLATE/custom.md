@@ -1,10 +1,12 @@
 ---
-name: Custom issue template
-about: Describe this issue template's purpose here.
-title: ''
-labels: ''
-assignees: ''
-
+title: "{{ replace .BaseFileName "-" " " | title }}"
+date: {{ .Date }}
+categories: [""]
+life: [""]
+tech: [""]
+description: ""
+tags: [""]
+keywords: [""]
+slug: 
 ---
-
 
