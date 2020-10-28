@@ -1,5 +1,5 @@
 ---
-name: "Create A new Post :thought_balloon:"
+name: "Create A new Post 📝"
 about: 'new post speedly'
 title: ''
 labels: ''
