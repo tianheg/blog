@@ -7,7 +7,7 @@ assignees: ''
 ---
 
 
----
++++
 title: "{{ replace .BaseFileName "-" " " | title }}"
 date: {{ .Date }}
 categories: [""]
@@ -17,5 +17,4 @@ description: ""
 tags: [""]
 keywords: [""]
 slug: 
----
-
++++
