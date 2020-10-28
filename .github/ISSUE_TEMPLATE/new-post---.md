@@ -1,5 +1,5 @@
 ---
-name: "Create A new Post \\0x0001F4AD"
+name: "Create A new Post :thought_balloon:"
 about: 'new post speedly'
 title: ''
 labels: ''
@@ -8,8 +8,8 @@ assignees: ''
 
 
 +++
-title: "{{ replace .BaseFileName "-" " " | title }}"
-date: {{ .Date }}
+title: ""
+date: 2020-00-00T00:00:00+08:00
 categories: [""]
 life: [""]
 tech: [""]
