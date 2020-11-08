@@ -4,6 +4,8 @@ description = "About me"
 keywords = "about me"
 +++
 
+> Your burden will become a gift, and your suffering will light your way
+
 ## Person I want to be
 
 - 💻🛠➡️😴💰
