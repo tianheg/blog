@@ -2,7 +2,7 @@
 title = "友情链接"
 description = "感谢你的关注与支持 ~"
 +++
-<!-- markdownlint-disable MD043 -->
+
 ## 朋友们的博客
 
 |                                  |                      |
