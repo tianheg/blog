@@ -3,7 +3,7 @@ title = "关于"
 description = "关于我"
 keywords = "关于我"
 +++
-<!-- markdownlint-disable MD043 -->
+
 > 你的负担将变成了礼物，你受的苦将照亮你的路
 
 ## 我要成为什么样的人
