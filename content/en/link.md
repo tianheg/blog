@@ -4,7 +4,7 @@ description = "Friend Links"
 keywords = "Friend Links"
 outputs = "html"
 +++
-
+<!-- markdownlint-disable MD043 -->
 ## Blogs I follow
 
 |                                                |                         |
