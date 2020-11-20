@@ -5,7 +5,7 @@ keywords = "about me"
 +++
 
 > Your burden will become a gift, and your suffering will light your way
-<!-- markdownlint-disable MD043 -->
+
 ## Person I want to be
 
 - 💻🛠➡️😴💰
