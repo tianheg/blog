@@ -10,6 +10,7 @@ description = "感谢你的关注与支持 ~"
  [reuixiy](https://io-oi.me/)     | Viva La Vida
  [荷戟独彷徨](https://guanqr.com) | The Sound of Silence
  [ChrAlpha's Blog](https://blog.ichr.me) | 你必须拼尽全力，才能显得毫不费力
+ [苏卡卡的有底洞](https://blog.skk.moe/) | 童话只美在真实却从不续写
 
 ## 我关注的博客
 
