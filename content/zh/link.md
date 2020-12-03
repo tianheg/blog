@@ -5,10 +5,11 @@ description = "感谢你的关注与支持 ~"
 
 ## 朋友们的博客
 
-|                                  |                      |
-| -------------------------------- | -------------------- |
-| [reuixiy](https://io-oi.me/)     | Viva La Vida         |
-| [荷戟独彷徨](https://guanqr.com) | The Sound of Silence |
+|||
+|---|---|
+ [reuixiy](https://io-oi.me/)     | Viva La Vida
+ [荷戟独彷徨](https://guanqr.com) | The Sound of Silence
+ [ChrAlpha's Blog](https://blog.ichr.me) | 你必须拼尽全力，才能显得毫不费力
 
 ## 我关注的博客
 
