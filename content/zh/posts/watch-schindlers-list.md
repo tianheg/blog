@@ -6,7 +6,7 @@ life: ["电影"]
 description: "记录看过《辛德勒的名单》的所思所想"
 tags: ["二战"]
 keywords: ["二战"]
-slug: watch schindlers-list
+slug: watch-schindlers-list
 ---
 
 辛德勒是个好人。
