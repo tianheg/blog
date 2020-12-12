@@ -7,5 +7,4 @@ tech: [""]
 description: ""
 tags: [""]
 keywords: [""]
-slug: 
 ---
