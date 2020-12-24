@@ -3,8 +3,6 @@ title = "友情链接"
 description = "感谢你的关注与支持 ~"
 +++
 
-[申请友链](https://github.com/tianheg/friends)
-
 ## 朋友们的博客
 
 |||
