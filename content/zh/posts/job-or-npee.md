@@ -29,6 +29,8 @@ draft: true
 - 不要轻易妥协
 - 考虑家庭情况
 
+可以读 online master。
+
 ## 参考资料
 
 - [2022考研：考研时间安排表](https://zhuanlan.zhihu.com/p/87584642)
