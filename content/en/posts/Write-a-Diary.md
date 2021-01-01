@@ -1,9 +1,7 @@
 ---
 title: Write a Diary
 date: 2020-02-22T21:03:54+08:00
-categories: ["Life"]
 tags: ["Diary"]
-life: ["Essay"]
 ---
 
 Let me tell you. It is my first diary, I'll write my life with English.
