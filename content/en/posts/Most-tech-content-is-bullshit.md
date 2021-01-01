@@ -1,8 +1,6 @@
 ---
 title: Most tech content is bullshit
 date: 2020-06-10T21:40:35+08:00
-categories: ["Tech"]
-tech: ["HackerNews"]
 tags: ["HackerNews"]
 slug: Most tech content is bullshit
 ---

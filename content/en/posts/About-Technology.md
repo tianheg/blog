@@ -1,8 +1,6 @@
 ---
 title: About Technology
 date: 2020-02-26T22:23:08+08:00
-categories: ["Life"]
-
 tags: ["Tech","Study"]
 keywords: ["Tech","Study"]
 description: "This passage is talking about tech"
