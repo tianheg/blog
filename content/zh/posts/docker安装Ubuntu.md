@@ -1,8 +1,7 @@
 ---
 title: Docker 安装 Ubuntu
 date: 2020-05-10T10:19:26+08:00
-categories: ["技术"]
-tech: ["Docker"]
+tags: ["Docker"]
 slug: docker install ubuntu
 ---
 
@@ -94,4 +93,3 @@ D:\A\
 λ ls
 LICENSE  LICENSE-APACHE  LICENSE-MIT  README.md  install.sh  ipfs.exe  ubuntu_test1.tar
 ```
-
