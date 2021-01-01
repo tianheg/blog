@@ -1,8 +1,7 @@
 ---
 title: 些许烦忧
 date: 2019-12-19T16:36:01+08:00
-categories: ["生活"]
-life: ["随笔"]
+tags: ["随笔"]
 slug: a little worry
 ---
 

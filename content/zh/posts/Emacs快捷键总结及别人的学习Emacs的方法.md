@@ -1,11 +1,8 @@
 ---
 title: Emacs 快捷键总结及别人的学习 Emacs 的方法
 date: 2020-05-18T14:06:58+08:00
-categories: ["技术"]
-tech: ["Emacs"]
+tags: ["Emacs"]
 slug: Emacs Shortcuts and way to learn
-toc: true
-tocNum: true
 ---
 
 C - <chr> : Ctrl + chr || M - <chr> : Alt + chr
@@ -111,10 +108,6 @@ kill移除的东西可以被重新插入（在任何位置），delete删除的�
 (define-key isearch-mode-map [(control b)] 'isearch-delete-char)
 ))
 ```
-
-
-
-
 
 然后, 最近对我自己这些年积攒下来的插件做了一个彻底的清理, 然后, 配置文件清凉了不少. 这里也贴一下我的 `init.el` 的内容, 也方便大家了解(至少对我来说)有哪些常用的包. (我没有用包管理来下载, 都是自己 提前下载好的, 每个包一个目录, 包含这个包相关的一个或数个 el 文件, 外加一个我写的 ``_init` 结尾的配置文件, 所有的目录会动态的加入 load-path
 

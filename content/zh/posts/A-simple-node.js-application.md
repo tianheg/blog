@@ -1,8 +1,7 @@
 ---
 title: 一个 Node.js 简单应用
 date: 2020-04-03T17:52:09+08:00
-categories: ["技术"]
-tech: ["Node.js"]
+tags: ["Node.js"]
 slug: node application
 ---
 

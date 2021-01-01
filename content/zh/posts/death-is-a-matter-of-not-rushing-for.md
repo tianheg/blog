@@ -1,8 +1,6 @@
 ---
 title: "死亡是一件不必急于求成的事"
 date: 2019-03-10T15:45:01+08:00
-categories: ["生活"]
-life: ["随笔"]
 description: "死是一个必然会降临的节日"
 tags: ["死亡"]
 keywords: ["死亡"]
