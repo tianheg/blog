@@ -1,8 +1,6 @@
 ---
 title: Parents
 date: 2020-02-24T20:57:07+08:00
-categories: ["Life"]
-life: ["Essay"]
 tags: ["Parents"]
 ---
 
