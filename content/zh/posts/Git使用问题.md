@@ -1,11 +1,8 @@
 ---
 title: Git - 使用问题
 date: 2020-05-10T18:56:56+08:00
-categories: ["技术"]
-tech: ["Git"]
+tags: ["Git"]
 slug: Git use problems
-toc: true
-tocNum: true
 ---
 
 ## 当 git pull 失败时
@@ -27,7 +24,7 @@ fatal: index-pack failed
 
 报错：
 
-```
+```bash
 repo URL: 'master' must be absolute or begin with ./|../
 ```
 
@@ -49,7 +46,7 @@ error: failed to push some refs to 'git@github.com:Name/repo.git'
 
 报错：
 
-```
+```bash
 git push
 fatal: HttpRequestException encountered
 输入 GitHub 用户名
@@ -61,7 +58,7 @@ fatal: HttpRequestException encountered
 
 The "fatal: refusing to merge unrelated histories" Git error occurs when two *unrelated* projects are merged (i.e., projects that are not aware of each other’s existence and have mismatching commit histories).
 
-![](https://static.yidajiabei.xyz/img/refusing-to-merge.png)
+![refusing-to-merge.png](/images/refusing-to-merge.png)
 
 Consider the following two cases that throw this error:
 
@@ -76,7 +73,7 @@ The error is resolved by toggling the *allow-unrelated-histories* switch. After 
 git pull origin master --allow-unrelated-histories
 ```
 
-More information can be found [here, ](https://github.com/git/git/blob/master/Documentation/RelNotes/2.9.0.txt#L58-L68) on Git’s official documentation.
+More information can be found [here](https://github.com/git/git/blob/master/Documentation/RelNotes/2.9.0.txt#L58-L68) on Git’s official documentation.
 
 ## `git push origin master` 后出现：
 
@@ -86,4 +83,3 @@ kex_exchange_identification: read: Connection reset by peer
 Connection reset by 192.30.255.112 port 22
 fatal: Could not read from remote repository.
 ```
-

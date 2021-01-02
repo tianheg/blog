@@ -1,8 +1,7 @@
 ---
 title: Linux 之旅 - 开始
 date: 2020-06-07T08:30:41+08:00
-categories: ["技术"]
-tech: ["Linux"]
+tags: ["Linux"]
 slug: LinuxJourney getting started
 ---
 

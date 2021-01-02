@@ -1,8 +1,7 @@
 ---
-title: Hexo 双线部署到 GitHub 和 Coding 问题总结
+title: "Hexo 双线部署到 GitHub 和 Coding 问题总结"
 date: 2020-05-18T14:25:57+08:00
-categories: ["技术"]
-tech: ["Hexo"]
+tags: ["Hexo"]
 slug: hexo deploy GitHub and Coding
 ---
 
@@ -15,9 +14,9 @@ slug: hexo deploy GitHub and Coding
 | CNAME    | @        | 海外     | gaotianhe.github.io     |          | 600   | 正常            |      |
 | CNAME    | www      | 百度     | nz41rt.coding-pages.com |          | 600   | 正常            |      |
 
-从该网址 [静态网站列表](https://yidajiabei.coding.net/p/yidajiabei/cd/website/static) 进入 网址https://www.yidajiabei.xyz 时，没有 css、js、html等的渲染，只有空白和蓝色的文字。刷新一次后无法访问，显示：
+从该网址 [静态网站列表](https://yidajiabei.coding.net/p/yidajiabei/cd/website/static) 进入 网址 <https://www.yidajiabei.xyz> 时，没有 css、js、html等的渲染，只有空白和蓝色的文字。刷新一次后无法访问，显示：
 
-```
+```text
 This site can’t be reached
 www.yidajiabei.xyz’s server IP address could not be found.
 Try running Windows Network Diagnostics.
@@ -37,11 +36,11 @@ DNS_PROBE_FINISHED_NXDOMAIN
 | CNAME    | @          | 海外     | gaotianhe.github.io     |          | 600   | 正常            |      |
 | CNAME    | www        | 百度     | nz41rt.coding-pages.com |          | 600   | 正常            |      |
 
-从该网址 [静态网站列表](https://yidajiabei.coding.net/p/yidajiabei/cd/website/static) 进入 网址https://www.yidajiabei.xyz 时，无法访问。
+从该网址 [静态网站列表](https://yidajiabei.coding.net/p/yidajiabei/cd/website/static) 进入 网址 <https://www.yidajiabei.xyz> 时，无法访问。
 
-从 GitHub 那里访问 https://yidajiabei.xyz 也不正常，显示如下信息：
+从 GitHub 那里访问 <https://yidajiabei.xyz> 也不正常，显示如下信息：
 
-```
+```text
 Your connection is not private
 Attackers might be trying to steal your information from yidajiabei.xyz (for example, passwords, messages, or credit cards). Learn more
 NET::ERR_CERT_COMMON_NAME_INVALID
@@ -60,8 +59,6 @@ You cannot visit yidajiabei.xyz right now because the website uses HSTS. Network
 | CNAME    | @        | 默认     | gaotianhe.github.io     |          | 600   | 正常            |      |
 | CNAME    | @        | 百度     | nz41rt.coding-pages.com |          | 600   | 暂停            |      |
 
-
-
 域名 yidajiabei.xyz 的解析设置：
 
 | 记录类型 | 主机记录    | 解析线路 | 记录值                                                       | MX优先级 | TTL值 | 状态(暂停/正常) | 备注 |
@@ -77,13 +74,11 @@ You cannot visit yidajiabei.xyz right now because the website uses HSTS. Network
 
 再为二级域名 www.yidajiabei.xyz 在 yidajiabei.xyz 的解析列表里，添加 TXT 文本记录。
 
-目前能够通过 https://www.yidajiabei.xyz 访问博客，也能通过 https://www.yidajiabei.xyz/knowledge 访问知识库
+目前能够通过 <https://www.yidajiabei.xyz> 访问博客，也能通过 <https://www.yidajiabei.xyz/knowledge> 访问知识库
 
 ---
 
-无法在 [谷歌站长](https://search.google.com/search-console?resource_id=sc-domain%3Ayidajiabei.xyz) 添加站点地图 https://www.yidajiabei.xyz/sitemap.xml
-
-
+无法在 [谷歌站长](https://search.google.com/search-console?resource_id=sc-domain%3Ayidajiabei.xyz) 添加站点地图 <https://www.yidajiabei.xyz/sitemap.xml>
 
 ---
 

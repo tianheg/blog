@@ -1,12 +1,11 @@
 ---
 title: MXLinux 使用 apt-get 命令报错
 date: 2020-05-12T23:36:09+08:00
-categories: ["技术"]
-tech: ["MXLinux"]
+tags: ["MXLinux"]
 slug: MXLinux error about apt
 ---
 
-```
+```bash
 E: Could not get lock /var/lib/dpkg/lock - open (11: Resource temporarily unavailable)
 E: Unable to lock the administration directory (/var/lib/dpkg/), is another process using it?
 ```
@@ -51,30 +50,31 @@ sudo rm /var/lib/dpkg/lock
 
 使用 apt-get 命令的时候,遇到这种错误咋办?
 
-E: Could not get lock /var/lib/dpkg/lock - open (11: Resource temporarily unavailable) 
-E: Unable to lock the administration directory (/var/lib/dpkg/), is another process using it? 
+E: Could not get lock /var/lib/dpkg/lock - open (11: Resource temporarily unavailable)
+E: Unable to lock the administration directory (/var/lib/dpkg/), is another process using it?
 
 ## 找到并且杀掉所有的apt-get 和apt进程
 
 运行下面的命令来生成所有含有 apt 的进程列表，你可以使用ps和grep命令并用管道组合来得到含有apt或者apt-get的进程。
 
-```
+```bash
 ps -A | grep apt
 ```
 
 找出所有的 apt 以及 apt-get 进程
 
-```
-$ sudo kill -9 processnumber
-$ #或者
-$ sudo kill -SIGKILL processnumber
+```bash
+sudo kill -9 processnumber
+#或者
+sudo kill -SIGKILL processnumber
 ```
 
 比如，下面命令中的9是SIGKILL的信号数，它会杀掉第一个 apt 进程
-```
-$ sudo kill -9 进程ID
-$ #或者
-$ sudo kill -SIGKILL 进程ID
+
+```bash
+sudo kill -9 进程ID
+#或者
+sudo kill -SIGKILL 进程ID
 ```
 
 ## 删除锁定文件
@@ -90,28 +90,28 @@ $ sudo kill -SIGKILL 进程ID
 首先运行下面的命令来移除 /var/lib/dpkg/ 文件夹下的锁定文件：
 
 ```bash
-$ sudo rm /var/lib/dpkg/lock
+sudo rm /var/lib/dpkg/lock
 ```
 
 之后像下面这样强制重新配置软件包：
 
 ```bash
-$ sudo dpkg --configure -a
+sudo dpkg --configure -a
 ```
 
 也可以删除 /var/lib/apt/lists/ 以及缓存文件夹下的锁定文件：
 
-```
-$ sudo rm /var/lib/apt/lists/lock
-$ sudo rm /var/cache/apt/archives/lock
+```bash
+sudo rm /var/lib/apt/lists/lock
+sudo rm /var/cache/apt/archives/lock
 ```
 
 接下来，更新你的软件包源列表：
 
-```
-$ sudo apt update
-$ #或者
-$ sudo apt-get update
+```bash
+sudo apt update
+#或者
+sudo apt-get update
 ```
 
 总结一下，对于 Ubuntu（以及它的衍生版）用户在使用 apt-get 或者 apt 也叫 aptitude 命令时遇到的问题，我们已经用两种方法来解决了。

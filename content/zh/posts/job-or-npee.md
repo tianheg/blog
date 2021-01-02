@@ -1,12 +1,9 @@
 ---
 title: "工作还是考研？"
 date: 2021-01-01T08:59:19+08:00
-categories: [""]
-life: [""]
-tech: [""]
-description: ""
-tags: [""]
-keywords: [""]
+description: "选择工作还是选择考研？"
+tags: ["工作","考研","选择"]
+keywords: ["工作","考研","选择"]
 draft: true
 ---
 

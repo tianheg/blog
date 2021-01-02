@@ -1,11 +1,8 @@
 ---
 title: Git - 生成 ssh 密匙并添加到 Github
 date: 2020-05-13T21:55:40+08:00
-categories: ["技术"]
-tech: ["Git"]
+tags: ["Git"]
 slug: git generate ssh add to github
-tocNum: false
-toc: true
 ---
 
 ## 生成新 SSH 密钥并添加到 ssh-agent
@@ -17,7 +14,7 @@ toc: true
 2.粘贴下面的文本（替换为你的 GitHub 电子邮件地址）。
 
 ```bash
-$ ssh-keygen -t rsa -b 4096 -C "your_email@example.com"
+ssh-keygen -t rsa -b 4096 -C "your_email@example.com"
 ```
 
 这将创建以所提供的电子邮件地址为标签的新 SSH 密钥。
@@ -53,7 +50,7 @@ $ eval "$(ssh-agent -s)"
 2.将 SSH 私钥添加到 ssh-agent。如果创建了不同名称的密钥，或者要添加不同名称的现有密钥，请将命令中的 id_rsa 替换为私钥文件的名称。
 
 ```bash
-$ ssh-add ~/.ssh/id_rsa
+ssh-add ~/.ssh/id_rsa
 ```
 
 3.将 SSH 密钥：id_rsa.pub添加到 GitHub 帐户。

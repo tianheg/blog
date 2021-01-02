@@ -1,11 +1,9 @@
 ---
 title: "为自己制作 now 页面"
 date: 2020-12-12T10:46:58+08:00
-categories: ["生活"]
-life: ["随笔"]
 description: "记录拖延已久的 now 页面制作"
-tags: ["现在"]
-keywords: ["现在"]
+tags: ["现在","随笔"]
+keywords: ["现在","随笔"]
 ---
 
 一个计划很久的小任务，今天完成：为自己的博客页面添加 now 页面。

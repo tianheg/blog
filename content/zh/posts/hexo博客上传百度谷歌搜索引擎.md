@@ -1,14 +1,13 @@
 ---
-title: Hexo 博客上传百度谷歌搜索引擎
+title: "Hexo 博客上传百度谷歌搜索引擎"
 date: 2020-05-18T14:22:54+08:00
-categories: ["技术"]
-tech: ["Hexo"]
+tags: ["Hexo"]
 slug: Hexo blog allow googlebot and baiduspider
 ---
 
 针对 hexo 主题 even 来说，它的文件结构如下所示：
 
-```
+```text
 even
 |---[.github]
 |------[workflows]
@@ -82,7 +81,7 @@ even
 
 谷歌百度站点收录，需要下载插件：
 
-```
+```bash
 npm install hexo-generator-baidu-sitemap --save
 npm install hexo-generator-sitemap --save
 ```
@@ -97,8 +96,6 @@ baidusitemap:
   path: baidusitemap.xml
 ```
 
-
-
 对于主动推送，要下载插件： `hexo-baidu-url-submit`
 
 然后在根目录的 _config.yml 文件里添加如下内容：
@@ -110,4 +107,3 @@ baidu_url_submit:
   token:       # 秘钥
   path: baidu_urls.txt   # 文本文档的地址， 新链接会保存在此文本文档里
 ```
-

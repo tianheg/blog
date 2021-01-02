@@ -1,8 +1,6 @@
 ---
 title: "老师，您好"
 date: 2020-11-02T21:23:21+08:00
-categories: ["生活"]
-life: ["随笔"]
 description: "写写自己的老师们"
 tags: ["感悟"]
 keywords: ["感悟"]

@@ -1,8 +1,7 @@
 ---
 title: 听从你心，无问西东
 date: 2019-06-22T14:56:09+08:00
-categories: ["生活"]
-life: ["电影"]
+tags: ["电影"]
 slug: listen to your heart
 ---
 
