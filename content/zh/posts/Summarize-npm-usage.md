@@ -1,11 +1,7 @@
 ---
 title: 总结 npm 使用
 date: 2020-04-04T11:14:30+08:00
-categories: ["技术"]
-tech: ["Node.js"]
-slug: 
-toc: true
-tocNum: true
+tags: ["Node.js"]
 ---
 
 ## 一、
@@ -19,7 +15,7 @@ tocNum: true
 
 ## 二、
 
-执行以下操作，需要npm版本大于等于2.6.1，具体细节请访问：https://www.npmjs.cn/getting-started/updating-global-packages/
+执行以下操作，需要npm版本大于等于2.6.1，具体细节请访问：<https://www.npmjs.cn/getting-started/updating-global-packages/>
 
 更新全局安装的包：`npm update -g <package>`
 
@@ -47,7 +43,7 @@ npm WARN optional SKIPPING OPTIONAL DEPENDENCY: fsevents@2.1.2 (node_modules\fse
 npm WARN notsup SKIPPING OPTIONAL DEPENDENCY: Unsupported platform for fsevents@2.1.2: wanted {"os":"darwin","arch":"any"}(current: {"os":"win32","arch":"x64"})
 ```
 
-问题探索简记： 
+问题探索简记：
 
 10-13行代码：`fsevents`暂时无法卸载，它被`chokidar@2.1.8`、`chokidar@3.3.1`需要着。换句话说，后两者依赖于`fsevents`。但是，让我不明白的是，如果不能卸载，那为什么会在`fsevents`前显示`UNMET OPTIONAL DEPENDENCY(未满足的可选依赖)`。难道可选不代表：可以删除吗？
 
@@ -61,7 +57,7 @@ npm WARN notsup SKIPPING OPTIONAL DEPENDENCY: Unsupported platform for fsevents@
 
 1. 使用`npm view jquery versions`，这种方式可以查看npm服务器上所有的jquery版本信息：
 
-   ```
+   ```bash
    E:\可以在任意路径执行>npm view jquery versions
    
    [
@@ -87,14 +83,14 @@ npm WARN notsup SKIPPING OPTIONAL DEPENDENCY: Unsupported platform for fsevents@
 
 2. 使用`npm view jquery version`，这种方式只能查看jquery的最新版本：
 
-   ```
+   ```bash
    E:\可以在任意路径执行>npm view jquery version
    3.4.1
    ```
 
 3. 使用`npm info jquery`，这种方式和第一种一样能查看所有版本信息，它还能显示更多关于jquery的信息：
 
-   ```
+   ```bash
    E:\可以在任意路径执行>npm info jquery
    
    jquery@3.4.1 | MIT | deps: none | versions: 50
@@ -123,7 +119,7 @@ npm WARN notsup SKIPPING OPTIONAL DEPENDENCY: Unsupported platform for fsevents@
 
 1. 使用`npm ls jquery`，查看本地安装的jquery，因为我没有安装jquery，所以返回的结果为`empty`：
 
-   ```
+   ```bash
    E:\当前目录>npm ls jquery
    hexo-site@0.0.0 E:\当前目录
    `-- (empty)
@@ -131,7 +127,7 @@ npm WARN notsup SKIPPING OPTIONAL DEPENDENCY: Unsupported platform for fsevents@
 
    代码所示第二行中`hexo-site@0.0.0`可以忽略，因为我当前目录下部署有hexo，所以会显示。因此，当我执行`npm ls hexo`时，会出现如下信息：
 
-   ```
+   ```bash
    E:\当前目录>npm ls hexo
    hexo-site@0.0.0 E:\当前目录
    `-- hexo@4.2.0
@@ -139,7 +135,7 @@ npm WARN notsup SKIPPING OPTIONAL DEPENDENCY: Unsupported platform for fsevents@
 
 2. 使用`npm ls jquery -g`，查看全局安装的jquery，因为我没有安装jquery，所以它会显示：
 
-   ```
+   ```bash
    E:\当前目录>npm ls jquery -g
    C:\Users\yourname\AppData\Roaming\npm
    `-- (empty)
@@ -147,7 +143,7 @@ npm WARN notsup SKIPPING OPTIONAL DEPENDENCY: Unsupported platform for fsevents@
 
    但我安装了hexo，它显示：
 
-   ```
+   ```bash
    E:\当前目录>npm ls hexo -g
    C:\Users\yourname\AppData\Roaming\npm
    `-- (empty)
@@ -155,7 +151,7 @@ npm WARN notsup SKIPPING OPTIONAL DEPENDENCY: Unsupported platform for fsevents@
 
    我不知道这是个什么情况，我想到自己安装hexo时，是通过安装hexo-cli获得的，于是我进行了如下操作：
 
-   ```
+   ```bash
    E:\当前目录>npm ls hexo-cli -g
    C:\Users\yourname\AppData\Roaming\npm
    `-- hexo-cli@3.1.0
@@ -165,7 +161,7 @@ npm WARN notsup SKIPPING OPTIONAL DEPENDENCY: Unsupported platform for fsevents@
 
    我再次执行`npm ls serverless -g`，而它出现在了该目录下，所以不为empty。关于`serverless`框架，我只是听说过，看过一点腾讯云录制的教学视频。看不懂，以后再研究，`serverless`是可以建博客的。好奇它的部署操作。
 
-   ```
+   ```bash
    E:\当前目录>npm ls serverless -g
    C:\Users\yourname\AppData\Roaming\npm
    `-- serverless@1.67.0
@@ -325,7 +321,7 @@ npm WARN notsup SKIPPING OPTIONAL DEPENDENCY: Unsupported platform for fsevents@
 
 4. `npm install -g vue`，全局安装vue：
 
-   ```
+   ```bash
    E:\当前目录>npm install -g vue
    + vue@2.6.11
    added 1 package from 1 contributor in 0.518s

@@ -1,9 +1,7 @@
 ---
-title: Ubuntu18.04 使用中文输入法
+title: "Ubuntu18.04 使用中文输入法"
 date: 2020-03-04T21:14:25+08:00
-categories: ["技术"]
-tech: ["Ubuntu"]
-slug: 
+tags: ["Ubuntu"]
 ---
 
 关于方法，我是按照[https://blog.csdn.net/qq_27211927/article/details/80877684](https://blog.csdn.net/qq_27211927/article/details/80877684)给的方法设置的，还好没有什么错误，我高兴地在 Ubuntu 文档里打下了 “ 你好，这是我改好输入法后输入的文字。”。下面把更改方法写出来。
@@ -39,4 +37,3 @@ slug:
 三、无论哪一个人都会随时间逝去，所以活在当下一直是个我要提醒自己的地方
 
 四、爱情的定义是什么，人和机器人能相爱吗？这个问题有待思考。
-

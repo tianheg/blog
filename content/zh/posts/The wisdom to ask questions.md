@@ -1,8 +1,7 @@
 ---
 title: 提问的智慧
 date: 2020-04-30T13:23:13+08:00
-categories: ["技术"]
-tech: ["Ask"]
+tags: ["Ask"]
 slug: How To Ask Questions The Smart Way
 ---
 

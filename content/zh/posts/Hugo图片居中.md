@@ -1,8 +1,7 @@
 ---
 title: Hugo 图片居中
 date: 2020-05-10T17:49:41+08:00
-categories: ["技术"]
-tech: ["Hugo"]
+tags: ["Hugo"]
 slug: Hugo center picture
 ---
 
@@ -12,7 +11,6 @@ slug: Hugo center picture
 
 ```html
 <div align=center>  <!-- 可选的项：right，left，center -->
-	<img src="url" width="" height="">  <!-- src处填写路径（本地或网络） width 和 height 就是控制图片的大小的-->
+    <img src="url" width="" height="">  <!-- src处填写路径（本地或网络） width 和 height 就是控制图片的大小的-->
 </div>
 ```
-

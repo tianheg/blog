@@ -1,11 +1,9 @@
 ---
 title: 新年随笔
 date: 2019-02-05T20:24:45+08:00
-categories: ["生活"]
-life: ["随笔"]
 description: "2019 年的正月初一，一些想法"
-tags: [""]
-keywords: [""]
+tags: ["随笔"]
+keywords: ["随笔"]
 slug: essay-in-the-new-year
 ---
 

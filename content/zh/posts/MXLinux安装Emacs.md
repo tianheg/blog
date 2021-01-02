@@ -1,48 +1,45 @@
 ---
 title: MXLinux 安装 Emacs
 date: 2020-05-13T13:38:01+08:00
-categories: ["技术"]
-tech: ["MXLinux","Emacs"]
+tags: ["MXLinux","Emacs"]
 slug: install emacs on mxlinux
-toc: true
-tocNum: true
 ---
 
 ## 安装步骤
 
 ### 下载 emacs-26.3.tar.gz 到 /home/
 
-```
+```bash
 wget http://mirrors.ustc.edu.cn/gnu/emacs/emacs-26.3.tar.gz
 ```
 
 ### 解压缩
 
-```
+```bash
 tar -zxvf emacs-26.3.tar.gz
 ```
 
 ### 进入解压目录
 
-```
+```bash
 cd /home/emacs-26.3
 ```
 
 ### 配置
 
-```
+```bash
 ./configure --prefix=/opt/emacs
 ```
 
 ### 编译及安装
 
-```
+```bash
 make && make install
 ```
 
 ### 设置环境变量
 
-```
+```bash
 vim /etc/profile
 export PATH=$PATH:/opt/emacs/bin
 :wq # 保存退出
@@ -50,13 +47,13 @@ export PATH=$PATH:/opt/emacs/bin
 
 ### 加载环境变量
 
-```
+```bash
 source /etc/profile
 ```
 
 ### 测试
 
-```
+```bash
 which emacs
 /usr/local/bin/emacs
 ```
@@ -65,7 +62,7 @@ which emacs
 
 ### 使用 Emacs
 
-```
+```bash
 emacs
 ```
 
@@ -75,7 +72,7 @@ emacs
 
 在上述步骤进行至 **配置** 阶段时，我的 MXLinux 终端报错，主要信息是缺少 `x` 环境，以下代码是类似的错误信息，我的错误信息当时没有保存：
 
-```
+```bash
 checking for long file names... yes
 checking for X... no
 checking for X... true
@@ -91,7 +88,7 @@ to configure.
 
 于是，我按照 [这里](https://askubuntu.com/questions/213873/what-libraries-do-i-need-to-install-if-i-want-to-compile-emacs) 的第一个回答的提示执行了下述命令：
 
-```
+```bash
 sudo apt-get install build-essential texinfo libx11-dev libxpm-dev libjpeg-dev libpng-dev libgif-dev libtiff-dev libgtk-3-dev libncurses-dev libgnutls28-dev
 ```
 

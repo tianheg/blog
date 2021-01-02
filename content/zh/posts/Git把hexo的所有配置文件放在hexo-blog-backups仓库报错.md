@@ -1,12 +1,12 @@
 ---
 title: Git - 把 hexo 的所有配置文件放在 hexo-blog-backups 仓库报错
 date: 2020-05-10T19:03:30+08:00
-categories: ["技术"]
-tech: ["Git"]
+tags: ["Git"]
 slug: Git error place docs to repo
 ---
 
 错误信息：
+
 ```bash
 E:\Github\hexo-blog-backups (master -> origin)
 λ git add *
@@ -27,4 +27,5 @@ hint: See "git help submodule" for more information.
 ```
 
 问题描述：
+
 把hexo的所有配置文件放在hexo-blog-backups仓库报错

@@ -1,9 +1,7 @@
 ---
 title: 解决 PyCharm 无法打开 Terminal 问题
 date: 2020-04-12T11:12:06+08:00
-categories: ["技术"]
-tech: ["Python"]
-slug: 
+tags: ["Python"]
 ---
 
 #### 问题描述

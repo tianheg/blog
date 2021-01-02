@@ -1,11 +1,8 @@
 ---
 title: Git - 使用子模块
 date: 2020-05-10T18:59:25+08:00
-categories: ["技术"]
-tech: ["Git"]
+tags: ["Git"]
 slug: Git use submodule
-toc: true
-tocNum: true
 ---
 
 ## git-submodule(1) Manual Page
@@ -445,6 +442,7 @@ $ git commit -m "Merge Tom's Changes" (5)
 这就是为什么前面的错误信息是 “merge following commits not found”，因为它不能 **这样** 做。 它让人困惑是因为**谁能想到它会尝试这样做**？
 
 如果它找到了一个可以接受的合并提交，你会看到类似下面的信息：
+
 ```bash
 $ git merge origin/master
 warning: Failed to merge submodule DbConnector (not fast-forward)
@@ -460,7 +458,9 @@ Auto-merging DbConnector
 CONFLICT (submodule): Merge conflict in DbConnector
 Automatic merge failed; fix conflicts and then commit the result.
 ```
+
 Git 建议的命令是更新索引，就像你运行了 `git add` 那样，这样会清除冲突然后提交。 不过你可能不应该这样做。你可以轻松地进入子模块目录，查看差异是什么，快进到这次提交，恰当地测试，然后提交它。
+
 ```bash
 $ cd DbConnector/
 $ git merge 9fd905e
@@ -471,4 +471,5 @@ $ cd ..
 $ git add DbConnector
 $ git commit -am 'Fast forwarded to a common submodule child'
 ```
+
 这些命令完成了同一件事，但是通过这种方式你至少可以验证工作是否有效，以及当你在完成时可以确保子模块目录中有你的代码。

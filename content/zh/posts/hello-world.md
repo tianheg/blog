@@ -1,8 +1,6 @@
 ---
 title: "Hello World"
 date: 2018-12-23T02:12:41+08:00
-categories: ["生活"]
-life: ["随笔"]
 description: "一个开始，决定记录自己，上下求索"
 tags: ["开始"]
 keywords: ["开始"]

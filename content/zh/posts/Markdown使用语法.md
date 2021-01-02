@@ -1,11 +1,8 @@
 ---
 title: Markdown 使用语法
 date: 2020-05-10T17:39:28+08:00
-categories: ["技术"]
-tech: ["Markdown"]
+tags: ["Markdown"]
 slug: Markdown uses syntax
-toc: true
-tocNum: true
 ---
 
 ## 添加任务列表

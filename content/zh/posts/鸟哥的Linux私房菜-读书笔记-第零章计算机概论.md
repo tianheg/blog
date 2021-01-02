@@ -1,11 +1,8 @@
 ---
 title: 鸟哥的 Linux 私房菜-第零章计算机概论
 date: 2020-05-12T17:55:02+08:00
-categories: ["技术"]
-tech: ["笔记"]
+tags: ["笔记"]
 slug: Bird Linux 0 introduction to computer
-toc: true
-tocNum: true
 ---
 
 ## CPU 的种类
@@ -29,8 +26,6 @@ CISC 在微指令集的每一个小指令可以执行一些较低阶的硬件操
 先说 AMD 和 Intel：
 
 Intel 和 AMD 是两家公司。一开始，Intel 先自己研发出 x86 架构，后来，AMD 也拿到了 x86 架构的授权。此时，Intel 向 64 位过渡，研发出 ia64(64架构)，但是因为和 x86 架构不兼容导致市场反应极差。AMD 率先研发出 x86 的64 位兼容(32和64位的混合架构)，也就是后来的 x86_64，后来 Intel 也拿到了 x86_64 的生产授权（这两家专利交叉很严重）。但是因为是 AMD 率先研发，所以，x86_64 也叫 amd64。
-
-{{< ad_embed_post >}}
 
 目前，AMD 和 Intel 是世界上最大的两家 x86 和 x86_64 的 CPU 厂家（其中，Intel 占了 3/4 的市场份额）。
 
