@@ -11,6 +11,7 @@ tocNum: true
 这是 [官网](https://mxlinux.org/)，可以从 [这里](https://mxlinux.org/wiki/system/iso-download-mirrors/) 下载到 iso 镜像。接下来就可以在 Vbox 进行安装。
 
 安装信息：
+
 - 主机版本：Win10 64bit
 - VBox 版本：6.1.6
 - MXLinux 版本：MX-19.1_x64

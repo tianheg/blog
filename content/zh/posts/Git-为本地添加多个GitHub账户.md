@@ -1,8 +1,7 @@
 ---
-title: Git - 为本地添加多个 GitHub 账户
+title: "Git - 为本地添加多个 GitHub 账户"
 date: 2020-06-12T17:51:00+08:00
-categories: ["技术"]
-tech: ["Git"]
+tags: ["Git"]
 slug: Git for multiple GitHub accounts
 ---
 
@@ -65,8 +64,5 @@ git config --local user.email ""
 
 参考链接：
 
-1. https://www.fofxacademy.com/how-to-setup-git-on-your-pc-for-multiple-github-accounts/
-2. https://www.freecodecamp.org/news/manage-multiple-github-accounts-the-ssh-way-2dadc30ccaca/ (理解更清晰)
-
-
-
+1. <https://www.fofxacademy.com/how-to-setup-git-on-your-pc-for-multiple-github-accounts/>
+2. <https://www.freecodecamp.org/news/manage-multiple-github-accounts-the-ssh-way-2dadc30ccaca/> (理解更清晰)

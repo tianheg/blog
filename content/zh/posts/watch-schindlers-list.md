@@ -1,11 +1,9 @@
 ---
 title: “因为你的善行，这些生命得以传承下去”
 date: 2020-02-14T21:13:51+08:00
-categories: ["生活"]
-life: ["电影"]
 description: "记录看过《辛德勒的名单》的所思所想"
-tags: ["二战"]
-keywords: ["二战"]
+tags: ["二战","电影"]
+keywords: ["二战","电影"]
 slug: watch-schindlers-list
 ---
 

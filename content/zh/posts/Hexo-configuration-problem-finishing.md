@@ -1,12 +1,10 @@
 ---
 title: hexo 配置问题整理
 date: 2020-04-05T11:09:31+08:00
-categories: ["技术"]
-tech: ["Hexo"]
-slug: 
+tags: ["Hexo"]
 ---
 
-```
+```bash
 $ cd <folder>
 $ npm install
 #这里建议在安装一些组件，防止后续的一些问题的出现

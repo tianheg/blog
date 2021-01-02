@@ -1,8 +1,7 @@
 ---
 title: 看电影也是一种观察世界的方式
 date: 2020-02-17T22:31:05+08:00
-categories: ["生活"]
-life: ["电影"]
+tags: ["电影"]
 slug: watch movies way to world
 ---
 

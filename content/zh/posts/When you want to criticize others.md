@@ -1,8 +1,7 @@
 ---
 title: 当你想批评别人的时候……
 date: 2020-01-27T16:42:53+08:00
-categories: ["生活"]
-life: ["随笔"]
+tags: ["随笔"]
 slug: criticize others
 ---
 

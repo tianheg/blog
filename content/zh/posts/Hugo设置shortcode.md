@@ -1,8 +1,7 @@
 ---
 title: Hugo 设置 shortcode
 date: 2020-05-13T16:04:22+08:00
-categories: ["技术"]
-tech: ["Hugo"]
+tags: ["Hugo"]
 slug: hugo set shortcode
 ---
 
@@ -115,10 +114,10 @@ repository = '<svg xmlns="http://www.w3.org/2000/svg" class="icon" viewBox="0 0 
 具体简码和样式如下：
 
 ```markdown
-{{</* github name="yidajiabei.xyz" link="https://github.com/Gaotianhe/yidajiabei.xyz" description="Blog of mine with Hugo https://www.yidajiabei.xyz/" color="#E34C26" language="HTML" */>}}
+{{</* github name="blog" link="https://github.com/tianheg/blog" description="Blog Source Files" color="#E34C26" language="HTML" */>}}
 ```
 
-{{< github name="yidajiabei.xyz" link="https://github.com/Gaotianhe/yidajiabei.xyz" description="Blog of mine with Hugo https://www.yidajiabei.xyz/" color="#E34C26" language="HTML">}}
+{{< github name="blog" link="https://github.com/tianheg/blog" description="Blog Source Files" color="#E34C26" language="HTML">}}
 
 ## gallery
 
@@ -220,6 +219,7 @@ print('hello world')
 </highlight>
 
 没有报错，但是没有高亮
+
 ## quote
 
 中文：
@@ -272,8 +272,6 @@ print('hello world')
 
 ## admonition
 
-
-
 ## myshortcode
 
 ```html
@@ -287,7 +285,7 @@ print('hello world')
 
 无法 `hugo server`，显示如下内容：
 
-```
+```bash
 E:\test>hugo server
 Building sites … panic: runtime error: invalid memory address or nil pointer dereference
 [signal 0xc0000005 code=0x0 addr=0x20 pc=0xfe8bf9]

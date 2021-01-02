@@ -1,8 +1,7 @@
 ---
 title: 记录使用 nvm
 date: 2020-04-04T07:56:10+08:00
-categories: ["技术"]
-tech: ["Node.js"]
+tags: ["Node.js"]
 slug: record use nvm
 ---
 
@@ -10,7 +9,7 @@ slug: record use nvm
 
 nvm use 出问题 $ nvm use 7.2.0 exit status 1: 'D:\My
 
-https://segmentfault.com/q/1010000007654139
+<https://segmentfault.com/q/1010000007654139>
 
 二、设置npm全局安装路径
 
@@ -18,7 +17,7 @@ https://segmentfault.com/q/1010000007654139
 
 `npm config set cache "....\nodejs\node_cache"`
 
-参考https://blog.csdn.net/traguezw/article/details/54577560
+参考 <https://blog.csdn.net/traguezw/article/details/54577560>
 
 三、原来的node没有卸载干净，导致通过nvm安装node好后，输入npm没有反应
 

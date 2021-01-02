@@ -1,14 +1,13 @@
 ---
 title: Python 中 list 没有 add 属性
 date: 2020-05-18T14:29:41+08:00
-categories: ["技术"]
-tech: ["Python"]
+tags: ["Python"]
 slug: Python's list no add
 ---
 
 为以下输入时，报错：
 
-```
+```bash
 >>> A = (['a', 'b', 'c', 'd'])
 >>> 'a' in A
 True
@@ -32,7 +31,7 @@ AttributeError: 'list' object has no attribute 'add'
 
 为以下输入时，正常：
 
-```
+```bash
 >>> abc = set(['a', 'b', 'c', 'd'])
 >>> 'a' in abc
 True

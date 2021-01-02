@@ -1,8 +1,7 @@
 ---
 title: Hugo Meme 主题配置
 date: 2020-06-09T16:30:09+08:00
-categories: ["技术"]
-tech: ["Hugo"]
+tags: ["Hugo"]
 slug: meme theme configuration
 ---
 
@@ -40,7 +39,7 @@ slug: meme theme configuration
 <p style="margin:25px">
    <b>"少年贪玩，青年迷恋爱情，壮年汲汲于成名成家，暮年自安于自欺欺人。人寿几何，顽铁能炼成的精金，能有多少？但不同程度的锻炼，必有不同程度的成绩；不同程度的纵欲放肆，必积下不同程度的顽劣。"<br />上苍不会让所有幸福集中到某个人身上，得到爱情未必拥有金钱；拥有金钱未必得到快乐；得到快乐未必拥有健康；拥有健康未必一切都会如愿以偿。保持知足常乐的心态才是淬炼心智、净化心灵的最佳途径。一切快乐的享受都属于精神，这种快乐把忍受变为享受，是精神对于物质的胜利，这便是人生哲学。"</b>
 </p>
-<div style="text-align:right;margin:15px" ><footer>——<cite>杨绛</cite></footer></div>	
+<div style="text-align:right;margin:15px" ><footer>——<cite>杨绛</cite></footer></div>
 </div>
 ```
 
@@ -50,7 +49,7 @@ slug: meme theme configuration
 <p style="margin:25px">
    <b>"少年贪玩，青年迷恋爱情，壮年汲汲于成名成家，暮年自安于自欺欺人。人寿几何，顽铁能炼成的精金，能有多少？但不同程度的锻炼，必有不同程度的成绩；不同程度的纵欲放肆，必积下不同程度的顽劣。"<br />上苍不会让所有幸福集中到某个人身上，得到爱情未必拥有金钱；拥有金钱未必得到快乐；得到快乐未必拥有健康；拥有健康未必一切都会如愿以偿。保持知足常乐的心态才是淬炼心智、净化心灵的最佳途径。一切快乐的享受都属于精神，这种快乐把忍受变为享受，是精神对于物质的胜利，这便是人生哲学。"</b>
 </p>
-<div style="text-align:right;margin:15px" ><footer>——<cite>杨绛</cite></footer></div>	
+<div style="text-align:right;margin:15px" ><footer>——<cite>杨绛</cite></footer></div>
 </div>
 
 ## 文字渐变色
