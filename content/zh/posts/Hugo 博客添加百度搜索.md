@@ -1,8 +1,7 @@
 ---
 title: Hugo 博客添加百度搜索
 date: 2020-06-09T16:58:48+08:00
-categories: ["技术"]
-tech: ["Hugo"]
+tags: ["Hugo"]
 slug: Hugo blog add baidu search
 ---
 
@@ -33,28 +32,28 @@ slug: Hugo blog add baidu search
 ```scss
 //设置百度search样式
 .searchbar {     
-	border: rgb(120, 120, 120) solid 2px;
-	border-radius: 2em;    /*左右边框为半圆*/
-	width: 80%;
-	height: 40px;
-	box-shadow: 0px 0px 10px rgb(125, 125, 125);
-	margin: 0 auto;  /*重要！整个搜索框居中对齐*/
-	padding: 4px;
-	/*margin-top: 90px;	*/
+    border: rgb(120, 120, 120) solid 2px;
+    border-radius: 2em;    /*左右边框为半圆*/
+    width: 80%;
+    height: 40px;
+    box-shadow: 0px 0px 10px rgb(125, 125, 125);
+    margin: 0 auto;  /*重要！整个搜索框居中对齐*/
+    padding: 4px;
+    /*margin-top: 90px;    */
 }
 .search{ 
-	height: 38px;
-	border:none;    /*取消默认的边框以设置自定义边框*/
-	outline:none;   /*取消浏览器默认的蓝光边框以设置自定义的输入框*/   
-	vertical-align: middle;
-	/*background: #000000*/
-	background-color:transparent;/*搜索框与搜索按钮透明*/
-	
-	width: 90%;
-	margin-left: 10px;
-	font: bolder;
-	font-size: 20px;
-	color:rgb(120, 120, 120);	
+    height: 38px;
+    border:none;    /*取消默认的边框以设置自定义边框*/
+    outline:none;   /*取消浏览器默认的蓝光边框以设置自定义的输入框*/   
+    vertical-align: middle;
+    /*background: #000000*/
+    background-color:transparent;/*搜索框与搜索按钮透明*/
+    
+    width: 90%;
+    margin-left: 10px;
+    font: bolder;
+    font-size: 20px;
+    color:rgb(120, 120, 120);    
 }
 ```
 

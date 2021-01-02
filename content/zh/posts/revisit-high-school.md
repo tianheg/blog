@@ -1,8 +1,6 @@
 ---
 title: 高中重游
 date: 2019-02-11T16:08:54+08:00
-categories: ["生活"]
-life: ["随笔"]
 description: "分别高中校园半学期，那些过往历历在目"
 tags: ["高中","重游"]
 keywords: ["高中","重游"]

@@ -1,8 +1,7 @@
 ---
 title: MXLinux 安装中文输入法
 date: 2020-05-17T16:03:04+08:00
-categories: ["技术"]
-tech: ["MXLinux"]
+tags: ["MXLinux"]
 slug: install Chinese input method on MXLinux
 ---
 
@@ -10,19 +9,19 @@ slug: install Chinese input method on MXLinux
 
 添加中文支持：
 
-```
+```bash
 sudo apt-get install locales
 ```
 
 配置 locales 软件包：
 
-```
+```bash
 sudo dpkg-reconfigure locales
 ```
 
 就会出现一个图形界面，在界面的区域设置中选中以下几项：
 
-```
+```bash
 zh_CN GB2312
 zh_CN.GB18030 GB18030
 zh_CN.GBK GBK
@@ -31,7 +30,7 @@ zh_CN.UTF-8 UTF-8
 
 如何你还需要英文界面，还需要勾选：
 
-```
+```bash
 en_US.UTF-8 UTF-8
 ```
 

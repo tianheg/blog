@@ -1,11 +1,9 @@
 ---
 title: "奇怪"
 date: 2020-12-11T20:12:08+08:00
-categories: ["生活"]
-life: ["诗歌"]
 description: "一首突发奇想的诗"
-tags: ["奇怪"]
-keywords: ["奇怪"]
+tags: ["奇怪","诗歌"]
+keywords: ["奇怪","诗歌"]
 slug: strange
 ---
 

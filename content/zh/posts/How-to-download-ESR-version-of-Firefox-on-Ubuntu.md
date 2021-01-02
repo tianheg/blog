@@ -1,8 +1,7 @@
 ---
 title: 如何在 Ubuntu 上下载 Firefox 的 ESR 版本
 date: 2020-02-27T22:17:09+08:00
-categories: ["技术"]
-tech: ["Ubuntu"]
+tags: ["Ubuntu"]
 slug: download esr firefox on ubuntu
 ---
 
@@ -26,13 +25,13 @@ Ubuntu是Linux操作系统的桌面类系统的一个发行版，因为网站后
 
 在Firefox的诸多版本中（有Beta、Nightly、Develop Edition、Extended Support Release），随想推荐了Firefox的ESR版本，这一版本具有极强的稳定性还有很强的定制功能。因此，我昨天在自己的笔记本上安装了Firefox的ESR版本。目前看来和普通的Firefox没有什么区别，等我的进一步探索吧。
 
-因为要学习Linux，所以装Ubuntu，想着顺便把Ubuntu里自带的Firefox换成它的ESR版本吧。于是就开始操作上网找教程，终于在这里找到了 https://www.linuxuprising.com/2018/11/how-to-install-firefox-esr-in-ubuntu-or.html 。下面我就简述一下操作过程。
+因为要学习Linux，所以装Ubuntu，想着顺便把Ubuntu里自带的Firefox换成它的ESR版本吧。于是就开始操作上网找教程，终于在这里找到了 <https://www.linuxuprising.com/2018/11/how-to-install-firefox-esr-in-ubuntu-or.html>。下面我就简述一下操作过程。
 
 首先，把旧的Firefox卸载，在Terminal里输入`sudo apt remove firefox`.
 
 然后，分别输入以下三行代码：
 
-```
+```bash
 sudo add-apt-repository ppa:mozillateam/ppa
 sudo apt-get update
 sudo apt install firefox-esr

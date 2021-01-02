@@ -1,11 +1,8 @@
 ---
 title: 使用 DocToc 自动生成文档目录
 date: 2020-05-11T19:05:46+08:00
-categories: ["技术"]
-tech: ["Node.js"]
+tags: ["Node.js"]
 slug: use doctoc generate toc
-toc: true
-tocNum: true
 ---
 
 DocToc 为本地 git 存储库中的 markdown 文件生成目录。生成的目录可以正常显示在包括 GitHub 在内的代码托管网站上。
@@ -14,17 +11,17 @@ DocToc 为本地 git 存储库中的 markdown 文件生成目录。生成的目�
 
 - 安装
 - 使用
-	- 给当前目录及子目录的所有文件添加目录
-	- 轻松地更新已存在的由 DocToc 生成的目录
-	- 给单个文件添加目录
-		- 例子
-	- 使用 DocToc 生成兼容其他网站的链接
-		- 例子
-	- 指定目录的位置
-	- 指定自定义目录标题
-	- 指定目录的最大标题级别
-	- 打印到标准输出
-	- 作为一个 Git 钩子使用
+  - 给当前目录及子目录的所有文件添加目录
+  - 轻松地更新已存在的由 DocToc 生成的目录
+  - 给单个文件添加目录
+    - 例子
+  - 使用 DocToc 生成兼容其他网站的链接
+    - 例子
+  - 指定目录的位置
+  - 指定自定义目录标题
+  - 指定目录的最大标题级别
+  - 打印到标准输出
+  - 作为一个 Git 钩子使用
 
 ## 安装
 
@@ -54,13 +51,13 @@ doctoc .
 
 如果你只想转换一个文件，这样做：
 
-```
+```bash
 doctoc /path/to/file [...]
 ```
 
 #### 例子
 
-```
+```bash
 doctoc README.md
 
 doctoc CONTRIBUTING.md LICENSE.md
@@ -68,7 +65,7 @@ doctoc CONTRIBUTING.md LICENSE.md
 
 你可以通过该特征做更复杂的事情。例如，如果你安装了 [ack](http://beyondgrep.com/) ，你可以给具体的文件添加 `<!-- DOCTOC SKIP -->` 然后使用
 
-```
+```bash
 ack -L 'DOCTOC SKIP' | xargs doctoc
 ```
 
@@ -80,7 +77,7 @@ ack -L 'DOCTOC SKIP' | xargs doctoc
 
 可用的模式：
 
-```
+```bash
 --bitbucket bitbucket.org
 --nodejs    nodejs.org
 --github    github.com
@@ -90,7 +87,7 @@ ack -L 'DOCTOC SKIP' | xargs doctoc
 
 #### 例子
 
-```
+```bash
 doctoc README.md --bitbucket
 ```
 
@@ -98,14 +95,14 @@ doctoc README.md --bitbucket
 
 DocToc 默认将目录放在文档的顶部，你可以通过以下格式，让 DocToc 将生成的目录放在其他地方：
 
-```
+```bash
 <!-- START doctoc -->
 <!-- END doctoc -->
 ```
 
 你可以直接把这段代码放在你的 .md 文件中。例如：
 
-```
+```md
 // my_new_post.md
 Here we are, introducing the post. It's going to be great!
 But first: a TOC for easy reference.
@@ -140,7 +137,7 @@ Here we'll discuss...
 
 通过使用以下配置，doctoc 可以用作 [预提交](http://pre-commit.com/) 钩子：
 
-```
+```txt
 repos:
 -   repo: https://github.com/thlorenz/doctoc
     sha: ...  # substitute a tagged version 

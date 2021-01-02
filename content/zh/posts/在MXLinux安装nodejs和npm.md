@@ -1,16 +1,13 @@
 ---
-title: MXLinux 安装 Node.js 和 npm
+title: "MXLinux 安装 Node.js 和 npm"
 date: 2020-05-12T15:59:49+08:00
-categories: ["技术"]
-tech: ["Node.js","MXLinux"]
+tags: ["Node.js","MXLinux"]
 slug: install nodejs and npm on MXLinux
-toc: true
-tocNum: true
 ---
 
 以下方式能够下载 Nodejs 和 npm ：
 
-```
+```bash
 sudo apt-get install nodejs
 sudo apt-get install npm
 ```
@@ -29,19 +26,19 @@ sudo apt-get install npm
 
 进入 `/usr/local/src` 目录：
 
-```
+```bash
 cd /usr/local/src 
 ```
 
 ### 下载 Nodejs 安装包
 
-```
+```bash
 wget https://nodejs.org/dist/v12.16.1/node-v12.16.1-linux-x64.tar.gz
 ```
 
 ### 解压并安装
 
-```
+```bash
 tar -zxvf node-v12.16.1-linux-x64.tar.gz
 cd node-v12.16.1-linux-x64.tar.gz
 sudo ./configure
@@ -61,7 +58,7 @@ v12.16.1
 
 npm 是外国网站，因为某些原因，直接通过 npm 命令安装包会很慢。可以切换成国内的淘宝源：
 
-```
+```bash
 npm install -g cnpm
 ```
 
@@ -73,7 +70,7 @@ npm install -g cnpm
 
 ### 安装  nvm
 
-```
+```bash
 cd ~/
 git clone https://github.com/nvm-sh/nvm.git .nvm
 cd ~/.nvm
@@ -85,7 +82,7 @@ git checkout v0.35.3
 
 然后将下列数行内容，放到你的 `~/.bashrc`，`~/.profile` 或者 `~/.zshrc` 文件中，这样做是为了在登录时自动获取资源：
 
-```
+```bash
 export NVM_DIR="$HOME/.nvm"
 [ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"  # This loads nvm
 [ -s "$NVM_DIR/bash_completion" ] && \. "$NVM_DIR/bash_completion"  # This loads nvm bash_completion
@@ -95,7 +92,7 @@ export NVM_DIR="$HOME/.nvm"
 
 ### 使用 nvm
 
-```
+```bash
 $ nvm
 
 Node Version Manager (v0.35.3)
@@ -172,13 +169,13 @@ Note:
 
 1.列出可安装的 Node.js 版本：
 
-```
+```bash
 nvm ls-remote
 ```
 
 2.安装指定 Node.js 版本：
 
-```
+```bash
 nvm install 12.16.3
 ```
 
@@ -186,19 +183,19 @@ nvm install 12.16.3
 
 3.卸载指定版本 Node.js：
 
-```
+```bash
 nvm uninstall 12.16.3
 ```
 
 4.通常最好安装最近的长周期版本：
 
-```
+```bash
 nvm install --lts
 ```
 
 5.设置 shell 的 Node.js 版本
 
-```
+```bash
 nvm use 12.16.3
 ```
 
@@ -206,13 +203,13 @@ nvm use 12.16.3
 
 6.还原环境变量 Path：
 
-```
+```bash
 nvm deactivate
 ```
 
 7.迁移 npm 至新版本的 Node.js：
 
-```
+```bash
 nvm install node --reinstall-packages-from=node
 或
 nvm install v12.16.3 --reinstall-packages-from=12.16.3
@@ -222,13 +219,13 @@ nvm install v12.16.3 --reinstall-packages-from=12.16.3
 
 它存储在工程根目录中，用于记录该工程依赖的 Node.js 版本。
 
-```
+```bash
 echo 12.16.3 > .nvmrc
 ```
 
 进入工程目录（当前目录），运行：
 
-```
+```bash
 nvm use
 ```
 
@@ -236,7 +233,7 @@ nvm use
 
 ### 升级 nvm
 
-```
+```bash
 cd $NVM_DIR
 git fetch origin
 git checkout `git describe --abbrev=0 --tags`
@@ -244,7 +241,7 @@ git checkout `git describe --abbrev=0 --tags`
 
 升级完成后，需要重新激活 nvm：
 
-```
+```bash
 . $NVM_DIR/nvm.sh
 ```
 
@@ -252,7 +249,7 @@ git checkout `git describe --abbrev=0 --tags`
 
 若不希望使用 Node.js 的官方 Docker 镜像，可利用 nvm 创建镜像：
 
-```
+```txt
 FROM ubuntu:bionic
 MAINTAINER ...
 
@@ -270,7 +267,5 @@ RUN set -eux; \
     apt-get clean; \
     rm -rf /var/lib/apt/lists/* /root/.nvm/.cache
 ```
-
-
 
 [^1]: [Linux 环境下源码编译安装 NodeJS及npm](https://www.jianshu.com/p/54e336acbae3)

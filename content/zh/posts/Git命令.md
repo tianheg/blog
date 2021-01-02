@@ -1,11 +1,8 @@
 ---
 title: Git - 命令
 date: 2020-05-10T19:05:18+08:00
-categories: ["技术"]
-tech: ["Git"]
+tags: ["Git"]
 slug: Git order
-toc: true
-tocNum: false
 ---
 
 ## 命令
@@ -24,6 +21,7 @@ git commit -m "explain" 将暂存区的改动合并到版本库的分支中
 rm <file> 直接删除工作区的内容
 
 ## 通过 SSH 连接仓库的 Wiki
+
 ```text
 git remote set-url origin git@github.com:YourName/YourRepoName.wiki.git
 ```
@@ -33,7 +31,8 @@ To do that, we can avoid input the name and password when pushing.
 ## 移除hexo远程库后无法推送hugo相关仓库
 
 问题：
-```
+
+```bash
 D:\Hugo\Sites\blog>git push origin master
 To github.com:Gaotianhe/Gaotianhe.github.io.git
  ! [rejected]          master -> master (non-fast-forward)
@@ -70,11 +69,13 @@ D:\Hugo\Sites\blog>
    git pull --rebase origin master
    git push origin master
    ```
+
    先把本地文件覆盖，再推送至远程
 
 ## git branch --set-upstream 本地关联远程分支
 
 从别人的远程库pull时出现以下信息：
+
 ```bash
 λ git pull
 There is no tracking information for the current branch.
@@ -119,6 +120,7 @@ git branch --set-upstream-to=origin/remote_branch  your_branch
 #### 方法一：用commit –amend
 
 这种方法不仅可以修改commit message，也可以修改提交内容。这种方式在还没有推送到远端的情况下可以比较方便的保持原有的Change-Id，推荐使用（若已经推送到远端，Change-Id则会修改掉）。
+
 ```bash
 #修改需要修改的地方（只是修改commit message就不用做)
 git add .  #这一步如果只是修改commit message不用输入
@@ -130,6 +132,7 @@ git push <remote> <branch> -f #若还没有推送到远端，不用输入
 #### 方法二：用reset后修改
 
 这种方法与上面方法基本一致，也可以修改提交内容和commit message。这种方式在还没有推送到远端的情况下也可以比较方便的保持原有的Change-Id，（若已经推送到远端，Change-Id则会修改掉）。
+
 ```bash
 git reset HEAD^
 #修改需要修改的地方（只是修改commit message就不用做)
@@ -139,11 +142,13 @@ git push <remote> <branch> -f #若还没有推送到远端，不用输入
 ```
 
 #### 方法三：提交到了错误的分支上的处理
+
 ```bash
 # 取消最新的提交，然后保留现场原状
 git reset HEAD~ --soft
 git stash
 ```
+
 ```bash
 # 切换到正确的分支
 git checkout name-of-the-correct-branch
@@ -154,6 +159,7 @@ git commit -m "你的提交说明"
 ```
 
 遇到这种情况，很多人会说用cherry-pick(摘樱桃)，像下面这样。不过你自己看吧，哪个舒服用哪个。
+
 ```bash
 git checkout name-of-the-correct-branch
 # 把主分支上的最新提交摘过来，嘻嘻～～
@@ -166,6 +172,7 @@ git reset HEAD~ --hard
 ### 二.修改很久之前的一次提交
 
 1.查看修改
+
 ```bash
 git rebase -i master~1 #最后一次
 git rebase -i master~5 #最后五次
@@ -191,6 +198,7 @@ pick 92b495b 2009-08-08: ×××××××
 ```
 
 3.命令行显示：
+
 ```bash
 Stopped at e35b8f3… reflog branch first commit
 You can amend the commit now, with
@@ -201,6 +209,7 @@ Once you are satisfied with your changes, run
 
 git rebase –continue
 ```
+
 ```bash
 #修改需要修改的地方（只是修改commit message就不用做)
 git add . #这一步如果只是修改commit message不用输入
@@ -209,11 +218,13 @@ git commit --amend
 ```
 
 4.使用 git rebase –continue 完成操作
+
 ```bash
 git rebase --continue
 ```
 
 5.推送到远端（若还没有推送到远端，不用处理）
+
 ```bash
 git push <remote> <branch> -f
 ```

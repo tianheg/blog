@@ -1,8 +1,7 @@
 ---
 title: Hugo 主题及多语言图标不能在 Linux Chrome 中正常显示
 date: 2020-05-17T10:11:26+08:00
-categories: ["技术"]
-tech: ["Hugo"]
+tags: ["Hugo"]
 slug: hugo theme and multilingual can't display on Chrome of linux
 ---
 
@@ -14,7 +13,7 @@ slug: hugo theme and multilingual can't display on Chrome of linux
 
 系统环境：
 
-```
+```text
 System:    
            Kernel: 4.19.0-6-amd64 x86_64 bits: 64 compiler: gcc v: 8.3.0 
            parameters: BOOT_IMAGE=/boot/vmlinuz-4.19.0-6-amd64 
@@ -30,7 +29,7 @@ Machine:
 
 Chrome 版本：
 
-```
+```text
 Chrome: 81.0.4044.138 (Official Build) (64-bit)
 ```
 

@@ -1,11 +1,7 @@
 ---
 title: 和 Emacs 的第一次见面
 date: 2020-02-26T20:33:41+08:00
-categories: ["技术"]
-tech: ["Emacs"]
-slug: 
-toc: true
-tocNum: true
+tags: ["Emacs"]
 ---
 
 ## 技术之外
@@ -60,8 +56,3 @@ tocNum: true
 我不知道a代表什么，e大概是ending吧。
 
 这就是今天的学习内容。
-
-
-
-
-
