@@ -6,7 +6,7 @@ keywords = "关于我"
 
 > 你的负担将变成了礼物，你受的苦将照亮你的路
 
-## 我要成为什么样的人
+## 关于我
 
 - 💻🛠➡️😴💰
 - 积极影响他人
@@ -22,3 +22,13 @@ keywords = "关于我"
   - 培养冷静温和的性情
   - 从逻辑辩证角度看待事物
   - 创造自己的财富之路
+
+<footer>
+<script src="https://utteranc.es/client.js"
+        repo= "tianheg/comments"
+        issue-term="title"
+        theme="github-light"
+        crossorigin="anonymous"
+        async>
+</script>
+</footer>
