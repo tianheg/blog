@@ -18,6 +18,14 @@ keywords = "关于我"
 
 音乐多为舒缓放松，间或品味大师雅作。谈及音乐，流行音乐不听，其余皆可。
 
+## 订阅博客
+
+- RSS
+  - 直接使用 [链接](https://blog.yidajiabei.xyz/index.xml)
+  - [Feeds.pub](https://feeds.pub/feed/https%3A%2F%2Fblog.yidajiabei.xyz%2Findex.xml)
+- 直接浏览网站
+- 公众号：一大加贝
+
 ## 联系我
 
 邮件：yidajiabei#gmail.com
