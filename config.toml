@@ -73,9 +73,11 @@ FootnoteReturnLinkContents = "↑"
     favicon_32 = "images/f/favicon-32x32.png"
     favicon_16 = "images/f/favicon-16x16.png"
     siteLogo = "images/me.png"
-    colorscheme = "light"
+    colorscheme = "auto"
 
 
+    hideColorSchemeToggle = false
+    maxSeeAlsoItems = 5
     custom_css = ["/css/main.css"]
     custom_js = ["/js/lazysizes.min.js"]
 
@@ -105,6 +107,8 @@ FootnoteReturnLinkContents = "↑"
     weight = 8
     url = "index.xml"
 
+[params.cloudflare]
+    token = "1f5b4eb8f0944641ac64f3049e9e0bcc"
 
 [menu]
     ## 菜单栏
@@ -114,27 +118,32 @@ FootnoteReturnLinkContents = "↑"
         weight = 1
         pre = "internal"
     [[menu.main]]
+        url = "/now/"
+        name = "现在"
+        weight = 2
+        pre = "internal"
+    [[menu.main]]
         url = "https://project.yidajiabei.xyz"
         name = "项目"
-        weight = 2
+        weight = 3
         pre = "external" # 新标签页打开，具体设置见 ~\themes\me\layouts\partials\header.html:13
     [[menu.main]]
         url = "/tags/"
         name = "标签"
-        weight = 3
+        weight = 4
         pre = "internal"
     [[menu.main]]
         url = "/posts/"
         name = "归档"
-        weight = 4
+        weight = 5
+        pre = "internal"
+    [[menu.main]]
+        url = "/talk/"
+        name = "嘀咕"
+        weight = 6
         pre = "internal"
     [[menu.main]]
         url = "/link/"
         name = "友链"
-        weight = 5
-        pre = "internal"
-    [[menu.main]]
-        url = "/now/"
-        name = "现在"
-        weight = 6
+        weight = 7
         pre = "internal"

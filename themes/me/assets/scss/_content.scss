@@ -3,36 +3,34 @@
   display: flex;
   margin-top: 1.6rem;
   margin-bottom: 3.2rem;
-  hr {
-    margin: auto;
-  }
   article {
     header {
       margin-top: 6.4rem;
       margin-bottom: 3.2rem;
-      @media only screen and (max-width : 768px) {
-        margin-top: 10px;
-        margin-bottom: 10px;
-      }
       h1 {
-        font-size: 30px;
+        font-size: 4.2rem;
         line-height: 4.6rem;
         margin: 0;
         @media only screen and (max-width : 768px) {
-          font-size: 24px;
+          font-size: 4.0rem;
           line-height: 4.4rem;
         }
       }
     }
-    // footer {
-    //   // margin-top: 4.0rem;
-    //   .see-also {
-    //     // margin: 3.2rem 0;
-    //     h3 {
-    //       //margin: 3.2rem 0;
-    //     }
-    //   }
-    // }
+    footer {
+      margin-top: 4.0rem;
+      .see-also {
+        margin: 3.2rem 0;
+        h3 {
+          margin: 3.2rem 0;
+        }
+      }
+    }
+    p {
+      text-align: justify;
+      text-justify: auto;
+      hyphens: auto;
+    }
   }
   .post {
     .post-title {
@@ -46,22 +44,12 @@
         margin-right: 0.5rem;
       }
       .date {
-        font-size: 16px;
-        @media only screen and (max-width : 768px) {
-          font-size: 14px;
-        }
         .posted-on {
           margin-left: 0;
           margin-right: 1.5rem;
         }
       }
       .tags {
-        font-size: 16px;
-        @media only screen and (max-width : 768px) {
-          font-size: 14px;
-        }
-      }
-      .categories {
         font-size: 16px;
         @media only screen and (max-width : 768px) {
           font-size: 14px;
@@ -97,13 +85,12 @@
     padding: 0;
     li {
       font-size: 1.8rem;
-      line-height: 1.8;
       @media only screen and (max-width : 768px) {
         margin: 1.6rem 0 1.6rem 0;
-        line-height: 1.6;
       }
       .date {
         display: inline-block;
+        flex:1;
         width: 20.0rem;
         text-align: right;
         margin-right: 3.0rem;
@@ -114,13 +101,21 @@
       }
       .title {
         font-size: 1.8rem;
-        color: $link-color;
+        flex:2;
+        color: $fg-color;
         font-family: $heading-font-family;
         font-weight: 700;
-        // &:hover,
-        // &:focus {
-        //   color: $link-color
-        // }
+        &:hover,
+        &:focus {
+          color: $link-color
+        }
+      }
+    }
+  }
+  ul:not(.pagination) {
+    li {
+      @media only screen and (min-width : 768.1px) {
+        display: flex;
       }
     }
   }
