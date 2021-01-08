@@ -38,8 +38,9 @@ keywords = "关于我"
 
 <footer>
 <script src="https://utteranc.es/client.js"
-        repo= "tianheg/comments"
+        repo= "tianheg/blog"
         issue-term="title"
+        label="comment"
         theme="github-light"
         crossorigin="anonymous"
         async>
