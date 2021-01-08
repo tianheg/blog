@@ -1,14 +1,15 @@
-{{ define "title" }}
-  {{ title (i18n (lower .Title)) | default .Title }} · {{ .Site.Title }}
-{{ end }}
 {{ define "content" }}
   <section class="container list">
+    {{/*  {{ partial "breadcrumb.html" . }}  */}}
+
     <h1 class="title"> {{ title (i18n (lower .Title)) | default .Title }} </h1>
-    <!-- <ul>
+    共计 {{ len (where .Site.RegularPages "Section" "posts") }} 篇日志
+    <h2>{{ .Date.Format "2006" }}</h2>
+    <ul>  
       {{- range .Paginator.Pages -}}
         {{- .Render "li" -}}
       {{- end -}}
-    </ul> -->
+    </ul>
     {{ $prev := 3000}}
     {{range .Site.RegularPages}}
     {{if .Date}}

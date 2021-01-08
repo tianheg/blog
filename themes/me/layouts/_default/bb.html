@@ -1,0 +1,101 @@
+{{ define "content"}}
+  <section class="container post">
+
+        <h2 class="post-title">{{.Title}}</h2>
+        <div class="post-content">
+          <p class="count">共嘀咕了<span class="count-data">0</span>条</p>
+          <section class="timeline">
+            <ul>
+              <div class="list">
+              </div>
+            </ul>
+          </section>
+          <div class="load">
+            <button class="load-btn button-load">加载更多</button>
+          </div>
+        </div>
+  </section>
+  <style>
+    .timeline ul {margin:0;padding-bottom:2rem;}
+    .timeline ul li {background:#eaeaea;list-style-type:none;position:relative;width:2px;margin-left:20px;padding:10px 0 50px;}
+    .timeline ul li::after {content:'';position:absolute;left:50%;top:25px;transform:translateX(-50%);width:8px;height:8px;border-radius:50%;background:inherit;}
+    .timeline ul li div {background:#eaeaea;border-radius:5px;position:relative;top:0;left:40px;width:670px;padding:8px 16px;}
+    .timeline ul li div p{margin:0;font-size: 17px;letter-spacing:2px;color: #000;}
+    .timeline ul li div::before{content:'';position:absolute;top:10px;width:0;height:0;border-style:solid;left:-15px;border-width:8px 16px 8px 0;border-color:transparent #eaeaea transparent transparent;}
+    .dark-theme .timeline ul li div p{color:#fafafa;}
+    .dark-theme .timeline ul li,.dark-theme .timeline ul li div{background:#3b3d42;}
+    .dark-theme .timeline ul li div::before{border-color:transparent #3b3d42 transparent transparent;}
+    @media (max-width:860px) {
+      .timeline ul li{margin-left:0;}
+      .timeline ul li div{width:calc(100vw - 75px);left:30px;}
+    }
+  </style>
+  <script type="text/javascript" src="https://cdn.jsdelivr.net/gh/TencentCloudBase/tcb-js-sdk@master/tcbjs/1.10.10/tcb.js"></script>
+
+  <script>
+    //初始化
+    const app = tcb.init({
+      env: 'bb-5g8ftb00dc1199d4' //这里是你的环境id
+    })
+    app.auth({
+      persistence: "session"
+    }).anonymousAuthProvider().signIn().then(() => {
+      //定义数据对象
+      const db = app.database()
+      //选择数据表
+      const collection = db.collection('bb')
+      /**
+       * 定义基本变量
+       * count | int, 数目
+       * per | int, 每页显示项目数
+       * page | int, 第几页
+       */
+      var count = 0, per = 10, page = 1
+      /**
+       * 获取数目
+       */
+      collection.count(function (err, res) {
+        count = res.total
+        $('.count-data').text(count)
+        getList()
+      })
+      /**
+       * 封装获取数据函数
+       */
+      function getList() {
+        if ((page - 1) * per >= count) {
+          return
+        }
+        var date
+        collection.limit(per).skip((page - 1) * per).orderBy('date', 'desc').get(function (err, res) {
+          (res.data).forEach(item => {
+            date = item.date
+            content = urlToLink(item.content)
+            $('.list').append('<li class="item"><div><p>' + content + '</p><time class="date"><small>' + `${(date.getHours() + 1) <= 12 ? '上午' : '下午'}` + `${(date.getHours() + 1) <= 10 ? ('0' + date.getHours()) : date.getHours()}` + ':' + `${(date.getMinutes() + 1) <= 10 ? ('0' + date.getMinutes()) : date.getMinutes()}` + ' · ' + date.getFullYear() + '年' + (`${(date.getMonth() + 1) < 10 ? ('0' + (date.getMonth() + 1)) : date.getMonth() + 1}`) + '月' + `${(date.getDate() + 1) < 10 ? ('0' + date.getDate()) : date.getDate()}` + '日 ' + ' ·「' + item.from + '」</small></time></div></li>')
+          });
+          if (page * per >= count) {
+            $('.load').remove()
+            return
+          }
+          page++
+        });
+      }
+      $('.button-load').click(function () { getList() })
+    }).catch(err => {
+      console.log(err)
+    });
+
+    // 图片和链接
+    function urlToLink(str) {
+      var re = /\bhttps?:\/\/(?!\S+(?:jpe?g|png|bmp|gif|webp|gif))\S+/g;
+      var re_forpic = /\bhttps?:\/\/.*?(\.gif|\.jpeg|\.png|\.jpg|\.bmp|\.webp)/g;
+      str = str.replace(re, function (website) {
+        return "<a href='" + website + "' target='_blank' rel='noopener'> <svg class='post-meta-icon' height='18' width='18' viewBox='0 0 20 20'> <path d='M16.469,8.924l-2.414,2.413c-0.156,0.156-0.408,0.156-0.564,0c-0.156-0.155-0.156-0.408,0-0.563l2.414-2.414c1.175-1.175,1.175-3.087,0-4.262c-0.57-0.569-1.326-0.883-2.132-0.883s-1.562,0.313-2.132,0.883L9.227,6.511c-1.175,1.175-1.175,3.087,0,4.263c0.288,0.288,0.624,0.511,0.997,0.662c0.204,0.083,0.303,0.315,0.22,0.52c-0.171,0.422-0.643,0.17-0.52,0.22c-0.473-0.191-0.898-0.474-1.262-0.838c-1.487-1.485-1.487-3.904,0-5.391l2.414-2.413c0.72-0.72,1.678-1.117,2.696-1.117s1.976,0.396,2.696,1.117C17.955,5.02,17.955,7.438,16.469,8.924 M10.076,7.825c-0.205-0.083-0.437,0.016-0.52,0.22c-0.083,0.205,0.016,0.437,0.22,0.52c0.374,0.151,0.709,0.374,0.997,0.662c1.176,1.176,1.176,3.088,0,4.263l-2.414,2.413c-0.569,0.569-1.326,0.883-2.131,0.883s-1.562-0.313-2.132-0.883c-1.175-1.175-1.175-3.087,0-4.262L6.51,9.227c0.156-0.155,0.156-0.408,0-0.564c-0.156-0.156-0.408-0.156-0.564,0l-2.414,2.414c-1.487,1.485-1.487,3.904,0,5.391c0.72,0.72,1.678,1.116,2.696,1.116s1.976-0.396,2.696-1.116l2.414-2.413c1.487-1.486,1.487-3.905,0-5.392C10.974,8.298,10.55,8.017,10.076,7.825'></path></svg>链接 </a>";
+      });
+      str = str.replace(re_forpic, function (imgurl) {
+        return "<a href='" + imgurl + "' data-lightbox='" + imgurl + "' data-title='" + imgurl + "' data-alt='" + imgurl + "' rel='noopener'><img loading='lazy' src='" + imgurl + "' /></a>";
+      });
+      return str;
+    }
+  </script>
+{{ end }}
