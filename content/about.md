@@ -18,6 +18,8 @@ keywords = "关于我"
 
 音乐多为舒缓放松，间或品味大师雅作。谈及音乐，流行音乐不听，其余皆可。
 
+一份感谢清单：[谢谢你](https://blog.yidajiabei.xyz/posts/thanks)
+
 ## 订阅博客
 
 - RSS
@@ -30,9 +32,9 @@ keywords = "关于我"
 
 邮件：yidajiabei#gmail.com
 
-如果你觉得，我的文章对你有帮助，而你恰好有余钱的话，还请不吝赞赏：
+如果你觉得，我的文章对你有帮助，而你恰好有余钱的话，还请不吝赞赏：[爱发电](https://afdian.net/@yidajiabei)
 
-[爱发电](https://afdian.net/@yidajiabei)
+---
 
 欢迎留言：
 
