@@ -45,6 +45,13 @@ Hugo 构建，主要记录生活随笔，想写些深度技术内容。
 - 知识之间的紧密联系
 - 查找方便
 - 公开可访问
+- 信息需要被整理
+- 对于信息的分类（质与量）
+  - 质：优质信息，如学术论文、新闻特稿、经典名著、牛人分享等
+  - 量：大量信息，如家长里短、鸡毛蒜皮、社群聊天、日常新闻、常识经验等
+  - 种类划分：技术、商业、学术、政治、日常等等 or 平台、形式、社群、新闻
+  - 从对信息的使用周期进行划分：短期使用信息、中期使用信息、长期使用信息
+- 信息获取到使用的链路：获取 优质/商业/可利用 信息 --> 发现信息中蕴含的价值和机会 --> 执行试错并优化
 
 ## 一些工具——数字花园
 
@@ -188,3 +195,4 @@ My thinking/process is basically:
 16. <http://gordonbrander.com/pattern/>
 17. <https://github.com/brennanbrown/enjoyment-work>
 18. <https://github.com/Mint-System/Knowledge/>
+19. [建立知识体系，这份指南就够了](https://github.com/tianheg/articles/blob/main/docs/book/%E5%BB%BA%E7%AB%8B%E7%9F%A5%E8%AF%86%E4%BD%93%E7%B3%BB%EF%BC%8C%E8%BF%99%E4%BB%BD%E6%8C%87%E5%8D%97%E5%B0%B1%E5%A4%9F%E4%BA%86.md)
