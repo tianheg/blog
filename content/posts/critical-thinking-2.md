@@ -1,10 +1,9 @@
 ---
-title: "【9.6 - 9.8】批判性思维3——思维品质和思维技能"
+title: "思维品质和思维技能"
 date: 2020-09-08T19:47:00+08:00
 description: "记录学习批判性思维的笔记"
 tags: ["批判性思维"]
 keywords: ["批判性思维"]
-slug: 9.6 9.8 Critical Thinking 3 Thinking quality and thinking skills
 ---
 
 ## 思维品质
@@ -81,7 +80,7 @@ slug: 9.6 9.8 Critical Thinking 3 Thinking quality and thinking skills
 
 以上九个思维任务的总结：
 
-![评估论证](/images/pinggulunzheng.png)
+![评估论证](/images/critical-thinking-2-pinggulunzheng.png)
 
 ### 总结与回顾
 
