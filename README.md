@@ -10,4 +10,8 @@ You can visit this link to watch my site:
 
 <https://blog.yidajiabei.xyz>
 
+## LICENSE
+
 <a rel="license" href="http://creativecommons.org/licenses/by-nc-sa/4.0/"><img style="border-width:0" src="https://i.creativecommons.org/l/by-nc-sa/4.0/88x31.png" /></a>
+
+All my contents are under [CC BY-NC-SA 4.0](https://creativecommons.org/licenses/by-nc-sa/4.0/)
