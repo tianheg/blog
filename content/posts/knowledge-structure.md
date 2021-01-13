@@ -44,6 +44,7 @@ Hugo 构建，主要记录生活随笔，想写些深度技术内容。
 - 需要一个方便的容器（写作），比如：Hexo，Hugo，Vuepress，Gatsby，MkDocs，Docsify 等等，静态网站生成器（Static Site Generator, SSG）
 - 知识之间的紧密联系
 - 查找方便
+- 公开可访问
 
 ## 一些工具——数字花园
 
