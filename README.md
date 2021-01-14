@@ -10,6 +10,8 @@ You can visit this link to watch my site:
 
 <https://blog.yidajiabei.xyz>
 
+My blog will be: [project](https://github.com/tianheg/blog/projects/1?fullscreen=true)
+
 ## LICENSE
 
 <a rel="license" href="http://creativecommons.org/licenses/by-nc-sa/4.0/"><img style="border-width:0" src="https://i.creativecommons.org/l/by-nc-sa/4.0/88x31.png" /></a>
