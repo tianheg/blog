@@ -1,8 +1,9 @@
 ---
-title: 孤独是人生的必修课
+title: "孤独是人生的必修课"
 date: 2019-03-23T15:02:09+08:00
-tags: ["随笔"]
-slug: Loneliness is a required course in life
+description: "记录自己和孤独相处的感受，感觉"
+tags: ["随笔", "孤独"]
+keywords: ["随笔", "孤独"]
 ---
 
 心好乱，很难受，但是却不知道难受的根源。
