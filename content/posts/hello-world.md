@@ -1,10 +1,9 @@
 ---
-title: "Hello World"
+title: "你好，世界"
 date: 2018-12-23T02:12:41+08:00
 description: "一个开始，决定记录自己，上下求索"
-tags: ["开始"]
-keywords: ["开始"]
-slug: hello-world
+tags: ["开始", "随笔"]
+keywords: ["开始", "随笔"]
 ---
 
 说起来也是很后知后觉了，直到今天(2020 年 6 月 4 日)，我才意识到要为博客写一篇开头。
