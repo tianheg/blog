@@ -1,8 +1,8 @@
 ---
 title: "{{ replace .BaseFileName "-" " " | title }}"
 date: {{ .Date }}
-tags: [""]
 description: ""
+tags: [""]
 keywords: [""]
 draft: false
 ---
