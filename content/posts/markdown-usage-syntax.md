@@ -1,8 +1,9 @@
 ---
-title: Markdown 使用语法
+title: "Markdown 使用语法"
 date: 2020-05-10T17:39:28+08:00
+description: "记录 Markdown 的使用语法"
 tags: ["Markdown"]
-slug: Markdown uses syntax
+keywords: ["Markdown"]
 ---
 
 ## 添加任务列表
@@ -41,3 +42,9 @@ slug: Markdown uses syntax
 ```
 
 就是这样添加脚注的
+
+---
+
+参考资料
+
+1. <https://daringfireball.net/projects/markdown/>
