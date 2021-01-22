@@ -1,23 +1,33 @@
 ---
-title: Git - 命令
+title: "命令"
 date: 2020-05-10T19:05:18+08:00
+description: "汇总常用 Git 指令"
 tags: ["Git"]
-slug: Git order
+keywords: ["Git"]
 ---
 
 ## 命令
 
-git checkout -- file  丢弃工作区的修改，让文件回到最近一次git commit或git add的状态
+git checkout -- file  丢弃工作区的修改，让文件回到最近一次 git commit 或 git add 的状态
+
 git checkout <branch> 切换到另一分支
-git reset HEAD <file> unstage the stage,撤销暂存区的修改
+
+git reset HEAD <file> unstage the stage 撤销暂存区的修改
+
 git log --pretty=oneline 从最近到最远的3次提交日志
+
 git reset --hard HEAD^ 回到最近的一次提交版本
+
 ……………………… HEAD^^ 回到最近的第二次提交版本
+
 ……………………… HEAD~100 回到最近的第100次提交版本
+
 ……………………… commit id 回到该id号对应的版本
 
 git add <file> 从工作区添加到暂存区;git rm <file> 将工作区中的删除添加到暂存区
+
 git commit -m "explain" 将暂存区的改动合并到版本库的分支中
+
 rm <file> 直接删除工作区的内容
 
 ## 通过 SSH 连接仓库的 Wiki
