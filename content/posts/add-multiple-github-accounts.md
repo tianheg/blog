@@ -1,8 +1,9 @@
 ---
-title: "Git - 为本地添加多个 GitHub 账户"
+title: "为本地添加多个 GitHub 账户"
 date: 2020-06-12T17:51:00+08:00
+description: "记录在本地如何添加多个 GitHub 账户"
 tags: ["Git"]
-slug: Git for multiple GitHub accounts
+keywords: ["Git"]
 ---
 
 重要参考：[使用 SSH 连接到 GitHub（多帐号）](https://io-oi.me/tech/ssh-with-multiple-github-accounts/)
