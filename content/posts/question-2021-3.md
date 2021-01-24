@@ -11,3 +11,5 @@ draft: false
 
 - 为什么 QQ 音乐在 VMware Workstation 16 Player 中的 Win10 虚拟机中播放音乐时不时卡顿呢？是不是因为 CPU 占用达到 100%？为什么 CPU 占用会达到 100%？
 - 如果人的一切行为都是为了现实中的利益获得，人的思想体现在哪里？人如果没有好奇心，没有幻想，人还是人吗？
+- 如何才能删除维基账户？由于 MediaWiki 软件的限制，还无法删除 Wikipedia 帐户。但是可以让自己的账户不可用，以便使用新的用户名。[参考](https://www.wikihow.com/Delete-Your-Wikipedia-Account)
+- 为什么一个论点的提出都要一个极好的例子跟随呢？
