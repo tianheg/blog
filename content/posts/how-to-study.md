@@ -4,7 +4,6 @@ date: 2021-01-10T11:27:17+08:00
 tags: ["学习", "How to"]
 description: "如何学习"
 keywords: ["学习", "方法"]
-draft: false
 ---
 
 本文主要写如何学习。
