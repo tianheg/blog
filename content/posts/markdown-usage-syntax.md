@@ -6,6 +6,54 @@ tags: ["Markdown"]
 keywords: ["Markdown"]
 ---
 
+## 综述
+
+### 设计哲学
+
+Markdown 被设计得易于读写。
+
+### 行内 HTML
+
+Markdown 不是 HTML 的替代，或是接近它。如果有些标记 Markdown 没有，你大可以用 HTML。唯一限制使用的是块元素。跨度 HTML 标签可以在 Markdown 段落的任何地方使用。
+
+### 自动转义特殊字符
+
+在 HTML 中有两个字符需要特别对待：`<` 和 `&`。< 被用来作为标签的开始；& 被用来表示 HTML 实体。如果你想把它们用作文字字符，你必须把它们作为实体转义，例如 &lt; 和 &amp;，原形：`&lt;` 和 `&amp;`。
+
+`&` 使网络作家特别困扰。如果你想写 `AT&T`，你需要写 `AT&amp;T`。
+
+## 块元素
+
+### 段落和换行符
+
+段落就是纯文本，段落之间有至少一个空行，多个空行也只会形成一个空行。
+
+### 页眉（HEADERS）
+
+### 块引用
+
+### 列表
+
+### 代码块
+
+### 水平尺
+
+## 跨度元件（Span Elements）
+
+### 链接
+
+### 强调
+
+### 代码
+
+### 照片
+
+## 杂项
+
+### 反斜线转义
+
+### 自动链接
+
 ## 添加任务列表
 
 - [ ] 「请帮我列出解决此问题的完整步骤」
@@ -45,6 +93,6 @@ keywords: ["Markdown"]
 
 ---
 
-参考资料
+**参考资料**：
 
-1. <https://daringfireball.net/projects/markdown/>
+1. <https://daringfireball.net/projects/markdown/syntax>
