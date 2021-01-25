@@ -4,7 +4,6 @@ date: {{ .Date }}
 description: ""
 tags: [""]
 keywords: [""]
-draft: false
 ---
 
 ---
