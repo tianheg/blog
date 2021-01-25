@@ -274,18 +274,6 @@ ___
 _ _ _
 ```
 
-* * *
-
-***
-
-- - -
-
----
-
-___
-
-_ _ _
-
 ## 跨度元件（Span Elements）
 
 ### 链接
@@ -386,19 +374,158 @@ Visit [Daring Fireball][] for more information.
 [Daring Fireball]: https://daringfireball.net/
 ```
 
+脚注就是隐式链接，它（指脚注）把 `[]` 直接省略了。
+
 ### 强调
+
+Markdown 使用 `*` 和 `_` 表示强调。由一个 `*` 或 `_` 包裹的文本，在 HTML 中变成 `<em></em>`；由两个 `*` 或 `_` 包裹的文本，在 HTML 中变成 `<strong></strong>`。例子，输入：
+
+```md
+*single asterisks*
+
+_single underscores_
+
+**double asterisks**
+
+__double underscores__
+```
+
+```html
+<em>single asterisks</em>
+
+<em>single underscores</em>
+
+<strong>double asterisks</strong>
+
+<strong>double underscores</strong>
+```
+
+强调可以被用于一个单词中。
+
+但如果你在一个 * 或 _ 加上空格，它们会变成字面上的星号或下划线。
+
+要在原本会用作强调定界符的位置产生文字星号或下划线，可以反斜杠对其进行转义：
+
+```md
+\*this text is surrounded by literal asterisks\*
+```
 
 ### 代码
 
-### 照片
+使用反引号（``）表示代码的范围。
+
+为了在一个代码片中包含一个文字反引号，可以使用两个反引号表示代码片：
+
+```md
+``There is a literal backtick (`) here.``
+```
+
+在双反引号中，插入文字反引号：
+
+```md
+A single backtick in a code span: `` ` ``
+
+A backtick-delimited string in a code span: `` `foo` ``
+```
+
+——使用空格。
+
+变成 HTML：
+
+```html
+<p>A single backtick in a code span: <code>`</code></p>
+
+<p>A backtick-delimited string in a code span: <code>`foo`</code></p>
+```
+
+在代码片中，& 和 <> 会被自动转换。
+
+### 图片
+
+Markdown 使用一种类似于链接语法的图像语法，允许两种样式：内联和引用。
+
+内联图像语法：
+
+```md
+![Alt text](/path/to/img.jpg)
+
+![Alt text](/path/to/img.jpg "Optional title")
+```
+
+解释：
+
+- 感叹号；
+- 方括号包裹，方括号内是图片的 alt 属性文本；
+- 一组括号，内部是图片链接或路径，后面是可选的图片的标题
+
+引用图片语法：
+
+```md
+![Alt text][id]
+[id]: url/to/image  "Optional title attribute"
+```
+
+Markdown 没有指定图像尺寸的语法，可以使用 HTML 的图片标签 `<img>`。
 
 ## 杂项
 
 ### 反斜线转义
 
+在一些情况下，我们不想使用 Markdown 语法，而是需要表示语法的字符。但是，直接使用它们，由于 Markdown 语法的作用会改变样式，所以需要对这些字符进行转义，即，使用 `\`。
+
+Markdown 提供以下字符的转义：
+
+```txt
+\   backslash
+`   backtick
+*   asterisk
+_   underscore
+{}  curly braces
+[]  square brackets
+()  parentheses
+#   hash mark
++   plus sign
+-   minus sign (hyphen)
+.   dot
+!   exclamation mark
+```
+
 ### 自动链接
 
-## 添加任务列表
+用尖括号（<>）包裹的链接会自动转换成可以点击的链接：
+
+输入：
+
+```md
+<https://daringfireball.net/projects/markdown/syntax>
+```
+
+输出为 HTML：
+
+```html
+<a href="https://daringfireball.net/projects/markdown/syntax">https://daringfireball.net/projects/markdown/syntax</a>
+```
+
+还可以改变电子邮箱，输入：
+
+```md
+<address@example.com>
+```
+
+HTML 输出：
+
+```html
+<a href="&#x6D;&#x61;i&#x6C;&#x74;&#x6F;:&#x61;&#x64;&#x64;&#x72;&#x65;
+&#115;&#115;&#64;&#101;&#120;&#x61;&#109;&#x70;&#x6C;e&#x2E;&#99;&#111;
+&#109;">&#x61;&#x64;&#x64;&#x72;&#x65;&#115;&#115;&#64;&#101;&#120;&#x61;
+&#109;&#x70;&#x6C;e&#x2E;&#99;&#111;&#109;</a>
+```
+
+它将在浏览器中呈现为指向 “`address@example.com`” 的可点击链接。
+
+（这种实体编码技巧的确会欺骗许多（即使不是大多数）地址收集机器人，但绝对不会欺骗所有它们。总比没有好，但是以这种方式发布的地址最终可能会开始收到**垃圾邮件**。）
+
+### 添加任务列表
 
 - [ ] 「请帮我列出解决此问题的完整步骤」
 
@@ -418,21 +545,11 @@ Visit [Daring Fireball][] for more information.
 - [x] 「我应该查阅哪个文章或者哪个网站？」（大致指个方向都会对我有很大帮助）
 ```
 
-## 添加换行符
+### 添加换行符
 
 在 markdown 中，无法多次按 Enter 键，并不能形成多个空行，需要使用 HTML 语法
 
 使用 `<br/>` 形成空行
-
-## 添加脚注
-
-```markdown
-以前曾经学过《未选择的路》[^1]
-
-[^1]: [未选择的路](https://baike.baidu.com/item/未选择的路/79357)
-```
-
-就是这样添加脚注的
 
 ---
 
