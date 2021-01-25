@@ -4,7 +4,6 @@ date: 2021-01-22T21:37:09+08:00
 description: "记录稻盛和夫的经营十二条"
 tags: ["激励"]
 keywords: ["激励"]
-draft: false
 ---
 
 1. 明确事业的目的和意义
