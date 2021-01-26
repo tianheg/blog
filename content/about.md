@@ -20,6 +20,10 @@ keywords = "关于我"
 
 一份感谢清单：[谢谢你](https://blog.yidajiabei.xyz/posts/thanks)
 
+### 自我观察
+
+- 不够细心（2021-01-26）
+
 ## 订阅博客
 
 - RSS
