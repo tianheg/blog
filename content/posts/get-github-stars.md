@@ -2,8 +2,8 @@
 title: "怎样获得 GitHub 的 stars 列表"
 date: 2020-12-09T13:36:47+08:00
 description: "记录获得 GitHub 的 stars 的过程"
-tags: ["GitHub"]
-keywords: ["GitHub"]
+tags: ["GitHub", "GitHub Actions"]
+keywords: ["GitHub", "GitHub Actions"]
 ---
 
 一直有一个想法：把 GitHub 上加星的仓库做成一个列表或者其他便于浏览查找的形式。今天，我就发现了这种工具。趁着午休，把它用上了，展示仓库：[tianheg/stars](https://github.com/tianheg/stars)。
