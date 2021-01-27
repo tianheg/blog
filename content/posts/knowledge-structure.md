@@ -10,7 +10,17 @@ keywords: ["体系", "知识", "构建", "Wiki", "Note", "Blog"]
 
 ## 现有的努力
 
-### Wiki
+### Blog + Obsidian
+
+2021-01-27
+
+现在的做法：使用博客构建体系，使用 Obsidian 建立文档联系
+
+### 2021-01-27 之前的方案
+
+Wiki，Note，Blog 三个体系划分知识，分类太多，不好专注。这三种形式，知识之间的链接程度不同，在这三者来回跳跃容易乱掉。
+
+**Wiki**
 
 Vuepress 构建，主要用于构建技术领域的结构框架，一开始的领域涉及算法和数据结构、计算机系统原理、数据库原理、前后端开发指南、分布式技术、编程语言、网络基础、操作系统、安全、其他（其中含有：开源许可证、生活、数学、学习、科技、网站、工具、数据分析）。
 
@@ -22,7 +32,7 @@ Vuepress 构建，主要用于构建技术领域的结构框架，一开始的�
 
 访问方便。这一点目前对我来说不成问题，以后也不会成为难题。因为 GitHub 在国内的访问速度不是很理想，如果不能科学上网，使用 GitHub 如食鸡肋。
 
-### Note
+**Note**
 
 同样 Vuepress 构建，用于记录书影音笔记，从别处收集的文章。还有一个页面用于收集获取书影音的方法。
 
@@ -30,29 +40,13 @@ Vuepress 构建，主要用于构建技术领域的结构框架，一开始的�
 
 经过此次分类，对于内容体系的划分有了更深一步的理解。
 
-### Blog
+**Blog**
 
 Hugo 构建，主要记录生活随笔，想写些深度技术内容。
 
 现在，博客是我的知识体系的最终归宿。以标签为索引，目标是化繁为简。我明白知识体系构建的过程一定是从简单到复杂，我要让复杂变得简单，但又不仅仅是简单，复杂也包含在其中。
 
 可以类比道家，一生二、二生三、三生万物。
-
-### 获取信息的方式
-
-- 书籍
-- 电影
-- 音乐
-- 网站 / RSS
-- 知识星球
-- 微信公众号
-- ……
-
-书籍是最好的获取信息的方式，这是我目前认为的适合我的信息获取方式。
-
-文字类反馈，写作 wiki 的一个方法，用自己的话表达别人的你认为的好的内容。写 summary
-
-在写作中，作者退居二线，多以『你』称呼
 
 ## 一些点子
 
@@ -67,6 +61,20 @@ Hugo 构建，主要记录生活随笔，想写些深度技术内容。
   - 种类划分：技术、商业、学术、政治、日常等等 or 平台、形式、社群、新闻
   - 从对信息的使用周期进行划分：短期使用信息、中期使用信息、长期使用信息
 - 信息获取到使用的链路：获取 优质/商业/可利用 信息 --> 发现信息中蕴含的价值和机会 --> 执行试错并优化
+- 文字类反馈，写作笔记的一个方法，用自己的话表达别人的你认为的好的内容。写 summary
+- 书籍是最好的获取信息的方式，这是我目前认为的适合我的信息获取方式。
+
+## 别人做笔记的思路
+
+1
+
+My thinking/process is basically:
+
+1. In order to maintain as much open format and interoperability in the future, stick to content and file format standards.
+2. For the few internal/external links in each document, it’s not that much of an inconvenience (especially with quick keys) to use standard `[text](link)` syntax. This ensures I can serve any .MD file I have with any SSG and/or use any standard Markdown converter now and in the future. And when I’ve finished the document, I do have to manually at Tags to the Frontmatter “tags” array. Adds 2-3 seconds per tag, but guarantees I’ll have taxonomy connections between files when published through an SSG.
+3. Placing Frontmatter at the top of each file also guarantees future interoperability, conversion, and hosting via SSG. Using TextExpander makes this super easy and fast.
+
+——来自 [ShaneRobinson](https://forum.obsidian.md/t/obsidian-github-pages-for-digital-gardeners/2622/7)
 
 ## 一些工具——数字花园
 
@@ -175,18 +183,6 @@ Hugo 构建，主要记录生活随笔，想写些深度技术内容。
 | [Tymon Zaniewski](garden.tymon-zaniewski.xyz) | Jekyll ([open-source template](https://maximevaillancourt.com/blog/setting-up-your-own-digital-garden-with-jekyll)) | personal wiki, DIY electronics, making music |
 | [Aquiles Carattino](https://www.aquiles.me) | Aqui Brain Dump | Science. Notes on books and papers. Technology Transfer. Working in Public |
 | [Yenly Ma](https://yenly.wtf) | [Foamy NextJS](https://github.com/yenly/foamy-nextjs) and NextJS with MDX | Digital garden of gardens. Learning and making in public. |
-
-## 别人做笔记的思路
-
-1
-
-My thinking/process is basically:
-
-1. In order to maintain as much open format and interoperability in the future, stick to content and file format standards.
-2. For the few internal/external links in each document, it’s not that much of an inconvenience (especially with quick keys) to use standard `[text](link)` syntax. This ensures I can serve any .MD file I have with any SSG and/or use any standard Markdown converter now and in the future. And when I’ve finished the document, I do have to manually at Tags to the Frontmatter “tags” array. Adds 2-3 seconds per tag, but guarantees I’ll have taxonomy connections between files when published through an SSG.
-3. Placing Frontmatter at the top of each file also guarantees future interoperability, conversion, and hosting via SSG. Using TextExpander makes this super easy and fast.
-
-——来自 [ShaneRobinson](https://forum.obsidian.md/t/obsidian-github-pages-for-digital-gardeners/2622/7)
 
 ---
 
