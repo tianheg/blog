@@ -556,3 +556,4 @@ HTML 输出：
 **参考资料**：
 
 1. <https://daringfireball.net/projects/markdown/syntax>
+2. <https://spec.commonmark.org/0.29/>
