@@ -30,7 +30,7 @@ keywords = "关于我"
 
 ### 博客
 
-- 可以使用 `[](/posts/file-name)` 相互引用文章
+- 可以使用 `[post-title](/posts/post-file-name/)` 和 `[tag-name](/tags/tag-name/)` 相互引用文章
 - 文章中的“他”，不单指男性，还有女性
 
 ## 订阅博客
