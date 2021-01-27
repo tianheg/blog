@@ -8,7 +8,7 @@ keywords: ["GitHub", "GitHub Actions", "JavaScript", "Python", "pipenv"]
 
 午饭前看到一个 issue：[[开源自荐] 利用Github Actions获取网站的Rss数据，并更新到个人主页](https://github.com/ruanyf/weekly/issues/1616)。
 
-标题勾起了我学习的兴趣。自己也想进一步学习 [GitHub Actions](/posts/get-github-stars) 的使用。
+标题勾起了我学习的兴趣。自己也想进一步学习 [GitHub Actions](/tags/github-actions/) 的使用。
 
 ## 添加「年进度」
 
