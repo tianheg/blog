@@ -236,5 +236,5 @@ Stack Exchange 已经成长到 [超过一百个网站](https://stackexchange.com
 **参考资料**：
 
 1. <http://www.catb.org/~esr/faqs/smart-questions.html>
-2. <https://github.com/ryanhanwu/How-To-Ask-Questions-The-Smart-Way/blob/master/README-zh_CN.md>
+2. <https://github.com/ryanhanwu/How-To-Ask-Questions-The-Smart-Way/blob/main/README-zh_CN.md>
 3. <https://en.wikipedia.org/wiki/Stack_Exchange>
