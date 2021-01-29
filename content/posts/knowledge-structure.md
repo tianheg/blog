@@ -1,8 +1,8 @@
 ---
 title: "构建知识体系"
 date: 2021-01-10T10:59:20+08:00
-tags: ["知识体系"]
 description: "构建自己的知识体系"
+tags: ["知识体系"]
 keywords: ["体系", "知识", "构建", "Wiki", "Note", "Blog"]
 ---
 
