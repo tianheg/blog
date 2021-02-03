@@ -1,28 +1,12 @@
 {{ define "title" }}
-  {{ .Title }}
-  {{ if eq .Site.Language.Lang "zh" }}
-    标签
-  {{ else }}
-    Tag
-  {{ end }}
-   ·
-  {{ .Site.Title }}
+  {{ .Title }} 标签 - {{ .Site.Title }}
 {{ end }}
 {{ define "description" }}
-  {{ if eq .Site.Language.Lang "zh" }}
     和{{ .Title }}相关的文章
-  {{ else }}
-    {{ .Title }} related articles
-  {{ end }}
 {{ end }}
 {{ define "content" }}
   <section class="container list">
-    <h1 class="title">{{ .Title }}
-      {{ if eq .Site.Language.Lang "zh" }}
-        标签
-      {{ else }}
-        Tag
-      {{ end }}
+    <h1 class="title">{{ .Title }} 标签
     </h1>
     <ul>
       {{- range .Paginator.Pages -}}
