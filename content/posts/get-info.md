@@ -16,6 +16,7 @@ keywords: ["知识体系"]
 
 - <https://bloggingfordevs.com/trends/>
 - <https://news.ycombinator.com/best>
+- <https://bloghub.fun/>
 
 ## 博客
 
@@ -58,6 +59,9 @@ keywords: ["知识体系"]
 - <https://kenengba.com/>
 - <https://yuguo.us/>
 - <https://io-oi.me/>
+- <http://lixiaolai.com/>
+- <https://www.geekonomics10000.com/>
+- <http://mindhacks.cn/>
 - <https://www.owlling.com/blog>
 - <https://telegram.org/blog>
 - <https://github.blog/>
@@ -81,8 +85,27 @@ keywords: ["知识体系"]
 ## Telegram
 
 - <https://t.me/NewlearnerChannel>
+- <https://t.me/durov>
+- <https://t.me/yixiuer>
+- <https://t.me/randysight>
 
 ## Twitter
+
+- @jakewies
+- @nishuang
+- @lilydjwg
+- @ruanyf
+- @gvanrossum
+- @jc_unknwon
+- @durov
+- @indigitalcolor
+- @FrancescoCiull4
+- @GoHugoIO
+- @paulg
+- @haoel
+- @randyloop
+- @reuixiy
+- @github
 
 ## Youtube
 
@@ -116,3 +139,4 @@ keywords: ["知识体系"]
 - <https://feeds.pub/>
 - <https://flomoapp.com/>
 - <https://trello.com/>
+- <https://ifttt.com/home>
