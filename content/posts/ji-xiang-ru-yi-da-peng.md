@@ -14,4 +14,4 @@ keywords: ["电影"]
 
 **参考资料**：
 
-1. [【随机波动041】与大鹏谈《吉祥如意》：不是一起过个年就成为一家人，漫长生活编织出中国家庭](https://www.stovol.club/041) [网页存档](https://web.archive.org/web/20210204140436/https://www.stovol.club/041)
+1. [【随机波动041】与大鹏谈《吉祥如意》：不是一起过个年就成为一家人，漫长生活编织出中国家庭](https://www.stovol.club/041)（[网页存档](https://web.archive.org/web/20210204140436/https://www.stovol.club/041)）
