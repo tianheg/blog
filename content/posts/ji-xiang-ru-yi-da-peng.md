@@ -40,7 +40,7 @@ keywords: ["电影"]
 
 ![ji-xiang-ru-yi-da-peng.jpeg](/images/ji-xiang-ru-yi-da-peng.jpeg)
 
-——<em><sup>只照了一张姥姥过世时，大鹏送的花圈</sup></em>
+<em><sup><center>只照了一张姥姥过世时，大鹏送的花圈</center></sup></em>
 
 丽丽（刘陆）：我爸他咋不认识我呢？
 
