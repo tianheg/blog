@@ -67,6 +67,7 @@ keywords: ["知识体系"]
 - <https://www.geekonomics10000.com/>
 - <http://mindhacks.cn/>
 - <https://www.owlling.com/blog>
+- <https://solitorian.com/>
 - <https://telegram.org/blog>
 - <https://github.blog/>
 - <https://blog.cloudflare.com/>
@@ -80,6 +81,9 @@ keywords: ["知识体系"]
 - <https://wanqu.co/>
 - <https://www.notion.so/ProductThinking-a601a12335044f349a22caf57f274c27>
 - <https://tundrazone.com/category/taiyuantongxin/>
+- [中文非虚构报道](https://feixugou.news.blog/)
+- [上海书评](https://www.thepaper.cn/list_26878)
+- [四季书评](http://www.4sbooks.com/)
 
 ## 知识星球
 
