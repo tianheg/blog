@@ -2,8 +2,8 @@
 title: 因为看《堤（1962）》做的一场梦
 date: 2020-08-10T07:56:44+08:00
 description: "讲述我的梦的故事"
-tags: ["梦","电影"]
-keywords: ["梦","电影"]
+tags: ["电影"]
+keywords: ["电影"]
 slug: watch di
 ---
 
