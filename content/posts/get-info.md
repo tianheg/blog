@@ -6,6 +6,10 @@ tags: ["知识体系"]
 keywords: ["知识体系"]
 ---
 
+最近更新：2021-02-07
+
+---
+
 这是 [知识体系](/tags/知识体系/) 的一部分。
 
 ## 待办事项
@@ -70,6 +74,12 @@ keywords: ["知识体系"]
 ## 其他网站
 
 - <https://www.allhistory.com/>
+- <https://liqi.io/>
+- <https://chengbaoyuedu.cn/>
+- <https://www.notion.so/f3b9324ec1c545f3a7ad31d71da1fc38>
+- <https://wanqu.co/>
+- <https://www.notion.so/ProductThinking-a601a12335044f349a22caf57f274c27>
+- <https://tundrazone.com/category/taiyuantongxin/>
 
 ## 知识星球
 
@@ -136,6 +146,7 @@ keywords: ["知识体系"]
 
 ## 工具
 
+- <https://www.notion.so/>
 - <https://feeds.pub/>
 - <https://flomoapp.com/>
 - <https://trello.com/>
