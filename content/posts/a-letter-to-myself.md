@@ -2,8 +2,8 @@
 title: "给自己的一封信"
 date: 2020-11-20T21:30:28+08:00
 description: "记录自己在理想主义、生活状态、以后发展方向的思考"
-tags: ["反思","想法","理想","思考"]
-keywords: ["反思","想法","理想","思考"]
+tags: ["三省吾身"]
+keywords: ["三省吾身"]
 slug: a-letter-to-myself
 ---
 
