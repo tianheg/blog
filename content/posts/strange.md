@@ -2,9 +2,8 @@
 title: "奇怪"
 date: 2020-12-11T20:12:08+08:00
 description: "一首突发奇想的诗"
-tags: ["奇怪","诗歌"]
-keywords: ["奇怪","诗歌"]
-slug: strange
+tags: ["诗歌"]
+keywords: ["诗歌"]
 ---
 
 一、
