@@ -18,6 +18,10 @@ keywords: ["问题"]
 - 什么是亲情？维系人类族系关系的究竟是什么？
 - 为什么计算机科学教育不能使任何人成为专业的程序员？（Computer science education cannot make anybody an expert programmer any more than studying brushes and pigment can make somebody an expert painter.- Eric Raymond）
 
+## 2021-01-31
+
+- fujiu（一种发酵的米饭）是怎么做的呢？
+
 [昨天编辑了 Hugo 语法高亮 短代码的缘故]: https://github.com/tianheg/blog/compare/1bed2bcf1a4270fcf4f9382b0d4151d14e9ebac1...main
 [参考]: https://www.yangzhiping.com/psy/openmintalk.html
 [Power-Up: Text to Cards]: https://trello.com/power-ups/5e14aa34ce4580518945bf9b/text-to-cards
