@@ -2,9 +2,8 @@
 title: "一眼望到头"
 date: 2020-09-26T21:39:26+08:00
 description: "生活的意义在哪里"
-tags: ["路","诗歌"]
-keywords: ["路","诗歌"]
-slug: yi yan wang dao tou
+tags: ["诗歌"]
+keywords: ["诗歌"]
 ---
 
 ![一眼望到头](/images/poetry-yiyanwangdaotou.jpg)
