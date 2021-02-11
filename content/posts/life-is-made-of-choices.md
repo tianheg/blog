@@ -2,9 +2,8 @@
 title: "生活由一次又一次的选择组成"
 date: 2020-10-01T22:41:26+08:00
 description: "记录自己对于“选择”一词的体悟"
-tags: ["选择","随笔"]
-keywords: ["选择","随笔"]
-slug: life is made of choices
+tags: ["随笔"]
+keywords: ["随笔"]
 ---
 
 朋友曾经告诉我：
