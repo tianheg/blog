@@ -1,8 +1,9 @@
 ---
-title: 常用镜像列表
+title: "常用镜像列表"
 date: 2020-05-18T14:14:23+08:00
-tags: ["镜像"]
-slug: Common mirror list
+description: "收集常用的国内软件镜像"
+tags: ["工具"]
+keywords: ["工具"]
 ---
 
 | 名字 | 网址 | 备注 |
