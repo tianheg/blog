@@ -1,8 +1,9 @@
 ---
-title: 读《邢福增：〈中國的政治、宗教與自由〉》
+title: "邢福增：〈中國的政治、宗教與自由〉"
 date: 2020-06-10T18:52:21+08:00
+description: "邢福增：〈中國的政治、宗教與自由〉 读书笔记"
 tags: ["读书"]
-slug: read xingfuzeng China
+keywords: ["读书"]
 ---
 
 **目录**
@@ -92,5 +93,9 @@ slug: read xingfuzeng China
 邢老師從政教關係的後三個層面來切入主題，也就是在中國語境下國家 / 政府跟宗教的關係應該是什麽呢？政府跟宗教組織的關係呢？宗教組織跟政治的關係又是怎麽楊呢？
 
 ## 三、怎麽理解政教關係：（一）國家 / 政府與宗教的關係
+
+---
+
+**参考资料**：
 
 [原文訪問（pdf）](https://drive.google.com/file/d/1d92iorItapvTvGErKBF9FBTMUCQ3xRG9/view)
