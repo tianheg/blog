@@ -156,3 +156,5 @@ keywords: ["知识体系"]
 - <https://flomoapp.com/>
 - <https://trello.com/>
 - <https://ifttt.com/home>
+
+更多详见 [Notion](https://www.notion.so/yidajiabei/2cd8592c485747ce854899439c5449f7)
