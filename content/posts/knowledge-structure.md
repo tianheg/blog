@@ -107,6 +107,7 @@ My thinking/process is basically:
 - [Org Roam](https://www.orgroam.com/) - non-hierarchical note-taking with org-mode in emacs
 - [Obsidian](https://obsidian.md/) - a Roam-like knowledge base that works on top of a local folder of plain text Markdown files. 一个能够生成文档联系图的应用
 - [TheBrain](https://www.thebrain.com/) - A tool for taking interconnected notes with an interactive graph.
+- [Kumu](https://www.kumu.io/) - Make sense of your messy world. Kumu makes it easy to organize complex data into relationship maps that are beautiful to look at and a pleasure to use.
 
 ### 其余的花园用具
 
