@@ -1,8 +1,9 @@
 ---
-title: Hugo 设置 shortcode
+title: "Hugo 设置 shortcode"
 date: 2020-05-13T16:04:22+08:00
+description: "Hugo 设置 shortcode"
 tags: ["Hugo"]
-slug: hugo set shortcode
+keywords: ["Hugo"]
 ---
 
 ## align
@@ -331,7 +332,7 @@ created by golang.org/x/sync/errgroup.(*Group).Go
 
 ---
 
-参考链接：
+**参考链接**：
 
 1. [自定义 Hugo Shortcodes 简码](https://guanqr.com/tech/website/hugo-shortcodes-customization/)
 2. [主题文档 - 扩展 Shortcodes](https://hugoloveit.com/zh-cn/theme-documentation-extended-shortcodes/)
