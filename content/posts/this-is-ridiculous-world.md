@@ -1,8 +1,9 @@
 ---
-title: 这是个光怪陆离的世界
+title: "这是个光怪陆离的世界"
 date: 2020-05-22T07:20:41+08:00
+description: "这是个光怪陆离的世界"
 tags: ["随笔"]
-slug: this is ridiculous world
+keywords: ["随笔"]
 ---
 
 每一个人都很奇怪，世界变得陌生且冷漠，一个人，很孤独。
