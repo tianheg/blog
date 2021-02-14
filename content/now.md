@@ -5,6 +5,20 @@ keywords: "现在"
 outputs: "html"
 ---
 
+## 2021.02.14 - 2021.02.28
+
+**第一阶段**：
+
+- 完成 freeCodeCamp 的 Responsive Web Design 部分
+- 写出关于 HTML，CSS 使用的一些文章（不要随处可见的笔记内容）
+- Responsive Web Design 部分有结课项目，完成它
+
+**第二阶段**（如果能提前完成第一阶段任务，则进入第二阶段）：
+
+- 开始 freeCodeCamp 的 JavaScript Algorithms and Data Structures 部分的学习
+- 使用 HTML，CSS 做一些喜欢的页面（Codepen 上很多例子）
+- 三天一道 Leetcode 题目，用 JavaScript 写题解，放在 GitHub 仓库
+
 ## 2021.01.23
 
 - 学习 HTML，CSS
