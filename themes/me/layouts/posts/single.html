@@ -24,8 +24,10 @@
         {{ if .Params.featured_image }}
           <img src='{{ .Params.featured_image }}' alt="Featured image"/>
         {{ end }}
-        {{- $Content := partial "markdownify.html" (dict "$" . "raw" .Content "isContent" true) -}}
-        {{ .Content }}
+        {{ $content := .Content }}
+        {{ $content = replaceRE `<a href="(https?://.+)">` `<a href="$1" target="_blank">` $content | safeHTML }}
+        {{ $content = replaceRE `<a href="(mailto:.+)">` `<a href="$1" target="_blank">` $content | safeHTML }}
+        {{ $content | safeHTML }}
       </div>
 
       <footer>
