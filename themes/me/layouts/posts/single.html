@@ -3,9 +3,6 @@
 {{ end }}
 
 {{ define "content" }}
-
-{{- $Content := partial "markdownify.html" (dict "$" . "raw" .Content "isContent" true) -}}
-
   <section class="container post">
     <article>
       <header>
@@ -27,6 +24,7 @@
         {{ if .Params.featured_image }}
           <img src='{{ .Params.featured_image }}' alt="Featured image"/>
         {{ end }}
+        {{- $Content := partial "markdownify.html" (dict "$" . "raw" .Content "isContent" true) -}}
         {{ .Content }}
       </div>
 
