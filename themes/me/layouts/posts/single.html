@@ -1,6 +1,7 @@
 {{ define "title" }}
   {{ .Title }} - {{ .Site.Title }}
 {{ end }}
+{{- $Content := partial "markdownify.html" (dict "$" . "raw" .Content "isContent" true) -}}
 {{ define "content" }}
   <section class="container post">
     <article>
@@ -32,6 +33,5 @@
     </article>
 
     {{ partial "posts/math.html" . }}
-    {{ partial "markdownify.html" . }}
   </section>
 {{ end }}
