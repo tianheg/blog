@@ -1,7 +1,7 @@
 ---
-title: "stormzhang 给程序员的 50 条建议"
+title: "stormzhang 给程序员的建议"
 date: 2021-02-09T22:30:23+08:00
-description: "stormzhang 给程序员的 50 条建议"
+description: "stormzhang 给程序员的建议"
 tags: ["激励"]
 keywords: ["激励"]
 ---
