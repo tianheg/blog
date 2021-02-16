@@ -1,8 +1,11 @@
 {{ define "title" }}
   {{ .Title }} - {{ .Site.Title }}
 {{ end }}
-{{- $Content := partial "markdownify.html" (dict "$" . "raw" .Content "isContent" true) -}}
+
+
+
 {{ define "content" }}
+{{- $Content := partial "markdownify.html" (dict "$" . "raw" .Content "isContent" true) -}}
   <section class="container post">
     <article>
       <header>
