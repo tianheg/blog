@@ -2,10 +2,10 @@
   {{ .Title }} - {{ .Site.Title }}
 {{ end }}
 
-
-
 {{ define "content" }}
+
 {{- $Content := partial "markdownify.html" (dict "$" . "raw" .Content "isContent" true) -}}
+
   <section class="container post">
     <article>
       <header>
