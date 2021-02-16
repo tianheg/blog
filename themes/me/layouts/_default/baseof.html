@@ -13,7 +13,11 @@
     {{ template "_internal/twitter_cards.html" . }}
     {{ template "_internal/opengraph.html" . }}
 
-    <title>{{ block "title" . }}{{ .Site.Title }}{{ end }}</title>
+    <title>
+      {{- block "title" . -}}
+        {{ if .IsPage }}{{ .Title }} - {{ .Site.Title }}{{ else }}{{ .Site.Title }}{{ end }}
+      {{- end -}}
+    </title>
 
     {{ if .Permalink }}
       <link rel="canonical" href="{{ .Permalink }}">
