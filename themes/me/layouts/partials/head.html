@@ -3,9 +3,11 @@
   name="description"
   content="{{ .Description | default (.Summary | default .Site.Params.description ) }}"
 />
-<meta name="keywords" content="{{ (delimit .Keywords ",") | default
-.Site.Params.keywords }}"> {{ template "_internal/twitter_cards.html" . }} {{
-template "_internal/opengraph.html" . }}
+<meta name="keywords" content="{{ (delimit .Keywords ",") | default .Site.Params.keywords }}">
+
+{{ template "_internal/twitter_cards.html" . }}
+
+{{ template "_internal/opengraph.html" . }}
 
 {{ if .Permalink }}
     <link rel="canonical" href="{{ .Permalink }}">
