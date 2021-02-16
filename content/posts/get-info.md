@@ -52,6 +52,7 @@ keywords: ["知识体系"]
 - <http://macshuo.com/>
 - <http://www.paulgraham.com/>
 - <https://blog.lilydjwg.me/>
+- <https://tin6.com>
 - <https://draveness.me/>
 - <https://yihui.org/cn/>
 - <https://www.paulirish.com/>
