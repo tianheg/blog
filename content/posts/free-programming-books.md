@@ -2,8 +2,8 @@
 title: "免费编程书籍"
 date: 2020-05-29T22:37:19+08:00
 description: "免费的编程书籍"
-tags: ["资源"]
-keywords: ["资源"]
+tags: ["编程资源"]
+keywords: ["编程资源"]
 ---
 
 **目录**：
