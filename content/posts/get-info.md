@@ -6,7 +6,7 @@ tags: ["知识体系"]
 keywords: ["知识体系"]
 ---
 
-最近更新：2021-02-07
+最近更新：2021-02-17
 
 ---
 
@@ -15,6 +15,7 @@ keywords: ["知识体系"]
 ## 待办事项
 
 1. 搜集我的信息渠道
+2. 分类（前端，其他技术【指非前端】，其他【指除前两项以外的内容】）
 
 ## 博客聚合
 
@@ -78,9 +79,9 @@ keywords: ["知识体系"]
 - <https://www.allhistory.com/>
 - <https://liqi.io/>
 - <https://chengbaoyuedu.cn/>
-- <https://www.notion.so/f3b9324ec1c545f3a7ad31d71da1fc38>
+- [DEX 周刊](https://www.notion.so/f3b9324ec1c545f3a7ad31d71da1fc38)
 - <https://wanqu.co/>
-- <https://www.notion.so/ProductThinking-a601a12335044f349a22caf57f274c27>
+- [产品沉思录（精选） ProductThinking by 少楠](https://www.notion.so/ProductThinking-a601a12335044f349a22caf57f274c27)
 - <https://tundrazone.com/category/taiyuantongxin/>
 - [中文非虚构报道](https://feixugou.news.blog/)
 - [上海书评](https://www.thepaper.cn/list_26878)
@@ -152,10 +153,14 @@ keywords: ["知识体系"]
 
 ## 工具
 
-- <https://www.notion.so/>
-- <https://feeds.pub/>
-- <https://flomoapp.com/>
-- <https://trello.com/>
+- <https://www.notion.so/> 知识库管理软件，不仅仅如此
+- <https://feeds.pub/> RSS 在线聚合站
+- <https://flomoapp.com/> 它可以用来同步链接、文字等。有很多使用场景。
+- <https://trello.com/> 一个看板管理应用，我用它来管理我的 ToDoList
 - <https://ifttt.com/home>
-
-更多详见 [Notion](https://www.notion.so/yidajiabei/2cd8592c485747ce854899439c5449f7)
+- <https://www.merriam-webster.com/> 查单词
+- <https://www.instapaper.com/> 稍后读应用
+- <https://shimo.im/> 石墨文档
+- <https://knb.im/mp/> 「可能吧」公众号排版编辑器
+- <https://app-amped.music.163.com/> 在线编曲
+- <https://q24.io/useless/> 这是一个随机生成「Useless Ideas」的工具，你可以用它创作更多激发灵感的工具。
