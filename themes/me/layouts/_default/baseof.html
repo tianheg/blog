@@ -53,7 +53,7 @@
     {{ if and .Site.Params.googleTagManager .Site.Params.googleTagManager.id }}
       {{- partial "analytics/googletagmanager" . -}}
     {{ end }}
-    
+
     {{ if and .Site.Params.cloudflare .Site.Params.cloudflare.token }}
       {{- partial "analytics/cloudflare" . -}}
     {{ end }}
