@@ -42,3 +42,7 @@ flomo - 浮墨笔记
 - <https://app-amped.music.163.com/>
 
 在线编曲
+
+- <https://www.notion.so/>
+
+知识库管理软件，不仅仅如此
