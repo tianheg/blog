@@ -68,4 +68,6 @@
 
 {{ hugo.Generator }}
 
-<meta name="baidu-site-verification" content="code-bdDSY1U3gf" />
+{{ if and .Site.Params.baidutongji .Site.Params.baidutongji.id }}
+    {{- partial "analytics/baidutongji" . -}}
+{{ end }}
