@@ -58,10 +58,6 @@
       {{- partial "analytics/cloudflare" . -}}
     {{ end }}
 
-    {{ if and .Site.Params.baidutongji .Site.Params.baidutongji.id }}
-      {{- partial "analytics/baidutongji" . -}}
-    {{ end }}
-
     {{ if and .Site.Params.enableServiceWorker (eq hugo.Environment "production") }}
         {{- $sw := resources.Get "js/sw.js" -}}
         {{- $dummy := "" | resources.FromString "dummy.js" -}}
