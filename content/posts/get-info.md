@@ -17,6 +17,33 @@ keywords: ["知识体系"]
 1. 搜集我的信息渠道
 2. 分类（前端，其他技术【指非前端】，其他【指除前两项以外的内容】）
 
+## 分类
+
+### 前端
+
+- [前端 - 掘金翻译计划](https://github.com/xitu/gold-miner#%E5%89%8D%E7%AB%AF)
+- [前端开发 - V2EX](https://www.v2ex.com/go/fe)
+- [前端精读周刊 - GitHub](https://github.com/dt-fe/weekly)
+- [前端知识月刊 - GitHub](https://github.com/jsfront/month)
+- [前端技能汇总 - GitHub](https://github.com/JacksonTian/fks)
+- [前端乐园 - GitHub](https://github.com/abc-club/js-paradise)
+- [腾讯移动 Web 前端知识库 - GitHub](https://github.com/AlloyTeam/Mars)
+- [前端特效存档 - GitHub](https://github.com/yangxi0126/javaScript)
+- [前端入门到进阶图文教程 - GitHub](https://github.com/qianguyihao/Web)
+- [前端历程 - GitHub](https://github.com/ltadpoles/web-document)
+- [前端知识 - GitHub](https://github.com/kisoua/Front--end--tutorial)
+- [前端知识集锦 - GitHub](https://github.com/KieSun/Front-end-knowledge)
+- [📝 Web前端洞见。有深度的 Web 前端内容 - GitHub](https://github.com/iamjoel/front-end-note)
+- [前端面试复习笔记 - GitHub](https://github.com/CavsZhouyou/Front-End-Interview-Notebook)
+- [收集的前端面试题和答案 - GitHub](https://github.com/qiu-deqing/FE-interview)
+- [关注基础知识，打造优质前端博客 - GitHub](https://github.com/ljianshu/Blog)
+- [一个前端的博客 - GitHub](https://github.com/muwoo/blogs)
+- [【前端进阶】优质博文 - GitHub](https://github.com/YvetteLau/Blog)
+- [我的前端博客 - GitHub](https://github.com/hacke2/hacke2.github.io)
+- [前端 100 天，帮助 10W 人入门并进阶前端 - GitHub](https://github.com/lefex/FE)
+- [前端资源 - GitHub](https://github.com/iq9891/awesome-frontend)
+- [GitHub最全的前端资源汇总仓库（包括前端学习、开发资源、求职面试等） - GitHub](https://github.com/helloqingfeng/Awsome-Front-End-learning-resource)
+
 ## 博客聚合
 
 - <https://bloggingfordevs.com/trends/>
