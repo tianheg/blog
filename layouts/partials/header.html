@@ -10,24 +10,40 @@
         {{ range sort . }}
           <li class="navigation-item">
             {{- $linkType := (string .Pre) -}}
-            <a class="navigation-link" href="{{ .URL | absLangURL }}"{{ if eq $linkType "external" }} target="_blank" rel="external noopener"{{ end }}>{{ .Name }}</a>
+            <a class="navigation-link" href="{{ .URL | absLangURL }}" {{ if eq $linkType "external" }} target="_blank" rel="external noopener"{{ end }}>{{ .Name }}</a>
           </li>
         {{ end }}
       {{ end }}
 
-      <li class="navigation-list navigation-item" x-data="{ open: false }">
-          <button class="text-gray-600" id="modal-search" role="button" @click="open = true">
-              <i class="text-2xl fas fa-search"></i>
-          </button>
-          <div x-show="open" style="display:none" class="fixed z-10 mx-auto my-auto inset-0 overflow-y-auto">
-              <div class="flex items-end justify-center min-h-screen pt-4 px-4 pb-20 text-center sm:block sm:p-0">
-                  <div class="fixed inset-0 transition-opacity" aria-hidden="true">
-                      <div class="absolute inset-0 bg-gray-500 opacity-75"></div>
-                  </div>
-                  <span class="hidden sm:inline-block sm:align-middle sm:h-screen" aria-hidden="true">&#8203;</span>
-                  <input type="search" name="search" id="search" class="focus:ring-indigo-500 block w-full m-4 px-4 sm:text-lg border-gray-300 rounded-md" placeholder="Search..." @keydown.escape="open = false" @click.away="open = false">
-              </div>
+      <li class="list-none mx-2" x-data="{ open: false }"><button class="text-gray-600" id="modal-search" role="button"
+          @click="open = true">
+          <svg class="svg-inline--fa fa-search fa-w-16 text-2xl" aria-hidden="true" focusable="false" data-prefix="fas"
+            data-icon="search" role="img" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512" data-fa-i2svg="">
+            <path fill="currentColor"
+              d="M505 442.7L405.3 343c-4.5-4.5-10.6-7-17-7H372c27.6-35.3 44-79.7 44-128C416 93.1 322.9 0 208 0S0 93.1 0 208s93.1 208 208 208c48.3 0 92.7-16.4 128-44v16.3c0 6.4 2.5 12.5 7 17l99.7 99.7c9.4 9.4 24.6 9.4 33.9 0l28.3-28.3c9.4-9.4 9.4-24.6.1-34zM208 336c-70.7 0-128-57.2-128-128 0-70.7 57.2-128 128-128 70.7 0 128 57.2 128 128 0 70.7-57.2 128-128 128z">
+            </path>
+          </svg><!-- <i class="text-2xl fas fa-search"></i> --></button>
+        <div x-show="open" style="display:none" class="fixed z-10 mx-auto my-auto inset-0 overflow-y-auto">
+          <div class="flex items-end justify-center min-h-screen pt-4 px-4 pb-20 text-center sm:block sm:p-0">
+            <div class="fixed inset-0 transition-opacity" aria-hidden="true">
+              <div class="absolute inset-0 bg-gray-500 opacity-75"></div>
+            </div><span class="hidden sm:inline-block sm:align-middle sm:h-screen" aria-hidden="true">&#8203;</span>
+            <span class="algolia-autocomplete" style="position: relative; display: inline-block; direction: ltr;"><input
+                type="search" name="search" id="search"
+                class="focus:ring-indigo-500 block w-full m-4 px-4 sm:text-lg border-gray-300 rounded-md ds-input"
+                placeholder="Search..." @keydown.escape="open = false" @click.away="open = false" autocomplete="off"
+                spellcheck="false" role="combobox" aria-autocomplete="list" aria-expanded="false"
+                aria-label="search input" aria-owns="algolia-autocomplete-listbox-0" dir="auto"
+                style="position: relative; vertical-align: top;">
+              <pre aria-hidden="true"
+                style="position: absolute; visibility: hidden; white-space: pre; font-family: ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, &quot;segoe ui&quot;, Roboto, &quot;helvetica neue&quot;, Arial, &quot;noto sans&quot;, sans-serif, &quot;apple color emoji&quot;, &quot;segoe ui emoji&quot;, &quot;segoe ui symbol&quot;, &quot;noto color emoji&quot;; font-size: 16px; font-style: normal; font-variant: normal; font-weight: 400; word-spacing: 0px; letter-spacing: normal; text-indent: 0px; text-rendering: auto; text-transform: none;"></pre>
+              <span class="ds-dropdown-menu" role="listbox" id="algolia-autocomplete-listbox-0"
+                style="position: absolute; top: 100%; z-index: 100; display: none; left: 0px; right: auto;">
+                <div class="ds-dataset-1"></div>
+              </span>
+            </span>
           </div>
+        </div>
       </li>
     </ul>
   </section>
