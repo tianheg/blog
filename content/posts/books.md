@@ -12,6 +12,7 @@ weight: 1
 ### 抽象
 
 - [The Pragmatic Programmer(程序员修炼之道)](/posts/the-pragmatic-programmer/)
+- [黑客与画家](/posts/hackers-and-painters)
 
 ### Linux
 
