@@ -1,7 +1,7 @@
 ---
-title: "我在四维世界"
+title: "我在高维世界"
 date: 2021-02-21T09:22:00+08:00
-description: "记录我在四维世界"
+description: "记录我在高维世界"
 tags: ["随笔"]
 keywords: ["随笔"]
 ---
