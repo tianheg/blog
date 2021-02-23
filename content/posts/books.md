@@ -49,6 +49,10 @@ weight: 1
 - 精力管理
 - [高效能人士的七个习惯](/posts/the-7-habits-of-highly-effective-people/)
 
+## 传记
+
+- [史蒂夫·乔布斯传](/posts/steve-jobs)
+
 ## 随感
 
 - [今天的图书馆人很少，适合看书](/posts/few-people-in-library-suitable-for-reading/)
