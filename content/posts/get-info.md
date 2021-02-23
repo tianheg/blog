@@ -1,12 +1,12 @@
 ---
-title: "信息获取"
+title: "信息输入"
 date: 2021-01-29T22:25:09+08:00
-description: "记录自己的信息获取渠道"
+description: "信息输入"
 tags: ["知识体系"]
 keywords: ["知识体系"]
 ---
 
-最近更新：2021-02-17
+最近更新：2021-02-23
 
 ---
 
@@ -15,7 +15,7 @@ keywords: ["知识体系"]
 ## 待办事项
 
 1. 搜集我的信息渠道
-2. 分类（前端，其他技术【指非前端】，其他【指除前两项以外的内容】）
+2. 分类
 
 ## 分类
 
@@ -44,27 +44,45 @@ keywords: ["知识体系"]
 - [前端资源 - GitHub](https://github.com/iq9891/awesome-frontend)
 - [GitHub最全的前端资源汇总仓库（包括前端学习、开发资源、求职面试等） - GitHub](https://github.com/helloqingfeng/Awsome-Front-End-learning-resource)
 
+### 值得学习的人的博客
+
+- [阮一峰的网络日志](http://www.ruanyifeng.com/blog/)
+- [Sam Altman](https://blog.samaltman.com/) | [Wikipedia](https://en.wikipedia.org/wiki/Sam_Altman)
+- [当然我在扯淡 - 王垠](https://www.yinwang.org/)
+- [写给十一岁时的我 - 王垠](https://yinwang1.wordpress.com/)
+- [Randy's Blog(卢涛南)](https://lutaonan.com/) | 一个热爱编程的人
+
+### 推荐网站
+
+- [Nautilus](https://nautil.us/)（We are here to tell you about science and its endless connections to our lives. 深度英文文章）
+
+### 一般博客
+
+- [Astral Codex Ten](https://astralcodexten.substack.com/) | [他的旧网站](https://slatestarcodex.com/)
+- [蚊子前端博客](https://www.xiabingbao.com/)
+- [王登科-DK博客](https://greatdk.com/)
+- [扯氮集](http://weiwuhui.com/)
+- [Scott H Young](https://www.scotthyoung.com/blog/) | 一个推崇快速学习方法的人
+- [胡涂说](https://hutusi.com/)
+- [Zach Holman!](https://zachholman.com/) | I advise and invest in startups. I was one of the first engineers at GitHub
+
+### 播客
+
+- [捕蛇者说](https://pythonhunter.org/)（编程、程序员、Python）
+- [随机波动 Stochastic Volatility](https://www.stovol.club/)（由三位女性媒体人发起的一档泛文化类播客）
+
 ## 博客聚合
 
 - <https://bloggingfordevs.com/trends/>
 - <https://news.ycombinator.com/best>
 - <https://bloghub.fun/>
+- <https://datorss.com/>
 
 ## 博客
 
-- [阮一峰的网络日志](http://www.ruanyifeng.com/blog/)
-- <https://astralcodexten.substack.com/>
-- <https://nautil.us/>
-- <https://www.xiabingbao.com/>
-- <https://greatdk.com/>
-- <https://lutaonan.com/>
-- <http://weiwuhui.com/>
-- <https://www.scotthyoung.com/blog>
-- <https://slatestarcodex.com/>
-- <https://hutusi.com/>
 - <https://zachholman.com/>
 - <https://blog.t9t.io/>
-- <https://www.yinwang.org/>
+
 - <https://lucifer.ren/>
 - <https://hiwannz.com/>
 - <https://immmmm.com/>
