@@ -118,6 +118,7 @@ keywords: ["知识体系"]
 ### 其他网站
 
 - [全历史](https://www.allhistory.com/)
+- [DailyArt Magazine](https://www.dailyartmagazine.com/)
 - [利器 | 创造者和他们的工具](https://liqi.io/)
 - [城堡阅读](https://chengbaoyuedu.cn/)
 - [DEX 周刊](https://www.notion.so/f3b9324ec1c545f3a7ad31d71da1fc38)
@@ -128,6 +129,7 @@ keywords: ["知识体系"]
 - [上海书评](https://www.thepaper.cn/list_26878)
 - [四季书评](http://www.4sbooks.com/)
 - [The Yemao.News](http://news.yemaosheji.com/)
+- [夜猫设计导航](https://www.yemaosheji.com/)
 - [Issues · reuixiy/io-oi.me](https://github.com/reuixiy/io-oi.me/issues/)
 - [Gitcoin: Grow Open Source](https://gitcoin.co/)
 
@@ -147,7 +149,9 @@ keywords: ["知识体系"]
 - <https://feeds.pub/> RSS 在线聚合站
 - <https://flomoapp.com/> 它可以用来同步链接、文字等。有很多使用场景。
 - <https://trello.com/> 一个看板管理应用，我用它来管理我的 ToDoList
-- <https://ifttt.com/home>
+- <https://ifttt.com/home> 自动化
+- <https://automate.io/> 自动化
+- <https://actionsflow.github.io/> 自动化
 - <https://www.merriam-webster.com/> 查单词
 - <https://www.instapaper.com/> 稍后读应用
 - <https://shimo.im/> 石墨文档
