@@ -17,6 +17,13 @@ keywords: ["知识体系"]
 1. 搜集我的信息渠道
 2. 分类
 
+## 博客聚合
+
+- <https://bloggingfordevs.com/trends/>
+- <https://news.ycombinator.com/best>
+- <https://bloghub.fun/>
+- <https://datorss.com/>
+
 ## 分类
 
 ### 前端
@@ -46,11 +53,14 @@ keywords: ["知识体系"]
 
 ### 值得学习的人的博客
 
+- [Paul Graham](http://www.paulgraham.com/)
 - [阮一峰的网络日志](http://www.ruanyifeng.com/blog/)
 - [Sam Altman](https://blog.samaltman.com/) | [Wikipedia](https://en.wikipedia.org/wiki/Sam_Altman)
 - [当然我在扯淡 - 王垠](https://www.yinwang.org/)
 - [写给十一岁时的我 - 王垠](https://yinwang1.wordpress.com/)
 - [Randy's Blog(卢涛南)](https://lutaonan.com/) | 一个热爱编程的人
+- [酷 壳 – CoolShell](https://coolshell.cn/)
+- [reuixiy](https://io-oi.me/)
 
 ### 推荐网站
 
@@ -65,126 +75,60 @@ keywords: ["知识体系"]
 - [Scott H Young](https://www.scotthyoung.com/blog/) | 一个推崇快速学习方法的人
 - [胡涂说](https://hutusi.com/)
 - [Zach Holman!](https://zachholman.com/) | I advise and invest in startups. I was one of the first engineers at GitHub
+- [timqian 的中文博客](https://blog.t9t.io/)
+- [XAOXUU](https://xaoxuu.com/)
+- [lucifer 的博客](https://lucifer.ren/blog/)
+- [见字如面](https://hiwannz.com/)
+- [木木木木木](https://immmmm.com/)
+- [0xADADA](https://0xadada.pub/)
+- [Knowledge Continuum](https://www.raghuveer.net/)
+- [宇宙的心弦](https://www.physixfan.com/)
+- [唐巧的博客](http://blog.devtang.com/)
+- [代码家](https://daimajia.com/)
+- [Hi,DIYgod](https://diygod.me/)
+- [Barret李靖 | 小胡子哥的个人网站](https://www.barretlee.com/)
+- [Hello Alili](https://alili.tech/)
+- [MacTalk-池建强的随想录](http://macshuo.com/)
+- [依云's Blog](https://blog.lilydjwg.me/)
+- [消夏錄](https://tin6.com/)
+- [面向信仰编程](https://draveness.me/)
+- [中文日志 - Yihui Xie | 谢益辉](https://yihui.org/cn/)
+- [Skywind Inside](http://www.skywind.me/blog/)
+- [木遥的窗子](http://blog.farmostwood.net/)
+- [Hawstein's Blog](https://hawstein.com/)
+- [可能吧](https://kenengba.com/)
+- [余果的博客](https://yuguo.us/)
+- [李笑来](http://lixiaolai.com/)
+- [学而时嘻之 | 用理工科思维理解世界](https://www.geekonomics10000.com/)
+- [刘未鹏 | Mind Hacks](http://mindhacks.cn/)
+- [owlling.com/blog](https://www.owlling.com/blog)
+- [所歷托言 —— Solitorian on Another Stage](https://solitorian.com/)
+
+### 官方博客
+
+- [GitHub Blog](https://github.blog/)
+- [Cloudflare Blog](https://blog.cloudflare.com/)
+- [Telegram Blog](https://telegram.org/blog)
 
 ### 播客
 
 - [捕蛇者说](https://pythonhunter.org/)（编程、程序员、Python）
 - [随机波动 Stochastic Volatility](https://www.stovol.club/)（由三位女性媒体人发起的一档泛文化类播客）
 
-## 博客聚合
+### 其他网站
 
-- <https://bloggingfordevs.com/trends/>
-- <https://news.ycombinator.com/best>
-- <https://bloghub.fun/>
-- <https://datorss.com/>
-
-## 博客
-
-- <https://zachholman.com/>
-- <https://blog.t9t.io/>
-
-- <https://lucifer.ren/>
-- <https://hiwannz.com/>
-- <https://immmmm.com/>
-- <https://0xadada.pub/>
-- <https://www.raghuveer.net/>
-- <https://www.physixfan.com/>
-- <http://blog.devtang.com/>
-- <https://daimajia.com/>
-- <https://diygod.me/>
-- <https://www.barretlee.com/>
-- <https://coolshell.cn/>
-- <https://alili.tech/>
-- <http://macshuo.com/>
-- <http://www.paulgraham.com/>
-- <https://blog.lilydjwg.me/>
-- <https://tin6.com>
-- <https://draveness.me/>
-- <https://yihui.org/cn/>
-- <https://www.paulirish.com/>
-- <https://toweave.github.io/>
-- <http://shrekshao.github.io/>
-- <http://www.skywind.me/blog/>
-- <http://blog.farmostwood.net/>
-- <https://hawstein.com/>
-- <https://kenengba.com/>
-- <https://yuguo.us/>
-- <https://io-oi.me/>
-- <http://lixiaolai.com/>
-- <https://www.geekonomics10000.com/>
-- <http://mindhacks.cn/>
-- <https://www.owlling.com/blog>
-- <https://solitorian.com/>
-- <https://telegram.org/blog>
-- <https://github.blog/>
-- <https://blog.cloudflare.com/>
-
-## 其他网站
-
-- <https://www.allhistory.com/>
-- <https://liqi.io/>
-- <https://chengbaoyuedu.cn/>
+- [全历史](https://www.allhistory.com/)
+- [利器 | 创造者和他们的工具](https://liqi.io/)
+- [城堡阅读](https://chengbaoyuedu.cn/)
 - [DEX 周刊](https://www.notion.so/f3b9324ec1c545f3a7ad31d71da1fc38)
-- <https://wanqu.co/>
+- [湾区日报](https://wanqu.co/)
 - [产品沉思录（精选） ProductThinking by 少楠](https://www.notion.so/ProductThinking-a601a12335044f349a22caf57f274c27)
-- <https://tundrazone.com/category/taiyuantongxin/>
+- [苔原通信 - 苔原带](https://tundrazone.com/category/taiyuantongxin/)
 - [中文非虚构报道](https://feixugou.news.blog/)
 - [上海书评](https://www.thepaper.cn/list_26878)
 - [四季书评](http://www.4sbooks.com/)
-- <http://news.yemaosheji.com/>
-
-## 知识星球
-
-- 帅张和他的朋友们
-- caoz 的小密圈
-- 积累赚钱能力（限免）
-- 阿海的圈子
-
-## GitHub
-
-- <https://github.com/reuixiy/io-oi.me/issues/>
-
-## Telegram
-
-- <https://t.me/NewlearnerChannel>
-- <https://t.me/durov>
-- <https://t.me/yixiuer>
-- <https://t.me/randysight>
-
-## Twitter
-
-- @jakewies
-- @nishuang
-- @lilydjwg
-- @ruanyf
-- @gvanrossum
-- @jc_unknwon
-- @durov
-- @indigitalcolor
-- @FrancescoCiull4
-- @GoHugoIO
-- @paulg
-- @haoel
-- @randyloop
-- @reuixiy
-- @github
-
-## Youtube
-
-- 一席
-- 十三邀
-
-## 公众号
-
-- L 先生说
-- 多元思维 Hack
-- stormzhang
-- caoz 的梦呓
-- 小道消息
-- 槽边往事
-- 一支烟士披里纯
-- 小王子和狐狸的玫瑰园
-- 镇守海
+- [The Yemao.News](http://news.yemaosheji.com/)
+- [Issues · reuixiy/io-oi.me](https://github.com/reuixiy/io-oi.me/issues/)
 
 ## 其他
 
