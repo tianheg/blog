@@ -13,6 +13,7 @@ weight: 1
 
 - [The Pragmatic Programmer(程序员修炼之道)](/posts/the-pragmatic-programmer/)
 - [黑客与画家](/posts/hackers-and-painters)
+- [How to be a Programmer 中文版](/posts/how-to-be-a-programmer-zh)
 
 ### Linux
 
