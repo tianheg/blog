@@ -64,7 +64,9 @@ keywords: ["知识体系"]
 
 ### 推荐网站
 
+- [arXiv.org](https://arxiv.org/)（arXiv is a free distribution service and an open-access archive for 1,843,706 scholarly articles in the fields of physics, mathematics, computer science, quantitative biology, quantitative finance, statistics, electrical engineering and systems science, and economics. Materials on this site are not peer-reviewed by arXiv.）[RSS](https://arxiv.org/help/rss)
 - [Nautilus](https://nautil.us/)（We are here to tell you about science and its endless connections to our lives. 深度英文文章）
+- [LWN.net](https://lwn.net/Archives/)
 
 ### 一般博客
 
@@ -103,6 +105,7 @@ keywords: ["知识体系"]
 - [刘未鹏 | Mind Hacks](http://mindhacks.cn/)
 - [owlling.com/blog](https://www.owlling.com/blog)
 - [所歷托言 —— Solitorian on Another Stage](https://solitorian.com/)
+- [Spencer's Blog](https://blog.spencerwoo.com/)
 
 ### 官方博客
 
@@ -114,6 +117,10 @@ keywords: ["知识体系"]
 
 - [捕蛇者说](https://pythonhunter.org/)（编程、程序员、Python）
 - [随机波动 Stochastic Volatility](https://www.stovol.club/)（由三位女性媒体人发起的一档泛文化类播客）
+
+### Medium
+
+- [Doing a thing](https://medium.com/doing-a-thing)
 
 ### 其他网站
 
@@ -158,3 +165,4 @@ keywords: ["知识体系"]
 - <https://knb.im/mp/> 「可能吧」公众号排版编辑器
 - <https://app-amped.music.163.com/> 在线编曲
 - <https://q24.io/useless/> 这是一个随机生成「Useless Ideas」的工具，你可以用它创作更多激发灵感的工具。
+- <https://miro.com/> 思维导图协作
