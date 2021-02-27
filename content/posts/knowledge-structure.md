@@ -10,12 +10,13 @@ keywords: ["体系", "知识", "构建", "Wiki", "Note", "Blog"]
 
 ## 现有的努力
 
-### Blog + Obsidian
+### 2021-02-27
 
-2021-01-27
+![blog + TIL](/images/blog.png)
 
-**现在的做法**：
+### 2021-01-27
 
+- **Blog + Obsidian**
 - 使用博客构建体系，使用 Obsidian 建立文档联系
 - flomo 记录「[问题](/tags/问题)」，然后每天选择一个时间，把这些问题放到博客的每周问题总结里
 
