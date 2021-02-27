@@ -139,6 +139,7 @@ keywords: ["知识体系"]
 - [夜猫设计导航](https://www.yemaosheji.com/)
 - [Issues · reuixiy/io-oi.me](https://github.com/reuixiy/io-oi.me/issues/)
 - [Gitcoin: Grow Open Source](https://gitcoin.co/)
+- [F2E - LearnKu](https://learnku.com/f2e)
 
 ## 其他
 
