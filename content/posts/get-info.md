@@ -61,12 +61,15 @@ keywords: ["知识体系"]
 - [Randy's Blog(卢涛南)](https://lutaonan.com/) | 一个热爱编程的人
 - [酷 壳 – CoolShell](https://coolshell.cn/)
 - [reuixiy](https://io-oi.me/)
+- [Naval](https://nav.al/)
+- [zen habits](https://zenhabits.net/)
 
 ### 推荐网站
 
 - [arXiv.org](https://arxiv.org/)（arXiv is a free distribution service and an open-access archive for 1,843,706 scholarly articles in the fields of physics, mathematics, computer science, quantitative biology, quantitative finance, statistics, electrical engineering and systems science, and economics. Materials on this site are not peer-reviewed by arXiv.）[RSS](https://arxiv.org/help/rss)
 - [Nautilus](https://nautil.us/)（We are here to tell you about science and its endless connections to our lives. 深度英文文章）
 - [LWN.net](https://lwn.net/Archives/)
+- [freeCodeCamp Programming Tutorials](https://www.freecodecamp.org/news/)
 
 ### 一般博客
 
@@ -121,6 +124,7 @@ keywords: ["知识体系"]
 ### Medium
 
 - [Doing a thing](https://medium.com/doing-a-thing)
+- [Yachen Liu](https://blankwonder.medium.com/)
 
 ### 其他网站
 
