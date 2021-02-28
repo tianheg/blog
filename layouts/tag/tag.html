@@ -6,8 +6,8 @@
 {{ end }}
 {{ define "content" }}
   <section class="container list">
-    <h1 class="title">{{ .Title }} 标签
-    </h1>
+    <h1>{{ .Title }} 标签</h1>
+    {{ .Description | .Page.RenderString }}
     <ul>
       {{- range .Paginator.Pages -}}
         {{- .Render "li" -}}
