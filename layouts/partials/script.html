@@ -1,4 +1,3 @@
-
     {{ if not .Site.Params.hideColorSchemeToggle }}
       {{ if .Site.IsServer }}
         {{ $script := resources.Get "js/dark-mode.js" }}
@@ -17,10 +16,6 @@
     
     {{ if and .Site.Params.googleTagManager .Site.Params.googleTagManager.id }}
       {{- partial "analytics/googletagmanager" . -}}
-    {{ end }}
-
-    {{ if and .Site.Params.cloudflare .Site.Params.cloudflare.token }}
-      {{- partial "analytics/cloudflare" . -}}
     {{ end }}
 
     {{ if and .Site.Params.enableServiceWorker (eq hugo.Environment "production") }}
