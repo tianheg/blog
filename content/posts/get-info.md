@@ -121,6 +121,11 @@ keywords: ["知识体系"]
 - [捕蛇者说](https://pythonhunter.org/)（编程、程序员、Python）
 - [随机波动 Stochastic Volatility](https://www.stovol.club/)（由三位女性媒体人发起的一档泛文化类播客）
 
+### DEV Community 👩‍💻👨‍💻
+
+- [dev](https://dev.to/)
+- [@captainsafia](https://dev.to/captainsafia)
+
 ### Medium
 
 - [Doing a thing](https://medium.com/doing-a-thing)
