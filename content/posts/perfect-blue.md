@@ -10,7 +10,7 @@ keywords: ["电影"]
 
 今天，分 3 次看完今敏的《未麻的部屋》，之所以看是因为看到豆瓣写着今天是今敏逝世 10 周年。
 
-![今敏](https://cdn.jsdelivr.net/gh/tianheg/static@wiki/images/rwl/watch/jinmin.jpeg)
+![今敏](/images/films/jinmin.jpeg)
 
 我以前不熟悉今敏，现在也不熟悉。我看过他的 3 （加上《未麻的部屋》）部电影，《红辣椒》是我特别喜欢的，《千年女优》是一场追逐爱的旅程。
 
