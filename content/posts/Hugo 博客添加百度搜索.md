@@ -59,7 +59,7 @@ slug: Hugo blog add baidu search
 
 ## 新建“百度”菜单的_INDEX.MD
 
-在文件夹`~/content/zh/`(我使用的多语言)下新建文件夹`search`，并在search文件夹下新建文件**_index.md**，并写入以下代码：
+在文件夹`~/content/zh/`(我使用的多语言)下新建文件夹`search`，并在 search 文件夹下新建文件**_index.md**，并写入以下代码：
 
 ```markdown
 <div class="searchbar">
@@ -85,4 +85,4 @@ search = '<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="20p
 
 参考链接：
 
-1. [Blog中加入百度搜索](https://ztygcs.github.io/posts/blog%E4%B8%AD%E5%8A%A0%E5%85%A5%E7%99%BE%E5%BA%A6%E6%90%9C%E7%B4%A2/)
+1. [Blog 中加入百度搜索](https://ztygcs.github.io/posts/blog%E4%B8%AD%E5%8A%A0%E5%85%A5%E7%99%BE%E5%BA%A6%E6%90%9C%E7%B4%A2/)
