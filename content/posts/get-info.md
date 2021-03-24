@@ -40,7 +40,7 @@ keywords: ["知识体系"]
 - [前端历程 - GitHub](https://github.com/ltadpoles/web-document)
 - [前端知识 - GitHub](https://github.com/kisoua/Front--end--tutorial)
 - [前端知识集锦 - GitHub](https://github.com/KieSun/Front-end-knowledge)
-- [📝 Web前端洞见。有深度的 Web 前端内容 - GitHub](https://github.com/iamjoel/front-end-note)
+- [📝 Web 前端洞见。有深度的 Web 前端内容 - GitHub](https://github.com/iamjoel/front-end-note)
 - [前端面试复习笔记 - GitHub](https://github.com/CavsZhouyou/Front-End-Interview-Notebook)
 - [收集的前端面试题和答案 - GitHub](https://github.com/qiu-deqing/FE-interview)
 - [关注基础知识，打造优质前端博客 - GitHub](https://github.com/ljianshu/Blog)
@@ -49,7 +49,7 @@ keywords: ["知识体系"]
 - [我的前端博客 - GitHub](https://github.com/hacke2/hacke2.github.io)
 - [前端 100 天，帮助 10W 人入门并进阶前端 - GitHub](https://github.com/lefex/FE)
 - [前端资源 - GitHub](https://github.com/iq9891/awesome-frontend)
-- [GitHub最全的前端资源汇总仓库（包括前端学习、开发资源、求职面试等） - GitHub](https://github.com/helloqingfeng/Awsome-Front-End-learning-resource)
+- [GitHub 最全的前端资源汇总仓库（包括前端学习、开发资源、求职面试等） - GitHub](https://github.com/helloqingfeng/Awsome-Front-End-learning-resource)
 
 ### 值得学习的人的博客
 
@@ -75,7 +75,7 @@ keywords: ["知识体系"]
 
 - [Astral Codex Ten](https://astralcodexten.substack.com/) | [他的旧网站](https://slatestarcodex.com/)
 - [蚊子前端博客](https://www.xiabingbao.com/)
-- [王登科-DK博客](https://greatdk.com/)
+- [王登科-DK 博客](https://greatdk.com/)
 - [扯氮集](http://weiwuhui.com/)
 - [Scott H Young](https://www.scotthyoung.com/blog/) | 一个推崇快速学习方法的人
 - [胡涂说](https://hutusi.com/)
@@ -91,7 +91,7 @@ keywords: ["知识体系"]
 - [唐巧的博客](http://blog.devtang.com/)
 - [代码家](https://daimajia.com/)
 - [Hi,DIYgod](https://diygod.me/)
-- [Barret李靖 | 小胡子哥的个人网站](https://www.barretlee.com/)
+- [Barret 李靖 | 小胡子哥的个人网站](https://www.barretlee.com/)
 - [Hello Alili](https://alili.tech/)
 - [MacTalk-池建强的随想录](http://macshuo.com/)
 - [依云's Blog](https://blog.lilydjwg.me/)
