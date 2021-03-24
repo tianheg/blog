@@ -10,7 +10,7 @@ Dead Poets Society - 1989 - 美国
 
 这是一部好电影。本文结构：
 
-![dead-poets-society](https://cdn.jsdelivr.net/gh/tianheg/static@wiki/images/rwl/watch/dead-poets-society.jpeg)
+![dead-poets-society](/images/films/dead-poets-society.jpeg)
 
 ## 句子
 
