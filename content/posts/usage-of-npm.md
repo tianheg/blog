@@ -51,7 +51,7 @@ npm WARN notsup SKIPPING OPTIONAL DEPENDENCY: Unsupported platform for fsevents@
 
 其余错误，待到真正需要解决时再解决。
 
-## 四、查看特定包版本：
+## 四、查看特定包版本
 
 举例：
 
