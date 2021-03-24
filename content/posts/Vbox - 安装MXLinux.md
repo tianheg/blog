@@ -64,4 +64,4 @@ Name 任意，我的命名：`MXLinux`。文件夹选一个集中存放虚拟机
 
 在安装过程中，会抛出异常。如果你不是第一次在 VBox 上安装系统，那么在主机 VBox 的安装目录中一定有 VBoxGuestAdditions.iso 文件。它安装过程的异常会询问你：是直接使用现存的，还是重新安装继续接下来的步骤。我直接继续了，安装后重启，重新打开后发现不是充满整个窗口。又从窗口菜单处的 View 处点击 Full-screen Mode，发现可以全屏，取消全屏，界面能够完全填充窗口。
 
-[^1]: [世界排名第一的Linux系统：MX Linux安装图解](https://cloud.tencent.com/developer/news/472702)
+[^1]: [世界排名第一的 Linux 系统：MX Linux 安装图解](https://cloud.tencent.com/developer/news/472702)
