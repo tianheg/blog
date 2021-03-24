@@ -1,10 +1,9 @@
 {
     "name": "tianheg",
-    "version": "0.4.0",
-    "description": "A theme for https://blog.yidajiabei.xyz",
-    "main": "index.js",
     "scripts": {
-        "algolia": "if [ $ALGOLIA_INDEX_NAME ]; then atomic-algolia; else echo \"ALGOLIA_INDEX_NAME not setup, ignore\"; fi"
+        "algolia": "if [ $ALGOLIA_INDEX_NAME ]; then atomic-algolia; else echo \"ALGOLIA_INDEX_NAME not setup, ignore\"; fi",
+        "lint": "lint-md *.md content/*/*.md",
+        "format": "lint-md *.md content/*/*.md --fix"
     },
     "author": "tianheg",
     "license": "MIT",
@@ -18,7 +17,9 @@
         "postcss-cli": "^8.3.1",
         "postcss-import": "^14.0.0",
         "purgecss-from-html": "^4.0.0",
-        "tailwindcss": "^2.0.3"
+        "tailwindcss": "^2.0.3",
+        "lint-md-cli": "^0.1.2",
+        "lint-staged": "^10.4.0"
     },
     "devDependencies": {
         "eslint": "^7.20.0",
@@ -27,5 +28,9 @@
         "eslint-plugin-node": "^11.1.0",
         "eslint-plugin-promise": "^4.3.1",
         "gulp": "^4.0.2"
+    },
+    "lint-staged": {
+        "*.{json,yml}": "prettier --write",
+        "*.md": "lint-md --fix"
     }
 }
