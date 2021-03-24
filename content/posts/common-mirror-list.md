@@ -23,7 +23,7 @@ keywords: ["工具"]
 | 西北农林科技大学 | <https://mirrors.nwsuaf.edu.cn/> | |
 | 首都在线科技股份有限公司 | <http://mirrors.yun-idc.com/> | |
 | 常州贝特康姆软件技术有限公司 | <http://centos.bitcomm.cn/> | |
-| 公云PubYun | <http://mirrors.pubyun.com/> | |
+| 公云 PubYun | <http://mirrors.pubyun.com/> | |
 
 软件版列表：
 
