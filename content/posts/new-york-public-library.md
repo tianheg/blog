@@ -6,7 +6,7 @@ tags: ["艺术"]
 keywords: ["艺术"]
 ---
 
-![New York Public Library](https://cdn.jsdelivr.net/gh/tianheg/static@wiki/images/rwl/watch/new-york-public-library.jpeg)
+![New York Public Library](/images/arts/new-york-public-library.jpeg)
 
 Time for something more urban! Tavík František Šimon was an influential Czech printmaker and painter. Largely ignored during the Communist era in Czechoslovakia, his work has received greater attention in recent years.
 
