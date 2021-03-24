@@ -14,15 +14,15 @@ git checkout <branch> 切换到另一分支
 
 git reset HEAD <file> unstage the stage 撤销暂存区的修改
 
-git log --pretty=oneline 从最近到最远的3次提交日志
+git log --pretty=oneline 从最近到最远的 3 次提交日志
 
 git reset --hard HEAD^ 回到最近的一次提交版本
 
-……………………… HEAD^^ 回到最近的第二次提交版本
+…… HEAD^^ 回到最近的第二次提交版本
 
-……………………… HEAD~100 回到最近的第100次提交版本
+…… HEAD~100 回到最近的第 100 次提交版本
 
-……………………… commit id 回到该id号对应的版本
+…… commit id 回到该 id 号对应的版本
 
 git add <file> 从工作区添加到暂存区;git rm <file> 将工作区中的删除添加到暂存区
 
@@ -38,7 +38,7 @@ git remote set-url origin git@github.com:YourName/YourRepoName.wiki.git
 
 To do that, we can avoid input the name and password when pushing.
 
-## 移除hexo远程库后无法推送hugo相关仓库
+## 移除 hexo 远程库后无法推送 hugo 相关仓库
 
 问题：
 
@@ -84,7 +84,7 @@ D:\Hugo\Sites\blog>
 
 ## git branch --set-upstream 本地关联远程分支
 
-从别人的远程库pull时出现以下信息：
+从别人的远程库 pull 时出现以下信息：
 
 ```bash
 λ git pull
@@ -99,13 +99,13 @@ If you wish to set tracking information for this branch you can do so with:
     git branch --set-upstream-to=origin/<branch> master
 ```
 
-在本地新建分支时，要和远程库关联。关联目的是在执行git pull, git push操作时就不需要指定对应的远程分支，你只要没有显示指定，git pull的时候，就会提示你
+在本地新建分支时，要和远程库关联。关联目的是在执行 git pull, git push 操作时就不需要指定对应的远程分支，你只要没有显示指定，git pull 的时候，就会提示你
 
 解决方法就是按照提示添加一下：
 
 git branch --set-upstream-to=origin/remote_branch  your_branch
 
-其中，origin/remote_branch是你本地分支对应的远程分支；your_branch是你当前的本地分支。
+其中，origin/remote_branch 是你本地分支对应的远程分支；your_branch 是你当前的本地分支。
 
 ## git pull 后出现：fatal: refusing to merge unrelated histories
 
@@ -113,7 +113,7 @@ git branch --set-upstream-to=origin/remote_branch  your_branch
 
 `fatal: refusing to merge unrelated histories`
 
-## 修改已经提交的commit内容
+## 修改已经提交的 commit 内容
 
 通过 `git rebase -i` 进行分支管理
 
@@ -127,9 +127,9 @@ git branch --set-upstream-to=origin/remote_branch  your_branch
 
 这是最常见的一种场景，往往刚刚提交后最容易发现问题。
 
-#### 方法一：用commit –amend
+#### 方法一：用 commit –amend
 
-这种方法不仅可以修改commit message，也可以修改提交内容。这种方式在还没有推送到远端的情况下可以比较方便的保持原有的Change-Id，推荐使用（若已经推送到远端，Change-Id则会修改掉）。
+这种方法不仅可以修改 commit message，也可以修改提交内容。这种方式在还没有推送到远端的情况下可以比较方便的保持原有的 Change-Id，推荐使用（若已经推送到远端，Change-Id 则会修改掉）。
 
 ```bash
 #修改需要修改的地方（只是修改commit message就不用做)
@@ -139,9 +139,9 @@ git commit --amend
 git push <remote> <branch> -f #若还没有推送到远端，不用输入
 ```
 
-#### 方法二：用reset后修改
+#### 方法二：用 reset 后修改
 
-这种方法与上面方法基本一致，也可以修改提交内容和commit message。这种方式在还没有推送到远端的情况下也可以比较方便的保持原有的Change-Id，（若已经推送到远端，Change-Id则会修改掉）。
+这种方法与上面方法基本一致，也可以修改提交内容和 commit message。这种方式在还没有推送到远端的情况下也可以比较方便的保持原有的 Change-Id，（若已经推送到远端，Change-Id 则会修改掉）。
 
 ```bash
 git reset HEAD^
@@ -168,7 +168,7 @@ git commit -m "你的提交说明"
 # 现在你已经提交到正确的分支上了
 ```
 
-遇到这种情况，很多人会说用cherry-pick(摘樱桃)，像下面这样。不过你自己看吧，哪个舒服用哪个。
+遇到这种情况，很多人会说用 cherry-pick(摘樱桃)，像下面这样。不过你自己看吧，哪个舒服用哪个。
 
 ```bash
 git checkout name-of-the-correct-branch

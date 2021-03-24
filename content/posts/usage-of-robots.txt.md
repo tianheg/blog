@@ -50,7 +50,7 @@ MSNBOT http://search.msn.com
 
 注意“Disallow: /test”和“Disallow: /test/”的区别。
 
-“Disallow: /test”表示可以禁止的URL包括：“/test、/testabc.html、/test/abc”这三种形式；
+“Disallow: /test”表示可以禁止的 URL 包括：“/test、/testabc.html、/test/abc”这三种形式；
 
 “Disallow: /test/”则允许 Robot 访问：“/test、/testabc.html”，禁止访问：“/test/abc”这种形式。
 
@@ -58,27 +58,27 @@ MSNBOT http://search.msn.com
 
 #### Allow
 
-该项和Disallow对立，表示允许搜索引擎Robot访问指定内容。
+该项和 Disallow 对立，表示允许搜索引擎 Robot 访问指定内容。
 
 ### robots.txt 文件用法实例
 
-1. 允许所有搜索引擎Robot访问
+1. 允许所有搜索引擎 Robot 访问
 
    ```txt
    User-agent: *
    Disallow:
    ```
 
-   或者robots.txt文件为空，什么也不写，也能达到同样的效果。
+   或者 robots.txt 文件为空，什么也不写，也能达到同样的效果。
 
-2. 禁止所有搜索引擎Robot访问网站的任何内容
+2. 禁止所有搜索引擎 Robot 访问网站的任何内容
 
    ```txt
    User-agent: *
    Disallow: /
    ```
 
-3. 禁止所有搜索引擎Robot访问网站的指定内容（如下例中的aaa、bbb、ccc目录）
+3. 禁止所有搜索引擎 Robot 访问网站的指定内容（如下例中的 aaa、bbb、ccc 目录）
 
    ```txt
    User-agent: *
@@ -87,14 +87,14 @@ MSNBOT http://search.msn.com
    Disallow: /ccc/
    ```
 
-4. 禁止指定搜索引擎 Robot 访问如下例中的Google机器人：Googlebot）
+4. 禁止指定搜索引擎 Robot 访问如下例中的 Google 机器人：Googlebot）
 
    ```txt
    User-agent: Googlebot
    Disallow: /
    ```
 
-5. 只允许指定搜索引擎Robot访问（如下例中的百度机器人：Baiduspider）
+5. 只允许指定搜索引擎 Robot 访问（如下例中的百度机器人：Baiduspider）
 
    ```txt
    User-agent: Baiduspider
