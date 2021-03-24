@@ -18,6 +18,6 @@ keywords: ["电影"]
 
 那位老师举办了一次绘画比赛，以下两幅画中，第一幅是孩子画的，第二幅是这位老师画的。
 
-![like-stars-on-earth-0.png](https://cdn.jsdelivr.net/gh/tianheg/static@wiki/images/rwl/watch/like-stars-on-earth-0.jpeg)
+![like-stars-on-earth-0.png](/images/films/like-stars-on-earth-0.jpeg)
 
-![like-stars-on-earth-1.png](https://cdn.jsdelivr.net/gh/tianheg/static@wiki/images/rwl/watch/like-stars-on-earth-1.jpeg)
+![like-stars-on-earth-1.png](/images/films/like-stars-on-earth-1.jpeg)
