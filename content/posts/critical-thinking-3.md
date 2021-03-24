@@ -70,7 +70,7 @@ keywords: ["批判性思维"]
 
 ## 案例分析：北京污染的影响？不清除
 
-分析论证的结构：树状图解（I型、T型、V型）
+分析论证的结构：树状图解（I 型、T 型、V 型）
 
 ![树状图解（I型、T型、V型）](/images/critical-thinking-3-tree-diagram.png)
 
@@ -148,4 +148,4 @@ keywords: ["批判性思维"]
 
 The Use of Argument Toulmin, Stephen E. 2003, Cambridge University Press.
 
-批判性思维的原理和方法，第3章，【加】董毓，2010，高等教育出版社
+批判性思维的原理和方法，第 3 章，【加】董毓，2010，高等教育出版社
