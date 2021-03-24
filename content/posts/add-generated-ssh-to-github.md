@@ -54,7 +54,7 @@ $ eval "$(ssh-agent -s)"
 ssh-add ~/.ssh/id_rsa
 ```
 
-3.将 SSH 密钥：id_rsa.pub添加到 GitHub 帐户。
+3.将 SSH 密钥：id_rsa.pub 添加到 GitHub 帐户。
 
 ---
 
