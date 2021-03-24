@@ -20,7 +20,7 @@ tags: ["随笔"]
 
 Laughter is not our medicine. Stories hold our cure. Laughter is just the honey that sweetens the bitter medicine. I don't want to unite you with laughter or anger. I just needed my story heard, my story felt and understood by individuals with minds of their own.
 
-#### 视频资料：
+#### 视频资料
 
 <https://www.bilibili.com/video/av33216109/> （英语字幕）
 
