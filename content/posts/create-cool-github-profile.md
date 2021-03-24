@@ -6,7 +6,7 @@ tags: ["GitHub", "GitHub Actions", "JavaScript", "Python", "pipenv"]
 keywords: ["GitHub", "GitHub Actions", "JavaScript", "Python", "pipenv"]
 ---
 
-午饭前看到一个 issue：[[开源自荐] 利用Github Actions获取网站的Rss数据，并更新到个人主页](https://github.com/ruanyf/weekly/issues/1616)。
+午饭前看到一个 issue：[[开源自荐] 利用 Github Actions 获取网站的 RSS 数据，并更新到个人主页](https://github.com/ruanyf/weekly/issues/1616)。
 
 标题勾起了我学习的兴趣。自己也想进一步学习 [GitHub Actions](/tags/github-actions/) 的使用。
 
@@ -72,7 +72,7 @@ pytz = "2020.5"
 python_version = "3.7"
 ```
 
-`python_version` 必须是 3.7，改成其他的会报错（[错误地址1][]）：
+`python_version` 必须是 3.7，改成其他的会报错（[错误地址 1][]）：
 
 ```sh
 Warning: Python 3.8 was not found on your system...
@@ -81,7 +81,7 @@ You can specify specific versions of Python with:
 $ pipenv --python path/to/python
 ```
 
-因为好奇是否必须是 3.7，我改成 3.8，3.9，3.x。发现都出现错误。改成 3.x 报错（[错误地址2][]）：
+因为好奇是否必须是 3.7，我改成 3.8，3.9，3.x。发现都出现错误。改成 3.x 报错（[错误地址 2][]）：
 
 ```sh
 ValueError: invalid literal for int() with base 10: '3.x'
