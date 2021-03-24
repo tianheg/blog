@@ -1,10 +1,9 @@
 ---
 title: "复杂度分析"
 date: 2021-01-04T16:38:19+08:00
-tags: ["ADS","复杂度分析"]
+tags: ["ADS"]
 description: "这篇文章将汇总，我从一开始学习复杂度分析，到以后灵活使用它的过程"
 keywords: ["ADS","复杂度分析"]
-draft: true
 ---
 
 这是学习 ADS（算法和数据结构）的第一篇文章。
@@ -33,11 +32,9 @@ draft: true
 
 ### 例子一
 
-```c
+---
 
-```
-
-## 参考资料
+**参考资料**：
 
 - [复杂度分析 | Wiki](https://wiki.yidajiabei.xyz/ads/getting-started.html#%E5%A4%8D%E6%9D%82%E5%BA%A6%E5%88%86%E6%9E%90)
 - [什么是复杂度分析 - leetcode](https://leetcode-cn.com/circle/article/GCJe6w/)
