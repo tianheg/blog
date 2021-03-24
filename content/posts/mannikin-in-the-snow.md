@@ -6,7 +6,7 @@ tags: ["艺术"]
 keywords: ["艺术"]
 ---
 
-![mannikin-in-the-snow.png](https://cdn.jsdelivr.net/gh/tianheg/static@wiki/images/rwl/watch/mannikin-in-the-snow.jpeg)
+![mannikin-in-the-snow.png](/images/arts/mannikin-in-the-snow.jpeg)
 
 Sargent painted this canvas in the company of his fellow expatriate Edwin Austin Abbey in Fairford, Gloucestershire, where the two artists had rented a studio for their work on mural commissions. As a diversion one day, they arranged a mannequin in the snow and painted oil sketches of it from their studio window. The results reveal their dissimilar approaches to art. The critic Royal Cortissoz recalled that Abbey conjured from the mannequin a lifelike medieval troubadour wearing a cloak and a feathered hat (in a painting that has not been located); Sargent, instead, recorded the lifeless dummy that stood before his eyes.
 
