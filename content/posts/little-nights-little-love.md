@@ -8,7 +8,7 @@ keywords: ["电影"]
 
 アイネクライネ ナハトムジーク - 2019 - 日本
 
-![little-nights-little-love.png](https://cdn.jsdelivr.net/gh/tianheg/static@wiki/images/rwl/watch/little-nights-little-love.jpeg)
+![little-nights-little-love.png](/images/films/little-nights-little-love.jpeg)
 
 冥冥之中，你爱的那个人就在那里等你。
 
