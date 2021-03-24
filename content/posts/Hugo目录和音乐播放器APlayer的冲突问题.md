@@ -115,7 +115,7 @@ id="967686417">
 
 参考链接：
 
-1. [metingjs与hexo-toc插件冲突，中文标题无法跳转](https://github.com/metowolf/MetingJS/issues/5)
+1. [metingjs 与 hexo-toc 插件冲突，中文标题无法跳转](https://github.com/metowolf/MetingJS/issues/5)
 2. [Aplayer conflicts with hexo-toc](https://github.com/MoePlayer/APlayer/issues/242)
 3. [Update post.ejs](https://github.com/nqmysb/hexo-theme-huweihuang/commit/9896728accbda1f880c1216f443a5251d1b072f5)
 4. [Hugo 音乐短代码](https://immmmm.com/hugo-shortcodes-music/)

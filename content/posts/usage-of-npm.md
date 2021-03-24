@@ -57,7 +57,7 @@ npm WARN notsup SKIPPING OPTIONAL DEPENDENCY: Unsupported platform for fsevents@
 
 比如我们需要 jquery，我们要查看 jquery 包在服务器上的版本：
 
-1. 使用`npm view jquery versions`，这种方式可以查看npm服务器上所有的jquery版本信息：
+1. 使用`npm view jquery versions`，这种方式可以查看 npm 服务器上所有的 jquery 版本信息：
 
    ```bash
    E:\可以在任意路径执行>npm view jquery versions
@@ -117,7 +117,7 @@ npm WARN notsup SKIPPING OPTIONAL DEPENDENCY: Unsupported platform for fsevents@
 
    这东西太有用了！
 
-如果我们需要查看本地下载的jquery版本信息，怎么做呢？
+如果我们需要查看本地下载的 jquery 版本信息，怎么做呢？
 
 1. 使用 `npm ls jquery`，查看本地安装的 jquery，因为我没有安装 jquery，所以返回的结果为 `empty`：
 
@@ -199,7 +199,7 @@ npm WARN notsup SKIPPING OPTIONAL DEPENDENCY: Unsupported platform for fsevents@
 
    这一步，实际上，包括以下几步都不是必须，根据个人需要选择。
 
-2. `npm view vue versions` 查看vue的所有版本：
+2. `npm view vue versions` 查看 vue 的所有版本：
 
    ```powershell
    PS C:\Users\yourname> npm view vue versions
@@ -296,7 +296,7 @@ npm WARN notsup SKIPPING OPTIONAL DEPENDENCY: Unsupported platform for fsevents@
    ]
    ```
 
-   根据需要选择版本，我们可以从这些版本中看出vue的开发过程。
+   根据需要选择版本，我们可以从这些版本中看出 vue 的开发过程。
 
 3. `npm install vue` 下载最新 vue 发布版本：
 
@@ -349,7 +349,7 @@ npm WARN notsup SKIPPING OPTIONAL DEPENDENCY: Unsupported platform for fsevents@
 
    为什么会这样？因为我并没有全局安装，也就是使用 `npm install -g vue` 安装。
 
-   这样 vue只会存在于`C:\Users\yourname\node_modules`路径下，而通过全局安装包的路径下并无vue。当我通过上述命令全局安装后，再次执行`npm ls vue -g`，就会出现：
+   这样 vue 只会存在于`C:\Users\yourname\node_modules`路径下，而通过全局安装包的路径下并无 vue。当我通过上述命令全局安装后，再次执行`npm ls vue -g`，就会出现：
 
    ```powershell
    PS C:\Users\yourname> npm ls vue -g
