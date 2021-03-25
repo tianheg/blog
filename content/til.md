@@ -31,7 +31,7 @@ Understanding about TIL:
 - 分类名字使用英文，~~如果内容是中文，题目也要用中文，以暗示内容是中文；英文等同~~ 「中文 + 英文」，两者哪一个适合用哪个
 - 把自己今天的收获，放到这儿，无论是否与技术相关
 
-_228 TILs and counting..._
+_250 TILs and counting..._
 
 ---
 
@@ -39,14 +39,17 @@ _228 TILs and counting..._
 
 - [Accessibility](#accessibility)
 - [Algolia](#algolia)
+- [Body](#body)
 - [Chrome](#chrome)
 - [Cloudflare](#cloudflare)
 - [CSS](#css)
 - [Curl](#curl)
+- [DNS](#dns)
 - [Docker](#docker)
 - [Emmet](#emmet)
 - [English](#english)
 - [Firefox](#firefox)
+- [Gatsby](#gatsby)
 - [Git](#git)
 - [GitHub](#github)
 - [Go](#go)
@@ -55,7 +58,7 @@ _228 TILs and counting..._
 - [HTML](#html)
 - [Hugo](#hugo)
 - [JavaScript](#javascript)
-- [Law](#law)
+- [法律](#法律)
 - [Let's Encrypt](#lets-encrypt)
 - [Linux](#linux)
 - [Node.js](#nodejs)
@@ -64,7 +67,7 @@ _228 TILs and counting..._
 - [Python](#python)
 - [Security](#security)
 - [SSH](#ssh)
-- [Traffic](#traffic)
+- [交通](#交通)
 - [Translate](#translate)
 - [Trello](#trello)
 - [Ubuntu](#ubuntu)
@@ -92,10 +95,26 @@ _228 TILs and counting..._
 - [Make Screen Reader Navigation Easier With The Nav Landmark](https://til.yidajiabei.xyz/accessibility/make-screen-reader-navigation-easier-with-the-nav-landmark)
 - [Make Screen Reader Navigation Easier With The Footer Landmark](https://til.yidajiabei.xyz/accessibility/make-screen-reader-navigation-easier-with-the-footer-landmark)
 - [Improve Accessibility Of Audio Content With The Audio Element](https://til.yidajiabei.xyz/accessibility/improve-accessibility-of-audio-content-with-the-audio-element)
+- [Improve Chart Accessibility With The Figure Element](https://til.yidajiabei.xyz/accessibility/improve-chart-accessibility-with-the-figure-element.md)
+- [Improve Form Field Accessibility With The Label Element](https://til.yidajiabei.xyz/accessibility/improve-form-field-accessibility-with-the-label-element.md)
+- [Wrap Radio Buttons In A Fieldset Element For Better Accessibility](https://til.yidajiabei.xyz/accessibility/wrap-radio-buttons-in-a-fieldset-element-for-better-accessibility.md)
+- [Add An Accessible Date Picker](https://til.yidajiabei.xyz/accessibility/add-an-accessible-date-picker.md)
+- [Standardize Times With The HTML5 Datetime Attribute](https://til.yidajiabei.xyz/accessibility/standardize-times-with-the-html5-datetime-attribute.md)
+- [Make Elements Only Visible To A Screen Reader By Using Custom CSS](https://til.yidajiabei.xyz/accessibility/make-elements-only-visible-to-a-screen-reader-by-using-custom-css.md)
+- [Improve Readability With High Contrast Text](https://til.yidajiabei.xyz/accessibility/improve-readability-with-high-contrast-text.md)
+- [Avoid Colorblindness Issues By Using Sufficient Contrast](https://til.yidajiabei.xyz/accessibility/avoid-colorblindness-issues-by-using-sufficient-contrast.md)
+- [Avoid Colorblindness Issues By Carefully Choosing Colors That Convey Information](https://til.yidajiabei.xyz/accessibility/avoid-colorblindness-issues-by-carefully-choosing-colors-that-convey-information.md)
+- [Give Links Meaning By Using Descriptive Link Text](https://til.yidajiabei.xyz/accessibility/give-links-meaning-by-using-descriptive-link-text.md)
+- [Make Links Navigable With HTML Access Keys](https://til.yidajiabei.xyz/accessibility/make-links-navigable-with-html-access-keys.md)
+- [Use Tabindex To Add Keyboard Focus To An Element](https://til.yidajiabei.xyz/accessibility/use-tabindex-to-add-keyboard-focus-to-an-element.md)
 
 ### Algolia
 
 - [What Is A Usage Unit?](https://til.yidajiabei.xyz/algolia/what-is-a-usage-unit)
+
+### Body
+
+- [Ear](https://til.yidajiabei.xyz/body/ear.md)
 
 ### Chrome
 
@@ -170,6 +189,10 @@ _228 TILs and counting..._
 
 - [Install Curl](https://til.yidajiabei.xyz/curl/install-curl)
 
+### DNS
+
+- [DNS 解析平滑迁移](https://til.yidajiabei.xyz/dns/dns-resolution-smooth-migration.md)
+
 ### Docker
 
 - [Add Registry Mirrors For Ubuntu](https://til.yidajiabei.xyz/docker/add-registry-mirrors-for-ubuntu)
@@ -190,6 +213,11 @@ _228 TILs and counting..._
 ### Firefox
 
 - [Secure Connection Failed](https://til.yidajiabei.xyz/firefox/secure-connection-failed)
+
+### Gatsby
+
+- [Change Default Package Manager](https://til.yidajiabei.xyz/gatsby/change-default-package-manager.md)
+- [Set Up Development Environment](https://til.yidajiabei.xyz/gatsby/set-up-development-environment.md)
 
 ### Git
 
@@ -268,9 +296,9 @@ _228 TILs and counting..._
 
 - [JavaScript Virtual Machine](https://til.yidajiabei.xyz/javascript/javascript-virtual-machine)
 
-### Law
+### 法律
 
-- [Id Card](https://til.yidajiabei.xyz/law/id-card)
+- [身份证](https://til.yidajiabei.xyz/law/id-card)
 
 ### Let's Encrypt
 
@@ -280,8 +308,10 @@ _228 TILs and counting..._
 
 - [Create Users](https://til.yidajiabei.xyz/linux/create-users)
 - [Difference Between `useradd` And `adduser`](https://til.yidajiabei.xyz/linux/difference-between-useradd-and-adduser)
+- [Extract File](https://til.yidajiabei.xyz/linux/extract-file.md)
 - [Install `.bundle` Packages In Linux](https://til.yidajiabei.xyz/linux/install-bundle-packages-in-linux)
 - [List Users](https://til.yidajiabei.xyz/linux/list-users)
+- [Move File](https://til.yidajiabei.xyz/linux/move-file.md)
 - [Orders](https://til.yidajiabei.xyz/linux/orders)
 - [Switch Users](https://til.yidajiabei.xyz/linux/switch-users)
 - [Username Is Not In The Sudoers File](https://til.yidajiabei.xyz/linux/username-is-not-in-the-sudoers-file)
@@ -291,6 +321,7 @@ _228 TILs and counting..._
 - [Husky Error Command "husky-run" Not Found](https://til.yidajiabei.xyz/nodejs/husky-command-husky-run-not-found)
 - [Install Node.js And NPM](https://til.yidajiabei.xyz/nodejs/install-nodejs-npm)
 - [Package.json License Should Be A Valid SPDX License Expression](https://til.yidajiabei.xyz/nodejs/package-license-should-be-a-valid-spdx-license-expression)
+- [String Does Not Match The Pattern Of](https://til.yidajiabei.xyz/nodejs/string-does-not-match-the-pattern-of.md)
 - [Used Packages](https://til.yidajiabei.xyz/nodejs/used-packages)
 
 ### Notion
@@ -306,6 +337,7 @@ _228 TILs and counting..._
 - [Connection Broken By Proxy Error](https://til.yidajiabei.xyz/python/connection-broken-by-proxy-error)
 - [Install Pipenv On Ubuntu](https://til.yidajiabei.xyz/python/install-pipenv-on-ubuntu)
 - [Packages I Always Use](https://til.yidajiabei.xyz/python/packages-i-always-use)
+- [TypeError: Cannot Unpack Non-iterable NoneType Object](https://til.yidajiabei.xyz/python/typeerror-cannot-unpack-non-iterable-nonetype-object.md)
 - [Update Pipfile.lock](https://til.yidajiabei.xyz/python/update-pipenv-lock-file)
 
 ### Security
@@ -317,7 +349,7 @@ _228 TILs and counting..._
 
 - [Generate SSH Key](https://til.yidajiabei.xyz/ssh/generate-ssh-key)
 
-### Traffic
+### 交通
 
 - [如何买票](https://til.yidajiabei.xyz/traffic/how-to-buy-tickets)
 
@@ -347,6 +379,7 @@ _228 TILs and counting..._
 - [Install SQLite Database Browser](https://til.yidajiabei.xyz/ubuntu/install-sqlite-database-browser)
 - [Install VLC](https://til.yidajiabei.xyz/ubuntu/install-vlc)
 - [Install VMware Workstation Player](https://til.yidajiabei.xyz/ubuntu/install-vmware-workstation-player)
+- [Install Zotero](https://til.yidajiabei.xyz/ubuntu/install-zotero.md)
 - [Local Network Share](https://til.yidajiabei.xyz/ubuntu/local-network-share)
 - [No Pip On Ubuntu20.04](https://til.yidajiabei.xyz/ubuntu/no-pip-on-ubuntu20-04)
 - [Resize Ubuntu Partitions](https://til.yidajiabei.xyz/ubuntu/resize-ubuntu-partitions)
