@@ -1,8 +1,9 @@
 ---
-title: Hugo 没有安装扩展版产生的问题
+title: "Hugo 没有安装扩展版产生的问题"
 date: 2020-05-10T17:51:21+08:00
+description: "记录 Hugo 没有安装扩展版产生的问题"
 tags: ["Hugo"]
-slug: Hugo problems with no extended
+keywords: ["Hugo"]
 ---
 
 如果没有安装 Hugo 扩展版，在执行 `hugo server` 命令时，会报如下错误：
