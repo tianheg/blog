@@ -1,8 +1,9 @@
 ---
-title: Hugo Meme 主题配置
+title: "配置 Hugo 主题 Meme"
 date: 2020-06-09T16:30:09+08:00
+description: "配置 Hugo 主题 Meme"
 tags: ["Hugo"]
-slug: meme theme configuration
+keywords: ["Hugo"]
 ---
 
 ## 卡片风格
@@ -134,6 +135,6 @@ var t1 = Date.UTC(2020, 01, 01, 00, 00, 00)
 
 ---
 
-参考链接：
+**参考资料**：
 
 1. [MemE 主题优化](https://ztygcs.github.io/posts/meme%E4%B8%BB%E9%A2%98%E4%BC%98%E5%8C%96/)
