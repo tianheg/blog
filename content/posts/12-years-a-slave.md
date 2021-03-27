@@ -1,7 +1,7 @@
 ---
 title: "为奴十二年"
 date: 2020-11-09T20:19:42+08:00
-description: "看为奴十二年"
+description: "看《为奴十二年》"
 tags: ["电影"]
 keywords: ["电影"]
 ---
