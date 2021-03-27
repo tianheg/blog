@@ -1,11 +1,12 @@
 ---
-title: Hugo 主题及多语言图标不能在 Linux Chrome 中正常显示
+title: "Hugo 主题及多语言图标不能在 Linux Chrome 中正常显示"
 date: 2020-05-17T10:11:26+08:00
+description: "记录 Hugo 主题及多语言图标不能在 Linux Chrome 中正常显示"
 tags: ["Hugo"]
-slug: hugo theme and multilingual can't display on Chrome of linux
+keywords: ["Hugo"]
 ---
 
-这个问题，我给正在使用的主题：Meme，提了 issue，地址：[我是地址](https://github.com/reuixiy/hugo-theme-meme/issues/139) 。
+这个问题，我给正在使用的主题：Meme，提了 issue，[地址](https://github.com/reuixiy/hugo-theme-meme/issues/139) 。
 
 博客我是不放图片的，我描述一下，什么是不能正常显示：
 
@@ -49,7 +50,7 @@ apt install fonts-noto-color-emoji
 
 ---
 
-参考链接：
+**参考资料**：
 
 1. [The icon of theme and multilingual can't display on GoogleChrome on linux](https://github.com/reuixiy/hugo-theme-meme/issues/139)
 2. [Google Noto Fonts](https://www.google.com/get/noto/)
