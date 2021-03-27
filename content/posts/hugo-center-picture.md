@@ -1,8 +1,9 @@
 ---
-title: Hugo 图片居中
+title: "Hugo 图片居中"
 date: 2020-05-10T17:49:41+08:00
+description: "记录 Hugo 图片居中"
 tags: ["Hugo"]
-slug: Hugo center picture
+keywords: ["Hugo"]
 ---
 
 一般插入图片使用这样的格式： `![]()`
