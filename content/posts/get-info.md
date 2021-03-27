@@ -109,6 +109,7 @@ keywords: ["知识体系"]
 - [owlling.com/blog](https://www.owlling.com/blog)
 - [所歷托言 —— Solitorian on Another Stage](https://solitorian.com/)
 - [Spencer's Blog](https://blog.spencerwoo.com/)
+- [Philosopher](https://philosopher.life/)
 
 ### 官方博客
 
