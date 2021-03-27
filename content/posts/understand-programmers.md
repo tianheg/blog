@@ -1,8 +1,9 @@
 ---
-title: 越来越能体会程序员的辛苦
+title: "越来越能体会程序员的辛苦"
 date: 2020-01-30T21:34:47+08:00
-tags: ["编程"]
-slug: understand programmers
+description: "越来越能体会程序员的辛苦"
+tags: ["随笔"]
+keywords: ["随笔"]
 ---
 
 > 国泰民安，百姓安居乐业，生活真的很美好啊。——《武林外传》邢捕头
