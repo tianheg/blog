@@ -6,6 +6,15 @@ tags: ["读书"]
 keywords: ["读书"]
 ---
 
+## 社科哲学
+
+- 荷马史诗
+- 亚里士多德
+- 卢梭
+- 尼采
+- 波伏娃
+- 伍尔芙
+
 ## 技术
 
 ### 抽象
@@ -64,6 +73,21 @@ keywords: ["读书"]
 - Charles Dickens | 查尔斯·狄更斯【英国 19 世纪中期（维多利亚时代）作家、评论家。小说作品反映出个人的成长经验与社会的时代脉络，广受当时与后世评论家、学者及读者的认可与喜爱】
 - William Makepeace Thackeray | 威廉·梅克比斯·萨克雷【一位与狄更斯齐名的维多利亚时代的英国小说家。最著名的作品是《浮华世界》（一译《名利场》），此外还有《潘丹尼斯》等等】
 
+## 哥伦比亚大学核心课程
+
+- 文学人文(Literature Humanities)
+- 现代文明(Contemporary Civilization)
+- 艺术(Art Humanities)
+- 音乐(Music Humanities)
+- 外语(Foreign Language)
+- 逻辑与修辞(Logic and Rhetoric)
+- 世界主要文化(Maior Culture)
+- 科学(Science)
+
+为了完成核心课程的要求，学生必须要先修四门基本课——**文学人文、现代文明、艺术人文**和**音乐人文**，然后完成**世界主要文化、科学、外语、逻辑与修辞**等课程。
+
+无论学生的专业(inajororconcentration)是什么，都使他们对文学、哲学、历史、音乐、艺术和科学方面的深刻思想与巨大成就具有宽广的视野。
+
 ---
 
 **参考资料**：
@@ -72,3 +96,4 @@ keywords: ["读书"]
 2. [查尔斯·狄更斯 - 中文维基](https://zh.wikipedia.org/wiki/%E6%9F%A5%E5%B0%94%E6%96%AF%C2%B7%E7%8B%84%E6%9B%B4%E6%96%AF)
 3. [Agatha Christie - Wikipedia](https://en.wikipedia.org/wiki/Agatha_Christie)
 4. [Charles Dickens](https://en.wikipedia.org/wiki/Charles_Dickens)
+5. [哥伦比亚大学核心课程](https://www.college.columbia.edu/core/)
