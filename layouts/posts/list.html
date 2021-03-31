@@ -1,12 +1,10 @@
 {{ define "content" }}
 <section class="container list">
-  {{/* {{ partial "breadcrumb.html" . }} */}}
-
   <h1 class="title">{{ title (i18n (lower .Title)) | default .Title }}</h1>
   共计 {{ len (where .Site.RegularPages "Section" "posts") }} 篇日志
   <ul>
     {{ range .Pages.GroupByDate "2006" }}
-    <h2 class="archive-title" style="margin: 2em auto 1.5em auto;text-align: center">{{ .Key }}</h2>
+    <h2 id="{{ .Key }}" class="archive-title" style="margin: 2em auto 1.5em auto;text-align: center">{{ .Key }}</h2>
     {{ range .Pages.GroupByDate "2006-01-02" }} {{ range .Pages }}
     <p style="display: block;margin-block-start: 1em;margin-block-end: 1em;margin-inline-start: 0px;margin-inline-end: 0px;">
       <span>{{ .Date.Format "2006-01-02" }}</span>
@@ -14,19 +12,5 @@
     </p>
     {{ end }} {{ end }} {{ end }}
   </ul>
-  {{/* {{ $prev := 3000}} {{range .Site.RegularPages}} {{if .Date}} {{if gt
-  $prev (.Date.Format "2006")}} {{if ne $prev 3000}} {{ end }}
-
-  <h2>{{ .Date.Format "2006" }}</h2>
-  <ul>
-    {{ end }}
-    <ul style="text-align: center">
-      <li>
-        {{.Date.Format "2006-01-02"}}<a href="{{ .Permalink }}">{{ .Title }}</a>
-      </li>
-    </ul>
-    {{ $prev = .Date.Format "2006"}} {{end}} {{end}}
-  </ul>
-  */}} 
 </section>
 {{ end }}
