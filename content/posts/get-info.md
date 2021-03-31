@@ -150,6 +150,7 @@ keywords: ["知识体系"]
 - [Issues · reuixiy/io-oi.me](https://github.com/reuixiy/io-oi.me/issues/)
 - [Gitcoin: Grow Open Source](https://gitcoin.co/)
 - [F2E - LearnKu](https://learnku.com/f2e)
+- [卢浮宫在线展品](https://collections.louvre.fr/en/)
 
 ## 其他
 
