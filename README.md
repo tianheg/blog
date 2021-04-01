@@ -16,3 +16,5 @@ My blog will be: [project](https://github.com/tianheg/blog/projects/1?fullscreen
 <a rel="license" href="http://creativecommons.org/licenses/by-nc-sa/4.0/"><img style="border-width:0" src="https://i.creativecommons.org/l/by-nc-sa/4.0/88x31.png" /></a>
 
 All my contents are under [CC BY-NC-SA 4.0](https://creativecommons.org/licenses/by-nc-sa/4.0/)
+
+备忘：《电磁场与电磁波》C 考将在 2022 年 3/4 月份（毕业的那一学期）进行，勿忘！！！
