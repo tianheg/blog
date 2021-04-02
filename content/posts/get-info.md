@@ -17,13 +17,6 @@ keywords: ["知识体系"]
 1. 搜集我的信息渠道
 2. 分类
 
-## 博客聚合
-
-- <https://bloggingfordevs.com/trends/>
-- <https://news.ycombinator.com/best>
-- <https://bloghub.fun/>
-- <https://datorss.com/>
-
 ## 分类
 
 ### 前端
