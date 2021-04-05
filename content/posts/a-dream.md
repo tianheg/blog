@@ -1,8 +1,9 @@
 ---
-title: 一场梦
+title: "一场梦"
 date: 2020-06-17T07:43:45+08:00
+description: "一场梦"
 tags: ["随笔"]
-slug: a dream
+keywords: ["随笔"]
 ---
 
 我抓住这场梦的尾巴，以免它稍后在我脑中消逝。
