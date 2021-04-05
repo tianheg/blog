@@ -239,4 +239,4 @@ keywords: ["读书"]
 
 **参考资料**：
 
-1. <https://weread.qq.com/web/reader/e223222071bfd2e5e22d5a8kc81322c012c81e728d9d180>
+1. [那些忧伤的年轻人——微信读书](https://weread.qq.com/web/reader/e223222071bfd2e5e22d5a8kc81322c012c81e728d9d180)
