@@ -1,8 +1,9 @@
 ---
-title: Win10 终端常用命令
+title: "Win10 终端常用命令"
 date: 2020-05-18T14:12:27+08:00
+description: "Win10 终端常用命令"
 tags: ["Win10"]
-slug: Win10 terminal order
+keywords: ["Win10"]
 ---
 
 1. 新建文件夹
