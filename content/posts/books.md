@@ -117,6 +117,7 @@ keywords: ["读书"]
 
 - 精力管理
 - [高效能人士的七个习惯](/posts/the-7-habits-of-highly-effective-people/)
+- [许知远《那些忧伤的年轻人》](/posts/those-sad-young-men/)
 
 ## 传记
 
