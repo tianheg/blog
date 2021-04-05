@@ -272,7 +272,7 @@ keywords: ["读书"]
 - [查尔斯·狄更斯 - 中文维基](https://zh.wikipedia.org/wiki/%E6%9F%A5%E5%B0%94%E6%96%AF%C2%B7%E7%8B%84%E6%9B%B4%E6%96%AF)
 - [Agatha Christie - Wikipedia](https://en.wikipedia.org/wiki/Agatha_Christie)
 - [Charles Dickens](https://en.wikipedia.org/wiki/Charles_Dickens)
-- [哥伦比亚大学核心课程](https://www.college.columbia.edu/core/) 
+- [哥伦比亚大学核心课程](https://www.college.columbia.edu/core/)
 - [如何自学一个领域？这里有一份全指南](http://mp.weixin.qq.com/s?__biz=MzAxNTY0NjEzNg==&mid=2247485694&idx=1&sn=05e656061f472096179aff41948e861b&chksm=9b81a429acf62d3f48eee58915a032058aeeb0bc02f1d40c3a9158f261789c0561183f7b9c3a&scene=21#wechat_redirect)
 - [为什么学了很多知识，仍然没有什么用？](http://mp.weixin.qq.com/s?__biz=MzAxNTY0NjEzNg==&mid=2247485517&idx=1&sn=0af6feea628abc72314a3f65399b92ad&chksm=9b81a49aacf62d8c8319ffe3d8baa61ad88299e57cbf0511731a32a4dd4ee0a1d0faabb17f6f&scene=21#wechat_redirect)
 - [不破除这种认知，读再多书都没用](http://mp.weixin.qq.com/s?__biz=MzAxNTY0NjEzNg==&mid=2247485368&idx=1&sn=e00dee99c69e04853c2dbe70f1dc2916&chksm=9b81ab6facf6227969ba93f954f680b62eb5de60296a2229a00deaed93771d8bd51ae85ab992&scene=21#wechat_redirect)
