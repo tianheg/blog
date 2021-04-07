@@ -1,11 +1,9 @@
 ---
-title: MXLinux - VBox 安装 MXLinux
+title: "VBox 安装 MXLinux"
+description: "VBox 安装 MXLinux"
 date: 2020-05-11T16:08:21+08:00
-categories: ["技术"]
-tech: ["MXLinux"]
-slug: use VBox install MXLinux
-toc: true
-tocNum: true
+tags: ["VBox", "MXLinux"]
+keywords: ["VBox", "MXLinux"]
 ---
 
 这是 [官网](https://mxlinux.org/)，可以从 [这里](https://mxlinux.org/wiki/system/iso-download-mirrors/) 下载到 iso 镜像。接下来就可以在 Vbox 进行安装。
