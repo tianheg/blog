@@ -4,7 +4,6 @@ date: 2020-09-20T11:51:28+08:00
 description: "记录为什么停更，以及停更后的感受"
 tags: ["随笔"]
 keywords: ["随笔"]
-slug: close official account regain a new life
 ---
 
 这个想法存留已久，我考虑了很长时间。如果你留意过的话，我曾经注销过**公众号**。因为不是立即注销，有七天的缓冲期，注销当天我就取消注销了。
