@@ -1,8 +1,9 @@
 ---
-title: Python 中 list 没有 add 属性
+title: "【Python】list 对象没有 add 属性"
+description: "【Python】list 对象没有 add 属性"
 date: 2020-05-18T14:29:41+08:00
 tags: ["Python"]
-slug: Python's list no add
+keywords: ["Python"]
 ---
 
 为以下输入时，报错：
