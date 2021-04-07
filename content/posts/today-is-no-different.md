@@ -1,8 +1,9 @@
 ---
-title: 今天没有什么不同
+title: "今天没有什么不同"
+description: "今天没有什么不同"
 date: 2020-01-06T14:39:06+08:00
 tags: ["随笔"]
-slug: Today is no different
+keywords: ["随笔"]
 ---
 
 今天没有什么不同，除了一刻不停地捣鼓电脑。
