@@ -1,5 +1,5 @@
 ---
-title: "高效能人士的七个习惯"
+title: "Stephen Covey《高效能人士的七个习惯》"
 date: 2021-02-03T17:18:23+08:00
 description: "高效能人士的七个习惯"
 tags: ["读书"]
