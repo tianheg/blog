@@ -1,5 +1,5 @@
 ---
-title: "史蒂夫·乔布斯传"
+title: "Walter Isaacson《史蒂夫·乔布斯传》"
 date: 2021-02-23T19:36:30+08:00
 description: "《史蒂夫·乔布斯传》读书笔记"
 tags: ["读书"]
