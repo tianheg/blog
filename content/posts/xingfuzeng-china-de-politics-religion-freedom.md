@@ -1,7 +1,7 @@
 ---
-title: "邢福增：〈中國的政治、宗教與自由〉"
+title: "邢福增《中國的政治、宗教與自由》"
 date: 2020-06-10T18:52:21+08:00
-description: "邢福增：〈中國的政治、宗教與自由〉 读书笔记"
+description: "《中國的政治、宗教與自由》读书笔记"
 tags: ["读书"]
 keywords: ["读书"]
 ---
@@ -75,4 +75,4 @@ keywords: ["读书"]
 
 **参考资料**：
 
-[原文訪問（pdf）](https://drive.google.com/file/d/1d92iorItapvTvGErKBF9FBTMUCQ3xRG9/view)
+1. [原文訪問（pdf）](https://drive.google.com/file/d/1d92iorItapvTvGErKBF9FBTMUCQ3xRG9/view)
