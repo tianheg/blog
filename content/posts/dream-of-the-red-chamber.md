@@ -1,8 +1,9 @@
 ---
-title: 读《红楼梦》
+title: "曹雪芹《红楼梦》"
 date: 2019-08-25T14:31:59+08:00
+description: "曹雪芹《红楼梦》"
 tags: ["读书"]
-slug: read hongloumeng
+keywords: ["读书"]
 ---
 
 ## 总体
