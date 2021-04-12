@@ -1,5 +1,5 @@
 ---
-title: "How to be a Programmer 中文版"
+title: "Robert L. Read《How to be a Programmer 中文版》"
 date: 2021-02-24T19:46:25+08:00
 description: "读《How to be a Programmer 中文版》"
 tags: ["读书"]
