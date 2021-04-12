@@ -1,5 +1,5 @@
 ---
-title: "一九八四"
+title: "George Orwell《一九八四》"
 date: 2020-07-18T20:17:13+08:00
 description: "记录读《一九八四》的一些内容"
 tags: ["读书"]
