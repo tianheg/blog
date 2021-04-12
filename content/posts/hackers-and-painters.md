@@ -1,5 +1,5 @@
 ---
-title: "黑客与画家"
+title: "Paul Graham《黑客与画家》"
 date: 2021-02-23T19:04:51+08:00
 description: "《黑客与画家》读书笔记"
 tags: ["读书"]
