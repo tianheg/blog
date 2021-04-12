@@ -1,5 +1,5 @@
 ---
-title: "永恒的终结"
+title: "Isaac Asimov《永恒的终结》"
 date: 2021-02-20T17:45:57+08:00
 description: "阅读《永恒的终结》"
 tags: ["读书"]
