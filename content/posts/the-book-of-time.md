@@ -1,7 +1,7 @@
 ---
-title: "时间之书"
+title: "余世存《时间之书》"
 date: 2020-05-12T00:26:49+08:00
-description: "时间之书 读书笔记"
+description: "《时间之书》读书笔记"
 tags: ["读书"]
 keywords: ["读书"]
 ---
