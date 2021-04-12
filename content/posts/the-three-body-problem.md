@@ -1,7 +1,7 @@
 ---
-title: "三体"
+title: "刘慈欣《三体》"
 date: 2020-05-23T19:34:28+08:00
-description: "三体 读书笔记"
+description: "《三体》读书笔记"
 tags: ["读书"]
 keywords: ["读书"]
 ---
