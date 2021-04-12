@@ -1,7 +1,7 @@
 ---
-title: " The Pragmatic Programmer(程序员修炼之道)"
+title: "David Thomas&Andrew Hunt《程序员修炼之道》"
 date: 2020-07-14T09:32:03+08:00
-description: "记录读 The Pragmatic Programmer 的心得与体会"
+description: "阅读《程序员修炼之道》"
 tags: ["读书"]
 keywords: ["读书"]
 ---
