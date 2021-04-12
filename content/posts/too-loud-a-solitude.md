@@ -1,5 +1,5 @@
 ---
-title: "过于喧嚣的孤独"
+title: "Bohumil Hrabal《过于喧嚣的孤独》"
 date: 2019-12-01T18:12:31+08:00
 description: "过于喧嚣的孤独 读书笔记"
 tags: ["读书"]
