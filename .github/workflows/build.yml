@@ -13,10 +13,10 @@ jobs:
 
     steps:
     - name: 'Building...'
-      uses: reuixiy/hugo-deploy@v1
+      uses: tianheg/github-actions@hugo
       env:
-        DEPLOY_REPO: yixiuer/yixiuer.github.io
-        DEPLOY_BRANCH: build
+        DEPLOY_REPO: tianheg/self
+        DEPLOY_BRANCH: gh-pages
         DEPLOY_KEY: ${{ secrets.DEPLOY_KEY }}
         # https://en.wikipedia.org/wiki/List_of_tz_database_time_zones
         TZ: Asia/Shanghai
