@@ -1,6 +1,6 @@
-# Yixiuer.me
+# Self.yidajiabei.xyz
 
-[![Built on GitHub](https://github.com/yixiuer/yixiuer.me/workflows/build/badge.svg)](https://github.com/yixiuer/yixiuer.me/actions)
+[![github pages](https://github.com/tianheg/self/actions/workflows/build.yml/badge.svg)](https://github.com/tianheg/self/actions/workflows/build.yml)
 [![Generator is Hugo](https://img.shields.io/badge/Generator-Hugo-ff4088?&logo=hugo)](https://github.com/gohugoio/hugo)
 [![Theme is MemE](https://img.shields.io/badge/Theme-MemE-2a6df4)](https://github.com/reuixiy/hugo-theme-meme)
 
