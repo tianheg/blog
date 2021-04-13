@@ -1,3 +1,0 @@
-+++
-slug = "beyond-the-earth"
-+++
