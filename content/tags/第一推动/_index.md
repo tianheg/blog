@@ -1,3 +1,0 @@
-+++
-slug = "the-unmoved-mover"
-+++

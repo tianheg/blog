@@ -1,3 +1,0 @@
-+++
-slug = "good-or-evil"
-+++
