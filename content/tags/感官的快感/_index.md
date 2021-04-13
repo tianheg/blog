@@ -1,3 +1,0 @@
-+++
-slug = "pleasure-of-sense"
-+++
