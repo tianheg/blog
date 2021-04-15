@@ -38,11 +38,10 @@ keywords = "关于我"
 
 ## 订阅博客
 
+- 直接浏览网站
 - RSS
   - 直接使用 [链接](https://blog.yidajiabei.xyz/index.xml)
   - [Feeds.pub](https://feeds.pub/feed/https%3A%2F%2Fblog.yidajiabei.xyz%2Findex.xml)
-- 直接浏览网站
-- 公众号：一大加贝
 
 ## 联系我
 
