@@ -9,15 +9,6 @@
         <div class="post-title">
           <h1 class="title">{{ .Title }}</h1>
         </div>
-        <div class="post-meta">
-          <div class="date">
-            <span class="reading-time">
-              <i class="fas fa-clock"></i>
-              {{ i18n "reading_time" .ReadingTime }}
-            </span>
-          </div>
-          {{ with .Page.Params.Tags }}{{ partial "taxonomy/tags.html" . }}{{ end }}
-        </div>
       </header>
 
       <div>
