@@ -32,7 +32,7 @@ keywords = "关于我"
 
 - 可以使用 `[post-title](/posts/post-file-name/)` 和 `[tag-name](/tags/tag-name/)` 相互引用文章
 - 文章中的“他”，不单指男性，还有女性
-- 在写作中，作者退居二线，多以『你』称呼
+- 在写作中，作者退居二线，多以「你」称呼
 
 ![A Letter to Reader](/images/a-letter-to-reader.jpg)
 
