@@ -17,7 +17,7 @@ keywords: ["编程","方法","态度"]
 
 ## 高效处理新信息
 
-在开始学习如何编程之前，你需要学习 [如何『学习』](https://blog.yidajiabei.xyz/posts/how-to-study/)。
+在开始学习如何编程之前，你需要学习 [如何「学习」](https://blog.yidajiabei.xyz/posts/how-to-study/)。
 
 当观看课程或者读文档时感到沮丧困惑是完全正常的，每个人都会在第一步挣扎。
 
