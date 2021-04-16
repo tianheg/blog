@@ -18,7 +18,7 @@ keywords = "关于我"
 
 音乐多为舒缓放松，间或品味大师雅作。谈及音乐，流行音乐不听，其余皆可。
 
-一份感谢清单：[谢谢你](https://blog.yidajiabei.xyz/posts/thanks)
+一份感谢清单：[谢谢你](/posts/thanks)
 
 ### 自我观察
 
