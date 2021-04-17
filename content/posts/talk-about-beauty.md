@@ -2,8 +2,8 @@
 title: "朱光潜《谈美》"
 date: 2021-03-24T21:05:21+08:00
 description: "阅读《谈美》的笔记和感受"
-tags: ["读书"]
-keywords: ["读书"]
+tags: ["阅读"]
+keywords: ["阅读"]
 ---
 
 ## 提出问题

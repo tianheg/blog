@@ -2,8 +2,8 @@
 title: "Stefan Zweig《一个女人一生中的二十四小时》"
 date: 2019-11-19T20:19:42+08:00
 description: "读一个女人一生中的二十四小时"
-tags: ["读书"]
-keywords: ["读书"]
+tags: ["阅读"]
+keywords: ["阅读"]
 ---
 
 > 生活中不缺少文字

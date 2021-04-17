@@ -2,8 +2,8 @@
 title: "Mortimer Jerome Adler&Charles Van Doren《如何阅读一本书》"
 date: 2021-02-16T08:32:49+08:00
 description: "《如何阅读一本书》读书笔记"
-tags: ["读书"]
-keywords: ["读书"]
+tags: ["阅读"]
+keywords: ["阅读"]
 ---
 
 这本书属于「第 2 层书籍」。

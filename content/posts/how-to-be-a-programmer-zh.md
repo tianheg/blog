@@ -2,8 +2,8 @@
 title: "Robert L. Read《How to be a Programmer 中文版》"
 date: 2021-02-24T19:46:25+08:00
 description: "读《How to be a Programmer 中文版》"
-tags: ["读书"]
-keywords: ["读书"]
+tags: ["阅读"]
+keywords: ["阅读"]
 ---
 
 这本书属于「第 2 层书籍」。
