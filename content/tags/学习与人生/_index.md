@@ -1,0 +1,3 @@
++++
+slug = "study-and-life"
++++
