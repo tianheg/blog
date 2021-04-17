@@ -2,8 +2,8 @@
 title: "David G.Myers《社会心理学》"
 date: 2021-04-12T16:46:38+08:00
 description: "阅读《社会心理学》"
-tags: ["读书"]
-keywords: ["读书"]
+tags: ["阅读"]
+keywords: ["阅读"]
 ---
 
 ## 提出问题

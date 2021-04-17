@@ -2,8 +2,8 @@
 title: "鸟哥《鸟哥的 Linux 私房菜》"
 date: 2020-05-12T17:55:02+08:00
 description: "读《鸟哥的 Linux 私房菜》记的笔记"
-tags: ["读书"]
-keywords: ["读书"]
+tags: ["阅读"]
+keywords: ["阅读"]
 ---
 
 ## CPU 的种类

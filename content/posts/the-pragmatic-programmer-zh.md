@@ -2,8 +2,8 @@
 title: "David Thomas&Andrew Hunt《程序员修炼之道》"
 date: 2020-07-14T09:32:03+08:00
 description: "阅读《程序员修炼之道》"
-tags: ["读书"]
-keywords: ["读书"]
+tags: ["阅读"]
+keywords: ["阅读"]
 ---
 
 > 务实（ Pragmatic ）这个词来自拉丁语 *pragmaticus* —— “精通业务”，该词又来源于希腊语 πραγματικός ，意思是 “适合使用”。
