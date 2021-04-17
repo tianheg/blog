@@ -2,8 +2,8 @@
 title: "George Orwell《一九八四》"
 date: 2020-07-18T20:17:13+08:00
 description: "记录读《一九八四》的一些内容"
-tags: ["读书"]
-keywords: ["读书"]
+tags: ["阅读"]
+keywords: ["阅读"]
 ---
 
 > 在栗树荫下，<br>我出卖了你，你出卖了我。
