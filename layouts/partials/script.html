@@ -12,12 +12,6 @@
       <script src="{{ . | relURL }}"></script>
     {{ end }}
 
-    {{ template "_internal/google_analytics.html" . }}
-    
-    {{ if and .Site.Params.googleTagManager .Site.Params.googleTagManager.id }}
-      {{- partial "analytics/googletagmanager" . -}}
-    {{ end }}
-
     {{ if and .Site.Params.enableServiceWorker (eq hugo.Environment "production") }}
         {{- $sw := resources.Get "js/sw.js" -}}
         {{- $dummy := "" | resources.FromString "dummy.js" -}}
