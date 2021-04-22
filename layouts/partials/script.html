@@ -1,3 +1,7 @@
+    <!-- Cloudflare Web Analytics -->
+    <script defer src='https://static.cloudflareinsights.com/beacon.min.js' data-cf-beacon='{"token": "663868e3e36143f89fc901707f305104"}'></script>
+    <!-- End Cloudflare Web Analytics -->
+    
     {{ if not .Site.Params.hideColorSchemeToggle }}
       {{ if .Site.IsServer }}
         {{ $script := resources.Get "js/dark-mode.js" }}
@@ -45,3 +49,4 @@
             debug: false,
         });
     </script>
+    
