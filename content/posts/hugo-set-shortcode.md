@@ -130,7 +130,7 @@ repository = '<svg xmlns="http://www.w3.org/2000/svg" class="icon" viewBox="0 0 
 ## notice
 
 {{<notice notice-warning>}}
-some
+内容
 {{</notice>}}
 
 ```html
@@ -171,16 +171,10 @@ some
 
 ## gist
 
-{{< gist Gaotianhe cd6d8a915c96e54a0faa1c93f51c9593 >}}
+{{< gist tianheg 1ce40c3e06eddab6bc72b87cc26ec067 >}}
 
 ```html
-{{</* gist Gaotianhe cd6d8a915c96e54a0faa1c93f51c9593 */>}}
-```
-
-<script src="https://gist.github.com/Gaotianhe/cd6d8a915c96e54a0faa1c93f51c9593.js"></script>
-
-```html
-<script src="https://gist.github.com/Gaotianhe/cd6d8a915c96e54a0faa1c93f51c9593.js"></script>
+{{</* gist tianheg 1ce40c3e06eddab6bc72b87cc26ec067 */>}}
 ```
 
 ## year
