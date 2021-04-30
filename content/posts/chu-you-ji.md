@@ -59,7 +59,7 @@ keywords: ["随笔", "出游", "经历"]
 
 ![chu-you-ji-11.jpg](/images/chu-you-ji-11.jpg)
 
-我仔细地看来一会，那个黑色的部分真的是一个人！
+我仔细地看了一会，那个黑色的部分真的是一个人！
 
 ![chu-you-ji-12.jpg](/images/chu-you-ji-12.jpg)
 
