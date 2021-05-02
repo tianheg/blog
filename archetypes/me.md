@@ -25,17 +25,17 @@ slug = "meditation-2105xx"
 16. 你可以肯定自己，但你不能否定别人。
 17. 你昨天阅读并思考了吗
 18. Do you develop these good habits?
-        -Wake up early
-        -Plan your day
-        -Organize your workstation
-        -Exercise for 20 mins
-        -Compliment someone
-        -Take breaks
-        -Drink enough water
-        -Eat healthy
-        -Read 30 mins
-        -Perform acts of kindness
-        -Spend some time for yourself
-        -Get enough sleep
-        -Laugh often
-        -Be yourself
+    1. Wake up early
+    2. Plan your day
+    3. Organize your workstation
+    4. Exercise for 20 mins
+    5. Compliment someone
+    6. Take breaks
+    7. Drink enough water
+    8. Eat healthy
+    9. Read 30 mins
+    10. Perform acts of kindness
+    11. Spend some time for yourself
+    12. Get enough sleep
+    13. Laugh often
+    14. Be yourself
