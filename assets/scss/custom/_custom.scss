@@ -157,3 +157,69 @@ pre {
         display: block;
     }
 }
+blockquote.quote {
+	position: relative;
+	margin: 2em auto;
+	padding-left: 3em;
+	color: inherit;
+	border: none;
+	&::before {
+		position: absolute;
+		left: 0;
+		content: "“";
+		font-size: 3em;
+		font-weight: bold;
+		line-height: 1;
+	}
+}
+blockquote.quote.poetry {
+	display: table;
+	padding: 0;
+	&::before {
+		left: -1em;
+	}
+	p {
+		&:last-child {
+			margin: 0;
+		}
+	}
+}
+blockquote.quote.en {
+	p {
+		line-height: 1.618;
+		text-align: left;
+		hyphens: auto;
+		-webkit-hyphens: auto;
+		-moz-hyphens: auto;
+	}
+}
+blockquote.quote-center {
+	position: relative;
+	border-left: none;
+	padding-left: 0;
+	border-top: 1px solid var(--color-contrast-lower);
+	border-bottom: 1px solid var(--color-contrast-lower);
+	p {
+		text-align: center !important;
+		margin-top: 1.5em;
+		margin-bottom: 1.5em;
+	}
+	&::before {
+		position: absolute;
+		left: 0;
+		content: "“";
+		color: var(--color-contrast-low);
+		font-size: 3em;
+		font-weight: bold;
+		margin-top: -0.42em;
+	}
+	&::after {
+		position: absolute;
+		right: 0;
+		content: "”";
+		color: var(--color-contrast-low);
+		font-size: 3em;
+		font-weight: bold;
+		margin-top: -0.7em;
+	}
+}
