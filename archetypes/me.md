@@ -23,3 +23,19 @@ slug = "meditation-2105xx"
 14. 人们总爱问“你未来想从事什么职业”。说实话，我不认为这世界上能有任何一样事情、一个领域，能够让我不带任何自我欺骗地说可以忠心一辈子。首先它要经得起我的审视。
 15. 其实都能看到肤浅的那一层东西，往往存在部分人看到这一层觉得足够了，这挺致命的，探索欲没了，也不再去思考。
 16. 你可以肯定自己，但你不能否定别人。
+17. 你昨天阅读并思考了吗
+18. Do you develop these good habits?
+        -Wake up early
+        -Plan your day
+        -Organize your workstation
+        -Exercise for 20 mins
+        -Compliment someone
+        -Take breaks
+        -Drink enough water
+        -Eat healthy
+        -Read 30 mins
+        -Perform acts of kindness
+        -Spend some time for yourself
+        -Get enough sleep
+        -Laugh often
+        -Be yourself
