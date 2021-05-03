@@ -1,4 +1,4 @@
-# Self.yidajiabei.xyz
+# Self
 
 [![github pages](https://github.com/tianheg/self/actions/workflows/build.yml/badge.svg)](https://github.com/tianheg/self/actions/workflows/build.yml)
 [![Generator is Hugo](https://img.shields.io/badge/Generator-Hugo-ff4088?&logo=hugo)](https://github.com/gohugoio/hugo)
