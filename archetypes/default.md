@@ -1,10 +1,10 @@
----
-title: "{{ replace .BaseFileName "-" " " | title }}"
-date: {{ .Date }}
-description: ""
-tags: [""]
-keywords: [""]
----
++++
+title = "{{ replace .BaseFileName "-" " " | title }}"
+date = {{ .Date }}
+description = ""
+tags = [""]
+keywords = [""]
++++
 
 ---
 
