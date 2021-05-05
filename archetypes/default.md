@@ -4,6 +4,7 @@ date = {{ .Date }}
 description = ""
 tags = [""]
 keywords = [""]
+slug = ""
 +++
 
 ---
