@@ -11,8 +11,6 @@ slug = "ethan-hawke-ryans-song"
 - 歌手：Ethan Hawke
 - 来源：《少年时代》电视原声带
 
-{{< music auto="https://music.163.com/#/m/song?id=33984002">}}
-
 <br/>
 
 {{< quote-center >}}
