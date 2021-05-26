@@ -30,11 +30,16 @@ keywords = "关于我"
 
 ### 博客
 
+**2021-05-26**
+
+- 把 blog 的主题改成技术，以前是生活技术。
+- 生活部分的文章放到[自我](https://self.yidajiabei.xyz/)中
+
+**2021-01-26**
+
 - 可以使用 `[post-title](/posts/post-file-name/)` 和 `[tag-name](/tags/tag-name/)` 相互引用文章
 - 文章中的“他”，不单指男性，还有女性
 - 在写作中，作者退居二线，多以「你」称呼
-
-![A Letter to Reader](/images/a-letter-to-reader.jpg)
 
 ## 订阅博客
 
