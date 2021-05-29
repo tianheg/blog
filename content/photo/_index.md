@@ -22,7 +22,7 @@ title = "照片墙"
 
 ![2021-05-05-1.jpg](https://cdn.jsdelivr.net/gh/tianheg/static@main/img/photo/2021-05-05-1.jpg "云在干嘛？")
 
-![2021-04-30-13.jpg](https://cdn.jsdelivr.net/gh/tianheg/static@main/img/photo/2021-04-30-13.jpg "请关注中间三个座位，中间作为的上方（远处）有一个斜着写的「Z」")
+![2021-04-30-13.jpg](https://cdn.jsdelivr.net/gh/tianheg/static@main/img/photo/2021-04-30-13.jpg "请关注中间三个座位，中间座位的上方（远处）有一个斜着写的「Z」")
 
 ![2021-04-30-12.jpg](https://cdn.jsdelivr.net/gh/tianheg/static@main/img/photo/2021-04-30-12.jpg "好清")
 
