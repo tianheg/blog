@@ -1,9 +1,7 @@
 +++
-title = ""
+title = "{{ replace .BaseFileName "-" " " | title }}"
 date = {{ .Date }}
-description = ""
 tags = ["阅读"]
-keywords = ["阅读"]
 slug = ""
 +++
 
