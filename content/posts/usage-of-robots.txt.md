@@ -2,8 +2,7 @@
 title: "使用 robots.txt"
 date: 2020-05-17T10:33:48+08:00
 description: "记录 robots.txt 的用法"
-tags: ["SEO", "Sites"]
-keywords: ["SEO", "Sites"]
+tags: ["SEO"]
 ---
 
 ## robots.txt 文件是什么
