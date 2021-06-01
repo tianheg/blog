@@ -1,8 +1,8 @@
 +++
-title = "沉思录2105xx"
+title = "{{ replace .Name "-" " " | title }}"
 date = "{{ .Date }}"
 tags = ["沉思录"]
-slug = "meditation-2105xx"
+slug = "meditation-2106xx"
 +++
 
 每日自问：
