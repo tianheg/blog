@@ -6,6 +6,8 @@ title = "照片墙"
 
 图片拍摄的时间越早，它的位置越往下
 
+![2021-06-01-1.jpg](https://cdn.jsdelivr.net/gh/tianheg/static@main/img/photo/2021-06-01-1.jpg "去上课")
+
 ![2021-05-29-2.jpg](https://cdn.jsdelivr.net/gh/tianheg/static@main/img/photo/2021-05-29-2.jpg "颜色")
 
 ![2021-05-29-1.jpg](https://cdn.jsdelivr.net/gh/tianheg/static@main/img/photo/2021-05-29-1.jpg "图书馆门前的钢琴")
