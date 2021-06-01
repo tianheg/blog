@@ -36,5 +36,4 @@ keywords: ["ADS","复杂度分析"]
 
 **参考资料**：
 
-- [复杂度分析 | Wiki](https://wiki.yidajiabei.xyz/ads/getting-started.html#%E5%A4%8D%E6%9D%82%E5%BA%A6%E5%88%86%E6%9E%90)
 - [什么是复杂度分析 - leetcode](https://leetcode-cn.com/circle/article/GCJe6w/)
