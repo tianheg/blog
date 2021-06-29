@@ -1,32 +1,21 @@
 <!DOCTYPE html>
 <html lang="{{ .Site.Language.Lang }}">
-  <head>
-    <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta http-equiv="Content-Language" content="{{ .Site.Language.Lang }}">
-    <title>
-      {{- block "title" . -}}
-        {{ if .IsPage }}{{ .Title }} - {{ .Site.Title }}{{ else }}{{ .Site.Title }}{{ end }}
-      {{- end -}}
-    </title>
-    {{ partial "head.html" . }}
-  </head>
+  {{ partial "head.html" . }}
+
   {{ $csClass := "colorscheme-light" }}
   {{ if eq .Site.Params.colorScheme "dark" }}
     {{ $csClass = "colorscheme-dark" }}
   {{ else if eq .Site.Params.colorScheme "auto" }}
     {{ $csClass = "colorscheme-auto" }}
   {{ end }}
+  
   <body class="{{ $csClass }}">
     {{ partial "float" . }}
     <main class="wrapper">
       {{ partial "header.html" . }}
-      <div class="content">
-        {{ block "content" . }}{{ end }}
-      </div>
+      <div class="content">{{ block "content" . }}{{ end }}</div>
       {{ partial "footer.html" . }}
     </main>
-      {{ partial "script.html" . }}
+    {{ partial "script.html" . }}
   </body>
-
 </html>
