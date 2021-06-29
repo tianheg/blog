@@ -1,4 +1,13 @@
-{{ with .Site.Params.author }}<meta name="author" content="{{ . }}" />{{ end }}
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="Content-Language" content="{{ .Site.Language.Lang }}">
+    <title>
+      {{- block "title" . -}}
+        {{ if .IsPage }}{{ .Title }} - {{ .Site.Title }}{{ else }}{{ .Site.Title }}{{ end }}
+      {{- end -}}
+    </title>
+  	{{ with .Site.Params.author }}<meta name="author" content="{{ . }}" />{{ end }}
     <meta name="description" content="{{ .Description | default (.Summary | default .Site.Params.description ) }}"/>
     <meta name="keywords" content="{{ (delimit .Keywords ",") | default .Site.Params.keywords }}">
 
@@ -68,3 +77,4 @@
     {{ hugo.Generator }}
 
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/docsearch.js@2.6.3/dist/cdn/docsearch.min.css" integrity="sha256-QOSRU/ra9ActyXkIBbiIB144aDBdtvXBcNc3OTNuX/Q=" crossorigin="anonymous">
+</head>
