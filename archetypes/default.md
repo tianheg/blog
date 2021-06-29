@@ -1,6 +1,6 @@
 +++
-title = "{{ replace .BaseFileName "-" " " | title }}"
-date = {{ .Date }}
+title = "{{ replace .Name "-" " " | title }}"
+date = "{{ .Date }}"
 tags = [""]
 slug = ""
 +++
