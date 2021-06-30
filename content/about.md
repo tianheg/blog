@@ -136,13 +136,11 @@ keywords = "关于我"
 
 欢迎留言：
 
-<footer>
-<script src="https://utteranc.es/client.js"
-        repo= "tianheg/blog"
-        issue-term="title"
-        label="comment"
-        theme="github-light"
-        crossorigin="anonymous"
-        async>
-</script>
-</footer>
+<div id="cusdis_thread"
+  data-host="https://cusdis.com"
+  data-app-id="0e6eb753-064d-4cbc-a66f-380a227fd114"
+  data-page-id="{{ .File.UniqueID }}"
+  data-page-url="{{ .Permalink }}"
+  data-page-title="{{ .Title }}"
+></div>
+<script async defer src="https://cusdis.com/js/cusdis.es.js"></script>
