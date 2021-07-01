@@ -1,4 +1,3 @@
-<<<<<<< HEAD
 <blockquote class="quote-center">
     {{- $content := .Inner | markdownify -}}
     {{- if not (strings.HasPrefix $content "<p>") }}
@@ -6,13 +5,4 @@
     {{- else }}
         {{- $content }}
     {{- end -}}
-=======
-<blockquote class="quote-center">
-    {{- $content := .Inner | markdownify -}}
-    {{- if not (strings.HasPrefix $content "<p>") }}
-        {{ printf `<p>%s</p>` $content | safeHTML }}
-    {{- else }}
-        {{- $content }}
-    {{- end -}}
->>>>>>> self_main
 </blockquote> 
