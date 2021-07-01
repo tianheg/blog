@@ -1,12 +1,12 @@
 ---
-title: "212 号房间"
+title: "Chambre 212"
 date: 2020-06-14T20:19:42+08:00
 description: "看 212 号房间"
 tags: ["电影"]
 keywords: ["电影"]
 ---
 
-Chambre 212 - 2019 - 法国 / 比利时 / 卢森堡
+212 号房间 Chambre 212 - 2019 - 法国 / 比利时 / 卢森堡
 
 ![Chambre 212](/images/watch212house.jpg)
 

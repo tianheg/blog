@@ -1,12 +1,12 @@
 ---
-title: "利刃出鞘"
+title: "Knives Out"
 date: 2020-05-21T20:19:42+08:00
 description: "看利刃出鞘"
 tags: ["电影"]
 keywords: ["电影"]
 ---
 
-Knives Out - 2019 - 美国
+Knives Out 利刃出鞘 - 2019 - 美国
 
 这部片子在最初的几分钟让我觉得这个环境好富裕，我没有往推理方面去想。
 

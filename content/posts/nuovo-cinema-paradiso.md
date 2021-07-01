@@ -1,5 +1,5 @@
 ---
-title: "天堂电影院"
+title: "Nuovo Cinema Paradiso"
 date: 2020-10-18T20:19:42+08:00
 description: "看天堂电影院"
 tags: ["电影"]

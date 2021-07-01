@@ -1,7 +1,6 @@
 ---
-title: "大都会"
+title: "メトロポリス"
 date: 2020-12-03T20:19:42+08:00
-description: "看大都会"
 tags: ["电影"]
 keywords: ["电影"]
 ---

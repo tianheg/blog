@@ -1,7 +1,6 @@
 ---
-title: "科学怪人"
+title: "Frankenstein"
 date: 2020-12-30T20:19:42+08:00
-description: "看科学怪人"
 tags: ["电影"]
 keywords: ["电影"]
 ---

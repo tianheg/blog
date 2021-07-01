@@ -1,5 +1,5 @@
 ---
-title: "摩登时代"
+title: "Modern Times"
 date: 2019-04-28T20:19:42+08:00
 description: "看摩登时代"
 tags: ["电影"]

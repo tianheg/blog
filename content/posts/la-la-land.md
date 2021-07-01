@@ -1,10 +1,12 @@
 ---
-title: "爱乐之城"
+title: "La La Land"
 date: 2021-04-29T20:05:37+08:00
 description: "一些观看《爱乐之城》的想法"
 tags: ["电影"]
 keywords: ["电影"]
 ---
+
+爱乐之城
 
 ![La La Land](/images/films/la-la-land.png)
 

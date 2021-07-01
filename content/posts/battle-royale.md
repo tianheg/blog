@@ -1,7 +1,6 @@
 ---
-title: "大逃杀"
+title: "バトル・ロワイアル"
 date: 2020-12-02T20:19:42+08:00
-description: "看大逃杀"
 tags: ["电影"]
 keywords: ["电影"]
 ---

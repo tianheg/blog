@@ -1,10 +1,11 @@
 ---
-title: "蝙蝠侠"
+title: "The Batman franchise"
 date: 2021-03-24T20:21:05+08:00
-description: "观看《蝙蝠侠》"
 tags: ["电影"]
 keywords: ["电影"]
 ---
+
+## Batman(1989)
 
 《蝙蝠侠》1989 年上映，电影讲述蝙蝠侠和小丑的抗争故事。
 
@@ -17,3 +18,17 @@ keywords: ["电影"]
 Alfred 究竟是谁？他为什么一直在 Wayne 身边？电影介绍，他是 Wayne 父母的朋友。
 
 得到一个人的爱很容易，亦或这只是电影的艺术效果？不知道。
+
+## Batman Returns(1992)
+
+## Batman Forever(1995)
+
+## Batman & Robin(1997)
+
+## Batman Begins(2005)
+
+## Batman: The Dark Knight(2008)
+
+## The Dark Knight Rises (2012)
+
+## Batman v Superman: Dawn of Justice(2016)

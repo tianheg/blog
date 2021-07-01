@@ -1,12 +1,11 @@
 ---
-title: "死亡诗社"
+title: "Dead Poets Society"
 date: 2020-05-30T20:19:42+08:00
-description: "看死亡诗社"
 tags: ["电影"]
 keywords: ["电影"]
 ---
 
-Dead Poets Society - 1989 - 美国
+死亡诗社 Dead Poets Society - 1989 - 美国
 
 这是一部好电影。本文结构：
 
