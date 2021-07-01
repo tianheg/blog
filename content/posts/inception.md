@@ -1,7 +1,6 @@
 ---
-title: "盗梦空间"
+title: "Inception"
 date: 2021-02-15T19:24:27+08:00
-description: "《盗梦空间》观影感受"
 tags: ["电影"]
 keywords: ["电影"]
 ---

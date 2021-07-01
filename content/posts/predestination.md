@@ -1,12 +1,11 @@
 ---
-title: "前目的地"
+title: "Predestination"
 date: 2019-10-22T20:19:42+08:00
-description: "看前目的地"
 tags: ["电影"]
 keywords: ["电影"]
 ---
 
-Predestination - 2014 - 澳大利亚 / 美国
+Predestination 前目的地 - 2014 - 澳大利亚 / 美国
 
 距离上一次看，已经过去很长时间。
 

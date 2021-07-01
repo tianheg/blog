@@ -1,7 +1,6 @@
 ---
-title: "同等族群"
+title: "Equals"
 date: 2020-10-21T20:19:42+08:00
-description: "看同等族群"
 tags: ["电影"]
 keywords: ["电影"]
 ---

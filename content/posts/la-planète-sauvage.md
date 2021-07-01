@@ -1,5 +1,5 @@
 ---
-title: "原始星球"
+title: "La planète sauvage"
 date: 2020-10-21T20:19:42+08:00
 description: "看原始星球"
 tags: ["电影"]

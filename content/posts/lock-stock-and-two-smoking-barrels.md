@@ -1,5 +1,5 @@
 ---
-title: "两杆大烟枪"
+title: "Lock, Stock and Two Smoking Barrels"
 date: 2020-11-23T20:19:42+08:00
 description: "看两杆大烟枪"
 tags: ["电影"]
@@ -7,8 +7,6 @@ keywords: ["电影"]
 ---
 
 Lock, Stock and Two Smoking Barrels(两杆大烟枪) - 1998 - 英国
-
-Lock, Stock and Two Smoking Barrels
 
 太可悲了，偷完大麻和钱，立马就被人找上门
 

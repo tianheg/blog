@@ -1,7 +1,6 @@
 ---
-title: "心灵捕手"
+title: "Good Will Hunting"
 date: 2019-11-13T20:19:42+08:00
-description: "看心灵捕手"
 tags: ["电影"]
 keywords: ["电影"]
 ---
