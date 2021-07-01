@@ -1,3 +1,3 @@
 +++
-slug = "movie"
+slug = "movies"
 +++
