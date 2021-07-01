@@ -1,7 +1,6 @@
 ---
-title: "香水"
+title: "Perfume: The Story of a Murderer"
 date: 2020-09-20T20:19:42+08:00
-description: "看香水"
 tags: ["电影"]
 keywords: ["电影"]
 ---

@@ -1,12 +1,12 @@
 ---
-title: "海蒂和爷爷"
+title: "Heidi"
 date: 2020-06-09T20:19:42+08:00
 description: "看海蒂和爷爷"
 tags: ["电影"]
 keywords: ["电影"]
 ---
 
-Heidi - 2015 - 德国 / 瑞士 / 南非
+Heidi 海蒂和爷爷 - 2015 - 德国 / 瑞士 / 南非
 
 ## 故事梗概
 

@@ -1,5 +1,5 @@
 ---
-title: "寄生虫"
+title: "기생충"
 date: 2020-05-22T20:19:42+08:00
 description: "看寄生虫"
 tags: ["电影"]

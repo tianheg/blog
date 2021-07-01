@@ -1,7 +1,6 @@
 ---
-title: "美丽心灵"
+title: "A Beautiful Mind"
 date: 2020-11-11T20:19:42+08:00
-description: "看《美丽心灵》"
 tags: ["电影"]
 keywords: ["电影"]
 ---

@@ -1,12 +1,12 @@
 ---
-title: "来自深渊：启程的黎明"
+title: "メイドインアビス 旅立ちの夜明け"
 date: 2020-05-21T20:19:42+08:00
 description: "看来自深渊：启程的黎明"
 tags: ["电影"]
 keywords: ["电影"]
 ---
 
-メイドインアビス 旅立ちの夜明け - 2019 - 日本
+メイドインアビス 旅立ちの夜明け 来自深渊：启程的黎明 - 2019 - 日本
 
 片尾曲《[Underground River](https://y.qq.com/n/yqq/song/003zTGBh3oMJrK.html)》。很好听。
 
