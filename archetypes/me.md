@@ -2,7 +2,7 @@
 title = "{{ replace .Name "-" " " | title }}"
 date = "{{ .Date }}"
 tags = ["沉思录"]
-slug = "meditation-2106xx"
+slug = "meditation-2107xx"
 +++
 
 每日自问：
