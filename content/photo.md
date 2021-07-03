@@ -6,6 +6,8 @@ title = "照片墙"
 
 图片拍摄的时间越早，它的位置越往下
 
+![2021-06-26-1.jpg](https://cdn.jsdelivr.net/gh/tianheg/static@main/img/photo/2021-06-26-1.jpg "叶子上的王国")
+
 ![2021-06-13-3.jpg](https://cdn.jsdelivr.net/gh/tianheg/static@main/img/photo/2021-06-13-3.jpg "后山的一个风向标")
 
 ![2021-06-13-2.jpg](https://cdn.jsdelivr.net/gh/tianheg/static@main/img/photo/2021-06-13-2.jpg "树的纹路")
