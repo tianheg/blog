@@ -1,5 +1,4 @@
 @mixin base_dark {
-
   color: $fg-color-dark;
   background-color: $bg-color-dark;
 
@@ -16,20 +15,20 @@
     color: $alt-fg-color-dark;
   }
 
-dl {
+  dl {
     margin: 1em;
-}
+  }
 
-dt {
+  dt {
     float: left;
     clear: left;
     width: 9.5em;
     margin: 0.125em;
     padding: 2px 4px;
     font-weight: 700;
-}
+  }
 
-dd {
+  dd {
     border-top: 1px #ccc;
     margin-top: 0.5em;
     margin-right: 0px;
@@ -41,7 +40,7 @@ dd {
     padding-left: 0px;
     display: block;
     margin-inline-start: 40px;
-}
+  }
 
   code {
     background-color: $alt-bg-color-dark;
@@ -59,18 +58,18 @@ dd {
     border-left: 3px solid $alt-bg-color-dark;
   }
 
-  table td, table th {
+  table td,
+  table th {
     border: 2px solid $alt-fg-color-dark;
   }
-
 }
 
 body.colorscheme-dark {
-  @include base_dark()
+  @include base_dark();
 }
 
 body.colorscheme-auto {
   @media (prefers-color-scheme: dark) {
-    @include base_dark()
+    @include base_dark();
   }
 }

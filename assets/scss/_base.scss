@@ -1,21 +1,21 @@
 *,
 *:after,
 *:before {
-	box-sizing: inherit;
+  box-sizing: inherit;
 }
 
 html {
-	box-sizing: border-box;
-	font-size: 62.5%;
+  box-sizing: border-box;
+  font-size: 62.5%;
 }
 
 body {
   color: $fg-color; // #707070 or $fg-color
   background-color: $bg-color; //#efefef or $bg-color
-	font-family: $text-font-family;
-	font-size: 18px;
+  font-family: $text-font-family;
+  font-size: 18px;
   line-height: 1.8em;
-  @media only screen and (max-width : 768px) {
+  @media only screen and (max-width: 768px) {
     font-size: 16px;
     line-height: 1.6em;
   }
@@ -33,7 +33,7 @@ a {
 }
 
 p {
-  margin: 2.0rem 0 2.0rem 0;
+  margin: 2rem 0 2rem 0;
 }
 
 h1,
@@ -49,30 +49,30 @@ h6 {
 }
 
 dl {
-    margin: 1em;
+  margin: 1em;
 }
 
 dt {
-    float: left;
-    clear: left;
-    width: 9.5em;
-    margin: 0.125em;
-    padding: 2px 4px;
-    font-weight: 700;
+  float: left;
+  clear: left;
+  width: 9.5em;
+  margin: 0.125em;
+  padding: 2px 4px;
+  font-weight: 700;
 }
 
 dd {
-    border-top: 1px #ccc;
-    margin: 0.5em 0px 2em 0px;
-    padding: 0;
-    display: block;
-    margin-inline-start: 40px;
+  border-top: 1px #ccc;
+  margin: 0.5em 0px 2em 0px;
+  padding: 0;
+  display: block;
+  margin-inline-start: 40px;
 }
 
 h1 {
   font-size: 30px;
   line-height: 3.6rem;
-  @media only screen and (max-width : 768px) {
+  @media only screen and (max-width: 768px) {
     font-size: 24px;
     line-height: 3.4rem;
   }
@@ -80,15 +80,15 @@ h1 {
 h2 {
   font-size: 26px;
   line-height: 3.2rem;
-  @media only screen and (max-width : 768px) {
+  @media only screen and (max-width: 768px) {
     font-size: 20px;
-    line-height: 3.0rem;
+    line-height: 3rem;
   }
 }
 h3 {
   font-size: 22px;
   line-height: 2.8rem;
-  @media only screen and (max-width : 768px) {
+  @media only screen and (max-width: 768px) {
     font-size: 16px;
     line-height: 2.6rem;
   }
@@ -96,7 +96,7 @@ h3 {
 h4 {
   font-size: 18px;
   line-height: 2.6rem;
-  @media only screen and (max-width : 768px) {
+  @media only screen and (max-width: 768px) {
     font-size: 12px;
     line-height: 2.4rem;
   }
@@ -104,7 +104,7 @@ h4 {
 h5 {
   font-size: 14px;
   line-height: 2.4rem;
-  @media only screen and (max-width : 768px) {
+  @media only screen and (max-width: 768px) {
     font-size: 8px;
     line-height: 2.2rem;
   }
@@ -112,13 +112,14 @@ h5 {
 h6 {
   font-size: 14px;
   line-height: 2.2rem;
-  @media only screen and (max-width : 768px) {
+  @media only screen and (max-width: 768px) {
     font-size: 6px;
-    line-height: 2.0rem;
+    line-height: 2rem;
   }
 }
 
-b, strong {
+b,
+strong {
   font-weight: 700;
 }
 
@@ -132,11 +133,11 @@ b, strong {
 pre {
   display: block;
   font-family: $code-font-family;
-  font-size: .95em;
+  font-size: 0.95em;
   font-weight: 400;
   line-height: 2.6rem;
-  margin: 2.0rem 0 2.0rem 0;
-  padding: 2.0rem;
+  margin: 2rem 0 2rem 0;
+  padding: 2rem;
   overflow-x: auto;
   code {
     display: inline-block;
@@ -147,7 +148,7 @@ pre {
 
 code {
   font-family: $code-font-family;
-  font-size: .95em;
+  font-size: 0.95em;
   font-weight: 400;
   background-color: $alt-bg-color;
   color: $fg-color;
@@ -161,13 +162,15 @@ blockquote {
   font-family: initial;
 }
 
-th, td {
+th,
+td {
   padding: 1.6rem;
 }
 table {
   border-collapse: collapse;
 }
-table td, table th {
+table td,
+table th {
   border: 2px solid $alt-fg-color;
 }
 table tr:first-child th {
@@ -203,10 +206,10 @@ figure {
 
 .container {
   margin: 0 auto;
-  max-width: 90.0rem;
+  max-width: 90rem;
   width: 100%;
-  padding-left: 2.0rem;
-  padding-right: 2.0rem;
+  padding-left: 2rem;
+  padding-right: 2rem;
 }
 
 .fab {
@@ -236,8 +239,8 @@ figure {
 img.emoji {
   height: 1em;
   width: 1em;
-  margin: 0 .05em 0 .1em;
-  vertical-align: -0.1em; 
+  margin: 0 0.05em 0 0.1em;
+  vertical-align: -0.1em;
 }
 
 // footnote link
@@ -248,8 +251,12 @@ a[href^="#fnref:"] {
   color: $orange;
   // font-family: monospace;
 }
-a[href^="#fn:"]:before{ content: '[' }
-a[href^="#fn:"]:after{ content: ']' }
+a[href^="#fn:"]:before {
+  content: "[";
+}
+a[href^="#fn:"]:after {
+  content: "]";
+}
 
 .footnotes {
   font-size: medium;
@@ -276,16 +283,16 @@ img {
 }
 
 .footer-note {
-  text-decoration: none; 
-  text-decoration-color:darkgray !important;
+  text-decoration: none;
+  text-decoration-color: darkgray !important;
 }
 
 .tag-cloud {
-    text-align: center;
+  text-align: center;
 }
 
 .tag-cloud-item {
-    margin: 0.5rem;
-    display: inline-block;
-    font-family: $text-font-family;
+  margin: 0.5rem;
+  display: inline-block;
+  font-family: $text-font-family;
 }
