@@ -4,7 +4,7 @@ date: 2020-02-29T22:54:01+08:00
 tags: ["随笔"]
 ---
 
-现在正好下午 11 点钟，我想想自己还要做哪些事：在 Typora 编辑好 markdown 文档；在 VScode 本地（localhost:4000）查看 web 网站效果，并将代码部署到 GitHub ，然后 GitHub 自动将上传好的代码生成网站，显示在网址 [https://gaotianhe.github.io/](https://gaotianhe.github.io/)；然后把 markdown 文档复制到石墨文档中，并清除格式；在 Notepad++ 里去掉所有格式，只剩下文本；把文本剪切到微信公众平台的后台编辑器，全选文字，字号 15px ，两端缩进 16，最近学会用 PPT 给封面图片加文字，你可能注意到了（也可能没有），然后发送到手机预览，调试（原谅我用计算机用语），修改，虽然有时改得不错，但还是不太满意。OK，这就是全部流程。
+现在正好下午 11 点钟，我想想自己还要做哪些事：在 Typora 编辑好 markdown 文档；在 VScode 本地（localhost:4000）查看 web 网站效果，并将代码部署到 GitHub ，然后 GitHub 自动将上传好的代码生成网站，显示在网址；然后把 markdown 文档复制到石墨文档中，并清除格式；在 Notepad++ 里去掉所有格式，只剩下文本；把文本剪切到微信公众平台的后台编辑器，全选文字，字号 15px ，两端缩进 16，最近学会用 PPT 给封面图片加文字，你可能注意到了（也可能没有），然后发送到手机预览，调试（原谅我用计算机用语），修改，虽然有时改得不错，但还是不太满意。OK，这就是全部流程。
 
 下面开始正文，没错以上全部是凑字数（\`_\`）。
 
@@ -20,7 +20,7 @@ tags: ["随笔"]
 
 Laughter is not our medicine. Stories hold our cure. Laughter is just the honey that sweetens the bitter medicine. I don't want to unite you with laughter or anger. I just needed my story heard, my story felt and understood by individuals with minds of their own.
 
-#### 视频资料
+**视频资料**：
 
 <https://www.bilibili.com/video/av33216109/> （英语字幕）
 
