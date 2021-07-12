@@ -1,79 +1,77 @@
-<head>
-    <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta http-equiv="Content-Language" content="{{ .Site.Language.Lang }}">
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta http-equiv="Content-Language" content="{{ .Site.Language.Lang }}" />
     <title>
-      {{- block "title" . -}}
-        {{ if .IsPage }}{{ .Title }} - {{ .Site.Title }}{{ else }}{{ .Site.Title }}{{ end }}
-      {{- end -}}
+    {{- block "title" . -}} {{ if .IsPage }}{{ .Title }} - {{ .Site.Title }}{{
+    else }}{{ .Site.Title }}{{ end }} {{- end -}}
     </title>
-  	{{ with .Site.Params.author }}<meta name="author" content="{{ . }}" />{{ end }}
+    {{ with .Site.Params.author }}<meta name="author" content="{{ . }}" />{{ end }}
     <meta name="description" content="{{ .Description | default (.Summary | default .Site.Params.description ) }}"/>
-    <meta name="keywords" content="{{ (delimit .Keywords ",") | default .Site.Params.keywords }}">
-
+    <meta name="keywords" content="{{ (delimit .Keywords ",") | default
+    .Site.Params.keywords }}">
     {{ template "_internal/twitter_cards.html" . }}
-
     {{ template "_internal/opengraph.html" . }}
-
     {{ if .Permalink }}
-        <link rel="canonical" href="{{ .Permalink }}">
+    <link rel="canonical" href="{{ .Permalink }}" />
     {{ end }}
 
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+SC:wght@300&family=Source+Code+Pro&display=swap" rel="stylesheet">
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+SC:wght@300&family=Source+Code+Pro&display=swap" rel="stylesheet"/>
 
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css" integrity="sha512-iBBXm8fW90+nuLcSKlbmrPcLa0OT92xO1BIsZ+ywDWZCvqsWgccV3gFoRBv0z+8dLJgyAHIhR35VZc2oM/gI1w==" crossorigin="anonymous" />
-    {{/*  from https://cdnjs.com/libraries/font-awesome  */}}
-    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/normalize.css@8/normalize.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css" integrity="sha512-iBBXm8fW90+nuLcSKlbmrPcLa0OT92xO1BIsZ+ywDWZCvqsWgccV3gFoRBv0z+8dLJgyAHIhR35VZc2oM/gI1w==" crossorigin="anonymous"/>
+    {{/* from https://cdnjs.com/libraries/font-awesome */}}
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/normalize.css@8/normalize.min.css"/>
 
-{{ if .Site.IsServer }}
-    {{ $cssOpts := (dict "targetPath" "css/coder.css" "enableSourceMap" true ) }}
-    {{ $styles := resources.Get "scss/coder.scss" | resources.ExecuteAsTemplate "style.coder.css" . | toCSS $cssOpts }}
-    <link rel="stylesheet" href="{{ $styles.RelPermalink }}" media="screen">
-{{ else }}
-    {{ $cssOpts := (dict "targetPath" "css/coder.css" ) }}
-    {{ $styles := resources.Get "scss/coder.scss" | resources.ExecuteAsTemplate "style.coder.css" . | toCSS $cssOpts | minify | fingerprint }}
-    <link rel="stylesheet" href="{{ $styles.RelPermalink }}" integrity="{{ $styles.Data.Integrity }}" crossorigin="anonymous" media="screen" />
-{{ end }}
-
-{{ if  or (eq .Site.Params.colorScheme "auto") (eq .Site.Params.colorScheme "dark") }}
-    {{ if .Site.IsServer }}
-    {{ $cssOpts := (dict "targetPath" "css/coder-dark.css" "enableSourceMap" true ) }}
-    {{ $styles := resources.Get "scss/coder-dark.scss" | resources.ExecuteAsTemplate "style.coder-dark.css" . | toCSS $cssOpts }}
-    <link rel="stylesheet" href="{{ $styles.RelPermalink }}" media="screen">
-    {{ else }}
-    {{ $cssOpts := (dict "targetPath" "css/coder-dark.css" ) }}
-    {{ $styles := resources.Get "scss/coder-dark.scss" | resources.ExecuteAsTemplate "style.coder-dark.css" . | toCSS $cssOpts | minify | fingerprint }}
-    <link rel="stylesheet" href="{{ $styles.RelPermalink }}" integrity="{{ $styles.Data.Integrity }}" crossorigin="anonymous" media="screen" />
+    {{ if .Site.IsServer }} {{ $cssOpts := (dict "targetPath" "css/coder.css"
+    "enableSourceMap" true ) }} {{ $styles := resources.Get "scss/coder.scss" |
+    resources.ExecuteAsTemplate "style.coder.css" . | toCSS $cssOpts }}
+    <link rel="stylesheet" href="{{ $styles.RelPermalink }}" media="screen" />
+    {{ else }} {{ $cssOpts := (dict "targetPath" "css/coder.css" ) }} {{ $styles :=
+    resources.Get "scss/coder.scss" | resources.ExecuteAsTemplate "style.coder.css"
+    . | toCSS $cssOpts | minify | fingerprint }}
+    <link rel="stylesheet" href="{{ $styles.RelPermalink }}" integrity="{{ $styles.Data.Integrity }}" crossorigin="anonymous" media="screen"/>
     {{ end }}
-{{ end }}
-
-{{ range .Site.Params.customCSS }}
+    
+    {{ if or (eq .Site.Params.colorScheme "auto") (eq
+    .Site.Params.colorScheme "dark") }} {{ if .Site.IsServer }} {{ $cssOpts := (dict
+    "targetPath" "css/coder-dark.css" "enableSourceMap" true ) }} {{ $styles :=
+    resources.Get "scss/coder-dark.scss" | resources.ExecuteAsTemplate
+    "style.coder-dark.css" . | toCSS $cssOpts }}
+    <link rel="stylesheet" href="{{ $styles.RelPermalink }}" media="screen" />
+    {{ else }} {{ $cssOpts := (dict "targetPath" "css/coder-dark.css" ) }} {{
+    $styles := resources.Get "scss/coder-dark.scss" | resources.ExecuteAsTemplate
+    "style.coder-dark.css" . | toCSS $cssOpts | minify | fingerprint }}
+    <link rel="stylesheet" href="{{ $styles.RelPermalink }}" integrity="{{ $styles.Data.Integrity }}" crossorigin="anonymous" media="screen"/>
+    {{ end }}
+    {{ end }}
+    
+    {{ range .Site.Params.customCSS }}
     <link rel="stylesheet" href="{{ . | relURL }}" />
-{{ end }}
-
-{{ range .Site.Params.customSCSS }}
-{{/* We don't change the targetPath to because it's transparent to users */}}
-    {{ if $.Site.IsServer }}
-    {{ $cssOpts := (dict "enableSourceMap" true ) }}
-    {{ $styles := resources.Get . | toCSS $cssOpts }}
-    <link rel="stylesheet" href="{{ $styles.RelPermalink }}" media="screen">
-    {{ else }}
-    {{ $styles := resources.Get . | toCSS | minify | fingerprint }}
-    <link rel="stylesheet" href="{{ $styles.RelPermalink }}" integrity="{{ $styles.Data.Integrity }}" crossorigin="anonymous" media="screen" />
     {{ end }}
-{{ end }}
-
-    <link rel="icon" type="image/png" href="{{ .Site.Params.favicon_32 | default "/images/favicon-32x32.png" | relURL }}" sizes="32x32">
-    <link rel="icon" type="image/png" href="{{ .Site.Params.favicon_16 | default "/images/favicon-16x16.png" | relURL }}" sizes="16x16">
-
-    <link rel="apple-touch-icon" href="{{ .Site.Params.touchicon | default "/images/apple-touch-icon.png" | relURL }}">
-    <link rel="apple-touch-icon" sizes="180x180" href="{{ .Site.Params.touchicon | default "/images/apple-touch-icon.png" | relURL }}">
-
+    
+    {{ range .Site.Params.customSCSS }}
+    {{/* We don't change the targetPath to because it's transparent to users */}}
+    {{ if $.Site.IsServer }} {{
+    $cssOpts := (dict "enableSourceMap" true ) }} {{ $styles := resources.Get . |
+    toCSS $cssOpts }}
+    <link rel="stylesheet" href="{{ $styles.RelPermalink }}" media="screen" />
+    {{ else }} {{ $styles := resources.Get . | toCSS | minify | fingerprint }}
+    <link rel="stylesheet" href="{{ $styles.RelPermalink }}" integrity="{{ $styles.Data.Integrity }}" crossorigin="anonymous" media="screen"/>
+    {{ end }}
+    {{ end }}
+    
+    <link rel="icon" type="image/png" href="{{
+    .Site.Params.favicon_32 | default "/images/favicon-32x32.png" | relURL }}"
+    sizes="32x32">
+    <link rel="icon" type="image/png" href="{{
+    .Site.Params.favicon_16 | default "/images/favicon-16x16.png" | relURL }}"
+    sizes="16x16">
+    <link rel="apple-touch-icon" href="{{ .Site.Params.touchicon |
+    default "/images/apple-touch-icon.png" | relURL }}">
+    <link rel="apple-touch-icon" sizes="180x180" href="{{ .Site.Params.touchicon | default
+    "/images/apple-touch-icon.png" | relURL }}">
+    
     {{ range .AlternativeOutputFormats -}}
-        {{ printf `<link rel="%s" type="%s" href="%s" title="%s" />` .Rel .MediaType.Type .RelPermalink $.Site.Title | safeHTML }}
-    {{ end -}}
-
+    {{ printf `<link rel="%s" type="%s" href="%s" title="%s" />` .Rel .MediaType.Type .RelPermalink $.Site.Title | safeHTML }} {{ end -}}
     {{ hugo.Generator }}
-</head>

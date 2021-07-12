@@ -18,7 +18,7 @@ darkModeToggle.addEventListener("click", () => {
   setTheme(body.classList.contains("colorscheme-dark") ? "light" : "dark");
 });
 
-darkModeMediaQuery.addEventListener((event) => {
+darkModeMediaQuery.addEventListener("click", (event) => {
   setTheme(event.matches ? "dark" : "light");
 });
 
