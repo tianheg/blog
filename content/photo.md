@@ -2,17 +2,13 @@
 title = "照片墙"
 +++
 
-## 自己照的
-
 图片拍摄的时间越早，它的位置越往下
 
-![2021-06-26-1.jpg](https://cdn.jsdelivr.net/gh/tianheg/static@main/img/photo/2021-06-26-1.jpg "叶子上的王国")
+<img src="https://cdn.jsdelivr.net/gh/tianheg/static@main/img/photo/2021-06-26-1.jpg" loading="lazy" alt="叶子上的王国">
 
-![2021-06-13-3.jpg](https://cdn.jsdelivr.net/gh/tianheg/static@main/img/photo/2021-06-13-3.jpg "后山的一个风向标")
-
-![2021-06-13-2.jpg](https://cdn.jsdelivr.net/gh/tianheg/static@main/img/photo/2021-06-13-2.jpg "树的纹路")
-
-![2021-06-13-1.jpg](https://cdn.jsdelivr.net/gh/tianheg/static@main/img/photo/2021-06-13-1.jpg "看，蚂蚁！")
+<img src="https://cdn.jsdelivr.net/gh/tianheg/static@main/img/photo/2021-06-13-3.jpg" alt="后山的一个风向标" loading="lazy">
+<img src="https://cdn.jsdelivr.net/gh/tianheg/static@main/img/photo/2021-06-13-2.jpg" alt="树的纹路" loading="lazy">
+<img src="https://cdn.jsdelivr.net/gh/tianheg/static@main/img/photo/2021-06-13-1.jpg" alt="看，蚂蚁！" loading="lazy">
 
 ![2021-06-07.jpg](https://cdn.jsdelivr.net/gh/tianheg/static@main/img/photo/2021-06-07.jpg "滑地心小")
 
@@ -189,5 +185,3 @@ title = "照片墙"
 ![2019-01-13-1.jpg](https://cdn.jsdelivr.net/gh/tianheg/static@main/img/photo/2019-01-13-1.jpg "最后一次进入高中校园")
 
 ![2019-01-13-2.jpg](https://cdn.jsdelivr.net/gh/tianheg/static@main/img/photo/2019-01-13-2.jpg "晚自习下课")
-
-## 来自网络
