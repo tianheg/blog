@@ -1,7 +1,6 @@
     <!-- Cloudflare Web Analytics -->
     <script defer src='https://static.cloudflareinsights.com/beacon.min.js' data-cf-beacon='{"token": "663868e3e36143f89fc901707f305104"}'></script>
     <!-- End Cloudflare Web Analytics -->
-    
     {{ if not .Site.Params.hideColorSchemeToggle }}
       {{ if .Site.IsServer }}
         {{ $script := resources.Get "js/dark-mode.js" }}
@@ -10,24 +9,6 @@
         {{ $script := resources.Get "js/dark-mode.js" | minify | fingerprint }}
         <script src="{{ $script.RelPermalink }}"></script>
       {{ end }}
-    {{ end }}
-
-    {{ range .Site.Params.customJS }}
-      <script src="{{ . | relURL }}"></script>
-    {{ end }}
-
-    {{ if and .Site.Params.enableServiceWorker (eq hugo.Environment "production") }}
-        {{- $sw := resources.Get "js/sw.js" -}}
-        {{- $dummy := "" | resources.FromString "dummy.js" -}}
-        {{- $url := (slice $sw $dummy | resources.Concat "sw.js").RelPermalink -}}
-
-        <script>
-            if ('serviceWorker' in navigator) {
-                window.addEventListener('load', function() {
-                    navigator.serviceWorker.register('{{ $url }}');
-                });
-            }
-        </script>
     {{ end }}
     <script>
       console.info("\n%c 🎉 嗨~ 想看源代码？ %c \nGitHub仓库: https://github.com/tianheg/blog \n%c学习技术%c、%c热爱生活%c。",
@@ -38,15 +19,3 @@
       "color:#0E70ED; font-size: 16px; margin: 1em 0;",
       "color:#666666; font-size: 16px; margin: 1em 0;");
     </script>
-
-    <script src="https://cdn.jsdelivr.net/npm/docsearch.js@2.6.3/dist/cdn/docsearch.min.js" integrity="sha256-qybEsgf0PGiQS22AmoozPs09oRnSC7Gu7eBu4fbS2Ac=" crossorigin="anonymous"></script>
-    <script>
-        docsearch({
-            apiKey: 'de7765d6bf73c57d10c8419cf2f903fd',
-            indexName: 'tianheg_blog',
-            appId: '3YFMA5JFC4',
-            inputSelector: '#docsearch',
-            debug: false,
-        });
-    </script>
-    
