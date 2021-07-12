@@ -1,20 +1,18 @@
 <!DOCTYPE html>
 <html lang="{{ .Site.Language.Lang }}">
-  {{ partial "head.html" . }}
+  <head>
+    {{ partial "head.html" . }}
+  </head>
+  {{ $csClass := "colorscheme-light" }} {{ if eq .Site.Params.colorScheme "dark"
+  }} {{ $csClass = "colorscheme-dark" }} {{ else if eq .Site.Params.colorScheme
+  "auto" }} {{ $csClass = "colorscheme-auto" }} {{ end }}
 
-  {{ $csClass := "colorscheme-light" }}
-  {{ if eq .Site.Params.colorScheme "dark" }}
-    {{ $csClass = "colorscheme-dark" }}
-  {{ else if eq .Site.Params.colorScheme "auto" }}
-    {{ $csClass = "colorscheme-auto" }}
-  {{ end }}
-  
   <body class="{{ $csClass }}">
     {{ partial "float" . }}
     <main class="wrapper">
-      {{ partial "header.html" . }}
-      <div class="content">{{ block "content" . }}{{ end }}</div>
-      {{ partial "footer.html" . }}
+    {{ partial "header.html" . }}
+    <div class="content">{{ block "content" . }}{{ end }}</div>
+    {{ partial "footer.html" . }}
     </main>
     {{ partial "script.html" . }}
   </body>
