@@ -20,6 +20,10 @@ keywords: ["电影"]
 - Star Trek Into Darkness 星际迷航：暗黑无界（2013）
 - Star Trek Beyond 星际迷航：超越星辰（2016）
 
+## Star Trek VIII: First Contact 星际迷航 8：第一次接触（1996）
+
+如果有一天，马斯克的公司能造出曲率飞船就好了，这样或许能和外星人来一次「第一次接触」
+
 ---
 
 **参考资料**：
