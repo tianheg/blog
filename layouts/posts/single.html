@@ -19,10 +19,6 @@
         {{ $content = replaceRE `<a href="(https?://.+)">` `<a href="$1" target="_blank" rel="noopener">` $content | safeHTML }}
         {{ $content | safeHTML }}
       </div>
-
-      <footer>
-        {{ partial "posts/cusdis.html" . }}
-      </footer>
     </article>
 
     {{ partial "posts/math.html" . }}
