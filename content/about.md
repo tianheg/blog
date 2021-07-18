@@ -53,16 +53,4 @@ keywords = "关于我"
 
 ---
 
-欢迎留言：
-<script src="https://giscus-tianheg.vercel.app/client.js"
-        data-repo="tianheg/blog"
-        data-repo-id="MDEwOlJlcG9zaXRvcnkyNzY5Mjk1OTM="
-        data-category="General"
-        data-category-id="MDE4OkRpc2N1c3Npb25DYXRlZ29yeTEyNDMxNDA3"
-        data-mapping="title"
-        data-reactions-enabled="1"
-        data-emit-metadata="0"
-        data-theme="light"
-        crossorigin="anonymous"
-        async>
-</script>
+欢迎留言，请发邮件
