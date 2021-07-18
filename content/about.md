@@ -22,6 +22,7 @@ keywords = "关于我"
 
 ### 自我观察
 
+- 现在绝对不要交女朋友，我怕自己突然暴躁起来会伤害到她（2021-07-17）
 - 看似稳重的性格，愤怒的时候一点都不平静（2021-07-08）
 - 在与人交谈时会轻笑缓和气氛（2021-07-01）
 - 不够细心（2021-01-26）
@@ -53,12 +54,15 @@ keywords = "关于我"
 ---
 
 欢迎留言：
-
-<div id="cusdis_thread"
-  data-host="https://cusdis.com"
-  data-app-id="0e6eb753-064d-4cbc-a66f-380a227fd114"
-  data-page-id="{{ .File.UniqueID }}"
-  data-page-url="{{ .Permalink }}"
-  data-page-title="{{ .Title }}"
-></div>
-<script async defer src="https://cusdis.com/js/cusdis.es.js"></script>
+<script src="https://giscus-tianheg.vercel.app/client.js"
+        data-repo="tianheg/blog"
+        data-repo-id="MDEwOlJlcG9zaXRvcnkyNzY5Mjk1OTM="
+        data-category="General"
+        data-category-id="MDE4OkRpc2N1c3Npb25DYXRlZ29yeTEyNDMxNDA3"
+        data-mapping="title"
+        data-reactions-enabled="1"
+        data-emit-metadata="0"
+        data-theme="light"
+        crossorigin="anonymous"
+        async>
+</script>
