@@ -2,8 +2,8 @@
 title: "雨"
 date: 2021-03-26T21:38:06+08:00
 description: "雨"
-tags: ["诗歌"]
-keywords: ["诗歌"]
+tags: ["诗作"]
+keywords: ["诗作"]
 ---
 
 戴着耳机
