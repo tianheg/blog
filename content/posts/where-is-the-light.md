@@ -2,8 +2,8 @@
 title: "光明在哪里"
 description: "光明在哪里"
 date: 2020-05-25T08:49:05+08:00
-tags: ["诗歌"]
-keywords: ["诗歌"]
+tags: ["诗作"]
+keywords: ["诗作"]
 ---
 
 光明在哪里
