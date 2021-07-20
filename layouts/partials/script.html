@@ -1,21 +1,18 @@
-    <!-- Cloudflare Web Analytics -->
-    <script defer src='https://static.cloudflareinsights.com/beacon.min.js' data-cf-beacon='{"token": "663868e3e36143f89fc901707f305104"}'></script>
-    <!-- End Cloudflare Web Analytics -->
-    {{ if not .Site.Params.hideColorSchemeToggle }}
-      {{ if .Site.IsServer }}
-        {{ $script := resources.Get "js/dark-mode.js" }}
-        <script src="{{ $script.RelPermalink }}"></script>
-      {{ else }}
-        {{ $script := resources.Get "js/dark-mode.js" | minify | fingerprint }}
-        <script src="{{ $script.RelPermalink }}"></script>
-      {{ end }}
-    {{ end }}
-    <script>
-      console.info("\n%c 🎉 嗨~ 想看源代码？ %c \nGitHub仓库: https://github.com/tianheg/blog \n%c学习技术%c、%c热爱生活%c。",
-      "color: #fff; padding: 5px 0; background: #29c75f; margin: 1em 0;",
-      "display: block;margin-left: 0.5em; margin: 1em 0;",
-      "color:#E24432; font-size: 16px; margin: 1em 0;",
-      "color:#666666; font-size: 16px; margin: 1em 0;",
-      "color:#0E70ED; font-size: 16px; margin: 1em 0;",
-      "color:#666666; font-size: 16px; margin: 1em 0;");
-    </script>
+{{ if not .Site.Params.hideColorSchemeToggle }}
+  {{ if .Site.IsServer }}
+    {{ $script := resources.Get "js/dark-mode.js" }}
+    <script src="{{ $script.RelPermalink }}"></script>
+  {{ else }}
+    {{ $script := resources.Get "js/dark-mode.js" | minify | fingerprint }}
+    <script src="{{ $script.RelPermalink }}"></script>
+  {{ end }}
+{{ end }}
+<script>
+  console.info("\n%c 🎉 嗨~ 想看源代码？ %c \nGitHub仓库: https://github.com/tianheg/blog \n%c学习技术%c、%c热爱生活%c。",
+  "color: #fff; padding: 5px 0; background: #29c75f; margin: 1em 0;",
+  "display: block;margin-left: 0.5em; margin: 1em 0;",
+  "color:#E24432; font-size: 16px; margin: 1em 0;",
+  "color:#666666; font-size: 16px; margin: 1em 0;",
+  "color:#0E70ED; font-size: 16px; margin: 1em 0;",
+  "color:#666666; font-size: 16px; margin: 1em 0;");
+</script>
