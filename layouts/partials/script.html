@@ -1,12 +1,11 @@
-{{ if not .Site.Params.hideColorSchemeToggle }}
-  {{ if .Site.IsServer }}
-    {{ $script := resources.Get "js/dark-mode.js" }}
-    <script src="{{ $script.RelPermalink }}"></script>
-  {{ else }}
-    {{ $script := resources.Get "js/dark-mode.js" | minify | fingerprint }}
-    <script src="{{ $script.RelPermalink }}"></script>
-  {{ end }}
+{{ if .Site.IsServer }}
+  {{ $script := resources.Get "js/dark-mode.js" }}
+  <script src="{{ $script.RelPermalink }}"></script>
+{{ else }}
+  {{ $script := resources.Get "js/dark-mode.js" | minify | fingerprint }}
+  <script src="{{ $script.RelPermalink }}" integrity="{{ $script.Data.Integrity }}"></script>
 {{ end }}
+
 <script>
   console.info("\n%c 🎉 嗨~ 想看源代码？ %c \nGitHub仓库: https://github.com/tianheg/blog \n%c学习技术%c、%c热爱生活%c。",
   "color: #fff; padding: 5px 0; background: #29c75f; margin: 1em 0;",
