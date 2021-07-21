@@ -74,6 +74,8 @@
 
     <link rel="apple-touch-icon" href="{{ .Site.Params.touchicon | default "/images/apple-touch-icon.png" | relURL }}">
     <link rel="apple-touch-icon" sizes="180x180" href="{{ .Site.Params.touchicon | default "/images/apple-touch-icon.png" | relURL }}">
+    <!-- PWA -->
+    <link rel="manifest" href="/manifest.json">
 
     {{ range .AlternativeOutputFormats -}}
     {{ printf `<link rel="%s" type="%s" href="%s" title="%s" />` .Rel .MediaType.Type .RelPermalink $.Site.Title | safeHTML }} {{ end -}}
@@ -95,6 +97,7 @@
       </div>
       {{ partial "footer.html" . }}
     </main>
+    {{ partial "service-worker.html" . }}
     {{ partial "script.html" . }}
   </body>
 </html>
