@@ -26,11 +26,6 @@ darkModeMediaQuery.addEventListener("click", (event) => {
   setTheme(event.matches ? "dark" : "light");
 });
 
-document.addEventListener("DOMContentLoaded", function () {
-  let node = document.querySelector(".preload-transitions");
-  node.classList.remove("preload-transitions");
-});
-
 function setTheme(theme) {
   body.classList.remove("colorscheme-auto");
   let inverse = theme === "dark" ? "light" : "dark";
