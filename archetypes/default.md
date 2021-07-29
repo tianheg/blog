@@ -4,5 +4,3 @@ date = "{{ .Date }}"
 tags = [""]
 slug = ""
 +++
-
-ref:
