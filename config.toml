@@ -1,6 +1,8 @@
 baseURL = "https://blog.yidajiabei.xyz"
 title = "一大加贝"
 
+theme = "hugo-shortcode-gallery"
+timeout = 60000
 languagecode = "zh"
 defaultcontentlanguage = "zh"
 hasCJKLanguage = true
@@ -91,6 +93,12 @@ FootnoteReturnLinkContents = "↑"
 
     enableServiceWorker = true
 
+    galleryRowHeight    = 200
+    galleryMargins      = 10
+    galleryResizeOptions= "800x800 q88 Lanczos"
+    galleryPreviewType  = "blur"
+    galleryThumbnailHoverEffect = "enlarge"
+
 # Social links
 [[params.social]]
     name = "Github"
@@ -136,10 +144,10 @@ FootnoteReturnLinkContents = "↑"
         weight = 4
         pre = "internal"
     [[menu.main]]
-        url = "https://gallery.yidajiabei.xyz/"
+        url = "/photo/"
         name = "照片"
         weight = 5
-        pre = "external"
+        pre = "internal"
     [[menu.main]]
         url = "/posts/"
         name = "归档"
