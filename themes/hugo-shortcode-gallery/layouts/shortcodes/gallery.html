@@ -84,7 +84,7 @@ Ordinal: {{ .Ordinal}}
 	{{ range $original := sort $images "Name" $sortOrder}}
 		{{ if eq $original.ResourceType "image" }}
 			{{ $thumbnail := ($original.Fit ($resizeOptions)) }}
-
+      <!-- can't use *.webp image -->
 			{{ $metaFileName := print $original.Name ".meta"}}
 			{{ $metadata := $currentPage.Page.Resources.GetMatch ($metaFileName) }}
 			{{ if $metadata }}
