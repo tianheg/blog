@@ -55,7 +55,7 @@ keywords: ["Hugo"]
 
 ## 文字渐变色
 
-在文件 `~/assets/scss/custom/_custom.scss` 中添加..渐变..样式：
+在文件 `~/assets/scss/custom/_custom.scss` 中添加 *渐变* 样式：
 
 ```scss
 .colorfulfont {
