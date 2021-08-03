@@ -4,3 +4,10 @@
 
 [context.production.environment]
   HUGO_VERSION = "0.82.0"
+
+[[plugins]]
+package = "@algolia/netlify-plugin-crawler"
+  [plugins.inputs]
+  branches = ['main']
+  pathPrefix = "/"
+  customDomain = "blog.yidajiabei.xyz"
