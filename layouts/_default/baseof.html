@@ -102,6 +102,7 @@
     {{ $csClass = "colorscheme-auto" }}
   {{ end }}
   <body class="{{ $csClass }}">
+    {{ partial "float" . }}
     <main class="wrapper">
       {{ partial "header.html" . }}
       <div class="content">
