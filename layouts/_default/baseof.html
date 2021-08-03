@@ -82,6 +82,17 @@
     {{ range .AlternativeOutputFormats -}}
     {{ printf `<link rel="%s" type="%s" href="%s" title="%s" />` .Rel .MediaType.Type .RelPermalink $.Site.Title | safeHTML }} {{ end -}}
     {{ hugo.Generator }}
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@algolia/algoliasearch-netlify-frontend@1/dist/algoliasearchNetlify.css" />
+    <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/@algolia/algoliasearch-netlify-frontend@1/dist/algoliasearchNetlify.js"></script>
+    <script type="text/javascript">
+    algoliasearchNetlify({
+      appId: 'S2PFTKKDZW',
+      apiKey: '8ceffb63dfac8e8b4949d69c814f0d2d',
+      siteId: '97b3c50b-ef38-4cf3-9d47-7072043dba30',
+      branch: 'main',
+      selector: 'div#search',
+    });
+    </script>
   </head>
 
   {{ $csClass := "colorscheme-light" }}
