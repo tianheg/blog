@@ -1,6 +1,5 @@
 {{ define "content" }}
 <section class="container list">
-  <h1 class="title">{{ title (i18n (lower .Title)) | default .Title }}</h1>
   共计 {{ len (where .Site.RegularPages "Section" "posts") }} 篇日志
   <ul>
     {{ range .Pages.GroupByDate "2006" }}
@@ -8,7 +7,7 @@
     {{ range .Pages.GroupByDate "2006-01-02" }} {{ range .Pages }}
     <p style="display: block;margin-block-start: 1em;margin-block-end: 1em;margin-inline-start: 0px;margin-inline-end: 0px;">
       <span>{{ .Date.Format "2006-01-02" }}</span>
-      <a class="post-link" href="{{ .RelPermalink }}">{{ .Title }}</a>
+      <a href="{{ .RelPermalink }}" style="font-weight: normal;">{{ .Title }}</a>
     </p>
     {{ end }} {{ end }} {{ end }}
   </ul>
