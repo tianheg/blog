@@ -1,7 +1,7 @@
 ---
 title: 光猫 LOS 红灯闪烁，PON 灯不亮
 date: 2020-05-20T09:12:46+08:00
-tags: ["上网"]
+tags: ["计算机网络"]
 slug: Light cat LOS red light flashes
 ---
 
