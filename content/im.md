@@ -175,6 +175,9 @@ Do you develop these good habits?
 ---
 一切都从自身出发，自己做的任何事情遇到的任何失败都不要去责怪环境，责怪别人，先反思自己身上有哪些可以改的缺点，自己有哪些地方是做的不好的地方，然后改掉。记得乐观一点，要相信这个世界还是有很多很多美好的事物存在的，没有什么事情过不去的。不要被乱花迷了眼，好好做事情，沉下心，来相信时间的力量。
 
+---
+学习解决问题的通用技能 Education is about more than memorization. Learning & practicing general principles of problem solving is more important than memorizing the techniques of how to solve specific problems.
+
 ## 技术遐想
 
 You only need 26 customers paying you $99/mo to make an average U.S. income.
