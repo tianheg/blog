@@ -300,6 +300,14 @@ Randy 的编程经历 <https://lutaonan.com/blog/my-coding-road/>
 - 听技术大会 JSConf，React Conf
 - 习惯于英文技术环境
 
+---
+maya 的故事，让我记忆深刻
+
+<https://www.xiaoyuzhoufm.com/episode/61257677cc5f215c6e0b868a?s=eyJ1IjoiNjA1NGU4NjFlMGY1ZTcyM2JiMjRjMzQ4In0%3D%0A>
+
+- 我应该怎样生活
+- 好好地爱自己
+
 ## 我的问题
 
 1. 如何归纳总结
