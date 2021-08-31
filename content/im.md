@@ -183,7 +183,7 @@ We generally assume that the world is becoming a better place every year. But wh
 
 20 years ago we had decentralized Internet and a relatively unrestricted banking system. Today, Apple and Google censor information and apps on our phones while Visa and Mastercard limit what goods and services we can pay for. Every year we give up more power and control over our lives to a handful of unaccountable corporate executives we didn't elect.
 
-Most of us willingly carry tracking devices – our phones – and allow corporations to use our private data to target us with content that keeps us distracted with low-quality entertainment. Unlike 20 years ago, we are now surrounded by surveillance cameras, which in countries like China use AI to make sure nobody can hide. 
+Most of us willingly carry tracking devices – our phones – and allow corporations to use our private data to target us with content that keeps us distracted with low-quality entertainment. Unlike 20 years ago, we are now surrounded by surveillance cameras, which in countries like China use AI to make sure nobody can hide.
 
 In 2017, China overtook the US as the largest economy in the world by purchasing power, showing the world that individual freedoms are not required for economic development. Looking at China's success, more countries become authoritarian, curbing essential human rights such as freedom of speech, movement and assembly.
 
@@ -194,6 +194,13 @@ The most active and creative minds of our generation are too busy playing in the
 Watching this, I wonder what will become the legacy of our generation. Will we go down in history as those who let free societies turn into dystopian nightmares? Or will we be remembered as those who defended the freedoms that previous generations fought so hard to win?
 
 ## 技术遐想
+
+1. 找到适合自己的方法
+2. 多实践
+3. 对于某个库的学习，更重要的是学习它的思维方式，每看一个例子，就先想一想如果自己写，会把代码写成怎样，再与真实的例子进行对照，举一反三，这样的学习会是很快的过程
+4. 学编程，不要在基础阶段停留太多时间，边学边做是成长最快的；先把内容快速都顺一遍，了解完整体情况再针对攻克问题，要尽快上手实战项目（我以前的思维模式更多是“基础要打牢”，喜欢缓慢、一本正经地学习，学完了再接触实战项目。这种思维导致了我的“开头难”，因为总觉得学习编程需要全心投入，觉得自己目前恐怕时间不够啊，再等等，空余时间一鼓作气再学啊。然而生活中，很多东西都需要穿插着进行，没有那种“专门的时间”，太把新知识当回事儿，就很难开头……）所以，最小行动单元这个技巧真的很好用，满足基本条件能运行就先干起来，在过程中调整
+
+---
 
 1. 编程语言没有优劣，只有更合适的应用场景
 2. 写代码以前，可以试着画流程图
@@ -307,6 +314,7 @@ maya 的故事，让我记忆深刻
 
 - 我应该怎样生活
 - 好好地爱自己
+- 如果不能给小孩一个正常的成长环境，那就不要选择生小孩
 
 ## 我的问题
 
