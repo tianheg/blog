@@ -180,6 +180,11 @@ Do you develop these good habits?
 
 ## 技术遐想
 
+1. 编程语言没有优劣，只有更合适的应用场景
+2. 写代码以前，可以试着画流程图
+
+---
+
 You only need 26 customers paying you $99/mo to make an average U.S. income.
 
 or
