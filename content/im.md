@@ -195,6 +195,10 @@ Watching this, I wonder what will become the legacy of our generation. Will we g
 
 ## 技术遐想
 
+想做一个类似于<https://sharenote.app/> 的网站，分享我的读书笔记。
+
+---
+
 1. 找到适合自己的方法
 2. 多实践
 3. 对于某个库的学习，更重要的是学习它的思维方式，每看一个例子，就先想一想如果自己写，会把代码写成怎样，再与真实的例子进行对照，举一反三，这样的学习会是很快的过程
