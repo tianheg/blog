@@ -58,17 +58,6 @@ keywords: "关于我"
 - 首页的三个联系方式
 - [中文维基百科](https://zh.wikipedia.org/wiki/User:Tianheg)（[短链接](https://w.wiki/43iP)）
 
-<footer>
-<script src="https://giscus.app/client.js"
-        data-repo="tianheg/blog"
-        data-repo-id="MDEwOlJlcG9zaXRvcnkyNzY5Mjk1OTM="
-        data-category="Comments"
-        data-category-id="DIC_kwDOEIGcOc4B-9dV"
-        data-mapping="title"
-        data-reactions-enabled="1"
-        data-emit-metadata="0"
-        data-theme="light"
-        crossorigin="anonymous"
-        async>
-</script>
-</footer>
+## 留言板
+
+- [GitHub Discussion](https://github.com/tianheg/blog/discussions/177)
