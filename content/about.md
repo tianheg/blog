@@ -1,8 +1,8 @@
-+++
-title = "关于"
-description = "关于我"
-keywords = "关于我"
-+++
+---
+title: "关于"
+description: "关于我"
+keywords: "关于我"
+---
 
 ## 关于我
 
@@ -19,8 +19,6 @@ keywords = "关于我"
 观影多为丰富感官体验，欣赏视觉之美。观影不论限制，经典佳作看，儿童动画亦看，前者多为欣赏，后者多为放松。皆有益处。
 
 音乐多为舒缓放松，间或品味大师雅作。谈及音乐，流行音乐不听，其余皆可。
-
-[中文维基](https://w.wiki/433m)
 
 ### 自我观察
 
@@ -55,4 +53,22 @@ keywords = "关于我"
 
 ---
 
-欢迎留言，请发邮件
+## 网络足迹
+
+- 首页的三个联系方式
+- [中文维基百科](https://zh.wikipedia.org/wiki/User:Tianheg)（[短链接](https://w.wiki/43iP)）
+
+<footer>
+<script src="https://giscus.app/client.js"
+        data-repo="tianheg/blog"
+        data-repo-id="MDEwOlJlcG9zaXRvcnkyNzY5Mjk1OTM="
+        data-category="Comments"
+        data-category-id="DIC_kwDOEIGcOc4B-9dV"
+        data-mapping="title"
+        data-reactions-enabled="1"
+        data-emit-metadata="0"
+        data-theme="light"
+        crossorigin="anonymous"
+        async>
+</script>
+</footer>
