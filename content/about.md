@@ -36,6 +36,7 @@ keywords: "关于我"
 - 直接浏览网站
 - [RSS](https://blog.yidajiabei.xyz/index.xml)
 - 公众号：一大加贝
+- [Newsletter 天贺私语](https://www.getrevue.co/profile/tianheg)
 
 订阅前思考几个问题：
 
