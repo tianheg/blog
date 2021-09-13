@@ -36,7 +36,6 @@ keywords: "关于我"
 - 直接浏览网站
 - [RSS](https://blog.yidajiabei.xyz/index.xml)
 - 公众号：一大加贝
-- [Newsletter 天贺私语](https://www.getrevue.co/profile/tianheg)
 
 订阅前思考几个问题：
 
@@ -53,6 +52,15 @@ keywords: "关于我"
  [数学小兵儿](https://matnoble.me/) | 数学＆计算机 我都爱
 
 ---
+
+## Newsletter
+
+- [天贺私语](https://www.getrevue.co/profile/tianheg)
+
+主题改变过程：
+
+- 意识流写作，阅读理解
+- 一些很自我的生活哲学思考，偶尔分享书籍和电影
 
 ## 网络足迹
 
