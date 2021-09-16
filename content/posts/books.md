@@ -92,11 +92,11 @@ keywords: ["阅读"]
 
 ## 虚构
 
-- [红楼梦](/posts/read-hongloumeng/)
+- [红楼梦](/posts/dream-of-the-red-chamber/)
 
 ### 乌托邦
 
-- [一九八四](/posts/read-yijiubasi)
+- [一九八四](/posts/nineteen-eighty-four)
 
 ### 科幻
 
