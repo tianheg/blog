@@ -5,7 +5,11 @@ keywords: "现在"
 outputs: "html"
 ---
 
-## 2021.05.01 - ？
+## 2021.09.17 - 2021.09.19
+
+- 建立对于技术框架的整体认知
+
+## 2021.05.01 - 2021.05.26
 
 - 学习 JavaScript Algorithms and Data Structures(fCC)
 
