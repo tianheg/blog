@@ -53,15 +53,6 @@ keywords: "关于我"
 
 ---
 
-## Newsletter
-
-- [天贺私语](https://www.getrevue.co/profile/tianheg)
-
-主题改变过程：
-
-- 意识流写作，阅读理解
-- 一些很自我的生活哲学思考，偶尔分享书籍和电影
-
 ## 网络足迹
 
 - 首页的三个联系方式
