@@ -61,3 +61,7 @@ keywords: "关于我"
 ## 留言板
 
 - [GitHub Discussion](https://github.com/tianheg/blog/discussions/177)
+
+## 赞助
+
+<center><iframe id="afdian_leaflet" src="https://afdian.net/leaflet?slug=tianheg" width="100%" scrolling="no" height="260" frameborder="0"></iframe></center><script>document.body.clientWidth< 700 ? document.getElementById("afdian_leaflet").width = "100%" : document.getElementById("afdian_leaflet").width = "640"</script>
