@@ -3,7 +3,6 @@ date = '2021-04-15T20:02:06+08:00'
 slug = 'programmers-manifesto'
 tags = ['编程']
 title = "Programmers' Manifesto(宣言)"
-
 +++
 
 1. Continually and actively improve ourselves as programmers

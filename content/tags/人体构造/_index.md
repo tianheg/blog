@@ -1,4 +1,3 @@
 +++
 slug = 'human-body-structure'
-
 +++

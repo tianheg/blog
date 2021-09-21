@@ -4,7 +4,6 @@ description = '一枚书签的故事'
 keywords = ['随笔']
 tags = ['随笔']
 title = '一枚书签'
-
 +++
 
 ![bookmark](/images/bookmark.jpg)

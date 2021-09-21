@@ -4,7 +4,6 @@ description = '明白老师的分享逻辑'
 keywords = ['个人']
 tags = ['个人']
 title = '明白老师的分享逻辑'
-
 +++
 
 引子：《[如何用 6 分钟让自己的每一天都活力满满](/posts/use-6-minutes-to-make-your-every-day-full-of-energy/)》

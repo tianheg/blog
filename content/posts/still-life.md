@@ -4,7 +4,6 @@ description = '看寂静人生'
 keywords = ['电影']
 tags = ['电影']
 title = '寂静人生'
-
 +++
 
 STILL LIFE(寂静人生) - 2013 - 英国

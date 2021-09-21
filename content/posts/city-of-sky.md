@@ -4,7 +4,6 @@ description = '看《天空之城》带给我的感触'
 keywords = ['电影']
 tags = ['电影']
 title = '天空の城ラピュタ'
-
 +++
 
 天空之城

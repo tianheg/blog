@@ -4,7 +4,6 @@ description = '记录 Hugo 主题及多语言图标不能在 Linux Chrome 中正
 keywords = ['Hugo']
 tags = ['Hugo']
 title = 'Hugo 主题及多语言图标不能在 Linux Chrome 中正常显示'
-
 +++
 
 这个问题，我给正在使用的主题：Meme，提了 issue，[地址](https://github.com/reuixiy/hugo-theme-meme/issues/139) 。

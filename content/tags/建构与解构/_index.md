@@ -1,4 +1,3 @@
 +++
 slug = 'construction-and-deconstruction'
-
 +++

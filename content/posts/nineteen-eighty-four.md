@@ -4,7 +4,6 @@ description = '记录读《一九八四》的一些内容'
 keywords = ['阅读']
 tags = ['阅读']
 title = 'George Orwell《一九八四》'
-
 +++
 
 > 在栗树荫下，<br>我出卖了你，你出卖了我。

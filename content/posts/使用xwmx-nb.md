@@ -3,7 +3,6 @@ date = '2021-07-31T14:22:38+08:00'
 slug = 'use-xwmx-nb'
 tags = ['Terminal', 'Zettelkasten']
 title = '使用 xwmx/nb'
-
 +++
 
 ## 安装

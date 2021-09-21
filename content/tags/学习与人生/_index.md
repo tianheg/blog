@@ -1,4 +1,3 @@
 +++
 slug = 'study-and-life'
-
 +++

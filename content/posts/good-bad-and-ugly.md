@@ -4,7 +4,6 @@ description = '看黄金三镖客'
 keywords = ['电影']
 tags = ['电影']
 title = 'Il buono, il brutto, il cattivo.'
-
 +++
 
 1966 - 黄金三镖客 Il buono, il brutto, il cattivo.

@@ -4,7 +4,6 @@ description = '记录解决 Hugo 目录和 APlayer 的冲突问题'
 keywords = ['Hugo']
 tags = ['Hugo']
 title = 'Hugo 目录和音乐播放器 APlayer 的冲突问题'
-
 +++
 
 我是今天刚刚弄好 “关于” 页面的音乐播放器，然后突然发现：目录锚点失效了。

@@ -1,4 +1,3 @@
 +++
 slug = 'year-end-summary'
-
 +++

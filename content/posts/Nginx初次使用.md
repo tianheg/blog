@@ -3,7 +3,6 @@ date = '2021-09-19T10:25:17+08:00'
 slug = 'first-use-nginx'
 tags = ['Nginx']
 title = 'Nginx 初次使用'
-
 +++
 
 1. 下载

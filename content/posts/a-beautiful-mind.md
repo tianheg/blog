@@ -3,7 +3,6 @@ date = '2020-11-11T20:19:42+08:00'
 keywords = ['电影']
 tags = ['电影']
 title = 'A Beautiful Mind'
-
 +++
 
 A Beautiful Mind(美丽心灵) - 2001 - 美国

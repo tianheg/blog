@@ -4,7 +4,6 @@ description = '阅读《社会心理学》'
 keywords = ['阅读']
 tags = ['阅读']
 title = 'David G.Myers《社会心理学》'
-
 +++
 
 ## 提出问题

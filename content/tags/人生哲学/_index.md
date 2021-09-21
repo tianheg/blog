@@ -1,4 +1,3 @@
 +++
 slug = 'philosophy-of-life'
-
 +++

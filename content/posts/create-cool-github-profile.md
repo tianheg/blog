@@ -4,7 +4,6 @@ description = '为 GitHub 主页添加「年进度」和「最近更新的博客
 keywords = ['GitHub', 'GitHub Actions', 'JavaScript', 'Python', 'pipenv']
 tags = ['GitHub', 'GitHub Actions', 'JavaScript', 'Python', 'pipenv']
 title = '为 GitHub 主页添加「年进度」和「最近更新的博客文章」'
-
 +++
 
 午饭前看到一个 issue：[[开源自荐] 利用 Github Actions 获取网站的 RSS 数据，并更新到个人主页](https://github.com/ruanyf/weekly/issues/1616)。

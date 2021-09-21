@@ -3,7 +3,6 @@ date = '2021-08-20T10:47:41+08:00'
 slug = 'arch-software-installation-and-usage'
 tags = ['Arch']
 title = 'Arch 软件安装和用法'
-
 +++
 
 ## Hide GRUB
@@ -450,30 +449,30 @@ Connect PC with phone
 
 ref: <https://io-oi.me/tech/hello-arch-linux/>
 
-名字 | 说明 | 类似
-:---:|:---:|:---:
-google-chrome | Google Chrome 浏览器 | *
-visual-studio-code-bin | Visual Studio Code | *
-netease-cloud-music | 网易云音乐 | *
-flameshot | 现代、快捷、轻便的截图工具 | *
-proxychains-ng | 终端内科学上网代理工具 | *
-redshift | 显示屏色温调节工具 | f.lux
-vlc | 强大的多媒体播放工具 | *
-telegram-desktop | 客户端开源的加密聊天工具 | *
-gthumb | 图片浏览工具，可简单编辑图片，可清除照片元数据 | *
-libreoffice-fresh | 必备的办公软件 | Microsoft Office
-inkscape | 强大的矢量图形编辑软件 | Adobe Illustrator、CorelDraw
-youtube-dl | YouTube 视频下载工具 | *
-glances | monitoring tool | *
-keepass | password manage | *
-hugo | static site generator | *
-foliate | equb ... reader | *
-anki | a spaced repetition system | *
-informant | arch news reader and pacman hook | *
-dnsutils | `dig` | *
-dnsmasq | 使用国外 DNS 造成国内网站访问慢的解决方法 | *
-tldr | <https://github.com/tldr-pages/tldr> | *
-virtualbox | Virtual Machine | *
+|          名字          |                      说明                      |             类似             |
+| :--------------------: | :--------------------------------------------: | :--------------------------: |
+|     google-chrome      |              Google Chrome 浏览器              |              *               |
+| visual-studio-code-bin |               Visual Studio Code               |              *               |
+|  netease-cloud-music   |                   网易云音乐                   |              *               |
+|       flameshot        |           现代、快捷、轻便的截图工具           |              *               |
+|     proxychains-ng     |             终端内科学上网代理工具             |              *               |
+|        redshift        |               显示屏色温调节工具               |            f.lux             |
+|          vlc           |              强大的多媒体播放工具              |              *               |
+|    telegram-desktop    |            客户端开源的加密聊天工具            |              *               |
+|         gthumb         | 图片浏览工具，可简单编辑图片，可清除照片元数据 |              *               |
+|   libreoffice-fresh    |                 必备的办公软件                 |       Microsoft Office       |
+|        inkscape        |             强大的矢量图形编辑软件             | Adobe Illustrator、CorelDraw |
+|       youtube-dl       |              YouTube 视频下载工具              |              *               |
+|        glances         |                monitoring tool                 |              *               |
+|        keepass         |                password manage                 |              *               |
+|          hugo          |             static site generator              |              *               |
+|        foliate         |                equb ... reader                 |              *               |
+|          anki          |           a spaced repetition system           |              *               |
+|       informant        |        arch news reader and pacman hook        |              *               |
+|        dnsutils        |                     `dig`                      |              *               |
+|        dnsmasq         |   使用国外 DNS 造成国内网站访问慢的解决方法    |              *               |
+|          tldr          |      <https://github.com/tldr-pages/tldr>      |              *               |
+|       virtualbox       |                Virtual Machine                 |              *               |
 
 ```sh
 sudo pacman -S google-chrome visual-studio-code-bin netease-cloud-music flameshot proxychains-ng redshift vlc telegram-desktop gthumb libreoffice-fresh inkscape youtube-dl glances keepass hugo foliate anki informant dnsutils dnsmasq tldr virtualbox virtualbox-host-modules-arch virtualbox-ext-oracle virtualbox

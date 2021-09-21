@@ -4,7 +4,6 @@ description = '为终端配置代理'
 keywords = ['Proxy']
 tags = ['Proxy']
 title = '为终端配置代理'
-
 +++
 
 ## Zshrc

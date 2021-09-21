@@ -4,7 +4,6 @@ description = 'Hugo 如何置顶文章'
 keywords = ['Hugo']
 tags = ['Hugo']
 title = 'Hugo 置顶博客'
-
 +++
 
 简单得令我怀疑，只需要在 `Front-matter` 内添加如下片段即可：

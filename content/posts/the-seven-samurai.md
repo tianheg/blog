@@ -4,7 +4,6 @@ description = '看七武士'
 keywords = ['电影']
 tags = ['电影']
 title = '七武士'
-
 +++
 
 七人の侍(七武士) - 1954 - 日本

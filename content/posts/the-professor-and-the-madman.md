@@ -4,7 +4,6 @@ description = '看教授与疯子'
 keywords = ['电影']
 tags = ['电影']
 title = '教授与疯子'
-
 +++
 
 The Professor and the Madman(教授与疯子) - 2019 - 爱尔兰 / 法国 / 冰岛 / 美国 / 墨西哥 / 比利时 / 英国 / 中国香港

@@ -4,7 +4,6 @@ description = '翻译一篇博客：作者认为，大多数网络发布的技�
 keywords = ['翻译']
 tags = ['翻译']
 title = '大多数技术内容都是废话'
-
 +++
 
 源站：[Most tech content is bullshit](https://www.aleksandra.codes/tech-content-consumer)

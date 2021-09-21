@@ -1,4 +1,3 @@
 +++
 slug = 'checking-errors'
-
 +++
