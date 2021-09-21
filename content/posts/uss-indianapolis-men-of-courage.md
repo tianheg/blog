@@ -1,8 +1,9 @@
 +++
-title = "USS Indianapolis: Men of Courage"
-date = "2021-08-02T23:02:40+08:00"
-tags = ["电影"]
-slug = "uss-indianapolis-men-of-courage"
+date = '2021-08-02T23:02:40+08:00'
+slug = 'uss-indianapolis-men-of-courage'
+tags = ['电影']
+title = 'USS Indianapolis: Men of Courage'
+
 +++
 
 > 如果成功了，他们就是英雄。

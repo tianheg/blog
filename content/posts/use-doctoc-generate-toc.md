@@ -1,10 +1,11 @@
----
-title: "使用 DocToc 自动生成文档目录"
-date: 2020-05-11T19:05:46+08:00
-description: "记录使用 DocToc 生成目录"
-tags: ["工具"]
-keywords: ["工具"]
----
++++
+date = '2020-05-11T19:05:46+08:00'
+description = '记录使用 DocToc 生成目录'
+keywords = ['工具']
+tags = ['工具']
+title = '使用 DocToc 自动生成文档目录'
+
++++
 
 DocToc 为本地 git 存储库中的 markdown 文件生成目录。生成的目录可以正常显示在包括 GitHub 在内的代码托管网站上。
 

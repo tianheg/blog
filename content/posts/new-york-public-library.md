@@ -1,10 +1,11 @@
----
-title: "New York Public Library"
-date: 2021-01-22T09:31:34+08:00
-description: "记录 New York Public Library"
-tags: ["艺术"]
-keywords: ["艺术"]
----
++++
+date = '2021-01-22T09:31:34+08:00'
+description = '记录 New York Public Library'
+keywords = ['艺术']
+tags = ['艺术']
+title = 'New York Public Library'
+
++++
 
 ![New York Public Library](/images/arts/new-york-public-library.jpeg)
 

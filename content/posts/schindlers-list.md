@@ -1,10 +1,11 @@
----
-title: "辛德勒的名单"
-date: 2020-02-14T20:19:42+08:00
-description: "看辛德勒的名单"
-tags: ["电影"]
-keywords: ["电影"]
----
++++
+date = '2020-02-14T20:19:42+08:00'
+description = '看辛德勒的名单'
+keywords = ['电影']
+tags = ['电影']
+title = '辛德勒的名单'
+
++++
 
 Schindler's List - 1993 - 美国
 

@@ -1,10 +1,11 @@
----
-title: "IMAP 和 POP3 有什么区别？"
-date: 2021-01-31T18:42:08+08:00
-description: "记录 IMAP 和 POP3 有什么区别？"
-tags: ["Email"]
-keywords: ["Email"]
----
++++
+date = '2021-01-31T18:42:08+08:00'
+description = '记录 IMAP 和 POP3 有什么区别？'
+keywords = ['Email']
+tags = ['Email']
+title = 'IMAP 和 POP3 有什么区别？'
+
++++
 
 POP3 协议允许电子邮件客户端下载服务器上的邮件，但是在客户端的操作（如移动邮件、标记已读等），不会反馈到服务器上，比如通过客户端收取了邮箱中的 3 封邮件并移动到其他文件夹，邮箱服务器上的这些邮件是没有同时被移动的。
 

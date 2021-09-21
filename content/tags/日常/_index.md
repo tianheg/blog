@@ -1,3 +1,4 @@
 +++
-slug = "daily"
+slug = 'daily'
+
 +++

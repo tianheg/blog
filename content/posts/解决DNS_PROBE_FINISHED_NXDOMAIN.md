@@ -1,8 +1,9 @@
 +++
-title = "解决 DNS_PROBE_FINISHED_NXDOMAIN"
-date = "2021-07-31T11:51:41+08:00"
-tags = ["计算机网络"]
-slug = "fix-dns-probe-finished-nxdomain"
+date = '2021-07-31T11:51:41+08:00'
+slug = 'fix-dns-probe-finished-nxdomain'
+tags = ['计算机网络']
+title = '解决 DNS_PROBE_FINISHED_NXDOMAIN'
+
 +++
 
 如果 DNS 解析域名/地址失败，就会得到 `DNS_PROBE_FINISHED_NXDOMAIN` 提示，无法打开目标网页。

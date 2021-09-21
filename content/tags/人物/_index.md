@@ -1,3 +1,4 @@
 +++
-slug = "people"
+slug = 'people'
+
 +++

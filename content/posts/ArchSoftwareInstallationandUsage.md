@@ -1,8 +1,9 @@
 +++
-title = "Arch 软件安装和用法"
-date = "2021-08-20T10:47:41+08:00"
-tags = ["Arch"]
-slug = "arch-software-installation-and-usage"
+date = '2021-08-20T10:47:41+08:00'
+slug = 'arch-software-installation-and-usage'
+tags = ['Arch']
+title = 'Arch 软件安装和用法'
+
 +++
 
 ## Hide GRUB

@@ -1,10 +1,11 @@
----
-title: "Midway"
-date: 2019-11-15T20:19:42+08:00
-description: "看中途岛之战"
-tags: ["电影"]
-keywords: ["电影"]
----
++++
+date = '2019-11-15T20:19:42+08:00'
+description = '看中途岛之战'
+keywords = ['电影']
+tags = ['电影']
+title = 'Midway'
+
++++
 
 中途岛之战 - 1976 - 美国
 

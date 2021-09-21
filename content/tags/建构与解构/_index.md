@@ -1,3 +1,4 @@
 +++
-slug = "construction-and-deconstruction"
+slug = 'construction-and-deconstruction'
+
 +++

@@ -1,8 +1,9 @@
 +++
-title = "The World Is Too Much With Us"
-date = "2021-06-09T07:32:10+08:00"
-tags = ["诗作"]
-slug = "world-too-much-us"
+date = '2021-06-09T07:32:10+08:00'
+slug = 'world-too-much-us'
+tags = ['诗作']
+title = 'The World Is Too Much With Us'
+
 +++
 
 The world is too much with us; late and soon,

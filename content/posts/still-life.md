@@ -1,10 +1,11 @@
----
-title: "寂静人生"
-date: 2020-10-25T20:19:42+08:00
-description: "看寂静人生"
-tags: ["电影"]
-keywords: ["电影"]
----
++++
+date = '2020-10-25T20:19:42+08:00'
+description = '看寂静人生'
+keywords = ['电影']
+tags = ['电影']
+title = '寂静人生'
+
++++
 
 STILL LIFE(寂静人生) - 2013 - 英国
 

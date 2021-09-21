@@ -1,10 +1,11 @@
----
-title: "10 of the Most Famous Female Artist Self-Portraits"
-date: 2021-01-22T09:31:34+08:00
-description: "记录 10 of the Most Famous Female Artist Self-Portraits"
-tags: ["艺术"]
-keywords: ["艺术"]
----
++++
+date = '2021-01-22T09:31:34+08:00'
+description = '记录 10 of the Most Famous Female Artist Self-Portraits'
+keywords = ['艺术']
+tags = ['艺术']
+title = '10 of the Most Famous Female Artist Self-Portraits'
+
++++
 
 ## 1. Frida Kahlo
 

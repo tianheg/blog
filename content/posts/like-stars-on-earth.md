@@ -1,10 +1,11 @@
----
-title: "Taare Zameen Par"
-date: 2021-01-03T20:19:42+08:00
-description: "看地球上的星星"
-tags: ["电影"]
-keywords: ["电影"]
----
++++
+date = '2021-01-03T20:19:42+08:00'
+description = '看地球上的星星'
+keywords = ['电影']
+tags = ['电影']
+title = 'Taare Zameen Par'
+
++++
 
 地球上的星星
 

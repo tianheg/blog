@@ -1,3 +1,4 @@
 +++
-slug = "inspire"
+slug = 'inspire'
+
 +++

@@ -1,3 +1,4 @@
 +++
-slug = "semantics"
+slug = 'semantics'
+
 +++

@@ -1,4 +1,5 @@
 +++
-title = "短期享乐"
-slug = "short-term-pleasure"
+slug = 'short-term-pleasure'
+title = '短期享乐'
+
 +++

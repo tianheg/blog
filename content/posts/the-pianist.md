@@ -1,10 +1,11 @@
----
-title: "钢琴家"
-date: 2020-11-11T20:19:42+08:00
-description: "看钢琴家"
-tags: ["电影"]
-keywords: ["电影"]
----
++++
+date = '2020-11-11T20:19:42+08:00'
+description = '看钢琴家'
+keywords = ['电影']
+tags = ['电影']
+title = '钢琴家'
+
++++
 
 The Pianist(钢琴家) - 2002 - 法国 / 德国 / 英国 / 波兰
 

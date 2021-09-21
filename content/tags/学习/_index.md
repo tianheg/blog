@@ -1,3 +1,4 @@
 +++
-slug = "learning"
+slug = 'learning'
+
 +++

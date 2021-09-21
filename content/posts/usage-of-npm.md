@@ -1,10 +1,11 @@
----
-title: "使用 npm"
-date: 2020-04-04T11:14:30+08:00
-description: "记录 npm 的使用"
-tags: ["Node.js"]
-keywords: ["Node.js"]
----
++++
+date = '2020-04-04T11:14:30+08:00'
+description = '记录 npm 的使用'
+keywords = ['Node.js']
+tags = ['Node.js']
+title = '使用 npm'
+
++++
 
 ## 一、
 

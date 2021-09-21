@@ -1,3 +1,4 @@
 +++
-slug = "tool"
+slug = 'tool'
+
 +++

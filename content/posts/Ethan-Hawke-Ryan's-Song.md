@@ -1,10 +1,11 @@
 +++
+date = '2021-05-05T14:27:14+08:00'
+description = '《少年时代》中听到歌词，想立刻唱的一首歌'
+keywords = ['音乐', '少年时代']
+slug = 'ethan-hawke-ryans-song'
+tags = ['音乐']
 title = "Ethan Hawke Ryan's Song"
-date = 2021-05-05T14:27:14+08:00
-description = "《少年时代》中听到歌词，想立刻唱的一首歌"
-tags = ["音乐"]
-keywords = ["音乐","少年时代"]
-slug = "ethan-hawke-ryans-song"
+
 +++
 
 - 专辑：Split the Difference (Daddy's Lullaby)

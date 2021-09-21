@@ -1,10 +1,11 @@
----
-title: "大多数技术内容都是废话"
-date: 2020-06-10T21:40:35+08:00
-description: "翻译一篇博客：作者认为，大多数网络发布的技术内容都是废话"
-tags: ["翻译"]
-keywords: ["翻译"]
----
++++
+date = '2020-06-10T21:40:35+08:00'
+description = '翻译一篇博客：作者认为，大多数网络发布的技术内容都是废话'
+keywords = ['翻译']
+tags = ['翻译']
+title = '大多数技术内容都是废话'
+
++++
 
 源站：[Most tech content is bullshit](https://www.aleksandra.codes/tech-content-consumer)
 

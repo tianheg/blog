@@ -1,10 +1,11 @@
----
-title: "La planète sauvage"
-date: 2020-10-21T20:19:42+08:00
-description: "看原始星球"
-tags: ["电影"]
-keywords: ["电影"]
----
++++
+date = '2020-10-21T20:19:42+08:00'
+description = '看原始星球'
+keywords = ['电影']
+tags = ['电影']
+title = 'La planète sauvage'
+
++++
 
 La planète sauvage(原始星球) - 1973 - 法国
 

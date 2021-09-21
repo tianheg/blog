@@ -1,3 +1,4 @@
 +++
-slug = "thinking"
+slug = 'thinking'
+
 +++

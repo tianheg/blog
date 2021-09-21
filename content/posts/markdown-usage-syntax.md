@@ -1,10 +1,11 @@
----
-title: "Markdown 使用语法"
-date: 2020-05-10T17:39:28+08:00
-description: "记录 Markdown 的使用语法"
-tags: ["Markdown"]
-keywords: ["Markdown"]
----
++++
+date = '2020-05-10T17:39:28+08:00'
+description = '记录 Markdown 的使用语法'
+keywords = ['Markdown']
+tags = ['Markdown']
+title = 'Markdown 使用语法'
+
++++
 
 ## 综述
 

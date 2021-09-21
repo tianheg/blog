@@ -1,8 +1,9 @@
 +++
-title = "同扭曲时间的事儿抗争"
-date = "2021-04-13T21:16:14+08:00"
-tags = ["时间管理"]
-slug = "fight-against-time-distorting-things"
+date = '2021-04-13T21:16:14+08:00'
+slug = 'fight-against-time-distorting-things'
+tags = ['时间管理']
+title = '同扭曲时间的事儿抗争'
+
 +++
 
 ## 主动管理

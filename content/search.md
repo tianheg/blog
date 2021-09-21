@@ -1,5 +1,6 @@
 +++
-outputs = "html"
+outputs = 'html'
+
 +++
 
 <div id="search"></div>
