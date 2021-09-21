@@ -5,7 +5,6 @@ draft = true
 keywords = ['学习', '读书']
 tags = ['学习', '读书']
 title = '刻意练习的意义'
-
 +++
 
 ---

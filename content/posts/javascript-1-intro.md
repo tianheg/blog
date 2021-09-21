@@ -4,7 +4,6 @@ description = '学习 Javascript 1 - 介绍 JavaScript'
 keywords = ['JavaScript']
 tags = ['JavaScript']
 title = '学习 Javascript 1 - 介绍 JavaScript'
-
 +++
 
 ## 什么是 JavaScript

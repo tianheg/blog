@@ -4,7 +4,6 @@ description = '阅读《阿西莫夫最新科学指南（上下册）》'
 keywords = ['阅读']
 tags = ['阅读']
 title = 'Isaac Asimov《阿西莫夫最新科学指南（上下册）》'
-
 +++
 
 ## 摘录

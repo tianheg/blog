@@ -4,7 +4,6 @@ description = '记录 Bathers at Moritzburg'
 keywords = ['艺术']
 tags = ['艺术']
 title = 'Bathers at Moritzburg'
-
 +++
 
 ![bathers-at-moritzburg.png](/images/bathers-at-moritzburg.jpeg)

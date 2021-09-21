@@ -4,7 +4,6 @@ description = '记录 Hugo 图片居中'
 keywords = ['Hugo']
 tags = ['Hugo']
 title = 'Hugo 图片居中'
-
 +++
 
 一般插入图片使用这样的格式： `![]()`

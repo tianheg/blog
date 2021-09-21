@@ -4,7 +4,6 @@ description = '《史蒂夫·乔布斯传》读书笔记'
 keywords = ['阅读']
 tags = ['阅读']
 title = 'Walter Isaacson《史蒂夫·乔布斯传》'
-
 +++
 
 ## 摘录

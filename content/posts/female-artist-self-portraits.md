@@ -4,7 +4,6 @@ description = '记录 10 of the Most Famous Female Artist Self-Portraits'
 keywords = ['艺术']
 tags = ['艺术']
 title = '10 of the Most Famous Female Artist Self-Portraits'
-
 +++
 
 ## 1. Frida Kahlo

@@ -1,4 +1,3 @@
 +++
 slug = 'theory-of-relativity'
-
 +++

@@ -4,7 +4,6 @@ description = '一首突发奇想的诗'
 keywords = ['诗作']
 tags = ['诗作']
 title = '奇怪'
-
 +++
 
 一、

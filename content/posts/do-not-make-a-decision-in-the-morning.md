@@ -4,7 +4,6 @@ description = '早晨不做决策性决定'
 keywords = ['个人']
 tags = ['个人']
 title = '早晨不做决策性决定'
-
 +++
 
 如果你同时符合：

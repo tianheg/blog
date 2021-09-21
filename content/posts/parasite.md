@@ -4,7 +4,6 @@ description = '看寄生虫'
 keywords = ['电影']
 tags = ['电影']
 title = '기생충'
-
 +++
 
 기생충 - 2019

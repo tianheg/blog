@@ -4,7 +4,6 @@ description = '这算又溜走了一日'
 keywords = ['随笔']
 tags = ['随笔']
 title = '这算又溜走了一日'
-
 +++
 
 王小波说：

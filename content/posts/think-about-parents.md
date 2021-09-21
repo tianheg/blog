@@ -4,7 +4,6 @@ description = '和父亲的一次争吵'
 keywords = ['随笔']
 tags = ['随笔']
 title = '孩子，你应该为你的身边人想想'
-
 +++
 
 ## 事情

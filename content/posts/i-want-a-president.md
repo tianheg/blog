@@ -3,7 +3,6 @@ date = '2021-04-15T08:28:44+08:00'
 slug = 'i-want-a-president'
 tags = ['诗作']
 title = '我想要的总统'
-
 +++
 
 I want a dyke for president. I want a person

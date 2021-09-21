@@ -5,7 +5,6 @@ keywords = ['音乐', '少年时代']
 slug = 'ethan-hawke-ryans-song'
 tags = ['音乐']
 title = "Ethan Hawke Ryan's Song"
-
 +++
 
 - 专辑：Split the Difference (Daddy's Lullaby)

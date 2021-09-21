@@ -4,7 +4,6 @@ description = '<To Be or Not to Be> 是一部好电影'
 keywords = ['电影']
 tags = ['电影']
 title = 'To Be or Not to Be'
-
 +++
 
 这部电影很好，我看得很投入，很多时候都是欢笑的。

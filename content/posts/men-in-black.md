@@ -3,7 +3,6 @@ date = '2019-06-13T20:19:42+08:00'
 keywords = ['电影']
 tags = ['电影']
 title = 'The Man in black collection'
-
 +++
 
 重温了一遍黑衣人的三部电影，威尔·史密斯很搞笑。

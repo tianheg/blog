@@ -1,4 +1,3 @@
 +++
 slug = 'tao-te-ching'
-
 +++

@@ -4,7 +4,6 @@ description = '记录拖延已久的 now 页面制作'
 keywords = ['blog']
 tags = ['blog']
 title = '为自己制作 now 页面'
-
 +++
 
 一个计划很久的小任务，今天完成：为自己的博客页面添加 now 页面。

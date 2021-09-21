@@ -4,7 +4,6 @@ description = '记录 Hugo 没有安装扩展版产生的问题'
 keywords = ['Hugo']
 tags = ['Hugo']
 title = 'Hugo 没有安装扩展版产生的问题'
-
 +++
 
 如果没有安装 Hugo 扩展版，在执行 `hugo server` 命令时，会报如下错误：
