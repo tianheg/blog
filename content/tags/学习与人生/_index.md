@@ -1,3 +1,4 @@
 +++
-slug = "study-and-life"
+slug = 'study-and-life'
+
 +++

@@ -1,3 +1,4 @@
 +++
-slug = "ego"
+slug = 'ego'
+
 +++

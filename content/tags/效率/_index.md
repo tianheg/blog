@@ -1,3 +1,4 @@
 +++
-slug = "efficiency"
+slug = 'efficiency'
+
 +++

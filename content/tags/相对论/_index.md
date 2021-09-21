@@ -1,3 +1,4 @@
 +++
-slug = "theory-of-relativity"
+slug = 'theory-of-relativity'
+
 +++

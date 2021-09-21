@@ -1,3 +1,4 @@
 +++
-slug = "music"
+slug = 'music'
+
 +++

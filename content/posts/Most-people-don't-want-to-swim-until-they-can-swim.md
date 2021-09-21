@@ -1,9 +1,10 @@
----
-title: 大多数人在还不会游泳之前都不会想游泳
-date: 2019-12-04T18:23:49+08:00
-tags: ["随笔"]
-slug: people not do before they can
----
++++
+date = '2019-12-04T18:23:49+08:00'
+slug = 'people not do before they can'
+tags = ['随笔']
+title = '大多数人在还不会游泳之前都不会想游泳'
+
++++
 
 昨天太累了，晚上十点睡觉，定闹钟晚上十一点半起床写作业，结果今天早晨五点醒。
 

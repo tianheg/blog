@@ -1,3 +1,4 @@
 +++
-slug = "independent-thinking"
+slug = 'independent-thinking'
+
 +++

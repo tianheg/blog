@@ -1,10 +1,11 @@
----
-title: "为终端配置代理"
-date: 2020-04-03T22:34:17+08:00
-description: "为终端配置代理"
-tags: ["Proxy"]
-keywords: ["Proxy"]
----
++++
+date = '2020-04-03T22:34:17+08:00'
+description = '为终端配置代理'
+keywords = ['Proxy']
+tags = ['Proxy']
+title = '为终端配置代理'
+
++++
 
 ## Zshrc
 

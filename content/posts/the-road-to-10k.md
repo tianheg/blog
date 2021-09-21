@@ -1,7 +1,8 @@
 +++
-title = "The Road to 10K"
-date = "2021-05-03T07:34:49+08:00"
-tags = ["鼓舞"]
+date = '2021-05-03T07:34:49+08:00'
+tags = ['鼓舞']
+title = 'The Road to 10K'
+
 +++
 
 来源：<https://til.daryll.codes/journey/>

@@ -1,8 +1,9 @@
 +++
-title = "为网站开启 PWA"
-date = "2021-07-21T17:13:42+08:00"
-tags = ["PWA"]
-slug = "open-pwa-for-site"
+date = '2021-07-21T17:13:42+08:00'
+slug = 'open-pwa-for-site'
+tags = ['PWA']
+title = '为网站开启 PWA'
+
 +++
 
 开启 PWA 需要三个部分：一个 JS 文件，一个 HTML 文件，一个 manifest 文件。我的网站使用 Hugo 构建。

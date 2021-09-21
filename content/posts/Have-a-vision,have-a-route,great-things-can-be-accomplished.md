@@ -1,9 +1,10 @@
----
-title: 有愿景，有路线，大事可成
-date: 2020-02-05T14:54:56+08:00
-tags: ["随笔"]
-slug: have something accomplish thing
----
++++
+date = '2020-02-05T14:54:56+08:00'
+slug = 'have something accomplish thing'
+tags = ['随笔']
+title = '有愿景，有路线，大事可成'
+
++++
 
 ## 有愿景
 

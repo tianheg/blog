@@ -1,10 +1,11 @@
----
-title: "La La Land"
-date: 2021-04-29T20:05:37+08:00
-description: "一些观看《爱乐之城》的想法"
-tags: ["电影"]
-keywords: ["电影"]
----
++++
+date = '2021-04-29T20:05:37+08:00'
+description = '一些观看《爱乐之城》的想法'
+keywords = ['电影']
+tags = ['电影']
+title = 'La La Land'
+
++++
 
 爱乐之城
 

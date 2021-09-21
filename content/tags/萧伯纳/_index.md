@@ -1,3 +1,4 @@
 +++
-slug = "george-bernard-shaw"
+slug = 'george-bernard-shaw'
+
 +++

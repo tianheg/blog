@@ -1,10 +1,11 @@
----
-title: "音乐之声"
-date: 2021-01-15T20:19:42+08:00
-description: "看音乐之声"
-tags: ["电影"]
-keywords: ["电影"]
----
++++
+date = '2021-01-15T20:19:42+08:00'
+description = '看音乐之声'
+keywords = ['电影']
+tags = ['电影']
+title = '音乐之声'
+
++++
 
 The Sound of Music (1965)
 

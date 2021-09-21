@@ -1,10 +1,11 @@
----
-title: "星际迷航系列"
-date: 2021-02-02T21:06:47+08:00
-description: "归类星际迷航"
-tags: ["电影"]
-keywords: ["电影"]
----
++++
+date = '2021-02-02T21:06:47+08:00'
+description = '归类星际迷航'
+keywords = ['电影']
+tags = ['电影']
+title = '星际迷航系列'
+
++++
 
 - Star Trek I: The Motion Picture 星际迷航 1：无限太空（1979）
 - Star Trek II: The Wrath of Khan 星际迷航 2：可汗之怒（1982）

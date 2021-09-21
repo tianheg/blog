@@ -1,8 +1,9 @@
 +++
-title = "为gatsby-theme-garden添加代码高亮"
-date = "2021-07-19T22:51:09+08:00"
-tags = ["Gatsby"]
-slug = "add-code-highlight-for-gatsby-theme-garden"
+date = '2021-07-19T22:51:09+08:00'
+slug = 'add-code-highlight-for-gatsby-theme-garden'
+tags = ['Gatsby']
+title = '为gatsby-theme-garden添加代码高亮'
+
 +++
 
 想为没有代码高亮的主题 `gatsby-theme-garden`，添加代码高亮。一开始采用 `gatsby-remark-prismjs`，却发现它的最新版本和 Gatsby v2 版本并不兼容，而把 Gatsby 迁移到 v3 版本代价很大，需要处理更多的兼容性问题。我开始在 Gatsby 官方仓库里找，终于我找到 `gatsby-plugin-theme-ui`。于是，在 `gatsby-config.js` 设置：

@@ -1,3 +1,4 @@
 +++
-slug = "writing-rules"
+slug = 'writing-rules'
+
 +++

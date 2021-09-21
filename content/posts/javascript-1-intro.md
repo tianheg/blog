@@ -1,10 +1,11 @@
----
-title: "学习 Javascript 1 - 介绍 JavaScript"
-date: 2021-01-26T16:35:10+08:00
-description: "学习 Javascript 1 - 介绍 JavaScript"
-tags: ["JavaScript"]
-keywords: ["JavaScript"]
----
++++
+date = '2021-01-26T16:35:10+08:00'
+description = '学习 Javascript 1 - 介绍 JavaScript'
+keywords = ['JavaScript']
+tags = ['JavaScript']
+title = '学习 Javascript 1 - 介绍 JavaScript'
+
++++
 
 ## 什么是 JavaScript
 

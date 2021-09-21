@@ -1,3 +1,4 @@
 +++
-slug = "sociology"
+slug = 'sociology'
+
 +++

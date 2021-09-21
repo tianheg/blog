@@ -1,10 +1,11 @@
----
-title: "Hugo 语法高亮"
-date: 2021-01-24T21:39:07+08:00
-description: "记录 Hugo 支持高亮的语言"
-tags: ["Hugo"]
-keywords: ["Hugo"]
----
++++
+date = '2021-01-24T21:39:07+08:00'
+description = '记录 Hugo 支持高亮的语言'
+keywords = ['Hugo']
+tags = ['Hugo']
+title = 'Hugo 语法高亮'
+
++++
 
 {{< chroma-lexers >}}
 

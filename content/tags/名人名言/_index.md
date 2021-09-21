@@ -1,3 +1,4 @@
 +++
-slug = "famous-quotes"
+slug = 'famous-quotes'
+
 +++

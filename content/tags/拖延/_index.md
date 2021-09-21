@@ -1,3 +1,4 @@
 +++
-slug = "delay"
+slug = 'delay'
+
 +++

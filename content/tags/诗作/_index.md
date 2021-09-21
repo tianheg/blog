@@ -1,3 +1,4 @@
 +++
-slug = "poetical-works"
+slug = 'poetical-works'
+
 +++

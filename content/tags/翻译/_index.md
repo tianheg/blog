@@ -1,3 +1,4 @@
 +++
-slug = "translate"
+slug = 'translate'
+
 +++

@@ -1,10 +1,11 @@
----
-title: "Lock, Stock and Two Smoking Barrels"
-date: 2020-11-23T20:19:42+08:00
-description: "看两杆大烟枪"
-tags: ["电影"]
-keywords: ["电影"]
----
++++
+date = '2020-11-23T20:19:42+08:00'
+description = '看两杆大烟枪'
+keywords = ['电影']
+tags = ['电影']
+title = 'Lock, Stock and Two Smoking Barrels'
+
++++
 
 Lock, Stock and Two Smoking Barrels(两杆大烟枪) - 1998 - 英国
 

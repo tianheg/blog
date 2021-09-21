@@ -1,3 +1,4 @@
 +++
-slug = "doubt"
+slug = 'doubt'
+
 +++

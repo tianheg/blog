@@ -1,3 +1,4 @@
 +++
-slug = "year-end-summary"
+slug = 'year-end-summary'
+
 +++

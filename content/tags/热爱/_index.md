@@ -1,3 +1,4 @@
 +++
-slug = "love"
+slug = 'love'
+
 +++

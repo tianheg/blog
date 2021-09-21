@@ -1,10 +1,11 @@
----
-title: "设计自己的标志"
-date: 2021-01-31T18:42:08+08:00
-description: "记录看《你迟早要设计自己的标志，不如早点看看 - oooooohmygosh》的笔记"
-tags: ["设计"]
-keywords: ["设计"]
----
++++
+date = '2021-01-31T18:42:08+08:00'
+description = '记录看《你迟早要设计自己的标志，不如早点看看 - oooooohmygosh》的笔记'
+keywords = ['设计']
+tags = ['设计']
+title = '设计自己的标志'
+
++++
 
 一个图形标志
 
