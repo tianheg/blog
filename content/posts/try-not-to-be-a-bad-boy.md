@@ -4,7 +4,6 @@ description = '讲述今天作弊这件事，还有有关锡兰的故事'
 keywords = ['随笔']
 tags = ['随笔']
 title = '我不是好孩子，但我尽量不做坏孩子'
-
 +++
 
 我既不是一个好孩子，我也不觉得自己是坏孩子，`I'm just a boy, that's all.`

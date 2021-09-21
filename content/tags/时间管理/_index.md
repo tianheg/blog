@@ -1,4 +1,3 @@
 +++
 slug = 'time-management'
-
 +++

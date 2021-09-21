@@ -4,7 +4,6 @@ description = 'Hugo 设置 shortcode'
 keywords = ['Hugo']
 tags = ['Hugo']
 title = 'Hugo 设置 shortcode'
-
 +++
 
 ## align

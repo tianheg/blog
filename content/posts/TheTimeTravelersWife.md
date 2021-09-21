@@ -3,7 +3,6 @@ date = '2021-08-14T15:02:13+08:00'
 slug = 'the-time-travelers-wife'
 tags = ['电影']
 title = "The Time Traveler's Wife"
-
 +++
 
 克莱尔是否真的意识到，结婚之后的生活就是丈夫随机穿越时空，克莱尔不知道他什么时候会消失不见。

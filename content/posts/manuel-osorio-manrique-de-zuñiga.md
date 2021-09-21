@@ -4,7 +4,6 @@ description = 'Manuel Osorio Manrique De Zuñiga'
 keywords = ['艺术']
 tags = ['艺术']
 title = 'Manuel Osorio Manrique De Zuñiga'
-
 +++
 
 ![Manuel Osorio Manrique De Zuñiga](/images/manuel-osorio-manrique-de-zuñiga.jpeg)

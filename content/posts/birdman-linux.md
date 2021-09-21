@@ -4,7 +4,6 @@ description = '读《鸟哥的 Linux 私房菜》记的笔记'
 keywords = ['阅读']
 tags = ['阅读']
 title = '鸟哥《鸟哥的 Linux 私房菜》'
-
 +++
 
 ## CPU 的种类

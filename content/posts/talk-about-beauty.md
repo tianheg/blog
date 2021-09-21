@@ -4,7 +4,6 @@ description = '阅读《谈美》的笔记和感受'
 keywords = ['阅读']
 tags = ['阅读']
 title = '朱光潜《谈美》'
-
 +++
 
 ## 提出问题

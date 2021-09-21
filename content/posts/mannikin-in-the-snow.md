@@ -4,7 +4,6 @@ description = '记录 Mannikin in the Snow'
 keywords = ['艺术']
 tags = ['艺术']
 title = 'Mannikin in the Snow'
-
 +++
 
 ![mannikin-in-the-snow.png](/images/arts/mannikin-in-the-snow.jpeg)

@@ -3,7 +3,6 @@ date = '2021-05-23T17:00:41+08:00'
 slug = 'how-i-am-so-productive'
 tags = ['效率']
 title = 'How I Am So Productive'
-
 +++
 
 source: <https://kentcdodds.com/blog/how-i-am-so-productive>

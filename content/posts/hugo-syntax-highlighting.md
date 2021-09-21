@@ -4,7 +4,6 @@ description = '记录 Hugo 支持高亮的语言'
 keywords = ['Hugo']
 tags = ['Hugo']
 title = 'Hugo 语法高亮'
-
 +++
 
 {{< chroma-lexers >}}

@@ -3,7 +3,6 @@ date = '2021-02-03T07:39:50+08:00'
 description = "我的编程经历——Randy's Blog"
 tags = ['鼓舞']
 title = "我的编程经历——Randy's Blog"
-
 +++
 
 「激励」的含义：别人的编程之路，对我有激励作用。

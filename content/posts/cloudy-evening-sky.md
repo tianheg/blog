@@ -4,7 +4,6 @@ description = '记录 Cloudy Evening Sky'
 keywords = ['艺术']
 tags = ['艺术']
 title = 'Cloudy Evening Sky'
-
 +++
 
 Author: Caspar David Friedrich

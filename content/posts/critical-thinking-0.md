@@ -4,7 +4,6 @@ description = '记录学习批判性思维的笔记'
 keywords = ['批判性思维']
 tags = ['批判性思维']
 title = '定义及价值'
-
 +++
 
 参考资料：[中国青年政治学院：批判性思维（谷振诣教授）](https://www.bilibili.com/video/BV1ex411Q7Li)

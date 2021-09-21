@@ -4,7 +4,6 @@ description = '《如何阅读一本书》读书笔记'
 keywords = ['阅读']
 tags = ['阅读']
 title = 'Mortimer Jerome Adler&Charles Van Doren《如何阅读一本书》'
-
 +++
 
 这本书属于「第 2 层书籍」。

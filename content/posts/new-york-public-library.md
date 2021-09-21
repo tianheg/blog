@@ -4,7 +4,6 @@ description = '记录 New York Public Library'
 keywords = ['艺术']
 tags = ['艺术']
 title = 'New York Public Library'
-
 +++
 
 ![New York Public Library](/images/arts/new-york-public-library.jpeg)

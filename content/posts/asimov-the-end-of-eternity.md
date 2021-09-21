@@ -4,7 +4,6 @@ description = '阅读《永恒的终结》'
 keywords = ['阅读']
 tags = ['阅读']
 title = 'Isaac Asimov《永恒的终结》'
-
 +++
 
 ## 摘录

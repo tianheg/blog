@@ -5,7 +5,6 @@ mathjax = false
 slug = 'learn-in-public'
 tags = ['学习', '认知']
 title = 'Learn in Public'
-
 +++
 
 source: <https://www.swyx.io/learn-in-public/>

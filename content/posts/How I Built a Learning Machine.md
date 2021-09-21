@@ -3,7 +3,6 @@ date = '2021-05-23T17:04:40+08:00'
 slug = 'how-i-built-a-learning-machine'
 tags = ['效率']
 title = 'How I Built a Learning Machine'
-
 +++
 
 source: <https://dev.to/jbranchaud/how-i-built-a-learning-machine-45k9>

@@ -3,7 +3,6 @@ date = '2020-10-21T20:19:42+08:00'
 keywords = ['电影']
 tags = ['电影']
 title = 'Equals'
-
 +++
 
 Equals(同等族群) - 2015 - 美国

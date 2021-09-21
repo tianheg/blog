@@ -3,7 +3,6 @@ date = '2021-08-17T20:12:50+08:00'
 slug = 'arch-linux-downgrade-linux-kernel-because-of-system-freeze'
 tags = ['Arch']
 title = 'Arch Linux 因卡顿回退 Linux 内核'
-
 +++
 
 在未回退以前使用 linux 5.13.10，目前回退到 5.13.9，暂时正常。

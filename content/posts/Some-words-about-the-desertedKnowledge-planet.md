@@ -3,7 +3,6 @@ date = '2020-01-31T23:15:39+08:00'
 slug = 'words about knowledge planet'
 tags = ['随笔']
 title = '知识星球逐渐冷清有感'
-
 +++
 
 写在 **知识星球** 社区—— **阿海的圈子**

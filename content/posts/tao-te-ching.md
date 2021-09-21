@@ -3,7 +3,6 @@ date = '2021-04-15T20:06:17+08:00'
 slug = 'tao-te-ching'
 tags = ['道德经']
 title = 'Tao Te Ching'
-
 +++
 
 (英文版道德经的一个小节)

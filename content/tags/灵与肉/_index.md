@@ -1,4 +1,3 @@
 +++
 slug = 'mind-and-body'
-
 +++

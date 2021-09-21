@@ -4,7 +4,6 @@ description = '看钢琴家'
 keywords = ['电影']
 tags = ['电影']
 title = '钢琴家'
-
 +++
 
 The Pianist(钢琴家) - 2002 - 法国 / 德国 / 英国 / 波兰

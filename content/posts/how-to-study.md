@@ -4,7 +4,6 @@ description = '如何学习'
 keywords = ['学习', '方法']
 tags = ['学习', 'How to']
 title = '如何学习'
-
 +++
 
 本文主要写如何学习。

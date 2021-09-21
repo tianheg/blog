@@ -4,7 +4,6 @@ description = '看《完美的世界》'
 keywords = ['电影']
 tags = ['电影']
 title = 'A Perfect World'
-
 +++
 
 A Perfect World(完美的世界) - 1993 - 美国

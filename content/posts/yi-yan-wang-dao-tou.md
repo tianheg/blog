@@ -4,7 +4,6 @@ description = '生活的意义在哪里'
 keywords = ['诗作']
 tags = ['诗作']
 title = '一眼望到头'
-
 +++
 
 ![一眼望到头](/images/poetry-yiyanwangdaotou.jpg)

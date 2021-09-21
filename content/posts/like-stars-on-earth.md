@@ -4,7 +4,6 @@ description = '看地球上的星星'
 keywords = ['电影']
 tags = ['电影']
 title = 'Taare Zameen Par'
-
 +++
 
 地球上的星星
