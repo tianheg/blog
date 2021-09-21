@@ -1,10 +1,11 @@
----
-title: "Hugo 置顶博客"
-date: 2021-02-21T16:01:05+08:00
-description: "Hugo 如何置顶文章"
-tags: ["Hugo"]
-keywords: ["Hugo"]
----
++++
+date = '2021-02-21T16:01:05+08:00'
+description = 'Hugo 如何置顶文章'
+keywords = ['Hugo']
+tags = ['Hugo']
+title = 'Hugo 置顶博客'
+
++++
 
 简单得令我怀疑，只需要在 `Front-matter` 内添加如下片段即可：
 

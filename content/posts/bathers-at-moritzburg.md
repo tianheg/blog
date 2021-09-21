@@ -1,10 +1,11 @@
----
-title: "Bathers at Moritzburg"
-date: 2021-01-22T09:31:34+08:00
-description: "记录 Bathers at Moritzburg"
-tags: ["艺术"]
-keywords: ["艺术"]
----
++++
+date = '2021-01-22T09:31:34+08:00'
+description = '记录 Bathers at Moritzburg'
+keywords = ['艺术']
+tags = ['艺术']
+title = 'Bathers at Moritzburg'
+
++++
 
 ![bathers-at-moritzburg.png](/images/bathers-at-moritzburg.jpeg)
 

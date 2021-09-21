@@ -1,3 +1,4 @@
 +++
-slug = "math"
+slug = 'math'
+
 +++

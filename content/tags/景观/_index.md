@@ -1,3 +1,4 @@
 +++
-slug = "scenery"
+slug = 'scenery'
+
 +++

@@ -1,10 +1,11 @@
----
-title: "Hugo 内链当前标签页打开，外链新标签页打开"
-date: 2021-02-16T21:45:07+08:00
-description: "记录<Hugo 内链当前标签页打开，外链新标签页打开>实现过程"
-tags: ["Hugo"]
-keywords: ["Hugo"]
----
++++
+date = '2021-02-16T21:45:07+08:00'
+description = '记录<Hugo 内链当前标签页打开，外链新标签页打开>实现过程'
+keywords = ['Hugo']
+tags = ['Hugo']
+title = 'Hugo 内链当前标签页打开，外链新标签页打开'
+
++++
 
 ## 例子
 

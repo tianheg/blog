@@ -1,3 +1,4 @@
 +++
-slug = "aesthetic"
+slug = 'aesthetic'
+
 +++

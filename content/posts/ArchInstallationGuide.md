@@ -1,8 +1,9 @@
 +++
-title = "Arch 安装指南"
-date = "2021-08-20T10:43:44+08:00"
-tags = ["Arch"]
-slug = "arch-installation-guide"
+date = '2021-08-20T10:43:44+08:00'
+slug = 'arch-installation-guide'
+tags = ['Arch']
+title = 'Arch 安装指南'
+
 +++
 
 安装过程整体顺利，没有无法解决的问题，主要参考资料：

@@ -1,10 +1,11 @@
----
-title: "真心半解"
-date: 2020-05-19T20:19:42+08:00
-description: "看真心半解"
-tags: ["电影"]
-keywords: ["电影"]
----
++++
+date = '2020-05-19T20:19:42+08:00'
+description = '看真心半解'
+keywords = ['电影']
+tags = ['电影']
+title = '真心半解'
+
++++
 
 The Half of It - 2020 - 美国
 

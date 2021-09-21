@@ -1,3 +1,4 @@
 +++
-slug = "design"
+slug = 'design'
+
 +++

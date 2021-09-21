@@ -1,10 +1,11 @@
----
-title: "Hugo 设置 shortcode"
-date: 2020-05-13T16:04:22+08:00
-description: "Hugo 设置 shortcode"
-tags: ["Hugo"]
-keywords: ["Hugo"]
----
++++
+date = '2020-05-13T16:04:22+08:00'
+description = 'Hugo 设置 shortcode'
+keywords = ['Hugo']
+tags = ['Hugo']
+title = 'Hugo 设置 shortcode'
+
++++
 
 ## align
 

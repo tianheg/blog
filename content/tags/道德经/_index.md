@@ -1,3 +1,4 @@
 +++
-slug = "tao-te-ching"
+slug = 'tao-te-ching'
+
 +++

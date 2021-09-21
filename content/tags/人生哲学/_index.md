@@ -1,3 +1,4 @@
 +++
-slug = "philosophy-of-life"
+slug = 'philosophy-of-life'
+
 +++

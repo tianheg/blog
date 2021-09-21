@@ -1,3 +1,4 @@
 +++
-slug = "food"
+slug = 'food'
+
 +++

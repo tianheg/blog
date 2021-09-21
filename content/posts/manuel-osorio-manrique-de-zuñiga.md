@@ -1,10 +1,11 @@
----
-title: "Manuel Osorio Manrique De Zuñiga"
-date: 2021-02-03T16:41:48+08:00
-description: "Manuel Osorio Manrique De Zuñiga"
-tags: ["艺术"]
-keywords: ["艺术"]
----
++++
+date = '2021-02-03T16:41:48+08:00'
+description = 'Manuel Osorio Manrique De Zuñiga'
+keywords = ['艺术']
+tags = ['艺术']
+title = 'Manuel Osorio Manrique De Zuñiga'
+
++++
 
 ![Manuel Osorio Manrique De Zuñiga](/images/manuel-osorio-manrique-de-zuñiga.jpeg)
 

@@ -1,10 +1,11 @@
 +++
-title = "Learn in Public"
-date = "2021-05-23T17:06:51+08:00"
-tags = ["学习", "认知"]
-slug = "learn-in-public"
+date = '2021-05-23T17:06:51+08:00'
 katex = false
 mathjax = false
+slug = 'learn-in-public'
+tags = ['学习', '认知']
+title = 'Learn in Public'
+
 +++
 
 source: <https://www.swyx.io/learn-in-public/>

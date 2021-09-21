@@ -1,10 +1,11 @@
----
-title: "Nietzsche《查拉图斯特拉如是说》"
-date: 2021-04-12T16:37:18+08:00
-description: "阅读《查拉图斯特拉如是说》"
-tags: ["阅读"]
-keywords: ["阅读"]
----
++++
+date = '2021-04-12T16:37:18+08:00'
+description = '阅读《查拉图斯特拉如是说》'
+keywords = ['阅读']
+tags = ['阅读']
+title = 'Nietzsche《查拉图斯特拉如是说》'
+
++++
 
 ## 第 1 章 序言
 

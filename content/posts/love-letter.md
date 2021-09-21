@@ -1,10 +1,11 @@
----
-title: "Love Letter"
-date: 2020-10-26T20:19:42+08:00
-description: "看情书"
-tags: ["电影"]
-keywords: ["电影"]
----
++++
+date = '2020-10-26T20:19:42+08:00'
+description = '看情书'
+keywords = ['电影']
+tags = ['电影']
+title = 'Love Letter'
+
++++
 
 Love Letter(情书) - 1995 - 日本
 

@@ -1,10 +1,11 @@
----
-title: "Stephen Covey《高效能人士的七个习惯》"
-date: 2021-02-03T17:18:23+08:00
-description: "高效能人士的七个习惯"
-tags: ["阅读"]
-keywords: ["阅读"]
----
++++
+date = '2021-02-03T17:18:23+08:00'
+description = '高效能人士的七个习惯'
+keywords = ['阅读']
+tags = ['阅读']
+title = 'Stephen Covey《高效能人士的七个习惯》'
+
++++
 
 七个习惯：
 

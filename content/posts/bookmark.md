@@ -1,10 +1,11 @@
----
-title: "一枚书签"
-date: 2021-04-08T17:49:41+08:00
-description: "一枚书签的故事"
-tags: ["随笔"]
-keywords: ["随笔"]
----
++++
+date = '2021-04-08T17:49:41+08:00'
+description = '一枚书签的故事'
+keywords = ['随笔']
+tags = ['随笔']
+title = '一枚书签'
+
++++
 
 ![bookmark](/images/bookmark.jpg)
 

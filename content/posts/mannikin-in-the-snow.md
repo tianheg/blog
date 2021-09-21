@@ -1,10 +1,11 @@
----
-title: "Mannikin in the Snow"
-date: 2021-01-22T09:31:34+08:00
-description: "记录 Mannikin in the Snow"
-tags: ["艺术"]
-keywords: ["艺术"]
----
++++
+date = '2021-01-22T09:31:34+08:00'
+description = '记录 Mannikin in the Snow'
+keywords = ['艺术']
+tags = ['艺术']
+title = 'Mannikin in the Snow'
+
++++
 
 ![mannikin-in-the-snow.png](/images/arts/mannikin-in-the-snow.jpeg)
 

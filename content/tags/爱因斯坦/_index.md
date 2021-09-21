@@ -1,3 +1,4 @@
 +++
-slug = "einstein"
+slug = 'einstein'
+
 +++

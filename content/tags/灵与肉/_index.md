@@ -1,3 +1,4 @@
 +++
-slug = "mind-and-body"
+slug = 'mind-and-body'
+
 +++

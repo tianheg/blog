@@ -1,3 +1,4 @@
 +++
-slug = "wealth"
+slug = 'wealth'
+
 +++

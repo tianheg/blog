@@ -1,8 +1,9 @@
 +++
-title = "Theranos 标志着硅谷泡沫的顶峰吗？"
-date = "2021-07-30T00:51:52+08:00"
-tags = ["阅读"]
-slug = "does-theranos-mark-the-peak-of-the-silicon-valley-bubble"
+date = '2021-07-30T00:51:52+08:00'
+slug = 'does-theranos-mark-the-peak-of-the-silicon-valley-bubble'
+tags = ['阅读']
+title = 'Theranos 标志着硅谷泡沫的顶峰吗？'
+
 +++
 Does Theranos Mark the Peak of the Silicon Valley Bubble?
 

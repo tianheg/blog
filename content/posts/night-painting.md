@@ -1,10 +1,11 @@
----
-title: "Night（夜）"
-date: 2021-02-03T17:04:37+08:00
-description: "夜——画作"
-tags: ["艺术"]
-keywords: ["艺术"]
----
++++
+date = '2021-02-03T17:04:37+08:00'
+description = '夜——画作'
+keywords = ['艺术']
+tags = ['艺术']
+title = 'Night（夜）'
+
++++
 
 阿尔希普·伊凡诺维奇·库茵芝
 

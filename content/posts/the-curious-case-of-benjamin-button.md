@@ -1,10 +1,11 @@
----
-title: "本杰明·巴顿奇事"
-date: 2021-03-28T16:41:39+08:00
-description: "观看《本杰明·巴顿奇事》"
-tags: ["电影"]
-keywords: ["电影"]
----
++++
+date = '2021-03-28T16:41:39+08:00'
+description = '观看《本杰明·巴顿奇事》'
+keywords = ['电影']
+tags = ['电影']
+title = '本杰明·巴顿奇事'
+
++++
 
 > You can be mad as a mad dog at the way things went.
 >

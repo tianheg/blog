@@ -1,10 +1,11 @@
----
-title: "重启"
-date: 2020-06-11T20:19:42+08:00
-description: "看重启"
-tags: ["电影"]
-keywords: ["电影"]
----
++++
+date = '2020-06-11T20:19:42+08:00'
+description = '看重启'
+keywords = ['电影']
+tags = ['电影']
+title = '重启'
+
++++
 
 Rebooted - 2019 - 澳大利亚
 

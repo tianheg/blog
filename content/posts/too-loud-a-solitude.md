@@ -1,10 +1,11 @@
----
-title: "Bohumil Hrabal《过于喧嚣的孤独》"
-date: 2019-12-01T18:12:31+08:00
-description: "过于喧嚣的孤独 读书笔记"
-tags: ["阅读"]
-keywords: ["阅读"]
----
++++
+date = '2019-12-01T18:12:31+08:00'
+description = '过于喧嚣的孤独 读书笔记'
+keywords = ['阅读']
+tags = ['阅读']
+title = 'Bohumil Hrabal《过于喧嚣的孤独》'
+
++++
 
 要认知自己，只有身处孤独之境，因为孤独是回归自我、否定权威、建立自主权的力量。
 

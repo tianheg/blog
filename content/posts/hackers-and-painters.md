@@ -1,10 +1,11 @@
----
-title: "Paul Graham《黑客与画家》"
-date: 2021-02-23T19:04:51+08:00
-description: "《黑客与画家》读书笔记"
-tags: ["阅读"]
-keywords: ["阅读"]
----
++++
+date = '2021-02-23T19:04:51+08:00'
+description = '《黑客与画家》读书笔记'
+keywords = ['阅读']
+tags = ['阅读']
+title = 'Paul Graham《黑客与画家》'
+
++++
 
 Hackers and Painters: Big Ideas from the Computer Age
 

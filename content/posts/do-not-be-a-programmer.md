@@ -1,7 +1,8 @@
 +++
+date = '2021-05-03T07:34:49+08:00'
+tags = ['鼓舞']
 title = "Don't Be A Programmer"
-date = "2021-05-03T07:34:49+08:00"
-tags = ["鼓舞"]
+
 +++
 
 I get a lot of questions about programming but I don't think they're the right questions to ask questions like:

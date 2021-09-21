@@ -1,8 +1,9 @@
 +++
+date = '2021-04-15T20:02:06+08:00'
+slug = 'programmers-manifesto'
+tags = ['编程']
 title = "Programmers' Manifesto(宣言)"
-date = "2021-04-15T20:02:06+08:00"
-tags = ["编程"]
-slug = "programmers-manifesto"
+
 +++
 
 1. Continually and actively improve ourselves as programmers

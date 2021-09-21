@@ -1,3 +1,4 @@
 +++
-slug = "checking-errors"
+slug = 'checking-errors'
+
 +++

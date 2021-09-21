@@ -1,8 +1,9 @@
 +++
-title = "Breathe"
-date = "2021-04-15T08:28:44+08:00"
-tags = ["诗作"]
-slug = "breathe"
+date = '2021-04-15T08:28:44+08:00'
+slug = 'breathe'
+tags = ['诗作']
+title = 'Breathe'
+
 +++
 
 By [Leo Babauta](http://leobabauta.com)

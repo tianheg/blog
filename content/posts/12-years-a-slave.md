@@ -1,10 +1,11 @@
----
-title: "12 Years a Slave"
-date: 2020-11-09T20:19:42+08:00
-description: "看《为奴十二年》"
-tags: ["电影"]
-keywords: ["电影"]
----
++++
+date = '2020-11-09T20:19:42+08:00'
+description = '看《为奴十二年》'
+keywords = ['电影']
+tags = ['电影']
+title = '12 Years a Slave'
+
++++
 
 12 Years a Slave(为奴十二年) - 2013 - 美国/英国
 

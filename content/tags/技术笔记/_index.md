@@ -1,3 +1,4 @@
----
-slug: "tech-notes"
----
++++
+slug = 'tech-notes'
+
++++

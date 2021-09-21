@@ -1,8 +1,9 @@
 +++
-title = "SICP1: Building Abstractions with Procedures"
-date = "2021-07-01T20:51:38+08:00"
-tags = ["计算机科学"]
-slug = "sicp-1"
+date = '2021-07-01T20:51:38+08:00'
+slug = 'sicp-1'
+tags = ['计算机科学']
+title = 'SICP1: Building Abstractions with Procedures'
+
 +++
 
 {{< quote >}}

@@ -1,9 +1,10 @@
----
-title: "stormzhang 的成长经历"
-date: 2021-02-12T21:08:38+08:00
-description: "stormzhang 的成长经历"
-tags: ["鼓舞"]
----
++++
+date = '2021-02-12T21:08:38+08:00'
+description = 'stormzhang 的成长经历'
+tags = ['鼓舞']
+title = 'stormzhang 的成长经历'
+
++++
 
 本文来自帅张在「生财有术」社群的分享。
 

@@ -1,9 +1,10 @@
----
-title: "En man som heter Ove"
-date: 2020-10-22T20:19:42+08:00
-tags: ["电影"]
-keywords: ["电影"]
----
++++
+date = '2020-10-22T20:19:42+08:00'
+keywords = ['电影']
+tags = ['电影']
+title = 'En man som heter Ove'
+
++++
 
 En man som heter Ove(一个叫欧维的男人决定去死) - 2015 - 瑞典
 

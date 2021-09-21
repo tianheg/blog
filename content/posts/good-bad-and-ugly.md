@@ -1,10 +1,11 @@
----
-title: "Il buono, il brutto, il cattivo."
-date: 2020-12-05T20:19:42+08:00
-description: "看黄金三镖客"
-tags: ["电影"]
-keywords: ["电影"]
----
++++
+date = '2020-12-05T20:19:42+08:00'
+description = '看黄金三镖客'
+keywords = ['电影']
+tags = ['电影']
+title = 'Il buono, il brutto, il cattivo.'
+
++++
 
 1966 - 黄金三镖客 Il buono, il brutto, il cattivo.
 
