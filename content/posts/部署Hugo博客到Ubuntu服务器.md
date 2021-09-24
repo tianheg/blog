@@ -65,6 +65,7 @@ http {
 ```sh
 #!/usr/bin/env bash
 
+cd ~/blog
 export BLOG_PATH=/home/ubuntu/blog/config.toml
 git restore $BLOG_PATH
 git pull
