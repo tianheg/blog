@@ -1,7 +1,6 @@
 +++
 description = '关于我'
-keywords = '关于我'
-title = '关于'
+keywords = '我'
 +++
 
 ## 关于我
