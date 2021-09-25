@@ -108,6 +108,9 @@ uglyURLs = false
         weight = 7
         identifier = "theme-switcher"
     [[menu.main]]
+        weight = 8
+        identifier = "lang-switcher"
+    [[menu.main]]
         url = "/about/"
         name = "关于"
         weight = 1
@@ -368,3 +371,59 @@ uglyURLs = false
     fofPoster = "./images/flying-clouds-720p.jpg"
     fofVideoWebm = "/videos/flying-clouds-720p.webm"
     fofVideoMp4 = "/videos/flying-clouds-720p.mp4"
+
+
+[languages.zh]
+    languageName = "🇨🇳"
+    contentDir = "content/zh"
+    weight = 1
+
+# 英文
+[languages.en]
+    languageName = "🇺🇸"
+    contentDir = "content/en"
+    weight = 2
+    languageCode = "en-US"
+    hasCJKLanguage = false
+    copyright = "[CC BY-NC-SA 4.0](https://creativecommons.org/licenses/by-nc-sa/4.0/deed.en)"
+[languages.en.permalinks]
+    tags = "/tags/:slug/"
+[languages.en.taxonomies]
+    tag = "tags"
+[languages.en.menu]
+    [[languages.en.menu.main]]
+        url = "/en/tags/"
+        name = "Tags"
+        weight = 1
+        pre = "internal"
+    [[languages.en.menu.main]]
+        url = "/en/posts/"
+        name = "Posts"
+        weight = 2
+        pre = "internal"
+    [[languages.en.menu.main]]
+        url = "/en/about/"
+        name = "about"
+        weight = 3
+        pre = "internal"
+    [[languages.en.menu.main]]
+        weight = 4
+        identifier = "theme-switcher"
+    [[languages.en.menu.main]]
+        weight = 5
+        identifier = "lang-switcher"
+
+[languages.en.params]
+    homePoetry = ["In the dark night", "Longing for a light of care", "In the daylight", "Desiring for the swallow of a black hole", "’Cause curiosity—seeks for what’s in the darkness"]
+    siteDescription = "Blog of reuixiy in English."
+    listDateFormat = "January 2"
+    fontFamilyTitle = "'Amstelvar', serif"
+    fontFamilyHeadings = "'Amstelvar', serif"
+    fontFamilyBody = "'Amstelvar', serif"
+    fontsLink = "https://fonts.googleapis.com/css2?family=Source+Code+Pro:ital,wght@0,400;0,700;1,400;1,700&display=swap"
+    lineHeight = 1.618
+    enableJustify = false
+    enableSmallCaps = true
+    enableEmphasisPoint = false
+    enableChinesePunctuationGlyphCorrection = false
+    customFooter = "[CC BY-NC-SA 4.0](https://creativecommons.org/licenses/by-nc-sa/4.0/deed.en)"
