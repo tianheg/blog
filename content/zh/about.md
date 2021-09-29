@@ -35,11 +35,10 @@ keywords = '我'
 
 - 直接浏览网站
 - [RSS](https://blog.yidajiabei.xyz/index.xml)
-- 公众号：一大加贝
 
 订阅前思考几个问题：
 
-1. 阅读我的生活技术博客，能带给你什么
+1. 阅读我的生活/技术博客，能带给你什么
 2. 如果让你用阅读我博客的时间做更多有意义的事情，你会因此更快乐吗？如果是那就做吧，如果否那就看我记录自己吧
 
 ## 友链
@@ -58,9 +57,10 @@ keywords = '我'
 - 首页的三个联系方式
 - [中文维基百科](https://zh.wikipedia.org/wiki/User:Tianheg)（[短链接](https://w.wiki/43iP)）
 
-## 留言板
+## 留言
 
-- [GitHub Discussion](https://github.com/tianheg/blog/discussions/177)
+- eMail: yidajiabei+at+gmail.com
+- [新建 GitHub issue](https://github.com/tianheg/blog/issues/new)
 
 ## 赞助
 
