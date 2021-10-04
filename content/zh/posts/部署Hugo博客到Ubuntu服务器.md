@@ -1,7 +1,7 @@
 +++
 date = '2021-09-21T22:20:34+08:00'
 title = '部署 Hugo 博客到 Ubuntu 服务器'
-tags = ['Hugo', 'Web Server']
+tags = ['Hugo', 'Web Server', 'Nginx']
 slug = 'deploy-hugo-blog-to-ubuntu-server'
 +++
 
