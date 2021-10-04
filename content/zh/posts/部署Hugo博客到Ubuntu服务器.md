@@ -73,9 +73,19 @@ sed -i 's/blog/weblog/g' $BLOG_PATH
 sudo hugo -d /var/www/hugo
 ```
 
----
+## 迁移博客到服务器
 
-ref:
+把以上过程中的域名换为 `blog.yidajiabei.xyz`。更新博客的脚本改为：
+
+```sh
+#!/usr/bin/env bash
+
+cd ~/blog
+git pull
+sudo hugo -d /var/www/hugo
+```
+
+## 参考资料
 
 1. <https://gideonwolfe.com/posts/sysadmin/hugonginx/>
 2. <http://www.withpy.com/hugo博客部署到腾讯云服务器/>
