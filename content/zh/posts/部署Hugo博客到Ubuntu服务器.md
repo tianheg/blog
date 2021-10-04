@@ -82,6 +82,7 @@ sudo hugo -d /var/www/hugo
 
 cd ~/blog
 git pull
+sudo rm -rf /var/www/hugo ~/blog/public # 如果内容被删除，则需要使用新的 hugo build 文档
 sudo hugo -d /var/www/hugo
 ```
 
