@@ -52,11 +52,6 @@ keywords = '我'
 
 ---
 
-## 网络足迹
-
-- 首页的三个联系方式
-- [中文维基百科](https://zh.wikipedia.org/wiki/User:Tianheg)（[短链接](https://w.wiki/43iP)）
-
 ## 留言
 
 - eMail: yidajiabei+at+gmail.com
