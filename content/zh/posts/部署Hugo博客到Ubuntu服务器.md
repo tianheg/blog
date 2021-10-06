@@ -86,6 +86,26 @@ sudo rm -rf /var/www/hugo ~/blog/public # 如果内容被删除，则需要使�
 sudo hugo -d /var/www/hugo
 ```
 
+遇到 Git 子模块无法更新的情况，于是还需要在以上脚本中添加以下命令：
+
+```sh
+rm -rf themes/tianheg
+git clone --depth 1 https://github.com/tianheg/hugo-theme-tianheg.git themes/tianheg
+```
+
+完整命令如下：
+
+```sh
+#!/usr/bin/env bash
+
+cd ~/blog
+rm -rf themes/tianheg
+git clone --depth 1 https://github.com/tianheg/hugo-theme-tianheg.git themes/tianheg
+git pull
+sudo rm -rf /var/www/hugo ~/blog/public # 如果内容被删除，则需要使用新的 hugo build 文档
+sudo hugo -d /var/www/hugo
+```
+
 ## 参考资料
 
 1. <https://gideonwolfe.com/posts/sysadmin/hugonginx/>
