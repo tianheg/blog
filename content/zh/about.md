@@ -59,4 +59,5 @@ keywords = '我'
 
 ## 赞助
 
-<center><iframe id="afdian_leaflet" src="https://afdian.net/leaflet?slug=tianheg" width="100%" scrolling="no" height="218" frameborder="0"></iframe></center><script>document.body.clientWidth< 700 ? document.getElementById("afdian_leaflet").width = "100%" : document.getElementById("afdian_leaflet").width = "640"</script>
+- [为❤️发电](https://afdian.net/@tianheg)
+- [请我吃饭😋](https://dun.mianbaoduo.com/@tianheg)
