@@ -110,7 +110,6 @@ sudo hugo -d /var/www/hugo
 
 参见[云服务器配置 Git 仓库托管并使用 Git Hooks 自动执行脚本](/posts/configure-git-with-server-and-use-git-hook/)
 
-
 ## 参考资料
 
 1. <https://gideonwolfe.com/posts/sysadmin/hugonginx/>
