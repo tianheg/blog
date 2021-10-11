@@ -1,7 +1,7 @@
 +++
 date = '2021-10-11T16:32:31+08:00'
 title = '云服务器配置 Git 仓库托管并使用 Git Hooks 自动执行脚本'
-tags = ['Web Server', 'Git']
+tags = ['Web Server', 'Git', 'Hugo']
 slug = 'configure-git-with-server-and-use-git-hook'
 +++
 
