@@ -144,7 +144,7 @@ sudo pacman -S fcitx5-im fcitx5-chinese-addons fcitx5-pinyin-zhwiki fcitx5-mater
 
 `Enter` 回车键异常：中文模式下，按 <kbd>；</kbd> 后再按 <kbd>Enter</kbd> 无法输入英文分号。可能不是问题，刚从 fcitx4 升级到 fcitx5。
 
-经过这些时间的磨合，发现：这的确是一个 bug。
+经过这些时间的磨合，发现：这的确是一个 bug。过段时间，我改变了想法，想到这可能是因为不同软件之间 `Enter` 键的作用不同造成的。
 
 ## 字体[^7]
 
