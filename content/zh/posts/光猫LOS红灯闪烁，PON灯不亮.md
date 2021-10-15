@@ -1,7 +1,7 @@
 +++
 date = '2020-05-20T09:12:46+08:00'
 slug = 'Light cat LOS red light flashes'
-tags = ['计算机网络']
+tags = ['Computer Network']
 title = '光猫 LOS 红灯闪烁，PON 灯不亮'
 +++
 

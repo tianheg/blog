@@ -1,7 +1,7 @@
 +++
 date = '2021-07-01T20:51:38+08:00'
 slug = 'sicp-1'
-tags = ['计算机科学']
+tags = ['Computer Science']
 title = 'SICP1: Building Abstractions with Procedures'
 +++
 

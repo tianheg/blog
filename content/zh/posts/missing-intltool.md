@@ -1,7 +1,7 @@
 +++
 date = '2021-06-12T10:13:20+08:00'
 slug = 'missing-intltool'
-tags = ['Geany', '源码编译', '排错']
+tags = ['Source Compilation']
 title = '安装 intltool'
 +++
 
