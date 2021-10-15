@@ -1,8 +1,6 @@
 +++
 date = '2021-01-12T08:42:45+08:00'
-description = '如何学习编程'
-keywords = ['编程', '方法', '态度']
-tags = ['How to', '编程']
+tags = ['Programming']
 title = '如何编程'
 +++
 

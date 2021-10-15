@@ -1,7 +1,7 @@
 +++
 date = '2021-07-31T11:51:41+08:00'
 slug = 'fix-dns-probe-finished-nxdomain'
-tags = ['计算机网络']
+tags = ['Computer Network']
 title = '解决 DNS_PROBE_FINISHED_NXDOMAIN'
 +++
 
