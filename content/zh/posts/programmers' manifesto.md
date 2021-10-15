@@ -1,7 +1,7 @@
 +++
 date = '2021-04-15T20:02:06+08:00'
 slug = 'programmers-manifesto'
-tags = ['编程']
+tags = ['Programming']
 title = "Programmers' Manifesto(宣言)"
 +++
 

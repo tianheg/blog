@@ -1,3 +1,0 @@
-+++
-slug = 'source-compilation'
-+++

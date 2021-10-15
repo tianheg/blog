@@ -1,7 +1,7 @@
 +++
 date = '2021-10-01T19:40:17+08:00'
 title = '上野宣《图解 HTTP》'
-tags = ['阅读']
+tags = ['阅读', 'Computer Network']
 slug = 'graphical-http'
 +++
 
