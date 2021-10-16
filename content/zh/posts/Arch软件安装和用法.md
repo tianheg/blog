@@ -493,6 +493,7 @@ yay -S rpi-imager
 | wireshark-qt | Network traffic and protocol analyzer/sniffer - Qt GUI |
 | newsboat | An RSS/Atom feed reader for text terminals |
 | [treesheets-bin](http://strlen.com/treesheets/) | TreeSheets free form data organizer [给你一张无限大可缩放的白纸, 你会在上面写什么?](https://hintsnet.com/pimgeek/2019/07/10/if-given-an-infinite-zoomable-paper-what-would-you-write/)|
+| python-pipenv | Sacred Marriage of Pipfile, Pip, & Virtualenv. |
 
 ### Fly.io
 
