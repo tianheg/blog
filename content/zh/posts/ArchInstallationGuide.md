@@ -46,6 +46,8 @@ Device      Start       End   Sectors  Size Type
 /dev/sdb2  526336 250069646 249543311  119G Linux filesystem
 ```
 
+关于是否分配 SWAP 分区的讨论：<https://bbs.archlinuxcn.org/viewtopic.php?id=10472>
+
 机械硬盘 sda 作为挂载硬盘存储文件。
 
 ### 硬盘格式化、新建文件系统
@@ -228,9 +230,73 @@ sudo grub-mkconfig -o /boot/grub/grub.cfg
 
 这一步要在知道自己显卡配置的前提下执行。
 
+#### VA-API or VDPAU
+
+```sh
+sudo pacman -S libva-utils vdpauinfo
+vainfo
+vdpauinfo
+```
+
+```text
+vainfo: VA-API version: 1.12 (libva 2.12.0) vainfo: Driver
+version: Intel iHD driver for Intel(R) Gen Graphics - 21.3.2 ()
+vainfo: Supported profile and entrypoints VAProfileNone :
+VAEntrypointVideoProc VAProfileNone : VAEntrypointStats
+VAProfileMPEG2Simple : VAEntrypointVLD VAProfileMPEG2Simple :
+VAEntrypointEncSlice VAProfileMPEG2Main : VAEntrypointVLD
+VAProfileMPEG2Main : VAEntrypointEncSlice VAProfileH264Main :
+VAEntrypointVLD VAProfileH264Main : VAEntrypointEncSlice
+VAProfileH264Main : VAEntrypointFEI VAProfileH264Main :
+VAEntrypointEncSliceLP VAProfileH264High : VAEntrypointVLD
+VAProfileH264High : VAEntrypointEncSlice VAProfileH264High :
+VAEntrypointFEI VAProfileH264High : VAEntrypointEncSliceLP
+VAProfileVC1Simple : VAEntrypointVLD VAProfileVC1Main :
+VAEntrypointVLD VAProfileVC1Advanced : VAEntrypointVLD
+VAProfileJPEGBaseline : VAEntrypointVLD VAProfileJPEGBaseline :
+VAEntrypointEncPicture VAProfileH264ConstrainedBaseline:
+VAEntrypointVLD VAProfileH264ConstrainedBaseline: VAEntrypointEncSlice
+VAProfileH264ConstrainedBaseline: VAEntrypointFEI
+VAProfileH264ConstrainedBaseline: VAEntrypointEncSliceLP
+VAProfileVP8Version0\_3 : VAEntrypointVLD VAProfileVP8Version0\_3 :
+VAEntrypointEncSlice VAProfileHEVCMain : VAEntrypointVLD
+VAProfileHEVCMain : VAEntrypointEncSlice VAProfileHEVCMain :
+VAEntrypointFEI VAProfileHEVCMain10 : VAEntrypointVLD
+VAProfileHEVCMain10 : VAEntrypointEncSlice VAProfileVP9Profile0 :
+VAEntrypointVLD VAProfileVP9Profile2 : VAEntrypointVLD
+
+display: :0 screen: 0 Failed to open VDPAU backend
+libvdpau\_va\_gl.so: cannot open shared object file: No such file or
+directory Error creating VDPAU device: 1
+```
+
+So mine is VA-API, I supposed to install [libva-mesa-driver](https://wiki.archlinux.org/title/Hardware_video_acceleration#:~:text=VA-API%20on%20Radeon%20HD%202000%20and%20newer%20GPUs).
+
+我的两种 GPU：
+
+00:02.0 VGA compatible controller: Intel Corporation UHD Graphics 620
+(rev 07) 01:00.0 Display controller: Advanced Micro Devices, Inc.
+[AMD/ATI] Topaz XT [Radeon R7 M260/M265 / M340/M360 / M440/M445 /
+530/535 / 620/625 Mobile] (rev c3)
+
+- Radeon R7 M260(Topaz) <https://en.wikipedia.org/wiki/List_of_AMD_graphics_processing_units#Radeon_R5/R7/R9_M200_series>
+
 ```sh
 sudo pacman -S xf86-video-intel intel-media-driver vulkan-intel xf86-video-amdgpu xf86-video-ati mesa-vdpau vulkan-radeon
 ```
+
+不推荐安装 `xf86-video-intel`，详见 [Intel graphics - ArchWiki](https://wiki.archlinux.org/title/Intel_graphics#:~:text=Often%20not%20recommended%2C%20see%20note%20below)
+
+CPU 的详细信息：<https://en.wikipedia.org/wiki/List_of_Intel_graphics_processing_units#:~:text=38.4-,Core%20i5-8250U,-Core%20i5-8350U>
+
+HDMI audio: <https://wiki.archlinux.org/title/ATI#:~:text=HDMI%20audio%20is%20supported>
+
+ref:
+
+1. <https://wiki.archlinux.org/title/Hardware_video_acceleration>
+2. <https://wiki.archlinux.org/title/Vulkan>
+3. <https://wiki.archlinux.org/title/Xorg#Driver_installation>
+4. <https://wiki.archlinux.org/title/Hardware_video_acceleration#:~:text=VDPAU%20on%20Radeon%20R300%20and%20newer%20GPUs>
 
 ### 安装图形界面
 
@@ -280,7 +346,7 @@ sudo vim /etc/fstab
 
 添加 noatime 和 diacard：
 
-```fstab
+```sh
 # <file system> <dir> <type> <options> <dump> <pass>
 # /dev/sdb2
 UUID=b182ad17-2f74-4bf0-95b6-a42884a4ff79 /          ext4       rw,noatime,discard 0 1
@@ -297,7 +363,7 @@ sudo vim /etc/default/grub
 
 找到 `GRUB_CMDLINE_LINUX_DEFAULT` 这一行，添加 `elevator=noop`:
 
-```grub
+```sh
 GRUB_CMDLINE_LINUX_DEFAULT="elevator=noop loglevel=3 quiet"
 ```
 
@@ -313,7 +379,7 @@ sudo vim /etc/fstab
 
 添加以下内容到最后：
 
-```fstab
+```sh
 tmpfs  /tmp    tmpfs   defaults,noatime,mode=1777 0 0
 tmpfs  /var/log    tmpfs   defaults,noatime,mode=1777 0 0
 tmpfs  /var/tmp    tmpfs   defaults,noatime,mode=1777 0 0
@@ -341,3 +407,7 @@ sudo dd if=/dev/zero of=/tmp/test.img bs=1G count=1 oflag=dsync
 ```
 
 至此系统完善到此告一段落。
+
+## 其他
+
+- [在阿里云服务器上安装 Arch Linux](https://nyac.at/4)
