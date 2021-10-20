@@ -218,6 +218,29 @@ gpg --import tianheg-pubkeys.txt
 gpg --import github-web-flow.txt
 ```
 
+## 键盘映射[^17]
+
+把上下左右建映射到字母键：
+
+```sh
+vim ~/ijkl
+xmodmap ~/ijkl
+```
+
+`ijkl`:
+
+```
+keycode 66 = Mode_switch
+keysym j = j J Left
+keysym l = l L Right
+keysym i = i I Up
+keysym k = k K Down
+```
+
+但是，在做完以上步骤后，我的 Left Ctrl -> CapsLock 的映射失效了，所以我需要修改文件内容。
+
+让一切恢复之前的状态的命令：`setxkbmap -layout us`。
+
 ## pacman
 
 Is it possible that there is a major kernel update in the repository, and that some of the driver packages have not been updated?
@@ -1032,3 +1055,4 @@ Creating user redis (Redis in-memory data structure store) with uid 973 and gid 
 [^14]: http://www.mutt.org/
 [^15]: https://apps.ankiweb.net/#download
 [^16]: https://blog.lilydjwg.me/2020/10/29/pacsync.215578.html
+[^17]: https://tonsky.me/blog/cursor-keys/
