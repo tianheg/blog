@@ -3,6 +3,7 @@ date = '2021-10-17T21:04:50+08:00'
 title = 'LC1. 两数之和'
 tags = ['LeetCode']
 slug = 'lc-1-two-sum'
+katex = true
 +++
 
 今天思考 LeetCode 题目：两数之和[^1]。
