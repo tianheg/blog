@@ -10,7 +10,7 @@ slug = 'install-letsencrypt-with-nginx-on-ubuntu20.04'
 1. 有一台已经初始安装的 Ubuntu20.04 服务器，包括一个能够 sudo 的非 root 的用户和防火墙
 2. 一个已注册的域名
 3. 域名已经和当前服务器 IP 绑定
-4. [Nginx 已经安装并能够正常使用](2021-09-19-Nginx初次使用.md)
+4. [Nginx 已经安装并能够正常使用](/posts/first-use-nginx/)
 
 ## 安装 Certbot
 
