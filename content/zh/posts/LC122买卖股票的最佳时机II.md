@@ -1,13 +1,11 @@
 +++
 date = '2021-10-22T21:47:47+08:00'
-title = 'LC122. 买卖股票的最佳时机||'
+title = 'LC122. 买卖股票的最佳时机II'
 tags = ['LeetCode']
 slug = 'lc-122-best-time-to-buy-and-sell-stock-ii'
 +++
 
-# LC122买卖股票的最佳时机||
-
-今天思考 LeetCode 题目：买卖股票的最佳时机||[^1]。
+今天思考 LeetCode 题目：买卖股票的最佳时机II[^1]。
 
 ## 题目描述
 
