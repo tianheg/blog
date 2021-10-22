@@ -1,7 +1,7 @@
 +++
 date = '2021-10-22T21:53:21+08:00'
-title = '在 Ubuntu20.04 配合 Nginx 使用 Let\'s Encrypt 证书'
-tags = ['Nginx', 'Ubuntu', 'Let\'s Encrypt']
+title = "在 Ubuntu20.04 配合 Nginx 使用 Let's Encrypt 证书"
+tags = ['Nginx', 'Ubuntu', "Let's Encrypt"]
 slug = 'install-letsencrypt-with-nginx-on-ubuntu20.04'
 +++
 
