@@ -939,7 +939,7 @@ lon=115.622324
 
 ```sh
 npm install -g tldr
-cd .nvm/versions/node/v14.18.1/lib/node_modules/tldr
+cd ~/.nvm/versions/node/v14.18.1/lib/node_modules/tldr
 mkdir -p $ZSH_CUSTOM/plugins/tldr
 cp bin/completion/zsh/_tldr $ZSH_CUSTOM/plugins/tldr/_tldr
 ```
