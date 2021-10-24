@@ -935,6 +935,17 @@ lon=115.622324
 1. <https://wiki.archlinux.org/title/redshift>
 2. <https://io-oi.me/tech/hello-arch-linux/#redshift>
 
+### tldr
+
+```sh
+npm install -g tldr
+cd .nvm/versions/node/v14.18.1/lib/node_modules/tldr
+mkdir -p $ZSH_CUSTOM/plugins/tldr
+ln -s bin/completion/zsh/_tldr $ZSH_CUSTOM/plugins/tldr/_tldr
+```
+
+在 `~/.zshrc` 的 plugins 中加入 tldr。
+
 ## 让 Arch Linux 系统和最新的镜像同步，从最快的镜像下载[^16]
 
 ```sh
