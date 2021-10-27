@@ -98,6 +98,8 @@ chmod +x blog.git/hooks/post-receive
 ```sh
 #!/bin/sh
 git --work-tree=/home/hugo --git-dir=/home/git/blog.git checkout -f
+cd /var/www/hugo
+rm -rf * # 删除文件夹下的所有文件以保持最新
 cd /home/hugo
 hugo --minify -d /var/www/hugo
 ```
