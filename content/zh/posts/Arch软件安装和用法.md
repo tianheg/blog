@@ -5,7 +5,6 @@ tags = ['Arch']
 title = 'Arch 软件安装和用法'
 toc = true
 +++
-# Arch 软件安装和用法
 
 ## 隐藏 GRUB 加载
 
