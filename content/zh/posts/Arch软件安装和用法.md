@@ -952,6 +952,7 @@ cp bin/completion/zsh/_tldr $ZSH_CUSTOM/plugins/tldr/_tldr
 
 ```sh
 sudo pacman -S tldr
+pip install shtab
 tldr --print-completion zsh | sudo tee /usr/local/share/zsh/site-functions/_tldr
 ```
 
