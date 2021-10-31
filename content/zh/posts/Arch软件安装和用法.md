@@ -5,6 +5,7 @@ tags = ['Arch']
 title = 'Arch 软件安装和用法'
 toc = true
 +++
+# Arch 软件安装和用法
 
 ## 隐藏 GRUB 加载
 
@@ -937,6 +938,8 @@ lon=115.622324
 
 ### tldr
 
+1. tldr-node-client
+
 ```sh
 npm install -g tldr
 cd ~/.nvm/versions/node/v14.18.1/lib/node_modules/tldr
@@ -945,6 +948,22 @@ cp bin/completion/zsh/_tldr $ZSH_CUSTOM/plugins/tldr/_tldr
 ```
 
 在 `~/.zshrc` 的 plugins 中加入 tldr。
+
+2. tldr-python-client
+
+```sh
+sudo pacman -S tldr
+tldr --print-completion zsh | sudo tee /usr/local/share/zsh/site-functions/_tldr
+```
+
+在 `~/.zshrc` 中加入以下内容：
+
+```sh
+export TLDR_CACHE_ENABLED=1
+export TLDR_CACHE_MAX_AGE=720
+export TLDR_PAGES_SOURCE_LOCATION="https://raw.githubusercontent.com/tldr-pages/tldr/master/pages"
+export TLDR_DOWNLOAD_CACHE_LOCATION="https://tldr-pages.github.io/assets/tldr.zip"
+```
 
 ## 让 Arch Linux 系统和最新的镜像同步，从最快的镜像下载[^16]
 
