@@ -25,7 +25,6 @@ apt install git
 adduser git # note difference with useradd
 passwd git # add password for git user
 sudo visudo
-
 ```
 
 修改 `/etc/sudoers`：
