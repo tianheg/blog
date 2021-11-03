@@ -26,9 +26,6 @@ nginx -V
 server {
     listen 443 ssl http2;
 }
-server {
-    listen 80 http2;
-}
 ```
 
 修改完成后，执行 `sudo systemctl restart nginx` 来重启 Nginx。
