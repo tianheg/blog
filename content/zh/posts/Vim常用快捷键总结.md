@@ -18,4 +18,5 @@ b | move backward one word
 G | move to the end of the file
 gg | move to the beginning of the file
 `. | move to the last edit
-
+v/V->Ctrl-q->d->p/P | Cut and paste
+v/V->Ctrl-q->y->p/P | Copy(yank) and paste
