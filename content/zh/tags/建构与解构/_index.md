@@ -1,3 +1,0 @@
-+++
-slug = 'construction-and-deconstruction'
-+++

@@ -1,3 +1,0 @@
-+++
-slug = 'mind-and-body'
-+++
