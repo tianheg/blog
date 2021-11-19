@@ -1,5 +1,9 @@
 # 博客改变记录
 
+## 2021-11-19
+
+- 使用 [Emacs Org-mode](https://github.com/dirtysalt/dirtysalt.github.io)
+
 ## 2021-09-23
 
 - 使用 [Tianheg](https://github.com/tianheg/hugo-theme-tianheg)
