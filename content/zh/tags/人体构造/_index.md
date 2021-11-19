@@ -1,3 +1,0 @@
-+++
-slug = 'human-body-structure'
-+++
