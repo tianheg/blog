@@ -5,8 +5,9 @@ emacs="emacs"
 git pull origin main
 
 # generate html files.
-
+rm ~/.org-timestamps/pages.cache
 $emacs --batch --script ./scripts/publish.el
+
 if [ $? != 0 ]
 then
     echo "publish failed!"
@@ -16,6 +17,7 @@ fi
 # post processing html files.
 python ./scripts/pp-html
 
-# git add .
-# git commit -a -m 'BUILD HTML'
-# git push origin main
+git add --all
+git commit -m 'BUILD HTML'
+git push ts main
+git push origin main
