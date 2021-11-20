@@ -1,0 +1,51 @@
+#!/usr/bin/env python
+# coding:utf-8
+# Copyright (C) dirlt
+
+import glob
+import re
+import os
+
+domain = 'www.yidajiabei.xyz'
+
+site = 'https://%s/' % (domain)
+
+HTML_DIR = "/home/archie/repo/blog/"
+ORG_DIR = "/home/archie/org/"
+html_files = glob.glob("/home/archie/repo/blog/**/**/*.html")
+org_files = glob.glob("/home/archie/org/**/**/*.org")
+print(html_files)
+
+
+# HEAD_BEGIN = """
+# """.replace('\n', '')
+
+# HEAD_BEGIN = ''
+
+# BODY_BEGIN = """
+# """.replace('\n', '')
+
+# BODY_END = """<div id="content">
+# """.replace('\n', '')
+
+# BODY_END = ''
+
+for f in html_files:
+    xs = open(f).readlines()
+    site_id = f[len(HTML_DIR):]
+    site_title = site_id
+
+
+with open('./sitemap.txt', 'w') as fh:
+    lines = [site + x[len(HTML_DIR):-4] + 'html\n' for x in html_files]
+    lines.sort()
+    fh.writelines(lines)
+
+with open('./sitemap.xml', 'w') as fh:
+    fh.write("""<?xml version="1.0" encoding="UTF-8"?>
+<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">""")
+    lines = ['<url><loc>{}</loc></url>\n'.format(
+        site + x[len(HTML_DIR):-4] + 'html') for x in html_files]
+    lines.sort()
+    fh.writelines(lines)
+    fh.write('</urlset>\n')
