@@ -24,21 +24,6 @@ html_files = glob.glob(HTML_DIR + "*.html") + \
     glob.glob(HTML_DIR + "wiki/**/*.html")
 
 org_files = glob.glob("/home/archie/org/**/**/*.org")
-print(html_files)
-
-
-# HEAD_BEGIN = """
-# """.replace('\n', '')
-
-# HEAD_BEGIN = ''
-
-# BODY_BEGIN = """
-# """.replace('\n', '')
-
-# BODY_END = """<div id="content">
-# """.replace('\n', '')
-
-# BODY_END = ''
 
 for f in html_files:
     xs = open(f).readlines()
