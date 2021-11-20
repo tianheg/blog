@@ -1,0 +1,346 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN"
+"http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en">
+<head>
+<!-- 2021-11-20 Sat 19:26 -->
+<meta http-equiv="Content-Type" content="text/html;charset=utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>&lrm;</title>
+<meta name="generator" content="Org mode" />
+<script type="text/javascript">
+// @license magnet:?xt=urn:btih:e95b018ef3580986a04669f1b5879592219e2a7a&dn=public-domain.txt Public Domain
+<!--/*--><![CDATA[/*><!--*/
+     function CodeHighlightOn(elem, id)
+     {
+       var target = document.getElementById(id);
+       if(null != target) {
+         elem.classList.add("code-highlighted");
+         target.classList.add("code-highlighted");
+       }
+     }
+     function CodeHighlightOff(elem, id)
+     {
+       var target = document.getElementById(id);
+       if(null != target) {
+         elem.classList.remove("code-highlighted");
+         target.classList.remove("code-highlighted");
+       }
+     }
+    /*]]>*///-->
+// @license-end
+</script>
+</head>
+<body>
+<div id="content">
+<div id="table-of-contents">
+<h2>Table of Contents</h2>
+<div id="text-table-of-contents">
+<ul>
+<li><a href="#安装">1. 安装</a></li>
+<li><a href="#使用">2. 使用</a>
+<ul>
+<li><a href="#给当前目录及子目录的所有文件添加目录">2.1. 给当前目录及子目录的所有文件添加目录</a></li>
+<li><a href="#轻松地更新已存在的由-doctoc-生成的目录">2.2. 轻松地更新已存在的由 DocToc 生成的目录</a></li>
+<li><a href="#给单个文件添加目录">2.3. 给单个文件添加目录</a>
+<ul>
+<li><a href="#例子">2.3.1. 例子</a></li>
+</ul>
+</li>
+<li><a href="#使用-doctoc-生成兼容其他网站的链接">2.4. 使用 DocToc 生成兼容其他网站的链接</a>
+<ul>
+<li><a href="#例子-1">2.4.1. 例子</a></li>
+</ul>
+</li>
+<li><a href="#指定目录位置">2.5. 指定目录位置</a></li>
+<li><a href="#指定自定义目录标题">2.6. 指定自定义目录标题</a></li>
+<li><a href="#指定目录的最大标题级别">2.7. 指定目录的最大标题级别</a></li>
+<li><a href="#打印到标准输出">2.8. 打印到标准输出</a></li>
+<li><a href="#作为一个-git-钩子使用">2.9. 作为一个 Git 钩子使用</a></li>
+</ul>
+</li>
+</ul>
+</div>
+</div>
+<p>
+<del>+</del> date = '2020-05-11T19:05:46+08:00' description = '记录使用 DocToc
+生成目录' keywords = ['工具'] tags = ['工具'] title = '使用 DocToc
+自动生成文档目录' <del>+</del>
+</p>
+
+<p>
+DocToc 为本地 git 存储库中的 markdown
+文件生成目录。生成的目录可以正常显示在包括 GitHub 在内的代码托管网站上。
+</p>
+
+<p>
+用 DocToc 生成的目录：
+</p>
+
+<ul class="org-ul">
+<li>安装</li>
+<li>使用
+
+<ul class="org-ul">
+<li>给当前目录及子目录的所有文件添加目录</li>
+<li>轻松地更新已存在的由 DocToc 生成的目录</li>
+<li>给单个文件添加目录
+
+<ul class="org-ul">
+<li>例子</li>
+</ul></li>
+
+<li>使用 DocToc 生成兼容其他网站的链接
+
+<ul class="org-ul">
+<li>例子</li>
+</ul></li>
+
+<li>指定目录的位置</li>
+<li>指定自定义目录标题</li>
+<li>指定目录的最大标题级别</li>
+<li>打印到标准输出</li>
+<li>作为一个 Git 钩子使用</li>
+</ul></li>
+</ul>
+
+<div id="outline-container-安装" class="outline-2">
+<h2 id="安装"><span class="section-number-2">1</span> 安装</h2>
+<div class="outline-text-2" id="text-安装">
+<div class="org-src-container">
+<pre class="src src-shell">npm install -g doctoc
+</pre>
+</div>
+</div>
+</div>
+
+<div id="outline-container-使用" class="outline-2">
+<h2 id="使用"><span class="section-number-2">2</span> 使用</h2>
+<div class="outline-text-2" id="text-使用">
+<p>
+在最简单的用法中，可以将一个或多个文件或文件夹传递给 <code>doctoc</code>
+命令。这将更新指定的每个文件以及通过递归搜索每个文件夹找到的每个标记文件的
+toc。下面是一些例子。
+</p>
+</div>
+
+<div id="outline-container-给当前目录及子目录的所有文件添加目录" class="outline-3">
+<h3 id="给当前目录及子目录的所有文件添加目录"><span class="section-number-3">2.1</span> 给当前目录及子目录的所有文件添加目录</h3>
+<div class="outline-text-3" id="text-给当前目录及子目录的所有文件添加目录">
+<p>
+在你本地的 Git 仓库目录下，打开终端，输入：
+</p>
+
+<div class="org-src-container">
+<pre class="src src-shell">doctoc .
+</pre>
+</div>
+
+<p>
+该命令会更新所有当前目录和子目录的 markdown
+文件，用一个内容表指向一个文件对应的各级 markdown 标题，该内容表由
+markdown 语法剖析程式生成。 DocToc 默认使用 GitHub 语法，但是可以指定其他模式。
+</p>
+</div>
+</div>
+
+<div id="outline-container-轻松地更新已存在的由-doctoc-生成的目录" class="outline-3">
+<h3 id="轻松地更新已存在的由-doctoc-生成的目录"><span class="section-number-3">2.2</span> 轻松地更新已存在的由 DocToc 生成的目录</h3>
+<div class="outline-text-3" id="text-轻松地更新已存在的由-doctoc-生成的目录">
+<p>
+如果你已经有了一个由 DocToc 生成的目录，那 <code>doctoc .</code>
+命令执行时，文档会自动更新，而不是插入一个复制版本。 DocToc
+把生成的目录放在 <code>&lt;!-- START doctoc --&gt;</code> 和 <code>&lt;!-- END doctoc --&gt;</code>
+之间，所以你也可以把它放在文档的任何位置，同样可以更新。
+</p>
+</div>
+</div>
+
+<div id="outline-container-给单个文件添加目录" class="outline-3">
+<h3 id="给单个文件添加目录"><span class="section-number-3">2.3</span> 给单个文件添加目录</h3>
+<div class="outline-text-3" id="text-给单个文件添加目录">
+<p>
+如果你只想转换一个文件，这样做：
+</p>
+
+<div class="org-src-container">
+<pre class="src src-shell">doctoc /path/to/file [...]
+</pre>
+</div>
+</div>
+
+<div id="outline-container-例子" class="outline-4">
+<h4 id="例子"><span class="section-number-4">2.3.1</span> 例子</h4>
+<div class="outline-text-4" id="text-例子">
+<div class="org-src-container">
+<pre class="src src-shell">doctoc README.md
+
+doctoc CONTRIBUTING.md LICENSE.md
+</pre>
+</div>
+
+<p>
+你可以通过该特征做更复杂的事情。例如，如果你安装了
+<a href="http://beyondgrep.com/">ack</a> ，你可以给具体的文件添加
+<code>&lt;!-- DOCTOC SKIP --&gt;</code> 然后使用
+</p>
+
+<div class="org-src-container">
+<pre class="src src-shell">ack -L <span style="font-style: italic;">'DOCTOC SKIP'</span> | xargs doctoc
+</pre>
+</div>
+
+<p>
+来仅仅重新编译哪些没有 "DCOTOC SKIP" 注解的文件。
+</p>
+</div>
+</div>
+</div>
+
+<div id="outline-container-使用-doctoc-生成兼容其他网站的链接" class="outline-3">
+<h3 id="使用-doctoc-生成兼容其他网站的链接"><span class="section-number-3">2.4</span> 使用 DocToc 生成兼容其他网站的链接</h3>
+<div class="outline-text-3" id="text-使用-doctoc-生成兼容其他网站的链接">
+<p>
+为了添加的内容表能够兼容其他站点，而添加适当的模式标识：
+</p>
+
+<p>
+可用的模式：
+</p>
+
+<div class="org-src-container">
+<pre class="src src-shell">--bitbucket bitbucket.org
+--nodejs    nodejs.org
+--github    github.com
+--gitlab    gitlab.com
+--ghost     ghost.org
+</pre>
+</div>
+</div>
+
+<div id="outline-container-例子-1" class="outline-4">
+<h4 id="例子-1"><span class="section-number-4">2.4.1</span> 例子</h4>
+<div class="outline-text-4" id="text-例子-1">
+<div class="org-src-container">
+<pre class="src src-shell">doctoc README.md --bitbucket
+</pre>
+</div>
+</div>
+</div>
+</div>
+
+<div id="outline-container-指定目录位置" class="outline-3">
+<h3 id="指定目录位置"><span class="section-number-3">2.5</span> 指定目录位置</h3>
+<div class="outline-text-3" id="text-指定目录位置">
+<p>
+DocToc 默认将目录放在文档的顶部，你可以通过以下格式，让 DocToc
+将生成的目录放在其他地方：
+</p>
+
+<div class="org-src-container">
+<pre class="src src-shell">&lt;!-- START doctoc --&gt;
+&lt;!-- END doctoc --&gt;
+</pre>
+</div>
+
+<p>
+你可以直接把这段代码放在你的 .md 文件中。例如：
+</p>
+
+<pre class="example" id="org3f6d1b7">
+// my_new_post.md
+Here we are, introducing the post. It's going to be great!
+But first: a TOC for easy reference.
+
+&lt;!-- START doctoc --&gt;
+&lt;!-- END doctoc --&gt;
+
+# Section One
+
+Here we'll discuss...
+</pre>
+
+<p>
+执行命令将会在该处插入目录。
+</p>
+</div>
+</div>
+
+<div id="outline-container-指定自定义目录标题" class="outline-3">
+<h3 id="指定自定义目录标题"><span class="section-number-3">2.6</span> 指定自定义目录标题</h3>
+<div class="outline-text-3" id="text-指定自定义目录标题">
+<p>
+使用 <code>--title</code> 选项可以指定 markdown
+格式的自定义目录标题。例子，=doctoc &#x2013;title '<b><b>Contents</b></b>'=。在这之后，你可以简单地执行
+=doctoc &lt;file&gt;=，DocToc 会保留你自定义的标题。
+</p>
+
+<p>
+或者使用 <code>--notitle</code>
+选项，用换行把标题空出来。这样会很方便地将该标题移出目录。
+</p>
+</div>
+</div>
+
+<div id="outline-container-指定目录的最大标题级别" class="outline-3">
+<h3 id="指定目录的最大标题级别"><span class="section-number-3">2.7</span> 指定目录的最大标题级别</h3>
+<div class="outline-text-3" id="text-指定目录的最大标题级别">
+<p>
+使用 <code>--maxlevel</code> 选项将 TOC
+条目限制为只包含指定级别的标题;例如，=doctoc——maxlevel 3=。
+</p>
+
+<p>
+默认情况下，对标记格式的标题没有限制，而来自嵌入式 HTML 的标题被限制在 4
+个级别。
+</p>
+</div>
+</div>
+
+<div id="outline-container-打印到标准输出" class="outline-3">
+<h3 id="打印到标准输出"><span class="section-number-3">2.8</span> 打印到标准输出</h3>
+<div class="outline-text-3" id="text-打印到标准输出">
+<p>
+可以使用 <code>-s</code> 或 <code>--stdout</code> 选项打印到 stdout 。
+</p>
+</div>
+</div>
+
+<div id="outline-container-作为一个-git-钩子使用" class="outline-3">
+<h3 id="作为一个-git-钩子使用"><span class="section-number-3">2.9</span> 作为一个 Git 钩子使用</h3>
+<div class="outline-text-3" id="text-作为一个-git-钩子使用">
+<p>
+通过使用以下配置，doctoc 可以用作 <a href="http://pre-commit.com/">预提交</a>
+钩子：
+</p>
+
+<pre class="example" id="org87df96d">
+repos:
+-   repo: https://github.com/thlorenz/doctoc
+    sha: ...  # substitute a tagged version 
+    hooks:
+    -   id: doctoc
+</pre>
+
+<p>
+这将在提交时对标记文件运行 =doctoc=，以确保 TOC 保持最新。
+</p>
+
+<hr />
+
+<p>
+*参考链接*：
+</p>
+
+<ol class="org-ol">
+<li><a href="https://www.npmjs.com/package/doctoc">https://www.npmjs.com/package/doctoc</a></li>
+</ol>
+</div>
+</div>
+</div>
+</div>
+<div id="postamble" class="status">
+<p class="postamble">First created:  <br />Last updated: 2021-11-20 Sat 17:55 <br />Power by <a href="https://www.gnu.org/software/emacs/">Emacs</a> 27.2 (<a href="https://orgmode.org">Org</a> mode 9.4.4)</p>
+</div>
+</body>
+</html>

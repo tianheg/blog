@@ -1,0 +1,488 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN"
+"http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" lang="zh" xml:lang="zh">
+<head>
+<!-- 2021-11-20 Sat 19:25 -->
+<meta http-equiv="Content-Type" content="text/html;charset=utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>2020-36</title>
+<meta name="generator" content="Org mode" />
+<meta name="description" content="Learn Technology, Love Life"
+ />
+<style type="text/css">
+ <!--/*--><![CDATA[/*><!--*/
+  .title  { text-align: center;
+             margin-bottom: .2em; }
+  .subtitle { text-align: center;
+              font-size: medium;
+              font-weight: bold;
+              margin-top:0; }
+  .todo   { font-family: monospace; color: red; }
+  .done   { font-family: monospace; color: green; }
+  .priority { font-family: monospace; color: orange; }
+  .tag    { background-color: #eee; font-family: monospace;
+            padding: 2px; font-size: 80%; font-weight: normal; }
+  .timestamp { color: #bebebe; }
+  .timestamp-kwd { color: #5f9ea0; }
+  .org-right  { margin-left: auto; margin-right: 0px;  text-align: right; }
+  .org-left   { margin-left: 0px;  margin-right: auto; text-align: left; }
+  .org-center { margin-left: auto; margin-right: auto; text-align: center; }
+  .underline { text-decoration: underline; }
+  #postamble p, #preamble p { font-size: 90%; margin: .2em; }
+  p.verse { margin-left: 3%; }
+  pre {
+    border: 1px solid #ccc;
+    box-shadow: 3px 3px 3px #eee;
+    padding: 8pt;
+    font-family: monospace;
+    overflow: auto;
+    margin: 1.2em;
+  }
+  pre.src {
+    position: relative;
+    overflow: auto;
+    padding-top: 1.2em;
+  }
+  pre.src:before {
+    display: none;
+    position: absolute;
+    background-color: white;
+    top: -10px;
+    right: 10px;
+    padding: 3px;
+    border: 1px solid black;
+  }
+  pre.src:hover:before { display: inline; margin-top: 14px;}
+  /* Languages per Org manual */
+  pre.src-asymptote:before { content: 'Asymptote'; }
+  pre.src-awk:before { content: 'Awk'; }
+  pre.src-C:before { content: 'C'; }
+  /* pre.src-C++ doesn't work in CSS */
+  pre.src-clojure:before { content: 'Clojure'; }
+  pre.src-css:before { content: 'CSS'; }
+  pre.src-D:before { content: 'D'; }
+  pre.src-ditaa:before { content: 'ditaa'; }
+  pre.src-dot:before { content: 'Graphviz'; }
+  pre.src-calc:before { content: 'Emacs Calc'; }
+  pre.src-emacs-lisp:before { content: 'Emacs Lisp'; }
+  pre.src-fortran:before { content: 'Fortran'; }
+  pre.src-gnuplot:before { content: 'gnuplot'; }
+  pre.src-haskell:before { content: 'Haskell'; }
+  pre.src-hledger:before { content: 'hledger'; }
+  pre.src-java:before { content: 'Java'; }
+  pre.src-js:before { content: 'Javascript'; }
+  pre.src-latex:before { content: 'LaTeX'; }
+  pre.src-ledger:before { content: 'Ledger'; }
+  pre.src-lisp:before { content: 'Lisp'; }
+  pre.src-lilypond:before { content: 'Lilypond'; }
+  pre.src-lua:before { content: 'Lua'; }
+  pre.src-matlab:before { content: 'MATLAB'; }
+  pre.src-mscgen:before { content: 'Mscgen'; }
+  pre.src-ocaml:before { content: 'Objective Caml'; }
+  pre.src-octave:before { content: 'Octave'; }
+  pre.src-org:before { content: 'Org mode'; }
+  pre.src-oz:before { content: 'OZ'; }
+  pre.src-plantuml:before { content: 'Plantuml'; }
+  pre.src-processing:before { content: 'Processing.js'; }
+  pre.src-python:before { content: 'Python'; }
+  pre.src-R:before { content: 'R'; }
+  pre.src-ruby:before { content: 'Ruby'; }
+  pre.src-sass:before { content: 'Sass'; }
+  pre.src-scheme:before { content: 'Scheme'; }
+  pre.src-screen:before { content: 'Gnu Screen'; }
+  pre.src-sed:before { content: 'Sed'; }
+  pre.src-sh:before { content: 'shell'; }
+  pre.src-sql:before { content: 'SQL'; }
+  pre.src-sqlite:before { content: 'SQLite'; }
+  /* additional languages in org.el's org-babel-load-languages alist */
+  pre.src-forth:before { content: 'Forth'; }
+  pre.src-io:before { content: 'IO'; }
+  pre.src-J:before { content: 'J'; }
+  pre.src-makefile:before { content: 'Makefile'; }
+  pre.src-maxima:before { content: 'Maxima'; }
+  pre.src-perl:before { content: 'Perl'; }
+  pre.src-picolisp:before { content: 'Pico Lisp'; }
+  pre.src-scala:before { content: 'Scala'; }
+  pre.src-shell:before { content: 'Shell Script'; }
+  pre.src-ebnf2ps:before { content: 'ebfn2ps'; }
+  /* additional language identifiers per "defun org-babel-execute"
+       in ob-*.el */
+  pre.src-cpp:before  { content: 'C++'; }
+  pre.src-abc:before  { content: 'ABC'; }
+  pre.src-coq:before  { content: 'Coq'; }
+  pre.src-groovy:before  { content: 'Groovy'; }
+  /* additional language identifiers from org-babel-shell-names in
+     ob-shell.el: ob-shell is the only babel language using a lambda to put
+     the execution function name together. */
+  pre.src-bash:before  { content: 'bash'; }
+  pre.src-csh:before  { content: 'csh'; }
+  pre.src-ash:before  { content: 'ash'; }
+  pre.src-dash:before  { content: 'dash'; }
+  pre.src-ksh:before  { content: 'ksh'; }
+  pre.src-mksh:before  { content: 'mksh'; }
+  pre.src-posh:before  { content: 'posh'; }
+  /* Additional Emacs modes also supported by the LaTeX listings package */
+  pre.src-ada:before { content: 'Ada'; }
+  pre.src-asm:before { content: 'Assembler'; }
+  pre.src-caml:before { content: 'Caml'; }
+  pre.src-delphi:before { content: 'Delphi'; }
+  pre.src-html:before { content: 'HTML'; }
+  pre.src-idl:before { content: 'IDL'; }
+  pre.src-mercury:before { content: 'Mercury'; }
+  pre.src-metapost:before { content: 'MetaPost'; }
+  pre.src-modula-2:before { content: 'Modula-2'; }
+  pre.src-pascal:before { content: 'Pascal'; }
+  pre.src-ps:before { content: 'PostScript'; }
+  pre.src-prolog:before { content: 'Prolog'; }
+  pre.src-simula:before { content: 'Simula'; }
+  pre.src-tcl:before { content: 'tcl'; }
+  pre.src-tex:before { content: 'TeX'; }
+  pre.src-plain-tex:before { content: 'Plain TeX'; }
+  pre.src-verilog:before { content: 'Verilog'; }
+  pre.src-vhdl:before { content: 'VHDL'; }
+  pre.src-xml:before { content: 'XML'; }
+  pre.src-nxml:before { content: 'XML'; }
+  /* add a generic configuration mode; LaTeX export needs an additional
+     (add-to-list 'org-latex-listings-langs '(conf " ")) in .emacs */
+  pre.src-conf:before { content: 'Configuration File'; }
+
+  table { border-collapse:collapse; }
+  caption.t-above { caption-side: top; }
+  caption.t-bottom { caption-side: bottom; }
+  td, th { vertical-align:top;  }
+  th.org-right  { text-align: center;  }
+  th.org-left   { text-align: center;   }
+  th.org-center { text-align: center; }
+  td.org-right  { text-align: right;  }
+  td.org-left   { text-align: left;   }
+  td.org-center { text-align: center; }
+  dt { font-weight: bold; }
+  .footpara { display: inline; }
+  .footdef  { margin-bottom: 1em; }
+  .figure { padding: 1em; }
+  .figure p { text-align: center; }
+  .equation-container {
+    display: table;
+    text-align: center;
+    width: 100%;
+  }
+  .equation {
+    vertical-align: middle;
+  }
+  .equation-label {
+    display: table-cell;
+    text-align: right;
+    vertical-align: middle;
+  }
+  .inlinetask {
+    padding: 10px;
+    border: 2px solid gray;
+    margin: 10px;
+    background: #ffffcc;
+  }
+  #org-div-home-and-up
+   { text-align: right; font-size: 70%; white-space: nowrap; }
+  textarea { overflow-x: auto; }
+  .linenr { font-size: smaller }
+  .code-highlighted { background-color: #ffff00; }
+  .org-info-js_info-navigation { border-style: none; }
+  #org-info-js_console-label
+    { font-size: 10px; font-weight: bold; white-space: nowrap; }
+  .org-info-js_search-highlight
+    { background-color: #ffff00; color: #000000; font-weight: bold; }
+  .org-svg { width: 90%; }
+  /*]]>*/-->
+</style>
+<link rel="stylesheet" type="text/css" href="/theme/site.css"/>
+<link rel="stylesheet" type="text/css" href="/theme/org.css"/>
+<script type="text/javascript">
+// @license magnet:?xt=urn:btih:e95b018ef3580986a04669f1b5879592219e2a7a&dn=public-domain.txt Public Domain
+<!--/*--><![CDATA[/*><!--*/
+     function CodeHighlightOn(elem, id)
+     {
+       var target = document.getElementById(id);
+       if(null != target) {
+         elem.classList.add("code-highlighted");
+         target.classList.add("code-highlighted");
+       }
+     }
+     function CodeHighlightOff(elem, id)
+     {
+       var target = document.getElementById(id);
+       if(null != target) {
+         elem.classList.remove("code-highlighted");
+         target.classList.remove("code-highlighted");
+       }
+     }
+    /*]]>*///-->
+// @license-end
+</script>
+</head>
+<body>
+<div id="content">
+<h1 class="title">2020-36</h1>
+<div id="table-of-contents">
+<h2>Table of Contents</h2>
+<div id="text-table-of-contents">
+<ul>
+<li><a href="#定义">1. 定义</a>
+<ul>
+<li><a href="#批判">1.1. 批判</a></li>
+<li><a href="#反省思维也称为复盘式思维">1.2. 反省思维（也称为复盘式思维）</a></li>
+</ul>
+</li>
+<li><a href="#批判精神与理性美德">2. 批判精神与理性美德</a>
+<ul>
+<li><a href="#批判精神">2.1. 批判精神</a></li>
+<li><a href="#理性美德">2.2. 理性美德</a></li>
+</ul>
+</li>
+</ul>
+</div>
+</div>
+<p>
+8.31-9.6
+</p>
+
+<p>
+这是 2020 年第 36 周总结。
+</p>
+
+<p>
+可以被记录下来的事项：
+</p>
+
+<ol class="org-ol">
+<li>开始学习 "批判性思维"；</li>
+<li>开始规范化使用 GitHub 的 issues
+功能进行灵感随想记录，这是写作博客的前奏，参考：<a href="https://github.com/reuixiy/io-oi.me/issues/10">reuixiy/io-oi.me/issues/#10</a>；</li>
+<li>开启【三日工作计划】，【每日读书计划】；</li>
+<li>我给笔记本买了个显示器做扩展屏，但我原意想给树莓派用，不过由于目前不会开始树莓派的学习开发，就暂时“借”给笔记本用了；</li>
+</ol>
+
+<p>
+目前脑子里，本周值得记录的事情就这么多。
+</p>
+
+<p>
+下面主要谈谈 "批判性思维"：
+</p>
+
+<p>
+在此之前，我打出几句话：
+</p>
+
+<blockquote>
+<p>
+大学是职业学习者练习基本功的地方。比如语言基本功，思维基本功，做人的基本功，以及你所学专业的基本功。基本功练得有多扎实，将来自己发展的潜力就有多大。-&#x2013;&#x2014;谷振诣
+</p>
+</blockquote>
+
+<p>
+当我听到这句话时，心里某处模糊的地方瞬间清晰明了，写下来与你共勉。
+</p>
+
+<p>
+我已经学习了两部分 "批判性思维" 的相关内容：定义和批判精神与理性美德。
+</p>
+
+<div id="outline-container-定义" class="outline-2">
+<h2 id="定义"><span class="section-number-2">1</span> 定义</h2>
+<div class="outline-text-2" id="text-定义">
+<blockquote>
+<p>
+批判性思维是面对相信什么或做什么的决断而进行的言之有据的反省思维。-&#x2013;&#x2014;Robert
+H. Ennis, 1992, Critical Thinking: What is It?
+</p>
+</blockquote>
+
+<p>
+那么，什么是批判？什么是反省思维？
+</p>
+</div>
+
+<div id="outline-container-批判" class="outline-3">
+<h3 id="批判"><span class="section-number-3">1.1</span> 批判</h3>
+<div class="outline-text-3" id="text-批判">
+<p>
+批判有两项基本原则：适用于对象的宽容原则，适用于标准的批评中立原则。前者是为了避免出现误解，在进行批判时要尽可能理解批判的对象。如若不然可能令人啼笑皆非。后者是在进行批判时采用一种公众认同的标准，比如，逻辑准则、科学准则、法律准则、道德准则等等。如果使用立场性标准进行批判，容易产生争议，陷入公说公有理、婆说婆有理的境地。
+</p>
+
+<p>
+批判的目标是得出好的判断。好的判断的价值毋庸置疑。法国的布鲁叶曾说：
+</p>
+
+<blockquote>
+<p>
+"世界上最稀有的东西，除了好的判断外，便是钻石和珠宝了。"
+</p>
+</blockquote>
+</div>
+</div>
+
+<div id="outline-container-反省思维也称为复盘式思维" class="outline-3">
+<h3 id="反省思维也称为复盘式思维"><span class="section-number-3">1.2</span> 反省思维（也称为复盘式思维）</h3>
+<div class="outline-text-3" id="text-反省思维也称为复盘式思维">
+<p>
+思维的几个层次：
+</p>
+
+<ol class="org-ol">
+<li><p>
+自然思维（如围棋-实战）
+</p>
+
+<p>
+自然的思考，洞察力和偏见，事实与错觉，真理与谬误&#x2026;&#x2026;混合在一起的思考活动。
+</p></li>
+
+<li><p>
+反省思维（如围棋-复盘，"复盘"一词即来源于此，这是我的判断）
+</p>
+
+<p>
+对第一层思考的分析、评估、审验等反思性思考活动，对自己的所知进行校正、净化、更新、完善&#x2026;&#x2026;
+</p></li>
+</ol>
+
+<p>
+在反思阶段，因为输赢已定，没有功利的影响。所以能够进行纯粹彻底的反省，思考自己的缺陷。
+</p>
+
+<hr />
+
+<blockquote>
+<p>
+人贵在有自知之明。
+</p>
+</blockquote>
+
+<p>
+这句话，在我来看，是说：人最宝贵的地方在于知道自己不知道什么。每个人看这句话的角度不同，就会有不同的见解。
+</p>
+
+<p>
+较为全面的理解：
+</p>
+
+<ol class="org-ol">
+<li>知道自己知道什么，知道自己不知道什么；</li>
+
+<li>知道自己所知中的缺陷。</li>
+</ol>
+</div>
+</div>
+</div>
+
+<div id="outline-container-批判精神与理性美德" class="outline-2">
+<h2 id="批判精神与理性美德"><span class="section-number-2">2</span> 批判精神与理性美德</h2>
+<div class="outline-text-2" id="text-批判精神与理性美德">
+</div>
+<div id="outline-container-批判精神" class="outline-3">
+<h3 id="批判精神"><span class="section-number-3">2.1</span> 批判精神</h3>
+<div class="outline-text-3" id="text-批判精神">
+<ul class="org-ul">
+<li>独立思考的精神</li>
+<li>反思质疑的精神</li>
+<li>开放兼容的精神</li>
+</ul>
+
+<p>
+*独立思考*的实质不在于你提出什么样的观点，而在于你提出观点的过程是不是经过了严肃的探究和缜密的思考。是否充分发挥了理性的自主。
+</p>
+
+<p>
+*反思质疑*是掌握批判性思维的基本要求。【与它相反的做法是什么，迷信专家意见、轻信名人言论、盲目追捧流行思潮，墨守成规或者跟着感觉走，轻率武断等等，这些都是缺乏反思质疑精神的表现】
+</p>
+
+<p>
+反思需要以换位思考得到的看法为镜子，审查出自己所知中的缺陷。想完成*换位思考*就意味着，你要对社会上的各种角色有深入的理解。换位思考越逼真越好，所以在进行换位思考时要把自己所有的东西都放掉，包括我是个男的【笑~】等等。
+</p>
+
+<p>
+*开放*精神就是勇于突破自我中心的局限，破除斯格托玛【"斯格托玛"意为由于集中关注自我的认知而形成的盲点，希腊文原意指黑暗，失去部分视野、盲点】的精神。亨特教授提出
+"三的原则"：
+</p>
+
+<blockquote>
+<p>
+对问题至少要从三种角度去思考，提出三种方案来决定行动，考察三种反驳你的观点，寻找三个例子来解释一个概念，等等。-&#x2013;&#x2014;Hunter,
+David A.2009. A Prantical Guide to Critical Thinking: What to Do and
+Believe.
+</p>
+</blockquote>
+
+<p>
+因为我们天然有自我中心的倾向，所以我们要人为努力地去遵循这三的规则，去拓展视野，使你的盲点尽量少，我们不能做到绝对完美。
+</p>
+
+<p>
+*兼容*优于宽容。宽容是一元价值观下的宽宏大量，宽容是有限度的【凡讲宽容的人，都是有底线的。讲宽容需要忍，他希望你在核心价值观那待着。一旦突破那个底线，绝不宽容】；兼容是多元价值观之下的海纳百川，没有限度【它承认各种观点，像大自然对待万物一样，它自身的那个价值不是以某一种核心价值观（如孟子只以自己儒家仁爱的思想为唯一的真理，凡是和它不符合的统统都不对）】。
+</p>
+
+<p>
+*开放兼容*的精神是精通批判性思维的最高精神境界。
+</p>
+</div>
+</div>
+
+<div id="outline-container-理性美德" class="outline-3">
+<h3 id="理性美德"><span class="section-number-3">2.2</span> 理性美德</h3>
+<div class="outline-text-3" id="text-理性美德">
+<p>
+人脑的三种功能：
+</p>
+
+<p>
+（1）欲望【支配行为的第一动力】：理想、目标、愿望、动机、目的、价值等等。【欲望得到满足人就快乐，得不到满足人就痛苦。欲望决定了你是否在思考、决定了你的情感状态。】
+</p>
+
+<p>
+（2）情感【往往起到两方面的作用，一方面有它有利的一面，有激情，它就像一个发动机一样，推动着理性去、坚持不懈地去发挥它的聪明才智；它也有坏的一面，情感经常情绪化或者说急于求成，这样它就会使思维陷入那种快速劣质的状态，反而坏事，所以它是个双刃剑】：快乐、痛苦、喜悦、烦恼、平静、浮躁等等。
+</p>
+
+<p>
+（3）理性：分析、比较、概括、判断、推理、论证等等。
+</p>
+
+<p>
+人的行为受三种要素支配，欲望是第一动力。
+</p>
+
+<p>
+假如人完全按理智行事，那人就成了机器人了；
+</p>
+
+<p>
+假如人完全按欲望行事，那人就成了野兽了；
+</p>
+
+<p>
+假如人完全按情感行事，那人就成了疯子了。
+</p>
+
+<p>
+遗憾的是人既不是机器人，也不是野兽，也不是疯子。欲望、理智、情感，这三种要素在每个人身上所发生的化学反应都不一样，它来推动人的行为。
+</p>
+
+<ul class="org-ul">
+<li>虚心的态度 + 开放兼容精神 =&gt; 理性的谦逊</li>
+<li>专心的态度 + 独立思考的精神 =&gt; 理性的执著</li>
+<li>平和的心态 + 反思质疑的精神 =&gt; 理性的公正</li>
+</ul>
+
+<hr />
+
+<p>
+总结完。
+</p>
+</div>
+</div>
+</div>
+</div>
+<div id="postamble" class="status">
+<p class="postamble">First created: 2020-09-06 Sun 07:34 <br />Last updated: 2021-11-20 Sat 17:43 <br />Power by <a href="https://www.gnu.org/software/emacs/">Emacs</a> 27.2 (<a href="https://orgmode.org">Org</a> mode 9.4.4)</p>
+</div>
+</body>
+</html>
