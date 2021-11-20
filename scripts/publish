@@ -1,12 +1,8 @@
 #!/bin/bash
 
-kernel="uname -s"
-emacs="emacs"
-git pull origin main
-
 # generate html files.
 rm ~/.org-timestamps/pages.cache
-$emacs --batch --script ./scripts/publish.el
+emacs --batch --script ./scripts/publish.el
 
 if [ $? != 0 ]
 then
