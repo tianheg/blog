@@ -3,6 +3,9 @@
 
 ;; https://orgmode.org/worg/org-tutorials/org-publish-html-tutorial.html
 (require 'ox-publish)
+(require 'org)
+(require 'ox-html)
+(require 'ox-rss)
 
 ;; https://bastibe.de/2014-05-07-speeding-up-org-publishing.html
 (remove-hook 'find-file-hooks 'vc-find-file-hook 'vc-refresh-state)
@@ -31,6 +34,8 @@
          ;; TODO(yan): seqeuncep my-org-publish-html-head failed?!
          ;; :html-head my-org-publish-html-head
          :html-head ""
+         :auto-sitemap t
+         :rss-extension "xml"
          :publishing-function org-html-publish-to-html
          :with-toc 't)
         ("site" :components ("pages"))))
