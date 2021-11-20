@@ -1,7 +1,7 @@
 #!/bin/bash
 
 # generate html files.
-rm ~/.org-timestamps/pages.cache
+# rm ~/.org-timestamps/pages.cache
 emacs --batch --script ./scripts/publish.el
 
 if [ $? != 0 ]
@@ -12,7 +12,7 @@ fi
 
 # post processing html files.
 python ./scripts/gen-sitemap
-
+rm */**/**/*.html
 git add --all
 git commit -m 'BUILD HTML'
 git push ts main

@@ -1,0 +1,142 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN"
+"http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en">
+<head>
+<!-- 2021-11-20 Sat 19:26 -->
+<meta http-equiv="Content-Type" content="text/html;charset=utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>&lrm;</title>
+<meta name="generator" content="Org mode" />
+<script type="text/javascript">
+// @license magnet:?xt=urn:btih:e95b018ef3580986a04669f1b5879592219e2a7a&dn=public-domain.txt Public Domain
+<!--/*--><![CDATA[/*><!--*/
+     function CodeHighlightOn(elem, id)
+     {
+       var target = document.getElementById(id);
+       if(null != target) {
+         elem.classList.add("code-highlighted");
+         target.classList.add("code-highlighted");
+       }
+     }
+     function CodeHighlightOff(elem, id)
+     {
+       var target = document.getElementById(id);
+       if(null != target) {
+         elem.classList.remove("code-highlighted");
+         target.classList.remove("code-highlighted");
+       }
+     }
+    /*]]>*///-->
+// @license-end
+</script>
+<script type="text/x-mathjax-config">
+    MathJax.Hub.Config({
+        displayAlign: "center",
+        displayIndent: "0em",
+
+        "HTML-CSS": { scale: 100,
+                        linebreaks: { automatic: "false" },
+                        webFont: "TeX"
+                       },
+        SVG: {scale: 100,
+              linebreaks: { automatic: "false" },
+              font: "TeX"},
+        NativeMML: {scale: 100},
+        TeX: { equationNumbers: {autoNumber: "AMS"},
+               MultLineWidth: "85%",
+               TagSide: "right",
+               TagIndent: ".8em"
+             }
+});
+</script>
+<script type="text/javascript"
+        src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.0/MathJax.js?config=TeX-AMS_HTML"></script>
+</head>
+<body>
+<div id="content">
+<div id="table-of-contents">
+<h2>Table of Contents</h2>
+<div id="text-table-of-contents">
+<ul>
+<li><a href="#题目描述">1. 题目描述</a></li>
+<li><a href="#题解2">2. 题解</a></li>
+</ul>
+</div>
+</div>
+<p>
+<del>+</del> date = '2021-10-23T21:51:30+08:00' title = 'LC189. 旋转数组' tags =
+['LeetCode'] slug = 'lc-189-rotate-array' <del>+</del>
+</p>
+
+<p>
+今天思考 LeetCode 题目：旋转数组<sup><a id="fnr.1" class="footref" href="#fn.1">1</a></sup>。
+</p>
+
+<div id="outline-container-题目描述" class="outline-2">
+<h2 id="题目描述"><span class="section-number-2">1</span> 题目描述</h2>
+<div class="outline-text-2" id="text-题目描述">
+<p>
+给定一个数组，将数组中的元素向右移动 <code>k</code> 个位置，其中 <code>k</code> 是非负数。
+</p>
+
+<p>
+进阶：
+</p>
+
+<ul class="org-ul">
+<li>尽可能想出更多的解决方案，至少有三种不同的方法可以解决这个问题。</li>
+<li>能使用空间复杂度为 \(O(1)\) 的原地算法解决这个问题吗？</li>
+</ul>
+</div>
+</div>
+
+<div id="outline-container-题解2" class="outline-2">
+<h2 id="题解2"><span class="section-number-2">2</span> 题解<sup><a id="fnr.2" class="footref" href="#fn.2">2</a></sup></h2>
+<div class="outline-text-2" id="text-题解2">
+<div class="org-src-container">
+<pre class="src src-js"><span style="font-style: italic;">/**</span>
+<span style="font-style: italic;"> * @param {number[]} nums</span>
+<span style="font-style: italic;"> * @param {number} k</span>
+<span style="font-style: italic;"> * @return {void} Do not return anything, modify nums in-place instead.</span>
+<span style="font-style: italic;"> */</span>
+<span style="font-weight: bold;">var</span> <span style="font-weight: bold; font-style: italic;">rotate</span> = <span style="font-weight: bold;">function</span>(<span style="font-weight: bold; font-style: italic;">nums</span>, <span style="font-weight: bold; font-style: italic;">k</span>) {
+    <span style="font-weight: bold;">const</span> <span style="font-weight: bold; font-style: italic;">n</span> = nums.length;
+    <span style="font-weight: bold;">const</span> <span style="font-weight: bold; font-style: italic;">newArr</span> = <span style="font-weight: bold;">new</span> <span style="font-weight: bold; text-decoration: underline;">Array</span>(n);
+    <span style="font-weight: bold;">for</span> (<span style="font-weight: bold;">let</span> <span style="font-weight: bold; font-style: italic;">i</span> = 0; i &lt; n; ++i) {
+        newArr[(i + k) % n] = nums[i];
+    }
+    <span style="font-weight: bold;">for</span> (<span style="font-weight: bold;">let</span> <span style="font-weight: bold; font-style: italic;">i</span> = 0; i &lt; n; ++i) {
+        nums[i] = newArr[i];
+    }
+};
+
+<span style="font-weight: bold; font-style: italic;">// </span><span style="font-weight: bold; font-style: italic;">console.log(rotate([1, 2, 3, 4, 5, 6, 7], 3));</span>
+</pre>
+</div>
+
+<p>
+不知道为什么，本地测试时显示 =undefined=。
+</p>
+</div>
+</div>
+<div id="footnotes">
+<h2 class="footnotes">Footnotes: </h2>
+<div id="text-footnotes">
+
+<div class="footdef"><sup><a id="fn.1" class="footnum" href="#fnr.1">1</a></sup> <div class="footpara"><p class="footpara">
+<a href="https://leetcode-cn.com/problems/rotate-array/">https://leetcode-cn.com/problems/rotate-array/</a>
+</p></div></div>
+
+<div class="footdef"><sup><a id="fn.2" class="footnum" href="#fnr.2">2</a></sup> <div class="footpara"><p class="footpara">
+<a href="https://leetcode-cn.com/problems/rotate-array/solution/xuan-zhuan-shu-zu-by-leetcode-solution-nipk/">https://leetcode-cn.com/problems/rotate-array/solution/xuan-zhuan-shu-zu-by-leetcode-solution-nipk/</a>
+</p></div></div>
+
+
+</div>
+</div></div>
+<div id="postamble" class="status">
+<p class="postamble">First created:  <br />Last updated: 2021-11-18 Thu 16:22 <br />Power by <a href="https://www.gnu.org/software/emacs/">Emacs</a> 27.2 (<a href="https://orgmode.org">Org</a> mode 9.4.4)</p>
+</div>
+</body>
+</html>
