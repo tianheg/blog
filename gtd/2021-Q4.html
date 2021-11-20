@@ -1,0 +1,645 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN"
+"http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" lang="zh" xml:lang="zh">
+<head>
+<!-- 2021-11-19 Fri 22:08 -->
+<meta http-equiv="Content-Type" content="text/html;charset=utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>2021 Q4</title>
+<meta name="generator" content="Org mode" />
+<meta name="description" content="Learn Technology, Love Life"
+ />
+<style type="text/css">
+ <!--/*--><![CDATA[/*><!--*/
+  .title  { text-align: center;
+             margin-bottom: .2em; }
+  .subtitle { text-align: center;
+              font-size: medium;
+              font-weight: bold;
+              margin-top:0; }
+  .todo   { font-family: monospace; color: red; }
+  .done   { font-family: monospace; color: green; }
+  .priority { font-family: monospace; color: orange; }
+  .tag    { background-color: #eee; font-family: monospace;
+            padding: 2px; font-size: 80%; font-weight: normal; }
+  .timestamp { color: #bebebe; }
+  .timestamp-kwd { color: #5f9ea0; }
+  .org-right  { margin-left: auto; margin-right: 0px;  text-align: right; }
+  .org-left   { margin-left: 0px;  margin-right: auto; text-align: left; }
+  .org-center { margin-left: auto; margin-right: auto; text-align: center; }
+  .underline { text-decoration: underline; }
+  #postamble p, #preamble p { font-size: 90%; margin: .2em; }
+  p.verse { margin-left: 3%; }
+  pre {
+    border: 1px solid #ccc;
+    box-shadow: 3px 3px 3px #eee;
+    padding: 8pt;
+    font-family: monospace;
+    overflow: auto;
+    margin: 1.2em;
+  }
+  pre.src {
+    position: relative;
+    overflow: auto;
+    padding-top: 1.2em;
+  }
+  pre.src:before {
+    display: none;
+    position: absolute;
+    background-color: white;
+    top: -10px;
+    right: 10px;
+    padding: 3px;
+    border: 1px solid black;
+  }
+  pre.src:hover:before { display: inline; margin-top: 14px;}
+  /* Languages per Org manual */
+  pre.src-asymptote:before { content: 'Asymptote'; }
+  pre.src-awk:before { content: 'Awk'; }
+  pre.src-C:before { content: 'C'; }
+  /* pre.src-C++ doesn't work in CSS */
+  pre.src-clojure:before { content: 'Clojure'; }
+  pre.src-css:before { content: 'CSS'; }
+  pre.src-D:before { content: 'D'; }
+  pre.src-ditaa:before { content: 'ditaa'; }
+  pre.src-dot:before { content: 'Graphviz'; }
+  pre.src-calc:before { content: 'Emacs Calc'; }
+  pre.src-emacs-lisp:before { content: 'Emacs Lisp'; }
+  pre.src-fortran:before { content: 'Fortran'; }
+  pre.src-gnuplot:before { content: 'gnuplot'; }
+  pre.src-haskell:before { content: 'Haskell'; }
+  pre.src-hledger:before { content: 'hledger'; }
+  pre.src-java:before { content: 'Java'; }
+  pre.src-js:before { content: 'Javascript'; }
+  pre.src-latex:before { content: 'LaTeX'; }
+  pre.src-ledger:before { content: 'Ledger'; }
+  pre.src-lisp:before { content: 'Lisp'; }
+  pre.src-lilypond:before { content: 'Lilypond'; }
+  pre.src-lua:before { content: 'Lua'; }
+  pre.src-matlab:before { content: 'MATLAB'; }
+  pre.src-mscgen:before { content: 'Mscgen'; }
+  pre.src-ocaml:before { content: 'Objective Caml'; }
+  pre.src-octave:before { content: 'Octave'; }
+  pre.src-org:before { content: 'Org mode'; }
+  pre.src-oz:before { content: 'OZ'; }
+  pre.src-plantuml:before { content: 'Plantuml'; }
+  pre.src-processing:before { content: 'Processing.js'; }
+  pre.src-python:before { content: 'Python'; }
+  pre.src-R:before { content: 'R'; }
+  pre.src-ruby:before { content: 'Ruby'; }
+  pre.src-sass:before { content: 'Sass'; }
+  pre.src-scheme:before { content: 'Scheme'; }
+  pre.src-screen:before { content: 'Gnu Screen'; }
+  pre.src-sed:before { content: 'Sed'; }
+  pre.src-sh:before { content: 'shell'; }
+  pre.src-sql:before { content: 'SQL'; }
+  pre.src-sqlite:before { content: 'SQLite'; }
+  /* additional languages in org.el's org-babel-load-languages alist */
+  pre.src-forth:before { content: 'Forth'; }
+  pre.src-io:before { content: 'IO'; }
+  pre.src-J:before { content: 'J'; }
+  pre.src-makefile:before { content: 'Makefile'; }
+  pre.src-maxima:before { content: 'Maxima'; }
+  pre.src-perl:before { content: 'Perl'; }
+  pre.src-picolisp:before { content: 'Pico Lisp'; }
+  pre.src-scala:before { content: 'Scala'; }
+  pre.src-shell:before { content: 'Shell Script'; }
+  pre.src-ebnf2ps:before { content: 'ebfn2ps'; }
+  /* additional language identifiers per "defun org-babel-execute"
+       in ob-*.el */
+  pre.src-cpp:before  { content: 'C++'; }
+  pre.src-abc:before  { content: 'ABC'; }
+  pre.src-coq:before  { content: 'Coq'; }
+  pre.src-groovy:before  { content: 'Groovy'; }
+  /* additional language identifiers from org-babel-shell-names in
+     ob-shell.el: ob-shell is the only babel language using a lambda to put
+     the execution function name together. */
+  pre.src-bash:before  { content: 'bash'; }
+  pre.src-csh:before  { content: 'csh'; }
+  pre.src-ash:before  { content: 'ash'; }
+  pre.src-dash:before  { content: 'dash'; }
+  pre.src-ksh:before  { content: 'ksh'; }
+  pre.src-mksh:before  { content: 'mksh'; }
+  pre.src-posh:before  { content: 'posh'; }
+  /* Additional Emacs modes also supported by the LaTeX listings package */
+  pre.src-ada:before { content: 'Ada'; }
+  pre.src-asm:before { content: 'Assembler'; }
+  pre.src-caml:before { content: 'Caml'; }
+  pre.src-delphi:before { content: 'Delphi'; }
+  pre.src-html:before { content: 'HTML'; }
+  pre.src-idl:before { content: 'IDL'; }
+  pre.src-mercury:before { content: 'Mercury'; }
+  pre.src-metapost:before { content: 'MetaPost'; }
+  pre.src-modula-2:before { content: 'Modula-2'; }
+  pre.src-pascal:before { content: 'Pascal'; }
+  pre.src-ps:before { content: 'PostScript'; }
+  pre.src-prolog:before { content: 'Prolog'; }
+  pre.src-simula:before { content: 'Simula'; }
+  pre.src-tcl:before { content: 'tcl'; }
+  pre.src-tex:before { content: 'TeX'; }
+  pre.src-plain-tex:before { content: 'Plain TeX'; }
+  pre.src-verilog:before { content: 'Verilog'; }
+  pre.src-vhdl:before { content: 'VHDL'; }
+  pre.src-xml:before { content: 'XML'; }
+  pre.src-nxml:before { content: 'XML'; }
+  /* add a generic configuration mode; LaTeX export needs an additional
+     (add-to-list 'org-latex-listings-langs '(conf " ")) in .emacs */
+  pre.src-conf:before { content: 'Configuration File'; }
+
+  table { border-collapse:collapse; }
+  caption.t-above { caption-side: top; }
+  caption.t-bottom { caption-side: bottom; }
+  td, th { vertical-align:top;  }
+  th.org-right  { text-align: center;  }
+  th.org-left   { text-align: center;   }
+  th.org-center { text-align: center; }
+  td.org-right  { text-align: right;  }
+  td.org-left   { text-align: left;   }
+  td.org-center { text-align: center; }
+  dt { font-weight: bold; }
+  .footpara { display: inline; }
+  .footdef  { margin-bottom: 1em; }
+  .figure { padding: 1em; }
+  .figure p { text-align: center; }
+  .equation-container {
+    display: table;
+    text-align: center;
+    width: 100%;
+  }
+  .equation {
+    vertical-align: middle;
+  }
+  .equation-label {
+    display: table-cell;
+    text-align: right;
+    vertical-align: middle;
+  }
+  .inlinetask {
+    padding: 10px;
+    border: 2px solid gray;
+    margin: 10px;
+    background: #ffffcc;
+  }
+  #org-div-home-and-up
+   { text-align: right; font-size: 70%; white-space: nowrap; }
+  textarea { overflow-x: auto; }
+  .linenr { font-size: smaller }
+  .code-highlighted { background-color: #ffff00; }
+  .org-info-js_info-navigation { border-style: none; }
+  #org-info-js_console-label
+    { font-size: 10px; font-weight: bold; white-space: nowrap; }
+  .org-info-js_search-highlight
+    { background-color: #ffff00; color: #000000; font-weight: bold; }
+  .org-svg { width: 90%; }
+  /*]]>*/-->
+</style>
+<link rel="stylesheet" type="text/css" href="/theme/site.css"/>
+<link rel="stylesheet" type="text/css" href="/theme/org.css"/>
+<script type="text/javascript">
+// @license magnet:?xt=urn:btih:e95b018ef3580986a04669f1b5879592219e2a7a&dn=public-domain.txt Public Domain
+<!--/*--><![CDATA[/*><!--*/
+     function CodeHighlightOn(elem, id)
+     {
+       var target = document.getElementById(id);
+       if(null != target) {
+         elem.classList.add("code-highlighted");
+         target.classList.add("code-highlighted");
+       }
+     }
+     function CodeHighlightOff(elem, id)
+     {
+       var target = document.getElementById(id);
+       if(null != target) {
+         elem.classList.remove("code-highlighted");
+         target.classList.remove("code-highlighted");
+       }
+     }
+    /*]]>*///-->
+// @license-end
+</script>
+</head>
+<body>
+<div id="content">
+<h1 class="title">2021 Q4</h1>
+
+<div id="outline-container-org0c9abdd" class="outline-2">
+<h2 id="org0c9abdd">2021-10-29</h2>
+<div class="outline-text-2" id="text-org0c9abdd">
+</div>
+<div id="outline-container-orgd4674a4" class="outline-3">
+<h3 id="orgd4674a4"><span class="done DONE">DONE</span> 整理 reading-list 中的读书清单、电影音乐清单</h3>
+</div>
+<div id="outline-container-org9a3ac7b" class="outline-3">
+<h3 id="org9a3ac7b"><span class="todo TODO">TODO</span> Make notes with Introduction to the Focused and Diffuse Modes</h3>
+</div>
+</div>
+
+<div id="outline-container-org387c6e0" class="outline-2">
+<h2 id="org387c6e0">2021-10-30 <code>[0/6]</code></h2>
+<div class="outline-text-2" id="text-org387c6e0">
+</div>
+<div id="outline-container-org01c4292" class="outline-3">
+<h3 id="org01c4292"><span class="done DONE">DONE</span> Make notes with Introduction to the Focused and Diffuse Modes</h3>
+</div>
+<div id="outline-container-org0696ab4" class="outline-3">
+<h3 id="org0696ab4"><span class="done DONE">DONE</span> 整理 reading-list 中的读书清单、电影音乐清单</h3>
+</div>
+<div id="outline-container-orgb488f9a" class="outline-3">
+<h3 id="orgb488f9a"><span class="done CANCELLED">CANCELLED</span> 总结 3 个重要的 HTML 知识点</h3>
+</div>
+<div id="outline-container-orge8a165e" class="outline-3">
+<h3 id="orge8a165e"><span class="done CANCELLED">CANCELLED</span> 敲代码 exercise 3/83</h3>
+</div>
+<div id="outline-container-org1c62889" class="outline-3">
+<h3 id="org1c62889"><span class="done CANCELLED">CANCELLED</span> LC92. 反转链表II</h3>
+</div>
+<div id="outline-container-org4f47470" class="outline-3">
+<h3 id="org4f47470"><span class="done CANCELLED">CANCELLED</span> 如果时间充裕，整理TIL</h3>
+</div>
+</div>
+<div id="outline-container-orga0aa251" class="outline-2">
+<h2 id="orga0aa251">2021-10-31 <code>[1/5]</code></h2>
+<div class="outline-text-2" id="text-orga0aa251">
+</div>
+<div id="outline-container-org5781923" class="outline-3">
+<h3 id="org5781923"><span class="done DONE">DONE</span> 整理 reading-list 中的读书清单、电影音乐清单</h3>
+</div>
+<div id="outline-container-org2be5d41" class="outline-3">
+<h3 id="org2be5d41"><span class="done CANCELLED">CANCELLED</span> 总结 3 个重要的 HTML 知识点</h3>
+</div>
+<div id="outline-container-orgd267ae9" class="outline-3">
+<h3 id="orgd267ae9"><span class="done CANCELLED">CANCELLED</span> 敲代码 exercise 3/83</h3>
+</div>
+<div id="outline-container-org6a03af7" class="outline-3">
+<h3 id="org6a03af7"><span class="done CANCELLED">CANCELLED</span> LC92. 反转链表II</h3>
+</div>
+<div id="outline-container-orgaffe4bd" class="outline-3">
+<h3 id="orgaffe4bd"><span class="done CANCELLED">CANCELLED</span> 如果时间充裕，整理TIL</h3>
+</div>
+</div>
+<div id="outline-container-org4d55f70" class="outline-2">
+<h2 id="org4d55f70">2021-11-01 <code>[1/5]</code></h2>
+<div class="outline-text-2" id="text-org4d55f70">
+</div>
+<div id="outline-container-org28460d9" class="outline-3">
+<h3 id="org28460d9"><span class="done CANCELLED">CANCELLED</span> 练习 exercise 3/83</h3>
+</div>
+<div id="outline-container-org64d60ac" class="outline-3">
+<h3 id="org64d60ac"><span class="done CANCELLED">CANCELLED</span> LC.92 反转链表II</h3>
+</div>
+<div id="outline-container-org618677e" class="outline-3">
+<h3 id="org618677e"><span class="done CANCELLED">CANCELLED</span> 浏览《第一行代码》，对要做的事情有一个整体理解</h3>
+</div>
+<div id="outline-container-orgfa0443f" class="outline-3">
+<h3 id="orgfa0443f"><span class="done CANCELLED">CANCELLED</span> 修改简历</h3>
+</div>
+<div id="outline-container-org0d11347" class="outline-3">
+<h3 id="org0d11347"><span class="done DONE">DONE</span> 2021年10月下旬总结</h3>
+</div>
+</div>
+<div id="outline-container-org872f24b" class="outline-2">
+<h2 id="org872f24b">2021-11-02 <code>[3/3]</code></h2>
+<div class="outline-text-2" id="text-org872f24b">
+</div>
+<div id="outline-container-org8d9989e" class="outline-3">
+<h3 id="org8d9989e"><span class="done DONE">DONE</span> Notes with <i>Using the Focused &amp; Diffuse Modes</i></h3>
+</div>
+<div id="outline-container-org59e9f24" class="outline-3">
+<h3 id="org59e9f24"><span class="done DONE">DONE</span> 写 1 行代码（exercise）</h3>
+</div>
+<div id="outline-container-orgf5621c7" class="outline-3">
+<h3 id="orgf5621c7"><span class="done DONE">DONE</span> 阅读《第一行代码》目录，概括出一个大概</h3>
+</div>
+</div>
+<div id="outline-container-org313c14b" class="outline-2">
+<h2 id="org313c14b">2021-11-03 <code>[3/3]</code></h2>
+<div class="outline-text-2" id="text-org313c14b">
+</div>
+<div id="outline-container-org757aa1e" class="outline-3">
+<h3 id="org757aa1e"><span class="done DONE">DONE</span> 博客《Nginx 中在 80 端口添加 HTTP/2 出现问题》</h3>
+</div>
+<div id="outline-container-org807a01a" class="outline-3">
+<h3 id="org807a01a"><span class="done DONE">DONE</span> MDNFE/Web Standards</h3>
+</div>
+<div id="outline-container-org3ef928a" class="outline-3">
+<h3 id="org3ef928a"><span class="done DONE">DONE</span> 读《毛姆-读书随想录》164-181</h3>
+</div>
+</div>
+<div id="outline-container-org2909788" class="outline-2">
+<h2 id="org2909788">2021-11-04 <code>[1/3]</code></h2>
+<div class="outline-text-2" id="text-org2909788">
+</div>
+<div id="outline-container-org763d19d" class="outline-3">
+<h3 id="org763d19d"><span class="done DONE">DONE</span> 博客《人的本性即是变化》（思路来自毛姆的《总结》）</h3>
+</div>
+<div id="outline-container-orgf516f35" class="outline-3">
+<h3 id="orgf516f35"><span class="done CANCELLED">CANCELLED</span> MDNFE/Learning and getting help</h3>
+</div>
+<div id="outline-container-org8a4e31c" class="outline-3">
+<h3 id="org8a4e31c"><span class="done CANCELLED">CANCELLED</span> Read and make notes: <a href="https://sachachua.com/blog/2014/02/excuses-guide-blogging-pdf-epub-mobi-free-also-notes-publishing/">A No Excuses Guide to Blogging; also, notes on publishing</a></h3>
+</div>
+</div>
+<div id="outline-container-org7fc169b" class="outline-2">
+<h2 id="org7fc169b">2021-11-05 <code>[3/4]</code></h2>
+<div class="outline-text-2" id="text-org7fc169b">
+</div>
+<div id="outline-container-orgaa1ba3a" class="outline-3">
+<h3 id="orgaa1ba3a"><span class="done DONE">DONE</span> MDNFE/Learning and getting help,Introduction to HTML/1;2</h3>
+</div>
+<div id="outline-container-orgc6c8f6f" class="outline-3">
+<h3 id="orgc6c8f6f"><span class="done DONE">DONE</span> 修改博客《人的本性即是变化》</h3>
+</div>
+<div id="outline-container-org7889529" class="outline-3">
+<h3 id="org7889529"><span class="done DONE">DONE</span> Read and make notes: <a href="https://sachachua.com/blog/2014/02/excuses-guide-blogging-pdf-epub-mobi-free-also-notes-publishing/">A No Excuses Guide to Blogging; also, notes on publishing</a></h3>
+</div>
+<div id="outline-container-org579f292" class="outline-3">
+<h3 id="org579f292"><span class="done CANCELLED">CANCELLED</span> Notes with <i>What is Learning?</i></h3>
+</div>
+</div>
+<div id="outline-container-org01fabad" class="outline-2">
+<h2 id="org01fabad">2021-11-06 <code>[3/5]</code></h2>
+<div class="outline-text-2" id="text-org01fabad">
+</div>
+<div id="outline-container-orgc6e901e" class="outline-3">
+<h3 id="orgc6e901e"><span class="done DONE">DONE</span> MDNFE/Introduction to HTML/*</h3>
+</div>
+<div id="outline-container-orgb3f1b9b" class="outline-3">
+<h3 id="orgb3f1b9b"><span class="done DONE">DONE</span> Read and make notes: Sacha Chua/sketchnoting</h3>
+</div>
+<div id="outline-container-org3d0f36f" class="outline-3">
+<h3 id="org3d0f36f"><span class="done CANCELLED">CANCELLED</span> Notes with <i>What is Learning?</i></h3>
+</div>
+<div id="outline-container-orga6822d2" class="outline-3">
+<h3 id="orga6822d2"><span class="done DONE">DONE</span> 把 Learn 迁移到服务器上</h3>
+</div>
+<div id="outline-container-org8a4ff75" class="outline-3">
+<h3 id="org8a4ff75"><span class="done CANCELLED">CANCELLED</span> 修改 feed 网页的默认模板</h3>
+</div>
+</div>
+<div id="outline-container-orgb1b7c81" class="outline-2">
+<h2 id="orgb1b7c81">2021-11-07 <code>[2/4]</code></h2>
+<div class="outline-text-2" id="text-orgb1b7c81">
+</div>
+<div id="outline-container-org667a2f1" class="outline-3">
+<h3 id="org667a2f1"><span class="done CANCELLED">CANCELLED</span> MDNFE/Multimedia and embedding/*</h3>
+</div>
+<div id="outline-container-orgc792fb5" class="outline-3">
+<h3 id="orgc792fb5"><span class="done CANCELLED">CANCELLED</span> Notes with <i>What is Learning?</i></h3>
+</div>
+<div id="outline-container-org942ad24" class="outline-3">
+<h3 id="org942ad24"><span class="done DONE">DONE</span> 修改 feed 网页的默认模板 <a href="https://tianheg.github.io/feed/">https://tianheg.github.io/feed/</a></h3>
+</div>
+<div id="outline-container-orge89f446" class="outline-3">
+<h3 id="orge89f446"><span class="done DONE">DONE</span> 做了小程序实验</h3>
+</div>
+</div>
+<div id="outline-container-orgf2380cf" class="outline-2">
+<h2 id="orgf2380cf">2021-11-08 <code>[1/2]</code></h2>
+<div class="outline-text-2" id="text-orgf2380cf">
+</div>
+<div id="outline-container-org841c24a" class="outline-3">
+<h3 id="org841c24a"><span class="done DONE">DONE</span> MDNFE/Multimedia and embedding/*</h3>
+</div>
+<div id="outline-container-org6040cd6" class="outline-3">
+<h3 id="org6040cd6"><span class="done CANCELLED">CANCELLED</span> Notes with <i>What is Learning?</i></h3>
+</div>
+</div>
+<div id="outline-container-org920db5a" class="outline-2">
+<h2 id="org920db5a">2021-11-09 <code>[3/5]</code></h2>
+<div class="outline-text-2" id="text-org920db5a">
+</div>
+<div id="outline-container-org319d16b" class="outline-3">
+<h3 id="org319d16b"><span class="done DONE">DONE</span> 发布：JS 字符串 <code>includes()</code></h3>
+</div>
+<div id="outline-container-org47402d5" class="outline-3">
+<h3 id="org47402d5"><span class="done DONE">DONE</span> MDNFE/HTML Tables/*;发布练习任务文章</h3>
+</div>
+<div id="outline-container-orge86cc9e" class="outline-3">
+<h3 id="orge86cc9e"><span class="done CANCELLED">CANCELLED</span> Review first MDNFE module: Complete assessments</h3>
+</div>
+<div id="outline-container-orgc83615c" class="outline-3">
+<h3 id="orgc83615c"><span class="done CANCELLED">CANCELLED</span> 如果前面两个完成，再完成 MDNFE/CSS first steps/*</h3>
+</div>
+<div id="outline-container-org50b5ffc" class="outline-3">
+<h3 id="org50b5ffc"><span class="done DONE">DONE</span> Notes with <i>What is Learning?</i></h3>
+</div>
+</div>
+<div id="outline-container-org121a8d6" class="outline-2">
+<h2 id="org121a8d6">2021-11-10 <code>[/5]</code></h2>
+<div class="outline-text-2" id="text-org121a8d6">
+</div>
+<div id="outline-container-org01ad1cf" class="outline-3">
+<h3 id="org01ad1cf"><span class="done CANCELLED">CANCELLED</span> Review first MDNFE module: Complete assessments</h3>
+</div>
+<div id="outline-container-orgf7eb518" class="outline-3">
+<h3 id="orgf7eb518"><span class="done CANCELLED">CANCELLED</span> 归档TIL仓库，将其中的内容变为博客</h3>
+</div>
+<div id="outline-container-orgcfff916" class="outline-3">
+<h3 id="orgcfff916"><span class="done CANCELLED">CANCELLED</span> LC刷题：整理一张表（LC Top100）；LC20有效的括号</h3>
+</div>
+<div id="outline-container-org32e2318" class="outline-3">
+<h3 id="org32e2318"><span class="done CANCELLED">CANCELLED</span> 关于算法：如果上一条完成，阅读《帅张星球算法项目手册》</h3>
+</div>
+<div id="outline-container-org8a75d62" class="outline-3">
+<h3 id="org8a75d62"><span class="done CANCELLED">CANCELLED</span> Notes with <i>A Procrastination Preview</i></h3>
+</div>
+</div>
+<div id="outline-container-orgdfb92d6" class="outline-2">
+<h2 id="orgdfb92d6">2021-11-11 <code>[3/11]</code></h2>
+<div class="outline-text-2" id="text-orgdfb92d6">
+</div>
+<div id="outline-container-org3887286" class="outline-3">
+<h3 id="org3887286"><span class="done DONE">DONE</span> 认真写作《如何从Git仓库中完全移除文件》</h3>
+</div>
+<div id="outline-container-org2fd23de" class="outline-3">
+<h3 id="org2fd23de"><span class="done CANCELLED">CANCELLED</span> Review first MDNFE module: Complete assessments</h3>
+<div class="outline-text-3" id="text-org2fd23de">
+<ul class="org-ul">
+<li>HTML Marking Up Letter 已写进博客</li>
+<li class="off"><code>[&#xa0;]</code> Structuring Page of Content</li>
+<li class="off"><code>[&#xa0;]</code> HTML Multimedia and Embedding Mozilla splash page</li>
+</ul>
+</div>
+</div>
+<div id="outline-container-org12ba14e" class="outline-3">
+<h3 id="org12ba14e"><span class="done CANCELLED">CANCELLED</span> 归档TIL仓库，将其中的内容变为博客</h3>
+<div class="outline-text-3" id="text-org12ba14e">
+<ul class="org-ul">
+<li class="off"><code>[&#xa0;]</code> 《如何写好 Git commit》</li>
+<li class="off"><code>[&#xa0;]</code> 《Git tag,branch,submodule 基本使用》</li>
+<li class="off"><code>[&#xa0;]</code> 《如何合并两个 Git 仓库》</li>
+<li class="off"><code>[&#xa0;]</code> 《如何在本地与上游仓库同步》</li>
+</ul>
+</div>
+</div>
+<div id="outline-container-org84f6ab5" class="outline-3">
+<h3 id="org84f6ab5"><span class="done DONE">DONE</span> LC刷题：整理一张表（LC Top100）</h3>
+</div>
+<div id="outline-container-orgb405d5d" class="outline-3">
+<h3 id="orgb405d5d"><span class="done CANCELLED">CANCELLED</span> 关于算法：如果上一条完成，阅读《帅张星球算法项目手册》</h3>
+</div>
+<div id="outline-container-org7c15105" class="outline-3">
+<h3 id="org7c15105"><span class="done CANCELLED">CANCELLED</span> Notes with <i>A Procrastination Preview</i></h3>
+</div>
+</div>
+<div id="outline-container-orgb32621c" class="outline-2">
+<h2 id="orgb32621c">2021-11-12 <code>[2/9]</code></h2>
+<div class="outline-text-2" id="text-orgb32621c">
+</div>
+<div id="outline-container-org21ecbae" class="outline-3">
+<h3 id="org21ecbae"><span class="done CANCELLED">CANCELLED</span> Review first MDNFE module: Complete assessments</h3>
+<div class="outline-text-3" id="text-org21ecbae">
+<ul class="org-ul">
+<li>Structuring Page of Content</li>
+<li class="off"><code>[&#xa0;]</code> HTML Multimedia and Embedding Mozilla splash page</li>
+</ul>
+</div>
+</div>
+<div id="outline-container-org86653b9" class="outline-3">
+<h3 id="org86653b9"><span class="done CANCELLED">CANCELLED</span> 归档TIL仓库，将其中的内容变为博客</h3>
+<div class="outline-text-3" id="text-org86653b9">
+<ul class="org-ul">
+<li class="off"><code>[&#xa0;]</code> 《如何写好 Git commit》</li>
+<li class="off"><code>[&#xa0;]</code> 《Git tag,branch,submodule 基本使用》</li>
+<li class="off"><code>[&#xa0;]</code> 《如何合并两个 Git 仓库》</li>
+<li class="off"><code>[&#xa0;]</code> 《如何在本地与上游仓库同步》</li>
+</ul>
+</div>
+</div>
+<div id="outline-container-orgf3c519a" class="outline-3">
+<h3 id="orgf3c519a"><span class="done DONE">DONE</span> LC刷题：LC20有效的括号</h3>
+</div>
+<div id="outline-container-org047a68a" class="outline-3">
+<h3 id="org047a68a"><span class="done CANCELLED">CANCELLED</span> 关于算法：如果上一条完成，阅读《帅张星球算法项目手册》</h3>
+</div>
+<div id="outline-container-orgfd1b514" class="outline-3">
+<h3 id="orgfd1b514"><span class="done CANCELLED">CANCELLED</span> Notes with <i>A Procrastination Preview</i></h3>
+</div>
+</div>
+<div id="outline-container-org530fee8" class="outline-2">
+<h2 id="org530fee8">2021-11-13 <code>[5/7]</code></h2>
+<div class="outline-text-2" id="text-org530fee8">
+</div>
+<div id="outline-container-org2e495bf" class="outline-3">
+<h3 id="org2e495bf"><span class="done DONE">DONE</span> Review first MDNFE module: Complete assessments</h3>
+<div class="outline-text-3" id="text-org2e495bf">
+<ul class="org-ul">
+<li>HTML Multimedia and Embedding Mozilla splash page</li>
+</ul>
+</div>
+</div>
+<div id="outline-container-org605e701" class="outline-3">
+<h3 id="org605e701"><span class="done CANCELLED">CANCELLED</span> 整理Wiki仓库，将其中的内容变为博客</h3>
+<div class="outline-text-3" id="text-org605e701">
+<ul class="org-ul">
+<li>《如何写好 Git commit》</li>
+<li>《Git tag,branch,submodule 基本使用》</li>
+<li class="off"><code>[&#xa0;]</code> 《如何合并两个 Git 仓库》</li>
+<li class="off"><code>[&#xa0;]</code> 《如何在本地与上游仓库同步》</li>
+</ul>
+</div>
+</div>
+<div id="outline-container-orgd00cc71" class="outline-3">
+<h3 id="orgd00cc71"><span class="done DONE">DONE</span> 关于算法：阅读《帅张星球算法项目手册》/递归思维训练</h3>
+</div>
+<div id="outline-container-org82de656" class="outline-3">
+<h3 id="org82de656"><span class="done DONE">DONE</span> Notes with <i>A Procrastination Preview</i></h3>
+</div>
+</div>
+<div id="outline-container-orgbd544ac" class="outline-2">
+<h2 id="orgbd544ac">2021-11-14 <code>[/10]</code></h2>
+<div class="outline-text-2" id="text-orgbd544ac">
+</div>
+<div id="outline-container-org1ba3b17" class="outline-3">
+<h3 id="org1ba3b17"><span class="done CANCELLED">CANCELLED</span> MDNFE/CSS first steps(选择之前HTML中的任务，将学到的CSS应用其中)</h3>
+</div>
+<div id="outline-container-orgf0313f1" class="outline-3">
+<h3 id="orgf0313f1"><span class="done CANCELLED">CANCELLED</span> 整理Wiki仓库，将其中的内容变为博客</h3>
+<div class="outline-text-3" id="text-orgf0313f1">
+<ul class="org-ul">
+<li class="off"><code>[&#xa0;]</code> 《如何合并两个 Git 仓库》</li>
+<li class="off"><code>[&#xa0;]</code> 《如何在本地与上游仓库同步》</li>
+</ul>
+</div>
+</div>
+<div id="outline-container-orgbda864d" class="outline-3">
+<h3 id="orgbda864d"><span class="done CANCELLED">CANCELLED</span> Notes with <i>Practice Makes Permanent</i></h3>
+</div>
+<div id="outline-container-org3971a73" class="outline-3">
+<h3 id="org3971a73"><span class="done CANCELLED">CANCELLED</span> 阅读《帅张星球算法项目手册》/动态规划训练</h3>
+</div>
+<div id="outline-container-org90551d9" class="outline-3">
+<h3 id="org90551d9"><span class="done CANCELLED">CANCELLED</span> Read <a href="https://www.lewissociety.org/innerring/">https://www.lewissociety.org/innerring/</a></h3>
+</div>
+<div id="outline-container-org1de5dff" class="outline-3">
+<h3 id="org1de5dff"><span class="done CANCELLED">CANCELLED</span> 找工作不能只以大公司作为好工作的唯一判断标准 <a href="https://articles.zsxq.com/id_q7s9qa5nf7mr.html">https://articles.zsxq.com/id_q7s9qa5nf7mr.html</a></h3>
+</div>
+<div id="outline-container-orgba5d8af" class="outline-3">
+<h3 id="orgba5d8af"><span class="done CANCELLED">CANCELLED</span> <a href="http://www.brainfacts.org/">http://www.brainfacts.org/</a></h3>
+</div>
+<div id="outline-container-org97960b2" class="outline-3">
+<h3 id="org97960b2"><span class="done CANCELLED">CANCELLED</span> <a href="https://i.linuxtoy.org/docs/guide/pr05.html">https://i.linuxtoy.org/docs/guide/pr05.html</a></h3>
+</div>
+<div id="outline-container-orgec107ad" class="outline-3">
+<h3 id="orgec107ad"><span class="done CANCELLED">CANCELLED</span> <a href="https://www.freecodecamp.org/news/the-c-beginners-handbook/#introduction-to-c">https://www.freecodecamp.org/news/the-c-beginners-handbook/#introduction-to-c</a></h3>
+</div>
+</div>
+<div id="outline-container-org88a8662" class="outline-2">
+<h2 id="org88a8662">2021-11-15 <code>[1/1]</code></h2>
+<div class="outline-text-2" id="text-org88a8662">
+</div>
+<div id="outline-container-org303e483" class="outline-3">
+<h3 id="org303e483"><span class="done DONE">DONE</span> 《2021年11月上旬总结》</h3>
+</div>
+</div>
+<div id="outline-container-org8957406" class="outline-2">
+<h2 id="org8957406">2021-11-16 <code>[1/1]</code></h2>
+<div class="outline-text-2" id="text-org8957406">
+</div>
+<div id="outline-container-orgf54c5cd" class="outline-3">
+<h3 id="orgf54c5cd"><span class="done DONE">DONE</span> 搭框架（Web）</h3>
+</div>
+</div>
+<div id="outline-container-orge2eb92e" class="outline-2">
+<h2 id="orge2eb92e">2021-11-17 <code>[1/1]</code></h2>
+<div class="outline-text-2" id="text-orge2eb92e">
+</div>
+<div id="outline-container-orgfb0510f" class="outline-3">
+<h3 id="orgfb0510f"><span class="done DONE">DONE</span> 搭框架（Web）</h3>
+</div>
+</div>
+<div id="outline-container-org6991f24" class="outline-2">
+<h2 id="org6991f24">2021-11-18 <code>[5/5]</code></h2>
+<div class="outline-text-2" id="text-org6991f24">
+</div>
+<div id="outline-container-org98e204b" class="outline-3">
+<h3 id="org98e204b"><span class="done DONE">DONE</span> 《由兼职时的错误引起的自我反思》</h3>
+</div>
+<div id="outline-container-orgf0c96e0" class="outline-3">
+<h3 id="orgf0c96e0"><span class="done DONE">DONE</span> <a href="https://t.zsxq.com/AUfmuN3">https://t.zsxq.com/AUfmuN3</a></h3>
+</div>
+<div id="outline-container-org16c6705" class="outline-3">
+<h3 id="org16c6705"><span class="done DONE">DONE</span> 诗作/麻辣拌</h3>
+</div>
+<div id="outline-container-orgbdedb90" class="outline-3">
+<h3 id="orgbdedb90"><span class="done DONE">DONE</span> Notes with <i>Practice Makes Permanent</i></h3>
+</div>
+<div id="outline-container-org27ca5a4" class="outline-3">
+<h3 id="org27ca5a4"><span class="done DONE">DONE</span> LC96不同的二叉搜索树</h3>
+</div>
+</div>
+<div id="outline-container-org564b30d" class="outline-2">
+<h2 id="org564b30d">2021-11-19</h2>
+<div class="outline-text-2" id="text-org564b30d">
+</div>
+<div id="outline-container-org7626237" class="outline-3">
+<h3 id="org7626237"><span class="done CANCELLED">CANCELLED</span> TODO org-blog</h3>
+</div>
+</div>
+</div>
+<div id="postamble" class="status">
+<p class="postamble">First created: 2021-11-19 Fri 21:21 <br />Last updated: 2021-11-19 Fri 21:32 <br />Power by <a href="https://www.gnu.org/software/emacs/">Emacs</a> 27.2 (<a href="https://orgmode.org">Org</a> mode 9.4.4)</p>
+</div>
+</body>
+</html>
