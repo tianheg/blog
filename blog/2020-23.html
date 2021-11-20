@@ -1,0 +1,319 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN"
+"http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" lang="zh" xml:lang="zh">
+<head>
+<!-- 2021-11-19 Fri 22:08 -->
+<meta http-equiv="Content-Type" content="text/html;charset=utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>2020-23</title>
+<meta name="generator" content="Org mode" />
+<meta name="description" content="Learn Technology, Love Life"
+ />
+<style type="text/css">
+ <!--/*--><![CDATA[/*><!--*/
+  .title  { text-align: center;
+             margin-bottom: .2em; }
+  .subtitle { text-align: center;
+              font-size: medium;
+              font-weight: bold;
+              margin-top:0; }
+  .todo   { font-family: monospace; color: red; }
+  .done   { font-family: monospace; color: green; }
+  .priority { font-family: monospace; color: orange; }
+  .tag    { background-color: #eee; font-family: monospace;
+            padding: 2px; font-size: 80%; font-weight: normal; }
+  .timestamp { color: #bebebe; }
+  .timestamp-kwd { color: #5f9ea0; }
+  .org-right  { margin-left: auto; margin-right: 0px;  text-align: right; }
+  .org-left   { margin-left: 0px;  margin-right: auto; text-align: left; }
+  .org-center { margin-left: auto; margin-right: auto; text-align: center; }
+  .underline { text-decoration: underline; }
+  #postamble p, #preamble p { font-size: 90%; margin: .2em; }
+  p.verse { margin-left: 3%; }
+  pre {
+    border: 1px solid #ccc;
+    box-shadow: 3px 3px 3px #eee;
+    padding: 8pt;
+    font-family: monospace;
+    overflow: auto;
+    margin: 1.2em;
+  }
+  pre.src {
+    position: relative;
+    overflow: auto;
+    padding-top: 1.2em;
+  }
+  pre.src:before {
+    display: none;
+    position: absolute;
+    background-color: white;
+    top: -10px;
+    right: 10px;
+    padding: 3px;
+    border: 1px solid black;
+  }
+  pre.src:hover:before { display: inline; margin-top: 14px;}
+  /* Languages per Org manual */
+  pre.src-asymptote:before { content: 'Asymptote'; }
+  pre.src-awk:before { content: 'Awk'; }
+  pre.src-C:before { content: 'C'; }
+  /* pre.src-C++ doesn't work in CSS */
+  pre.src-clojure:before { content: 'Clojure'; }
+  pre.src-css:before { content: 'CSS'; }
+  pre.src-D:before { content: 'D'; }
+  pre.src-ditaa:before { content: 'ditaa'; }
+  pre.src-dot:before { content: 'Graphviz'; }
+  pre.src-calc:before { content: 'Emacs Calc'; }
+  pre.src-emacs-lisp:before { content: 'Emacs Lisp'; }
+  pre.src-fortran:before { content: 'Fortran'; }
+  pre.src-gnuplot:before { content: 'gnuplot'; }
+  pre.src-haskell:before { content: 'Haskell'; }
+  pre.src-hledger:before { content: 'hledger'; }
+  pre.src-java:before { content: 'Java'; }
+  pre.src-js:before { content: 'Javascript'; }
+  pre.src-latex:before { content: 'LaTeX'; }
+  pre.src-ledger:before { content: 'Ledger'; }
+  pre.src-lisp:before { content: 'Lisp'; }
+  pre.src-lilypond:before { content: 'Lilypond'; }
+  pre.src-lua:before { content: 'Lua'; }
+  pre.src-matlab:before { content: 'MATLAB'; }
+  pre.src-mscgen:before { content: 'Mscgen'; }
+  pre.src-ocaml:before { content: 'Objective Caml'; }
+  pre.src-octave:before { content: 'Octave'; }
+  pre.src-org:before { content: 'Org mode'; }
+  pre.src-oz:before { content: 'OZ'; }
+  pre.src-plantuml:before { content: 'Plantuml'; }
+  pre.src-processing:before { content: 'Processing.js'; }
+  pre.src-python:before { content: 'Python'; }
+  pre.src-R:before { content: 'R'; }
+  pre.src-ruby:before { content: 'Ruby'; }
+  pre.src-sass:before { content: 'Sass'; }
+  pre.src-scheme:before { content: 'Scheme'; }
+  pre.src-screen:before { content: 'Gnu Screen'; }
+  pre.src-sed:before { content: 'Sed'; }
+  pre.src-sh:before { content: 'shell'; }
+  pre.src-sql:before { content: 'SQL'; }
+  pre.src-sqlite:before { content: 'SQLite'; }
+  /* additional languages in org.el's org-babel-load-languages alist */
+  pre.src-forth:before { content: 'Forth'; }
+  pre.src-io:before { content: 'IO'; }
+  pre.src-J:before { content: 'J'; }
+  pre.src-makefile:before { content: 'Makefile'; }
+  pre.src-maxima:before { content: 'Maxima'; }
+  pre.src-perl:before { content: 'Perl'; }
+  pre.src-picolisp:before { content: 'Pico Lisp'; }
+  pre.src-scala:before { content: 'Scala'; }
+  pre.src-shell:before { content: 'Shell Script'; }
+  pre.src-ebnf2ps:before { content: 'ebfn2ps'; }
+  /* additional language identifiers per "defun org-babel-execute"
+       in ob-*.el */
+  pre.src-cpp:before  { content: 'C++'; }
+  pre.src-abc:before  { content: 'ABC'; }
+  pre.src-coq:before  { content: 'Coq'; }
+  pre.src-groovy:before  { content: 'Groovy'; }
+  /* additional language identifiers from org-babel-shell-names in
+     ob-shell.el: ob-shell is the only babel language using a lambda to put
+     the execution function name together. */
+  pre.src-bash:before  { content: 'bash'; }
+  pre.src-csh:before  { content: 'csh'; }
+  pre.src-ash:before  { content: 'ash'; }
+  pre.src-dash:before  { content: 'dash'; }
+  pre.src-ksh:before  { content: 'ksh'; }
+  pre.src-mksh:before  { content: 'mksh'; }
+  pre.src-posh:before  { content: 'posh'; }
+  /* Additional Emacs modes also supported by the LaTeX listings package */
+  pre.src-ada:before { content: 'Ada'; }
+  pre.src-asm:before { content: 'Assembler'; }
+  pre.src-caml:before { content: 'Caml'; }
+  pre.src-delphi:before { content: 'Delphi'; }
+  pre.src-html:before { content: 'HTML'; }
+  pre.src-idl:before { content: 'IDL'; }
+  pre.src-mercury:before { content: 'Mercury'; }
+  pre.src-metapost:before { content: 'MetaPost'; }
+  pre.src-modula-2:before { content: 'Modula-2'; }
+  pre.src-pascal:before { content: 'Pascal'; }
+  pre.src-ps:before { content: 'PostScript'; }
+  pre.src-prolog:before { content: 'Prolog'; }
+  pre.src-simula:before { content: 'Simula'; }
+  pre.src-tcl:before { content: 'tcl'; }
+  pre.src-tex:before { content: 'TeX'; }
+  pre.src-plain-tex:before { content: 'Plain TeX'; }
+  pre.src-verilog:before { content: 'Verilog'; }
+  pre.src-vhdl:before { content: 'VHDL'; }
+  pre.src-xml:before { content: 'XML'; }
+  pre.src-nxml:before { content: 'XML'; }
+  /* add a generic configuration mode; LaTeX export needs an additional
+     (add-to-list 'org-latex-listings-langs '(conf " ")) in .emacs */
+  pre.src-conf:before { content: 'Configuration File'; }
+
+  table { border-collapse:collapse; }
+  caption.t-above { caption-side: top; }
+  caption.t-bottom { caption-side: bottom; }
+  td, th { vertical-align:top;  }
+  th.org-right  { text-align: center;  }
+  th.org-left   { text-align: center;   }
+  th.org-center { text-align: center; }
+  td.org-right  { text-align: right;  }
+  td.org-left   { text-align: left;   }
+  td.org-center { text-align: center; }
+  dt { font-weight: bold; }
+  .footpara { display: inline; }
+  .footdef  { margin-bottom: 1em; }
+  .figure { padding: 1em; }
+  .figure p { text-align: center; }
+  .equation-container {
+    display: table;
+    text-align: center;
+    width: 100%;
+  }
+  .equation {
+    vertical-align: middle;
+  }
+  .equation-label {
+    display: table-cell;
+    text-align: right;
+    vertical-align: middle;
+  }
+  .inlinetask {
+    padding: 10px;
+    border: 2px solid gray;
+    margin: 10px;
+    background: #ffffcc;
+  }
+  #org-div-home-and-up
+   { text-align: right; font-size: 70%; white-space: nowrap; }
+  textarea { overflow-x: auto; }
+  .linenr { font-size: smaller }
+  .code-highlighted { background-color: #ffff00; }
+  .org-info-js_info-navigation { border-style: none; }
+  #org-info-js_console-label
+    { font-size: 10px; font-weight: bold; white-space: nowrap; }
+  .org-info-js_search-highlight
+    { background-color: #ffff00; color: #000000; font-weight: bold; }
+  .org-svg { width: 90%; }
+  /*]]>*/-->
+</style>
+<link rel="stylesheet" type="text/css" href="/theme/site.css"/>
+<link rel="stylesheet" type="text/css" href="/theme/org.css"/>
+<script type="text/javascript">
+// @license magnet:?xt=urn:btih:e95b018ef3580986a04669f1b5879592219e2a7a&dn=public-domain.txt Public Domain
+<!--/*--><![CDATA[/*><!--*/
+     function CodeHighlightOn(elem, id)
+     {
+       var target = document.getElementById(id);
+       if(null != target) {
+         elem.classList.add("code-highlighted");
+         target.classList.add("code-highlighted");
+       }
+     }
+     function CodeHighlightOff(elem, id)
+     {
+       var target = document.getElementById(id);
+       if(null != target) {
+         elem.classList.remove("code-highlighted");
+         target.classList.remove("code-highlighted");
+       }
+     }
+    /*]]>*///-->
+// @license-end
+</script>
+</head>
+<body>
+<div id="content">
+<h1 class="title">2020-23</h1>
+<p>
+6.1-6.7
+</p>
+
+<p>
+这一周虽然没有尽数完成计划事项，但解决了很多棘手的问题。
+</p>
+
+<p>
+已完成：
+</p>
+
+<ol class="org-ol">
+<li>写作博客 5 篇(其中部分待完善)</li>
+<li>解决由 http 和 https
+之间相互转换而造成的重定向次数过多，进而使网页瘫痪问题</li>
+<li>解决 VSCode 打开新文件覆盖旧文件问题</li>
+<li>为网站添加友情链接</li>
+<li>将博客部署至 Netlify</li>
+<li>使用 hugo-notice 进行段落标记</li>
+<li>在博客左下角添加微信公众号二维码，提供订阅博客渠道</li>
+<li>搜集一些可以使用的 shortcodes</li>
+<li>通过修改 hosts 文件加速访问 GitHub</li>
+</ol>
+
+<p>
+未完成：
+</p>
+
+<ol class="org-ol">
+<li>Emacs Tutorial 没有学习完</li>
+<li>没有做《三十六惑》笔记</li>
+<li>两本书的读书笔记搁置</li>
+<li>没有学习 Python</li>
+<li>没有学习专业课</li>
+</ol>
+
+<p>
+第 24 周规划：
+</p>
+
+<ol class="org-ol">
+<li>周一 -&#x2013;&#x2014; 把 Emacs Toturial 学习完，并总结成博客</li>
+<li>周一 -&#x2013;&#x2014; 做信号习题，不会的看书</li>
+<li>周一 -&#x2013;&#x2014;
+预习周二要学的模电，弄清楚数电学到哪了，看看学到的地方的前后两个小节</li>
+<li>周二 -&#x2013;&#x2014; 学习 Frontend Masters 的 Bootcamp 的部分</li>
+<li>周二 -&#x2013;&#x2014; 复习模电、数电当天学习内容，预习概率</li>
+<li>周三 -&#x2013;&#x2014; 学习 算法，做笔记</li>
+<li>周三 -&#x2013;&#x2014; 继续学习 Frontend</li>
+<li>周三 -&#x2013;&#x2014; 做概率作业</li>
+<li>周三 -&#x2013;&#x2014; 复习 数电</li>
+<li>周四 -&#x2013;&#x2014; 复习 周二和周三 学习的 Frontend 和算法</li>
+<li>周四 -&#x2013;&#x2014; 复习+预习模电</li>
+<li>周四 -&#x2013;&#x2014; 复习+预习信号</li>
+<li>周五 -&#x2013;&#x2014; 看电影《海蒂和爷爷》</li>
+<li>周六 -&#x2013;&#x2014; 复习周一至周五所学编程和专业课程</li>
+<li>周日同周六</li>
+</ol>
+
+<p>
+本周学习状况分析：
+</p>
+
+<ol class="org-ol">
+<li>一开始的计划不够详细，新的一周开始时也没有制订更详细的计划。所以看似完成了那么多的问题，但是这些问题不成体系。我没有一个提纲挈领的东西，我面朝哪里，就解决哪里的问题，没有规划，不完全，心里不踏实。</li>
+
+<li>周二坐在电脑面前的时间最长，在解决有关网站的一些问题。处于解决问题的状态持续了很长时间，我逐渐急躁起来，在查找问题答案的过程中，我越来越不能沉住气，反过来它就影响我解决问题的效率。进而，产生自我怀疑。实际上，这只不过是过度疲劳所造成的后果。</li>
+
+<li>我一直在念叨我的信号、模电、数电、概率这四门课程。我不能在心里想任何让我紧张的话，唯一能做的，就是制订计划+复习。</li>
+
+<li><p>
+这一周有一件比较高兴的事：我申请通过了 GitHub
+对于在校学生的特殊照顾，可以免费升级至 pro
+用户。另外，还有很多其他对于目前的我来说很有用的资源。具体的申请方法：
+</p>
+
+<p>
+访问：<a href="https://education.github.com/discount_requests/new">https://education.github.com/discount_requests/new</a>,
+选择“学生”，选一个邮箱，输入学校名称(英文的)，然后它会出现一个上传文件的地方，注意上传格式是
+图片 还是
+pdf。这个证明文件可以去学信网(<a href="https://my.chsi.com.cn/archive/index.jsp">https://my.chsi.com.cn/archive/index.jsp</a>)下载，先登录后找到“在线验证报告”，下载即可，最后填写使用
+GitHub 的计划。
+</p>
+
+<p>
+这个审核速度很快，我的是一天还是半天，我忘记了。总之，祝想申请这一优惠的你成功吧。
+</p></li>
+</ol>
+</div>
+<div id="postamble" class="status">
+<p class="postamble">First created:  <br />Last updated: 2021-11-19 Fri 16:14 <br />Power by <a href="https://www.gnu.org/software/emacs/">Emacs</a> 27.2 (<a href="https://orgmode.org">Org</a> mode 9.4.4)</p>
+</div>
+</body>
+</html>

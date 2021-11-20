@@ -1,0 +1,20 @@
+#!/bin/bash
+
+kernel="uname -s"
+emacs="emacs"
+git pull origin main
+
+# generate html files.
+
+$emacs --batch --script ./scripts/publish.el
+if [ $? != 0 ]
+then
+    echo "publish failed!"
+    exit 1
+fi
+
+# post processing html files.
+python ./scripts/pp-html
+# git add .
+# git commit -a -m 'BUILD HTML'
+# git push origin main
