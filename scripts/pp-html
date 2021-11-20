@@ -1,0 +1,72 @@
+#!/usr/bin/env python
+#coding:utf-8
+#Copyright (C) dirlt
+
+import glob
+import re
+import os
+
+domain = 'www.yidajiabei.xyz'
+
+site = 'https://%s/' % (domain)
+
+r1 = re.compile(r'^<meta name="generated" content="')
+r2 = re.compile(r'^<p class="date">Date: ')
+r3 = re.compile(r'^<a href="http://validator.w3.org/check')
+r4 = re.compile(r'^<!-- \d{4}-\d{2}\-\d{2} ')
+
+HTML_DIR = '~/repo/blog/'
+ORG_DIR = './org/'
+html_files = glob.glob(HTML_DIR + '*.html') + glob.glob(HTML_DIR + '*.html')
+org_files = glob.glob(ORG_DIR + '*.org') + glob.glob(ORG_DIR + '*.org')
+
+HEAD_BEGIN = ''
+
+BODY_BEGIN = """
+""".replace('\n','')
+
+BODY_END = """
+<div id="content">
+""".replace('\n','')
+
+for f in html_files:
+    xs = open(f).readlines()
+    site_id = f[len(HTML_DIR):]
+    site_title = site_id
+
+    data=[]
+    for x in xs:
+        x = x[:-1] # strip trailing \n
+        if x.find('<head>') != -1 and not x == '<head>' + HEAD_BEGIN + '\n':
+            data.append('<head>' + HEAD_BEGIN)
+        elif x.find('<body>') != -1 and not x == '<body>' + BODY_BEGIN + '\n':
+            data.append('<body>' + BODY_BEGIN)
+        elif x.find('</head>') != -1 and not x == '</head>' + '\n':
+            data.append('</head>')
+        elif x.find('</body>') != -1 and not x == BODY_END%(locals()) + '</body>' + '\n':
+            data.append(BODY_END%(locals()) + '</body>')
+        elif r1.match(x) or r2.match(x) or r3.match(x) or r4.match(x):
+            pass
+        else:
+            data.append(x)
+        if x.find('<title>') !=-1 and x.find('</title>') != -1:
+            site_title = x[len('<title>'):-len('</title>')].replace("'", '')
+    print('add code to \'%s\''%(f))
+
+    with open(f, 'w') as fh:
+        fh.writelines(map(lambda x: x + '\n', data))
+
+
+with open('./sitemap.txt', 'w') as fh:
+    lines = [site + x[len(HTML_DIR):-4] + 'html\n' for x in html_files]
+    lines.sort()
+    fh.writelines(lines)
+
+with open('./sitemap.xml', 'w') as fh:
+    fh.write("""<?xml version="1.0" encoding="UTF-8"?>
+<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">""")
+    lines = ['<url><loc>{}</loc></url>\n'.format(
+        site + x[len(HTML_DIR):-4] + 'html') for x in html_files]
+    lines.sort()
+    fh.writelines(lines)
+    fh.write('</urlset>\n')
