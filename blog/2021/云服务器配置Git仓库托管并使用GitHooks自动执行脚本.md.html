@@ -1,0 +1,223 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN"
+"http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en">
+<head>
+<!-- 2021-11-20 Sat 19:26 -->
+<meta http-equiv="Content-Type" content="text/html;charset=utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>&lrm;</title>
+<meta name="generator" content="Org mode" />
+<script type="text/javascript">
+// @license magnet:?xt=urn:btih:e95b018ef3580986a04669f1b5879592219e2a7a&dn=public-domain.txt Public Domain
+<!--/*--><![CDATA[/*><!--*/
+     function CodeHighlightOn(elem, id)
+     {
+       var target = document.getElementById(id);
+       if(null != target) {
+         elem.classList.add("code-highlighted");
+         target.classList.add("code-highlighted");
+       }
+     }
+     function CodeHighlightOff(elem, id)
+     {
+       var target = document.getElementById(id);
+       if(null != target) {
+         elem.classList.remove("code-highlighted");
+         target.classList.remove("code-highlighted");
+       }
+     }
+    /*]]>*///-->
+// @license-end
+</script>
+</head>
+<body>
+<div id="content">
+<div id="table-of-contents">
+<h2>Table of Contents</h2>
+<div id="text-table-of-contents">
+<ul>
+<li><a href="#更新-git-至最新版本">1. 更新 Git 至最新版本</a></li>
+<li><a href="#创建-git-用户">2. 创建 Git 用户</a></li>
+<li><a href="#配置-ssh-公匙">3. 配置 ssh 公匙</a></li>
+<li><a href="#创建博客文件夹">4. 创建博客文件夹</a></li>
+<li><a href="#更改站点目录权限">5. 更改站点目录权限</a></li>
+<li><a href="#创建-bare-仓库并配置-git-hook">6. 创建 bare 仓库并配置 Git Hook</a></li>
+<li><a href="#本地配置云服务器仓库">7. 本地配置云服务器仓库</a></li>
+<li><a href="#参考">8. 参考</a></li>
+</ul>
+</div>
+</div>
+<p>
+<del>+</del> date = '2021-10-11T16:32:31+08:00' title = '云服务器配置 Git
+仓库托管并使用 Git Hooks 自动执行脚本' tags = ['Web Server', 'Git',
+'Hugo'] slug = 'configure-git-with-server-and-use-git-hook' <del>+</del>
+</p>
+
+<p>
+上文见<a href="file:///posts/deploy-hugo-blog-to-ubuntu-server/">部署 Hugo 博客到
+Ubuntu 服务器</a>。
+</p>
+
+<p>
+之前的博客更新思路是，本地提交修改至
+GitHub，再登陆云服务器，手动执行脚本，达到更新博客内容的目的。但是，从
+GitHub 拉取代码较慢，于是想到可以把本地的更改同时推送到 GitHub
+和云服务器。再通过 Git Hooks
+自动执行「更新博客」的脚本，以此达到提升效率的目的。
+</p>
+
+<div id="outline-container-更新-git-至最新版本" class="outline-2">
+<h2 id="更新-git-至最新版本"><span class="section-number-2">1</span> 更新 Git 至最新版本</h2>
+<div class="outline-text-2" id="text-更新-git-至最新版本">
+<p>
+云服务器的系统是 Ubuntu 20.04，所以可以通过以下命令安装 Git 的最新版本：
+</p>
+
+<pre class="example" id="org79d7dce">
+add-apt-repository ppa:git-core/ppa
+apt update
+apt install git
+</pre>
+</div>
+</div>
+
+<div id="outline-container-创建-git-用户" class="outline-2">
+<h2 id="创建-git-用户"><span class="section-number-2">2</span> 创建 Git 用户</h2>
+<div class="outline-text-2" id="text-创建-git-用户">
+<pre class="example" id="orgf672198">
+adduser git # note difference with useradd
+passwd git # add password for git user
+sudo visudo
+</pre>
+
+<p>
+修改 =/etc/sudoers=：
+</p>
+
+<pre class="example" id="orga734960">
+root    ALL=(ALL)       ALL
+ubuntu  ALL=(ALL:ALL) NOPASSWD: ALL
+git  ALL=(ALL:ALL) NOPASSWD: ALL # add
+</pre>
+</div>
+</div>
+
+<div id="outline-container-配置-ssh-公匙" class="outline-2">
+<h2 id="配置-ssh-公匙"><span class="section-number-2">3</span> 配置 ssh 公匙</h2>
+<div class="outline-text-2" id="text-配置-ssh-公匙">
+<p>
+在本地主机执行以下命令：
+</p>
+
+<pre class="example" id="org100a55c">
+ssh-keygen -t ed25519 -C "email"
+</pre>
+
+<p>
+会生成两个文件：id<sub>ed25519</sub> 和 id<sub>ed25519.pub</sub>。将 id<sub>ed25519.pub</sub>
+文件里的内容复制到云服务器的 authorized<sub>keys</sub> 文件中：
+</p>
+
+<pre class="example" id="org7b9261d">
+su git
+mkdir ~/.ssh
+vim ~/.ssh/authorized_keys
+</pre>
+
+<p>
+注意：=~= 代表 =/home/git=。只有 git 用户才能使用这个公匙。
+</p>
+
+<p>
+修改权限：
+</p>
+
+<pre class="example" id="org9855f0f">
+cd ~
+chmod 600 .ssh/authorized_keys
+chmod 700 .ssh
+</pre>
+
+<p>
+本地测试 git 服务：
+</p>
+
+<pre class="example" id="org8ff6e55">
+ssh -v git@server-ip # Server public network IP
+</pre>
+</div>
+</div>
+
+<div id="outline-container-创建博客文件夹" class="outline-2">
+<h2 id="创建博客文件夹"><span class="section-number-2">4</span> 创建博客文件夹</h2>
+<div class="outline-text-2" id="text-创建博客文件夹">
+<pre class="example" id="org1742f50">
+su root # switch to root user
+mkdir /home/hugo
+chown git:git -R /home/hugo
+</pre>
+</div>
+</div>
+
+<div id="outline-container-更改站点目录权限" class="outline-2">
+<h2 id="更改站点目录权限"><span class="section-number-2">5</span> 更改站点目录权限</h2>
+<div class="outline-text-2" id="text-更改站点目录权限">
+<pre class="example" id="orgf98e8ad">
+sudo chown git:git -R /var/www/hugo # for git hook
+</pre>
+</div>
+</div>
+
+<div id="outline-container-创建-bare-仓库并配置-git-hook" class="outline-2">
+<h2 id="创建-bare-仓库并配置-git-hook"><span class="section-number-2">6</span> 创建 bare 仓库并配置 Git Hook</h2>
+<div class="outline-text-2" id="text-创建-bare-仓库并配置-git-hook">
+<pre class="example" id="org18dbbb7">
+su root
+cd /home/git
+git init --bare blog.git
+chown git:git -R blog.git
+vim blog.git/hooks/post-receive
+chmod +x blog.git/hooks/post-receive
+</pre>
+
+<p>
+新建文件 =blog.git/hooks/post-receive=：
+</p>
+
+<pre class="example" id="orga5c6e9a">
+#!/bin/sh
+git --work-tree=/home/hugo --git-dir=/home/git/blog.git checkout -f
+cd /var/www/hugo
+rm -rf * # 删除文件夹下的所有文件以保持最新
+cd /home/hugo
+hugo --minify -d /var/www/hugo
+</pre>
+</div>
+</div>
+
+<div id="outline-container-本地配置云服务器仓库" class="outline-2">
+<h2 id="本地配置云服务器仓库"><span class="section-number-2">7</span> 本地配置云服务器仓库</h2>
+<div class="outline-text-2" id="text-本地配置云服务器仓库">
+<pre class="example" id="org5ca2c07">
+git remote add origin git@server-ip:/home/git/blog.git
+git push -u origin main # first push
+</pre>
+</div>
+</div>
+
+<div id="outline-container-参考" class="outline-2">
+<h2 id="参考"><span class="section-number-2">8</span> 参考</h2>
+<div class="outline-text-2" id="text-参考">
+<ol class="org-ol">
+<li><a href="https://segmentfault.com/a/1190000039676421">https://segmentfault.com/a/1190000039676421</a></li>
+<li><a href="https://www.saintsjd.com/2011/01/what-is-a-bare-git-repository/">https://www.saintsjd.com/2011/01/what-is-a-bare-git-repository/</a></li>
+</ol>
+</div>
+</div>
+</div>
+<div id="postamble" class="status">
+<p class="postamble">First created:  <br />Last updated: 2021-11-18 Thu 16:22 <br />Power by <a href="https://www.gnu.org/software/emacs/">Emacs</a> 27.2 (<a href="https://orgmode.org">Org</a> mode 9.4.4)</p>
+</div>
+</body>
+</html>

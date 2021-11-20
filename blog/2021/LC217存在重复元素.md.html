@@ -1,0 +1,117 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN"
+"http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en">
+<head>
+<!-- 2021-11-20 Sat 19:26 -->
+<meta http-equiv="Content-Type" content="text/html;charset=utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>&lrm;</title>
+<meta name="generator" content="Org mode" />
+<script type="text/javascript">
+// @license magnet:?xt=urn:btih:e95b018ef3580986a04669f1b5879592219e2a7a&dn=public-domain.txt Public Domain
+<!--/*--><![CDATA[/*><!--*/
+     function CodeHighlightOn(elem, id)
+     {
+       var target = document.getElementById(id);
+       if(null != target) {
+         elem.classList.add("code-highlighted");
+         target.classList.add("code-highlighted");
+       }
+     }
+     function CodeHighlightOff(elem, id)
+     {
+       var target = document.getElementById(id);
+       if(null != target) {
+         elem.classList.remove("code-highlighted");
+         target.classList.remove("code-highlighted");
+       }
+     }
+    /*]]>*///-->
+// @license-end
+</script>
+</head>
+<body>
+<div id="content">
+<div id="table-of-contents">
+<h2>Table of Contents</h2>
+<div id="text-table-of-contents">
+<ul>
+<li><a href="#题目描述">1. 题目描述</a></li>
+<li><a href="#题解2">2. 题解</a></li>
+</ul>
+</div>
+</div>
+<p>
+<del>+</del> date = '2021-10-24T21:20:57+08:00' title = 'LC217. 存在重复元素'
+tags = ['LeetCode'] slug = 'lc-217-contains-duplicate' <del>+</del>
+</p>
+
+<p>
+今天思考 LeetCode 题目：存在重复元素<sup><a id="fnr.1" class="footref" href="#fn.1">1</a></sup>。
+</p>
+
+<div id="outline-container-题目描述" class="outline-2">
+<h2 id="题目描述"><span class="section-number-2">1</span> 题目描述</h2>
+<div class="outline-text-2" id="text-题目描述">
+<p>
+给定一个整数数组，判断是否存在重复元素。
+</p>
+
+<p>
+如果存在一值在数组中出现至少两次，函数返回
+=true=。如果数组中每个元素都不相同，则返回 =false=。
+</p>
+</div>
+</div>
+
+<div id="outline-container-题解2" class="outline-2">
+<h2 id="题解2"><span class="section-number-2">2</span> 题解<sup><a id="fnr.2" class="footref" href="#fn.2">2</a></sup></h2>
+<div class="outline-text-2" id="text-题解2">
+<div class="org-src-container">
+<pre class="src src-js"><span style="font-style: italic;">/**</span>
+<span style="font-style: italic;"> * @param {number[]} nums</span>
+<span style="font-style: italic;"> * @return {boolean}</span>
+<span style="font-style: italic;"> */</span>
+<span style="font-weight: bold;">var</span> <span style="font-weight: bold; font-style: italic;">containsDuplicate</span> = <span style="font-weight: bold;">function</span> (<span style="font-weight: bold; font-style: italic;">nums</span>) {
+  nums.sort((a, b) =&gt; a - b);
+  <span style="font-weight: bold;">for</span> (<span style="font-weight: bold;">let</span> <span style="font-weight: bold; font-style: italic;">i</span> = 0; i &lt; nums.length; i++) {
+    <span style="font-weight: bold;">if</span> (nums[i] == nums[i - 1]) {
+      <span style="font-weight: bold;">return</span> <span style="font-weight: bold; text-decoration: underline;">true</span>;
+    }
+  }
+  <span style="font-weight: bold;">return</span> <span style="font-weight: bold; text-decoration: underline;">false</span>;
+};
+</pre>
+</div>
+
+<p>
+代码的 for 循环、if 语句，是我写的。原来的 if 语句还有 else
+从句，后来去掉，把 else 中的 return false 移动到了外面。
+</p>
+
+<p>
+<code>nums.sort</code> 是来自别人的。
+</p>
+</div>
+</div>
+<div id="footnotes">
+<h2 class="footnotes">Footnotes: </h2>
+<div id="text-footnotes">
+
+<div class="footdef"><sup><a id="fn.1" class="footnum" href="#fnr.1">1</a></sup> <div class="footpara"><p class="footpara">
+<a href="https://leetcode-cn.com/problems/contains-duplicate/">https://leetcode-cn.com/problems/contains-duplicate/</a>
+</p></div></div>
+
+<div class="footdef"><sup><a id="fn.2" class="footnum" href="#fnr.2">2</a></sup> <div class="footpara"><p class="footpara">
+<a href="https://leetcode-cn.com/problems/contains-duplicate/solution/cun-zai-zhong-fu-yuan-su-by-leetcode-sol-iedd/">https://leetcode-cn.com/problems/contains-duplicate/solution/cun-zai-zhong-fu-yuan-su-by-leetcode-sol-iedd/</a>
+</p></div></div>
+
+
+</div>
+</div></div>
+<div id="postamble" class="status">
+<p class="postamble">First created:  <br />Last updated: 2021-11-18 Thu 16:22 <br />Power by <a href="https://www.gnu.org/software/emacs/">Emacs</a> 27.2 (<a href="https://orgmode.org">Org</a> mode 9.4.4)</p>
+</div>
+</body>
+</html>

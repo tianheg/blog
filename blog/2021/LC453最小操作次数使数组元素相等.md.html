@@ -1,0 +1,113 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN"
+"http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en">
+<head>
+<!-- 2021-11-20 Sat 19:26 -->
+<meta http-equiv="Content-Type" content="text/html;charset=utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>&lrm;</title>
+<meta name="generator" content="Org mode" />
+<script type="text/javascript">
+// @license magnet:?xt=urn:btih:e95b018ef3580986a04669f1b5879592219e2a7a&dn=public-domain.txt Public Domain
+<!--/*--><![CDATA[/*><!--*/
+     function CodeHighlightOn(elem, id)
+     {
+       var target = document.getElementById(id);
+       if(null != target) {
+         elem.classList.add("code-highlighted");
+         target.classList.add("code-highlighted");
+       }
+     }
+     function CodeHighlightOff(elem, id)
+     {
+       var target = document.getElementById(id);
+       if(null != target) {
+         elem.classList.remove("code-highlighted");
+         target.classList.remove("code-highlighted");
+       }
+     }
+    /*]]>*///-->
+// @license-end
+</script>
+</head>
+<body>
+<div id="content">
+<div id="table-of-contents">
+<h2>Table of Contents</h2>
+<div id="text-table-of-contents">
+<ul>
+<li><a href="#题目表述">1. 题目表述</a></li>
+<li><a href="#题解2">2. 题解</a></li>
+</ul>
+</div>
+</div>
+<p>
+<del>+</del> date = '2021-10-20T21:23:29+08:00' title = 'LC453.
+最小操作次数使数组元素相等' tags = ['LeetCode'] slug =
+'lc-453-minimum-moves-to-equal-array-elements' <del>+</del>
+</p>
+
+<p>
+今天思考 LeetCode 题目：最小操作次数使数组元素相等<sup><a id="fnr.1" class="footref" href="#fn.1">1</a></sup>。
+</p>
+
+<div id="outline-container-题目表述" class="outline-2">
+<h2 id="题目表述"><span class="section-number-2">1</span> 题目表述</h2>
+<div class="outline-text-2" id="text-题目表述">
+<p>
+给你一个长度为 <code>n</code> 的整数数组，每次操作将会使 <code>n - 1</code> 个元素增加
+=1=。返回让数组所有元素相等的最小操作次数。
+</p>
+</div>
+</div>
+
+<div id="outline-container-题解2" class="outline-2">
+<h2 id="题解2"><span class="section-number-2">2</span> 题解<sup><a id="fnr.2" class="footref" href="#fn.2">2</a></sup></h2>
+<div class="outline-text-2" id="text-题解2">
+<div class="org-src-container">
+<pre class="src src-js"><span style="font-style: italic;">/**</span>
+<span style="font-style: italic;"> * @param {number[]} nums</span>
+<span style="font-style: italic;"> * @return {number}</span>
+<span style="font-style: italic;"> */</span>
+<span style="font-weight: bold;">let</span> <span style="font-weight: bold; font-style: italic;">minMoves</span> = <span style="font-weight: bold;">function</span>(<span style="font-weight: bold; font-style: italic;">nums</span>) {
+  <span style="font-weight: bold;">const</span> <span style="font-weight: bold; font-style: italic;">minNum</span> = Math.min(...nums);
+  <span style="font-weight: bold;">let</span> <span style="font-weight: bold; font-style: italic;">res</span> = 0;
+  <span style="font-weight: bold;">for</span> (<span style="font-weight: bold;">const</span> <span style="font-weight: bold; font-style: italic;">num</span> of nums) {
+    res += num - minNum;
+  }
+  <span style="font-weight: bold;">return</span> res;
+}
+</pre>
+</div>
+
+<p>
+代码使用了全局对象
+=Math=，它是有属性和方法的内建对象，适合处理数学常量和函数。它不是函数对象。<sup><a id="fnr.3" class="footref" href="#fn.3">3</a></sup>
+</p>
+</div>
+</div>
+<div id="footnotes">
+<h2 class="footnotes">Footnotes: </h2>
+<div id="text-footnotes">
+
+<div class="footdef"><sup><a id="fn.1" class="footnum" href="#fnr.1">1</a></sup> <div class="footpara"><p class="footpara">
+<a href="https://leetcode-cn.com/problems/minimum-moves-to-equal-array-elements/">https://leetcode-cn.com/problems/minimum-moves-to-equal-array-elements/</a>
+</p></div></div>
+
+<div class="footdef"><sup><a id="fn.2" class="footnum" href="#fnr.2">2</a></sup> <div class="footpara"><p class="footpara">
+<a href="https://leetcode-cn.com/problems/minimum-moves-to-equal-array-elements/solution/zui-xiao-cao-zuo-ci-shu-shi-shu-zu-yuan-3meg3/">https://leetcode-cn.com/problems/minimum-moves-to-equal-array-elements/solution/zui-xiao-cao-zuo-ci-shu-shi-shu-zu-yuan-3meg3/</a>
+</p></div></div>
+
+<div class="footdef"><sup><a id="fn.3" class="footnum" href="#fnr.3">3</a></sup> <div class="footpara"><p class="footpara">
+<a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Math">https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Math</a>
+</p></div></div>
+
+
+</div>
+</div></div>
+<div id="postamble" class="status">
+<p class="postamble">First created:  <br />Last updated: 2021-11-18 Thu 16:22 <br />Power by <a href="https://www.gnu.org/software/emacs/">Emacs</a> 27.2 (<a href="https://orgmode.org">Org</a> mode 9.4.4)</p>
+</div>
+</body>
+</html>

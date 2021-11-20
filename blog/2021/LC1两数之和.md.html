@@ -1,0 +1,238 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN"
+"http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en">
+<head>
+<!-- 2021-11-20 Sat 19:26 -->
+<meta http-equiv="Content-Type" content="text/html;charset=utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>&lrm;</title>
+<meta name="generator" content="Org mode" />
+<script type="text/javascript">
+// @license magnet:?xt=urn:btih:e95b018ef3580986a04669f1b5879592219e2a7a&dn=public-domain.txt Public Domain
+<!--/*--><![CDATA[/*><!--*/
+     function CodeHighlightOn(elem, id)
+     {
+       var target = document.getElementById(id);
+       if(null != target) {
+         elem.classList.add("code-highlighted");
+         target.classList.add("code-highlighted");
+       }
+     }
+     function CodeHighlightOff(elem, id)
+     {
+       var target = document.getElementById(id);
+       if(null != target) {
+         elem.classList.remove("code-highlighted");
+         target.classList.remove("code-highlighted");
+       }
+     }
+    /*]]>*///-->
+// @license-end
+</script>
+<script type="text/x-mathjax-config">
+    MathJax.Hub.Config({
+        displayAlign: "center",
+        displayIndent: "0em",
+
+        "HTML-CSS": { scale: 100,
+                        linebreaks: { automatic: "false" },
+                        webFont: "TeX"
+                       },
+        SVG: {scale: 100,
+              linebreaks: { automatic: "false" },
+              font: "TeX"},
+        NativeMML: {scale: 100},
+        TeX: { equationNumbers: {autoNumber: "AMS"},
+               MultLineWidth: "85%",
+               TagSide: "right",
+               TagIndent: ".8em"
+             }
+});
+</script>
+<script type="text/javascript"
+        src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.0/MathJax.js?config=TeX-AMS_HTML"></script>
+</head>
+<body>
+<div id="content">
+<div id="table-of-contents">
+<h2>Table of Contents</h2>
+<div id="text-table-of-contents">
+<ul>
+<li><a href="#题目描述">1. 题目描述</a></li>
+<li><a href="#题解">2. 题解</a>
+<ul>
+<li><a href="#一2">2.1. 一</a></li>
+<li><a href="#二45">2.2. 二，</a></li>
+</ul>
+</li>
+</ul>
+</div>
+</div>
+<p>
+<del>+</del> date = '2021-10-17T21:04:50+08:00' title = 'LC1. 两数之和' tags =
+['LeetCode'] slug = 'lc-1-two-sum' katex = true <del>+</del>
+</p>
+
+<p>
+今天思考 LeetCode 题目：两数之和<sup><a id="fnr.1" class="footref" href="#fn.1">1</a></sup>。
+</p>
+
+<div id="outline-container-题目描述" class="outline-2">
+<h2 id="题目描述"><span class="section-number-2">1</span> 题目描述</h2>
+<div class="outline-text-2" id="text-题目描述">
+<p>
+两个变量，一个整数数组 <code>nums</code> 和一个整数目标值 =target=，在该数组中找出
+<i>和为目标值 <code>target</code></i> 的那两个整数，并返回它们的数组下标。
+</p>
+
+<p>
+可假设每种输入只会对应一个答案。但是，数组中同一个元素在答案里不能重复出现。
+</p>
+
+<p>
+可按任意顺序返回答案。
+</p>
+</div>
+</div>
+
+<div id="outline-container-题解" class="outline-2">
+<h2 id="题解"><span class="section-number-2">2</span> 题解</h2>
+<div class="outline-text-2" id="text-题解">
+</div>
+<div id="outline-container-一2" class="outline-3">
+<h3 id="一2"><span class="section-number-3">2.1</span> 一<sup><a id="fnr.2" class="footref" href="#fn.2">2</a></sup></h3>
+<div class="outline-text-3" id="text-一2">
+<div class="org-src-container">
+<pre class="src src-js"><span style="font-style: italic;">/**</span>
+<span style="font-style: italic;"> * @param {number[]} nums</span>
+<span style="font-style: italic;"> * @param {number} target</span>
+<span style="font-style: italic;"> * @return {number[]}</span>
+<span style="font-style: italic;"> */</span>
+<span style="font-weight: bold;">let</span> <span style="font-weight: bold; font-style: italic;">twoSum</span> = <span style="font-weight: bold;">function</span> (<span style="font-weight: bold; font-style: italic;">nums</span>, <span style="font-weight: bold; font-style: italic;">target</span>) {
+  <span style="font-weight: bold;">const</span> <span style="font-weight: bold; font-style: italic;">map</span> = <span style="font-weight: bold;">new</span> <span style="font-weight: bold; text-decoration: underline;">Map</span>();
+  <span style="font-weight: bold;">for</span> (<span style="font-weight: bold;">let</span> <span style="font-weight: bold; font-style: italic;">i</span> = 0; i &lt; nums.length; i++) {
+    <span style="font-weight: bold;">let</span> <span style="font-weight: bold; font-style: italic;">x</span> = target - nums[i];
+    <span style="font-weight: bold;">if</span> (map.has(x)) {
+      <span style="font-weight: bold;">return</span> [map.get(x), i];
+    } <span style="font-weight: bold;">else</span> {
+      map.set(nums[i], i);
+    }
+  }
+};
+</pre>
+</div>
+
+<ul class="org-ul">
+<li>时间复杂度：\(O(n)\)</li>
+<li>空间复杂度：</li>
+</ul>
+
+<p>
+<code>Map</code>:
+</p>
+
+<p>
+<code>const map = new Map()</code>
+</p>
+
+<ul class="org-ul">
+<li><code>map.has()</code></li>
+<li><code>map.get()</code></li>
+<li><code>map.set</code></li>
+</ul>
+
+<p>
+全局对象 <code>Map</code> 持有键值对，且记忆原有的插入顺序。=Map= 和 <code>Object</code>
+是有区别的<sup><a id="fnr.3" class="footref" href="#fn.3">3</a></sup>：
+</p>
+
+<ol class="org-ol">
+<li><code>Map</code> 默认不存放内容，只存放后来放入的；=Object=
+有原型，所以存在和你的 key 矛盾的 key。</li>
+<li><code>Map</code> 的 key 可以是任何值（函数、对象、其他基元）；=Object=
+只能是字符串或符号。</li>
+<li><code>Map</code> 的 key 顺序和插入顺序一致；=Object= 则很复杂。</li>
+<li><code>Map</code> 的大小通过属性 size 获得；=Object= 的大小必须手动决定。</li>
+<li><code>Map</code> 是一个可迭代对象，所以可迭代；=Object=
+没有实现迭代协议，所以不能直接通过 <code>for...of</code> 迭代。</li>
+<li><code>Map</code> 在涉及频繁添加和删除键值对的场景中执行得更好；=Object= 相较于
+<code>Map</code> 在添加和删除键值对的场景稍弱。</li>
+<li>序列化，语法分析：=Map=
+并无原生支持，但可以自己构建；原生支持：=Object= 到 JSON，JSON 到
+=Object=。</li>
+</ol>
+
+<p>
+什么是哈希表？
+</p>
+</div>
+</div>
+
+<div id="outline-container-二45" class="outline-3">
+<h3 id="二45"><span class="section-number-3">2.2</span> 二<sup><a id="fnr.4" class="footref" href="#fn.4">4</a></sup>，<sup><a id="fnr.5" class="footref" href="#fn.5">5</a></sup></h3>
+<div class="outline-text-3" id="text-二45">
+<div class="org-src-container">
+<pre class="src src-js"><span style="font-style: italic;">/**</span>
+<span style="font-style: italic;"> * @param {number[]} nums</span>
+<span style="font-style: italic;"> * @param {number} target</span>
+<span style="font-style: italic;"> * @return {number[]}</span>
+<span style="font-style: italic;"> */</span>
+<span style="font-weight: bold;">var</span> <span style="font-weight: bold; font-style: italic;">twoSum</span> = <span style="font-weight: bold;">function</span> (<span style="font-weight: bold; font-style: italic;">nums</span>, <span style="font-weight: bold; font-style: italic;">target</span>) {
+  <span style="font-weight: bold;">let</span> <span style="font-weight: bold; font-style: italic;">prevNums</span> = {}; <span style="font-weight: bold; font-style: italic;">// </span><span style="font-weight: bold; font-style: italic;">&#23384;&#20648;&#20986;&#29616;&#30340;&#25968;&#23383;&#65292;&#21644;&#23545;&#24212;&#30340;&#32034;&#24341;</span>
+  <span style="font-weight: bold;">for</span> (<span style="font-weight: bold;">let</span> <span style="font-weight: bold; font-style: italic;">i</span> = 0; i &lt; nums.length; i++) { <span style="font-weight: bold; font-style: italic;">// </span><span style="font-weight: bold; font-style: italic;">&#36941;&#21382;&#20803;&#32032;</span>
+    <span style="font-weight: bold;">const</span> <span style="font-weight: bold; font-style: italic;">currentNum</span> = nums[i]; <span style="font-weight: bold; font-style: italic;">// </span><span style="font-weight: bold; font-style: italic;">&#24403;&#21069;&#20803;&#32032;</span>
+    <span style="font-weight: bold;">const</span> <span style="font-weight: bold; font-style: italic;">targetNum</span> = target - currentNum; <span style="font-weight: bold; font-style: italic;">// </span><span style="font-weight: bold; font-style: italic;">&#28385;&#36275;&#35201;&#27714;&#30340;&#30446;&#26631;&#20803;&#32032;</span>
+    <span style="font-weight: bold;">const</span> <span style="font-weight: bold; font-style: italic;">targetNumIndex</span> = prevNums[targetNum]; <span style="font-weight: bold; font-style: italic;">// </span><span style="font-weight: bold; font-style: italic;">&#22312; prevNums &#20013;&#33719;&#24471;&#30446;&#26631;&#20803;&#32032;&#30340;&#32034;&#24341;</span>
+    <span style="font-weight: bold;">if</span> (targetNumIndex !== <span style="font-weight: bold; text-decoration: underline;">undefined</span>) {
+      <span style="font-weight: bold;">return</span> [targetNumIndex, i]; <span style="font-weight: bold; font-style: italic;">// </span><span style="font-weight: bold; font-style: italic;">&#22914;&#26524;&#23384;&#22312;&#65292;&#30452;&#25509;&#36820;&#22238; [&#30446;&#26631;&#20803;&#32032;&#32034;&#24341;, &#24403;&#21069;&#32034;&#24341;]</span>
+    } <span style="font-weight: bold;">else</span> {
+      prevNums[currentNum] = i; <span style="font-weight: bold; font-style: italic;">// </span><span style="font-weight: bold; font-style: italic;">&#19981;&#23384;&#22312;&#30340;&#35805;&#65292;&#35828;&#26126;&#20043;&#21069;&#27809;&#20986;&#29616;&#30446;&#26631;&#20803;&#32032;&#65292;&#23384;&#20837;&#24403;&#21069;&#20803;&#32032;&#21644;&#23545;&#24212;&#32034;&#24341;</span>
+    }
+  }
+};
+</pre>
+</div>
+
+<p>
+哈希表
+</p>
+
+<p>
+HashMap 减少查询时间。
+</p>
+</div>
+</div>
+</div>
+<div id="footnotes">
+<h2 class="footnotes">Footnotes: </h2>
+<div id="text-footnotes">
+
+<div class="footdef"><sup><a id="fn.1" class="footnum" href="#fnr.1">1</a></sup> <div class="footpara"><p class="footpara">
+<a href="https://leetcode-cn.com/problems/two-sum/">https://leetcode-cn.com/problems/two-sum/</a>
+</p></div></div>
+
+<div class="footdef"><sup><a id="fn.2" class="footnum" href="#fnr.2">2</a></sup> <div class="footpara"><p class="footpara">
+<a href="https://leetcode-cn.com/problems/two-sum/solution/qiao-yong-jszhong-de-mapdui-xiang-by-ber-qegl/">https://leetcode-cn.com/problems/two-sum/solution/qiao-yong-jszhong-de-mapdui-xiang-by-ber-qegl/</a>
+</p></div></div>
+
+<div class="footdef"><sup><a id="fn.3" class="footnum" href="#fnr.3">3</a></sup> <div class="footpara"><p class="footpara">
+<a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Map">https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Map</a>
+</p></div></div>
+
+<div class="footdef"><sup><a id="fn.4" class="footnum" href="#fnr.4">4</a></sup> <div class="footpara"><p class="footpara">
+<a href="https://leetcode-cn.com/problems/two-sum/solution/dai-ma-sui-xiang-lu-dai-ni-gao-qing-chu-xhhit/">https://leetcode-cn.com/problems/two-sum/solution/dai-ma-sui-xiang-lu-dai-ni-gao-qing-chu-xhhit/</a>
+</p></div></div>
+
+<div class="footdef"><sup><a id="fn.5" class="footnum" href="#fnr.5">5</a></sup> <div class="footpara"><p class="footpara">
+<a href="https://leetcode-cn.com/problems/two-sum/solution/qing-xi-de-bian-liang-ming-ming-bang-zhu-ji-yi-bu-/">https://leetcode-cn.com/problems/two-sum/solution/qing-xi-de-bian-liang-ming-ming-bang-zhu-ji-yi-bu-/</a>
+</p></div></div>
+
+
+</div>
+</div></div>
+<div id="postamble" class="status">
+<p class="postamble">First created:  <br />Last updated: 2021-11-18 Thu 16:22 <br />Power by <a href="https://www.gnu.org/software/emacs/">Emacs</a> 27.2 (<a href="https://orgmode.org">Org</a> mode 9.4.4)</p>
+</div>
+</body>
+</html>
