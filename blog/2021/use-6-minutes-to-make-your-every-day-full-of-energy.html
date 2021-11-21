@@ -1,0 +1,436 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN"
+"http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en">
+<head>
+<!-- 2021-11-21 Sun 11:41 -->
+<meta http-equiv="Content-Type" content="text/html;charset=utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>&lrm;</title>
+<meta name="generator" content="Org mode" />
+<style type="text/css">
+ <!--/*--><![CDATA[/*><!--*/
+  .title  { text-align: center;
+             margin-bottom: .2em; }
+  .subtitle { text-align: center;
+              font-size: medium;
+              font-weight: bold;
+              margin-top:0; }
+  .todo   { font-family: monospace; color: red; }
+  .done   { font-family: monospace; color: green; }
+  .priority { font-family: monospace; color: orange; }
+  .tag    { background-color: #eee; font-family: monospace;
+            padding: 2px; font-size: 80%; font-weight: normal; }
+  .timestamp { color: #bebebe; }
+  .timestamp-kwd { color: #5f9ea0; }
+  .org-right  { margin-left: auto; margin-right: 0px;  text-align: right; }
+  .org-left   { margin-left: 0px;  margin-right: auto; text-align: left; }
+  .org-center { margin-left: auto; margin-right: auto; text-align: center; }
+  .underline { text-decoration: underline; }
+  #postamble p, #preamble p { font-size: 90%; margin: .2em; }
+  p.verse { margin-left: 3%; }
+  pre {
+    border: 1px solid #ccc;
+    box-shadow: 3px 3px 3px #eee;
+    padding: 8pt;
+    font-family: monospace;
+    overflow: auto;
+    margin: 1.2em;
+  }
+  pre.src {
+    position: relative;
+    overflow: auto;
+    padding-top: 1.2em;
+  }
+  pre.src:before {
+    display: none;
+    position: absolute;
+    background-color: white;
+    top: -10px;
+    right: 10px;
+    padding: 3px;
+    border: 1px solid black;
+  }
+  pre.src:hover:before { display: inline; margin-top: 14px;}
+  /* Languages per Org manual */
+  pre.src-asymptote:before { content: 'Asymptote'; }
+  pre.src-awk:before { content: 'Awk'; }
+  pre.src-C:before { content: 'C'; }
+  /* pre.src-C++ doesn't work in CSS */
+  pre.src-clojure:before { content: 'Clojure'; }
+  pre.src-css:before { content: 'CSS'; }
+  pre.src-D:before { content: 'D'; }
+  pre.src-ditaa:before { content: 'ditaa'; }
+  pre.src-dot:before { content: 'Graphviz'; }
+  pre.src-calc:before { content: 'Emacs Calc'; }
+  pre.src-emacs-lisp:before { content: 'Emacs Lisp'; }
+  pre.src-fortran:before { content: 'Fortran'; }
+  pre.src-gnuplot:before { content: 'gnuplot'; }
+  pre.src-haskell:before { content: 'Haskell'; }
+  pre.src-hledger:before { content: 'hledger'; }
+  pre.src-java:before { content: 'Java'; }
+  pre.src-js:before { content: 'Javascript'; }
+  pre.src-latex:before { content: 'LaTeX'; }
+  pre.src-ledger:before { content: 'Ledger'; }
+  pre.src-lisp:before { content: 'Lisp'; }
+  pre.src-lilypond:before { content: 'Lilypond'; }
+  pre.src-lua:before { content: 'Lua'; }
+  pre.src-matlab:before { content: 'MATLAB'; }
+  pre.src-mscgen:before { content: 'Mscgen'; }
+  pre.src-ocaml:before { content: 'Objective Caml'; }
+  pre.src-octave:before { content: 'Octave'; }
+  pre.src-org:before { content: 'Org mode'; }
+  pre.src-oz:before { content: 'OZ'; }
+  pre.src-plantuml:before { content: 'Plantuml'; }
+  pre.src-processing:before { content: 'Processing.js'; }
+  pre.src-python:before { content: 'Python'; }
+  pre.src-R:before { content: 'R'; }
+  pre.src-ruby:before { content: 'Ruby'; }
+  pre.src-sass:before { content: 'Sass'; }
+  pre.src-scheme:before { content: 'Scheme'; }
+  pre.src-screen:before { content: 'Gnu Screen'; }
+  pre.src-sed:before { content: 'Sed'; }
+  pre.src-sh:before { content: 'shell'; }
+  pre.src-sql:before { content: 'SQL'; }
+  pre.src-sqlite:before { content: 'SQLite'; }
+  /* additional languages in org.el's org-babel-load-languages alist */
+  pre.src-forth:before { content: 'Forth'; }
+  pre.src-io:before { content: 'IO'; }
+  pre.src-J:before { content: 'J'; }
+  pre.src-makefile:before { content: 'Makefile'; }
+  pre.src-maxima:before { content: 'Maxima'; }
+  pre.src-perl:before { content: 'Perl'; }
+  pre.src-picolisp:before { content: 'Pico Lisp'; }
+  pre.src-scala:before { content: 'Scala'; }
+  pre.src-shell:before { content: 'Shell Script'; }
+  pre.src-ebnf2ps:before { content: 'ebfn2ps'; }
+  /* additional language identifiers per "defun org-babel-execute"
+       in ob-*.el */
+  pre.src-cpp:before  { content: 'C++'; }
+  pre.src-abc:before  { content: 'ABC'; }
+  pre.src-coq:before  { content: 'Coq'; }
+  pre.src-groovy:before  { content: 'Groovy'; }
+  /* additional language identifiers from org-babel-shell-names in
+     ob-shell.el: ob-shell is the only babel language using a lambda to put
+     the execution function name together. */
+  pre.src-bash:before  { content: 'bash'; }
+  pre.src-csh:before  { content: 'csh'; }
+  pre.src-ash:before  { content: 'ash'; }
+  pre.src-dash:before  { content: 'dash'; }
+  pre.src-ksh:before  { content: 'ksh'; }
+  pre.src-mksh:before  { content: 'mksh'; }
+  pre.src-posh:before  { content: 'posh'; }
+  /* Additional Emacs modes also supported by the LaTeX listings package */
+  pre.src-ada:before { content: 'Ada'; }
+  pre.src-asm:before { content: 'Assembler'; }
+  pre.src-caml:before { content: 'Caml'; }
+  pre.src-delphi:before { content: 'Delphi'; }
+  pre.src-html:before { content: 'HTML'; }
+  pre.src-idl:before { content: 'IDL'; }
+  pre.src-mercury:before { content: 'Mercury'; }
+  pre.src-metapost:before { content: 'MetaPost'; }
+  pre.src-modula-2:before { content: 'Modula-2'; }
+  pre.src-pascal:before { content: 'Pascal'; }
+  pre.src-ps:before { content: 'PostScript'; }
+  pre.src-prolog:before { content: 'Prolog'; }
+  pre.src-simula:before { content: 'Simula'; }
+  pre.src-tcl:before { content: 'tcl'; }
+  pre.src-tex:before { content: 'TeX'; }
+  pre.src-plain-tex:before { content: 'Plain TeX'; }
+  pre.src-verilog:before { content: 'Verilog'; }
+  pre.src-vhdl:before { content: 'VHDL'; }
+  pre.src-xml:before { content: 'XML'; }
+  pre.src-nxml:before { content: 'XML'; }
+  /* add a generic configuration mode; LaTeX export needs an additional
+     (add-to-list 'org-latex-listings-langs '(conf " ")) in .emacs */
+  pre.src-conf:before { content: 'Configuration File'; }
+
+  table { border-collapse:collapse; }
+  caption.t-above { caption-side: top; }
+  caption.t-bottom { caption-side: bottom; }
+  td, th { vertical-align:top;  }
+  th.org-right  { text-align: center;  }
+  th.org-left   { text-align: center;   }
+  th.org-center { text-align: center; }
+  td.org-right  { text-align: right;  }
+  td.org-left   { text-align: left;   }
+  td.org-center { text-align: center; }
+  dt { font-weight: bold; }
+  .footpara { display: inline; }
+  .footdef  { margin-bottom: 1em; }
+  .figure { padding: 1em; }
+  .figure p { text-align: center; }
+  .equation-container {
+    display: table;
+    text-align: center;
+    width: 100%;
+  }
+  .equation {
+    vertical-align: middle;
+  }
+  .equation-label {
+    display: table-cell;
+    text-align: right;
+    vertical-align: middle;
+  }
+  .inlinetask {
+    padding: 10px;
+    border: 2px solid gray;
+    margin: 10px;
+    background: #ffffcc;
+  }
+  #org-div-home-and-up
+   { text-align: right; font-size: 70%; white-space: nowrap; }
+  textarea { overflow-x: auto; }
+  .linenr { font-size: smaller }
+  .code-highlighted { background-color: #ffff00; }
+  .org-info-js_info-navigation { border-style: none; }
+  #org-info-js_console-label
+    { font-size: 10px; font-weight: bold; white-space: nowrap; }
+  .org-info-js_search-highlight
+    { background-color: #ffff00; color: #000000; font-weight: bold; }
+  .org-svg { width: 90%; }
+  /*]]>*/-->
+</style>
+<script type="text/javascript">
+// @license magnet:?xt=urn:btih:e95b018ef3580986a04669f1b5879592219e2a7a&dn=public-domain.txt Public Domain
+<!--/*--><![CDATA[/*><!--*/
+     function CodeHighlightOn(elem, id)
+     {
+       var target = document.getElementById(id);
+       if(null != target) {
+         elem.classList.add("code-highlighted");
+         target.classList.add("code-highlighted");
+       }
+     }
+     function CodeHighlightOff(elem, id)
+     {
+       var target = document.getElementById(id);
+       if(null != target) {
+         elem.classList.remove("code-highlighted");
+         target.classList.remove("code-highlighted");
+       }
+     }
+    /*]]>*///-->
+// @license-end
+</script>
+</head>
+<body>
+<div id="content">
+<div id="table-of-contents">
+<h2>Table of Contents</h2>
+<div id="text-table-of-contents">
+<ul>
+<li><a href="#高频事件一定要重视">1. 高频事件，一定要重视</a></li>
+<li><a href="#成功是由多个因素组合">2. 成功是由多个因素组合</a></li>
+<li><a href="#越早做一天就越早受益一天">3. 越早做一天，就越早受益一天</a></li>
+<li><a href="#如何用-6-分钟让自己一整天充满活力">4. 如何用 6 分钟，让自己一整天充满活力</a>
+<ul>
+<li><a href="#静心">4.1. 1. 静心</a></li>
+<li><a href="#自我肯定">4.2. 2. 自我肯定</a></li>
+<li><a href="#内心演练">4.3. 3. 内心演练</a></li>
+<li><a href="#锻炼">4.4. 4. 锻炼</a></li>
+</ul>
+</li>
+</ul>
+</div>
+</div>
+<p>
+<del>+</del> date = '2021-02-03T09:51:09+08:00' description = '《如何用 6
+分钟让自己的每一天都活力满满》阅读笔记' keywords = ['个人'] tags =
+['个人'] title = '如何用 6 分钟让自己的每一天都活力满满' <del>+</del>
+</p>
+
+<p>
+*一个人怎样度过早晨，就会怎样度过一天*。
+</p>
+
+
+<div id="orgbbdf7e8" class="figure">
+<p><img src="file:///images/morning.jpeg" alt="morning.jpeg" />
+</p>
+<p><span class="figure-number">Figure 1: </span>morning</p>
+</div>
+
+<div id="outline-container-高频事件一定要重视" class="outline-2">
+<h2 id="高频事件一定要重视"><span class="section-number-2">1</span> 高频事件，一定要重视</h2>
+<div class="outline-text-2" id="text-高频事件一定要重视">
+<p>
+改变“最高频要素”会从根本上改变生命体的生活质量。比如呼吸和心率是极高频的事物，改善呼吸和心跳收益极大。
+</p>
+
+<p>
+*通过睡眠呼吸机和冥想可以改善呼吸，通过有氧运动可以改善心跳*。
+</p>
+
+<p>
+那么对组织而言，什么是它的呼吸和心跳？
+</p>
+</div>
+</div>
+
+<div id="outline-container-成功是由多个因素组合" class="outline-2">
+<h2 id="成功是由多个因素组合"><span class="section-number-2">2</span> 成功是由多个因素组合</h2>
+<div class="outline-text-2" id="text-成功是由多个因素组合">
+<p>
+成功 = 效率 + 情绪 + 方法 + 心态 + &#x2026;&#x2026;
+</p>
+
+<p>
+在每一个点上，优化到极致
+</p>
+
+<p>
+累加起来，就比别人高很多
+</p>
+</div>
+</div>
+
+<div id="outline-container-越早做一天就越早受益一天" class="outline-2">
+<h2 id="越早做一天就越早受益一天"><span class="section-number-2">3</span> 越早做一天，就越早受益一天</h2>
+<div class="outline-text-2" id="text-越早做一天就越早受益一天">
+<ul class="org-ul">
+<li>早起</li>
+<li>修心</li>
+<li>写作</li>
+<li>读书</li>
+<li>思考</li>
+<li>&#x2026;&#x2026;</li>
+</ul>
+
+<p>
+<b>每天都能让自己变得更好一点</b>
+</p>
+</div>
+</div>
+
+<div id="outline-container-如何用-6-分钟让自己一整天充满活力" class="outline-2">
+<h2 id="如何用-6-分钟让自己一整天充满活力"><span class="section-number-2">4</span> 如何用 6 分钟，让自己一整天充满活力</h2>
+<div class="outline-text-2" id="text-如何用-6-分钟让自己一整天充满活力">
+<ol class="org-ol">
+<li>静心</li>
+<li>自我肯定</li>
+<li>内心演练</li>
+<li>锻炼</li>
+</ol>
+
+<p>
+/ / /
+</p>
+</div>
+
+<div id="outline-container-静心" class="outline-3">
+<h3 id="静心"><span class="section-number-3">4.1</span> 1. 静心</h3>
+<div class="outline-text-3" id="text-静心">
+<p>
+头脑明晰，每天专注自己的目标
+</p>
+
+<ul class="org-ul">
+<li>冥想（想象自己呼入的是积极、爱、平静和力量，呼出的是压力和烦恼）</li>
+<li>沉思（目标）</li>
+<li>深呼吸</li>
+<li>感恩（感谢父母、家人、朋友、国家、这个世界）</li>
+</ul>
+</div>
+</div>
+
+<div id="outline-container-自我肯定" class="outline-3">
+<h3 id="自我肯定"><span class="section-number-3">4.2</span> 2. 自我肯定</h3>
+<div class="outline-text-3" id="text-自我肯定">
+<ul class="org-ul">
+<li>调整自己的精神状态（大脑喜欢放大影响，思考负面的事情）</li>
+<li>无论你以为自己做得到、还是做不到，你都是对的</li>
+<li>主动对自己的潜意识编程（健康、财务、人际关系、幸福、自信&#x2026;&#x2026;）</li>
+</ul>
+
+<p>
+*关于自我肯定*：
+</p>
+
+<ol class="org-ol">
+<li>我想成为什么样的人？</li>
+<li>我想要实现什么样的目标？</li>
+<li>我每天要做什么事情？</li>
+</ol>
+
+<p>
+准备一份励志语录，每天早晨起来：朗读；每晚睡觉之前：朗读。
+</p>
+
+<p>
+<b>对抗惯性</b>
+</p>
+</div>
+</div>
+
+<div id="outline-container-内心演练" class="outline-3">
+<h3 id="内心演练"><span class="section-number-3">4.3</span> 3. 内心演练</h3>
+<div class="outline-text-3" id="text-内心演练">
+<p>
+想象自己理想的一天，轻松、自信、愉快地完成所有工作（人总是会被困在过去，总是在脑海里反复播放曾经失败的画面）。
+</p>
+
+<blockquote>
+<p>
+稻盛和夫：想象得有色彩
+</p>
+
+<p>
+老虎伍兹：经常在心里预演高尔夫球的运行轨迹
+</p>
+
+<p>
+世界冠军：哪怕是训练，我也会首先在脑海预演一遍击球的过程，然后才会击球
+</p>
+</blockquote>
+
+<p>
+*我们现在的一切，都是过去思想的结果*。
+</p>
+</div>
+</div>
+
+<div id="outline-container-锻炼" class="outline-3">
+<h3 id="锻炼"><span class="section-number-3">4.4</span> 4. 锻炼</h3>
+<div class="outline-text-3" id="text-锻炼">
+<ul class="org-ul">
+<li>让心脏强烈地跳动起来</li>
+<li>让血液流遍全身</li>
+<li>让身体充满活力</li>
+</ul>
+
+<p>
+/ / /
+</p>
+
+<ol class="org-ol">
+<li>静心：冥想/深呼吸</li>
+<li>自我肯定：朗读</li>
+<li>内心演练：想象</li>
+<li>锻炼：动起来</li>
+</ol>
+
+<p>
+👇
+</p>
+
+<p>
+开始一天的工作
+</p>
+
+<hr />
+
+<p>
+*参考资料*：
+</p>
+
+<ol class="org-ol">
+<li>明白-&#x2013;&#x2014;《如何用 6 分钟让自己的每一天都活力满满》</li>
+</ol>
+</div>
+</div>
+</div>
+</div>
+</body>
+</html>
