@@ -1,0 +1,381 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN"
+"http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en">
+<head>
+<!-- 2021-11-21 Sun 11:39 -->
+<meta http-equiv="Content-Type" content="text/html;charset=utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>&lrm;</title>
+<meta name="generator" content="Org mode" />
+<style type="text/css">
+ <!--/*--><![CDATA[/*><!--*/
+  .title  { text-align: center;
+             margin-bottom: .2em; }
+  .subtitle { text-align: center;
+              font-size: medium;
+              font-weight: bold;
+              margin-top:0; }
+  .todo   { font-family: monospace; color: red; }
+  .done   { font-family: monospace; color: green; }
+  .priority { font-family: monospace; color: orange; }
+  .tag    { background-color: #eee; font-family: monospace;
+            padding: 2px; font-size: 80%; font-weight: normal; }
+  .timestamp { color: #bebebe; }
+  .timestamp-kwd { color: #5f9ea0; }
+  .org-right  { margin-left: auto; margin-right: 0px;  text-align: right; }
+  .org-left   { margin-left: 0px;  margin-right: auto; text-align: left; }
+  .org-center { margin-left: auto; margin-right: auto; text-align: center; }
+  .underline { text-decoration: underline; }
+  #postamble p, #preamble p { font-size: 90%; margin: .2em; }
+  p.verse { margin-left: 3%; }
+  pre {
+    border: 1px solid #ccc;
+    box-shadow: 3px 3px 3px #eee;
+    padding: 8pt;
+    font-family: monospace;
+    overflow: auto;
+    margin: 1.2em;
+  }
+  pre.src {
+    position: relative;
+    overflow: auto;
+    padding-top: 1.2em;
+  }
+  pre.src:before {
+    display: none;
+    position: absolute;
+    background-color: white;
+    top: -10px;
+    right: 10px;
+    padding: 3px;
+    border: 1px solid black;
+  }
+  pre.src:hover:before { display: inline; margin-top: 14px;}
+  /* Languages per Org manual */
+  pre.src-asymptote:before { content: 'Asymptote'; }
+  pre.src-awk:before { content: 'Awk'; }
+  pre.src-C:before { content: 'C'; }
+  /* pre.src-C++ doesn't work in CSS */
+  pre.src-clojure:before { content: 'Clojure'; }
+  pre.src-css:before { content: 'CSS'; }
+  pre.src-D:before { content: 'D'; }
+  pre.src-ditaa:before { content: 'ditaa'; }
+  pre.src-dot:before { content: 'Graphviz'; }
+  pre.src-calc:before { content: 'Emacs Calc'; }
+  pre.src-emacs-lisp:before { content: 'Emacs Lisp'; }
+  pre.src-fortran:before { content: 'Fortran'; }
+  pre.src-gnuplot:before { content: 'gnuplot'; }
+  pre.src-haskell:before { content: 'Haskell'; }
+  pre.src-hledger:before { content: 'hledger'; }
+  pre.src-java:before { content: 'Java'; }
+  pre.src-js:before { content: 'Javascript'; }
+  pre.src-latex:before { content: 'LaTeX'; }
+  pre.src-ledger:before { content: 'Ledger'; }
+  pre.src-lisp:before { content: 'Lisp'; }
+  pre.src-lilypond:before { content: 'Lilypond'; }
+  pre.src-lua:before { content: 'Lua'; }
+  pre.src-matlab:before { content: 'MATLAB'; }
+  pre.src-mscgen:before { content: 'Mscgen'; }
+  pre.src-ocaml:before { content: 'Objective Caml'; }
+  pre.src-octave:before { content: 'Octave'; }
+  pre.src-org:before { content: 'Org mode'; }
+  pre.src-oz:before { content: 'OZ'; }
+  pre.src-plantuml:before { content: 'Plantuml'; }
+  pre.src-processing:before { content: 'Processing.js'; }
+  pre.src-python:before { content: 'Python'; }
+  pre.src-R:before { content: 'R'; }
+  pre.src-ruby:before { content: 'Ruby'; }
+  pre.src-sass:before { content: 'Sass'; }
+  pre.src-scheme:before { content: 'Scheme'; }
+  pre.src-screen:before { content: 'Gnu Screen'; }
+  pre.src-sed:before { content: 'Sed'; }
+  pre.src-sh:before { content: 'shell'; }
+  pre.src-sql:before { content: 'SQL'; }
+  pre.src-sqlite:before { content: 'SQLite'; }
+  /* additional languages in org.el's org-babel-load-languages alist */
+  pre.src-forth:before { content: 'Forth'; }
+  pre.src-io:before { content: 'IO'; }
+  pre.src-J:before { content: 'J'; }
+  pre.src-makefile:before { content: 'Makefile'; }
+  pre.src-maxima:before { content: 'Maxima'; }
+  pre.src-perl:before { content: 'Perl'; }
+  pre.src-picolisp:before { content: 'Pico Lisp'; }
+  pre.src-scala:before { content: 'Scala'; }
+  pre.src-shell:before { content: 'Shell Script'; }
+  pre.src-ebnf2ps:before { content: 'ebfn2ps'; }
+  /* additional language identifiers per "defun org-babel-execute"
+       in ob-*.el */
+  pre.src-cpp:before  { content: 'C++'; }
+  pre.src-abc:before  { content: 'ABC'; }
+  pre.src-coq:before  { content: 'Coq'; }
+  pre.src-groovy:before  { content: 'Groovy'; }
+  /* additional language identifiers from org-babel-shell-names in
+     ob-shell.el: ob-shell is the only babel language using a lambda to put
+     the execution function name together. */
+  pre.src-bash:before  { content: 'bash'; }
+  pre.src-csh:before  { content: 'csh'; }
+  pre.src-ash:before  { content: 'ash'; }
+  pre.src-dash:before  { content: 'dash'; }
+  pre.src-ksh:before  { content: 'ksh'; }
+  pre.src-mksh:before  { content: 'mksh'; }
+  pre.src-posh:before  { content: 'posh'; }
+  /* Additional Emacs modes also supported by the LaTeX listings package */
+  pre.src-ada:before { content: 'Ada'; }
+  pre.src-asm:before { content: 'Assembler'; }
+  pre.src-caml:before { content: 'Caml'; }
+  pre.src-delphi:before { content: 'Delphi'; }
+  pre.src-html:before { content: 'HTML'; }
+  pre.src-idl:before { content: 'IDL'; }
+  pre.src-mercury:before { content: 'Mercury'; }
+  pre.src-metapost:before { content: 'MetaPost'; }
+  pre.src-modula-2:before { content: 'Modula-2'; }
+  pre.src-pascal:before { content: 'Pascal'; }
+  pre.src-ps:before { content: 'PostScript'; }
+  pre.src-prolog:before { content: 'Prolog'; }
+  pre.src-simula:before { content: 'Simula'; }
+  pre.src-tcl:before { content: 'tcl'; }
+  pre.src-tex:before { content: 'TeX'; }
+  pre.src-plain-tex:before { content: 'Plain TeX'; }
+  pre.src-verilog:before { content: 'Verilog'; }
+  pre.src-vhdl:before { content: 'VHDL'; }
+  pre.src-xml:before { content: 'XML'; }
+  pre.src-nxml:before { content: 'XML'; }
+  /* add a generic configuration mode; LaTeX export needs an additional
+     (add-to-list 'org-latex-listings-langs '(conf " ")) in .emacs */
+  pre.src-conf:before { content: 'Configuration File'; }
+
+  table { border-collapse:collapse; }
+  caption.t-above { caption-side: top; }
+  caption.t-bottom { caption-side: bottom; }
+  td, th { vertical-align:top;  }
+  th.org-right  { text-align: center;  }
+  th.org-left   { text-align: center;   }
+  th.org-center { text-align: center; }
+  td.org-right  { text-align: right;  }
+  td.org-left   { text-align: left;   }
+  td.org-center { text-align: center; }
+  dt { font-weight: bold; }
+  .footpara { display: inline; }
+  .footdef  { margin-bottom: 1em; }
+  .figure { padding: 1em; }
+  .figure p { text-align: center; }
+  .equation-container {
+    display: table;
+    text-align: center;
+    width: 100%;
+  }
+  .equation {
+    vertical-align: middle;
+  }
+  .equation-label {
+    display: table-cell;
+    text-align: right;
+    vertical-align: middle;
+  }
+  .inlinetask {
+    padding: 10px;
+    border: 2px solid gray;
+    margin: 10px;
+    background: #ffffcc;
+  }
+  #org-div-home-and-up
+   { text-align: right; font-size: 70%; white-space: nowrap; }
+  textarea { overflow-x: auto; }
+  .linenr { font-size: smaller }
+  .code-highlighted { background-color: #ffff00; }
+  .org-info-js_info-navigation { border-style: none; }
+  #org-info-js_console-label
+    { font-size: 10px; font-weight: bold; white-space: nowrap; }
+  .org-info-js_search-highlight
+    { background-color: #ffff00; color: #000000; font-weight: bold; }
+  .org-svg { width: 90%; }
+  /*]]>*/-->
+</style>
+<script type="text/javascript">
+// @license magnet:?xt=urn:btih:e95b018ef3580986a04669f1b5879592219e2a7a&dn=public-domain.txt Public Domain
+<!--/*--><![CDATA[/*><!--*/
+     function CodeHighlightOn(elem, id)
+     {
+       var target = document.getElementById(id);
+       if(null != target) {
+         elem.classList.add("code-highlighted");
+         target.classList.add("code-highlighted");
+       }
+     }
+     function CodeHighlightOff(elem, id)
+     {
+       var target = document.getElementById(id);
+       if(null != target) {
+         elem.classList.remove("code-highlighted");
+         target.classList.remove("code-highlighted");
+       }
+     }
+    /*]]>*///-->
+// @license-end
+</script>
+</head>
+<body>
+<div id="content">
+<p>
+<del>+</del> date = '2021-09-19T21:58:04+08:00' slug = 'i-got-my-curiosity-back'
+tags = ['随笔'] title = '我找回了好奇心' <del>+</del>
+</p>
+
+<p>
+2019 年 5 月 15
+日写的文章《<a href="file:///posts/we-said-that-it-would-not-change/">当初说好不会改变的我们都改变了</a>》：
+</p>
+
+<blockquote>
+<p>
+有的人，对自然的一切事物都保持着好奇心，当一件未知事物摆在面前，他们想的不是如何应付过去。
+</p>
+
+<p>
+而是*如果自己做成这一件事情，能从中得到些什么，能够学会怎样的思维方式*。因为这就是他们做这件事情的意义所在。
+</p>
+</blockquote>
+
+<p>
+2019 年 5 月 22
+日写的文章《<a href="file:///posts/are-you-an-imaginative-person/">你是一个有想象力的人吗？</a>》：
+</p>
+
+<blockquote>
+<p>
+我知道自己最喜欢天马行空了，无论看到什么都会保持一定的好奇心，有些疑问就会寻求帮助，寻求父母的帮助，寻求身边人的帮助。
+</p>
+</blockquote>
+
+<p>
+2019 年 7 月 17
+日写的文章《<a href="file:///posts/my-linear-algebra-failed/">对不起，我的线代挂了</a>》：
+</p>
+
+<blockquote>
+<p>
+思绪很容易就飘向童年，那时的自己内心纯净，单纯自然，虽然很自卑，却比现在好太多。见到一些自然而又美妙的事物总是很有好奇心，总是那么着迷，总是那么的忘乎所以。印象最深的到现在也忘得差不多了。时间就是一把斧子，把我这颗大树砍得不成样子，人非人，鬼非鬼，整个儿一变态。童年大树枝繁叶茂，根系发达，尚能茁壮成长；斧子在我成年后显现出威力，把我的天性刨去，只剩劣根（性）。所以，我痛苦不堪，始终不能自然。
+</p>
+</blockquote>
+
+<p>
+2019 年 8 月 23
+日写的文章《<a href="file:///posts/good-curiosity-is-a-treasure/">好奇心用好是个宝</a>》：
+</p>
+
+<blockquote>
+<p>
+你是否还保有儿时的那种好奇心，见到什么都想研究一番。这种好奇心的第一个阶段就是占有欲，我们认为自己占有了某样事物时，自己的好奇心就被满足了。其实，这只是一种假象。专业点讲，你占有的仅仅是物理实体。通俗点讲，占有物质仅仅是第一步，接下来还需要在精神上满足好奇心。
+</p>
+</blockquote>
+
+<p>
+2019 年 10 月 15
+日写的文章《<a href="file:///posts/when-you-really-start-something/">当你真正开启一件事情的时候</a>》：
+</p>
+
+<blockquote>
+<p>
+在这件事中你能够获得极大的满足感，你的好奇心获得极大的满足，你整个人就像是一个热烈的太阳一样，热情如火，激情四射。
+</p>
+</blockquote>
+
+<p>
+2020 年 1 月 29
+日写的文章《<a href="file:///posts/good-and-bad-are-all-in-your-own-thoughts/">好与坏全在于自己的想法</a>》：
+</p>
+
+<blockquote>
+<p>
+插件安装太多会使浏览器打开变慢，所以，之前试用的大部分插件都删除了。在花时间用这些插件的时候，一开始还有好奇心、有活力，但时间一长就不行了。这个时间长指的是连续五六个小时。好奇心就会变成烦躁，想着赶紧结束这一切吧。
+</p>
+</blockquote>
+
+<p>
+2020 年 2 月 7
+日写的文章《<a href="file:///posts/liang-shuming-eight-levels-of-learning/">梁漱溟《学问的八层境界》</a>》：
+</p>
+
+<blockquote>
+<p>
+我并不厌倦社交，我只是不太想花很多时间在上面，维持友谊没有必要。真正的朋友不会因为你很长时间不和他联系而故意疏远你的。在与朋友的交往中，我就会发现这个人有很多和我不一样的地方。于是，我就怀着强烈的好奇心，去询问他，你为什么会这样想，为什么会这样做。实在不明白他做某些事情的缘由。
+</p>
+</blockquote>
+
+<p>
+2021 年 1 月 24
+日写的文章《<a href="file:///posts/question-2021-3/">2021年第3周问题汇总</a>》：
+</p>
+
+<blockquote>
+<p>
+如果人的一切行为都是为了现实中的利益获得，人的思想体现在哪里？人如果没有好奇心，没有幻想，人还是人吗？
+</p>
+</blockquote>
+
+<p>
+2021 年 2 月 20
+日写的文章《<a href="file:///posts/asimov-the-intelligent-man-s-guide-to-science/">Isaac
+Asimov《阿西莫夫最新科学指南（上下册）》</a>》：
+</p>
+
+<blockquote>
+<p>
+在刺探别人的私生活上，它仍然是人类精神中最高贵的天性，因为好奇心最基本的定义是“求知欲”。这种求知欲最初表现在解决人类实际生活的需求上，例如：怎样耕种作物能获得丰收？怎样设计弓箭才最好用？怎样织布比较好？简单地说就是“应用艺术”。当这些比较基本的技能需求满足以后又如何呢？求知欲不可避免地会升级到比较不受限制和更复杂的活动上。
+</p>
+</blockquote>
+
+<p>
+2021 年 2 月 23 日写的文章《<a href="file:///posts/steve-jobs/">Walter
+Isaacson《史蒂夫·乔布斯传》</a>》：
+</p>
+
+<blockquote>
+<p>
+我遭遇的是自己从未遇到过的另一种形式的权威，而且我不喜欢它。他们几乎都要制服我了。差一点儿他们就把我身上所有的好奇心都赶走了。
+</p>
+</blockquote>
+
+<p>
+2021 年 4 月 5
+日写的文章《<a href="file:///posts/those-sad-young-men/">许知远《那些忧伤的年轻人》</a>》：
+</p>
+
+<blockquote>
+<p>
+两点是：一、我们对于世界依然充满无限的好奇心；二、这个世界是复杂而非线性的。有了这两点存在，我们这世界的信息就依然会增加下去。
+</p>
+</blockquote>
+
+<p>
+2021 年 9 月 4
+日写的文章《<a href="file:///posts/maugham-the-razors-edge/">毛姆《刀锋》</a>》：
+</p>
+
+<blockquote>
+<p>
+什么是“无限”？
+</p>
+
+<p>
+“雅利安人最初来到印度时，把我们已知的世界看作只是我们不可知世界的表象；但是他们喜欢这样一个世界，觉得它山清水秀、五彩缤纷。仅仅几个世纪之后，当疲惫的征服和不断恶化的气候削弱了他们的活力时，他们就成为成群结队入侵者的猎物。他们看到的仅仅是生命的罪恶，并且渴望从轮回中解脱出来。但是为什么我们西方人，尤其是我们美国人竟然被腐朽、死亡、饥渴、疾病、衰老、痛苦和欺骗所震慑呢？我们有强大的生命力。当时，我坐在自己的小木屋里，抽着烟斗，我感觉比之前任何时候都充满活力，我觉得体内有种力量急于扩展开来，这不是因为我远离世界，遁世隐居，而是我生活在这个世界上，爱世界上的万事万物，不是爱它们的表象，而是爱它们之中蕴含着的‘无限'。假如在我经历的极乐时刻，我的确和‘绝对'合二为一，那么，如果他们说的是真的，任何事情都不能影响到我，而当我已经清算了我今生的业（印度教和佛教等宗教中认为今生的行为会影响到来世的信仰），我就再也不能回到尘世来。这种想法使我感到抑郁。我想一次又一次生存，有生命的轮回，我愿意去接受任何类型生命的存在，不论它是痛苦还是悲伤，我感觉生生世世、生生不息才能满足我的渴望、我的活力和我的好奇心。
+</p>
+</blockquote>
+
+<p>
+在过去撰写的这 12 篇文章里包含了同一个词-&#x2013;&#x2014;「好奇心」，19
+年出现的次数最多，21年次之，20年最少。我不断地告诉自己要保持一颗好奇心，但是我做不到。有太多诱惑让我忘记好奇，只想得到利益好处，却忘记当好奇心得到满足时的单纯喜悦的感觉。
+</p>
+
+<p>
+我很庆幸，自己认识了
+[@reuixiy](<a href="https://io-oi.me/">https://io-oi.me/</a>)。在向他询问一个概念时，他引出了「好奇心」一词，我突然意识到-&#x2013;&#x2014;好奇心得到满足时的愉悦感很久没有了，有的只是机械地准备面试，不会思考自己为什么要这样做。
+</p>
+
+<p>
+秋招的时候到了，我还在学习技能，不能和别人一样投递简历。我应该按照自己的节奏，循着自己的好奇心，探索自己的技术方向。
+</p>
+</div>
+</body>
+</html>

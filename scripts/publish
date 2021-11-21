@@ -1,18 +1,16 @@
 #!/bin/bash
 
-# generate html files.
-# rm ~/.org-timestamps/pages.cache
+## remvoe old html files
+find . -name "*.html" -type f -delete # https://askubuntu.com/a/377442
+
+## generate new html files
+rm ~/.org-timestamps/pages.cache
 emacs --batch --script ./scripts/publish.el
 
-if [ $? != 0 ]
-then
-    echo "publish failed!"
-    exit 1
-fi
-
-# post processing html files.
+## generate sitemap
 python ./scripts/gen-sitemap
+
+## push two remotes
 git add --all
-git commit -m 'BUILD HTML'
-git push ts main
+git commit -m "BUILD HTML"
 git push origin main
