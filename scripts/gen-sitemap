@@ -43,4 +43,4 @@ with open('./sitemap.xml', 'w') as fh:
         site + x[len(HTML_DIR):-4] + 'html') for x in html_files]
     lines.sort()
     fh.writelines(lines)
-    fh.write('</urlset>\n')
+    fh.write('</urlset>')
