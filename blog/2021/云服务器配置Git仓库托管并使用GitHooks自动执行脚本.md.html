@@ -3,11 +3,195 @@
 "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en">
 <head>
-<!-- 2021-11-20 Sat 19:26 -->
+<!-- 2021-11-21 Sun 08:40 -->
 <meta http-equiv="Content-Type" content="text/html;charset=utf-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1" />
 <title>&lrm;</title>
 <meta name="generator" content="Org mode" />
+<style type="text/css">
+ <!--/*--><![CDATA[/*><!--*/
+  .title  { text-align: center;
+             margin-bottom: .2em; }
+  .subtitle { text-align: center;
+              font-size: medium;
+              font-weight: bold;
+              margin-top:0; }
+  .todo   { font-family: monospace; color: red; }
+  .done   { font-family: monospace; color: green; }
+  .priority { font-family: monospace; color: orange; }
+  .tag    { background-color: #eee; font-family: monospace;
+            padding: 2px; font-size: 80%; font-weight: normal; }
+  .timestamp { color: #bebebe; }
+  .timestamp-kwd { color: #5f9ea0; }
+  .org-right  { margin-left: auto; margin-right: 0px;  text-align: right; }
+  .org-left   { margin-left: 0px;  margin-right: auto; text-align: left; }
+  .org-center { margin-left: auto; margin-right: auto; text-align: center; }
+  .underline { text-decoration: underline; }
+  #postamble p, #preamble p { font-size: 90%; margin: .2em; }
+  p.verse { margin-left: 3%; }
+  pre {
+    border: 1px solid #ccc;
+    box-shadow: 3px 3px 3px #eee;
+    padding: 8pt;
+    font-family: monospace;
+    overflow: auto;
+    margin: 1.2em;
+  }
+  pre.src {
+    position: relative;
+    overflow: auto;
+    padding-top: 1.2em;
+  }
+  pre.src:before {
+    display: none;
+    position: absolute;
+    background-color: white;
+    top: -10px;
+    right: 10px;
+    padding: 3px;
+    border: 1px solid black;
+  }
+  pre.src:hover:before { display: inline; margin-top: 14px;}
+  /* Languages per Org manual */
+  pre.src-asymptote:before { content: 'Asymptote'; }
+  pre.src-awk:before { content: 'Awk'; }
+  pre.src-C:before { content: 'C'; }
+  /* pre.src-C++ doesn't work in CSS */
+  pre.src-clojure:before { content: 'Clojure'; }
+  pre.src-css:before { content: 'CSS'; }
+  pre.src-D:before { content: 'D'; }
+  pre.src-ditaa:before { content: 'ditaa'; }
+  pre.src-dot:before { content: 'Graphviz'; }
+  pre.src-calc:before { content: 'Emacs Calc'; }
+  pre.src-emacs-lisp:before { content: 'Emacs Lisp'; }
+  pre.src-fortran:before { content: 'Fortran'; }
+  pre.src-gnuplot:before { content: 'gnuplot'; }
+  pre.src-haskell:before { content: 'Haskell'; }
+  pre.src-hledger:before { content: 'hledger'; }
+  pre.src-java:before { content: 'Java'; }
+  pre.src-js:before { content: 'Javascript'; }
+  pre.src-latex:before { content: 'LaTeX'; }
+  pre.src-ledger:before { content: 'Ledger'; }
+  pre.src-lisp:before { content: 'Lisp'; }
+  pre.src-lilypond:before { content: 'Lilypond'; }
+  pre.src-lua:before { content: 'Lua'; }
+  pre.src-matlab:before { content: 'MATLAB'; }
+  pre.src-mscgen:before { content: 'Mscgen'; }
+  pre.src-ocaml:before { content: 'Objective Caml'; }
+  pre.src-octave:before { content: 'Octave'; }
+  pre.src-org:before { content: 'Org mode'; }
+  pre.src-oz:before { content: 'OZ'; }
+  pre.src-plantuml:before { content: 'Plantuml'; }
+  pre.src-processing:before { content: 'Processing.js'; }
+  pre.src-python:before { content: 'Python'; }
+  pre.src-R:before { content: 'R'; }
+  pre.src-ruby:before { content: 'Ruby'; }
+  pre.src-sass:before { content: 'Sass'; }
+  pre.src-scheme:before { content: 'Scheme'; }
+  pre.src-screen:before { content: 'Gnu Screen'; }
+  pre.src-sed:before { content: 'Sed'; }
+  pre.src-sh:before { content: 'shell'; }
+  pre.src-sql:before { content: 'SQL'; }
+  pre.src-sqlite:before { content: 'SQLite'; }
+  /* additional languages in org.el's org-babel-load-languages alist */
+  pre.src-forth:before { content: 'Forth'; }
+  pre.src-io:before { content: 'IO'; }
+  pre.src-J:before { content: 'J'; }
+  pre.src-makefile:before { content: 'Makefile'; }
+  pre.src-maxima:before { content: 'Maxima'; }
+  pre.src-perl:before { content: 'Perl'; }
+  pre.src-picolisp:before { content: 'Pico Lisp'; }
+  pre.src-scala:before { content: 'Scala'; }
+  pre.src-shell:before { content: 'Shell Script'; }
+  pre.src-ebnf2ps:before { content: 'ebfn2ps'; }
+  /* additional language identifiers per "defun org-babel-execute"
+       in ob-*.el */
+  pre.src-cpp:before  { content: 'C++'; }
+  pre.src-abc:before  { content: 'ABC'; }
+  pre.src-coq:before  { content: 'Coq'; }
+  pre.src-groovy:before  { content: 'Groovy'; }
+  /* additional language identifiers from org-babel-shell-names in
+     ob-shell.el: ob-shell is the only babel language using a lambda to put
+     the execution function name together. */
+  pre.src-bash:before  { content: 'bash'; }
+  pre.src-csh:before  { content: 'csh'; }
+  pre.src-ash:before  { content: 'ash'; }
+  pre.src-dash:before  { content: 'dash'; }
+  pre.src-ksh:before  { content: 'ksh'; }
+  pre.src-mksh:before  { content: 'mksh'; }
+  pre.src-posh:before  { content: 'posh'; }
+  /* Additional Emacs modes also supported by the LaTeX listings package */
+  pre.src-ada:before { content: 'Ada'; }
+  pre.src-asm:before { content: 'Assembler'; }
+  pre.src-caml:before { content: 'Caml'; }
+  pre.src-delphi:before { content: 'Delphi'; }
+  pre.src-html:before { content: 'HTML'; }
+  pre.src-idl:before { content: 'IDL'; }
+  pre.src-mercury:before { content: 'Mercury'; }
+  pre.src-metapost:before { content: 'MetaPost'; }
+  pre.src-modula-2:before { content: 'Modula-2'; }
+  pre.src-pascal:before { content: 'Pascal'; }
+  pre.src-ps:before { content: 'PostScript'; }
+  pre.src-prolog:before { content: 'Prolog'; }
+  pre.src-simula:before { content: 'Simula'; }
+  pre.src-tcl:before { content: 'tcl'; }
+  pre.src-tex:before { content: 'TeX'; }
+  pre.src-plain-tex:before { content: 'Plain TeX'; }
+  pre.src-verilog:before { content: 'Verilog'; }
+  pre.src-vhdl:before { content: 'VHDL'; }
+  pre.src-xml:before { content: 'XML'; }
+  pre.src-nxml:before { content: 'XML'; }
+  /* add a generic configuration mode; LaTeX export needs an additional
+     (add-to-list 'org-latex-listings-langs '(conf " ")) in .emacs */
+  pre.src-conf:before { content: 'Configuration File'; }
+
+  table { border-collapse:collapse; }
+  caption.t-above { caption-side: top; }
+  caption.t-bottom { caption-side: bottom; }
+  td, th { vertical-align:top;  }
+  th.org-right  { text-align: center;  }
+  th.org-left   { text-align: center;   }
+  th.org-center { text-align: center; }
+  td.org-right  { text-align: right;  }
+  td.org-left   { text-align: left;   }
+  td.org-center { text-align: center; }
+  dt { font-weight: bold; }
+  .footpara { display: inline; }
+  .footdef  { margin-bottom: 1em; }
+  .figure { padding: 1em; }
+  .figure p { text-align: center; }
+  .equation-container {
+    display: table;
+    text-align: center;
+    width: 100%;
+  }
+  .equation {
+    vertical-align: middle;
+  }
+  .equation-label {
+    display: table-cell;
+    text-align: right;
+    vertical-align: middle;
+  }
+  .inlinetask {
+    padding: 10px;
+    border: 2px solid gray;
+    margin: 10px;
+    background: #ffffcc;
+  }
+  #org-div-home-and-up
+   { text-align: right; font-size: 70%; white-space: nowrap; }
+  textarea { overflow-x: auto; }
+  .linenr { font-size: smaller }
+  .code-highlighted { background-color: #ffff00; }
+  .org-info-js_info-navigation { border-style: none; }
+  #org-info-js_console-label
+    { font-size: 10px; font-weight: bold; white-space: nowrap; }
+  .org-info-js_search-highlight
+    { background-color: #ffff00; color: #000000; font-weight: bold; }
+  .org-svg { width: 90%; }
+  /*]]>*/-->
+</style>
 <script type="text/javascript">
 // @license magnet:?xt=urn:btih:e95b018ef3580986a04669f1b5879592219e2a7a&dn=public-domain.txt Public Domain
 <!--/*--><![CDATA[/*><!--*/
@@ -74,7 +258,7 @@ GitHub 拉取代码较慢，于是想到可以把本地的更改同时推送到 
 云服务器的系统是 Ubuntu 20.04，所以可以通过以下命令安装 Git 的最新版本：
 </p>
 
-<pre class="example" id="org79d7dce">
+<pre class="example" id="orgba9b369">
 add-apt-repository ppa:git-core/ppa
 apt update
 apt install git
@@ -85,7 +269,7 @@ apt install git
 <div id="outline-container-创建-git-用户" class="outline-2">
 <h2 id="创建-git-用户"><span class="section-number-2">2</span> 创建 Git 用户</h2>
 <div class="outline-text-2" id="text-创建-git-用户">
-<pre class="example" id="orgf672198">
+<pre class="example" id="org8c766be">
 adduser git # note difference with useradd
 passwd git # add password for git user
 sudo visudo
@@ -95,7 +279,7 @@ sudo visudo
 修改 =/etc/sudoers=：
 </p>
 
-<pre class="example" id="orga734960">
+<pre class="example" id="orgdc32b6e">
 root    ALL=(ALL)       ALL
 ubuntu  ALL=(ALL:ALL) NOPASSWD: ALL
 git  ALL=(ALL:ALL) NOPASSWD: ALL # add
@@ -110,7 +294,7 @@ git  ALL=(ALL:ALL) NOPASSWD: ALL # add
 在本地主机执行以下命令：
 </p>
 
-<pre class="example" id="org100a55c">
+<pre class="example" id="org5ca211b">
 ssh-keygen -t ed25519 -C "email"
 </pre>
 
@@ -119,7 +303,7 @@ ssh-keygen -t ed25519 -C "email"
 文件里的内容复制到云服务器的 authorized<sub>keys</sub> 文件中：
 </p>
 
-<pre class="example" id="org7b9261d">
+<pre class="example" id="orgf73854e">
 su git
 mkdir ~/.ssh
 vim ~/.ssh/authorized_keys
@@ -133,7 +317,7 @@ vim ~/.ssh/authorized_keys
 修改权限：
 </p>
 
-<pre class="example" id="org9855f0f">
+<pre class="example" id="org23e564c">
 cd ~
 chmod 600 .ssh/authorized_keys
 chmod 700 .ssh
@@ -143,7 +327,7 @@ chmod 700 .ssh
 本地测试 git 服务：
 </p>
 
-<pre class="example" id="org8ff6e55">
+<pre class="example" id="orgfa2b29d">
 ssh -v git@server-ip # Server public network IP
 </pre>
 </div>
@@ -152,7 +336,7 @@ ssh -v git@server-ip # Server public network IP
 <div id="outline-container-创建博客文件夹" class="outline-2">
 <h2 id="创建博客文件夹"><span class="section-number-2">4</span> 创建博客文件夹</h2>
 <div class="outline-text-2" id="text-创建博客文件夹">
-<pre class="example" id="org1742f50">
+<pre class="example" id="org2d883d5">
 su root # switch to root user
 mkdir /home/hugo
 chown git:git -R /home/hugo
@@ -163,7 +347,7 @@ chown git:git -R /home/hugo
 <div id="outline-container-更改站点目录权限" class="outline-2">
 <h2 id="更改站点目录权限"><span class="section-number-2">5</span> 更改站点目录权限</h2>
 <div class="outline-text-2" id="text-更改站点目录权限">
-<pre class="example" id="orgf98e8ad">
+<pre class="example" id="orgb818db6">
 sudo chown git:git -R /var/www/hugo # for git hook
 </pre>
 </div>
@@ -172,7 +356,7 @@ sudo chown git:git -R /var/www/hugo # for git hook
 <div id="outline-container-创建-bare-仓库并配置-git-hook" class="outline-2">
 <h2 id="创建-bare-仓库并配置-git-hook"><span class="section-number-2">6</span> 创建 bare 仓库并配置 Git Hook</h2>
 <div class="outline-text-2" id="text-创建-bare-仓库并配置-git-hook">
-<pre class="example" id="org18dbbb7">
+<pre class="example" id="orga0a7d63">
 su root
 cd /home/git
 git init --bare blog.git
@@ -185,7 +369,7 @@ chmod +x blog.git/hooks/post-receive
 新建文件 =blog.git/hooks/post-receive=：
 </p>
 
-<pre class="example" id="orga5c6e9a">
+<pre class="example" id="org6f1e25e">
 #!/bin/sh
 git --work-tree=/home/hugo --git-dir=/home/git/blog.git checkout -f
 cd /var/www/hugo
@@ -199,7 +383,7 @@ hugo --minify -d /var/www/hugo
 <div id="outline-container-本地配置云服务器仓库" class="outline-2">
 <h2 id="本地配置云服务器仓库"><span class="section-number-2">7</span> 本地配置云服务器仓库</h2>
 <div class="outline-text-2" id="text-本地配置云服务器仓库">
-<pre class="example" id="org5ca2c07">
+<pre class="example" id="orgd0ed20a">
 git remote add origin git@server-ip:/home/git/blog.git
 git push -u origin main # first push
 </pre>
@@ -215,9 +399,6 @@ git push -u origin main # first push
 </ol>
 </div>
 </div>
-</div>
-<div id="postamble" class="status">
-<p class="postamble">First created:  <br />Last updated: 2021-11-18 Thu 16:22 <br />Power by <a href="https://www.gnu.org/software/emacs/">Emacs</a> 27.2 (<a href="https://orgmode.org">Org</a> mode 9.4.4)</p>
 </div>
 </body>
 </html>
