@@ -1,0 +1,406 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN"
+"http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en">
+<head>
+<!-- 2021-11-21 Sun 11:40 -->
+<meta http-equiv="Content-Type" content="text/html;charset=utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>&lrm;</title>
+<meta name="generator" content="Org mode" />
+<style type="text/css">
+ <!--/*--><![CDATA[/*><!--*/
+  .title  { text-align: center;
+             margin-bottom: .2em; }
+  .subtitle { text-align: center;
+              font-size: medium;
+              font-weight: bold;
+              margin-top:0; }
+  .todo   { font-family: monospace; color: red; }
+  .done   { font-family: monospace; color: green; }
+  .priority { font-family: monospace; color: orange; }
+  .tag    { background-color: #eee; font-family: monospace;
+            padding: 2px; font-size: 80%; font-weight: normal; }
+  .timestamp { color: #bebebe; }
+  .timestamp-kwd { color: #5f9ea0; }
+  .org-right  { margin-left: auto; margin-right: 0px;  text-align: right; }
+  .org-left   { margin-left: 0px;  margin-right: auto; text-align: left; }
+  .org-center { margin-left: auto; margin-right: auto; text-align: center; }
+  .underline { text-decoration: underline; }
+  #postamble p, #preamble p { font-size: 90%; margin: .2em; }
+  p.verse { margin-left: 3%; }
+  pre {
+    border: 1px solid #ccc;
+    box-shadow: 3px 3px 3px #eee;
+    padding: 8pt;
+    font-family: monospace;
+    overflow: auto;
+    margin: 1.2em;
+  }
+  pre.src {
+    position: relative;
+    overflow: auto;
+    padding-top: 1.2em;
+  }
+  pre.src:before {
+    display: none;
+    position: absolute;
+    background-color: white;
+    top: -10px;
+    right: 10px;
+    padding: 3px;
+    border: 1px solid black;
+  }
+  pre.src:hover:before { display: inline; margin-top: 14px;}
+  /* Languages per Org manual */
+  pre.src-asymptote:before { content: 'Asymptote'; }
+  pre.src-awk:before { content: 'Awk'; }
+  pre.src-C:before { content: 'C'; }
+  /* pre.src-C++ doesn't work in CSS */
+  pre.src-clojure:before { content: 'Clojure'; }
+  pre.src-css:before { content: 'CSS'; }
+  pre.src-D:before { content: 'D'; }
+  pre.src-ditaa:before { content: 'ditaa'; }
+  pre.src-dot:before { content: 'Graphviz'; }
+  pre.src-calc:before { content: 'Emacs Calc'; }
+  pre.src-emacs-lisp:before { content: 'Emacs Lisp'; }
+  pre.src-fortran:before { content: 'Fortran'; }
+  pre.src-gnuplot:before { content: 'gnuplot'; }
+  pre.src-haskell:before { content: 'Haskell'; }
+  pre.src-hledger:before { content: 'hledger'; }
+  pre.src-java:before { content: 'Java'; }
+  pre.src-js:before { content: 'Javascript'; }
+  pre.src-latex:before { content: 'LaTeX'; }
+  pre.src-ledger:before { content: 'Ledger'; }
+  pre.src-lisp:before { content: 'Lisp'; }
+  pre.src-lilypond:before { content: 'Lilypond'; }
+  pre.src-lua:before { content: 'Lua'; }
+  pre.src-matlab:before { content: 'MATLAB'; }
+  pre.src-mscgen:before { content: 'Mscgen'; }
+  pre.src-ocaml:before { content: 'Objective Caml'; }
+  pre.src-octave:before { content: 'Octave'; }
+  pre.src-org:before { content: 'Org mode'; }
+  pre.src-oz:before { content: 'OZ'; }
+  pre.src-plantuml:before { content: 'Plantuml'; }
+  pre.src-processing:before { content: 'Processing.js'; }
+  pre.src-python:before { content: 'Python'; }
+  pre.src-R:before { content: 'R'; }
+  pre.src-ruby:before { content: 'Ruby'; }
+  pre.src-sass:before { content: 'Sass'; }
+  pre.src-scheme:before { content: 'Scheme'; }
+  pre.src-screen:before { content: 'Gnu Screen'; }
+  pre.src-sed:before { content: 'Sed'; }
+  pre.src-sh:before { content: 'shell'; }
+  pre.src-sql:before { content: 'SQL'; }
+  pre.src-sqlite:before { content: 'SQLite'; }
+  /* additional languages in org.el's org-babel-load-languages alist */
+  pre.src-forth:before { content: 'Forth'; }
+  pre.src-io:before { content: 'IO'; }
+  pre.src-J:before { content: 'J'; }
+  pre.src-makefile:before { content: 'Makefile'; }
+  pre.src-maxima:before { content: 'Maxima'; }
+  pre.src-perl:before { content: 'Perl'; }
+  pre.src-picolisp:before { content: 'Pico Lisp'; }
+  pre.src-scala:before { content: 'Scala'; }
+  pre.src-shell:before { content: 'Shell Script'; }
+  pre.src-ebnf2ps:before { content: 'ebfn2ps'; }
+  /* additional language identifiers per "defun org-babel-execute"
+       in ob-*.el */
+  pre.src-cpp:before  { content: 'C++'; }
+  pre.src-abc:before  { content: 'ABC'; }
+  pre.src-coq:before  { content: 'Coq'; }
+  pre.src-groovy:before  { content: 'Groovy'; }
+  /* additional language identifiers from org-babel-shell-names in
+     ob-shell.el: ob-shell is the only babel language using a lambda to put
+     the execution function name together. */
+  pre.src-bash:before  { content: 'bash'; }
+  pre.src-csh:before  { content: 'csh'; }
+  pre.src-ash:before  { content: 'ash'; }
+  pre.src-dash:before  { content: 'dash'; }
+  pre.src-ksh:before  { content: 'ksh'; }
+  pre.src-mksh:before  { content: 'mksh'; }
+  pre.src-posh:before  { content: 'posh'; }
+  /* Additional Emacs modes also supported by the LaTeX listings package */
+  pre.src-ada:before { content: 'Ada'; }
+  pre.src-asm:before { content: 'Assembler'; }
+  pre.src-caml:before { content: 'Caml'; }
+  pre.src-delphi:before { content: 'Delphi'; }
+  pre.src-html:before { content: 'HTML'; }
+  pre.src-idl:before { content: 'IDL'; }
+  pre.src-mercury:before { content: 'Mercury'; }
+  pre.src-metapost:before { content: 'MetaPost'; }
+  pre.src-modula-2:before { content: 'Modula-2'; }
+  pre.src-pascal:before { content: 'Pascal'; }
+  pre.src-ps:before { content: 'PostScript'; }
+  pre.src-prolog:before { content: 'Prolog'; }
+  pre.src-simula:before { content: 'Simula'; }
+  pre.src-tcl:before { content: 'tcl'; }
+  pre.src-tex:before { content: 'TeX'; }
+  pre.src-plain-tex:before { content: 'Plain TeX'; }
+  pre.src-verilog:before { content: 'Verilog'; }
+  pre.src-vhdl:before { content: 'VHDL'; }
+  pre.src-xml:before { content: 'XML'; }
+  pre.src-nxml:before { content: 'XML'; }
+  /* add a generic configuration mode; LaTeX export needs an additional
+     (add-to-list 'org-latex-listings-langs '(conf " ")) in .emacs */
+  pre.src-conf:before { content: 'Configuration File'; }
+
+  table { border-collapse:collapse; }
+  caption.t-above { caption-side: top; }
+  caption.t-bottom { caption-side: bottom; }
+  td, th { vertical-align:top;  }
+  th.org-right  { text-align: center;  }
+  th.org-left   { text-align: center;   }
+  th.org-center { text-align: center; }
+  td.org-right  { text-align: right;  }
+  td.org-left   { text-align: left;   }
+  td.org-center { text-align: center; }
+  dt { font-weight: bold; }
+  .footpara { display: inline; }
+  .footdef  { margin-bottom: 1em; }
+  .figure { padding: 1em; }
+  .figure p { text-align: center; }
+  .equation-container {
+    display: table;
+    text-align: center;
+    width: 100%;
+  }
+  .equation {
+    vertical-align: middle;
+  }
+  .equation-label {
+    display: table-cell;
+    text-align: right;
+    vertical-align: middle;
+  }
+  .inlinetask {
+    padding: 10px;
+    border: 2px solid gray;
+    margin: 10px;
+    background: #ffffcc;
+  }
+  #org-div-home-and-up
+   { text-align: right; font-size: 70%; white-space: nowrap; }
+  textarea { overflow-x: auto; }
+  .linenr { font-size: smaller }
+  .code-highlighted { background-color: #ffff00; }
+  .org-info-js_info-navigation { border-style: none; }
+  #org-info-js_console-label
+    { font-size: 10px; font-weight: bold; white-space: nowrap; }
+  .org-info-js_search-highlight
+    { background-color: #ffff00; color: #000000; font-weight: bold; }
+  .org-svg { width: 90%; }
+  /*]]>*/-->
+</style>
+<script type="text/javascript">
+// @license magnet:?xt=urn:btih:e95b018ef3580986a04669f1b5879592219e2a7a&dn=public-domain.txt Public Domain
+<!--/*--><![CDATA[/*><!--*/
+     function CodeHighlightOn(elem, id)
+     {
+       var target = document.getElementById(id);
+       if(null != target) {
+         elem.classList.add("code-highlighted");
+         target.classList.add("code-highlighted");
+       }
+     }
+     function CodeHighlightOff(elem, id)
+     {
+       var target = document.getElementById(id);
+       if(null != target) {
+         elem.classList.remove("code-highlighted");
+         target.classList.remove("code-highlighted");
+       }
+     }
+    /*]]>*///-->
+// @license-end
+</script>
+</head>
+<body>
+<div id="content">
+<div id="table-of-contents">
+<h2>Table of Contents</h2>
+<div id="text-table-of-contents">
+<ul>
+<li><a href="#lamp">1. LAMP</a></li>
+<li><a href="#install-wordpress">2. Install WordPress</a></li>
+<li><a href="#install-wordpress-theme">3. Install WordPress Theme</a></li>
+<li><a href="#support-https">4. Support HTTPS</a></li>
+</ul>
+</div>
+</div>
+<p>
+<del>+</del> date = '2021-08-02T08:54:04+08:00' slug =
+'install-wordpress-with-lamp' tags = ['WordPress'] title = 'Install
+WordPress With LAMP' <del>+</del>
+</p>
+
+<div id="outline-container-lamp" class="outline-2">
+<h2 id="lamp"><span class="section-number-2">1</span> LAMP</h2>
+<div class="outline-text-2" id="text-lamp">
+<p>
+Linux, Apache, MySQL, PHP
+</p>
+
+<pre class="example" id="org8df3dd3">
+sudo apt update
+sudo apt-get install apache2 -y # apache2
+sudo apt install php libapache2-mod-php # php, libapache2-mod-php
+sudo systemctl restart apache2 # restart apache2
+sudo apt-get install mariadb-server php-mysql -y # MariaDB Server and PHP-MySQL packages
+sudo systemctl restart apache2 # restart apache2 again
+cd /var/www/html/ # open web folder
+sudo rm * # remove old files
+sudo wget http://wordpress.org/latest.tar.gz # download WordPress
+sudo tar xzf latest.tar.gz # extract WordPress tarball
+sudo mv wordpress/* . # move WordPress files to /var/www/html/*
+sudo rm -rf wordpress latest.tar.gz # remove wordpress folder and WordPress tarball
+sudo apt install tree
+tree -L 1
+.
+├── index.php
+├── license.txt
+├── readme.html
+├── wp-activate.php
+├── wp-admin
+├── wp-blog-header.php
+├── wp-comments-post.php
+├── wp-config-sample.php
+├── wp-content
+├── wp-cron.php
+├── wp-includes
+├── wp-links-opml.php
+├── wp-load.php
+├── wp-login.php
+├── wp-mail.php
+├── wp-settings.php
+├── wp-signup.php
+├── wp-trackback.php
+└── xmlrpc.php
+
+3 directories, 16 files
+
+sudo chown -R www-data: . # change ownership of all these files to Apache user
+sudo mysql_secure_installation # MariaDB
+sudo mysql -uroot -p # run MySQL
+MariaDB [(none)]&gt; create database wordpress;
+Query OK, 1 row affected (0.001 sec)
+MariaDB [(none)]&gt; GRANT ALL PRIVILEGES ON wordpress.* TO 'root'@'hostname' IDENTIFIED BY '&lt;YOUR PASSWORD&gt;';
+Query OK, 0 rows affected (0.012 sec)
+MariaDB [(none)]&gt; FLUSH PRIVILEGES;
+Query OK, 0 rows affected (0.001 sec)
+# Exit the MariaDB prompt with Ctrl + D
+sudo reboot # restart Raspberry Pi
+</pre>
+
+<p>
+Write php file to test:
+</p>
+
+<pre class="example" id="org61bc058">
+&lt;?php
+phpinfo();
+</pre>
+
+<p>
+Save to <code>test.php</code>, then access <code>http://ip/test.php</code>, will see the
+phpinfo.
+</p>
+
+<p>
+After execute <code>sudo mysql_secure_installation</code>:
+</p>
+
+<ul class="org-ul">
+<li>You will be asked <code>Enter current password for root (enter for none):</code>
+&#x2014; If you had set root password jusst input, or you can press <b>Enter</b>
+to set it.</li>
+<li>Type in <b>Y</b> and press <b>Enter</b> to <code>Set root password?</code>.</li>
+<li>Type in a password at the <code>New password:</code> prompt, and press <b>Enter</b>.
+<b>Important:</b> remember this root password, as you will need it later to
+set up WordPress.</li>
+<li>Type in <b>Y</b> to <code>Remove anonymous users</code>.</li>
+<li>Type in <b>Y</b> to <code>Disallow root login remotely</code>.</li>
+<li>Type in <b>Y</b> to <code>Remove test database and access to it</code>.</li>
+<li>Type in <b>Y</b> to <code>Reload privilege tables now</code>.</li>
+</ul>
+
+<p>
+When complete, you will see the message <code>All done!</code> and
+<code>Thanks for using MariaDB!</code>.
+</p>
+</div>
+</div>
+
+<div id="outline-container-install-wordpress" class="outline-2">
+<h2 id="install-wordpress"><span class="section-number-2">2</span> Install WordPress</h2>
+<div class="outline-text-2" id="text-install-wordpress">
+<p>
+Then begin the WordPress installation.
+</p>
+
+<pre class="example" id="orgaf71192">
+Database Name:      wordpress
+User Name:          root
+Password:           &lt;YOUR PASSWORD&gt;
+Database Host:      localhost
+Table Prefix:       wp_
+</pre>
+
+<p>
+After input these, if you get <code>Server Down</code> error, just run
+<code>sudo systemctl restart apache2</code>.
+</p>
+
+<p>
+Then:
+</p>
+
+<pre class="example" id="org23d6bf6">
+Site Title: tianheg
+Username: root
+Password: &lt;Set a password&gt;
+Email: user@domain
+</pre>
+
+<p>
+I like <a href="https://zenhabits.net/">https://zenhabits.net/</a>'s theme, I
+<a href="https://zenhabits.net/theme/">download it</a>, install it.
+</p>
+</div>
+</div>
+
+<div id="outline-container-install-wordpress-theme" class="outline-2">
+<h2 id="install-wordpress-theme"><span class="section-number-2">3</span> Install WordPress Theme</h2>
+<div class="outline-text-2" id="text-install-wordpress-theme">
+<ol class="org-ol">
+<li>Access <code>http://address/wp-admin/</code></li>
+<li>Click Appearance/Themes</li>
+<li>Find Add New/Upload Theme, you can just upload the zh2 zip file.
+That's it!</li>
+<li>Custom it as you want.</li>
+</ol>
+</div>
+</div>
+
+<div id="outline-container-support-https" class="outline-2">
+<h2 id="support-https"><span class="section-number-2">4</span> Support HTTPS</h2>
+<div class="outline-text-2" id="text-support-https">
+<p>
+Before test these activity, must backup the site:
+</p>
+
+<p>
+ref:
+</p>
+
+<ol class="org-ol">
+<li><a href="https://projects.raspberrypi.org/en/projects/lamp-web-server-with-wordpress">https://projects.raspberrypi.org/en/projects/lamp-web-server-with-wordpress</a></li>
+<li><a href="https://linuxize.com/post/how-to-install-php-on-ubuntu-20-04/">https://linuxize.com/post/how-to-install-php-on-ubuntu-20-04/</a></li>
+<li><a href="https://www.wpbeginner.com/wp-tutorials/how-to-add-ssl-and-https-in-wordpress/">https://www.wpbeginner.com/wp-tutorials/how-to-add-ssl-and-https-in-wordpress/</a></li>
+<li><a href="https://wordpress.org/plugins/really-simple-ssl/#installation">https://wordpress.org/plugins/really-simple-ssl/#installation</a></li>
+</ol>
+</div>
+</div>
+</div>
+</body>
+</html>

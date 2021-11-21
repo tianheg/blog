@@ -1,0 +1,284 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN"
+"http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" lang="zh" xml:lang="zh">
+<head>
+<!-- 2021-11-21 Sun 11:41 -->
+<meta http-equiv="Content-Type" content="text/html;charset=utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>Internet TOC</title>
+<meta name="generator" content="Org mode" />
+<meta name="description" content="Learn Technology, Love Life"
+ />
+<style type="text/css">
+ <!--/*--><![CDATA[/*><!--*/
+  .title  { text-align: center;
+             margin-bottom: .2em; }
+  .subtitle { text-align: center;
+              font-size: medium;
+              font-weight: bold;
+              margin-top:0; }
+  .todo   { font-family: monospace; color: red; }
+  .done   { font-family: monospace; color: green; }
+  .priority { font-family: monospace; color: orange; }
+  .tag    { background-color: #eee; font-family: monospace;
+            padding: 2px; font-size: 80%; font-weight: normal; }
+  .timestamp { color: #bebebe; }
+  .timestamp-kwd { color: #5f9ea0; }
+  .org-right  { margin-left: auto; margin-right: 0px;  text-align: right; }
+  .org-left   { margin-left: 0px;  margin-right: auto; text-align: left; }
+  .org-center { margin-left: auto; margin-right: auto; text-align: center; }
+  .underline { text-decoration: underline; }
+  #postamble p, #preamble p { font-size: 90%; margin: .2em; }
+  p.verse { margin-left: 3%; }
+  pre {
+    border: 1px solid #ccc;
+    box-shadow: 3px 3px 3px #eee;
+    padding: 8pt;
+    font-family: monospace;
+    overflow: auto;
+    margin: 1.2em;
+  }
+  pre.src {
+    position: relative;
+    overflow: auto;
+    padding-top: 1.2em;
+  }
+  pre.src:before {
+    display: none;
+    position: absolute;
+    background-color: white;
+    top: -10px;
+    right: 10px;
+    padding: 3px;
+    border: 1px solid black;
+  }
+  pre.src:hover:before { display: inline; margin-top: 14px;}
+  /* Languages per Org manual */
+  pre.src-asymptote:before { content: 'Asymptote'; }
+  pre.src-awk:before { content: 'Awk'; }
+  pre.src-C:before { content: 'C'; }
+  /* pre.src-C++ doesn't work in CSS */
+  pre.src-clojure:before { content: 'Clojure'; }
+  pre.src-css:before { content: 'CSS'; }
+  pre.src-D:before { content: 'D'; }
+  pre.src-ditaa:before { content: 'ditaa'; }
+  pre.src-dot:before { content: 'Graphviz'; }
+  pre.src-calc:before { content: 'Emacs Calc'; }
+  pre.src-emacs-lisp:before { content: 'Emacs Lisp'; }
+  pre.src-fortran:before { content: 'Fortran'; }
+  pre.src-gnuplot:before { content: 'gnuplot'; }
+  pre.src-haskell:before { content: 'Haskell'; }
+  pre.src-hledger:before { content: 'hledger'; }
+  pre.src-java:before { content: 'Java'; }
+  pre.src-js:before { content: 'Javascript'; }
+  pre.src-latex:before { content: 'LaTeX'; }
+  pre.src-ledger:before { content: 'Ledger'; }
+  pre.src-lisp:before { content: 'Lisp'; }
+  pre.src-lilypond:before { content: 'Lilypond'; }
+  pre.src-lua:before { content: 'Lua'; }
+  pre.src-matlab:before { content: 'MATLAB'; }
+  pre.src-mscgen:before { content: 'Mscgen'; }
+  pre.src-ocaml:before { content: 'Objective Caml'; }
+  pre.src-octave:before { content: 'Octave'; }
+  pre.src-org:before { content: 'Org mode'; }
+  pre.src-oz:before { content: 'OZ'; }
+  pre.src-plantuml:before { content: 'Plantuml'; }
+  pre.src-processing:before { content: 'Processing.js'; }
+  pre.src-python:before { content: 'Python'; }
+  pre.src-R:before { content: 'R'; }
+  pre.src-ruby:before { content: 'Ruby'; }
+  pre.src-sass:before { content: 'Sass'; }
+  pre.src-scheme:before { content: 'Scheme'; }
+  pre.src-screen:before { content: 'Gnu Screen'; }
+  pre.src-sed:before { content: 'Sed'; }
+  pre.src-sh:before { content: 'shell'; }
+  pre.src-sql:before { content: 'SQL'; }
+  pre.src-sqlite:before { content: 'SQLite'; }
+  /* additional languages in org.el's org-babel-load-languages alist */
+  pre.src-forth:before { content: 'Forth'; }
+  pre.src-io:before { content: 'IO'; }
+  pre.src-J:before { content: 'J'; }
+  pre.src-makefile:before { content: 'Makefile'; }
+  pre.src-maxima:before { content: 'Maxima'; }
+  pre.src-perl:before { content: 'Perl'; }
+  pre.src-picolisp:before { content: 'Pico Lisp'; }
+  pre.src-scala:before { content: 'Scala'; }
+  pre.src-shell:before { content: 'Shell Script'; }
+  pre.src-ebnf2ps:before { content: 'ebfn2ps'; }
+  /* additional language identifiers per "defun org-babel-execute"
+       in ob-*.el */
+  pre.src-cpp:before  { content: 'C++'; }
+  pre.src-abc:before  { content: 'ABC'; }
+  pre.src-coq:before  { content: 'Coq'; }
+  pre.src-groovy:before  { content: 'Groovy'; }
+  /* additional language identifiers from org-babel-shell-names in
+     ob-shell.el: ob-shell is the only babel language using a lambda to put
+     the execution function name together. */
+  pre.src-bash:before  { content: 'bash'; }
+  pre.src-csh:before  { content: 'csh'; }
+  pre.src-ash:before  { content: 'ash'; }
+  pre.src-dash:before  { content: 'dash'; }
+  pre.src-ksh:before  { content: 'ksh'; }
+  pre.src-mksh:before  { content: 'mksh'; }
+  pre.src-posh:before  { content: 'posh'; }
+  /* Additional Emacs modes also supported by the LaTeX listings package */
+  pre.src-ada:before { content: 'Ada'; }
+  pre.src-asm:before { content: 'Assembler'; }
+  pre.src-caml:before { content: 'Caml'; }
+  pre.src-delphi:before { content: 'Delphi'; }
+  pre.src-html:before { content: 'HTML'; }
+  pre.src-idl:before { content: 'IDL'; }
+  pre.src-mercury:before { content: 'Mercury'; }
+  pre.src-metapost:before { content: 'MetaPost'; }
+  pre.src-modula-2:before { content: 'Modula-2'; }
+  pre.src-pascal:before { content: 'Pascal'; }
+  pre.src-ps:before { content: 'PostScript'; }
+  pre.src-prolog:before { content: 'Prolog'; }
+  pre.src-simula:before { content: 'Simula'; }
+  pre.src-tcl:before { content: 'tcl'; }
+  pre.src-tex:before { content: 'TeX'; }
+  pre.src-plain-tex:before { content: 'Plain TeX'; }
+  pre.src-verilog:before { content: 'Verilog'; }
+  pre.src-vhdl:before { content: 'VHDL'; }
+  pre.src-xml:before { content: 'XML'; }
+  pre.src-nxml:before { content: 'XML'; }
+  /* add a generic configuration mode; LaTeX export needs an additional
+     (add-to-list 'org-latex-listings-langs '(conf " ")) in .emacs */
+  pre.src-conf:before { content: 'Configuration File'; }
+
+  table { border-collapse:collapse; }
+  caption.t-above { caption-side: top; }
+  caption.t-bottom { caption-side: bottom; }
+  td, th { vertical-align:top;  }
+  th.org-right  { text-align: center;  }
+  th.org-left   { text-align: center;   }
+  th.org-center { text-align: center; }
+  td.org-right  { text-align: right;  }
+  td.org-left   { text-align: left;   }
+  td.org-center { text-align: center; }
+  dt { font-weight: bold; }
+  .footpara { display: inline; }
+  .footdef  { margin-bottom: 1em; }
+  .figure { padding: 1em; }
+  .figure p { text-align: center; }
+  .equation-container {
+    display: table;
+    text-align: center;
+    width: 100%;
+  }
+  .equation {
+    vertical-align: middle;
+  }
+  .equation-label {
+    display: table-cell;
+    text-align: right;
+    vertical-align: middle;
+  }
+  .inlinetask {
+    padding: 10px;
+    border: 2px solid gray;
+    margin: 10px;
+    background: #ffffcc;
+  }
+  #org-div-home-and-up
+   { text-align: right; font-size: 70%; white-space: nowrap; }
+  textarea { overflow-x: auto; }
+  .linenr { font-size: smaller }
+  .code-highlighted { background-color: #ffff00; }
+  .org-info-js_info-navigation { border-style: none; }
+  #org-info-js_console-label
+    { font-size: 10px; font-weight: bold; white-space: nowrap; }
+  .org-info-js_search-highlight
+    { background-color: #ffff00; color: #000000; font-weight: bold; }
+  .org-svg { width: 90%; }
+  /*]]>*/-->
+</style>
+<link rel="stylesheet" type="text/css" href="/theme/org.css"/>
+<link rel="stylesheet" type="text/css" href="/theme/site.css"/>
+<script type="text/javascript">
+// @license magnet:?xt=urn:btih:e95b018ef3580986a04669f1b5879592219e2a7a&dn=public-domain.txt Public Domain
+<!--/*--><![CDATA[/*><!--*/
+     function CodeHighlightOn(elem, id)
+     {
+       var target = document.getElementById(id);
+       if(null != target) {
+         elem.classList.add("code-highlighted");
+         target.classList.add("code-highlighted");
+       }
+     }
+     function CodeHighlightOff(elem, id)
+     {
+       var target = document.getElementById(id);
+       if(null != target) {
+         elem.classList.remove("code-highlighted");
+         target.classList.remove("code-highlighted");
+       }
+     }
+    /*]]>*///-->
+// @license-end
+</script>
+</head>
+<body>
+<div id="content">
+<h1 class="title">Internet TOC</h1>
+<ol class="org-ol">
+<li><a href="https://archive.org/">互联网存档</a> 网页历史</li>
+<li><a href="https://www.wikipedia.org/">维基百科</a> 百科全书</li>
+<li><a href="https://www.imdb.com/">IMDB</a> 电影电视</li>
+<li>[Google文化学院](<a href="https://www.google.com/culturalinstitute/">https://www.google.com/culturalinstitute/</a>) 文艺历史</li>
+<li>[生活&amp;时代杂志照片存档](<a href="https://images.google.com/hosted/life">https://images.google.com/hosted/life</a>) 摄影照片</li>
+<li>[最全的设计模式库](<a href="https://developer.yahoo.com/ypatterns/about/libraries.html">https://developer.yahoo.com/ypatterns/about/libraries.html</a>) 设计模式</li>
+<li>[Google老报纸存档](<a href="https://news.google.com/newspapers">https://news.google.com/newspapers</a>) 媒体历史</li>
+<li>[CC电影库](<a href="https://www.criterion.com/library">https://www.criterion.com/library</a>) 电影&amp;设计</li>
+<li>[绝对伏特加的鸡尾酒](<a href="https://www.absolutdrinks.com/">https://www.absolutdrinks.com/</a>) 调酒</li>
+<li>[汉典](<a href="https://www.zdic.net/">https://www.zdic.net/</a>) 汉语言</li>
+</ol>
+<p>
+11.[BODYBUILDING超全的动作指导](<a href="https://www.bodybuilding.com/exercises/">https://www.bodybuilding.com/exercises/</a>) 健身
+</p>
+<ol class="org-ol">
+<li>[葡萄酒搜索](<a href="https://www.vinopedia.com/">https://www.vinopedia.com/</a>) 葡萄酒</li>
+<li>[Vogue网站主题地图](<a href="https://www.vogue.com/sitemap/topics/">https://www.vogue.com/sitemap/topics/</a>) 时尚 （[Archive - Vogue](<a href="https://www.vogue.com/archive/">https://www.vogue.com/archive/</a>) 会员才能看）</li>
+<li>[计算机历史博物馆](<a href="https://www.computerhistory.org/">https://www.computerhistory.org/</a>) 计算机历史</li>
+<li>[MSDN](<a href="https://msdn.microsoft.com/">https://msdn.microsoft.com/</a>)、[Google Developers](<a href="https://developers.google.com/">https://developers.google.com/</a>)、[Apple Developer](<a href="https://developer.apple.com/">https://developer.apple.com/</a>)、[IBM developerWorks](<a href="https://www.ibm.com/developerworks">https://www.ibm.com/developerworks</a>)、[Intel Developer](<a href="https://software.intel.com/">https://software.intel.com/</a>)、[Facebook Developers](<a href="https://developers.facebook.com/">https://developers.facebook.com/</a>)、[Amazon Web Services](<a href="https://aws.amazon.com/">https://aws.amazon.com/</a>) 开发</li>
+<li>[CIA的世界概况](<a href="https://www.cia.gov/library/publications/the-world-factbook/index.html">https://www.cia.gov/library/publications/the-world-factbook/index.html</a>) 百科</li>
+<li>[GettyImages](<a href="https://www.gettyimages.com/">https://www.gettyimages.com/</a>) 图库 更多：[作为一名平面设计师，你是如何找素材的？](<a href="https://www.zhihu.com/question/23914832">https://www.zhihu.com/question/23914832</a>)</li>
+<li>[Google趋势热榜](<a href="https://www.google.com/trends/topcharts">https://www.google.com/trends/topcharts</a>) 搜索历史</li>
+<li>[Archive | Industrial Light &amp; Magic](<a href="https://www.ilm.com/archive/">https://www.ilm.com/archive/</a>) 特效</li>
+<li>[Archive - The New Yorker](<a href="https://www.newyorker.com/archive">https://www.newyorker.com/archive</a>)、[纽约时报存档](<a href="https://www.nytimes.com/ref/membercenter/nytarchive.html">https://www.nytimes.com/ref/membercenter/nytarchive.html</a>) 、[时代杂志存档](<a href="https://content.time.com/time/magazine/archives/">https://content.time.com/time/magazine/archives/</a>)、[Wired Magazine Issue Archive](<a href="https://archive.wired.com/wired/archive/covers.html">https://archive.wired.com/wired/archive/covers.html</a>)、 [Vanity Fair](<a href="https://www.vanityfair.com/">https://www.vanityfair.com/</a>) 、[The Economist](<a href="https://www.economist.com/printedition/covers">https://www.economist.com/printedition/covers</a>) 文艺科技历史</li>
+<li>[Google 学术搜索](<a href="https://scholar.google.com/">https://scholar.google.com/</a>) 论文</li>
+<li>[豆瓣标签](<a href="https://www.douban.com/tag/">https://www.douban.com/tag/</a>) 兴趣</li>
+<li>[RARBG](<a href="https://rarbg.to/">https://rarbg.to/</a>)、[btD](<a href="https://btdig.com/index.htm">https://btdig.com/index.htm</a>) [1377x.to](<a href="https://www.1377x.to/">https://www.1377x.to/</a>) 找片</li>
+<li>[谷歌地球](<a href="https://www.google.com/intl/zh-CN/earth/">https://www.google.com/intl/zh-CN/earth/</a>) 地理信息</li>
+<li>[Wikia](<a href="https://www.wikia.com/">https://www.wikia.com/</a>) 主题维基</li>
+<li>[GIPHY](<a href="https://giphy.com/">https://giphy.com/</a>) GIF搜索</li>
+<li>[搜狗微信搜索](<a href="https://weixin.sogou.com/">https://weixin.sogou.com/</a>)、[搜狗知乎搜索](<a href="https://zhihu.sogou.com/">https://zhihu.sogou.com/</a>) 微信知乎搜索</li>
+<li>[鸠摩搜书](<a href="https://www.jiumodiary.com/">https://www.jiumodiary.com/</a>) 电子书搜索</li>
+<li>[App Store 排行榜](<a href="https://www.apple.com/cn/itunes/charts/">https://www.apple.com/cn/itunes/charts/</a>)、[小众软件](<a href="https://www.appinn.com/">https://www.appinn.com/</a>)、[最美应用](<a href="https://zuimeia.com/">https://zuimeia.com/</a>)、[少数派](<a href="https://sspai.com/">https://sspai.com/</a>) 应用</li>
+<li>[百度搜索风云榜](<a href="https://top.baidu.com/">https://top.baidu.com/</a>) 微信指数 大陆搜索趋势</li>
+<li>[NASA](<a href="https://www.nasa.gov/">https://www.nasa.gov/</a>) 航天</li>
+<li>[Smithsonian](<a href="https://www.si.edu/">https://www.si.edu/</a>) 历史博物</li>
+<li>[电子商务500强](<a href="https://www.internetretailer.com/top500research/">https://www.internetretailer.com/top500research/</a>) 电子商务</li>
+<li>[Pixar](<a href="https://www.pixar.com/">https://www.pixar.com/</a>) 电脑动画</li>
+<li>[Top Advertising Agencies: Global Rankings, Profiles &amp; Timelines](<a href="https://adage.com/datacenter/">https://adage.com/datacenter/</a>) 广告</li>
+<li>[盖洛普](<a href="https://www.gallup.com/">https://www.gallup.com/</a>)、[麦肯锡](<a href="https://www.mckinsey.com/">https://www.mckinsey.com/</a>)、[尼尔森](<a href="https://www.nielsen.com/">https://www.nielsen.com/</a>) 调查&amp;咨询</li>
+<li>[IDEO](<a href="https://www.ideo.com/">https://www.ideo.com/</a>) 设计</li>
+<li>[The Video Game Museum](<a href="https://www.vgmuseum.com/">https://www.vgmuseum.com/</a>) 视频游戏历史</li>
+<li>[Swatch Group](<a href="https://www.swatchgroup.com/">https://www.swatchgroup.com/</a>)、[LVMH](<a href="https://www.lvmh.com/">https://www.lvmh.com/</a>)、[Kering](<a href="https://kering.com/">https://kering.com/</a>)、[Richemont](<a href="https://richemont.com/">https://richemont.com/</a>) 奢侈品</li>
+<li>[Olympics](<a href="https://www.olympic.org/">https://www.olympic.org/</a>)、[FIFA](<a href="https://www.fifa.com/">https://www.fifa.com/</a>)、[NBA](<a href="https://www.nba.com/">https://www.nba.com/</a>)、[Formula 1](<a href="https://www.formula1.com/">https://www.formula1.com/</a>)、[NFL](<a href="https://www.nfl.com/">https://www.nfl.com/</a>)、体育</li>
+<li>[The Rock and Roll Hall of Fame and Museum](<a href="https://www.rockhall.com/">https://www.rockhall.com/</a>) 音乐</li>
+<li>[WorldCat](<a href="https://www.worldcat.org/">https://www.worldcat.org/</a>) 图书馆目录</li>
+<li>[WPP](<a href="https://www.wpp.com/">https://www.wpp.com/</a>) 广告传播</li>
+<li>[可口可乐公司](<a href="https://www.coca-colacompany.com/">https://www.coca-colacompany.com/</a>)、[麦当劳](<a href="https://www.aboutmcdonalds.com/">https://www.aboutmcdonalds.com/</a>)、[Altria](<a href="https://www.altria.com/">https://www.altria.com/</a>)、[星巴克](<a href="https://www.starbucks.com/">https://www.starbucks.com/</a>)、[AB InBev](<a href="https://www.ab-inbev.com/">https://www.ab-inbev.com/</a>)、[百胜](<a href="https://www.yum.com/">https://www.yum.com/</a>)、[Red Bull](<a href="https://www.redbull.com/">https://www.redbull.com/</a>)、[PepsiCo](<a href="https://www.pepsico.com/">https://www.pepsico.com/</a>)、[Nestlé](<a href="https://www.nestle.com/">https://www.nestle.com/</a>)、[bacardi](<a href="https://www.bacardilimited.com/">https://www.bacardilimited.com/</a>) 垃圾食品</li>
+<li>[P&amp;G](<a href="https://www.pg.com/">https://www.pg.com/</a>)、[Unilever](<a href="https://www.unilever.com/">https://www.unilever.com/</a>) 洗化</li>
+<li>[National Geographic](<a href="https://www.nationalgeographic.com/">https://www.nationalgeographic.com/</a>) 摄影照片</li>
+<li>[NIKE](<a href="https://www.nike.com/">https://www.nike.com/</a>)、[Under Armour](<a href="https://ua.com/">https://ua.com/</a>)、[adidas](<a href="https://www.adidas.com/">https://www.adidas.com/</a>) 体育用品</li>
+<li>[DMOZ](<a href="https://www.dmoz.org/">https://www.dmoz.org/</a>) 目录</li>
+<li>[hao123](<a href="https://www.hao123.com/">https://www.hao123.com/</a>) 目录</li>
+<li>[Deep web](<a href="https://www.wikiwand.com/en/Deep_web">https://www.wikiwand.com/en/Deep_web</a>)</li>
+<li>[Steam](<a href="https://store.steampowered.com/">https://store.steampowered.com/</a>) 游戏</li>
+</ol>
+</div>
+</body>
+</html>

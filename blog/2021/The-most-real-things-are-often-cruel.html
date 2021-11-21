@@ -1,0 +1,330 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN"
+"http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en">
+<head>
+<!-- 2021-11-21 Sun 11:40 -->
+<meta http-equiv="Content-Type" content="text/html;charset=utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>&lrm;</title>
+<meta name="generator" content="Org mode" />
+<style type="text/css">
+ <!--/*--><![CDATA[/*><!--*/
+  .title  { text-align: center;
+             margin-bottom: .2em; }
+  .subtitle { text-align: center;
+              font-size: medium;
+              font-weight: bold;
+              margin-top:0; }
+  .todo   { font-family: monospace; color: red; }
+  .done   { font-family: monospace; color: green; }
+  .priority { font-family: monospace; color: orange; }
+  .tag    { background-color: #eee; font-family: monospace;
+            padding: 2px; font-size: 80%; font-weight: normal; }
+  .timestamp { color: #bebebe; }
+  .timestamp-kwd { color: #5f9ea0; }
+  .org-right  { margin-left: auto; margin-right: 0px;  text-align: right; }
+  .org-left   { margin-left: 0px;  margin-right: auto; text-align: left; }
+  .org-center { margin-left: auto; margin-right: auto; text-align: center; }
+  .underline { text-decoration: underline; }
+  #postamble p, #preamble p { font-size: 90%; margin: .2em; }
+  p.verse { margin-left: 3%; }
+  pre {
+    border: 1px solid #ccc;
+    box-shadow: 3px 3px 3px #eee;
+    padding: 8pt;
+    font-family: monospace;
+    overflow: auto;
+    margin: 1.2em;
+  }
+  pre.src {
+    position: relative;
+    overflow: auto;
+    padding-top: 1.2em;
+  }
+  pre.src:before {
+    display: none;
+    position: absolute;
+    background-color: white;
+    top: -10px;
+    right: 10px;
+    padding: 3px;
+    border: 1px solid black;
+  }
+  pre.src:hover:before { display: inline; margin-top: 14px;}
+  /* Languages per Org manual */
+  pre.src-asymptote:before { content: 'Asymptote'; }
+  pre.src-awk:before { content: 'Awk'; }
+  pre.src-C:before { content: 'C'; }
+  /* pre.src-C++ doesn't work in CSS */
+  pre.src-clojure:before { content: 'Clojure'; }
+  pre.src-css:before { content: 'CSS'; }
+  pre.src-D:before { content: 'D'; }
+  pre.src-ditaa:before { content: 'ditaa'; }
+  pre.src-dot:before { content: 'Graphviz'; }
+  pre.src-calc:before { content: 'Emacs Calc'; }
+  pre.src-emacs-lisp:before { content: 'Emacs Lisp'; }
+  pre.src-fortran:before { content: 'Fortran'; }
+  pre.src-gnuplot:before { content: 'gnuplot'; }
+  pre.src-haskell:before { content: 'Haskell'; }
+  pre.src-hledger:before { content: 'hledger'; }
+  pre.src-java:before { content: 'Java'; }
+  pre.src-js:before { content: 'Javascript'; }
+  pre.src-latex:before { content: 'LaTeX'; }
+  pre.src-ledger:before { content: 'Ledger'; }
+  pre.src-lisp:before { content: 'Lisp'; }
+  pre.src-lilypond:before { content: 'Lilypond'; }
+  pre.src-lua:before { content: 'Lua'; }
+  pre.src-matlab:before { content: 'MATLAB'; }
+  pre.src-mscgen:before { content: 'Mscgen'; }
+  pre.src-ocaml:before { content: 'Objective Caml'; }
+  pre.src-octave:before { content: 'Octave'; }
+  pre.src-org:before { content: 'Org mode'; }
+  pre.src-oz:before { content: 'OZ'; }
+  pre.src-plantuml:before { content: 'Plantuml'; }
+  pre.src-processing:before { content: 'Processing.js'; }
+  pre.src-python:before { content: 'Python'; }
+  pre.src-R:before { content: 'R'; }
+  pre.src-ruby:before { content: 'Ruby'; }
+  pre.src-sass:before { content: 'Sass'; }
+  pre.src-scheme:before { content: 'Scheme'; }
+  pre.src-screen:before { content: 'Gnu Screen'; }
+  pre.src-sed:before { content: 'Sed'; }
+  pre.src-sh:before { content: 'shell'; }
+  pre.src-sql:before { content: 'SQL'; }
+  pre.src-sqlite:before { content: 'SQLite'; }
+  /* additional languages in org.el's org-babel-load-languages alist */
+  pre.src-forth:before { content: 'Forth'; }
+  pre.src-io:before { content: 'IO'; }
+  pre.src-J:before { content: 'J'; }
+  pre.src-makefile:before { content: 'Makefile'; }
+  pre.src-maxima:before { content: 'Maxima'; }
+  pre.src-perl:before { content: 'Perl'; }
+  pre.src-picolisp:before { content: 'Pico Lisp'; }
+  pre.src-scala:before { content: 'Scala'; }
+  pre.src-shell:before { content: 'Shell Script'; }
+  pre.src-ebnf2ps:before { content: 'ebfn2ps'; }
+  /* additional language identifiers per "defun org-babel-execute"
+       in ob-*.el */
+  pre.src-cpp:before  { content: 'C++'; }
+  pre.src-abc:before  { content: 'ABC'; }
+  pre.src-coq:before  { content: 'Coq'; }
+  pre.src-groovy:before  { content: 'Groovy'; }
+  /* additional language identifiers from org-babel-shell-names in
+     ob-shell.el: ob-shell is the only babel language using a lambda to put
+     the execution function name together. */
+  pre.src-bash:before  { content: 'bash'; }
+  pre.src-csh:before  { content: 'csh'; }
+  pre.src-ash:before  { content: 'ash'; }
+  pre.src-dash:before  { content: 'dash'; }
+  pre.src-ksh:before  { content: 'ksh'; }
+  pre.src-mksh:before  { content: 'mksh'; }
+  pre.src-posh:before  { content: 'posh'; }
+  /* Additional Emacs modes also supported by the LaTeX listings package */
+  pre.src-ada:before { content: 'Ada'; }
+  pre.src-asm:before { content: 'Assembler'; }
+  pre.src-caml:before { content: 'Caml'; }
+  pre.src-delphi:before { content: 'Delphi'; }
+  pre.src-html:before { content: 'HTML'; }
+  pre.src-idl:before { content: 'IDL'; }
+  pre.src-mercury:before { content: 'Mercury'; }
+  pre.src-metapost:before { content: 'MetaPost'; }
+  pre.src-modula-2:before { content: 'Modula-2'; }
+  pre.src-pascal:before { content: 'Pascal'; }
+  pre.src-ps:before { content: 'PostScript'; }
+  pre.src-prolog:before { content: 'Prolog'; }
+  pre.src-simula:before { content: 'Simula'; }
+  pre.src-tcl:before { content: 'tcl'; }
+  pre.src-tex:before { content: 'TeX'; }
+  pre.src-plain-tex:before { content: 'Plain TeX'; }
+  pre.src-verilog:before { content: 'Verilog'; }
+  pre.src-vhdl:before { content: 'VHDL'; }
+  pre.src-xml:before { content: 'XML'; }
+  pre.src-nxml:before { content: 'XML'; }
+  /* add a generic configuration mode; LaTeX export needs an additional
+     (add-to-list 'org-latex-listings-langs '(conf " ")) in .emacs */
+  pre.src-conf:before { content: 'Configuration File'; }
+
+  table { border-collapse:collapse; }
+  caption.t-above { caption-side: top; }
+  caption.t-bottom { caption-side: bottom; }
+  td, th { vertical-align:top;  }
+  th.org-right  { text-align: center;  }
+  th.org-left   { text-align: center;   }
+  th.org-center { text-align: center; }
+  td.org-right  { text-align: right;  }
+  td.org-left   { text-align: left;   }
+  td.org-center { text-align: center; }
+  dt { font-weight: bold; }
+  .footpara { display: inline; }
+  .footdef  { margin-bottom: 1em; }
+  .figure { padding: 1em; }
+  .figure p { text-align: center; }
+  .equation-container {
+    display: table;
+    text-align: center;
+    width: 100%;
+  }
+  .equation {
+    vertical-align: middle;
+  }
+  .equation-label {
+    display: table-cell;
+    text-align: right;
+    vertical-align: middle;
+  }
+  .inlinetask {
+    padding: 10px;
+    border: 2px solid gray;
+    margin: 10px;
+    background: #ffffcc;
+  }
+  #org-div-home-and-up
+   { text-align: right; font-size: 70%; white-space: nowrap; }
+  textarea { overflow-x: auto; }
+  .linenr { font-size: smaller }
+  .code-highlighted { background-color: #ffff00; }
+  .org-info-js_info-navigation { border-style: none; }
+  #org-info-js_console-label
+    { font-size: 10px; font-weight: bold; white-space: nowrap; }
+  .org-info-js_search-highlight
+    { background-color: #ffff00; color: #000000; font-weight: bold; }
+  .org-svg { width: 90%; }
+  /*]]>*/-->
+</style>
+<script type="text/javascript">
+// @license magnet:?xt=urn:btih:e95b018ef3580986a04669f1b5879592219e2a7a&dn=public-domain.txt Public Domain
+<!--/*--><![CDATA[/*><!--*/
+     function CodeHighlightOn(elem, id)
+     {
+       var target = document.getElementById(id);
+       if(null != target) {
+         elem.classList.add("code-highlighted");
+         target.classList.add("code-highlighted");
+       }
+     }
+     function CodeHighlightOff(elem, id)
+     {
+       var target = document.getElementById(id);
+       if(null != target) {
+         elem.classList.remove("code-highlighted");
+         target.classList.remove("code-highlighted");
+       }
+     }
+    /*]]>*///-->
+// @license-end
+</script>
+</head>
+<body>
+<div id="content">
+<p>
+<del>+</del> date = '2020-02-12T01:26:18+08:00' tags = ['随笔'] title =
+'最真实的事情往往很残酷' <del>+</del>
+</p>
+
+<p>
+今天突然来了兴致，看了几部灾难类高分电影，写写观后感。按顺序写吧，这几部电影之间没有什么太多的关联。
+</p>
+
+<p>
+第一部是《拉卡》，17 年的短片，只有 22 分钟。豆瓣 7.6 分，不算太高。
+</p>
+
+<p>
+故事讲的是地球上来了外表丑陋的外星人，它们占据主要城市，建立基地，拿人类做活体实验。在人类的大脑上装上某种活跃组织，有太多的人死亡，但是一个叫
+Amir
+的男人挺过来，外星人在一次现场排查中以为他已经死亡，所以他被还在反抗外星人的残余人类所救。
+</p>
+
+<p>
+Amir
+似乎有某种能力，这是他被改造后的收获，在一段疑似未来的影像中，残余人类组织的武装杀死了一个外星人，它是一种形似直立鳄鱼的怪物。
+</p>
+
+<p>
+整个世界脏乱不已，有种异于现实生活的真实感。影片风格偏重口味，血浆喷溅场面很真实。
+</p>
+
+<p>
+该短片的导演就是《第九区》的导演 Neill
+Blomkamp，一如《第九区》的脏乱风格，外星人依然是在地球反客为主。种种人间惨剧发生在这个小小的地球。
+</p>
+
+<p>
+仅仅透过《拉卡》，并不能窥见 Neill
+想要表达的内涵，世界观的架构已经完成，接下来需要做的就是继续观看其他两个部分。Neill
+说包括《拉卡》在内的三部约 20
+分钟的短片组成了他的工作室实验短片系列的第一卷，至于是否还有第二卷、第三卷，这就要看观众怎么决定了。
+</p>
+
+<p>
+我还是蛮期待的，毕竟在这样的世界观下能够发生什么样的故事，我也很好奇。期待
+Neill 及其团队的演绎。希望不要和《第九区》一样。
+</p>
+
+<p>
+第二部是《釜山行》，16 年的电影。豆瓣 8.5，在灾难电影中还算不错。
+</p>
+
+<p>
+刚出来这部电影时，据说很吓人，也没敢看。这几天看了好几场人间喜剧，再看《釜山行》也没有那么可怕了。
+</p>
+
+<p>
+故事主要发生在一列火车和一节火车头上，在火车发车的那一刻，一个被感染的女人上了这列开往釜山的列车。经过一段反应期，"她"尸变了，变成了僵尸。
+</p>
+
+<p>
+随后的故事有些俗套了，可以想见，遇到会咬人的僵尸第一想到的肯定是逃跑，逃跑就一定会发生争执，这就是矛盾的集结点。石宇和女儿秀安在这列火车上，遇到这种突发情况，逃跑是肯定的，中途下车发现根本没有救援，反而是大堆的僵尸。
+</p>
+
+<p>
+在这下车上车过程中，秀安和爸爸分开，和一个怀孕的名叫成景的女人待在一起，她们在
+13
+车厢；爸爸则和成景的丈夫尹相华在一起，还有一个叫闵英国的十八九岁大的男生也是一个幸存者，他们在
+9 车厢。
+</p>
+
+<p>
+石宇通过尹相华的电话得知女儿她们都在第 13
+车厢，所以他们必须杀过去，尽管中间隔着很多被感染失去理智的人们。在这一过程中，僵尸们有很多特点-&#x2013;&#x2014;趋光、黑暗中无法活动、喜食人血。这些特点完全是遵照经典僵尸片的模板刻画的。场面血腥，但是我没有感觉到害怕，可能是长大了。
+</p>
+
+<p>
+演员孔侑演绎的石宇给我一种不太真实的感觉，就是他演得不太符合一个自私自利的基金经理形象。有些出戏，总是光鲜亮丽的，似乎遇见僵尸前后没有什么太大的变化。或者是剧本有问题，整个电影氛围都不是那种特别深刻严肃的，虽然有对于人性的刻画，着重描绘的肯定是我以上提到的那些人。还有一个人就是那个客运长容锡，他的自私是刻画出来了，可是我总是觉得少了一丝绝望在。兄弟你可是在演灾难片，可能下一刻你就挂了，我总感觉到影片中一些不那么和谐的地方存在。
+</p>
+
+<p>
+这就是我对这部电影的想法。
+</p>
+
+<p>
+第三部是《勇往直前》，17 年的电影。豆瓣
+8.4，看的时候多次感慨大自然的无情。
+</p>
+
+<p>
+故事是由真实事件“格拉尼特山高手”消防队英勇事迹改编。消防队长 Marsh
+带领着一群得力队员，却因为没有得到先锋队认证而不能冲在灭火的前线，这让他觉得很失败，妻子出主意让他找消防主任帮忙，最终他带领队员通过先锋队考核。然而，在执行第二次灭火任务时，因为火势过大，尽管全员
+19
+人躲进防护袋里，依然被大火带走。除了名叫布伦丹的队员，其余人全部殉难。
+</p>
+
+<p>
+看这部影片时，内心触动很大。它讲述了一群人的故事，他们为了大多数人的生命财产安全，牺牲了自己的生命，我将永远对他们这群人怀有最崇高的敬意。大火来临时，是他们冲在最前，是他们保护了我们活着的人。当我看到那些牺牲的队员的家属抱头痛哭时，深深地为她们哀伤。这些队员也有自己的家人，他们死了，他们的家人们怎么办，要一生活在痛苦中吗？
+</p>
+
+<p>
+这真是个矛盾的地方，守护我们的人去了，他们的家人却要承受这用生命换来的荣誉，这荣誉有谁愿意接受呢！唉，我们永远都不能忘记：在我们的生活中，一直有这样的一群人，他们在发生火灾时最先冲在前头。这群可爱的人啊，理应受到我们发自内心的敬意。
+</p>
+
+<p>
+电影中的故事往往是生活现实的艺术升华，现实生活中的故事造就了这一部又一部的感人电影。所以，一个爱看电影的人，一定是一个热爱生活的人。疾病的侵袭并不能把我们打到，虽然人性的丑恶在这种灾难面前体现得淋漓尽致，虽然有些人有些组织的行为恶劣得我已找不到合适的言辞来咒骂，虽然有些人一副事不关己高高挂起的模样，但是，我依然相信我们能够一同度过难关。仅仅因为我们是人类，尽管我们自身如此卑劣不堪，我们依然能够齐心协力度过难关。
+</p>
+
+<p>
+加油！
+</p>
+</div>
+</body>
+</html>
