@@ -1,0 +1,408 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN"
+"http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" lang="zh" xml:lang="zh">
+<head>
+<!-- 2021-11-21 Sun 22:19 -->
+<meta http-equiv="Content-Type" content="text/html;charset=utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>海天霞、#f3a694以及日常语言的囚笼：你要如何进入这个世界？</title>
+<meta name="generator" content="Org mode" />
+<meta name="description" content="Learn Technology, Love Life"
+ />
+<style type="text/css">
+ <!--/*--><![CDATA[/*><!--*/
+  .title  { text-align: center;
+             margin-bottom: .2em; }
+  .subtitle { text-align: center;
+              font-size: medium;
+              font-weight: bold;
+              margin-top:0; }
+  .todo   { font-family: monospace; color: red; }
+  .done   { font-family: monospace; color: green; }
+  .priority { font-family: monospace; color: orange; }
+  .tag    { background-color: #eee; font-family: monospace;
+            padding: 2px; font-size: 80%; font-weight: normal; }
+  .timestamp { color: #bebebe; }
+  .timestamp-kwd { color: #5f9ea0; }
+  .org-right  { margin-left: auto; margin-right: 0px;  text-align: right; }
+  .org-left   { margin-left: 0px;  margin-right: auto; text-align: left; }
+  .org-center { margin-left: auto; margin-right: auto; text-align: center; }
+  .underline { text-decoration: underline; }
+  #postamble p, #preamble p { font-size: 90%; margin: .2em; }
+  p.verse { margin-left: 3%; }
+  pre {
+    border: 1px solid #ccc;
+    box-shadow: 3px 3px 3px #eee;
+    padding: 8pt;
+    font-family: monospace;
+    overflow: auto;
+    margin: 1.2em;
+  }
+  pre.src {
+    position: relative;
+    overflow: auto;
+    padding-top: 1.2em;
+  }
+  pre.src:before {
+    display: none;
+    position: absolute;
+    background-color: white;
+    top: -10px;
+    right: 10px;
+    padding: 3px;
+    border: 1px solid black;
+  }
+  pre.src:hover:before { display: inline; margin-top: 14px;}
+  /* Languages per Org manual */
+  pre.src-asymptote:before { content: 'Asymptote'; }
+  pre.src-awk:before { content: 'Awk'; }
+  pre.src-C:before { content: 'C'; }
+  /* pre.src-C++ doesn't work in CSS */
+  pre.src-clojure:before { content: 'Clojure'; }
+  pre.src-css:before { content: 'CSS'; }
+  pre.src-D:before { content: 'D'; }
+  pre.src-ditaa:before { content: 'ditaa'; }
+  pre.src-dot:before { content: 'Graphviz'; }
+  pre.src-calc:before { content: 'Emacs Calc'; }
+  pre.src-emacs-lisp:before { content: 'Emacs Lisp'; }
+  pre.src-fortran:before { content: 'Fortran'; }
+  pre.src-gnuplot:before { content: 'gnuplot'; }
+  pre.src-haskell:before { content: 'Haskell'; }
+  pre.src-hledger:before { content: 'hledger'; }
+  pre.src-java:before { content: 'Java'; }
+  pre.src-js:before { content: 'Javascript'; }
+  pre.src-latex:before { content: 'LaTeX'; }
+  pre.src-ledger:before { content: 'Ledger'; }
+  pre.src-lisp:before { content: 'Lisp'; }
+  pre.src-lilypond:before { content: 'Lilypond'; }
+  pre.src-lua:before { content: 'Lua'; }
+  pre.src-matlab:before { content: 'MATLAB'; }
+  pre.src-mscgen:before { content: 'Mscgen'; }
+  pre.src-ocaml:before { content: 'Objective Caml'; }
+  pre.src-octave:before { content: 'Octave'; }
+  pre.src-org:before { content: 'Org mode'; }
+  pre.src-oz:before { content: 'OZ'; }
+  pre.src-plantuml:before { content: 'Plantuml'; }
+  pre.src-processing:before { content: 'Processing.js'; }
+  pre.src-python:before { content: 'Python'; }
+  pre.src-R:before { content: 'R'; }
+  pre.src-ruby:before { content: 'Ruby'; }
+  pre.src-sass:before { content: 'Sass'; }
+  pre.src-scheme:before { content: 'Scheme'; }
+  pre.src-screen:before { content: 'Gnu Screen'; }
+  pre.src-sed:before { content: 'Sed'; }
+  pre.src-sh:before { content: 'shell'; }
+  pre.src-sql:before { content: 'SQL'; }
+  pre.src-sqlite:before { content: 'SQLite'; }
+  /* additional languages in org.el's org-babel-load-languages alist */
+  pre.src-forth:before { content: 'Forth'; }
+  pre.src-io:before { content: 'IO'; }
+  pre.src-J:before { content: 'J'; }
+  pre.src-makefile:before { content: 'Makefile'; }
+  pre.src-maxima:before { content: 'Maxima'; }
+  pre.src-perl:before { content: 'Perl'; }
+  pre.src-picolisp:before { content: 'Pico Lisp'; }
+  pre.src-scala:before { content: 'Scala'; }
+  pre.src-shell:before { content: 'Shell Script'; }
+  pre.src-ebnf2ps:before { content: 'ebfn2ps'; }
+  /* additional language identifiers per "defun org-babel-execute"
+       in ob-*.el */
+  pre.src-cpp:before  { content: 'C++'; }
+  pre.src-abc:before  { content: 'ABC'; }
+  pre.src-coq:before  { content: 'Coq'; }
+  pre.src-groovy:before  { content: 'Groovy'; }
+  /* additional language identifiers from org-babel-shell-names in
+     ob-shell.el: ob-shell is the only babel language using a lambda to put
+     the execution function name together. */
+  pre.src-bash:before  { content: 'bash'; }
+  pre.src-csh:before  { content: 'csh'; }
+  pre.src-ash:before  { content: 'ash'; }
+  pre.src-dash:before  { content: 'dash'; }
+  pre.src-ksh:before  { content: 'ksh'; }
+  pre.src-mksh:before  { content: 'mksh'; }
+  pre.src-posh:before  { content: 'posh'; }
+  /* Additional Emacs modes also supported by the LaTeX listings package */
+  pre.src-ada:before { content: 'Ada'; }
+  pre.src-asm:before { content: 'Assembler'; }
+  pre.src-caml:before { content: 'Caml'; }
+  pre.src-delphi:before { content: 'Delphi'; }
+  pre.src-html:before { content: 'HTML'; }
+  pre.src-idl:before { content: 'IDL'; }
+  pre.src-mercury:before { content: 'Mercury'; }
+  pre.src-metapost:before { content: 'MetaPost'; }
+  pre.src-modula-2:before { content: 'Modula-2'; }
+  pre.src-pascal:before { content: 'Pascal'; }
+  pre.src-ps:before { content: 'PostScript'; }
+  pre.src-prolog:before { content: 'Prolog'; }
+  pre.src-simula:before { content: 'Simula'; }
+  pre.src-tcl:before { content: 'tcl'; }
+  pre.src-tex:before { content: 'TeX'; }
+  pre.src-plain-tex:before { content: 'Plain TeX'; }
+  pre.src-verilog:before { content: 'Verilog'; }
+  pre.src-vhdl:before { content: 'VHDL'; }
+  pre.src-xml:before { content: 'XML'; }
+  pre.src-nxml:before { content: 'XML'; }
+  /* add a generic configuration mode; LaTeX export needs an additional
+     (add-to-list 'org-latex-listings-langs '(conf " ")) in .emacs */
+  pre.src-conf:before { content: 'Configuration File'; }
+
+  table { border-collapse:collapse; }
+  caption.t-above { caption-side: top; }
+  caption.t-bottom { caption-side: bottom; }
+  td, th { vertical-align:top;  }
+  th.org-right  { text-align: center;  }
+  th.org-left   { text-align: center;   }
+  th.org-center { text-align: center; }
+  td.org-right  { text-align: right;  }
+  td.org-left   { text-align: left;   }
+  td.org-center { text-align: center; }
+  dt { font-weight: bold; }
+  .footpara { display: inline; }
+  .footdef  { margin-bottom: 1em; }
+  .figure { padding: 1em; }
+  .figure p { text-align: center; }
+  .equation-container {
+    display: table;
+    text-align: center;
+    width: 100%;
+  }
+  .equation {
+    vertical-align: middle;
+  }
+  .equation-label {
+    display: table-cell;
+    text-align: right;
+    vertical-align: middle;
+  }
+  .inlinetask {
+    padding: 10px;
+    border: 2px solid gray;
+    margin: 10px;
+    background: #ffffcc;
+  }
+  #org-div-home-and-up
+   { text-align: right; font-size: 70%; white-space: nowrap; }
+  textarea { overflow-x: auto; }
+  .linenr { font-size: smaller }
+  .code-highlighted { background-color: #ffff00; }
+  .org-info-js_info-navigation { border-style: none; }
+  #org-info-js_console-label
+    { font-size: 10px; font-weight: bold; white-space: nowrap; }
+  .org-info-js_search-highlight
+    { background-color: #ffff00; color: #000000; font-weight: bold; }
+  .org-svg { width: 90%; }
+  /*]]>*/-->
+</style>
+<link rel="stylesheet" type="text/css" href="/theme/org.css"/>
+<link rel="stylesheet" type="text/css" href="/theme/site.css"/>
+<script type="text/javascript">
+// @license magnet:?xt=urn:btih:e95b018ef3580986a04669f1b5879592219e2a7a&dn=public-domain.txt Public Domain
+<!--/*--><![CDATA[/*><!--*/
+     function CodeHighlightOn(elem, id)
+     {
+       var target = document.getElementById(id);
+       if(null != target) {
+         elem.classList.add("code-highlighted");
+         target.classList.add("code-highlighted");
+       }
+     }
+     function CodeHighlightOff(elem, id)
+     {
+       var target = document.getElementById(id);
+       if(null != target) {
+         elem.classList.remove("code-highlighted");
+         target.classList.remove("code-highlighted");
+       }
+     }
+    /*]]>*///-->
+// @license-end
+</script>
+</head>
+<body>
+<div id="content">
+<h1 class="title">海天霞、#f3a694以及日常语言的囚笼：你要如何进入这个世界？</h1>
+<blockquote>
+<p>
+前几天逛书店，无意中翻到郭浩老师的《中国传统色彩》，惊叹于这些颜色居然有如此美妙的名字和寓意。
+</p>
+
+<p>
+玄（#201208），黑中泛赤，说的是太阳将从地平线出来时一霎那的天光之色；（图2）
+</p>
+
+<p>
+纁（#86351a），太阳刚落于地平线时泛出的余光之色，红黄交叠。皇帝祭祀，衣服配色是上玄下纁，以表达对天地敬畏之心。（图3）
+</p>
+
+<p>
+东方既白（#98aec8），一种浅蓝白，苏东坡和他的朋友们于船上宴饮后宿下，翌日清晨，天空微明，看见蓝中透白的天色，《赤壁赋》中写到：「相与枕籍乎舟中，不知东方之既白」。（图4）
+</p>
+
+<p>
+暮山紫（#8986a9），出自《滕王阁序》「潦水尽而寒潭清，烟光凝而暮山紫」，「年轻的诗人站在夕阳的山前，水雾烟，余晖光凝固在一起，给山罩上一层薄紫色，他怦然心动，落笔而成：暮山紫」。
+</p>
+
+<p>
+海天霞（#f3a694），一种粉色，顾名思义，说的是海天交汇处晚霞所映出的颜色……（图5）
+</p>
+
+<p>
+为每个传统色标出色彩代码，是十分败兴的行为。原书中没有出现任何色彩编号，是刻意拒绝将这些颜色放置在“色彩科学”的坐标系中，我非常理解，这会让玄黑褪为深暗红，会让东方既白关联上马卡龙，会让海天霞沦为配色参考书里的一串代码。（图6）
+</p>
+
+<p>
+让海天霞与#f3a694同框，是我刻意为之，这能引出今天的话题：我们为经验对象命名的方式，决定了我们打开世界的方式。
+</p>
+
+<p>
+看完本文，若再有人问：东西方思维方式差异/艺术直觉vs科学理性各自特点/故事隐喻vs抽象逻辑的优劣……这类问题，你可以给他举海天霞与#f3a694的例子。
+</p>
+
+<p>
+我们先来看看一位中国文人是如何介绍#f3a694的：
+</p>
+
+<p>
+海天霞被“发明”于中国明代。当年阉党事败，宦官刘若愚受诬，蒙冤入狱，在狱期间，他效司马迁为榜样，写下《酌中志》，这部明代杂史成为后世珍贵史料，书中提到：「海天霞，内织造局所造新色也，似白而微红」。
+</p>
+
+<p>
+内织染局专司宫廷缎匹，调制出这种新颜色，用来制作宫人春季打底内衣。似白而微红的内衣，搭上青绿色纱罗外衬，淡红配青绿，有“瑟瑟波纹衬海霞”之观感。明末诗人秦兰徵曾在《天启宫词》里赞叹：「烂漫花棚锦绣窠，海上霞色上轻罗，斗鸡打马消长昼，一半春光戏里过」
+</p>
+
+<p>
+那本狱中写成的《酌中志》，忿忿苦闷中亦记录了许多诸如海天霞的美好细节，如：
+</p>
+
+<p>
+逆贤擅政，则王体乾等夏穿真青油绿怀素纱，内以玉色素纱衬之，满身活文，如水之波，如木之理；而冬则天青、竹绿、油绿怀素纱，光耀射目，争相夸尚，以艳丽为美。
+</p>
+
+<p>
+据说后来崇祯皇帝读到此书，“戚然改容”，刘若愚得以重见天日，「记叙美好总归是有希望的」。
+</p>
+
+<p>
+接下来，是西方人对海天霞的解释：
+</p>
+
+<p>
+海天霞，名词，该名词所指经验范畴，统称为「颜色」。
+</p>
+
+<p>
+颜色，形色质三要素之一，视觉感官中任何对象，都有颜色之维。其本质是不同波长的光对视锥细胞产生刺激，被我们以不同视觉-心理表征加以区别，这些表征就是「颜色」。人之所以能拥有分辨颜色的能力，乃是自然选择的结果：那些不能在万绿丛中一眼盯住红苹果的智人，留不下自己的后代。
+</p>
+
+<p>
+在今天的色彩符号系统中，所谓的「海天霞」可以确切地划定为代号#f3a694的颜色。
+</p>
+
+<p>
+解释完了，再多说一个字都是胡话。
+</p>
+
+<p>
+相比刘若愚的故事，西方人对颜色的解释精确但枯燥，原因在于他们传承了古希腊人留下的抽象理论偏好：
+</p>
+
+<p>
+一旦为观察对象抽象出各种维度，我们就能在维度之中进一步展开抽象，比如为视觉对象抽象出形状-颜色-质感，又为颜色抽象出色相、饱和度、亮度。
+</p>
+
+<p>
+一旦我们将对象切分得足够细碎，我们就有机会仔细地“观测度量”每一个细碎维度的变化规律。只要能把握变量，就能用抽象的形式语言（代数、编程语言）来建模，比如色相、饱和度、亮度三个变量所构成的HSL色彩空间。
+</p>
+
+<p>
+一旦建模成功，这个模型所映射的经验范畴中的所有未知因素都将被消除，包含了无穷信息量的经验世界，将被几十个字节的符号规则所笼罩，这叫做“抽象的普遍性”。比如在HSL的符号规则体系中，整个人类世界不会再有未知的色彩。只要逻辑允许，模型和另一个模型可以相互映射，比如HSL色彩与RGB色彩相互映射。对计算机来说，H11 S39 L76总是等价于R243 G166 B148，总是能被换算成#f3a694。
+</p>
+
+<p>
+（东西方思维之别，见图7与图8）
+</p>
+
+<p>
+你会发现，现代人眼中的颜色已经完全抽象化，成了毫无实质的“经验错觉”，彻底祛了魅，所谓暮山紫、海天霞，无非是特定条件下反射散射的因缘际会，诗意的栖居在理性逻辑前顷刻消解，多无趣……
+</p>
+
+<p>
+按照套路，写到这里就可以开始批判“科学理性”了。理性世界观很无聊，老是搞这种批判其实更无聊——说得好像我们个个都是擅分析，懂收敛的理性人儿，过度运思以至于走火入魔，要写点东西棒喝劝戒一番。屁啊，咱们哪有那么能耐？真能给自己脸上贴金。
+</p>
+
+<p>
+一个人若能在自己的专业领域提出HSL这样的解释模型，都是极其了不起的成就，将大幅提升该领域的生产力，刘勰在《文心雕龙》中写道，我们论说事理，追求的就是「穷于有数，追于无形」，今天的色彩科学理论无疑做到了。
+</p>
+
+<p>
+古人细腻的感受与修辞能力令人向往，现代理论极具普适性的抽象之力同样值得敬畏。真正值得批判，迫切需要来一棒子的，是「日常语言囚笼」。
+</p>
+
+<p>
+啥叫日常语言的囚笼？
+</p>
+
+<p>
+我在《说话Pro》课程中介绍过一个抽象之梯，这是语言学家塞缪尔·早川提出的一个理论工具，我们可以用它来分析我们日常语言的表现力。
+</p>
+
+<p>
+抽象之梯的底部，是最具体的概念，比如「汤质的耳垂」、「镰仓街边的海」，顶端，是最抽象的概念，比如「有机物」、「无机物」。我们用来理解、言说世界的每一个词，都能在抽象之梯之上找到它的位置。
+</p>
+
+<p>
+某些写作教材常常会提到抽象之梯，并给出建议：如果你要追求深刻的理解或表达，要么去到抽象之梯的最底端，用极其具象写实的话语展开你的经验，要么去到抽象之梯的最顶端，用极其抽象凝练的符号收敛你的经验。简单来说，要么说最接地气的话，要么拔高作概括，少整些不上不下、两头不沾的陈词习语。
+</p>
+
+<p>
+比如，文学作品里那些一笔扎进经验细节里的白描，就是在梯子底部的话语：「一刻工夫，一碗肉已不见，骑手将嘴啃进酒碗里，一仰头，喉节猛一缩，又缓缓移下来，并不出长气，就喝汤。一时满屋都是喉咙响」。
+</p>
+
+<p>
+以本人拙劣的作文水平，大概会写成「骑手饿极了，用大碗喝汤，满屋都是汤水咕咕下肚的声音」。饿是一种抽象，「饿极了」相比「一碗肉不见了、啃进碗里、不出长气、喉结猛一缩」显得十分多余；「汤咕咕下肚」依然是抽象的，“下肚”是他人的内在经验和作者的刻意想象，相比「喉结响」，显得很间接，难以凝结成意象。
+</p>
+
+<p>
+又比如，上文中「穷于有数，追于无形」就是高度概括的表达。展开之后，就成了上文中的「一旦建模成功，这个模型所映射的经验范畴中的所有未知因素都将被消除，包含了无穷信息量的经验世界，将被几十个字节的符号规则所笼罩……现代人眼中的颜色已经被完全抽象化，成了毫无实质的“错觉”」，如此啰里八嗦也许是必要的，但的确不高级。
+</p>
+
+<p>
+我无意讨论表达与写作的技巧，将这把抽象之梯推而广之，「海天霞」们正是那些深插入泥土的词汇，#f3a694则是极其精准的抽象符号，而我们日常语言中的「粉紫色」，就是悬在中间，不上不下的陈词滥调。（充满商品拜物教气质的“马卡龙色系”、“蒂夫尼蓝”、“卡地亚红”们也许更糟）
+</p>
+
+<p>
+这里的「粉紫」、「饿」，都是「方便概念」，它们直接、无深度、易于操作、刚好够用。粉紫既不能如海天霞般唤起我们的感受力，也无法像#f3a694般调取一个精密的符号规则来释放生产力。自从知道那种感觉叫「饿极了」，就再也听不见喉结的响动声。
+</p>
+
+<p>
+这是所谓「日常语言囚笼」。价值、成功、金色、辉煌，成功就是价值，多金就是辉煌……日常语言为我们划出了一个结界，我们用它抵御这个世界的复杂。一旦我们发现人生不止于此，世界另有蹊跷，于是有事要说，有理要辩，便会立刻发现语言本身就是最难于突破的屏障。梯子上下两端，都能获得某种眼界与自由，夹在中间，只能落入尴尬，沦为庸常。（图9）
+</p>
+
+<p>
+以上是《中国传统色》带来一些启发，最后祝各位都能左手海天霞，右手#f3a694，喜提独立之精神，自由之思想。
+</p>
+</blockquote>
+
+<p>
+一边是诗性的表达，一边是理性至上，两者都于我们有益，都有助于我们理解这个世界。
+</p>
+
+<p>
+<img src="../../images/traditional-chinese-colors-0.jpg" alt="traditional-chinese-colors-0.jpg" />
+<img src="../../images/traditional-chinese-colors-1.jpg" alt="traditional-chinese-colors-1.jpg" />
+<img src="../../images/traditional-chinese-colors-2.jpg" alt="traditional-chinese-colors-2.jpg" />
+</p>
+
+<p>
+内容来自：
+</p>
+
+
+<div id="orge4ec817" class="figure">
+<p><img src="../../images/tangzhi.jpg" alt="tangzhi.jpg" />
+</p>
+</div>
+</div>
+</body>
+</html>
