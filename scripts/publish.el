@@ -27,11 +27,10 @@
          :base-directory "~/org/"
          :publishing-directory "~/repo/blog/"
          :recursive t
-         :html-head-include-default-style nil
-         ;; TODO(yan): seqeuncep my-org-publish-html-head failed?!
-         ;; :html-head my-org-publish-html-head
+         :html-head-include-default-style nil\
          :html-head ""
          :publishing-function org-html-publish-to-html
+         :html-postamble nil
          :with-toc 't)
         ("site" :components ("pages"))))
 
