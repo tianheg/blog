@@ -1,0 +1,281 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN"
+"http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en">
+<head>
+<!-- 2021-11-21 Sun 11:39 -->
+<meta http-equiv="Content-Type" content="text/html;charset=utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>&lrm;</title>
+<meta name="generator" content="Org mode" />
+<style type="text/css">
+ <!--/*--><![CDATA[/*><!--*/
+  .title  { text-align: center;
+             margin-bottom: .2em; }
+  .subtitle { text-align: center;
+              font-size: medium;
+              font-weight: bold;
+              margin-top:0; }
+  .todo   { font-family: monospace; color: red; }
+  .done   { font-family: monospace; color: green; }
+  .priority { font-family: monospace; color: orange; }
+  .tag    { background-color: #eee; font-family: monospace;
+            padding: 2px; font-size: 80%; font-weight: normal; }
+  .timestamp { color: #bebebe; }
+  .timestamp-kwd { color: #5f9ea0; }
+  .org-right  { margin-left: auto; margin-right: 0px;  text-align: right; }
+  .org-left   { margin-left: 0px;  margin-right: auto; text-align: left; }
+  .org-center { margin-left: auto; margin-right: auto; text-align: center; }
+  .underline { text-decoration: underline; }
+  #postamble p, #preamble p { font-size: 90%; margin: .2em; }
+  p.verse { margin-left: 3%; }
+  pre {
+    border: 1px solid #ccc;
+    box-shadow: 3px 3px 3px #eee;
+    padding: 8pt;
+    font-family: monospace;
+    overflow: auto;
+    margin: 1.2em;
+  }
+  pre.src {
+    position: relative;
+    overflow: auto;
+    padding-top: 1.2em;
+  }
+  pre.src:before {
+    display: none;
+    position: absolute;
+    background-color: white;
+    top: -10px;
+    right: 10px;
+    padding: 3px;
+    border: 1px solid black;
+  }
+  pre.src:hover:before { display: inline; margin-top: 14px;}
+  /* Languages per Org manual */
+  pre.src-asymptote:before { content: 'Asymptote'; }
+  pre.src-awk:before { content: 'Awk'; }
+  pre.src-C:before { content: 'C'; }
+  /* pre.src-C++ doesn't work in CSS */
+  pre.src-clojure:before { content: 'Clojure'; }
+  pre.src-css:before { content: 'CSS'; }
+  pre.src-D:before { content: 'D'; }
+  pre.src-ditaa:before { content: 'ditaa'; }
+  pre.src-dot:before { content: 'Graphviz'; }
+  pre.src-calc:before { content: 'Emacs Calc'; }
+  pre.src-emacs-lisp:before { content: 'Emacs Lisp'; }
+  pre.src-fortran:before { content: 'Fortran'; }
+  pre.src-gnuplot:before { content: 'gnuplot'; }
+  pre.src-haskell:before { content: 'Haskell'; }
+  pre.src-hledger:before { content: 'hledger'; }
+  pre.src-java:before { content: 'Java'; }
+  pre.src-js:before { content: 'Javascript'; }
+  pre.src-latex:before { content: 'LaTeX'; }
+  pre.src-ledger:before { content: 'Ledger'; }
+  pre.src-lisp:before { content: 'Lisp'; }
+  pre.src-lilypond:before { content: 'Lilypond'; }
+  pre.src-lua:before { content: 'Lua'; }
+  pre.src-matlab:before { content: 'MATLAB'; }
+  pre.src-mscgen:before { content: 'Mscgen'; }
+  pre.src-ocaml:before { content: 'Objective Caml'; }
+  pre.src-octave:before { content: 'Octave'; }
+  pre.src-org:before { content: 'Org mode'; }
+  pre.src-oz:before { content: 'OZ'; }
+  pre.src-plantuml:before { content: 'Plantuml'; }
+  pre.src-processing:before { content: 'Processing.js'; }
+  pre.src-python:before { content: 'Python'; }
+  pre.src-R:before { content: 'R'; }
+  pre.src-ruby:before { content: 'Ruby'; }
+  pre.src-sass:before { content: 'Sass'; }
+  pre.src-scheme:before { content: 'Scheme'; }
+  pre.src-screen:before { content: 'Gnu Screen'; }
+  pre.src-sed:before { content: 'Sed'; }
+  pre.src-sh:before { content: 'shell'; }
+  pre.src-sql:before { content: 'SQL'; }
+  pre.src-sqlite:before { content: 'SQLite'; }
+  /* additional languages in org.el's org-babel-load-languages alist */
+  pre.src-forth:before { content: 'Forth'; }
+  pre.src-io:before { content: 'IO'; }
+  pre.src-J:before { content: 'J'; }
+  pre.src-makefile:before { content: 'Makefile'; }
+  pre.src-maxima:before { content: 'Maxima'; }
+  pre.src-perl:before { content: 'Perl'; }
+  pre.src-picolisp:before { content: 'Pico Lisp'; }
+  pre.src-scala:before { content: 'Scala'; }
+  pre.src-shell:before { content: 'Shell Script'; }
+  pre.src-ebnf2ps:before { content: 'ebfn2ps'; }
+  /* additional language identifiers per "defun org-babel-execute"
+       in ob-*.el */
+  pre.src-cpp:before  { content: 'C++'; }
+  pre.src-abc:before  { content: 'ABC'; }
+  pre.src-coq:before  { content: 'Coq'; }
+  pre.src-groovy:before  { content: 'Groovy'; }
+  /* additional language identifiers from org-babel-shell-names in
+     ob-shell.el: ob-shell is the only babel language using a lambda to put
+     the execution function name together. */
+  pre.src-bash:before  { content: 'bash'; }
+  pre.src-csh:before  { content: 'csh'; }
+  pre.src-ash:before  { content: 'ash'; }
+  pre.src-dash:before  { content: 'dash'; }
+  pre.src-ksh:before  { content: 'ksh'; }
+  pre.src-mksh:before  { content: 'mksh'; }
+  pre.src-posh:before  { content: 'posh'; }
+  /* Additional Emacs modes also supported by the LaTeX listings package */
+  pre.src-ada:before { content: 'Ada'; }
+  pre.src-asm:before { content: 'Assembler'; }
+  pre.src-caml:before { content: 'Caml'; }
+  pre.src-delphi:before { content: 'Delphi'; }
+  pre.src-html:before { content: 'HTML'; }
+  pre.src-idl:before { content: 'IDL'; }
+  pre.src-mercury:before { content: 'Mercury'; }
+  pre.src-metapost:before { content: 'MetaPost'; }
+  pre.src-modula-2:before { content: 'Modula-2'; }
+  pre.src-pascal:before { content: 'Pascal'; }
+  pre.src-ps:before { content: 'PostScript'; }
+  pre.src-prolog:before { content: 'Prolog'; }
+  pre.src-simula:before { content: 'Simula'; }
+  pre.src-tcl:before { content: 'tcl'; }
+  pre.src-tex:before { content: 'TeX'; }
+  pre.src-plain-tex:before { content: 'Plain TeX'; }
+  pre.src-verilog:before { content: 'Verilog'; }
+  pre.src-vhdl:before { content: 'VHDL'; }
+  pre.src-xml:before { content: 'XML'; }
+  pre.src-nxml:before { content: 'XML'; }
+  /* add a generic configuration mode; LaTeX export needs an additional
+     (add-to-list 'org-latex-listings-langs '(conf " ")) in .emacs */
+  pre.src-conf:before { content: 'Configuration File'; }
+
+  table { border-collapse:collapse; }
+  caption.t-above { caption-side: top; }
+  caption.t-bottom { caption-side: bottom; }
+  td, th { vertical-align:top;  }
+  th.org-right  { text-align: center;  }
+  th.org-left   { text-align: center;   }
+  th.org-center { text-align: center; }
+  td.org-right  { text-align: right;  }
+  td.org-left   { text-align: left;   }
+  td.org-center { text-align: center; }
+  dt { font-weight: bold; }
+  .footpara { display: inline; }
+  .footdef  { margin-bottom: 1em; }
+  .figure { padding: 1em; }
+  .figure p { text-align: center; }
+  .equation-container {
+    display: table;
+    text-align: center;
+    width: 100%;
+  }
+  .equation {
+    vertical-align: middle;
+  }
+  .equation-label {
+    display: table-cell;
+    text-align: right;
+    vertical-align: middle;
+  }
+  .inlinetask {
+    padding: 10px;
+    border: 2px solid gray;
+    margin: 10px;
+    background: #ffffcc;
+  }
+  #org-div-home-and-up
+   { text-align: right; font-size: 70%; white-space: nowrap; }
+  textarea { overflow-x: auto; }
+  .linenr { font-size: smaller }
+  .code-highlighted { background-color: #ffff00; }
+  .org-info-js_info-navigation { border-style: none; }
+  #org-info-js_console-label
+    { font-size: 10px; font-weight: bold; white-space: nowrap; }
+  .org-info-js_search-highlight
+    { background-color: #ffff00; color: #000000; font-weight: bold; }
+  .org-svg { width: 90%; }
+  /*]]>*/-->
+</style>
+<script type="text/javascript">
+// @license magnet:?xt=urn:btih:e95b018ef3580986a04669f1b5879592219e2a7a&dn=public-domain.txt Public Domain
+<!--/*--><![CDATA[/*><!--*/
+     function CodeHighlightOn(elem, id)
+     {
+       var target = document.getElementById(id);
+       if(null != target) {
+         elem.classList.add("code-highlighted");
+         target.classList.add("code-highlighted");
+       }
+     }
+     function CodeHighlightOff(elem, id)
+     {
+       var target = document.getElementById(id);
+       if(null != target) {
+         elem.classList.remove("code-highlighted");
+         target.classList.remove("code-highlighted");
+       }
+     }
+    /*]]>*///-->
+// @license-end
+</script>
+</head>
+<body>
+<div id="content">
+<p>
+<del>+</del> date = '2021-03-18T08:43:01+08:00' description =
+'记录一次关于吃蜂蜜的经历' keywords = ['健康', '蜂蜜', '恐惧'] tags =
+['健康'] title = '蜂蜜吃太多，对身体有什么影响' <del>+</del>
+</p>
+
+<p>
+室友在一天早晨的时候告诉我，"你睡觉打呼噜。特别响，吵得我睡不着。"
+</p>
+
+<p>
+我觉得这是个问题，于是我用 Bing
+搜索，在一篇百度经验里找到*喝蜂蜜*的办法。在超市买瓶蜂蜜就开始喝。我不知道蜂蜜喝得太多有什么坏处。直到我前天晚上即将睡觉时，一种从未感受过的晕眩侵袭了我，好像下一刻我就要死去了，我匆忙奔向床，快速地脱下衣物，躺下来。晕眩的程度似乎有所好转，但是很快入睡的我不得而知。
+</p>
+
+<p>
+昨天的精神状态也不是很好，浑身乏力，没有动力学习。直到今天，我突然觉得可能是蜂蜜的问题，于是我去搜索*蜂蜜食用过多*相关的问题，找到以下解答：
+</p>
+
+<blockquote>
+<p>
+
+</p>
+
+<ol class="org-ol">
+<li>过量食用蜂蜜会发胖。</li>
+<li>过量食用蜂蜜会引发高血糖、糖尿病。蜂蜜中糖份含量非常高，长期大量食用蜂蜜会导致体内含糖量高引起高血糖，也会导致肥胖，而肥胖是引发糖尿病的重要因素。本身患有高血糖的人在大量食用蜂蜜后会使血糖继续升高，还有可能引发多种糖尿病的并发症。</li>
+<li>过量食用蜂蜜有可能会导致铅中毒。蜂蜜虽然是一种纯天然的高营养食材，但是蜂蜜中也含有较少的微量元素铅，铅是不容易被排出体外的重金属。如果大量长期吃蜂蜜，会使铅在体内堆积，时间长了会使人出现铅中毒。当然少量的食用蜂蜜是不存在铅中毒的，正常食用蜂蜜，微量铅元素是可以通过新陈代谢慢慢排出体外的。</li>
+<li>过量食用蜂蜜会诱发胃溃疡。天然的蜂蜜中含有酸性成份，少量食用会促进胃酸分泌，帮助消化，但大量食用蜂蜜会使胃酸分泌过多，从而腐蚀胃黏膜，破坏肠胃系统，使身体出现胃溃疡、十二指肠溃疡、胃穿孔等肠胃疾病。</li>
+<li>过量食用蜂蜜会引发龋（qǔ）齿。食用蜂蜜后口腔和牙齿上会沾染一些糖分，如果我们不及时刷牙或用清水漱口，那些糖分就会成为口腔内细菌的养分，细菌在分解糖分的时会产生很多酸性物质，溶解牙釉质腐蚀牙齿从而而引发龋齿，因此不能大量食用蜂蜜，少量食用后也要及时刷牙或用清水漱口。</li>
+<li>过量食用蜂蜜会引起腹泻。在蜂蜜水的作用与功效里讲过蜂蜜有很好的通肠润便治疗便秘的效果，但是食用蜂蜜过量就会引起腹泻拉肚子。</li>
+</ol>
+
+<p>
+长期食用蜂蜜好处多，但要注意食用方法和用量。成人每天最好在 80-100
+克左右，小孩和老人要适量减少饮用量，为了身体健康一定不要过量食用蜂蜜。
+</p>
+</blockquote>
+
+<p>
+我 3 月 10 日晚上 21:07
+记下买蜂蜜这笔账。从那天开始，我就开始食用蜂蜜。具体的方法：倒入水杯，等待蜂蜜溶解到水中，喝水。每次倒入的量不算多，但是我倒蜂蜜的频率很高。我喜欢那种甜甜的感觉。虽然截至今天，一个星期过去了，我才使用了大约
+240g
+蜂蜜，但最近几天的食用量比最开始几天有所增加，所以，我因为摄入过多蜂蜜，出现了一些症状。
+</p>
+
+<p>
+所以，我决定暂停食用蜂蜜，改为每天喝白开水。
+</p>
+
+<hr />
+
+<p>
+*参考资料*：
+</p>
+
+<ol class="org-ol">
+<li><a href="https://zhuanlan.zhihu.com/p/133737633">蜂蜜食用过量会怎样-&#x2013;&#x2014;知乎</a></li>
+</ol>
+</div>
+</body>
+</html>
