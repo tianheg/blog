@@ -1,0 +1,320 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN"
+"http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en">
+<head>
+<!-- 2021-11-21 Sun 11:41 -->
+<meta http-equiv="Content-Type" content="text/html;charset=utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>&lrm;</title>
+<meta name="generator" content="Org mode" />
+<style type="text/css">
+ <!--/*--><![CDATA[/*><!--*/
+  .title  { text-align: center;
+             margin-bottom: .2em; }
+  .subtitle { text-align: center;
+              font-size: medium;
+              font-weight: bold;
+              margin-top:0; }
+  .todo   { font-family: monospace; color: red; }
+  .done   { font-family: monospace; color: green; }
+  .priority { font-family: monospace; color: orange; }
+  .tag    { background-color: #eee; font-family: monospace;
+            padding: 2px; font-size: 80%; font-weight: normal; }
+  .timestamp { color: #bebebe; }
+  .timestamp-kwd { color: #5f9ea0; }
+  .org-right  { margin-left: auto; margin-right: 0px;  text-align: right; }
+  .org-left   { margin-left: 0px;  margin-right: auto; text-align: left; }
+  .org-center { margin-left: auto; margin-right: auto; text-align: center; }
+  .underline { text-decoration: underline; }
+  #postamble p, #preamble p { font-size: 90%; margin: .2em; }
+  p.verse { margin-left: 3%; }
+  pre {
+    border: 1px solid #ccc;
+    box-shadow: 3px 3px 3px #eee;
+    padding: 8pt;
+    font-family: monospace;
+    overflow: auto;
+    margin: 1.2em;
+  }
+  pre.src {
+    position: relative;
+    overflow: auto;
+    padding-top: 1.2em;
+  }
+  pre.src:before {
+    display: none;
+    position: absolute;
+    background-color: white;
+    top: -10px;
+    right: 10px;
+    padding: 3px;
+    border: 1px solid black;
+  }
+  pre.src:hover:before { display: inline; margin-top: 14px;}
+  /* Languages per Org manual */
+  pre.src-asymptote:before { content: 'Asymptote'; }
+  pre.src-awk:before { content: 'Awk'; }
+  pre.src-C:before { content: 'C'; }
+  /* pre.src-C++ doesn't work in CSS */
+  pre.src-clojure:before { content: 'Clojure'; }
+  pre.src-css:before { content: 'CSS'; }
+  pre.src-D:before { content: 'D'; }
+  pre.src-ditaa:before { content: 'ditaa'; }
+  pre.src-dot:before { content: 'Graphviz'; }
+  pre.src-calc:before { content: 'Emacs Calc'; }
+  pre.src-emacs-lisp:before { content: 'Emacs Lisp'; }
+  pre.src-fortran:before { content: 'Fortran'; }
+  pre.src-gnuplot:before { content: 'gnuplot'; }
+  pre.src-haskell:before { content: 'Haskell'; }
+  pre.src-hledger:before { content: 'hledger'; }
+  pre.src-java:before { content: 'Java'; }
+  pre.src-js:before { content: 'Javascript'; }
+  pre.src-latex:before { content: 'LaTeX'; }
+  pre.src-ledger:before { content: 'Ledger'; }
+  pre.src-lisp:before { content: 'Lisp'; }
+  pre.src-lilypond:before { content: 'Lilypond'; }
+  pre.src-lua:before { content: 'Lua'; }
+  pre.src-matlab:before { content: 'MATLAB'; }
+  pre.src-mscgen:before { content: 'Mscgen'; }
+  pre.src-ocaml:before { content: 'Objective Caml'; }
+  pre.src-octave:before { content: 'Octave'; }
+  pre.src-org:before { content: 'Org mode'; }
+  pre.src-oz:before { content: 'OZ'; }
+  pre.src-plantuml:before { content: 'Plantuml'; }
+  pre.src-processing:before { content: 'Processing.js'; }
+  pre.src-python:before { content: 'Python'; }
+  pre.src-R:before { content: 'R'; }
+  pre.src-ruby:before { content: 'Ruby'; }
+  pre.src-sass:before { content: 'Sass'; }
+  pre.src-scheme:before { content: 'Scheme'; }
+  pre.src-screen:before { content: 'Gnu Screen'; }
+  pre.src-sed:before { content: 'Sed'; }
+  pre.src-sh:before { content: 'shell'; }
+  pre.src-sql:before { content: 'SQL'; }
+  pre.src-sqlite:before { content: 'SQLite'; }
+  /* additional languages in org.el's org-babel-load-languages alist */
+  pre.src-forth:before { content: 'Forth'; }
+  pre.src-io:before { content: 'IO'; }
+  pre.src-J:before { content: 'J'; }
+  pre.src-makefile:before { content: 'Makefile'; }
+  pre.src-maxima:before { content: 'Maxima'; }
+  pre.src-perl:before { content: 'Perl'; }
+  pre.src-picolisp:before { content: 'Pico Lisp'; }
+  pre.src-scala:before { content: 'Scala'; }
+  pre.src-shell:before { content: 'Shell Script'; }
+  pre.src-ebnf2ps:before { content: 'ebfn2ps'; }
+  /* additional language identifiers per "defun org-babel-execute"
+       in ob-*.el */
+  pre.src-cpp:before  { content: 'C++'; }
+  pre.src-abc:before  { content: 'ABC'; }
+  pre.src-coq:before  { content: 'Coq'; }
+  pre.src-groovy:before  { content: 'Groovy'; }
+  /* additional language identifiers from org-babel-shell-names in
+     ob-shell.el: ob-shell is the only babel language using a lambda to put
+     the execution function name together. */
+  pre.src-bash:before  { content: 'bash'; }
+  pre.src-csh:before  { content: 'csh'; }
+  pre.src-ash:before  { content: 'ash'; }
+  pre.src-dash:before  { content: 'dash'; }
+  pre.src-ksh:before  { content: 'ksh'; }
+  pre.src-mksh:before  { content: 'mksh'; }
+  pre.src-posh:before  { content: 'posh'; }
+  /* Additional Emacs modes also supported by the LaTeX listings package */
+  pre.src-ada:before { content: 'Ada'; }
+  pre.src-asm:before { content: 'Assembler'; }
+  pre.src-caml:before { content: 'Caml'; }
+  pre.src-delphi:before { content: 'Delphi'; }
+  pre.src-html:before { content: 'HTML'; }
+  pre.src-idl:before { content: 'IDL'; }
+  pre.src-mercury:before { content: 'Mercury'; }
+  pre.src-metapost:before { content: 'MetaPost'; }
+  pre.src-modula-2:before { content: 'Modula-2'; }
+  pre.src-pascal:before { content: 'Pascal'; }
+  pre.src-ps:before { content: 'PostScript'; }
+  pre.src-prolog:before { content: 'Prolog'; }
+  pre.src-simula:before { content: 'Simula'; }
+  pre.src-tcl:before { content: 'tcl'; }
+  pre.src-tex:before { content: 'TeX'; }
+  pre.src-plain-tex:before { content: 'Plain TeX'; }
+  pre.src-verilog:before { content: 'Verilog'; }
+  pre.src-vhdl:before { content: 'VHDL'; }
+  pre.src-xml:before { content: 'XML'; }
+  pre.src-nxml:before { content: 'XML'; }
+  /* add a generic configuration mode; LaTeX export needs an additional
+     (add-to-list 'org-latex-listings-langs '(conf " ")) in .emacs */
+  pre.src-conf:before { content: 'Configuration File'; }
+
+  table { border-collapse:collapse; }
+  caption.t-above { caption-side: top; }
+  caption.t-bottom { caption-side: bottom; }
+  td, th { vertical-align:top;  }
+  th.org-right  { text-align: center;  }
+  th.org-left   { text-align: center;   }
+  th.org-center { text-align: center; }
+  td.org-right  { text-align: right;  }
+  td.org-left   { text-align: left;   }
+  td.org-center { text-align: center; }
+  dt { font-weight: bold; }
+  .footpara { display: inline; }
+  .footdef  { margin-bottom: 1em; }
+  .figure { padding: 1em; }
+  .figure p { text-align: center; }
+  .equation-container {
+    display: table;
+    text-align: center;
+    width: 100%;
+  }
+  .equation {
+    vertical-align: middle;
+  }
+  .equation-label {
+    display: table-cell;
+    text-align: right;
+    vertical-align: middle;
+  }
+  .inlinetask {
+    padding: 10px;
+    border: 2px solid gray;
+    margin: 10px;
+    background: #ffffcc;
+  }
+  #org-div-home-and-up
+   { text-align: right; font-size: 70%; white-space: nowrap; }
+  textarea { overflow-x: auto; }
+  .linenr { font-size: smaller }
+  .code-highlighted { background-color: #ffff00; }
+  .org-info-js_info-navigation { border-style: none; }
+  #org-info-js_console-label
+    { font-size: 10px; font-weight: bold; white-space: nowrap; }
+  .org-info-js_search-highlight
+    { background-color: #ffff00; color: #000000; font-weight: bold; }
+  .org-svg { width: 90%; }
+  /*]]>*/-->
+</style>
+<script type="text/javascript">
+// @license magnet:?xt=urn:btih:e95b018ef3580986a04669f1b5879592219e2a7a&dn=public-domain.txt Public Domain
+<!--/*--><![CDATA[/*><!--*/
+     function CodeHighlightOn(elem, id)
+     {
+       var target = document.getElementById(id);
+       if(null != target) {
+         elem.classList.add("code-highlighted");
+         target.classList.add("code-highlighted");
+       }
+     }
+     function CodeHighlightOff(elem, id)
+     {
+       var target = document.getElementById(id);
+       if(null != target) {
+         elem.classList.remove("code-highlighted");
+         target.classList.remove("code-highlighted");
+       }
+     }
+    /*]]>*///-->
+// @license-end
+</script>
+</head>
+<body>
+<div id="content">
+<p>
+<del>+</del> date = '2020-05-23T19:34:28+08:00' description = '《三体》读书笔记'
+keywords = ['阅读'] tags = ['阅读'] title = '刘慈欣《三体》' <del>+</del>
+</p>
+
+<blockquote>
+<p>
+这很容易使人回想起一个星星都没有出现时的苍穹，那蓝色的虚空透出一片广阔的茫然，仿佛是大理石雕像那没有瞳仁的眼睑。
+</p>
+</blockquote>
+
+<p>
+忘记了这句话在哪里标记的了，只觉得印象深刻，于是记下来。这应该是描写宇宙的空旷的，宇宙其实又是拥挤的，这很矛盾，于是就会用刘慈欣创造的“黑暗森林”理论来解释：宇宙并不空旷，但是智慧生命不能主动表明自己的位置，因为这会毁灭这个智慧生命。
+</p>
+
+<blockquote>
+<p>
+"叶老师，这&#x2026;&#x2026;真是太有意思了，可是宇宙社会学的公理是什么呢？"
+"第一，生存是文明的第一需要；第二，文明不断增长和扩张，但宇宙中的物质总量保持不变"
+</p>
+</blockquote>
+
+<p>
+"宇宙社会学"，刘慈欣真敢造词，两个现实中的词汇："宇宙"和“社会学”。在刘慈欣的笔下变成了一门研究宇宙的学问，我很佩服刘慈欣的想象力。再来看这两个公理：
+</p>
+
+<p>
+*生存是文明的第一需要*。这一点从小说中看来的确如此，地球人要生存，三体人也要生存，这是两个文明之间的战争。
+</p>
+
+<p>
+*文明不断增长和扩张，但宇宙中的物质总量保持不变*。这一句话，我持肯定态度。初中时学过“熵”的概念，"熵增"就表示混乱度增加。对于“宇宙”这一事物来说，它的初始值恒定，即物质总量保持不变。任何在其中的作用都会导致熵增，即增加混乱度。这个世界正越来越无序，所以某些人说的“社会的长期稳定”想必已岌岌可危。
+</p>
+
+<blockquote>
+<p>
+宇宙就是一座黑暗森林，每个文明都是带枪的猎人，像幽灵般潜行于林间，轻轻拨开挡路的树枝，竭力不让脚步发出一点儿声音，连呼吸都小心翼翼&#x2026;&#x2026;
+</p>
+</blockquote>
+
+<p>
+不错，这就像人与人的接触那样，我不知道你是怎样的人，你也不知道我是怎样的人。一旦认定你要伤害我，我一定立刻远离你，这就是黑暗森林。
+</p>
+
+<blockquote>
+<p>
+太阳快落下去了，你们的孩子居然不害怕？
+"当然不害怕，她知道明天太阳还会升起来的。"
+</p>
+</blockquote>
+
+<p>
+我们的太阳在哪里？我们的太阳落下来，明天真的如今天这般升起吗？电影《阳光普照》里，阿豪始终是处于众人的阳光之下，别人却不知道阿豪自己不需要别人的阳光。阿豪所讲的那一版本的“司马光砸缸”的故事，现在我才领会一点它的深意：
+</p>
+
+<p>
+司马光和小伙伴玩捉迷藏，司马光当鬼（司马光闭着眼在一个地方数数，数完了开始抓人），最后所有的小伙伴都被抓到了。但是，司马光坚持还有一个人没有找到，大家都觉得没有其他人了，因为人已经够了。但是，大家拗不过司马光的坚持。开始跟他一起寻找，找着找着，来到一棵树前，树下有一口大缸。大家都认为有小孩掉进水缸里了，司马光砸破水缸，却发现里面没有水。
+</p>
+
+<p>
+只有一个小孩，坐在阴暗的角落，那个小孩就是司马光自己。
+</p>
+
+<blockquote>
+<p>
+真的只有五分钟，那个全体会议只开了五分钟，这个极权社会的基本价值观就得到了
+"青铜时代"号上绝大多数人的认可。所以，当人类真正流落太空时，极权只需五分钟。
+</p>
+</blockquote>
+
+<p>
+现实中有一部《浪潮》（2008
+年）电影，根据真实的时间改编。在豆瓣上标记了想看。每一个人都是喜欢极权的，因为权力在手，天下我有。不在其位，即便心恋期政也没有办法。
+</p>
+
+<blockquote>
+<p>
+生命从海洋登上陆地是地球生物进化的一个里程碑，但那些上岸的鱼再也不是鱼了；同样，真正进入太空的人，再也不是人了。所以，人们，当你们打算飞向外太空再也不回头时，请千万慎重，需付出的代价比你们想象的要大得多。
+</p>
+</blockquote>
+
+<p>
+这是地球人成为太空人所必需的代价，Ta 们必须抛弃一些东西。
+</p>
+
+<blockquote>
+<p>
+死亡是唯一一座永远亮着的灯塔，不管你向哪里航行，最终都得转向它指引的方向。一切都会逝去，只有死神永生。
+</p>
+</blockquote>
+
+<p>
+这句话照应了第三部的标题："死神永生"。
+</p>
+
+<p>
+我们永远都是奔向死亡的，关键是在死之前你想要做成什么，你有什么愿望。
+</p>
+</div>
+</body>
+</html>

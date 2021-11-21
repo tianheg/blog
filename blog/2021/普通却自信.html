@@ -1,0 +1,356 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN"
+"http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en">
+<head>
+<!-- 2021-11-21 Sun 11:41 -->
+<meta http-equiv="Content-Type" content="text/html;charset=utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>&lrm;</title>
+<meta name="generator" content="Org mode" />
+<style type="text/css">
+ <!--/*--><![CDATA[/*><!--*/
+  .title  { text-align: center;
+             margin-bottom: .2em; }
+  .subtitle { text-align: center;
+              font-size: medium;
+              font-weight: bold;
+              margin-top:0; }
+  .todo   { font-family: monospace; color: red; }
+  .done   { font-family: monospace; color: green; }
+  .priority { font-family: monospace; color: orange; }
+  .tag    { background-color: #eee; font-family: monospace;
+            padding: 2px; font-size: 80%; font-weight: normal; }
+  .timestamp { color: #bebebe; }
+  .timestamp-kwd { color: #5f9ea0; }
+  .org-right  { margin-left: auto; margin-right: 0px;  text-align: right; }
+  .org-left   { margin-left: 0px;  margin-right: auto; text-align: left; }
+  .org-center { margin-left: auto; margin-right: auto; text-align: center; }
+  .underline { text-decoration: underline; }
+  #postamble p, #preamble p { font-size: 90%; margin: .2em; }
+  p.verse { margin-left: 3%; }
+  pre {
+    border: 1px solid #ccc;
+    box-shadow: 3px 3px 3px #eee;
+    padding: 8pt;
+    font-family: monospace;
+    overflow: auto;
+    margin: 1.2em;
+  }
+  pre.src {
+    position: relative;
+    overflow: auto;
+    padding-top: 1.2em;
+  }
+  pre.src:before {
+    display: none;
+    position: absolute;
+    background-color: white;
+    top: -10px;
+    right: 10px;
+    padding: 3px;
+    border: 1px solid black;
+  }
+  pre.src:hover:before { display: inline; margin-top: 14px;}
+  /* Languages per Org manual */
+  pre.src-asymptote:before { content: 'Asymptote'; }
+  pre.src-awk:before { content: 'Awk'; }
+  pre.src-C:before { content: 'C'; }
+  /* pre.src-C++ doesn't work in CSS */
+  pre.src-clojure:before { content: 'Clojure'; }
+  pre.src-css:before { content: 'CSS'; }
+  pre.src-D:before { content: 'D'; }
+  pre.src-ditaa:before { content: 'ditaa'; }
+  pre.src-dot:before { content: 'Graphviz'; }
+  pre.src-calc:before { content: 'Emacs Calc'; }
+  pre.src-emacs-lisp:before { content: 'Emacs Lisp'; }
+  pre.src-fortran:before { content: 'Fortran'; }
+  pre.src-gnuplot:before { content: 'gnuplot'; }
+  pre.src-haskell:before { content: 'Haskell'; }
+  pre.src-hledger:before { content: 'hledger'; }
+  pre.src-java:before { content: 'Java'; }
+  pre.src-js:before { content: 'Javascript'; }
+  pre.src-latex:before { content: 'LaTeX'; }
+  pre.src-ledger:before { content: 'Ledger'; }
+  pre.src-lisp:before { content: 'Lisp'; }
+  pre.src-lilypond:before { content: 'Lilypond'; }
+  pre.src-lua:before { content: 'Lua'; }
+  pre.src-matlab:before { content: 'MATLAB'; }
+  pre.src-mscgen:before { content: 'Mscgen'; }
+  pre.src-ocaml:before { content: 'Objective Caml'; }
+  pre.src-octave:before { content: 'Octave'; }
+  pre.src-org:before { content: 'Org mode'; }
+  pre.src-oz:before { content: 'OZ'; }
+  pre.src-plantuml:before { content: 'Plantuml'; }
+  pre.src-processing:before { content: 'Processing.js'; }
+  pre.src-python:before { content: 'Python'; }
+  pre.src-R:before { content: 'R'; }
+  pre.src-ruby:before { content: 'Ruby'; }
+  pre.src-sass:before { content: 'Sass'; }
+  pre.src-scheme:before { content: 'Scheme'; }
+  pre.src-screen:before { content: 'Gnu Screen'; }
+  pre.src-sed:before { content: 'Sed'; }
+  pre.src-sh:before { content: 'shell'; }
+  pre.src-sql:before { content: 'SQL'; }
+  pre.src-sqlite:before { content: 'SQLite'; }
+  /* additional languages in org.el's org-babel-load-languages alist */
+  pre.src-forth:before { content: 'Forth'; }
+  pre.src-io:before { content: 'IO'; }
+  pre.src-J:before { content: 'J'; }
+  pre.src-makefile:before { content: 'Makefile'; }
+  pre.src-maxima:before { content: 'Maxima'; }
+  pre.src-perl:before { content: 'Perl'; }
+  pre.src-picolisp:before { content: 'Pico Lisp'; }
+  pre.src-scala:before { content: 'Scala'; }
+  pre.src-shell:before { content: 'Shell Script'; }
+  pre.src-ebnf2ps:before { content: 'ebfn2ps'; }
+  /* additional language identifiers per "defun org-babel-execute"
+       in ob-*.el */
+  pre.src-cpp:before  { content: 'C++'; }
+  pre.src-abc:before  { content: 'ABC'; }
+  pre.src-coq:before  { content: 'Coq'; }
+  pre.src-groovy:before  { content: 'Groovy'; }
+  /* additional language identifiers from org-babel-shell-names in
+     ob-shell.el: ob-shell is the only babel language using a lambda to put
+     the execution function name together. */
+  pre.src-bash:before  { content: 'bash'; }
+  pre.src-csh:before  { content: 'csh'; }
+  pre.src-ash:before  { content: 'ash'; }
+  pre.src-dash:before  { content: 'dash'; }
+  pre.src-ksh:before  { content: 'ksh'; }
+  pre.src-mksh:before  { content: 'mksh'; }
+  pre.src-posh:before  { content: 'posh'; }
+  /* Additional Emacs modes also supported by the LaTeX listings package */
+  pre.src-ada:before { content: 'Ada'; }
+  pre.src-asm:before { content: 'Assembler'; }
+  pre.src-caml:before { content: 'Caml'; }
+  pre.src-delphi:before { content: 'Delphi'; }
+  pre.src-html:before { content: 'HTML'; }
+  pre.src-idl:before { content: 'IDL'; }
+  pre.src-mercury:before { content: 'Mercury'; }
+  pre.src-metapost:before { content: 'MetaPost'; }
+  pre.src-modula-2:before { content: 'Modula-2'; }
+  pre.src-pascal:before { content: 'Pascal'; }
+  pre.src-ps:before { content: 'PostScript'; }
+  pre.src-prolog:before { content: 'Prolog'; }
+  pre.src-simula:before { content: 'Simula'; }
+  pre.src-tcl:before { content: 'tcl'; }
+  pre.src-tex:before { content: 'TeX'; }
+  pre.src-plain-tex:before { content: 'Plain TeX'; }
+  pre.src-verilog:before { content: 'Verilog'; }
+  pre.src-vhdl:before { content: 'VHDL'; }
+  pre.src-xml:before { content: 'XML'; }
+  pre.src-nxml:before { content: 'XML'; }
+  /* add a generic configuration mode; LaTeX export needs an additional
+     (add-to-list 'org-latex-listings-langs '(conf " ")) in .emacs */
+  pre.src-conf:before { content: 'Configuration File'; }
+
+  table { border-collapse:collapse; }
+  caption.t-above { caption-side: top; }
+  caption.t-bottom { caption-side: bottom; }
+  td, th { vertical-align:top;  }
+  th.org-right  { text-align: center;  }
+  th.org-left   { text-align: center;   }
+  th.org-center { text-align: center; }
+  td.org-right  { text-align: right;  }
+  td.org-left   { text-align: left;   }
+  td.org-center { text-align: center; }
+  dt { font-weight: bold; }
+  .footpara { display: inline; }
+  .footdef  { margin-bottom: 1em; }
+  .figure { padding: 1em; }
+  .figure p { text-align: center; }
+  .equation-container {
+    display: table;
+    text-align: center;
+    width: 100%;
+  }
+  .equation {
+    vertical-align: middle;
+  }
+  .equation-label {
+    display: table-cell;
+    text-align: right;
+    vertical-align: middle;
+  }
+  .inlinetask {
+    padding: 10px;
+    border: 2px solid gray;
+    margin: 10px;
+    background: #ffffcc;
+  }
+  #org-div-home-and-up
+   { text-align: right; font-size: 70%; white-space: nowrap; }
+  textarea { overflow-x: auto; }
+  .linenr { font-size: smaller }
+  .code-highlighted { background-color: #ffff00; }
+  .org-info-js_info-navigation { border-style: none; }
+  #org-info-js_console-label
+    { font-size: 10px; font-weight: bold; white-space: nowrap; }
+  .org-info-js_search-highlight
+    { background-color: #ffff00; color: #000000; font-weight: bold; }
+  .org-svg { width: 90%; }
+  /*]]>*/-->
+</style>
+<script type="text/javascript">
+// @license magnet:?xt=urn:btih:e95b018ef3580986a04669f1b5879592219e2a7a&dn=public-domain.txt Public Domain
+<!--/*--><![CDATA[/*><!--*/
+     function CodeHighlightOn(elem, id)
+     {
+       var target = document.getElementById(id);
+       if(null != target) {
+         elem.classList.add("code-highlighted");
+         target.classList.add("code-highlighted");
+       }
+     }
+     function CodeHighlightOff(elem, id)
+     {
+       var target = document.getElementById(id);
+       if(null != target) {
+         elem.classList.remove("code-highlighted");
+         target.classList.remove("code-highlighted");
+       }
+     }
+    /*]]>*///-->
+// @license-end
+</script>
+</head>
+<body>
+<div id="content">
+<p>
+<del>+</del> date = '2021-05-07T13:49:54+08:00' slug = 'ordinary-but-confident'
+tags = ['心理学'] title = '普通却自信' <del>+</del>
+</p>
+
+<p>
+「普通却自信」所代表的一种品质是一种难能可贵的品质。因为它规避了人最常见的两种认知偏差：积极偏差，以及消极偏差。
+</p>
+
+<p>
+先谈「积极偏差」。
+</p>
+
+<p>
+1978 年，心理学家 Matlin 和 Stang
+首次提出了这种效应。他们发现：当我们跟别人交流跟回忆往事的时候，总是倾向于对真实的经历进行粉饰，亦即关注那些更正面、更美好的事物，忽略那些负面、不够美好的事物。
+</p>
+
+<p>
+「积极偏差」的成因：*人需要不断肯定自己存在的价值，这样我们才能从中获得继续存在下去的力量*。
+</p>
+
+<p>
+我们知道，记忆可以大体分成长时记忆和短时记忆，而长时记忆又可以进一步细分，分成语义记忆和情境记忆（又叫做*自传体记忆*）。
+</p>
+
+<p>
+语义记忆，指的是对句子、概念等信息的记忆；而自传体记忆呢，指的是对「我做过什么事情」的记忆
+-&#x2013;&#x2014; 它是以情境的形式储存和「回放」的。
+</p>
+
+<p>
+我们的自我认知，很大程度上就来自于自传体记忆。
+</p>
+
+<p>
+也就是说：我觉得我是一个什么样的人，我喜欢什么、不喜欢什么，我擅长什么、不擅长什么，我相信什么、不相信什么&#x2026;&#x2026;以上这些，心理学上叫做一个人的「*自我图式*」。而自我图式的重要组成部分，就是一个人的自传体记忆。
+</p>
+
+<p>
+所以，更加正面的自传体记忆，就可以形成一个更加正面的自我图式，从而，让你能够切身地感受到「我是有价值的」「我是优秀的」「我是值得存在的」。
+</p>
+
+<p>
+心理学把这种更加正面的自我图式，叫做「高自尊状态」。它会带来很多正面效果。比如：对生活充满热情，更加积极地面对困难，更加不容易被挑战打垮&#x2026;&#x2026;诸如此类。
+</p>
+
+<p>
+暂且总结一下：
+</p>
+
+<p>
+*积极偏差会带来更正面的自传体记忆，形成更正面的自我图式，从而帮助我们提高自尊*。
+</p>
+
+<p>
+积极偏差的实质，是对中性的事物进行正向解释，它本质上是对客观世界的一种粉饰和美化。它带来的自我图示，往往是失真的，片面的。这会导致：我总是高估自己的能力和特质，认为自己比实际情况更有能力，认为自己比平均水平更出色（我目前就处在这一种状况）。这种状态，被称为「自我优越偏差」。（比如，个人总会倾向于认为，他在各方面的特质都要优于一般人。）
+</p>
+
+<p>
+实际上，这是不可能的。前两个例子明显不合逻辑，第三个例子也很难发生。我们假设把人类的知识领域设为
+100%，一个人能够在 1-2% 的领域做到精通，在 10%
+的领域里做到优于一般人，就已经非常非常不容易了。其余90%的领域，也就是正常人水平而已，甚至不如普通人。这是事实吗？
+</p>
+
+<p>
+可能有朋友会问：一个人的智力水平如果更高，难道不是很容易在各方面都超越常人吗？
+</p>
+
+<p>
+当然不是。智力只是一个生理特征，它只能决定你掌握一项技能的速度。而人的精力是有限的，智力再高，速度再快，你也不可能穷尽人类知识和技能的各个领域。像人类历史上的通才如达芬奇、罗素、司马贺，也只不过这么寥寥几位而已。
+</p>
+
+<p>
+再者，哪怕是智力，目前也存在着许多争议和不同模型。以加德纳的多元智力理论为例，他把智力分成了
+8
+个维度，包括语文、数理、空间、动觉、音乐、人际、内省和自然。在某几个维度出类拔萃就已经极其稀有了，理论上，不存在
+8 个维度都非常出色的人。
+</p>
+
+<p>
+所以，如果你无法清醒地认识自己，无法摆脱「自我优越偏差」，那就很容易落入「自以为是」的陷阱。
+</p>
+
+<p>
+自以为是 &#x2013;&gt;
+异质的高自尊（具体表现：刻意只吸收能让自己觉得自己很厉害的信息，而回避那些能体现自己在某些方面的不足的信息）
+</p>
+
+<p>
+然后是「消极偏差」。
+</p>
+
+<p>
+什么是「消极偏差」：我们在处理和自己相关的信息时，更容易注意到负面的、消极的内容，并高估它们的重要性和严重性。
+</p>
+
+<hr />
+
+<p>
+积极偏差是针对整体框架的，而消极偏差是针对具体事件的。
+</p>
+
+<p>
+真正影响我们的，永远不是危险本身，而是我们对危险的恐惧。
+</p>
+
+<hr />
+
+<p>
+能够接纳自己，承认自己的普通，就克服了积极偏差；而对于消极偏差，要树立绝对能够战胜困难的决心。要有一种成长心态：我是一个不断成长的个体。我所面对的挑战可能很困难，但没关系，一切无法消灭我的事物，终归都会成为我的养分。失败了，我会收获经验；成功了，我会收获成长。对抗消极偏差的正确心态：正视它，削减它，接纳它，然后，消化它。
+</p>
+
+<p>
+如何培养「普通却自信」这种可贵的品质？
+</p>
+
+<ol class="org-ol">
+<li>觉察，然后更清醒地看待自己</li>
+<li>降低对自己不必要的预期</li>
+<li>用事实和数据思考，而非感受
+
+<ol class="org-ol">
+<li>因此，养成一个习惯，平时多积累事实、搜集数据，包括自己在复盘的时候，也多从事实和数据入手（比如：「我做了什么，这个行为带来了什么样的结果」，这种分析方式就比「这个行为好不好」要好很多）。</li>
+</ol></li>
+
+<li>想清楚你想成为一个什么样的人</li>
+</ol>
+
+<hr />
+
+<ol class="org-ol">
+<li><a href="https://mp.weixin.qq.com/s/dVfQiQR4vSTc316l1Ey9KA">做一个普通而自信的人</a></li>
+</ol>
+</div>
+</body>
+</html>

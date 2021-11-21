@@ -1,0 +1,385 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN"
+"http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en">
+<head>
+<!-- 2021-11-21 Sun 11:41 -->
+<meta http-equiv="Content-Type" content="text/html;charset=utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>&lrm;</title>
+<meta name="generator" content="Org mode" />
+<style type="text/css">
+ <!--/*--><![CDATA[/*><!--*/
+  .title  { text-align: center;
+             margin-bottom: .2em; }
+  .subtitle { text-align: center;
+              font-size: medium;
+              font-weight: bold;
+              margin-top:0; }
+  .todo   { font-family: monospace; color: red; }
+  .done   { font-family: monospace; color: green; }
+  .priority { font-family: monospace; color: orange; }
+  .tag    { background-color: #eee; font-family: monospace;
+            padding: 2px; font-size: 80%; font-weight: normal; }
+  .timestamp { color: #bebebe; }
+  .timestamp-kwd { color: #5f9ea0; }
+  .org-right  { margin-left: auto; margin-right: 0px;  text-align: right; }
+  .org-left   { margin-left: 0px;  margin-right: auto; text-align: left; }
+  .org-center { margin-left: auto; margin-right: auto; text-align: center; }
+  .underline { text-decoration: underline; }
+  #postamble p, #preamble p { font-size: 90%; margin: .2em; }
+  p.verse { margin-left: 3%; }
+  pre {
+    border: 1px solid #ccc;
+    box-shadow: 3px 3px 3px #eee;
+    padding: 8pt;
+    font-family: monospace;
+    overflow: auto;
+    margin: 1.2em;
+  }
+  pre.src {
+    position: relative;
+    overflow: auto;
+    padding-top: 1.2em;
+  }
+  pre.src:before {
+    display: none;
+    position: absolute;
+    background-color: white;
+    top: -10px;
+    right: 10px;
+    padding: 3px;
+    border: 1px solid black;
+  }
+  pre.src:hover:before { display: inline; margin-top: 14px;}
+  /* Languages per Org manual */
+  pre.src-asymptote:before { content: 'Asymptote'; }
+  pre.src-awk:before { content: 'Awk'; }
+  pre.src-C:before { content: 'C'; }
+  /* pre.src-C++ doesn't work in CSS */
+  pre.src-clojure:before { content: 'Clojure'; }
+  pre.src-css:before { content: 'CSS'; }
+  pre.src-D:before { content: 'D'; }
+  pre.src-ditaa:before { content: 'ditaa'; }
+  pre.src-dot:before { content: 'Graphviz'; }
+  pre.src-calc:before { content: 'Emacs Calc'; }
+  pre.src-emacs-lisp:before { content: 'Emacs Lisp'; }
+  pre.src-fortran:before { content: 'Fortran'; }
+  pre.src-gnuplot:before { content: 'gnuplot'; }
+  pre.src-haskell:before { content: 'Haskell'; }
+  pre.src-hledger:before { content: 'hledger'; }
+  pre.src-java:before { content: 'Java'; }
+  pre.src-js:before { content: 'Javascript'; }
+  pre.src-latex:before { content: 'LaTeX'; }
+  pre.src-ledger:before { content: 'Ledger'; }
+  pre.src-lisp:before { content: 'Lisp'; }
+  pre.src-lilypond:before { content: 'Lilypond'; }
+  pre.src-lua:before { content: 'Lua'; }
+  pre.src-matlab:before { content: 'MATLAB'; }
+  pre.src-mscgen:before { content: 'Mscgen'; }
+  pre.src-ocaml:before { content: 'Objective Caml'; }
+  pre.src-octave:before { content: 'Octave'; }
+  pre.src-org:before { content: 'Org mode'; }
+  pre.src-oz:before { content: 'OZ'; }
+  pre.src-plantuml:before { content: 'Plantuml'; }
+  pre.src-processing:before { content: 'Processing.js'; }
+  pre.src-python:before { content: 'Python'; }
+  pre.src-R:before { content: 'R'; }
+  pre.src-ruby:before { content: 'Ruby'; }
+  pre.src-sass:before { content: 'Sass'; }
+  pre.src-scheme:before { content: 'Scheme'; }
+  pre.src-screen:before { content: 'Gnu Screen'; }
+  pre.src-sed:before { content: 'Sed'; }
+  pre.src-sh:before { content: 'shell'; }
+  pre.src-sql:before { content: 'SQL'; }
+  pre.src-sqlite:before { content: 'SQLite'; }
+  /* additional languages in org.el's org-babel-load-languages alist */
+  pre.src-forth:before { content: 'Forth'; }
+  pre.src-io:before { content: 'IO'; }
+  pre.src-J:before { content: 'J'; }
+  pre.src-makefile:before { content: 'Makefile'; }
+  pre.src-maxima:before { content: 'Maxima'; }
+  pre.src-perl:before { content: 'Perl'; }
+  pre.src-picolisp:before { content: 'Pico Lisp'; }
+  pre.src-scala:before { content: 'Scala'; }
+  pre.src-shell:before { content: 'Shell Script'; }
+  pre.src-ebnf2ps:before { content: 'ebfn2ps'; }
+  /* additional language identifiers per "defun org-babel-execute"
+       in ob-*.el */
+  pre.src-cpp:before  { content: 'C++'; }
+  pre.src-abc:before  { content: 'ABC'; }
+  pre.src-coq:before  { content: 'Coq'; }
+  pre.src-groovy:before  { content: 'Groovy'; }
+  /* additional language identifiers from org-babel-shell-names in
+     ob-shell.el: ob-shell is the only babel language using a lambda to put
+     the execution function name together. */
+  pre.src-bash:before  { content: 'bash'; }
+  pre.src-csh:before  { content: 'csh'; }
+  pre.src-ash:before  { content: 'ash'; }
+  pre.src-dash:before  { content: 'dash'; }
+  pre.src-ksh:before  { content: 'ksh'; }
+  pre.src-mksh:before  { content: 'mksh'; }
+  pre.src-posh:before  { content: 'posh'; }
+  /* Additional Emacs modes also supported by the LaTeX listings package */
+  pre.src-ada:before { content: 'Ada'; }
+  pre.src-asm:before { content: 'Assembler'; }
+  pre.src-caml:before { content: 'Caml'; }
+  pre.src-delphi:before { content: 'Delphi'; }
+  pre.src-html:before { content: 'HTML'; }
+  pre.src-idl:before { content: 'IDL'; }
+  pre.src-mercury:before { content: 'Mercury'; }
+  pre.src-metapost:before { content: 'MetaPost'; }
+  pre.src-modula-2:before { content: 'Modula-2'; }
+  pre.src-pascal:before { content: 'Pascal'; }
+  pre.src-ps:before { content: 'PostScript'; }
+  pre.src-prolog:before { content: 'Prolog'; }
+  pre.src-simula:before { content: 'Simula'; }
+  pre.src-tcl:before { content: 'tcl'; }
+  pre.src-tex:before { content: 'TeX'; }
+  pre.src-plain-tex:before { content: 'Plain TeX'; }
+  pre.src-verilog:before { content: 'Verilog'; }
+  pre.src-vhdl:before { content: 'VHDL'; }
+  pre.src-xml:before { content: 'XML'; }
+  pre.src-nxml:before { content: 'XML'; }
+  /* add a generic configuration mode; LaTeX export needs an additional
+     (add-to-list 'org-latex-listings-langs '(conf " ")) in .emacs */
+  pre.src-conf:before { content: 'Configuration File'; }
+
+  table { border-collapse:collapse; }
+  caption.t-above { caption-side: top; }
+  caption.t-bottom { caption-side: bottom; }
+  td, th { vertical-align:top;  }
+  th.org-right  { text-align: center;  }
+  th.org-left   { text-align: center;   }
+  th.org-center { text-align: center; }
+  td.org-right  { text-align: right;  }
+  td.org-left   { text-align: left;   }
+  td.org-center { text-align: center; }
+  dt { font-weight: bold; }
+  .footpara { display: inline; }
+  .footdef  { margin-bottom: 1em; }
+  .figure { padding: 1em; }
+  .figure p { text-align: center; }
+  .equation-container {
+    display: table;
+    text-align: center;
+    width: 100%;
+  }
+  .equation {
+    vertical-align: middle;
+  }
+  .equation-label {
+    display: table-cell;
+    text-align: right;
+    vertical-align: middle;
+  }
+  .inlinetask {
+    padding: 10px;
+    border: 2px solid gray;
+    margin: 10px;
+    background: #ffffcc;
+  }
+  #org-div-home-and-up
+   { text-align: right; font-size: 70%; white-space: nowrap; }
+  textarea { overflow-x: auto; }
+  .linenr { font-size: smaller }
+  .code-highlighted { background-color: #ffff00; }
+  .org-info-js_info-navigation { border-style: none; }
+  #org-info-js_console-label
+    { font-size: 10px; font-weight: bold; white-space: nowrap; }
+  .org-info-js_search-highlight
+    { background-color: #ffff00; color: #000000; font-weight: bold; }
+  .org-svg { width: 90%; }
+  /*]]>*/-->
+</style>
+<script type="text/javascript">
+// @license magnet:?xt=urn:btih:e95b018ef3580986a04669f1b5879592219e2a7a&dn=public-domain.txt Public Domain
+<!--/*--><![CDATA[/*><!--*/
+     function CodeHighlightOn(elem, id)
+     {
+       var target = document.getElementById(id);
+       if(null != target) {
+         elem.classList.add("code-highlighted");
+         target.classList.add("code-highlighted");
+       }
+     }
+     function CodeHighlightOff(elem, id)
+     {
+       var target = document.getElementById(id);
+       if(null != target) {
+         elem.classList.remove("code-highlighted");
+         target.classList.remove("code-highlighted");
+       }
+     }
+    /*]]>*///-->
+// @license-end
+</script>
+</head>
+<body>
+<div id="content">
+<p>
+<del>+</del> date = '2021-06-19T18:01:40+08:00' slug = 'meditation-210619' tags =
+['沉思录'] title = '沉思录210619' <del>+</del>
+</p>
+
+<p>
+每日自问：
+</p>
+
+<ol class="org-ol">
+<li>你想成为怎样的人？</li>
+</ol>
+
+
+<div id="org57d8006" class="figure">
+<p><object type="image/svg+xml" data="https://cdn.jsdelivr.net/gh/tianheg/static@main/img/feedback.svg" class="org-svg">
+Sorry, your browser does not support SVG.</object>
+</p>
+<p><span class="figure-number">Figure 1: </span>Feedback</p>
+</div>
+
+<p>
+仿照作者给的图，画了自己的那一份。该作者指出了一种有意义的生活模式：把最多的时间花在价值性活动上，兼顾成长性活动；同时尽可能减少填充性活动，避免规范性活动。
+</p>
+
+<p>
+在继续这篇文章的笔记之前，提醒自己：作者提供的只是他在解决自己问题的一份总结，这些词汇也只是在他所发现的对于常见原理的不同称呼，切不可因为认识了几个新词，便觉得自己的生活完全在自己的掌控之中，这是不现实的。我之所以选择接触这种内容，是想了解别人在解决自己问题时，有着怎样的思考过程；在浏览了这些思考过程后，我会试着模仿，出错是肯定的，因为这不是为我量身定制的，把错误的地方改成适合自己的版本。由此以来，一次学习便结束了。
+</p>
+
+<p>
+在「沉思录210618」中已经介绍了价值性活动。接下来进行余下内容的介绍和记录。
+</p>
+
+<p>
+什么是成长性活动？它是指那些短期内无法获得奖励，但长期来看对自己又有帮助的事情。最常见的就是「学习」。
+</p>
+
+<p>
+作者提供了一个「*动力-阻力*」模型：要能够长期做「成长性活动」，无非两种途径：要么提高动力，要么减少阻力。
+</p>
+
+<p>
+如何提高动力？让它与价值性活动产生联系。不要盲目去学习。而是以自己为主：先试着去做一些超出你目前能力范围的事情，探索一些落在你未知边界之外的东西，在这个过程中，你遇到什么问题，产生什么需求，再有针对性地去学习，这样效果一定是最好的。
+</p>
+
+<p>
+作者提到自己运动锻炼的动力：不是锻炼本身能带给他乐趣，而是因为运动可以帮他提升每一天的精力上限，让他有更充沛的精力去学习、思考、写作，产出更丰富的成果。
+</p>
+
+<p>
+运动带给我的也是精力的提升。所以，我最近几个月的跑步频率相较于以前大幅提高。
+</p>
+
+<p>
+可以在脑海中幻想：
+</p>
+
+<ul class="org-ul">
+<li>我的目标是什么？我想达到一个什么样的状态？</li>
+<li>现在的自己距离这一好的状态还有多远？</li>
+<li>如果这些差距消失了，我和现在相比会有什么不同？</li>
+</ul>
+
+<p>
+试着去想象那个理想的自己，并将他跟现在这个不够完美的自己对比，通过这种对比，来赋予自己不断前进和行动的动力。
+</p>
+
+<p>
+我可能会下意识地把「未来的我」和「现在的我」分开，认为未来的我是不确定的、模糊的、不重要的，因此才会更加重视眼前的回报。
+</p>
+
+<p>
+所以，一旦我把「未来的我」跟「现在的我」整合起来，让他们成为同一个人，我就会有更强的动力，可以抵御住短期回报的诱惑。
+</p>
+
+<p>
+这是动力层面。
+</p>
+
+<p>
+那么阻力层面呢？要培养一个长期的习惯，一个有效的做法，就是把它分解成最小化步骤，然后再添加到一个旧习惯后面-&#x2013;&#x2014;作者常提及一个句式「一&#x2026;&#x2026;就&#x2026;&#x2026;」。
+</p>
+
+<p>
+比如：
+</p>
+
+<ul class="org-ul">
+<li>一吃完早饭就读20分钟书；</li>
+<li>一吃完午饭就进行一次小复盘（上午完成了什么，哪些还要下午继续跟进）；</li>
+<li>一有灵感就马上用软件 flomo 记录下来；</li>
+<li>&#x2026;&#x2026;</li>
+</ul>
+
+<p>
+一方面，简化自己想要养成的长期习惯。先从最小的一步做起，等到习惯了、适应了，再往上累加；另一方面，通过「一&#x2026;&#x2026;就&#x2026;&#x2026;」的方式，为这个习惯建立一个触发器（trigger），让自己无需刻意去想也能落实到每天的行动里。
+</p>
+
+<p>
+接下来的时间属于「填充性活动」和「规范性活动」。
+</p>
+
+<p>
+什么是填充性活动？就是昨天的沉思录提到的「刺激奖赏」。「填充」是因为这些活动发生在碎片时间，用来填充其他活动之间的间隙。作者有个习惯，会为一切娱乐消遣活动*设定一个时间边界*，比如：手头的事情告一段落，休息一下，我会给自己半小时，看看纪录片，读几页小说，看些不动脑子的东西。半小时到了，立刻停下，继续下一段工作。
+</p>
+
+<p>
+如果玩起来忘了时间该怎么办？作者提供了他的方法-&#x2013;&#x2014;*养成「多看时间」的习惯*。他在工作、学习、休息的时候，无论是面对电脑还是手机，都会几分钟看一下时间，估摸自己在这段时间里做了什么。
+</p>
+
+<p>
+这样做的好处是：
+</p>
+
+<ul class="org-ul">
+<li>在进入「沉浸状态」时，依然不会「忘记时间」；</li>
+<li>帮你对自己的效率和执行力有一个明确的判断，即知道自己做什么事情大约需要多久，可以更精确地做好项目管理</li>
+</ul>
+
+<p>
+另外，平时*维护好一份清单*，当我进入碎片时间、不知道做什么的时候，可以及时把这份清单拿出来用。
+</p>
+
+<p>
+清单里可以放：
+</p>
+
+<ul class="org-ul">
+<li>比较琐碎的操作性事务，比如，回邮件、回信息、整理文档、整理日记，等等；</li>
+<li>比较新鲜的探索性事务，比如，试用新工具</li>
+</ul>
+
+<p>
+以上是「填充性活动」。
+</p>
+
+<p>
+什么是「规范性活动」？它指的是外界对我的要求，那些我「为别人而做」的事情，以及最常见的，基于大众的惯常模式的「你应该做什么」。
+</p>
+
+<p>
+这部分事务，有其存在的理由和意义，在大多数时候，它们提供给我的不是短期或长期反馈，而是「惩罚」。也就是：不这样做，会有不好的后果。
+</p>
+
+<p>
+既然这部分无法完全不做，我就要采取一种更好的「替代方式」：
+</p>
+
+<ul class="org-ul">
+<li>思考我这样做的根本目的是什么？</li>
+<li>为了达到这个目的，还有没有别的方式可以达到？</li>
+</ul>
+
+<hr />
+
+<p>
+<b>参考资料</b>
+</p>
+
+<ol class="org-ol">
+<li><a href="https://mp.weixin.qq.com/s/Q5lfDRYcI-DfgqHChpAMGw">如何让生命更有意义？</a></li>
+<li><a href="https://mp.weixin.qq.com/s/qskUsPN_a_p6QTgIAju6nw">不要为了学习而学习</a></li>
+</ol>
+</div>
+</body>
+</html>
