@@ -3,11 +3,195 @@
 "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en">
 <head>
-<!-- 2021-11-20 Sat 19:26 -->
+<!-- 2021-11-21 Sun 08:39 -->
 <meta http-equiv="Content-Type" content="text/html;charset=utf-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1" />
 <title>&lrm;</title>
 <meta name="generator" content="Org mode" />
+<style type="text/css">
+ <!--/*--><![CDATA[/*><!--*/
+  .title  { text-align: center;
+             margin-bottom: .2em; }
+  .subtitle { text-align: center;
+              font-size: medium;
+              font-weight: bold;
+              margin-top:0; }
+  .todo   { font-family: monospace; color: red; }
+  .done   { font-family: monospace; color: green; }
+  .priority { font-family: monospace; color: orange; }
+  .tag    { background-color: #eee; font-family: monospace;
+            padding: 2px; font-size: 80%; font-weight: normal; }
+  .timestamp { color: #bebebe; }
+  .timestamp-kwd { color: #5f9ea0; }
+  .org-right  { margin-left: auto; margin-right: 0px;  text-align: right; }
+  .org-left   { margin-left: 0px;  margin-right: auto; text-align: left; }
+  .org-center { margin-left: auto; margin-right: auto; text-align: center; }
+  .underline { text-decoration: underline; }
+  #postamble p, #preamble p { font-size: 90%; margin: .2em; }
+  p.verse { margin-left: 3%; }
+  pre {
+    border: 1px solid #ccc;
+    box-shadow: 3px 3px 3px #eee;
+    padding: 8pt;
+    font-family: monospace;
+    overflow: auto;
+    margin: 1.2em;
+  }
+  pre.src {
+    position: relative;
+    overflow: auto;
+    padding-top: 1.2em;
+  }
+  pre.src:before {
+    display: none;
+    position: absolute;
+    background-color: white;
+    top: -10px;
+    right: 10px;
+    padding: 3px;
+    border: 1px solid black;
+  }
+  pre.src:hover:before { display: inline; margin-top: 14px;}
+  /* Languages per Org manual */
+  pre.src-asymptote:before { content: 'Asymptote'; }
+  pre.src-awk:before { content: 'Awk'; }
+  pre.src-C:before { content: 'C'; }
+  /* pre.src-C++ doesn't work in CSS */
+  pre.src-clojure:before { content: 'Clojure'; }
+  pre.src-css:before { content: 'CSS'; }
+  pre.src-D:before { content: 'D'; }
+  pre.src-ditaa:before { content: 'ditaa'; }
+  pre.src-dot:before { content: 'Graphviz'; }
+  pre.src-calc:before { content: 'Emacs Calc'; }
+  pre.src-emacs-lisp:before { content: 'Emacs Lisp'; }
+  pre.src-fortran:before { content: 'Fortran'; }
+  pre.src-gnuplot:before { content: 'gnuplot'; }
+  pre.src-haskell:before { content: 'Haskell'; }
+  pre.src-hledger:before { content: 'hledger'; }
+  pre.src-java:before { content: 'Java'; }
+  pre.src-js:before { content: 'Javascript'; }
+  pre.src-latex:before { content: 'LaTeX'; }
+  pre.src-ledger:before { content: 'Ledger'; }
+  pre.src-lisp:before { content: 'Lisp'; }
+  pre.src-lilypond:before { content: 'Lilypond'; }
+  pre.src-lua:before { content: 'Lua'; }
+  pre.src-matlab:before { content: 'MATLAB'; }
+  pre.src-mscgen:before { content: 'Mscgen'; }
+  pre.src-ocaml:before { content: 'Objective Caml'; }
+  pre.src-octave:before { content: 'Octave'; }
+  pre.src-org:before { content: 'Org mode'; }
+  pre.src-oz:before { content: 'OZ'; }
+  pre.src-plantuml:before { content: 'Plantuml'; }
+  pre.src-processing:before { content: 'Processing.js'; }
+  pre.src-python:before { content: 'Python'; }
+  pre.src-R:before { content: 'R'; }
+  pre.src-ruby:before { content: 'Ruby'; }
+  pre.src-sass:before { content: 'Sass'; }
+  pre.src-scheme:before { content: 'Scheme'; }
+  pre.src-screen:before { content: 'Gnu Screen'; }
+  pre.src-sed:before { content: 'Sed'; }
+  pre.src-sh:before { content: 'shell'; }
+  pre.src-sql:before { content: 'SQL'; }
+  pre.src-sqlite:before { content: 'SQLite'; }
+  /* additional languages in org.el's org-babel-load-languages alist */
+  pre.src-forth:before { content: 'Forth'; }
+  pre.src-io:before { content: 'IO'; }
+  pre.src-J:before { content: 'J'; }
+  pre.src-makefile:before { content: 'Makefile'; }
+  pre.src-maxima:before { content: 'Maxima'; }
+  pre.src-perl:before { content: 'Perl'; }
+  pre.src-picolisp:before { content: 'Pico Lisp'; }
+  pre.src-scala:before { content: 'Scala'; }
+  pre.src-shell:before { content: 'Shell Script'; }
+  pre.src-ebnf2ps:before { content: 'ebfn2ps'; }
+  /* additional language identifiers per "defun org-babel-execute"
+       in ob-*.el */
+  pre.src-cpp:before  { content: 'C++'; }
+  pre.src-abc:before  { content: 'ABC'; }
+  pre.src-coq:before  { content: 'Coq'; }
+  pre.src-groovy:before  { content: 'Groovy'; }
+  /* additional language identifiers from org-babel-shell-names in
+     ob-shell.el: ob-shell is the only babel language using a lambda to put
+     the execution function name together. */
+  pre.src-bash:before  { content: 'bash'; }
+  pre.src-csh:before  { content: 'csh'; }
+  pre.src-ash:before  { content: 'ash'; }
+  pre.src-dash:before  { content: 'dash'; }
+  pre.src-ksh:before  { content: 'ksh'; }
+  pre.src-mksh:before  { content: 'mksh'; }
+  pre.src-posh:before  { content: 'posh'; }
+  /* Additional Emacs modes also supported by the LaTeX listings package */
+  pre.src-ada:before { content: 'Ada'; }
+  pre.src-asm:before { content: 'Assembler'; }
+  pre.src-caml:before { content: 'Caml'; }
+  pre.src-delphi:before { content: 'Delphi'; }
+  pre.src-html:before { content: 'HTML'; }
+  pre.src-idl:before { content: 'IDL'; }
+  pre.src-mercury:before { content: 'Mercury'; }
+  pre.src-metapost:before { content: 'MetaPost'; }
+  pre.src-modula-2:before { content: 'Modula-2'; }
+  pre.src-pascal:before { content: 'Pascal'; }
+  pre.src-ps:before { content: 'PostScript'; }
+  pre.src-prolog:before { content: 'Prolog'; }
+  pre.src-simula:before { content: 'Simula'; }
+  pre.src-tcl:before { content: 'tcl'; }
+  pre.src-tex:before { content: 'TeX'; }
+  pre.src-plain-tex:before { content: 'Plain TeX'; }
+  pre.src-verilog:before { content: 'Verilog'; }
+  pre.src-vhdl:before { content: 'VHDL'; }
+  pre.src-xml:before { content: 'XML'; }
+  pre.src-nxml:before { content: 'XML'; }
+  /* add a generic configuration mode; LaTeX export needs an additional
+     (add-to-list 'org-latex-listings-langs '(conf " ")) in .emacs */
+  pre.src-conf:before { content: 'Configuration File'; }
+
+  table { border-collapse:collapse; }
+  caption.t-above { caption-side: top; }
+  caption.t-bottom { caption-side: bottom; }
+  td, th { vertical-align:top;  }
+  th.org-right  { text-align: center;  }
+  th.org-left   { text-align: center;   }
+  th.org-center { text-align: center; }
+  td.org-right  { text-align: right;  }
+  td.org-left   { text-align: left;   }
+  td.org-center { text-align: center; }
+  dt { font-weight: bold; }
+  .footpara { display: inline; }
+  .footdef  { margin-bottom: 1em; }
+  .figure { padding: 1em; }
+  .figure p { text-align: center; }
+  .equation-container {
+    display: table;
+    text-align: center;
+    width: 100%;
+  }
+  .equation {
+    vertical-align: middle;
+  }
+  .equation-label {
+    display: table-cell;
+    text-align: right;
+    vertical-align: middle;
+  }
+  .inlinetask {
+    padding: 10px;
+    border: 2px solid gray;
+    margin: 10px;
+    background: #ffffcc;
+  }
+  #org-div-home-and-up
+   { text-align: right; font-size: 70%; white-space: nowrap; }
+  textarea { overflow-x: auto; }
+  .linenr { font-size: smaller }
+  .code-highlighted { background-color: #ffff00; }
+  .org-info-js_info-navigation { border-style: none; }
+  #org-info-js_console-label
+    { font-size: 10px; font-weight: bold; white-space: nowrap; }
+  .org-info-js_search-highlight
+    { background-color: #ffff00; color: #000000; font-weight: bold; }
+  .org-svg { width: 90%; }
+  /*]]>*/-->
+</style>
 <script type="text/javascript">
 // @license magnet:?xt=urn:btih:e95b018ef3580986a04669f1b5879592219e2a7a&dn=public-domain.txt Public Domain
 <!--/*--><![CDATA[/*><!--*/
@@ -324,7 +508,7 @@ Berson ）发明，耶洛因此获得 1977 年诺贝尔生理学和医学奖；<
 <div id="outline-container-诊断标准" class="outline-2">
 <h2 id="诊断标准"><span class="section-number-2">5</span> 诊断标准</h2>
 <div class="outline-text-2" id="text-诊断标准">
-<div class="html" id="orgf219e47">
+<div class="html" id="orgcc2354e">
 <p>
 &lt;center&gt;
 </p>
@@ -335,7 +519,7 @@ Berson ）发明，耶洛因此获得 1977 年诺贝尔生理学和医学奖；<
 世界卫生组织糖尿病诊断标准
 </p>
 
-<div class="html" id="org885fd3f">
+<div class="html" id="org60bea26">
 <p>
 &lt;/center&gt;
 </p>
@@ -404,28 +588,28 @@ Berson ）发明，耶洛因此获得 1977 年诺贝尔生理学和医学奖；<
 <div id="outline-container-糖代谢状态分类who1999" class="outline-3">
 <h3 id="糖代谢状态分类who1999"><span class="section-number-3">5.1</span> 糖代谢状态分类（WHO1999）</h3>
 <div class="outline-text-3" id="text-糖代谢状态分类who1999">
-<div class="html" id="org90ede46">
+<div class="html" id="org1a00b76">
 <p>
 &lt;table class="wikitable" style="text-align:center"&gt;
 </p>
 
 </div>
 
-<div class="html" id="org8158111">
+<div class="html" id="orgb84c601">
 <p>
 &lt;tbody&gt;
 </p>
 
 </div>
 
-<div class="html" id="org28d6fed">
+<div class="html" id="org6122e53">
 <p>
 &lt;tr&gt;
 </p>
 
 </div>
 
-<div class="html" id="org9f5707a">
+<div class="html" id="orgb8f149e">
 <p>
 &lt;th rowspan="2"&gt;
 </p>
@@ -436,14 +620,14 @@ Berson ）发明，耶洛因此获得 1977 年诺贝尔生理学和医学奖；<
 糖代谢分类
 </p>
 
-<div class="html" id="orgab91b35">
+<div class="html" id="orga01bda2">
 <p>
 &lt;/th&gt;
 </p>
 
 </div>
 
-<div class="html" id="org2664ae6">
+<div class="html" id="orgf6908cd">
 <p>
 &lt;th colspan="2"&gt;
 </p>
@@ -454,28 +638,28 @@ Berson ）发明，耶洛因此获得 1977 年诺贝尔生理学和医学奖；<
 静脉血浆葡萄糖（mmol/L）
 </p>
 
-<div class="html" id="org198a398">
+<div class="html" id="orga17fc5c">
 <p>
 &lt;/th&gt;
 </p>
 
 </div>
 
-<div class="html" id="orged67c5b">
+<div class="html" id="org3f3fb74">
 <p>
 &lt;/tr&gt;
 </p>
 
 </div>
 
-<div class="html" id="org98da478">
+<div class="html" id="org6eb8421">
 <p>
 &lt;tr&gt;
 </p>
 
 </div>
 
-<div class="html" id="orga8d893b">
+<div class="html" id="org7bc7732">
 <p>
 &lt;td&gt;
 </p>
@@ -486,14 +670,14 @@ Berson ）发明，耶洛因此获得 1977 年诺贝尔生理学和医学奖；<
 空腹血糖（FPG）
 </p>
 
-<div class="html" id="org82226ab">
+<div class="html" id="org6471d20">
 <p>
 &lt;/td&gt;
 </p>
 
 </div>
 
-<div class="html" id="org5bfb437">
+<div class="html" id="orga230dcf">
 <p>
 &lt;td&gt;
 </p>
@@ -504,28 +688,28 @@ Berson ）发明，耶洛因此获得 1977 年诺贝尔生理学和医学奖；<
 糖负荷后 2 小时血糖（2hPPG）
 </p>
 
-<div class="html" id="org76c58ba">
+<div class="html" id="orgbe0b344">
 <p>
 &lt;/td&gt;
 </p>
 
 </div>
 
-<div class="html" id="org0f3a658">
+<div class="html" id="orgacec072">
 <p>
 &lt;/tr&gt;
 </p>
 
 </div>
 
-<div class="html" id="org5f2bedd">
+<div class="html" id="org1aa4ec1">
 <p>
 &lt;tr&gt;
 </p>
 
 </div>
 
-<div class="html" id="org3533930">
+<div class="html" id="org70fb7ed">
 <p>
 &lt;td&gt;
 </p>
@@ -536,14 +720,14 @@ Berson ）发明，耶洛因此获得 1977 年诺贝尔生理学和医学奖；<
 正常血糖（NGR）
 </p>
 
-<div class="html" id="org9b5e29c">
+<div class="html" id="orgc479a51">
 <p>
 &lt;/td&gt;
 </p>
 
 </div>
 
-<div class="html" id="orgb03f2b5">
+<div class="html" id="org993a928">
 <p>
 &lt;td&gt;
 </p>
@@ -554,14 +738,14 @@ Berson ）发明，耶洛因此获得 1977 年诺贝尔生理学和医学奖；<
 &lt;6.1
 </p>
 
-<div class="html" id="orgbeafae9">
+<div class="html" id="org9b8ed4b">
 <p>
 &lt;/td&gt;
 </p>
 
 </div>
 
-<div class="html" id="orgc204a6d">
+<div class="html" id="orga52c3fd">
 <p>
 &lt;td&gt;
 </p>
@@ -572,28 +756,28 @@ Berson ）发明，耶洛因此获得 1977 年诺贝尔生理学和医学奖；<
 &lt;7.8
 </p>
 
-<div class="html" id="orgfb358ae">
+<div class="html" id="orgf282375">
 <p>
 &lt;/td&gt;
 </p>
 
 </div>
 
-<div class="html" id="orgc533c15">
+<div class="html" id="org6520292">
 <p>
 &lt;/tr&gt;
 </p>
 
 </div>
 
-<div class="html" id="orgb5c9a57">
+<div class="html" id="org4a10d81">
 <p>
 &lt;tr&gt;
 </p>
 
 </div>
 
-<div class="html" id="org3f5f6a5">
+<div class="html" id="orgd4b0172">
 <p>
 &lt;td&gt;
 </p>
@@ -604,14 +788,14 @@ Berson ）发明，耶洛因此获得 1977 年诺贝尔生理学和医学奖；<
 空腹血糖受损（IFG）
 </p>
 
-<div class="html" id="orgede5378">
+<div class="html" id="org9ecef1b">
 <p>
 &lt;/td&gt;
 </p>
 
 </div>
 
-<div class="html" id="orgd87a1df">
+<div class="html" id="orgf45b32c">
 <p>
 &lt;td&gt;
 </p>
@@ -622,14 +806,14 @@ Berson ）发明，耶洛因此获得 1977 年诺贝尔生理学和医学奖；<
 6.1～&lt;7.0
 </p>
 
-<div class="html" id="org0bdf98b">
+<div class="html" id="org682bdde">
 <p>
 &lt;/td&gt;
 </p>
 
 </div>
 
-<div class="html" id="org57ec623">
+<div class="html" id="orgf4a86b1">
 <p>
 &lt;td&gt;
 </p>
@@ -640,28 +824,28 @@ Berson ）发明，耶洛因此获得 1977 年诺贝尔生理学和医学奖；<
 &lt;7.8
 </p>
 
-<div class="html" id="orgecaed4d">
+<div class="html" id="orge3c840f">
 <p>
 &lt;/td&gt;
 </p>
 
 </div>
 
-<div class="html" id="orga264d16">
+<div class="html" id="org380fd3c">
 <p>
 &lt;/tr&gt;
 </p>
 
 </div>
 
-<div class="html" id="orgabddfcd">
+<div class="html" id="org058e1f1">
 <p>
 &lt;tr&gt;
 </p>
 
 </div>
 
-<div class="html" id="org660520c">
+<div class="html" id="org8612390">
 <p>
 &lt;td&gt;
 </p>
@@ -672,14 +856,14 @@ Berson ）发明，耶洛因此获得 1977 年诺贝尔生理学和医学奖；<
 糖耐量减低（IGT）
 </p>
 
-<div class="html" id="org395a45f">
+<div class="html" id="orgd184ab7">
 <p>
 &lt;/td&gt;
 </p>
 
 </div>
 
-<div class="html" id="org69f6a70">
+<div class="html" id="orgb60e502">
 <p>
 &lt;td&gt;
 </p>
@@ -690,14 +874,14 @@ Berson ）发明，耶洛因此获得 1977 年诺贝尔生理学和医学奖；<
 &lt;7.0
 </p>
 
-<div class="html" id="org792bd9d">
+<div class="html" id="orgb4eef55">
 <p>
 &lt;/td&gt;
 </p>
 
 </div>
 
-<div class="html" id="orge713189">
+<div class="html" id="org008575b">
 <p>
 &lt;td&gt;
 </p>
@@ -708,28 +892,28 @@ Berson ）发明，耶洛因此获得 1977 年诺贝尔生理学和医学奖；<
 7.8～&lt;11.1
 </p>
 
-<div class="html" id="orgdf4ecbe">
+<div class="html" id="orge6f6a66">
 <p>
 &lt;/td&gt;
 </p>
 
 </div>
 
-<div class="html" id="orgda0af59">
+<div class="html" id="orgf215b53">
 <p>
 &lt;/tr&gt;
 </p>
 
 </div>
 
-<div class="html" id="org0a153c7">
+<div class="html" id="org7465159">
 <p>
 &lt;tr&gt;
 </p>
 
 </div>
 
-<div class="html" id="orgd9efcf3">
+<div class="html" id="org709f703">
 <p>
 &lt;td&gt;
 </p>
@@ -740,14 +924,14 @@ Berson ）发明，耶洛因此获得 1977 年诺贝尔生理学和医学奖；<
 糖尿病（DM）
 </p>
 
-<div class="html" id="org540cc95">
+<div class="html" id="org36ed6a3">
 <p>
 &lt;/td&gt;
 </p>
 
 </div>
 
-<div class="html" id="org553bbde">
+<div class="html" id="orgcd8949a">
 <p>
 &lt;td&gt;
 </p>
@@ -758,14 +942,14 @@ Berson ）发明，耶洛因此获得 1977 年诺贝尔生理学和医学奖；<
 ≥7.0
 </p>
 
-<div class="html" id="org66e0e7a">
+<div class="html" id="orgefe1e1f">
 <p>
 &lt;/td&gt;
 </p>
 
 </div>
 
-<div class="html" id="org34e8169">
+<div class="html" id="org3070fa8">
 <p>
 &lt;td&gt;
 </p>
@@ -776,28 +960,28 @@ Berson ）发明，耶洛因此获得 1977 年诺贝尔生理学和医学奖；<
 ≥11.1
 </p>
 
-<div class="html" id="org336f958">
+<div class="html" id="orge93415c">
 <p>
 &lt;/td&gt;
 </p>
 
 </div>
 
-<div class="html" id="orge68e9cb">
+<div class="html" id="orgdd339d6">
 <p>
 &lt;/tr&gt;
 </p>
 
 </div>
 
-<div class="html" id="org44522d4">
+<div class="html" id="org514b3dd">
 <p>
 &lt;/tbody&gt;
 </p>
 
 </div>
 
-<div class="html" id="orgffcb3df">
+<div class="html" id="org959f915">
 <p>
 &lt;/table&gt;
 </p>
@@ -1000,9 +1184,6 @@ TG≥2.22mmol/L），或正在接受调脂治疗</li>
 </p>
 </div>
 </div>
-</div>
-<div id="postamble" class="status">
-<p class="postamble">First created:  <br />Last updated: 2021-11-18 Thu 16:22 <br />Power by <a href="https://www.gnu.org/software/emacs/">Emacs</a> 27.2 (<a href="https://orgmode.org">Org</a> mode 9.4.4)</p>
 </div>
 </body>
 </html>

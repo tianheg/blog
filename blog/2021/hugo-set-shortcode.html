@@ -3,11 +3,195 @@
 "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en">
 <head>
-<!-- 2021-11-20 Sat 19:26 -->
+<!-- 2021-11-21 Sun 08:39 -->
 <meta http-equiv="Content-Type" content="text/html;charset=utf-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1" />
 <title>&lrm;</title>
 <meta name="generator" content="Org mode" />
+<style type="text/css">
+ <!--/*--><![CDATA[/*><!--*/
+  .title  { text-align: center;
+             margin-bottom: .2em; }
+  .subtitle { text-align: center;
+              font-size: medium;
+              font-weight: bold;
+              margin-top:0; }
+  .todo   { font-family: monospace; color: red; }
+  .done   { font-family: monospace; color: green; }
+  .priority { font-family: monospace; color: orange; }
+  .tag    { background-color: #eee; font-family: monospace;
+            padding: 2px; font-size: 80%; font-weight: normal; }
+  .timestamp { color: #bebebe; }
+  .timestamp-kwd { color: #5f9ea0; }
+  .org-right  { margin-left: auto; margin-right: 0px;  text-align: right; }
+  .org-left   { margin-left: 0px;  margin-right: auto; text-align: left; }
+  .org-center { margin-left: auto; margin-right: auto; text-align: center; }
+  .underline { text-decoration: underline; }
+  #postamble p, #preamble p { font-size: 90%; margin: .2em; }
+  p.verse { margin-left: 3%; }
+  pre {
+    border: 1px solid #ccc;
+    box-shadow: 3px 3px 3px #eee;
+    padding: 8pt;
+    font-family: monospace;
+    overflow: auto;
+    margin: 1.2em;
+  }
+  pre.src {
+    position: relative;
+    overflow: auto;
+    padding-top: 1.2em;
+  }
+  pre.src:before {
+    display: none;
+    position: absolute;
+    background-color: white;
+    top: -10px;
+    right: 10px;
+    padding: 3px;
+    border: 1px solid black;
+  }
+  pre.src:hover:before { display: inline; margin-top: 14px;}
+  /* Languages per Org manual */
+  pre.src-asymptote:before { content: 'Asymptote'; }
+  pre.src-awk:before { content: 'Awk'; }
+  pre.src-C:before { content: 'C'; }
+  /* pre.src-C++ doesn't work in CSS */
+  pre.src-clojure:before { content: 'Clojure'; }
+  pre.src-css:before { content: 'CSS'; }
+  pre.src-D:before { content: 'D'; }
+  pre.src-ditaa:before { content: 'ditaa'; }
+  pre.src-dot:before { content: 'Graphviz'; }
+  pre.src-calc:before { content: 'Emacs Calc'; }
+  pre.src-emacs-lisp:before { content: 'Emacs Lisp'; }
+  pre.src-fortran:before { content: 'Fortran'; }
+  pre.src-gnuplot:before { content: 'gnuplot'; }
+  pre.src-haskell:before { content: 'Haskell'; }
+  pre.src-hledger:before { content: 'hledger'; }
+  pre.src-java:before { content: 'Java'; }
+  pre.src-js:before { content: 'Javascript'; }
+  pre.src-latex:before { content: 'LaTeX'; }
+  pre.src-ledger:before { content: 'Ledger'; }
+  pre.src-lisp:before { content: 'Lisp'; }
+  pre.src-lilypond:before { content: 'Lilypond'; }
+  pre.src-lua:before { content: 'Lua'; }
+  pre.src-matlab:before { content: 'MATLAB'; }
+  pre.src-mscgen:before { content: 'Mscgen'; }
+  pre.src-ocaml:before { content: 'Objective Caml'; }
+  pre.src-octave:before { content: 'Octave'; }
+  pre.src-org:before { content: 'Org mode'; }
+  pre.src-oz:before { content: 'OZ'; }
+  pre.src-plantuml:before { content: 'Plantuml'; }
+  pre.src-processing:before { content: 'Processing.js'; }
+  pre.src-python:before { content: 'Python'; }
+  pre.src-R:before { content: 'R'; }
+  pre.src-ruby:before { content: 'Ruby'; }
+  pre.src-sass:before { content: 'Sass'; }
+  pre.src-scheme:before { content: 'Scheme'; }
+  pre.src-screen:before { content: 'Gnu Screen'; }
+  pre.src-sed:before { content: 'Sed'; }
+  pre.src-sh:before { content: 'shell'; }
+  pre.src-sql:before { content: 'SQL'; }
+  pre.src-sqlite:before { content: 'SQLite'; }
+  /* additional languages in org.el's org-babel-load-languages alist */
+  pre.src-forth:before { content: 'Forth'; }
+  pre.src-io:before { content: 'IO'; }
+  pre.src-J:before { content: 'J'; }
+  pre.src-makefile:before { content: 'Makefile'; }
+  pre.src-maxima:before { content: 'Maxima'; }
+  pre.src-perl:before { content: 'Perl'; }
+  pre.src-picolisp:before { content: 'Pico Lisp'; }
+  pre.src-scala:before { content: 'Scala'; }
+  pre.src-shell:before { content: 'Shell Script'; }
+  pre.src-ebnf2ps:before { content: 'ebfn2ps'; }
+  /* additional language identifiers per "defun org-babel-execute"
+       in ob-*.el */
+  pre.src-cpp:before  { content: 'C++'; }
+  pre.src-abc:before  { content: 'ABC'; }
+  pre.src-coq:before  { content: 'Coq'; }
+  pre.src-groovy:before  { content: 'Groovy'; }
+  /* additional language identifiers from org-babel-shell-names in
+     ob-shell.el: ob-shell is the only babel language using a lambda to put
+     the execution function name together. */
+  pre.src-bash:before  { content: 'bash'; }
+  pre.src-csh:before  { content: 'csh'; }
+  pre.src-ash:before  { content: 'ash'; }
+  pre.src-dash:before  { content: 'dash'; }
+  pre.src-ksh:before  { content: 'ksh'; }
+  pre.src-mksh:before  { content: 'mksh'; }
+  pre.src-posh:before  { content: 'posh'; }
+  /* Additional Emacs modes also supported by the LaTeX listings package */
+  pre.src-ada:before { content: 'Ada'; }
+  pre.src-asm:before { content: 'Assembler'; }
+  pre.src-caml:before { content: 'Caml'; }
+  pre.src-delphi:before { content: 'Delphi'; }
+  pre.src-html:before { content: 'HTML'; }
+  pre.src-idl:before { content: 'IDL'; }
+  pre.src-mercury:before { content: 'Mercury'; }
+  pre.src-metapost:before { content: 'MetaPost'; }
+  pre.src-modula-2:before { content: 'Modula-2'; }
+  pre.src-pascal:before { content: 'Pascal'; }
+  pre.src-ps:before { content: 'PostScript'; }
+  pre.src-prolog:before { content: 'Prolog'; }
+  pre.src-simula:before { content: 'Simula'; }
+  pre.src-tcl:before { content: 'tcl'; }
+  pre.src-tex:before { content: 'TeX'; }
+  pre.src-plain-tex:before { content: 'Plain TeX'; }
+  pre.src-verilog:before { content: 'Verilog'; }
+  pre.src-vhdl:before { content: 'VHDL'; }
+  pre.src-xml:before { content: 'XML'; }
+  pre.src-nxml:before { content: 'XML'; }
+  /* add a generic configuration mode; LaTeX export needs an additional
+     (add-to-list 'org-latex-listings-langs '(conf " ")) in .emacs */
+  pre.src-conf:before { content: 'Configuration File'; }
+
+  table { border-collapse:collapse; }
+  caption.t-above { caption-side: top; }
+  caption.t-bottom { caption-side: bottom; }
+  td, th { vertical-align:top;  }
+  th.org-right  { text-align: center;  }
+  th.org-left   { text-align: center;   }
+  th.org-center { text-align: center; }
+  td.org-right  { text-align: right;  }
+  td.org-left   { text-align: left;   }
+  td.org-center { text-align: center; }
+  dt { font-weight: bold; }
+  .footpara { display: inline; }
+  .footdef  { margin-bottom: 1em; }
+  .figure { padding: 1em; }
+  .figure p { text-align: center; }
+  .equation-container {
+    display: table;
+    text-align: center;
+    width: 100%;
+  }
+  .equation {
+    vertical-align: middle;
+  }
+  .equation-label {
+    display: table-cell;
+    text-align: right;
+    vertical-align: middle;
+  }
+  .inlinetask {
+    padding: 10px;
+    border: 2px solid gray;
+    margin: 10px;
+    background: #ffffcc;
+  }
+  #org-div-home-and-up
+   { text-align: right; font-size: 70%; white-space: nowrap; }
+  textarea { overflow-x: auto; }
+  .linenr { font-size: smaller }
+  .code-highlighted { background-color: #ffff00; }
+  .org-info-js_info-navigation { border-style: none; }
+  #org-info-js_console-label
+    { font-size: 10px; font-weight: bold; white-space: nowrap; }
+  .org-info-js_search-highlight
+    { background-color: #ffff00; color: #000000; font-weight: bold; }
+  .org-svg { width: 90%; }
+  /*]]>*/-->
+</style>
 <script type="text/javascript">
 // @license magnet:?xt=urn:btih:e95b018ef3580986a04669f1b5879592219e2a7a&dn=public-domain.txt Public Domain
 <!--/*--><![CDATA[/*><!--*/
@@ -62,7 +246,7 @@ shortcode' <del>+</del>
 =align.html=，内容如下：
 </p>
 
-<pre class="example" id="org982b109">
+<pre class="example" id="org3550efa">
 &lt;!-- 文件位置：~/layouts/shortcodes/align.html --&gt;
 
 &lt;p style="text-align:{{ index .Params 0 }}"&gt;{{ index .Params 1 | markdownify }}&lt;/p&gt;
@@ -72,7 +256,7 @@ shortcode' <del>+</del>
 具体简码样式：
 </p>
 
-<pre class="example" id="org06d846e">
+<pre class="example" id="org7971e74">
 {{&lt;/* align left "文字" */&gt;}}
 
 {{&lt;/* align center "文字" */&gt;}}
@@ -101,7 +285,7 @@ shortcode' <del>+</del>
 新建文件 github.html
 </p>
 
-<pre class="example" id="orgd6db350">
+<pre class="example" id="org809d5b5">
 &lt;!-- 文件位置：~/layouts/shortcodes/github.html --&gt;
 
 &lt;div class="github"&gt;
@@ -122,7 +306,7 @@ shortcode' <del>+</del>
 文件中添加如下内容：
 </p>
 
-<pre class="example" id="orgbe552ee">
+<pre class="example" id="org1c24883">
 // 文件位置：~/assets/scss/custom/_custom.scss
 
 .github {
@@ -173,7 +357,7 @@ shortcode' <del>+</del>
 最后需要在 <code>~/data/SVG.toml</code> 文件中插入图标：
 </p>
 
-<pre class="example" id="org2233ac2">
+<pre class="example" id="org272cc7e">
 # 文件位置：~/data/SVG.toml
 
 # GitHub Icon
@@ -189,7 +373,7 @@ repository = '&lt;svg xmlns="http://www.w3.org/2000/svg" class="icon" viewBox="0
 具体简码和样式如下：
 </p>
 
-<pre class="example" id="org99df875">
+<pre class="example" id="org7a12716">
 {{&lt;/* github name="blog" link="https://github.com/tianheg/blog" description="Blog Source Files" color="#E34C26" language="HTML" */&gt;}}
 </pre>
 
@@ -203,7 +387,7 @@ description="Blog Source Files" color="#E34C26" language="HTML"&gt;}}
 <div id="outline-container-gallery" class="outline-2">
 <h2 id="gallery"><span class="section-number-2">3</span> gallery</h2>
 <div class="outline-text-2" id="text-gallery">
-<pre class="example" id="orgb9a9865">
+<pre class="example" id="org2a86002">
 {{&lt;/* gallery dir="/images/friends/" /&gt;}} {{&lt; load-photoswipe */&gt;}}
 # 这是添加组合图片的短代码
 </pre>
@@ -217,7 +401,7 @@ description="Blog Source Files" color="#E34C26" language="HTML"&gt;}}
 {{}} 内容 {{}}
 </p>
 
-<pre class="example" id="org40bb422">
+<pre class="example" id="org0a3931a">
 {{&lt;/*notice notice-warning&gt;}}
 内容
 {{&lt;/notice*/&gt;}}
@@ -227,7 +411,7 @@ description="Blog Source Files" color="#E34C26" language="HTML"&gt;}}
 {{}} 内容 {{}}
 </p>
 
-<pre class="example" id="orga2614a8">
+<pre class="example" id="org011925c">
 {{&lt;/*notice notice-tip&gt;}}
 内容
 {{&lt;/notice*/&gt;}}
@@ -237,7 +421,7 @@ description="Blog Source Files" color="#E34C26" language="HTML"&gt;}}
 {{}} 内容 {{}}
 </p>
 
-<pre class="example" id="org91f6bdd">
+<pre class="example" id="orgc9ab247">
 {{&lt;/*notice notice-info&gt;}}
 内容
 {{&lt;/notice*/&gt;}}
@@ -247,7 +431,7 @@ description="Blog Source Files" color="#E34C26" language="HTML"&gt;}}
 {{}} 内容 {{}}
 </p>
 
-<pre class="example" id="org5dd9b5b">
+<pre class="example" id="orgc2ceb20">
 {{&lt;/*notice notice-note&gt;}}
 内容
 {{&lt;/notice*/&gt;}}
@@ -262,7 +446,7 @@ description="Blog Source Files" color="#E34C26" language="HTML"&gt;}}
 {{&lt; gist tianheg 1ce40c3e06eddab6bc72b87cc26ec067 &gt;}}
 </p>
 
-<pre class="example" id="org0cfafe1">
+<pre class="example" id="orge75a60c">
 {{&lt;/* gist tianheg 1ce40c3e06eddab6bc72b87cc26ec067 */&gt;}}
 </pre>
 </div>
@@ -275,7 +459,7 @@ description="Blog Source Files" color="#E34C26" language="HTML"&gt;}}
 {{&lt; year &gt;}}
 </p>
 
-<pre class="example" id="orga09d03d">
+<pre class="example" id="orgf28c455">
 {{&lt;/* year */&gt;}}
 </pre>
 </div>
@@ -288,11 +472,11 @@ description="Blog Source Files" color="#E34C26" language="HTML"&gt;}}
 highlighted text
 </p>
 
-<pre class="example" id="orge5eec30">
+<pre class="example" id="org0c03ec6">
 &lt;mark&gt;highlighted text&lt;/mark&gt;
 </pre>
 
-<pre class="example" id="org90cf7dd">
+<pre class="example" id="org23e77c2">
 添加\layouts\shortcodes\highlight.html：
 &lt;highlight html &gt;
 &lt;section id="main"&gt;
@@ -329,7 +513,7 @@ print('hello world')
 {{&lt; /quote &gt;}}
 </p>
 
-<pre class="example" id="org2654914">
+<pre class="example" id="org2fa250d">
 {{&lt;/* quote &gt;}}
 教育，特别是未成年人的教育，一定要尽量将偏见和仇恨压到最低，以至于无。我们唯一要仇恨的就是仇恨本身，我们最应该对偏见本身有偏见。我不希望我们的下一代生活在仇恨之中，我不希望我们的下一代还有战争和屠杀，我不希望我们的下一代还有“儿童党卫军”等组织，我不希望我们的下一代还高唱忠于领袖、忠于组织的赞歌。我希望我们的下一代在和平的环境中，享受面包和音乐；我希望我们的下一代，无论什么肤色和信仰都可以平等和平的交流；我希望我们的下一代自由地选择自己喜欢的生活，而不是做任何人或任何组织的“螺丝钉”；我希望我们的下一代都内心甜美、热爱自由，各美其美；我希望我们的下一代忠于自己的良知和责任，成为有思想、有智慧、有爱心的好人。
 {{&lt; /quote */&gt;}}
@@ -345,7 +529,7 @@ read and write poetry because we are members of the human race. And the
 human race is filled with passion./ {{&lt; /quote &gt;}}
 </p>
 
-<pre class="example" id="orgf4a3297">
+<pre class="example" id="orga4e00c8">
 {{&lt;/* quote en &gt;}}
 *We don't read and write poetry because it's cute. We read and write poetry because we are members of the human race. And the human race is filled with passion.*
 {{&lt; /quote */&gt;}}
@@ -360,7 +544,7 @@ human race is filled with passion./ {{&lt; /quote &gt;}}
 {{&lt; /quote-center &gt;}}
 </p>
 
-<pre class="example" id="org58a0615">
+<pre class="example" id="orgf3a14a6">
 {{&lt;/* quote-center &gt;}}
 毕竟西湖六月中&lt;br&gt;风光不与四时同&lt;br&gt;接天莲叶无穷碧&lt;br&gt;映日荷花别样红
 {{&lt; /quote-center */&gt;}}
@@ -370,11 +554,11 @@ human race is filled with passion./ {{&lt; /quote &gt;}}
 {{&lt; wp tag="Wikipedia:历史上的今天" lang="zh" title="历史上的今天" &gt;}}
 </p>
 
-<pre class="example" id="orge9ecaaf">
+<pre class="example" id="org9c8258a">
 {{&lt;/* wp tag="Wikipedia:历史上的今天" lang="zh" title="历史上的今天" */&gt;}}
 </pre>
 
-<pre class="example" id="org6d723c7">
+<pre class="example" id="org79f6a86">
 {{&lt;/* bili aid="625811282" cid="197006223" */&gt;}}
 # aid 和 cid 可以通过页面的源码获得(按 Ctrl+U 打开页面源码)
 </pre>
@@ -393,9 +577,6 @@ Hugo Shortcodes 简码</a></li>
 </ol>
 </div>
 </div>
-</div>
-<div id="postamble" class="status">
-<p class="postamble">First created:  <br />Last updated: 2021-11-20 Sat 19:21 <br />Power by <a href="https://www.gnu.org/software/emacs/">Emacs</a> 27.2 (<a href="https://orgmode.org">Org</a> mode 9.4.4)</p>
 </div>
 </body>
 </html>
