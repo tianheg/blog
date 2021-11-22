@@ -1,0 +1,365 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN"
+"http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en">
+<head>
+<!-- 2021-11-22 Mon 17:39 -->
+<meta http-equiv="Content-Type" content="text/html;charset=utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>&lrm;</title>
+<meta name="generator" content="Org mode" />
+<style type="text/css">
+ <!--/*--><![CDATA[/*><!--*/
+  .title  { text-align: center;
+             margin-bottom: .2em; }
+  .subtitle { text-align: center;
+              font-size: medium;
+              font-weight: bold;
+              margin-top:0; }
+  .todo   { font-family: monospace; color: red; }
+  .done   { font-family: monospace; color: green; }
+  .priority { font-family: monospace; color: orange; }
+  .tag    { background-color: #eee; font-family: monospace;
+            padding: 2px; font-size: 80%; font-weight: normal; }
+  .timestamp { color: #bebebe; }
+  .timestamp-kwd { color: #5f9ea0; }
+  .org-right  { margin-left: auto; margin-right: 0px;  text-align: right; }
+  .org-left   { margin-left: 0px;  margin-right: auto; text-align: left; }
+  .org-center { margin-left: auto; margin-right: auto; text-align: center; }
+  .underline { text-decoration: underline; }
+  #postamble p, #preamble p { font-size: 90%; margin: .2em; }
+  p.verse { margin-left: 3%; }
+  pre {
+    border: 1px solid #ccc;
+    box-shadow: 3px 3px 3px #eee;
+    padding: 8pt;
+    font-family: monospace;
+    overflow: auto;
+    margin: 1.2em;
+  }
+  pre.src {
+    position: relative;
+    overflow: auto;
+    padding-top: 1.2em;
+  }
+  pre.src:before {
+    display: none;
+    position: absolute;
+    background-color: white;
+    top: -10px;
+    right: 10px;
+    padding: 3px;
+    border: 1px solid black;
+  }
+  pre.src:hover:before { display: inline; margin-top: 14px;}
+  /* Languages per Org manual */
+  pre.src-asymptote:before { content: 'Asymptote'; }
+  pre.src-awk:before { content: 'Awk'; }
+  pre.src-C:before { content: 'C'; }
+  /* pre.src-C++ doesn't work in CSS */
+  pre.src-clojure:before { content: 'Clojure'; }
+  pre.src-css:before { content: 'CSS'; }
+  pre.src-D:before { content: 'D'; }
+  pre.src-ditaa:before { content: 'ditaa'; }
+  pre.src-dot:before { content: 'Graphviz'; }
+  pre.src-calc:before { content: 'Emacs Calc'; }
+  pre.src-emacs-lisp:before { content: 'Emacs Lisp'; }
+  pre.src-fortran:before { content: 'Fortran'; }
+  pre.src-gnuplot:before { content: 'gnuplot'; }
+  pre.src-haskell:before { content: 'Haskell'; }
+  pre.src-hledger:before { content: 'hledger'; }
+  pre.src-java:before { content: 'Java'; }
+  pre.src-js:before { content: 'Javascript'; }
+  pre.src-latex:before { content: 'LaTeX'; }
+  pre.src-ledger:before { content: 'Ledger'; }
+  pre.src-lisp:before { content: 'Lisp'; }
+  pre.src-lilypond:before { content: 'Lilypond'; }
+  pre.src-lua:before { content: 'Lua'; }
+  pre.src-matlab:before { content: 'MATLAB'; }
+  pre.src-mscgen:before { content: 'Mscgen'; }
+  pre.src-ocaml:before { content: 'Objective Caml'; }
+  pre.src-octave:before { content: 'Octave'; }
+  pre.src-org:before { content: 'Org mode'; }
+  pre.src-oz:before { content: 'OZ'; }
+  pre.src-plantuml:before { content: 'Plantuml'; }
+  pre.src-processing:before { content: 'Processing.js'; }
+  pre.src-python:before { content: 'Python'; }
+  pre.src-R:before { content: 'R'; }
+  pre.src-ruby:before { content: 'Ruby'; }
+  pre.src-sass:before { content: 'Sass'; }
+  pre.src-scheme:before { content: 'Scheme'; }
+  pre.src-screen:before { content: 'Gnu Screen'; }
+  pre.src-sed:before { content: 'Sed'; }
+  pre.src-sh:before { content: 'shell'; }
+  pre.src-sql:before { content: 'SQL'; }
+  pre.src-sqlite:before { content: 'SQLite'; }
+  /* additional languages in org.el's org-babel-load-languages alist */
+  pre.src-forth:before { content: 'Forth'; }
+  pre.src-io:before { content: 'IO'; }
+  pre.src-J:before { content: 'J'; }
+  pre.src-makefile:before { content: 'Makefile'; }
+  pre.src-maxima:before { content: 'Maxima'; }
+  pre.src-perl:before { content: 'Perl'; }
+  pre.src-picolisp:before { content: 'Pico Lisp'; }
+  pre.src-scala:before { content: 'Scala'; }
+  pre.src-shell:before { content: 'Shell Script'; }
+  pre.src-ebnf2ps:before { content: 'ebfn2ps'; }
+  /* additional language identifiers per "defun org-babel-execute"
+       in ob-*.el */
+  pre.src-cpp:before  { content: 'C++'; }
+  pre.src-abc:before  { content: 'ABC'; }
+  pre.src-coq:before  { content: 'Coq'; }
+  pre.src-groovy:before  { content: 'Groovy'; }
+  /* additional language identifiers from org-babel-shell-names in
+     ob-shell.el: ob-shell is the only babel language using a lambda to put
+     the execution function name together. */
+  pre.src-bash:before  { content: 'bash'; }
+  pre.src-csh:before  { content: 'csh'; }
+  pre.src-ash:before  { content: 'ash'; }
+  pre.src-dash:before  { content: 'dash'; }
+  pre.src-ksh:before  { content: 'ksh'; }
+  pre.src-mksh:before  { content: 'mksh'; }
+  pre.src-posh:before  { content: 'posh'; }
+  /* Additional Emacs modes also supported by the LaTeX listings package */
+  pre.src-ada:before { content: 'Ada'; }
+  pre.src-asm:before { content: 'Assembler'; }
+  pre.src-caml:before { content: 'Caml'; }
+  pre.src-delphi:before { content: 'Delphi'; }
+  pre.src-html:before { content: 'HTML'; }
+  pre.src-idl:before { content: 'IDL'; }
+  pre.src-mercury:before { content: 'Mercury'; }
+  pre.src-metapost:before { content: 'MetaPost'; }
+  pre.src-modula-2:before { content: 'Modula-2'; }
+  pre.src-pascal:before { content: 'Pascal'; }
+  pre.src-ps:before { content: 'PostScript'; }
+  pre.src-prolog:before { content: 'Prolog'; }
+  pre.src-simula:before { content: 'Simula'; }
+  pre.src-tcl:before { content: 'tcl'; }
+  pre.src-tex:before { content: 'TeX'; }
+  pre.src-plain-tex:before { content: 'Plain TeX'; }
+  pre.src-verilog:before { content: 'Verilog'; }
+  pre.src-vhdl:before { content: 'VHDL'; }
+  pre.src-xml:before { content: 'XML'; }
+  pre.src-nxml:before { content: 'XML'; }
+  /* add a generic configuration mode; LaTeX export needs an additional
+     (add-to-list 'org-latex-listings-langs '(conf " ")) in .emacs */
+  pre.src-conf:before { content: 'Configuration File'; }
+
+  table { border-collapse:collapse; }
+  caption.t-above { caption-side: top; }
+  caption.t-bottom { caption-side: bottom; }
+  td, th { vertical-align:top;  }
+  th.org-right  { text-align: center;  }
+  th.org-left   { text-align: center;   }
+  th.org-center { text-align: center; }
+  td.org-right  { text-align: right;  }
+  td.org-left   { text-align: left;   }
+  td.org-center { text-align: center; }
+  dt { font-weight: bold; }
+  .footpara { display: inline; }
+  .footdef  { margin-bottom: 1em; }
+  .figure { padding: 1em; }
+  .figure p { text-align: center; }
+  .equation-container {
+    display: table;
+    text-align: center;
+    width: 100%;
+  }
+  .equation {
+    vertical-align: middle;
+  }
+  .equation-label {
+    display: table-cell;
+    text-align: right;
+    vertical-align: middle;
+  }
+  .inlinetask {
+    padding: 10px;
+    border: 2px solid gray;
+    margin: 10px;
+    background: #ffffcc;
+  }
+  #org-div-home-and-up
+   { text-align: right; font-size: 70%; white-space: nowrap; }
+  textarea { overflow-x: auto; }
+  .linenr { font-size: smaller }
+  .code-highlighted { background-color: #ffff00; }
+  .org-info-js_info-navigation { border-style: none; }
+  #org-info-js_console-label
+    { font-size: 10px; font-weight: bold; white-space: nowrap; }
+  .org-info-js_search-highlight
+    { background-color: #ffff00; color: #000000; font-weight: bold; }
+  .org-svg { width: 90%; }
+  /*]]>*/-->
+</style>
+<script type="text/javascript">
+// @license magnet:?xt=urn:btih:e95b018ef3580986a04669f1b5879592219e2a7a&dn=public-domain.txt Public Domain
+<!--/*--><![CDATA[/*><!--*/
+     function CodeHighlightOn(elem, id)
+     {
+       var target = document.getElementById(id);
+       if(null != target) {
+         elem.classList.add("code-highlighted");
+         target.classList.add("code-highlighted");
+       }
+     }
+     function CodeHighlightOff(elem, id)
+     {
+       var target = document.getElementById(id);
+       if(null != target) {
+         elem.classList.remove("code-highlighted");
+         target.classList.remove("code-highlighted");
+       }
+     }
+    /*]]>*///-->
+// @license-end
+</script>
+</head>
+<body>
+<div id="content">
+<div id="table-of-contents">
+<h2>Table of Contents</h2>
+<div id="text-table-of-contents">
+<ul>
+<li><a href="#安装-certbot">1. 安装 Certbot</a></li>
+<li><a href="#配置-nginx">2. 配置 Nginx</a></li>
+<li><a href="#获取一个-ssl-证书">3. 获取一个 SSL 证书</a></li>
+<li><a href="#验证-certbot-自动更新">4. 验证 Certbot 自动更新</a></li>
+</ul>
+</div>
+</div>
+<p>
+<del>+</del> date = '2021-10-22T21:53:21+08:00' title = "在 Ubuntu20.04 配合
+Nginx 使用 Let's Encrypt 证书" tags = ['Nginx', 'Ubuntu', "Let's
+Encrypt"] slug = 'install-letsencrypt-with-nginx-on-ubuntu20.04' <del>+</del>
+</p>
+
+<p>
+进行以下步骤的前提：
+</p>
+
+<ol class="org-ol">
+<li>有一台已经初始安装的 Ubuntu20.04 服务器，包括一个能够 sudo 的非 root
+的用户和防火墙</li>
+<li>一个已注册的域名</li>
+<li>域名已经和当前服务器 IP 绑定</li>
+<li><a href="file:///posts/first-use-nginx/">Nginx 已经安装并能够正常使用</a></li>
+</ol>
+
+<div id="outline-container-安装-certbot" class="outline-2">
+<h2 id="安装-certbot"><span class="section-number-2">1</span> 安装 Certbot</h2>
+<div class="outline-text-2" id="text-安装-certbot">
+<pre class="example" id="orgacc95e9">
+sudo apt install certbot python3-certbot-nginx
+</pre>
+</div>
+</div>
+
+<div id="outline-container-配置-nginx" class="outline-2">
+<h2 id="配置-nginx"><span class="section-number-2">2</span> 配置 Nginx</h2>
+<div class="outline-text-2" id="text-配置-nginx">
+<p>
+我已经通过 Nginx
+部署了一个站点-&#x2013;&#x2014;blog.yidajiabei.xyz，现在部署的是第二个站点-&#x2013;&#x2014;til.yidajiabei.xyz。我没有使用
+server block<sup><a id="fnr.1" class="footref" href="#fn.1">1</a></sup>，即新建
+<code>/etc/nginx/sites-available/til.yidajiabei.xyz</code> 文件，并通过
+<code>sudo ln -s /etc/nginx/sites-available/til.yidajiabei.xyz /etc/nginx/sites-enabled/</code>
+命令链接至 <code>sites-enabled</code> 文件夹下。而是直接将配置写在
+<code>/etc/nginx/nginx.conf</code> 文件中。
+</p>
+
+<pre class="example" id="orgf9673a1">
+http {
+    ssl_protocols TLSv1 TLSv1.1 TLSv1.2 TLSv1.3;
+    ssl_prefer_server_ciphers on;
+    server {
+        listen 443 ssl;
+    server_name til.yidajiabei.xyz;
+    ssl_session_timeout 5m;
+    location / {
+        root /var/www/til;
+        index index.html index.htm;
+    }
+    }
+    server {
+        listen 80;
+    server_name til.yidajiabei.xyz;
+    rewrite ^(.*) https://$server_name$1 permanent;
+    }
+}
+</pre>
+
+<p>
+你可以看到有两个 server，前一个是配置 HTTPS 的，后一个是把 HTTP 重定向至
+HTTPS。而且，第一个 server 中缺少 SSL 证书和密匙，这两个配置是由 Certbot
+自动添加的。
+</p>
+</div>
+</div>
+
+<div id="outline-container-获取一个-ssl-证书" class="outline-2">
+<h2 id="获取一个-ssl-证书"><span class="section-number-2">3</span> 获取一个 SSL 证书</h2>
+<div class="outline-text-2" id="text-获取一个-ssl-证书">
+<pre class="example" id="orga2ef62d">
+sudo certbot --nginx -d til.yidajiabei.xyz
+</pre>
+
+<p>
+按照提示一步步操作，如果没有异常，就能够获得 SSL 证书，位置在
+<code>/etc/letsencrypt/live/til.yidajiabei.xyz/=，此时
+=/etc/nginx/nginx.conf</code> 文件也会发生变化：
+</p>
+
+<pre class="example" id="org628c8e9">
+http {
+    ...
+    server {
+        listen 443 ssl;
+        server_name til.yidajiabei.xyz;
+    ssl_certificate /etc/letsencrypt/live/til.yidajiabei.xyz/fullchain.pem; # managed by Certbot
+    ssl_certificate_key /etc/letsencrypt/live/til.yidajiabei.xyz/privkey.pem; # managed by Certbot
+        ssl_session_timeout 5m;
+        ...
+    }
+    ...
+}
+</pre>
+</div>
+</div>
+
+<div id="outline-container-验证-certbot-自动更新" class="outline-2">
+<h2 id="验证-certbot-自动更新"><span class="section-number-2">4</span> 验证 Certbot 自动更新</h2>
+<div class="outline-text-2" id="text-验证-certbot-自动更新">
+<pre class="example" id="org5c868aa">
+sudo systemctl status certbot.timer
+● certbot.timer - Run certbot twice daily
+     Loaded: loaded (/lib/systemd/system/certbot.timer; enabled; vendor preset: enabled)
+     Active: active (waiting) since Fri 2021-10-22 09:38:04 CST; 6h ago
+    Trigger: Sat 2021-10-23 04:10:06 CST; 12h left
+   Triggers: ● certbot.service
+
+Oct 22 09:38:04 VM-4-5-ubuntu systemd[1]: Started Run certbot twice daily.
+</pre>
+
+<p>
+Certbot 自动更新正常运行。还可以通过以下命令测试「更新证书」这一过程：
+</p>
+
+<pre class="example" id="org045b375">
+sudo certbot renew --dry-run
+</pre>
+</div>
+</div>
+<div id="footnotes">
+<h2 class="footnotes">Footnotes: </h2>
+<div id="text-footnotes">
+
+<div class="footdef"><sup><a id="fn.1" class="footnum" href="#fnr.1">1</a></sup> <div class="footpara"><p class="footpara">
+<a href="https://www.digitalocean.com/community/tutorials/how-to-install-nginx-on-ubuntu-20-04">https://www.digitalocean.com/community/tutorials/how-to-install-nginx-on-ubuntu-20-04</a>
+</p></div></div>
+
+
+</div>
+</div></div>
+</body>
+</html>

@@ -1,0 +1,322 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN"
+"http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en">
+<head>
+<!-- 2021-11-22 Mon 17:40 -->
+<meta http-equiv="Content-Type" content="text/html;charset=utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>&lrm;</title>
+<meta name="generator" content="Org mode" />
+<style type="text/css">
+ <!--/*--><![CDATA[/*><!--*/
+  .title  { text-align: center;
+             margin-bottom: .2em; }
+  .subtitle { text-align: center;
+              font-size: medium;
+              font-weight: bold;
+              margin-top:0; }
+  .todo   { font-family: monospace; color: red; }
+  .done   { font-family: monospace; color: green; }
+  .priority { font-family: monospace; color: orange; }
+  .tag    { background-color: #eee; font-family: monospace;
+            padding: 2px; font-size: 80%; font-weight: normal; }
+  .timestamp { color: #bebebe; }
+  .timestamp-kwd { color: #5f9ea0; }
+  .org-right  { margin-left: auto; margin-right: 0px;  text-align: right; }
+  .org-left   { margin-left: 0px;  margin-right: auto; text-align: left; }
+  .org-center { margin-left: auto; margin-right: auto; text-align: center; }
+  .underline { text-decoration: underline; }
+  #postamble p, #preamble p { font-size: 90%; margin: .2em; }
+  p.verse { margin-left: 3%; }
+  pre {
+    border: 1px solid #ccc;
+    box-shadow: 3px 3px 3px #eee;
+    padding: 8pt;
+    font-family: monospace;
+    overflow: auto;
+    margin: 1.2em;
+  }
+  pre.src {
+    position: relative;
+    overflow: auto;
+    padding-top: 1.2em;
+  }
+  pre.src:before {
+    display: none;
+    position: absolute;
+    background-color: white;
+    top: -10px;
+    right: 10px;
+    padding: 3px;
+    border: 1px solid black;
+  }
+  pre.src:hover:before { display: inline; margin-top: 14px;}
+  /* Languages per Org manual */
+  pre.src-asymptote:before { content: 'Asymptote'; }
+  pre.src-awk:before { content: 'Awk'; }
+  pre.src-C:before { content: 'C'; }
+  /* pre.src-C++ doesn't work in CSS */
+  pre.src-clojure:before { content: 'Clojure'; }
+  pre.src-css:before { content: 'CSS'; }
+  pre.src-D:before { content: 'D'; }
+  pre.src-ditaa:before { content: 'ditaa'; }
+  pre.src-dot:before { content: 'Graphviz'; }
+  pre.src-calc:before { content: 'Emacs Calc'; }
+  pre.src-emacs-lisp:before { content: 'Emacs Lisp'; }
+  pre.src-fortran:before { content: 'Fortran'; }
+  pre.src-gnuplot:before { content: 'gnuplot'; }
+  pre.src-haskell:before { content: 'Haskell'; }
+  pre.src-hledger:before { content: 'hledger'; }
+  pre.src-java:before { content: 'Java'; }
+  pre.src-js:before { content: 'Javascript'; }
+  pre.src-latex:before { content: 'LaTeX'; }
+  pre.src-ledger:before { content: 'Ledger'; }
+  pre.src-lisp:before { content: 'Lisp'; }
+  pre.src-lilypond:before { content: 'Lilypond'; }
+  pre.src-lua:before { content: 'Lua'; }
+  pre.src-matlab:before { content: 'MATLAB'; }
+  pre.src-mscgen:before { content: 'Mscgen'; }
+  pre.src-ocaml:before { content: 'Objective Caml'; }
+  pre.src-octave:before { content: 'Octave'; }
+  pre.src-org:before { content: 'Org mode'; }
+  pre.src-oz:before { content: 'OZ'; }
+  pre.src-plantuml:before { content: 'Plantuml'; }
+  pre.src-processing:before { content: 'Processing.js'; }
+  pre.src-python:before { content: 'Python'; }
+  pre.src-R:before { content: 'R'; }
+  pre.src-ruby:before { content: 'Ruby'; }
+  pre.src-sass:before { content: 'Sass'; }
+  pre.src-scheme:before { content: 'Scheme'; }
+  pre.src-screen:before { content: 'Gnu Screen'; }
+  pre.src-sed:before { content: 'Sed'; }
+  pre.src-sh:before { content: 'shell'; }
+  pre.src-sql:before { content: 'SQL'; }
+  pre.src-sqlite:before { content: 'SQLite'; }
+  /* additional languages in org.el's org-babel-load-languages alist */
+  pre.src-forth:before { content: 'Forth'; }
+  pre.src-io:before { content: 'IO'; }
+  pre.src-J:before { content: 'J'; }
+  pre.src-makefile:before { content: 'Makefile'; }
+  pre.src-maxima:before { content: 'Maxima'; }
+  pre.src-perl:before { content: 'Perl'; }
+  pre.src-picolisp:before { content: 'Pico Lisp'; }
+  pre.src-scala:before { content: 'Scala'; }
+  pre.src-shell:before { content: 'Shell Script'; }
+  pre.src-ebnf2ps:before { content: 'ebfn2ps'; }
+  /* additional language identifiers per "defun org-babel-execute"
+       in ob-*.el */
+  pre.src-cpp:before  { content: 'C++'; }
+  pre.src-abc:before  { content: 'ABC'; }
+  pre.src-coq:before  { content: 'Coq'; }
+  pre.src-groovy:before  { content: 'Groovy'; }
+  /* additional language identifiers from org-babel-shell-names in
+     ob-shell.el: ob-shell is the only babel language using a lambda to put
+     the execution function name together. */
+  pre.src-bash:before  { content: 'bash'; }
+  pre.src-csh:before  { content: 'csh'; }
+  pre.src-ash:before  { content: 'ash'; }
+  pre.src-dash:before  { content: 'dash'; }
+  pre.src-ksh:before  { content: 'ksh'; }
+  pre.src-mksh:before  { content: 'mksh'; }
+  pre.src-posh:before  { content: 'posh'; }
+  /* Additional Emacs modes also supported by the LaTeX listings package */
+  pre.src-ada:before { content: 'Ada'; }
+  pre.src-asm:before { content: 'Assembler'; }
+  pre.src-caml:before { content: 'Caml'; }
+  pre.src-delphi:before { content: 'Delphi'; }
+  pre.src-html:before { content: 'HTML'; }
+  pre.src-idl:before { content: 'IDL'; }
+  pre.src-mercury:before { content: 'Mercury'; }
+  pre.src-metapost:before { content: 'MetaPost'; }
+  pre.src-modula-2:before { content: 'Modula-2'; }
+  pre.src-pascal:before { content: 'Pascal'; }
+  pre.src-ps:before { content: 'PostScript'; }
+  pre.src-prolog:before { content: 'Prolog'; }
+  pre.src-simula:before { content: 'Simula'; }
+  pre.src-tcl:before { content: 'tcl'; }
+  pre.src-tex:before { content: 'TeX'; }
+  pre.src-plain-tex:before { content: 'Plain TeX'; }
+  pre.src-verilog:before { content: 'Verilog'; }
+  pre.src-vhdl:before { content: 'VHDL'; }
+  pre.src-xml:before { content: 'XML'; }
+  pre.src-nxml:before { content: 'XML'; }
+  /* add a generic configuration mode; LaTeX export needs an additional
+     (add-to-list 'org-latex-listings-langs '(conf " ")) in .emacs */
+  pre.src-conf:before { content: 'Configuration File'; }
+
+  table { border-collapse:collapse; }
+  caption.t-above { caption-side: top; }
+  caption.t-bottom { caption-side: bottom; }
+  td, th { vertical-align:top;  }
+  th.org-right  { text-align: center;  }
+  th.org-left   { text-align: center;   }
+  th.org-center { text-align: center; }
+  td.org-right  { text-align: right;  }
+  td.org-left   { text-align: left;   }
+  td.org-center { text-align: center; }
+  dt { font-weight: bold; }
+  .footpara { display: inline; }
+  .footdef  { margin-bottom: 1em; }
+  .figure { padding: 1em; }
+  .figure p { text-align: center; }
+  .equation-container {
+    display: table;
+    text-align: center;
+    width: 100%;
+  }
+  .equation {
+    vertical-align: middle;
+  }
+  .equation-label {
+    display: table-cell;
+    text-align: right;
+    vertical-align: middle;
+  }
+  .inlinetask {
+    padding: 10px;
+    border: 2px solid gray;
+    margin: 10px;
+    background: #ffffcc;
+  }
+  #org-div-home-and-up
+   { text-align: right; font-size: 70%; white-space: nowrap; }
+  textarea { overflow-x: auto; }
+  .linenr { font-size: smaller }
+  .code-highlighted { background-color: #ffff00; }
+  .org-info-js_info-navigation { border-style: none; }
+  #org-info-js_console-label
+    { font-size: 10px; font-weight: bold; white-space: nowrap; }
+  .org-info-js_search-highlight
+    { background-color: #ffff00; color: #000000; font-weight: bold; }
+  .org-svg { width: 90%; }
+  /*]]>*/-->
+</style>
+<script type="text/javascript">
+// @license magnet:?xt=urn:btih:e95b018ef3580986a04669f1b5879592219e2a7a&dn=public-domain.txt Public Domain
+<!--/*--><![CDATA[/*><!--*/
+     function CodeHighlightOn(elem, id)
+     {
+       var target = document.getElementById(id);
+       if(null != target) {
+         elem.classList.add("code-highlighted");
+         target.classList.add("code-highlighted");
+       }
+     }
+     function CodeHighlightOff(elem, id)
+     {
+       var target = document.getElementById(id);
+       if(null != target) {
+         elem.classList.remove("code-highlighted");
+         target.classList.remove("code-highlighted");
+       }
+     }
+    /*]]>*///-->
+// @license-end
+</script>
+</head>
+<body>
+<div id="content">
+<p>
+<del>+</del> date = '2019-08-13T15:53:56+08:00' slug = 'After the prosperity only
+orphans' tags = ['随笔'] title = '繁华过后只剩孤人' <del>+</del>
+</p>
+
+<p>
+人生的意义是什么？有谁能够说得清，又有谁能够说给我听？-&#x2013;&#x2014;题记
+</p>
+
+<p>
+生活小事，人生大事，都是事。看待的角度不同，当时的心情不一，周围的人不同，也就有了不同的意义，不同的说辞。
+</p>
+
+<p>
+但是，这背后又剩下什么呢？你还是孤身一人独活于人世，一叶孤舟，飘荡在这社会的大江湖之中。身后只有生身父母，身前都是江湖。
+</p>
+
+<p>
+人在社会里生活身不由己，这是在所难免的，不必为此伤怀。
+</p>
+
+<p>
+但是有时人就是那么固执，偏偏不愿意相信社会的真相，总想为自己保留那一片纯净的土地，总想为与自己相识的人搭建一处客栈、一处可以放下心事的客栈。
+</p>
+
+<p>
+<b>人们是需要这样一间客栈的，它很宁静，不会多言，只静听。</b>
+</p>
+
+<p>
+心情烦闷看看这儿的风景，心情就会愉快甚许。离去时也有力量面对自己的事情了。
+</p>
+
+<p>
+我相信，这句话以前的自己格外信奉。觉得只要自己能够有自信便不怕不成事，可是随着我了解的事情越来越多，我畏缩了。
+</p>
+
+<p>
+我害怕自己，做不成事，只是平凡一生。有人说，平凡不好吗？
+</p>
+
+<p>
+平凡由各自品味，我所理解的平凡就是碌碌无为，消极厌世。我所理解的不平凡就是积极生活，认真生活。
+</p>
+
+<p>
+所以我怕自己平凡，我怕自己碌碌无为一辈子。我想啊想，想自己到底应该做什么。如此想了很长时间，结果发现自己好像一无是处，没有长处，没有优点。有的只是一副不太健康的躯体与一个灵魂。
+</p>
+
+<p>
+人究竟为何存世？我们出现于这宇宙之中，究竟有何意义？似乎不是我所能回答的了的，我也无暇顾及，连自己都搞不明白。思考这样的问题为时过早。
+</p>
+
+<p>
+但我知道自己迟早会思考的，因为这样的问题是很诱人的，他值得一辈子去探索。乐此不疲。
+</p>
+
+<p>
+沉迷物欲很长时间了，渐渐地把自己也迷失了。好玩的东西太多了，你看不过来的，你也没有那个时间。
+</p>
+
+<p>
+还有好多人需要的你的陪伴呢！一直不敢提及“朋友”二字，一怕太过喧嚣惊扰了真正的友，二怕太过肆意导致没有友。朋友，一个多么神圣的词眼，可是我觉得自己没有。
+</p>
+
+<p>
+微信好友的列表里，我在所有除家人、初中同学、高中同学、大学同学以外的人的备注上都标了一个“P”，意为朋友。可是那是一概而论的，所有人皆可为我的朋友，所有人又都不是。因为他们是我不想去打扰的。
+</p>
+
+<p>
+帮你渡过难关的朋友要铭记，因为他们愿意帮助你，所以我特意做了一张表，记下来。一辈子也不忘，没有什么能值得我记忆，没有什么能不值得我记忆。
+</p>
+
+<p>
+*求学到底是为了什么*，是为了每天把各种乱糟糟的信息都塞进自己的大脑，好骗自己，让自己觉得自己学识渊博吗？不是的，每天的信息扑面而来，你可以不接，你可以不看。
+</p>
+
+<p>
+但是你守不住自己，你耐不住诱惑，你想看看外面的精彩，但是你又清楚地知道：那个世界离你很遥远，你要非常努力才能做到，还有可能做不到。
+</p>
+
+<p>
+当你自省时，你是否会想过自己求学的目的。以前高三的时候总是很向往外面的世界，羡慕那些能够凭自己力量把握住自己人生，觉得自己也能够做到。
+</p>
+
+<p>
+可是现在呢，一年过去了，我的各种观念都摇摇欲坠。我在害怕，我在犹豫到底要不要继续学习。因为我想：如果这些知识只是我不加思考以后吸收的话，那么我又是谁呢？知识的容器？立刻就不想接受任何知识了，害怕自己被他们掌控，受别人摆布。
+</p>
+
+<p>
+有时候你还不知道自己受摆布了，因为你被知识蒙蔽了双眼，你看不清近在眼前的事情。因为你没有自省、自问、自我。
+</p>
+
+<p>
+一个人最重要的是什么？你也许会说物质，也许和我一样觉得最重要的是思想。很简单，思想只属于你自己，只有你自己才能真正领会。别人从你这儿所理解的，只是你希望他了解以及他按照自己的思想从你这借鉴来的。
+</p>
+
+<p>
+*其实生活蛮好的，其他人也蛮好的，只是你自己糟透了，可是想了半天也不知道自己为什么糟透了，就知道自己会是那种什么道理都懂但是过不好一生的人强行快乐吧。-&#x2013;&#x2014;*朋友的微博如是写道，甚好，取之作结
+</p>
+</div>
+</body>
+</html>
