@@ -3,7 +3,7 @@
 "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en">
 <head>
-<!-- 2021-11-22 Mon 11:24 -->
+<!-- 2021-11-22 Mon 15:26 -->
 <meta http-equiv="Content-Type" content="text/html;charset=utf-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1" />
 <title>&lrm;</title>
@@ -241,7 +241,7 @@
 <div id="outline-container-安装-hugo" class="outline-2">
 <h2 id="安装-hugo"><span class="section-number-2">1</span> 安装 Hugo</h2>
 <div class="outline-text-2" id="text-安装-hugo">
-<pre class="example" id="org68d93f4">
+<pre class="example" id="org64693ba">
 export HUGO_VERSION="0.88.1"
 wget https://github.com/gohugoio/hugo/releases/download/v${HUGO_VERSION}/hugo_extended_${HUGO_VERSION}_Linux-64bit.deb
 sudo apt-get install ./hugo_extended_${HUGO_VERSION}_Linux-64bit.deb
@@ -252,7 +252,7 @@ sudo apt-get install ./hugo_extended_${HUGO_VERSION}_Linux-64bit.deb
 <div id="outline-container-克隆仓库本地预览" class="outline-2">
 <h2 id="克隆仓库本地预览"><span class="section-number-2">2</span> 克隆仓库，本地预览</h2>
 <div class="outline-text-2" id="text-克隆仓库本地预览">
-<pre class="example" id="orga9c7332">
+<pre class="example" id="org86a4b19">
 cd ~
 git clone https://github.com/tianheg/blog.git
 cd blog
@@ -264,7 +264,7 @@ hugo server --bind 0.0.0.0 --baseURL http://ip:1313
 <div id="outline-container-安装并配置-nginx-服务器" class="outline-2">
 <h2 id="安装并配置-nginx-服务器"><span class="section-number-2">3</span> 安装并配置 Nginx 服务器</h2>
 <div class="outline-text-2" id="text-安装并配置-nginx-服务器">
-<pre class="example" id="org555c2d5">
+<pre class="example" id="org0523116">
 sudo apt-get install nginx
 </pre>
 
@@ -272,7 +272,7 @@ sudo apt-get install nginx
 修改 <code>/etc/nginx/nginx.conf</code>:
 </p>
 
-<pre class="example" id="orgec6cb29">
+<pre class="example" id="org8c5d120">
 http {
   server {
       listen 443 ssl;
@@ -316,7 +316,7 @@ http {
 制作了一个很简单的脚本 =update-blog.sh=：
 </p>
 
-<pre class="example" id="org7f0c087">
+<pre class="example" id="org5192080">
 #!/usr/bin/env bash
 
 cd ~/blog
@@ -336,7 +336,7 @@ sudo hugo -d /var/www/hugo
 把以上过程中的域名换为 =blog.yidajiabei.xyz=。更新博客的脚本改为：
 </p>
 
-<pre class="example" id="org0927fdc">
+<pre class="example" id="org49df673">
 #!/usr/bin/env bash
 
 cd ~/blog
@@ -349,7 +349,7 @@ sudo hugo -d /var/www/hugo
 遇到 Git 子模块无法更新的情况，于是还需要在以上脚本中添加以下命令：
 </p>
 
-<pre class="example" id="orgf02e136">
+<pre class="example" id="orge0eccc0">
 rm -rf themes/tianheg
 git clone --depth 1 https://github.com/tianheg/hugo-theme-tianheg.git themes/tianheg
 </pre>
@@ -358,7 +358,7 @@ git clone --depth 1 https://github.com/tianheg/hugo-theme-tianheg.git themes/tia
 完整命令如下：
 </p>
 
-<pre class="example" id="org66ceaf3">
+<pre class="example" id="org4e5abfa">
 #!/usr/bin/env bash
 
 cd ~/blog
