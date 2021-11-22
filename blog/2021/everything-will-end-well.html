@@ -1,0 +1,283 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN"
+"http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en">
+<head>
+<!-- 2021-11-22 Mon 17:40 -->
+<meta http-equiv="Content-Type" content="text/html;charset=utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>&lrm;</title>
+<meta name="generator" content="Org mode" />
+<style type="text/css">
+ <!--/*--><![CDATA[/*><!--*/
+  .title  { text-align: center;
+             margin-bottom: .2em; }
+  .subtitle { text-align: center;
+              font-size: medium;
+              font-weight: bold;
+              margin-top:0; }
+  .todo   { font-family: monospace; color: red; }
+  .done   { font-family: monospace; color: green; }
+  .priority { font-family: monospace; color: orange; }
+  .tag    { background-color: #eee; font-family: monospace;
+            padding: 2px; font-size: 80%; font-weight: normal; }
+  .timestamp { color: #bebebe; }
+  .timestamp-kwd { color: #5f9ea0; }
+  .org-right  { margin-left: auto; margin-right: 0px;  text-align: right; }
+  .org-left   { margin-left: 0px;  margin-right: auto; text-align: left; }
+  .org-center { margin-left: auto; margin-right: auto; text-align: center; }
+  .underline { text-decoration: underline; }
+  #postamble p, #preamble p { font-size: 90%; margin: .2em; }
+  p.verse { margin-left: 3%; }
+  pre {
+    border: 1px solid #ccc;
+    box-shadow: 3px 3px 3px #eee;
+    padding: 8pt;
+    font-family: monospace;
+    overflow: auto;
+    margin: 1.2em;
+  }
+  pre.src {
+    position: relative;
+    overflow: auto;
+    padding-top: 1.2em;
+  }
+  pre.src:before {
+    display: none;
+    position: absolute;
+    background-color: white;
+    top: -10px;
+    right: 10px;
+    padding: 3px;
+    border: 1px solid black;
+  }
+  pre.src:hover:before { display: inline; margin-top: 14px;}
+  /* Languages per Org manual */
+  pre.src-asymptote:before { content: 'Asymptote'; }
+  pre.src-awk:before { content: 'Awk'; }
+  pre.src-C:before { content: 'C'; }
+  /* pre.src-C++ doesn't work in CSS */
+  pre.src-clojure:before { content: 'Clojure'; }
+  pre.src-css:before { content: 'CSS'; }
+  pre.src-D:before { content: 'D'; }
+  pre.src-ditaa:before { content: 'ditaa'; }
+  pre.src-dot:before { content: 'Graphviz'; }
+  pre.src-calc:before { content: 'Emacs Calc'; }
+  pre.src-emacs-lisp:before { content: 'Emacs Lisp'; }
+  pre.src-fortran:before { content: 'Fortran'; }
+  pre.src-gnuplot:before { content: 'gnuplot'; }
+  pre.src-haskell:before { content: 'Haskell'; }
+  pre.src-hledger:before { content: 'hledger'; }
+  pre.src-java:before { content: 'Java'; }
+  pre.src-js:before { content: 'Javascript'; }
+  pre.src-latex:before { content: 'LaTeX'; }
+  pre.src-ledger:before { content: 'Ledger'; }
+  pre.src-lisp:before { content: 'Lisp'; }
+  pre.src-lilypond:before { content: 'Lilypond'; }
+  pre.src-lua:before { content: 'Lua'; }
+  pre.src-matlab:before { content: 'MATLAB'; }
+  pre.src-mscgen:before { content: 'Mscgen'; }
+  pre.src-ocaml:before { content: 'Objective Caml'; }
+  pre.src-octave:before { content: 'Octave'; }
+  pre.src-org:before { content: 'Org mode'; }
+  pre.src-oz:before { content: 'OZ'; }
+  pre.src-plantuml:before { content: 'Plantuml'; }
+  pre.src-processing:before { content: 'Processing.js'; }
+  pre.src-python:before { content: 'Python'; }
+  pre.src-R:before { content: 'R'; }
+  pre.src-ruby:before { content: 'Ruby'; }
+  pre.src-sass:before { content: 'Sass'; }
+  pre.src-scheme:before { content: 'Scheme'; }
+  pre.src-screen:before { content: 'Gnu Screen'; }
+  pre.src-sed:before { content: 'Sed'; }
+  pre.src-sh:before { content: 'shell'; }
+  pre.src-sql:before { content: 'SQL'; }
+  pre.src-sqlite:before { content: 'SQLite'; }
+  /* additional languages in org.el's org-babel-load-languages alist */
+  pre.src-forth:before { content: 'Forth'; }
+  pre.src-io:before { content: 'IO'; }
+  pre.src-J:before { content: 'J'; }
+  pre.src-makefile:before { content: 'Makefile'; }
+  pre.src-maxima:before { content: 'Maxima'; }
+  pre.src-perl:before { content: 'Perl'; }
+  pre.src-picolisp:before { content: 'Pico Lisp'; }
+  pre.src-scala:before { content: 'Scala'; }
+  pre.src-shell:before { content: 'Shell Script'; }
+  pre.src-ebnf2ps:before { content: 'ebfn2ps'; }
+  /* additional language identifiers per "defun org-babel-execute"
+       in ob-*.el */
+  pre.src-cpp:before  { content: 'C++'; }
+  pre.src-abc:before  { content: 'ABC'; }
+  pre.src-coq:before  { content: 'Coq'; }
+  pre.src-groovy:before  { content: 'Groovy'; }
+  /* additional language identifiers from org-babel-shell-names in
+     ob-shell.el: ob-shell is the only babel language using a lambda to put
+     the execution function name together. */
+  pre.src-bash:before  { content: 'bash'; }
+  pre.src-csh:before  { content: 'csh'; }
+  pre.src-ash:before  { content: 'ash'; }
+  pre.src-dash:before  { content: 'dash'; }
+  pre.src-ksh:before  { content: 'ksh'; }
+  pre.src-mksh:before  { content: 'mksh'; }
+  pre.src-posh:before  { content: 'posh'; }
+  /* Additional Emacs modes also supported by the LaTeX listings package */
+  pre.src-ada:before { content: 'Ada'; }
+  pre.src-asm:before { content: 'Assembler'; }
+  pre.src-caml:before { content: 'Caml'; }
+  pre.src-delphi:before { content: 'Delphi'; }
+  pre.src-html:before { content: 'HTML'; }
+  pre.src-idl:before { content: 'IDL'; }
+  pre.src-mercury:before { content: 'Mercury'; }
+  pre.src-metapost:before { content: 'MetaPost'; }
+  pre.src-modula-2:before { content: 'Modula-2'; }
+  pre.src-pascal:before { content: 'Pascal'; }
+  pre.src-ps:before { content: 'PostScript'; }
+  pre.src-prolog:before { content: 'Prolog'; }
+  pre.src-simula:before { content: 'Simula'; }
+  pre.src-tcl:before { content: 'tcl'; }
+  pre.src-tex:before { content: 'TeX'; }
+  pre.src-plain-tex:before { content: 'Plain TeX'; }
+  pre.src-verilog:before { content: 'Verilog'; }
+  pre.src-vhdl:before { content: 'VHDL'; }
+  pre.src-xml:before { content: 'XML'; }
+  pre.src-nxml:before { content: 'XML'; }
+  /* add a generic configuration mode; LaTeX export needs an additional
+     (add-to-list 'org-latex-listings-langs '(conf " ")) in .emacs */
+  pre.src-conf:before { content: 'Configuration File'; }
+
+  table { border-collapse:collapse; }
+  caption.t-above { caption-side: top; }
+  caption.t-bottom { caption-side: bottom; }
+  td, th { vertical-align:top;  }
+  th.org-right  { text-align: center;  }
+  th.org-left   { text-align: center;   }
+  th.org-center { text-align: center; }
+  td.org-right  { text-align: right;  }
+  td.org-left   { text-align: left;   }
+  td.org-center { text-align: center; }
+  dt { font-weight: bold; }
+  .footpara { display: inline; }
+  .footdef  { margin-bottom: 1em; }
+  .figure { padding: 1em; }
+  .figure p { text-align: center; }
+  .equation-container {
+    display: table;
+    text-align: center;
+    width: 100%;
+  }
+  .equation {
+    vertical-align: middle;
+  }
+  .equation-label {
+    display: table-cell;
+    text-align: right;
+    vertical-align: middle;
+  }
+  .inlinetask {
+    padding: 10px;
+    border: 2px solid gray;
+    margin: 10px;
+    background: #ffffcc;
+  }
+  #org-div-home-and-up
+   { text-align: right; font-size: 70%; white-space: nowrap; }
+  textarea { overflow-x: auto; }
+  .linenr { font-size: smaller }
+  .code-highlighted { background-color: #ffff00; }
+  .org-info-js_info-navigation { border-style: none; }
+  #org-info-js_console-label
+    { font-size: 10px; font-weight: bold; white-space: nowrap; }
+  .org-info-js_search-highlight
+    { background-color: #ffff00; color: #000000; font-weight: bold; }
+  .org-svg { width: 90%; }
+  /*]]>*/-->
+</style>
+<script type="text/javascript">
+// @license magnet:?xt=urn:btih:e95b018ef3580986a04669f1b5879592219e2a7a&dn=public-domain.txt Public Domain
+<!--/*--><![CDATA[/*><!--*/
+     function CodeHighlightOn(elem, id)
+     {
+       var target = document.getElementById(id);
+       if(null != target) {
+         elem.classList.add("code-highlighted");
+         target.classList.add("code-highlighted");
+       }
+     }
+     function CodeHighlightOff(elem, id)
+     {
+       var target = document.getElementById(id);
+       if(null != target) {
+         elem.classList.remove("code-highlighted");
+         target.classList.remove("code-highlighted");
+       }
+     }
+    /*]]>*///-->
+// @license-end
+</script>
+</head>
+<body>
+<div id="content">
+<p>
+<del>+</del> date = '2019-12-29T00:26:14+08:00' tags = ['随笔'] title =
+'凡事都会以美好结局' <del>+</del>
+</p>
+
+<p>
+一切事情都会以美好结局，如果不是，说明它还没结束。记不得是从哪里，寻觅得这一佳句，印象极深刻。
+</p>
+
+<p>
+我发现自己越来越能容得下人，越来越能容得下事情了。遇到不喜欢的人，别着急，他（她）身上一定有让我惊喜的地方。什么事情不想做，好好考虑，哦，这件事我要做，因为它能让我改变。
+</p>
+
+<p>
+生活就是由这些东西构成的，这些东西组成了我的每一天。很多时候，我们感到乏味了，不是生活本身让我们厌倦了，而是我们那颗好奇的心封闭了。不再寻觅，不再探索。又或者是我们累了，需要积蓄精力，否则没办法继续生活了。
+</p>
+
+<p>
+年幼一些时，脑袋瓜里总有些天真的想法。我想每天是快乐的，我要别人每天也像我一样快乐。可是，随着时间的流淌，我发现很少有人每天都很快乐。他们很多也有不开心的时刻，只是那些痛苦，都被隐藏在身后。你面前的这个人是积极的、阳光的、可爱的，他（她）身后可能是消极的、昏暗的、迷离的。为什么人前人后如此不同？这个人虚伪吗？未必，他只是在学着习惯社会而已。这个社会里，大家都那样，都愿意分享快乐，没有人愿意分享忧愁，也没有人喜欢听别人的忧愁。每天有那么多事，非要说不好的，打扰别人心情吗？
+</p>
+
+<p>
+我曾经分享给别人自己的忧愁，分享后心里的负担减轻，却又在担心倾听的人的状态，生怕对方受到不好的影响。现在的自己再次回想起往事，多是嘲笑自己当时的扭捏。别人倾听哭诉何尝不是一种新的体会。自己让对方明白，原来这个世界有人和他（她）一样，一样的充满忧伤，一样的犹豫不决，一样的不知所措。就像无辜的犯错的小孩，不知道怎么了，惩罚便随之而来。
+</p>
+
+<p>
+现在的我，不曾再做过分享不开心的傻事。因为长大了，明白一个人生活意味着什么了。人生而孤独，所以他们需要同伴，避免让自己陷入永恒的孤独。可是同伴不好找，所以绝大多数人的一生是没有同伴的一生。酒友好觅，知己难求。
+生活中的朋友只是表面，进不了内心，也无法达到。因为人是孤独的嘛。我们能做的，只有在某种程度上达成一定的共识，这样就会拥有朋友。朋友和我们可以一起做事情，一起分享喜悦，一起经历困境。但唯独孤独不可共享，人生来就是个体，能否意识到就另说了。
+</p>
+
+<p>
+人的认知被世界建构，人同时用自己的认知建构这个世界。所以，社会是共享的。它有你我他的认知构成。当你在学习认知社会时，你的认知被拓宽，你的眼界被扩大。你觉得自己生活在这样的时代真是一件幸事。
+</p>
+
+<p>
+今天看到朋友分享的经济观察报有关 00
+后的报道。看到那些被报道的同龄人甚至更年轻的朋友们那么努力地追求想要的生活，我觉得自己很高兴，有那么多人在这个世界上，和我一样大，和我一样怀揣梦想。
+</p>
+
+<p>
+今年似乎是 00 后们被广泛提及的第一年，身为前辈的 90
+后们似乎退休了。舞台留给了已经启程的我们。看到一篇文章，题目是《前辈让一让，准备好和
+00 后分享这个世界》。真的很棒诶，我们 00
+后要登上舞台了，说实话真有些紧张，没什么拿得出手的东西。但是，怎么也要露一手。不能白来这一趟啊！
+</p>
+
+<p>
+今天，更新手机应用的时候发现一个宝藏
+app，名字叫小独。每天推荐一首歌、一句话、一篇文。真的很喜欢这种
+app，而且整个布局是我特别喜欢的极简风。好奇的伙伴们可以下载看看。
+</p>
+
+<p>
+而且，当我看到这个 App
+时，我想的是：每天文章的好歌美句都来了。你看，下一个 app
+既满足了实际需要，还能帮助写文章。多好呀！
+</p>
+
+<p>
+*纵然伤心，也不要愁眉不展，因为你不知是谁会爱上你的笑容*。-&#x2013;&#x2014;《飞鸟集》泰戈尔
+</p>
+</div>
+</body>
+</html>

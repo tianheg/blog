@@ -1,0 +1,422 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN"
+"http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en">
+<head>
+<!-- 2021-11-22 Mon 17:40 -->
+<meta http-equiv="Content-Type" content="text/html;charset=utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>&lrm;</title>
+<meta name="generator" content="Org mode" />
+<style type="text/css">
+ <!--/*--><![CDATA[/*><!--*/
+  .title  { text-align: center;
+             margin-bottom: .2em; }
+  .subtitle { text-align: center;
+              font-size: medium;
+              font-weight: bold;
+              margin-top:0; }
+  .todo   { font-family: monospace; color: red; }
+  .done   { font-family: monospace; color: green; }
+  .priority { font-family: monospace; color: orange; }
+  .tag    { background-color: #eee; font-family: monospace;
+            padding: 2px; font-size: 80%; font-weight: normal; }
+  .timestamp { color: #bebebe; }
+  .timestamp-kwd { color: #5f9ea0; }
+  .org-right  { margin-left: auto; margin-right: 0px;  text-align: right; }
+  .org-left   { margin-left: 0px;  margin-right: auto; text-align: left; }
+  .org-center { margin-left: auto; margin-right: auto; text-align: center; }
+  .underline { text-decoration: underline; }
+  #postamble p, #preamble p { font-size: 90%; margin: .2em; }
+  p.verse { margin-left: 3%; }
+  pre {
+    border: 1px solid #ccc;
+    box-shadow: 3px 3px 3px #eee;
+    padding: 8pt;
+    font-family: monospace;
+    overflow: auto;
+    margin: 1.2em;
+  }
+  pre.src {
+    position: relative;
+    overflow: auto;
+    padding-top: 1.2em;
+  }
+  pre.src:before {
+    display: none;
+    position: absolute;
+    background-color: white;
+    top: -10px;
+    right: 10px;
+    padding: 3px;
+    border: 1px solid black;
+  }
+  pre.src:hover:before { display: inline; margin-top: 14px;}
+  /* Languages per Org manual */
+  pre.src-asymptote:before { content: 'Asymptote'; }
+  pre.src-awk:before { content: 'Awk'; }
+  pre.src-C:before { content: 'C'; }
+  /* pre.src-C++ doesn't work in CSS */
+  pre.src-clojure:before { content: 'Clojure'; }
+  pre.src-css:before { content: 'CSS'; }
+  pre.src-D:before { content: 'D'; }
+  pre.src-ditaa:before { content: 'ditaa'; }
+  pre.src-dot:before { content: 'Graphviz'; }
+  pre.src-calc:before { content: 'Emacs Calc'; }
+  pre.src-emacs-lisp:before { content: 'Emacs Lisp'; }
+  pre.src-fortran:before { content: 'Fortran'; }
+  pre.src-gnuplot:before { content: 'gnuplot'; }
+  pre.src-haskell:before { content: 'Haskell'; }
+  pre.src-hledger:before { content: 'hledger'; }
+  pre.src-java:before { content: 'Java'; }
+  pre.src-js:before { content: 'Javascript'; }
+  pre.src-latex:before { content: 'LaTeX'; }
+  pre.src-ledger:before { content: 'Ledger'; }
+  pre.src-lisp:before { content: 'Lisp'; }
+  pre.src-lilypond:before { content: 'Lilypond'; }
+  pre.src-lua:before { content: 'Lua'; }
+  pre.src-matlab:before { content: 'MATLAB'; }
+  pre.src-mscgen:before { content: 'Mscgen'; }
+  pre.src-ocaml:before { content: 'Objective Caml'; }
+  pre.src-octave:before { content: 'Octave'; }
+  pre.src-org:before { content: 'Org mode'; }
+  pre.src-oz:before { content: 'OZ'; }
+  pre.src-plantuml:before { content: 'Plantuml'; }
+  pre.src-processing:before { content: 'Processing.js'; }
+  pre.src-python:before { content: 'Python'; }
+  pre.src-R:before { content: 'R'; }
+  pre.src-ruby:before { content: 'Ruby'; }
+  pre.src-sass:before { content: 'Sass'; }
+  pre.src-scheme:before { content: 'Scheme'; }
+  pre.src-screen:before { content: 'Gnu Screen'; }
+  pre.src-sed:before { content: 'Sed'; }
+  pre.src-sh:before { content: 'shell'; }
+  pre.src-sql:before { content: 'SQL'; }
+  pre.src-sqlite:before { content: 'SQLite'; }
+  /* additional languages in org.el's org-babel-load-languages alist */
+  pre.src-forth:before { content: 'Forth'; }
+  pre.src-io:before { content: 'IO'; }
+  pre.src-J:before { content: 'J'; }
+  pre.src-makefile:before { content: 'Makefile'; }
+  pre.src-maxima:before { content: 'Maxima'; }
+  pre.src-perl:before { content: 'Perl'; }
+  pre.src-picolisp:before { content: 'Pico Lisp'; }
+  pre.src-scala:before { content: 'Scala'; }
+  pre.src-shell:before { content: 'Shell Script'; }
+  pre.src-ebnf2ps:before { content: 'ebfn2ps'; }
+  /* additional language identifiers per "defun org-babel-execute"
+       in ob-*.el */
+  pre.src-cpp:before  { content: 'C++'; }
+  pre.src-abc:before  { content: 'ABC'; }
+  pre.src-coq:before  { content: 'Coq'; }
+  pre.src-groovy:before  { content: 'Groovy'; }
+  /* additional language identifiers from org-babel-shell-names in
+     ob-shell.el: ob-shell is the only babel language using a lambda to put
+     the execution function name together. */
+  pre.src-bash:before  { content: 'bash'; }
+  pre.src-csh:before  { content: 'csh'; }
+  pre.src-ash:before  { content: 'ash'; }
+  pre.src-dash:before  { content: 'dash'; }
+  pre.src-ksh:before  { content: 'ksh'; }
+  pre.src-mksh:before  { content: 'mksh'; }
+  pre.src-posh:before  { content: 'posh'; }
+  /* Additional Emacs modes also supported by the LaTeX listings package */
+  pre.src-ada:before { content: 'Ada'; }
+  pre.src-asm:before { content: 'Assembler'; }
+  pre.src-caml:before { content: 'Caml'; }
+  pre.src-delphi:before { content: 'Delphi'; }
+  pre.src-html:before { content: 'HTML'; }
+  pre.src-idl:before { content: 'IDL'; }
+  pre.src-mercury:before { content: 'Mercury'; }
+  pre.src-metapost:before { content: 'MetaPost'; }
+  pre.src-modula-2:before { content: 'Modula-2'; }
+  pre.src-pascal:before { content: 'Pascal'; }
+  pre.src-ps:before { content: 'PostScript'; }
+  pre.src-prolog:before { content: 'Prolog'; }
+  pre.src-simula:before { content: 'Simula'; }
+  pre.src-tcl:before { content: 'tcl'; }
+  pre.src-tex:before { content: 'TeX'; }
+  pre.src-plain-tex:before { content: 'Plain TeX'; }
+  pre.src-verilog:before { content: 'Verilog'; }
+  pre.src-vhdl:before { content: 'VHDL'; }
+  pre.src-xml:before { content: 'XML'; }
+  pre.src-nxml:before { content: 'XML'; }
+  /* add a generic configuration mode; LaTeX export needs an additional
+     (add-to-list 'org-latex-listings-langs '(conf " ")) in .emacs */
+  pre.src-conf:before { content: 'Configuration File'; }
+
+  table { border-collapse:collapse; }
+  caption.t-above { caption-side: top; }
+  caption.t-bottom { caption-side: bottom; }
+  td, th { vertical-align:top;  }
+  th.org-right  { text-align: center;  }
+  th.org-left   { text-align: center;   }
+  th.org-center { text-align: center; }
+  td.org-right  { text-align: right;  }
+  td.org-left   { text-align: left;   }
+  td.org-center { text-align: center; }
+  dt { font-weight: bold; }
+  .footpara { display: inline; }
+  .footdef  { margin-bottom: 1em; }
+  .figure { padding: 1em; }
+  .figure p { text-align: center; }
+  .equation-container {
+    display: table;
+    text-align: center;
+    width: 100%;
+  }
+  .equation {
+    vertical-align: middle;
+  }
+  .equation-label {
+    display: table-cell;
+    text-align: right;
+    vertical-align: middle;
+  }
+  .inlinetask {
+    padding: 10px;
+    border: 2px solid gray;
+    margin: 10px;
+    background: #ffffcc;
+  }
+  #org-div-home-and-up
+   { text-align: right; font-size: 70%; white-space: nowrap; }
+  textarea { overflow-x: auto; }
+  .linenr { font-size: smaller }
+  .code-highlighted { background-color: #ffff00; }
+  .org-info-js_info-navigation { border-style: none; }
+  #org-info-js_console-label
+    { font-size: 10px; font-weight: bold; white-space: nowrap; }
+  .org-info-js_search-highlight
+    { background-color: #ffff00; color: #000000; font-weight: bold; }
+  .org-svg { width: 90%; }
+  /*]]>*/-->
+</style>
+<script type="text/javascript">
+// @license magnet:?xt=urn:btih:e95b018ef3580986a04669f1b5879592219e2a7a&dn=public-domain.txt Public Domain
+<!--/*--><![CDATA[/*><!--*/
+     function CodeHighlightOn(elem, id)
+     {
+       var target = document.getElementById(id);
+       if(null != target) {
+         elem.classList.add("code-highlighted");
+         target.classList.add("code-highlighted");
+       }
+     }
+     function CodeHighlightOff(elem, id)
+     {
+       var target = document.getElementById(id);
+       if(null != target) {
+         elem.classList.remove("code-highlighted");
+         target.classList.remove("code-highlighted");
+       }
+     }
+    /*]]>*///-->
+// @license-end
+</script>
+</head>
+<body>
+<div id="content">
+<div id="table-of-contents">
+<h2>Table of Contents</h2>
+<div id="text-table-of-contents">
+<ul>
+<li><a href="#frida-kahlo">1. 1. Frida Kahlo</a></li>
+<li><a href="#sofonisba-anguissola">2. 2. Sofonisba Anguissola</a></li>
+<li><a href="#artemisia-gentileschi">3. 3. Artemisia Gentileschi</a></li>
+<li><a href="#remedios-varo-uranga">4. 4. Remedios Varo Uranga</a></li>
+<li><a href="#lois-mailou-jones">5. 5. Lois Mailou Jones</a></li>
+<li><a href="#elisabeth-louise-vigée-le-brun">6. 6. Elisabeth Louise Vigée Le Brun</a></li>
+<li><a href="#tamara-de-lempicka">7. 7. Tamara de Lempicka</a></li>
+<li><a href="#marie-gabrielle-capet">8. 8. Marie-Gabrielle Capet</a></li>
+<li><a href="#angelica-kauffman">9. 9. Angelica Kauffman</a></li>
+<li><a href="#amrita-sher-gil">10. 10. Amrita Sher-Gil</a></li>
+</ul>
+</div>
+</div>
+<p>
+<del>+</del> date = '2021-01-22T09:31:34+08:00' description = '记录 10 of the
+Most Famous Female Artist Self-Portraits' keywords = ['艺术'] tags =
+['艺术'] title = '10 of the Most Famous Female Artist Self-Portraits'
+<del>+</del>
+</p>
+
+<div id="outline-container-frida-kahlo" class="outline-2">
+<h2 id="frida-kahlo"><span class="section-number-2">1</span> 1. Frida Kahlo</h2>
+<div class="outline-text-2" id="text-frida-kahlo">
+
+<div id="org16ae4eb" class="figure">
+<p><img src="file:///images/arts/frida-kahlo.jpeg" alt="frida-kahlo.jpeg" />
+</p>
+<p><span class="figure-number">Figure 1: </span>frida-kahlo.png</p>
+</div>
+
+<p>
+Female artist self-portraits: Frida Kahlo, Self-Portrait with Thorn
+Necklace and Hummingbird, 1940, Harry Ransom Center, Austin, Texas, USA.
+Wikipedia.
+</p>
+</div>
+</div>
+
+<div id="outline-container-sofonisba-anguissola" class="outline-2">
+<h2 id="sofonisba-anguissola"><span class="section-number-2">2</span> 2. Sofonisba Anguissola</h2>
+<div class="outline-text-2" id="text-sofonisba-anguissola">
+
+<div id="org79ac9be" class="figure">
+<p><img src="file:///images/arts/sofonisba-anguissola.jpeg" alt="sofonisba-anguissola.jpeg" />
+</p>
+<p><span class="figure-number">Figure 2: </span>sofonisba-anguissola.png</p>
+</div>
+
+<p>
+Female artist self-portraits: Sofonisba Anguissola, Self-Portrait, 1556,
+Lancut Museum, Lancut, Poland. Wikimedia.
+</p>
+</div>
+</div>
+
+<div id="outline-container-artemisia-gentileschi" class="outline-2">
+<h2 id="artemisia-gentileschi"><span class="section-number-2">3</span> 3. Artemisia Gentileschi</h2>
+<div class="outline-text-2" id="text-artemisia-gentileschi">
+
+<div id="org5f5b308" class="figure">
+<p><img src="file:///images/arts/artemisia-gentileschi.jpeg" alt="artemisia-gentileschi.jpeg" />
+</p>
+<p><span class="figure-number">Figure 3: </span>artemisia-gentileschi.png</p>
+</div>
+
+<p>
+Female artist self-portraits: Artemisia Gentileschi, Self-Portrait as
+the Allegory of Painting, 1638-39, Royal Collection, London, UK.
+</p>
+</div>
+</div>
+
+<div id="outline-container-remedios-varo-uranga" class="outline-2">
+<h2 id="remedios-varo-uranga"><span class="section-number-2">4</span> 4. Remedios Varo Uranga</h2>
+<div class="outline-text-2" id="text-remedios-varo-uranga">
+
+<div id="org9b65c8a" class="figure">
+<p><img src="file:///images/arts/remedios-varo-uranga.jpeg" alt="remedios-varo-uranga.jpeg" />
+</p>
+<p><span class="figure-number">Figure 4: </span>remedios-varo-uranga.png</p>
+</div>
+
+<p>
+Female artist self-portraits: Remedios Varo Uranga, <i>Self-portrait with
+Unicorn</i>, date unknown, private collection.
+<a href="https://mydailyartdisplay.wordpress.com/">My Daily Art Display.</a>
+</p>
+</div>
+</div>
+
+<div id="outline-container-lois-mailou-jones" class="outline-2">
+<h2 id="lois-mailou-jones"><span class="section-number-2">5</span> 5. Lois Mailou Jones</h2>
+<div class="outline-text-2" id="text-lois-mailou-jones">
+
+<div id="orga0e520a" class="figure">
+<p><img src="file:///images/arts/lois-mailou-jones.jpeg" alt="lois-mailou-jones.jpeg" />
+</p>
+<p><span class="figure-number">Figure 5: </span>lois-mailou-jones.png</p>
+</div>
+
+<p>
+Female artist self-portraits: Lois Mailou Jones, Self-Portrait, 1940,
+Smithsonian American Art Museum, Washington DC, USA.
+</p>
+</div>
+</div>
+
+<div id="outline-container-elisabeth-louise-vigée-le-brun" class="outline-2">
+<h2 id="elisabeth-louise-vigée-le-brun"><span class="section-number-2">6</span> 6. Elisabeth Louise Vigée Le Brun</h2>
+<div class="outline-text-2" id="text-elisabeth-louise-vigée-le-brun">
+
+<div id="org03c6741" class="figure">
+<p><img src="file:///images/arts/elisabeth-louise-vigee-le-brun.jpeg" alt="elisabeth-louise-vigee-le-brun.jpeg" />
+</p>
+<p><span class="figure-number">Figure 6: </span>elisabeth-louise-vigée-le-brun.png</p>
+</div>
+
+<p>
+Female artist self-portraits: Élisabeth Louise Vigée-LeBrun,
+Self-Portrait, 1790, Galleria degli Uffizi, Florence, Italy.
+</p>
+</div>
+</div>
+
+<div id="outline-container-tamara-de-lempicka" class="outline-2">
+<h2 id="tamara-de-lempicka"><span class="section-number-2">7</span> 7. Tamara de Lempicka</h2>
+<div class="outline-text-2" id="text-tamara-de-lempicka">
+
+<div id="org1d5f625" class="figure">
+<p><img src="file:///images/arts/tamara-de-lempicka.jpeg" alt="tamara-de-lempicka.jpeg" />
+</p>
+<p><span class="figure-number">Figure 7: </span>tamara-de-lempicka.png</p>
+</div>
+
+<p>
+Female artist self-portraits: Tamara de Lempicka, Self-Portrait in the
+Green Bugatti, 1929, private collection. Wikimedia commons.
+</p>
+</div>
+</div>
+
+<div id="outline-container-marie-gabrielle-capet" class="outline-2">
+<h2 id="marie-gabrielle-capet"><span class="section-number-2">8</span> 8. Marie-Gabrielle Capet</h2>
+<div class="outline-text-2" id="text-marie-gabrielle-capet">
+
+<div id="orgd8b5840" class="figure">
+<p><img src="file:///images/arts/marie-gabrielle-capet.jpeg" alt="marie-gabrielle-capet.jpeg" />
+</p>
+<p><span class="figure-number">Figure 8: </span>marie-gabrielle-capet.png</p>
+</div>
+
+<p>
+Female artist self-portraits: Marie-Gabrielle Capet, Self-Portrait,
+1783, National Museum of Western Art, Tokyo, Japan. Wikimedia Commons.
+</p>
+</div>
+</div>
+
+<div id="outline-container-angelica-kauffman" class="outline-2">
+<h2 id="angelica-kauffman"><span class="section-number-2">9</span> 9. Angelica Kauffman</h2>
+<div class="outline-text-2" id="text-angelica-kauffman">
+
+<div id="org0cfa496" class="figure">
+<p><img src="file:///images/arts/angelica-kauffman.jpeg" alt="angelica-kauffman.jpeg" />
+</p>
+<p><span class="figure-number">Figure 9: </span>angelica-kauffman</p>
+</div>
+
+<p>
+Female artist self-portraits: Angelica Kauffman, Self-Portrait,
+1770&#x2013;75, National Portrait Gallery, London, UK.
+</p>
+</div>
+</div>
+
+<div id="outline-container-amrita-sher-gil" class="outline-2">
+<h2 id="amrita-sher-gil"><span class="section-number-2">10</span> 10. Amrita Sher-Gil</h2>
+<div class="outline-text-2" id="text-amrita-sher-gil">
+
+<div id="org5a49df5" class="figure">
+<p><img src="file:///images/arts/amrita-sher-gil.jpeg" alt="amrita-sher-gil.jpeg" />
+</p>
+<p><span class="figure-number">Figure 10: </span>amrita-sher-gil.png</p>
+</div>
+
+<p>
+Female artist self-portraits: Amrita Sher-Gil, Self-Portrait as a
+Tahitian, 1934, Kiran Nadar Museum of Art, New Dehli, India.
+<a href="https://www.tate.org.uk/whats-on/tate-modern/exhibition/amrita-sher-gil/amrita-sher-gil-room-1-early-years-paris">Tate</a>.
+</p>
+
+<p>
+<a href="https://www.dailyartmagazine.com/female-artist-self-portraits/">Source</a>
+</p>
+</div>
+</div>
+</div>
+</body>
+</html>

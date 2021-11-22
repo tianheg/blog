@@ -1,0 +1,370 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN"
+"http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en">
+<head>
+<!-- 2021-11-22 Mon 17:40 -->
+<meta http-equiv="Content-Type" content="text/html;charset=utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>&lrm;</title>
+<meta name="generator" content="Org mode" />
+<style type="text/css">
+ <!--/*--><![CDATA[/*><!--*/
+  .title  { text-align: center;
+             margin-bottom: .2em; }
+  .subtitle { text-align: center;
+              font-size: medium;
+              font-weight: bold;
+              margin-top:0; }
+  .todo   { font-family: monospace; color: red; }
+  .done   { font-family: monospace; color: green; }
+  .priority { font-family: monospace; color: orange; }
+  .tag    { background-color: #eee; font-family: monospace;
+            padding: 2px; font-size: 80%; font-weight: normal; }
+  .timestamp { color: #bebebe; }
+  .timestamp-kwd { color: #5f9ea0; }
+  .org-right  { margin-left: auto; margin-right: 0px;  text-align: right; }
+  .org-left   { margin-left: 0px;  margin-right: auto; text-align: left; }
+  .org-center { margin-left: auto; margin-right: auto; text-align: center; }
+  .underline { text-decoration: underline; }
+  #postamble p, #preamble p { font-size: 90%; margin: .2em; }
+  p.verse { margin-left: 3%; }
+  pre {
+    border: 1px solid #ccc;
+    box-shadow: 3px 3px 3px #eee;
+    padding: 8pt;
+    font-family: monospace;
+    overflow: auto;
+    margin: 1.2em;
+  }
+  pre.src {
+    position: relative;
+    overflow: auto;
+    padding-top: 1.2em;
+  }
+  pre.src:before {
+    display: none;
+    position: absolute;
+    background-color: white;
+    top: -10px;
+    right: 10px;
+    padding: 3px;
+    border: 1px solid black;
+  }
+  pre.src:hover:before { display: inline; margin-top: 14px;}
+  /* Languages per Org manual */
+  pre.src-asymptote:before { content: 'Asymptote'; }
+  pre.src-awk:before { content: 'Awk'; }
+  pre.src-C:before { content: 'C'; }
+  /* pre.src-C++ doesn't work in CSS */
+  pre.src-clojure:before { content: 'Clojure'; }
+  pre.src-css:before { content: 'CSS'; }
+  pre.src-D:before { content: 'D'; }
+  pre.src-ditaa:before { content: 'ditaa'; }
+  pre.src-dot:before { content: 'Graphviz'; }
+  pre.src-calc:before { content: 'Emacs Calc'; }
+  pre.src-emacs-lisp:before { content: 'Emacs Lisp'; }
+  pre.src-fortran:before { content: 'Fortran'; }
+  pre.src-gnuplot:before { content: 'gnuplot'; }
+  pre.src-haskell:before { content: 'Haskell'; }
+  pre.src-hledger:before { content: 'hledger'; }
+  pre.src-java:before { content: 'Java'; }
+  pre.src-js:before { content: 'Javascript'; }
+  pre.src-latex:before { content: 'LaTeX'; }
+  pre.src-ledger:before { content: 'Ledger'; }
+  pre.src-lisp:before { content: 'Lisp'; }
+  pre.src-lilypond:before { content: 'Lilypond'; }
+  pre.src-lua:before { content: 'Lua'; }
+  pre.src-matlab:before { content: 'MATLAB'; }
+  pre.src-mscgen:before { content: 'Mscgen'; }
+  pre.src-ocaml:before { content: 'Objective Caml'; }
+  pre.src-octave:before { content: 'Octave'; }
+  pre.src-org:before { content: 'Org mode'; }
+  pre.src-oz:before { content: 'OZ'; }
+  pre.src-plantuml:before { content: 'Plantuml'; }
+  pre.src-processing:before { content: 'Processing.js'; }
+  pre.src-python:before { content: 'Python'; }
+  pre.src-R:before { content: 'R'; }
+  pre.src-ruby:before { content: 'Ruby'; }
+  pre.src-sass:before { content: 'Sass'; }
+  pre.src-scheme:before { content: 'Scheme'; }
+  pre.src-screen:before { content: 'Gnu Screen'; }
+  pre.src-sed:before { content: 'Sed'; }
+  pre.src-sh:before { content: 'shell'; }
+  pre.src-sql:before { content: 'SQL'; }
+  pre.src-sqlite:before { content: 'SQLite'; }
+  /* additional languages in org.el's org-babel-load-languages alist */
+  pre.src-forth:before { content: 'Forth'; }
+  pre.src-io:before { content: 'IO'; }
+  pre.src-J:before { content: 'J'; }
+  pre.src-makefile:before { content: 'Makefile'; }
+  pre.src-maxima:before { content: 'Maxima'; }
+  pre.src-perl:before { content: 'Perl'; }
+  pre.src-picolisp:before { content: 'Pico Lisp'; }
+  pre.src-scala:before { content: 'Scala'; }
+  pre.src-shell:before { content: 'Shell Script'; }
+  pre.src-ebnf2ps:before { content: 'ebfn2ps'; }
+  /* additional language identifiers per "defun org-babel-execute"
+       in ob-*.el */
+  pre.src-cpp:before  { content: 'C++'; }
+  pre.src-abc:before  { content: 'ABC'; }
+  pre.src-coq:before  { content: 'Coq'; }
+  pre.src-groovy:before  { content: 'Groovy'; }
+  /* additional language identifiers from org-babel-shell-names in
+     ob-shell.el: ob-shell is the only babel language using a lambda to put
+     the execution function name together. */
+  pre.src-bash:before  { content: 'bash'; }
+  pre.src-csh:before  { content: 'csh'; }
+  pre.src-ash:before  { content: 'ash'; }
+  pre.src-dash:before  { content: 'dash'; }
+  pre.src-ksh:before  { content: 'ksh'; }
+  pre.src-mksh:before  { content: 'mksh'; }
+  pre.src-posh:before  { content: 'posh'; }
+  /* Additional Emacs modes also supported by the LaTeX listings package */
+  pre.src-ada:before { content: 'Ada'; }
+  pre.src-asm:before { content: 'Assembler'; }
+  pre.src-caml:before { content: 'Caml'; }
+  pre.src-delphi:before { content: 'Delphi'; }
+  pre.src-html:before { content: 'HTML'; }
+  pre.src-idl:before { content: 'IDL'; }
+  pre.src-mercury:before { content: 'Mercury'; }
+  pre.src-metapost:before { content: 'MetaPost'; }
+  pre.src-modula-2:before { content: 'Modula-2'; }
+  pre.src-pascal:before { content: 'Pascal'; }
+  pre.src-ps:before { content: 'PostScript'; }
+  pre.src-prolog:before { content: 'Prolog'; }
+  pre.src-simula:before { content: 'Simula'; }
+  pre.src-tcl:before { content: 'tcl'; }
+  pre.src-tex:before { content: 'TeX'; }
+  pre.src-plain-tex:before { content: 'Plain TeX'; }
+  pre.src-verilog:before { content: 'Verilog'; }
+  pre.src-vhdl:before { content: 'VHDL'; }
+  pre.src-xml:before { content: 'XML'; }
+  pre.src-nxml:before { content: 'XML'; }
+  /* add a generic configuration mode; LaTeX export needs an additional
+     (add-to-list 'org-latex-listings-langs '(conf " ")) in .emacs */
+  pre.src-conf:before { content: 'Configuration File'; }
+
+  table { border-collapse:collapse; }
+  caption.t-above { caption-side: top; }
+  caption.t-bottom { caption-side: bottom; }
+  td, th { vertical-align:top;  }
+  th.org-right  { text-align: center;  }
+  th.org-left   { text-align: center;   }
+  th.org-center { text-align: center; }
+  td.org-right  { text-align: right;  }
+  td.org-left   { text-align: left;   }
+  td.org-center { text-align: center; }
+  dt { font-weight: bold; }
+  .footpara { display: inline; }
+  .footdef  { margin-bottom: 1em; }
+  .figure { padding: 1em; }
+  .figure p { text-align: center; }
+  .equation-container {
+    display: table;
+    text-align: center;
+    width: 100%;
+  }
+  .equation {
+    vertical-align: middle;
+  }
+  .equation-label {
+    display: table-cell;
+    text-align: right;
+    vertical-align: middle;
+  }
+  .inlinetask {
+    padding: 10px;
+    border: 2px solid gray;
+    margin: 10px;
+    background: #ffffcc;
+  }
+  #org-div-home-and-up
+   { text-align: right; font-size: 70%; white-space: nowrap; }
+  textarea { overflow-x: auto; }
+  .linenr { font-size: smaller }
+  .code-highlighted { background-color: #ffff00; }
+  .org-info-js_info-navigation { border-style: none; }
+  #org-info-js_console-label
+    { font-size: 10px; font-weight: bold; white-space: nowrap; }
+  .org-info-js_search-highlight
+    { background-color: #ffff00; color: #000000; font-weight: bold; }
+  .org-svg { width: 90%; }
+  /*]]>*/-->
+</style>
+<script type="text/javascript">
+// @license magnet:?xt=urn:btih:e95b018ef3580986a04669f1b5879592219e2a7a&dn=public-domain.txt Public Domain
+<!--/*--><![CDATA[/*><!--*/
+     function CodeHighlightOn(elem, id)
+     {
+       var target = document.getElementById(id);
+       if(null != target) {
+         elem.classList.add("code-highlighted");
+         target.classList.add("code-highlighted");
+       }
+     }
+     function CodeHighlightOff(elem, id)
+     {
+       var target = document.getElementById(id);
+       if(null != target) {
+         elem.classList.remove("code-highlighted");
+         target.classList.remove("code-highlighted");
+       }
+     }
+    /*]]>*///-->
+// @license-end
+</script>
+</head>
+<body>
+<div id="content">
+<p>
+<del>+</del> date = '2020-06-14T21:39:30+08:00' slug = 'write add life ply' tags
+= ['随笔'] title = '写作-&#x2013;&#x2014;增加生命的厚度' <del>+</del>
+</p>
+
+<p>
+刚听完邓安庆（公众号：邓安庆，豆瓣：邓安庆）老师讲述他的写作经历。
+</p>
+
+<p>
+写作之于我来说，它意味着什么，这是本篇文章的主题。
+</p>
+
+<div class="html" id="orgba644fe">
+<p>
+&lt;center&gt;
+</p>
+
+</div>
+
+<p>
+一、父亲打儿子
+</p>
+
+<div class="html" id="org7a55d20">
+<p>
+&lt;/center&gt;
+</p>
+
+</div>
+
+<p>
+一个敏感孤僻的人，童年大都过得不好。我就是这样。我到现在还记得：一次父亲打儿子事件。
+</p>
+
+<p>
+那是小学三年级，下午三点多放学，我晚上七点多到家，被问到去哪里了，说和同学一起玩去了。到家时，父亲的棍棒已经备好，只待我进屋，即可开打。打时，屁股开花都无法形容那种痛苦，顺带还有一丝年幼时的不解：我又没有做错什么，你为什么要打我。母亲第二天告诉我，你回家太晚，你的爸爸很担心你。
+</p>
+
+<p>
+当时年幼，不记得这句话，只记得挨打。这样的挨打后来持续多年，每每有不如意的事情，每每出现像上文那样反常规的事情，我的屁股就不得安生。
+</p>
+
+<p>
+忽然，我不再挨打，那时我上高中了。父亲说，你已经长那么大了，打你也没有用了，你自己好自为之吧。
+</p>
+
+<p>
+但是，就在最近我又挨打了，原因是我考试不及格，我还和他顶嘴。所以，又被揍了一顿。
+</p>
+
+<p>
+我会记得这样的事情直到永远，因为这似乎就是我宝贵的人生财富（笑~~）。我从“打”中学到了很多，不论好坏。
+</p>
+
+<div class="html" id="org8ae9c2a">
+<p>
+&lt;center&gt;
+</p>
+
+</div>
+
+<p>
+二、性格的形成
+</p>
+
+<div class="html" id="orgd3be41b">
+<p>
+&lt;/center&gt;
+</p>
+
+</div>
+
+<p>
+我很怕人，我敏感易怒，我不喜欢人多。我不喜欢和虚伪的人相处。我有时很暴力，我会努力压制，别人从未知晓。
+</p>
+
+<p>
+性格的形成离不开环境，而这环境的主要缔造者-&#x2013;&#x2014;我的父亲，成了促成我性格的主力。从小在他的棍棒下成长，即便在成年以后也难以避免。这不是一种控诉，而是一件事实的阐述。
+</p>
+
+<p>
+实际上，我很感激我的父亲，很感激我的生活环境。正因为这些，我才得以在朦胧中接触到写作，我不是一个专业写作者，我只是我生活的忠实记录者。
+</p>
+
+<div class="html" id="org636512e">
+<p>
+&lt;p style="margin:25px"&gt;
+</p>
+
+</div>
+
+<p>
+那些夜里哭泣的夜晚，我都在思考自己活着的意义，现在想来，那是我早期的自我启蒙。
+</p>
+
+<div class="html" id="org7fa8d0d">
+<p>
+&lt;/p&gt;
+</p>
+
+</div>
+
+<p>
+少年时代总有各种烦恼，身边没有可以倾诉的人，只能和自己说话。在很长的一个时间段里，我都在和自己说话，这是一件极有意思的事情，因为对话的开始和结束全在我自己的掌控之中，无关他人，也没有人会打扰到我。
+</p>
+
+<p>
+但是，随着进入大学，生活上接触的人越来越多，我很少甚至几乎没有过和自己说话的时候。或许，这是一个标志，标志着我个一个成长阶段的过去，下一个阶段开始了。
+</p>
+
+<p>
+下一个阶段是什么？它是一个别人开始闯入我的生活的阶段，以前我的世界不为外人所知晓，现在不一样了，我可以通过微信公众号、博客写下我的想法，分享到朋友圈，我很享受这一过程。我并不知道这种状态会持续多长时间，但是我知道这会一直持续下去。
+</p>
+
+<p>
+随着不断地了解自己，我发现自己有很多的偏见，对自己的偏见、对家人的、对朋友的、对同学的、对陌生人的。我总是用自己的经验去判断别人的行为。这很危险，我现在知道了，我在努力改正。
+</p>
+
+<div class="html" id="org790bc95">
+<p>
+&lt;center&gt;
+</p>
+
+</div>
+
+<p>
+三、生命的厚度
+</p>
+
+<div class="html" id="orge40d2db">
+<p>
+&lt;/center&gt;
+</p>
+
+</div>
+
+<p>
+好久没有遇到这个词了，现在已经忘记，刚才是什么东西使我想起这个词。所幸我记下来了。
+</p>
+
+<p>
+很多时候，我都认为现实生活是极其乏味且无聊的。尽管它确实是的。但是，我发现了可以慰藉的地方：我可以记录下来，我可以把自己的生活记录下来。不必担心其他人，因为他们无暇顾及。所以，我就几乎每天记录，不记录的日子我烦躁不安，记录下来的日子我心平气和。写作竟成了一剂良药，能够使我的生活安定，这实在是一件幸事！
+</p>
+
+<p>
+日子一天天过，写作一直持续着，希望以后能写一本我的个人传记，留给后来人翻阅。
+</p>
+</div>
+</body>
+</html>

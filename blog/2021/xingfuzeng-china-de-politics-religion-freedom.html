@@ -1,0 +1,375 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN"
+"http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en">
+<head>
+<!-- 2021-11-22 Mon 17:40 -->
+<meta http-equiv="Content-Type" content="text/html;charset=utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>&lrm;</title>
+<meta name="generator" content="Org mode" />
+<style type="text/css">
+ <!--/*--><![CDATA[/*><!--*/
+  .title  { text-align: center;
+             margin-bottom: .2em; }
+  .subtitle { text-align: center;
+              font-size: medium;
+              font-weight: bold;
+              margin-top:0; }
+  .todo   { font-family: monospace; color: red; }
+  .done   { font-family: monospace; color: green; }
+  .priority { font-family: monospace; color: orange; }
+  .tag    { background-color: #eee; font-family: monospace;
+            padding: 2px; font-size: 80%; font-weight: normal; }
+  .timestamp { color: #bebebe; }
+  .timestamp-kwd { color: #5f9ea0; }
+  .org-right  { margin-left: auto; margin-right: 0px;  text-align: right; }
+  .org-left   { margin-left: 0px;  margin-right: auto; text-align: left; }
+  .org-center { margin-left: auto; margin-right: auto; text-align: center; }
+  .underline { text-decoration: underline; }
+  #postamble p, #preamble p { font-size: 90%; margin: .2em; }
+  p.verse { margin-left: 3%; }
+  pre {
+    border: 1px solid #ccc;
+    box-shadow: 3px 3px 3px #eee;
+    padding: 8pt;
+    font-family: monospace;
+    overflow: auto;
+    margin: 1.2em;
+  }
+  pre.src {
+    position: relative;
+    overflow: auto;
+    padding-top: 1.2em;
+  }
+  pre.src:before {
+    display: none;
+    position: absolute;
+    background-color: white;
+    top: -10px;
+    right: 10px;
+    padding: 3px;
+    border: 1px solid black;
+  }
+  pre.src:hover:before { display: inline; margin-top: 14px;}
+  /* Languages per Org manual */
+  pre.src-asymptote:before { content: 'Asymptote'; }
+  pre.src-awk:before { content: 'Awk'; }
+  pre.src-C:before { content: 'C'; }
+  /* pre.src-C++ doesn't work in CSS */
+  pre.src-clojure:before { content: 'Clojure'; }
+  pre.src-css:before { content: 'CSS'; }
+  pre.src-D:before { content: 'D'; }
+  pre.src-ditaa:before { content: 'ditaa'; }
+  pre.src-dot:before { content: 'Graphviz'; }
+  pre.src-calc:before { content: 'Emacs Calc'; }
+  pre.src-emacs-lisp:before { content: 'Emacs Lisp'; }
+  pre.src-fortran:before { content: 'Fortran'; }
+  pre.src-gnuplot:before { content: 'gnuplot'; }
+  pre.src-haskell:before { content: 'Haskell'; }
+  pre.src-hledger:before { content: 'hledger'; }
+  pre.src-java:before { content: 'Java'; }
+  pre.src-js:before { content: 'Javascript'; }
+  pre.src-latex:before { content: 'LaTeX'; }
+  pre.src-ledger:before { content: 'Ledger'; }
+  pre.src-lisp:before { content: 'Lisp'; }
+  pre.src-lilypond:before { content: 'Lilypond'; }
+  pre.src-lua:before { content: 'Lua'; }
+  pre.src-matlab:before { content: 'MATLAB'; }
+  pre.src-mscgen:before { content: 'Mscgen'; }
+  pre.src-ocaml:before { content: 'Objective Caml'; }
+  pre.src-octave:before { content: 'Octave'; }
+  pre.src-org:before { content: 'Org mode'; }
+  pre.src-oz:before { content: 'OZ'; }
+  pre.src-plantuml:before { content: 'Plantuml'; }
+  pre.src-processing:before { content: 'Processing.js'; }
+  pre.src-python:before { content: 'Python'; }
+  pre.src-R:before { content: 'R'; }
+  pre.src-ruby:before { content: 'Ruby'; }
+  pre.src-sass:before { content: 'Sass'; }
+  pre.src-scheme:before { content: 'Scheme'; }
+  pre.src-screen:before { content: 'Gnu Screen'; }
+  pre.src-sed:before { content: 'Sed'; }
+  pre.src-sh:before { content: 'shell'; }
+  pre.src-sql:before { content: 'SQL'; }
+  pre.src-sqlite:before { content: 'SQLite'; }
+  /* additional languages in org.el's org-babel-load-languages alist */
+  pre.src-forth:before { content: 'Forth'; }
+  pre.src-io:before { content: 'IO'; }
+  pre.src-J:before { content: 'J'; }
+  pre.src-makefile:before { content: 'Makefile'; }
+  pre.src-maxima:before { content: 'Maxima'; }
+  pre.src-perl:before { content: 'Perl'; }
+  pre.src-picolisp:before { content: 'Pico Lisp'; }
+  pre.src-scala:before { content: 'Scala'; }
+  pre.src-shell:before { content: 'Shell Script'; }
+  pre.src-ebnf2ps:before { content: 'ebfn2ps'; }
+  /* additional language identifiers per "defun org-babel-execute"
+       in ob-*.el */
+  pre.src-cpp:before  { content: 'C++'; }
+  pre.src-abc:before  { content: 'ABC'; }
+  pre.src-coq:before  { content: 'Coq'; }
+  pre.src-groovy:before  { content: 'Groovy'; }
+  /* additional language identifiers from org-babel-shell-names in
+     ob-shell.el: ob-shell is the only babel language using a lambda to put
+     the execution function name together. */
+  pre.src-bash:before  { content: 'bash'; }
+  pre.src-csh:before  { content: 'csh'; }
+  pre.src-ash:before  { content: 'ash'; }
+  pre.src-dash:before  { content: 'dash'; }
+  pre.src-ksh:before  { content: 'ksh'; }
+  pre.src-mksh:before  { content: 'mksh'; }
+  pre.src-posh:before  { content: 'posh'; }
+  /* Additional Emacs modes also supported by the LaTeX listings package */
+  pre.src-ada:before { content: 'Ada'; }
+  pre.src-asm:before { content: 'Assembler'; }
+  pre.src-caml:before { content: 'Caml'; }
+  pre.src-delphi:before { content: 'Delphi'; }
+  pre.src-html:before { content: 'HTML'; }
+  pre.src-idl:before { content: 'IDL'; }
+  pre.src-mercury:before { content: 'Mercury'; }
+  pre.src-metapost:before { content: 'MetaPost'; }
+  pre.src-modula-2:before { content: 'Modula-2'; }
+  pre.src-pascal:before { content: 'Pascal'; }
+  pre.src-ps:before { content: 'PostScript'; }
+  pre.src-prolog:before { content: 'Prolog'; }
+  pre.src-simula:before { content: 'Simula'; }
+  pre.src-tcl:before { content: 'tcl'; }
+  pre.src-tex:before { content: 'TeX'; }
+  pre.src-plain-tex:before { content: 'Plain TeX'; }
+  pre.src-verilog:before { content: 'Verilog'; }
+  pre.src-vhdl:before { content: 'VHDL'; }
+  pre.src-xml:before { content: 'XML'; }
+  pre.src-nxml:before { content: 'XML'; }
+  /* add a generic configuration mode; LaTeX export needs an additional
+     (add-to-list 'org-latex-listings-langs '(conf " ")) in .emacs */
+  pre.src-conf:before { content: 'Configuration File'; }
+
+  table { border-collapse:collapse; }
+  caption.t-above { caption-side: top; }
+  caption.t-bottom { caption-side: bottom; }
+  td, th { vertical-align:top;  }
+  th.org-right  { text-align: center;  }
+  th.org-left   { text-align: center;   }
+  th.org-center { text-align: center; }
+  td.org-right  { text-align: right;  }
+  td.org-left   { text-align: left;   }
+  td.org-center { text-align: center; }
+  dt { font-weight: bold; }
+  .footpara { display: inline; }
+  .footdef  { margin-bottom: 1em; }
+  .figure { padding: 1em; }
+  .figure p { text-align: center; }
+  .equation-container {
+    display: table;
+    text-align: center;
+    width: 100%;
+  }
+  .equation {
+    vertical-align: middle;
+  }
+  .equation-label {
+    display: table-cell;
+    text-align: right;
+    vertical-align: middle;
+  }
+  .inlinetask {
+    padding: 10px;
+    border: 2px solid gray;
+    margin: 10px;
+    background: #ffffcc;
+  }
+  #org-div-home-and-up
+   { text-align: right; font-size: 70%; white-space: nowrap; }
+  textarea { overflow-x: auto; }
+  .linenr { font-size: smaller }
+  .code-highlighted { background-color: #ffff00; }
+  .org-info-js_info-navigation { border-style: none; }
+  #org-info-js_console-label
+    { font-size: 10px; font-weight: bold; white-space: nowrap; }
+  .org-info-js_search-highlight
+    { background-color: #ffff00; color: #000000; font-weight: bold; }
+  .org-svg { width: 90%; }
+  /*]]>*/-->
+</style>
+<script type="text/javascript">
+// @license magnet:?xt=urn:btih:e95b018ef3580986a04669f1b5879592219e2a7a&dn=public-domain.txt Public Domain
+<!--/*--><![CDATA[/*><!--*/
+     function CodeHighlightOn(elem, id)
+     {
+       var target = document.getElementById(id);
+       if(null != target) {
+         elem.classList.add("code-highlighted");
+         target.classList.add("code-highlighted");
+       }
+     }
+     function CodeHighlightOff(elem, id)
+     {
+       var target = document.getElementById(id);
+       if(null != target) {
+         elem.classList.remove("code-highlighted");
+         target.classList.remove("code-highlighted");
+       }
+     }
+    /*]]>*///-->
+// @license-end
+</script>
+</head>
+<body>
+<div id="content">
+<div id="table-of-contents">
+<h2>Table of Contents</h2>
+<div id="text-table-of-contents">
+<ul>
+<li><a href="#一香港的基本法與宗教自由">1. 一、香港的《基本法》與宗教自由</a></li>
+<li><a href="#二政教關係的概念">2. 二、政教關係的概念</a></li>
+<li><a href="#三怎麽理解政教關係一國家-政府與宗教的關係">3. 三、怎麽理解政教關係：（一）國家 / 政府與宗教的關係</a></li>
+</ul>
+</div>
+</div>
+<p>
+<del>+</del> date = '2020-06-10T18:52:21+08:00' description =
+'《中國的政治、宗教與自由》读书笔记' keywords = ['阅读'] tags = ['阅读']
+title = '邢福增《中國的政治、宗教與自由》' <del>+</del>
+</p>
+
+<p>
+<b>目录</b>
+</p>
+
+<p>
+<b>第一部分</b> <b>演講</b>
+</p>
+
+<ul class="org-ul">
+<li>一、香港的《基本法》與宗教自由</li>
+<li>二、政教關係的概念</li>
+<li>三、怎麼理解政教關係：（一）國家／政府跟宗教的關係</li>
+<li>四、中國政府與宗教的關係</li>
+<li>五、怎麼理解政教關係：（二）國家／政府跟宗教組織的關係</li>
+<li>六、中國政府與宗教組織的關係</li>
+<li>七、怎麼理解政教關係：（三）宗教組織跟政治的關係</li>
+<li>八、中國宗教組織與政治的關係</li>
+<li>九、什麼是宗教自由？</li>
+<li>十、宗教自由中的普世價值與中國模式十一、小結</li>
+</ul>
+
+<p>
+<b>第二部分</b> <b>提問</b>
+</p>
+
+<ul class="org-ul">
+<li>提問一：邪教</li>
+<li>提問二：父母在家庭的宗教教育，是否是強迫？</li>
+<li>提問三：法輪功</li>
+<li>提問四：家庭教會的基督徒怎麼行動？</li>
+<li>提問五、基督教與天主教跟香港社會運動的關係</li>
+<li>提問六：十八大後宗教政策轉向的看法</li>
+<li>提問七：對於新疆「改造營」中少數民族信教人士進行「極端思想改造」的看法</li>
+<li>提問八：共產黨是不是一個宗教？</li>
+<li>提問九：天主教、中國與梵蒂岡衝突的關係</li>
+<li>提問十：如何看待維穩對於宗教打壓的觀點？</li>
+<li>提問十一：《公民權利和政治權利國際公約》</li>
+<li>提問十二：疫情與宗教的關係</li>
+<li>提問十三：宗教可以進入校園嗎？</li>
+</ul>
+
+<hr />
+
+<div class="html" id="org73f3e49">
+<p>
+&lt;center&gt;
+</p>
+
+</div>
+
+<p>
+第一部分 演講
+</p>
+
+<div class="html" id="orgc6d6ff3">
+<p>
+&lt;/center&gt;
+</p>
+
+</div>
+
+<p>
+邢老師從政教關係切題。
+</p>
+
+<div id="outline-container-一香港的基本法與宗教自由" class="outline-2">
+<h2 id="一香港的基本法與宗教自由"><span class="section-number-2">1</span> 一、香港的《基本法》與宗教自由</h2>
+<div class="outline-text-2" id="text-一香港的基本法與宗教自由">
+<p>
+在進入主題之前，邢老師展示了一份 1986
+年香港《明報》的簡報，其中這篇文章是談基本法與宗教自由。今年（2020）剛好是《基本法》頒佈的三十週年，這在香港也算是一個比較重要的事情。其實《基本法》在起草過程當中有很多爭議，其中之一是牽涉到宗教自由的問題。
+</p>
+
+<p>
+在八十年代的香港有一個很特別的筆名-&#x2013;&#x2014;辛維思，也是這篇文章的作者，他當時寫了很多關於《基本法》的文章。剛好那個時候是《基本法》的起草階段，他的文章又是比較傾向中方的立場，所以大家都猜可能是想通過「辛維思」背後的一個人或一群人表達中方對《基本法》的一些不同立場。
+</p>
+
+<p>
+更特別的是因爲他先後寫了〈基本法與宗教自由〉、〈再談基本法與宗教自由〉兩篇關於宗教自由的文章，主要講的是他發現香港的教會不管是天主教還是基督教，都有政治化的趨向。他認爲教會如果關心社會、參與社會議題或者對政治社會的事情表達意見，這可能就是一種「政教合一」的問題。他覺得《基本法》應該要肯定宗教自由，但同時需要避免出現宗教團體關於社會政治的問題，因此他提出了一個「政教分離」的概念。
+</p>
+
+<p>
+辛維思的觀點引起很多爭議，例如這篇文章表達的是一種怎樣的政教分離？從中還可以引發出，諸如政府怎麽看待宗教團體？宗教團體跟政府以及社會是什麽關係？宗教或教會有沒有社會責任？什麽是政治化？很多很多不同的問題。
+</p>
+
+<p>
+辛維思要從中國政府的角度來跟香港的宗教界特別是基督教、天主教表達一種立場和態度，也就是到底中國政府覺得教會應該跟社會、政治是一種什麽關係。很明顯這是希望用中國對政教分離的理解影響
+97 后的香港，甚至 1997
+年以前香港宗教界就應該好好地調整自己預備迎接主權的移交。
+</p>
+</div>
+</div>
+
+<div id="outline-container-二政教關係的概念" class="outline-2">
+<h2 id="二政教關係的概念"><span class="section-number-2">2</span> 二、政教關係的概念</h2>
+<div class="outline-text-2" id="text-二政教關係的概念">
+<p>
+從廣義來講就是政治跟宗教，也可以狹義地說是國家政府和宗教組織（例如教會）。當把這些不同理解、不同維度（dimension）加起來的時候，我們發現他裡面可以牽涉到四種不同層面的政教關係：
+</p>
+
+<p>
+一、政治（politics）與宗教（religion）
+</p>
+
+<p>
+二、國家 / 政府（state/government）與宗教（religion）
+</p>
+
+<p>
+三、國家 / 政府（state/government）與宗教組織（religion body/church）
+</p>
+
+<p>
+四、政治（politics）與宗教組織（religious body/church）
+</p>
+
+<p>
+邢老師從政教關係的後三個層面來切入主題，也就是在中國語境下國家 /
+政府跟宗教的關係應該是什麽呢？政府跟宗教組織的關係呢？宗教組織跟政治的關係又是怎麽楊呢？
+</p>
+</div>
+</div>
+
+<div id="outline-container-三怎麽理解政教關係一國家-政府與宗教的關係" class="outline-2">
+<h2 id="三怎麽理解政教關係一國家-政府與宗教的關係"><span class="section-number-2">3</span> 三、怎麽理解政教關係：（一）國家 / 政府與宗教的關係</h2>
+<div class="outline-text-2" id="text-三怎麽理解政教關係一國家-政府與宗教的關係">
+<hr />
+
+<p>
+*参考资料*：
+</p>
+
+<ol class="org-ol">
+<li><a href="https://drive.google.com/file/d/1d92iorItapvTvGErKBF9FBTMUCQ3xRG9/view">原文訪問（pdf）</a></li>
+</ol>
+</div>
+</div>
+</div>
+</body>
+</html>
