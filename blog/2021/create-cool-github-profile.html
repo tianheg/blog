@@ -3,7 +3,7 @@
 "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml" lang="zh" xml:lang="zh">
 <head>
-<!-- 2021-11-21 Sun 22:19 -->
+<!-- 2021-11-22 Mon 11:24 -->
 <meta http-equiv="Content-Type" content="text/html;charset=utf-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1" />
 <title>为 GitHub 主页添加「年进度」和「最近更新的博客文章」</title>
@@ -196,6 +196,7 @@
 </style>
 <link rel="stylesheet" type="text/css" href="/theme/org.css"/>
 <link rel="stylesheet" type="text/css" href="/theme/site.css"/>
+<!-- Cloudflare Web Analytics --><script defer src='https://static.cloudflareinsights.com/beacon.min.js' data-cf-beacon='{"token": "d5b841b503ed4d1b8fad459b84d1cc2f"}'></script><!-- End Cloudflare Web Analytics -->
 <script type="text/javascript">
 // @license magnet:?xt=urn:btih:e95b018ef3580986a04669f1b5879592219e2a7a&dn=public-domain.txt Public Domain
 <!--/*--><![CDATA[/*><!--*/
@@ -322,7 +323,7 @@ console.log(readme)
 开发工作流。在与个人用户名相同的仓库中添加 =Pipfile=：
 </p>
 
-<pre class="example" id="org9dfa986">
+<pre class="example" id="org77cdebb">
 [[source]]
 name = "pypi"
 url = "https://pypi.org/simple"
@@ -346,7 +347,7 @@ python_version = "3.7"
 <code>python_version</code> 必须是 3.7，改成其他的会报错（[错误地址 1][]）：
 </p>
 
-<pre class="example" id="org2776e3b">
+<pre class="example" id="org3fc7b48">
 Warning: Python 3.8 was not found on your system...
 Neither 'pyenv' nor 'asdf' could be found to install Python.
 You can specify specific versions of Python with:
@@ -358,7 +359,7 @@ $ pipenv --python path/to/python
 报错（[错误地址 2][]）：
 </p>
 
-<pre class="example" id="orgfe93237">
+<pre class="example" id="orgb564c8f">
 ValueError: invalid literal for int() with base 10: '3.x'
 </pre>
 
@@ -367,7 +368,7 @@ ValueError: invalid literal for int() with base 10: '3.x'
 WSL2-Ubuntu20.04。我已经安装了最新版本的 pip，直接安装 pipenv 即可：
 </p>
 
-<pre class="example" id="org3f911d8">
+<pre class="example" id="orgc570e76">
 pip install pipenv
 </pre>
 
@@ -375,7 +376,7 @@ pip install pipenv
 然后，在本地仓库中新建上述文件 =Pipfile=，执行：
 </p>
 
-<pre class="example" id="org58704d5">
+<pre class="example" id="org41b9dea">
 pipenv install
 </pre>
 
@@ -389,7 +390,7 @@ pipenv install
 另外一个主要文件就是 =main.py=：
 </p>
 
-<pre class="example" id="org76cfb6d">
+<pre class="example" id="org3642194">
 import feedparser
 import time
 import os
@@ -457,7 +458,7 @@ main()
 首先，新建文件 =~\.github\workflows\main.yml=，并添加以下内容：
 </p>
 
-<pre class="example" id="org9b2ffac">
+<pre class="example" id="orgf5ae0e1">
 name: update tianheg profile
 
 on:
@@ -534,7 +535,7 @@ pipenv 分支中。
 文件结构：
 </p>
 
-<pre class="example" id="orgd606103">
+<pre class="example" id="orga028506">
 Dockerfile
 LICENSE
 README.md
@@ -550,7 +551,7 @@ entrypoint.sh
 <code>Dockerfile</code> 内容：
 </p>
 
-<pre class="example" id="orga0ef569">
+<pre class="example" id="org26d107d">
 ARG PYTHON_IMAGE_VERSION=3
 FROM python:$PYTHON_IMAGE_VERSION
 
@@ -567,7 +568,7 @@ ENTRYPOINT ["/entrypoint.sh"]
 <code>entrypoint.sh</code> 内容：
 </p>
 
-<pre class="example" id="orge279b00">
+<pre class="example" id="orgd7500cf">
 #!/bin/sh
 
 sh -c "pipenv $*"
