@@ -1,0 +1,486 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN"
+"http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en">
+<head>
+<!-- 2021-11-22 Mon 17:39 -->
+<meta http-equiv="Content-Type" content="text/html;charset=utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>&lrm;</title>
+<meta name="generator" content="Org mode" />
+<style type="text/css">
+ <!--/*--><![CDATA[/*><!--*/
+  .title  { text-align: center;
+             margin-bottom: .2em; }
+  .subtitle { text-align: center;
+              font-size: medium;
+              font-weight: bold;
+              margin-top:0; }
+  .todo   { font-family: monospace; color: red; }
+  .done   { font-family: monospace; color: green; }
+  .priority { font-family: monospace; color: orange; }
+  .tag    { background-color: #eee; font-family: monospace;
+            padding: 2px; font-size: 80%; font-weight: normal; }
+  .timestamp { color: #bebebe; }
+  .timestamp-kwd { color: #5f9ea0; }
+  .org-right  { margin-left: auto; margin-right: 0px;  text-align: right; }
+  .org-left   { margin-left: 0px;  margin-right: auto; text-align: left; }
+  .org-center { margin-left: auto; margin-right: auto; text-align: center; }
+  .underline { text-decoration: underline; }
+  #postamble p, #preamble p { font-size: 90%; margin: .2em; }
+  p.verse { margin-left: 3%; }
+  pre {
+    border: 1px solid #ccc;
+    box-shadow: 3px 3px 3px #eee;
+    padding: 8pt;
+    font-family: monospace;
+    overflow: auto;
+    margin: 1.2em;
+  }
+  pre.src {
+    position: relative;
+    overflow: auto;
+    padding-top: 1.2em;
+  }
+  pre.src:before {
+    display: none;
+    position: absolute;
+    background-color: white;
+    top: -10px;
+    right: 10px;
+    padding: 3px;
+    border: 1px solid black;
+  }
+  pre.src:hover:before { display: inline; margin-top: 14px;}
+  /* Languages per Org manual */
+  pre.src-asymptote:before { content: 'Asymptote'; }
+  pre.src-awk:before { content: 'Awk'; }
+  pre.src-C:before { content: 'C'; }
+  /* pre.src-C++ doesn't work in CSS */
+  pre.src-clojure:before { content: 'Clojure'; }
+  pre.src-css:before { content: 'CSS'; }
+  pre.src-D:before { content: 'D'; }
+  pre.src-ditaa:before { content: 'ditaa'; }
+  pre.src-dot:before { content: 'Graphviz'; }
+  pre.src-calc:before { content: 'Emacs Calc'; }
+  pre.src-emacs-lisp:before { content: 'Emacs Lisp'; }
+  pre.src-fortran:before { content: 'Fortran'; }
+  pre.src-gnuplot:before { content: 'gnuplot'; }
+  pre.src-haskell:before { content: 'Haskell'; }
+  pre.src-hledger:before { content: 'hledger'; }
+  pre.src-java:before { content: 'Java'; }
+  pre.src-js:before { content: 'Javascript'; }
+  pre.src-latex:before { content: 'LaTeX'; }
+  pre.src-ledger:before { content: 'Ledger'; }
+  pre.src-lisp:before { content: 'Lisp'; }
+  pre.src-lilypond:before { content: 'Lilypond'; }
+  pre.src-lua:before { content: 'Lua'; }
+  pre.src-matlab:before { content: 'MATLAB'; }
+  pre.src-mscgen:before { content: 'Mscgen'; }
+  pre.src-ocaml:before { content: 'Objective Caml'; }
+  pre.src-octave:before { content: 'Octave'; }
+  pre.src-org:before { content: 'Org mode'; }
+  pre.src-oz:before { content: 'OZ'; }
+  pre.src-plantuml:before { content: 'Plantuml'; }
+  pre.src-processing:before { content: 'Processing.js'; }
+  pre.src-python:before { content: 'Python'; }
+  pre.src-R:before { content: 'R'; }
+  pre.src-ruby:before { content: 'Ruby'; }
+  pre.src-sass:before { content: 'Sass'; }
+  pre.src-scheme:before { content: 'Scheme'; }
+  pre.src-screen:before { content: 'Gnu Screen'; }
+  pre.src-sed:before { content: 'Sed'; }
+  pre.src-sh:before { content: 'shell'; }
+  pre.src-sql:before { content: 'SQL'; }
+  pre.src-sqlite:before { content: 'SQLite'; }
+  /* additional languages in org.el's org-babel-load-languages alist */
+  pre.src-forth:before { content: 'Forth'; }
+  pre.src-io:before { content: 'IO'; }
+  pre.src-J:before { content: 'J'; }
+  pre.src-makefile:before { content: 'Makefile'; }
+  pre.src-maxima:before { content: 'Maxima'; }
+  pre.src-perl:before { content: 'Perl'; }
+  pre.src-picolisp:before { content: 'Pico Lisp'; }
+  pre.src-scala:before { content: 'Scala'; }
+  pre.src-shell:before { content: 'Shell Script'; }
+  pre.src-ebnf2ps:before { content: 'ebfn2ps'; }
+  /* additional language identifiers per "defun org-babel-execute"
+       in ob-*.el */
+  pre.src-cpp:before  { content: 'C++'; }
+  pre.src-abc:before  { content: 'ABC'; }
+  pre.src-coq:before  { content: 'Coq'; }
+  pre.src-groovy:before  { content: 'Groovy'; }
+  /* additional language identifiers from org-babel-shell-names in
+     ob-shell.el: ob-shell is the only babel language using a lambda to put
+     the execution function name together. */
+  pre.src-bash:before  { content: 'bash'; }
+  pre.src-csh:before  { content: 'csh'; }
+  pre.src-ash:before  { content: 'ash'; }
+  pre.src-dash:before  { content: 'dash'; }
+  pre.src-ksh:before  { content: 'ksh'; }
+  pre.src-mksh:before  { content: 'mksh'; }
+  pre.src-posh:before  { content: 'posh'; }
+  /* Additional Emacs modes also supported by the LaTeX listings package */
+  pre.src-ada:before { content: 'Ada'; }
+  pre.src-asm:before { content: 'Assembler'; }
+  pre.src-caml:before { content: 'Caml'; }
+  pre.src-delphi:before { content: 'Delphi'; }
+  pre.src-html:before { content: 'HTML'; }
+  pre.src-idl:before { content: 'IDL'; }
+  pre.src-mercury:before { content: 'Mercury'; }
+  pre.src-metapost:before { content: 'MetaPost'; }
+  pre.src-modula-2:before { content: 'Modula-2'; }
+  pre.src-pascal:before { content: 'Pascal'; }
+  pre.src-ps:before { content: 'PostScript'; }
+  pre.src-prolog:before { content: 'Prolog'; }
+  pre.src-simula:before { content: 'Simula'; }
+  pre.src-tcl:before { content: 'tcl'; }
+  pre.src-tex:before { content: 'TeX'; }
+  pre.src-plain-tex:before { content: 'Plain TeX'; }
+  pre.src-verilog:before { content: 'Verilog'; }
+  pre.src-vhdl:before { content: 'VHDL'; }
+  pre.src-xml:before { content: 'XML'; }
+  pre.src-nxml:before { content: 'XML'; }
+  /* add a generic configuration mode; LaTeX export needs an additional
+     (add-to-list 'org-latex-listings-langs '(conf " ")) in .emacs */
+  pre.src-conf:before { content: 'Configuration File'; }
+
+  table { border-collapse:collapse; }
+  caption.t-above { caption-side: top; }
+  caption.t-bottom { caption-side: bottom; }
+  td, th { vertical-align:top;  }
+  th.org-right  { text-align: center;  }
+  th.org-left   { text-align: center;   }
+  th.org-center { text-align: center; }
+  td.org-right  { text-align: right;  }
+  td.org-left   { text-align: left;   }
+  td.org-center { text-align: center; }
+  dt { font-weight: bold; }
+  .footpara { display: inline; }
+  .footdef  { margin-bottom: 1em; }
+  .figure { padding: 1em; }
+  .figure p { text-align: center; }
+  .equation-container {
+    display: table;
+    text-align: center;
+    width: 100%;
+  }
+  .equation {
+    vertical-align: middle;
+  }
+  .equation-label {
+    display: table-cell;
+    text-align: right;
+    vertical-align: middle;
+  }
+  .inlinetask {
+    padding: 10px;
+    border: 2px solid gray;
+    margin: 10px;
+    background: #ffffcc;
+  }
+  #org-div-home-and-up
+   { text-align: right; font-size: 70%; white-space: nowrap; }
+  textarea { overflow-x: auto; }
+  .linenr { font-size: smaller }
+  .code-highlighted { background-color: #ffff00; }
+  .org-info-js_info-navigation { border-style: none; }
+  #org-info-js_console-label
+    { font-size: 10px; font-weight: bold; white-space: nowrap; }
+  .org-info-js_search-highlight
+    { background-color: #ffff00; color: #000000; font-weight: bold; }
+  .org-svg { width: 90%; }
+  /*]]>*/-->
+</style>
+<script type="text/javascript">
+// @license magnet:?xt=urn:btih:e95b018ef3580986a04669f1b5879592219e2a7a&dn=public-domain.txt Public Domain
+<!--/*--><![CDATA[/*><!--*/
+     function CodeHighlightOn(elem, id)
+     {
+       var target = document.getElementById(id);
+       if(null != target) {
+         elem.classList.add("code-highlighted");
+         target.classList.add("code-highlighted");
+       }
+     }
+     function CodeHighlightOff(elem, id)
+     {
+       var target = document.getElementById(id);
+       if(null != target) {
+         elem.classList.remove("code-highlighted");
+         target.classList.remove("code-highlighted");
+       }
+     }
+    /*]]>*///-->
+// @license-end
+</script>
+</head>
+<body>
+<div id="content">
+<div id="table-of-contents">
+<h2>Table of Contents</h2>
+<div id="text-table-of-contents">
+<ul>
+<li><a href="#前言">1. 前言</a></li>
+<li><a href="#为什么要写">2. 为什么要写</a></li>
+<li><a href="#为什么要这样写">3. 为什么要这样写</a></li>
+<li><a href="#怎样写">4. 怎样写</a></li>
+<li><a href="#写短评的好处">5. 写短评的好处</a></li>
+<li><a href="#后记">6. 后记</a></li>
+</ul>
+</div>
+</div>
+<p>
+<del>+</del> date = '2021-04-15T08:28:44+08:00' slug =
+'why-do-i-write-film-reviews' tags = ['阅读', '电影'] title =
+'我为何要写电影短评' <del>+</del>
+</p>
+
+<div id="outline-container-前言" class="outline-2">
+<h2 id="前言"><span class="section-number-2">1</span> 前言</h2>
+<div class="outline-text-2" id="text-前言">
+<p>
+看电影这几年，每当看完一部电影，便习惯用140字的电影短评来做记录。这种记录的习惯仿佛已经嵌入到生活里，观看，标记，码字，通过短评实现与一部电影的“告别”。
+</p>
+
+<p>
+时常有朋友来热情讨论，你写短评有什么技巧么，我可以看什么书来提高写作？同时也必然会有质疑的声音，你每次都对仗不累么？把字都写满是强迫症么？
+</p>
+
+<p>
+首先，我承认写短评算不上什么技能，也不能算成就。短评的价值，于我自己会更加有分量。它虽然是公共展示出来的，相比于给别人看，它更多的是一种对自己的检视和自省。每条短评，它是记录了我看电影时候的喜怒，感触，战栗和觉醒的一个过程。
+</p>
+
+<p>
+于是我才承诺自己，要认真对待它，并坚持做下去。毕竟归根结底，这是写给自己看的东西，有些文字是自己才能体会到的奥义。假如，还能有其他人也同样喜欢，那真是再好不过的幸事。
+</p>
+
+<p>
+其实一直有些话想说，但之前总觉得资历不够，论技巧又谈不上，回应质疑的声音于事无补，但又不吐不快。希望通过此文，回顾一下爱电影，写短评的初心。以及不管别人如何质疑，还是要坚持写下去啊。
+</p>
+</div>
+</div>
+
+<div id="outline-container-为什么要写" class="outline-2">
+<h2 id="为什么要写"><span class="section-number-2">2</span> 为什么要写</h2>
+<div class="outline-text-2" id="text-为什么要写">
+<p>
+很早就意识到，一部电影看完了，仿佛就像与一个朋友告别。看得电影越多，越会懊恼自己记忆力太差。试想，如何记住上千部电影的所有细节？而一部电影在观看之后，如何体现它的价值，我与电影共处的这段时光要如何纪念？
+</p>
+
+<p>
+于是，我想到了写短评-&#x2013;&#x2014;我可以用短评来记录电影里让我触动的、难以忘怀的、希望提醒自己的情节和细节。经年以后，这就是自己送给自己的一笔财富，一份礼物。毕竟不可能把每部遗忘的电影重看一遍，但是借助当年自己亲笔写下的文字，总会敲醒许多记忆里沉睡的记忆。
+</p>
+
+<p>
+后来发现，写短评又相当于对这部电影的一种敬意。我尊重每一部我完整看过的电影，尊重创造这些影像背后的所有工作人员，是他们创造了我一个近两小时的幻境，打开了我的视野，延长了我的生命。而我，用这短短的140字，完成了一次专属于自己的小小仪式。无论佳作还是烂片，都一视同仁，为的是对得起自己看电影的这段时光。
+</p>
+
+<p>
+最开始豆瓣的短评输入栏只能输入140个字符，身为重度强迫症的我，逐渐发现把字数都凑满会更舒服一些（所以早期有大量凑字数的短评）。
+</p>
+</div>
+</div>
+
+<div id="outline-container-为什么要这样写" class="outline-2">
+<h2 id="为什么要这样写"><span class="section-number-2">3</span> 为什么要这样写</h2>
+<div class="outline-text-2" id="text-为什么要这样写">
+<p>
+刚开始写短评的时候，会假模假式分析电影的摄影，表演，台词等，后来明白自己能力有限，做不到面面俱到，也根本写不出所以然来。逐步开始从电影文本去挖掘一部电影。风格的形成，主要仰赖于早期的几条短评。
+</p>
+
+<p>
+我一直觉得，作家是用文字进行表达，导演是用影像进行表达，甚至男团女团的表演也是在用歌舞进行表达。人们都有表达的欲望，而准确地传递出自己的表达是珍贵的。写短评同样是一种表达，表达了关于电影自己的体悟也好，感触也罢，借助文字表达出来，才是短评的价值所在。
+</p>
+</div>
+</div>
+
+<div id="outline-container-怎样写" class="outline-2">
+<h2 id="怎样写"><span class="section-number-2">4</span> 怎样写</h2>
+<div class="outline-text-2" id="text-怎样写">
+<p>
+接下来的内容主要只针对那些对这类风格短评感兴趣的朋友了（其他人可以略过），比如会有朋友问，如何记住电影里的许多细节，又如何能通过文字来准确传达出这些感受。
+</p>
+
+<p>
+我觉得做任何事情都没有捷径可走，观看一部电影的时候，我会尽量全神贯注，不快进，不会边看边玩手机，不会在困顿的时候看电影。同时尽量选择最高清的画质，最好的设备。因为只有当拥有一个很好的状态，全神贯注的意志，才能不错过导演精心安排的每一个细节，才不会在提笔的时候无话可说。
+</p>
+
+<p>
+参加电影节的时候，我基本上都是每天要看6部电影，大量观影的同时还要保证记住每部电影的情节甚至情绪，我的习惯是看完电影后，在手机的备忘录里快速打出电影里的重要信息点。可能是某种物品，某个地名，某个情节，或者是一句触动自己的台词。以便日后补短评的时候可以快速回忆起来，这样不断积累了上万字的备忘录信息。
+</p>
+
+<p>
+平时的创作中，如果非要说捷径，我觉得最好的一个习惯就是摘抄。这个不单单是对写短评有利，对任何写作都是很棒的秘方。平时看到好的文字就随手摘抄下来，没事经常翻翻，就会融汇到自己的文字中了。
+</p>
+
+<blockquote>
+<p>
+《南山的部长们》：朴部长押错命运的筹码，被挚友绞为齑粉；金部长听错权力的擂鼓，被君王划出裂缝。那日过得了汉江桥，今时走不出宫井洞。曾是举事的狼豕，今是火烹的狗兔。昔日权倾朝野的将士，而今弄权挟势的走卒。历史吹了一阵风，有人丢了帽子，有人掉了皮鞋，有人醉于汽酒，有人滑入血泊。为何要过桥，早没人记得。
+</p>
+</blockquote>
+
+<p>
+像这条短评，就是化用了兔死狗烹、狼奔豕突这样的成语，平时就需要积累和摘抄。
+</p>
+
+<blockquote>
+<p>
+《诛仙1》：世人皆知他将会是危害苍生的嗜血魔王，偏有人背叛魔道，偏有剑刃偏一寸，偏有情不知所起。你看这朝堂有为官的朽木，殿陛有食禄的禽兽，正派名门藏着屠村的杀手，旁门左道养着控线的走肉，哪个在造福苍生，是谁在害怕法器。在这鲜君子也鲜小人的世道，不是嗜血珠在呼唤主人，而是仙侠世界在呼唤张小凡。
+</p>
+</blockquote>
+
+<p>
+这条是化用了龚自珍的《乙丙之际箸议第九》。原文如下：
+左无才相，右无才史，阃无才将，庠序无才士，陇无才民，廛无才工，衢无才商，抑巷无才偷，市无才驵，薮泽无才盗；则非但鲜君子也，抑小人甚鲜。
+意思是，朝廷之中没有有才能的宰相，也没有有才能的史官，便将没有有才能的将军，学校没有有才能的读书人，田间没有有才能的农民，城市里没有有才能的工人，大街上没有有才能的商人，甚至连箱子里都没有有才能的小偷，草泽中也没有有才能的强盗。不光君子少，连小人也很少。虽然电影不怎么样，但是从电影里还是可以解读出新的东西来，借助平时的积累来充实短评。
+</p>
+
+<p>
+虽然我经常写对仗的句子，但其实我深知这是一种偷懒的行径，类似脱口秀里的“谐音梗”。不是不能用，但是用多了会怠惰于对文字的敏感性。对仗排比的句式会让句子读起来更有气势，但也时常会陷入硬凑字数的嫌疑。这也是在不断自我斗争、反省的一个过程。但无论是否对仗，形式只是一个方面，我觉得最重要的是找到电影里各种意象、角色之间的内在逻辑和联系，再用文字加以整合，使其自洽。所以我的很多短评都是用了这样的方式达到内容的互通-&#x2013;&#x2014;
+</p>
+
+<blockquote>
+<p>
+《痛苦与荣耀》：仿佛是童年时的一场中暑让我病到了现在，如今我周身病痛，想念旧日天井的阳光。喜欢住在母体一样的洞穴里，却留她一人在重症病房终老。曾经以为爱情可以撼动山林，原来它连你的爱人都无法拯救。后来你戒了毒瘾，我却成了赌徒。赌你会出现在此刻窗外的门口，像一幅五十年前的画作流转回来，却不属于我。
+</p>
+
+<p>
+《夏目友人帐》：人类走路只需20分钟，妖怪穿墙却要三个月；与亲人相伴已有八年，被世界忘记只需一瞬。内向的妖怪总是迟钝，无情的人类往往健忘。没有天眼的普通人看不见相遇瀑布，习得神力的除妖师解不开分别咒语。没有了神却仍能祈祷，没有了爱就只能流浪，离开就被忘记是最残酷的奖赏，化身逝者陪伴是最温柔的神罚。
+</p>
+
+<p>
+《妈阁是座城》：我带你入赌场，你带我过情关，赌场有庄有闲，情场有赔有赚。赌徒叠积木越垒越高，在牌桌上粉身碎骨。女人赊感情越贷越多，在人生里满盘皆输。看得清谁是未来客户，看不清谁能托付一生。不知道爱他什么，还卑贱像海鸥往爱上扑。那些男人晒过煎饼，捏过泥塑，在赌场上宛若英雄，只有我在情场里像个赌徒。
+</p>
+
+<p>
+《地球最后的夜晚》：讲故事旅馆就能长住，有音乐歌厅就会开业，念咒语房子就会旋转，所有记忆里的地方都有魔力。吃了蜂蜜就会幸福，吃了柚子就会快乐，吃了苹果就会伤心，所有牵挂过的食物都有情感。我穿越时空，教孩子打球，与母亲送别，和情人看水晶吊灯。故事不会讲完，歌厅不会拆除，房子不会烧焦，在短暂里走向永远。
+</p>
+
+<p>
+《血观音》：棠宁上了逃难的货船，注定靠不了岸。吸了权欲的烟，休想借药片安眠；棠真上了求爱的列车，注定到不了站。捡了绝情的果，别想靠红绳还愿；月影上了独返的飞机，注定落不了地，断了观音的手，甭想凭佛咒往生。三具假面，是权欲的人头、绝情的鱼头、观音的水头。长命百岁万年富贵，是我送你最恶毒的祝愿。
+</p>
+</blockquote>
+
+<p>
+除了找到内在逻辑，还可以提炼一个关键信息点，围绕信息来加以深化-&#x2013;&#x2014;
+</p>
+
+<blockquote>
+<p>
+《山河故人》：梁子说他的告别在迪厅已经说过了，父亲无言甚至连告别都没有，所以涛执意陪着儿子颠簸半个山河，只为告别时别那么匆忙。终究在儿子的记忆里她成了故人，隔空呼唤恍如前世。父子的沟通不畅如同时光的讽刺，绵长的岁月跨度总是让人不胜唏嘘。次第登场的人物在交错光影里道声珍重，牵挂是爱最痛苦的部分。
+</p>
+</blockquote>
+
+<p>
+在《山河故人》里提炼出了“告别”这个信息点，每个人物对于告别都有不同的处理方式和手段。一部电影内容繁杂，似乎我只需要从一个切面去挖掘，总结就足够了。这样短评是有一个核心思想在的，同时又能和电影主题呼应。
+</p>
+
+<blockquote>
+<p>
+《七月与安生》：曾经分不清，谁砸了消防铃、谁喝了雪梨汤，年少让我们不分彼此；后来分太清，谁挂了玉观音、谁写了问候信，爱情让我们分崩离析；终于你和我再无分别，谁生的小姑娘古灵精怪，谁写的故事叫人唏嘘，双生花开在二七，我们对镜映照出了彼此。爱情能否谦让能否分享，爱一个人能否胜过自己，我们还是分不清。
+</p>
+</blockquote>
+
+<p>
+这条短评通篇几乎都是电影里的情节点，"消防铃"、"雪梨汤"、"玉观音"、"问候信"都是电影里触动我的情节点，用这些情节点贯穿起文字，日后再读的时候就会很快想起电影里的一些名场面。
+</p>
+
+<blockquote>
+<p>
+《暴裂无声》：老板儿子吃真空羊肉，贪婪绞入碎肉机；屠夫儿子喝污染井水，正义只在电视屏。戳瞎左眼，被戳伤的同乡都能包庇；咬断舌头，被救助的律师却不敢发声。凭蛮力垒不成金字塔，靠假声变不成兔子妈。超人面具如同良心咒，送不回原主；寻子告示像是招魂符，在风里飘摇。真相埋进泥土，藏入山洞，终于再无人知。
+</p>
+</blockquote>
+
+<p>
+比如我在电影里发现，影片里被戳伤的同乡尚能包庇主角，但那被救助的律师却唯唯诺诺。于是借助文字来表达出来。导演用影像已经建构了一个讽刺的众生相，我希望能从自己的文字里传达出来这些人物关联。
+</p>
+</div>
+</div>
+
+<div id="outline-container-写短评的好处" class="outline-2">
+<h2 id="写短评的好处"><span class="section-number-2">5</span> 写短评的好处</h2>
+<div class="outline-text-2" id="text-写短评的好处">
+<p>
+我大概写了2000多部电影的短评，每条140字，也是将近30万字的内容。这些文字是对自己的一笔宝贵财富，它倒逼着你要认真对待每一部电影，每一帧画面，而不是仅仅当成消遣。当然，把电影当成消遣没有错，只是当你发现可以认真对待它的时候，它也一定会给你回馈。
+</p>
+
+<p>
+写短评的时候常常抓耳挠腮，创作一条短评可能短则一两个小时，长的甚至要半天到一天。这个过程是寻找灵感，复盘整个电影的过程。在这个过程里，我会需要查阅大量的资料。比如最近看《群山》，就查阅到了《莫尼兹：仁医还是恐怖屠夫？》这样的文章，了解了美国曾经如何对待精神病患的历史。看《黑水》就随手了解了特氟龙的来龙去脉。看《南山的部长们》又花了一晚上快速了解了一遍韩国历任总统的历史。
+</p>
+
+<p>
+因为认真对待短评，也会认真对待电影，于是通过电影这个窗口，又主动去了解了很多新的知识，历史地理人文艺术，电影题材包罗万象，它又帮助你去多了解了一下这个世界。
+</p>
+
+<p>
+而在写短评的过程中，由于不断思考，不断抽离和进入，会对人物情节，关系有更深的感悟和新的灵感。
+</p>
+
+<blockquote>
+<p>
+《南瓜与蛋黄酱》：藏进罐子里的纸币，折叠了我的羞耻；摆放墙角的书柜，组装了他的坚强。弄丢了羞耻心的我，看他落寞地弹吉他故作坚强。嗅他遗留的套头衫，整个房间都是伤心的气味；看那拖走的摩托车，整个街道都是空虚的划痕。后来懂得，气味不能果腹、划痕不会致命。年少的爱慕渐行渐远，只留下骗你说不是写给你的歌。
+</p>
+</blockquote>
+
+<p>
+最后的一句话呼应的是电影里太贺的那个角色给前女友写了首歌，歌曲深情款款，却告诉她这歌并不是给你写的。当时看的时候我觉得很莫名，却又说不出哪里不对。在短评的书写过程中，我越发体会到了他们两人之间那种暧昧和隐秘的情愫。所以写到最后我忽然释然了，男生或许只是骗女友说，这不是写给你的歌。这首歌作为他们感情的见证，又让我对电影里的情感有了新一层的理解。
+</p>
+
+<p>
+其实每部让我感触很深的电影，总是让我觉得可以下笔千言，好电影的短评也是很好写的。很多优秀的导演都在电影里埋了超级多的意象，比如《小偷家族》里的烟花，《寄生虫》里的石头，还有一些是很戳我的画面，比如《寻梦环游记》里奶奶的麻花辫，《夜以继日》里满手泡沫的拥抱。我都会把这些捕捉到的东西写到短评里，日后读起来都是珍贵的，启封记忆的引子。
+</p>
+
+<blockquote>
+<p>
+《小偷家族》：最费力的成长留在树上的只有壳，最狰狞的伤口留在皮肤的只有疤。最动人的烟火绽在空中看不到，最深沉的感谢飘进风中听不清。你教我食物最美味的吃法，却教我获得食物最羞耻的手法；我学会祈祷最灵验的手势，也学会用来祈祷最不齿的心愿。我在商店里偷换掉童年，你在泥土里掩埋了伤疤，而我们组成了家。
+</p>
+
+<p>
+《寄生虫》：沐浴庭院里的阳光就能进化成人，呼吸暗室里的空气只会走肉如鬼。抱上贫穷的石头终生无法脱手，染上廉价的气味永世不能消除。蜷缩地下的臭虫，用药剂开窗替自己杀菌；位居高处的宿主，用金钱雇人给自己消毒。富人吸着穷人的血高升，穷人寄在富人的屋苟活，人鬼同处一室分享食物，虫兽寄生一体发育恩仇。
+</p>
+
+<p>
+《寻梦环游记》：供奉的遗像是牵引家人回家的通道，驻留的记忆是保持亡灵存续的神力，热闹的音乐是唤醒思念启封的药引。我为你写了首歌，穿越浩瀚的岁月烟尘，捱过冰冷的孤独冬季，横跨漫长的天人之路，在你老去的时候，唱给你听。这瑰丽的灯火万家，摇曳的烛光千盏，不如你梳着麻花辫坐在床头时，眼里闪烁的星光璀璨。
+</p>
+
+<p>
+《夜以继日》：河水上涨，你是第一个遭殃的房子。地震来袭，我是第一盏摔碎的吊灯。爱一个人，出了车祸还能接吻，盖上被单就能相拥，坐新干线和他吃一碗面，伸出手就敢陪他浪迹天涯。爱也只需要下了高速时，被叮嘱继续安心睡去。跟同类相爱，与异类厮守，跟感激结婚，与最爱错过。知道灾难来临，仍满手泡沫抱你如初。
+</p>
+</blockquote>
+
+<p>
+如果能用文字记录下自己印象最深刻的瞬间，才会觉得写的不算废话。比如《迦百农》（《何以为家》）里让我印象最深的是男孩看到人贩子把婴儿抱走的时刻，他站在那个吵闹街角，身体小小的，世界却那么大，每每想起都无比心酸，用文字记录下来这个瞬间，也希望能永远凝固在我的记忆里。
+</p>
+
+<blockquote>
+<p>
+《迦百农》：见过游乐园女神被扒光，洗过沾了鲜血的衣服，听过蜘蛛侠变成蟑螂侠的传闻。才知道美丽会变丑陋，纯净会变脏臭，英雄泯然众人，自己却无能为力。把童贞交给世界，用匕首刺穿丑陋，靠起诉状告父母，挤笑脸嘲弄命运。赞恩把婴儿交给男人，才明白自己谁都保护不了。他就站在破败的街角，仿佛人生走到尽头。
+</p>
+</blockquote>
+</div>
+</div>
+
+<div id="outline-container-后记" class="outline-2">
+<h2 id="后记"><span class="section-number-2">6</span> 后记</h2>
+<div class="outline-text-2" id="text-后记">
+<p>
+还是那句话，写短评算不上什么才华，更算不上什么成就。甚至还时常会遇到讥笑-&#x2013;&#x2014;何必如此认真。短评或许算不上影评，或者也没什么价值，但我仍愿意认真对待它。因为归根结底，这是一场自己与电影相联结的修行。我们观看电影，我们也用自己的方式记录着电影。我尊重每一位电影创作者，也尊重每一位从不同角度解读电影的人。哪怕有些人只写了一句话，也会精确点到精髓，给人以启发。
+</p>
+
+<p>
+同时自己也热切地希望看到很多好的短评，能有自己的风格和特色，用自己的形式从不同角度解读电影。感觉完全不必要模仿，写出自己的风格和特色，重要的是以我手写我心，言之有物，不无病呻吟（也是我始终在努力的目标）。
+</p>
+
+<p>
+拿出了自己的短评来说事，很有点王婆卖瓜的嫌疑。认真写短评大概有五年时间，这五年逐渐开始会有朋友会说很喜欢你的短评，心里自然特别开心。也会有一些冷嘲热讽，说你好假好装，说怎么才能拉黑不看你写的东西。
+</p>
+
+<p>
+其实，短评终究是一次自己与自己的对话，省视我对世界了解多少，我对电影是否依然热爱。当然，有的人一个字不写并不妨碍他们热爱电影。我想说的是，写短评终归是给自己写的，它对我自己的意义一定会比其他人要大。别人很喜欢那与有荣焉，别人不喜欢那也只能说抱歉，希望互相谅解吧。毕竟我们需要一个载体去纪念一段时光，一段自己与电影相处的幸福时光。
+</p>
+</div>
+</div>
+</div>
+</body>
+</html>

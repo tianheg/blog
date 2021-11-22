@@ -1,0 +1,336 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN"
+"http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en">
+<head>
+<!-- 2021-11-22 Mon 17:40 -->
+<meta http-equiv="Content-Type" content="text/html;charset=utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>&lrm;</title>
+<meta name="generator" content="Org mode" />
+<style type="text/css">
+ <!--/*--><![CDATA[/*><!--*/
+  .title  { text-align: center;
+             margin-bottom: .2em; }
+  .subtitle { text-align: center;
+              font-size: medium;
+              font-weight: bold;
+              margin-top:0; }
+  .todo   { font-family: monospace; color: red; }
+  .done   { font-family: monospace; color: green; }
+  .priority { font-family: monospace; color: orange; }
+  .tag    { background-color: #eee; font-family: monospace;
+            padding: 2px; font-size: 80%; font-weight: normal; }
+  .timestamp { color: #bebebe; }
+  .timestamp-kwd { color: #5f9ea0; }
+  .org-right  { margin-left: auto; margin-right: 0px;  text-align: right; }
+  .org-left   { margin-left: 0px;  margin-right: auto; text-align: left; }
+  .org-center { margin-left: auto; margin-right: auto; text-align: center; }
+  .underline { text-decoration: underline; }
+  #postamble p, #preamble p { font-size: 90%; margin: .2em; }
+  p.verse { margin-left: 3%; }
+  pre {
+    border: 1px solid #ccc;
+    box-shadow: 3px 3px 3px #eee;
+    padding: 8pt;
+    font-family: monospace;
+    overflow: auto;
+    margin: 1.2em;
+  }
+  pre.src {
+    position: relative;
+    overflow: auto;
+    padding-top: 1.2em;
+  }
+  pre.src:before {
+    display: none;
+    position: absolute;
+    background-color: white;
+    top: -10px;
+    right: 10px;
+    padding: 3px;
+    border: 1px solid black;
+  }
+  pre.src:hover:before { display: inline; margin-top: 14px;}
+  /* Languages per Org manual */
+  pre.src-asymptote:before { content: 'Asymptote'; }
+  pre.src-awk:before { content: 'Awk'; }
+  pre.src-C:before { content: 'C'; }
+  /* pre.src-C++ doesn't work in CSS */
+  pre.src-clojure:before { content: 'Clojure'; }
+  pre.src-css:before { content: 'CSS'; }
+  pre.src-D:before { content: 'D'; }
+  pre.src-ditaa:before { content: 'ditaa'; }
+  pre.src-dot:before { content: 'Graphviz'; }
+  pre.src-calc:before { content: 'Emacs Calc'; }
+  pre.src-emacs-lisp:before { content: 'Emacs Lisp'; }
+  pre.src-fortran:before { content: 'Fortran'; }
+  pre.src-gnuplot:before { content: 'gnuplot'; }
+  pre.src-haskell:before { content: 'Haskell'; }
+  pre.src-hledger:before { content: 'hledger'; }
+  pre.src-java:before { content: 'Java'; }
+  pre.src-js:before { content: 'Javascript'; }
+  pre.src-latex:before { content: 'LaTeX'; }
+  pre.src-ledger:before { content: 'Ledger'; }
+  pre.src-lisp:before { content: 'Lisp'; }
+  pre.src-lilypond:before { content: 'Lilypond'; }
+  pre.src-lua:before { content: 'Lua'; }
+  pre.src-matlab:before { content: 'MATLAB'; }
+  pre.src-mscgen:before { content: 'Mscgen'; }
+  pre.src-ocaml:before { content: 'Objective Caml'; }
+  pre.src-octave:before { content: 'Octave'; }
+  pre.src-org:before { content: 'Org mode'; }
+  pre.src-oz:before { content: 'OZ'; }
+  pre.src-plantuml:before { content: 'Plantuml'; }
+  pre.src-processing:before { content: 'Processing.js'; }
+  pre.src-python:before { content: 'Python'; }
+  pre.src-R:before { content: 'R'; }
+  pre.src-ruby:before { content: 'Ruby'; }
+  pre.src-sass:before { content: 'Sass'; }
+  pre.src-scheme:before { content: 'Scheme'; }
+  pre.src-screen:before { content: 'Gnu Screen'; }
+  pre.src-sed:before { content: 'Sed'; }
+  pre.src-sh:before { content: 'shell'; }
+  pre.src-sql:before { content: 'SQL'; }
+  pre.src-sqlite:before { content: 'SQLite'; }
+  /* additional languages in org.el's org-babel-load-languages alist */
+  pre.src-forth:before { content: 'Forth'; }
+  pre.src-io:before { content: 'IO'; }
+  pre.src-J:before { content: 'J'; }
+  pre.src-makefile:before { content: 'Makefile'; }
+  pre.src-maxima:before { content: 'Maxima'; }
+  pre.src-perl:before { content: 'Perl'; }
+  pre.src-picolisp:before { content: 'Pico Lisp'; }
+  pre.src-scala:before { content: 'Scala'; }
+  pre.src-shell:before { content: 'Shell Script'; }
+  pre.src-ebnf2ps:before { content: 'ebfn2ps'; }
+  /* additional language identifiers per "defun org-babel-execute"
+       in ob-*.el */
+  pre.src-cpp:before  { content: 'C++'; }
+  pre.src-abc:before  { content: 'ABC'; }
+  pre.src-coq:before  { content: 'Coq'; }
+  pre.src-groovy:before  { content: 'Groovy'; }
+  /* additional language identifiers from org-babel-shell-names in
+     ob-shell.el: ob-shell is the only babel language using a lambda to put
+     the execution function name together. */
+  pre.src-bash:before  { content: 'bash'; }
+  pre.src-csh:before  { content: 'csh'; }
+  pre.src-ash:before  { content: 'ash'; }
+  pre.src-dash:before  { content: 'dash'; }
+  pre.src-ksh:before  { content: 'ksh'; }
+  pre.src-mksh:before  { content: 'mksh'; }
+  pre.src-posh:before  { content: 'posh'; }
+  /* Additional Emacs modes also supported by the LaTeX listings package */
+  pre.src-ada:before { content: 'Ada'; }
+  pre.src-asm:before { content: 'Assembler'; }
+  pre.src-caml:before { content: 'Caml'; }
+  pre.src-delphi:before { content: 'Delphi'; }
+  pre.src-html:before { content: 'HTML'; }
+  pre.src-idl:before { content: 'IDL'; }
+  pre.src-mercury:before { content: 'Mercury'; }
+  pre.src-metapost:before { content: 'MetaPost'; }
+  pre.src-modula-2:before { content: 'Modula-2'; }
+  pre.src-pascal:before { content: 'Pascal'; }
+  pre.src-ps:before { content: 'PostScript'; }
+  pre.src-prolog:before { content: 'Prolog'; }
+  pre.src-simula:before { content: 'Simula'; }
+  pre.src-tcl:before { content: 'tcl'; }
+  pre.src-tex:before { content: 'TeX'; }
+  pre.src-plain-tex:before { content: 'Plain TeX'; }
+  pre.src-verilog:before { content: 'Verilog'; }
+  pre.src-vhdl:before { content: 'VHDL'; }
+  pre.src-xml:before { content: 'XML'; }
+  pre.src-nxml:before { content: 'XML'; }
+  /* add a generic configuration mode; LaTeX export needs an additional
+     (add-to-list 'org-latex-listings-langs '(conf " ")) in .emacs */
+  pre.src-conf:before { content: 'Configuration File'; }
+
+  table { border-collapse:collapse; }
+  caption.t-above { caption-side: top; }
+  caption.t-bottom { caption-side: bottom; }
+  td, th { vertical-align:top;  }
+  th.org-right  { text-align: center;  }
+  th.org-left   { text-align: center;   }
+  th.org-center { text-align: center; }
+  td.org-right  { text-align: right;  }
+  td.org-left   { text-align: left;   }
+  td.org-center { text-align: center; }
+  dt { font-weight: bold; }
+  .footpara { display: inline; }
+  .footdef  { margin-bottom: 1em; }
+  .figure { padding: 1em; }
+  .figure p { text-align: center; }
+  .equation-container {
+    display: table;
+    text-align: center;
+    width: 100%;
+  }
+  .equation {
+    vertical-align: middle;
+  }
+  .equation-label {
+    display: table-cell;
+    text-align: right;
+    vertical-align: middle;
+  }
+  .inlinetask {
+    padding: 10px;
+    border: 2px solid gray;
+    margin: 10px;
+    background: #ffffcc;
+  }
+  #org-div-home-and-up
+   { text-align: right; font-size: 70%; white-space: nowrap; }
+  textarea { overflow-x: auto; }
+  .linenr { font-size: smaller }
+  .code-highlighted { background-color: #ffff00; }
+  .org-info-js_info-navigation { border-style: none; }
+  #org-info-js_console-label
+    { font-size: 10px; font-weight: bold; white-space: nowrap; }
+  .org-info-js_search-highlight
+    { background-color: #ffff00; color: #000000; font-weight: bold; }
+  .org-svg { width: 90%; }
+  /*]]>*/-->
+</style>
+<script type="text/javascript">
+// @license magnet:?xt=urn:btih:e95b018ef3580986a04669f1b5879592219e2a7a&dn=public-domain.txt Public Domain
+<!--/*--><![CDATA[/*><!--*/
+     function CodeHighlightOn(elem, id)
+     {
+       var target = document.getElementById(id);
+       if(null != target) {
+         elem.classList.add("code-highlighted");
+         target.classList.add("code-highlighted");
+       }
+     }
+     function CodeHighlightOff(elem, id)
+     {
+       var target = document.getElementById(id);
+       if(null != target) {
+         elem.classList.remove("code-highlighted");
+         target.classList.remove("code-highlighted");
+       }
+     }
+    /*]]>*///-->
+// @license-end
+</script>
+</head>
+<body>
+<div id="content">
+<p>
+<del>+</del> date = '2021-05-22T10:44:44+08:00' slug = 'meditation-210522' tags =
+['沉思录'] title = '沉思录210522' <del>+</del>
+</p>
+
+<p>
+每日自问：
+</p>
+
+<ol class="org-ol">
+<li>你想成为怎样的人？</li>
+</ol>
+
+<p>
+查找了一些资料，写了一个新建文章的 bash 脚本：
+</p>
+
+<pre class="example" id="orgedacc64">
+#!/bin/bash
+
+echo -n 'Enter the Article Name: '
+read -r a
+touch 2021/"$(date +"%F")-$a.md" &amp;&amp; code $_
+</pre>
+
+<p>
+以后可以直接运行 <code>./new.sh</code> 新建文章，还能少输入几个字母就用
+<code>alias new</code>"./new.sh" # only run under ~/github/tianheg/articles= 放在
+<code>~/.zshrc</code> 里。
+</p>
+
+<hr />
+
+<p>
+昨天我又读了一遍
+<a href="https://blog.yidajiabei.xyz/posts/if-a-girl-say-i-like-you-today/">如果今天我被表白</a>（写得主观；还应有一种可能：花不是给我的，但室友说，这些都不重要，重要的是我自己的感受，我当时的感觉），我认为自己写很好：把自己的感受和思考都记录下来了，自己的一些问题也浮现了出来-&#x2013;&#x2014;自卑心理是时刻存在的，从未消失，它提醒着我，我只是一个普通人，努力地生活、感悟生活。羡慕别人有时候很危险，不知道什么时候羡慕就变成了嫉妒，嫉妒变成愤怒，对自己的愤怒，恨自己不能和别人一样。但是，我不可能和别人一样。这种情绪的激荡持续地在我的内心。
+</p>
+
+<p>
+终于，我决定不再在意他人的目光，执着地走自己的路，就这样，继续生活。
+</p>
+
+<hr />
+
+<p>
+只有在面对 deadline 的压力之下的时候，人对时间的利用率才会加倍提升
+</p>
+
+<hr />
+
+<p>
+一项技术的淘汰，不一定是因为它的能力不够了，而是有一种更好的可以取代它的技术出现了
+</p>
+
+<hr />
+
+<p>
+有一个好设备很关键，那样就不会花很多时间处理与设备有关的问题，专注于实验本身
+</p>
+
+<hr />
+
+<p>
+对于教育的三点思考
+</p>
+
+<p>
+（1）表面上，美国人总是表现出来对教育很关心，学校暴露的各种运作问题都能上新闻媒体。但是，对于学生怎么学习、在学校里到底学到了什么，美国人却漠不关心。
+</p>
+
+<p>
+David Perell
+认为，其实应该反过来，需要关心的是学生是否真的学到了东西，而对于学校的各种问题倒是可以漠不关心。
+</p>
+
+<p>
+（2）学生应该特别重视写作课。
+</p>
+
+<p>
+如果你不知道如何写作，可能就不知道如何思考。
+</p>
+
+<p>
+（3）老师们总是抱怨学生不听课，但是很少想一想，自己的讲课是否值得一听。
+</p>
+
+<p>
+<a href="http://www.ruanyifeng.com/blog/2021/05/weekly-issue-159.html">http://www.ruanyifeng.com/blog/2021/05/weekly-issue-159.html</a>
+</p>
+
+<hr />
+
+<p>
+Being ahead of your time by a year will make you rich, but being ahead
+of your time by a decade will drive you insane @David Perell
+<a href="https://twitter.com/david_perell/status/1387994182883631106">https://twitter.com/david_perell/status/1387994182883631106</a>
+</p>
+
+<hr />
+
+<p>
+今日完成：
+</p>
+
+<ol class="org-ol">
+<li>:white<sub>check</sub><sub>mark</sub>: Complete half of it 总结 bash examples
+<a href="https://linuxhint.com/30_bash_script_examples/">https://linuxhint.com/30_bash_script_examples/</a></li>
+<li>:white<sub>check</sub><sub>mark</sub>: 如何洗汗渍（记在 self 里）</li>
+<li>:white<sub>check</sub><sub>mark</sub>: 阅读及笔记
+<a href="https://www.matuzo.at/blog/html-boilerplate/">https://www.matuzo.at/blog/html-boilerplate/</a></li>
+<li>参考并配置 <a href="https://github.com/ykfe/fe-dev-playbook">https://github.com/ykfe/fe-dev-playbook</a></li>
+<li>阅读，笔记 <a href="https://github.com/ruanyf/jstraining">https://github.com/ruanyf/jstraining</a></li>
+</ol>
+</div>
+</body>
+</html>
