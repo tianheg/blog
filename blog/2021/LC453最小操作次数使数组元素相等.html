@@ -3,7 +3,7 @@
 "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en">
 <head>
-<!-- 2021-11-22 Mon 17:40 -->
+<!-- 2021-11-24 Wed 16:43 -->
 <meta http-equiv="Content-Type" content="text/html;charset=utf-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1" />
 <title>&lrm;</title>
@@ -250,17 +250,17 @@
 <h2 id="题解2"><span class="section-number-2">2</span> 题解<sup><a id="fnr.2" class="footref" href="#fn.2">2</a></sup></h2>
 <div class="outline-text-2" id="text-题解2">
 <div class="org-src-container">
-<pre class="src src-js"><span style="font-style: italic;">/**</span>
-<span style="font-style: italic;"> * @param {number[]} nums</span>
-<span style="font-style: italic;"> * @return {number}</span>
-<span style="font-style: italic;"> */</span>
-<span style="font-weight: bold;">let</span> <span style="font-weight: bold; font-style: italic;">minMoves</span> = <span style="font-weight: bold;">function</span>(<span style="font-weight: bold; font-style: italic;">nums</span>) {
-  <span style="font-weight: bold;">const</span> <span style="font-weight: bold; font-style: italic;">minNum</span> = Math.min(...nums);
-  <span style="font-weight: bold;">let</span> <span style="font-weight: bold; font-style: italic;">res</span> = 0;
-  <span style="font-weight: bold;">for</span> (<span style="font-weight: bold;">const</span> <span style="font-weight: bold; font-style: italic;">num</span> of nums) {
+<pre class="src src-js"><span style="color: #7c7565;">/**</span>
+<span style="color: #7c7565;"> * @param {number[]} nums</span>
+<span style="color: #7c7565;"> * @return {number}</span>
+<span style="color: #7c7565;"> */</span>
+<span style="color: #91a0b3;">let</span> <span style="color: #aaca86;">minMoves</span> = <span style="color: #91a0b3;">function</span>(<span style="color: #aaca86;">nums</span>) {
+  <span style="color: #91a0b3;">const</span> <span style="color: #aaca86;">minNum</span> = Math.min(...nums);
+  <span style="color: #91a0b3;">let</span> <span style="color: #aaca86;">res</span> = 0;
+  <span style="color: #91a0b3;">for</span> (<span style="color: #91a0b3;">const</span> <span style="color: #aaca86;">num</span> of nums) {
     res += num - minNum;
   }
-  <span style="font-weight: bold;">return</span> res;
+  <span style="color: #91a0b3;">return</span> res;
 }
 </pre>
 </div>

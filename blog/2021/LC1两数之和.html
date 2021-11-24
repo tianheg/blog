@@ -3,7 +3,7 @@
 "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en">
 <head>
-<!-- 2021-11-22 Mon 17:40 -->
+<!-- 2021-11-24 Wed 16:43 -->
 <meta http-equiv="Content-Type" content="text/html;charset=utf-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1" />
 <title>&lrm;</title>
@@ -288,18 +288,18 @@
 <h3 id="一2"><span class="section-number-3">2.1</span> 一<sup><a id="fnr.2" class="footref" href="#fn.2">2</a></sup></h3>
 <div class="outline-text-3" id="text-一2">
 <div class="org-src-container">
-<pre class="src src-js"><span style="font-style: italic;">/**</span>
-<span style="font-style: italic;"> * @param {number[]} nums</span>
-<span style="font-style: italic;"> * @param {number} target</span>
-<span style="font-style: italic;"> * @return {number[]}</span>
-<span style="font-style: italic;"> */</span>
-<span style="font-weight: bold;">let</span> <span style="font-weight: bold; font-style: italic;">twoSum</span> = <span style="font-weight: bold;">function</span> (<span style="font-weight: bold; font-style: italic;">nums</span>, <span style="font-weight: bold; font-style: italic;">target</span>) {
-  <span style="font-weight: bold;">const</span> <span style="font-weight: bold; font-style: italic;">map</span> = <span style="font-weight: bold;">new</span> <span style="font-weight: bold; text-decoration: underline;">Map</span>();
-  <span style="font-weight: bold;">for</span> (<span style="font-weight: bold;">let</span> <span style="font-weight: bold; font-style: italic;">i</span> = 0; i &lt; nums.length; i++) {
-    <span style="font-weight: bold;">let</span> <span style="font-weight: bold; font-style: italic;">x</span> = target - nums[i];
-    <span style="font-weight: bold;">if</span> (map.has(x)) {
-      <span style="font-weight: bold;">return</span> [map.get(x), i];
-    } <span style="font-weight: bold;">else</span> {
+<pre class="src src-js"><span style="color: #7c7565;">/**</span>
+<span style="color: #7c7565;"> * @param {number[]} nums</span>
+<span style="color: #7c7565;"> * @param {number} target</span>
+<span style="color: #7c7565;"> * @return {number[]}</span>
+<span style="color: #7c7565;"> */</span>
+<span style="color: #91a0b3;">let</span> <span style="color: #aaca86;">twoSum</span> = <span style="color: #91a0b3;">function</span> (<span style="color: #aaca86;">nums</span>, <span style="color: #aaca86;">target</span>) {
+  <span style="color: #91a0b3;">const</span> <span style="color: #aaca86;">map</span> = <span style="color: #91a0b3;">new</span> <span style="color: #ad8572;">Map</span>();
+  <span style="color: #91a0b3;">for</span> (<span style="color: #91a0b3;">let</span> <span style="color: #aaca86;">i</span> = 0; i &lt; nums.length; i++) {
+    <span style="color: #91a0b3;">let</span> <span style="color: #aaca86;">x</span> = target - nums[i];
+    <span style="color: #91a0b3;">if</span> (map.has(x)) {
+      <span style="color: #91a0b3;">return</span> [map.get(x), i];
+    } <span style="color: #91a0b3;">else</span> {
       map.set(nums[i], i);
     }
   }
@@ -357,21 +357,21 @@
 <h3 id="二45"><span class="section-number-3">2.2</span> 二<sup><a id="fnr.4" class="footref" href="#fn.4">4</a></sup>，<sup><a id="fnr.5" class="footref" href="#fn.5">5</a></sup></h3>
 <div class="outline-text-3" id="text-二45">
 <div class="org-src-container">
-<pre class="src src-js"><span style="font-style: italic;">/**</span>
-<span style="font-style: italic;"> * @param {number[]} nums</span>
-<span style="font-style: italic;"> * @param {number} target</span>
-<span style="font-style: italic;"> * @return {number[]}</span>
-<span style="font-style: italic;"> */</span>
-<span style="font-weight: bold;">var</span> <span style="font-weight: bold; font-style: italic;">twoSum</span> = <span style="font-weight: bold;">function</span> (<span style="font-weight: bold; font-style: italic;">nums</span>, <span style="font-weight: bold; font-style: italic;">target</span>) {
-  <span style="font-weight: bold;">let</span> <span style="font-weight: bold; font-style: italic;">prevNums</span> = {}; <span style="font-weight: bold; font-style: italic;">// </span><span style="font-weight: bold; font-style: italic;">&#23384;&#20648;&#20986;&#29616;&#30340;&#25968;&#23383;&#65292;&#21644;&#23545;&#24212;&#30340;&#32034;&#24341;</span>
-  <span style="font-weight: bold;">for</span> (<span style="font-weight: bold;">let</span> <span style="font-weight: bold; font-style: italic;">i</span> = 0; i &lt; nums.length; i++) { <span style="font-weight: bold; font-style: italic;">// </span><span style="font-weight: bold; font-style: italic;">&#36941;&#21382;&#20803;&#32032;</span>
-    <span style="font-weight: bold;">const</span> <span style="font-weight: bold; font-style: italic;">currentNum</span> = nums[i]; <span style="font-weight: bold; font-style: italic;">// </span><span style="font-weight: bold; font-style: italic;">&#24403;&#21069;&#20803;&#32032;</span>
-    <span style="font-weight: bold;">const</span> <span style="font-weight: bold; font-style: italic;">targetNum</span> = target - currentNum; <span style="font-weight: bold; font-style: italic;">// </span><span style="font-weight: bold; font-style: italic;">&#28385;&#36275;&#35201;&#27714;&#30340;&#30446;&#26631;&#20803;&#32032;</span>
-    <span style="font-weight: bold;">const</span> <span style="font-weight: bold; font-style: italic;">targetNumIndex</span> = prevNums[targetNum]; <span style="font-weight: bold; font-style: italic;">// </span><span style="font-weight: bold; font-style: italic;">&#22312; prevNums &#20013;&#33719;&#24471;&#30446;&#26631;&#20803;&#32032;&#30340;&#32034;&#24341;</span>
-    <span style="font-weight: bold;">if</span> (targetNumIndex !== <span style="font-weight: bold; text-decoration: underline;">undefined</span>) {
-      <span style="font-weight: bold;">return</span> [targetNumIndex, i]; <span style="font-weight: bold; font-style: italic;">// </span><span style="font-weight: bold; font-style: italic;">&#22914;&#26524;&#23384;&#22312;&#65292;&#30452;&#25509;&#36820;&#22238; [&#30446;&#26631;&#20803;&#32032;&#32034;&#24341;, &#24403;&#21069;&#32034;&#24341;]</span>
-    } <span style="font-weight: bold;">else</span> {
-      prevNums[currentNum] = i; <span style="font-weight: bold; font-style: italic;">// </span><span style="font-weight: bold; font-style: italic;">&#19981;&#23384;&#22312;&#30340;&#35805;&#65292;&#35828;&#26126;&#20043;&#21069;&#27809;&#20986;&#29616;&#30446;&#26631;&#20803;&#32032;&#65292;&#23384;&#20837;&#24403;&#21069;&#20803;&#32032;&#21644;&#23545;&#24212;&#32034;&#24341;</span>
+<pre class="src src-js"><span style="color: #7c7565;">/**</span>
+<span style="color: #7c7565;"> * @param {number[]} nums</span>
+<span style="color: #7c7565;"> * @param {number} target</span>
+<span style="color: #7c7565;"> * @return {number[]}</span>
+<span style="color: #7c7565;"> */</span>
+<span style="color: #91a0b3;">var</span> <span style="color: #aaca86;">twoSum</span> = <span style="color: #91a0b3;">function</span> (<span style="color: #aaca86;">nums</span>, <span style="color: #aaca86;">target</span>) {
+  <span style="color: #91a0b3;">let</span> <span style="color: #aaca86;">prevNums</span> = {}; <span style="color: #706565;">// </span><span style="color: #857575;">&#23384;&#20648;&#20986;&#29616;&#30340;&#25968;&#23383;&#65292;&#21644;&#23545;&#24212;&#30340;&#32034;&#24341;</span>
+  <span style="color: #91a0b3;">for</span> (<span style="color: #91a0b3;">let</span> <span style="color: #aaca86;">i</span> = 0; i &lt; nums.length; i++) { <span style="color: #706565;">// </span><span style="color: #857575;">&#36941;&#21382;&#20803;&#32032;</span>
+    <span style="color: #91a0b3;">const</span> <span style="color: #aaca86;">currentNum</span> = nums[i]; <span style="color: #706565;">// </span><span style="color: #857575;">&#24403;&#21069;&#20803;&#32032;</span>
+    <span style="color: #91a0b3;">const</span> <span style="color: #aaca86;">targetNum</span> = target - currentNum; <span style="color: #706565;">// </span><span style="color: #857575;">&#28385;&#36275;&#35201;&#27714;&#30340;&#30446;&#26631;&#20803;&#32032;</span>
+    <span style="color: #91a0b3;">const</span> <span style="color: #aaca86;">targetNumIndex</span> = prevNums[targetNum]; <span style="color: #706565;">// </span><span style="color: #857575;">&#22312; prevNums &#20013;&#33719;&#24471;&#30446;&#26631;&#20803;&#32032;&#30340;&#32034;&#24341;</span>
+    <span style="color: #91a0b3;">if</span> (targetNumIndex !== <span style="color: #ab85a3;">undefined</span>) {
+      <span style="color: #91a0b3;">return</span> [targetNumIndex, i]; <span style="color: #706565;">// </span><span style="color: #857575;">&#22914;&#26524;&#23384;&#22312;&#65292;&#30452;&#25509;&#36820;&#22238; [&#30446;&#26631;&#20803;&#32032;&#32034;&#24341;, &#24403;&#21069;&#32034;&#24341;]</span>
+    } <span style="color: #91a0b3;">else</span> {
+      prevNums[currentNum] = i; <span style="color: #706565;">// </span><span style="color: #857575;">&#19981;&#23384;&#22312;&#30340;&#35805;&#65292;&#35828;&#26126;&#20043;&#21069;&#27809;&#20986;&#29616;&#30446;&#26631;&#20803;&#32032;&#65292;&#23384;&#20837;&#24403;&#21069;&#20803;&#32032;&#21644;&#23545;&#24212;&#32034;&#24341;</span>
     }
   }
 };
