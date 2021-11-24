@@ -3,7 +3,7 @@
 "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en">
 <head>
-<!-- 2021-11-22 Mon 17:40 -->
+<!-- 2021-11-24 Wed 16:43 -->
 <meta http-equiv="Content-Type" content="text/html;charset=utf-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1" />
 <title>&lrm;</title>
@@ -258,7 +258,7 @@ GitHub 拉取代码较慢，于是想到可以把本地的更改同时推送到 
 云服务器的系统是 Ubuntu 20.04，所以可以通过以下命令安装 Git 的最新版本：
 </p>
 
-<pre class="example" id="org0623549">
+<pre class="example" id="orgd743801">
 add-apt-repository ppa:git-core/ppa
 apt update
 apt install git
@@ -269,7 +269,7 @@ apt install git
 <div id="outline-container-创建-git-用户" class="outline-2">
 <h2 id="创建-git-用户"><span class="section-number-2">2</span> 创建 Git 用户</h2>
 <div class="outline-text-2" id="text-创建-git-用户">
-<pre class="example" id="org0a2a24c">
+<pre class="example" id="org0d1f0bc">
 adduser git # note difference with useradd
 passwd git # add password for git user
 sudo visudo
@@ -279,7 +279,7 @@ sudo visudo
 修改 =/etc/sudoers=：
 </p>
 
-<pre class="example" id="org314cbb4">
+<pre class="example" id="org5311d64">
 root    ALL=(ALL)       ALL
 ubuntu  ALL=(ALL:ALL) NOPASSWD: ALL
 git  ALL=(ALL:ALL) NOPASSWD: ALL # add
@@ -294,7 +294,7 @@ git  ALL=(ALL:ALL) NOPASSWD: ALL # add
 在本地主机执行以下命令：
 </p>
 
-<pre class="example" id="org21d5134">
+<pre class="example" id="org793c687">
 ssh-keygen -t ed25519 -C "email"
 </pre>
 
@@ -303,7 +303,7 @@ ssh-keygen -t ed25519 -C "email"
 文件里的内容复制到云服务器的 authorized<sub>keys</sub> 文件中：
 </p>
 
-<pre class="example" id="org60347a2">
+<pre class="example" id="orgc2cbcb9">
 su git
 mkdir ~/.ssh
 vim ~/.ssh/authorized_keys
@@ -317,7 +317,7 @@ vim ~/.ssh/authorized_keys
 修改权限：
 </p>
 
-<pre class="example" id="org7d3d689">
+<pre class="example" id="org91089f9">
 cd ~
 chmod 600 .ssh/authorized_keys
 chmod 700 .ssh
@@ -327,7 +327,7 @@ chmod 700 .ssh
 本地测试 git 服务：
 </p>
 
-<pre class="example" id="org5b20956">
+<pre class="example" id="org8677d1f">
 ssh -v git@server-ip # Server public network IP
 </pre>
 </div>
@@ -336,7 +336,7 @@ ssh -v git@server-ip # Server public network IP
 <div id="outline-container-创建博客文件夹" class="outline-2">
 <h2 id="创建博客文件夹"><span class="section-number-2">4</span> 创建博客文件夹</h2>
 <div class="outline-text-2" id="text-创建博客文件夹">
-<pre class="example" id="orgdaa466c">
+<pre class="example" id="orge2f8efa">
 su root # switch to root user
 mkdir /home/hugo
 chown git:git -R /home/hugo
@@ -347,7 +347,7 @@ chown git:git -R /home/hugo
 <div id="outline-container-更改站点目录权限" class="outline-2">
 <h2 id="更改站点目录权限"><span class="section-number-2">5</span> 更改站点目录权限</h2>
 <div class="outline-text-2" id="text-更改站点目录权限">
-<pre class="example" id="org70e3ce9">
+<pre class="example" id="orgba1bb6a">
 sudo chown git:git -R /var/www/hugo # for git hook
 </pre>
 </div>
@@ -356,7 +356,7 @@ sudo chown git:git -R /var/www/hugo # for git hook
 <div id="outline-container-创建-bare-仓库并配置-git-hook" class="outline-2">
 <h2 id="创建-bare-仓库并配置-git-hook"><span class="section-number-2">6</span> 创建 bare 仓库并配置 Git Hook</h2>
 <div class="outline-text-2" id="text-创建-bare-仓库并配置-git-hook">
-<pre class="example" id="orgfaeb21f">
+<pre class="example" id="org57ce215">
 su root
 cd /home/git
 git init --bare blog.git
@@ -369,7 +369,7 @@ chmod +x blog.git/hooks/post-receive
 新建文件 =blog.git/hooks/post-receive=：
 </p>
 
-<pre class="example" id="orgf285c9b">
+<pre class="example" id="org958514b">
 #!/bin/sh
 git --work-tree=/home/hugo --git-dir=/home/git/blog.git checkout -f
 cd /var/www/hugo
@@ -383,7 +383,7 @@ hugo --minify -d /var/www/hugo
 <div id="outline-container-本地配置云服务器仓库" class="outline-2">
 <h2 id="本地配置云服务器仓库"><span class="section-number-2">7</span> 本地配置云服务器仓库</h2>
 <div class="outline-text-2" id="text-本地配置云服务器仓库">
-<pre class="example" id="org5b0a7b0">
+<pre class="example" id="org4624482">
 git remote add origin git@server-ip:/home/git/blog.git
 git push -u origin main # first push
 </pre>

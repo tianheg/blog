@@ -3,7 +3,7 @@
 "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en">
 <head>
-<!-- 2021-11-22 Mon 17:40 -->
+<!-- 2021-11-24 Wed 16:43 -->
 <meta http-equiv="Content-Type" content="text/html;charset=utf-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1" />
 <title>&lrm;</title>
@@ -278,36 +278,36 @@
 </p>
 
 <div class="org-src-container">
-<pre class="src src-js"><span style="font-style: italic;">/**</span>
-<span style="font-style: italic;"> * @param {string} s</span>
-<span style="font-style: italic;"> * @return {boolean}</span>
-<span style="font-style: italic;"> */</span>
-<span style="font-weight: bold;">var</span> <span style="font-weight: bold; font-style: italic;">isValid</span> = <span style="font-weight: bold;">function</span> (<span style="font-weight: bold; font-style: italic;">s</span>) {
-  <span style="font-weight: bold;">const</span> <span style="font-weight: bold; font-style: italic;">n</span> = s.length;
-  <span style="font-weight: bold;">if</span> (n % 2 === 1) {
-    <span style="font-weight: bold;">return</span> <span style="font-weight: bold; text-decoration: underline;">false</span>;
+<pre class="src src-js"><span style="color: #7c7565;">/**</span>
+<span style="color: #7c7565;"> * @param {string} s</span>
+<span style="color: #7c7565;"> * @return {boolean}</span>
+<span style="color: #7c7565;"> */</span>
+<span style="color: #91a0b3;">var</span> <span style="color: #aaca86;">isValid</span> = <span style="color: #91a0b3;">function</span> (<span style="color: #aaca86;">s</span>) {
+  <span style="color: #91a0b3;">const</span> <span style="color: #aaca86;">n</span> = s.length;
+  <span style="color: #91a0b3;">if</span> (n % 2 === 1) {
+    <span style="color: #91a0b3;">return</span> <span style="color: #ab85a3;">false</span>;
   }
-  <span style="font-weight: bold;">const</span> <span style="font-weight: bold; font-style: italic;">pairs</span> = <span style="font-weight: bold;">new</span> <span style="font-weight: bold; text-decoration: underline;">Map</span>([
-    <span style="font-weight: bold; font-style: italic;">// </span><span style="font-weight: bold; font-style: italic;">&#21704;&#24076;&#34920;</span>
-    [<span style="font-style: italic;">")"</span>, <span style="font-style: italic;">"("</span>], <span style="font-weight: bold; font-style: italic;">// </span><span style="font-weight: bold; font-style: italic;">&#38190;&#20540;&#23545;</span>
-    [<span style="font-style: italic;">"]"</span>, <span style="font-style: italic;">"["</span>],
-    [<span style="font-style: italic;">"}"</span>, <span style="font-style: italic;">"{"</span>],
+  <span style="color: #91a0b3;">const</span> <span style="color: #aaca86;">pairs</span> = <span style="color: #91a0b3;">new</span> <span style="color: #ad8572;">Map</span>([
+    <span style="color: #706565;">// </span><span style="color: #857575;">&#21704;&#24076;&#34920;</span>
+    [<span style="color: #ddbc91;">")"</span>, <span style="color: #ddbc91;">"("</span>], <span style="color: #706565;">// </span><span style="color: #857575;">&#38190;&#20540;&#23545;</span>
+    [<span style="color: #ddbc91;">"]"</span>, <span style="color: #ddbc91;">"["</span>],
+    [<span style="color: #ddbc91;">"}"</span>, <span style="color: #ddbc91;">"{"</span>],
   ]);
-  <span style="font-weight: bold;">const</span> <span style="font-weight: bold; font-style: italic;">stk</span> = []; <span style="font-weight: bold; font-style: italic;">// </span><span style="font-weight: bold; font-style: italic;">&#22534;&#26632;</span>
-  <span style="font-weight: bold;">for</span> (<span style="font-weight: bold;">let</span> <span style="font-weight: bold; font-style: italic;">ch</span> of s) {
-    <span style="font-weight: bold; font-style: italic;">// </span><span style="font-weight: bold; font-style: italic;">&#24490;&#29615;&#36845;&#20195;</span>
-    <span style="font-weight: bold;">if</span> (pairs.has(ch)) {
-      <span style="font-weight: bold;">if</span> (!stk.length || stk[stk.length - 1] !== pairs.get(ch)) {
-        <span style="font-weight: bold;">return</span> <span style="font-weight: bold; text-decoration: underline;">false</span>;
+  <span style="color: #91a0b3;">const</span> <span style="color: #aaca86;">stk</span> = []; <span style="color: #706565;">// </span><span style="color: #857575;">&#22534;&#26632;</span>
+  <span style="color: #91a0b3;">for</span> (<span style="color: #91a0b3;">let</span> <span style="color: #aaca86;">ch</span> of s) {
+    <span style="color: #706565;">// </span><span style="color: #857575;">&#24490;&#29615;&#36845;&#20195;</span>
+    <span style="color: #91a0b3;">if</span> (pairs.has(ch)) {
+      <span style="color: #91a0b3;">if</span> (!stk.length || stk[stk.length - 1] !== pairs.get(ch)) {
+        <span style="color: #91a0b3;">return</span> <span style="color: #ab85a3;">false</span>;
       }
       stk.pop();
-    } <span style="font-weight: bold;">else</span> {
+    } <span style="color: #91a0b3;">else</span> {
       stk.push(ch);
     }
   }
-  <span style="font-weight: bold;">return</span> !stk.length;
+  <span style="color: #91a0b3;">return</span> !stk.length;
 };
-console.log(isValid(<span style="font-style: italic;">"]["</span>));
+console.log(isValid(<span style="color: #ddbc91;">"]["</span>));
 </pre>
 </div>
 </div>

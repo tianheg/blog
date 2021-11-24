@@ -3,7 +3,7 @@
 "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en">
 <head>
-<!-- 2021-11-22 Mon 17:39 -->
+<!-- 2021-11-24 Wed 16:42 -->
 <meta http-equiv="Content-Type" content="text/html;charset=utf-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1" />
 <title>&lrm;</title>
@@ -268,21 +268,21 @@
 <h3 id="一2"><span class="section-number-3">2.1</span> 一<sup><a id="fnr.2" class="footref" href="#fn.2">2</a></sup></h3>
 <div class="outline-text-3" id="text-一2">
 <div class="org-src-container">
-<pre class="src src-js"><span style="font-style: italic;">/**</span>
-<span style="font-style: italic;"> * @param {number[]} numbers</span>
-<span style="font-style: italic;"> * @param {number} target</span>
-<span style="font-style: italic;"> * @return {number[]}</span>
-<span style="font-style: italic;"> */</span>
-<span style="font-weight: bold;">let</span> <span style="font-weight: bold; font-style: italic;">twoSum</span> = <span style="font-weight: bold;">function</span> (<span style="font-weight: bold; font-style: italic;">numbers</span>, <span style="font-weight: bold; font-style: italic;">target</span>) {
-  <span style="font-weight: bold;">let</span> [<span style="font-weight: bold; font-style: italic;">left</span>, <span style="font-weight: bold; font-style: italic;">right</span>] = [0, numbers.length - 1];
-  <span style="font-weight: bold; font-style: italic;">// </span><span style="font-weight: bold; font-style: italic;">&#23450;&#20041;&#24038;&#21491;&#21452;&#25351;&#38024;</span>
-  <span style="font-weight: bold;">while</span> (left &lt; right) {
-    <span style="font-weight: bold;">if</span> (numbers[left] + numbers[right] &gt; target) {
-      right--; <span style="font-weight: bold; font-style: italic;">// </span><span style="font-weight: bold; font-style: italic;">&#22826;&#22823;&#65292;&#21491;&#25351;&#38024;&#24038;&#31227;</span>
-    } <span style="font-weight: bold;">else</span> <span style="font-weight: bold;">if</span> (numbers[left] + numbers[right] &lt; target) {
-      left++; <span style="font-weight: bold; font-style: italic;">// </span><span style="font-weight: bold; font-style: italic;">&#22826;&#23567;&#65292;&#24038;&#25351;&#38024;&#21491;&#31227;</span>
-    } <span style="font-weight: bold;">else</span> {
-      <span style="font-weight: bold;">return</span> [left + 1, right + 1]; <span style="font-weight: bold; font-style: italic;">// </span><span style="font-weight: bold; font-style: italic;">&#21508;&#33258;+1 &#36820;&#22238;</span>
+<pre class="src src-js"><span style="color: #7c7565;">/**</span>
+<span style="color: #7c7565;"> * @param {number[]} numbers</span>
+<span style="color: #7c7565;"> * @param {number} target</span>
+<span style="color: #7c7565;"> * @return {number[]}</span>
+<span style="color: #7c7565;"> */</span>
+<span style="color: #91a0b3;">let</span> <span style="color: #aaca86;">twoSum</span> = <span style="color: #91a0b3;">function</span> (<span style="color: #aaca86;">numbers</span>, <span style="color: #aaca86;">target</span>) {
+  <span style="color: #91a0b3;">let</span> [<span style="color: #aaca86;">left</span>, <span style="color: #aaca86;">right</span>] = [0, numbers.length - 1];
+  <span style="color: #706565;">// </span><span style="color: #857575;">&#23450;&#20041;&#24038;&#21491;&#21452;&#25351;&#38024;</span>
+  <span style="color: #91a0b3;">while</span> (left &lt; right) {
+    <span style="color: #91a0b3;">if</span> (numbers[left] + numbers[right] &gt; target) {
+      right--; <span style="color: #706565;">// </span><span style="color: #857575;">&#22826;&#22823;&#65292;&#21491;&#25351;&#38024;&#24038;&#31227;</span>
+    } <span style="color: #91a0b3;">else</span> <span style="color: #91a0b3;">if</span> (numbers[left] + numbers[right] &lt; target) {
+      left++; <span style="color: #706565;">// </span><span style="color: #857575;">&#22826;&#23567;&#65292;&#24038;&#25351;&#38024;&#21491;&#31227;</span>
+    } <span style="color: #91a0b3;">else</span> {
+      <span style="color: #91a0b3;">return</span> [left + 1, right + 1]; <span style="color: #706565;">// </span><span style="color: #857575;">&#21508;&#33258;+1 &#36820;&#22238;</span>
     }
   }
 };

@@ -3,7 +3,7 @@
 "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml" lang="zh" xml:lang="zh">
 <head>
-<!-- 2021-11-22 Mon 17:40 -->
+<!-- 2021-11-24 Wed 16:42 -->
 <meta http-equiv="Content-Type" content="text/html;charset=utf-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1" />
 <title>为 GitHub 主页添加「年进度」和「最近更新的博客文章」</title>
@@ -275,25 +275,25 @@ Github Actions 获取网站的 RSS 数据，并更新到个人主页</a>。
 </p>
 
 <div class="org-src-container">
-<pre class="src src-js"><span style="font-weight: bold;">const</span> <span style="font-weight: bold; font-style: italic;">thisYear</span> = <span style="font-weight: bold;">new</span> <span style="font-weight: bold; text-decoration: underline;">Date</span>().getFullYear()
-<span style="font-weight: bold;">const</span> <span style="font-weight: bold; font-style: italic;">startTimeOfThisYear</span> = <span style="font-weight: bold;">new</span> <span style="font-weight: bold; text-decoration: underline;">Date</span>(<span style="font-style: italic;">`${thisYear}-01-01T00:00:00+00:00`</span>).getTime()
-<span style="font-weight: bold;">const</span> <span style="font-weight: bold; font-style: italic;">endTimeOfThisYear</span> = <span style="font-weight: bold;">new</span> <span style="font-weight: bold; text-decoration: underline;">Date</span>(<span style="font-style: italic;">`${thisYear}-12-31T23:59:59+00:00`</span>).getTime()
-<span style="font-weight: bold;">const</span> <span style="font-weight: bold; font-style: italic;">progressOfThisYear</span> = (Date.now() - startTimeOfThisYear) / (endTimeOfThisYear - startTimeOfThisYear)
-<span style="font-weight: bold;">const</span> <span style="font-weight: bold; font-style: italic;">progressBarOfThisYear</span> = generateProgressBar()
+<pre class="src src-js"><span style="color: #91a0b3;">const</span> <span style="color: #aaca86;">thisYear</span> = <span style="color: #91a0b3;">new</span> <span style="color: #ad8572;">Date</span>().getFullYear()
+<span style="color: #91a0b3;">const</span> <span style="color: #aaca86;">startTimeOfThisYear</span> = <span style="color: #91a0b3;">new</span> <span style="color: #ad8572;">Date</span>(<span style="color: #ddbc91;">`${thisYear}-01-01T00:00:00+00:00`</span>).getTime()
+<span style="color: #91a0b3;">const</span> <span style="color: #aaca86;">endTimeOfThisYear</span> = <span style="color: #91a0b3;">new</span> <span style="color: #ad8572;">Date</span>(<span style="color: #ddbc91;">`${thisYear}-12-31T23:59:59+00:00`</span>).getTime()
+<span style="color: #91a0b3;">const</span> <span style="color: #aaca86;">progressOfThisYear</span> = (Date.now() - startTimeOfThisYear) / (endTimeOfThisYear - startTimeOfThisYear)
+<span style="color: #91a0b3;">const</span> <span style="color: #aaca86;">progressBarOfThisYear</span> = generateProgressBar()
 
-<span style="font-weight: bold;">function</span> <span style="font-weight: bold;">generateProgressBar</span>() {
-    <span style="font-weight: bold;">const</span> <span style="font-weight: bold; font-style: italic;">progressBarCapacity</span> = 30
-    <span style="font-weight: bold;">const</span> <span style="font-weight: bold; font-style: italic;">passedProgressBarIndex</span> = parseInt(progressOfThisYear * progressBarCapacity)
-    <span style="font-weight: bold;">const</span> <span style="font-weight: bold; font-style: italic;">progressBar</span> = Array(progressBarCapacity)
-        .fill(<span style="font-style: italic;">'_'</span>)
-        .map((value, index) =&gt; index &lt; passedProgressBarIndex ? <span style="font-style: italic;">'&#9608;'</span> : value)
-        .join(<span style="font-style: italic;">''</span>)
-    <span style="font-weight: bold;">return</span> <span style="font-style: italic;">` ${progressBar}`</span>
+<span style="color: #91a0b3;">function</span> <span style="color: #a9df90;">generateProgressBar</span>() {
+    <span style="color: #91a0b3;">const</span> <span style="color: #aaca86;">progressBarCapacity</span> = 30
+    <span style="color: #91a0b3;">const</span> <span style="color: #aaca86;">passedProgressBarIndex</span> = parseInt(progressOfThisYear * progressBarCapacity)
+    <span style="color: #91a0b3;">const</span> <span style="color: #aaca86;">progressBar</span> = Array(progressBarCapacity)
+        .fill(<span style="color: #ddbc91;">'_'</span>)
+        .map((value, index) =&gt; index &lt; passedProgressBarIndex ? <span style="color: #ddbc91;">'&#9608;'</span> : value)
+        .join(<span style="color: #ddbc91;">''</span>)
+    <span style="color: #91a0b3;">return</span> <span style="color: #ddbc91;">` ${progressBar}`</span>
 }
 
-<span style="font-weight: bold;">const</span> <span style="font-weight: bold; font-style: italic;">readme</span> =<span style="font-style: italic;">`</span>
-<span style="font-style: italic;">Annual balance  ${progressBarOfThisYear} ${(progressBarOfThisYear * 100).toFixed(2)} %</span>
-<span style="font-style: italic;">&#9200; Updated on ${new Date().toUTCString()}`</span>;
+<span style="color: #91a0b3;">const</span> <span style="color: #aaca86;">readme</span> =<span style="color: #ddbc91;">`</span>
+<span style="color: #ddbc91;">Annual balance  ${progressBarOfThisYear} ${(progressBarOfThisYear * 100).toFixed(2)} %</span>
+<span style="color: #ddbc91;">&#9200; Updated on ${new Date().toUTCString()}`</span>;
 console.log(readme)
 </pre>
 </div>
@@ -323,7 +323,7 @@ console.log(readme)
 开发工作流。在与个人用户名相同的仓库中添加 =Pipfile=：
 </p>
 
-<pre class="example" id="orgfaeb06b">
+<pre class="example" id="orgf147747">
 [[source]]
 name = "pypi"
 url = "https://pypi.org/simple"
@@ -347,7 +347,7 @@ python_version = "3.7"
 <code>python_version</code> 必须是 3.7，改成其他的会报错（[错误地址 1][]）：
 </p>
 
-<pre class="example" id="org7528a8e">
+<pre class="example" id="org5336839">
 Warning: Python 3.8 was not found on your system...
 Neither 'pyenv' nor 'asdf' could be found to install Python.
 You can specify specific versions of Python with:
@@ -359,7 +359,7 @@ $ pipenv --python path/to/python
 报错（[错误地址 2][]）：
 </p>
 
-<pre class="example" id="org38a8b7e">
+<pre class="example" id="orgb8f717c">
 ValueError: invalid literal for int() with base 10: '3.x'
 </pre>
 
@@ -368,7 +368,7 @@ ValueError: invalid literal for int() with base 10: '3.x'
 WSL2-Ubuntu20.04。我已经安装了最新版本的 pip，直接安装 pipenv 即可：
 </p>
 
-<pre class="example" id="org1af1018">
+<pre class="example" id="org7a4784f">
 pip install pipenv
 </pre>
 
@@ -376,7 +376,7 @@ pip install pipenv
 然后，在本地仓库中新建上述文件 =Pipfile=，执行：
 </p>
 
-<pre class="example" id="org92033a3">
+<pre class="example" id="org36a7056">
 pipenv install
 </pre>
 
@@ -390,7 +390,7 @@ pipenv install
 另外一个主要文件就是 =main.py=：
 </p>
 
-<pre class="example" id="org75031f5">
+<pre class="example" id="orgbd74ea0">
 import feedparser
 import time
 import os
@@ -458,7 +458,7 @@ main()
 首先，新建文件 =~\.github\workflows\main.yml=，并添加以下内容：
 </p>
 
-<pre class="example" id="org9c5995c">
+<pre class="example" id="orgaa479e7">
 name: update tianheg profile
 
 on:
@@ -535,7 +535,7 @@ pipenv 分支中。
 文件结构：
 </p>
 
-<pre class="example" id="orga5b0ea1">
+<pre class="example" id="org06151cf">
 Dockerfile
 LICENSE
 README.md
@@ -551,7 +551,7 @@ entrypoint.sh
 <code>Dockerfile</code> 内容：
 </p>
 
-<pre class="example" id="org21abcfe">
+<pre class="example" id="org0d505a4">
 ARG PYTHON_IMAGE_VERSION=3
 FROM python:$PYTHON_IMAGE_VERSION
 
@@ -568,7 +568,7 @@ ENTRYPOINT ["/entrypoint.sh"]
 <code>entrypoint.sh</code> 内容：
 </p>
 
-<pre class="example" id="orgf48ad6b">
+<pre class="example" id="org8d4c950">
 #!/bin/sh
 
 sh -c "pipenv $*"

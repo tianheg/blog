@@ -3,7 +3,7 @@
 "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en">
 <head>
-<!-- 2021-11-22 Mon 17:40 -->
+<!-- 2021-11-24 Wed 16:43 -->
 <meta http-equiv="Content-Type" content="text/html;charset=utf-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1" />
 <title>&lrm;</title>
@@ -332,7 +332,7 @@
 <div id="outline-container-软件安装及配置" class="outline-3">
 <h3 id="软件安装及配置"><span class="section-number-3">2.1</span> 软件安装及配置</h3>
 <div class="outline-text-3" id="text-软件安装及配置">
-<pre class="example" id="orgb4eec56">
+<pre class="example" id="org0524c06">
 $ mysql --version
 mysql  Ver 8.0.24 for Linux on x86_64 (Source distribution)
 $ java -version
@@ -361,7 +361,7 @@ Linux 上配置 MySQL 对于我这个新手来说很是吃力。
 <li>MySQL</li>
 </ol>
 
-<pre class="example" id="org5b50b19">
+<pre class="example" id="orgdb89059">
 $ sudo pacman -S mysql
 
 # 此前操作：1. 安装 mysql 后卸载 2. 安装 percona-server 后卸载
@@ -411,7 +411,7 @@ percona-server 间接解决了无法启动 mysqld 服务的问题。于是，使
 percona-server。由它提供 MySQL 相关功能。
 </p>
 
-<pre class="example" id="orgc671e52">
+<pre class="example" id="org06ca15b">
 $ systemctl status mysqld
 ○ mysqld.service - MySQL Server
      Loaded: loaded (/usr/lib/systemd/system/mysqld.service; enabled; vendor preset: disabled)
@@ -638,7 +638,7 @@ Go 语言这样的后起之秀，但是，Java 目前还占据主导地位。</l
 一、=com.alibaba:druid:jar:1.1.21 is invalid=
 </p>
 
-<pre class="example" id="org68f56c3">
+<pre class="example" id="orgabce5d1">
 [WARNING] The POM for com.alibaba:druid:jar:1.1.21 is invalid, transitive dependencies (if any) will not be available, enable debug logging for more details
 </pre>
 
@@ -655,7 +655,7 @@ Go 语言这样的后起之秀，但是，Java 目前还占据主导地位。</l
 当运行 <code>RunBoot.java</code> 主方法时，出现错误：
 </p>
 
-<pre class="example" id="org1ba676b">
+<pre class="example" id="org793fed5">
 /usr/lib/jvm/default/bin/java...
 
   .   ____          _            __ _ _
@@ -723,7 +723,7 @@ Process finished with exit code 1
 3）=APPLICATION FAILED TO START=
 </p>
 
-<pre class="example" id="orgb0b10c8">
+<pre class="example" id="org82ee6aa">
 Description:
 
 Failed to configure a DataSource: 'url' attribute is not specified and no embedded datasource could be configured.
@@ -742,7 +742,7 @@ Consider the following:
 在为 ~/ 添加以下内容后，可以运行：
 </p>
 
-<pre class="example" id="orgde73bcc">
+<pre class="example" id="orgb412cb7">
 spring:
     datasource:
         driver-class-name: com.mysql.cj.jdbc.Driver
@@ -829,14 +829,14 @@ Vue 模型：
 </p>
 
 
-<div id="org3a92258" class="figure">
+<div id="orge25e154" class="figure">
 <p><object type="image/svg+xml" data="https://cdn.jsdelivr.net/gh/tianheg/static@main/img/vue-mvvm.svg" class="org-svg">
 Sorry, your browser does not support SVG.</object>
 </p>
 <p><span class="figure-number">Figure 1: </span>Vue MVVM</p>
 </div>
 
-<pre class="example" id="org192b927">
+<pre class="example" id="orge1372d8">
 &lt;div id="app"&gt;
   &lt;li v-for="type in mi_type"&gt;
     &lt;a v-bind:href="type.url"&gt;{{type.name}}&lt;/a&gt;&lt;span&gt;|&lt;/span&gt;
@@ -845,20 +845,20 @@ Sorry, your browser does not support SVG.</object>
 </pre>
 
 <div class="org-src-container">
-<pre class="src src-js"><span style="font-weight: bold;">let</span> <span style="font-weight: bold; font-style: italic;">app</span> = <span style="font-weight: bold;">new</span> <span style="font-weight: bold; text-decoration: underline;">Vue</span>({
-    el: <span style="font-style: italic;">'#app'</span>,
+<pre class="src src-js"><span style="color: #91a0b3;">let</span> <span style="color: #aaca86;">app</span> = <span style="color: #91a0b3;">new</span> <span style="color: #ad8572;">Vue</span>({
+    el: <span style="color: #ddbc91;">'#app'</span>,
     data: {
-        <span style="font-weight: bold; font-style: italic;">// </span><span style="font-weight: bold; font-style: italic;">mi_index: '&#20140;&#19996;&#21830;&#22478;',</span>
-        <span style="font-weight: bold; font-style: italic;">// </span><span style="font-weight: bold; font-style: italic;">mi_url: 'https://www.jd.com',</span>
+        <span style="color: #706565;">// </span><span style="color: #857575;">mi_index: '&#20140;&#19996;&#21830;&#22478;',</span>
+        <span style="color: #706565;">// </span><span style="color: #857575;">mi_url: 'https://www.jd.com',</span>
         mi_type: []
     },
-    <span style="font-weight: bold;">created</span>:<span style="font-weight: bold;">function</span>() { <span style="font-weight: bold; font-style: italic;">// </span><span style="font-weight: bold; font-style: italic;">auto exec after Vue object load successfully</span>
-        <span style="font-weight: bold; font-style: italic;">// </span><span style="font-weight: bold; font-style: italic;">data initialization</span>
-        <span style="font-weight: bold; text-decoration: underline;">this</span>.mi_type = [
-            {name: <span style="font-style: italic;">`&#23567;&#31859;`</span>, url:<span style="font-style: italic;">`https://www.mi.com/`</span>},
-            {name: <span style="font-style: italic;">`&#28120;&#23453;`</span>, url:<span style="font-style: italic;">`https://www.taobao.com/`</span>},
-            {name: <span style="font-style: italic;">`&#20140;&#19996;`</span>, url:<span style="font-style: italic;">`https://www.jd.com/`</span>},
-            {name: <span style="font-style: italic;">`&#25340;&#22810;&#22810;`</span>, url:<span style="font-style: italic;">`https://youhui.pinduoduo.com/`</span>},
+    <span style="color: #a9df90;">created</span>:<span style="color: #91a0b3;">function</span>() { <span style="color: #706565;">// </span><span style="color: #857575;">auto exec after Vue object load successfully</span>
+        <span style="color: #706565;">// </span><span style="color: #857575;">data initialization</span>
+        <span style="color: #ab85a3;">this</span>.mi_type = [
+            {name: <span style="color: #ddbc91;">`&#23567;&#31859;`</span>, url:<span style="color: #ddbc91;">`https://www.mi.com/`</span>},
+            {name: <span style="color: #ddbc91;">`&#28120;&#23453;`</span>, url:<span style="color: #ddbc91;">`https://www.taobao.com/`</span>},
+            {name: <span style="color: #ddbc91;">`&#20140;&#19996;`</span>, url:<span style="color: #ddbc91;">`https://www.jd.com/`</span>},
+            {name: <span style="color: #ddbc91;">`&#25340;&#22810;&#22810;`</span>, url:<span style="color: #ddbc91;">`https://youhui.pinduoduo.com/`</span>},
         ]
     }
 })
@@ -888,7 +888,7 @@ Sorry, your browser does not support SVG.</object>
 Project 结构：
 </p>
 
-<pre class="example" id="orgace232b">
+<pre class="example" id="orgcb95d34">
 ~ root
 --&gt;src/main/java/yidajiabei.xyz/RunBoot.java
 --&gt;src/main/java/yidajiabei.xyz/controller/MiIndexPageController.java
@@ -900,102 +900,102 @@ Project 结构：
 </pre>
 
 <div class="org-src-container">
-<pre class="src src-java"><span style="font-weight: bold; font-style: italic;">// </span><span style="font-weight: bold; font-style: italic;">src/main/java/yidajiabei.xyz/RunBoot.java</span>
-<span style="font-weight: bold;">package</span> yidajiabei.<span style="font-weight: bold; text-decoration: underline;">xyz</span>;
-<span style="font-weight: bold;">import</span> <span style="font-weight: bold; text-decoration: underline;">org</span>.<span style="font-weight: bold; text-decoration: underline;">springframework</span>.<span style="font-weight: bold; text-decoration: underline;">boot</span>.<span style="font-weight: bold; text-decoration: underline;">SpringApplication</span>;
-<span style="font-weight: bold;">import</span> <span style="font-weight: bold; text-decoration: underline;">org</span>.<span style="font-weight: bold; text-decoration: underline;">springframework</span>.<span style="font-weight: bold; text-decoration: underline;">boot</span>.<span style="font-weight: bold; text-decoration: underline;">autoconfigure</span>.<span style="font-weight: bold; text-decoration: underline;">SpringBootApplication</span>;
+<pre class="src src-java"><span style="color: #706565;">// </span><span style="color: #857575;">src/main/java/yidajiabei.xyz/RunBoot.java</span>
+<span style="color: #91a0b3;">package</span> yidajiabei.<span style="color: #ab85a3;">xyz</span>;
+<span style="color: #91a0b3;">import</span> <span style="color: #ab85a3;">org</span>.<span style="color: #ab85a3;">springframework</span>.<span style="color: #ab85a3;">boot</span>.<span style="color: #ad8572;">SpringApplication</span>;
+<span style="color: #91a0b3;">import</span> <span style="color: #ab85a3;">org</span>.<span style="color: #ab85a3;">springframework</span>.<span style="color: #ab85a3;">boot</span>.<span style="color: #ab85a3;">autoconfigure</span>.<span style="color: #ad8572;">SpringBootApplication</span>;
 
-<span style="font-weight: bold; text-decoration: underline;">@SpringBootApplication</span>
-<span style="font-weight: bold;">public</span> <span style="font-weight: bold;">class</span> <span style="font-weight: bold; text-decoration: underline;">RunBoot</span> {
-    <span style="font-weight: bold;">public</span> <span style="font-weight: bold;">static</span> <span style="font-weight: bold; text-decoration: underline;">void</span> <span style="font-weight: bold;">main</span>(<span style="font-weight: bold; text-decoration: underline;">String</span>[] <span style="font-weight: bold; font-style: italic;">args</span>) {
-        SpringApplication.run(RunBoot.<span style="font-weight: bold;">class</span>, args);
+<span style="color: #ab85a3;">@SpringBootApplication</span>
+<span style="color: #91a0b3;">public</span> <span style="color: #91a0b3;">class</span> <span style="color: #ad8572;">RunBoot</span> {
+    <span style="color: #91a0b3;">public</span> <span style="color: #91a0b3;">static</span> <span style="color: #ad8572;">void</span> <span style="color: #a9df90;">main</span>(<span style="color: #ad8572;">String</span>[] <span style="color: #aaca86;">args</span>) {
+        SpringApplication.run(RunBoot.<span style="color: #91a0b3;">class</span>, args);
     }
 }
 </pre>
 </div>
 
 <div class="org-src-container">
-<pre class="src src-java"><span style="font-weight: bold; font-style: italic;">// </span><span style="font-weight: bold; font-style: italic;">src/main/java/yidajiabei.xyz/controller/MiIndexPageController.java</span>
-<span style="font-weight: bold;">package</span> yidajiabei.xyz.<span style="font-weight: bold; text-decoration: underline;">controller</span>;
+<pre class="src src-java"><span style="color: #706565;">// </span><span style="color: #857575;">src/main/java/yidajiabei.xyz/controller/MiIndexPageController.java</span>
+<span style="color: #91a0b3;">package</span> yidajiabei.xyz.<span style="color: #ab85a3;">controller</span>;
 
-<span style="font-weight: bold;">import</span> <span style="font-weight: bold; text-decoration: underline;">org</span>.<span style="font-weight: bold; text-decoration: underline;">springframework</span>.<span style="font-weight: bold; text-decoration: underline;">web</span>.<span style="font-weight: bold; text-decoration: underline;">bind</span>.<span style="font-weight: bold; text-decoration: underline;">annotation</span>.<span style="font-weight: bold; text-decoration: underline;">RequestMapping</span>;
-<span style="font-weight: bold;">import</span> <span style="font-weight: bold; text-decoration: underline;">org</span>.<span style="font-weight: bold; text-decoration: underline;">springframework</span>.<span style="font-weight: bold; text-decoration: underline;">web</span>.<span style="font-weight: bold; text-decoration: underline;">bind</span>.<span style="font-weight: bold; text-decoration: underline;">annotation</span>.<span style="font-weight: bold; text-decoration: underline;">RestController</span>;
-<span style="font-weight: bold;">import</span> <span style="font-weight: bold; text-decoration: underline;">yidajiabei</span>.<span style="font-weight: bold; text-decoration: underline;">xyz</span>.<span style="font-weight: bold; text-decoration: underline;">domain</span>.<span style="font-weight: bold; text-decoration: underline;">UrlBean</span>;
-<span style="font-weight: bold;">import</span> <span style="font-weight: bold; text-decoration: underline;">yidajiabei</span>.<span style="font-weight: bold; text-decoration: underline;">xyz</span>.<span style="font-weight: bold; text-decoration: underline;">util</span>.<span style="font-weight: bold; text-decoration: underline;">ResultBean</span>;
+<span style="color: #91a0b3;">import</span> <span style="color: #ab85a3;">org</span>.<span style="color: #ab85a3;">springframework</span>.<span style="color: #ab85a3;">web</span>.<span style="color: #ab85a3;">bind</span>.<span style="color: #ab85a3;">annotation</span>.<span style="color: #ad8572;">RequestMapping</span>;
+<span style="color: #91a0b3;">import</span> <span style="color: #ab85a3;">org</span>.<span style="color: #ab85a3;">springframework</span>.<span style="color: #ab85a3;">web</span>.<span style="color: #ab85a3;">bind</span>.<span style="color: #ab85a3;">annotation</span>.<span style="color: #ad8572;">RestController</span>;
+<span style="color: #91a0b3;">import</span> <span style="color: #ab85a3;">yidajiabei</span>.<span style="color: #ab85a3;">xyz</span>.<span style="color: #ab85a3;">domain</span>.<span style="color: #ad8572;">UrlBean</span>;
+<span style="color: #91a0b3;">import</span> <span style="color: #ab85a3;">yidajiabei</span>.<span style="color: #ab85a3;">xyz</span>.<span style="color: #ab85a3;">util</span>.<span style="color: #ad8572;">ResultBean</span>;
 
-<span style="font-weight: bold;">import</span> <span style="font-weight: bold; text-decoration: underline;">java</span>.<span style="font-weight: bold; text-decoration: underline;">util</span>.<span style="font-weight: bold; text-decoration: underline;">ArrayList</span>;
-<span style="font-weight: bold;">import</span> <span style="font-weight: bold; text-decoration: underline;">java</span>.<span style="font-weight: bold; text-decoration: underline;">util</span>.<span style="font-weight: bold; text-decoration: underline;">List</span>;
+<span style="color: #91a0b3;">import</span> <span style="color: #ab85a3;">java</span>.<span style="color: #ab85a3;">util</span>.<span style="color: #ad8572;">ArrayList</span>;
+<span style="color: #91a0b3;">import</span> <span style="color: #ab85a3;">java</span>.<span style="color: #ab85a3;">util</span>.<span style="color: #ad8572;">List</span>;
 
-<span style="font-weight: bold; text-decoration: underline;">@RestController</span>
-<span style="font-weight: bold;">public</span> <span style="font-weight: bold;">class</span> <span style="font-weight: bold; text-decoration: underline;">MiIndexPageController</span> {
-    <span style="font-weight: bold; text-decoration: underline;">@RequestMapping</span>(<span style="font-style: italic;">"/typeList"</span>)
-    <span style="font-weight: bold;">public</span> <span style="font-weight: bold; text-decoration: underline;">ResultBean</span> <span style="font-weight: bold;">typeList</span>() {
-        <span style="font-weight: bold; text-decoration: underline;">ResultBean</span>&lt;<span style="font-weight: bold; text-decoration: underline;">List</span>&lt;<span style="font-weight: bold; text-decoration: underline;">UrlBean</span>&gt;&gt; <span style="font-weight: bold; font-style: italic;">result</span> = <span style="font-weight: bold;">new</span> <span style="font-weight: bold; text-decoration: underline;">ResultBean</span>&lt;<span style="font-weight: bold; text-decoration: underline;">List</span>&lt;<span style="font-weight: bold; text-decoration: underline;">UrlBean</span>&gt;&gt;();
+<span style="color: #ab85a3;">@RestController</span>
+<span style="color: #91a0b3;">public</span> <span style="color: #91a0b3;">class</span> <span style="color: #ad8572;">MiIndexPageController</span> {
+    <span style="color: #ab85a3;">@RequestMapping</span>(<span style="color: #ddbc91;">"/typeList"</span>)
+    <span style="color: #91a0b3;">public</span> <span style="color: #ad8572;">ResultBean</span> <span style="color: #a9df90;">typeList</span>() {
+        <span style="color: #ad8572;">ResultBean</span>&lt;<span style="color: #ad8572;">List</span>&lt;<span style="color: #ad8572;">UrlBean</span>&gt;&gt; <span style="color: #aaca86;">result</span> = <span style="color: #91a0b3;">new</span> <span style="color: #ad8572;">ResultBean</span>&lt;<span style="color: #ad8572;">List</span>&lt;<span style="color: #ad8572;">UrlBean</span>&gt;&gt;();
 
-        <span style="font-weight: bold; font-style: italic;">// </span><span style="font-weight: bold; font-style: italic;">Data assembly</span>
-        result.setSign(<span style="font-weight: bold; text-decoration: underline;">true</span>);
-        result.setMsg(<span style="font-style: italic;">"Data Query succeeded!"</span>);
-        <span style="font-weight: bold; font-style: italic;">// </span><span style="font-weight: bold; font-style: italic;">[]</span>
-        <span style="font-weight: bold; text-decoration: underline;">List</span>&lt;<span style="font-weight: bold; text-decoration: underline;">UrlBean</span>&gt; <span style="font-weight: bold; font-style: italic;">list</span> = <span style="font-weight: bold;">new</span> <span style="font-weight: bold; text-decoration: underline;">ArrayList</span>&lt;<span style="font-weight: bold; text-decoration: underline;">UrlBean</span>&gt;();
-        <span style="font-weight: bold; font-style: italic;">// </span><span style="font-weight: bold; font-style: italic;">list begin</span>
-        <span style="font-weight: bold; text-decoration: underline;">UrlBean</span> <span style="font-weight: bold; font-style: italic;">bean1</span> = <span style="font-weight: bold;">new</span> <span style="font-weight: bold; text-decoration: underline;">UrlBean</span>();
+        <span style="color: #706565;">// </span><span style="color: #857575;">Data assembly</span>
+        result.setSign(<span style="color: #ab85a3;">true</span>);
+        result.setMsg(<span style="color: #ddbc91;">"Data Query succeeded!"</span>);
+        <span style="color: #706565;">// </span><span style="color: #857575;">[]</span>
+        <span style="color: #ad8572;">List</span>&lt;<span style="color: #ad8572;">UrlBean</span>&gt; <span style="color: #aaca86;">list</span> = <span style="color: #91a0b3;">new</span> <span style="color: #ad8572;">ArrayList</span>&lt;<span style="color: #ad8572;">UrlBean</span>&gt;();
+        <span style="color: #706565;">// </span><span style="color: #857575;">list begin</span>
+        <span style="color: #ad8572;">UrlBean</span> <span style="color: #aaca86;">bean1</span> = <span style="color: #91a0b3;">new</span> <span style="color: #ad8572;">UrlBean</span>();
         bean1.setId(1);
-        bean1.setName(<span style="font-style: italic;">"&#23567;&#31859;"</span>);
-        bean1.setUrl(<span style="font-style: italic;">"https://www.mi.com/"</span>);
+        bean1.setName(<span style="color: #ddbc91;">"&#23567;&#31859;"</span>);
+        bean1.setUrl(<span style="color: #ddbc91;">"https://www.mi.com/"</span>);
         list.add(bean1);
 
-        <span style="font-weight: bold; text-decoration: underline;">UrlBean</span> <span style="font-weight: bold; font-style: italic;">bean2</span> = <span style="font-weight: bold;">new</span> <span style="font-weight: bold; text-decoration: underline;">UrlBean</span>();
+        <span style="color: #ad8572;">UrlBean</span> <span style="color: #aaca86;">bean2</span> = <span style="color: #91a0b3;">new</span> <span style="color: #ad8572;">UrlBean</span>();
         bean2.setId(2);
-        bean2.setName(<span style="font-style: italic;">"&#28120;&#23453;"</span>);
-        bean2.setUrl(<span style="font-style: italic;">"https://www.taobao.com/"</span>);
+        bean2.setName(<span style="color: #ddbc91;">"&#28120;&#23453;"</span>);
+        bean2.setUrl(<span style="color: #ddbc91;">"https://www.taobao.com/"</span>);
         list.add(bean2);
 
-        <span style="font-weight: bold; text-decoration: underline;">UrlBean</span> <span style="font-weight: bold; font-style: italic;">bean3</span> = <span style="font-weight: bold;">new</span> <span style="font-weight: bold; text-decoration: underline;">UrlBean</span>();
+        <span style="color: #ad8572;">UrlBean</span> <span style="color: #aaca86;">bean3</span> = <span style="color: #91a0b3;">new</span> <span style="color: #ad8572;">UrlBean</span>();
         bean3.setId(3);
-        bean3.setName(<span style="font-style: italic;">"&#20140;&#19996;"</span>);
-        bean3.setUrl(<span style="font-style: italic;">"https://www.jd.com/"</span>);
+        bean3.setName(<span style="color: #ddbc91;">"&#20140;&#19996;"</span>);
+        bean3.setUrl(<span style="color: #ddbc91;">"https://www.jd.com/"</span>);
         list.add(bean3);
-        <span style="font-weight: bold; font-style: italic;">// </span><span style="font-weight: bold; font-style: italic;">list end</span>
+        <span style="color: #706565;">// </span><span style="color: #857575;">list end</span>
 
         result.setData(list);
-        <span style="font-weight: bold;">return</span> result;
+        <span style="color: #91a0b3;">return</span> result;
     }
 }
 </pre>
 </div>
 
 <div class="org-src-container">
-<pre class="src src-java"><span style="font-weight: bold; font-style: italic;">// </span><span style="font-weight: bold; font-style: italic;">src/main/java/yidajiabei.xyz/util/ResultBean.java</span>
-<span style="font-weight: bold;">package</span> yidajiabei.xyz.<span style="font-weight: bold; text-decoration: underline;">util</span>;
+<pre class="src src-java"><span style="color: #706565;">// </span><span style="color: #857575;">src/main/java/yidajiabei.xyz/util/ResultBean.java</span>
+<span style="color: #91a0b3;">package</span> yidajiabei.xyz.<span style="color: #ab85a3;">util</span>;
 
-<span style="font-weight: bold; font-style: italic;">// </span><span style="font-weight: bold; font-style: italic;">{ sign: boolean, msg: "", data: null }</span>
-<span style="font-weight: bold;">public</span> <span style="font-weight: bold;">class</span> <span style="font-weight: bold; text-decoration: underline;">ResultBean</span>&lt;<span style="font-weight: bold; text-decoration: underline;">T</span>&gt; {
-    <span style="font-weight: bold;">private</span> <span style="font-weight: bold; text-decoration: underline;">boolean</span> <span style="font-weight: bold; font-style: italic;">sign</span>; <span style="font-weight: bold; font-style: italic;">// </span><span style="font-weight: bold; font-style: italic;">result</span>
-    <span style="font-weight: bold;">private</span> <span style="font-weight: bold; text-decoration: underline;">String</span> <span style="font-weight: bold; font-style: italic;">msg</span>;   <span style="font-weight: bold; font-style: italic;">// </span><span style="font-weight: bold; font-style: italic;">message</span>
-    <span style="font-weight: bold;">private</span> <span style="font-weight: bold; text-decoration: underline;">T</span> <span style="font-weight: bold; font-style: italic;">data</span>;       <span style="font-weight: bold; font-style: italic;">// </span><span style="font-weight: bold; font-style: italic;">return json data</span>
+<span style="color: #706565;">// </span><span style="color: #857575;">{ sign: boolean, msg: "", data: null }</span>
+<span style="color: #91a0b3;">public</span> <span style="color: #91a0b3;">class</span> <span style="color: #ad8572;">ResultBean</span>&lt;<span style="color: #ad8572;">T</span>&gt; {
+    <span style="color: #91a0b3;">private</span> <span style="color: #ad8572;">boolean</span> <span style="color: #aaca86;">sign</span>; <span style="color: #706565;">// </span><span style="color: #857575;">result</span>
+    <span style="color: #91a0b3;">private</span> <span style="color: #ad8572;">String</span> <span style="color: #aaca86;">msg</span>;   <span style="color: #706565;">// </span><span style="color: #857575;">message</span>
+    <span style="color: #91a0b3;">private</span> <span style="color: #ad8572;">T</span> <span style="color: #aaca86;">data</span>;       <span style="color: #706565;">// </span><span style="color: #857575;">return json data</span>
 
-    <span style="font-weight: bold;">public</span> <span style="font-weight: bold; text-decoration: underline;">boolean</span> <span style="font-weight: bold;">isSign</span>() {
-        <span style="font-weight: bold;">return</span> sign;
+    <span style="color: #91a0b3;">public</span> <span style="color: #ad8572;">boolean</span> <span style="color: #a9df90;">isSign</span>() {
+        <span style="color: #91a0b3;">return</span> sign;
     }
 
-    <span style="font-weight: bold;">public</span> <span style="font-weight: bold; text-decoration: underline;">void</span> <span style="font-weight: bold;">setSign</span>(<span style="font-weight: bold; text-decoration: underline;">boolean</span> <span style="font-weight: bold; font-style: italic;">sign</span>) {
-        <span style="font-weight: bold;">this</span>.sign = sign;
+    <span style="color: #91a0b3;">public</span> <span style="color: #ad8572;">void</span> <span style="color: #a9df90;">setSign</span>(<span style="color: #ad8572;">boolean</span> <span style="color: #aaca86;">sign</span>) {
+        <span style="color: #91a0b3;">this</span>.sign = sign;
     }
 
-    <span style="font-weight: bold;">public</span> <span style="font-weight: bold; text-decoration: underline;">String</span> <span style="font-weight: bold;">getMsg</span>() {
-        <span style="font-weight: bold;">return</span> msg;
+    <span style="color: #91a0b3;">public</span> <span style="color: #ad8572;">String</span> <span style="color: #a9df90;">getMsg</span>() {
+        <span style="color: #91a0b3;">return</span> msg;
     }
 
-    <span style="font-weight: bold;">public</span> <span style="font-weight: bold; text-decoration: underline;">void</span> <span style="font-weight: bold;">setMsg</span>(<span style="font-weight: bold; text-decoration: underline;">String</span> <span style="font-weight: bold; font-style: italic;">msg</span>) {
-        <span style="font-weight: bold;">this</span>.msg = msg;
+    <span style="color: #91a0b3;">public</span> <span style="color: #ad8572;">void</span> <span style="color: #a9df90;">setMsg</span>(<span style="color: #ad8572;">String</span> <span style="color: #aaca86;">msg</span>) {
+        <span style="color: #91a0b3;">this</span>.msg = msg;
     }
 
-    <span style="font-weight: bold;">public</span> <span style="font-weight: bold; text-decoration: underline;">T</span> <span style="font-weight: bold;">getData</span>() {
-        <span style="font-weight: bold;">return</span> data;
+    <span style="color: #91a0b3;">public</span> <span style="color: #ad8572;">T</span> <span style="color: #a9df90;">getData</span>() {
+        <span style="color: #91a0b3;">return</span> data;
     }
 
-    <span style="font-weight: bold;">public</span> <span style="font-weight: bold; text-decoration: underline;">void</span> <span style="font-weight: bold;">setData</span>(<span style="font-weight: bold; text-decoration: underline;">T</span> <span style="font-weight: bold; font-style: italic;">data</span>) {
-        <span style="font-weight: bold;">this</span>.data = data;
+    <span style="color: #91a0b3;">public</span> <span style="color: #ad8572;">void</span> <span style="color: #a9df90;">setData</span>(<span style="color: #ad8572;">T</span> <span style="color: #aaca86;">data</span>) {
+        <span style="color: #91a0b3;">this</span>.data = data;
     }
 }
 </pre>
@@ -1006,7 +1006,7 @@ Project 结构：
 </p>
 
 
-<div id="orgd035065" class="figure">
+<div id="org1443d27" class="figure">
 <p><object type="image/svg+xml" data="file:///images/java-resultbean.svg" class="org-svg">
 Sorry, your browser does not support SVG.</object>
 </p>
@@ -1014,62 +1014,62 @@ Sorry, your browser does not support SVG.</object>
 </div>
 
 <div class="org-src-container">
-<pre class="src src-java"><span style="font-weight: bold; font-style: italic;">// </span><span style="font-weight: bold; font-style: italic;">src/main/java/yidajiabei.xyz/domain/UrlBean.java</span>
-<span style="font-weight: bold;">package</span> yidajiabei.xyz.<span style="font-weight: bold; text-decoration: underline;">domain</span>;
+<pre class="src src-java"><span style="color: #706565;">// </span><span style="color: #857575;">src/main/java/yidajiabei.xyz/domain/UrlBean.java</span>
+<span style="color: #91a0b3;">package</span> yidajiabei.xyz.<span style="color: #ab85a3;">domain</span>;
 
-<span style="font-weight: bold; font-style: italic;">// </span><span style="font-weight: bold; font-style: italic;">{ id: null, name: "", url: "" }</span>
-<span style="font-weight: bold;">public</span> <span style="font-weight: bold;">class</span> <span style="font-weight: bold; text-decoration: underline;">UrlBean</span> {
-    <span style="font-weight: bold;">private</span> <span style="font-weight: bold; text-decoration: underline;">Integer</span> <span style="font-weight: bold; font-style: italic;">id</span>; <span style="font-weight: bold; font-style: italic;">// </span><span style="font-weight: bold; font-style: italic;">Unique identifier</span>
-    <span style="font-weight: bold;">private</span> <span style="font-weight: bold; text-decoration: underline;">String</span> <span style="font-weight: bold; font-style: italic;">name</span>;
-    <span style="font-weight: bold;">private</span> <span style="font-weight: bold; text-decoration: underline;">String</span> <span style="font-weight: bold; font-style: italic;">url</span>;
+<span style="color: #706565;">// </span><span style="color: #857575;">{ id: null, name: "", url: "" }</span>
+<span style="color: #91a0b3;">public</span> <span style="color: #91a0b3;">class</span> <span style="color: #ad8572;">UrlBean</span> {
+    <span style="color: #91a0b3;">private</span> <span style="color: #ad8572;">Integer</span> <span style="color: #aaca86;">id</span>; <span style="color: #706565;">// </span><span style="color: #857575;">Unique identifier</span>
+    <span style="color: #91a0b3;">private</span> <span style="color: #ad8572;">String</span> <span style="color: #aaca86;">name</span>;
+    <span style="color: #91a0b3;">private</span> <span style="color: #ad8572;">String</span> <span style="color: #aaca86;">url</span>;
 
-    <span style="font-weight: bold;">public</span> <span style="font-weight: bold; text-decoration: underline;">Integer</span> <span style="font-weight: bold;">getId</span>() {
-        <span style="font-weight: bold;">return</span> id;
+    <span style="color: #91a0b3;">public</span> <span style="color: #ad8572;">Integer</span> <span style="color: #a9df90;">getId</span>() {
+        <span style="color: #91a0b3;">return</span> id;
     }
 
-    <span style="font-weight: bold;">public</span> <span style="font-weight: bold; text-decoration: underline;">void</span> <span style="font-weight: bold;">setId</span>(<span style="font-weight: bold; text-decoration: underline;">Integer</span> <span style="font-weight: bold; font-style: italic;">id</span>) {
-        <span style="font-weight: bold;">this</span>.id = id;
+    <span style="color: #91a0b3;">public</span> <span style="color: #ad8572;">void</span> <span style="color: #a9df90;">setId</span>(<span style="color: #ad8572;">Integer</span> <span style="color: #aaca86;">id</span>) {
+        <span style="color: #91a0b3;">this</span>.id = id;
     }
 
-    <span style="font-weight: bold;">public</span> <span style="font-weight: bold; text-decoration: underline;">String</span> <span style="font-weight: bold;">getName</span>() {
-        <span style="font-weight: bold;">return</span> name;
+    <span style="color: #91a0b3;">public</span> <span style="color: #ad8572;">String</span> <span style="color: #a9df90;">getName</span>() {
+        <span style="color: #91a0b3;">return</span> name;
     }
 
-    <span style="font-weight: bold;">public</span> <span style="font-weight: bold; text-decoration: underline;">void</span> <span style="font-weight: bold;">setName</span>(<span style="font-weight: bold; text-decoration: underline;">String</span> <span style="font-weight: bold; font-style: italic;">name</span>) {
-        <span style="font-weight: bold;">this</span>.name = name;
+    <span style="color: #91a0b3;">public</span> <span style="color: #ad8572;">void</span> <span style="color: #a9df90;">setName</span>(<span style="color: #ad8572;">String</span> <span style="color: #aaca86;">name</span>) {
+        <span style="color: #91a0b3;">this</span>.name = name;
     }
 
-    <span style="font-weight: bold;">public</span> <span style="font-weight: bold; text-decoration: underline;">String</span> <span style="font-weight: bold;">getUrl</span>() {
-        <span style="font-weight: bold;">return</span> url;
+    <span style="color: #91a0b3;">public</span> <span style="color: #ad8572;">String</span> <span style="color: #a9df90;">getUrl</span>() {
+        <span style="color: #91a0b3;">return</span> url;
     }
 
-    <span style="font-weight: bold;">public</span> <span style="font-weight: bold; text-decoration: underline;">void</span> <span style="font-weight: bold;">setUrl</span>(<span style="font-weight: bold; text-decoration: underline;">String</span> <span style="font-weight: bold; font-style: italic;">url</span>) {
-        <span style="font-weight: bold;">this</span>.url = url;
+    <span style="color: #91a0b3;">public</span> <span style="color: #ad8572;">void</span> <span style="color: #a9df90;">setUrl</span>(<span style="color: #ad8572;">String</span> <span style="color: #aaca86;">url</span>) {
+        <span style="color: #91a0b3;">this</span>.url = url;
     }
 }
 </pre>
 </div>
 
 <div class="org-src-container">
-<pre class="src src-js"><span style="font-weight: bold; font-style: italic;">// </span><span style="font-weight: bold; font-style: italic;">src/main/resources/static/js/system/index.js</span>
-<span style="font-weight: bold;">let</span> <span style="font-weight: bold; font-style: italic;">app</span> = <span style="font-weight: bold;">new</span> <span style="font-weight: bold; text-decoration: underline;">Vue</span>({
-    el: <span style="font-style: italic;">'#app'</span>,
+<pre class="src src-js"><span style="color: #706565;">// </span><span style="color: #857575;">src/main/resources/static/js/system/index.js</span>
+<span style="color: #91a0b3;">let</span> <span style="color: #aaca86;">app</span> = <span style="color: #91a0b3;">new</span> <span style="color: #ad8572;">Vue</span>({
+    el: <span style="color: #ddbc91;">'#app'</span>,
     data: {
-        <span style="font-weight: bold; font-style: italic;">// </span><span style="font-weight: bold; font-style: italic;">mi_index: '&#20140;&#19996;&#21830;&#22478;',</span>
-        <span style="font-weight: bold; font-style: italic;">// </span><span style="font-weight: bold; font-style: italic;">mi_url: 'https://www.jd.com/',</span>
+        <span style="color: #706565;">// </span><span style="color: #857575;">mi_index: '&#20140;&#19996;&#21830;&#22478;',</span>
+        <span style="color: #706565;">// </span><span style="color: #857575;">mi_url: 'https://www.jd.com/',</span>
         mi_type: []
     },
-    <span style="font-weight: bold;">created</span>:<span style="font-weight: bold;">function</span> () {
-        <span style="font-weight: bold; font-style: italic;">// </span><span style="font-weight: bold; font-style: italic;">send ajax request</span>
-        <span style="font-weight: bold;">let</span> <span style="font-weight: bold; font-style: italic;">_this</span> = <span style="font-weight: bold; text-decoration: underline;">this</span>;
-        axios.get(<span style="font-style: italic;">"http://localhost:8000/typeList"</span>, {params: {}})
-            .then(<span style="font-weight: bold;">function</span> (<span style="font-weight: bold; font-style: italic;">ret</span>) {
+    <span style="color: #a9df90;">created</span>:<span style="color: #91a0b3;">function</span> () {
+        <span style="color: #706565;">// </span><span style="color: #857575;">send ajax request</span>
+        <span style="color: #91a0b3;">let</span> <span style="color: #aaca86;">_this</span> = <span style="color: #ab85a3;">this</span>;
+        axios.get(<span style="color: #ddbc91;">"http://localhost:8000/typeList"</span>, {params: {}})
+            .then(<span style="color: #91a0b3;">function</span> (<span style="color: #aaca86;">ret</span>) {
                 console.log(ret.data);
-                <span style="font-weight: bold;">let</span> <span style="font-weight: bold; font-style: italic;">dataType</span> = ret.data;
-                dataType.msg = <span style="font-weight: bold; text-decoration: underline;">undefined</span>;
-                <span style="font-weight: bold;">if</span>(dataType.sign===<span style="font-weight: bold; text-decoration: underline;">true</span>) {
+                <span style="color: #91a0b3;">let</span> <span style="color: #aaca86;">dataType</span> = ret.data;
+                dataType.msg = <span style="color: #ab85a3;">undefined</span>;
+                <span style="color: #91a0b3;">if</span>(dataType.sign===<span style="color: #ab85a3;">true</span>) {
                     _this.mi_type = dataType.data;
-                } <span style="font-weight: bold;">else</span> {
+                } <span style="color: #91a0b3;">else</span> {
                     alert(dataType.msg);
                 }
         })
@@ -1083,14 +1083,14 @@ axios 的图形示意：
 </p>
 
 
-<div id="org5ba5c1a" class="figure">
+<div id="org05780e1" class="figure">
 <p><object type="image/svg+xml" data="file:///images/axios.svg" class="org-svg">
 Sorry, your browser does not support SVG.</object>
 </p>
 <p><span class="figure-number">Figure 3: </span>ResultBean.java</p>
 </div>
 
-<pre class="example" id="orgc5aa5da">
+<pre class="example" id="orge181f5a">
 &lt;!-- src/main/resources/static/index.html --&gt;
 &lt;li v-for="type in mi_type"&gt;
   &lt;a v-bind:href="type.url"&gt;{{ type.name }}&lt;/a&gt;&lt;span&gt;|&lt;/span&gt;
@@ -1126,9 +1126,9 @@ sql 语句练习：
 </p>
 
 <div class="org-src-container">
-<pre class="src src-sql"><span style="font-weight: bold;">SELECT</span> id,<span style="font-weight: bold;">name</span>,url <span style="font-weight: bold;">FROM</span> urlbean;
-<span style="font-weight: bold; font-style: italic;">-- this is comment</span>
-<span style="font-weight: bold; font-style: italic;">-- &#20174; urlbean &#20013;&#36873;&#25321; id,name,url &#23383;&#27573;</span>
+<pre class="src src-sql"><span style="color: #91a0b3;">SELECT</span> id,<span style="color: #91a0b3;">name</span>,url <span style="color: #91a0b3;">FROM</span> urlbean;
+<span style="color: #857575;">-- this is comment</span>
+<span style="color: #857575;">-- &#20174; urlbean &#20013;&#36873;&#25321; id,name,url &#23383;&#27573;</span>
 </pre>
 </div>
 
@@ -1153,7 +1153,7 @@ urlPageBean，urlPageBeanMapper 文件，之后前端从后端调用数据。
 输出：
 </p>
 
-<pre class="example" id="org7c54925">
+<pre class="example" id="org7cdf35f">
 ERROR 1045 (28000): Access denied for user 'root'@'localhost' (using password: YES)
 </pre>
 
@@ -1161,7 +1161,7 @@ ERROR 1045 (28000): Access denied for user 'root'@'localhost' (using password: Y
 解决办法（<a href="https://stackoverflow.com/a/41793945">来源</a>）：
 </p>
 
-<pre class="example" id="org28ac20a">
+<pre class="example" id="org6fa1e13">
 # add `skip-grant-tables` under `[mysqld]` in `/etc/my.cnf` or `/etc/mysql/my.cnf`
 systemctl restart mysqld
 mysql -u root -p
@@ -1183,7 +1183,7 @@ systemctl restart mysqld
 修改 my.cnf 文件，我的文件配置：
 </p>
 
-<pre class="example" id="orge19844e">
+<pre class="example" id="orge922521">
 # For advice on how to change settings please see
 # http://dev.mysql.com/doc/refman/8.0/en/server-configuration-defaults.html
 
@@ -1233,7 +1233,7 @@ secure-file-priv = "/home/archie/"
 <h3 id="第七天"><span class="section-number-3">2.9</span> 第七天</h3>
 <div class="outline-text-3" id="text-第七天">
 
-<div id="org1899195" class="figure">
+<div id="org6cc86c6" class="figure">
 <p><object type="image/svg+xml" data="file:///images/front-back-end-mysql-framework.svg" class="org-svg">
 Sorry, your browser does not support SVG.</object>
 </p>
@@ -1294,12 +1294,12 @@ lombok 插件的使用：
 </ol>
 
 <div class="org-src-container">
-<pre class="src src-java"><span style="font-weight: bold; text-decoration: underline;">@Getter</span>
-<span style="font-weight: bold; text-decoration: underline;">@Setter</span>
-<span style="font-weight: bold;">public</span> <span style="font-weight: bold;">class</span> <span style="font-weight: bold; text-decoration: underline;">Resultbean</span>&lt;<span style="font-weight: bold; text-decoration: underline;">T</span>&gt; {
-    <span style="font-weight: bold;">private</span> <span style="font-weight: bold; text-decoration: underline;">boolean</span> <span style="font-weight: bold; font-style: italic;">sign</span>;
-    <span style="font-weight: bold;">private</span> <span style="font-weight: bold; text-decoration: underline;">String</span> <span style="font-weight: bold; font-style: italic;">msg</span>;
-    <span style="font-weight: bold;">private</span> <span style="font-weight: bold; text-decoration: underline;">T</span> <span style="font-weight: bold; font-style: italic;">data</span>;
+<pre class="src src-java"><span style="color: #ab85a3;">@Getter</span>
+<span style="color: #ab85a3;">@Setter</span>
+<span style="color: #91a0b3;">public</span> <span style="color: #91a0b3;">class</span> <span style="color: #ad8572;">Resultbean</span>&lt;<span style="color: #ad8572;">T</span>&gt; {
+    <span style="color: #91a0b3;">private</span> <span style="color: #ad8572;">boolean</span> <span style="color: #aaca86;">sign</span>;
+    <span style="color: #91a0b3;">private</span> <span style="color: #ad8572;">String</span> <span style="color: #aaca86;">msg</span>;
+    <span style="color: #91a0b3;">private</span> <span style="color: #ad8572;">T</span> <span style="color: #aaca86;">data</span>;
 }
 </pre>
 </div>
