@@ -3,7 +3,7 @@
 "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en">
 <head>
-<!-- 2021-11-22 Mon 17:39 -->
+<!-- 2021-11-24 Wed 16:42 -->
 <meta http-equiv="Content-Type" content="text/html;charset=utf-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1" />
 <title>&lrm;</title>
@@ -266,21 +266,21 @@
 <h2 id="题解2"><span class="section-number-2">2</span> 题解<sup><a id="fnr.2" class="footref" href="#fn.2">2</a></sup></h2>
 <div class="outline-text-2" id="text-题解2">
 <div class="org-src-container">
-<pre class="src src-js"><span style="font-style: italic;">/**</span>
-<span style="font-style: italic;"> * @param {number[]} prices</span>
-<span style="font-style: italic;"> * @return {number}</span>
-<span style="font-style: italic;"> */</span>
-<span style="font-weight: bold;">let</span> <span style="font-weight: bold; font-style: italic;">maxProfit</span> = <span style="font-weight: bold;">function</span> (<span style="font-weight: bold; font-style: italic;">prices</span>) {
-  <span style="font-weight: bold;">const</span> <span style="font-weight: bold; font-style: italic;">n</span> = prices.length;
-  <span style="font-weight: bold;">let</span> <span style="font-weight: bold; font-style: italic;">dp0</span> = 0,
+<pre class="src src-js"><span style="color: #7c7565;">/**</span>
+<span style="color: #7c7565;"> * @param {number[]} prices</span>
+<span style="color: #7c7565;"> * @return {number}</span>
+<span style="color: #7c7565;"> */</span>
+<span style="color: #91a0b3;">let</span> <span style="color: #aaca86;">maxProfit</span> = <span style="color: #91a0b3;">function</span> (<span style="color: #aaca86;">prices</span>) {
+  <span style="color: #91a0b3;">const</span> <span style="color: #aaca86;">n</span> = prices.length;
+  <span style="color: #91a0b3;">let</span> <span style="color: #aaca86;">dp0</span> = 0,
     dp1 = -prices[0];
-  <span style="font-weight: bold;">for</span> (<span style="font-weight: bold;">let</span> <span style="font-weight: bold; font-style: italic;">i</span> = 1; i &lt; n; ++i) {
-    <span style="font-weight: bold;">let</span> <span style="font-weight: bold; font-style: italic;">newDp0</span> = Math.max(dp0, dp1 + prices[i]);
-    <span style="font-weight: bold;">let</span> <span style="font-weight: bold; font-style: italic;">newDp1</span> = Math.max(dp1, dp0 - prices[i]);
+  <span style="color: #91a0b3;">for</span> (<span style="color: #91a0b3;">let</span> <span style="color: #aaca86;">i</span> = 1; i &lt; n; ++i) {
+    <span style="color: #91a0b3;">let</span> <span style="color: #aaca86;">newDp0</span> = Math.max(dp0, dp1 + prices[i]);
+    <span style="color: #91a0b3;">let</span> <span style="color: #aaca86;">newDp1</span> = Math.max(dp1, dp0 - prices[i]);
     dp0 = newDp0;
     dp1 = newDp1;
   }
-  <span style="font-weight: bold;">return</span> dp0;
+  <span style="color: #91a0b3;">return</span> dp0;
 };
 </pre>
 </div>

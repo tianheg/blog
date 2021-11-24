@@ -3,7 +3,7 @@
 "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en">
 <head>
-<!-- 2021-11-22 Mon 17:40 -->
+<!-- 2021-11-24 Wed 16:43 -->
 <meta http-equiv="Content-Type" content="text/html;charset=utf-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1" />
 <title>&lrm;</title>
@@ -261,30 +261,30 @@ tags = ['LeetCode'] slug = 'lc-94-binary-tree-inorder-traversal' <del>+</del>
 </p>
 
 <div class="org-src-container">
-<pre class="src src-js"><span style="font-style: italic;">/**</span>
-<span style="font-style: italic;"> * Definition for a binary tree node.</span>
-<span style="font-style: italic;"> * function TreeNode(val, left, right) {</span>
-<span style="font-style: italic;"> *     this.val = (val===undefined ? 0 : val)</span>
-<span style="font-style: italic;"> *     this.left = (left===undefined ? null : left)</span>
-<span style="font-style: italic;"> *     this.right = (right===undefined ? null : right)</span>
-<span style="font-style: italic;"> * }</span>
-<span style="font-style: italic;"> */</span>
-<span style="font-style: italic;">/**</span>
-<span style="font-style: italic;"> * @param {TreeNode} root</span>
-<span style="font-style: italic;"> * @return {number[]}</span>
-<span style="font-style: italic;"> */</span>
-<span style="font-weight: bold;">let</span> <span style="font-weight: bold; font-style: italic;">inorderTraversal</span> = <span style="font-weight: bold;">function</span>(<span style="font-weight: bold; font-style: italic;">root</span>) {
-    <span style="font-weight: bold;">const</span> <span style="font-weight: bold; font-style: italic;">res</span> = [];
-    <span style="font-weight: bold;">const</span> <span style="font-weight: bold; font-style: italic;">inorder</span> = (root) =&gt; {
-        <span style="font-weight: bold;">if</span> (!root) {
-            <span style="font-weight: bold;">return</span>;
+<pre class="src src-js"><span style="color: #7c7565;">/**</span>
+<span style="color: #7c7565;"> * Definition for a binary tree node.</span>
+<span style="color: #7c7565;"> * function TreeNode(val, left, right) {</span>
+<span style="color: #7c7565;"> *     this.val = (val===undefined ? 0 : val)</span>
+<span style="color: #7c7565;"> *     this.left = (left===undefined ? null : left)</span>
+<span style="color: #7c7565;"> *     this.right = (right===undefined ? null : right)</span>
+<span style="color: #7c7565;"> * }</span>
+<span style="color: #7c7565;"> */</span>
+<span style="color: #7c7565;">/**</span>
+<span style="color: #7c7565;"> * @param {TreeNode} root</span>
+<span style="color: #7c7565;"> * @return {number[]}</span>
+<span style="color: #7c7565;"> */</span>
+<span style="color: #91a0b3;">let</span> <span style="color: #aaca86;">inorderTraversal</span> = <span style="color: #91a0b3;">function</span>(<span style="color: #aaca86;">root</span>) {
+    <span style="color: #91a0b3;">const</span> <span style="color: #aaca86;">res</span> = [];
+    <span style="color: #91a0b3;">const</span> <span style="color: #aaca86;">inorder</span> = (root) =&gt; {
+        <span style="color: #91a0b3;">if</span> (!root) {
+            <span style="color: #91a0b3;">return</span>;
         }
         inorder(root.left);
         res.push(root.val);
         inorder(root.right);
     }
     inorder(root);
-    <span style="font-weight: bold;">return</span> res;
+    <span style="color: #91a0b3;">return</span> res;
 };
 </pre>
 </div>

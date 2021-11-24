@@ -3,7 +3,7 @@
 "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en">
 <head>
-<!-- 2021-11-22 Mon 17:40 -->
+<!-- 2021-11-24 Wed 16:42 -->
 <meta http-equiv="Content-Type" content="text/html;charset=utf-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1" />
 <title>&lrm;</title>
@@ -232,45 +232,45 @@ JS 文件：
 </p>
 
 <div class="org-src-container">
-<pre class="src src-js"><span style="font-style: italic;">/**</span>
-<span style="font-style: italic;">  References:</span>
+<pre class="src src-js"><span style="color: #7c7565;">/**</span>
+<span style="color: #7c7565;">  References:</span>
 
-<span style="font-style: italic;">  1. https://developers.google.com/web/fundamentals/primers/service-workers</span>
-<span style="font-style: italic;">  2. https://developers.google.com/web/fundamentals/instant-and-offline/offline-cookbook</span>
-<span style="font-style: italic;">  3. https://googlechrome.github.io/samples/service-worker/</span>
-<span style="font-style: italic;">  4. https://developer.mozilla.org/en-US/docs/Web/API/Service_Worker_API/Using_Service_Workers</span>
-<span style="font-style: italic;">  5. https://serviceworke.rs/</span>
-<span style="font-style: italic;">  6. https://www.youtube.com/watch?v=baSiSIyTGSk</span>
-<span style="font-style: italic;">*/</span>
+<span style="color: #7c7565;">  1. https://developers.google.com/web/fundamentals/primers/service-workers</span>
+<span style="color: #7c7565;">  2. https://developers.google.com/web/fundamentals/instant-and-offline/offline-cookbook</span>
+<span style="color: #7c7565;">  3. https://googlechrome.github.io/samples/service-worker/</span>
+<span style="color: #7c7565;">  4. https://developer.mozilla.org/en-US/docs/Web/API/Service_Worker_API/Using_Service_Workers</span>
+<span style="color: #7c7565;">  5. https://serviceworke.rs/</span>
+<span style="color: #7c7565;">  6. https://www.youtube.com/watch?v=baSiSIyTGSk</span>
+<span style="color: #7c7565;">*/</span>
 
-<span style="font-weight: bold;">const</span> <span style="font-weight: bold; font-style: italic;">RUNTIME</span> = <span style="font-style: italic;">"runtime"</span>;
+<span style="color: #91a0b3;">const</span> <span style="color: #aaca86;">RUNTIME</span> = <span style="color: #ddbc91;">"runtime"</span>;
 
 self.skipWaiting();
 
-self.addEventListener(<span style="font-style: italic;">"fetch"</span>, (event) =&gt; {
-  <span style="font-weight: bold; font-style: italic;">// </span><span style="font-weight: bold; font-style: italic;">Do nothing if not the same origin</span>
-  <span style="font-weight: bold;">if</span> (!event.request.url.startsWith(self.location.origin)) {
-    <span style="font-weight: bold;">return</span>;
+self.addEventListener(<span style="color: #ddbc91;">"fetch"</span>, (event) =&gt; {
+  <span style="color: #706565;">// </span><span style="color: #857575;">Do nothing if not the same origin</span>
+  <span style="color: #91a0b3;">if</span> (!event.request.url.startsWith(self.location.origin)) {
+    <span style="color: #91a0b3;">return</span>;
   }
 
-  <span style="font-weight: bold; font-style: italic;">// </span><span style="font-weight: bold; font-style: italic;">Network first strategy</span>
+  <span style="color: #706565;">// </span><span style="color: #857575;">Network first strategy</span>
   event.respondWith(
-    (<span style="font-weight: bold;">async</span> () =&gt; {
-      <span style="font-weight: bold;">const</span> <span style="font-weight: bold; font-style: italic;">cache</span> = <span style="font-weight: bold;">await</span> caches.open(RUNTIME);
+    (<span style="color: #91a0b3;">async</span> () =&gt; {
+      <span style="color: #91a0b3;">const</span> <span style="color: #aaca86;">cache</span> = <span style="color: #91a0b3;">await</span> caches.open(RUNTIME);
 
-      <span style="font-weight: bold;">try</span> {
-        <span style="font-weight: bold;">const</span> <span style="font-weight: bold; font-style: italic;">networkResponse</span> = <span style="font-weight: bold;">await</span> fetch(event.request);
+      <span style="color: #91a0b3;">try</span> {
+        <span style="color: #91a0b3;">const</span> <span style="color: #aaca86;">networkResponse</span> = <span style="color: #91a0b3;">await</span> fetch(event.request);
 
-        <span style="font-weight: bold; font-style: italic;">// </span><span style="font-weight: bold; font-style: italic;">Save/Update cache if network response is ok</span>
-        <span style="font-weight: bold;">if</span> (networkResponse &amp;&amp; networkResponse.status === 200) {
+        <span style="color: #706565;">// </span><span style="color: #857575;">Save/Update cache if network response is ok</span>
+        <span style="color: #91a0b3;">if</span> (networkResponse &amp;&amp; networkResponse.status === 200) {
           cache.put(event.request, networkResponse.clone());
         }
 
-        <span style="font-weight: bold;">return</span> networkResponse;
-      } <span style="font-weight: bold;">catch</span> (e) {
-        <span style="font-weight: bold;">const</span> <span style="font-weight: bold; font-style: italic;">cachedResponse</span> = <span style="font-weight: bold;">await</span> cache.match(event.request);
+        <span style="color: #91a0b3;">return</span> networkResponse;
+      } <span style="color: #91a0b3;">catch</span> (e) {
+        <span style="color: #91a0b3;">const</span> <span style="color: #aaca86;">cachedResponse</span> = <span style="color: #91a0b3;">await</span> cache.match(event.request);
 
-        <span style="font-weight: bold;">return</span> cachedResponse;
+        <span style="color: #91a0b3;">return</span> cachedResponse;
       }
     })()
   );
@@ -282,7 +282,7 @@ self.addEventListener(<span style="font-style: italic;">"fetch"</span>, (event) 
 HTML 文件：
 </p>
 
-<pre class="example" id="org44cabe5">
+<pre class="example" id="org2de722a">
 {{ if and .Site.Params.enableServiceWorker (eq hugo.Environment "production") }}
     {{- $sw := resources.Get "js/sw.js" -}}
     {{- $dummy := "" | resources.FromString "dummy.js" -}}
@@ -302,7 +302,7 @@ HTML 文件：
 manifest 文件：
 </p>
 
-<pre class="example" id="orgc50f800">
+<pre class="example" id="orgf2383e7">
 {
   "name": "一大加贝",
   "icons": [

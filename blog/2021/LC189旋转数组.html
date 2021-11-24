@@ -3,7 +3,7 @@
 "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en">
 <head>
-<!-- 2021-11-22 Mon 17:39 -->
+<!-- 2021-11-24 Wed 16:42 -->
 <meta http-equiv="Content-Type" content="text/html;charset=utf-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1" />
 <title>&lrm;</title>
@@ -279,23 +279,23 @@
 <h2 id="题解2"><span class="section-number-2">2</span> 题解<sup><a id="fnr.2" class="footref" href="#fn.2">2</a></sup></h2>
 <div class="outline-text-2" id="text-题解2">
 <div class="org-src-container">
-<pre class="src src-js"><span style="font-style: italic;">/**</span>
-<span style="font-style: italic;"> * @param {number[]} nums</span>
-<span style="font-style: italic;"> * @param {number} k</span>
-<span style="font-style: italic;"> * @return {void} Do not return anything, modify nums in-place instead.</span>
-<span style="font-style: italic;"> */</span>
-<span style="font-weight: bold;">var</span> <span style="font-weight: bold; font-style: italic;">rotate</span> = <span style="font-weight: bold;">function</span>(<span style="font-weight: bold; font-style: italic;">nums</span>, <span style="font-weight: bold; font-style: italic;">k</span>) {
-    <span style="font-weight: bold;">const</span> <span style="font-weight: bold; font-style: italic;">n</span> = nums.length;
-    <span style="font-weight: bold;">const</span> <span style="font-weight: bold; font-style: italic;">newArr</span> = <span style="font-weight: bold;">new</span> <span style="font-weight: bold; text-decoration: underline;">Array</span>(n);
-    <span style="font-weight: bold;">for</span> (<span style="font-weight: bold;">let</span> <span style="font-weight: bold; font-style: italic;">i</span> = 0; i &lt; n; ++i) {
+<pre class="src src-js"><span style="color: #7c7565;">/**</span>
+<span style="color: #7c7565;"> * @param {number[]} nums</span>
+<span style="color: #7c7565;"> * @param {number} k</span>
+<span style="color: #7c7565;"> * @return {void} Do not return anything, modify nums in-place instead.</span>
+<span style="color: #7c7565;"> */</span>
+<span style="color: #91a0b3;">var</span> <span style="color: #aaca86;">rotate</span> = <span style="color: #91a0b3;">function</span>(<span style="color: #aaca86;">nums</span>, <span style="color: #aaca86;">k</span>) {
+    <span style="color: #91a0b3;">const</span> <span style="color: #aaca86;">n</span> = nums.length;
+    <span style="color: #91a0b3;">const</span> <span style="color: #aaca86;">newArr</span> = <span style="color: #91a0b3;">new</span> <span style="color: #ad8572;">Array</span>(n);
+    <span style="color: #91a0b3;">for</span> (<span style="color: #91a0b3;">let</span> <span style="color: #aaca86;">i</span> = 0; i &lt; n; ++i) {
         newArr[(i + k) % n] = nums[i];
     }
-    <span style="font-weight: bold;">for</span> (<span style="font-weight: bold;">let</span> <span style="font-weight: bold; font-style: italic;">i</span> = 0; i &lt; n; ++i) {
+    <span style="color: #91a0b3;">for</span> (<span style="color: #91a0b3;">let</span> <span style="color: #aaca86;">i</span> = 0; i &lt; n; ++i) {
         nums[i] = newArr[i];
     }
 };
 
-<span style="font-weight: bold; font-style: italic;">// </span><span style="font-weight: bold; font-style: italic;">console.log(rotate([1, 2, 3, 4, 5, 6, 7], 3));</span>
+<span style="color: #706565;">// </span><span style="color: #857575;">console.log(rotate([1, 2, 3, 4, 5, 6, 7], 3));</span>
 </pre>
 </div>
 
