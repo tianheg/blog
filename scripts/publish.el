@@ -27,7 +27,7 @@
          :base-directory "~/org/"
          :publishing-directory "~/repo/blog/"
          :recursive t
-         :html-head-include-default-style nil\
+         :html-head-include-default-style nil
          :html-head ""
          :publishing-function org-html-publish-to-html
          :html-postamble nil
