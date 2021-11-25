@@ -3,7 +3,7 @@
 "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml" lang="zh" xml:lang="zh">
 <head>
-<!-- 2021-11-25 Thu 16:49 -->
+<!-- 2021-11-25 Thu 17:20 -->
 <meta http-equiv="Content-Type" content="text/html;charset=utf-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1" />
 <title>PJWD4(JS高级程序设计第4版)C7 迭代器与生成器</title>
@@ -227,8 +227,8 @@
 <h2>Table of Contents</h2>
 <div id="text-table-of-contents">
 <ul>
-<li><a href="#orgfb72f52">1. 什么是迭代？</a></li>
-<li><a href="#org1e8fafb">2. 迭代器模式</a></li>
+<li><a href="#org4dad9f1">1. 什么是迭代？</a></li>
+<li><a href="#org575eb7c">2. 迭代器模式</a></li>
 </ul>
 </div>
 </div>
@@ -236,8 +236,8 @@
 「迭代」是指，按照顺序多次执行程序，一般有明确的终止条件。ES6 规范新增了两个高级特性：迭代器和生成器。它们能帮助我们更好地实现迭代。
 </p>
 
-<div id="outline-container-orgfb72f52" class="outline-2">
-<h2 id="orgfb72f52"><span class="section-number-2">1</span> 什么是迭代？</h2>
+<div id="outline-container-org4dad9f1" class="outline-2">
+<h2 id="org4dad9f1"><span class="section-number-2">1</span> 什么是迭代？</h2>
 <div class="outline-text-2" id="text-1">
 <p>
 在 JS 中，计数循环是一种最为简单的迭代：
@@ -277,7 +277,7 @@
 </ol>
 
 <p>
-ES5 新增了 <code>Array.prototype.forEach()</code> <code>Array.prototype.forEach()</code> 方法，部分解决了通过迭代的需要（但不够理想）：
+ES5 新增了 <code>Array.prototype.forEach()</code> 方法，部分解决了通过迭代的需要（但不够理想）：
 </p>
 
 <div class="org-src-container">
@@ -297,8 +297,8 @@ collection.forEach((item) =&gt; console.log(item));
 </div>
 </div>
 
-<div id="outline-container-org1e8fafb" class="outline-2">
-<h2 id="org1e8fafb"><span class="section-number-2">2</span> 迭代器模式</h2>
+<div id="outline-container-org575eb7c" class="outline-2">
+<h2 id="org575eb7c"><span class="section-number-2">2</span> 迭代器模式</h2>
 <div class="outline-text-2" id="text-2">
 <p>
 迭代器模式使某些结构被称为「可迭代对象」（iterable），因为它们实现了正式的 Iterable 接口，而且可通过迭代器 Iterator 消费（？）。
