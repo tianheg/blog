@@ -3,13 +3,14 @@
 "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml" lang="zh" xml:lang="zh">
 <head>
-<!-- 2021-11-24 Wed 16:42 -->
+<!-- 2021-11-25 Thu 16:49 -->
 <meta http-equiv="Content-Type" content="text/html;charset=utf-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1" />
 <title>PJWD4(JS高级程序设计第4版)C7 迭代器与生成器</title>
 <meta name="generator" content="Org mode" />
 <meta name="description" content="Learn Technology, Love Life"
  />
+<meta name="keywords" content="博客, blog, 技术, 生活, Technology, Life" />
 <style type="text/css">
  <!--/*--><![CDATA[/*><!--*/
   .title  { text-align: center;
@@ -194,7 +195,6 @@
   .org-svg { width: 90%; }
   /*]]>*/-->
 </style>
-<link rel="stylesheet" type="text/css" href="/theme/org.css"/>
 <link rel="stylesheet" type="text/css" href="/theme/site.css"/>
 <!-- Cloudflare Web Analytics --><script defer src='https://static.cloudflareinsights.com/beacon.min.js' data-cf-beacon='{"token": "d5b841b503ed4d1b8fad459b84d1cc2f"}'></script><!-- End Cloudflare Web Analytics -->
 <script type="text/javascript">
@@ -227,7 +227,8 @@
 <h2>Table of Contents</h2>
 <div id="text-table-of-contents">
 <ul>
-<li><a href="#org27ff0ef">1. 什么是迭代？</a></li>
+<li><a href="#orgfb72f52">1. 什么是迭代？</a></li>
+<li><a href="#org1e8fafb">2. 迭代器模式</a></li>
 </ul>
 </div>
 </div>
@@ -235,15 +236,15 @@
 「迭代」是指，按照顺序多次执行程序，一般有明确的终止条件。ES6 规范新增了两个高级特性：迭代器和生成器。它们能帮助我们更好地实现迭代。
 </p>
 
-<div id="outline-container-org27ff0ef" class="outline-2">
-<h2 id="org27ff0ef"><span class="section-number-2">1</span> 什么是迭代？</h2>
+<div id="outline-container-orgfb72f52" class="outline-2">
+<h2 id="orgfb72f52"><span class="section-number-2">1</span> 什么是迭代？</h2>
 <div class="outline-text-2" id="text-1">
 <p>
 在 JS 中，计数循环是一种最为简单的迭代：
 </p>
 
 <div class="org-src-container">
-<pre class="src src-javascript"><span style="color: #91a0b3;">for</span> (<span style="color: #91a0b3;">let</span> <span style="color: #aaca86;">i</span> = 1; i &lt;= 20; ++i) {
+<pre class="src src-js"><span style="color: #91a0b3;">for</span> (<span style="color: #91a0b3;">let</span> <span style="color: #aaca86;">i</span> = 1; i &lt;= 20; ++i) {
     console.log(i);
 }
 </pre>
@@ -258,7 +259,7 @@
 </p>
 
 <div class="org-src-container">
-<pre class="src src-javascript"><span style="color: #91a0b3;">let</span> <span style="color: #aaca86;">collection</span> = [<span style="color: #ddbc91;">'foo'</span>, <span style="color: #ddbc91;">'bar'</span>, <span style="color: #ddbc91;">'baz'</span>];
+<pre class="src src-js"><span style="color: #91a0b3;">let</span> <span style="color: #aaca86;">collection</span> = [<span style="color: #ddbc91;">'foo'</span>, <span style="color: #ddbc91;">'bar'</span>, <span style="color: #ddbc91;">'baz'</span>];
 
 <span style="color: #91a0b3;">for</span> (<span style="color: #91a0b3;">let</span> <span style="color: #aaca86;">index</span> = 0; index &lt; collection.length; ++index) {
     console.log(collection[index])
@@ -276,8 +277,47 @@
 </ol>
 
 <p>
-ES5 新增了 <code>Array.prototype.forEach()</code> 方法，部分解决了通过迭代的需要（但不够理想）：
+ES5 新增了 <code>Array.prototype.forEach()</code> <code>Array.prototype.forEach()</code> 方法，部分解决了通过迭代的需要（但不够理想）：
 </p>
+
+<div class="org-src-container">
+<pre class="src src-js"><span style="color: #91a0b3;">let</span> <span style="color: #aaca86;">collection</span> = [<span style="color: #ddbc91;">'foo'</span>, <span style="color: #ddbc91;">'bar'</span>, <span style="color: #ddbc91;">'baz'</span>];
+
+collection.forEach((item) =&gt; console.log(item));
+</pre>
+</div>
+
+<p>
+该方法解决了「单独记录索引」和「通过数组对象取值」的问题，但无法标识迭代的终止时间。故而它只适用于「数组」，且回调结构笨拙。
+</p>
+
+<p>
+迭代器就是为了解决「使用过多循环导致代码混乱度增加」而出现的。
+</p>
+</div>
+</div>
+
+<div id="outline-container-org1e8fafb" class="outline-2">
+<h2 id="org1e8fafb"><span class="section-number-2">2</span> 迭代器模式</h2>
+<div class="outline-text-2" id="text-2">
+<p>
+迭代器模式使某些结构被称为「可迭代对象」（iterable），因为它们实现了正式的 Iterable 接口，而且可通过迭代器 Iterator 消费（？）。
+</p>
+
+<p>
+可迭代对象，具体来讲可理解为数组或集合，这样的集合类型对象。特点：「有限元素」，「无歧义的遍历顺序」。
+</p>
+
+<p>
+可迭代对象不仅可以是集合类型对象，也可以是仅仅具有类似数组行为的其他数据结构，比如文章开头的计数循环。该循环生成的值是暂时的，但循环本身在执行迭代。
+</p>
+
+<p>
+任何实现 Iterable 接口的数据结构都可以被实现 Iterator 接口的结构「消费」（consume）。
+</p>
+
+<p>
+<b>迭代器（iterator）是按需创建的一次性对象。每个迭代器都会关联一个可迭代对象，而迭代器会暴露迭代其关联可迭代对象的 API。迭代器不关心可迭代对象的内部结构，只关心如何取得连续的值。</b></p>
 </div>
 </div>
 </div>

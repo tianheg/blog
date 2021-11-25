@@ -137,16 +137,25 @@ a:hover {
 }
 
 table {
-  width: 100%;
-  margin-bottom: 16px;
-  border: 1px solid #666;
-  font-size: 14px;
+  margin: 1em auto;
+  border-top: 2px solid;
+  border-collapse: collapse;
 }
-
-table th,
-table td {
-  border: 1px solid #555;
-  padding: 8px;
+table,
+thead {
+  border-bottom: 2px solid;
+}
+table td + td,
+table th + th {
+  border-left: 1px solid grey;
+}
+table tr {
+  border-top: 1px solid #d3d3d3;
+}
+td,
+th {
+  padding: 0.3em 0.6em;
+  vertical-align: middle;
 }
 
 pre, code {
