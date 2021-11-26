@@ -3,7 +3,7 @@
 "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en">
 <head>
-<!-- 2021-11-25 Thu 18:09 -->
+<!-- 2021-11-26 Fri 15:11 -->
 <meta http-equiv="Content-Type" content="text/html;charset=utf-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1" />
 <title>&lrm;</title>
@@ -57,7 +57,7 @@ HTTPS，还下载了一个名字为 =download</code> 且文件类型为
 通过这篇文章<sup><a id="fnr.2" class="footref" href="#fn.2">2</a></sup>，我学到一条检查网站是否支持 HTTP/2 的命令：
 </p>
 
-<pre class="example" id="orgfe92f76">
+<pre class="example" id="org4cf8b29">
 $ curl -I -k --http2 https://blog.yidajiabei.xyz/
 HTTP/2 200 
 server: nginx/1.18.0 (Ubuntu)
@@ -73,7 +73,7 @@ accept-ranges: bytes
 在这篇文章中，我找到了 Nginx 配置 HTTP/2 的方法：
 </p>
 
-<pre class="example" id="org4830d18">
+<pre class="example" id="orgf70ebf1">
 server {
     listen 443 ssl http2 default_server;
     ssl_certificate    /path/to/server.cert;
@@ -89,7 +89,7 @@ server {
 HTTP2 呢？也就是说，以下配置会造成无法由 HTTP 跳转到 HTTPS：
 </p>
 
-<pre class="example" id="org5607269">
+<pre class="example" id="orgaef2089">
 server {
     listen 80 http2;
     # ...
