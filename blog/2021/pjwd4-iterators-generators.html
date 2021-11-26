@@ -3,7 +3,7 @@
 "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml" lang="zh" xml:lang="zh">
 <head>
-<!-- 2021-11-25 Thu 18:09 -->
+<!-- 2021-11-26 Fri 15:11 -->
 <meta http-equiv="Content-Type" content="text/html;charset=utf-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1" />
 <title>PJWD4(JS高级程序设计第4版)C7 迭代器与生成器</title>
@@ -227,8 +227,12 @@
 <h2>Table of Contents</h2>
 <div id="text-table-of-contents">
 <ul>
-<li><a href="#org38c118e">1. 什么是迭代？</a></li>
-<li><a href="#org50336d4">2. 迭代器模式</a></li>
+<li><a href="#orgc9ac694">1. 什么是迭代？</a></li>
+<li><a href="#org8f0744a">2. 迭代器模式</a>
+<ul>
+<li><a href="#orgc13851c">2.1. 可迭代协议</a></li>
+</ul>
+</li>
 </ul>
 </div>
 </div>
@@ -236,8 +240,8 @@
 「迭代」是指，按照顺序多次执行程序，一般有明确的终止条件。ES6 规范新增了两个高级特性：迭代器和生成器。它们能帮助我们更好地实现迭代。
 </p>
 
-<div id="outline-container-org38c118e" class="outline-2">
-<h2 id="org38c118e"><span class="section-number-2">1</span> 什么是迭代？</h2>
+<div id="outline-container-orgc9ac694" class="outline-2">
+<h2 id="orgc9ac694"><span class="section-number-2">1</span> 什么是迭代？</h2>
 <div class="outline-text-2" id="text-1">
 <p>
 在 JS 中，计数循环是一种最为简单的迭代：
@@ -297,8 +301,8 @@ collection.forEach((item) =&gt; console.log(item));
 </div>
 </div>
 
-<div id="outline-container-org50336d4" class="outline-2">
-<h2 id="org50336d4"><span class="section-number-2">2</span> 迭代器模式</h2>
+<div id="outline-container-org8f0744a" class="outline-2">
+<h2 id="org8f0744a"><span class="section-number-2">2</span> 迭代器模式</h2>
 <div class="outline-text-2" id="text-2">
 <p>
 迭代器模式使某些结构被称为「可迭代对象」（iterable），因为它们实现了正式的 Iterable 接口，而且可通过迭代器 Iterator 消费（？）。
@@ -317,7 +321,90 @@ collection.forEach((item) =&gt; console.log(item));
 </p>
 
 <p>
-<b>迭代器（iterator）是按需创建的一次性对象。每个迭代器都会关联一个可迭代对象，而迭代器会暴露迭代其关联可迭代对象的 API。迭代器不关心可迭代对象的内部结构，只关心如何取得连续的值。</b></p>
+<b>迭代器（iterator）是按需创建的一次性对象。每个迭代器都会关联一个可迭代对象，而迭代器会暴露迭代其关联可迭代对象的 API。迭代器不关心可迭代对象的内部结构，只关心如何取得连续的值。</b>
+</p>
+</div>
+
+<div id="outline-container-orgc13851c" class="outline-3">
+<h3 id="orgc13851c"><span class="section-number-3">2.1</span> 可迭代协议</h3>
+<div class="outline-text-3" id="text-2-1">
+<p>
+实现 Iterable 接口（可迭代协议）要求同时具备两种能力：「支持迭代的自我识别」和「创建实现 Iterator 接口的对象」。
+</p>
+
+<p>
+实现了 Iterable 接口的内置类型：
+</p>
+
+<ul class="org-ul">
+<li>字符串</li>
+<li>数组</li>
+<li>映射</li>
+<li>集合</li>
+<li>arguments 对象</li>
+<li>NodeList 等 DOM 集合类型</li>
+</ul>
+
+<p>
+问题：什么是工厂函数？
+</p>
+
+<p>
+解答：它是<a href="javascript-factory-functions.html">返回新对象的函数</a>。
+</p>
+
+<p>
+实现可迭代协议的所有类型，都会自动兼容接收可迭代对象的任何语言特性。接收可迭代对象的原生语言特性包括：
+</p>
+
+<ul class="org-ul">
+<li>for-of 循环</li>
+<li>数组解构</li>
+<li>扩展操作符</li>
+<li>Array.form()</li>
+<li>创建集合</li>
+<li>创建映射</li>
+<li>Promise.all() 接收由期约组成的可迭代对象</li>
+<li>Promise.race() 接收由期约组成的可迭代对象</li>
+<li>yield* 操作符，在生成器中使用</li>
+</ul>
+
+<p>
+这些原生语言结构会在后台调用提供的可迭代对象的这个工厂函数，从而创建一个迭代器：
+</p>
+
+<div class="org-src-container">
+<pre class="src src-js"><span style="color: #91a0b3;">let</span> <span style="color: #aaca86;">arr</span> = [<span style="color: #ddbc91;">"foo"</span>, <span style="color: #ddbc91;">"bar"</span>, <span style="color: #ddbc91;">"baz"</span>];
+
+<span style="color: #706565;">// </span><span style="color: #857575;">for...of &#24490;&#29615;</span>
+<span style="color: #91a0b3;">for</span> (<span style="color: #91a0b3;">let</span> <span style="color: #aaca86;">el</span> of arr) {
+    console.log(el);
+}
+
+<span style="color: #706565;">// </span><span style="color: #857575;">&#25968;&#32452;&#35299;&#26500;</span>
+<span style="color: #91a0b3;">let</span> [<span style="color: #aaca86;">a</span>, <span style="color: #aaca86;">b</span>, <span style="color: #aaca86;">c</span>] = arr;
+console.log(a, b, c);
+
+<span style="color: #706565;">// </span><span style="color: #857575;">&#25193;&#23637;&#25805;&#20316;&#31526;</span>
+<span style="color: #91a0b3;">let</span> <span style="color: #aaca86;">arr2</span> = [...arr];
+console.log(arr2);
+
+<span style="color: #706565;">// </span><span style="color: #857575;">Array.from()</span>
+<span style="color: #91a0b3;">let</span> <span style="color: #aaca86;">arr3</span> = Array.from(arr);
+console.log(arr3);
+
+<span style="color: #706565;">// </span><span style="color: #857575;">Set &#26500;&#36896;&#20989;&#25968;</span>
+<span style="color: #91a0b3;">let</span> <span style="color: #aaca86;">set</span> = <span style="color: #91a0b3;">new</span> <span style="color: #ad8572;">Set</span>(arr);
+console.log(set);
+
+<span style="color: #706565;">// </span><span style="color: #857575;">Map &#26500;&#36896;&#20989;&#25968;</span>
+<span style="color: #91a0b3;">let</span> <span style="color: #aaca86;">pairs</span> = arr.map((x, i) =&gt; [x,, i]);
+console.log(pairs);
+<span style="color: #91a0b3;">let</span> <span style="color: #aaca86;">map</span> = <span style="color: #91a0b3;">new</span> <span style="color: #ad8572;">Map</span>(pairs);
+console.log(map);
+</pre>
+</div>
+</div>
 </div>
 </div>
 </div>
