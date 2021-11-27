@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html lang="zh">
 <head>
-<!-- 2021-11-27 Sat 10:24 -->
+<!-- 2021-11-27 Sat 10:32 -->
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>PJWD4(JS高级程序设计第4版)C7 迭代器与生成器</title>
@@ -193,6 +193,7 @@
   .org-svg { width: 90%; }
   /*]]>*/-->
 </style>
+<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin><link href="https://fonts.googleapis.com/css2?family=Lato&family=Noto+Serif+SC:wght@500&display=swap" rel="stylesheet">
 <link rel="stylesheet" type="text/css" href="/theme/site.css"/>
 <!-- Cloudflare Web Analytics --><script defer src='https://static.cloudflareinsights.com/beacon.min.js' data-cf-beacon='{"token": "d5b841b503ed4d1b8fad459b84d1cc2f"}'></script><!-- End Cloudflare Web Analytics -->
 <script defer src="/theme/link.js"></script>
@@ -227,10 +228,10 @@
 <h2>Table of Contents</h2>
 <div id="text-table-of-contents">
 <ul>
-<li><a href="#orgd2947b8">1. 什么是迭代？</a></li>
-<li><a href="#org24655ac">2. 迭代器模式</a>
+<li><a href="#org9b6282f">1. 什么是迭代？</a></li>
+<li><a href="#org57acfff">2. 迭代器模式</a>
 <ul>
-<li><a href="#org2623e23">2.1. 可迭代协议</a></li>
+<li><a href="#org96c65e6">2.1. 可迭代协议</a></li>
 </ul>
 </li>
 </ul>
@@ -240,8 +241,8 @@
 「迭代」是指，按照顺序多次执行程序，一般有明确的终止条件。ES6 规范新增了两个高级特性：迭代器和生成器。它们能帮助我们更好地实现迭代。
 </p>
 
-<div id="outline-container-orgd2947b8" class="outline-2">
-<h2 id="orgd2947b8"><span class="section-number-2">1</span> 什么是迭代？</h2>
+<div id="outline-container-org9b6282f" class="outline-2">
+<h2 id="org9b6282f"><span class="section-number-2">1</span> 什么是迭代？</h2>
 <div class="outline-text-2" id="text-1">
 <p>
 在 JS 中，计数循环是一种最为简单的迭代：
@@ -301,8 +302,8 @@ collection.forEach((item) =&gt; console.log(item));
 </div>
 </div>
 
-<div id="outline-container-org24655ac" class="outline-2">
-<h2 id="org24655ac"><span class="section-number-2">2</span> 迭代器模式</h2>
+<div id="outline-container-org57acfff" class="outline-2">
+<h2 id="org57acfff"><span class="section-number-2">2</span> 迭代器模式</h2>
 <div class="outline-text-2" id="text-2">
 <p>
 迭代器模式使某些结构被称为「可迭代对象」（iterable），因为它们实现了正式的 Iterable 接口，而且可通过迭代器 Iterator 消费（？）。
@@ -325,8 +326,8 @@ collection.forEach((item) =&gt; console.log(item));
 </p>
 </div>
 
-<div id="outline-container-org2623e23" class="outline-3">
-<h3 id="org2623e23"><span class="section-number-3">2.1</span> 可迭代协议</h3>
+<div id="outline-container-org96c65e6" class="outline-3">
+<h3 id="org96c65e6"><span class="section-number-3">2.1</span> 可迭代协议</h3>
 <div class="outline-text-3" id="text-2-1">
 <p>
 实现 Iterable 接口（可迭代协议）要求同时具备两种能力：「支持迭代的自我识别」和「创建实现 Iterator 接口的对象」。
