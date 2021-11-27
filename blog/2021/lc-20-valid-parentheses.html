@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html lang="zh">
 <head>
-<!-- 2021-11-27 Sat 10:24 -->
+<!-- 2021-11-27 Sat 10:33 -->
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>LC20. 有效的括号</title>
@@ -193,6 +193,7 @@
   .org-svg { width: 90%; }
   /*]]>*/-->
 </style>
+<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin><link href="https://fonts.googleapis.com/css2?family=Lato&family=Noto+Serif+SC:wght@500&display=swap" rel="stylesheet">
 <link rel="stylesheet" type="text/css" href="/theme/site.css"/>
 <!-- Cloudflare Web Analytics --><script defer src='https://static.cloudflareinsights.com/beacon.min.js' data-cf-beacon='{"token": "d5b841b503ed4d1b8fad459b84d1cc2f"}'></script><!-- End Cloudflare Web Analytics -->
 <script defer src="/theme/link.js"></script>
@@ -227,9 +228,9 @@
 <h2>Table of Contents</h2>
 <div id="text-table-of-contents">
 <ul>
-<li><a href="#org337983b">1. 题目描述</a></li>
-<li><a href="#orgcc84c8b">2. 想法</a></li>
-<li><a href="#org48da4c9">3. 题解</a></li>
+<li><a href="#org7cd948c">1. 题目描述</a></li>
+<li><a href="#orga17e5ae">2. 想法</a></li>
+<li><a href="#org7e1b119">3. 题解</a></li>
 </ul>
 </div>
 </nav>
@@ -237,8 +238,8 @@
 今天思考 LeetCode 题目：有效的括号<sup><a id="fnr.1" class="footref" href="#fn.1">1</a></sup>。
 </p>
 
-<div id="outline-container-org337983b" class="outline-2">
-<h2 id="org337983b"><span class="section-number-2">1</span> 题目描述</h2>
+<div id="outline-container-org7cd948c" class="outline-2">
+<h2 id="org7cd948c"><span class="section-number-2">1</span> 题目描述</h2>
 <div class="outline-text-2" id="text-1">
 <p>
 给定一个只包括 <code>(</code> ， <code>)</code> ， <code>{</code> ， <code>}</code> ， <code>[</code> ， <code>]</code> 的字符串 <code>s</code> ，判断字符串是否有效。
@@ -255,8 +256,8 @@
 </div>
 </div>
 
-<div id="outline-container-orgcc84c8b" class="outline-2">
-<h2 id="orgcc84c8b"><span class="section-number-2">2</span> 想法</h2>
+<div id="outline-container-orga17e5ae" class="outline-2">
+<h2 id="orga17e5ae"><span class="section-number-2">2</span> 想法</h2>
 <div class="outline-text-2" id="text-2">
 <p>
 一个只有以上 6 种字符的字符串组合，判断是否满足有效条件，可以采用双指针法，定义两个指向字符串开头和结尾的指针。
@@ -269,8 +270,8 @@
 </div>
 </div>
 
-<div id="outline-container-org48da4c9" class="outline-2">
-<h2 id="org48da4c9"><span class="section-number-2">3</span> 题解<sup><a id="fnr.2" class="footref" href="#fn.2">2</a></sup></h2>
+<div id="outline-container-org7e1b119" class="outline-2">
+<h2 id="org7e1b119"><span class="section-number-2">3</span> 题解<sup><a id="fnr.2" class="footref" href="#fn.2">2</a></sup></h2>
 <div class="outline-text-2" id="text-3">
 <p>
 这道题目可以使用栈。栈的相关概念：先入后出、除头尾节点外，每个节点有一个前驱和一个后驱。
