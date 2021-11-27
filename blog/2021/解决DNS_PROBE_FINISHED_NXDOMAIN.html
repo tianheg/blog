@@ -3,7 +3,7 @@
 "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en">
 <head>
-<!-- 2021-11-27 Sat 10:24 -->
+<!-- 2021-11-27 Sat 10:33 -->
 <meta http-equiv="Content-Type" content="text/html;charset=utf-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1" />
 <title>&lrm;</title>
@@ -91,7 +91,7 @@ domain，域名不存在。因为，提示的意思是：DNS
 <div id="outline-container-释放并更新-ip-地址" class="outline-2">
 <h2 id="释放并更新-ip-地址"><span class="section-number-2">1</span> 释放并更新 IP 地址</h2>
 <div class="outline-text-2" id="text-释放并更新-ip-地址">
-<pre class="example" id="orgf2f758b">
+<pre class="example" id="orgb1bada4">
 sudo dhclient -r # 释放
 sudo dhclient # 更新
 </pre>
@@ -107,7 +107,7 @@ sudo dhclient # 更新
 我又执行了一遍代码片段的内容：
 </p>
 
-<pre class="example" id="org3130bac">
+<pre class="example" id="org16bc319">
 $ sudo dhclient -r
 Killed old client process
 $ sudo dhclient
@@ -122,7 +122,7 @@ OK，更新 IP 没有输出，说明正常执行。
 <div id="outline-container-重启-dns-客户端服务" class="outline-2">
 <h2 id="重启-dns-客户端服务"><span class="section-number-2">2</span> 重启 DNS 客户端服务</h2>
 <div class="outline-text-2" id="text-重启-dns-客户端服务">
-<pre class="example" id="org3b71b71">
+<pre class="example" id="org0024f0a">
 sudo apt install bind9
 sudo apt install dnsutils
 sudo vim /etc/bind/named.conf.options # add nameservers:8.8.8.8;8.8.4.4;1.1.1.1 to forwarders
@@ -146,7 +146,7 @@ Ubuntu20.04 预装的 netplan
 软件。我使用后者，因为它在命令行操作，很方便。
 </p>
 
-<pre class="example" id="org988d06f">
+<pre class="example" id="orge558179">
 $ ls -a /etc/netplan
 .  ..  01-network-manager-all.yaml
 </pre>
@@ -155,7 +155,7 @@ $ ls -a /etc/netplan
 查看 01-network-manager-all.yaml 文件，发现还没有进行任何配置：
 </p>
 
-<pre class="example" id="orga434dc6">
+<pre class="example" id="org2b3c900">
 network:
   version: 2
   renderer: NetworkManager
@@ -172,7 +172,7 @@ DHCP），NetworkManager 就是 Ubuntu 网络管理的默认 GUI。
 文件：
 </p>
 
-<pre class="example" id="org834eaa2">
+<pre class="example" id="orgf7027ec">
 network:
   version: 2
   renderer: networkd
@@ -217,7 +217,7 @@ network:
 <div id="outline-container-检查本地-hosts-文件" class="outline-2">
 <h2 id="检查本地-hosts-文件"><span class="section-number-2">6</span> 检查本地 hosts 文件</h2>
 <div class="outline-text-2" id="text-检查本地-hosts-文件">
-<pre class="example" id="orgb4c268b">
+<pre class="example" id="org2d1fd4a">
 vim /etc/hosts
 </pre>
 
