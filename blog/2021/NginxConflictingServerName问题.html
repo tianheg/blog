@@ -1,0 +1,71 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN"
+"http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en">
+<head>
+<!-- 2021-11-29 Mon 22:08 -->
+<meta http-equiv="Content-Type" content="text/html;charset=utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>&lrm;</title>
+<meta name="generator" content="Org mode" />
+<script type="text/javascript">
+// @license magnet:?xt=urn:btih:e95b018ef3580986a04669f1b5879592219e2a7a&dn=public-domain.txt Public Domain
+<!--/*--><![CDATA[/*><!--*/
+     function CodeHighlightOn(elem, id)
+     {
+       var target = document.getElementById(id);
+       if(null != target) {
+         elem.classList.add("code-highlighted");
+         target.classList.add("code-highlighted");
+       }
+     }
+     function CodeHighlightOff(elem, id)
+     {
+       var target = document.getElementById(id);
+       if(null != target) {
+         elem.classList.remove("code-highlighted");
+         target.classList.remove("code-highlighted");
+       }
+     }
+    /*]]>*///-->
+// @license-end
+</script>
+</head>
+<body>
+<div id="content">
+<p>
+<del>+</del> date = '2021-10-22T21:51:37+08:00' title = 'Nginx Conflicting Server
+Name 问题' tags = ['Nginx'] slug = 'nginx-conflicting-server-name' <del>+</del>
+</p>
+
+<p>
+曾经在执行一些 Nginx 命令时总会出现如下警告：
+</p>
+
+<pre class="example" id="org77c63ff">
+sudo nginx -t
+time [warn] 15818#15818: conflicting server name "mydomain.com" on 0.0.0.0:80, ignored
+</pre>
+
+<p>
+这只是个警告，所以没有给予更多关注，当时想的主要是保证网站的正常运行。现在网站已经正常运行了一段时间，于是对于这个警告也有了兴趣。在网络中的第一次搜索就找到了答案<sup><a id="fnr.1" class="footref" href="#fn.1">1</a></sup>，说明这个问题很简单，事实也是如此。
+</p>
+
+<p>
+在 Nginx 的站点配置中，有一个叫做 server block 的概念。一个 server block
+就是一个站点，它有两个可选位置：=/etc/nginx/nginx.conf= 和
+=/etc/nginx/sites-enabled/example.com=。而之所以出现上述警告，是因为我对同一个域名进行了两次配置。我同时使用这两个位置属于重复设置，删除其中一个配置即可。
+</p>
+<div id="footnotes">
+<h2 class="footnotes">Footnotes: </h2>
+<div id="text-footnotes">
+
+<div class="footdef"><sup><a id="fn.1" class="footnum" href="#fnr.1">1</a></sup> <div class="footpara"><p class="footpara">
+<a href="https://www.digitalocean.com/community/questions/conflicting-server-name-mydomain-com-on-0-0-0-0-80-ignored-nginx-error-log-ubuntu-20-04?answer=64571">https://www.digitalocean.com/community/questions/conflicting-server-name-mydomain-com-on-0-0-0-0-80-ignored-nginx-error-log-ubuntu-20-04?answer=64571</a>
+</p></div></div>
+
+
+</div>
+</div></div>
+</body>
+</html>

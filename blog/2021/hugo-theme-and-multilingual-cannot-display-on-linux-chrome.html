@@ -1,0 +1,125 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN"
+"http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en">
+<head>
+<!-- 2021-11-29 Mon 22:08 -->
+<meta http-equiv="Content-Type" content="text/html;charset=utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>&lrm;</title>
+<meta name="generator" content="Org mode" />
+<script type="text/javascript">
+// @license magnet:?xt=urn:btih:e95b018ef3580986a04669f1b5879592219e2a7a&dn=public-domain.txt Public Domain
+<!--/*--><![CDATA[/*><!--*/
+     function CodeHighlightOn(elem, id)
+     {
+       var target = document.getElementById(id);
+       if(null != target) {
+         elem.classList.add("code-highlighted");
+         target.classList.add("code-highlighted");
+       }
+     }
+     function CodeHighlightOff(elem, id)
+     {
+       var target = document.getElementById(id);
+       if(null != target) {
+         elem.classList.remove("code-highlighted");
+         target.classList.remove("code-highlighted");
+       }
+     }
+    /*]]>*///-->
+// @license-end
+</script>
+</head>
+<body>
+<div id="content">
+<p>
+<del>+</del> date = '2020-05-17T10:11:26+08:00' description = '记录 Hugo
+主题及多语言图标不能在 Linux Chrome 中正常显示' keywords = ['Hugo'] tags
+= ['Hugo'] title = 'Hugo 主题及多语言图标不能在 Linux Chrome 中正常显示'
+<del>+</del>
+</p>
+
+<p>
+这个问题，我给正在使用的主题：Meme，提了
+issue，<a href="https://github.com/reuixiy/hugo-theme-meme/issues/139">地址</a>
+。
+</p>
+
+<p>
+博客我是不放图片的，我描述一下，什么是不能正常显示：
+</p>
+
+<p>
+在 Win10 的 Chrome
+中原来显示主题的太阳图标和多语言的字符图标（在移动端显示为国旗），现在在
+Linux 中都变成了 *方块*，功能上没问题，就是不太好看。
+</p>
+
+<p>
+系统环境：
+</p>
+
+<pre class="example" id="org0c0d1ef">
+System:    
+           Kernel: 4.19.0-6-amd64 x86_64 bits: 64 compiler: gcc v: 8.3.0 
+           parameters: BOOT_IMAGE=/boot/vmlinuz-4.19.0-6-amd64 
+           root=UUID=dc4e6e4a-c8a2-44e4-aee1-e677ad07eada ro quiet splash 
+           Desktop: Xfce 4.14.2 tk: Gtk 3.24.5 info: xfce4-panel wm: xfwm4 dm: LightDM 1.26.0 
+           Distro: MX-19.1_x64 patito feo February 15  2020 base: Debian GNU/Linux 10 (buster) 
+Machine:   
+           Type: Virtualbox System: innotek product: VirtualBox v: 1.2 serial: &lt;filter&gt; 
+           Chassis: Oracle Corporation type: 1 serial: &lt;filter&gt; 
+           Mobo: Oracle model: VirtualBox v: 1.2 serial: &lt;filter&gt; BIOS: innotek v: VirtualBox 
+           date: 12/01/2006 
+</pre>
+
+<p>
+Chrome 版本：
+</p>
+
+<pre class="example" id="orgfd096a1">
+Chrome: 81.0.4044.138 (Official Build) (64-bit)
+</pre>
+
+<p>
+主题的开发者说，因为主题和多语言图标用了 emoji。所以，如果 Linux
+上没有相关的 emoji 支持的话，是不能正常显示的。
+</p>
+
+<p>
+所以，我按照 Ta 的建议，安装了 =fonts-noto-color-emoji=：
+</p>
+
+<div class="org-src-container">
+<pre class="src src-shell">apt install fonts-noto-color-emoji
+</pre>
+</div>
+
+<p>
+但是没有立刻起作用，于是我在 Google 搜索，这个字体 <code>Google Noto Fonts</code>
+，又下载了 =Noto Emoji=。
+</p>
+
+<p>
+这时我发现，起作用了，但是没有颜色。
+</p>
+
+<p>
+过了一会儿（有 10 分钟的样子），好了，图标可以正常显示了。
+</p>
+
+<hr />
+
+<p>
+*参考资料*：
+</p>
+
+<ol class="org-ol">
+<li><a href="https://github.com/reuixiy/hugo-theme-meme/issues/139">The icon of
+theme and multilingual can't display on GoogleChrome on linux</a></li>
+<li><a href="https://www.google.com/get/noto/">Google Noto Fonts</a></li>
+</ol>
+</div>
+</body>
+</html>
