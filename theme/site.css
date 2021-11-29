@@ -4,44 +4,75 @@ body {
   font-size: 15px;
 }
 
-h1,
-h2,
-h3,
-h4,
-h5,
+h1 {
+  margin: 0 0;
+  padding: 0 0;
+  color: #a5573e;
+  font-family: "Josefin Sans", -apple-system, "PingFang SC", "Hiragino Sans GB", "Microsoft Yahei", "WenQuanYi Micro Hei", "ST Heiti", sans-serif;
+  font-weight: normal;
+  border-bottom: 1px solid #e8e8e8;
+  padding-bottom: 16px;
+}
+
+h2 {
+  margin: 0 0;
+  padding: 0 0;
+  color: #a5573e;
+  font-family: "Josefin Sans", -apple-system, "PingFang SC", "Hiragino Sans GB", "Microsoft Yahei", "WenQuanYi Micro Hei", "ST Heiti", sans-serif;
+  font-size: 28px;
+  margin: 25px 0 20px;
+  padding-bottom: 8px;
+  border-bottom: 1px solid #ccc;
+}
+
+h3 {
+  margin: 0 0;
+  padding: 0 0;
+  color: #a5573e;
+  font-family: "Josefin Sans", -apple-system, "PingFang SC", "Hiragino Sans GB", "Microsoft Yahei", "WenQuanYi Micro Hei", "ST Heiti", sans-serif;
+  font-size: 22px;
+  margin: 25px 0 20px;
+  padding-bottom: 8px;
+  border-bottom: 1px dashed #ccc;
+}
+
+h4 {
+  margin: 0 0;
+  padding: 0 0;
+  color: #a5573e;
+  font-family: "Josefin Sans", -apple-system, "PingFang SC", "Hiragino Sans GB", "Microsoft Yahei", "WenQuanYi Micro Hei", "ST Heiti", sans-serif;
+  font-size: 18px;
+  margin: 20px 0;
+}
+
+h5 {
+  margin: 0 0;
+  padding: 0 0;
+  color: #a5573e;
+  font-family: "Josefin Sans", -apple-system, "PingFang SC", "Hiragino Sans GB", "Microsoft Yahei", "WenQuanYi Micro Hei", "ST Heiti", sans-serif;
+  font-size: 16px;
+  margin: 18px 0;
+}
+
 h6 {
   margin: 0 0;
   padding: 0 0;
   color: #a5573e;
-  font-family: "Josefin Sans", -apple-system, "PingFang SC", "Hiragino Sans GB",
-    "Microsoft Yahei", "WenQuanYi Micro Hei", "ST Heiti", sans-serif;
+  font-family: "Josefin Sans", -apple-system, "PingFang SC", "Hiragino Sans GB", "Microsoft Yahei", "WenQuanYi Micro Hei", "ST Heiti", sans-serif;
+  font-size: 16px;
+  margin: 18px 0;
 }
 
 div#content {
   max-width: 780px;
   margin: 12px auto 12px auto;
-  font-family: Georgia, -apple-system, "Nimbus Roman No9 L", "PingFang SC",
-    "Hiragino Sans GB", "Noto Sans SC", "Microsoft Yahei", "WenQuanYi Micro Hei",
-    "ST Heiti", sans-serif;
+  font-family: Georgia, -apple-system, "Nimbus Roman No9 L", "PingFang SC", "Hiragino Sans GB", "Noto Sans SC", "Microsoft Yahei", "WenQuanYi Micro Hei", "ST Heiti", sans-serif;
 }
-
-div#content ol,
-div#content ul {
+div#content ol {
   line-height: 22px;
 }
-
-@media (max-width: 780px) {
-  div#content {
-    border: none;
-    margin: 0 0;
-    padding: 8px 8px;
-  }
-}
-
-h1 {
-  font-weight: normal;
-  border-bottom: 1px solid #e8e8e8;
-  padding-bottom: 16px;
+div#content ul {
+  line-height: 22px;
 }
 
 h1.title {
@@ -50,31 +81,6 @@ h1.title {
   margin-bottom: 0;
   border-bottom: none;
   color: black;
-}
-
-h2 {
-  font-size: 28px;
-  margin: 25px 0 20px;
-  padding-bottom: 8px;
-  border-bottom: 1px solid #ccc;
-}
-
-h3 {
-  font-size: 22px;
-  margin: 25px 0 20px;
-  padding-bottom: 8px;
-  border-bottom: 1px dashed #ccc;
-}
-
-h4 {
-  font-size: 18px;
-  margin: 20px 0;
-}
-
-h5,
-h6 {
-  font-size: 16px;
-  margin: 18px 0;
 }
 
 p {
@@ -90,23 +96,20 @@ p {
   background-color: #fff8f8;
   font-size: 90%;
 }
-
-#text-table-of-contents {
-  margin-top: 16px;
-}
-
 #table-of-contents a {
   text-decoration: none;
 }
-
 #table-of-contents ul {
   margin: 0;
   padding-left: 20px;
 }
-
 #table-of-contents ul li {
   padding: 2px 0;
   line-height: 22px;
+}
+
+#text-table-of-contents {
+  margin-top: 16px;
 }
 
 blockquote {
@@ -116,16 +119,20 @@ blockquote {
   overflow: auto;
   word-wrap: break-word;
 }
-
-blockquote p,
-blockquote ol,
-blockquote ul {
+blockquote p {
   color: #555;
   line-height: 22px;
 }
-
 blockquote p:last-child {
   margin-bottom: 0;
+}
+blockquote ol {
+  color: #555;
+  line-height: 22px;
+}
+blockquote ul {
+  color: #555;
+  line-height: 22px;
 }
 
 .figure {
@@ -145,7 +152,6 @@ a {
   text-decoration: none;
   background-color: transparent;
 }
-
 a:hover {
   color: #0056b3;
   text-decoration: underline;
@@ -155,32 +161,35 @@ table {
   margin: 1em auto;
   border-top: 2px solid;
   border-collapse: collapse;
-}
-table,
-thead {
   border-bottom: 2px solid;
 }
-table td + td,
+table td + td {
+  border-left: 1px solid grey;
+}
 table th + th {
   border-left: 1px solid grey;
 }
 table tr {
   border-top: 1px solid #d3d3d3;
 }
-td,
+
+thead {
+  border-bottom: 2px solid;
+}
+
+td {
+  padding: 0.3em 0.6em;
+  vertical-align: middle;
+}
+
 th {
   padding: 0.3em 0.6em;
   vertical-align: middle;
 }
 
-pre,
-code {
-  font-family: "JetBrains Mono", Consolas, "ubuntu", "DejaVu Sans Mono", Monaco,
-    "Courier New", monospace;
-  font-size: 14px;
-}
-
 pre {
+  font-family: "JetBrains Mono", Consolas, "ubuntu", "DejaVu Sans Mono", Monaco, "Courier New", monospace;
+  font-size: 14px;
   box-shadow: none;
   padding: 16px;
   margin: 0 0;
@@ -193,6 +202,8 @@ pre {
 }
 
 code {
+  font-family: "JetBrains Mono", Consolas, "ubuntu", "DejaVu Sans Mono", Monaco, "Courier New", monospace;
+  font-size: 14px;
   background-color: whitesmoke;
   padding: 2px 2px;
   margin: 0 2px;
@@ -210,9 +221,18 @@ dl.org-dl dd {
   padding: 4px 0 8px 25px;
   margin-left: 0;
 }
-
 dl.org-dl dd ul.org-ul {
   margin-top: 0;
   margin-bottom: 0;
   padding-left: 20px;
 }
+
+@media (max-width: 780px) {
+  div#content {
+    border: none;
+    margin: 0 0;
+    padding: 8px 8px;
+  }
+}
+
+/*# sourceMappingURL=site.css.map */
