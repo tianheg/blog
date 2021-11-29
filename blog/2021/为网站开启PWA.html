@@ -1,0 +1,162 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN"
+"http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en">
+<head>
+<!-- 2021-11-29 Mon 22:08 -->
+<meta http-equiv="Content-Type" content="text/html;charset=utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>&lrm;</title>
+<meta name="generator" content="Org mode" />
+<script type="text/javascript">
+// @license magnet:?xt=urn:btih:e95b018ef3580986a04669f1b5879592219e2a7a&dn=public-domain.txt Public Domain
+<!--/*--><![CDATA[/*><!--*/
+     function CodeHighlightOn(elem, id)
+     {
+       var target = document.getElementById(id);
+       if(null != target) {
+         elem.classList.add("code-highlighted");
+         target.classList.add("code-highlighted");
+       }
+     }
+     function CodeHighlightOff(elem, id)
+     {
+       var target = document.getElementById(id);
+       if(null != target) {
+         elem.classList.remove("code-highlighted");
+         target.classList.remove("code-highlighted");
+       }
+     }
+    /*]]>*///-->
+// @license-end
+</script>
+</head>
+<body>
+<div id="content">
+<p>
+<del>+</del> date = '2021-07-21T17:13:42+08:00' slug = 'open-pwa-for-site' tags =
+['PWA'] title = '为网站开启 PWA' <del>+</del>
+</p>
+
+<p>
+开启 PWA 需要三个部分：一个 JS 文件，一个 HTML 文件，一个 manifest
+文件。我的网站使用 Hugo 构建。
+</p>
+
+<p>
+JS 文件：
+</p>
+
+<div class="org-src-container">
+<pre class="src src-js"><span style="color: #7c7565;">/**</span>
+<span style="color: #7c7565;">  References:</span>
+
+<span style="color: #7c7565;">  1. https://developers.google.com/web/fundamentals/primers/service-workers</span>
+<span style="color: #7c7565;">  2. https://developers.google.com/web/fundamentals/instant-and-offline/offline-cookbook</span>
+<span style="color: #7c7565;">  3. https://googlechrome.github.io/samples/service-worker/</span>
+<span style="color: #7c7565;">  4. https://developer.mozilla.org/en-US/docs/Web/API/Service_Worker_API/Using_Service_Workers</span>
+<span style="color: #7c7565;">  5. https://serviceworke.rs/</span>
+<span style="color: #7c7565;">  6. https://www.youtube.com/watch?v=baSiSIyTGSk</span>
+<span style="color: #7c7565;">*/</span>
+
+<span style="color: #91a0b3;">const</span> <span style="color: #aaca86;">RUNTIME</span> = <span style="color: #ddbc91;">"runtime"</span>;
+
+self.skipWaiting();
+
+self.addEventListener(<span style="color: #ddbc91;">"fetch"</span>, (event) =&gt; {
+  <span style="color: #706565;">// </span><span style="color: #857575;">Do nothing if not the same origin</span>
+  <span style="color: #91a0b3;">if</span> (!event.request.url.startsWith(self.location.origin)) {
+    <span style="color: #91a0b3;">return</span>;
+  }
+
+  <span style="color: #706565;">// </span><span style="color: #857575;">Network first strategy</span>
+  event.respondWith(
+    (<span style="color: #91a0b3;">async</span> () =&gt; {
+      <span style="color: #91a0b3;">const</span> <span style="color: #aaca86;">cache</span> = <span style="color: #91a0b3;">await</span> caches.open(RUNTIME);
+
+      <span style="color: #91a0b3;">try</span> {
+        <span style="color: #91a0b3;">const</span> <span style="color: #aaca86;">networkResponse</span> = <span style="color: #91a0b3;">await</span> fetch(event.request);
+
+        <span style="color: #706565;">// </span><span style="color: #857575;">Save/Update cache if network response is ok</span>
+        <span style="color: #91a0b3;">if</span> (networkResponse &amp;&amp; networkResponse.status === 200) {
+          cache.put(event.request, networkResponse.clone());
+        }
+
+        <span style="color: #91a0b3;">return</span> networkResponse;
+      } <span style="color: #91a0b3;">catch</span> (e) {
+        <span style="color: #91a0b3;">const</span> <span style="color: #aaca86;">cachedResponse</span> = <span style="color: #91a0b3;">await</span> cache.match(event.request);
+
+        <span style="color: #91a0b3;">return</span> cachedResponse;
+      }
+    })()
+  );
+});
+</pre>
+</div>
+
+<p>
+HTML 文件：
+</p>
+
+<pre class="example" id="org1d21cff">
+{{ if and .Site.Params.enableServiceWorker (eq hugo.Environment "production") }}
+    {{- $sw := resources.Get "js/sw.js" -}}
+    {{- $dummy := "" | resources.FromString "dummy.js" -}}
+    {{- $url := (slice $sw $dummy | resources.Concat "sw.js").RelPermalink -}}
+
+    &lt;script&gt;
+        if ('serviceWorker' in navigator) {
+            window.addEventListener('load', function() {
+                navigator.serviceWorker.register('{{ $url }}');
+            });
+        }
+    &lt;/script&gt;
+{{ end }}
+</pre>
+
+<p>
+manifest 文件：
+</p>
+
+<pre class="example" id="org8b850a2">
+{
+  "name": "一大加贝",
+  "icons": [
+    {
+      "src": "/images/android-chrome-192x192.png",
+      "type": "image/png",
+      "sizes": "192x192",
+      "purpose": "maskable"
+    },
+    {
+      "src": "/images/android-chrome-512x512.png",
+      "sizes": "512x512",
+      "type": "image/png"
+    }
+  ],
+  "start_url": "/?source=pwa",
+  "theme_color": "#fff",
+  "background_color": "#fff",
+  "display": "standalone",
+  "orientation": "portrait-primary"
+}
+</pre>
+
+<p>
+最后把以上三个文件导入网站中即可。
+</p>
+
+<p>
+ref:
+</p>
+
+<ol class="org-ol">
+<li><a href="https://developer.mozilla.org/en-US/docs/Web/HTML/Element/meta/name/theme-color">https://developer.mozilla.org/en-US/docs/Web/HTML/Element/meta/name/theme-color</a></li>
+<li><a href="https://io-oi.me/tech/a-simple-service-worker/">一个简单的 Service
+Worker</a></li>
+<li><a href="https://github.com/reuixiy/hugo-theme-meme/blob/159652eafb/layouts/partials/components/service-worker.html">service-worker.html</a></li>
+<li><a href="https://github.com/reuixiy/hugo-theme-meme/blob/159652eafb/assets/js/sw.js">sw.js</a></li>
+</ol>
+</div>
+</body>
+</html>
