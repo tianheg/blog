@@ -1,0 +1,807 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN"
+"http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en">
+<head>
+<!-- 2021-11-29 Mon 22:09 -->
+<meta http-equiv="Content-Type" content="text/html;charset=utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>&lrm;</title>
+<meta name="generator" content="Org mode" />
+<script type="text/javascript">
+// @license magnet:?xt=urn:btih:e95b018ef3580986a04669f1b5879592219e2a7a&dn=public-domain.txt Public Domain
+<!--/*--><![CDATA[/*><!--*/
+     function CodeHighlightOn(elem, id)
+     {
+       var target = document.getElementById(id);
+       if(null != target) {
+         elem.classList.add("code-highlighted");
+         target.classList.add("code-highlighted");
+       }
+     }
+     function CodeHighlightOff(elem, id)
+     {
+       var target = document.getElementById(id);
+       if(null != target) {
+         elem.classList.remove("code-highlighted");
+         target.classList.remove("code-highlighted");
+       }
+     }
+    /*]]>*///-->
+// @license-end
+</script>
+</head>
+<body>
+<div id="content">
+<div id="table-of-contents">
+<h2>Table of Contents</h2>
+<div id="text-table-of-contents">
+<ul>
+<li><a href="#terminology">1. Terminology</a></li>
+<li><a href="#了解-web-及网络基础">2. 了解 Web 及网络基础</a>
+<ul>
+<li><a href="#使用-http-协议访问-web">2.1. 使用 HTTP 协议访问 Web</a></li>
+<li><a href="#http-的诞生">2.2. HTTP 的诞生</a></li>
+<li><a href="#网络基础-tcpip">2.3. 网络基础 TCP/IP</a></li>
+<li><a href="#与-http-关系密切的协议-iptcp-和-dns">2.4. 与 HTTP 关系密切的协议 : IP、TCP 和 DNS</a></li>
+<li><a href="#负责域名解析的-dns-服务">2.5. 负责域名解析的 DNS 服务</a></li>
+<li><a href="#各种协议与-http-协议的关系">2.6. 各种协议与 HTTP 协议的关系</a></li>
+<li><a href="#uri-和-url">2.7. URI 和 URL</a></li>
+<li><a href="#并不是所有的应用程序都符合-rfc">2.8. 并不是所有的应用程序都符合 RFC</a></li>
+</ul>
+</li>
+<li><a href="#简单的-http-协议">3. 简单的 HTTP 协议</a>
+<ul>
+<li><a href="#http-协议用于客户端和服务器端之间的通信">3.1. HTTP 协议用于客户端和服务器端之间的通信</a></li>
+<li><a href="#通过请求和响应的交换达成通信">3.2. 通过请求和响应的交换达成通信</a></li>
+<li><a href="#http-是不保存状态的协议">3.3. HTTP 是不保存状态的协议</a></li>
+<li><a href="#请求-uri-定位资源">3.4. 请求 URI 定位资源</a></li>
+<li><a href="#http1.1-中的可用方法">3.5. HTTP/1.1 中的可用方法</a></li>
+<li><a href="#使用方法下达命令">3.6. 使用方法下达命令</a></li>
+<li><a href="#持久连接节省通信量">3.7. 持久连接节省通信量</a></li>
+<li><a href="#重要使用-cookie-的状态管理">3.8. （重要）使用 Cookie 的状态管理</a></li>
+</ul>
+</li>
+</ul>
+</div>
+</div>
+<p>
+<del>+</del> date = '2021-10-01T19:40:17+08:00' title = '上野宣《图解 HTTP》'
+tags = ['阅读', 'Computer Network'] slug = 'graphical-http' <del>+</del>
+</p>
+
+<p>
+获取图书途径：<a href="https://weread.qq.com/web/reader/3da32b505dd9f43da9a1acakc81322c012c81e728d9d180">微信读书</a>
+</p>
+
+<p>
+文档中图片来自微信读书，版权归发行方所有，本人仅学习使用。
+</p>
+
+<div id="outline-container-terminology" class="outline-2">
+<h2 id="terminology"><span class="section-number-2">1</span> Terminology</h2>
+<div class="outline-text-2" id="text-terminology">
+<p>
+TCP/IP 协议族：HTTP
+</p>
+
+<p>
+*协议*（procotol）：不同硬件、操作系统之间的通信规则。
+</p>
+
+<p>
+*TCP/IP*：与互联网相关联的协议集合
+</p>
+
+<p>
+*DNS*（Domain Name System）：域名系统，提供域名到 IP
+地址之间的解析服务。
+</p>
+
+<p>
+*Client*（客户端）：请求访问资源的一端
+</p>
+
+<p>
+*Server*（服务端）：提供响应资源的一端
+</p>
+</div>
+</div>
+
+<div id="outline-container-了解-web-及网络基础" class="outline-2">
+<h2 id="了解-web-及网络基础"><span class="section-number-2">2</span> 了解 Web 及网络基础</h2>
+<div class="outline-text-2" id="text-了解-web-及网络基础">
+</div>
+<div id="outline-container-使用-http-协议访问-web" class="outline-3">
+<h3 id="使用-http-协议访问-web"><span class="section-number-3">2.1</span> 使用 HTTP 协议访问 Web</h3>
+<div class="outline-text-3" id="text-使用-http-协议访问-web">
+<p>
+Web 使用一种名为 HTTP（HyperText Transfer
+Protocol，超文本转移协议）的协议作为规范，完成从客户端到服务器等一系列运作流程。协议是指规则的约定。Web
+是建立在 HTTP 协议上通信的。
+</p>
+</div>
+</div>
+
+<div id="outline-container-http-的诞生" class="outline-3">
+<h3 id="http-的诞生"><span class="section-number-3">2.2</span> HTTP 的诞生</h3>
+<div class="outline-text-3" id="text-http-的诞生">
+<p>
+1989 年，CERN（欧洲核子研究组织）的 Tim Berners-Lee
+提出了一种能让远隔两地的研究者们共享知识的设想-&#x2013;&#x2014;借助多文档之间相互关联形成的超文本（HyperText），连成可相互参阅的
+WWW（World Wide Web, 万维网）。
+</p>
+
+<p>
+当时提出的 3 项 WWW 构建技术，分别是：
+</p>
+
+<ul class="org-ul">
+<li>把 SGML（Standard Generalized Markup
+Language，标准通用标记语言）作为页面的文本标记语言的 HTML（HyperText
+Markup Language，超文本标记语言）</li>
+<li>作为文档传递协议的 HTTP</li>
+<li>指定文档所在地址的 URL（Uniform Resource Locator，统一资源定位符）</li>
+</ul>
+
+<p>
+WWW 首次使用是称呼具备 Web
+浏览器功能的客户端应用程序，现在用于表示这一系列的集合，也可简称为 Web。
+</p>
+
+<table border="2" cellspacing="0" cellpadding="6" rules="groups" frame="hsides">
+
+
+<colgroup>
+<col  class="org-right" />
+
+<col  class="org-left" />
+</colgroup>
+<thead>
+<tr>
+<th scope="col" class="org-right">时间</th>
+<th scope="col" class="org-left">HTTP 版本/事件</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td class="org-right">1990</td>
+<td class="org-left">发明 HTTP（作者：Tim Berners-Lee）</td>
+</tr>
+
+<tr>
+<td class="org-right">1991</td>
+<td class="org-left">HTTP/0.9</td>
+</tr>
+
+<tr>
+<td class="org-right"><a href="https://www.ietf.org/rfc/rfc1945.txt">1996</a></td>
+<td class="org-left">HTTP/1.0</td>
+</tr>
+
+<tr>
+<td class="org-right">1997</td>
+<td class="org-left">HTTP/1.1（主流 HTTP 协议版本）</td>
+</tr>
+
+<tr>
+<td class="org-right">2015</td>
+<td class="org-left">HTTP/2</td>
+</tr>
+
+<tr>
+<td class="org-right">2020(draft)</td>
+<td class="org-left">HTTP/3</td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+
+<div id="outline-container-网络基础-tcpip" class="outline-3">
+<h3 id="网络基础-tcpip"><span class="section-number-3">2.3</span> 网络基础 TCP/IP</h3>
+<div class="outline-text-3" id="text-网络基础-tcpip">
+<p>
+通常使用的网络（包括互联网）是在 TCP/IP 协议族的基础上运作的。而 HTTP
+属于它内部的一个子集。
+</p>
+
+<blockquote>
+<p>
+什么是协议？
+</p>
+</blockquote>
+
+<p>
+计算机与网络设备要相互通信，双方就必须基于相同的方法。不同的硬件、操作系统之间的通信，所有的这一切都需要一种规则，而这种规则被称为*协议*（protocol）。
+</p>
+
+
+<div id="org03f87ff" class="figure">
+<p><img src="https://cdn.jsdelivr.net/gh/tianheg/static@main/img/%E5%9B%BE%E8%A7%A3HTTP0.jpeg" alt="%E5%9B%BE%E8%A7%A3HTTP0.jpeg" />
+</p>
+<p><span class="figure-number">Figure 1: </span>TCP/IP 是互联网相关的各类协议族的总称</p>
+</div>
+
+<p>
+一、TCP/IP 的分层管理
+</p>
+
+<p>
+*TCP/IP 协议族里重要的一点就是分层*。TCP/IP
+协议族按层次分为以下四层：应用层、传输层、网络层和数据链路层。
+</p>
+
+<p>
+1）应用层
+</p>
+
+<p>
+它决定了向用户提供应用服务时通信的活动。TCP/IP
+协议族内预存了各类通用的应用服务。比如，FTP（File Transfer
+Protocol，文件传输协议）和 DNS（Domain Name
+System，域名系统）服务就是其中两类。
+</p>
+
+<p>
+HTTP 协议也处于该层。
+</p>
+
+<p>
+2）传输层
+</p>
+
+<p>
+传输层对上层应用层，提供处于网络连接中的两台计算机之间的数据传输。在传输层有两个性质不同的协议：TCP（Transmission
+Control Protocol，传输控制协议）和 UDP（User Data
+Protocol，用户数据报协议）。
+</p>
+
+<p>
+3）网络层（又名网络互连层）
+</p>
+
+<p>
+网路层用来处理网络上流动的数据包。数据包是网络传输的最小数据单位。该层规定了通过哪条传输路线将数据包传送给对方。
+</p>
+
+<p>
+4）链路层（又名数据链路层，网络接口层）
+</p>
+
+<p>
+用来处理连接网络的硬件部分。包括控制操作系统、硬件的设备驱动、NIC（Network
+Interface
+Card，网络适配器，即网卡），以及光纤等物理可见部分（还包括连接器等一些传输媒介）。硬件上的范畴均在链路层的作用范围之内。
+</p>
+
+<p>
+二、TCP/IP 通信传输流
+</p>
+
+
+<div id="org4b6973f" class="figure">
+<p><img src="https://cdn.jsdelivr.net/gh/tianheg/static@main/img/%E5%9B%BE%E8%A7%A3HTTP1.jpeg" alt="%E5%9B%BE%E8%A7%A3HTTP1.jpeg" />
+</p>
+<p><span class="figure-number">Figure 2: </span>TCP/IP 通信传输流</p>
+</div>
+
+<p>
+每一层利用的协议：应用层（HTTP）、传输层（TCP）、网络层（IP）、链路层
+</p>
+
+
+<div id="org6b0882b" class="figure">
+<p><img src="https://cdn.jsdelivr.net/gh/tianheg/static@main/img/%E5%9B%BE%E8%A7%A3HTTP2.jpeg" alt="%E5%9B%BE%E8%A7%A3HTTP2.jpeg" />
+</p>
+<p><span class="figure-number">Figure 3: </span>封装过程</p>
+</div>
+
+<p>
+这种把数据信息包装起来的做法称为封装（encapsulate）。
+</p>
+</div>
+</div>
+
+<div id="outline-container-与-http-关系密切的协议-iptcp-和-dns" class="outline-3">
+<h3 id="与-http-关系密切的协议-iptcp-和-dns"><span class="section-number-3">2.4</span> 与 HTTP 关系密切的协议 : IP、TCP 和 DNS</h3>
+<div class="outline-text-3" id="text-与-http-关系密切的协议-iptcp-和-dns">
+<p>
+一、负责传输的 IP 协议
+</p>
+
+<p>
+按层次分，IP（Internet Protocol）网际协议位于网络层。IP
+协议的作用是把各种数据包传送给对方。而确保传送的两个重要条件是 IP 地址和
+MAC 地址（Media Access Control Address）。
+</p>
+
+<p>
+IP 地址确定节点的网络地址，MAC 地址则指网卡所属的固定地址。IP 地址和 MAC
+地址可以配对。前者可变，后者基本不变。
+</p>
+
+<p>
+1）使用 ARP 协议凭借 MAC 地址进行通信
+</p>
+
+<p>
+ARP（Address Resolution Protocol）是一种用以解析地址的协议，根据通信方的
+IP 地址就可以反查出对应的 MAC 地址。
+</p>
+
+<p>
+在一般网络中，位于端点的两台计算机如果想要通信要经过多台计算机进行中转，中转时会使用
+ARP 协议通过 MAC 地址搜索中转目标。
+</p>
+
+<p>
+2）互联网的网络传输不可预测
+</p>
+
+<p>
+中转过程中的路由选择（routing）。
+</p>
+
+
+<div id="org2051dc1" class="figure">
+<p><img src="https://cdn.jsdelivr.net/gh/tianheg/static@main/img/%E5%9B%BE%E8%A7%A3HTTP3.jpeg" alt="%E5%9B%BE%E8%A7%A3HTTP3.jpeg" />
+</p>
+<p><span class="figure-number">Figure 4: </span>路由选择机制</p>
+</div>
+
+<p>
+二、确保可靠性的 TCP 协议
+</p>
+
+<p>
+按层次分，TCP 位于传输层，提供可靠的字节流服务。字节流服务（Byte System
+Service）是指，为了方便传输，将大块数据分割成以报文段（segment）为单位的数据包进行管理。而可靠的传输服务是指，能够把数据准确可靠地传给对方。（TCP
+协议为了更容易传送大数据才分割数据，它还能确认数据最终是否送达。）
+</p>
+
+<p>
+1）确保数据送达
+</p>
+
+<p>
+TCP 协议采用了三次握手（three-way
+handshaking）策略，目的是为了准确无误地将数据送达。TCP
+的标志（flag）-&#x2013;&#x2014;SYN（synchronize）和 ACK（acknowledgement）。
+</p>
+
+<p>
+发送端首先发送一个带 SYN 标志的数据包给对方。接受端收到后，回传一个带有
+SYN/ACK 标志的数据包以示传达确认信息。最后，发送端再回传一个带 ACK
+标志的数据包，代表“握手”结束。
+</p>
+
+<p>
+若在握手过程中某个阶段莫名中断，TCP
+协议会再次以相同的顺序发送相同的数据包。
+</p>
+
+<ul class="org-ul">
+<li>Post &#x2013;&gt;SYN Get</li>
+<li>Post &lt;&#x2013;SYN/ACK Get</li>
+<li>Post &#x2013;&gt;ACK Get</li>
+</ul>
+
+
+<div id="org6af1777" class="figure">
+<p><object type="image/svg+xml" data="https://cdn.jsdelivr.net/gh/tianheg/static@main/img/%E5%9B%BE%E8%A7%A3HTTP4-three-way-handshaking.svg" class="org-svg">
+Sorry, your browser does not support SVG.</object>
+</p>
+<p><span class="figure-number">Figure 5: </span>three-way handshaking</p>
+</div>
+</div>
+</div>
+
+<div id="outline-container-负责域名解析的-dns-服务" class="outline-3">
+<h3 id="负责域名解析的-dns-服务"><span class="section-number-3">2.5</span> 负责域名解析的 DNS 服务</h3>
+<div class="outline-text-3" id="text-负责域名解析的-dns-服务">
+<p>
+DNS 服务是为了让人类更容易记住计算机在网络中的位置。
+</p>
+</div>
+</div>
+
+<div id="outline-container-各种协议与-http-协议的关系" class="outline-3">
+<h3 id="各种协议与-http-协议的关系"><span class="section-number-3">2.6</span> 各种协议与 HTTP 协议的关系</h3>
+<div class="outline-text-3" id="text-各种协议与-http-协议的关系">
+
+<div id="orge3473e3" class="figure">
+<p><object type="image/svg+xml" data="https://cdn.jsdelivr.net/gh/tianheg/static@main/img/%E5%9B%BE%E8%A7%A3HTTP5-protocols.svg" class="org-svg">
+Sorry, your browser does not support SVG.</object>
+</p>
+<p><span class="figure-number">Figure 6: </span>各种协议与 HTTP 协议的关系</p>
+</div>
+</div>
+</div>
+
+<div id="outline-container-uri-和-url" class="outline-3">
+<h3 id="uri-和-url"><span class="section-number-3">2.7</span> URI 和 URL</h3>
+<div class="outline-text-3" id="text-uri-和-url">
+<p>
+URI（统一资源标识符）与 URL（统一资源定位符）：Uniform Resource
+Identifier 与 Uniform Resource Locator。
+</p>
+
+<p>
+一、统一资源标识符
+</p>
+
+<ul class="org-ul">
+<li>Uniform：统一的格式有利于处理不同类型的资源；</li>
+<li>Resource：可标识的任何东西；</li>
+<li>Identifier：可标识的对象，也称为标识符。</li>
+</ul>
+
+<p>
+因此，URI 就是由协议表示的资源的定位标识符。（URI
+就是由某个协议方案表示的资源，的定位标识符。协议方案是指访问资源所使用的协议类型名称。采用
+HTTP 协议时，协议方案就是 http。）
+</p>
+
+<blockquote>
+<p>
+标准的 URI 协议方案有 30
+种左右，由隶属于国际互联网资源管理的非营利社团 ICANN（Internet
+Corporationfor Assigned Names and
+Numbers，互联网名称与数字地址分配机构）的 IANA（InternetAssigned
+Numbers Authority，互联网号码分配局）管理颁布。
+</p>
+</blockquote>
+
+<p>
+URI 用字符串标识某一互联网资源，而 URL
+表示资源的地点（互联网上所处的位置）。可见 URL 是 URI 的子集。
+</p>
+
+<p>
+二、URI 格式
+</p>
+
+
+<div id="org3fb50f1" class="figure">
+<p><object type="image/svg+xml" data="https://cdn.jsdelivr.net/gh/tianheg/static@main/img/%E5%9B%BE%E8%A7%A3HTTP6-%E7%BB%9D%E5%AF%B9URI.svg" class="org-svg">
+Sorry, your browser does not support SVG.</object>
+</p>
+<p><span class="figure-number">Figure 7: </span>绝对 URI</p>
+</div>
+</div>
+</div>
+
+<div id="outline-container-并不是所有的应用程序都符合-rfc" class="outline-3">
+<h3 id="并不是所有的应用程序都符合-rfc"><span class="section-number-3">2.8</span> 并不是所有的应用程序都符合 RFC</h3>
+<div class="outline-text-3" id="text-并不是所有的应用程序都符合-rfc">
+<p>
+有一些用来制定 HTTP 协议技术标准的文档，它们被称为 RFC（Request for
+Comments，征求修正意见书）。
+</p>
+
+<p>
+RFC 是互联网的设计文档，如果不按照 RFC
+标准执行，就有可能导致无法通信。所以绝大多数设备会采用 RFC
+标准。但是，有些程序并未采用 RFC 标准，且使用者众多，这时那些遵循 RFC
+标准的客户端或服务端将不得不适配这些例外的程序。
+</p>
+
+<p>
+本书以后的 HTTP 协议内容，除去部分例外外，基本上都以 RFC 的标准为准。
+</p>
+</div>
+</div>
+</div>
+
+<div id="outline-container-简单的-http-协议" class="outline-2">
+<h2 id="简单的-http-协议"><span class="section-number-2">3</span> 简单的 HTTP 协议</h2>
+<div class="outline-text-2" id="text-简单的-http-协议">
+<p>
+主要使用 HTTP/1.1 版本。
+</p>
+</div>
+
+<div id="outline-container-http-协议用于客户端和服务器端之间的通信" class="outline-3">
+<h3 id="http-协议用于客户端和服务器端之间的通信"><span class="section-number-3">3.1</span> HTTP 协议用于客户端和服务器端之间的通信</h3>
+<div class="outline-text-3" id="text-http-协议用于客户端和服务器端之间的通信">
+<p>
+客户端和服务端的角色并不固定，但在具体通信线路中，资源传输方向是确定的。HTTP
+协议能够明确区分哪端是客户端，哪端是服务端。
+</p>
+</div>
+</div>
+
+<div id="outline-container-通过请求和响应的交换达成通信" class="outline-3">
+<h3 id="通过请求和响应的交换达成通信"><span class="section-number-3">3.2</span> 通过请求和响应的交换达成通信</h3>
+<div class="outline-text-3" id="text-通过请求和响应的交换达成通信">
+<p>
+通信请求由客户端发出，然后服务端才响应。服务端在没有接收到请求之前不会发送响应。
+</p>
+
+<pre class="example" id="org767e454">
+GET /index.html HTTP/1.1
+</pre>
+
+<ul class="org-ul">
+<li><code>GET</code> 访问服务器的类型，称为方法（method）</li>
+<li><code>/index.html</code> 表示请求访问的资源对象，也叫请求 URI（request-URI）</li>
+<li><code>HTTP/1.1</code> HTTP 的版本号，用以提示客户端使用的 HTTP 协议功能</li>
+</ul>
+
+<p>
+我的网站的请求头：
+</p>
+
+<pre class="example" id="org47a8ce7">
+GET / HTTP/2
+Host: www.yidajiabei.xyz
+</pre>
+
+<p>
+我网站的响应头：
+</p>
+
+<pre class="example" id="org9fb2ff7">
+HTTP/1.1 200 Connection established
+</pre>
+
+<blockquote>
+<p>
+请求报文由请求方法、请求
+URI、协议版本、可选的请求首部字段和内容实体构成。响应报文由协议版本、状态码、原因短语、可选的响应首部字段以及实体主体构成。
+</p>
+</blockquote>
+</div>
+</div>
+
+<div id="outline-container-http-是不保存状态的协议" class="outline-3">
+<h3 id="http-是不保存状态的协议"><span class="section-number-3">3.3</span> HTTP 是不保存状态的协议</h3>
+<div class="outline-text-3" id="text-http-是不保存状态的协议">
+<p>
+HTTP 是无状态（stateless）协议-&#x2013;&#x2014;HTTP
+协议对于发送过的请求或响应都不做持久化处理。
+</p>
+
+<p>
+随着 Web 的不断发展，HTTP
+协议的无状态特性让网站无法保存用户的已登录信息，导致用户在当前页面输入的登录信息，在访问该网站的另一处页面时会失效，进而让用户不得不重新登录。
+</p>
+
+<p>
+于是，Cookie 技术便是为了解决这一问题而诞生的。
+</p>
+</div>
+</div>
+
+<div id="outline-container-请求-uri-定位资源" class="outline-3">
+<h3 id="请求-uri-定位资源"><span class="section-number-3">3.4</span> 请求 URI 定位资源</h3>
+<div class="outline-text-3" id="text-请求-uri-定位资源">
+<pre class="example" id="org03e3b99">
+GET https://job.yidajiabei.xyz/#/ HTTP/3
+
+GET / HTTP/3
+Host: job.yidajiabei.xyz
+
+# 对服务器发起请求
+OPTIONS * HTTP/1.1
+</pre>
+</div>
+</div>
+
+<div id="outline-container-http1.1-中的可用方法" class="outline-3">
+<h3 id="http1.1-中的可用方法"><span class="section-number-3">3.5</span> HTTP/1.1 中的可用方法</h3>
+<div class="outline-text-3" id="text-http1.1-中的可用方法">
+<p>
+一、GET 获取资源
+</p>
+
+<p>
+GET 方法用于请求已被 URI 识别的资源。
+</p>
+
+
+<div id="orgc8150f2" class="figure">
+<p><object type="image/svg+xml" data="https://cdn.jsdelivr.net/gh/tianheg/static@main/img/%E5%9B%BE%E8%A7%A3HTTP7-GET.svg" class="org-svg">
+Sorry, your browser does not support SVG.</object>
+</p>
+<p><span class="figure-number">Figure 8: </span>GET</p>
+</div>
+
+<p>
+二、POST 传输实体主体
+</p>
+
+
+<div id="org14f8d5d" class="figure">
+<p><object type="image/svg+xml" data="https://cdn.jsdelivr.net/gh/tianheg/static@main/img/%E5%9B%BE%E8%A7%A3HTTP8-POST.svg" class="org-svg">
+Sorry, your browser does not support SVG.</object>
+</p>
+<p><span class="figure-number">Figure 9: </span>POST</p>
+</div>
+
+<p>
+三、PUT 传输文件
+</p>
+
+<p>
+过程：在请求报文的主体中包含文件内容，然后保存到请求 URI
+指定的位置。但是，由于 HTTP/1.1 的 PUT
+方法自身不带验证机制，任何人都可以上传文件，存在安全性问题，因此一般的
+Web 网站不使用该方法。
+</p>
+
+<p>
+使用该方法的场景：
+</p>
+
+<ol class="org-ol">
+<li>Web 应用程序具有验证机制</li>
+<li>架构设计采用 REST（Representational State
+Transfer，表征状态转移）标准</li>
+</ol>
+
+
+<div id="orgca20a50" class="figure">
+<p><object type="image/svg+xml" data="https://cdn.jsdelivr.net/gh/tianheg/static@main/img/%E5%9B%BE%E8%A7%A3HTTP9-PUT.svg" class="org-svg">
+Sorry, your browser does not support SVG.</object>
+</p>
+<p><span class="figure-number">Figure 10: </span>PUT</p>
+</div>
+
+<blockquote>
+<p>
+（PUT 的）响应：请求执行成功，但无数据返回
+</p>
+</blockquote>
+
+<p>
+四、HEAD 获得报文首部
+</p>
+
+<p>
+HEAD 和 GET 一样，只是不返回报文主体部分。用于确认 URI
+的有效性及资源更新的日期时间等。
+</p>
+
+
+<div id="org39ea61d" class="figure">
+<p><object type="image/svg+xml" data="https://cdn.jsdelivr.net/gh/tianheg/static@main/img/%E5%9B%BE%E8%A7%A3HTTP10-HEAD.svg" class="org-svg">
+Sorry, your browser does not support SVG.</object>
+</p>
+<p><span class="figure-number">Figure 11: </span>HEAD</p>
+</div>
+
+<p>
+五、DELETE 删除文件（类比 PUT）
+</p>
+
+<p>
+六、OPTIONS 询问支持的方法
+</p>
+
+<pre class="example" id="org354c3e1">
+curl -X OPTIONS https://example.org -i
+</pre>
+
+<p>
+Output:
+</p>
+
+<pre class="example" id="org8c5a571">
+HTTP/2 200
+allow: OPTIONS, GET, HEAD, POST
+cache-control: max-age=604800
+content-type: text/html; charset=UTF-8
+date: Tue, 07 Sep 2021 02:09:50 GMT
+expires: Tue, 14 Sep 2021 02:09:50 GMT
+server: EOS (vny/044E)
+content-length: 0
+</pre>
+
+<p>
+七、TRACE 追踪路径
+</p>
+
+<p>
+TRACE 方法能让 Web 服务端将之前的请求通信环回给客户端。
+</p>
+
+<p>
+请求过程中，会在首部字段 Max-Forwards
+中填入数值，每经过一个服务端就将数值减 1，减到 0
+时停止传播，最后接收到请求的服务器则返回状态码 200 OK 的响应。
+</p>
+
+<p>
+客户端可以通过 TRACE
+方法确认连接过程中的数据是怎样被修改/篡改的。但是，因为它易引起
+XST（Cross-Site Tracing，跨站追踪）攻击，所以通常不使用。
+</p>
+
+<p>
+八、CONNECT 要求用隧道协议连接代理
+</p>
+
+<p>
+CONNECT 方法要求在与代理服务器通信时建立隧道，实现用隧道协议（tunnel
+protocol）进行 TCP 通信。主要使用 SSL（Secure Sockets
+Layer，安全套接层）和 TLS（Transport Layer
+Security,传输层安全）协议吧通信内容加密后经网络隧道传输。
+</p>
+</div>
+</div>
+
+<div id="outline-container-使用方法下达命令" class="outline-3">
+<h3 id="使用方法下达命令"><span class="section-number-3">3.6</span> 使用方法下达命令</h3>
+<div class="outline-text-3" id="text-使用方法下达命令">
+<p>
+通过方法向请求 URI 指定的资源发送请求报文。
+</p>
+
+<p>
+一下列出 HTTP/1.0 和 HTTP/1.1
+支持的方法。要注意：方法名区分大小写，注意要用大写字母。
+</p>
+
+
+<div id="orgea85a97" class="figure">
+<p><img src="https://cdn.jsdelivr.net/gh/tianheg/static@main/img/%E5%9B%BE%E8%A7%A3HTTP11-http1-http1.1.jpeg" alt="%E5%9B%BE%E8%A7%A3HTTP11-http1-http1.1.jpeg" />
+</p>
+<p><span class="figure-number">Figure 12: </span>HTTP/1.0 HTTP/1.1</p>
+</div>
+</div>
+</div>
+
+<div id="outline-container-持久连接节省通信量" class="outline-3">
+<h3 id="持久连接节省通信量"><span class="section-number-3">3.7</span> 持久连接节省通信量</h3>
+<div class="outline-text-3" id="text-持久连接节省通信量">
+<p>
+如果保证持久连接？
+</p>
+
+<p>
+在 HTTP/1.1 和部分的 HTTP/1.0 中提出了持久连接（HTTP Persistent
+Connections，也称为 HTTP keep-alive 或 HTTP connection reuse）的方法。
+</p>
+
+<p>
+持久连接的特性：如果通信双方均不明确提出断开连接，则保持 TCP 连接状态。
+</p>
+
+<p>
+持久连接的好处：
+</p>
+
+<ol class="org-ol">
+<li>减少了 TCP 连接的重复建立和断开所造成的额外开销，减轻了服务器段的负载</li>
+<li>节省时间，Web 页面的显示速度也相应提高</li>
+</ol>
+
+<p>
+在 HTTP/1.1 中，所有的连接默认都是持久连接，但在 HTTP/1.0
+内并未标准化。只有客户端与服务器端都支持持久连接时，才能持久连接。
+</p>
+
+<p>
+什么是管线化（pipelining）？
+</p>
+
+<p>
+管线化让多个请求的发送成为现实。
+</p>
+</div>
+</div>
+
+<div id="outline-container-重要使用-cookie-的状态管理" class="outline-3">
+<h3 id="重要使用-cookie-的状态管理"><span class="section-number-3">3.8</span> （重要）使用 Cookie 的状态管理</h3>
+<div class="outline-text-3" id="text-重要使用-cookie-的状态管理">
+<p>
+Cookie 技术通过在请求和响应报文中写入 Cookie 信息来控制客户端的状态。
+</p>
+</div>
+</div>
+</div>
+</div>
+</body>
+</html>

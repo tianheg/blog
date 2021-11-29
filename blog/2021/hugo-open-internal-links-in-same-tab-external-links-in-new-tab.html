@@ -1,0 +1,95 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN"
+"http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en">
+<head>
+<!-- 2021-11-29 Mon 22:08 -->
+<meta http-equiv="Content-Type" content="text/html;charset=utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>&lrm;</title>
+<meta name="generator" content="Org mode" />
+<script type="text/javascript">
+// @license magnet:?xt=urn:btih:e95b018ef3580986a04669f1b5879592219e2a7a&dn=public-domain.txt Public Domain
+<!--/*--><![CDATA[/*><!--*/
+     function CodeHighlightOn(elem, id)
+     {
+       var target = document.getElementById(id);
+       if(null != target) {
+         elem.classList.add("code-highlighted");
+         target.classList.add("code-highlighted");
+       }
+     }
+     function CodeHighlightOff(elem, id)
+     {
+       var target = document.getElementById(id);
+       if(null != target) {
+         elem.classList.remove("code-highlighted");
+         target.classList.remove("code-highlighted");
+       }
+     }
+    /*]]>*///-->
+// @license-end
+</script>
+</head>
+<body>
+<div id="content">
+<div id="table-of-contents">
+<h2>Table of Contents</h2>
+<div id="text-table-of-contents">
+<ul>
+<li><a href="#例子">1. 例子</a></li>
+<li><a href="#实现">2. 实现</a></li>
+</ul>
+</div>
+</div>
+<p>
+<del>+</del> date = '2021-02-16T21:45:07+08:00' description = '记录&lt;Hugo
+内链当前标签页打开，外链新标签页打开&gt;实现过程' keywords = ['Hugo'] tags
+= ['Hugo'] title = 'Hugo 内链当前标签页打开，外链新标签页打开' <del>+</del>
+</p>
+
+<div id="outline-container-例子" class="outline-2">
+<h2 id="例子"><span class="section-number-2">1</span> 例子</h2>
+<div class="outline-text-2" id="text-例子">
+<ul class="org-ul">
+<li><a href="https://yihui.org/cn/">https://yihui.org/cn/</a></li>
+<li><a href="https://io-oi.me/">https://io-oi.me/</a></li>
+</ul>
+</div>
+</div>
+
+<div id="outline-container-实现" class="outline-2">
+<h2 id="实现"><span class="section-number-2">2</span> 实现</h2>
+<div class="outline-text-2" id="text-实现">
+<p>
+在 Hugo 博客的博客单页面（single.html）中，修改 <code>{{ .Content }}</code> 为
+</p>
+
+<pre class="example" id="orgd49330c">
+{{ $content := .Content }}
+{{ $content = replaceRE `&lt;a href="(https?://.+)"&gt;` `&lt;a href="$1" target="_blank" rel="noopener"&gt;` $content | safeHTML }}
+{{ $content | safeHTML }}
+</pre>
+
+<p>
+这样就可以实现「内链当前标签页打开，外链新标签页打开」。这可能是应用了「正则表达式」，我还不太了解。Hugo
+的语法我还不了解。
+</p>
+
+<hr />
+
+<p>
+*参考资料*：
+</p>
+
+<ol class="org-ol">
+<li><a href="https://discourse.gohugo.io/t/how-to-open-plain-url-links-in-a-new-tab/25523/6">https://discourse.gohugo.io/t/how-to-open-plain-url-links-in-a-new-tab/25523/6</a></li>
+<li><a href="https://github.com/reuixiy/hugo-theme-meme/blob/d392ab1814/layouts/partials/utils/markdownify.html?rgh-link-date=2021-01-12T04%3A02%3A06Z#L27">https://github.com/reuixiy/hugo-theme-meme/blob/d392ab1814/layouts/partials/utils/markdownify.html?rgh-link-date=2021-01-12T04%3A02%3A06Z#L27</a></li>
+<li><a href="https://stackoverflow.com/a/4425214/12539782">https://stackoverflow.com/a/4425214/12539782</a></li>
+<li><a href="https://discourse.gohugo.io/t/internal-links-in-same-tab-external-links-in-new-tab/11048/9">https://discourse.gohugo.io/t/internal-links-in-same-tab-external-links-in-new-tab/11048/9</a></li>
+</ol>
+</div>
+</div>
+</div>
+</body>
+</html>

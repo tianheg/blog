@@ -1,0 +1,225 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN"
+"http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en">
+<head>
+<!-- 2021-11-29 Mon 22:09 -->
+<meta http-equiv="Content-Type" content="text/html;charset=utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>&lrm;</title>
+<meta name="generator" content="Org mode" />
+<script type="text/javascript">
+// @license magnet:?xt=urn:btih:e95b018ef3580986a04669f1b5879592219e2a7a&dn=public-domain.txt Public Domain
+<!--/*--><![CDATA[/*><!--*/
+     function CodeHighlightOn(elem, id)
+     {
+       var target = document.getElementById(id);
+       if(null != target) {
+         elem.classList.add("code-highlighted");
+         target.classList.add("code-highlighted");
+       }
+     }
+     function CodeHighlightOff(elem, id)
+     {
+       var target = document.getElementById(id);
+       if(null != target) {
+         elem.classList.remove("code-highlighted");
+         target.classList.remove("code-highlighted");
+       }
+     }
+    /*]]>*///-->
+// @license-end
+</script>
+</head>
+<body>
+<div id="content">
+<div id="table-of-contents">
+<h2>Table of Contents</h2>
+<div id="text-table-of-contents">
+<ul>
+<li><a href="#tag12">1. Tag,</a></li>
+<li><a href="#branch">2. Branch</a>
+<ul>
+<li><a href="#本地和远程创建空分支4">2.1. 本地和远程创建空分支</a></li>
+<li><a href="#本地和远程删除分支">2.2. 本地和远程删除分支</a></li>
+<li><a href="#克隆特定远程分支">2.3. 克隆特定远程分支</a></li>
+<li><a href="#删除仅存在本地远程仓库中不存在的分支">2.4. 删除仅存在本地（远程仓库中不存在）的分支</a></li>
+</ul>
+</li>
+<li><a href="#submodule">3. Submodule</a>
+<ul>
+<li><a href="#移除-submodule">3.1. 移除 Submodule</a></li>
+</ul>
+</li>
+</ul>
+</div>
+</div>
+<p>
+<del>+</del> date = '2021-11-13T15:40:57+08:00' title = 'Git tag,branch,submodule
+基本使用' tags = ['Git'] slug = 'git-tag-branch-submodule-basic-usage'
+<del>+</del>
+</p>
+
+<div id="outline-container-tag12" class="outline-2">
+<h2 id="tag12"><span class="section-number-2">1</span> Tag<sup><a id="fnr.1" class="footref" href="#fn.1">1</a></sup>,<sup><a id="fnr.2" class="footref" href="#fn.2">2</a></sup></h2>
+<div class="outline-text-2" id="text-tag12">
+<pre class="example" id="orgc62718f">
+git tag &lt;tag-name&gt; # create local tag
+git tag -d &lt;tag-name&gt; # delete local tag
+git push origin :refs/tags/&lt;tag-name&gt; # delete remote tag
+git fsck --unreachable | grep tag &amp;&amp; git update-ref refs/tags/&lt;tag_name&gt; &lt;hash&gt; # recover a deleted tag
+
+git describe --tags --abbrev=0 # show the most recent tag on the current branch
+git tag --contains &lt;commitid&gt; # find all tags containing a specific commit
+</pre>
+</div>
+</div>
+
+<div id="outline-container-branch" class="outline-2">
+<h2 id="branch"><span class="section-number-2">2</span> Branch</h2>
+<div class="outline-text-2" id="text-branch">
+<p>
+分支不能含空格，见这里<sup><a id="fnr.3" class="footref" href="#fn.3">3</a></sup>。
+</p>
+</div>
+
+<div id="outline-container-本地和远程创建空分支4" class="outline-3">
+<h3 id="本地和远程创建空分支4"><span class="section-number-3">2.1</span> 本地和远程创建空分支<sup><a id="fnr.4" class="footref" href="#fn.4">4</a></sup></h3>
+<div class="outline-text-3" id="text-本地和远程创建空分支4">
+<pre class="example" id="org288f430">
+# UPDATE(git &gt; 2.27)
+git switch --orphan &lt;new branch&gt;
+git commit --allow-empty -m "Initial commit on orphan branch"
+git push -u origin &lt;new branch&gt;
+
+## Old Way
+
+# local
+git checkout --orphan empty-branch
+git rm -rf .
+# remote
+git commit --allow-empty -m "root commit"
+git push origin empty-branch
+</pre>
+</div>
+</div>
+
+<div id="outline-container-本地和远程删除分支" class="outline-3">
+<h3 id="本地和远程删除分支"><span class="section-number-3">2.2</span> 本地和远程删除分支</h3>
+<div class="outline-text-3" id="text-本地和远程删除分支">
+<pre class="example" id="org2fa4bf5">
+# delete branch locally
+git branch -d localBranchName
+# delete a local branch that has not been merged to the current branch or an upstream
+git branch -D localBranchName
+
+# delete branch remotely
+git push origin --delete remoteBranchName
+# same as
+git push origin :remoteBranchName
+
+# delete multiple branches
+git branch | grep 'fix/' | xargs git branch -d
+
+# rename current branch
+git branch -m new-name
+# rename a different(local) branch
+git branch -m old-name new-name
+
+# delete the old-name remote branch and push the new-name local branch
+git push origin :old_name new_name
+</pre>
+</div>
+</div>
+
+<div id="outline-container-克隆特定远程分支" class="outline-3">
+<h3 id="克隆特定远程分支"><span class="section-number-3">2.3</span> 克隆特定远程分支</h3>
+<div class="outline-text-3" id="text-克隆特定远程分支">
+<pre class="example" id="orge690f1f">
+git clone --branch &lt;branchname&gt; &lt;remote-repo-url&gt;
+</pre>
+</div>
+</div>
+
+<div id="outline-container-删除仅存在本地远程仓库中不存在的分支" class="outline-3">
+<h3 id="删除仅存在本地远程仓库中不存在的分支"><span class="section-number-3">2.4</span> 删除仅存在本地（远程仓库中不存在）的分支</h3>
+<div class="outline-text-3" id="text-删除仅存在本地远程仓库中不存在的分支">
+<pre class="example" id="orgfed6b8a">
+$ git branch -a
+* main
+
+  remotes/origin/articles-main
+  remotes/origin/gh-pages
+  remotes/origin/main
+
+# remote branch articles-main, gh-pages has been deleted
+$ git remote prune origin
+Pruning origin
+URL: git@github.com:tianheg/wiki.git
+
+* [pruned] origin/articles-main
+* [pruned] origin/gh-pages
+</pre>
+
+<p>
+Others:
+</p>
+
+<pre class="example" id="org1c92f0e">
+git branch # list local branches
+git branch -r # list remote branches
+git branch -a # list local and remote branches
+git checkout -b &lt;branch&gt; &lt;SHA1_OF_COMMIT&gt; # create a branch from a commit
+</pre>
+</div>
+</div>
+</div>
+
+<div id="outline-container-submodule" class="outline-2">
+<h2 id="submodule"><span class="section-number-2">3</span> Submodule</h2>
+<div class="outline-text-2" id="text-submodule">
+<pre class="example" id="orgf42ffe8">
+# clone all submodules
+git clone --recursive git://github.com/foo/bar.git
+# already cloned
+git submodule update --init --recursive
+</pre>
+</div>
+
+<div id="outline-container-移除-submodule" class="outline-3">
+<h3 id="移除-submodule"><span class="section-number-3">3.1</span> 移除 Submodule</h3>
+<div class="outline-text-3" id="text-移除-submodule">
+<pre class="example" id="org0c8feea">
+git submodule deinit submodulename
+git rm submodulename
+git rm --cached submodulename
+rm -rf .git/modules/submodulename
+</pre>
+</div>
+</div>
+</div>
+<div id="footnotes">
+<h2 class="footnotes">Footnotes: </h2>
+<div id="text-footnotes">
+
+<div class="footdef"><sup><a id="fn.1" class="footnum" href="#fnr.1">1</a></sup> <div class="footpara"><p class="footpara">
+<a href="https://github.com/git-tips/tips#create-local-tag">https://github.com/git-tips/tips#create-local-tag</a>
+</p></div></div>
+
+<div class="footdef"><sup><a id="fn.2" class="footnum" href="#fnr.2">2</a></sup> <div class="footpara"><p class="footpara">
+<a href="https://github.com/k88hudson/git-flight-rules">https://github.com/k88hudson/git-flight-rules</a>
+</p></div></div>
+
+<div class="footdef"><sup><a id="fn.3" class="footnum" href="#fnr.3">3</a></sup> <div class="footpara"><p class="footpara">
+<a href="https://stackoverflow.com/a/6619113">https://stackoverflow.com/a/6619113</a>
+</p></div></div>
+
+<div class="footdef"><sup><a id="fn.4" class="footnum" href="#fnr.4">4</a></sup> <div class="footpara"><p class="footpara">
+<a href="https://stackoverflow.com/a/34100189">https://stackoverflow.com/a/34100189</a>
+</p></div></div>
+
+
+</div>
+</div></div>
+</body>
+</html>
