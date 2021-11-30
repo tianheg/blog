@@ -3,7 +3,7 @@
 "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en">
 <head>
-<!-- 2021-11-30 Tue 09:06 -->
+<!-- 2021-11-30 Tue 09:28 -->
 <meta http-equiv="Content-Type" content="text/html;charset=utf-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1" />
 <title>&lrm;</title>
@@ -65,7 +65,7 @@ Encrypt"] slug = 'install-letsencrypt-with-nginx-on-ubuntu20.04' <del>+</del>
 <div id="outline-container-安装-certbot" class="outline-2">
 <h2 id="安装-certbot"><span class="section-number-2">1</span> 安装 Certbot</h2>
 <div class="outline-text-2" id="text-安装-certbot">
-<pre class="example" id="orgea7707d">
+<pre class="example" id="orgacf3cdc">
 sudo apt install certbot python3-certbot-nginx
 </pre>
 </div>
@@ -84,7 +84,7 @@ server block<sup><a id="fnr.1" class="footref" href="#fn.1">1</a></sup>，即新
 <code>/etc/nginx/nginx.conf</code> 文件中。
 </p>
 
-<pre class="example" id="org98e858b">
+<pre class="example" id="org13ed621">
 http {
     ssl_protocols TLSv1 TLSv1.1 TLSv1.2 TLSv1.3;
     ssl_prefer_server_ciphers on;
@@ -116,7 +116,7 @@ HTTPS。而且，第一个 server 中缺少 SSL 证书和密匙，这两个配�
 <div id="outline-container-获取一个-ssl-证书" class="outline-2">
 <h2 id="获取一个-ssl-证书"><span class="section-number-2">3</span> 获取一个 SSL 证书</h2>
 <div class="outline-text-2" id="text-获取一个-ssl-证书">
-<pre class="example" id="orgaff1469">
+<pre class="example" id="orgc93f2f1">
 sudo certbot --nginx -d til.yidajiabei.xyz
 </pre>
 
@@ -126,7 +126,7 @@ sudo certbot --nginx -d til.yidajiabei.xyz
 =/etc/nginx/nginx.conf</code> 文件也会发生变化：
 </p>
 
-<pre class="example" id="org3c888f9">
+<pre class="example" id="org522da1d">
 http {
     ...
     server {
@@ -146,7 +146,7 @@ http {
 <div id="outline-container-验证-certbot-自动更新" class="outline-2">
 <h2 id="验证-certbot-自动更新"><span class="section-number-2">4</span> 验证 Certbot 自动更新</h2>
 <div class="outline-text-2" id="text-验证-certbot-自动更新">
-<pre class="example" id="orgf4a7004">
+<pre class="example" id="orgbdc69e4">
 sudo systemctl status certbot.timer
 ● certbot.timer - Run certbot twice daily
      Loaded: loaded (/lib/systemd/system/certbot.timer; enabled; vendor preset: enabled)
@@ -161,7 +161,7 @@ Oct 22 09:38:04 VM-4-5-ubuntu systemd[1]: Started Run certbot twice daily.
 Certbot 自动更新正常运行。还可以通过以下命令测试「更新证书」这一过程：
 </p>
 
-<pre class="example" id="orgb46b1d1">
+<pre class="example" id="orge722530">
 sudo certbot renew --dry-run
 </pre>
 </div>
