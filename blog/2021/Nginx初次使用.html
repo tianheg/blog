@@ -3,7 +3,7 @@
 "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en">
 <head>
-<!-- 2021-11-30 Tue 07:44 -->
+<!-- 2021-11-30 Tue 09:07 -->
 <meta http-equiv="Content-Type" content="text/html;charset=utf-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1" />
 <title>&lrm;</title>
@@ -54,7 +54,7 @@
 我使用 Arch Linux
 </p>
 
-<pre class="example" id="org487da01">
+<pre class="example" id="org0c79f1d">
 sudo pacman -S nginx
 </pre>
 
@@ -80,7 +80,7 @@ Nginx 的计算机是代理服务器）</li>
 打开关闭 Nginx，重新加载配置
 </p>
 
-<pre class="example" id="orga47a53a">
+<pre class="example" id="orgf482736">
 sudo nginx # start
 sudo nginx stop # fast shutdown
 sudo nginx quit # graceful shutdown
@@ -96,7 +96,7 @@ ps -ax | grep nginx
 配置文件的结构
 </p>
 
-<pre class="example" id="orgd096ab6">
+<pre class="example" id="orga7ef05d">
 name {
     key: value;
     # comment
@@ -107,7 +107,7 @@ name {
 设置 Nginx 为静态内容提供服务
 </p>
 
-<pre class="example" id="orgf086ab0">
+<pre class="example" id="org07ce867">
 # edit /etc/nginx/nginx.conf
 http {
     server {
@@ -132,7 +132,7 @@ http {
 将它与 FastCGI 应用程序连接
 </p>
 
-<pre class="example" id="orgdd457ac">
+<pre class="example" id="org26c5e87">
 server {
     location / {
         fastcgi_pass  localhost:9000;
@@ -153,7 +153,7 @@ server {
 1.could not build optimal types<sub>hash</sub>
 </p>
 
-<pre class="example" id="org9445c60">
+<pre class="example" id="org7a93013">
 sudo nginx
 2021/09/19 08:55:04 [warn] 33400#33400: could not build optimal types_hash, you should increase either types_hash_max_size: 1024 or types_hash_bucket_size: 64; ignoring types_hash_bucket_size
 </pre>
@@ -162,7 +162,7 @@ sudo nginx
 Solution<sup><a id="fnr.1" class="footref" href="#fn.1">1</a></sup>:
 </p>
 
-<pre class="example" id="orgf94157d">
+<pre class="example" id="org06c8ca1">
 # /etc/nginx/nginx.conf
 http {
     types_hash_max_size 4096;
@@ -173,7 +173,7 @@ http {
 <li>Address already in use</li>
 </ol>
 
-<pre class="example" id="org355f30f">
+<pre class="example" id="orga5a6007">
 [emerg] 34338#34338: bind() to 0.0.0.0:80 failed (98: Address already in use)
 </pre>
 
@@ -181,7 +181,7 @@ http {
 Solution<sup><a id="fnr.2" class="footref" href="#fn.2">2</a></sup>:
 </p>
 
-<pre class="example" id="org56c55a5">
+<pre class="example" id="orga2f5bd6">
 sudo pkill -f nginx &amp; wait $!
 sudo systemctl start nginx
 </pre>
