@@ -4,7 +4,7 @@
 <!-- 2021-12-02 Thu 13:28 -->
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<title>Git Remove Untracked Files from Working Tree</title>
+<title>如何理解 JS 中的 (e)</title>
 <meta name="generator" content="Org mode">
 <meta name="description" content="Learn Technology, Love Life"
 >
@@ -224,18 +224,50 @@
 <body>
 <div id="content">
 <header>
-<h1 class="title">Git Remove Untracked Files from Working Tree</h1>
+<h1 class="title">如何理解 JS 中的 (e)</h1>
 </header><p>
-<a href="https://stackoverflow.com/a/64966/12539782">https://stackoverflow.com/a/64966/12539782</a>
+<code>e</code> 是将传递给事件处理程序的 <code>event</code> 对象的短 var 引用<sup><a id="fnr.1" class="footref" href="#fn.1">1</a></sup>。
+</p>
+
+<p>
+事件对象本质上有许多有趣的方法和属性，可以在事件处理程序中使用。
+</p>
+
+<p>
+一些小例子<sup><a id="fnr.2" class="footref" href="#fn.2">2</a></sup>：
 </p>
 
 <div class="org-src-container">
-<pre class="src src-sh"><span style="color: #706565;"># </span><span style="color: #857575;">Print out the list of files and directories which will be removed (dry run)</span>
-git clean -n -d
-<span style="color: #706565;"># </span><span style="color: #857575;">Delete the files from the repository</span>
-git clean -f
+<pre class="src src-js"><span style="color: #91a0b3;">function</span> <span style="color: #a9df90;">doSomething</span>(<span style="color: #aaca86;">e</span>) {
+  <span style="color: #91a0b3;">if</span> (!e) <span style="color: #91a0b3;">var</span> <span style="color: #aaca86;">e</span> = window.event;
+  alert(e.type);
+}
 </pre>
 </div>
+
+<div class="org-src-container">
+<pre class="src src-js"><span style="color: #91a0b3;">function</span> <span style="color: #a9df90;">doSomething</span>(<span style="color: #aaca86;">e</span>) {
+  <span style="color: #91a0b3;">var</span> <span style="color: #aaca86;">targ</span>;
+  <span style="color: #91a0b3;">if</span> (!e) <span style="color: #91a0b3;">var</span> <span style="color: #aaca86;">e</span> = window.event;
+  <span style="color: #91a0b3;">if</span> (e.target) targ = e.target;
+  <span style="color: #91a0b3;">else</span> <span style="color: #91a0b3;">if</span> (e.srcElement) targ = e.srcElement;
+  <span style="color: #91a0b3;">if</span> (targ.nodeType == 3) targ = targ.parentNode;
+}
+</pre>
 </div>
+<div id="footnotes">
+<h2 class="footnotes">Footnotes: </h2>
+<div id="text-footnotes">
+
+<div class="footdef"><sup><a id="fn.1" class="footnum" href="#fnr.1">1</a></sup> <div class="footpara"><p class="footpara">
+<a href="https://stackoverflow.com/a/10323409/12539782">https://stackoverflow.com/a/10323409/12539782</a>
+</p></div></div>
+
+<div class="footdef"><sup><a id="fn.2" class="footnum" href="#fnr.2">2</a></sup> <div class="footpara"><p class="footpara">
+<a href="https://www.quirksmode.org/js/events_properties.html">https://www.quirksmode.org/js/events_properties.html</a></p></div></div>
+
+
+</div>
+</div></div>
 </body>
 </html>
