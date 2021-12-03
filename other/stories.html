@@ -1,0 +1,343 @@
+<!DOCTYPE html>
+<html lang="zh">
+<head>
+<!-- 2021-12-03 Fri 10:12 -->
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Others</title>
+<meta name="generator" content="Org mode">
+<meta name="description" content="Learn Technology, Love Life"
+>
+<meta name="keywords" content="博客, blog, 技术, 生活, Technology, Life">
+<style type="text/css">
+ <!--/*--><![CDATA[/*><!--*/
+  .title  { text-align: center;
+             margin-bottom: .2em; }
+  .subtitle { text-align: center;
+              font-size: medium;
+              font-weight: bold;
+              margin-top:0; }
+  .todo   { font-family: monospace; color: red; }
+  .done   { font-family: monospace; color: green; }
+  .priority { font-family: monospace; color: orange; }
+  .tag    { background-color: #eee; font-family: monospace;
+            padding: 2px; font-size: 80%; font-weight: normal; }
+  .timestamp { color: #bebebe; }
+  .timestamp-kwd { color: #5f9ea0; }
+  .org-right  { margin-left: auto; margin-right: 0px;  text-align: right; }
+  .org-left   { margin-left: 0px;  margin-right: auto; text-align: left; }
+  .org-center { margin-left: auto; margin-right: auto; text-align: center; }
+  .underline { text-decoration: underline; }
+  #postamble p, #preamble p { font-size: 90%; margin: .2em; }
+  p.verse { margin-left: 3%; }
+  pre {
+    border: 1px solid #ccc;
+    box-shadow: 3px 3px 3px #eee;
+    padding: 8pt;
+    font-family: monospace;
+    overflow: auto;
+    margin: 1.2em;
+  }
+  pre.src {
+    position: relative;
+    overflow: auto;
+    padding-top: 1.2em;
+  }
+  pre.src:before {
+    display: none;
+    position: absolute;
+    background-color: white;
+    top: -10px;
+    right: 10px;
+    padding: 3px;
+    border: 1px solid black;
+  }
+  pre.src:hover:before { display: inline; margin-top: 14px;}
+  /* Languages per Org manual */
+  pre.src-asymptote:before { content: 'Asymptote'; }
+  pre.src-awk:before { content: 'Awk'; }
+  pre.src-C:before { content: 'C'; }
+  /* pre.src-C++ doesn't work in CSS */
+  pre.src-clojure:before { content: 'Clojure'; }
+  pre.src-css:before { content: 'CSS'; }
+  pre.src-D:before { content: 'D'; }
+  pre.src-ditaa:before { content: 'ditaa'; }
+  pre.src-dot:before { content: 'Graphviz'; }
+  pre.src-calc:before { content: 'Emacs Calc'; }
+  pre.src-emacs-lisp:before { content: 'Emacs Lisp'; }
+  pre.src-fortran:before { content: 'Fortran'; }
+  pre.src-gnuplot:before { content: 'gnuplot'; }
+  pre.src-haskell:before { content: 'Haskell'; }
+  pre.src-hledger:before { content: 'hledger'; }
+  pre.src-java:before { content: 'Java'; }
+  pre.src-js:before { content: 'Javascript'; }
+  pre.src-latex:before { content: 'LaTeX'; }
+  pre.src-ledger:before { content: 'Ledger'; }
+  pre.src-lisp:before { content: 'Lisp'; }
+  pre.src-lilypond:before { content: 'Lilypond'; }
+  pre.src-lua:before { content: 'Lua'; }
+  pre.src-matlab:before { content: 'MATLAB'; }
+  pre.src-mscgen:before { content: 'Mscgen'; }
+  pre.src-ocaml:before { content: 'Objective Caml'; }
+  pre.src-octave:before { content: 'Octave'; }
+  pre.src-org:before { content: 'Org mode'; }
+  pre.src-oz:before { content: 'OZ'; }
+  pre.src-plantuml:before { content: 'Plantuml'; }
+  pre.src-processing:before { content: 'Processing.js'; }
+  pre.src-python:before { content: 'Python'; }
+  pre.src-R:before { content: 'R'; }
+  pre.src-ruby:before { content: 'Ruby'; }
+  pre.src-sass:before { content: 'Sass'; }
+  pre.src-scheme:before { content: 'Scheme'; }
+  pre.src-screen:before { content: 'Gnu Screen'; }
+  pre.src-sed:before { content: 'Sed'; }
+  pre.src-sh:before { content: 'shell'; }
+  pre.src-sql:before { content: 'SQL'; }
+  pre.src-sqlite:before { content: 'SQLite'; }
+  /* additional languages in org.el's org-babel-load-languages alist */
+  pre.src-forth:before { content: 'Forth'; }
+  pre.src-io:before { content: 'IO'; }
+  pre.src-J:before { content: 'J'; }
+  pre.src-makefile:before { content: 'Makefile'; }
+  pre.src-maxima:before { content: 'Maxima'; }
+  pre.src-perl:before { content: 'Perl'; }
+  pre.src-picolisp:before { content: 'Pico Lisp'; }
+  pre.src-scala:before { content: 'Scala'; }
+  pre.src-shell:before { content: 'Shell Script'; }
+  pre.src-ebnf2ps:before { content: 'ebfn2ps'; }
+  /* additional language identifiers per "defun org-babel-execute"
+       in ob-*.el */
+  pre.src-cpp:before  { content: 'C++'; }
+  pre.src-abc:before  { content: 'ABC'; }
+  pre.src-coq:before  { content: 'Coq'; }
+  pre.src-groovy:before  { content: 'Groovy'; }
+  /* additional language identifiers from org-babel-shell-names in
+     ob-shell.el: ob-shell is the only babel language using a lambda to put
+     the execution function name together. */
+  pre.src-bash:before  { content: 'bash'; }
+  pre.src-csh:before  { content: 'csh'; }
+  pre.src-ash:before  { content: 'ash'; }
+  pre.src-dash:before  { content: 'dash'; }
+  pre.src-ksh:before  { content: 'ksh'; }
+  pre.src-mksh:before  { content: 'mksh'; }
+  pre.src-posh:before  { content: 'posh'; }
+  /* Additional Emacs modes also supported by the LaTeX listings package */
+  pre.src-ada:before { content: 'Ada'; }
+  pre.src-asm:before { content: 'Assembler'; }
+  pre.src-caml:before { content: 'Caml'; }
+  pre.src-delphi:before { content: 'Delphi'; }
+  pre.src-html:before { content: 'HTML'; }
+  pre.src-idl:before { content: 'IDL'; }
+  pre.src-mercury:before { content: 'Mercury'; }
+  pre.src-metapost:before { content: 'MetaPost'; }
+  pre.src-modula-2:before { content: 'Modula-2'; }
+  pre.src-pascal:before { content: 'Pascal'; }
+  pre.src-ps:before { content: 'PostScript'; }
+  pre.src-prolog:before { content: 'Prolog'; }
+  pre.src-simula:before { content: 'Simula'; }
+  pre.src-tcl:before { content: 'tcl'; }
+  pre.src-tex:before { content: 'TeX'; }
+  pre.src-plain-tex:before { content: 'Plain TeX'; }
+  pre.src-verilog:before { content: 'Verilog'; }
+  pre.src-vhdl:before { content: 'VHDL'; }
+  pre.src-xml:before { content: 'XML'; }
+  pre.src-nxml:before { content: 'XML'; }
+  /* add a generic configuration mode; LaTeX export needs an additional
+     (add-to-list 'org-latex-listings-langs '(conf " ")) in .emacs */
+  pre.src-conf:before { content: 'Configuration File'; }
+
+  table { border-collapse:collapse; }
+  caption.t-above { caption-side: top; }
+  caption.t-bottom { caption-side: bottom; }
+  td, th { vertical-align:top;  }
+  th.org-right  { text-align: center;  }
+  th.org-left   { text-align: center;   }
+  th.org-center { text-align: center; }
+  td.org-right  { text-align: right;  }
+  td.org-left   { text-align: left;   }
+  td.org-center { text-align: center; }
+  dt { font-weight: bold; }
+  .footpara { display: inline; }
+  .footdef  { margin-bottom: 1em; }
+  .figure { padding: 1em; }
+  .figure p { text-align: center; }
+  .equation-container {
+    display: table;
+    text-align: center;
+    width: 100%;
+  }
+  .equation {
+    vertical-align: middle;
+  }
+  .equation-label {
+    display: table-cell;
+    text-align: right;
+    vertical-align: middle;
+  }
+  .inlinetask {
+    padding: 10px;
+    border: 2px solid gray;
+    margin: 10px;
+    background: #ffffcc;
+  }
+  #org-div-home-and-up
+   { text-align: right; font-size: 70%; white-space: nowrap; }
+  textarea { overflow-x: auto; }
+  .linenr { font-size: smaller }
+  .code-highlighted { background-color: #ffff00; }
+  .org-info-js_info-navigation { border-style: none; }
+  #org-info-js_console-label
+    { font-size: 10px; font-weight: bold; white-space: nowrap; }
+  .org-info-js_search-highlight
+    { background-color: #ffff00; color: #000000; font-weight: bold; }
+  .org-svg { width: 90%; }
+  /*]]>*/-->
+</style>
+<link rel="stylesheet" href="/theme/normalize.css"/>
+<link rel="stylesheet" href="/theme/site.css"/>
+<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin><link href="https://fonts.googleapis.com/css2?family=Noto+Sans+SC&display=swap" rel="stylesheet">
+<script defer src='https://static.cloudflareinsights.com/beacon.min.js' data-cf-beacon='{"token": "d5b841b503ed4d1b8fad459b84d1cc2f"}'></script>
+<script defer src="/theme/link.js"></script>
+<script type="text/javascript">
+// @license magnet:?xt=urn:btih:e95b018ef3580986a04669f1b5879592219e2a7a&dn=public-domain.txt Public Domain
+<!--/*--><![CDATA[/*><!--*/
+     function CodeHighlightOn(elem, id)
+     {
+       var target = document.getElementById(id);
+       if(null != target) {
+         elem.classList.add("code-highlighted");
+         target.classList.add("code-highlighted");
+       }
+     }
+     function CodeHighlightOff(elem, id)
+     {
+       var target = document.getElementById(id);
+       if(null != target) {
+         elem.classList.remove("code-highlighted");
+         target.classList.remove("code-highlighted");
+       }
+     }
+    /*]]>*///-->
+// @license-end
+</script>
+</head>
+<body>
+<div id="content">
+<header>
+<h1 class="title">Others</h1>
+</header><p>
+Every person learns at a different speed and that's ok.
+</p>
+
+<p>
+Is your speed, and you'll be fine in the future if you are consistent.
+</p>
+
+<p>
+Don't compare yourself to others because we tend to see only the good in them.
+</p>
+
+<p>
+Learn at your pace.
+</p>
+
+<p>
+Great point, everyone's journey is different. Just take small but
+consistent steps everyday
+</p>
+
+<p>
+autfu 的开源经历 <a href="https://antfu.me/posts/about-yak-shaving-zh">https://antfu.me/posts/about-yak-shaving-zh</a>
+</p>
+
+<p>
+&#x2014;
+</p>
+
+<p>
+Randy 的编程经历 <a href="https://lutaonan.com/blog/my-coding-road/">https://lutaonan.com/blog/my-coding-road/</a>
+</p>
+
+<p>
+把自行车做成了自动驾驶 <a href="https://www.bilibili.com/video/BV1fV411x72a">https://www.bilibili.com/video/BV1fV411x72a</a>
+</p>
+
+<p>
+钉钉创始人陈航的成长故事 <a href="https://cjxy.zust.edu.cn/info/1075/1727.htm">https://cjxy.zust.edu.cn/info/1075/1727.htm</a>
+</p>
+
+<p>
+&#x2014;
+</p>
+
+<p>
+丁红的奇特的、令我向往的人生经历 <a href="https://www.xiaoyuzhoufm.com/episode/5fc63cbadee9c1e16d88ffde?s=eyJ1IjoiNjA1NGU4NjFlMGY1ZTcyM2JiMjRjMzQ4In0%3D%0A">https://www.xiaoyuzhoufm.com/episode/5fc63cbadee9c1e16d88ffde?s=eyJ1IjoiNjA1NGU4NjFlMGY1ZTcyM2JiMjRjMzQ4In0%3D%0A</a>
+</p>
+<ul class="org-ul">
+<li>选择与自己志趣相投的朋友，拒绝不合适的朋友</li>
+<li>有些事情，只有做了，才会看到，有很多人，在做和我一样的事情</li>
+<li>考试这种事情，它不是个凭运气的问题；它的结果取决于，你花多少时间和毅力的问题</li>
+<li>先试了再说，不要想着自己干不了；（6分的时候做成了一件10分的事）一个机会只给你打6分，你要拼命争取那个机会，为什么？失败了是应该的，万一不小心成功了呢？如果你真的很努力地争取这些机会，你就会很努力地弥补这些不足，慢慢的你的能力就会往那个方向提高；如果一个机会给你打10分，那个机会本来就是你的，没有必要争，就看你要不要</li>
+<li>对一件事的爱够不够？如果够，你就能够排除万难，做到你想做的事情</li>
+</ul>
+
+<p>
+编程启蒙/从社区学习/个人竞争力（本期人物：Randy，AB）
+<a href="https://binary.2bab.me/episodes/008-enlightenment-n-self-innovation">https://binary.2bab.me/episodes/008-enlightenment-n-self-innovation</a>
+</p>
+
+<ul class="org-ul">
+<li>Randy 对编程的理解升华到信仰——《<a href="https://movie.douban.com/subject/3205624/">社交网络</a>》</li>
+<li>Randy 的启蒙书《JavaScript DOM 编程艺术》和《JavaScript 高级程序设计》</li>
+<li>了解做一件事，如何入手</li>
+<li>人是不可靠的，让程序辅助自己编程</li>
+<li>开源社区帮助 Randy 赚取名声</li>
+<li>前端简历没有区分度</li>
+<li>在技术社区和别人不一样</li>
+<li>每天看 Twitter、HN：看别人怎么解决问题</li>
+<li>听技术大会 JSConf，React Conf</li>
+<li>习惯于英文技术环境</li>
+</ul>
+
+<p>
+&#x2014;
+</p>
+
+<p>
+maya 的故事，让我记忆深刻 <a href="https://www.xiaoyuzhoufm.com/episode/61257677cc5f215c6e0b868a?s=eyJ1IjoiNjA1NGU4NjFlMGY1ZTcyM2JiMjRjMzQ4In0%3D%0A">https://www.xiaoyuzhoufm.com/episode/61257677cc5f215c6e0b868a?s=eyJ1IjoiNjA1NGU4NjFlMGY1ZTcyM2JiMjRjMzQ4In0%3D%0A</a>
+</p>
+
+<p>
+&#x2014;
+</p>
+
+<p>
+<a href="https://twitter.com/codingyuri/status/1437019319557308416?s=19">https://twitter.com/codingyuri/status/1437019319557308416?s=19</a>
+</p>
+<ul class="org-ul">
+<li>做真实的自己</li>
+<li>不知道一些事情是完全 OK 的</li>
+<li>参与进自己的学习活动中</li>
+<li>变得强大起来，不受别人的消极影响</li>
+<li>建立有意义的链接</li>
+</ul>
+
+<p>
+&#x2014;
+</p>
+
+<p>
+<a href="https://mp.weixin.qq.com/s/z_-jB2bhL6HYyGHg2MzOcg">张一鸣：我的大学四年收获及工作感悟</a>
+</p>
+
+<ul class="org-ul">
+<li>做好自己事情的同时，尽自己最大努力帮助别人解决问题</li>
+<li>有好奇心，能够主动学习新事物、新知识和新技能</li>
+<li>对不确定性保持乐观</li>
+<li>不甘于平庸</li>
+<li>不傲娇，要能延迟满足感</li>
+<li>对重要的选择要有判断力</li>
+</ul>
+</div>
+</body>
+</html>
