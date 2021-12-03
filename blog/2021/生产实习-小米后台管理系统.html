@@ -3,7 +3,7 @@
 "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en">
 <head>
-<!-- 2021-12-03 Fri 18:51 -->
+<!-- 2021-12-03 Fri 18:53 -->
 <meta http-equiv="Content-Type" content="text/html;charset=utf-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1" />
 <title>&lrm;</title>
@@ -148,7 +148,7 @@
 <div id="outline-container-软件安装及配置" class="outline-3">
 <h3 id="软件安装及配置"><span class="section-number-3">2.1</span> 软件安装及配置</h3>
 <div class="outline-text-3" id="text-软件安装及配置">
-<pre class="example" id="org3f301d6">
+<pre class="example" id="org521b1a7">
 $ mysql --version
 mysql  Ver 8.0.24 for Linux on x86_64 (Source distribution)
 $ java -version
@@ -177,7 +177,7 @@ Linux 上配置 MySQL 对于我这个新手来说很是吃力。
 <li>MySQL</li>
 </ol>
 
-<pre class="example" id="org0adea28">
+<pre class="example" id="org1f4f5d4">
 $ sudo pacman -S mysql
 
 # 此前操作：1. 安装 mysql 后卸载 2. 安装 percona-server 后卸载
@@ -227,7 +227,7 @@ percona-server 间接解决了无法启动 mysqld 服务的问题。于是，使
 percona-server。由它提供 MySQL 相关功能。
 </p>
 
-<pre class="example" id="org0681900">
+<pre class="example" id="org7b90f09">
 $ systemctl status mysqld
 ○ mysqld.service - MySQL Server
      Loaded: loaded (/usr/lib/systemd/system/mysqld.service; enabled; vendor preset: disabled)
@@ -454,7 +454,7 @@ Go 语言这样的后起之秀，但是，Java 目前还占据主导地位。</l
 一、=com.alibaba:druid:jar:1.1.21 is invalid=
 </p>
 
-<pre class="example" id="orgdcdc9bd">
+<pre class="example" id="orgbf28ba6">
 [WARNING] The POM for com.alibaba:druid:jar:1.1.21 is invalid, transitive dependencies (if any) will not be available, enable debug logging for more details
 </pre>
 
@@ -471,7 +471,7 @@ Go 语言这样的后起之秀，但是，Java 目前还占据主导地位。</l
 当运行 <code>RunBoot.java</code> 主方法时，出现错误：
 </p>
 
-<pre class="example" id="orgea47917">
+<pre class="example" id="orgbd8194a">
 /usr/lib/jvm/default/bin/java...
 
   .   ____          _            __ _ _
@@ -539,7 +539,7 @@ Process finished with exit code 1
 3）=APPLICATION FAILED TO START=
 </p>
 
-<pre class="example" id="org9e15e7b">
+<pre class="example" id="org9bc5832">
 Description:
 
 Failed to configure a DataSource: 'url' attribute is not specified and no embedded datasource could be configured.
@@ -558,7 +558,7 @@ Consider the following:
 在为 ~/ 添加以下内容后，可以运行：
 </p>
 
-<pre class="example" id="org3ff3cad">
+<pre class="example" id="org9c908df">
 spring:
     datasource:
         driver-class-name: com.mysql.cj.jdbc.Driver
@@ -645,14 +645,14 @@ Vue 模型：
 </p>
 
 
-<div id="org90f9dd9" class="figure">
+<div id="orge664a02" class="figure">
 <p><object type="image/svg+xml" data="https://cdn.jsdelivr.net/gh/tianheg/static@main/img/vue-mvvm.svg" class="org-svg">
 Sorry, your browser does not support SVG.</object>
 </p>
 <p><span class="figure-number">Figure 1: </span>Vue MVVM</p>
 </div>
 
-<pre class="example" id="org251e911">
+<pre class="example" id="orgb4881a1">
 &lt;div id="app"&gt;
   &lt;li v-for="type in mi_type"&gt;
     &lt;a v-bind:href="type.url"&gt;{{type.name}}&lt;/a&gt;&lt;span&gt;|&lt;/span&gt;
@@ -704,7 +704,7 @@ Sorry, your browser does not support SVG.</object>
 Project 结构：
 </p>
 
-<pre class="example" id="orgbfc1662">
+<pre class="example" id="org7fa68e0">
 ~ root
 --&gt;src/main/java/yidajiabei.xyz/RunBoot.java
 --&gt;src/main/java/yidajiabei.xyz/controller/MiIndexPageController.java
@@ -822,7 +822,7 @@ Project 结构：
 </p>
 
 
-<div id="org62541c5" class="figure">
+<div id="org6f2c410" class="figure">
 <p><object type="image/svg+xml" data="../../images/java-resultbean.svg" class="org-svg">
 Sorry, your browser does not support SVG.</object>
 </p>
@@ -899,14 +899,14 @@ axios 的图形示意：
 </p>
 
 
-<div id="org497c893" class="figure">
+<div id="orgd8377ca" class="figure">
 <p><object type="image/svg+xml" data="../../images/axios.svg" class="org-svg">
 Sorry, your browser does not support SVG.</object>
 </p>
 <p><span class="figure-number">Figure 3: </span>ResultBean.java</p>
 </div>
 
-<pre class="example" id="orgb8b31cc">
+<pre class="example" id="org864a6cd">
 &lt;!-- src/main/resources/static/index.html --&gt;
 &lt;li v-for="type in mi_type"&gt;
   &lt;a v-bind:href="type.url"&gt;{{ type.name }}&lt;/a&gt;&lt;span&gt;|&lt;/span&gt;
@@ -969,7 +969,7 @@ urlPageBean，urlPageBeanMapper 文件，之后前端从后端调用数据。
 输出：
 </p>
 
-<pre class="example" id="org97805c1">
+<pre class="example" id="org349d998">
 ERROR 1045 (28000): Access denied for user 'root'@'localhost' (using password: YES)
 </pre>
 
@@ -977,7 +977,7 @@ ERROR 1045 (28000): Access denied for user 'root'@'localhost' (using password: Y
 解决办法（<a href="https://stackoverflow.com/a/41793945">来源</a>）：
 </p>
 
-<pre class="example" id="org857adc5">
+<pre class="example" id="orga9450c8">
 # add `skip-grant-tables` under `[mysqld]` in `/etc/my.cnf` or `/etc/mysql/my.cnf`
 systemctl restart mysqld
 mysql -u root -p
@@ -999,7 +999,7 @@ systemctl restart mysqld
 修改 my.cnf 文件，我的文件配置：
 </p>
 
-<pre class="example" id="org7d723c0">
+<pre class="example" id="orgb808310">
 # For advice on how to change settings please see
 # http://dev.mysql.com/doc/refman/8.0/en/server-configuration-defaults.html
 
@@ -1049,7 +1049,7 @@ secure-file-priv = "/home/archie/"
 <h3 id="第七天"><span class="section-number-3">2.9</span> 第七天</h3>
 <div class="outline-text-3" id="text-第七天">
 
-<div id="org3e5530f" class="figure">
+<div id="org0581a7f" class="figure">
 <p><object type="image/svg+xml" data="../../images/front-back-end-mysql-framework.svg" class="org-svg">
 Sorry, your browser does not support SVG.</object>
 </p>
