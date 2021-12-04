@@ -1,10 +1,10 @@
 <!DOCTYPE html>
 <html lang="zh">
 <head>
-<!-- 2021-12-04 Sat 21:39 -->
+<!-- 2021-12-04 Sat 21:40 -->
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<title>深度拖延者报道</title>
+<title>Draw Sky, Cloud</title>
 <meta name="generator" content="Org mode">
 <meta name="description" content="Learn Technology, Love Life"
 >
@@ -224,24 +224,34 @@
 <body>
 <div id="content">
 <header>
-<h1 class="title">深度拖延者报道</h1>
+<h1 class="title">Draw Sky, Cloud</h1>
 </header><p>
-今天，我又拖延了。因为快期末考试了，许多作业任务都积压在一起。越来越多，所以就拿看电影来躲避，结果没课的下午都被我拿来看电影了。战果颇丰，把豆瓣上标“想看”的
-7
-部科幻电影搞定了。心里的焦虑与看电影的快感交织在一起，这种感觉真的是很煎熬，但是我又深深沉浸其中无法自拔。而当我从那种着迷状态下清醒过来时，我没有感到懊悔，只是感到有点可惜。
+<a href="https://css-tricks.com/drawing-realistic-clouds-with-svg-and-css/">https://css-tricks.com/drawing-realistic-clouds-with-svg-and-css/</a>
 </p>
 
 <p>
-我不是寻求帮助的，因为我认为拖延只是一个人逃避一件事的方式，有些事情不得不做，有些事情早晚会做。如果你有拖延的心理，不要排斥，因为那是很正常的。我们能做的，可能就是沉浸其中，过后稍稍反思一下，然后按照自己的本来想法，安排工作学习。
+<a href="https://tianheg.github.io/exercise/web/hcj/blue-sky-white-cloud/">演示地址</a>
 </p>
 
 <p>
-就像昨天的日知录写的那样，有些事情我们现在不想做，并不代表我们以后不会做。这中间的过程，应该就是成长。
+主要使用了 SVG。它是基于 XML 的标记语言，用来描绘二维向量图形。下面会列出本次练习使用的元素或属性，并解释作用。
 </p>
 
-<p>
-我每天都在成长，大家每天也都在成长，那么让我们一起成长吧！！！
-</p>
+<ul class="org-ul">
+<li>svg 一个容器，用于定义新的坐标系和视图</li>
+<li>filter 通过对原始图形进行原子级别的分组，来自定义过滤效果</li>
+<li>feTurbulence 使用 Perlin 湍流函数生成图像，可以合成云或大理石</li>
+<li>type 通用属性，基于不同元素表达不同含义
+<ul class="org-ul">
+<li>对于 feTurbulence 来说，它指示滤波器应该执行噪声还是湍流函数，type 的值：fractalNoise | turbulence</li>
+</ul></li>
+<li>baseFrequency 表示 feTurbulence 噪声函数的基准频率</li>
+<li>numOctaves 定义了噪声函数的八度数</li>
+<li>seed 表示伪随机数生成器的起始数</li>
+<li>feDisplacementMap The &lt;feDisplacementMap&gt; SVG filter primitive uses the pixel values from the image from in2 to spatially displace the image from in（完全不理解这句的含义）</li>
+<li>in 标识输入</li>
+<li>scale 定义了位移缩放因子</li>
+</ul>
 </div>
 </body>
 </html>
