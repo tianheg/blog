@@ -3,7 +3,7 @@
 "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en">
 <head>
-<!-- 2021-12-06 Mon 22:28 -->
+<!-- 2021-12-07 Tue 14:54 -->
 <meta http-equiv="Content-Type" content="text/html;charset=utf-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1" />
 <title>&lrm;</title>
@@ -50,7 +50,7 @@ ohmyzsh 和 nvm，如果你想尝试可以使用我的新仓库模板
 文件结构：
 </p>
 
-<pre class="example" id="org0446d57">
+<pre class="example" id="org9b3efd8">
 .devcontainer
 --&gt;devcontainer.json
 --&gt;Dockerfile
@@ -61,7 +61,7 @@ ohmyzsh 和 nvm，如果你想尝试可以使用我的新仓库模板
 devcontainer.json:
 </p>
 
-<pre class="example" id="org5ecb55c">
+<pre class="example" id="orgf8c4ba9">
 {
     "name": "Codespaces Basic Starter",
     "extensions": [
@@ -101,7 +101,7 @@ devcontainer.json:
 Dockerfile:
 </p>
 
-<pre class="example" id="org2a93b35">
+<pre class="example" id="org4303912">
 FROM ubuntu:20.04
 
 WORKDIR /home/
@@ -121,7 +121,7 @@ RUN echo '[ -s "$NVM_DIR/nvm.sh" ] &amp;&amp; . "$NVM_DIR/nvm.sh"  # This loads 
 setup.sh:
 </p>
 
-<pre class="example" id="orgb7a35e3">
+<pre class="example" id="org09c7c06">
 ## update and install some things we should probably have
 apt-get update
 apt-get install -y \
@@ -174,7 +174,7 @@ sed -i "/# for examples/aif\ test -t l; then\nexec zsh\nfi" ~/.bashrc
 只需要以下命令：
 </p>
 
-<pre class="example" id="orgf018368">
+<pre class="example" id="orgad7a3ec">
 nvm install --lts # install Node.js, npm
 npm install -g yarn # install yarn
 </pre>
@@ -184,7 +184,7 @@ npm install -g yarn # install yarn
 是第二个命令能够执行的必要条件。
 </p>
 
-<pre class="example" id="org088656b">
+<pre class="example" id="orgfbbb283">
 sed -i "/# for examples/aif\ test -t l; then\nexec zsh\nfi"
 </pre>
 
@@ -193,7 +193,7 @@ sed -i "/# for examples/aif\ test -t l; then\nexec zsh\nfi"
 bash，我想用 zsh，于是需要在 <code>.bashrc</code> 的开头添加如下字样：
 </p>
 
-<pre class="example" id="orgc0355db">
+<pre class="example" id="org677831e">
 if test -t l; then
 exec zsh
 fi
