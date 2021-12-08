@@ -4,7 +4,7 @@
 find . -name "*.html" -type f -delete # https://askubuntu.com/a/377442
 
 ## generate new html files
-rm ~/.org-timestamps/pages.cache
+rm -rf ~/.org-timestamps/
 emacs --batch --script ./scripts/publish.el
 
 ## generate sitemap
