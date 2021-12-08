@@ -3,8 +3,6 @@
 # Copyright (C) dirlt
 
 import glob
-import re
-import os
 
 domain = 'www.yidajiabei.xyz'
 
@@ -16,12 +14,7 @@ html_files = glob.glob(HTML_DIR + "*.html") + \
     glob.glob(HTML_DIR + "blog/*.html") + \
     glob.glob(HTML_DIR + "blog/**/*.html") + \
     glob.glob(HTML_DIR + "gtd/*.html") + \
-    glob.glob(HTML_DIR + "leetcode/*.html") + \
-    glob.glob(HTML_DIR + "other/*.html") + \
-    glob.glob(HTML_DIR + "reading/*.html") + \
-    glob.glob(HTML_DIR + "reading/**/*.html") + \
-    glob.glob(HTML_DIR + "wiki/*.html") + \
-    glob.glob(HTML_DIR + "wiki/**/*.html")
+    glob.glob(HTML_DIR + "other/*.html")
 
 org_files = glob.glob("/home/archie/org/**/**/*.org")
 
