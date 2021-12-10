@@ -3,7 +3,7 @@
 "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en">
 <head>
-<!-- 2021-12-09 Thu 21:08 -->
+<!-- 2021-12-10 Fri 13:21 -->
 <meta http-equiv="Content-Type" content="text/html;charset=utf-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1" />
 <title>&lrm;</title>
@@ -63,7 +63,7 @@
 <div id="outline-container-tag12" class="outline-2">
 <h2 id="tag12"><span class="section-number-2">1</span> Tag<sup><a id="fnr.1" class="footref" href="#fn.1">1</a></sup>,<sup><a id="fnr.2" class="footref" href="#fn.2">2</a></sup></h2>
 <div class="outline-text-2" id="text-tag12">
-<pre class="example" id="orgdce0b82">
+<pre class="example" id="org459906d">
 git tag &lt;tag-name&gt; # create local tag
 git tag -d &lt;tag-name&gt; # delete local tag
 git push origin :refs/tags/&lt;tag-name&gt; # delete remote tag
@@ -86,7 +86,7 @@ git tag --contains &lt;commitid&gt; # find all tags containing a specific commit
 <div id="outline-container-本地和远程创建空分支4" class="outline-3">
 <h3 id="本地和远程创建空分支4"><span class="section-number-3">2.1</span> 本地和远程创建空分支<sup><a id="fnr.4" class="footref" href="#fn.4">4</a></sup></h3>
 <div class="outline-text-3" id="text-本地和远程创建空分支4">
-<pre class="example" id="orgf44dde6">
+<pre class="example" id="org7f0bfcf">
 # UPDATE(git &gt; 2.27)
 git switch --orphan &lt;new branch&gt;
 git commit --allow-empty -m "Initial commit on orphan branch"
@@ -107,7 +107,7 @@ git push origin empty-branch
 <div id="outline-container-本地和远程删除分支" class="outline-3">
 <h3 id="本地和远程删除分支"><span class="section-number-3">2.2</span> 本地和远程删除分支</h3>
 <div class="outline-text-3" id="text-本地和远程删除分支">
-<pre class="example" id="org0ef1dc0">
+<pre class="example" id="orgb5e55e9">
 # delete branch locally
 git branch -d localBranchName
 # delete a local branch that has not been merged to the current branch or an upstream
@@ -135,7 +135,7 @@ git push origin :old_name new_name
 <div id="outline-container-克隆特定远程分支" class="outline-3">
 <h3 id="克隆特定远程分支"><span class="section-number-3">2.3</span> 克隆特定远程分支</h3>
 <div class="outline-text-3" id="text-克隆特定远程分支">
-<pre class="example" id="org5390650">
+<pre class="example" id="org9194d7b">
 git clone --branch &lt;branchname&gt; &lt;remote-repo-url&gt;
 </pre>
 </div>
@@ -144,7 +144,7 @@ git clone --branch &lt;branchname&gt; &lt;remote-repo-url&gt;
 <div id="outline-container-删除仅存在本地远程仓库中不存在的分支" class="outline-3">
 <h3 id="删除仅存在本地远程仓库中不存在的分支"><span class="section-number-3">2.4</span> 删除仅存在本地（远程仓库中不存在）的分支</h3>
 <div class="outline-text-3" id="text-删除仅存在本地远程仓库中不存在的分支">
-<pre class="example" id="orgd11eefe">
+<pre class="example" id="orga2bb47a">
 $ git branch -a
 * main
 
@@ -165,7 +165,7 @@ URL: git@github.com:tianheg/wiki.git
 Others:
 </p>
 
-<pre class="example" id="orge9149f8">
+<pre class="example" id="org62412af">
 git branch # list local branches
 git branch -r # list remote branches
 git branch -a # list local and remote branches
@@ -178,7 +178,7 @@ git checkout -b &lt;branch&gt; &lt;SHA1_OF_COMMIT&gt; # create a branch from a c
 <div id="outline-container-submodule" class="outline-2">
 <h2 id="submodule"><span class="section-number-2">3</span> Submodule</h2>
 <div class="outline-text-2" id="text-submodule">
-<pre class="example" id="org9680d6b">
+<pre class="example" id="org385b8a1">
 # clone all submodules
 git clone --recursive git://github.com/foo/bar.git
 # already cloned
@@ -189,7 +189,7 @@ git submodule update --init --recursive
 <div id="outline-container-移除-submodule" class="outline-3">
 <h3 id="移除-submodule"><span class="section-number-3">3.1</span> 移除 Submodule</h3>
 <div class="outline-text-3" id="text-移除-submodule">
-<pre class="example" id="org954d6e8">
+<pre class="example" id="org13c634a">
 git submodule deinit submodulename
 git rm submodulename
 git rm --cached submodulename
