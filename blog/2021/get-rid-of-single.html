@@ -1,0 +1,435 @@
+<!DOCTYPE html>
+<html lang="zh">
+<head>
+<!-- 2021-12-12 Sun 20:58 -->
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>脱单指南</title>
+<meta name="generator" content="Org mode">
+<meta name="description" content="Learn Technology, Love Life"
+>
+<meta name="keywords" content="博客, blog, 技术, 生活, Technology, Life">
+<style type="text/css">
+ <!--/*--><![CDATA[/*><!--*/
+  .title  { text-align: center;
+             margin-bottom: .2em; }
+  .subtitle { text-align: center;
+              font-size: medium;
+              font-weight: bold;
+              margin-top:0; }
+  .todo   { font-family: monospace; color: red; }
+  .done   { font-family: monospace; color: green; }
+  .priority { font-family: monospace; color: orange; }
+  .tag    { background-color: #eee; font-family: monospace;
+            padding: 2px; font-size: 80%; font-weight: normal; }
+  .timestamp { color: #bebebe; }
+  .timestamp-kwd { color: #5f9ea0; }
+  .org-right  { margin-left: auto; margin-right: 0px;  text-align: right; }
+  .org-left   { margin-left: 0px;  margin-right: auto; text-align: left; }
+  .org-center { margin-left: auto; margin-right: auto; text-align: center; }
+  .underline { text-decoration: underline; }
+  #postamble p, #preamble p { font-size: 90%; margin: .2em; }
+  p.verse { margin-left: 3%; }
+  pre {
+    border: 1px solid #ccc;
+    box-shadow: 3px 3px 3px #eee;
+    padding: 8pt;
+    font-family: monospace;
+    overflow: auto;
+    margin: 1.2em;
+  }
+  pre.src {
+    position: relative;
+    overflow: auto;
+    padding-top: 1.2em;
+  }
+  pre.src:before {
+    display: none;
+    position: absolute;
+    background-color: white;
+    top: -10px;
+    right: 10px;
+    padding: 3px;
+    border: 1px solid black;
+  }
+  pre.src:hover:before { display: inline; margin-top: 14px;}
+  /* Languages per Org manual */
+  pre.src-asymptote:before { content: 'Asymptote'; }
+  pre.src-awk:before { content: 'Awk'; }
+  pre.src-C:before { content: 'C'; }
+  /* pre.src-C++ doesn't work in CSS */
+  pre.src-clojure:before { content: 'Clojure'; }
+  pre.src-css:before { content: 'CSS'; }
+  pre.src-D:before { content: 'D'; }
+  pre.src-ditaa:before { content: 'ditaa'; }
+  pre.src-dot:before { content: 'Graphviz'; }
+  pre.src-calc:before { content: 'Emacs Calc'; }
+  pre.src-emacs-lisp:before { content: 'Emacs Lisp'; }
+  pre.src-fortran:before { content: 'Fortran'; }
+  pre.src-gnuplot:before { content: 'gnuplot'; }
+  pre.src-haskell:before { content: 'Haskell'; }
+  pre.src-hledger:before { content: 'hledger'; }
+  pre.src-java:before { content: 'Java'; }
+  pre.src-js:before { content: 'Javascript'; }
+  pre.src-latex:before { content: 'LaTeX'; }
+  pre.src-ledger:before { content: 'Ledger'; }
+  pre.src-lisp:before { content: 'Lisp'; }
+  pre.src-lilypond:before { content: 'Lilypond'; }
+  pre.src-lua:before { content: 'Lua'; }
+  pre.src-matlab:before { content: 'MATLAB'; }
+  pre.src-mscgen:before { content: 'Mscgen'; }
+  pre.src-ocaml:before { content: 'Objective Caml'; }
+  pre.src-octave:before { content: 'Octave'; }
+  pre.src-org:before { content: 'Org mode'; }
+  pre.src-oz:before { content: 'OZ'; }
+  pre.src-plantuml:before { content: 'Plantuml'; }
+  pre.src-processing:before { content: 'Processing.js'; }
+  pre.src-python:before { content: 'Python'; }
+  pre.src-R:before { content: 'R'; }
+  pre.src-ruby:before { content: 'Ruby'; }
+  pre.src-sass:before { content: 'Sass'; }
+  pre.src-scheme:before { content: 'Scheme'; }
+  pre.src-screen:before { content: 'Gnu Screen'; }
+  pre.src-sed:before { content: 'Sed'; }
+  pre.src-sh:before { content: 'shell'; }
+  pre.src-sql:before { content: 'SQL'; }
+  pre.src-sqlite:before { content: 'SQLite'; }
+  /* additional languages in org.el's org-babel-load-languages alist */
+  pre.src-forth:before { content: 'Forth'; }
+  pre.src-io:before { content: 'IO'; }
+  pre.src-J:before { content: 'J'; }
+  pre.src-makefile:before { content: 'Makefile'; }
+  pre.src-maxima:before { content: 'Maxima'; }
+  pre.src-perl:before { content: 'Perl'; }
+  pre.src-picolisp:before { content: 'Pico Lisp'; }
+  pre.src-scala:before { content: 'Scala'; }
+  pre.src-shell:before { content: 'Shell Script'; }
+  pre.src-ebnf2ps:before { content: 'ebfn2ps'; }
+  /* additional language identifiers per "defun org-babel-execute"
+       in ob-*.el */
+  pre.src-cpp:before  { content: 'C++'; }
+  pre.src-abc:before  { content: 'ABC'; }
+  pre.src-coq:before  { content: 'Coq'; }
+  pre.src-groovy:before  { content: 'Groovy'; }
+  /* additional language identifiers from org-babel-shell-names in
+     ob-shell.el: ob-shell is the only babel language using a lambda to put
+     the execution function name together. */
+  pre.src-bash:before  { content: 'bash'; }
+  pre.src-csh:before  { content: 'csh'; }
+  pre.src-ash:before  { content: 'ash'; }
+  pre.src-dash:before  { content: 'dash'; }
+  pre.src-ksh:before  { content: 'ksh'; }
+  pre.src-mksh:before  { content: 'mksh'; }
+  pre.src-posh:before  { content: 'posh'; }
+  /* Additional Emacs modes also supported by the LaTeX listings package */
+  pre.src-ada:before { content: 'Ada'; }
+  pre.src-asm:before { content: 'Assembler'; }
+  pre.src-caml:before { content: 'Caml'; }
+  pre.src-delphi:before { content: 'Delphi'; }
+  pre.src-html:before { content: 'HTML'; }
+  pre.src-idl:before { content: 'IDL'; }
+  pre.src-mercury:before { content: 'Mercury'; }
+  pre.src-metapost:before { content: 'MetaPost'; }
+  pre.src-modula-2:before { content: 'Modula-2'; }
+  pre.src-pascal:before { content: 'Pascal'; }
+  pre.src-ps:before { content: 'PostScript'; }
+  pre.src-prolog:before { content: 'Prolog'; }
+  pre.src-simula:before { content: 'Simula'; }
+  pre.src-tcl:before { content: 'tcl'; }
+  pre.src-tex:before { content: 'TeX'; }
+  pre.src-plain-tex:before { content: 'Plain TeX'; }
+  pre.src-verilog:before { content: 'Verilog'; }
+  pre.src-vhdl:before { content: 'VHDL'; }
+  pre.src-xml:before { content: 'XML'; }
+  pre.src-nxml:before { content: 'XML'; }
+  /* add a generic configuration mode; LaTeX export needs an additional
+     (add-to-list 'org-latex-listings-langs '(conf " ")) in .emacs */
+  pre.src-conf:before { content: 'Configuration File'; }
+
+  table { border-collapse:collapse; }
+  caption.t-above { caption-side: top; }
+  caption.t-bottom { caption-side: bottom; }
+  td, th { vertical-align:top;  }
+  th.org-right  { text-align: center;  }
+  th.org-left   { text-align: center;   }
+  th.org-center { text-align: center; }
+  td.org-right  { text-align: right;  }
+  td.org-left   { text-align: left;   }
+  td.org-center { text-align: center; }
+  dt { font-weight: bold; }
+  .footpara { display: inline; }
+  .footdef  { margin-bottom: 1em; }
+  .figure { padding: 1em; }
+  .figure p { text-align: center; }
+  .equation-container {
+    display: table;
+    text-align: center;
+    width: 100%;
+  }
+  .equation {
+    vertical-align: middle;
+  }
+  .equation-label {
+    display: table-cell;
+    text-align: right;
+    vertical-align: middle;
+  }
+  .inlinetask {
+    padding: 10px;
+    border: 2px solid gray;
+    margin: 10px;
+    background: #ffffcc;
+  }
+  #org-div-home-and-up
+   { text-align: right; font-size: 70%; white-space: nowrap; }
+  textarea { overflow-x: auto; }
+  .linenr { font-size: smaller }
+  .code-highlighted { background-color: #ffff00; }
+  .org-info-js_info-navigation { border-style: none; }
+  #org-info-js_console-label
+    { font-size: 10px; font-weight: bold; white-space: nowrap; }
+  .org-info-js_search-highlight
+    { background-color: #ffff00; color: #000000; font-weight: bold; }
+  .org-svg { width: 90%; }
+  /*]]>*/-->
+</style>
+<link rel="stylesheet" href="/theme/normalize.css"/>
+<link rel="stylesheet" href="/theme/site.css"/>
+<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin><link href="https://fonts.googleapis.com/css2?family=Noto+Sans+SC&display=swap" rel="stylesheet">
+<script defer src='https://static.cloudflareinsights.com/beacon.min.js' data-cf-beacon='{"token": "d5b841b503ed4d1b8fad459b84d1cc2f"}'></script>
+<script defer src="/theme/link.js"></script>
+<script type="text/javascript">
+// @license magnet:?xt=urn:btih:e95b018ef3580986a04669f1b5879592219e2a7a&dn=public-domain.txt Public Domain
+<!--/*--><![CDATA[/*><!--*/
+     function CodeHighlightOn(elem, id)
+     {
+       var target = document.getElementById(id);
+       if(null != target) {
+         elem.classList.add("code-highlighted");
+         target.classList.add("code-highlighted");
+       }
+     }
+     function CodeHighlightOff(elem, id)
+     {
+       var target = document.getElementById(id);
+       if(null != target) {
+         elem.classList.remove("code-highlighted");
+         target.classList.remove("code-highlighted");
+       }
+     }
+    /*]]>*///-->
+// @license-end
+</script>
+</head>
+<body>
+<div id="content">
+<header>
+<h1 class="title">脱单指南</h1>
+</header><nav id="table-of-contents">
+<h2>Table of Contents</h2>
+<div id="text-table-of-contents">
+<ul>
+<li><a href="#org4dd68ba">1. 创造联系</a></li>
+<li><a href="#org146d382">2. 建立吸引</a></li>
+</ul>
+</div>
+</nav>
+<p>
+本文来源：知识星球app-「帅张和他的朋友们」-飞巴发表-十二画分享的男生篇脱单指南
+</p>
+
+<p>
+<a href="https://articles.zsxq.com/id_3rs2w7ohsbrm.html">https://articles.zsxq.com/id_3rs2w7ohsbrm.html</a> 链接付费后可见
+</p>
+
+<p>
+我抄在这里想做个笔记，学习一下如何谈恋爱。因为我实在不擅长和女生相处。
+</p>
+
+<div id="outline-container-org4dd68ba" class="outline-2">
+<h2 id="org4dd68ba"><span class="section-number-2">1</span> 创造联系</h2>
+<div class="outline-text-2" id="text-1">
+<p>
+一、看朋友圈找话题
+</p>
+
+<p>
+一个正常女孩子的朋友圈会有一些吃饭游玩的照片，那么你最重要看的不是照片上的人物漂亮不漂亮，而是要看照片里面的场景，如吃饭的餐厅和游玩的地点。
+</p>
+
+<p>
+接下来既然你们都是吃货就继续聊吃吧，在聊天的过程当中千万不要暴露你的需求感，自然的表现你只是谈论一些好吃的地方，女孩的社交直觉很敏感呢!
+</p>
+
+<p>
+聊到高潮的时候要进行一个模糊邀约或者自称临时有别的事把话题收住，让女孩对和你的下次聊天或者第一次约会有一个小小的期待，为第二次沟通做铺垫。
+</p>
+
+<p>
+二、聊星座
+</p>
+
+<p>
+女生是个比较感性的，就是任何可以预算到女孩子能感觉出来，但是说不出来的东西，她们都比较感觉到神奇。比较感兴趣兴趣。星座也可以当八卦聊，如果女生不喜欢聊星座，你也可以聊聊一些中国的比较虚幻的东西。这个问题背后的逻辑，任何可以预测到女孩子们没有说出来的东西，都是可以的。
+</p>
+
+<p>
+这样可聊的话题量挺多，不要直接上来就问女孩子的生日，或者直接问人家什么星座的，直接问生日女孩子会反感。你可以用猜，猜错猜对都没有关系，猜错都可以延长你们的聊天时长，这也是个能拉近关系的途径。
+</p>
+
+<p>
+三、聊宠物
+</p>
+
+<p>
+女生一般比较喜欢可爱的小的动物。可以根据这个找一些话题。比如，喂什么食物、去哪家宠物店、宠物有什么习性。
+</p>
+
+<p>
+四、聊旅游
+</p>
+
+<p>
+女孩子大都喜欢浪漫、美好的地方，无论去过没去过，都比较感兴趣。不要一开始就问对方喜欢什么地方，或者为什么喜欢这些地方，首先提出来自己的想法，表达为什么喜欢。跟女孩达成共识，有些共鸣，话题会源源不断。
+</p>
+
+<p>
+拓展的话题越多，聊的时间就越久，过程之中便可以试探出女孩对哪些东西感兴趣，以后聊天的主要话题也就出现了。
+</p>
+</div>
+</div>
+
+<div id="outline-container-org146d382" class="outline-2">
+<h2 id="org146d382"><span class="section-number-2">2</span> 建立吸引</h2>
+<div class="outline-text-2" id="text-2">
+<p>
+一、破解测试
+</p>
+
+<p>
+建立吸引其实就是要有一些见面，或者一些更深度的交流。你们俩可能在过程中，聊出了一些可以一起去做的事情。那么下一步就是约会嘛，你们俩单独约会，一起去看电影儿、吃饭，聊一些她不能跟别人聊的一些话题。慢慢主动跟你分享心里面有什么委屈，或者内心的疑惑，不管是好事、坏事。
+</p>
+
+<p>
+如果你跟他已经互相换了爱称了，情侣之间的呢称可以到非常肉麻的，一般到这个阶段的时候，女生一般都会进对你进行一些暗中考验。举个例子，你有几段感情？都发展到什么地步了？这个时候你们女士都会因为他不放心，一般这些问题大部分人觉得是送命题，接下来分享破解此问题的两步公式。
+</p>
+
+<p>
+第一步，赞同女生的考验或者对你的测试，第二步，有创意的、幽默的曲解女生对你的废物测试或是对你的考验，就是把她的考验曲解成太喜欢你了。如果你知道女生的情感史，你只需要回答比她多1-2个就行了，也不多出太多，这样给女生的感觉是棋逢对手。当然你如果是母胎SOLO还是直接坦白了吧，否则一聊天就会露馅。
+</p>
+
+<p>
+二、女生的五种心理
+</p>
+
+<p>
+恋爱过程对于女生有特别阶段性的意义的，这个时候女性在这个阶段一般上了一般心情，是心理变得是捉摸不定、难以猜测。有种5种心理，
+</p>
+
+<p>
+第一个叫口是心非。她在表达自己欲望的过程当中，一定是比较含蓄的、委婉的，甚至有时候是反向的。这种心理是自我保护的一种策略，她说不的时候可能暗含着期待，该做的事情你要去勇敢的去做。举个例子，约女生去看电影，男生说我要去买票，女生说不用我来买，你这个时候怎么办？
+</p>
+
+<p>
+第二个叫不受控制的嫉妒。这个时候女生对周围的人或者事物特别敏感，尤其在恋爱过程当中，她会不断跟人做一些比较，她自己的价值在你这儿得不到一些认可，会产生嫉妒等心理，例如担心自己不够瘦、不够漂亮、打扮的不够等等。
+</p>
+
+<p>
+第三个就叫喜欢被紧张的感觉。在恋爱过程当中，女生有时会故意的姗姗来迟或者是答应跟你有约了，让你产生那种比较焦急的、焦躁了或者担心了，会有一种被紧张的特别享受。
+</p>
+
+<p>
+第四种就是令人费解的消费。可能平时交往过程中生活可能比较节俭，但是在一起之后，可能偶尔想体验一下恋爱的感觉，去消费一些平时两个人都舍不得去吃的一些东西，会去一些比较有档次或者有意义的一些场所去消费、买东西了。
+</p>
+
+<p>
+第五个就叫甜言蜜语。比如女生喜欢听男朋友叫她亲爱的、我爱你或者是宝贝。我们女男生一般都很难理解这一点，说经常这么偶尔叫这么一但天天这么叫，叫的有时一开始可能说修与疏口，慢慢就习惯了。
+</p>
+
+<p>
+以上这五种心理，你们要清晰的知道，对于你下一步这些关系升级也是挺好的。
+</p>
+
+<p>
+三、巩固吸引
+</p>
+
+<p>
+1, 相处的三种关系
+</p>
+
+<p>
+1）讨好关系
+</p>
+
+<p>
+女生被男生吸引，急于寻求男生的认可。
+</p>
+
+<p>
+2）平等关系
+</p>
+
+<p>
+彼此平等对待，不会刻意迎合彼此。
+</p>
+
+<p>
+3）破坏关系
+</p>
+
+<p>
+女生没有被男生吸引，且女生已经意识到男生在追求自己。
+</p>
+
+<p>
+2, 男生需要培养的关系
+</p>
+
+<p>
+自信
+</p>
+
+<p>
+交心
+</p>
+
+<p>
+控制情绪
+</p>
+
+<p>
+四、确定关系
+</p>
+
+<p>
+确定恋爱关系。站在对方的角度考虑问题。
+</p>
+
+<p>
+五、原则和策略
+</p>
+
+<p>
+1, 一个原则
+</p>
+
+<p>
+聊天以感性话题为主，避免聊理性话题
+</p>
+
+<p>
+2, 两个策略
+</p>
+
+<p>
+一个是短期：收集一些感性话题，书影音等
+</p>
+
+<p>
+一个是长期：阳光、积极。</p>
+</div>
+</div>
+</div>
+</body>
+</html>
