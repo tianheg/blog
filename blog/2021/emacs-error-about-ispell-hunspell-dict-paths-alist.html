@@ -3,7 +3,7 @@
 "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en">
 <head>
-<!-- 2021-12-12 Sun 08:22 -->
+<!-- 2021-12-12 Sun 13:29 -->
 <meta http-equiv="Content-Type" content="text/html;charset=utf-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1" />
 <title>&lrm;</title>
@@ -43,7 +43,7 @@
 今天在使用过程中，出现错误：
 </p>
 
-<pre class="example" id="org18524cf">
+<pre class="example" id="org7d38781">
 Error running timer ‘auto-save-buffers’: (error "Can’t find Hunspell dictionary with a .aff affi\
 x file")
 </pre>
@@ -56,7 +56,7 @@ x file")
 安装后错误变为：
 </p>
 
-<pre class="example" id="org0da8643">
+<pre class="example" id="org3c97fd2">
 Error running timer ‘auto-save-buffers’: (error "ispell-phaf: No matching entry for hunspelldict\
  in ‘ispell-hunspell-dict-paths-alist’.
 ")
@@ -70,7 +70,7 @@ Error running timer ‘auto-save-buffers’: (error "ispell-phaf: No matching en
 对 <code>~/.emacs.d/lisp/init-spelling.el</code> 进行的修改：
 </p>
 
-<pre class="example" id="orge0a7a1a">
+<pre class="example" id="org8f6caa8">
 +    (setq ispell-hunspell-dict-paths-alist
 +          '(("en_US" "/usr/share/hunspell/en_US.aff")))
 +    (setq ispell-local-dictionary "en_US")
