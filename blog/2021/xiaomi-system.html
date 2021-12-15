@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html lang="zh">
 <head>
-<!-- 2021-12-14 Tue 21:38 -->
+<!-- 2021-12-15 Wed 10:54 -->
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>生产实习-小米后台管理系统</title>
@@ -334,7 +334,7 @@
 <div id="outline-container-软件安装及配置" class="outline-3">
 <h3 id="软件安装及配置"><span class="section-number-3">2.1</span> 软件安装及配置</h3>
 <div class="outline-text-3" id="text-软件安装及配置">
-<pre class="example" id="orgccb8775">
+<pre class="example" id="orge873bf9">
 $ mysql --version
 mysql  Ver 8.0.24 for Linux on x86_64 (Source distribution)
 $ java -version
@@ -350,7 +350,7 @@ OS name: "linux", version: "5.13.12-arch1-1", arch: "amd64", family: "unix"
 </pre>
 
 <p>
-一、 MySQL
+一、MySQL
 </p>
 
 <p>
@@ -363,7 +363,7 @@ Linux 上配置 MySQL 对于我这个新手来说很是吃力。
 <li>MySQL</li>
 </ol>
 
-<pre class="example" id="org5d0b264">
+<pre class="example" id="org1ab7f24">
 $ sudo pacman -S mysql
 
 # 此前操作：1. 安装 mysql 后卸载 2. 安装 percona-server 后卸载
@@ -413,7 +413,7 @@ percona-server 间接解决了无法启动 mysqld 服务的问题。于是，使
 percona-server。由它提供 MySQL 相关功能。
 </p>
 
-<pre class="example" id="org492edb8">
+<pre class="example" id="org8c9f60b">
 $ systemctl status mysqld
 ○ mysqld.service - MySQL Server
      Loaded: loaded (/usr/lib/systemd/system/mysqld.service; enabled; vendor preset: disabled)
@@ -550,7 +550,7 @@ txt 文本：姓名(第一天).txt
 
 <ul class="org-ul">
 <li>day1 课程感受；对 Java 方向的看法</li>
-<li>day2 重新创建 maven 项目 1_高天贺home，定义一个包
+<li>day2 重新创建 maven 项目 1_高天贺 home，定义一个包
 HelloMaven，写一个主方法，输出 <code>hello maven</code></li>
 <li>day3 在 day2 的项目中，重新操作当天的任务；记学习笔记</li>
 <li>day4 完成「数组绑定 HTML」，在 day2 项目中操作一遍；笔记</li>
@@ -640,7 +640,7 @@ Go 语言这样的后起之秀，但是，Java 目前还占据主导地位。</l
 一、=com.alibaba:druid:jar:1.1.21 is invalid=
 </p>
 
-<pre class="example" id="org4fd068d">
+<pre class="example" id="org794fdd7">
 [WARNING] The POM for com.alibaba:druid:jar:1.1.21 is invalid, transitive dependencies (if any) will not be available, enable debug logging for more details
 </pre>
 
@@ -657,7 +657,7 @@ Go 语言这样的后起之秀，但是，Java 目前还占据主导地位。</l
 当运行 <code>RunBoot.java</code> 主方法时，出现错误：
 </p>
 
-<pre class="example" id="org78f823f">
+<pre class="example" id="org23200dd">
 /usr/lib/jvm/default/bin/java...
 
   .   ____          _            __ _ _
@@ -725,7 +725,7 @@ Process finished with exit code 1
 3）=APPLICATION FAILED TO START=
 </p>
 
-<pre class="example" id="org2a74768">
+<pre class="example" id="orgdf75fad">
 Description:
 
 Failed to configure a DataSource: 'url' attribute is not specified and no embedded datasource could be configured.
@@ -744,7 +744,7 @@ Consider the following:
 在为 ~/ 添加以下内容后，可以运行：
 </p>
 
-<pre class="example" id="orga27b3f3">
+<pre class="example" id="org2f8b9b7">
 spring:
     datasource:
         driver-class-name: com.mysql.cj.jdbc.Driver
@@ -770,7 +770,7 @@ spring:
 </ol>
 
 <p>
-4）='artifactId' with value '1_中文home' does not match a valid id pattern.=
+4）='artifactId' with value '1_中文 home' does not match a valid id pattern.=
 </p>
 
 <p>
@@ -831,14 +831,14 @@ Vue 模型：
 </p>
 
 
-<figure id="org1d7a511">
+<figure id="org1fdd455">
 <object type="image/svg+xml" data="https://cdn.jsdelivr.net/gh/tianheg/static@main/img/vue-mvvm.svg" class="org-svg">
 Sorry, your browser does not support SVG.</object>
 
 <figcaption><span class="figure-number">Figure 1: </span>Vue MVVM</figcaption>
 </figure>
 
-<pre class="example" id="orgb16d254">
+<pre class="example" id="org162b594">
 &lt;div id="app"&gt;
   &lt;li v-for="type in mi_type"&gt;
     &lt;a v-bind:href="type.url"&gt;{{type.name}}&lt;/a&gt;&lt;span&gt;|&lt;/span&gt;
@@ -890,7 +890,7 @@ Sorry, your browser does not support SVG.</object>
 Project 结构：
 </p>
 
-<pre class="example" id="orgff7eeb9">
+<pre class="example" id="org0c8379b">
 ~ root
 --&gt;src/main/java/yidajiabei.xyz/RunBoot.java
 --&gt;src/main/java/yidajiabei.xyz/controller/MiIndexPageController.java
@@ -1008,7 +1008,7 @@ Project 结构：
 </p>
 
 
-<figure id="org06ad19f">
+<figure id="orge6e353b">
 <object type="image/svg+xml" data="../../images/java-resultbean.svg" class="org-svg">
 Sorry, your browser does not support SVG.</object>
 
@@ -1085,14 +1085,14 @@ axios 的图形示意：
 </p>
 
 
-<figure id="orgbd27f74">
+<figure id="orga83e125">
 <object type="image/svg+xml" data="../../images/axios.svg" class="org-svg">
 Sorry, your browser does not support SVG.</object>
 
 <figcaption><span class="figure-number">Figure 3: </span>ResultBean.java</figcaption>
 </figure>
 
-<pre class="example" id="org7f52235">
+<pre class="example" id="org4399694">
 &lt;!-- src/main/resources/static/index.html --&gt;
 &lt;li v-for="type in mi_type"&gt;
   &lt;a v-bind:href="type.url"&gt;{{ type.name }}&lt;/a&gt;&lt;span&gt;|&lt;/span&gt;
@@ -1155,7 +1155,7 @@ urlPageBean，urlPageBeanMapper 文件，之后前端从后端调用数据。
 输出：
 </p>
 
-<pre class="example" id="orge68ed2d">
+<pre class="example" id="org022f14e">
 ERROR 1045 (28000): Access denied for user 'root'@'localhost' (using password: YES)
 </pre>
 
@@ -1163,7 +1163,7 @@ ERROR 1045 (28000): Access denied for user 'root'@'localhost' (using password: Y
 解决办法（<a href="https://stackoverflow.com/a/41793945">来源</a>）：
 </p>
 
-<pre class="example" id="org60a47e9">
+<pre class="example" id="orgdf42443">
 # add `skip-grant-tables` under `[mysqld]` in `/etc/my.cnf` or `/etc/mysql/my.cnf`
 systemctl restart mysqld
 mysql -u root -p
@@ -1185,7 +1185,7 @@ systemctl restart mysqld
 修改 my.cnf 文件，我的文件配置：
 </p>
 
-<pre class="example" id="org4a77ff6">
+<pre class="example" id="org263c34d">
 # For advice on how to change settings please see
 # http://dev.mysql.com/doc/refman/8.0/en/server-configuration-defaults.html
 
@@ -1235,7 +1235,7 @@ secure-file-priv = "/home/archie/"
 <h3 id="第七天"><span class="section-number-3">2.9</span> 第七天</h3>
 <div class="outline-text-3" id="text-第七天">
 
-<figure id="orgdbab315">
+<figure id="org8ad76d0">
 <object type="image/svg+xml" data="../../images/front-back-end-mysql-framework.svg" class="org-svg">
 Sorry, your browser does not support SVG.</object>
 
@@ -1345,7 +1345,7 @@ lombok 插件的使用：
 </p>
 
 <ol class="org-ol">
-<li>每节课（40分钟），截图说明进度</li>
+<li>每节课（40 分钟），截图说明进度</li>
 <li>制作流程严格按照顺序执行</li>
 <li>遇到问题，随时提问</li>
 <li>第一个需求：制作左侧菜单
