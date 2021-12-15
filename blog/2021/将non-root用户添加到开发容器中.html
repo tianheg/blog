@@ -3,7 +3,7 @@
 "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en">
 <head>
-<!-- 2021-12-15 Wed 10:53 -->
+<!-- 2021-12-15 Wed 14:18 -->
 <meta http-equiv="Content-Type" content="text/html;charset=utf-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1" />
 <title>&lrm;</title>
@@ -72,7 +72,7 @@ Code（server）和任何子进程（终端、任务、调试）使用它，方�
 devcontainer.json 中指定 remoteUser 属性：
 </p>
 
-<pre class="example" id="orgdd4bd0c">
+<pre class="example" id="org22502ed">
 "remoteUser": "user-name-goes-here"
 </pre>
 
@@ -95,7 +95,7 @@ UID/GID 不会被更新，但是可以在 Dockerfile 中手动更改这些值。
 <div id="outline-container-创建-non-root-用户" class="outline-2">
 <h2 id="创建-non-root-用户"><span class="section-number-2">2</span> 创建 non-root 用户</h2>
 <div class="outline-text-2" id="text-创建-non-root-用户">
-<pre class="example" id="orgd3c608c">
+<pre class="example" id="orgc8f57e8">
 ARG USERNAME=user-name-goes-here
 ARG USER_UID=1000
 ARG USER_GID=$USER_UID
@@ -129,7 +129,7 @@ USER $USERNAME
 中的这个代码片段手动更改用户的 UID/GID。根据需要更新 ARG 值。
 </p>
 
-<pre class="example" id="org713ee6b">
+<pre class="example" id="org124d180">
 ARG USERNAME=user-name-goes-here
 ARG USER_UID=1000
 ARG USER_GID=$USER_UID
