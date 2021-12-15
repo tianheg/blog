@@ -3,7 +3,7 @@
 "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en">
 <head>
-<!-- 2021-12-14 Tue 21:38 -->
+<!-- 2021-12-15 Wed 10:53 -->
 <meta http-equiv="Content-Type" content="text/html;charset=utf-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1" />
 <title>&lrm;</title>
@@ -37,7 +37,7 @@
 <h2>Table of Contents</h2>
 <div id="text-table-of-contents">
 <ul>
-<li><a href="#为-vs-codeserver指定用户">1. 为 VS Code（server）指定用户</a></li>
+<li><a href="#为-vs-codeserver 指定用户">1. 为 VS Code（server）指定用户</a></li>
 <li><a href="#创建-non-root-用户">2. 创建 non-root 用户</a></li>
 <li><a href="#改变已存在用户的-uidgid">3. 改变已存在用户的 UID/GID</a></li>
 </ul>
@@ -62,9 +62,9 @@ non-root 即非 root，意思是没有管理员权限（根权限）。
 non-root 用户，这样使运行环境更安全。
 </p>
 
-<div id="outline-container-为-vs-codeserver指定用户" class="outline-2">
-<h2 id="为-vs-codeserver指定用户"><span class="section-number-2">1</span> 为 VS Code（server）指定用户</h2>
-<div class="outline-text-2" id="text-为-vs-codeserver指定用户">
+<div id="outline-container-为-vs-codeserver 指定用户" class="outline-2">
+<h2 id="为-vs-codeserver 指定用户"><span class="section-number-2">1</span> 为 VS Code（server）指定用户</h2>
+<div class="outline-text-2" id="text-为-vs-codeserver 指定用户">
 <p>
 如果你使用的镜像或 Dockerfile 已经提供了一个可供选择的 non-root
 用户，但默认默认用户仍然是 =root=。可以选择让 VS
@@ -72,7 +72,7 @@ Code（server）和任何子进程（终端、任务、调试）使用它，方�
 devcontainer.json 中指定 remoteUser 属性：
 </p>
 
-<pre class="example" id="org83fcd8a">
+<pre class="example" id="orgdd4bd0c">
 "remoteUser": "user-name-goes-here"
 </pre>
 
@@ -95,7 +95,7 @@ UID/GID 不会被更新，但是可以在 Dockerfile 中手动更改这些值。
 <div id="outline-container-创建-non-root-用户" class="outline-2">
 <h2 id="创建-non-root-用户"><span class="section-number-2">2</span> 创建 non-root 用户</h2>
 <div class="outline-text-2" id="text-创建-non-root-用户">
-<pre class="example" id="org75cee66">
+<pre class="example" id="orgd3c608c">
 ARG USERNAME=user-name-goes-here
 ARG USER_UID=1000
 ARG USER_GID=$USER_UID
@@ -129,7 +129,7 @@ USER $USERNAME
 中的这个代码片段手动更改用户的 UID/GID。根据需要更新 ARG 值。
 </p>
 
-<pre class="example" id="orgc29ebd4">
+<pre class="example" id="org713ee6b">
 ARG USERNAME=user-name-goes-here
 ARG USER_UID=1000
 ARG USER_GID=$USER_UID
