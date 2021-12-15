@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html lang="zh">
 <head>
-<!-- 2021-12-14 Tue 21:38 -->
+<!-- 2021-12-15 Wed 10:53 -->
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>为 GitHub 主页添加「年进度」和「最近更新的博客文章」</title>
@@ -325,7 +325,7 @@ console.log(readme)
 开发工作流。在与个人用户名相同的仓库中添加 =Pipfile=：
 </p>
 
-<pre class="example" id="org629cbec">
+<pre class="example" id="org3693f03">
 [[source]]
 name = "pypi"
 url = "https://pypi.org/simple"
@@ -349,7 +349,7 @@ python_version = "3.7"
 <code>python_version</code> 必须是 3.7，改成其他的会报错（[错误地址 1][]）：
 </p>
 
-<pre class="example" id="org55371e8">
+<pre class="example" id="org34b57e2">
 Warning: Python 3.8 was not found on your system...
 Neither 'pyenv' nor 'asdf' could be found to install Python.
 You can specify specific versions of Python with:
@@ -361,7 +361,7 @@ $ pipenv --python path/to/python
 报错（[错误地址 2][]）：
 </p>
 
-<pre class="example" id="orgcfbe896">
+<pre class="example" id="org1f0908e">
 ValueError: invalid literal for int() with base 10: '3.x'
 </pre>
 
@@ -370,7 +370,7 @@ ValueError: invalid literal for int() with base 10: '3.x'
 WSL2-Ubuntu20.04。我已经安装了最新版本的 pip，直接安装 pipenv 即可：
 </p>
 
-<pre class="example" id="org47d839d">
+<pre class="example" id="org01964c6">
 pip install pipenv
 </pre>
 
@@ -378,7 +378,7 @@ pip install pipenv
 然后，在本地仓库中新建上述文件 =Pipfile=，执行：
 </p>
 
-<pre class="example" id="orga6e0f82">
+<pre class="example" id="orgc2f9d14">
 pipenv install
 </pre>
 
@@ -392,7 +392,7 @@ pipenv install
 另外一个主要文件就是 =main.py=：
 </p>
 
-<pre class="example" id="orgadedaa1">
+<pre class="example" id="org624011b">
 import feedparser
 import time
 import os
@@ -425,10 +425,10 @@ def main():
     insert_info = blog
 
     # 替换 ---start--- 到 ---end--- 之间的内容
-    # pytz.timezone('Asia/Shanghai')).strftime('%Y年%m月%d日%H时M分')
+    # pytz.timezone('Asia/Shanghai')).strftime('%Y 年%m 月%d 日%H 时 M 分')
     fmt = '%Y-%m-%d %H:%M:%S %Z%z'
-    insert_info = "---start---\n\n**最近更新文章(" + "更新时间:"+  datetime.fromtimestamp(int(time.time()),pytz.timezone('Asia/Shanghai')).strftime('%Y-%m-%d %H:%M:%S') + " | 通过Github Actions自动更新)**" +"\n" + insert_info + "\n---end---"
-    # 获取README.md内容
+    insert_info = "---start---\n\n**最近更新文章(" + "更新时间:"+  datetime.fromtimestamp(int(time.time()),pytz.timezone('Asia/Shanghai')).strftime('%Y-%m-%d %H:%M:%S') + " | 通过 Github Actions 自动更新)**" +"\n" + insert_info + "\n---end---"
+    # 获取 README.md 内容
     with open (os.path.join(os.getcwd(), "README.md"), 'r', encoding='utf-8') as f:
         readme_md_content = f.read()
 
@@ -460,7 +460,7 @@ main()
 首先，新建文件 =~\.github\workflows\main.yml=，并添加以下内容：
 </p>
 
-<pre class="example" id="org81f4079">
+<pre class="example" id="org1fbf3ab">
 name: update tianheg profile
 
 on:
@@ -537,7 +537,7 @@ pipenv 分支中。
 文件结构：
 </p>
 
-<pre class="example" id="org206e66c">
+<pre class="example" id="org857f0bb">
 Dockerfile
 LICENSE
 README.md
@@ -553,7 +553,7 @@ entrypoint.sh
 <code>Dockerfile</code> 内容：
 </p>
 
-<pre class="example" id="org7abdd50">
+<pre class="example" id="org12872fe">
 ARG PYTHON_IMAGE_VERSION=3
 FROM python:$PYTHON_IMAGE_VERSION
 
@@ -570,7 +570,7 @@ ENTRYPOINT ["/entrypoint.sh"]
 <code>entrypoint.sh</code> 内容：
 </p>
 
-<pre class="example" id="org869be36">
+<pre class="example" id="org9193c98">
 #!/bin/sh
 
 sh -c "pipenv $*"
