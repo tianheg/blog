@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html lang="zh">
 <head>
-<!-- 2021-12-15 Wed 14:18 -->
+<!-- 2021-12-16 Thu 10:26 -->
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>在 Ubuntu20.04 配合 Nginx 使用 Let's Encrypt 证书</title>
@@ -229,10 +229,10 @@
 <h2>Table of Contents</h2>
 <div id="text-table-of-contents">
 <ul>
-<li><a href="#orge52e3cd">1. 安装 Certbot</a></li>
-<li><a href="#orga8f5691">2. 配置 Nginx</a></li>
-<li><a href="#orgf6e49bf">3. 获取一个 SSL 证书</a></li>
-<li><a href="#orgb297e7d">4. 验证 Certbot 自动更新</a></li>
+<li><a href="#orgb091333">1. 安装 Certbot</a></li>
+<li><a href="#orgd34e901">2. 配置 Nginx</a></li>
+<li><a href="#org670b349">3. 获取一个 SSL 证书</a></li>
+<li><a href="#orga299e67">4. 验证 Certbot 自动更新</a></li>
 </ul>
 </div>
 </nav>
@@ -248,8 +248,8 @@
 <li><a href="nginx-1st.html">Nginx 已经安装并能够正常使用</a></li>
 </ol>
 
-<div id="outline-container-orge52e3cd" class="outline-2">
-<h2 id="orge52e3cd"><span class="section-number-2">1</span> 安装 Certbot</h2>
+<div id="outline-container-orgb091333" class="outline-2">
+<h2 id="orgb091333"><span class="section-number-2">1</span> 安装 Certbot</h2>
 <div class="outline-text-2" id="text-1">
 <div class="org-src-container">
 <pre class="src src-sh">sudo apt install certbot python3-certbot-nginx
@@ -258,8 +258,8 @@
 </div>
 </div>
 
-<div id="outline-container-orga8f5691" class="outline-2">
-<h2 id="orga8f5691"><span class="section-number-2">2</span> 配置 Nginx</h2>
+<div id="outline-container-orgd34e901" class="outline-2">
+<h2 id="orgd34e901"><span class="section-number-2">2</span> 配置 Nginx</h2>
 <div class="outline-text-2" id="text-2">
 <p>
 我已经通过 Nginx 部署了一个站点——blog.yidajiabei.xyz，现在部署的是第二个站点——til.yidajiabei.xyz。我没有使用 server block<sup><a id="fnr.1" class="footref" href="#fn.1">1</a></sup>，即新建 <code>/etc/nginx/sites-available/til.yidajiabei.xyz</code> 文件，并通过 <code>sudo ln -s /etc/nginx/sites-available/til.yidajiabei.xyz /etc/nginx/sites-enabled/</code> 命令链接至 <code>sites-enabled</code> 文件夹下。而是直接将配置写在 <code>/etc/nginx/nginx.conf</code> 文件中。
@@ -293,8 +293,8 @@
 </div>
 </div>
 
-<div id="outline-container-orgf6e49bf" class="outline-2">
-<h2 id="orgf6e49bf"><span class="section-number-2">3</span> 获取一个 SSL 证书</h2>
+<div id="outline-container-org670b349" class="outline-2">
+<h2 id="org670b349"><span class="section-number-2">3</span> 获取一个 SSL 证书</h2>
 <div class="outline-text-2" id="text-3">
 <div class="org-src-container">
 <pre class="src src-sh">sudo certbot --nginx -d til.yidajiabei.xyz
@@ -323,8 +323,8 @@
 </div>
 </div>
 
-<div id="outline-container-orgb297e7d" class="outline-2">
-<h2 id="orgb297e7d"><span class="section-number-2">4</span> 验证 Certbot 自动更新</h2>
+<div id="outline-container-orga299e67" class="outline-2">
+<h2 id="orga299e67"><span class="section-number-2">4</span> 验证 Certbot 自动更新</h2>
 <div class="outline-text-2" id="text-4">
 <div class="org-src-container">
 <pre class="src src-sh">sudo systemctl status certbot.timer
