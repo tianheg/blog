@@ -17,13 +17,7 @@
          :publishing-function org-html-publish-to-html
          :html-postamble nil
          :with-toc 't)
-         ;; 这个 rss.xml 目前是手动维护内容
-         ("rss.xml"
-          :base-directory "~/org/blog/"
-          :base-extension "xml"
-          :publishing-directory "~/repo/blog/"
-          :publishing-function org-publish-attachment)
-        ("site" :components ("pages" "rss.xml"))))
+        ("site" :components ("pages"))))
 
 ;; (progn (profiler-start 'cpu) (org-publish-project "site") (profiler-report) (profiler-stop))
 (org-publish-project "site")
