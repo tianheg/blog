@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html lang="zh">
 <head>
-<!-- 2021-12-17 Fri 15:15 -->
+<!-- 2021-12-18 Sat 13:31 -->
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>域名邮箱</title>
@@ -230,7 +230,22 @@
 </p>
 
 <p>
-me@yidajiabei.xyz</p>
+一直以来都很想要一个域名邮箱，现在终于有了。域地址名：me@yidajiabei.xyz。
+</p>
+
+<p>
+使用 <a href="https://forwardemail.net/en">https://forwardemail.net/en</a>（支持 GitHub 登录），只需要添加 3 条 DNS 记录：
+</p>
+
+<div class="org-src-container">
+<pre class="src src-text">MX   @  mx1.forwardemail.net  10
+MX   @  mx2.forwardemail.net  10
+TXT  @  forward-email=me:youremail@example.com
+</pre>
+</div>
+
+<p>
+10 是优先级，me 则表示 <code>me@yidajiabei.xyz</code> ，当向该域名邮箱发送邮件时，邮件会被转发至 <code>youremail@example.com</code> 。</p>
 </div>
 </body>
 </html>
