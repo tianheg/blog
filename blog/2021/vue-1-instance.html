@@ -1,10 +1,10 @@
 <!DOCTYPE html>
 <html lang="zh">
 <head>
-<!-- 2021-12-19 Sun 10:38 -->
+<!-- 2021-12-19 Sun 10:39 -->
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<title>2020-37</title>
+<title>Vue1 应用和组件实例</title>
 <meta name="generator" content="Org mode">
 <meta name="description" content="Learn Technology, Love Life"
 >
@@ -224,72 +224,96 @@
 <body>
 <div id="content">
 <header>
-<h1 class="title">2020-37</h1>
-</header><p>
-9.7-9.13
-</p>
-
-<p>
-这是 2020 年第 37 周总结。
-</p>
-
-<p>
-<a href="https://github.com/Gaotianhe/ideas/issues">issues</a> 总数：7 + 25 + 25
-= 57。
-</p>
-
-<p>
-Number of new issues in each tab:
-</p>
-
-<ul class="org-ul">
-<li>Daily-reading-plan: 1;</li>
-<li>Notes: 24;</li>
-<li>Todo: 30;</li>
-<li>三日工作计划: 1;</li>
-<li>信息视角: 0;</li>
-<li>想法: 21;</li>
-<li>执念: 0;</li>
-<li>日记: 6;</li>
-<li>问题: 17;</li>
+<h1 class="title">Vue1 应用和组件实例</h1>
+</header><nav id="table-of-contents">
+<h2>Table of Contents</h2>
+<div id="text-table-of-contents">
+<ul>
+<li><a href="#orge7a2263">1. 创建一个应用实例</a></li>
+<li><a href="#org6efaca1">2. 根组件</a></li>
 </ul>
+</div>
+</nav>
+<p>
+<a href="https://v3.vuejs.org/guide/instance.html">https://v3.vuejs.org/guide/instance.html</a>
+</p>
+
+<div id="outline-container-orge7a2263" class="outline-2">
+<h2 id="orge7a2263"><span class="section-number-2">1</span> 创建一个应用实例</h2>
+<div class="outline-text-2" id="text-1">
+<p>
+每一个 Vue 应用的开始，都是通过 <code>createApp</code> 函数，创建一个新的应用实例：
+</p>
+
+<div class="org-src-container">
+<pre class="src src-javascript"><span style="color: #91a0b3;">const</span> <span style="color: #aaca86;">app</span> = Vue.createApp({
+  <span style="color: #706565;">/* </span><span style="color: #857575;">options</span><span style="color: #706565;"> */</span>
+})
+</pre>
+</div>
 
 <p>
-做了一个重要决定-&#x2013;&#x2014;考研，昨天在确定这件事之后，整个人都是失魂落魄的，似乎考研是一个莫大的考验，我无法完成它。心里又在安慰自己：没事儿，每天都做点儿，一步一个脚印就可以了。
+该应用实例被用于注册「全局变量」，然后可以被应用内部的组件使用。一个例子：
+</p>
+
+<div class="org-src-container">
+<pre class="src src-javascript"><span style="color: #91a0b3;">const</span> <span style="color: #aaca86;">app</span> = Vue.createApp({})
+app.component(<span style="color: #ddbc91;">'SearchInput'</span>, SearchInputComponent)
+app.directive(<span style="color: #ddbc91;">'focus'</span>, FocusDirective)
+app.use(LocalePlugin)
+</pre>
+</div>
+
+<p>
+大部分通过应用示例暴露的方法返回相同的示例，允许直接链接：
+</p>
+
+<div class="org-src-container">
+<pre class="src src-javascript">Vue.createApp({})
+  .component(<span style="color: #ddbc91;">'SearchInput'</span>, SearchInputComponent)
+  .directive(<span style="color: #ddbc91;">'focus'</span>, FocusDirective)
+  .use(LocalePlugin)
+</pre>
+</div>
+
+<p>
+可以在 <a href="https://v3.vuejs.org/api/application-api.html">API reference</a> 找到全部的应用 API。
+</p>
+</div>
+</div>
+
+<div id="outline-container-org6efaca1" class="outline-2">
+<h2 id="org6efaca1"><span class="section-number-2">2</span> 根组件</h2>
+<div class="outline-text-2" id="text-2">
+<p>
+传递给 <code>createApp</code> 的选项被用于配置 <b>根组件</b> 。当我们安装应用程序时，该组件开始渲染。
 </p>
 
 <p>
-今天上微机课时，我写下了这个 To Do List:
+应用需要被安装进入一个 DOM 元素中。例如，如果我们想把 Vue 应用安装进 <code>&lt;div id</code>"app"&gt;&lt;/div&gt;= ，我们应该传入 <code>#app</code> ：
 </p>
 
-<table>
-
-
-<colgroup>
-<col  class="org-left">
-</colgroup>
-<tbody>
-<tr>
-<td class="org-left">见多识广 &#x2013;&gt; articles</td>
-</tr>
-
-<tr>
-<td class="org-left">考研 &#x2013;&gt; 研一</td>
-</tr>
-
-<tr>
-<td class="org-left">完成本科学业 &#x2013;&gt; 毕业</td>
-</tr>
-
-<tr>
-<td class="org-left">自我心理探索 &#x2013;&gt; 更加了解自己</td>
-</tr>
-</tbody>
-</table>
+<div class="org-src-container">
+<pre class="src src-javascript"><span style="color: #91a0b3;">const</span> <span style="color: #aaca86;">RootComponent</span> = {
+  <span style="color: #706565;">/* </span><span style="color: #857575;">options</span><span style="color: #706565;"> */</span>
+}
+<span style="color: #91a0b3;">const</span> <span style="color: #aaca86;">app</span> = Vue.createApp(RootComponent)
+<span style="color: #91a0b3;">const</span> <span style="color: #aaca86;">vm</span> = app.mount(<span style="color: #ddbc91;">'#app'</span>)
+</pre>
+</div>
 
 <p>
-列表重要程度不分先后，但其中顺利毕业是考研成功的前提。
+与大多数应用方法不同， <code>mount</code> 不返回应用，它返回根组件实例。
 </p>
+
+<p>
+尽管 Vue 与 <a href="https://en.wikipedia.org/wiki/Model_View_ViewModel">MVVM</a> 模式没有严格相关，但 Vue 的设计在一定程度上受它的启发。
+</p>
+
+<p>
+作为惯例，我们经常使用变量 vm (ViewModel 的缩写)来引用组件实例。</p>
+</div>
+</div>
 </div>
 </body>
 </html>
