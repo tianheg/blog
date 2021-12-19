@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html lang="zh">
 <head>
-<!-- 2021-12-19 Sun 10:39 -->
+<!-- 2021-12-19 Sun 14:29 -->
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>Vue1 应用和组件实例</title>
@@ -229,8 +229,11 @@
 <h2>Table of Contents</h2>
 <div id="text-table-of-contents">
 <ul>
-<li><a href="#orge7a2263">1. 创建一个应用实例</a></li>
-<li><a href="#org6efaca1">2. 根组件</a></li>
+<li><a href="#org63a1969">1. 创建一个应用实例</a></li>
+<li><a href="#org300cc10">2. 根组件</a></li>
+<li><a href="#org441f920">3. 组件实例属性</a></li>
+<li><a href="#org50673b8">4. 生命周期钩子</a></li>
+<li><a href="#org278846e">5. 生命周期图</a></li>
 </ul>
 </div>
 </nav>
@@ -238,8 +241,8 @@
 <a href="https://v3.vuejs.org/guide/instance.html">https://v3.vuejs.org/guide/instance.html</a>
 </p>
 
-<div id="outline-container-orge7a2263" class="outline-2">
-<h2 id="orge7a2263"><span class="section-number-2">1</span> 创建一个应用实例</h2>
+<div id="outline-container-org63a1969" class="outline-2">
+<h2 id="org63a1969"><span class="section-number-2">1</span> 创建一个应用实例</h2>
 <div class="outline-text-2" id="text-1">
 <p>
 每一个 Vue 应用的开始，都是通过 <code>createApp</code> 函数，创建一个新的应用实例：
@@ -282,8 +285,8 @@ app.use(LocalePlugin)
 </div>
 </div>
 
-<div id="outline-container-org6efaca1" class="outline-2">
-<h2 id="org6efaca1"><span class="section-number-2">2</span> 根组件</h2>
+<div id="outline-container-org300cc10" class="outline-2">
+<h2 id="org300cc10"><span class="section-number-2">2</span> 根组件</h2>
 <div class="outline-text-2" id="text-2">
 <p>
 传递给 <code>createApp</code> 的选项被用于配置 <b>根组件</b> 。当我们安装应用程序时，该组件开始渲染。
@@ -311,7 +314,106 @@ app.use(LocalePlugin)
 </p>
 
 <p>
-作为惯例，我们经常使用变量 vm (ViewModel 的缩写)来引用组件实例。</p>
+作为惯例，我们经常使用变量 vm (ViewModel 的缩写)来引用组件实例。
+</p>
+
+<p>
+到这里我们见到的都是单组件，大多数真实应用程序被组织为嵌套的、可以重复使用的组件树。例如，一个 Todo 应用的组件树可能是这样：
+</p>
+
+<div class="org-src-container">
+<pre class="src src-text">Root Component
+|-- TodoList
+    |-- TodoItem
+    |   |-- DeleteTodoButton
+    |   &#9492;&#9472;  EditTodoButton
+    &#9492;&#9472;  TodoListFooter
+        |-- ClearTodosButton
+        &#9492;&#9472;  TodoListStatistics
+</pre>
+</div>
+
+<p>
+每一个组件都有自己的组件实例， <code>vm</code> 。对于某些组件来说，例如 <code>TodoItem</code> ，可能会同时呈现多个渲染实例。在该应用的所有组件实例会共享应用实例。
+</p>
+
+<p>
+<a href="https://v3.vuejs.org/guide/component-basics.html">组件系统</a>稍后可见。现在只需要知道，根组件和其他组件并无不同。配置选项与相应组件实例的行为相同。
+</p>
+</div>
+</div>
+
+<div id="outline-container-org441f920" class="outline-2">
+<h2 id="org441f920"><span class="section-number-2">3</span> 组件实例属性</h2>
+<div class="outline-text-2" id="text-3">
+<p>
+<code>data</code> 中定义的属性会通过组件实例公开：
+</p>
+
+<div class="org-src-container">
+<pre class="src src-javascript"><span style="color: #91a0b3;">const</span> <span style="color: #aaca86;">app</span> = Vue.createApp({
+  data() {
+    <span style="color: #91a0b3;">return</span> { count: 4 }
+  }
+})
+
+<span style="color: #91a0b3;">const</span> <span style="color: #aaca86;">vm</span> = app.mount(<span style="color: #ddbc91;">'#app'</span>)
+console.log(vm.count)
+</pre>
+</div>
+
+<p>
+还有其他可以添加的使用者定义选项，像 <code>methods</code> ， <code>props</code> ， <code>computed</code> ， <code>inject</code> ， <code>setup</code> 。组件实例的所有属性，无论如何定义，对组件的模板都是可见。Vue 还会通过组件实例公开一些内建属性，像 <code>$attrs</code> 和 <code>$emit</code> 。这些属性都有一个 <code>$</code> 前缀，以避免和使用者定义的属性名相混淆。
+</p>
+</div>
+</div>
+
+<div id="outline-container-org50673b8" class="outline-2">
+<h2 id="org50673b8"><span class="section-number-2">4</span> 生命周期钩子</h2>
+<div class="outline-text-2" id="text-4">
+<p>
+每一个组件实例在创建时会经历一系列的初始化步骤。比如，这需要设置数据观测、编译模板、将实例安装至 DOM，当数据变化时更新 DOM。自始至终，它也运行着被称作 lifecycle hooks 的函数，让使用者能够在特定阶段加入他们的代码。
+</p>
+
+<p>
+例如，<a href="https://v3.vuejs.org/api/options-lifecycle-hooks.html#created">created</a> 钩子用于在实例创建以后运行代码。
+</p>
+
+<div class="org-src-container">
+<pre class="src src-javascript">Vue.createApp({
+  data() {
+    <span style="color: #91a0b3;">return</span> { count: 1 }
+  },
+  created() {
+    <span style="color: #706565;">// </span><span style="color: #857575;">`this` points to the vm instance</span>
+    console.log(<span style="color: #ddbc91;">'count is: '</span> + <span style="color: #ab85a3;">this</span>.count)
+  }
+})
+</pre>
+</div>
+
+<p>
+还有更多钩子可以在生命循环的不同阶段使用，比如 mounted，updated，unmounted。调用所有生命周期钩子时，它们的 this 上下文指向调用它的当前活动实例。
+</p>
+
+<p>
+<span style="background-color: #FFFF00;">注意</span>：
+</p>
+
+<p>
+不要在选项属性或回调中使用箭头函数。例如， <code>created: () =&gt; console.log(this.a)</code> 或 <code>vm.$watch('a', newValue =&gt; this.myMethod())</code> 。因为箭头函数没有 <code>this</code> ，=this= 将作为任何其他变量处理，并通过父作用域进行词法查找，直到找到，经常产生错误，如 <code>Uncaught TypeError: Cannot read property of undefined</code> 或 <code>Uncaught TypeError: this.myMethod is not a function</code> 。
+</p>
+</div>
+</div>
+
+<div id="outline-container-org278846e" class="outline-2">
+<h2 id="org278846e"><span class="section-number-2">5</span> 生命周期图</h2>
+<div class="outline-text-2" id="text-5">
+<p>
+下面是一张生命周期实例图。
+</p>
+
+<img src="https://v3.vuejs.org/images/lifecycle.svg" style="display: block;margin: auto;">
 </div>
 </div>
 </div>
