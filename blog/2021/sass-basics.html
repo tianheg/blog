@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html lang="zh">
 <head>
-<!-- 2021-12-23 Thu 20:53 -->
+<!-- 2021-12-24 Fri 15:58 -->
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>Sass Basics</title>
@@ -226,11 +226,11 @@
 <h2>Table of Contents</h2>
 <div id="text-table-of-contents">
 <ul>
-<li><a href="#orgd320229">1. Preprocessing</a></li>
-<li><a href="#org302c1b7">2. Variables</a></li>
-<li><a href="#org6d5e4ce">3. Nesting</a></li>
-<li><a href="#orgde048af">4. Partials</a></li>
-<li><a href="#org7e1653c">5. Modules</a></li>
+<li><a href="#org89c6884">1. Preprocessing</a></li>
+<li><a href="#org40894ea">2. Variables</a></li>
+<li><a href="#org4e685af">3. Nesting</a></li>
+<li><a href="#orgb24099f">4. Partials</a></li>
+<li><a href="#org711ec2a">5. Modules</a></li>
 </ul>
 </div>
 </nav>
@@ -238,8 +238,8 @@
 <a href="https://sass-lang.com/guide">https://sass-lang.com/guide</a>
 </p>
 
-<div id="outline-container-orgd320229" class="outline-2">
-<h2 id="orgd320229"><span class="section-number-2">1</span> Preprocessing</h2>
+<div id="outline-container-org89c6884" class="outline-2">
+<h2 id="org89c6884"><span class="section-number-2">1</span> Preprocessing</h2>
 <div class="outline-text-2" id="text-1">
 <p>
 Sass 这一预处理工具，能够帮助我写作更具健壮性、可维护的 CSS。
@@ -261,8 +261,8 @@ sass --watch app/sass:public/stylesheets
 </div>
 </div>
 
-<div id="outline-container-org302c1b7" class="outline-2">
-<h2 id="org302c1b7"><span class="section-number-2">2</span> Variables</h2>
+<div id="outline-container-org40894ea" class="outline-2">
+<h2 id="org40894ea"><span class="section-number-2">2</span> Variables</h2>
 <div class="outline-text-2" id="text-2">
 <p>
 变量（Variables）可以存储需要重复使用的信息。
@@ -289,8 +289,8 @@ sass --watch app/sass:public/stylesheets
 </div>
 </div>
 
-<div id="outline-container-org6d5e4ce" class="outline-2">
-<h2 id="org6d5e4ce"><span class="section-number-2">3</span> Nesting</h2>
+<div id="outline-container-org4e685af" class="outline-2">
+<h2 id="org4e685af"><span class="section-number-2">3</span> Nesting</h2>
 <div class="outline-text-2" id="text-3">
 <p>
 Sass 能够处理和 HTML 一样，写出嵌套的 CSS。但注意不要滥用。
@@ -334,8 +334,8 @@ Sass 能够处理和 HTML 一样，写出嵌套的 CSS。但注意不要滥用�
 </div>
 </div>
 
-<div id="outline-container-orgde048af" class="outline-2">
-<h2 id="orgde048af"><span class="section-number-2">4</span> Partials</h2>
+<div id="outline-container-orgb24099f" class="outline-2">
+<h2 id="orgb24099f"><span class="section-number-2">4</span> Partials</h2>
 <div class="outline-text-2" id="text-4">
 <p>
 还可以创建一些小的代码片段，包含在一个主 Sass 文件中。代码片段可视为模块化的组件。代码片段文件的命名： <code>_filename.scss</code> ，有了 <code>_</code> 在编译时 不会生成 *.css 文件。在主 Sass 文件中，使用 <code>@use</code> 调用 partial 文件。
@@ -343,8 +343,8 @@ Sass 能够处理和 HTML 一样，写出嵌套的 CSS。但注意不要滥用�
 </div>
 </div>
 
-<div id="outline-container-org7e1653c" class="outline-2">
-<h2 id="org7e1653c"><span class="section-number-2">5</span> Modules</h2>
+<div id="outline-container-org711ec2a" class="outline-2">
+<h2 id="org711ec2a"><span class="section-number-2">5</span> Modules</h2>
 <div class="outline-text-2" id="text-5">
 <p>
 目前只有 Dart Sass 支持使用 <code>@use</code> 导入模块，其他分支（LibSass，Ruby Sass）需使用 <code>@import rule</code> ，后者已经<a href="https://sass-lang.com/documentation/at-rules/import">不鼓励使用</a>。
