@@ -11,6 +11,7 @@
       '(("pages"
          :base-directory "~/org/"
          :publishing-directory "~/repo/blog/"
+         :exclude "~/org/gtd/"
          :recursive t
          :html-head-include-default-style nil
          :html-head ""
