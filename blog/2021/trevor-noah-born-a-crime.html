@@ -1,0 +1,483 @@
+<!DOCTYPE html>
+<html lang="zh">
+<head>
+<!-- 2021-12-26 Sun 08:55 -->
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>天生有罪</title>
+<meta name="generator" content="Org mode">
+<style type="text/css">
+ <!--/*--><![CDATA[/*><!--*/
+  .title  { text-align: center;
+             margin-bottom: .2em; }
+  .subtitle { text-align: center;
+              font-size: medium;
+              font-weight: bold;
+              margin-top:0; }
+  .todo   { font-family: monospace; color: red; }
+  .done   { font-family: monospace; color: green; }
+  .priority { font-family: monospace; color: orange; }
+  .tag    { background-color: #eee; font-family: monospace;
+            padding: 2px; font-size: 80%; font-weight: normal; }
+  .timestamp { color: #bebebe; }
+  .timestamp-kwd { color: #5f9ea0; }
+  .org-right  { margin-left: auto; margin-right: 0px;  text-align: right; }
+  .org-left   { margin-left: 0px;  margin-right: auto; text-align: left; }
+  .org-center { margin-left: auto; margin-right: auto; text-align: center; }
+  .underline { text-decoration: underline; }
+  #postamble p, #preamble p { font-size: 90%; margin: .2em; }
+  p.verse { margin-left: 3%; }
+  pre {
+    border: 1px solid #ccc;
+    box-shadow: 3px 3px 3px #eee;
+    padding: 8pt;
+    font-family: monospace;
+    overflow: auto;
+    margin: 1.2em;
+  }
+  pre.src {
+    position: relative;
+    overflow: auto;
+    padding-top: 1.2em;
+  }
+  pre.src:before {
+    display: none;
+    position: absolute;
+    background-color: white;
+    top: -10px;
+    right: 10px;
+    padding: 3px;
+    border: 1px solid black;
+  }
+  pre.src:hover:before { display: inline; margin-top: 14px;}
+  /* Languages per Org manual */
+  pre.src-asymptote:before { content: 'Asymptote'; }
+  pre.src-awk:before { content: 'Awk'; }
+  pre.src-C:before { content: 'C'; }
+  /* pre.src-C++ doesn't work in CSS */
+  pre.src-clojure:before { content: 'Clojure'; }
+  pre.src-css:before { content: 'CSS'; }
+  pre.src-D:before { content: 'D'; }
+  pre.src-ditaa:before { content: 'ditaa'; }
+  pre.src-dot:before { content: 'Graphviz'; }
+  pre.src-calc:before { content: 'Emacs Calc'; }
+  pre.src-emacs-lisp:before { content: 'Emacs Lisp'; }
+  pre.src-fortran:before { content: 'Fortran'; }
+  pre.src-gnuplot:before { content: 'gnuplot'; }
+  pre.src-haskell:before { content: 'Haskell'; }
+  pre.src-hledger:before { content: 'hledger'; }
+  pre.src-java:before { content: 'Java'; }
+  pre.src-js:before { content: 'Javascript'; }
+  pre.src-latex:before { content: 'LaTeX'; }
+  pre.src-ledger:before { content: 'Ledger'; }
+  pre.src-lisp:before { content: 'Lisp'; }
+  pre.src-lilypond:before { content: 'Lilypond'; }
+  pre.src-lua:before { content: 'Lua'; }
+  pre.src-matlab:before { content: 'MATLAB'; }
+  pre.src-mscgen:before { content: 'Mscgen'; }
+  pre.src-ocaml:before { content: 'Objective Caml'; }
+  pre.src-octave:before { content: 'Octave'; }
+  pre.src-org:before { content: 'Org mode'; }
+  pre.src-oz:before { content: 'OZ'; }
+  pre.src-plantuml:before { content: 'Plantuml'; }
+  pre.src-processing:before { content: 'Processing.js'; }
+  pre.src-python:before { content: 'Python'; }
+  pre.src-R:before { content: 'R'; }
+  pre.src-ruby:before { content: 'Ruby'; }
+  pre.src-sass:before { content: 'Sass'; }
+  pre.src-scheme:before { content: 'Scheme'; }
+  pre.src-screen:before { content: 'Gnu Screen'; }
+  pre.src-sed:before { content: 'Sed'; }
+  pre.src-sh:before { content: 'shell'; }
+  pre.src-sql:before { content: 'SQL'; }
+  pre.src-sqlite:before { content: 'SQLite'; }
+  /* additional languages in org.el's org-babel-load-languages alist */
+  pre.src-forth:before { content: 'Forth'; }
+  pre.src-io:before { content: 'IO'; }
+  pre.src-J:before { content: 'J'; }
+  pre.src-makefile:before { content: 'Makefile'; }
+  pre.src-maxima:before { content: 'Maxima'; }
+  pre.src-perl:before { content: 'Perl'; }
+  pre.src-picolisp:before { content: 'Pico Lisp'; }
+  pre.src-scala:before { content: 'Scala'; }
+  pre.src-shell:before { content: 'Shell Script'; }
+  pre.src-ebnf2ps:before { content: 'ebfn2ps'; }
+  /* additional language identifiers per "defun org-babel-execute"
+       in ob-*.el */
+  pre.src-cpp:before  { content: 'C++'; }
+  pre.src-abc:before  { content: 'ABC'; }
+  pre.src-coq:before  { content: 'Coq'; }
+  pre.src-groovy:before  { content: 'Groovy'; }
+  /* additional language identifiers from org-babel-shell-names in
+     ob-shell.el: ob-shell is the only babel language using a lambda to put
+     the execution function name together. */
+  pre.src-bash:before  { content: 'bash'; }
+  pre.src-csh:before  { content: 'csh'; }
+  pre.src-ash:before  { content: 'ash'; }
+  pre.src-dash:before  { content: 'dash'; }
+  pre.src-ksh:before  { content: 'ksh'; }
+  pre.src-mksh:before  { content: 'mksh'; }
+  pre.src-posh:before  { content: 'posh'; }
+  /* Additional Emacs modes also supported by the LaTeX listings package */
+  pre.src-ada:before { content: 'Ada'; }
+  pre.src-asm:before { content: 'Assembler'; }
+  pre.src-caml:before { content: 'Caml'; }
+  pre.src-delphi:before { content: 'Delphi'; }
+  pre.src-html:before { content: 'HTML'; }
+  pre.src-idl:before { content: 'IDL'; }
+  pre.src-mercury:before { content: 'Mercury'; }
+  pre.src-metapost:before { content: 'MetaPost'; }
+  pre.src-modula-2:before { content: 'Modula-2'; }
+  pre.src-pascal:before { content: 'Pascal'; }
+  pre.src-ps:before { content: 'PostScript'; }
+  pre.src-prolog:before { content: 'Prolog'; }
+  pre.src-simula:before { content: 'Simula'; }
+  pre.src-tcl:before { content: 'tcl'; }
+  pre.src-tex:before { content: 'TeX'; }
+  pre.src-plain-tex:before { content: 'Plain TeX'; }
+  pre.src-verilog:before { content: 'Verilog'; }
+  pre.src-vhdl:before { content: 'VHDL'; }
+  pre.src-xml:before { content: 'XML'; }
+  pre.src-nxml:before { content: 'XML'; }
+  /* add a generic configuration mode; LaTeX export needs an additional
+     (add-to-list 'org-latex-listings-langs '(conf " ")) in .emacs */
+  pre.src-conf:before { content: 'Configuration File'; }
+
+  table { border-collapse:collapse; }
+  caption.t-above { caption-side: top; }
+  caption.t-bottom { caption-side: bottom; }
+  td, th { vertical-align:top;  }
+  th.org-right  { text-align: center;  }
+  th.org-left   { text-align: center;   }
+  th.org-center { text-align: center; }
+  td.org-right  { text-align: right;  }
+  td.org-left   { text-align: left;   }
+  td.org-center { text-align: center; }
+  dt { font-weight: bold; }
+  .footpara { display: inline; }
+  .footdef  { margin-bottom: 1em; }
+  .figure { padding: 1em; }
+  .figure p { text-align: center; }
+  .equation-container {
+    display: table;
+    text-align: center;
+    width: 100%;
+  }
+  .equation {
+    vertical-align: middle;
+  }
+  .equation-label {
+    display: table-cell;
+    text-align: right;
+    vertical-align: middle;
+  }
+  .inlinetask {
+    padding: 10px;
+    border: 2px solid gray;
+    margin: 10px;
+    background: #ffffcc;
+  }
+  #org-div-home-and-up
+   { text-align: right; font-size: 70%; white-space: nowrap; }
+  textarea { overflow-x: auto; }
+  .linenr { font-size: smaller }
+  .code-highlighted { background-color: #ffff00; }
+  .org-info-js_info-navigation { border-style: none; }
+  #org-info-js_console-label
+    { font-size: 10px; font-weight: bold; white-space: nowrap; }
+  .org-info-js_search-highlight
+    { background-color: #ffff00; color: #000000; font-weight: bold; }
+  .org-svg { width: 90%; }
+  /*]]>*/-->
+</style>
+<link rel="stylesheet" href="/theme/normalize.css"/>
+<link rel="stylesheet" href="/theme/site.css"/>
+<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin><link href="https://fonts.googleapis.com/css2?family=Noto+Sans+SC&display=swap" rel="stylesheet">
+<script defer src='https://static.cloudflareinsights.com/beacon.min.js' data-cf-beacon='{"token": "d5b841b503ed4d1b8fad459b84d1cc2f"}'></script>
+<script defer src="/theme/link.js"></script>
+<script type="text/javascript">
+// @license magnet:?xt=urn:btih:e95b018ef3580986a04669f1b5879592219e2a7a&dn=public-domain.txt Public Domain
+<!--/*--><![CDATA[/*><!--*/
+     function CodeHighlightOn(elem, id)
+     {
+       var target = document.getElementById(id);
+       if(null != target) {
+         elem.classList.add("code-highlighted");
+         target.classList.add("code-highlighted");
+       }
+     }
+     function CodeHighlightOff(elem, id)
+     {
+       var target = document.getElementById(id);
+       if(null != target) {
+         elem.classList.remove("code-highlighted");
+         target.classList.remove("code-highlighted");
+       }
+     }
+    /*]]>*///-->
+// @license-end
+</script>
+</head>
+<body>
+<div id="content">
+<header>
+<h1 class="title">天生有罪</h1>
+</header><nav id="table-of-contents">
+<h2>Table of Contents</h2>
+<div id="text-table-of-contents">
+<ul>
+<li><a href="#org8db5c17">1. 摘录</a></li>
+<li><a href="#orgeb269e4">2. 感悟</a></li>
+</ul>
+</div>
+</nav>
+
+<div id="outline-container-org8db5c17" class="outline-2">
+<h2 id="org8db5c17"><span class="section-number-2">1</span> 摘录</h2>
+<div class="outline-text-2" id="text-1">
+<blockquote>
+<p>
+从另一方面看，它也让我远离了现实。玛丽威尔是一块现实沙漠中的绿洲，一个非常舒适的地方，我在那里不需要做什么困难的抉择，但在现实中，种族歧视依然存在，人们依然会因此受伤。仅仅因为它没有发生在你身上，并不意味着它就不存在。在某一个时刻，你必须要做出选择，黑人还是白人，你得站个队。你可以试着逃避，你可以说："哦，我不站队的。"但在某个时刻，生活会强迫你站队。
+</p>
+</blockquote>
+
+<p>
+在某一时刻，生活会强迫我们做自己不愿意的选择。
+</p>
+
+<blockquote>
+<p>
+如果你总是想着你妈妈会打你，或者生活会惩罚你，你就不会再突破界限，打破规则。最好的是，你挨完打，哭一会儿，第二天醒来继续生活。身上可能会留下几块淤青，提醒你发生了什么，但没事的，过一段时间，淤青会褪去，而且它们褪去是有原因的-&#x2013;&#x2014;又到了该干点儿什么坏事的时候了。
+</p>
+</blockquote>
+
+<p>
+不怕挨打，打完了继续生活，这没什么。
+</p>
+
+<blockquote>
+<p>
+我相信芙菲是我的狗，当然这并不是真的。芙菲是只狗。我是个小孩。我们在一起玩得很开心。只是恰巧她住在我们家而已。这段经历影响了日后我对于感情的看法：你并不拥有你所爱的人
+</p>
+</blockquote>
+
+<p>
+你并不拥有你所爱的人。
+</p>
+
+<blockquote>
+<p>
+突然，我心里闪过了奇怪的一瞬。那个瞬间，我瞄到了那男孩脸上的恐惧，我意识到，亚伯的行为已经超过了要给我复仇这件事的限度。他不是在教训这个男生，而是在殴打他。作为一个成年人，他正在朝一个 12 岁的男孩发泄自己的怒火。从那个瞬间开始，我想法从“真好，我报仇了”，变成了“不不不不，过了，过了，哦天，哦天，哦天，老天啊，我都干了什么”？
+</p>
+</blockquote>
+
+<p>
+"我"让继父亚伯教训那个男生，但是亚伯却以成人的武力殴打他。
+</p>
+
+<blockquote>
+<p>
+"是啊，她也超级难过，因为她一直很喜欢你，一直在等你约她出去呢。好了，我要去上课了！拜拜！"
+她跑远了，留我站在原地，目瞪口呆。她一次性给了我太多信息，先是萨赫拉走了，再是她移民去美国了，最后是她原来一直喜欢我。就好像我连续经历了三次心碎的波涛，而且每一次都比前一次更加汹涌。我的思绪开始回到那些聊天的现场，在院子里，在电话里，每一次我都应该把那句话说出口："嘿，萨赫拉，我喜欢你。你愿意做我的女朋友吗？"就这十八个字，如果我能有勇气把它们说出来，也许我的一生会就此不同。但是我没说，现在她已经离开了。
+</p>
+</blockquote>
+
+<p>
+有些事情，当明白时已经无可挽回，错过就是永远。
+</p>
+
+<blockquote>
+<p>
+有钱后，我了解到的第一件事就是，钱给了你选择的权利。人们不是想要变得多富有，人们是想要选择的权利。你越有钱，你面前的选择就越多。这就是金钱带给你的自由。
+</p>
+</blockquote>
+
+<p>
+金钱带来选择的权利。
+</p>
+
+<blockquote>
+<p>
+"是，但是大学的压力会潜移默化地影响你。我了解你。你的性格是不会坐在原地，让你眼睁睁看着其他人都超过你的。如果你在一个积极进步的环境里，你也会变成积极进步的人。"
+</p>
+</blockquote>
+
+<p>
+"崔娃"的母亲如是说。找寻积极进步的环境。
+</p>
+
+<blockquote>
+<p>
+对于女人要向男人鞠躬的传统，我妈更是觉得荒谬至极，不过她也不完全拒绝，而是把这个动作做得很过火，以达到嘲讽的目的。其他女人会在男人面前很有礼貌地微微屈膝行礼，而我妈则会直接趴倒，蜷起身子，匍匐在地，好像在拜神一样，而且她会在地上一直趴着，趴很久很久，久到让所有人开始感到不适。
+</p>
+</blockquote>
+
+<p>
+睿智的母亲。
+</p>
+
+<blockquote>
+<p>
+我从没见过这样的场面。那时我才九岁，仍然以为警察都是好人。你有了麻烦，你去叫警察，那些人会一路闪着红蓝警灯，救你于水火之中。但是那天，我记得我站在那里，看着我妈妈目瞪口呆、惊慌失措的样子，因为这些警察不肯帮她。这时我才意识到，警察并不是我以为的那种形象。他们首先是男人，其次才是警察。
+</p>
+</blockquote>
+
+<p>
+性别歧视。
+</p>
+
+<blockquote>
+<p>
+"他以为他是世界警察，"她说，"但是世界的问题恰恰就在这里。我们身边有太多人连自己都管不好，却总想着去管教身边的其他人。"
+</p>
+</blockquote>
+
+<p>
+管好自己便已足够。
+</p>
+
+<blockquote>
+<p>
+我看看手机，显示是我母亲的电话号码，当我接起来时，电话那头却是安德鲁。他的声音听上去特别平静。
+</p>
+
+<p>
+"嘿，特雷弗，我是安德鲁。"
+</p>
+
+<p>
+"嘿。"
+</p>
+
+<p>
+"你好吗？"
+</p>
+
+<p>
+"好啊。怎么了？"
+</p>
+
+<p>
+"你在忙吗？"
+</p>
+
+<p>
+"我还有点儿困。怎么了？"
+</p>
+
+<p>
+"妈妈中枪了。"
+</p>
+
+<p>
+好吧，关于这通电话，有两个诡异的地方。首先，他为什么要问我忙不忙？你妈妈中枪了，你嘴里说的第一句话应该是“妈妈中枪了”，而不应该是“你好吗”，也不应该是“你在忙吗”。这让我很困惑。第二个诡异的地方是，当他说出，"妈妈中枪了"，我没有问“谁开的枪”，我不用问。他说，"妈妈中枪了"，我的脑中自动填补了剩下的内容："亚伯开枪打了妈妈。"
+</p>
+</blockquote>
+
+<p>
+我曾经看过“崔娃”讲这段故事时的视频片段，描述的时候蛮搞笑，但“崔娃”是在讲一件严肃的事情。这种对比给我一种冲击。
+</p>
+
+<blockquote>
+<p>
+"我们在从教堂回家的路上，"他说，依然极度平静，"爸爸在门口等着我们，他从车里走出来，就开枪了。"
+</p>
+
+<p>
+"往哪儿开枪？他打到她哪儿了？"
+</p>
+
+<p>
+"打在她腿上了。"
+</p>
+
+<p>
+"哦，好。"我松了口气。
+</p>
+
+<p>
+"然后朝她的头开了一枪。"
+</p>
+
+<p>
+听到这句话后，我的身体彻底软掉了。我现在还清楚地记得当时交通灯的颜色。*那一刻，周围的声音都没了，仿佛进入了真空。我大哭起来，我从来没有这么哭过。我崩溃了，抽泣不已，浑身颤抖。我哭得好像我为之前做过的事流的眼泪都是被浪费的眼泪*。我哭得特别厉害，此刻哭泣的我如果能够回到过去，看到以前那个为其他事情哭泣的我，一定会一巴掌扇过去，对过去的那些我说："这点儿破事哪里值得你哭。"*我哭并非出于悲伤，也不是在发泄，更不是在为自己伤心，而是在表达一种原始的伤痛，因为我的身体无法通过其他形式表达，所以我只能痛哭。她是我的妈妈，她是我的队友，从来都是我们两个人，是我和她在对抗整个世界*。当安德鲁说出“朝她的头开了一枪”时，我碎成了两半。
+</p>
+</blockquote>
+
+<p>
+当读到这段时，我也哭了，想到自己的母亲。
+</p>
+
+<blockquote>
+<p>
+"他的眼睛告诉我他不是在说谎。"他对我说。"那是魔鬼的眼睛。那一刻，我知道我的父亲已经不在了。"
+</p>
+</blockquote>
+
+<p>
+安德鲁对“我”说。"我的父亲"指亚伯，也是“我”（崔娃）的继父。
+</p>
+
+<blockquote>
+<p>
+我不想对你撒谎：那一刻我犹豫了。我犹豫了好一会儿。那一刻，我听到护士说的是，"你所有的钱都会搭进去"，然后我开始想，好吧&#x2026;&#x2026;她多大年纪来着，50 岁？挺好的了，是不是？她这辈子已经过得很好了。
+</p>
+</blockquote>
+
+<p>
+读到这里时我笑了。崔娃的幽默。
+</p>
+
+<blockquote>
+<p>
+我把那张信用卡紧紧按到护士的手心里。 "做你们能做的一切。救救我妈妈。"
+</p>
+</blockquote>
+
+<p>
+哈哈，还是妈妈重要。
+</p>
+
+<blockquote>
+<p>
+"我的孩子，你要看到好的一面。"
+</p>
+
+<p>
+"什么？你在说什么啊，'好的一面'？妈妈，你被子弹爆了头。这还有好的一面？"
+</p>
+
+<p>
+"当然有了。从现在起，你就正式成了这个家里最好看的人。"
+</p>
+
+<p>
+她脸上露出灿烂的笑容，哈哈大笑起来。尽管我还在泪流不止，但也忍不住笑了起来。我一边号啕大哭，一边歇斯底里地笑。我们坐在一起，她紧紧攥着我的手，我的母亲和她的儿子，我们像以前那样一起放声大笑，在那个明媚而阳光灿烂的美丽日子里，在重症监护病房中，为我们经历的这一切放声大笑。
+</p>
+</blockquote>
+
+<p>
+正因为有这样的母亲，崔娃才会如今天这般有成就，被众多人喜爱。
+</p>
+</div>
+</div>
+
+<div id="outline-container-orgeb269e4" class="outline-2">
+<h2 id="orgeb269e4"><span class="section-number-2">2</span> 感悟</h2>
+<div class="outline-text-2" id="text-2">
+<p>
+生活尽管有困难，但总有办法克服。保持着乐观坚强的心态，积极地面对每一个今天。不被不好的事情影响，即使被影响了也要尽快恢复。
+</p>
+
+<p>
+亲人是彼此的支柱。
+</p>
+
+<p>
+幽默是生活的调味剂。
+</p>
+</div>
+</div>
+</div>
+</body>
+</html>

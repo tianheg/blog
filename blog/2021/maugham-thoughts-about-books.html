@@ -1,0 +1,452 @@
+<!DOCTYPE html>
+<html lang="zh">
+<head>
+<!-- 2021-12-26 Sun 08:55 -->
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>读《读书随想录》</title>
+<meta name="generator" content="Org mode">
+<style type="text/css">
+ <!--/*--><![CDATA[/*><!--*/
+  .title  { text-align: center;
+             margin-bottom: .2em; }
+  .subtitle { text-align: center;
+              font-size: medium;
+              font-weight: bold;
+              margin-top:0; }
+  .todo   { font-family: monospace; color: red; }
+  .done   { font-family: monospace; color: green; }
+  .priority { font-family: monospace; color: orange; }
+  .tag    { background-color: #eee; font-family: monospace;
+            padding: 2px; font-size: 80%; font-weight: normal; }
+  .timestamp { color: #bebebe; }
+  .timestamp-kwd { color: #5f9ea0; }
+  .org-right  { margin-left: auto; margin-right: 0px;  text-align: right; }
+  .org-left   { margin-left: 0px;  margin-right: auto; text-align: left; }
+  .org-center { margin-left: auto; margin-right: auto; text-align: center; }
+  .underline { text-decoration: underline; }
+  #postamble p, #preamble p { font-size: 90%; margin: .2em; }
+  p.verse { margin-left: 3%; }
+  pre {
+    border: 1px solid #ccc;
+    box-shadow: 3px 3px 3px #eee;
+    padding: 8pt;
+    font-family: monospace;
+    overflow: auto;
+    margin: 1.2em;
+  }
+  pre.src {
+    position: relative;
+    overflow: auto;
+    padding-top: 1.2em;
+  }
+  pre.src:before {
+    display: none;
+    position: absolute;
+    background-color: white;
+    top: -10px;
+    right: 10px;
+    padding: 3px;
+    border: 1px solid black;
+  }
+  pre.src:hover:before { display: inline; margin-top: 14px;}
+  /* Languages per Org manual */
+  pre.src-asymptote:before { content: 'Asymptote'; }
+  pre.src-awk:before { content: 'Awk'; }
+  pre.src-C:before { content: 'C'; }
+  /* pre.src-C++ doesn't work in CSS */
+  pre.src-clojure:before { content: 'Clojure'; }
+  pre.src-css:before { content: 'CSS'; }
+  pre.src-D:before { content: 'D'; }
+  pre.src-ditaa:before { content: 'ditaa'; }
+  pre.src-dot:before { content: 'Graphviz'; }
+  pre.src-calc:before { content: 'Emacs Calc'; }
+  pre.src-emacs-lisp:before { content: 'Emacs Lisp'; }
+  pre.src-fortran:before { content: 'Fortran'; }
+  pre.src-gnuplot:before { content: 'gnuplot'; }
+  pre.src-haskell:before { content: 'Haskell'; }
+  pre.src-hledger:before { content: 'hledger'; }
+  pre.src-java:before { content: 'Java'; }
+  pre.src-js:before { content: 'Javascript'; }
+  pre.src-latex:before { content: 'LaTeX'; }
+  pre.src-ledger:before { content: 'Ledger'; }
+  pre.src-lisp:before { content: 'Lisp'; }
+  pre.src-lilypond:before { content: 'Lilypond'; }
+  pre.src-lua:before { content: 'Lua'; }
+  pre.src-matlab:before { content: 'MATLAB'; }
+  pre.src-mscgen:before { content: 'Mscgen'; }
+  pre.src-ocaml:before { content: 'Objective Caml'; }
+  pre.src-octave:before { content: 'Octave'; }
+  pre.src-org:before { content: 'Org mode'; }
+  pre.src-oz:before { content: 'OZ'; }
+  pre.src-plantuml:before { content: 'Plantuml'; }
+  pre.src-processing:before { content: 'Processing.js'; }
+  pre.src-python:before { content: 'Python'; }
+  pre.src-R:before { content: 'R'; }
+  pre.src-ruby:before { content: 'Ruby'; }
+  pre.src-sass:before { content: 'Sass'; }
+  pre.src-scheme:before { content: 'Scheme'; }
+  pre.src-screen:before { content: 'Gnu Screen'; }
+  pre.src-sed:before { content: 'Sed'; }
+  pre.src-sh:before { content: 'shell'; }
+  pre.src-sql:before { content: 'SQL'; }
+  pre.src-sqlite:before { content: 'SQLite'; }
+  /* additional languages in org.el's org-babel-load-languages alist */
+  pre.src-forth:before { content: 'Forth'; }
+  pre.src-io:before { content: 'IO'; }
+  pre.src-J:before { content: 'J'; }
+  pre.src-makefile:before { content: 'Makefile'; }
+  pre.src-maxima:before { content: 'Maxima'; }
+  pre.src-perl:before { content: 'Perl'; }
+  pre.src-picolisp:before { content: 'Pico Lisp'; }
+  pre.src-scala:before { content: 'Scala'; }
+  pre.src-shell:before { content: 'Shell Script'; }
+  pre.src-ebnf2ps:before { content: 'ebfn2ps'; }
+  /* additional language identifiers per "defun org-babel-execute"
+       in ob-*.el */
+  pre.src-cpp:before  { content: 'C++'; }
+  pre.src-abc:before  { content: 'ABC'; }
+  pre.src-coq:before  { content: 'Coq'; }
+  pre.src-groovy:before  { content: 'Groovy'; }
+  /* additional language identifiers from org-babel-shell-names in
+     ob-shell.el: ob-shell is the only babel language using a lambda to put
+     the execution function name together. */
+  pre.src-bash:before  { content: 'bash'; }
+  pre.src-csh:before  { content: 'csh'; }
+  pre.src-ash:before  { content: 'ash'; }
+  pre.src-dash:before  { content: 'dash'; }
+  pre.src-ksh:before  { content: 'ksh'; }
+  pre.src-mksh:before  { content: 'mksh'; }
+  pre.src-posh:before  { content: 'posh'; }
+  /* Additional Emacs modes also supported by the LaTeX listings package */
+  pre.src-ada:before { content: 'Ada'; }
+  pre.src-asm:before { content: 'Assembler'; }
+  pre.src-caml:before { content: 'Caml'; }
+  pre.src-delphi:before { content: 'Delphi'; }
+  pre.src-html:before { content: 'HTML'; }
+  pre.src-idl:before { content: 'IDL'; }
+  pre.src-mercury:before { content: 'Mercury'; }
+  pre.src-metapost:before { content: 'MetaPost'; }
+  pre.src-modula-2:before { content: 'Modula-2'; }
+  pre.src-pascal:before { content: 'Pascal'; }
+  pre.src-ps:before { content: 'PostScript'; }
+  pre.src-prolog:before { content: 'Prolog'; }
+  pre.src-simula:before { content: 'Simula'; }
+  pre.src-tcl:before { content: 'tcl'; }
+  pre.src-tex:before { content: 'TeX'; }
+  pre.src-plain-tex:before { content: 'Plain TeX'; }
+  pre.src-verilog:before { content: 'Verilog'; }
+  pre.src-vhdl:before { content: 'VHDL'; }
+  pre.src-xml:before { content: 'XML'; }
+  pre.src-nxml:before { content: 'XML'; }
+  /* add a generic configuration mode; LaTeX export needs an additional
+     (add-to-list 'org-latex-listings-langs '(conf " ")) in .emacs */
+  pre.src-conf:before { content: 'Configuration File'; }
+
+  table { border-collapse:collapse; }
+  caption.t-above { caption-side: top; }
+  caption.t-bottom { caption-side: bottom; }
+  td, th { vertical-align:top;  }
+  th.org-right  { text-align: center;  }
+  th.org-left   { text-align: center;   }
+  th.org-center { text-align: center; }
+  td.org-right  { text-align: right;  }
+  td.org-left   { text-align: left;   }
+  td.org-center { text-align: center; }
+  dt { font-weight: bold; }
+  .footpara { display: inline; }
+  .footdef  { margin-bottom: 1em; }
+  .figure { padding: 1em; }
+  .figure p { text-align: center; }
+  .equation-container {
+    display: table;
+    text-align: center;
+    width: 100%;
+  }
+  .equation {
+    vertical-align: middle;
+  }
+  .equation-label {
+    display: table-cell;
+    text-align: right;
+    vertical-align: middle;
+  }
+  .inlinetask {
+    padding: 10px;
+    border: 2px solid gray;
+    margin: 10px;
+    background: #ffffcc;
+  }
+  #org-div-home-and-up
+   { text-align: right; font-size: 70%; white-space: nowrap; }
+  textarea { overflow-x: auto; }
+  .linenr { font-size: smaller }
+  .code-highlighted { background-color: #ffff00; }
+  .org-info-js_info-navigation { border-style: none; }
+  #org-info-js_console-label
+    { font-size: 10px; font-weight: bold; white-space: nowrap; }
+  .org-info-js_search-highlight
+    { background-color: #ffff00; color: #000000; font-weight: bold; }
+  .org-svg { width: 90%; }
+  /*]]>*/-->
+</style>
+<link rel="stylesheet" href="/theme/normalize.css"/>
+<link rel="stylesheet" href="/theme/site.css"/>
+<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin><link href="https://fonts.googleapis.com/css2?family=Noto+Sans+SC&display=swap" rel="stylesheet">
+<script defer src='https://static.cloudflareinsights.com/beacon.min.js' data-cf-beacon='{"token": "d5b841b503ed4d1b8fad459b84d1cc2f"}'></script>
+<script defer src="/theme/link.js"></script>
+<script type="text/javascript">
+// @license magnet:?xt=urn:btih:e95b018ef3580986a04669f1b5879592219e2a7a&dn=public-domain.txt Public Domain
+<!--/*--><![CDATA[/*><!--*/
+     function CodeHighlightOn(elem, id)
+     {
+       var target = document.getElementById(id);
+       if(null != target) {
+         elem.classList.add("code-highlighted");
+         target.classList.add("code-highlighted");
+       }
+     }
+     function CodeHighlightOff(elem, id)
+     {
+       var target = document.getElementById(id);
+       if(null != target) {
+         elem.classList.remove("code-highlighted");
+         target.classList.remove("code-highlighted");
+       }
+     }
+    /*]]>*///-->
+// @license-end
+</script>
+</head>
+<body>
+<div id="content">
+<header>
+<h1 class="title">读《读书随想录》</h1>
+</header><nav id="table-of-contents">
+<h2>Table of Contents</h2>
+<div id="text-table-of-contents">
+<ul>
+<li><a href="#orge2b199d">1. 我为你开列的英国文学清单</a></li>
+<li><a href="#orga0fc463">2. 其实人人都和哲学有关</a></li>
+<li><a href="#org87f0013">3. “真、美、善”之我见</a></li>
+<li><a href="#org1d599c8">4. 《堂吉诃德》与《蒙田随笔》</a></li>
+<li><a href="#org4b92953">5. 艾米莉·博朗特的《呼啸山庄》</a></li>
+<li><a href="#orgc6f3769">6. 列夫·托尔斯泰《战争与和平》</a></li>
+</ul>
+</div>
+</nav>
+<blockquote>
+<p>
+读书应该是一种享受。不错，有为了对付考试，或者为了获得资料，有些书我们不得不读，但读那种书是不可能得到享受的。我们只是为了增进知识才读它们，所希望的也只是它们能满足我们的需要，至多希望它们不至于沉闷得难以猝读。我们读那种书是不得不读，而不是喜欢读。这当然不是我现在要谈的读书。我要谈的读书，它既不能帮你获得学位，也不能帮你谋生；既不会教你怎样驾船，也不会教你怎样修机器，却可以使你生活得更充实。只是，要想得到这样的好处，你必须喜欢读才行。
+</p>
+</blockquote>
+
+<blockquote>
+<p>
+我自己就喜欢同时读四五本书，因为我们的心情毕竟天天都在变化，即使在一天里，也不是每小时都热切地想读某本书的。我们必须适应这样的情况。
+</p>
+
+<p>
+我当然采取了最适合我自己的办法。早晨开始工作前，我总是读一点科学或者哲学方面的著作，因为读这类书需要头脑清醒、思想集中，这有助于我一天的工作。等工作做完后，我觉得很轻松，就不想再进行紧张的脑力活动了，这时我便读历史、散文、评论或者传记；晚上，我看小说。此外，我手边总有一本诗集，兴之所至就读上一段，而在我床头，则放着一本既可以随便从哪里开始读、又可以随便读到哪里都能放得下的书。可惜的是，这样的书很少见。
+</p>
+</blockquote>
+
+<p>
+跳跃式阅读
+</p>
+
+<blockquote>
+<p>
+道德标准不是一成不变的，原因是它和人的行为举止密切相关，而我们大家都知道，人的行为往往是虚伪的、复杂的和多变的。
+</p>
+</blockquote>
+
+<p>
+人的行为是虚伪的
+</p>
+
+<div id="outline-container-orge2b199d" class="outline-2">
+<h2 id="orge2b199d"><span class="section-number-2">1</span> 我为你开列的英国文学清单</h2>
+<div class="outline-text-2" id="text-1">
+<p>
+小说：
+</p>
+
+<ul class="org-ul">
+<li>笛福《摩尔·弗兰德斯》</li>
+<li>斯威夫特《格列佛游记》</li>
+<li>菲尔丁《汤姆·琼斯》</li>
+<li>斯特恩《项狄传》《感伤的旅行》</li>
+<li>包斯维尔《塞缪尔·约翰逊传》《赫布雷德群岛游记》</li>
+<li>塞缪尔·约翰逊《诗人传》</li>
+<li>吉本《自传》</li>
+</ul>
+
+<blockquote>
+<p>
+作为情人，我叹息；作为儿子，我服从；我的创伤，由于时间、分离和新的生活习惯，便不知不觉痊愈了。——吉本《自传》
+</p>
+</blockquote>
+
+<ul class="org-ul">
+<li>狄更斯《大卫·科波菲尔》</li>
+<li>勃特勒《众生之路》</li>
+<li>简·奥斯丁《曼菲斯尔德庄园》</li>
+<li>赫兹里特《桌边漫谈》</li>
+<li>萨克雷《名利场》</li>
+<li>艾米丽·勃朗特《呼啸山庄》</li>
+<li>梅瑞狄斯《利己主义者》</li>
+<li>乔治·艾略特《米德尔马契》</li>
+</ul>
+
+<p>
+诗歌：
+</p>
+
+<ul class="org-ul">
+<li>帕格雷夫《黄金诗库》《牛津英诗选》</li>
+<li>杰拉尔德·布莱特《英国短诗精华》</li>
+<li>莎士比亚</li>
+<li>罗伯特·勃利奇斯《人之精神》</li>
+</ul>
+
+<blockquote>
+<p>
+不读书的人不经常思考，所以也不经常有话可谈。——塞缪尔·约翰逊写给女友施雷尔的信
+</p>
+</blockquote>
+</div>
+</div>
+
+<div id="outline-container-orga0fc463" class="outline-2">
+<h2 id="orga0fc463"><span class="section-number-2">2</span> 其实人人都和哲学有关</h2>
+<div class="outline-text-2" id="text-2">
+<blockquote>
+<p>
+决定论者认为，你在生活中没有一个举动不是由你是怎样一个人所决定的；你不仅是你的肌肉、你的神经、你的内脏和你的脑子，同时也是你的习惯、你的见解和你的各种各样的想法——所有这些，不管你对它们知道得多么少，也不管他们多么矛盾、多么偏狭、多么荒诞，它们存在着，而且影响着你的行为反应。
+</p>
+</blockquote>
+
+<blockquote>
+<p>
+大多数人也许并不想用某种形式把它们表现出来。他们所有的，很难说是思想，至少不是有意识的思想，而是一种模糊的感觉，一种就像生理学家不久前刚发现的肌肉感那样的经验。这种感觉是他们各自从社会流行观念中获得的，同时又根据自已的经验稍稍加以改变。他们过着有秩序的生活，有这样一种思想和感觉的混合体就可以了。由手其中含有某些世代累积起来的智慧，它是和日常生活的一般需要相适应的。但是，我却想形成我自己的思维模式，而且从年轻的时候起就想弄明白，哪些是我必须去面对的重要问题。我尽力想获得有关宇宙总体构造的知识；我想作出决断，我是否只需要考虑此生呢，还是只需要考虑来生？我想搞清楚，我是完全自由的呢，还是出于一种幻觉才自以为在按自己的意志行事？我想知道，人生是本来就有意义的呢，还是必须由我来赋予它某种意义？于是，我便开始杂乱无序地读各种各样的书。
+</p>
+</blockquote>
+</div>
+</div>
+
+<div id="outline-container-org87f0013" class="outline-2">
+<h2 id="org87f0013"><span class="section-number-2">3</span> “真、美、善”之我见</h2>
+<div class="outline-text-2" id="text-3">
+<p>
+真善美很可能是人类出于实际需要而形成的理念。
+</p>
+
+<blockquote>
+<p>
+人并不以“真”为生，而是靠骗为业；他的理想主义，有时在我看来，也不过是想借“真”的名义弄虚作假，以此满足他的自负心理罢了。
+</p>
+</blockquote>
+
+<p>
+或许我就是如此。
+</p>
+
+<p>
+能给人带来想象力的作品往往更使我喜爱。
+</p>
+
+<p>
+不要真正达到完美，因为一览众山小。
+</p>
+
+<blockquote>
+<p>
+美是相对于一代人的特殊需要而言的。
+</p>
+
+<p>
+那些在审美方面特别敏感的人，在性欲方面也往往趋于极端，甚至是病态的。
+</p>
+
+<p>
+神秘论者说，除非能提高人的品性而且能使人有更多的能力去做好事。否则再大的欣喜也是毫无意义的。它的价值就在于实际效用。
+</p>
+</blockquote>
+
+<p>
+我不这么认为，我认为美是一种精神享受。它不应该和实际相关。
+</p>
+
+<blockquote>
+<p>
+他们总是自命不凡；他们自己不善于处理生活中的实际事务，却又瞧不起安分守己地从事平凡工作的人；他们自以为读过许多书或者看过许多画，就可以高人一等；他们借艺术来逃避现实生活，还愚昧无知地鄙夷日常事务，贬低人类的基本活动；他们其实比吸毒成瘾的人好不了多少，甚至更坏，因为吸毒成瘾的人至少还不像他们那样自以为是、盛气凌人。
+</p>
+
+<p>
+如果它是一种安慰，那就可以了；世界不可避免地充满邪恶，若能有一方净土可使人隐退一阵，那当然很好；但是不是为了逃避邪恶，而是为了积聚力量去面对邪恶。
+</p>
+</blockquote>
+
+<blockquote>
+<p>
+人生的大悲剧不是因为人会死，而是因为人会停止爱。你爱的人不再爱你了，这不是生活中的一个小小的不幸，而是一种简直不可原谅的罪恶；当拉罗什福科发现两个情人之间总是一个爱、一个被爱时，他便用一句格言说出了这种不和谐状态，而正因为这种不和谐，人们将永远不可能获得幸福美满的爱情。不管人们多么讨厌，也不管他们多么愤怒地予以否认，毋庸置疑的事实是，爱情是以一定的性腺分泌为基础的。绝大多数人的性腺都不会无限制地受同一个对象的刺激而经久不衰地分泌；再说，随着年事增长，性腺也会萎缩。人们在这方面都很虚伪，都不愿面对现实。当他们的爱情已衰退成他们所谓的坚贞不渝的爱怜时，他们是那样的自欺欺人，甚至还为此沾沾自喜，好像爱怜和爱情是同一回事！爱怜之情产生于习惯、利害关系、生活便利和有人做伴的需要，它与其说令人兴奋，不如说令人安宁。我们是变化的产物，变化是我们赖以生存的必要条件，难道作为我们最强烈的本能之一的性本能就能背离这一法则吗？今年的我们不再是去年的我们，我们所爱的人也不再是去年的那个人，要是我们自己变了，却还能继续爱一个同样也变了的人，那是幸运所致。在绝大多数情况下，由于自己变了，我们就得做出巨大的努力，才能勉强地继续爱一个我们曾经爱过而如今已经变了的人，这只是因为爱情的力量在抓住我们时曾是那么强大，以至于我们总相信它是经久不衰的，一旦它变弱了，我们便自觉惭愧，觉得受了骗，就责怪自己不够坚贞，而实际上，我们应该把自己的变心看作是人类本性的自然结果。
+</p>
+</blockquote>
+
+<blockquote>
+<p>
+至于那些伟大的历史人物，如但丁、提香、莎士比亚和斯宾诺莎等，要对他们表示敬意，最好的办法是把他们当做我们的同时代人，和他们亲密无间，而不是对他们顶礼膜拜，这样才是真正表示我们的最高敬意，因为和他们亲密无间也就是认为他们依然活在我们中间。
+</p>
+</blockquote>
+
+<p>
+表示敬意的最好选择：和他们亲密无间。
+</p>
+
+<blockquote>
+<p>
+美好之人生，不外乎各人顺其性情，做好分内之事
+</p>
+</blockquote>
+</div>
+</div>
+
+<div id="outline-container-org1d599c8" class="outline-2">
+<h2 id="org1d599c8"><span class="section-number-2">4</span> 《堂吉诃德》与《蒙田随笔》</h2>
+<div class="outline-text-2" id="text-4">
+<blockquote>
+<p>
+他的怀疑论使他对人对己都很宽容——一种我们今天特别需要的美德——这种宽容来自对人类的兴趣和对生活的热爱，而反过来，只要抱着宽容的态度，我们对自己的生活会更加热爱，对他人的幸福也会更加关心。
+</p>
+</blockquote>
+</div>
+</div>
+
+<div id="outline-container-org4b92953" class="outline-2">
+<h2 id="org4b92953"><span class="section-number-2">5</span> 艾米莉·博朗特的《呼啸山庄》</h2>
+<div class="outline-text-2" id="text-5">
+<blockquote>
+<p>
+这是因为她在故事中把她自己内心深处的东西泄露了出来。她深入到自己寂寞的内心的最底层，并在那里发现了许多不可告人的秘密，与此同时一种创作冲动又使她不得不把这些秘密遮遮盖盖地讲出来，以此卸下心中的负担。
+</p>
+</blockquote>
+</div>
+</div>
+
+<div id="outline-container-orgc6f3769" class="outline-2">
+<h2 id="orgc6f3769"><span class="section-number-2">6</span> 列夫·托尔斯泰《战争与和平》</h2>
+<div class="outline-text-2" id="text-6">
+<blockquote>
+<p>
+他从卡拉塔耶夫那里认识到“人类幸福只能从内心找寻，它来自对人类简单需要的满足，不幸的根源不是贫穷，而是过于富足，生命中没有什么困难是无法面对的”。最终他发现自己终于找到了多年来一直在寻找的东西——内心的安宁与平静。
+</p>
+</blockquote>
+
+<p>
+这也是我一直在寻找的东西。</p>
+</div>
+</div>
+</div>
+</body>
+</html>
