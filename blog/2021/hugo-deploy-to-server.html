@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html lang="zh">
 <head>
-<!-- 2021-12-26 Sun 10:30 -->
+<!-- 2021-12-26 Sun 21:28 -->
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>部署 Hugo 博客到 Ubuntu 服务器</title>
@@ -226,20 +226,20 @@
 <h2>Table of Contents</h2>
 <div id="text-table-of-contents">
 <ul>
-<li><a href="#orgeac410a">1. 安装 Hugo</a></li>
-<li><a href="#orge1c1066">2. 克隆仓库，本地预览</a></li>
-<li><a href="#org67ccc9c">3. 安装并配置 Nginx 服务器</a></li>
-<li><a href="#orgeaa45e7">4. 从云服务商下载 HTTPS 证书</a></li>
-<li><a href="#orgc9e86da">5. Shell 脚本快速更新博客</a></li>
-<li><a href="#orgec85057">6. 迁移博客到服务器</a></li>
-<li><a href="#org052cc21">7. 另一种部署方式——Git Hooks</a></li>
-<li><a href="#org7f60599">8. 参考资料</a></li>
+<li><a href="#org61ec786">1. 安装 Hugo</a></li>
+<li><a href="#org7d0c2e9">2. 克隆仓库，本地预览</a></li>
+<li><a href="#org431e1c8">3. 安装并配置 Nginx 服务器</a></li>
+<li><a href="#org525d2e1">4. 从云服务商下载 HTTPS 证书</a></li>
+<li><a href="#orgb0fafec">5. Shell 脚本快速更新博客</a></li>
+<li><a href="#orgc5b7bc2">6. 迁移博客到服务器</a></li>
+<li><a href="#org5948a46">7. 另一种部署方式——Git Hooks</a></li>
+<li><a href="#org361462d">8. 参考资料</a></li>
 </ul>
 </div>
 </nav>
 
-<div id="outline-container-orgeac410a" class="outline-2">
-<h2 id="orgeac410a"><span class="section-number-2">1</span> 安装 Hugo</h2>
+<div id="outline-container-org61ec786" class="outline-2">
+<h2 id="org61ec786"><span class="section-number-2">1</span> 安装 Hugo</h2>
 <div class="outline-text-2" id="text-1">
 <div class="org-src-container">
 <pre class="src src-sh"><span style="color: #9fbfdf;">export</span> <span style="color: #aaca86;">HUGO_VERSION</span>=<span style="color: #ddbc91;">"0.88.1"</span>
@@ -250,8 +250,8 @@ sudo apt-get install ./hugo_extended_${<span style="color: #aaca86;">HUGO_VERSIO
 </div>
 </div>
 
-<div id="outline-container-orge1c1066" class="outline-2">
-<h2 id="orge1c1066"><span class="section-number-2">2</span> 克隆仓库，本地预览</h2>
+<div id="outline-container-org7d0c2e9" class="outline-2">
+<h2 id="org7d0c2e9"><span class="section-number-2">2</span> 克隆仓库，本地预览</h2>
 <div class="outline-text-2" id="text-2">
 <div class="org-src-container">
 <pre class="src src-sh"><span style="color: #9fbfdf;">cd</span> ~
@@ -263,8 +263,8 @@ hugo server --bind 0.0.0.0 --baseURL http://ip:1313
 </div>
 </div>
 
-<div id="outline-container-org67ccc9c" class="outline-2">
-<h2 id="org67ccc9c"><span class="section-number-2">3</span> 安装并配置 Nginx 服务器</h2>
+<div id="outline-container-org431e1c8" class="outline-2">
+<h2 id="org431e1c8"><span class="section-number-2">3</span> 安装并配置 Nginx 服务器</h2>
 <div class="outline-text-2" id="text-3">
 <div class="org-src-container">
 <pre class="src src-sh">sudo apt-get install nginx
@@ -302,8 +302,8 @@ hugo server --bind 0.0.0.0 --baseURL http://ip:1313
 </div>
 </div>
 
-<div id="outline-container-orgeaa45e7" class="outline-2">
-<h2 id="orgeaa45e7"><span class="section-number-2">4</span> 从云服务商下载 HTTPS 证书</h2>
+<div id="outline-container-org525d2e1" class="outline-2">
+<h2 id="org525d2e1"><span class="section-number-2">4</span> 从云服务商下载 HTTPS 证书</h2>
 <div class="outline-text-2" id="text-4">
 <p>
 证书压缩文件里包含了很多服务器的文件夹，找到 Nginx 的文件夹，重命名两个文件为 <code>domain.crt</code> ， <code>domain.key</code> 。并将两个文件放到 <code>/etc/nginx/ssl/</code> 文件夹下（如果不存在 ssl 文件夹，需要新建）。
@@ -311,8 +311,8 @@ hugo server --bind 0.0.0.0 --baseURL http://ip:1313
 </div>
 </div>
 
-<div id="outline-container-orgc9e86da" class="outline-2">
-<h2 id="orgc9e86da"><span class="section-number-2">5</span> Shell 脚本快速更新博客</h2>
+<div id="outline-container-orgb0fafec" class="outline-2">
+<h2 id="orgb0fafec"><span class="section-number-2">5</span> Shell 脚本快速更新博客</h2>
 <div class="outline-text-2" id="text-5">
 <p>
 制作了一个很简单的脚本 <code>update-blog.sh</code> ：
@@ -332,8 +332,8 @@ sudo hugo -d /var/www/hugo
 </div>
 </div>
 
-<div id="outline-container-orgec85057" class="outline-2">
-<h2 id="orgec85057"><span class="section-number-2">6</span> 迁移博客到服务器</h2>
+<div id="outline-container-orgc5b7bc2" class="outline-2">
+<h2 id="orgc5b7bc2"><span class="section-number-2">6</span> 迁移博客到服务器</h2>
 <div class="outline-text-2" id="text-6">
 <p>
 把以上过程中的域名换为 <code>blog.yidajiabei.xyz</code> 。更新博客的脚本改为：
@@ -377,8 +377,8 @@ sudo hugo -d /var/www/hugo
 </div>
 </div>
 
-<div id="outline-container-org052cc21" class="outline-2">
-<h2 id="org052cc21"><span class="section-number-2">7</span> 另一种部署方式——Git Hooks</h2>
+<div id="outline-container-org5948a46" class="outline-2">
+<h2 id="org5948a46"><span class="section-number-2">7</span> 另一种部署方式——Git Hooks</h2>
 <div class="outline-text-2" id="text-7">
 <p>
 参见<a href="git-server-hook.html">云服务器配置 Git 仓库托管并使用 Git Hooks 自动执行脚本</a>
@@ -386,8 +386,8 @@ sudo hugo -d /var/www/hugo
 </div>
 </div>
 
-<div id="outline-container-org7f60599" class="outline-2">
-<h2 id="org7f60599"><span class="section-number-2">8</span> 参考资料</h2>
+<div id="outline-container-org361462d" class="outline-2">
+<h2 id="org361462d"><span class="section-number-2">8</span> 参考资料</h2>
 <div class="outline-text-2" id="text-8">
 <ol class="org-ol">
 <li><a href="https://gideonwolfe.com/posts/sysadmin/hugonginx/">https://gideonwolfe.com/posts/sysadmin/hugonginx/</a></li>

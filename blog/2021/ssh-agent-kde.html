@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html lang="zh">
 <head>
-<!-- 2021-12-26 Sun 10:32 -->
+<!-- 2021-12-26 Sun 21:29 -->
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>KDE 开机自启 ssh agent，加载密匙</title>
@@ -226,22 +226,24 @@
 <h2>Table of Contents</h2>
 <div id="text-table-of-contents">
 <ul>
-<li><a href="#orga05ad5d">1. Kwallet</a></li>
-<li><a href="#org2526456">2. 开机启动 ssh-agent</a></li>
-<li><a href="#orga185e4b">3. 开机添加 ssh 密匙</a></li>
-<li><a href="#org0204aa8">4. 环境变量与普通应用</a></li>
+<li><a href="#org26f3527">1. Kwallet</a></li>
+<li><a href="#orgc7d4cd6">2. 开机启动 ssh-agent</a></li>
+<li><a href="#org27bdaaf">3. 开机添加 ssh 密匙</a></li>
+<li><a href="#org3d3490f">4. 环境变量与普通应用</a></li>
 </ul>
 </div>
 </nav>
 <ol class="org-ol">
-<li></li>
+<li><a href="https://wiki.archlinux.org/title/KDE_Wallet#Using_the_KDE_Wallet_to_store_ssh_key_passphrases">Using the KDE Wallet to store ssh key passphrases</a></li>
+<li><a href="https://dev.to/manekenpix/kde-plasma-ssh-keys-111e">KDE Plasma &amp; ssh keys</a></li>
 </ol>
+
 <p>
 <a href="https://userbase.kde.org/KDE_Wallet_Manager">Kwallet</a> 是 Linux 桌面管理器 KDE 下的一款管理密码的应用。
 </p>
 
-<div id="outline-container-orga05ad5d" class="outline-2">
-<h2 id="orga05ad5d"><span class="section-number-2">1</span> Kwallet</h2>
+<div id="outline-container-org26f3527" class="outline-2">
+<h2 id="org26f3527"><span class="section-number-2">1</span> Kwallet</h2>
 <div class="outline-text-2" id="text-1">
 <p>
 创建一个新钱包，并为它设置密码。
@@ -249,8 +251,8 @@
 </div>
 </div>
 
-<div id="outline-container-org2526456" class="outline-2">
-<h2 id="org2526456"><span class="section-number-2">2</span> 开机启动 ssh-agent</h2>
+<div id="outline-container-orgc7d4cd6" class="outline-2">
+<h2 id="orgc7d4cd6"><span class="section-number-2">2</span> 开机启动 ssh-agent</h2>
 <div class="outline-text-2" id="text-2">
 <p>
 确保安装了 <a href="https://github.com/KDE/ksshaskpass">Ksshaskpass</a>。
@@ -282,8 +284,8 @@
 </div>
 </div>
 
-<div id="outline-container-orga185e4b" class="outline-2">
-<h2 id="orga185e4b"><span class="section-number-2">3</span> 开机添加 ssh 密匙</h2>
+<div id="outline-container-org27bdaaf" class="outline-2">
+<h2 id="org27bdaaf"><span class="section-number-2">3</span> 开机添加 ssh 密匙</h2>
 <div class="outline-text-2" id="text-3">
 <p>
 新建文件 <code>~/.config/autostart/ssh-add.desktop</code> ：
@@ -299,8 +301,8 @@
 </div>
 </div>
 
-<div id="outline-container-org0204aa8" class="outline-2">
-<h2 id="org0204aa8"><span class="section-number-2">4</span> 环境变量与普通应用</h2>
+<div id="outline-container-org3d3490f" class="outline-2">
+<h2 id="org3d3490f"><span class="section-number-2">4</span> 环境变量与普通应用</h2>
 <div class="outline-text-2" id="text-4">
 <p>
 启动 ssh agent 要比添加 ssh 密匙提前。因为前者使用的是环境变量，后者使用的只是普通应用自启动。</p>
