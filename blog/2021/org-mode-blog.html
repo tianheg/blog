@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html lang="zh">
 <head>
-<!-- 2021-12-26 Sun 08:56 -->
+<!-- 2021-12-26 Sun 10:32 -->
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>使用 Org Mode 写博客</title>
@@ -226,7 +226,7 @@
 <h2>Table of Contents</h2>
 <div id="text-table-of-contents">
 <ul>
-<li><a href="#org36c0ed9">1. 如何构建</a></li>
+<li><a href="#org468e786">1. 如何构建</a></li>
 </ul>
 </div>
 </nav>
@@ -241,8 +241,8 @@
 11 月 20 日，开始用 Org-mode 构建博客。
 </p>
 
-<div id="outline-container-org36c0ed9" class="outline-2">
-<h2 id="org36c0ed9"><span class="section-number-2">1</span> 如何构建</h2>
+<div id="outline-container-org468e786" class="outline-2">
+<h2 id="org468e786"><span class="section-number-2">1</span> 如何构建</h2>
 <div class="outline-text-2" id="text-1">
 <p>
 我的主要参考资料已经放在文章开头。
@@ -358,19 +358,14 @@
       '((<span style="color: #ddbc91;">"pages"</span>
          <span style="color: #9fbfdf;">:base-directory</span> <span style="color: #ddbc91;">"~/org/"</span>
          <span style="color: #9fbfdf;">:publishing-directory</span> <span style="color: #ddbc91;">"~/repo/blog/"</span>
+         <span style="color: #9fbfdf;">:exclude</span> <span style="color: #ddbc91;">"gtd*"</span>
          <span style="color: #9fbfdf;">:recursive</span> t
          <span style="color: #9fbfdf;">:html-head-include-default-style</span> nil
          <span style="color: #9fbfdf;">:html-head</span> <span style="color: #ddbc91;">""</span>
          <span style="color: #9fbfdf;">:publishing-function</span> org-html-publish-to-html
          <span style="color: #9fbfdf;">:html-postamble</span> nil
          <span style="color: #9fbfdf;">:with-toc</span> 't)
-         <span style="color: #706565;">;; </span><span style="color: #857575;">&#36825;&#20010; rss.xml &#30446;&#21069;&#26159;&#25163;&#21160;&#32500;&#25252;&#20869;&#23481;</span>
-         (<span style="color: #ddbc91;">"rss.xml"</span>
-          <span style="color: #9fbfdf;">:base-directory</span> <span style="color: #ddbc91;">"~/org/blog/"</span>
-          <span style="color: #9fbfdf;">:base-extension</span> <span style="color: #ddbc91;">"xml"</span>
-          <span style="color: #9fbfdf;">:publishing-directory</span> <span style="color: #ddbc91;">"~/repo/blog/"</span>
-          <span style="color: #9fbfdf;">:publishing-function</span> org-publish-attachment)
-        (<span style="color: #ddbc91;">"site"</span> <span style="color: #9fbfdf;">:components</span> (<span style="color: #ddbc91;">"pages"</span> <span style="color: #ddbc91;">"rss.xml"</span>))))
+        (<span style="color: #ddbc91;">"site"</span> <span style="color: #9fbfdf;">:components</span> (<span style="color: #ddbc91;">"pages"</span>))))
 
 <span style="color: #706565;">;; </span><span style="color: #857575;">(progn (profiler-start 'cpu) (org-publish-project "site") (profiler-report) (profiler-stop))</span>
 (org-publish-project <span style="color: #ddbc91;">"site"</span>)
