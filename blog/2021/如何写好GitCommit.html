@@ -1,0 +1,116 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN"
+"http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en">
+<head>
+<!-- 2021-12-26 Sun 08:55 -->
+<meta http-equiv="Content-Type" content="text/html;charset=utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>&lrm;</title>
+<meta name="generator" content="Org mode" />
+<script type="text/javascript">
+// @license magnet:?xt=urn:btih:e95b018ef3580986a04669f1b5879592219e2a7a&dn=public-domain.txt Public Domain
+<!--/*--><![CDATA[/*><!--*/
+     function CodeHighlightOn(elem, id)
+     {
+       var target = document.getElementById(id);
+       if(null != target) {
+         elem.classList.add("code-highlighted");
+         target.classList.add("code-highlighted");
+       }
+     }
+     function CodeHighlightOff(elem, id)
+     {
+       var target = document.getElementById(id);
+       if(null != target) {
+         elem.classList.remove("code-highlighted");
+         target.classList.remove("code-highlighted");
+       }
+     }
+    /*]]>*///-->
+// @license-end
+</script>
+</head>
+<body>
+<div id="content">
+<div id="table-of-contents">
+<h2>Table of Contents</h2>
+<div id="text-table-of-contents">
+<ul>
+<li><a href="#github-例子">1. GitHub 例子</a></li>
+</ul>
+</div>
+</div>
+<p>
+<del>+</del> date = '2021-11-13T14:55:34+08:00' title = '如何写好 Git commit'
+tags = ['Git'] slug = 'how-to-write-good-git-commit' <del>+</del>
+</p>
+
+<p>
+好的 commit 的作用：
+</p>
+
+<ol class="org-ol">
+<li>帮助理解本次操作内容</li>
+<li>加速和简化 code reviews</li>
+<li>解释不能只用代码来描述的“为什么”</li>
+<li>帮助以后的维护者，弄清楚为什么以及改变是怎样产生的，使故障排除和调试更容易</li>
+</ol>
+
+<pre class="example" id="org7946714">
+feat: add hat wobble
+^--^ ^------------^
+| |
+| |-&gt; Summary in present tense.
+|
+|-------&gt;Type: chore, docs, feat(option), fix, refactor, style, test, (!)BREAKING CHANGE, build, ci, perf, test
+</pre>
+
+<p>
+例子<sup><a id="fnr.1" class="footref" href="#fn.1">1</a></sup>：
+</p>
+
+<ul class="org-ul">
+<li>chore: add Oyster build script</li>
+<li>docs: explain hat wobble</li>
+<li>feat: add beta sequence</li>
+<li>feat(lang): add polish language</li>
+<li>fix: remove broken confirmation message</li>
+<li>refactor: share logic between 4d3d3d3 and flarhgunnstow</li>
+<li>style: convert tabs to spaces</li>
+<li>test: ensure Tayne retains clothing</li>
+</ul>
+
+<div id="outline-container-github-例子" class="outline-2">
+<h2 id="github-例子"><span class="section-number-2">1</span> GitHub 例子</h2>
+<div class="outline-text-2" id="text-github-例子">
+<pre class="example" id="org61c8260">
+git commit -m "fix: accept current change
+https://github.com/tianheg/blog/blob/26af0419337014dea93ada9bf4a3d8bbbcc39619/layouts/shortcodes/music.html#L1"
+
+git commit -m "add: ...
+close #123"
+</pre>
+
+<p>
+更多资料见这里<sup><a id="fnr.2" class="footref" href="#fn.2">2</a></sup>。
+</p>
+</div>
+</div>
+<div id="footnotes">
+<h2 class="footnotes">Footnotes: </h2>
+<div id="text-footnotes">
+
+<div class="footdef"><sup><a id="fn.1" class="footnum" href="#fnr.1">1</a></sup> <div class="footpara"><p class="footpara">
+<a href="https://sparkbox.com/foundry/semantic_commit_messages">https://sparkbox.com/foundry/semantic_commit_messages</a>
+</p></div></div>
+
+<div class="footdef"><sup><a id="fn.2" class="footnum" href="#fnr.2">2</a></sup> <div class="footpara"><p class="footpara">
+<a href="https://www.conventionalcommits.org/en/v1.0.0/#summary">https://www.conventionalcommits.org/en/v1.0.0/#summary</a>
+</p></div></div>
+
+
+</div>
+</div></div>
+</body>
+</html>
