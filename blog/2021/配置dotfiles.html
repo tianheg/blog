@@ -1,0 +1,125 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN"
+"http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en">
+<head>
+<!-- 2021-12-26 Sun 08:55 -->
+<meta http-equiv="Content-Type" content="text/html;charset=utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>&lrm;</title>
+<meta name="generator" content="Org mode" />
+<script type="text/javascript">
+// @license magnet:?xt=urn:btih:e95b018ef3580986a04669f1b5879592219e2a7a&dn=public-domain.txt Public Domain
+<!--/*--><![CDATA[/*><!--*/
+     function CodeHighlightOn(elem, id)
+     {
+       var target = document.getElementById(id);
+       if(null != target) {
+         elem.classList.add("code-highlighted");
+         target.classList.add("code-highlighted");
+       }
+     }
+     function CodeHighlightOff(elem, id)
+     {
+       var target = document.getElementById(id);
+       if(null != target) {
+         elem.classList.remove("code-highlighted");
+         target.classList.remove("code-highlighted");
+       }
+     }
+    /*]]>*///-->
+// @license-end
+</script>
+</head>
+<body>
+<div id="content">
+<div id="table-of-contents">
+<h2>Table of Contents</h2>
+<div id="text-table-of-contents">
+<ul>
+<li><a href="#在这过程中安装的程序">1. 在这过程中安装的程序</a></li>
+<li><a href="#关于-dotfiles-的思考">2. 关于 dotfiles 的思考</a></li>
+</ul>
+</div>
+</div>
+<p>
+<del>+</del> date = '2021-08-01T21:27:39+08:00' slug = 'deal-with-dotfiles' tags
+= ['System', 'Productivity'] title = '配置 dotfiles' <del>+</del>
+</p>
+
+<p>
+日常开发中会接触到很多 <code>.*</code>
+类文件，这些是程序的配置文件。使用程序时间长了，会形成属于自己的 <code>.*</code>
+文件。如果能够对这些文件进行管理，如果需要重新配置开发环境，这些自己的
+<code>.*</code> 文件会起到关键作用。
+</p>
+
+<div id="outline-container-在这过程中安装的程序" class="outline-2">
+<h2 id="在这过程中安装的程序"><span class="section-number-2">1</span> 在这过程中安装的程序</h2>
+<div class="outline-text-2" id="text-在这过程中安装的程序">
+<ul class="org-ul">
+<li><p>
+<a href="https://www.gnu.org/software/stow/">GNU stow</a>
+</p>
+
+<pre class="example" id="org553f2b9">
+tar xzf stow-latest.tar.gz
+cd stow
+./configure
+sudo make install
+</pre></li>
+</ul>
+
+<p>
+没有弄明白怎么用 GnuPG 加密文件，下次再思考。
+</p>
+</div>
+</div>
+
+<div id="outline-container-关于-dotfiles-的思考" class="outline-2">
+<h2 id="关于-dotfiles-的思考"><span class="section-number-2">2</span> 关于 dotfiles 的思考</h2>
+<div class="outline-text-2" id="text-关于-dotfiles-的思考">
+<p>
+Some developers believe that "dotfiles are meant to be forked". I
+disagree.（就是参考 2）
+</p>
+
+<blockquote>
+<p>
+如果某些配置对所有人都有用，那么这个配置就会成为默认配置。
+</p>
+</blockquote>
+
+<p>
+这句话不错。
+</p>
+
+<blockquote>
+<p>
+I thought that writing my own would be a lot more easier and quicker
+than learning some tool that already existed. The benefits of writing
+your own tools are that you don't have to learn them, they will do
+exactly what you want them to do and you could potentially design them
+as simple and straightforward as possible from the very start, not
+mentioning about learning some new technologies while doing something
+new. @ref:5
+</p>
+</blockquote>
+
+<p>
+ref:
+</p>
+
+<ol class="org-ol">
+<li><a href="https://dotfiles.github.io/">https://dotfiles.github.io/</a></li>
+<li><a href="https://zachholman.com/2010/08/dotfiles-are-meant-to-be-forked/">https://zachholman.com/2010/08/dotfiles-are-meant-to-be-forked/</a></li>
+<li><a href="https://abdullah.today/encrypted-dotfiles/">https://abdullah.today/encrypted-dotfiles/</a></li>
+<li><a href="https://www.anishathalye.com/2014/08/03/managing-your-dotfiles/">https://www.anishathalye.com/2014/08/03/managing-your-dotfiles/</a></li>
+<li><a href="https://troydm.github.io/blog/2017/02/27/manage-your-dotfiles-like-a-boss/">https://troydm.github.io/blog/2017/02/27/manage-your-dotfiles-like-a-boss/</a></li>
+<li><a href="https://github.com/webpro/awesome-dotfiles">https://github.com/webpro/awesome-dotfiles</a></li>
+</ol>
+</div>
+</div>
+</div>
+</body>
+</html>

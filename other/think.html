@@ -1,0 +1,757 @@
+<!DOCTYPE html>
+<html lang="zh">
+<head>
+<!-- 2021-12-26 Sun 08:54 -->
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Think</title>
+<meta name="generator" content="Org mode">
+<style type="text/css">
+ <!--/*--><![CDATA[/*><!--*/
+  .title  { text-align: center;
+             margin-bottom: .2em; }
+  .subtitle { text-align: center;
+              font-size: medium;
+              font-weight: bold;
+              margin-top:0; }
+  .todo   { font-family: monospace; color: red; }
+  .done   { font-family: monospace; color: green; }
+  .priority { font-family: monospace; color: orange; }
+  .tag    { background-color: #eee; font-family: monospace;
+            padding: 2px; font-size: 80%; font-weight: normal; }
+  .timestamp { color: #bebebe; }
+  .timestamp-kwd { color: #5f9ea0; }
+  .org-right  { margin-left: auto; margin-right: 0px;  text-align: right; }
+  .org-left   { margin-left: 0px;  margin-right: auto; text-align: left; }
+  .org-center { margin-left: auto; margin-right: auto; text-align: center; }
+  .underline { text-decoration: underline; }
+  #postamble p, #preamble p { font-size: 90%; margin: .2em; }
+  p.verse { margin-left: 3%; }
+  pre {
+    border: 1px solid #ccc;
+    box-shadow: 3px 3px 3px #eee;
+    padding: 8pt;
+    font-family: monospace;
+    overflow: auto;
+    margin: 1.2em;
+  }
+  pre.src {
+    position: relative;
+    overflow: auto;
+    padding-top: 1.2em;
+  }
+  pre.src:before {
+    display: none;
+    position: absolute;
+    background-color: white;
+    top: -10px;
+    right: 10px;
+    padding: 3px;
+    border: 1px solid black;
+  }
+  pre.src:hover:before { display: inline; margin-top: 14px;}
+  /* Languages per Org manual */
+  pre.src-asymptote:before { content: 'Asymptote'; }
+  pre.src-awk:before { content: 'Awk'; }
+  pre.src-C:before { content: 'C'; }
+  /* pre.src-C++ doesn't work in CSS */
+  pre.src-clojure:before { content: 'Clojure'; }
+  pre.src-css:before { content: 'CSS'; }
+  pre.src-D:before { content: 'D'; }
+  pre.src-ditaa:before { content: 'ditaa'; }
+  pre.src-dot:before { content: 'Graphviz'; }
+  pre.src-calc:before { content: 'Emacs Calc'; }
+  pre.src-emacs-lisp:before { content: 'Emacs Lisp'; }
+  pre.src-fortran:before { content: 'Fortran'; }
+  pre.src-gnuplot:before { content: 'gnuplot'; }
+  pre.src-haskell:before { content: 'Haskell'; }
+  pre.src-hledger:before { content: 'hledger'; }
+  pre.src-java:before { content: 'Java'; }
+  pre.src-js:before { content: 'Javascript'; }
+  pre.src-latex:before { content: 'LaTeX'; }
+  pre.src-ledger:before { content: 'Ledger'; }
+  pre.src-lisp:before { content: 'Lisp'; }
+  pre.src-lilypond:before { content: 'Lilypond'; }
+  pre.src-lua:before { content: 'Lua'; }
+  pre.src-matlab:before { content: 'MATLAB'; }
+  pre.src-mscgen:before { content: 'Mscgen'; }
+  pre.src-ocaml:before { content: 'Objective Caml'; }
+  pre.src-octave:before { content: 'Octave'; }
+  pre.src-org:before { content: 'Org mode'; }
+  pre.src-oz:before { content: 'OZ'; }
+  pre.src-plantuml:before { content: 'Plantuml'; }
+  pre.src-processing:before { content: 'Processing.js'; }
+  pre.src-python:before { content: 'Python'; }
+  pre.src-R:before { content: 'R'; }
+  pre.src-ruby:before { content: 'Ruby'; }
+  pre.src-sass:before { content: 'Sass'; }
+  pre.src-scheme:before { content: 'Scheme'; }
+  pre.src-screen:before { content: 'Gnu Screen'; }
+  pre.src-sed:before { content: 'Sed'; }
+  pre.src-sh:before { content: 'shell'; }
+  pre.src-sql:before { content: 'SQL'; }
+  pre.src-sqlite:before { content: 'SQLite'; }
+  /* additional languages in org.el's org-babel-load-languages alist */
+  pre.src-forth:before { content: 'Forth'; }
+  pre.src-io:before { content: 'IO'; }
+  pre.src-J:before { content: 'J'; }
+  pre.src-makefile:before { content: 'Makefile'; }
+  pre.src-maxima:before { content: 'Maxima'; }
+  pre.src-perl:before { content: 'Perl'; }
+  pre.src-picolisp:before { content: 'Pico Lisp'; }
+  pre.src-scala:before { content: 'Scala'; }
+  pre.src-shell:before { content: 'Shell Script'; }
+  pre.src-ebnf2ps:before { content: 'ebfn2ps'; }
+  /* additional language identifiers per "defun org-babel-execute"
+       in ob-*.el */
+  pre.src-cpp:before  { content: 'C++'; }
+  pre.src-abc:before  { content: 'ABC'; }
+  pre.src-coq:before  { content: 'Coq'; }
+  pre.src-groovy:before  { content: 'Groovy'; }
+  /* additional language identifiers from org-babel-shell-names in
+     ob-shell.el: ob-shell is the only babel language using a lambda to put
+     the execution function name together. */
+  pre.src-bash:before  { content: 'bash'; }
+  pre.src-csh:before  { content: 'csh'; }
+  pre.src-ash:before  { content: 'ash'; }
+  pre.src-dash:before  { content: 'dash'; }
+  pre.src-ksh:before  { content: 'ksh'; }
+  pre.src-mksh:before  { content: 'mksh'; }
+  pre.src-posh:before  { content: 'posh'; }
+  /* Additional Emacs modes also supported by the LaTeX listings package */
+  pre.src-ada:before { content: 'Ada'; }
+  pre.src-asm:before { content: 'Assembler'; }
+  pre.src-caml:before { content: 'Caml'; }
+  pre.src-delphi:before { content: 'Delphi'; }
+  pre.src-html:before { content: 'HTML'; }
+  pre.src-idl:before { content: 'IDL'; }
+  pre.src-mercury:before { content: 'Mercury'; }
+  pre.src-metapost:before { content: 'MetaPost'; }
+  pre.src-modula-2:before { content: 'Modula-2'; }
+  pre.src-pascal:before { content: 'Pascal'; }
+  pre.src-ps:before { content: 'PostScript'; }
+  pre.src-prolog:before { content: 'Prolog'; }
+  pre.src-simula:before { content: 'Simula'; }
+  pre.src-tcl:before { content: 'tcl'; }
+  pre.src-tex:before { content: 'TeX'; }
+  pre.src-plain-tex:before { content: 'Plain TeX'; }
+  pre.src-verilog:before { content: 'Verilog'; }
+  pre.src-vhdl:before { content: 'VHDL'; }
+  pre.src-xml:before { content: 'XML'; }
+  pre.src-nxml:before { content: 'XML'; }
+  /* add a generic configuration mode; LaTeX export needs an additional
+     (add-to-list 'org-latex-listings-langs '(conf " ")) in .emacs */
+  pre.src-conf:before { content: 'Configuration File'; }
+
+  table { border-collapse:collapse; }
+  caption.t-above { caption-side: top; }
+  caption.t-bottom { caption-side: bottom; }
+  td, th { vertical-align:top;  }
+  th.org-right  { text-align: center;  }
+  th.org-left   { text-align: center;   }
+  th.org-center { text-align: center; }
+  td.org-right  { text-align: right;  }
+  td.org-left   { text-align: left;   }
+  td.org-center { text-align: center; }
+  dt { font-weight: bold; }
+  .footpara { display: inline; }
+  .footdef  { margin-bottom: 1em; }
+  .figure { padding: 1em; }
+  .figure p { text-align: center; }
+  .equation-container {
+    display: table;
+    text-align: center;
+    width: 100%;
+  }
+  .equation {
+    vertical-align: middle;
+  }
+  .equation-label {
+    display: table-cell;
+    text-align: right;
+    vertical-align: middle;
+  }
+  .inlinetask {
+    padding: 10px;
+    border: 2px solid gray;
+    margin: 10px;
+    background: #ffffcc;
+  }
+  #org-div-home-and-up
+   { text-align: right; font-size: 70%; white-space: nowrap; }
+  textarea { overflow-x: auto; }
+  .linenr { font-size: smaller }
+  .code-highlighted { background-color: #ffff00; }
+  .org-info-js_info-navigation { border-style: none; }
+  #org-info-js_console-label
+    { font-size: 10px; font-weight: bold; white-space: nowrap; }
+  .org-info-js_search-highlight
+    { background-color: #ffff00; color: #000000; font-weight: bold; }
+  .org-svg { width: 90%; }
+  /*]]>*/-->
+</style>
+<link rel="stylesheet" href="/theme/normalize.css"/>
+<link rel="stylesheet" href="/theme/site.css"/>
+<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin><link href="https://fonts.googleapis.com/css2?family=Noto+Sans+SC&display=swap" rel="stylesheet">
+<script defer src='https://static.cloudflareinsights.com/beacon.min.js' data-cf-beacon='{"token": "d5b841b503ed4d1b8fad459b84d1cc2f"}'></script>
+<script defer src="/theme/link.js"></script>
+<script type="text/javascript">
+// @license magnet:?xt=urn:btih:e95b018ef3580986a04669f1b5879592219e2a7a&dn=public-domain.txt Public Domain
+<!--/*--><![CDATA[/*><!--*/
+     function CodeHighlightOn(elem, id)
+     {
+       var target = document.getElementById(id);
+       if(null != target) {
+         elem.classList.add("code-highlighted");
+         target.classList.add("code-highlighted");
+       }
+     }
+     function CodeHighlightOff(elem, id)
+     {
+       var target = document.getElementById(id);
+       if(null != target) {
+         elem.classList.remove("code-highlighted");
+         target.classList.remove("code-highlighted");
+       }
+     }
+    /*]]>*///-->
+// @license-end
+</script>
+</head>
+<body>
+<div id="content">
+<header>
+<h1 class="title">Think</h1>
+</header><nav id="table-of-contents">
+<h2>Table of Contents</h2>
+<div id="text-table-of-contents">
+<ul>
+<li><a href="#org9f5a8ab">1. 人生思考</a></li>
+<li><a href="#orgc5a91c4">2. 技术遐想</a></li>
+</ul>
+</div>
+</nav>
+
+<div id="outline-container-org9f5a8ab" class="outline-2">
+<h2 id="org9f5a8ab"><span class="section-number-2">1</span> 人生思考</h2>
+<div class="outline-text-2" id="text-1">
+<p>
+能贡献友谊的人，就能照顾好自己。
+</p>
+
+<p>
+状态不佳的时候，去想象你是你自己最好的朋友。
+</p>
+
+<p>
+你陪伴他，安慰他，认可他，深深的相信他，对他说最温柔最阳光的话。
+</p>
+
+<p>
+你如何对待朋友，就如何对待自己。
+</p>
+
+<p>
+你对自己充满了爱和接纳，而不是挑剔责难，从你用爱把自己灌满的那一刻开始，就再也不会孤独，像时刻沐浴在四月的春风里，暖暖的。
+</p>
+
+<p>
+&#x2014;
+如果你因为别人已经解释过某些概念，而不写关于这些概念的文章，你永远也不会写出一篇文章。解释一些概念、写一些入门教程，即使这些别人已经做过，你自己做一遍对你也是很有好处的。
+</p>
+
+<p>
+&#x2014;
+你的人生你自己做主，别人说的是他们认知的世界。
+</p>
+
+<p>
+&#x2014;
+阻碍你进步的最大敌人就是你的自我。
+</p>
+
+<p>
+学会分清关于你工作的批评，还是关于你个人的批评，是进步的关键。
+</p>
+
+<p>
+它使你能够积极地寻找和拥抱失败，把它作为学习的机会，而不会影响你的自信心。
+</p>
+
+<p>
+&#x2014;
+了解不同的人、不同的观点，比较理解
+</p>
+
+<p>
+&#x2014;
+乔布斯在斯坦福大学的演讲：
+你们的时间有限，所以不要把时间浪费在别人的生活里。不要被条条框框束缚，否则你就生活在他人思考的结果里。不要让他人的观点所发出的噪声淹没你内心的声音。最为重要的是，要有遵从你的内心和直觉的勇气，它们可能已知道你其实想成为一个什么样的人，其他事物都是次要的。
+</p>
+
+<p>
+&#x2014;
+很多事并非非此即彼，很多事情无法用对与错评价，只是个人观点不同。人际关系的名言——见人说人话，见鬼说鬼话。能做到这样便能处理好人际关系。
+</p>
+
+<p>
+&#x2014;
+自己摸索着做到一件事是困难的。经历各种阻碍也很正常，就像刚学习走路的孩子，总会跌到。但我要做到的，就是快速经历学走路的阶段，并容许自己跌倒后不断地站起来。
+</p>
+
+<p>
+&#x2014;
+Do you develop these good habits?
+</p>
+
+<ol class="org-ol">
+<li>Wake up early</li>
+<li>Plan your day</li>
+<li>Organize your workstation</li>
+<li>Exercise for 20 mins</li>
+<li>Compliment someone</li>
+<li>Take breaks</li>
+<li>Drink enough water</li>
+<li>Eat healthy</li>
+<li>Read 30 mins</li>
+<li>Perform acts of kindness</li>
+<li>Spend some time for yourself</li>
+<li>Get enough sleep</li>
+<li>Laugh often</li>
+<li>Be yourself</li>
+</ol>
+
+<p>
+&#x2014;
+金钱随能力而来，这在现在是可以做到的。寻找工作的第一原则是要提升能力，能给自己多大成长。
+</p>
+
+<p>
+&#x2014;
+不要太在意别人外在的光鲜生活，很可能他们自己的生活却是一地鸡毛。
+</p>
+
+<p>
+&#x2014;
+以旁观者的视角看到的都是好处，只有亲身经历才能看得全面。
+</p>
+
+<p>
+&#x2014;
+选择一个天花板较高的方向后，不要轻易变更，只有深耕才能出彩。
+</p>
+
+<p>
+&#x2014;
+时间不等人，不要因为选择方向而犹豫，快速选择，放手去做。
+</p>
+
+<p>
+&#x2014;
+做事情的时候想清楚：自己的长远目标是什么？
+</p>
+
+<p>
+&#x2014;
+想清楚最终目标，朝着这个方向努力，不要轻易被外界影响。
+</p>
+
+<p>
+&#x2014;
+当公司法人一定要慎重，现在太多人的法律意识淡薄。一个律师能见证这人世间的险恶，如果有客户找到律师帮他洗脱罪名，律师第一个考虑的是：能不能找到人帮客户背锅。现在很多互联网项目都有亿点擦边球，所以不要轻易的相信别人，自己要有自己的底牌，别被当成了替罪羔羊。
+</p>
+
+<p>
+&#x2014;
+找到自己所选圈子生态位的方法。用四象限法则，把自己知道的一些信息全都罗列出来，然后分类，找到这个圈子的荒芜地带。
+</p>
+
+<p>
+&#x2014;
+团队作战很重要，一个人的力量是有限的，尽可能的找到能和自己互补的合作伙伴。找人先磨合一个月，先不要谈利润分成什么的，先把事情做好然后再去谈这个事情。能找到彼此为后背的伙伴真的太重要了。
+</p>
+
+<p>
+&#x2014;
+当你想做一件事情的时候，不用顾虑没有什么资源，你考虑清楚之后把做这件事儿的大旗竖起来。当你把大旗竖起来之后，资源自动就靠近你了。
+</p>
+
+<p>
+&#x2014;
+如果你不想走中庸之路，那你必然会遭受一些前所未有的困难。多看留在历史上的人物传记，不断地提高自己的品质。最好就走别人已经验证过的道路，这样你会轻松很多。
+</p>
+
+<p>
+&#x2014;
+不管你心里有多大抱负，想做哪些事情，想成为什么样的人。都尽快地按照自己的想法去做，尽快地去市场上接收反馈，不要自己意淫，时间不等人。去试错，给自己定止损点，给自己定 KPI，去完成这些目标。
+</p>
+
+<p>
+&#x2014;
+如果自己认定一件事情了，那就全力以赴，不要因为一点困难就退缩。遇见什么问题把问题写下来，然后去尝试所有可能解决问题的方法。如果你认定一件项目，但是连三个月的时间都没有给到这个项目，那真的是太浪费自己的时间精力了。
+</p>
+
+<p>
+&#x2014;
+如果大佬给了你一个共事的机会，你没有全力以赴地去完成这件事情，那么你下次再也没有和这个大佬合作的可能了。
+</p>
+
+<p>
+&#x2014;
+赞美是最廉价的，一定要对自己有一个清晰的定位和认知，别被乱花迷了眼。尽可能的让自己有高认知、低底线。在现在「厚脸皮」是一个褒义词。
+</p>
+
+<p>
+&#x2014;
+大部分人迷茫的原因是因为想太多做太少。所以去行动吧，不要迷茫了。不要轻易地去组局，也不要轻易地给任何人背书。
+</p>
+
+<p>
+&#x2014;
+给拜访的人带伴手礼是一种礼貌。礼品不需要太贵，但是一定要选好看实用的。平时多看看小米有品，在 200 块钱以内就能选到很好的小礼品了。这里给个参考：小蓝牙音箱。
+</p>
+
+<p>
+&#x2014;
+中国是一个人情社会，所以维护人际关系是一门非常重要的学问。平时的送礼，节假日的问候，过年的红包祝福，这些都不可少，送出去的礼物一定要高配，选这个品类里面最好的那款。
+</p>
+
+<p>
+&#x2014;
+历史的车轮滚滚向前，很多现象都会重演。我们可以把已经验证过的东西搬到别的地方，比如把我们国家发展过的东西搬到现在比我们落后的东南亚那些国家。比如把城市里用过的套路再搬到农村。
+</p>
+
+<p>
+&#x2014;
+出了社会会经历各种毒打，但是如果你抱着大腿，就会少走很多弯路。所以去外面工作为人一定要机灵，在公司里勤快一点，和同事的关系处好，多请教前辈，多请正确的人吃饭，吃饭花不了多少钱的，但是吃饭能收获很多东西。
+</p>
+
+<p>
+&#x2014;
+影响力是一种稀缺而宝贵的资源。做一个思想家，不断地拔高自己，输出自己的思想，让别人有所收获。
+</p>
+
+<p>
+&#x2014;
+你看见的、你听见的并不都是事实。现在声音可以伪装，视频可以 AI 换脸，聊天记录可以伪造。一件事情只有真正地和当事人对峙，把所有的证据从头到尾当面给你看，你才能判断这件事情的真假。所以不要轻易地为任何人站台。现在社会的容错率太低了，键盘侠太多了，大家看到某个人的“错处”，恨不得把他给弄死。
+</p>
+
+<p>
+&#x2014;
+当一个好人，专注于自己的事情，不参与外界的纷争。和自己没有关系的事情，一笑了之，不要轻易地发表任何观点。因为事情的真相我们不清楚。
+</p>
+
+<p>
+&#x2014;
+把自己的优点和自己待提高的点拿纸写下来。然后单点突破，这样能够提高效率。把自己该突破的点。一个一个地找专门老师挨个突破。
+</p>
+
+<p>
+&#x2014;
+整理知识。将前人的经验整合利用。
+</p>
+
+<p>
+&#x2014;
+对于普通人来说，努力表达自己，被看见，被认同，被肯定，被传播是穿透圈层建立影响力最快的方式。
+</p>
+
+<p>
+&#x2014;
+亦仁说过，人人都应该有自己的小圈子。这个小圈子可以称之为自己的智囊团，里面的成员是愿意把“猪肉”分出来给大家的。现在应该是一个抱团取暖的时代。一个人可以走得更快，但一群人可以走得更远。
+</p>
+
+<p>
+&#x2014;
+找到一个合适的人组建家庭非常重要，家庭是否和谐决定了你未来的道路能走多远，所以不要轻易组建家庭。
+</p>
+
+<p>
+&#x2014;
+青春啊，还有很多东西值得体验，不仅仅只有赚钱这一件事情，所以年轻的时候多去给自己未来留下一点回忆吧，多去看一看这大好河山多去体验一下校园的美好事物。打工挣钱，毕业之后还有很多机会呢。但是这个还得视自己的情况而定，去外面看山水，见人是可以给自己开阔视野，沉淀东西的。
+</p>
+
+<p>
+&#x2014;
+找对象呀，不需要看家境，因为能走到最后的几率太小了，你需要的物质上的东西自己就能够很轻易的实现呀，为什么为了这些东西出卖自己呢？找对象就看你们两个的三观合不合适，这个人是否能给你提供情绪价值，你需要 TA 的时候他能不能过来陪你，你累的时候 TA 能不能和你一起出去玩两天……
+</p>
+
+<p>
+&#x2014;
+沟通是感情的升温剂，如果两个人可以无话不说，那基本上两个人之间就不会遇见特别大的问题。人都是需要被肯定的，大家都喜欢听好话。所以嘴巴甜一点，脸皮厚一点，“亲爱的，你好棒”
+</p>
+
+<p>
+“宝宝，你咋这么优秀呢”，“我眼光真好，找了这么优秀的对象”……（多夸，多表达，多拥抱，多鼓励，生活这么苦了，有对象就甜一点吧）
+</p>
+
+<p>
+&#x2014;
+我们首先是自己，然后才是其他的角色（妈妈，女儿，姐姐）所以呀，尽量对自己好一点，不要委屈自己。不管自己是什么身份，都不要忘记，自己才是最重要的那个人，不要忘记成长。
+</p>
+
+<p>
+&#x2014;
+如果可以的话，就建立自己的人生树吧，尽早要建立自己的基本盘，然后不断的把学到的技能往自己的树干上填充。
+</p>
+
+<p>
+&#x2014;
+我去看一本书，更重要的是读懂这个作者，因为这个内容都是这个作者产出的。我们只有了解这个作者才知道这本书他到底想表达什么。
+</p>
+
+<p>
+&#x2014;
+我们一定要有 120%的相信自己可以成为那个更好的自己。因为成长道路上，我们注定会遇见质疑的声音，不同的挫折，不同的困难 不管遇见任何困难，我们都要相信自己就是那个天选之子，自己一定可以通过困难。在成长的道路上信心真的太重要了。如果你被一次失败就退缩了，停止了前进的步伐。选择了安逸，那你就很难在有之前熊熊燃烧的斗志了。
+</p>
+
+<p>
+&#x2014;
+对已经没有办法改变的事情，就不要过多的去懊悔了。复盘一下当初自己为什么会犯错，自己能不能改正当初犯错的那个行为。错误往往比正确能给人带来更多的收获，因为错误能让你意识到自己身上有哪些可以改的缺点，这就是“市场”给你的反馈。你要相信一切都是最好的安排，淡定接受一切的挑战。
+</p>
+
+<p>
+&#x2014;
+一切都从自身出发，自己做的任何事情遇到的任何失败都不要去责怪环境，责怪别人，先反思自己身上有哪些可以改的缺点，自己有哪些地方是做的不好的地方，然后改掉。记得乐观一点，要相信这个世界还是有很多很多美好的事物存在的，没有什么事情过不去的。不要被乱花迷了眼，好好做事情，沉下心，来相信时间的力量。
+</p>
+
+<p>
+&#x2014;
+学习解决问题的通用技能 Education is about more than memorization. Learning &amp; practicing general principles of problem solving is more important than memorizing the techniques of how to solve specific problems.
+</p>
+
+<p>
+&#x2014;
+We generally assume that the world is becoming a better place every year. But when it comes to individual freedoms, the opposite is true. Most studies show humanity is now less free than several years ago.
+</p>
+
+<p>
+20 years ago we had decentralized Internet and a relatively unrestricted banking system. Today, Apple and Google censor information and apps on our phones while Visa and Mastercard limit what goods and services we can pay for. Every year we give up more power and control over our lives to a handful of unaccountable corporate executives we didn't elect.
+</p>
+
+<p>
+Most of us willingly carry tracking devices – our phones – and allow corporations to use our private data to target us with content that keeps us distracted with low-quality entertainment. Unlike 20 years ago, we are now surrounded by surveillance cameras, which in countries like China use AI to make sure nobody can hide.
+</p>
+
+<p>
+In 2017, China overtook the US as the largest economy in the world by purchasing power, showing the world that individual freedoms are not required for economic development. Looking at China's success, more countries become authoritarian, curbing essential human rights such as freedom of speech, movement and assembly.
+</p>
+
+<p>
+Who is going to fix it?
+</p>
+
+<p>
+The most active and creative minds of our generation are too busy playing in the rapidly shrinking sandbox called "free enterprise" or producing digital content to keep everyone else glued to their devices for longer. The rest seem to be too distracted with the abundance of cheap digital entertainment to critically assess the trend and take action.
+</p>
+
+<p>
+Watching this, I wonder what will become the legacy of our generation. Will we go down in history as those who let free societies turn into dystopian nightmares? Or will we be remembered as those who defended the freedoms that previous generations fought so hard to win?
+</p>
+
+<p>
+&#x2014;
+知道事物的顺序是非常重要的
+</p>
+
+<p>
+&#x2014;
+让自己拥有更多选择（健康身体、良好信用、不要欠债）
+</p>
+
+<p>
+&#x2014;
+学习（输入） &#x2013;&gt; 思考（加工） &#x2013;&gt; 行动（输出）
+</p>
+
+<p>
+&#x2014;
+自我认知定位：不断问自己，通过他人反馈了解自己，不断反思复盘
+</p>
+
+<p>
+&#x2014;
+</p>
+
+<p>
+人的决策，基本分为两种决策方式，一种是 <b>以证据和逻辑为基础</b> ，另一种是 <b>以潜意识和情绪为基础</b> 。如果你能做到更多的是以第一种方式做决策，你就比 70% 的人强，因为大多数人就算是关键决策也是稀里糊涂的。但做到了第一种，还有很大的进步空间，因为以证据和逻辑为基础，做好的前提是，你知道从何处获得以及如何获得证据和逻辑，当然是从可信人那里获得，以可信度加权的方式获得，这样你就比 90% 的人强。 |
+</p>
+
+<p>
+知道事物的顺序是非常重要的。不时地问问自己，这是做事情的正确顺序吗？这是 Neil Kakkar 写《Is That the Right Sequence to Do Things In?》中我最难忘掉的一个应对 2021 年后世界的一条建议。<a href="https://neilkakkar.com/sequencing-things-in-the-right-order.html">https://neilkakkar.com/sequencing-things-in-the-right-order.html</a>
+</p>
+</div>
+</div>
+
+<div id="outline-container-orgc5a91c4" class="outline-2">
+<h2 id="orgc5a91c4"><span class="section-number-2">2</span> 技术遐想</h2>
+<div class="outline-text-2" id="text-2">
+<ol class="org-ol">
+<li>找到适合自己的方法</li>
+<li>多实践</li>
+<li>对于某个库的学习，更重要的是学习它的思维方式，每看一个例子，就先想一想如果自己写，会把代码写成怎样，再与真实的例子进行对照，举一反三，这样的学习会是很快的过程</li>
+<li>学编程，不要在基础阶段停留太多时间，边学边做是成长最快的；先把内容快速都顺一遍，了解完整体情况再针对攻克问题，要尽快上手实战项目（我以前的思维模式更多是“基础要打牢”，喜欢缓慢、一本正经地学习，学完了再接触实战项目。这种思维导致了我的“开头难”，因为总觉得学习编程需要全心投入，觉得自己目前恐怕时间不够啊，再等等，空余时间一鼓作气再学啊。然而生活中，很多东西都需要穿插着进行，没有那种“专门的时间”，太把新知识当回事儿，就很难开头&#x2026;&#x2026;）所以，最小行动单元这个技巧真的很好用，满足基本条件能运行就先干起来，在过程中调整</li>
+</ol>
+
+<hr>
+
+<ol class="org-ol">
+<li>编程语言没有优劣，只有更合适的应用场景</li>
+<li>写代码以前，可以试着画流程图</li>
+</ol>
+
+<hr>
+
+<p>
+You only need 26 customers paying you $99/mo to make an average U.S.
+income.
+</p>
+
+<p>
+or
+</p>
+
+<ul class="org-ul">
+<li>做一个优质小众的服务是可行的。做好值得用户花大价钱的服务，对独立开发者或者小型开发团队是一种选择</li>
+<li>一项价值$99/mo 的服务，需要关注产品本身，只需要 26
+人说明并不需要太大的流量，而是精准的受众群体</li>
+<li>另外：付费周期和数额非常灵活，也可以年付费$99，订阅人数要达到 312 人</li>
+</ul>
+
+<p>
+&#x2014;
+#+BEGGIN_QUOTE
+取法其上，得乎其中，取法其中，得乎其下，取法其下，法不得也。——孔子教育弟子时说
+</p>
+
+<p>
+学习之道：读书学习不能「死」学，如果生搬硬套，则只有形体而缺乏神韵。
+</p>
+
+<p>
+读一本好书，如若无法领悟其精髓，又如何能够应用于自己的生活中呢？
+</p>
+
+<p>
+所以，要辩证地学习，同时要学习创新。
+#+END_QUOTE
+</p>
+
+<p>
+&#x2014;
+所有技术成长过程中必须坚持的优良品质：
+</p>
+
+<ol class="org-ol">
+<li>lifelong learnin 终身学习</li>
+<li>hands-on practice 上手实践</li>
+<li>learn to think 学会思考</li>
+<li>master the basics, buy old books 掌握基础，阅读经典书籍</li>
+<li>Review history                                                                                                      |</li>
+</ol>
+
+<p>
+&#x2014;
+约翰·乌歇尔从小就对数学有兴趣，在他还打球的 2015 年，就在学术杂志上发表过论文《用于计算图拉普拉斯算子的 Fiedler 向量的级联多重网格算法》，这种题目一看就属于专业数学家的范畴，说明那时他的数学水平已经不低了。
+</p>
+
+<p>
+因此，外界对这件事情的看法就是，他具有数学天才，所以改行去读数学也很正常。
+</p>
+
+<p>
+在一次采访中，他回应了这种看法。说得真好，推荐给大家。
+</p>
+
+<p>
+#+BEGGIN_QUOTE
+"在别人眼里，数学对于数学家是很容易的。错了， 那是一场斗争，艰苦而孤独，不确定能得到成果，而且需要很长时间的奋斗。数学家是热爱斗争的人。"
+#+END_QUOTE
+</p>
+
+<p>
+他的意思是，即使他真心热爱数学，依然觉得数学研究非常艰苦。（注意，一个真心热爱的人还说艰苦，如果换成普通人，感受可想而知。）他能够坚持下去，并不是因为他觉得很容易，而是因为他可以忍受这些痛苦。
+</p>
+
+<p>
+这段话对我很有启发。大家往往只看到成功时的荣耀，而忽视成功之前那个痛苦的过程。英国著名作家奥威尔就说过："一个人如果将他自己描述得很好的话，他十有八九是在撒谎，因为任何生命从内部审视都只不过是一系列的失败。"
+</p>
+
+<p>
+实际上，一个人能够成功，仅有热爱是不够的，还必须有强大的忍受能力，能够吃苦。
+</p>
+
+<p>
+很多人建议，寻找人生方向时，你应该听从自己的内心，寻找真正热爱的事情。我现在觉得，更现实的建议应该是，寻找你愿意忍受的痛苦。 你在哪一个方向上，愿意心甘情愿地、经年累月地吃苦，具有最大的忍耐，"虽九死其尤未悔"，那就是你应该选择的方向。
+</p>
+
+<p>
+你能在某件事上赢过别人，原因很可能不是你比他强，也不是你比他更热爱这个事业，而是你比他更抗打击。生活虐你千百遍，等到别人都放弃的时候，你还没有放弃。
+</p>
+
+<p>
+&#x2014;
+我不了解我使用过的任一语言、框架、系统。我学过计算机体系结构、系统编程和分布式系统，但对他们一知半解。我完全不懂数据库、网络、编译原理和编程语言。我几乎不能完成力扣中等以上的算法题。我没有写过任何一个独创工具或是想出任何一种优化的思路，我只会拙劣地模仿。我觉得我不适合学计算机……
+</p>
+
+<p>
+&#x2014;
+通过软件学习科学技术，软件的安装过程中，会有诸多问题，解决这些问题不是主要目的，这些问题只是铺垫。之后，要进行的才是真正重要的。
+</p>
+
+<p>
+&#x2014;
+</p>
+
+<p>
+知识是思考的根基
+</p>
+
+<p>
+&#x2014;
+</p>
+
+
+<ol class="org-ol">
+<li>如何归纳总结</li>
+<li>如何记笔记</li>
+<li>目标是既定的&#x2013;&gt;规划目标(合适的机会、内容)&#x2013;&gt;行动(思维指导) | 你是这么做的吗</li>
+<li>转换的能力越强，应用空间越大，改造思考过程 | 你昨天的转换能力变强了吗</li>
+<li>学习的目的-&#x2013;&#x2014;理解世界，理解自己 | 你昨天对自己和世界的了解更多一点了吗</li>
+<li>我的自制力不强 | 你的自制力更强了吗</li>
+<li>逻辑思维(即推理)&#x2013;&gt;思维能力(会与不会不重要)&#x2013;&gt;本质(自己的) | 你昨天的哪些思维过程转化成为你自己的知识体系了</li>
+<li>当我第一次遇到一件事时，这件事虽然第一次发生在我身上，但是这件事的第一次发生已经距离我遇到这件事时很久了 | 昨天哪些事情的解决是因为前人的智慧而不是自己的创造</li>
+<li>(不断地)试错&#x2013;&gt; 1.接近对 2.对 3.达到自己满意 | 你昨天试错了吗</li>
+<li>所有问题都用特定方式解决 | 你昨天找到解决某个问题的方法了吗</li>
+<li>不断想，想到不能再想(即没有问题) | 你昨天思考了什么有价值的问题</li>
+<li>经历痛苦，熬过去，体会真实 | 你昨天经历的痛苦让你体会到真实了吗</li>
+<li>你为什么不想想你干了什么，而不是总想着你没干什么</li>
+<li>你珍惜你有的东西了吗，你用尽全力去争取你想要的东西了吗</li>
+<li>人们总带着批评的心态说“三分钟热度”这件事。可这世界上多少事情是经得起三分钟认真的推敲和审视的呢。爱问为什么、刨根问底的人，几分钟便能感到一样事情非常站不住脚了，哪里还要执着。说到底执着果真是一种绝对的美德吗，还是自圆其说？像爱情那样，太不疯魔不成活的爱，其实往往是生病了，是一厢情愿的幻想和认知偏差。</li>
+<li>人们总爱问“你未来想从事什么职业”。说实话，我不认为这世界上能有任何一样事情、一个领域，能够让我不带任何自我欺骗地说可以忠心一辈子。首先它要经得起我的审视。</li>
+<li>其实都能看到肤浅的那一层东西，往往存在部分人看到这一层觉得足够了，这挺致命的，探索欲没了，也不再去思考。</li>
+<li>你可以肯定自己，但你不能否定别人。</li>
+<li>你昨天阅读并思考了吗</li>
+<li>说脏话</li>
+<li>发现自己无法心平气和地和父母说话，总是担心说话会演变成争吵</li>
+<li>对找工作有恐惧，担心找不到</li>
+<li>我对自慰的迷恋（尽管它让我易怒，低沉，消极）</li>
+<li>我以前从未感受到如此深刻的对缺少金钱💰的恐惧
+我认为这是我最大的收获：我看见了自己对于金钱的依赖，我方才意识到，自己是恐惧没有金钱的。我一直生活在却不缺金钱的环境里，我的家庭无法和别人相比。我有一个在服装厂工作的母亲，每月所挣不会超过 4000 元，每日加班到晚上九点；我有一个同样劳累的父亲，他已年近五十，仍在从事刮大白这样重体力的工作，每月还要还 2000 多元的房贷。
+我为自己如今仍不能挣钱而羞愧。</li>
+
+<li>没有习惯性地进行批判性思考（事例：单片机实验一，实验指导书提供的流程图是以汇编语言作为源程序画出的，而我做实验时使用的是 C 语言，所以我应该重新画一个 C 语言版本的流程图，但是我并未太把单片机实验报告当回事，认为它只是一份作业而已，因此就没有做任何思考，直接把汇编语言版本的流程图抄在实验报告中。
+而在第一次交作业时，老师找出这一问题，让我拿回去更改。）</li>
+
+<li>每次从一个地方，去另一个地方，总会忘带一些东西</li>
+<li>我只能在很少情况下，清楚地描述某件事情。我的感情表露强于事情表达</li>
+<li>通过戴无线耳机，得出结论：我的右耳听力强于左耳</li>
+<li>我会在真朋友面前，真的哭</li>
+<li>我做一件事的用时：明白上课要认真听讲花了我 3120h；做一道通信原理第二章的作业题需要 0.5 h</li>
+<li>我不是一个自制力强的人</li>
+</ol>
+</div>
+</div>
+</div>
+</body>
+</html>

@@ -1,0 +1,821 @@
+<!DOCTYPE html>
+<html lang="zh">
+<head>
+<!-- 2021-12-26 Sun 08:55 -->
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Emacs 常用快捷键总结</title>
+<meta name="generator" content="Org mode">
+<style type="text/css">
+ <!--/*--><![CDATA[/*><!--*/
+  .title  { text-align: center;
+             margin-bottom: .2em; }
+  .subtitle { text-align: center;
+              font-size: medium;
+              font-weight: bold;
+              margin-top:0; }
+  .todo   { font-family: monospace; color: red; }
+  .done   { font-family: monospace; color: green; }
+  .priority { font-family: monospace; color: orange; }
+  .tag    { background-color: #eee; font-family: monospace;
+            padding: 2px; font-size: 80%; font-weight: normal; }
+  .timestamp { color: #bebebe; }
+  .timestamp-kwd { color: #5f9ea0; }
+  .org-right  { margin-left: auto; margin-right: 0px;  text-align: right; }
+  .org-left   { margin-left: 0px;  margin-right: auto; text-align: left; }
+  .org-center { margin-left: auto; margin-right: auto; text-align: center; }
+  .underline { text-decoration: underline; }
+  #postamble p, #preamble p { font-size: 90%; margin: .2em; }
+  p.verse { margin-left: 3%; }
+  pre {
+    border: 1px solid #ccc;
+    box-shadow: 3px 3px 3px #eee;
+    padding: 8pt;
+    font-family: monospace;
+    overflow: auto;
+    margin: 1.2em;
+  }
+  pre.src {
+    position: relative;
+    overflow: auto;
+    padding-top: 1.2em;
+  }
+  pre.src:before {
+    display: none;
+    position: absolute;
+    background-color: white;
+    top: -10px;
+    right: 10px;
+    padding: 3px;
+    border: 1px solid black;
+  }
+  pre.src:hover:before { display: inline; margin-top: 14px;}
+  /* Languages per Org manual */
+  pre.src-asymptote:before { content: 'Asymptote'; }
+  pre.src-awk:before { content: 'Awk'; }
+  pre.src-C:before { content: 'C'; }
+  /* pre.src-C++ doesn't work in CSS */
+  pre.src-clojure:before { content: 'Clojure'; }
+  pre.src-css:before { content: 'CSS'; }
+  pre.src-D:before { content: 'D'; }
+  pre.src-ditaa:before { content: 'ditaa'; }
+  pre.src-dot:before { content: 'Graphviz'; }
+  pre.src-calc:before { content: 'Emacs Calc'; }
+  pre.src-emacs-lisp:before { content: 'Emacs Lisp'; }
+  pre.src-fortran:before { content: 'Fortran'; }
+  pre.src-gnuplot:before { content: 'gnuplot'; }
+  pre.src-haskell:before { content: 'Haskell'; }
+  pre.src-hledger:before { content: 'hledger'; }
+  pre.src-java:before { content: 'Java'; }
+  pre.src-js:before { content: 'Javascript'; }
+  pre.src-latex:before { content: 'LaTeX'; }
+  pre.src-ledger:before { content: 'Ledger'; }
+  pre.src-lisp:before { content: 'Lisp'; }
+  pre.src-lilypond:before { content: 'Lilypond'; }
+  pre.src-lua:before { content: 'Lua'; }
+  pre.src-matlab:before { content: 'MATLAB'; }
+  pre.src-mscgen:before { content: 'Mscgen'; }
+  pre.src-ocaml:before { content: 'Objective Caml'; }
+  pre.src-octave:before { content: 'Octave'; }
+  pre.src-org:before { content: 'Org mode'; }
+  pre.src-oz:before { content: 'OZ'; }
+  pre.src-plantuml:before { content: 'Plantuml'; }
+  pre.src-processing:before { content: 'Processing.js'; }
+  pre.src-python:before { content: 'Python'; }
+  pre.src-R:before { content: 'R'; }
+  pre.src-ruby:before { content: 'Ruby'; }
+  pre.src-sass:before { content: 'Sass'; }
+  pre.src-scheme:before { content: 'Scheme'; }
+  pre.src-screen:before { content: 'Gnu Screen'; }
+  pre.src-sed:before { content: 'Sed'; }
+  pre.src-sh:before { content: 'shell'; }
+  pre.src-sql:before { content: 'SQL'; }
+  pre.src-sqlite:before { content: 'SQLite'; }
+  /* additional languages in org.el's org-babel-load-languages alist */
+  pre.src-forth:before { content: 'Forth'; }
+  pre.src-io:before { content: 'IO'; }
+  pre.src-J:before { content: 'J'; }
+  pre.src-makefile:before { content: 'Makefile'; }
+  pre.src-maxima:before { content: 'Maxima'; }
+  pre.src-perl:before { content: 'Perl'; }
+  pre.src-picolisp:before { content: 'Pico Lisp'; }
+  pre.src-scala:before { content: 'Scala'; }
+  pre.src-shell:before { content: 'Shell Script'; }
+  pre.src-ebnf2ps:before { content: 'ebfn2ps'; }
+  /* additional language identifiers per "defun org-babel-execute"
+       in ob-*.el */
+  pre.src-cpp:before  { content: 'C++'; }
+  pre.src-abc:before  { content: 'ABC'; }
+  pre.src-coq:before  { content: 'Coq'; }
+  pre.src-groovy:before  { content: 'Groovy'; }
+  /* additional language identifiers from org-babel-shell-names in
+     ob-shell.el: ob-shell is the only babel language using a lambda to put
+     the execution function name together. */
+  pre.src-bash:before  { content: 'bash'; }
+  pre.src-csh:before  { content: 'csh'; }
+  pre.src-ash:before  { content: 'ash'; }
+  pre.src-dash:before  { content: 'dash'; }
+  pre.src-ksh:before  { content: 'ksh'; }
+  pre.src-mksh:before  { content: 'mksh'; }
+  pre.src-posh:before  { content: 'posh'; }
+  /* Additional Emacs modes also supported by the LaTeX listings package */
+  pre.src-ada:before { content: 'Ada'; }
+  pre.src-asm:before { content: 'Assembler'; }
+  pre.src-caml:before { content: 'Caml'; }
+  pre.src-delphi:before { content: 'Delphi'; }
+  pre.src-html:before { content: 'HTML'; }
+  pre.src-idl:before { content: 'IDL'; }
+  pre.src-mercury:before { content: 'Mercury'; }
+  pre.src-metapost:before { content: 'MetaPost'; }
+  pre.src-modula-2:before { content: 'Modula-2'; }
+  pre.src-pascal:before { content: 'Pascal'; }
+  pre.src-ps:before { content: 'PostScript'; }
+  pre.src-prolog:before { content: 'Prolog'; }
+  pre.src-simula:before { content: 'Simula'; }
+  pre.src-tcl:before { content: 'tcl'; }
+  pre.src-tex:before { content: 'TeX'; }
+  pre.src-plain-tex:before { content: 'Plain TeX'; }
+  pre.src-verilog:before { content: 'Verilog'; }
+  pre.src-vhdl:before { content: 'VHDL'; }
+  pre.src-xml:before { content: 'XML'; }
+  pre.src-nxml:before { content: 'XML'; }
+  /* add a generic configuration mode; LaTeX export needs an additional
+     (add-to-list 'org-latex-listings-langs '(conf " ")) in .emacs */
+  pre.src-conf:before { content: 'Configuration File'; }
+
+  table { border-collapse:collapse; }
+  caption.t-above { caption-side: top; }
+  caption.t-bottom { caption-side: bottom; }
+  td, th { vertical-align:top;  }
+  th.org-right  { text-align: center;  }
+  th.org-left   { text-align: center;   }
+  th.org-center { text-align: center; }
+  td.org-right  { text-align: right;  }
+  td.org-left   { text-align: left;   }
+  td.org-center { text-align: center; }
+  dt { font-weight: bold; }
+  .footpara { display: inline; }
+  .footdef  { margin-bottom: 1em; }
+  .figure { padding: 1em; }
+  .figure p { text-align: center; }
+  .equation-container {
+    display: table;
+    text-align: center;
+    width: 100%;
+  }
+  .equation {
+    vertical-align: middle;
+  }
+  .equation-label {
+    display: table-cell;
+    text-align: right;
+    vertical-align: middle;
+  }
+  .inlinetask {
+    padding: 10px;
+    border: 2px solid gray;
+    margin: 10px;
+    background: #ffffcc;
+  }
+  #org-div-home-and-up
+   { text-align: right; font-size: 70%; white-space: nowrap; }
+  textarea { overflow-x: auto; }
+  .linenr { font-size: smaller }
+  .code-highlighted { background-color: #ffff00; }
+  .org-info-js_info-navigation { border-style: none; }
+  #org-info-js_console-label
+    { font-size: 10px; font-weight: bold; white-space: nowrap; }
+  .org-info-js_search-highlight
+    { background-color: #ffff00; color: #000000; font-weight: bold; }
+  .org-svg { width: 90%; }
+  /*]]>*/-->
+</style>
+<link rel="stylesheet" href="/theme/normalize.css"/>
+<link rel="stylesheet" href="/theme/site.css"/>
+<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin><link href="https://fonts.googleapis.com/css2?family=Noto+Sans+SC&display=swap" rel="stylesheet">
+<script defer src='https://static.cloudflareinsights.com/beacon.min.js' data-cf-beacon='{"token": "d5b841b503ed4d1b8fad459b84d1cc2f"}'></script>
+<script defer src="/theme/link.js"></script>
+<script type="text/javascript">
+// @license magnet:?xt=urn:btih:e95b018ef3580986a04669f1b5879592219e2a7a&dn=public-domain.txt Public Domain
+<!--/*--><![CDATA[/*><!--*/
+     function CodeHighlightOn(elem, id)
+     {
+       var target = document.getElementById(id);
+       if(null != target) {
+         elem.classList.add("code-highlighted");
+         target.classList.add("code-highlighted");
+       }
+     }
+     function CodeHighlightOff(elem, id)
+     {
+       var target = document.getElementById(id);
+       if(null != target) {
+         elem.classList.remove("code-highlighted");
+         target.classList.remove("code-highlighted");
+       }
+     }
+    /*]]>*///-->
+// @license-end
+</script>
+</head>
+<body>
+<div id="content">
+<header>
+<h1 class="title">Emacs 常用快捷键总结</h1>
+</header><nav id="table-of-contents">
+<h2>Table of Contents</h2>
+<div id="text-table-of-contents">
+<ul>
+<li><a href="#basic-cursor-control">1. Basic Cursor Control</a></li>
+<li><a href="#inserting-and-deleting">2. Inserting and Deleting</a></li>
+<li><a href="#undo">3. Undo</a></li>
+<li><a href="#files">4. Files</a></li>
+<li><a href="#buffers">5. Buffers</a></li>
+<li><a href="#extending-the-command-set">6. Extending the command set</a></li>
+<li><a href="#auto-save">7. Auto save</a></li>
+<li><a href="#echo-area">8. Echo area</a></li>
+<li><a href="#mode-line">9. Mode line</a></li>
+<li><a href="#searching">10. Searching</a></li>
+<li><a href="#multiple-windows">11. Multiple windows</a></li>
+<li><a href="#multiple-frames">12. Multiple frames</a></li>
+<li><a href="#recursive-editing-levels">13. Recursive editing levels</a></li>
+<li><a href="#get-help">14. Get help</a></li>
+</ul>
+</div>
+</nav>
+<table>
+
+
+<colgroup>
+<col  class="org-left">
+
+<col  class="org-left">
+</colgroup>
+<thead>
+<tr>
+<th scope="col" class="org-left">Keyboard shortcuts</th>
+<th scope="col" class="org-left">Effects</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td class="org-left"><code>emacs -nw -Q</code></td>
+<td class="org-left">不安装任何插件在命令行打开 Emacs</td>
+</tr>
+
+<tr>
+<td class="org-left"><code>C-v</code></td>
+<td class="org-left">forward one screen</td>
+</tr>
+
+<tr>
+<td class="org-left"><code>M-v</code></td>
+<td class="org-left">backwards one screen</td>
+</tr>
+
+<tr>
+<td class="org-left"><code>C-l</code></td>
+<td class="org-left">text around cursor to center of screen</td>
+</tr>
+
+<tr>
+<td class="org-left"><code>M-x help-with-tutorial</code></td>
+<td class="org-left">打开教程</td>
+</tr>
+
+<tr>
+<td class="org-left"><code>C-x C-c</code></td>
+<td class="org-left">end Emacs session</td>
+</tr>
+</tbody>
+</table>
+
+<div id="outline-container-basic-cursor-control" class="outline-2">
+<h2 id="basic-cursor-control"><span class="section-number-2">1</span> Basic Cursor Control</h2>
+<div class="outline-text-2" id="text-basic-cursor-control">
+<table>
+
+
+<colgroup>
+<col  class="org-left">
+
+<col  class="org-left">
+</colgroup>
+<thead>
+<tr>
+<th scope="col" class="org-left">Keyboard shortcuts</th>
+<th scope="col" class="org-left">Effects</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td class="org-left"><code>C-p</code></td>
+<td class="org-left">previous line</td>
+</tr>
+
+<tr>
+<td class="org-left"><code>C-n</code></td>
+<td class="org-left">next line</td>
+</tr>
+
+<tr>
+<td class="org-left"><code>C-b</code></td>
+<td class="org-left">backward a character</td>
+</tr>
+
+<tr>
+<td class="org-left"><code>C-f</code></td>
+<td class="org-left">forward a character</td>
+</tr>
+
+<tr>
+<td class="org-left"><code>M-b</code></td>
+<td class="org-left">backward a word</td>
+</tr>
+
+<tr>
+<td class="org-left"><code>M-f</code></td>
+<td class="org-left">forward a word</td>
+</tr>
+
+<tr>
+<td class="org-left"><code>C-a</code></td>
+<td class="org-left">beginning of line</td>
+</tr>
+
+<tr>
+<td class="org-left"><code>C-e</code></td>
+<td class="org-left">end of line</td>
+</tr>
+
+<tr>
+<td class="org-left"><code>M-a</code></td>
+<td class="org-left">beginning of sentence</td>
+</tr>
+
+<tr>
+<td class="org-left"><code>M-e</code></td>
+<td class="org-left">end of sentence</td>
+</tr>
+
+<tr>
+<td class="org-left"><code>M-&lt;</code></td>
+<td class="org-left">beginning of whole text</td>
+</tr>
+
+<tr>
+<td class="org-left"><code>M-&gt;</code></td>
+<td class="org-left">end of whole text</td>
+</tr>
+
+<tr>
+<td class="org-left"><code>C-u num command</code></td>
+<td class="org-left">run command, use num as repeat-count; 注意 <code>C-u 6 C-v</code> 与其他命令的不同</td>
+</tr>
+
+<tr>
+<td class="org-left"><code>C-g</code></td>
+<td class="org-left">quit a partially entered command; 退出没有响应的命令</td>
+</tr>
+
+<tr>
+<td class="org-left"><code>C-x 1</code></td>
+<td class="org-left">kill all other windows</td>
+</tr>
+</tbody>
+</table>
+
+<p>
+如果遇到暂时禁止执行的命令，按下 <code>n</code> 取消执行。
+</p>
+</div>
+</div>
+
+<div id="outline-container-inserting-and-deleting" class="outline-2">
+<h2 id="inserting-and-deleting"><span class="section-number-2">2</span> Inserting and Deleting</h2>
+<div class="outline-text-2" id="text-inserting-and-deleting">
+<table>
+
+
+<colgroup>
+<col  class="org-left">
+
+<col  class="org-left">
+</colgroup>
+<thead>
+<tr>
+<th scope="col" class="org-left">Keyboard shortcuts</th>
+<th scope="col" class="org-left">Effects</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td class="org-left"><code>&lt;DEL&gt;=BackSpace</code></td>
+<td class="org-left">delete character before current cursor</td>
+</tr>
+
+<tr>
+<td class="org-left"><code>M-&lt;DEL&gt;</code></td>
+<td class="org-left">kill word before cursor</td>
+</tr>
+
+<tr>
+<td class="org-left"><code>C-d</code></td>
+<td class="org-left">delete next character after cursor</td>
+</tr>
+
+<tr>
+<td class="org-left"><code>M-d</code></td>
+<td class="org-left">kill next word after cursor</td>
+</tr>
+
+<tr>
+<td class="org-left"><code>C-k</code></td>
+<td class="org-left">kill from cursor to end of line</td>
+</tr>
+
+<tr>
+<td class="org-left"><code>M-k</code></td>
+<td class="org-left">kill from cursor to end of current sentence</td>
+</tr>
+
+<tr>
+<td class="org-left"><code>C-e</code></td>
+<td class="org-left">move to end of line</td>
+</tr>
+
+<tr>
+<td class="org-left"><code>M-e</code></td>
+<td class="org-left">move forward to end of sentence</td>
+</tr>
+
+<tr>
+<td class="org-left"><code>C-&lt;SPC&gt;(&lt;SPC&gt;=space) move-cursor-to-somewhere C-w C-y</code></td>
+<td class="org-left">kill random text, then yank to somewhere(like cut and paste)</td>
+</tr>
+</tbody>
+</table>
+
+<p>
+<code>killing</code> 和 <code>deleting</code> 的区别：
+</p>
+
+<ul class="org-ul">
+<li><code>killed</code> text can be reinserted (at any position)</li>
+<li><code>deleted</code> things cannot be reinserted in this way, but you can undo a
+deletion</li>
+</ul>
+
+<p>
+Reinsertion of killed text is called "yanking".
+</p>
+</div>
+</div>
+
+<div id="outline-container-undo" class="outline-2">
+<h2 id="undo"><span class="section-number-2">3</span> Undo</h2>
+<div class="outline-text-2" id="text-undo">
+<table>
+
+
+<colgroup>
+<col  class="org-left">
+
+<col  class="org-left">
+</colgroup>
+<thead>
+<tr>
+<th scope="col" class="org-left">Keyboard shortcuts</th>
+<th scope="col" class="org-left">Effects</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td class="org-left"><code>C-/</code></td>
+<td class="org-left">undo a change to text(<code>C-/</code> 不会撤销光标移动命令，滑动命令)</td>
+</tr>
+</tbody>
+</table>
+
+<p>
+For <code>C-/</code> Self-inserting characters are usually handled in group of up
+to 20.
+</p>
+
+<p>
+Normally, C-/ undoes the changes made by one command; if you repeat C-/
+several times in a row, each repetition undoes one more command.
+</p>
+</div>
+</div>
+
+<div id="outline-container-files" class="outline-2">
+<h2 id="files"><span class="section-number-2">4</span> Files</h2>
+<div class="outline-text-2" id="text-files">
+<table>
+
+
+<colgroup>
+<col  class="org-left">
+
+<col  class="org-left">
+</colgroup>
+<thead>
+<tr>
+<th scope="col" class="org-left">Keyboard shortcuts</th>
+<th scope="col" class="org-left">Effects</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td class="org-left"><code>C-x C-f</code></td>
+<td class="org-left">find a file</td>
+</tr>
+
+<tr>
+<td class="org-left"><code>C-x C-s</code></td>
+<td class="org-left">save the file</td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+
+<div id="outline-container-buffers" class="outline-2">
+<h2 id="buffers"><span class="section-number-2">5</span> Buffers</h2>
+<div class="outline-text-2" id="text-buffers">
+<p>
+Emacs stores each file's text inside an object called a "buffer".
+</p>
+
+<table>
+
+
+<colgroup>
+<col  class="org-left">
+
+<col  class="org-left">
+</colgroup>
+<thead>
+<tr>
+<th scope="col" class="org-left">Keyboard shortcuts</th>
+<th scope="col" class="org-left">Effects</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td class="org-left"><code>C-x C-b</code></td>
+<td class="org-left">List buffers</td>
+</tr>
+
+<tr>
+<td class="org-left"><code>C-x b &lt;BUFFER NAME&gt;</code></td>
+<td class="org-left">switch buffer</td>
+</tr>
+
+<tr>
+<td class="org-left"><code>C-x b *Messages*</code></td>
+<td class="org-left">see the messages</td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+
+<div id="outline-container-extending-the-command-set" class="outline-2">
+<h2 id="extending-the-command-set"><span class="section-number-2">6</span> Extending the command set</h2>
+<div class="outline-text-2" id="text-extending-the-command-set">
+<p>
+指的是两种行为：C-x，M-x。
+</p>
+
+<table>
+
+
+<colgroup>
+<col  class="org-left">
+
+<col  class="org-left">
+</colgroup>
+<thead>
+<tr>
+<th scope="col" class="org-left">Keyboard shortcuts</th>
+<th scope="col" class="org-left">Effects</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td class="org-left"><code>C-x &lt;one character&gt;</code></td>
+<td class="org-left">Character eXtend</td>
+</tr>
+
+<tr>
+<td class="org-left"><code>M-x &lt;a long name&gt;</code></td>
+<td class="org-left">Named command eXtend</td>
+</tr>
+
+<tr>
+<td class="org-left"><code>C-z</code></td>
+<td class="org-left">exit Emacs <b>temporarily</b></td>
+</tr>
+
+<tr>
+<td class="org-left"><code>fg</code> or =%emacs=(exec in console)</td>
+<td class="org-left">recover from <code>C-z</code></td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+
+<div id="outline-container-auto-save" class="outline-2">
+<h2 id="auto-save"><span class="section-number-2">7</span> Auto save</h2>
+<div class="outline-text-2" id="text-auto-save">
+<p>
+=#example.md#=，这是一个自动保存的备份文件。
+</p>
+</div>
+</div>
+
+<div id="outline-container-echo-area" class="outline-2">
+<h2 id="echo-area"><span class="section-number-2">8</span> Echo area</h2>
+<div class="outline-text-2" id="text-echo-area">
+</div>
+</div>
+<div id="outline-container-mode-line" class="outline-2">
+<h2 id="mode-line"><span class="section-number-2">9</span> Mode line</h2>
+<div class="outline-text-2" id="text-mode-line">
+<p>
+-:**&#x2013; TUTORIAL 63% L736 (Fundamental)---&#x2013;&#x2014;
+</p>
+
+<ul class="org-ul">
+<li><code>63%</code> 表示当前文档的进度。如果来到文档底部会显示
+Bot,来到文档顶部会显示 Top。</li>
+<li><code>(Fundamental)</code> 则是指编辑模式，</li>
+</ul>
+
+<p>
+Major mode
+</p>
+
+<p>
+Minor mode
+</p>
+</div>
+</div>
+
+<div id="outline-container-searching" class="outline-2">
+<h2 id="searching"><span class="section-number-2">10</span> Searching</h2>
+<div class="outline-text-2" id="text-searching">
+<table>
+
+
+<colgroup>
+<col  class="org-left">
+
+<col  class="org-left">
+</colgroup>
+<thead>
+<tr>
+<th scope="col" class="org-left">Keyboard shortcuts</th>
+<th scope="col" class="org-left">Effects</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td class="org-left"><code>C-s</code></td>
+<td class="org-left">start search <b>after</b> cursor</td>
+</tr>
+
+<tr>
+<td class="org-left"><code>C-r</code></td>
+<td class="org-left">start search <b>before</b> cursor</td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+
+<div id="outline-container-multiple-windows" class="outline-2">
+<h2 id="multiple-windows"><span class="section-number-2">11</span> Multiple windows</h2>
+<div class="outline-text-2" id="text-multiple-windows">
+<table>
+
+
+<colgroup>
+<col  class="org-left">
+
+<col  class="org-left">
+</colgroup>
+<thead>
+<tr>
+<th scope="col" class="org-left">Keyboard shortcuts</th>
+<th scope="col" class="org-left">Effects</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td class="org-left"><code>C-x 2</code></td>
+<td class="org-left">create one more window(top+bottom)</td>
+</tr>
+
+<tr>
+<td class="org-left"><code>C-x 3</code></td>
+<td class="org-left">create one more window(left+right)</td>
+</tr>
+
+<tr>
+<td class="org-left"><code>C-x o</code></td>
+<td class="org-left">switch to other windows(one by one)</td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+
+<div id="outline-container-multiple-frames" class="outline-2">
+<h2 id="multiple-frames"><span class="section-number-2">12</span> Multiple frames</h2>
+<div class="outline-text-2" id="text-multiple-frames">
+<table>
+
+
+<colgroup>
+<col  class="org-left">
+
+<col  class="org-left">
+</colgroup>
+<thead>
+<tr>
+<th scope="col" class="org-left">Keyboard shortcuts</th>
+<th scope="col" class="org-left">Effects</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td class="org-left"><code>C-x 5 2</code></td>
+<td class="org-left">new frame</td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+
+<div id="outline-container-recursive-editing-levels" class="outline-2">
+<h2 id="recursive-editing-levels"><span class="section-number-2">13</span> Recursive editing levels</h2>
+<div class="outline-text-2" id="text-recursive-editing-levels">
+<p>
+[(Fundamental)]
+</p>
+</div>
+</div>
+
+<div id="outline-container-get-help" class="outline-2">
+<h2 id="get-help"><span class="section-number-2">14</span> Get help</h2>
+<div class="outline-text-2" id="text-get-help">
+<table>
+
+
+<colgroup>
+<col  class="org-left">
+
+<col  class="org-left">
+</colgroup>
+<thead>
+<tr>
+<th scope="col" class="org-left">Keyboard shortcuts</th>
+<th scope="col" class="org-left">Effects</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td class="org-left"><code>C-h c C-p</code></td>
+<td class="org-left">oneline explanation</td>
+</tr>
+
+<tr>
+<td class="org-left"><code>C-h k C-p</code></td>
+<td class="org-left">explanation with more details</td>
+</tr>
+
+<tr>
+<td class="org-left"><code>C-h f &lt;function name&gt;</code></td>
+<td class="org-left">describe a function</td>
+</tr>
+
+<tr>
+<td class="org-left"><code>C-h v &lt;variable name&gt;</code></td>
+<td class="org-left">describe a variable</td>
+</tr>
+
+<tr>
+<td class="org-left"><code>C-h r</code></td>
+<td class="org-left">read manual</td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+</div>
+</body>
+</html>
