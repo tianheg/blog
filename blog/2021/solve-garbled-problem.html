@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html lang="zh">
 <head>
-<!-- 2021-12-26 Sun 21:35 -->
+<!-- 2021-12-27 Mon 16:12 -->
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>解决 Windows 下中文文件在 Linux 中读取乱码的问题</title>
@@ -226,9 +226,9 @@
 <h2>Table of Contents</h2>
 <div id="text-table-of-contents">
 <ul>
-<li><a href="#org000c411">1. 文件名乱码</a></li>
-<li><a href="#org2640682">2. 文件内容乱码</a></li>
-<li><a href="#orgf8c0681">3. zip 压缩包乱码</a></li>
+<li><a href="#org6e341b1">1. 文件名乱码</a></li>
+<li><a href="#orge4869a0">2. 文件内容乱码</a></li>
+<li><a href="#org42d235d">3. zip 压缩包乱码</a></li>
 </ul>
 </div>
 </nav>
@@ -240,8 +240,8 @@
 Windows 系统下创建的文件采用的编码标准可能是 gbk/gb2312。所以避免乱码的基本原则就是使用包含字符更多的 utf-8，避免使用其他编码格式。
 </p>
 
-<div id="outline-container-org000c411" class="outline-2">
-<h2 id="org000c411"><span class="section-number-2">1</span> 文件名乱码</h2>
+<div id="outline-container-org6e341b1" class="outline-2">
+<h2 id="org6e341b1"><span class="section-number-2">1</span> 文件名乱码</h2>
 <div class="outline-text-2" id="text-1">
 <p>
 安装 <a href="https://linux.die.net/man/1/convmv">convmv</a>，使用 <code>convmv</code> 命令转换编码格式。举例：
@@ -254,8 +254,8 @@ Windows 系统下创建的文件采用的编码标准可能是 gbk/gb2312。所�
 </div>
 </div>
 
-<div id="outline-container-org2640682" class="outline-2">
-<h2 id="org2640682"><span class="section-number-2">2</span> 文件内容乱码</h2>
+<div id="outline-container-orge4869a0" class="outline-2">
+<h2 id="orge4869a0"><span class="section-number-2">2</span> 文件内容乱码</h2>
 <div class="outline-text-2" id="text-2">
 <p>
 使用 <code>iconv</code> 命令转换格式：
@@ -268,8 +268,8 @@ Windows 系统下创建的文件采用的编码标准可能是 gbk/gb2312。所�
 </div>
 </div>
 
-<div id="outline-container-orgf8c0681" class="outline-2">
-<h2 id="orgf8c0681"><span class="section-number-2">3</span> zip 压缩包乱码</h2>
+<div id="outline-container-org42d235d" class="outline-2">
+<h2 id="org42d235d"><span class="section-number-2">3</span> zip 压缩包乱码</h2>
 <div class="outline-text-2" id="text-3">
 <p>
 在非 utf8 编码环境(通常是 Windows 下的中文环境)下，不要使用 zip 进行压缩(建议使用 7z)。需要一个特殊的参数：
