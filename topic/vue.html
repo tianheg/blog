@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html lang="zh">
 <head>
-<!-- 2021-12-26 Sun 21:33 -->
+<!-- 2021-12-27 Mon 16:10 -->
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>Vue.js</title>
@@ -226,71 +226,71 @@
 <h2>Table of Contents</h2>
 <div id="text-table-of-contents">
 <ul>
-<li><a href="#org78e0681">1. Declarative Rendering 声明式呈现/渲染</a></li>
-<li><a href="#org8aba44e">2. Handling User Input 处理用户输入</a></li>
-<li><a href="#org74829e0">3. Conditionals and Loops 条件和循环</a></li>
-<li><a href="#org761f1b7">4. Composing with Components</a></li>
-<li><a href="#org47b308a">5. Application &amp; Component Instances 应用和组件实例</a>
+<li><a href="#org359577f">1. Declarative Rendering 声明式呈现/渲染</a></li>
+<li><a href="#org4d0a7ff">2. Handling User Input 处理用户输入</a></li>
+<li><a href="#orgfea02a0">3. Conditionals and Loops 条件和循环</a></li>
+<li><a href="#orgdabe007">4. Composing with Components</a></li>
+<li><a href="#orgb20d5a0">5. Application &amp; Component Instances 应用和组件实例</a>
 <ul>
-<li><a href="#orgffad151">5.1. Lifecycle Hooks</a></li>
-<li><a href="#orgc8d7189">5.2. Lifecycle Diagram</a></li>
+<li><a href="#orgb2bf1aa">5.1. Lifecycle Hooks</a></li>
+<li><a href="#orgf54ec6b">5.2. Lifecycle Diagram</a></li>
 </ul>
 </li>
-<li><a href="#orgab5c0f1">6. Template Syntax</a>
+<li><a href="#org3224b65">6. Template Syntax</a>
 <ul>
-<li><a href="#orgcc91ead">6.1. Directives 指令</a></li>
-<li><a href="#org6f24876">6.2. Shorthands 速记</a>
+<li><a href="#orge540721">6.1. Directives 指令</a></li>
+<li><a href="#orgfb22130">6.2. Shorthands 速记</a>
 <ul>
-<li><a href="#orgcd0f2c9">6.2.1. Caveats 警告</a></li>
-</ul>
-</li>
-</ul>
-</li>
-<li><a href="#org9754390">7. Data Properties and Methods 数据属性和方法</a>
-<ul>
-<li><a href="#org2b01588">7.1. Methods</a>
-<ul>
-<li><a href="#orgd6fa11c">7.1.1. Debouncing and Throttling</a></li>
+<li><a href="#org82a9897">6.2.1. Caveats 警告</a></li>
 </ul>
 </li>
 </ul>
 </li>
-<li><a href="#org3d1d9f7">8. Computed Properties and Watchers</a>
+<li><a href="#orgd4f2b2b">7. Data Properties and Methods 数据属性和方法</a>
 <ul>
-<li><a href="#orgcbb2122">8.1. Computed Caching vs Methods</a></li>
-<li><a href="#org6a4e8f0">8.2. Computed Setter</a></li>
-<li><a href="#org8103b8e">8.3. Watchers</a></li>
-<li><a href="#orgfdceded">8.4. Computed vs Watch Property</a></li>
+<li><a href="#orgfc76c95">7.1. Methods</a>
+<ul>
+<li><a href="#org0bfcb96">7.1.1. Debouncing and Throttling</a></li>
 </ul>
 </li>
-<li><a href="#orgc5a17e3">9. Class and Style Bindings</a></li>
-<li><a href="#orgb1d7ae9">10. Conditional Rendering</a>
-<ul>
-<li><a href="#org03eca4c">10.1. <code>v-if</code></a></li>
-<li><a href="#org08fd1a3">10.2. <code>v-show</code></a></li>
-<li><a href="#org14b99e3">10.3. <code>v-for</code></a></li>
 </ul>
 </li>
-<li><a href="#org71ee0d4">11. List Rendering</a>
+<li><a href="#org32d0243">8. Computed Properties and Watchers</a>
 <ul>
-<li><a href="#org00d1b5f">11.1. Mapping an Array to Elements with <code>v-for</code></a></li>
-<li><a href="#org823a74e">11.2. <code>v-for</code> with an Object</a></li>
-<li><a href="#orgd63f4a9">11.3. Maintaining State</a></li>
-<li><a href="#orged550b6">11.4. Array Change Detection</a>
-<ul>
-<li><a href="#org3f98ea7">11.4.1. Mutation Methods</a></li>
-<li><a href="#org6e6a518">11.4.2. Replacing an Array</a></li>
+<li><a href="#orgcae0f15">8.1. Computed Caching vs Methods</a></li>
+<li><a href="#org8d85ec3">8.2. Computed Setter</a></li>
+<li><a href="#org9355166">8.3. Watchers</a></li>
+<li><a href="#org1c7e915">8.4. Computed vs Watch Property</a></li>
 </ul>
 </li>
-<li><a href="#orgfeba6d9">11.5. Displaying Filtered/Sorted Results</a></li>
+<li><a href="#orgc47944f">9. Class and Style Bindings</a></li>
+<li><a href="#org9d47a61">10. Conditional Rendering</a>
+<ul>
+<li><a href="#org8bb88da">10.1. <code>v-if</code></a></li>
+<li><a href="#org52ff0e7">10.2. <code>v-show</code></a></li>
+<li><a href="#orge69ced0">10.3. <code>v-for</code></a></li>
+</ul>
+</li>
+<li><a href="#orgde8f563">11. List Rendering</a>
+<ul>
+<li><a href="#org7f4e395">11.1. Mapping an Array to Elements with <code>v-for</code></a></li>
+<li><a href="#org44e9bb1">11.2. <code>v-for</code> with an Object</a></li>
+<li><a href="#org9ecc4d5">11.3. Maintaining State</a></li>
+<li><a href="#orgac801f9">11.4. Array Change Detection</a>
+<ul>
+<li><a href="#orgbf32a63">11.4.1. Mutation Methods</a></li>
+<li><a href="#orgbedc1cd">11.4.2. Replacing an Array</a></li>
+</ul>
+</li>
+<li><a href="#org3338698">11.5. Displaying Filtered/Sorted Results</a></li>
 </ul>
 </li>
 </ul>
 </div>
 </nav>
 
-<div id="outline-container-org78e0681" class="outline-2">
-<h2 id="org78e0681"><span class="section-number-2">1</span> Declarative Rendering 声明式呈现/渲染</h2>
+<div id="outline-container-org359577f" class="outline-2">
+<h2 id="org359577f"><span class="section-number-2">1</span> Declarative Rendering 声明式呈现/渲染</h2>
 <div class="outline-text-2" id="text-1">
 <p>
 return data
@@ -302,8 +302,8 @@ insert function
 </div>
 </div>
 
-<div id="outline-container-org8aba44e" class="outline-2">
-<h2 id="org8aba44e"><span class="section-number-2">2</span> Handling User Input 处理用户输入</h2>
+<div id="outline-container-org4d0a7ff" class="outline-2">
+<h2 id="org4d0a7ff"><span class="section-number-2">2</span> Handling User Input 处理用户输入</h2>
 <div class="outline-text-2" id="text-2">
 <p>
 v-on:click
@@ -319,8 +319,8 @@ v-on:click
 </div>
 </div>
 
-<div id="outline-container-org74829e0" class="outline-2">
-<h2 id="org74829e0"><span class="section-number-2">3</span> Conditionals and Loops 条件和循环</h2>
+<div id="outline-container-orgfea02a0" class="outline-2">
+<h2 id="orgfea02a0"><span class="section-number-2">3</span> Conditionals and Loops 条件和循环</h2>
 <div class="outline-text-2" id="text-3">
 <p>
 v-if, v-for
@@ -328,8 +328,8 @@ v-if, v-for
 </div>
 </div>
 
-<div id="outline-container-org761f1b7" class="outline-2">
-<h2 id="org761f1b7"><span class="section-number-2">4</span> Composing with Components</h2>
+<div id="outline-container-orgdabe007" class="outline-2">
+<h2 id="orgdabe007"><span class="section-number-2">4</span> Composing with Components</h2>
 <div class="outline-text-2" id="text-4">
 <p>
 组件系统
@@ -337,21 +337,21 @@ v-if, v-for
 </div>
 </div>
 
-<div id="outline-container-org47b308a" class="outline-2">
-<h2 id="org47b308a"><span class="section-number-2">5</span> Application &amp; Component Instances 应用和组件实例</h2>
+<div id="outline-container-orgb20d5a0" class="outline-2">
+<h2 id="orgb20d5a0"><span class="section-number-2">5</span> Application &amp; Component Instances 应用和组件实例</h2>
 <div class="outline-text-2" id="text-5">
 </div>
-<div id="outline-container-orgffad151" class="outline-3">
-<h3 id="orgffad151"><span class="section-number-3">5.1</span> Lifecycle Hooks</h3>
+<div id="outline-container-orgb2bf1aa" class="outline-3">
+<h3 id="orgb2bf1aa"><span class="section-number-3">5.1</span> Lifecycle Hooks</h3>
 </div>
 
-<div id="outline-container-orgc8d7189" class="outline-3">
-<h3 id="orgc8d7189"><span class="section-number-3">5.2</span> Lifecycle Diagram</h3>
+<div id="outline-container-orgf54ec6b" class="outline-3">
+<h3 id="orgf54ec6b"><span class="section-number-3">5.2</span> Lifecycle Diagram</h3>
 </div>
 </div>
 
-<div id="outline-container-orgab5c0f1" class="outline-2">
-<h2 id="orgab5c0f1"><span class="section-number-2">6</span> Template Syntax</h2>
+<div id="outline-container-org3224b65" class="outline-2">
+<h2 id="org3224b65"><span class="section-number-2">6</span> Template Syntax</h2>
 <div class="outline-text-2" id="text-6">
 <p>
 <code>v-once</code> 怎么用
@@ -362,16 +362,16 @@ v-if, v-for
 </p>
 </div>
 
-<div id="outline-container-orgcc91ead" class="outline-3">
-<h3 id="orgcc91ead"><span class="section-number-3">6.1</span> Directives 指令</h3>
+<div id="outline-container-orge540721" class="outline-3">
+<h3 id="orge540721"><span class="section-number-3">6.1</span> Directives 指令</h3>
 </div>
 
-<div id="outline-container-org6f24876" class="outline-3">
-<h3 id="org6f24876"><span class="section-number-3">6.2</span> Shorthands 速记</h3>
+<div id="outline-container-orgfb22130" class="outline-3">
+<h3 id="orgfb22130"><span class="section-number-3">6.2</span> Shorthands 速记</h3>
 <div class="outline-text-3" id="text-6-2">
 </div>
-<div id="outline-container-orgcd0f2c9" class="outline-4">
-<h4 id="orgcd0f2c9"><span class="section-number-4">6.2.1</span> Caveats 警告</h4>
+<div id="outline-container-org82a9897" class="outline-4">
+<h4 id="org82a9897"><span class="section-number-4">6.2.1</span> Caveats 警告</h4>
 <div class="outline-text-4" id="text-6-2-1">
 <ul class="org-ul">
 <li>对动态参数值的约束：只能是除去 <code>null</code> （它的作用是明确移除当前绑定）的字符串，非字符串将显示警告</li>
@@ -382,30 +382,30 @@ v-if, v-for
 </div>
 </div>
 
-<div id="outline-container-org9754390" class="outline-2">
-<h2 id="org9754390"><span class="section-number-2">7</span> Data Properties and Methods 数据属性和方法</h2>
+<div id="outline-container-orgd4f2b2b" class="outline-2">
+<h2 id="orgd4f2b2b"><span class="section-number-2">7</span> Data Properties and Methods 数据属性和方法</h2>
 <div class="outline-text-2" id="text-7">
 </div>
-<div id="outline-container-org2b01588" class="outline-3">
-<h3 id="org2b01588"><span class="section-number-3">7.1</span> Methods</h3>
+<div id="outline-container-orgfc76c95" class="outline-3">
+<h3 id="orgfc76c95"><span class="section-number-3">7.1</span> Methods</h3>
 <div class="outline-text-3" id="text-7-1">
 <p>
 定义方法的时候不要使用箭头函数，这会阻止 Vue 绑定正确的 <code>this</code> 值。
 </p>
 </div>
 
-<div id="outline-container-orgd6fa11c" class="outline-4">
-<h4 id="orgd6fa11c"><span class="section-number-4">7.1.1</span> Debouncing and Throttling</h4>
+<div id="outline-container-org0bfcb96" class="outline-4">
+<h4 id="org0bfcb96"><span class="section-number-4">7.1.1</span> Debouncing and Throttling</h4>
 </div>
 </div>
 </div>
 
-<div id="outline-container-org3d1d9f7" class="outline-2">
-<h2 id="org3d1d9f7"><span class="section-number-2">8</span> Computed Properties and Watchers</h2>
+<div id="outline-container-org32d0243" class="outline-2">
+<h2 id="org32d0243"><span class="section-number-2">8</span> Computed Properties and Watchers</h2>
 <div class="outline-text-2" id="text-8">
 </div>
-<div id="outline-container-orgcbb2122" class="outline-3">
-<h3 id="orgcbb2122"><span class="section-number-3">8.1</span> Computed Caching vs Methods</h3>
+<div id="outline-container-orgcae0f15" class="outline-3">
+<h3 id="orgcae0f15"><span class="section-number-3">8.1</span> Computed Caching vs Methods</h3>
 <div class="outline-text-3" id="text-8-1">
 <p>
 前者变化的前提是：对应的数据改变。
@@ -417,21 +417,21 @@ v-if, v-for
 </div>
 </div>
 
-<div id="outline-container-org6a4e8f0" class="outline-3">
-<h3 id="org6a4e8f0"><span class="section-number-3">8.2</span> Computed Setter</h3>
+<div id="outline-container-org8d85ec3" class="outline-3">
+<h3 id="org8d85ec3"><span class="section-number-3">8.2</span> Computed Setter</h3>
 </div>
 
-<div id="outline-container-org8103b8e" class="outline-3">
-<h3 id="org8103b8e"><span class="section-number-3">8.3</span> Watchers</h3>
+<div id="outline-container-org9355166" class="outline-3">
+<h3 id="org9355166"><span class="section-number-3">8.3</span> Watchers</h3>
 </div>
 
-<div id="outline-container-orgfdceded" class="outline-3">
-<h3 id="orgfdceded"><span class="section-number-3">8.4</span> Computed vs Watch Property</h3>
+<div id="outline-container-org1c7e915" class="outline-3">
+<h3 id="org1c7e915"><span class="section-number-3">8.4</span> Computed vs Watch Property</h3>
 </div>
 </div>
 
-<div id="outline-container-orgc5a17e3" class="outline-2">
-<h2 id="orgc5a17e3"><span class="section-number-2">9</span> Class and Style Bindings</h2>
+<div id="outline-container-orgc47944f" class="outline-2">
+<h2 id="orgc47944f"><span class="section-number-2">9</span> Class and Style Bindings</h2>
 <div class="outline-text-2" id="text-9">
 <p>
 不能对
@@ -449,52 +449,52 @@ v-if, v-for
 </div>
 </div>
 
-<div id="outline-container-orgb1d7ae9" class="outline-2">
-<h2 id="orgb1d7ae9"><span class="section-number-2">10</span> Conditional Rendering</h2>
+<div id="outline-container-org9d47a61" class="outline-2">
+<h2 id="org9d47a61"><span class="section-number-2">10</span> Conditional Rendering</h2>
 <div class="outline-text-2" id="text-10">
 </div>
-<div id="outline-container-org03eca4c" class="outline-3">
-<h3 id="org03eca4c"><span class="section-number-3">10.1</span> <code>v-if</code></h3>
+<div id="outline-container-org8bb88da" class="outline-3">
+<h3 id="org8bb88da"><span class="section-number-3">10.1</span> <code>v-if</code></h3>
 </div>
-<div id="outline-container-org08fd1a3" class="outline-3">
-<h3 id="org08fd1a3"><span class="section-number-3">10.2</span> <code>v-show</code></h3>
+<div id="outline-container-org52ff0e7" class="outline-3">
+<h3 id="org52ff0e7"><span class="section-number-3">10.2</span> <code>v-show</code></h3>
 </div>
-<div id="outline-container-org14b99e3" class="outline-3">
-<h3 id="org14b99e3"><span class="section-number-3">10.3</span> <code>v-for</code></h3>
+<div id="outline-container-orge69ced0" class="outline-3">
+<h3 id="orge69ced0"><span class="section-number-3">10.3</span> <code>v-for</code></h3>
 </div>
 </div>
 
-<div id="outline-container-org71ee0d4" class="outline-2">
-<h2 id="org71ee0d4"><span class="section-number-2">11</span> List Rendering</h2>
+<div id="outline-container-orgde8f563" class="outline-2">
+<h2 id="orgde8f563"><span class="section-number-2">11</span> List Rendering</h2>
 <div class="outline-text-2" id="text-11">
 </div>
-<div id="outline-container-org00d1b5f" class="outline-3">
-<h3 id="org00d1b5f"><span class="section-number-3">11.1</span> Mapping an Array to Elements with <code>v-for</code></h3>
+<div id="outline-container-org7f4e395" class="outline-3">
+<h3 id="org7f4e395"><span class="section-number-3">11.1</span> Mapping an Array to Elements with <code>v-for</code></h3>
 </div>
-<div id="outline-container-org823a74e" class="outline-3">
-<h3 id="org823a74e"><span class="section-number-3">11.2</span> <code>v-for</code> with an Object</h3>
+<div id="outline-container-org44e9bb1" class="outline-3">
+<h3 id="org44e9bb1"><span class="section-number-3">11.2</span> <code>v-for</code> with an Object</h3>
 </div>
-<div id="outline-container-orgd63f4a9" class="outline-3">
-<h3 id="orgd63f4a9"><span class="section-number-3">11.3</span> Maintaining State</h3>
+<div id="outline-container-org9ecc4d5" class="outline-3">
+<h3 id="org9ecc4d5"><span class="section-number-3">11.3</span> Maintaining State</h3>
 <div class="outline-text-3" id="text-11-3">
 <p>
 就地补丁策略
 </p>
 </div>
 </div>
-<div id="outline-container-orged550b6" class="outline-3">
-<h3 id="orged550b6"><span class="section-number-3">11.4</span> Array Change Detection</h3>
+<div id="outline-container-orgac801f9" class="outline-3">
+<h3 id="orgac801f9"><span class="section-number-3">11.4</span> Array Change Detection</h3>
 <div class="outline-text-3" id="text-11-4">
 </div>
-<div id="outline-container-org3f98ea7" class="outline-4">
-<h4 id="org3f98ea7"><span class="section-number-4">11.4.1</span> Mutation Methods</h4>
+<div id="outline-container-orgbf32a63" class="outline-4">
+<h4 id="orgbf32a63"><span class="section-number-4">11.4.1</span> Mutation Methods</h4>
 </div>
-<div id="outline-container-org6e6a518" class="outline-4">
-<h4 id="org6e6a518"><span class="section-number-4">11.4.2</span> Replacing an Array</h4>
+<div id="outline-container-orgbedc1cd" class="outline-4">
+<h4 id="orgbedc1cd"><span class="section-number-4">11.4.2</span> Replacing an Array</h4>
 </div>
 </div>
-<div id="outline-container-orgfeba6d9" class="outline-3">
-<h3 id="orgfeba6d9"><span class="section-number-3">11.5</span> Displaying Filtered/Sorted Results</h3>
+<div id="outline-container-org3338698" class="outline-3">
+<h3 id="org3338698"><span class="section-number-3">11.5</span> Displaying Filtered/Sorted Results</h3>
 </div>
 </div>
 </div>
