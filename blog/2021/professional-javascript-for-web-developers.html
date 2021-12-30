@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html lang="zh">
 <head>
-<!-- 2021-12-30 Thu 16:56 -->
+<!-- 2021-12-30 Thu 20:35 -->
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>JavaScript 高级程序设计第 4 版</title>
@@ -226,10 +226,10 @@
 <h2>Table of Contents</h2>
 <div id="text-table-of-contents">
 <ul>
-<li><a href="#org16e17e6">1. 什么是迭代？</a></li>
-<li><a href="#orgab93abf">2. 迭代器模式</a>
+<li><a href="#org13c15e8">1. 什么是迭代？</a></li>
+<li><a href="#org289782d">2. 迭代器模式</a>
 <ul>
-<li><a href="#orge54138e">2.1. 可迭代协议</a></li>
+<li><a href="#org7577130">2.1. 可迭代协议</a></li>
 </ul>
 </li>
 </ul>
@@ -239,8 +239,8 @@
 「迭代」是指，按照顺序多次执行程序，一般有明确的终止条件。ES6 规范新增了两个高级特性：迭代器和生成器。它们能帮助我们更好地实现迭代。
 </p>
 
-<div id="outline-container-org16e17e6" class="outline-2">
-<h2 id="org16e17e6"><span class="section-number-2">1</span> 什么是迭代？</h2>
+<div id="outline-container-org13c15e8" class="outline-2">
+<h2 id="org13c15e8"><span class="section-number-2">1</span> 什么是迭代？</h2>
 <div class="outline-text-2" id="text-1">
 <p>
 在 JS 中，计数循环是一种最为简单的迭代：
@@ -300,8 +300,8 @@ collection.forEach((item) =&gt; console.log(item));
 </div>
 </div>
 
-<div id="outline-container-orgab93abf" class="outline-2">
-<h2 id="orgab93abf"><span class="section-number-2">2</span> 迭代器模式</h2>
+<div id="outline-container-org289782d" class="outline-2">
+<h2 id="org289782d"><span class="section-number-2">2</span> 迭代器模式</h2>
 <div class="outline-text-2" id="text-2">
 <p>
 迭代器模式使某些结构被称为「可迭代对象」（iterable），因为它们实现了正式的 Iterable 接口，而且可通过迭代器 Iterator 消费（？）。
@@ -324,8 +324,8 @@ collection.forEach((item) =&gt; console.log(item));
 </p>
 </div>
 
-<div id="outline-container-orge54138e" class="outline-3">
-<h3 id="orge54138e"><span class="section-number-3">2.1</span> 可迭代协议</h3>
+<div id="outline-container-org7577130" class="outline-3">
+<h3 id="org7577130"><span class="section-number-3">2.1</span> 可迭代协议</h3>
 <div class="outline-text-3" id="text-2-1">
 <p>
 实现 Iterable 接口（可迭代协议）要求同时具备两种能力：「支持迭代的自我识别」和「创建实现 Iterator 接口的对象」。

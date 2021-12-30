@@ -1,0 +1,365 @@
+<!DOCTYPE html>
+<html lang="zh">
+<head>
+<!-- 2021-12-30 Thu 20:34 -->
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>不必彷徨，放手去做</title>
+<meta name="generator" content="Org mode">
+<style type="text/css">
+ <!--/*--><![CDATA[/*><!--*/
+  .title  { text-align: center;
+             margin-bottom: .2em; }
+  .subtitle { text-align: center;
+              font-size: medium;
+              font-weight: bold;
+              margin-top:0; }
+  .todo   { font-family: monospace; color: red; }
+  .done   { font-family: monospace; color: green; }
+  .priority { font-family: monospace; color: orange; }
+  .tag    { background-color: #eee; font-family: monospace;
+            padding: 2px; font-size: 80%; font-weight: normal; }
+  .timestamp { color: #bebebe; }
+  .timestamp-kwd { color: #5f9ea0; }
+  .org-right  { margin-left: auto; margin-right: 0px;  text-align: right; }
+  .org-left   { margin-left: 0px;  margin-right: auto; text-align: left; }
+  .org-center { margin-left: auto; margin-right: auto; text-align: center; }
+  .underline { text-decoration: underline; }
+  #postamble p, #preamble p { font-size: 90%; margin: .2em; }
+  p.verse { margin-left: 3%; }
+  pre {
+    border: 1px solid #ccc;
+    box-shadow: 3px 3px 3px #eee;
+    padding: 8pt;
+    font-family: monospace;
+    overflow: auto;
+    margin: 1.2em;
+  }
+  pre.src {
+    position: relative;
+    overflow: auto;
+    padding-top: 1.2em;
+  }
+  pre.src:before {
+    display: none;
+    position: absolute;
+    background-color: white;
+    top: -10px;
+    right: 10px;
+    padding: 3px;
+    border: 1px solid black;
+  }
+  pre.src:hover:before { display: inline; margin-top: 14px;}
+  /* Languages per Org manual */
+  pre.src-asymptote:before { content: 'Asymptote'; }
+  pre.src-awk:before { content: 'Awk'; }
+  pre.src-C:before { content: 'C'; }
+  /* pre.src-C++ doesn't work in CSS */
+  pre.src-clojure:before { content: 'Clojure'; }
+  pre.src-css:before { content: 'CSS'; }
+  pre.src-D:before { content: 'D'; }
+  pre.src-ditaa:before { content: 'ditaa'; }
+  pre.src-dot:before { content: 'Graphviz'; }
+  pre.src-calc:before { content: 'Emacs Calc'; }
+  pre.src-emacs-lisp:before { content: 'Emacs Lisp'; }
+  pre.src-fortran:before { content: 'Fortran'; }
+  pre.src-gnuplot:before { content: 'gnuplot'; }
+  pre.src-haskell:before { content: 'Haskell'; }
+  pre.src-hledger:before { content: 'hledger'; }
+  pre.src-java:before { content: 'Java'; }
+  pre.src-js:before { content: 'Javascript'; }
+  pre.src-latex:before { content: 'LaTeX'; }
+  pre.src-ledger:before { content: 'Ledger'; }
+  pre.src-lisp:before { content: 'Lisp'; }
+  pre.src-lilypond:before { content: 'Lilypond'; }
+  pre.src-lua:before { content: 'Lua'; }
+  pre.src-matlab:before { content: 'MATLAB'; }
+  pre.src-mscgen:before { content: 'Mscgen'; }
+  pre.src-ocaml:before { content: 'Objective Caml'; }
+  pre.src-octave:before { content: 'Octave'; }
+  pre.src-org:before { content: 'Org mode'; }
+  pre.src-oz:before { content: 'OZ'; }
+  pre.src-plantuml:before { content: 'Plantuml'; }
+  pre.src-processing:before { content: 'Processing.js'; }
+  pre.src-python:before { content: 'Python'; }
+  pre.src-R:before { content: 'R'; }
+  pre.src-ruby:before { content: 'Ruby'; }
+  pre.src-sass:before { content: 'Sass'; }
+  pre.src-scheme:before { content: 'Scheme'; }
+  pre.src-screen:before { content: 'Gnu Screen'; }
+  pre.src-sed:before { content: 'Sed'; }
+  pre.src-sh:before { content: 'shell'; }
+  pre.src-sql:before { content: 'SQL'; }
+  pre.src-sqlite:before { content: 'SQLite'; }
+  /* additional languages in org.el's org-babel-load-languages alist */
+  pre.src-forth:before { content: 'Forth'; }
+  pre.src-io:before { content: 'IO'; }
+  pre.src-J:before { content: 'J'; }
+  pre.src-makefile:before { content: 'Makefile'; }
+  pre.src-maxima:before { content: 'Maxima'; }
+  pre.src-perl:before { content: 'Perl'; }
+  pre.src-picolisp:before { content: 'Pico Lisp'; }
+  pre.src-scala:before { content: 'Scala'; }
+  pre.src-shell:before { content: 'Shell Script'; }
+  pre.src-ebnf2ps:before { content: 'ebfn2ps'; }
+  /* additional language identifiers per "defun org-babel-execute"
+       in ob-*.el */
+  pre.src-cpp:before  { content: 'C++'; }
+  pre.src-abc:before  { content: 'ABC'; }
+  pre.src-coq:before  { content: 'Coq'; }
+  pre.src-groovy:before  { content: 'Groovy'; }
+  /* additional language identifiers from org-babel-shell-names in
+     ob-shell.el: ob-shell is the only babel language using a lambda to put
+     the execution function name together. */
+  pre.src-bash:before  { content: 'bash'; }
+  pre.src-csh:before  { content: 'csh'; }
+  pre.src-ash:before  { content: 'ash'; }
+  pre.src-dash:before  { content: 'dash'; }
+  pre.src-ksh:before  { content: 'ksh'; }
+  pre.src-mksh:before  { content: 'mksh'; }
+  pre.src-posh:before  { content: 'posh'; }
+  /* Additional Emacs modes also supported by the LaTeX listings package */
+  pre.src-ada:before { content: 'Ada'; }
+  pre.src-asm:before { content: 'Assembler'; }
+  pre.src-caml:before { content: 'Caml'; }
+  pre.src-delphi:before { content: 'Delphi'; }
+  pre.src-html:before { content: 'HTML'; }
+  pre.src-idl:before { content: 'IDL'; }
+  pre.src-mercury:before { content: 'Mercury'; }
+  pre.src-metapost:before { content: 'MetaPost'; }
+  pre.src-modula-2:before { content: 'Modula-2'; }
+  pre.src-pascal:before { content: 'Pascal'; }
+  pre.src-ps:before { content: 'PostScript'; }
+  pre.src-prolog:before { content: 'Prolog'; }
+  pre.src-simula:before { content: 'Simula'; }
+  pre.src-tcl:before { content: 'tcl'; }
+  pre.src-tex:before { content: 'TeX'; }
+  pre.src-plain-tex:before { content: 'Plain TeX'; }
+  pre.src-verilog:before { content: 'Verilog'; }
+  pre.src-vhdl:before { content: 'VHDL'; }
+  pre.src-xml:before { content: 'XML'; }
+  pre.src-nxml:before { content: 'XML'; }
+  /* add a generic configuration mode; LaTeX export needs an additional
+     (add-to-list 'org-latex-listings-langs '(conf " ")) in .emacs */
+  pre.src-conf:before { content: 'Configuration File'; }
+
+  table { border-collapse:collapse; }
+  caption.t-above { caption-side: top; }
+  caption.t-bottom { caption-side: bottom; }
+  td, th { vertical-align:top;  }
+  th.org-right  { text-align: center;  }
+  th.org-left   { text-align: center;   }
+  th.org-center { text-align: center; }
+  td.org-right  { text-align: right;  }
+  td.org-left   { text-align: left;   }
+  td.org-center { text-align: center; }
+  dt { font-weight: bold; }
+  .footpara { display: inline; }
+  .footdef  { margin-bottom: 1em; }
+  .figure { padding: 1em; }
+  .figure p { text-align: center; }
+  .equation-container {
+    display: table;
+    text-align: center;
+    width: 100%;
+  }
+  .equation {
+    vertical-align: middle;
+  }
+  .equation-label {
+    display: table-cell;
+    text-align: right;
+    vertical-align: middle;
+  }
+  .inlinetask {
+    padding: 10px;
+    border: 2px solid gray;
+    margin: 10px;
+    background: #ffffcc;
+  }
+  #org-div-home-and-up
+   { text-align: right; font-size: 70%; white-space: nowrap; }
+  textarea { overflow-x: auto; }
+  .linenr { font-size: smaller }
+  .code-highlighted { background-color: #ffff00; }
+  .org-info-js_info-navigation { border-style: none; }
+  #org-info-js_console-label
+    { font-size: 10px; font-weight: bold; white-space: nowrap; }
+  .org-info-js_search-highlight
+    { background-color: #ffff00; color: #000000; font-weight: bold; }
+  .org-svg { width: 90%; }
+  /*]]>*/-->
+</style>
+<link rel="stylesheet" href="/theme/normalize.css"/>
+<link rel="stylesheet" href="/theme/site.css"/>
+<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin><link href="https://fonts.googleapis.com/css2?family=Noto+Sans+SC&display=swap" rel="stylesheet">
+<script defer src='https://static.cloudflareinsights.com/beacon.min.js' data-cf-beacon='{"token": "d5b841b503ed4d1b8fad459b84d1cc2f"}'></script>
+<script defer src="/theme/link.js"></script>
+<script type="text/javascript">
+// @license magnet:?xt=urn:btih:e95b018ef3580986a04669f1b5879592219e2a7a&dn=public-domain.txt Public Domain
+<!--/*--><![CDATA[/*><!--*/
+     function CodeHighlightOn(elem, id)
+     {
+       var target = document.getElementById(id);
+       if(null != target) {
+         elem.classList.add("code-highlighted");
+         target.classList.add("code-highlighted");
+       }
+     }
+     function CodeHighlightOff(elem, id)
+     {
+       var target = document.getElementById(id);
+       if(null != target) {
+         elem.classList.remove("code-highlighted");
+         target.classList.remove("code-highlighted");
+       }
+     }
+    /*]]>*///-->
+// @license-end
+</script>
+</head>
+<body>
+<div id="content">
+<header>
+<h1 class="title">不必彷徨，放手去做</h1>
+</header><p>
+今年我 20 了，还没有一技之长，还不能挣钱，还不能为父母减轻负担，想到这里，心里羞愧万分。全文基于此时的心境扩散开来。
+</p>
+
+<p>
+我是一个比较喜欢发散思维的人。从一件事情的一个侧面，由此及彼，我能联想到很多事情。世界之大，给我的发散思维提供了充分的养料。所以，我写文章的时候，都是跳跃着写，由此及彼，两件看似完全不相干的事情，我都能联想到一起。
+</p>
+
+<p>
+脑子里的东西很多很杂，我会一一写下来，分享给正在阅读的你。
+</p>
+
+<p>
+邓安庆，一个作家，活跃于豆瓣平台，公众号（邓安庆）一直更文。看他的文章，你总能感受到一种平静，那些生活里我们经常遇见的人事物，通过他的叙述，都显得那样真切自然。反观自己的生活，哦，原来自己生活中的点滴是那么有意义，而自己竟然视而不见。后悔，然后是庆幸，自己现在知道了如何捕捉生活中的美好。
+</p>
+
+<p>
+以下摘录自 邓安庆 的《天边一星子》：
+</p>
+
+<blockquote>
+<p>
+我饿的不行，先盛了饭，就着一个菜吃了起来。母亲又端来另外一盘菜，"这个菜留点儿，他们也要吃的。"顿了一下，母亲又说，"管么子要考虑别人，晓得啵？莫像你爸那样，要晓得心疼人。"
+"心疼人"这三个字，一下子击中了我。
+</p>
+</blockquote>
+
+<p>
+邓安庆
+母亲说的那句方言，我不知道什么意思。大意为让“我”知道要考虑别人，会心疼人。但是，他的母亲却是家里最劳累的那一个，家里的事情，无论大小，都由母亲操持。这跟我家里的情况有些相像，我的母亲总是在家里最忙碌的那个人，父亲做的少一些。家里的家务活，在过去很长时间都由母亲完成，父亲从不过问，我也没有这个意识。
+</p>
+
+<p>
+我的父母亲是在上个世纪末结的婚，在那个时间段里一起生活的人们，可能还都停留在男主外女主内的思想观念里。我的父亲以前不过问家务也无可厚非，但是，随着时代的发展，人们生活水平提高了，一些固有的旧观念开始转变。家务活不再专属于女性，男性也要承担一定的家庭劳动，以此来确立自己在家里的地位。
+</p>
+
+<p>
+这两天母亲总是唠叨着，让我出门，离开电脑，多出去锻炼。可是我离不开。我想着抓紧时间学习
+Python，身体状况不算太差，这两天比较早睡，竟然早起了，在 7:00
+左右。不过，看着我这日益丰满的肚子，我有点犹豫。我觉得自己还是要出去走走的。
+</p>
+
+<p>
+今天，在 V2EX
+上看到一个帖子：说一个人，之前是程序员，因为身体原因，转行做客服，做到今年做了三年，公司提前通知裁员而且没有补偿。但是，因为他有失业保险，所以可以领
+5 个月的钱，数目是正常工资的 80% 。
+</p>
+
+<p>
+看到这，我有点小发愁：我这身子骨能撑得下去吗？如果现在不能，我要做什么才能增强我的体质呢？于是，要锻炼的心，日益急切。慢慢开始锻炼吧。
+</p>
+
+<p>
+我在 Github 上新建了一个名为
+<a href="https://github.com/Gaotianhe/Daily-checking">Daily-Checking</a>
+的仓库，主要是记录自己每天做完了什么事情，遇到了什么问题，本来想的是供以后复盘查看的。不过，我发现这样做，其实挺鸡肋的，感觉没有起到我期望的作用。所以，也就暂时没有记录很多天了。
+</p>
+
+<p>
+我打算今天开始完善一下，那里的结构布局。
+</p>
+
+<p>
+我对于自己的博客的未来很看好，打算长期写下去，折腾不止。对于公众号，抱着分享知识和想法的态度努力更新。这些事情对于我自己知识的归纳总结，思维的提升都有着很大的帮助，要坚持下去！
+</p>
+
+<p>
+再谈个关于囤积资料的事情。我喜欢囤没有用的资料，而且我还不太整理，所以，很多资料放在那里对我一点用处都没有。我今天把印象笔记里的两千多条内容，删到了七百多条。那些删掉的内容几乎都是从那些公众号里收藏的，我为什么会收藏这么多呢？因为当我收藏的时候，我很满足，以为那些收藏的东西以后都会阅读。其实，自从收藏的时候，读了个大概，以后的任何时间都没有再次打开过。
+</p>
+
+<p>
+我只是在寻求储存知识的乐趣，我爱存知识，但我不爱知识。所以，当我今天删除那些内容的时候，我一点点心痛的感觉都没有。所以，不要再囤知识了，知识都在网络上，想搜就可以搜到，但是有些时候并不能如愿。
+</p>
+
+<p>
+我要逐步清空电脑和我脑袋里那些无用的东西，把该总结的东西总结好，该抛弃的东西一点都不能留恋，该学习的东西一步一个脚印地规划好。
+</p>
+
+<p>
+我喜欢妄想，幻想着自己以后各种各样的事情。举个例子，我在想自己学习好专业课还有自学编程，以后毕业了，软件有编程，硬件有我的专业支撑，走到哪里都很吃香。
+</p>
+
+<p>
+但是，回到现实，我的专业课没有学习，编程进展缓慢，巨大的压力袭来。这种情况下，我是很容易崩溃的。不过，我不能让自己那么做，因为我崩溃了，这些知识怎么进到我的脑袋里。我还怎么继续我的生活呢？所以，我一直都会努力学习的。为自己加油💪！
+</p>
+
+<p>
+上个星期五，知道我学校所在地可能新增病例，我就知道这学期不可能指望着能回到学校了。我死了这份心。更加专注于其他事情。
+</p>
+
+<p>
+天外有天，人外有人。总是看着天外的天，会迷失自己的。看到那么多比我还优秀的人，看到那么多早早就经济独立的人，看到那么多生活逍遥的人。同时，我也看到这些的反面。我自己在哪里？我是谁？
+</p>
+
+<p>
+每隔一段时间，经历这样一个迷失期，然后努力，再迷失，再努力&#x2026;&#x2026;经历很多次之后，我明白：这样的比较苍白无力。因为我在进行诸如此类的比较时，忽略了很多潜在因素。我列举一点点：家庭、城市、经济等。
+</p>
+
+<p>
+当我看到一个高中生就能够写那么好的博客时，我一方面是羡慕佩服的，另一方面在想：我高中时干嘛了，我如果从高中开始就写博客，现在会怎么样？这些想法始终回响在我的脑海。这些都是无法假如的。我要放开这些无谓的东西，放手去做，做到我认为的那种好。
+</p>
+
+<p>
+看了 邓安庆 今天的推文《下来吃饭》，他从湖北老家来北京复工，要接受隔离。
+</p>
+
+<p>
+以下段落摘自 邓安庆
+公众号今日文章《<a href="https://mp.weixin.qq.com/s/OyE7MlZ56moUAtELOQcCNQ">下来吃饭</a>》[如果要看全文，可以点击书名号“《》”内部的文字，在微信公众号也可跳转，因为目标文章也是公众号文章]：
+</p>
+
+<blockquote>
+<p>
+母亲 "嗯"
+地一声，"你和你哥一出生，都多灾多难的。你哥哥出生后一年，就去武汉的同济医院住了好几个月院。你一出生，有血管瘤，又去住院。好不容易长大了，这里那里疼，我每回一想总觉得自家做得不好。要是当年生你们之前营养好一点，各方面注意一点，你们后来会不会好很多&#x2026;&#x2026;这个真的是不敢细想。"
+</p>
+
+<p>
+我立马接口道，"现在我跟我哥不是都蛮好的嘛！不用想七想八的。"母亲没有再说话。
+</p>
+
+<p>
+我知道她放不下，也许这一辈子，她都不会放下。时间已经流逝了，很多事情无法挽回。当年父亲带着她去坐轮渡到江对岸时，她注定要愧对自己只有九岁大的小儿子，那个还不会做饭、洗衣服、连睡觉都从来都要挨着自己睡的小儿子。
+</p>
+</blockquote>
+
+<p>
+很多时候，父母对孩子是充满歉意的，觉得自己没照顾好自己的孩子，让孩子受了委屈。
+</p>
+
+<p>
+邓安庆
+是个怎么样的人，我无从得知。从他的文章来看，很细腻、纯真、宁静，在这个人的性格里。看他的文章，如我这般的人，会落泪、会忏悔、会反思。
+</p>
+
+<p>
+总之，生活总是向前的，我不敢停下来
+</p>
+</div>
+</body>
+</html>
