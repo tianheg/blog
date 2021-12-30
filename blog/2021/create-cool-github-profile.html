@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html lang="zh">
 <head>
-<!-- 2021-12-30 Thu 16:55 -->
+<!-- 2021-12-30 Thu 20:35 -->
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>为 GitHub 主页添加「年进度」和「最近更新的博客文章」</title>
@@ -322,7 +322,7 @@ console.log(readme)
 开发工作流。在与个人用户名相同的仓库中添加 =Pipfile=：
 </p>
 
-<pre class="example" id="org995d9ce">
+<pre class="example" id="org22cf3f8">
 [[source]]
 name = "pypi"
 url = "https://pypi.org/simple"
@@ -346,7 +346,7 @@ python_version = "3.7"
 <code>python_version</code> 必须是 3.7，改成其他的会报错（[错误地址 1][]）：
 </p>
 
-<pre class="example" id="orgbd47139">
+<pre class="example" id="orgc7bf30e">
 Warning: Python 3.8 was not found on your system...
 Neither 'pyenv' nor 'asdf' could be found to install Python.
 You can specify specific versions of Python with:
@@ -358,7 +358,7 @@ $ pipenv --python path/to/python
 报错（[错误地址 2][]）：
 </p>
 
-<pre class="example" id="orgc1fe274">
+<pre class="example" id="org328ae74">
 ValueError: invalid literal for int() with base 10: '3.x'
 </pre>
 
@@ -367,7 +367,7 @@ ValueError: invalid literal for int() with base 10: '3.x'
 WSL2-Ubuntu20.04。我已经安装了最新版本的 pip，直接安装 pipenv 即可：
 </p>
 
-<pre class="example" id="org2eb8616">
+<pre class="example" id="org094134e">
 pip install pipenv
 </pre>
 
@@ -375,7 +375,7 @@ pip install pipenv
 然后，在本地仓库中新建上述文件 =Pipfile=，执行：
 </p>
 
-<pre class="example" id="orgf2701db">
+<pre class="example" id="org2a3de40">
 pipenv install
 </pre>
 
@@ -389,7 +389,7 @@ pipenv install
 另外一个主要文件就是 =main.py=：
 </p>
 
-<pre class="example" id="orgee9ac95">
+<pre class="example" id="orged2439e">
 import feedparser
 import time
 import os
@@ -457,7 +457,7 @@ main()
 首先，新建文件 =~\.github\workflows\main.yml=，并添加以下内容：
 </p>
 
-<pre class="example" id="org1bef0ef">
+<pre class="example" id="org423dee8">
 name: update tianheg profile
 
 on:
@@ -534,7 +534,7 @@ pipenv 分支中。
 文件结构：
 </p>
 
-<pre class="example" id="org2a9b916">
+<pre class="example" id="orgc174abb">
 Dockerfile
 LICENSE
 README.md
@@ -550,7 +550,7 @@ entrypoint.sh
 <code>Dockerfile</code> 内容：
 </p>
 
-<pre class="example" id="org70bb151">
+<pre class="example" id="org89de28c">
 ARG PYTHON_IMAGE_VERSION=3
 FROM python:$PYTHON_IMAGE_VERSION
 
@@ -567,7 +567,7 @@ ENTRYPOINT ["/entrypoint.sh"]
 <code>entrypoint.sh</code> 内容：
 </p>
 
-<pre class="example" id="orgf4addc6">
+<pre class="example" id="org2809c3a">
 #!/bin/sh
 
 sh -c "pipenv $*"

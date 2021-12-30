@@ -1,0 +1,208 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN"
+"http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en">
+<head>
+<!-- 2021-12-30 Thu 20:34 -->
+<meta http-equiv="Content-Type" content="text/html;charset=utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>&lrm;</title>
+<meta name="generator" content="Org mode" />
+<script type="text/javascript">
+// @license magnet:?xt=urn:btih:e95b018ef3580986a04669f1b5879592219e2a7a&dn=public-domain.txt Public Domain
+<!--/*--><![CDATA[/*><!--*/
+     function CodeHighlightOn(elem, id)
+     {
+       var target = document.getElementById(id);
+       if(null != target) {
+         elem.classList.add("code-highlighted");
+         target.classList.add("code-highlighted");
+       }
+     }
+     function CodeHighlightOff(elem, id)
+     {
+       var target = document.getElementById(id);
+       if(null != target) {
+         elem.classList.remove("code-highlighted");
+         target.classList.remove("code-highlighted");
+       }
+     }
+    /*]]>*///-->
+// @license-end
+</script>
+</head>
+<body>
+<div id="content">
+<p>
+<del>+</del> date = '2020-05-20T09:12:46+08:00' slug = 'Light cat LOS red light
+flashes' tags = ['Computer Network'] title = '光猫 LOS 红灯闪烁，PON
+灯不亮' <del>+</del>
+</p>
+
+<p>
+我家光猫出现如下几个问题：
+</p>
+
+<p>
+1.蓝色光纤接口、电源、LAN 口网线接入：电源灯常亮、PON 灯不亮、LOS
+红灯闪烁、LAN 绿灯闪烁
+</p>
+
+<p>
+2.仅插入电源：电源灯常亮、LOS
+红灯慢闪烁。根据在网络中搜索到的信息，我推断是光猫本身坏了。
+</p>
+
+<p>
+但是，我接到了运营商的电话，发现他们说我们这里正在进行改动，所以光纤受到影响。
+</p>
+
+<p>
+指示灯说明（光猫型号：HUAWEI HG8010）：
+</p>
+
+<table border="2" cellspacing="0" cellpadding="6" rules="groups" frame="hsides">
+
+
+<colgroup>
+<col  class="org-left" />
+
+<col  class="org-left" />
+
+<col  class="org-left" />
+</colgroup>
+<thead>
+<tr>
+<th scope="col" class="org-left">指示灯（从右到左）</th>
+<th scope="col" class="org-left">状态</th>
+<th scope="col" class="org-left">说明</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td class="org-left">LAN</td>
+<td class="org-left">常亮</td>
+<td class="org-left">以太网连接正常</td>
+</tr>
+
+<tr>
+<td class="org-left">&#xa0;</td>
+<td class="org-left">闪烁</td>
+<td class="org-left">以太网接口有数据传输</td>
+</tr>
+
+<tr>
+<td class="org-left">&#xa0;</td>
+<td class="org-left">熄灭</td>
+<td class="org-left">以太网连接未建立</td>
+</tr>
+
+<tr>
+<td class="org-left">PON、LOS</td>
+<td class="org-left">如下表所示</td>
+<td class="org-left">&#xa0;</td>
+</tr>
+
+<tr>
+<td class="org-left">POWER</td>
+<td class="org-left">绿灯常亮</td>
+<td class="org-left">电源接通</td>
+</tr>
+
+<tr>
+<td class="org-left">&#xa0;</td>
+<td class="org-left">熄灭</td>
+<td class="org-left">电源断开</td>
+</tr>
+</tbody>
+</table>
+
+<table border="2" cellspacing="0" cellpadding="6" rules="groups" frame="hsides">
+
+
+<colgroup>
+<col  class="org-right" />
+
+<col  class="org-left" />
+
+<col  class="org-left" />
+
+<col  class="org-left" />
+</colgroup>
+<thead>
+<tr>
+<th scope="col" class="org-right">状态编号</th>
+<th scope="col" class="org-left">指示灯状态</th>
+<th scope="col" class="org-left">&#xa0;</th>
+<th scope="col" class="org-left">说明</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td class="org-right">&#xa0;</td>
+<td class="org-left">PON</td>
+<td class="org-left">LOS</td>
+<td class="org-left">&#xa0;</td>
+</tr>
+
+<tr>
+<td class="org-right">1</td>
+<td class="org-left">快闪（2 次/秒）</td>
+<td class="org-left">熄灭</td>
+<td class="org-left">PON 终端正在尝试与上层设备建立连接</td>
+</tr>
+
+<tr>
+<td class="org-right">2</td>
+<td class="org-left">常亮</td>
+<td class="org-left">熄灭</td>
+<td class="org-left">PON 终端与上层设备已经建立连接</td>
+</tr>
+
+<tr>
+<td class="org-right">3</td>
+<td class="org-left">熄灭</td>
+<td class="org-left">慢闪（1 次/2 秒）</td>
+<td class="org-left">PON 终端未接光纤或无光信号</td>
+</tr>
+
+<tr>
+<td class="org-right">4</td>
+<td class="org-left">熄灭</td>
+<td class="org-left">常亮</td>
+<td class="org-left">PON 终端被上层设备禁用或 PON 终端发光异常，请联系服务提供商</td>
+</tr>
+
+<tr>
+<td class="org-right">5</td>
+<td class="org-left">熄灭</td>
+<td class="org-left">熄灭</td>
+<td class="org-left">同 4</td>
+</tr>
+
+<tr>
+<td class="org-right">6</td>
+<td class="org-left">快闪（2 次/秒）</td>
+<td class="org-left">快闪（2 次/秒）</td>
+<td class="org-left">同 4</td>
+</tr>
+
+<tr>
+<td class="org-right">7</td>
+<td class="org-left">慢闪（1 次/2 秒）</td>
+<td class="org-left">快闪（2 次/秒）</td>
+<td class="org-left">PON 终端硬件故障</td>
+</tr>
+</tbody>
+</table>
+
+<p>
+最后，只插入电源，LOS 确实闪烁，但是把光纤接口插入后恢复正常。
+</p>
+
+<p>
+因此，我认为这次故障原因不在家庭内部，而在于他们正在增强信号，而暂时把光纤切断。
+</p>
+</div>
+</body>
+</html>
