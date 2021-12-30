@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html lang="zh">
 <head>
-<!-- 2021-12-30 Thu 16:54 -->
+<!-- 2021-12-30 Thu 20:35 -->
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>Vue1 应用和组件实例</title>
@@ -226,11 +226,11 @@
 <h2>Table of Contents</h2>
 <div id="text-table-of-contents">
 <ul>
-<li><a href="#org852f343">1. 创建一个应用实例</a></li>
-<li><a href="#org38543a2">2. 根组件</a></li>
-<li><a href="#orgdf5750d">3. 组件实例属性</a></li>
-<li><a href="#orgf5252db">4. 生命周期钩子</a></li>
-<li><a href="#orgdc0dcc1">5. 生命周期图</a></li>
+<li><a href="#org7d6b3f4">1. 创建一个应用实例</a></li>
+<li><a href="#org1336afc">2. 根组件</a></li>
+<li><a href="#org93bef20">3. 组件实例属性</a></li>
+<li><a href="#org89616b7">4. 生命周期钩子</a></li>
+<li><a href="#org0304ed1">5. 生命周期图</a></li>
 </ul>
 </div>
 </nav>
@@ -238,8 +238,8 @@
 <a href="https://v3.vuejs.org/guide/instance.html">https://v3.vuejs.org/guide/instance.html</a>
 </p>
 
-<div id="outline-container-org852f343" class="outline-2">
-<h2 id="org852f343"><span class="section-number-2">1</span> 创建一个应用实例</h2>
+<div id="outline-container-org7d6b3f4" class="outline-2">
+<h2 id="org7d6b3f4"><span class="section-number-2">1</span> 创建一个应用实例</h2>
 <div class="outline-text-2" id="text-1">
 <p>
 每一个 Vue 应用的开始，都是通过 <code>createApp</code> 函数，创建一个新的应用实例：
@@ -282,8 +282,8 @@ app.use(LocalePlugin)
 </div>
 </div>
 
-<div id="outline-container-org38543a2" class="outline-2">
-<h2 id="org38543a2"><span class="section-number-2">2</span> 根组件</h2>
+<div id="outline-container-org1336afc" class="outline-2">
+<h2 id="org1336afc"><span class="section-number-2">2</span> 根组件</h2>
 <div class="outline-text-2" id="text-2">
 <p>
 传递给 <code>createApp</code> 的选项被用于配置 <b>根组件</b> 。当我们安装应用程序时，该组件开始渲染。
@@ -340,8 +340,8 @@ app.use(LocalePlugin)
 </div>
 </div>
 
-<div id="outline-container-orgdf5750d" class="outline-2">
-<h2 id="orgdf5750d"><span class="section-number-2">3</span> 组件实例属性</h2>
+<div id="outline-container-org93bef20" class="outline-2">
+<h2 id="org93bef20"><span class="section-number-2">3</span> 组件实例属性</h2>
 <div class="outline-text-2" id="text-3">
 <p>
 <code>data</code> 中定义的属性会通过组件实例公开：
@@ -365,8 +365,8 @@ console.log(vm.count)
 </div>
 </div>
 
-<div id="outline-container-orgf5252db" class="outline-2">
-<h2 id="orgf5252db"><span class="section-number-2">4</span> 生命周期钩子</h2>
+<div id="outline-container-org89616b7" class="outline-2">
+<h2 id="org89616b7"><span class="section-number-2">4</span> 生命周期钩子</h2>
 <div class="outline-text-2" id="text-4">
 <p>
 每一个组件实例在创建时会经历一系列的初始化步骤。比如，这需要设置数据观测、编译模板、将实例安装至 DOM，当数据变化时更新 DOM。自始至终，它也运行着被称作 lifecycle hooks 的函数，让使用者能够在特定阶段加入他们的代码。
@@ -403,8 +403,8 @@ console.log(vm.count)
 </div>
 </div>
 
-<div id="outline-container-orgdc0dcc1" class="outline-2">
-<h2 id="orgdc0dcc1"><span class="section-number-2">5</span> 生命周期图</h2>
+<div id="outline-container-org0304ed1" class="outline-2">
+<h2 id="org0304ed1"><span class="section-number-2">5</span> 生命周期图</h2>
 <div class="outline-text-2" id="text-5">
 <p>
 下面是一张生命周期实例图。

@@ -1,13 +1,200 @@
-<?xml version="1.0" encoding="utf-8"?>
-<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN"
-"http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
-<html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en">
+<!DOCTYPE html>
+<html lang="zh">
 <head>
-<!-- 2021-12-30 Thu 16:55 -->
-<meta http-equiv="Content-Type" content="text/html;charset=utf-8" />
-<meta name="viewport" content="width=device-width, initial-scale=1" />
-<title>&lrm;</title>
-<meta name="generator" content="Org mode" />
+<!-- 2021-12-30 Thu 20:35 -->
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Git tag,branch,submodule 基本使用</title>
+<meta name="generator" content="Org mode">
+<style type="text/css">
+ <!--/*--><![CDATA[/*><!--*/
+  .title  { text-align: center;
+             margin-bottom: .2em; }
+  .subtitle { text-align: center;
+              font-size: medium;
+              font-weight: bold;
+              margin-top:0; }
+  .todo   { font-family: monospace; color: red; }
+  .done   { font-family: monospace; color: green; }
+  .priority { font-family: monospace; color: orange; }
+  .tag    { background-color: #eee; font-family: monospace;
+            padding: 2px; font-size: 80%; font-weight: normal; }
+  .timestamp { color: #bebebe; }
+  .timestamp-kwd { color: #5f9ea0; }
+  .org-right  { margin-left: auto; margin-right: 0px;  text-align: right; }
+  .org-left   { margin-left: 0px;  margin-right: auto; text-align: left; }
+  .org-center { margin-left: auto; margin-right: auto; text-align: center; }
+  .underline { text-decoration: underline; }
+  #postamble p, #preamble p { font-size: 90%; margin: .2em; }
+  p.verse { margin-left: 3%; }
+  pre {
+    border: 1px solid #ccc;
+    box-shadow: 3px 3px 3px #eee;
+    padding: 8pt;
+    font-family: monospace;
+    overflow: auto;
+    margin: 1.2em;
+  }
+  pre.src {
+    position: relative;
+    overflow: auto;
+    padding-top: 1.2em;
+  }
+  pre.src:before {
+    display: none;
+    position: absolute;
+    background-color: white;
+    top: -10px;
+    right: 10px;
+    padding: 3px;
+    border: 1px solid black;
+  }
+  pre.src:hover:before { display: inline; margin-top: 14px;}
+  /* Languages per Org manual */
+  pre.src-asymptote:before { content: 'Asymptote'; }
+  pre.src-awk:before { content: 'Awk'; }
+  pre.src-C:before { content: 'C'; }
+  /* pre.src-C++ doesn't work in CSS */
+  pre.src-clojure:before { content: 'Clojure'; }
+  pre.src-css:before { content: 'CSS'; }
+  pre.src-D:before { content: 'D'; }
+  pre.src-ditaa:before { content: 'ditaa'; }
+  pre.src-dot:before { content: 'Graphviz'; }
+  pre.src-calc:before { content: 'Emacs Calc'; }
+  pre.src-emacs-lisp:before { content: 'Emacs Lisp'; }
+  pre.src-fortran:before { content: 'Fortran'; }
+  pre.src-gnuplot:before { content: 'gnuplot'; }
+  pre.src-haskell:before { content: 'Haskell'; }
+  pre.src-hledger:before { content: 'hledger'; }
+  pre.src-java:before { content: 'Java'; }
+  pre.src-js:before { content: 'Javascript'; }
+  pre.src-latex:before { content: 'LaTeX'; }
+  pre.src-ledger:before { content: 'Ledger'; }
+  pre.src-lisp:before { content: 'Lisp'; }
+  pre.src-lilypond:before { content: 'Lilypond'; }
+  pre.src-lua:before { content: 'Lua'; }
+  pre.src-matlab:before { content: 'MATLAB'; }
+  pre.src-mscgen:before { content: 'Mscgen'; }
+  pre.src-ocaml:before { content: 'Objective Caml'; }
+  pre.src-octave:before { content: 'Octave'; }
+  pre.src-org:before { content: 'Org mode'; }
+  pre.src-oz:before { content: 'OZ'; }
+  pre.src-plantuml:before { content: 'Plantuml'; }
+  pre.src-processing:before { content: 'Processing.js'; }
+  pre.src-python:before { content: 'Python'; }
+  pre.src-R:before { content: 'R'; }
+  pre.src-ruby:before { content: 'Ruby'; }
+  pre.src-sass:before { content: 'Sass'; }
+  pre.src-scheme:before { content: 'Scheme'; }
+  pre.src-screen:before { content: 'Gnu Screen'; }
+  pre.src-sed:before { content: 'Sed'; }
+  pre.src-sh:before { content: 'shell'; }
+  pre.src-sql:before { content: 'SQL'; }
+  pre.src-sqlite:before { content: 'SQLite'; }
+  /* additional languages in org.el's org-babel-load-languages alist */
+  pre.src-forth:before { content: 'Forth'; }
+  pre.src-io:before { content: 'IO'; }
+  pre.src-J:before { content: 'J'; }
+  pre.src-makefile:before { content: 'Makefile'; }
+  pre.src-maxima:before { content: 'Maxima'; }
+  pre.src-perl:before { content: 'Perl'; }
+  pre.src-picolisp:before { content: 'Pico Lisp'; }
+  pre.src-scala:before { content: 'Scala'; }
+  pre.src-shell:before { content: 'Shell Script'; }
+  pre.src-ebnf2ps:before { content: 'ebfn2ps'; }
+  /* additional language identifiers per "defun org-babel-execute"
+       in ob-*.el */
+  pre.src-cpp:before  { content: 'C++'; }
+  pre.src-abc:before  { content: 'ABC'; }
+  pre.src-coq:before  { content: 'Coq'; }
+  pre.src-groovy:before  { content: 'Groovy'; }
+  /* additional language identifiers from org-babel-shell-names in
+     ob-shell.el: ob-shell is the only babel language using a lambda to put
+     the execution function name together. */
+  pre.src-bash:before  { content: 'bash'; }
+  pre.src-csh:before  { content: 'csh'; }
+  pre.src-ash:before  { content: 'ash'; }
+  pre.src-dash:before  { content: 'dash'; }
+  pre.src-ksh:before  { content: 'ksh'; }
+  pre.src-mksh:before  { content: 'mksh'; }
+  pre.src-posh:before  { content: 'posh'; }
+  /* Additional Emacs modes also supported by the LaTeX listings package */
+  pre.src-ada:before { content: 'Ada'; }
+  pre.src-asm:before { content: 'Assembler'; }
+  pre.src-caml:before { content: 'Caml'; }
+  pre.src-delphi:before { content: 'Delphi'; }
+  pre.src-html:before { content: 'HTML'; }
+  pre.src-idl:before { content: 'IDL'; }
+  pre.src-mercury:before { content: 'Mercury'; }
+  pre.src-metapost:before { content: 'MetaPost'; }
+  pre.src-modula-2:before { content: 'Modula-2'; }
+  pre.src-pascal:before { content: 'Pascal'; }
+  pre.src-ps:before { content: 'PostScript'; }
+  pre.src-prolog:before { content: 'Prolog'; }
+  pre.src-simula:before { content: 'Simula'; }
+  pre.src-tcl:before { content: 'tcl'; }
+  pre.src-tex:before { content: 'TeX'; }
+  pre.src-plain-tex:before { content: 'Plain TeX'; }
+  pre.src-verilog:before { content: 'Verilog'; }
+  pre.src-vhdl:before { content: 'VHDL'; }
+  pre.src-xml:before { content: 'XML'; }
+  pre.src-nxml:before { content: 'XML'; }
+  /* add a generic configuration mode; LaTeX export needs an additional
+     (add-to-list 'org-latex-listings-langs '(conf " ")) in .emacs */
+  pre.src-conf:before { content: 'Configuration File'; }
+
+  table { border-collapse:collapse; }
+  caption.t-above { caption-side: top; }
+  caption.t-bottom { caption-side: bottom; }
+  td, th { vertical-align:top;  }
+  th.org-right  { text-align: center;  }
+  th.org-left   { text-align: center;   }
+  th.org-center { text-align: center; }
+  td.org-right  { text-align: right;  }
+  td.org-left   { text-align: left;   }
+  td.org-center { text-align: center; }
+  dt { font-weight: bold; }
+  .footpara { display: inline; }
+  .footdef  { margin-bottom: 1em; }
+  .figure { padding: 1em; }
+  .figure p { text-align: center; }
+  .equation-container {
+    display: table;
+    text-align: center;
+    width: 100%;
+  }
+  .equation {
+    vertical-align: middle;
+  }
+  .equation-label {
+    display: table-cell;
+    text-align: right;
+    vertical-align: middle;
+  }
+  .inlinetask {
+    padding: 10px;
+    border: 2px solid gray;
+    margin: 10px;
+    background: #ffffcc;
+  }
+  #org-div-home-and-up
+   { text-align: right; font-size: 70%; white-space: nowrap; }
+  textarea { overflow-x: auto; }
+  .linenr { font-size: smaller }
+  .code-highlighted { background-color: #ffff00; }
+  .org-info-js_info-navigation { border-style: none; }
+  #org-info-js_console-label
+    { font-size: 10px; font-weight: bold; white-space: nowrap; }
+  .org-info-js_search-highlight
+    { background-color: #ffff00; color: #000000; font-weight: bold; }
+  .org-svg { width: 90%; }
+  /*]]>*/-->
+</style>
+<link rel="stylesheet" href="/theme/normalize.css"/>
+<link rel="stylesheet" href="/theme/site.css"/>
+<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin><link href="https://fonts.googleapis.com/css2?family=Noto+Sans+SC&display=swap" rel="stylesheet">
+<script defer src='https://static.cloudflareinsights.com/beacon.min.js' data-cf-beacon='{"token": "d5b841b503ed4d1b8fad459b84d1cc2f"}'></script>
+<script defer src="/theme/link.js"></script>
 <script type="text/javascript">
 // @license magnet:?xt=urn:btih:e95b018ef3580986a04669f1b5879592219e2a7a&dn=public-domain.txt Public Domain
 <!--/*--><![CDATA[/*><!--*/
@@ -33,126 +220,127 @@
 </head>
 <body>
 <div id="content">
-<div id="table-of-contents">
+<header>
+<h1 class="title">Git tag,branch,submodule 基本使用</h1>
+</header><nav id="table-of-contents">
 <h2>Table of Contents</h2>
 <div id="text-table-of-contents">
 <ul>
-<li><a href="#tag12">1. Tag,</a></li>
-<li><a href="#branch">2. Branch</a>
+<li><a href="#org92ba13a">1. Tag,</a></li>
+<li><a href="#org5babeee">2. Branch</a>
 <ul>
-<li><a href="#本地和远程创建空分支 4">2.1. 本地和远程创建空分支</a></li>
-<li><a href="#本地和远程删除分支">2.2. 本地和远程删除分支</a></li>
-<li><a href="#克隆特定远程分支">2.3. 克隆特定远程分支</a></li>
-<li><a href="#删除仅存在本地远程仓库中不存在的分支">2.4. 删除仅存在本地（远程仓库中不存在）的分支</a></li>
+<li><a href="#org60e4c89">2.1. 本地和远程创建空分支</a></li>
+<li><a href="#orge36bf15">2.2. 本地和远程删除分支</a></li>
+<li><a href="#orgfa5e580">2.3. 克隆特定远程分支</a></li>
+<li><a href="#org8154ac4">2.4. 删除仅存在本地（远程仓库中不存在）的分支</a></li>
 </ul>
 </li>
-<li><a href="#submodule">3. Submodule</a>
+<li><a href="#orgefade00">3. Submodule</a>
 <ul>
-<li><a href="#移除-submodule">3.1. 移除 Submodule</a></li>
+<li><a href="#org2f15053">3.1. 移除 Submodule</a></li>
 </ul>
 </li>
 </ul>
 </div>
-</div>
-<p>
-<del>+</del> date = '2021-11-13T15:40:57+08:00' title = 'Git tag,branch,submodule
-基本使用' tags = ['Git'] slug = 'git-tag-branch-submodule-basic-usage'
-<del>+</del>
-</p>
+</nav>
 
-<div id="outline-container-tag12" class="outline-2">
-<h2 id="tag12"><span class="section-number-2">1</span> Tag<sup><a id="fnr.1" class="footref" href="#fn.1">1</a></sup>,<sup><a id="fnr.2" class="footref" href="#fn.2">2</a></sup></h2>
-<div class="outline-text-2" id="text-tag12">
-<pre class="example" id="org40f3e91">
-git tag &lt;tag-name&gt; # create local tag
-git tag -d &lt;tag-name&gt; # delete local tag
-git push origin :refs/tags/&lt;tag-name&gt; # delete remote tag
-git fsck --unreachable | grep tag &amp;&amp; git update-ref refs/tags/&lt;tag_name&gt; &lt;hash&gt; # recover a deleted tag
+<div id="outline-container-org92ba13a" class="outline-2">
+<h2 id="org92ba13a"><span class="section-number-2">1</span> Tag<sup><a id="fnr.1" class="footref" href="#fn.1">1</a></sup>,<sup><a id="fnr.2" class="footref" href="#fn.2">2</a></sup></h2>
+<div class="outline-text-2" id="text-1">
+<div class="org-src-container">
+<pre class="src src-sh">git tag &lt;tag-name&gt; <span style="color: #706565;"># </span><span style="color: #857575;">create local tag</span>
+git tag -d &lt;tag-name&gt; <span style="color: #706565;"># </span><span style="color: #857575;">delete local tag</span>
+git push origin :refs/tags/&lt;tag-name&gt; <span style="color: #706565;"># </span><span style="color: #857575;">delete remote tag</span>
+git fsck --unreachable | grep tag &amp;&amp; git update-ref refs/tags/&lt;tag_name&gt; &lt;hash&gt; <span style="color: #706565;"># </span><span style="color: #857575;">recover a deleted tag</span>
 
-git describe --tags --abbrev=0 # show the most recent tag on the current branch
-git tag --contains &lt;commitid&gt; # find all tags containing a specific commit
+git describe --tags --abbrev=0 <span style="color: #706565;"># </span><span style="color: #857575;">show the most recent tag on the current branch</span>
+git tag --contains &lt;commitid&gt; <span style="color: #706565;"># </span><span style="color: #857575;">find all tags containing a specific commit</span>
 </pre>
 </div>
 </div>
+</div>
 
-<div id="outline-container-branch" class="outline-2">
-<h2 id="branch"><span class="section-number-2">2</span> Branch</h2>
-<div class="outline-text-2" id="text-branch">
+<div id="outline-container-org5babeee" class="outline-2">
+<h2 id="org5babeee"><span class="section-number-2">2</span> Branch</h2>
+<div class="outline-text-2" id="text-2">
 <p>
 分支不能含空格，见这里<sup><a id="fnr.3" class="footref" href="#fn.3">3</a></sup>。
 </p>
 </div>
 
-<div id="outline-container-本地和远程创建空分支 4" class="outline-3">
-<h3 id="本地和远程创建空分支 4"><span class="section-number-3">2.1</span> 本地和远程创建空分支<sup><a id="fnr.4" class="footref" href="#fn.4">4</a></sup></h3>
-<div class="outline-text-3" id="text-本地和远程创建空分支 4">
-<pre class="example" id="org5da83f8">
-# UPDATE(git &gt; 2.27)
+<div id="outline-container-org60e4c89" class="outline-3">
+<h3 id="org60e4c89"><span class="section-number-3">2.1</span> 本地和远程创建空分支<sup><a id="fnr.4" class="footref" href="#fn.4">4</a></sup></h3>
+<div class="outline-text-3" id="text-2-1">
+<div class="org-src-container">
+<pre class="src src-sh"><span style="color: #706565;"># </span><span style="color: #857575;">UPDATE(git &gt; 2.27)</span>
 git switch --orphan &lt;new branch&gt;
-git commit --allow-empty -m "Initial commit on orphan branch"
+git commit --allow-empty -m <span style="color: #ddbc91;">"Initial commit on orphan branch"</span>
 git push -u origin &lt;new branch&gt;
 
-## Old Way
+<span style="color: #706565;">## </span><span style="color: #857575;">Old Way</span>
 
-# local
+<span style="color: #706565;"># </span><span style="color: #857575;">local</span>
 git checkout --orphan empty-branch
 git rm -rf .
-# remote
-git commit --allow-empty -m "root commit"
+<span style="color: #706565;"># </span><span style="color: #857575;">remote</span>
+git commit --allow-empty -m <span style="color: #ddbc91;">"root commit"</span>
 git push origin empty-branch
 </pre>
 </div>
 </div>
+</div>
 
-<div id="outline-container-本地和远程删除分支" class="outline-3">
-<h3 id="本地和远程删除分支"><span class="section-number-3">2.2</span> 本地和远程删除分支</h3>
-<div class="outline-text-3" id="text-本地和远程删除分支">
-<pre class="example" id="org7a0359e">
-# delete branch locally
+<div id="outline-container-orge36bf15" class="outline-3">
+<h3 id="orge36bf15"><span class="section-number-3">2.2</span> 本地和远程删除分支</h3>
+<div class="outline-text-3" id="text-2-2">
+<div class="org-src-container">
+<pre class="src src-sh"><span style="color: #706565;"># </span><span style="color: #857575;">delete branch locally</span>
 git branch -d localBranchName
-# delete a local branch that has not been merged to the current branch or an upstream
+<span style="color: #706565;"># </span><span style="color: #857575;">delete a local branch that has not been merged to the current branch or an upstream</span>
 git branch -D localBranchName
 
-# delete branch remotely
+<span style="color: #706565;"># </span><span style="color: #857575;">delete branch remotely</span>
 git push origin --delete remoteBranchName
-# same as
+<span style="color: #706565;"># </span><span style="color: #857575;">same as</span>
 git push origin :remoteBranchName
 
-# delete multiple branches
-git branch | grep 'fix/' | xargs git branch -d
+<span style="color: #706565;"># </span><span style="color: #857575;">delete multiple branches</span>
+git branch | grep <span style="color: #ddbc91;">'fix/'</span> | xargs git branch -d
 
-# rename current branch
+<span style="color: #706565;"># </span><span style="color: #857575;">rename current branch</span>
 git branch -m new-name
-# rename a different(local) branch
+<span style="color: #706565;"># </span><span style="color: #857575;">rename a different(local) branch</span>
 git branch -m old-name new-name
 
-# delete the old-name remote branch and push the new-name local branch
+<span style="color: #706565;"># </span><span style="color: #857575;">delete the old-name remote branch and push the new-name local branch</span>
 git push origin :old_name new_name
 </pre>
 </div>
 </div>
+</div>
 
-<div id="outline-container-克隆特定远程分支" class="outline-3">
-<h3 id="克隆特定远程分支"><span class="section-number-3">2.3</span> 克隆特定远程分支</h3>
-<div class="outline-text-3" id="text-克隆特定远程分支">
-<pre class="example" id="org1b84272">
-git clone --branch &lt;branchname&gt; &lt;remote-repo-url&gt;
+<div id="outline-container-orgfa5e580" class="outline-3">
+<h3 id="orgfa5e580"><span class="section-number-3">2.3</span> 克隆特定远程分支</h3>
+<div class="outline-text-3" id="text-2-3">
+<div class="org-src-container">
+<pre class="src src-sh">git clone --branch &lt;branchname&gt; &lt;remote-repo-url&gt;
 </pre>
 </div>
 </div>
+</div>
 
-<div id="outline-container-删除仅存在本地远程仓库中不存在的分支" class="outline-3">
-<h3 id="删除仅存在本地远程仓库中不存在的分支"><span class="section-number-3">2.4</span> 删除仅存在本地（远程仓库中不存在）的分支</h3>
-<div class="outline-text-3" id="text-删除仅存在本地远程仓库中不存在的分支">
-<pre class="example" id="org2aef195">
-$ git branch -a
+<div id="outline-container-org8154ac4" class="outline-3">
+<h3 id="org8154ac4"><span class="section-number-3">2.4</span> 删除仅存在本地（远程仓库中不存在）的分支</h3>
+<div class="outline-text-3" id="text-2-4">
+<div class="org-src-container">
+<pre class="src src-sh">$ git branch -a
 * main
 
   remotes/origin/articles-main
   remotes/origin/gh-pages
   remotes/origin/main
 
-# remote branch articles-main, gh-pages has been deleted
+<span style="color: #706565;"># </span><span style="color: #857575;">remote branch articles-main, gh-pages has been deleted</span>
 $ git remote prune origin
 Pruning origin
 URL: git@github.com:tianheg/wiki.git
@@ -160,41 +348,45 @@ URL: git@github.com:tianheg/wiki.git
 * [pruned] origin/articles-main
 * [pruned] origin/gh-pages
 </pre>
+</div>
 
 <p>
 Others:
 </p>
 
-<pre class="example" id="orgadabc2e">
-git branch # list local branches
-git branch -r # list remote branches
-git branch -a # list local and remote branches
-git checkout -b &lt;branch&gt; &lt;SHA1_OF_COMMIT&gt; # create a branch from a commit
+<div class="org-src-container">
+<pre class="src src-sh">git branch <span style="color: #706565;"># </span><span style="color: #857575;">list local branches</span>
+git branch -r <span style="color: #706565;"># </span><span style="color: #857575;">list remote branches</span>
+git branch -a <span style="color: #706565;"># </span><span style="color: #857575;">list local and remote branches</span>
+git checkout -b &lt;branch&gt; &lt;SHA1_OF_COMMIT&gt; <span style="color: #706565;"># </span><span style="color: #857575;">create a branch from a commit</span>
 </pre>
 </div>
 </div>
 </div>
+</div>
 
-<div id="outline-container-submodule" class="outline-2">
-<h2 id="submodule"><span class="section-number-2">3</span> Submodule</h2>
-<div class="outline-text-2" id="text-submodule">
-<pre class="example" id="org9aa660c">
-# clone all submodules
+<div id="outline-container-orgefade00" class="outline-2">
+<h2 id="orgefade00"><span class="section-number-2">3</span> Submodule</h2>
+<div class="outline-text-2" id="text-3">
+<div class="org-src-container">
+<pre class="src src-sh"><span style="color: #706565;"># </span><span style="color: #857575;">clone all submodules</span>
 git clone --recursive git://github.com/foo/bar.git
-# already cloned
+<span style="color: #706565;"># </span><span style="color: #857575;">already cloned</span>
 git submodule update --init --recursive
 </pre>
 </div>
+</div>
 
-<div id="outline-container-移除-submodule" class="outline-3">
-<h3 id="移除-submodule"><span class="section-number-3">3.1</span> 移除 Submodule</h3>
-<div class="outline-text-3" id="text-移除-submodule">
-<pre class="example" id="org2170eef">
-git submodule deinit submodulename
+<div id="outline-container-org2f15053" class="outline-3">
+<h3 id="org2f15053"><span class="section-number-3">3.1</span> 移除 Submodule</h3>
+<div class="outline-text-3" id="text-3-1">
+<div class="org-src-container">
+<pre class="src src-sh">git submodule deinit submodulename
 git rm submodulename
 git rm --cached submodulename
 rm -rf .git/modules/submodulename
 </pre>
+</div>
 </div>
 </div>
 </div>
@@ -215,8 +407,7 @@ rm -rf .git/modules/submodulename
 </p></div></div>
 
 <div class="footdef"><sup><a id="fn.4" class="footnum" href="#fnr.4">4</a></sup> <div class="footpara"><p class="footpara">
-<a href="https://stackoverflow.com/a/34100189">https://stackoverflow.com/a/34100189</a>
-</p></div></div>
+<a href="https://stackoverflow.com/a/34100189">https://stackoverflow.com/a/34100189</a></p></div></div>
 
 
 </div>
