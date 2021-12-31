@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html lang="zh">
 <head>
-<!-- 2021-12-31 Fri 17:26 -->
+<!-- 2021-12-31 Fri 20:15 -->
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>Hugo 设置 shortcode</title>
@@ -246,7 +246,7 @@
 =align.html=，内容如下：
 </p>
 
-<pre class="example" id="org24fed69">
+<pre class="example" id="org4a7ec28">
 &lt;!-- 文件位置：~/layouts/shortcodes/align.html --&gt;
 
 &lt;p style="text-align:{{ index .Params 0 }}"&gt;{{ index .Params 1 | markdownify }}&lt;/p&gt;
@@ -256,7 +256,7 @@
 具体简码样式：
 </p>
 
-<pre class="example" id="org2b3b0d3">
+<pre class="example" id="org0ca646e">
 {{&lt;/* align left "文字" */&gt;}}
 
 {{&lt;/* align center "文字" */&gt;}}
@@ -285,7 +285,7 @@
 新建文件 github.html
 </p>
 
-<pre class="example" id="org6bd9ea6">
+<pre class="example" id="org8bc7369">
 &lt;!-- 文件位置：~/layouts/shortcodes/github.html --&gt;
 
 &lt;div class="github"&gt;
@@ -306,7 +306,7 @@
 文件中添加如下内容：
 </p>
 
-<pre class="example" id="orgb63374a">
+<pre class="example" id="org367d3ce">
 // 文件位置：~/assets/scss/custom/_custom.scss
 
 .github {
@@ -357,7 +357,7 @@
 最后需要在 <code>~/data/SVG.toml</code> 文件中插入图标：
 </p>
 
-<pre class="example" id="org717ea3d">
+<pre class="example" id="orgf107769">
 # 文件位置：~/data/SVG.toml
 
 # GitHub Icon
@@ -373,7 +373,7 @@ repository = '&lt;svg xmlns="http://www.w3.org/2000/svg" class="icon" viewBox="0
 具体简码和样式如下：
 </p>
 
-<pre class="example" id="orge00e9be">
+<pre class="example" id="org10fba67">
 {{&lt;/* github name="blog" link="https://github.com/tianheg/blog" description="Blog Source Files" color="#E34C26" language="HTML" */&gt;}}
 </pre>
 
@@ -387,7 +387,7 @@ description="Blog Source Files" color="#E34C26" language="HTML"&gt;}}
 <div id="outline-container-gallery" class="outline-2">
 <h2 id="gallery"><span class="section-number-2">3</span> gallery</h2>
 <div class="outline-text-2" id="text-gallery">
-<pre class="example" id="orgfea9200">
+<pre class="example" id="org07bbdd3">
 {{&lt;/* gallery dir="/images/friends/" /&gt;}} {{&lt; load-photoswipe */&gt;}}
 # 这是添加组合图片的短代码
 </pre>
@@ -401,7 +401,7 @@ description="Blog Source Files" color="#E34C26" language="HTML"&gt;}}
 {{}} 内容 {{}}
 </p>
 
-<pre class="example" id="org9b41799">
+<pre class="example" id="org1c3d842">
 {{&lt;/*notice notice-warning&gt;}}
 内容
 {{&lt;/notice*/&gt;}}
@@ -411,7 +411,7 @@ description="Blog Source Files" color="#E34C26" language="HTML"&gt;}}
 {{}} 内容 {{}}
 </p>
 
-<pre class="example" id="org7228443">
+<pre class="example" id="orgccde786">
 {{&lt;/*notice notice-tip&gt;}}
 内容
 {{&lt;/notice*/&gt;}}
@@ -421,7 +421,7 @@ description="Blog Source Files" color="#E34C26" language="HTML"&gt;}}
 {{}} 内容 {{}}
 </p>
 
-<pre class="example" id="org181436c">
+<pre class="example" id="orgfd0e622">
 {{&lt;/*notice notice-info&gt;}}
 内容
 {{&lt;/notice*/&gt;}}
@@ -431,7 +431,7 @@ description="Blog Source Files" color="#E34C26" language="HTML"&gt;}}
 {{}} 内容 {{}}
 </p>
 
-<pre class="example" id="org09be092">
+<pre class="example" id="orgb691847">
 {{&lt;/*notice notice-note&gt;}}
 内容
 {{&lt;/notice*/&gt;}}
@@ -446,7 +446,7 @@ description="Blog Source Files" color="#E34C26" language="HTML"&gt;}}
 {{&lt; gist tianheg 1ce40c3e06eddab6bc72b87cc26ec067 &gt;}}
 </p>
 
-<pre class="example" id="orga7a72e5">
+<pre class="example" id="org10b2564">
 {{&lt;/* gist tianheg 1ce40c3e06eddab6bc72b87cc26ec067 */&gt;}}
 </pre>
 </div>
@@ -459,7 +459,7 @@ description="Blog Source Files" color="#E34C26" language="HTML"&gt;}}
 {{&lt; year &gt;}}
 </p>
 
-<pre class="example" id="org6a6b9d6">
+<pre class="example" id="org4da994c">
 {{&lt;/* year */&gt;}}
 </pre>
 </div>
@@ -472,11 +472,11 @@ description="Blog Source Files" color="#E34C26" language="HTML"&gt;}}
 highlighted text
 </p>
 
-<pre class="example" id="orgace0ac8">
+<pre class="example" id="orgdb2e64a">
 &lt;mark&gt;highlighted text&lt;/mark&gt;
 </pre>
 
-<pre class="example" id="orgfb4180f">
+<pre class="example" id="org88cc2cf">
 添加\layouts\shortcodes\highlight.html：
 &lt;highlight html &gt;
 &lt;section id="main"&gt;
@@ -513,7 +513,7 @@ print('hello world')
 {{&lt; /quote &gt;}}
 </p>
 
-<pre class="example" id="org3d1f928">
+<pre class="example" id="orgde91c23">
 {{&lt;/* quote &gt;}}
 教育，特别是未成年人的教育，一定要尽量将偏见和仇恨压到最低，以至于无。我们唯一要仇恨的就是仇恨本身，我们最应该对偏见本身有偏见。我不希望我们的下一代生活在仇恨之中，我不希望我们的下一代还有战争和屠杀，我不希望我们的下一代还有“儿童党卫军”等组织，我不希望我们的下一代还高唱忠于领袖、忠于组织的赞歌。我希望我们的下一代在和平的环境中，享受面包和音乐；我希望我们的下一代，无论什么肤色和信仰都可以平等和平的交流；我希望我们的下一代自由地选择自己喜欢的生活，而不是做任何人或任何组织的“螺丝钉”；我希望我们的下一代都内心甜美、热爱自由，各美其美；我希望我们的下一代忠于自己的良知和责任，成为有思想、有智慧、有爱心的好人。
 {{&lt; /quote */&gt;}}
@@ -529,7 +529,7 @@ read and write poetry because we are members of the human race. And the
 human race is filled with passion./ {{&lt; /quote &gt;}}
 </p>
 
-<pre class="example" id="orgd244ddb">
+<pre class="example" id="org921481f">
 {{&lt;/* quote en &gt;}}
 *We don't read and write poetry because it's cute. We read and write poetry because we are members of the human race. And the human race is filled with passion.*
 {{&lt; /quote */&gt;}}
@@ -544,7 +544,7 @@ human race is filled with passion./ {{&lt; /quote &gt;}}
 {{&lt; /quote-center &gt;}}
 </p>
 
-<pre class="example" id="org60e1d6a">
+<pre class="example" id="org0c3e69a">
 {{&lt;/* quote-center &gt;}}
 毕竟西湖六月中&lt;br&gt;风光不与四时同&lt;br&gt;接天莲叶无穷碧&lt;br&gt;映日荷花别样红
 {{&lt; /quote-center */&gt;}}
@@ -554,11 +554,11 @@ human race is filled with passion./ {{&lt; /quote &gt;}}
 {{&lt; wp tag="Wikipedia:历史上的今天" lang="zh" title="历史上的今天" &gt;}}
 </p>
 
-<pre class="example" id="orgc33299b">
+<pre class="example" id="org0a0769c">
 {{&lt;/* wp tag="Wikipedia:历史上的今天" lang="zh" title="历史上的今天" */&gt;}}
 </pre>
 
-<pre class="example" id="org3bb2a21">
+<pre class="example" id="org0407744">
 {{&lt;/* bili aid="625811282" cid="197006223" */&gt;}}
 # aid 和 cid 可以通过页面的源码获得(按 Ctrl+U 打开页面源码)
 </pre>
