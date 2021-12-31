@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html lang="zh">
 <head>
-<!-- 2021-12-30 Thu 20:35 -->
+<!-- 2021-12-31 Fri 09:54 -->
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>KDE 开机自启 ssh agent，加载密匙</title>
@@ -226,10 +226,10 @@
 <h2>Table of Contents</h2>
 <div id="text-table-of-contents">
 <ul>
-<li><a href="#org6ad5163">1. Kwallet</a></li>
-<li><a href="#org3cd7575">2. 开机启动 ssh-agent</a></li>
-<li><a href="#org083974f">3. 开机添加 ssh 密匙</a></li>
-<li><a href="#orgbe8e3a5">4. 环境变量与普通应用</a></li>
+<li><a href="#org55c075c">1. Kwallet</a></li>
+<li><a href="#orgdc46f7c">2. 开机启动 ssh-agent</a></li>
+<li><a href="#org0d8849e">3. 开机添加 ssh 密匙</a></li>
+<li><a href="#orgf917bc4">4. 环境变量与普通应用</a></li>
 </ul>
 </div>
 </nav>
@@ -242,8 +242,8 @@
 <a href="https://userbase.kde.org/KDE_Wallet_Manager">Kwallet</a> 是 Linux 桌面管理器 KDE 下的一款管理密码的应用。
 </p>
 
-<div id="outline-container-org6ad5163" class="outline-2">
-<h2 id="org6ad5163"><span class="section-number-2">1</span> Kwallet</h2>
+<div id="outline-container-org55c075c" class="outline-2">
+<h2 id="org55c075c"><span class="section-number-2">1</span> Kwallet</h2>
 <div class="outline-text-2" id="text-1">
 <p>
 创建一个新钱包，并为它设置密码。
@@ -251,8 +251,8 @@
 </div>
 </div>
 
-<div id="outline-container-org3cd7575" class="outline-2">
-<h2 id="org3cd7575"><span class="section-number-2">2</span> 开机启动 ssh-agent</h2>
+<div id="outline-container-orgdc46f7c" class="outline-2">
+<h2 id="orgdc46f7c"><span class="section-number-2">2</span> 开机启动 ssh-agent</h2>
 <div class="outline-text-2" id="text-2">
 <p>
 确保安装了 <a href="https://github.com/KDE/ksshaskpass">Ksshaskpass</a>。
@@ -284,8 +284,8 @@
 </div>
 </div>
 
-<div id="outline-container-org083974f" class="outline-2">
-<h2 id="org083974f"><span class="section-number-2">3</span> 开机添加 ssh 密匙</h2>
+<div id="outline-container-org0d8849e" class="outline-2">
+<h2 id="org0d8849e"><span class="section-number-2">3</span> 开机添加 ssh 密匙</h2>
 <div class="outline-text-2" id="text-3">
 <p>
 新建文件 <code>~/.config/autostart/ssh-add.desktop</code> ：
@@ -301,8 +301,8 @@
 </div>
 </div>
 
-<div id="outline-container-orgbe8e3a5" class="outline-2">
-<h2 id="orgbe8e3a5"><span class="section-number-2">4</span> 环境变量与普通应用</h2>
+<div id="outline-container-orgf917bc4" class="outline-2">
+<h2 id="orgf917bc4"><span class="section-number-2">4</span> 环境变量与普通应用</h2>
 <div class="outline-text-2" id="text-4">
 <p>
 启动 ssh agent 要比添加 ssh 密匙提前。因为前者使用的是环境变量，后者使用的只是普通应用自启动。</p>
