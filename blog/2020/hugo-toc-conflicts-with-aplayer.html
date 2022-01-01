@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html lang="zh">
 <head>
-<!-- 2021-12-31 Fri 20:16 -->
+<!-- 2022-01-01 Sat 19:28 -->
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>Hugo 目录和音乐播放器 APlayer 的冲突问题</title>
@@ -276,7 +276,7 @@ issue。发现了一段对该问题解答很有用的评论：
 我最后把目录和播放器的问题解决了。我的办法是把：
 </p>
 
-<pre class="example" id="org11afdc6">
+<pre class="example" id="org7b8385d">
 &lt;!-- require APlayer --&gt;
 &lt;link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/aplayer/dist/APlayer.min.css"&gt;
 &lt;script src="https://cdn.jsdelivr.net/npm/aplayer/dist/APlayer.min.js"&gt;&lt;/script&gt;
@@ -288,7 +288,7 @@ issue。发现了一段对该问题解答很有用的评论：
 直接放进 "关于" 的 markdown 文件里，然后再加上我的网易云歌单：
 </p>
 
-<pre class="example" id="orgec7e3f5">
+<pre class="example" id="org5d670be">
 &lt;meting-js
 server="netease"
 type="playlist"
@@ -313,7 +313,7 @@ id="967686417"&gt;
 新建 <code>~/layouts/shortcodes/music.html</code> ，在其中添加如下代码：
 </p>
 
-<pre class="example" id="orgb60c4f4">
+<pre class="example" id="orgbfefc30">
 {{- $scratch := .Page.Scratch.Get "scratch" -}}
 &lt;!-- require APlayer --&gt;
 &lt;link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/aplayer/dist/APlayer.min.css"&gt;
@@ -367,7 +367,7 @@ id="967686417"&gt;
 然后直接在 md 文档中引用即可：
 </p>
 
-<pre class="example" id="org63928e6">
+<pre class="example" id="org90def20">
 {{&lt;/* music auto="https://music.163.com/#/playlist?id=5043861211" */&gt;}}
 </pre>
 

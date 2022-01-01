@@ -1,0 +1,379 @@
+<!DOCTYPE html>
+<html lang="zh">
+<head>
+<!-- 2022-01-01 Sat 19:29 -->
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>2021 年终总结</title>
+<meta name="generator" content="Org mode">
+<style type="text/css">
+ <!--/*--><![CDATA[/*><!--*/
+  .title  { text-align: center;
+             margin-bottom: .2em; }
+  .subtitle { text-align: center;
+              font-size: medium;
+              font-weight: bold;
+              margin-top:0; }
+  .todo   { font-family: monospace; color: red; }
+  .done   { font-family: monospace; color: green; }
+  .priority { font-family: monospace; color: orange; }
+  .tag    { background-color: #eee; font-family: monospace;
+            padding: 2px; font-size: 80%; font-weight: normal; }
+  .timestamp { color: #bebebe; }
+  .timestamp-kwd { color: #5f9ea0; }
+  .org-right  { margin-left: auto; margin-right: 0px;  text-align: right; }
+  .org-left   { margin-left: 0px;  margin-right: auto; text-align: left; }
+  .org-center { margin-left: auto; margin-right: auto; text-align: center; }
+  .underline { text-decoration: underline; }
+  #postamble p, #preamble p { font-size: 90%; margin: .2em; }
+  p.verse { margin-left: 3%; }
+  pre {
+    border: 1px solid #ccc;
+    box-shadow: 3px 3px 3px #eee;
+    padding: 8pt;
+    font-family: monospace;
+    overflow: auto;
+    margin: 1.2em;
+  }
+  pre.src {
+    position: relative;
+    overflow: auto;
+    padding-top: 1.2em;
+  }
+  pre.src:before {
+    display: none;
+    position: absolute;
+    background-color: white;
+    top: -10px;
+    right: 10px;
+    padding: 3px;
+    border: 1px solid black;
+  }
+  pre.src:hover:before { display: inline; margin-top: 14px;}
+  /* Languages per Org manual */
+  pre.src-asymptote:before { content: 'Asymptote'; }
+  pre.src-awk:before { content: 'Awk'; }
+  pre.src-C:before { content: 'C'; }
+  /* pre.src-C++ doesn't work in CSS */
+  pre.src-clojure:before { content: 'Clojure'; }
+  pre.src-css:before { content: 'CSS'; }
+  pre.src-D:before { content: 'D'; }
+  pre.src-ditaa:before { content: 'ditaa'; }
+  pre.src-dot:before { content: 'Graphviz'; }
+  pre.src-calc:before { content: 'Emacs Calc'; }
+  pre.src-emacs-lisp:before { content: 'Emacs Lisp'; }
+  pre.src-fortran:before { content: 'Fortran'; }
+  pre.src-gnuplot:before { content: 'gnuplot'; }
+  pre.src-haskell:before { content: 'Haskell'; }
+  pre.src-hledger:before { content: 'hledger'; }
+  pre.src-java:before { content: 'Java'; }
+  pre.src-js:before { content: 'Javascript'; }
+  pre.src-latex:before { content: 'LaTeX'; }
+  pre.src-ledger:before { content: 'Ledger'; }
+  pre.src-lisp:before { content: 'Lisp'; }
+  pre.src-lilypond:before { content: 'Lilypond'; }
+  pre.src-lua:before { content: 'Lua'; }
+  pre.src-matlab:before { content: 'MATLAB'; }
+  pre.src-mscgen:before { content: 'Mscgen'; }
+  pre.src-ocaml:before { content: 'Objective Caml'; }
+  pre.src-octave:before { content: 'Octave'; }
+  pre.src-org:before { content: 'Org mode'; }
+  pre.src-oz:before { content: 'OZ'; }
+  pre.src-plantuml:before { content: 'Plantuml'; }
+  pre.src-processing:before { content: 'Processing.js'; }
+  pre.src-python:before { content: 'Python'; }
+  pre.src-R:before { content: 'R'; }
+  pre.src-ruby:before { content: 'Ruby'; }
+  pre.src-sass:before { content: 'Sass'; }
+  pre.src-scheme:before { content: 'Scheme'; }
+  pre.src-screen:before { content: 'Gnu Screen'; }
+  pre.src-sed:before { content: 'Sed'; }
+  pre.src-sh:before { content: 'shell'; }
+  pre.src-sql:before { content: 'SQL'; }
+  pre.src-sqlite:before { content: 'SQLite'; }
+  /* additional languages in org.el's org-babel-load-languages alist */
+  pre.src-forth:before { content: 'Forth'; }
+  pre.src-io:before { content: 'IO'; }
+  pre.src-J:before { content: 'J'; }
+  pre.src-makefile:before { content: 'Makefile'; }
+  pre.src-maxima:before { content: 'Maxima'; }
+  pre.src-perl:before { content: 'Perl'; }
+  pre.src-picolisp:before { content: 'Pico Lisp'; }
+  pre.src-scala:before { content: 'Scala'; }
+  pre.src-shell:before { content: 'Shell Script'; }
+  pre.src-ebnf2ps:before { content: 'ebfn2ps'; }
+  /* additional language identifiers per "defun org-babel-execute"
+       in ob-*.el */
+  pre.src-cpp:before  { content: 'C++'; }
+  pre.src-abc:before  { content: 'ABC'; }
+  pre.src-coq:before  { content: 'Coq'; }
+  pre.src-groovy:before  { content: 'Groovy'; }
+  /* additional language identifiers from org-babel-shell-names in
+     ob-shell.el: ob-shell is the only babel language using a lambda to put
+     the execution function name together. */
+  pre.src-bash:before  { content: 'bash'; }
+  pre.src-csh:before  { content: 'csh'; }
+  pre.src-ash:before  { content: 'ash'; }
+  pre.src-dash:before  { content: 'dash'; }
+  pre.src-ksh:before  { content: 'ksh'; }
+  pre.src-mksh:before  { content: 'mksh'; }
+  pre.src-posh:before  { content: 'posh'; }
+  /* Additional Emacs modes also supported by the LaTeX listings package */
+  pre.src-ada:before { content: 'Ada'; }
+  pre.src-asm:before { content: 'Assembler'; }
+  pre.src-caml:before { content: 'Caml'; }
+  pre.src-delphi:before { content: 'Delphi'; }
+  pre.src-html:before { content: 'HTML'; }
+  pre.src-idl:before { content: 'IDL'; }
+  pre.src-mercury:before { content: 'Mercury'; }
+  pre.src-metapost:before { content: 'MetaPost'; }
+  pre.src-modula-2:before { content: 'Modula-2'; }
+  pre.src-pascal:before { content: 'Pascal'; }
+  pre.src-ps:before { content: 'PostScript'; }
+  pre.src-prolog:before { content: 'Prolog'; }
+  pre.src-simula:before { content: 'Simula'; }
+  pre.src-tcl:before { content: 'tcl'; }
+  pre.src-tex:before { content: 'TeX'; }
+  pre.src-plain-tex:before { content: 'Plain TeX'; }
+  pre.src-verilog:before { content: 'Verilog'; }
+  pre.src-vhdl:before { content: 'VHDL'; }
+  pre.src-xml:before { content: 'XML'; }
+  pre.src-nxml:before { content: 'XML'; }
+  /* add a generic configuration mode; LaTeX export needs an additional
+     (add-to-list 'org-latex-listings-langs '(conf " ")) in .emacs */
+  pre.src-conf:before { content: 'Configuration File'; }
+
+  table { border-collapse:collapse; }
+  caption.t-above { caption-side: top; }
+  caption.t-bottom { caption-side: bottom; }
+  td, th { vertical-align:top;  }
+  th.org-right  { text-align: center;  }
+  th.org-left   { text-align: center;   }
+  th.org-center { text-align: center; }
+  td.org-right  { text-align: right;  }
+  td.org-left   { text-align: left;   }
+  td.org-center { text-align: center; }
+  dt { font-weight: bold; }
+  .footpara { display: inline; }
+  .footdef  { margin-bottom: 1em; }
+  .figure { padding: 1em; }
+  .figure p { text-align: center; }
+  .equation-container {
+    display: table;
+    text-align: center;
+    width: 100%;
+  }
+  .equation {
+    vertical-align: middle;
+  }
+  .equation-label {
+    display: table-cell;
+    text-align: right;
+    vertical-align: middle;
+  }
+  .inlinetask {
+    padding: 10px;
+    border: 2px solid gray;
+    margin: 10px;
+    background: #ffffcc;
+  }
+  #org-div-home-and-up
+   { text-align: right; font-size: 70%; white-space: nowrap; }
+  textarea { overflow-x: auto; }
+  .linenr { font-size: smaller }
+  .code-highlighted { background-color: #ffff00; }
+  .org-info-js_info-navigation { border-style: none; }
+  #org-info-js_console-label
+    { font-size: 10px; font-weight: bold; white-space: nowrap; }
+  .org-info-js_search-highlight
+    { background-color: #ffff00; color: #000000; font-weight: bold; }
+  .org-svg { width: 90%; }
+  /*]]>*/-->
+</style>
+<link rel="stylesheet" href="/theme/normalize.css"/>
+<link rel="stylesheet" href="/theme/site.css"/>
+<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin><link href="https://fonts.googleapis.com/css2?family=Noto+Sans+SC&display=swap" rel="stylesheet">
+<script defer src='https://static.cloudflareinsights.com/beacon.min.js' data-cf-beacon='{"token": "d5b841b503ed4d1b8fad459b84d1cc2f"}'></script>
+<script defer src="/theme/link.js"></script>
+<script type="text/javascript">
+// @license magnet:?xt=urn:btih:e95b018ef3580986a04669f1b5879592219e2a7a&dn=public-domain.txt Public Domain
+<!--/*--><![CDATA[/*><!--*/
+     function CodeHighlightOn(elem, id)
+     {
+       var target = document.getElementById(id);
+       if(null != target) {
+         elem.classList.add("code-highlighted");
+         target.classList.add("code-highlighted");
+       }
+     }
+     function CodeHighlightOff(elem, id)
+     {
+       var target = document.getElementById(id);
+       if(null != target) {
+         elem.classList.remove("code-highlighted");
+         target.classList.remove("code-highlighted");
+       }
+     }
+    /*]]>*///-->
+// @license-end
+</script>
+</head>
+<body>
+<div id="content">
+<header>
+<h1 class="title">2021 年终总结</h1>
+</header><ol class="org-ol">
+<li>总结 2021</li>
+<li>展望 2022</li>
+</ol>
+
+<div id="outline-container-orgd080467" class="outline-2">
+<h2 id="orgd080467">2021</h2>
+<div class="outline-text-2" id="text-orgd080467">
+</div>
+<div id="outline-container-org62e22bc" class="outline-3">
+<h3 id="org62e22bc">关于博客</h3>
+<div class="outline-text-3" id="text-org62e22bc">
+<p>
+博客是我记录自己学习和生活的地方。所以，博客的数量某种程度上代表了我学习的广度和对生活的思考。但是，很多博客文章都是写了个开头，草草了事。我很喜欢的一个比喻——蜻蜓点水。这就是我写文章的一个特点。
+</p>
+
+<p>
+11 月 20 日那天，开始用 Org Mode<sup><a id="fnr.1" class="footref" href="#fn.1">1</a></sup> 作为博客的基础设施。格式转换工作断断续续地进行，明天就能完成。为什么要用 Org Mode 呢？因为好奇。Emacs 是上世纪就流传的文本编辑器，另一款比较流行的编辑器是 Vim，经常会有人询问 Emacs 和 Vim 哪一个更好用，其实无论是否好用，不到使用的时候根本不知道。Emacs 使用了 2 个月，能够进行文本编辑、记住了几个常用快捷键。我在去年就接触了 Emacs，不过最近两个月才开始真正使用。这是为什么？我认为这就是学习新事物的过程，一个黑箱摆在面前，害怕的同时又很好奇；害怕是因为对自己期待太高，进而担心学不会，好奇就是，想知道这个东西到底是干什么用的，能不能为我所用，提高我的效率？
+</p>
+
+<p>
+于是，我开始用 Emacs，自然就了解到基于 Emacs 的 Org Mode。Org Mode 和 Markdown 一样，是一种用于标记文本的文本格式，有自己的语法，能够被导出为 HTML、PDF 等常见格式。学习 Org Mode 的收获，就是你正在阅读的这个博客网站。文章结构全部由自己决定，主题来自 org.css<sup><a id="fnr.2" class="footref" href="#fn.2">2</a></sup>。
+</p>
+
+<p>
+关于博客的内容，我是一直在改变看法的：
+</p>
+
+<ol class="org-ol">
+<li>只记录自己的技术笔记，和生活所思</li>
+<li>加入阅读书籍、观看电影、听音乐的笔记和感想</li>
+<li>加入阅读别人的文章的笔记</li>
+</ol>
+
+<p>
+博客内容的改变主要集中在究竟是只记录 1,2 还是记录 1,2,3。阅读别人的文章有时是一种美妙的享受，这时会想把自己关于文章的一些理解与评论记录下来，这样能够让自己对文章的理解更深刻，也能让更多人读到好的文章。在这种改变之间，鼓舞我的是 @dirtysalt，他的博客<sup><a id="fnr.3" class="footref" href="#fn.3">3</a></sup>只有文字，没有样式。他写的内容既有技术又有生活，既有自己对技术的理解，也有阅读别人好的文章或书籍所记的笔记。
+</p>
+</div>
+</div>
+
+<div id="outline-container-org10701c4" class="outline-3">
+<h3 id="org10701c4">关于自我认知</h3>
+<div class="outline-text-3" id="text-org10701c4">
+<p>
+我只挑选一件事来说，通过这件事我想说明自己还不够了解自己。
+</p>
+
+<p>
+有一天，从外面回到寝室，在路过别人寝室门口时，看到一个人正在咳嗽，手里拿着烟。我心里想：看吧，这就是抽烟的后果——咳嗽不断，最后可能癌症缠身。我想当然地认为那个人是因为吸烟才咳嗽的，进而觉得这个人真活该。我为什么会有这样的心理？因为我几乎每天都能在走廊里看到有人吸烟，闻到烟味的我认为自己的身体受到了伤害，这种消极情绪长时间积累下来，遇到新的刺激就会爆发。所以，我回到寝室，兴奋地跟室友说，这个人因为抽烟咳嗽，真活该啊。
+</p>
+
+<p>
+一个室友回了一句，你这是反社会啊。就像一块正燃烧的木炭，倒上一碗水。心情一下子变得沉闷，也无法继续学习了。我坐在床边，弯腰趴在双腿上，无声地哭了起来，脑子里只有一个词——反社会。这是一个很严重的词，它用在我身上，让我很不安。我那样嘲笑别人，真的不对吗？或许，没有所谓对与错，只是立场不同，观点不同。
+</p>
+
+<p>
+张鑫旭在文章《我对知乎前端相关问题的十问十答<sup><a id="fnr.4" class="footref" href="#fn.4">4</a></sup>》中，提到：
+</p>
+
+<blockquote>
+<p>
+自我认知带来的好处就是更自信，内心更加强大了，比方说一些说话刻薄的人说你是“变态”，你就大可不必放在心上。
+</p>
+</blockquote>
+
+<p>
+我为什么会谈到这句话？因为直到今天才明白，我对自己还没有足够的认识，仅凭人家一个「反社会」，就能轻易将我击溃。我曾经的自信似乎是自己的无知营造的假象，我并没有自己想象的那样厉害，我还有很多亟需改变。人在年轻的时候总爱做梦，梦见自己是主角，功成名就；来到现实，却发现自己是无名小卒，微不足道。改变很简单，好好生活。理想不是用来实现的，而是用来追逐的，这是《<a href="../2021/o-alquimista.html">牧羊少年奇幻之旅</a>》告诉我的道理。
+</p>
+</div>
+</div>
+
+<div id="outline-container-orgb22cea3" class="outline-3">
+<h3 id="orgb22cea3">关于工作</h3>
+<div class="outline-text-3" id="text-orgb22cea3">
+<p>
+「别人都找到工作了，我还没有找到。」、「你已经大四了。再找不到工作怎么办？」
+</p>
+
+<p>
+这些是我未曾说出，却潜藏在心里的话。会有很多类人给我压力，我努力把这些压力排解掉，一步一步地朝着既定目标——找到一份前端工程师工作，前进着。学习一遍的内容，会很快忘记，需要再学习一遍；这是一个循环：学习-&gt;遗忘-&gt;学习-&gt;遗忘-&gt;学习……直到某一天，再也不会遗忘了。就算任何人都在否定自己，不断地说你不行，你也别放弃，因为他们并不了解你，不知道你内心的渴望。
+</p>
+
+<p>
+我进行过<a href="../2021/first-interview.html">一次面试</a>，通过这次面试我明白自己还无法胜任公司的工作。通过上文提及的张鑫旭的文章<sup><a id="fnr.4.100" class="footref" href="#fn.4">4</a></sup>，我明白自己应该花时间学习 JavaScript 基础。
+</p>
+</div>
+</div>
+
+<div id="outline-container-org356e84a" class="outline-3">
+<h3 id="org356e84a">关于书影音</h3>
+<div class="outline-text-3" id="text-org356e84a">
+<p>
+读书的话
+</p>
+
+<p>
+今年读了毛姆的主要作品：《月亮与六便士》现在已经忘记、《刀锋》则对主人公去印度感受自然的描写，神往异常、《人性的枷锁》讲述了主人公菲利普与两个女人的纠葛。还有上个星期刚读的一本畅销书《克拉拉与太阳》，讨论了未来世界人与人之间的关系是如何影响我们的行为的。
+</p>
+
+<p>
+观影的话
+</p>
+
+<p>
+看了《你好，李焕英》、《鸟人》、《遗愿清单》、《007》系列、《爱乐之城》、《比海更深（海よりもまだ深く）》、《吉祥如意》、《地球上的星星》
+</p>
+
+<p>
+听音
+</p>
+
+<p>
+回顾了许嵩的歌，《雅俗共赏》、新专辑《乌鸦》；遇到新歌手王菀之，她的《画意》听得最多。最爱《Life Is Wonderful (Live in Amsterdam)》，Jason Mraz 演唱。
+</p>
+</div>
+</div>
+</div>
+
+<div id="outline-container-org01a8641" class="outline-2">
+<h2 id="org01a8641">2022</h2>
+<div class="outline-text-2" id="text-org01a8641">
+<p>
+接下来的一年，期待自己的成长：
+</p>
+
+<ol class="org-ol">
+<li>找到属于自己的笃定、自信</li>
+<li>找到一份前端工程师工作，并努力为公司创造价值、让自己获得历练</li>
+</ol>
+</div>
+</div>
+<div id="footnotes">
+<h2 class="footnotes">Footnotes: </h2>
+<div id="text-footnotes">
+
+<div class="footdef"><sup><a id="fn.1" class="footnum" href="#fnr.1">1</a></sup> <div class="footpara"><p class="footpara">
+<a href="https://orgmode.org/">https://orgmode.org/</a>
+</p></div></div>
+
+<div class="footdef"><sup><a id="fn.2" class="footnum" href="#fnr.2">2</a></sup> <div class="footpara"><p class="footpara">
+<a href="https://github.com/gongzhitaao/orgcss">https://github.com/gongzhitaao/orgcss</a>
+</p></div></div>
+
+<div class="footdef"><sup><a id="fn.3" class="footnum" href="#fnr.3">3</a></sup> <div class="footpara"><p class="footpara">
+<a href="https://dirtysalt.github.io/html/blogs.html">https://dirtysalt.github.io/html/blogs.html</a></p></div></div>
+
+<div class="footdef"><sup><a id="fn.4" class="footnum" href="#fnr.4">4</a></sup> <div class="footpara"><p class="footpara">
+<a href="https://www.zhangxinxu.com/wordpress/2017/06/ten-question-about-frontend-zhihu/">https://www.zhangxinxu.com/wordpress/2017/06/ten-question-about-frontend-zhihu/</a>
+</p></div></div>
+
+
+</div>
+</div></div>
+</body>
+</html>
