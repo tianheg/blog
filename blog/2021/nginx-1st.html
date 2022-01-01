@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html lang="zh">
 <head>
-<!-- 2021-12-31 Fri 20:17 -->
+<!-- 2022-01-01 Sat 19:29 -->
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>Nginx 初次使用</title>
@@ -226,26 +226,26 @@
 <h2>Table of Contents</h2>
 <div id="text-table-of-contents">
 <ul>
-<li><a href="#org1ce3b01">1. 下载</a></li>
-<li><a href="#org919c936">2. 初学者指南</a>
+<li><a href="#org6f995db">1. 下载</a></li>
+<li><a href="#orgfe066ab">2. 初学者指南</a>
 <ul>
-<li><a href="#org5cee4d1">2.1. 打开关闭 Nginx，重新加载配置</a></li>
-<li><a href="#org4ffbef2">2.2. 设置 Nginx 为静态内容提供服务</a></li>
-<li><a href="#orgdfec3a4">2.3. 将 Nginx 配置为代理服务器</a></li>
+<li><a href="#org3303444">2.1. 打开关闭 Nginx，重新加载配置</a></li>
+<li><a href="#orge452a9d">2.2. 设置 Nginx 为静态内容提供服务</a></li>
+<li><a href="#org7fc2cfa">2.3. 将 Nginx 配置为代理服务器</a></li>
 </ul>
 </li>
-<li><a href="#orgcd8ebf0">3. 使用中的报错</a>
+<li><a href="#org8ccd6d4">3. 使用中的报错</a>
 <ul>
-<li><a href="#orgb3bd1ff">3.1. could not build optimal types_hash</a></li>
-<li><a href="#org8e054ac">3.2. Address already in use</a></li>
+<li><a href="#org0a27f05">3.1. could not build optimal types_hash</a></li>
+<li><a href="#orga1ef071">3.2. Address already in use</a></li>
 </ul>
 </li>
 </ul>
 </div>
 </nav>
 
-<div id="outline-container-org1ce3b01" class="outline-2">
-<h2 id="org1ce3b01"><span class="section-number-2">1</span> 下载</h2>
+<div id="outline-container-org6f995db" class="outline-2">
+<h2 id="org6f995db"><span class="section-number-2">1</span> 下载</h2>
 <div class="outline-text-2" id="text-1">
 <p>
 我使用 Arch Linux
@@ -258,8 +258,8 @@
 </div>
 </div>
 
-<div id="outline-container-org919c936" class="outline-2">
-<h2 id="org919c936"><span class="section-number-2">2</span> 初学者指南</h2>
+<div id="outline-container-orgfe066ab" class="outline-2">
+<h2 id="orgfe066ab"><span class="section-number-2">2</span> 初学者指南</h2>
 <div class="outline-text-2" id="text-2">
 <p>
 <a href="http://nginx.org/en/docs/beginners_guide.html">http://nginx.org/en/docs/beginners_guide.html</a>
@@ -280,8 +280,8 @@ Nginx 的计算机是代理服务器）</li>
 </ul>
 </div>
 
-<div id="outline-container-org5cee4d1" class="outline-3">
-<h3 id="org5cee4d1"><span class="section-number-3">2.1</span> 打开关闭 Nginx，重新加载配置</h3>
+<div id="outline-container-org3303444" class="outline-3">
+<h3 id="org3303444"><span class="section-number-3">2.1</span> 打开关闭 Nginx，重新加载配置</h3>
 <div class="outline-text-3" id="text-2-1">
 <div class="org-src-container">
 <pre class="src src-sh">sudo nginx <span style="color: #706565;"># </span><span style="color: #857575;">start</span>
@@ -310,8 +310,8 @@ ps -ax | grep nginx
 </div>
 </div>
 
-<div id="outline-container-org4ffbef2" class="outline-3">
-<h3 id="org4ffbef2"><span class="section-number-3">2.2</span> 设置 Nginx 为静态内容提供服务</h3>
+<div id="outline-container-orge452a9d" class="outline-3">
+<h3 id="orge452a9d"><span class="section-number-3">2.2</span> 设置 Nginx 为静态内容提供服务</h3>
 <div class="outline-text-3" id="text-2-2">
 <div class="org-src-container">
 <pre class="src src-conf"><span style="color: #706565;"># </span><span style="color: #857575;">edit /etc/nginx/nginx.conf</span>
@@ -332,8 +332,8 @@ ps -ax | grep nginx
 </div>
 </div>
 
-<div id="outline-container-orgdfec3a4" class="outline-3">
-<h3 id="orgdfec3a4"><span class="section-number-3">2.3</span> 将 Nginx 配置为代理服务器</h3>
+<div id="outline-container-org7fc2cfa" class="outline-3">
+<h3 id="org7fc2cfa"><span class="section-number-3">2.3</span> 将 Nginx 配置为代理服务器</h3>
 <div class="outline-text-3" id="text-2-3">
 <p>
 将它与 FastCGI 应用程序连接
@@ -357,12 +357,12 @@ ps -ax | grep nginx
 </div>
 </div>
 
-<div id="outline-container-orgcd8ebf0" class="outline-2">
-<h2 id="orgcd8ebf0"><span class="section-number-2">3</span> 使用中的报错</h2>
+<div id="outline-container-org8ccd6d4" class="outline-2">
+<h2 id="org8ccd6d4"><span class="section-number-2">3</span> 使用中的报错</h2>
 <div class="outline-text-2" id="text-3">
 </div>
-<div id="outline-container-orgb3bd1ff" class="outline-3">
-<h3 id="orgb3bd1ff"><span class="section-number-3">3.1</span> could not build optimal types_hash</h3>
+<div id="outline-container-org0a27f05" class="outline-3">
+<h3 id="org0a27f05"><span class="section-number-3">3.1</span> could not build optimal types_hash</h3>
 <div class="outline-text-3" id="text-3-1">
 <div class="org-src-container">
 <pre class="src src-sh">sudo nginx
@@ -384,8 +384,8 @@ Solution<sup><a id="fnr.1" class="footref" href="#fn.1">1</a></sup>:
 </div>
 </div>
 
-<div id="outline-container-org8e054ac" class="outline-3">
-<h3 id="org8e054ac"><span class="section-number-3">3.2</span> Address already in use</h3>
+<div id="outline-container-orga1ef071" class="outline-3">
+<h3 id="orga1ef071"><span class="section-number-3">3.2</span> Address already in use</h3>
 <div class="outline-text-3" id="text-3-2">
 <div class="org-src-container">
 <pre class="src src-sh">[emerg] 34338#34338: bind() to 0.0.0.0:80 failed (98: Address already<span style="color: #91a0b3;"> in</span> use)
