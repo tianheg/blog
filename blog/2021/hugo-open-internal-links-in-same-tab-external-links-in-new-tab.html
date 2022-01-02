@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html lang="zh">
 <head>
-<!-- 2022-01-02 Sun 14:55 -->
+<!-- 2022-01-02 Sun 15:10 -->
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>Hugo 内链当前标签页打开，外链新标签页打开</title>
@@ -222,18 +222,9 @@
 <div id="content">
 <header>
 <h1 class="title">Hugo 内链当前标签页打开，外链新标签页打开</h1>
-</header><nav id="table-of-contents">
-<h2>Table of Contents</h2>
-<div id="text-table-of-contents">
-<ul>
-<li><a href="#例子">1. 例子</a></li>
-<li><a href="#实现">2. 实现</a></li>
-</ul>
-</div>
-</nav>
-
+</header>
 <div id="outline-container-例子" class="outline-2">
-<h2 id="例子"><span class="section-number-2">1</span> 例子</h2>
+<h2 id="例子">例子</h2>
 <div class="outline-text-2" id="text-例子">
 <ul class="org-ul">
 <li><a href="https://yihui.org/cn/">https://yihui.org/cn/</a></li>
@@ -243,13 +234,13 @@
 </div>
 
 <div id="outline-container-实现" class="outline-2">
-<h2 id="实现"><span class="section-number-2">2</span> 实现</h2>
+<h2 id="实现">实现</h2>
 <div class="outline-text-2" id="text-实现">
 <p>
 在 Hugo 博客的博客单页面（single.html）中，修改 <code>{{ .Content }}</code> 为
 </p>
 
-<pre class="example" id="orgf1aa582">
+<pre class="example" id="org3ea9eb9">
 {{ $content := .Content }}
 {{ $content = replaceRE `&lt;a href="(https?://.+)"&gt;` `&lt;a href="$1" target="_blank" rel="noopener"&gt;` $content | safeHTML }}
 {{ $content | safeHTML }}

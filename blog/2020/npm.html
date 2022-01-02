@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html lang="zh">
 <head>
-<!-- 2022-01-02 Sun 14:54 -->
+<!-- 2022-01-02 Sun 15:09 -->
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>使用 npm</title>
@@ -244,21 +244,9 @@
 <div id="content">
 <header>
 <h1 class="title">使用 npm</h1>
-</header><nav id="table-of-contents">
-<h2>Table of Contents</h2>
-<div id="text-table-of-contents">
-<ul>
-<li><a href="#一">1. 一、</a></li>
-<li><a href="#二">2. 二、</a></li>
-<li><a href="#三问题">3. 三、问题</a></li>
-<li><a href="#四查看特定包版本">4. 四、查看特定包版本</a></li>
-<li><a href="#五 npm-安装指定版本的包以-vue-为例">5. 五、npm 安装指定版本的包（以 vue 为例）</a></li>
-</ul>
-</div>
-</nav>
-
+</header>
 <div id="outline-container-一" class="outline-2">
-<h2 id="一"><span class="section-number-2">1</span> 一、</h2>
+<h2 id="一">一、</h2>
 <div class="outline-text-2" id="text-一">
 <p>
 更新单个本地包版本：使用 <code>npm update &lt;package&gt;</code>
@@ -276,7 +264,7 @@
 </div>
 
 <div id="outline-container-二" class="outline-2">
-<h2 id="二"><span class="section-number-2">2</span> 二、</h2>
+<h2 id="二">二、</h2>
 <div class="outline-text-2" id="text-二">
 <p>
 执行以下操作，需要 npm 版本大于等于
@@ -303,9 +291,9 @@
 </div>
 
 <div id="outline-container-三问题" class="outline-2">
-<h2 id="三问题"><span class="section-number-2">3</span> 三、问题</h2>
+<h2 id="三问题">三、问题</h2>
 <div class="outline-text-2" id="text-三问题">
-<pre class="example" id="orgb1afd80">
+<pre class="example" id="org05e4969">
 npm WARN deprecated bcrypt-nodejs@0.0.3: bcrypt-nodejs is no longer actively maintained. Please use bcrypt or bcryptjs. See https://github.com/kelektiv/node.bcrypt.js/wiki/bcrypt-vs-brypt.js to learn more about these two options
 npm WARN deprecated minimatch@2.0.10: Please update to minimatch 3.0.2 or higher to avoid a RegExp DoS issue
 npm WARN deprecated connect@2.7.11: connect 2.x series is deprecated
@@ -337,7 +325,7 @@ npm WARN notsup SKIPPING OPTIONAL DEPENDENCY: Unsupported platform for fsevents@
 </div>
 
 <div id="outline-container-四查看特定包版本" class="outline-2">
-<h2 id="四查看特定包版本"><span class="section-number-2">4</span> 四、查看特定包版本</h2>
+<h2 id="四查看特定包版本">四、查看特定包版本</h2>
 <div class="outline-text-2" id="text-四查看特定包版本">
 <p>
 举例：
@@ -521,14 +509,14 @@ C:\Users\yourname\AppData\Roaming\npm
 </div>
 
 <div id="outline-container-五 npm-安装指定版本的包以-vue-为例" class="outline-2">
-<h2 id="五 npm-安装指定版本的包以-vue-为例"><span class="section-number-2">5</span> 五、npm 安装指定版本的包（以 vue 为例）</h2>
+<h2 id="五 npm-安装指定版本的包以-vue-为例">五、npm 安装指定版本的包（以 vue 为例）</h2>
 <div class="outline-text-2" id="text-五 npm-安装指定版本的包以-vue-为例">
 <ol class="org-ol">
 <li><p>
 <code>npm info vue</code> 查看 vue 信息：
 </p>
 
-<pre class="example" id="orgc0da4da">
+<pre class="example" id="orgaee488b">
 PS C:\Users\yourname&gt; npm info vue
 
 vue@2.6.11 | MIT | deps: none | versions: 263
@@ -556,7 +544,7 @@ published 3 months ago by yyx990803 &lt;yyx990803@gmail.com&gt;
 <code>npm view vue versions</code> 查看 vue 的所有版本：
 </p>
 
-<pre class="example" id="org9ec742f">
+<pre class="example" id="org525be4c">
 PS C:\Users\yourname&gt; npm view vue versions
 
 [
@@ -659,7 +647,7 @@ PS C:\Users\yourname&gt; npm view vue versions
 <code>npm install vue</code> 下载最新 vue 发布版本：
 </p>
 
-<pre class="example" id="org696d6f6">
+<pre class="example" id="orgdc7e3e8">
 PS C:\Users\yourname&gt; npm install vue
 npm WARN saveError ENOENT: no such file or directory, open 'C:\Users\yourname\package.json'
 npm WARN enoent ENOENT: no such file or directory, open 'C:\Users\yourname\package.json'
@@ -700,7 +688,7 @@ added 1 package from 1 contributor<span style="color: #91a0b3;"> in</span> 0.518
 <code>npm ls vue</code> 查看本地 vue 版本：
 </p>
 
-<pre class="example" id="org82b30b7">
+<pre class="example" id="org10515ca">
 PS C:\Users\yourname&gt; npm ls vue
 C:\Users\Gao Tian He
 `-- vue@2.6.11
@@ -710,7 +698,7 @@ C:\Users\Gao Tian He
 <code>npm ls vue -g</code> 查看全局安装 vue 包版本：
 </p>
 
-<pre class="example" id="orgdd061c3">
+<pre class="example" id="orgd56ab87">
 PS C:\Users\yourname&gt; npm ls vue -g
 C:\Users\yourname\AppData\Roaming\npm
 `-- (empty)
@@ -727,7 +715,7 @@ C:\Users\yourname\AppData\Roaming\npm
 vue。当我通过上述命令全局安装后，再次执行=npm ls vue -g=，就会出现：
 </p>
 
-<pre class="example" id="orgb830f13">
+<pre class="example" id="orgb4d62bf">
 PS C:\Users\yourname&gt; npm ls vue -g
 C:\Users\yourname\AppData\Roaming\npm
 `-- vue@2.6.11

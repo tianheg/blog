@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html lang="zh">
 <head>
-<!-- 2022-01-02 Sun 14:56 -->
+<!-- 2022-01-02 Sun 15:11 -->
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>Install WordPress With LAMP</title>
@@ -222,26 +222,15 @@
 <div id="content">
 <header>
 <h1 class="title">Install WordPress With LAMP</h1>
-</header><nav id="table-of-contents">
-<h2>Table of Contents</h2>
-<div id="text-table-of-contents">
-<ul>
-<li><a href="#lamp">1. LAMP</a></li>
-<li><a href="#install-wordpress">2. Install WordPress</a></li>
-<li><a href="#install-wordpress-theme">3. Install WordPress Theme</a></li>
-<li><a href="#support-https">4. Support HTTPS</a></li>
-</ul>
-</div>
-</nav>
-
+</header>
 <div id="outline-container-lamp" class="outline-2">
-<h2 id="lamp"><span class="section-number-2">1</span> LAMP</h2>
+<h2 id="lamp">LAMP</h2>
 <div class="outline-text-2" id="text-lamp">
 <p>
 Linux, Apache, MySQL, PHP
 </p>
 
-<pre class="example" id="org617d5fe">
+<pre class="example" id="org8e577b2">
 sudo apt update
 sudo apt-get install apache2 -y # apache2
 sudo apt install php libapache2-mod-php # php, libapache2-mod-php
@@ -296,7 +285,7 @@ sudo reboot # restart Raspberry Pi
 Write php file to test:
 </p>
 
-<pre class="example" id="org3647a59">
+<pre class="example" id="org152ba2c">
 &lt;?php
 phpinfo();
 </pre>
@@ -332,13 +321,13 @@ When complete, you will see the message <code>All done!</code> and
 </div>
 
 <div id="outline-container-install-wordpress" class="outline-2">
-<h2 id="install-wordpress"><span class="section-number-2">2</span> Install WordPress</h2>
+<h2 id="install-wordpress">Install WordPress</h2>
 <div class="outline-text-2" id="text-install-wordpress">
 <p>
 Then begin the WordPress installation.
 </p>
 
-<pre class="example" id="orgf06603d">
+<pre class="example" id="org95fd677">
 Database Name:      wordpress
 User Name:          root
 Password:           &lt;YOUR PASSWORD&gt;
@@ -355,7 +344,7 @@ After input these, if you get <code>Server Down</code> error, just run
 Then:
 </p>
 
-<pre class="example" id="org0fce62a">
+<pre class="example" id="org0f2379c">
 Site Title: tianheg
 Username: root
 Password: &lt;Set a password&gt;
@@ -370,7 +359,7 @@ I like <a href="https://zenhabits.net/">https://zenhabits.net/</a>'s theme, I
 </div>
 
 <div id="outline-container-install-wordpress-theme" class="outline-2">
-<h2 id="install-wordpress-theme"><span class="section-number-2">3</span> Install WordPress Theme</h2>
+<h2 id="install-wordpress-theme">Install WordPress Theme</h2>
 <div class="outline-text-2" id="text-install-wordpress-theme">
 <ol class="org-ol">
 <li>Access <code>http://address/wp-admin/</code></li>
@@ -383,7 +372,7 @@ That's it!</li>
 </div>
 
 <div id="outline-container-support-https" class="outline-2">
-<h2 id="support-https"><span class="section-number-2">4</span> Support HTTPS</h2>
+<h2 id="support-https">Support HTTPS</h2>
 <div class="outline-text-2" id="text-support-https">
 <p>
 Before test these activity, must backup the site:
