@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html lang="zh">
 <head>
-<!-- 2022-01-02 Sun 14:54 -->
+<!-- 2022-01-02 Sun 15:10 -->
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>使用 DocToc 自动生成文档目录</title>
@@ -222,36 +222,7 @@
 <div id="content">
 <header>
 <h1 class="title">使用 DocToc 自动生成文档目录</h1>
-</header><nav id="table-of-contents">
-<h2>Table of Contents</h2>
-<div id="text-table-of-contents">
-<ul>
-<li><a href="#安装">1. 安装</a></li>
-<li><a href="#使用">2. 使用</a>
-<ul>
-<li><a href="#给当前目录及子目录的所有文件添加目录">2.1. 给当前目录及子目录的所有文件添加目录</a></li>
-<li><a href="#轻松地更新已存在的由-doctoc-生成的目录">2.2. 轻松地更新已存在的由 DocToc 生成的目录</a></li>
-<li><a href="#给单个文件添加目录">2.3. 给单个文件添加目录</a>
-<ul>
-<li><a href="#例子">2.3.1. 例子</a></li>
-</ul>
-</li>
-<li><a href="#使用-doctoc-生成兼容其他网站的链接">2.4. 使用 DocToc 生成兼容其他网站的链接</a>
-<ul>
-<li><a href="#例子-1">2.4.1. 例子</a></li>
-</ul>
-</li>
-<li><a href="#指定目录位置">2.5. 指定目录位置</a></li>
-<li><a href="#指定自定义目录标题">2.6. 指定自定义目录标题</a></li>
-<li><a href="#指定目录的最大标题级别">2.7. 指定目录的最大标题级别</a></li>
-<li><a href="#打印到标准输出">2.8. 打印到标准输出</a></li>
-<li><a href="#作为一个-git-钩子使用">2.9. 作为一个 Git 钩子使用</a></li>
-</ul>
-</li>
-</ul>
-</div>
-</nav>
-<p>
+</header><p>
 DocToc 为本地 git 存储库中的 markdown
 文件生成目录。生成的目录可以正常显示在包括 GitHub 在内的代码托管网站上。
 </p>
@@ -288,7 +259,7 @@ DocToc 为本地 git 存储库中的 markdown
 </ul>
 
 <div id="outline-container-安装" class="outline-2">
-<h2 id="安装"><span class="section-number-2">1</span> 安装</h2>
+<h2 id="安装">安装</h2>
 <div class="outline-text-2" id="text-安装">
 <div class="org-src-container">
 <pre class="src src-shell">npm install -g doctoc
@@ -298,7 +269,7 @@ DocToc 为本地 git 存储库中的 markdown
 </div>
 
 <div id="outline-container-使用" class="outline-2">
-<h2 id="使用"><span class="section-number-2">2</span> 使用</h2>
+<h2 id="使用">使用</h2>
 <div class="outline-text-2" id="text-使用">
 <p>
 在最简单的用法中，可以将一个或多个文件或文件夹传递给 <code>doctoc</code>
@@ -308,7 +279,7 @@ toc。下面是一些例子。
 </div>
 
 <div id="outline-container-给当前目录及子目录的所有文件添加目录" class="outline-3">
-<h3 id="给当前目录及子目录的所有文件添加目录"><span class="section-number-3">2.1</span> 给当前目录及子目录的所有文件添加目录</h3>
+<h3 id="给当前目录及子目录的所有文件添加目录">给当前目录及子目录的所有文件添加目录</h3>
 <div class="outline-text-3" id="text-给当前目录及子目录的所有文件添加目录">
 <p>
 在你本地的 Git 仓库目录下，打开终端，输入：
@@ -328,7 +299,7 @@ markdown 语法剖析程式生成。DocToc 默认使用 GitHub 语法，但是�
 </div>
 
 <div id="outline-container-轻松地更新已存在的由-doctoc-生成的目录" class="outline-3">
-<h3 id="轻松地更新已存在的由-doctoc-生成的目录"><span class="section-number-3">2.2</span> 轻松地更新已存在的由 DocToc 生成的目录</h3>
+<h3 id="轻松地更新已存在的由-doctoc-生成的目录">轻松地更新已存在的由 DocToc 生成的目录</h3>
 <div class="outline-text-3" id="text-轻松地更新已存在的由-doctoc-生成的目录">
 <p>
 如果你已经有了一个由 DocToc 生成的目录，那 <code>doctoc .</code>
@@ -340,7 +311,7 @@ markdown 语法剖析程式生成。DocToc 默认使用 GitHub 语法，但是�
 </div>
 
 <div id="outline-container-给单个文件添加目录" class="outline-3">
-<h3 id="给单个文件添加目录"><span class="section-number-3">2.3</span> 给单个文件添加目录</h3>
+<h3 id="给单个文件添加目录">给单个文件添加目录</h3>
 <div class="outline-text-3" id="text-给单个文件添加目录">
 <p>
 如果你只想转换一个文件，这样做：
@@ -353,7 +324,7 @@ markdown 语法剖析程式生成。DocToc 默认使用 GitHub 语法，但是�
 </div>
 
 <div id="outline-container-例子" class="outline-4">
-<h4 id="例子"><span class="section-number-4">2.3.1</span> 例子</h4>
+<h4 id="例子">例子</h4>
 <div class="outline-text-4" id="text-例子">
 <div class="org-src-container">
 <pre class="src src-shell">doctoc README.md
@@ -381,7 +352,7 @@ doctoc CONTRIBUTING.md LICENSE.md
 </div>
 
 <div id="outline-container-使用-doctoc-生成兼容其他网站的链接" class="outline-3">
-<h3 id="使用-doctoc-生成兼容其他网站的链接"><span class="section-number-3">2.4</span> 使用 DocToc 生成兼容其他网站的链接</h3>
+<h3 id="使用-doctoc-生成兼容其他网站的链接">使用 DocToc 生成兼容其他网站的链接</h3>
 <div class="outline-text-3" id="text-使用-doctoc-生成兼容其他网站的链接">
 <p>
 为了添加的内容表能够兼容其他站点，而添加适当的模式标识：
@@ -402,7 +373,7 @@ doctoc CONTRIBUTING.md LICENSE.md
 </div>
 
 <div id="outline-container-例子-1" class="outline-4">
-<h4 id="例子-1"><span class="section-number-4">2.4.1</span> 例子</h4>
+<h4 id="例子-1">例子</h4>
 <div class="outline-text-4" id="text-例子-1">
 <div class="org-src-container">
 <pre class="src src-shell">doctoc README.md --bitbucket
@@ -413,7 +384,7 @@ doctoc CONTRIBUTING.md LICENSE.md
 </div>
 
 <div id="outline-container-指定目录位置" class="outline-3">
-<h3 id="指定目录位置"><span class="section-number-3">2.5</span> 指定目录位置</h3>
+<h3 id="指定目录位置">指定目录位置</h3>
 <div class="outline-text-3" id="text-指定目录位置">
 <p>
 DocToc 默认将目录放在文档的顶部，你可以通过以下格式，让 DocToc
@@ -430,7 +401,7 @@ DocToc 默认将目录放在文档的顶部，你可以通过以下格式，让 
 你可以直接把这段代码放在你的 .md 文件中。例如：
 </p>
 
-<pre class="example" id="orgd287a75">
+<pre class="example" id="orga104d61">
 // my_new_post.md
 Here we are, introducing the post. It's going to be great!
 But first: a TOC for easy reference.
@@ -450,7 +421,7 @@ Here we'll discuss...
 </div>
 
 <div id="outline-container-指定自定义目录标题" class="outline-3">
-<h3 id="指定自定义目录标题"><span class="section-number-3">2.6</span> 指定自定义目录标题</h3>
+<h3 id="指定自定义目录标题">指定自定义目录标题</h3>
 <div class="outline-text-3" id="text-指定自定义目录标题">
 <p>
 使用 <code>--title</code> 选项可以指定 markdown
@@ -466,7 +437,7 @@ Here we'll discuss...
 </div>
 
 <div id="outline-container-指定目录的最大标题级别" class="outline-3">
-<h3 id="指定目录的最大标题级别"><span class="section-number-3">2.7</span> 指定目录的最大标题级别</h3>
+<h3 id="指定目录的最大标题级别">指定目录的最大标题级别</h3>
 <div class="outline-text-3" id="text-指定目录的最大标题级别">
 <p>
 使用 <code>--maxlevel</code> 选项将 TOC
@@ -481,7 +452,7 @@ Here we'll discuss...
 </div>
 
 <div id="outline-container-打印到标准输出" class="outline-3">
-<h3 id="打印到标准输出"><span class="section-number-3">2.8</span> 打印到标准输出</h3>
+<h3 id="打印到标准输出">打印到标准输出</h3>
 <div class="outline-text-3" id="text-打印到标准输出">
 <p>
 可以使用 <code>-s</code> 或 <code>--stdout</code> 选项打印到 stdout。
@@ -490,14 +461,14 @@ Here we'll discuss...
 </div>
 
 <div id="outline-container-作为一个-git-钩子使用" class="outline-3">
-<h3 id="作为一个-git-钩子使用"><span class="section-number-3">2.9</span> 作为一个 Git 钩子使用</h3>
+<h3 id="作为一个-git-钩子使用">作为一个 Git 钩子使用</h3>
 <div class="outline-text-3" id="text-作为一个-git-钩子使用">
 <p>
 通过使用以下配置，doctoc 可以用作 <a href="http://pre-commit.com/">预提交</a>
 钩子：
 </p>
 
-<pre class="example" id="orgc677e5d">
+<pre class="example" id="orge9fee0e">
 repos:
 -   repo: https://github.com/thlorenz/doctoc
     sha: ...  # substitute a tagged version 
