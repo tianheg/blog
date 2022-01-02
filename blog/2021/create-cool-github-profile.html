@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html lang="zh">
 <head>
-<!-- 2022-01-02 Sun 14:55 -->
+<!-- 2022-01-02 Sun 15:10 -->
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>为 GitHub 主页添加「年进度」和「最近更新的博客文章」</title>
@@ -244,18 +244,7 @@
 <div id="content">
 <header>
 <h1 class="title">为 GitHub 主页添加「年进度」和「最近更新的博客文章」</h1>
-</header><nav id="table-of-contents">
-<h2>Table of Contents</h2>
-<div id="text-table-of-contents">
-<ul>
-<li><a href="#添加年进度">1. 添加「年进度」</a></li>
-<li><a href="#添加最近更新的博客文章">2. 添加「最近更新的博客文章」</a></li>
-<li><a href="#整合-github-actions">3. 整合 GitHub Actions</a></li>
-<li><a href="#解释-tianheggithub-actionspipenv">4. 解释 tianheg/github-actions@pipenv</a></li>
-</ul>
-</div>
-</nav>
-<p>
+</header><p>
 午饭前看到一个
 issue：<a href="https://github.com/ruanyf/weekly/issues/1616">[开源自荐] 利用
 Github Actions 获取网站的 RSS 数据，并更新到个人主页</a>。
@@ -267,7 +256,7 @@ Github Actions 获取网站的 RSS 数据，并更新到个人主页</a>。
 </p>
 
 <div id="outline-container-添加年进度" class="outline-2">
-<h2 id="添加年进度"><span class="section-number-2">1</span> 添加「年进度」</h2>
+<h2 id="添加年进度">添加「年进度」</h2>
 <div class="outline-text-2" id="text-添加年进度">
 <p>
 用到了 JavaScript 的知识，代码：
@@ -315,14 +304,14 @@ console.log(readme)
 </div>
 
 <div id="outline-container-添加最近更新的博客文章" class="outline-2">
-<h2 id="添加最近更新的博客文章"><span class="section-number-2">2</span> 添加「最近更新的博客文章」</h2>
+<h2 id="添加最近更新的博客文章">添加「最近更新的博客文章」</h2>
 <div class="outline-text-2" id="text-添加最近更新的博客文章">
 <p>
 使用了 <a href="https://github.com/pypa/pipenv">pipenv</a> 这个 Python
 开发工作流。在与个人用户名相同的仓库中添加 =Pipfile=：
 </p>
 
-<pre class="example" id="org7930a8e">
+<pre class="example" id="org2176548">
 [[source]]
 name = "pypi"
 url = "https://pypi.org/simple"
@@ -346,7 +335,7 @@ python_version = "3.7"
 <code>python_version</code> 必须是 3.7，改成其他的会报错（[错误地址 1][]）：
 </p>
 
-<pre class="example" id="org8531fd9">
+<pre class="example" id="org1e257f0">
 Warning: Python 3.8 was not found on your system...
 Neither 'pyenv' nor 'asdf' could be found to install Python.
 You can specify specific versions of Python with:
@@ -358,7 +347,7 @@ $ pipenv --python path/to/python
 报错（[错误地址 2][]）：
 </p>
 
-<pre class="example" id="org0432c1a">
+<pre class="example" id="orgdddab06">
 ValueError: invalid literal for int() with base 10: '3.x'
 </pre>
 
@@ -367,7 +356,7 @@ ValueError: invalid literal for int() with base 10: '3.x'
 WSL2-Ubuntu20.04。我已经安装了最新版本的 pip，直接安装 pipenv 即可：
 </p>
 
-<pre class="example" id="orgd321713">
+<pre class="example" id="orge476688">
 pip install pipenv
 </pre>
 
@@ -375,7 +364,7 @@ pip install pipenv
 然后，在本地仓库中新建上述文件 =Pipfile=，执行：
 </p>
 
-<pre class="example" id="org2de26e7">
+<pre class="example" id="org8f3d165">
 pipenv install
 </pre>
 
@@ -389,7 +378,7 @@ pipenv install
 另外一个主要文件就是 =main.py=：
 </p>
 
-<pre class="example" id="org73c7024">
+<pre class="example" id="orgb2fdf21">
 import feedparser
 import time
 import os
@@ -447,7 +436,7 @@ main()
 </div>
 
 <div id="outline-container-整合-github-actions" class="outline-2">
-<h2 id="整合-github-actions"><span class="section-number-2">3</span> 整合 GitHub Actions</h2>
+<h2 id="整合-github-actions">整合 GitHub Actions</h2>
 <div class="outline-text-2" id="text-整合-github-actions">
 <p>
 我想让 GitHub Actions 帮我完成这两件事。我需要怎么做呢？
@@ -457,7 +446,7 @@ main()
 首先，新建文件 =~\.github\workflows\main.yml=，并添加以下内容：
 </p>
 
-<pre class="example" id="org929f6a4">
+<pre class="example" id="orgeb1a993">
 name: update tianheg profile
 
 on:
@@ -523,7 +512,7 @@ commit</li>
 </div>
 
 <div id="outline-container-解释-tianheggithub-actionspipenv" class="outline-2">
-<h2 id="解释-tianheggithub-actionspipenv"><span class="section-number-2">4</span> 解释 tianheg/github-actions@pipenv</h2>
+<h2 id="解释-tianheggithub-actionspipenv">解释 tianheg/github-actions@pipenv</h2>
 <div class="outline-text-2" id="text-解释-tianheggithub-actionspipenv">
 <p>
 这是我使用的关于 pipenv 的 GitHub Actions，它位于我的 GitHub 仓库的
@@ -534,7 +523,7 @@ pipenv 分支中。
 文件结构：
 </p>
 
-<pre class="example" id="org751d151">
+<pre class="example" id="org87dc542">
 Dockerfile
 LICENSE
 README.md
@@ -550,7 +539,7 @@ entrypoint.sh
 <code>Dockerfile</code> 内容：
 </p>
 
-<pre class="example" id="orgd83acae">
+<pre class="example" id="org04b983d">
 ARG PYTHON_IMAGE_VERSION=3
 FROM python:$PYTHON_IMAGE_VERSION
 
@@ -567,7 +556,7 @@ ENTRYPOINT ["/entrypoint.sh"]
 <code>entrypoint.sh</code> 内容：
 </p>
 
-<pre class="example" id="org36dda69">
+<pre class="example" id="org3d4be56">
 #!/bin/sh
 
 sh -c "pipenv $*"

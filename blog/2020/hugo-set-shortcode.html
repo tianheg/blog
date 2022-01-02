@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html lang="zh">
 <head>
-<!-- 2022-01-02 Sun 14:54 -->
+<!-- 2022-01-02 Sun 15:09 -->
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>Hugo 设置 shortcode</title>
@@ -222,31 +222,16 @@
 <div id="content">
 <header>
 <h1 class="title">Hugo 设置 shortcode</h1>
-</header><nav id="table-of-contents">
-<h2>Table of Contents</h2>
-<div id="text-table-of-contents">
-<ul>
-<li><a href="#align">1. align</a></li>
-<li><a href="#github">2. github</a></li>
-<li><a href="#gallery">3. gallery</a></li>
-<li><a href="#notice">4. notice</a></li>
-<li><a href="#gist">5. gist</a></li>
-<li><a href="#year">6. year</a></li>
-<li><a href="#highlight">7. highlight</a></li>
-<li><a href="#quote">8. quote</a></li>
-</ul>
-</div>
-</nav>
-
+</header>
 <div id="outline-container-align" class="outline-2">
-<h2 id="align"><span class="section-number-2">1</span> align</h2>
+<h2 id="align">align</h2>
 <div class="outline-text-2" id="text-align">
 <p>
 对文字进行居中、居左、居右的设置。在 <code>~/layouts/shortcodes/</code> 下创建
 =align.html=，内容如下：
 </p>
 
-<pre class="example" id="orgfae4833">
+<pre class="example" id="org9752d19">
 &lt;!-- 文件位置：~/layouts/shortcodes/align.html --&gt;
 
 &lt;p style="text-align:{{ index .Params 0 }}"&gt;{{ index .Params 1 | markdownify }}&lt;/p&gt;
@@ -256,7 +241,7 @@
 具体简码样式：
 </p>
 
-<pre class="example" id="org22ad50f">
+<pre class="example" id="orgbfa02a2">
 {{&lt;/* align left "文字" */&gt;}}
 
 {{&lt;/* align center "文字" */&gt;}}
@@ -279,13 +264,13 @@
 </div>
 
 <div id="outline-container-github" class="outline-2">
-<h2 id="github"><span class="section-number-2">2</span> github</h2>
+<h2 id="github">github</h2>
 <div class="outline-text-2" id="text-github">
 <p>
 新建文件 github.html
 </p>
 
-<pre class="example" id="org09f9f62">
+<pre class="example" id="orgc49997f">
 &lt;!-- 文件位置：~/layouts/shortcodes/github.html --&gt;
 
 &lt;div class="github"&gt;
@@ -306,7 +291,7 @@
 文件中添加如下内容：
 </p>
 
-<pre class="example" id="org5e5fdba">
+<pre class="example" id="org8265e9f">
 // 文件位置：~/assets/scss/custom/_custom.scss
 
 .github {
@@ -357,7 +342,7 @@
 最后需要在 <code>~/data/SVG.toml</code> 文件中插入图标：
 </p>
 
-<pre class="example" id="orge61cdad">
+<pre class="example" id="org488a66c">
 # 文件位置：~/data/SVG.toml
 
 # GitHub Icon
@@ -373,7 +358,7 @@ repository = '&lt;svg xmlns="http://www.w3.org/2000/svg" class="icon" viewBox="0
 具体简码和样式如下：
 </p>
 
-<pre class="example" id="orgf92e2fa">
+<pre class="example" id="orgc95e660">
 {{&lt;/* github name="blog" link="https://github.com/tianheg/blog" description="Blog Source Files" color="#E34C26" language="HTML" */&gt;}}
 </pre>
 
@@ -385,9 +370,9 @@ description="Blog Source Files" color="#E34C26" language="HTML"&gt;}}
 </div>
 
 <div id="outline-container-gallery" class="outline-2">
-<h2 id="gallery"><span class="section-number-2">3</span> gallery</h2>
+<h2 id="gallery">gallery</h2>
 <div class="outline-text-2" id="text-gallery">
-<pre class="example" id="org3dd3aac">
+<pre class="example" id="org3b0214d">
 {{&lt;/* gallery dir="/images/friends/" /&gt;}} {{&lt; load-photoswipe */&gt;}}
 # 这是添加组合图片的短代码
 </pre>
@@ -395,13 +380,13 @@ description="Blog Source Files" color="#E34C26" language="HTML"&gt;}}
 </div>
 
 <div id="outline-container-notice" class="outline-2">
-<h2 id="notice"><span class="section-number-2">4</span> notice</h2>
+<h2 id="notice">notice</h2>
 <div class="outline-text-2" id="text-notice">
 <p>
 {{}} 内容 {{}}
 </p>
 
-<pre class="example" id="orgf1eb502">
+<pre class="example" id="org89d22b8">
 {{&lt;/*notice notice-warning&gt;}}
 内容
 {{&lt;/notice*/&gt;}}
@@ -411,7 +396,7 @@ description="Blog Source Files" color="#E34C26" language="HTML"&gt;}}
 {{}} 内容 {{}}
 </p>
 
-<pre class="example" id="org0c8314d">
+<pre class="example" id="org0d362cc">
 {{&lt;/*notice notice-tip&gt;}}
 内容
 {{&lt;/notice*/&gt;}}
@@ -421,7 +406,7 @@ description="Blog Source Files" color="#E34C26" language="HTML"&gt;}}
 {{}} 内容 {{}}
 </p>
 
-<pre class="example" id="org9e0f5b3">
+<pre class="example" id="org2a03aad">
 {{&lt;/*notice notice-info&gt;}}
 内容
 {{&lt;/notice*/&gt;}}
@@ -431,7 +416,7 @@ description="Blog Source Files" color="#E34C26" language="HTML"&gt;}}
 {{}} 内容 {{}}
 </p>
 
-<pre class="example" id="orge614d87">
+<pre class="example" id="orgc4e39b9">
 {{&lt;/*notice notice-note&gt;}}
 内容
 {{&lt;/notice*/&gt;}}
@@ -440,43 +425,43 @@ description="Blog Source Files" color="#E34C26" language="HTML"&gt;}}
 </div>
 
 <div id="outline-container-gist" class="outline-2">
-<h2 id="gist"><span class="section-number-2">5</span> gist</h2>
+<h2 id="gist">gist</h2>
 <div class="outline-text-2" id="text-gist">
 <p>
 {{&lt; gist tianheg 1ce40c3e06eddab6bc72b87cc26ec067 &gt;}}
 </p>
 
-<pre class="example" id="org13a9320">
+<pre class="example" id="org7fe1f89">
 {{&lt;/* gist tianheg 1ce40c3e06eddab6bc72b87cc26ec067 */&gt;}}
 </pre>
 </div>
 </div>
 
 <div id="outline-container-year" class="outline-2">
-<h2 id="year"><span class="section-number-2">6</span> year</h2>
+<h2 id="year">year</h2>
 <div class="outline-text-2" id="text-year">
 <p>
 {{&lt; year &gt;}}
 </p>
 
-<pre class="example" id="org0c0fd71">
+<pre class="example" id="orgf0af19a">
 {{&lt;/* year */&gt;}}
 </pre>
 </div>
 </div>
 
 <div id="outline-container-highlight" class="outline-2">
-<h2 id="highlight"><span class="section-number-2">7</span> highlight</h2>
+<h2 id="highlight">highlight</h2>
 <div class="outline-text-2" id="text-highlight">
 <p>
 highlighted text
 </p>
 
-<pre class="example" id="org6417061">
+<pre class="example" id="org450577a">
 &lt;mark&gt;highlighted text&lt;/mark&gt;
 </pre>
 
-<pre class="example" id="org6eb26b2">
+<pre class="example" id="org2cfe30e">
 添加\layouts\shortcodes\highlight.html：
 &lt;highlight html &gt;
 &lt;section id="main"&gt;
@@ -501,7 +486,7 @@ print('hello world')
 </div>
 
 <div id="outline-container-quote" class="outline-2">
-<h2 id="quote"><span class="section-number-2">8</span> quote</h2>
+<h2 id="quote">quote</h2>
 <div class="outline-text-2" id="text-quote">
 <p>
 中文：
@@ -513,7 +498,7 @@ print('hello world')
 {{&lt; /quote &gt;}}
 </p>
 
-<pre class="example" id="org06d8d2c">
+<pre class="example" id="org0d38fbb">
 {{&lt;/* quote &gt;}}
 教育，特别是未成年人的教育，一定要尽量将偏见和仇恨压到最低，以至于无。我们唯一要仇恨的就是仇恨本身，我们最应该对偏见本身有偏见。我不希望我们的下一代生活在仇恨之中，我不希望我们的下一代还有战争和屠杀，我不希望我们的下一代还有“儿童党卫军”等组织，我不希望我们的下一代还高唱忠于领袖、忠于组织的赞歌。我希望我们的下一代在和平的环境中，享受面包和音乐；我希望我们的下一代，无论什么肤色和信仰都可以平等和平的交流；我希望我们的下一代自由地选择自己喜欢的生活，而不是做任何人或任何组织的“螺丝钉”；我希望我们的下一代都内心甜美、热爱自由，各美其美；我希望我们的下一代忠于自己的良知和责任，成为有思想、有智慧、有爱心的好人。
 {{&lt; /quote */&gt;}}
@@ -529,7 +514,7 @@ read and write poetry because we are members of the human race. And the
 human race is filled with passion./ {{&lt; /quote &gt;}}
 </p>
 
-<pre class="example" id="org4598c39">
+<pre class="example" id="org4b073af">
 {{&lt;/* quote en &gt;}}
 *We don't read and write poetry because it's cute. We read and write poetry because we are members of the human race. And the human race is filled with passion.*
 {{&lt; /quote */&gt;}}
@@ -544,7 +529,7 @@ human race is filled with passion./ {{&lt; /quote &gt;}}
 {{&lt; /quote-center &gt;}}
 </p>
 
-<pre class="example" id="orgb2c2f87">
+<pre class="example" id="org75c4546">
 {{&lt;/* quote-center &gt;}}
 毕竟西湖六月中&lt;br&gt;风光不与四时同&lt;br&gt;接天莲叶无穷碧&lt;br&gt;映日荷花别样红
 {{&lt; /quote-center */&gt;}}
@@ -554,11 +539,11 @@ human race is filled with passion./ {{&lt; /quote &gt;}}
 {{&lt; wp tag="Wikipedia:历史上的今天" lang="zh" title="历史上的今天" &gt;}}
 </p>
 
-<pre class="example" id="orgbceaf36">
+<pre class="example" id="org0119ef8">
 {{&lt;/* wp tag="Wikipedia:历史上的今天" lang="zh" title="历史上的今天" */&gt;}}
 </pre>
 
-<pre class="example" id="orgc432b05">
+<pre class="example" id="org92ee14e">
 {{&lt;/* bili aid="625811282" cid="197006223" */&gt;}}
 # aid 和 cid 可以通过页面的源码获得(按 Ctrl+U 打开页面源码)
 </pre>

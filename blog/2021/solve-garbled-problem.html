@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html lang="zh">
 <head>
-<!-- 2022-01-02 Sun 14:56 -->
+<!-- 2022-01-02 Sun 15:11 -->
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>解决 Windows 下中文文件在 Linux 中读取乱码的问题</title>
@@ -222,17 +222,7 @@
 <div id="content">
 <header>
 <h1 class="title">解决 Windows 下中文文件在 Linux 中读取乱码的问题</h1>
-</header><nav id="table-of-contents">
-<h2>Table of Contents</h2>
-<div id="text-table-of-contents">
-<ul>
-<li><a href="#orgcc80893">1. 文件名乱码</a></li>
-<li><a href="#org95baa81">2. 文件内容乱码</a></li>
-<li><a href="#org5e3bef6">3. zip 压缩包乱码</a></li>
-</ul>
-</div>
-</nav>
-<p>
+</header><p>
 <a href="https://wiki.archlinux.org/title/Localization/Simplified_Chinese#Garbled_problem">Garbled problem - Localization/Simplified Chinese - ArchWiki</a>
 </p>
 
@@ -240,9 +230,9 @@
 Windows 系统下创建的文件采用的编码标准可能是 gbk/gb2312。所以避免乱码的基本原则就是使用包含字符更多的 utf-8，避免使用其他编码格式。
 </p>
 
-<div id="outline-container-orgcc80893" class="outline-2">
-<h2 id="orgcc80893"><span class="section-number-2">1</span> 文件名乱码</h2>
-<div class="outline-text-2" id="text-1">
+<div id="outline-container-orge1c0bca" class="outline-2">
+<h2 id="orge1c0bca">文件名乱码</h2>
+<div class="outline-text-2" id="text-orge1c0bca">
 <p>
 安装 <a href="https://linux.die.net/man/1/convmv">convmv</a>，使用 <code>convmv</code> 命令转换编码格式。举例：
 </p>
@@ -254,9 +244,9 @@ Windows 系统下创建的文件采用的编码标准可能是 gbk/gb2312。所�
 </div>
 </div>
 
-<div id="outline-container-org95baa81" class="outline-2">
-<h2 id="org95baa81"><span class="section-number-2">2</span> 文件内容乱码</h2>
-<div class="outline-text-2" id="text-2">
+<div id="outline-container-orgc70142f" class="outline-2">
+<h2 id="orgc70142f">文件内容乱码</h2>
+<div class="outline-text-2" id="text-orgc70142f">
 <p>
 使用 <code>iconv</code> 命令转换格式：
 </p>
@@ -268,9 +258,9 @@ Windows 系统下创建的文件采用的编码标准可能是 gbk/gb2312。所�
 </div>
 </div>
 
-<div id="outline-container-org5e3bef6" class="outline-2">
-<h2 id="org5e3bef6"><span class="section-number-2">3</span> zip 压缩包乱码</h2>
-<div class="outline-text-2" id="text-3">
+<div id="outline-container-org47c61ef" class="outline-2">
+<h2 id="org47c61ef">zip 压缩包乱码</h2>
+<div class="outline-text-2" id="text-org47c61ef">
 <p>
 在非 utf8 编码环境(通常是 Windows 下的中文环境)下，不要使用 zip 进行压缩(建议使用 7z)。需要一个特殊的参数：
 </p>

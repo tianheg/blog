@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html lang="zh">
 <head>
-<!-- 2022-01-02 Sun 14:55 -->
+<!-- 2022-01-02 Sun 15:10 -->
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>Arch 软件安装和用法</title>
@@ -222,95 +222,15 @@
 <div id="content">
 <header>
 <h1 class="title">Arch 软件安装和用法</h1>
-</header><nav id="table-of-contents">
-<h2>Table of Contents</h2>
-<div id="text-table-of-contents">
-<ul>
-<li><a href="#隐藏-grub-加载">1. 隐藏 GRUB 加载</a></li>
-<li><a href="#挂载">2. 挂载</a></li>
-<li><a href="#reflector-更新镜像 4">3. Reflector 更新镜像</a>
-<ul>
-<li><a href="#开机自动执行">3.1. 开机自动执行</a></li>
-<li><a href="#通过-pacman-hook-自动化以上步骤">3.2. 通过 Pacman hook 自动化以上步骤</a></li>
-<li><a href="#设置代理">3.3. 设置代理</a></li>
-<li><a href="#clash">3.4. Clash</a></li>
-</ul>
-</li>
-<li><a href="#输入法配置 6">4. 输入法配置</a>
-<ul>
-<li><a href="#fcitx5-使用发现">4.1. fcitx5 使用发现</a></li>
-</ul>
-</li>
-<li><a href="#字体 7">5. 字体</a></li>
-<li><a href="#蓝牙">6. 蓝牙</a></li>
-<li><a href="#git">7. Git</a></li>
-<li><a href="#gpg">8. GPG</a></li>
-<li><a href="#键盘映射 17">9. 键盘映射</a></li>
-<li><a href="#pacman">10. pacman</a>
-<ul>
-<li><a href="#配置-pacman">10.1. 配置 pacman</a></li>
-<li><a href="#pacman-命令">10.2. pacman 命令</a></li>
-<li><a href="#应该避免执行的-pacman-指令">10.3. 应该避免执行的 pacman 指令</a></li>
-<li><a href="#执行-pacman-命令过程中遇到的信息警告错误">10.4. 执行 pacman 命令过程中，遇到的信息/警告/错误</a></li>
-</ul>
-</li>
-<li><a href="#yay">11. yay</a>
-<ul>
-<li><a href="#安装-yay">11.1. 安装 yay</a></li>
-<li><a href="#使用-yay">11.2. 使用 yay</a></li>
-<li><a href="#yay-问题">11.3. yay 问题</a></li>
-</ul>
-</li>
-<li><a href="#imagerrpi-imager">12. Imager(rpi-imager)</a></li>
-<li><a href="#orgf08061b">13. 其他软件</a>
-<ul>
-<li><a href="#org1d575e5">13.1. MongoDB</a></li>
-<li><a href="#fly.io">13.2. Fly.io</a></li>
-<li><a href="#ventoy">13.3. ventoy</a></li>
-<li><a href="#cmdpxl">13.4. cmdpxl</a></li>
-<li><a href="#maven">13.5. maven</a></li>
-<li><a href="#sagemath">13.6. Sagemath</a></li>
-<li><a href="#tomcat8">13.7. Tomcat8</a></li>
-<li><a href="#mysql">13.8. MySQL</a></li>
-<li><a href="#idea">13.9. IDEA</a></li>
-<li><a href="#sphinx">13.10. Sphinx</a></li>
-<li><a href="#exa">13.11. exa</a></li>
-<li><a href="#informant10">13.12. informant</a></li>
-<li><a href="#virtualbox11">13.13. Virtualbox</a></li>
-<li><a href="#earlyoom">13.14. earlyoom</a></li>
-<li><a href="#vagrant13">13.15. Vagrant</a></li>
-<li><a href="#qemu">13.16. QEMU</a></li>
-<li><a href="#mutt14">13.17. Mutt</a></li>
-<li><a href="#flameshot">13.18. Flameshot</a></li>
-<li><a href="#anki15">13.19. Anki</a></li>
-<li><a href="#exercism">13.20. exercism</a></li>
-<li><a href="#scheme-programming-language">13.21. Scheme Programming Language</a></li>
-<li><a href="#nscd-自启动">13.22. <code>nscd</code> 自启动</a></li>
-<li><a href="#redshift">13.23. redshift</a></li>
-<li><a href="#tldr">13.24. tldr</a></li>
-</ul>
-</li>
-<li><a href="#让-arch-linux-系统和最新的镜像同步从最快的镜像下载 16">14. 让 Arch Linux 系统和最新的镜像同步，从最快的镜像下载</a></li>
-<li><a href="#使用国外-dns-造成国内网站访问慢的解决方法">15. 使用国外 DNS 造成国内网站访问慢的解决方法</a></li>
-<li><a href="#备份">16. 备份</a>
-<ul>
-<li><a href="#timeshift">16.1. timeshift</a></li>
-</ul>
-</li>
-<li><a href="#自动更新-hosts-github-相关-ip">17. 自动更新 hosts GitHub 相关 IP</a></li>
-<li><a href="#orga58b0ad">18. Wayland 下的剪切板工具</a></li>
-</ul>
-</div>
-</nav>
-
+</header>
 <div id="outline-container-隐藏-grub-加载" class="outline-2">
-<h2 id="隐藏-grub-加载"><span class="section-number-2">1</span> 隐藏 GRUB 加载</h2>
+<h2 id="隐藏-grub-加载">隐藏 GRUB 加载</h2>
 <div class="outline-text-2" id="text-隐藏-grub-加载">
 <p>
 尝试过这种办法<sup><a id="fnr.1" class="footref" href="#fn.1">1</a></sup>，没起作用；然后尝试这一个<sup><a id="fnr.2" class="footref" href="#fn.2">2</a></sup>成功了：
 </p>
 
-<pre class="example" id="orge295e41">
+<pre class="example" id="org5c6a1e5">
 sudo vim /etc/default/grub
 sudo grub-mkconfig -o /boot/grub/grub.cfg
 </pre>
@@ -319,7 +239,7 @@ sudo grub-mkconfig -o /boot/grub/grub.cfg
 修改 <code>etc/default/grub</code>:
 </p>
 
-<pre class="example" id="org837bcff">
+<pre class="example" id="org64aa3af">
 -GRUB_TIMEOUT=1
 +GRUB_TIMEOUT=0
 </pre>
@@ -327,7 +247,7 @@ sudo grub-mkconfig -o /boot/grub/grub.cfg
 </div>
 
 <div id="outline-container-挂载" class="outline-2">
-<h2 id="挂载"><span class="section-number-2">2</span> 挂载</h2>
+<h2 id="挂载">挂载</h2>
 <div class="outline-text-2" id="text-挂载">
 <p>
 挂载外来文件系统，推荐使用 udiskctl(install udisks2,
@@ -338,24 +258,24 @@ sudo grub-mkconfig -o /boot/grub/grub.cfg
 </div>
 
 <div id="outline-container-reflector-更新镜像 4" class="outline-2">
-<h2 id="reflector-更新镜像 4"><span class="section-number-2">3</span> Reflector 更新镜像<sup><a id="fnr.4" class="footref" href="#fn.4">4</a></sup></h2>
+<h2 id="reflector-更新镜像 4">Reflector 更新镜像<sup><a id="fnr.4" class="footref" href="#fn.4">4</a></sup></h2>
 <div class="outline-text-2" id="text-reflector-更新镜像 4">
 </div>
 <div id="outline-container-开机自动执行" class="outline-3">
-<h3 id="开机自动执行"><span class="section-number-3">3.1</span> 开机自动执行</h3>
+<h3 id="开机自动执行">开机自动执行</h3>
 <div class="outline-text-3" id="text-开机自动执行">
 <p>
 <code>/etc/xdg/reflector/reflector.conf</code>:
 </p>
 
-<pre class="example" id="org21827cf">
+<pre class="example" id="orga43f21e">
 --save /etc/pacman.d/mirrorlist
 --country China
 --protocol https
 --latest 5
 </pre>
 
-<pre class="example" id="orgce59b4b">
+<pre class="example" id="org928fd12">
 systemctl enable reflector
 systemctl start reflector
 </pre>
@@ -363,13 +283,13 @@ systemctl start reflector
 </div>
 
 <div id="outline-container-通过-pacman-hook-自动化以上步骤" class="outline-3">
-<h3 id="通过-pacman-hook-自动化以上步骤"><span class="section-number-3">3.2</span> 通过 Pacman hook 自动化以上步骤</h3>
+<h3 id="通过-pacman-hook-自动化以上步骤">通过 Pacman hook 自动化以上步骤</h3>
 <div class="outline-text-3" id="text-通过-pacman-hook-自动化以上步骤">
 <p>
 <code>/etc/pacman.d/hooks/mirrorupgrade.hook</code>:
 </p>
 
-<pre class="example" id="org0a44d1a">
+<pre class="example" id="orge5dfd43">
 [Trigger]
 Operation = Upgrade
 Type = Package
@@ -385,14 +305,14 @@ Exec = /bin/sh -c 'systemctl start reflector.service; [ -f /etc/pacman.d/mirrorl
 </div>
 
 <div id="outline-container-设置代理" class="outline-3">
-<h3 id="设置代理"><span class="section-number-3">3.3</span> 设置代理</h3>
+<h3 id="设置代理">设置代理</h3>
 <div class="outline-text-3" id="text-设置代理">
 </div>
 </div>
 <div id="outline-container-clash" class="outline-3">
-<h3 id="clash"><span class="section-number-3">3.4</span> Clash</h3>
+<h3 id="clash">Clash</h3>
 <div class="outline-text-3" id="text-clash">
-<pre class="example" id="orga4ae6cb">
+<pre class="example" id="org1dac2c1">
 export CLASH_VERSION="1.6.5"
 wget -O clash.gz https://github.com/Dreamacro/clash/releases/download/v${CLASH_VERSION}/clash-linux-amd64-v${CLASH_VERSION}.gz
 gzip -f clash.gz -d
@@ -409,7 +329,7 @@ sudo vim /etc/systemd/system/clash.service
 <code>/etc/systemd/system/clash.service</code>:
 </p>
 
-<pre class="example" id="org190e64c">
+<pre class="example" id="orge6ae375">
 [Unit]
 Description=Clash daemon, A rule-based proxy in Go.
 After=network.target
@@ -427,7 +347,7 @@ WantedBy=multi-user.target
 测试代理是否有效（脚本不起作用）<sup><a id="fnr.5" class="footref" href="#fn.5">5</a></sup>：
 </p>
 
-<pre class="example" id="org447c850">
+<pre class="example" id="org7ce0bed">
 # 来自「依云」https://blog.lilydjwg.me
 def test_youtube(port: int) -Union[str, bool]:
   output = subprocess.check_output([
@@ -447,13 +367,13 @@ def test_youtube(port: int) -Union[str, bool]:
 </div>
 
 <div id="outline-container-输入法配置 6" class="outline-2">
-<h2 id="输入法配置 6"><span class="section-number-2">4</span> 输入法配置<sup><a id="fnr.6" class="footref" href="#fn.6">6</a></sup></h2>
+<h2 id="输入法配置 6">输入法配置<sup><a id="fnr.6" class="footref" href="#fn.6">6</a></sup></h2>
 <div class="outline-text-2" id="text-输入法配置 6">
 <p>
 想把 ibus 移除，只使用 fcitx。后来发现 ibus 被很多程序依赖无法删除。
 </p>
 
-<pre class="example" id="orgd9b42c8">
+<pre class="example" id="org5e40808">
 sudo pacman -S fcitx-im fcitx-configtool fcitx-googlepinyin
 </pre>
 
@@ -465,7 +385,7 @@ Add support for gtk,qt:
 添加对 gtk，qt 类（指通过 gtk、qt 编程得到的软件）软件的支持：
 </p>
 
-<pre class="example" id="orgd3b9ccf">
+<pre class="example" id="org298d04c">
 # /etc/profile
 export XMODIFIERS="@im=fcitx"
 export GTK_IM_MODULE="fcitx"
@@ -476,7 +396,7 @@ export QT_IM_MODULE="fcitx"
 升级 fcitx 版本 4-&gt;5，并安装词库、主题：
 </p>
 
-<pre class="example" id="orga1251be">
+<pre class="example" id="org29080c9">
 sudo pacman -Rsc fcitx
 sudo pacman -S fcitx5-im fcitx5-chinese-addons fcitx5-pinyin-zhwiki fcitx5-material-color
 </pre>
@@ -487,7 +407,7 @@ sudo pacman -S fcitx5-im fcitx5-chinese-addons fcitx5-pinyin-zhwiki fcitx5-mater
 </div>
 
 <div id="outline-container-fcitx5-使用发现" class="outline-3">
-<h3 id="fcitx5-使用发现"><span class="section-number-3">4.1</span> fcitx5 使用发现</h3>
+<h3 id="fcitx5-使用发现">fcitx5 使用发现</h3>
 <div class="outline-text-3" id="text-fcitx5-使用发现">
 <p>
 <code>Enter</code> 回车键异常：中文模式下，按 ； 后再按 Enter
@@ -504,7 +424,7 @@ bug。过段时间，我改变了想法，想到这可能是因为不同软件�
 </div>
 
 <div id="outline-container-字体 7" class="outline-2">
-<h2 id="字体 7"><span class="section-number-2">5</span> 字体<sup><a id="fnr.7" class="footref" href="#fn.7">7</a></sup></h2>
+<h2 id="字体 7">字体<sup><a id="fnr.7" class="footref" href="#fn.7">7</a></sup></h2>
 <div class="outline-text-2" id="text-字体 7">
 <p>
 使用的是以前用过的 GNOME 桌面环境的默认字体设置：
@@ -520,7 +440,7 @@ bug。过段时间，我改变了想法，想到这可能是因为不同软件�
 所有安装的字体：
 </p>
 
-<pre class="example" id="orgc4006ea">
+<pre class="example" id="org603e08d">
 sudo pacman -S noto-fonts noto-fonts-extra noto-fonts-emoji noto-fonts-cjk ttf-dejavu ttf-liberation ttf-roboto ttf-inconsolata ttf-linux-libertine ttf-droid adobe-source-han-sans-cn-fonts adobe-source-han-serif-cn-fonts
 yay -S otf-eb-garamond ttf-monaco otf-san-francisco consolas-font
 </pre>
@@ -546,25 +466,25 @@ monaco, menlo, hack, IBM Plex Mono
 <li>手动安装的字体所在的目录：=~/.local/share/fonts/=</li>
 </ul>
 
-<pre class="example" id="org1c50015">
+<pre class="example" id="orgb487c70">
 fc-cache -fv # 更新字体缓存
 </pre>
 </div>
 </div>
 
 <div id="outline-container-蓝牙" class="outline-2">
-<h2 id="蓝牙"><span class="section-number-2">6</span> 蓝牙</h2>
+<h2 id="蓝牙">蓝牙</h2>
 <div class="outline-text-2" id="text-蓝牙">
-<pre class="example" id="org539b40d">
+<pre class="example" id="orgdeaf4ed">
 sudo systemctl enable --now bluetooth
 </pre>
 </div>
 </div>
 
 <div id="outline-container-git" class="outline-2">
-<h2 id="git"><span class="section-number-2">7</span> Git</h2>
+<h2 id="git">Git</h2>
 <div class="outline-text-2" id="text-git">
-<pre class="example" id="org3efbcec">
+<pre class="example" id="orgf042c79">
 wget -O ~/.gitconfig https://github.com/tianheg/dotfiles/raw/main/gitconfig
 # 不要忘记 commit.gpgsign true
 
@@ -576,13 +496,13 @@ chmod 400 ~/.ssh/id_ed25519
 </div>
 
 <div id="outline-container-gpg" class="outline-2">
-<h2 id="gpg"><span class="section-number-2">8</span> GPG</h2>
+<h2 id="gpg">GPG</h2>
 <div class="outline-text-2" id="text-gpg">
 <p>
 修改 <code>~/.gnupg/</code> 权限：
 </p>
 
-<pre class="example" id="org36bd239">
+<pre class="example" id="org08915e0">
 # https://superuser.com/a/954536 ; https://superuser.com/a/954639
 # Set ownership to your own user and primary group
 chown -R "$USER:$(id -gn)" ~/.gnupg
@@ -602,7 +522,7 @@ chmod 600 ~/.gnupg/*
 web-flow)：
 </p>
 
-<pre class="example" id="org6f972f7">
+<pre class="example" id="orgea81366">
 wget -O tianheg-pubkeys.txt https://github.com/tianheg.gpg
 wget -O github-web-flow.txt https://github.com/web-flow.gpg
 gpg --import tianheg-pubkeys.txt
@@ -612,13 +532,13 @@ gpg --import github-web-flow.txt
 </div>
 
 <div id="outline-container-键盘映射 17" class="outline-2">
-<h2 id="键盘映射 17"><span class="section-number-2">9</span> 键盘映射<sup><a id="fnr.8" class="footref" href="#fn.8">8</a></sup></h2>
+<h2 id="键盘映射 17">键盘映射<sup><a id="fnr.8" class="footref" href="#fn.8">8</a></sup></h2>
 <div class="outline-text-2" id="text-键盘映射 17">
 <p>
 把上下左右建映射到字母键：
 </p>
 
-<pre class="example" id="org5376ada">
+<pre class="example" id="org2992a74">
 vim ~/ijkl
 xmodmap ~/ijkl
 </pre>
@@ -627,7 +547,7 @@ xmodmap ~/ijkl
 <code>ijkl</code>:
 </p>
 
-<pre class="example" id="org795332c">
+<pre class="example" id="org6b56e8f">
 keycode 66 = Mode_switch
 keysym j = j J Left
 keysym l = l L Right
@@ -647,7 +567,7 @@ keysym k = k K Down
 </div>
 
 <div id="outline-container-pacman" class="outline-2">
-<h2 id="pacman"><span class="section-number-2">10</span> pacman</h2>
+<h2 id="pacman">pacman</h2>
 <div class="outline-text-2" id="text-pacman">
 <p>
 Is it possible that there is a major kernel update in the repository,
@@ -666,13 +586,13 @@ driver packages that they have installed.
 </div>
 
 <div id="outline-container-配置-pacman" class="outline-3">
-<h3 id="配置-pacman"><span class="section-number-3">10.1</span> 配置 pacman</h3>
+<h3 id="配置-pacman">配置 pacman</h3>
 <div class="outline-text-3" id="text-配置-pacman">
 <p>
 添加库 =/etc/pacman.conf=：
 </p>
 
-<pre class="example" id="org6ac8837">
+<pre class="example" id="org5eec637">
 [archlinuxcn]
 Server = https://repo.archlinuxcn.org/$arch
 </pre>
@@ -685,16 +605,16 @@ Server = https://repo.archlinuxcn.org/$arch
 导入 PGP 公匙（为了验证 archlinuxcn 库）:
 </p>
 
-<pre class="example" id="org129b18a">
+<pre class="example" id="orgb7790ac">
 sudo pacman -Syy &amp;&amp; sudo pacman -S archlinuxcn-keyring
 </pre>
 </div>
 </div>
 
 <div id="outline-container-pacman-命令" class="outline-3">
-<h3 id="pacman-命令"><span class="section-number-3">10.2</span> pacman 命令</h3>
+<h3 id="pacman-命令">pacman 命令</h3>
 <div class="outline-text-3" id="text-pacman-命令">
-<pre class="example" id="org88ddc1d">
+<pre class="example" id="org6195cc2">
 ## 常用
 pacman -Qe # List all explicitly installed packages
 pacman -Qet # list all packages explicitly installed and not required as dependencies
@@ -752,9 +672,9 @@ pacman -F /path/to/file_name # query the database to know which remote package a
 </div>
 
 <div id="outline-container-应该避免执行的-pacman-指令" class="outline-3">
-<h3 id="应该避免执行的-pacman-指令"><span class="section-number-3">10.3</span> 应该避免执行的 pacman 指令</h3>
+<h3 id="应该避免执行的-pacman-指令">应该避免执行的 pacman 指令</h3>
 <div class="outline-text-3" id="text-应该避免执行的-pacman-指令">
-<pre class="example" id="orgfb18f0d">
+<pre class="example" id="org902502b">
 pacman -Sy # never run!!!
 pacman -Rdd package # never run!!!
 </pre>
@@ -768,13 +688,13 @@ pacman -Rdd package # never run!!!
 </div>
 
 <div id="outline-container-执行-pacman-命令过程中遇到的信息警告错误" class="outline-3">
-<h3 id="执行-pacman-命令过程中遇到的信息警告错误"><span class="section-number-3">10.4</span> 执行 pacman 命令过程中，遇到的信息/警告/错误</h3>
+<h3 id="执行-pacman-命令过程中遇到的信息警告错误">执行 pacman 命令过程中，遇到的信息/警告/错误</h3>
 <div class="outline-text-3" id="text-执行-pacman-命令过程中遇到的信息警告错误">
 <p>
 循环依赖：
 </p>
 
-<pre class="example" id="org7ef61f1">
+<pre class="example" id="org132ded8">
 warning: dependency cycle detected
 </pre>
 
@@ -782,7 +702,7 @@ warning: dependency cycle detected
 执行 <code>sudo pacman -Syu</code> 时：
 </p>
 
-<pre class="example" id="orgcb8a125">
+<pre class="example" id="org56a8459">
 WARNING: Possibly missing firmware for module
 </pre>
 
@@ -804,7 +724,7 @@ gpg: key 786C63F330D7CB92: no user ID for key signature packet of class
 10[^0]
 </p>
 
-<pre class="example" id="org81a6c0a">
+<pre class="example" id="orgd363350">
 gpg: key 786C63F330D7CB92: no user ID for key signature packet of class 10
 gpg: key 1EB2638FF56C0C53: no user ID for key signature packet of class 10
 gpg: next trustdb check due at 2021-10-09
@@ -853,7 +773,7 @@ warning: /etc/pacman.d/mirrorlist installed as
 </div>
 
 <div id="outline-container-yay" class="outline-2">
-<h2 id="yay"><span class="section-number-2">11</span> yay</h2>
+<h2 id="yay">yay</h2>
 <div class="outline-text-2" id="text-yay">
 <p>
 Yet Another Yogurt: 又一个从 Arch User Repository 下载包的工具。
@@ -861,9 +781,9 @@ Yet Another Yogurt: 又一个从 Arch User Repository 下载包的工具。
 </div>
 
 <div id="outline-container-安装-yay" class="outline-3">
-<h3 id="安装-yay"><span class="section-number-3">11.1</span> 安装 yay</h3>
+<h3 id="安装-yay">安装 yay</h3>
 <div class="outline-text-3" id="text-安装-yay">
-<pre class="example" id="org0298d95">
+<pre class="example" id="orgd62c4f2">
 sudo pacman -S yay
 # pacman -S --needed git base-devel
 # git clone https://aur.archlinux.org/yay.git
@@ -874,9 +794,9 @@ sudo pacman -S yay
 </div>
 
 <div id="outline-container-使用-yay" class="outline-3">
-<h3 id="使用-yay"><span class="section-number-3">11.2</span> 使用 yay</h3>
+<h3 id="使用-yay">使用 yay</h3>
 <div class="outline-text-3" id="text-使用-yay">
-<pre class="example" id="orgb15116d">
+<pre class="example" id="org41fc440">
 # Interactively search and install packages from the repos and AUR:
 yay package_name|search_term
 # Synchronize and update all packages from the repos and AUR:
@@ -898,7 +818,7 @@ yay -Ps
 </div>
 
 <div id="outline-container-yay-问题" class="outline-3">
-<h3 id="yay-问题"><span class="section-number-3">11.3</span> yay 问题</h3>
+<h3 id="yay-问题">yay 问题</h3>
 <div class="outline-text-3" id="text-yay-问题">
 <ol class="org-ol">
 <li>安装时总是出现
@@ -921,9 +841,9 @@ yay -Ps
 </div>
 
 <div id="outline-container-imagerrpi-imager" class="outline-2">
-<h2 id="imagerrpi-imager"><span class="section-number-2">12</span> Imager(rpi-imager)</h2>
+<h2 id="imagerrpi-imager">Imager(rpi-imager)</h2>
 <div class="outline-text-2" id="text-imagerrpi-imager">
-<pre class="example" id="org9e7f485">
+<pre class="example" id="orgaa89a85">
 yay -S rpi-imager
 </pre>
 
@@ -934,9 +854,9 @@ yay -S rpi-imager
 </div>
 </div>
 
-<div id="outline-container-orgf08061b" class="outline-2">
-<h2 id="orgf08061b"><span class="section-number-2">13</span> 其他软件</h2>
-<div class="outline-text-2" id="text-13">
+<div id="outline-container-orgfa1d609" class="outline-2">
+<h2 id="orgfa1d609">其他软件</h2>
+<div class="outline-text-2" id="text-orgfa1d609">
 <p>
 参考：
 </p>
@@ -1318,9 +1238,9 @@ yay -S rpi-imager
 </table>
 </div>
 
-<div id="outline-container-org1d575e5" class="outline-3">
-<h3 id="org1d575e5"><span class="section-number-3">13.1</span> MongoDB</h3>
-<div class="outline-text-3" id="text-13-1">
+<div id="outline-container-org56d9ca7" class="outline-3">
+<h3 id="org56d9ca7">MongoDB</h3>
+<div class="outline-text-3" id="text-org56d9ca7">
 <div class="org-src-container">
 <pre class="src src-sh">yay -S mongodb-bin mongodb-tools-bin mongosh-bin
 </pre>
@@ -1329,9 +1249,9 @@ yay -S rpi-imager
 </div>
 
 <div id="outline-container-fly.io" class="outline-3">
-<h3 id="fly.io"><span class="section-number-3">13.2</span> Fly.io</h3>
+<h3 id="fly.io">Fly.io</h3>
 <div class="outline-text-3" id="text-fly.io">
-<pre class="example" id="org27a0556">
+<pre class="example" id="org87fd32d">
 curl -L https://fly.io/install.sh | sh
 flyctl auth login
 flyctl info
@@ -1341,13 +1261,13 @@ flyctl open
 </div>
 
 <div id="outline-container-ventoy" class="outline-3">
-<h3 id="ventoy"><span class="section-number-3">13.3</span> ventoy</h3>
+<h3 id="ventoy">ventoy</h3>
 <div class="outline-text-3" id="text-ventoy">
 <p>
 Output:
 </p>
 
-<pre class="example" id="orgc5dd69f">
+<pre class="example" id="org0dd5753">
 NOTE: You can create persistence images for ventoy with the "ventoy-persistent" command,
       and losslessly expand persistence ".dat" files using "ventoy-extend-persistent",
       which are shortcuts to "/opt/ventoy/CreatePersistentImg.sh" and
@@ -1358,23 +1278,23 @@ NOTE: You can create persistence images for ventoy with the "ventoy-persistent" 
 </div>
 
 <div id="outline-container-cmdpxl" class="outline-3">
-<h3 id="cmdpxl"><span class="section-number-3">13.4</span> cmdpxl</h3>
+<h3 id="cmdpxl">cmdpxl</h3>
 <div class="outline-text-3" id="text-cmdpxl">
-<pre class="example" id="org48af667">
+<pre class="example" id="org22d8410">
 pip install cmdpxl
 </pre>
 </div>
 </div>
 
 <div id="outline-container-maven" class="outline-3">
-<h3 id="maven"><span class="section-number-3">13.5</span> maven</h3>
+<h3 id="maven">maven</h3>
 <div class="outline-text-3" id="text-maven">
 <p>
 Apache Maven. Tool for building and managing Java-based projects. More
 information: <a href="https://maven.apache.org">https://maven.apache.org</a>.
 </p>
 
-<pre class="example" id="org7ac0b25">
+<pre class="example" id="org41077d0">
 -   Compile a project:
     :   mvn compile
 
@@ -1404,9 +1324,9 @@ information: <a href="https://maven.apache.org">https://maven.apache.org</a>.
 </div>
 
 <div id="outline-container-sagemath" class="outline-3">
-<h3 id="sagemath"><span class="section-number-3">13.6</span> Sagemath</h3>
+<h3 id="sagemath">Sagemath</h3>
 <div class="outline-text-3" id="text-sagemath">
-<pre class="example" id="orgac0059a">
+<pre class="example" id="orgdd1bdb2">
 sudo pacman -S sagemath
 </pre>
 
@@ -1414,7 +1334,7 @@ sudo pacman -S sagemath
 Output:
 </p>
 
-<pre class="example" id="orgc4df123">
+<pre class="example" id="orgf8053e7">
 resolving dependencies...
 looking for conflicting packages...
 warning: dependency cycle detected:
@@ -1426,9 +1346,9 @@ warning: jupyter will be installed before its python-ipywidgets dependency
 </div>
 
 <div id="outline-container-tomcat8" class="outline-3">
-<h3 id="tomcat8"><span class="section-number-3">13.7</span> Tomcat8</h3>
+<h3 id="tomcat8">Tomcat8</h3>
 <div class="outline-text-3" id="text-tomcat8">
-<pre class="example" id="orga975001">
+<pre class="example" id="orgcc034ba">
 sudo pacman -S tomcat8
 </pre>
 
@@ -1436,7 +1356,7 @@ sudo pacman -S tomcat8
 Output:
 </p>
 
-<pre class="example" id="orgb81027e">
+<pre class="example" id="org9c83370">
 extra/eclipse-ecj          4.6.3-2        1.65 MiB       1.53 MiB
 extra/java-commons-daemon  1.2.4-1        0.02 MiB       0.02 MiB
 extra/java-jsvc            1.2.4-1        0.06 MiB       0.02 MiB
@@ -1453,9 +1373,9 @@ Creating user tomcat8 (Tomcat 8 user) with uid 57 and gid 57.
 </div>
 
 <div id="outline-container-mysql" class="outline-3">
-<h3 id="mysql"><span class="section-number-3">13.8</span> MySQL</h3>
+<h3 id="mysql">MySQL</h3>
 <div class="outline-text-3" id="text-mysql">
-<pre class="example" id="org7b5c3cc">
+<pre class="example" id="org4189f0a">
 sudo pacman -S mysql
 </pre>
 
@@ -1463,7 +1383,7 @@ sudo pacman -S mysql
 Output:
 </p>
 
-<pre class="example" id="org47d9d41">
+<pre class="example" id="org167377b">
 archlinuxcn/libmysqlclient  8.0.24-1       6.89 MiB       1.31 MiB
 archlinuxcn/mysql-clients   8.0.24-1      52.30 MiB       2.12 MiB
 archlinuxcn/mysql           8.0.24-1     172.41 MiB      19.10 MiB
@@ -1490,7 +1410,7 @@ Creating user mysql (MySQL) with uid 89 and gid 89.
 删除 mysql，使用 percona-server 管理。
 </p>
 
-<pre class="example" id="org5c5c58d">
+<pre class="example" id="org79dbe0a">
 sudo pacman -S percona-server
 </pre>
 
@@ -1498,7 +1418,7 @@ sudo pacman -S percona-server
 Output:
 </p>
 
-<pre class="example" id="orgcaed594">
+<pre class="example" id="org8111c3c">
 extra/numactl             2.0.14-1       0.22 MiB       0.08 MiB
 community/percona-server  8.0.25_15-2  167.91 MiB      25.30 MiB
 </pre>
@@ -1506,9 +1426,9 @@ community/percona-server  8.0.25_15-2  167.91 MiB      25.30 MiB
 </div>
 
 <div id="outline-container-idea" class="outline-3">
-<h3 id="idea"><span class="section-number-3">13.9</span> IDEA</h3>
+<h3 id="idea">IDEA</h3>
 <div class="outline-text-3" id="text-idea">
-<pre class="example" id="org0b62d95">
+<pre class="example" id="org1aaea21">
 sudo pacman -S intellij-idea-community-edition/intellij-idea-ultimate-edition
 </pre>
 
@@ -1516,7 +1436,7 @@ sudo pacman -S intellij-idea-community-edition/intellij-idea-ultimate-edition
 Output:
 </p>
 
-<pre class="example" id="orgdf646e2">
+<pre class="example" id="org2067d2e">
 # select jdk11-openjdk
 extra/java-environment-common              3-3              0.00 MiB       0.00 MiB
 extra/java-runtime-common                  3-3              0.01 MiB       0.00 MiB
@@ -1536,7 +1456,7 @@ set _JAVA_AWT_WM_NONREPARENTING=1 in /etc/profile.d/jre.sh
 </div>
 
 <div id="outline-container-sphinx" class="outline-3">
-<h3 id="sphinx"><span class="section-number-3">13.10</span> Sphinx</h3>
+<h3 id="sphinx">Sphinx</h3>
 <div class="outline-text-3" id="text-sphinx">
 <p>
 Sphinx is a documentation generator or a tool that translates a set of
@@ -1544,7 +1464,7 @@ plain text source files into various output formats, automatically
 producing cross-references, indices, etc.
 </p>
 
-<pre class="example" id="org93b02d7">
+<pre class="example" id="orgdc4ecff">
 pip install sphinx-autobuild rstcheck # for VS Code extension: reStructuredText
 pip install sphinx-rtd-theme # sphinx-rtd-theme theme
 pip install sphinx-copybutton
@@ -1555,14 +1475,14 @@ sudo pacman -S python-sphinx-issues python-sphinx-furo
 </div>
 
 <div id="outline-container-exa" class="outline-3">
-<h3 id="exa"><span class="section-number-3">13.11</span> exa</h3>
+<h3 id="exa">exa</h3>
 <div class="outline-text-3" id="text-exa">
 <p>
 A modern replacement for <code>ls</code> (List directory contents)
 <a href="https://the.exa.website">https://the.exa.website</a>
 </p>
 
-<pre class="example" id="org774faf4">
+<pre class="example" id="orgb67d152">
 exa
 exa --oneline # List files one per line
 exa --all # List all files, including hidden files
@@ -1577,7 +1497,7 @@ exa --git-ignore # Don't list files mentioned in `.gitignore`
 </div>
 
 <div id="outline-container-informant10" class="outline-3">
-<h3 id="informant10"><span class="section-number-3">13.12</span> informant<sup><a id="fnr.10" class="footref" href="#fn.10">10</a></sup></h3>
+<h3 id="informant10">informant<sup><a id="fnr.10" class="footref" href="#fn.10">10</a></sup></h3>
 <div class="outline-text-3" id="text-informant10">
 <p>
 一个 Arch Linux 新闻阅读器和 pacman
@@ -1587,13 +1507,13 @@ hook。可以帮你在更新包时检查是否还有没有阅读的 Arch Linux �
 </div>
 
 <div id="outline-container-virtualbox11" class="outline-3">
-<h3 id="virtualbox11"><span class="section-number-3">13.13</span> Virtualbox<sup><a id="fnr.11" class="footref" href="#fn.11">11</a></sup></h3>
+<h3 id="virtualbox11">Virtualbox<sup><a id="fnr.11" class="footref" href="#fn.11">11</a></sup></h3>
 <div class="outline-text-3" id="text-virtualbox11">
 <p>
 Error message:
 </p>
 
-<pre class="example" id="org2f156fd">
+<pre class="example" id="org5131ec5">
 WARNING: The vboxdrv kernel module is not loaded. Either there is no module available for the current kernel (5.13.8-arch1-1) or it failed to load. Please recompile the kernel module and install it by
 
 sudo /sbin/vboxconfig
@@ -1605,7 +1525,7 @@ You will not be able to start VMs until this problem is fixed.
 exec:
 </p>
 
-<pre class="example" id="org1462a94">
+<pre class="example" id="orgb9a7feb">
 sudo modprobe vboxdrv
 </pre>
 
@@ -1616,7 +1536,7 @@ No message now.
 </div>
 
 <div id="outline-container-earlyoom" class="outline-3">
-<h3 id="earlyoom"><span class="section-number-3">13.14</span> earlyoom</h3>
+<h3 id="earlyoom">earlyoom</h3>
 <div class="outline-text-3" id="text-earlyoom">
 <p>
 如果是为了避免系统卡死，可以安装并使用 earlyoom<sup><a id="fnr.12" class="footref" href="#fn.12">12</a></sup>。
@@ -1627,7 +1547,7 @@ No message now.
 值最高的进程，避免系统内存耗尽卡死。
 </p>
 
-<pre class="example" id="org193b22d">
+<pre class="example" id="org36708d2">
 # after install
 sudo systemctl enable --now earlyoom
 </pre>
@@ -1635,9 +1555,9 @@ sudo systemctl enable --now earlyoom
 </div>
 
 <div id="outline-container-vagrant13" class="outline-3">
-<h3 id="vagrant13"><span class="section-number-3">13.15</span> Vagrant<sup><a id="fnr.13" class="footref" href="#fn.13">13</a></sup></h3>
+<h3 id="vagrant13">Vagrant<sup><a id="fnr.13" class="footref" href="#fn.13">13</a></sup></h3>
 <div class="outline-text-3" id="text-vagrant13">
-<pre class="example" id="orga5d0858">
+<pre class="example" id="orgb995d09">
 sudo pacman -S vagrant
 mkdir arch-vagrant &amp;&amp;  cd $_
 vim Vagrantfile
@@ -1648,7 +1568,7 @@ vagrant up
 <code>Vagrantfile</code>:
 </p>
 
-<pre class="example" id="orga32fc2c">
+<pre class="example" id="orga812b7a">
 Vagrant.configure("2") do |config|
     config.vm.box = "archlinux/archlinux"
 end
@@ -1658,7 +1578,7 @@ end
 After exec <code>vagrant up</code>, error message:
 </p>
 
-<pre class="example" id="orgd3a08a9">
+<pre class="example" id="org0712575">
 No usable default provider could be found for your system.
 
 Vagrant relies on interactions with 3rd party systems, known as
@@ -1686,7 +1606,7 @@ error message for that particular provider.
 After exec <code>sudo modprobe vboxdrv</code>, no message now.
 </p>
 
-<pre class="example" id="org7ef3603">
+<pre class="example" id="orgc8d754f">
 vagrant up
 </pre>
 
@@ -1694,7 +1614,7 @@ vagrant up
 Output:
 </p>
 
-<pre class="example" id="org1c54379">
+<pre class="example" id="orgf5edcd7">
 Vagrant is currently configured to create VirtualBox synced folders with
 the `SharedFoldersEnableSymlinksCreate` option enabled. If the Vagrant
 guest is not trusted, you may want to disable this option. For more
@@ -1716,9 +1636,9 @@ NS_ERROR_INVALID_ARG
 </div>
 
 <div id="outline-container-qemu" class="outline-3">
-<h3 id="qemu"><span class="section-number-3">13.16</span> QEMU</h3>
+<h3 id="qemu">QEMU</h3>
 <div class="outline-text-3" id="text-qemu">
-<pre class="example" id="org9fd245f">
+<pre class="example" id="orgbcbdeed">
 sudo pacman -S qemu
 </pre>
 
@@ -1726,7 +1646,7 @@ sudo pacman -S qemu
 Output:
 </p>
 
-<pre class="example" id="org39ccba5">
+<pre class="example" id="org1a7f00a">
 Please add your user to the brlapi group.
 Optional dependencies for brltty
     at-spi2-core: X11/GNOME Apps accessibility [installed]
@@ -1749,7 +1669,7 @@ Merge those examples, if needed to the according config files.
 </div>
 
 <div id="outline-container-mutt14" class="outline-3">
-<h3 id="mutt14"><span class="section-number-3">13.17</span> Mutt<sup><a id="fnr.14" class="footref" href="#fn.14">14</a></sup></h3>
+<h3 id="mutt14">Mutt<sup><a id="fnr.14" class="footref" href="#fn.14">14</a></sup></h3>
 <div class="outline-text-3" id="text-mutt14">
 <p>
 终端邮件
@@ -1758,7 +1678,7 @@ Merge those examples, if needed to the according config files.
 </div>
 
 <div id="outline-container-flameshot" class="outline-3">
-<h3 id="flameshot"><span class="section-number-3">13.18</span> Flameshot</h3>
+<h3 id="flameshot">Flameshot</h3>
 <div class="outline-text-3" id="text-flameshot">
 <p>
 可以配置下快捷键，使用起来更加快捷。去 Settings &gt;
@@ -1770,9 +1690,9 @@ Keyboard，然后下拉页面到底部，点击 <code>+</code> 号，Name 填 <c
 </div>
 
 <div id="outline-container-anki15" class="outline-3">
-<h3 id="anki15"><span class="section-number-3">13.19</span> Anki<sup><a id="fnr.15" class="footref" href="#fn.15">15</a></sup></h3>
+<h3 id="anki15">Anki<sup><a id="fnr.15" class="footref" href="#fn.15">15</a></sup></h3>
 <div class="outline-text-3" id="text-anki15">
-<pre class="example" id="org01caca2">
+<pre class="example" id="orgaed8c95">
 tar xjf ~/Downloads/anki-2.1.46-linux.tar.bz2
 cd anki-2.1.46-linux
 sudo ./install.sh
@@ -1781,9 +1701,9 @@ sudo ./install.sh
 </div>
 
 <div id="outline-container-exercism" class="outline-3">
-<h3 id="exercism"><span class="section-number-3">13.20</span> exercism</h3>
+<h3 id="exercism">exercism</h3>
 <div class="outline-text-3" id="text-exercism">
-<pre class="example" id="org1377fd9">
+<pre class="example" id="orgfa743ee">
 # https://github.com/exercism/cli/releases/ download exercism-linux-64bit.tgz
 tar -xf exercism-linux-64bit.tgz
 # Once you download and extract the archive, make it available in your $PATH
@@ -1797,9 +1717,9 @@ exercism configure --token=
 </div>
 
 <div id="outline-container-scheme-programming-language" class="outline-3">
-<h3 id="scheme-programming-language"><span class="section-number-3">13.21</span> Scheme Programming Language</h3>
+<h3 id="scheme-programming-language">Scheme Programming Language</h3>
 <div class="outline-text-3" id="text-scheme-programming-language">
-<pre class="example" id="orga4f70fb">
+<pre class="example" id="org72d0243">
 guile hello-world.scm
 ;;; note: source file /home/archie/exercism/scheme/hello-world/hello-world.scm
 ;;;       newer than compiled /home/archie/.cache/guile/ccache/2.2-LE-8-3.A/home/archie/exercism/scheme/hello-world/hello-world.scm.go
@@ -1820,7 +1740,7 @@ How to close these info?
 <code>.zshrc</code>:
 </p>
 
-<pre class="example" id="orga044506">
+<pre class="example" id="org7f86bda">
 alias guile="guile --no-auto-compile"
 </pre>
 
@@ -1832,9 +1752,9 @@ guile</a>
 </div>
 
 <div id="outline-container-nscd-自启动" class="outline-3">
-<h3 id="nscd-自启动"><span class="section-number-3">13.22</span> <code>nscd</code> 自启动</h3>
+<h3 id="nscd-自启动"><code>nscd</code> 自启动</h3>
 <div class="outline-text-3" id="text-nscd-自启动">
-<pre class="example" id="org8cb7798">
+<pre class="example" id="orge2d5d1b">
 systemctl enable nscd
 </pre>
 
@@ -1847,13 +1767,13 @@ behavior of the cache daemon.
 </div>
 
 <div id="outline-container-redshift" class="outline-3">
-<h3 id="redshift"><span class="section-number-3">13.23</span> redshift</h3>
+<h3 id="redshift">redshift</h3>
 <div class="outline-text-3" id="text-redshift">
 <p>
 纬度，经度 115.622324,33.165395
 </p>
 
-<pre class="example" id="org6812ff7">
+<pre class="example" id="orgd846fb9">
 mkdir ~/.config/redshift
 vim ~/.config/redshift/redshift.conf
 </pre>
@@ -1862,7 +1782,7 @@ vim ~/.config/redshift/redshift.conf
 <code>~/.config/redshift/redshift.conf</code>:
 </p>
 
-<pre class="example" id="org07a143d">
+<pre class="example" id="orgfef91e1">
 [redshift]
 location-provider=manual
 temp-day=5500
@@ -1885,13 +1805,13 @@ lon=115.622324
 </div>
 
 <div id="outline-container-tldr" class="outline-3">
-<h3 id="tldr"><span class="section-number-3">13.24</span> tldr</h3>
+<h3 id="tldr">tldr</h3>
 <div class="outline-text-3" id="text-tldr">
 <ol class="org-ol">
 <li>tldr-node-client</li>
 </ol>
 
-<pre class="example" id="org09e8f45">
+<pre class="example" id="orga64ff81">
 npm install -g tldr
 cd ~/.nvm/versions/node/v14.18.1/lib/node_modules/tldr
 mkdir -p $ZSH_CUSTOM/plugins/tldr
@@ -1906,7 +1826,7 @@ cp bin/completion/zsh/_tldr $ZSH_CUSTOM/plugins/tldr/_tldr
 <li>tldr-python-client</li>
 </ol>
 
-<pre class="example" id="org392d768">
+<pre class="example" id="orgb88e7bd">
 sudo pacman -S tldr
 </pre>
 
@@ -1914,7 +1834,7 @@ sudo pacman -S tldr
 在 <code>~/.zshrc</code> 中加入以下内容：
 </p>
 
-<pre class="example" id="orgb4d3ecd">
+<pre class="example" id="org6f11e13">
 export TLDR_CACHE_ENABLED=1
 export TLDR_CACHE_MAX_AGE=720
 export TLDR_PAGES_SOURCE_LOCATION="https://raw.githubusercontent.com/tldr-pages/tldr/master/pages"
@@ -1925,9 +1845,9 @@ export TLDR_DOWNLOAD_CACHE_LOCATION="https://tldr-pages.github.io/assets/tldr.zi
 </div>
 
 <div id="outline-container-让-arch-linux-系统和最新的镜像同步从最快的镜像下载 16" class="outline-2">
-<h2 id="让-arch-linux-系统和最新的镜像同步从最快的镜像下载 16"><span class="section-number-2">14</span> 让 Arch Linux 系统和最新的镜像同步，从最快的镜像下载<sup><a id="fnr.16" class="footref" href="#fn.16">16</a></sup></h2>
+<h2 id="让-arch-linux-系统和最新的镜像同步从最快的镜像下载 16">让 Arch Linux 系统和最新的镜像同步，从最快的镜像下载<sup><a id="fnr.16" class="footref" href="#fn.16">16</a></sup></h2>
 <div class="outline-text-2" id="text-让-arch-linux-系统和最新的镜像同步从最快的镜像下载 16">
-<pre class="example" id="orge436ff0">
+<pre class="example" id="orgc6d2072">
 #!/bin/bash -e
 
 unshare -m bash &lt;&lt;'EOF'
@@ -1945,13 +1865,13 @@ EOF
 </div>
 
 <div id="outline-container-使用国外-dns-造成国内网站访问慢的解决方法" class="outline-2">
-<h2 id="使用国外-dns-造成国内网站访问慢的解决方法"><span class="section-number-2">15</span> 使用国外 DNS 造成国内网站访问慢的解决方法</h2>
+<h2 id="使用国外-dns-造成国内网站访问慢的解决方法">使用国外 DNS 造成国内网站访问慢的解决方法</h2>
 <div class="outline-text-2" id="text-使用国外-dns-造成国内网站访问慢的解决方法">
 <p>
 <a href="https://wzyboy.im/post/874.html">https://wzyboy.im/post/874.html</a>
 </p>
 
-<pre class="example" id="org3d22bb0">
+<pre class="example" id="org7ddc5f7">
 systemctl status dnsmasq
 </pre>
 
@@ -1959,7 +1879,7 @@ systemctl status dnsmasq
 Output:
 </p>
 
-<pre class="example" id="org159f749">
+<pre class="example" id="org92b667c">
 dnsmasq.service - dnsmasq - A lightweight DHCP and caching DNS server
     Loaded: loaded (/usr/lib/systemd/system/dnsmasq.service; enabled; vendor preset: disabled)
         Active: inactive (dead)
@@ -1990,20 +1910,20 @@ ref:
 </div>
 
 <div id="outline-container-备份" class="outline-2">
-<h2 id="备份"><span class="section-number-2">16</span> 备份</h2>
+<h2 id="备份">备份</h2>
 <div class="outline-text-2" id="text-备份">
 <ul class="org-ul">
 <li><a href="https://blog.lilydjwg.me/2013/12/29/rsync-btrfs-dm-crypt-full-backup.42219.html">https://blog.lilydjwg.me/2013/12/29/rsync-btrfs-dm-crypt-full-backup.42219.html</a></li>
 <li><a href="https://github.com/teejee2008/timeshift">https://github.com/teejee2008/timeshift</a></li>
 </ul>
 
-<pre class="example" id="org2319907">
+<pre class="example" id="org1fdd528">
 sudo pacman -S timeshift
 </pre>
 </div>
 
 <div id="outline-container-timeshift" class="outline-3">
-<h3 id="timeshift"><span class="section-number-3">16.1</span> timeshift</h3>
+<h3 id="timeshift">timeshift</h3>
 <div class="outline-text-3" id="text-timeshift">
 <ol class="org-ol">
 <li>Snapshot type: rsync (btrfs cannot use because of BTRFS snapts are
@@ -2016,7 +1936,7 @@ hidden files</li>
 </div>
 
 <div id="outline-container-自动更新-hosts-github-相关-ip" class="outline-2">
-<h2 id="自动更新-hosts-github-相关-ip"><span class="section-number-2">17</span> 自动更新 hosts GitHub 相关 IP</h2>
+<h2 id="自动更新-hosts-github-相关-ip">自动更新 hosts GitHub 相关 IP</h2>
 <div class="outline-text-2" id="text-自动更新-hosts-github-相关-ip">
 <p>
 ref:
@@ -2032,15 +1952,15 @@ ref:
 前提：=/etc/hosts= 文件中要先存在 <code>github.com</code>
 </p>
 
-<pre class="example" id="org5ec3eb2">
+<pre class="example" id="orgfc7eb31">
 sudo pacman -S python-aiohttp
 </pre>
 </div>
 </div>
 
-<div id="outline-container-orga58b0ad" class="outline-2">
-<h2 id="orga58b0ad"><span class="section-number-2">18</span> Wayland 下的剪切板工具</h2>
-<div class="outline-text-2" id="text-18">
+<div id="outline-container-org1330455" class="outline-2">
+<h2 id="org1330455">Wayland 下的剪切板工具</h2>
+<div class="outline-text-2" id="text-org1330455">
 <ul class="org-ul">
 <li><a href="https://github.com/bugaevc/wl-clipboard">https://github.com/bugaevc/wl-clipboard</a></li>
 </ul>
