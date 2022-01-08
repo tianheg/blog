@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html lang="zh">
 <head>
-<!-- 2022-01-08 Sat 16:14 -->
+<!-- 2022-01-08 Sat 17:00 -->
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>使用 robots.txt</title>
@@ -190,33 +190,11 @@
   .org-svg { width: 90%; }
   /*]]>*/-->
 </style>
-<link rel="stylesheet" href="/theme/normalize.css"/>
-<link rel="stylesheet" href="/theme/org.css"/>
 <link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin><link href="https://fonts.googleapis.com/css2?family=Noto+Sans+SC&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="/theme/normalize.css"/>
+<link rel="stylesheet" href="/theme/site.css"/>
 <script defer src='https://static.cloudflareinsights.com/beacon.min.js' data-cf-beacon='{"token": "d5b841b503ed4d1b8fad459b84d1cc2f"}'></script>
 <script defer src="/theme/link.js"></script>
-<script type="text/javascript">
-// @license magnet:?xt=urn:btih:e95b018ef3580986a04669f1b5879592219e2a7a&dn=public-domain.txt Public Domain
-<!--/*--><![CDATA[/*><!--*/
-     function CodeHighlightOn(elem, id)
-     {
-       var target = document.getElementById(id);
-       if(null != target) {
-         elem.classList.add("code-highlighted");
-         target.classList.add("code-highlighted");
-       }
-     }
-     function CodeHighlightOff(elem, id)
-     {
-       var target = document.getElementById(id);
-       if(null != target) {
-         elem.classList.remove("code-highlighted");
-         target.classList.remove("code-highlighted");
-       }
-     }
-    /*]]>*///-->
-// @license-end
-</script>
 </head>
 <body>
 <div id="content">
@@ -257,7 +235,7 @@ robots.txt 是一个简单的以 .txt 结尾的文本文件，是搜索引擎 Ro
 例子：
 </p>
 
-<pre class="example" id="orgc1839c7">
+<pre class="example" id="org5b18509">
 User-agent: *  # 对所有搜索引擎 Robot 开放
 Disallow: /categories/ # 禁止访问 categories 目录下任何内容
 </pre>
@@ -281,7 +259,7 @@ Disallow: /categories/ # 禁止访问 categories 目录下任何内容
 *注*：常见搜索引擎蜘蛛 Robots 名称
 </p>
 
-<pre class="example" id="orgc620115">
+<pre class="example" id="org9dfe6be">
 Baiduspider http://www.baidu.com
 ia_archiver http://www.alexa.com
 Googlebot http://www.google.com
@@ -343,7 +321,7 @@ Disallow 记录。
 允许所有搜索引擎 Robot 访问
 </p>
 
-<pre class="example" id="org5f68c6b">
+<pre class="example" id="orgdd57715">
 User-agent: *
 Disallow:
 </pre>
@@ -356,7 +334,7 @@ Disallow:
 禁止所有搜索引擎 Robot 访问网站的任何内容
 </p>
 
-<pre class="example" id="org0640850">
+<pre class="example" id="orgc8eb020">
 User-agent: *
 Disallow: /
 </pre></li>
@@ -366,7 +344,7 @@ Disallow: /
 目录）
 </p>
 
-<pre class="example" id="org8a72b84">
+<pre class="example" id="org51a7bad">
 User-agent: *
 Disallow: /aaa/
 Disallow: /bbb/
@@ -377,7 +355,7 @@ Disallow: /ccc/
 禁止指定搜索引擎 Robot 访问如下例中的 Google 机器人：Googlebot）
 </p>
 
-<pre class="example" id="org28ad636">
+<pre class="example" id="orgc512455">
 User-agent: Googlebot
 Disallow: /
 </pre></li>
@@ -386,7 +364,7 @@ Disallow: /
 只允许指定搜索引擎 Robot 访问（如下例中的百度机器人：Baiduspider）
 </p>
 
-<pre class="example" id="orgc8d52e3">
+<pre class="example" id="org79e14eb">
 User-agent: Baiduspider
 Disallow:
 User-agent: *

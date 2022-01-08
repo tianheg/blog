@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html lang="zh">
 <head>
-<!-- 2022-01-08 Sat 16:16 -->
+<!-- 2022-01-08 Sat 17:01 -->
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>JavaScript 高级程序设计第 4 版</title>
@@ -190,33 +190,11 @@
   .org-svg { width: 90%; }
   /*]]>*/-->
 </style>
-<link rel="stylesheet" href="/theme/normalize.css"/>
-<link rel="stylesheet" href="/theme/org.css"/>
 <link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin><link href="https://fonts.googleapis.com/css2?family=Noto+Sans+SC&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="/theme/normalize.css"/>
+<link rel="stylesheet" href="/theme/site.css"/>
 <script defer src='https://static.cloudflareinsights.com/beacon.min.js' data-cf-beacon='{"token": "d5b841b503ed4d1b8fad459b84d1cc2f"}'></script>
 <script defer src="/theme/link.js"></script>
-<script type="text/javascript">
-// @license magnet:?xt=urn:btih:e95b018ef3580986a04669f1b5879592219e2a7a&dn=public-domain.txt Public Domain
-<!--/*--><![CDATA[/*><!--*/
-     function CodeHighlightOn(elem, id)
-     {
-       var target = document.getElementById(id);
-       if(null != target) {
-         elem.classList.add("code-highlighted");
-         target.classList.add("code-highlighted");
-       }
-     }
-     function CodeHighlightOff(elem, id)
-     {
-       var target = document.getElementById(id);
-       if(null != target) {
-         elem.classList.remove("code-highlighted");
-         target.classList.remove("code-highlighted");
-       }
-     }
-    /*]]>*///-->
-// @license-end
-</script>
 </head>
 <body>
 <div id="content">
@@ -226,9 +204,9 @@
 「迭代」是指，按照顺序多次执行程序，一般有明确的终止条件。ES6 规范新增了两个高级特性：迭代器和生成器。它们能帮助我们更好地实现迭代。
 </p>
 
-<div id="outline-container-org05aa46f" class="outline-2">
-<h2 id="org05aa46f">什么是迭代？</h2>
-<div class="outline-text-2" id="text-org05aa46f">
+<div id="outline-container-org4fad22f" class="outline-2">
+<h2 id="org4fad22f">什么是迭代？</h2>
+<div class="outline-text-2" id="text-org4fad22f">
 <p>
 在 JS 中，计数循环是一种最为简单的迭代：
 </p>
@@ -287,9 +265,9 @@ collection.forEach((item) =&gt; console.log(item));
 </div>
 </div>
 
-<div id="outline-container-org6268d61" class="outline-2">
-<h2 id="org6268d61">迭代器模式</h2>
-<div class="outline-text-2" id="text-org6268d61">
+<div id="outline-container-org9dd6cb9" class="outline-2">
+<h2 id="org9dd6cb9">迭代器模式</h2>
+<div class="outline-text-2" id="text-org9dd6cb9">
 <p>
 迭代器模式使某些结构被称为「可迭代对象」（iterable），因为它们实现了正式的 Iterable 接口，而且可通过迭代器 Iterator 消费（？）。
 </p>
@@ -311,9 +289,9 @@ collection.forEach((item) =&gt; console.log(item));
 </p>
 </div>
 
-<div id="outline-container-orgbba149d" class="outline-3">
-<h3 id="orgbba149d">可迭代协议</h3>
-<div class="outline-text-3" id="text-orgbba149d">
+<div id="outline-container-orgd546caf" class="outline-3">
+<h3 id="orgd546caf">可迭代协议</h3>
+<div class="outline-text-3" id="text-orgd546caf">
 <p>
 实现 Iterable 接口（可迭代协议）要求同时具备两种能力：「支持迭代的自我识别」和「创建实现 Iterator 接口的对象」。
 </p>
