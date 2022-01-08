@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html lang="zh">
 <head>
-<!-- 2022-01-08 Sat 12:00 -->
+<!-- 2022-01-08 Sat 13:00 -->
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>部署 Hugo 博客到 Ubuntu 服务器</title>
@@ -223,9 +223,9 @@
 <header>
 <h1 class="title">部署 Hugo 博客到 Ubuntu 服务器</h1>
 </header>
-<div id="outline-container-orgf612aad" class="outline-2">
-<h2 id="orgf612aad">安装 Hugo</h2>
-<div class="outline-text-2" id="text-orgf612aad">
+<div id="outline-container-orgcaed054" class="outline-2">
+<h2 id="orgcaed054">安装 Hugo</h2>
+<div class="outline-text-2" id="text-orgcaed054">
 <div class="org-src-container">
 <pre class="src src-sh"><span style="color: #9fbfdf;">export</span> <span style="color: #aaca86;">HUGO_VERSION</span>=<span style="color: #ddbc91;">"0.88.1"</span>
 wget https://github.com/gohugoio/hugo/releases/download/v${<span style="color: #aaca86;">HUGO_VERSION</span>}/hugo_extended_${<span style="color: #aaca86;">HUGO_VERSION</span>}_Linux-64bit.deb
@@ -235,9 +235,9 @@ sudo apt-get install ./hugo_extended_${<span style="color: #aaca86;">HUGO_VERSIO
 </div>
 </div>
 
-<div id="outline-container-orgac0eb09" class="outline-2">
-<h2 id="orgac0eb09">克隆仓库，本地预览</h2>
-<div class="outline-text-2" id="text-orgac0eb09">
+<div id="outline-container-orgcdcb384" class="outline-2">
+<h2 id="orgcdcb384">克隆仓库，本地预览</h2>
+<div class="outline-text-2" id="text-orgcdcb384">
 <div class="org-src-container">
 <pre class="src src-sh"><span style="color: #9fbfdf;">cd</span> ~
 git clone https://github.com/tianheg/blog.git
@@ -248,9 +248,9 @@ hugo server --bind 0.0.0.0 --baseURL http://ip:1313
 </div>
 </div>
 
-<div id="outline-container-org49fbaa7" class="outline-2">
-<h2 id="org49fbaa7">安装并配置 Nginx 服务器</h2>
-<div class="outline-text-2" id="text-org49fbaa7">
+<div id="outline-container-org6213996" class="outline-2">
+<h2 id="org6213996">安装并配置 Nginx 服务器</h2>
+<div class="outline-text-2" id="text-org6213996">
 <div class="org-src-container">
 <pre class="src src-sh">sudo apt-get install nginx
 </pre>
@@ -287,18 +287,18 @@ hugo server --bind 0.0.0.0 --baseURL http://ip:1313
 </div>
 </div>
 
-<div id="outline-container-orgbfe3e39" class="outline-2">
-<h2 id="orgbfe3e39">从云服务商下载 HTTPS 证书</h2>
-<div class="outline-text-2" id="text-orgbfe3e39">
+<div id="outline-container-orgcfc8dcf" class="outline-2">
+<h2 id="orgcfc8dcf">从云服务商下载 HTTPS 证书</h2>
+<div class="outline-text-2" id="text-orgcfc8dcf">
 <p>
 证书压缩文件里包含了很多服务器的文件夹，找到 Nginx 的文件夹，重命名两个文件为 <code>domain.crt</code> ， <code>domain.key</code> 。并将两个文件放到 <code>/etc/nginx/ssl/</code> 文件夹下（如果不存在 ssl 文件夹，需要新建）。
 </p>
 </div>
 </div>
 
-<div id="outline-container-org23b3564" class="outline-2">
-<h2 id="org23b3564">Shell 脚本快速更新博客</h2>
-<div class="outline-text-2" id="text-org23b3564">
+<div id="outline-container-org53eb63c" class="outline-2">
+<h2 id="org53eb63c">Shell 脚本快速更新博客</h2>
+<div class="outline-text-2" id="text-org53eb63c">
 <p>
 制作了一个很简单的脚本 <code>update-blog.sh</code> ：
 </p>
@@ -317,9 +317,9 @@ sudo hugo -d /var/www/hugo
 </div>
 </div>
 
-<div id="outline-container-orgff3a460" class="outline-2">
-<h2 id="orgff3a460">迁移博客到服务器</h2>
-<div class="outline-text-2" id="text-orgff3a460">
+<div id="outline-container-orgbe7368e" class="outline-2">
+<h2 id="orgbe7368e">迁移博客到服务器</h2>
+<div class="outline-text-2" id="text-orgbe7368e">
 <p>
 把以上过程中的域名换为 <code>blog.yidajiabei.xyz</code> 。更新博客的脚本改为：
 </p>
@@ -362,18 +362,18 @@ sudo hugo -d /var/www/hugo
 </div>
 </div>
 
-<div id="outline-container-org3812656" class="outline-2">
-<h2 id="org3812656">另一种部署方式——Git Hooks</h2>
-<div class="outline-text-2" id="text-org3812656">
+<div id="outline-container-org637f8eb" class="outline-2">
+<h2 id="org637f8eb">另一种部署方式——Git Hooks</h2>
+<div class="outline-text-2" id="text-org637f8eb">
 <p>
 参见<a href="git-server-hook.html">云服务器配置 Git 仓库托管并使用 Git Hooks 自动执行脚本</a>
 </p>
 </div>
 </div>
 
-<div id="outline-container-org7f7e9ab" class="outline-2">
-<h2 id="org7f7e9ab">参考资料</h2>
-<div class="outline-text-2" id="text-org7f7e9ab">
+<div id="outline-container-org3ebcb46" class="outline-2">
+<h2 id="org3ebcb46">参考资料</h2>
+<div class="outline-text-2" id="text-org3ebcb46">
 <ol class="org-ol">
 <li><a href="https://gideonwolfe.com/posts/sysadmin/hugonginx/">https://gideonwolfe.com/posts/sysadmin/hugonginx/</a></li>
 <li><a href="http://www.withpy.com/hugo%E5%8D%9A%E5%AE%A2%E9%83%A8%E7%BD%B2%E5%88%B0%E8%85%BE%E8%AE%AF%E4%BA%91%E6%9C%8D%E5%8A%A1%E5%99%A8/">http://www.withpy.com/hugo%E5%8D%9A%E5%AE%A2%E9%83%A8%E7%BD%B2%E5%88%B0%E8%85%BE%E8%AE%AF%E4%BA%91%E6%9C%8D%E5%8A%A1%E5%99%A8/</a></li>
