@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html lang="zh">
 <head>
-<!-- 2022-01-08 Sat 17:02 -->
+<!-- 2022-01-08 Sat 18:01 -->
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>自动发布 Org Mode</title>
@@ -232,7 +232,9 @@
 </p>
 
 <div class="org-src-container">
-<pre class="src src-shell"><span style="color: #706565;">##</span><span style="color: #857575;">!/bin/bash</span>
+<pre class="src src-shell"><span style="color: #ddbc91;">\\</span>#!/bin/bash <span style="color: #706565;"># </span><span style="color: #857575;">&#35813;&#34892;&#22312;&#23454;&#38469;&#20351;&#29992;&#26102;&#65292;&#21482;&#26377; #!/bin/bash</span>
+<span style="color: #706565;"># </span><span style="color: #857575;">&#22914;&#26524;&#19981;&#21152;\\&#65292;&#23548;&#20986;&#30340; html &#25991;&#20214;&#20013;&#26080;&#27861;&#26174;&#31034;#</span>
+
 <span style="color: #706565;"># </span><span style="color: #857575;">&#22914;&#26524;&#27809;&#26377;&#19979;&#38754;&#36825;&#19968;&#34892;&#65292;&#23601;&#19981;&#33021;&#36890;&#36807; publickey push &#21040;&#36828;&#31243;&#20179;&#24211;</span>
 <span style="color: #9fbfdf;">export</span> <span style="color: #aaca86;">GIT_SSH_COMMAND</span>=<span style="color: #ddbc91;">"ssh -i /home/$USER/.ssh/private_key"</span>
 <span style="color: #9fbfdf;">cd</span> ~/repo/blog/
