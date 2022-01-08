@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html lang="zh">
 <head>
-<!-- 2022-01-08 Sat 15:01 -->
+<!-- 2022-01-08 Sat 16:02 -->
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>Git tag,branch,submodule 基本使用</title>
@@ -223,9 +223,9 @@
 <header>
 <h1 class="title">Git tag,branch,submodule 基本使用</h1>
 </header>
-<div id="outline-container-org6f0b8e8" class="outline-2">
-<h2 id="org6f0b8e8">Tag<sup><a id="fnr.1" class="footref" href="#fn.1">1</a></sup>,<sup><a id="fnr.2" class="footref" href="#fn.2">2</a></sup></h2>
-<div class="outline-text-2" id="text-org6f0b8e8">
+<div id="outline-container-org18197b3" class="outline-2">
+<h2 id="org18197b3">Tag<sup><a id="fnr.1" class="footref" href="#fn.1">1</a></sup>,<sup><a id="fnr.2" class="footref" href="#fn.2">2</a></sup></h2>
+<div class="outline-text-2" id="text-org18197b3">
 <div class="org-src-container">
 <pre class="src src-sh">git tag &lt;tag-name&gt; <span style="color: #706565;"># </span><span style="color: #857575;">create local tag</span>
 git tag -d &lt;tag-name&gt; <span style="color: #706565;"># </span><span style="color: #857575;">delete local tag</span>
@@ -239,17 +239,17 @@ git tag --contains &lt;commitid&gt; <span style="color: #706565;"># </span><span
 </div>
 </div>
 
-<div id="outline-container-org2641a12" class="outline-2">
-<h2 id="org2641a12">Branch</h2>
-<div class="outline-text-2" id="text-org2641a12">
+<div id="outline-container-org26667fe" class="outline-2">
+<h2 id="org26667fe">Branch</h2>
+<div class="outline-text-2" id="text-org26667fe">
 <p>
 分支不能含空格，见这里<sup><a id="fnr.3" class="footref" href="#fn.3">3</a></sup>。
 </p>
 </div>
 
-<div id="outline-container-org665a53c" class="outline-3">
-<h3 id="org665a53c">本地和远程创建空分支<sup><a id="fnr.4" class="footref" href="#fn.4">4</a></sup></h3>
-<div class="outline-text-3" id="text-org665a53c">
+<div id="outline-container-org5788f7f" class="outline-3">
+<h3 id="org5788f7f">本地和远程创建空分支<sup><a id="fnr.4" class="footref" href="#fn.4">4</a></sup></h3>
+<div class="outline-text-3" id="text-org5788f7f">
 <div class="org-src-container">
 <pre class="src src-sh"><span style="color: #706565;"># </span><span style="color: #857575;">UPDATE(git &gt; 2.27)</span>
 git switch --orphan &lt;new branch&gt;
@@ -269,9 +269,9 @@ git push origin empty-branch
 </div>
 </div>
 
-<div id="outline-container-orgd1635f8" class="outline-3">
-<h3 id="orgd1635f8">本地和远程删除分支</h3>
-<div class="outline-text-3" id="text-orgd1635f8">
+<div id="outline-container-orgdc65cbd" class="outline-3">
+<h3 id="orgdc65cbd">本地和远程删除分支</h3>
+<div class="outline-text-3" id="text-orgdc65cbd">
 <div class="org-src-container">
 <pre class="src src-sh"><span style="color: #706565;"># </span><span style="color: #857575;">delete branch locally</span>
 git branch -d localBranchName
@@ -298,9 +298,9 @@ git push origin :old_name new_name
 </div>
 </div>
 
-<div id="outline-container-org19c31f1" class="outline-3">
-<h3 id="org19c31f1">克隆特定远程分支</h3>
-<div class="outline-text-3" id="text-org19c31f1">
+<div id="outline-container-orgc52f24f" class="outline-3">
+<h3 id="orgc52f24f">克隆特定远程分支</h3>
+<div class="outline-text-3" id="text-orgc52f24f">
 <div class="org-src-container">
 <pre class="src src-sh">git clone --branch &lt;branchname&gt; &lt;remote-repo-url&gt;
 </pre>
@@ -308,9 +308,9 @@ git push origin :old_name new_name
 </div>
 </div>
 
-<div id="outline-container-orgaaa5ad3" class="outline-3">
-<h3 id="orgaaa5ad3">删除仅存在本地（远程仓库中不存在）的分支</h3>
-<div class="outline-text-3" id="text-orgaaa5ad3">
+<div id="outline-container-org62f4e71" class="outline-3">
+<h3 id="org62f4e71">删除仅存在本地（远程仓库中不存在）的分支</h3>
+<div class="outline-text-3" id="text-org62f4e71">
 <div class="org-src-container">
 <pre class="src src-sh">$ git branch -a
 * main
@@ -344,9 +344,9 @@ git checkout -b &lt;branch&gt; &lt;SHA1_OF_COMMIT&gt; <span style="color: #70656
 </div>
 </div>
 
-<div id="outline-container-org2745275" class="outline-2">
-<h2 id="org2745275">Submodule</h2>
-<div class="outline-text-2" id="text-org2745275">
+<div id="outline-container-org08bcf16" class="outline-2">
+<h2 id="org08bcf16">Submodule</h2>
+<div class="outline-text-2" id="text-org08bcf16">
 <div class="org-src-container">
 <pre class="src src-sh"><span style="color: #706565;"># </span><span style="color: #857575;">clone all submodules</span>
 git clone --recursive git://github.com/foo/bar.git
@@ -356,9 +356,9 @@ git submodule update --init --recursive
 </div>
 </div>
 
-<div id="outline-container-org8a7b9c0" class="outline-3">
-<h3 id="org8a7b9c0">移除 Submodule</h3>
-<div class="outline-text-3" id="text-org8a7b9c0">
+<div id="outline-container-org347a2b6" class="outline-3">
+<h3 id="org347a2b6">移除 Submodule</h3>
+<div class="outline-text-3" id="text-org347a2b6">
 <div class="org-src-container">
 <pre class="src src-sh">git submodule deinit submodulename
 git rm submodulename
