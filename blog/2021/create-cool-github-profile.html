@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html lang="zh">
 <head>
-<!-- 2022-01-08 Sat 16:15 -->
+<!-- 2022-01-08 Sat 17:01 -->
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>为 GitHub 主页添加「年进度」和「最近更新的博客文章」</title>
@@ -190,33 +190,11 @@
   .org-svg { width: 90%; }
   /*]]>*/-->
 </style>
-<link rel="stylesheet" href="/theme/normalize.css"/>
-<link rel="stylesheet" href="/theme/org.css"/>
 <link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin><link href="https://fonts.googleapis.com/css2?family=Noto+Sans+SC&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="/theme/normalize.css"/>
+<link rel="stylesheet" href="/theme/site.css"/>
 <script defer src='https://static.cloudflareinsights.com/beacon.min.js' data-cf-beacon='{"token": "d5b841b503ed4d1b8fad459b84d1cc2f"}'></script>
 <script defer src="/theme/link.js"></script>
-<script type="text/javascript">
-// @license magnet:?xt=urn:btih:e95b018ef3580986a04669f1b5879592219e2a7a&dn=public-domain.txt Public Domain
-<!--/*--><![CDATA[/*><!--*/
-     function CodeHighlightOn(elem, id)
-     {
-       var target = document.getElementById(id);
-       if(null != target) {
-         elem.classList.add("code-highlighted");
-         target.classList.add("code-highlighted");
-       }
-     }
-     function CodeHighlightOff(elem, id)
-     {
-       var target = document.getElementById(id);
-       if(null != target) {
-         elem.classList.remove("code-highlighted");
-         target.classList.remove("code-highlighted");
-       }
-     }
-    /*]]>*///-->
-// @license-end
-</script>
 <script type="text/x-mathjax-config">
     MathJax.Hub.Config({
         displayAlign: "center",
@@ -311,7 +289,7 @@ console.log(readme)
 开发工作流。在与个人用户名相同的仓库中添加 =Pipfile=：
 </p>
 
-<pre class="example" id="orgb9b73cf">
+<pre class="example" id="org94f2b54">
 [[source]]
 name = "pypi"
 url = "https://pypi.org/simple"
@@ -335,7 +313,7 @@ python_version = "3.7"
 <code>python_version</code> 必须是 3.7，改成其他的会报错（[错误地址 1][]）：
 </p>
 
-<pre class="example" id="org0585eab">
+<pre class="example" id="org26c1589">
 Warning: Python 3.8 was not found on your system...
 Neither 'pyenv' nor 'asdf' could be found to install Python.
 You can specify specific versions of Python with:
@@ -347,7 +325,7 @@ $ pipenv --python path/to/python
 报错（[错误地址 2][]）：
 </p>
 
-<pre class="example" id="org64dc65c">
+<pre class="example" id="org4b85d52">
 ValueError: invalid literal for int() with base 10: '3.x'
 </pre>
 
@@ -356,7 +334,7 @@ ValueError: invalid literal for int() with base 10: '3.x'
 WSL2-Ubuntu20.04。我已经安装了最新版本的 pip，直接安装 pipenv 即可：
 </p>
 
-<pre class="example" id="org28d26f6">
+<pre class="example" id="org1838b9e">
 pip install pipenv
 </pre>
 
@@ -364,7 +342,7 @@ pip install pipenv
 然后，在本地仓库中新建上述文件 =Pipfile=，执行：
 </p>
 
-<pre class="example" id="org8d64e64">
+<pre class="example" id="org8288487">
 pipenv install
 </pre>
 
@@ -378,7 +356,7 @@ pipenv install
 另外一个主要文件就是 =main.py=：
 </p>
 
-<pre class="example" id="org834cbd4">
+<pre class="example" id="org0a1b52a">
 import feedparser
 import time
 import os
@@ -446,7 +424,7 @@ main()
 首先，新建文件 =~\.github\workflows\main.yml=，并添加以下内容：
 </p>
 
-<pre class="example" id="org9384c22">
+<pre class="example" id="org09a0f29">
 name: update tianheg profile
 
 on:
@@ -523,7 +501,7 @@ pipenv 分支中。
 文件结构：
 </p>
 
-<pre class="example" id="orgb40d42d">
+<pre class="example" id="orgef6136e">
 Dockerfile
 LICENSE
 README.md
@@ -539,7 +517,7 @@ entrypoint.sh
 <code>Dockerfile</code> 内容：
 </p>
 
-<pre class="example" id="org03ad8c9">
+<pre class="example" id="org920769b">
 ARG PYTHON_IMAGE_VERSION=3
 FROM python:$PYTHON_IMAGE_VERSION
 
@@ -556,7 +534,7 @@ ENTRYPOINT ["/entrypoint.sh"]
 <code>entrypoint.sh</code> 内容：
 </p>
 
-<pre class="example" id="org3081415">
+<pre class="example" id="org1d3b7b7">
 #!/bin/sh
 
 sh -c "pipenv $*"

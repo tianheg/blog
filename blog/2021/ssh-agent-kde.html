@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html lang="zh">
 <head>
-<!-- 2022-01-08 Sat 16:16 -->
+<!-- 2022-01-08 Sat 17:02 -->
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>KDE 开机自启 ssh agent，加载密匙</title>
@@ -190,33 +190,11 @@
   .org-svg { width: 90%; }
   /*]]>*/-->
 </style>
-<link rel="stylesheet" href="/theme/normalize.css"/>
-<link rel="stylesheet" href="/theme/org.css"/>
 <link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin><link href="https://fonts.googleapis.com/css2?family=Noto+Sans+SC&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="/theme/normalize.css"/>
+<link rel="stylesheet" href="/theme/site.css"/>
 <script defer src='https://static.cloudflareinsights.com/beacon.min.js' data-cf-beacon='{"token": "d5b841b503ed4d1b8fad459b84d1cc2f"}'></script>
 <script defer src="/theme/link.js"></script>
-<script type="text/javascript">
-// @license magnet:?xt=urn:btih:e95b018ef3580986a04669f1b5879592219e2a7a&dn=public-domain.txt Public Domain
-<!--/*--><![CDATA[/*><!--*/
-     function CodeHighlightOn(elem, id)
-     {
-       var target = document.getElementById(id);
-       if(null != target) {
-         elem.classList.add("code-highlighted");
-         target.classList.add("code-highlighted");
-       }
-     }
-     function CodeHighlightOff(elem, id)
-     {
-       var target = document.getElementById(id);
-       if(null != target) {
-         elem.classList.remove("code-highlighted");
-         target.classList.remove("code-highlighted");
-       }
-     }
-    /*]]>*///-->
-// @license-end
-</script>
 </head>
 <body>
 <div id="content">
@@ -231,18 +209,18 @@
 <a href="https://userbase.kde.org/KDE_Wallet_Manager">Kwallet</a> 是 Linux 桌面管理器 KDE 下的一款管理密码的应用。
 </p>
 
-<div id="outline-container-org5d6b27d" class="outline-2">
-<h2 id="org5d6b27d">Kwallet</h2>
-<div class="outline-text-2" id="text-org5d6b27d">
+<div id="outline-container-org3e44694" class="outline-2">
+<h2 id="org3e44694">Kwallet</h2>
+<div class="outline-text-2" id="text-org3e44694">
 <p>
 创建一个新钱包，并为它设置密码。
 </p>
 </div>
 </div>
 
-<div id="outline-container-org94d2f79" class="outline-2">
-<h2 id="org94d2f79">开机启动 ssh-agent</h2>
-<div class="outline-text-2" id="text-org94d2f79">
+<div id="outline-container-orgfd49135" class="outline-2">
+<h2 id="orgfd49135">开机启动 ssh-agent</h2>
+<div class="outline-text-2" id="text-orgfd49135">
 <p>
 确保安装了 <a href="https://github.com/KDE/ksshaskpass">Ksshaskpass</a>。
 </p>
@@ -273,9 +251,9 @@
 </div>
 </div>
 
-<div id="outline-container-org92f3a58" class="outline-2">
-<h2 id="org92f3a58">开机添加 ssh 密匙</h2>
-<div class="outline-text-2" id="text-org92f3a58">
+<div id="outline-container-org8b56f6b" class="outline-2">
+<h2 id="org8b56f6b">开机添加 ssh 密匙</h2>
+<div class="outline-text-2" id="text-org8b56f6b">
 <p>
 新建文件 <code>~/.config/autostart/ssh-add.desktop</code> ：
 </p>
@@ -290,9 +268,9 @@
 </div>
 </div>
 
-<div id="outline-container-org1cdb395" class="outline-2">
-<h2 id="org1cdb395">环境变量与普通应用</h2>
-<div class="outline-text-2" id="text-org1cdb395">
+<div id="outline-container-org89a7046" class="outline-2">
+<h2 id="org89a7046">环境变量与普通应用</h2>
+<div class="outline-text-2" id="text-org89a7046">
 <p>
 启动 ssh agent 要比添加 ssh 密匙提前。因为前者使用的是环境变量，后者使用的只是普通应用自启动。</p>
 </div>
