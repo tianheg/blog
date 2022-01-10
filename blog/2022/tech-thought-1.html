@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html lang="zh">
 <head>
-<!-- 2022-01-10 Mon 09:01 -->
+<!-- 2022-01-10 Mon 10:01 -->
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>技术遐想（一）</title>
@@ -217,7 +217,71 @@
 </p>
 
 <p>
-我在解决问题的时候，并没有对问题的本质进行思考。就用上一段的两个例子来说，前者很明确，就是想用 CSS 画个正方形；后者却不那么具体，“基础概念”一词，每个人的理解都不一样，所以我找到的答案都是 <b>别人认为的基础概念</b> 。刚开始学习一门语言的时候，我不知道哪些是基础概念，哪些只是需要了解，这个时候了解已经掌握这门语言的人，他们是怎样学习的，就很重要。</p>
+我在解决问题的时候，并没有对问题的本质进行思考。就用上一段的两个例子来说，前者很明确，就是想用 CSS 画个正方形；后者却不那么具体，“基础概念”一词，每个人的理解都不一样，所以我找到的答案都是 <b>别人认为的基础概念</b> 。刚开始学习一门语言的时候，我不知道哪些是基础概念，哪些只是需要了解，这个时候了解已经掌握这门语言的人，他们是怎样学习的，就很重要。之后再思考：掌握一门语言的关键在哪里（数据类型，函数）。
+</p>
+
+<p>
+遇到问题，怎样进行分析？
+</p>
+
+<ol class="org-ol">
+<li>你要知道，这个问题是否真的是个问题。因为有时，我们会误以为这是个很困难的问题，直到解决了那一刻才意识到，原来这么容易就能解决。为什么我们没有在最开始就想到这一点？可能的原因就是，没有对问题的本质进行探讨。还是上文想知道 JS 基本概念的例子，其实我并不只是想知道 JS 的基本概念，我还想了解语言的整体，我要知道它有哪些部分构成，分别都起什么作用。这就是在 What 层面上的思考，即它是否是一个问题。</li>
+<li>How 层面。这个问题是怎样产生的？代码层面，能不能做一个最小 demo 把问题复现。</li>
+<li>Why 层面。问题出现了，为什么会在这里出现这样的问题，是否了解了足够多的背景信息？官方文档是否逐字句阅读过？</li>
+<li>还有其他需要思考之处：在解决问题的过程中，你能查阅哪些资料，我知道的有 MDN，GitHub，搜索引擎；你有没有找到更好的解决办法；为了不让自己重复解决相同或类似的问题，写成博客或是记笔记就是一个好办法；通过这次问题，学习到了哪些东西。</li>
+</ol>
+
+<p>
+致谢：
+</p>
+
+<ol class="org-ol">
+<li><a href="https://github.com/lencx/z/discussions/79">解决问题方法论</a></li>
+<li><a href="https://program-think.blogspot.com/2009/02/study-technology-in-three-steps.html">学习技术的三部曲：WHAT、HOW、WHY</a></li>
+</ol>
+
+<p>
+二、给定一个颜色数组，如何让它和网页中的目标元素一一对应
+</p>
+
+<div class="org-src-container">
+<pre class="src src-javascript"><span style="color: #91a0b3;">const</span> <span style="color: #aaca86;">rgbas</span> = [
+  <span style="color: #ddbc91;">"rgba(251,34,240,0.25)"</span>,
+  <span style="color: #ddbc91;">"rgba(214,17,21,0.25)"</span>,
+  <span style="color: #ddbc91;">"rgba(14,251,252,0.25)"</span>,
+  <span style="color: #ddbc91;">"rgba(158,134,255,0.25)"</span>,
+  <span style="color: #ddbc91;">"rgba(60,255,20,0.25)"</span>,
+  <span style="color: #ddbc91;">"rgba(44,158,52,0.25)"</span>,
+  <span style="color: #ddbc91;">"rgba(225,211,20,0.25)"</span>,
+  <span style="color: #ddbc91;">"rgba(100,117,121,0.25)"</span>,
+];
+<span style="color: #91a0b3;">const</span> <span style="color: #aaca86;">boards</span> = document.getElementsByClassName(<span style="color: #ddbc91;">"board"</span>);
+
+rgbas.forEach(() =&gt; {
+  <span style="color: #91a0b3;">for</span> (<span style="color: #91a0b3;">let</span> <span style="color: #aaca86;">i</span> = 0; i &lt; boards.length; i++) {
+    boards[i].style.backgroundColor = rgbas[i];
+  }
+})
+</pre>
+</div>
+
+<ul class="org-ul">
+<li>定义了颜色数组 rgbas[8]</li>
+<li>将第一个颜色分配给第一个 board 元素；第二个颜色分配给第二个 board 元素；以此类推</li>
+</ul>
+
+<p>
+其他下面赋值的部分还有另一种写法：
+</p>
+
+<div class="org-src-container">
+<pre class="src src-javascript"><span style="color: #91a0b3;">for</span> (<span style="color: #91a0b3;">let</span> <span style="color: #aaca86;">i</span> = 0; i &lt; rgbas.length; i++) {
+  <span style="color: #91a0b3;">for</span> (<span style="color: #91a0b3;">let</span> <span style="color: #aaca86;">j</span> = 0; j &lt; boards.length; j++) {
+    ...
+  }
+}
+</pre>
+</div>
 </div>
 </body>
 </html>
