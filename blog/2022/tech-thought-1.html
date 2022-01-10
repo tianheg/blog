@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html lang="zh">
 <head>
-<!-- 2022-01-10 Mon 10:01 -->
+<!-- 2022-01-10 Mon 11:01 -->
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>技术遐想（一）</title>
@@ -245,7 +245,7 @@
 </p>
 
 <div class="org-src-container">
-<pre class="src src-javascript"><span style="color: #91a0b3;">const</span> <span style="color: #aaca86;">rgbas</span> = [
+<pre class="src src-js"><span style="color: #91a0b3;">const</span> <span style="color: #aaca86;">rgbas</span> = [
   <span style="color: #ddbc91;">"rgba(251,34,240,0.25)"</span>,
   <span style="color: #ddbc91;">"rgba(214,17,21,0.25)"</span>,
   <span style="color: #ddbc91;">"rgba(14,251,252,0.25)"</span>,
@@ -271,17 +271,155 @@ rgbas.forEach(() =&gt; {
 </ul>
 
 <p>
-其他下面赋值的部分还有另一种写法：
+下面赋值的部分还有另一种写法：
 </p>
 
 <div class="org-src-container">
-<pre class="src src-javascript"><span style="color: #91a0b3;">for</span> (<span style="color: #91a0b3;">let</span> <span style="color: #aaca86;">i</span> = 0; i &lt; rgbas.length; i++) {
+<pre class="src src-js"><span style="color: #91a0b3;">for</span> (<span style="color: #91a0b3;">let</span> <span style="color: #aaca86;">i</span> = 0; i &lt; rgbas.length; i++) {
   <span style="color: #91a0b3;">for</span> (<span style="color: #91a0b3;">let</span> <span style="color: #aaca86;">j</span> = 0; j &lt; boards.length; j++) {
     ...
   }
 }
 </pre>
 </div>
+
+<p>
+最开始想出的代码是这个样子：
+</p>
+
+<div class="org-src-container">
+<pre class="src src-js"><span style="color: #91a0b3;">for</span> (<span style="color: #91a0b3;">let</span> <span style="color: #aaca86;">j</span> = 0; j &lt; rgbas.length; j++) {
+  <span style="color: #91a0b3;">for</span> (<span style="color: #91a0b3;">let</span> <span style="color: #aaca86;">i</span> = 0; i &lt; boards.length; i++) {
+    boards[i].style.backgroundColor = rgbas[j];
+  }
+}
+</pre>
+</div>
+
+<p>
+想实现上述效果，但却发现：每一个 board 都有相同的背景色，思考一会儿才发现，如果这样写就会把颜色数组 rgbas 的最后一个颜色元素赋值给每一个 board。
+</p>
+
+<p>
+致谢：<a href="https://50projects50days.com/js/main.js">main.js</a>
+</p>
+
+<p>
+三、怎样在多个页面应用相同的 HTML
+</p>
+
+<p>
+我接触到一个概念——Web Components。在制作网站时，在很多页面都会共用同一个 header 和 footer，Web Components 就是帮助我们复用这些共同代码的。
+</p>
+
+<p>
+<code>index.html</code> ：
+</p>
+
+<div class="org-src-container">
+<pre class="src src-html">&lt;<span style="color: #91a0b3;">!DOCTYPE</span> html&gt;
+&lt;<span style="color: #a9df90;">html</span>&gt;
+  &lt;<span style="color: #a9df90;">head</span>&gt;
+    ...
+    &lt;<span style="color: #a9df90;">script</span> <span style="color: #aaca86;">src</span>=<span style="color: #ddbc91;">"./components/header.js"</span> defer&gt;&lt;/<span style="color: #a9df90;">script</span>&gt;
+  &lt;/<span style="color: #a9df90;">head</span>&gt;
+  &lt;<span style="color: #a9df90;">body</span>&gt;
+    &lt;<span style="color: #a9df90;">header-component</span>&gt;&lt;/<span style="color: #a9df90;">header-component</span>&gt;
+  &lt;/<span style="color: #a9df90;">body</span>&gt;
+&lt;/<span style="color: #a9df90;">html</span>&gt;
+</pre>
+</div>
+
+<p>
+<code>./components/header.js</code> ：
+</p>
+
+<div class="org-src-container">
+<pre class="src src-js"><span style="color: #91a0b3;">const</span> <span style="color: #aaca86;">headerTemplate</span> = document.createElement(<span style="color: #ddbc91;">"template"</span>);
+
+headerTemplate.innerHTML = <span style="color: #ddbc91;">`</span>
+<span style="color: #ddbc91;">  &lt;style&gt;</span>
+<span style="color: #ddbc91;">    header {</span>
+<span style="color: #ddbc91;">      background: rgba(0, 0, 0, 0.6);</span>
+<span style="color: #ddbc91;">      color: #999;</span>
+<span style="color: #ddbc91;">      width: 100%;</span>
+<span style="color: #ddbc91;">      z-index: 2;</span>
+<span style="color: #ddbc91;">      display: flex;</span>
+<span style="color: #ddbc91;">    }</span>
+
+<span style="color: #ddbc91;">    header a {</span>
+<span style="color: #ddbc91;">      text-decoration: none;</span>
+<span style="color: #ddbc91;">      color: #fff;</span>
+<span style="color: #ddbc91;">      outline: none;</span>
+<span style="color: #ddbc91;">    }</span>
+<span style="color: #ddbc91;">    header a:visited {</span>
+<span style="color: #ddbc91;">      color: #999;</span>
+<span style="color: #ddbc91;">    }</span>
+<span style="color: #ddbc91;">    header a:hover {</span>
+<span style="color: #ddbc91;">      color: #fff;</span>
+<span style="color: #ddbc91;">    }</span>
+
+<span style="color: #ddbc91;">    header a#logo {</span>
+<span style="color: #ddbc91;">      color: #fff;</span>
+<span style="color: #ddbc91;">      font-size: 18px;</span>
+<span style="color: #ddbc91;">      font-weight: bold;</span>
+<span style="color: #ddbc91;">      margin: 0;</span>
+<span style="color: #ddbc91;">      padding: 15px;</span>
+<span style="color: #ddbc91;">      text-align: center;</span>
+<span style="color: #ddbc91;">    }</span>
+
+<span style="color: #ddbc91;">    header ul {</span>
+<span style="color: #ddbc91;">      display: flex;</span>
+
+<span style="color: #ddbc91;">    }</span>
+<span style="color: #ddbc91;">    ul li {</span>
+<span style="color: #ddbc91;">      margin-right: 5px;</span>
+<span style="color: #ddbc91;">      padding: 0 5px;</span>
+<span style="color: #ddbc91;">      list-style-type: none;</span>
+<span style="color: #ddbc91;">    }</span>
+<span style="color: #ddbc91;">    ul li a {</span>
+<span style="color: #ddbc91;">      display: block;</span>
+<span style="color: #ddbc91;">    }</span>
+<span style="color: #ddbc91;">  &lt;/style&gt;</span>
+<span style="color: #ddbc91;">  &lt;header&gt;</span>
+<span style="color: #ddbc91;">    &lt;a href="/" id="logo"&gt;Home&lt;/a&gt;</span>
+<span style="color: #ddbc91;">    &lt;ul&gt;</span>
+<span style="color: #ddbc91;">      &lt;li&gt;&lt;a href="javascript.html"&gt;JavaScript&lt;/a&gt;&lt;/li&gt;</span>
+<span style="color: #ddbc91;">      &lt;li&gt;&lt;a href="css.html"&gt;CSS&lt;/a&gt;&lt;/li&gt;</span>
+<span style="color: #ddbc91;">      &lt;li&gt;&lt;a href="html.html"&gt;HTML&lt;/a&gt;&lt;/li&gt;</span>
+<span style="color: #ddbc91;">      &lt;li&gt;&lt;a href="developer-tools.html"&gt;Developer Tools&lt;/a&gt;&lt;/li&gt;</span>
+<span style="color: #ddbc91;">    &lt;/ul&gt;</span>
+<span style="color: #ddbc91;">  &lt;/header&gt;</span>
+<span style="color: #ddbc91;">`</span>;
+
+<span style="color: #91a0b3;">class</span> Header <span style="color: #91a0b3;">extends</span> HTMLElement {
+  constructor() {
+    <span style="color: #91a0b3;">super</span>();
+  }
+
+  connectedCallback() {
+    <span style="color: #91a0b3;">const</span> <span style="color: #aaca86;">shadowRoot</span> = <span style="color: #ab85a3;">this</span>.attachShadow({ mode: <span style="color: #ddbc91;">"closed"</span> });
+
+    shadowRoot.appendChild(headerTemplate.content);
+  }
+}
+
+customElements.define(<span style="color: #ddbc91;">"header-component"</span>, Header);
+</pre>
+</div>
+
+<p>
+实现 Web Component
+</p>
+
+<p>
+致谢：
+</p>
+
+<ol class="org-ol">
+<li><a href="https://developer.mozilla.org/en-US/docs/Web/Web_Components">Web Components - MDN</a></li>
+<li><a href="https://www.freecodecamp.org/news/reusable-html-components-how-to-reuse-a-header-and-footer-on-a-website/">Reusable HTML Components – How to Reuse a Header and Footer on a Website</a></li>
+</ol>
 </div>
 </body>
 </html>
