@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html lang="zh">
 <head>
-<!-- 2022-01-10 Mon 11:01 -->
+<!-- 2022-01-10 Mon 12:01 -->
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>技术遐想（一）</title>
@@ -409,8 +409,16 @@ customElements.define(<span style="color: #ddbc91;">"header-component"</span>, H
 </div>
 
 <p>
-实现 Web Component
+实现一个 Web Component 的一般步骤：
 </p>
+
+<ol class="org-ol">
+<li>对现有 Class 的功能进行扩展，创建自己的 Class</li>
+<li>使用 CustomElementRegistry.define() 方法注册你的自定义标签</li>
+<li>如果需要，附加 shadow DOM 到自定义元素中</li>
+<li>如果需要，使用 &lt;template&gt; 和 &lt;slot&gt; 定义 HTML 模板。再一次使用常规 DOM 方法克隆模板，并把它附加在你的 shadow DOM 下</li>
+<li>你可以在任何你需要的页面使用你的自定义标签</li>
+</ol>
 
 <p>
 致谢：
