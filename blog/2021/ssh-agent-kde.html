@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html lang="zh">
 <head>
-<!-- 2022-01-12 Wed 11:01 -->
+<!-- 2022-01-12 Wed 12:01 -->
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>KDE 开机自启 ssh agent，加载密匙</title>
@@ -209,18 +209,18 @@
 <a href="https://userbase.kde.org/KDE_Wallet_Manager">Kwallet</a> 是 Linux 桌面管理器 KDE 下的一款管理密码的应用。
 </p>
 
-<div id="outline-container-org42de720" class="outline-2">
-<h2 id="org42de720">Kwallet</h2>
-<div class="outline-text-2" id="text-org42de720">
+<div id="outline-container-org06b9442" class="outline-2">
+<h2 id="org06b9442">Kwallet</h2>
+<div class="outline-text-2" id="text-org06b9442">
 <p>
 创建一个新钱包，并为它设置密码。
 </p>
 </div>
 </div>
 
-<div id="outline-container-org8bffd90" class="outline-2">
-<h2 id="org8bffd90">开机启动 ssh-agent</h2>
-<div class="outline-text-2" id="text-org8bffd90">
+<div id="outline-container-org38ca706" class="outline-2">
+<h2 id="org38ca706">开机启动 ssh-agent</h2>
+<div class="outline-text-2" id="text-org38ca706">
 <p>
 确保安装了 <a href="https://github.com/KDE/ksshaskpass">Ksshaskpass</a>。
 </p>
@@ -251,9 +251,9 @@
 </div>
 </div>
 
-<div id="outline-container-org93b6914" class="outline-2">
-<h2 id="org93b6914">开机添加 ssh 密匙</h2>
-<div class="outline-text-2" id="text-org93b6914">
+<div id="outline-container-org052c54b" class="outline-2">
+<h2 id="org052c54b">开机添加 ssh 密匙</h2>
+<div class="outline-text-2" id="text-org052c54b">
 <p>
 新建文件 <code>~/.config/autostart/ssh-add.desktop</code> ：
 </p>
@@ -268,9 +268,9 @@
 </div>
 </div>
 
-<div id="outline-container-org916774b" class="outline-2">
-<h2 id="org916774b">环境变量与普通应用</h2>
-<div class="outline-text-2" id="text-org916774b">
+<div id="outline-container-org1456d16" class="outline-2">
+<h2 id="org1456d16">环境变量与普通应用</h2>
+<div class="outline-text-2" id="text-org1456d16">
 <p>
 启动 ssh agent 要比添加 ssh 密匙提前。因为前者使用的是环境变量，后者使用的只是普通应用自启动。</p>
 </div>
