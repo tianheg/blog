@@ -3,7 +3,7 @@
 "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en">
 <head>
-<!-- 2022-01-11 Tue 22:01 -->
+<!-- 2022-01-12 Wed 08:02 -->
 <meta http-equiv="Content-Type" content="text/html;charset=utf-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1" />
 <title>&lrm;</title>
@@ -64,7 +64,7 @@ Flask。在它的官网有专门的入门教程<sup><a id="fnr.3" class="footref
 <div id="outline-container-创建虚拟环境 5" class="outline-2">
 <h2 id="创建虚拟环境 5"><span class="section-number-2">1</span> 创建虚拟环境<sup><a id="fnr.5" class="footref" href="#fn.5">5</a></sup></h2>
 <div class="outline-text-2" id="text-创建虚拟环境 5">
-<pre class="example" id="orgea510fb">
+<pre class="example" id="org9acae3e">
 python -V
 # Python 3.9.7 Python 版本为 3.x 时使用以下命令
 python -m venv venv --upgrade-deps # --upgrade-deps 升级依赖到最新版
@@ -88,7 +88,7 @@ source &lt;venv&gt;/bin/activate # 进入虚拟环境
 Demo 在这里是指最小运行步骤。
 </p>
 
-<pre class="example" id="orga2e0ae2">
+<pre class="example" id="orgcf91b94">
 pip install Flask # 安装 Flask 框架
 </pre>
 
@@ -96,7 +96,7 @@ pip install Flask # 安装 Flask 框架
 在当前目录下新建 <code>main.py</code>:
 </p>
 
-<pre class="example" id="org766df0a">
+<pre class="example" id="org14a4609">
 from flask import Flask
 
 app = Flask(__name__)
@@ -109,7 +109,7 @@ def hello_world():
 执行以下命令：
 </p>
 
-<pre class="example" id="org0f1f7b2">
+<pre class="example" id="orgb6c6596">
 export FLASK_APP=main # 当前执行文件的名称，如果文件命名为 app 或 wsgi 则不需要执行该命令
 flask run
 </pre>
@@ -145,11 +145,11 @@ flask run
 =.env=。但是，使用此功能需要安装 python-dotenv 依赖，安装命令：
 </p>
 
-<pre class="example" id="org3580aaf">
+<pre class="example" id="org0ca95d6">
 pip install python-dotenv
 </pre>
 
-<pre class="example" id="org7d33a63">
+<pre class="example" id="org4f277ca">
 FLASK_APP=main
 FLASK_ENV=development
 # FLASK_RUN_PORT=8000
@@ -164,7 +164,7 @@ FLASK_ENV=development
 文档结构（直接复制自官方文档），再和我的进行比较得来：
 </p>
 
-<pre class="example" id="org6f3265f">
+<pre class="example" id="org6296034">
 /home/user/Projects/flask-tutorial
 ├── flaskr/
 │   ├── __init__.py
@@ -201,7 +201,7 @@ FLASK_ENV=development
 我的源码在这里<sup><a id="fnr.6" class="footref" href="#fn.6">6</a></sup>。当你准备好运行时，需要初始化数据库：
 </p>
 
-<pre class="example" id="org31b8fb6">
+<pre class="example" id="org6d4778f">
 flask init-db
 </pre>
 
@@ -209,7 +209,7 @@ flask init-db
 以上文件结构中有一个重要部分-&#x2013;&#x2014;测试。我在学习该项目时，很多包依赖已经更新了几个版本，所以在测试时有很多报错。占比最高的错误是：
 </p>
 
-<pre class="example" id="org33caae4">
+<pre class="example" id="org33c61fe">
 sqlite3.OperationalError: near "(": syntax error
 </pre>
 
@@ -217,7 +217,7 @@ sqlite3.OperationalError: near "(": syntax error
 而在部署生产环境出现的一个错误：
 </p>
 
-<pre class="example" id="orgbff67ee">
+<pre class="example" id="org3605485">
 sqlite3.OperationalError: no such table: post
 </pre>
 
