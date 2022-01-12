@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html lang="zh">
 <head>
-<!-- 2022-01-12 Wed 13:00 -->
+<!-- 2022-01-12 Wed 19:00 -->
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>在 Ubuntu20.04 配合 Nginx 使用 Let's Encrypt 证书</title>
@@ -212,9 +212,9 @@
 <li><a href="nginx-1st.html">Nginx 已经安装并能够正常使用</a></li>
 </ol>
 
-<div id="outline-container-org43e1ea6" class="outline-2">
-<h2 id="org43e1ea6">安装 Certbot</h2>
-<div class="outline-text-2" id="text-org43e1ea6">
+<div id="outline-container-org457acb3" class="outline-2">
+<h2 id="org457acb3">安装 Certbot</h2>
+<div class="outline-text-2" id="text-org457acb3">
 <div class="org-src-container">
 <pre class="src src-sh">sudo apt install certbot python3-certbot-nginx
 </pre>
@@ -222,9 +222,9 @@
 </div>
 </div>
 
-<div id="outline-container-org6ff784e" class="outline-2">
-<h2 id="org6ff784e">配置 Nginx</h2>
-<div class="outline-text-2" id="text-org6ff784e">
+<div id="outline-container-orgeca77ce" class="outline-2">
+<h2 id="orgeca77ce">配置 Nginx</h2>
+<div class="outline-text-2" id="text-orgeca77ce">
 <p>
 我已经通过 Nginx 部署了一个站点——blog.yidajiabei.xyz，现在部署的是第二个站点——til.yidajiabei.xyz。我没有使用 server block<sup><a id="fnr.1" class="footref" href="#fn.1">1</a></sup>，即新建 <code>/etc/nginx/sites-available/til.yidajiabei.xyz</code> 文件，并通过 <code>sudo ln -s /etc/nginx/sites-available/til.yidajiabei.xyz /etc/nginx/sites-enabled/</code> 命令链接至 <code>sites-enabled</code> 文件夹下。而是直接将配置写在 <code>/etc/nginx/nginx.conf</code> 文件中。
 </p>
@@ -257,9 +257,9 @@
 </div>
 </div>
 
-<div id="outline-container-org21bc6fd" class="outline-2">
-<h2 id="org21bc6fd">获取一个 SSL 证书</h2>
-<div class="outline-text-2" id="text-org21bc6fd">
+<div id="outline-container-org422dfad" class="outline-2">
+<h2 id="org422dfad">获取一个 SSL 证书</h2>
+<div class="outline-text-2" id="text-org422dfad">
 <div class="org-src-container">
 <pre class="src src-sh">sudo certbot --nginx -d til.yidajiabei.xyz
 </pre>
@@ -287,9 +287,9 @@
 </div>
 </div>
 
-<div id="outline-container-orgaf16e7d" class="outline-2">
-<h2 id="orgaf16e7d">验证 Certbot 自动更新</h2>
-<div class="outline-text-2" id="text-orgaf16e7d">
+<div id="outline-container-org67e3412" class="outline-2">
+<h2 id="org67e3412">验证 Certbot 自动更新</h2>
+<div class="outline-text-2" id="text-org67e3412">
 <div class="org-src-container">
 <pre class="src src-sh">sudo systemctl status certbot.timer
 &#9679; certbot.timer - Run certbot twice daily
