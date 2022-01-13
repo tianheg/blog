@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html lang="zh">
 <head>
-<!-- 2022-01-13 Thu 12:02 -->
+<!-- 2022-01-13 Thu 13:01 -->
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>解决 Windows 下中文文件在 Linux 中读取乱码的问题</title>
@@ -208,9 +208,9 @@
 Windows 系统下创建的文件采用的编码标准可能是 gbk/gb2312。所以避免乱码的基本原则就是使用包含字符更多的 utf-8，避免使用其他编码格式。
 </p>
 
-<div id="outline-container-org06b6a38" class="outline-2">
-<h2 id="org06b6a38">文件名乱码</h2>
-<div class="outline-text-2" id="text-org06b6a38">
+<div id="outline-container-org9929ddb" class="outline-2">
+<h2 id="org9929ddb">文件名乱码</h2>
+<div class="outline-text-2" id="text-org9929ddb">
 <p>
 安装 <a href="https://linux.die.net/man/1/convmv">convmv</a>，使用 <code>convmv</code> 命令转换编码格式。举例：
 </p>
@@ -222,9 +222,9 @@ Windows 系统下创建的文件采用的编码标准可能是 gbk/gb2312。所�
 </div>
 </div>
 
-<div id="outline-container-org5e8c9df" class="outline-2">
-<h2 id="org5e8c9df">文件内容乱码</h2>
-<div class="outline-text-2" id="text-org5e8c9df">
+<div id="outline-container-org9c2af89" class="outline-2">
+<h2 id="org9c2af89">文件内容乱码</h2>
+<div class="outline-text-2" id="text-org9c2af89">
 <p>
 使用 <code>iconv</code> 命令转换格式：
 </p>
@@ -236,9 +236,9 @@ Windows 系统下创建的文件采用的编码标准可能是 gbk/gb2312。所�
 </div>
 </div>
 
-<div id="outline-container-org6f8e44d" class="outline-2">
-<h2 id="org6f8e44d">zip 压缩包乱码</h2>
-<div class="outline-text-2" id="text-org6f8e44d">
+<div id="outline-container-org119e990" class="outline-2">
+<h2 id="org119e990">zip 压缩包乱码</h2>
+<div class="outline-text-2" id="text-org119e990">
 <p>
 在非 utf8 编码环境(通常是 Windows 下的中文环境)下，不要使用 zip 进行压缩(建议使用 7z)。需要一个特殊的参数：
 </p>
