@@ -1,10 +1,10 @@
 <!DOCTYPE html>
 <html lang="zh">
 <head>
-<!-- 2022-01-14 Fri 17:00 -->
+<!-- 2022-01-14 Fri 17:01 -->
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<title>时间伤痕之外</title>
+<title>如何在 Sphinx 下使用 JSDoc</title>
 <meta name="generator" content="Org mode">
 <style type="text/css">
  <!--/*--><![CDATA[/*><!--*/
@@ -199,72 +199,207 @@
 <body>
 <div id="content">
 <header>
-<h1 class="title">时间伤痕之外</h1>
-</header><p>
-人在少年时期是最自恋的，我就是如此。不记得 QQ
-是什么时候申请的，刚才翻看空间时，显示“2011 年 1
-月没有留下痕迹”。想必在那之前，我的 QQ
-号就已经注册好了。我还记得这不是我第一个 QQ
-号，而且还是让同学帮忙申请的。
-</p>
-
-<p>
-你知道我的第一个说说签名是什么吗？是“*低调才是最牛 B
-的炫*”。你也许很意外，也许觉得很正常。当我闲极无聊翻到这个签名时，很意外，好奇自己当时脑子里都是些什么东西。第二个签名就很自恋，是“*Who
-like me?*”。第三个更甚，是“*Who like me?'孤芳自赏'*”。
-</p>
-
-<p>
-由此可见，那时的我是多么“骚”。记得是当时同学的评价。时间太长，细节内容记不清了。
-</p>
-
-<p>
-我不知道是不是时间本身的原因，当我长成人后，有关于少年时期的记忆都变成碎片一样的东西，不可察看。*过去越来越模糊，当下却越来越清晰，清晰到恍如梦中。*
-</p>
-
-<p>
-*时间本身是不可逆的，所以它带给我的伤痕格外刻骨铭心。*年少时的我是很自卑的，不知道是否是父母棍棒教育的原因，不太敢表达自己的想法，总是唯唯诺诺，总是很随和。
-</p>
-
-<p>
-那些给我带来伤痕的事情很多，写下来只会为无聊之人的助兴。放在心里便好，时刻铭记。
-</p>
-
-<p>
-*人是无法真正理解他人的。*这句话，今天我有深刻体会。我作一个假设：如果我要理解一个人，我该怎么做？首先，我要成为这个人。我要理解他的行为，我就要经历他所经历的，想他所想的。而且还要身处在同样的社会自然环境里。
-</p>
-
-<p>
-在这些条件满足的情况下，我们勉强可以说：你有资格真正理解这个人。为什么会“勉强”，而不是“一定”？因为人本身具有极大的不确定性，心智是自由的。你能够和这个人想法一致吗？怎么可能呢！
-</p>
-
-<p>
-所以，人是无法真正理解他人的。
-</p>
-
-<p>
-今天明白了这个道理不晚，这是成长的一部分。
-</p>
-
-<p>
-<b>人生在世，孤独相伴，一生如此。浮于表面的事物已经褪去它的华丽外衣，内里裹挟的是无尽的令你吃惊的真实。一步一步走去，面对、深思、行动，升华。</b>
-</p>
-
-<p>
-很多时候，我不太敢这么大胆地袒露自己内心所想，怕把你们都吓跑了，我不就没朋友了。可是，当我越把自己的这一面展现给你们时，你越不嫌弃我，我就越体会到友情的珍贵。人为什么要有朋友？*因为人一个人走很孤独，知道有这么一个朋友心里就会踏实很多。*
-</p>
-
-<p>
-我发觉自己以前的某种恐惧，到现在看来，完全没有必要。有这样一种事情，你会在特定的时间，得心应手地完成它。之前从未接触，你到了那个时间点，你就知道怎么做。
-</p>
-
-<p>
-所以，有些时候我计划了很多事情，但都是计划赶不上变化。真正去做时，总有各种各样的情况发生。*因此，列计划要给出两套方案，一套基本计划，一套应付变化。*
-</p>
-
-<p>
-最近在计算机学习方面没有多少进步，比较着急，希望年后走完数量不多的亲戚能有很多时间学习。
-</p>
+<h1 class="title">如何在 Sphinx 下使用 JSDoc</h1>
+</header><nav id="table-of-contents">
+<h2>Table of Contents</h2>
+<div id="text-table-of-contents">
+<ul>
+<li><a href="#org6b18e87">1. 使用</a></li>
+<li><a href="#org3f87aec">2. 文件结构</a></li>
+<li><a href="#orgda12071">3. GitHub Action 自动部署</a></li>
+</ul>
 </div>
+</nav>
+<p>
+我建了一个仓库，记录自己学习 MDN 网站的过程。我发现了很多函数，它们有参数和返回值，我想着能不能把学习使用过的函数做成一个文档列表，于是我找到了 JSDoc<sup><a id="fnr.1" class="footref" href="#fn.1">1</a></sup>。它能根据 js 源文件生成文档。
+</p>
+
+<p>
+Sphinx 是 Python 编程语言下的常见文档构建程序。我想把 JSDoc 和它结合起来，于是我找到了 sphinx-js<sup><a id="fnr.2" class="footref" href="#fn.2">2</a></sup>。
+</p>
+
+<div id="outline-container-org6b18e87" class="outline-2">
+<h2 id="org6b18e87"><span class="section-number-2">1</span> 使用</h2>
+<div class="outline-text-2" id="text-1">
+<p>
+确保 Python 版本为 3.8，使用 3.10 会报错：
+</p>
+
+<div class="org-src-container">
+<pre class="src src-sh">Could not import extension sphinx_js (exception: cannot import name <span style="color: #ddbc91;">'Mapping'</span> from <span style="color: #ddbc91;">'collections'</span> (/usr/lib/python3.10/collections/__init__.py))
+</pre>
+</div>
+
+<p>
+可以将待安装的 pypi 包保存为 requirements.txt：
+</p>
+
+<div class="org-src-container">
+<pre class="src src-txt">sphinx
+sphinx-autobuild
+sphinx-js&gt;=3.1
+## 以上必选，以下分别是主题，md 文档支持，可不安装
+furo
+myst-parser
+</pre>
+</div>
+
+<div class="org-src-container">
+<pre class="src src-sh"><span style="color: #706565;"># </span><span style="color: #857575;">&#21019;&#24314;&#34394;&#25311;&#29615;&#22659;&#24182;&#26356;&#26032;&#20381;&#36182;&#21040;&#26368;&#26032;&#29256;&#26412;</span>
+python -m venv venv --upgrade-deps
+<span style="color: #706565;"># </span><span style="color: #857575;">&#28608;&#27963;&#34394;&#25311;&#29615;&#22659;</span>
+. venv/bin/activate
+<span style="color: #706565;"># </span><span style="color: #857575;">&#23433;&#35013; pypi &#21253;</span>
+pip install -r requirements.txt
+</pre>
+</div>
+
+<p>
+Sphinx 文档配置文件 conf.py：
+</p>
+
+<div class="org-src-container">
+<pre class="src src-python"><span style="color: #aaca86;">extensions</span> = [
+  <span style="color: #ddbc91;">"sphinx_js"</span>
+]
+<span style="color: #706565;"># </span><span style="color: #857575;">Used to extract JSDoc function/class docs from source</span>
+<span style="color: #aaca86;">js_language</span> = <span style="color: #ddbc91;">'javascript'</span>
+<span style="color: #aaca86;">js_source_path</span> = <span style="color: #ddbc91;">'../src/'</span>
+<span style="color: #706565;"># </span><span style="color: #857575;">jsdoc_config_path = '../tsconfig.json'</span>
+<span style="color: #aaca86;">primary_domain</span> = <span style="color: #ddbc91;">'js'</span>
+</pre>
+</div>
+
+<p>
+文档配置 api.rst：
+</p>
+
+<div class="org-src-container">
+<pre class="src src-rst"><span style="background-color: #262626;">API</span>
+<span style="color: #91a0b3;">====</span>
+
+<span style="color: #9fbfdf;">.. autofunction::</span> parseInt
+</pre>
+</div>
+
+<p>
+js 源文件 index.js：
+</p>
+
+<div class="org-src-container">
+<pre class="src src-js"><span style="color: #7c7565;">/** @function parseInt</span>
+<span style="color: #7c7565;"> * @param {string} string - value to parse</span>
+<span style="color: #7c7565;"> * @param {number} [radix] - integer between 2 and 36. Not default to 10 !!!</span>
+<span style="color: #7c7565;"> * @return {(number|NaN)} integer | NaN (radix &lt; 2 or radix &gt; 36 or first non-whitespace character cannot be converted to a number)</span>
+<span style="color: #7c7565;"> *</span>
+<span style="color: #7c7565;"> * @example</span>
+<span style="color: #7c7565;"> * parseInt('0xe', 16)</span>
+<span style="color: #7c7565;"> */</span>
+</pre>
+</div>
+
+<p>
+本地预览：
+</p>
+
+<div class="org-src-container">
+<pre class="src src-sh">sphinx-autobuild content build
+</pre>
+</div>
+</div>
+</div>
+
+<div id="outline-container-org3f87aec" class="outline-2">
+<h2 id="org3f87aec"><span class="section-number-2">2</span> 文件结构</h2>
+<div class="outline-text-2" id="text-2">
+<div class="org-src-container">
+<pre class="src src-txt">.
+├── build
+├── content
+│  ├── _static
+│  ├── api.rst
+│  ├── conf.py
+│  └── index.md
+├── Makefile
+├── requirements.txt
+├── src
+│  └── index.js
+└── venv
+</pre>
+</div>
+</div>
+</div>
+
+<div id="outline-container-orgda12071" class="outline-2">
+<h2 id="orgda12071"><span class="section-number-2">3</span> GitHub Action 自动部署</h2>
+<div class="outline-text-2" id="text-3">
+<div class="org-src-container">
+<pre class="src src-yml">name: "Build Sphinx"
+
+on:
+  push:
+    branches: [main]
+
+jobs:
+  docs:
+    runs-on: ubuntu-latest
+    steps:
+    - uses: actions/checkout@v2
+    - uses: actions/setup-python@v2
+      with:
+        python-version: 3.8
+    - uses: actions/setup-node@v2
+      with:
+        node-version: '14'
+    - name: Install dependencies
+      run: |
+          python -m pip install --upgrade pip
+          if [ -f requirements.txt ]; then pip install -r requirements.txt; fi
+          npm install -g jsdoc
+    - name: Clone deploy branch
+      run: |
+        REMOTE_BRANCH="${REMOTE_BRANCH:-gh-pages}"
+        REMOTE_REPO="https://${GITHUB_ACTOR}:${{ secrets.GITHUB_TOKEN }}@github.com/${GITHUB_REPOSITORY}.git"
+
+        rm -rf build/html/
+        mkdir -p build/html/
+        git clone --depth=1 --branch="${REMOTE_BRANCH}" --single-branch --no-checkout \
+          "${REMOTE_REPO}" build/html/
+    - run: make html
+    - name: Deploy to GitHub Pages
+      if: "github.event_name == 'push'"
+      run: |
+        SOURCE_COMMIT="$(git log -1 --pretty="%an: %B" "$GITHUB_SHA")"
+        pushd build/html/ &amp;&gt;/dev/null
+        if [ "$(git status --porcelain | wc -l)" -eq 0 ]; then
+          exit 0
+        fi
+
+        git add --all
+        git -c user.name="${GITHUB_ACTOR}" -c user.email="${GITHUB_ACTOR}@users.noreply.github.com" \
+          commit --quiet \
+          --message "Deploy docs from ${GITHUB_SHA}" \
+          --message "$SOURCE_COMMIT"
+        git push
+
+        popd &amp;&gt;/dev/null
+</pre>
+</div>
+</div>
+</div>
+<div id="footnotes">
+<h2 class="footnotes">Footnotes: </h2>
+<div id="text-footnotes">
+
+<div class="footdef"><sup><a id="fn.1" class="footnum" href="#fnr.1">1</a></sup> <div class="footpara"><p class="footpara">
+<a href="https://github.com/jsdoc/jsdoc">https://github.com/jsdoc/jsdoc</a>
+</p></div></div>
+
+<div class="footdef"><sup><a id="fn.2" class="footnum" href="#fnr.2">2</a></sup> <div class="footpara"><p class="footpara">
+<a href="https://github.com/mozilla/sphinx-js">https://github.com/mozilla/sphinx-js</a></p></div></div>
+
+
+</div>
+</div></div>
 </body>
 </html>
