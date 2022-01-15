@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html lang="zh">
 <head>
-<!-- 2022-01-15 Sat 18:01 -->
+<!-- 2022-01-15 Sat 19:01 -->
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>深入了解现代浏览器（一）</title>
@@ -212,26 +212,26 @@
 作为第一部分，将讨论核心计算术语，Chrome 的多进程架构。
 </p>
 
-<div id="outline-container-org79b64fb" class="outline-2">
-<h2 id="org79b64fb">CPU，GPU，内存和多进程架构</h2>
-<div class="outline-text-2" id="text-org79b64fb">
+<div id="outline-container-org18c9cff" class="outline-2">
+<h2 id="org18c9cff">CPU，GPU，内存和多进程架构</h2>
+<div class="outline-text-2" id="text-org18c9cff">
 <p>
 <b>计算机的核心是 CPU 和 GPU</b>
 </p>
 </div>
 
-<div id="outline-container-org8fcef8c" class="outline-3">
-<h3 id="org8fcef8c">CPU</h3>
-<div class="outline-text-3" id="text-org8fcef8c">
+<div id="outline-container-org768f13f" class="outline-3">
+<h3 id="org768f13f">CPU</h3>
+<div class="outline-text-3" id="text-org768f13f">
 <p>
 Central Processing Unit，简写 CPU。它是计算机的大脑。中央处理器的核心，可看成是一个办公室职员，能够次序处理接到的多种不同任务。在过去大多数 CPU 是单芯片。核心就像是在同一个芯片内的另一个 CPU。在现代硬件中，你能获得多个内核，给你的手机和电脑带来更强大的计算能力。
 </p>
 </div>
 </div>
 
-<div id="outline-container-org8ab1038" class="outline-3">
-<h3 id="org8ab1038">GPU</h3>
-<div class="outline-text-3" id="text-org8ab1038">
+<div id="outline-container-org53175ac" class="outline-3">
+<h3 id="org53175ac">GPU</h3>
+<div class="outline-text-3" id="text-org53175ac">
 <p>
 Graphics Processing Unit，简写 GPU。它是计算机的另一个部分。与 CPU 相比，GPU 更擅长通过多核在同一时间处理简单任务。顾名思义，它最初是用来处理图形的。这就是为什么在图形上下文中，“使用 GPU”或“ GPU 支持的”与快速渲染和平滑交互相关联。
 </p>
@@ -243,9 +243,9 @@ Graphics Processing Unit，简写 GPU。它是计算机的另一个部分。与 
 </div>
 </div>
 
-<div id="outline-container-org5373948" class="outline-2">
-<h2 id="org5373948">在进程和线程上执行程序</h2>
-<div class="outline-text-2" id="text-org5373948">
+<div id="outline-container-orgdf8a4d7" class="outline-2">
+<h2 id="orgdf8a4d7">在进程和线程上执行程序</h2>
+<div class="outline-text-2" id="text-orgdf8a4d7">
 <p>
 一个进程可被描述为一个应用程序的执行程序；线程则在进程内部，可以执行进程中的部分程序。
 </p>
