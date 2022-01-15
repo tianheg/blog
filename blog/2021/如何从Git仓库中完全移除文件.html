@@ -3,7 +3,7 @@
 "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en">
 <head>
-<!-- 2022-01-15 Sat 21:01 -->
+<!-- 2022-01-15 Sat 22:02 -->
 <meta http-equiv="Content-Type" content="text/html;charset=utf-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1" />
 <title>&lrm;</title>
@@ -56,7 +56,7 @@
 能够达到我的目的的命令<sup><a id="fnr.1" class="footref" href="#fn.1">1</a></sup>：
 </p>
 
-<pre class="example" id="orgd9b812d">
+<pre class="example" id="org931912c">
 git filter-branch --index-filter "git rm -rf --cached --ignore-unmatch path_to_file" HEAD
 git push -f
 </pre>
@@ -65,7 +65,7 @@ git push -f
 当使用 <code>filter-branch</code> 命令时，出现以下提示：
 </p>
 
-<pre class="example" id="org657d8b8">
+<pre class="example" id="org39183d9">
 WARNING: git-filter-branch has a glut of gotchas generating mangled history
          rewrites.  Hit Ctrl-C before proceeding to abort, then use an
          alternative filtering tool such as 'git filter-repo'
@@ -92,7 +92,7 @@ Ctrl+C 可在未执行命令以前取消，然后使用另一个可供选择的�
 现在被 Git 项目推荐，用于代替 =git filter-branch=。
 </p>
 
-<pre class="example" id="org9ae9737">
+<pre class="example" id="org114eca0">
 sudo pacman -S git-filter-repo # 安装
 
 ### 演示使用方法
