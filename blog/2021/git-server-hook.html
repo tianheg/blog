@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html lang="zh">
 <head>
-<!-- 2022-01-16 Sun 22:01 -->
+<!-- 2022-01-16 Sun 23:02 -->
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>云服务器配置 Git 仓库托管并使用 Git Hooks 自动执行脚本</title>
@@ -208,9 +208,9 @@
 之前的博客更新思路是，本地提交修改至 GitHub，再登陆云服务器，手动执行脚本，达到更新博客内容的目的。但是，从 GitHub 拉取代码较慢，于是想到可以把本地的更改同时推送到 GitHub 和云服务器。再通过 Git Hooks 自动执行「更新博客」的脚本，以此达到提升效率的目的。
 </p>
 
-<div id="outline-container-org4ef44e5" class="outline-2">
-<h2 id="org4ef44e5">更新 Git 至最新版本</h2>
-<div class="outline-text-2" id="text-org4ef44e5">
+<div id="outline-container-org50b8b0c" class="outline-2">
+<h2 id="org50b8b0c">更新 Git 至最新版本</h2>
+<div class="outline-text-2" id="text-org50b8b0c">
 <p>
 云服务器的系统是 Ubuntu 20.04，所以可以通过以下命令安装 Git 的最新版本：
 </p>
@@ -224,9 +224,9 @@ apt install git
 </div>
 </div>
 
-<div id="outline-container-org17898a4" class="outline-2">
-<h2 id="org17898a4">创建 Git 用户</h2>
-<div class="outline-text-2" id="text-org17898a4">
+<div id="outline-container-org027aebd" class="outline-2">
+<h2 id="org027aebd">创建 Git 用户</h2>
+<div class="outline-text-2" id="text-org027aebd">
 <div class="org-src-container">
 <pre class="src src-sh">adduser git <span style="color: #706565;"># </span><span style="color: #857575;">note difference with useradd</span>
 passwd git <span style="color: #706565;"># </span><span style="color: #857575;">add password for git user</span>
@@ -247,9 +247,9 @@ sudo visudo
 </div>
 </div>
 
-<div id="outline-container-orga0ea75b" class="outline-2">
-<h2 id="orga0ea75b">配置 ssh 公匙</h2>
-<div class="outline-text-2" id="text-orga0ea75b">
+<div id="outline-container-orgcd7de5d" class="outline-2">
+<h2 id="orgcd7de5d">配置 ssh 公匙</h2>
+<div class="outline-text-2" id="text-orgcd7de5d">
 <p>
 在本地主机执行以下命令：
 </p>
@@ -309,9 +309,9 @@ chmod 700 .ssh
 </div>
 </div>
 
-<div id="outline-container-org4a9609b" class="outline-2">
-<h2 id="org4a9609b">创建博客文件夹</h2>
-<div class="outline-text-2" id="text-org4a9609b">
+<div id="outline-container-orgd43988d" class="outline-2">
+<h2 id="orgd43988d">创建博客文件夹</h2>
+<div class="outline-text-2" id="text-orgd43988d">
 <div class="org-src-container">
 <pre class="src src-sh">su root <span style="color: #706565;"># </span><span style="color: #857575;">switch to root user</span>
 mkdir /home/hugo
@@ -321,9 +321,9 @@ chown git:git -R /home/hugo
 </div>
 </div>
 
-<div id="outline-container-orgb7e4259" class="outline-2">
-<h2 id="orgb7e4259">更改站点目录权限</h2>
-<div class="outline-text-2" id="text-orgb7e4259">
+<div id="outline-container-org468ca40" class="outline-2">
+<h2 id="org468ca40">更改站点目录权限</h2>
+<div class="outline-text-2" id="text-org468ca40">
 <div class="org-src-container">
 <pre class="src src-sh">sudo chown git:git -R /var/www/hugo <span style="color: #706565;"># </span><span style="color: #857575;">for git hook</span>
 </pre>
@@ -331,9 +331,9 @@ chown git:git -R /home/hugo
 </div>
 </div>
 
-<div id="outline-container-org6463852" class="outline-2">
-<h2 id="org6463852">创建 bare 仓库并配置 Git Hook</h2>
-<div class="outline-text-2" id="text-org6463852">
+<div id="outline-container-org76866e6" class="outline-2">
+<h2 id="org76866e6">创建 bare 仓库并配置 Git Hook</h2>
+<div class="outline-text-2" id="text-org76866e6">
 <div class="org-src-container">
 <pre class="src src-sh">su root
 <span style="color: #9fbfdf;">cd</span> /home/git
@@ -360,9 +360,9 @@ hugo --minify -d /var/www/hugo
 </div>
 </div>
 
-<div id="outline-container-org2f4d63e" class="outline-2">
-<h2 id="org2f4d63e">本地配置云服务器仓库</h2>
-<div class="outline-text-2" id="text-org2f4d63e">
+<div id="outline-container-org98db0f3" class="outline-2">
+<h2 id="org98db0f3">本地配置云服务器仓库</h2>
+<div class="outline-text-2" id="text-org98db0f3">
 <div class="org-src-container">
 <pre class="src src-sh">git remote add origin git@server-ip:/home/git/blog.git
 git push -u origin main <span style="color: #706565;"># </span><span style="color: #857575;">first push</span>
@@ -371,9 +371,9 @@ git push -u origin main <span style="color: #706565;"># </span><span style="colo
 </div>
 </div>
 
-<div id="outline-container-orgcde9e15" class="outline-2">
-<h2 id="orgcde9e15">参考</h2>
-<div class="outline-text-2" id="text-orgcde9e15">
+<div id="outline-container-org5f824df" class="outline-2">
+<h2 id="org5f824df">参考</h2>
+<div class="outline-text-2" id="text-org5f824df">
 <ol class="org-ol">
 <li><a href="https://segmentfault.com/a/1190000039676421">https://segmentfault.com/a/1190000039676421</a></li>
 <li><a href="https://www.saintsjd.com/2011/01/what-is-a-bare-git-repository/">https://www.saintsjd.com/2011/01/what-is-a-bare-git-repository/</a></li>
