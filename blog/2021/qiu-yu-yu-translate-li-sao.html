@@ -1,45 +1,206 @@
-<?xml version="1.0" encoding="utf-8"?>
-<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN"
-"http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
-<html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en">
+<!DOCTYPE html>
+<html lang="zh">
 <head>
-<!-- 2022-01-17 Mon 20:39 -->
-<meta http-equiv="Content-Type" content="text/html;charset=utf-8" />
-<meta name="viewport" content="width=device-width, initial-scale=1" />
-<title>&lrm;</title>
-<meta name="generator" content="Org mode" />
-<script type="text/javascript">
-// @license magnet:?xt=urn:btih:e95b018ef3580986a04669f1b5879592219e2a7a&dn=public-domain.txt Public Domain
-<!--/*--><![CDATA[/*><!--*/
-     function CodeHighlightOn(elem, id)
-     {
-       var target = document.getElementById(id);
-       if(null != target) {
-         elem.classList.add("code-highlighted");
-         target.classList.add("code-highlighted");
-       }
-     }
-     function CodeHighlightOff(elem, id)
-     {
-       var target = document.getElementById(id);
-       if(null != target) {
-         elem.classList.remove("code-highlighted");
-         target.classList.remove("code-highlighted");
-       }
-     }
-    /*]]>*///-->
-// @license-end
-</script>
+<!-- 2022-01-17 Mon 21:01 -->
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>余秋雨译《离骚》</title>
+<meta name="generator" content="Org mode">
+<style type="text/css">
+ <!--/*--><![CDATA[/*><!--*/
+  .title  { text-align: center;
+             margin-bottom: .2em; }
+  .subtitle { text-align: center;
+              font-size: medium;
+              font-weight: bold;
+              margin-top:0; }
+  .todo   { font-family: monospace; color: red; }
+  .done   { font-family: monospace; color: green; }
+  .priority { font-family: monospace; color: orange; }
+  .tag    { background-color: #eee; font-family: monospace;
+            padding: 2px; font-size: 80%; font-weight: normal; }
+  .timestamp { color: #bebebe; }
+  .timestamp-kwd { color: #5f9ea0; }
+  .org-right  { margin-left: auto; margin-right: 0px;  text-align: right; }
+  .org-left   { margin-left: 0px;  margin-right: auto; text-align: left; }
+  .org-center { margin-left: auto; margin-right: auto; text-align: center; }
+  .underline { text-decoration: underline; }
+  #postamble p, #preamble p { font-size: 90%; margin: .2em; }
+  p.verse { margin-left: 3%; }
+  pre {
+    border: 1px solid #ccc;
+    box-shadow: 3px 3px 3px #eee;
+    padding: 8pt;
+    font-family: monospace;
+    overflow: auto;
+    margin: 1.2em;
+  }
+  pre.src {
+    position: relative;
+    overflow: auto;
+    padding-top: 1.2em;
+  }
+  pre.src:before {
+    display: none;
+    position: absolute;
+    background-color: white;
+    top: -10px;
+    right: 10px;
+    padding: 3px;
+    border: 1px solid black;
+  }
+  pre.src:hover:before { display: inline; margin-top: 14px;}
+  /* Languages per Org manual */
+  pre.src-asymptote:before { content: 'Asymptote'; }
+  pre.src-awk:before { content: 'Awk'; }
+  pre.src-C:before { content: 'C'; }
+  /* pre.src-C++ doesn't work in CSS */
+  pre.src-clojure:before { content: 'Clojure'; }
+  pre.src-css:before { content: 'CSS'; }
+  pre.src-D:before { content: 'D'; }
+  pre.src-ditaa:before { content: 'ditaa'; }
+  pre.src-dot:before { content: 'Graphviz'; }
+  pre.src-calc:before { content: 'Emacs Calc'; }
+  pre.src-emacs-lisp:before { content: 'Emacs Lisp'; }
+  pre.src-fortran:before { content: 'Fortran'; }
+  pre.src-gnuplot:before { content: 'gnuplot'; }
+  pre.src-haskell:before { content: 'Haskell'; }
+  pre.src-hledger:before { content: 'hledger'; }
+  pre.src-java:before { content: 'Java'; }
+  pre.src-js:before { content: 'Javascript'; }
+  pre.src-latex:before { content: 'LaTeX'; }
+  pre.src-ledger:before { content: 'Ledger'; }
+  pre.src-lisp:before { content: 'Lisp'; }
+  pre.src-lilypond:before { content: 'Lilypond'; }
+  pre.src-lua:before { content: 'Lua'; }
+  pre.src-matlab:before { content: 'MATLAB'; }
+  pre.src-mscgen:before { content: 'Mscgen'; }
+  pre.src-ocaml:before { content: 'Objective Caml'; }
+  pre.src-octave:before { content: 'Octave'; }
+  pre.src-org:before { content: 'Org mode'; }
+  pre.src-oz:before { content: 'OZ'; }
+  pre.src-plantuml:before { content: 'Plantuml'; }
+  pre.src-processing:before { content: 'Processing.js'; }
+  pre.src-python:before { content: 'Python'; }
+  pre.src-R:before { content: 'R'; }
+  pre.src-ruby:before { content: 'Ruby'; }
+  pre.src-sass:before { content: 'Sass'; }
+  pre.src-scheme:before { content: 'Scheme'; }
+  pre.src-screen:before { content: 'Gnu Screen'; }
+  pre.src-sed:before { content: 'Sed'; }
+  pre.src-sh:before { content: 'shell'; }
+  pre.src-sql:before { content: 'SQL'; }
+  pre.src-sqlite:before { content: 'SQLite'; }
+  /* additional languages in org.el's org-babel-load-languages alist */
+  pre.src-forth:before { content: 'Forth'; }
+  pre.src-io:before { content: 'IO'; }
+  pre.src-J:before { content: 'J'; }
+  pre.src-makefile:before { content: 'Makefile'; }
+  pre.src-maxima:before { content: 'Maxima'; }
+  pre.src-perl:before { content: 'Perl'; }
+  pre.src-picolisp:before { content: 'Pico Lisp'; }
+  pre.src-scala:before { content: 'Scala'; }
+  pre.src-shell:before { content: 'Shell Script'; }
+  pre.src-ebnf2ps:before { content: 'ebfn2ps'; }
+  /* additional language identifiers per "defun org-babel-execute"
+       in ob-*.el */
+  pre.src-cpp:before  { content: 'C++'; }
+  pre.src-abc:before  { content: 'ABC'; }
+  pre.src-coq:before  { content: 'Coq'; }
+  pre.src-groovy:before  { content: 'Groovy'; }
+  /* additional language identifiers from org-babel-shell-names in
+     ob-shell.el: ob-shell is the only babel language using a lambda to put
+     the execution function name together. */
+  pre.src-bash:before  { content: 'bash'; }
+  pre.src-csh:before  { content: 'csh'; }
+  pre.src-ash:before  { content: 'ash'; }
+  pre.src-dash:before  { content: 'dash'; }
+  pre.src-ksh:before  { content: 'ksh'; }
+  pre.src-mksh:before  { content: 'mksh'; }
+  pre.src-posh:before  { content: 'posh'; }
+  /* Additional Emacs modes also supported by the LaTeX listings package */
+  pre.src-ada:before { content: 'Ada'; }
+  pre.src-asm:before { content: 'Assembler'; }
+  pre.src-caml:before { content: 'Caml'; }
+  pre.src-delphi:before { content: 'Delphi'; }
+  pre.src-html:before { content: 'HTML'; }
+  pre.src-idl:before { content: 'IDL'; }
+  pre.src-mercury:before { content: 'Mercury'; }
+  pre.src-metapost:before { content: 'MetaPost'; }
+  pre.src-modula-2:before { content: 'Modula-2'; }
+  pre.src-pascal:before { content: 'Pascal'; }
+  pre.src-ps:before { content: 'PostScript'; }
+  pre.src-prolog:before { content: 'Prolog'; }
+  pre.src-simula:before { content: 'Simula'; }
+  pre.src-tcl:before { content: 'tcl'; }
+  pre.src-tex:before { content: 'TeX'; }
+  pre.src-plain-tex:before { content: 'Plain TeX'; }
+  pre.src-verilog:before { content: 'Verilog'; }
+  pre.src-vhdl:before { content: 'VHDL'; }
+  pre.src-xml:before { content: 'XML'; }
+  pre.src-nxml:before { content: 'XML'; }
+  /* add a generic configuration mode; LaTeX export needs an additional
+     (add-to-list 'org-latex-listings-langs '(conf " ")) in .emacs */
+  pre.src-conf:before { content: 'Configuration File'; }
+
+  table { border-collapse:collapse; }
+  caption.t-above { caption-side: top; }
+  caption.t-bottom { caption-side: bottom; }
+  td, th { vertical-align:top;  }
+  th.org-right  { text-align: center;  }
+  th.org-left   { text-align: center;   }
+  th.org-center { text-align: center; }
+  td.org-right  { text-align: right;  }
+  td.org-left   { text-align: left;   }
+  td.org-center { text-align: center; }
+  dt { font-weight: bold; }
+  .footpara { display: inline; }
+  .footdef  { margin-bottom: 1em; }
+  .figure { padding: 1em; }
+  .figure p { text-align: center; }
+  .equation-container {
+    display: table;
+    text-align: center;
+    width: 100%;
+  }
+  .equation {
+    vertical-align: middle;
+  }
+  .equation-label {
+    display: table-cell;
+    text-align: right;
+    vertical-align: middle;
+  }
+  .inlinetask {
+    padding: 10px;
+    border: 2px solid gray;
+    margin: 10px;
+    background: #ffffcc;
+  }
+  #org-div-home-and-up
+   { text-align: right; font-size: 70%; white-space: nowrap; }
+  textarea { overflow-x: auto; }
+  .linenr { font-size: smaller }
+  .code-highlighted { background-color: #ffff00; }
+  .org-info-js_info-navigation { border-style: none; }
+  #org-info-js_console-label
+    { font-size: 10px; font-weight: bold; white-space: nowrap; }
+  .org-info-js_search-highlight
+    { background-color: #ffff00; color: #000000; font-weight: bold; }
+  .org-svg { width: 90%; }
+  /*]]>*/-->
+</style>
+<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin><link href="https://fonts.googleapis.com/css2?family=Noto+Sans+SC&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="/theme/normalize.css"/>
+<link rel="stylesheet" href="/theme/site.css"/>
+<script defer src='https://static.cloudflareinsights.com/beacon.min.js' data-cf-beacon='{"token": "d5b841b503ed4d1b8fad459b84d1cc2f"}'></script>
+<script defer src="/theme/link.js"></script>
 </head>
 <body>
 <div id="content">
-<p>
-<del>+</del> date = '2021-05-02T14:55:02+08:00' indentFirstParagraph = true slug
-= 'qiu-yu-yu-translate-li-sao' tags = ['古'] title = '余秋雨译《离骚》'
-<del>+</del>
-</p>
-
-<blockquote>
+<header>
+<h1 class="title">余秋雨译《离骚》</h1>
+</header><blockquote>
 <p>
 我是谁？
 </p>
@@ -58,9 +219,7 @@
 </blockquote>
 
 <p>
-{{&lt; quote &gt;}}
 帝高阳之苗裔兮，朕皇考曰伯庸。摄提贞于孟陬兮，惟庚寅吾以降。皇览揆余初度兮，肇锡余以嘉名：名余曰正则兮，字余曰灵均。纷吾既有此内美兮，又重之以修能。扈江离与辟芷兮，纫秋兰以为佩。
-{{&lt; /quote &gt;}}
 </p>
 
 <p>
@@ -68,10 +227,7 @@
 </p>
 
 <p>
-{{&lt; quote &gt;}}
-汨余若将不及兮，恐年岁之不吾与。朝搴阰之木兰兮，夕揽洲之宿莽。日月忽其不淹兮，春与秋其代序。唯草木之零落兮，恐美人之迟暮。(唯
-通：惟)不抚壮而弃秽兮，何不改乎此度?乘骐骥以驰骋兮，来吾道夫先路！ {{&lt;
-/quote &gt;}}
+汨余若将不及兮，恐年岁之不吾与。朝搴阰之木兰兮，夕揽洲之宿莽。日月忽其不淹兮，春与秋其代序。唯草木之零落兮，恐美人之迟暮。(唯通：惟)不抚壮而弃秽兮，何不改乎此度?乘骐骥以驰骋兮，来吾道夫先路！
 </p>
 
 <p>
@@ -79,9 +235,7 @@
 </p>
 
 <p>
-{{&lt; quote &gt;}}
 昔三后之纯粹兮，固众芳之所在。杂申椒与菌桂兮，岂惟纫夫蕙茞！彼尧、舜之耿介兮，既遵道而得路。何桀纣之猖披兮，夫惟捷径以窘步。惟夫党人之偷乐兮，路幽昧以险隘。岂余身之殚殃兮，恐皇舆之败绩！忽奔走以先后兮，及前王之踵武。荃不查余之中情兮，反信谗而齌怒。余固知謇謇之为患兮，忍而不能舍也。指九天以为正兮，夫惟灵修之故也。
-{{&lt; /quote &gt;}}
 </p>
 
 <p>
@@ -89,9 +243,7 @@
 </p>
 
 <p>
-{{&lt; quote &gt;}}
 曰黄昏以为期兮，羌中道而改路！初既与余成言兮，后悔遁而有他。余既不难夫离别兮，伤灵修之数化。
-{{&lt; /quote &gt;}}
 </p>
 
 <p>
@@ -100,9 +252,7 @@
 </p>
 
 <p>
-{{&lt; quote &gt;}}
 余既滋兰之九畹兮，又树蕙之百亩。畦留夷与揭车兮，杂杜衡与芳芷。冀枝叶之峻茂兮，愿俟时乎吾将刈。虽萎绝其亦何伤兮，哀众芳之芜秽。
-{{&lt; /quote &gt;}}
 </p>
 
 <p>
@@ -110,9 +260,7 @@
 </p>
 
 <p>
-{{&lt; quote &gt;}}
 众皆竞进以贪婪兮，凭不厌乎求索。羌内恕己以量人兮，各兴心而嫉妒。忽驰骛以追逐兮，非余心之所急。老冉冉其将至兮，恐修名之不立。
-{{&lt; /quote &gt;}}
 </p>
 
 <p>
@@ -120,9 +268,7 @@
 </p>
 
 <p>
-{{&lt; quote &gt;}}
 朝饮木兰之坠露兮，夕餐秋菊之落英。苟余情其信姱以练要兮，长顑颔亦何伤。掔木根以结茞兮，贯薜荔之落蕊。矫菌桂以纫蕙兮，索胡绳之纚纚。謇吾法夫前修兮，非世俗之所服。虽不周于今之人兮，愿依彭咸之遗则。
-{{&lt; /quote &gt;}}
 </p>
 
 <p>
@@ -130,9 +276,7 @@
 </p>
 
 <p>
-{{&lt; quote &gt;}}
 长太息以掩涕兮，哀民生之多艰。余虽好修姱以鞿羁兮，謇朝谇而夕替。既替余以蕙纕兮，又申之以揽茝。亦余心之所善兮，虽九死其犹未悔。
-{{&lt; /quote &gt;}}
 </p>
 
 <p>
@@ -140,9 +284,7 @@
 </p>
 
 <p>
-{{&lt; quote &gt;}}
 怨灵修之浩荡兮，终不察夫民心。众女嫉余之蛾眉兮，谣诼谓余以善淫。固时俗之工巧兮，偭规矩而改错。背绳墨以追曲兮，竞周容以为度。忳郁邑余侘傺兮，吾独穷困乎此时也。宁溘死以流亡兮，余不忍为此态也。
-{{&lt; /quote &gt;}}
 </p>
 
 <p>
@@ -150,9 +292,7 @@
 </p>
 
 <p>
-{{&lt; quote &gt;}}
 鸷鸟之不群兮，自前世而固然。何方圜之能周兮，夫孰异道而相安？屈心而抑志兮，忍尤而攘诟。伏清白以死直兮，固前圣之所厚。悔相道之不察兮，延伫乎吾将反。回朕车以复路兮，及行迷之未远。步余马于兰皋兮，驰椒丘且焉止息。进不入以离尤兮，退将复修吾初服。
-{{&lt; /quote &gt;}}
 </p>
 
 <p>
@@ -160,9 +300,7 @@
 </p>
 
 <p>
-{{&lt; quote &gt;}}
 制芰荷以为衣兮，集芙蓉以为裳。不吾知其亦已兮，苟余情其信芳。高余冠之岌岌兮，长余佩之陆离。芳与泽其杂糅兮，唯昭质其犹未亏。忽反顾以游目兮，将往观乎四荒。佩缤纷其繁饰兮，芳菲菲其弥章。民生各有所乐兮，余独好修以为常。虽体解吾犹未变兮，岂余心之可惩。
-{{&lt; /quote &gt;}}
 </p>
 
 <p>
@@ -170,9 +308,7 @@
 </p>
 
 <p>
-{{&lt; quote &gt;}}
 女嬃之婵媛兮，申申其詈予，曰：「鲧婞直以亡身兮，终然夭乎羽之野。汝何博謇而好修兮，纷独有此姱节？薋菉葹以盈室兮，判独离而不服。」
-{{&lt; /quote &gt;}}
 </p>
 
 <p>
@@ -180,9 +316,7 @@
 </p>
 
 <p>
-{{&lt; quote &gt;}}
 众不可户说兮，孰云察余之中情？世并举而好朋兮，夫何茕独而不予听？依前圣以节中兮，喟凭心而历兹。济沅、湘以南征兮，就重华而敶词：
-{{&lt; /quote &gt;}}
 </p>
 
 <p>
@@ -194,9 +328,7 @@
 </p>
 
 <p>
-{{&lt; quote &gt;}}
 启《九辩》与《九歌》兮，夏康娱以自纵。不顾难以图后兮，五子用失乎家衖。羿淫游以佚畋兮，又好射夫封狐。固乱流其鲜终兮，浞又贪夫厥家。浇身被服强圉兮，纵欲而不忍。日康娱而自忘兮，厥首用夫颠陨。夏桀之常违兮，乃遂焉而逢殃。后辛之菹醢兮，殷宗用而不长。
-{{&lt; /quote &gt;}}
 </p>
 
 <p>
@@ -204,9 +336,7 @@
 </p>
 
 <p>
-{{&lt; quote &gt;}}
 汤、禹俨而祗敬兮，周论道而莫差。举贤才而授能兮，循绳墨而不颇。皇天无私阿兮，览民德焉错辅。夫维圣哲以茂行兮，苟得用此下土。
-{{&lt; /quote &gt;}}
 </p>
 
 <p>
@@ -214,9 +344,7 @@
 </p>
 
 <p>
-{{&lt; quote &gt;}}
 瞻前而顾后兮，相观民之计极。夫孰非义而可用兮？孰非善而可服？阽余身而危死兮，览余初其犹未悔。不量凿而正枘兮，固前修以菹醢。曾歔欷余郁邑兮，哀朕时之不当。揽茹蕙以掩涕兮，沾余襟之浪浪。
-{{&lt; /quote &gt;}}
 </p>
 
 <p>
@@ -224,9 +352,7 @@
 </p>
 
 <p>
-{{&lt; quote &gt;}}
-跪敷衽以陈辞兮，耿吾既得此中正。驷玉虬以桀鹥兮，溘埃风余上征。 {{&lt;
-/quote &gt;}}
+跪敷衽以陈辞兮，耿吾既得此中正。驷玉虬以桀鹥兮，溘埃风余上征。
 </p>
 
 <p>
@@ -234,9 +360,7 @@
 </p>
 
 <p>
-{{&lt; quote &gt;}}
 朝发轫于苍梧兮，夕余至乎县圃。欲少留此灵琐兮，日忽忽其将暮。吾令羲和弭节兮，望崦嵫而勿迫。路漫漫其修远兮，吾将上下而求索。
-{{&lt; /quote &gt;}}
 </p>
 
 <p>
@@ -244,9 +368,7 @@
 </p>
 
 <p>
-{{&lt; quote &gt;}}
 饮余马于咸池兮，总余辔乎扶桑。折若木以拂日兮，聊逍遥以相羊。前望舒使先驱兮，后飞廉使奔属。鸾皇为余先戒兮，雷师告余以未具。吾令凤鸟飞腾兮，继之以日夜。飘风屯其相离兮，帅云霓而来御。纷总总其离合兮，斑陆离其上下。
-{{&lt; /quote &gt;}}
 </p>
 
 <p>
@@ -254,9 +376,7 @@
 </p>
 
 <p>
-{{&lt; quote &gt;}}
 吾令帝阍开关兮，倚阊阖而望予。时暧暧其将罢兮，结幽兰而延伫。世溷浊而不分兮，好蔽美而嫉妒。
-{{&lt; /quote &gt;}}
 </p>
 
 <p>
@@ -264,9 +384,7 @@
 </p>
 
 <p>
-{{&lt; quote &gt;}}
-朝吾将济于白水兮，登阆风而绁马。忽反顾以流涕兮，哀高丘之无女。 {{&lt;
-/quote &gt;}}
+朝吾将济于白水兮，登阆风而绁马。忽反顾以流涕兮，哀高丘之无女。
 </p>
 
 <p>
@@ -274,9 +392,7 @@
 </p>
 
 <p>
-{{&lt; quote &gt;}}
 溘吾游此春宫兮，折琼枝以继佩。及荣华之未落兮，相下女之可诒。吾令丰隆乘云兮，求宓妃之所在。解佩纕以结言兮，吾令謇修以为理。纷总总其离合兮，忽纬繣其难迁。夕归次于穷石兮，朝濯发乎洧盘。保厥美以骄傲兮，日康娱以淫游。虽信美而无礼兮，来违弃而改求。
-{{&lt; /quote &gt;}}
 </p>
 
 <p>
@@ -284,9 +400,7 @@
 </p>
 
 <p>
-{{&lt; quote &gt;}}
 览相观于四极兮，周流乎天余乃下。望瑶台之偃蹇兮，见有娀之佚女。吾令鸩为媒兮，鸩告余以不好。雄鸠之鸣逝兮，余犹恶其佻巧。心犹豫而狐疑兮，欲自适而不可。凤皇既受诒兮，恐高辛之先我。
-{{&lt; /quote &gt;}}
 </p>
 
 <p>
@@ -294,9 +408,7 @@
 </p>
 
 <p>
-{{&lt; quote &gt;}}
 欲远集而无所止兮，聊浮游以逍遥。及少康之未家兮，留有虞之二姚。理弱而媒拙兮，恐导言之不固。
-{{&lt; /quote &gt;}}
 </p>
 
 <p>
@@ -304,9 +416,7 @@
 </p>
 
 <p>
-{{&lt; quote &gt;}}
 世溷浊而嫉贤兮，好蔽美而称恶。闺中既以邃远兮，哲王又不寤。怀朕情而不发兮，余焉能忍而与此终古？
-{{&lt; /quote &gt;}}
 </p>
 
 <p>
@@ -314,21 +424,23 @@
 </p>
 
 <p>
-{{&lt; quote &gt;}}
 索琼茅以筳篿兮，命灵氛为余占之。曰：「两美其必合兮，孰信修而慕之？思九州之博大兮，岂惟是其有女？」曰：「勉远逝而无狐疑兮，孰求美而释女？何所独无芳草兮，尔何怀乎故宇？」
-{{&lt; /quote &gt;}}
 </p>
 
 <p>
 拿着芳草竹片，请巫师灵氛为我占卜。
+</p>
+
+<p>
 占问："美美必合，谁不慕之？九州之大，难道只有这里才有佳人？"
+</p>
+
+<p>
 卜答："赶紧远逝，别再狐疑。天下何处无芳草，何必总是怀故土？"
 </p>
 
 <p>
-{{&lt; quote &gt;}}
 世幽昧以昡曜兮，孰云察余之善恶？民好恶其不同兮，惟此党人其独异！户服艾以盈要兮，谓幽兰其不可佩。览察草木其犹未得兮，岂珵美之能当？苏粪壤以充祎兮，谓申椒其不芳。
-{{&lt; /quote &gt;}}
 </p>
 
 <p>
@@ -336,9 +448,7 @@
 </p>
 
 <p>
-{{&lt; quote &gt;}}
 欲从灵氛之吉占兮，心犹豫而狐疑。巫咸将夕降兮，怀椒糈而要之。百神翳其备降兮，九疑缤其并迎。皇剡剡其扬灵兮，告余以吉故。曰：「勉升降以上下兮，求矩矱之所同。汤、禹俨而求合兮，挚、咎繇而能调。苟中情其好修兮，又何必用夫行媒？说操筑于傅岩兮，武丁用而不疑。吕望之鼓刀兮，遭周文而得举。宁戚之讴歌兮，齐桓闻以该辅。
-{{&lt; /quote &gt;}}
 </p>
 
 <p>
@@ -346,9 +456,7 @@
 </p>
 
 <p>
-{{&lt; quote &gt;}}
 及年岁之未晏兮，时亦犹其未央。恐鹈鴃之先鸣兮，使夫百草为之不芳。」何琼佩之偃蹇兮，众薆然而蔽之。惟此党人之不谅兮，恐嫉妒而折之。时缤纷其变易兮，又何可以淹留？兰芷变而不芳兮，荃蕙化而为茅。
-{{&lt; /quote &gt;}}
 </p>
 
 <p>
@@ -356,9 +464,7 @@
 </p>
 
 <p>
-{{&lt; quote &gt;}}
 何昔日之芳草兮，今直为此萧艾也？岂其有他故兮，莫好修之害也！余以兰为可恃兮，羌无实而容长。委厥美以从俗兮，苟得列乎众芳。椒专佞以慢慆兮，樧又欲充夫佩帏。既干进而务入兮，又何芳之能祗？固时俗之流从兮，又孰能无变化？览椒兰其若兹兮，又况揭车与江离？
-{{&lt; /quote &gt;}}
 </p>
 
 <p>
@@ -366,9 +472,7 @@
 </p>
 
 <p>
-{{&lt; quote &gt;}}
 惟兹佩之可贵兮，委厥美而历兹。芳菲菲而难亏兮，芬至今犹未沬。和调度以自娱兮，聊浮游而求女。及余饰之方壮兮，周流观乎上下。
-{{&lt; /quote &gt;}}
 </p>
 
 <p>
@@ -376,7 +480,7 @@
 </p>
 
 <p>
-{{&lt; quote &gt;}} 灵氛既告余以吉占兮，历吉日乎吾将行。 {{&lt; /quote &gt;}}
+灵氛既告余以吉占兮，历吉日乎吾将行。
 </p>
 
 <p>
@@ -384,9 +488,7 @@
 </p>
 
 <p>
-{{&lt; quote &gt;}}
 折琼枝以为羞兮，精琼爢以为粻。为余驾飞龙兮，杂瑶象以为车。何离心之可同兮？吾将远逝以自疏。邅吾道夫昆仑兮，路修远以周流。扬云霓之晻蔼兮，鸣玉鸾之啾啾。朝发轫于天津兮，夕余至乎西极。凤皇翼其承旗兮，高翱翔之翼翼。
-{{&lt; /quote &gt;}}
 </p>
 
 <p>
@@ -394,9 +496,7 @@
 </p>
 
 <p>
-{{&lt; quote &gt;}}
 忽吾行此流沙兮，遵赤水而容与。麾蛟龙使梁津兮，诏西皇使涉予。路修远以多艰兮，腾众车使径待。路不周以左转兮，指西海以为期。余车其千乘兮，齐玉轪而并驰。
-{{&lt; /quote &gt;}}
 </p>
 
 <p>
@@ -404,9 +504,7 @@
 </p>
 
 <p>
-{{&lt; quote &gt;}}
 驾八龙之婉婉兮，载云旗之委蛇。抑志而弭节兮，神高驰之邈邈。奏《九歌》而舞《韶》兮，聊假日以偷乐。
-{{&lt; /quote &gt;}}
 </p>
 
 <p>
@@ -414,9 +512,7 @@
 </p>
 
 <p>
-{{&lt; quote &gt;}}
-陟升皇之赫戏兮，忽临睨夫旧乡。仆夫悲余马怀兮，蜷局顾而不行。 {{&lt; /quote
-&gt;}}
+陟升皇之赫戏兮，忽临睨夫旧乡。仆夫悲余马怀兮，蜷局顾而不行。
 </p>
 
 <p>
@@ -424,16 +520,14 @@
 </p>
 
 <p>
-{{&lt; quote &gt;}}
 乱曰：已矣哉！国无人莫我知兮，又何怀乎故都！既莫足与为美政兮，吾将从彭咸之所居！
-{{&lt; /quote &gt;}}
 </p>
 
 <p>
 唉，算了吧。既然国中无人知我，我又何必怀恋故乡？既然不能实行美政，我将奔向彭咸所在的地方。
 </p>
 
-<hr />
+<hr>
 
 <ol class="org-ol">
 <li><a href="https://www.shicimingju.com/chaxun/list/7405.html">屈原《离骚》</a></li>
