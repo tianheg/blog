@@ -1,76 +1,206 @@
-<?xml version="1.0" encoding="utf-8"?>
-<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN"
-"http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
-<html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en">
+<!DOCTYPE html>
+<html lang="zh">
 <head>
-<!-- 2022-01-17 Mon 20:01 -->
-<meta http-equiv="Content-Type" content="text/html;charset=utf-8" />
-<meta name="viewport" content="width=device-width, initial-scale=1" />
-<title>&lrm;</title>
-<meta name="generator" content="Org mode" />
-<script type="text/javascript">
-// @license magnet:?xt=urn:btih:e95b018ef3580986a04669f1b5879592219e2a7a&dn=public-domain.txt Public Domain
-<!--/*--><![CDATA[/*><!--*/
-     function CodeHighlightOn(elem, id)
-     {
-       var target = document.getElementById(id);
-       if(null != target) {
-         elem.classList.add("code-highlighted");
-         target.classList.add("code-highlighted");
-       }
-     }
-     function CodeHighlightOff(elem, id)
-     {
-       var target = document.getElementById(id);
-       if(null != target) {
-         elem.classList.remove("code-highlighted");
-         target.classList.remove("code-highlighted");
-       }
-     }
-    /*]]>*///-->
-// @license-end
-</script>
+<!-- 2022-01-17 Mon 20:39 -->
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>图解 HTTP</title>
+<meta name="generator" content="Org mode">
+<style type="text/css">
+ <!--/*--><![CDATA[/*><!--*/
+  .title  { text-align: center;
+             margin-bottom: .2em; }
+  .subtitle { text-align: center;
+              font-size: medium;
+              font-weight: bold;
+              margin-top:0; }
+  .todo   { font-family: monospace; color: red; }
+  .done   { font-family: monospace; color: green; }
+  .priority { font-family: monospace; color: orange; }
+  .tag    { background-color: #eee; font-family: monospace;
+            padding: 2px; font-size: 80%; font-weight: normal; }
+  .timestamp { color: #bebebe; }
+  .timestamp-kwd { color: #5f9ea0; }
+  .org-right  { margin-left: auto; margin-right: 0px;  text-align: right; }
+  .org-left   { margin-left: 0px;  margin-right: auto; text-align: left; }
+  .org-center { margin-left: auto; margin-right: auto; text-align: center; }
+  .underline { text-decoration: underline; }
+  #postamble p, #preamble p { font-size: 90%; margin: .2em; }
+  p.verse { margin-left: 3%; }
+  pre {
+    border: 1px solid #ccc;
+    box-shadow: 3px 3px 3px #eee;
+    padding: 8pt;
+    font-family: monospace;
+    overflow: auto;
+    margin: 1.2em;
+  }
+  pre.src {
+    position: relative;
+    overflow: auto;
+    padding-top: 1.2em;
+  }
+  pre.src:before {
+    display: none;
+    position: absolute;
+    background-color: white;
+    top: -10px;
+    right: 10px;
+    padding: 3px;
+    border: 1px solid black;
+  }
+  pre.src:hover:before { display: inline; margin-top: 14px;}
+  /* Languages per Org manual */
+  pre.src-asymptote:before { content: 'Asymptote'; }
+  pre.src-awk:before { content: 'Awk'; }
+  pre.src-C:before { content: 'C'; }
+  /* pre.src-C++ doesn't work in CSS */
+  pre.src-clojure:before { content: 'Clojure'; }
+  pre.src-css:before { content: 'CSS'; }
+  pre.src-D:before { content: 'D'; }
+  pre.src-ditaa:before { content: 'ditaa'; }
+  pre.src-dot:before { content: 'Graphviz'; }
+  pre.src-calc:before { content: 'Emacs Calc'; }
+  pre.src-emacs-lisp:before { content: 'Emacs Lisp'; }
+  pre.src-fortran:before { content: 'Fortran'; }
+  pre.src-gnuplot:before { content: 'gnuplot'; }
+  pre.src-haskell:before { content: 'Haskell'; }
+  pre.src-hledger:before { content: 'hledger'; }
+  pre.src-java:before { content: 'Java'; }
+  pre.src-js:before { content: 'Javascript'; }
+  pre.src-latex:before { content: 'LaTeX'; }
+  pre.src-ledger:before { content: 'Ledger'; }
+  pre.src-lisp:before { content: 'Lisp'; }
+  pre.src-lilypond:before { content: 'Lilypond'; }
+  pre.src-lua:before { content: 'Lua'; }
+  pre.src-matlab:before { content: 'MATLAB'; }
+  pre.src-mscgen:before { content: 'Mscgen'; }
+  pre.src-ocaml:before { content: 'Objective Caml'; }
+  pre.src-octave:before { content: 'Octave'; }
+  pre.src-org:before { content: 'Org mode'; }
+  pre.src-oz:before { content: 'OZ'; }
+  pre.src-plantuml:before { content: 'Plantuml'; }
+  pre.src-processing:before { content: 'Processing.js'; }
+  pre.src-python:before { content: 'Python'; }
+  pre.src-R:before { content: 'R'; }
+  pre.src-ruby:before { content: 'Ruby'; }
+  pre.src-sass:before { content: 'Sass'; }
+  pre.src-scheme:before { content: 'Scheme'; }
+  pre.src-screen:before { content: 'Gnu Screen'; }
+  pre.src-sed:before { content: 'Sed'; }
+  pre.src-sh:before { content: 'shell'; }
+  pre.src-sql:before { content: 'SQL'; }
+  pre.src-sqlite:before { content: 'SQLite'; }
+  /* additional languages in org.el's org-babel-load-languages alist */
+  pre.src-forth:before { content: 'Forth'; }
+  pre.src-io:before { content: 'IO'; }
+  pre.src-J:before { content: 'J'; }
+  pre.src-makefile:before { content: 'Makefile'; }
+  pre.src-maxima:before { content: 'Maxima'; }
+  pre.src-perl:before { content: 'Perl'; }
+  pre.src-picolisp:before { content: 'Pico Lisp'; }
+  pre.src-scala:before { content: 'Scala'; }
+  pre.src-shell:before { content: 'Shell Script'; }
+  pre.src-ebnf2ps:before { content: 'ebfn2ps'; }
+  /* additional language identifiers per "defun org-babel-execute"
+       in ob-*.el */
+  pre.src-cpp:before  { content: 'C++'; }
+  pre.src-abc:before  { content: 'ABC'; }
+  pre.src-coq:before  { content: 'Coq'; }
+  pre.src-groovy:before  { content: 'Groovy'; }
+  /* additional language identifiers from org-babel-shell-names in
+     ob-shell.el: ob-shell is the only babel language using a lambda to put
+     the execution function name together. */
+  pre.src-bash:before  { content: 'bash'; }
+  pre.src-csh:before  { content: 'csh'; }
+  pre.src-ash:before  { content: 'ash'; }
+  pre.src-dash:before  { content: 'dash'; }
+  pre.src-ksh:before  { content: 'ksh'; }
+  pre.src-mksh:before  { content: 'mksh'; }
+  pre.src-posh:before  { content: 'posh'; }
+  /* Additional Emacs modes also supported by the LaTeX listings package */
+  pre.src-ada:before { content: 'Ada'; }
+  pre.src-asm:before { content: 'Assembler'; }
+  pre.src-caml:before { content: 'Caml'; }
+  pre.src-delphi:before { content: 'Delphi'; }
+  pre.src-html:before { content: 'HTML'; }
+  pre.src-idl:before { content: 'IDL'; }
+  pre.src-mercury:before { content: 'Mercury'; }
+  pre.src-metapost:before { content: 'MetaPost'; }
+  pre.src-modula-2:before { content: 'Modula-2'; }
+  pre.src-pascal:before { content: 'Pascal'; }
+  pre.src-ps:before { content: 'PostScript'; }
+  pre.src-prolog:before { content: 'Prolog'; }
+  pre.src-simula:before { content: 'Simula'; }
+  pre.src-tcl:before { content: 'tcl'; }
+  pre.src-tex:before { content: 'TeX'; }
+  pre.src-plain-tex:before { content: 'Plain TeX'; }
+  pre.src-verilog:before { content: 'Verilog'; }
+  pre.src-vhdl:before { content: 'VHDL'; }
+  pre.src-xml:before { content: 'XML'; }
+  pre.src-nxml:before { content: 'XML'; }
+  /* add a generic configuration mode; LaTeX export needs an additional
+     (add-to-list 'org-latex-listings-langs '(conf " ")) in .emacs */
+  pre.src-conf:before { content: 'Configuration File'; }
+
+  table { border-collapse:collapse; }
+  caption.t-above { caption-side: top; }
+  caption.t-bottom { caption-side: bottom; }
+  td, th { vertical-align:top;  }
+  th.org-right  { text-align: center;  }
+  th.org-left   { text-align: center;   }
+  th.org-center { text-align: center; }
+  td.org-right  { text-align: right;  }
+  td.org-left   { text-align: left;   }
+  td.org-center { text-align: center; }
+  dt { font-weight: bold; }
+  .footpara { display: inline; }
+  .footdef  { margin-bottom: 1em; }
+  .figure { padding: 1em; }
+  .figure p { text-align: center; }
+  .equation-container {
+    display: table;
+    text-align: center;
+    width: 100%;
+  }
+  .equation {
+    vertical-align: middle;
+  }
+  .equation-label {
+    display: table-cell;
+    text-align: right;
+    vertical-align: middle;
+  }
+  .inlinetask {
+    padding: 10px;
+    border: 2px solid gray;
+    margin: 10px;
+    background: #ffffcc;
+  }
+  #org-div-home-and-up
+   { text-align: right; font-size: 70%; white-space: nowrap; }
+  textarea { overflow-x: auto; }
+  .linenr { font-size: smaller }
+  .code-highlighted { background-color: #ffff00; }
+  .org-info-js_info-navigation { border-style: none; }
+  #org-info-js_console-label
+    { font-size: 10px; font-weight: bold; white-space: nowrap; }
+  .org-info-js_search-highlight
+    { background-color: #ffff00; color: #000000; font-weight: bold; }
+  .org-svg { width: 90%; }
+  /*]]>*/-->
+</style>
+<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin><link href="https://fonts.googleapis.com/css2?family=Noto+Sans+SC&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="/theme/normalize.css"/>
+<link rel="stylesheet" href="/theme/site.css"/>
+<script defer src='https://static.cloudflareinsights.com/beacon.min.js' data-cf-beacon='{"token": "d5b841b503ed4d1b8fad459b84d1cc2f"}'></script>
+<script defer src="/theme/link.js"></script>
 </head>
 <body>
 <div id="content">
-<div id="table-of-contents">
-<h2>Table of Contents</h2>
-<div id="text-table-of-contents">
-<ul>
-<li><a href="#terminology">1. Terminology</a></li>
-<li><a href="#了解-web-及网络基础">2. 了解 Web 及网络基础</a>
-<ul>
-<li><a href="#使用-http-协议访问-web">2.1. 使用 HTTP 协议访问 Web</a></li>
-<li><a href="#http-的诞生">2.2. HTTP 的诞生</a></li>
-<li><a href="#网络基础-tcpip">2.3. 网络基础 TCP/IP</a></li>
-<li><a href="#与-http-关系密切的协议-iptcp-和-dns">2.4. 与 HTTP 关系密切的协议 : IP、TCP 和 DNS</a></li>
-<li><a href="#负责域名解析的-dns-服务">2.5. 负责域名解析的 DNS 服务</a></li>
-<li><a href="#各种协议与-http-协议的关系">2.6. 各种协议与 HTTP 协议的关系</a></li>
-<li><a href="#uri-和-url">2.7. URI 和 URL</a></li>
-<li><a href="#并不是所有的应用程序都符合-rfc">2.8. 并不是所有的应用程序都符合 RFC</a></li>
-</ul>
-</li>
-<li><a href="#简单的-http-协议">3. 简单的 HTTP 协议</a>
-<ul>
-<li><a href="#http-协议用于客户端和服务器端之间的通信">3.1. HTTP 协议用于客户端和服务器端之间的通信</a></li>
-<li><a href="#通过请求和响应的交换达成通信">3.2. 通过请求和响应的交换达成通信</a></li>
-<li><a href="#http-是不保存状态的协议">3.3. HTTP 是不保存状态的协议</a></li>
-<li><a href="#请求-uri-定位资源">3.4. 请求 URI 定位资源</a></li>
-<li><a href="#http1.1-中的可用方法">3.5. HTTP/1.1 中的可用方法</a></li>
-<li><a href="#使用方法下达命令">3.6. 使用方法下达命令</a></li>
-<li><a href="#持久连接节省通信量">3.7. 持久连接节省通信量</a></li>
-<li><a href="#重要使用-cookie-的状态管理">3.8. （重要）使用 Cookie 的状态管理</a></li>
-</ul>
-</li>
-</ul>
-</div>
-</div>
-<p>
-<del>+</del> date = '2021-10-01T19:40:17+08:00' title = '上野宣《图解 HTTP》'
-tags = ['阅读', 'Computer Network'] slug = 'graphical-http' <del>+</del>
-</p>
-
-<p>
+<header>
+<h1 class="title">图解 HTTP</h1>
+</header><p>
 获取图书途径：<a href="https://weread.qq.com/web/reader/3da32b505dd9f43da9a1acakc81322c012c81e728d9d180">微信读书</a>
 </p>
 
@@ -79,7 +209,7 @@ tags = ['阅读', 'Computer Network'] slug = 'graphical-http' <del>+</del>
 </p>
 
 <div id="outline-container-terminology" class="outline-2">
-<h2 id="terminology"><span class="section-number-2">1</span> Terminology</h2>
+<h2 id="terminology">Terminology</h2>
 <div class="outline-text-2" id="text-terminology">
 <p>
 TCP/IP 协议族：HTTP
@@ -109,11 +239,11 @@ TCP/IP 协议族：HTTP
 </div>
 
 <div id="outline-container-了解-web-及网络基础" class="outline-2">
-<h2 id="了解-web-及网络基础"><span class="section-number-2">2</span> 了解 Web 及网络基础</h2>
+<h2 id="了解-web-及网络基础">了解 Web 及网络基础</h2>
 <div class="outline-text-2" id="text-了解-web-及网络基础">
 </div>
 <div id="outline-container-使用-http-协议访问-web" class="outline-3">
-<h3 id="使用-http-协议访问-web"><span class="section-number-3">2.1</span> 使用 HTTP 协议访问 Web</h3>
+<h3 id="使用-http-协议访问-web">使用 HTTP 协议访问 Web</h3>
 <div class="outline-text-3" id="text-使用-http-协议访问-web">
 <p>
 Web 使用一种名为 HTTP（HyperText Transfer
@@ -124,7 +254,7 @@ Protocol，超文本转移协议）的协议作为规范，完成从客户端到
 </div>
 
 <div id="outline-container-http-的诞生" class="outline-3">
-<h3 id="http-的诞生"><span class="section-number-3">2.2</span> HTTP 的诞生</h3>
+<h3 id="http-的诞生">HTTP 的诞生</h3>
 <div class="outline-text-3" id="text-http-的诞生">
 <p>
 1989 年，CERN（欧洲核子研究组织）的 Tim Berners-Lee
@@ -149,13 +279,13 @@ WWW 首次使用是称呼具备 Web
 浏览器功能的客户端应用程序，现在用于表示这一系列的集合，也可简称为 Web。
 </p>
 
-<table border="2" cellspacing="0" cellpadding="6" rules="groups" frame="hsides">
+<table>
 
 
 <colgroup>
-<col  class="org-right" />
+<col  class="org-right">
 
-<col  class="org-left" />
+<col  class="org-left">
 </colgroup>
 <thead>
 <tr>
@@ -199,7 +329,7 @@ WWW 首次使用是称呼具备 Web
 </div>
 
 <div id="outline-container-网络基础-tcpip" class="outline-3">
-<h3 id="网络基础-tcpip"><span class="section-number-3">2.3</span> 网络基础 TCP/IP</h3>
+<h3 id="网络基础-tcpip">网络基础 TCP/IP</h3>
 <div class="outline-text-3" id="text-网络基础-tcpip">
 <p>
 通常使用的网络（包括互联网）是在 TCP/IP 协议族的基础上运作的。而 HTTP
@@ -217,11 +347,11 @@ WWW 首次使用是称呼具备 Web
 </p>
 
 
-<div id="org992dea3" class="figure">
-<p><img src="https://cdn.jsdelivr.net/gh/tianheg/static@main/img/%E5%9B%BE%E8%A7%A3HTTP0.jpeg" alt="%E5%9B%BE%E8%A7%A3HTTP0.jpeg" />
-</p>
-<p><span class="figure-number">Figure 1: </span>TCP/IP 是互联网相关的各类协议族的总称</p>
-</div>
+<figure id="org3ed33a1">
+<img src="https://cdn.jsdelivr.net/gh/tianheg/static@main/img/%E5%9B%BE%E8%A7%A3HTTP0.jpeg" alt="%E5%9B%BE%E8%A7%A3HTTP0.jpeg">
+
+<figcaption><span class="figure-number">Figure 1: </span>TCP/IP 是互联网相关的各类协议族的总称</figcaption>
+</figure>
 
 <p>
 一、TCP/IP 的分层管理
@@ -280,22 +410,22 @@ Card，网络适配器，即网卡），以及光纤等物理可见部分（还�
 </p>
 
 
-<div id="org3e9d7b0" class="figure">
-<p><img src="https://cdn.jsdelivr.net/gh/tianheg/static@main/img/%E5%9B%BE%E8%A7%A3HTTP1.jpeg" alt="%E5%9B%BE%E8%A7%A3HTTP1.jpeg" />
-</p>
-<p><span class="figure-number">Figure 2: </span>TCP/IP 通信传输流</p>
-</div>
+<figure id="orgdee017c">
+<img src="https://cdn.jsdelivr.net/gh/tianheg/static@main/img/%E5%9B%BE%E8%A7%A3HTTP1.jpeg" alt="%E5%9B%BE%E8%A7%A3HTTP1.jpeg">
+
+<figcaption><span class="figure-number">Figure 2: </span>TCP/IP 通信传输流</figcaption>
+</figure>
 
 <p>
 每一层利用的协议：应用层（HTTP）、传输层（TCP）、网络层（IP）、链路层
 </p>
 
 
-<div id="org00c6446" class="figure">
-<p><img src="https://cdn.jsdelivr.net/gh/tianheg/static@main/img/%E5%9B%BE%E8%A7%A3HTTP2.jpeg" alt="%E5%9B%BE%E8%A7%A3HTTP2.jpeg" />
-</p>
-<p><span class="figure-number">Figure 3: </span>封装过程</p>
-</div>
+<figure id="orgbcb4436">
+<img src="https://cdn.jsdelivr.net/gh/tianheg/static@main/img/%E5%9B%BE%E8%A7%A3HTTP2.jpeg" alt="%E5%9B%BE%E8%A7%A3HTTP2.jpeg">
+
+<figcaption><span class="figure-number">Figure 3: </span>封装过程</figcaption>
+</figure>
 
 <p>
 这种把数据信息包装起来的做法称为封装（encapsulate）。
@@ -304,7 +434,7 @@ Card，网络适配器，即网卡），以及光纤等物理可见部分（还�
 </div>
 
 <div id="outline-container-与-http-关系密切的协议-iptcp-和-dns" class="outline-3">
-<h3 id="与-http-关系密切的协议-iptcp-和-dns"><span class="section-number-3">2.4</span> 与 HTTP 关系密切的协议 : IP、TCP 和 DNS</h3>
+<h3 id="与-http-关系密切的协议-iptcp-和-dns">与 HTTP 关系密切的协议 : IP、TCP 和 DNS</h3>
 <div class="outline-text-3" id="text-与-http-关系密切的协议-iptcp-和-dns">
 <p>
 一、负责传输的 IP 协议
@@ -344,11 +474,11 @@ ARP 协议通过 MAC 地址搜索中转目标。
 </p>
 
 
-<div id="orgf2524e2" class="figure">
-<p><img src="https://cdn.jsdelivr.net/gh/tianheg/static@main/img/%E5%9B%BE%E8%A7%A3HTTP3.jpeg" alt="%E5%9B%BE%E8%A7%A3HTTP3.jpeg" />
-</p>
-<p><span class="figure-number">Figure 4: </span>路由选择机制</p>
-</div>
+<figure id="orgc7c41cc">
+<img src="https://cdn.jsdelivr.net/gh/tianheg/static@main/img/%E5%9B%BE%E8%A7%A3HTTP3.jpeg" alt="%E5%9B%BE%E8%A7%A3HTTP3.jpeg">
+
+<figcaption><span class="figure-number">Figure 4: </span>路由选择机制</figcaption>
+</figure>
 
 <p>
 二、确保可靠性的 TCP 协议
@@ -388,17 +518,17 @@ SYN/ACK 标志的数据包以示传达确认信息。最后，发送端再回传
 </ul>
 
 
-<div id="org9904c67" class="figure">
-<p><object type="image/svg+xml" data="https://cdn.jsdelivr.net/gh/tianheg/static@main/img/%E5%9B%BE%E8%A7%A3HTTP4-three-way-handshaking.svg" class="org-svg">
+<figure id="org414f3dc">
+<object type="image/svg+xml" data="https://cdn.jsdelivr.net/gh/tianheg/static@main/img/%E5%9B%BE%E8%A7%A3HTTP4-three-way-handshaking.svg" class="org-svg">
 Sorry, your browser does not support SVG.</object>
-</p>
-<p><span class="figure-number">Figure 5: </span>three-way handshaking</p>
-</div>
+
+<figcaption><span class="figure-number">Figure 5: </span>three-way handshaking</figcaption>
+</figure>
 </div>
 </div>
 
 <div id="outline-container-负责域名解析的-dns-服务" class="outline-3">
-<h3 id="负责域名解析的-dns-服务"><span class="section-number-3">2.5</span> 负责域名解析的 DNS 服务</h3>
+<h3 id="负责域名解析的-dns-服务">负责域名解析的 DNS 服务</h3>
 <div class="outline-text-3" id="text-负责域名解析的-dns-服务">
 <p>
 DNS 服务是为了让人类更容易记住计算机在网络中的位置。
@@ -407,20 +537,20 @@ DNS 服务是为了让人类更容易记住计算机在网络中的位置。
 </div>
 
 <div id="outline-container-各种协议与-http-协议的关系" class="outline-3">
-<h3 id="各种协议与-http-协议的关系"><span class="section-number-3">2.6</span> 各种协议与 HTTP 协议的关系</h3>
+<h3 id="各种协议与-http-协议的关系">各种协议与 HTTP 协议的关系</h3>
 <div class="outline-text-3" id="text-各种协议与-http-协议的关系">
 
-<div id="org3f8ddb8" class="figure">
-<p><object type="image/svg+xml" data="https://cdn.jsdelivr.net/gh/tianheg/static@main/img/%E5%9B%BE%E8%A7%A3HTTP5-protocols.svg" class="org-svg">
+<figure id="orgb57044c">
+<object type="image/svg+xml" data="https://cdn.jsdelivr.net/gh/tianheg/static@main/img/%E5%9B%BE%E8%A7%A3HTTP5-protocols.svg" class="org-svg">
 Sorry, your browser does not support SVG.</object>
-</p>
-<p><span class="figure-number">Figure 6: </span>各种协议与 HTTP 协议的关系</p>
-</div>
+
+<figcaption><span class="figure-number">Figure 6: </span>各种协议与 HTTP 协议的关系</figcaption>
+</figure>
 </div>
 </div>
 
 <div id="outline-container-uri-和-url" class="outline-3">
-<h3 id="uri-和-url"><span class="section-number-3">2.7</span> URI 和 URL</h3>
+<h3 id="uri-和-url">URI 和 URL</h3>
 <div class="outline-text-3" id="text-uri-和-url">
 <p>
 URI（统一资源标识符）与 URL（统一资源定位符）：Uniform Resource
@@ -463,17 +593,17 @@ URI 用字符串标识某一互联网资源，而 URL
 </p>
 
 
-<div id="org7b8f5bc" class="figure">
-<p><object type="image/svg+xml" data="https://cdn.jsdelivr.net/gh/tianheg/static@main/img/%E5%9B%BE%E8%A7%A3HTTP6-%E7%BB%9D%E5%AF%B9URI.svg" class="org-svg">
+<figure id="org5747bf5">
+<object type="image/svg+xml" data="https://cdn.jsdelivr.net/gh/tianheg/static@main/img/%E5%9B%BE%E8%A7%A3HTTP6-%E7%BB%9D%E5%AF%B9URI.svg" class="org-svg">
 Sorry, your browser does not support SVG.</object>
-</p>
-<p><span class="figure-number">Figure 7: </span>绝对 URI</p>
-</div>
+
+<figcaption><span class="figure-number">Figure 7: </span>绝对 URI</figcaption>
+</figure>
 </div>
 </div>
 
 <div id="outline-container-并不是所有的应用程序都符合-rfc" class="outline-3">
-<h3 id="并不是所有的应用程序都符合-rfc"><span class="section-number-3">2.8</span> 并不是所有的应用程序都符合 RFC</h3>
+<h3 id="并不是所有的应用程序都符合-rfc">并不是所有的应用程序都符合 RFC</h3>
 <div class="outline-text-3" id="text-并不是所有的应用程序都符合-rfc">
 <p>
 有一些用来制定 HTTP 协议技术标准的文档，它们被称为 RFC（Request for
@@ -495,7 +625,7 @@ RFC 是互联网的设计文档，如果不按照 RFC
 </div>
 
 <div id="outline-container-简单的-http-协议" class="outline-2">
-<h2 id="简单的-http-协议"><span class="section-number-2">3</span> 简单的 HTTP 协议</h2>
+<h2 id="简单的-http-协议">简单的 HTTP 协议</h2>
 <div class="outline-text-2" id="text-简单的-http-协议">
 <p>
 主要使用 HTTP/1.1 版本。
@@ -503,7 +633,7 @@ RFC 是互联网的设计文档，如果不按照 RFC
 </div>
 
 <div id="outline-container-http-协议用于客户端和服务器端之间的通信" class="outline-3">
-<h3 id="http-协议用于客户端和服务器端之间的通信"><span class="section-number-3">3.1</span> HTTP 协议用于客户端和服务器端之间的通信</h3>
+<h3 id="http-协议用于客户端和服务器端之间的通信">HTTP 协议用于客户端和服务器端之间的通信</h3>
 <div class="outline-text-3" id="text-http-协议用于客户端和服务器端之间的通信">
 <p>
 客户端和服务端的角色并不固定，但在具体通信线路中，资源传输方向是确定的。HTTP
@@ -513,13 +643,13 @@ RFC 是互联网的设计文档，如果不按照 RFC
 </div>
 
 <div id="outline-container-通过请求和响应的交换达成通信" class="outline-3">
-<h3 id="通过请求和响应的交换达成通信"><span class="section-number-3">3.2</span> 通过请求和响应的交换达成通信</h3>
+<h3 id="通过请求和响应的交换达成通信">通过请求和响应的交换达成通信</h3>
 <div class="outline-text-3" id="text-通过请求和响应的交换达成通信">
 <p>
 通信请求由客户端发出，然后服务端才响应。服务端在没有接收到请求之前不会发送响应。
 </p>
 
-<pre class="example" id="orgedbaec3">
+<pre class="example" id="org3da5cb8">
 GET /index.html HTTP/1.1
 </pre>
 
@@ -533,7 +663,7 @@ GET /index.html HTTP/1.1
 我的网站的请求头：
 </p>
 
-<pre class="example" id="orga61e3fa">
+<pre class="example" id="orgce6f1f4">
 GET / HTTP/2
 Host: www.yidajiabei.xyz
 </pre>
@@ -542,7 +672,7 @@ Host: www.yidajiabei.xyz
 我网站的响应头：
 </p>
 
-<pre class="example" id="orgefc1eb6">
+<pre class="example" id="org40f65f5">
 HTTP/1.1 200 Connection established
 </pre>
 
@@ -556,7 +686,7 @@ URI、协议版本、可选的请求首部字段和内容实体构成。响应�
 </div>
 
 <div id="outline-container-http-是不保存状态的协议" class="outline-3">
-<h3 id="http-是不保存状态的协议"><span class="section-number-3">3.3</span> HTTP 是不保存状态的协议</h3>
+<h3 id="http-是不保存状态的协议">HTTP 是不保存状态的协议</h3>
 <div class="outline-text-3" id="text-http-是不保存状态的协议">
 <p>
 HTTP 是无状态（stateless）协议-&#x2013;&#x2014;HTTP
@@ -575,9 +705,9 @@ HTTP 是无状态（stateless）协议-&#x2013;&#x2014;HTTP
 </div>
 
 <div id="outline-container-请求-uri-定位资源" class="outline-3">
-<h3 id="请求-uri-定位资源"><span class="section-number-3">3.4</span> 请求 URI 定位资源</h3>
+<h3 id="请求-uri-定位资源">请求 URI 定位资源</h3>
 <div class="outline-text-3" id="text-请求-uri-定位资源">
-<pre class="example" id="org46b3dfe">
+<pre class="example" id="orge871c7e">
 GET https://job.yidajiabei.xyz/#/ HTTP/3
 
 GET / HTTP/3
@@ -590,7 +720,7 @@ OPTIONS * HTTP/1.1
 </div>
 
 <div id="outline-container-http1.1-中的可用方法" class="outline-3">
-<h3 id="http1.1-中的可用方法"><span class="section-number-3">3.5</span> HTTP/1.1 中的可用方法</h3>
+<h3 id="http1.1-中的可用方法">HTTP/1.1 中的可用方法</h3>
 <div class="outline-text-3" id="text-http1.1-中的可用方法">
 <p>
 一、GET 获取资源
@@ -601,24 +731,24 @@ GET 方法用于请求已被 URI 识别的资源。
 </p>
 
 
-<div id="org7144e9a" class="figure">
-<p><object type="image/svg+xml" data="https://cdn.jsdelivr.net/gh/tianheg/static@main/img/%E5%9B%BE%E8%A7%A3HTTP7-GET.svg" class="org-svg">
+<figure id="orgce296be">
+<object type="image/svg+xml" data="https://cdn.jsdelivr.net/gh/tianheg/static@main/img/%E5%9B%BE%E8%A7%A3HTTP7-GET.svg" class="org-svg">
 Sorry, your browser does not support SVG.</object>
-</p>
-<p><span class="figure-number">Figure 8: </span>GET</p>
-</div>
+
+<figcaption><span class="figure-number">Figure 8: </span>GET</figcaption>
+</figure>
 
 <p>
 二、POST 传输实体主体
 </p>
 
 
-<div id="org21eed7d" class="figure">
-<p><object type="image/svg+xml" data="https://cdn.jsdelivr.net/gh/tianheg/static@main/img/%E5%9B%BE%E8%A7%A3HTTP8-POST.svg" class="org-svg">
+<figure id="orge9df0e8">
+<object type="image/svg+xml" data="https://cdn.jsdelivr.net/gh/tianheg/static@main/img/%E5%9B%BE%E8%A7%A3HTTP8-POST.svg" class="org-svg">
 Sorry, your browser does not support SVG.</object>
-</p>
-<p><span class="figure-number">Figure 9: </span>POST</p>
-</div>
+
+<figcaption><span class="figure-number">Figure 9: </span>POST</figcaption>
+</figure>
 
 <p>
 三、PUT 传输文件
@@ -642,12 +772,12 @@ Transfer，表征状态转移）标准</li>
 </ol>
 
 
-<div id="org9d9bf3f" class="figure">
-<p><object type="image/svg+xml" data="https://cdn.jsdelivr.net/gh/tianheg/static@main/img/%E5%9B%BE%E8%A7%A3HTTP9-PUT.svg" class="org-svg">
+<figure id="orgf3ae20f">
+<object type="image/svg+xml" data="https://cdn.jsdelivr.net/gh/tianheg/static@main/img/%E5%9B%BE%E8%A7%A3HTTP9-PUT.svg" class="org-svg">
 Sorry, your browser does not support SVG.</object>
-</p>
-<p><span class="figure-number">Figure 10: </span>PUT</p>
-</div>
+
+<figcaption><span class="figure-number">Figure 10: </span>PUT</figcaption>
+</figure>
 
 <blockquote>
 <p>
@@ -665,12 +795,12 @@ HEAD 和 GET 一样，只是不返回报文主体部分。用于确认 URI
 </p>
 
 
-<div id="org5765909" class="figure">
-<p><object type="image/svg+xml" data="https://cdn.jsdelivr.net/gh/tianheg/static@main/img/%E5%9B%BE%E8%A7%A3HTTP10-HEAD.svg" class="org-svg">
+<figure id="org73e4cb5">
+<object type="image/svg+xml" data="https://cdn.jsdelivr.net/gh/tianheg/static@main/img/%E5%9B%BE%E8%A7%A3HTTP10-HEAD.svg" class="org-svg">
 Sorry, your browser does not support SVG.</object>
-</p>
-<p><span class="figure-number">Figure 11: </span>HEAD</p>
-</div>
+
+<figcaption><span class="figure-number">Figure 11: </span>HEAD</figcaption>
+</figure>
 
 <p>
 五、DELETE 删除文件（类比 PUT）
@@ -680,7 +810,7 @@ Sorry, your browser does not support SVG.</object>
 六、OPTIONS 询问支持的方法
 </p>
 
-<pre class="example" id="org88e8152">
+<pre class="example" id="org83acf00">
 curl -X OPTIONS https://example.org -i
 </pre>
 
@@ -688,7 +818,7 @@ curl -X OPTIONS https://example.org -i
 Output:
 </p>
 
-<pre class="example" id="org69b9cc0">
+<pre class="example" id="org2b4d058">
 HTTP/2 200
 allow: OPTIONS, GET, HEAD, POST
 cache-control: max-age=604800
@@ -733,7 +863,7 @@ Security,传输层安全）协议吧通信内容加密后经网络隧道传输�
 </div>
 
 <div id="outline-container-使用方法下达命令" class="outline-3">
-<h3 id="使用方法下达命令"><span class="section-number-3">3.6</span> 使用方法下达命令</h3>
+<h3 id="使用方法下达命令">使用方法下达命令</h3>
 <div class="outline-text-3" id="text-使用方法下达命令">
 <p>
 通过方法向请求 URI 指定的资源发送请求报文。
@@ -745,16 +875,16 @@ Security,传输层安全）协议吧通信内容加密后经网络隧道传输�
 </p>
 
 
-<div id="org6cdfa7a" class="figure">
-<p><img src="https://cdn.jsdelivr.net/gh/tianheg/static@main/img/%E5%9B%BE%E8%A7%A3HTTP11-http1-http1.1.jpeg" alt="%E5%9B%BE%E8%A7%A3HTTP11-http1-http1.1.jpeg" />
-</p>
-<p><span class="figure-number">Figure 12: </span>HTTP/1.0 HTTP/1.1</p>
-</div>
+<figure id="org8aa2f70">
+<img src="https://cdn.jsdelivr.net/gh/tianheg/static@main/img/%E5%9B%BE%E8%A7%A3HTTP11-http1-http1.1.jpeg" alt="%E5%9B%BE%E8%A7%A3HTTP11-http1-http1.1.jpeg">
+
+<figcaption><span class="figure-number">Figure 12: </span>HTTP/1.0 HTTP/1.1</figcaption>
+</figure>
 </div>
 </div>
 
 <div id="outline-container-持久连接节省通信量" class="outline-3">
-<h3 id="持久连接节省通信量"><span class="section-number-3">3.7</span> 持久连接节省通信量</h3>
+<h3 id="持久连接节省通信量">持久连接节省通信量</h3>
 <div class="outline-text-3" id="text-持久连接节省通信量">
 <p>
 如果保证持久连接？
@@ -794,7 +924,7 @@ Connections，也称为 HTTP keep-alive 或 HTTP connection reuse）的方法。
 </div>
 
 <div id="outline-container-重要使用-cookie-的状态管理" class="outline-3">
-<h3 id="重要使用-cookie-的状态管理"><span class="section-number-3">3.8</span> （重要）使用 Cookie 的状态管理</h3>
+<h3 id="重要使用-cookie-的状态管理">（重要）使用 Cookie 的状态管理</h3>
 <div class="outline-text-3" id="text-重要使用-cookie-的状态管理">
 <p>
 Cookie 技术通过在请求和响应报文中写入 Cookie 信息来控制客户端的状态。
