@@ -1,128 +1,215 @@
-<?xml version="1.0" encoding="utf-8"?>
-<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN"
-"http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
-<html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en">
+<!DOCTYPE html>
+<html lang="zh">
 <head>
-<!-- 2022-01-17 Mon 18:01 -->
-<meta http-equiv="Content-Type" content="text/html;charset=utf-8" />
-<meta name="viewport" content="width=device-width, initial-scale=1" />
-<title>&lrm;</title>
-<meta name="generator" content="Org mode" />
-<script type="text/javascript">
-// @license magnet:?xt=urn:btih:e95b018ef3580986a04669f1b5879592219e2a7a&dn=public-domain.txt Public Domain
-<!--/*--><![CDATA[/*><!--*/
-     function CodeHighlightOn(elem, id)
-     {
-       var target = document.getElementById(id);
-       if(null != target) {
-         elem.classList.add("code-highlighted");
-         target.classList.add("code-highlighted");
-       }
-     }
-     function CodeHighlightOff(elem, id)
-     {
-       var target = document.getElementById(id);
-       if(null != target) {
-         elem.classList.remove("code-highlighted");
-         target.classList.remove("code-highlighted");
-       }
-     }
-    /*]]>*///-->
-// @license-end
-</script>
+<!-- 2022-01-17 Mon 19:00 -->
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>学习与人生</title>
+<meta name="generator" content="Org mode">
+<style type="text/css">
+ <!--/*--><![CDATA[/*><!--*/
+  .title  { text-align: center;
+             margin-bottom: .2em; }
+  .subtitle { text-align: center;
+              font-size: medium;
+              font-weight: bold;
+              margin-top:0; }
+  .todo   { font-family: monospace; color: red; }
+  .done   { font-family: monospace; color: green; }
+  .priority { font-family: monospace; color: orange; }
+  .tag    { background-color: #eee; font-family: monospace;
+            padding: 2px; font-size: 80%; font-weight: normal; }
+  .timestamp { color: #bebebe; }
+  .timestamp-kwd { color: #5f9ea0; }
+  .org-right  { margin-left: auto; margin-right: 0px;  text-align: right; }
+  .org-left   { margin-left: 0px;  margin-right: auto; text-align: left; }
+  .org-center { margin-left: auto; margin-right: auto; text-align: center; }
+  .underline { text-decoration: underline; }
+  #postamble p, #preamble p { font-size: 90%; margin: .2em; }
+  p.verse { margin-left: 3%; }
+  pre {
+    border: 1px solid #ccc;
+    box-shadow: 3px 3px 3px #eee;
+    padding: 8pt;
+    font-family: monospace;
+    overflow: auto;
+    margin: 1.2em;
+  }
+  pre.src {
+    position: relative;
+    overflow: auto;
+    padding-top: 1.2em;
+  }
+  pre.src:before {
+    display: none;
+    position: absolute;
+    background-color: white;
+    top: -10px;
+    right: 10px;
+    padding: 3px;
+    border: 1px solid black;
+  }
+  pre.src:hover:before { display: inline; margin-top: 14px;}
+  /* Languages per Org manual */
+  pre.src-asymptote:before { content: 'Asymptote'; }
+  pre.src-awk:before { content: 'Awk'; }
+  pre.src-C:before { content: 'C'; }
+  /* pre.src-C++ doesn't work in CSS */
+  pre.src-clojure:before { content: 'Clojure'; }
+  pre.src-css:before { content: 'CSS'; }
+  pre.src-D:before { content: 'D'; }
+  pre.src-ditaa:before { content: 'ditaa'; }
+  pre.src-dot:before { content: 'Graphviz'; }
+  pre.src-calc:before { content: 'Emacs Calc'; }
+  pre.src-emacs-lisp:before { content: 'Emacs Lisp'; }
+  pre.src-fortran:before { content: 'Fortran'; }
+  pre.src-gnuplot:before { content: 'gnuplot'; }
+  pre.src-haskell:before { content: 'Haskell'; }
+  pre.src-hledger:before { content: 'hledger'; }
+  pre.src-java:before { content: 'Java'; }
+  pre.src-js:before { content: 'Javascript'; }
+  pre.src-latex:before { content: 'LaTeX'; }
+  pre.src-ledger:before { content: 'Ledger'; }
+  pre.src-lisp:before { content: 'Lisp'; }
+  pre.src-lilypond:before { content: 'Lilypond'; }
+  pre.src-lua:before { content: 'Lua'; }
+  pre.src-matlab:before { content: 'MATLAB'; }
+  pre.src-mscgen:before { content: 'Mscgen'; }
+  pre.src-ocaml:before { content: 'Objective Caml'; }
+  pre.src-octave:before { content: 'Octave'; }
+  pre.src-org:before { content: 'Org mode'; }
+  pre.src-oz:before { content: 'OZ'; }
+  pre.src-plantuml:before { content: 'Plantuml'; }
+  pre.src-processing:before { content: 'Processing.js'; }
+  pre.src-python:before { content: 'Python'; }
+  pre.src-R:before { content: 'R'; }
+  pre.src-ruby:before { content: 'Ruby'; }
+  pre.src-sass:before { content: 'Sass'; }
+  pre.src-scheme:before { content: 'Scheme'; }
+  pre.src-screen:before { content: 'Gnu Screen'; }
+  pre.src-sed:before { content: 'Sed'; }
+  pre.src-sh:before { content: 'shell'; }
+  pre.src-sql:before { content: 'SQL'; }
+  pre.src-sqlite:before { content: 'SQLite'; }
+  /* additional languages in org.el's org-babel-load-languages alist */
+  pre.src-forth:before { content: 'Forth'; }
+  pre.src-io:before { content: 'IO'; }
+  pre.src-J:before { content: 'J'; }
+  pre.src-makefile:before { content: 'Makefile'; }
+  pre.src-maxima:before { content: 'Maxima'; }
+  pre.src-perl:before { content: 'Perl'; }
+  pre.src-picolisp:before { content: 'Pico Lisp'; }
+  pre.src-scala:before { content: 'Scala'; }
+  pre.src-shell:before { content: 'Shell Script'; }
+  pre.src-ebnf2ps:before { content: 'ebfn2ps'; }
+  /* additional language identifiers per "defun org-babel-execute"
+       in ob-*.el */
+  pre.src-cpp:before  { content: 'C++'; }
+  pre.src-abc:before  { content: 'ABC'; }
+  pre.src-coq:before  { content: 'Coq'; }
+  pre.src-groovy:before  { content: 'Groovy'; }
+  /* additional language identifiers from org-babel-shell-names in
+     ob-shell.el: ob-shell is the only babel language using a lambda to put
+     the execution function name together. */
+  pre.src-bash:before  { content: 'bash'; }
+  pre.src-csh:before  { content: 'csh'; }
+  pre.src-ash:before  { content: 'ash'; }
+  pre.src-dash:before  { content: 'dash'; }
+  pre.src-ksh:before  { content: 'ksh'; }
+  pre.src-mksh:before  { content: 'mksh'; }
+  pre.src-posh:before  { content: 'posh'; }
+  /* Additional Emacs modes also supported by the LaTeX listings package */
+  pre.src-ada:before { content: 'Ada'; }
+  pre.src-asm:before { content: 'Assembler'; }
+  pre.src-caml:before { content: 'Caml'; }
+  pre.src-delphi:before { content: 'Delphi'; }
+  pre.src-html:before { content: 'HTML'; }
+  pre.src-idl:before { content: 'IDL'; }
+  pre.src-mercury:before { content: 'Mercury'; }
+  pre.src-metapost:before { content: 'MetaPost'; }
+  pre.src-modula-2:before { content: 'Modula-2'; }
+  pre.src-pascal:before { content: 'Pascal'; }
+  pre.src-ps:before { content: 'PostScript'; }
+  pre.src-prolog:before { content: 'Prolog'; }
+  pre.src-simula:before { content: 'Simula'; }
+  pre.src-tcl:before { content: 'tcl'; }
+  pre.src-tex:before { content: 'TeX'; }
+  pre.src-plain-tex:before { content: 'Plain TeX'; }
+  pre.src-verilog:before { content: 'Verilog'; }
+  pre.src-vhdl:before { content: 'VHDL'; }
+  pre.src-xml:before { content: 'XML'; }
+  pre.src-nxml:before { content: 'XML'; }
+  /* add a generic configuration mode; LaTeX export needs an additional
+     (add-to-list 'org-latex-listings-langs '(conf " ")) in .emacs */
+  pre.src-conf:before { content: 'Configuration File'; }
+
+  table { border-collapse:collapse; }
+  caption.t-above { caption-side: top; }
+  caption.t-bottom { caption-side: bottom; }
+  td, th { vertical-align:top;  }
+  th.org-right  { text-align: center;  }
+  th.org-left   { text-align: center;   }
+  th.org-center { text-align: center; }
+  td.org-right  { text-align: right;  }
+  td.org-left   { text-align: left;   }
+  td.org-center { text-align: center; }
+  dt { font-weight: bold; }
+  .footpara { display: inline; }
+  .footdef  { margin-bottom: 1em; }
+  .figure { padding: 1em; }
+  .figure p { text-align: center; }
+  .equation-container {
+    display: table;
+    text-align: center;
+    width: 100%;
+  }
+  .equation {
+    vertical-align: middle;
+  }
+  .equation-label {
+    display: table-cell;
+    text-align: right;
+    vertical-align: middle;
+  }
+  .inlinetask {
+    padding: 10px;
+    border: 2px solid gray;
+    margin: 10px;
+    background: #ffffcc;
+  }
+  #org-div-home-and-up
+   { text-align: right; font-size: 70%; white-space: nowrap; }
+  textarea { overflow-x: auto; }
+  .linenr { font-size: smaller }
+  .code-highlighted { background-color: #ffff00; }
+  .org-info-js_info-navigation { border-style: none; }
+  #org-info-js_console-label
+    { font-size: 10px; font-weight: bold; white-space: nowrap; }
+  .org-info-js_search-highlight
+    { background-color: #ffff00; color: #000000; font-weight: bold; }
+  .org-svg { width: 90%; }
+  /*]]>*/-->
+</style>
+<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin><link href="https://fonts.googleapis.com/css2?family=Noto+Sans+SC&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="/theme/normalize.css"/>
+<link rel="stylesheet" href="/theme/site.css"/>
+<script defer src='https://static.cloudflareinsights.com/beacon.min.js' data-cf-beacon='{"token": "d5b841b503ed4d1b8fad459b84d1cc2f"}'></script>
+<script defer src="/theme/link.js"></script>
 </head>
 <body>
 <div id="content">
-<div id="table-of-contents">
-<h2>Table of Contents</h2>
-<div id="text-table-of-contents">
-<ul>
-<li><a href="#回顾">1. 回顾</a></li>
-<li><a href="#动机">2. 动机</a>
-<ul>
-<li><a href="#学习的类型">2.1. 学习的类型</a></li>
-<li><a href="#好奇心">2.2. 好奇心</a></li>
-<li><a href="#思维的乐趣">2.3. 思维的乐趣</a></li>
-<li><a href="#兴趣">2.4. 兴趣</a>
-<ul>
-<li><a href="#什么是兴趣 2">2.4.1. 什么是兴趣？</a></li>
-<li><a href="#兴趣有什么好处">2.4.2. 兴趣有什么好处？</a></li>
-<li><a href="#兴趣重要吗">2.4.3. 兴趣重要吗？</a></li>
-</ul>
-</li>
-</ul>
-</li>
-<li><a href="#自学">3. 自学</a>
-<ul>
-<li><a href="#领域的差异弱耦合-vs-强耦合">3.1. 领域的差异-&#x2013;&#x2014;弱耦合 VS 强耦合</a></li>
-<li><a href="#复杂领域-vs-简单领域">3.2. 复杂领域 VS 简单领域</a></li>
-<li><a href="#媒介形态">3.3. 媒介形态</a></li>
-<li><a href="#为啥俺推荐书籍这种媒介形态">3.4. 为啥俺推荐“书籍”这种媒介形态？</a></li>
-<li><a href="#重点系统性学习">3.5. 重点：*系统性学习*</a></li>
-<li><a href="#从费曼学习法到双赢博弈">3.6. 从“费曼学习法”到“双赢博弈”</a></li>
-<li><a href="#权衡与取舍">3.7. 权衡与取舍</a></li>
-</ul>
-</li>
-<li><a href="#实践">4. 实践</a>
-<ul>
-<li><a href="#理论-vs-实践">4.1. 理论 VS 实践</a></li>
-<li><a href="#三种不同的领域">4.2. 三种不同的领域</a></li>
-<li><a href="#应试教育的产物做题家">4.3. 应试教育的产物-&#x2013;&#x2014;【做题家】</a></li>
-<li><a href="#做题家的局限性">4.4. "做题家"的局限性</a></li>
-<li><a href="#如何摆脱做题家的困境">4.5. 如何摆脱“做题家”的困境？</a></li>
-</ul>
-</li>
-<li><a href="#自律">5. 自律</a>
-<ul>
-<li><a href="#某个心理学实验的启示">5.1. 某个心理学实验的启示</a></li>
-<li><a href="#自律与思维能力的关系">5.2. "自律"与“思维能力”的关系</a></li>
-<li><a href="#自律的难度">5.3. "自律"的难度</a></li>
-<li><a href="#马太效应 5">5.4. 马太效应</a></li>
-<li><a href="#互联网进一步强化上述的马太效应">5.5. 互联网进一步强化上述的马太效应</a></li>
-<li><a href="#小结自律也就是战胜自我">5.6. 小结："自律"也就是“战胜自我”</a></li>
-</ul>
-</li>
-<li><a href="#成长">6. 成长</a>
-<ul>
-<li><a href="#能力提升的两种模式渐进-vs-跃迁">6.1. 能力提升的两种模式-&#x2013;&#x2014;渐进 VS 跃迁</a></li>
-<li><a href="#死而后生模式-反脆弱">6.2. 【死而后生】模式 ＆ 反脆弱</a></li>
-</ul>
-</li>
-<li><a href="#时间">7. 时间</a>
-<ul>
-<li><a href="#能力曲线 3">7.1. 能力曲线</a></li>
-<li><a href="#能力曲线的变化趋势">7.2. 能力曲线的变化趋势</a></li>
-<li><a href="#对速成的迷思">7.3. 对“速成”的迷思</a></li>
-<li><a href="#时间站在哪一边">7.4. 时间站在哪一边？</a></li>
-<li><a href="#对起跑线的迷思">7.5. 对“起跑线”的迷思</a></li>
-</ul>
-</li>
-<li><a href="#人生">8. 人生</a>
-<ul>
-<li><a href="#古人类学的启示">8.1. "古人类学"的启示</a></li>
-<li><a href="#如何跳出 996 怪圈">8.2. 如何跳出“996 怪圈”？</a></li>
-</ul>
-</li>
-</ul>
-</div>
-</div>
-<p>
-<del>+</del> date = '2021-04-17T08:16:14+08:00' slug = 'study-and-life' tags =
-['学习与人生'] title = '学习与人生' <del>+</del>
-</p>
-
-<p>
+<header>
+<h1 class="title">学习与人生</h1>
+</header><p>
 本篇文章是阅读编程随想博客文章的摘录。
 </p>
 
 <p>
-编程随想从 09 年 1 月 15 日开始写作博客，截止到 2020 年 12 月 4 日，Ta
-已经写作 700
-篇。我想：这个人能坚持这么长时间的写作，一定有值得学习的地方，故而将仔细研读这篇文章。
+编程随想从 09 年 1 月 15 日开始写作博客，截止到 2020 年 12 月 4 日，Ta 已经写作 700 篇。我想：这个人能坚持这么长时间的写作，一定有值得学习的地方，故而将仔细研读这篇文章。
 </p>
 
 <div id="outline-container-回顾" class="outline-2">
-<h2 id="回顾"><span class="section-number-2">1</span> 回顾</h2>
+<h2 id="回顾">回顾</h2>
 <div class="outline-text-2" id="text-回顾">
 <p>
 前面已经说过 Ta 的博客文章数量已经达到 700。那么是什么能让 Ta
@@ -137,7 +224,7 @@
 </div>
 
 <div id="outline-container-动机" class="outline-2">
-<h2 id="动机"><span class="section-number-2">2</span> 动机</h2>
+<h2 id="动机">动机</h2>
 <div class="outline-text-2" id="text-动机">
 <p>
 要讨论“学习能力”，首先要讨论【学习的动机】。
@@ -145,7 +232,7 @@
 </div>
 
 <div id="outline-container-学习的类型" class="outline-3">
-<h3 id="学习的类型"><span class="section-number-3">2.1</span> 学习的类型</h3>
+<h3 id="学习的类型">学习的类型</h3>
 <div class="outline-text-3" id="text-学习的类型">
 <p>
 "学习"大致可以分为两类：主动学习 or 被动学习。
@@ -189,7 +276,7 @@
 </div>
 
 <div id="outline-container-好奇心" class="outline-3">
-<h3 id="好奇心"><span class="section-number-3">2.2</span> 好奇心</h3>
+<h3 id="好奇心">好奇心</h3>
 <div class="outline-text-3" id="text-好奇心">
 <p>
 关于“内在的动机”，首先来聊聊【好奇心】，很多人的求知欲望就源于它。
@@ -214,7 +301,7 @@
 </div>
 
 <div id="outline-container-思维的乐趣" class="outline-3">
-<h3 id="思维的乐趣"><span class="section-number-3">2.3</span> 思维的乐趣</h3>
+<h3 id="思维的乐趣">思维的乐趣</h3>
 <div class="outline-text-3" id="text-思维的乐趣">
 <p>
 "好奇心"意味着你有一种知道更多东西的心理倾向，而“思维的乐趣”指的是“爱思考”的心理倾向。
@@ -236,11 +323,11 @@ Ta
 </div>
 
 <div id="outline-container-兴趣" class="outline-3">
-<h3 id="兴趣"><span class="section-number-3">2.4</span> 兴趣</h3>
+<h3 id="兴趣">兴趣</h3>
 <div class="outline-text-3" id="text-兴趣">
 </div>
 <div id="outline-container-什么是兴趣 2" class="outline-4">
-<h4 id="什么是兴趣 2"><span class="section-number-4">2.4.1</span> 什么是兴趣？<sup><a id="fnr.1" class="footref" href="#fn.1">1</a></sup></h4>
+<h4 id="什么是兴趣 2">什么是兴趣？<sup><a id="fnr.1" class="footref" href="#fn.1">1</a></sup></h4>
 <div class="outline-text-4" id="text-什么是兴趣 2">
 <p>
 *1. 哪些不是兴趣*？
@@ -285,7 +372,7 @@ Zone”，用来描述一种“心理状态”。处于这种状态，你会感�
 </p>
 
 <p>
-引申文章：《<a href="https://pt.yidajiabei.xyz/2019/03/Why-Thinking-Hard-So-Hard.html">为什么独立思考这么难？-&#x2013;&#x2014;谈谈心理学的成因，并分享俺的经验</a>》，从“心理学”和“脑神经科学”
+引申文章：《为什么独立思考这么难？-&#x2013;&#x2014;谈谈心理学的成因，并分享俺的经验》，从“心理学”和“脑神经科学”
 的角度，分析了“心理舒适区”的【根源】。
 </p></li>
 </ul>
@@ -343,23 +430,23 @@ Zone”，用来描述一种“心理状态”。处于这种状态，你会感�
 </div>
 
 <div id="outline-container-兴趣有什么好处" class="outline-4">
-<h4 id="兴趣有什么好处"><span class="section-number-4">2.4.2</span> 兴趣有什么好处？</h4>
+<h4 id="兴趣有什么好处">兴趣有什么好处？</h4>
 <div class="outline-text-4" id="text-兴趣有什么好处">
 </div>
 </div>
 <div id="outline-container-兴趣重要吗" class="outline-4">
-<h4 id="兴趣重要吗"><span class="section-number-4">2.4.3</span> 兴趣重要吗？</h4>
+<h4 id="兴趣重要吗">兴趣重要吗？</h4>
 <div class="outline-text-4" id="text-兴趣重要吗">
 </div>
 </div>
 </div>
 </div>
 <div id="outline-container-自学" class="outline-2">
-<h2 id="自学"><span class="section-number-2">3</span> 自学</h2>
+<h2 id="自学">自学</h2>
 <div class="outline-text-2" id="text-自学">
 </div>
 <div id="outline-container-领域的差异弱耦合-vs-强耦合" class="outline-3">
-<h3 id="领域的差异弱耦合-vs-强耦合"><span class="section-number-3">3.1</span> 领域的差异-&#x2013;&#x2014;弱耦合 VS 强耦合</h3>
+<h3 id="领域的差异弱耦合-vs-强耦合">领域的差异-&#x2013;&#x2014;弱耦合 VS 强耦合</h3>
 <div class="outline-text-3" id="text-领域的差异弱耦合-vs-强耦合">
 <p>
 这里所说的“耦合”，可以通俗地理解为“依赖性”。弱耦合的领域，其各个组成部分之间的依赖性很小；反之，强耦合的领域，其各个组成部分之间的依赖性很大。为了帮助大伙儿理解，俺找 2 个典型的栗子给大伙儿瞧一瞧。
@@ -428,7 +515,7 @@ Zone”，用来描述一种“心理状态”。处于这种状态，你会感�
 </div>
 
 <div id="outline-container-复杂领域-vs-简单领域" class="outline-3">
-<h3 id="复杂领域-vs-简单领域"><span class="section-number-3">3.2</span> 复杂领域 VS 简单领域</h3>
+<h3 id="复杂领域-vs-简单领域">复杂领域 VS 简单领域</h3>
 <div class="outline-text-3" id="text-复杂领域-vs-简单领域">
 <p>
 为了叙述方便，俺把那些依赖层次很深，依赖路径很多的领域，称之为“复杂领域”；反之则是“简单领域”。"复杂领域"的依赖关系，不仅仅有【学科内】的依赖，还有【跨学科】的依赖。比如：刚才提到“标准模型”依赖于“量子力学”，这个属于物理学内部的依赖关系；而“标准模型”间接依赖于“微分方程
@@ -457,7 +544,7 @@ OK 了，你去学习更高层的领域，才会比较顺畅。
 </div>
 
 <div id="outline-container-媒介形态" class="outline-3">
-<h3 id="媒介形态"><span class="section-number-3">3.3</span> 媒介形态</h3>
+<h3 id="媒介形态">媒介形态</h3>
 <div class="outline-text-3" id="text-媒介形态">
 <p>
 关于“媒介形态”这个概念，以及“媒介形态对认知过程（学习过程）的影响”，俺已经写过如下好几篇博文。此处不再唠叨。
@@ -511,7 +598,7 @@ OK 了，你去学习更高层的领域，才会比较顺畅。
 </div>
 
 <div id="outline-container-为啥俺推荐书籍这种媒介形态" class="outline-3">
-<h3 id="为啥俺推荐书籍这种媒介形态"><span class="section-number-3">3.4</span> 为啥俺推荐“书籍”这种媒介形态？</h3>
+<h3 id="为啥俺推荐书籍这种媒介形态">为啥俺推荐“书籍”这种媒介形态？</h3>
 <div class="outline-text-3" id="text-为啥俺推荐书籍这种媒介形态">
 <p>
 在各种媒介形态中，最好的形态是【书籍】。这里所说的书籍包括“电子书 or
@@ -537,21 +624,20 @@ OK 了，你去学习更高层的领域，才会比较顺畅。
 </div>
 
 <div id="outline-container-重点系统性学习" class="outline-3">
-<h3 id="重点系统性学习"><span class="section-number-3">3.5</span> 重点：*系统性学习*</h3>
+<h3 id="重点系统性学习">重点：*系统性学习*</h3>
 <div class="outline-text-3" id="text-重点系统性学习">
 <p>
 越是依赖关系很复杂的领域，越是需要通过【系统性学习】才能搞定它。
 </p>
 
 <p>
-《<a href="https://program-think.blogspot.com/2019/10/Systematic-Learning.html">如何【系统性学习】-&#x2013;&#x2014;从“媒介形态”聊到“DIKW
-模型”</a>》
+《<a href="https://program-think.blogspot.com/2019/10/Systematic-Learning.html">如何【系统性学习】-&#x2013;&#x2014;从“媒介形态”聊到“DIKW 模型”</a>》
 </p>
 </div>
 </div>
 
 <div id="outline-container-从费曼学习法到双赢博弈" class="outline-3">
-<h3 id="从费曼学习法到双赢博弈"><span class="section-number-3">3.6</span> 从“费曼学习法”到“双赢博弈”</h3>
+<h3 id="从费曼学习法到双赢博弈">从“费曼学习法”到“双赢博弈”</h3>
 <div class="outline-text-3" id="text-从费曼学习法到双赢博弈">
 <p>
 上一个小节引用的那篇谈“系统性学习”的博文中，提到了【费曼学习法】。针对这个学习法，稍微补充一下。
@@ -580,7 +666,7 @@ OK 了，你去学习更高层的领域，才会比较顺畅。
 </div>
 
 <div id="outline-container-权衡与取舍" class="outline-3">
-<h3 id="权衡与取舍"><span class="section-number-3">3.7</span> 权衡与取舍</h3>
+<h3 id="权衡与取舍">权衡与取舍</h3>
 <div class="outline-text-3" id="text-权衡与取舍">
 <p>
 在如今这个【信息爆炸】的时代，需要学的东西越来越多，而每个人的时间/精力都是有限滴。该咋办捏？类似的问题，在开博的头几年就经常有人问，所以俺在 2013 年写了如下这篇，讨论了相关的话题。《<a href="https://program-think.blogspot.com/2013/09/knowledge-structure.html">如何完善自己的知识结构</a>》
@@ -590,11 +676,11 @@ OK 了，你去学习更高层的领域，才会比较顺畅。
 </div>
 
 <div id="outline-container-实践" class="outline-2">
-<h2 id="实践"><span class="section-number-2">4</span> 实践</h2>
+<h2 id="实践">实践</h2>
 <div class="outline-text-2" id="text-实践">
 </div>
 <div id="outline-container-理论-vs-实践" class="outline-3">
-<h3 id="理论-vs-实践"><span class="section-number-3">4.1</span> 理论 VS 实践</h3>
+<h3 id="理论-vs-实践">理论 VS 实践</h3>
 <div class="outline-text-3" id="text-理论-vs-实践">
 <p>
 为了避免歧义，先界定一下术语：
@@ -611,7 +697,7 @@ OK 了，你去学习更高层的领域，才会比较顺畅。
 </div>
 
 <div id="outline-container-三种不同的领域" class="outline-3">
-<h3 id="三种不同的领域"><span class="section-number-3">4.2</span> 三种不同的领域</h3>
+<h3 id="三种不同的领域">三种不同的领域</h3>
 <div class="outline-text-3" id="text-三种不同的领域">
 <p>
 各色各样的领域，大体可以分为三类：有实践无理论、有理论无实践、理论与实践并重。
@@ -660,7 +746,7 @@ OK 了，你去学习更高层的领域，才会比较顺畅。
 </div>
 
 <div id="outline-container-应试教育的产物做题家" class="outline-3">
-<h3 id="应试教育的产物做题家"><span class="section-number-3">4.3</span> 应试教育的产物-&#x2013;&#x2014;【做题家】</h3>
+<h3 id="应试教育的产物做题家">应试教育的产物-&#x2013;&#x2014;【做题家】</h3>
 <div class="outline-text-3" id="text-应试教育的产物做题家">
 <p>
 开头部分已经吐槽过天朝教育体制的弊端（摧毁学习的内在动机）。现在俺要吐槽教育体制的另一个弊端-&#x2013;&#x2014;*重理论而轻实践*。
@@ -698,7 +784,7 @@ OK 了，你去学习更高层的领域，才会比较顺畅。
 </div>
 
 <div id="outline-container-做题家的局限性" class="outline-3">
-<h3 id="做题家的局限性"><span class="section-number-3">4.4</span> "做题家"的局限性</h3>
+<h3 id="做题家的局限性">"做题家"的局限性</h3>
 <div class="outline-text-3" id="text-做题家的局限性">
 <p>
 <b>思维定势</b>
@@ -755,7 +841,7 @@ OK 了，你去学习更高层的领域，才会比较顺畅。
 </div>
 
 <div id="outline-container-如何摆脱做题家的困境" class="outline-3">
-<h3 id="如何摆脱做题家的困境"><span class="section-number-3">4.5</span> 如何摆脱“做题家”的困境？</h3>
+<h3 id="如何摆脱做题家的困境">如何摆脱“做题家”的困境？</h3>
 <div class="outline-text-3" id="text-如何摆脱做题家的困境">
 <p>
 简单说几个点，供那些“做题家”参考：
@@ -774,7 +860,7 @@ OK 了，你去学习更高层的领域，才会比较顺畅。
 </div>
 
 <div id="outline-container-自律" class="outline-2">
-<h2 id="自律"><span class="section-number-2">5</span> 自律</h2>
+<h2 id="自律">自律</h2>
 <div class="outline-text-2" id="text-自律">
 <p>
 前面聊了这么多，最终能否做到，都取决于一个关键点-&#x2013;&#x2014;你是否足够自律（是否有*足够强的自制力*）。
@@ -782,7 +868,7 @@ OK 了，你去学习更高层的领域，才会比较顺畅。
 </div>
 
 <div id="outline-container-某个心理学实验的启示" class="outline-3">
-<h3 id="某个心理学实验的启示"><span class="section-number-3">5.1</span> 某个心理学实验的启示</h3>
+<h3 id="某个心理学实验的启示">某个心理学实验的启示</h3>
 <div class="outline-text-3" id="text-某个心理学实验的启示">
 <p>
 有一个很知名的心理学实验，可能很多读者已经听说过。这个实验大致是这样的-&#x2013;&#x2014;
@@ -801,7 +887,7 @@ OK 了，你去学习更高层的领域，才会比较顺畅。
 </p>
 
 <p>
-俺曾经推荐过一本书《<a href="https://pt.yidajiabei.xyz/2012/06/book-review-road-less-traveled.html">书评：＜少有人走的路-&#x2013;&#x2014;心智成熟的旅程＞</a>》，专门谈【心理成熟】这个话题。其开头部分讲到了【推迟满足感】对于心智成熟的重要性。
+俺曾经推荐过一本书《书评：＜少有人走的路-&#x2013;&#x2014;心智成熟的旅程＞》，专门谈【心理成熟】这个话题。其开头部分讲到了【推迟满足感】对于心智成熟的重要性。
 </p>
 
 <p>
@@ -815,10 +901,10 @@ OK 了，你去学习更高层的领域，才会比较顺畅。
 </div>
 
 <div id="outline-container-自律与思维能力的关系" class="outline-3">
-<h3 id="自律与思维能力的关系"><span class="section-number-3">5.2</span> "自律"与“思维能力”的关系</h3>
+<h3 id="自律与思维能力的关系">"自律"与“思维能力”的关系</h3>
 <div class="outline-text-3" id="text-自律与思维能力的关系">
 <p>
-关于这个话题，俺已经单独写了长篇博文：《<a href="https://pt.yidajiabei.xyz/2019/03/Why-Thinking-Hard-So-Hard.html">为什么独立思考这么难？-&#x2013;&#x2014;谈谈心理学的成因，并分享俺的经验</a>》
+关于这个话题，俺已经单独写了长篇博文：《为什么独立思考这么难？-&#x2013;&#x2014;谈谈心理学的成因，并分享俺的经验》
 </p>
 
 <p>
@@ -828,7 +914,7 @@ OK 了，你去学习更高层的领域，才会比较顺畅。
 </div>
 
 <div id="outline-container-自律的难度" class="outline-3">
-<h3 id="自律的难度"><span class="section-number-3">5.3</span> "自律"的难度</h3>
+<h3 id="自律的难度">"自律"的难度</h3>
 <div class="outline-text-3" id="text-自律的难度">
 <p>
 如何提升自律的能力？这方面的书已经有很多。有必要提醒一下："心灵鸡汤"类型的书，多半【不】靠谱。比较靠谱是那些-&#x2013;&#x2014;由专业的心理学家写出来的书，并且有充足的实验数据作为支撑。比如俺网盘上分享的《自控力》（洋文叫做“The
@@ -863,11 +949,11 @@ Willpower Instinct”）。
 </div>
 
 <div id="outline-container-马太效应 5" class="outline-3">
-<h3 id="马太效应 5"><span class="section-number-3">5.4</span> 马太效应<sup><a id="fnr.2" class="footref" href="#fn.2">2</a></sup></h3>
+<h3 id="马太效应 5">马太效应<sup><a id="fnr.2" class="footref" href="#fn.2">2</a></sup></h3>
 <div class="outline-text-3" id="text-马太效应 5">
 <blockquote>
 <p>
-<b>凡有的，还要加给他，叫他有馀；凡没有的，连他所有的也要夺去。</b>-&#x2013;&#x2014;《马太福音》第 25 章第 29 节、《路加福音》第 19 章第 11-26 节
+<b>凡有的，还要加给他，叫他有馀；凡没有的，连他所有的也要夺去。</b> -&#x2013;&#x2014;《马太福音》第 25 章第 29 节、《路加福音》第 19 章第 11-26 节
 </p>
 </blockquote>
 
@@ -901,10 +987,10 @@ Willpower Instinct”）。
 </div>
 
 <div id="outline-container-互联网进一步强化上述的马太效应" class="outline-3">
-<h3 id="互联网进一步强化上述的马太效应"><span class="section-number-3">5.5</span> 互联网进一步强化上述的马太效应</h3>
+<h3 id="互联网进一步强化上述的马太效应">互联网进一步强化上述的马太效应</h3>
 <div class="outline-text-3" id="text-互联网进一步强化上述的马太效应">
 <p>
-关于这点，俺已经在《<a href="https://pt.yidajiabei.xyz/2019/12/Time-and-Life.html">时间与人生-&#x2013;&#x2014;跨入本世纪 20 年代的随想</a>》一文中聊过了。
+关于这点，俺已经在《时间与人生-&#x2013;&#x2014;跨入本世纪 20 年代的随想》一文中聊过了。
 </p>
 
 <p>
@@ -950,7 +1036,7 @@ SNS（社交网络）的普及，使得每个网民更容易获得各种娱乐�
 </div>
 
 <div id="outline-container-小结自律也就是战胜自我" class="outline-3">
-<h3 id="小结自律也就是战胜自我"><span class="section-number-3">5.6</span> 小结："自律"也就是“战胜自我”</h3>
+<h3 id="小结自律也就是战胜自我">小结："自律"也就是“战胜自我”</h3>
 <div class="outline-text-3" id="text-小结自律也就是战胜自我">
 <p>
 前面关于“自律”的讨论可能会让某些读者觉得很悲哀，但事实就是如此。
@@ -983,11 +1069,11 @@ SNS（社交网络）的普及，使得每个网民更容易获得各种娱乐�
 </div>
 
 <div id="outline-container-成长" class="outline-2">
-<h2 id="成长"><span class="section-number-2">6</span> 成长</h2>
+<h2 id="成长">成长</h2>
 <div class="outline-text-2" id="text-成长">
 </div>
 <div id="outline-container-能力提升的两种模式渐进-vs-跃迁" class="outline-3">
-<h3 id="能力提升的两种模式渐进-vs-跃迁"><span class="section-number-3">6.1</span> 能力提升的两种模式-&#x2013;&#x2014;渐进 VS 跃迁</h3>
+<h3 id="能力提升的两种模式渐进-vs-跃迁">能力提升的两种模式-&#x2013;&#x2014;渐进 VS 跃迁</h3>
 <div class="outline-text-3" id="text-能力提升的两种模式渐进-vs-跃迁">
 <p>
 很多人存在一个误解：以为“能力的提升”类似于“线性的变化”。
@@ -1039,7 +1125,7 @@ level。
 </div>
 
 <div id="outline-container-死而后生模式-反脆弱" class="outline-3">
-<h3 id="死而后生模式-反脆弱"><span class="section-number-3">6.2</span> 【死而后生】模式 ＆ 反脆弱</h3>
+<h3 id="死而后生模式-反脆弱">【死而后生】模式 ＆ 反脆弱</h3>
 <div class="outline-text-3" id="text-死而后生模式-反脆弱">
 <p>
 说到“死而后生模式”，某些聪明的读者会联想到尼采的那句名言：那不能杀死我的，使我更强！（What
@@ -1058,11 +1144,11 @@ does not kill me, makes me stronger.）。
 </div>
 
 <div id="outline-container-时间" class="outline-2">
-<h2 id="时间"><span class="section-number-2">7</span> 时间</h2>
+<h2 id="时间">时间</h2>
 <div class="outline-text-2" id="text-时间">
 </div>
 <div id="outline-container-能力曲线 3" class="outline-3">
-<h3 id="能力曲线 3"><span class="section-number-3">7.1</span> 能力曲线<sup><a id="fnr.4" class="footref" href="#fn.4">4</a></sup></h3>
+<h3 id="能力曲线 3">能力曲线<sup><a id="fnr.4" class="footref" href="#fn.4">4</a></sup></h3>
 <div class="outline-text-3" id="text-能力曲线 3">
 <p>
 关于“能力曲线”这个概念，在《时间与人生-&#x2013;&#x2014;跨入本世纪 20 年代的随想》一文中已经介绍过了，指的是：【综合能力】随时间变化的曲线。
@@ -1079,7 +1165,7 @@ does not kill me, makes me stronger.）。
 </div>
 
 <div id="outline-container-能力曲线的变化趋势" class="outline-3">
-<h3 id="能力曲线的变化趋势"><span class="section-number-3">7.2</span> 能力曲线的变化趋势</h3>
+<h3 id="能力曲线的变化趋势">能力曲线的变化趋势</h3>
 <div class="outline-text-3" id="text-能力曲线的变化趋势">
 <p>
 在上述谈《时间与人生》的博文中俺说过：大部分人的“能力曲线”是边际【递减】，但有极少数人的“能力曲线”是边际【递增】。
@@ -1116,7 +1202,7 @@ does not kill me, makes me stronger.）。
 </div>
 
 <div id="outline-container-对速成的迷思" class="outline-3">
-<h3 id="对速成的迷思"><span class="section-number-3">7.3</span> 对“速成”的迷思</h3>
+<h3 id="对速成的迷思">对“速成”的迷思</h3>
 <div class="outline-text-3" id="text-对速成的迷思">
 <p>
 与“起跑线”这个忽悠类似的，还有一个对“速成”的忽悠。
@@ -1131,21 +1217,21 @@ does not kill me, makes me stronger.）。
 </p>
 
 <p>
-《<a href="https://pt.yidajiabei.xyz/2015/06/The-Mythical-Theories-of-Success.html">成功学批判-&#x2013;&#x2014;简述其危害性及各种谬误</a>》
+《成功学批判-&#x2013;&#x2014;简述其危害性及各种谬误》
 </p>
 
 <p>
-《<a href="https://pt.yidajiabei.xyz/2014/01/misunderstanding-about-making-money.html">为啥急功近利反而赚不到钱-&#x2013;&#x2014;给拜金主义者的忠告</a>》
+《为啥急功近利反而赚不到钱-&#x2013;&#x2014;给拜金主义者的忠告》
 </p>
 
 <p>
-《<a href="https://pt.yidajiabei.xyz/2015/05/Survivorship-Bias.html">思维的误区：幸存者偏见-&#x2013;&#x2014;顺便推荐巴菲特最著名的演讲</a>》
+《思维的误区：幸存者偏见-&#x2013;&#x2014;顺便推荐巴菲特最著名的演讲》
 </p>
 </div>
 </div>
 
 <div id="outline-container-时间站在哪一边" class="outline-3">
-<h3 id="时间站在哪一边"><span class="section-number-3">7.4</span> 时间站在哪一边？</h3>
+<h3 id="时间站在哪一边">时间站在哪一边？</h3>
 <div class="outline-text-3" id="text-时间站在哪一边">
 <p>
 巴菲特有句名言，大意是：如果你善于利用“复利”这个工具，时间站在你这边。
@@ -1188,7 +1274,7 @@ does not kill me, makes me stronger.）。
 </div>
 
 <div id="outline-container-对起跑线的迷思" class="outline-3">
-<h3 id="对起跑线的迷思"><span class="section-number-3">7.5</span> 对“起跑线”的迷思</h3>
+<h3 id="对起跑线的迷思">对“起跑线”的迷思</h3>
 <div class="outline-text-3" id="text-对起跑线的迷思">
 <p>
 最近 20 年，天朝流行一句“不要让孩子输在起跑线上”。这句话【忽悠】了很多人（尤其是中产阶级父母），也间接催生了庞大的“早教行业”。在这个场景中，大伙儿可以再次体会到：无处不在的【智商税】:)
@@ -1223,11 +1309,11 @@ does not kill me, makes me stronger.）。
 </div>
 
 <div id="outline-container-人生" class="outline-2">
-<h2 id="人生"><span class="section-number-2">8</span> 人生</h2>
+<h2 id="人生">人生</h2>
 <div class="outline-text-2" id="text-人生">
 </div>
 <div id="outline-container-古人类学的启示" class="outline-3">
-<h3 id="古人类学的启示"><span class="section-number-3">8.1</span> "古人类学"的启示</h3>
+<h3 id="古人类学的启示">"古人类学"的启示</h3>
 <div class="outline-text-3" id="text-古人类学的启示">
 <p>
 在即将上线的“科普类电子书”里面，有一本书叫做《人类的起源》，作者是古人类学领域的学术权威理查德·利基（Richard
@@ -1282,16 +1368,14 @@ SNS。单单这个习惯，俺每天就比别人多节省出 1 到 2 小时（�
 </div>
 
 <div id="outline-container-如何跳出 996 怪圈" class="outline-3">
-<h3 id="如何跳出 996 怪圈"><span class="section-number-3">8.2</span> 如何跳出“996 怪圈”？</h3>
+<h3 id="如何跳出 996 怪圈">如何跳出“996 怪圈”？</h3>
 <div class="outline-text-3" id="text-如何跳出 996 怪圈">
 <p>
 （如果你没有陷入这个怪圈，这个小节就不用看了，直接看下一个小节）
 </p>
 
 <p>
-去年（2019）俺写了一篇《"996 工作制"只不过是【劫贫济富】的缩影-&#x2013;&#x2014;"马云奇葩言论"随想
-<a href="https://pt.yidajiabei.xyz/2019/04/996-Working-Hour-System.html">pt.yidajiabei.xyz</a>
-》，其中提到了【996 怪圈】。当时俺承诺要写一篇博文谈谈“如何跳出这个怪圈”。拖了一年半，今天终于要兑现当时的承诺了。
+去年（2019）俺写了一篇《"996 工作制"只不过是【劫贫济富】的缩影-&#x2013;&#x2014;"马云奇葩言论"随想》，其中提到了【996 怪圈】。当时俺承诺要写一篇博文谈谈“如何跳出这个怪圈”。拖了一年半，今天终于要兑现当时的承诺了。
 </p>
 
 <p>
@@ -1331,9 +1415,7 @@ SNS。单单这个习惯，俺每天就比别人多节省出 1 到 2 小时（�
 </p>
 
 <p>
-当你的能力提升了，你的议价能力也跟着提升了。"议价能力"既可以用来跳槽，也可以用来跟你的上级谈条件（当你要运用“自身的议价能力”，这篇《博弈论入门教程
-<a href="https://pt.yidajiabei.xyz/2020/11/Game-Theory.html">pt.yidajiabei.xyz</a>
-》或许有点用）。
+当你的能力提升了，你的议价能力也跟着提升了。"议价能力"既可以用来跳槽，也可以用来跟你的上级谈条件（当你要运用“自身的议价能力”，这篇《博弈论入门教程》或许有点用）。
 </p>
 
 <p>
@@ -1350,7 +1432,7 @@ SNS。单单这个习惯，俺每天就比别人多节省出 1 到 2 小时（�
 很多人可能会选第 1 条路，但俺通常建议第 2 条路。　　一般来说，刚刚脱离“996 怪圈”的时候，你先不要太看重钱，先搞定【能力】（有了能力，钱自然不是问题）。而为了搞定能力，你需要【时间】。如果你想在上述两条路线中找出一个中间路线，这个中间路线也应该是尽量偏向于“路线 2”。<sup><a id="fnr.5" class="footref" href="#fn.5">5</a></sup>
 </p>
 
-<hr />
+<hr>
 </div>
 </div>
 </div>
