@@ -1,0 +1,107 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN"
+"http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en">
+<head>
+<!-- 2022-01-18 Tue 17:01 -->
+<meta http-equiv="Content-Type" content="text/html;charset=utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>&lrm;</title>
+<meta name="generator" content="Org mode" />
+<script type="text/javascript">
+// @license magnet:?xt=urn:btih:e95b018ef3580986a04669f1b5879592219e2a7a&dn=public-domain.txt Public Domain
+<!--/*--><![CDATA[/*><!--*/
+     function CodeHighlightOn(elem, id)
+     {
+       var target = document.getElementById(id);
+       if(null != target) {
+         elem.classList.add("code-highlighted");
+         target.classList.add("code-highlighted");
+       }
+     }
+     function CodeHighlightOff(elem, id)
+     {
+       var target = document.getElementById(id);
+       if(null != target) {
+         elem.classList.remove("code-highlighted");
+         target.classList.remove("code-highlighted");
+       }
+     }
+    /*]]>*///-->
+// @license-end
+</script>
+</head>
+<body>
+<div id="content">
+<p>
+<del>+</del> date = '2021-07-20T22:51:11+08:00' slug =
+'the-surprise-with-solving-problem' tags = ['Web Analytics'] title =
+'解决问题的路上永远都伴随着意外和惊喜' <del>+</del>
+</p>
+
+<p>
+解决问题的路上永远都伴随着意外和惊喜。在我的 Cloudflare 账户能够使用 Web
+Analytics 后，就开始用它了。界面没有 Google Analytics
+那么复杂，部署很方便。
+</p>
+
+<p>
+很长时间以来，我都通过 Wappalyzer 这个 Chrome
+扩展看到我的网站同时使用了以上两种浏览量统计工具。
+</p>
+
+<p>
+我觉得很奇怪：我的代码里已经没有 Google Analytics
+相关的内容了，为什么还会提示已经使用呢？
+</p>
+
+<p>
+于是我搜索了一番，在 Cloudflare 社区找到一个问答，里面提到了 Cloudflare
+App。我没有在意。
+</p>
+
+<p>
+我把所有其他可能性排除后，决定仔细查看 Cloudflare
+的每一个设置，当我查看到 App 时，我惊讶地发现：我居然安装了 Google
+Analytics！而且 track ID 和我在 Console 里看到的一样。这个 App
+是一年前安装的，因为时间太过久远，所以就忘记卸载了。
+</p>
+
+<p>
+于是，我确定这是问题所在。于是卸载了这个 Cloudflare app。
+</p>
+
+<hr />
+
+<p>
+图一是博客的 console 显示的和 Google Analytics
+有关的内容；图二则是个人主页下的 Google Analytics
+的文件路径，可以清楚的看到 cdn-cgi（这是 Cloudflare
+存放各种文件的虚拟路径）下的 App 里的 Google Analytics。
+</p>
+
+
+<div id="org7e619c3" class="figure">
+<p><img src="https://cdn.jsdelivr.net/gh/tianheg/static@main/img/cf-ga-0.png" alt="cf-ga-0.png" />
+</p>
+<p><span class="figure-number">Figure 1: </span>cf-ga-0</p>
+</div>
+
+
+<div id="orgb1cada7" class="figure">
+<p><img src="https://cdn.jsdelivr.net/gh/tianheg/static@main/img/cf-ga-1.png" alt="cf-ga-1.png" />
+</p>
+<p><span class="figure-number">Figure 2: </span>cf-ga-1</p>
+</div>
+
+<p>
+ref:
+</p>
+
+<ol class="org-ol">
+<li><a href="https://community.cloudflare.com/t/added-cdn-cgi-script-on-my-pages/3342">Added
+cdn-cgi script on my pages</a></li>
+</ol>
+</div>
+</body>
+</html>

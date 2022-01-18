@@ -1,0 +1,503 @@
+<!DOCTYPE html>
+<html lang="zh">
+<head>
+<!-- 2022-01-18 Tue 17:01 -->
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>TK 教主的话</title>
+<meta name="generator" content="Org mode">
+<style type="text/css">
+ <!--/*--><![CDATA[/*><!--*/
+  .title  { text-align: center;
+             margin-bottom: .2em; }
+  .subtitle { text-align: center;
+              font-size: medium;
+              font-weight: bold;
+              margin-top:0; }
+  .todo   { font-family: monospace; color: red; }
+  .done   { font-family: monospace; color: green; }
+  .priority { font-family: monospace; color: orange; }
+  .tag    { background-color: #eee; font-family: monospace;
+            padding: 2px; font-size: 80%; font-weight: normal; }
+  .timestamp { color: #bebebe; }
+  .timestamp-kwd { color: #5f9ea0; }
+  .org-right  { margin-left: auto; margin-right: 0px;  text-align: right; }
+  .org-left   { margin-left: 0px;  margin-right: auto; text-align: left; }
+  .org-center { margin-left: auto; margin-right: auto; text-align: center; }
+  .underline { text-decoration: underline; }
+  #postamble p, #preamble p { font-size: 90%; margin: .2em; }
+  p.verse { margin-left: 3%; }
+  pre {
+    border: 1px solid #ccc;
+    box-shadow: 3px 3px 3px #eee;
+    padding: 8pt;
+    font-family: monospace;
+    overflow: auto;
+    margin: 1.2em;
+  }
+  pre.src {
+    position: relative;
+    overflow: auto;
+    padding-top: 1.2em;
+  }
+  pre.src:before {
+    display: none;
+    position: absolute;
+    background-color: white;
+    top: -10px;
+    right: 10px;
+    padding: 3px;
+    border: 1px solid black;
+  }
+  pre.src:hover:before { display: inline; margin-top: 14px;}
+  /* Languages per Org manual */
+  pre.src-asymptote:before { content: 'Asymptote'; }
+  pre.src-awk:before { content: 'Awk'; }
+  pre.src-C:before { content: 'C'; }
+  /* pre.src-C++ doesn't work in CSS */
+  pre.src-clojure:before { content: 'Clojure'; }
+  pre.src-css:before { content: 'CSS'; }
+  pre.src-D:before { content: 'D'; }
+  pre.src-ditaa:before { content: 'ditaa'; }
+  pre.src-dot:before { content: 'Graphviz'; }
+  pre.src-calc:before { content: 'Emacs Calc'; }
+  pre.src-emacs-lisp:before { content: 'Emacs Lisp'; }
+  pre.src-fortran:before { content: 'Fortran'; }
+  pre.src-gnuplot:before { content: 'gnuplot'; }
+  pre.src-haskell:before { content: 'Haskell'; }
+  pre.src-hledger:before { content: 'hledger'; }
+  pre.src-java:before { content: 'Java'; }
+  pre.src-js:before { content: 'Javascript'; }
+  pre.src-latex:before { content: 'LaTeX'; }
+  pre.src-ledger:before { content: 'Ledger'; }
+  pre.src-lisp:before { content: 'Lisp'; }
+  pre.src-lilypond:before { content: 'Lilypond'; }
+  pre.src-lua:before { content: 'Lua'; }
+  pre.src-matlab:before { content: 'MATLAB'; }
+  pre.src-mscgen:before { content: 'Mscgen'; }
+  pre.src-ocaml:before { content: 'Objective Caml'; }
+  pre.src-octave:before { content: 'Octave'; }
+  pre.src-org:before { content: 'Org mode'; }
+  pre.src-oz:before { content: 'OZ'; }
+  pre.src-plantuml:before { content: 'Plantuml'; }
+  pre.src-processing:before { content: 'Processing.js'; }
+  pre.src-python:before { content: 'Python'; }
+  pre.src-R:before { content: 'R'; }
+  pre.src-ruby:before { content: 'Ruby'; }
+  pre.src-sass:before { content: 'Sass'; }
+  pre.src-scheme:before { content: 'Scheme'; }
+  pre.src-screen:before { content: 'Gnu Screen'; }
+  pre.src-sed:before { content: 'Sed'; }
+  pre.src-sh:before { content: 'shell'; }
+  pre.src-sql:before { content: 'SQL'; }
+  pre.src-sqlite:before { content: 'SQLite'; }
+  /* additional languages in org.el's org-babel-load-languages alist */
+  pre.src-forth:before { content: 'Forth'; }
+  pre.src-io:before { content: 'IO'; }
+  pre.src-J:before { content: 'J'; }
+  pre.src-makefile:before { content: 'Makefile'; }
+  pre.src-maxima:before { content: 'Maxima'; }
+  pre.src-perl:before { content: 'Perl'; }
+  pre.src-picolisp:before { content: 'Pico Lisp'; }
+  pre.src-scala:before { content: 'Scala'; }
+  pre.src-shell:before { content: 'Shell Script'; }
+  pre.src-ebnf2ps:before { content: 'ebfn2ps'; }
+  /* additional language identifiers per "defun org-babel-execute"
+       in ob-*.el */
+  pre.src-cpp:before  { content: 'C++'; }
+  pre.src-abc:before  { content: 'ABC'; }
+  pre.src-coq:before  { content: 'Coq'; }
+  pre.src-groovy:before  { content: 'Groovy'; }
+  /* additional language identifiers from org-babel-shell-names in
+     ob-shell.el: ob-shell is the only babel language using a lambda to put
+     the execution function name together. */
+  pre.src-bash:before  { content: 'bash'; }
+  pre.src-csh:before  { content: 'csh'; }
+  pre.src-ash:before  { content: 'ash'; }
+  pre.src-dash:before  { content: 'dash'; }
+  pre.src-ksh:before  { content: 'ksh'; }
+  pre.src-mksh:before  { content: 'mksh'; }
+  pre.src-posh:before  { content: 'posh'; }
+  /* Additional Emacs modes also supported by the LaTeX listings package */
+  pre.src-ada:before { content: 'Ada'; }
+  pre.src-asm:before { content: 'Assembler'; }
+  pre.src-caml:before { content: 'Caml'; }
+  pre.src-delphi:before { content: 'Delphi'; }
+  pre.src-html:before { content: 'HTML'; }
+  pre.src-idl:before { content: 'IDL'; }
+  pre.src-mercury:before { content: 'Mercury'; }
+  pre.src-metapost:before { content: 'MetaPost'; }
+  pre.src-modula-2:before { content: 'Modula-2'; }
+  pre.src-pascal:before { content: 'Pascal'; }
+  pre.src-ps:before { content: 'PostScript'; }
+  pre.src-prolog:before { content: 'Prolog'; }
+  pre.src-simula:before { content: 'Simula'; }
+  pre.src-tcl:before { content: 'tcl'; }
+  pre.src-tex:before { content: 'TeX'; }
+  pre.src-plain-tex:before { content: 'Plain TeX'; }
+  pre.src-verilog:before { content: 'Verilog'; }
+  pre.src-vhdl:before { content: 'VHDL'; }
+  pre.src-xml:before { content: 'XML'; }
+  pre.src-nxml:before { content: 'XML'; }
+  /* add a generic configuration mode; LaTeX export needs an additional
+     (add-to-list 'org-latex-listings-langs '(conf " ")) in .emacs */
+  pre.src-conf:before { content: 'Configuration File'; }
+
+  table { border-collapse:collapse; }
+  caption.t-above { caption-side: top; }
+  caption.t-bottom { caption-side: bottom; }
+  td, th { vertical-align:top;  }
+  th.org-right  { text-align: center;  }
+  th.org-left   { text-align: center;   }
+  th.org-center { text-align: center; }
+  td.org-right  { text-align: right;  }
+  td.org-left   { text-align: left;   }
+  td.org-center { text-align: center; }
+  dt { font-weight: bold; }
+  .footpara { display: inline; }
+  .footdef  { margin-bottom: 1em; }
+  .figure { padding: 1em; }
+  .figure p { text-align: center; }
+  .equation-container {
+    display: table;
+    text-align: center;
+    width: 100%;
+  }
+  .equation {
+    vertical-align: middle;
+  }
+  .equation-label {
+    display: table-cell;
+    text-align: right;
+    vertical-align: middle;
+  }
+  .inlinetask {
+    padding: 10px;
+    border: 2px solid gray;
+    margin: 10px;
+    background: #ffffcc;
+  }
+  #org-div-home-and-up
+   { text-align: right; font-size: 70%; white-space: nowrap; }
+  textarea { overflow-x: auto; }
+  .linenr { font-size: smaller }
+  .code-highlighted { background-color: #ffff00; }
+  .org-info-js_info-navigation { border-style: none; }
+  #org-info-js_console-label
+    { font-size: 10px; font-weight: bold; white-space: nowrap; }
+  .org-info-js_search-highlight
+    { background-color: #ffff00; color: #000000; font-weight: bold; }
+  .org-svg { width: 90%; }
+  /*]]>*/-->
+</style>
+<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin><link href="https://fonts.googleapis.com/css2?family=Noto+Sans+SC&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="/theme/normalize.css"/>
+<link rel="stylesheet" href="/theme/site.css"/>
+<script defer src='https://static.cloudflareinsights.com/beacon.min.js' data-cf-beacon='{"token": "d5b841b503ed4d1b8fad459b84d1cc2f"}'></script>
+<script defer src="/theme/link.js"></script>
+</head>
+<body>
+<div id="content">
+<header>
+<h1 class="title">TK 教主的话</h1>
+</header><p>
+1，
+</p>
+
+<p>
+理想主义者免不了都有这样一个困扰：世界是有可能“君子死，冠不免”的，还是说“仓廪实而知礼节”甚至“穷生奸计，富长良心”是唯一铁律？
+</p>
+
+<p>
+前几年《三体》刚从科幻这个小圈子进入大众视野中的时候，我看到不少批判黑暗森林法则的文章。一般来说，批判一个东西，是要给出证据的，起码要指出具体哪儿有问题。但在那些批判文章里，我没有看到证据，甚至也没有看到论证过程。那些文章几乎就是作者的自言自语：这不对，这不可能是对的，这怎么可能是对的。
+</p>
+
+<p>
+如果你看到过哪怕不那么严密地论证出黑暗森林法则的错误，或指出其不合理之处的文章，请发在评论里。
+</p>
+
+<p>
+2，
+</p>
+
+<p>
+<a href="https://www.sohu.com/a/409682454_119705">"杭州失踪女子被杀案"曾经有过“芜湖版”</a>
+很多人看了这里面的“鉴于本案系家庭内部犯罪，社会危害程度有别于发生在社会上的暴力杀人案件，在判处死刑同时，可宣告缓期两年执行”，非常气愤和费解。实际上这个判决思路并不是当事法院的发明。
+</p>
+
+<p>
+最高人民法院 1999 年印发的《全国法院维护农村稳定刑事审判工作座谈会纪要》里就有："对于因婚姻家庭、邻里纠纷等民间矛盾激化引发的故意杀人犯罪，适用死刑一定十分慎重，应当与发生在社会上的严重危害社会治安其他故意杀人犯罪案件有所区别。"
+</p>
+
+<p>
+然后 2010 年印发的《关于贯彻宽严相济刑事政策的若干意见》里再次强调："对于因恋爱、婚姻、家庭、邻里纠纷等民间矛盾激化引发的犯罪，因劳动纠纷、管理失当等原因引发、犯罪动机不属恶劣的犯罪，因被害方过错或者基于义愤引发的或者具有防卫因素的突发性犯罪，应酌情从宽处罚。"
+</p>
+
+<p>
+中国司法实践中很有特色的一点是非常看重“影响”。这一点，你站在老百姓的角度是理解不了的。
+</p>
+
+<p>
+3，
+</p>
+
+<p>
+经济学理论是作者基于自身所处时代的科技水平提出来的。马尔萨斯想不到合成氨和农业机械，马克思想不到自动化和人工智能。所以，对待过去的理论，需要根据科技发展情况加以修正-&#x2013;&#x2014;"修正主义"才是科学的态度，原教旨主义要不得。
+</p>
+
+<p>
+4，
+</p>
+
+<p>
+校友关系其实就是新一代的同乡关系。都是人类社会目前这个发展阶段的必然产物。
+</p>
+
+<p>
+所以，基于同乡、同族关系的利益同盟，并不比基于校友关系的利益同盟更庸俗更低级。
+</p>
+
+<p>
+5，
+</p>
+
+<p>
+为什么说很多讨论必须基于某个价值观呢？
+</p>
+
+<p>
+来，先看一下这张个截图。是不是觉得很荒谬很不可理喻？因为你的价值观是“版权”这个事情具有理所当然的正确性。基于你这个价值观，自然会认为截图中的观点荒谬不可理喻。然而如果站在对方的价值观，荒谬不可理喻的则是你，你这种人“害了广大的盗版玩家”。
+</p>
+
+
+<figure id="orga183dca">
+<img src="../../images/tombkeeper-de-words.png" alt="tombkeeper-de-words.png">
+
+<figcaption><span class="figure-number">Figure 1: </span>tombkeeper-de-words</figcaption>
+</figure>
+
+<p>
+那么版权难道不具有理所当然的正确性？反版权也能是一种价值观？
+</p>
+
+<p>
+你看，当一种价值观在你头脑里根深蒂固之后，你就会视之为理所当然，以至于不仅无法认同其它价值观，甚至连接受其它价值观的存在都很难。
+</p>
+
+<p>
+持反版权价值观的海盗党，是瑞典的第三大政党。他们在 2009
+年欧洲议会选举中在瑞典获得了 7.1%
+的选票，拿到了欧洲议会中的两个席位。他们对反版权这个价值观的阐述，可比这张截图理由充分逻辑严密的多。
+</p>
+
+<p>
+举这个版权的例子，不是要说版权的问题，是告诉你，很多讨论，必须基于某个价值观，要假设某个价值观是正确的，不能搞解构一切那套。否则讨论本身也毫无意义。
+</p>
+
+<p>
+6，
+</p>
+
+<p>
+有人认为要社会和谐人人满意，关键还是要实现共产主义。等实现了共产主义，大家都是同一个阶级，就不会有这么多怨气了。
+</p>
+
+<p>
+告诉你一个秘密：我们其实已经实现共产主义了。
+</p>
+
+<p>
+半个世纪前，老大哥那边认为共产主义是能天天吃“古拉希”，就是土豆炖牛肉。咱们这边认为共产主义就是“楼上楼下电灯电话”"点灯不用油耕地不用牛"。
+</p>
+
+<p>
+你看，是不是实现了？
+</p>
+
+<p>
+凡是涉及人性的问题，永远回避不了一个词：欲壑难填。
+</p>
+
+<p>
+即便普及了哆啦 A 梦，想要什么随时变，也一样不行的。你能普及哆啦 A
+梦，能普及静香吗？把静香分配给胖虎，那静香的共产主义在哪儿？
+</p>
+
+<p>
+智人是由自然选择和性选择两个筛子筛出来的。我们的基因里刻着追求最好的物质，追求最好的异性，追求最好的一切。最好，是比较出来的。有最好，就一定有最不好。
+</p>
+
+<p>
+所以，无论物质多丰富也不可能让大家都满意。
+</p>
+
+<p>
+所以，永远“内卷”。
+</p>
+
+<p>
+7，
+</p>
+
+<p>
+合作最根本基础是利益一致。考虑合作首先要想双方利益是否一致。利益不一致甚至矛盾的情况下谈合作，这种情况有个成语，叫与虎谋皮。
+</p>
+
+<p>
+8，
+</p>
+
+<p>
+只要接受了“内卷”这个概念，一切皆可内卷。威尔·史密斯演的《当幸福来敲门》，如果今天上映，显然是一部“内卷大片”。
+</p>
+
+<p>
+主人公最后的“幸福”，是因为在六个月的实习后得到了一份工作。这 6 个月的实习不光是无薪实习，而且一共有 20 个实习生，最后只有一个能留下。工贼·史密斯付出了常人难以企及的努力后留了下来，那另外 19 个人呢？
+</p>
+
+<p>
+你看，是不是很容易把这部电影解读成资本家用来催眠工人阶级，培养工贼的“内卷大片”？
+</p>
+
+<p>
+9，
+</p>
+
+<p>
+刘慈欣《球状闪电》里有一段非常有价值的话：
+</p>
+
+<p>
+"其实，儿子，过一个美妙的人生并不难，听爸爸教你：你选一个公认的世界难题，最好是只用一张纸和一只铅笔的数学难题，比如哥德巴赫猜想或费尔马大定理什么的，或连纸笔都不要的纯自然哲学难题，比如宇宙的本源之类，投入全部身心钻研，只问耕耘不问收获，不知不觉的专注中，一辈子也就过去了。人们常说的寄托，也就是这么回事。或是相反，把挣钱作为惟一的目标，所有的时间都想着怎么挣，也不问挣来干什么用，到死的时候像葛朗台一样抱者一堆金币说：啊，真暖和啊&#x2026;&#x2026;所以，美妙人生的关键在于你能迷上什么东西。比如我-&#x2013;&#x2014;"爸爸指指房间里到处摆放着的那些小幅水彩画，它们的技法都很传统，画得中规中矩，从中看不出什么灵气来。这些画映着窗外的电光，像一群闪动的屏幕，"我迷上了画画，虽然知道自己成不了梵高。"
+</p>
+
+<p>
+"是啊，理想主义者和玩世不恭的人都觉得对方很可怜，可他们实际都很幸运"。妈妈若有所思地说。
+</p>
+
+<p>
+10，
+</p>
+
+<p>
+你问一个白左要不要往烟盒上印黑掉的肺烂掉的脚，他肯定说 Yes
+Yes。你问一个白左要不要禁止在广告里出现吸烟的画面，他肯定说 Yes
+Yes。你问一个白左要不要给含糖饮料加税，他肯定说 Yes Yes。
+</p>
+
+<p>
+而且能说的头头是道，各种理论各种证据。
+</p>
+
+<p>
+但你问他在和个人形象有关的广告里用一个 BMI
+严重超标的人来竖成积极向上的正面典型合适不合适，他就觉得合适了。
+</p>
+
+<p>
+而且能说的头头是道，各种理论各种证据。
+</p>
+
+<p>
+11，
+</p>
+
+<p>
+白左思维的一个特点是回避人的主观能动性，弱化人作为主体的责任。
+</p>
+
+<p>
+比如一些过去认为是道德层面的问题，他们喜欢定义成疾病。搞个 MRI
+照一照，只要找到某类人大脑某个区域有变化，就成了-&#x2013;&#x2014;哇，有器质性改变，是病，一定是病！
+</p>
+
+<p>
+定义成病，就好办了。不光没错，还值得同情，可以上电视节目痛陈患病前后的心路历程。有些虽然没定义成病，也并不妨碍他们拿类似这种
+MRI 结果当作怨天怨地怨概率总之相关人自己没责任的有力证据。
+</p>
+
+<p>
+大脑也是由物质组成的，思维上的不同当然会体现为物理层面的不同。如果用 MRI
+看，可以发现音乐家的大脑和普通人不一样，职业运动员的大脑也和普通人不一样。所以
+MRI
+看到的那些不同得分清楚到底是原因还是结果。如果真是先天异常肿瘤压迫之类的，说是病，那还合理。但不能不分因果就扑上去关怀。
+</p>
+
+<p>
+12，
+</p>
+
+<p>
+"多元化"是接受多样性的存在。你硅基，我碳基。我到你家去你请我吃饭，你到我家来我请你充电。你芯片击穿了，我也不歧视你。你想换芯片，我帮你。你不想换，也随意。
+</p>
+
+<p>
+但击穿的芯片就是击穿的芯片，不是多元化的下一代处理器。
+</p>
+
+<p>
+13，
+</p>
+
+<p>
+电子时代之前，假设每个歌手可以给 200 个人提供娱乐服务。那么，10000
+人的城市，就需要 50 个歌手。好听不好听都得听，有个人唱给你听就不错了。
+</p>
+
+<p>
+现在，一个歌手所能服务的人数几乎是无限的。而人们一定会选择最好的。所以，即便考虑不同风格偏好，在每个风格分支上，也一样有极为明显的头部效应。
+</p>
+
+<p>
+这种范式改变对大部分唱得没那么好听的歌手当然很不理想。但对听歌的人来说当然非常理想。所以技术进步到底好不好，也要看你站在什么立场上。
+</p>
+
+<p>
+互联网行业几乎都是这种范式，绝大部分人去选择使用少数最好的产品。而为了做出最好的产品，只需要少数企业招聘少数最好的人。
+</p>
+
+<p>
+想明白这一点，可以想明白很多问题。比如为什么毕业生求职难和企业招人难会同时存在。
+</p>
+
+<p>
+14，
+</p>
+
+<p>
+判断一个人的话有没有参考价值，有个重要指标，就是看其观点是否始终可被预测。
+</p>
+
+<p>
+有些人，对中国的好事，一定要找找里面的坏事。所以其观点始终可被准确预测。
+</p>
+
+<p>
+有些人，对中国的坏事，一定要找找里面的好事。所以其观点始终可被准确预测。
+</p>
+
+<p>
+有些人，对任何事的观点都是消极的。所以其观点始终可被准确预测。
+</p>
+
+<p>
+有些人，对任何事的观点都“凑巧”是有利于维稳的。所以其观点始终可被准确预测。
+</p>
+
+<p>
+这些人没有情感，没有逻辑，只有价值观。这些人就像运行在网页里一段简单的小程序，你的大脑只要花零点五秒就能仿真出他们的运行结果，可以准确预测到他们会说什么。如果去思考这些人的话，就是侮辱你自己的智慧。
+</p>
+
+<hr>
+
+<p>
+*参考资料*：
+</p>
+
+<ol class="org-ol">
+<li><a href="https://www.notion.so/Tombkeeper-Renew-71918259a4de4c97b6fbdc2ed2e81fd2">https://www.notion.so/Tombkeeper-Renew-71918259a4de4c97b6fbdc2ed2e81fd2</a></li>
+<li><a href="https://weibo.com/tombkeeper">https://weibo.com/tombkeeper</a></li>
+</ol>
+</div>
+</body>
+</html>

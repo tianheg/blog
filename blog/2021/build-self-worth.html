@@ -1,0 +1,314 @@
+<!DOCTYPE html>
+<html lang="zh">
+<head>
+<!-- 2022-01-18 Tue 17:01 -->
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>建构自我价值</title>
+<meta name="generator" content="Org mode">
+<style type="text/css">
+ <!--/*--><![CDATA[/*><!--*/
+  .title  { text-align: center;
+             margin-bottom: .2em; }
+  .subtitle { text-align: center;
+              font-size: medium;
+              font-weight: bold;
+              margin-top:0; }
+  .todo   { font-family: monospace; color: red; }
+  .done   { font-family: monospace; color: green; }
+  .priority { font-family: monospace; color: orange; }
+  .tag    { background-color: #eee; font-family: monospace;
+            padding: 2px; font-size: 80%; font-weight: normal; }
+  .timestamp { color: #bebebe; }
+  .timestamp-kwd { color: #5f9ea0; }
+  .org-right  { margin-left: auto; margin-right: 0px;  text-align: right; }
+  .org-left   { margin-left: 0px;  margin-right: auto; text-align: left; }
+  .org-center { margin-left: auto; margin-right: auto; text-align: center; }
+  .underline { text-decoration: underline; }
+  #postamble p, #preamble p { font-size: 90%; margin: .2em; }
+  p.verse { margin-left: 3%; }
+  pre {
+    border: 1px solid #ccc;
+    box-shadow: 3px 3px 3px #eee;
+    padding: 8pt;
+    font-family: monospace;
+    overflow: auto;
+    margin: 1.2em;
+  }
+  pre.src {
+    position: relative;
+    overflow: auto;
+    padding-top: 1.2em;
+  }
+  pre.src:before {
+    display: none;
+    position: absolute;
+    background-color: white;
+    top: -10px;
+    right: 10px;
+    padding: 3px;
+    border: 1px solid black;
+  }
+  pre.src:hover:before { display: inline; margin-top: 14px;}
+  /* Languages per Org manual */
+  pre.src-asymptote:before { content: 'Asymptote'; }
+  pre.src-awk:before { content: 'Awk'; }
+  pre.src-C:before { content: 'C'; }
+  /* pre.src-C++ doesn't work in CSS */
+  pre.src-clojure:before { content: 'Clojure'; }
+  pre.src-css:before { content: 'CSS'; }
+  pre.src-D:before { content: 'D'; }
+  pre.src-ditaa:before { content: 'ditaa'; }
+  pre.src-dot:before { content: 'Graphviz'; }
+  pre.src-calc:before { content: 'Emacs Calc'; }
+  pre.src-emacs-lisp:before { content: 'Emacs Lisp'; }
+  pre.src-fortran:before { content: 'Fortran'; }
+  pre.src-gnuplot:before { content: 'gnuplot'; }
+  pre.src-haskell:before { content: 'Haskell'; }
+  pre.src-hledger:before { content: 'hledger'; }
+  pre.src-java:before { content: 'Java'; }
+  pre.src-js:before { content: 'Javascript'; }
+  pre.src-latex:before { content: 'LaTeX'; }
+  pre.src-ledger:before { content: 'Ledger'; }
+  pre.src-lisp:before { content: 'Lisp'; }
+  pre.src-lilypond:before { content: 'Lilypond'; }
+  pre.src-lua:before { content: 'Lua'; }
+  pre.src-matlab:before { content: 'MATLAB'; }
+  pre.src-mscgen:before { content: 'Mscgen'; }
+  pre.src-ocaml:before { content: 'Objective Caml'; }
+  pre.src-octave:before { content: 'Octave'; }
+  pre.src-org:before { content: 'Org mode'; }
+  pre.src-oz:before { content: 'OZ'; }
+  pre.src-plantuml:before { content: 'Plantuml'; }
+  pre.src-processing:before { content: 'Processing.js'; }
+  pre.src-python:before { content: 'Python'; }
+  pre.src-R:before { content: 'R'; }
+  pre.src-ruby:before { content: 'Ruby'; }
+  pre.src-sass:before { content: 'Sass'; }
+  pre.src-scheme:before { content: 'Scheme'; }
+  pre.src-screen:before { content: 'Gnu Screen'; }
+  pre.src-sed:before { content: 'Sed'; }
+  pre.src-sh:before { content: 'shell'; }
+  pre.src-sql:before { content: 'SQL'; }
+  pre.src-sqlite:before { content: 'SQLite'; }
+  /* additional languages in org.el's org-babel-load-languages alist */
+  pre.src-forth:before { content: 'Forth'; }
+  pre.src-io:before { content: 'IO'; }
+  pre.src-J:before { content: 'J'; }
+  pre.src-makefile:before { content: 'Makefile'; }
+  pre.src-maxima:before { content: 'Maxima'; }
+  pre.src-perl:before { content: 'Perl'; }
+  pre.src-picolisp:before { content: 'Pico Lisp'; }
+  pre.src-scala:before { content: 'Scala'; }
+  pre.src-shell:before { content: 'Shell Script'; }
+  pre.src-ebnf2ps:before { content: 'ebfn2ps'; }
+  /* additional language identifiers per "defun org-babel-execute"
+       in ob-*.el */
+  pre.src-cpp:before  { content: 'C++'; }
+  pre.src-abc:before  { content: 'ABC'; }
+  pre.src-coq:before  { content: 'Coq'; }
+  pre.src-groovy:before  { content: 'Groovy'; }
+  /* additional language identifiers from org-babel-shell-names in
+     ob-shell.el: ob-shell is the only babel language using a lambda to put
+     the execution function name together. */
+  pre.src-bash:before  { content: 'bash'; }
+  pre.src-csh:before  { content: 'csh'; }
+  pre.src-ash:before  { content: 'ash'; }
+  pre.src-dash:before  { content: 'dash'; }
+  pre.src-ksh:before  { content: 'ksh'; }
+  pre.src-mksh:before  { content: 'mksh'; }
+  pre.src-posh:before  { content: 'posh'; }
+  /* Additional Emacs modes also supported by the LaTeX listings package */
+  pre.src-ada:before { content: 'Ada'; }
+  pre.src-asm:before { content: 'Assembler'; }
+  pre.src-caml:before { content: 'Caml'; }
+  pre.src-delphi:before { content: 'Delphi'; }
+  pre.src-html:before { content: 'HTML'; }
+  pre.src-idl:before { content: 'IDL'; }
+  pre.src-mercury:before { content: 'Mercury'; }
+  pre.src-metapost:before { content: 'MetaPost'; }
+  pre.src-modula-2:before { content: 'Modula-2'; }
+  pre.src-pascal:before { content: 'Pascal'; }
+  pre.src-ps:before { content: 'PostScript'; }
+  pre.src-prolog:before { content: 'Prolog'; }
+  pre.src-simula:before { content: 'Simula'; }
+  pre.src-tcl:before { content: 'tcl'; }
+  pre.src-tex:before { content: 'TeX'; }
+  pre.src-plain-tex:before { content: 'Plain TeX'; }
+  pre.src-verilog:before { content: 'Verilog'; }
+  pre.src-vhdl:before { content: 'VHDL'; }
+  pre.src-xml:before { content: 'XML'; }
+  pre.src-nxml:before { content: 'XML'; }
+  /* add a generic configuration mode; LaTeX export needs an additional
+     (add-to-list 'org-latex-listings-langs '(conf " ")) in .emacs */
+  pre.src-conf:before { content: 'Configuration File'; }
+
+  table { border-collapse:collapse; }
+  caption.t-above { caption-side: top; }
+  caption.t-bottom { caption-side: bottom; }
+  td, th { vertical-align:top;  }
+  th.org-right  { text-align: center;  }
+  th.org-left   { text-align: center;   }
+  th.org-center { text-align: center; }
+  td.org-right  { text-align: right;  }
+  td.org-left   { text-align: left;   }
+  td.org-center { text-align: center; }
+  dt { font-weight: bold; }
+  .footpara { display: inline; }
+  .footdef  { margin-bottom: 1em; }
+  .figure { padding: 1em; }
+  .figure p { text-align: center; }
+  .equation-container {
+    display: table;
+    text-align: center;
+    width: 100%;
+  }
+  .equation {
+    vertical-align: middle;
+  }
+  .equation-label {
+    display: table-cell;
+    text-align: right;
+    vertical-align: middle;
+  }
+  .inlinetask {
+    padding: 10px;
+    border: 2px solid gray;
+    margin: 10px;
+    background: #ffffcc;
+  }
+  #org-div-home-and-up
+   { text-align: right; font-size: 70%; white-space: nowrap; }
+  textarea { overflow-x: auto; }
+  .linenr { font-size: smaller }
+  .code-highlighted { background-color: #ffff00; }
+  .org-info-js_info-navigation { border-style: none; }
+  #org-info-js_console-label
+    { font-size: 10px; font-weight: bold; white-space: nowrap; }
+  .org-info-js_search-highlight
+    { background-color: #ffff00; color: #000000; font-weight: bold; }
+  .org-svg { width: 90%; }
+  /*]]>*/-->
+</style>
+<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin><link href="https://fonts.googleapis.com/css2?family=Noto+Sans+SC&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="/theme/normalize.css"/>
+<link rel="stylesheet" href="/theme/site.css"/>
+<script defer src='https://static.cloudflareinsights.com/beacon.min.js' data-cf-beacon='{"token": "d5b841b503ed4d1b8fad459b84d1cc2f"}'></script>
+<script defer src="/theme/link.js"></script>
+</head>
+<body>
+<div id="content">
+<header>
+<h1 class="title">建构自我价值</h1>
+</header><p>
+<a href="https://zh.wikihow.com/%E5%BB%BA%E6%9E%84%E8%87%AA%E6%88%91%E4%BB%B7%E5%80%BC">建构自我价值 - Wikihow</a>
+</p>
+
+<p>
+在听过播客<a href="https://www.xiaoyuzhoufm.com/episode/5fca27e0dee9c1e16d0eb010">Steve 说 212 期 - 杜素娟 - 文学是人生的后悔药</a>后，我突然意识到，自己在自我价值的认识上是存在偏差的。我曾经将自己的价值建立在他人的认可之上，但是只有他人的认可是不够的，一旦当外界评价转向消极，我就会自我否定，放大自己的弱点，对自己的优点全然不顾。
+</p>
+
+<p>
+我在网络中寻找解决办法，于是就有了文章开头的链接。
+</p>
+
+<p>
+婴儿为什么天生就能知道自己的自我价值？随着生活继续，他人的评论、期望和态度都会改变这种天然的自我价值感。自我价值使我们相信能够凭借自己的才能，在社会中作出贡献，能够过上充实的生活。因此，重建自我价值是一个自然、必要且健康的过程。
+</p>
+
+<div id="outline-container-org955b84b" class="outline-2">
+<h2 id="org955b84b">方法 1：保持头脑清醒</h2>
+<div class="outline-text-2" id="text-org955b84b">
+</div>
+<div id="outline-container-orgfa4540e" class="outline-3">
+<h3 id="orgfa4540e">Understand the power of my attitude toward myself</h3>
+<div class="outline-text-3" id="text-orgfa4540e">
+<p>
+我如何看待、谈论和呈现自己，最终将构成现实中的我。如果碰巧我让自己失望，贬低自己的价值，在面对他人时贬低自己的才能，那么我会变得自卑、缺少自尊，几乎没有存在感。谦恭和自我否定之间是有区别的。<sup><a id="fnr.1" class="footref" href="#fn.1">1</a></sup>
+</p>
+
+<p>
+另一方面，如果我夸大自己的才能和才艺，我会变得自大和傲慢。这并不是说我高估了自我价值，而是经由不安全感来欺骗自己。两者之间有一条中庸之道，我会认识到并且很高兴自己是一个有价值的人，与其他人平等，我的才能和思想独特而有价值。如果我长期低估自己的价值，实现这一信念会变得困难，但是人「总是」有可能改变自己的想法，要学会珍惜自己。<sup><a id="fnr.2" class="footref" href="#fn.2">2</a></sup>
+</p>
+</div>
+</div>
+
+<div id="outline-container-org3a70cac" class="outline-3">
+<h3 id="org3a70cac">Learn to overcome a fear of self-love</h3>
+<div class="outline-text-3" id="text-org3a70cac">
+<p>
+学会克服「爱自己」的恐惧。自爱与「自恋和利己」不同。害怕别人评价自己消极，甚至不敢用一个中性词形容自己。
+</p>
+
+<p>
+<b>让我成为自己最好的朋友是一种健康的自爱。</b> 自爱是用关怀、宽容、慷慨和同情心来对待「我自己」，就像对待一个特别的朋友一样。
+</p>
+
+<p>
+<b>不要执着于他人如何看待我。</b> 他人对我对待看法只会让我产生消极心理。只有我才能给自己所需的自尊。
+</p>
+</div>
+</div>
+
+<div id="outline-container-orgabaf081" class="outline-3">
+<h3 id="orgabaf081">Trust my own feelings</h3>
+<div class="outline-text-3" id="text-orgabaf081">
+<p>
+我要相信自己的感受，这样便能分辨不公，从容应对。
+</p>
+
+<p>
+我们让其他人做决定的时候，自我价值会下降。这种做法最初看似最简单，我不用进行艰难的选择；但是在我们为自己作出决定的时候，自我价值会增长。如果不这样做，就总有人为我做决定。而一旦那些人从我的生活消失，我就会孤立无援、优柔寡断。
+</p>
+</div>
+</div>
+
+<div id="outline-container-org76c3433" class="outline-3">
+<h3 id="org76c3433">Analyze myself</h3>
+<div class="outline-text-3" id="text-org76c3433">
+<p>
+自我分析时可以问的问题：
+</p>
+
+<ul class="org-ul">
+<li>我有什么经历？这种经历如何促进了我的成长？</li>
+<li>我有什么才能？列出至少五个。</li>
+<li>我有什么技艺？记住，才能是天生的，而技艺需要磨练。</li>
+<li>我有什么优势？不要总盯着自己的弱点不放，要懂得过犹不及。现在关注自己的优点，考虑如何充分利用它们。</li>
+<li>我这一生想怎么过？我现在是这么过的吗？如果不是，为什么？</li>
+<li>我对自己的健康满意吗？如果不满意，为什么？我能做些什么来保持健康，不让自己生病？</li>
+<li>什么能让我感到满足？我是在努力实现它，还是在忙于实现他人的愿望？</li>
+<li>什么对我很重要？</li>
+</ul>
+</div>
+</div>
+
+<div id="outline-container-org1616c2a" class="outline-3">
+<h3 id="org1616c2a">Stop making your self-worth conditional on other people</h3>
+<div class="outline-text-3" id="text-org1616c2a">
+<p>
+不要再让别人决定我的自我价值。如果我总是在试图达到别人的期望，就很难找到自己的自我价值。
+</p>
+
+<ul class="org-ul">
+<li></li>
+</ul>
+</div>
+</div>
+</div>
+<div id="footnotes">
+<h2 class="footnotes">Footnotes: </h2>
+<div id="text-footnotes">
+
+<div class="footdef"><sup><a id="fn.1" class="footnum" href="#fnr.1">1</a></sup> <div class="footpara"><p class="footpara">
+<a href="https://opentextbc.ca/socialpsychology/chapter/the-cognitive-self-the-self-concept/">https://opentextbc.ca/socialpsychology/chapter/the-cognitive-self-the-self-concept/</a>
+</p></div></div>
+
+<div class="footdef"><sup><a id="fn.2" class="footnum" href="#fnr.2">2</a></sup> <div class="footpara"><p class="footpara">
+<a href="https://blogs.scientificamerican.com/scicurious-brain/the-superiority-illusion-where-everyone-is-above-average/">https://blogs.scientificamerican.com/scicurious-brain/the-superiority-illusion-where-everyone-is-above-average/</a></p></div></div>
+
+
+</div>
+</div></div>
+</body>
+</html>
