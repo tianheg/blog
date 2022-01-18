@@ -1,0 +1,383 @@
+<!DOCTYPE html>
+<html lang="zh">
+<head>
+<!-- 2022-01-18 Tue 17:01 -->
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>能够识别表象和本质，找工作与学习效率的联系</title>
+<meta name="generator" content="Org mode">
+<style type="text/css">
+ <!--/*--><![CDATA[/*><!--*/
+  .title  { text-align: center;
+             margin-bottom: .2em; }
+  .subtitle { text-align: center;
+              font-size: medium;
+              font-weight: bold;
+              margin-top:0; }
+  .todo   { font-family: monospace; color: red; }
+  .done   { font-family: monospace; color: green; }
+  .priority { font-family: monospace; color: orange; }
+  .tag    { background-color: #eee; font-family: monospace;
+            padding: 2px; font-size: 80%; font-weight: normal; }
+  .timestamp { color: #bebebe; }
+  .timestamp-kwd { color: #5f9ea0; }
+  .org-right  { margin-left: auto; margin-right: 0px;  text-align: right; }
+  .org-left   { margin-left: 0px;  margin-right: auto; text-align: left; }
+  .org-center { margin-left: auto; margin-right: auto; text-align: center; }
+  .underline { text-decoration: underline; }
+  #postamble p, #preamble p { font-size: 90%; margin: .2em; }
+  p.verse { margin-left: 3%; }
+  pre {
+    border: 1px solid #ccc;
+    box-shadow: 3px 3px 3px #eee;
+    padding: 8pt;
+    font-family: monospace;
+    overflow: auto;
+    margin: 1.2em;
+  }
+  pre.src {
+    position: relative;
+    overflow: auto;
+    padding-top: 1.2em;
+  }
+  pre.src:before {
+    display: none;
+    position: absolute;
+    background-color: white;
+    top: -10px;
+    right: 10px;
+    padding: 3px;
+    border: 1px solid black;
+  }
+  pre.src:hover:before { display: inline; margin-top: 14px;}
+  /* Languages per Org manual */
+  pre.src-asymptote:before { content: 'Asymptote'; }
+  pre.src-awk:before { content: 'Awk'; }
+  pre.src-C:before { content: 'C'; }
+  /* pre.src-C++ doesn't work in CSS */
+  pre.src-clojure:before { content: 'Clojure'; }
+  pre.src-css:before { content: 'CSS'; }
+  pre.src-D:before { content: 'D'; }
+  pre.src-ditaa:before { content: 'ditaa'; }
+  pre.src-dot:before { content: 'Graphviz'; }
+  pre.src-calc:before { content: 'Emacs Calc'; }
+  pre.src-emacs-lisp:before { content: 'Emacs Lisp'; }
+  pre.src-fortran:before { content: 'Fortran'; }
+  pre.src-gnuplot:before { content: 'gnuplot'; }
+  pre.src-haskell:before { content: 'Haskell'; }
+  pre.src-hledger:before { content: 'hledger'; }
+  pre.src-java:before { content: 'Java'; }
+  pre.src-js:before { content: 'Javascript'; }
+  pre.src-latex:before { content: 'LaTeX'; }
+  pre.src-ledger:before { content: 'Ledger'; }
+  pre.src-lisp:before { content: 'Lisp'; }
+  pre.src-lilypond:before { content: 'Lilypond'; }
+  pre.src-lua:before { content: 'Lua'; }
+  pre.src-matlab:before { content: 'MATLAB'; }
+  pre.src-mscgen:before { content: 'Mscgen'; }
+  pre.src-ocaml:before { content: 'Objective Caml'; }
+  pre.src-octave:before { content: 'Octave'; }
+  pre.src-org:before { content: 'Org mode'; }
+  pre.src-oz:before { content: 'OZ'; }
+  pre.src-plantuml:before { content: 'Plantuml'; }
+  pre.src-processing:before { content: 'Processing.js'; }
+  pre.src-python:before { content: 'Python'; }
+  pre.src-R:before { content: 'R'; }
+  pre.src-ruby:before { content: 'Ruby'; }
+  pre.src-sass:before { content: 'Sass'; }
+  pre.src-scheme:before { content: 'Scheme'; }
+  pre.src-screen:before { content: 'Gnu Screen'; }
+  pre.src-sed:before { content: 'Sed'; }
+  pre.src-sh:before { content: 'shell'; }
+  pre.src-sql:before { content: 'SQL'; }
+  pre.src-sqlite:before { content: 'SQLite'; }
+  /* additional languages in org.el's org-babel-load-languages alist */
+  pre.src-forth:before { content: 'Forth'; }
+  pre.src-io:before { content: 'IO'; }
+  pre.src-J:before { content: 'J'; }
+  pre.src-makefile:before { content: 'Makefile'; }
+  pre.src-maxima:before { content: 'Maxima'; }
+  pre.src-perl:before { content: 'Perl'; }
+  pre.src-picolisp:before { content: 'Pico Lisp'; }
+  pre.src-scala:before { content: 'Scala'; }
+  pre.src-shell:before { content: 'Shell Script'; }
+  pre.src-ebnf2ps:before { content: 'ebfn2ps'; }
+  /* additional language identifiers per "defun org-babel-execute"
+       in ob-*.el */
+  pre.src-cpp:before  { content: 'C++'; }
+  pre.src-abc:before  { content: 'ABC'; }
+  pre.src-coq:before  { content: 'Coq'; }
+  pre.src-groovy:before  { content: 'Groovy'; }
+  /* additional language identifiers from org-babel-shell-names in
+     ob-shell.el: ob-shell is the only babel language using a lambda to put
+     the execution function name together. */
+  pre.src-bash:before  { content: 'bash'; }
+  pre.src-csh:before  { content: 'csh'; }
+  pre.src-ash:before  { content: 'ash'; }
+  pre.src-dash:before  { content: 'dash'; }
+  pre.src-ksh:before  { content: 'ksh'; }
+  pre.src-mksh:before  { content: 'mksh'; }
+  pre.src-posh:before  { content: 'posh'; }
+  /* Additional Emacs modes also supported by the LaTeX listings package */
+  pre.src-ada:before { content: 'Ada'; }
+  pre.src-asm:before { content: 'Assembler'; }
+  pre.src-caml:before { content: 'Caml'; }
+  pre.src-delphi:before { content: 'Delphi'; }
+  pre.src-html:before { content: 'HTML'; }
+  pre.src-idl:before { content: 'IDL'; }
+  pre.src-mercury:before { content: 'Mercury'; }
+  pre.src-metapost:before { content: 'MetaPost'; }
+  pre.src-modula-2:before { content: 'Modula-2'; }
+  pre.src-pascal:before { content: 'Pascal'; }
+  pre.src-ps:before { content: 'PostScript'; }
+  pre.src-prolog:before { content: 'Prolog'; }
+  pre.src-simula:before { content: 'Simula'; }
+  pre.src-tcl:before { content: 'tcl'; }
+  pre.src-tex:before { content: 'TeX'; }
+  pre.src-plain-tex:before { content: 'Plain TeX'; }
+  pre.src-verilog:before { content: 'Verilog'; }
+  pre.src-vhdl:before { content: 'VHDL'; }
+  pre.src-xml:before { content: 'XML'; }
+  pre.src-nxml:before { content: 'XML'; }
+  /* add a generic configuration mode; LaTeX export needs an additional
+     (add-to-list 'org-latex-listings-langs '(conf " ")) in .emacs */
+  pre.src-conf:before { content: 'Configuration File'; }
+
+  table { border-collapse:collapse; }
+  caption.t-above { caption-side: top; }
+  caption.t-bottom { caption-side: bottom; }
+  td, th { vertical-align:top;  }
+  th.org-right  { text-align: center;  }
+  th.org-left   { text-align: center;   }
+  th.org-center { text-align: center; }
+  td.org-right  { text-align: right;  }
+  td.org-left   { text-align: left;   }
+  td.org-center { text-align: center; }
+  dt { font-weight: bold; }
+  .footpara { display: inline; }
+  .footdef  { margin-bottom: 1em; }
+  .figure { padding: 1em; }
+  .figure p { text-align: center; }
+  .equation-container {
+    display: table;
+    text-align: center;
+    width: 100%;
+  }
+  .equation {
+    vertical-align: middle;
+  }
+  .equation-label {
+    display: table-cell;
+    text-align: right;
+    vertical-align: middle;
+  }
+  .inlinetask {
+    padding: 10px;
+    border: 2px solid gray;
+    margin: 10px;
+    background: #ffffcc;
+  }
+  #org-div-home-and-up
+   { text-align: right; font-size: 70%; white-space: nowrap; }
+  textarea { overflow-x: auto; }
+  .linenr { font-size: smaller }
+  .code-highlighted { background-color: #ffff00; }
+  .org-info-js_info-navigation { border-style: none; }
+  #org-info-js_console-label
+    { font-size: 10px; font-weight: bold; white-space: nowrap; }
+  .org-info-js_search-highlight
+    { background-color: #ffff00; color: #000000; font-weight: bold; }
+  .org-svg { width: 90%; }
+  /*]]>*/-->
+</style>
+<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin><link href="https://fonts.googleapis.com/css2?family=Noto+Sans+SC&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="/theme/normalize.css"/>
+<link rel="stylesheet" href="/theme/site.css"/>
+<script defer src='https://static.cloudflareinsights.com/beacon.min.js' data-cf-beacon='{"token": "d5b841b503ed4d1b8fad459b84d1cc2f"}'></script>
+<script defer src="/theme/link.js"></script>
+</head>
+<body>
+<div id="content">
+<header>
+<h1 class="title">能够识别表象和本质，找工作与学习效率的联系</h1>
+</header><p>
+我直接和他说，你现在不愁工作了，可以规划自己的职业生涯了，那么问题是你想走哪条路，对什么方向有兴趣，或是自己的长项是什么？结果，他说他也不知道，说就是想多看看多经历一些事情，也不知道自己最终会对什么事有兴趣，也不知道哪个方向更适合自己，可能再来个 5 年就能明确了。不过，他明确表示对前端技术不感兴趣。
+</p>
+
+<div id="outline-container-org0174415" class="outline-2">
+<h2 id="org0174415">关于兴趣和投入</h2>
+<div class="outline-text-2" id="text-org0174415">
+<p>
+兴趣是学习的助燃剂。对一件事有兴趣是是否愿意对这件事投入更多时间或者资源的前提条件。因此，找到自己的兴趣点的确是非常关键的。不过，我们也能看到下面几点。
+</p>
+
+<ul class="org-ul">
+<li><b>一方面，兴趣是需要保持的</b> 。有的人有的事就是三分钟的兴趣。刚开始兴趣十足，然而时间一长，兴趣因为各种原因不能保持，就会很快地“移情别恋”了。所以，不能持久的兴趣，或是一时兴起的兴趣，都无法让人投入下去。</li>
+<li><b>另一方面，兴趣其实也是可以培养出来的</b> 。我高考时，对计算机软件毫无兴趣，反而对物理世界里的很多东西感兴趣，比如无线电、原子能，或是飞行器之类的。但阴差阳错，我最终考了个计算机软件专业，然后发现，自己越来越喜欢编程了，于是就到了今天。</li>
+</ul>
+
+<p>
+我发现，一个可以持久的兴趣，或是可以培养出来的兴趣，后面都有一个比较本质的东西，其实就是成就感，他是你坚持或者努力的最直接的正反馈。也就是说，*兴趣只是开始，而能让人不断投入时间和精力的则是正反馈，是成就感*。
+</p>
+
+<p>
+所以，我对这个朋友说，你对一件事的兴趣只是一种表象，而内在更多的是你做这件事的成就感是否可以持续。*你需要找到让自己能够更有成就感的事情，兴趣总是可以培养的*。
+</p>
+</div>
+</div>
+
+<div id="outline-container-关于学习和工作" class="outline-2">
+<h2 id="关于学习和工作">关于学习和工作</h2>
+<div class="outline-text-2" id="text-关于学习和工作">
+<p>
+我觉得，学好一项技术和是否找到与之相匹配的工作有关联，但它们之间并不是强关联的。但之所以，我们都觉得通过工作才让我们学习和成长得更快，主要有这些原因。
+</p>
+
+<ul class="org-ul">
+<li>工作能为我们带来相应的场景和实际的问题，而不是空泛的学习。带着问题去学习，带着场景去解决问题，的确是一种高效的学习方式。</li>
+<li>在工作当中，有同事和高手帮助。和他们的交互和讨论，可以让你更快地学习和成长。</li>
+</ul>
+
+<p>
+本质上来说，并不是只有找到了相应的工作我们才可以学好一项技术，而是，我们在通过解决实际问题，在和他人讨论，获得高手帮助的环境中，才能更快更有效率地学习和成长。
+</p>
+
+<p>
+有时候，在工作中你反而学不到东西，那是因为你找的这个工作能够提供的场景不够丰富，需要解决的实际问题太过简单，以及你的同事对你的帮助不大。这时，这个工作反而限制了你的学习和成长。
+</p>
+
+<ul class="org-ul">
+<li>找工作不只是找用这个技术的工作，更是要找场景，找实际问题，找团队。这些才是本质。一项技术很多公司都在用，然而，只有进入到有更多的场景、有挑战性的问题、有靠谱团队的公司，才对学习和成长更有帮助。</li>
+<li>不要完全把自己的学习寄希望于找一份工作，才会学得好。我给他的建议是，在一些开源社区内，有助于学习的场景会更多，要解决的实际问题也更多，同时你能接触到的牛人也更多。特别是一些有大量公司和几万、几十万甚至上百万的开发人员在贡献代码的项目，我认为可以让人成长很快。</li>
+</ul>
+
+<p>
+总之， <b>找到学习的方法，提升自己对新事物学习的能力，才是学习和成长的关键。</b>
+</p>
+</div>
+</div>
+
+<div id="outline-container-orgec00a5e" class="outline-2">
+<h2 id="orgec00a5e">关于技术和价值</h2>
+<div class="outline-text-2" id="text-orgec00a5e">
+<p>
+后面，我们又聊到了什么样的技术会是属于未来的技术，以及应该把时间花在什么样的技术上。我问了他这样一个问题："你觉得，让人登月探索宇宙的技术价值大，还是造高铁的技术价值大？或者是科学种田的技术价值大？&#x2026;&#x2026;"
+</p>
+
+<p>
+是的，对于这个问题，从不同的角度上看，就会得到不同的结论。似乎，我们无法说明白哪项技术创造的价值更大，因为完全没法比较。
+</p>
+
+<p>
+于是我又说了一个例子，在第一次工业革命的时候，也就是蒸汽机时代，除了蒸汽机之外还有其它一些技术含量更高的技术，比如化学、冶金、水泥、玻璃&#x2026;&#x2026;但是，这么一个不起眼的技术引发了人类社会的变革。也许，那个时候，在技术圈中，很多技术专家还鄙视蒸汽机的技术含量太低呢。
+</p>
+
+<p>
+我并不是想说高大上的技术无用，我想说的是，技术无贵贱，很多伟大的事就是通过一些不起眼的技术造就的。所以，我们应该关注的是：
+</p>
+
+<ul class="org-ul">
+<li>要用技术解决什么样的问题，场景非常重要；</li>
+<li>如何降低技术的学习成本，提高易用性，从而可以让技术更为普及。</li>
+</ul>
+
+<p>
+另外，我又说了一个例子。假设，我们今天没有电，忽然，有人说他发明了电。我相信，这个世界上的很多人都会觉得“电”这个东西没什么用，而只有等到“电灯”的发明，人们才明白发明“电”是多么牛。
+</p>
+
+<p>
+所以，对于一些“基础技术”来说，通常会在某段时间内会被人类社会低估。就像国内前几年低估“云计算”技术一样。基础技术就像是创新的引擎，其不断地成熟和完善会引发更上层的技术不断地衍生，越滚越大。
+</p>
+
+<p>
+而在一个基础技术被广泛应用的过程中，如何规模化也会成为一个关键。这就好像发电厂一样，没有发电厂，电力就无法做到规模化。记得汽车发明的时候，要组装一个汽车的时间成本、人力成本、物力成本都非常高，所以完全无法做到规模化，而通过模块化分工、自动化生产等技术手段才释放了产能，从而普及。
+</p>
+
+<p>
+所以，我个人觉得一项有价值的技术，并不在于这项技术是否有技术含量，而是在于：
+</p>
+
+<ul class="org-ul">
+<li>能否低成本高效率地解决实际问题；</li>
+<li>是不是众多产品的基础技术；</li>
+<li>是不是可以支持规模化的技术。</li>
+</ul>
+
+<p>
+对于我们搞计算机软件的人来说，也可以找到相对应的技术点。比如：
+</p>
+
+<ul class="org-ul">
+<li>低成本高效率地解决实际问题的技术，一定是自动化的技术。软件天生就是用来完成重复劳动的，天生就是用来做自动化的。而未来的
+AI 和 IoT 也是在拼命数字化和自动化还没有自动化的领域。</li>
+<li>基础技术总是枯燥和有价值的。数学、算法、网络、存储等基础技术吃得越透，就越容易服务上层的各种衍生技术或产品。</li>
+<li>支持规模化的技术也是很有价值的。在软件行业中，也就是 PaaS 的相关技术。</li>
+</ul>
+
+<p>
+当然，我的意思并不是别的技术都没有价值了。重申一下，*技术无贵贱。我只是想说，能规模化低成本高效率解决实际问题的技术及其基础技术，就算是很
+low，也是很有价值的*。
+</p>
+</div>
+</div>
+
+<div id="outline-container-org1fc14bf" class="outline-2">
+<h2 id="org1fc14bf">关于趋势和未来</h2>
+<div class="outline-text-2" id="text-org1fc14bf">
+<p>
+我一直认为，*这个世界的技术趋势和未来其实是被人控制的*。就是被那些有权有势有钱的公司或国家来控制的。当然，他们控制的不是长期的未来，但短期的未来（3-5 年）一定是他们控制着的。
+</p>
+
+<p>
+也就是说，技术的未来要去哪，主要是看这个世界的投入会到哪。基本上就是这个世界上的有钱有势的人把财富投到哪个领域，也就是这个世界的大公司或大国们的规划。
+</p>
+
+<p>
+一旦他们把大量的金钱投到某个领域，这个领域就会得到发展，那么发展之后，这个领域也就成为未来了。只要是有一堆公司在往一个方向上不间断地投资或者花钱，这个方向不想成为未来似乎都不可能。
+</p>
+
+<p>
+听上去多少有点儿令人沮丧，但我个人觉得世界就是如此简单粗暴运作着的。
+</p>
+
+<p>
+所以，对于我们这些在这个世界里排不上号的人来说，只能默默地跟随着这些大公司所引领的趋势和未来。对一些缺钱缺人的创业公司，唯一能够做的，也许只是两条路，一是用更为低的成本来提供和大公司相应的技术，另一条路是在细分垂直市场上做得比大公司更专更精。等着自己有一天长大后，也能加入第一梯队从而“引领”未来。
+</p>
+</div>
+</div>
+
+<div id="outline-container-orgfe7adcc" class="outline-2">
+<h2 id="orgfe7adcc">小结</h2>
+<div class="outline-text-2" id="text-orgfe7adcc">
+<p>
+在我们的生活和工作中，总是会有很多人混淆一些看似有联系，实则关系不大的词和概念，分辨不清事物的表象和本质。
+</p>
+
+<p>
+比如文中提到的兴趣和投入。表面上，兴趣是决定一件事儿能否做持久的关键因素。而反观我们自己和他人的经历不难发现，兴趣扮演的角色通常是敲门砖，它引发我们关注到某事某物。而真正能让我们坚持下去的，实际上是做一件事之后从中收获到的正反馈，也就是成就感。
+</p>
+
+<p>
+同样，人们也经常搞错学习和工作之间的关系。多数人都会认为，在工作中学习和成长速度更快。而仔细观察下来，你会发现，工作不过是提供了一个能够解决实际问题，能跟人讨论，有高手帮助的环境。
+</p>
+
+<p>
+所以说，让我们成长的并不是工作本身，而是有利于学习的环境。也就是说，如果我们想学习，除了可以选择有助于学习的工作机会，开源社区提供的环境同样有助于我们的学习和提高，那里高手更多，实际问题不少。
+</p>
+
+<p>
+还有，技术和价值。人们通常认为技术含量高的技术其价值会更高，而历史上无数的事实却告诉我们，能规模化、低成本、高效率地解决实际问题的技术及其基础技术，才发挥出了更为深远的影响，甚至其价值更是颠覆性的，难以估量。
+</p>
+
+<p>
+趋势和未来也是被误解得很深的一对“孪生兄弟”。虽然大家通常会认为有什么样的技术趋势，必然带来什么样的未来。殊不知，所谓的趋势和未来，其实都是可以由人为控制的，特别是哪些有钱有势的人和公司。也就是，社会的资金和资源流向什么领域，这个领域势必会得到成长和发展，会逐渐形成趋势，进而成为未来。我们遵循这样的规律，就能很容易地判断出未来的，最起码是近几年的技术流向了。
+</p>
+
+<p>
+再如，加班和产出，努力和成功，速度和效率&#x2026;&#x2026;加班等于高产出吗？显然不是。很努力就一定会成功吗？当然不是。速度快就是效率高吗？更加不是。可以枚举的还有很多，如干得多就等于干得好吗？等等。
+</p>
+</div>
+</div>
+</div>
+</body>
+</html>

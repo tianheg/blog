@@ -1,0 +1,752 @@
+<!DOCTYPE html>
+<html lang="zh">
+<head>
+<!-- 2022-01-18 Tue 17:01 -->
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>如何阅读一本书</title>
+<meta name="generator" content="Org mode">
+<style type="text/css">
+ <!--/*--><![CDATA[/*><!--*/
+  .title  { text-align: center;
+             margin-bottom: .2em; }
+  .subtitle { text-align: center;
+              font-size: medium;
+              font-weight: bold;
+              margin-top:0; }
+  .todo   { font-family: monospace; color: red; }
+  .done   { font-family: monospace; color: green; }
+  .priority { font-family: monospace; color: orange; }
+  .tag    { background-color: #eee; font-family: monospace;
+            padding: 2px; font-size: 80%; font-weight: normal; }
+  .timestamp { color: #bebebe; }
+  .timestamp-kwd { color: #5f9ea0; }
+  .org-right  { margin-left: auto; margin-right: 0px;  text-align: right; }
+  .org-left   { margin-left: 0px;  margin-right: auto; text-align: left; }
+  .org-center { margin-left: auto; margin-right: auto; text-align: center; }
+  .underline { text-decoration: underline; }
+  #postamble p, #preamble p { font-size: 90%; margin: .2em; }
+  p.verse { margin-left: 3%; }
+  pre {
+    border: 1px solid #ccc;
+    box-shadow: 3px 3px 3px #eee;
+    padding: 8pt;
+    font-family: monospace;
+    overflow: auto;
+    margin: 1.2em;
+  }
+  pre.src {
+    position: relative;
+    overflow: auto;
+    padding-top: 1.2em;
+  }
+  pre.src:before {
+    display: none;
+    position: absolute;
+    background-color: white;
+    top: -10px;
+    right: 10px;
+    padding: 3px;
+    border: 1px solid black;
+  }
+  pre.src:hover:before { display: inline; margin-top: 14px;}
+  /* Languages per Org manual */
+  pre.src-asymptote:before { content: 'Asymptote'; }
+  pre.src-awk:before { content: 'Awk'; }
+  pre.src-C:before { content: 'C'; }
+  /* pre.src-C++ doesn't work in CSS */
+  pre.src-clojure:before { content: 'Clojure'; }
+  pre.src-css:before { content: 'CSS'; }
+  pre.src-D:before { content: 'D'; }
+  pre.src-ditaa:before { content: 'ditaa'; }
+  pre.src-dot:before { content: 'Graphviz'; }
+  pre.src-calc:before { content: 'Emacs Calc'; }
+  pre.src-emacs-lisp:before { content: 'Emacs Lisp'; }
+  pre.src-fortran:before { content: 'Fortran'; }
+  pre.src-gnuplot:before { content: 'gnuplot'; }
+  pre.src-haskell:before { content: 'Haskell'; }
+  pre.src-hledger:before { content: 'hledger'; }
+  pre.src-java:before { content: 'Java'; }
+  pre.src-js:before { content: 'Javascript'; }
+  pre.src-latex:before { content: 'LaTeX'; }
+  pre.src-ledger:before { content: 'Ledger'; }
+  pre.src-lisp:before { content: 'Lisp'; }
+  pre.src-lilypond:before { content: 'Lilypond'; }
+  pre.src-lua:before { content: 'Lua'; }
+  pre.src-matlab:before { content: 'MATLAB'; }
+  pre.src-mscgen:before { content: 'Mscgen'; }
+  pre.src-ocaml:before { content: 'Objective Caml'; }
+  pre.src-octave:before { content: 'Octave'; }
+  pre.src-org:before { content: 'Org mode'; }
+  pre.src-oz:before { content: 'OZ'; }
+  pre.src-plantuml:before { content: 'Plantuml'; }
+  pre.src-processing:before { content: 'Processing.js'; }
+  pre.src-python:before { content: 'Python'; }
+  pre.src-R:before { content: 'R'; }
+  pre.src-ruby:before { content: 'Ruby'; }
+  pre.src-sass:before { content: 'Sass'; }
+  pre.src-scheme:before { content: 'Scheme'; }
+  pre.src-screen:before { content: 'Gnu Screen'; }
+  pre.src-sed:before { content: 'Sed'; }
+  pre.src-sh:before { content: 'shell'; }
+  pre.src-sql:before { content: 'SQL'; }
+  pre.src-sqlite:before { content: 'SQLite'; }
+  /* additional languages in org.el's org-babel-load-languages alist */
+  pre.src-forth:before { content: 'Forth'; }
+  pre.src-io:before { content: 'IO'; }
+  pre.src-J:before { content: 'J'; }
+  pre.src-makefile:before { content: 'Makefile'; }
+  pre.src-maxima:before { content: 'Maxima'; }
+  pre.src-perl:before { content: 'Perl'; }
+  pre.src-picolisp:before { content: 'Pico Lisp'; }
+  pre.src-scala:before { content: 'Scala'; }
+  pre.src-shell:before { content: 'Shell Script'; }
+  pre.src-ebnf2ps:before { content: 'ebfn2ps'; }
+  /* additional language identifiers per "defun org-babel-execute"
+       in ob-*.el */
+  pre.src-cpp:before  { content: 'C++'; }
+  pre.src-abc:before  { content: 'ABC'; }
+  pre.src-coq:before  { content: 'Coq'; }
+  pre.src-groovy:before  { content: 'Groovy'; }
+  /* additional language identifiers from org-babel-shell-names in
+     ob-shell.el: ob-shell is the only babel language using a lambda to put
+     the execution function name together. */
+  pre.src-bash:before  { content: 'bash'; }
+  pre.src-csh:before  { content: 'csh'; }
+  pre.src-ash:before  { content: 'ash'; }
+  pre.src-dash:before  { content: 'dash'; }
+  pre.src-ksh:before  { content: 'ksh'; }
+  pre.src-mksh:before  { content: 'mksh'; }
+  pre.src-posh:before  { content: 'posh'; }
+  /* Additional Emacs modes also supported by the LaTeX listings package */
+  pre.src-ada:before { content: 'Ada'; }
+  pre.src-asm:before { content: 'Assembler'; }
+  pre.src-caml:before { content: 'Caml'; }
+  pre.src-delphi:before { content: 'Delphi'; }
+  pre.src-html:before { content: 'HTML'; }
+  pre.src-idl:before { content: 'IDL'; }
+  pre.src-mercury:before { content: 'Mercury'; }
+  pre.src-metapost:before { content: 'MetaPost'; }
+  pre.src-modula-2:before { content: 'Modula-2'; }
+  pre.src-pascal:before { content: 'Pascal'; }
+  pre.src-ps:before { content: 'PostScript'; }
+  pre.src-prolog:before { content: 'Prolog'; }
+  pre.src-simula:before { content: 'Simula'; }
+  pre.src-tcl:before { content: 'tcl'; }
+  pre.src-tex:before { content: 'TeX'; }
+  pre.src-plain-tex:before { content: 'Plain TeX'; }
+  pre.src-verilog:before { content: 'Verilog'; }
+  pre.src-vhdl:before { content: 'VHDL'; }
+  pre.src-xml:before { content: 'XML'; }
+  pre.src-nxml:before { content: 'XML'; }
+  /* add a generic configuration mode; LaTeX export needs an additional
+     (add-to-list 'org-latex-listings-langs '(conf " ")) in .emacs */
+  pre.src-conf:before { content: 'Configuration File'; }
+
+  table { border-collapse:collapse; }
+  caption.t-above { caption-side: top; }
+  caption.t-bottom { caption-side: bottom; }
+  td, th { vertical-align:top;  }
+  th.org-right  { text-align: center;  }
+  th.org-left   { text-align: center;   }
+  th.org-center { text-align: center; }
+  td.org-right  { text-align: right;  }
+  td.org-left   { text-align: left;   }
+  td.org-center { text-align: center; }
+  dt { font-weight: bold; }
+  .footpara { display: inline; }
+  .footdef  { margin-bottom: 1em; }
+  .figure { padding: 1em; }
+  .figure p { text-align: center; }
+  .equation-container {
+    display: table;
+    text-align: center;
+    width: 100%;
+  }
+  .equation {
+    vertical-align: middle;
+  }
+  .equation-label {
+    display: table-cell;
+    text-align: right;
+    vertical-align: middle;
+  }
+  .inlinetask {
+    padding: 10px;
+    border: 2px solid gray;
+    margin: 10px;
+    background: #ffffcc;
+  }
+  #org-div-home-and-up
+   { text-align: right; font-size: 70%; white-space: nowrap; }
+  textarea { overflow-x: auto; }
+  .linenr { font-size: smaller }
+  .code-highlighted { background-color: #ffff00; }
+  .org-info-js_info-navigation { border-style: none; }
+  #org-info-js_console-label
+    { font-size: 10px; font-weight: bold; white-space: nowrap; }
+  .org-info-js_search-highlight
+    { background-color: #ffff00; color: #000000; font-weight: bold; }
+  .org-svg { width: 90%; }
+  /*]]>*/-->
+</style>
+<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin><link href="https://fonts.googleapis.com/css2?family=Noto+Sans+SC&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="/theme/normalize.css"/>
+<link rel="stylesheet" href="/theme/site.css"/>
+<script defer src='https://static.cloudflareinsights.com/beacon.min.js' data-cf-beacon='{"token": "d5b841b503ed4d1b8fad459b84d1cc2f"}'></script>
+<script defer src="/theme/link.js"></script>
+</head>
+<body>
+<div id="content">
+<header>
+<h1 class="title">如何阅读一本书</h1>
+</header><p>
+这本书属于「第 2 层书籍」。
+</p>
+
+<div id="outline-container-阅读的目的" class="outline-2">
+<h2 id="阅读的目的">阅读的目的</h2>
+<div class="outline-text-2" id="text-阅读的目的">
+<p>
+娱乐消遣、获取资讯、增进理解力。
+</p>
+
+<p>
+获取资讯-&#x2013;&#x2014;获取信息，只需动用“记忆力”。这种阅读给你的帮助不够大；
+</p>
+
+<p>
+增进理解力-&#x2013;&#x2014;记忆力+分析+推理+总结+想象+&#x2026;&#x2026;这种阅读过程会有更多的思考，可以让你的思维提升到一个新的高度。
+</p>
+</div>
+</div>
+
+<div id="outline-container-主动阅读-vs-被动阅读" class="outline-2">
+<h2 id="主动阅读-vs-被动阅读">主动阅读 VS 被动阅读</h2>
+<div class="outline-text-2" id="text-主动阅读-vs-被动阅读">
+<p>
+「主动阅读」：带着问题阅读，一边阅读一边思考
+</p>
+
+<p>
+「被动阅读」：在阅读过程中没有思考
+</p>
+
+<p>
+如果阅读目的是“增进理解力”，就是典型的主动阅读；如果是为了“娱乐消遣”，基本上是被动阅读；至于“获取资讯”，则两者皆有。
+</p>
+
+<p>
+人们只懂得“灌输式的阅读”的原因是：
+</p>
+
+<p>
+<b>1. 教育体制</b>
+</p>
+
+<p>
+教育体制是灌输式的，只能进行被动阅读，无法进行主动阅读。
+</p>
+
+<p>
+教育没有系统地培养独立思维能力，尤其是「批判性思维」的能力。
+</p>
+
+<p>
+<b>2. 快餐文化</b>
+</p>
+
+<p>
+花费过多时间在消遣性阅读上，时间长了，主动阅读的能力就会逐渐退化。
+</p>
+
+<p>
+在这方面，微博客（microblog）是典型的消极代表-&#x2013;&#x2014;微博客不但碎片化很严重，而且助长了消遣性阅读的风气。
+</p>
+
+<p>
+那么，什么是「带着问题阅读」呢？
+</p>
+
+<p>
+关于一本书，你一定要提出四个主要的问题。
+</p>
+
+<p>
+（1）整体来说，这本书到底在谈些什么？
+</p>
+
+<p>
+你一定要想办法找出这本书的主题，作者如何依次发展这个主题，如何逐步从核心主题分解出从属的关键议题来。
+</p>
+
+<p>
+（2）作者在细部说了什么，怎么说的？
+</p>
+
+<p>
+你一定要想办法找出主要的想法、声明与论点。这些组合成作者想要传达的特殊讯息。
+</p>
+
+<p>
+（3）这本书说得有道理吗？
+</p>
+
+<p>
+是全部有道理，还是部分有道理？除非你能回答前两个问题，否则你没法回答这个问题。在你判断这本书是否有道理之前，你必须先了解整本书在说些什么才行。然而，等你了解了一本书，如果你又读得很认真的话，你会觉得有责任为这本书做个自己的判断。光是知道作者的想法是不够的。
+</p>
+
+<p>
+（4）这本书跟你有什么关系？
+</p>
+
+<p>
+如果这本书给了你一些资讯，你一定要问问这些资讯有什么意义。为什么这位作者会认为知道这件事很重要？你真的有必要去了解吗？如果这本书不只提供了资讯，还启发了你，就更有必要找出其他相关的、更深的含义或建议，以获得更多的启示。
+</p>
+
+<p>
+光知道者四个问题还不够。在阅读过程中，你要记得去提出这些问题。要养成这样的习惯，才能成为一个有自我要求的阅读者。除此之外，你还要知道如何精准、正确地回答问题。如此锻炼而来的能力，就是阅读的艺术。
+</p>
+
+<p>
+*如何让一本书真正属于你自己*？
+</p>
+
+<ul class="org-ul">
+<li>写下来</li>
+</ul>
+
+<p>
+*为什么对阅读来说，在书籍上做笔记是不可或缺的事*？
+</p>
+
+<ol class="org-ol">
+<li>能够让你保持清醒</li>
+<li>主动的阅读其实就是一种思考</li>
+<li>把感想写下来，能帮你记住作者的思想</li>
+<li>表达自己和作者相同或相异的观点</li>
+</ol>
+
+<p>
+*做笔记的方法*：
+</p>
+
+<ul class="org-ul">
+<li>在需要的地方画底线</li>
+<li>在画底线处的栏外再加画一道线-&#x2013;&#x2014;强调已经画的部分，也可以在旁边加一个明显的记号</li>
+<li>在空白处做特殊标记-&#x2013;&#x2014;要慎用，只用来强调书中十来个最重要的生命或段落即可</li>
+<li>在空白处编号-&#x2013;&#x2014;作者的某个观点发展出一连串的重要陈述时，可以做顺序编号</li>
+<li>在空白处记下其他的页码-&#x2013;&#x2014;强调作者在书中的其他部分也有相同的论述</li>
+<li>在书页的空白处记下问题或答案</li>
+</ul>
+
+<p>
+*检视阅读时，该如何做笔记*：
+</p>
+
+<p>
+在空白处记下一下问题和问题的答案，
+</p>
+
+<ul class="org-ul">
+<li>这是什么样的一本书</li>
+<li>整本书在讲的是什么</li>
+<li>作者是借着怎样的整体架构，来发展他的观点或陈述他对这个主题的理解</li>
+</ul>
+
+<p>
+值得注意的是，这些笔记主要的重点是全书的架构，而不是内容。我们称这样的笔记为结构笔记（structural
+note-making）。
+</p>
+
+<p>
+在检视阅读中，还有一种概念笔记（conceptual note-making）。
+</p>
+
+<p>
+还有一种更高阶的笔记-&#x2013;&#x2014;辨证笔记（dialectical
+note-making）。这是针对一场讨论情境的笔记-&#x2013;&#x2014;这场讨论是由许多作者所共同参与的，而且他们可能根本没有察觉自己的参与。
+</p>
+
+<p>
+*培养阅读的习惯*：
+</p>
+
+<p>
+知道一项艺术的规则，跟养成习惯是不同的。我们谈到一个有技术的人时，并不是在说他知道该如何去做那件事，而是他已经养成去做那件事的习惯了。当然，对于规则是否了解得够清楚，是能不能拥有技巧的关键。知晓规则，培养习惯。
+</p>
+
+<p>
+并不是每一个人都清楚做一个艺术家是要照规则不断练习的。人们会指着一个具有高度原创性的画作或雕塑说："他不按规矩来。他的作品原创性非常高，这是前人从没有做过的东西，根本没有规律可循。"其实这些人是没有看出这个艺术家所遵循的规则而已。
+</p>
+
+<p>
+*由许多规则中养成一个习惯*：
+</p>
+
+<p>
+新手学习滑雪时，总要按照教练的要求学习分开的几个步骤-&#x2013;&#x2014;屈膝，眼睛向下面的山丘看，重心向下，保持背部挺直，身体前倾。你怎么能做到这些，同时还要滑雪呢？
+</p>
+
+<p>
+答案是忘掉这些，不过你要先把这些分开的步骤练习好。为了忘掉这些单一的动作，一开始你必须先分别学会每一个单一的动作。只有这样，你才能将所有的动作连结起来，变成一个优秀的滑雪高手。
+</p>
+
+<p>
+用这个例子和阅读进行对比。只有分开练习书中的步骤，并且要非常熟练，然后才能一本书接着一本书，流畅地阅读。
+</p>
+
+<p>
+一个人只要学习过一种复杂的技巧，就会知道要学习一项新技巧，一开始的复杂过程是不足为惧的。
+</p>
+
+<p>
+规则的多样化，意味着要养成一个习惯的复杂度，而非表示要形成许多个不同的习惯。在到达一个程度时，每个分开的动作自然会压缩、连结起来，变成一个完整的动作。当所有相关动作都能相当自然地做出来时，你就已经养成做这件事的习惯了。
+</p>
+
+<p>
+更多内容，请看此书的第 5 章-&#x2013;&#x2014;如何做一个自我要求的读者。
+</p>
+</div>
+</div>
+
+<div id="outline-container-阅读的层次" class="outline-2">
+<h2 id="阅读的层次">阅读的层次</h2>
+<div class="outline-text-2" id="text-阅读的层次">
+<p>
+此书的重点内容在于：介绍了 4 种阅读层次。
+</p>
+
+<p>
+为什么称“层次”而不是“类型”？因为层次有“高低之分”，而层次之间是递进关系而不是并列关系-&#x2013;&#x2014;上面的层次需要依赖下面层次的技能。
+</p>
+</div>
+
+<div id="outline-container-基础阅读" class="outline-3">
+<h3 id="基础阅读">基础阅读</h3>
+<div class="outline-text-3" id="text-基础阅读">
+<p>
+这是最基础的阅读层次。你只需要做到“读懂书籍*字面上*的意思”。需要的技能仅仅是：识字、断句、联系上下文等。
+</p>
+
+<p>
+这部分内容在此书的第 3 章介绍。
+</p>
+</div>
+</div>
+
+<div id="outline-container-检视阅读" class="outline-3">
+<h3 id="检视阅读">检视阅读</h3>
+<div class="outline-text-3" id="text-检视阅读">
+<p>
+此书的第 4 章介绍「检视阅读」的各种技巧。
+</p>
+
+<p>
+检视阅读也可以简称为“略读”。它所起的作用即是：在非常有限的时间内，大致弄清楚一本书的内容和主题。
+</p>
+
+<p>
+检视阅读的价值在于，它能帮助你在短时间内判断一本书的优劣。这样就避免在烂书上浪费太多时间。另外，后面要提的「主题阅读」层次，也非常依赖「检视阅读」的能力。
+</p>
+</div>
+</div>
+
+<div id="outline-container-分析阅读" class="outline-3">
+<h3 id="分析阅读">分析阅读</h3>
+<div class="outline-text-3" id="text-分析阅读">
+<p>
+分析阅读称为“精读”。分析阅读是此书的重中之重。
+</p>
+
+<p>
+分析阅读包含以下几个阶段：
+</p>
+
+<p>
+<b>第 1 阶段-&#x2013;&#x2014;这本书在谈什么</b>
+</p>
+
+<p>
+主要在第 7 章介绍。这个阶段你需要做如下 4 件事情。
+</p>
+
+<p>
+（1）依照书本的种类和主题做分类。
+</p>
+
+<p>
+（2）用最简短的句子说出整本书在谈论些什么。
+</p>
+
+<p>
+（3）按照顺序和关系，列出全书的重要部分。将全书的纲要拟出来之后，再将各个部分的纲要也一一列出。
+</p>
+
+<p>
+（4）找出作者在问的问题，或作者想要解决的问题。
+</p>
+
+<p>
+<b>第 2 阶段-&#x2013;&#x2014;诠释整本书的内容</b>
+</p>
+
+<p>
+主要在第 8 章和第 9 章介绍。这个阶段你需要做如下 4 件事情。
+</p>
+
+<p>
+（5）找出重要的、关键性的词汇，透过它们与作者达成共识。
+</p>
+
+<p>
+（6）从最重要的句子里抓出作者的重要主旨。
+</p>
+
+<p>
+（7）找出作者在论述些啥，重新架构这些论述的因果关系，以明白作者的主张。
+</p>
+
+<p>
+（8）搞清楚作者已经解决了哪些问题，还有哪些是未解决的。在未解决的问题中，哪些是作者认为自己无法解决的。
+</p>
+
+<p>
+<b>第 3 阶段-&#x2013;&#x2014;评价这本书</b>
+</p>
+
+<p>
+主要在第 10 章和第 11 章介绍。
+</p>
+
+<p>
+（9）除非你已经掌握某本书的架构，也能诠释整本书了，否则不要轻易评论。
+</p>
+
+<p>
+（10）不要争强好胜，非辩到底不可。
+</p>
+
+<p>
+（11）在说出评论之前，你要能区分出书中的「事实」与「观点」。
+</p>
+
+<p>
+（12）证明作者的知识不足。
+</p>
+
+<p>
+（13）证明作者的知识有误。
+</p>
+
+<p>
+（14）证明作者的逻辑错误。
+</p>
+
+<p>
+（15）证明作者的分析和理由不够完整。
+</p>
+
+<p>
+另外，在第 12
+章介绍了辅助阅读。包括利用外在的工具和资源（比如工具书、百科全书、字典等）辅助阅读某本书。推荐英文维基百科。
+</p>
+</div>
+</div>
+</div>
+
+<div id="outline-container-主题阅读" class="outline-2">
+<h2 id="主题阅读">主题阅读</h2>
+<div class="outline-text-2" id="text-主题阅读">
+<p>
+「主题阅读」在第 20 章介绍。
+</p>
+
+<p>
+所谓“主题阅读”，通俗而言就是：为了研究某个主题，阅读跟该主题相关的多本书籍。这种阅读主要包括
+5 个步骤：
+</p>
+
+<p>
+<b>1. 找到这几本书的相关章节</b>
+</p>
+
+<p>
+这时候，"检视阅读"又派上用场了。
+</p>
+
+<p>
+<b>2. 带引（带着引领着）作者与你达成共识</b>
+</p>
+
+<p>
+这一步骤类似于“分析阅读”的第 2 阶段。
+</p>
+
+<p>
+<b>3. 厘清问题</b>
+</p>
+
+<p>
+你可以列出一些问题，然后看看这几本书能够回答这些问题。
+</p>
+
+<p>
+<b>4. 界定议题</b>
+</p>
+
+<p>
+如果几本不同的书籍都能够回答同一个问题，并且答案有差异。那么，你可以根据答案的差异、作者的情况，判断出这个问题的价值。
+</p>
+
+<p>
+比方说：如果某个问题，多本书的作者给出全然不同的答案，而且这几本书的作者在立场的客观性、分析的全面性、思考的深度等方面都足够。那么这个问题就是一个非常有价值的问题，值得深入思考。
+</p>
+
+<p>
+<b>5. 分析讨论</b>
+</p>
+
+<p>
+找到有价值的问题之后，就需要通过自己的综合分析，思考一下：【为什么】这几本书的作者，对同一个问题会有不同的答案。如果你能想明白，那么你对该主题所处的领域，就有了更深刻的理解。
+</p>
+</div>
+</div>
+
+<div id="outline-container-如何阅读不同类型的书籍" class="outline-2">
+<h2 id="如何阅读不同类型的书籍">如何阅读不同类型的书籍</h2>
+<div class="outline-text-2" id="text-如何阅读不同类型的书籍">
+<p>
+这本书的如下章节，分别介绍了具体类型的书籍，有哪些阅读技巧。
+</p>
+
+<ul class="org-ul">
+<li>第 13 章 如何阅读实用型的书</li>
+<li>第 14 章 如何阅读想象文学</li>
+<li>第 15 章 如何阅读故事、戏剧、诗歌</li>
+<li>第 16 章 如何阅读历史书</li>
+<li>第 17 章 如何阅读科学与数学</li>
+<li>第 18 章 如何阅读哲学书</li>
+<li>第 19 章 如何阅读社会科学</li>
+</ul>
+</div>
+</div>
+
+<div id="outline-container-阅读与心智的成长" class="outline-2">
+<h2 id="阅读与心智的成长">阅读与心智的成长</h2>
+<div class="outline-text-2" id="text-阅读与心智的成长">
+</div>
+<div id="outline-container-好书能带来什么帮助" class="outline-3">
+<h3 id="好书能带来什么帮助">好书能带来什么帮助</h3>
+<div class="outline-text-3" id="text-好书能带来什么帮助">
+<p>
+好书的重要性：
+</p>
+
+<p>
+读一本好书，会让你的努力有所回报。最好的书对你的回馈也最多。当然，这样的回馈分成两种：第一，当你成功地阅读了一本难读的好书之后，你的阅读技巧必然增进了。第二（长期来说，这一点更重要）一本好书能教你了解这个世界以及你自己。你不只更懂得如何读得更好，还更懂得生命。你变得更有智慧，而不只是更有知识-&#x2013;&#x2014;像只提供讯息的书所形成的那样。你会成为一位智者，对人类生命中永恒的真理有更深刻的体认。
+</p>
+
+<p>
+请注意「知识」和「智慧」-&#x2013;&#x2014;只提供讯息的书，能带给你“知识”；而真正的好书，能带给你“智慧”。至于消遣性的书，既不会给你知识，也不会给你智慧。
+</p>
+</div>
+</div>
+
+<div id="outline-container-书籍的金字塔" class="outline-3">
+<h3 id="书籍的金字塔">书籍的金字塔</h3>
+<div class="outline-text-3" id="text-书籍的金字塔">
+<p>
+书籍的好坏符合「二八原理」。
+</p>
+
+<p>
+关于书籍的金字塔，有三层：
+</p>
+
+<p>
+<b>第 1 层</b>
+</p>
+
+<p>
+99% 的书籍对于你能力的提升是毫无帮助的。这 99%
+里面，相当大一部分书是“消遣性”的，还有一些可能是跟你完全无关的领域。
+</p>
+
+<p>
+显然，这些书籍是不需要进行“分析阅读”的。
+</p>
+
+<p>
+<b>第 2 层</b>
+</p>
+
+<p>
+这一层次的书，你至少要做一次完整的“分析阅读”。经过一次分析阅读之后，你基本上就“读通”了，知道这本书的主要精华。一旦读通，以后你就无需再去阅读。顶多是偶尔拿出来翻看个别重点，复习某些片段。
+</p>
+
+<p>
+<b>第 3 层</b>
+</p>
+
+<p>
+这一层次的书，非常得少。它们的特点是：你无法通过一次完整的“分析阅读”，就把它读通。甚至有可能你进行了
+N 次分析阅读，也无法尽其究竟。
+</p>
+
+<p>
+2 和 3 层的书差异为什么这么大呢？
+</p>
+
+<p>
+原因如下：
+</p>
+
+<p>
+（1）第 2 层的书
+</p>
+
+<p>
+当你进行多次分析阅读，每次的收获会变少。因为你本人的积累增多了，理解力提升了，而书的内容是固定的。显然每次阅读，收获降低了。
+</p>
+
+<p>
+（2）第 3 层的书
+</p>
+
+<p>
+随着你能力的提升，每一次对该书进行分析阅读，你的收获都是全新的。甚至有可能后面的阅读，收获会更多。为什么会这样呢？因为这类书的作者，境界远远高于你本人。有可能在你一生的不同阶段都可以反复阅读同一本书，始终有收获。因为你始终达不到该书作者的境界。（《论语》属于这类书籍）
+</p>
+</div>
+</div>
+
+<div id="outline-container-生命与心智的成长" class="outline-3">
+<h3 id="生命与心智的成长">生命与心智的成长</h3>
+<div class="outline-text-3" id="text-生命与心智的成长">
+<blockquote>
+<p>
+人类的心智有很奇怪的一点，主要是这一点划分了我们心智与身体的截然不同。我们的身体是*有限制*的，心智却*没有限制*。其中一个迹象是，在力量与技巧上，身体不能无限制地成长。人们到了
+30
+岁左右，身体状况就达到了巅峰，随着时间的变化，身体的状况只有越来越恶化，而*我们的头脑却能无限地成长与发展下去*。我们的心智不会因为到了某个年纪就停止成长，只有当大脑失去活力，僵化了，才会失去了增加技巧与理解力的力量。
+</p>
+
+<p>
+*这是人类最明显的特质，也是万物之灵与其他动物最主要不同之处*。其他的动物似乎发展到某个层次之后，便不再有心智上的发展。但是人类独有的特质，却也潜藏着巨大的危险。*心智就像肌肉一样，如果不常运用就会萎缩*。心智的萎缩就是在惩罚我们不经常动脑。这是个可怕的惩罚，因为证据显示，心智萎缩也可能要人的命。除此之外，似乎也没法说明为什么许多工作忙碌的人一旦退休之后就会立刻死亡。他们活着是因为工作对他们的心智上有所要求，那是一种认为的支撑力量，也就是外界的力量。一旦外界要求的力量消失之后，他们又没有*内在的心智活动*（什么是「内在的心智活动」？是思考吗？），他们便停止了思考，死亡也跟着来了。
+</p>
+</blockquote>
+
+<hr>
+
+<p>
+*参考资料*：
+</p>
+
+<ol class="org-ol">
+<li><a href="https://program-think.blogspot.com/2013/04/how-to-read-book.html">《如何阅读一本书》-&#x2013;&#x2014;书评及内容纲要</a></li>
+</ol>
+</div>
+</div>
+</div>
+</div>
+</body>
+</html>
