@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html lang="zh">
 <head>
-<!-- 2022-01-19 Wed 18:00 -->
+<!-- 2022-01-19 Wed 19:00 -->
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>Markdown 使用语法</title>
@@ -269,7 +269,7 @@ Setext 风格的标题分别使用 <code>=</code> 和 <code>-</code>
 表示一级和二级标题（任何数量均可）。例子：
 </p>
 
-<pre class="example" id="org8bd79c4">
+<pre class="example" id="orgf33d6f9">
 一级标题
 =
 
@@ -282,7 +282,7 @@ Atx 风格的标题使用 1-6 个
 #（数字记号）在标题开头处，对应标题的六个级别。例子：
 </p>
 
-<pre class="example" id="orgb6659a2">
+<pre class="example" id="org261ded1">
 # 一级标题
 ## 二级标题
 ### 三级标题
@@ -327,7 +327,7 @@ This is the first level of quoting.
 #+end_quote
 </p>
 
-<pre class="example" id="orgb5e6c56">
+<pre class="example" id="orgc088ef5">
 &gt; This is the first level of quoting.
 &gt;
 &gt; &gt; This is nested blockquote.
@@ -371,7 +371,7 @@ Markdown 支持有序和无序列表。
 <li>8</li>
 </ol>
 
-<pre class="example" id="org0eaadb2">
+<pre class="example" id="orgce3fb0b">
 1. 1
 1. 1
 1. 1
@@ -391,7 +391,7 @@ Markdown 支持有序和无序列表。
 <li>8</li>
 </ol>
 
-<pre class="example" id="orgd78299a">
+<pre class="example" id="org8822e97">
    1. 1 &lt;!-- `1.` 前有三个空格 --&gt;
 1. 2
 2. 8
@@ -401,7 +401,7 @@ Markdown 支持有序和无序列表。
 为了使列表更好看，你可以手动缩进：
 </p>
 
-<pre class="example" id="orga162d52">
+<pre class="example" id="orgcd7889f">
 *   Lorem ipsum dolor sit amet, consectetuer adipiscing elit.
     Aliquam hendrerit mi posuere lectus. Vestibulum enim wisi,
     viverra nec, fringilla in, laoreet vitae, risus.
@@ -413,7 +413,7 @@ Markdown 支持有序和无序列表。
 不过，懒得缩进也可以：
 </p>
 
-<pre class="example" id="orgea5f46c">
+<pre class="example" id="orgf957331">
 *   Lorem ipsum dolor sit amet, consectetuer adipiscing elit.
 Aliquam hendrerit mi posuere lectus. Vestibulum enim wisi,
 viverra nec, fringilla in, laoreet vitae, risus.
@@ -425,7 +425,7 @@ Suspendisse id sem consectetuer libero luctus adipiscing.
 如果列表之间有空行，转为 HTML 时会插入 =&lt;p&gt;=。例如，这个输入：
 </p>
 
-<pre class="example" id="orgc7e3e5d">
+<pre class="example" id="org9e572cb">
 *   Bird
 *   Magic
 </pre>
@@ -434,7 +434,7 @@ Suspendisse id sem consectetuer libero luctus adipiscing.
 会变成：
 </p>
 
-<pre class="example" id="org19cf878">
+<pre class="example" id="orgf0fe919">
 &lt;ul&gt;
 &lt;li&gt;Bird&lt;/li&gt;
 &lt;li&gt;Magic&lt;/li&gt;
@@ -445,7 +445,7 @@ Suspendisse id sem consectetuer libero luctus adipiscing.
 但这个：
 </p>
 
-<pre class="example" id="org710858e">
+<pre class="example" id="org05180f8">
 *   Bird
 
 *   Magic
@@ -455,7 +455,7 @@ Suspendisse id sem consectetuer libero luctus adipiscing.
 会变成：
 </p>
 
-<pre class="example" id="org1c23aa6">
+<pre class="example" id="orgb66a242">
 &lt;ul&gt;
 &lt;li&gt;&lt;p&gt;Bird&lt;/p&gt;&lt;/li&gt;
 &lt;li&gt;&lt;p&gt;Magic&lt;/p&gt;&lt;/li&gt;
@@ -467,7 +467,7 @@ Suspendisse id sem consectetuer libero luctus adipiscing.
 缩进：
 </p>
 
-<pre class="example" id="org36c2f93">
+<pre class="example" id="org68477c5">
 1. This is a list item with two paragraphs. Lorem ipsum dolor
    sit amet, consectetuer adipiscing elit. Aliquam hendrerit
    mi posuere lectus.
@@ -509,7 +509,7 @@ risus. Donec sit amet nisl. Aliquam semper ipsum sit amet velit.
 值得注意，以下内容会偶然触发列表：
 </p>
 
-<pre class="example" id="orgd79408d">
+<pre class="example" id="orgbc8cc30">
 1986. What a great season.
 </pre>
 
@@ -517,7 +517,7 @@ risus. Donec sit amet nisl. Aliquam semper ipsum sit amet velit.
 这种情况可以通过添加反斜杠 <code>\</code> 转义：
 </p>
 
-<pre class="example" id="orge0c88b2">
+<pre class="example" id="org0bca673">
 1986\. What a great season.
 </pre>
 </div>
@@ -534,7 +534,7 @@ risus. Donec sit amet nisl. Aliquam semper ipsum sit amet velit.
 从代码块的每一行移除一个缩进级别：4 个空格或 1 个 tab。例子：
 </p>
 
-<pre class="example" id="orgc89f153">
+<pre class="example" id="org5d2015f">
 Here is an example of AppleScript:
 
     tell application "Foo"
@@ -546,7 +546,7 @@ Here is an example of AppleScript:
 会变成：
 </p>
 
-<pre class="example" id="org1a7fffc">
+<pre class="example" id="org59cc693">
 &lt;p&gt;Here is an example of AppleScript:&lt;/p&gt;
 
 &lt;pre&gt;&lt;code&gt;tell application "Foo"
@@ -563,7 +563,7 @@ end tell
 在代码块中，=&amp;= 和 <code>&lt;=、=&gt;</code> 会自动转换成 HTML 实体。例如：
 </p>
 
-<pre class="example" id="org909a589">
+<pre class="example" id="orgc192054">
 &lt;div class="footer"&gt;
     &amp;copy; 2004 Foo Corporation
 &lt;/div&gt;
@@ -573,7 +573,7 @@ end tell
 会变成
 </p>
 
-<pre class="example" id="orgc047888">
+<pre class="example" id="orgbf9f479">
 &lt;pre&gt;&lt;code&gt;&amp;lt;div class="footer"&amp;gt;
     &amp;amp;copy; 2004 Foo Corporation
 &amp;lt;/div&amp;gt;
@@ -596,7 +596,7 @@ end tell
 =*=、连字符 =-=、下划线 =_=：
 </p>
 
-<pre class="example" id="org13e3574">
+<pre class="example" id="orgf485354">
 * * *
 
 ***
@@ -633,7 +633,7 @@ Markdown 支持两种形式的链接：行内和引用。
 后还可以添加一个标题作为 HTML 的 title 文本。例子：
 </p>
 
-<pre class="example" id="orgdd52764">
+<pre class="example" id="org1674f7e">
 This is [an example](http://example.com/ "Title") inline link.
 
 [This link](http://example.net/) has no title attribute.
@@ -643,7 +643,7 @@ This is [an example](http://example.com/ "Title") inline link.
 会产生：
 </p>
 
-<pre class="example" id="orge5c1216">
+<pre class="example" id="org1175735">
 &lt;p&gt;This is &lt;a href="http://example.com/" title="Title"&gt;
 an example&lt;/a&gt; inline link.&lt;/p&gt;
 
@@ -655,7 +655,7 @@ title attribute.&lt;/p&gt;
 如果使用同一服务器的本地资源，则可以使用相对路径：
 </p>
 
-<pre class="example" id="orge7a0c71">
+<pre class="example" id="org04be88f">
 See my [About](/about/) page for details.
 </pre>
 
@@ -663,7 +663,7 @@ See my [About](/about/) page for details.
 参考样式链接使用第二组方括号，在其中放置您选择的标签以标识该链接：
 </p>
 
-<pre class="example" id="org910abd1">
+<pre class="example" id="orgfdb965a">
 This is [an example][id] reference-style link.
 </pre>
 
@@ -671,7 +671,7 @@ This is [an example][id] reference-style link.
 你还可以在两个方括号之间加入空格：
 </p>
 
-<pre class="example" id="org36559ea">
+<pre class="example" id="orgbe197aa">
 This is [an example] [id] reference-style link.
 </pre>
 
@@ -683,7 +683,7 @@ This is [an example] <a href="http://example.com/">id</a> reference-style link.
 然后，在这个文本的任何地方，单独一行，像这样定义标签：
 </p>
 
-<pre class="example" id="org7016fbc">
+<pre class="example" id="org46f484a">
 [id]: http://example.com/  "Optional Title Here"
 </pre>
 
@@ -707,7 +707,7 @@ This is [an example] <a href="http://example.com/">id</a> reference-style link.
 链接还可以用 <code>&lt;&gt;</code> 包裹：
 </p>
 
-<pre class="example" id="orga5c74e3">
+<pre class="example" id="orga08ab65">
 [id]: &lt;http://example.com/&gt;  "Optional Title Here"
 </pre>
 
@@ -715,7 +715,7 @@ This is [an example] <a href="http://example.com/">id</a> reference-style link.
 如果链接很长，你还可以把标题放到使用多余的 空格 或 tab 缩进下一行：
 </p>
 
-<pre class="example" id="org566043b">
+<pre class="example" id="orgb4df12a">
 [id]: http://example.com/longish/path/to/resource/here
     "Optional Title Here"
 </pre>
@@ -730,7 +730,7 @@ This is [an example] <a href="http://example.com/">id</a> reference-style link.
 例如，这两个链接：
 </p>
 
-<pre class="example" id="org4090734">
+<pre class="example" id="org5d52861">
 [link text][a]
 [link text][A]
 </pre>
@@ -739,7 +739,7 @@ This is [an example] <a href="http://example.com/">id</a> reference-style link.
 隐式链接可以省略链接标签，例子：
 </p>
 
-<pre class="example" id="org4f1b79e">
+<pre class="example" id="org7d5dba7">
 [Google][]
 [Google]: https://www.google.com/
 </pre>
@@ -748,7 +748,7 @@ This is [an example] <a href="http://example.com/">id</a> reference-style link.
 因为链接名称可能包含空格，所以对于包含多个单词的链接名称也是可行的：
 </p>
 
-<pre class="example" id="org914a817">
+<pre class="example" id="org95ffe04">
 Visit [Daring Fireball][] for more information.
 [Daring Fireball]: https://daringfireball.net/
 </pre>
@@ -768,7 +768,7 @@ Markdown 使用 <code>*</code> 和 <code>_</code> 表示强调。由一个 <code
 =&lt;strong&gt;&lt;/strong&gt;=。例子，输入：
 </p>
 
-<pre class="example" id="org83e7d40">
+<pre class="example" id="org265c9dc">
 *single asterisks*
 
 _single underscores_
@@ -778,7 +778,7 @@ _single underscores_
 __double underscores__
 </pre>
 
-<pre class="example" id="org69fd860">
+<pre class="example" id="orgb01e7d9">
 &lt;em&gt;single asterisks&lt;/em&gt;
 
 &lt;em&gt;single underscores&lt;/em&gt;
@@ -800,7 +800,7 @@ __double underscores__
 要在原本会用作强调定界符的位置产生文字星号或下划线，可以反斜杠对其进行转义：
 </p>
 
-<pre class="example" id="org529aeed">
+<pre class="example" id="orgc56543a">
 \*this text is surrounded by literal asterisks\*
 </pre>
 </div>
@@ -817,7 +817,7 @@ __double underscores__
 为了在一个代码片中包含一个文字反引号，可以使用两个反引号表示代码片：
 </p>
 
-<pre class="example" id="orgd467d8f">
+<pre class="example" id="org7de843e">
 ``There is a literal backtick (`) here.``
 </pre>
 
@@ -825,7 +825,7 @@ __double underscores__
 在双反引号中，插入文字反引号：
 </p>
 
-<pre class="example" id="org53dd323">
+<pre class="example" id="org411ec13">
 A single backtick in a code span: `` ` ``
 
 A backtick-delimited string in a code span: `` `foo` ``
@@ -839,7 +839,7 @@ A backtick-delimited string in a code span: `` `foo` ``
 变成 HTML：
 </p>
 
-<pre class="example" id="orga2f8bfa">
+<pre class="example" id="orga24d37c">
 &lt;p&gt;A single backtick in a code span: &lt;code&gt;`&lt;/code&gt;&lt;/p&gt;
 
 &lt;p&gt;A backtick-delimited string in a code span: &lt;code&gt;`foo`&lt;/code&gt;&lt;/p&gt;
@@ -862,7 +862,7 @@ Markdown 使用一种类似于链接语法的图像语法，允许两种样式�
 内联图像语法：
 </p>
 
-<pre class="example" id="org24afa1b">
+<pre class="example" id="org7cab304">
 ![Alt text](/path/to/img.jpg)
 
 ![Alt text](/path/to/img.jpg "Optional title")
@@ -882,7 +882,7 @@ Markdown 使用一种类似于链接语法的图像语法，允许两种样式�
 引用图片语法：
 </p>
 
-<pre class="example" id="org736f6e0">
+<pre class="example" id="org44927e6">
 ![Alt text][id]
 [id]: url/to/image  "Optional title attribute"
 </pre>
@@ -911,7 +911,7 @@ Markdown 没有指定图像尺寸的语法，可以使用 HTML 的图片标签 =
 Markdown 提供以下字符的转义：
 </p>
 
-<pre class="example" id="org99a9770">
+<pre class="example" id="org3187456">
 \   backslash
 `   backtick
 *   asterisk
@@ -939,7 +939,7 @@ _   underscore
 输入：
 </p>
 
-<pre class="example" id="org64ab50f">
+<pre class="example" id="org4fe2ad0">
 &lt;https://daringfireball.net/projects/markdown/syntax&gt;
 </pre>
 
@@ -947,7 +947,7 @@ _   underscore
 输出为 HTML：
 </p>
 
-<pre class="example" id="org400ab24">
+<pre class="example" id="org3efd767">
 &lt;a href="https://daringfireball.net/projects/markdown/syntax"&gt;https://daringfireball.net/projects/markdown/syntax&lt;/a&gt;
 </pre>
 
@@ -955,7 +955,7 @@ _   underscore
 还可以改变电子邮箱，输入：
 </p>
 
-<pre class="example" id="orgcd93d52">
+<pre class="example" id="org0f062a4">
 &lt;address@example.com&gt;
 </pre>
 
@@ -963,7 +963,7 @@ _   underscore
 HTML 输出：
 </p>
 
-<pre class="example" id="org4922f5d">
+<pre class="example" id="org34ee47b">
 &lt;a href="&amp;#x6D;&amp;#x61;i&amp;#x6C;&amp;#x74;&amp;#x6F;:&amp;#x61;&amp;#x64;&amp;#x64;&amp;#x72;&amp;#x65;
 &amp;#115;&amp;#115;&amp;#64;&amp;#101;&amp;#120;&amp;#x61;&amp;#109;&amp;#x70;&amp;#x6C;e&amp;#x2E;&amp;#99;&amp;#111;
 &amp;#109;"&gt;&amp;#x61;&amp;#x64;&amp;#x64;&amp;#x72;&amp;#x65;&amp;#115;&amp;#115;&amp;#64;&amp;#101;&amp;#120;&amp;#x61;
@@ -993,7 +993,7 @@ HTML 输出：
 <li class="on"><code>[X]</code> 「我应该查阅哪个文章或者哪个网站？」（大致指个方向都会对我有很大帮助）</li>
 </ul>
 
-<pre class="example" id="org39ddfc5">
+<pre class="example" id="org97cd4a3">
 - [ ] 「请帮我列出解决此问题的完整步骤」
 
 - [x] 「有没有人能指个方向？（剩下的我可以自己来）」
