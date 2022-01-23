@@ -1,0 +1,265 @@
+<!DOCTYPE html>
+<html lang="zh">
+<head>
+<!-- 2022-01-23 Sun 21:05 -->
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Redundancy is Life, Except When it's Death</title>
+<meta name="generator" content="Org mode">
+<style type="text/css">
+ <!--/*--><![CDATA[/*><!--*/
+  .title  { text-align: center;
+             margin-bottom: .2em; }
+  .subtitle { text-align: center;
+              font-size: medium;
+              font-weight: bold;
+              margin-top:0; }
+  .todo   { font-family: monospace; color: red; }
+  .done   { font-family: monospace; color: green; }
+  .priority { font-family: monospace; color: orange; }
+  .tag    { background-color: #eee; font-family: monospace;
+            padding: 2px; font-size: 80%; font-weight: normal; }
+  .timestamp { color: #bebebe; }
+  .timestamp-kwd { color: #5f9ea0; }
+  .org-right  { margin-left: auto; margin-right: 0px;  text-align: right; }
+  .org-left   { margin-left: 0px;  margin-right: auto; text-align: left; }
+  .org-center { margin-left: auto; margin-right: auto; text-align: center; }
+  .underline { text-decoration: underline; }
+  #postamble p, #preamble p { font-size: 90%; margin: .2em; }
+  p.verse { margin-left: 3%; }
+  pre {
+    border: 1px solid #ccc;
+    box-shadow: 3px 3px 3px #eee;
+    padding: 8pt;
+    font-family: monospace;
+    overflow: auto;
+    margin: 1.2em;
+  }
+  pre.src {
+    position: relative;
+    overflow: auto;
+    padding-top: 1.2em;
+  }
+  pre.src:before {
+    display: none;
+    position: absolute;
+    background-color: white;
+    top: -10px;
+    right: 10px;
+    padding: 3px;
+    border: 1px solid black;
+  }
+  pre.src:hover:before { display: inline; margin-top: 14px;}
+  /* Languages per Org manual */
+  pre.src-asymptote:before { content: 'Asymptote'; }
+  pre.src-awk:before { content: 'Awk'; }
+  pre.src-C:before { content: 'C'; }
+  /* pre.src-C++ doesn't work in CSS */
+  pre.src-clojure:before { content: 'Clojure'; }
+  pre.src-css:before { content: 'CSS'; }
+  pre.src-D:before { content: 'D'; }
+  pre.src-ditaa:before { content: 'ditaa'; }
+  pre.src-dot:before { content: 'Graphviz'; }
+  pre.src-calc:before { content: 'Emacs Calc'; }
+  pre.src-emacs-lisp:before { content: 'Emacs Lisp'; }
+  pre.src-fortran:before { content: 'Fortran'; }
+  pre.src-gnuplot:before { content: 'gnuplot'; }
+  pre.src-haskell:before { content: 'Haskell'; }
+  pre.src-hledger:before { content: 'hledger'; }
+  pre.src-java:before { content: 'Java'; }
+  pre.src-js:before { content: 'Javascript'; }
+  pre.src-latex:before { content: 'LaTeX'; }
+  pre.src-ledger:before { content: 'Ledger'; }
+  pre.src-lisp:before { content: 'Lisp'; }
+  pre.src-lilypond:before { content: 'Lilypond'; }
+  pre.src-lua:before { content: 'Lua'; }
+  pre.src-matlab:before { content: 'MATLAB'; }
+  pre.src-mscgen:before { content: 'Mscgen'; }
+  pre.src-ocaml:before { content: 'Objective Caml'; }
+  pre.src-octave:before { content: 'Octave'; }
+  pre.src-org:before { content: 'Org mode'; }
+  pre.src-oz:before { content: 'OZ'; }
+  pre.src-plantuml:before { content: 'Plantuml'; }
+  pre.src-processing:before { content: 'Processing.js'; }
+  pre.src-python:before { content: 'Python'; }
+  pre.src-R:before { content: 'R'; }
+  pre.src-ruby:before { content: 'Ruby'; }
+  pre.src-sass:before { content: 'Sass'; }
+  pre.src-scheme:before { content: 'Scheme'; }
+  pre.src-screen:before { content: 'Gnu Screen'; }
+  pre.src-sed:before { content: 'Sed'; }
+  pre.src-sh:before { content: 'shell'; }
+  pre.src-sql:before { content: 'SQL'; }
+  pre.src-sqlite:before { content: 'SQLite'; }
+  /* additional languages in org.el's org-babel-load-languages alist */
+  pre.src-forth:before { content: 'Forth'; }
+  pre.src-io:before { content: 'IO'; }
+  pre.src-J:before { content: 'J'; }
+  pre.src-makefile:before { content: 'Makefile'; }
+  pre.src-maxima:before { content: 'Maxima'; }
+  pre.src-perl:before { content: 'Perl'; }
+  pre.src-picolisp:before { content: 'Pico Lisp'; }
+  pre.src-scala:before { content: 'Scala'; }
+  pre.src-shell:before { content: 'Shell Script'; }
+  pre.src-ebnf2ps:before { content: 'ebfn2ps'; }
+  /* additional language identifiers per "defun org-babel-execute"
+       in ob-*.el */
+  pre.src-cpp:before  { content: 'C++'; }
+  pre.src-abc:before  { content: 'ABC'; }
+  pre.src-coq:before  { content: 'Coq'; }
+  pre.src-groovy:before  { content: 'Groovy'; }
+  /* additional language identifiers from org-babel-shell-names in
+     ob-shell.el: ob-shell is the only babel language using a lambda to put
+     the execution function name together. */
+  pre.src-bash:before  { content: 'bash'; }
+  pre.src-csh:before  { content: 'csh'; }
+  pre.src-ash:before  { content: 'ash'; }
+  pre.src-dash:before  { content: 'dash'; }
+  pre.src-ksh:before  { content: 'ksh'; }
+  pre.src-mksh:before  { content: 'mksh'; }
+  pre.src-posh:before  { content: 'posh'; }
+  /* Additional Emacs modes also supported by the LaTeX listings package */
+  pre.src-ada:before { content: 'Ada'; }
+  pre.src-asm:before { content: 'Assembler'; }
+  pre.src-caml:before { content: 'Caml'; }
+  pre.src-delphi:before { content: 'Delphi'; }
+  pre.src-html:before { content: 'HTML'; }
+  pre.src-idl:before { content: 'IDL'; }
+  pre.src-mercury:before { content: 'Mercury'; }
+  pre.src-metapost:before { content: 'MetaPost'; }
+  pre.src-modula-2:before { content: 'Modula-2'; }
+  pre.src-pascal:before { content: 'Pascal'; }
+  pre.src-ps:before { content: 'PostScript'; }
+  pre.src-prolog:before { content: 'Prolog'; }
+  pre.src-simula:before { content: 'Simula'; }
+  pre.src-tcl:before { content: 'tcl'; }
+  pre.src-tex:before { content: 'TeX'; }
+  pre.src-plain-tex:before { content: 'Plain TeX'; }
+  pre.src-verilog:before { content: 'Verilog'; }
+  pre.src-vhdl:before { content: 'VHDL'; }
+  pre.src-xml:before { content: 'XML'; }
+  pre.src-nxml:before { content: 'XML'; }
+  /* add a generic configuration mode; LaTeX export needs an additional
+     (add-to-list 'org-latex-listings-langs '(conf " ")) in .emacs */
+  pre.src-conf:before { content: 'Configuration File'; }
+
+  table { border-collapse:collapse; }
+  caption.t-above { caption-side: top; }
+  caption.t-bottom { caption-side: bottom; }
+  td, th { vertical-align:top;  }
+  th.org-right  { text-align: center;  }
+  th.org-left   { text-align: center;   }
+  th.org-center { text-align: center; }
+  td.org-right  { text-align: right;  }
+  td.org-left   { text-align: left;   }
+  td.org-center { text-align: center; }
+  dt { font-weight: bold; }
+  .footpara { display: inline; }
+  .footdef  { margin-bottom: 1em; }
+  .figure { padding: 1em; }
+  .figure p { text-align: center; }
+  .equation-container {
+    display: table;
+    text-align: center;
+    width: 100%;
+  }
+  .equation {
+    vertical-align: middle;
+  }
+  .equation-label {
+    display: table-cell;
+    text-align: right;
+    vertical-align: middle;
+  }
+  .inlinetask {
+    padding: 10px;
+    border: 2px solid gray;
+    margin: 10px;
+    background: #ffffcc;
+  }
+  #org-div-home-and-up
+   { text-align: right; font-size: 70%; white-space: nowrap; }
+  textarea { overflow-x: auto; }
+  .linenr { font-size: smaller }
+  .code-highlighted { background-color: #ffff00; }
+  .org-info-js_info-navigation { border-style: none; }
+  #org-info-js_console-label
+    { font-size: 10px; font-weight: bold; white-space: nowrap; }
+  .org-info-js_search-highlight
+    { background-color: #ffff00; color: #000000; font-weight: bold; }
+  .org-svg { width: 90%; }
+  /*]]>*/-->
+</style>
+<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin><link href="https://fonts.googleapis.com/css2?family=Noto+Sans+SC&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="/theme/normalize.css"/>
+<link rel="stylesheet" href="/theme/site.css"/>
+<script defer src='https://static.cloudflareinsights.com/beacon.min.js' data-cf-beacon='{"token": "d5b841b503ed4d1b8fad459b84d1cc2f"}'></script>
+<script defer src="/theme/link.js"></script>
+</head>
+<body>
+<div id="content">
+<header>
+<h1 class="title">Redundancy is Life, Except When it's Death</h1>
+</header><p>
+<a href="https://www.franklinfaraday.com/redundancy-is-life-except-when-its-death/">https://www.franklinfaraday.com/redundancy-is-life-except-when-its-death/</a>
+</p>
+
+<blockquote>
+<p>
+为什么为飞机添加第二个引擎会增加意外发生的几率？这对副业、主业、创业意味着什么？
+</p>
+</blockquote>
+
+<p>
+创新的最可靠的方式就是将一个领域得到的经验教训，应用于另一个领域。飞机引擎数量的发展变化就是一个例子。最开始的飞机引擎只有一个，放在中心位置，但是当这个唯一的引擎损坏后，飞机就会坠毁；之后考虑使用两个引擎，这种坠机情况大幅降低，但随之而来有另一个问题：具有两个引擎的飞机，如果一个引擎停转，因为失去平衡，只有一个引擎的飞机照样会坠毁。可以增加更多引擎，但这又会增加成本。
+</p>
+
+<p>
+从飞机设计中得到的经验具有广泛意义。飞机设计是一个工程问题，试图在很多方面平衡不同的风险和收益，但这很快变得非常复杂，尽管只是基于基础原则。这些原则可以用于任何地方，包括我们的个人生活和商业活动。
+</p>
+
+<p>
+在任何开发的初始阶段，无论是在技术上还是其他方面，增加能力都是以增加风险为代价的。降低风险是极其困难的。更多的冗余不能解决问题。举个简单例子，如果你有一个引擎，它有 25% 的几率损毁，这真的很糟糕。但是如果你有两个引擎，每一个都有 25% 的损毁率，那么它们每一个损毁的概率现在提升至 44%。如果剩下的一个引擎不足以让飞机保持在空中，增加第二个引擎只会让你的飞机坠毁的可能性变得更大，而不是更小。
+</p>
+
+<p>
+之后，随着开发过程更加成熟，冗余才能够创造安全。一旦剩余的发动机或引擎足够强大以保持飞机在空中，更多的引擎实际上确实使整个系统更加安全。任何冒险的开始都是如此，无论是技术上的，商业上的，还是个人的。
+</p>
+
+<p>
+在你的个人事务和生意中，如果你扩张到新的企业而没有把握好先前的事情，那么发生灾难的可能性就很高。尽管快速增长的风险是众所周知的，但快速扩张已经摧毁了许许多多的公司。这一点在特许经营中最为明显，一家成功的商店可以带来丰厚的利润，并且经营效率很高。然而，就像添加动力不足的引擎一样，如果想把商店做大，开很多分店，这需要更多新的技能，这样做很容易弄垮刚开始有起色的那一个商店。因此，尽管与迪士尼合作的冰淇淋连锁店看起来与空中的一架损坏的飞机相差甚远，但它们都可能因为一个相似的根源而遭受灾难。
+</p>
+
+<p>
+同样地，如果你的第一份工作已经让你无暇顾及其他，这个时候再接受第二份工作，你会有很大概率丢掉第一份工作。如果你的第二份工作无法让你养活自己，你的生活将会面临一个危机。不幸的是，就像战争常常证明飞机设计的风险是合理的一样，人们通常在被迫的情况下做两份工作(或者一份工作和一份兼职)，而不是在真正合适的时候。
+</p>
+
+<p>
+然而，如果你等待着，直到你的资金和能力，至少在两个方向上已经足够使用，冗余优势就开始发挥作用。拥有两份工作增加金钱上的安全感和稳定。一次失败可以被另一份工作弥补；更专注于剩下的那一个，直到稳定到足以继续开始两份工作。两份甚至更多强大的选项能够增加冗余，为整个系统带来安全。多个不够强大的选项会导致整个过程的彻底失败。
+</p>
+
+<p>
+一旦你确定了至少几个方面的努力是成功的，你就可以最终减少到你真正需要的，把你的努力集中在那些被证明可以产生最好的表现。如果需要的话，任何一个机会都可以让我们保持在空中，这是我们想要的。
+</p>
+
+<p>
+“但我看到的那些奇特的电动飞机怎么办？它们都至少有四个甚至更多的发动机来保证它们的飞行!”需要记住的重要事情是，这些许多电机中的每一个只负责总负荷的一小部分。任何一个人的失败，甚至是其中几个人的失败，都可以很容易地由其他人来弥补。
+</p>
+
+<p>
+这些电机相对简单，可靠性高。让它们为飞机提供动力的是极其智能的计算机，它控制着飞机，同时还有一个强大的电池形式的充足电源。
+</p>
+
+<p>
+同样，在我们的创业生活中，科技以前所未有的方式使微型企业成为可能。在数字飞行控制之前，四轴飞行器是不可能的。在计算机和互联网出现之前，一个独立的商人不可能有 4 个收入来源，但是今天，一个人做一些咨询、经营一个博客和联盟佣金、经营一个运输业务、经营一系列度假租赁并不是不寻常的事情。
+</p>
+
+<p>
+四条或更多可靠的现金流，即使它们各自很弱，也可能比一两条更强的信息流更好、更安全。关键在于努力应该尽可能独立，而不是相互干扰。
+</p>
+
+<p>
+如果你有多个收入来源都依赖于一个网站的流量，你就不会真正有多个收入来源产生推力; 你有一个单引擎，可能在失败的边缘以最大功率持续工作。同样地，从可靠的收入角度来看，成为一名 Uber 司机也没有什么错，但是花在开车上的时间会很快挤出你的其他收入来源。</p>
+</div>
+</body>
+</html>
