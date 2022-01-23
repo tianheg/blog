@@ -1,0 +1,770 @@
+<!DOCTYPE html>
+<html lang="zh">
+<head>
+<!-- 2022-01-23 Sun 21:06 -->
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>郝斌 C 语言学习：概述、预备知识</title>
+<meta name="generator" content="Org mode">
+<style type="text/css">
+ <!--/*--><![CDATA[/*><!--*/
+  .title  { text-align: center;
+             margin-bottom: .2em; }
+  .subtitle { text-align: center;
+              font-size: medium;
+              font-weight: bold;
+              margin-top:0; }
+  .todo   { font-family: monospace; color: red; }
+  .done   { font-family: monospace; color: green; }
+  .priority { font-family: monospace; color: orange; }
+  .tag    { background-color: #eee; font-family: monospace;
+            padding: 2px; font-size: 80%; font-weight: normal; }
+  .timestamp { color: #bebebe; }
+  .timestamp-kwd { color: #5f9ea0; }
+  .org-right  { margin-left: auto; margin-right: 0px;  text-align: right; }
+  .org-left   { margin-left: 0px;  margin-right: auto; text-align: left; }
+  .org-center { margin-left: auto; margin-right: auto; text-align: center; }
+  .underline { text-decoration: underline; }
+  #postamble p, #preamble p { font-size: 90%; margin: .2em; }
+  p.verse { margin-left: 3%; }
+  pre {
+    border: 1px solid #ccc;
+    box-shadow: 3px 3px 3px #eee;
+    padding: 8pt;
+    font-family: monospace;
+    overflow: auto;
+    margin: 1.2em;
+  }
+  pre.src {
+    position: relative;
+    overflow: auto;
+    padding-top: 1.2em;
+  }
+  pre.src:before {
+    display: none;
+    position: absolute;
+    background-color: white;
+    top: -10px;
+    right: 10px;
+    padding: 3px;
+    border: 1px solid black;
+  }
+  pre.src:hover:before { display: inline; margin-top: 14px;}
+  /* Languages per Org manual */
+  pre.src-asymptote:before { content: 'Asymptote'; }
+  pre.src-awk:before { content: 'Awk'; }
+  pre.src-C:before { content: 'C'; }
+  /* pre.src-C++ doesn't work in CSS */
+  pre.src-clojure:before { content: 'Clojure'; }
+  pre.src-css:before { content: 'CSS'; }
+  pre.src-D:before { content: 'D'; }
+  pre.src-ditaa:before { content: 'ditaa'; }
+  pre.src-dot:before { content: 'Graphviz'; }
+  pre.src-calc:before { content: 'Emacs Calc'; }
+  pre.src-emacs-lisp:before { content: 'Emacs Lisp'; }
+  pre.src-fortran:before { content: 'Fortran'; }
+  pre.src-gnuplot:before { content: 'gnuplot'; }
+  pre.src-haskell:before { content: 'Haskell'; }
+  pre.src-hledger:before { content: 'hledger'; }
+  pre.src-java:before { content: 'Java'; }
+  pre.src-js:before { content: 'Javascript'; }
+  pre.src-latex:before { content: 'LaTeX'; }
+  pre.src-ledger:before { content: 'Ledger'; }
+  pre.src-lisp:before { content: 'Lisp'; }
+  pre.src-lilypond:before { content: 'Lilypond'; }
+  pre.src-lua:before { content: 'Lua'; }
+  pre.src-matlab:before { content: 'MATLAB'; }
+  pre.src-mscgen:before { content: 'Mscgen'; }
+  pre.src-ocaml:before { content: 'Objective Caml'; }
+  pre.src-octave:before { content: 'Octave'; }
+  pre.src-org:before { content: 'Org mode'; }
+  pre.src-oz:before { content: 'OZ'; }
+  pre.src-plantuml:before { content: 'Plantuml'; }
+  pre.src-processing:before { content: 'Processing.js'; }
+  pre.src-python:before { content: 'Python'; }
+  pre.src-R:before { content: 'R'; }
+  pre.src-ruby:before { content: 'Ruby'; }
+  pre.src-sass:before { content: 'Sass'; }
+  pre.src-scheme:before { content: 'Scheme'; }
+  pre.src-screen:before { content: 'Gnu Screen'; }
+  pre.src-sed:before { content: 'Sed'; }
+  pre.src-sh:before { content: 'shell'; }
+  pre.src-sql:before { content: 'SQL'; }
+  pre.src-sqlite:before { content: 'SQLite'; }
+  /* additional languages in org.el's org-babel-load-languages alist */
+  pre.src-forth:before { content: 'Forth'; }
+  pre.src-io:before { content: 'IO'; }
+  pre.src-J:before { content: 'J'; }
+  pre.src-makefile:before { content: 'Makefile'; }
+  pre.src-maxima:before { content: 'Maxima'; }
+  pre.src-perl:before { content: 'Perl'; }
+  pre.src-picolisp:before { content: 'Pico Lisp'; }
+  pre.src-scala:before { content: 'Scala'; }
+  pre.src-shell:before { content: 'Shell Script'; }
+  pre.src-ebnf2ps:before { content: 'ebfn2ps'; }
+  /* additional language identifiers per "defun org-babel-execute"
+       in ob-*.el */
+  pre.src-cpp:before  { content: 'C++'; }
+  pre.src-abc:before  { content: 'ABC'; }
+  pre.src-coq:before  { content: 'Coq'; }
+  pre.src-groovy:before  { content: 'Groovy'; }
+  /* additional language identifiers from org-babel-shell-names in
+     ob-shell.el: ob-shell is the only babel language using a lambda to put
+     the execution function name together. */
+  pre.src-bash:before  { content: 'bash'; }
+  pre.src-csh:before  { content: 'csh'; }
+  pre.src-ash:before  { content: 'ash'; }
+  pre.src-dash:before  { content: 'dash'; }
+  pre.src-ksh:before  { content: 'ksh'; }
+  pre.src-mksh:before  { content: 'mksh'; }
+  pre.src-posh:before  { content: 'posh'; }
+  /* Additional Emacs modes also supported by the LaTeX listings package */
+  pre.src-ada:before { content: 'Ada'; }
+  pre.src-asm:before { content: 'Assembler'; }
+  pre.src-caml:before { content: 'Caml'; }
+  pre.src-delphi:before { content: 'Delphi'; }
+  pre.src-html:before { content: 'HTML'; }
+  pre.src-idl:before { content: 'IDL'; }
+  pre.src-mercury:before { content: 'Mercury'; }
+  pre.src-metapost:before { content: 'MetaPost'; }
+  pre.src-modula-2:before { content: 'Modula-2'; }
+  pre.src-pascal:before { content: 'Pascal'; }
+  pre.src-ps:before { content: 'PostScript'; }
+  pre.src-prolog:before { content: 'Prolog'; }
+  pre.src-simula:before { content: 'Simula'; }
+  pre.src-tcl:before { content: 'tcl'; }
+  pre.src-tex:before { content: 'TeX'; }
+  pre.src-plain-tex:before { content: 'Plain TeX'; }
+  pre.src-verilog:before { content: 'Verilog'; }
+  pre.src-vhdl:before { content: 'VHDL'; }
+  pre.src-xml:before { content: 'XML'; }
+  pre.src-nxml:before { content: 'XML'; }
+  /* add a generic configuration mode; LaTeX export needs an additional
+     (add-to-list 'org-latex-listings-langs '(conf " ")) in .emacs */
+  pre.src-conf:before { content: 'Configuration File'; }
+
+  table { border-collapse:collapse; }
+  caption.t-above { caption-side: top; }
+  caption.t-bottom { caption-side: bottom; }
+  td, th { vertical-align:top;  }
+  th.org-right  { text-align: center;  }
+  th.org-left   { text-align: center;   }
+  th.org-center { text-align: center; }
+  td.org-right  { text-align: right;  }
+  td.org-left   { text-align: left;   }
+  td.org-center { text-align: center; }
+  dt { font-weight: bold; }
+  .footpara { display: inline; }
+  .footdef  { margin-bottom: 1em; }
+  .figure { padding: 1em; }
+  .figure p { text-align: center; }
+  .equation-container {
+    display: table;
+    text-align: center;
+    width: 100%;
+  }
+  .equation {
+    vertical-align: middle;
+  }
+  .equation-label {
+    display: table-cell;
+    text-align: right;
+    vertical-align: middle;
+  }
+  .inlinetask {
+    padding: 10px;
+    border: 2px solid gray;
+    margin: 10px;
+    background: #ffffcc;
+  }
+  #org-div-home-and-up
+   { text-align: right; font-size: 70%; white-space: nowrap; }
+  textarea { overflow-x: auto; }
+  .linenr { font-size: smaller }
+  .code-highlighted { background-color: #ffff00; }
+  .org-info-js_info-navigation { border-style: none; }
+  #org-info-js_console-label
+    { font-size: 10px; font-weight: bold; white-space: nowrap; }
+  .org-info-js_search-highlight
+    { background-color: #ffff00; color: #000000; font-weight: bold; }
+  .org-svg { width: 90%; }
+  /*]]>*/-->
+</style>
+<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin><link href="https://fonts.googleapis.com/css2?family=Noto+Sans+SC&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="/theme/normalize.css"/>
+<link rel="stylesheet" href="/theme/site.css"/>
+<script defer src='https://static.cloudflareinsights.com/beacon.min.js' data-cf-beacon='{"token": "d5b841b503ed4d1b8fad459b84d1cc2f"}'></script>
+<script defer src="/theme/link.js"></script>
+</head>
+<body>
+<div id="content">
+<header>
+<h1 class="title">郝斌 C 语言学习：概述、预备知识</h1>
+</header><p>
+<a href="https://www.bilibili.com/video/BV1os411h77o">https://www.bilibili.com/video/BV1os411h77o</a>
+</p>
+
+<div id="outline-container-orga96354c" class="outline-2">
+<h2 id="orga96354c">自学</h2>
+<div class="outline-text-2" id="text-orga96354c">
+<p>
+刚开始学习基础时，两行代码之间是逻辑关联的；但是学习高阶代码时，因为两行代码中进行了大量封装，所以两行代码之间可能就没有明显的逻辑关联。
+</p>
+
+<p>
+学习知识 A 时的思考：
+</p>
+
+<ol class="org-ol">
+<li>为什么需要 A</li>
+<li>什么是 A</li>
+<li>怎么用 A</li>
+<li>注意的问题</li>
+<li>A 应用的领域</li>
+<li>A 是否重要</li>
+</ol>
+
+<p>
+仅以入门为目的，可以看看谭浩强、林锐、王爽。
+</p>
+</div>
+</div>
+
+<div id="outline-container-org810c378" class="outline-2">
+<h2 id="org810c378">为什么出视频</h2>
+<div class="outline-text-2" id="text-org810c378">
+<p>
+作者认为一个人成功的几个必备要素（重要性排序）：
+</p>
+
+<ol class="org-ol">
+<li>时代</li>
+<li>出身</li>
+<li>机遇</li>
+<li>勤奋、天赋（针对个体而言）</li>
+</ol>
+
+<p>
+苦于没有入门资料，想出视频让更多想自学的人，有收获。
+</p>
+</div>
+</div>
+
+<div id="outline-container-org9428ccf" class="outline-2">
+<h2 id="org9428ccf">C 概述_内容概述</h2>
+<div class="outline-text-2" id="text-org9428ccf">
+<ol class="org-ol">
+<li>为什么学习 C 语言
+<ul class="org-ul">
+<li>C 的起源和发展</li>
+<li>C 的特点</li>
+<li>C 的应用领域</li>
+<li>C 的重要性</li>
+</ul></li>
+<li>怎么学 C</li>
+<li>学习的目标</li>
+<li>常见问题答疑
+<ul class="org-ul">
+<li>学习 Java 为什么建议先学 C</li>
+<li>没学过计算机专业课，怎样学懂 C 语言</li>
+<li>英语和数学不好，怎样学懂 C 语言</li>
+</ul></li>
+<li>课程计划</li>
+</ol>
+</div>
+</div>
+
+<div id="outline-container-org5424443" class="outline-2">
+<h2 id="org5424443">HelloWorld</h2>
+<div class="outline-text-2" id="text-org5424443">
+<div class="org-src-container">
+<pre class="src src-c"><span style="color: #cF9570;">#include</span> <span style="color: #ddbc91;">&lt;stdio.h&gt;</span>
+<span style="color: #706565;">/* </span><span style="color: #857575;">This is a comment</span><span style="color: #706565;"> */</span>
+<span style="color: #ad8572;">int</span> <span style="color: #a9df90;">main</span>()
+{
+    printf(<span style="color: #ddbc91;">"Hello, world!\n"</span>);
+    <span style="color: #91a0b3;">return</span> 0;
+}
+</pre>
+</div>
+
+<div class="org-src-container">
+<pre class="src src-sh">gcc -o helloworld helloworld.c
+./helloworld
+</pre>
+</div>
+</div>
+</div>
+
+<div id="outline-container-orge3c26ef" class="outline-2">
+<h2 id="orge3c26ef">C 的起源和发展</h2>
+<div class="outline-text-2" id="text-orge3c26ef">
+<p>
+<img src="../../images/c-origin-development.png" alt="c-origin-development.png">
+<img src="../../images/c-origin-development-1.png" alt="c-origin-development-1.png">
+</p>
+</div>
+</div>
+
+<div id="outline-container-org002a03a" class="outline-2">
+<h2 id="org002a03a">C 的特点</h2>
+<div class="outline-text-2" id="text-org002a03a">
+<p>
+优点：代码量小、速度快、功能强大
+</p>
+
+<p>
+缺点：危险性高、开发周期长、可移植性不强
+</p>
+
+<p>
+C 语言的指针使 C 语言可以访问硬件。
+</p>
+</div>
+</div>
+
+<div id="outline-container-org360828b" class="outline-2">
+<h2 id="org360828b">C 的应用领域</h2>
+<div class="outline-text-2" id="text-org360828b">
+<ul class="org-ul">
+<li>系统软件开发
+<ul class="org-ul">
+<li>操作系统</li>
+<li>驱动程序</li>
+<li>数据库</li>
+</ul></li>
+<li>应用软件开发
+<ul class="org-ul">
+<li>办公软件：WPS</li>
+<li>图形图像多媒体</li>
+<li>嵌入式软件开发</li>
+<li>游戏开发</li>
+</ul></li>
+</ul>
+</div>
+</div>
+
+<div id="outline-container-org24bcb44" class="outline-2">
+<h2 id="org24bcb44">C 的重要性</h2>
+<div class="outline-text-2" id="text-org24bcb44">
+<ul class="org-ul">
+<li>最重要的系统开发语言</li>
+<li>一个合格黑客必须掌握的语言</li>
+<li>想终身从事程序设计和开发的人员，必须熟练掌握的语言</li>
+<li>为学习数据结构、C++、Java 打基础</li>
+</ul>
+
+<p>
+病毒、木马
+</p>
+
+<p>
+内存泄漏
+</p>
+</div>
+</div>
+
+<div id="outline-container-orge18583b" class="outline-2">
+<h2 id="orge18583b">怎么学习 C</h2>
+<div class="outline-text-2" id="text-orge18583b">
+<ul class="org-ul">
+<li>多思考、多敲代码</li>
+</ul>
+
+<p>
+看书：
+</p>
+
+<ul class="org-ul">
+<li>谭浩强《C 语言程序设计》（好与不好，自己读过才知道，道听途说、轻信不可为）</li>
+<li>The C Programming Language</li>
+<li>C Primer Plus</li>
+<li>C 和指针</li>
+<li>C 专家编程</li>
+<li>C 陷阱与缺陷</li>
+</ul>
+</div>
+</div>
+
+<div id="outline-container-org609317f" class="outline-2">
+<h2 id="org609317f">学习目标</h2>
+<div class="outline-text-2" id="text-org609317f">
+<ul class="org-ul">
+<li>了解程序语言及发展历史</li>
+<li>熟练掌握 C 语言的语法规则</li>
+<li>掌握简单算法</li>
+<li>理解面向过程的思想，为以后学习面向对象铺垫</li>
+<li>能看懂程序</li>
+<li>会调试程序</li>
+<li>掌握将大问题转化成一系列小问题来求解的思想</li>
+<li>为学习 C++、数据结构等打基础</li>
+</ul>
+</div>
+</div>
+
+<div id="outline-container-org02058da" class="outline-2">
+<h2 id="org02058da">课程大纲</h2>
+<div class="outline-text-2" id="text-org02058da">
+
+<figure id="orgfc0dde1">
+<img src="../../images/haobin-c.png" alt="haobin-c.png">
+
+</figure>
+</div>
+</div>
+
+<div id="outline-container-orgfcd7631" class="outline-2">
+<h2 id="orgfcd7631">C 语言预备专业知识</h2>
+<div class="outline-text-2" id="text-orgfcd7631">
+<p>
+1，CPU、内存条、硬盘、显卡、主板、显示器之间的关系
+</p>
+
+<p>
+1）需要访问某个文件时，操作系统会将文件数据调入内存中；由于 CPU 与硬盘运行速度的巨大差异，CPU 不能直接处理硬盘数据
+</p>
+
+<p>
+2）CPU 处理内存中的文件数据
+</p>
+
+<p>
+3）将处理结果根据文件类型发送给显示器、显卡……
+</p>
+
+<p>
+4）主板将 CPU、内存条、硬盘等实体，通过总线连接在一起
+</p>
+
+<p>
+2，HelloWorld 如何运行
+</p>
+
+<p>
+1）编译
+</p>
+
+<p>
+2）链接
+</p>
+
+<p>
+3）操作系统调用 CPU 执行可执行文件
+</p>
+
+<p>
+3，什么是数据类型
+</p>
+
+<p>
+1）基本类型
+</p>
+
+<ul class="org-ul">
+<li>整数
+<ul class="org-ul">
+<li>整型 int 4 字节</li>
+<li>短整型 short int 2 字节</li>
+<li>长整型 long int 8 字节</li>
+</ul></li>
+<li>浮点数（实数）
+<ul class="org-ul">
+<li>单精度 float 4 字节</li>
+<li>双精度 double 8 字节</li>
+</ul></li>
+<li>字符 char 1 字节</li>
+</ul>
+
+<p>
+2）复合类型
+</p>
+
+<ul class="org-ul">
+<li>结构体</li>
+<li>枚举（这是主要，其余两个不常见）</li>
+<li>共用体</li>
+</ul>
+
+<p>
+4，什么是变量
+</p>
+
+<p>
+<b>变量的本质就是内存中一段存储空间。</b>
+</p>
+
+<div class="org-src-container">
+<pre class="src src-c"><span style="color: #cF9570;">#include</span> <span style="color: #ddbc91;">&lt;stdio.h&gt;</span>
+
+<span style="color: #ad8572;">int</span> <span style="color: #a9df90;">main</span>(<span style="color: #ad8572;">void</span>)
+{
+    <span style="color: #ad8572;">int</span> <span style="color: #aaca86;">i</span>;
+    i = 3;
+    ...
+}
+</pre>
+</div>
+
+<p>
+定义一个整型变量 i，然后将 3 赋给 i。问题是， <b>3 被存放在哪个物理实体里了？内存。</b>
+</p>
+
+<p>
+当程序运行时，CPU 处理内存中的变量 i（此时 i 为 3）； <b>当程序运行结束，内存中存放 3 的地址被释放。</b>
+</p>
+
+<p>
+5，CPU、内存条、应用软件、操作系统之间的关系
+</p>
+
+<p>
+应用软件请求操作系统，在内存条中分配一段地址空间；程序运行时，CPU 对数据进行处理。
+</p>
+
+<p>
+6，<span style="background-color: #FFFF00;">变量为什么需要初始化</span>
+</p>
+
+<ul class="org-ul">
+<li>「初始化」就是赋值</li>
+<li>如果定义变量但未初始化，变量会被赋给一个任意值，且不更改，除非重新定义</li>
+<li>机器重启之后恢复平时使用的状态的原因：重启后，内存的电位全部为低电位</li>
+<li>「释放」，内存空间重新开放给程序使用</li>
+</ul>
+
+<p>
+<b>为什么视频中通过 VC++6.0 运行以下代码的结果是一个很大的任意数，而我的却是 0？</b>
+</p>
+
+<p>
+视频中接下来说了原因：微软的这个 VC++6.0 软件，在设计时考虑到未初始化的情况。软件会自动为未初始化变量添加一个「填充字」，一般是 <code>-8</code> 开头的长串数字。提醒开发者，当前变量未初始化。
+</p>
+
+<p>
+代码：
+</p>
+
+<div class="org-src-container">
+<pre class="src src-c"><span style="color: #cF9570;">#include</span> <span style="color: #ddbc91;">&lt;stdio.h&gt;</span>
+
+<span style="color: #ad8572;">int</span> <span style="color: #a9df90;">main</span>(<span style="color: #ad8572;">void</span>) {
+    <span style="color: #ad8572;">int</span> <span style="color: #aaca86;">i</span>;
+    printf(<span style="color: #ddbc91;">"i = %d\n"</span>, i);
+    <span style="color: #91a0b3;">return</span> i;
+}
+</pre>
+</div>
+
+<p>
+背景：
+</p>
+
+<p>
+视频中使用的操作系统为 Windows（可能是 XP），时间是 09 年 10 月，软件使用的是 VC++6.0；我使用的操作系统是 Arch Linux，时间是 21 年 12 月，在命令行使用 gcc（版本号为 11.1.0）编译。
+</p>
+
+<p>
+7，如何定义变量
+</p>
+
+<p>
+数据类型 变量名 = 要赋的值;
+</p>
+
+<p>
+等价于
+</p>
+
+<p>
+数据类型 变量名;
+</p>
+
+<p>
+变量名 = 要赋的值;
+</p>
+
+<p>
+8，<span style="background-color: #FFFF00;">什么是进制</span>
+</p>
+
+<ul class="org-ul">
+<li>进制就是逢几进一</li>
+<li>十进制-逢十进一</li>
+<li>二进制-逢二进一</li>
+<li><b>C 语言规定八进制前加 0（是零，不是字母 o），十六进制前加 0x 或 0X，十进制前什么都不加</b></li>
+<li>一年 12 个月-十二进制</li>
+<li>一周 7 天-七进制</li>
+<li>一天 24 小时-二十四进制</li>
+</ul>
+
+<p>
+进制转换表：
+</p>
+
+
+<figure id="org3178d69">
+<img src="../../images/metric-conversion.png" alt="metric-conversion.png">
+
+</figure>
+
+<p>
+<code>printf</code> 的用法：
+</p>
+
+<ul class="org-ul">
+<li>%d 十进制输出</li>
+<li>%x 十六进制输出</li>
+<li>%o 八进制</li>
+</ul>
+
+<p>
+思考表象后的本质。
+</p>
+
+<p>
+9，常量在 C 语言中是如何表示的
+</p>
+
+<p>
+常量分为整数和浮点数。
+</p>
+
+<p>
+整数
+</p>
+
+<ul class="org-ul">
+<li>十进制：传统写法</li>
+<li>十六进制：前面加 0x 或  0X</li>
+<li>八进制：前面是数字 0（零）</li>
+</ul>
+
+<p>
+浮点数
+</p>
+
+<ul class="org-ul">
+<li>传统写法：float x = 3.2;</li>
+<li>科学计数法：float x = 2.1e3; 2100 float x = 12.23e-2; 0.1223</li>
+</ul>
+
+<p>
+在 C/C++ 中，实数默认为 double 类型，如果需要使用 float，要这样写 <code>float x = 2.1e3F;</code>
+</p>
+
+<p>
+字符
+</p>
+
+<ul class="org-ul">
+<li>单个字符 'a', 'b', 'c'</li>
+<li>字符串 "abc" "A"(但是，这样写是对的，它表示：'A' '\0')</li>
+</ul>
+
+<p>
+10，常量以怎样的二进制代码存储在计算机中
+</p>
+
+<p>
+编码
+</p>
+
+<ul class="org-ul">
+<li>整数是以补码的形式转化为二进制代码在计算机中存储；</li>
+<li>实数是以 IEEE754 标准转化为二进制代码在计算机中存储；</li>
+<li>字符的存储方式与整数的相同（字符&#x2013;&gt;ASCII 码（整数））</li>
+</ul>
+</div>
+
+<div id="outline-container-orgf2d0019" class="outline-3">
+<h3 id="orgf2d0019"><span style="background-color: #FFFF00;">代码规范化</span></h3>
+<div class="outline-text-3" id="text-orgf2d0019">
+<ul class="org-ul">
+<li>编码成对</li>
+<li><code>if ()</code> if 与之后的括号要有空格，便于与函数区分；运算优先级越低，它的符号附近需要加空格</li>
+<li>缩进：同等地位不需缩进</li>
+<li>换行：通过换行区分以下程序的三部分；相对独立也可以换行（if&#x2026;else if&#x2026;else&#x2026;）</li>
+</ul>
+
+<p>
+程序的三部分：
+</p>
+
+<ol class="org-ol">
+<li>定义变量</li>
+<li>对变量进行操作</li>
+<li>输出值</li>
+</ol>
+
+<p>
+<b>为什么会有 <code>return 0;</code> 存在？</b>
+</p>
+</div>
+</div>
+
+<div id="outline-container-org18b67e4" class="outline-3">
+<h3 id="org18b67e4">什么是字节</h3>
+<div class="outline-text-3" id="text-org18b67e4">
+<p>
+字节（byte）是存储数据的单位，并且是硬件能访问的最小单位
+</p>
+
+<ul class="org-ul">
+<li>一个字节存储 8 个标志位</li>
+<li>1k = 1024 字节</li>
+<li>……</li>
+</ul>
+
+<p>
+硬件只能控制到字节，通过软件（位运算符）精确到位
+</p>
+</div>
+</div>
+
+<div id="outline-container-org9086886" class="outline-3">
+<h3 id="org9086886">不同数据类型之间相互赋值</h3>
+<div class="outline-text-3" id="text-org9086886">
+<p>
+学习这个知识点，需要知道「补码」。
+</p>
+</div>
+</div>
+
+<div id="outline-container-orgaaf3465" class="outline-3">
+<h3 id="orgaaf3465"><span style="background-color: #FFFF00;">什么是 ASCII</span></h3>
+<div class="outline-text-3" id="text-orgaaf3465">
+<p>
+它规定不同字符使用哪些整数值表示。
+</p>
+</div>
+</div>
+
+<div id="outline-container-orgc8c59b6" class="outline-3">
+<h3 id="orgc8c59b6">char 使用常见问题解析</h3>
+<div class="outline-text-3" id="text-orgc8c59b6">
+<div class="org-src-container">
+<pre class="src src-c"><span style="color: #cF9570;">#include</span> <span style="color: #ddbc91;">&lt;stdio.h&gt;</span>
+<span style="color: #ad8572;">int</span> <span style="color: #a9df90;">main</span>() {
+    <span style="color: #ad8572;">char</span> <span style="color: #aaca86;">ch</span> = <span style="color: #ddbc91;">'A'</span>; <span style="color: #706565;">// </span><span style="color: #857575;">OK</span>
+    <span style="color: #ad8572;">char</span> <span style="color: #aaca86;">ch</span> = <span style="color: #ddbc91;">"A"</span>; <span style="color: #706565;">// </span><span style="color: #857575;">error, "A" &lt;=&gt; 'A' + '\0'</span>
+    <span style="color: #ad8572;">char</span> <span style="color: #aaca86;">ch</span> = <span style="color: #ddbc91;">"AB"</span>; <span style="color: #706565;">// </span><span style="color: #857575;">error, string cannot be assigned to single variable</span>
+    printf(<span style="color: #ddbc91;">"%c"</span>, ch); <span style="color: #706565;">// </span><span style="color: #857575;">output string</span>
+    <span style="color: #91a0b3;">return</span> 0;
+}
+</pre>
+</div>
+
+<ul class="org-ul">
+<li>单引号只能找到包裹单个字符</li>
+<li>多个字符必须用双引号</li>
+</ul>
+</div>
+</div>
+
+<div id="outline-container-orgf862091" class="outline-3">
+<h3 id="orgf862091">字符的存储</h3>
+</div>
+</div>
+</div>
+</body>
+</html>
