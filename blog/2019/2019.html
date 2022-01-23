@@ -1,0 +1,380 @@
+<!DOCTYPE html>
+<html lang="zh">
+<head>
+<!-- 2022-01-23 Sun 21:05 -->
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>2019 年终总结</title>
+<meta name="generator" content="Org mode">
+<style type="text/css">
+ <!--/*--><![CDATA[/*><!--*/
+  .title  { text-align: center;
+             margin-bottom: .2em; }
+  .subtitle { text-align: center;
+              font-size: medium;
+              font-weight: bold;
+              margin-top:0; }
+  .todo   { font-family: monospace; color: red; }
+  .done   { font-family: monospace; color: green; }
+  .priority { font-family: monospace; color: orange; }
+  .tag    { background-color: #eee; font-family: monospace;
+            padding: 2px; font-size: 80%; font-weight: normal; }
+  .timestamp { color: #bebebe; }
+  .timestamp-kwd { color: #5f9ea0; }
+  .org-right  { margin-left: auto; margin-right: 0px;  text-align: right; }
+  .org-left   { margin-left: 0px;  margin-right: auto; text-align: left; }
+  .org-center { margin-left: auto; margin-right: auto; text-align: center; }
+  .underline { text-decoration: underline; }
+  #postamble p, #preamble p { font-size: 90%; margin: .2em; }
+  p.verse { margin-left: 3%; }
+  pre {
+    border: 1px solid #ccc;
+    box-shadow: 3px 3px 3px #eee;
+    padding: 8pt;
+    font-family: monospace;
+    overflow: auto;
+    margin: 1.2em;
+  }
+  pre.src {
+    position: relative;
+    overflow: auto;
+    padding-top: 1.2em;
+  }
+  pre.src:before {
+    display: none;
+    position: absolute;
+    background-color: white;
+    top: -10px;
+    right: 10px;
+    padding: 3px;
+    border: 1px solid black;
+  }
+  pre.src:hover:before { display: inline; margin-top: 14px;}
+  /* Languages per Org manual */
+  pre.src-asymptote:before { content: 'Asymptote'; }
+  pre.src-awk:before { content: 'Awk'; }
+  pre.src-C:before { content: 'C'; }
+  /* pre.src-C++ doesn't work in CSS */
+  pre.src-clojure:before { content: 'Clojure'; }
+  pre.src-css:before { content: 'CSS'; }
+  pre.src-D:before { content: 'D'; }
+  pre.src-ditaa:before { content: 'ditaa'; }
+  pre.src-dot:before { content: 'Graphviz'; }
+  pre.src-calc:before { content: 'Emacs Calc'; }
+  pre.src-emacs-lisp:before { content: 'Emacs Lisp'; }
+  pre.src-fortran:before { content: 'Fortran'; }
+  pre.src-gnuplot:before { content: 'gnuplot'; }
+  pre.src-haskell:before { content: 'Haskell'; }
+  pre.src-hledger:before { content: 'hledger'; }
+  pre.src-java:before { content: 'Java'; }
+  pre.src-js:before { content: 'Javascript'; }
+  pre.src-latex:before { content: 'LaTeX'; }
+  pre.src-ledger:before { content: 'Ledger'; }
+  pre.src-lisp:before { content: 'Lisp'; }
+  pre.src-lilypond:before { content: 'Lilypond'; }
+  pre.src-lua:before { content: 'Lua'; }
+  pre.src-matlab:before { content: 'MATLAB'; }
+  pre.src-mscgen:before { content: 'Mscgen'; }
+  pre.src-ocaml:before { content: 'Objective Caml'; }
+  pre.src-octave:before { content: 'Octave'; }
+  pre.src-org:before { content: 'Org mode'; }
+  pre.src-oz:before { content: 'OZ'; }
+  pre.src-plantuml:before { content: 'Plantuml'; }
+  pre.src-processing:before { content: 'Processing.js'; }
+  pre.src-python:before { content: 'Python'; }
+  pre.src-R:before { content: 'R'; }
+  pre.src-ruby:before { content: 'Ruby'; }
+  pre.src-sass:before { content: 'Sass'; }
+  pre.src-scheme:before { content: 'Scheme'; }
+  pre.src-screen:before { content: 'Gnu Screen'; }
+  pre.src-sed:before { content: 'Sed'; }
+  pre.src-sh:before { content: 'shell'; }
+  pre.src-sql:before { content: 'SQL'; }
+  pre.src-sqlite:before { content: 'SQLite'; }
+  /* additional languages in org.el's org-babel-load-languages alist */
+  pre.src-forth:before { content: 'Forth'; }
+  pre.src-io:before { content: 'IO'; }
+  pre.src-J:before { content: 'J'; }
+  pre.src-makefile:before { content: 'Makefile'; }
+  pre.src-maxima:before { content: 'Maxima'; }
+  pre.src-perl:before { content: 'Perl'; }
+  pre.src-picolisp:before { content: 'Pico Lisp'; }
+  pre.src-scala:before { content: 'Scala'; }
+  pre.src-shell:before { content: 'Shell Script'; }
+  pre.src-ebnf2ps:before { content: 'ebfn2ps'; }
+  /* additional language identifiers per "defun org-babel-execute"
+       in ob-*.el */
+  pre.src-cpp:before  { content: 'C++'; }
+  pre.src-abc:before  { content: 'ABC'; }
+  pre.src-coq:before  { content: 'Coq'; }
+  pre.src-groovy:before  { content: 'Groovy'; }
+  /* additional language identifiers from org-babel-shell-names in
+     ob-shell.el: ob-shell is the only babel language using a lambda to put
+     the execution function name together. */
+  pre.src-bash:before  { content: 'bash'; }
+  pre.src-csh:before  { content: 'csh'; }
+  pre.src-ash:before  { content: 'ash'; }
+  pre.src-dash:before  { content: 'dash'; }
+  pre.src-ksh:before  { content: 'ksh'; }
+  pre.src-mksh:before  { content: 'mksh'; }
+  pre.src-posh:before  { content: 'posh'; }
+  /* Additional Emacs modes also supported by the LaTeX listings package */
+  pre.src-ada:before { content: 'Ada'; }
+  pre.src-asm:before { content: 'Assembler'; }
+  pre.src-caml:before { content: 'Caml'; }
+  pre.src-delphi:before { content: 'Delphi'; }
+  pre.src-html:before { content: 'HTML'; }
+  pre.src-idl:before { content: 'IDL'; }
+  pre.src-mercury:before { content: 'Mercury'; }
+  pre.src-metapost:before { content: 'MetaPost'; }
+  pre.src-modula-2:before { content: 'Modula-2'; }
+  pre.src-pascal:before { content: 'Pascal'; }
+  pre.src-ps:before { content: 'PostScript'; }
+  pre.src-prolog:before { content: 'Prolog'; }
+  pre.src-simula:before { content: 'Simula'; }
+  pre.src-tcl:before { content: 'tcl'; }
+  pre.src-tex:before { content: 'TeX'; }
+  pre.src-plain-tex:before { content: 'Plain TeX'; }
+  pre.src-verilog:before { content: 'Verilog'; }
+  pre.src-vhdl:before { content: 'VHDL'; }
+  pre.src-xml:before { content: 'XML'; }
+  pre.src-nxml:before { content: 'XML'; }
+  /* add a generic configuration mode; LaTeX export needs an additional
+     (add-to-list 'org-latex-listings-langs '(conf " ")) in .emacs */
+  pre.src-conf:before { content: 'Configuration File'; }
+
+  table { border-collapse:collapse; }
+  caption.t-above { caption-side: top; }
+  caption.t-bottom { caption-side: bottom; }
+  td, th { vertical-align:top;  }
+  th.org-right  { text-align: center;  }
+  th.org-left   { text-align: center;   }
+  th.org-center { text-align: center; }
+  td.org-right  { text-align: right;  }
+  td.org-left   { text-align: left;   }
+  td.org-center { text-align: center; }
+  dt { font-weight: bold; }
+  .footpara { display: inline; }
+  .footdef  { margin-bottom: 1em; }
+  .figure { padding: 1em; }
+  .figure p { text-align: center; }
+  .equation-container {
+    display: table;
+    text-align: center;
+    width: 100%;
+  }
+  .equation {
+    vertical-align: middle;
+  }
+  .equation-label {
+    display: table-cell;
+    text-align: right;
+    vertical-align: middle;
+  }
+  .inlinetask {
+    padding: 10px;
+    border: 2px solid gray;
+    margin: 10px;
+    background: #ffffcc;
+  }
+  #org-div-home-and-up
+   { text-align: right; font-size: 70%; white-space: nowrap; }
+  textarea { overflow-x: auto; }
+  .linenr { font-size: smaller }
+  .code-highlighted { background-color: #ffff00; }
+  .org-info-js_info-navigation { border-style: none; }
+  #org-info-js_console-label
+    { font-size: 10px; font-weight: bold; white-space: nowrap; }
+  .org-info-js_search-highlight
+    { background-color: #ffff00; color: #000000; font-weight: bold; }
+  .org-svg { width: 90%; }
+  /*]]>*/-->
+</style>
+<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin><link href="https://fonts.googleapis.com/css2?family=Noto+Sans+SC&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="/theme/normalize.css"/>
+<link rel="stylesheet" href="/theme/site.css"/>
+<script defer src='https://static.cloudflareinsights.com/beacon.min.js' data-cf-beacon='{"token": "d5b841b503ed4d1b8fad459b84d1cc2f"}'></script>
+<script defer src="/theme/link.js"></script>
+</head>
+<body>
+<div id="content">
+<header>
+<h1 class="title">2019 年终总结</h1>
+</header><blockquote>
+<p>
+你是真的活了一万多天
+</p>
+
+<p>
+还是仅仅生活了一天
+</p>
+
+<p>
+却重复了一万多次
+</p>
+
+<p>
+-&#x2013;&#x2014;航航
+</p>
+</blockquote>
+
+<p>
+这一年来，有苦有泪，有喜有忧，待到此时，倒也算圆满。写下几段话，总结一下生活吧：
+</p>
+
+<p>
+一、
+</p>
+
+<p>
+与家人的关系慢慢地变化了，但不是很快。我是一个不念家的人（用妈妈的话来说的，就是不着家），几个月也不会打一个电话，偶尔一次也是妈妈打给我，因为她想我了。
+</p>
+
+<p>
+我很清楚，自己不想往家里打电话，没有原因，就是不想。很多时候，每当我听到别人经常给家里人打电话，会感到很奇怪：至于吗？我认为这是自己的特点，我这年纪老是向往外界，念家？那是不可能的。
+</p>
+
+<p>
+可是，话又说回来，哪一个离家的孩子，不想念自己的爸爸妈妈兄弟姐妹呢？不是不念，而是不愿。没有做出一番成就，很难无愧父母。所以，总是不愿回家，甚至都不曾在外人面前提起。怕惊扰了内心那一丝牵挂。
+</p>
+
+<p>
+妹妹，也长大了，上初一。正是健康成长的时候，我告诉爸妈不要总是打骂。要和她好好交流，了解妹妹自己的想法。现在，每当我接到家里的电话，妹妹总是很开心地跟我说着班里的趣闻乐事。我觉得这样很好，快乐地过好每一天，这是我对妹妹的祝福。同时，也在心里祝愿亲爱的爸爸妈妈，在新的一年里，能够健健康康的，身上的病痛能少一些。
+</p>
+
+<p>
+二、
+</p>
+
+<p>
+今天考大学物理，祈祷能及格吧。我发现我想的和我做的完全不一样，考试前我正好看了某一题，试卷上就是原题，但是我还是不会写。
+</p>
+
+<p>
+这就是不会学习的表现，没有什么掉渣的理由，因为到这个阶段，好好学习是必须做到的。上课的确听讲了，但是下课从来不去巩固，从来不温习上课的内容。那我的业余时间都用来干嘛呢？我在干真正重要的事-&#x2013;&#x2014;培养技能，锻炼能力。每天写文，看各种好看的书，这是必备功课。
+</p>
+
+<p>
+我把业余应该用来复习的时间，全部挤占了，所以，如果我这次考试有不及格的科目的话，也是意料之中的。这就是个人规划问题了。每件事，都有其应当重视的程度，程度不同，所花费的时间也不同。
+</p>
+
+<p>
+我呢，沉浸在舒适的写作环境里，却忽略了，完成考试也是我需要而且必须做的事情。完成考试是当前任务，锤炼技能是未来的事情。它们如何占用我的时间，这是我应该思考的问题。
+</p>
+
+<p>
+三、
+</p>
+
+<p>
+今年，遇到了很多人，和他们沟通交流，收获颇丰。在心里谢谢他们。我这个人，无论什么事，都想跟时间扯上点关系。大概时间每一个人，都拥有的，扯上时间就等同于和每一个人产生联系吧。
+</p>
+
+<p>
+小时候，嗯嗯&#x2026;&#x2026;小时候的朋友，我忘记了。印象很深的一件事是一个小伙伴欺负我，其他的没什么了。这就是幼年，大概不到
+6 岁。
+</p>
+
+<p>
+6
+岁以后的日子都是在大连度过的，因为爸爸在这里打工，他是一名装修工人。这个时候，我记得有几个玩得好的伙伴，孙厚华是一位，牟宇琦也是一位。王韵涵是我小学时的暗恋对象。现在讲出来，都是自嘲，你小子当年那么小，竟然还有喜欢的人，心里的另一个声音又会说，怎么样，不行啊。这也没什么，不是吗？
+</p>
+
+<p>
+2010
+年，从大连回到老家安徽，在县城里上小学五年级。那时候认识的人，现在只能安静地躺在
+qq
+好友列表里。不再有任何联系了。没办法，时间的力量是可怕的。他们走向了不同的生活，如果没有交集往后一辈子可能不会再见面了。
+</p>
+
+<p>
+2012
+年，我上初中，那个时候学校还是初中小学联合部。对我而言，上初中就是换栋楼，换个教室而已。我在那里度过了三年时光。现在还有联系的，有很多。我们建了微信群、qq
+群，平时看他们插科打诨，我偶尔参与。感觉真好！
+</p>
+
+<p>
+2015
+年，我刚上高一。你说，我要是在那个时候，抓住风口，像现在的成功自媒体创业者一样，开一个公众号（有留言功能，2018
+年之后的公众号都不再有留言功能）。你说，我是不是就有钱了（财迷脸）。可惜，没如果。
+</p>
+
+<p>
+高中的时候，我印象最深的，就一次和全班同学的冲突。班里很吵，当时我想让大家安静，好好学习。但是，没人听我的，还是很吵。我很大声地说话，说着一些大道理，说着说着自己开始自顾自地哭了起来。
+</p>
+
+<p>
+觉得自己很委屈，为什么自己那么努力地做这件事，就是不见成效。现在看来，都是过去了，但是依然感激那时那么努力，在迷茫的时候多少能有一些慰藉。
+</p>
+
+<p>
+2018
+年，我上大学，来到陌生城市，和陌生的朋友见面。遇到一些人，错过一些人，好歹留下几个人。此行不虚，继续前行。
+</p>
+
+<p>
+四、
+</p>
+
+<p>
+一说到个人成长，就变得无话可说。因为心智依然不够成熟，个人学习的系统方法也没有着落，心里挺没底的。
+</p>
+
+<p>
+我认为未来一年，将是我成长，最快的一年。为什么呢？因为一切都整装待发。我列几点：
+</p>
+
+<p>
+1.学校学习做好，上课听讲，下课巩固复习；
+</p>
+
+<p>
+2.学习 Python 语言及其相关技术，阅读技术书籍，正是踏入程序员门槛；
+</p>
+
+<p>
+3.开始投稿赚生活费，要自立更生了；
+</p>
+
+<p>
+4.看书看书，什么书都看，但就目前来讲，涉及面有心理学、社会学、经济学、编程技术还有小说、文学评论等。只要没有心理上的不适，都会看。能看多少，就看我的本事了。
+</p>
+
+<p>
+最重要的一点是要学会如何适应这个社会，如何与社会交往。我觉得真诚是最重要的。
+</p>
+
+<p>
+依然以前人为榜样，但是坚定走自己的路。时常会把自己和他人比较，越比较越觉得自己不如别人。这样挺好的，让我知道自己有几斤几两，但是也不要过分计较。
+</p>
+
+<p>
+心智的成长不是朝夕可见的，它需要时间、需要变化、需要学习。我不是在说着一些无关紧要的事情，而是一件很重要的事情-&#x2013;&#x2014;一个人行走在社会里，能够一直拥有的是自己的脑子，是自己脑袋里的东西。所以，思维很重要，知道如何锻炼思维更重要。
+</p>
+
+<p>
+所以，在看书的时候看一些思维提升的书籍，并非功利，也丝毫没有被忽悠的作用。如果你被书里的东西弄迷糊了，说明你还要多努力多学习。
+</p>
+
+<p>
+五、
+</p>
+
+<p>
+说几个有关人生大事的思考：
+</p>
+
+<p>
+考研是条路，我还没有坚定决心。我要清楚自己要什么，别人想考研是想离开这个学校，去更好的学校。我想这还不够，我为什么要这样做，我考研能够获得什么，我考研成功后能得到什么，我考研要付出多少东西。不弄清楚这些，我是没有办法继续行动的。
+</p>
+
+<p>
+六、
+</p>
+
+<p>
+我出去走一趟，无论去哪里，出去就行。加油，用自己挣的钱，来一次说走就走的旅行。
+</p>
+</div>
+</body>
+</html>

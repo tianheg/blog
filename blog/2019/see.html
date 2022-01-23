@@ -1,0 +1,408 @@
+<!DOCTYPE html>
+<html lang="zh">
+<head>
+<!-- 2022-01-23 Sun 21:05 -->
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>看见</title>
+<meta name="generator" content="Org mode">
+<style type="text/css">
+ <!--/*--><![CDATA[/*><!--*/
+  .title  { text-align: center;
+             margin-bottom: .2em; }
+  .subtitle { text-align: center;
+              font-size: medium;
+              font-weight: bold;
+              margin-top:0; }
+  .todo   { font-family: monospace; color: red; }
+  .done   { font-family: monospace; color: green; }
+  .priority { font-family: monospace; color: orange; }
+  .tag    { background-color: #eee; font-family: monospace;
+            padding: 2px; font-size: 80%; font-weight: normal; }
+  .timestamp { color: #bebebe; }
+  .timestamp-kwd { color: #5f9ea0; }
+  .org-right  { margin-left: auto; margin-right: 0px;  text-align: right; }
+  .org-left   { margin-left: 0px;  margin-right: auto; text-align: left; }
+  .org-center { margin-left: auto; margin-right: auto; text-align: center; }
+  .underline { text-decoration: underline; }
+  #postamble p, #preamble p { font-size: 90%; margin: .2em; }
+  p.verse { margin-left: 3%; }
+  pre {
+    border: 1px solid #ccc;
+    box-shadow: 3px 3px 3px #eee;
+    padding: 8pt;
+    font-family: monospace;
+    overflow: auto;
+    margin: 1.2em;
+  }
+  pre.src {
+    position: relative;
+    overflow: auto;
+    padding-top: 1.2em;
+  }
+  pre.src:before {
+    display: none;
+    position: absolute;
+    background-color: white;
+    top: -10px;
+    right: 10px;
+    padding: 3px;
+    border: 1px solid black;
+  }
+  pre.src:hover:before { display: inline; margin-top: 14px;}
+  /* Languages per Org manual */
+  pre.src-asymptote:before { content: 'Asymptote'; }
+  pre.src-awk:before { content: 'Awk'; }
+  pre.src-C:before { content: 'C'; }
+  /* pre.src-C++ doesn't work in CSS */
+  pre.src-clojure:before { content: 'Clojure'; }
+  pre.src-css:before { content: 'CSS'; }
+  pre.src-D:before { content: 'D'; }
+  pre.src-ditaa:before { content: 'ditaa'; }
+  pre.src-dot:before { content: 'Graphviz'; }
+  pre.src-calc:before { content: 'Emacs Calc'; }
+  pre.src-emacs-lisp:before { content: 'Emacs Lisp'; }
+  pre.src-fortran:before { content: 'Fortran'; }
+  pre.src-gnuplot:before { content: 'gnuplot'; }
+  pre.src-haskell:before { content: 'Haskell'; }
+  pre.src-hledger:before { content: 'hledger'; }
+  pre.src-java:before { content: 'Java'; }
+  pre.src-js:before { content: 'Javascript'; }
+  pre.src-latex:before { content: 'LaTeX'; }
+  pre.src-ledger:before { content: 'Ledger'; }
+  pre.src-lisp:before { content: 'Lisp'; }
+  pre.src-lilypond:before { content: 'Lilypond'; }
+  pre.src-lua:before { content: 'Lua'; }
+  pre.src-matlab:before { content: 'MATLAB'; }
+  pre.src-mscgen:before { content: 'Mscgen'; }
+  pre.src-ocaml:before { content: 'Objective Caml'; }
+  pre.src-octave:before { content: 'Octave'; }
+  pre.src-org:before { content: 'Org mode'; }
+  pre.src-oz:before { content: 'OZ'; }
+  pre.src-plantuml:before { content: 'Plantuml'; }
+  pre.src-processing:before { content: 'Processing.js'; }
+  pre.src-python:before { content: 'Python'; }
+  pre.src-R:before { content: 'R'; }
+  pre.src-ruby:before { content: 'Ruby'; }
+  pre.src-sass:before { content: 'Sass'; }
+  pre.src-scheme:before { content: 'Scheme'; }
+  pre.src-screen:before { content: 'Gnu Screen'; }
+  pre.src-sed:before { content: 'Sed'; }
+  pre.src-sh:before { content: 'shell'; }
+  pre.src-sql:before { content: 'SQL'; }
+  pre.src-sqlite:before { content: 'SQLite'; }
+  /* additional languages in org.el's org-babel-load-languages alist */
+  pre.src-forth:before { content: 'Forth'; }
+  pre.src-io:before { content: 'IO'; }
+  pre.src-J:before { content: 'J'; }
+  pre.src-makefile:before { content: 'Makefile'; }
+  pre.src-maxima:before { content: 'Maxima'; }
+  pre.src-perl:before { content: 'Perl'; }
+  pre.src-picolisp:before { content: 'Pico Lisp'; }
+  pre.src-scala:before { content: 'Scala'; }
+  pre.src-shell:before { content: 'Shell Script'; }
+  pre.src-ebnf2ps:before { content: 'ebfn2ps'; }
+  /* additional language identifiers per "defun org-babel-execute"
+       in ob-*.el */
+  pre.src-cpp:before  { content: 'C++'; }
+  pre.src-abc:before  { content: 'ABC'; }
+  pre.src-coq:before  { content: 'Coq'; }
+  pre.src-groovy:before  { content: 'Groovy'; }
+  /* additional language identifiers from org-babel-shell-names in
+     ob-shell.el: ob-shell is the only babel language using a lambda to put
+     the execution function name together. */
+  pre.src-bash:before  { content: 'bash'; }
+  pre.src-csh:before  { content: 'csh'; }
+  pre.src-ash:before  { content: 'ash'; }
+  pre.src-dash:before  { content: 'dash'; }
+  pre.src-ksh:before  { content: 'ksh'; }
+  pre.src-mksh:before  { content: 'mksh'; }
+  pre.src-posh:before  { content: 'posh'; }
+  /* Additional Emacs modes also supported by the LaTeX listings package */
+  pre.src-ada:before { content: 'Ada'; }
+  pre.src-asm:before { content: 'Assembler'; }
+  pre.src-caml:before { content: 'Caml'; }
+  pre.src-delphi:before { content: 'Delphi'; }
+  pre.src-html:before { content: 'HTML'; }
+  pre.src-idl:before { content: 'IDL'; }
+  pre.src-mercury:before { content: 'Mercury'; }
+  pre.src-metapost:before { content: 'MetaPost'; }
+  pre.src-modula-2:before { content: 'Modula-2'; }
+  pre.src-pascal:before { content: 'Pascal'; }
+  pre.src-ps:before { content: 'PostScript'; }
+  pre.src-prolog:before { content: 'Prolog'; }
+  pre.src-simula:before { content: 'Simula'; }
+  pre.src-tcl:before { content: 'tcl'; }
+  pre.src-tex:before { content: 'TeX'; }
+  pre.src-plain-tex:before { content: 'Plain TeX'; }
+  pre.src-verilog:before { content: 'Verilog'; }
+  pre.src-vhdl:before { content: 'VHDL'; }
+  pre.src-xml:before { content: 'XML'; }
+  pre.src-nxml:before { content: 'XML'; }
+  /* add a generic configuration mode; LaTeX export needs an additional
+     (add-to-list 'org-latex-listings-langs '(conf " ")) in .emacs */
+  pre.src-conf:before { content: 'Configuration File'; }
+
+  table { border-collapse:collapse; }
+  caption.t-above { caption-side: top; }
+  caption.t-bottom { caption-side: bottom; }
+  td, th { vertical-align:top;  }
+  th.org-right  { text-align: center;  }
+  th.org-left   { text-align: center;   }
+  th.org-center { text-align: center; }
+  td.org-right  { text-align: right;  }
+  td.org-left   { text-align: left;   }
+  td.org-center { text-align: center; }
+  dt { font-weight: bold; }
+  .footpara { display: inline; }
+  .footdef  { margin-bottom: 1em; }
+  .figure { padding: 1em; }
+  .figure p { text-align: center; }
+  .equation-container {
+    display: table;
+    text-align: center;
+    width: 100%;
+  }
+  .equation {
+    vertical-align: middle;
+  }
+  .equation-label {
+    display: table-cell;
+    text-align: right;
+    vertical-align: middle;
+  }
+  .inlinetask {
+    padding: 10px;
+    border: 2px solid gray;
+    margin: 10px;
+    background: #ffffcc;
+  }
+  #org-div-home-and-up
+   { text-align: right; font-size: 70%; white-space: nowrap; }
+  textarea { overflow-x: auto; }
+  .linenr { font-size: smaller }
+  .code-highlighted { background-color: #ffff00; }
+  .org-info-js_info-navigation { border-style: none; }
+  #org-info-js_console-label
+    { font-size: 10px; font-weight: bold; white-space: nowrap; }
+  .org-info-js_search-highlight
+    { background-color: #ffff00; color: #000000; font-weight: bold; }
+  .org-svg { width: 90%; }
+  /*]]>*/-->
+</style>
+<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin><link href="https://fonts.googleapis.com/css2?family=Noto+Sans+SC&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="/theme/normalize.css"/>
+<link rel="stylesheet" href="/theme/site.css"/>
+<script defer src='https://static.cloudflareinsights.com/beacon.min.js' data-cf-beacon='{"token": "d5b841b503ed4d1b8fad459b84d1cc2f"}'></script>
+<script defer src="/theme/link.js"></script>
+</head>
+<body>
+<div id="content">
+<header>
+<h1 class="title">看见</h1>
+</header><blockquote>
+<p>
+十年前，当陈虻问我如果做新闻关心什么时，我说关心新闻中的人-&#x2013;&#x2014;这一句话，把我推到今天。
+</p>
+
+<p>
+话很普通，只是一句常识，做起这份工作才发觉它何等不易，"人"常常被有意无意忽略，被无知和偏见遮蔽，被概念化，被模式化，这些思维，就埋在无意识之下。无意识是如此之深，以至于常常看不见他人，对自己也熟视无睹。
+</p>
+
+<p>
+陈虻说过，死亡不可怕，最可怕的是无意识，那才相当于死。
+</p>
+
+<p>
+一个国家由人组成，一个人也由无数他人组成。
+</p>
+</blockquote>
+
+<p>
+人是最主要的。但人又是易被忽视的。人的固有缺陷：无知、偏见等特点，导致了人的易被忽视。这些往往是在无意识中发生。所以难以察觉，即便是自己，也很难了解自己的潜意识。
+</p>
+
+<blockquote>
+<p>
+要想“看见”，就要从蒙昧中睁开眼来。
+</p>
+
+<p>
+这才是最困难的地方，因为蒙昧就是我自身，像一块石头一样成了心里的坝。
+</p>
+</blockquote>
+
+<p>
+自己便是蒙昧，如何让自己睁开眼、醒转过来。
+</p>
+
+<blockquote>
+<p>
+在大量的新闻报道里。我只选择了留给我强烈生命印象的人。
+</p>
+</blockquote>
+
+<p>
+这样的人，也另大众印象深刻。
+</p>
+
+<blockquote>
+<p>
+坚硬的成见和模式被一遍遍冲刷。
+</p>
+</blockquote>
+
+<p>
+渐渐地抛弃成见、模式。
+</p>
+
+<blockquote>
+<p>
+我试着尽可能诚实地写下这不断犯错、不断推翻、不断疑问、不断重建的事实和因果。
+</p>
+</blockquote>
+
+<p>
+尽可能客观地记述。
+</p>
+
+<blockquote>
+<p>
+你想如何报道一个国家，就要如何报道自己。
+</p>
+</blockquote>
+
+<p>
+自己与国家
+</p>
+
+<blockquote>
+<p>
+就像叶子从痛苦的蜷缩中要用力舒展一样，人也要从不假思索的蒙昧里挣脱，这才是活着。
+</p>
+</blockquote>
+
+<p>
+摆脱蒙昧，活着
+</p>
+
+<blockquote>
+<p>
+十年已至，如他所说，不要因为走得太远，忘了我们为什么出发。
+</p>
+</blockquote>
+
+<p>
+不忘初心
+</p>
+
+<hr>
+
+<p>
+《看见》是柴静撰写的有关央视十年历程的自传性作品。
+</p>
+
+<hr>
+
+<p>
+十年前她被选择成为国家电视台新闻主播，却因毫无经验而遭遇挫败，非典时期成为现场记者后，现实生活犬牙交错的切肤之感，让她一点一滴脱离外在与自我的束缚，对生活与人性有了更为宽广与深厚的理解。十年之间，非典、汶川地震、两会报道、北京奥运&#x2026;&#x2026;
+</p>
+
+<p>
+在每个重大事件现场，几乎都能发现柴静的身影，而如华南虎照、征地等刚性的调查报道她也多有制作。在书中，她记录下淹没在宏大叙事中的动人细节，为时代留下私人的注脚。
+</p>
+
+<p>
+一如既往，柴静看见并记录下新闻中给她留下强烈生命印象的个人，每个人都深嵌在世界之中，没有人可以只是一个旁观者，他人经受的，我必经受。书中记录下的人与事，是他们的生活，也是你和我的生活。
+</p>
+
+<blockquote>
+<p>
+我们要维护一条道德的底线。那条底线，是对生命的尊重，一个社会是有规则的，不是随性而为，不是暴力、滥交、背叛、屠戮！
+</p>
+
+<p>
+到底什么是道德的底线呢？曾经有人问过我，我说因为每个人的道德观不同，所以这个底线是没法规定的。他说至少要有个底线嘛，像孝敬父母什么的。我说，每个人的处境不同，遭遇不同，所以想法不同，你怎么知道你的底线就一定是别人的底线呢？他没再回答。
+</p>
+</blockquote>
+
+<p>
+上面两段话值得深思，道德的底线究竟是什么？
+</p>
+
+<p>
+从小就被传统的儒家文化教育着，说着仁义礼智信，说着百善孝为先。可是，在这个世界上并不是每个人都有着和孔子一样的道德观。他们的遭遇，他们的境况注定了他们不能以公众所能够理解的方式作出符合公众期望的事情。二〇〇六年两会期间，网上有段视频热传，是一只猫被一个穿高跟鞋的女人踩死的过程（可自行搜索）。
+</p>
+
+<p>
+当时这个新闻可谓是一石激起千层浪，在公众眼里，猫是弱者，一个人竟然踩死猫，这在我们看来是难以想象的。可是，我们除了图一时口舌之利，还有其他的情绪吗？我们难道就不想知道这个女人为何会出现在那里，做着那样的事情吗？我们或许没有这样的心劲去做这方面的思考。所以，我们只是一群毫无理智的键盘侠而已。
+</p>
+
+<p>
+虐猫事件中，有网友发起人肉搜索。在柴静采访他（发起人肉搜索的网友）时，他对自己的所作所为表示抱歉。以下内容节选自柴静的《看见》：
+</p>
+
+<blockquote>
+<p>
+我说："你为什么要关心他的处境？"
+</p>
+
+<p>
+"他现在的处境吧，多多少少跟我有一些关系，我这边想跟他说一声抱歉。"
+</p>
+
+<p>
+"有的人觉得，如果一个人可以直接对动物做出很残忍的事情，那么为什么我们不可以用语言来攻击他呢？"
+</p>
+
+<p>
+他说："当初他做出这样的行为以后，就已经是错了，既然他都错了，为什么我们还要跟着他一起错呢。"
+</p>
+
+<p>
+"你说的这个错是指什么？"
+</p>
+
+<p>
+"他攻击了动物，而我们攻击他。"
+</p>
+
+<p>
+"攻击的背后是什么呢？"
+</p>
+
+<p>
+"是在发泄，发泄当时愤怒的感情。"他说。
+</p>
+</blockquote>
+
+<p>
+当我们的道德观受到挑衅时，我们就会以这种方式来发泄自己内心的感情。殊不知，这样做反倒使自己也成了恶人。那么，我们究竟该如何看待这样的事件，笔者以为我们可以从以下三点进行思考：
+</p>
+
+<p>
+一、当一件事情发生时，无论它显得多么离谱，别急，先缕清整件事情的来龙去脉再做他想。
+</p>
+
+<p>
+二、站在你自己的角度下一个结论，然后在看看其他人的结论。
+</p>
+
+<p>
+三、最后心态平静了，再站在当事人的角度思考。我们不可能感同身受，但至少能够窥探出真相的一角。
+</p>
+
+<hr>
+
+<p>
+最近一直在看《看见》，很震撼，很喜爱，很沉醉。这是一本讲事实的书，记录了柴静的成长经历，语句优美朴实，每一句都蕴含着深刻的道理。
+</p>
+
+<hr>
+
+<p>
+阅读版本：《看见》柴静著，广西师范大学出版社 2013 版
+</p>
+</div>
+</body>
+</html>

@@ -19,16 +19,18 @@
          :publishing-function org-html-publish-to-html
          :html-postamble nil
          :with-toc 't)
-        ("feed"
-         :base-directory "~/org/"
-         :base-extension "org"
-         :html-link-home "https://www.yidajiabei.xyz/blog/"
-         :html-link-use-abs-url t
-         :publishing-directory "~/repo/blog/"
-         :publishing-function (org-rss-publish-to-rss)
-         :exclude ".*"
-         :include ("blog/index.org")
-        ("site" :components ("pages" "feed")))))
+        ("site" :components ("pages"))))
+
+(add-to-list 'org-publish-project-alist
+             '("blog-rss"
+             :base-directory "~/org/"
+            :base-extension "org"
+            :html-link-home "https://www.yidajiabei.xyz/blog/"
+            :html-link-use-abs-url t
+            :publishing-directory "~/repo/blog/"
+            :publishing-function (org-rss-publish-to-rss)
+            :exclude ".*"
+            :include ("blog/index.org")))
 
 ;; (progn (profiler-start 'cpu) (org-publish-project "site") (profiler-report) (profiler-stop))
 (org-publish-project "site")

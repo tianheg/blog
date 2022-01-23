@@ -1,0 +1,808 @@
+<!DOCTYPE html>
+<html lang="zh">
+<head>
+<!-- 2022-01-23 Sun 21:05 -->
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>读过的书</title>
+<meta name="generator" content="Org mode">
+<style type="text/css">
+ <!--/*--><![CDATA[/*><!--*/
+  .title  { text-align: center;
+             margin-bottom: .2em; }
+  .subtitle { text-align: center;
+              font-size: medium;
+              font-weight: bold;
+              margin-top:0; }
+  .todo   { font-family: monospace; color: red; }
+  .done   { font-family: monospace; color: green; }
+  .priority { font-family: monospace; color: orange; }
+  .tag    { background-color: #eee; font-family: monospace;
+            padding: 2px; font-size: 80%; font-weight: normal; }
+  .timestamp { color: #bebebe; }
+  .timestamp-kwd { color: #5f9ea0; }
+  .org-right  { margin-left: auto; margin-right: 0px;  text-align: right; }
+  .org-left   { margin-left: 0px;  margin-right: auto; text-align: left; }
+  .org-center { margin-left: auto; margin-right: auto; text-align: center; }
+  .underline { text-decoration: underline; }
+  #postamble p, #preamble p { font-size: 90%; margin: .2em; }
+  p.verse { margin-left: 3%; }
+  pre {
+    border: 1px solid #ccc;
+    box-shadow: 3px 3px 3px #eee;
+    padding: 8pt;
+    font-family: monospace;
+    overflow: auto;
+    margin: 1.2em;
+  }
+  pre.src {
+    position: relative;
+    overflow: auto;
+    padding-top: 1.2em;
+  }
+  pre.src:before {
+    display: none;
+    position: absolute;
+    background-color: white;
+    top: -10px;
+    right: 10px;
+    padding: 3px;
+    border: 1px solid black;
+  }
+  pre.src:hover:before { display: inline; margin-top: 14px;}
+  /* Languages per Org manual */
+  pre.src-asymptote:before { content: 'Asymptote'; }
+  pre.src-awk:before { content: 'Awk'; }
+  pre.src-C:before { content: 'C'; }
+  /* pre.src-C++ doesn't work in CSS */
+  pre.src-clojure:before { content: 'Clojure'; }
+  pre.src-css:before { content: 'CSS'; }
+  pre.src-D:before { content: 'D'; }
+  pre.src-ditaa:before { content: 'ditaa'; }
+  pre.src-dot:before { content: 'Graphviz'; }
+  pre.src-calc:before { content: 'Emacs Calc'; }
+  pre.src-emacs-lisp:before { content: 'Emacs Lisp'; }
+  pre.src-fortran:before { content: 'Fortran'; }
+  pre.src-gnuplot:before { content: 'gnuplot'; }
+  pre.src-haskell:before { content: 'Haskell'; }
+  pre.src-hledger:before { content: 'hledger'; }
+  pre.src-java:before { content: 'Java'; }
+  pre.src-js:before { content: 'Javascript'; }
+  pre.src-latex:before { content: 'LaTeX'; }
+  pre.src-ledger:before { content: 'Ledger'; }
+  pre.src-lisp:before { content: 'Lisp'; }
+  pre.src-lilypond:before { content: 'Lilypond'; }
+  pre.src-lua:before { content: 'Lua'; }
+  pre.src-matlab:before { content: 'MATLAB'; }
+  pre.src-mscgen:before { content: 'Mscgen'; }
+  pre.src-ocaml:before { content: 'Objective Caml'; }
+  pre.src-octave:before { content: 'Octave'; }
+  pre.src-org:before { content: 'Org mode'; }
+  pre.src-oz:before { content: 'OZ'; }
+  pre.src-plantuml:before { content: 'Plantuml'; }
+  pre.src-processing:before { content: 'Processing.js'; }
+  pre.src-python:before { content: 'Python'; }
+  pre.src-R:before { content: 'R'; }
+  pre.src-ruby:before { content: 'Ruby'; }
+  pre.src-sass:before { content: 'Sass'; }
+  pre.src-scheme:before { content: 'Scheme'; }
+  pre.src-screen:before { content: 'Gnu Screen'; }
+  pre.src-sed:before { content: 'Sed'; }
+  pre.src-sh:before { content: 'shell'; }
+  pre.src-sql:before { content: 'SQL'; }
+  pre.src-sqlite:before { content: 'SQLite'; }
+  /* additional languages in org.el's org-babel-load-languages alist */
+  pre.src-forth:before { content: 'Forth'; }
+  pre.src-io:before { content: 'IO'; }
+  pre.src-J:before { content: 'J'; }
+  pre.src-makefile:before { content: 'Makefile'; }
+  pre.src-maxima:before { content: 'Maxima'; }
+  pre.src-perl:before { content: 'Perl'; }
+  pre.src-picolisp:before { content: 'Pico Lisp'; }
+  pre.src-scala:before { content: 'Scala'; }
+  pre.src-shell:before { content: 'Shell Script'; }
+  pre.src-ebnf2ps:before { content: 'ebfn2ps'; }
+  /* additional language identifiers per "defun org-babel-execute"
+       in ob-*.el */
+  pre.src-cpp:before  { content: 'C++'; }
+  pre.src-abc:before  { content: 'ABC'; }
+  pre.src-coq:before  { content: 'Coq'; }
+  pre.src-groovy:before  { content: 'Groovy'; }
+  /* additional language identifiers from org-babel-shell-names in
+     ob-shell.el: ob-shell is the only babel language using a lambda to put
+     the execution function name together. */
+  pre.src-bash:before  { content: 'bash'; }
+  pre.src-csh:before  { content: 'csh'; }
+  pre.src-ash:before  { content: 'ash'; }
+  pre.src-dash:before  { content: 'dash'; }
+  pre.src-ksh:before  { content: 'ksh'; }
+  pre.src-mksh:before  { content: 'mksh'; }
+  pre.src-posh:before  { content: 'posh'; }
+  /* Additional Emacs modes also supported by the LaTeX listings package */
+  pre.src-ada:before { content: 'Ada'; }
+  pre.src-asm:before { content: 'Assembler'; }
+  pre.src-caml:before { content: 'Caml'; }
+  pre.src-delphi:before { content: 'Delphi'; }
+  pre.src-html:before { content: 'HTML'; }
+  pre.src-idl:before { content: 'IDL'; }
+  pre.src-mercury:before { content: 'Mercury'; }
+  pre.src-metapost:before { content: 'MetaPost'; }
+  pre.src-modula-2:before { content: 'Modula-2'; }
+  pre.src-pascal:before { content: 'Pascal'; }
+  pre.src-ps:before { content: 'PostScript'; }
+  pre.src-prolog:before { content: 'Prolog'; }
+  pre.src-simula:before { content: 'Simula'; }
+  pre.src-tcl:before { content: 'tcl'; }
+  pre.src-tex:before { content: 'TeX'; }
+  pre.src-plain-tex:before { content: 'Plain TeX'; }
+  pre.src-verilog:before { content: 'Verilog'; }
+  pre.src-vhdl:before { content: 'VHDL'; }
+  pre.src-xml:before { content: 'XML'; }
+  pre.src-nxml:before { content: 'XML'; }
+  /* add a generic configuration mode; LaTeX export needs an additional
+     (add-to-list 'org-latex-listings-langs '(conf " ")) in .emacs */
+  pre.src-conf:before { content: 'Configuration File'; }
+
+  table { border-collapse:collapse; }
+  caption.t-above { caption-side: top; }
+  caption.t-bottom { caption-side: bottom; }
+  td, th { vertical-align:top;  }
+  th.org-right  { text-align: center;  }
+  th.org-left   { text-align: center;   }
+  th.org-center { text-align: center; }
+  td.org-right  { text-align: right;  }
+  td.org-left   { text-align: left;   }
+  td.org-center { text-align: center; }
+  dt { font-weight: bold; }
+  .footpara { display: inline; }
+  .footdef  { margin-bottom: 1em; }
+  .figure { padding: 1em; }
+  .figure p { text-align: center; }
+  .equation-container {
+    display: table;
+    text-align: center;
+    width: 100%;
+  }
+  .equation {
+    vertical-align: middle;
+  }
+  .equation-label {
+    display: table-cell;
+    text-align: right;
+    vertical-align: middle;
+  }
+  .inlinetask {
+    padding: 10px;
+    border: 2px solid gray;
+    margin: 10px;
+    background: #ffffcc;
+  }
+  #org-div-home-and-up
+   { text-align: right; font-size: 70%; white-space: nowrap; }
+  textarea { overflow-x: auto; }
+  .linenr { font-size: smaller }
+  .code-highlighted { background-color: #ffff00; }
+  .org-info-js_info-navigation { border-style: none; }
+  #org-info-js_console-label
+    { font-size: 10px; font-weight: bold; white-space: nowrap; }
+  .org-info-js_search-highlight
+    { background-color: #ffff00; color: #000000; font-weight: bold; }
+  .org-svg { width: 90%; }
+  /*]]>*/-->
+</style>
+<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin><link href="https://fonts.googleapis.com/css2?family=Noto+Sans+SC&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="/theme/normalize.css"/>
+<link rel="stylesheet" href="/theme/site.css"/>
+<script defer src='https://static.cloudflareinsights.com/beacon.min.js' data-cf-beacon='{"token": "d5b841b503ed4d1b8fad459b84d1cc2f"}'></script>
+<script defer src="/theme/link.js"></script>
+</head>
+<body>
+<div id="content">
+<header>
+<h1 class="title">读过的书</h1>
+</header><nav id="table-of-contents">
+<h2>Table of Contents</h2>
+<div id="text-table-of-contents">
+<ul>
+<li><a href="#org52554e1">1. 读书分类</a>
+<ul>
+<li><a href="#orgfc6e66f">1.1. 软件开发 + 计算机科学</a></li>
+<li><a href="#org057a3e1">1.2. 人物传记</a></li>
+<li><a href="#org377841b">1.3. 社会科学</a></li>
+<li><a href="#orgd97d0f3">1.4. 自然学科</a></li>
+<li><a href="#org4efbf73">1.5. 自我成长</a></li>
+<li><a href="#org4ad4008">1.6. 文学创作</a></li>
+</ul>
+</li>
+<li><a href="#org7ecb8f7">2. 年度阅读计划</a>
+<ul>
+<li><a href="#orgeba87f5">2.1. 2022</a></li>
+</ul>
+</li>
+<li><a href="#orgb4ce3b9">3. 很好的资源</a>
+<ul>
+<li><a href="#org931a4d7">3.1. 外文书籍网站</a></li>
+<li><a href="#orgfed127d">3.2. 网上书店</a></li>
+<li><a href="#org1a8a7f3">3.3. 找绝版书</a></li>
+<li><a href="#org66effe5">3.4. 论文检索</a></li>
+</ul>
+</li>
+</ul>
+</div>
+</nav>
+
+<div id="outline-container-org52554e1" class="outline-2">
+<h2 id="org52554e1"><span class="section-number-2">1</span> 读书分类</h2>
+<div class="outline-text-2" id="text-1">
+</div>
+<div id="outline-container-orgfc6e66f" class="outline-3">
+<h3 id="orgfc6e66f"><span class="section-number-3">1.1</span> 软件开发 + 计算机科学</h3>
+<div class="outline-text-3" id="text-1-1">
+<blockquote>
+<p>
+改变了那么多次表面，却没有改变自己的内心。抛弃一切外在的东西，专注提升自己的核心能力。
+</p>
+</blockquote>
+
+<ul class="org-ul">
+<li>HTML
+<ul class="org-ul">
+<li><a href="blog/2021/definitive-guide-to-html5.html">HTML5 权威指南</a>，by Adam Freeman</li>
+<li>Introducing HTML5</li>
+</ul></li>
+<li>CSS
+<ul class="org-ul">
+<li>张鑫旭：CSS 世界 CSS 选择器世界 CSS 新世界</li>
+<li>CSS 解密</li>
+<li>CSS The Definitive Guide</li>
+</ul></li>
+<li>JS
+<ul class="org-ul">
+<li><a href="blog/2022/dom-scripting.html">DOM Scripting</a></li>
+<li><a href="blog/2021/professional-javascript-for-web-developers.html">JavaScript 高级程序设计第 4 版</a>，by Matt Frisbie</li>
+<li>You Don't Know JS</li>
+</ul></li>
+<li>TS
+<ul class="org-ul">
+<li>TypeScript Docs</li>
+</ul></li>
+<li><a href="https://github.com/microsoft/Web-Dev-For-Beginners">Web Dev for Beginners</a></li>
+<li>Computer Network
+<ul class="org-ul">
+<li>Computer Networking: A Top-Down Approach 计算机网络：自顶向下法</li>
+<li>图解 HTTP，by 上野宣</li>
+</ul></li>
+<li>Operating System 
+<ul class="org-ul">
+<li>Operating System Concepts</li>
+<li>Modern Operating Systems</li>
+<li>Operating Systems: Three Easy Pieces 操作系统导论</li>
+<li><a href="blog/2020/birdman-linux.html">鸟哥的 Linux 私房菜</a>，by 鸟哥</li>
+</ul></li>
+<li>Programming
+<ul class="org-ul">
+<li>Structure and Interpretation of Computer Programs(Scheme 语言)</li>
+<li><a href="https://composingprograms.com/">Composing Programs</a>(Python3 语言)</li>
+<li><a href="http://htdp.org/2021-11-15/Book/index.html">How to Design Programs, Second Edition</a></li>
+<li>以上三本理解难度由难到易</li>
+<li>辅助练习平台 <a href="https://exercism.org/">exercism</a></li>
+</ul></li>
+<li>Computer Architecture
+<ul class="org-ul">
+<li>Computer Systems: A Programmer's Perspective</li>
+<li>The Elements of Computing Systems</li>
+</ul></li>
+<li>Algorithms and Data Structures
+<ul class="org-ul">
+<li><a href="https://algs4.cs.princeton.edu/home/">Algorithms, 4th Edition</a>(可阅读全部)</li>
+<li>Introduction to Algorithms(可阅读「基础」部分)</li>
+<li><a href="https://visualgo.net/en">VisuAlgo</a> / <a href="https://www.cs.usfca.edu/~galles/visualization/Algorithms.html">https://www.cs.usfca.edu/~galles/visualization/Algorithms.html</a></li>
+<li><a href="https://github.com/trekhleb/javascript-algorithms">JavaScript Algorithms and Data Structures</a></li>
+<li><a href="https://www3.cs.stonybrook.edu/~skiena/373/videos/">Analysis of Algorithms Lectures</a></li>
+<li><a href="https://leetcode-cn.com/problem-list/2cktkvj/">LeetCode 热题 HOT 100</a></li>
+<li>The Algorithm Design Manual</li>
+<li>How to Solve It</li>
+</ul></li>
+<li>Mathematics for Computer Science
+<ul class="org-ul">
+<li>离散数学是数学领域中和计算机科学最密切相关的一个分支</li>
+<li>离散数学
+<ul class="org-ul">
+<li><a href="https://cims.nyu.edu/~regev/teaching/discrete_math_fall_2005/dmbook.pdf">lecture notes by László Lovász</a></li>
+<li>Mathematics for Computer Science</li>
+</ul></li>
+<li>线性代数
+<ul class="org-ul">
+<li>Introduction to Linear Algebra</li>
+</ul></li>
+</ul></li>
+<li>Databases
+<ul class="org-ul">
+<li>Readings in Database Systems</li>
+</ul></li>
+<li>Languages and Compilers
+<ul class="org-ul">
+<li>Crafting Interpreters</li>
+</ul></li>
+<li>Distributed Systems</li>
+<li><a href="2021/how-to-be-a-programmer-zh.html">How to be a Programmer 中文版</a>，by Robert L. Read</li>
+<li>程序员修炼之道(第 2 版)(The Pragmatic Programmer: From Journeyman to Master)，by David Thomas, Andrew Hunt</li>
+<li>信息检索，by 黄如花</li>
+<li>参考资料
+<ul class="org-ul">
+<li><a href="https://teachyourselfcs.com/">https://teachyourselfcs.com/</a></li>
+<li><a href="https://www.xiaoyuzhoufm.com/episode/61684ce4d8fa23fb00fc4d3b">EP01.学前端的入门问题</a></li>
+</ul></li>
+</ul>
+</div>
+</div>
+
+<div id="outline-container-org057a3e1" class="outline-3">
+<h3 id="org057a3e1"><span class="section-number-3">1.2</span> 人物传记</h3>
+<div class="outline-text-3" id="text-1-2">
+<ul class="org-ul">
+<li>二十世纪美国第一夫人</li>
+<li>比尔・盖茨全传，by 于成龙</li>
+<li>加西亚·马尔克斯传，by 杰拉德·马丁</li>
+<li>牛津通识读本：罗素，by A.C.格雷林</li>
+<li><a href="blog/2021/einstein-himself.html">爱因斯坦自述</a>，by 爱因斯坦</li>
+</ul>
+</div>
+</div>
+
+<div id="outline-container-org377841b" class="outline-3">
+<h3 id="org377841b"><span class="section-number-3">1.3</span> 社会科学</h3>
+<div class="outline-text-3" id="text-1-3">
+<ul class="org-ul">
+<li>全球通史，by L. S. Stavrianos</li>
+<li>社会心理学，by David G.Myers</li>
+<li>你一定爱读的极简欧洲史，by 约翰·赫斯特</li>
+<li>意识的解释，by 丹尼尔・丹尼特</li>
+<li>幸福的方法，by Tal Ben-Shahar</li>
+<li>不焦虑了，by 安藤俊介</li>
+<li>非暴力沟通，by 马歇尔·卢森堡</li>
+<li>马斯洛论自我超越，by Abraham Maslow</li>
+<li>简单的逻辑学 Being Logical: A Guide to Good Thinking，by D.Q.麦克伦尼</li>
+<li>薛兆丰经济学讲义，by 薛兆丰</li>
+<li>生而贫穷，by 赵皓阳</li>
+<li>中国经济的定力，by 白重恩、蔡昉、樊纲</li>
+<li>小狗钱钱，by 博多·舍费尔</li>
+<li>怪诞心理学(Quirkology: The Curious Science of Everyday Lives)，by 理查德·怀斯曼</li>
+<li>怪诞脑科学(Kluge: The Haphazard Construction of the Human Mind)，by 盖瑞·马库斯</li>
+<li>人的自我寻求，by 罗洛·梅</li>
+<li><a href="blog/2021/tao-te-ching.html">道德经</a> by 老子</li>
+<li><a href="blog/2021/making-sence-of-people.html">极简个性心理学</a>，by 塞缪尔·巴伦德斯</li>
+<li>荷马史诗</li>
+<li>亚里士多德</li>
+<li>卢梭</li>
+<li>尼采</li>
+<li>波伏娃</li>
+<li>伍尔芙</li>
+<li>《大问题：简明哲学导论》（第 10 版）罗伯特·所罗门</li>
+<li>《做哲学：88 个思想实验中的哲学导论》小西奥多·希克；刘易斯·沃恩</li>
+<li>《想透彻：当代哲学导论》夸梅·安东尼·阿皮亚</li>
+<li>哲学的故事</li>
+<li>人性七论</li>
+<li>你的第一本哲学书，by Thomas Nagel</li>
+<li>哲学概论，by 杨方</li>
+<li>《经济学的思维方式》托马斯·索维尔</li>
+<li>《大历史》大卫·克里斯蒂安</li>
+<li>《世界观》（第 2 版）理查德·德威特</li>
+<li>《哲学·科学·常识》陈嘉映</li>
+<li>心理学与生活，by 理查德·格里格等</li>
+<li>这才是心理学，by 基思·斯坦诺维奇</li>
+<li>《社会心理学》戴维·迈尔斯、吉洛维奇</li>
+<li>《社会心理学》（第 3 版）Thomas Gilovich 等</li>
+<li>《不确定世界的理性选择》雷德·海斯蒂等</li>
+<li>《社会认知》齐瓦·孔达</li>
+<li>《认知心理学》E.Bruce Goldstein</li>
+<li>《认识天性》</li>
+<li>马丁·塞利格曼的书</li>
+<li>《理性情绪》阿尔伯特·埃利斯</li>
+<li>《情绪急救》盖伊·温奇</li>
+<li>《自我的追寻》 弗洛姆</li>
+<li>《心智探奇》史蒂芬·平克</li>
+<li>《人类活动中的理性》赫伯特·西蒙</li>
+<li>《表象与本质》侯世达，美国知名认知科学家</li>
+<li>《我们赖以生存的隐喻》乔治·莱考夫；马克· 约翰逊</li>
+<li>《思考，快与慢》丹尼尔·卡尼曼</li>
+<li>《超越智商》基思·斯坦诺维奇</li>
+<li>《不确定世界的理性选择》雷德·海斯蒂；罗宾·道斯</li>
+<li>如何高效学习</li>
+<li>《学会提问》尼尔·布朗</li>
+<li>专注力：化繁为简的惊人力量</li>
+<li>思考的艺术</li>
+<li>批判性思维工具</li>
+<li>逻辑思维简易入门</li>
+<li>《是思考，还是想太多》冀剑制</li>
+<li>《模型思维》斯科特·佩奇</li>
+</ul>
+<p>
+-《社会学的邀请》威特
+</p>
+<ul class="org-ul">
+<li>《艺术的故事》贡布里希</li>
+<li>《写给大家看的设计书》（第 4 版）Robin Williams</li>
+<li>诺曼的《设计心理学》</li>
+<li>《营销管理》（第 15 版）菲利普·科特勒</li>
+<li>《定位》《重新定位》杰克·特劳特</li>
+<li>《在家就能读 MBA》乔希·考夫曼</li>
+<li>《卓有成效的管理者》彼得·德鲁克</li>
+<li>自我与防御机制，by 安娜·弗洛伊德（是精神分析学派创始人弗洛伊德的孩子）</li>
+</ul>
+</div>
+</div>
+<div id="outline-container-orgd97d0f3" class="outline-3">
+<h3 id="orgd97d0f3"><span class="section-number-3">1.4</span> 自然学科</h3>
+<div class="outline-text-3" id="text-1-4">
+<ul class="org-ul">
+<li><a href="blog/2021/asimov-the-intelligent-mans-guide-to-science.html">阿西莫夫最新科学指南（上下册）</a> by 阿西莫夫</li>
+<li>智能科学，by 史忠植</li>
+<li>5G 时代，by 项立刚</li>
+<li>数学
+<ul class="org-ul">
+<li>数学之美，by 吴军</li>
+</ul></li>
+<li><a href="https://www.anthropic-principle.com/q=book/table_of_contents/">Anthropic Bias</a> 物理学等</li>
+</ul>
+</div>
+</div>
+
+<div id="outline-container-org4efbf73" class="outline-3">
+<h3 id="org4efbf73"><span class="section-number-3">1.5</span> 自我成长</h3>
+<div class="outline-text-3" id="text-1-5">
+<ul class="org-ul">
+<li><a href="blog/2020/everyone-can-use-english.html">人人都能用英语</a> by 李笑来</li>
+<li>企业家爸爸写给女儿的信，by G.金斯利・沃德</li>
+<li><a href="blog/2021/how-to-organize-information-effectively.html">如何有效整理信息</a> by 奥野宣之</li>
+<li>跃迁，by 古典</li>
+<li>好好学习，by 成甲</li>
+<li>影响力，by 罗伯特・西奥迪尼</li>
+<li>跨界学习，by 王烁</li>
+<li>高效能人士的笔记整理术，by 霁色</li>
+<li>如何成为一个学习忍者，by 格雷厄姆・奥尔科特</li>
+<li>如何学习，by Benedict Carey</li>
+<li>如何高效学习，by 斯科特·扬</li>
+<li>如何阅读一本书，by 莫提默·J. 艾德勒、查尔斯·范多伦</li>
+<li>刻意练习，by Anders Ericsson, Robert Pool</li>
+<li>财富自由之路，by 博多·舍费尔</li>
+<li>学会如何学习，by Barbara Oakley</li>
+<li>学习之道，by Barbara Oakley</li>
+<li><a href="blog/2020/survivors-of-the-future.html">未来世界的幸存者</a> by 阮一峰</li>
+<li><a href="blog/2021/paul-graham-hackers-and-painters.html">黑客与画家</a>，by Paul Graham</li>
+<li>你凭什么做好互联网：从技术思维到商业逻辑，by caoz（曹大）（正确决策）</li>
+<li>硅谷之火——人与计算机的未来，by 保罗·弗赖伯格、迈克尔·斯韦因</li>
+</ul>
+</div>
+</div>
+
+<div id="outline-container-org4ad4008" class="outline-3">
+<h3 id="org4ad4008"><span class="section-number-3">1.6</span> 文学创作</h3>
+<div class="outline-text-3" id="text-1-6">
+<ul class="org-ul">
+<li><a href="blog/2021/luxun-zhaohuaxishi.html">朝花夕拾</a> by 鲁迅</li>
+<li><a href="blog/2019/24-hours-in-the-life-of-a-woman.html">一个女人一生中的二十四小时</a> by 茨威格</li>
+<li><a href="blog/2021/asimov-the-end-of-eternity.html">永恒的终结</a> by 阿西莫夫</li>
+<li><a href="blog/2019/distant-savior.html">遥远的救世主</a> by 豆豆</li>
+<li><a href="blog/2019/dream-of-the-red-chamber.html">红楼梦</a> by 曹雪芹</li>
+<li>毛姆
+<ul class="org-ul">
+<li>月亮与六便士</li>
+<li>👍👍刀锋</li>
+<li>👍👍人性的枷锁</li>
+<li>面纱</li>
+<li>寻欢作乐</li>
+<li><a href="blog/2021/maugham-thoughts-about-books.html">读书随想录</a></li>
+</ul></li>
+<li>狼王梦，by 沈石溪</li>
+<li>哑舍全集，by 玄色</li>
+<li>没有星星，夜不滚烫，by 榛生</li>
+<li>致 D 情史，by 安德烈·高兹</li>
+<li>三体全集（三部），by 刘慈欣</li>
+<li>明天也是小春日和，by 津端英子、津端修一</li>
+<li>小窗幽记，by 陆绍珩</li>
+<li>二十首情诗和一首绝望的歌，by 巴勃罗・聂鲁达</li>
+<li>仓央嘉措诗传全集，by 闫晗</li>
+<li>👍👍<a href="blog/2021/o-alquimista.html">牧羊少年奇幻之旅</a>，by 保罗・柯艾略</li>
+<li><a href="blog/2019/huang-hu-ren-jian.html">恍惚人间</a> by 小考拉</li>
+<li>世界文学名著英汉对照全译精选，by 英语学习大书虫研究室等</li>
+<li>沙漠里的爱情，by 巴尔扎克（士兵与母豹的奇妙爱情）</li>
+<li>谈美，by 朱光潜</li>
+<li>时间的女儿，by 八月长安</li>
+<li>离开前请叫醒我，by 卢思浩</li>
+<li>谁的青春不迷茫，by 刘同</li>
+<li>总要习惯一个人，by 蕊希</li>
+<li>愿有人陪你颠沛流离，by 卢思浩</li>
+<li>瓦尔登湖，by 梭罗</li>
+<li>人生有何意义，by 胡适</li>
+<li>👍👍 林清玄散文精选，by 林清玄</li>
+<li>人间有味是清欢，by 林清玄</li>
+<li>白岩松：行走在爱与恨之间，by 白岩松</li>
+<li>👍 皮囊，by 蔡崇达</li>
+<li>青春电影手册：影史 100 佳青春电影，by 程青松</li>
+<li>时间之问，by 汪波</li>
+<li>傅雷家书，by 傅雷、朱敏馥、傅聪、傅敏</li>
+<li>看见，by 柴静</li>
+<li>未解之谜（上），by 克雷格・P.鲍尔</li>
+<li>未解之谜（下），by 克雷格・P.鲍尔</li>
+<li>流量是蓝海，by 毕胜</li>
+<li>👍👍 外婆的道歉信，by 弗雷德里克・巴克曼</li>
+<li>👍👍 过于喧嚣的孤独，by 博胡米尔·赫拉巴尔</li>
+<li>好兵帅克，by 雅洛斯拉夫·哈谢克</li>
+<li>圣经的故事，by 亨德里克・房龙</li>
+<li>👍👍 82 年生的金智英，by [韩] 赵南柱</li>
+<li>太古和其他的时间，by Olga Tokarczuk</li>
+<li>什锦拼盘，by 唐鲁孙</li>
+<li>太阳黑子，by 须一瓜</li>
+<li>给青年的十二封信，by 朱光潜</li>
+<li>未来世界的幸存者，by 阮一峰</li>
+<li>一九八四，by George Orwell</li>
+<li>天年，by 何夕</li>
+<li>海奥华预言，by Michelle Desmarckett</li>
+<li>查拉图斯特拉如是说，by Friedrich Nietzsche</li>
+<li>永隔一江水，by 邓安庆</li>
+<li>我在未来等你，by 刘同</li>
+<li>那些忧伤的年轻人，by 许知远</li>
+<li>借我一生，by 余秋雨</li>
+<li>👍👍 新版文化苦旅，by 余秋雨</li>
+<li>局外人，by 加缪</li>
+<li>以眨眼干杯，by 东野圭吾</li>
+<li>一只特立独行的猪，by 王小波</li>
+<li>江湖，by 凡悲鲁</li>
+<li>亲爱的三毛，by 三毛</li>
+<li>醉步男，by 小林泰三</li>
+<li>看海的人，by 小林泰三</li>
+<li>👍👍寂寞的游戏，by 袁哲生</li>
+<li>时间机器，by 赫伯特·乔治·威尔斯</li>
+<li>银河帝国：基地，by Isaac Asimov</li>
+<li>银河帝国：基地与帝国，by Isaac Asimov</li>
+<li>银河帝国：第二基地，by Isaac Asimov</li>
+<li>银河帝国：基地前奏，by Isaac Asimov</li>
+<li>银河帝国：迈向基地，by Isaac Asimov</li>
+<li>银河帝国：基地边缘，by Isaac Asimov</li>
+<li>银河帝国：基地与地球，by Isaac Asimov</li>
+<li>银河帝国：我，机器人，by Isaac Asimov</li>
+<li>银河帝国：钢穴，by Isaac Asimov</li>
+<li>银河帝国：裸阳，by Isaac Asimov</li>
+<li>银河帝国：曙光中的机器人，by Isaac Asimov</li>
+<li>银河帝国：机器人与帝国，by Isaac Asimov</li>
+<li>银河帝国：繁星若尘，by Isaac Asimov</li>
+<li>银河帝国：星空暗流，by Isaac Asimov</li>
+<li>银河帝国：苍穹一粟，by Isaac Asimov</li>
+<li>少数派报告(The Minority Report)，by Philip K. Dick</li>
+<li>莱根谭，by 洪应明</li>
+<li><a href="blog/2021/trevor-noah-born-a-crime.html">天生有罪</a> by 特雷弗·诺亚</li>
+<li>新版名：活过，爱过，写过；旧版名：人间采蜜记（自传），by 李银河</li>
+<li>爱你就像爱生命，by 王小波</li>
+<li>无人生还，by 阿加莎·克里斯蒂</li>
+<li><a href="blog/2021/neal-stephenson-snow-crash.html">雪崩</a>，by Neal Stephenson</li>
+<li><a href="blog/2021/kazuo-shiguro-klara-and-the-sun.html">克拉拉与太阳</a>，by 石黑一雄</li>
+<li>编码宝典</li>
+<li>沙丘</li>
+<li>万有引力之虹</li>
+<li>基地</li>
+<li>大魔法师</li>
+<li>1984</li>
+<li>最后和最先的人</li>
+<li>造星者</li>
+<li>漫长的明天</li>
+<li>达尔格伦</li>
+<li>无尽的玩笑</li>
+<li>挽救计划</li>
+<li>纳尔奇思与歌尔得蒙，by [德] 赫尔曼·黑塞，2021 年 6 月</li>
+<li>你当像鸟飞往你的山，by [美] 塔拉·韦斯特弗，2021 年 6 月</li>
+<li>永生的操练——但丁《神曲》解析，by 残雪，2021 年 6 月</li>
+<li>禅与摩托车维修艺术，by [美] 罗伯特·M.波西格，2021 年 6 月</li>
+<li>The Innovation：How a Group of Hackers，Geniuses，and Greeks Created the Digital Revolution.，by Walter Isaacson，2021 年 7 月</li>
+<li>How to Take Smart Notes，by Sönke Ahrens，2021 年 7 月</li>
+<li>夜晚的潜水艇，by 陈春成，2021 年 7 月</li>
+<li>邓小平时代，by 傅高义，2021 年 7 月</li>
+<li>What I Wish I Knew When I Was 20，by Tina Seelig，2021 年 7 月 ⭐</li>
+<li>The Peregrine，by J. A. Baker，2021 年 7 月（Werner Herzog 推荐）</li>
+<li>幸福之路，by 罗素，2021 年 7 月</li>
+<li>圣杯与剑，by Riane Eisler，2021 年 9 月</li>
+<li>人性的优点、人性的缺点，by 卡耐基，2021 年 9 月</li>
+<li><a href="https://www.ruanyifeng.com/calvino/nonfiction/cat-76/">未来千年文学备忘录</a>，by 卡尔维诺</li>
+<li><a href="https://www.gutenberg.org/cache/epub/37224/pg37224-images.html">Popular Books on Natural Science</a>，by Aaron David Bernstein(伯恩斯坦)</li>
+<li>堂吉诃德，by Cervantes，2021 年 11 月</li>
+<li>少年维特之烦恼，by 歌德，2021 年 11 月</li>
+<li>蒙田随笔，by 蒙田，2021 年 11 月</li>
+<li><a href="https://www.navalmanack.com/almanack-of-naval-ravikant/table-of-contents">Almanack of naval Ravikant</a>，by Eric Jorgenson，2021 年 11 月</li>
+<li>反脆弱，by Nassim Nicholas Taleb 纳西姆·尼古拉斯·塔勒布，2021 年 11 月</li>
+<li><a href="https://i.linuxtoy.org/docs/guide/index.html">开源世界旅行手册</a></li>
+<li>冰与火之歌</li>
+<li>魔戒（指环王）</li>
+<li>达芬奇密码</li>
+<li>小妇人</li>
+<li>帮助</li>
+<li>偷书贼</li>
+<li>洞熊家族</li>
+<li>汤姆索亚历险记</li>
+<li>艾利克斯克罗斯</li>
+<li>手斧男孩</li>
+<li>尼日利亚作家钦努阿·阿契贝的小说《瓦解》</li>
+<li>哈利·波特</li>
+<li>陋室</li>
+<li>远大前程（查尔斯·狄更斯）</li>
+<li>愤怒的葡萄（约翰·斯坦贝克）</li>
+<li>暮光之城（斯蒂芬妮·梅耶）</li>
+<li>罪与罚（陀思妥耶夫斯基）</li>
+<li>J·D·塞林格：麦田里的守望者</li>
+<li>苏珊·柯林斯  贝蒂·史密斯  约翰·诺尔斯 修女索尔加</li>
+<li>苏珊·辛顿：局外人（非加缪）</li>
+<li>V·C·安德鲁【维多利亚·安德鲁】：阁楼里的花</li>
+<li>格列佛游记</li>
+<li>堂吉诃德</li>
+<li>笨蛋联盟（约翰·肯尼迪·图尔）</li>
+<li>爱丽丝·沃克的《紫色》</li>
+<li>（委内瑞拉前总统）罗慕洛·加莱戈斯 艾莉丝·希伯德 露西·莫德·蒙格马利 奇玛曼达·戈兹·阿迪切</li>
+<li>玛格丽特·米切尔的《飘》</li>
+<li>《红色羊齿草的故乡》</li>
+<li>马里奥·普佐 蒂姆·莱希和杰里·B·詹金斯 艾茵·兰德的反乌托邦推理小说 汤姆·克兰西</li>
+<li>弗兰克·赫尔伯《沙丘魔堡》</li>
+<li>丁·昆士的《观察者》</li>
+<li>恩斯特·克莱恩的《头号玩家》</li>
+<li>迈克尔·克莱顿的《侏罗纪公园》</li>
+<li>罗伯特·麦卡蒙的《天鹅之歌》</li>
+<li>罗伯特·乔丹的思维扭曲构思《世界之眼》第一卷《时光之轮》</li>
+<li>安迪·维尔激动人心的《火星救援》</li>
+<li>杰森·雷诺斯兹《鬼魂》作者（对我来说故事都是为了塑造角色而设的，因为人只会在人身上投入情感，我情愿尽我所能尝试描写人物，而不是角色，我想写的是人本身，活生生的人才会让故事更能触动人心。）</li>
+<li>吉利安·福林《消失的爱人》作者（我觉得人们分两种：要么喜欢探索未知，要么对未知毫无兴致。而我一直都是好奇心强的“那是啥“一族）</li>
+<li>尼古拉斯·斯帕克斯《恋恋笔记本》作者（小说里包含的不仅是一个创意，而是成干上万个奇思妙想的结合，相互贯穿叠加。）</li>
+<li>戴安娜·加瓦尔东《异乡人》作者（我一直觉得写自己知道的东西完全没有意义，因为只写他们自己的自传会限制每个人的想象力，对任何人而言都变得不好玩了。能够把人们从他们的日常生活圈子里拉出来，再传送到完全不同的世界里，那才是魔法。）</li>
+<li>E·B·怀特的《夏洛的网》</li>
+<li>约翰·欧文是《为欧文·米尼析祷》的作者</li>
+<li>简·奥斯汀的《傲慢与偏见》</li>
+<li>列夫·托尔斯泰的《战争与和平》</li>
+<li>拉尔夫·海登的《看不见的人》</li>
+<li>玛丽·雪莱的《弗兰肯斯坦》</li>
+<li>斯蒂芬·金《末日逼近》</li>
+<li>库尔特·冯内古特  保罗·柯艾略    道格拉斯·亚当</li>
+<li>C·S·刘易斯的《纳尼亚传奇》</li>
+<li>赫曼·黑塞的《悉达多》 玛丽莲·罗宾逊的普利策获奖作品《吉利亚德》 弗兰克·E·佩雷迪的《黑暗已至》 戴夫·亨特的《心灵入侵者》 约翰·班扬的《天路历程》</li>
+<li>作者：鲁道夫·阿那亚</li>
+<li>朱诺特·迪亚兹 E·L·詹姆丝 欧内斯特·海明威 洛伊丝·洛利 玛格丽特·阿特伍德 约瑟夫·海勒</li>
+<li>拉里·麦克穆特瑞的《孤鸽镇》</li>
+<li>托妮·莫里森的普利策奖悲剧作品《宠儿》</li>
+<li>穷查理宝典</li>
+<li>谁在世界中心</li>
+<li>自私的基因</li>
+<li>原则</li>
+<li>做哲学 : 88 个思想实验中的哲学导论</li>
+<li>尼采与形而上学</li>
+<li>历史的巨镜</li>
+<li>中国思想史十讲（上卷）</li>
+<li><a href="https://wmdpd.com/about/">https://wmdpd.com/about/</a></li>
+<li>计算之魂</li>
+<li>浪潮之巅</li>
+<li>数学之美</li>
+<li>文明之光</li>
+<li>👍👍房思琪的初恋乐园，by 林奕含</li>
+</ul>
+</div>
+</div>
+</div>
+
+<div id="outline-container-org7ecb8f7" class="outline-2">
+<h2 id="org7ecb8f7"><span class="section-number-2">2</span> 年度阅读计划</h2>
+<div class="outline-text-2" id="text-2">
+<p>
+✅
+</p>
+
+<p>
+选书标准：
+</p>
+
+<ul class="org-ul">
+<li>一年只能选择 10 本书阅读，思考并践行书中的见解；</li>
+<li>主题阅读书目不计算在内，因为主题阅读一定要阅读很多书籍和文章，有 10 本的限制太委屈了；</li>
+<li>技术书籍不算在内，也就是说阅读技术书籍数量不限；</li>
+</ul>
+</div>
+
+<div id="outline-container-orgeba87f5" class="outline-3">
+<h3 id="orgeba87f5"><span class="section-number-3">2.1</span> 2022</h3>
+<div class="outline-text-3" id="text-2-1">
+<ul class="org-ul">
+<li>哲学的故事</li>
+<li>人性七论</li>
+<li>十三邀 3：“我们都在给大问题做注脚”</li>
+<li>以鸟兽之名</li>
+<li>人间好玩</li>
+<li>我生有涯愿无尽：梁漱溟自述文录</li>
+<li>寂寞的游戏</li>
+<li>少有人走的路</li>
+<li>高效能人士的七个习惯</li>
+<li>穷查理宝典</li>
+</ul>
+</div>
+</div>
+</div>
+
+<div id="outline-container-orgb4ce3b9" class="outline-2">
+<h2 id="orgb4ce3b9"><span class="section-number-2">3</span> 很好的资源</h2>
+<div class="outline-text-2" id="text-3">
+<ol class="org-ol">
+<li><a href="https://ctext.org/zhs">中国哲学书电子化计划</a></li>
+<li>选择出版图书方法(包月服务)：微信读书(19)-&gt;亚马逊(12)</li>
+<li><a href="https://www.best-books.dev/">Best-Books.dev</a> - 一个收录各种优质程序书籍的网站</li>
+<li><a href="https://allitebook.xyz/">All IT eBooks - Best Free IT eBooks Download</a></li>
+<li><a href="https://ebookfoundation.github.io/free-programming-books/">free-programming-books</a></li>
+<li><a href="https://new.shuge.org/">书格</a></li>
+<li><a href="https://learning.acm.org/faq/oreilly-faqs">O'Reilly Learning Platform FAQs</a></li>
+<li><a href="https://github.com/ascoders/weekly">前端精读周刊</a></li>
+<li><a href="https://chybeta.github.io/2017/08/19/Web-Security-Learning/">Web-Security-Learning</a></li>
+<li><a href="https://z-lib.org/">Z-lib</a></li>
+<li><a href="https://www.chongbuluo.com/">虫部落</a> -&gt; 搜书</li>
+<li><a href="https://ebook2.lorefree.com/">LoreFree ebook</a></li>
+<li><a href="http://www.zoudupai.com/">走读派读书导航</a></li>
+<li><a href="https://www.ituring.com.cn/">图灵</a></li>
+<li><a href="https://www.jiumodiary.com/">鸠摩搜索</a></li>
+<li><a href="https://bookfere.com/">书伴</a></li>
+<li><a href="https://www.toplinks.cc/s/">淘链客 - 外链资源聚合搜索引擎</a></li>
+<li><a href="https://kgbook.com/">苦瓜书盘</a></li>
+<li><a href="http://www.duxieren.com/">读写人</a></li>
+<li><a href="http://www.ucdrs.superlib.net/">全国图书馆参考咨询联盟</a></li>
+<li><a href="https://libgen.is/">Library Genesis</a> <a href="https://libgen.rs/">https://libgen.rs/</a> <a href="https://libgen.st/">https://libgen.st/</a> <a href="http://libgen.gs/">http://libgen.gs/</a></li>
+</ol>
+</div>
+
+<div id="outline-container-org931a4d7" class="outline-3">
+<h3 id="org931a4d7"><span class="section-number-3">3.1</span> 外文书籍网站</h3>
+<div class="outline-text-3" id="text-3-1">
+<ol class="org-ol">
+<li><a href="https://www.loc.gov/collections/world-digital-library/about-this-collection/">World Digital Library</a></li>
+<li><a href="https://www.gutenberg.org/">Project Gutenberg</a></li>
+<li><a href="https://manybooks.net/">manybooks</a></li>
+<li><a href="https://digilibraries.com/">DigiLibraries.com - Free eBooks library</a></li>
+<li><a href="https://magazinelib.com/">MagazineLib</a></li>
+</ol>
+</div>
+</div>
+
+<div id="outline-container-orgfed127d" class="outline-3">
+<h3 id="orgfed127d"><span class="section-number-3">3.2</span> 网上书店</h3>
+<div class="outline-text-3" id="text-3-2">
+<ol class="org-ol">
+<li><a href="https://www.amazon.cn/">亚马逊</a></li>
+<li><a href="https://book.dangdang.com/">当当图书</a></li>
+<li><a href="https://book.jd.com/">京东书店</a></li>
+<li><a href="https://www.kongfz.com/">孔夫子旧书网</a></li>
+<li><a href="http://www.bookschina.com/">中国图书网</a></li>
+<li><a href="https://taoshu.com/">淘书网</a></li>
+<li><a href="https://www.bookuu.com/">博库网</a></li>
+<li><a href="https://www.cp.com.cn/">商务印书馆</a></li>
+</ol>
+</div>
+</div>
+
+<div id="outline-container-org1a8a7f3" class="outline-3">
+<h3 id="org1a8a7f3"><span class="section-number-3">3.3</span> 找绝版书</h3>
+<div class="outline-text-3" id="text-3-3">
+<p>
+<a href="https://mp.weixin.qq.com/s/PNjMNmD6M8xcpNr3WnJltw">https://mp.weixin.qq.com/s/PNjMNmD6M8xcpNr3WnJltw</a>
+</p>
+
+<ol class="org-ol">
+<li>高价孔夫子旧书网购入</li>
+<li>多爪鱼花时间等书</li>
+<li>联系出版社/作者（可以去「全国图书馆参考咨询联盟」搜书，在  <i>版权页</i> 找到联系方式；通过出版社的社交媒体；联系作者/译者购买样书）。更好的做法，是找到出版社仍在持续更新，明显有人在打理的社交媒体，然后留言。</li>
+<li>图书馆借阅后复印/淘宝买影印版</li>
+</ol>
+</div>
+</div>
+
+<div id="outline-container-org66effe5" class="outline-3">
+<h3 id="org66effe5"><span class="section-number-3">3.4</span> 论文检索</h3>
+<div class="outline-text-3" id="text-3-4">
+<ol class="org-ol">
+<li>Sci-Hub <a href="https://sci-hub.wf/">https://sci-hub.wf/</a> <a href="https://sci-hub.ren/">https://sci-hub.ren/</a> <a href="https://sci-hub.se/">https://sci-hub.se/</a></li>
+<li><a href="https://arxiv.org/archive/cs">https://arxiv.org/archive/cs</a></li>
+</ol>
+</div>
+</div>
+</div>
+</div>
+</body>
+</html>

@@ -1,0 +1,335 @@
+<!DOCTYPE html>
+<html lang="zh">
+<head>
+<!-- 2022-01-23 Sun 21:05 -->
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>2020-42</title>
+<meta name="generator" content="Org mode">
+<style type="text/css">
+ <!--/*--><![CDATA[/*><!--*/
+  .title  { text-align: center;
+             margin-bottom: .2em; }
+  .subtitle { text-align: center;
+              font-size: medium;
+              font-weight: bold;
+              margin-top:0; }
+  .todo   { font-family: monospace; color: red; }
+  .done   { font-family: monospace; color: green; }
+  .priority { font-family: monospace; color: orange; }
+  .tag    { background-color: #eee; font-family: monospace;
+            padding: 2px; font-size: 80%; font-weight: normal; }
+  .timestamp { color: #bebebe; }
+  .timestamp-kwd { color: #5f9ea0; }
+  .org-right  { margin-left: auto; margin-right: 0px;  text-align: right; }
+  .org-left   { margin-left: 0px;  margin-right: auto; text-align: left; }
+  .org-center { margin-left: auto; margin-right: auto; text-align: center; }
+  .underline { text-decoration: underline; }
+  #postamble p, #preamble p { font-size: 90%; margin: .2em; }
+  p.verse { margin-left: 3%; }
+  pre {
+    border: 1px solid #ccc;
+    box-shadow: 3px 3px 3px #eee;
+    padding: 8pt;
+    font-family: monospace;
+    overflow: auto;
+    margin: 1.2em;
+  }
+  pre.src {
+    position: relative;
+    overflow: auto;
+    padding-top: 1.2em;
+  }
+  pre.src:before {
+    display: none;
+    position: absolute;
+    background-color: white;
+    top: -10px;
+    right: 10px;
+    padding: 3px;
+    border: 1px solid black;
+  }
+  pre.src:hover:before { display: inline; margin-top: 14px;}
+  /* Languages per Org manual */
+  pre.src-asymptote:before { content: 'Asymptote'; }
+  pre.src-awk:before { content: 'Awk'; }
+  pre.src-C:before { content: 'C'; }
+  /* pre.src-C++ doesn't work in CSS */
+  pre.src-clojure:before { content: 'Clojure'; }
+  pre.src-css:before { content: 'CSS'; }
+  pre.src-D:before { content: 'D'; }
+  pre.src-ditaa:before { content: 'ditaa'; }
+  pre.src-dot:before { content: 'Graphviz'; }
+  pre.src-calc:before { content: 'Emacs Calc'; }
+  pre.src-emacs-lisp:before { content: 'Emacs Lisp'; }
+  pre.src-fortran:before { content: 'Fortran'; }
+  pre.src-gnuplot:before { content: 'gnuplot'; }
+  pre.src-haskell:before { content: 'Haskell'; }
+  pre.src-hledger:before { content: 'hledger'; }
+  pre.src-java:before { content: 'Java'; }
+  pre.src-js:before { content: 'Javascript'; }
+  pre.src-latex:before { content: 'LaTeX'; }
+  pre.src-ledger:before { content: 'Ledger'; }
+  pre.src-lisp:before { content: 'Lisp'; }
+  pre.src-lilypond:before { content: 'Lilypond'; }
+  pre.src-lua:before { content: 'Lua'; }
+  pre.src-matlab:before { content: 'MATLAB'; }
+  pre.src-mscgen:before { content: 'Mscgen'; }
+  pre.src-ocaml:before { content: 'Objective Caml'; }
+  pre.src-octave:before { content: 'Octave'; }
+  pre.src-org:before { content: 'Org mode'; }
+  pre.src-oz:before { content: 'OZ'; }
+  pre.src-plantuml:before { content: 'Plantuml'; }
+  pre.src-processing:before { content: 'Processing.js'; }
+  pre.src-python:before { content: 'Python'; }
+  pre.src-R:before { content: 'R'; }
+  pre.src-ruby:before { content: 'Ruby'; }
+  pre.src-sass:before { content: 'Sass'; }
+  pre.src-scheme:before { content: 'Scheme'; }
+  pre.src-screen:before { content: 'Gnu Screen'; }
+  pre.src-sed:before { content: 'Sed'; }
+  pre.src-sh:before { content: 'shell'; }
+  pre.src-sql:before { content: 'SQL'; }
+  pre.src-sqlite:before { content: 'SQLite'; }
+  /* additional languages in org.el's org-babel-load-languages alist */
+  pre.src-forth:before { content: 'Forth'; }
+  pre.src-io:before { content: 'IO'; }
+  pre.src-J:before { content: 'J'; }
+  pre.src-makefile:before { content: 'Makefile'; }
+  pre.src-maxima:before { content: 'Maxima'; }
+  pre.src-perl:before { content: 'Perl'; }
+  pre.src-picolisp:before { content: 'Pico Lisp'; }
+  pre.src-scala:before { content: 'Scala'; }
+  pre.src-shell:before { content: 'Shell Script'; }
+  pre.src-ebnf2ps:before { content: 'ebfn2ps'; }
+  /* additional language identifiers per "defun org-babel-execute"
+       in ob-*.el */
+  pre.src-cpp:before  { content: 'C++'; }
+  pre.src-abc:before  { content: 'ABC'; }
+  pre.src-coq:before  { content: 'Coq'; }
+  pre.src-groovy:before  { content: 'Groovy'; }
+  /* additional language identifiers from org-babel-shell-names in
+     ob-shell.el: ob-shell is the only babel language using a lambda to put
+     the execution function name together. */
+  pre.src-bash:before  { content: 'bash'; }
+  pre.src-csh:before  { content: 'csh'; }
+  pre.src-ash:before  { content: 'ash'; }
+  pre.src-dash:before  { content: 'dash'; }
+  pre.src-ksh:before  { content: 'ksh'; }
+  pre.src-mksh:before  { content: 'mksh'; }
+  pre.src-posh:before  { content: 'posh'; }
+  /* Additional Emacs modes also supported by the LaTeX listings package */
+  pre.src-ada:before { content: 'Ada'; }
+  pre.src-asm:before { content: 'Assembler'; }
+  pre.src-caml:before { content: 'Caml'; }
+  pre.src-delphi:before { content: 'Delphi'; }
+  pre.src-html:before { content: 'HTML'; }
+  pre.src-idl:before { content: 'IDL'; }
+  pre.src-mercury:before { content: 'Mercury'; }
+  pre.src-metapost:before { content: 'MetaPost'; }
+  pre.src-modula-2:before { content: 'Modula-2'; }
+  pre.src-pascal:before { content: 'Pascal'; }
+  pre.src-ps:before { content: 'PostScript'; }
+  pre.src-prolog:before { content: 'Prolog'; }
+  pre.src-simula:before { content: 'Simula'; }
+  pre.src-tcl:before { content: 'tcl'; }
+  pre.src-tex:before { content: 'TeX'; }
+  pre.src-plain-tex:before { content: 'Plain TeX'; }
+  pre.src-verilog:before { content: 'Verilog'; }
+  pre.src-vhdl:before { content: 'VHDL'; }
+  pre.src-xml:before { content: 'XML'; }
+  pre.src-nxml:before { content: 'XML'; }
+  /* add a generic configuration mode; LaTeX export needs an additional
+     (add-to-list 'org-latex-listings-langs '(conf " ")) in .emacs */
+  pre.src-conf:before { content: 'Configuration File'; }
+
+  table { border-collapse:collapse; }
+  caption.t-above { caption-side: top; }
+  caption.t-bottom { caption-side: bottom; }
+  td, th { vertical-align:top;  }
+  th.org-right  { text-align: center;  }
+  th.org-left   { text-align: center;   }
+  th.org-center { text-align: center; }
+  td.org-right  { text-align: right;  }
+  td.org-left   { text-align: left;   }
+  td.org-center { text-align: center; }
+  dt { font-weight: bold; }
+  .footpara { display: inline; }
+  .footdef  { margin-bottom: 1em; }
+  .figure { padding: 1em; }
+  .figure p { text-align: center; }
+  .equation-container {
+    display: table;
+    text-align: center;
+    width: 100%;
+  }
+  .equation {
+    vertical-align: middle;
+  }
+  .equation-label {
+    display: table-cell;
+    text-align: right;
+    vertical-align: middle;
+  }
+  .inlinetask {
+    padding: 10px;
+    border: 2px solid gray;
+    margin: 10px;
+    background: #ffffcc;
+  }
+  #org-div-home-and-up
+   { text-align: right; font-size: 70%; white-space: nowrap; }
+  textarea { overflow-x: auto; }
+  .linenr { font-size: smaller }
+  .code-highlighted { background-color: #ffff00; }
+  .org-info-js_info-navigation { border-style: none; }
+  #org-info-js_console-label
+    { font-size: 10px; font-weight: bold; white-space: nowrap; }
+  .org-info-js_search-highlight
+    { background-color: #ffff00; color: #000000; font-weight: bold; }
+  .org-svg { width: 90%; }
+  /*]]>*/-->
+</style>
+<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin><link href="https://fonts.googleapis.com/css2?family=Noto+Sans+SC&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="/theme/normalize.css"/>
+<link rel="stylesheet" href="/theme/site.css"/>
+<script defer src='https://static.cloudflareinsights.com/beacon.min.js' data-cf-beacon='{"token": "d5b841b503ed4d1b8fad459b84d1cc2f"}'></script>
+<script defer src="/theme/link.js"></script>
+</head>
+<body>
+<div id="content">
+<header>
+<h1 class="title">2020-42</h1>
+</header><p>
+10.12-10.18
+</p>
+
+<p>
+这是 2020 年第 42 周总结。
+</p>
+
+<p>
+总算，这周回到了恰当的时间点上。
+</p>
+
+<p>
+我开始阅读 JavaScript 相关的电子书，开始学习这一门 Web
+编程语言。大概是第一次学习的缘故，觉得 JavaScript
+不是很好懂，学习的次数多了，理解得应该就会深刻一些。
+</p>
+
+<p>
+进度（2020-10-10~2020-10-15）：
+</p>
+
+<ul class="org-ul">
+<li>[solved] vscode ctrl + click instead of alt + click</li>
+<li>[solved] curl problems, find more about it</li>
+<li>begin think slowly</li>
+<li>meet some ways about Multisim's slow running speed</li>
+<li>Completed work on deadline</li>
+<li>Configure a Software Developer Portfolio; learn about how to use
+issues write blogs. All these are based on react</li>
+</ul>
+
+<p>
+我觉得自己这周关于编程做得很少，我对此感到很不满意（对自己）。
+</p>
+
+<hr>
+
+<p>
+这周开始把一些想法集中记录在一个
+<a href="https://github.com/Gaotianhe/way-to-life">仓库</a> 里，列举一部分：
+</p>
+
+<ul class="org-ul">
+<li>不能否认“别人曾经帮助我”这一事实</li>
+<li>降维打击：准备雅思考六级</li>
+<li><a href="https://github.com/Gaotianhe/way-to-life/blob/main/docs/%E5%BF%83%E7%90%86%E5%AD%A6%E4%B8%AD%E7%9A%84%E7%84%A6%E7%82%B9%E6%95%88%E5%BA%94-%E9%80%8F%E6%98%8E%E8%80%85%E6%95%88%E5%BA%94.md">心理学中的焦点效应，透明者效应</a></li>
+<li>*我为什么无法控制自己看黄色录像的欲望*？</li>
+<li><a href="https://github.com/Gaotianhe/way-to-life/blob/main/docs/%E5%B9%B8%E7%A6%8F%E5%B0%B1%E6%98%AF%E4%BD%A0%E5%9C%A8%E6%B0%B8%E8%BF%9C%E5%A4%B1%E5%8E%BB%E4%B8%80%E6%A0%B7%E4%B8%9C%E8%A5%BF%E7%9A%84%E5%89%8D%E4%B8%80%E5%88%BB.md">幸福就是你在永远失去一样东西的前一刻</a></li>
+<li><a href="https://github.com/Gaotianhe/way-to-life/blob/main/docs/%E7%94%9F%E6%AE%96%E7%A7%91%E6%97%A5%E8%AE%B0%E4%B9%8B%E7%94%B7%E7%A7%91-%E7%88%B6%E6%9D%83%E5%9D%8D%E5%A1%8C%E5%8F%AA%E5%9C%A8%E4%B8%80%E7%9E%AC%E9%97%B4.md">生殖科日记之男科-父权坍塌只在一瞬间</a></li>
+<li>没有自由之后，我的心无限彷徨</li>
+<li>我怎么知道今天的我一定会比昨天的我更好</li>
+</ul>
+
+<p>
+诸如此类的细碎想法，都会被我小心记录下来，留备以后研究。
+</p>
+
+<p>
+上周我谈到要剖析自己，先从看黄色录像开始。我最早接触这种东西是小学五年级，我能记住的都是印象较为深刻的，摆弄父亲的手机，突然就打开了一个黄色视频。父亲呵斥我立刻关掉它，我立马关上了。但是，录像中男女裸露的躯体在我尚小的心灵中留下了印象。我的好奇心无处不在，自然对此十分好奇，不过当时年纪太小，不懂这是什么东西。
+</p>
+
+<p>
+我还记得是小学班级里，一个同学拿出砖头式的手机，说有黄片。一堆男生围上去，我也很好奇，凑过去看
+</p>
+<hr>
+<p>
+一个很胖的男人在对一个女人做活塞运动（这个比喻还是挺形象的）。当时，大家一起做的这件事，我不觉得有什么不好。但是，现在回想起当时的行为，觉得自己不该凑上去。我在想：当时旁边的女同学会怎么看我们这群看黄片的男生呢？这就不得而知了。
+</p>
+
+<p>
+初中时，我开始能偶尔摆弄母亲的手机，除了用它来看玄幻小说外，它的功能就是看黄色电子书，我看的有一本名字叫《
+<i>淫荡少妇之白洁</i>
+》。这本书彻底改变我的性事。我一边看一边想象，真的有这样一个女人供我翻云覆雨。希望自己能像小说中的男人们那样威武雄壮，御女无数。然而，现实中的我却是寡言少语的人，现实中与想象里的反差是如此之大，以至于你不会相信这回事同一个人的状态。但这的确是我一个人的行为。
+</p>
+
+<p>
+高中时，几乎没有机会用手机，所以也就没有这些黄色书籍供我来看。
+</p>
+
+<p>
+来到大学，我就百无禁忌了，在欲望来临的时候，随便找些性爱视频（这些在网络上随处可见）就能自慰。不过，频繁地如此会带来一个后果
+</p>
+<hr>
+<p>
+精神上的萎靡不振。身体能量总体是有限的，如果大量能量被用于产生精子，那么身体的某些位置就得不到充足的能量，这样的后果就是人整体机能的降低。
+</p>
+
+<p>
+但是，每次当我下定决心不再看黄色录像时，内心的性欲总是蠢蠢欲动，驱使着我去做这件对我的物理身体无益的事情。
+</p>
+
+<p>
+我会永不看黄色录像吗？这个问题无法回答。换个说法，我会没有性欲吗？这个几乎不可能（对于现在这个阶段的我来说，性欲是一定会存在的）。那么，没有女朋友的我只能通过看黄色录像缓解性欲了。再回答第一个问题，我会看黄色录像。但是，看黄色录像对我的身体是有害的，这个问题如何解决？可以改变看黄色录像的频率。目前，一个星期一次到两次，可以变成两个星期看一次。
+</p>
+
+<p>
+这样，看黄色录像这个问题似乎是解决了。
+</p>
+
+<p>
+当我写下这些关于黄色录像的话时，我知道我已经对自己足够坦诚了。因为我在以前是绝对不敢讲出来的，因为这实在是一件很羞耻的事情（我曾经这样认为）。我现在觉得这是我自己的合理的欲望。说到欲望，我今天问同学一个问题：客观来讲，你是怎么判断一个人有自由意志？他回答说，"人有欲望"。他的话让困扰了我很久的有关性欲的问题迎刃而解了。人之所以为人，就是人有各种各样的欲望，性欲当然也是其中的一部分。所以，看黄色录像来满足性欲不是一件羞耻的事情。
+</p>
+
+<hr>
+
+<p>
+现在，来说说“偏见”这个词。今天在《 <i>社会心理学</i>
+》一书中，看到有关人的偏见的大量研究描述。我只说我现在还有印象的部分。偏见可以像一个标签，我给你一个偏见，即给你一个标签。你是一个高高的、身体匀称的、男人，这些标签构成了你这个人，我对你外表的偏见帮助我认识你。这时的偏见体现出了它积极的一面。而偏见最经常被讨论的一面，就是它的消极一面。而消极主要体现在种族歧视和性别歧视。
+</p>
+
+<p>
+在讨论“偏见”这一大的概念之前，我先声明一点：受限于我知识面、语言表达能力的不足，一些文字可能无法恰如其分地表达出我想表达的意思，甚至会被曲解。
+</p>
+
+<p>
+种族歧视问题由来已久，我所耳闻的就是美国这一国家里黑人和白人的冲突问题。白人对于黑人都有一个普遍印象
+</p>
+<hr>
+<p>
+野蛮、霸道、不讲理、喜欢动武。偏见会造成认知偏差，而这会导致矛盾的加剧。
+</p>
+
+<p>
+性别歧视就更不必多说，女性在职场中受到的歧视比男性多出很多。这句话也出自我的偏见（因为我惰于亲自查资料）。你看，偏见之所以形成，就是人们喜欢那些更简单的理由。你之所以上班迟到，是因为你懒没能起来早些，而不是因为路上堵车。
+</p>
+
+<p>
+这几句话就是我获得的知识的小结。
+</p>
+</div>
+</body>
+</html>

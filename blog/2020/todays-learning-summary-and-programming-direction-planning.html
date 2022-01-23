@@ -1,0 +1,515 @@
+<!DOCTYPE html>
+<html lang="zh">
+<head>
+<!-- 2022-01-23 Sun 21:05 -->
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>今日学习总结与编程方向规划</title>
+<meta name="generator" content="Org mode">
+<style type="text/css">
+ <!--/*--><![CDATA[/*><!--*/
+  .title  { text-align: center;
+             margin-bottom: .2em; }
+  .subtitle { text-align: center;
+              font-size: medium;
+              font-weight: bold;
+              margin-top:0; }
+  .todo   { font-family: monospace; color: red; }
+  .done   { font-family: monospace; color: green; }
+  .priority { font-family: monospace; color: orange; }
+  .tag    { background-color: #eee; font-family: monospace;
+            padding: 2px; font-size: 80%; font-weight: normal; }
+  .timestamp { color: #bebebe; }
+  .timestamp-kwd { color: #5f9ea0; }
+  .org-right  { margin-left: auto; margin-right: 0px;  text-align: right; }
+  .org-left   { margin-left: 0px;  margin-right: auto; text-align: left; }
+  .org-center { margin-left: auto; margin-right: auto; text-align: center; }
+  .underline { text-decoration: underline; }
+  #postamble p, #preamble p { font-size: 90%; margin: .2em; }
+  p.verse { margin-left: 3%; }
+  pre {
+    border: 1px solid #ccc;
+    box-shadow: 3px 3px 3px #eee;
+    padding: 8pt;
+    font-family: monospace;
+    overflow: auto;
+    margin: 1.2em;
+  }
+  pre.src {
+    position: relative;
+    overflow: auto;
+    padding-top: 1.2em;
+  }
+  pre.src:before {
+    display: none;
+    position: absolute;
+    background-color: white;
+    top: -10px;
+    right: 10px;
+    padding: 3px;
+    border: 1px solid black;
+  }
+  pre.src:hover:before { display: inline; margin-top: 14px;}
+  /* Languages per Org manual */
+  pre.src-asymptote:before { content: 'Asymptote'; }
+  pre.src-awk:before { content: 'Awk'; }
+  pre.src-C:before { content: 'C'; }
+  /* pre.src-C++ doesn't work in CSS */
+  pre.src-clojure:before { content: 'Clojure'; }
+  pre.src-css:before { content: 'CSS'; }
+  pre.src-D:before { content: 'D'; }
+  pre.src-ditaa:before { content: 'ditaa'; }
+  pre.src-dot:before { content: 'Graphviz'; }
+  pre.src-calc:before { content: 'Emacs Calc'; }
+  pre.src-emacs-lisp:before { content: 'Emacs Lisp'; }
+  pre.src-fortran:before { content: 'Fortran'; }
+  pre.src-gnuplot:before { content: 'gnuplot'; }
+  pre.src-haskell:before { content: 'Haskell'; }
+  pre.src-hledger:before { content: 'hledger'; }
+  pre.src-java:before { content: 'Java'; }
+  pre.src-js:before { content: 'Javascript'; }
+  pre.src-latex:before { content: 'LaTeX'; }
+  pre.src-ledger:before { content: 'Ledger'; }
+  pre.src-lisp:before { content: 'Lisp'; }
+  pre.src-lilypond:before { content: 'Lilypond'; }
+  pre.src-lua:before { content: 'Lua'; }
+  pre.src-matlab:before { content: 'MATLAB'; }
+  pre.src-mscgen:before { content: 'Mscgen'; }
+  pre.src-ocaml:before { content: 'Objective Caml'; }
+  pre.src-octave:before { content: 'Octave'; }
+  pre.src-org:before { content: 'Org mode'; }
+  pre.src-oz:before { content: 'OZ'; }
+  pre.src-plantuml:before { content: 'Plantuml'; }
+  pre.src-processing:before { content: 'Processing.js'; }
+  pre.src-python:before { content: 'Python'; }
+  pre.src-R:before { content: 'R'; }
+  pre.src-ruby:before { content: 'Ruby'; }
+  pre.src-sass:before { content: 'Sass'; }
+  pre.src-scheme:before { content: 'Scheme'; }
+  pre.src-screen:before { content: 'Gnu Screen'; }
+  pre.src-sed:before { content: 'Sed'; }
+  pre.src-sh:before { content: 'shell'; }
+  pre.src-sql:before { content: 'SQL'; }
+  pre.src-sqlite:before { content: 'SQLite'; }
+  /* additional languages in org.el's org-babel-load-languages alist */
+  pre.src-forth:before { content: 'Forth'; }
+  pre.src-io:before { content: 'IO'; }
+  pre.src-J:before { content: 'J'; }
+  pre.src-makefile:before { content: 'Makefile'; }
+  pre.src-maxima:before { content: 'Maxima'; }
+  pre.src-perl:before { content: 'Perl'; }
+  pre.src-picolisp:before { content: 'Pico Lisp'; }
+  pre.src-scala:before { content: 'Scala'; }
+  pre.src-shell:before { content: 'Shell Script'; }
+  pre.src-ebnf2ps:before { content: 'ebfn2ps'; }
+  /* additional language identifiers per "defun org-babel-execute"
+       in ob-*.el */
+  pre.src-cpp:before  { content: 'C++'; }
+  pre.src-abc:before  { content: 'ABC'; }
+  pre.src-coq:before  { content: 'Coq'; }
+  pre.src-groovy:before  { content: 'Groovy'; }
+  /* additional language identifiers from org-babel-shell-names in
+     ob-shell.el: ob-shell is the only babel language using a lambda to put
+     the execution function name together. */
+  pre.src-bash:before  { content: 'bash'; }
+  pre.src-csh:before  { content: 'csh'; }
+  pre.src-ash:before  { content: 'ash'; }
+  pre.src-dash:before  { content: 'dash'; }
+  pre.src-ksh:before  { content: 'ksh'; }
+  pre.src-mksh:before  { content: 'mksh'; }
+  pre.src-posh:before  { content: 'posh'; }
+  /* Additional Emacs modes also supported by the LaTeX listings package */
+  pre.src-ada:before { content: 'Ada'; }
+  pre.src-asm:before { content: 'Assembler'; }
+  pre.src-caml:before { content: 'Caml'; }
+  pre.src-delphi:before { content: 'Delphi'; }
+  pre.src-html:before { content: 'HTML'; }
+  pre.src-idl:before { content: 'IDL'; }
+  pre.src-mercury:before { content: 'Mercury'; }
+  pre.src-metapost:before { content: 'MetaPost'; }
+  pre.src-modula-2:before { content: 'Modula-2'; }
+  pre.src-pascal:before { content: 'Pascal'; }
+  pre.src-ps:before { content: 'PostScript'; }
+  pre.src-prolog:before { content: 'Prolog'; }
+  pre.src-simula:before { content: 'Simula'; }
+  pre.src-tcl:before { content: 'tcl'; }
+  pre.src-tex:before { content: 'TeX'; }
+  pre.src-plain-tex:before { content: 'Plain TeX'; }
+  pre.src-verilog:before { content: 'Verilog'; }
+  pre.src-vhdl:before { content: 'VHDL'; }
+  pre.src-xml:before { content: 'XML'; }
+  pre.src-nxml:before { content: 'XML'; }
+  /* add a generic configuration mode; LaTeX export needs an additional
+     (add-to-list 'org-latex-listings-langs '(conf " ")) in .emacs */
+  pre.src-conf:before { content: 'Configuration File'; }
+
+  table { border-collapse:collapse; }
+  caption.t-above { caption-side: top; }
+  caption.t-bottom { caption-side: bottom; }
+  td, th { vertical-align:top;  }
+  th.org-right  { text-align: center;  }
+  th.org-left   { text-align: center;   }
+  th.org-center { text-align: center; }
+  td.org-right  { text-align: right;  }
+  td.org-left   { text-align: left;   }
+  td.org-center { text-align: center; }
+  dt { font-weight: bold; }
+  .footpara { display: inline; }
+  .footdef  { margin-bottom: 1em; }
+  .figure { padding: 1em; }
+  .figure p { text-align: center; }
+  .equation-container {
+    display: table;
+    text-align: center;
+    width: 100%;
+  }
+  .equation {
+    vertical-align: middle;
+  }
+  .equation-label {
+    display: table-cell;
+    text-align: right;
+    vertical-align: middle;
+  }
+  .inlinetask {
+    padding: 10px;
+    border: 2px solid gray;
+    margin: 10px;
+    background: #ffffcc;
+  }
+  #org-div-home-and-up
+   { text-align: right; font-size: 70%; white-space: nowrap; }
+  textarea { overflow-x: auto; }
+  .linenr { font-size: smaller }
+  .code-highlighted { background-color: #ffff00; }
+  .org-info-js_info-navigation { border-style: none; }
+  #org-info-js_console-label
+    { font-size: 10px; font-weight: bold; white-space: nowrap; }
+  .org-info-js_search-highlight
+    { background-color: #ffff00; color: #000000; font-weight: bold; }
+  .org-svg { width: 90%; }
+  /*]]>*/-->
+</style>
+<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin><link href="https://fonts.googleapis.com/css2?family=Noto+Sans+SC&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="/theme/normalize.css"/>
+<link rel="stylesheet" href="/theme/site.css"/>
+<script defer src='https://static.cloudflareinsights.com/beacon.min.js' data-cf-beacon='{"token": "d5b841b503ed4d1b8fad459b84d1cc2f"}'></script>
+<script defer src="/theme/link.js"></script>
+</head>
+<body>
+<div id="content">
+<header>
+<h1 class="title">今日学习总结与编程方向规划</h1>
+</header><p>
+中午下课的间隙，看到知乎上的一个人，她回答一个评论，贴上了她的网站。我因为好奇点击。惊叹于她开博时间之早，最早的博文时间在
+04 年，遥想那时我才 4 岁。她的博客里有没有技术文我不知道，我看了最远的
+04
+年她写自己军训，最近的是带孩子的日常。这是一种记录生活的方式。我问自己：你是想记录生活还是分享技术亦或是两者兼具。
+</p>
+
+<p>
+我当然想两者兼具，因为这就是自己想要的，把自己成长的轨迹一点一滴地记录下来，等到将来给未来的某个人看。所以，当我写下一些文字的时侯，这恰恰是我想要记录下来的，不管它给我什么样的感受，也不管它给你什么样的感受。
+</p>
+
+<div id="outline-container-要学习的内容有很多" class="outline-2">
+<h2 id="要学习的内容有很多">要学习的内容有很多</h2>
+<div class="outline-text-2" id="text-要学习的内容有很多">
+<p>
+新学期的到来让我压力很大，这种网络授课的形式最要人命的就是周遭的环境，在学校里大家一起到一个教室，听老师传授知识，我能够跟上老师的节奏。昨天只有一节课，这种缺点还没有彻底浮现，今天有三节课，上课上得我都要吐了。心里很烦躁久久不能平静下来。
+</p>
+
+<p>
+我把学习到的知识记下来，巩固一下：
+</p>
+</div>
+
+<div id="outline-container-数电" class="outline-3">
+<h3 id="数电">数电</h3>
+<div class="outline-text-3" id="text-数电">
+<p>
+数电，全称：“ 数字电子技术
+”。今天主要讲了二进制、十进制、八进制、十六进制的相互转换。这是不同进制对照表：
+</p>
+
+<table>
+
+
+<colgroup>
+<col  class="org-right">
+
+<col  class="org-right">
+
+<col  class="org-right">
+
+<col  class="org-right">
+</colgroup>
+<thead>
+<tr>
+<th scope="col" class="org-right">十进制数</th>
+<th scope="col" class="org-right">二进制数</th>
+<th scope="col" class="org-right">八进制数</th>
+<th scope="col" class="org-right">十六进制数</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td class="org-right">00</td>
+<td class="org-right">0000</td>
+<td class="org-right">00</td>
+<td class="org-right">0</td>
+</tr>
+
+<tr>
+<td class="org-right">01</td>
+<td class="org-right">0001</td>
+<td class="org-right">01</td>
+<td class="org-right">1</td>
+</tr>
+
+<tr>
+<td class="org-right">02</td>
+<td class="org-right">0010</td>
+<td class="org-right">02</td>
+<td class="org-right">2</td>
+</tr>
+
+<tr>
+<td class="org-right">03</td>
+<td class="org-right">0011</td>
+<td class="org-right">03</td>
+<td class="org-right">3</td>
+</tr>
+
+<tr>
+<td class="org-right">04</td>
+<td class="org-right">0100</td>
+<td class="org-right">04</td>
+<td class="org-right">4</td>
+</tr>
+
+<tr>
+<td class="org-right">05</td>
+<td class="org-right">0101</td>
+<td class="org-right">05</td>
+<td class="org-right">5</td>
+</tr>
+
+<tr>
+<td class="org-right">06</td>
+<td class="org-right">0110</td>
+<td class="org-right">06</td>
+<td class="org-right">6</td>
+</tr>
+
+<tr>
+<td class="org-right">07</td>
+<td class="org-right">0111</td>
+<td class="org-right">07</td>
+<td class="org-right">7</td>
+</tr>
+
+<tr>
+<td class="org-right">08</td>
+<td class="org-right">1000</td>
+<td class="org-right">10</td>
+<td class="org-right">8</td>
+</tr>
+
+<tr>
+<td class="org-right">09</td>
+<td class="org-right">1001</td>
+<td class="org-right">11</td>
+<td class="org-right">9</td>
+</tr>
+
+<tr>
+<td class="org-right">10</td>
+<td class="org-right">1010</td>
+<td class="org-right">12</td>
+<td class="org-right">A</td>
+</tr>
+
+<tr>
+<td class="org-right">11</td>
+<td class="org-right">1011</td>
+<td class="org-right">13</td>
+<td class="org-right">B</td>
+</tr>
+
+<tr>
+<td class="org-right">12</td>
+<td class="org-right">1100</td>
+<td class="org-right">14</td>
+<td class="org-right">C</td>
+</tr>
+
+<tr>
+<td class="org-right">13</td>
+<td class="org-right">1101</td>
+<td class="org-right">15</td>
+<td class="org-right">D</td>
+</tr>
+
+<tr>
+<td class="org-right">14</td>
+<td class="org-right">1110</td>
+<td class="org-right">16</td>
+<td class="org-right">E</td>
+</tr>
+
+<tr>
+<td class="org-right">15</td>
+<td class="org-right">1111</td>
+<td class="org-right">17</td>
+<td class="org-right">F</td>
+</tr>
+</tbody>
+</table>
+
+<p>
+对于二进制来说，数位排列时，高位在左，低位在右。十进制数 &#x2013; &gt;
+二进制数，整数部分短除法取余，小数部分乘 2 取整。二进制数 &#x2013; &gt;
+十进制数，按权值乘，整数四位 8421，小数四位 2^(-1) 、2^(-2) 、2^(-3)
+、2^(-4) ，其他情况类比以上。
+</p>
+
+<p>
+对于八进制来说，对应数位数字相加满 8 进一。二进制数 &#x2013; &gt;
+八进制数，整数部分从小数点左边开始取，3 位一组，不够 3
+位要在不够的位数左边补零；小数部分从小数点右边开始取，3 位一组，不够 3
+位要在不够的位数右边补零。
+</p>
+
+<p>
+对于十六进制来说，满 16 进一。二进制数 &#x2013;&gt;
+十六进制数，整数部分从小数点左边开始取，4 位一组，不够 4
+位要在不够的位数左边补零；小数部分从小数点右边开始取，4 位一组，不够 4
+位要在不够的位数右边补零。
+</p>
+
+<p>
+关于十进制与八进制的相互转换，关于十进制与十六进制的相互转换，要通过二进制进行。原因：二进制与八进制、十六进制属于同一类，它们之间相互转换较为容易；十进制与二进制的转换，之前学习计算机基础时有过印象。所以，要这样做。
+</p>
+
+<p>
+这就是今天数电的学习内容。
+</p>
+</div>
+</div>
+
+<div id="outline-container-模电" class="outline-3">
+<h3 id="模电">模电</h3>
+<div class="outline-text-3" id="text-模电">
+<p>
+模电，全称：“ 模拟电子技术
+”。主要讲了半导体的两种类型：P（positive）型、N（negative）型。前者又被称为空穴型半导体，空穴带正电；后者则被称为电子型半导体，电子带负电。
+</p>
+
+<p>
+纯净的具有晶体结构的半导体被称为本征半导体。
+</p>
+
+<p>
+运载电荷的粒子称为载流子。导体导电只有一种载流子，即自由电子导电；而本征半导体有两种载流子，即自由电子和空穴均参与导电。
+</p>
+
+<p>
+半导体在（高温的）热激发下产生自由电子和空穴对的现象称为本征激发。自由电子如果在运动的过程中与空穴相遇就会填补空穴，使两者同时消失，这种现象称为复合。
+</p>
+
+<p>
+在纯净的硅晶体中掺入五价元素（如磷），使之取代晶体中硅原子的位置，就形成了
+N 型半导体。N
+型半导体中，自由电子的浓度大于空穴的浓度，故称自由电子为多（数载流）子，空穴为少（数载流）子。掺入的杂质越多，多子的浓度就越高，导电性能也就越强。
+</p>
+
+<p>
+在纯净的硅晶体中掺入三价元素（如磷），使之取代晶体中硅原子的位置，就形成了
+P 型半导体。P
+型半导体中，空穴的浓度大于自由电子的浓度，故称空穴为多（数载流）子，自由电子为少（数载流）子。掺入的杂质越多，空穴的浓度就越高，导电性能也就越强。
+</p>
+
+<p>
+杂质原子提供电子形成像 N
+型半导体，则称杂质原子为施主原子；杂质原子中的空穴吸收电子形成像 P
+型半导体，则称杂质原子为受主原子。
+</p>
+</div>
+</div>
+
+<div id="outline-container-英语" class="outline-3">
+<h3 id="英语">英语</h3>
+<div class="outline-text-3" id="text-英语">
+<p>
+英语部分看了一些单词，记录下来这些不认识的单词：
+</p>
+
+<pre class="example" id="org6c67b21">
+on the heels of 紧跟……之后
+specimen n. 标本
+as yet 到目前（或那时）为止
+giant n.;a. 巨人；巨大的怪物；巨大的
+squid n. 鱿鱼
+elusive a. 难以捉摸的
+ingenuity n. 创造性；创新；机智
+monumental a. 巨大的
+a drop in the bucket / a drop in the ocean 沧海一粟
+entirety n. 全部|entirely ad. 全部地
+in one's entirety 整体地/全面地
+</pre>
+
+<hr>
+
+<p>
+明天有一节概率与数理统计，上课要集中精力。
+</p>
+</div>
+
+<div id="outline-container-自己想学的东西也很多" class="outline-4">
+<h4 id="自己想学的东西也很多">自己想学的东西也很多</h4>
+<div class="outline-text-4" id="text-自己想学的东西也很多">
+<p>
+python
+跟着教程学，没进行下去，主要折腾网站去了。各种细碎的知识东学一下、西学一点，总是感觉自己没学到东西。我也是好高骛远，有太多想学的技术了。web
+端的网页设计，像 JavaScipt 等语言；看别人文章写用 python
+爬虫获取静态网页数据等等。
+</p>
+
+<p>
+而且我越来越意识信息安全的重要性，信息安全本来就非常重要，我只是才意识到。我看了编程随想的博文知道的，现在很多国产软件都是有后门的，相关部门如果想调查某一个人很容易，而且企业要想生存下去就一定要跟政府合作。否则没有政府的支持，企业想做大根本不可能。
+</p>
+
+<p>
+上个星期吧，把电脑上的搜狗输入法卸载了，因为输入法这个东西是收集隐私的利器。以前，每当我在搜狗输入法个人中心，看我的打字数目，很高兴，看我打了那么多字。现在想来不禁有些后怕。搜狗有一个庞大的云词库，汇集中国网民每天输入的各种词汇，如果有人想通过云词库看你输入了什么，这个可以通过技术办到也可以通过权力，谁知道呢。
+</p>
+
+<p>
+我本来想改用谷歌输入法，但是用不了，只好改用 Win10
+自带的微软输入法。它比搜狗在搜集用户隐私方面比较轻，还是因为我技术不行，不知道微软输入法有没有搜集隐私。Win
+端的软件逐渐向开源软件方向转化，有开源的绝对不用没有开放源代码的。开放了源代码就意味着任何人都可以根据自己的需要去修改、去优化，所以一旦有人发现开源软件有收集隐私这一严重问题，这个软件最开始的发布方一定会进行修改或者其他人进行修改。
+</p>
+
+<p>
+所以，那些使用的人很多的开源软件一般情况下没有问题。
+</p>
+
+<p>
+*对于编程方向的学习，我一直处于一种很模糊的阶段，实在是不知道学什么，我是什么都想学，什么都学个皮毛*。这肯定是一个需要度过的阶段，我在这个阶段需要做的就是尽量多地学习各种技术。编程语言以
+C、python、Java
+为主，其他的语言具体到应用时再学习；计算机科学知识要开始学习了，我列举出来，编程、计算机架构、算法与数据结构、数学知识、操作系统、计算机网络、数据库、编程语言与编译器、分布式系统，这些知识对于更好地思考编程有很大帮助。这里有<a href="https://github.com/keithnull/TeachYourselfCS-CN/blob/master/TeachYourselfCS-CN.md">学习计算机科学知识的途径</a>。
+</p>
+
+<p>
+编程学习最重要的就是实践，我现在处于写代码的阶段。我要做的就是，我写出具有特定功能的代码，然后实现功能，如果不能实现，检查问题出在哪里，看书或者去搜索或者去论坛。我现在遇到的问题都不是新问题，所以一定能够在互联网中找到答案。
+</p>
+
+<p>
+今天，就到这儿吧，我还有学一会儿 Emacs。这玩意儿挺复杂的。
+</p>
+</div>
+</div>
+</div>
+</div>
+</div>
+</body>
+</html>
