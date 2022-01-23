@@ -26,12 +26,17 @@
         ("site-rss"
          :base-directory "~/org/"
          :base-extension "org"
+         :recursive nil
+         :exclude (regexp-opt '("rss.org" "index.org" "404.org"))
+         :publishing-function 'rw/org-rss-publish-to-rss
+         :publishing-directory "~/repo/blog/"
+         :rss-extension "xml"
          :html-link-home "https://www.yidajiabei.xyz/blog/"
          :html-link-use-abs-url t
-         :publishing-directory "~/repo/blog/"
-         :publishing-function (org-rss-publish-to-rss)
-         :exclude ".*"
-         :include ("blog/index.org")
+         :html-link-org-files-as-html t
+         :auto-sitemap t
+         :sitemap-filename "rss.org"
+         :sitemap-title "一大加贝的 RSS"
          )
         ;; publish component
         ("site" :components ("site-orgs" "site-rss"))
