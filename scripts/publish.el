@@ -9,7 +9,9 @@
 (remove-hook 'find-file-hooks 'vc-find-file-hook 'vc-refresh-state)
 
 (setq org-publish-project-alist
-      '(("pages"
+      '(
+        ;; blog
+        ("site-orgs"
          :base-directory "~/org/"
          :publishing-directory "~/repo/blog/"
          ;; :exclude "gtd*"
@@ -18,19 +20,22 @@
          :html-head ""
          :publishing-function org-html-publish-to-html
          :html-postamble nil
-         :with-toc 't)
-        ("site" :components ("pages"))))
-
-(add-to-list 'org-publish-project-alist
-             '("blog-rss"
-             :base-directory "~/org/"
-            :base-extension "org"
-            :html-link-home "https://www.yidajiabei.xyz/blog/"
-            :html-link-use-abs-url t
-            :publishing-directory "~/repo/blog/"
-            :publishing-function (org-rss-publish-to-rss)
-            :exclude ".*"
-            :include ("blog/index.org")))
+         :with-toc 't
+         )
+        ;; RSS
+        ("site-rss"
+         :base-directory "~/org/"
+         :base-extension "org"
+         :html-link-home "https://www.yidajiabei.xyz/blog/"
+         :html-link-use-abs-url t
+         :publishing-directory "~/repo/blog/"
+         :publishing-function (org-rss-publish-to-rss)
+         :exclude ".*"
+         :include ("blog/index.org")
+         )
+        ;; publish component
+        ("site" :components ("site-orgs" "site-rss"))
+        ))
 
 ;; (progn (profiler-start 'cpu) (org-publish-project "site") (profiler-report) (profiler-stop))
 (org-publish-project "site")
