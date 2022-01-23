@@ -1,8 +1,9 @@
 ;; load env
 (load "~/.emacs.d/init.el")
-
+(add-to-list 'load-path "~/repo/blog/scripts")
 ;; https://orgmode.org/worg/org-tutorials/org-publish-html-tutorial.html
 (require 'ox-publish)
+(require 'ox-rss)
 
 ;; https://bastibe.de/2014-05-07-speeding-up-org-publishing.html
 (remove-hook 'find-file-hooks 'vc-find-file-hook 'vc-refresh-state)
@@ -23,14 +24,13 @@
          :base-extension "org"
          :html-link-home "https://www.yidajiabei.xyz/blog/"
          :html-link-use-abs-url t
-         :rss-extension "xml"
          :publishing-directory "~/repo/blog/"
          :publishing-function (org-rss-publish-to-rss)
-         :section-numbers nil
          :exclude ".*"
-         :include ("index.org")
-         :table-of-contents nil)
-        ("site" :components ("pages" "feed"))))
+         :include ("blog/index.org")
+        ("site" :components ("pages" "feed")))))
 
 ;; (progn (profiler-start 'cpu) (org-publish-project "site") (profiler-report) (profiler-stop))
 (org-publish-project "site")
+
+;; https://bzg.fr/en/blogging-from-emacs/
