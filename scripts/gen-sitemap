@@ -31,7 +31,7 @@ with open('./sitemap.txt', 'w') as fh:
 
 with open('./sitemap.xml', 'w') as fh:
     fh.write("""<?xml version="1.0" encoding="UTF-8"?>
-<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">\n""")
+<urlset xmlns="https://www.sitemaps.org/schemas/sitemap/0.9/">\n""")
     lines = ['<url><loc>{}</loc></url>\n'.format(
         site + x[len(HTML_DIR):-4] + 'html') for x in html_files]
     lines.sort()
