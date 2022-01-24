@@ -1,0 +1,9 @@
+#!/usr/bin/env python
+
+import json
+
+# 读取json文件内容,返回字典格式
+with open('./scripts/blogs.json','r',encoding='utf8')as fp:
+    json_data = json.load(fp)
+    for x in range(0, len(json_data) -1):
+      print(json_data[x]['title'])
