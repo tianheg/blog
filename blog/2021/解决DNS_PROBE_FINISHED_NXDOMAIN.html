@@ -1,0 +1,253 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN"
+"http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en">
+<head>
+<!-- 2022-01-24 Mon 22:19 -->
+<meta http-equiv="Content-Type" content="text/html;charset=utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>&lrm;</title>
+<meta name="generator" content="Org mode" />
+<script type="text/javascript">
+// @license magnet:?xt=urn:btih:e95b018ef3580986a04669f1b5879592219e2a7a&dn=public-domain.txt Public Domain
+<!--/*--><![CDATA[/*><!--*/
+     function CodeHighlightOn(elem, id)
+     {
+       var target = document.getElementById(id);
+       if(null != target) {
+         elem.classList.add("code-highlighted");
+         target.classList.add("code-highlighted");
+       }
+     }
+     function CodeHighlightOff(elem, id)
+     {
+       var target = document.getElementById(id);
+       if(null != target) {
+         elem.classList.remove("code-highlighted");
+         target.classList.remove("code-highlighted");
+       }
+     }
+    /*]]>*///-->
+// @license-end
+</script>
+</head>
+<body>
+<div id="content">
+<div id="table-of-contents">
+<h2>Table of Contents</h2>
+<div id="text-table-of-contents">
+<ul>
+<li><a href="#释放并更新-ip-地址">1. 释放并更新 IP 地址</a></li>
+<li><a href="#重启-dns-客户端服务">2. 重启 DNS 客户端服务</a></li>
+<li><a href="#改变-dns-服务器">3. 改变 DNS 服务器</a></li>
+<li><a href="#重置-chrome-flags">4. 重置 Chrome flags</a></li>
+<li><a href="#暂时关闭-vpn-或杀毒软件">5. 暂时关闭 VPN 或杀毒软件</a></li>
+<li><a href="#检查本地-hosts-文件">6. 检查本地 hosts 文件</a></li>
+<li><a href="#重启电脑">7. 重启电脑</a></li>
+</ul>
+</div>
+</div>
+<p>
+<del>+</del> date = '2021-07-31T11:51:41+08:00' slug =
+'fix-dns-probe-finished-nxdomain' tags = ['Computer Network'] title =
+'解决 DNS<sub>PROBE</sub><sub>FINISHED</sub><sub>NXDOMAIN</sub>' <del>+</del>
+</p>
+
+<p>
+如果 DNS 解析域名/地址失败，就会得到 <code>DNS_PROBE_FINISHED_NXDOMAIN</code>
+提示，无法打开目标网页。
+</p>
+
+<p>
+DNS 是域名系统，它是连接域名（URL）和服务器 IP 地址是桥梁。probe
+是调查/探查的意思，NXDOMAIN 则表示 non-existent
+domain，域名不存在。因为，提示的意思是：DNS
+探查域名完成，当前域名不存在。
+</p>
+
+<p>
+但实际上，域名是存在的。所以，哪里出问题了？
+</p>
+
+<p>
+以下是从网络中找到的 8 种解决该问题的办法：
+</p>
+
+<ul class="org-ul">
+<li>释放并更新 IP 地址</li>
+<li>重启 DNS 客户端服务</li>
+<li>改变 DNS 服务器</li>
+<li>重置 Chrome Flags</li>
+<li>暂时关闭 VPN 和杀毒软件</li>
+<li>检查本地 hosts 文件</li>
+<li>检查域名 DNS</li>
+<li>重启电脑</li>
+</ul>
+
+<p>
+*我的电脑系统是 Ubuntu20.04.1，以下所有操作都在此系统进行*。
+</p>
+
+<div id="outline-container-释放并更新-ip-地址" class="outline-2">
+<h2 id="释放并更新-ip-地址"><span class="section-number-2">1</span> 释放并更新 IP 地址</h2>
+<div class="outline-text-2" id="text-释放并更新-ip-地址">
+<pre class="example" id="orgcc33a6c">
+sudo dhclient -r # 释放
+sudo dhclient # 更新
+</pre>
+
+<p>
+但是执行 <code>sudo dhclient</code>
+报错：=RTNETLINK answers: Operation not possible due to RF-kill=，通过<a href="https://bbs.archlinux.org/viewtopic.php?pid=1322377#p1322377">这里</a>得到一个操作
+<code>rfkill unblock all=。再执行 =sudo dhclient</code>
+不报错了，输出：=RTNETLINK answers: File exists=。文件已存在的话，重新执行即可。
+</p>
+
+<p>
+我又执行了一遍代码片段的内容：
+</p>
+
+<pre class="example" id="org5ae4cef">
+$ sudo dhclient -r
+Killed old client process
+$ sudo dhclient
+</pre>
+
+<p>
+OK，更新 IP 没有输出，说明正常执行。
+</p>
+</div>
+</div>
+
+<div id="outline-container-重启-dns-客户端服务" class="outline-2">
+<h2 id="重启-dns-客户端服务"><span class="section-number-2">2</span> 重启 DNS 客户端服务</h2>
+<div class="outline-text-2" id="text-重启-dns-客户端服务">
+<pre class="example" id="org67e731c">
+sudo apt install bind9
+sudo apt install dnsutils
+sudo vim /etc/bind/named.conf.options # add nameservers:8.8.8.8;8.8.4.4;1.1.1.1 to forwarders
+sudo systemctl restart bind9.service # open bind9 service
+service bind9 status # check bind9 status
+</pre>
+
+<p>
+然后，如果我执行 <code>sudo service bind9 restart</code> 就说明 DNS
+客户端已被重启。
+</p>
+</div>
+</div>
+
+<div id="outline-container-改变-dns-服务器" class="outline-2">
+<h2 id="改变-dns-服务器"><span class="section-number-2">3</span> 改变 DNS 服务器</h2>
+<div class="outline-text-2" id="text-改变-dns-服务器">
+<p>
+在 Ubuntu 有两种修改方式，一种通过 GUI（图形化界面），一种通过
+Ubuntu20.04 预装的 netplan
+软件。我使用后者，因为它在命令行操作，很方便。
+</p>
+
+<pre class="example" id="org09f472d">
+$ ls -a /etc/netplan
+.  ..  01-network-manager-all.yaml
+</pre>
+
+<p>
+查看 01-network-manager-all.yaml 文件，发现还没有进行任何配置：
+</p>
+
+<pre class="example" id="org1f8faa3">
+network:
+  version: 2
+  renderer: NetworkManager
+</pre>
+
+<p>
+它的意思是：让 NetworkManager
+接管所有网络设置（默认情况下，一旦检测到运营商，任何以太网设备都将提供
+DHCP），NetworkManager 就是 Ubuntu 网络管理的默认 GUI。
+</p>
+
+<p>
+根据参考写一个新的能更新 nameserver 的 01-network-manager-all.yaml
+文件：
+</p>
+
+<pre class="example" id="orgad5102c">
+network:
+  version: 2
+  renderer: networkd
+  ethernets:
+    enp2s0:
+      dhcp4: true
+      nameservers:
+        addresses:
+        - 8.8.8.8
+        - 8.8.4.4
+</pre>
+
+<p>
+使用 networkd 作为渲染器不会让设备使用 DHCP 自动出现; 每个接口都需要在
+<code>/etc/netplan</code> 中的文件中指定，以便编写其配置并在 networkd 中使用。
+</p>
+</div>
+</div>
+
+<div id="outline-container-重置-chrome-flags" class="outline-2">
+<h2 id="重置-chrome-flags"><span class="section-number-2">4</span> 重置 Chrome flags</h2>
+<div class="outline-text-2" id="text-重置-chrome-flags">
+<p>
+在 Google Chrome 浏览器中的地址栏输入 <code>chrome://flags/</code> 点击右上方的
+<code>Reset all</code> 即可。这样做是因为 Chrome
+会时不时释出一些实验性功能，这些实验性功能可能回使原本正常的 DNS
+解析受到影响。
+</p>
+</div>
+</div>
+
+<div id="outline-container-暂时关闭-vpn-或杀毒软件" class="outline-2">
+<h2 id="暂时关闭-vpn-或杀毒软件"><span class="section-number-2">5</span> 暂时关闭 VPN 或杀毒软件</h2>
+<div class="outline-text-2" id="text-暂时关闭-vpn-或杀毒软件">
+<p>
+这是因为 VPN
+会改变电脑的网络环境，由此会产生诸多问题。杀毒软件会对网络进行严格监控，它会控制进出口流量，甄别可能会对主机/网络产生消极影响的流量。
+</p>
+</div>
+</div>
+
+<div id="outline-container-检查本地-hosts-文件" class="outline-2">
+<h2 id="检查本地-hosts-文件"><span class="section-number-2">6</span> 检查本地 hosts 文件</h2>
+<div class="outline-text-2" id="text-检查本地-hosts-文件">
+<pre class="example" id="orgb19c17e">
+vim /etc/hosts
+</pre>
+
+<p>
+如果你要修改，就要在 root 下执行：=sudo vim /etc/hosts=。
+</p>
+</div>
+</div>
+
+<div id="outline-container-重启电脑" class="outline-2">
+<h2 id="重启电脑"><span class="section-number-2">7</span> 重启电脑</h2>
+<div class="outline-text-2" id="text-重启电脑">
+<p>
+这是最后的万全之策。很多问题可以通过重启解决，这一个也可能不会例外。
+</p>
+
+<p>
+ref:
+</p>
+
+<ol class="org-ol">
+<li><a href="https://support.google.com/chrome/thread/6144098/dns-probe-finished-nxdomain?hl=en&amp;msgid=13374613">https://support.google.com/chrome/thread/6144098/dns-probe-finished-nxdomain?hl=en&amp;msgid=13374613</a></li>
+<li><a href="https://kinsta.com/knowledgebase/dns_probe_finished_nxdomain/">https://kinsta.com/knowledgebase/dns_probe_finished_nxdomain/</a></li>
+<li><a href="https://www.cyberciti.biz/faq/howto-linux-renew-dhcp-client-ip-address/">https://www.cyberciti.biz/faq/howto-linux-renew-dhcp-client-ip-address/</a></li>
+<li><a href="https://ubuntu.com/server/docs/service-domain-name-service-dns">https://ubuntu.com/server/docs/service-domain-name-service-dns</a></li>
+<li><a href="https://www.cyberciti.biz/faq/restart-named-service-ubuntu-debuan-linux/">https://www.cyberciti.biz/faq/restart-named-service-ubuntu-debuan-linux/</a></li>
+<li><a href="https://netplan.io/">https://netplan.io/</a></li>
+</ol>
+</div>
+</div>
+</div>
+</body>
+</html>

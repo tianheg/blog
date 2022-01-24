@@ -1,0 +1,733 @@
+<!DOCTYPE html>
+<html lang="zh">
+<head>
+<!-- 2022-01-24 Mon 22:19 -->
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>查拉图斯特拉如是说</title>
+<meta name="generator" content="Org mode">
+<style type="text/css">
+ <!--/*--><![CDATA[/*><!--*/
+  .title  { text-align: center;
+             margin-bottom: .2em; }
+  .subtitle { text-align: center;
+              font-size: medium;
+              font-weight: bold;
+              margin-top:0; }
+  .todo   { font-family: monospace; color: red; }
+  .done   { font-family: monospace; color: green; }
+  .priority { font-family: monospace; color: orange; }
+  .tag    { background-color: #eee; font-family: monospace;
+            padding: 2px; font-size: 80%; font-weight: normal; }
+  .timestamp { color: #bebebe; }
+  .timestamp-kwd { color: #5f9ea0; }
+  .org-right  { margin-left: auto; margin-right: 0px;  text-align: right; }
+  .org-left   { margin-left: 0px;  margin-right: auto; text-align: left; }
+  .org-center { margin-left: auto; margin-right: auto; text-align: center; }
+  .underline { text-decoration: underline; }
+  #postamble p, #preamble p { font-size: 90%; margin: .2em; }
+  p.verse { margin-left: 3%; }
+  pre {
+    border: 1px solid #ccc;
+    box-shadow: 3px 3px 3px #eee;
+    padding: 8pt;
+    font-family: monospace;
+    overflow: auto;
+    margin: 1.2em;
+  }
+  pre.src {
+    position: relative;
+    overflow: auto;
+    padding-top: 1.2em;
+  }
+  pre.src:before {
+    display: none;
+    position: absolute;
+    background-color: white;
+    top: -10px;
+    right: 10px;
+    padding: 3px;
+    border: 1px solid black;
+  }
+  pre.src:hover:before { display: inline; margin-top: 14px;}
+  /* Languages per Org manual */
+  pre.src-asymptote:before { content: 'Asymptote'; }
+  pre.src-awk:before { content: 'Awk'; }
+  pre.src-C:before { content: 'C'; }
+  /* pre.src-C++ doesn't work in CSS */
+  pre.src-clojure:before { content: 'Clojure'; }
+  pre.src-css:before { content: 'CSS'; }
+  pre.src-D:before { content: 'D'; }
+  pre.src-ditaa:before { content: 'ditaa'; }
+  pre.src-dot:before { content: 'Graphviz'; }
+  pre.src-calc:before { content: 'Emacs Calc'; }
+  pre.src-emacs-lisp:before { content: 'Emacs Lisp'; }
+  pre.src-fortran:before { content: 'Fortran'; }
+  pre.src-gnuplot:before { content: 'gnuplot'; }
+  pre.src-haskell:before { content: 'Haskell'; }
+  pre.src-hledger:before { content: 'hledger'; }
+  pre.src-java:before { content: 'Java'; }
+  pre.src-js:before { content: 'Javascript'; }
+  pre.src-latex:before { content: 'LaTeX'; }
+  pre.src-ledger:before { content: 'Ledger'; }
+  pre.src-lisp:before { content: 'Lisp'; }
+  pre.src-lilypond:before { content: 'Lilypond'; }
+  pre.src-lua:before { content: 'Lua'; }
+  pre.src-matlab:before { content: 'MATLAB'; }
+  pre.src-mscgen:before { content: 'Mscgen'; }
+  pre.src-ocaml:before { content: 'Objective Caml'; }
+  pre.src-octave:before { content: 'Octave'; }
+  pre.src-org:before { content: 'Org mode'; }
+  pre.src-oz:before { content: 'OZ'; }
+  pre.src-plantuml:before { content: 'Plantuml'; }
+  pre.src-processing:before { content: 'Processing.js'; }
+  pre.src-python:before { content: 'Python'; }
+  pre.src-R:before { content: 'R'; }
+  pre.src-ruby:before { content: 'Ruby'; }
+  pre.src-sass:before { content: 'Sass'; }
+  pre.src-scheme:before { content: 'Scheme'; }
+  pre.src-screen:before { content: 'Gnu Screen'; }
+  pre.src-sed:before { content: 'Sed'; }
+  pre.src-sh:before { content: 'shell'; }
+  pre.src-sql:before { content: 'SQL'; }
+  pre.src-sqlite:before { content: 'SQLite'; }
+  /* additional languages in org.el's org-babel-load-languages alist */
+  pre.src-forth:before { content: 'Forth'; }
+  pre.src-io:before { content: 'IO'; }
+  pre.src-J:before { content: 'J'; }
+  pre.src-makefile:before { content: 'Makefile'; }
+  pre.src-maxima:before { content: 'Maxima'; }
+  pre.src-perl:before { content: 'Perl'; }
+  pre.src-picolisp:before { content: 'Pico Lisp'; }
+  pre.src-scala:before { content: 'Scala'; }
+  pre.src-shell:before { content: 'Shell Script'; }
+  pre.src-ebnf2ps:before { content: 'ebfn2ps'; }
+  /* additional language identifiers per "defun org-babel-execute"
+       in ob-*.el */
+  pre.src-cpp:before  { content: 'C++'; }
+  pre.src-abc:before  { content: 'ABC'; }
+  pre.src-coq:before  { content: 'Coq'; }
+  pre.src-groovy:before  { content: 'Groovy'; }
+  /* additional language identifiers from org-babel-shell-names in
+     ob-shell.el: ob-shell is the only babel language using a lambda to put
+     the execution function name together. */
+  pre.src-bash:before  { content: 'bash'; }
+  pre.src-csh:before  { content: 'csh'; }
+  pre.src-ash:before  { content: 'ash'; }
+  pre.src-dash:before  { content: 'dash'; }
+  pre.src-ksh:before  { content: 'ksh'; }
+  pre.src-mksh:before  { content: 'mksh'; }
+  pre.src-posh:before  { content: 'posh'; }
+  /* Additional Emacs modes also supported by the LaTeX listings package */
+  pre.src-ada:before { content: 'Ada'; }
+  pre.src-asm:before { content: 'Assembler'; }
+  pre.src-caml:before { content: 'Caml'; }
+  pre.src-delphi:before { content: 'Delphi'; }
+  pre.src-html:before { content: 'HTML'; }
+  pre.src-idl:before { content: 'IDL'; }
+  pre.src-mercury:before { content: 'Mercury'; }
+  pre.src-metapost:before { content: 'MetaPost'; }
+  pre.src-modula-2:before { content: 'Modula-2'; }
+  pre.src-pascal:before { content: 'Pascal'; }
+  pre.src-ps:before { content: 'PostScript'; }
+  pre.src-prolog:before { content: 'Prolog'; }
+  pre.src-simula:before { content: 'Simula'; }
+  pre.src-tcl:before { content: 'tcl'; }
+  pre.src-tex:before { content: 'TeX'; }
+  pre.src-plain-tex:before { content: 'Plain TeX'; }
+  pre.src-verilog:before { content: 'Verilog'; }
+  pre.src-vhdl:before { content: 'VHDL'; }
+  pre.src-xml:before { content: 'XML'; }
+  pre.src-nxml:before { content: 'XML'; }
+  /* add a generic configuration mode; LaTeX export needs an additional
+     (add-to-list 'org-latex-listings-langs '(conf " ")) in .emacs */
+  pre.src-conf:before { content: 'Configuration File'; }
+
+  table { border-collapse:collapse; }
+  caption.t-above { caption-side: top; }
+  caption.t-bottom { caption-side: bottom; }
+  td, th { vertical-align:top;  }
+  th.org-right  { text-align: center;  }
+  th.org-left   { text-align: center;   }
+  th.org-center { text-align: center; }
+  td.org-right  { text-align: right;  }
+  td.org-left   { text-align: left;   }
+  td.org-center { text-align: center; }
+  dt { font-weight: bold; }
+  .footpara { display: inline; }
+  .footdef  { margin-bottom: 1em; }
+  .figure { padding: 1em; }
+  .figure p { text-align: center; }
+  .equation-container {
+    display: table;
+    text-align: center;
+    width: 100%;
+  }
+  .equation {
+    vertical-align: middle;
+  }
+  .equation-label {
+    display: table-cell;
+    text-align: right;
+    vertical-align: middle;
+  }
+  .inlinetask {
+    padding: 10px;
+    border: 2px solid gray;
+    margin: 10px;
+    background: #ffffcc;
+  }
+  #org-div-home-and-up
+   { text-align: right; font-size: 70%; white-space: nowrap; }
+  textarea { overflow-x: auto; }
+  .linenr { font-size: smaller }
+  .code-highlighted { background-color: #ffff00; }
+  .org-info-js_info-navigation { border-style: none; }
+  #org-info-js_console-label
+    { font-size: 10px; font-weight: bold; white-space: nowrap; }
+  .org-info-js_search-highlight
+    { background-color: #ffff00; color: #000000; font-weight: bold; }
+  .org-svg { width: 90%; }
+  /*]]>*/-->
+</style>
+<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin><link href="https://fonts.googleapis.com/css2?family=Noto+Sans+SC&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="/theme/normalize.css"/>
+<link rel="stylesheet" href="/theme/site.css"/>
+<script defer src='https://static.cloudflareinsights.com/beacon.min.js' data-cf-beacon='{"token": "d5b841b503ed4d1b8fad459b84d1cc2f"}'></script>
+<script defer src="/theme/link.js"></script>
+</head>
+<body>
+<div id="content">
+<header>
+<h1 class="title">查拉图斯特拉如是说</h1>
+</header>
+<div id="outline-container-第-1-章-序言" class="outline-2">
+<h2 id="第-1-章-序言">第 1 章 序言</h2>
+<div class="outline-text-2" id="text-第-1-章-序言">
+<blockquote>
+<p>
+我就如一只蜜蜂，因为采集了太多的花蜜，所以厌倦了自己的智慧，只想张开双臂。
+</p>
+</blockquote>
+
+<p>
+厌倦了智慧
+</p>
+
+<blockquote>
+<p>
+直到尘世中睿智的人们，一次次为自己的愚钝与拙劣感到欣喜；人间的穷苦者，一次次为自己的富有感到欣喜和满足
+</p>
+</blockquote>
+
+<p>
+为自己的愚钝感到惊喜，为自己的富有感到惊喜
+</p>
+
+<blockquote>
+<p>
+做一只空杯，是这只杯子最热切的希望
+</p>
+</blockquote>
+
+<p>
+空杯
+</p>
+
+<blockquote>
+<p>
+耄耋
+</p>
+</blockquote>
+
+<p>
+耄耋（mào
+dié），汉语词语，指人年老、高龄。有耄耋之年这一说法，指人的八九十岁。该词出自《汉·曹操·对酒歌》："人耄耋，皆得以寿终。恩泽广及草木昆虫。"
+</p>
+
+<blockquote>
+<p>
+孤独是承载你生活的海洋
+</p>
+</blockquote>
+
+<p>
+孤独是生活的主旋律
+</p>
+
+<blockquote>
+<p>
+与其赠送礼物，倒不如帮助他们分担一些肩上的负重，如果你愿意那么做，他们会喜闻乐见，并对你无限感激。
+</p>
+</blockquote>
+
+<p>
+分担负重
+</p>
+
+<blockquote>
+<p>
+我还没有贫穷到能去施舍的地步
+</p>
+</blockquote>
+
+<p>
+有深意
+</p>
+
+<blockquote>
+<p>
+对人类而言，我们踽踽的脚步显得太孤独。就像是黎明到来之前的深夜，他们躺在床上，听到门外有脚步声传来，就会猜想：这么晚了，这个小偷要到什么地方去。
+</p>
+</blockquote>
+
+<p>
+神明是人所不可知的
+</p>
+
+<blockquote>
+<p>
+上帝已经死亡
+</p>
+</blockquote>
+
+<p>
+尼采的说法
+</p>
+
+<blockquote>
+<p>
+许多生物都通过克服自身而创造了许多不朽的物质
+</p>
+</blockquote>
+
+<p>
+何谓克服自身
+</p>
+
+<blockquote>
+<p>
+从前，你们还不是人，是猿猴，现在，你们变成了人类，但很多时候，你们比一只真正的猿猴更像是猿猴。
+</p>
+</blockquote>
+
+<p>
+比真正的猿猴更像猿猴，徒有人类的外表，而内里却是一副文明尚未涉足的模样
+</p>
+
+<blockquote>
+<p>
+在整个人类群体中，智慧最卓著的，也不过是介于植物与鬼神之间的混种
+</p>
+</blockquote>
+
+<p>
+这句话不甚理解
+</p>
+
+<blockquote>
+<p>
+超人
+</p>
+</blockquote>
+
+<p>
+超人，超越人类
+</p>
+
+<blockquote>
+<p>
+超人是大地的意义。
+</p>
+</blockquote>
+
+<p>
+何为超人
+</p>
+
+<blockquote>
+<p>
+不要将信任轻易给予那些妄谈超脱尘世的人，不管他们是有心还是无意，无论他们无知还是全知，他们都是不折不扣的坏种。
+</p>
+</blockquote>
+
+<p>
+为何这样贬低那些人呢
+</p>
+
+<blockquote>
+<p>
+人身上总有一种伟大的特质，这种特质在于人不是目的，而只是一座桥梁。人的身上，有着一种落寞，人本身，就是一种动物朝着超人的过渡，而这，也正是人的可爱之处。
+</p>
+</blockquote>
+
+<p>
+人是由动物向超人的过渡
+</p>
+
+<blockquote>
+<p>
+他们，对邻人还充满着友爱，只因为，他们赖以生存的热量有一部分来自与邻人的摩擦。
+</p>
+</blockquote>
+
+<p>
+友爱所以存在，是因为能给自己带来什么
+</p>
+
+<blockquote>
+<p>
+人生总是处处透着阴森，没有任何的意义：一个穿着彩衣的小丑也能轻易变成别人的噩梦。
+</p>
+</blockquote>
+
+<p>
+噩梦指代什么
+</p>
+
+<blockquote>
+<p>
+少年小丑
+</p>
+</blockquote>
+
+<p>
+少年小丑🤡又指代什么
+</p>
+
+<blockquote>
+<p>
+我突然醒悟过来，我需要的是伙伴、活的伙伴，而不是一个我想要带到哪里去就带到哪里去的已经死去的伙伴-&#x2013;&#x2014;一具尸体。
+</p>
+</blockquote>
+
+<p>
+寻找活的伙伴
+</p>
+</div>
+</div>
+
+<div id="outline-container-第-2-章-三种变形" class="outline-2">
+<h2 id="第-2-章-三种变形">第 2 章 三种变形</h2>
+<div class="outline-text-2" id="text-第-2-章-三种变形">
+<blockquote>
+<p>
+负重和最沉重的事物是精神的必需，因为，只有负重，精神才会变得强壮。
+</p>
+</blockquote>
+
+<p>
+负重使精神健壮
+</p>
+
+<blockquote>
+<p>
+莫非它是要用贬低自己的方式来伤害自己的傲慢？莫非它是要用表现愚蠢的方式来嘲谑自己的智慧？
+</p>
+</blockquote>
+
+<p>
+傲慢与智慧
+</p>
+</div>
+</div>
+
+<div id="outline-container-第-3-章-德性讲坛" class="outline-2">
+<h2 id="第-3-章-德性讲坛">第 3 章 德性讲坛</h2>
+<div class="outline-text-2" id="text-第-3-章-德性讲坛">
+<ol class="org-ol">
+<li></li>
+</ol>
+
+<blockquote>
+<p>
+对睡眠心怀敬意，这是非常重要的事情，在睡眠面前，要保持谦卑与羞怯的心，要远离那些在夜里精神奕奕的人和一切睡眠质量差的人。
+</p>
+</blockquote>
+
+<ol class="org-ol">
+<li></li>
+</ol>
+
+<blockquote>
+<p>
+睡眠很重要，它不是一件小事，白天，我们精神奕奕，保持理智和清醒，为的就是在晚上能够睡好。
+</p>
+
+<p>
+白天的时候，你必须克制自己十次，这样你就会疲倦，但这是灵魂的罂粟。
+</p>
+
+<p>
+白天的时候，你必须调和自己十次，因为，克制本身是痛苦的，不调和就无法安眠。
+</p>
+
+<p>
+白天的时候，你必须寻找到十种真理，否则，你还要在夜间继续寻找，你的灵魂处于饥饿状态。
+</p>
+
+<p>
+白天的时候，你必须欢快地大笑十次，否则，肠胃会让我们感受到痛苦的滋味，它最擅长在夜晚捣乱了。
+</p>
+</blockquote>
+
+<ol class="org-ol">
+<li></li>
+</ol>
+
+<blockquote>
+<p>
+好的睡眠要求我们服从上司的安排，对领导表示敬重，哪怕这个领导本身并不正派，但我们又能如何呢，权力本身就跛足前行。
+</p>
+</blockquote>
+
+<ol class="org-ol">
+<li></li>
+</ol>
+
+<blockquote>
+<p>
+我不需要煊赫的名声与巨额的金钱，它们会让我的脾脏发炎，但我也需要一些钱财和一点微薄的名誉，否则我的睡眠质量会很差。
+</p>
+</blockquote>
+
+<ol class="org-ol">
+<li></li>
+</ol>
+
+<blockquote>
+<p>
+睡眠亲吻着我的眼，我的眼睛慢慢地闭合。睡眠轻轻抚着我的唇，我的唇张开了。
+</p>
+
+<p>
+它的动作很轻柔，就像是世间最可爱的窃贼，我的思想被偷走了，我的身体还傻傻地站着，就像这个讲坛。
+</p>
+
+<p>
+可是，我站立的时间其实也很短，因为，我的身体躺倒了。
+</p>
+</blockquote>
+
+<ol class="org-ol">
+<li></li>
+</ol>
+
+<blockquote>
+<p>
+站在讲坛上的所有所谓的智者，其实都不懂得生命的美好和意义，在他们看来，能够一夜安睡，没有梦魇，就是最现实的智慧。
+</p>
+</blockquote>
+</div>
+</div>
+
+<div id="outline-container-第-4-章-彼世论者" class="outline-2">
+<h2 id="第-4-章-彼世论者">第 4 章 彼世论者</h2>
+<div class="outline-text-2" id="text-第-4-章-彼世论者">
+<ol class="org-ol">
+<li></li>
+</ol>
+
+<blockquote>
+<p>
+我认为世界就是一件永远都承受着悲痛与苦难的作品，而作品的主人正是上帝。
+</p>
+</blockquote>
+
+<ol class="org-ol">
+<li></li>
+</ol>
+
+<blockquote>
+<p>
+在我看来，不管是善良还是罪恶，不管是快乐还是痛苦，不管是我还是你，都不过是创造者为了抛撇自我而创造的多彩烟雾，他才因此创造了整个世界。
+</p>
+</blockquote>
+
+<ol class="org-ol">
+<li></li>
+</ol>
+
+<blockquote>
+<p>
+过去，我认为，世界就是一个不完美的倒影，是矛盾的倒影，这种矛盾永远都存在，这个世界永远都不完美。但对于同样不完美的、世界的创造者而言，这个世界本就是完美的，是值得沉醉其中的。
+</p>
+</blockquote>
+
+<ol class="org-ol">
+<li></li>
+</ol>
+
+<blockquote>
+<p>
+我会将一种新的意志传达给人类，教会他们不再盲目地行走，教会他们承认新道路的正确与美好，教会他们不要和奄奄一息的垂死者和病入膏肓的病人一样悄无声息地背弃这条道路。
+</p>
+</blockquote>
+</div>
+</div>
+
+<div id="outline-container-第-5-章-身体的蔑视者" class="outline-2">
+<h2 id="第-5-章-身体的蔑视者">第 5 章 身体的蔑视者</h2>
+<div class="outline-text-2" id="text-第-5-章-身体的蔑视者">
+<ol class="org-ol">
+<li></li>
+</ol>
+
+<blockquote>
+<p>
+我有一句话想要和蔑视身体的人说。从我的角度来看，他们没有必要去改变自己的学识和教养，他们要做的，只是离开，悄无声息地离开自己的身体。孩子们说："我的身体就是我的灵魂。"是什么原因让人们不愿意和孩子说一样的话呢？
+</p>
+</blockquote>
+
+<ol class="org-ol">
+<li></li>
+</ol>
+
+<blockquote>
+<p>
+你们以自我为骄傲，但你却不愿意相信其实最伟大的从来都是你的身体和你的理性，它不是说自我，而是做自我。
+</p>
+
+<p>
+事实上，感觉和认知从来都没有终点，它是无尽的。所有的感官和精神都是自负的，它们想要让你相信，你所看到的、感觉到的、认知到的便是一切，是终点。
+</p>
+
+<p>
+感官也好，精神也好，不过都是自身的一种工具。自身可以用感官的眼睛去探寻，也可以用精神的耳朵去倾听。
+</p>
+
+<p>
+自身在不停地倾听和寻找，它进行征服、对比、毁灭、强迫。它统治着，也统治着自我。
+</p>
+
+<p>
+兄弟们啊，总有一个你看不到的主宰在掌控着你的思维和感情，这个主宰就是自身，是你自己。它住在你的身体里，它其实就是你的身体，但你对它并不熟悉。
+</p>
+</blockquote>
+
+<ol class="org-ol">
+<li></li>
+</ol>
+
+<blockquote>
+<p>
+"来这里，感受一下痛苦的滋味吧。"自身这样对自我说。于是，自我开始痛苦，痛苦的同时，它在不停地思索怎样才能让自己不痛苦，而它，本就应当对这些进行思考。
+</p>
+
+<p>
+"来这里，感受一下快乐的滋味吧。"自身这样对自我说。于是，自我变得快乐，快乐的同时，它在不停地思索怎样才能让快乐变得长久，而它，本就应当对这些进行思考。
+</p>
+
+<p>
+我有一句话想和蔑视身体的人说，他们的尊重本就是由蔑视构成的。尊重、蔑视、价值、意志都是如何诞生的呢？
+</p>
+
+<p>
+尊重和蔑视都是自身为自己创造的，快乐与痛苦也是自身为自己创造的，自身具有创造性。精神是创造性的身体创造的，其存在的意义就是作为意志的手掌。
+</p>
+</blockquote>
+
+<ol class="org-ol">
+<li></li>
+</ol>
+
+<blockquote>
+<p>
+蔑视身体的人啊，我永远都不会步你们的后尘，对我而言，你们也从来都不是那座架设在人类与超人之间的过渡的桥梁。
+</p>
+</blockquote>
+</div>
+</div>
+
+<div id="outline-container-第-6-章-快乐与热情" class="outline-2">
+<h2 id="第-6-章-快乐与热情">第 6 章 快乐与热情</h2>
+<div class="outline-text-2" id="text-第-6-章-快乐与热情">
+<blockquote>
+<p>
+被克服、被毁灭是人类的命运，所以，你应该挚爱你的德性，因为它会把你毁灭掉。
+</p>
+</blockquote>
+</div>
+</div>
+
+<div id="outline-container-第-7-章-苍白的罪犯" class="outline-2">
+<h2 id="第-7-章-苍白的罪犯">第 7 章 苍白的罪犯</h2>
+<div class="outline-text-2" id="text-第-7-章-苍白的罪犯">
+<blockquote>
+<p>
+一个为了自我的存在而苦恼的生命是没有任何办法能够拯救的，除了迅速的死亡。
+</p>
+</blockquote>
+</div>
+</div>
+
+<div id="outline-container-自由的死亡" class="outline-2">
+<h2 id="自由的死亡">自由的死亡</h2>
+<div class="outline-text-2" id="text-自由的死亡">
+<p>
+所有希望沐浴荣光的人，都应该学会在恰当的时候、在必要的时候把荣耀舍弃，去修炼一种生与死的艰难艺术，亦即，在最恰当的时候，选择离去。
+</p>
+</div>
+</div>
+
+<div id="outline-container-救赎" class="outline-2">
+<h2 id="救赎">救赎</h2>
+<div class="outline-text-2" id="text-救赎">
+<p>
+意志最寂静的忧伤是什么？是它不能盼望回到过去，也无法回到过去，它无法冲破时间的束缚，也无法满足时间的祈望。
+</p>
+</div>
+</div>
+
+<div id="outline-container-日出之前" class="outline-2">
+<h2 id="日出之前">日出之前</h2>
+<div class="outline-text-2" id="text-日出之前">
+<p>
+与其看到光辉圣洁的天空被轻浮动荡的云朵亵渎，我宁可面对一片幽锁的天空，我宁可蹲在深渊底部的桶里仰望那黯淡无光的天穹。
+</p>
+
+<p>
+相比于野猫一般小心翼翼地、充满了质疑的宁静，我宁可选择狂风、暴雨和喧嚣。哪怕是行走在人群中，我也更憎恨那些谨小慎微、唯唯诺诺、踌躇不前、充满怀疑、轻浮动荡如云朵般的人。
+</p>
+</div>
+</div>
+
+<div id="outline-container-三种罪恶" class="outline-2">
+<h2 id="三种罪恶">三种罪恶</h2>
+<div class="outline-text-2" id="text-三种罪恶">
+<p>
+这个被界定的世界被我那稳稳的梦窥视着、观察着，我的梦很满足，它对新鲜的事物并不钟爱，它对古旧的事物也不偏好，它不害怕什么，也不会祈祷和恳求什么。
+</p>
+
+<p>
+对权力的欲望、淫邪的欲望以及自私自利
+</p>
+</div>
+</div>
+
+<div id="outline-container-正午" class="outline-2">
+<h2 id="正午">正午</h2>
+<div class="outline-text-2" id="text-正午">
+<p>
+睡眠正如羽毛一般轻缓地、温柔地在我的身体上舞蹈，就像那无法寻觅到踪迹的微风舞动在平静无澜的海面上。
+</p>
+</div>
+</div>
+
+<div id="outline-container-高等级的人" class="outline-2">
+<h2 id="高等级的人">高等级的人</h2>
+<div class="outline-text-2" id="text-高等级的人">
+<p>
+只有卑微的小人才有“舍己为人”"同类互助"的德性，你们是自私自利的，所以，你们没有必要“为邻人”做任何事，"邻人"也无权要求你们去做任何事。是的，即便你们不做，他们也无能为力。
+</p>
+
+<hr>
+
+<p>
+*参考资料*：
+</p>
+</div>
+</div>
+</div>
+</body>
+</html>
