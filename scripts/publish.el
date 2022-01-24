@@ -4,7 +4,7 @@
 ;; https://orgmode.org/worg/org-tutorials/org-publish-html-tutorial.html
 (require 'ox-publish)
 (require 'ox-rss)
-
+  
 ;; https://bastibe.de/2014-05-07-speeding-up-org-publishing.html
 (remove-hook 'find-file-hooks 'vc-find-file-hook 'vc-refresh-state)
 
@@ -27,8 +27,10 @@
          :base-directory "~/org/"
          :base-extension "org"
          :recursive nil
-         :exclude (regexp-opt '("rss.org" "index.org" "404.org"))
-         :publishing-function 'rw/org-rss-publish-to-rss
+         :exclude "rss.org"
+         :exclude "index.org"
+         :exclude "404.org"
+         :publishing-function org-publish-org-sitemap
          :publishing-directory "~/repo/blog/"
          :rss-extension "xml"
          :html-link-home "https://www.yidajiabei.xyz/blog/"
