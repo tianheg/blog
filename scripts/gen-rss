@@ -15,13 +15,13 @@ def get_end_of_day(date):
 # 读取json文件内容,返回字典格式
 with open('./scripts/blogs.json','r',encoding='utf8')as fp:
     json_data = json.load(fp)
-    itemLines = ["<item><title>" + str(json_data[x]['title']) + "</title><link>" + site + str(json_data[x]['link']) + "</link><guid isPermaLink=\"true\">" + site + str(json_data[x]['link']) + "</guid><pubDate>" + get_end_of_day(str(json_data[x]['date'])).strftime("%a, %d %b %Y %I:%M:%S %z") + "</pubDate></item>\n"for x in range(0, len(json_data) -1)]
+    itemLines = ["<item><title>" + str(json_data[x]['title']) + "</title><link>" + site + str(json_data[x]['link']) + "</link><guid isPermaLink=\"true\">" + site + str(json_data[x]['link']) + "</guid><pubDate>" + get_end_of_day(str(json_data[x]['date'])).strftime("%a, %d %b %Y %I:%M:%S %Z") + "</pubDate></item>\n"for x in range(0, len(json_data) -1)]
     # print(type(itemLines))
 
 
 with open('./blog/index.xml', 'w') as fh:
   fh.write("""<?xml version="1.0" encoding="UTF-8"?>
-<rss version="2.0"><channel>
+<rss xmlns:atom="http://www.w3.org/2005/Atom" version="2.0"><channel>
 <title>一大加贝</title>
 <link>https://www.yidajiabei.xyz/blog/</link>
 <description>学习技术，热爱生活</description>
@@ -32,7 +32,8 @@ with open('./blog/index.xml', 'w') as fh:
 <copyright>在保留本文作者及本文链接的前提下，非商业用途随意转载分享。</copyright>
 <lastBuildDate>""")
   fh.write(str(dt.datetime.now().strftime("%a, %d %b %Y %I:%M:%S +0800")))
-  fh.write("</lastBuildDate>\n")
+  fh.write("""</lastBuildDate>
+  <atom:link rel="self" type="application/rss+xml" href="https://www.yidajiabei.xyz/blog/index.xml"/>\n""")
   fh.writelines(itemLines)
   fh.write("""</channel>
 </rss>""")
