@@ -1,9 +1,29 @@
 #!/usr/bin/env python
 
 import json
+import datetime as dt
+
+domain = 'www.yidajiabei.xyz'
+
+site = 'https://%s/blog/' % (domain)
 
 # 读取json文件内容,返回字典格式
 with open('./scripts/blogs.json','r',encoding='utf8')as fp:
     json_data = json.load(fp)
-    for x in range(0, len(json_data) -1):
-      print(json_data[x]['title'])
+    # for x in range(0, len(json_data) -1):
+    #   print(json_data[x]['title'])
+
+with open('./blog/index.xml', 'w') as fh:
+  fh.write("""<rss version="2.0"><channel>
+<title>一大加贝</title>
+<link>https://www.yidajiabei.xyz/blog/</link>
+<description>学习技术，热爱生活</description>
+<generator>Python script wrote by myself</generator>
+<language>zh-CN</language>
+<managingEditor>me@yidajiabei.xyz (Jim Gao)</managingEditor>
+<webMaster>me@yidajiabei.xyz (Jim Gao)</webMaster>
+<copyright>在保留本文作者及本文链接的前提下，非商业用途随意转载分享。</copyright>
+<lastBuildDate>""")
+  fh.write(str(dt.datetime.now()))
+  fh.write("""</lastBuildDate>
+<atom:link rel="self" type="application/rss+xml" href="https://www.yidajiabei.xyz/blog/index.xml"/>\n""")
