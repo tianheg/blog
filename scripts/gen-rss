@@ -10,7 +10,7 @@ site = 'https://%s/blog/' % (domain)
 # 读取json文件内容,返回字典格式
 with open('./scripts/blogs.json','r',encoding='utf8')as fp:
     json_data = json.load(fp)
-    itemLines = ["<item><title>" + str(json_data[x]['title']) + "</title><link>" + site + str(json_data[x]['link']) + "</link><guid isPermaLink=\"true\">" + site + str(json_data[x]['link']) + "</guid><pubDate>" + str(json_data[x]['date']) + "</pubDate></item>"for x in range(0, len(json_data) -1)]
+    itemLines = ["<item><title>" + str(json_data[x]['title']) + "</title><link>" + site + str(json_data[x]['link']) + "</link><guid isPermaLink=\"true\">" + site + str(json_data[x]['link']) + "</guid><pubDate>" + str(json_data[x]['date']) + "</pubDate></item>\n"for x in range(0, len(json_data) -1)]
     # print(type(itemLines))
 
 
