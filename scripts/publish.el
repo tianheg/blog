@@ -21,27 +21,11 @@
          :publishing-function org-html-publish-to-html
          :html-postamble nil
          :with-toc 't
+         :auto-sitemap t
          )
         ;; RSS
-        ("site-rss"
-         :base-directory "~/org/"
-         :base-extension "org"
-         :recursive nil
-         :exclude "rss.org"
-         :exclude "index.org"
-         :exclude "404.org"
-         :publishing-function org-publish-org-sitemap
-         :publishing-directory "~/repo/blog/"
-         :rss-extension "xml"
-         :html-link-home "https://www.yidajiabei.xyz/blog/"
-         :html-link-use-abs-url t
-         :html-link-org-files-as-html t
-         :auto-sitemap t
-         :sitemap-filename "rss.org"
-         :sitemap-title "一大加贝的 RSS"
-         )
         ;; publish component
-        ("site" :components ("site-orgs" "site-rss"))
+        ("site" :components ("site-orgs"))
         ))
 
 ;; (progn (profiler-start 'cpu) (org-publish-project "site") (profiler-report) (profiler-stop))
