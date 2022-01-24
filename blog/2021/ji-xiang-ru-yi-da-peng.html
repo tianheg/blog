@@ -1,0 +1,364 @@
+<!DOCTYPE html>
+<html lang="zh">
+<head>
+<!-- 2022-01-24 Mon 22:19 -->
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>吉祥如意——大鹏</title>
+<meta name="generator" content="Org mode">
+<style type="text/css">
+ <!--/*--><![CDATA[/*><!--*/
+  .title  { text-align: center;
+             margin-bottom: .2em; }
+  .subtitle { text-align: center;
+              font-size: medium;
+              font-weight: bold;
+              margin-top:0; }
+  .todo   { font-family: monospace; color: red; }
+  .done   { font-family: monospace; color: green; }
+  .priority { font-family: monospace; color: orange; }
+  .tag    { background-color: #eee; font-family: monospace;
+            padding: 2px; font-size: 80%; font-weight: normal; }
+  .timestamp { color: #bebebe; }
+  .timestamp-kwd { color: #5f9ea0; }
+  .org-right  { margin-left: auto; margin-right: 0px;  text-align: right; }
+  .org-left   { margin-left: 0px;  margin-right: auto; text-align: left; }
+  .org-center { margin-left: auto; margin-right: auto; text-align: center; }
+  .underline { text-decoration: underline; }
+  #postamble p, #preamble p { font-size: 90%; margin: .2em; }
+  p.verse { margin-left: 3%; }
+  pre {
+    border: 1px solid #ccc;
+    box-shadow: 3px 3px 3px #eee;
+    padding: 8pt;
+    font-family: monospace;
+    overflow: auto;
+    margin: 1.2em;
+  }
+  pre.src {
+    position: relative;
+    overflow: auto;
+    padding-top: 1.2em;
+  }
+  pre.src:before {
+    display: none;
+    position: absolute;
+    background-color: white;
+    top: -10px;
+    right: 10px;
+    padding: 3px;
+    border: 1px solid black;
+  }
+  pre.src:hover:before { display: inline; margin-top: 14px;}
+  /* Languages per Org manual */
+  pre.src-asymptote:before { content: 'Asymptote'; }
+  pre.src-awk:before { content: 'Awk'; }
+  pre.src-C:before { content: 'C'; }
+  /* pre.src-C++ doesn't work in CSS */
+  pre.src-clojure:before { content: 'Clojure'; }
+  pre.src-css:before { content: 'CSS'; }
+  pre.src-D:before { content: 'D'; }
+  pre.src-ditaa:before { content: 'ditaa'; }
+  pre.src-dot:before { content: 'Graphviz'; }
+  pre.src-calc:before { content: 'Emacs Calc'; }
+  pre.src-emacs-lisp:before { content: 'Emacs Lisp'; }
+  pre.src-fortran:before { content: 'Fortran'; }
+  pre.src-gnuplot:before { content: 'gnuplot'; }
+  pre.src-haskell:before { content: 'Haskell'; }
+  pre.src-hledger:before { content: 'hledger'; }
+  pre.src-java:before { content: 'Java'; }
+  pre.src-js:before { content: 'Javascript'; }
+  pre.src-latex:before { content: 'LaTeX'; }
+  pre.src-ledger:before { content: 'Ledger'; }
+  pre.src-lisp:before { content: 'Lisp'; }
+  pre.src-lilypond:before { content: 'Lilypond'; }
+  pre.src-lua:before { content: 'Lua'; }
+  pre.src-matlab:before { content: 'MATLAB'; }
+  pre.src-mscgen:before { content: 'Mscgen'; }
+  pre.src-ocaml:before { content: 'Objective Caml'; }
+  pre.src-octave:before { content: 'Octave'; }
+  pre.src-org:before { content: 'Org mode'; }
+  pre.src-oz:before { content: 'OZ'; }
+  pre.src-plantuml:before { content: 'Plantuml'; }
+  pre.src-processing:before { content: 'Processing.js'; }
+  pre.src-python:before { content: 'Python'; }
+  pre.src-R:before { content: 'R'; }
+  pre.src-ruby:before { content: 'Ruby'; }
+  pre.src-sass:before { content: 'Sass'; }
+  pre.src-scheme:before { content: 'Scheme'; }
+  pre.src-screen:before { content: 'Gnu Screen'; }
+  pre.src-sed:before { content: 'Sed'; }
+  pre.src-sh:before { content: 'shell'; }
+  pre.src-sql:before { content: 'SQL'; }
+  pre.src-sqlite:before { content: 'SQLite'; }
+  /* additional languages in org.el's org-babel-load-languages alist */
+  pre.src-forth:before { content: 'Forth'; }
+  pre.src-io:before { content: 'IO'; }
+  pre.src-J:before { content: 'J'; }
+  pre.src-makefile:before { content: 'Makefile'; }
+  pre.src-maxima:before { content: 'Maxima'; }
+  pre.src-perl:before { content: 'Perl'; }
+  pre.src-picolisp:before { content: 'Pico Lisp'; }
+  pre.src-scala:before { content: 'Scala'; }
+  pre.src-shell:before { content: 'Shell Script'; }
+  pre.src-ebnf2ps:before { content: 'ebfn2ps'; }
+  /* additional language identifiers per "defun org-babel-execute"
+       in ob-*.el */
+  pre.src-cpp:before  { content: 'C++'; }
+  pre.src-abc:before  { content: 'ABC'; }
+  pre.src-coq:before  { content: 'Coq'; }
+  pre.src-groovy:before  { content: 'Groovy'; }
+  /* additional language identifiers from org-babel-shell-names in
+     ob-shell.el: ob-shell is the only babel language using a lambda to put
+     the execution function name together. */
+  pre.src-bash:before  { content: 'bash'; }
+  pre.src-csh:before  { content: 'csh'; }
+  pre.src-ash:before  { content: 'ash'; }
+  pre.src-dash:before  { content: 'dash'; }
+  pre.src-ksh:before  { content: 'ksh'; }
+  pre.src-mksh:before  { content: 'mksh'; }
+  pre.src-posh:before  { content: 'posh'; }
+  /* Additional Emacs modes also supported by the LaTeX listings package */
+  pre.src-ada:before { content: 'Ada'; }
+  pre.src-asm:before { content: 'Assembler'; }
+  pre.src-caml:before { content: 'Caml'; }
+  pre.src-delphi:before { content: 'Delphi'; }
+  pre.src-html:before { content: 'HTML'; }
+  pre.src-idl:before { content: 'IDL'; }
+  pre.src-mercury:before { content: 'Mercury'; }
+  pre.src-metapost:before { content: 'MetaPost'; }
+  pre.src-modula-2:before { content: 'Modula-2'; }
+  pre.src-pascal:before { content: 'Pascal'; }
+  pre.src-ps:before { content: 'PostScript'; }
+  pre.src-prolog:before { content: 'Prolog'; }
+  pre.src-simula:before { content: 'Simula'; }
+  pre.src-tcl:before { content: 'tcl'; }
+  pre.src-tex:before { content: 'TeX'; }
+  pre.src-plain-tex:before { content: 'Plain TeX'; }
+  pre.src-verilog:before { content: 'Verilog'; }
+  pre.src-vhdl:before { content: 'VHDL'; }
+  pre.src-xml:before { content: 'XML'; }
+  pre.src-nxml:before { content: 'XML'; }
+  /* add a generic configuration mode; LaTeX export needs an additional
+     (add-to-list 'org-latex-listings-langs '(conf " ")) in .emacs */
+  pre.src-conf:before { content: 'Configuration File'; }
+
+  table { border-collapse:collapse; }
+  caption.t-above { caption-side: top; }
+  caption.t-bottom { caption-side: bottom; }
+  td, th { vertical-align:top;  }
+  th.org-right  { text-align: center;  }
+  th.org-left   { text-align: center;   }
+  th.org-center { text-align: center; }
+  td.org-right  { text-align: right;  }
+  td.org-left   { text-align: left;   }
+  td.org-center { text-align: center; }
+  dt { font-weight: bold; }
+  .footpara { display: inline; }
+  .footdef  { margin-bottom: 1em; }
+  .figure { padding: 1em; }
+  .figure p { text-align: center; }
+  .equation-container {
+    display: table;
+    text-align: center;
+    width: 100%;
+  }
+  .equation {
+    vertical-align: middle;
+  }
+  .equation-label {
+    display: table-cell;
+    text-align: right;
+    vertical-align: middle;
+  }
+  .inlinetask {
+    padding: 10px;
+    border: 2px solid gray;
+    margin: 10px;
+    background: #ffffcc;
+  }
+  #org-div-home-and-up
+   { text-align: right; font-size: 70%; white-space: nowrap; }
+  textarea { overflow-x: auto; }
+  .linenr { font-size: smaller }
+  .code-highlighted { background-color: #ffff00; }
+  .org-info-js_info-navigation { border-style: none; }
+  #org-info-js_console-label
+    { font-size: 10px; font-weight: bold; white-space: nowrap; }
+  .org-info-js_search-highlight
+    { background-color: #ffff00; color: #000000; font-weight: bold; }
+  .org-svg { width: 90%; }
+  /*]]>*/-->
+</style>
+<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin><link href="https://fonts.googleapis.com/css2?family=Noto+Sans+SC&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="/theme/normalize.css"/>
+<link rel="stylesheet" href="/theme/site.css"/>
+<script defer src='https://static.cloudflareinsights.com/beacon.min.js' data-cf-beacon='{"token": "d5b841b503ed4d1b8fad459b84d1cc2f"}'></script>
+<script defer src="/theme/link.js"></script>
+</head>
+<body>
+<div id="content">
+<header>
+<h1 class="title">吉祥如意——大鹏</h1>
+</header><p>
+我是先看的《随机波动》里，三位女性创作者与大鹏的对话。然后才看的《吉祥如意》。
+</p>
+
+<div id="outline-container-与大鹏的对话" class="outline-2">
+<h2 id="与大鹏的对话">与大鹏的对话</h2>
+<div class="outline-text-2" id="text-与大鹏的对话">
+<p>
+生活的尺度与表演的尺度。在这部片子里，刘陆扮演丽丽，也就是三舅的女儿。她是从一个演员的身份来演丽丽，而当真正的丽丽的出现时，我发觉：刘陆所呈现的丽丽和真实的丽丽不一样。生活不是表演，很多场景，比如，一个人非常生气，表演给别人看时，可能就是表现出很生气的状态；但真正的生活中，如果真的很生气，反而是不说话的，那种压抑的气氛，能够表明一个人是非常生气的。
+</p>
+
+<p>
+大鹏对她们（三位女性创作者）说，我是有愧疚的，当我跟着别人往前爬，心里想的是那些同事会怎么看自己，平时大家都是正常的交流，现在看到那个人在地上爬。大鹏那个时候想的是这些。大鹏说，如果是别人责备自己，还可以去沟通，达到和解；或者更极端，根本不理别人。可如果责备自己的人是自己，该怎么沟通呢？该怎么面对这个事情呢？
+</p>
+
+<p>
+片子是 2016 年拍的，直到今年（2021
+年）才上映，这中间经历的时间，大鹏在消化那些过往，那些时间里的自己。人是具有复杂情感的动物，很多时候，一个人的行为不是那么好推理，就像我从徐皓峰那儿听到的一句话："放弃推理"。你越想穷尽一个人的内心，你越难以达到目标，因为每个人的内心都是沟壑纵横的。
+</p>
+
+<p>
+演员永远是需要一个动机的：问你为什么十年了才回来？
+</p>
+
+<p>
+作为一个演员，确实是需要在特定的场景进入特定的情境。但是一个人真正的生活场景却不是这样。
+</p>
+
+<p>
+作为一个真实的人，她在那个场合可能就是想逃避。
+</p>
+
+<p>
+生活跟戏剧往往是不同的，他们往往是两种不同的方向。现在把真实的情况也展示出来。
+</p>
+
+<p>
+生活是没有办法，用一种简单的道德标准来判断。就是问你 10
+年不回来是为什么？
+</p>
+</div>
+</div>
+
+<div id="outline-container-看电影" class="outline-2">
+<h2 id="看电影">看电影</h2>
+<div class="outline-text-2" id="text-看电影">
+<blockquote>
+<p>
+人终有一死，但当死亡近在眼前时，恐惧如潮水般涌来。
+</p>
+</blockquote>
+</div>
+
+<div id="outline-container-电影简介" class="outline-3">
+<h3 id="电影简介">电影简介</h3>
+<div class="outline-text-3" id="text-电影简介">
+<p>
+电影分为两部分：第一部分，名字是「吉祥」；第二部分，名字是「如意」。
+</p>
+
+<p>
+「*吉祥*」讲述了大鹏的姥姥生病，去世了；姥姥的第三个孩子-&#x2013;&#x2014;大鹏的三舅，因为没有行为能力，所以一直是生活在村子中的二舅和他的妻子照顾。姥姥一共有四个孩子，大鹏是大女儿的孩子，姥姥还有三个儿子。
+</p>
+
+<p>
+姥姥走了，「三舅由谁来照顾」这个问题使大家一起讨论，要说明的是：二舅和妻子已经照顾了三舅二十年，从三舅发病的时候开始。
+</p>
+
+
+<figure id="org4d6e3d6">
+<img src="../../images/ji-xiang-ru-yi-da-peng.jpeg" alt="ji-xiang-ru-yi-da-peng.jpeg">
+
+<figcaption><span class="figure-number">Figure 1: </span>ji-xiang-ru-yi-da-peng.jpeg</figcaption>
+</figure>
+
+<div class="html" id="org1b117f3">
+<p>
+&lt;center&gt;
+</p>
+
+</div>
+
+<p>
+只照了一张姥姥过世时，大鹏送的花圈
+</p>
+
+<div class="html" id="org7e45dc8">
+<p>
+&lt;/center&gt;
+</p>
+
+</div>
+
+<p>
+丽丽（刘陆）：我爸他咋不认识我呢？
+</p>
+
+<p>
+「再也没有妈了」（姥姥去世那天，她的女儿哭喊）
+</p>
+
+<p>
+「*如意*」更像是大鹏导演的手记，它介绍了短片的拍摄场景。
+</p>
+
+<p>
+宿命：是不是因为拍电影姥姥去世（大鹏），是不是因为回来看望奶奶，奶奶才会去世（真正的丽丽）。
+</p>
+
+<p>
+在北京的大鹏，在家乡的大鹏。这两个是截然不同的个体，身在北京，与家乡那个自己是割裂的；回到家乡，那个在家乡的自己又回来了，面前都是这些事情。
+</p>
+
+<p>
+刘陆：我还是不理解为什么十年不回来了
+</p>
+
+<p>
+大鹏妈：要不是你拍这个，人也不能聚那么齐
+</p>
+
+<p>
+大鹏：我不知道能拍成什么样，就看老天爷能给我们什么。
+</p>
+</div>
+</div>
+
+<div id="outline-container-一些感受" class="outline-3">
+<h3 id="一些感受">一些感受</h3>
+<div class="outline-text-3" id="text-一些感受">
+<p>
+我无法想象：如果有一天，我的父母亲去世，我该怎么面对这个事情。
+</p>
+
+<p>
+一想到这儿，眼泪就流了下来。
+</p>
+
+<p>
+电影中描绘的的确是生活中的场景，看的时候，我觉得是有距离感的。可能是自己觉得这样的事情，短时间内不会发生。
+</p>
+
+<p>
+但我又会设想：如果真的发生，我该怎么办？我该怎么面对亲人的过世？这对于现在的我来说，非常艰难。
+</p>
+
+<hr>
+
+<p>
+*参考资料*：
+</p>
+
+<ol class="org-ol">
+<li><a href="https://www.stovol.club/041">【随机波动
+041】与大鹏谈《吉祥如意》：不是一起过个年就成为一家人，漫长生活编织出中国家庭</a>（<a href="https://web.archive.org/web/20210204140436/https://www.stovol.club/041">网页存档</a>）</li>
+</ol>
+</div>
+</div>
+</div>
+</div>
+</body>
+</html>

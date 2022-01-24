@@ -1,0 +1,401 @@
+<!DOCTYPE html>
+<html lang="zh">
+<head>
+<!-- 2022-01-24 Mon 22:19 -->
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>GitHub Code Search 搜索语法</title>
+<meta name="generator" content="Org mode">
+<style type="text/css">
+ <!--/*--><![CDATA[/*><!--*/
+  .title  { text-align: center;
+             margin-bottom: .2em; }
+  .subtitle { text-align: center;
+              font-size: medium;
+              font-weight: bold;
+              margin-top:0; }
+  .todo   { font-family: monospace; color: red; }
+  .done   { font-family: monospace; color: green; }
+  .priority { font-family: monospace; color: orange; }
+  .tag    { background-color: #eee; font-family: monospace;
+            padding: 2px; font-size: 80%; font-weight: normal; }
+  .timestamp { color: #bebebe; }
+  .timestamp-kwd { color: #5f9ea0; }
+  .org-right  { margin-left: auto; margin-right: 0px;  text-align: right; }
+  .org-left   { margin-left: 0px;  margin-right: auto; text-align: left; }
+  .org-center { margin-left: auto; margin-right: auto; text-align: center; }
+  .underline { text-decoration: underline; }
+  #postamble p, #preamble p { font-size: 90%; margin: .2em; }
+  p.verse { margin-left: 3%; }
+  pre {
+    border: 1px solid #ccc;
+    box-shadow: 3px 3px 3px #eee;
+    padding: 8pt;
+    font-family: monospace;
+    overflow: auto;
+    margin: 1.2em;
+  }
+  pre.src {
+    position: relative;
+    overflow: auto;
+    padding-top: 1.2em;
+  }
+  pre.src:before {
+    display: none;
+    position: absolute;
+    background-color: white;
+    top: -10px;
+    right: 10px;
+    padding: 3px;
+    border: 1px solid black;
+  }
+  pre.src:hover:before { display: inline; margin-top: 14px;}
+  /* Languages per Org manual */
+  pre.src-asymptote:before { content: 'Asymptote'; }
+  pre.src-awk:before { content: 'Awk'; }
+  pre.src-C:before { content: 'C'; }
+  /* pre.src-C++ doesn't work in CSS */
+  pre.src-clojure:before { content: 'Clojure'; }
+  pre.src-css:before { content: 'CSS'; }
+  pre.src-D:before { content: 'D'; }
+  pre.src-ditaa:before { content: 'ditaa'; }
+  pre.src-dot:before { content: 'Graphviz'; }
+  pre.src-calc:before { content: 'Emacs Calc'; }
+  pre.src-emacs-lisp:before { content: 'Emacs Lisp'; }
+  pre.src-fortran:before { content: 'Fortran'; }
+  pre.src-gnuplot:before { content: 'gnuplot'; }
+  pre.src-haskell:before { content: 'Haskell'; }
+  pre.src-hledger:before { content: 'hledger'; }
+  pre.src-java:before { content: 'Java'; }
+  pre.src-js:before { content: 'Javascript'; }
+  pre.src-latex:before { content: 'LaTeX'; }
+  pre.src-ledger:before { content: 'Ledger'; }
+  pre.src-lisp:before { content: 'Lisp'; }
+  pre.src-lilypond:before { content: 'Lilypond'; }
+  pre.src-lua:before { content: 'Lua'; }
+  pre.src-matlab:before { content: 'MATLAB'; }
+  pre.src-mscgen:before { content: 'Mscgen'; }
+  pre.src-ocaml:before { content: 'Objective Caml'; }
+  pre.src-octave:before { content: 'Octave'; }
+  pre.src-org:before { content: 'Org mode'; }
+  pre.src-oz:before { content: 'OZ'; }
+  pre.src-plantuml:before { content: 'Plantuml'; }
+  pre.src-processing:before { content: 'Processing.js'; }
+  pre.src-python:before { content: 'Python'; }
+  pre.src-R:before { content: 'R'; }
+  pre.src-ruby:before { content: 'Ruby'; }
+  pre.src-sass:before { content: 'Sass'; }
+  pre.src-scheme:before { content: 'Scheme'; }
+  pre.src-screen:before { content: 'Gnu Screen'; }
+  pre.src-sed:before { content: 'Sed'; }
+  pre.src-sh:before { content: 'shell'; }
+  pre.src-sql:before { content: 'SQL'; }
+  pre.src-sqlite:before { content: 'SQLite'; }
+  /* additional languages in org.el's org-babel-load-languages alist */
+  pre.src-forth:before { content: 'Forth'; }
+  pre.src-io:before { content: 'IO'; }
+  pre.src-J:before { content: 'J'; }
+  pre.src-makefile:before { content: 'Makefile'; }
+  pre.src-maxima:before { content: 'Maxima'; }
+  pre.src-perl:before { content: 'Perl'; }
+  pre.src-picolisp:before { content: 'Pico Lisp'; }
+  pre.src-scala:before { content: 'Scala'; }
+  pre.src-shell:before { content: 'Shell Script'; }
+  pre.src-ebnf2ps:before { content: 'ebfn2ps'; }
+  /* additional language identifiers per "defun org-babel-execute"
+       in ob-*.el */
+  pre.src-cpp:before  { content: 'C++'; }
+  pre.src-abc:before  { content: 'ABC'; }
+  pre.src-coq:before  { content: 'Coq'; }
+  pre.src-groovy:before  { content: 'Groovy'; }
+  /* additional language identifiers from org-babel-shell-names in
+     ob-shell.el: ob-shell is the only babel language using a lambda to put
+     the execution function name together. */
+  pre.src-bash:before  { content: 'bash'; }
+  pre.src-csh:before  { content: 'csh'; }
+  pre.src-ash:before  { content: 'ash'; }
+  pre.src-dash:before  { content: 'dash'; }
+  pre.src-ksh:before  { content: 'ksh'; }
+  pre.src-mksh:before  { content: 'mksh'; }
+  pre.src-posh:before  { content: 'posh'; }
+  /* Additional Emacs modes also supported by the LaTeX listings package */
+  pre.src-ada:before { content: 'Ada'; }
+  pre.src-asm:before { content: 'Assembler'; }
+  pre.src-caml:before { content: 'Caml'; }
+  pre.src-delphi:before { content: 'Delphi'; }
+  pre.src-html:before { content: 'HTML'; }
+  pre.src-idl:before { content: 'IDL'; }
+  pre.src-mercury:before { content: 'Mercury'; }
+  pre.src-metapost:before { content: 'MetaPost'; }
+  pre.src-modula-2:before { content: 'Modula-2'; }
+  pre.src-pascal:before { content: 'Pascal'; }
+  pre.src-ps:before { content: 'PostScript'; }
+  pre.src-prolog:before { content: 'Prolog'; }
+  pre.src-simula:before { content: 'Simula'; }
+  pre.src-tcl:before { content: 'tcl'; }
+  pre.src-tex:before { content: 'TeX'; }
+  pre.src-plain-tex:before { content: 'Plain TeX'; }
+  pre.src-verilog:before { content: 'Verilog'; }
+  pre.src-vhdl:before { content: 'VHDL'; }
+  pre.src-xml:before { content: 'XML'; }
+  pre.src-nxml:before { content: 'XML'; }
+  /* add a generic configuration mode; LaTeX export needs an additional
+     (add-to-list 'org-latex-listings-langs '(conf " ")) in .emacs */
+  pre.src-conf:before { content: 'Configuration File'; }
+
+  table { border-collapse:collapse; }
+  caption.t-above { caption-side: top; }
+  caption.t-bottom { caption-side: bottom; }
+  td, th { vertical-align:top;  }
+  th.org-right  { text-align: center;  }
+  th.org-left   { text-align: center;   }
+  th.org-center { text-align: center; }
+  td.org-right  { text-align: right;  }
+  td.org-left   { text-align: left;   }
+  td.org-center { text-align: center; }
+  dt { font-weight: bold; }
+  .footpara { display: inline; }
+  .footdef  { margin-bottom: 1em; }
+  .figure { padding: 1em; }
+  .figure p { text-align: center; }
+  .equation-container {
+    display: table;
+    text-align: center;
+    width: 100%;
+  }
+  .equation {
+    vertical-align: middle;
+  }
+  .equation-label {
+    display: table-cell;
+    text-align: right;
+    vertical-align: middle;
+  }
+  .inlinetask {
+    padding: 10px;
+    border: 2px solid gray;
+    margin: 10px;
+    background: #ffffcc;
+  }
+  #org-div-home-and-up
+   { text-align: right; font-size: 70%; white-space: nowrap; }
+  textarea { overflow-x: auto; }
+  .linenr { font-size: smaller }
+  .code-highlighted { background-color: #ffff00; }
+  .org-info-js_info-navigation { border-style: none; }
+  #org-info-js_console-label
+    { font-size: 10px; font-weight: bold; white-space: nowrap; }
+  .org-info-js_search-highlight
+    { background-color: #ffff00; color: #000000; font-weight: bold; }
+  .org-svg { width: 90%; }
+  /*]]>*/-->
+</style>
+<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin><link href="https://fonts.googleapis.com/css2?family=Noto+Sans+SC&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="/theme/normalize.css"/>
+<link rel="stylesheet" href="/theme/site.css"/>
+<script defer src='https://static.cloudflareinsights.com/beacon.min.js' data-cf-beacon='{"token": "d5b841b503ed4d1b8fad459b84d1cc2f"}'></script>
+<script defer src="/theme/link.js"></script>
+</head>
+<body>
+<div id="content">
+<header>
+<h1 class="title">GitHub Code Search 搜索语法</h1>
+</header><nav id="table-of-contents">
+<h2>Table of Contents</h2>
+<div id="text-table-of-contents">
+<ul>
+<li><a href="#org4d6e092">1. 基础查询结构</a></li>
+<li><a href="#org2915d1d">2. 精确查找</a></li>
+<li><a href="#org5a2f07e">3. 仓库和组织限定词</a></li>
+<li><a href="#orgfee6816">4. 语言限定</a></li>
+<li><a href="#org741673e">5. 路径限定</a></li>
+<li><a href="#orgb9701df">6. 扩展名限定</a></li>
+<li><a href="#orgdacd625">7. Symbol 限定</a></li>
+<li><a href="#orge7d815b">8. Content 限定</a></li>
+</ul>
+</div>
+</nav>
+<p>
+<a href="https://cs.github.com/about/syntax">https://cs.github.com/about/syntax</a>
+</p>
+
+<div id="outline-container-org4d6e092" class="outline-2">
+<h2 id="org4d6e092"><span class="section-number-2">1</span> 基础查询结构</h2>
+<div class="outline-text-2" id="text-1">
+<p>
+一个关键词会匹配文件内容或文件路径。
+</p>
+
+<p>
+多个关键词会匹配文件内容，只要包含关键词，就会出现在搜索结果中，不论前后顺序，是否是一个单词（多个关键词之间没有空格）。
+</p>
+
+<p>
+还可以使用特定关键字（限定词）指定查询范围：
+</p>
+
+<ul class="org-ul">
+<li>repo:github/github</li>
+<li>org:github 或者 user:tj</li>
+<li>language:python</li>
+<li>path:README.md</li>
+<li>extension:js</li>
+<li>symbol:scanbytes</li>
+<li>content:querystats</li>
+</ul>
+
+<p>
+还支持逻辑运算符：
+</p>
+
+<ul class="org-ul">
+<li>hello world &lt;=&gt; hello AND world</li>
+<li>hello OR world</li>
+<li>hello NOT world</li>
+<li>"fatal error" NOT path:__testing__</li>
+<li>(language:ruby OR language:python) AND NOT path:"<i>tests</i>"</li>
+</ul>
+
+<p>
+还支持正则表达式，要用 // 包围：
+</p>
+
+<p>
+\/git.*push\/
+</p>
+
+<p>
+会查询所有文件中，git 后面有 push 的部分。git 与 push 之间可以有任意字符。
+</p>
+</div>
+</div>
+
+<div id="outline-container-org2915d1d" class="outline-2">
+<h2 id="org2915d1d"><span class="section-number-2">2</span> 精确查找</h2>
+<div class="outline-text-2" id="text-2">
+<p>
+目标词组要用 "" 包裹 "abc def"。
+</p>
+
+<p>
+如果待搜索的字符串中有引号，可以用反斜杠转义 "name = \"Jim\""。
+</p>
+
+<p>
+也支持限定词 path:git language:"protocol buffers"。
+</p>
+</div>
+</div>
+
+<div id="outline-container-org5a2f07e" class="outline-2">
+<h2 id="org5a2f07e"><span class="section-number-2">3</span> 仓库和组织限定词</h2>
+<div class="outline-text-2" id="text-3">
+<p>
+repo:github/linguist
+</p>
+
+<p>
+repo:torvalds/linux OR repo:git/git
+</p>
+
+<p>
+org:github &lt;=&gt; user:github
+</p>
+
+<p>
+目前（2022-01-11）还不支持对仓库名和组织名、用户名的正则表达式全部或部分匹配，所以搜索时，需要输入目标的全部 user[org]/reponame。
+</p>
+</div>
+</div>
+
+<div id="outline-container-orgfee6816" class="outline-2">
+<h2 id="orgfee6816"><span class="section-number-2">4</span> 语言限定</h2>
+<div class="outline-text-2" id="text-4">
+<p>
+language:ruby OR language:cpp OR language:csharp
+</p>
+
+<p>
+所有语言都在<a href="https://github.com/github/linguist/blob/master/lib/linguist/languages.yml">这里</a>。
+</p>
+</div>
+</div>
+
+<div id="outline-container-org741673e" class="outline-2">
+<h2 id="org741673e"><span class="section-number-2">5</span> 路径限定</h2>
+<div class="outline-text-2" id="text-5">
+<p>
+path:unit_tests
+</p>
+
+<p>
+它会查找所有路径中包含目标的部分。
+</p>
+
+<p>
+如果只想得到根路径下的内容，用正则表达式：
+</p>
+
+<div class="org-src-container">
+<pre class="src src-text">path:/(^|\\/)/README\.md$/
+</pre>
+</div>
+</div>
+</div>
+
+<div id="outline-container-orgb9701df" class="outline-2">
+<h2 id="orgb9701df"><span class="section-number-2">6</span> 扩展名限定</h2>
+<div class="outline-text-2" id="text-6">
+<p>
+extension:.js &lt;=&gt; extension:js
+</p>
+
+<p>
+extension:/[jt]s/
+</p>
+
+<p>
+查找扩展名为 js 或 ts 的文件。
+</p>
+</div>
+</div>
+
+<div id="outline-container-orgdacd625" class="outline-2">
+<h2 id="orgdacd625"><span class="section-number-2">7</span> Symbol 限定</h2>
+<div class="outline-text-2" id="text-7">
+<p>
+language:go symbol:WithContext
+</p>
+
+<p>
+目前（2022-01-11）只能查找关于 Symbol 的定义，还没有支持所有 Symbol 或语言。关于语言支持 Symbol 搜索的情况可以看 <a href="https://cs.github.com/about/faq#languages">FAQ</a>。
+</p>
+
+<p>
+同样可以用正则表达式搜索：
+</p>
+
+<p>
+language:rust symbol:/^String::to_.*/
+</p>
+</div>
+</div>
+
+<div id="outline-container-orge7d815b" class="outline-2">
+<h2 id="orge7d815b"><span class="section-number-2">8</span> Content 限定</h2>
+<div class="outline-text-2" id="text-8">
+<p>
+如果只想搜索内容，不包括文件路径，可以这样
+</p>
+
+<p>
+content:README.md
+</p>
+
+<p>
+它只匹配文件内容中，含有 README.md 的部分。</p>
+</div>
+</div>
+</div>
+</body>
+</html>
