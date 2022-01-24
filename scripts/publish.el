@@ -1,9 +1,8 @@
 ;; load env
 (load "~/.emacs.d/init.el")
-(add-to-list 'load-path "~/repo/blog/scripts")
+
 ;; https://orgmode.org/worg/org-tutorials/org-publish-html-tutorial.html
 (require 'ox-publish)
-(require 'ox-rss)
   
 ;; https://bastibe.de/2014-05-07-speeding-up-org-publishing.html
 (remove-hook 'find-file-hooks 'vc-find-file-hook 'vc-refresh-state)
@@ -21,9 +20,7 @@
          :publishing-function org-html-publish-to-html
          :html-postamble nil
          :with-toc 't
-         :auto-sitemap t
          )
-        ;; RSS
         ;; publish component
         ("site" :components ("site-orgs"))
         ))
