@@ -2,20 +2,25 @@
 
 import json
 import datetime as dt
+from datetime import datetime, date, time, timezone
 
 domain = 'www.yidajiabei.xyz'
 
 site = 'https://%s/blog/' % (domain)
 
+def get_end_of_day(date):
+    return datetime.strptime(
+        f'{date} 08:00:00', '%Y-%m-%d %H:%M:%S').astimezone()
+
 # 读取json文件内容,返回字典格式
 with open('./scripts/blogs.json','r',encoding='utf8')as fp:
     json_data = json.load(fp)
-    itemLines = ["<item><title>" + str(json_data[x]['title']) + "</title><link>" + site + str(json_data[x]['link']) + "</link><guid isPermaLink=\"true\">" + site + str(json_data[x]['link']) + "</guid><pubDate>" + str(json_data[x]['date']) + "</pubDate></item>\n"for x in range(0, len(json_data) -1)]
+    itemLines = ["<item><title>" + str(json_data[x]['title']) + "</title><link>" + site + str(json_data[x]['link']) + "</link><guid isPermaLink=\"true\">" + site + str(json_data[x]['link']) + "</guid><pubDate>" + get_end_of_day(str(json_data[x]['date'])).strftime("%a, %d %b %Y %I:%M:%S %z") + "</pubDate></item>\n"for x in range(0, len(json_data) -1)]
     # print(type(itemLines))
 
 
 with open('./blog/index.xml', 'w') as fh:
-  fh.write("""<?xml version="1.0"?>
+  fh.write("""<?xml version="1.0" encoding="UTF-8"?>
 <rss version="2.0"><channel>
 <title>一大加贝</title>
 <link>https://www.yidajiabei.xyz/blog/</link>
@@ -26,8 +31,11 @@ with open('./blog/index.xml', 'w') as fh:
 <webMaster>me@yidajiabei.xyz (Jim Gao)</webMaster>
 <copyright>在保留本文作者及本文链接的前提下，非商业用途随意转载分享。</copyright>
 <lastBuildDate>""")
-  fh.write(str(dt.datetime.now()))
+  fh.write(str(dt.datetime.now().strftime("%a, %d %b %Y %I:%M:%S +0800")))
   fh.write("</lastBuildDate>\n")
   fh.writelines(itemLines)
   fh.write("""</channel>
 </rss>""")
+
+# http://johnbokma.com/blog/2019/10/09/hand-coding-an-rss-2-0-feed-in-python.html
+# print(dt.datetime(2019, 10, 9, 23, 59, 59, tzinfo=dt.timezone(dt.timedelta(seconds=700), 'CST')))
