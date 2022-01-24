@@ -10,11 +10,12 @@ site = 'https://%s/blog/' % (domain)
 # 读取json文件内容,返回字典格式
 with open('./scripts/blogs.json','r',encoding='utf8')as fp:
     json_data = json.load(fp)
-    # for x in range(0, len(json_data) -1):
-    #   print(json_data[x]['title'])
+    itemLines = ["<item><title>" + str(json_data[x]['title']) + "</title><link>" + site + str(json_data[x]['link']) + "</link><guid isPermaLink=\"true\">" + site + str(json_data[x]['link']) + "</guid><pubDate>" + str(json_data[x]['date']) + "</pubDate></item>"for x in range(0, len(json_data) -1)]
+    # print(type(itemLines))
+
 
 with open('./blog/index.xml', 'w') as fh:
-  fh.write("""<rss version="2.0"><channel>
+  fh.write("""<?xml version="1.0"?><rss version="2.0"><channel>
 <title>一大加贝</title>
 <link>https://www.yidajiabei.xyz/blog/</link>
 <description>学习技术，热爱生活</description>
@@ -27,3 +28,6 @@ with open('./blog/index.xml', 'w') as fh:
   fh.write(str(dt.datetime.now()))
   fh.write("""</lastBuildDate>
 <atom:link rel="self" type="application/rss+xml" href="https://www.yidajiabei.xyz/blog/index.xml"/>\n""")
+  fh.writelines(itemLines)
+  fh.write("""</channel>
+</rss>""")
