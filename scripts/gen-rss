@@ -26,8 +26,7 @@ with open('./blog/index.xml', 'w') as fh:
 <copyright>在保留本文作者及本文链接的前提下，非商业用途随意转载分享。</copyright>
 <lastBuildDate>""")
   fh.write(str(dt.datetime.now()))
-  fh.write("""</lastBuildDate>
-<atom:link rel="self" type="application/rss+xml" href="https://www.yidajiabei.xyz/blog/index.xml"/>\n""")
+  fh.write("</lastBuildDate>\n")
   fh.writelines(itemLines)
   fh.write("""</channel>
 </rss>""")
