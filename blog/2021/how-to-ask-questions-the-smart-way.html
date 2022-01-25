@@ -1,95 +1,207 @@
-<?xml version="1.0" encoding="utf-8"?>
-<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN"
-"http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
-<html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en">
+<!DOCTYPE html>
+<html lang="zh">
 <head>
-<!-- 2022-01-25 Tue 20:01 -->
-<meta http-equiv="Content-Type" content="text/html;charset=utf-8" />
-<meta name="viewport" content="width=device-width, initial-scale=1" />
-<title>&lrm;</title>
-<meta name="generator" content="Org mode" />
-<script type="text/javascript">
-// @license magnet:?xt=urn:btih:e95b018ef3580986a04669f1b5879592219e2a7a&dn=public-domain.txt Public Domain
-<!--/*--><![CDATA[/*><!--*/
-     function CodeHighlightOn(elem, id)
-     {
-       var target = document.getElementById(id);
-       if(null != target) {
-         elem.classList.add("code-highlighted");
-         target.classList.add("code-highlighted");
-       }
-     }
-     function CodeHighlightOff(elem, id)
-     {
-       var target = document.getElementById(id);
-       if(null != target) {
-         elem.classList.remove("code-highlighted");
-         target.classList.remove("code-highlighted");
-       }
-     }
-    /*]]>*///-->
-// @license-end
-</script>
+<!-- 2022-01-25 Tue 21:00 -->
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>提问的智慧</title>
+<meta name="generator" content="Org mode">
+<style type="text/css">
+ <!--/*--><![CDATA[/*><!--*/
+  .title  { text-align: center;
+             margin-bottom: .2em; }
+  .subtitle { text-align: center;
+              font-size: medium;
+              font-weight: bold;
+              margin-top:0; }
+  .todo   { font-family: monospace; color: red; }
+  .done   { font-family: monospace; color: green; }
+  .priority { font-family: monospace; color: orange; }
+  .tag    { background-color: #eee; font-family: monospace;
+            padding: 2px; font-size: 80%; font-weight: normal; }
+  .timestamp { color: #bebebe; }
+  .timestamp-kwd { color: #5f9ea0; }
+  .org-right  { margin-left: auto; margin-right: 0px;  text-align: right; }
+  .org-left   { margin-left: 0px;  margin-right: auto; text-align: left; }
+  .org-center { margin-left: auto; margin-right: auto; text-align: center; }
+  .underline { text-decoration: underline; }
+  #postamble p, #preamble p { font-size: 90%; margin: .2em; }
+  p.verse { margin-left: 3%; }
+  pre {
+    border: 1px solid #ccc;
+    box-shadow: 3px 3px 3px #eee;
+    padding: 8pt;
+    font-family: monospace;
+    overflow: auto;
+    margin: 1.2em;
+  }
+  pre.src {
+    position: relative;
+    overflow: auto;
+    padding-top: 1.2em;
+  }
+  pre.src:before {
+    display: none;
+    position: absolute;
+    background-color: white;
+    top: -10px;
+    right: 10px;
+    padding: 3px;
+    border: 1px solid black;
+  }
+  pre.src:hover:before { display: inline; margin-top: 14px;}
+  /* Languages per Org manual */
+  pre.src-asymptote:before { content: 'Asymptote'; }
+  pre.src-awk:before { content: 'Awk'; }
+  pre.src-C:before { content: 'C'; }
+  /* pre.src-C++ doesn't work in CSS */
+  pre.src-clojure:before { content: 'Clojure'; }
+  pre.src-css:before { content: 'CSS'; }
+  pre.src-D:before { content: 'D'; }
+  pre.src-ditaa:before { content: 'ditaa'; }
+  pre.src-dot:before { content: 'Graphviz'; }
+  pre.src-calc:before { content: 'Emacs Calc'; }
+  pre.src-emacs-lisp:before { content: 'Emacs Lisp'; }
+  pre.src-fortran:before { content: 'Fortran'; }
+  pre.src-gnuplot:before { content: 'gnuplot'; }
+  pre.src-haskell:before { content: 'Haskell'; }
+  pre.src-hledger:before { content: 'hledger'; }
+  pre.src-java:before { content: 'Java'; }
+  pre.src-js:before { content: 'Javascript'; }
+  pre.src-latex:before { content: 'LaTeX'; }
+  pre.src-ledger:before { content: 'Ledger'; }
+  pre.src-lisp:before { content: 'Lisp'; }
+  pre.src-lilypond:before { content: 'Lilypond'; }
+  pre.src-lua:before { content: 'Lua'; }
+  pre.src-matlab:before { content: 'MATLAB'; }
+  pre.src-mscgen:before { content: 'Mscgen'; }
+  pre.src-ocaml:before { content: 'Objective Caml'; }
+  pre.src-octave:before { content: 'Octave'; }
+  pre.src-org:before { content: 'Org mode'; }
+  pre.src-oz:before { content: 'OZ'; }
+  pre.src-plantuml:before { content: 'Plantuml'; }
+  pre.src-processing:before { content: 'Processing.js'; }
+  pre.src-python:before { content: 'Python'; }
+  pre.src-R:before { content: 'R'; }
+  pre.src-ruby:before { content: 'Ruby'; }
+  pre.src-sass:before { content: 'Sass'; }
+  pre.src-scheme:before { content: 'Scheme'; }
+  pre.src-screen:before { content: 'Gnu Screen'; }
+  pre.src-sed:before { content: 'Sed'; }
+  pre.src-sh:before { content: 'shell'; }
+  pre.src-sql:before { content: 'SQL'; }
+  pre.src-sqlite:before { content: 'SQLite'; }
+  /* additional languages in org.el's org-babel-load-languages alist */
+  pre.src-forth:before { content: 'Forth'; }
+  pre.src-io:before { content: 'IO'; }
+  pre.src-J:before { content: 'J'; }
+  pre.src-makefile:before { content: 'Makefile'; }
+  pre.src-maxima:before { content: 'Maxima'; }
+  pre.src-perl:before { content: 'Perl'; }
+  pre.src-picolisp:before { content: 'Pico Lisp'; }
+  pre.src-scala:before { content: 'Scala'; }
+  pre.src-shell:before { content: 'Shell Script'; }
+  pre.src-ebnf2ps:before { content: 'ebfn2ps'; }
+  /* additional language identifiers per "defun org-babel-execute"
+       in ob-*.el */
+  pre.src-cpp:before  { content: 'C++'; }
+  pre.src-abc:before  { content: 'ABC'; }
+  pre.src-coq:before  { content: 'Coq'; }
+  pre.src-groovy:before  { content: 'Groovy'; }
+  /* additional language identifiers from org-babel-shell-names in
+     ob-shell.el: ob-shell is the only babel language using a lambda to put
+     the execution function name together. */
+  pre.src-bash:before  { content: 'bash'; }
+  pre.src-csh:before  { content: 'csh'; }
+  pre.src-ash:before  { content: 'ash'; }
+  pre.src-dash:before  { content: 'dash'; }
+  pre.src-ksh:before  { content: 'ksh'; }
+  pre.src-mksh:before  { content: 'mksh'; }
+  pre.src-posh:before  { content: 'posh'; }
+  /* Additional Emacs modes also supported by the LaTeX listings package */
+  pre.src-ada:before { content: 'Ada'; }
+  pre.src-asm:before { content: 'Assembler'; }
+  pre.src-caml:before { content: 'Caml'; }
+  pre.src-delphi:before { content: 'Delphi'; }
+  pre.src-html:before { content: 'HTML'; }
+  pre.src-idl:before { content: 'IDL'; }
+  pre.src-mercury:before { content: 'Mercury'; }
+  pre.src-metapost:before { content: 'MetaPost'; }
+  pre.src-modula-2:before { content: 'Modula-2'; }
+  pre.src-pascal:before { content: 'Pascal'; }
+  pre.src-ps:before { content: 'PostScript'; }
+  pre.src-prolog:before { content: 'Prolog'; }
+  pre.src-simula:before { content: 'Simula'; }
+  pre.src-tcl:before { content: 'tcl'; }
+  pre.src-tex:before { content: 'TeX'; }
+  pre.src-plain-tex:before { content: 'Plain TeX'; }
+  pre.src-verilog:before { content: 'Verilog'; }
+  pre.src-vhdl:before { content: 'VHDL'; }
+  pre.src-xml:before { content: 'XML'; }
+  pre.src-nxml:before { content: 'XML'; }
+  /* add a generic configuration mode; LaTeX export needs an additional
+     (add-to-list 'org-latex-listings-langs '(conf " ")) in .emacs */
+  pre.src-conf:before { content: 'Configuration File'; }
+
+  table { border-collapse:collapse; }
+  caption.t-above { caption-side: top; }
+  caption.t-bottom { caption-side: bottom; }
+  td, th { vertical-align:top;  }
+  th.org-right  { text-align: center;  }
+  th.org-left   { text-align: center;   }
+  th.org-center { text-align: center; }
+  td.org-right  { text-align: right;  }
+  td.org-left   { text-align: left;   }
+  td.org-center { text-align: center; }
+  dt { font-weight: bold; }
+  .footpara { display: inline; }
+  .footdef  { margin-bottom: 1em; }
+  .figure { padding: 1em; }
+  .figure p { text-align: center; }
+  .equation-container {
+    display: table;
+    text-align: center;
+    width: 100%;
+  }
+  .equation {
+    vertical-align: middle;
+  }
+  .equation-label {
+    display: table-cell;
+    text-align: right;
+    vertical-align: middle;
+  }
+  .inlinetask {
+    padding: 10px;
+    border: 2px solid gray;
+    margin: 10px;
+    background: #ffffcc;
+  }
+  #org-div-home-and-up
+   { text-align: right; font-size: 70%; white-space: nowrap; }
+  textarea { overflow-x: auto; }
+  .linenr { font-size: smaller }
+  .code-highlighted { background-color: #ffff00; }
+  .org-info-js_info-navigation { border-style: none; }
+  #org-info-js_console-label
+    { font-size: 10px; font-weight: bold; white-space: nowrap; }
+  .org-info-js_search-highlight
+    { background-color: #ffff00; color: #000000; font-weight: bold; }
+  .org-svg { width: 90%; }
+  /*]]>*/-->
+</style>
+<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin><link href="https://fonts.googleapis.com/css2?family=Noto+Sans+SC&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="/theme/normalize.css"/>
+<link rel="stylesheet" href="/theme/site.css"/>
+<script defer src='https://static.cloudflareinsights.com/beacon.min.js' data-cf-beacon='{"token": "d5b841b503ed4d1b8fad459b84d1cc2f"}'></script>
+<script defer src="/theme/link.js"></script>
 </head>
 <body>
 <div id="content">
-<div id="table-of-contents">
-<h2>Table of Contents</h2>
-<div id="text-table-of-contents">
-<ul>
-<li><a href="#在提问之前">1. 在提问之前</a></li>
-<li><a href="#当你提问时">2. 当你提问时</a>
-<ul>
-<li><a href="#慎重地选择提问的论坛">2.1. 慎重地选择提问的论坛</a></li>
-<li><a href="#stack-exchange">2.2. Stack Exchange</a></li>
-<li><a href="#网站和-irc-论坛">2.3. 网站和 IRC 论坛</a></li>
-<li><a href="#使用项目邮件列表">2.4. 使用项目邮件列表</a></li>
-<li><a href="#使用有意义并且描述明确的标题">2.5. 使用有意义并且描述明确的标题</a></li>
-<li><a href="#使问题容易回复">2.6. 使问题容易回复</a></li>
-<li><a href="#用清晰正确精准且语法正确的语句">2.7. 用清晰、正确、精准且语法正确的语句</a></li>
-<li><a href="#使用易于读取且标准的文件格式发送问题">2.8. 使用易于读取且标准的文件格式发送问题</a></li>
-<li><a href="#精确地描述问题并言之有物">2.9. 精确地描述问题并言之有物</a></li>
-<li><a href="#话不在多而在精">2.10. 话不在多而在精</a></li>
-<li><a href="#别动辄声称找到-bug">2.11. 别动辄声称找到 Bug</a></li>
-<li><a href="#低声下气不能减少你的工作">2.12. 低声下气不能减少你的工作</a></li>
-<li><a href="#描述问题症状而不是你的猜测">2.13. 描述问题症状而不是你的猜测</a></li>
-<li><a href="#按发生时间先后列出问题症状">2.14. 按发生时间先后列出问题症状</a></li>
-<li><a href="#描述目标而不是过程">2.15. 描述目标而不是过程</a></li>
-<li><a href="#别要求使用私人电邮回复">2.16. 别要求使用私人电邮回复</a></li>
-<li><a href="#清楚明确地表达你的问题以及需求">2.17. 清楚明确地表达你的问题以及需求</a></li>
-<li><a href="#询问有关代码的问题时">2.18. 询问有关代码的问题时</a></li>
-<li><a href="#别把自己家庭作业的问题贴上来">2.19. 别把自己家庭作业的问题贴上来</a></li>
-<li><a href="#去掉无意义的句子">2.20. 去掉无意义的句子</a></li>
-<li><a href="#即使很急也别在标题中写紧急">2.21. 即使很急也别在标题中写「紧急」</a></li>
-<li><a href="#礼貌些没有坏处">2.22. 礼貌些没有坏处</a></li>
-<li><a href="#问题解决后加个简短的补充说明">2.23. 问题解决后，加个简短的补充说明</a></li>
-</ul>
-</li>
-<li><a href="#如何解读答案">3. 如何解读答案</a>
-<ul>
-<li><a href="#rtfm-和-stfw 如何知道你已完全搞砸了">3.1. RTFM 和 STFW：如何知道你已完全搞砸了</a></li>
-<li><a href="#如果还是搞不懂">3.2. 如果还是搞不懂</a></li>
-<li><a href="#处理无礼的回应">3.3. 处理无礼的回应</a></li>
-</ul>
-</li>
-<li><a href="#如何避免扮演失败者">4. 如何避免扮演失败者</a></li>
-<li><a href="#不该问的问题">5. 不该问的问题</a></li>
-<li><a href="#好问题与蠢问题">6. 好问题与蠢问题</a></li>
-<li><a href="#如果得不到回答">7. 如果得不到回答</a></li>
-<li><a href="#如何更好地回答问题">8. 如何更好地回答问题</a></li>
-<li><a href="#相关资源">9. 相关资源</a></li>
-<li><a href="#鸣谢">10. 鸣谢</a></li>
-</ul>
-</div>
-</div>
-<p>
-<del>+</del> date = '2021-01-23T15:07:41+08:00' tags = ['问题'] title =
-'提问的智慧' slug = 'how-to-ask-questions-the-smart-way' <del>+</del>
-</p>
-
-<p>
-在黑客世界里，你所提技术问题解答的好坏,
-很大程度上取决你提问的方式与此问题的难度。《提问的智慧》就是一篇教我们如何提问的文章。
+<header>
+<h1 class="title">提问的智慧</h1>
+</header><p>
+在黑客世界里，你所提技术问题解答的好坏，很大程度上取决你提问的方式与此问题的难度。《提问的智慧》就是一篇教我们如何提问的文章。
 </p>
 
 <p>
@@ -105,7 +217,7 @@
 </p>
 
 <div id="outline-container-在提问之前" class="outline-2">
-<h2 id="在提问之前"><span class="section-number-2">1</span> 在提问之前</h2>
+<h2 id="在提问之前">在提问之前</h2>
 <div class="outline-text-2" id="text-在提问之前">
 <p>
 在你准备向别人提问前，请先完成一下步骤：
@@ -154,11 +266,11 @@ Google 搜过什么）也让遇到相似问题的人能被搜索引擎引导到�
 </div>
 
 <div id="outline-container-当你提问时" class="outline-2">
-<h2 id="当你提问时"><span class="section-number-2">2</span> 当你提问时</h2>
+<h2 id="当你提问时">当你提问时</h2>
 <div class="outline-text-2" id="text-当你提问时">
 </div>
 <div id="outline-container-慎重地选择提问的论坛" class="outline-3">
-<h3 id="慎重地选择提问的论坛"><span class="section-number-3">2.1</span> 慎重地选择提问的论坛</h3>
+<h3 id="慎重地选择提问的论坛">慎重地选择提问的论坛</h3>
 <div class="outline-text-3" id="text-慎重地选择提问的论坛">
 <p>
 *小心选择你要提问的场合*。如果做了下述的事情，你很可能被忽略掉或者被看作失败者：
@@ -192,7 +304,7 @@ Google 搜过什么）也让遇到相似问题的人能被搜索引擎引导到�
 </div>
 
 <div id="outline-container-stack-exchange" class="outline-3">
-<h3 id="stack-exchange"><span class="section-number-3">2.2</span> Stack Exchange</h3>
+<h3 id="stack-exchange">Stack Exchange</h3>
 <div class="outline-text-3" id="text-stack-exchange">
 <p>
 搜索，然后在 Stack Exchange 提问。
@@ -225,7 +337,7 @@ Stack Exchange 已经成长到
 </div>
 
 <div id="outline-container-网站和-irc-论坛" class="outline-3">
-<h3 id="网站和-irc-论坛"><span class="section-number-3">2.3</span> 网站和 IRC 论坛</h3>
+<h3 id="网站和-irc-论坛">网站和 IRC 论坛</h3>
 <div class="outline-text-3" id="text-网站和-irc-论坛">
 <p>
 本地的使用者群组，或者你所使用软件的开发者正在宣传他们的网页论坛或 IRC
@@ -255,7 +367,7 @@ IRC 中寻求帮助。
 </div>
 
 <div id="outline-container-使用项目邮件列表" class="outline-3">
-<h3 id="使用项目邮件列表"><span class="section-number-3">2.4</span> 使用项目邮件列表</h3>
+<h3 id="使用项目邮件列表">使用项目邮件列表</h3>
 <div class="outline-text-3" id="text-使用项目邮件列表">
 <p>
 当某个项目提供开发者邮件列表时，要向列表而不是其中的个别成员提问，即使你确信他一定能回答你的问题。查一查项目的文件和首页，找到项目的邮件列表并使用它。有几个很好的理由支持我们采用这种办法：
@@ -283,7 +395,7 @@ IRC 中寻求帮助。
 </div>
 
 <div id="outline-container-使用有意义并且描述明确的标题" class="outline-3">
-<h3 id="使用有意义并且描述明确的标题"><span class="section-number-3">2.5</span> 使用有意义并且描述明确的标题</h3>
+<h3 id="使用有意义并且描述明确的标题">使用有意义并且描述明确的标题</h3>
 <div class="outline-text-3" id="text-使用有意义并且描述明确的标题">
 <p>
 在邮件列表、新闻群组或论坛中，大约 50
@@ -352,7 +464,7 @@ X.org 的 X 版中出现？是针对某牌显卡芯片组？或者只是其中�
 </div>
 
 <div id="outline-container-使问题容易回复" class="outline-3">
-<h3 id="使问题容易回复"><span class="section-number-3">2.6</span> 使问题容易回复</h3>
+<h3 id="使问题容易回复">使问题容易回复</h3>
 <div class="outline-text-3" id="text-使问题容易回复">
 <p>
 不要因为麻烦而放弃在邮件客户端设置回复地址，这会降低回复的概率。在论坛，要求通过电子邮件回复是非常无礼的，除非你认为回复的信息可能比较敏感（有人会为了某些未知的原因，只让你而不是整个论坛知道答案）。
@@ -366,7 +478,7 @@ X.org 的 X 版中出现？是针对某牌显卡芯片组？或者只是其中�
 </div>
 
 <div id="outline-container-用清晰正确精准且语法正确的语句" class="outline-3">
-<h3 id="用清晰正确精准且语法正确的语句"><span class="section-number-3">2.7</span> 用清晰、正确、精准且语法正确的语句</h3>
+<h3 id="用清晰正确精准且语法正确的语句">用清晰、正确、精准且语法正确的语句</h3>
 <div class="outline-text-3" id="text-用清晰正确精准且语法正确的语句">
 <p>
 正确的拼写、标点符号和大小写是很重要的。如果你觉得这样做很麻烦，那你多半得不到别人的帮助。不用太僵硬与正式-&#x2013;&#x2014;在黑客文化里，在保证*很准确*的情况下，能够使用非正式的语句也是一种得到关注的能力。这能够表明你是在思考和关注问题。
@@ -420,7 +532,7 @@ translate responses, if you only use one or the other.
 </div>
 
 <div id="outline-container-使用易于读取且标准的文件格式发送问题" class="outline-3">
-<h3 id="使用易于读取且标准的文件格式发送问题"><span class="section-number-3">2.8</span> 使用易于读取且标准的文件格式发送问题</h3>
+<h3 id="使用易于读取且标准的文件格式发送问题">使用易于读取且标准的文件格式发送问题</h3>
 <div class="outline-text-3" id="text-使用易于读取且标准的文件格式发送问题">
 <p>
 需要做到：
@@ -453,7 +565,7 @@ HTML（<a href="http://archive.birdhouse.org/etc/evilmail.html">关闭 HTML</a>
 </div>
 
 <div id="outline-container-精确地描述问题并言之有物" class="outline-3">
-<h3 id="精确地描述问题并言之有物"><span class="section-number-3">2.9</span> 精确地描述问题并言之有物</h3>
+<h3 id="精确地描述问题并言之有物">精确地描述问题并言之有物</h3>
 <div class="outline-text-3" id="text-精确地描述问题并言之有物">
 <ul class="org-ul">
 <li>仔细、清楚地描述你的问题或 Bug 的症状。</li>
@@ -482,7 +594,7 @@ Bug</a>》的出色文章。强力推荐你也读一读。
 </div>
 
 <div id="outline-container-话不在多而在精" class="outline-3">
-<h3 id="话不在多而在精"><span class="section-number-3">2.10</span> 话不在多而在精</h3>
+<h3 id="话不在多而在精">话不在多而在精</h3>
 <div class="outline-text-3" id="text-话不在多而在精">
 <p>
 你需要提供精确有内容的信息。这并不是要求你简单地把成堆的出错代码或者资料完全放到你的提问中。如果你有庞大而复杂的测试样例能重现程序挂掉的情境，尽量将它裁剪得越小越好。
@@ -496,7 +608,7 @@ bug 报告的过程中，你很可能就自己找到了解决办法。
 </div>
 
 <div id="outline-container-别动辄声称找到-bug" class="outline-3">
-<h3 id="别动辄声称找到-bug"><span class="section-number-3">2.11</span> 别动辄声称找到 Bug</h3>
+<h3 id="别动辄声称找到-bug">别动辄声称找到 Bug</h3>
 <div class="outline-text-3" id="text-别动辄声称找到-bug">
 <p>
 除非你能提供解决问题的源代码补丁，或者提供回归测试来表明前一版本中行为不正确，否则你多半不能够完全确信。这同样适用于文件，如果你（声称）发现了文件的
@@ -512,7 +624,7 @@ bug。开发者总是希望软件足够完美，出现 bug 会冒犯他们（如
 </div>
 
 <div id="outline-container-低声下气不能减少你的工作" class="outline-3">
-<h3 id="低声下气不能减少你的工作"><span class="section-number-3">2.12</span> 低声下气不能减少你的工作</h3>
+<h3 id="低声下气不能减少你的工作">低声下气不能减少你的工作</h3>
 <div class="outline-text-3" id="text-低声下气不能减少你的工作">
 <p>
 过于卑微同样无法为你带来问题的解决办法。做好前文所说明的步骤。
@@ -521,7 +633,7 @@ bug。开发者总是希望软件足够完美，出现 bug 会冒犯他们（如
 </div>
 
 <div id="outline-container-描述问题症状而不是你的猜测" class="outline-3">
-<h3 id="描述问题症状而不是你的猜测"><span class="section-number-3">2.13</span> 描述问题症状而不是你的猜测</h3>
+<h3 id="描述问题症状而不是你的猜测">描述问题症状而不是你的猜测</h3>
 <div class="outline-text-3" id="text-描述问题症状而不是你的猜测">
 <p>
 *蠢问题*：
@@ -552,7 +664,7 @@ bug。开发者总是希望软件足够完美，出现 bug 会冒犯他们（如
 </div>
 
 <div id="outline-container-按发生时间先后列出问题症状" class="outline-3">
-<h3 id="按发生时间先后列出问题症状"><span class="section-number-3">2.14</span> 按发生时间先后列出问题症状</h3>
+<h3 id="按发生时间先后列出问题症状">按发生时间先后列出问题症状</h3>
 <div class="outline-text-3" id="text-按发生时间先后列出问题症状">
 <p>
 在说明中包含操作步骤，以及机器和软件的反应，直到问题发生。
@@ -561,7 +673,7 @@ bug。开发者总是希望软件足够完美，出现 bug 会冒犯他们（如
 </div>
 
 <div id="outline-container-描述目标而不是过程" class="outline-3">
-<h3 id="描述目标而不是过程"><span class="section-number-3">2.15</span> 描述目标而不是过程</h3>
+<h3 id="描述目标而不是过程">描述目标而不是过程</h3>
 <div class="outline-text-3" id="text-描述目标而不是过程">
 <p>
 寻求帮助的人经常在心中有个更高层次的目标，而在他们认为达成目标的一条特定路径上停滞了。他们不会思考：会不会这条路本身就有问题？
@@ -596,7 +708,7 @@ slot）， 但却无法从某绘图程序的颜色选择器取得十六进制的
 </div>
 
 <div id="outline-container-别要求使用私人电邮回复" class="outline-3">
-<h3 id="别要求使用私人电邮回复"><span class="section-number-3">2.16</span> 别要求使用私人电邮回复</h3>
+<h3 id="别要求使用私人电邮回复">别要求使用私人电邮回复</h3>
 <div class="outline-text-3" id="text-别要求使用私人电邮回复">
 <p>
 黑客们认为问题的解决过程应该公开透明，可能会有更有经验的人能够注意到不完整或者不当之处，最初的回复才能够、也应该被纠正。同时，提供帮助的人也能借此展示自己的才能，给同行看。
@@ -605,7 +717,7 @@ slot）， 但却无法从某绘图程序的颜色选择器取得十六进制的
 </div>
 
 <div id="outline-container-清楚明确地表达你的问题以及需求" class="outline-3">
-<h3 id="清楚明确地表达你的问题以及需求"><span class="section-number-3">2.17</span> 清楚明确地表达你的问题以及需求</h3>
+<h3 id="清楚明确地表达你的问题以及需求">清楚明确地表达你的问题以及需求</h3>
 <div class="outline-text-3" id="text-清楚明确地表达你的问题以及需求">
 <p>
 向别人提问时，要明确表述需要回答者做什么，这样做会定出一个时间和精力的上限，便于回答者能够集中精力帮助你。
@@ -618,7 +730,7 @@ slot）， 但却无法从某绘图程序的颜色选择器取得十六进制的
 </div>
 
 <div id="outline-container-询问有关代码的问题时" class="outline-3">
-<h3 id="询问有关代码的问题时"><span class="section-number-3">2.18</span> 询问有关代码的问题时</h3>
+<h3 id="询问有关代码的问题时">询问有关代码的问题时</h3>
 <div class="outline-text-3" id="text-询问有关代码的问题时">
 <p>
 不要让别人帮你调试问题代码，也不提示以下应该如何入手。
@@ -653,7 +765,7 @@ case）*。如何定义*最精简的测试用例*？那是问题的缩影；一�
 </div>
 
 <div id="outline-container-别把自己家庭作业的问题贴上来" class="outline-3">
-<h3 id="别把自己家庭作业的问题贴上来"><span class="section-number-3">2.19</span> 别把自己家庭作业的问题贴上来</h3>
+<h3 id="别把自己家庭作业的问题贴上来">别把自己家庭作业的问题贴上来</h3>
 <div class="outline-text-3" id="text-别把自己家庭作业的问题贴上来">
 <p>
 这些问题是需要我们自己独自解决的，可能有经验的人会给我们一些提示，但是仍然需要自己解决。
@@ -662,17 +774,17 @@ case）*。如何定义*最精简的测试用例*？那是问题的缩影；一�
 </div>
 
 <div id="outline-container-去掉无意义的句子" class="outline-3">
-<h3 id="去掉无意义的句子"><span class="section-number-3">2.20</span> 去掉无意义的句子</h3>
+<h3 id="去掉无意义的句子">去掉无意义的句子</h3>
 <div class="outline-text-3" id="text-去掉无意义的句子">
 </div>
 </div>
 <div id="outline-container-即使很急也别在标题中写紧急" class="outline-3">
-<h3 id="即使很急也别在标题中写紧急"><span class="section-number-3">2.21</span> 即使很急也别在标题中写「紧急」</h3>
+<h3 id="即使很急也别在标题中写紧急">即使很急也别在标题中写「紧急」</h3>
 <div class="outline-text-3" id="text-即使很急也别在标题中写紧急">
 </div>
 </div>
 <div id="outline-container-礼貌些没有坏处" class="outline-3">
-<h3 id="礼貌些没有坏处"><span class="section-number-3">2.22</span> 礼貌些没有坏处</h3>
+<h3 id="礼貌些没有坏处">礼貌些没有坏处</h3>
 <div class="outline-text-3" id="text-礼貌些没有坏处">
 <p>
 彬彬有礼，多用=请=和=谢谢您的关注=，或=谢谢你的关照=。让大家都知道你对他们花时间免费提供帮助心存感激。
@@ -695,7 +807,7 @@ Bug
 </div>
 
 <div id="outline-container-问题解决后加个简短的补充说明" class="outline-3">
-<h3 id="问题解决后加个简短的补充说明"><span class="section-number-3">2.23</span> 问题解决后，加个简短的补充说明</h3>
+<h3 id="问题解决后加个简短的补充说明">问题解决后，加个简短的补充说明</h3>
 <div class="outline-text-3" id="text-问题解决后加个简短的补充说明">
 <p>
 问题解决后，向所有帮助过你的人发个说明，让他们知道问题是怎样解决的，并再一次向他们表示感谢。如果问题在新闻组或者邮件列表中引起了广泛关注，应该在那里贴一个说明比较恰当。
@@ -725,11 +837,11 @@ Bug
 </div>
 
 <div id="outline-container-如何解读答案" class="outline-2">
-<h2 id="如何解读答案"><span class="section-number-2">3</span> 如何解读答案</h2>
+<h2 id="如何解读答案">如何解读答案</h2>
 <div class="outline-text-2" id="text-如何解读答案">
 </div>
 <div id="outline-container-rtfm-和-stfw 如何知道你已完全搞砸了" class="outline-3">
-<h3 id="rtfm-和-stfw 如何知道你已完全搞砸了"><span class="section-number-3">3.1</span> RTFM 和 STFW：如何知道你已完全搞砸了</h3>
+<h3 id="rtfm-和-stfw 如何知道你已完全搞砸了">RTFM 和 STFW：如何知道你已完全搞砸了</h3>
 <div class="outline-text-3" id="text-rtfm-和-stfw 如何知道你已完全搞砸了">
 <p>
 RTFM: Read The Fucking Manual
@@ -755,7 +867,7 @@ STFW: Search The Fucking Web
 </div>
 
 <div id="outline-container-如果还是搞不懂" class="outline-3">
-<h3 id="如果还是搞不懂"><span class="section-number-3">3.2</span> 如果还是搞不懂</h3>
+<h3 id="如果还是搞不懂">如果还是搞不懂</h3>
 <div class="outline-text-3" id="text-如果还是搞不懂">
 <p>
 如果你看不懂回应，别立刻要求对方解释。像你以前试着自己解决问题时那样（利用手册，FAQ，网络，身边的高手），先试着去搞懂他的回应。如果你真的需要对方解释，记得表现出你已经从中学到了点什么。
@@ -769,7 +881,7 @@ STFW: Search The Fucking Web
 </div>
 
 <div id="outline-container-处理无礼的回应" class="outline-3">
-<h3 id="处理无礼的回应"><span class="section-number-3">3.3</span> 处理无礼的回应</h3>
+<h3 id="处理无礼的回应">处理无礼的回应</h3>
 <div class="outline-text-3" id="text-处理无礼的回应">
 <p>
 很多黑客圈子中看似无礼的行为并不是存心冒犯。相反，它是直接了当，一针见血式的交流风格，这种风格更注重解决问题，而不是使人感觉舒服而却模模糊糊。
@@ -787,7 +899,7 @@ STFW: Search The Fucking Web
 </div>
 
 <div id="outline-container-如何避免扮演失败者" class="outline-2">
-<h2 id="如何避免扮演失败者"><span class="section-number-2">4</span> 如何避免扮演失败者</h2>
+<h2 id="如何避免扮演失败者">如何避免扮演失败者</h2>
 <div class="outline-text-2" id="text-如何避免扮演失败者">
 <p>
 社区的标准不会自行维持，它们是通过参与者积极而*公开地*执行来维持的。
@@ -800,7 +912,7 @@ STFW: Search The Fucking Web
 </div>
 
 <div id="outline-container-不该问的问题" class="outline-2">
-<h2 id="不该问的问题"><span class="section-number-2">5</span> 不该问的问题</h2>
+<h2 id="不该问的问题">不该问的问题</h2>
 <div class="outline-text-2" id="text-不该问的问题">
 <p>
 以下是几个经典蠢问题，以及黑客没回答时心中所想的：
@@ -843,7 +955,7 @@ TeX 格式吗？
 问题：我怎么才能破解 root 帐号/窃取 OP 特权/读别人的邮件呢？
 </p>
 
-<hr />
+<hr>
 
 <p>
 &gt; 问题：我能在哪找到 X 程序或 X 资源？
@@ -890,7 +1002,7 @@ TeX 格式吗？
 <p>
 回答：这不算是问题吧，我对要我问你二十个问题才找得出你真正问题的问题没兴趣
 </p>
-<hr />
+<hr>
 <p>
 我有更有意思的事要做呢。在看到这类问题的时候，我的反应通常不外如下三种
 </p>
@@ -951,7 +1063,7 @@ Linux
 </div>
 
 <div id="outline-container-好问题与蠢问题" class="outline-2">
-<h2 id="好问题与蠢问题"><span class="section-number-2">6</span> 好问题与蠢问题</h2>
+<h2 id="好问题与蠢问题">好问题与蠢问题</h2>
 <div class="outline-text-2" id="text-好问题与蠢问题">
 <p>
 最后，我将透过举一些例子，来说明怎样聪明的提问；同一个问题的两种问法被放在一起，一种是愚蠢的，另一种才是明智的。
@@ -1076,7 +1188,7 @@ Linux
 </div>
 
 <div id="outline-container-如果得不到回答" class="outline-2">
-<h2 id="如果得不到回答"><span class="section-number-2">7</span> 如果得不到回答</h2>
+<h2 id="如果得不到回答">如果得不到回答</h2>
 <div class="outline-text-2" id="text-如果得不到回答">
 <p>
 如果仍得不到回答，请不要以为我们觉得无法帮助你。有时只是看到你问题的人不知道答案罢了。没有回应不代表你被忽视，虽然不可否认这种差别很难区分。
@@ -1089,7 +1201,7 @@ Linux
 </div>
 
 <div id="outline-container-如何更好地回答问题" class="outline-2">
-<h2 id="如何更好地回答问题"><span class="section-number-2">8</span> 如何更好地回答问题</h2>
+<h2 id="如何更好地回答问题">如何更好地回答问题</h2>
 <div class="outline-text-2" id="text-如何更好地回答问题">
 <p>
 *态度和善一点*。问题带来的压力常使人显得无礼或愚蠢，其实并不是这样。
@@ -1139,7 +1251,7 @@ Y、Z、A、B、C 但没得到结果，回答 <code>试试看 A 或是 B</code> 
 </div>
 
 <div id="outline-container-相关资源" class="outline-2">
-<h2 id="相关资源"><span class="section-number-2">9</span> 相关资源</h2>
+<h2 id="相关资源">相关资源</h2>
 <div class="outline-text-2" id="text-相关资源">
 <p>
 如果你需要个人电脑、Unix 系统和网络如何运作的基础知识，参阅
@@ -1154,7 +1266,7 @@ Y、Z、A、B、C 但没得到结果，回答 <code>试试看 A 或是 B</code> 
 </div>
 
 <div id="outline-container-鸣谢" class="outline-2">
-<h2 id="鸣谢"><span class="section-number-2">10</span> 鸣谢</h2>
+<h2 id="鸣谢">鸣谢</h2>
 <div class="outline-text-2" id="text-鸣谢">
 <p>
 Evelyn Mitchel
@@ -1162,10 +1274,10 @@ Evelyn Mitchel
 Ramendik 贡献了一些特别有价值的建议和改进。
 </p>
 
-<hr />
+<hr>
 
 <p>
-*参考资料*：
+<b>参考资料</b> ：
 </p>
 
 <ol class="org-ol">
