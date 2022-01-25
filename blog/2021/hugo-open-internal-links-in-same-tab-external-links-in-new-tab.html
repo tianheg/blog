@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html lang="zh">
 <head>
-<!-- 2022-01-25 Tue 21:00 -->
+<!-- 2022-01-25 Tue 21:42 -->
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>Hugo 内链当前标签页打开，外链新标签页打开</title>
@@ -218,7 +218,7 @@
 在 Hugo 博客的博客单页面（single.html）中，修改 <code>{{ .Content }}</code> 为
 </p>
 
-<pre class="example" id="orgb4d2379">
+<pre class="example" id="org7147027">
 {{ $content := .Content }}
 {{ $content = replaceRE `&lt;a href="(https?://.+)"&gt;` `&lt;a href="$1" target="_blank" rel="noopener"&gt;` $content | safeHTML }}
 {{ $content | safeHTML }}
