@@ -1,0 +1,434 @@
+<!DOCTYPE html>
+<html lang="zh">
+<head>
+<!-- 2022-01-26 Wed 21:06 -->
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>HTML Tables Structuring Planet Data</title>
+<meta name="generator" content="Org mode">
+<style type="text/css">
+ <!--/*--><![CDATA[/*><!--*/
+  .title  { text-align: center;
+             margin-bottom: .2em; }
+  .subtitle { text-align: center;
+              font-size: medium;
+              font-weight: bold;
+              margin-top:0; }
+  .todo   { font-family: monospace; color: red; }
+  .done   { font-family: monospace; color: green; }
+  .priority { font-family: monospace; color: orange; }
+  .tag    { background-color: #eee; font-family: monospace;
+            padding: 2px; font-size: 80%; font-weight: normal; }
+  .timestamp { color: #bebebe; }
+  .timestamp-kwd { color: #5f9ea0; }
+  .org-right  { margin-left: auto; margin-right: 0px;  text-align: right; }
+  .org-left   { margin-left: 0px;  margin-right: auto; text-align: left; }
+  .org-center { margin-left: auto; margin-right: auto; text-align: center; }
+  .underline { text-decoration: underline; }
+  #postamble p, #preamble p { font-size: 90%; margin: .2em; }
+  p.verse { margin-left: 3%; }
+  pre {
+    border: 1px solid #ccc;
+    box-shadow: 3px 3px 3px #eee;
+    padding: 8pt;
+    font-family: monospace;
+    overflow: auto;
+    margin: 1.2em;
+  }
+  pre.src {
+    position: relative;
+    overflow: auto;
+    padding-top: 1.2em;
+  }
+  pre.src:before {
+    display: none;
+    position: absolute;
+    background-color: white;
+    top: -10px;
+    right: 10px;
+    padding: 3px;
+    border: 1px solid black;
+  }
+  pre.src:hover:before { display: inline; margin-top: 14px;}
+  /* Languages per Org manual */
+  pre.src-asymptote:before { content: 'Asymptote'; }
+  pre.src-awk:before { content: 'Awk'; }
+  pre.src-C:before { content: 'C'; }
+  /* pre.src-C++ doesn't work in CSS */
+  pre.src-clojure:before { content: 'Clojure'; }
+  pre.src-css:before { content: 'CSS'; }
+  pre.src-D:before { content: 'D'; }
+  pre.src-ditaa:before { content: 'ditaa'; }
+  pre.src-dot:before { content: 'Graphviz'; }
+  pre.src-calc:before { content: 'Emacs Calc'; }
+  pre.src-emacs-lisp:before { content: 'Emacs Lisp'; }
+  pre.src-fortran:before { content: 'Fortran'; }
+  pre.src-gnuplot:before { content: 'gnuplot'; }
+  pre.src-haskell:before { content: 'Haskell'; }
+  pre.src-hledger:before { content: 'hledger'; }
+  pre.src-java:before { content: 'Java'; }
+  pre.src-js:before { content: 'Javascript'; }
+  pre.src-latex:before { content: 'LaTeX'; }
+  pre.src-ledger:before { content: 'Ledger'; }
+  pre.src-lisp:before { content: 'Lisp'; }
+  pre.src-lilypond:before { content: 'Lilypond'; }
+  pre.src-lua:before { content: 'Lua'; }
+  pre.src-matlab:before { content: 'MATLAB'; }
+  pre.src-mscgen:before { content: 'Mscgen'; }
+  pre.src-ocaml:before { content: 'Objective Caml'; }
+  pre.src-octave:before { content: 'Octave'; }
+  pre.src-org:before { content: 'Org mode'; }
+  pre.src-oz:before { content: 'OZ'; }
+  pre.src-plantuml:before { content: 'Plantuml'; }
+  pre.src-processing:before { content: 'Processing.js'; }
+  pre.src-python:before { content: 'Python'; }
+  pre.src-R:before { content: 'R'; }
+  pre.src-ruby:before { content: 'Ruby'; }
+  pre.src-sass:before { content: 'Sass'; }
+  pre.src-scheme:before { content: 'Scheme'; }
+  pre.src-screen:before { content: 'Gnu Screen'; }
+  pre.src-sed:before { content: 'Sed'; }
+  pre.src-sh:before { content: 'shell'; }
+  pre.src-sql:before { content: 'SQL'; }
+  pre.src-sqlite:before { content: 'SQLite'; }
+  /* additional languages in org.el's org-babel-load-languages alist */
+  pre.src-forth:before { content: 'Forth'; }
+  pre.src-io:before { content: 'IO'; }
+  pre.src-J:before { content: 'J'; }
+  pre.src-makefile:before { content: 'Makefile'; }
+  pre.src-maxima:before { content: 'Maxima'; }
+  pre.src-perl:before { content: 'Perl'; }
+  pre.src-picolisp:before { content: 'Pico Lisp'; }
+  pre.src-scala:before { content: 'Scala'; }
+  pre.src-shell:before { content: 'Shell Script'; }
+  pre.src-ebnf2ps:before { content: 'ebfn2ps'; }
+  /* additional language identifiers per "defun org-babel-execute"
+       in ob-*.el */
+  pre.src-cpp:before  { content: 'C++'; }
+  pre.src-abc:before  { content: 'ABC'; }
+  pre.src-coq:before  { content: 'Coq'; }
+  pre.src-groovy:before  { content: 'Groovy'; }
+  /* additional language identifiers from org-babel-shell-names in
+     ob-shell.el: ob-shell is the only babel language using a lambda to put
+     the execution function name together. */
+  pre.src-bash:before  { content: 'bash'; }
+  pre.src-csh:before  { content: 'csh'; }
+  pre.src-ash:before  { content: 'ash'; }
+  pre.src-dash:before  { content: 'dash'; }
+  pre.src-ksh:before  { content: 'ksh'; }
+  pre.src-mksh:before  { content: 'mksh'; }
+  pre.src-posh:before  { content: 'posh'; }
+  /* Additional Emacs modes also supported by the LaTeX listings package */
+  pre.src-ada:before { content: 'Ada'; }
+  pre.src-asm:before { content: 'Assembler'; }
+  pre.src-caml:before { content: 'Caml'; }
+  pre.src-delphi:before { content: 'Delphi'; }
+  pre.src-html:before { content: 'HTML'; }
+  pre.src-idl:before { content: 'IDL'; }
+  pre.src-mercury:before { content: 'Mercury'; }
+  pre.src-metapost:before { content: 'MetaPost'; }
+  pre.src-modula-2:before { content: 'Modula-2'; }
+  pre.src-pascal:before { content: 'Pascal'; }
+  pre.src-ps:before { content: 'PostScript'; }
+  pre.src-prolog:before { content: 'Prolog'; }
+  pre.src-simula:before { content: 'Simula'; }
+  pre.src-tcl:before { content: 'tcl'; }
+  pre.src-tex:before { content: 'TeX'; }
+  pre.src-plain-tex:before { content: 'Plain TeX'; }
+  pre.src-verilog:before { content: 'Verilog'; }
+  pre.src-vhdl:before { content: 'VHDL'; }
+  pre.src-xml:before { content: 'XML'; }
+  pre.src-nxml:before { content: 'XML'; }
+  /* add a generic configuration mode; LaTeX export needs an additional
+     (add-to-list 'org-latex-listings-langs '(conf " ")) in .emacs */
+  pre.src-conf:before { content: 'Configuration File'; }
+
+  table { border-collapse:collapse; }
+  caption.t-above { caption-side: top; }
+  caption.t-bottom { caption-side: bottom; }
+  td, th { vertical-align:top;  }
+  th.org-right  { text-align: center;  }
+  th.org-left   { text-align: center;   }
+  th.org-center { text-align: center; }
+  td.org-right  { text-align: right;  }
+  td.org-left   { text-align: left;   }
+  td.org-center { text-align: center; }
+  dt { font-weight: bold; }
+  .footpara { display: inline; }
+  .footdef  { margin-bottom: 1em; }
+  .figure { padding: 1em; }
+  .figure p { text-align: center; }
+  .equation-container {
+    display: table;
+    text-align: center;
+    width: 100%;
+  }
+  .equation {
+    vertical-align: middle;
+  }
+  .equation-label {
+    display: table-cell;
+    text-align: right;
+    vertical-align: middle;
+  }
+  .inlinetask {
+    padding: 10px;
+    border: 2px solid gray;
+    margin: 10px;
+    background: #ffffcc;
+  }
+  #org-div-home-and-up
+   { text-align: right; font-size: 70%; white-space: nowrap; }
+  textarea { overflow-x: auto; }
+  .linenr { font-size: smaller }
+  .code-highlighted { background-color: #ffff00; }
+  .org-info-js_info-navigation { border-style: none; }
+  #org-info-js_console-label
+    { font-size: 10px; font-weight: bold; white-space: nowrap; }
+  .org-info-js_search-highlight
+    { background-color: #ffff00; color: #000000; font-weight: bold; }
+  .org-svg { width: 90%; }
+  /*]]>*/-->
+</style>
+<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin><link href="https://fonts.googleapis.com/css2?family=Noto+Sans+SC&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="/theme/normalize.css"/>
+<link rel="stylesheet" href="/theme/site.css"/>
+<script defer src='https://static.cloudflareinsights.com/beacon.min.js' data-cf-beacon='{"token": "d5b841b503ed4d1b8fad459b84d1cc2f"}'></script>
+<script defer src="/theme/link.js"></script>
+</head>
+<body>
+<div id="content">
+<header>
+<h1 class="title">HTML Tables Structuring Planet Data</h1>
+</header>
+<div id="outline-container-代码" class="outline-2">
+<h2 id="代码">代码</h2>
+<div class="outline-text-2" id="text-代码">
+</div>
+<div id="outline-container-html" class="outline-3">
+<h3 id="html">HTML</h3>
+<div class="outline-text-3" id="text-html">
+<pre class="example" id="org015fcb4">
+&lt;!DOCTYPE html&gt;
+&lt;html lang="en"&gt;
+  &lt;head&gt;
+    &lt;meta charset="utf-8" /&gt;
+    &lt;title&gt;Planets data&lt;/title&gt;
+    &lt;link href="style.css" rel="stylesheet" type="text/css" /&gt;
+  &lt;/head&gt;
+  &lt;body&gt;
+    &lt;h1&gt;Planets data&lt;/h1&gt;
+    &lt;table&gt;
+      &lt;caption&gt;
+        Data about the planets of our solar system (Planetary facts taken from
+        &lt;a href="http://nssdc.gsfc.nasa.gov/planetary/factsheet/"
+          &gt;Nasa's Planetary Fact Sheet - Metric&lt;/a
+        &gt;).
+      &lt;/caption&gt;
+      &lt;colgroup&gt;
+        &lt;col span="2" /&gt;
+        &lt;col style="border: 2px solid black" /&gt;
+        &lt;col span="9" /&gt;
+      &lt;/colgroup&gt;
+      &lt;thead&gt;
+        &lt;tr&gt;
+          &lt;td colspan="2"&gt;&amp;nbsp;&lt;/td&gt;
+          &lt;th scope="col"&gt;Name&lt;/th&gt;
+          &lt;th scope="col"&gt;Mass (10&lt;sup&gt;24&lt;/sup&gt;kg)&lt;/th&gt;
+          &lt;th scope="col"&gt;Diameter (km)&lt;/th&gt;
+          &lt;th scope="col"&gt;Density (kg/m&lt;sup&gt;3&lt;/sup&gt;)&lt;/th&gt;
+          &lt;th scope="col"&gt;Gravity (m/s&lt;sup&gt;2&lt;/sup&gt;)&lt;/th&gt;
+          &lt;th scope="col"&gt;Length of day (hours)&lt;/th&gt;
+          &lt;th scope="col"&gt;Distance from Sun (10&lt;sup&gt;6&lt;/sup&gt;km)&lt;/th&gt;
+          &lt;th scope="col"&gt;Mean temperature (°C)&lt;/th&gt;
+          &lt;th scope="col"&gt;Number of moons&lt;/th&gt;
+          &lt;th scope="col"&gt;Notes&lt;/th&gt;
+        &lt;/tr&gt;
+      &lt;/thead&gt;
+      &lt;tbody&gt;
+        &lt;tr&gt;
+          &lt;th rowspan="4" colspan="2" scope="rowgroup"&gt;Terrestrial planets&lt;/th&gt;
+          &lt;th scope="row"&gt;Mercury&lt;/th&gt;
+          &lt;td&gt;0.330&lt;/td&gt;
+          &lt;td&gt;4,879&lt;/td&gt;
+          &lt;td&gt;5427&lt;/td&gt;
+          &lt;td&gt;3.7&lt;/td&gt;
+          &lt;td&gt;4222.6&lt;/td&gt;
+          &lt;td&gt;57.9&lt;/td&gt;
+          &lt;td&gt;167&lt;/td&gt;
+          &lt;td&gt;0&lt;/td&gt;
+          &lt;td&gt;Closest to the Sun&lt;/td&gt;
+        &lt;/tr&gt;
+        &lt;tr&gt;
+          &lt;th scope="row"&gt;Venus&lt;/th&gt;
+          &lt;td&gt;4.87&lt;/td&gt;
+          &lt;td&gt;12,104&lt;/td&gt;
+          &lt;td&gt;5243&lt;/td&gt;
+          &lt;td&gt;8.9&lt;/td&gt;
+          &lt;td&gt;2802.0&lt;/td&gt;
+          &lt;td&gt;108.2&lt;/td&gt;
+          &lt;td&gt;464&lt;/td&gt;
+          &lt;td&gt;0&lt;/td&gt;
+          &lt;td&gt;&lt;/td&gt;
+        &lt;/tr&gt;
+        &lt;tr&gt;
+          &lt;th scope="row"&gt;Earth&lt;/th&gt;
+          &lt;td&gt;5.97&lt;/td&gt;
+          &lt;td&gt;12,756&lt;/td&gt;
+          &lt;td&gt;5514&lt;/td&gt;
+          &lt;td&gt;9.8&lt;/td&gt;
+          &lt;td&gt;24.0&lt;/td&gt;
+          &lt;td&gt;149.6&lt;/td&gt;
+          &lt;td&gt;15&lt;/td&gt;
+          &lt;td&gt;1&lt;/td&gt;
+          &lt;td&gt;Our World&lt;/td&gt;
+        &lt;/tr&gt;
+        &lt;tr&gt;
+          &lt;th scope="row"&gt;Mars&lt;/th&gt;
+          &lt;td&gt;0.642&lt;/td&gt;
+          &lt;td&gt;6,792&lt;/td&gt;
+          &lt;td&gt;3933&lt;/td&gt;
+          &lt;td&gt;3.7&lt;/td&gt;
+          &lt;td&gt;24.7&lt;/td&gt;
+          &lt;td&gt;227.9&lt;/td&gt;
+          &lt;td&gt;-65&lt;/td&gt;
+          &lt;td&gt;2&lt;/td&gt;
+          &lt;td&gt;The red planet&lt;/td&gt;
+        &lt;/tr&gt;
+        &lt;tr&gt;
+          &lt;th rowspan="4" scope="rowgroup"&gt;Jovian planets&lt;/th&gt;
+          &lt;th rowspan="2" scope="rowgroup"&gt;Gas giants&lt;/th&gt;
+          &lt;th scope="row"&gt;Jupiter&lt;/th&gt;
+          &lt;td&gt;1898&lt;/td&gt;
+          &lt;td&gt;142,984&lt;/td&gt;
+          &lt;td&gt;1326&lt;/td&gt;
+          &lt;td&gt;23.1&lt;/td&gt;
+          &lt;td&gt;9.9&lt;/td&gt;
+          &lt;td&gt;778.6&lt;/td&gt;
+          &lt;td&gt;-110&lt;/td&gt;
+          &lt;td&gt;67&lt;/td&gt;
+          &lt;td&gt;The largest planet&lt;/td&gt;
+        &lt;/tr&gt;
+        &lt;tr&gt;
+          &lt;th scope="row"&gt;Saturn&lt;/th&gt;
+          &lt;td&gt;568&lt;/td&gt;
+          &lt;td&gt;120,536&lt;/td&gt;
+          &lt;td&gt;687&lt;/td&gt;
+          &lt;td&gt;9.0&lt;/td&gt;
+          &lt;td&gt;10.7&lt;/td&gt;
+          &lt;td&gt;1433.5&lt;/td&gt;
+          &lt;td&gt;-140&lt;/td&gt;
+          &lt;td&gt;62&lt;/td&gt;
+          &lt;td&gt;&lt;/td&gt;
+        &lt;/tr&gt;
+        &lt;tr&gt;
+          &lt;th rowspan="2" scope="rowgroup"&gt;Ice giants&lt;/th&gt;
+          &lt;th scope="row"&gt;Uranus&lt;/th&gt;
+          &lt;td&gt;86.8&lt;/td&gt;
+          &lt;td&gt;51,118&lt;/td&gt;
+          &lt;td&gt;1271&lt;/td&gt;
+          &lt;td&gt;8.7&lt;/td&gt;
+          &lt;td&gt;17.2&lt;/td&gt;
+          &lt;td&gt;2872.5&lt;/td&gt;
+          &lt;td&gt;-195&lt;/td&gt;
+          &lt;td&gt;27&lt;/td&gt;
+          &lt;td&gt;&lt;/td&gt;
+        &lt;/tr&gt;
+        &lt;tr&gt;
+          &lt;th scope="row"&gt;Neptune&lt;/th&gt;
+          &lt;td&gt;102&lt;/td&gt;
+          &lt;td&gt;49,528&lt;/td&gt;
+          &lt;td&gt;1638&lt;/td&gt;
+          &lt;td&gt;11.0&lt;/td&gt;
+          &lt;td&gt;16.1&lt;/td&gt;
+          &lt;td&gt;4495.1&lt;/td&gt;
+          &lt;td&gt;-200&lt;/td&gt;
+          &lt;td&gt;14&lt;/td&gt;
+          &lt;td&gt;&lt;/td&gt;
+        &lt;/tr&gt;
+        &lt;tr&gt;
+          &lt;th colspan="2" scope="rowgroup"&gt;Dwarf planets&lt;/th&gt;
+          &lt;th scope="row"&gt;Pluto&lt;/th&gt;
+          &lt;td&gt;0.0146&lt;/td&gt;
+          &lt;td&gt;2,370&lt;/td&gt;
+          &lt;td&gt;2095&lt;/td&gt;
+          &lt;td&gt;0.7&lt;/td&gt;
+          &lt;td&gt;153.3&lt;/td&gt;
+          &lt;td&gt;5906.4&lt;/td&gt;
+          &lt;td&gt;-225&lt;/td&gt;
+          &lt;td&gt;5&lt;/td&gt;
+          &lt;td&gt;
+            Declassified as a planet in 2006, but this
+            &lt;a
+              href="http://www.usatoday.com/story/tech/2014/10/02/pluto-planet-solar-system/16578959/"
+              &gt;remains controversial&lt;/a
+            &gt;.
+          &lt;/td&gt;
+        &lt;/tr&gt;
+      &lt;/tbody&gt;
+    &lt;/table&gt;
+  &lt;/body&gt;
+&lt;/html&gt;
+</pre>
+</div>
+</div>
+
+<div id="outline-container-css" class="outline-3">
+<h3 id="css">CSS</h3>
+<div class="outline-text-3" id="text-css">
+<div class="org-src-container">
+<pre class="src src-css"><span style="color: #a9df90;">html </span>{
+  <span style="color: #91a0b3;">font-family</span>: sans-serif;
+}
+
+<span style="color: #a9df90;">table </span>{
+  <span style="color: #91a0b3;">border-collapse</span>: collapse;
+  <span style="color: #91a0b3;">border</span>: 2px solid <span style="color: #000000; background-color: #c8c8c8;">rgb(200,200,200)</span>;
+  <span style="color: #91a0b3;">letter-spacing</span>: 1px;
+  <span style="color: #91a0b3;">font-size</span>: 0.8rem;
+}
+
+<span style="color: #a9df90;">td, th </span>{
+  <span style="color: #91a0b3;">border</span>: 1px solid <span style="color: #000000; background-color: #bebebe;">rgb(190,190,190)</span>;
+  <span style="color: #91a0b3;">padding</span>: 10px 20px;
+}
+
+<span style="color: #a9df90;">th </span>{
+  <span style="color: #91a0b3;">background-color</span>: <span style="color: #000000; background-color: #ebebeb;">rgb(235,235,235)</span>;
+}
+
+<span style="color: #a9df90;">td </span>{
+  <span style="color: #91a0b3;">text-align</span>: center;
+}
+
+<span style="color: #a9df90;">tr:nth-child(even) td </span>{
+  <span style="color: #91a0b3;">background-color</span>: <span style="color: #000000; background-color: #fafafa;">rgb(250,250,250)</span>;
+}
+
+<span style="color: #a9df90;">tr:nth-child(odd) td </span>{
+  <span style="color: #91a0b3;">background-color</span>: <span style="color: #000000; background-color: #f5f5f5;">rgb(245,245,245)</span>;
+}
+
+<span style="color: #a9df90;">caption </span>{
+  <span style="color: #91a0b3;">padding</span>: 10px;
+}
+</pre>
+</div>
+</div>
+</div>
+</div>
+
+<div id="outline-container-思考" class="outline-2">
+<h2 id="思考">思考</h2>
+<div class="outline-text-2" id="text-思考">
+<p>
+HTML
+中的表格是一个强大的工具，它能够以直观的形式显示数据。通过以上练习，我使用了
+<code>table</code>,=caption=,=colgroup=,=col=,=thead=,=tbody=,=tr=,=th=,=td=
+元素，并用到了 <code>span</code>,=colspan=,=rowspan=,=scope= 属性。
+</p>
+</div>
+</div>
+</div>
+</body>
+</html>

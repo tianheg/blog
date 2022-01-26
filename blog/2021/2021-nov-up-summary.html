@@ -1,0 +1,342 @@
+<!DOCTYPE html>
+<html lang="zh">
+<head>
+<!-- 2022-01-26 Wed 21:06 -->
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>2021 年 11 月上旬总结</title>
+<meta name="generator" content="Org mode">
+<style type="text/css">
+ <!--/*--><![CDATA[/*><!--*/
+  .title  { text-align: center;
+             margin-bottom: .2em; }
+  .subtitle { text-align: center;
+              font-size: medium;
+              font-weight: bold;
+              margin-top:0; }
+  .todo   { font-family: monospace; color: red; }
+  .done   { font-family: monospace; color: green; }
+  .priority { font-family: monospace; color: orange; }
+  .tag    { background-color: #eee; font-family: monospace;
+            padding: 2px; font-size: 80%; font-weight: normal; }
+  .timestamp { color: #bebebe; }
+  .timestamp-kwd { color: #5f9ea0; }
+  .org-right  { margin-left: auto; margin-right: 0px;  text-align: right; }
+  .org-left   { margin-left: 0px;  margin-right: auto; text-align: left; }
+  .org-center { margin-left: auto; margin-right: auto; text-align: center; }
+  .underline { text-decoration: underline; }
+  #postamble p, #preamble p { font-size: 90%; margin: .2em; }
+  p.verse { margin-left: 3%; }
+  pre {
+    border: 1px solid #ccc;
+    box-shadow: 3px 3px 3px #eee;
+    padding: 8pt;
+    font-family: monospace;
+    overflow: auto;
+    margin: 1.2em;
+  }
+  pre.src {
+    position: relative;
+    overflow: auto;
+    padding-top: 1.2em;
+  }
+  pre.src:before {
+    display: none;
+    position: absolute;
+    background-color: white;
+    top: -10px;
+    right: 10px;
+    padding: 3px;
+    border: 1px solid black;
+  }
+  pre.src:hover:before { display: inline; margin-top: 14px;}
+  /* Languages per Org manual */
+  pre.src-asymptote:before { content: 'Asymptote'; }
+  pre.src-awk:before { content: 'Awk'; }
+  pre.src-C:before { content: 'C'; }
+  /* pre.src-C++ doesn't work in CSS */
+  pre.src-clojure:before { content: 'Clojure'; }
+  pre.src-css:before { content: 'CSS'; }
+  pre.src-D:before { content: 'D'; }
+  pre.src-ditaa:before { content: 'ditaa'; }
+  pre.src-dot:before { content: 'Graphviz'; }
+  pre.src-calc:before { content: 'Emacs Calc'; }
+  pre.src-emacs-lisp:before { content: 'Emacs Lisp'; }
+  pre.src-fortran:before { content: 'Fortran'; }
+  pre.src-gnuplot:before { content: 'gnuplot'; }
+  pre.src-haskell:before { content: 'Haskell'; }
+  pre.src-hledger:before { content: 'hledger'; }
+  pre.src-java:before { content: 'Java'; }
+  pre.src-js:before { content: 'Javascript'; }
+  pre.src-latex:before { content: 'LaTeX'; }
+  pre.src-ledger:before { content: 'Ledger'; }
+  pre.src-lisp:before { content: 'Lisp'; }
+  pre.src-lilypond:before { content: 'Lilypond'; }
+  pre.src-lua:before { content: 'Lua'; }
+  pre.src-matlab:before { content: 'MATLAB'; }
+  pre.src-mscgen:before { content: 'Mscgen'; }
+  pre.src-ocaml:before { content: 'Objective Caml'; }
+  pre.src-octave:before { content: 'Octave'; }
+  pre.src-org:before { content: 'Org mode'; }
+  pre.src-oz:before { content: 'OZ'; }
+  pre.src-plantuml:before { content: 'Plantuml'; }
+  pre.src-processing:before { content: 'Processing.js'; }
+  pre.src-python:before { content: 'Python'; }
+  pre.src-R:before { content: 'R'; }
+  pre.src-ruby:before { content: 'Ruby'; }
+  pre.src-sass:before { content: 'Sass'; }
+  pre.src-scheme:before { content: 'Scheme'; }
+  pre.src-screen:before { content: 'Gnu Screen'; }
+  pre.src-sed:before { content: 'Sed'; }
+  pre.src-sh:before { content: 'shell'; }
+  pre.src-sql:before { content: 'SQL'; }
+  pre.src-sqlite:before { content: 'SQLite'; }
+  /* additional languages in org.el's org-babel-load-languages alist */
+  pre.src-forth:before { content: 'Forth'; }
+  pre.src-io:before { content: 'IO'; }
+  pre.src-J:before { content: 'J'; }
+  pre.src-makefile:before { content: 'Makefile'; }
+  pre.src-maxima:before { content: 'Maxima'; }
+  pre.src-perl:before { content: 'Perl'; }
+  pre.src-picolisp:before { content: 'Pico Lisp'; }
+  pre.src-scala:before { content: 'Scala'; }
+  pre.src-shell:before { content: 'Shell Script'; }
+  pre.src-ebnf2ps:before { content: 'ebfn2ps'; }
+  /* additional language identifiers per "defun org-babel-execute"
+       in ob-*.el */
+  pre.src-cpp:before  { content: 'C++'; }
+  pre.src-abc:before  { content: 'ABC'; }
+  pre.src-coq:before  { content: 'Coq'; }
+  pre.src-groovy:before  { content: 'Groovy'; }
+  /* additional language identifiers from org-babel-shell-names in
+     ob-shell.el: ob-shell is the only babel language using a lambda to put
+     the execution function name together. */
+  pre.src-bash:before  { content: 'bash'; }
+  pre.src-csh:before  { content: 'csh'; }
+  pre.src-ash:before  { content: 'ash'; }
+  pre.src-dash:before  { content: 'dash'; }
+  pre.src-ksh:before  { content: 'ksh'; }
+  pre.src-mksh:before  { content: 'mksh'; }
+  pre.src-posh:before  { content: 'posh'; }
+  /* Additional Emacs modes also supported by the LaTeX listings package */
+  pre.src-ada:before { content: 'Ada'; }
+  pre.src-asm:before { content: 'Assembler'; }
+  pre.src-caml:before { content: 'Caml'; }
+  pre.src-delphi:before { content: 'Delphi'; }
+  pre.src-html:before { content: 'HTML'; }
+  pre.src-idl:before { content: 'IDL'; }
+  pre.src-mercury:before { content: 'Mercury'; }
+  pre.src-metapost:before { content: 'MetaPost'; }
+  pre.src-modula-2:before { content: 'Modula-2'; }
+  pre.src-pascal:before { content: 'Pascal'; }
+  pre.src-ps:before { content: 'PostScript'; }
+  pre.src-prolog:before { content: 'Prolog'; }
+  pre.src-simula:before { content: 'Simula'; }
+  pre.src-tcl:before { content: 'tcl'; }
+  pre.src-tex:before { content: 'TeX'; }
+  pre.src-plain-tex:before { content: 'Plain TeX'; }
+  pre.src-verilog:before { content: 'Verilog'; }
+  pre.src-vhdl:before { content: 'VHDL'; }
+  pre.src-xml:before { content: 'XML'; }
+  pre.src-nxml:before { content: 'XML'; }
+  /* add a generic configuration mode; LaTeX export needs an additional
+     (add-to-list 'org-latex-listings-langs '(conf " ")) in .emacs */
+  pre.src-conf:before { content: 'Configuration File'; }
+
+  table { border-collapse:collapse; }
+  caption.t-above { caption-side: top; }
+  caption.t-bottom { caption-side: bottom; }
+  td, th { vertical-align:top;  }
+  th.org-right  { text-align: center;  }
+  th.org-left   { text-align: center;   }
+  th.org-center { text-align: center; }
+  td.org-right  { text-align: right;  }
+  td.org-left   { text-align: left;   }
+  td.org-center { text-align: center; }
+  dt { font-weight: bold; }
+  .footpara { display: inline; }
+  .footdef  { margin-bottom: 1em; }
+  .figure { padding: 1em; }
+  .figure p { text-align: center; }
+  .equation-container {
+    display: table;
+    text-align: center;
+    width: 100%;
+  }
+  .equation {
+    vertical-align: middle;
+  }
+  .equation-label {
+    display: table-cell;
+    text-align: right;
+    vertical-align: middle;
+  }
+  .inlinetask {
+    padding: 10px;
+    border: 2px solid gray;
+    margin: 10px;
+    background: #ffffcc;
+  }
+  #org-div-home-and-up
+   { text-align: right; font-size: 70%; white-space: nowrap; }
+  textarea { overflow-x: auto; }
+  .linenr { font-size: smaller }
+  .code-highlighted { background-color: #ffff00; }
+  .org-info-js_info-navigation { border-style: none; }
+  #org-info-js_console-label
+    { font-size: 10px; font-weight: bold; white-space: nowrap; }
+  .org-info-js_search-highlight
+    { background-color: #ffff00; color: #000000; font-weight: bold; }
+  .org-svg { width: 90%; }
+  /*]]>*/-->
+</style>
+<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin><link href="https://fonts.googleapis.com/css2?family=Noto+Sans+SC&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="/theme/normalize.css"/>
+<link rel="stylesheet" href="/theme/site.css"/>
+<script defer src='https://static.cloudflareinsights.com/beacon.min.js' data-cf-beacon='{"token": "d5b841b503ed4d1b8fad459b84d1cc2f"}'></script>
+<script defer src="/theme/link.js"></script>
+</head>
+<body>
+<div id="content">
+<header>
+<h1 class="title">2021 年 11 月上旬总结</h1>
+</header><p>
+11 月前半段主要完成了：
+</p>
+
+<ol class="org-ol">
+<li>确定两个对自己的要求（最重要），「*自信*」与「*不断问问题*」，前者让我坚信自己，后者我已经具备，因此让我更加自信</li>
+<li><i>Learning How to Learn</i> 笔记记录 3
+小节，思考专注与发散思维模式的区别，并应用于自己的学习生活中</li>
+
+<li>Using the Focused &amp; Diffuse Modes</li>
+<li>What is Learning?</li>
+<li>A Procrastination Preview</li>
+
+<li>MDNFE（MDN 的前端开发者教程）完成，对前端的发展历史、Web
+标准有了更多的认识</li>
+
+<li>Getting started</li>
+<li>Semantics and structure with HTML</li>
+
+<li>阅读《帅张星球算法项目手册》<sup><a id="fnr.1" class="footref" href="#fn.1">1</a></sup>第一小节：递归思维训练，留下初次印象</li>
+</ol>
+
+<p>
+在哈佛大学教授，泰勒·本·沙哈尔的《积极心理学》课程中，有这样的陈述：
+</p>
+
+<blockquote>
+<p>
+So here is the longitudinal study that was done by John Kotter. John
+Kotter, Professor of Leadership Management, the business school across
+the river, came to Harvard in 1972, joined the faculty and started to
+follow Harvard class, MBA class of 1973 and followed them for 20
+years. And what he waa interested in was to find out all the
+information that he could about this class.
+</p>
+
+<p>
+What he found 20 years later, early 90s, when the study ended, was
+these students were extremely successful. Or ex-students were
+extremely successful, very wealthy, having a lot of impact, whether
+it's on the organization, the community. They did extremely well, but
+within the large group of highly successful Harvard MBAs, he found a
+small group that was extraordinarily successful, more successful than
+the rest of the group, whether it's in terms of income, whether it's
+in terms of impact, whether it's in terms of overall quality of life,
+extraordinarily successful.
+</p>
+
+<p>
+And what he wanted to identify was, why. What distinguish the small
+group from the rest of the pack? Very successful, but not quite as
+successful as that small group.
+</p>
+
+<p>
+And he found only two things. It was not their IQs that made no
+difference what so ever to their long-term success, It was not where
+they came from pre MBA. What they did had nothing to do with it. Two
+and two things alone mattered in terms of determing who will be the
+extraordinarily successful and the rest.
+</p>
+
+<p>
+The first thing was the extraordinarily successful groups <b>really
+believed in themselves</b>. They thought they could do well. They were
+driven. They were motivated. They thought "I'm going to make it, I'm
+going to succeed."
+</p>
+
+<p>
+And the second thing that he found, was this group, they were always
+asking questions, they were always at the state of curiosity. Always
+looking up, opening up , wanting to understand the world the more.
+They were life-long learners.
+</p>
+</blockquote>
+
+<p>
+就是这两种品质-&#x2013;&#x2014;自信和不断地问问题，让我更有动力去做那些让自己更好的事情。
+</p>
+
+<p>
+<i>Learning How to Learn</i> 是一门教人如何学习的在线课程。
+</p>
+
+<ol class="org-ol">
+<li>专注和发散模式是两种不同的思考方式，前者更关注要学习的事物本身，后者则要找到事物之间的更多联系。</li>
+<li>睡眠能够让我们的大脑得到休息从而更好地工作。</li>
+<li>当你不想做某件事情时，你的大脑会产生痛苦的感觉，为了消除这种痛感，你会选择做那些能让你愉快的事情；但是，经过研究发现，痛苦的感觉只是暂时的，一旦度过那个阶段，你能够获得极大的成就感。</li>
+</ol>
+
+<p>
+MDNFE（front-end web developer learning
+pathway）本阶段了解了互联网的发展历史，其中 Tim Berners-Lee
+是核心人物，他创造了 HTML 和
+HTTP，前者是网页的骨架，后者是浏览网页的重要协议，协议是双方通信都要遵守的共同约定。互联网发展离不开这些内容，但是为了所有人都能看到大体一致的网页内容，需要开发者组织起来，制定一些标准。这样就形成了各种互联网组织：WHATWG<sup><a id="fnr.2" class="footref" href="#fn.2">2</a></sup>，制定
+HTML 标准；ECMA<sup><a id="fnr.3" class="footref" href="#fn.3">3</a></sup>，制定 ECMAScript 标准，它是编程语言 JavaScript
+的基础。除此之外，还有很多其他的互联网组织，制定其他应用于互联网的标准。
+</p>
+
+<p>
+还学习了如何使用 HTML
+插入段落文本、图片、音频和超链接，学习如何让残疾人士更好地理解网页内容，学习如何使用表格整理数据。
+</p>
+
+<p>
+《帅张星球算法项目手册》是知识星球「帅张和他的朋友们」的球友 labuladong
+写作的算法学习手册，知识星球是一款社群工具，有网页端、app
+和微信小程序。我的笔记：
+</p>
+
+<ol class="org-ol">
+<li>数据结构的存储方式：数组和链表</li>
+<li>数据结构的基本操作：增删改查</li>
+</ol>
+
+<p>
+11 月已经过半，下旬继续努力！
+</p>
+<div id="footnotes">
+<h2 class="footnotes">Footnotes: </h2>
+<div id="text-footnotes">
+
+<div class="footdef"><sup><a id="fn.1" class="footnum" href="#fnr.1">1</a></sup> <div class="footpara"><p class="footpara">
+<a href="https://labuladong.github.io/zgnb/">https://labuladong.github.io/zgnb/</a>
+</p></div></div>
+
+<div class="footdef"><sup><a id="fn.2" class="footnum" href="#fnr.2">2</a></sup> <div class="footpara"><p class="footpara">
+<a href="https://whatwg.org/">https://whatwg.org/</a>
+</p></div></div>
+
+<div class="footdef"><sup><a id="fn.3" class="footnum" href="#fnr.3">3</a></sup> <div class="footpara"><p class="footpara">
+<a href="https://www.ecma-international.org/">https://www.ecma-international.org/</a>
+</p></div></div>
+
+
+</div>
+</div></div>
+</body>
+</html>
