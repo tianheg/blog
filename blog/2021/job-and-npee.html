@@ -1,0 +1,472 @@
+<!DOCTYPE html>
+<html lang="zh">
+<head>
+<!-- 2022-01-26 Wed 21:06 -->
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>工作还是考研？</title>
+<meta name="generator" content="Org mode">
+<style type="text/css">
+ <!--/*--><![CDATA[/*><!--*/
+  .title  { text-align: center;
+             margin-bottom: .2em; }
+  .subtitle { text-align: center;
+              font-size: medium;
+              font-weight: bold;
+              margin-top:0; }
+  .todo   { font-family: monospace; color: red; }
+  .done   { font-family: monospace; color: green; }
+  .priority { font-family: monospace; color: orange; }
+  .tag    { background-color: #eee; font-family: monospace;
+            padding: 2px; font-size: 80%; font-weight: normal; }
+  .timestamp { color: #bebebe; }
+  .timestamp-kwd { color: #5f9ea0; }
+  .org-right  { margin-left: auto; margin-right: 0px;  text-align: right; }
+  .org-left   { margin-left: 0px;  margin-right: auto; text-align: left; }
+  .org-center { margin-left: auto; margin-right: auto; text-align: center; }
+  .underline { text-decoration: underline; }
+  #postamble p, #preamble p { font-size: 90%; margin: .2em; }
+  p.verse { margin-left: 3%; }
+  pre {
+    border: 1px solid #ccc;
+    box-shadow: 3px 3px 3px #eee;
+    padding: 8pt;
+    font-family: monospace;
+    overflow: auto;
+    margin: 1.2em;
+  }
+  pre.src {
+    position: relative;
+    overflow: auto;
+    padding-top: 1.2em;
+  }
+  pre.src:before {
+    display: none;
+    position: absolute;
+    background-color: white;
+    top: -10px;
+    right: 10px;
+    padding: 3px;
+    border: 1px solid black;
+  }
+  pre.src:hover:before { display: inline; margin-top: 14px;}
+  /* Languages per Org manual */
+  pre.src-asymptote:before { content: 'Asymptote'; }
+  pre.src-awk:before { content: 'Awk'; }
+  pre.src-C:before { content: 'C'; }
+  /* pre.src-C++ doesn't work in CSS */
+  pre.src-clojure:before { content: 'Clojure'; }
+  pre.src-css:before { content: 'CSS'; }
+  pre.src-D:before { content: 'D'; }
+  pre.src-ditaa:before { content: 'ditaa'; }
+  pre.src-dot:before { content: 'Graphviz'; }
+  pre.src-calc:before { content: 'Emacs Calc'; }
+  pre.src-emacs-lisp:before { content: 'Emacs Lisp'; }
+  pre.src-fortran:before { content: 'Fortran'; }
+  pre.src-gnuplot:before { content: 'gnuplot'; }
+  pre.src-haskell:before { content: 'Haskell'; }
+  pre.src-hledger:before { content: 'hledger'; }
+  pre.src-java:before { content: 'Java'; }
+  pre.src-js:before { content: 'Javascript'; }
+  pre.src-latex:before { content: 'LaTeX'; }
+  pre.src-ledger:before { content: 'Ledger'; }
+  pre.src-lisp:before { content: 'Lisp'; }
+  pre.src-lilypond:before { content: 'Lilypond'; }
+  pre.src-lua:before { content: 'Lua'; }
+  pre.src-matlab:before { content: 'MATLAB'; }
+  pre.src-mscgen:before { content: 'Mscgen'; }
+  pre.src-ocaml:before { content: 'Objective Caml'; }
+  pre.src-octave:before { content: 'Octave'; }
+  pre.src-org:before { content: 'Org mode'; }
+  pre.src-oz:before { content: 'OZ'; }
+  pre.src-plantuml:before { content: 'Plantuml'; }
+  pre.src-processing:before { content: 'Processing.js'; }
+  pre.src-python:before { content: 'Python'; }
+  pre.src-R:before { content: 'R'; }
+  pre.src-ruby:before { content: 'Ruby'; }
+  pre.src-sass:before { content: 'Sass'; }
+  pre.src-scheme:before { content: 'Scheme'; }
+  pre.src-screen:before { content: 'Gnu Screen'; }
+  pre.src-sed:before { content: 'Sed'; }
+  pre.src-sh:before { content: 'shell'; }
+  pre.src-sql:before { content: 'SQL'; }
+  pre.src-sqlite:before { content: 'SQLite'; }
+  /* additional languages in org.el's org-babel-load-languages alist */
+  pre.src-forth:before { content: 'Forth'; }
+  pre.src-io:before { content: 'IO'; }
+  pre.src-J:before { content: 'J'; }
+  pre.src-makefile:before { content: 'Makefile'; }
+  pre.src-maxima:before { content: 'Maxima'; }
+  pre.src-perl:before { content: 'Perl'; }
+  pre.src-picolisp:before { content: 'Pico Lisp'; }
+  pre.src-scala:before { content: 'Scala'; }
+  pre.src-shell:before { content: 'Shell Script'; }
+  pre.src-ebnf2ps:before { content: 'ebfn2ps'; }
+  /* additional language identifiers per "defun org-babel-execute"
+       in ob-*.el */
+  pre.src-cpp:before  { content: 'C++'; }
+  pre.src-abc:before  { content: 'ABC'; }
+  pre.src-coq:before  { content: 'Coq'; }
+  pre.src-groovy:before  { content: 'Groovy'; }
+  /* additional language identifiers from org-babel-shell-names in
+     ob-shell.el: ob-shell is the only babel language using a lambda to put
+     the execution function name together. */
+  pre.src-bash:before  { content: 'bash'; }
+  pre.src-csh:before  { content: 'csh'; }
+  pre.src-ash:before  { content: 'ash'; }
+  pre.src-dash:before  { content: 'dash'; }
+  pre.src-ksh:before  { content: 'ksh'; }
+  pre.src-mksh:before  { content: 'mksh'; }
+  pre.src-posh:before  { content: 'posh'; }
+  /* Additional Emacs modes also supported by the LaTeX listings package */
+  pre.src-ada:before { content: 'Ada'; }
+  pre.src-asm:before { content: 'Assembler'; }
+  pre.src-caml:before { content: 'Caml'; }
+  pre.src-delphi:before { content: 'Delphi'; }
+  pre.src-html:before { content: 'HTML'; }
+  pre.src-idl:before { content: 'IDL'; }
+  pre.src-mercury:before { content: 'Mercury'; }
+  pre.src-metapost:before { content: 'MetaPost'; }
+  pre.src-modula-2:before { content: 'Modula-2'; }
+  pre.src-pascal:before { content: 'Pascal'; }
+  pre.src-ps:before { content: 'PostScript'; }
+  pre.src-prolog:before { content: 'Prolog'; }
+  pre.src-simula:before { content: 'Simula'; }
+  pre.src-tcl:before { content: 'tcl'; }
+  pre.src-tex:before { content: 'TeX'; }
+  pre.src-plain-tex:before { content: 'Plain TeX'; }
+  pre.src-verilog:before { content: 'Verilog'; }
+  pre.src-vhdl:before { content: 'VHDL'; }
+  pre.src-xml:before { content: 'XML'; }
+  pre.src-nxml:before { content: 'XML'; }
+  /* add a generic configuration mode; LaTeX export needs an additional
+     (add-to-list 'org-latex-listings-langs '(conf " ")) in .emacs */
+  pre.src-conf:before { content: 'Configuration File'; }
+
+  table { border-collapse:collapse; }
+  caption.t-above { caption-side: top; }
+  caption.t-bottom { caption-side: bottom; }
+  td, th { vertical-align:top;  }
+  th.org-right  { text-align: center;  }
+  th.org-left   { text-align: center;   }
+  th.org-center { text-align: center; }
+  td.org-right  { text-align: right;  }
+  td.org-left   { text-align: left;   }
+  td.org-center { text-align: center; }
+  dt { font-weight: bold; }
+  .footpara { display: inline; }
+  .footdef  { margin-bottom: 1em; }
+  .figure { padding: 1em; }
+  .figure p { text-align: center; }
+  .equation-container {
+    display: table;
+    text-align: center;
+    width: 100%;
+  }
+  .equation {
+    vertical-align: middle;
+  }
+  .equation-label {
+    display: table-cell;
+    text-align: right;
+    vertical-align: middle;
+  }
+  .inlinetask {
+    padding: 10px;
+    border: 2px solid gray;
+    margin: 10px;
+    background: #ffffcc;
+  }
+  #org-div-home-and-up
+   { text-align: right; font-size: 70%; white-space: nowrap; }
+  textarea { overflow-x: auto; }
+  .linenr { font-size: smaller }
+  .code-highlighted { background-color: #ffff00; }
+  .org-info-js_info-navigation { border-style: none; }
+  #org-info-js_console-label
+    { font-size: 10px; font-weight: bold; white-space: nowrap; }
+  .org-info-js_search-highlight
+    { background-color: #ffff00; color: #000000; font-weight: bold; }
+  .org-svg { width: 90%; }
+  /*]]>*/-->
+</style>
+<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin><link href="https://fonts.googleapis.com/css2?family=Noto+Sans+SC&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="/theme/normalize.css"/>
+<link rel="stylesheet" href="/theme/site.css"/>
+<script defer src='https://static.cloudflareinsights.com/beacon.min.js' data-cf-beacon='{"token": "d5b841b503ed4d1b8fad459b84d1cc2f"}'></script>
+<script defer src="/theme/link.js"></script>
+</head>
+<body>
+<div id="content">
+<header>
+<h1 class="title">工作还是考研？</h1>
+</header>
+<div id="outline-container-学长学姐们的做法或者看法" class="outline-2">
+<h2 id="学长学姐们的做法或者看法">学长学姐们的做法或者看法</h2>
+<div class="outline-text-2" id="text-学长学姐们的做法或者看法">
+<p>
+A：觉得我们学校的电子信息工程专业不好找工作，所以从一开始就决定考研。
+</p>
+
+<p>
+B：从学长 B
+这里了解到：他们这一届的同学有考研和找工作的。考研的同学还有没考上二战的；找工作去向有三桶油（中石油、中海油、中石化），有去国企建筑类公司的（实际上就是体力劳动，所以只要男生），有去教育培训机构的。还有几个同学，花钱培训，去当程序员，因为培训出来有经验，给了
+6k 工资。
+</p>
+
+<p>
+C：建议考研，因为不考研工资待遇低。17
+级学长学姐们因为疫情在家没怎么复习，所以最终考研的人数和往届比较少。也有做程序员的，他们接受过培训，平均工资在
+5k。基本上都是在省会或二线城市。西北以西安居多。普遍对工资水平不满意。
+</p>
+
+<p>
+D：不考研找不到好工作，也不想那么早就业，逃避就业就选择了考研。大家都去考研，所以就考了；或者是希望有一个更高的学历。
+</p>
+
+<p>
+E：因为学校有明显的偏向-&#x2013;&#x2014;石油化工的方向，不喜欢过那种倒班的生活。现在本科生太多，去好企业还是要研究生，工资待遇肯定也没有研究生强。所以，想考研走人工智能方向，那种生活是我喜欢的。
+</p>
+
+<p>
+F：这位学长是计科专业。他说，实力够的话，可以直接工作，不过学长的老师跟他说学历低容易遇到中年危机。他说，考研可以让自己接触到更好的人，接触更多的东西。不管怎么选，要坚持住。现在研究生扩招，如果不考研，担心本科生的竞争力会下降。今年计算机类的招聘，关键技术、关键位置上的东西要求都是研究生、及研究生以上的。本科生就是
+Java、客户端、Web 前端。
+</p>
+</div>
+</div>
+
+<div id="outline-container-未曾谋面的朋友们的想法" class="outline-2">
+<h2 id="未曾谋面的朋友们的想法">未曾谋面的朋友们的想法</h2>
+<div class="outline-text-2" id="text-未曾谋面的朋友们的想法">
+<p>
+A：
+</p>
+
+<ol class="org-ol">
+<li>看你的专业无研究生学历差别大不大；</li>
+<li>对自己能力的评估。</li>
+</ol>
+
+<p>
+看法：
+</p>
+
+<ol class="org-ol">
+<li>985、211、双一流考起来压力大，和很多二战、三战的人竞争。自己也要做好有可能不甘心而二战的准备。</li>
+<li>双非除了北京上海等大城市（自己能探索机会开拓视野）不值得考，因为学历内卷严重，三年出来可能面对的境况比现在还差。三年的工作经验和自己的成长以及存的钱反而可能更珍贵-&#x2013;&#x2014;毕竟读研一直在那个框架中磨选题、论文也很累很不自由。</li>
+<li>一切决定最终都是为了提升自己能力，即所谓核心竞争力。所以，若是决定考研，就抱着这个心态不要觉得痛苦，要想是为了自己好才去考的。如果不考，就一边提升竞争力一边找工作，如果觉得竞争力短时间提高不了，就给自己一两年时间（可以通过读研这个方式）</li>
+</ol>
+
+<p>
+B：
+</p>
+
+<blockquote>
+<p>
+抛开学历，单谈优势的话，应该是理论方面的优势吧。不过这个只与你的学习能力有关，与读研究生和工作并无太大关系，毕竟其实都是自学。
+</p>
+</blockquote>
+
+<p>
+获取技术和是否拥有研究生学历并无太大关系。
+</p>
+
+<blockquote>
+<p>
+无论哪条路，坚持自己感兴趣的方向，热心学习钻研，就没错。
+</p>
+</blockquote>
+
+<p>
+不论是选择工作还是考研，坚持自己感兴趣的方向最重要。坚持自己的兴趣，就能成就自己的优势，也就谈不上什么中年危机了。
+</p>
+
+<blockquote>
+<p>
+如果要工作的话，第一份工作一定要选好，要有耐心，不要轻易妥协。
+</p>
+
+<p>
+我现在的话，工作还是比较自由的，比在学校自由，所以挺开心的。
+</p>
+
+<p>
+最后还要考虑自己的家庭情况。
+</p>
+
+<p>
+仅供参考。
+</p>
+</blockquote>
+
+<ul class="org-ul">
+<li>不要轻易妥协</li>
+<li>考虑家庭情况</li>
+</ul>
+
+<p>
+C：可以读 online master。
+</p>
+</div>
+</div>
+
+<div id="outline-container-自我分析" class="outline-2">
+<h2 id="自我分析">自我分析</h2>
+<div class="outline-text-2" id="text-自我分析">
+<p>
+我喜欢编程，愿意深入。家庭困难需要工作挣钱，讨厌学校的腐朽气息，想早点进入社会。在学校里学不到真正的知识，只有理论。但是，编程知识可以自学，工作时能接触到大的项目，考研：专硕第一年上课，第二年找工作。学术型硕士：跟着老师做课题发表论文。工作的话，可能因为忙于工作，而耽搁了自我能力的提升。随着疫情的发展，未来经济每况愈下，不知道未来会是如何。如果研究生三年之后，经济状况，不如三年前，找工作时还是不行。
+</p>
+
+<p>
+专硕和学硕的区别：
+</p>
+
+<p>
+这是我们国家为应对研究生扩招而特别分类的两类研究生，专硕注重动手实践能力，学硕注重学术研究能力。专硕
+2 年或者 3 年，学硕 3
+年。虽然读专硕和学硕都是研究生学历，但是学硕在找工作时的认可度会更高。计算机方向的专硕比学硕的学费要贵。
+</p>
+
+<p>
+*培养方向不同*，这是学硕和专硕最大的不同。一般来说选择专硕就是冲着实践去的。如果考了专硕，将来再去考博会不捡便宜。老师有可能不要你，因为很多都是硕博连读，老师讲求学术门派，学术功底。所以如果将来想要考博就冲着学硕考，因为专硕是冲着实践去的，功利一些，复合一些，目的就是为了将来能够更快的找一个好工作。而学术硕士更侧重于理论研究，更讲究硕博连读。
+</p>
+
+<p>
+关于学硕和专硕找工作的问题，其实很多 HR
+也不知道学术硕士和专业硕士有多大差别。除非是那种特别讲求学术功底的地方，才会问你是学硕还是专硕。有这种鉴别能力的用人单位非常少，除非那种极其顶尖的，会限定就要学术硕士，就要某一个学校毕业的。
+</p>
+
+<p>
+所以如果考研是冲着将来就业去的，冲着短平快去的，专业硕士捡便宜，因为它的学制短就两年多的时间，并且现在很多学校在专硕的教学中往往会引进很多社会力量。这些老师讲的东西接地气，能够快速的运用于实践。
+</p>
+
+<p>
+今年，我国在学研究生总规模将达到 300 万人；专业学位硕士招生占比超过
+60%。（来源：教育部官网）
+</p>
+
+<p>
+2020 年硕士研究生报考人数达到 341 万人，比上年增加了 51
+万人。与考生激增趋势相似，2020 年高校毕业生预计比上年增加 40
+多万人，达到 874 万人。
+</p>
+
+<blockquote>
+<p>
+研究生教育是实施创新驱动发展战略和建设创新型国家的核心要素，国外高等教育体系中研究生占比普遍在
+30%以上，而我国仅为
+15%，随着我国高等教育进入普及化阶段，人才培养结构需要进一步上移。
+</p>
+</blockquote>
+
+<p>
+对专业硕士来说，要明确职业性是其根本特征之一，将专业实践能力作为主要目标和学位审定的重要考虑，并贯穿招生录取、课堂教学、实习实践、学位论文等全环节。
+</p>
+
+<p>
+对学术硕士，要以创新思维能力培养为核心，建立硕博一体化培养体系。加强研究生学位论文的质量监控和过程管理，通过同行评议等途径，加强质量监管。而导师也要深入一线，深度参与研究生培养，大幅提高研究生的创新思维能力。
+</p>
+
+<blockquote>
+<p>
+"我国研究生教育还有扩张的空间。"在王传毅看来，研究生教育本身就具有调整就业增量、延缓就业压力的重要功能，也是提高国民受教育程度，增强人口素质的重要手段，"扩招研究生既是国计又是民生"。他也坦言，"尽管，可能对三年后研究生的就业产生一定影响，但是对延缓当前疫情所导致的就业岗位紧张现象，仍具有积极意义"。
+</p>
+</blockquote>
+
+<p>
+硕士招生规模年年增长。即便是这样，在一些人看来，我国硕士研究生的培养规模仍有可扩大的空间。他们给出的理由是，2018
+年中国每千人注册研究生数为 1.96 人。而自 2010
+年以来，美国、英国、法国一直保持近 9
+人的水平。而这一数据一直被看作衡量研究生教育发展水平的重要指标。
+</p>
+
+<p>
+教育部给出答案：分校确定招生方案。计划增量将重点投向临床医学、人工智能等专业，而且以专业学位培养为主，以高层次的应用型人才专业学位为主。
+</p>
+
+<p>
+在扩招的专业类型上，专业硕士则获得更多关注。专业学位硕士强调操作能力培养，具有很强的实践性。专硕招生规模的增长，顺应我国经济发展对应用型人才日益增长的需求，也符合当前我国对研究生培养结构布局。
+</p>
+
+<p>
+专业学位作为扩招重点，对专业实践基地、校外导师的数量和质量都要求颇高。
+</p>
+
+<p>
+扩招将向中西部地区和东北地区高校倾斜，向临床医学、公共卫生、人工智能等专业倾斜。但是，有专家称，此次重点扩招专业涵盖部分新兴专业，一些专业刚发展起来，教师的前期储备会存在困难。
+</p>
+
+<p>
+在自己学习时，要有方向，一方面要提升名气，使简历发光，一方面深入学习，要有真本事。
+</p>
+
+<p>
+为了获得研究生学历，所付出的时间成本与性价比。
+</p>
+
+<p>
+同样的，研究生学历固然好，但是其代价是两到三年的时间（且不论其间涉及的精力），可以说是一笔不小的时间成本了。相同的时间，对于一个本科毕业后就进入业界工作的同学，或许，他会通过实际的工程与业务，得到更多的经验，提升更多的能力？
+</p>
+
+<p>
+而至于找工作，同样的条件下，研究生确实比本科生有优势。但时间并不是静止的，研究生的比较对象，应当是工作了三年的本科生，这样孰优孰劣呢？
+</p>
+
+<blockquote>
+<p>
+好的研究生还是能学点东西的（说来说去还是看个人）。"耽误"的这 2-3
+年放大到 65
+岁退休来看不值一提，长远收益还是很大，学历鄙视链即使是互联网公司，也是有的，好的学历至少是有正向作用的，另外一方面，户口（不管是积分还是应届生）也是值得考虑。------<a href="https://www.v2ex.com/member/iyaozhen">iyaozhen</a>
+</p>
+</blockquote>
+
+<p>
+<span class="timestamp-wrapper"><span class="timestamp">[2021-07-12 Mon]</span></span>更新：
+</p>
+
+<p>
+我刚才突然想到：我决定工作而不是考研，是因为：我在学校已经待了太长时间，我这个人对社交并不敏感，没有很积极地结交新朋友。如果继续呆在学校里，我会一直持续这种状态，对我以后进入社会并不好。
+</p>
+
+<p>
+早点进入社会，改变自己的学生心态，让自己更快地成长。
+</p>
+</div>
+</div>
+
+<div id="outline-container-参考资料" class="outline-2">
+<h2 id="参考资料">参考资料</h2>
+<div class="outline-text-2" id="text-参考资料">
+<ul class="org-ul">
+<li><a href="https://zhuanlan.zhihu.com/p/87584642">2022 考研：考研时间安排表</a></li>
+<li><a href="https://en.wikipedia.org/wiki/Postgraduate_Admission_Test">Postgraduate
+Admission Test - Wikipedia</a></li>
+<li><a href="https://www.imwzk.com/posts/2020-07-19-why-i-choose-to-work-after-graduation/">我为什么放弃保研，选择直接工作</a></li>
+<li><a href="https://www.zhihu.com/question/28755681/answer/957787747">读两年的专硕是一种什么体验？ -
+中天国子大学的回答 - 知乎</a></li>
+<li><a href="https://www.zhihu.com/question/55962301/answer/867891931">学硕和专硕怎么选择？ -
+长风师兄教育的回答 - 知乎</a></li>
+<li><a href="https://yz.chsi.com.cn/kyzx/bkzn/201805/20180522/1690412124.html">2019
+考研早知道：专业硕士与学术硕士的 11 个区别 - 研招网</a></li>
+<li><a href="http://www.moe.gov.cn/fbh/live/2020/52717/mtbd/202012/t20201204_503520.html">教育部："十三五"时期我国高等教育实现突破性进展</a></li>
+<li><a href="http://www.moe.gov.cn/jyb_xwfb/s5147/202005/t20200528_459881.html">扩招后如何保障研究生培养质量</a></li>
+<li><a href="http://www.moe.gov.cn/jyb_xwfb/s5147/202003/t20200303_426788.html">考研碰上疫情，复试怎么办</a></li>
+<li><a href="http://www.moe.gov.cn/jyb_xwfb/s5147/202003/t20200311_429779.html">硕士扩招
+18.9 万人：怎么扩，如何招</a></li>
+<li><a href="https://zhuanlan.zhihu.com/p/90396934">计算机专业有必要考研吗？ -
+知乎</a></li>
+<li><a href="https://zhuanlan.zhihu.com/p/84350029">对计算机专业来说学历真的重要吗？ -
+知乎</a></li>
+<li><a href="https://www.zhihu.com/question/423606967/answer/1501734515">如何看待教育部提出「专硕将扩大到硕士研究生招生三分之二」？对于考研党有何影响？ -
+达尔文的火车的回答 - 知乎</a></li>
+<li><a href="https://www.zhihu.com/question/20462634/answer/44989131">考研该怎样准备呢？ -
+王土豆的回答 - 知乎</a></li>
+<li><a href="https://yz.chsi.com.cn/kyzx/jyxd/201908/20190808/1811678376.html">2020
+考研：大三复习想考研，应该从哪里入手</a></li>
+<li><a href="https://github.com/easychen/career-guide-for-cs-graduate">计算机系应届生求职指北</a></li>
+</ul>
+</div>
+</div>
+</div>
+</body>
+</html>
