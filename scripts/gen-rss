@@ -16,7 +16,7 @@ def get_end_of_day(date):
 with open('./scripts/blogs.json','r',encoding='utf8')as fp:
     json_data = json.load(fp)
     itemLines = ["<item><title>" + str(json_data[x]['title']) + "</title><link>" + site + str(json_data[x]['link']) + "</link><guid isPermaLink=\"true\">" + site + str(json_data[x]['link']) + "</guid><pubDate>" + get_end_of_day(str(json_data[x]['date'])).strftime("%a, %d %b %Y %I:%M:%S %Z") + "</pubDate></item>\n"for x in range(0, len(json_data) -1)]
-    # print(type(itemLines))
+    # print(itemLines[0:20])
 
 
 with open('./blog/index.xml', 'w') as fh:
@@ -34,7 +34,7 @@ with open('./blog/index.xml', 'w') as fh:
   fh.write(str(dt.datetime.now().strftime("%a, %d %b %Y %I:%M:%S +0800")))
   fh.write("""</lastBuildDate>
   <atom:link rel="self" type="application/rss+xml" href="https://www.yidajiabei.xyz/blog/index.xml"/>\n""")
-  fh.writelines(itemLines)
+  fh.writelines(itemLines[0:20])
   fh.write("""</channel>
 </rss>""")
 
