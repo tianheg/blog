@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html lang="zh">
 <head>
-<!-- 2022-01-27 Thu 22:01 -->
+<!-- 2022-01-27 Thu 23:02 -->
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>通过 Python 为博客生成 RSS</title>
@@ -241,7 +241,7 @@
   fh.write(<span style="color: #9fbfdf;">str</span>(dt.datetime.now().strftime(<span style="color: #ddbc91;">"%a, %d %b %Y %I:%M:%S +0800"</span>)))
   fh.write(<span style="color: #ddbc91;">"""&lt;/lastBuildDate&gt;</span>
 <span style="color: #ddbc91;">  &lt;atom:link rel="self" type="application/rss+xml" href="https://www.yidajiabei.xyz/blog/index.xml"/&gt;\n"""</span>)
-  fh.writelines(itemLines)
+  fh.writelines(itemLines[0:20])
   fh.write(<span style="color: #ddbc91;">"""&lt;/channel&gt;</span>
 <span style="color: #ddbc91;">&lt;/rss&gt;"""</span>)
 </pre>
@@ -250,6 +250,77 @@
 <p>
 我通过 GitHub Action 每天抓取博客文章列表，并存储为 blogs.json。然后用 Python 处理 JSON 中的 title,link,date。
 </p>
+
+<p>
+生成 blogs.json 的 JavaScript 程序：
+</p>
+
+<div class="org-src-container">
+<pre class="src src-js"><span style="color: #91a0b3;">const</span> <span style="color: #aaca86;">axios</span> = require(<span style="color: #ddbc91;">'axios'</span>);
+<span style="color: #91a0b3;">const</span> <span style="color: #aaca86;">cheerio</span> = require(<span style="color: #ddbc91;">'cheerio'</span>);
+<span style="color: #91a0b3;">const</span> <span style="color: #aaca86;">fs</span> = require(<span style="color: #ddbc91;">'fs'</span>);
+
+<span style="color: #706565;">// </span><span style="color: #857575;">for blogs.json</span>
+<span style="color: #91a0b3;">const</span> <span style="color: #aaca86;">url</span> = <span style="color: #ddbc91;">'https://www.yidajiabei.xyz/blog/index.html'</span>;
+
+<span style="color: #91a0b3;">async</span> <span style="color: #91a0b3;">function</span> scrapeData() {
+  <span style="color: #91a0b3;">try</span> {
+    <span style="color: #706565;">// </span><span style="color: #857575;">Fetch HTML of the page we want to scrape</span>
+    <span style="color: #91a0b3;">const</span> { data } = <span style="color: #91a0b3;">await</span> axios.get(url);
+    <span style="color: #706565;">// </span><span style="color: #857575;">Load HTML we fetched in the previous line</span>
+    <span style="color: #91a0b3;">const</span> <span style="color: #aaca86;">$</span> = cheerio.load(data);
+    <span style="color: #706565;">// </span><span style="color: #857575;">Select all the list items in plainlist class</span>
+    <span style="color: #91a0b3;">const</span> <span style="color: #aaca86;">listItems</span> = $(<span style="color: #ddbc91;">'.org-ul li'</span>);
+    <span style="color: #706565;">// </span><span style="color: #857575;">Stores data for all countries</span>
+    <span style="color: #91a0b3;">const</span> <span style="color: #aaca86;">countries</span> = [];
+    <span style="color: #706565;">// </span><span style="color: #857575;">Use .each method to loop through the li we selected</span>
+    listItems.each((idx, el) =&gt; {
+      <span style="color: #706565;">// </span><span style="color: #857575;">Object holding data for each country/jurisdiction</span>
+      <span style="color: #91a0b3;">const</span> <span style="color: #aaca86;">country</span> = { title: <span style="color: #ddbc91;">''</span>, link: <span style="color: #ddbc91;">''</span>, date: <span style="color: #ddbc91;">''</span> }; <span style="color: #706565;">// </span><span style="color: #857575;">, link: ""</span>
+      <span style="color: #706565;">// </span><span style="color: #857575;">Select the text content of a and span elements</span>
+      <span style="color: #706565;">// </span><span style="color: #857575;">Store the textcontent in the above object</span>
+      country.title = $(el).children(<span style="color: #ddbc91;">'a'</span>).text();
+      country.link = $(el).children(<span style="color: #ddbc91;">'a'</span>).attr(<span style="color: #ddbc91;">'href'</span>);
+      country.date = $(el)
+        .text()
+        .replace(<span style="color: #ddbc91;">/[^0-9][^\s]+/</span>g, <span style="color: #ddbc91;">''</span>)
+        .split(<span style="color: #ddbc91;">'-'</span>)
+        .join(<span style="color: #ddbc91;">''</span>)
+        .match(<span style="color: #ddbc91;">/.{1,2}/</span>g)
+        .join(<span style="color: #ddbc91;">'-'</span>);
+      <span style="color: #91a0b3;">if</span> (country.link.split(<span style="color: #ddbc91;">'/'</span>)[0] === <span style="color: #ddbc91;">'2022'</span>) {
+        country.date = <span style="color: #ddbc91;">'2022-'</span> + country.date;
+      } <span style="color: #91a0b3;">else</span> <span style="color: #91a0b3;">if</span> (country.link.split(<span style="color: #ddbc91;">'/'</span>)[0] === <span style="color: #ddbc91;">'2021'</span>) {
+        country.date = <span style="color: #ddbc91;">'2021-'</span> + country.date;
+      } <span style="color: #91a0b3;">else</span> <span style="color: #91a0b3;">if</span> (country.link.split(<span style="color: #ddbc91;">'/'</span>)[0] === <span style="color: #ddbc91;">'2020'</span>) {
+        country.date = <span style="color: #ddbc91;">'2020-'</span> + country.date;
+      } <span style="color: #91a0b3;">else</span> <span style="color: #91a0b3;">if</span> (country.link.split(<span style="color: #ddbc91;">'/'</span>)[0] === <span style="color: #ddbc91;">'2019'</span>) {
+        country.date = <span style="color: #ddbc91;">'2019-'</span> + country.date;
+      } <span style="color: #91a0b3;">else</span> <span style="color: #91a0b3;">if</span> (country.link.split(<span style="color: #ddbc91;">'/'</span>)[0] === <span style="color: #ddbc91;">'2018'</span>) {
+        country.date = <span style="color: #ddbc91;">'2018-'</span> + country.date;
+      } 
+        <span style="color: #706565;">// </span><span style="color: #857575;">console.log(country.title);</span>
+        <span style="color: #706565;">// </span><span style="color: #857575;">Populate countries array with country data</span>
+        countries.push(country);
+    });
+    <span style="color: #706565;">// </span><span style="color: #857575;">Logs countries array to the console</span>
+    console.dir(countries);
+    <span style="color: #706565;">// </span><span style="color: #857575;">Write countries array in countries.json file</span>
+    fs.writeFile(<span style="color: #ddbc91;">'blogs.json'</span>, JSON.stringify(countries, <span style="color: #ab85a3;">null</span>, 2), (err) =&gt; {
+      <span style="color: #91a0b3;">if</span> (err) {
+        console.error(err);
+        <span style="color: #91a0b3;">return</span>;
+      }
+      console.log(<span style="color: #ddbc91;">'Successfully written data to blogs.json'</span>);
+    });
+  } <span style="color: #91a0b3;">catch</span> (err) {
+    console.error(err);
+  }
+}
+<span style="color: #706565;">// </span><span style="color: #857575;">Invoke the above function</span>
+scrapeData();
+</pre>
+</div>
 
 <p>
 参考资料：
