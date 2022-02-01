@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html lang="zh">
 <head>
-<!-- 2022-02-01 Tue 13:01 -->
+<!-- 2022-02-01 Tue 14:01 -->
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>将 non-root 用户添加到开发容器中</title>
@@ -223,7 +223,7 @@ Code（server）和任何子进程（终端、任务、调试）使用它，方�
 devcontainer.json 中指定 remoteUser 属性：
 </p>
 
-<pre class="example" id="org980b42e">
+<pre class="example" id="org9346e29">
 "remoteUser": "user-name-goes-here"
 </pre>
 
@@ -246,7 +246,7 @@ UID/GID 不会被更新，但是可以在 Dockerfile 中手动更改这些值。
 <div id="outline-container-创建-non-root-用户" class="outline-2">
 <h2 id="创建-non-root-用户">创建 non-root 用户</h2>
 <div class="outline-text-2" id="text-创建-non-root-用户">
-<pre class="example" id="org8338431">
+<pre class="example" id="org5d487bc">
 ARG USERNAME=user-name-goes-here
 ARG USER_UID=1000
 ARG USER_GID=$USER_UID
@@ -280,7 +280,7 @@ USER $USERNAME
 中的这个代码片段手动更改用户的 UID/GID。根据需要更新 ARG 值。
 </p>
 
-<pre class="example" id="orgb90e90a">
+<pre class="example" id="orgad6642b">
 ARG USERNAME=user-name-goes-here
 ARG USER_UID=1000
 ARG USER_GID=$USER_UID
