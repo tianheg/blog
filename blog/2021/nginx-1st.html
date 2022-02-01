@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html lang="zh">
 <head>
-<!-- 2022-02-01 Tue 20:01 -->
+<!-- 2022-02-01 Tue 21:01 -->
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>Nginx 初次使用</title>
@@ -201,9 +201,9 @@
 <header>
 <h1 class="title">Nginx 初次使用</h1>
 </header>
-<div id="outline-container-org5f2c340" class="outline-2">
-<h2 id="org5f2c340">下载</h2>
-<div class="outline-text-2" id="text-org5f2c340">
+<div id="outline-container-orge9d5d49" class="outline-2">
+<h2 id="orge9d5d49">下载</h2>
+<div class="outline-text-2" id="text-orge9d5d49">
 <p>
 我使用 Arch Linux
 </p>
@@ -215,9 +215,9 @@
 </div>
 </div>
 
-<div id="outline-container-orgab68042" class="outline-2">
-<h2 id="orgab68042">初学者指南</h2>
-<div class="outline-text-2" id="text-orgab68042">
+<div id="outline-container-org7a2155d" class="outline-2">
+<h2 id="org7a2155d">初学者指南</h2>
+<div class="outline-text-2" id="text-org7a2155d">
 <p>
 <a href="http://nginx.org/en/docs/beginners_guide.html">http://nginx.org/en/docs/beginners_guide.html</a>
 </p>
@@ -237,9 +237,9 @@ Nginx 的计算机是代理服务器）</li>
 </ul>
 </div>
 
-<div id="outline-container-orgfcd892f" class="outline-3">
-<h3 id="orgfcd892f">打开关闭 Nginx，重新加载配置</h3>
-<div class="outline-text-3" id="text-orgfcd892f">
+<div id="outline-container-orgf142d06" class="outline-3">
+<h3 id="orgf142d06">打开关闭 Nginx，重新加载配置</h3>
+<div class="outline-text-3" id="text-orgf142d06">
 <div class="org-src-container">
 <pre class="src src-sh">sudo nginx <span style="color: #706565;"># </span><span style="color: #857575;">start</span>
 sudo nginx stop <span style="color: #706565;"># </span><span style="color: #857575;">fast shutdown</span>
@@ -267,9 +267,9 @@ ps -ax | grep nginx
 </div>
 </div>
 
-<div id="outline-container-org725fd9d" class="outline-3">
-<h3 id="org725fd9d">设置 Nginx 为静态内容提供服务</h3>
-<div class="outline-text-3" id="text-org725fd9d">
+<div id="outline-container-orgdaaa90a" class="outline-3">
+<h3 id="orgdaaa90a">设置 Nginx 为静态内容提供服务</h3>
+<div class="outline-text-3" id="text-orgdaaa90a">
 <div class="org-src-container">
 <pre class="src src-conf"><span style="color: #706565;"># </span><span style="color: #857575;">edit /etc/nginx/nginx.conf</span>
 <span style="color: #ad8572;">http</span> {
@@ -289,9 +289,9 @@ ps -ax | grep nginx
 </div>
 </div>
 
-<div id="outline-container-orgc01d60a" class="outline-3">
-<h3 id="orgc01d60a">将 Nginx 配置为代理服务器</h3>
-<div class="outline-text-3" id="text-orgc01d60a">
+<div id="outline-container-org443d972" class="outline-3">
+<h3 id="org443d972">将 Nginx 配置为代理服务器</h3>
+<div class="outline-text-3" id="text-org443d972">
 <p>
 将它与 FastCGI 应用程序连接
 </p>
@@ -314,13 +314,13 @@ ps -ax | grep nginx
 </div>
 </div>
 
-<div id="outline-container-org0f08eee" class="outline-2">
-<h2 id="org0f08eee">使用中的报错</h2>
-<div class="outline-text-2" id="text-org0f08eee">
+<div id="outline-container-orgb7fb96d" class="outline-2">
+<h2 id="orgb7fb96d">使用中的报错</h2>
+<div class="outline-text-2" id="text-orgb7fb96d">
 </div>
-<div id="outline-container-org4c7741b" class="outline-3">
-<h3 id="org4c7741b">could not build optimal types_hash</h3>
-<div class="outline-text-3" id="text-org4c7741b">
+<div id="outline-container-org7f6aee9" class="outline-3">
+<h3 id="org7f6aee9">could not build optimal types_hash</h3>
+<div class="outline-text-3" id="text-org7f6aee9">
 <div class="org-src-container">
 <pre class="src src-sh">sudo nginx
 2021/09/19 08:55:04 [warn] 33400#33400: could not build optimal types_hash, you should increase either types_hash_max_size: 1024 or types_hash_bucket_size: 64; ignoring types_hash_bucket_size
@@ -341,9 +341,9 @@ Solution<sup><a id="fnr.1" class="footref" href="#fn.1">1</a></sup>:
 </div>
 </div>
 
-<div id="outline-container-org2af1adb" class="outline-3">
-<h3 id="org2af1adb">Address already in use</h3>
-<div class="outline-text-3" id="text-org2af1adb">
+<div id="outline-container-orgb2de005" class="outline-3">
+<h3 id="orgb2de005">Address already in use</h3>
+<div class="outline-text-3" id="text-orgb2de005">
 <div class="org-src-container">
 <pre class="src src-sh">[emerg] 34338#34338: bind() to 0.0.0.0:80 failed (98: Address already<span style="color: #91a0b3;"> in</span> use)
 </pre>
