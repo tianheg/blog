@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html lang="zh">
 <head>
-<!-- 2022-02-02 Wed 17:02 -->
+<!-- 2022-02-02 Wed 18:02 -->
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>常用脚本</title>
@@ -201,9 +201,9 @@
 <header>
 <h1 class="title">常用脚本</h1>
 </header>
-<div id="outline-container-org83a435d" class="outline-2">
-<h2 id="org83a435d">批量删除 Pypi 包</h2>
-<div class="outline-text-2" id="text-org83a435d">
+<div id="outline-container-orgfc23623" class="outline-2">
+<h2 id="orgfc23623">批量删除 Pypi 包</h2>
+<div class="outline-text-2" id="text-orgfc23623">
 <div class="org-src-container">
 <pre class="src src-sh">pip freeze | grep SOMETHING | xargs pip uninstall -y
 <span style="color: #706565;"># </span><span style="color: #857575;">https://stackoverflow.com/a/9406259</span>
@@ -212,9 +212,9 @@
 </div>
 </div>
 
-<div id="outline-container-org02d4850" class="outline-2">
-<h2 id="org02d4850">批量删除 Pacman 包</h2>
-<div class="outline-text-2" id="text-org02d4850">
+<div id="outline-container-orge1d7401" class="outline-2">
+<h2 id="orge1d7401">批量删除 Pacman 包</h2>
+<div class="outline-text-2" id="text-orge1d7401">
 <div class="org-src-container">
 <pre class="src src-sh">sudo pacman -Rs $(pacman -Qq | grep some_words)
 <span style="color: #706565;"># </span><span style="color: #857575;">https://bbs.archlinux.org/viewtopic.php?pid=1533162#p1533162</span>
