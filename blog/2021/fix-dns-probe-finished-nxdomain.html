@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html lang="zh">
 <head>
-<!-- 2022-02-06 Sun 09:00 -->
+<!-- 2022-02-06 Sun 09:08 -->
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>解决 DNS_PROBE_FINISHED_NXDOMAIN</title>
@@ -190,7 +190,6 @@
   .org-svg { width: 90%; }
   /*]]>*/-->
 </style>
-<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin><link href="https://fonts.googleapis.com/css2?family=Noto+Sans+SC&display=swap" rel="stylesheet">
 <link rel="stylesheet" href="/theme/normalize.css"/>
 <link rel="stylesheet" href="/theme/site.css"/>
 <script defer src='https://static.cloudflareinsights.com/beacon.min.js' data-cf-beacon='{"token": "d5b841b503ed4d1b8fad459b84d1cc2f"}'></script>
@@ -237,7 +236,7 @@ domain，域名不存在。因为，提示的意思是：DNS
 <div id="outline-container-释放并更新-ip-地址" class="outline-2">
 <h2 id="释放并更新-ip-地址">释放并更新 IP 地址</h2>
 <div class="outline-text-2" id="text-释放并更新-ip-地址">
-<pre class="example" id="org5c50381">
+<pre class="example" id="org6cdbe44">
 sudo dhclient -r # 释放
 sudo dhclient # 更新
 </pre>
@@ -253,7 +252,7 @@ sudo dhclient # 更新
 我又执行了一遍代码片段的内容：
 </p>
 
-<pre class="example" id="orgfcd1567">
+<pre class="example" id="org97a9c19">
 $ sudo dhclient -r
 Killed old client process
 $ sudo dhclient
@@ -268,7 +267,7 @@ OK，更新 IP 没有输出，说明正常执行。
 <div id="outline-container-重启-dns-客户端服务" class="outline-2">
 <h2 id="重启-dns-客户端服务">重启 DNS 客户端服务</h2>
 <div class="outline-text-2" id="text-重启-dns-客户端服务">
-<pre class="example" id="org6168383">
+<pre class="example" id="org0816a81">
 sudo apt install bind9
 sudo apt install dnsutils
 sudo vim /etc/bind/named.conf.options # add nameservers:8.8.8.8;8.8.4.4;1.1.1.1 to forwarders
@@ -292,7 +291,7 @@ Ubuntu20.04 预装的 netplan
 软件。我使用后者，因为它在命令行操作，很方便。
 </p>
 
-<pre class="example" id="org563a702">
+<pre class="example" id="orgb2506ff">
 $ ls -a /etc/netplan
 .  ..  01-network-manager-all.yaml
 </pre>
@@ -301,7 +300,7 @@ $ ls -a /etc/netplan
 查看 01-network-manager-all.yaml 文件，发现还没有进行任何配置：
 </p>
 
-<pre class="example" id="org699a072">
+<pre class="example" id="org680d156">
 network:
   version: 2
   renderer: NetworkManager
@@ -318,7 +317,7 @@ DHCP），NetworkManager 就是 Ubuntu 网络管理的默认 GUI。
 文件：
 </p>
 
-<pre class="example" id="org2b15b37">
+<pre class="example" id="orga5a3f78">
 network:
   version: 2
   renderer: networkd
@@ -363,7 +362,7 @@ network:
 <div id="outline-container-检查本地-hosts-文件" class="outline-2">
 <h2 id="检查本地-hosts-文件">检查本地 hosts 文件</h2>
 <div class="outline-text-2" id="text-检查本地-hosts-文件">
-<pre class="example" id="orgf96c1a2">
+<pre class="example" id="org66575e7">
 vim /etc/hosts
 </pre>
 

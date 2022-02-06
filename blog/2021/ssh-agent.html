@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html lang="zh">
 <head>
-<!-- 2022-02-06 Sun 09:00 -->
+<!-- 2022-02-06 Sun 09:08 -->
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title><code>ssh-agent</code></title>
@@ -190,7 +190,6 @@
   .org-svg { width: 90%; }
   /*]]>*/-->
 </style>
-<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin><link href="https://fonts.googleapis.com/css2?family=Noto+Sans+SC&display=swap" rel="stylesheet">
 <link rel="stylesheet" href="/theme/normalize.css"/>
 <link rel="stylesheet" href="/theme/site.css"/>
 <script defer src='https://static.cloudflareinsights.com/beacon.min.js' data-cf-beacon='{"token": "d5b841b503ed4d1b8fad459b84d1cc2f"}'></script>
@@ -204,9 +203,9 @@
 <a href="https://www.ssh.com/academy/ssh/agent">https://www.ssh.com/academy/ssh/agent</a>
 </p>
 
-<div id="outline-container-org75b5f43" class="outline-2">
-<h2 id="org75b5f43">什么是 ssh-agent？</h2>
-<div class="outline-text-2" id="text-org75b5f43">
+<div id="outline-container-org7414227" class="outline-2">
+<h2 id="org7414227">什么是 ssh-agent？</h2>
+<div class="outline-text-2" id="text-org7414227">
 <p>
 <code>ssh-agent</code> 是一个帮助程序，帮助记录用户们的身份密钥和对应的密匙。记录之后，用户便能够登陆对应服务器，而不需要重复输入密码或密匙。这是单点登陆（SSO，single-sign-on）的一种实现方式。
 </p>
@@ -217,18 +216,18 @@ SSH agent 被用于 SSH 公钥验证。它使用 SSH 密钥进行身份验证。
 </div>
 </div>
 
-<div id="outline-container-org2b2affd" class="outline-2">
-<h2 id="org2b2affd">启动 <code>ssh-agent</code></h2>
-<div class="outline-text-2" id="text-org2b2affd">
+<div id="outline-container-org9dac04a" class="outline-2">
+<h2 id="org9dac04a">启动 <code>ssh-agent</code></h2>
+<div class="outline-text-2" id="text-org9dac04a">
 <p>
 在大多数 Linux 系统中， <code>ssh-agent</code> 是自启动的。如果未启动的话可以使用 <code>eval `ssh-agent`</code> 启动。为了允许通过密钥登录，需要开启公钥授权。这在 OpenSSH 中是默认开启的。由位于 <code>/etc/ssh/sshd_config</code> 文件中的 <code>PubkeyAuthentication</code> 选项确定。
 </p>
 </div>
 </div>
 
-<div id="outline-container-orgc44ba1a" class="outline-2">
-<h2 id="orgc44ba1a">为 Agent 添加 SSH 密钥</h2>
-<div class="outline-text-2" id="text-orgc44ba1a">
+<div id="outline-container-org00a759d" class="outline-2">
+<h2 id="org00a759d">为 Agent 添加 SSH 密钥</h2>
+<div class="outline-text-2" id="text-org00a759d">
 <div class="org-src-container">
 <pre class="src src-sh">ssh-add ~/.ssh/id_rsa
 ssh-add -l <span style="color: #706565;"># </span><span style="color: #857575;">list added keys</span>
@@ -237,17 +236,17 @@ ssh-add -l <span style="color: #706565;"># </span><span style="color: #857575;">
 </div>
 </div>
 
-<div id="outline-container-orgc3ece7e" class="outline-2">
-<h2 id="orgc3ece7e">转发 SSH Agent</h2>
+<div id="outline-container-orgb654de9" class="outline-2">
+<h2 id="orgb654de9">转发 SSH Agent</h2>
 </div>
 
-<div id="outline-container-org10f2664" class="outline-2">
-<h2 id="org10f2664"><code>ssh-agent</code> 命令</h2>
+<div id="outline-container-org06aecf2" class="outline-2">
+<h2 id="org06aecf2"><code>ssh-agent</code> 命令</h2>
 </div>
 
-<div id="outline-container-orgbc9f01a" class="outline-2">
-<h2 id="orgbc9f01a">延伸阅读</h2>
-<div class="outline-text-2" id="text-orgbc9f01a">
+<div id="outline-container-org46ed036" class="outline-2">
+<h2 id="org46ed036">延伸阅读</h2>
+<div class="outline-text-2" id="text-org46ed036">
 <ul class="org-ul">
 <li><a href="https://www.ssh.com/academy/iam/ssh-key-management">SSH Key Management</a></li>
 </ul>

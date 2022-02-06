@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html lang="zh">
 <head>
-<!-- 2022-02-06 Sun 09:00 -->
+<!-- 2022-02-06 Sun 09:08 -->
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>Nginx 初次使用</title>
@@ -190,7 +190,6 @@
   .org-svg { width: 90%; }
   /*]]>*/-->
 </style>
-<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin><link href="https://fonts.googleapis.com/css2?family=Noto+Sans+SC&display=swap" rel="stylesheet">
 <link rel="stylesheet" href="/theme/normalize.css"/>
 <link rel="stylesheet" href="/theme/site.css"/>
 <script defer src='https://static.cloudflareinsights.com/beacon.min.js' data-cf-beacon='{"token": "d5b841b503ed4d1b8fad459b84d1cc2f"}'></script>
@@ -201,9 +200,9 @@
 <header>
 <h1 class="title">Nginx 初次使用</h1>
 </header>
-<div id="outline-container-orgbfba950" class="outline-2">
-<h2 id="orgbfba950">下载</h2>
-<div class="outline-text-2" id="text-orgbfba950">
+<div id="outline-container-org4972d16" class="outline-2">
+<h2 id="org4972d16">下载</h2>
+<div class="outline-text-2" id="text-org4972d16">
 <p>
 我使用 Arch Linux
 </p>
@@ -215,9 +214,9 @@
 </div>
 </div>
 
-<div id="outline-container-org2a7b12b" class="outline-2">
-<h2 id="org2a7b12b">初学者指南</h2>
-<div class="outline-text-2" id="text-org2a7b12b">
+<div id="outline-container-org9ec6b14" class="outline-2">
+<h2 id="org9ec6b14">初学者指南</h2>
+<div class="outline-text-2" id="text-org9ec6b14">
 <p>
 <a href="http://nginx.org/en/docs/beginners_guide.html">http://nginx.org/en/docs/beginners_guide.html</a>
 </p>
@@ -237,9 +236,9 @@ Nginx 的计算机是代理服务器）</li>
 </ul>
 </div>
 
-<div id="outline-container-org6c233ef" class="outline-3">
-<h3 id="org6c233ef">打开关闭 Nginx，重新加载配置</h3>
-<div class="outline-text-3" id="text-org6c233ef">
+<div id="outline-container-orgb741d30" class="outline-3">
+<h3 id="orgb741d30">打开关闭 Nginx，重新加载配置</h3>
+<div class="outline-text-3" id="text-orgb741d30">
 <div class="org-src-container">
 <pre class="src src-sh">sudo nginx <span style="color: #706565;"># </span><span style="color: #857575;">start</span>
 sudo nginx stop <span style="color: #706565;"># </span><span style="color: #857575;">fast shutdown</span>
@@ -267,9 +266,9 @@ ps -ax | grep nginx
 </div>
 </div>
 
-<div id="outline-container-org45440f9" class="outline-3">
-<h3 id="org45440f9">设置 Nginx 为静态内容提供服务</h3>
-<div class="outline-text-3" id="text-org45440f9">
+<div id="outline-container-orgeb109d1" class="outline-3">
+<h3 id="orgeb109d1">设置 Nginx 为静态内容提供服务</h3>
+<div class="outline-text-3" id="text-orgeb109d1">
 <div class="org-src-container">
 <pre class="src src-conf"><span style="color: #706565;"># </span><span style="color: #857575;">edit /etc/nginx/nginx.conf</span>
 <span style="color: #ad8572;">http</span> {
@@ -289,9 +288,9 @@ ps -ax | grep nginx
 </div>
 </div>
 
-<div id="outline-container-org9d4a593" class="outline-3">
-<h3 id="org9d4a593">将 Nginx 配置为代理服务器</h3>
-<div class="outline-text-3" id="text-org9d4a593">
+<div id="outline-container-org1028570" class="outline-3">
+<h3 id="org1028570">将 Nginx 配置为代理服务器</h3>
+<div class="outline-text-3" id="text-org1028570">
 <p>
 将它与 FastCGI 应用程序连接
 </p>
@@ -314,13 +313,13 @@ ps -ax | grep nginx
 </div>
 </div>
 
-<div id="outline-container-orga08d1bc" class="outline-2">
-<h2 id="orga08d1bc">使用中的报错</h2>
-<div class="outline-text-2" id="text-orga08d1bc">
+<div id="outline-container-org1121534" class="outline-2">
+<h2 id="org1121534">使用中的报错</h2>
+<div class="outline-text-2" id="text-org1121534">
 </div>
-<div id="outline-container-org2a7ab64" class="outline-3">
-<h3 id="org2a7ab64">could not build optimal types_hash</h3>
-<div class="outline-text-3" id="text-org2a7ab64">
+<div id="outline-container-org1c7c37d" class="outline-3">
+<h3 id="org1c7c37d">could not build optimal types_hash</h3>
+<div class="outline-text-3" id="text-org1c7c37d">
 <div class="org-src-container">
 <pre class="src src-sh">sudo nginx
 2021/09/19 08:55:04 [warn] 33400#33400: could not build optimal types_hash, you should increase either types_hash_max_size: 1024 or types_hash_bucket_size: 64; ignoring types_hash_bucket_size
@@ -341,9 +340,9 @@ Solution<sup><a id="fnr.1" class="footref" href="#fn.1">1</a></sup>:
 </div>
 </div>
 
-<div id="outline-container-org5933ba1" class="outline-3">
-<h3 id="org5933ba1">Address already in use</h3>
-<div class="outline-text-3" id="text-org5933ba1">
+<div id="outline-container-org2a07acd" class="outline-3">
+<h3 id="org2a07acd">Address already in use</h3>
+<div class="outline-text-3" id="text-org2a07acd">
 <div class="org-src-container">
 <pre class="src src-sh">[emerg] 34338#34338: bind() to 0.0.0.0:80 failed (98: Address already<span style="color: #91a0b3;"> in</span> use)
 </pre>
