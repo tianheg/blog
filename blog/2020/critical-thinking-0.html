@@ -1,199 +1,16 @@
 <!DOCTYPE html>
 <html lang="zh">
 <head>
-<!-- 2022-02-06 Sun 14:00 -->
+<!-- 2022-02-06 Sun 15:53 -->
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>批判性思维：定义及价值</title>
 <meta name="generator" content="Org mode">
-<style type="text/css">
- <!--/*--><![CDATA[/*><!--*/
-  .title  { text-align: center;
-             margin-bottom: .2em; }
-  .subtitle { text-align: center;
-              font-size: medium;
-              font-weight: bold;
-              margin-top:0; }
-  .todo   { font-family: monospace; color: red; }
-  .done   { font-family: monospace; color: green; }
-  .priority { font-family: monospace; color: orange; }
-  .tag    { background-color: #eee; font-family: monospace;
-            padding: 2px; font-size: 80%; font-weight: normal; }
-  .timestamp { color: #bebebe; }
-  .timestamp-kwd { color: #5f9ea0; }
-  .org-right  { margin-left: auto; margin-right: 0px;  text-align: right; }
-  .org-left   { margin-left: 0px;  margin-right: auto; text-align: left; }
-  .org-center { margin-left: auto; margin-right: auto; text-align: center; }
-  .underline { text-decoration: underline; }
-  #postamble p, #preamble p { font-size: 90%; margin: .2em; }
-  p.verse { margin-left: 3%; }
-  pre {
-    border: 1px solid #ccc;
-    box-shadow: 3px 3px 3px #eee;
-    padding: 8pt;
-    font-family: monospace;
-    overflow: auto;
-    margin: 1.2em;
-  }
-  pre.src {
-    position: relative;
-    overflow: auto;
-    padding-top: 1.2em;
-  }
-  pre.src:before {
-    display: none;
-    position: absolute;
-    background-color: white;
-    top: -10px;
-    right: 10px;
-    padding: 3px;
-    border: 1px solid black;
-  }
-  pre.src:hover:before { display: inline; margin-top: 14px;}
-  /* Languages per Org manual */
-  pre.src-asymptote:before { content: 'Asymptote'; }
-  pre.src-awk:before { content: 'Awk'; }
-  pre.src-C:before { content: 'C'; }
-  /* pre.src-C++ doesn't work in CSS */
-  pre.src-clojure:before { content: 'Clojure'; }
-  pre.src-css:before { content: 'CSS'; }
-  pre.src-D:before { content: 'D'; }
-  pre.src-ditaa:before { content: 'ditaa'; }
-  pre.src-dot:before { content: 'Graphviz'; }
-  pre.src-calc:before { content: 'Emacs Calc'; }
-  pre.src-emacs-lisp:before { content: 'Emacs Lisp'; }
-  pre.src-fortran:before { content: 'Fortran'; }
-  pre.src-gnuplot:before { content: 'gnuplot'; }
-  pre.src-haskell:before { content: 'Haskell'; }
-  pre.src-hledger:before { content: 'hledger'; }
-  pre.src-java:before { content: 'Java'; }
-  pre.src-js:before { content: 'Javascript'; }
-  pre.src-latex:before { content: 'LaTeX'; }
-  pre.src-ledger:before { content: 'Ledger'; }
-  pre.src-lisp:before { content: 'Lisp'; }
-  pre.src-lilypond:before { content: 'Lilypond'; }
-  pre.src-lua:before { content: 'Lua'; }
-  pre.src-matlab:before { content: 'MATLAB'; }
-  pre.src-mscgen:before { content: 'Mscgen'; }
-  pre.src-ocaml:before { content: 'Objective Caml'; }
-  pre.src-octave:before { content: 'Octave'; }
-  pre.src-org:before { content: 'Org mode'; }
-  pre.src-oz:before { content: 'OZ'; }
-  pre.src-plantuml:before { content: 'Plantuml'; }
-  pre.src-processing:before { content: 'Processing.js'; }
-  pre.src-python:before { content: 'Python'; }
-  pre.src-R:before { content: 'R'; }
-  pre.src-ruby:before { content: 'Ruby'; }
-  pre.src-sass:before { content: 'Sass'; }
-  pre.src-scheme:before { content: 'Scheme'; }
-  pre.src-screen:before { content: 'Gnu Screen'; }
-  pre.src-sed:before { content: 'Sed'; }
-  pre.src-sh:before { content: 'shell'; }
-  pre.src-sql:before { content: 'SQL'; }
-  pre.src-sqlite:before { content: 'SQLite'; }
-  /* additional languages in org.el's org-babel-load-languages alist */
-  pre.src-forth:before { content: 'Forth'; }
-  pre.src-io:before { content: 'IO'; }
-  pre.src-J:before { content: 'J'; }
-  pre.src-makefile:before { content: 'Makefile'; }
-  pre.src-maxima:before { content: 'Maxima'; }
-  pre.src-perl:before { content: 'Perl'; }
-  pre.src-picolisp:before { content: 'Pico Lisp'; }
-  pre.src-scala:before { content: 'Scala'; }
-  pre.src-shell:before { content: 'Shell Script'; }
-  pre.src-ebnf2ps:before { content: 'ebfn2ps'; }
-  /* additional language identifiers per "defun org-babel-execute"
-       in ob-*.el */
-  pre.src-cpp:before  { content: 'C++'; }
-  pre.src-abc:before  { content: 'ABC'; }
-  pre.src-coq:before  { content: 'Coq'; }
-  pre.src-groovy:before  { content: 'Groovy'; }
-  /* additional language identifiers from org-babel-shell-names in
-     ob-shell.el: ob-shell is the only babel language using a lambda to put
-     the execution function name together. */
-  pre.src-bash:before  { content: 'bash'; }
-  pre.src-csh:before  { content: 'csh'; }
-  pre.src-ash:before  { content: 'ash'; }
-  pre.src-dash:before  { content: 'dash'; }
-  pre.src-ksh:before  { content: 'ksh'; }
-  pre.src-mksh:before  { content: 'mksh'; }
-  pre.src-posh:before  { content: 'posh'; }
-  /* Additional Emacs modes also supported by the LaTeX listings package */
-  pre.src-ada:before { content: 'Ada'; }
-  pre.src-asm:before { content: 'Assembler'; }
-  pre.src-caml:before { content: 'Caml'; }
-  pre.src-delphi:before { content: 'Delphi'; }
-  pre.src-html:before { content: 'HTML'; }
-  pre.src-idl:before { content: 'IDL'; }
-  pre.src-mercury:before { content: 'Mercury'; }
-  pre.src-metapost:before { content: 'MetaPost'; }
-  pre.src-modula-2:before { content: 'Modula-2'; }
-  pre.src-pascal:before { content: 'Pascal'; }
-  pre.src-ps:before { content: 'PostScript'; }
-  pre.src-prolog:before { content: 'Prolog'; }
-  pre.src-simula:before { content: 'Simula'; }
-  pre.src-tcl:before { content: 'tcl'; }
-  pre.src-tex:before { content: 'TeX'; }
-  pre.src-plain-tex:before { content: 'Plain TeX'; }
-  pre.src-verilog:before { content: 'Verilog'; }
-  pre.src-vhdl:before { content: 'VHDL'; }
-  pre.src-xml:before { content: 'XML'; }
-  pre.src-nxml:before { content: 'XML'; }
-  /* add a generic configuration mode; LaTeX export needs an additional
-     (add-to-list 'org-latex-listings-langs '(conf " ")) in .emacs */
-  pre.src-conf:before { content: 'Configuration File'; }
-
-  table { border-collapse:collapse; }
-  caption.t-above { caption-side: top; }
-  caption.t-bottom { caption-side: bottom; }
-  td, th { vertical-align:top;  }
-  th.org-right  { text-align: center;  }
-  th.org-left   { text-align: center;   }
-  th.org-center { text-align: center; }
-  td.org-right  { text-align: right;  }
-  td.org-left   { text-align: left;   }
-  td.org-center { text-align: center; }
-  dt { font-weight: bold; }
-  .footpara { display: inline; }
-  .footdef  { margin-bottom: 1em; }
-  .figure { padding: 1em; }
-  .figure p { text-align: center; }
-  .equation-container {
-    display: table;
-    text-align: center;
-    width: 100%;
-  }
-  .equation {
-    vertical-align: middle;
-  }
-  .equation-label {
-    display: table-cell;
-    text-align: right;
-    vertical-align: middle;
-  }
-  .inlinetask {
-    padding: 10px;
-    border: 2px solid gray;
-    margin: 10px;
-    background: #ffffcc;
-  }
-  #org-div-home-and-up
-   { text-align: right; font-size: 70%; white-space: nowrap; }
-  textarea { overflow-x: auto; }
-  .linenr { font-size: smaller }
-  .code-highlighted { background-color: #ffff00; }
-  .org-info-js_info-navigation { border-style: none; }
-  #org-info-js_console-label
-    { font-size: 10px; font-weight: bold; white-space: nowrap; }
-  .org-info-js_search-highlight
-    { background-color: #ffff00; color: #000000; font-weight: bold; }
-  .org-svg { width: 90%; }
-  /*]]>*/-->
-</style>
-<link rel="stylesheet" href="/theme/normalize.css"/>
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/highlightjs/cdn-release@11.4.0/build/styles/base16/dracula.min.css">
+<script src="https://cdn.jsdelivr.net/gh/highlightjs/cdn-release@11.4.0/build/highlight.min.js"></script>
 <link rel="stylesheet" href="/theme/site.css"/>
 <script defer src='https://static.cloudflareinsights.com/beacon.min.js' data-cf-beacon='{"token": "d5b841b503ed4d1b8fad459b84d1cc2f"}'></script>
-<script defer src="/theme/link.js"></script>
+<script defer src="/theme/main.js"></script>
 </head>
 <body>
 <div id="content">
@@ -207,9 +24,9 @@
 大学是职业学习者练习基本功的地方。比如语言基本功，思维基本功，做人的基本功，以及你所学专业的基本功。基本功练得有多扎实，将来自己发展的潜力就有多大。
 </p>
 
-<div id="outline-container-orge219d9a" class="outline-2">
-<h2 id="orge219d9a">第一讲 批判性思维定义</h2>
-<div class="outline-text-2" id="text-orge219d9a">
+<div id="outline-container-orgb41821a" class="outline-2">
+<h2 id="orgb41821a">第一讲 批判性思维定义</h2>
+<div class="outline-text-2" id="text-orgb41821a">
 <p>
 批评性思维是面对相信什么或做什么的决断而进行的言之有据的反省思维。
 </p>
@@ -223,15 +40,15 @@
 </p>
 </div>
 
-<div id="outline-container-orgaa86eb6" class="outline-3">
-<h3 id="orgaa86eb6">批判</h3>
-<div class="outline-text-3" id="text-orgaa86eb6">
+<div id="outline-container-orgda11591" class="outline-3">
+<h3 id="orgda11591">批判</h3>
+<div class="outline-text-3" id="text-orgda11591">
 <p>
 批判的三个要素：对象，标准，目的
 </p>
 
 
-<figure id="org953309a">
+<figure id="orgdcc711d">
 <img src="../../images/critical-thinking-0-pipan.png" alt="critical-thinking-0-pipan.png">
 
 </figure>
@@ -281,9 +98,9 @@
 </div>
 </div>
 
-<div id="outline-container-org6d8d85a" class="outline-3">
-<h3 id="org6d8d85a">反省思维（也可称为复盘式思维）</h3>
-<div class="outline-text-3" id="text-org6d8d85a">
+<div id="outline-container-org18a159f" class="outline-3">
+<h3 id="org18a159f">反省思维（也可称为复盘式思维）</h3>
+<div class="outline-text-3" id="text-org18a159f">
 <p>
 思维的几个层次：
 </p>
@@ -316,9 +133,9 @@
 </div>
 </div>
 
-<div id="outline-container-org19232a9" class="outline-3">
-<h3 id="org19232a9">自知之明</h3>
-<div class="outline-text-3" id="text-org19232a9">
+<div id="outline-container-orga37af7f" class="outline-3">
+<h3 id="orga37af7f">自知之明</h3>
+<div class="outline-text-3" id="text-orga37af7f">
 <p>
 理解：
 </p>
@@ -449,9 +266,9 @@ Wikipedia:
 </div>
 </div>
 
-<div id="outline-container-org84633a3" class="outline-3">
-<h3 id="org84633a3">总结与回顾</h3>
-<div class="outline-text-3" id="text-org84633a3">
+<div id="outline-container-orgc891c26" class="outline-3">
+<h3 id="orgc891c26">总结与回顾</h3>
+<div class="outline-text-3" id="text-orgc891c26">
 <p>
 批评性思维是面对相信什么或做什么的决断而进行的言之有据的反省思维。
 </p>
@@ -482,9 +299,9 @@ W. Paul）
 </div>
 </div>
 
-<div id="outline-container-org006afc8" class="outline-2">
-<h2 id="org006afc8">批判性思维的价值</h2>
-<div class="outline-text-2" id="text-org006afc8">
+<div id="outline-container-org62e926f" class="outline-2">
+<h2 id="org62e926f">批判性思维的价值</h2>
+<div class="outline-text-2" id="text-org62e926f">
 <blockquote>
 <p>
 应该把独立思考和综合判断能力放在首位，而不是获得特定知识的能力。-&#x2013;&#x2014;爱因斯坦
@@ -496,9 +313,9 @@ W. Paul）
 </p>
 </div>
 
-<div id="outline-container-orgdebe9f2" class="outline-3">
-<h3 id="orgdebe9f2">批判性思维的人生价值</h3>
-<div class="outline-text-3" id="text-orgdebe9f2">
+<div id="outline-container-org76e35fe" class="outline-3">
+<h3 id="org76e35fe">批判性思维的人生价值</h3>
+<div class="outline-text-3" id="text-org76e35fe">
 <p>
 思考三个问题：
 </p>
@@ -533,9 +350,9 @@ W. Paul）
 </div>
 </div>
 
-<div id="outline-container-orgf04b47d" class="outline-3">
-<h3 id="orgf04b47d">批判性思维的社会价值</h3>
-<div class="outline-text-3" id="text-orgf04b47d">
+<div id="outline-container-org65afc1f" class="outline-3">
+<h3 id="org65afc1f">批判性思维的社会价值</h3>
+<div class="outline-text-3" id="text-org65afc1f">
 <blockquote>
 <p>
 批判性的思考习惯，如果它应用在社会中变得寻常的话，将遍及社会中所有的风俗，因为它是解决生活问题的方法。-&#x2013;&#x2014;人类学和社会学的鼻祖，萨姆纳（W.
@@ -549,9 +366,9 @@ G. Sumner），社会习俗，1906.
 </div>
 </div>
 
-<div id="outline-container-org44c212e" class="outline-3">
-<h3 id="org44c212e">批判性思维的教育价值</h3>
-<div class="outline-text-3" id="text-org44c212e">
+<div id="outline-container-orgbd07306" class="outline-3">
+<h3 id="orgbd07306">批判性思维的教育价值</h3>
+<div class="outline-text-3" id="text-orgbd07306">
 <blockquote>
 <p>
 只有对批判性思维能力进行教育培养，才能真正称得上是培养合格市民的教育。-&#x2013;&#x2014;人类学和社会学的鼻祖，萨姆纳（W.
@@ -567,9 +384,9 @@ G. Sumner），社会习俗，1906.
 </div>
 </div>
 
-<div id="outline-container-org9d8f83b" class="outline-2">
-<h2 id="org9d8f83b">总结与回顾</h2>
-<div class="outline-text-2" id="text-org9d8f83b">
+<div id="outline-container-org1bd1c8e" class="outline-2">
+<h2 id="org1bd1c8e">总结与回顾</h2>
+<div class="outline-text-2" id="text-org1bd1c8e">
 <blockquote>
 <p>
 批判能力是教育和训练的产物。它是一种思维习惯和力量，是人们获得幸福的首要条件，是无论男女都应接受的训练。只有它才能保证我们不出现*错觉、欺骗、迷信*以及对自己和所处环境的*误解*。-&#x2013;&#x2014;萨姆纳（W.

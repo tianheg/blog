@@ -1,5 +1,9 @@
 # 博客改变记录
 
+## 2022-02-06
+
+- 借助 highlight.js 为代码添加高亮
+
 ## 2021-11-19
 
 - 使用 [Emacs Org-mode](https://github.com/dirtysalt/dirtysalt.github.io)

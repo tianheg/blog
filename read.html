@@ -1,196 +1,13 @@
 <!DOCTYPE html>
 <html lang="zh">
 <head>
-<!-- 2022-02-06 Sun 14:00 -->
+<!-- 2022-02-06 Sun 15:53 -->
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>读过的书</title>
 <meta name="generator" content="Org mode">
-<style type="text/css">
- <!--/*--><![CDATA[/*><!--*/
-  .title  { text-align: center;
-             margin-bottom: .2em; }
-  .subtitle { text-align: center;
-              font-size: medium;
-              font-weight: bold;
-              margin-top:0; }
-  .todo   { font-family: monospace; color: red; }
-  .done   { font-family: monospace; color: green; }
-  .priority { font-family: monospace; color: orange; }
-  .tag    { background-color: #eee; font-family: monospace;
-            padding: 2px; font-size: 80%; font-weight: normal; }
-  .timestamp { color: #bebebe; }
-  .timestamp-kwd { color: #5f9ea0; }
-  .org-right  { margin-left: auto; margin-right: 0px;  text-align: right; }
-  .org-left   { margin-left: 0px;  margin-right: auto; text-align: left; }
-  .org-center { margin-left: auto; margin-right: auto; text-align: center; }
-  .underline { text-decoration: underline; }
-  #postamble p, #preamble p { font-size: 90%; margin: .2em; }
-  p.verse { margin-left: 3%; }
-  pre {
-    border: 1px solid #ccc;
-    box-shadow: 3px 3px 3px #eee;
-    padding: 8pt;
-    font-family: monospace;
-    overflow: auto;
-    margin: 1.2em;
-  }
-  pre.src {
-    position: relative;
-    overflow: auto;
-    padding-top: 1.2em;
-  }
-  pre.src:before {
-    display: none;
-    position: absolute;
-    background-color: white;
-    top: -10px;
-    right: 10px;
-    padding: 3px;
-    border: 1px solid black;
-  }
-  pre.src:hover:before { display: inline; margin-top: 14px;}
-  /* Languages per Org manual */
-  pre.src-asymptote:before { content: 'Asymptote'; }
-  pre.src-awk:before { content: 'Awk'; }
-  pre.src-C:before { content: 'C'; }
-  /* pre.src-C++ doesn't work in CSS */
-  pre.src-clojure:before { content: 'Clojure'; }
-  pre.src-css:before { content: 'CSS'; }
-  pre.src-D:before { content: 'D'; }
-  pre.src-ditaa:before { content: 'ditaa'; }
-  pre.src-dot:before { content: 'Graphviz'; }
-  pre.src-calc:before { content: 'Emacs Calc'; }
-  pre.src-emacs-lisp:before { content: 'Emacs Lisp'; }
-  pre.src-fortran:before { content: 'Fortran'; }
-  pre.src-gnuplot:before { content: 'gnuplot'; }
-  pre.src-haskell:before { content: 'Haskell'; }
-  pre.src-hledger:before { content: 'hledger'; }
-  pre.src-java:before { content: 'Java'; }
-  pre.src-js:before { content: 'Javascript'; }
-  pre.src-latex:before { content: 'LaTeX'; }
-  pre.src-ledger:before { content: 'Ledger'; }
-  pre.src-lisp:before { content: 'Lisp'; }
-  pre.src-lilypond:before { content: 'Lilypond'; }
-  pre.src-lua:before { content: 'Lua'; }
-  pre.src-matlab:before { content: 'MATLAB'; }
-  pre.src-mscgen:before { content: 'Mscgen'; }
-  pre.src-ocaml:before { content: 'Objective Caml'; }
-  pre.src-octave:before { content: 'Octave'; }
-  pre.src-org:before { content: 'Org mode'; }
-  pre.src-oz:before { content: 'OZ'; }
-  pre.src-plantuml:before { content: 'Plantuml'; }
-  pre.src-processing:before { content: 'Processing.js'; }
-  pre.src-python:before { content: 'Python'; }
-  pre.src-R:before { content: 'R'; }
-  pre.src-ruby:before { content: 'Ruby'; }
-  pre.src-sass:before { content: 'Sass'; }
-  pre.src-scheme:before { content: 'Scheme'; }
-  pre.src-screen:before { content: 'Gnu Screen'; }
-  pre.src-sed:before { content: 'Sed'; }
-  pre.src-sh:before { content: 'shell'; }
-  pre.src-sql:before { content: 'SQL'; }
-  pre.src-sqlite:before { content: 'SQLite'; }
-  /* additional languages in org.el's org-babel-load-languages alist */
-  pre.src-forth:before { content: 'Forth'; }
-  pre.src-io:before { content: 'IO'; }
-  pre.src-J:before { content: 'J'; }
-  pre.src-makefile:before { content: 'Makefile'; }
-  pre.src-maxima:before { content: 'Maxima'; }
-  pre.src-perl:before { content: 'Perl'; }
-  pre.src-picolisp:before { content: 'Pico Lisp'; }
-  pre.src-scala:before { content: 'Scala'; }
-  pre.src-shell:before { content: 'Shell Script'; }
-  pre.src-ebnf2ps:before { content: 'ebfn2ps'; }
-  /* additional language identifiers per "defun org-babel-execute"
-       in ob-*.el */
-  pre.src-cpp:before  { content: 'C++'; }
-  pre.src-abc:before  { content: 'ABC'; }
-  pre.src-coq:before  { content: 'Coq'; }
-  pre.src-groovy:before  { content: 'Groovy'; }
-  /* additional language identifiers from org-babel-shell-names in
-     ob-shell.el: ob-shell is the only babel language using a lambda to put
-     the execution function name together. */
-  pre.src-bash:before  { content: 'bash'; }
-  pre.src-csh:before  { content: 'csh'; }
-  pre.src-ash:before  { content: 'ash'; }
-  pre.src-dash:before  { content: 'dash'; }
-  pre.src-ksh:before  { content: 'ksh'; }
-  pre.src-mksh:before  { content: 'mksh'; }
-  pre.src-posh:before  { content: 'posh'; }
-  /* Additional Emacs modes also supported by the LaTeX listings package */
-  pre.src-ada:before { content: 'Ada'; }
-  pre.src-asm:before { content: 'Assembler'; }
-  pre.src-caml:before { content: 'Caml'; }
-  pre.src-delphi:before { content: 'Delphi'; }
-  pre.src-html:before { content: 'HTML'; }
-  pre.src-idl:before { content: 'IDL'; }
-  pre.src-mercury:before { content: 'Mercury'; }
-  pre.src-metapost:before { content: 'MetaPost'; }
-  pre.src-modula-2:before { content: 'Modula-2'; }
-  pre.src-pascal:before { content: 'Pascal'; }
-  pre.src-ps:before { content: 'PostScript'; }
-  pre.src-prolog:before { content: 'Prolog'; }
-  pre.src-simula:before { content: 'Simula'; }
-  pre.src-tcl:before { content: 'tcl'; }
-  pre.src-tex:before { content: 'TeX'; }
-  pre.src-plain-tex:before { content: 'Plain TeX'; }
-  pre.src-verilog:before { content: 'Verilog'; }
-  pre.src-vhdl:before { content: 'VHDL'; }
-  pre.src-xml:before { content: 'XML'; }
-  pre.src-nxml:before { content: 'XML'; }
-  /* add a generic configuration mode; LaTeX export needs an additional
-     (add-to-list 'org-latex-listings-langs '(conf " ")) in .emacs */
-  pre.src-conf:before { content: 'Configuration File'; }
-
-  table { border-collapse:collapse; }
-  caption.t-above { caption-side: top; }
-  caption.t-bottom { caption-side: bottom; }
-  td, th { vertical-align:top;  }
-  th.org-right  { text-align: center;  }
-  th.org-left   { text-align: center;   }
-  th.org-center { text-align: center; }
-  td.org-right  { text-align: right;  }
-  td.org-left   { text-align: left;   }
-  td.org-center { text-align: center; }
-  dt { font-weight: bold; }
-  .footpara { display: inline; }
-  .footdef  { margin-bottom: 1em; }
-  .figure { padding: 1em; }
-  .figure p { text-align: center; }
-  .equation-container {
-    display: table;
-    text-align: center;
-    width: 100%;
-  }
-  .equation {
-    vertical-align: middle;
-  }
-  .equation-label {
-    display: table-cell;
-    text-align: right;
-    vertical-align: middle;
-  }
-  .inlinetask {
-    padding: 10px;
-    border: 2px solid gray;
-    margin: 10px;
-    background: #ffffcc;
-  }
-  #org-div-home-and-up
-   { text-align: right; font-size: 70%; white-space: nowrap; }
-  textarea { overflow-x: auto; }
-  .linenr { font-size: smaller }
-  .code-highlighted { background-color: #ffff00; }
-  .org-info-js_info-navigation { border-style: none; }
-  #org-info-js_console-label
-    { font-size: 10px; font-weight: bold; white-space: nowrap; }
-  .org-info-js_search-highlight
-    { background-color: #ffff00; color: #000000; font-weight: bold; }
-  .org-svg { width: 90%; }
-  /*]]>*/-->
-</style>
-<link rel="stylesheet" href="/theme/normalize.css"/>
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/highlightjs/cdn-release@11.4.0/build/styles/base16/dracula.min.css">
+<script src="https://cdn.jsdelivr.net/gh/highlightjs/cdn-release@11.4.0/build/highlight.min.js"></script>
 <link rel="stylesheet" href="/theme/site.css"/>
 <script defer src='https://static.cloudflareinsights.com/beacon.min.js' data-cf-beacon='{"token": "d5b841b503ed4d1b8fad459b84d1cc2f"}'></script>
 <script defer src="/theme/link.js"></script>
@@ -203,39 +20,39 @@
 <h2>Table of Contents</h2>
 <div id="text-table-of-contents">
 <ul>
-<li><a href="#org7750ddf">1. 读书分类</a>
+<li><a href="#org2be7a47">1. 读书分类</a>
 <ul>
-<li><a href="#orgd1b90ba">1.1. 软件开发 + 计算机科学</a></li>
-<li><a href="#org9cf513a">1.2. 人物传记</a></li>
-<li><a href="#org84f903a">1.3. 社会科学</a></li>
-<li><a href="#org19707e8">1.4. 自然学科</a></li>
-<li><a href="#org7d18642">1.5. 自我成长</a></li>
-<li><a href="#org1d3793c">1.6. 文学创作</a></li>
+<li><a href="#org2541311">1.1. 软件开发 + 计算机科学</a></li>
+<li><a href="#org2f3adac">1.2. 人物传记</a></li>
+<li><a href="#org1771319">1.3. 社会科学</a></li>
+<li><a href="#org45d569b">1.4. 自然学科</a></li>
+<li><a href="#orgf44327e">1.5. 自我成长</a></li>
+<li><a href="#orgf7d4b49">1.6. 文学创作</a></li>
 </ul>
 </li>
-<li><a href="#org945e9cb">2. 年度阅读计划</a>
+<li><a href="#org89edc2f">2. 年度阅读计划</a>
 <ul>
-<li><a href="#org780766b">2.1. 2022</a></li>
+<li><a href="#orgbc0a8da">2.1. 2022</a></li>
 </ul>
 </li>
-<li><a href="#org1d906f0">3. 很好的资源</a>
+<li><a href="#org7fe1f1a">3. 很好的资源</a>
 <ul>
-<li><a href="#orgfb887ec">3.1. 外文书籍网站</a></li>
-<li><a href="#org579f087">3.2. 网上书店</a></li>
-<li><a href="#org5ff1d18">3.3. 找绝版书</a></li>
-<li><a href="#org04dc24d">3.4. 论文检索</a></li>
+<li><a href="#org5589196">3.1. 外文书籍网站</a></li>
+<li><a href="#orga49e2da">3.2. 网上书店</a></li>
+<li><a href="#org8de1ca3">3.3. 找绝版书</a></li>
+<li><a href="#orgd2e6efb">3.4. 论文检索</a></li>
 </ul>
 </li>
 </ul>
 </div>
 </nav>
 
-<div id="outline-container-org7750ddf" class="outline-2">
-<h2 id="org7750ddf"><span class="section-number-2">1</span> 读书分类</h2>
+<div id="outline-container-org2be7a47" class="outline-2">
+<h2 id="org2be7a47"><span class="section-number-2">1</span> 读书分类</h2>
 <div class="outline-text-2" id="text-1">
 </div>
-<div id="outline-container-orgd1b90ba" class="outline-3">
-<h3 id="orgd1b90ba"><span class="section-number-3">1.1</span> 软件开发 + 计算机科学</h3>
+<div id="outline-container-org2541311" class="outline-3">
+<h3 id="org2541311"><span class="section-number-3">1.1</span> 软件开发 + 计算机科学</h3>
 <div class="outline-text-3" id="text-1-1">
 <ul class="org-ul">
 <li><a href="blog/2021/definitive-guide-to-html5.html">HTML5 权威指南</a>，by Adam Freeman</li>
@@ -292,8 +109,8 @@
 </div>
 </div>
 
-<div id="outline-container-org9cf513a" class="outline-3">
-<h3 id="org9cf513a"><span class="section-number-3">1.2</span> 人物传记</h3>
+<div id="outline-container-org2f3adac" class="outline-3">
+<h3 id="org2f3adac"><span class="section-number-3">1.2</span> 人物传记</h3>
 <div class="outline-text-3" id="text-1-2">
 <ul class="org-ul">
 <li>二十世纪美国第一夫人</li>
@@ -305,8 +122,8 @@
 </div>
 </div>
 
-<div id="outline-container-org84f903a" class="outline-3">
-<h3 id="org84f903a"><span class="section-number-3">1.3</span> 社会科学</h3>
+<div id="outline-container-org1771319" class="outline-3">
+<h3 id="org1771319"><span class="section-number-3">1.3</span> 社会科学</h3>
 <div class="outline-text-3" id="text-1-3">
 <ul class="org-ul">
 <li>全球通史，by L. S. Stavrianos</li>
@@ -387,8 +204,8 @@
 </ul>
 </div>
 </div>
-<div id="outline-container-org19707e8" class="outline-3">
-<h3 id="org19707e8"><span class="section-number-3">1.4</span> 自然学科</h3>
+<div id="outline-container-org45d569b" class="outline-3">
+<h3 id="org45d569b"><span class="section-number-3">1.4</span> 自然学科</h3>
 <div class="outline-text-3" id="text-1-4">
 <ul class="org-ul">
 <li><a href="blog/2021/asimov-the-intelligent-mans-guide-to-science.html">阿西莫夫最新科学指南（上下册）</a> by 阿西莫夫</li>
@@ -403,8 +220,8 @@
 </div>
 </div>
 
-<div id="outline-container-org7d18642" class="outline-3">
-<h3 id="org7d18642"><span class="section-number-3">1.5</span> 自我成长</h3>
+<div id="outline-container-orgf44327e" class="outline-3">
+<h3 id="orgf44327e"><span class="section-number-3">1.5</span> 自我成长</h3>
 <div class="outline-text-3" id="text-1-5">
 <ul class="org-ul">
 <li><a href="blog/2020/everyone-can-use-english.html">人人都能用英语</a> by 李笑来</li>
@@ -431,8 +248,8 @@
 </div>
 </div>
 
-<div id="outline-container-org1d3793c" class="outline-3">
-<h3 id="org1d3793c"><span class="section-number-3">1.6</span> 文学创作</h3>
+<div id="outline-container-orgf7d4b49" class="outline-3">
+<h3 id="orgf7d4b49"><span class="section-number-3">1.6</span> 文学创作</h3>
 <div class="outline-text-3" id="text-1-6">
 <ul class="org-ul">
 <li><a href="blog/2021/luxun-zhaohuaxishi.html">朝花夕拾</a> by 鲁迅</li>
@@ -638,8 +455,8 @@
 </div>
 </div>
 
-<div id="outline-container-org945e9cb" class="outline-2">
-<h2 id="org945e9cb"><span class="section-number-2">2</span> 年度阅读计划</h2>
+<div id="outline-container-org89edc2f" class="outline-2">
+<h2 id="org89edc2f"><span class="section-number-2">2</span> 年度阅读计划</h2>
 <div class="outline-text-2" id="text-2">
 <p>
 ✅
@@ -656,8 +473,8 @@
 </ul>
 </div>
 
-<div id="outline-container-org780766b" class="outline-3">
-<h3 id="org780766b"><span class="section-number-3">2.1</span> 2022</h3>
+<div id="outline-container-orgbc0a8da" class="outline-3">
+<h3 id="orgbc0a8da"><span class="section-number-3">2.1</span> 2022</h3>
 <div class="outline-text-3" id="text-2-1">
 <ul class="org-ul">
 <li>哲学的故事</li>
@@ -675,8 +492,8 @@
 </div>
 </div>
 
-<div id="outline-container-org1d906f0" class="outline-2">
-<h2 id="org1d906f0"><span class="section-number-2">3</span> 很好的资源</h2>
+<div id="outline-container-org7fe1f1a" class="outline-2">
+<h2 id="org7fe1f1a"><span class="section-number-2">3</span> 很好的资源</h2>
 <div class="outline-text-2" id="text-3">
 <ol class="org-ol">
 <li><a href="https://ctext.org/zhs">中国哲学书电子化计划</a></li>
@@ -703,8 +520,8 @@
 </ol>
 </div>
 
-<div id="outline-container-orgfb887ec" class="outline-3">
-<h3 id="orgfb887ec"><span class="section-number-3">3.1</span> 外文书籍网站</h3>
+<div id="outline-container-org5589196" class="outline-3">
+<h3 id="org5589196"><span class="section-number-3">3.1</span> 外文书籍网站</h3>
 <div class="outline-text-3" id="text-3-1">
 <ol class="org-ol">
 <li><a href="https://www.loc.gov/collections/world-digital-library/about-this-collection/">World Digital Library</a></li>
@@ -716,8 +533,8 @@
 </div>
 </div>
 
-<div id="outline-container-org579f087" class="outline-3">
-<h3 id="org579f087"><span class="section-number-3">3.2</span> 网上书店</h3>
+<div id="outline-container-orga49e2da" class="outline-3">
+<h3 id="orga49e2da"><span class="section-number-3">3.2</span> 网上书店</h3>
 <div class="outline-text-3" id="text-3-2">
 <ol class="org-ol">
 <li><a href="https://www.amazon.cn/">亚马逊</a></li>
@@ -732,8 +549,8 @@
 </div>
 </div>
 
-<div id="outline-container-org5ff1d18" class="outline-3">
-<h3 id="org5ff1d18"><span class="section-number-3">3.3</span> 找绝版书</h3>
+<div id="outline-container-org8de1ca3" class="outline-3">
+<h3 id="org8de1ca3"><span class="section-number-3">3.3</span> 找绝版书</h3>
 <div class="outline-text-3" id="text-3-3">
 <p>
 <a href="https://mp.weixin.qq.com/s/PNjMNmD6M8xcpNr3WnJltw">https://mp.weixin.qq.com/s/PNjMNmD6M8xcpNr3WnJltw</a>
@@ -748,8 +565,8 @@
 </div>
 </div>
 
-<div id="outline-container-org04dc24d" class="outline-3">
-<h3 id="org04dc24d"><span class="section-number-3">3.4</span> 论文检索</h3>
+<div id="outline-container-orgd2e6efb" class="outline-3">
+<h3 id="orgd2e6efb"><span class="section-number-3">3.4</span> 论文检索</h3>
 <div class="outline-text-3" id="text-3-4">
 <ol class="org-ol">
 <li>Sci-Hub <a href="https://sci-hub.wf/">https://sci-hub.wf/</a> <a href="https://sci-hub.ren/">https://sci-hub.ren/</a> <a href="https://sci-hub.se/">https://sci-hub.se/</a></li>

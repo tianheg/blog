@@ -1,199 +1,16 @@
 <!DOCTYPE html>
 <html lang="zh">
 <head>
-<!-- 2022-02-06 Sun 14:00 -->
+<!-- 2022-02-06 Sun 15:54 -->
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>生产实习-小米后台管理系统</title>
 <meta name="generator" content="Org mode">
-<style type="text/css">
- <!--/*--><![CDATA[/*><!--*/
-  .title  { text-align: center;
-             margin-bottom: .2em; }
-  .subtitle { text-align: center;
-              font-size: medium;
-              font-weight: bold;
-              margin-top:0; }
-  .todo   { font-family: monospace; color: red; }
-  .done   { font-family: monospace; color: green; }
-  .priority { font-family: monospace; color: orange; }
-  .tag    { background-color: #eee; font-family: monospace;
-            padding: 2px; font-size: 80%; font-weight: normal; }
-  .timestamp { color: #bebebe; }
-  .timestamp-kwd { color: #5f9ea0; }
-  .org-right  { margin-left: auto; margin-right: 0px;  text-align: right; }
-  .org-left   { margin-left: 0px;  margin-right: auto; text-align: left; }
-  .org-center { margin-left: auto; margin-right: auto; text-align: center; }
-  .underline { text-decoration: underline; }
-  #postamble p, #preamble p { font-size: 90%; margin: .2em; }
-  p.verse { margin-left: 3%; }
-  pre {
-    border: 1px solid #ccc;
-    box-shadow: 3px 3px 3px #eee;
-    padding: 8pt;
-    font-family: monospace;
-    overflow: auto;
-    margin: 1.2em;
-  }
-  pre.src {
-    position: relative;
-    overflow: auto;
-    padding-top: 1.2em;
-  }
-  pre.src:before {
-    display: none;
-    position: absolute;
-    background-color: white;
-    top: -10px;
-    right: 10px;
-    padding: 3px;
-    border: 1px solid black;
-  }
-  pre.src:hover:before { display: inline; margin-top: 14px;}
-  /* Languages per Org manual */
-  pre.src-asymptote:before { content: 'Asymptote'; }
-  pre.src-awk:before { content: 'Awk'; }
-  pre.src-C:before { content: 'C'; }
-  /* pre.src-C++ doesn't work in CSS */
-  pre.src-clojure:before { content: 'Clojure'; }
-  pre.src-css:before { content: 'CSS'; }
-  pre.src-D:before { content: 'D'; }
-  pre.src-ditaa:before { content: 'ditaa'; }
-  pre.src-dot:before { content: 'Graphviz'; }
-  pre.src-calc:before { content: 'Emacs Calc'; }
-  pre.src-emacs-lisp:before { content: 'Emacs Lisp'; }
-  pre.src-fortran:before { content: 'Fortran'; }
-  pre.src-gnuplot:before { content: 'gnuplot'; }
-  pre.src-haskell:before { content: 'Haskell'; }
-  pre.src-hledger:before { content: 'hledger'; }
-  pre.src-java:before { content: 'Java'; }
-  pre.src-js:before { content: 'Javascript'; }
-  pre.src-latex:before { content: 'LaTeX'; }
-  pre.src-ledger:before { content: 'Ledger'; }
-  pre.src-lisp:before { content: 'Lisp'; }
-  pre.src-lilypond:before { content: 'Lilypond'; }
-  pre.src-lua:before { content: 'Lua'; }
-  pre.src-matlab:before { content: 'MATLAB'; }
-  pre.src-mscgen:before { content: 'Mscgen'; }
-  pre.src-ocaml:before { content: 'Objective Caml'; }
-  pre.src-octave:before { content: 'Octave'; }
-  pre.src-org:before { content: 'Org mode'; }
-  pre.src-oz:before { content: 'OZ'; }
-  pre.src-plantuml:before { content: 'Plantuml'; }
-  pre.src-processing:before { content: 'Processing.js'; }
-  pre.src-python:before { content: 'Python'; }
-  pre.src-R:before { content: 'R'; }
-  pre.src-ruby:before { content: 'Ruby'; }
-  pre.src-sass:before { content: 'Sass'; }
-  pre.src-scheme:before { content: 'Scheme'; }
-  pre.src-screen:before { content: 'Gnu Screen'; }
-  pre.src-sed:before { content: 'Sed'; }
-  pre.src-sh:before { content: 'shell'; }
-  pre.src-sql:before { content: 'SQL'; }
-  pre.src-sqlite:before { content: 'SQLite'; }
-  /* additional languages in org.el's org-babel-load-languages alist */
-  pre.src-forth:before { content: 'Forth'; }
-  pre.src-io:before { content: 'IO'; }
-  pre.src-J:before { content: 'J'; }
-  pre.src-makefile:before { content: 'Makefile'; }
-  pre.src-maxima:before { content: 'Maxima'; }
-  pre.src-perl:before { content: 'Perl'; }
-  pre.src-picolisp:before { content: 'Pico Lisp'; }
-  pre.src-scala:before { content: 'Scala'; }
-  pre.src-shell:before { content: 'Shell Script'; }
-  pre.src-ebnf2ps:before { content: 'ebfn2ps'; }
-  /* additional language identifiers per "defun org-babel-execute"
-       in ob-*.el */
-  pre.src-cpp:before  { content: 'C++'; }
-  pre.src-abc:before  { content: 'ABC'; }
-  pre.src-coq:before  { content: 'Coq'; }
-  pre.src-groovy:before  { content: 'Groovy'; }
-  /* additional language identifiers from org-babel-shell-names in
-     ob-shell.el: ob-shell is the only babel language using a lambda to put
-     the execution function name together. */
-  pre.src-bash:before  { content: 'bash'; }
-  pre.src-csh:before  { content: 'csh'; }
-  pre.src-ash:before  { content: 'ash'; }
-  pre.src-dash:before  { content: 'dash'; }
-  pre.src-ksh:before  { content: 'ksh'; }
-  pre.src-mksh:before  { content: 'mksh'; }
-  pre.src-posh:before  { content: 'posh'; }
-  /* Additional Emacs modes also supported by the LaTeX listings package */
-  pre.src-ada:before { content: 'Ada'; }
-  pre.src-asm:before { content: 'Assembler'; }
-  pre.src-caml:before { content: 'Caml'; }
-  pre.src-delphi:before { content: 'Delphi'; }
-  pre.src-html:before { content: 'HTML'; }
-  pre.src-idl:before { content: 'IDL'; }
-  pre.src-mercury:before { content: 'Mercury'; }
-  pre.src-metapost:before { content: 'MetaPost'; }
-  pre.src-modula-2:before { content: 'Modula-2'; }
-  pre.src-pascal:before { content: 'Pascal'; }
-  pre.src-ps:before { content: 'PostScript'; }
-  pre.src-prolog:before { content: 'Prolog'; }
-  pre.src-simula:before { content: 'Simula'; }
-  pre.src-tcl:before { content: 'tcl'; }
-  pre.src-tex:before { content: 'TeX'; }
-  pre.src-plain-tex:before { content: 'Plain TeX'; }
-  pre.src-verilog:before { content: 'Verilog'; }
-  pre.src-vhdl:before { content: 'VHDL'; }
-  pre.src-xml:before { content: 'XML'; }
-  pre.src-nxml:before { content: 'XML'; }
-  /* add a generic configuration mode; LaTeX export needs an additional
-     (add-to-list 'org-latex-listings-langs '(conf " ")) in .emacs */
-  pre.src-conf:before { content: 'Configuration File'; }
-
-  table { border-collapse:collapse; }
-  caption.t-above { caption-side: top; }
-  caption.t-bottom { caption-side: bottom; }
-  td, th { vertical-align:top;  }
-  th.org-right  { text-align: center;  }
-  th.org-left   { text-align: center;   }
-  th.org-center { text-align: center; }
-  td.org-right  { text-align: right;  }
-  td.org-left   { text-align: left;   }
-  td.org-center { text-align: center; }
-  dt { font-weight: bold; }
-  .footpara { display: inline; }
-  .footdef  { margin-bottom: 1em; }
-  .figure { padding: 1em; }
-  .figure p { text-align: center; }
-  .equation-container {
-    display: table;
-    text-align: center;
-    width: 100%;
-  }
-  .equation {
-    vertical-align: middle;
-  }
-  .equation-label {
-    display: table-cell;
-    text-align: right;
-    vertical-align: middle;
-  }
-  .inlinetask {
-    padding: 10px;
-    border: 2px solid gray;
-    margin: 10px;
-    background: #ffffcc;
-  }
-  #org-div-home-and-up
-   { text-align: right; font-size: 70%; white-space: nowrap; }
-  textarea { overflow-x: auto; }
-  .linenr { font-size: smaller }
-  .code-highlighted { background-color: #ffff00; }
-  .org-info-js_info-navigation { border-style: none; }
-  #org-info-js_console-label
-    { font-size: 10px; font-weight: bold; white-space: nowrap; }
-  .org-info-js_search-highlight
-    { background-color: #ffff00; color: #000000; font-weight: bold; }
-  .org-svg { width: 90%; }
-  /*]]>*/-->
-</style>
-<link rel="stylesheet" href="/theme/normalize.css"/>
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/highlightjs/cdn-release@11.4.0/build/styles/base16/dracula.min.css">
+<script src="https://cdn.jsdelivr.net/gh/highlightjs/cdn-release@11.4.0/build/highlight.min.js"></script>
 <link rel="stylesheet" href="/theme/site.css"/>
 <script defer src='https://static.cloudflareinsights.com/beacon.min.js' data-cf-beacon='{"token": "d5b841b503ed4d1b8fad459b84d1cc2f"}'></script>
-<script defer src="/theme/link.js"></script>
+<script defer src="/theme/main.js"></script>
 </head>
 <body>
 <div id="content">
@@ -267,7 +84,7 @@
 <div id="outline-container-软件安装及配置" class="outline-3">
 <h3 id="软件安装及配置">软件安装及配置</h3>
 <div class="outline-text-3" id="text-软件安装及配置">
-<pre class="example" id="orge42b051">
+<pre class="example" id="org40c9d37">
 $ mysql --version
 mysql  Ver 8.0.24 for Linux on x86_64 (Source distribution)
 $ java -version
@@ -296,7 +113,7 @@ Linux 上配置 MySQL 对于我这个新手来说很是吃力。
 <li>MySQL</li>
 </ol>
 
-<pre class="example" id="org51712b2">
+<pre class="example" id="org9f7cf90">
 $ sudo pacman -S mysql
 
 # 此前操作：1. 安装 mysql 后卸载 2. 安装 percona-server 后卸载
@@ -346,7 +163,7 @@ percona-server 间接解决了无法启动 mysqld 服务的问题。于是，使
 percona-server。由它提供 MySQL 相关功能。
 </p>
 
-<pre class="example" id="orgdace491">
+<pre class="example" id="org67d4cce">
 $ systemctl status mysqld
 ○ mysqld.service - MySQL Server
      Loaded: loaded (/usr/lib/systemd/system/mysqld.service; enabled; vendor preset: disabled)
@@ -573,7 +390,7 @@ Go 语言这样的后起之秀，但是，Java 目前还占据主导地位。</l
 一、=com.alibaba:druid:jar:1.1.21 is invalid=
 </p>
 
-<pre class="example" id="org07961e7">
+<pre class="example" id="org36fe759">
 [WARNING] The POM for com.alibaba:druid:jar:1.1.21 is invalid, transitive dependencies (if any) will not be available, enable debug logging for more details
 </pre>
 
@@ -590,7 +407,7 @@ Go 语言这样的后起之秀，但是，Java 目前还占据主导地位。</l
 当运行 <code>RunBoot.java</code> 主方法时，出现错误：
 </p>
 
-<pre class="example" id="org0e0c42d">
+<pre class="example" id="orgc905753">
 /usr/lib/jvm/default/bin/java...
 
   .   ____          _            __ _ _
@@ -658,7 +475,7 @@ Process finished with exit code 1
 3）=APPLICATION FAILED TO START=
 </p>
 
-<pre class="example" id="orgc472de6">
+<pre class="example" id="orgea3a7e3">
 Description:
 
 Failed to configure a DataSource: 'url' attribute is not specified and no embedded datasource could be configured.
@@ -677,7 +494,7 @@ Consider the following:
 在为 ~/ 添加以下内容后，可以运行：
 </p>
 
-<pre class="example" id="orga96945e">
+<pre class="example" id="org2d24197">
 spring:
     datasource:
         driver-class-name: com.mysql.cj.jdbc.Driver
@@ -764,14 +581,14 @@ Vue 模型：
 </p>
 
 
-<figure id="orgd4ed19a">
+<figure id="org9b29007">
 <object type="image/svg+xml" data="https://cdn.jsdelivr.net/gh/tianheg/static@main/img/vue-mvvm.svg" class="org-svg">
 Sorry, your browser does not support SVG.</object>
 
 <figcaption><span class="figure-number">Figure 1: </span>Vue MVVM</figcaption>
 </figure>
 
-<pre class="example" id="orgee16851">
+<pre class="example" id="org52e8793">
 &lt;div id="app"&gt;
   &lt;li v-for="type in mi_type"&gt;
     &lt;a v-bind:href="type.url"&gt;{{type.name}}&lt;/a&gt;&lt;span&gt;|&lt;/span&gt;
@@ -823,7 +640,7 @@ Sorry, your browser does not support SVG.</object>
 Project 结构：
 </p>
 
-<pre class="example" id="orga35a369">
+<pre class="example" id="org03dc9b4">
 ~ root
 --&gt;src/main/java/yidajiabei.xyz/RunBoot.java
 --&gt;src/main/java/yidajiabei.xyz/controller/MiIndexPageController.java
@@ -941,7 +758,7 @@ Project 结构：
 </p>
 
 
-<figure id="org0ebdd99">
+<figure id="org6caa766">
 <object type="image/svg+xml" data="../../images/java-resultbean.svg" class="org-svg">
 Sorry, your browser does not support SVG.</object>
 
@@ -1018,14 +835,14 @@ axios 的图形示意：
 </p>
 
 
-<figure id="org4e6bb5e">
+<figure id="orgdd2faa3">
 <object type="image/svg+xml" data="../../images/axios.svg" class="org-svg">
 Sorry, your browser does not support SVG.</object>
 
 <figcaption><span class="figure-number">Figure 3: </span>ResultBean.java</figcaption>
 </figure>
 
-<pre class="example" id="org61a79e9">
+<pre class="example" id="orgaa6f563">
 &lt;!-- src/main/resources/static/index.html --&gt;
 &lt;li v-for="type in mi_type"&gt;
   &lt;a v-bind:href="type.url"&gt;{{ type.name }}&lt;/a&gt;&lt;span&gt;|&lt;/span&gt;
@@ -1088,7 +905,7 @@ urlPageBean，urlPageBeanMapper 文件，之后前端从后端调用数据。
 输出：
 </p>
 
-<pre class="example" id="orgcfe54ee">
+<pre class="example" id="org1b47eb6">
 ERROR 1045 (28000): Access denied for user 'root'@'localhost' (using password: YES)
 </pre>
 
@@ -1096,7 +913,7 @@ ERROR 1045 (28000): Access denied for user 'root'@'localhost' (using password: Y
 解决办法（<a href="https://stackoverflow.com/a/41793945">来源</a>）：
 </p>
 
-<pre class="example" id="orgc05ccad">
+<pre class="example" id="org9412280">
 # add `skip-grant-tables` under `[mysqld]` in `/etc/my.cnf` or `/etc/mysql/my.cnf`
 systemctl restart mysqld
 mysql -u root -p
@@ -1118,7 +935,7 @@ systemctl restart mysqld
 修改 my.cnf 文件，我的文件配置：
 </p>
 
-<pre class="example" id="org7be1148">
+<pre class="example" id="org879ff87">
 # For advice on how to change settings please see
 # http://dev.mysql.com/doc/refman/8.0/en/server-configuration-defaults.html
 
@@ -1168,7 +985,7 @@ secure-file-priv = "/home/archie/"
 <h3 id="第七天">第七天</h3>
 <div class="outline-text-3" id="text-第七天">
 
-<figure id="org2220663">
+<figure id="orgeb233de">
 <object type="image/svg+xml" data="../../images/front-back-end-mysql-framework.svg" class="org-svg">
 Sorry, your browser does not support SVG.</object>
 

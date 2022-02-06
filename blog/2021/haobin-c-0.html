@@ -1,199 +1,16 @@
 <!DOCTYPE html>
 <html lang="zh">
 <head>
-<!-- 2022-02-06 Sun 14:00 -->
+<!-- 2022-02-06 Sun 15:54 -->
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>郝斌 C 语言学习：概述、预备知识</title>
 <meta name="generator" content="Org mode">
-<style type="text/css">
- <!--/*--><![CDATA[/*><!--*/
-  .title  { text-align: center;
-             margin-bottom: .2em; }
-  .subtitle { text-align: center;
-              font-size: medium;
-              font-weight: bold;
-              margin-top:0; }
-  .todo   { font-family: monospace; color: red; }
-  .done   { font-family: monospace; color: green; }
-  .priority { font-family: monospace; color: orange; }
-  .tag    { background-color: #eee; font-family: monospace;
-            padding: 2px; font-size: 80%; font-weight: normal; }
-  .timestamp { color: #bebebe; }
-  .timestamp-kwd { color: #5f9ea0; }
-  .org-right  { margin-left: auto; margin-right: 0px;  text-align: right; }
-  .org-left   { margin-left: 0px;  margin-right: auto; text-align: left; }
-  .org-center { margin-left: auto; margin-right: auto; text-align: center; }
-  .underline { text-decoration: underline; }
-  #postamble p, #preamble p { font-size: 90%; margin: .2em; }
-  p.verse { margin-left: 3%; }
-  pre {
-    border: 1px solid #ccc;
-    box-shadow: 3px 3px 3px #eee;
-    padding: 8pt;
-    font-family: monospace;
-    overflow: auto;
-    margin: 1.2em;
-  }
-  pre.src {
-    position: relative;
-    overflow: auto;
-    padding-top: 1.2em;
-  }
-  pre.src:before {
-    display: none;
-    position: absolute;
-    background-color: white;
-    top: -10px;
-    right: 10px;
-    padding: 3px;
-    border: 1px solid black;
-  }
-  pre.src:hover:before { display: inline; margin-top: 14px;}
-  /* Languages per Org manual */
-  pre.src-asymptote:before { content: 'Asymptote'; }
-  pre.src-awk:before { content: 'Awk'; }
-  pre.src-C:before { content: 'C'; }
-  /* pre.src-C++ doesn't work in CSS */
-  pre.src-clojure:before { content: 'Clojure'; }
-  pre.src-css:before { content: 'CSS'; }
-  pre.src-D:before { content: 'D'; }
-  pre.src-ditaa:before { content: 'ditaa'; }
-  pre.src-dot:before { content: 'Graphviz'; }
-  pre.src-calc:before { content: 'Emacs Calc'; }
-  pre.src-emacs-lisp:before { content: 'Emacs Lisp'; }
-  pre.src-fortran:before { content: 'Fortran'; }
-  pre.src-gnuplot:before { content: 'gnuplot'; }
-  pre.src-haskell:before { content: 'Haskell'; }
-  pre.src-hledger:before { content: 'hledger'; }
-  pre.src-java:before { content: 'Java'; }
-  pre.src-js:before { content: 'Javascript'; }
-  pre.src-latex:before { content: 'LaTeX'; }
-  pre.src-ledger:before { content: 'Ledger'; }
-  pre.src-lisp:before { content: 'Lisp'; }
-  pre.src-lilypond:before { content: 'Lilypond'; }
-  pre.src-lua:before { content: 'Lua'; }
-  pre.src-matlab:before { content: 'MATLAB'; }
-  pre.src-mscgen:before { content: 'Mscgen'; }
-  pre.src-ocaml:before { content: 'Objective Caml'; }
-  pre.src-octave:before { content: 'Octave'; }
-  pre.src-org:before { content: 'Org mode'; }
-  pre.src-oz:before { content: 'OZ'; }
-  pre.src-plantuml:before { content: 'Plantuml'; }
-  pre.src-processing:before { content: 'Processing.js'; }
-  pre.src-python:before { content: 'Python'; }
-  pre.src-R:before { content: 'R'; }
-  pre.src-ruby:before { content: 'Ruby'; }
-  pre.src-sass:before { content: 'Sass'; }
-  pre.src-scheme:before { content: 'Scheme'; }
-  pre.src-screen:before { content: 'Gnu Screen'; }
-  pre.src-sed:before { content: 'Sed'; }
-  pre.src-sh:before { content: 'shell'; }
-  pre.src-sql:before { content: 'SQL'; }
-  pre.src-sqlite:before { content: 'SQLite'; }
-  /* additional languages in org.el's org-babel-load-languages alist */
-  pre.src-forth:before { content: 'Forth'; }
-  pre.src-io:before { content: 'IO'; }
-  pre.src-J:before { content: 'J'; }
-  pre.src-makefile:before { content: 'Makefile'; }
-  pre.src-maxima:before { content: 'Maxima'; }
-  pre.src-perl:before { content: 'Perl'; }
-  pre.src-picolisp:before { content: 'Pico Lisp'; }
-  pre.src-scala:before { content: 'Scala'; }
-  pre.src-shell:before { content: 'Shell Script'; }
-  pre.src-ebnf2ps:before { content: 'ebfn2ps'; }
-  /* additional language identifiers per "defun org-babel-execute"
-       in ob-*.el */
-  pre.src-cpp:before  { content: 'C++'; }
-  pre.src-abc:before  { content: 'ABC'; }
-  pre.src-coq:before  { content: 'Coq'; }
-  pre.src-groovy:before  { content: 'Groovy'; }
-  /* additional language identifiers from org-babel-shell-names in
-     ob-shell.el: ob-shell is the only babel language using a lambda to put
-     the execution function name together. */
-  pre.src-bash:before  { content: 'bash'; }
-  pre.src-csh:before  { content: 'csh'; }
-  pre.src-ash:before  { content: 'ash'; }
-  pre.src-dash:before  { content: 'dash'; }
-  pre.src-ksh:before  { content: 'ksh'; }
-  pre.src-mksh:before  { content: 'mksh'; }
-  pre.src-posh:before  { content: 'posh'; }
-  /* Additional Emacs modes also supported by the LaTeX listings package */
-  pre.src-ada:before { content: 'Ada'; }
-  pre.src-asm:before { content: 'Assembler'; }
-  pre.src-caml:before { content: 'Caml'; }
-  pre.src-delphi:before { content: 'Delphi'; }
-  pre.src-html:before { content: 'HTML'; }
-  pre.src-idl:before { content: 'IDL'; }
-  pre.src-mercury:before { content: 'Mercury'; }
-  pre.src-metapost:before { content: 'MetaPost'; }
-  pre.src-modula-2:before { content: 'Modula-2'; }
-  pre.src-pascal:before { content: 'Pascal'; }
-  pre.src-ps:before { content: 'PostScript'; }
-  pre.src-prolog:before { content: 'Prolog'; }
-  pre.src-simula:before { content: 'Simula'; }
-  pre.src-tcl:before { content: 'tcl'; }
-  pre.src-tex:before { content: 'TeX'; }
-  pre.src-plain-tex:before { content: 'Plain TeX'; }
-  pre.src-verilog:before { content: 'Verilog'; }
-  pre.src-vhdl:before { content: 'VHDL'; }
-  pre.src-xml:before { content: 'XML'; }
-  pre.src-nxml:before { content: 'XML'; }
-  /* add a generic configuration mode; LaTeX export needs an additional
-     (add-to-list 'org-latex-listings-langs '(conf " ")) in .emacs */
-  pre.src-conf:before { content: 'Configuration File'; }
-
-  table { border-collapse:collapse; }
-  caption.t-above { caption-side: top; }
-  caption.t-bottom { caption-side: bottom; }
-  td, th { vertical-align:top;  }
-  th.org-right  { text-align: center;  }
-  th.org-left   { text-align: center;   }
-  th.org-center { text-align: center; }
-  td.org-right  { text-align: right;  }
-  td.org-left   { text-align: left;   }
-  td.org-center { text-align: center; }
-  dt { font-weight: bold; }
-  .footpara { display: inline; }
-  .footdef  { margin-bottom: 1em; }
-  .figure { padding: 1em; }
-  .figure p { text-align: center; }
-  .equation-container {
-    display: table;
-    text-align: center;
-    width: 100%;
-  }
-  .equation {
-    vertical-align: middle;
-  }
-  .equation-label {
-    display: table-cell;
-    text-align: right;
-    vertical-align: middle;
-  }
-  .inlinetask {
-    padding: 10px;
-    border: 2px solid gray;
-    margin: 10px;
-    background: #ffffcc;
-  }
-  #org-div-home-and-up
-   { text-align: right; font-size: 70%; white-space: nowrap; }
-  textarea { overflow-x: auto; }
-  .linenr { font-size: smaller }
-  .code-highlighted { background-color: #ffff00; }
-  .org-info-js_info-navigation { border-style: none; }
-  #org-info-js_console-label
-    { font-size: 10px; font-weight: bold; white-space: nowrap; }
-  .org-info-js_search-highlight
-    { background-color: #ffff00; color: #000000; font-weight: bold; }
-  .org-svg { width: 90%; }
-  /*]]>*/-->
-</style>
-<link rel="stylesheet" href="/theme/normalize.css"/>
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/highlightjs/cdn-release@11.4.0/build/styles/base16/dracula.min.css">
+<script src="https://cdn.jsdelivr.net/gh/highlightjs/cdn-release@11.4.0/build/highlight.min.js"></script>
 <link rel="stylesheet" href="/theme/site.css"/>
 <script defer src='https://static.cloudflareinsights.com/beacon.min.js' data-cf-beacon='{"token": "d5b841b503ed4d1b8fad459b84d1cc2f"}'></script>
-<script defer src="/theme/link.js"></script>
+<script defer src="/theme/main.js"></script>
 </head>
 <body>
 <div id="content">
@@ -203,9 +20,9 @@
 <a href="https://www.bilibili.com/video/BV1os411h77o">https://www.bilibili.com/video/BV1os411h77o</a>
 </p>
 
-<div id="outline-container-org73d8725" class="outline-2">
-<h2 id="org73d8725">自学</h2>
-<div class="outline-text-2" id="text-org73d8725">
+<div id="outline-container-org2e3aff4" class="outline-2">
+<h2 id="org2e3aff4">自学</h2>
+<div class="outline-text-2" id="text-org2e3aff4">
 <p>
 刚开始学习基础时，两行代码之间是逻辑关联的；但是学习高阶代码时，因为两行代码中进行了大量封装，所以两行代码之间可能就没有明显的逻辑关联。
 </p>
@@ -229,9 +46,9 @@
 </div>
 </div>
 
-<div id="outline-container-orgb02d27d" class="outline-2">
-<h2 id="orgb02d27d">为什么出视频</h2>
-<div class="outline-text-2" id="text-orgb02d27d">
+<div id="outline-container-org9af92de" class="outline-2">
+<h2 id="org9af92de">为什么出视频</h2>
+<div class="outline-text-2" id="text-org9af92de">
 <p>
 作者认为一个人成功的几个必备要素（重要性排序）：
 </p>
@@ -249,9 +66,9 @@
 </div>
 </div>
 
-<div id="outline-container-org194b520" class="outline-2">
-<h2 id="org194b520">C 概述_内容概述</h2>
-<div class="outline-text-2" id="text-org194b520">
+<div id="outline-container-orgd3dd2c7" class="outline-2">
+<h2 id="orgd3dd2c7">C 概述_内容概述</h2>
+<div class="outline-text-2" id="text-orgd3dd2c7">
 <ol class="org-ol">
 <li>为什么学习 C 语言
 <ul class="org-ul">
@@ -273,9 +90,9 @@
 </div>
 </div>
 
-<div id="outline-container-org50cb325" class="outline-2">
-<h2 id="org50cb325">HelloWorld</h2>
-<div class="outline-text-2" id="text-org50cb325">
+<div id="outline-container-org5aee03b" class="outline-2">
+<h2 id="org5aee03b">HelloWorld</h2>
+<div class="outline-text-2" id="text-org5aee03b">
 <div class="org-src-container">
 <pre class="src src-c"><span style="color: #cF9570;">#include</span> <span style="color: #ddbc91;">&lt;stdio.h&gt;</span>
 <span style="color: #706565;">/* </span><span style="color: #857575;">This is a comment</span><span style="color: #706565;"> */</span>
@@ -295,9 +112,9 @@
 </div>
 </div>
 
-<div id="outline-container-org358313f" class="outline-2">
-<h2 id="org358313f">C 的起源和发展</h2>
-<div class="outline-text-2" id="text-org358313f">
+<div id="outline-container-org0b2473b" class="outline-2">
+<h2 id="org0b2473b">C 的起源和发展</h2>
+<div class="outline-text-2" id="text-org0b2473b">
 <p>
 <img src="../../images/c-origin-development.png" alt="c-origin-development.png">
 <img src="../../images/c-origin-development-1.png" alt="c-origin-development-1.png">
@@ -305,9 +122,9 @@
 </div>
 </div>
 
-<div id="outline-container-orgd6cbda9" class="outline-2">
-<h2 id="orgd6cbda9">C 的特点</h2>
-<div class="outline-text-2" id="text-orgd6cbda9">
+<div id="outline-container-org49b3f43" class="outline-2">
+<h2 id="org49b3f43">C 的特点</h2>
+<div class="outline-text-2" id="text-org49b3f43">
 <p>
 优点：代码量小、速度快、功能强大
 </p>
@@ -322,9 +139,9 @@ C 语言的指针使 C 语言可以访问硬件。
 </div>
 </div>
 
-<div id="outline-container-org89cb413" class="outline-2">
-<h2 id="org89cb413">C 的应用领域</h2>
-<div class="outline-text-2" id="text-org89cb413">
+<div id="outline-container-orgdfd1b1c" class="outline-2">
+<h2 id="orgdfd1b1c">C 的应用领域</h2>
+<div class="outline-text-2" id="text-orgdfd1b1c">
 <ul class="org-ul">
 <li>系统软件开发
 <ul class="org-ul">
@@ -343,9 +160,9 @@ C 语言的指针使 C 语言可以访问硬件。
 </div>
 </div>
 
-<div id="outline-container-org4fc0472" class="outline-2">
-<h2 id="org4fc0472">C 的重要性</h2>
-<div class="outline-text-2" id="text-org4fc0472">
+<div id="outline-container-org9b3c8f9" class="outline-2">
+<h2 id="org9b3c8f9">C 的重要性</h2>
+<div class="outline-text-2" id="text-org9b3c8f9">
 <ul class="org-ul">
 <li>最重要的系统开发语言</li>
 <li>一个合格黑客必须掌握的语言</li>
@@ -363,9 +180,9 @@ C 语言的指针使 C 语言可以访问硬件。
 </div>
 </div>
 
-<div id="outline-container-orgd983fb8" class="outline-2">
-<h2 id="orgd983fb8">怎么学习 C</h2>
-<div class="outline-text-2" id="text-orgd983fb8">
+<div id="outline-container-orgf750910" class="outline-2">
+<h2 id="orgf750910">怎么学习 C</h2>
+<div class="outline-text-2" id="text-orgf750910">
 <ul class="org-ul">
 <li>多思考、多敲代码</li>
 </ul>
@@ -385,9 +202,9 @@ C 语言的指针使 C 语言可以访问硬件。
 </div>
 </div>
 
-<div id="outline-container-org24cf24c" class="outline-2">
-<h2 id="org24cf24c">学习目标</h2>
-<div class="outline-text-2" id="text-org24cf24c">
+<div id="outline-container-org2e2dec2" class="outline-2">
+<h2 id="org2e2dec2">学习目标</h2>
+<div class="outline-text-2" id="text-org2e2dec2">
 <ul class="org-ul">
 <li>了解程序语言及发展历史</li>
 <li>熟练掌握 C 语言的语法规则</li>
@@ -401,20 +218,20 @@ C 语言的指针使 C 语言可以访问硬件。
 </div>
 </div>
 
-<div id="outline-container-org4ec573f" class="outline-2">
-<h2 id="org4ec573f">课程大纲</h2>
-<div class="outline-text-2" id="text-org4ec573f">
+<div id="outline-container-org1cf5fd8" class="outline-2">
+<h2 id="org1cf5fd8">课程大纲</h2>
+<div class="outline-text-2" id="text-org1cf5fd8">
 
-<figure id="org32c746e">
+<figure id="orgc055d8a">
 <img src="../../images/haobin-c.png" alt="haobin-c.png">
 
 </figure>
 </div>
 </div>
 
-<div id="outline-container-orgfa23fe0" class="outline-2">
-<h2 id="orgfa23fe0">C 语言预备专业知识</h2>
-<div class="outline-text-2" id="text-orgfa23fe0">
+<div id="outline-container-org1315658" class="outline-2">
+<h2 id="org1315658">C 语言预备专业知识</h2>
+<div class="outline-text-2" id="text-org1315658">
 <p>
 1，CPU、内存条、硬盘、显卡、主板、显示器之间的关系
 </p>
@@ -601,7 +418,7 @@ C 语言的指针使 C 语言可以访问硬件。
 </p>
 
 
-<figure id="org13378c3">
+<figure id="org0f5cd82">
 <img src="../../images/metric-conversion.png" alt="metric-conversion.png">
 
 </figure>
@@ -675,9 +492,9 @@ C 语言的指针使 C 语言可以访问硬件。
 </ul>
 </div>
 
-<div id="outline-container-org841818d" class="outline-3">
-<h3 id="org841818d"><span style="background-color: #FFFF00;">代码规范化</span></h3>
-<div class="outline-text-3" id="text-org841818d">
+<div id="outline-container-org1ce12a0" class="outline-3">
+<h3 id="org1ce12a0"><span style="background-color: #FFFF00;">代码规范化</span></h3>
+<div class="outline-text-3" id="text-org1ce12a0">
 <ul class="org-ul">
 <li>编码成对</li>
 <li><code>if ()</code> if 与之后的括号要有空格，便于与函数区分；运算优先级越低，它的符号附近需要加空格</li>
@@ -701,9 +518,9 @@ C 语言的指针使 C 语言可以访问硬件。
 </div>
 </div>
 
-<div id="outline-container-org5f7805b" class="outline-3">
-<h3 id="org5f7805b">什么是字节</h3>
-<div class="outline-text-3" id="text-org5f7805b">
+<div id="outline-container-org64f7ff3" class="outline-3">
+<h3 id="org64f7ff3">什么是字节</h3>
+<div class="outline-text-3" id="text-org64f7ff3">
 <p>
 字节（byte）是存储数据的单位，并且是硬件能访问的最小单位
 </p>
@@ -720,27 +537,27 @@ C 语言的指针使 C 语言可以访问硬件。
 </div>
 </div>
 
-<div id="outline-container-org68e78db" class="outline-3">
-<h3 id="org68e78db">不同数据类型之间相互赋值</h3>
-<div class="outline-text-3" id="text-org68e78db">
+<div id="outline-container-orgbff3842" class="outline-3">
+<h3 id="orgbff3842">不同数据类型之间相互赋值</h3>
+<div class="outline-text-3" id="text-orgbff3842">
 <p>
 学习这个知识点，需要知道「补码」。
 </p>
 </div>
 </div>
 
-<div id="outline-container-org1b688e9" class="outline-3">
-<h3 id="org1b688e9"><span style="background-color: #FFFF00;">什么是 ASCII</span></h3>
-<div class="outline-text-3" id="text-org1b688e9">
+<div id="outline-container-org723a51a" class="outline-3">
+<h3 id="org723a51a"><span style="background-color: #FFFF00;">什么是 ASCII</span></h3>
+<div class="outline-text-3" id="text-org723a51a">
 <p>
 它规定不同字符使用哪些整数值表示。
 </p>
 </div>
 </div>
 
-<div id="outline-container-org978e761" class="outline-3">
-<h3 id="org978e761">char 使用常见问题解析</h3>
-<div class="outline-text-3" id="text-org978e761">
+<div id="outline-container-orgb5c94fc" class="outline-3">
+<h3 id="orgb5c94fc">char 使用常见问题解析</h3>
+<div class="outline-text-3" id="text-orgb5c94fc">
 <div class="org-src-container">
 <pre class="src src-c"><span style="color: #cF9570;">#include</span> <span style="color: #ddbc91;">&lt;stdio.h&gt;</span>
 <span style="color: #ad8572;">int</span> <span style="color: #a9df90;">main</span>() {
@@ -760,8 +577,8 @@ C 语言的指针使 C 语言可以访问硬件。
 </div>
 </div>
 
-<div id="outline-container-org9d41143" class="outline-3">
-<h3 id="org9d41143">字符的存储</h3>
+<div id="outline-container-org19a4a12" class="outline-3">
+<h3 id="org19a4a12">字符的存储</h3>
 </div>
 </div>
 </div>

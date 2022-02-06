@@ -1,199 +1,16 @@
 <!DOCTYPE html>
 <html lang="zh">
 <head>
-<!-- 2022-02-06 Sun 14:01 -->
+<!-- 2022-02-06 Sun 15:54 -->
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>技术框架</title>
 <meta name="generator" content="Org mode">
-<style type="text/css">
- <!--/*--><![CDATA[/*><!--*/
-  .title  { text-align: center;
-             margin-bottom: .2em; }
-  .subtitle { text-align: center;
-              font-size: medium;
-              font-weight: bold;
-              margin-top:0; }
-  .todo   { font-family: monospace; color: red; }
-  .done   { font-family: monospace; color: green; }
-  .priority { font-family: monospace; color: orange; }
-  .tag    { background-color: #eee; font-family: monospace;
-            padding: 2px; font-size: 80%; font-weight: normal; }
-  .timestamp { color: #bebebe; }
-  .timestamp-kwd { color: #5f9ea0; }
-  .org-right  { margin-left: auto; margin-right: 0px;  text-align: right; }
-  .org-left   { margin-left: 0px;  margin-right: auto; text-align: left; }
-  .org-center { margin-left: auto; margin-right: auto; text-align: center; }
-  .underline { text-decoration: underline; }
-  #postamble p, #preamble p { font-size: 90%; margin: .2em; }
-  p.verse { margin-left: 3%; }
-  pre {
-    border: 1px solid #ccc;
-    box-shadow: 3px 3px 3px #eee;
-    padding: 8pt;
-    font-family: monospace;
-    overflow: auto;
-    margin: 1.2em;
-  }
-  pre.src {
-    position: relative;
-    overflow: auto;
-    padding-top: 1.2em;
-  }
-  pre.src:before {
-    display: none;
-    position: absolute;
-    background-color: white;
-    top: -10px;
-    right: 10px;
-    padding: 3px;
-    border: 1px solid black;
-  }
-  pre.src:hover:before { display: inline; margin-top: 14px;}
-  /* Languages per Org manual */
-  pre.src-asymptote:before { content: 'Asymptote'; }
-  pre.src-awk:before { content: 'Awk'; }
-  pre.src-C:before { content: 'C'; }
-  /* pre.src-C++ doesn't work in CSS */
-  pre.src-clojure:before { content: 'Clojure'; }
-  pre.src-css:before { content: 'CSS'; }
-  pre.src-D:before { content: 'D'; }
-  pre.src-ditaa:before { content: 'ditaa'; }
-  pre.src-dot:before { content: 'Graphviz'; }
-  pre.src-calc:before { content: 'Emacs Calc'; }
-  pre.src-emacs-lisp:before { content: 'Emacs Lisp'; }
-  pre.src-fortran:before { content: 'Fortran'; }
-  pre.src-gnuplot:before { content: 'gnuplot'; }
-  pre.src-haskell:before { content: 'Haskell'; }
-  pre.src-hledger:before { content: 'hledger'; }
-  pre.src-java:before { content: 'Java'; }
-  pre.src-js:before { content: 'Javascript'; }
-  pre.src-latex:before { content: 'LaTeX'; }
-  pre.src-ledger:before { content: 'Ledger'; }
-  pre.src-lisp:before { content: 'Lisp'; }
-  pre.src-lilypond:before { content: 'Lilypond'; }
-  pre.src-lua:before { content: 'Lua'; }
-  pre.src-matlab:before { content: 'MATLAB'; }
-  pre.src-mscgen:before { content: 'Mscgen'; }
-  pre.src-ocaml:before { content: 'Objective Caml'; }
-  pre.src-octave:before { content: 'Octave'; }
-  pre.src-org:before { content: 'Org mode'; }
-  pre.src-oz:before { content: 'OZ'; }
-  pre.src-plantuml:before { content: 'Plantuml'; }
-  pre.src-processing:before { content: 'Processing.js'; }
-  pre.src-python:before { content: 'Python'; }
-  pre.src-R:before { content: 'R'; }
-  pre.src-ruby:before { content: 'Ruby'; }
-  pre.src-sass:before { content: 'Sass'; }
-  pre.src-scheme:before { content: 'Scheme'; }
-  pre.src-screen:before { content: 'Gnu Screen'; }
-  pre.src-sed:before { content: 'Sed'; }
-  pre.src-sh:before { content: 'shell'; }
-  pre.src-sql:before { content: 'SQL'; }
-  pre.src-sqlite:before { content: 'SQLite'; }
-  /* additional languages in org.el's org-babel-load-languages alist */
-  pre.src-forth:before { content: 'Forth'; }
-  pre.src-io:before { content: 'IO'; }
-  pre.src-J:before { content: 'J'; }
-  pre.src-makefile:before { content: 'Makefile'; }
-  pre.src-maxima:before { content: 'Maxima'; }
-  pre.src-perl:before { content: 'Perl'; }
-  pre.src-picolisp:before { content: 'Pico Lisp'; }
-  pre.src-scala:before { content: 'Scala'; }
-  pre.src-shell:before { content: 'Shell Script'; }
-  pre.src-ebnf2ps:before { content: 'ebfn2ps'; }
-  /* additional language identifiers per "defun org-babel-execute"
-       in ob-*.el */
-  pre.src-cpp:before  { content: 'C++'; }
-  pre.src-abc:before  { content: 'ABC'; }
-  pre.src-coq:before  { content: 'Coq'; }
-  pre.src-groovy:before  { content: 'Groovy'; }
-  /* additional language identifiers from org-babel-shell-names in
-     ob-shell.el: ob-shell is the only babel language using a lambda to put
-     the execution function name together. */
-  pre.src-bash:before  { content: 'bash'; }
-  pre.src-csh:before  { content: 'csh'; }
-  pre.src-ash:before  { content: 'ash'; }
-  pre.src-dash:before  { content: 'dash'; }
-  pre.src-ksh:before  { content: 'ksh'; }
-  pre.src-mksh:before  { content: 'mksh'; }
-  pre.src-posh:before  { content: 'posh'; }
-  /* Additional Emacs modes also supported by the LaTeX listings package */
-  pre.src-ada:before { content: 'Ada'; }
-  pre.src-asm:before { content: 'Assembler'; }
-  pre.src-caml:before { content: 'Caml'; }
-  pre.src-delphi:before { content: 'Delphi'; }
-  pre.src-html:before { content: 'HTML'; }
-  pre.src-idl:before { content: 'IDL'; }
-  pre.src-mercury:before { content: 'Mercury'; }
-  pre.src-metapost:before { content: 'MetaPost'; }
-  pre.src-modula-2:before { content: 'Modula-2'; }
-  pre.src-pascal:before { content: 'Pascal'; }
-  pre.src-ps:before { content: 'PostScript'; }
-  pre.src-prolog:before { content: 'Prolog'; }
-  pre.src-simula:before { content: 'Simula'; }
-  pre.src-tcl:before { content: 'tcl'; }
-  pre.src-tex:before { content: 'TeX'; }
-  pre.src-plain-tex:before { content: 'Plain TeX'; }
-  pre.src-verilog:before { content: 'Verilog'; }
-  pre.src-vhdl:before { content: 'VHDL'; }
-  pre.src-xml:before { content: 'XML'; }
-  pre.src-nxml:before { content: 'XML'; }
-  /* add a generic configuration mode; LaTeX export needs an additional
-     (add-to-list 'org-latex-listings-langs '(conf " ")) in .emacs */
-  pre.src-conf:before { content: 'Configuration File'; }
-
-  table { border-collapse:collapse; }
-  caption.t-above { caption-side: top; }
-  caption.t-bottom { caption-side: bottom; }
-  td, th { vertical-align:top;  }
-  th.org-right  { text-align: center;  }
-  th.org-left   { text-align: center;   }
-  th.org-center { text-align: center; }
-  td.org-right  { text-align: right;  }
-  td.org-left   { text-align: left;   }
-  td.org-center { text-align: center; }
-  dt { font-weight: bold; }
-  .footpara { display: inline; }
-  .footdef  { margin-bottom: 1em; }
-  .figure { padding: 1em; }
-  .figure p { text-align: center; }
-  .equation-container {
-    display: table;
-    text-align: center;
-    width: 100%;
-  }
-  .equation {
-    vertical-align: middle;
-  }
-  .equation-label {
-    display: table-cell;
-    text-align: right;
-    vertical-align: middle;
-  }
-  .inlinetask {
-    padding: 10px;
-    border: 2px solid gray;
-    margin: 10px;
-    background: #ffffcc;
-  }
-  #org-div-home-and-up
-   { text-align: right; font-size: 70%; white-space: nowrap; }
-  textarea { overflow-x: auto; }
-  .linenr { font-size: smaller }
-  .code-highlighted { background-color: #ffff00; }
-  .org-info-js_info-navigation { border-style: none; }
-  #org-info-js_console-label
-    { font-size: 10px; font-weight: bold; white-space: nowrap; }
-  .org-info-js_search-highlight
-    { background-color: #ffff00; color: #000000; font-weight: bold; }
-  .org-svg { width: 90%; }
-  /*]]>*/-->
-</style>
-<link rel="stylesheet" href="/theme/normalize.css"/>
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/highlightjs/cdn-release@11.4.0/build/styles/base16/dracula.min.css">
+<script src="https://cdn.jsdelivr.net/gh/highlightjs/cdn-release@11.4.0/build/highlight.min.js"></script>
 <link rel="stylesheet" href="/theme/site.css"/>
 <script defer src='https://static.cloudflareinsights.com/beacon.min.js' data-cf-beacon='{"token": "d5b841b503ed4d1b8fad459b84d1cc2f"}'></script>
-<script defer src="/theme/link.js"></script>
+<script defer src="/theme/main.js"></script>
 </head>
 <body>
 <div id="content">
@@ -228,9 +45,9 @@
 <li>JS，HTML，CSS，Vue，React 等</li>
 </ol>
 
-<div id="outline-container-orga4d89f4" class="outline-2">
-<h2 id="orga4d89f4">学习方法</h2>
-<div class="outline-text-2" id="text-orga4d89f4">
+<div id="outline-container-orgb6e2615" class="outline-2">
+<h2 id="orgb6e2615">学习方法</h2>
+<div class="outline-text-2" id="text-orgb6e2615">
 <ul class="org-ul">
 <li>先对要学习的技术，有大概认知（建立索引）：
 <ul class="org-ul">
@@ -245,9 +62,9 @@
 </div>
 </div>
 
-<div id="outline-container-orgd56d073" class="outline-2">
-<h2 id="orgd56d073">目标</h2>
-<div class="outline-text-2" id="text-orgd56d073">
+<div id="outline-container-orgd603f3e" class="outline-2">
+<h2 id="orgd603f3e">目标</h2>
+<div class="outline-text-2" id="text-orgd603f3e">
 <ol class="org-ol">
 <li>打牢计算机基础</li>
 <li>熟悉前端所需知识</li>
@@ -256,13 +73,13 @@
 </div>
 </div>
 
-<div id="outline-container-orga7776da" class="outline-2">
-<h2 id="orga7776da">关键词索引</h2>
-<div class="outline-text-2" id="text-orga7776da">
+<div id="outline-container-orgebea720" class="outline-2">
+<h2 id="orgebea720">关键词索引</h2>
+<div class="outline-text-2" id="text-orgebea720">
 </div>
-<div id="outline-container-orgfa3b19a" class="outline-3">
-<h3 id="orgfa3b19a">Software</h3>
-<div class="outline-text-3" id="text-orgfa3b19a">
+<div id="outline-container-org463853f" class="outline-3">
+<h3 id="org463853f">Software</h3>
+<div class="outline-text-3" id="text-org463853f">
 <ul class="org-ul">
 <li>text editor</li>
 <li>web browser</li>
@@ -274,9 +91,9 @@
 </div>
 </div>
 
-<div id="outline-container-orgc0240c9" class="outline-3">
-<h3 id="orgc0240c9">Web and web standards</h3>
-<div class="outline-text-3" id="text-orgc0240c9">
+<div id="outline-container-orge40e7a2" class="outline-3">
+<h3 id="orge40e7a2">Web and web standards</h3>
+<div class="outline-text-3" id="text-orge40e7a2">
 <ul class="org-ul">
 <li>history of the web</li>
 <li>HTML(WHATWG)</li>
@@ -305,9 +122,9 @@
 </div>
 </div>
 
-<div id="outline-container-org7668f92" class="outline-3">
-<h3 id="org7668f92">HTML</h3>
-<div class="outline-text-3" id="text-org7668f92">
+<div id="outline-container-org753c0fa" class="outline-3">
+<h3 id="org753c0fa">HTML</h3>
+<div class="outline-text-3" id="text-org753c0fa">
 <ul class="org-ul">
 <li>comments <code>&lt;!--- ---&gt;</code></li>
 <li>element</li>
@@ -356,9 +173,9 @@
 </div>
 </div>
 
-<div id="outline-container-org0ed48aa" class="outline-3">
-<h3 id="org0ed48aa">CSS</h3>
-<div class="outline-text-3" id="text-org0ed48aa">
+<div id="outline-container-org806ecdb" class="outline-3">
+<h3 id="org806ecdb">CSS</h3>
+<div class="outline-text-3" id="text-org806ecdb">
 <ul class="org-ul">
 <li>add CSS</li>
 <li>based on location,state(link)</li>
@@ -461,9 +278,9 @@
 </div>
 </div>
 
-<div id="outline-container-org601012a" class="outline-3">
-<h3 id="org601012a">JS</h3>
-<div class="outline-text-3" id="text-org601012a">
+<div id="outline-container-org5578199" class="outline-3">
+<h3 id="org5578199">JS</h3>
+<div class="outline-text-3" id="text-org5578199">
 <ul class="org-ul">
 <li>variables</li>
 <li>data types
@@ -532,9 +349,9 @@
 </div>
 </div>
 
-<div id="outline-container-org6e745bb" class="outline-3">
-<h3 id="org6e745bb">Web Forms</h3>
-<div class="outline-text-3" id="text-org6e745bb">
+<div id="outline-container-org68b4a60" class="outline-3">
+<h3 id="org68b4a60">Web Forms</h3>
+<div class="outline-text-3" id="text-org68b4a60">
 <ul class="org-ul">
 <li>HTML5 input types
 <ul class="org-ul">
@@ -553,9 +370,9 @@
 </div>
 </div>
 
-<div id="outline-container-orgb08e44a" class="outline-3">
-<h3 id="orgb08e44a">Tools and testing</h3>
-<div class="outline-text-3" id="text-orgb08e44a">
+<div id="outline-container-orgb4af6a1" class="outline-3">
+<h3 id="orgb4af6a1">Tools and testing</h3>
+<div class="outline-text-3" id="text-orgb4af6a1">
 <ul class="org-ul">
 <li>cross browser testing: Initial planning &gt; Development &gt; Testing/discovery &gt; Fixes/iteration
 <ul class="org-ul">
@@ -574,9 +391,9 @@
 </div>
 </div>
 
-<div id="outline-container-org6eb28de" class="outline-3">
-<h3 id="org6eb28de">Modern tooling</h3>
-<div class="outline-text-3" id="text-org6eb28de">
+<div id="outline-container-orga57bb32" class="outline-3">
+<h3 id="orga57bb32">Modern tooling</h3>
+<div class="outline-text-3" id="text-orga57bb32">
 <ul class="org-ul">
 <li>Git, GitHub</li>
 <li>modern tooling ecosystem
@@ -635,13 +452,13 @@
 </div>
 </div>
 
-<div id="outline-container-org0a28c4a" class="outline-3">
-<h3 id="org0a28c4a">AlDS</h3>
-<div class="outline-text-3" id="text-org0a28c4a">
+<div id="outline-container-org4e48a9a" class="outline-3">
+<h3 id="org4e48a9a">AlDS</h3>
+<div class="outline-text-3" id="text-org4e48a9a">
 </div>
-<div id="outline-container-org80de681" class="outline-4">
-<h4 id="org80de681">Data Strucutre</h4>
-<div class="outline-text-4" id="text-org80de681">
+<div id="outline-container-orgcb32ce4" class="outline-4">
+<h4 id="orgcb32ce4">Data Strucutre</h4>
+<div class="outline-text-4" id="text-orgcb32ce4">
 <p>
 数据结构能通过编程语言提供的数据类型、引用和其他操作实现。一个设计杰出的数据结构，能在有限时间和空间下，支持各种程序执行。
 </p>
@@ -659,9 +476,9 @@
 </div>
 </div>
 
-<div id="outline-container-orgfdcb565" class="outline-4">
-<h4 id="orgfdcb565">Algorithm</h4>
-<div class="outline-text-4" id="text-orgfdcb565">
+<div id="outline-container-org63a3ad3" class="outline-4">
+<h4 id="org63a3ad3">Algorithm</h4>
+<div class="outline-text-4" id="text-org63a3ad3">
 <p>
 算法，在数学（算学）和计算机科学之中，指一个被定义好的、计算机可执行的有限步骤或次序，常用于计算、数据处理和自动推理。算法是有效方法，包含一系列定义清晰的指令，并可于有限的时间及空间内清楚地表述出来。
 </p>
@@ -730,13 +547,13 @@
 </div>
 </div>
 
-<div id="outline-container-org5d8f588" class="outline-2">
-<h2 id="org5d8f588">技术领域</h2>
-<div class="outline-text-2" id="text-org5d8f588">
+<div id="outline-container-org31cea61" class="outline-2">
+<h2 id="org31cea61">技术领域</h2>
+<div class="outline-text-2" id="text-org31cea61">
 </div>
-<div id="outline-container-org12744c2" class="outline-3">
-<h3 id="org12744c2">浏览器</h3>
-<div class="outline-text-3" id="text-org12744c2">
+<div id="outline-container-org721b85b" class="outline-3">
+<h3 id="org721b85b">浏览器</h3>
+<div class="outline-text-3" id="text-org721b85b">
 <ul class="org-ul">
 <li>Edge（Blink）</li>
 <li>Chrome / Chromium（Blink）</li>
@@ -746,9 +563,9 @@
 </ul>
 </div>
 </div>
-<div id="outline-container-org56e056c" class="outline-3">
-<h3 id="org56e056c">编程语言</h3>
-<div class="outline-text-3" id="text-org56e056c">
+<div id="outline-container-org32ec172" class="outline-3">
+<h3 id="org32ec172">编程语言</h3>
+<div class="outline-text-3" id="text-org32ec172">
 <ul class="org-ul">
 <li>JavaScript</li>
 <li>TypeScript</li>
@@ -758,9 +575,9 @@
 </ul>
 </div>
 </div>
-<div id="outline-container-org91b7076" class="outline-3">
-<h3 id="org91b7076">HTML，CSS</h3>
-<div class="outline-text-3" id="text-org91b7076">
+<div id="outline-container-org47225c9" class="outline-3">
+<h3 id="org47225c9">HTML，CSS</h3>
+<div class="outline-text-3" id="text-org47225c9">
 <ul class="org-ul">
 <li>HTML / HTML5</li>
 <li>CSS / CSS3</li>
@@ -768,9 +585,9 @@
 </ul>
 </div>
 </div>
-<div id="outline-container-orgba52dad" class="outline-3">
-<h3 id="orgba52dad">开发工具</h3>
-<div class="outline-text-3" id="text-orgba52dad">
+<div id="outline-container-org22fd643" class="outline-3">
+<h3 id="org22fd643">开发工具</h3>
+<div class="outline-text-3" id="text-org22fd643">
 <ul class="org-ul">
 <li>编辑器和 IDE
 <ul class="org-ul">
@@ -804,9 +621,9 @@
 </ul>
 </div>
 </div>
-<div id="outline-container-org4b17226" class="outline-3">
-<h3 id="org4b17226">代码质量</h3>
-<div class="outline-text-3" id="text-org4b17226">
+<div id="outline-container-org24ff3e6" class="outline-3">
+<h3 id="org24ff3e6">代码质量</h3>
+<div class="outline-text-3" id="text-org24ff3e6">
 <ul class="org-ul">
 <li>Coding Style
 <ul class="org-ul">
@@ -827,9 +644,9 @@
 </ul>
 </div>
 </div>
-<div id="outline-container-org4321b0f" class="outline-3">
-<h3 id="org4321b0f">前端库 / 框架</h3>
-<div class="outline-text-3" id="text-org4321b0f">
+<div id="outline-container-orgc397b53" class="outline-3">
+<h3 id="orgc397b53">前端库 / 框架</h3>
+<div class="outline-text-3" id="text-orgc397b53">
 <ul class="org-ul">
 <li><a href="https://jquery.com/">jQuery</a> / <a href="https://underscorejs.org/">Underscore</a> / <a href="https://mootools.net/">Mootools</a></li>
 <li><a href="https://dojotoolkit.org/">Dojo</a> / <a href="https://dojotoolkit.org/">Ext JS</a></li>
@@ -853,9 +670,9 @@
 </ul>
 </div>
 </div>
-<div id="outline-container-org8a4e0c0" class="outline-3">
-<h3 id="org8a4e0c0">技术标准 / 规范</h3>
-<div class="outline-text-3" id="text-org8a4e0c0">
+<div id="outline-container-orgbc31f64" class="outline-3">
+<h3 id="orgbc31f64">技术标准 / 规范</h3>
+<div class="outline-text-3" id="text-orgbc31f64">
 <ul class="org-ul">
 <li>HTTP/1.1: RFCs <a href="https://datatracker.ietf.org/doc/rfc7230/">7230</a>-7235</li>
 <li><a href="https://http2.github.io/">HTTP/2</a></li>
@@ -877,9 +694,9 @@
 </ul>
 </div>
 </div>
-<div id="outline-container-org91659ce" class="outline-3">
-<h3 id="org91659ce">性能</h3>
-<div class="outline-text-3" id="text-org91659ce">
+<div id="outline-container-org3500352" class="outline-3">
+<h3 id="org3500352">性能</h3>
+<div class="outline-text-3" id="text-org3500352">
 <ul class="org-ul">
 <li><a href="https://developer.yahoo.com/performance/rules.html">Best Practices for Speeding Up Your Web Site</a></li>
 <li><a href="https://developers.google.com/speed">PageSpeed</a></li>
@@ -897,12 +714,12 @@
 </ul>
 </div>
 </div>
-<div id="outline-container-orgedbdf10" class="outline-3">
-<h3 id="orgedbdf10">SEO</h3>
+<div id="outline-container-org8044561" class="outline-3">
+<h3 id="org8044561">SEO</h3>
 </div>
-<div id="outline-container-orge4f3a11" class="outline-3">
-<h3 id="orge4f3a11">部署流程</h3>
-<div class="outline-text-3" id="text-orge4f3a11">
+<div id="outline-container-org6dbd9f4" class="outline-3">
+<h3 id="org6dbd9f4">部署流程</h3>
+<div class="outline-text-3" id="text-org6dbd9f4">
 <ul class="org-ul">
 <li>压缩合并
 <ul class="org-ul">
@@ -929,9 +746,9 @@
 </ul>
 </div>
 </div>
-<div id="outline-container-orgada370b" class="outline-3">
-<h3 id="orgada370b">代码组织</h3>
-<div class="outline-text-3" id="text-orgada370b">
+<div id="outline-container-org296f3ec" class="outline-3">
+<h3 id="org296f3ec">代码组织</h3>
+<div class="outline-text-3" id="text-org296f3ec">
 <ul class="org-ul">
 <li>类库模块化
 <ul class="org-ul">
@@ -950,9 +767,9 @@
 </ul>
 </div>
 </div>
-<div id="outline-container-orgc030ed8" class="outline-3">
-<h3 id="orgc030ed8">安全</h3>
-<div class="outline-text-3" id="text-orgc030ed8">
+<div id="outline-container-org7cb3f7f" class="outline-3">
+<h3 id="org7cb3f7f">安全</h3>
+<div class="outline-text-3" id="text-org7cb3f7f">
 <ul class="org-ul">
 <li>CSRF / XSS</li>
 <li>CSP</li>
@@ -961,9 +778,9 @@
 </ul>
 </div>
 </div>
-<div id="outline-container-orgdccf6af" class="outline-3">
-<h3 id="orgdccf6af">移动 Web</h3>
-<div class="outline-text-3" id="text-orgdccf6af">
+<div id="outline-container-org7f66c76" class="outline-3">
+<h3 id="org7f66c76">移动 Web</h3>
+<div class="outline-text-3" id="text-org7f66c76">
 <ul class="org-ul">
 <li>H5 / CSS3</li>
 <li>Response Web Design</li>
@@ -978,9 +795,9 @@
 </ul>
 </div>
 </div>
-<div id="outline-container-org8de4e85" class="outline-3">
-<h3 id="org8de4e85">前沿技术社区/会议</h3>
-<div class="outline-text-3" id="text-org8de4e85">
+<div id="outline-container-orge4923e8" class="outline-3">
+<h3 id="orge4923e8">前沿技术社区/会议</h3>
+<div class="outline-text-3" id="text-orge4923e8">
 <ul class="org-ul">
 <li><a href="https://frontendfront.com/conferences/">upcoming CSS, JavaScript and front-end conferences in 2021 and 2022</a></li>
 <li><a href="https://jsconf.com/">JSconf</a></li>
@@ -990,9 +807,9 @@
 </ul>
 </div>
 </div>
-<div id="outline-container-orgfb76c9a" class="outline-3">
-<h3 id="orgfb76c9a">编程知识储备</h3>
-<div class="outline-text-3" id="text-orgfb76c9a">
+<div id="outline-container-org6086cd7" class="outline-3">
+<h3 id="org6086cd7">编程知识储备</h3>
+<div class="outline-text-3" id="text-org6086cd7">
 <ul class="org-ul">
 <li>数据结构</li>
 <li>OOP / AOP</li>
@@ -1003,9 +820,9 @@
 </ul>
 </div>
 </div>
-<div id="outline-container-org3ef845c" class="outline-3">
-<h3 id="org3ef845c">计算机知识储备</h3>
-<div class="outline-text-3" id="text-org3ef845c">
+<div id="outline-container-org69ea0da" class="outline-3">
+<h3 id="org69ea0da">计算机知识储备</h3>
+<div class="outline-text-3" id="text-org69ea0da">
 <ul class="org-ul">
 <li>编译原理</li>
 <li>计算机网络</li>
@@ -1016,9 +833,9 @@
 </ul>
 </div>
 </div>
-<div id="outline-container-orge86c313" class="outline-3">
-<h3 id="orge86c313">软技能</h3>
-<div class="outline-text-3" id="text-orge86c313">
+<div id="outline-container-org8dada74" class="outline-3">
+<h3 id="org8dada74">软技能</h3>
+<div class="outline-text-3" id="text-org8dada74">
 <ul class="org-ul">
 <li>知识管理/总结分享</li>
 <li>沟通技巧/团队协作</li>
@@ -1027,9 +844,9 @@
 </ul>
 </div>
 </div>
-<div id="outline-container-org7b4e660" class="outline-3">
-<h3 id="org7b4e660">可视化</h3>
-<div class="outline-text-3" id="text-org7b4e660">
+<div id="outline-container-orgaa2e271" class="outline-3">
+<h3 id="orgaa2e271">可视化</h3>
+<div class="outline-text-3" id="text-orgaa2e271">
 <ul class="org-ul">
 <li>SVG / Canvas / VML</li>
 <li>SVG: <a href="https://d3js.org/">D3</a> / <a href="https://dmitrybaranovskiy.github.io/raphael/">Raphaël</a> / <a href="http://snapsvg.io/">Snap.svg</a></li>
@@ -1038,9 +855,9 @@
 </ul>
 </div>
 </div>
-<div id="outline-container-orgda04622" class="outline-3">
-<h3 id="orgda04622">服务器</h3>
-<div class="outline-text-3" id="text-orgda04622">
+<div id="outline-container-org3f137a1" class="outline-3">
+<h3 id="org3f137a1">服务器</h3>
+<div class="outline-text-3" id="text-org3f137a1">
 <ul class="org-ul">
 <li>Nginx</li>
 <li>Apache</li>
@@ -1048,9 +865,9 @@
 </ul>
 </div>
 </div>
-<div id="outline-container-orga393032" class="outline-3">
-<h3 id="orga393032">数据库</h3>
-<div class="outline-text-3" id="text-orga393032">
+<div id="outline-container-org556e0d2" class="outline-3">
+<h3 id="org556e0d2">数据库</h3>
+<div class="outline-text-3" id="text-org556e0d2">
 <ul class="org-ul">
 <li>MySQL / PostgreSQL / IBM Db2 / Oracle Database</li>
 <li>MariaDB</li>
@@ -1059,18 +876,18 @@
 </ul>
 </div>
 </div>
-<div id="outline-container-org8f39bd2" class="outline-3">
-<h3 id="org8f39bd2">数据缓存</h3>
-<div class="outline-text-3" id="text-org8f39bd2">
+<div id="outline-container-org7e77292" class="outline-3">
+<h3 id="org7e77292">数据缓存</h3>
+<div class="outline-text-3" id="text-org7e77292">
 <ul class="org-ul">
 <li><a href="https://redis.io/">Redis</a></li>
 <li><a href="https://memcached.org/">Memcached</a></li>
 </ul>
 </div>
 </div>
-<div id="outline-container-orgd3f753f" class="outline-3">
-<h3 id="orgd3f753f">文件缓存/代理</h3>
-<div class="outline-text-3" id="text-orgd3f753f">
+<div id="outline-container-org8320e90" class="outline-3">
+<h3 id="org8320e90">文件缓存/代理</h3>
+<div class="outline-text-3" id="text-org8320e90">
 <ul class="org-ul">
 <li><a href="https://varnish-cache.org/">Varnish HTTP Cache</a></li>
 <li><a href="http://www.squid-cache.org/">Squid</a></li>
@@ -1079,9 +896,9 @@
 </div>
 </div>
 
-<div id="outline-container-org9a8db7a" class="outline-2">
-<h2 id="org9a8db7a">程序员练级攻略</h2>
-<div class="outline-text-2" id="text-org9a8db7a">
+<div id="outline-container-orgab78f60" class="outline-2">
+<h2 id="orgab78f60">程序员练级攻略</h2>
+<div class="outline-text-2" id="text-orgab78f60">
 <ul class="org-ul">
 <li><a href="https://norvig.com/21-days.html">Teach Yourself Programming in Ten Years</a> by Peter Norvig</li>
 <li><a href="https://skorks.com/2010/04/on-the-value-of-fundamentals-in-software-development/">On The Value Of Fundamentals In Software Development</a></li>
@@ -1089,13 +906,13 @@
 </ul>
 </div>
 
-<div id="outline-container-org3e78471" class="outline-3">
-<h3 id="org3e78471">第一步：零基础启蒙</h3>
-<div class="outline-text-3" id="text-org3e78471">
+<div id="outline-container-org4697ca6" class="outline-3">
+<h3 id="org4697ca6">第一步：零基础启蒙</h3>
+<div class="outline-text-3" id="text-org4697ca6">
 </div>
-<div id="outline-container-org87303e2" class="outline-4">
-<h4 id="org87303e2">什么是编程</h4>
-<div class="outline-text-4" id="text-org87303e2">
+<div id="outline-container-orgf295634" class="outline-4">
+<h4 id="orgf295634">什么是编程</h4>
+<div class="outline-text-4" id="text-orgf295634">
 <p>
 第一步：《与孩子一起学编程》
 </p>
@@ -1110,9 +927,9 @@
 </div>
 </div>
 
-<div id="outline-container-org507acf7" class="outline-4">
-<h4 id="org507acf7">编程入门</h4>
-<div class="outline-text-4" id="text-org507acf7">
+<div id="outline-container-org85b53c0" class="outline-4">
+<h4 id="org85b53c0">编程入门</h4>
+<div class="outline-text-4" id="text-org85b53c0">
 <p>
 一、入门语言 Python
 </p>
@@ -1232,9 +1049,9 @@
 </div>
 </div>
 
-<div id="outline-container-org3ddb186" class="outline-4">
-<h4 id="org3ddb186">实践项目：简单 Blog 系统或 BBS 系统</h4>
-<div class="outline-text-4" id="text-org3ddb186">
+<div id="outline-container-org8d7865a" class="outline-4">
+<h4 id="org8d7865a">实践项目：简单 Blog 系统或 BBS 系统</h4>
+<div class="outline-text-4" id="text-org8d7865a">
 <p>
 项目功能：
 </p>
@@ -1269,17 +1086,17 @@
 </div>
 </div>
 
-<div id="outline-container-org7cb32a3" class="outline-3">
-<h3 id="org7cb32a3">第二步：正式入门</h3>
-<div class="outline-text-3" id="text-org7cb32a3">
+<div id="outline-container-orgab5c5c2" class="outline-3">
+<h3 id="orgab5c5c2">第二步：正式入门</h3>
+<div class="outline-text-3" id="text-orgab5c5c2">
 <p>
 无论我做什么事，我都会面对各式各样的困难，这对每个人来说都是一样的，而只有兴趣、热情和成就感才能让我不畏惧这些困难。
 </p>
 </div>
 
-<div id="outline-container-org332903e" class="outline-4">
-<h4 id="org332903e">编程技能</h4>
-<div class="outline-text-4" id="text-org332903e">
+<div id="outline-container-org2514057" class="outline-4">
+<h4 id="org2514057">编程技能</h4>
+<div class="outline-text-4" id="text-org2514057">
 <p>
 <a href="https://blog.thefirehoseproject.com/posts/learn-to-code-and-be-self-reliant/">The Key To Accelerating Your Coding Skills</a>:
 </p>
@@ -1387,9 +1204,9 @@
 </div>
 </div>
 
-<div id="outline-container-org3ac74a0" class="outline-4">
-<h4 id="org3ac74a0">编程工具</h4>
-<div class="outline-text-4" id="text-org3ac74a0">
+<div id="outline-container-org2ad5c54" class="outline-4">
+<h4 id="org2ad5c54">编程工具</h4>
+<div class="outline-text-4" id="text-org2ad5c54">
 <ul class="org-ul">
 <li>编程 IDE：<a href="https://www.jetbrains.com/idea/">IDEA</a></li>
 <li>版本控制 Git
@@ -1403,9 +1220,9 @@
 </div>
 </div>
 
-<div id="outline-container-org04bee16" class="outline-4">
-<h4 id="org04bee16">实践项目：投票系统</h4>
-<div class="outline-text-4" id="text-org04bee16">
+<div id="outline-container-org1cee41e" class="outline-4">
+<h4 id="org1cee41e">实践项目：投票系统</h4>
+<div class="outline-text-4" id="text-org1cee41e">
 <p>
 业务需求：
 </p>
@@ -1441,9 +1258,9 @@
 </div>
 </div>
 
-<div id="outline-container-orgd9dab4a" class="outline-3">
-<h3 id="orgd9dab4a">第二步：程序员修养</h3>
-<div class="outline-text-3" id="text-orgd9dab4a">
+<div id="outline-container-org3d24310" class="outline-3">
+<h3 id="org3d24310">第二步：程序员修养</h3>
+<div class="outline-text-3" id="text-org3d24310">
 <p>
 <a href="https://www.quora.com/What-are-some-of-the-most-basic-things-every-programmer-should-know">What are some of the most basic things every programmer should know?</a>:
 </p>
@@ -1481,9 +1298,9 @@
 </p>
 </div>
 
-<div id="outline-container-orgf89cbab" class="outline-4">
-<h4 id="orgf89cbab">英文能力</h4>
-<div class="outline-text-4" id="text-orgf89cbab">
+<div id="outline-container-org2c9accf" class="outline-4">
+<h4 id="org2c9accf">英文能力</h4>
+<div class="outline-text-4" id="text-org2c9accf">
 <ol class="org-ol">
 <li>坚持 Google 英文关键词</li>
 <li>在 GitHub 只用英文写代码注释等内容</li>
@@ -1494,9 +1311,9 @@
 </div>
 </div>
 
-<div id="outline-container-orgb820adf" class="outline-4">
-<h4 id="orgb820adf">问问题的能力</h4>
-<div class="outline-text-4" id="text-orgb820adf">
+<div id="outline-container-orgc253a73" class="outline-4">
+<h4 id="orgc253a73">问问题的能力</h4>
+<div class="outline-text-4" id="text-orgc253a73">
 <ul class="org-ul">
 <li><a href="http://www.catb.org/~esr/faqs/smart-questions.html">How To Ask Questions The Smart Way</a> STFW（Search the fxxking web）以及 RTFM（Read the fxxking manual）</li>
 <li><a href="https://xyproblem.info/">X-Y PROBLEM</a>，<a href="https://coolshell.cn/articles/10804.html">X-Y 问题</a></li>
@@ -1505,9 +1322,9 @@
 </div>
 </div>
 
-<div id="outline-container-orga366318" class="outline-4">
-<h4 id="orga366318">写代码的修养</h4>
-<div class="outline-text-4" id="text-orga366318">
+<div id="outline-container-org7ce942e" class="outline-4">
+<h4 id="org7ce942e">写代码的修养</h4>
+<div class="outline-text-4" id="text-org7ce942e">
 <p>
 书籍推荐：
 </p>
@@ -1543,9 +1360,9 @@ Unit Test:
 </div>
 </div>
 
-<div id="outline-container-org29750c7" class="outline-4">
-<h4 id="org29750c7">安全防范</h4>
-<div class="outline-text-4" id="text-org29750c7">
+<div id="outline-container-orgc1613f6" class="outline-4">
+<h4 id="orgc1613f6">安全防范</h4>
+<div class="outline-text-4" id="text-orgc1613f6">
 <p>
 <a href="https://owasp.org/">Open Web Application Security Project® (OWASP)</a>：OWASP 是一个开源的、非盈利的全球性安全组织，致力于应用软件的安全研究。其被视为 Web 应用安全领域的权威参考。2009 年，国际信用卡数据安全技术 PCI 标准将其列为必要组件，美国国防信息系统局、欧洲网络与信息安全局、美国国家安全局等政府机构所发布的美国国家和国际立法、标准、准则和行业实务守则参考引用了 OWASP。
 </p>
@@ -1560,9 +1377,9 @@ Unit Test:
 </div>
 </div>
 
-<div id="outline-container-org0830dd9" class="outline-4">
-<h4 id="org0830dd9">系统上线</h4>
-<div class="outline-text-4" id="text-org0830dd9">
+<div id="outline-container-org2f5ca30" class="outline-4">
+<h4 id="org2f5ca30">系统上线</h4>
+<div class="outline-text-4" id="text-org2f5ca30">
 <p>
 关于测试：
 </p>
@@ -1588,9 +1405,9 @@ Unit Test:
 </div>
 </div>
 
-<div id="outline-container-org92bcd48" class="outline-3">
-<h3 id="org92bcd48">第三步：编程语言</h3>
-<div class="outline-text-3" id="text-org92bcd48">
+<div id="outline-container-org632ec98" class="outline-3">
+<h3 id="org632ec98">第三步：编程语言</h3>
+<div class="outline-text-3" id="text-org632ec98">
 <p>
 值得学习 C、C++、Java。它们是工业级编程语言。原因在于，C 和 C++ 语言规范都由 ISO 标准化过，而且都有工业界厂商组成的标准化委员会来制定工业标准；而且，它们已经在业界应用于许多重要的生产环境中。
 </p>
@@ -1606,9 +1423,9 @@ Unit Test:
 </p>
 </div>
 
-<div id="outline-container-orgf916843" class="outline-4">
-<h4 id="orgf916843">Java 语言</h4>
-<div class="outline-text-4" id="text-orgf916843">
+<div id="outline-container-org227a6b1" class="outline-4">
+<h4 id="org227a6b1">Java 语言</h4>
+<div class="outline-text-4" id="text-org227a6b1">
 <p>
 入门书：
 </p>
@@ -1633,9 +1450,9 @@ Unit Test:
 </div>
 </div>
 
-<div id="outline-container-org52f393d" class="outline-4">
-<h4 id="org52f393d">C/C++ 语言</h4>
-<div class="outline-text-4" id="text-org52f393d">
+<div id="outline-container-org4a13b2d" class="outline-4">
+<h4 id="org4a13b2d">C/C++ 语言</h4>
+<div class="outline-text-4" id="text-org4a13b2d">
 <ul class="org-ul">
 <li>👍👍The C Programming Language</li>
 <li>C 语言程序设计现代方法</li>
@@ -1656,9 +1473,9 @@ Unit Test:
 </div>
 </div>
 
-<div id="outline-container-org2315c04" class="outline-4">
-<h4 id="org2315c04">Go 语言</h4>
-<div class="outline-text-4" id="text-org2315c04">
+<div id="outline-container-org3b6192a" class="outline-4">
+<h4 id="org3b6192a">Go 语言</h4>
+<div class="outline-text-4" id="text-org3b6192a">
 <p>
 入门：<a href="https://gobyexample.com/">Go by Example</a>、<a href="https://go101.org/article/101.html">Go 101</a>、<a href="https://book.douban.com/subject/26337545/">The Go Programming Language</a>（<a href="https://coolshell.cn/articles/8460.html">GO 语言简介（上）- 语法</a>、<a href="https://coolshell.cn/articles/8489.html">GO 语言简介（下）- 特性</a>）
 </p>
@@ -1678,9 +1495,9 @@ Unit Test:
 </div>
 </div>
 
-<div id="outline-container-org4a9a35d" class="outline-4">
-<h4 id="org4a9a35d">设计模式</h4>
-<div class="outline-text-4" id="text-org4a9a35d">
+<div id="outline-container-orgc35e937" class="outline-4">
+<h4 id="orgc35e937">设计模式</h4>
+<div class="outline-text-4" id="text-orgc35e937">
 <p>
 书籍推荐：
 </p>
@@ -1713,13 +1530,13 @@ Unit Test:
 </div>
 </div>
 
-<div id="outline-container-orga9c5d01" class="outline-3">
-<h3 id="orga9c5d01">第四步：理论学科</h3>
-<div class="outline-text-3" id="text-orga9c5d01">
+<div id="outline-container-orgb7ed1a1" class="outline-3">
+<h3 id="orgb7ed1a1">第四步：理论学科</h3>
+<div class="outline-text-3" id="text-orgb7ed1a1">
 </div>
-<div id="outline-container-orgb0439bc" class="outline-4">
-<h4 id="orgb0439bc">算法&amp;数据结构</h4>
-<div class="outline-text-4" id="text-orgb0439bc">
+<div id="outline-container-orgef61b9c" class="outline-4">
+<h4 id="orgef61b9c">算法&amp;数据结构</h4>
+<div class="outline-text-4" id="text-orgef61b9c">
 <ul class="org-ul">
 <li>书籍
 <ul class="org-ul">
@@ -1740,9 +1557,9 @@ Unit Test:
 </div>
 </div>
 
-<div id="outline-container-org0c2a960" class="outline-4">
-<h4 id="org0c2a960">其他理论知识</h4>
-<div class="outline-text-4" id="text-org0c2a960">
+<div id="outline-container-org4744305" class="outline-4">
+<h4 id="org4744305">其他理论知识</h4>
+<div class="outline-text-4" id="text-org4744305">
 <p>
 书籍：
 </p>
@@ -1759,9 +1576,9 @@ Unit Test:
 </div>
 </div>
 
-<div id="outline-container-orge308c9d" class="outline-3">
-<h3 id="orge308c9d">第五步：系统知识</h3>
-<div class="outline-text-3" id="text-orge308c9d">
+<div id="outline-container-org9830dac" class="outline-3">
+<h3 id="org9830dac">第五步：系统知识</h3>
+<div class="outline-text-3" id="text-org9830dac">
 <p>
 系统知识是理论知识的工程实践。
 </p>
@@ -1823,9 +1640,9 @@ Unit Test:
 </ul>
 </div>
 
-<div id="outline-container-org4fd51b4" class="outline-4">
-<h4 id="org4fd51b4">系统知识的学习要点</h4>
-<div class="outline-text-4" id="text-org4fd51b4">
+<div id="outline-container-org123c3ba" class="outline-4">
+<h4 id="org123c3ba">系统知识的学习要点</h4>
+<div class="outline-text-4" id="text-org123c3ba">
 <ul class="org-ul">
 <li>用这些系统知识操作一下文件系统，实现一个可以拷贝目录树的小程序</li>
 <li>用 fork / wait / waitpid 写一个多进程的程序，用 pthread 写一个多线程带同步或互斥的程序。比如，多进程购票的程序</li>
@@ -1837,9 +1654,9 @@ Unit Test:
 </div>
 </div>
 
-<div id="outline-container-orgcbc3f45" class="outline-4">
-<h4 id="orgcbc3f45">C10K 问题</h4>
-<div class="outline-text-4" id="text-orgcbc3f45">
+<div id="outline-container-org0c2388c" class="outline-4">
+<h4 id="org0c2388c">C10K 问题</h4>
+<div class="outline-text-4" id="text-org0c2388c">
 <p>
 然后，当你读完《Unix 网络编程》后，千万要去读一下 “<a href="http://www.kegel.com/c10k.html">C10K Problem</a> （<a href="https://www.oschina.net/translate/c10k">中文翻译版</a>）”。提出这个问题的人叫丹·凯格尔（Dan Kegel），目前在 Google 任职。
 </p>
@@ -1858,9 +1675,9 @@ C10K 问题本质上是 <b>操作系统处理大并发请求的问题</b> 。对
 </div>
 </div>
 
-<div id="outline-container-org7a61c04" class="outline-4">
-<h4 id="org7a61c04">实践项目</h4>
-<div class="outline-text-4" id="text-org7a61c04">
+<div id="outline-container-orgdd7fe63" class="outline-4">
+<h4 id="orgdd7fe63">实践项目</h4>
+<div class="outline-text-4" id="text-orgdd7fe63">
 <p>
 实现语言可以用 C、C++ 或 Java。
 </p>
@@ -1923,13 +1740,13 @@ C10K 问题本质上是 <b>操作系统处理大并发请求的问题</b> 。对
 </div>
 </div>
 
-<div id="outline-container-org3eb48ea" class="outline-3">
-<h3 id="org3eb48ea">第六步：软件设计</h3>
-<div class="outline-text-3" id="text-org3eb48ea">
+<div id="outline-container-org5a46158" class="outline-3">
+<h3 id="org5a46158">第六步：软件设计</h3>
+<div class="outline-text-3" id="text-org5a46158">
 </div>
-<div id="outline-container-orgf9cf634" class="outline-4">
-<h4 id="orgf9cf634">编程范式</h4>
-<div class="outline-text-4" id="text-orgf9cf634">
+<div id="outline-container-org9efb937" class="outline-4">
+<h4 id="org9efb937">编程范式</h4>
+<div class="outline-text-4" id="text-org9efb937">
 <p>
 左耳听风-编程范式部分：
 </p>
@@ -1952,9 +1769,9 @@ C10K 问题本质上是 <b>操作系统处理大并发请求的问题</b> 。对
 </div>
 </div>
 
-<div id="outline-container-orgd40fa62" class="outline-4">
-<h4 id="orgd40fa62">一些软件设计的相关原则</h4>
-<div class="outline-text-4" id="text-orgd40fa62">
+<div id="outline-container-org53abef9" class="outline-4">
+<h4 id="org53abef9">一些软件设计的相关原则</h4>
+<div class="outline-text-4" id="text-org53abef9">
 <ul class="org-ul">
 <li><a href="https://en.wikipedia.org/wiki/Don%27t_repeat_yourself">Don't repeat yourself(DRY)</a></li>
 <li><a href="https://en.wikipedia.org/wiki/KISS_principle">KISS principle(KISS)</a></li>
@@ -1981,9 +1798,9 @@ C10K 问题本质上是 <b>操作系统处理大并发请求的问题</b> 。对
 </div>
 </div>
 
-<div id="outline-container-orgef41f2e" class="outline-4">
-<h4 id="orgef41f2e">有关软件设计的读物</h4>
-<div class="outline-text-4" id="text-orgef41f2e">
+<div id="outline-container-orga6798ad" class="outline-4">
+<h4 id="orga6798ad">有关软件设计的读物</h4>
+<div class="outline-text-4" id="text-orga6798ad">
 <ul class="org-ul">
 <li>领域驱动设计</li>
 <li>UNIX 编程艺术</li>
@@ -2008,9 +1825,9 @@ C10K 问题本质上是 <b>操作系统处理大并发请求的问题</b> 。对
 </div>
 </div>
 
-<div id="outline-container-org13e3ddb" class="outline-3">
-<h3 id="org13e3ddb">之后就是术业专攻了</h3>
-<div class="outline-text-3" id="text-org13e3ddb">
+<div id="outline-container-org590e4ea" class="outline-3">
+<h3 id="org590e4ea">之后就是术业专攻了</h3>
+<div class="outline-text-3" id="text-org590e4ea">
 <ul class="org-ul">
 <li>底层方向：操作系统、文件系统、数据库、网络……</li>
 <li>架构方向：分布式系统架构、微服务、DevOps、Cloud Native……</li>
@@ -2025,13 +1842,13 @@ C10K 问题本质上是 <b>操作系统处理大并发请求的问题</b> 。对
 </div>
 </div>
 
-<div id="outline-container-orgb570dad" class="outline-3">
-<h3 id="orgb570dad">前端</h3>
-<div class="outline-text-3" id="text-orgb570dad">
+<div id="outline-container-org860b06a" class="outline-3">
+<h3 id="org860b06a">前端</h3>
+<div class="outline-text-3" id="text-org860b06a">
 </div>
-<div id="outline-container-orgbd191bd" class="outline-4">
-<h4 id="orgbd191bd">前端基础</h4>
-<div class="outline-text-4" id="text-orgbd191bd">
+<div id="outline-container-org928aac7" class="outline-4">
+<h4 id="org928aac7">前端基础</h4>
+<div class="outline-text-4" id="text-org928aac7">
 <ul class="org-ul">
 <li>HTML5、CSS3（Canvas、SVG、WebGL、CSS 图形变换）、ES6</li>
 <li>JavaScript 核心原理</li>
@@ -2155,9 +1972,9 @@ C10K 问题本质上是 <b>操作系统处理大并发请求的问题</b> 。对
 </div>
 </div>
 
-<div id="outline-container-org6cfd489" class="outline-4">
-<h4 id="org6cfd489">底层原理</h4>
-<div class="outline-text-4" id="text-org6cfd489">
+<div id="outline-container-org294a49a" class="outline-4">
+<h4 id="org294a49a">底层原理</h4>
+<div class="outline-text-4" id="text-org294a49a">
 <p>
 七、浏览器原理
 </p>
@@ -2215,9 +2032,9 @@ C10K 问题本质上是 <b>操作系统处理大并发请求的问题</b> 。对
 </div>
 </div>
 
-<div id="outline-container-org4b8f98e" class="outline-4">
-<h4 id="org4b8f98e">性能优化</h4>
-<div class="outline-text-4" id="text-org4b8f98e">
+<div id="outline-container-org7050b0a" class="outline-4">
+<h4 id="org7050b0a">性能优化</h4>
+<div class="outline-text-4" id="text-org7050b0a">
 <ul class="org-ul">
 <li><a href="https://web.archive.org/web/20190905142237/http://www.allitebooks.in:80/web-performance-action">Web Performance in Action</a></li>
 <li><a href="https://designingforperformance.com/">Designing for Performance</a></li>
@@ -2268,9 +2085,9 @@ C10K 问题本质上是 <b>操作系统处理大并发请求的问题</b> 。对
 </div>
 </div>
 
-<div id="outline-container-org377c7ec" class="outline-4">
-<h4 id="org377c7ec">前端框架</h4>
-<div class="outline-text-4" id="text-org377c7ec">
+<div id="outline-container-org22b0c73" class="outline-4">
+<h4 id="org22b0c73">前端框架</h4>
+<div class="outline-text-4" id="text-org22b0c73">
 <p>
 框架比较：
 </p>
@@ -2388,9 +2205,9 @@ C10K 问题本质上是 <b>操作系统处理大并发请求的问题</b> 。对
 </div>
 </div>
 
-<div id="outline-container-org6c08897" class="outline-4">
-<h4 id="org6c08897">UI/UX 设计</h4>
-<div class="outline-text-4" id="text-org6c08897">
+<div id="outline-container-org0197e62" class="outline-4">
+<h4 id="org0197e62">UI/UX 设计</h4>
+<div class="outline-text-4" id="text-org0197e62">
 <ul class="org-ul">
 <li><a href="https://blog.nicolesaidy.com/7-steps-to-become-a-ui-ux-designer-8beed7639a95">7 steps to become a UI/UX designer</a></li>
 <li>Don't Make Me Think</li>
@@ -2527,13 +2344,13 @@ Fluent Design System 中文翻译为流畅设计体系，是微软于 2017 年�
 </div>
 </div>
 
-<div id="outline-container-org9d5a2ed" class="outline-2">
-<h2 id="org9d5a2ed">论文</h2>
-<div class="outline-text-2" id="text-org9d5a2ed">
+<div id="outline-container-orge6cfc73" class="outline-2">
+<h2 id="orge6cfc73">论文</h2>
+<div class="outline-text-2" id="text-orge6cfc73">
 </div>
-<div id="outline-container-orgac0ff7f" class="outline-3">
-<h3 id="orgac0ff7f">如何读</h3>
-<div class="outline-text-3" id="text-orgac0ff7f">
+<div id="outline-container-orgdf6a21b" class="outline-3">
+<h3 id="orgdf6a21b">如何读</h3>
+<div class="outline-text-3" id="text-orgdf6a21b">
 <ul class="org-ul">
 <li><a href="https://organizationsandmarkets.com/2010/08/31/how-to-read-an-academic-article/">How to Read an Academic Article</a></li>
 <li><a href="https://www.cc.gatech.edu/~akmassey/posts/2012-02-15-advice-on-reading-academic-papers.html">Advice on Reading Academic Papers</a></li>
@@ -2544,9 +2361,9 @@ Fluent Design System 中文翻译为流畅设计体系，是微软于 2017 年�
 </div>
 </div>
 
-<div id="outline-container-org2f5808d" class="outline-3">
-<h3 id="org2f5808d">计算机论文集散地</h3>
-<div class="outline-text-3" id="text-org2f5808d">
+<div id="outline-container-org1701dd7" class="outline-3">
+<h3 id="org1701dd7">计算机论文集散地</h3>
+<div class="outline-text-3" id="text-org1701dd7">
 <ul class="org-ul">
 <li><a href="https://www.youtube.com/c/K%C3%A1rolyZsolnai/featured">Two Minute Papers</a></li>
 <li><a href="https://jeffhuang.com/best_paper_awards/">Best Paper Awards in Computer Science (since 1996)</a></li>
@@ -2568,9 +2385,9 @@ Fluent Design System 中文翻译为流畅设计体系，是微软于 2017 年�
 </div>
 </div>
 
-<div id="outline-container-orgc105713" class="outline-2">
-<h2 id="orgc105713">编程规范</h2>
-<div class="outline-text-2" id="text-orgc105713">
+<div id="outline-container-org97bc4bd" class="outline-2">
+<h2 id="org97bc4bd">编程规范</h2>
+<div class="outline-text-2" id="text-org97bc4bd">
 <p>
 有编程规范的好处：
 </p>
@@ -2583,13 +2400,13 @@ Fluent Design System 中文翻译为流畅设计体系，是微软于 2017 年�
 </ul>
 </div>
 
-<div id="outline-container-org6b9d4bf" class="outline-3">
-<h3 id="org6b9d4bf">编程语言</h3>
-<div class="outline-text-3" id="text-org6b9d4bf">
+<div id="outline-container-org5cc8363" class="outline-3">
+<h3 id="org5cc8363">编程语言</h3>
+<div class="outline-text-3" id="text-org5cc8363">
 </div>
-<div id="outline-container-org6c8b448" class="outline-4">
-<h4 id="org6c8b448">C 语言</h4>
-<div class="outline-text-4" id="text-org6c8b448">
+<div id="outline-container-org6d1aa7a" class="outline-4">
+<h4 id="org6d1aa7a">C 语言</h4>
+<div class="outline-text-4" id="text-org6d1aa7a">
 <ul class="org-ul">
 <li><a href="https://mechatronics.me.wisc.edu/labresources/DataSheets/NASA-GSFC_C_Programming_Styles-94-003.pdf">NASA C Style</a></li>
 <li><a href="https://users.ece.cmu.edu/~eno/coding/CCodingStandard.html">C Coding Standard</a></li>
@@ -2600,9 +2417,9 @@ Fluent Design System 中文翻译为流畅设计体系，是微软于 2017 年�
 </div>
 </div>
 
-<div id="outline-container-org3c3355e" class="outline-4">
-<h4 id="org3c3355e">C++ 语言</h4>
-<div class="outline-text-4" id="text-org3c3355e">
+<div id="outline-container-org1d41424" class="outline-4">
+<h4 id="org1d41424">C++ 语言</h4>
+<div class="outline-text-4" id="text-org1d41424">
 <ul class="org-ul">
 <li><a href="https://isocpp.github.io/CppCoreGuidelines/CppCoreGuidelines">C++ Core Guidelines</a>，这个文档是各种 C++ 的大拿包括原作者在内在持续讨论更新的和 C++ 语言相关的各种最佳实践</li>
 <li><a href="https://google.github.io/styleguide/cppguide.html">Google C++ Style Guide</a></li>
@@ -2610,18 +2427,18 @@ Fluent Design System 中文翻译为流畅设计体系，是微软于 2017 年�
 </div>
 </div>
 
-<div id="outline-container-org092f0bd" class="outline-4">
-<h4 id="org092f0bd">Go 语言</h4>
-<div class="outline-text-4" id="text-org092f0bd">
+<div id="outline-container-org40a8227" class="outline-4">
+<h4 id="org40a8227">Go 语言</h4>
+<div class="outline-text-4" id="text-org40a8227">
 <ul class="org-ul">
 <li><a href="https://go.dev/doc/effective_go">Effective Go</a></li>
 </ul>
 </div>
 </div>
 
-<div id="outline-container-org848cd57" class="outline-4">
-<h4 id="org848cd57">Java 语言</h4>
-<div class="outline-text-4" id="text-org848cd57">
+<div id="outline-container-orgf11c8c9" class="outline-4">
+<h4 id="orgf11c8c9">Java 语言</h4>
+<div class="outline-text-4" id="text-orgf11c8c9">
 <ul class="org-ul">
 <li><a href="https://www.oracle.com/java/technologies/javase/codeconventions-contents.html">Code Conventions for the Java TM Programming Language</a>，Java 官方的编程规范</li>
 <li><a href="https://google.github.io/styleguide/javaguide.html">Google Java Style Guide</a></li>
@@ -2629,9 +2446,9 @@ Fluent Design System 中文翻译为流畅设计体系，是微软于 2017 年�
 </div>
 </div>
 
-<div id="outline-container-org7de00c5" class="outline-4">
-<h4 id="org7de00c5">JavaScript 语言</h4>
-<div class="outline-text-4" id="text-org7de00c5">
+<div id="outline-container-org39eb8cc" class="outline-4">
+<h4 id="org39eb8cc">JavaScript 语言</h4>
+<div class="outline-text-4" id="text-org39eb8cc">
 <ul class="org-ul">
 <li><a href="https://jstherightway.org/">JavaScript The Right Way</a>，一个相对比较容读的 JavaScript 编程规范，其中不但有代码规范，还有设计模式，测试工具，编程框架，游戏引擎……</li>
 <li><a href="https://google.github.io/styleguide/jsguide.html">Google JavaScript Style Guide</a></li>
@@ -2652,9 +2469,9 @@ Fluent Design System 中文翻译为流畅设计体系，是微软于 2017 年�
 </div>
 </div>
 
-<div id="outline-container-org8d7d878" class="outline-4">
-<h4 id="org8d7d878">PHP 语言</h4>
-<div class="outline-text-4" id="text-org8d7d878">
+<div id="outline-container-org535ea40" class="outline-4">
+<h4 id="org535ea40">PHP 语言</h4>
+<div class="outline-text-4" id="text-org535ea40">
 <ul class="org-ul">
 <li><a href="https://www.php-fig.org/psr/">PHP Standards Recommendations</a>，PHP 编码规范及标准推荐</li>
 <li><a href="https://phptherightway.com/">PHP The Right Way</a>，除了编码规范之外的各种 PHP 的最佳实践，还包括一些设计模式，安全问题，以及服务部署，Docker 虚拟化以及各种资源</li>
@@ -2663,9 +2480,9 @@ Fluent Design System 中文翻译为流畅设计体系，是微软于 2017 年�
 </div>
 </div>
 
-<div id="outline-container-org55b8ab2" class="outline-4">
-<h4 id="org55b8ab2">Python 语言</h4>
-<div class="outline-text-4" id="text-org55b8ab2">
+<div id="outline-container-orgf913bd0" class="outline-4">
+<h4 id="orgf913bd0">Python 语言</h4>
+<div class="outline-text-4" id="text-orgf913bd0">
 <ul class="org-ul">
 <li><a href="https://www.python.org/dev/peps/pep-0008/">PEP 8 &#x2013; Style Guide for Python Code</a>，Python 官方的编程规范</li>
 <li><a href="https://google.github.io/styleguide/pyguide.html">Google Python Style Guide</a></li>
@@ -2674,9 +2491,9 @@ Fluent Design System 中文翻译为流畅设计体系，是微软于 2017 年�
 </div>
 </div>
 
-<div id="outline-container-orge2c1251" class="outline-4">
-<h4 id="orge2c1251">Ruby 语言</h4>
-<div class="outline-text-4" id="text-orge2c1251">
+<div id="outline-container-orgbcf65f6" class="outline-4">
+<h4 id="orgbcf65f6">Ruby 语言</h4>
+<div class="outline-text-4" id="text-orgbcf65f6">
 <ul class="org-ul">
 <li><a href="https://github.com/airbnb/ruby">Ruby Style Guide - Airbnb</a></li>
 <li><a href="https://github.com/rubocop/ruby-style-guide">The Ruby Style Guide</a></li>
@@ -2684,9 +2501,9 @@ Fluent Design System 中文翻译为流畅设计体系，是微软于 2017 年�
 </div>
 </div>
 
-<div id="outline-container-orgf9a124c" class="outline-4">
-<h4 id="orgf9a124c">Rust 语言</h4>
-<div class="outline-text-4" id="text-orgf9a124c">
+<div id="outline-container-orgc514e03" class="outline-4">
+<h4 id="orgc514e03">Rust 语言</h4>
+<div class="outline-text-4" id="text-orgc514e03">
 <ul class="org-ul">
 <li><a href="https://doc.rust-lang.org/1.0.0/style/">Rust Style Guidelines</a></li>
 <li><a href="https://github.com/rust-dev-tools/fmt-rfcs/blob/master/guide/guide.md">Rust Style Guide</a></li>
@@ -2694,9 +2511,9 @@ Fluent Design System 中文翻译为流畅设计体系，是微软于 2017 年�
 </div>
 </div>
 
-<div id="outline-container-org7b97de6" class="outline-4">
-<h4 id="org7b97de6">Scala 语言</h4>
-<div class="outline-text-4" id="text-org7b97de6">
+<div id="outline-container-orgf3f2dc0" class="outline-4">
+<h4 id="orgf3f2dc0">Scala 语言</h4>
+<div class="outline-text-4" id="text-orgf3f2dc0">
 <ul class="org-ul">
 <li><a href="https://docs.scala-lang.org/style/">Scala Style Guide</a>，Scala 官方的编程规范</li>
 <li><a href="https://github.com/databricks/scala-style-guide">Databricks Scala Guide</a></li>
@@ -2705,9 +2522,9 @@ Fluent Design System 中文翻译为流畅设计体系，是微软于 2017 年�
 </div>
 </div>
 
-<div id="outline-container-org40102fb" class="outline-4">
-<h4 id="org40102fb">Shell 语言</h4>
-<div class="outline-text-4" id="text-org40102fb">
+<div id="outline-container-org2d496b5" class="outline-4">
+<h4 id="org2d496b5">Shell 语言</h4>
+<div class="outline-text-4" id="text-org2d496b5">
 <ul class="org-ul">
 <li><a href="https://google.github.io/styleguide/shellguide.html">Shell Style Guide</a></li>
 </ul>
@@ -2715,9 +2532,9 @@ Fluent Design System 中文翻译为流畅设计体系，是微软于 2017 年�
 </div>
 </div>
 
-<div id="outline-container-org2c78f5f" class="outline-3">
-<h3 id="org2c78f5f">Node.js 相关</h3>
-<div class="outline-text-3" id="text-org2c78f5f">
+<div id="outline-container-org3792eb8" class="outline-3">
+<h3 id="org3792eb8">Node.js 相关</h3>
+<div class="outline-text-3" id="text-org3792eb8">
 <ul class="org-ul">
 <li><a href="https://github.com/Microsoft/nodejs-guidelines">Microsoft + Node.js Guidelines</a></li>
 <li><a href="https://github.com/felixge/node-style-guide">Node.js Style Guide</a></li>
@@ -2725,18 +2542,18 @@ Fluent Design System 中文翻译为流畅设计体系，是微软于 2017 年�
 </div>
 </div>
 
-<div id="outline-container-orgd65adaf" class="outline-3">
-<h3 id="orgd65adaf">Mozilla 的编程规范</h3>
-<div class="outline-text-3" id="text-orgd65adaf">
+<div id="outline-container-orgf8988c1" class="outline-3">
+<h3 id="orgf8988c1">Mozilla 的编程规范</h3>
+<div class="outline-text-3" id="text-orgf8988c1">
 <ul class="org-ul">
 <li><a href="https://firefox-source-docs.mozilla.org/code-quality/coding-style/index.html">Mozilla Coding Style Guide</a>，其中包括 C、C++、Java、Python、JavaScript、Makefile 和 SVG 等编程规范</li>
 </ul>
 </div>
 </div>
 
-<div id="outline-container-org591d81e" class="outline-3">
-<h3 id="org591d81e">前端开发相关</h3>
-<div class="outline-text-3" id="text-org591d81e">
+<div id="outline-container-org3be8355" class="outline-3">
+<h3 id="org3be8355">前端开发相关</h3>
+<div class="outline-text-3" id="text-org3be8355">
 <ul class="org-ul">
 <li><a href="https://cssguidelin.es/">CSS Guidelines</a></li>
 <li><a href="http://smacss.com/">Scalable and Modular Architecture for CSS</a></li>
@@ -2759,22 +2576,22 @@ Fluent Design System 中文翻译为流畅设计体系，是微软于 2017 年�
 </div>
 </div>
 
-<div id="outline-container-orga34c2d8" class="outline-3">
-<h3 id="orga34c2d8">移动端相关</h3>
-<div class="outline-text-3" id="text-orga34c2d8">
+<div id="outline-container-org338081b" class="outline-3">
+<h3 id="org338081b">移动端相关</h3>
+<div class="outline-text-3" id="text-org338081b">
 </div>
-<div id="outline-container-orgec6e118" class="outline-4">
-<h4 id="orgec6e118">Kotlin</h4>
-<div class="outline-text-4" id="text-orgec6e118">
+<div id="outline-container-orgc77883e" class="outline-4">
+<h4 id="orgc77883e">Kotlin</h4>
+<div class="outline-text-4" id="text-orgc77883e">
 <ul class="org-ul">
 <li><a href="https://kotlinlang.org/docs/coding-conventions.html">Coding conventions</a></li>
 </ul>
 </div>
 </div>
 
-<div id="outline-container-orgf83fc9f" class="outline-4">
-<h4 id="orgf83fc9f">Objective-C 语言</h4>
-<div class="outline-text-4" id="text-orgf83fc9f">
+<div id="outline-container-orge98d8e0" class="outline-4">
+<h4 id="orge98d8e0">Objective-C 语言</h4>
+<div class="outline-text-4" id="text-orge98d8e0">
 <ul class="org-ul">
 <li><a href="https://developer.apple.com/library/archive/documentation/Cocoa/Conceptual/ProgrammingWithObjectiveC/Conventions/Conventions.html">Objective-C Conventions</a></li>
 <li><a href="https://github.com/google/styleguide/blob/gh-pages/objcguide.md">Google Objective-C Style Guide</a></li>
@@ -2783,9 +2600,9 @@ Fluent Design System 中文翻译为流畅设计体系，是微软于 2017 年�
 </div>
 </div>
 
-<div id="outline-container-orge40764f" class="outline-4">
-<h4 id="orge40764f">Swift 语言</h4>
-<div class="outline-text-4" id="text-orge40764f">
+<div id="outline-container-org325e932" class="outline-4">
+<h4 id="org325e932">Swift 语言</h4>
+<div class="outline-text-4" id="text-org325e932">
 <ul class="org-ul">
 <li><a href="https://www.swift.org/documentation/api-design-guidelines/">API Design Guidelines</a></li>
 <li><a href="https://github.com/github/swift-style-guide">swift-style-guide</a>，一个 Swift 的相关编程规范的教程</li>
@@ -2798,9 +2615,9 @@ Fluent Design System 中文翻译为流畅设计体系，是微软于 2017 年�
 </div>
 </div>
 
-<div id="outline-container-org58ad37b" class="outline-3">
-<h3 id="org58ad37b">API 相关</h3>
-<div class="outline-text-3" id="text-org58ad37b">
+<div id="outline-container-org0480c8a" class="outline-3">
+<h3 id="org0480c8a">API 相关</h3>
+<div class="outline-text-3" id="text-org0480c8a">
 <ul class="org-ul">
 <li><a href="https://github.com/Microsoft/api-guidelines">Microsoft REST API Guidelines</a></li>
 <li><a href="https://apiguide.readthedocs.io/en/latest/">API Design Guide</a></li>
@@ -2811,13 +2628,13 @@ Fluent Design System 中文翻译为流畅设计体系，是微软于 2017 年�
 </div>
 </div>
 
-<div id="outline-container-orge601367" class="outline-3">
-<h3 id="orge601367">开发工具相关</h3>
-<div class="outline-text-3" id="text-orge601367">
+<div id="outline-container-org3bde427" class="outline-3">
+<h3 id="org3bde427">开发工具相关</h3>
+<div class="outline-text-3" id="text-org3bde427">
 </div>
-<div id="outline-container-orgc8e9cba" class="outline-4">
-<h4 id="orgc8e9cba">Markdown 相关</h4>
-<div class="outline-text-4" id="text-orgc8e9cba">
+<div id="outline-container-org5d703fd" class="outline-4">
+<h4 id="org5d703fd">Markdown 相关</h4>
+<div class="outline-text-4" id="text-org5d703fd">
 <ul class="org-ul">
 <li><a href="https://github.com/google/styleguide/blob/gh-pages/docguide/style.md">Google Markdown style guide</a></li>
 <li><a href="https://cirosantilli.com/markdown-style-guide/">Markdown Style Guide</a></li>
@@ -2825,9 +2642,9 @@ Fluent Design System 中文翻译为流畅设计体系，是微软于 2017 年�
 </div>
 </div>
 
-<div id="outline-container-org13a73b5" class="outline-4">
-<h4 id="org13a73b5">JSON</h4>
-<div class="outline-text-4" id="text-org13a73b5">
+<div id="outline-container-org52d225e" class="outline-4">
+<h4 id="org52d225e">JSON</h4>
+<div class="outline-text-4" id="text-org52d225e">
 <ul class="org-ul">
 <li><a href="https://google.github.io/styleguide/jsoncstyleguide.xml">Google JSON Style Guide</a></li>
 <li><a href="https://web.archive.org/web/20170806104701/http://www.w3resource.com:80/slides/json-style-guide.php">JSON Style Guide</a></li>
@@ -2835,9 +2652,9 @@ Fluent Design System 中文翻译为流畅设计体系，是微软于 2017 年�
 </div>
 </div>
 
-<div id="outline-container-org6a993a6" class="outline-4">
-<h4 id="org6a993a6">Git 相关</h4>
-<div class="outline-text-4" id="text-org6a993a6">
+<div id="outline-container-orgdf47c93" class="outline-4">
+<h4 id="orgdf47c93">Git 相关</h4>
+<div class="outline-text-4" id="text-orgdf47c93">
 <ul class="org-ul">
 <li><a href="https://github.com/agis/git-style-guide">Git Style Guide</a></li>
 <li><a href="https://github.com/git/git/blob/master/Documentation/CodingGuidelines">Git Coding Guidelines</a></li>
@@ -2845,9 +2662,9 @@ Fluent Design System 中文翻译为流畅设计体系，是微软于 2017 年�
 </div>
 </div>
 
-<div id="outline-container-org295ef38" class="outline-4">
-<h4 id="org295ef38">正则表达式相关</h4>
-<div class="outline-text-4" id="text-org295ef38">
+<div id="outline-container-org2543f4e" class="outline-4">
+<h4 id="org2543f4e">正则表达式相关</h4>
+<div class="outline-text-4" id="text-org2543f4e">
 <ul class="org-ul">
 <li><a href="https://github.com/regexhq">RegexHQ</a></li>
 <li><a href="https://github.com/ziishaned/learn-regex">Learn regex the easy way</a></li>
@@ -2857,13 +2674,13 @@ Fluent Design System 中文翻译为流畅设计体系，是微软于 2017 年�
 </div>
 </div>
 
-<div id="outline-container-orgc06f60f" class="outline-2">
-<h2 id="orgc06f60f">Linux 系统、内存和网络</h2>
-<div class="outline-text-2" id="text-orgc06f60f">
+<div id="outline-container-orgf3cea19" class="outline-2">
+<h2 id="orgf3cea19">Linux 系统、内存和网络</h2>
+<div class="outline-text-2" id="text-orgf3cea19">
 </div>
-<div id="outline-container-orge36cd91" class="outline-3">
-<h3 id="orge36cd91">Linux 系统相关</h3>
-<div class="outline-text-3" id="text-orge36cd91">
+<div id="outline-container-orge899f56" class="outline-3">
+<h3 id="orge899f56">Linux 系统相关</h3>
+<div class="outline-text-3" id="text-orge899f56">
 <ul class="org-ul">
 <li><a href="https://access.redhat.com/documentation/en-us/red_hat_enterprise_linux/9-beta">Product Documentation for Red Hat Enterprise Linux 9.0 Beta</a></li>
 <li><a href="https://github.com/0xAX/linux-insides">linux-insides</a></li>
@@ -2878,9 +2695,9 @@ Fluent Design System 中文翻译为流畅设计体系，是微软于 2017 年�
 </div>
 </div>
 
-<div id="outline-container-org850023e" class="outline-3">
-<h3 id="org850023e">内存相关</h3>
-<div class="outline-text-3" id="text-org850023e">
+<div id="outline-container-org57595e5" class="outline-3">
+<h3 id="org57595e5">内存相关</h3>
+<div class="outline-text-3" id="text-org57595e5">
 <ul class="org-ul">
 <li><a href="https://web.archive.org/web/20200505005147/http://futuretech.blinkenlights.nl/misc/cpumemory.pdf">What Every Programmer Should Know About Memory</a></li>
 <li>几篇和内存相关的论文
@@ -2906,13 +2723,13 @@ Fluent Design System 中文翻译为流畅设计体系，是微软于 2017 年�
 </div>
 </div>
 
-<div id="outline-container-orgefeb9cc" class="outline-3">
-<h3 id="orgefeb9cc">计算机网络</h3>
-<div class="outline-text-3" id="text-orgefeb9cc">
+<div id="outline-container-org47f29f9" class="outline-3">
+<h3 id="org47f29f9">计算机网络</h3>
+<div class="outline-text-3" id="text-org47f29f9">
 </div>
-<div id="outline-container-org463bd00" class="outline-4">
-<h4 id="org463bd00">网络学习</h4>
-<div class="outline-text-4" id="text-org463bd00">
+<div id="outline-container-orgbde7331" class="outline-4">
+<h4 id="orgbde7331">网络学习</h4>
+<div class="outline-text-4" id="text-orgbde7331">
 <ul class="org-ul">
 <li>Computer Networks, 5th Edition，Andrew S. Tanenbaum / David J. Wetherall</li>
 <li><a href="https://web.archive.org/web/20191030175758/http://www.site.uottawa.ca:80/~shervin/courses/ceg4185/lectures/">渥汰华大学的一个课程讲义</a></li>
@@ -2921,9 +2738,9 @@ Fluent Design System 中文翻译为流畅设计体系，是微软于 2017 年�
 </div>
 </div>
 
-<div id="outline-container-orgfb3dea2" class="outline-4">
-<h4 id="orgfb3dea2">网络调优</h4>
-<div class="outline-text-4" id="text-orgfb3dea2">
+<div id="outline-container-org9138b4b" class="outline-4">
+<h4 id="org9138b4b">网络调优</h4>
+<div class="outline-text-4" id="text-org9138b4b">
 <ul class="org-ul">
 <li><a href="https://lartc.org/">Linux Advanced Routing &amp; Traffic Control</a></li>
 <li><a href="https://access.redhat.com/sites/default/files/attachments/20150325_network_performance_tuning.pdf">Red Hat Enterprise Linux Network Performance Tuning Guide</a></li>
@@ -2938,9 +2755,9 @@ Fluent Design System 中文翻译为流畅设计体系，是微软于 2017 年�
 </div>
 </div>
 
-<div id="outline-container-org7b4bacd" class="outline-4">
-<h4 id="org7b4bacd">网络协议</h4>
-<div class="outline-text-4" id="text-org7b4bacd">
+<div id="outline-container-orgd1d0384" class="outline-4">
+<h4 id="orgd1d0384">网络协议</h4>
+<div class="outline-text-4" id="text-orgd1d0384">
 <p>
 想要学习网络协议最好的方式就是学习通讯相关的 RFC。读 RFC 有几个好处，一方面可以学习技术，另一方面，可以通过 RFC 学习到一个好的技术文档是怎么写的，还能看到各种解决问题的方案和思路。
 </p>
@@ -3032,13 +2849,13 @@ HTTP 1.1 的原始 RFC 是 1999 年 6 月的 <a href="https://datatracker.ietf.o
 </div>
 </div>
 
-<div id="outline-container-org0f95dcc" class="outline-2">
-<h2 id="org0f95dcc">异步 I/O 模型和 Lock-Free 编程</h2>
-<div class="outline-text-2" id="text-org0f95dcc">
+<div id="outline-container-org90d8f7b" class="outline-2">
+<h2 id="org90d8f7b">异步 I/O 模型和 Lock-Free 编程</h2>
+<div class="outline-text-2" id="text-org90d8f7b">
 </div>
-<div id="outline-container-orga7dfd5f" class="outline-3">
-<h3 id="orga7dfd5f">异步 I/O 模型</h3>
-<div class="outline-text-3" id="text-orga7dfd5f">
+<div id="outline-container-orge3e071c" class="outline-3">
+<h3 id="orge3e071c">异步 I/O 模型</h3>
+<div class="outline-text-3" id="text-orge3e071c">
 <p>
 史蒂文斯（Stevens）在《UNIX 网络编程》一书 6.2 I/O Models 中介绍了五种 I/O 模型。
 </p>
@@ -3091,9 +2908,9 @@ Java 相关的 I/O 模型的文章：<a href="https://www.slideshare.net/e456/ty
 </div>
 </div>
 
-<div id="outline-container-org1432342" class="outline-3">
-<h3 id="org1432342">Lock-Free 编程</h3>
-<div class="outline-text-3" id="text-org1432342">
+<div id="outline-container-org4d7ca18" class="outline-3">
+<h3 id="org4d7ca18">Lock-Free 编程</h3>
+<div class="outline-text-3" id="text-org4d7ca18">
 <p>
 Lock-Free - 无锁技术越来越被开发人员重视，因为锁对于性能的影响实在是太大了，所以如果想开发出一个高性能的程序，你就非常有必要学习 Lock-Free 的编程方式。
 </p>
@@ -3156,9 +2973,9 @@ Lock-Free - 无锁技术越来越被开发人员重视，因为锁对于性能�
 </div>
 </div>
 
-<div id="outline-container-org14e9e44" class="outline-3">
-<h3 id="org14e9e44">其他：</h3>
-<div class="outline-text-3" id="text-org14e9e44">
+<div id="outline-container-org4d8d0be" class="outline-3">
+<h3 id="org4d8d0be">其他：</h3>
+<div class="outline-text-3" id="text-org4d8d0be">
 <ul class="org-ul">
 <li><a href="https://www.variadic.xyz/2011/08/15/all-about-64-bit-programming-in-one-place/">All about 64-bit programming in one place</a></li>
 <li><a href="https://dl.acm.org/doi/10.1145/3093336.3037750">What Scalable Programs Need from Transactional Memory</a></li>
@@ -3174,9 +2991,9 @@ Lock-Free - 无锁技术越来越被开发人员重视，因为锁对于性能�
 </div>
 </div>
 
-<div id="outline-container-org9ca29ca" class="outline-3">
-<h3 id="org9ca29ca">相关论文</h3>
-<div class="outline-text-3" id="text-org9ca29ca">
+<div id="outline-container-org2adff47" class="outline-3">
+<h3 id="org2adff47">相关论文</h3>
+<div class="outline-text-3" id="text-org2adff47">
 <ul class="org-ul">
 <li><a href="https://www.microsoft.com/en-us/research/wp-content/uploads/2016/02/acrobat-17.pdf">Hints for Computer System Design</a>，计算机设计的忠告，这是 ACM 图灵奖得主 Butler Lampson 在 Xerox PARC 工作时的一篇论文。这篇论文简明扼要地总结了他在做系统设计时的一些想法，非常值得一读。（用他的话来说，“Studying the design and implementation of a number of computer has led to some general hints for system design. They are described here and illustrated by many examples, ranging from hardware such as the Alto and the Dorado to application programs such as Bravo and Star“。）</li>
 <li><a href="https://www.hpl.hp.com/techreports/tandem/TR-86.1.pdf">The 5 minute rule for trading memory for disc accesses and the 5 byte rule for trading memory for CPU time</a>，根据文章名称也可以看出，5 分钟法则是用来衡量内存与磁盘的，而 5 字节法则则是在内存和 CPU 之间的权衡。这两个法则是 Jim Gray 和 Franco Putzolu 在 1986 年的文章。
@@ -3187,13 +3004,13 @@ Lock-Free - 无锁技术越来越被开发人员重视，因为锁对于性能�
 </div>
 </div>
 
-<div id="outline-container-orgc3c08cc" class="outline-2">
-<h2 id="orgc3c08cc">Java 底层知识</h2>
-<div class="outline-text-2" id="text-orgc3c08cc">
+<div id="outline-container-org6b41ce9" class="outline-2">
+<h2 id="org6b41ce9">Java 底层知识</h2>
+<div class="outline-text-2" id="text-org6b41ce9">
 </div>
-<div id="outline-container-orgce85467" class="outline-3">
-<h3 id="orgce85467">Java 字节码相关</h3>
-<div class="outline-text-3" id="text-orgce85467">
+<div id="outline-container-orgb5f7a1f" class="outline-3">
+<h3 id="orgb5f7a1f">Java 字节码相关</h3>
+<div class="outline-text-3" id="text-orgb5f7a1f">
 <ul class="org-ul">
 <li><a href="https://dzone.com/articles/introduction-to-java-bytecode">Introduction to Java Bytecode</a></li>
 <li><a href="https://github.com/jon-bell/bytecode-examples">Java Bytecode and JVMTI Examples</a>，这是一些使用 <a href="https://docs.oracle.com/javase/7/docs/platform/jvmti/jvmti.html">JVM Tool Interface</a> 操作字节码的比较实用的例子。包括方法调用统计、静态字节码修改、Heap Taggin 和 Heap Walking</li>
@@ -3211,9 +3028,9 @@ Lock-Free - 无锁技术越来越被开发人员重视，因为锁对于性能�
 </div>
 </div>
 
-<div id="outline-container-orgd8689e6" class="outline-3">
-<h3 id="orgd8689e6">JVM 相关</h3>
-<div class="outline-text-3" id="text-orgd8689e6">
+<div id="outline-container-org0fdc0ac" class="outline-3">
+<h3 id="org0fdc0ac">JVM 相关</h3>
+<div class="outline-text-3" id="text-org0fdc0ac">
 <ul class="org-ul">
 <li>阅读说明书：<a href="https://docs.oracle.com/javase/specs/jvms/se8/jvms8.pdf">The Java® Virtual Machine Specification Java SE 8 Edition</a></li>
 <li><a href="https://github.com/waylau/java-virtual-machine-specification">The Java® Virtual Machine Specification.《Java 虚拟机规范（第 11 版）》中文翻译及示例</a></li>
@@ -3253,9 +3070,9 @@ Lock-Free - 无锁技术越来越被开发人员重视，因为锁对于性能�
 </div>
 </div>
 
-<div id="outline-container-orga7d05f5" class="outline-2">
-<h2 id="orga7d05f5">数据库</h2>
-<div class="outline-text-2" id="text-orga7d05f5">
+<div id="outline-container-orgecdc7ea" class="outline-2">
+<h2 id="orgecdc7ea">数据库</h2>
+<div class="outline-text-2" id="text-orgecdc7ea">
 <p>
 对于数据库方向，重点就是两种数据库，一种是以 SQL 为代表的关系型数据库，另一种是以非 SQL 为代表的 NoSQL 数据库。关系型数据库主要有三个：Oracle、MySQL 和 Postgres。
 </p>
@@ -3273,9 +3090,9 @@ NoSQL 数据库千奇百怪，其主要是解决了关系型数据库中的各�
 </p>
 </div>
 
-<div id="outline-container-orgcc4d9fa" class="outline-3">
-<h3 id="orgcc4d9fa">关系型数据库</h3>
-<div class="outline-text-3" id="text-orgcc4d9fa">
+<div id="outline-container-orgfa80f27" class="outline-3">
+<h3 id="orgfa80f27">关系型数据库</h3>
+<div class="outline-text-3" id="text-orgfa80f27">
 <p>
 关系型数据库最主要的两个代表是闭源的 Oracle 和开源的 MySQL。
 </p>
@@ -3364,9 +3181,9 @@ MySQL 有两个比较有名的分支，一个是 Percona，另一个是 MariaDB�
 </div>
 </div>
 
-<div id="outline-container-orge8fc702" class="outline-3">
-<h3 id="orge8fc702">NoSQL 数据库</h3>
-<div class="outline-text-3" id="text-orge8fc702">
+<div id="outline-container-orge269127" class="outline-3">
+<h3 id="orge269127">NoSQL 数据库</h3>
+<div class="outline-text-3" id="text-orge269127">
 <p>
 关于 NoSQL 数据库，其最初目的就是解决大数据的问题。然而，也有人把其直接用来替换掉关系型数据库。所以在学习这个技术之前，我们需要对这个技术的一些概念和初衷有一定的了解。下面是一些推荐资料。
 </p>
@@ -3395,17 +3212,17 @@ MySQL 有两个比较有名的分支，一个是 Percona，另一个是 MariaDB�
 </div>
 </div>
 
-<div id="outline-container-orgcea8f94" class="outline-3">
-<h3 id="orgcea8f94">各种 NoSQL 数据库</h3>
-<div class="outline-text-3" id="text-orgcea8f94">
+<div id="outline-container-org160da98" class="outline-3">
+<h3 id="org160da98">各种 NoSQL 数据库</h3>
+<div class="outline-text-3" id="text-org160da98">
 <p>
 学习使用 NoSQL 数据库其实并不是一件很难的事，只要你把官方的文档仔细地读一下，是很容易上手的，而且大多数 NoSQL 数据库都是开源的，所以，也可以通过代码自己解决问题。下面我主要给出一些典型的 NoSQL 数据库的一些经验型的文章，供你参考。
 </p>
 </div>
 
-<div id="outline-container-org76631ae" class="outline-4">
-<h4 id="org76631ae">列数据库 Column Database</h4>
-<div class="outline-text-4" id="text-org76631ae">
+<div id="outline-container-org85de984" class="outline-4">
+<h4 id="org85de984">列数据库 Column Database</h4>
+<div class="outline-text-4" id="text-org85de984">
 <ul class="org-ul">
 <li>Cassandra 相关
 <ul class="org-ul">
@@ -3446,9 +3263,9 @@ MySQL 有两个比较有名的分支，一个是 Percona，另一个是 MariaDB�
 </div>
 </div>
 
-<div id="outline-container-orgaa1d8d4" class="outline-4">
-<h4 id="orgaa1d8d4">文档数据库 Document Database - MongoDB, SimpleDB, CouchDB</h4>
-<div class="outline-text-4" id="text-orgaa1d8d4">
+<div id="outline-container-org32f01ca" class="outline-4">
+<h4 id="org32f01ca">文档数据库 Document Database - MongoDB, SimpleDB, CouchDB</h4>
+<div class="outline-text-4" id="text-org32f01ca">
 <ul class="org-ul">
 <li><a href="https://docs.microsoft.com/en-us/archive/msdn-magazine/2011/november/data-points-what-the-heck-are-document-databases">Data Points - What the Heck Are Document Databases?</a></li>
 <li><a href="https://www.mongodb.com/blog/post/ebay-building-mission-critical-multi-data-center-applications-with-mongodb">eBay: Building Mission-Critical Multi-Data Center Applications with MongoDB</a></li>
@@ -3461,9 +3278,9 @@ MySQL 有两个比较有名的分支，一个是 Percona，另一个是 MariaDB�
 </div>
 </div>
 
-<div id="outline-container-orgc98ef1c" class="outline-4">
-<h4 id="orgc98ef1c">数据结构数据库 Data structure Database - Redis</h4>
-<div class="outline-text-4" id="text-orgc98ef1c">
+<div id="outline-container-org309546b" class="outline-4">
+<h4 id="org309546b">数据结构数据库 Data structure Database - Redis</h4>
+<div class="outline-text-4" id="text-org309546b">
 <ul class="org-ul">
 <li><a href="https://tech.trivago.com/2017/01/25/learn-redis-the-hard-way-in-production/">Learn Redis the hard way (in production) at Trivago</a></li>
 <li><a href="http://highscalability.com/blog/2014/9/8/how-twitter-uses-redis-to-scale-105tb-ram-39mm-qps-10000-ins.html">Twitter: How Twitter Uses Redis To Scale - 105TB RAM, 39MM QPS, 10,000+ Instances</a></li>
@@ -3478,9 +3295,9 @@ MySQL 有两个比较有名的分支，一个是 Percona，另一个是 MariaDB�
 </div>
 </div>
 
-<div id="outline-container-org9cfd8a2" class="outline-4">
-<h4 id="org9cfd8a2">时序数据库 Time-Series Database</h4>
-<div class="outline-text-4" id="text-org9cfd8a2">
+<div id="outline-container-org6b2d6da" class="outline-4">
+<h4 id="org6b2d6da">时序数据库 Time-Series Database</h4>
+<div class="outline-text-4" id="text-org6b2d6da">
 <ul class="org-ul">
 <li><a href="https://blog.timescale.com/blog/what-the-heck-is-time-series-data-and-why-do-i-need-a-time-series-database-dcf3b1b18563/">What is Time-Series Data &amp; Why We Need a Time-Series Database</a></li>
 <li><a href="https://blog.timescale.com/blog/time-series-data-why-and-how-to-use-a-relational-database-instead-of-nosql-d0cd6975e87c/">Time Series Data: Why and How to Use a Relational Database instead of NoSQL</a></li>
@@ -3494,9 +3311,9 @@ MySQL 有两个比较有名的分支，一个是 Percona，另一个是 MariaDB�
 </div>
 </div>
 
-<div id="outline-container-org0dc09a7" class="outline-4">
-<h4 id="org0dc09a7">图数据库 - Graph Platform</h4>
-<div class="outline-text-4" id="text-org0dc09a7">
+<div id="outline-container-orge62bacb" class="outline-4">
+<h4 id="orge62bacb">图数据库 - Graph Platform</h4>
+<div class="outline-text-4" id="text-orge62bacb">
 <ul class="org-ul">
 <li>首先是 IBM Devloperworks 上的两个简介性的 PPT。
 <ul class="org-ul">
@@ -3516,9 +3333,9 @@ MySQL 有两个比较有名的分支，一个是 Percona，另一个是 MariaDB�
 </div>
 </div>
 
-<div id="outline-container-org715e676" class="outline-4">
-<h4 id="org715e676">搜索数据库 - ElasticSearch</h4>
-<div class="outline-text-4" id="text-org715e676">
+<div id="outline-container-orgacfca89" class="outline-4">
+<h4 id="orgacfca89">搜索数据库 - ElasticSearch</h4>
+<div class="outline-text-4" id="text-orgacfca89">
 <ul class="org-ul">
 <li><a href="https://www.elastic.co/guide/en/elasticsearch/reference/current/index.html">Elasticsearch: The Definitive Guide</a> 这是官网方的 ElasticSearch 的学习资料，基本上来说，看这个就够了。</li>
 <li>接下来是 4 篇和性能调优相关的工程实践。
@@ -3535,13 +3352,13 @@ MySQL 有两个比较有名的分支，一个是 Percona，另一个是 MariaDB�
 </div>
 </div>
 
-<div id="outline-container-org1dcef2b" class="outline-2">
-<h2 id="org1dcef2b">容器化和自动化运维</h2>
-<div class="outline-text-2" id="text-org1dcef2b">
+<div id="outline-container-org0df187e" class="outline-2">
+<h2 id="org0df187e">容器化和自动化运维</h2>
+<div class="outline-text-2" id="text-org0df187e">
 </div>
-<div id="outline-container-org2fd67ee" class="outline-3">
-<h3 id="org2fd67ee">Docker</h3>
-<div class="outline-text-3" id="text-org2fd67ee">
+<div id="outline-container-orgc95553e" class="outline-3">
+<h3 id="orgc95553e">Docker</h3>
+<div class="outline-text-3" id="text-orgc95553e">
 <ul class="org-ul">
 <li><a href="https://docs.docker.com/get-started/overview/">Docker overview</a></li>
 <li><a href="https://training.play-with-docker.com/">在线体验</a></li>
@@ -3614,9 +3431,9 @@ Docker 有下面几种网络解决方案：<a href="https://www.tigera.io/blog/d
 </ul>
 </div>
 
-<div id="outline-container-orged1a980" class="outline-4">
-<h4 id="orged1a980">最佳实践</h4>
-<div class="outline-text-4" id="text-orged1a980">
+<div id="outline-container-org3e55d4d" class="outline-4">
+<h4 id="org3e55d4d">最佳实践</h4>
+<div class="outline-text-4" id="text-org3e55d4d">
 <p>
 下面分享一些与 Docker 相关的最佳实践。
 </p>
@@ -3631,9 +3448,9 @@ Docker 有下面几种网络解决方案：<a href="https://www.tigera.io/blog/d
 </div>
 </div>
 
-<div id="outline-container-orgb6f8756" class="outline-3">
-<h3 id="orgb6f8756">Kubernetes</h3>
-<div class="outline-text-3" id="text-orgb6f8756">
+<div id="outline-container-org461e7e2" class="outline-3">
+<h3 id="org461e7e2">Kubernetes</h3>
+<div class="outline-text-3" id="text-org461e7e2">
 <p>
 Kubernetes 是 Google 开源的容器集群管理系统，是 Google 多年大规模容器管理技术 Borg 的开源版本，也是 CNCF 最重要的项目之一，主要功能包括：
 </p>
@@ -3740,9 +3557,9 @@ CI/CD 相关的文章
 </ul>
 </div>
 
-<div id="outline-container-orgdaf8fc4" class="outline-4">
-<h4 id="orgdaf8fc4">最佳实践</h4>
-<div class="outline-text-4" id="text-orgdaf8fc4">
+<div id="outline-container-org07db616" class="outline-4">
+<h4 id="org07db616">最佳实践</h4>
+<div class="outline-text-4" id="text-org07db616">
 <ul class="org-ul">
 <li><a href="https://sachin34268.medium.com/kubernetes-best-practices-9b1435a4cb53">Kubernetes Best Practices</a> by Sachin Arote，AWS 工程师总结的最佳实践。</li>
 <li><a href="https://speakerdeck.com/thesandlord/kubernetes-best-practices">Kubernetes Best Practices</a> by Sandeep Dinesh，Google 云平台工程师总结的最佳实践。</li>
@@ -3751,9 +3568,9 @@ CI/CD 相关的文章
 </div>
 </div>
 
-<div id="outline-container-org396682b" class="outline-3">
-<h3 id="org396682b">Docker 和 Kubernetes 资源汇总</h3>
-<div class="outline-text-3" id="text-org396682b">
+<div id="outline-container-org762d27d" class="outline-3">
+<h3 id="org762d27d">Docker 和 Kubernetes 资源汇总</h3>
+<div class="outline-text-3" id="text-org762d27d">
 <p>
 GitHub 上和 Docker &amp; Kubernetes 相关的 Awesome 系列：<a href="https://github.com/veggiemonk/awesome-docker">Awesome Docker</a>，<a href="https://github.com/ramitsurana/awesome-kubernetes">Awesome Kubernetes</a>
 </p>
@@ -3783,13 +3600,13 @@ GitHub 上和 Docker &amp; Kubernetes 相关的 Awesome 系列：<a href="https:
 </div>
 </div>
 
-<div id="outline-container-org77cf69c" class="outline-2">
-<h2 id="org77cf69c">参考资料</h2>
-<div class="outline-text-2" id="text-org77cf69c">
+<div id="outline-container-orgb5b7ee0" class="outline-2">
+<h2 id="orgb5b7ee0">参考资料</h2>
+<div class="outline-text-2" id="text-orgb5b7ee0">
 </div>
-<div id="outline-container-org95e63d4" class="outline-3">
-<h3 id="org95e63d4">技术领域</h3>
-<div class="outline-text-3" id="text-org95e63d4">
+<div id="outline-container-org8af052c" class="outline-3">
+<h3 id="org8af052c">技术领域</h3>
+<div class="outline-text-3" id="text-org8af052c">
 <ul class="org-ul">
 <li><a href="https://github.com/JacksonTian/fks">https://github.com/JacksonTian/fks</a></li>
 <li><a href="https://github.com/KieSun/all-of-frontend">https://github.com/KieSun/all-of-frontend</a></li>
@@ -3801,9 +3618,9 @@ GitHub 上和 Docker &amp; Kubernetes 相关的 Awesome 系列：<a href="https:
 </ul>
 </div>
 </div>
-<div id="outline-container-org73c5f7f" class="outline-3">
-<h3 id="org73c5f7f">如何学习技术</h3>
-<div class="outline-text-3" id="text-org73c5f7f">
+<div id="outline-container-org38ff912" class="outline-3">
+<h3 id="org38ff912">如何学习技术</h3>
+<div class="outline-text-3" id="text-org38ff912">
 <ul class="org-ul">
 <li><a href="https://geekplux.com/posts/learning-by-index">建立索引式的学习方法</a></li>
 <li><a href="https://time.geekbang.org/column/intro/100002201">程序员练级攻略</a> by 陈皓（左耳朵耗子）</li>
