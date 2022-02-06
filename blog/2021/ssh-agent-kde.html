@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html lang="zh">
 <head>
-<!-- 2022-02-06 Sun 09:01 -->
+<!-- 2022-02-06 Sun 09:09 -->
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>KDE 开机自启 ssh agent，加载密匙</title>
@@ -190,7 +190,6 @@
   .org-svg { width: 90%; }
   /*]]>*/-->
 </style>
-<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin><link href="https://fonts.googleapis.com/css2?family=Noto+Sans+SC&display=swap" rel="stylesheet">
 <link rel="stylesheet" href="/theme/normalize.css"/>
 <link rel="stylesheet" href="/theme/site.css"/>
 <script defer src='https://static.cloudflareinsights.com/beacon.min.js' data-cf-beacon='{"token": "d5b841b503ed4d1b8fad459b84d1cc2f"}'></script>
@@ -209,18 +208,18 @@
 <a href="https://userbase.kde.org/KDE_Wallet_Manager">Kwallet</a> 是 Linux 桌面管理器 KDE 下的一款管理密码的应用。
 </p>
 
-<div id="outline-container-org8d6d9f6" class="outline-2">
-<h2 id="org8d6d9f6">Kwallet</h2>
-<div class="outline-text-2" id="text-org8d6d9f6">
+<div id="outline-container-orgf345129" class="outline-2">
+<h2 id="orgf345129">Kwallet</h2>
+<div class="outline-text-2" id="text-orgf345129">
 <p>
 创建一个新钱包，并为它设置密码。
 </p>
 </div>
 </div>
 
-<div id="outline-container-org1cf9b3c" class="outline-2">
-<h2 id="org1cf9b3c">开机启动 ssh-agent</h2>
-<div class="outline-text-2" id="text-org1cf9b3c">
+<div id="outline-container-orga6c713f" class="outline-2">
+<h2 id="orga6c713f">开机启动 ssh-agent</h2>
+<div class="outline-text-2" id="text-orga6c713f">
 <p>
 确保安装了 <a href="https://github.com/KDE/ksshaskpass">Ksshaskpass</a>。
 </p>
@@ -251,9 +250,9 @@
 </div>
 </div>
 
-<div id="outline-container-orgd60fb44" class="outline-2">
-<h2 id="orgd60fb44">开机添加 ssh 密匙</h2>
-<div class="outline-text-2" id="text-orgd60fb44">
+<div id="outline-container-org02dce16" class="outline-2">
+<h2 id="org02dce16">开机添加 ssh 密匙</h2>
+<div class="outline-text-2" id="text-org02dce16">
 <p>
 新建文件 <code>~/.config/autostart/ssh-add.desktop</code> ：
 </p>
@@ -268,9 +267,9 @@
 </div>
 </div>
 
-<div id="outline-container-orgde28a8e" class="outline-2">
-<h2 id="orgde28a8e">环境变量与普通应用</h2>
-<div class="outline-text-2" id="text-orgde28a8e">
+<div id="outline-container-orgaa0216e" class="outline-2">
+<h2 id="orgaa0216e">环境变量与普通应用</h2>
+<div class="outline-text-2" id="text-orgaa0216e">
 <p>
 启动 ssh agent 要比添加 ssh 密匙提前。因为前者使用的是环境变量，后者使用的只是普通应用自启动。</p>
 </div>
