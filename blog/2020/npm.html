@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html lang="zh">
 <head>
-<!-- 2022-02-06 Sun 15:53 -->
+<!-- 2022-02-06 Sun 16:36 -->
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>使用 npm</title>
@@ -87,7 +87,7 @@
 <div id="outline-container-三问题" class="outline-2">
 <h2 id="三问题">三、问题</h2>
 <div class="outline-text-2" id="text-三问题">
-<pre class="example" id="orgc700bfb">
+<pre class="example" id="org71db738">
 npm WARN deprecated bcrypt-nodejs@0.0.3: bcrypt-nodejs is no longer actively maintained. Please use bcrypt or bcryptjs. See https://github.com/kelektiv/node.bcrypt.js/wiki/bcrypt-vs-brypt.js to learn more about these two options
 npm WARN deprecated minimatch@2.0.10: Please update to minimatch 3.0.2 or higher to avoid a RegExp DoS issue
 npm WARN deprecated connect@2.7.11: connect 2.x series is deprecated
@@ -136,7 +136,7 @@ jquery 版本信息：
 </p>
 
 <div class="org-src-container">
-<pre class="src src-shell">E:\&#21487;&#20197;&#22312;&#20219;&#24847;&#36335;&#24452;&#25191;&#34892;&gt;npm view jquery versions
+<pre class="src src-sh">E:\&#21487;&#20197;&#22312;&#20219;&#24847;&#36335;&#24452;&#25191;&#34892;&gt;npm view jquery versions
 
 [
   <span style="color: #ddbc91;">'1.5.1'</span>,       <span style="color: #ddbc91;">'1.6.2'</span>,       <span style="color: #ddbc91;">'1.6.3'</span>,
@@ -165,7 +165,7 @@ jquery 版本信息：
 </p>
 
 <div class="org-src-container">
-<pre class="src src-shell">E:\&#21487;&#20197;&#22312;&#20219;&#24847;&#36335;&#24452;&#25191;&#34892;&gt;npm view jquery version
+<pre class="src src-sh">E:\&#21487;&#20197;&#22312;&#20219;&#24847;&#36335;&#24452;&#25191;&#34892;&gt;npm view jquery version
 3.4.1
 </pre>
 </div></li>
@@ -177,7 +177,7 @@ jquery 的信息：
 </p>
 
 <div class="org-src-container">
-<pre class="src src-shell">E:\&#21487;&#20197;&#22312;&#20219;&#24847;&#36335;&#24452;&#25191;&#34892;&gt;npm info jquery
+<pre class="src src-sh">E:\&#21487;&#20197;&#22312;&#20219;&#24847;&#36335;&#24452;&#25191;&#34892;&gt;npm info jquery
 
 jquery@3.4.1 | MIT | deps: none | versions: 50
 JavaScript library for DOM operations
@@ -216,7 +216,7 @@ jquery，所以返回的结果为 =empty=：
 </p>
 
 <div class="org-src-container">
-<pre class="src src-shell">E:\&#24403;&#21069;&#30446;&#24405;&gt;npm ls jquery
+<pre class="src src-sh">E:\&#24403;&#21069;&#30446;&#24405;&gt;npm ls jquery
 hexo-site@0.0.0 E:\&#24403;&#21069;&#30446;&#24405;
 <span style="font-weight: bold;">`-- (empty)</span>
 </pre>
@@ -228,7 +228,7 @@ hexo，所以会显示。因此，当我执行 <code>npm ls hexo</code> 时，�
 </p>
 
 <div class="org-src-container">
-<pre class="src src-shell">E:\&#24403;&#21069;&#30446;&#24405;&gt;npm ls hexo
+<pre class="src src-sh">E:\&#24403;&#21069;&#30446;&#24405;&gt;npm ls hexo
 hexo-site@0.0.0 E:\&#24403;&#21069;&#30446;&#24405;
 <span style="font-weight: bold;">`-- hexo@4.2.0</span>
 </pre>
@@ -240,7 +240,7 @@ jquery，所以它会显示：
 </p>
 
 <div class="org-src-container">
-<pre class="src src-shell">E:\&#24403;&#21069;&#30446;&#24405;&gt;npm ls jquery -g
+<pre class="src src-sh">E:\&#24403;&#21069;&#30446;&#24405;&gt;npm ls jquery -g
 C:\Users\yourname\AppData\Roaming\npm
 <span style="font-weight: bold;">`-- (empty)</span>
 </pre>
@@ -251,7 +251,7 @@ C:\Users\yourname\AppData\Roaming\npm
 </p>
 
 <div class="org-src-container">
-<pre class="src src-shell">E:\&#24403;&#21069;&#30446;&#24405;&gt;npm ls hexo -g
+<pre class="src src-sh">E:\&#24403;&#21069;&#30446;&#24405;&gt;npm ls hexo -g
 C:\Users\yourname\AppData\Roaming\npm
 <span style="font-weight: bold;">`-- (empty)</span>
 </pre>
@@ -263,7 +263,7 @@ C:\Users\yourname\AppData\Roaming\npm
 </p>
 
 <div class="org-src-container">
-<pre class="src src-shell">E:\&#24403;&#21069;&#30446;&#24405;&gt;npm ls hexo-cli -g
+<pre class="src src-sh">E:\&#24403;&#21069;&#30446;&#24405;&gt;npm ls hexo-cli -g
 C:\Users\yourname\AppData\Roaming\npm
 <span style="font-weight: bold;">`-- hexo-cli@3.1.0</span>
 </pre>
@@ -283,7 +283,7 @@ empty 的原因。
 </p>
 
 <div class="org-src-container">
-<pre class="src src-shell">E:\&#24403;&#21069;&#30446;&#24405;&gt;npm ls serverless -g
+<pre class="src src-sh">E:\&#24403;&#21069;&#30446;&#24405;&gt;npm ls serverless -g
 C:\Users\yourname\AppData\Roaming\npm
 <span style="font-weight: bold;">`-- serverless@1.67.0</span>
 </pre>
@@ -310,7 +310,7 @@ C:\Users\yourname\AppData\Roaming\npm
 <code>npm info vue</code> 查看 vue 信息：
 </p>
 
-<pre class="example" id="org7330161">
+<pre class="example" id="orgb218b3e">
 PS C:\Users\yourname&gt; npm info vue
 
 vue@2.6.11 | MIT | deps: none | versions: 263
@@ -338,7 +338,7 @@ published 3 months ago by yyx990803 &lt;yyx990803@gmail.com&gt;
 <code>npm view vue versions</code> 查看 vue 的所有版本：
 </p>
 
-<pre class="example" id="orgff59c0a">
+<pre class="example" id="orga46ceda">
 PS C:\Users\yourname&gt; npm view vue versions
 
 [
@@ -441,7 +441,7 @@ PS C:\Users\yourname&gt; npm view vue versions
 <code>npm install vue</code> 下载最新 vue 发布版本：
 </p>
 
-<pre class="example" id="org0e2fab4">
+<pre class="example" id="org732559e">
 PS C:\Users\yourname&gt; npm install vue
 npm WARN saveError ENOENT: no such file or directory, open 'C:\Users\yourname\package.json'
 npm WARN enoent ENOENT: no such file or directory, open 'C:\Users\yourname\package.json'
@@ -469,7 +469,7 @@ added 1 package from 1 contributor in 3.385s
 </p>
 
 <div class="org-src-container">
-<pre class="src src-shell">E:\&#24403;&#21069;&#30446;&#24405;&gt;npm install -g vue
+<pre class="src src-sh">E:\&#24403;&#21069;&#30446;&#24405;&gt;npm install -g vue
 + vue@2.6.11
 added 1 package from 1 contributor<span style="color: #91a0b3;"> in</span> 0.518s
 </pre>
@@ -482,7 +482,7 @@ added 1 package from 1 contributor<span style="color: #91a0b3;"> in</span> 0.518
 <code>npm ls vue</code> 查看本地 vue 版本：
 </p>
 
-<pre class="example" id="orgfc49c3b">
+<pre class="example" id="org9eb4ab6">
 PS C:\Users\yourname&gt; npm ls vue
 C:\Users\Gao Tian He
 `-- vue@2.6.11
@@ -492,7 +492,7 @@ C:\Users\Gao Tian He
 <code>npm ls vue -g</code> 查看全局安装 vue 包版本：
 </p>
 
-<pre class="example" id="orgb106491">
+<pre class="example" id="org879982e">
 PS C:\Users\yourname&gt; npm ls vue -g
 C:\Users\yourname\AppData\Roaming\npm
 `-- (empty)
@@ -509,7 +509,7 @@ C:\Users\yourname\AppData\Roaming\npm
 vue。当我通过上述命令全局安装后，再次执行=npm ls vue -g=，就会出现：
 </p>
 
-<pre class="example" id="org2f28792">
+<pre class="example" id="org611b910">
 PS C:\Users\yourname&gt; npm ls vue -g
 C:\Users\yourname\AppData\Roaming\npm
 `-- vue@2.6.11
