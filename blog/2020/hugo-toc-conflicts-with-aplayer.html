@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html lang="zh">
 <head>
-<!-- 2022-02-06 Sun 09:00 -->
+<!-- 2022-02-06 Sun 09:08 -->
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>Hugo 目录和音乐播放器 APlayer 的冲突问题</title>
@@ -190,7 +190,6 @@
   .org-svg { width: 90%; }
   /*]]>*/-->
 </style>
-<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin><link href="https://fonts.googleapis.com/css2?family=Noto+Sans+SC&display=swap" rel="stylesheet">
 <link rel="stylesheet" href="/theme/normalize.css"/>
 <link rel="stylesheet" href="/theme/site.css"/>
 <script defer src='https://static.cloudflareinsights.com/beacon.min.js' data-cf-beacon='{"token": "d5b841b503ed4d1b8fad459b84d1cc2f"}'></script>
@@ -246,7 +245,7 @@ issue。发现了一段对该问题解答很有用的评论：
 我最后把目录和播放器的问题解决了。我的办法是把：
 </p>
 
-<pre class="example" id="orga96c4fa">
+<pre class="example" id="orgdd570eb">
 &lt;!-- require APlayer --&gt;
 &lt;link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/aplayer/dist/APlayer.min.css"&gt;
 &lt;script src="https://cdn.jsdelivr.net/npm/aplayer/dist/APlayer.min.js"&gt;&lt;/script&gt;
@@ -258,7 +257,7 @@ issue。发现了一段对该问题解答很有用的评论：
 直接放进 "关于" 的 markdown 文件里，然后再加上我的网易云歌单：
 </p>
 
-<pre class="example" id="orge95a281">
+<pre class="example" id="orge8bf7b0">
 &lt;meting-js
 server="netease"
 type="playlist"
@@ -283,7 +282,7 @@ id="967686417"&gt;
 新建 <code>~/layouts/shortcodes/music.html</code> ，在其中添加如下代码：
 </p>
 
-<pre class="example" id="org5228090">
+<pre class="example" id="org2263e1b">
 {{- $scratch := .Page.Scratch.Get "scratch" -}}
 &lt;!-- require APlayer --&gt;
 &lt;link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/aplayer/dist/APlayer.min.css"&gt;
@@ -337,7 +336,7 @@ id="967686417"&gt;
 然后直接在 md 文档中引用即可：
 </p>
 
-<pre class="example" id="org51e99c3">
+<pre class="example" id="orgfe29619">
 {{&lt;/* music auto="https://music.163.com/#/playlist?id=5043861211" */&gt;}}
 </pre>
 
