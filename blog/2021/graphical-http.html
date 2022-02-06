@@ -1,199 +1,16 @@
 <!DOCTYPE html>
 <html lang="zh">
 <head>
-<!-- 2022-02-06 Sun 14:01 -->
+<!-- 2022-02-06 Sun 15:54 -->
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>图解 HTTP</title>
 <meta name="generator" content="Org mode">
-<style type="text/css">
- <!--/*--><![CDATA[/*><!--*/
-  .title  { text-align: center;
-             margin-bottom: .2em; }
-  .subtitle { text-align: center;
-              font-size: medium;
-              font-weight: bold;
-              margin-top:0; }
-  .todo   { font-family: monospace; color: red; }
-  .done   { font-family: monospace; color: green; }
-  .priority { font-family: monospace; color: orange; }
-  .tag    { background-color: #eee; font-family: monospace;
-            padding: 2px; font-size: 80%; font-weight: normal; }
-  .timestamp { color: #bebebe; }
-  .timestamp-kwd { color: #5f9ea0; }
-  .org-right  { margin-left: auto; margin-right: 0px;  text-align: right; }
-  .org-left   { margin-left: 0px;  margin-right: auto; text-align: left; }
-  .org-center { margin-left: auto; margin-right: auto; text-align: center; }
-  .underline { text-decoration: underline; }
-  #postamble p, #preamble p { font-size: 90%; margin: .2em; }
-  p.verse { margin-left: 3%; }
-  pre {
-    border: 1px solid #ccc;
-    box-shadow: 3px 3px 3px #eee;
-    padding: 8pt;
-    font-family: monospace;
-    overflow: auto;
-    margin: 1.2em;
-  }
-  pre.src {
-    position: relative;
-    overflow: auto;
-    padding-top: 1.2em;
-  }
-  pre.src:before {
-    display: none;
-    position: absolute;
-    background-color: white;
-    top: -10px;
-    right: 10px;
-    padding: 3px;
-    border: 1px solid black;
-  }
-  pre.src:hover:before { display: inline; margin-top: 14px;}
-  /* Languages per Org manual */
-  pre.src-asymptote:before { content: 'Asymptote'; }
-  pre.src-awk:before { content: 'Awk'; }
-  pre.src-C:before { content: 'C'; }
-  /* pre.src-C++ doesn't work in CSS */
-  pre.src-clojure:before { content: 'Clojure'; }
-  pre.src-css:before { content: 'CSS'; }
-  pre.src-D:before { content: 'D'; }
-  pre.src-ditaa:before { content: 'ditaa'; }
-  pre.src-dot:before { content: 'Graphviz'; }
-  pre.src-calc:before { content: 'Emacs Calc'; }
-  pre.src-emacs-lisp:before { content: 'Emacs Lisp'; }
-  pre.src-fortran:before { content: 'Fortran'; }
-  pre.src-gnuplot:before { content: 'gnuplot'; }
-  pre.src-haskell:before { content: 'Haskell'; }
-  pre.src-hledger:before { content: 'hledger'; }
-  pre.src-java:before { content: 'Java'; }
-  pre.src-js:before { content: 'Javascript'; }
-  pre.src-latex:before { content: 'LaTeX'; }
-  pre.src-ledger:before { content: 'Ledger'; }
-  pre.src-lisp:before { content: 'Lisp'; }
-  pre.src-lilypond:before { content: 'Lilypond'; }
-  pre.src-lua:before { content: 'Lua'; }
-  pre.src-matlab:before { content: 'MATLAB'; }
-  pre.src-mscgen:before { content: 'Mscgen'; }
-  pre.src-ocaml:before { content: 'Objective Caml'; }
-  pre.src-octave:before { content: 'Octave'; }
-  pre.src-org:before { content: 'Org mode'; }
-  pre.src-oz:before { content: 'OZ'; }
-  pre.src-plantuml:before { content: 'Plantuml'; }
-  pre.src-processing:before { content: 'Processing.js'; }
-  pre.src-python:before { content: 'Python'; }
-  pre.src-R:before { content: 'R'; }
-  pre.src-ruby:before { content: 'Ruby'; }
-  pre.src-sass:before { content: 'Sass'; }
-  pre.src-scheme:before { content: 'Scheme'; }
-  pre.src-screen:before { content: 'Gnu Screen'; }
-  pre.src-sed:before { content: 'Sed'; }
-  pre.src-sh:before { content: 'shell'; }
-  pre.src-sql:before { content: 'SQL'; }
-  pre.src-sqlite:before { content: 'SQLite'; }
-  /* additional languages in org.el's org-babel-load-languages alist */
-  pre.src-forth:before { content: 'Forth'; }
-  pre.src-io:before { content: 'IO'; }
-  pre.src-J:before { content: 'J'; }
-  pre.src-makefile:before { content: 'Makefile'; }
-  pre.src-maxima:before { content: 'Maxima'; }
-  pre.src-perl:before { content: 'Perl'; }
-  pre.src-picolisp:before { content: 'Pico Lisp'; }
-  pre.src-scala:before { content: 'Scala'; }
-  pre.src-shell:before { content: 'Shell Script'; }
-  pre.src-ebnf2ps:before { content: 'ebfn2ps'; }
-  /* additional language identifiers per "defun org-babel-execute"
-       in ob-*.el */
-  pre.src-cpp:before  { content: 'C++'; }
-  pre.src-abc:before  { content: 'ABC'; }
-  pre.src-coq:before  { content: 'Coq'; }
-  pre.src-groovy:before  { content: 'Groovy'; }
-  /* additional language identifiers from org-babel-shell-names in
-     ob-shell.el: ob-shell is the only babel language using a lambda to put
-     the execution function name together. */
-  pre.src-bash:before  { content: 'bash'; }
-  pre.src-csh:before  { content: 'csh'; }
-  pre.src-ash:before  { content: 'ash'; }
-  pre.src-dash:before  { content: 'dash'; }
-  pre.src-ksh:before  { content: 'ksh'; }
-  pre.src-mksh:before  { content: 'mksh'; }
-  pre.src-posh:before  { content: 'posh'; }
-  /* Additional Emacs modes also supported by the LaTeX listings package */
-  pre.src-ada:before { content: 'Ada'; }
-  pre.src-asm:before { content: 'Assembler'; }
-  pre.src-caml:before { content: 'Caml'; }
-  pre.src-delphi:before { content: 'Delphi'; }
-  pre.src-html:before { content: 'HTML'; }
-  pre.src-idl:before { content: 'IDL'; }
-  pre.src-mercury:before { content: 'Mercury'; }
-  pre.src-metapost:before { content: 'MetaPost'; }
-  pre.src-modula-2:before { content: 'Modula-2'; }
-  pre.src-pascal:before { content: 'Pascal'; }
-  pre.src-ps:before { content: 'PostScript'; }
-  pre.src-prolog:before { content: 'Prolog'; }
-  pre.src-simula:before { content: 'Simula'; }
-  pre.src-tcl:before { content: 'tcl'; }
-  pre.src-tex:before { content: 'TeX'; }
-  pre.src-plain-tex:before { content: 'Plain TeX'; }
-  pre.src-verilog:before { content: 'Verilog'; }
-  pre.src-vhdl:before { content: 'VHDL'; }
-  pre.src-xml:before { content: 'XML'; }
-  pre.src-nxml:before { content: 'XML'; }
-  /* add a generic configuration mode; LaTeX export needs an additional
-     (add-to-list 'org-latex-listings-langs '(conf " ")) in .emacs */
-  pre.src-conf:before { content: 'Configuration File'; }
-
-  table { border-collapse:collapse; }
-  caption.t-above { caption-side: top; }
-  caption.t-bottom { caption-side: bottom; }
-  td, th { vertical-align:top;  }
-  th.org-right  { text-align: center;  }
-  th.org-left   { text-align: center;   }
-  th.org-center { text-align: center; }
-  td.org-right  { text-align: right;  }
-  td.org-left   { text-align: left;   }
-  td.org-center { text-align: center; }
-  dt { font-weight: bold; }
-  .footpara { display: inline; }
-  .footdef  { margin-bottom: 1em; }
-  .figure { padding: 1em; }
-  .figure p { text-align: center; }
-  .equation-container {
-    display: table;
-    text-align: center;
-    width: 100%;
-  }
-  .equation {
-    vertical-align: middle;
-  }
-  .equation-label {
-    display: table-cell;
-    text-align: right;
-    vertical-align: middle;
-  }
-  .inlinetask {
-    padding: 10px;
-    border: 2px solid gray;
-    margin: 10px;
-    background: #ffffcc;
-  }
-  #org-div-home-and-up
-   { text-align: right; font-size: 70%; white-space: nowrap; }
-  textarea { overflow-x: auto; }
-  .linenr { font-size: smaller }
-  .code-highlighted { background-color: #ffff00; }
-  .org-info-js_info-navigation { border-style: none; }
-  #org-info-js_console-label
-    { font-size: 10px; font-weight: bold; white-space: nowrap; }
-  .org-info-js_search-highlight
-    { background-color: #ffff00; color: #000000; font-weight: bold; }
-  .org-svg { width: 90%; }
-  /*]]>*/-->
-</style>
-<link rel="stylesheet" href="/theme/normalize.css"/>
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/highlightjs/cdn-release@11.4.0/build/styles/base16/dracula.min.css">
+<script src="https://cdn.jsdelivr.net/gh/highlightjs/cdn-release@11.4.0/build/highlight.min.js"></script>
 <link rel="stylesheet" href="/theme/site.css"/>
 <script defer src='https://static.cloudflareinsights.com/beacon.min.js' data-cf-beacon='{"token": "d5b841b503ed4d1b8fad459b84d1cc2f"}'></script>
-<script defer src="/theme/link.js"></script>
+<script defer src="/theme/main.js"></script>
 </head>
 <body>
 <div id="content">
@@ -346,7 +163,7 @@ WWW 首次使用是称呼具备 Web
 </p>
 
 
-<figure id="orgce50483">
+<figure id="org301c341">
 <img src="https://cdn.jsdelivr.net/gh/tianheg/static@main/img/%E5%9B%BE%E8%A7%A3HTTP0.jpeg" alt="%E5%9B%BE%E8%A7%A3HTTP0.jpeg">
 
 <figcaption><span class="figure-number">Figure 1: </span>TCP/IP 是互联网相关的各类协议族的总称</figcaption>
@@ -409,7 +226,7 @@ Card，网络适配器，即网卡），以及光纤等物理可见部分（还�
 </p>
 
 
-<figure id="org7811155">
+<figure id="orge110057">
 <img src="https://cdn.jsdelivr.net/gh/tianheg/static@main/img/%E5%9B%BE%E8%A7%A3HTTP1.jpeg" alt="%E5%9B%BE%E8%A7%A3HTTP1.jpeg">
 
 <figcaption><span class="figure-number">Figure 2: </span>TCP/IP 通信传输流</figcaption>
@@ -420,7 +237,7 @@ Card，网络适配器，即网卡），以及光纤等物理可见部分（还�
 </p>
 
 
-<figure id="org520cf7c">
+<figure id="orgfc55eee">
 <img src="https://cdn.jsdelivr.net/gh/tianheg/static@main/img/%E5%9B%BE%E8%A7%A3HTTP2.jpeg" alt="%E5%9B%BE%E8%A7%A3HTTP2.jpeg">
 
 <figcaption><span class="figure-number">Figure 3: </span>封装过程</figcaption>
@@ -473,7 +290,7 @@ ARP 协议通过 MAC 地址搜索中转目标。
 </p>
 
 
-<figure id="orgd016db6">
+<figure id="org17d1583">
 <img src="https://cdn.jsdelivr.net/gh/tianheg/static@main/img/%E5%9B%BE%E8%A7%A3HTTP3.jpeg" alt="%E5%9B%BE%E8%A7%A3HTTP3.jpeg">
 
 <figcaption><span class="figure-number">Figure 4: </span>路由选择机制</figcaption>
@@ -517,7 +334,7 @@ SYN/ACK 标志的数据包以示传达确认信息。最后，发送端再回传
 </ul>
 
 
-<figure id="org8ccab6b">
+<figure id="orgf246b60">
 <object type="image/svg+xml" data="https://cdn.jsdelivr.net/gh/tianheg/static@main/img/%E5%9B%BE%E8%A7%A3HTTP4-three-way-handshaking.svg" class="org-svg">
 Sorry, your browser does not support SVG.</object>
 
@@ -539,7 +356,7 @@ DNS 服务是为了让人类更容易记住计算机在网络中的位置。
 <h3 id="各种协议与-http-协议的关系">各种协议与 HTTP 协议的关系</h3>
 <div class="outline-text-3" id="text-各种协议与-http-协议的关系">
 
-<figure id="orgdbac76a">
+<figure id="org8ba4f2f">
 <object type="image/svg+xml" data="https://cdn.jsdelivr.net/gh/tianheg/static@main/img/%E5%9B%BE%E8%A7%A3HTTP5-protocols.svg" class="org-svg">
 Sorry, your browser does not support SVG.</object>
 
@@ -592,7 +409,7 @@ URI 用字符串标识某一互联网资源，而 URL
 </p>
 
 
-<figure id="org86dc0e6">
+<figure id="orga1a4f61">
 <object type="image/svg+xml" data="https://cdn.jsdelivr.net/gh/tianheg/static@main/img/%E5%9B%BE%E8%A7%A3HTTP6-%E7%BB%9D%E5%AF%B9URI.svg" class="org-svg">
 Sorry, your browser does not support SVG.</object>
 
@@ -648,7 +465,7 @@ RFC 是互联网的设计文档，如果不按照 RFC
 通信请求由客户端发出，然后服务端才响应。服务端在没有接收到请求之前不会发送响应。
 </p>
 
-<pre class="example" id="org35d16ba">
+<pre class="example" id="org6478f48">
 GET /index.html HTTP/1.1
 </pre>
 
@@ -662,7 +479,7 @@ GET /index.html HTTP/1.1
 我的网站的请求头：
 </p>
 
-<pre class="example" id="org212d6af">
+<pre class="example" id="orga8da329">
 GET / HTTP/2
 Host: www.yidajiabei.xyz
 </pre>
@@ -671,7 +488,7 @@ Host: www.yidajiabei.xyz
 我网站的响应头：
 </p>
 
-<pre class="example" id="org934aef9">
+<pre class="example" id="org77fbc48">
 HTTP/1.1 200 Connection established
 </pre>
 
@@ -706,7 +523,7 @@ HTTP 是无状态（stateless）协议-&#x2013;&#x2014;HTTP
 <div id="outline-container-请求-uri-定位资源" class="outline-3">
 <h3 id="请求-uri-定位资源">请求 URI 定位资源</h3>
 <div class="outline-text-3" id="text-请求-uri-定位资源">
-<pre class="example" id="org83ed6d3">
+<pre class="example" id="org6f6a8d5">
 GET https://job.yidajiabei.xyz/#/ HTTP/3
 
 GET / HTTP/3
@@ -730,7 +547,7 @@ GET 方法用于请求已被 URI 识别的资源。
 </p>
 
 
-<figure id="org10e35cd">
+<figure id="org1e63268">
 <object type="image/svg+xml" data="https://cdn.jsdelivr.net/gh/tianheg/static@main/img/%E5%9B%BE%E8%A7%A3HTTP7-GET.svg" class="org-svg">
 Sorry, your browser does not support SVG.</object>
 
@@ -742,7 +559,7 @@ Sorry, your browser does not support SVG.</object>
 </p>
 
 
-<figure id="org34ac8d2">
+<figure id="orgffbc507">
 <object type="image/svg+xml" data="https://cdn.jsdelivr.net/gh/tianheg/static@main/img/%E5%9B%BE%E8%A7%A3HTTP8-POST.svg" class="org-svg">
 Sorry, your browser does not support SVG.</object>
 
@@ -771,7 +588,7 @@ Transfer，表征状态转移）标准</li>
 </ol>
 
 
-<figure id="orgdb694ea">
+<figure id="org48088fa">
 <object type="image/svg+xml" data="https://cdn.jsdelivr.net/gh/tianheg/static@main/img/%E5%9B%BE%E8%A7%A3HTTP9-PUT.svg" class="org-svg">
 Sorry, your browser does not support SVG.</object>
 
@@ -794,7 +611,7 @@ HEAD 和 GET 一样，只是不返回报文主体部分。用于确认 URI
 </p>
 
 
-<figure id="org6b77753">
+<figure id="org674911c">
 <object type="image/svg+xml" data="https://cdn.jsdelivr.net/gh/tianheg/static@main/img/%E5%9B%BE%E8%A7%A3HTTP10-HEAD.svg" class="org-svg">
 Sorry, your browser does not support SVG.</object>
 
@@ -809,7 +626,7 @@ Sorry, your browser does not support SVG.</object>
 六、OPTIONS 询问支持的方法
 </p>
 
-<pre class="example" id="orgde2d703">
+<pre class="example" id="orgf06477e">
 curl -X OPTIONS https://example.org -i
 </pre>
 
@@ -817,7 +634,7 @@ curl -X OPTIONS https://example.org -i
 Output:
 </p>
 
-<pre class="example" id="org2ae1843">
+<pre class="example" id="org6821dcb">
 HTTP/2 200
 allow: OPTIONS, GET, HEAD, POST
 cache-control: max-age=604800
@@ -874,7 +691,7 @@ Security,传输层安全）协议吧通信内容加密后经网络隧道传输�
 </p>
 
 
-<figure id="org8853cca">
+<figure id="org8ed4c82">
 <img src="https://cdn.jsdelivr.net/gh/tianheg/static@main/img/%E5%9B%BE%E8%A7%A3HTTP11-http1-http1.1.jpeg" alt="%E5%9B%BE%E8%A7%A3HTTP11-http1-http1.1.jpeg">
 
 <figcaption><span class="figure-number">Figure 12: </span>HTTP/1.0 HTTP/1.1</figcaption>

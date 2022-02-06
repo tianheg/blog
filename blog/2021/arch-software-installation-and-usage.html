@@ -1,199 +1,16 @@
 <!DOCTYPE html>
 <html lang="zh">
 <head>
-<!-- 2022-02-06 Sun 14:00 -->
+<!-- 2022-02-06 Sun 15:54 -->
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>Arch 软件安装和用法</title>
 <meta name="generator" content="Org mode">
-<style type="text/css">
- <!--/*--><![CDATA[/*><!--*/
-  .title  { text-align: center;
-             margin-bottom: .2em; }
-  .subtitle { text-align: center;
-              font-size: medium;
-              font-weight: bold;
-              margin-top:0; }
-  .todo   { font-family: monospace; color: red; }
-  .done   { font-family: monospace; color: green; }
-  .priority { font-family: monospace; color: orange; }
-  .tag    { background-color: #eee; font-family: monospace;
-            padding: 2px; font-size: 80%; font-weight: normal; }
-  .timestamp { color: #bebebe; }
-  .timestamp-kwd { color: #5f9ea0; }
-  .org-right  { margin-left: auto; margin-right: 0px;  text-align: right; }
-  .org-left   { margin-left: 0px;  margin-right: auto; text-align: left; }
-  .org-center { margin-left: auto; margin-right: auto; text-align: center; }
-  .underline { text-decoration: underline; }
-  #postamble p, #preamble p { font-size: 90%; margin: .2em; }
-  p.verse { margin-left: 3%; }
-  pre {
-    border: 1px solid #ccc;
-    box-shadow: 3px 3px 3px #eee;
-    padding: 8pt;
-    font-family: monospace;
-    overflow: auto;
-    margin: 1.2em;
-  }
-  pre.src {
-    position: relative;
-    overflow: auto;
-    padding-top: 1.2em;
-  }
-  pre.src:before {
-    display: none;
-    position: absolute;
-    background-color: white;
-    top: -10px;
-    right: 10px;
-    padding: 3px;
-    border: 1px solid black;
-  }
-  pre.src:hover:before { display: inline; margin-top: 14px;}
-  /* Languages per Org manual */
-  pre.src-asymptote:before { content: 'Asymptote'; }
-  pre.src-awk:before { content: 'Awk'; }
-  pre.src-C:before { content: 'C'; }
-  /* pre.src-C++ doesn't work in CSS */
-  pre.src-clojure:before { content: 'Clojure'; }
-  pre.src-css:before { content: 'CSS'; }
-  pre.src-D:before { content: 'D'; }
-  pre.src-ditaa:before { content: 'ditaa'; }
-  pre.src-dot:before { content: 'Graphviz'; }
-  pre.src-calc:before { content: 'Emacs Calc'; }
-  pre.src-emacs-lisp:before { content: 'Emacs Lisp'; }
-  pre.src-fortran:before { content: 'Fortran'; }
-  pre.src-gnuplot:before { content: 'gnuplot'; }
-  pre.src-haskell:before { content: 'Haskell'; }
-  pre.src-hledger:before { content: 'hledger'; }
-  pre.src-java:before { content: 'Java'; }
-  pre.src-js:before { content: 'Javascript'; }
-  pre.src-latex:before { content: 'LaTeX'; }
-  pre.src-ledger:before { content: 'Ledger'; }
-  pre.src-lisp:before { content: 'Lisp'; }
-  pre.src-lilypond:before { content: 'Lilypond'; }
-  pre.src-lua:before { content: 'Lua'; }
-  pre.src-matlab:before { content: 'MATLAB'; }
-  pre.src-mscgen:before { content: 'Mscgen'; }
-  pre.src-ocaml:before { content: 'Objective Caml'; }
-  pre.src-octave:before { content: 'Octave'; }
-  pre.src-org:before { content: 'Org mode'; }
-  pre.src-oz:before { content: 'OZ'; }
-  pre.src-plantuml:before { content: 'Plantuml'; }
-  pre.src-processing:before { content: 'Processing.js'; }
-  pre.src-python:before { content: 'Python'; }
-  pre.src-R:before { content: 'R'; }
-  pre.src-ruby:before { content: 'Ruby'; }
-  pre.src-sass:before { content: 'Sass'; }
-  pre.src-scheme:before { content: 'Scheme'; }
-  pre.src-screen:before { content: 'Gnu Screen'; }
-  pre.src-sed:before { content: 'Sed'; }
-  pre.src-sh:before { content: 'shell'; }
-  pre.src-sql:before { content: 'SQL'; }
-  pre.src-sqlite:before { content: 'SQLite'; }
-  /* additional languages in org.el's org-babel-load-languages alist */
-  pre.src-forth:before { content: 'Forth'; }
-  pre.src-io:before { content: 'IO'; }
-  pre.src-J:before { content: 'J'; }
-  pre.src-makefile:before { content: 'Makefile'; }
-  pre.src-maxima:before { content: 'Maxima'; }
-  pre.src-perl:before { content: 'Perl'; }
-  pre.src-picolisp:before { content: 'Pico Lisp'; }
-  pre.src-scala:before { content: 'Scala'; }
-  pre.src-shell:before { content: 'Shell Script'; }
-  pre.src-ebnf2ps:before { content: 'ebfn2ps'; }
-  /* additional language identifiers per "defun org-babel-execute"
-       in ob-*.el */
-  pre.src-cpp:before  { content: 'C++'; }
-  pre.src-abc:before  { content: 'ABC'; }
-  pre.src-coq:before  { content: 'Coq'; }
-  pre.src-groovy:before  { content: 'Groovy'; }
-  /* additional language identifiers from org-babel-shell-names in
-     ob-shell.el: ob-shell is the only babel language using a lambda to put
-     the execution function name together. */
-  pre.src-bash:before  { content: 'bash'; }
-  pre.src-csh:before  { content: 'csh'; }
-  pre.src-ash:before  { content: 'ash'; }
-  pre.src-dash:before  { content: 'dash'; }
-  pre.src-ksh:before  { content: 'ksh'; }
-  pre.src-mksh:before  { content: 'mksh'; }
-  pre.src-posh:before  { content: 'posh'; }
-  /* Additional Emacs modes also supported by the LaTeX listings package */
-  pre.src-ada:before { content: 'Ada'; }
-  pre.src-asm:before { content: 'Assembler'; }
-  pre.src-caml:before { content: 'Caml'; }
-  pre.src-delphi:before { content: 'Delphi'; }
-  pre.src-html:before { content: 'HTML'; }
-  pre.src-idl:before { content: 'IDL'; }
-  pre.src-mercury:before { content: 'Mercury'; }
-  pre.src-metapost:before { content: 'MetaPost'; }
-  pre.src-modula-2:before { content: 'Modula-2'; }
-  pre.src-pascal:before { content: 'Pascal'; }
-  pre.src-ps:before { content: 'PostScript'; }
-  pre.src-prolog:before { content: 'Prolog'; }
-  pre.src-simula:before { content: 'Simula'; }
-  pre.src-tcl:before { content: 'tcl'; }
-  pre.src-tex:before { content: 'TeX'; }
-  pre.src-plain-tex:before { content: 'Plain TeX'; }
-  pre.src-verilog:before { content: 'Verilog'; }
-  pre.src-vhdl:before { content: 'VHDL'; }
-  pre.src-xml:before { content: 'XML'; }
-  pre.src-nxml:before { content: 'XML'; }
-  /* add a generic configuration mode; LaTeX export needs an additional
-     (add-to-list 'org-latex-listings-langs '(conf " ")) in .emacs */
-  pre.src-conf:before { content: 'Configuration File'; }
-
-  table { border-collapse:collapse; }
-  caption.t-above { caption-side: top; }
-  caption.t-bottom { caption-side: bottom; }
-  td, th { vertical-align:top;  }
-  th.org-right  { text-align: center;  }
-  th.org-left   { text-align: center;   }
-  th.org-center { text-align: center; }
-  td.org-right  { text-align: right;  }
-  td.org-left   { text-align: left;   }
-  td.org-center { text-align: center; }
-  dt { font-weight: bold; }
-  .footpara { display: inline; }
-  .footdef  { margin-bottom: 1em; }
-  .figure { padding: 1em; }
-  .figure p { text-align: center; }
-  .equation-container {
-    display: table;
-    text-align: center;
-    width: 100%;
-  }
-  .equation {
-    vertical-align: middle;
-  }
-  .equation-label {
-    display: table-cell;
-    text-align: right;
-    vertical-align: middle;
-  }
-  .inlinetask {
-    padding: 10px;
-    border: 2px solid gray;
-    margin: 10px;
-    background: #ffffcc;
-  }
-  #org-div-home-and-up
-   { text-align: right; font-size: 70%; white-space: nowrap; }
-  textarea { overflow-x: auto; }
-  .linenr { font-size: smaller }
-  .code-highlighted { background-color: #ffff00; }
-  .org-info-js_info-navigation { border-style: none; }
-  #org-info-js_console-label
-    { font-size: 10px; font-weight: bold; white-space: nowrap; }
-  .org-info-js_search-highlight
-    { background-color: #ffff00; color: #000000; font-weight: bold; }
-  .org-svg { width: 90%; }
-  /*]]>*/-->
-</style>
-<link rel="stylesheet" href="/theme/normalize.css"/>
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/highlightjs/cdn-release@11.4.0/build/styles/base16/dracula.min.css">
+<script src="https://cdn.jsdelivr.net/gh/highlightjs/cdn-release@11.4.0/build/highlight.min.js"></script>
 <link rel="stylesheet" href="/theme/site.css"/>
 <script defer src='https://static.cloudflareinsights.com/beacon.min.js' data-cf-beacon='{"token": "d5b841b503ed4d1b8fad459b84d1cc2f"}'></script>
-<script defer src="/theme/link.js"></script>
+<script defer src="/theme/main.js"></script>
 </head>
 <body>
 <div id="content">
@@ -207,7 +24,7 @@
 尝试过这种办法<sup><a id="fnr.1" class="footref" href="#fn.1">1</a></sup>，没起作用；然后尝试这一个<sup><a id="fnr.2" class="footref" href="#fn.2">2</a></sup>成功了：
 </p>
 
-<pre class="example" id="org9456523">
+<pre class="example" id="orgb8de00f">
 sudo vim /etc/default/grub
 sudo grub-mkconfig -o /boot/grub/grub.cfg
 </pre>
@@ -216,7 +33,7 @@ sudo grub-mkconfig -o /boot/grub/grub.cfg
 修改 <code>etc/default/grub</code>:
 </p>
 
-<pre class="example" id="org206321e">
+<pre class="example" id="org99bcd78">
 -GRUB_TIMEOUT=1
 +GRUB_TIMEOUT=0
 </pre>
@@ -245,14 +62,14 @@ sudo grub-mkconfig -o /boot/grub/grub.cfg
 <code>/etc/xdg/reflector/reflector.conf</code>:
 </p>
 
-<pre class="example" id="org1dc09e4">
+<pre class="example" id="org84c11c9">
 --save /etc/pacman.d/mirrorlist
 --country China
 --protocol https
 --latest 5
 </pre>
 
-<pre class="example" id="orgdd7063f">
+<pre class="example" id="org611223d">
 systemctl enable reflector
 systemctl start reflector
 </pre>
@@ -266,7 +83,7 @@ systemctl start reflector
 <code>/etc/pacman.d/hooks/mirrorupgrade.hook</code>:
 </p>
 
-<pre class="example" id="orgd841823">
+<pre class="example" id="org7235543">
 [Trigger]
 Operation = Upgrade
 Type = Package
@@ -289,7 +106,7 @@ Exec = /bin/sh -c 'systemctl start reflector.service; [ -f /etc/pacman.d/mirrorl
 <div id="outline-container-clash" class="outline-3">
 <h3 id="clash">Clash</h3>
 <div class="outline-text-3" id="text-clash">
-<pre class="example" id="org401d68b">
+<pre class="example" id="orgab90172">
 export CLASH_VERSION="1.6.5"
 wget -O clash.gz https://github.com/Dreamacro/clash/releases/download/v${CLASH_VERSION}/clash-linux-amd64-v${CLASH_VERSION}.gz
 gzip -f clash.gz -d
@@ -306,7 +123,7 @@ sudo vim /etc/systemd/system/clash.service
 <code>/etc/systemd/system/clash.service</code>:
 </p>
 
-<pre class="example" id="org29ee017">
+<pre class="example" id="org2b0b639">
 [Unit]
 Description=Clash daemon, A rule-based proxy in Go.
 After=network.target
@@ -324,7 +141,7 @@ WantedBy=multi-user.target
 测试代理是否有效（脚本不起作用）<sup><a id="fnr.5" class="footref" href="#fn.5">5</a></sup>：
 </p>
 
-<pre class="example" id="org544f038">
+<pre class="example" id="orgb283d04">
 # 来自「依云」https://blog.lilydjwg.me
 def test_youtube(port: int) -Union[str, bool]:
   output = subprocess.check_output([
@@ -350,7 +167,7 @@ def test_youtube(port: int) -Union[str, bool]:
 想把 ibus 移除，只使用 fcitx。后来发现 ibus 被很多程序依赖无法删除。
 </p>
 
-<pre class="example" id="orgd208c8b">
+<pre class="example" id="org5cfa476">
 sudo pacman -S fcitx-im fcitx-configtool fcitx-googlepinyin
 </pre>
 
@@ -362,7 +179,7 @@ Add support for gtk,qt:
 添加对 gtk，qt 类（指通过 gtk、qt 编程得到的软件）软件的支持：
 </p>
 
-<pre class="example" id="orgaef8429">
+<pre class="example" id="org2f1ad3c">
 # /etc/profile
 export XMODIFIERS="@im=fcitx"
 export GTK_IM_MODULE="fcitx"
@@ -373,7 +190,7 @@ export QT_IM_MODULE="fcitx"
 升级 fcitx 版本 4-&gt;5，并安装词库、主题：
 </p>
 
-<pre class="example" id="orgf770314">
+<pre class="example" id="orgffecb01">
 sudo pacman -Rsc fcitx
 sudo pacman -S fcitx5-im fcitx5-chinese-addons fcitx5-pinyin-zhwiki fcitx5-material-color
 </pre>
@@ -417,7 +234,7 @@ bug。过段时间，我改变了想法，想到这可能是因为不同软件�
 所有安装的字体：
 </p>
 
-<pre class="example" id="org8bce9b8">
+<pre class="example" id="orgf363e64">
 sudo pacman -S noto-fonts noto-fonts-extra noto-fonts-emoji noto-fonts-cjk ttf-dejavu ttf-liberation ttf-roboto ttf-inconsolata ttf-linux-libertine ttf-droid adobe-source-han-sans-cn-fonts adobe-source-han-serif-cn-fonts
 yay -S otf-eb-garamond ttf-monaco otf-san-francisco consolas-font
 </pre>
@@ -443,7 +260,7 @@ monaco, menlo, hack, IBM Plex Mono
 <li>手动安装的字体所在的目录：=~/.local/share/fonts/=</li>
 </ul>
 
-<pre class="example" id="org5ee698e">
+<pre class="example" id="orgc5982cc">
 fc-cache -fv # 更新字体缓存
 </pre>
 </div>
@@ -452,7 +269,7 @@ fc-cache -fv # 更新字体缓存
 <div id="outline-container-蓝牙" class="outline-2">
 <h2 id="蓝牙">蓝牙</h2>
 <div class="outline-text-2" id="text-蓝牙">
-<pre class="example" id="org38665e1">
+<pre class="example" id="org19bff22">
 sudo systemctl enable --now bluetooth
 </pre>
 </div>
@@ -461,7 +278,7 @@ sudo systemctl enable --now bluetooth
 <div id="outline-container-git" class="outline-2">
 <h2 id="git">Git</h2>
 <div class="outline-text-2" id="text-git">
-<pre class="example" id="org0bdbd9f">
+<pre class="example" id="org74f9c77">
 wget -O ~/.gitconfig https://github.com/tianheg/dotfiles/raw/main/gitconfig
 # 不要忘记 commit.gpgsign true
 
@@ -479,7 +296,7 @@ chmod 400 ~/.ssh/id_ed25519
 修改 <code>~/.gnupg/</code> 权限：
 </p>
 
-<pre class="example" id="org75b37c0">
+<pre class="example" id="orgcdcacd9">
 # https://superuser.com/a/954536 ; https://superuser.com/a/954639
 # Set ownership to your own user and primary group
 chown -R "$USER:$(id -gn)" ~/.gnupg
@@ -499,7 +316,7 @@ chmod 600 ~/.gnupg/*
 web-flow)：
 </p>
 
-<pre class="example" id="orgb0d49e5">
+<pre class="example" id="org4a47cd6">
 wget -O tianheg-pubkeys.txt https://github.com/tianheg.gpg
 wget -O github-web-flow.txt https://github.com/web-flow.gpg
 gpg --import tianheg-pubkeys.txt
@@ -515,7 +332,7 @@ gpg --import github-web-flow.txt
 把上下左右建映射到字母键：
 </p>
 
-<pre class="example" id="orgadfb233">
+<pre class="example" id="org2321635">
 vim ~/ijkl
 xmodmap ~/ijkl
 </pre>
@@ -524,7 +341,7 @@ xmodmap ~/ijkl
 <code>ijkl</code>:
 </p>
 
-<pre class="example" id="org82ecf16">
+<pre class="example" id="org7023eac">
 keycode 66 = Mode_switch
 keysym j = j J Left
 keysym l = l L Right
@@ -569,7 +386,7 @@ driver packages that they have installed.
 添加库 =/etc/pacman.conf=：
 </p>
 
-<pre class="example" id="orgca1a7bb">
+<pre class="example" id="org9f5bfee">
 [archlinuxcn]
 Server = https://repo.archlinuxcn.org/$arch
 </pre>
@@ -582,7 +399,7 @@ Server = https://repo.archlinuxcn.org/$arch
 导入 PGP 公匙（为了验证 archlinuxcn 库）:
 </p>
 
-<pre class="example" id="orgbd0fb09">
+<pre class="example" id="orgfceec23">
 sudo pacman -Syy &amp;&amp; sudo pacman -S archlinuxcn-keyring
 </pre>
 </div>
@@ -591,7 +408,7 @@ sudo pacman -Syy &amp;&amp; sudo pacman -S archlinuxcn-keyring
 <div id="outline-container-pacman-命令" class="outline-3">
 <h3 id="pacman-命令">pacman 命令</h3>
 <div class="outline-text-3" id="text-pacman-命令">
-<pre class="example" id="org952cfac">
+<pre class="example" id="orga828592">
 ## 常用
 pacman -Qe # List all explicitly installed packages
 pacman -Qet # list all packages explicitly installed and not required as dependencies
@@ -651,7 +468,7 @@ pacman -F /path/to/file_name # query the database to know which remote package a
 <div id="outline-container-应该避免执行的-pacman-指令" class="outline-3">
 <h3 id="应该避免执行的-pacman-指令">应该避免执行的 pacman 指令</h3>
 <div class="outline-text-3" id="text-应该避免执行的-pacman-指令">
-<pre class="example" id="org0067e30">
+<pre class="example" id="org8c57059">
 pacman -Sy # never run!!!
 pacman -Rdd package # never run!!!
 </pre>
@@ -671,7 +488,7 @@ pacman -Rdd package # never run!!!
 循环依赖：
 </p>
 
-<pre class="example" id="orgf8fa315">
+<pre class="example" id="orgab2035e">
 warning: dependency cycle detected
 </pre>
 
@@ -679,7 +496,7 @@ warning: dependency cycle detected
 执行 <code>sudo pacman -Syu</code> 时：
 </p>
 
-<pre class="example" id="org824205b">
+<pre class="example" id="org597dfa3">
 WARNING: Possibly missing firmware for module
 </pre>
 
@@ -701,7 +518,7 @@ gpg: key 786C63F330D7CB92: no user ID for key signature packet of class
 10[^0]
 </p>
 
-<pre class="example" id="orge0d8370">
+<pre class="example" id="org667d746">
 gpg: key 786C63F330D7CB92: no user ID for key signature packet of class 10
 gpg: key 1EB2638FF56C0C53: no user ID for key signature packet of class 10
 gpg: next trustdb check due at 2021-10-09
@@ -760,7 +577,7 @@ Yet Another Yogurt: 又一个从 Arch User Repository 下载包的工具。
 <div id="outline-container-安装-yay" class="outline-3">
 <h3 id="安装-yay">安装 yay</h3>
 <div class="outline-text-3" id="text-安装-yay">
-<pre class="example" id="org0fd7def">
+<pre class="example" id="orge4b628e">
 sudo pacman -S yay
 # pacman -S --needed git base-devel
 # git clone https://aur.archlinux.org/yay.git
@@ -773,7 +590,7 @@ sudo pacman -S yay
 <div id="outline-container-使用-yay" class="outline-3">
 <h3 id="使用-yay">使用 yay</h3>
 <div class="outline-text-3" id="text-使用-yay">
-<pre class="example" id="orga0e8ff1">
+<pre class="example" id="orgf31be24">
 # Interactively search and install packages from the repos and AUR:
 yay package_name|search_term
 # Synchronize and update all packages from the repos and AUR:
@@ -820,7 +637,7 @@ yay -Ps
 <div id="outline-container-imagerrpi-imager" class="outline-2">
 <h2 id="imagerrpi-imager">Imager(rpi-imager)</h2>
 <div class="outline-text-2" id="text-imagerrpi-imager">
-<pre class="example" id="org5b2f3dc">
+<pre class="example" id="org11f3314">
 yay -S rpi-imager
 </pre>
 
@@ -831,9 +648,9 @@ yay -S rpi-imager
 </div>
 </div>
 
-<div id="outline-container-org4e062c7" class="outline-2">
-<h2 id="org4e062c7">其他软件</h2>
-<div class="outline-text-2" id="text-org4e062c7">
+<div id="outline-container-org495f171" class="outline-2">
+<h2 id="org495f171">其他软件</h2>
+<div class="outline-text-2" id="text-org495f171">
 <p>
 参考：
 </p>
@@ -1215,9 +1032,9 @@ yay -S rpi-imager
 </table>
 </div>
 
-<div id="outline-container-org9ec33ab" class="outline-3">
-<h3 id="org9ec33ab">MongoDB</h3>
-<div class="outline-text-3" id="text-org9ec33ab">
+<div id="outline-container-org477df31" class="outline-3">
+<h3 id="org477df31">MongoDB</h3>
+<div class="outline-text-3" id="text-org477df31">
 <div class="org-src-container">
 <pre class="src src-sh">yay -S mongodb-bin mongodb-tools-bin mongosh-bin
 </pre>
@@ -1228,7 +1045,7 @@ yay -S rpi-imager
 <div id="outline-container-fly.io" class="outline-3">
 <h3 id="fly.io">Fly.io</h3>
 <div class="outline-text-3" id="text-fly.io">
-<pre class="example" id="org51aeea5">
+<pre class="example" id="org90f4df5">
 curl -L https://fly.io/install.sh | sh
 flyctl auth login
 flyctl info
@@ -1244,7 +1061,7 @@ flyctl open
 Output:
 </p>
 
-<pre class="example" id="org0783938">
+<pre class="example" id="org280b13a">
 NOTE: You can create persistence images for ventoy with the "ventoy-persistent" command,
       and losslessly expand persistence ".dat" files using "ventoy-extend-persistent",
       which are shortcuts to "/opt/ventoy/CreatePersistentImg.sh" and
@@ -1257,7 +1074,7 @@ NOTE: You can create persistence images for ventoy with the "ventoy-persistent" 
 <div id="outline-container-cmdpxl" class="outline-3">
 <h3 id="cmdpxl">cmdpxl</h3>
 <div class="outline-text-3" id="text-cmdpxl">
-<pre class="example" id="orge07641e">
+<pre class="example" id="orgd6ef433">
 pip install cmdpxl
 </pre>
 </div>
@@ -1271,7 +1088,7 @@ Apache Maven. Tool for building and managing Java-based projects. More
 information: <a href="https://maven.apache.org">https://maven.apache.org</a>.
 </p>
 
-<pre class="example" id="org3423010">
+<pre class="example" id="org7d0a8b4">
 -   Compile a project:
     :   mvn compile
 
@@ -1303,7 +1120,7 @@ information: <a href="https://maven.apache.org">https://maven.apache.org</a>.
 <div id="outline-container-sagemath" class="outline-3">
 <h3 id="sagemath">Sagemath</h3>
 <div class="outline-text-3" id="text-sagemath">
-<pre class="example" id="org730473f">
+<pre class="example" id="org3ad691a">
 sudo pacman -S sagemath
 </pre>
 
@@ -1311,7 +1128,7 @@ sudo pacman -S sagemath
 Output:
 </p>
 
-<pre class="example" id="orgb5dac99">
+<pre class="example" id="orged83554">
 resolving dependencies...
 looking for conflicting packages...
 warning: dependency cycle detected:
@@ -1325,7 +1142,7 @@ warning: jupyter will be installed before its python-ipywidgets dependency
 <div id="outline-container-tomcat8" class="outline-3">
 <h3 id="tomcat8">Tomcat8</h3>
 <div class="outline-text-3" id="text-tomcat8">
-<pre class="example" id="org96baa51">
+<pre class="example" id="org1cd2ddf">
 sudo pacman -S tomcat8
 </pre>
 
@@ -1333,7 +1150,7 @@ sudo pacman -S tomcat8
 Output:
 </p>
 
-<pre class="example" id="orge572815">
+<pre class="example" id="orgdda6509">
 extra/eclipse-ecj          4.6.3-2        1.65 MiB       1.53 MiB
 extra/java-commons-daemon  1.2.4-1        0.02 MiB       0.02 MiB
 extra/java-jsvc            1.2.4-1        0.06 MiB       0.02 MiB
@@ -1352,7 +1169,7 @@ Creating user tomcat8 (Tomcat 8 user) with uid 57 and gid 57.
 <div id="outline-container-mysql" class="outline-3">
 <h3 id="mysql">MySQL</h3>
 <div class="outline-text-3" id="text-mysql">
-<pre class="example" id="org0237d43">
+<pre class="example" id="org49dd176">
 sudo pacman -S mysql
 </pre>
 
@@ -1360,7 +1177,7 @@ sudo pacman -S mysql
 Output:
 </p>
 
-<pre class="example" id="orga587c32">
+<pre class="example" id="org2afed59">
 archlinuxcn/libmysqlclient  8.0.24-1       6.89 MiB       1.31 MiB
 archlinuxcn/mysql-clients   8.0.24-1      52.30 MiB       2.12 MiB
 archlinuxcn/mysql           8.0.24-1     172.41 MiB      19.10 MiB
@@ -1387,7 +1204,7 @@ Creating user mysql (MySQL) with uid 89 and gid 89.
 删除 mysql，使用 percona-server 管理。
 </p>
 
-<pre class="example" id="orgf6837cb">
+<pre class="example" id="org955f14f">
 sudo pacman -S percona-server
 </pre>
 
@@ -1395,7 +1212,7 @@ sudo pacman -S percona-server
 Output:
 </p>
 
-<pre class="example" id="orgc40736e">
+<pre class="example" id="org2341ecf">
 extra/numactl             2.0.14-1       0.22 MiB       0.08 MiB
 community/percona-server  8.0.25_15-2  167.91 MiB      25.30 MiB
 </pre>
@@ -1405,7 +1222,7 @@ community/percona-server  8.0.25_15-2  167.91 MiB      25.30 MiB
 <div id="outline-container-idea" class="outline-3">
 <h3 id="idea">IDEA</h3>
 <div class="outline-text-3" id="text-idea">
-<pre class="example" id="org989dd1b">
+<pre class="example" id="orgbf56500">
 sudo pacman -S intellij-idea-community-edition/intellij-idea-ultimate-edition
 </pre>
 
@@ -1413,7 +1230,7 @@ sudo pacman -S intellij-idea-community-edition/intellij-idea-ultimate-edition
 Output:
 </p>
 
-<pre class="example" id="org3af499d">
+<pre class="example" id="org2c175a3">
 # select jdk11-openjdk
 extra/java-environment-common              3-3              0.00 MiB       0.00 MiB
 extra/java-runtime-common                  3-3              0.01 MiB       0.00 MiB
@@ -1441,7 +1258,7 @@ plain text source files into various output formats, automatically
 producing cross-references, indices, etc.
 </p>
 
-<pre class="example" id="org50eb4f2">
+<pre class="example" id="orgefd012b">
 pip install sphinx-autobuild rstcheck # for VS Code extension: reStructuredText
 pip install sphinx-rtd-theme # sphinx-rtd-theme theme
 pip install sphinx-copybutton
@@ -1459,7 +1276,7 @@ A modern replacement for <code>ls</code> (List directory contents)
 <a href="https://the.exa.website">https://the.exa.website</a>
 </p>
 
-<pre class="example" id="org395b457">
+<pre class="example" id="org2f0aa8b">
 exa
 exa --oneline # List files one per line
 exa --all # List all files, including hidden files
@@ -1490,7 +1307,7 @@ hook。可以帮你在更新包时检查是否还有没有阅读的 Arch Linux �
 Error message:
 </p>
 
-<pre class="example" id="orgb7a32e2">
+<pre class="example" id="org707b892">
 WARNING: The vboxdrv kernel module is not loaded. Either there is no module available for the current kernel (5.13.8-arch1-1) or it failed to load. Please recompile the kernel module and install it by
 
 sudo /sbin/vboxconfig
@@ -1502,7 +1319,7 @@ You will not be able to start VMs until this problem is fixed.
 exec:
 </p>
 
-<pre class="example" id="org5185522">
+<pre class="example" id="org6a896f5">
 sudo modprobe vboxdrv
 </pre>
 
@@ -1524,7 +1341,7 @@ No message now.
 值最高的进程，避免系统内存耗尽卡死。
 </p>
 
-<pre class="example" id="orge55bd30">
+<pre class="example" id="orgcf29d93">
 # after install
 sudo systemctl enable --now earlyoom
 </pre>
@@ -1534,7 +1351,7 @@ sudo systemctl enable --now earlyoom
 <div id="outline-container-vagrant13" class="outline-3">
 <h3 id="vagrant13">Vagrant<sup><a id="fnr.13" class="footref" href="#fn.13">13</a></sup></h3>
 <div class="outline-text-3" id="text-vagrant13">
-<pre class="example" id="org8d62996">
+<pre class="example" id="orge2f4f1b">
 sudo pacman -S vagrant
 mkdir arch-vagrant &amp;&amp;  cd $_
 vim Vagrantfile
@@ -1545,7 +1362,7 @@ vagrant up
 <code>Vagrantfile</code>:
 </p>
 
-<pre class="example" id="orgfcc98df">
+<pre class="example" id="org6369166">
 Vagrant.configure("2") do |config|
     config.vm.box = "archlinux/archlinux"
 end
@@ -1555,7 +1372,7 @@ end
 After exec <code>vagrant up</code>, error message:
 </p>
 
-<pre class="example" id="org96499e6">
+<pre class="example" id="org18ad70e">
 No usable default provider could be found for your system.
 
 Vagrant relies on interactions with 3rd party systems, known as
@@ -1583,7 +1400,7 @@ error message for that particular provider.
 After exec <code>sudo modprobe vboxdrv</code>, no message now.
 </p>
 
-<pre class="example" id="org53b4fd4">
+<pre class="example" id="orge5a6b69">
 vagrant up
 </pre>
 
@@ -1591,7 +1408,7 @@ vagrant up
 Output:
 </p>
 
-<pre class="example" id="orgd1320a7">
+<pre class="example" id="org812f9f2">
 Vagrant is currently configured to create VirtualBox synced folders with
 the `SharedFoldersEnableSymlinksCreate` option enabled. If the Vagrant
 guest is not trusted, you may want to disable this option. For more
@@ -1615,7 +1432,7 @@ NS_ERROR_INVALID_ARG
 <div id="outline-container-qemu" class="outline-3">
 <h3 id="qemu">QEMU</h3>
 <div class="outline-text-3" id="text-qemu">
-<pre class="example" id="orgdeef897">
+<pre class="example" id="org7a77898">
 sudo pacman -S qemu
 </pre>
 
@@ -1623,7 +1440,7 @@ sudo pacman -S qemu
 Output:
 </p>
 
-<pre class="example" id="orgbb28e81">
+<pre class="example" id="orgf60ca1d">
 Please add your user to the brlapi group.
 Optional dependencies for brltty
     at-spi2-core: X11/GNOME Apps accessibility [installed]
@@ -1669,7 +1486,7 @@ Keyboard，然后下拉页面到底部，点击 <code>+</code> 号，Name 填 <c
 <div id="outline-container-anki15" class="outline-3">
 <h3 id="anki15">Anki<sup><a id="fnr.15" class="footref" href="#fn.15">15</a></sup></h3>
 <div class="outline-text-3" id="text-anki15">
-<pre class="example" id="org8d655fe">
+<pre class="example" id="orgb08c0bf">
 tar xjf ~/Downloads/anki-2.1.46-linux.tar.bz2
 cd anki-2.1.46-linux
 sudo ./install.sh
@@ -1680,7 +1497,7 @@ sudo ./install.sh
 <div id="outline-container-exercism" class="outline-3">
 <h3 id="exercism">exercism</h3>
 <div class="outline-text-3" id="text-exercism">
-<pre class="example" id="org0705c79">
+<pre class="example" id="org035983b">
 # https://github.com/exercism/cli/releases/ download exercism-linux-64bit.tgz
 tar -xf exercism-linux-64bit.tgz
 # Once you download and extract the archive, make it available in your $PATH
@@ -1696,7 +1513,7 @@ exercism configure --token=
 <div id="outline-container-scheme-programming-language" class="outline-3">
 <h3 id="scheme-programming-language">Scheme Programming Language</h3>
 <div class="outline-text-3" id="text-scheme-programming-language">
-<pre class="example" id="org0a51b80">
+<pre class="example" id="org651ab91">
 guile hello-world.scm
 ;;; note: source file /home/archie/exercism/scheme/hello-world/hello-world.scm
 ;;;       newer than compiled /home/archie/.cache/guile/ccache/2.2-LE-8-3.A/home/archie/exercism/scheme/hello-world/hello-world.scm.go
@@ -1717,7 +1534,7 @@ How to close these info?
 <code>.zshrc</code>:
 </p>
 
-<pre class="example" id="org8c7077d">
+<pre class="example" id="org93798e6">
 alias guile="guile --no-auto-compile"
 </pre>
 
@@ -1731,7 +1548,7 @@ guile</a>
 <div id="outline-container-nscd-自启动" class="outline-3">
 <h3 id="nscd-自启动"><code>nscd</code> 自启动</h3>
 <div class="outline-text-3" id="text-nscd-自启动">
-<pre class="example" id="orgbf22413">
+<pre class="example" id="orga2eacbd">
 systemctl enable nscd
 </pre>
 
@@ -1750,7 +1567,7 @@ behavior of the cache daemon.
 纬度，经度 115.622324,33.165395
 </p>
 
-<pre class="example" id="orgfd83601">
+<pre class="example" id="orgbe45088">
 mkdir ~/.config/redshift
 vim ~/.config/redshift/redshift.conf
 </pre>
@@ -1759,7 +1576,7 @@ vim ~/.config/redshift/redshift.conf
 <code>~/.config/redshift/redshift.conf</code>:
 </p>
 
-<pre class="example" id="orgeeab00f">
+<pre class="example" id="org63c4aa6">
 [redshift]
 location-provider=manual
 temp-day=5500
@@ -1788,7 +1605,7 @@ lon=115.622324
 <li>tldr-node-client</li>
 </ol>
 
-<pre class="example" id="org565247e">
+<pre class="example" id="orgd4db08a">
 npm install -g tldr
 cd ~/.nvm/versions/node/v14.18.1/lib/node_modules/tldr
 mkdir -p $ZSH_CUSTOM/plugins/tldr
@@ -1803,7 +1620,7 @@ cp bin/completion/zsh/_tldr $ZSH_CUSTOM/plugins/tldr/_tldr
 <li>tldr-python-client</li>
 </ol>
 
-<pre class="example" id="org84aa4d2">
+<pre class="example" id="org4656e15">
 sudo pacman -S tldr
 </pre>
 
@@ -1811,7 +1628,7 @@ sudo pacman -S tldr
 在 <code>~/.zshrc</code> 中加入以下内容：
 </p>
 
-<pre class="example" id="org41ce325">
+<pre class="example" id="orgaf4fcb0">
 export TLDR_CACHE_ENABLED=1
 export TLDR_CACHE_MAX_AGE=720
 export TLDR_PAGES_SOURCE_LOCATION="https://raw.githubusercontent.com/tldr-pages/tldr/master/pages"
@@ -1824,7 +1641,7 @@ export TLDR_DOWNLOAD_CACHE_LOCATION="https://tldr-pages.github.io/assets/tldr.zi
 <div id="outline-container-让-arch-linux-系统和最新的镜像同步从最快的镜像下载 16" class="outline-2">
 <h2 id="让-arch-linux-系统和最新的镜像同步从最快的镜像下载 16">让 Arch Linux 系统和最新的镜像同步，从最快的镜像下载<sup><a id="fnr.16" class="footref" href="#fn.16">16</a></sup></h2>
 <div class="outline-text-2" id="text-让-arch-linux-系统和最新的镜像同步从最快的镜像下载 16">
-<pre class="example" id="orga0de857">
+<pre class="example" id="orgb2b78d9">
 #!/bin/bash -e
 
 unshare -m bash &lt;&lt;'EOF'
@@ -1848,7 +1665,7 @@ EOF
 <a href="https://wzyboy.im/post/874.html">https://wzyboy.im/post/874.html</a>
 </p>
 
-<pre class="example" id="org3b81114">
+<pre class="example" id="org9c328e0">
 systemctl status dnsmasq
 </pre>
 
@@ -1856,7 +1673,7 @@ systemctl status dnsmasq
 Output:
 </p>
 
-<pre class="example" id="org1f1f833">
+<pre class="example" id="orge11eba7">
 dnsmasq.service - dnsmasq - A lightweight DHCP and caching DNS server
     Loaded: loaded (/usr/lib/systemd/system/dnsmasq.service; enabled; vendor preset: disabled)
         Active: inactive (dead)
@@ -1894,7 +1711,7 @@ ref:
 <li><a href="https://github.com/teejee2008/timeshift">https://github.com/teejee2008/timeshift</a></li>
 </ul>
 
-<pre class="example" id="org1f50b6a">
+<pre class="example" id="orgc58ce3e">
 sudo pacman -S timeshift
 </pre>
 </div>
@@ -1929,15 +1746,15 @@ ref:
 前提：=/etc/hosts= 文件中要先存在 <code>github.com</code>
 </p>
 
-<pre class="example" id="orge525391">
+<pre class="example" id="orga0c37c5">
 sudo pacman -S python-aiohttp
 </pre>
 </div>
 </div>
 
-<div id="outline-container-orgd3c5471" class="outline-2">
-<h2 id="orgd3c5471">Wayland 下的剪切板工具</h2>
-<div class="outline-text-2" id="text-orgd3c5471">
+<div id="outline-container-orgf9f0b06" class="outline-2">
+<h2 id="orgf9f0b06">Wayland 下的剪切板工具</h2>
+<div class="outline-text-2" id="text-orgf9f0b06">
 <ul class="org-ul">
 <li><a href="https://github.com/bugaevc/wl-clipboard">https://github.com/bugaevc/wl-clipboard</a></li>
 </ul>
