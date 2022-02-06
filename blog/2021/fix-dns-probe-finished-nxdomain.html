@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html lang="zh">
 <head>
-<!-- 2022-02-06 Sun 19:00 -->
+<!-- 2022-02-06 Sun 20:00 -->
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>解决 DNS_PROBE_FINISHED_NXDOMAIN</title>
@@ -53,7 +53,7 @@ domain，域名不存在。因为，提示的意思是：DNS
 <div id="outline-container-释放并更新-ip-地址" class="outline-2">
 <h2 id="释放并更新-ip-地址">释放并更新 IP 地址</h2>
 <div class="outline-text-2" id="text-释放并更新-ip-地址">
-<pre class="example" id="orgb9949eb">
+<pre class="example" id="org8c1e231">
 sudo dhclient -r # 释放
 sudo dhclient # 更新
 </pre>
@@ -69,7 +69,7 @@ sudo dhclient # 更新
 我又执行了一遍代码片段的内容：
 </p>
 
-<pre class="example" id="orgcaa9c13">
+<pre class="example" id="orge6205eb">
 $ sudo dhclient -r
 Killed old client process
 $ sudo dhclient
@@ -84,7 +84,7 @@ OK，更新 IP 没有输出，说明正常执行。
 <div id="outline-container-重启-dns-客户端服务" class="outline-2">
 <h2 id="重启-dns-客户端服务">重启 DNS 客户端服务</h2>
 <div class="outline-text-2" id="text-重启-dns-客户端服务">
-<pre class="example" id="orgbf84c15">
+<pre class="example" id="orgda5b68b">
 sudo apt install bind9
 sudo apt install dnsutils
 sudo vim /etc/bind/named.conf.options # add nameservers:8.8.8.8;8.8.4.4;1.1.1.1 to forwarders
@@ -108,7 +108,7 @@ Ubuntu20.04 预装的 netplan
 软件。我使用后者，因为它在命令行操作，很方便。
 </p>
 
-<pre class="example" id="orgfc891a5">
+<pre class="example" id="org49119c1">
 $ ls -a /etc/netplan
 .  ..  01-network-manager-all.yaml
 </pre>
@@ -117,7 +117,7 @@ $ ls -a /etc/netplan
 查看 01-network-manager-all.yaml 文件，发现还没有进行任何配置：
 </p>
 
-<pre class="example" id="org9bfdf1b">
+<pre class="example" id="org259b65a">
 network:
   version: 2
   renderer: NetworkManager
@@ -134,7 +134,7 @@ DHCP），NetworkManager 就是 Ubuntu 网络管理的默认 GUI。
 文件：
 </p>
 
-<pre class="example" id="orge1d6ec0">
+<pre class="example" id="org0940b7e">
 network:
   version: 2
   renderer: networkd
@@ -179,7 +179,7 @@ network:
 <div id="outline-container-检查本地-hosts-文件" class="outline-2">
 <h2 id="检查本地-hosts-文件">检查本地 hosts 文件</h2>
 <div class="outline-text-2" id="text-检查本地-hosts-文件">
-<pre class="example" id="org63311b5">
+<pre class="example" id="org49d7cc5">
 vim /etc/hosts
 </pre>
 
