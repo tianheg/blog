@@ -1,196 +1,13 @@
 <!DOCTYPE html>
 <html lang="zh">
 <head>
-<!-- 2022-02-06 Sun 14:01 -->
+<!-- 2022-02-06 Sun 15:54 -->
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>Wiki</title>
 <meta name="generator" content="Org mode">
-<style type="text/css">
- <!--/*--><![CDATA[/*><!--*/
-  .title  { text-align: center;
-             margin-bottom: .2em; }
-  .subtitle { text-align: center;
-              font-size: medium;
-              font-weight: bold;
-              margin-top:0; }
-  .todo   { font-family: monospace; color: red; }
-  .done   { font-family: monospace; color: green; }
-  .priority { font-family: monospace; color: orange; }
-  .tag    { background-color: #eee; font-family: monospace;
-            padding: 2px; font-size: 80%; font-weight: normal; }
-  .timestamp { color: #bebebe; }
-  .timestamp-kwd { color: #5f9ea0; }
-  .org-right  { margin-left: auto; margin-right: 0px;  text-align: right; }
-  .org-left   { margin-left: 0px;  margin-right: auto; text-align: left; }
-  .org-center { margin-left: auto; margin-right: auto; text-align: center; }
-  .underline { text-decoration: underline; }
-  #postamble p, #preamble p { font-size: 90%; margin: .2em; }
-  p.verse { margin-left: 3%; }
-  pre {
-    border: 1px solid #ccc;
-    box-shadow: 3px 3px 3px #eee;
-    padding: 8pt;
-    font-family: monospace;
-    overflow: auto;
-    margin: 1.2em;
-  }
-  pre.src {
-    position: relative;
-    overflow: auto;
-    padding-top: 1.2em;
-  }
-  pre.src:before {
-    display: none;
-    position: absolute;
-    background-color: white;
-    top: -10px;
-    right: 10px;
-    padding: 3px;
-    border: 1px solid black;
-  }
-  pre.src:hover:before { display: inline; margin-top: 14px;}
-  /* Languages per Org manual */
-  pre.src-asymptote:before { content: 'Asymptote'; }
-  pre.src-awk:before { content: 'Awk'; }
-  pre.src-C:before { content: 'C'; }
-  /* pre.src-C++ doesn't work in CSS */
-  pre.src-clojure:before { content: 'Clojure'; }
-  pre.src-css:before { content: 'CSS'; }
-  pre.src-D:before { content: 'D'; }
-  pre.src-ditaa:before { content: 'ditaa'; }
-  pre.src-dot:before { content: 'Graphviz'; }
-  pre.src-calc:before { content: 'Emacs Calc'; }
-  pre.src-emacs-lisp:before { content: 'Emacs Lisp'; }
-  pre.src-fortran:before { content: 'Fortran'; }
-  pre.src-gnuplot:before { content: 'gnuplot'; }
-  pre.src-haskell:before { content: 'Haskell'; }
-  pre.src-hledger:before { content: 'hledger'; }
-  pre.src-java:before { content: 'Java'; }
-  pre.src-js:before { content: 'Javascript'; }
-  pre.src-latex:before { content: 'LaTeX'; }
-  pre.src-ledger:before { content: 'Ledger'; }
-  pre.src-lisp:before { content: 'Lisp'; }
-  pre.src-lilypond:before { content: 'Lilypond'; }
-  pre.src-lua:before { content: 'Lua'; }
-  pre.src-matlab:before { content: 'MATLAB'; }
-  pre.src-mscgen:before { content: 'Mscgen'; }
-  pre.src-ocaml:before { content: 'Objective Caml'; }
-  pre.src-octave:before { content: 'Octave'; }
-  pre.src-org:before { content: 'Org mode'; }
-  pre.src-oz:before { content: 'OZ'; }
-  pre.src-plantuml:before { content: 'Plantuml'; }
-  pre.src-processing:before { content: 'Processing.js'; }
-  pre.src-python:before { content: 'Python'; }
-  pre.src-R:before { content: 'R'; }
-  pre.src-ruby:before { content: 'Ruby'; }
-  pre.src-sass:before { content: 'Sass'; }
-  pre.src-scheme:before { content: 'Scheme'; }
-  pre.src-screen:before { content: 'Gnu Screen'; }
-  pre.src-sed:before { content: 'Sed'; }
-  pre.src-sh:before { content: 'shell'; }
-  pre.src-sql:before { content: 'SQL'; }
-  pre.src-sqlite:before { content: 'SQLite'; }
-  /* additional languages in org.el's org-babel-load-languages alist */
-  pre.src-forth:before { content: 'Forth'; }
-  pre.src-io:before { content: 'IO'; }
-  pre.src-J:before { content: 'J'; }
-  pre.src-makefile:before { content: 'Makefile'; }
-  pre.src-maxima:before { content: 'Maxima'; }
-  pre.src-perl:before { content: 'Perl'; }
-  pre.src-picolisp:before { content: 'Pico Lisp'; }
-  pre.src-scala:before { content: 'Scala'; }
-  pre.src-shell:before { content: 'Shell Script'; }
-  pre.src-ebnf2ps:before { content: 'ebfn2ps'; }
-  /* additional language identifiers per "defun org-babel-execute"
-       in ob-*.el */
-  pre.src-cpp:before  { content: 'C++'; }
-  pre.src-abc:before  { content: 'ABC'; }
-  pre.src-coq:before  { content: 'Coq'; }
-  pre.src-groovy:before  { content: 'Groovy'; }
-  /* additional language identifiers from org-babel-shell-names in
-     ob-shell.el: ob-shell is the only babel language using a lambda to put
-     the execution function name together. */
-  pre.src-bash:before  { content: 'bash'; }
-  pre.src-csh:before  { content: 'csh'; }
-  pre.src-ash:before  { content: 'ash'; }
-  pre.src-dash:before  { content: 'dash'; }
-  pre.src-ksh:before  { content: 'ksh'; }
-  pre.src-mksh:before  { content: 'mksh'; }
-  pre.src-posh:before  { content: 'posh'; }
-  /* Additional Emacs modes also supported by the LaTeX listings package */
-  pre.src-ada:before { content: 'Ada'; }
-  pre.src-asm:before { content: 'Assembler'; }
-  pre.src-caml:before { content: 'Caml'; }
-  pre.src-delphi:before { content: 'Delphi'; }
-  pre.src-html:before { content: 'HTML'; }
-  pre.src-idl:before { content: 'IDL'; }
-  pre.src-mercury:before { content: 'Mercury'; }
-  pre.src-metapost:before { content: 'MetaPost'; }
-  pre.src-modula-2:before { content: 'Modula-2'; }
-  pre.src-pascal:before { content: 'Pascal'; }
-  pre.src-ps:before { content: 'PostScript'; }
-  pre.src-prolog:before { content: 'Prolog'; }
-  pre.src-simula:before { content: 'Simula'; }
-  pre.src-tcl:before { content: 'tcl'; }
-  pre.src-tex:before { content: 'TeX'; }
-  pre.src-plain-tex:before { content: 'Plain TeX'; }
-  pre.src-verilog:before { content: 'Verilog'; }
-  pre.src-vhdl:before { content: 'VHDL'; }
-  pre.src-xml:before { content: 'XML'; }
-  pre.src-nxml:before { content: 'XML'; }
-  /* add a generic configuration mode; LaTeX export needs an additional
-     (add-to-list 'org-latex-listings-langs '(conf " ")) in .emacs */
-  pre.src-conf:before { content: 'Configuration File'; }
-
-  table { border-collapse:collapse; }
-  caption.t-above { caption-side: top; }
-  caption.t-bottom { caption-side: bottom; }
-  td, th { vertical-align:top;  }
-  th.org-right  { text-align: center;  }
-  th.org-left   { text-align: center;   }
-  th.org-center { text-align: center; }
-  td.org-right  { text-align: right;  }
-  td.org-left   { text-align: left;   }
-  td.org-center { text-align: center; }
-  dt { font-weight: bold; }
-  .footpara { display: inline; }
-  .footdef  { margin-bottom: 1em; }
-  .figure { padding: 1em; }
-  .figure p { text-align: center; }
-  .equation-container {
-    display: table;
-    text-align: center;
-    width: 100%;
-  }
-  .equation {
-    vertical-align: middle;
-  }
-  .equation-label {
-    display: table-cell;
-    text-align: right;
-    vertical-align: middle;
-  }
-  .inlinetask {
-    padding: 10px;
-    border: 2px solid gray;
-    margin: 10px;
-    background: #ffffcc;
-  }
-  #org-div-home-and-up
-   { text-align: right; font-size: 70%; white-space: nowrap; }
-  textarea { overflow-x: auto; }
-  .linenr { font-size: smaller }
-  .code-highlighted { background-color: #ffff00; }
-  .org-info-js_info-navigation { border-style: none; }
-  #org-info-js_console-label
-    { font-size: 10px; font-weight: bold; white-space: nowrap; }
-  .org-info-js_search-highlight
-    { background-color: #ffff00; color: #000000; font-weight: bold; }
-  .org-svg { width: 90%; }
-  /*]]>*/-->
-</style>
-<link rel="stylesheet" href="/theme/normalize.css"/>
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/highlightjs/cdn-release@11.4.0/build/styles/base16/dracula.min.css">
+<script src="https://cdn.jsdelivr.net/gh/highlightjs/cdn-release@11.4.0/build/highlight.min.js"></script>
 <link rel="stylesheet" href="/theme/site.css"/>
 <script defer src='https://static.cloudflareinsights.com/beacon.min.js' data-cf-beacon='{"token": "d5b841b503ed4d1b8fad459b84d1cc2f"}'></script>
 <script defer src="/theme/link.js"></script>
@@ -203,52 +20,52 @@
 <h2>Table of Contents</h2>
 <div id="text-table-of-contents">
 <ul>
-<li><a href="#orgedd7035">1. 身体健康</a></li>
-<li><a href="#orgfdfab0c">2. 核心技能</a>
+<li><a href="#orgec6b1db">1. 身体健康</a></li>
+<li><a href="#orgb21283d">2. 核心技能</a>
 <ul>
-<li><a href="#org4f791d4">2.1. 搜索</a></li>
-<li><a href="#orgf8f9d17">2.2. 学习</a>
+<li><a href="#org217100b">2.1. 搜索</a></li>
+<li><a href="#orgd961b5d">2.2. 学习</a>
 <ul>
-<li><a href="#orgbf89b6e">2.2.1. 学习如何学习</a></li>
-<li><a href="#orgd4c0f91">2.2.2. 修习 MOOCs&amp;其他课程 目录</a></li>
-<li><a href="#orgb94a3d3">2.2.3. 其他参考</a></li>
+<li><a href="#org633e78c">2.2.1. 学习如何学习</a></li>
+<li><a href="#orgece28c6">2.2.2. 修习 MOOCs&amp;其他课程 目录</a></li>
+<li><a href="#orgbf10574">2.2.3. 其他参考</a></li>
 </ul>
 </li>
-<li><a href="#org185c7d6">2.3. 共情（心理学）</a>
+<li><a href="#org28a955a">2.3. 共情（心理学）</a>
 <ul>
-<li><a href="#orgfd75c7a">2.3.1. 心理学必修课</a></li>
-<li><a href="#orga0ba4b9">2.3.2. 升级选修课</a></li>
-<li><a href="#org2c6e214">2.3.3. 丰富精神世界</a></li>
+<li><a href="#org0e43c77">2.3.1. 心理学必修课</a></li>
+<li><a href="#org5a1c997">2.3.2. 升级选修课</a></li>
+<li><a href="#orge687369">2.3.3. 丰富精神世界</a></li>
 </ul>
 </li>
 </ul>
 </li>
-<li><a href="#orgc113452">3. 思维意识</a>
+<li><a href="#orgdbde0ea">3. 思维意识</a>
 <ul>
-<li><a href="#org9350491">3.1. 批判性思维</a></li>
-<li><a href="#org7f70702">3.2. 自我价值</a></li>
+<li><a href="#orgc388cbc">3.1. 批判性思维</a></li>
+<li><a href="#orgbba6003">3.2. 自我价值</a></li>
 </ul>
 </li>
-<li><a href="#orgc5a7550">4. 社会实践</a>
+<li><a href="#orgb2bf6f3">4. 社会实践</a>
 <ul>
-<li><a href="#org92ba969">4.1. 环境保护</a></li>
+<li><a href="#org801ce13">4.1. 环境保护</a></li>
 </ul>
 </li>
-<li><a href="#orgf70b4fe">5. 技术探索</a>
+<li><a href="#org29fc240">5. 技术探索</a>
 <ul>
-<li><a href="#org96404b4">5.1. 关于技术的思考</a></li>
-<li><a href="#org4b0212c">5.2. 工作</a></li>
-<li><a href="#org2583921">5.3. LeetCode</a></li>
-<li><a href="#orgfcbf1bc">5.4. 安全</a></li>
-<li><a href="#org34cb7e3">5.5. Web</a></li>
-<li><a href="#org8e41d49">5.6. 字符编码</a></li>
-<li><a href="#org3c6fde2">5.7. Emacs</a></li>
-<li><a href="#orge69a150">5.8. VS Code</a></li>
-<li><a href="#orge2f0c04">5.9. Git</a></li>
-<li><a href="#orgc9b29d4">5.10. 工具</a></li>
-<li><a href="#orgb70dcdc">5.11. SSH</a></li>
-<li><a href="#org2d13915">5.12. Nginx</a></li>
-<li><a href="#orgced0a9b">5.13. KDE</a></li>
+<li><a href="#orgf4a7420">5.1. 关于技术的思考</a></li>
+<li><a href="#orgc285161">5.2. 工作</a></li>
+<li><a href="#orgc25c615">5.3. LeetCode</a></li>
+<li><a href="#org742ec37">5.4. 安全</a></li>
+<li><a href="#org7795a5c">5.5. Web</a></li>
+<li><a href="#org1d0aa0b">5.6. 字符编码</a></li>
+<li><a href="#org0c7c24c">5.7. Emacs</a></li>
+<li><a href="#org4a517b3">5.8. VS Code</a></li>
+<li><a href="#org3062765">5.9. Git</a></li>
+<li><a href="#orgc4751fb">5.10. 工具</a></li>
+<li><a href="#orgf802d19">5.11. SSH</a></li>
+<li><a href="#org438315e">5.12. Nginx</a></li>
+<li><a href="#orgddf88a6">5.13. KDE</a></li>
 </ul>
 </li>
 </ul>
@@ -258,8 +75,8 @@
 这一页是对博客的再分类。
 </p>
 
-<div id="outline-container-orgedd7035" class="outline-2">
-<h2 id="orgedd7035"><span class="section-number-2">1</span> 身体健康</h2>
+<div id="outline-container-orgec6b1db" class="outline-2">
+<h2 id="orgec6b1db"><span class="section-number-2">1</span> 身体健康</h2>
 <div class="outline-text-2" id="text-1">
 <ul class="org-ul">
 <li><a href="2021/human-tooth.html">关注牙齿健康</a></li>
@@ -277,12 +94,12 @@
 </ul>
 </div>
 </div>
-<div id="outline-container-orgfdfab0c" class="outline-2">
-<h2 id="orgfdfab0c"><span class="section-number-2">2</span> 核心技能</h2>
+<div id="outline-container-orgb21283d" class="outline-2">
+<h2 id="orgb21283d"><span class="section-number-2">2</span> 核心技能</h2>
 <div class="outline-text-2" id="text-2">
 </div>
-<div id="outline-container-org4f791d4" class="outline-3">
-<h3 id="org4f791d4"><span class="section-number-3">2.1</span> 搜索</h3>
+<div id="outline-container-org217100b" class="outline-3">
+<h3 id="org217100b"><span class="section-number-3">2.1</span> 搜索</h3>
 <div class="outline-text-3" id="text-2-1">
 <ul class="org-ul">
 <li><a href="2021/rules-of-info-by-block.html">My Rules of Information</a></li>
@@ -302,12 +119,12 @@
 </ul>
 </div>
 </div>
-<div id="outline-container-orgf8f9d17" class="outline-3">
-<h3 id="orgf8f9d17"><span class="section-number-3">2.2</span> 学习</h3>
+<div id="outline-container-orgd961b5d" class="outline-3">
+<h3 id="orgd961b5d"><span class="section-number-3">2.2</span> 学习</h3>
 <div class="outline-text-3" id="text-2-2">
 </div>
-<div id="outline-container-orgbf89b6e" class="outline-4">
-<h4 id="orgbf89b6e"><span class="section-number-4">2.2.1</span> 学习如何学习</h4>
+<div id="outline-container-org633e78c" class="outline-4">
+<h4 id="org633e78c"><span class="section-number-4">2.2.1</span> 学习如何学习</h4>
 <div class="outline-text-4" id="text-2-2-1">
 <ul class="org-ul">
 <li><a href="2021/learning-how-to-learn.html">学习如何学习</a></li>
@@ -323,8 +140,8 @@
 </div>
 </div>
 
-<div id="outline-container-orgd4c0f91" class="outline-4">
-<h4 id="orgd4c0f91"><span class="section-number-4">2.2.2</span> 修习 MOOCs&amp;其他课程 目录</h4>
+<div id="outline-container-orgece28c6" class="outline-4">
+<h4 id="orgece28c6"><span class="section-number-4">2.2.2</span> 修习 MOOCs&amp;其他课程 目录</h4>
 <div class="outline-text-4" id="text-2-2-2">
 <table>
 
@@ -408,8 +225,8 @@
 </div>
 </div>
 
-<div id="outline-container-orgb94a3d3" class="outline-4">
-<h4 id="orgb94a3d3"><span class="section-number-4">2.2.3</span> 其他参考</h4>
+<div id="outline-container-orgbf10574" class="outline-4">
+<h4 id="orgbf10574"><span class="section-number-4">2.2.3</span> 其他参考</h4>
 <div class="outline-text-4" id="text-2-2-3">
 <ul class="org-ul">
 <li><a href="https://github.com/yufree/MOOC">https://github.com/yufree/MOOC</a></li>
@@ -418,12 +235,12 @@
 </div>
 </div>
 
-<div id="outline-container-org185c7d6" class="outline-3">
-<h3 id="org185c7d6"><span class="section-number-3">2.3</span> 共情（<a href="https://psychology.knowyourself.cc/material">心理学</a>）</h3>
+<div id="outline-container-org28a955a" class="outline-3">
+<h3 id="org28a955a"><span class="section-number-3">2.3</span> 共情（<a href="https://psychology.knowyourself.cc/material">心理学</a>）</h3>
 <div class="outline-text-3" id="text-2-3">
 </div>
-<div id="outline-container-orgfd75c7a" class="outline-4">
-<h4 id="orgfd75c7a"><span class="section-number-4">2.3.1</span> 心理学必修课</h4>
+<div id="outline-container-org0e43c77" class="outline-4">
+<h4 id="org0e43c77"><span class="section-number-4">2.3.1</span> 心理学必修课</h4>
 <div class="outline-text-4" id="text-2-3-1">
 <ol class="org-ol">
 <li>心理学导论
@@ -460,8 +277,8 @@
 </ol>
 </div>
 </div>
-<div id="outline-container-orga0ba4b9" class="outline-4">
-<h4 id="orga0ba4b9"><span class="section-number-4">2.3.2</span> 升级选修课</h4>
+<div id="outline-container-org5a1c997" class="outline-4">
+<h4 id="org5a1c997"><span class="section-number-4">2.3.2</span> 升级选修课</h4>
 <div class="outline-text-4" id="text-2-3-2">
 <ol class="org-ol">
 <li>心理动力学流派
@@ -531,8 +348,8 @@
 </ul>
 </div>
 </div>
-<div id="outline-container-org2c6e214" class="outline-4">
-<h4 id="org2c6e214"><span class="section-number-4">2.3.3</span> 丰富精神世界</h4>
+<div id="outline-container-orge687369" class="outline-4">
+<h4 id="orge687369"><span class="section-number-4">2.3.3</span> 丰富精神世界</h4>
 <div class="outline-text-4" id="text-2-3-3">
 <ol class="org-ol">
 <li>博雅教育公开课视频推荐
@@ -566,12 +383,12 @@
 </div>
 </div>
 </div>
-<div id="outline-container-orgc113452" class="outline-2">
-<h2 id="orgc113452"><span class="section-number-2">3</span> 思维意识</h2>
+<div id="outline-container-orgdbde0ea" class="outline-2">
+<h2 id="orgdbde0ea"><span class="section-number-2">3</span> 思维意识</h2>
 <div class="outline-text-2" id="text-3">
 </div>
-<div id="outline-container-org9350491" class="outline-3">
-<h3 id="org9350491"><span class="section-number-3">3.1</span> 批判性思维</h3>
+<div id="outline-container-orgc388cbc" class="outline-3">
+<h3 id="orgc388cbc"><span class="section-number-3">3.1</span> 批判性思维</h3>
 <div class="outline-text-3" id="text-3-1">
 <ol class="org-ol">
 <li><a href="2020/critical-thinking-0.html">批判性思维：定义及价值</a></li>
@@ -581,8 +398,8 @@
 </ol>
 </div>
 </div>
-<div id="outline-container-org7f70702" class="outline-3">
-<h3 id="org7f70702"><span class="section-number-3">3.2</span> 自我价值</h3>
+<div id="outline-container-orgbba6003" class="outline-3">
+<h3 id="orgbba6003"><span class="section-number-3">3.2</span> 自我价值</h3>
 <div class="outline-text-3" id="text-3-2">
 <ul class="org-ul">
 <li><a href="2021/build-self-worth.html">建构自我价值</a></li>
@@ -590,15 +407,15 @@
 </div>
 </div>
 </div>
-<div id="outline-container-orgc5a7550" class="outline-2">
-<h2 id="orgc5a7550"><span class="section-number-2">4</span> 社会实践</h2>
+<div id="outline-container-orgb2bf6f3" class="outline-2">
+<h2 id="orgb2bf6f3"><span class="section-number-2">4</span> 社会实践</h2>
 <div class="outline-text-2" id="text-4">
 <ul class="org-ul">
 <li><a href="2022/legality-of-recording.html">录音的合法性</a></li>
 </ul>
 </div>
-<div id="outline-container-org92ba969" class="outline-3">
-<h3 id="org92ba969"><span class="section-number-3">4.1</span> 环境保护</h3>
+<div id="outline-container-org801ce13" class="outline-3">
+<h3 id="org801ce13"><span class="section-number-3">4.1</span> 环境保护</h3>
 <div class="outline-text-3" id="text-4-1">
 <ul class="org-ul">
 <li><a href="2022/carbon-tipping-points-our-solutions.html">Carbon, tipping points &amp; our simplest solutions</a> 未完成</li>
@@ -606,31 +423,31 @@
 </div>
 </div>
 </div>
-<div id="outline-container-orgf70b4fe" class="outline-2">
-<h2 id="orgf70b4fe"><span class="section-number-2">5</span> 技术探索</h2>
+<div id="outline-container-org29fc240" class="outline-2">
+<h2 id="org29fc240"><span class="section-number-2">5</span> 技术探索</h2>
 <div class="outline-text-2" id="text-5">
 <p>
 <a href="coding.html">索引</a>
 </p>
 </div>
-<div id="outline-container-org96404b4" class="outline-3">
-<h3 id="org96404b4"><span class="section-number-3">5.1</span> 关于技术的思考</h3>
+<div id="outline-container-orgf4a7420" class="outline-3">
+<h3 id="orgf4a7420"><span class="section-number-3">5.1</span> 关于技术的思考</h3>
 <div class="outline-text-3" id="text-5-1">
 <ul class="org-ul">
 <li><a href="2022/tech-thought-1.html">技术遐想（一）</a></li>
 </ul>
 </div>
 </div>
-<div id="outline-container-org4b0212c" class="outline-3">
-<h3 id="org4b0212c"><span class="section-number-3">5.2</span> 工作</h3>
+<div id="outline-container-orgc285161" class="outline-3">
+<h3 id="orgc285161"><span class="section-number-3">5.2</span> 工作</h3>
 <div class="outline-text-3" id="text-5-2">
 <ul class="org-ul">
 <li><a href="2022/contract-agreement.html">谨慎对待合同协议</a></li>
 </ul>
 </div>
 </div>
-<div id="outline-container-org2583921" class="outline-3">
-<h3 id="org2583921"><span class="section-number-3">5.3</span> LeetCode</h3>
+<div id="outline-container-orgc25c615" class="outline-3">
+<h3 id="orgc25c615"><span class="section-number-3">5.3</span> LeetCode</h3>
 <div class="outline-text-3" id="text-5-3">
 <table>
 
@@ -711,11 +528,11 @@
 </div>
 </div>
 
-<div id="outline-container-orgfcbf1bc" class="outline-3">
-<h3 id="orgfcbf1bc"><span class="section-number-3">5.4</span> 安全</h3>
+<div id="outline-container-org742ec37" class="outline-3">
+<h3 id="org742ec37"><span class="section-number-3">5.4</span> 安全</h3>
 </div>
-<div id="outline-container-org34cb7e3" class="outline-3">
-<h3 id="org34cb7e3"><span class="section-number-3">5.5</span> Web</h3>
+<div id="outline-container-org7795a5c" class="outline-3">
+<h3 id="org7795a5c"><span class="section-number-3">5.5</span> Web</h3>
 <div class="outline-text-3" id="text-5-5">
 <ul class="org-ul">
 <li><a href="2021/sky-cloud.html">Draw Sky, Cloud</a></li>
@@ -732,8 +549,8 @@
 </ul>
 </div>
 </div>
-<div id="outline-container-org8e41d49" class="outline-3">
-<h3 id="org8e41d49"><span class="section-number-3">5.6</span> 字符编码</h3>
+<div id="outline-container-org1d0aa0b" class="outline-3">
+<h3 id="org1d0aa0b"><span class="section-number-3">5.6</span> 字符编码</h3>
 <div class="outline-text-3" id="text-5-6">
 <p>
 UTF-8, UTF-16(JavaScript)
@@ -746,8 +563,8 @@ UTF-8, UTF-16(JavaScript)
 </div>
 </div>
 
-<div id="outline-container-org3c6fde2" class="outline-3">
-<h3 id="org3c6fde2"><span class="section-number-3">5.7</span> Emacs</h3>
+<div id="outline-container-org0c7c24c" class="outline-3">
+<h3 id="org0c7c24c"><span class="section-number-3">5.7</span> Emacs</h3>
 <div class="outline-text-3" id="text-5-7">
 <ul class="org-ul">
 <li><a href="2021/emacs-common-keyboard-shortcuts.html">Emacs 常用快捷键总结</a></li>
@@ -761,16 +578,16 @@ UTF-8, UTF-16(JavaScript)
 </ul>
 </div>
 </div>
-<div id="outline-container-orge69a150" class="outline-3">
-<h3 id="orge69a150"><span class="section-number-3">5.8</span> VS Code</h3>
+<div id="outline-container-org4a517b3" class="outline-3">
+<h3 id="org4a517b3"><span class="section-number-3">5.8</span> VS Code</h3>
 <div class="outline-text-3" id="text-5-8">
 <ul class="org-ul">
 <li><a href="https://code.visualstudio.com/shortcuts/keyboard-shortcuts-linux.pdf">Keyboard shortcuts for Linux - Visual Studio Code</a></li>
 </ul>
 </div>
 </div>
-<div id="outline-container-orge2f0c04" class="outline-3">
-<h3 id="orge2f0c04"><span class="section-number-3">5.9</span> Git</h3>
+<div id="outline-container-org3062765" class="outline-3">
+<h3 id="org3062765"><span class="section-number-3">5.9</span> Git</h3>
 <div class="outline-text-3" id="text-5-9">
 <ul class="org-ul">
 <li><a href="2021/git-credential.html">Git Credential</a></li>
@@ -778,8 +595,8 @@ UTF-8, UTF-16(JavaScript)
 </ul>
 </div>
 </div>
-<div id="outline-container-orgc9b29d4" class="outline-3">
-<h3 id="orgc9b29d4"><span class="section-number-3">5.10</span> 工具</h3>
+<div id="outline-container-orgc4751fb" class="outline-3">
+<h3 id="orgc4751fb"><span class="section-number-3">5.10</span> 工具</h3>
 <div class="outline-text-3" id="text-5-10">
 <ul class="org-ul">
 <li><a href="2020/common-mirror-list.html">常用镜像列表</a></li>
@@ -788,8 +605,8 @@ UTF-8, UTF-16(JavaScript)
 </ul>
 </div>
 </div>
-<div id="outline-container-orgb70dcdc" class="outline-3">
-<h3 id="orgb70dcdc"><span class="section-number-3">5.11</span> SSH</h3>
+<div id="outline-container-orgf802d19" class="outline-3">
+<h3 id="orgf802d19"><span class="section-number-3">5.11</span> SSH</h3>
 <div class="outline-text-3" id="text-5-11">
 <ul class="org-ul">
 <li><a href="2021/ssh-agent.html"><code>ssh-agent</code></a></li>
@@ -800,8 +617,8 @@ UTF-8, UTF-16(JavaScript)
 </ul>
 </div>
 </div>
-<div id="outline-container-org2d13915" class="outline-3">
-<h3 id="org2d13915"><span class="section-number-3">5.12</span> Nginx</h3>
+<div id="outline-container-org438315e" class="outline-3">
+<h3 id="org438315e"><span class="section-number-3">5.12</span> Nginx</h3>
 <div class="outline-text-3" id="text-5-12">
 <ul class="org-ul">
 <li><a href="2021/nginx-redirect.html">Nginx Redirect</a></li>
@@ -815,8 +632,8 @@ UTF-8, UTF-16(JavaScript)
 </ul>
 </div>
 </div>
-<div id="outline-container-orgced0a9b" class="outline-3">
-<h3 id="orgced0a9b"><span class="section-number-3">5.13</span> KDE</h3>
+<div id="outline-container-orgddf88a6" class="outline-3">
+<h3 id="orgddf88a6"><span class="section-number-3">5.13</span> KDE</h3>
 <div class="outline-text-3" id="text-5-13">
 <ul class="org-ul">
 <li><a href="2022/fix-kde-plasma-panel-crash.html">修复 KDE Plasma panel 崩溃问题</a></li>

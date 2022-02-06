@@ -1,199 +1,16 @@
 <!DOCTYPE html>
 <html lang="zh">
 <head>
-<!-- 2022-02-06 Sun 14:00 -->
+<!-- 2022-02-06 Sun 15:53 -->
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>批判性思维：批判性阅读的方法和实践</title>
 <meta name="generator" content="Org mode">
-<style type="text/css">
- <!--/*--><![CDATA[/*><!--*/
-  .title  { text-align: center;
-             margin-bottom: .2em; }
-  .subtitle { text-align: center;
-              font-size: medium;
-              font-weight: bold;
-              margin-top:0; }
-  .todo   { font-family: monospace; color: red; }
-  .done   { font-family: monospace; color: green; }
-  .priority { font-family: monospace; color: orange; }
-  .tag    { background-color: #eee; font-family: monospace;
-            padding: 2px; font-size: 80%; font-weight: normal; }
-  .timestamp { color: #bebebe; }
-  .timestamp-kwd { color: #5f9ea0; }
-  .org-right  { margin-left: auto; margin-right: 0px;  text-align: right; }
-  .org-left   { margin-left: 0px;  margin-right: auto; text-align: left; }
-  .org-center { margin-left: auto; margin-right: auto; text-align: center; }
-  .underline { text-decoration: underline; }
-  #postamble p, #preamble p { font-size: 90%; margin: .2em; }
-  p.verse { margin-left: 3%; }
-  pre {
-    border: 1px solid #ccc;
-    box-shadow: 3px 3px 3px #eee;
-    padding: 8pt;
-    font-family: monospace;
-    overflow: auto;
-    margin: 1.2em;
-  }
-  pre.src {
-    position: relative;
-    overflow: auto;
-    padding-top: 1.2em;
-  }
-  pre.src:before {
-    display: none;
-    position: absolute;
-    background-color: white;
-    top: -10px;
-    right: 10px;
-    padding: 3px;
-    border: 1px solid black;
-  }
-  pre.src:hover:before { display: inline; margin-top: 14px;}
-  /* Languages per Org manual */
-  pre.src-asymptote:before { content: 'Asymptote'; }
-  pre.src-awk:before { content: 'Awk'; }
-  pre.src-C:before { content: 'C'; }
-  /* pre.src-C++ doesn't work in CSS */
-  pre.src-clojure:before { content: 'Clojure'; }
-  pre.src-css:before { content: 'CSS'; }
-  pre.src-D:before { content: 'D'; }
-  pre.src-ditaa:before { content: 'ditaa'; }
-  pre.src-dot:before { content: 'Graphviz'; }
-  pre.src-calc:before { content: 'Emacs Calc'; }
-  pre.src-emacs-lisp:before { content: 'Emacs Lisp'; }
-  pre.src-fortran:before { content: 'Fortran'; }
-  pre.src-gnuplot:before { content: 'gnuplot'; }
-  pre.src-haskell:before { content: 'Haskell'; }
-  pre.src-hledger:before { content: 'hledger'; }
-  pre.src-java:before { content: 'Java'; }
-  pre.src-js:before { content: 'Javascript'; }
-  pre.src-latex:before { content: 'LaTeX'; }
-  pre.src-ledger:before { content: 'Ledger'; }
-  pre.src-lisp:before { content: 'Lisp'; }
-  pre.src-lilypond:before { content: 'Lilypond'; }
-  pre.src-lua:before { content: 'Lua'; }
-  pre.src-matlab:before { content: 'MATLAB'; }
-  pre.src-mscgen:before { content: 'Mscgen'; }
-  pre.src-ocaml:before { content: 'Objective Caml'; }
-  pre.src-octave:before { content: 'Octave'; }
-  pre.src-org:before { content: 'Org mode'; }
-  pre.src-oz:before { content: 'OZ'; }
-  pre.src-plantuml:before { content: 'Plantuml'; }
-  pre.src-processing:before { content: 'Processing.js'; }
-  pre.src-python:before { content: 'Python'; }
-  pre.src-R:before { content: 'R'; }
-  pre.src-ruby:before { content: 'Ruby'; }
-  pre.src-sass:before { content: 'Sass'; }
-  pre.src-scheme:before { content: 'Scheme'; }
-  pre.src-screen:before { content: 'Gnu Screen'; }
-  pre.src-sed:before { content: 'Sed'; }
-  pre.src-sh:before { content: 'shell'; }
-  pre.src-sql:before { content: 'SQL'; }
-  pre.src-sqlite:before { content: 'SQLite'; }
-  /* additional languages in org.el's org-babel-load-languages alist */
-  pre.src-forth:before { content: 'Forth'; }
-  pre.src-io:before { content: 'IO'; }
-  pre.src-J:before { content: 'J'; }
-  pre.src-makefile:before { content: 'Makefile'; }
-  pre.src-maxima:before { content: 'Maxima'; }
-  pre.src-perl:before { content: 'Perl'; }
-  pre.src-picolisp:before { content: 'Pico Lisp'; }
-  pre.src-scala:before { content: 'Scala'; }
-  pre.src-shell:before { content: 'Shell Script'; }
-  pre.src-ebnf2ps:before { content: 'ebfn2ps'; }
-  /* additional language identifiers per "defun org-babel-execute"
-       in ob-*.el */
-  pre.src-cpp:before  { content: 'C++'; }
-  pre.src-abc:before  { content: 'ABC'; }
-  pre.src-coq:before  { content: 'Coq'; }
-  pre.src-groovy:before  { content: 'Groovy'; }
-  /* additional language identifiers from org-babel-shell-names in
-     ob-shell.el: ob-shell is the only babel language using a lambda to put
-     the execution function name together. */
-  pre.src-bash:before  { content: 'bash'; }
-  pre.src-csh:before  { content: 'csh'; }
-  pre.src-ash:before  { content: 'ash'; }
-  pre.src-dash:before  { content: 'dash'; }
-  pre.src-ksh:before  { content: 'ksh'; }
-  pre.src-mksh:before  { content: 'mksh'; }
-  pre.src-posh:before  { content: 'posh'; }
-  /* Additional Emacs modes also supported by the LaTeX listings package */
-  pre.src-ada:before { content: 'Ada'; }
-  pre.src-asm:before { content: 'Assembler'; }
-  pre.src-caml:before { content: 'Caml'; }
-  pre.src-delphi:before { content: 'Delphi'; }
-  pre.src-html:before { content: 'HTML'; }
-  pre.src-idl:before { content: 'IDL'; }
-  pre.src-mercury:before { content: 'Mercury'; }
-  pre.src-metapost:before { content: 'MetaPost'; }
-  pre.src-modula-2:before { content: 'Modula-2'; }
-  pre.src-pascal:before { content: 'Pascal'; }
-  pre.src-ps:before { content: 'PostScript'; }
-  pre.src-prolog:before { content: 'Prolog'; }
-  pre.src-simula:before { content: 'Simula'; }
-  pre.src-tcl:before { content: 'tcl'; }
-  pre.src-tex:before { content: 'TeX'; }
-  pre.src-plain-tex:before { content: 'Plain TeX'; }
-  pre.src-verilog:before { content: 'Verilog'; }
-  pre.src-vhdl:before { content: 'VHDL'; }
-  pre.src-xml:before { content: 'XML'; }
-  pre.src-nxml:before { content: 'XML'; }
-  /* add a generic configuration mode; LaTeX export needs an additional
-     (add-to-list 'org-latex-listings-langs '(conf " ")) in .emacs */
-  pre.src-conf:before { content: 'Configuration File'; }
-
-  table { border-collapse:collapse; }
-  caption.t-above { caption-side: top; }
-  caption.t-bottom { caption-side: bottom; }
-  td, th { vertical-align:top;  }
-  th.org-right  { text-align: center;  }
-  th.org-left   { text-align: center;   }
-  th.org-center { text-align: center; }
-  td.org-right  { text-align: right;  }
-  td.org-left   { text-align: left;   }
-  td.org-center { text-align: center; }
-  dt { font-weight: bold; }
-  .footpara { display: inline; }
-  .footdef  { margin-bottom: 1em; }
-  .figure { padding: 1em; }
-  .figure p { text-align: center; }
-  .equation-container {
-    display: table;
-    text-align: center;
-    width: 100%;
-  }
-  .equation {
-    vertical-align: middle;
-  }
-  .equation-label {
-    display: table-cell;
-    text-align: right;
-    vertical-align: middle;
-  }
-  .inlinetask {
-    padding: 10px;
-    border: 2px solid gray;
-    margin: 10px;
-    background: #ffffcc;
-  }
-  #org-div-home-and-up
-   { text-align: right; font-size: 70%; white-space: nowrap; }
-  textarea { overflow-x: auto; }
-  .linenr { font-size: smaller }
-  .code-highlighted { background-color: #ffff00; }
-  .org-info-js_info-navigation { border-style: none; }
-  #org-info-js_console-label
-    { font-size: 10px; font-weight: bold; white-space: nowrap; }
-  .org-info-js_search-highlight
-    { background-color: #ffff00; color: #000000; font-weight: bold; }
-  .org-svg { width: 90%; }
-  /*]]>*/-->
-</style>
-<link rel="stylesheet" href="/theme/normalize.css"/>
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/highlightjs/cdn-release@11.4.0/build/styles/base16/dracula.min.css">
+<script src="https://cdn.jsdelivr.net/gh/highlightjs/cdn-release@11.4.0/build/highlight.min.js"></script>
 <link rel="stylesheet" href="/theme/site.css"/>
 <script defer src='https://static.cloudflareinsights.com/beacon.min.js' data-cf-beacon='{"token": "d5b841b503ed4d1b8fad459b84d1cc2f"}'></script>
-<script defer src="/theme/link.js"></script>
+<script defer src="/theme/main.js"></script>
 </head>
 <body>
 <div id="content">
@@ -209,13 +26,13 @@
 <b>如何阅读论证性的文章</b> 是批判性阅读最重要的任务。
 </p>
 
-<div id="outline-container-org747b51a" class="outline-2">
-<h2 id="org747b51a">批判性阅读的方法和技术</h2>
-<div class="outline-text-2" id="text-org747b51a">
+<div id="outline-container-orgad87976" class="outline-2">
+<h2 id="orgad87976">批判性阅读的方法和技术</h2>
+<div class="outline-text-2" id="text-orgad87976">
 </div>
-<div id="outline-container-org30e0c47" class="outline-3">
-<h3 id="org30e0c47">批判性阅读的阶段、目的和任务</h3>
-<div class="outline-text-3" id="text-org30e0c47">
+<div id="outline-container-orgda70095" class="outline-3">
+<h3 id="orgda70095">批判性阅读的阶段、目的和任务</h3>
+<div class="outline-text-3" id="text-orgda70095">
 <ul class="org-ul">
 <li><b>阶段 1：理解阶段</b>
 
@@ -240,9 +57,9 @@
 </div>
 </div>
 
-<div id="outline-container-orgedfd2b8" class="outline-3">
-<h3 id="orgedfd2b8">理解方法：宽容原则/发掘论证</h3>
-<div class="outline-text-3" id="text-orgedfd2b8">
+<div id="outline-container-org8478676" class="outline-3">
+<h3 id="org8478676">理解方法：宽容原则/发掘论证</h3>
+<div class="outline-text-3" id="text-org8478676">
 <ul class="org-ul">
 <li>理解性问题
 
@@ -269,9 +86,9 @@
 </div>
 </div>
 
-<div id="outline-container-orgb01039e" class="outline-3">
-<h3 id="orgb01039e">批判方法：中立原则/拷问论证</h3>
-<div class="outline-text-3" id="text-orgb01039e">
+<div id="outline-container-org61725cb" class="outline-3">
+<h3 id="org61725cb">批判方法：中立原则/拷问论证</h3>
+<div class="outline-text-3" id="text-org61725cb">
 <ul class="org-ul">
 <li>批判性问题
 
@@ -295,15 +112,15 @@
 </div>
 </div>
 
-<div id="outline-container-org3b247c0" class="outline-2">
-<h2 id="org3b247c0">案例分析：北京污染的影响？不清除</h2>
-<div class="outline-text-2" id="text-org3b247c0">
+<div id="outline-container-org5a34bdf" class="outline-2">
+<h2 id="org5a34bdf">案例分析：北京污染的影响？不清除</h2>
+<div class="outline-text-2" id="text-org5a34bdf">
 <p>
 分析论证的结构：树状图解（I 型、T 型、V 型）
 </p>
 
 
-<figure id="org79d62fb">
+<figure id="org2956ca5">
 <img src="../../images/critical-thinking-3-tree-diagram.png" alt="critical-thinking-3-tree-diagram.png">
 
 <figcaption><span class="figure-number">Figure 1: </span>树状图解（I 型、T 型、V 型）</figcaption>
@@ -311,9 +128,9 @@
 </div>
 </div>
 
-<div id="outline-container-orgab0a99f" class="outline-2">
-<h2 id="orgab0a99f">拷问论证</h2>
-<div class="outline-text-2" id="text-orgab0a99f">
+<div id="outline-container-orgcfe3b87" class="outline-2">
+<h2 id="orgcfe3b87">拷问论证</h2>
+<div class="outline-text-2" id="text-orgcfe3b87">
 <ul class="org-ul">
 <li><p>
 理由是真的吗？
@@ -327,7 +144,7 @@
 </ul>
 
 
-<figure id="org3e6a8d9">
+<figure id="orgf3c66b8">
 <img src="../../images/critical-thinking-3-assumption1-2.png" alt="critical-thinking-3-assumption1-2.png">
 
 <figcaption><span class="figure-number">Figure 2: </span>假设一二</figcaption>
@@ -367,13 +184,13 @@
 </div>
 </div>
 
-<div id="outline-container-org7ab868f" class="outline-2">
-<h2 id="org7ab868f">图尔明（Stephen E. Toulmin）模型</h2>
-<div class="outline-text-2" id="text-org7ab868f">
+<div id="outline-container-org156e21c" class="outline-2">
+<h2 id="org156e21c">图尔明（Stephen E. Toulmin）模型</h2>
+<div class="outline-text-2" id="text-org156e21c">
 </div>
-<div id="outline-container-org4c8a449" class="outline-3">
-<h3 id="org4c8a449">一个好论证，由六个部分组成</h3>
-<div class="outline-text-3" id="text-org4c8a449">
+<div id="outline-container-org89a8bac" class="outline-3">
+<h3 id="org89a8bac">一个好论证，由六个部分组成</h3>
+<div class="outline-text-3" id="text-org89a8bac">
 <ul class="org-ul">
 <li>数据（Data）：事实、证据（相当于小前提）</li>
 
@@ -389,21 +206,21 @@
 </ul>
 
 
-<figure id="org8250655">
+<figure id="orgfeab2cb">
 <img src="../../images/critical-thinking-3-example-argument.png" alt="critical-thinking-3-example-argument.png">
 
 <figcaption><span class="figure-number">Figure 3: </span>举例论证</figcaption>
 </figure>
 
 
-<figure id="org1d41281">
+<figure id="org157e02f">
 <img src="../../images/critical-thinking-3-example-argument-2.png" alt="critical-thinking-3-example-argument-2.png">
 
 <figcaption><span class="figure-number">Figure 4: </span>举例论证 2</figcaption>
 </figure>
 
 
-<figure id="org84a44cd">
+<figure id="org88fe805">
 <img src="../../images/critical-thinking-3-example-argument-3.png" alt="critical-thinking-3-example-argument-3.png">
 
 <figcaption><span class="figure-number">Figure 5: </span>举例论证 3</figcaption>
@@ -414,14 +231,14 @@
 </p>
 
 
-<figure id="org0eb2dc9">
+<figure id="org9a33fc8">
 <img src="../../images/critical-thinking-3-toulmin-model.png" alt="critical-thinking-3-toulmin-model.png">
 
 <figcaption><span class="figure-number">Figure 6: </span>图尔明模型</figcaption>
 </figure>
 
 
-<figure id="org6499580">
+<figure id="org848293b">
 <img src="../../images/critical-thinking-3-usage-toulmin-model.png" alt="critical-thinking-3-usage-toulmin-model.png">
 
 <figcaption><span class="figure-number">Figure 7: </span>使用图尔明模型</figcaption>
@@ -429,9 +246,9 @@
 </div>
 </div>
 
-<div id="outline-container-orgc895d34" class="outline-3">
-<h3 id="orgc895d34">图尔明模型的特点和优点</h3>
-<div class="outline-text-3" id="text-orgc895d34">
+<div id="outline-container-orga4c7352" class="outline-3">
+<h3 id="orga4c7352">图尔明模型的特点和优点</h3>
+<div class="outline-text-3" id="text-orga4c7352">
 <ul class="org-ul">
 <li>把起不同作用的理由以不同的位置标识出来</li>
 
@@ -445,9 +262,9 @@
 </div>
 </div>
 
-<div id="outline-container-org338a83a" class="outline-2">
-<h2 id="org338a83a">总结和回顾</h2>
-<div class="outline-text-2" id="text-org338a83a">
+<div id="outline-container-org2297dd5" class="outline-2">
+<h2 id="org2297dd5">总结和回顾</h2>
+<div class="outline-text-2" id="text-org2297dd5">
 <p>
 批判性阅读就是要在坚持宽容原则基础上，准确地回答理解性问题；在坚持中立原则的基础上，恰当地回答评估性问题。在准确地理解和恰当的评估基础上，得出论证好坏的判断。
 </p>

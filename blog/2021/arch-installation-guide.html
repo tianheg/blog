@@ -1,199 +1,16 @@
 <!DOCTYPE html>
 <html lang="zh">
 <head>
-<!-- 2022-02-06 Sun 14:00 -->
+<!-- 2022-02-06 Sun 15:54 -->
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>Arch 安装指南</title>
 <meta name="generator" content="Org mode">
-<style type="text/css">
- <!--/*--><![CDATA[/*><!--*/
-  .title  { text-align: center;
-             margin-bottom: .2em; }
-  .subtitle { text-align: center;
-              font-size: medium;
-              font-weight: bold;
-              margin-top:0; }
-  .todo   { font-family: monospace; color: red; }
-  .done   { font-family: monospace; color: green; }
-  .priority { font-family: monospace; color: orange; }
-  .tag    { background-color: #eee; font-family: monospace;
-            padding: 2px; font-size: 80%; font-weight: normal; }
-  .timestamp { color: #bebebe; }
-  .timestamp-kwd { color: #5f9ea0; }
-  .org-right  { margin-left: auto; margin-right: 0px;  text-align: right; }
-  .org-left   { margin-left: 0px;  margin-right: auto; text-align: left; }
-  .org-center { margin-left: auto; margin-right: auto; text-align: center; }
-  .underline { text-decoration: underline; }
-  #postamble p, #preamble p { font-size: 90%; margin: .2em; }
-  p.verse { margin-left: 3%; }
-  pre {
-    border: 1px solid #ccc;
-    box-shadow: 3px 3px 3px #eee;
-    padding: 8pt;
-    font-family: monospace;
-    overflow: auto;
-    margin: 1.2em;
-  }
-  pre.src {
-    position: relative;
-    overflow: auto;
-    padding-top: 1.2em;
-  }
-  pre.src:before {
-    display: none;
-    position: absolute;
-    background-color: white;
-    top: -10px;
-    right: 10px;
-    padding: 3px;
-    border: 1px solid black;
-  }
-  pre.src:hover:before { display: inline; margin-top: 14px;}
-  /* Languages per Org manual */
-  pre.src-asymptote:before { content: 'Asymptote'; }
-  pre.src-awk:before { content: 'Awk'; }
-  pre.src-C:before { content: 'C'; }
-  /* pre.src-C++ doesn't work in CSS */
-  pre.src-clojure:before { content: 'Clojure'; }
-  pre.src-css:before { content: 'CSS'; }
-  pre.src-D:before { content: 'D'; }
-  pre.src-ditaa:before { content: 'ditaa'; }
-  pre.src-dot:before { content: 'Graphviz'; }
-  pre.src-calc:before { content: 'Emacs Calc'; }
-  pre.src-emacs-lisp:before { content: 'Emacs Lisp'; }
-  pre.src-fortran:before { content: 'Fortran'; }
-  pre.src-gnuplot:before { content: 'gnuplot'; }
-  pre.src-haskell:before { content: 'Haskell'; }
-  pre.src-hledger:before { content: 'hledger'; }
-  pre.src-java:before { content: 'Java'; }
-  pre.src-js:before { content: 'Javascript'; }
-  pre.src-latex:before { content: 'LaTeX'; }
-  pre.src-ledger:before { content: 'Ledger'; }
-  pre.src-lisp:before { content: 'Lisp'; }
-  pre.src-lilypond:before { content: 'Lilypond'; }
-  pre.src-lua:before { content: 'Lua'; }
-  pre.src-matlab:before { content: 'MATLAB'; }
-  pre.src-mscgen:before { content: 'Mscgen'; }
-  pre.src-ocaml:before { content: 'Objective Caml'; }
-  pre.src-octave:before { content: 'Octave'; }
-  pre.src-org:before { content: 'Org mode'; }
-  pre.src-oz:before { content: 'OZ'; }
-  pre.src-plantuml:before { content: 'Plantuml'; }
-  pre.src-processing:before { content: 'Processing.js'; }
-  pre.src-python:before { content: 'Python'; }
-  pre.src-R:before { content: 'R'; }
-  pre.src-ruby:before { content: 'Ruby'; }
-  pre.src-sass:before { content: 'Sass'; }
-  pre.src-scheme:before { content: 'Scheme'; }
-  pre.src-screen:before { content: 'Gnu Screen'; }
-  pre.src-sed:before { content: 'Sed'; }
-  pre.src-sh:before { content: 'shell'; }
-  pre.src-sql:before { content: 'SQL'; }
-  pre.src-sqlite:before { content: 'SQLite'; }
-  /* additional languages in org.el's org-babel-load-languages alist */
-  pre.src-forth:before { content: 'Forth'; }
-  pre.src-io:before { content: 'IO'; }
-  pre.src-J:before { content: 'J'; }
-  pre.src-makefile:before { content: 'Makefile'; }
-  pre.src-maxima:before { content: 'Maxima'; }
-  pre.src-perl:before { content: 'Perl'; }
-  pre.src-picolisp:before { content: 'Pico Lisp'; }
-  pre.src-scala:before { content: 'Scala'; }
-  pre.src-shell:before { content: 'Shell Script'; }
-  pre.src-ebnf2ps:before { content: 'ebfn2ps'; }
-  /* additional language identifiers per "defun org-babel-execute"
-       in ob-*.el */
-  pre.src-cpp:before  { content: 'C++'; }
-  pre.src-abc:before  { content: 'ABC'; }
-  pre.src-coq:before  { content: 'Coq'; }
-  pre.src-groovy:before  { content: 'Groovy'; }
-  /* additional language identifiers from org-babel-shell-names in
-     ob-shell.el: ob-shell is the only babel language using a lambda to put
-     the execution function name together. */
-  pre.src-bash:before  { content: 'bash'; }
-  pre.src-csh:before  { content: 'csh'; }
-  pre.src-ash:before  { content: 'ash'; }
-  pre.src-dash:before  { content: 'dash'; }
-  pre.src-ksh:before  { content: 'ksh'; }
-  pre.src-mksh:before  { content: 'mksh'; }
-  pre.src-posh:before  { content: 'posh'; }
-  /* Additional Emacs modes also supported by the LaTeX listings package */
-  pre.src-ada:before { content: 'Ada'; }
-  pre.src-asm:before { content: 'Assembler'; }
-  pre.src-caml:before { content: 'Caml'; }
-  pre.src-delphi:before { content: 'Delphi'; }
-  pre.src-html:before { content: 'HTML'; }
-  pre.src-idl:before { content: 'IDL'; }
-  pre.src-mercury:before { content: 'Mercury'; }
-  pre.src-metapost:before { content: 'MetaPost'; }
-  pre.src-modula-2:before { content: 'Modula-2'; }
-  pre.src-pascal:before { content: 'Pascal'; }
-  pre.src-ps:before { content: 'PostScript'; }
-  pre.src-prolog:before { content: 'Prolog'; }
-  pre.src-simula:before { content: 'Simula'; }
-  pre.src-tcl:before { content: 'tcl'; }
-  pre.src-tex:before { content: 'TeX'; }
-  pre.src-plain-tex:before { content: 'Plain TeX'; }
-  pre.src-verilog:before { content: 'Verilog'; }
-  pre.src-vhdl:before { content: 'VHDL'; }
-  pre.src-xml:before { content: 'XML'; }
-  pre.src-nxml:before { content: 'XML'; }
-  /* add a generic configuration mode; LaTeX export needs an additional
-     (add-to-list 'org-latex-listings-langs '(conf " ")) in .emacs */
-  pre.src-conf:before { content: 'Configuration File'; }
-
-  table { border-collapse:collapse; }
-  caption.t-above { caption-side: top; }
-  caption.t-bottom { caption-side: bottom; }
-  td, th { vertical-align:top;  }
-  th.org-right  { text-align: center;  }
-  th.org-left   { text-align: center;   }
-  th.org-center { text-align: center; }
-  td.org-right  { text-align: right;  }
-  td.org-left   { text-align: left;   }
-  td.org-center { text-align: center; }
-  dt { font-weight: bold; }
-  .footpara { display: inline; }
-  .footdef  { margin-bottom: 1em; }
-  .figure { padding: 1em; }
-  .figure p { text-align: center; }
-  .equation-container {
-    display: table;
-    text-align: center;
-    width: 100%;
-  }
-  .equation {
-    vertical-align: middle;
-  }
-  .equation-label {
-    display: table-cell;
-    text-align: right;
-    vertical-align: middle;
-  }
-  .inlinetask {
-    padding: 10px;
-    border: 2px solid gray;
-    margin: 10px;
-    background: #ffffcc;
-  }
-  #org-div-home-and-up
-   { text-align: right; font-size: 70%; white-space: nowrap; }
-  textarea { overflow-x: auto; }
-  .linenr { font-size: smaller }
-  .code-highlighted { background-color: #ffff00; }
-  .org-info-js_info-navigation { border-style: none; }
-  #org-info-js_console-label
-    { font-size: 10px; font-weight: bold; white-space: nowrap; }
-  .org-info-js_search-highlight
-    { background-color: #ffff00; color: #000000; font-weight: bold; }
-  .org-svg { width: 90%; }
-  /*]]>*/-->
-</style>
-<link rel="stylesheet" href="/theme/normalize.css"/>
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/highlightjs/cdn-release@11.4.0/build/styles/base16/dracula.min.css">
+<script src="https://cdn.jsdelivr.net/gh/highlightjs/cdn-release@11.4.0/build/highlight.min.js"></script>
 <link rel="stylesheet" href="/theme/site.css"/>
 <script defer src='https://static.cloudflareinsights.com/beacon.min.js' data-cf-beacon='{"token": "d5b841b503ed4d1b8fad459b84d1cc2f"}'></script>
-<script defer src="/theme/link.js"></script>
+<script defer src="/theme/main.js"></script>
 </head>
 <body>
 <div id="content">
@@ -274,7 +91,7 @@ install.txt（详见参考资料 1）。
 分区结果：
 </p>
 
-<pre class="example" id="org93b583d">
+<pre class="example" id="orgac1d514">
 Device      Start       End   Sectors  Size Type
 /dev/sdb1    2048    526335    524288  256M EFI System
 /dev/sdb2  526336 250069646 249543311  119G Linux filesystem
@@ -294,7 +111,7 @@ Device      Start       End   Sectors  Size Type
 <div id="outline-container-硬盘格式化新建文件系统" class="outline-3">
 <h3 id="硬盘格式化新建文件系统">硬盘格式化、新建文件系统</h3>
 <div class="outline-text-3" id="text-硬盘格式化新建文件系统">
-<pre class="example" id="org03f52e2">
+<pre class="example" id="org22536cc">
 mkfs.fat -F32 /dev/sdb1
 mkfs.ext4 /dev/sdb2
 mkfs.ext4 /dev/sda
@@ -305,7 +122,7 @@ mkfs.ext4 /dev/sda
 <div id="outline-container-挂载分区" class="outline-3">
 <h3 id="挂载分区">挂载分区</h3>
 <div class="outline-text-3" id="text-挂载分区">
-<pre class="example" id="org4a26b4d">
+<pre class="example" id="org59ada04">
 mount /dev/sdb2 /mnt
 mkdir -p /mnt/boot/efi
 mount /dev/sdb1 /mnt/boot/efi
@@ -316,7 +133,7 @@ mount /dev/sdb1 /mnt/boot/efi
 <div id="outline-container-选择镜像源" class="outline-3">
 <h3 id="选择镜像源">选择镜像源</h3>
 <div class="outline-text-3" id="text-选择镜像源">
-<pre class="example" id="orgfe62568">
+<pre class="example" id="org2ae31a9">
 pacman -Syyy reflector # reflector 能够方便地选择镜像源
 reflector -c China -a 6 --sort rate --save /etc/pacman.d/mirrorlist # 这里的 mirrorlist 是 U 盘中的，还是硬盘中的？U 盘中的
 pacman -Syyy # y 刷新本地缓存 yyy 强制刷新
@@ -327,7 +144,7 @@ pacman -Syyy # y 刷新本地缓存 yyy 强制刷新
 <div id="outline-container-安装基本系统和安装时要用的应用到硬盘" class="outline-3">
 <h3 id="安装基本系统和安装时要用的应用到硬盘">安装基本系统和安装时要用的应用到硬盘</h3>
 <div class="outline-text-3" id="text-安装基本系统和安装时要用的应用到硬盘">
-<pre class="example" id="orgf11871d">
+<pre class="example" id="org2592cd5">
 pacstrap -i /mnt base base-devel linux linux-firmware dhcpcd vim
 </pre>
 </div>
@@ -341,7 +158,7 @@ pacstrap -i /mnt base base-devel linux linux-firmware dhcpcd vim
 <div id="outline-container-进入硬盘而不在-u-盘" class="outline-3">
 <h3 id="进入硬盘而不在-u-盘">进入硬盘，而不在 U 盘</h3>
 <div class="outline-text-3" id="text-进入硬盘而不在-u-盘">
-<pre class="example" id="org0a63598">
+<pre class="example" id="org4795c89">
 arch-chroot /mnt /bin/bash
 </pre>
 </div>
@@ -350,7 +167,7 @@ arch-chroot /mnt /bin/bash
 <div id="outline-container-生成挂载表" class="outline-3">
 <h3 id="生成挂载表">生成挂载表</h3>
 <div class="outline-text-3" id="text-生成挂载表">
-<pre class="example" id="orgeb9d979">
+<pre class="example" id="orgadd71c5">
 genfstab -U -p /mnt &gt;&gt; /mnt/etc/fstab
 </pre>
 
@@ -358,7 +175,7 @@ genfstab -U -p /mnt &gt;&gt; /mnt/etc/fstab
 检查：
 </p>
 
-<pre class="example" id="orgf23c771">
+<pre class="example" id="org958de42">
 cat /mnt/etc/fstab
 </pre>
 </div>
@@ -371,7 +188,7 @@ cat /mnt/etc/fstab
 设置时区：
 </p>
 
-<pre class="example" id="orgb602328">
+<pre class="example" id="org24e94c6">
 ln -sf /usr/share/zoneinfo/Asia/Shanghai /etc/localtime
 hwclock --systohc --utc
 </pre>
@@ -384,7 +201,7 @@ hwclock --systohc --utc
 <code>vim /etc/locale.gen</code> 取消注释：
 </p>
 
-<pre class="example" id="org8bf359a">
+<pre class="example" id="orgaa5b6a7">
 en_US.UTF-8 UTF-8
 ...
 zh_CN.UTF-8 UTF-8
@@ -394,7 +211,7 @@ zh_CN.UTF-8 UTF-8
 生成配置：
 </p>
 
-<pre class="example" id="org3851829">
+<pre class="example" id="org3ebc940">
 locale-gen
 </pre>
 
@@ -406,7 +223,7 @@ locale-gen
 <code>vim /etc/locale.conf</code> 输入：
 </p>
 
-<pre class="example" id="orgd5b9f4a">
+<pre class="example" id="org62e3472">
 LANG=en_US.UTF-8
 </pre>
 </div>
@@ -415,7 +232,7 @@ LANG=en_US.UTF-8
 <div id="outline-container-安装引导程序" class="outline-3">
 <h3 id="安装引导程序">安装引导程序</h3>
 <div class="outline-text-3" id="text-安装引导程序">
-<pre class="example" id="org3532320">
+<pre class="example" id="org9c4cc6d">
 pacman -S grub efibootmgr
 grub-install --target=x86_64-efi --bootloader-id=GRUB --efi-directory=/boot/efi
 grub-mkconfig -o /boot/grub/grub.cfg
@@ -433,7 +250,7 @@ arch wiki 后，可以在 /etc/default/grub 中设置
 <div id="outline-container-设置主机名" class="outline-3">
 <h3 id="设置主机名">设置主机名</h3>
 <div class="outline-text-3" id="text-设置主机名">
-<pre class="example" id="org27bdc93">
+<pre class="example" id="orgbecebb2">
 echo arch &gt; /etc/hostname
 </pre>
 
@@ -441,7 +258,7 @@ echo arch &gt; /etc/hostname
 <code>vim /etc/hosts</code> 添加以下内容：
 </p>
 
-<pre class="example" id="org980bccc">
+<pre class="example" id="org9fe63c3">
 127.0.0.1 localhost
 ::1 localhost
 127.0.0.1 arch.localdomain arch
@@ -452,7 +269,7 @@ echo arch &gt; /etc/hostname
 <div id="outline-container-提前配置网络" class="outline-3">
 <h3 id="提前配置网络">提前配置网络</h3>
 <div class="outline-text-3" id="text-提前配置网络">
-<pre class="example" id="org9f17176">
+<pre class="example" id="org421d10e">
 pacman -S networkmanager
 systemctl enable NetworkManager
 systemctl start NetworkManager
@@ -464,7 +281,7 @@ systemctl status NetworkManager # 检查是否运行
 <div id="outline-container-设置-root-密码" class="outline-3">
 <h3 id="设置-root-密码">设置 root 密码</h3>
 <div class="outline-text-3" id="text-设置-root-密码">
-<pre class="example" id="org1bf721c">
+<pre class="example" id="org2970aa0">
 passwd
 </pre>
 </div>
@@ -473,7 +290,7 @@ passwd
 <div id="outline-container-新建普通用户" class="outline-3">
 <h3 id="新建普通用户">新建普通用户</h3>
 <div class="outline-text-3" id="text-新建普通用户">
-<pre class="example" id="org2acc484">
+<pre class="example" id="orgb2bec73">
 useradd -m -g users -G wheel -s /bin/bash archie
 </pre>
 
@@ -481,7 +298,7 @@ useradd -m -g users -G wheel -s /bin/bash archie
 设置普通用户密码：
 </p>
 
-<pre class="example" id="orgb33fab7">
+<pre class="example" id="org94f5f1a">
 passwd archie
 </pre>
 
@@ -489,7 +306,7 @@ passwd archie
 设置普通用户权限:
 </p>
 
-<pre class="example" id="orgfa1e14a">
+<pre class="example" id="org02a2b7d">
 EDITOR=vim visudo
 </pre>
 
@@ -497,7 +314,7 @@ EDITOR=vim visudo
 取消注释：
 </p>
 
-<pre class="example" id="org0de451f">
+<pre class="example" id="org661eb11">
 ## Uncomment to allow members of group wheel to execute any command
 
 %wheel ALL=(ALL) ALL
@@ -512,7 +329,7 @@ EDITOR=vim visudo
 <div id="outline-container-返回-u-盘" class="outline-3">
 <h3 id="返回-u-盘">返回 U 盘</h3>
 <div class="outline-text-3" id="text-返回-u-盘">
-<pre class="example" id="orga579707">
+<pre class="example" id="org5ec5a26">
 exit
 </pre>
 </div>
@@ -522,7 +339,7 @@ exit
 <div id="outline-container-重启系统" class="outline-2">
 <h2 id="重启系统">重启系统</h2>
 <div class="outline-text-2" id="text-重启系统">
-<pre class="example" id="org0993018">
+<pre class="example" id="orgfd77011">
 umount -R /mnt
 reboot
 </pre>
@@ -540,7 +357,7 @@ reboot
 <div id="outline-container-启动微码更新" class="outline-3">
 <h3 id="启动微码更新">启动微码更新</h3>
 <div class="outline-text-3" id="text-启动微码更新">
-<pre class="example" id="org7ede369">
+<pre class="example" id="orge62ad8f">
 sudo pacman -S intel-ucode
 sudo grub-mkconfig -o /boot/grub/grub.cfg
 </pre>
@@ -558,13 +375,13 @@ sudo grub-mkconfig -o /boot/grub/grub.cfg
 <div id="outline-container-va-api-or-vdpau" class="outline-4">
 <h4 id="va-api-or-vdpau">VA-API or VDPAU</h4>
 <div class="outline-text-4" id="text-va-api-or-vdpau">
-<pre class="example" id="orgf93a8ac">
+<pre class="example" id="org5808e0f">
 sudo pacman -S libva-utils vdpauinfo
 vainfo
 vdpauinfo
 </pre>
 
-<pre class="example" id="orgd0bd901">
+<pre class="example" id="orga1e32f1">
 vainfo: VA-API version: 1.12 (libva 2.12.0) vainfo: Driver
 version: Intel iHD driver for Intel(R) Gen Graphics - 21.3.2 ()
 vainfo: Supported profile and entrypoints VAProfileNone :
@@ -617,7 +434,7 @@ So mine is VA-API, I supposed to install
 <a href="https://en.wikipedia.org/wiki/List_of_AMD_graphics_processing_units#Radeon_R5/R7/R9_M200_series">https://en.wikipedia.org/wiki/List_of_AMD_graphics_processing_units#Radeon_R5/R7/R9_M200_series</a></li>
 </ul>
 
-<pre class="example" id="orgaa8ba30">
+<pre class="example" id="org2411ca8">
 sudo pacman -S xf86-video-intel intel-media-driver vulkan-intel xf86-video-amdgpu xf86-video-ati mesa-vdpau vulkan-radeon
 </pre>
 
@@ -654,7 +471,7 @@ ref:
 <div id="outline-container-安装图形界面" class="outline-3">
 <h3 id="安装图形界面">安装图形界面</h3>
 <div class="outline-text-3" id="text-安装图形界面">
-<pre class="example" id="org78678b4">
+<pre class="example" id="org0a181c2">
 sudo pacman -S xorg xorg-server xorg-xinit plasma # gnome gnome-extra
 # systemctl enable gdm
 systemctl enable sddm # for kde(plasma)
@@ -664,7 +481,7 @@ systemctl enable sddm # for kde(plasma)
 桌面环境为 GNOME 时，切换 Wayland 至 Xorg：
 </p>
 
-<pre class="example" id="org32c35f0">
+<pre class="example" id="orgf1e6460">
 sudo vim /etc/gdm/custom.conf
 </pre>
 
@@ -672,7 +489,7 @@ sudo vim /etc/gdm/custom.conf
 <code>/etc/gdm/custom.conf</code>:
 </p>
 
-<pre class="example" id="orgff065e3">
+<pre class="example" id="org0193281">
 [daemon]
 # Uncoment the line below to force the login screen to use Xorg
 -#WaylandEnable=false
@@ -684,7 +501,7 @@ sudo vim /etc/gdm/custom.conf
 进入命令行模式，输入 gnome-terminal 显示：
 </p>
 
-<pre class="example" id="org3085ea3">
+<pre class="example" id="org5e07224">
 # Locale not supported by C library.
 # Using the fallback 'C' locale
 Unable to init server: Could not connect: Connection refused
@@ -713,7 +530,7 @@ Unable to init server: Could not connect: Connection refused
 0，则表明支持。
 </p>
 
-<pre class="example" id="orgd661516">
+<pre class="example" id="orgf3636aa">
 sudo vim /etc/fstab
 </pre>
 
@@ -721,7 +538,7 @@ sudo vim /etc/fstab
 添加 noatime 和 diacard：
 </p>
 
-<pre class="example" id="org6dcf3ff">
+<pre class="example" id="orga7fabe9">
 # &lt;file system&gt; &lt;dir&gt; &lt;type&gt; &lt;options&gt; &lt;dump&gt; &lt;pass&gt;
 # /dev/sdb2
 UUID=b182ad17-2f74-4bf0-95b6-a42884a4ff79 /          ext4       rw,noatime,discard 0 1
@@ -735,7 +552,7 @@ UUID=EF6F-2E0C       /boot/efi  vfat       rw,noatime,discard,fmask=0022,dmask=0
 <div id="outline-container-更换-io-scheduler" class="outline-4">
 <h4 id="更换-io-scheduler">更换 I/O  scheduler</h4>
 <div class="outline-text-4" id="text-更换-io-scheduler">
-<pre class="example" id="orge40db3c">
+<pre class="example" id="org4cd77a9">
 sudo vim /etc/default/grub
 </pre>
 
@@ -743,11 +560,11 @@ sudo vim /etc/default/grub
 找到 <code>GRUB_CMDLINE_LINUX_DEFAULT</code> 这一行，添加 <code>elevator=noop</code>:
 </p>
 
-<pre class="example" id="org726bf42">
+<pre class="example" id="org0be2fe5">
 GRUB_CMDLINE_LINUX_DEFAULT="elevator=noop loglevel=3 quiet"
 </pre>
 
-<pre class="example" id="org91860cf">
+<pre class="example" id="org5bb5df4">
 sudo grub-mkconfig -o /boot/grub/grub.cfg
 </pre>
 </div>
@@ -756,7 +573,7 @@ sudo grub-mkconfig -o /boot/grub/grub.cfg
 <div id="outline-container-迁移高读写文件到-tmpfs" class="outline-4">
 <h4 id="迁移高读写文件到-tmpfs">迁移高读写文件到 tmpfs</h4>
 <div class="outline-text-4" id="text-迁移高读写文件到-tmpfs">
-<pre class="example" id="orgfab9a4a">
+<pre class="example" id="org1f8a46f">
 sudo vim /etc/fstab
 </pre>
 
@@ -764,7 +581,7 @@ sudo vim /etc/fstab
 添加以下内容到最后：
 </p>
 
-<pre class="example" id="orgf50547c">
+<pre class="example" id="orgd171c05">
 tmpfs  /tmp    tmpfs   defaults,noatime,mode=1777 0 0
 tmpfs  /var/log    tmpfs   defaults,noatime,mode=1777 0 0
 tmpfs  /var/tmp    tmpfs   defaults,noatime,mode=1777 0 0
@@ -776,7 +593,7 @@ tmpfs  /var/tmp    tmpfs   defaults,noatime,mode=1777 0 0
 after connecting wifi</a> 问题取消挂载）：
 </p>
 
-<pre class="example" id="org9a28aad">
+<pre class="example" id="org4c8360d">
 cd ~/.cache/google-chrome/Default/ &amp;&amp; rm -rf Cache &amp;&amp; ln -sf /tmp Cache
 cd ~/.cache/google-chrome/Default/ &amp;&amp; unlink Cache # 取消 Symbolic Link
 </pre>
@@ -787,7 +604,7 @@ cd ~/.cache/google-chrome/Default/ &amp;&amp; unlink Cache # 取消 Symbolic Lin
 <div id="outline-container-检查硬盘状况" class="outline-3">
 <h3 id="检查硬盘状况">检查硬盘状况</h3>
 <div class="outline-text-3" id="text-检查硬盘状况">
-<pre class="example" id="org38df537">
+<pre class="example" id="orga009b50">
 sudo pacman -S hdparm smartmontools
 sudo hdparm -I /dev/sdb
 sudo smartctl -t short /dev/sdb
@@ -798,7 +615,7 @@ sudo smartctl -t short /dev/sdb
 <div id="outline-container-测试固态硬盘速度" class="outline-3">
 <h3 id="测试固态硬盘速度">测试固态硬盘速度</h3>
 <div class="outline-text-3" id="text-测试固态硬盘速度">
-<pre class="example" id="orgb82d4c2">
+<pre class="example" id="orgb3b7add">
 sudo dd if=/dev/zero of=/tmp/test.img bs=1G count=1 oflag=dsync
 </pre>
 
