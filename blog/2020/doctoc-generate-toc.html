@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html lang="zh">
 <head>
-<!-- 2022-02-06 Sun 15:53 -->
+<!-- 2022-02-06 Sun 16:36 -->
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>使用 DocToc 自动生成文档目录</title>
@@ -56,7 +56,7 @@ DocToc 为本地 git 存储库中的 markdown
 <h2 id="安装">安装</h2>
 <div class="outline-text-2" id="text-安装">
 <div class="org-src-container">
-<pre class="src src-shell">npm install -g doctoc
+<pre class="src src-sh">npm install -g doctoc
 </pre>
 </div>
 </div>
@@ -80,7 +80,7 @@ toc。下面是一些例子。
 </p>
 
 <div class="org-src-container">
-<pre class="src src-shell">doctoc .
+<pre class="src src-sh">doctoc .
 </pre>
 </div>
 
@@ -112,7 +112,7 @@ markdown 语法剖析程式生成。DocToc 默认使用 GitHub 语法，但是�
 </p>
 
 <div class="org-src-container">
-<pre class="src src-shell">doctoc /path/to/file [...]
+<pre class="src src-sh">doctoc /path/to/file [...]
 </pre>
 </div>
 </div>
@@ -121,7 +121,7 @@ markdown 语法剖析程式生成。DocToc 默认使用 GitHub 语法，但是�
 <h4 id="例子">例子</h4>
 <div class="outline-text-4" id="text-例子">
 <div class="org-src-container">
-<pre class="src src-shell">doctoc README.md
+<pre class="src src-sh">doctoc README.md
 
 doctoc CONTRIBUTING.md LICENSE.md
 </pre>
@@ -134,7 +134,7 @@ doctoc CONTRIBUTING.md LICENSE.md
 </p>
 
 <div class="org-src-container">
-<pre class="src src-shell">ack -L <span style="color: #ddbc91;">'DOCTOC SKIP'</span> | xargs doctoc
+<pre class="src src-sh">ack -L <span style="color: #ddbc91;">'DOCTOC SKIP'</span> | xargs doctoc
 </pre>
 </div>
 
@@ -157,7 +157,7 @@ doctoc CONTRIBUTING.md LICENSE.md
 </p>
 
 <div class="org-src-container">
-<pre class="src src-shell">--bitbucket bitbucket.org
+<pre class="src src-sh">--bitbucket bitbucket.org
 --nodejs    nodejs.org
 --github    github.com
 --gitlab    gitlab.com
@@ -170,7 +170,7 @@ doctoc CONTRIBUTING.md LICENSE.md
 <h4 id="例子-1">例子</h4>
 <div class="outline-text-4" id="text-例子-1">
 <div class="org-src-container">
-<pre class="src src-shell">doctoc README.md --bitbucket
+<pre class="src src-sh">doctoc README.md --bitbucket
 </pre>
 </div>
 </div>
@@ -186,7 +186,7 @@ DocToc 默认将目录放在文档的顶部，你可以通过以下格式，让 
 </p>
 
 <div class="org-src-container">
-<pre class="src src-shell">&lt;!-- START doctoc --&gt;
+<pre class="src src-sh">&lt;!-- START doctoc --&gt;
 &lt;!-- END doctoc --&gt;
 </pre>
 </div>
@@ -195,7 +195,7 @@ DocToc 默认将目录放在文档的顶部，你可以通过以下格式，让 
 你可以直接把这段代码放在你的 .md 文件中。例如：
 </p>
 
-<pre class="example" id="org3724138">
+<pre class="example" id="org04e5abd">
 // my_new_post.md
 Here we are, introducing the post. It's going to be great!
 But first: a TOC for easy reference.
@@ -262,7 +262,7 @@ Here we'll discuss...
 钩子：
 </p>
 
-<pre class="example" id="orgc553895">
+<pre class="example" id="org25b5728">
 repos:
 -   repo: https://github.com/thlorenz/doctoc
     sha: ...  # substitute a tagged version 
