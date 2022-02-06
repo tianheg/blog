@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html lang="zh">
 <head>
-<!-- 2022-02-06 Sun 09:09 -->
+<!-- 2022-02-06 Sun 10:01 -->
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>配置 GitHub Codespaces 初始环境</title>
@@ -210,7 +210,7 @@ ohmyzsh 和 nvm，如果你想尝试可以使用我的新仓库模板
 文件结构：
 </p>
 
-<pre class="example" id="org4af139e">
+<pre class="example" id="org423b52a">
 .devcontainer
 --&gt;devcontainer.json
 --&gt;Dockerfile
@@ -221,7 +221,7 @@ ohmyzsh 和 nvm，如果你想尝试可以使用我的新仓库模板
 devcontainer.json:
 </p>
 
-<pre class="example" id="org7cddc25">
+<pre class="example" id="orga84c519">
 {
     "name": "Codespaces Basic Starter",
     "extensions": [
@@ -261,7 +261,7 @@ devcontainer.json:
 Dockerfile:
 </p>
 
-<pre class="example" id="org29912bb">
+<pre class="example" id="orgc67b0d8">
 FROM ubuntu:20.04
 
 WORKDIR /home/
@@ -281,7 +281,7 @@ RUN echo '[ -s "$NVM_DIR/nvm.sh" ] &amp;&amp; . "$NVM_DIR/nvm.sh"  # This loads 
 setup.sh:
 </p>
 
-<pre class="example" id="org2e433e9">
+<pre class="example" id="org671281a">
 ## update and install some things we should probably have
 apt-get update
 apt-get install -y \
@@ -334,7 +334,7 @@ sed -i "/# for examples/aif\ test -t l; then\nexec zsh\nfi" ~/.bashrc
 只需要以下命令：
 </p>
 
-<pre class="example" id="org8e495bd">
+<pre class="example" id="org8c3ff74">
 nvm install --lts # install Node.js, npm
 npm install -g yarn # install yarn
 </pre>
@@ -344,7 +344,7 @@ npm install -g yarn # install yarn
 是第二个命令能够执行的必要条件。
 </p>
 
-<pre class="example" id="org5c22493">
+<pre class="example" id="org12416f9">
 sed -i "/# for examples/aif\ test -t l; then\nexec zsh\nfi"
 </pre>
 
@@ -353,7 +353,7 @@ sed -i "/# for examples/aif\ test -t l; then\nexec zsh\nfi"
 bash，我想用 zsh，于是需要在 <code>.bashrc</code> 的开头添加如下字样：
 </p>
 
-<pre class="example" id="org087b638">
+<pre class="example" id="org34e1ab5">
 if test -t l; then
 exec zsh
 fi
