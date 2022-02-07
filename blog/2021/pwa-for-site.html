@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html lang="zh">
 <head>
-<!-- 2022-02-07 Mon 15:01 -->
+<!-- 2022-02-07 Mon 16:01 -->
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>为网站开启 PWA</title>
@@ -75,7 +75,7 @@ self.addEventListener(<span style="color: #ddbc91;">"fetch"</span>, (event) =&gt
 HTML 文件：
 </p>
 
-<pre class="example" id="org33f3567">
+<pre class="example" id="orge8e4357">
 {{ if and .Site.Params.enableServiceWorker (eq hugo.Environment "production") }}
     {{- $sw := resources.Get "js/sw.js" -}}
     {{- $dummy := "" | resources.FromString "dummy.js" -}}
@@ -95,7 +95,7 @@ HTML 文件：
 manifest 文件：
 </p>
 
-<pre class="example" id="orgcd26fe6">
+<pre class="example" id="org9aabe5a">
 {
   "name": "一大加贝",
   "icons": [
