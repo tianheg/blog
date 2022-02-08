@@ -8,7 +8,7 @@
 <managingEditor>me@yidajiabei.xyz (Jim Gao)</managingEditor>
 <webMaster>me@yidajiabei.xyz (Jim Gao)</webMaster>
 <copyright>在保留本文作者及本文链接的前提下，非商业用途随意转载分享。</copyright>
-<lastBuildDate>Tue, 08 Feb 2022 09:39:24 +0800</lastBuildDate>
+<lastBuildDate>Tue, 08 Feb 2022 10:01:28 +0800</lastBuildDate>
   <atom:link rel="self" type="application/rss+xml" href="https://www.yidajiabei.xyz/blog/index.xml"/>
 <item><title>深入 PHP 与 jQuery 开发</title><link>https://www.yidajiabei.xyz/blog/2022/pro-php-and-jquery.html</link><guid isPermaLink="true">https://www.yidajiabei.xyz/blog/2022/pro-php-and-jquery.html</guid><pubDate>Sun, 06 Feb 2022 08:00:00 CST</pubDate><description type="html">&lt;div id="content"&gt;
 &lt;header&gt;
@@ -17,15 +17,29 @@
 &lt;h2&gt;Table of Contents&lt;/h2&gt;
 &lt;div id="text-table-of-contents"&gt;
 &lt;ul&gt;
-&lt;li&gt;&lt;a href="#orgca6d7eb"&gt;1. 第三章：面向对象编程&lt;/a&gt;
+&lt;li&gt;&lt;a href="#org4a94906"&gt;1. 第三章：面向对象编程&lt;/a&gt;
 &lt;ul&gt;
-&lt;li&gt;&lt;a href="#org03ee81c"&gt;1.1. 对象和类&lt;/a&gt;
+&lt;li&gt;&lt;a href="#orgdde9475"&gt;1.1. 对象和类&lt;/a&gt;
 &lt;ul&gt;
-&lt;li&gt;&lt;a href="#org1fafdcd"&gt;1.1.1. 类和对象的差异&lt;/a&gt;&lt;/li&gt;
-&lt;li&gt;&lt;a href="#org0e6810d"&gt;1.1.2. 创建类&lt;/a&gt;&lt;/li&gt;
-&lt;li&gt;&lt;a href="#org113daf5"&gt;1.1.3. 定义类属性&lt;/a&gt;&lt;/li&gt;
-&lt;li&gt;&lt;a href="#orgc0ce4ed"&gt;1.1.4. 定义类方法&lt;/a&gt;&lt;/li&gt;
-&lt;li&gt;&lt;a href="#orge81326f"&gt;1.1.5. 使用类继承&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href="#org6b19b4a"&gt;1.1.1. 类和对象的差异&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href="#org54a7949"&gt;1.1.2. 创建类&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href="#orgf3b94c5"&gt;1.1.3. 定义类属性&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href="#org3fcec15"&gt;1.1.4. 定义类方法&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href="#org4ec8ea3"&gt;1.1.5. 使用类继承&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href="#orge2abf93"&gt;1.1.6. 指定属性或方法的可见度&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href="#orgb044777"&gt;1.1.7. 文档块注释&lt;/a&gt;&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;li&gt;&lt;a href="#org1014c4f"&gt;1.2. 面向对象与面向过程的差异&lt;/a&gt;&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;li&gt;&lt;a href="#org9eb0921"&gt;2. 第四章：构建活动日程表&lt;/a&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;a href="#orgc50bf18"&gt;2.1. 规划设计&lt;/a&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;a href="#org5dad985"&gt;2.1.1. 定义数据库结构&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href="#orga5da23e"&gt;2.1.2. 创建类映射&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href="#org7fb8d0f"&gt;2.1.3. 规划项目的目录结构&lt;/a&gt;&lt;/li&gt;
 &lt;/ul&gt;
 &lt;/li&gt;
 &lt;/ul&gt;
@@ -34,8 +48,8 @@
 &lt;/div&gt;
 &lt;/nav&gt;
 
-&lt;div id="outline-container-orgca6d7eb" class="outline-2"&gt;
-&lt;h2 id="orgca6d7eb"&gt;&lt;span class="section-number-2"&gt;1&lt;/span&gt; 第三章：面向对象编程&lt;/h2&gt;
+&lt;div id="outline-container-org4a94906" class="outline-2"&gt;
+&lt;h2 id="org4a94906"&gt;&lt;span class="section-number-2"&gt;1&lt;/span&gt; 第三章：面向对象编程&lt;/h2&gt;
 &lt;div class="outline-text-2" id="text-1"&gt;
 &lt;p&gt;
 面向对象编程（OOP）：充分利用代码，将实现同类功能的代码聚合在一起，组织成类。
@@ -46,8 +60,8 @@
 &lt;/p&gt;
 &lt;/div&gt;
 
-&lt;div id="outline-container-org03ee81c" class="outline-3"&gt;
-&lt;h3 id="org03ee81c"&gt;&lt;span class="section-number-3"&gt;1.1&lt;/span&gt; 对象和类&lt;/h3&gt;
+&lt;div id="outline-container-orgdde9475" class="outline-3"&gt;
+&lt;h3 id="orgdde9475"&gt;&lt;span class="section-number-3"&gt;1.1&lt;/span&gt; 对象和类&lt;/h3&gt;
 &lt;div class="outline-text-3" id="text-1-1"&gt;
 &lt;ul class="org-ul"&gt;
 &lt;li&gt;类的基础组成&lt;/li&gt;
@@ -56,8 +70,8 @@
 &lt;/ul&gt;
 &lt;/div&gt;
 
-&lt;div id="outline-container-org1fafdcd" class="outline-4"&gt;
-&lt;h4 id="org1fafdcd"&gt;&lt;span class="section-number-4"&gt;1.1.1&lt;/span&gt; 类和对象的差异&lt;/h4&gt;
+&lt;div id="outline-container-org6b19b4a" class="outline-4"&gt;
+&lt;h4 id="org6b19b4a"&gt;&lt;span class="section-number-4"&gt;1.1.1&lt;/span&gt; 类和对象的差异&lt;/h4&gt;
 &lt;div class="outline-text-4" id="text-1-1-1"&gt;
 &lt;p&gt;
 类，打个比方，就像房子的蓝图。它在纸上清晰地定义了房子的形状，定义了房子各个部分之间的关系，并且计划好了怎么盖，虽然还没盖。
@@ -77,8 +91,8 @@
 &lt;/div&gt;
 &lt;/div&gt;
 
-&lt;div id="outline-container-org0e6810d" class="outline-4"&gt;
-&lt;h4 id="org0e6810d"&gt;&lt;span class="section-number-4"&gt;1.1.2&lt;/span&gt; 创建类&lt;/h4&gt;
+&lt;div id="outline-container-org54a7949" class="outline-4"&gt;
+&lt;h4 id="org54a7949"&gt;&lt;span class="section-number-4"&gt;1.1.2&lt;/span&gt; 创建类&lt;/h4&gt;
 &lt;div class="outline-text-4" id="text-1-1-2"&gt;
 &lt;p&gt;
 class ClassName
@@ -86,8 +100,8 @@ class ClassName
 &lt;/div&gt;
 &lt;/div&gt;
 
-&lt;div id="outline-container-org113daf5" class="outline-4"&gt;
-&lt;h4 id="org113daf5"&gt;&lt;span class="section-number-4"&gt;1.1.3&lt;/span&gt; 定义类属性&lt;/h4&gt;
+&lt;div id="outline-container-orgf3b94c5" class="outline-4"&gt;
+&lt;h4 id="orgf3b94c5"&gt;&lt;span class="section-number-4"&gt;1.1.3&lt;/span&gt; 定义类属性&lt;/h4&gt;
 &lt;div class="outline-text-4" id="text-1-1-3"&gt;
 &lt;p&gt;
 public $prop1 = "I'm a class property!";
@@ -99,8 +113,8 @@ public $prop1 = "I'm a class property!";
 &lt;/div&gt;
 &lt;/div&gt;
 
-&lt;div id="outline-container-orgc0ce4ed" class="outline-4"&gt;
-&lt;h4 id="orgc0ce4ed"&gt;&lt;span class="section-number-4"&gt;1.1.4&lt;/span&gt; 定义类方法&lt;/h4&gt;
+&lt;div id="outline-container-org3fcec15" class="outline-4"&gt;
+&lt;h4 id="org3fcec15"&gt;&lt;span class="section-number-4"&gt;1.1.4&lt;/span&gt; 定义类方法&lt;/h4&gt;
 &lt;div class="outline-text-4" id="text-1-1-4"&gt;
 &lt;p&gt;
 方法是只属于某一类的函数。
@@ -125,8 +139,236 @@ __construct，__destruct，unset，__toString
 &lt;/div&gt;
 &lt;/div&gt;
 
-&lt;div id="outline-container-orge81326f" class="outline-4"&gt;
-&lt;h4 id="orge81326f"&gt;&lt;span class="section-number-4"&gt;1.1.5&lt;/span&gt; 使用类继承&lt;/h4&gt;
+&lt;div id="outline-container-org4ec8ea3" class="outline-4"&gt;
+&lt;h4 id="org4ec8ea3"&gt;&lt;span class="section-number-4"&gt;1.1.5&lt;/span&gt; 使用类继承&lt;/h4&gt;
+&lt;div class="outline-text-4" id="text-1-1-5"&gt;
+&lt;p&gt;
+使用 extends 关键字，一个类能够从其他的类继承方法和属性。
+&lt;/p&gt;
+
+&lt;ol class="org-ol"&gt;
+&lt;li&gt;覆盖继承来的属性和方法&lt;/li&gt;
+&lt;li&gt;覆盖时保留被覆盖方法的功能&lt;/li&gt;
+&lt;/ol&gt;
+&lt;/div&gt;
+&lt;/div&gt;
+
+&lt;div id="outline-container-orge2abf93" class="outline-4"&gt;
+&lt;h4 id="orge2abf93"&gt;&lt;span class="section-number-4"&gt;1.1.6&lt;/span&gt; 指定属性或方法的可见度&lt;/h4&gt;
+&lt;div class="outline-text-4" id="text-1-1-6"&gt;
+&lt;p&gt;
+三个可见度关键字：public（公开的），protected（受保护的），private（私有的）
+&lt;/p&gt;
+
+&lt;p&gt;
+还有一种可见度：static（静态的），静态的方法和属性无需创建类的实例就可以访问。
+&lt;/p&gt;
+
+&lt;p&gt;
+为什么没有思考？
+&lt;/p&gt;
+&lt;/div&gt;
+&lt;/div&gt;
+
+&lt;div id="outline-container-orgb044777" class="outline-4"&gt;
+&lt;h4 id="orgb044777"&gt;&lt;span class="section-number-4"&gt;1.1.7&lt;/span&gt; 文档块注释&lt;/h4&gt;
+&lt;div class="outline-text-4" id="text-1-1-7"&gt;
+&lt;div class="org-src-container"&gt;
+&lt;pre class="src src-php"&gt;/**
+ * 
+ * @author Jim Gao &lt;me@yidajiabei.xyz&gt;
+ * @copyright 2022 Jim Gao
+ * @license link
+ * @var
+ * @param
+ * @return
+ */
+&lt;/pre&gt;
+&lt;/div&gt;
+&lt;/div&gt;
+&lt;/div&gt;
+&lt;/div&gt;
+
+&lt;div id="outline-container-org1014c4f" class="outline-3"&gt;
+&lt;h3 id="org1014c4f"&gt;&lt;span class="section-number-3"&gt;1.2&lt;/span&gt; 面向对象与面向过程的差异&lt;/h3&gt;
+&lt;div class="outline-text-3" id="text-1-2"&gt;
+&lt;p&gt;
+为什么在大项目中，采用面向对象方法？
+&lt;/p&gt;
+
+&lt;ol class="org-ol"&gt;
+&lt;li&gt;容易实现&lt;/li&gt;
+&lt;li&gt;更好的组织&lt;/li&gt;
+&lt;li&gt;更容易维护&lt;/li&gt;
+&lt;/ol&gt;
+
+&lt;p&gt;
+面向过程：
+&lt;/p&gt;
+
+&lt;div class="org-src-container"&gt;
+&lt;pre class="src src-php"&gt;&lt;?php
+
+function changeJob($person, $newjob)
+{
+  $person['job'] = $newjob;
+  return $person;
+}
+
+function happyBirthday($person)
+{
+  ++$person['age'];
+  return $person;
+}
+
+$person1 = array(
+  'name' =&gt; 'Tom',
+  'job' =&gt; 'Button-Pusher',
+  'age' =&gt; 34
+);
+
+$person2 = array(
+  'name' =&gt; 'John',
+  'job' =&gt; 'Lever-Pusher',
+  'age' =&gt; 42
+);
+
+echo "&lt;pre&gt;Person 1: ", print_r($person1, TRUE), "&lt;/pre&gt;";
+echo "&lt;pre&gt;Person 2: ", print_r($person2, TRUE), "&lt;/pre&gt;";
+
+$person1 = changeJob($person1, 'Box-Mover');
+$person1 = happyBirthday($person1);
+
+$person2 = happyBirthday($person2);
+
+echo "&lt;pre&gt;Person 1: ", print_r($person1, TRUE), "&lt;/pre&gt;";
+echo "&lt;pre&gt;Person 2: ", print_r($person2, TRUE), "&lt;/pre&gt;";
+&lt;/pre&gt;
+&lt;/div&gt;
+
+&lt;p&gt;
+面向对象：
+&lt;/p&gt;
+
+&lt;div class="org-src-container"&gt;
+&lt;pre class="src src-php"&gt;&lt;?php
+
+class Person
+{
+  private $_name;
+  private $_job;
+  private $_age;
+
+  public function __construct($name, $job, $age)
+  {
+    $this-&gt;_name = $name;
+    $this-&gt;_job = $job;
+    $this-&gt;_age = $age;
+  }
+
+  public function changeJob($newjob)
+  {
+    $this-&gt;_job = $newjob;
+  }
+
+  public function happyBirthday()
+  {
+    ++$this-&gt;_age;
+  }
+}
+
+$person1 = new Person("Tom", "Button-Pusher", 34);
+$person2 = new Person("John", "Lever Puller", 41);
+
+echo "&lt;pre&gt;Person 1: ", print_r($person1, TRUE), "&lt;/pre&gt;";
+echo "&lt;pre&gt;Person 2: ", print_r($person2, TRUE), "&lt;/pre&gt;";
+
+$person1-&gt;changeJob('Box-Mover');
+$person1-&gt;happyBirthday();
+$person2-&gt;happyBirthday();
+
+echo "&lt;pre&gt;Person 1: ", print_r($person1, TRUE), "&lt;/pre&gt;";
+echo "&lt;pre&gt;Person 2: ", print_r($person2, TRUE), "&lt;/pre&gt;";
+&lt;/pre&gt;
+&lt;/div&gt;
+&lt;/div&gt;
+&lt;/div&gt;
+&lt;/div&gt;
+
+&lt;div id="outline-container-org9eb0921" class="outline-2"&gt;
+&lt;h2 id="org9eb0921"&gt;&lt;span class="section-number-2"&gt;2&lt;/span&gt; 第四章：构建活动日程表&lt;/h2&gt;
+&lt;div class="outline-text-2" id="text-2"&gt;
+&lt;/div&gt;
+&lt;div id="outline-container-orgc50bf18" class="outline-3"&gt;
+&lt;h3 id="orgc50bf18"&gt;&lt;span class="section-number-3"&gt;2.1&lt;/span&gt; 规划设计&lt;/h3&gt;
+&lt;div class="outline-text-3" id="text-2-1"&gt;
+&lt;p&gt;
+由数据库 MySQL 驱动，先定义数据库结构，后规划网站地图（如何从数据库中获取数据和修改数据）。
+&lt;/p&gt;
+&lt;/div&gt;
+
+&lt;div id="outline-container-org5dad985" class="outline-4"&gt;
+&lt;h4 id="org5dad985"&gt;&lt;span class="section-number-4"&gt;2.1.1&lt;/span&gt; 定义数据库结构&lt;/h4&gt;
+&lt;div class="outline-text-4" id="text-2-1-1"&gt;
+&lt;p&gt;
+对于一个活动日程表来说，需要存储的信息：
+&lt;/p&gt;
+
+&lt;ul class="org-ul"&gt;
+&lt;li&gt;event_id 一个自增长整数，每个活动用该整数唯一标识&lt;/li&gt;
+&lt;li&gt;event_title 活动标题&lt;/li&gt;
+&lt;li&gt;event_desc 活动详情&lt;/li&gt;
+&lt;li&gt;event_start 活动开始时间 格式为：YYYY-MM-DD HH:MM:SS&lt;/li&gt;
+&lt;li&gt;event_end 活动结束时间 格式同开始时间&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/div&gt;
+&lt;/div&gt;
+
+&lt;div id="outline-container-orga5da23e" class="outline-4"&gt;
+&lt;h4 id="orga5da23e"&gt;&lt;span class="section-number-4"&gt;2.1.2&lt;/span&gt; 创建类映射&lt;/h4&gt;
+&lt;div class="outline-text-4" id="text-2-1-2"&gt;
+&lt;p&gt;
+主类 Calendar，负责处理与活动日程表有关的所有行为。方法和属性规划：
+&lt;/p&gt;
+
+&lt;ul class="org-ul"&gt;
+&lt;li&gt;构造函数
+&lt;ul class="org-ul"&gt;
+&lt;li&gt;保证数据库连接。若未连接，就创建一个连接&lt;/li&gt;
+&lt;li&gt;设定以下基本属性：数据库对象&lt;/li&gt;
+&lt;li&gt;显示当前日期，显示当前月份&lt;/li&gt;
+&lt;li&gt;显示当前年份&lt;/li&gt;
+&lt;li&gt;这个月有多少天，这个月的起始日是星期几&lt;/li&gt;
+&lt;/ul&gt;&lt;/li&gt;
+&lt;li&gt;生成活动表单 HTML
+&lt;ul class="org-ul"&gt;
+&lt;li&gt;检查时候正在修改或创建活动&lt;/li&gt;
+&lt;li&gt;如果是修改活动，把活动数据载入表单&lt;/li&gt;
+&lt;/ul&gt;&lt;/li&gt;
+&lt;li&gt;对用户输入进行安全处理后，将新活动保存到数据库&lt;/li&gt;
+&lt;li&gt;从数据库删除活动并请求用户确认&lt;/li&gt;
+&lt;li&gt;载入活动数据
+&lt;ul class="org-ul"&gt;
+&lt;li&gt;从数据库载入活动数据&lt;/li&gt;
+&lt;li&gt;将指定月份的每个活动按日期保存到一个数组中&lt;/li&gt;
+&lt;/ul&gt;&lt;/li&gt;
+&lt;li&gt;输出日历信息 HTML。循环活动数据数组，并附加相应的标题及时间&lt;/li&gt;
+&lt;li&gt;用 HTML 显示活动数据并允许通过活动 ID 载入活动描述和详情&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/div&gt;
+&lt;/div&gt;
+
+&lt;div id="outline-container-org7fb8d0f" class="outline-4"&gt;
+&lt;h4 id="org7fb8d0f"&gt;&lt;span class="section-number-4"&gt;2.1.3&lt;/span&gt; 规划项目的目录结构&lt;/h4&gt;
+&lt;div class="outline-text-4" id="text-2-1-3"&gt;
+&lt;p&gt;
+出于安全考虑，不要把私密数据放在网站根目录或是公开目录中，其中包括数据库配置文件、程序内核，以及网站运行所需的各个类。
+&lt;/p&gt;
+
+&lt;p&gt;
+需要两个目录：一个公开目录（public），存放供用户直接访问的文件，比如页面、CSS 文件、JavaScript 脚本等；一个是系统目录（sys），存放不易公开的文件，比如数据库账号密码，一些类文件和核心 PHP 文件。
+&lt;/p&gt;
+&lt;/div&gt;
 &lt;/div&gt;
 &lt;/div&gt;
 &lt;/div&gt;
@@ -266,65 +508,65 @@ sudo mv panel-restart /usr/bin/
 &lt;header&gt;
 &lt;h1 class="title"&gt;命令行工具&lt;/h1&gt;
 &lt;/header&gt;
-&lt;div id="outline-container-org4b1e817" class="outline-2"&gt;
-&lt;h2 id="org4b1e817"&gt;exa/ls/broot&lt;/h2&gt;
+&lt;div id="outline-container-org8773ba0" class="outline-2"&gt;
+&lt;h2 id="org8773ba0"&gt;exa/ls/broot&lt;/h2&gt;
 &lt;/div&gt;
 
-&lt;div id="outline-container-orgd669770" class="outline-2"&gt;
-&lt;h2 id="orgd669770"&gt;zoxide/cd&lt;/h2&gt;
+&lt;div id="outline-container-orgc037965" class="outline-2"&gt;
+&lt;h2 id="orgc037965"&gt;zoxide/cd&lt;/h2&gt;
 &lt;/div&gt;
 
-&lt;div id="outline-container-org0ac8567" class="outline-2"&gt;
-&lt;h2 id="org0ac8567"&gt;bat/cat&lt;/h2&gt;
+&lt;div id="outline-container-orga10ecc6" class="outline-2"&gt;
+&lt;h2 id="orga10ecc6"&gt;bat/cat&lt;/h2&gt;
 &lt;/div&gt;
 
-&lt;div id="outline-container-orge6772c1" class="outline-2"&gt;
-&lt;h2 id="orge6772c1"&gt;fx/jq/hexyl&lt;/h2&gt;
+&lt;div id="outline-container-orgb8dcdba" class="outline-2"&gt;
+&lt;h2 id="orgb8dcdba"&gt;fx/jq/hexyl&lt;/h2&gt;
 &lt;/div&gt;
 
-&lt;div id="outline-container-orgf9bd1f6" class="outline-2"&gt;
-&lt;h2 id="orgf9bd1f6"&gt;diff-so-fancy/git diff&lt;/h2&gt;
+&lt;div id="outline-container-org7c28d1a" class="outline-2"&gt;
+&lt;h2 id="org7c28d1a"&gt;diff-so-fancy/git diff&lt;/h2&gt;
 &lt;/div&gt;
 
-&lt;div id="outline-container-org0d89113" class="outline-2"&gt;
-&lt;h2 id="org0d89113"&gt;fd/find&lt;/h2&gt;
+&lt;div id="outline-container-orge690560" class="outline-2"&gt;
+&lt;h2 id="orge690560"&gt;fd/find&lt;/h2&gt;
 &lt;/div&gt;
 
-&lt;div id="outline-container-org9af4f98" class="outline-2"&gt;
-&lt;h2 id="org9af4f98"&gt;ripgrep/grep&lt;/h2&gt;
+&lt;div id="outline-container-orga81a2fc" class="outline-2"&gt;
+&lt;h2 id="orga81a2fc"&gt;ripgrep/grep&lt;/h2&gt;
 &lt;/div&gt;
 
-&lt;div id="outline-container-org2456c51" class="outline-2"&gt;
-&lt;h2 id="org2456c51"&gt;McFly/ctrl-r&lt;/h2&gt;
+&lt;div id="outline-container-org323048a" class="outline-2"&gt;
+&lt;h2 id="org323048a"&gt;McFly/ctrl-r&lt;/h2&gt;
 &lt;/div&gt;
 
-&lt;div id="outline-container-orgcb0925c" class="outline-2"&gt;
-&lt;h2 id="orgcb0925c"&gt;choose/cut&lt;/h2&gt;
+&lt;div id="outline-container-org0c6e2d3" class="outline-2"&gt;
+&lt;h2 id="org0c6e2d3"&gt;choose/cut&lt;/h2&gt;
 &lt;/div&gt;
 
-&lt;div id="outline-container-orgcdf239e" class="outline-2"&gt;
-&lt;h2 id="orgcdf239e"&gt;duf/df&lt;/h2&gt;
+&lt;div id="outline-container-orgb6a75c4" class="outline-2"&gt;
+&lt;h2 id="orgb6a75c4"&gt;duf/df&lt;/h2&gt;
 &lt;/div&gt;
 
-&lt;div id="outline-container-org0f7c7e4" class="outline-2"&gt;
-&lt;h2 id="org0f7c7e4"&gt;ncdu/du&lt;/h2&gt;
+&lt;div id="outline-container-org80a5289" class="outline-2"&gt;
+&lt;h2 id="org80a5289"&gt;ncdu/du&lt;/h2&gt;
 &lt;/div&gt;
 
-&lt;div id="outline-container-org73efb29" class="outline-2"&gt;
-&lt;h2 id="org73efb29"&gt;htop/top&lt;/h2&gt;
+&lt;div id="outline-container-orge4b4f4b" class="outline-2"&gt;
+&lt;h2 id="orge4b4f4b"&gt;htop/top&lt;/h2&gt;
 &lt;/div&gt;
 
-&lt;div id="outline-container-org0efe49a" class="outline-2"&gt;
-&lt;h2 id="org0efe49a"&gt;procs/ps&lt;/h2&gt;
+&lt;div id="outline-container-org6628b49" class="outline-2"&gt;
+&lt;h2 id="org6628b49"&gt;procs/ps&lt;/h2&gt;
 &lt;/div&gt;
 
-&lt;div id="outline-container-org40aef01" class="outline-2"&gt;
-&lt;h2 id="org40aef01"&gt;httpie/curl&lt;/h2&gt;
+&lt;div id="outline-container-org9276022" class="outline-2"&gt;
+&lt;h2 id="org9276022"&gt;httpie/curl&lt;/h2&gt;
 &lt;/div&gt;
 
-&lt;div id="outline-container-orgeeb7e9b" class="outline-2"&gt;
-&lt;h2 id="orgeeb7e9b"&gt;dog/dig&lt;/h2&gt;
-&lt;div class="outline-text-2" id="text-orgeeb7e9b"&gt;
+&lt;div id="outline-container-org574ccf5" class="outline-2"&gt;
+&lt;h2 id="org574ccf5"&gt;dog/dig&lt;/h2&gt;
+&lt;div class="outline-text-2" id="text-org574ccf5"&gt;
 &lt;p&gt;
 &lt;a href="https://mp.weixin.qq.com/s/gkPbQTyhAHwYrpzJjftJVQ"&gt;https://mp.weixin.qq.com/s/gkPbQTyhAHwYrpzJjftJVQ&lt;/a&gt;&lt;/p&gt;
 &lt;/div&gt;
@@ -541,18 +783,18 @@ JS 最重要的三种数据类型：字符串，数值，布尔值。
 一个数组作为另一个数组的元素
 &lt;/p&gt;
 
-&lt;div id="outline-container-org7d20706" class="outline-2"&gt;
-&lt;h2 id="org7d20706"&gt;对象&lt;/h2&gt;
-&lt;div class="outline-text-2" id="text-org7d20706"&gt;
+&lt;div id="outline-container-orgbbfbe7b" class="outline-2"&gt;
+&lt;h2 id="orgbbfbe7b"&gt;对象&lt;/h2&gt;
+&lt;div class="outline-text-2" id="text-orgbbfbe7b"&gt;
 &lt;p&gt;
 用点号获取属性和花括号语法创建对象。
 &lt;/p&gt;
 &lt;/div&gt;
 &lt;/div&gt;
 
-&lt;div id="outline-container-org6682b1d" class="outline-2"&gt;
-&lt;h2 id="org6682b1d"&gt;操作&lt;/h2&gt;
-&lt;div class="outline-text-2" id="text-org6682b1d"&gt;
+&lt;div id="outline-container-org3bbdeb5" class="outline-2"&gt;
+&lt;h2 id="org3bbdeb5"&gt;操作&lt;/h2&gt;
+&lt;div class="outline-text-2" id="text-org3bbdeb5"&gt;
 &lt;p&gt;
 自增、自减
 &lt;/p&gt;
@@ -572,9 +814,9 @@ JS 最重要的三种数据类型：字符串，数值，布尔值。
 &lt;/div&gt;
 &lt;/div&gt;
 
-&lt;div id="outline-container-org6f1b87d" class="outline-2"&gt;
-&lt;h2 id="org6f1b87d"&gt;条件语句&lt;/h2&gt;
-&lt;div class="outline-text-2" id="text-org6f1b87d"&gt;
+&lt;div id="outline-container-orgea0fa1e" class="outline-2"&gt;
+&lt;h2 id="orgea0fa1e"&gt;条件语句&lt;/h2&gt;
+&lt;div class="outline-text-2" id="text-orgea0fa1e"&gt;
 &lt;p&gt;
 if&#x2026;else&#x2026;
 &lt;/p&gt;
@@ -585,27 +827,27 @@ if&#x2026;else&#x2026;
 &lt;/div&gt;
 &lt;/div&gt;
 
-&lt;div id="outline-container-org4a98d15" class="outline-2"&gt;
-&lt;h2 id="org4a98d15"&gt;循环语句&lt;/h2&gt;
-&lt;div class="outline-text-2" id="text-org4a98d15"&gt;
+&lt;div id="outline-container-orgc85276b" class="outline-2"&gt;
+&lt;h2 id="orgc85276b"&gt;循环语句&lt;/h2&gt;
+&lt;div class="outline-text-2" id="text-orgc85276b"&gt;
 &lt;p&gt;
 do&#x2026;while 循环内部的代码至少执行一次
 &lt;/p&gt;
 &lt;/div&gt;
 &lt;/div&gt;
 
-&lt;div id="outline-container-orgbf24246" class="outline-2"&gt;
-&lt;h2 id="orgbf24246"&gt;函数&lt;/h2&gt;
-&lt;div class="outline-text-2" id="text-orgbf24246"&gt;
+&lt;div id="outline-container-org5c3d44a" class="outline-2"&gt;
+&lt;h2 id="org5c3d44a"&gt;函数&lt;/h2&gt;
+&lt;div class="outline-text-2" id="text-org5c3d44a"&gt;
 &lt;p&gt;
 传参
 &lt;/p&gt;
 &lt;/div&gt;
 &lt;/div&gt;
 
-&lt;div id="outline-container-org2311682" class="outline-2"&gt;
-&lt;h2 id="org2311682"&gt;变量的作用域&lt;/h2&gt;
-&lt;div class="outline-text-2" id="text-org2311682"&gt;
+&lt;div id="outline-container-orgd6db91d" class="outline-2"&gt;
+&lt;h2 id="orgd6db91d"&gt;变量的作用域&lt;/h2&gt;
+&lt;div class="outline-text-2" id="text-orgd6db91d"&gt;
 &lt;p&gt;
 全局变量：可在任何位置被引用，它的作用域是整个脚本；
 &lt;/p&gt;
@@ -620,9 +862,9 @@ do&#x2026;while 循环内部的代码至少执行一次
 &lt;/div&gt;
 &lt;/div&gt;
 
-&lt;div id="outline-container-orgd28657e" class="outline-2"&gt;
-&lt;h2 id="orgd28657e"&gt;对象&lt;/h2&gt;
-&lt;div class="outline-text-2" id="text-orgd28657e"&gt;
+&lt;div id="outline-container-org1dfcdca" class="outline-2"&gt;
+&lt;h2 id="org1dfcdca"&gt;对象&lt;/h2&gt;
+&lt;div class="outline-text-2" id="text-org1dfcdca"&gt;
 &lt;p&gt;
 对象是自包含的数据集合，包含在对象里的数据可以通过两种形式访问——属性和方法：
 &lt;/p&gt;
@@ -840,9 +1082,9 @@ SOP（标准作业程序，Standard Operating Procedure），指将某一事件�
 &lt;h2&gt;Table of Contents&lt;/h2&gt;
 &lt;div id="text-table-of-contents"&gt;
 &lt;ul&gt;
-&lt;li&gt;&lt;a href="#org6be99f2"&gt;1. 使用&lt;/a&gt;&lt;/li&gt;
-&lt;li&gt;&lt;a href="#org828ed76"&gt;2. 文件结构&lt;/a&gt;&lt;/li&gt;
-&lt;li&gt;&lt;a href="#orgb715fba"&gt;3. GitHub Action 自动部署&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href="#org3cdb714"&gt;1. 使用&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href="#org285dbc6"&gt;2. 文件结构&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href="#org295be03"&gt;3. GitHub Action 自动部署&lt;/a&gt;&lt;/li&gt;
 &lt;/ul&gt;
 &lt;/div&gt;
 &lt;/nav&gt;
@@ -854,8 +1096,8 @@ SOP（标准作业程序，Standard Operating Procedure），指将某一事件�
 Sphinx 是 Python 编程语言下的常见文档构建程序。我想把 JSDoc 和它结合起来，于是我找到了 sphinx-js&lt;sup&gt;&lt;a id="fnr.2" class="footref" href="#fn.2"&gt;2&lt;/a&gt;&lt;/sup&gt;。
 &lt;/p&gt;
 
-&lt;div id="outline-container-org6be99f2" class="outline-2"&gt;
-&lt;h2 id="org6be99f2"&gt;&lt;span class="section-number-2"&gt;1&lt;/span&gt; 使用&lt;/h2&gt;
+&lt;div id="outline-container-org3cdb714" class="outline-2"&gt;
+&lt;h2 id="org3cdb714"&gt;&lt;span class="section-number-2"&gt;1&lt;/span&gt; 使用&lt;/h2&gt;
 &lt;div class="outline-text-2" id="text-1"&gt;
 &lt;p&gt;
 确保 Python 版本为 3.8，使用 3.10 会报错：
@@ -945,8 +1187,8 @@ js 源文件 index.js：
 &lt;/div&gt;
 &lt;/div&gt;
 
-&lt;div id="outline-container-org828ed76" class="outline-2"&gt;
-&lt;h2 id="org828ed76"&gt;&lt;span class="section-number-2"&gt;2&lt;/span&gt; 文件结构&lt;/h2&gt;
+&lt;div id="outline-container-org285dbc6" class="outline-2"&gt;
+&lt;h2 id="org285dbc6"&gt;&lt;span class="section-number-2"&gt;2&lt;/span&gt; 文件结构&lt;/h2&gt;
 &lt;div class="outline-text-2" id="text-2"&gt;
 &lt;div class="org-src-container"&gt;
 &lt;pre class="src src-txt"&gt;.
@@ -966,8 +1208,8 @@ js 源文件 index.js：
 &lt;/div&gt;
 &lt;/div&gt;
 
-&lt;div id="outline-container-orgb715fba" class="outline-2"&gt;
-&lt;h2 id="orgb715fba"&gt;&lt;span class="section-number-2"&gt;3&lt;/span&gt; GitHub Action 自动部署&lt;/h2&gt;
+&lt;div id="outline-container-org295be03" class="outline-2"&gt;
+&lt;h2 id="org295be03"&gt;&lt;span class="section-number-2"&gt;3&lt;/span&gt; GitHub Action 自动部署&lt;/h2&gt;
 &lt;div class="outline-text-2" id="text-3"&gt;
 &lt;div class="org-src-container"&gt;
 &lt;pre class="src src-yml"&gt;name: "Build Sphinx"
@@ -1041,9 +1283,9 @@ jobs:
 &lt;header&gt;
 &lt;h1 class="title"&gt;常用脚本&lt;/h1&gt;
 &lt;/header&gt;
-&lt;div id="outline-container-org0ac270c" class="outline-2"&gt;
-&lt;h2 id="org0ac270c"&gt;批量删除 Pypi 包&lt;/h2&gt;
-&lt;div class="outline-text-2" id="text-org0ac270c"&gt;
+&lt;div id="outline-container-org55766ef" class="outline-2"&gt;
+&lt;h2 id="org55766ef"&gt;批量删除 Pypi 包&lt;/h2&gt;
+&lt;div class="outline-text-2" id="text-org55766ef"&gt;
 &lt;div class="org-src-container"&gt;
 &lt;pre class="src src-sh"&gt;pip freeze | grep SOMETHING | xargs pip uninstall -y
 &lt;span style="color: #706565;"&gt;# &lt;/span&gt;&lt;span style="color: #857575;"&gt;https://stackoverflow.com/a/9406259&lt;/span&gt;
@@ -1052,9 +1294,9 @@ jobs:
 &lt;/div&gt;
 &lt;/div&gt;
 
-&lt;div id="outline-container-org2d03a4a" class="outline-2"&gt;
-&lt;h2 id="org2d03a4a"&gt;批量删除 Pacman 包&lt;/h2&gt;
-&lt;div class="outline-text-2" id="text-org2d03a4a"&gt;
+&lt;div id="outline-container-orga3abaea" class="outline-2"&gt;
+&lt;h2 id="orga3abaea"&gt;批量删除 Pacman 包&lt;/h2&gt;
+&lt;div class="outline-text-2" id="text-orga3abaea"&gt;
 &lt;div class="org-src-container"&gt;
 &lt;pre class="src src-sh"&gt;sudo pacman -Rs $(pacman -Qq | grep some_words)
 &lt;span style="color: #706565;"&gt;# &lt;/span&gt;&lt;span style="color: #857575;"&gt;https://bbs.archlinux.org/viewtopic.php?pid=1533162#p1533162&lt;/span&gt;
@@ -1070,14 +1312,14 @@ jobs:
 &lt;h2&gt;Table of Contents&lt;/h2&gt;
 &lt;div id="text-table-of-contents"&gt;
 &lt;ul&gt;
-&lt;li&gt;&lt;a href="#org7d52994"&gt;1. 基础查询结构&lt;/a&gt;&lt;/li&gt;
-&lt;li&gt;&lt;a href="#org9a60d50"&gt;2. 精确查找&lt;/a&gt;&lt;/li&gt;
-&lt;li&gt;&lt;a href="#orgc02cbb0"&gt;3. 仓库和组织限定词&lt;/a&gt;&lt;/li&gt;
-&lt;li&gt;&lt;a href="#org31c49e5"&gt;4. 语言限定&lt;/a&gt;&lt;/li&gt;
-&lt;li&gt;&lt;a href="#org74ff36b"&gt;5. 路径限定&lt;/a&gt;&lt;/li&gt;
-&lt;li&gt;&lt;a href="#org55d41fd"&gt;6. 扩展名限定&lt;/a&gt;&lt;/li&gt;
-&lt;li&gt;&lt;a href="#orgfb90160"&gt;7. Symbol 限定&lt;/a&gt;&lt;/li&gt;
-&lt;li&gt;&lt;a href="#orgf22d4fa"&gt;8. Content 限定&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href="#org494a53a"&gt;1. 基础查询结构&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href="#org17a7e93"&gt;2. 精确查找&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href="#orgb1896b9"&gt;3. 仓库和组织限定词&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href="#orgec390e8"&gt;4. 语言限定&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href="#org2b71df6"&gt;5. 路径限定&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href="#orgdacc285"&gt;6. 扩展名限定&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href="#org5dcc7f2"&gt;7. Symbol 限定&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href="#org0ab95b5"&gt;8. Content 限定&lt;/a&gt;&lt;/li&gt;
 &lt;/ul&gt;
 &lt;/div&gt;
 &lt;/nav&gt;
@@ -1085,8 +1327,8 @@ jobs:
 &lt;a href="https://cs.github.com/about/syntax"&gt;https://cs.github.com/about/syntax&lt;/a&gt;
 &lt;/p&gt;
 
-&lt;div id="outline-container-org7d52994" class="outline-2"&gt;
-&lt;h2 id="org7d52994"&gt;&lt;span class="section-number-2"&gt;1&lt;/span&gt; 基础查询结构&lt;/h2&gt;
+&lt;div id="outline-container-org494a53a" class="outline-2"&gt;
+&lt;h2 id="org494a53a"&gt;&lt;span class="section-number-2"&gt;1&lt;/span&gt; 基础查询结构&lt;/h2&gt;
 &lt;div class="outline-text-2" id="text-1"&gt;
 &lt;p&gt;
 一个关键词会匹配文件内容或文件路径。
@@ -1136,8 +1378,8 @@ jobs:
 &lt;/div&gt;
 &lt;/div&gt;
 
-&lt;div id="outline-container-org9a60d50" class="outline-2"&gt;
-&lt;h2 id="org9a60d50"&gt;&lt;span class="section-number-2"&gt;2&lt;/span&gt; 精确查找&lt;/h2&gt;
+&lt;div id="outline-container-org17a7e93" class="outline-2"&gt;
+&lt;h2 id="org17a7e93"&gt;&lt;span class="section-number-2"&gt;2&lt;/span&gt; 精确查找&lt;/h2&gt;
 &lt;div class="outline-text-2" id="text-2"&gt;
 &lt;p&gt;
 目标词组要用 "" 包裹 "abc def"。
@@ -1153,8 +1395,8 @@ jobs:
 &lt;/div&gt;
 &lt;/div&gt;
 
-&lt;div id="outline-container-orgc02cbb0" class="outline-2"&gt;
-&lt;h2 id="orgc02cbb0"&gt;&lt;span class="section-number-2"&gt;3&lt;/span&gt; 仓库和组织限定词&lt;/h2&gt;
+&lt;div id="outline-container-orgb1896b9" class="outline-2"&gt;
+&lt;h2 id="orgb1896b9"&gt;&lt;span class="section-number-2"&gt;3&lt;/span&gt; 仓库和组织限定词&lt;/h2&gt;
 &lt;div class="outline-text-2" id="text-3"&gt;
 &lt;p&gt;
 repo:github/linguist
@@ -1174,8 +1416,8 @@ org:github &lt;=&gt; user:github
 &lt;/div&gt;
 &lt;/div&gt;
 
-&lt;div id="outline-container-org31c49e5" class="outline-2"&gt;
-&lt;h2 id="org31c49e5"&gt;&lt;span class="section-number-2"&gt;4&lt;/span&gt; 语言限定&lt;/h2&gt;
+&lt;div id="outline-container-orgec390e8" class="outline-2"&gt;
+&lt;h2 id="orgec390e8"&gt;&lt;span class="section-number-2"&gt;4&lt;/span&gt; 语言限定&lt;/h2&gt;
 &lt;div class="outline-text-2" id="text-4"&gt;
 &lt;p&gt;
 language:ruby OR language:cpp OR language:csharp
@@ -1187,8 +1429,8 @@ language:ruby OR language:cpp OR language:csharp
 &lt;/div&gt;
 &lt;/div&gt;
 
-&lt;div id="outline-container-org74ff36b" class="outline-2"&gt;
-&lt;h2 id="org74ff36b"&gt;&lt;span class="section-number-2"&gt;5&lt;/span&gt; 路径限定&lt;/h2&gt;
+&lt;div id="outline-container-org2b71df6" class="outline-2"&gt;
+&lt;h2 id="org2b71df6"&gt;&lt;span class="section-number-2"&gt;5&lt;/span&gt; 路径限定&lt;/h2&gt;
 &lt;div class="outline-text-2" id="text-5"&gt;
 &lt;p&gt;
 path:unit_tests
@@ -1209,8 +1451,8 @@ path:unit_tests
 &lt;/div&gt;
 &lt;/div&gt;
 
-&lt;div id="outline-container-org55d41fd" class="outline-2"&gt;
-&lt;h2 id="org55d41fd"&gt;&lt;span class="section-number-2"&gt;6&lt;/span&gt; 扩展名限定&lt;/h2&gt;
+&lt;div id="outline-container-orgdacc285" class="outline-2"&gt;
+&lt;h2 id="orgdacc285"&gt;&lt;span class="section-number-2"&gt;6&lt;/span&gt; 扩展名限定&lt;/h2&gt;
 &lt;div class="outline-text-2" id="text-6"&gt;
 &lt;p&gt;
 extension:.js &lt;=&gt; extension:js
@@ -1226,8 +1468,8 @@ extension:/[jt]s/
 &lt;/div&gt;
 &lt;/div&gt;
 
-&lt;div id="outline-container-orgfb90160" class="outline-2"&gt;
-&lt;h2 id="orgfb90160"&gt;&lt;span class="section-number-2"&gt;7&lt;/span&gt; Symbol 限定&lt;/h2&gt;
+&lt;div id="outline-container-org5dcc7f2" class="outline-2"&gt;
+&lt;h2 id="org5dcc7f2"&gt;&lt;span class="section-number-2"&gt;7&lt;/span&gt; Symbol 限定&lt;/h2&gt;
 &lt;div class="outline-text-2" id="text-7"&gt;
 &lt;p&gt;
 language:go symbol:WithContext
@@ -1247,8 +1489,8 @@ language:rust symbol:/^String::to_.*/
 &lt;/div&gt;
 &lt;/div&gt;
 
-&lt;div id="outline-container-orgf22d4fa" class="outline-2"&gt;
-&lt;h2 id="orgf22d4fa"&gt;&lt;span class="section-number-2"&gt;8&lt;/span&gt; Content 限定&lt;/h2&gt;
+&lt;div id="outline-container-org0ab95b5" class="outline-2"&gt;
+&lt;h2 id="org0ab95b5"&gt;&lt;span class="section-number-2"&gt;8&lt;/span&gt; Content 限定&lt;/h2&gt;
 &lt;div class="outline-text-2" id="text-8"&gt;
 &lt;p&gt;
 如果只想搜索内容，不包括文件路径，可以这样
