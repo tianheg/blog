@@ -8,8 +8,129 @@
 <managingEditor>me@yidajiabei.xyz (Jim Gao)</managingEditor>
 <webMaster>me@yidajiabei.xyz (Jim Gao)</webMaster>
 <copyright>在保留本文作者及本文链接的前提下，非商业用途随意转载分享。</copyright>
-<lastBuildDate>Tue, 08 Feb 2022 09:08:56 +0800</lastBuildDate>
+<lastBuildDate>Tue, 08 Feb 2022 09:39:24 +0800</lastBuildDate>
   <atom:link rel="self" type="application/rss+xml" href="https://www.yidajiabei.xyz/blog/index.xml"/>
+<item><title>深入 PHP 与 jQuery 开发</title><link>https://www.yidajiabei.xyz/blog/2022/pro-php-and-jquery.html</link><guid isPermaLink="true">https://www.yidajiabei.xyz/blog/2022/pro-php-and-jquery.html</guid><pubDate>Sun, 06 Feb 2022 08:00:00 CST</pubDate><description type="html">&lt;div id="content"&gt;
+&lt;header&gt;
+&lt;h1 class="title"&gt;深入 PHP 与 jQuery 开发&lt;/h1&gt;
+&lt;/header&gt;&lt;nav id="table-of-contents"&gt;
+&lt;h2&gt;Table of Contents&lt;/h2&gt;
+&lt;div id="text-table-of-contents"&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;a href="#orgca6d7eb"&gt;1. 第三章：面向对象编程&lt;/a&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;a href="#org03ee81c"&gt;1.1. 对象和类&lt;/a&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;a href="#org1fafdcd"&gt;1.1.1. 类和对象的差异&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href="#org0e6810d"&gt;1.1.2. 创建类&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href="#org113daf5"&gt;1.1.3. 定义类属性&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href="#orgc0ce4ed"&gt;1.1.4. 定义类方法&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href="#orge81326f"&gt;1.1.5. 使用类继承&lt;/a&gt;&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/div&gt;
+&lt;/nav&gt;
+
+&lt;div id="outline-container-orgca6d7eb" class="outline-2"&gt;
+&lt;h2 id="orgca6d7eb"&gt;&lt;span class="section-number-2"&gt;1&lt;/span&gt; 第三章：面向对象编程&lt;/h2&gt;
+&lt;div class="outline-text-2" id="text-1"&gt;
+&lt;p&gt;
+面向对象编程（OOP）：充分利用代码，将实现同类功能的代码聚合在一起，组织成类。
+&lt;/p&gt;
+
+&lt;p&gt;
+不要重复自己（DRY，Don't repeat yourself）
+&lt;/p&gt;
+&lt;/div&gt;
+
+&lt;div id="outline-container-org03ee81c" class="outline-3"&gt;
+&lt;h3 id="org03ee81c"&gt;&lt;span class="section-number-3"&gt;1.1&lt;/span&gt; 对象和类&lt;/h3&gt;
+&lt;div class="outline-text-3" id="text-1-1"&gt;
+&lt;ul class="org-ul"&gt;
+&lt;li&gt;类的基础组成&lt;/li&gt;
+&lt;li&gt;对象和类各自特点&lt;/li&gt;
+&lt;li&gt;它们的用法&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/div&gt;
+
+&lt;div id="outline-container-org1fafdcd" class="outline-4"&gt;
+&lt;h4 id="org1fafdcd"&gt;&lt;span class="section-number-4"&gt;1.1.1&lt;/span&gt; 类和对象的差异&lt;/h4&gt;
+&lt;div class="outline-text-4" id="text-1-1-1"&gt;
+&lt;p&gt;
+类，打个比方，就像房子的蓝图。它在纸上清晰地定义了房子的形状，定义了房子各个部分之间的关系，并且计划好了怎么盖，虽然还没盖。
+&lt;/p&gt;
+
+&lt;p&gt;
+对象就像依据蓝图造好的实实在在的房子。在对象中存储的数据就像组成房子的木头、电线和混凝土，在房子没盖起来之前，它们只是一堆东西。然而，当这些东西组装到一起，就成了一座结构完整且实用的房子。
+&lt;/p&gt;
+
+&lt;p&gt;
+&lt;b&gt;数据结构和行为组合到一起构成类，类使用这些信息生成对象。&lt;/b&gt; 同一个类同一时间可生成很多对象，每个对象相对于其他对象都是独立的。
+&lt;/p&gt;
+
+&lt;p&gt;
+继续使用盖房子比喻，这类似于用同一张蓝图在一大块地上盖房子：150 套不同的住房，看起来相同，但住着不同的家庭，有着不同的装饰。
+&lt;/p&gt;
+&lt;/div&gt;
+&lt;/div&gt;
+
+&lt;div id="outline-container-org0e6810d" class="outline-4"&gt;
+&lt;h4 id="org0e6810d"&gt;&lt;span class="section-number-4"&gt;1.1.2&lt;/span&gt; 创建类&lt;/h4&gt;
+&lt;div class="outline-text-4" id="text-1-1-2"&gt;
+&lt;p&gt;
+class ClassName
+&lt;/p&gt;
+&lt;/div&gt;
+&lt;/div&gt;
+
+&lt;div id="outline-container-org113daf5" class="outline-4"&gt;
+&lt;h4 id="org113daf5"&gt;&lt;span class="section-number-4"&gt;1.1.3&lt;/span&gt; 定义类属性&lt;/h4&gt;
+&lt;div class="outline-text-4" id="text-1-1-3"&gt;
+&lt;p&gt;
+public $prop1 = "I'm a class property!";
+&lt;/p&gt;
+
+&lt;p&gt;
+箭头（-&gt;）是访问特定对象包含的属性或方法的一个面向对象构造。
+&lt;/p&gt;
+&lt;/div&gt;
+&lt;/div&gt;
+
+&lt;div id="outline-container-orgc0ce4ed" class="outline-4"&gt;
+&lt;h4 id="orgc0ce4ed"&gt;&lt;span class="section-number-4"&gt;1.1.4&lt;/span&gt; 定义类方法&lt;/h4&gt;
+&lt;div class="outline-text-4" id="text-1-1-4"&gt;
+&lt;p&gt;
+方法是只属于某一类的函数。
+&lt;/p&gt;
+
+&lt;p&gt;
+OOP 使对象个体保持独立，代码的不同部分能很容易地分离成较小且相关的包。
+&lt;/p&gt;
+
+&lt;p&gt;
+PHP 还提供了一些特殊方法，简化代码（Magic methods are special methods which override PHP's default's action when certain actions are performed on an object.  from &lt;a href="https://www.php.net/manual/en/language.oop5.magic.php"&gt;Magic Methods - PHP Manual&lt;/a&gt;）。
+&lt;/p&gt;
+
+&lt;ol class="org-ol"&gt;
+&lt;li&gt;构造函数和析构函数&lt;/li&gt;
+&lt;li&gt;将类输出为字符串&lt;/li&gt;
+&lt;/ol&gt;
+
+&lt;p&gt;
+__construct，__destruct，unset，__toString
+&lt;/p&gt;
+&lt;/div&gt;
+&lt;/div&gt;
+
+&lt;div id="outline-container-orge81326f" class="outline-4"&gt;
+&lt;h4 id="orge81326f"&gt;&lt;span class="section-number-4"&gt;1.1.5&lt;/span&gt; 使用类继承&lt;/h4&gt;
+&lt;/div&gt;
+&lt;/div&gt;
+&lt;/div&gt;
+&lt;/div&gt;</description></item>
 <item><title>十三邀-鲁白</title><link>https://www.yidajiabei.xyz/blog/2022/shisanyao-lubai.html</link><guid isPermaLink="true">https://www.yidajiabei.xyz/blog/2022/shisanyao-lubai.html</guid><pubDate>Sat, 05 Feb 2022 08:00:00 CST</pubDate><description type="html">&lt;div id="content"&gt;
 &lt;header&gt;
 &lt;h1 class="title"&gt;十三邀-鲁白&lt;/h1&gt;
@@ -76,7 +197,7 @@
 &lt;/p&gt;
 
 &lt;div class="org-src-container"&gt;
-&lt;pre class="src src-shell"&gt;&lt;span style="color: #706565;"&gt;#&lt;/span&gt;&lt;span style="color: #857575;"&gt;!/bin/&lt;/span&gt;&lt;span style="color: #91a0b3;"&gt;bash&lt;/span&gt;
+&lt;pre class="src src-sh"&gt;&lt;span style="color: #706565;"&gt;#&lt;/span&gt;&lt;span style="color: #857575;"&gt;!/bin/&lt;/span&gt;&lt;span style="color: #91a0b3;"&gt;bash&lt;/span&gt;
 killall plasmashell;plasmashell &amp;
 &lt;/pre&gt;
 &lt;/div&gt;
@@ -145,65 +266,65 @@ sudo mv panel-restart /usr/bin/
 &lt;header&gt;
 &lt;h1 class="title"&gt;命令行工具&lt;/h1&gt;
 &lt;/header&gt;
-&lt;div id="outline-container-org1a0659c" class="outline-2"&gt;
-&lt;h2 id="org1a0659c"&gt;exa/ls/broot&lt;/h2&gt;
+&lt;div id="outline-container-org4b1e817" class="outline-2"&gt;
+&lt;h2 id="org4b1e817"&gt;exa/ls/broot&lt;/h2&gt;
 &lt;/div&gt;
 
-&lt;div id="outline-container-org21e0454" class="outline-2"&gt;
-&lt;h2 id="org21e0454"&gt;zoxide/cd&lt;/h2&gt;
+&lt;div id="outline-container-orgd669770" class="outline-2"&gt;
+&lt;h2 id="orgd669770"&gt;zoxide/cd&lt;/h2&gt;
 &lt;/div&gt;
 
-&lt;div id="outline-container-org3202764" class="outline-2"&gt;
-&lt;h2 id="org3202764"&gt;bat/cat&lt;/h2&gt;
+&lt;div id="outline-container-org0ac8567" class="outline-2"&gt;
+&lt;h2 id="org0ac8567"&gt;bat/cat&lt;/h2&gt;
 &lt;/div&gt;
 
-&lt;div id="outline-container-org7382f8b" class="outline-2"&gt;
-&lt;h2 id="org7382f8b"&gt;fx/jq/hexyl&lt;/h2&gt;
+&lt;div id="outline-container-orge6772c1" class="outline-2"&gt;
+&lt;h2 id="orge6772c1"&gt;fx/jq/hexyl&lt;/h2&gt;
 &lt;/div&gt;
 
-&lt;div id="outline-container-org9a25e23" class="outline-2"&gt;
-&lt;h2 id="org9a25e23"&gt;diff-so-fancy/git diff&lt;/h2&gt;
+&lt;div id="outline-container-orgf9bd1f6" class="outline-2"&gt;
+&lt;h2 id="orgf9bd1f6"&gt;diff-so-fancy/git diff&lt;/h2&gt;
 &lt;/div&gt;
 
-&lt;div id="outline-container-org6f9a990" class="outline-2"&gt;
-&lt;h2 id="org6f9a990"&gt;fd/find&lt;/h2&gt;
+&lt;div id="outline-container-org0d89113" class="outline-2"&gt;
+&lt;h2 id="org0d89113"&gt;fd/find&lt;/h2&gt;
 &lt;/div&gt;
 
-&lt;div id="outline-container-org54eaea1" class="outline-2"&gt;
-&lt;h2 id="org54eaea1"&gt;ripgrep/grep&lt;/h2&gt;
+&lt;div id="outline-container-org9af4f98" class="outline-2"&gt;
+&lt;h2 id="org9af4f98"&gt;ripgrep/grep&lt;/h2&gt;
 &lt;/div&gt;
 
-&lt;div id="outline-container-org24c3e35" class="outline-2"&gt;
-&lt;h2 id="org24c3e35"&gt;McFly/ctrl-r&lt;/h2&gt;
+&lt;div id="outline-container-org2456c51" class="outline-2"&gt;
+&lt;h2 id="org2456c51"&gt;McFly/ctrl-r&lt;/h2&gt;
 &lt;/div&gt;
 
-&lt;div id="outline-container-orgd2d51e7" class="outline-2"&gt;
-&lt;h2 id="orgd2d51e7"&gt;choose/cut&lt;/h2&gt;
+&lt;div id="outline-container-orgcb0925c" class="outline-2"&gt;
+&lt;h2 id="orgcb0925c"&gt;choose/cut&lt;/h2&gt;
 &lt;/div&gt;
 
-&lt;div id="outline-container-orgfc4ed0d" class="outline-2"&gt;
-&lt;h2 id="orgfc4ed0d"&gt;duf/df&lt;/h2&gt;
+&lt;div id="outline-container-orgcdf239e" class="outline-2"&gt;
+&lt;h2 id="orgcdf239e"&gt;duf/df&lt;/h2&gt;
 &lt;/div&gt;
 
-&lt;div id="outline-container-org1c2dac6" class="outline-2"&gt;
-&lt;h2 id="org1c2dac6"&gt;ncdu/du&lt;/h2&gt;
+&lt;div id="outline-container-org0f7c7e4" class="outline-2"&gt;
+&lt;h2 id="org0f7c7e4"&gt;ncdu/du&lt;/h2&gt;
 &lt;/div&gt;
 
-&lt;div id="outline-container-org0e7bd16" class="outline-2"&gt;
-&lt;h2 id="org0e7bd16"&gt;htop/top&lt;/h2&gt;
+&lt;div id="outline-container-org73efb29" class="outline-2"&gt;
+&lt;h2 id="org73efb29"&gt;htop/top&lt;/h2&gt;
 &lt;/div&gt;
 
-&lt;div id="outline-container-orgadcb462" class="outline-2"&gt;
-&lt;h2 id="orgadcb462"&gt;procs/ps&lt;/h2&gt;
+&lt;div id="outline-container-org0efe49a" class="outline-2"&gt;
+&lt;h2 id="org0efe49a"&gt;procs/ps&lt;/h2&gt;
 &lt;/div&gt;
 
-&lt;div id="outline-container-org5095304" class="outline-2"&gt;
-&lt;h2 id="org5095304"&gt;httpie/curl&lt;/h2&gt;
+&lt;div id="outline-container-org40aef01" class="outline-2"&gt;
+&lt;h2 id="org40aef01"&gt;httpie/curl&lt;/h2&gt;
 &lt;/div&gt;
 
-&lt;div id="outline-container-org73d4c3b" class="outline-2"&gt;
-&lt;h2 id="org73d4c3b"&gt;dog/dig&lt;/h2&gt;
-&lt;div class="outline-text-2" id="text-org73d4c3b"&gt;
+&lt;div id="outline-container-orgeeb7e9b" class="outline-2"&gt;
+&lt;h2 id="orgeeb7e9b"&gt;dog/dig&lt;/h2&gt;
+&lt;div class="outline-text-2" id="text-orgeeb7e9b"&gt;
 &lt;p&gt;
 &lt;a href="https://mp.weixin.qq.com/s/gkPbQTyhAHwYrpzJjftJVQ"&gt;https://mp.weixin.qq.com/s/gkPbQTyhAHwYrpzJjftJVQ&lt;/a&gt;&lt;/p&gt;
 &lt;/div&gt;
@@ -420,18 +541,18 @@ JS 最重要的三种数据类型：字符串，数值，布尔值。
 一个数组作为另一个数组的元素
 &lt;/p&gt;
 
-&lt;div id="outline-container-orga825df5" class="outline-2"&gt;
-&lt;h2 id="orga825df5"&gt;对象&lt;/h2&gt;
-&lt;div class="outline-text-2" id="text-orga825df5"&gt;
+&lt;div id="outline-container-org7d20706" class="outline-2"&gt;
+&lt;h2 id="org7d20706"&gt;对象&lt;/h2&gt;
+&lt;div class="outline-text-2" id="text-org7d20706"&gt;
 &lt;p&gt;
 用点号获取属性和花括号语法创建对象。
 &lt;/p&gt;
 &lt;/div&gt;
 &lt;/div&gt;
 
-&lt;div id="outline-container-org1b10eeb" class="outline-2"&gt;
-&lt;h2 id="org1b10eeb"&gt;操作&lt;/h2&gt;
-&lt;div class="outline-text-2" id="text-org1b10eeb"&gt;
+&lt;div id="outline-container-org6682b1d" class="outline-2"&gt;
+&lt;h2 id="org6682b1d"&gt;操作&lt;/h2&gt;
+&lt;div class="outline-text-2" id="text-org6682b1d"&gt;
 &lt;p&gt;
 自增、自减
 &lt;/p&gt;
@@ -451,9 +572,9 @@ JS 最重要的三种数据类型：字符串，数值，布尔值。
 &lt;/div&gt;
 &lt;/div&gt;
 
-&lt;div id="outline-container-org055e67b" class="outline-2"&gt;
-&lt;h2 id="org055e67b"&gt;条件语句&lt;/h2&gt;
-&lt;div class="outline-text-2" id="text-org055e67b"&gt;
+&lt;div id="outline-container-org6f1b87d" class="outline-2"&gt;
+&lt;h2 id="org6f1b87d"&gt;条件语句&lt;/h2&gt;
+&lt;div class="outline-text-2" id="text-org6f1b87d"&gt;
 &lt;p&gt;
 if&#x2026;else&#x2026;
 &lt;/p&gt;
@@ -464,27 +585,27 @@ if&#x2026;else&#x2026;
 &lt;/div&gt;
 &lt;/div&gt;
 
-&lt;div id="outline-container-org545f2b2" class="outline-2"&gt;
-&lt;h2 id="org545f2b2"&gt;循环语句&lt;/h2&gt;
-&lt;div class="outline-text-2" id="text-org545f2b2"&gt;
+&lt;div id="outline-container-org4a98d15" class="outline-2"&gt;
+&lt;h2 id="org4a98d15"&gt;循环语句&lt;/h2&gt;
+&lt;div class="outline-text-2" id="text-org4a98d15"&gt;
 &lt;p&gt;
 do&#x2026;while 循环内部的代码至少执行一次
 &lt;/p&gt;
 &lt;/div&gt;
 &lt;/div&gt;
 
-&lt;div id="outline-container-orgdb046b3" class="outline-2"&gt;
-&lt;h2 id="orgdb046b3"&gt;函数&lt;/h2&gt;
-&lt;div class="outline-text-2" id="text-orgdb046b3"&gt;
+&lt;div id="outline-container-orgbf24246" class="outline-2"&gt;
+&lt;h2 id="orgbf24246"&gt;函数&lt;/h2&gt;
+&lt;div class="outline-text-2" id="text-orgbf24246"&gt;
 &lt;p&gt;
 传参
 &lt;/p&gt;
 &lt;/div&gt;
 &lt;/div&gt;
 
-&lt;div id="outline-container-org2a8ca88" class="outline-2"&gt;
-&lt;h2 id="org2a8ca88"&gt;变量的作用域&lt;/h2&gt;
-&lt;div class="outline-text-2" id="text-org2a8ca88"&gt;
+&lt;div id="outline-container-org2311682" class="outline-2"&gt;
+&lt;h2 id="org2311682"&gt;变量的作用域&lt;/h2&gt;
+&lt;div class="outline-text-2" id="text-org2311682"&gt;
 &lt;p&gt;
 全局变量：可在任何位置被引用，它的作用域是整个脚本；
 &lt;/p&gt;
@@ -499,9 +620,9 @@ do&#x2026;while 循环内部的代码至少执行一次
 &lt;/div&gt;
 &lt;/div&gt;
 
-&lt;div id="outline-container-org2a60117" class="outline-2"&gt;
-&lt;h2 id="org2a60117"&gt;对象&lt;/h2&gt;
-&lt;div class="outline-text-2" id="text-org2a60117"&gt;
+&lt;div id="outline-container-orgd28657e" class="outline-2"&gt;
+&lt;h2 id="orgd28657e"&gt;对象&lt;/h2&gt;
+&lt;div class="outline-text-2" id="text-orgd28657e"&gt;
 &lt;p&gt;
 对象是自包含的数据集合，包含在对象里的数据可以通过两种形式访问——属性和方法：
 &lt;/p&gt;
@@ -719,9 +840,9 @@ SOP（标准作业程序，Standard Operating Procedure），指将某一事件�
 &lt;h2&gt;Table of Contents&lt;/h2&gt;
 &lt;div id="text-table-of-contents"&gt;
 &lt;ul&gt;
-&lt;li&gt;&lt;a href="#orgb368066"&gt;1. 使用&lt;/a&gt;&lt;/li&gt;
-&lt;li&gt;&lt;a href="#orgff6efbb"&gt;2. 文件结构&lt;/a&gt;&lt;/li&gt;
-&lt;li&gt;&lt;a href="#org38af667"&gt;3. GitHub Action 自动部署&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href="#org6be99f2"&gt;1. 使用&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href="#org828ed76"&gt;2. 文件结构&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href="#orgb715fba"&gt;3. GitHub Action 自动部署&lt;/a&gt;&lt;/li&gt;
 &lt;/ul&gt;
 &lt;/div&gt;
 &lt;/nav&gt;
@@ -733,8 +854,8 @@ SOP（标准作业程序，Standard Operating Procedure），指将某一事件�
 Sphinx 是 Python 编程语言下的常见文档构建程序。我想把 JSDoc 和它结合起来，于是我找到了 sphinx-js&lt;sup&gt;&lt;a id="fnr.2" class="footref" href="#fn.2"&gt;2&lt;/a&gt;&lt;/sup&gt;。
 &lt;/p&gt;
 
-&lt;div id="outline-container-orgb368066" class="outline-2"&gt;
-&lt;h2 id="orgb368066"&gt;&lt;span class="section-number-2"&gt;1&lt;/span&gt; 使用&lt;/h2&gt;
+&lt;div id="outline-container-org6be99f2" class="outline-2"&gt;
+&lt;h2 id="org6be99f2"&gt;&lt;span class="section-number-2"&gt;1&lt;/span&gt; 使用&lt;/h2&gt;
 &lt;div class="outline-text-2" id="text-1"&gt;
 &lt;p&gt;
 确保 Python 版本为 3.8，使用 3.10 会报错：
@@ -824,8 +945,8 @@ js 源文件 index.js：
 &lt;/div&gt;
 &lt;/div&gt;
 
-&lt;div id="outline-container-orgff6efbb" class="outline-2"&gt;
-&lt;h2 id="orgff6efbb"&gt;&lt;span class="section-number-2"&gt;2&lt;/span&gt; 文件结构&lt;/h2&gt;
+&lt;div id="outline-container-org828ed76" class="outline-2"&gt;
+&lt;h2 id="org828ed76"&gt;&lt;span class="section-number-2"&gt;2&lt;/span&gt; 文件结构&lt;/h2&gt;
 &lt;div class="outline-text-2" id="text-2"&gt;
 &lt;div class="org-src-container"&gt;
 &lt;pre class="src src-txt"&gt;.
@@ -845,8 +966,8 @@ js 源文件 index.js：
 &lt;/div&gt;
 &lt;/div&gt;
 
-&lt;div id="outline-container-org38af667" class="outline-2"&gt;
-&lt;h2 id="org38af667"&gt;&lt;span class="section-number-2"&gt;3&lt;/span&gt; GitHub Action 自动部署&lt;/h2&gt;
+&lt;div id="outline-container-orgb715fba" class="outline-2"&gt;
+&lt;h2 id="orgb715fba"&gt;&lt;span class="section-number-2"&gt;3&lt;/span&gt; GitHub Action 自动部署&lt;/h2&gt;
 &lt;div class="outline-text-2" id="text-3"&gt;
 &lt;div class="org-src-container"&gt;
 &lt;pre class="src src-yml"&gt;name: "Build Sphinx"
@@ -920,9 +1041,9 @@ jobs:
 &lt;header&gt;
 &lt;h1 class="title"&gt;常用脚本&lt;/h1&gt;
 &lt;/header&gt;
-&lt;div id="outline-container-org364d586" class="outline-2"&gt;
-&lt;h2 id="org364d586"&gt;批量删除 Pypi 包&lt;/h2&gt;
-&lt;div class="outline-text-2" id="text-org364d586"&gt;
+&lt;div id="outline-container-org0ac270c" class="outline-2"&gt;
+&lt;h2 id="org0ac270c"&gt;批量删除 Pypi 包&lt;/h2&gt;
+&lt;div class="outline-text-2" id="text-org0ac270c"&gt;
 &lt;div class="org-src-container"&gt;
 &lt;pre class="src src-sh"&gt;pip freeze | grep SOMETHING | xargs pip uninstall -y
 &lt;span style="color: #706565;"&gt;# &lt;/span&gt;&lt;span style="color: #857575;"&gt;https://stackoverflow.com/a/9406259&lt;/span&gt;
@@ -931,9 +1052,9 @@ jobs:
 &lt;/div&gt;
 &lt;/div&gt;
 
-&lt;div id="outline-container-orgd54e376" class="outline-2"&gt;
-&lt;h2 id="orgd54e376"&gt;批量删除 Pacman 包&lt;/h2&gt;
-&lt;div class="outline-text-2" id="text-orgd54e376"&gt;
+&lt;div id="outline-container-org2d03a4a" class="outline-2"&gt;
+&lt;h2 id="org2d03a4a"&gt;批量删除 Pacman 包&lt;/h2&gt;
+&lt;div class="outline-text-2" id="text-org2d03a4a"&gt;
 &lt;div class="org-src-container"&gt;
 &lt;pre class="src src-sh"&gt;sudo pacman -Rs $(pacman -Qq | grep some_words)
 &lt;span style="color: #706565;"&gt;# &lt;/span&gt;&lt;span style="color: #857575;"&gt;https://bbs.archlinux.org/viewtopic.php?pid=1533162#p1533162&lt;/span&gt;
@@ -949,14 +1070,14 @@ jobs:
 &lt;h2&gt;Table of Contents&lt;/h2&gt;
 &lt;div id="text-table-of-contents"&gt;
 &lt;ul&gt;
-&lt;li&gt;&lt;a href="#org372b55d"&gt;1. 基础查询结构&lt;/a&gt;&lt;/li&gt;
-&lt;li&gt;&lt;a href="#org01097ed"&gt;2. 精确查找&lt;/a&gt;&lt;/li&gt;
-&lt;li&gt;&lt;a href="#orgcc5d508"&gt;3. 仓库和组织限定词&lt;/a&gt;&lt;/li&gt;
-&lt;li&gt;&lt;a href="#orgc8720b2"&gt;4. 语言限定&lt;/a&gt;&lt;/li&gt;
-&lt;li&gt;&lt;a href="#org22d29a6"&gt;5. 路径限定&lt;/a&gt;&lt;/li&gt;
-&lt;li&gt;&lt;a href="#org9f54271"&gt;6. 扩展名限定&lt;/a&gt;&lt;/li&gt;
-&lt;li&gt;&lt;a href="#orgefa1076"&gt;7. Symbol 限定&lt;/a&gt;&lt;/li&gt;
-&lt;li&gt;&lt;a href="#orgbafd859"&gt;8. Content 限定&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href="#org7d52994"&gt;1. 基础查询结构&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href="#org9a60d50"&gt;2. 精确查找&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href="#orgc02cbb0"&gt;3. 仓库和组织限定词&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href="#org31c49e5"&gt;4. 语言限定&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href="#org74ff36b"&gt;5. 路径限定&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href="#org55d41fd"&gt;6. 扩展名限定&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href="#orgfb90160"&gt;7. Symbol 限定&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href="#orgf22d4fa"&gt;8. Content 限定&lt;/a&gt;&lt;/li&gt;
 &lt;/ul&gt;
 &lt;/div&gt;
 &lt;/nav&gt;
@@ -964,8 +1085,8 @@ jobs:
 &lt;a href="https://cs.github.com/about/syntax"&gt;https://cs.github.com/about/syntax&lt;/a&gt;
 &lt;/p&gt;
 
-&lt;div id="outline-container-org372b55d" class="outline-2"&gt;
-&lt;h2 id="org372b55d"&gt;&lt;span class="section-number-2"&gt;1&lt;/span&gt; 基础查询结构&lt;/h2&gt;
+&lt;div id="outline-container-org7d52994" class="outline-2"&gt;
+&lt;h2 id="org7d52994"&gt;&lt;span class="section-number-2"&gt;1&lt;/span&gt; 基础查询结构&lt;/h2&gt;
 &lt;div class="outline-text-2" id="text-1"&gt;
 &lt;p&gt;
 一个关键词会匹配文件内容或文件路径。
@@ -1015,8 +1136,8 @@ jobs:
 &lt;/div&gt;
 &lt;/div&gt;
 
-&lt;div id="outline-container-org01097ed" class="outline-2"&gt;
-&lt;h2 id="org01097ed"&gt;&lt;span class="section-number-2"&gt;2&lt;/span&gt; 精确查找&lt;/h2&gt;
+&lt;div id="outline-container-org9a60d50" class="outline-2"&gt;
+&lt;h2 id="org9a60d50"&gt;&lt;span class="section-number-2"&gt;2&lt;/span&gt; 精确查找&lt;/h2&gt;
 &lt;div class="outline-text-2" id="text-2"&gt;
 &lt;p&gt;
 目标词组要用 "" 包裹 "abc def"。
@@ -1032,8 +1153,8 @@ jobs:
 &lt;/div&gt;
 &lt;/div&gt;
 
-&lt;div id="outline-container-orgcc5d508" class="outline-2"&gt;
-&lt;h2 id="orgcc5d508"&gt;&lt;span class="section-number-2"&gt;3&lt;/span&gt; 仓库和组织限定词&lt;/h2&gt;
+&lt;div id="outline-container-orgc02cbb0" class="outline-2"&gt;
+&lt;h2 id="orgc02cbb0"&gt;&lt;span class="section-number-2"&gt;3&lt;/span&gt; 仓库和组织限定词&lt;/h2&gt;
 &lt;div class="outline-text-2" id="text-3"&gt;
 &lt;p&gt;
 repo:github/linguist
@@ -1053,8 +1174,8 @@ org:github &lt;=&gt; user:github
 &lt;/div&gt;
 &lt;/div&gt;
 
-&lt;div id="outline-container-orgc8720b2" class="outline-2"&gt;
-&lt;h2 id="orgc8720b2"&gt;&lt;span class="section-number-2"&gt;4&lt;/span&gt; 语言限定&lt;/h2&gt;
+&lt;div id="outline-container-org31c49e5" class="outline-2"&gt;
+&lt;h2 id="org31c49e5"&gt;&lt;span class="section-number-2"&gt;4&lt;/span&gt; 语言限定&lt;/h2&gt;
 &lt;div class="outline-text-2" id="text-4"&gt;
 &lt;p&gt;
 language:ruby OR language:cpp OR language:csharp
@@ -1066,8 +1187,8 @@ language:ruby OR language:cpp OR language:csharp
 &lt;/div&gt;
 &lt;/div&gt;
 
-&lt;div id="outline-container-org22d29a6" class="outline-2"&gt;
-&lt;h2 id="org22d29a6"&gt;&lt;span class="section-number-2"&gt;5&lt;/span&gt; 路径限定&lt;/h2&gt;
+&lt;div id="outline-container-org74ff36b" class="outline-2"&gt;
+&lt;h2 id="org74ff36b"&gt;&lt;span class="section-number-2"&gt;5&lt;/span&gt; 路径限定&lt;/h2&gt;
 &lt;div class="outline-text-2" id="text-5"&gt;
 &lt;p&gt;
 path:unit_tests
@@ -1088,8 +1209,8 @@ path:unit_tests
 &lt;/div&gt;
 &lt;/div&gt;
 
-&lt;div id="outline-container-org9f54271" class="outline-2"&gt;
-&lt;h2 id="org9f54271"&gt;&lt;span class="section-number-2"&gt;6&lt;/span&gt; 扩展名限定&lt;/h2&gt;
+&lt;div id="outline-container-org55d41fd" class="outline-2"&gt;
+&lt;h2 id="org55d41fd"&gt;&lt;span class="section-number-2"&gt;6&lt;/span&gt; 扩展名限定&lt;/h2&gt;
 &lt;div class="outline-text-2" id="text-6"&gt;
 &lt;p&gt;
 extension:.js &lt;=&gt; extension:js
@@ -1105,8 +1226,8 @@ extension:/[jt]s/
 &lt;/div&gt;
 &lt;/div&gt;
 
-&lt;div id="outline-container-orgefa1076" class="outline-2"&gt;
-&lt;h2 id="orgefa1076"&gt;&lt;span class="section-number-2"&gt;7&lt;/span&gt; Symbol 限定&lt;/h2&gt;
+&lt;div id="outline-container-orgfb90160" class="outline-2"&gt;
+&lt;h2 id="orgfb90160"&gt;&lt;span class="section-number-2"&gt;7&lt;/span&gt; Symbol 限定&lt;/h2&gt;
 &lt;div class="outline-text-2" id="text-7"&gt;
 &lt;p&gt;
 language:go symbol:WithContext
@@ -1126,8 +1247,8 @@ language:rust symbol:/^String::to_.*/
 &lt;/div&gt;
 &lt;/div&gt;
 
-&lt;div id="outline-container-orgbafd859" class="outline-2"&gt;
-&lt;h2 id="orgbafd859"&gt;&lt;span class="section-number-2"&gt;8&lt;/span&gt; Content 限定&lt;/h2&gt;
+&lt;div id="outline-container-orgf22d4fa" class="outline-2"&gt;
+&lt;h2 id="orgf22d4fa"&gt;&lt;span class="section-number-2"&gt;8&lt;/span&gt; Content 限定&lt;/h2&gt;
 &lt;div class="outline-text-2" id="text-8"&gt;
 &lt;p&gt;
 如果只想搜索内容，不包括文件路径，可以这样
@@ -1481,7 +1602,7 @@ customElements.define(&lt;span style="color: #ddbc91;"&gt;"header-component"&lt;
 &lt;/p&gt;
 
 &lt;div class="org-src-container"&gt;
-&lt;pre class="src src-shell"&gt;&lt;span style="color: #ddbc91;"&gt;\\&lt;/span&gt;#!/bin/bash &lt;span style="color: #706565;"&gt;# &lt;/span&gt;&lt;span style="color: #857575;"&gt;&#35813;&#34892;&#22312;&#23454;&#38469;&#20351;&#29992;&#26102;&#65292;&#21482;&#26377; #!/bin/bash&lt;/span&gt;
+&lt;pre class="src src-sh"&gt;&lt;span style="color: #ddbc91;"&gt;\\&lt;/span&gt;#!/bin/bash &lt;span style="color: #706565;"&gt;# &lt;/span&gt;&lt;span style="color: #857575;"&gt;&#35813;&#34892;&#22312;&#23454;&#38469;&#20351;&#29992;&#26102;&#65292;&#21482;&#26377; #!/bin/bash&lt;/span&gt;
 &lt;span style="color: #706565;"&gt;# &lt;/span&gt;&lt;span style="color: #857575;"&gt;&#22914;&#26524;&#19981;&#21152;\\&#65292;&#23548;&#20986;&#30340; html &#25991;&#20214;&#20013;&#26080;&#27861;&#26174;&#31034;#&lt;/span&gt;
 
 &lt;span style="color: #706565;"&gt;# &lt;/span&gt;&lt;span style="color: #857575;"&gt;&#22914;&#26524;&#27809;&#26377;&#19979;&#38754;&#36825;&#19968;&#34892;&#65292;&#23601;&#19981;&#33021;&#36890;&#36807; publickey push &#21040;&#36828;&#31243;&#20179;&#24211;&lt;/span&gt;
@@ -1592,83 +1713,6 @@ make publish
 
 &lt;p&gt;
 刮大白和做前端都是反馈及时的事情，前者一眼就能看到，后者根据输出可以看到。这样的好处是可以很快地发现问题并解决。&lt;/p&gt;
-&lt;/div&gt;</description></item>
-<item><title>和初中同学的一次聊天</title><link>https://www.yidajiabei.xyz/blog/2022/talk-with-junior-high-school-classmate.html</link><guid isPermaLink="true">https://www.yidajiabei.xyz/blog/2022/talk-with-junior-high-school-classmate.html</guid><pubDate>Sun, 02 Jan 2022 08:00:00 CST</pubDate><description type="html">&lt;div id="content"&gt;
-&lt;header&gt;
-&lt;h1 class="title"&gt;和初中同学的一次聊天&lt;/h1&gt;
-&lt;/header&gt;&lt;p&gt;
-本来约好是明天下午见面，不过她今天下午有时间，就约在下午四点，在一家名为「陌上花开」的咖啡店。
-&lt;/p&gt;
-
-&lt;p&gt;
-四年未见，比以前会打扮了，虽然还有些孩子气。可能是因为熟悉的原因，所以更愿意直视，注视着她，听她说话。面部表情很丰富，一个擅长说话的人。白色棉袄，鬓角的头发下垂，袖口还露着在里面的衣服。这是我少有的几次描绘熟人的形象，还需要继续练习。
-&lt;/p&gt;
-
-&lt;p&gt;
-在和她的聊天中，能感受到自己话语的无力，觉得并不能提供有效的办法；转念一想，或许这就是一种常态，企图通过一次对谈解决问题，那么这问题本就不是问题。一种可能的解决方案就是，持续地与问题死磕，同时在自己认为能够用力的地方，继续用力。我常用一句俗语抚慰自己：「尽人事，听天命」。
-&lt;/p&gt;
-
-&lt;p&gt;
-写这篇文章的目的有几个：
-&lt;/p&gt;
-
-&lt;ol class="org-ol"&gt;
-&lt;li&gt;记录。为了以后回望这次谈话，思考这次谈话的意义&lt;/li&gt;
-&lt;li&gt;分享。可能会对一些人有启发，公开地分享，让更多人获益&lt;/li&gt;
-&lt;li&gt;反刍。在开始写这篇文章的这一刻，我才再一次意识到：自己更习惯于用文字表达。这是我在编程之外的找到的第二个让我自信的地方&lt;/li&gt;
-&lt;/ol&gt;
-
-&lt;p&gt;
-突然想到一个人的表达：这个世界有很多的概念，有些概念没有调查就没办法真正理解，错误地使用只会增加困惑。
-&lt;/p&gt;
-
-&lt;p&gt;
-她是一名大专生，三年之前就开始准备专升本，但是昨天目标学校发布了新的公告：取消她的目标专业——英语；考本科需要考高等数学。她很喜欢英语，所以她专科时选择了英语专业，计划当一名初中或者高中英语老师。我通过中小学教师资格考试网发现，如果想考取初中或高中教师资格证，至少要本科学历。但是，她数学不行，专升本考试时可能无法过线。她一直在提醒自己：你没有办法专升本了。这让她陷入某种虚无。
-&lt;/p&gt;
-
-&lt;p&gt;
-还聊了其他问题，诸如，结婚的意义在哪里……其他的写文章的时候已经忘记了。
-&lt;/p&gt;
-
-&lt;p&gt;
-社会的有序运转需要各种规则，制定规则的人与应用规则的人注定不在一个角度考虑问题。我最近才从一种理想主义视角中脱离出来。在此之前，在我眼里一切都应该是舒适圆润的，如果不对我胃口，我会努力改变，强迫别人或事物适应我。如果不能改变外界，我就开始把自己封闭起来，不让自己被「污染」。自以为别人都不好，只有自己才是最好的。这种以自我为中心的心态是一直存在的，只不过很少表露给外人看。
-&lt;/p&gt;
-
-&lt;p&gt;
-公平只在少数需要舆论支持的情况下才会实现，真实生活中这只是一种「理想主义」。阶级是一种都存在的，但是我现在才意识到。我可以做什么呢？
-&lt;/p&gt;
-
-&lt;p&gt;
-我只是一个普通人，生活在一个社会主义国家。国家的强大，让我能够在和平的年代，认真地活好每一天。我不用微博，我不看抖音。我没有能力在接触它们之后，还能正常学习进步。我在大学这几年尝试了不少新事物：去过一个偏远地方的中学支教，我发现自己喜欢和孩子们相处、写作表达自己一直在做、20 年很幸运能够接触编程，现在想把编程作为职业、读过很多书、看过很多电影、听过很多歌。
-&lt;/p&gt;
-
-&lt;p&gt;
-从这些经历中，我总结出来一些对生活的理解：时间向前走，人经历得越来越多，思考得越来越多，羁绊也就越来越多。犹豫不安，不敢继续，这些情绪浸润着我的心，但是，当第二天来临的时候，新的一天又开始了，美好的事物在心间荡漾。
-&lt;/p&gt;
-
-&lt;p&gt;
-最好跟着自己的心走，再不济人生的重大决定跟着自己走。社会公认的人生步骤——升学、结婚、生小孩、为儿子买房，已经深入她的内心。我认为不该如此顺从社会风气。就算最终还是结婚生子，但是这的确是我深思熟虑的结果，而不是所谓的「别人认为你这样做最好」。人这一辈子只有这一次而已，如果不能按照自己的想法活，是很无聊的。当然，按照自己的想法肯定也受外界各种因素局限，这些都要考虑在内。
-&lt;/p&gt;
-
-&lt;p&gt;
-疫情是一个巨大的黑天鹅，没有人预料得到，当这种意外发生时，一切的计划都显得苍白无力。但是不是说没有计划，计划一定要有，而且不能只有一种计划。有一个计划 A 作为主线，plan B 用于应对意外事件。
-&lt;/p&gt;
-
-&lt;p&gt;
-好奇心是很重要的，培养自己对特定事物的好奇心。它会在意想不到的时刻给你惊喜。好奇能够引导你关注了解新事物的表面，若想深入需要付出常人不愿的努力。这些努力可能只是精神愉悦，也可能会带来物质回报。
-&lt;/p&gt;
-
-&lt;p&gt;
-脑袋空空，只有这些了:)
-&lt;/p&gt;
-
-&lt;p&gt;
-补充：
-&lt;/p&gt;
-
-&lt;ul class="org-ul"&gt;
-&lt;li&gt;教小学比教初中，可能更能够改变孩子&lt;/li&gt;
-&lt;/ul&gt;
 &lt;/div&gt;</description></item>
 </channel>
 </rss>
