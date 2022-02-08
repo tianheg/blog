@@ -4,7 +4,7 @@
 <!-- 2022-02-08 Tue 10:01 -->
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<title>修复 KDE Plasma panel 崩溃问题</title>
+<title>SSH 相关问题</title>
 <meta name="generator" content="Org mode">
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/highlightjs/cdn-release@11.4.0/build/styles/base16/dracula.min.css">
 <script src="https://cdn.jsdelivr.net/gh/highlightjs/cdn-release@11.4.0/build/highlight.min.js"></script>
@@ -15,28 +15,37 @@
 <body>
 <div id="content">
 <header>
-<h1 class="title">修复 KDE Plasma panel 崩溃问题</h1>
-</header><p>
-<a href="https://www.addictivetips.com/ubuntu-linux-tips/fix-kde-plasma-panel-crash/">https://www.addictivetips.com/ubuntu-linux-tips/fix-kde-plasma-panel-crash/</a>
+<h1 class="title">SSH 相关问题</h1>
+</header><ol class="org-ol">
+<li>ssh: Could not resolve hostname + cron job</li>
+</ol>
+
+<p>
+需要自动化执行 cron job，脚本主要功能就是 git push 到远程仓库。
 </p>
 
 <p>
-崩溃之后需要重启，不过 KDE 并没有像 GNOME 那样的重启机制。所以需要自定义。
+解决方法：
 </p>
 
 <p>
-创建一个脚本 panel-restart
+在脚本中添加：
 </p>
 
 <div class="org-src-container">
 <pre class="src src-sh"><span style="color: #706565;">#</span><span style="color: #857575;">!/bin/</span><span style="color: #91a0b3;">bash</span>
-killall plasmashell;plasmashell &amp;
-</pre>
-</div>
 
-<div class="org-src-container">
-<pre class="src src-sh">sudo chmod +x panel-restart
-sudo mv panel-restart /usr/bin/
+<span style="color: #706565;">## </span><span style="color: #857575;">Git</span>
+<span style="color: #9fbfdf;">eval</span> <span style="color: #ddbc91;">"$(ssh-agent -s)"</span>
+ssh-add ~/.ssh/ssh_key1
+ssh-add ~/.ssh/ssh_key2
+ssh-add -l
+
+<span style="color: #706565;">## </span><span style="color: #857575;">Job</span>
+<span style="color: #9fbfdf;">cd</span> ~/repo/blog/
+make publish
+<span style="color: #9fbfdf;">cd</span> ~/repo/gtd/
+make publish
 </pre>
 </div>
 </div>
