@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html lang="zh">
 <head>
-<!-- 2022-02-08 Tue 10:01 -->
+<!-- 2022-02-08 Tue 11:01 -->
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>图解 HTTP</title>
@@ -163,7 +163,7 @@ WWW 首次使用是称呼具备 Web
 </p>
 
 
-<figure id="orgb746344">
+<figure id="orgc753ea7">
 <img src="https://cdn.jsdelivr.net/gh/tianheg/static@main/img/%E5%9B%BE%E8%A7%A3HTTP0.jpeg" alt="%E5%9B%BE%E8%A7%A3HTTP0.jpeg">
 
 <figcaption><span class="figure-number">Figure 1: </span>TCP/IP 是互联网相关的各类协议族的总称</figcaption>
@@ -226,7 +226,7 @@ Card，网络适配器，即网卡），以及光纤等物理可见部分（还�
 </p>
 
 
-<figure id="org8bfcb8d">
+<figure id="org8d614ce">
 <img src="https://cdn.jsdelivr.net/gh/tianheg/static@main/img/%E5%9B%BE%E8%A7%A3HTTP1.jpeg" alt="%E5%9B%BE%E8%A7%A3HTTP1.jpeg">
 
 <figcaption><span class="figure-number">Figure 2: </span>TCP/IP 通信传输流</figcaption>
@@ -237,7 +237,7 @@ Card，网络适配器，即网卡），以及光纤等物理可见部分（还�
 </p>
 
 
-<figure id="org9fdfadd">
+<figure id="orgc6718a8">
 <img src="https://cdn.jsdelivr.net/gh/tianheg/static@main/img/%E5%9B%BE%E8%A7%A3HTTP2.jpeg" alt="%E5%9B%BE%E8%A7%A3HTTP2.jpeg">
 
 <figcaption><span class="figure-number">Figure 3: </span>封装过程</figcaption>
@@ -290,7 +290,7 @@ ARP 协议通过 MAC 地址搜索中转目标。
 </p>
 
 
-<figure id="org4af70e6">
+<figure id="orga73b085">
 <img src="https://cdn.jsdelivr.net/gh/tianheg/static@main/img/%E5%9B%BE%E8%A7%A3HTTP3.jpeg" alt="%E5%9B%BE%E8%A7%A3HTTP3.jpeg">
 
 <figcaption><span class="figure-number">Figure 4: </span>路由选择机制</figcaption>
@@ -334,7 +334,7 @@ SYN/ACK 标志的数据包以示传达确认信息。最后，发送端再回传
 </ul>
 
 
-<figure id="orge0226e5">
+<figure id="orgfcd2bfa">
 <object type="image/svg+xml" data="https://cdn.jsdelivr.net/gh/tianheg/static@main/img/%E5%9B%BE%E8%A7%A3HTTP4-three-way-handshaking.svg" class="org-svg">
 Sorry, your browser does not support SVG.</object>
 
@@ -356,7 +356,7 @@ DNS 服务是为了让人类更容易记住计算机在网络中的位置。
 <h3 id="各种协议与-http-协议的关系">各种协议与 HTTP 协议的关系</h3>
 <div class="outline-text-3" id="text-各种协议与-http-协议的关系">
 
-<figure id="orge104617">
+<figure id="orgc2092fe">
 <object type="image/svg+xml" data="https://cdn.jsdelivr.net/gh/tianheg/static@main/img/%E5%9B%BE%E8%A7%A3HTTP5-protocols.svg" class="org-svg">
 Sorry, your browser does not support SVG.</object>
 
@@ -409,7 +409,7 @@ URI 用字符串标识某一互联网资源，而 URL
 </p>
 
 
-<figure id="orgcc22b9a">
+<figure id="org4c7509a">
 <object type="image/svg+xml" data="https://cdn.jsdelivr.net/gh/tianheg/static@main/img/%E5%9B%BE%E8%A7%A3HTTP6-%E7%BB%9D%E5%AF%B9URI.svg" class="org-svg">
 Sorry, your browser does not support SVG.</object>
 
@@ -465,7 +465,7 @@ RFC 是互联网的设计文档，如果不按照 RFC
 通信请求由客户端发出，然后服务端才响应。服务端在没有接收到请求之前不会发送响应。
 </p>
 
-<pre class="example" id="org97cac7a">
+<pre class="example" id="orgd4d6a79">
 GET /index.html HTTP/1.1
 </pre>
 
@@ -479,7 +479,7 @@ GET /index.html HTTP/1.1
 我的网站的请求头：
 </p>
 
-<pre class="example" id="org178cee0">
+<pre class="example" id="org2eece88">
 GET / HTTP/2
 Host: www.yidajiabei.xyz
 </pre>
@@ -488,7 +488,7 @@ Host: www.yidajiabei.xyz
 我网站的响应头：
 </p>
 
-<pre class="example" id="orgdeb24a8">
+<pre class="example" id="org814ccec">
 HTTP/1.1 200 Connection established
 </pre>
 
@@ -523,7 +523,7 @@ HTTP 是无状态（stateless）协议-&#x2013;&#x2014;HTTP
 <div id="outline-container-请求-uri-定位资源" class="outline-3">
 <h3 id="请求-uri-定位资源">请求 URI 定位资源</h3>
 <div class="outline-text-3" id="text-请求-uri-定位资源">
-<pre class="example" id="org5469b8d">
+<pre class="example" id="org226f881">
 GET https://job.yidajiabei.xyz/#/ HTTP/3
 
 GET / HTTP/3
@@ -547,7 +547,7 @@ GET 方法用于请求已被 URI 识别的资源。
 </p>
 
 
-<figure id="org9fe14e5">
+<figure id="org8d63bd2">
 <object type="image/svg+xml" data="https://cdn.jsdelivr.net/gh/tianheg/static@main/img/%E5%9B%BE%E8%A7%A3HTTP7-GET.svg" class="org-svg">
 Sorry, your browser does not support SVG.</object>
 
@@ -559,7 +559,7 @@ Sorry, your browser does not support SVG.</object>
 </p>
 
 
-<figure id="orgd2ea316">
+<figure id="org800cef9">
 <object type="image/svg+xml" data="https://cdn.jsdelivr.net/gh/tianheg/static@main/img/%E5%9B%BE%E8%A7%A3HTTP8-POST.svg" class="org-svg">
 Sorry, your browser does not support SVG.</object>
 
@@ -588,7 +588,7 @@ Transfer，表征状态转移）标准</li>
 </ol>
 
 
-<figure id="org64c931c">
+<figure id="org795c541">
 <object type="image/svg+xml" data="https://cdn.jsdelivr.net/gh/tianheg/static@main/img/%E5%9B%BE%E8%A7%A3HTTP9-PUT.svg" class="org-svg">
 Sorry, your browser does not support SVG.</object>
 
@@ -611,7 +611,7 @@ HEAD 和 GET 一样，只是不返回报文主体部分。用于确认 URI
 </p>
 
 
-<figure id="org35f24ca">
+<figure id="org18ae1ef">
 <object type="image/svg+xml" data="https://cdn.jsdelivr.net/gh/tianheg/static@main/img/%E5%9B%BE%E8%A7%A3HTTP10-HEAD.svg" class="org-svg">
 Sorry, your browser does not support SVG.</object>
 
@@ -626,7 +626,7 @@ Sorry, your browser does not support SVG.</object>
 六、OPTIONS 询问支持的方法
 </p>
 
-<pre class="example" id="org2d9af40">
+<pre class="example" id="org7d70d05">
 curl -X OPTIONS https://example.org -i
 </pre>
 
@@ -634,7 +634,7 @@ curl -X OPTIONS https://example.org -i
 Output:
 </p>
 
-<pre class="example" id="orge5310f2">
+<pre class="example" id="org068d619">
 HTTP/2 200
 allow: OPTIONS, GET, HEAD, POST
 cache-control: max-age=604800
@@ -691,7 +691,7 @@ Security,传输层安全）协议吧通信内容加密后经网络隧道传输�
 </p>
 
 
-<figure id="orga687d7a">
+<figure id="org7910975">
 <img src="https://cdn.jsdelivr.net/gh/tianheg/static@main/img/%E5%9B%BE%E8%A7%A3HTTP11-http1-http1.1.jpeg" alt="%E5%9B%BE%E8%A7%A3HTTP11-http1-http1.1.jpeg">
 
 <figcaption><span class="figure-number">Figure 12: </span>HTTP/1.0 HTTP/1.1</figcaption>
