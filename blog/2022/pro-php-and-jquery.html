@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html lang="zh">
 <head>
-<!-- 2022-02-08 Tue 20:01 -->
+<!-- 2022-02-08 Tue 21:01 -->
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>深入 PHP 与 jQuery 开发</title>
@@ -20,29 +20,29 @@
 <h2>Table of Contents</h2>
 <div id="text-table-of-contents">
 <ul>
-<li><a href="#orgb2a7b7a">1. 第三章：面向对象编程</a>
+<li><a href="#orgf2b928f">1. 第三章：面向对象编程</a>
 <ul>
-<li><a href="#org442aa2a">1.1. 对象和类</a>
+<li><a href="#org97ca78f">1.1. 对象和类</a>
 <ul>
-<li><a href="#org6ec85f7">1.1.1. 类和对象的差异</a></li>
-<li><a href="#org2857918">1.1.2. 创建类</a></li>
-<li><a href="#orgd1932e9">1.1.3. 定义类属性</a></li>
-<li><a href="#orgf3e3a21">1.1.4. 定义类方法</a></li>
-<li><a href="#org009f0cd">1.1.5. 使用类继承</a></li>
-<li><a href="#orgbb7035f">1.1.6. 指定属性或方法的可见度</a></li>
-<li><a href="#orgde20c26">1.1.7. 文档块注释</a></li>
+<li><a href="#org4b51bd5">1.1.1. 类和对象的差异</a></li>
+<li><a href="#org9b9cfcf">1.1.2. 创建类</a></li>
+<li><a href="#org106deca">1.1.3. 定义类属性</a></li>
+<li><a href="#orga91f5f7">1.1.4. 定义类方法</a></li>
+<li><a href="#orgbf676f6">1.1.5. 使用类继承</a></li>
+<li><a href="#orgf0d00d5">1.1.6. 指定属性或方法的可见度</a></li>
+<li><a href="#orgb976b06">1.1.7. 文档块注释</a></li>
 </ul>
 </li>
-<li><a href="#org61b3a46">1.2. 面向对象与面向过程的差异</a></li>
+<li><a href="#orgd08c682">1.2. 面向对象与面向过程的差异</a></li>
 </ul>
 </li>
-<li><a href="#org15cdf8d">2. 第四章：构建活动日程表</a>
+<li><a href="#org458095e">2. 第四章：构建活动日程表</a>
 <ul>
-<li><a href="#orgd7b0b66">2.1. 规划设计</a>
+<li><a href="#org11ab5f3">2.1. 规划设计</a>
 <ul>
-<li><a href="#org03e0112">2.1.1. 定义数据库结构</a></li>
-<li><a href="#org12aa0b8">2.1.2. 创建类映射</a></li>
-<li><a href="#orgb9bb315">2.1.3. 规划项目的目录结构</a></li>
+<li><a href="#orgf898801">2.1.1. 定义数据库结构</a></li>
+<li><a href="#org9a0c15c">2.1.2. 创建类映射</a></li>
+<li><a href="#org3a898a2">2.1.3. 规划项目的目录结构</a></li>
 </ul>
 </li>
 </ul>
@@ -51,8 +51,8 @@
 </div>
 </nav>
 
-<div id="outline-container-orgb2a7b7a" class="outline-2">
-<h2 id="orgb2a7b7a"><span class="section-number-2">1</span> 第三章：面向对象编程</h2>
+<div id="outline-container-orgf2b928f" class="outline-2">
+<h2 id="orgf2b928f"><span class="section-number-2">1</span> 第三章：面向对象编程</h2>
 <div class="outline-text-2" id="text-1">
 <p>
 面向对象编程（OOP）：充分利用代码，将实现同类功能的代码聚合在一起，组织成类。
@@ -63,8 +63,8 @@
 </p>
 </div>
 
-<div id="outline-container-org442aa2a" class="outline-3">
-<h3 id="org442aa2a"><span class="section-number-3">1.1</span> 对象和类</h3>
+<div id="outline-container-org97ca78f" class="outline-3">
+<h3 id="org97ca78f"><span class="section-number-3">1.1</span> 对象和类</h3>
 <div class="outline-text-3" id="text-1-1">
 <ul class="org-ul">
 <li>类的基础组成</li>
@@ -73,8 +73,8 @@
 </ul>
 </div>
 
-<div id="outline-container-org6ec85f7" class="outline-4">
-<h4 id="org6ec85f7"><span class="section-number-4">1.1.1</span> 类和对象的差异</h4>
+<div id="outline-container-org4b51bd5" class="outline-4">
+<h4 id="org4b51bd5"><span class="section-number-4">1.1.1</span> 类和对象的差异</h4>
 <div class="outline-text-4" id="text-1-1-1">
 <p>
 类，打个比方，就像房子的蓝图。它在纸上清晰地定义了房子的形状，定义了房子各个部分之间的关系，并且计划好了怎么盖，虽然还没盖。
@@ -94,8 +94,8 @@
 </div>
 </div>
 
-<div id="outline-container-org2857918" class="outline-4">
-<h4 id="org2857918"><span class="section-number-4">1.1.2</span> 创建类</h4>
+<div id="outline-container-org9b9cfcf" class="outline-4">
+<h4 id="org9b9cfcf"><span class="section-number-4">1.1.2</span> 创建类</h4>
 <div class="outline-text-4" id="text-1-1-2">
 <p>
 class ClassName
@@ -103,8 +103,8 @@ class ClassName
 </div>
 </div>
 
-<div id="outline-container-orgd1932e9" class="outline-4">
-<h4 id="orgd1932e9"><span class="section-number-4">1.1.3</span> 定义类属性</h4>
+<div id="outline-container-org106deca" class="outline-4">
+<h4 id="org106deca"><span class="section-number-4">1.1.3</span> 定义类属性</h4>
 <div class="outline-text-4" id="text-1-1-3">
 <p>
 public $prop1 = "I'm a class property!";
@@ -116,8 +116,8 @@ public $prop1 = "I'm a class property!";
 </div>
 </div>
 
-<div id="outline-container-orgf3e3a21" class="outline-4">
-<h4 id="orgf3e3a21"><span class="section-number-4">1.1.4</span> 定义类方法</h4>
+<div id="outline-container-orga91f5f7" class="outline-4">
+<h4 id="orga91f5f7"><span class="section-number-4">1.1.4</span> 定义类方法</h4>
 <div class="outline-text-4" id="text-1-1-4">
 <p>
 方法是只属于某一类的函数。
@@ -142,8 +142,8 @@ __construct，__destruct，unset，__toString
 </div>
 </div>
 
-<div id="outline-container-org009f0cd" class="outline-4">
-<h4 id="org009f0cd"><span class="section-number-4">1.1.5</span> 使用类继承</h4>
+<div id="outline-container-orgbf676f6" class="outline-4">
+<h4 id="orgbf676f6"><span class="section-number-4">1.1.5</span> 使用类继承</h4>
 <div class="outline-text-4" id="text-1-1-5">
 <p>
 使用 extends 关键字，一个类能够从其他的类继承方法和属性。
@@ -156,8 +156,8 @@ __construct，__destruct，unset，__toString
 </div>
 </div>
 
-<div id="outline-container-orgbb7035f" class="outline-4">
-<h4 id="orgbb7035f"><span class="section-number-4">1.1.6</span> 指定属性或方法的可见度</h4>
+<div id="outline-container-orgf0d00d5" class="outline-4">
+<h4 id="orgf0d00d5"><span class="section-number-4">1.1.6</span> 指定属性或方法的可见度</h4>
 <div class="outline-text-4" id="text-1-1-6">
 <p>
 三个可见度关键字：public（公开的），protected（受保护的），private（私有的）
@@ -173,8 +173,8 @@ __construct，__destruct，unset，__toString
 </div>
 </div>
 
-<div id="outline-container-orgde20c26" class="outline-4">
-<h4 id="orgde20c26"><span class="section-number-4">1.1.7</span> 文档块注释</h4>
+<div id="outline-container-orgb976b06" class="outline-4">
+<h4 id="orgb976b06"><span class="section-number-4">1.1.7</span> 文档块注释</h4>
 <div class="outline-text-4" id="text-1-1-7">
 <div class="org-src-container">
 <pre class="src src-php">/**
@@ -192,8 +192,8 @@ __construct，__destruct，unset，__toString
 </div>
 </div>
 
-<div id="outline-container-org61b3a46" class="outline-3">
-<h3 id="org61b3a46"><span class="section-number-3">1.2</span> 面向对象与面向过程的差异</h3>
+<div id="outline-container-orgd08c682" class="outline-3">
+<h3 id="orgd08c682"><span class="section-number-3">1.2</span> 面向对象与面向过程的差异</h3>
 <div class="outline-text-3" id="text-1-2">
 <p>
 为什么在大项目中，采用面向对象方法？
@@ -298,20 +298,20 @@ echo "&lt;pre&gt;Person 2: ", print_r($person2, TRUE), "&lt;/pre&gt;";
 </div>
 </div>
 
-<div id="outline-container-org15cdf8d" class="outline-2">
-<h2 id="org15cdf8d"><span class="section-number-2">2</span> 第四章：构建活动日程表</h2>
+<div id="outline-container-org458095e" class="outline-2">
+<h2 id="org458095e"><span class="section-number-2">2</span> 第四章：构建活动日程表</h2>
 <div class="outline-text-2" id="text-2">
 </div>
-<div id="outline-container-orgd7b0b66" class="outline-3">
-<h3 id="orgd7b0b66"><span class="section-number-3">2.1</span> 规划设计</h3>
+<div id="outline-container-org11ab5f3" class="outline-3">
+<h3 id="org11ab5f3"><span class="section-number-3">2.1</span> 规划设计</h3>
 <div class="outline-text-3" id="text-2-1">
 <p>
 由数据库 MySQL 驱动，先定义数据库结构，后规划网站地图（如何从数据库中获取数据和修改数据）。
 </p>
 </div>
 
-<div id="outline-container-org03e0112" class="outline-4">
-<h4 id="org03e0112"><span class="section-number-4">2.1.1</span> 定义数据库结构</h4>
+<div id="outline-container-orgf898801" class="outline-4">
+<h4 id="orgf898801"><span class="section-number-4">2.1.1</span> 定义数据库结构</h4>
 <div class="outline-text-4" id="text-2-1-1">
 <p>
 对于一个活动日程表来说，需要存储的信息：
@@ -327,8 +327,8 @@ echo "&lt;pre&gt;Person 2: ", print_r($person2, TRUE), "&lt;/pre&gt;";
 </div>
 </div>
 
-<div id="outline-container-org12aa0b8" class="outline-4">
-<h4 id="org12aa0b8"><span class="section-number-4">2.1.2</span> 创建类映射</h4>
+<div id="outline-container-org9a0c15c" class="outline-4">
+<h4 id="org9a0c15c"><span class="section-number-4">2.1.2</span> 创建类映射</h4>
 <div class="outline-text-4" id="text-2-1-2">
 <p>
 主类 Calendar，负责处理与活动日程表有关的所有行为。方法和属性规划：
@@ -361,8 +361,8 @@ echo "&lt;pre&gt;Person 2: ", print_r($person2, TRUE), "&lt;/pre&gt;";
 </div>
 </div>
 
-<div id="outline-container-orgb9bb315" class="outline-4">
-<h4 id="orgb9bb315"><span class="section-number-4">2.1.3</span> 规划项目的目录结构</h4>
+<div id="outline-container-org3a898a2" class="outline-4">
+<h4 id="org3a898a2"><span class="section-number-4">2.1.3</span> 规划项目的目录结构</h4>
 <div class="outline-text-4" id="text-2-1-3">
 <p>
 出于安全考虑，不要把私密数据放在网站根目录或是公开目录中，其中包括数据库配置文件、程序内核，以及网站运行所需的各个类。

@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html lang="zh">
 <head>
-<!-- 2022-02-08 Tue 20:01 -->
+<!-- 2022-02-08 Tue 21:01 -->
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>Emacs 未指定 <code>ispell-hunspell-dict-paths-alist</code> 报错</title>
@@ -20,7 +20,7 @@
 今天在使用过程中，出现错误：
 </p>
 
-<pre class="example" id="orgf21df06">
+<pre class="example" id="orgd028585">
 Error running timer ‘auto-save-buffers’: (error "Can’t find Hunspell dictionary with a .aff affi\
 x file")
 </pre>
@@ -33,7 +33,7 @@ x file")
 安装后错误变为：
 </p>
 
-<pre class="example" id="org403ef08">
+<pre class="example" id="orgde4c891">
 Error running timer ‘auto-save-buffers’: (error "ispell-phaf: No matching entry for hunspelldict\
  in ‘ispell-hunspell-dict-paths-alist’.
 ")
@@ -47,7 +47,7 @@ Error running timer ‘auto-save-buffers’: (error "ispell-phaf: No matching en
 对 <code>~/.emacs.d/lisp/init-spelling.el</code> 进行的修改：
 </p>
 
-<pre class="example" id="org5722003">
+<pre class="example" id="org5639db8">
 +    (setq ispell-hunspell-dict-paths-alist
 +          '(("en_US" "/usr/share/hunspell/en_US.aff")))
 +    (setq ispell-local-dictionary "en_US")
