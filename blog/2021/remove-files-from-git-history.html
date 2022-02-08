@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html lang="zh">
 <head>
-<!-- 2022-02-08 Tue 13:01 -->
+<!-- 2022-02-08 Tue 14:01 -->
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>如何从 Git 仓库中完全移除文件</title>
@@ -25,7 +25,7 @@
 能够达到我的目的的命令<sup><a id="fnr.1" class="footref" href="#fn.1">1</a></sup>：
 </p>
 
-<pre class="example" id="org4e04c1b">
+<pre class="example" id="org6c11cef">
 git filter-branch --index-filter "git rm -rf --cached --ignore-unmatch path_to_file" HEAD
 git push -f
 </pre>
@@ -34,7 +34,7 @@ git push -f
 当使用 <code>filter-branch</code> 命令时，出现以下提示：
 </p>
 
-<pre class="example" id="org8170450">
+<pre class="example" id="orgeb418c3">
 WARNING: git-filter-branch has a glut of gotchas generating mangled history
          rewrites.  Hit Ctrl-C before proceeding to abort, then use an
          alternative filtering tool such as 'git filter-repo'
@@ -61,7 +61,7 @@ Ctrl+C 可在未执行命令以前取消，然后使用另一个可供选择的�
 现在被 Git 项目推荐，用于代替 =git filter-branch=。
 </p>
 
-<pre class="example" id="org3e44245">
+<pre class="example" id="org169cc3c">
 sudo pacman -S git-filter-repo # 安装
 
 ### 演示使用方法

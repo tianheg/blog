@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html lang="zh">
 <head>
-<!-- 2022-02-08 Tue 13:01 -->
+<!-- 2022-02-08 Tue 14:01 -->
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>GitHub Code Search 搜索语法</title>
@@ -20,14 +20,14 @@
 <h2>Table of Contents</h2>
 <div id="text-table-of-contents">
 <ul>
-<li><a href="#org215b6ae">1. 基础查询结构</a></li>
-<li><a href="#org2507822">2. 精确查找</a></li>
-<li><a href="#org2b415ac">3. 仓库和组织限定词</a></li>
-<li><a href="#orgbe80538">4. 语言限定</a></li>
-<li><a href="#org3a0ef8e">5. 路径限定</a></li>
-<li><a href="#org23a7476">6. 扩展名限定</a></li>
-<li><a href="#orga73b7bb">7. Symbol 限定</a></li>
-<li><a href="#orgded5b99">8. Content 限定</a></li>
+<li><a href="#org33be8c4">1. 基础查询结构</a></li>
+<li><a href="#org87b02ff">2. 精确查找</a></li>
+<li><a href="#org261f599">3. 仓库和组织限定词</a></li>
+<li><a href="#org0594700">4. 语言限定</a></li>
+<li><a href="#org61b75a7">5. 路径限定</a></li>
+<li><a href="#org87dfbd1">6. 扩展名限定</a></li>
+<li><a href="#org60e4a06">7. Symbol 限定</a></li>
+<li><a href="#orga6b7388">8. Content 限定</a></li>
 </ul>
 </div>
 </nav>
@@ -35,8 +35,8 @@
 <a href="https://cs.github.com/about/syntax">https://cs.github.com/about/syntax</a>
 </p>
 
-<div id="outline-container-org215b6ae" class="outline-2">
-<h2 id="org215b6ae"><span class="section-number-2">1</span> 基础查询结构</h2>
+<div id="outline-container-org33be8c4" class="outline-2">
+<h2 id="org33be8c4"><span class="section-number-2">1</span> 基础查询结构</h2>
 <div class="outline-text-2" id="text-1">
 <p>
 一个关键词会匹配文件内容或文件路径。
@@ -86,8 +86,8 @@
 </div>
 </div>
 
-<div id="outline-container-org2507822" class="outline-2">
-<h2 id="org2507822"><span class="section-number-2">2</span> 精确查找</h2>
+<div id="outline-container-org87b02ff" class="outline-2">
+<h2 id="org87b02ff"><span class="section-number-2">2</span> 精确查找</h2>
 <div class="outline-text-2" id="text-2">
 <p>
 目标词组要用 "" 包裹 "abc def"。
@@ -103,8 +103,8 @@
 </div>
 </div>
 
-<div id="outline-container-org2b415ac" class="outline-2">
-<h2 id="org2b415ac"><span class="section-number-2">3</span> 仓库和组织限定词</h2>
+<div id="outline-container-org261f599" class="outline-2">
+<h2 id="org261f599"><span class="section-number-2">3</span> 仓库和组织限定词</h2>
 <div class="outline-text-2" id="text-3">
 <p>
 repo:github/linguist
@@ -124,8 +124,8 @@ org:github &lt;=&gt; user:github
 </div>
 </div>
 
-<div id="outline-container-orgbe80538" class="outline-2">
-<h2 id="orgbe80538"><span class="section-number-2">4</span> 语言限定</h2>
+<div id="outline-container-org0594700" class="outline-2">
+<h2 id="org0594700"><span class="section-number-2">4</span> 语言限定</h2>
 <div class="outline-text-2" id="text-4">
 <p>
 language:ruby OR language:cpp OR language:csharp
@@ -137,8 +137,8 @@ language:ruby OR language:cpp OR language:csharp
 </div>
 </div>
 
-<div id="outline-container-org3a0ef8e" class="outline-2">
-<h2 id="org3a0ef8e"><span class="section-number-2">5</span> 路径限定</h2>
+<div id="outline-container-org61b75a7" class="outline-2">
+<h2 id="org61b75a7"><span class="section-number-2">5</span> 路径限定</h2>
 <div class="outline-text-2" id="text-5">
 <p>
 path:unit_tests
@@ -159,8 +159,8 @@ path:unit_tests
 </div>
 </div>
 
-<div id="outline-container-org23a7476" class="outline-2">
-<h2 id="org23a7476"><span class="section-number-2">6</span> 扩展名限定</h2>
+<div id="outline-container-org87dfbd1" class="outline-2">
+<h2 id="org87dfbd1"><span class="section-number-2">6</span> 扩展名限定</h2>
 <div class="outline-text-2" id="text-6">
 <p>
 extension:.js &lt;=&gt; extension:js
@@ -176,8 +176,8 @@ extension:/[jt]s/
 </div>
 </div>
 
-<div id="outline-container-orga73b7bb" class="outline-2">
-<h2 id="orga73b7bb"><span class="section-number-2">7</span> Symbol 限定</h2>
+<div id="outline-container-org60e4a06" class="outline-2">
+<h2 id="org60e4a06"><span class="section-number-2">7</span> Symbol 限定</h2>
 <div class="outline-text-2" id="text-7">
 <p>
 language:go symbol:WithContext
@@ -197,8 +197,8 @@ language:rust symbol:/^String::to_.*/
 </div>
 </div>
 
-<div id="outline-container-orgded5b99" class="outline-2">
-<h2 id="orgded5b99"><span class="section-number-2">8</span> Content 限定</h2>
+<div id="outline-container-orga6b7388" class="outline-2">
+<h2 id="orga6b7388"><span class="section-number-2">8</span> Content 限定</h2>
 <div class="outline-text-2" id="text-8">
 <p>
 如果只想搜索内容，不包括文件路径，可以这样
