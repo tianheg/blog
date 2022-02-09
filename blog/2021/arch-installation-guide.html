@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html lang="zh">
 <head>
-<!-- 2022-02-08 Tue 23:00 -->
+<!-- 2022-02-09 Wed 10:00 -->
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>Arch 安装指南</title>
@@ -91,7 +91,7 @@ install.txt（详见参考资料 1）。
 分区结果：
 </p>
 
-<pre class="example" id="org526c32e">
+<pre class="example" id="orgf7d085b">
 Device      Start       End   Sectors  Size Type
 /dev/sdb1    2048    526335    524288  256M EFI System
 /dev/sdb2  526336 250069646 249543311  119G Linux filesystem
@@ -111,7 +111,7 @@ Device      Start       End   Sectors  Size Type
 <div id="outline-container-硬盘格式化新建文件系统" class="outline-3">
 <h3 id="硬盘格式化新建文件系统">硬盘格式化、新建文件系统</h3>
 <div class="outline-text-3" id="text-硬盘格式化新建文件系统">
-<pre class="example" id="org4573b3f">
+<pre class="example" id="org430b8d9">
 mkfs.fat -F32 /dev/sdb1
 mkfs.ext4 /dev/sdb2
 mkfs.ext4 /dev/sda
@@ -122,7 +122,7 @@ mkfs.ext4 /dev/sda
 <div id="outline-container-挂载分区" class="outline-3">
 <h3 id="挂载分区">挂载分区</h3>
 <div class="outline-text-3" id="text-挂载分区">
-<pre class="example" id="org2b7360a">
+<pre class="example" id="org6958809">
 mount /dev/sdb2 /mnt
 mkdir -p /mnt/boot/efi
 mount /dev/sdb1 /mnt/boot/efi
@@ -133,7 +133,7 @@ mount /dev/sdb1 /mnt/boot/efi
 <div id="outline-container-选择镜像源" class="outline-3">
 <h3 id="选择镜像源">选择镜像源</h3>
 <div class="outline-text-3" id="text-选择镜像源">
-<pre class="example" id="org836092f">
+<pre class="example" id="org154ab4c">
 pacman -Syyy reflector # reflector 能够方便地选择镜像源
 reflector -c China -a 6 --sort rate --save /etc/pacman.d/mirrorlist # 这里的 mirrorlist 是 U 盘中的，还是硬盘中的？U 盘中的
 pacman -Syyy # y 刷新本地缓存 yyy 强制刷新
@@ -144,7 +144,7 @@ pacman -Syyy # y 刷新本地缓存 yyy 强制刷新
 <div id="outline-container-安装基本系统和安装时要用的应用到硬盘" class="outline-3">
 <h3 id="安装基本系统和安装时要用的应用到硬盘">安装基本系统和安装时要用的应用到硬盘</h3>
 <div class="outline-text-3" id="text-安装基本系统和安装时要用的应用到硬盘">
-<pre class="example" id="org323d709">
+<pre class="example" id="org1903325">
 pacstrap -i /mnt base base-devel linux linux-firmware dhcpcd vim
 </pre>
 </div>
@@ -158,7 +158,7 @@ pacstrap -i /mnt base base-devel linux linux-firmware dhcpcd vim
 <div id="outline-container-进入硬盘而不在-u-盘" class="outline-3">
 <h3 id="进入硬盘而不在-u-盘">进入硬盘，而不在 U 盘</h3>
 <div class="outline-text-3" id="text-进入硬盘而不在-u-盘">
-<pre class="example" id="orgd8760e1">
+<pre class="example" id="org5988b15">
 arch-chroot /mnt /bin/bash
 </pre>
 </div>
@@ -167,7 +167,7 @@ arch-chroot /mnt /bin/bash
 <div id="outline-container-生成挂载表" class="outline-3">
 <h3 id="生成挂载表">生成挂载表</h3>
 <div class="outline-text-3" id="text-生成挂载表">
-<pre class="example" id="org25fe07d">
+<pre class="example" id="org22a94b4">
 genfstab -U -p /mnt &gt;&gt; /mnt/etc/fstab
 </pre>
 
@@ -175,7 +175,7 @@ genfstab -U -p /mnt &gt;&gt; /mnt/etc/fstab
 检查：
 </p>
 
-<pre class="example" id="orgf4e3edc">
+<pre class="example" id="org1d5aa67">
 cat /mnt/etc/fstab
 </pre>
 </div>
@@ -188,7 +188,7 @@ cat /mnt/etc/fstab
 设置时区：
 </p>
 
-<pre class="example" id="org6f52709">
+<pre class="example" id="org80a1341">
 ln -sf /usr/share/zoneinfo/Asia/Shanghai /etc/localtime
 hwclock --systohc --utc
 </pre>
@@ -201,7 +201,7 @@ hwclock --systohc --utc
 <code>vim /etc/locale.gen</code> 取消注释：
 </p>
 
-<pre class="example" id="org984432c">
+<pre class="example" id="orga817b80">
 en_US.UTF-8 UTF-8
 ...
 zh_CN.UTF-8 UTF-8
@@ -211,7 +211,7 @@ zh_CN.UTF-8 UTF-8
 生成配置：
 </p>
 
-<pre class="example" id="org031547d">
+<pre class="example" id="org712db5f">
 locale-gen
 </pre>
 
@@ -223,7 +223,7 @@ locale-gen
 <code>vim /etc/locale.conf</code> 输入：
 </p>
 
-<pre class="example" id="org76a3794">
+<pre class="example" id="org64872d8">
 LANG=en_US.UTF-8
 </pre>
 </div>
@@ -232,7 +232,7 @@ LANG=en_US.UTF-8
 <div id="outline-container-安装引导程序" class="outline-3">
 <h3 id="安装引导程序">安装引导程序</h3>
 <div class="outline-text-3" id="text-安装引导程序">
-<pre class="example" id="org429dcd7">
+<pre class="example" id="orgee8afe3">
 pacman -S grub efibootmgr
 grub-install --target=x86_64-efi --bootloader-id=GRUB --efi-directory=/boot/efi
 grub-mkconfig -o /boot/grub/grub.cfg
@@ -250,7 +250,7 @@ arch wiki 后，可以在 /etc/default/grub 中设置
 <div id="outline-container-设置主机名" class="outline-3">
 <h3 id="设置主机名">设置主机名</h3>
 <div class="outline-text-3" id="text-设置主机名">
-<pre class="example" id="org196ff3b">
+<pre class="example" id="org3d4840f">
 echo arch &gt; /etc/hostname
 </pre>
 
@@ -258,7 +258,7 @@ echo arch &gt; /etc/hostname
 <code>vim /etc/hosts</code> 添加以下内容：
 </p>
 
-<pre class="example" id="org8662975">
+<pre class="example" id="org12410a0">
 127.0.0.1 localhost
 ::1 localhost
 127.0.0.1 arch.localdomain arch
@@ -269,7 +269,7 @@ echo arch &gt; /etc/hostname
 <div id="outline-container-提前配置网络" class="outline-3">
 <h3 id="提前配置网络">提前配置网络</h3>
 <div class="outline-text-3" id="text-提前配置网络">
-<pre class="example" id="org623423b">
+<pre class="example" id="org53e88c3">
 pacman -S networkmanager
 systemctl enable NetworkManager
 systemctl start NetworkManager
@@ -281,7 +281,7 @@ systemctl status NetworkManager # 检查是否运行
 <div id="outline-container-设置-root-密码" class="outline-3">
 <h3 id="设置-root-密码">设置 root 密码</h3>
 <div class="outline-text-3" id="text-设置-root-密码">
-<pre class="example" id="orgcb1e875">
+<pre class="example" id="orga6884f4">
 passwd
 </pre>
 </div>
@@ -290,7 +290,7 @@ passwd
 <div id="outline-container-新建普通用户" class="outline-3">
 <h3 id="新建普通用户">新建普通用户</h3>
 <div class="outline-text-3" id="text-新建普通用户">
-<pre class="example" id="org10459bf">
+<pre class="example" id="org5706dcf">
 useradd -m -g users -G wheel -s /bin/bash archie
 </pre>
 
@@ -298,7 +298,7 @@ useradd -m -g users -G wheel -s /bin/bash archie
 设置普通用户密码：
 </p>
 
-<pre class="example" id="orgd25b3f3">
+<pre class="example" id="orgd37dce8">
 passwd archie
 </pre>
 
@@ -306,7 +306,7 @@ passwd archie
 设置普通用户权限:
 </p>
 
-<pre class="example" id="org9f0431a">
+<pre class="example" id="org76822d8">
 EDITOR=vim visudo
 </pre>
 
@@ -314,7 +314,7 @@ EDITOR=vim visudo
 取消注释：
 </p>
 
-<pre class="example" id="org89e1a1d">
+<pre class="example" id="org892d6bb">
 ## Uncomment to allow members of group wheel to execute any command
 
 %wheel ALL=(ALL) ALL
@@ -329,7 +329,7 @@ EDITOR=vim visudo
 <div id="outline-container-返回-u-盘" class="outline-3">
 <h3 id="返回-u-盘">返回 U 盘</h3>
 <div class="outline-text-3" id="text-返回-u-盘">
-<pre class="example" id="orgf3944a3">
+<pre class="example" id="orgfbc89ed">
 exit
 </pre>
 </div>
@@ -339,7 +339,7 @@ exit
 <div id="outline-container-重启系统" class="outline-2">
 <h2 id="重启系统">重启系统</h2>
 <div class="outline-text-2" id="text-重启系统">
-<pre class="example" id="org52ae646">
+<pre class="example" id="orgd645e2c">
 umount -R /mnt
 reboot
 </pre>
@@ -357,7 +357,7 @@ reboot
 <div id="outline-container-启动微码更新" class="outline-3">
 <h3 id="启动微码更新">启动微码更新</h3>
 <div class="outline-text-3" id="text-启动微码更新">
-<pre class="example" id="org8798b06">
+<pre class="example" id="org336b7ce">
 sudo pacman -S intel-ucode
 sudo grub-mkconfig -o /boot/grub/grub.cfg
 </pre>
@@ -375,13 +375,13 @@ sudo grub-mkconfig -o /boot/grub/grub.cfg
 <div id="outline-container-va-api-or-vdpau" class="outline-4">
 <h4 id="va-api-or-vdpau">VA-API or VDPAU</h4>
 <div class="outline-text-4" id="text-va-api-or-vdpau">
-<pre class="example" id="org4ad1ca6">
+<pre class="example" id="org5715982">
 sudo pacman -S libva-utils vdpauinfo
 vainfo
 vdpauinfo
 </pre>
 
-<pre class="example" id="org3496627">
+<pre class="example" id="orgbc7274a">
 vainfo: VA-API version: 1.12 (libva 2.12.0) vainfo: Driver
 version: Intel iHD driver for Intel(R) Gen Graphics - 21.3.2 ()
 vainfo: Supported profile and entrypoints VAProfileNone :
@@ -434,7 +434,7 @@ So mine is VA-API, I supposed to install
 <a href="https://en.wikipedia.org/wiki/List_of_AMD_graphics_processing_units#Radeon_R5/R7/R9_M200_series">https://en.wikipedia.org/wiki/List_of_AMD_graphics_processing_units#Radeon_R5/R7/R9_M200_series</a></li>
 </ul>
 
-<pre class="example" id="orga2c9256">
+<pre class="example" id="org97ed239">
 sudo pacman -S xf86-video-intel intel-media-driver vulkan-intel xf86-video-amdgpu xf86-video-ati mesa-vdpau vulkan-radeon
 </pre>
 
@@ -471,7 +471,7 @@ ref:
 <div id="outline-container-安装图形界面" class="outline-3">
 <h3 id="安装图形界面">安装图形界面</h3>
 <div class="outline-text-3" id="text-安装图形界面">
-<pre class="example" id="org1f7b4af">
+<pre class="example" id="orgca92c8b">
 sudo pacman -S xorg xorg-server xorg-xinit plasma # gnome gnome-extra
 # systemctl enable gdm
 systemctl enable sddm # for kde(plasma)
@@ -481,7 +481,7 @@ systemctl enable sddm # for kde(plasma)
 桌面环境为 GNOME 时，切换 Wayland 至 Xorg：
 </p>
 
-<pre class="example" id="org6586629">
+<pre class="example" id="orga7f137a">
 sudo vim /etc/gdm/custom.conf
 </pre>
 
@@ -489,7 +489,7 @@ sudo vim /etc/gdm/custom.conf
 <code>/etc/gdm/custom.conf</code>:
 </p>
 
-<pre class="example" id="org4bc0761">
+<pre class="example" id="org9b8319d">
 [daemon]
 # Uncoment the line below to force the login screen to use Xorg
 -#WaylandEnable=false
@@ -501,7 +501,7 @@ sudo vim /etc/gdm/custom.conf
 进入命令行模式，输入 gnome-terminal 显示：
 </p>
 
-<pre class="example" id="org7f3c265">
+<pre class="example" id="org3ab8986">
 # Locale not supported by C library.
 # Using the fallback 'C' locale
 Unable to init server: Could not connect: Connection refused
@@ -530,7 +530,7 @@ Unable to init server: Could not connect: Connection refused
 0，则表明支持。
 </p>
 
-<pre class="example" id="orgbb2d035">
+<pre class="example" id="org2707cc0">
 sudo vim /etc/fstab
 </pre>
 
@@ -538,7 +538,7 @@ sudo vim /etc/fstab
 添加 noatime 和 diacard：
 </p>
 
-<pre class="example" id="orgc8eec26">
+<pre class="example" id="org8836a77">
 # &lt;file system&gt; &lt;dir&gt; &lt;type&gt; &lt;options&gt; &lt;dump&gt; &lt;pass&gt;
 # /dev/sdb2
 UUID=b182ad17-2f74-4bf0-95b6-a42884a4ff79 /          ext4       rw,noatime,discard 0 1
@@ -552,7 +552,7 @@ UUID=EF6F-2E0C       /boot/efi  vfat       rw,noatime,discard,fmask=0022,dmask=0
 <div id="outline-container-更换-io-scheduler" class="outline-4">
 <h4 id="更换-io-scheduler">更换 I/O  scheduler</h4>
 <div class="outline-text-4" id="text-更换-io-scheduler">
-<pre class="example" id="org3bfe1c2">
+<pre class="example" id="orgd4f0835">
 sudo vim /etc/default/grub
 </pre>
 
@@ -560,11 +560,11 @@ sudo vim /etc/default/grub
 找到 <code>GRUB_CMDLINE_LINUX_DEFAULT</code> 这一行，添加 <code>elevator=noop</code>:
 </p>
 
-<pre class="example" id="org1a438f7">
+<pre class="example" id="org5ede370">
 GRUB_CMDLINE_LINUX_DEFAULT="elevator=noop loglevel=3 quiet"
 </pre>
 
-<pre class="example" id="orgc365e84">
+<pre class="example" id="org351472c">
 sudo grub-mkconfig -o /boot/grub/grub.cfg
 </pre>
 </div>
@@ -573,7 +573,7 @@ sudo grub-mkconfig -o /boot/grub/grub.cfg
 <div id="outline-container-迁移高读写文件到-tmpfs" class="outline-4">
 <h4 id="迁移高读写文件到-tmpfs">迁移高读写文件到 tmpfs</h4>
 <div class="outline-text-4" id="text-迁移高读写文件到-tmpfs">
-<pre class="example" id="orgd78427b">
+<pre class="example" id="org8367091">
 sudo vim /etc/fstab
 </pre>
 
@@ -581,7 +581,7 @@ sudo vim /etc/fstab
 添加以下内容到最后：
 </p>
 
-<pre class="example" id="org017258c">
+<pre class="example" id="org5ad583e">
 tmpfs  /tmp    tmpfs   defaults,noatime,mode=1777 0 0
 tmpfs  /var/log    tmpfs   defaults,noatime,mode=1777 0 0
 tmpfs  /var/tmp    tmpfs   defaults,noatime,mode=1777 0 0
@@ -593,7 +593,7 @@ tmpfs  /var/tmp    tmpfs   defaults,noatime,mode=1777 0 0
 after connecting wifi</a> 问题取消挂载）：
 </p>
 
-<pre class="example" id="org35a939c">
+<pre class="example" id="orgc4a7f7b">
 cd ~/.cache/google-chrome/Default/ &amp;&amp; rm -rf Cache &amp;&amp; ln -sf /tmp Cache
 cd ~/.cache/google-chrome/Default/ &amp;&amp; unlink Cache # 取消 Symbolic Link
 </pre>
@@ -604,7 +604,7 @@ cd ~/.cache/google-chrome/Default/ &amp;&amp; unlink Cache # 取消 Symbolic Lin
 <div id="outline-container-检查硬盘状况" class="outline-3">
 <h3 id="检查硬盘状况">检查硬盘状况</h3>
 <div class="outline-text-3" id="text-检查硬盘状况">
-<pre class="example" id="org4c3ab50">
+<pre class="example" id="orga653118">
 sudo pacman -S hdparm smartmontools
 sudo hdparm -I /dev/sdb
 sudo smartctl -t short /dev/sdb
@@ -615,7 +615,7 @@ sudo smartctl -t short /dev/sdb
 <div id="outline-container-测试固态硬盘速度" class="outline-3">
 <h3 id="测试固态硬盘速度">测试固态硬盘速度</h3>
 <div class="outline-text-3" id="text-测试固态硬盘速度">
-<pre class="example" id="org82656ac">
+<pre class="example" id="org63a6972">
 sudo dd if=/dev/zero of=/tmp/test.img bs=1G count=1 oflag=dsync
 </pre>
 
