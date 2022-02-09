@@ -1,0 +1,16 @@
+#+SETUPFILE: ~/repo/blog/tpl/nil-site-tpl.org
+#+TITLE: 常用脚本
+
+* 批量删除 Pypi 包
+
+#+BEGIN_SRC sh
+pip freeze | grep SOMETHING | xargs pip uninstall -y
+# https://stackoverflow.com/a/9406259
+#+END_SRC
+
+* 批量删除 Pacman 包
+
+#+BEGIN_SRC sh
+sudo pacman -Rs $(pacman -Qq | grep some_words)
+# https://bbs.archlinux.org/viewtopic.php?pid=1533162#p1533162
+#+END_SRC

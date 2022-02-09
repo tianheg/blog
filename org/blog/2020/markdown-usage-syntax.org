@@ -1,0 +1,625 @@
+#+SETUPFILE: ~/repo/blog/tpl/nil-site-tpl.org
+#+TITLE: Markdown 使用语法
+
+** 综述
+   :PROPERTIES:
+   :CUSTOM_ID: 综述
+   :END:
+*** 设计哲学
+    :PROPERTIES:
+    :CUSTOM_ID: 设计哲学
+    :END:
+Markdown 被设计得易于读写。
+
+*** 行内 HTML
+    :PROPERTIES:
+    :CUSTOM_ID: 行内-html
+    :END:
+Markdown 不是 HTML 的替代，或是接近它。如果有些标记 Markdown
+没有，你大可以用 HTML。唯一限制使用的是块元素。跨度 HTML 标签可以在
+Markdown 段落的任何地方使用。
+
+*** 自动转义特殊字符
+    :PROPERTIES:
+    :CUSTOM_ID: 自动转义特殊字符
+    :END:
+在 HTML 中有两个字符需要特别对待：=<= 和 =&=。< 被用来作为标签的开始；&
+被用来表示 HTML
+实体。如果你想把它们用作文字字符，你必须把它们作为实体转义，例如 < 和
+&，原形：=&lt;= 和 =&amp;=。
+
+=&= 使网络作家特别困扰。如果你想写 =AT&T=，你需要写 =AT&amp;T=。
+
+** 块元素
+   :PROPERTIES:
+   :CUSTOM_ID: 块元素
+   :END:
+*** 段落和换行符
+    :PROPERTIES:
+    :CUSTOM_ID: 段落和换行符
+    :END:
+段落就是纯文本，段落之间有至少一个空行，多个空行也只会形成一个空行。
+
+*** 标题（HEADERS）
+    :PROPERTIES:
+    :CUSTOM_ID: 标题headers
+    :END:
+Markdown
+支持两种样式的标题，[[https://docutils.sourceforge.io/mirror/setext.html][Setext]]
+和 [[http://www.aaronsw.com/2002/atx/][atx]]。
+
+Setext 风格的标题分别使用 === 和 =-=
+表示一级和二级标题（任何数量均可）。例子：
+
+#+begin_example
+  一级标题
+  =
+
+  二级标题
+  -
+#+end_example
+
+Atx 风格的标题使用 1-6 个
+#（数字记号）在标题开头处，对应标题的六个级别。例子：
+
+#+begin_example
+  # 一级标题
+  ## 二级标题
+  ### 三级标题
+  ……
+#+end_example
+
+当然，你还可以在标题后添加数量不等的 === 做做样子。这并不影响，开头 #
+的数量才决定标题的级别。
+
+*** 块引用
+    :PROPERTIES:
+    :CUSTOM_ID: 块引用
+    :END:
+Markdown 使用邮件风格的 > 作为块引用。换行时最好把 > 带上，这样更美观。
+
+也可以只在段落的开头添加 > 以添加块引用，
+
+也可以添加多级引用（blockquote-in-a-blockquote）。例子：
+
+#+begin_quote
+  This is the first level of quoting.
+
+  #+begin_quote
+    This is nested blockquote.
+  #+end_quote
+
+  Back to the first level.
+#+end_quote
+
+#+begin_example
+  > This is the first level of quoting.
+  >
+  > > This is nested blockquote.
+  >
+  > Back to the first level.
+#+end_example
+
+块引用中还可以插入其他 Markdown 语法：标题、列表、代码块。
+
+*** 列表
+    :PROPERTIES:
+    :CUSTOM_ID: 列表
+    :END:
+Markdown 支持有序和无序列表。
+
+无序列表可以使用 =*=、=+=、=-= 表示。
+
+有序列表格式：=数字= + =.=。即便使用相同数字添加有序列表，依然按照从 1
+开始的顺序显示。
+
+1. 1
+
+2. 1
+
+3. 1
+
+4. 1
+
+5. 2
+
+6. 8
+
+#+begin_example
+  1. 1
+  1. 1
+  1. 1
+
+  3. 1
+  1. 2
+  4. 8
+#+end_example
+
+列表从左边开始，不多于三个空格为有效（四个空格为代码块）。
+
+1. 1
+2. 2
+3. 8
+
+#+begin_example
+     1. 1 <!-- `1.` 前有三个空格 -->
+  1. 2
+  2. 8
+#+end_example
+
+为了使列表更好看，你可以手动缩进：
+
+#+begin_example
+  *   Lorem ipsum dolor sit amet, consectetuer adipiscing elit.
+      Aliquam hendrerit mi posuere lectus. Vestibulum enim wisi,
+      viverra nec, fringilla in, laoreet vitae, risus.
+  *   Donec sit amet nisl. Aliquam semper ipsum sit amet velit.
+      Suspendisse id sem consectetuer libero luctus adipiscing.
+#+end_example
+
+不过，懒得缩进也可以：
+
+#+begin_example
+  *   Lorem ipsum dolor sit amet, consectetuer adipiscing elit.
+  Aliquam hendrerit mi posuere lectus. Vestibulum enim wisi,
+  viverra nec, fringilla in, laoreet vitae, risus.
+  *   Donec sit amet nisl. Aliquam semper ipsum sit amet velit.
+  Suspendisse id sem consectetuer libero luctus adipiscing.
+#+end_example
+
+如果列表之间有空行，转为 HTML 时会插入 =<p>=。例如，这个输入：
+
+#+begin_example
+  *   Bird
+  *   Magic
+#+end_example
+
+会变成：
+
+#+begin_example
+  <ul>
+  <li>Bird</li>
+  <li>Magic</li>
+  </ul>
+#+end_example
+
+但这个：
+
+#+begin_example
+  *   Bird
+
+  *   Magic
+#+end_example
+
+会变成：
+
+#+begin_example
+  <ul>
+  <li><p>Bird</p></li>
+  <li><p>Magic</p></li>
+  </ul>
+#+end_example
+
+列表中可能包含多个段落，其中每一个子段落必须以 3/4 个空格或一个 tab
+缩进：
+
+#+begin_example
+  1. This is a list item with two paragraphs. Lorem ipsum dolor
+     sit amet, consectetuer adipiscing elit. Aliquam hendrerit
+     mi posuere lectus.
+
+     Vestibulum enim wisi, viverra nec, fringilla in, laoreet
+     vitae, risus. Donec sit amet nisl. Aliquam semper ipsum
+     sit amet velit.
+
+  2. Suspendisse id sem consectetuer libero luctus adipiscing.
+#+end_example
+
+1. This is a list item with two paragraphs. Lorem ipsum dolor sit amet,
+   consectetuer adipiscing elit. Aliquam hendrerit mi posuere lectus.
+
+   Vestibulum enim wisi, viverra nec, fringilla in, laoreet vitae,
+   risus. Donec sit amet nisl. Aliquam semper ipsum sit amet velit.
+
+2. Suspendisse id sem consectetuer libero luctus adipiscing.
+
+缩进子段落是可选项。
+
+如果在列表中插入块引用，> 要缩进。
+
+在列表中使用代码块，用缩进 8 个空格或 2 个 tab。
+
+值得注意，以下内容会偶然触发列表：
+
+#+begin_example
+  1986. What a great season.
+#+end_example
+
+这种情况可以通过添加反斜杠 =\= 转义：
+
+#+begin_example
+  1986\. What a great season.
+#+end_example
+
+*** 代码块
+    :PROPERTIES:
+    :CUSTOM_ID: 代码块
+    :END:
+在 Markdown 中可以通过 缩进 4 个空格或 1 个 tab 来显示代码块。
+
+从代码块的每一行移除一个缩进级别：4 个空格或 1 个 tab。例子：
+
+#+begin_example
+  Here is an example of AppleScript:
+
+      tell application "Foo"
+          beep
+      end tell
+#+end_example
+
+会变成：
+
+#+begin_example
+  <p>Here is an example of AppleScript:</p>
+
+  <pre><code>tell application "Foo"
+      beep
+  end tell
+  </code></pre>
+#+end_example
+
+代码块会继续，直到没有缩进的那一行（或文章的结束）。
+
+在代码块中，=&= 和 =<=、=>= 会自动转换成 HTML 实体。例如：
+
+#+begin_example
+  <div class="footer">
+      &copy; 2004 Foo Corporation
+  </div>
+#+end_example
+
+会变成
+
+#+begin_example
+  <pre><code>&lt;div class="footer"&gt;
+      &amp;copy; 2004 Foo Corporation
+  &lt;/div&gt;
+  </code></pre>
+#+end_example
+
+常规 Markdown 语法未在代码块内处理。 例如，星号只是代码块中的文字星号。
+这意味着使用 Markdown 编写 Markdown 自己的语法也很容易。
+
+*** 分割线
+    :PROPERTIES:
+    :CUSTOM_ID: 分割线
+    :END:
+在 Markdown
+中添加分割线（=<hr />=）的方法：在同一行使用至少三个或多个星号
+=*=、连字符 =-=、下划线 =_=：
+
+#+begin_example
+  * * *
+
+  ***
+
+  - - -
+
+  ---
+
+  ___
+
+  _ _ _
+#+end_example
+
+** 跨度元件（Span Elements）
+   :PROPERTIES:
+   :CUSTOM_ID: 跨度元件span-elements
+   :END:
+*** 链接
+    :PROPERTIES:
+    :CUSTOM_ID: 链接
+    :END:
+Markdown 支持两种形式的链接：行内和引用。
+
+在这两种形式中，链接文本均由方括号 =[]= 分割。
+
+为了创建行内链接，在方括号后使用常规括号，并在其中插入链接。=链接=
+后还可以添加一个标题作为 HTML 的 title 文本。例子：
+
+#+begin_example
+  This is [an example](http://example.com/ "Title") inline link.
+
+  [This link](http://example.net/) has no title attribute.
+#+end_example
+
+会产生：
+
+#+begin_example
+  <p>This is <a href="http://example.com/" title="Title">
+  an example</a> inline link.</p>
+
+  <p><a href="http://example.net/">This link</a> has no
+  title attribute.</p>
+#+end_example
+
+如果使用同一服务器的本地资源，则可以使用相对路径：
+
+#+begin_example
+  See my [About](/about/) page for details.
+#+end_example
+
+参考样式链接使用第二组方括号，在其中放置您选择的标签以标识该链接：
+
+#+begin_example
+  This is [an example][id] reference-style link.
+#+end_example
+
+你还可以在两个方括号之间加入空格：
+
+#+begin_example
+  This is [an example] [id] reference-style link.
+#+end_example
+
+This is [an example] [[http://example.com/][id]] reference-style link.
+
+然后，在这个文本的任何地方，单独一行，像这样定义标签：
+
+#+begin_example
+  [id]: http://example.com/  "Optional Title Here"
+#+end_example
+
+解释：
+
+- 方括号内是识别链接（也可以不大于 3 个空格的缩进）；
+- 后面是冒号；
+- 再后面是至少一个空格；
+- 再后面是链接；
+- （可选）再后面是用 =""=、=''= 或 =()= 包裹的链接标题
+
+/注意/：在 =Markdown.pl= 1.0.1 中，有个 bug 阻止单引号分隔链接标题。
+
+链接还可以用 =<>= 包裹：
+
+#+begin_example
+  [id]: <http://example.com/>  "Optional Title Here"
+#+end_example
+
+如果链接很长，你还可以把标题放到使用多余的 空格 或 tab 缩进下一行：
+
+#+begin_example
+  [id]: http://example.com/longish/path/to/resource/here
+      "Optional Title Here"
+#+end_example
+
+链接定义仅在 Markdown 处理期间用于创建链接，并在 HTML
+输出中从文档中删除。
+
+链接定义名称可以由字母，数字，空格和标点符号组成，但它们不区分大小写。
+例如，这两个链接：
+
+#+begin_example
+  [link text][a]
+  [link text][A]
+#+end_example
+
+隐式链接可以省略链接标签，例子：
+
+#+begin_example
+  [Google][]
+  [Google]: https://www.google.com/
+#+end_example
+
+因为链接名称可能包含空格，所以对于包含多个单词的链接名称也是可行的：
+
+#+begin_example
+  Visit [Daring Fireball][] for more information.
+  [Daring Fireball]: https://daringfireball.net/
+#+end_example
+
+脚注就是隐式链接，它（指脚注）把 =[]= 直接省略了。
+
+*** 强调
+    :PROPERTIES:
+    :CUSTOM_ID: 强调
+    :END:
+Markdown 使用 =*= 和 =_= 表示强调。由一个 =*= 或 =_= 包裹的文本，在 HTML
+中变成 =<em></em>=；由两个 =*= 或 =_= 包裹的文本，在 HTML 中变成
+=<strong></strong>=。例子，输入：
+
+#+begin_example
+  *single asterisks*
+
+  _single underscores_
+
+  **double asterisks**
+
+  __double underscores__
+#+end_example
+
+#+begin_example
+  <em>single asterisks</em>
+
+  <em>single underscores</em>
+
+  <strong>double asterisks</strong>
+
+  <strong>double underscores</strong>
+#+end_example
+
+强调可以被用于一个单词中。
+
+但如果你在一个 * 或 _ 加上空格，它们会变成字面上的星号或下划线。
+
+要在原本会用作强调定界符的位置产生文字星号或下划线，可以反斜杠对其进行转义：
+
+#+begin_example
+  \*this text is surrounded by literal asterisks\*
+#+end_example
+
+*** 代码
+    :PROPERTIES:
+    :CUSTOM_ID: 代码
+    :END:
+使用反引号（``）表示代码的范围。
+
+为了在一个代码片中包含一个文字反引号，可以使用两个反引号表示代码片：
+
+#+begin_example
+  ``There is a literal backtick (`) here.``
+#+end_example
+
+在双反引号中，插入文字反引号：
+
+#+begin_example
+  A single backtick in a code span: `` ` ``
+
+  A backtick-delimited string in a code span: `` `foo` ``
+#+end_example
+
+------使用空格。
+
+变成 HTML：
+
+#+begin_example
+  <p>A single backtick in a code span: <code>`</code></p>
+
+  <p>A backtick-delimited string in a code span: <code>`foo`</code></p>
+#+end_example
+
+在代码片中，& 和 <> 会被自动转换。
+
+*** 图片
+    :PROPERTIES:
+    :CUSTOM_ID: 图片
+    :END:
+Markdown 使用一种类似于链接语法的图像语法，允许两种样式：内联和引用。
+
+内联图像语法：
+
+#+begin_example
+  ![Alt text](/path/to/img.jpg)
+
+  ![Alt text](/path/to/img.jpg "Optional title")
+#+end_example
+
+解释：
+
+- 感叹号；
+- 方括号包裹，方括号内是图片的 alt 属性文本；
+- 一组括号，内部是图片链接或路径，后面是可选的图片的标题
+
+引用图片语法：
+
+#+begin_example
+  ![Alt text][id]
+  [id]: url/to/image  "Optional title attribute"
+#+end_example
+
+Markdown 没有指定图像尺寸的语法，可以使用 HTML 的图片标签 =<img>=。
+
+** 杂项
+   :PROPERTIES:
+   :CUSTOM_ID: 杂项
+   :END:
+*** 反斜线转义
+    :PROPERTIES:
+    :CUSTOM_ID: 反斜线转义
+    :END:
+在一些情况下，我们不想使用 Markdown
+语法，而是需要表示语法的字符。但是，直接使用它们，由于 Markdown
+语法的作用会改变样式，所以需要对这些字符进行转义，即，使用 =\=。
+
+Markdown 提供以下字符的转义：
+
+#+begin_example
+  \   backslash
+  `   backtick
+  *   asterisk
+  _   underscore
+  {}  curly braces
+  []  square brackets
+  ()  parentheses
+  #   hash mark
+  +   plus sign
+  -   minus sign (hyphen)
+  .   dot
+  !   exclamation mark
+#+end_example
+
+*** 自动链接
+    :PROPERTIES:
+    :CUSTOM_ID: 自动链接
+    :END:
+用尖括号（<>）包裹的链接会自动转换成可以点击的链接：
+
+输入：
+
+#+begin_example
+  <https://daringfireball.net/projects/markdown/syntax>
+#+end_example
+
+输出为 HTML：
+
+#+begin_example
+  <a href="https://daringfireball.net/projects/markdown/syntax">https://daringfireball.net/projects/markdown/syntax</a>
+#+end_example
+
+还可以改变电子邮箱，输入：
+
+#+begin_example
+  <address@example.com>
+#+end_example
+
+HTML 输出：
+
+#+begin_example
+  <a href="&#x6D;&#x61;i&#x6C;&#x74;&#x6F;:&#x61;&#x64;&#x64;&#x72;&#x65;
+  &#115;&#115;&#64;&#101;&#120;&#x61;&#109;&#x70;&#x6C;e&#x2E;&#99;&#111;
+  &#109;">&#x61;&#x64;&#x64;&#x72;&#x65;&#115;&#115;&#64;&#101;&#120;&#x61;
+  &#109;&#x70;&#x6C;e&#x2E;&#99;&#111;&#109;</a>
+#+end_example
+
+它将在浏览器中呈现为指向 "=address@example.com=" 的可点击链接。
+
+（这种实体编码技巧的确会欺骗许多（即使不是大多数）地址收集机器人，但绝对不会欺骗所有它们。总比没有好，但是以这种方式发布的地址最终可能会开始收到*垃圾邮件*。）
+
+*** 添加任务列表
+    :PROPERTIES:
+    :CUSTOM_ID: 添加任务列表
+    :END:
+
+- [ ] 「请帮我列出解决此问题的完整步骤」
+
+- [X] 「有没有人能指个方向？（剩下的我可以自己来）」
+
+- [X] 「麻烦看下我这还差点什么？」（指点一下我也许就能独自攻克此问题）
+
+- [X]
+  「我应该查阅哪个文章或者哪个网站？」（大致指个方向都会对我有很大帮助）
+
+#+begin_example
+  - [ ] 「请帮我列出解决此问题的完整步骤」
+
+  - [x] 「有没有人能指个方向？（剩下的我可以自己来）」
+
+  - [x] 「麻烦看下我这还差点什么？」（指点一下我也许就能独自攻克此问题）
+
+  - [x] 「我应该查阅哪个文章或者哪个网站？」（大致指个方向都会对我有很大帮助）
+#+end_example
+
+*** 添加换行符
+    :PROPERTIES:
+    :CUSTOM_ID: 添加换行符
+    :END:
+在 markdown 中，无法多次按 Enter 键，并不能形成多个空行，需要使用 HTML
+语法
+
+使用 =<br/>= 形成空行
+
+--------------
+
+*参考资料*：
+
+1. [[https://daringfireball.net/projects/markdown/syntax]]
+2. [[https://spec.commonmark.org/0.29/]]
