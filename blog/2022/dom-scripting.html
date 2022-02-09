@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html lang="zh">
 <head>
-<!-- 2022-02-09 Wed 10:01 -->
+<!-- 2022-02-09 Wed 11:01 -->
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>DOM Scripting</title>
@@ -16,7 +16,26 @@
 <div id="content">
 <header>
 <h1 class="title">DOM Scripting</h1>
-</header><p>
+</header><nav id="table-of-contents">
+<h2>Table of Contents</h2>
+<div id="text-table-of-contents">
+<ul>
+<li><a href="#org860b75a">1. JS 的历史</a></li>
+<li><a href="#org1fba67d">2. JS 的语法</a>
+<ul>
+<li><a href="#orgbd300be">2.1. 操作</a></li>
+<li><a href="#org5fe5c77">2.2. 条件语句</a></li>
+<li><a href="#orgcb770b2">2.3. 循环语句</a></li>
+<li><a href="#orgd98d83b">2.4. 函数</a></li>
+<li><a href="#orgc5c85cd">2.5. 变量的作用域</a></li>
+<li><a href="#org929a338">2.6. 对象</a></li>
+</ul>
+</li>
+<li><a href="#orge8a8288">3. DOM</a></li>
+</ul>
+</div>
+</nav>
+<p>
 这本书讲了哪些内容：
 </p>
 
@@ -32,6 +51,9 @@ JS 的语法：语句，注释，变量（variable），赋值（将值存入变
 DOM：节点，getElementById,getElementsByTagName,getElementsByClassName,getAttribute,setAttribute
 </p>
 
+<div id="outline-container-org860b75a" class="outline-2">
+<h2 id="org860b75a"><span class="section-number-2">1</span> JS 的历史</h2>
+<div class="outline-text-2" id="text-1">
 <p>
 编译型语言与解释型语言的区别？
 </p>
@@ -44,7 +66,12 @@ DOM：节点，getElementById,getElementsByTagName,getElementsByClassName,getAtt
 <p>
 通过理解英语，来理解什么是解释型语言。
 </p>
+</div>
+</div>
 
+<div id="outline-container-org1fba67d" class="outline-2">
+<h2 id="org1fba67d"><span class="section-number-2">2</span> JS 的语法</h2>
+<div class="outline-text-2" id="text-2">
 <p>
 驼峰格式是函数名、方法名和对象属性名命名的首选格式。
 </p>
@@ -77,19 +104,11 @@ JS 最重要的三种数据类型：字符串，数值，布尔值。
 <p>
 一个数组作为另一个数组的元素
 </p>
-
-<div id="outline-container-org31ff1de" class="outline-2">
-<h2 id="org31ff1de">对象</h2>
-<div class="outline-text-2" id="text-org31ff1de">
-<p>
-用点号获取属性和花括号语法创建对象。
-</p>
-</div>
 </div>
 
-<div id="outline-container-org04fa1f5" class="outline-2">
-<h2 id="org04fa1f5">操作</h2>
-<div class="outline-text-2" id="text-org04fa1f5">
+<div id="outline-container-orgbd300be" class="outline-3">
+<h3 id="orgbd300be"><span class="section-number-3">2.1</span> 操作</h3>
+<div class="outline-text-3" id="text-2-1">
 <p>
 自增、自减
 </p>
@@ -109,9 +128,9 @@ JS 最重要的三种数据类型：字符串，数值，布尔值。
 </div>
 </div>
 
-<div id="outline-container-orgc60136d" class="outline-2">
-<h2 id="orgc60136d">条件语句</h2>
-<div class="outline-text-2" id="text-orgc60136d">
+<div id="outline-container-org5fe5c77" class="outline-3">
+<h3 id="org5fe5c77"><span class="section-number-3">2.2</span> 条件语句</h3>
+<div class="outline-text-3" id="text-2-2">
 <p>
 if&#x2026;else&#x2026;
 </p>
@@ -122,27 +141,27 @@ if&#x2026;else&#x2026;
 </div>
 </div>
 
-<div id="outline-container-org338d193" class="outline-2">
-<h2 id="org338d193">循环语句</h2>
-<div class="outline-text-2" id="text-org338d193">
+<div id="outline-container-orgcb770b2" class="outline-3">
+<h3 id="orgcb770b2"><span class="section-number-3">2.3</span> 循环语句</h3>
+<div class="outline-text-3" id="text-2-3">
 <p>
 do&#x2026;while 循环内部的代码至少执行一次
 </p>
 </div>
 </div>
 
-<div id="outline-container-orga7e79a5" class="outline-2">
-<h2 id="orga7e79a5">函数</h2>
-<div class="outline-text-2" id="text-orga7e79a5">
+<div id="outline-container-orgd98d83b" class="outline-3">
+<h3 id="orgd98d83b"><span class="section-number-3">2.4</span> 函数</h3>
+<div class="outline-text-3" id="text-2-4">
 <p>
 传参
 </p>
 </div>
 </div>
 
-<div id="outline-container-org4819f3c" class="outline-2">
-<h2 id="org4819f3c">变量的作用域</h2>
-<div class="outline-text-2" id="text-org4819f3c">
+<div id="outline-container-orgc5c85cd" class="outline-3">
+<h3 id="orgc5c85cd"><span class="section-number-3">2.5</span> 变量的作用域</h3>
+<div class="outline-text-3" id="text-2-5">
 <p>
 全局变量：可在任何位置被引用，它的作用域是整个脚本；
 </p>
@@ -157,9 +176,13 @@ do&#x2026;while 循环内部的代码至少执行一次
 </div>
 </div>
 
-<div id="outline-container-orga8b51d9" class="outline-2">
-<h2 id="orga8b51d9">对象</h2>
-<div class="outline-text-2" id="text-orga8b51d9">
+<div id="outline-container-org929a338" class="outline-3">
+<h3 id="org929a338"><span class="section-number-3">2.6</span> 对象</h3>
+<div class="outline-text-3" id="text-2-6">
+<p>
+用点号获取属性和花括号语法创建对象。
+</p>
+
 <p>
 对象是自包含的数据集合，包含在对象里的数据可以通过两种形式访问——属性和方法：
 </p>
@@ -183,5 +206,25 @@ do&#x2026;while 循环内部的代码至少执行一次
 </div>
 </div>
 </div>
+
+<div id="outline-container-orge8a8288" class="outline-2">
+<h2 id="orge8a8288"><span class="section-number-2">3</span> DOM</h2>
+<div class="outline-text-2" id="text-3">
+<p>
+DOM（文档对象模型，Document Object Model，核心是 document<sup><a id="fnr.1" class="footref" href="#fn.1">1</a></sup>。
+</p>
+</div>
+</div>
+<div id="footnotes">
+<h2 class="footnotes">Footnotes: </h2>
+<div id="text-footnotes">
+
+<div class="footdef"><sup><a id="fn.1" class="footnum" href="#fnr.1">1</a></sup> <div class="footpara"><p class="footpara">
+<a href="https://developer.mozilla.org/en-US/docs/Web/API/Document">https://developer.mozilla.org/en-US/docs/Web/API/Document</a>
+</p></div></div>
+
+
+</div>
+</div></div>
 </body>
 </html>
