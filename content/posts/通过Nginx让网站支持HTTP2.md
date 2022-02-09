@@ -1,0 +1,37 @@
++++
+date = '2021-10-27T08:47:53+08:00'
+title = '通过 Nginx 让网站支持 HTTP/2'
+tags = ['Nginx']
+slug = 'nginx-http2'
++++
+
+[^1]
+
+目前，HTTP 的主流版本是 1.1。它是 1997 年发布的。站点使用 Nginx 作为 Web 服务器，让它支持 HTTP/2 是非常简单的。
+
+只需要在 Nginx 的配置文件中（一般位于 `/etc/nginx/nginx.conf`）的对应位置添加 `http2` 即可。
+
+但是，在此之前，需检查 Nginx 是否支持 http2，并且 Openssh 的版本是否达到最低要求（>=1.0.2）。
+
+```sh
+nginx -V
+... --with-http_v2_module
+```
+
+如果能在输出中找到 `--with-http_v2_module` 就说明当前版本 Nginx 支持开启 HTTP/2。
+
+具体操作如下：
+
+```conf
+server {
+    listen 443 ssl http2;
+}
+```
+
+修改完成后，执行 `sudo systemctl restart nginx` 来重启 Nginx。
+
+如何检查网站是否支持 HTTP/2？
+
+可以通过开发者工具，对于 Firefox 可通过 F12 打开，在 Network 标签页下面，可以看到由 Status、Method、Domain 等组成的列表，其中有一项为 Protocol，如果修改成功，这一栏的值会由 HTTP/1.1 变为 HTTP/2。
+
+[^1]: https://www.nginx.com/blog/http2-module-nginx/

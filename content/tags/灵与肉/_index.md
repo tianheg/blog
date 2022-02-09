@@ -1,0 +1,3 @@
++++
+slug = 'mind-and-body'
++++

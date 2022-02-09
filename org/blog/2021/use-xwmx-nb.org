@@ -1,0 +1,47 @@
+#+SETUPFILE: ~/repo/blog/tpl/nil-site-tpl.org
+#+TITLE: 使用 xwmx/nb
+
+** 安装
+   :PROPERTIES:
+   :CUSTOM_ID: 安装
+   :END:
+#+begin_example
+  curl -o- https://raw.githubusercontent.com/nvm-sh/nvm/v0.38.0/install.sh | bash
+  export NVM_DIR="$([ -z "${XDG_CONFIG_HOME-}" ] && printf %s "${HOME}/.nvm" || printf %s "${XDG_CONFIG_HOME}/nvm")"
+  [ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh" # This loads nvm
+  nvm install --lts
+  npm install -g nb.sh
+  sudo "$(which nb)" completions install # install Bash and Zsh completion scripts (recommended)
+#+end_example
+
+** 用法
+   :PROPERTIES:
+   :CUSTOM_ID: 用法
+   :END:
+#+begin_example
+  nb add
+  nb <url>
+  nb edit <id>
+  nb show <id>
+  nb open <id>
+  nb list
+  nb search <query>
+  nb browse
+  nb notebooks add <name>
+  nb settings
+  nb help
+#+end_example
+
+** 用途
+   :PROPERTIES:
+   :CUSTOM_ID: 用途
+   :END:
+
+- 命令行记笔记、为链接加书签、支持 Backlink
+- 可同步至 GitHub，备份方便
+
+ref:
+
+1. [[https://github.com/xwmx/nb]]
+2. [[https://xwmx.github.io/nb/]]
+3. [[https://github.com/nvm-sh/nvm#installing-and-updating]]
