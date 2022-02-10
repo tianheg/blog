@@ -1,0 +1,28 @@
+#+SETUPFILE: ./hugo_setup.org
+#+TITLE: 如何理解 JS 中的 (e)
+#+DATE: <2021-12-01 Wed>
+=e= 是将传递给事件处理程序的 =event= 对象的短 var 引用[fn:js-e]。
+
+事件对象本质上有许多有趣的方法和属性，可以在事件处理程序中使用。
+
+一些小例子[fn:example]：
+
+#+BEGIN_SRC js
+function doSomething(e) {
+  if (!e) var e = window.event;
+  alert(e.type);
+}
+#+END_SRC
+
+#+BEGIN_SRC js
+function doSomething(e) {
+  var targ;
+  if (!e) var e = window.event;
+  if (e.target) targ = e.target;
+  else if (e.srcElement) targ = e.srcElement;
+  if (targ.nodeType == 3) targ = targ.parentNode;
+}
+#+END_SRC
+
+[fn:js-e] https://stackoverflow.com/a/10323409/12539782
+[fn:example] https://www.quirksmode.org/js/events_properties.html

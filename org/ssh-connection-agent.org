@@ -1,0 +1,18 @@
+#+SETUPFILE: ./hugo_setup.org
+#+TITLE: ssh =Could not open a connection to your authentication agent.=
+#+DATE: <2021-12-03 Fri>
+如何解决，运行以下代码即可：
+
+#+BEGIN_SRC sh
+eval "$(ssh-agent -s)"
+#+END_SRC
+
+那么为什么之前不需要执行这条命令，却不会出现这种错误提示呢？
+
+不需要执行是因为「在大多数 Linux 系统中， =ssh-agent= 可以在主机启动时自动配置运行」，刚才那个属于特殊情况，上述命令是手动运行 =ssh-agent= [fn:ssh-agent]。
+
+* 问题延伸
+
+- [[file:ssh-agent.org][=ssh-agent=]]
+
+[fn:ssh-agent] https://www.ssh.com/academy/ssh/agent
