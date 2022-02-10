@@ -1,0 +1,11 @@
+#+SETUPFILE: ./hugo_setup.org
+#+TITLE: scp - OpenSSH secure file copy
+#+DATE: <2021-12-03 Fri>
+https://www.techrepublic.com/article/how-to-use-secure-copy-with-ssh-key-authentication/
+
+#+BEGIN_SRC sh
+# copy local file to server
+scp -i ~/.ssh/id_rsa.pub FILENAME USER@SERVER:/home/USER/FILENAME
+# copy file from server
+scp -i ~/.ssh/id_rsa.pub USER@SERVER:/home/USER/FILENAME /home/USER/FILENAME
+#+END_SRC

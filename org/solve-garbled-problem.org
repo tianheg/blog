@@ -1,0 +1,30 @@
+#+SETUPFILE: ./hugo_setup.org
+#+TITLE: 解决 Windows 下中文文件在 Linux 中读取乱码的问题
+#+DATE: <2021-12-20 Mon>
+[[https://wiki.archlinux.org/title/Localization/Simplified_Chinese#Garbled_problem][Garbled problem - Localization/Simplified Chinese - ArchWiki]]
+
+Windows 系统下创建的文件采用的编码标准可能是 gbk/gb2312。所以避免乱码的基本原则就是使用包含字符更多的 utf-8，避免使用其他编码格式。
+
+* 文件名乱码
+
+安装 [[https://linux.die.net/man/1/convmv][convmv]]，使用 =convmv= 命令转换编码格式。举例：
+
+#+BEGIN_SRC sh
+$ convmv -f GBK -t UTF-8 --notest --nosmart file
+#+END_SRC
+
+* 文件内容乱码
+
+使用 =iconv= 命令转换格式：
+
+#+BEGIN_SRC sh
+$ iconv -f GBK -t UTF-8 -o new-file origin-file
+#+END_SRC
+
+* zip 压缩包乱码
+
+在非 utf8 编码环境(通常是 Windows 下的中文环境)下，不要使用 zip 进行压缩(建议使用 7z)。需要一个特殊的参数：
+
+#+BEGIN_SRC sh
+$ unzip -O gbk file.zip
+#+END_SRC
