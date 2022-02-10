@@ -1,9 +1,8 @@
 +++
-description = '关于我'
-keywords = '我'
+description = "关于我"
+keywords = "我"
+meta = false
 +++
-
-## 关于我
 
 半只脚踏入社会的一个人。我很年轻。
 
@@ -19,44 +18,34 @@ keywords = '我'
 
 音乐多为舒缓放松，间或品味大师雅作。谈及音乐，流行音乐不听，其余皆可。
 
-[感谢清单](/posts/thanks/)
+**自我提醒**：
 
-### 自我观察
+1. 不要太把自己当回事。
+2. 建立多元价值体系。
+3. 构建多元思维模型。
+4. 学习的真正目的在于，化为己用。
 
-- 想谈恋爱（2021-09-21）
-- 现在绝对不要交女朋友，我怕自己突然暴躁起来会伤害到她（2021-07-17）
-- 看似稳重的性格，愤怒的时候一点都不平静（2021-07-08）
-- 在与人交谈时会轻笑缓和气氛（2021-07-01）
-- 不够细心（2021-01-26）
-- 不能吃很辣的
-- 不能熬夜
-- 要随身带着卫生纸
-- 坐大巴车时，如果恰好坐在轮子上方会晕车
+## 重要索引
 
-## 订阅博客
-
-- 直接浏览网站
-- [RSS](https://blog.yidajiabei.xyz/index.xml)
-
-订阅前思考几个问题：
-
-1. 阅读我的生活/技术博客，能带给你什么
-2. 如果让你用阅读我博客的时间做更多有意义的事情，你会因此更快乐吗？如果是那就做吧，如果否那就看我记录自己吧
+- [感谢清单](/posts/thanks/)
+- [观影](/posts/watch/)
+- [阅读](/posts/read/)
 
 ## 友链
 
-|                                             |                                  |
-| ------------------------------------------- | -------------------------------- |
-| [荷戟独彷徨](https://guanqr.com)            | The Sound of Silence             |
-| [Ryan4Yin's Space](https://ryan4yin.space/) | 赞美快乐~                        |
-| [胡涂说](https://hutusi.com/)               | 任抛星汉归园圃，留取乾坤盛酒囊。 |
-| [数学小兵儿](https://matnoble.me/)          | 数学＆计算机 我都爱              |
+|                                             |                                      |
+| ------------------------------------------- | ------------------------------------ |
+| [荷戟独彷徨](https://guanqr.com)            | The Sound of Silence                 |
+| [Ryan4Yin's Space](https://ryan4yin.space/) | 赞美快乐~                            |
+| [胡涂说](https://hutusi.com/)               | 任抛星汉归园圃，留取乾坤盛酒囊。     |
+| [数学小兵儿](https://matnoble.me/)          | 数学＆计算机 我都爱                  |
+| [Power's Wiki](https://wiki-power.com/)     | 一位主动认识我的朋友，涉猎软硬件开发 |
 
 ---
 
 ## 留言
 
-- eMail: yidajiabei+at+gmail.com
+- Email: me+at+yidajiabei.xyz
 - [新建 GitHub issue](https://github.com/tianheg/blog/issues/new)
 
 ## 赞助
