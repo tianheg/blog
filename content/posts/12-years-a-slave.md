@@ -1,9 +1,9 @@
 +++
-date = '2020-11-09T20:19:42+08:00'
-description = '看《为奴十二年》'
-keywords = ['电影']
-tags = ['电影']
-title = '12 Years a Slave'
+title = "为奴十二年（12 Years a Slave）"
+date = 2020-11-09T00:00:00+08:00
+lastmod = 2022-02-10T17:36:57+08:00
+tags = ["电影"]
+draft = false
 +++
 
 12 Years a Slave(为奴十二年) - 2013 - 美国/英国
