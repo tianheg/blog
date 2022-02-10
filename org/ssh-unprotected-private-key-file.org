@@ -1,0 +1,37 @@
+#+SETUPFILE: ./hugo_setup.org
+#+TITLE: =WARNING: UNPROTECTED PRIVATE KEY FILE!= 警告怎样解释
+#+DATE: <2021-12-26 Sun>
+- https://chmodcommand.com/
+- [[https://www.howtogeek.com/168119/fixing-warning-unprotected-private-key-file-on-linux/][Fixing “WARNING: UNPROTECTED PRIVATE KEY FILE!” on Linux]]
+
+这说明公匙和私匙的权限不对。
+
+要对公匙和私匙设置 600 权限：
+
+#+BEGIN_SRC sh
+sudo chmod 600 ~/.ssh/yourkey
+sudo chmod 600 ~/.ssh/yourkey.pub
+#+END_SRC
+
+如果遇到：
+
+#+BEGIN_SRC sh
+Are you sure you want to continue connecting (yes/no)? yes
+Failed to add the host to the list of known hosts (/home/user/.ssh/known_hosts).
+#+END_SRC
+
+说明 =/home/user/.ssh/known_hosts= 的权限不正确，需要修改为 644：
+
+#+BEGIN_SRC sh
+sudo chmod 644 ~/.ssh/known_hosts
+#+END_SRC
+
+最后，可能还需要调整目录的权限为 755：
+
+#+BEGIN_SRC sh
+sudo chmod 755 ~/.ssh
+#+END_SRC
+
+- 600：表示 Ower 可读可写不可执行，Group 和 Others 都不可读不可写不可执行。
+- 644：表示 Ower 可读可写不可执行，Group 和 Others 都可读不可写不可执行。
+- 755：表示 Ower 可读可写可执行，Group 和 Others 都可读不可写可执行。

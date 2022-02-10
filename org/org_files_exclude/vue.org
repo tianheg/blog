@@ -1,0 +1,95 @@
+#+SETUPFILE: ./hugo_setup.org
+#+TITLE: Vue.js
+
+* Declarative Rendering 声明式呈现/渲染
+
+return data
+
+insert function
+
+* Handling User Input 处理用户输入
+
+v-on:click
+
+使用方法更新 App 的状态，而不需要直接操作 DOM，所有的 DOM 操作均由 Vue 完成。我们只需要关注底层逻辑。
+
+=v-model= 让表单输入和应用状态之间的双向绑定变得轻而易举。
+
+* Conditionals and Loops 条件和循环
+
+v-if, v-for
+
+* Composing with Components
+
+组件系统
+
+* Application & Component Instances 应用和组件实例
+
+** Lifecycle Hooks
+
+** Lifecycle Diagram
+
+* Template Syntax
+
+=v-once= 怎么用
+
+=v-bind= 用于属性
+
+** Directives 指令
+
+** Shorthands 速记
+
+*** Caveats 警告
+
+- 对动态参数值的约束：只能是除去 =null= （它的作用是明确移除当前绑定）的字符串，非字符串将显示警告
+- 对动态参数表达式的约束
+
+* Data Properties and Methods 数据属性和方法
+
+** Methods
+
+定义方法的时候不要使用箭头函数，这会阻止 Vue 绑定正确的 =this= 值。
+
+*** Debouncing and Throttling
+
+* Computed Properties and Watchers
+
+** Computed Caching vs Methods
+
+前者变化的前提是：对应的数据改变。
+
+如果数据不改变，就直接返回之前的内容，不需要再次运行函数。
+
+** Computed Setter
+
+** Watchers
+
+** Computed vs Watch Property
+
+* Class and Style Bindings
+
+不能对
+
+#+BEGIN_SRC html
+<div id="app">
+</div>
+#+END_SRC
+
+进行 =:class= ， =:style= 操作
+
+* Conditional Rendering
+
+** =v-if=
+** =v-show=
+** =v-for=
+
+* List Rendering
+
+** Mapping an Array to Elements with =v-for=
+** =v-for= with an Object
+** Maintaining State
+就地补丁策略
+** Array Change Detection
+*** Mutation Methods
+*** Replacing an Array
+** Displaying Filtered/Sorted Results

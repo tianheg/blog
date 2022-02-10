@@ -1,0 +1,180 @@
+#+SETUPFILE: ./hugo_setup.org
+#+TITLE: 技术遐想（一）
+#+DATE: <2022-01-10 Mon>
+从昨天开始，就决定手写一个 Cheatsheet 网站，仿照 [[https://overapi.com/][OverAPI]]。起因是想找到一个页面，能够看到 JS 相关所有理论知识，一搜索就找到了它，很喜欢这种样式。于是仿写的想法就产生了。
+
+有三点需要记录下来：
+
+一、怎样形成适合自己的解决问题的方法论？
+
+最重要的一点：知道自己想要什么。比如说，我想知道怎样用 CSS 画一个正方形，我就会搜索“CSS square”，搜索结果就是答案。再比如，我想知道 JavaScript 的基础概念都有哪些，我试过直接搜索“JS basic concepts”，结果的确有哪些基础念，但这可能并非我真正需要的。
+
+我在解决问题的时候，并没有对问题的本质进行思考。就用上一段的两个例子来说，前者很明确，就是想用 CSS 画个正方形；后者却不那么具体，“基础概念”一词，每个人的理解都不一样，所以我找到的答案都是 *别人认为的基础概念* 。刚开始学习一门语言的时候，我不知道哪些是基础概念，哪些只是需要了解，这个时候了解已经掌握这门语言的人，他们是怎样学习的，就很重要。之后再思考：掌握一门语言的关键在哪里（数据类型，函数）。
+
+遇到问题，怎样进行分析？
+
+1. 你要知道，这个问题是否真的是个问题。因为有时，我们会误以为这是个很困难的问题，直到解决了那一刻才意识到，原来这么容易就能解决。为什么我们没有在最开始就想到这一点？可能的原因就是，没有对问题的本质进行探讨。还是上文想知道 JS 基本概念的例子，其实我并不只是想知道 JS 的基本概念，我还想了解语言的整体，我要知道它有哪些部分构成，分别都起什么作用。这就是在 What 层面上的思考，即它是否是一个问题。
+2. How 层面。这个问题是怎样产生的？代码层面，能不能做一个最小 demo 把问题复现。
+3. Why 层面。问题出现了，为什么会在这里出现这样的问题，是否了解了足够多的背景信息？官方文档是否逐字句阅读过？
+4. 还有其他需要思考之处：在解决问题的过程中，你能查阅哪些资料，我知道的有 MDN，GitHub，搜索引擎；你有没有找到更好的解决办法；为了不让自己重复解决相同或类似的问题，写成博客或是记笔记就是一个好办法；通过这次问题，学习到了哪些东西。
+
+致谢：
+
+1. [[https://github.com/lencx/z/discussions/79][解决问题方法论]]
+2. [[https://program-think.blogspot.com/2009/02/study-technology-in-three-steps.html][学习技术的三部曲：WHAT、HOW、WHY]]
+
+二、给定一个颜色数组，如何让它和网页中的目标元素一一对应
+
+#+BEGIN_SRC js
+const rgbas = [
+  "rgba(251,34,240,0.25)",
+  "rgba(214,17,21,0.25)",
+  "rgba(14,251,252,0.25)",
+  "rgba(158,134,255,0.25)",
+  "rgba(60,255,20,0.25)",
+  "rgba(44,158,52,0.25)",
+  "rgba(225,211,20,0.25)",
+  "rgba(100,117,121,0.25)",
+];
+const boards = document.getElementsByClassName("board");
+
+rgbas.forEach(() => {
+  for (let i = 0; i < boards.length; i++) {
+    boards[i].style.backgroundColor = rgbas[i];
+  }
+})
+#+END_SRC
+
+- 定义了颜色数组 rgbas[8]
+- 将第一个颜色分配给第一个 board 元素；第二个颜色分配给第二个 board 元素；以此类推
+
+下面赋值的部分还有另一种写法：
+
+#+BEGIN_SRC js
+for (let i = 0; i < rgbas.length; i++) {
+  for (let j = 0; j < boards.length; j++) {
+    ...
+  }
+}
+#+END_SRC
+
+最开始想出的代码是这个样子：
+
+#+BEGIN_SRC js
+for (let j = 0; j < rgbas.length; j++) {
+  for (let i = 0; i < boards.length; i++) {
+    boards[i].style.backgroundColor = rgbas[j];
+  }
+}
+#+END_SRC
+
+想实现上述效果，但却发现：每一个 board 都有相同的背景色，思考一会儿才发现，如果这样写就会把颜色数组 rgbas 的最后一个颜色元素赋值给每一个 board。
+
+致谢：[[https://50projects50days.com/js/main.js][main.js]]
+
+三、怎样在多个页面应用相同的 HTML
+
+我接触到一个概念——Web Components。在制作网站时，在很多页面都会共用同一个 header 和 footer，Web Components 就是帮助我们复用这些共同代码的。
+
+=index.html= ：
+
+#+BEGIN_SRC html
+<!DOCTYPE html>
+<html>
+  <head>
+    ...
+    <script src="./components/header.js" defer></script>
+  </head>
+  <body>
+    <header-component></header-component>
+  </body>
+</html>
+#+END_SRC
+
+=./components/header.js= ：
+
+#+BEGIN_SRC js
+const headerTemplate = document.createElement("template");
+
+headerTemplate.innerHTML = `
+  <style>
+    header {
+      background: rgba(0, 0, 0, 0.6);
+      color: #999;
+      width: 100%;
+      z-index: 2;
+      display: flex;
+    }
+
+    header a {
+      text-decoration: none;
+      color: #fff;
+      outline: none;
+    }
+    header a:visited {
+      color: #999;
+    }
+    header a:hover {
+      color: #fff;
+    }
+
+    header a#logo {
+      color: #fff;
+      font-size: 18px;
+      font-weight: bold;
+      margin: 0;
+      padding: 15px;
+      text-align: center;
+    }
+
+    header ul {
+      display: flex;
+
+    }
+    ul li {
+      margin-right: 5px;
+      padding: 0 5px;
+      list-style-type: none;
+    }
+    ul li a {
+      display: block;
+    }
+  </style>
+  <header>
+    <a href="/" id="logo">Home</a>
+    <ul>
+      <li><a href="javascript.html">JavaScript</a></li>
+      <li><a href="css.html">CSS</a></li>
+      <li><a href="html.html">HTML</a></li>
+      <li><a href="developer-tools.html">Developer Tools</a></li>
+    </ul>
+  </header>
+`;
+
+class Header extends HTMLElement {
+  constructor() {
+    super();
+  }
+
+  connectedCallback() {
+    const shadowRoot = this.attachShadow({ mode: "closed" });
+
+    shadowRoot.appendChild(headerTemplate.content);
+  }
+}
+
+customElements.define("header-component", Header);
+#+END_SRC
+
+实现一个 Web Component 的一般步骤：
+
+1. 对现有 Class 的功能进行扩展，创建自己的 Class
+2. 使用 CustomElementRegistry.define() 方法注册你的自定义标签
+3. 如果需要，附加 shadow DOM 到自定义元素中
+4. 如果需要，使用 <template> 和 <slot> 定义 HTML 模板。再一次使用常规 DOM 方法克隆模板，并把它附加在你的 shadow DOM 下
+5. 你可以在任何你需要的页面使用你的自定义标签
+
+致谢：
+
+1. [[https://developer.mozilla.org/en-US/docs/Web/Web_Components][Web Components - MDN]]
+2. [[https://www.freecodecamp.org/news/reusable-html-components-how-to-reuse-a-header-and-footer-on-a-website/][Reusable HTML Components – How to Reuse a Header and Footer on a Website]]

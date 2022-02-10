@@ -1,0 +1,72 @@
+#+SETUPFILE: ./hugo_setup.org
+#+TITLE: LC101. 对称二叉树
+#+DATE: <2021-11-26 Fri>
+今天思考 LeetCode 题目：对称二叉树[fn:sym-tree]。
+
+* 题目描述
+
+给定一个二叉树，检查它是否是镜像对称的。
+
+例如，二叉树 =[1, 2, 2, 3, 4, 4, 3]= 是对称的。
+
+#+BEGIN_SRC text
+    1
+   / \
+  2   2
+ / \ / \
+3  4 4  3
+#+END_SRC
+
+下面这个 =[1, 2, 2, null, 3, null, 3]= 就不是：
+
+#+BEGIN_SRC text
+    1
+   / \
+  2   2
+   \   \
+   3    3
+#+END_SRC
+
+进阶：可以用递归和迭代两种方法解决这个问题吗？
+
+* 题解[fn:101-tijie]
+
+#+BEGIN_SRC js
+/**
+ * Definition for a binary tree node.
+ * function TreeNode(val, left, right) {
+ *     this.val = (val===undefined ? 0 : val)
+ *     this.left = (left===undefined ? null : left)
+ *     this.right = (right===undefined ? null : right)
+ * }
+ */
+/**
+ * @param {TreeNode} root
+ * @return {boolean}
+ */
+var isSymmetric = function (root) {
+    // 使用递归遍历左右子树 递归三部曲
+    // 1. 确定递归的参数 root.left root.right 和返回值 true false 
+    const compareNode = function (left, right) {
+        // 2. 确定终止条件 空的情况
+        if (left === null && right !== null || left !== null && right === null) {
+            return false;
+        } else if (left === null && right === null) {
+            return true;
+        } else if (left.val !== right.val) {
+            return false;
+        }
+        // 3. 确定单层递归逻辑
+        let outSide = compareNode(left.left, right.right);
+        let inSide = compareNode(left.right, right.left);
+        return outSide && inSide;
+    }
+    if (root === null) {
+        return true;
+    }
+    return compareNode(root.left, root.right);
+};
+#+END_SRC
+
+[fn:sym-tree] https://leetcode-cn.com/problems/symmetric-tree/
+[fn:101-tijie] <https://leetcode-cn.com/problems/symmetric-tree/solution/dai-ma-sui-xiang-lu-dai-ni-xue-tou-er-ch-hnjo/#:~:text=Right)%3B%0A%20%20%20%20%7D%0A%20%20%20%20return%20true%3B%0A%7D-,JavaScript,-%E9%80%92%E5%BD%92%E5%88%A4%E6%96%AD>
