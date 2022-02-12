@@ -1,3 +1,0 @@
-+++
-slug = 'george-bernard-shaw'
-+++
