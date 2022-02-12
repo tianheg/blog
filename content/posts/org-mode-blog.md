@@ -1,24 +1,28 @@
-#+SETUPFILE: ./hugo_setup.org
-#+TITLE: 使用 Org Mode 写博客
-#+DATE: <2021-12-08 Wed>
-#+HUGO_TAGS: Orgmode 技术
++++
+title = "使用 Org Mode 写博客"
+date = 2021-12-08T00:00:00+08:00
+lastmod = 2022-02-12T21:41:38+08:00
+tags = ["Orgmode", "技术"]
+draft = false
++++
 
-1. https://github.com/dirtysalt/dirtysalt.github.io
-2. https://www.zhangjiee.com/blog/2019/build-site-with-org-mode.html
-3. https://waychan.cn/blog/2019/blogging-with-orgmode
-4. [[https://www.shellcodes.org/Emacs/%E4%BD%BF%E7%94%A8Org-Mode%E7%94%9F%E6%88%90%E5%8D%9A%E5%AE%A2.html][使用 Org-Mode 生成博客]]
+1.  <https://github.com/dirtysalt/dirtysalt.github.io>
+2.  <https://www.zhangjiee.com/blog/2019/build-site-with-org-mode.html>
+3.  <https://waychan.cn/blog/2019/blogging-with-orgmode>
+4.  [使用 Org-Mode 生成博客](https://www.shellcodes.org/Emacs/%E4%BD%BF%E7%94%A8Org-Mode%E7%94%9F%E6%88%90%E5%8D%9A%E5%AE%A2.html)
 
 11 月 20 日，开始用 Org-mode 构建博客。
 
-* 如何构建
+
+## 如何构建 {#如何构建}
 
 我的主要参考资料已经放在文章开头。
 
-源文件路径： =~/org/= ，生成路径： =~/repo/blog/= 。
+源文件路径： `~/org/` ，生成路径： `~/repo/blog/` 。
 
 源文件目录结构：
 
-#+BEGIN_SRC text
+```text
 .
 ├── blog
 │  ├── 2018
@@ -49,11 +53,11 @@
    ├── coding.org
    ├── learn.org
    └── leetcode.org
-#+END_SRC
+```
 
 生成路径目录结构：
 
-#+BEGIN_SRC text
+```text
 .
 ├── blog
 ├── CHANGELOG.md
@@ -83,21 +87,21 @@
 │  ├── nil-site-tpl.org
 │  └── site-tpl.org
 └── videos
-#+END_SRC
+```
 
-生成路径的仓库在 [[https://github.com/tianheg/blog][GitHub:tianheg/blog]] 。blog 目录下的 script 文件夹里放置了生成 html 的脚本文件，tpl 文件夹下的文件内容被导入每一个博客文件：
+生成路径的仓库在 [GitHub:tianheg/blog](https://github.com/tianheg/blog) 。blog 目录下的 script 文件夹里放置了生成 html 的脚本文件，tpl 文件夹下的文件内容被导入每一个博客文件：
 
-#+BEGIN_SRC org
+```org
 #+SETUPFILE: ./hugo_setup.org
 
 或者
 
 #+SETUPFILE: ./hugo_setup.org
-#+END_SRC
+```
 
-主要配置文件 =publish.el= ：
+主要配置文件 `publish.el` ：
 
-#+BEGIN_SRC elisp
+```elisp
 ;; load env
 (load "~/.emacs.d/init.el")
 
@@ -122,10 +126,10 @@
 
 ;; (progn (profiler-start 'cpu) (org-publish-project "site") (profiler-report) (profiler-stop))
 (org-publish-project "site")
-#+END_SRC
+```
 
 生成 html：
 
-#+BEGIN_SRC sh
+```sh
 emacs --batch --script ./scripts/publish.el
-#+END_SRC
+```

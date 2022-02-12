@@ -1,6 +1,8 @@
 #+SETUPFILE: ./hugo_setup.org
 #+TITLE: 自动发布 Org Mode
 #+DATE: <2022-01-08 Sat>
+#+HUGO_TAGS: Orgmode 技术
+
 使用了 crontab。
 
 #+BEGIN_SRC sh
@@ -21,8 +23,7 @@ crontab -e
 =~/org/publish.sh= 内容：
 
 #+begin_src sh
-\\#!/bin/bash # 该行在实际使用时，只有 #!/bin/bash
-# 如果不加\\，导出的 html 文件中无法显示#
+#!/bin/bash
 
 # 如果没有下面这一行，就不能通过 publickey push 到远程仓库
 export GIT_SSH_COMMAND="ssh -i /home/$USER/.ssh/private_key"
