@@ -1,3 +1,0 @@
-+++
-slug = 'study-and-life'
-+++
