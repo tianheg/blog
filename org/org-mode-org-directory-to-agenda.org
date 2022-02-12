@@ -1,0 +1,10 @@
+#+SETUPFILE: ./hugo_setup.org
+#+TITLE: Orgmode 加载文件夹下的所有 Org 文件到 Agenda
+#+DATE: <2022-02-12 Sat>
+#+HUGO_TAGS: Orgmode 技术
+
+https://www.emacswiki.org/emacs/OrgMode
+
+#+BEGIN_SRC elisp
+(setq org-agenda-files (file-expand-wildcards "~/org/*.org"))
+#+END_SRC
