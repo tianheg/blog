@@ -1,9 +1,10 @@
 +++
 title = "学习《网道 JavaScript 教程》"
 date = 2022-02-12T00:00:00+08:00
-lastmod = 2022-02-14T12:07:17+08:00
+lastmod = 2022-02-14T18:46:45+08:00
 tags = ["JavaScript", "技术"]
 draft = false
+mathjax = true
 +++
 
 <https://wangdoc.com/javascript/index.html>
