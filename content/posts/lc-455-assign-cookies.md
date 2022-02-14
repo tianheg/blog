@@ -1,7 +1,7 @@
 +++
 title = "LC455. 分发饼干"
 date = 2022-02-14T00:00:00+08:00
-lastmod = 2022-02-14T15:08:51+08:00
+lastmod = 2022-02-14T21:06:42+08:00
 tags = ["技术", "LeetCode"]
 draft = false
 +++
@@ -69,6 +69,8 @@ console.log(findContentChildren([1,2,3], [1,6,3])); // 3
 3.  将所有解综合起来
 
 LeetCode 第 860 题（柠檬水找零）也涉及了贪心算法。
+
+代码中的一部分，与实现归并排序的代码相类似。
 
 [^fn:1]: <https://leetcode-cn.com/problems/assign-cookies/>
 [^fn:2]: <https://leetcode-cn.com/problems/assign-cookies/solution/fen-fa-bing-gan-by-leetcode-solution-50se/>
