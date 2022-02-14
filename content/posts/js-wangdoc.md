@@ -1,7 +1,7 @@
 +++
 title = "学习《网道 JavaScript 教程》"
 date = 2022-02-12T00:00:00+08:00
-lastmod = 2022-02-13T15:34:59+08:00
+lastmod = 2022-02-14T12:07:17+08:00
 tags = ["JavaScript", "技术"]
 draft = false
 +++
@@ -496,7 +496,9 @@ Infinity 与 undefined 计算，返回的都是 NaN。
 
 #### 与数值相关的全局方法 {#与数值相关的全局方法}
 
--   `parseInt()` 字符串->整数/NaN
--   `parseFloat()` 字符串->浮点数
+-   `parseInt()` 字符串-&gt;整数/NaN
+-   `parseFloat()` 字符串-&gt;浮点数
 -   `isNaN()`
 -   `isFinite()`
+
+测试 ox-hugo 保存自动导出 md 功能
