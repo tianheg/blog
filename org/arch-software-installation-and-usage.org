@@ -1,173 +1,140 @@
 #+SETUPFILE: ./hugo_setup.org
 #+TITLE: Arch 软件安装和用法
 #+DATE: <2021-08-20 Fri>
-** 隐藏 GRUB 加载
-   :PROPERTIES:
-   :CUSTOM_ID: 隐藏-grub-加载
-   :END:
+#+HUGO_TAGS: Archlinux 技术
+#+HUGO_CUSTOM_FRONT_MATTER: :toc true
+* 隐藏 GRUB 加载
 尝试过这种办法[fn:1]，没起作用；然后尝试这一个[fn:2]成功了：
+#+BEGIN_SRC sh
+sudo vim /etc/default/grub
+sudo grub-mkconfig -o /boot/grub/grub.cfg
+#+END_SRC
+
+修改 =etc/default/grub= :
+
+#+BEGIN_SRC diff
+-GRUB_TIMEOUT=1
++GRUB_TIMEOUT=0
+#+END_SRC
+
+* 挂载
+挂载外来文件系统，推荐使用 udiskctl(install udisks2, =pkgfile -b udisksctl= ) 命令，很多时候不需要 root 权限就能挂载和卸载[fn:3]。
+
+* Reflector 更新镜像[fn:4]
+** 开机自动执行
+=/etc/xdg/reflector/reflector.conf= ：
 
 #+begin_example
-  sudo vim /etc/default/grub
-  sudo grub-mkconfig -o /boot/grub/grub.cfg
+--save /etc/pacman.d/mirrorlist
+--country China
+--protocol https
+--latest 5
 #+end_example
 
-修改 =etc/default/grub=:
+#+BEGIN_SRC sh
+systemctl enable reflector
+systemctl start reflector
+#+END_SRC
+
+** 通过 Pacman hook 自动化以上步骤
+=/etc/pacman.d/hooks/mirrorupgrade.hook= ：
 
 #+begin_example
-  -GRUB_TIMEOUT=1
-  +GRUB_TIMEOUT=0
+[Trigger]
+Operation = Upgrade
+Type = Package
+Target = pacman-mirrorlist
+
+[Action]
+Description = Updating pacman-mirrorlist with reflector and removing pacnew...
+When = PostTransaction
+Depends = reflector
+Exec = /bin/sh -c 'systemctl start reflector.service; [ -f /etc/pacman.d/mirrorlist.pacnew ] && rm /etc/pacman.d/mirrorlist.pacnew'
 #+end_example
 
-** 挂载
-   :PROPERTIES:
-   :CUSTOM_ID: 挂载
-   :END:
-挂载外来文件系统，推荐使用 udiskctl(install udisks2,
-=pkgfile -b udisksctl=) 命令，很多时候不需要 root
-权限就能挂载和卸载[fn:3]。
+* 设置代理
+** Clash
+#+BEGIN_SRC sh
+export CLASH_VERSION="1.6.5"
+wget -O clash.gz https://github.com/Dreamacro/clash/releases/download/v${CLASH_VERSION}/clash-linux-amd64-v${CLASH_VERSION}.gz
+gzip -f clash.gz -d
+sudo mv ~/clash /usr/local/bin/clash
+chmod +x /usr/local/bin/clash
+clash # Generate config.yaml, Country.mmdb in ~/.config/clash
+## download yaml file from your service provider, rename it to config.yaml, put it under your clash folder
 
-** Reflector 更新镜像[fn:4]
-   :PROPERTIES:
-   :CUSTOM_ID: reflector-更新镜像 4
-   :END:
-*** 开机自动执行
-    :PROPERTIES:
-    :CUSTOM_ID: 开机自动执行
-    :END:
-=/etc/xdg/reflector/reflector.conf=:
+# open clash at start https://github.com/Dreamacro/clash/wiki/clash-as-a-daemon
+sudo vim /etc/systemd/system/clash.service
+#+END_SRC
 
-#+begin_example
-  --save /etc/pacman.d/mirrorlist
-  --country China
-  --protocol https
-  --latest 5
-#+end_example
+=/etc/systemd/system/clash.service= ：
 
 #+begin_example
-  systemctl enable reflector
-  systemctl start reflector
-#+end_example
+[Unit]
+Description=Clash daemon, A rule-based proxy in Go.
+After=network.target
 
-*** 通过 Pacman hook 自动化以上步骤
-    :PROPERTIES:
-    :CUSTOM_ID: 通过-pacman-hook-自动化以上步骤
-    :END:
-=/etc/pacman.d/hooks/mirrorupgrade.hook=:
+[Service]
+Type=simple
+Restart=always
+ExecStart=/usr/local/bin/clash -d "/home/archie/.config/clash"
 
-#+begin_example
-  [Trigger]
-  Operation = Upgrade
-  Type = Package
-  Target = pacman-mirrorlist
-
-  [Action]
-  Description = Updating pacman-mirrorlist with reflector and removing pacnew...
-  When = PostTransaction
-  Depends = reflector
-  Exec = /bin/sh -c 'systemctl start reflector.service; [ -f /etc/pacman.d/mirrorlist.pacnew ] && rm /etc/pacman.d/mirrorlist.pacnew'
-#+end_example
-
-*** 设置代理
-    :PROPERTIES:
-    :CUSTOM_ID: 设置代理
-    :END:
-*** Clash
-    :PROPERTIES:
-    :CUSTOM_ID: clash
-    :END:
-#+begin_example
-  export CLASH_VERSION="1.6.5"
-  wget -O clash.gz https://github.com/Dreamacro/clash/releases/download/v${CLASH_VERSION}/clash-linux-amd64-v${CLASH_VERSION}.gz
-  gzip -f clash.gz -d
-  sudo mv ~/clash /usr/local/bin/clash
-  chmod +x /usr/local/bin/clash
-  clash # Generate config.yaml, Country.mmdb in ~/.config/clash
-  ## download yaml file from your service provider, rename it to config.yaml, put it under your clash folder
-
-  # open clash at start https://github.com/Dreamacro/clash/wiki/clash-as-a-daemon
-  sudo vim /etc/systemd/system/clash.service
-#+end_example
-
-=/etc/systemd/system/clash.service=:
-
-#+begin_example
-  [Unit]
-  Description=Clash daemon, A rule-based proxy in Go.
-  After=network.target
-
-  [Service]
-  Type=simple
-  Restart=always
-  ExecStart=/usr/local/bin/clash -d "/home/archie/.config/clash"
-
-  [Install]
-  WantedBy=multi-user.target
+[Install]
+WantedBy=multi-user.target
 #+end_example
 
 测试代理是否有效（脚本不起作用）[fn:5]：
 
 #+begin_example
-  # 来自「依云」https://blog.lilydjwg.me
-  def test_youtube(port: int) -Union[str, bool]:
-    output = subprocess.check_output([
-      'curl', '-sS', '-m30', '-H', 'Accept-Language: en',
-      'https://www.youtube.com/premium', '--socks5-hostname', f'localhost:{port}',
-    ], text=True)
-    if 'Premium is not available in your country' in output:
-      return False
-    m = re.search(r'countryCode":"(\w+)', output)
-    if m:
-      return m.group(1)
-    else:
-      return 'US'
+# 来自「依云」https://blog.lilydjwg.me
+def test_youtube(port: int) -Union[str, bool]:
+  output = subprocess.check_output([
+    'curl', '-sS', '-m30', '-H', 'Accept-Language: en',
+    'https://www.youtube.com/premium', '--socks5-hostname', f'localhost:{port}',
+  ], text=True)
+  if 'Premium is not available in your country' in output:
+    return False
+  m = re.search(r'countryCode":"(\w+)', output)
+  if m:
+    return m.group(1)
+  else:
+    return 'US'
 #+end_example
 
-** 输入法配置[fn:6]
-   :PROPERTIES:
-   :CUSTOM_ID: 输入法配置 6
-   :END:
+* 输入法配置[fn:6]
 想把 ibus 移除，只使用 fcitx。后来发现 ibus 被很多程序依赖无法删除。
 
-#+begin_example
-  sudo pacman -S fcitx-im fcitx-configtool fcitx-googlepinyin
-#+end_example
+#+BEGIN_SRC sh
+sudo pacman -S fcitx-im fcitx-configtool fcitx-googlepinyin
+#+END_SRC
 
 Add support for gtk,qt:
 
 添加对 gtk，qt 类（指通过 gtk、qt 编程得到的软件）软件的支持：
 
 #+begin_example
-  # /etc/profile
-  export XMODIFIERS="@im=fcitx"
-  export GTK_IM_MODULE="fcitx"
-  export QT_IM_MODULE="fcitx"
+# /etc/profile
+export XMODIFIERS="@im=fcitx"
+export GTK_IM_MODULE="fcitx"
+export QT_IM_MODULE="fcitx"
 #+end_example
 
 升级 fcitx 版本 4->5，并安装词库、主题：
 
-#+begin_example
-  sudo pacman -Rsc fcitx
-  sudo pacman -S fcitx5-im fcitx5-chinese-addons fcitx5-pinyin-zhwiki fcitx5-material-color
-#+end_example
+#+BEGIN_SRC sh
+sudo pacman -Rsc fcitx
+sudo pacman -S fcitx5-im fcitx5-chinese-addons fcitx5-pinyin-zhwiki fcitx5-material-color
+#+END_SRC
 
 配置开机启动；主题：material-color-black
 
-*** fcitx5 使用发现
-    :PROPERTIES:
-    :CUSTOM_ID: fcitx5-使用发现
-    :END:
-=Enter= 回车键异常：中文模式下，按 ； 后再按 Enter
-无法输入英文分号。可能不是问题，刚从 fcitx4 升级到 fcitx5。
+** fcitx5 使用发现
 
-经过这些时间的磨合，发现：这的确是一个
-bug。过段时间，我改变了想法，想到这可能是因为不同软件之间 =Enter=
-键的作用不同造成的。
+=Enter= 回车键异常：中文模式下，按 ； 后再按 Enter 无法输入英文分号。可能不是问题，刚从 fcitx4 升级到 fcitx5。
 
-** 字体[fn:7]
-   :PROPERTIES:
-   :CUSTOM_ID: 字体 7
-   :END:
+经过这些时间的磨合，发现：这的确是一个 bug。过段时间，我改变了想法，想到这可能是因为不同软件之间 =Enter= 键的作用不同造成的。
+
+* 字体[fn:7]
 使用的是以前用过的 GNOME 桌面环境的默认字体设置：
 
 - Cantarell Regular 11
@@ -176,10 +143,10 @@ bug。过段时间，我改变了想法，想到这可能是因为不同软件�
 
 所有安装的字体：
 
-#+begin_example
-  sudo pacman -S noto-fonts noto-fonts-extra noto-fonts-emoji noto-fonts-cjk ttf-dejavu ttf-liberation ttf-roboto ttf-inconsolata ttf-linux-libertine ttf-droid adobe-source-han-sans-cn-fonts adobe-source-han-serif-cn-fonts
-  yay -S otf-eb-garamond ttf-monaco otf-san-francisco consolas-font
-#+end_example
+#+BEGIN_SRC sh
+sudo pacman -S noto-fonts noto-fonts-extra noto-fonts-emoji noto-fonts-cjk ttf-dejavu ttf-liberation ttf-roboto ttf-inconsolata ttf-linux-libertine ttf-droid adobe-source-han-sans-cn-fonts adobe-source-han-serif-cn-fonts
+yay -S otf-eb-garamond ttf-monaco otf-san-francisco consolas-font
+#+END_SRC
 
 中文：
 
@@ -189,209 +156,172 @@ noto-fonts, noto-fonts-cjk, noto-fonts-emoji, noto-fonts-extra
 
 monaco, menlo, hack, IBM Plex Mono
 
-- 命令行安装的字体所在的目录：=/usr/share/fonts/=
-- 手动安装的字体所在的目录：=~/.local/share/fonts/=
+- 命令行安装的字体所在的目录： =/usr/share/fonts/=
+- 手动安装的字体所在的目录： =~/.local/share/fonts/=
 
-#+begin_example
-  fc-cache -fv # 更新字体缓存
-#+end_example
+#+BEGIN_SRC sh
+fc-cache -fv # 更新字体缓存
+#+END_SRC
 
-** 蓝牙
-   :PROPERTIES:
-   :CUSTOM_ID: 蓝牙
-   :END:
-#+begin_example
-  sudo systemctl enable --now bluetooth
-#+end_example
+* 蓝牙
+#+BEGIN_SRC sh
+sudo systemctl enable --now bluetooth
+#+END_SRC
 
-** Git
-   :PROPERTIES:
-   :CUSTOM_ID: git
-   :END:
-#+begin_example
-  wget -O ~/.gitconfig https://github.com/tianheg/dotfiles/raw/main/gitconfig
-  # 不要忘记 commit.gpgsign true
+* Git
+#+BEGIN_SRC sh
+wget -O ~/.gitconfig https://github.com/tianheg/dotfiles/raw/main/gitconfig
+# 不要忘记 commit.gpgsign true
 
-  ## SSH
-  chmod 400 ~/.ssh/id_ed25519
-  # 解决 sign_and_send_pubkey: signing failed for ED25519 "/home/user/.ssh/id_ed25519" from agent: agent refused operation; git@github.com: Permission denied (publickey).
-#+end_example
+## SSH
+chmod 400 ~/.ssh/id_ed25519
+# 解决 sign_and_send_pubkey: signing failed for ED25519 "/home/user/.ssh/id_ed25519" from agent: agent refused operation; git@github.com: Permission denied (publickey).
+#+END_SRC
 
-** GPG
-   :PROPERTIES:
-   :CUSTOM_ID: gpg
-   :END:
+* GPG
 修改 =~/.gnupg/= 权限：
 
-#+begin_example
-  # https://superuser.com/a/954536 ; https://superuser.com/a/954639
-  # Set ownership to your own user and primary group
-  chown -R "$USER:$(id -gn)" ~/.gnupg
-  # Set permissions to read, write, execute for only yourself, no others
-  chmod 700 ~/.gnupg
-  # Set permissions to read, write for only yourself, no others
-  chmod 600 ~/.gnupg/*
-#+end_example
+#+BEGIN_SRC sh
+# https://superuser.com/a/954536 ; https://superuser.com/a/954639
+# Set ownership to your own user and primary group
+chown -R "$USER:$(id -gn)" ~/.gnupg
+# Set permissions to read, write, execute for only yourself, no others
+chmod 700 ~/.gnupg
+# Set permissions to read, write for only yourself, no others
+chmod 600 ~/.gnupg/*
+#+END_SRC
 
-这几条命令解决
-=gpg: WARNING: unsafe permissions on homedir '/home/user/.gnupg'=。
+这几条命令解决 =gpg: WARNING: unsafe permissions on homedir '/home/user/.gnupg'= 。
 
-*把 ~/.gnupg 文件夹保存在安全的地方*，然后导入公匙 GitHub(user +
-web-flow)：
+*把 ~/.gnupg 文件夹保存在安全的地方* ，然后导入 GitHub(user + web-flow)公匙：
 
-#+begin_example
-  wget -O tianheg-pubkeys.txt https://github.com/tianheg.gpg
-  wget -O github-web-flow.txt https://github.com/web-flow.gpg
-  gpg --import tianheg-pubkeys.txt
-  gpg --import github-web-flow.txt
-#+end_example
+#+BEGIN_SRC sh
+wget -O tianheg-pubkeys.txt https://github.com/tianheg.gpg
+wget -O github-web-flow.txt https://github.com/web-flow.gpg
+gpg --import tianheg-pubkeys.txt
+gpg --import github-web-flow.txt
+#+END_SRC
 
-** 键盘映射[fn:8]
-   :PROPERTIES:
-   :CUSTOM_ID: 键盘映射 17
-   :END:
+* 键盘映射[fn:8]
 把上下左右建映射到字母键：
 
-#+begin_example
-  vim ~/ijkl
-  xmodmap ~/ijkl
-#+end_example
+#+BEGIN_SRC sh
+vim ~/ijkl
+xmodmap ~/ijkl
+#+END_SRC
 
-=ijkl=:
+=ijkl= ：
 
-#+begin_example
-  keycode 66 = Mode_switch
-  keysym j = j J Left
-  keysym l = l L Right
-  keysym i = i I Up
-  keysym k = k K Down
-#+end_example
+#+BEGIN_SRC sh
+keycode 66 = Mode_switch
+keysym j = j J Left
+keysym l = l L Right
+keysym i = i I Up
+keysym k = k K Down
+#+END_SRC
 
-但是，在做完以上步骤后，我的 Left Ctrl -> CapsLock
-的映射失效了，所以我需要修改文件内容。
+但是，在做完以上步骤后，我的 Left Ctrl -> CapsLock 的映射失效了，所以我需要修改文件内容。
 
-让一切恢复之前的状态的命令：=setxkbmap -layout us=。
+让一切恢复之前的状态的命令： =setxkbmap -layout us= 。
 
-** pacman
-   :PROPERTIES:
-   :CUSTOM_ID: pacman
-   :END:
-Is it possible that there is a major kernel update in the repository,
-and that some of the driver packages have not been updated?
+* pacman
+Is it possible that there is a major kernel update in the repository, and that some of the driver packages have not been updated?
 
-No, it is not possible. Major kernel updates (e.g. linux 3.5.0-1 to
-linux 3.6.0-1) are always accompanied by rebuilds of all supported
-kernel driver packages. On the other hand, if you have an unsupported
-driver package (e.g. from the AUR) installed on your system, then a
-kernel update might break things for you if you do not rebuild it for
-the new kernel. Users are responsible for updating any unsupported
-driver packages that they have installed.
+No, it is not possible. Major kernel updates (e.g. linux 3.5.0-1 to linux 3.6.0-1) are always accompanied by rebuilds of all supported kernel driver packages. On the other hand, if you have an unsupported driver package (e.g. from the AUR) installed on your system, then a kernel update might break things for you if you do not rebuild it for the new kernel. Users are responsible for updating any unsupported driver packages that they have installed.
 
-*** 配置 pacman
-    :PROPERTIES:
-    :CUSTOM_ID: 配置-pacman
-    :END:
-添加库 =/etc/pacman.conf=：
+** 配置 pacman
+添加库 =/etc/pacman.conf= ：
 
-#+begin_example
-  [archlinuxcn]
-  Server = https://repo.archlinuxcn.org/$arch
-#+end_example
+#+BEGIN_SRC conf
+[archlinuxcn]
+Server = https://repo.archlinuxcn.org/$arch
+#+END_SRC
 
 分布在中国境内的镜像见这里[fn:9]。
 
 导入 PGP 公匙（为了验证 archlinuxcn 库）:
 
-#+begin_example
-  sudo pacman -Syy && sudo pacman -S archlinuxcn-keyring
-#+end_example
+#+BEGIN_SRC sh
+sudo pacman -Syy && sudo pacman -S archlinuxcn-keyring
+#+END_SRC
 
-*** pacman 命令
-    :PROPERTIES:
-    :CUSTOM_ID: pacman-命令
-    :END:
-#+begin_example
-  ## 常用
-  pacman -Qe # List all explicitly installed packages
-  pacman -Qet # list all packages explicitly installed and not required as dependencies
-  pacman -Qent # List all explicitly installed native packages (i.e. present in the sync database) that are not direct or optional dependencies
-  pacman -Qn # List all native packages (installed from the sync database(s))
-  pacman -Qm # List all foreign packages (typically manually downloaded and installed or packages removed from the repositories)
+** pacman 命令
+#+BEGIN_SRC sh
+## 常用
+pacman -Qe # List all explicitly installed packages
+pacman -Qet # list all packages explicitly installed and not required as dependencies
+pacman -Qent # List all explicitly installed native packages (i.e. present in the sync database) that are not direct or optional dependencies
+pacman -Qn # List all native packages (installed from the sync database(s))
+pacman -Qm # List all foreign packages (typically manually downloaded and installed or packages removed from the repositories)
 
-  sudo pacman -Qtdq | sudo pacman -Rns - # recursively removing orphans and their configuration files
+sudo pacman -Qtdq | sudo pacman -Rns - # recursively removing orphans and their configuration files
 
-  sudo pacman -Qii | awk '/^MODIFIED/ {print $2}' # print modified files under /etc
+sudo pacman -Qii | awk '/^MODIFIED/ {print $2}' # print modified files under /etc
 
-  pacman -Qs regex # List packages by regex
+pacman -Qs regex # List packages by regex
 
-  pacman -Qg group_name # List installed packages under this group
-  pacman -Sg group # List all packages in the package group named `group`, etc, base-devel, gnome
-  pacman -Qq | grep -Ee '-(bzr|cvs|darcs|git|hg|svn)$' # list all development/unstable packages
-  pacman -Syu # Update package list and upgrade all packages afterwards
-  pacman -Syu git # Update package list, upgrade all packages, and then install git if it wasn’t already installed
+pacman -Qg group_name # List installed packages under this group
+pacman -Sg group # List all packages in the package group named `group`, etc, base-devel, gnome
+pacman -Slq | rg <package> # search package_name
+pacman -Qq | grep -Ee '-(bzr|cvs|darcs|git|hg|svn)$' # list all development/unstable packages
+pacman -Syu # Update package list and upgrade all packages afterwards
+pacman -Syu git # Update package list, upgrade all packages, and then install git if it wasn’t already installed
 
-  pacman -S package_name1 package_name2 # Installing specific packages
-  pacman -S $(pacman -Ssq package_regex) # Install a list of packages with regex
-  pacman -S extra/package_name # Install specific repositories' package
-  pacman -S plasma-{desktop,mediacenter,nm}
-  pacman -S plasma-{workspace{,-wallpapers},pa}
+pacman -S package_name1 package_name2 # Installing specific packages
+pacman -S $(pacman -Ssq package_regex) # Install a list of packages with regex
+pacman -S extra/package_name # Install specific repositories' package
+pacman -S plasma-{desktop,mediacenter,nm}
+pacman -S plasma-{workspace{,-wallpapers},pa}
 
-  pacman -S gnome # Install through group of packages
-  Enter a selection (default=all): 1-10 15 # which will select packages 1 through 10 and 15 for installation
-  Enter a selection (default=all): ^5-8 ^2 # which will select all packages except 5 through 8 and 2 for installation
+pacman -S gnome # Install through group of packages
+Enter a selection (default=all): 1-10 15 # which will select packages 1 through 10 and 15 for installation
+Enter a selection (default=all): ^5-8 ^2 # which will select all packages except 5 through 8 and 2 for installation
 
-  pacman -R package_name # remove a single package, leaving all of its dependencies installed
-  pacman -Rs package_name # remove a single package and its dependencies which are not required by any other installed package
+pacman -R package_name # remove a single package, leaving all of its dependencies installed
+pacman -Rs package_name # remove a single package and its dependencies which are not required by any other installed package
 
-  pacman -Qtd # check for packages that were installed as a dependency but now, no other packages depend on them
+pacman -Qtd # check for packages that were installed as a dependency but now, no other packages depend on them
 
-  pacman -Ss string1 string2 ... # search for packages in the database
-  pacman -Qs string1 string2 ... # search for already installed packages
-  pacman -F string1 string2 ... # search for package file names in remote packages
-  pacman -Fy string1 string2 ... # first flush local cache, then search for package file names in remote packages
+pacman -Ss string1 string2 ... # search for packages in the database
+pacman -Qs string1 string2 ... # search for already installed packages
+pacman -F string1 string2 ... # search for package file names in remote packages
+pacman -Fy string1 string2 ... # first flush local cache, then search for package file names in remote packages
 
-  pacman -Si package_name # display extensive information about a given package
-  pacman -Qi package_name # display extensive information about locally installed packages
-  pacman -Qii package_name # also display the list of backup files and their modification states
+pacman -Si package_name # display extensive information about a given package
+pacman -Qi package_name # display extensive information about locally installed packages
+pacman -Qii package_name # also display the list of backup files and their modification states
 
-  pacman -Ql package_name # retrieve a list of the files installed by a package
-  pacman -Fl package_name # retrieve a list of the files installed by a remote package
+pacman -Ql package_name # retrieve a list of the files installed by a package
+pacman -Fl package_name # retrieve a list of the files installed by a remote package
 
 
 
-  ## Rarely use
-  pacman -Qk package_name # verify the presence of the files installed by a package, Passing the k flag twice will perform a more thorough check
-  pacman -Qo /path/to/file_name # query the database to know which package a file in the file system belongs to
-  pacman -F /path/to/file_name # query the database to know which remote package a file belongs to
-#+end_example
+## Rarely use
+pacman -Qk package_name # verify the presence of the files installed by a package, Passing the k flag twice will perform a more thorough check
+pacman -Qo /path/to/file_name # query the database to know which package a file in the file system belongs to
+pacman -F /path/to/file_name # query the database to know which remote package a file belongs to
+#+END_SRC
 
-*** 应该避免执行的 pacman 指令
-    :PROPERTIES:
-    :CUSTOM_ID: 应该避免执行的-pacman-指令
-    :END:
-#+begin_example
+** 应该避免执行的 pacman 指令
+#+BEGIN_SRC sh
   pacman -Sy # never run!!!
   pacman -Rdd package # never run!!!
-#+end_example
+#+END_SRC
 
-在 Arch
-中安装包时应避免没有升级系统就刷新包列表。这样做是为了避免出现依赖问题，比如，如果一个包被从官方仓库中移除，在进行包同步时就会报错。在实践中，不要执行
-=pacman -Sy package_name=，应该执行 =pacman -Syu package_name=
+在 Arch 中安装包时应避免没有升级系统就刷新包列表。这样做是为了避免出现依赖问题，比如，如果一个包被从官方仓库中移除，在进行包同步时就会报错。在实践中，不要执行 =pacman -Sy package_name= ，应该执行 =pacman -Syu package_name= 。
 
-*** 执行 pacman 命令过程中，遇到的信息/警告/错误
-    :PROPERTIES:
-    :CUSTOM_ID: 执行-pacman-命令过程中遇到的信息警告错误
-    :END:
+** 执行 pacman 命令过程中，遇到的信息/警告/错误
+
 循环依赖：
 
 #+begin_example
-  warning: dependency cycle detected
+warning: dependency cycle detected
 #+end_example
 
 执行 =sudo pacman -Syu= 时：
 
 #+begin_example
-  WARNING: Possibly missing firmware for module
+WARNING: Possibly missing firmware for module
 #+end_example
 
 这是一种警告。
@@ -404,32 +334,30 @@ driver packages that they have installed.
 gpg: key 786C63F330D7CB92: no user ID for key signature packet of class
 10[^0]
 
-#+begin_example
-  gpg: key 786C63F330D7CB92: no user ID for key signature packet of class 10
-  gpg: key 1EB2638FF56C0C53: no user ID for key signature packet of class 10
-  gpg: next trustdb check due at 2021-10-09
-    -> Disabled 3 keys.
+#+BEGIN_SRC sh
+gpg: key 786C63F330D7CB92: no user ID for key signature packet of class 10
+gpg: key 1EB2638FF56C0C53: no user ID for key signature packet of class 10
+gpg: next trustdb check due at 2021-10-09
+  -> Disabled 3 keys.
 
-  ## try 1
-  sudo pacman-key --refresh-keys
-  sudo pacman -S archlinux-keyring archlinuxcn-keyring
-  ## try 2
-  sudo rm -R /etc/pacman.d/gnupg/ # No such file or directory
-  sudo rm -rf /etc/pacman.d/gnupg/
-  sudo rm -R /root/.gnupg/ 
-  sudo rm -R /var/cache/pacman/pkg/
-  sudo gpg --refresh-keys
-  sudo pacman-key --init
-  sudo pacman-key --populate archlinux # still display `gpg: key xxx: no user ID for key signature packet of class 10`
-  sudo pacman-key --refresh-keys
-  sudo pacman -Syyu
-#+end_example
+## try 1
+sudo pacman-key --refresh-keys
+sudo pacman -S archlinux-keyring archlinuxcn-keyring
+## try 2
+sudo rm -R /etc/pacman.d/gnupg/ # No such file or directory
+sudo rm -rf /etc/pacman.d/gnupg/
+sudo rm -R /root/.gnupg/ 
+sudo rm -R /var/cache/pacman/pkg/
+sudo gpg --refresh-keys
+sudo pacman-key --init
+sudo pacman-key --populate archlinux # still display `gpg: key xxx: no user ID for key signature packet of class 10`
+sudo pacman-key --refresh-keys
+sudo pacman -Syyu
+#+END_SRC
 
-warning: /etc/pacman.d/mirrorlist installed as
-/etc/pacman.d/mirrorlist.pacnew
+warning: /etc/pacman.d/mirrorlist installed as /etc/pacman.d/mirrorlist.pacnew
 
-/etc/mkinitcpio.d/linux.preset: 'default' and
-/etc/mkinitcpio.d/linux.preset: 'fallback'
+/etc/mkinitcpio.d/linux.preset: 'default' and /etc/mkinitcpio.d/linux.preset: 'fallback'
 
 参考：
 
@@ -441,56 +369,52 @@ warning: /etc/pacman.d/mirrorlist installed as
 6. [[https://wiki.archlinux.org/title/Pacman/Rosetta]]
 7. [[https://wiki.archlinux.org/title/Mkinitcpio]]
 
-** yay
-   :PROPERTIES:
-   :CUSTOM_ID: yay
-   :END:
+* yay
+
 Yet Another Yogurt: 又一个从 Arch User Repository 下载包的工具。
 
-*** 安装 yay
-    :PROPERTIES:
-    :CUSTOM_ID: 安装-yay
-    :END:
-#+begin_example
-  sudo pacman -S yay
-  # pacman -S --needed git base-devel
-  # git clone https://aur.archlinux.org/yay.git
-  # cd yay
-  # makepkg -si
-#+end_example
+** 安装 yay
 
-*** 使用 yay
-    :PROPERTIES:
-    :CUSTOM_ID: 使用-yay
-    :END:
-#+begin_example
-  # Interactively search and install packages from the repos and AUR:
-  yay package_name|search_term
-  # Synchronize and update all packages from the repos and AUR:
-  yay
-  #Synchronize and update only AUR packages:
-  yay -Sua
-  # Install a new package from the repos and AUR:
-  yay -S package_name
-  # Remove an installed package and both its dependencies and configuration files:
-  yay -Rns package_name
-  # Search the package database for a keyword from the repos and AUR:
-  yay -Ss keyword
-  # Remove orphaned packages (installed as dependencies but not required by any package):
-  yay -Yc
-  # Show statistics for installed packages and system health:
-  yay -Ps
-#+end_example
+官方仓库：[[https://github.com/Jguer/yay]]
 
-*** yay 问题
-    :PROPERTIES:
-    :CUSTOM_ID: yay-问题
-    :END:
+#+BEGIN_SRC sh
+sudo pacman -S --needed git base-devel
+git clone https://aur.archlinux.org/yay.git
+cd yay
+makepkg -si
+#+END_SRC
 
-1. 安装时总是出现
-   ===WARNING: Using existing $srcdir/ tree=，这个可以忽视，只是说明安装过程。
-2. timeout 问题
-   [[https://github.com/Jguer/yay/issues/1278#issuecomment-635833427]]
+如果想通过 pacman 官方仓库里的 yay 包安装，在版本升级时可能会有滞后。可以在通过 pacman 安装 yay 后，运行命令：
+
+#+BEGIN_SRC 
+yay -S yay
+#+END_SRC
+
+保证得到 yay 的最新版本。
+
+** 使用 yay
+#+BEGIN_SRC sh
+# Interactively search and install packages from the repos and AUR:
+yay package_name|search_term
+# Synchronize and update all packages from the repos and AUR:
+yay
+#Synchronize and update only AUR packages:
+yay -Sua
+# Install a new package from the repos and AUR:
+yay -S package_name
+# Remove an installed package and both its dependencies and configuration files:
+yay -Rns package_name
+# Search the package database for a keyword from the repos and AUR:
+yay -Ss keyword
+# Remove orphaned packages (installed as dependencies but not required by any package):
+yay -Yc
+# Show statistics for installed packages and system health:
+yay -Ps
+#+END_SRC
+
+** yay 问题
+1. 安装时总是出现 =WARNING: Using existing $srcdir/ tree= ，这个可以忽视，只是说明安装过程。
+2. timeout 问题 [[https://github.com/Jguer/yay/issues/1278#issuecomment-635833427]]
 3. =Missing AUR Packages=
 
 参考：
@@ -498,18 +422,14 @@ Yet Another Yogurt: 又一个从 Arch User Repository 下载包的工具。
 1. [[https://github.com/Jguer/yay]]
 2. [[https://github.com/Jguer/yay/issues/1248]]
 
-** Imager(rpi-imager)
-   :PROPERTIES:
-   :CUSTOM_ID: imagerrpi-imager
-   :END:
-#+begin_example
-  yay -S rpi-imager
-#+end_example
+* Imager(rpi-imager)
+#+BEGIN_SRC sh
+yay -S rpi-imager
+#+END_SRC
 
-对于支持 UEFI 启动的设备，直接复制 iso 镜像中的所有文件到安装介质（如 U
-盘）中即可启动。
+对于支持 UEFI 启动的设备，直接复制 iso 镜像中的所有文件到安装介质（如 U 盘）中即可启动。
 
-** 其他软件
+* 其他软件
 
 参考：
 
@@ -546,7 +466,7 @@ Yet Another Yogurt: 又一个从 Arch User Repository 下载包的工具。
 | informant                                         | arch news reader and pacman hook                                                                                                                                                         |
 | dnsutils                                          | =dig=                                                                                                                                                                                    |
 | dnsmasq                                           | 使用国外 DNS 造成国内网站访问慢的解决方法                                                                                                                                                |
-| tldr                                              | [[https://github.com/tldr-pages/tldr][tldr-pages/tldr]]                                                                                                                                  |
+| tldr                                              | Collaborative cheatsheets for console commands                                                                                                                                   |
 | virtualbox                                        | Virtual Machine                                                                                                                                                                          |
 | qemu                                              | A generic and open source machine emulator and virtualizer                                                                                                                               |
 | earlyoom                                          | Early OOM Daemon for Linux                                                                                                                                                               |
@@ -589,559 +509,349 @@ Yet Another Yogurt: 又一个从 Arch User Repository 下载包的工具。
 | htop | Interactive process viewer |
 | prettyping | A ping wrapper making the output prettier, more colorful, more compact, and easier to read |
 
-*** MongoDB
+** MongoDB
 
 #+BEGIN_SRC sh
 yay -S mongodb-bin mongodb-tools-bin mongosh-bin
 #+END_SRC
 
-*** Fly.io
-    :PROPERTIES:
-    :CUSTOM_ID: fly.io
-    :END:
-#+begin_example
-  curl -L https://fly.io/install.sh | sh
-  flyctl auth login
-  flyctl info
-  flyctl open
-#+end_example
+** Fly.io
+#+BEGIN_SRC sh
+curl -L https://fly.io/install.sh | sh
+flyctl auth login
+flyctl info
+flyctl open
+#+END_SRC
 
-*** ventoy
-    :PROPERTIES:
-    :CUSTOM_ID: ventoy
-    :END:
-Output:
-
-#+begin_example
-  NOTE: You can create persistence images for ventoy with the "ventoy-persistent" command,
-        and losslessly expand persistence ".dat" files using "ventoy-extend-persistent",
-        which are shortcuts to "/opt/ventoy/CreatePersistentImg.sh" and
-        "/opt/ventoy/ExtendPersistentImg.sh", respectively.
-        (See https://www.ventoy.net/en/plugin_persistence.html for documentation.)
-#+end_example
-
-*** cmdpxl
-    :PROPERTIES:
-    :CUSTOM_ID: cmdpxl
-    :END:
-#+begin_example
-  pip install cmdpxl
-#+end_example
-
-*** maven
-    :PROPERTIES:
-    :CUSTOM_ID: maven
-    :END:
-Apache Maven. Tool for building and managing Java-based projects. More
-information: [[https://maven.apache.org]].
-
-#+begin_example
-  -   Compile a project:
-      :   mvn compile
-
-  -   Compile and package the compiled code in its distributable format, such as a `jar`:
-      :   mvn package
-
-  -   Compile and package, skipping unit tests:
-      :   mvn package -Dmaven.test.skip=true
-
-  -   Install the built package in local maven repository. (This will invoke the compile and package commands too):
-      :   mvn install
-
-  -   Delete build artifacts from the target directory:
-      :   mvn clean
-
-  -   Do a clean and then invoke the package phase:
-      :   mvn clean package
-
-  -   Clean and then package the code with a given build profile:
-      :   mvn clean -Pprofile package
-
-  -   Run a class with a main method:
-      :   mvn exec:java -Dexec.mainClass="com.example.Main"
-          -Dexec.args="arg1 arg2"
-#+end_example
-
-*** Sagemath
-    :PROPERTIES:
-    :CUSTOM_ID: sagemath
-    :END:
-#+begin_example
-  sudo pacman -S sagemath
-#+end_example
+** Sagemath
+#+BEGIN_SRC sh
+sudo pacman -S sagemath
+#+END_SRC
 
 Output:
 
 #+begin_example
-  resolving dependencies...
-  looking for conflicting packages...
-  warning: dependency cycle detected:
-  warning: python-ipykernel will be installed before its python-jupyter_client dependency
-  warning: dependency cycle detected:
-  warning: jupyter will be installed before its python-ipywidgets dependency
+resolving dependencies...
+looking for conflicting packages...
+warning: dependency cycle detected:
+warning: python-ipykernel will be installed before its python-jupyter_client dependency
+warning: dependency cycle detected:
+warning: jupyter will be installed before its python-ipywidgets dependency
 #+end_example
 
-*** Tomcat8
-    :PROPERTIES:
-    :CUSTOM_ID: tomcat8
-    :END:
-#+begin_example
-  sudo pacman -S tomcat8
-#+end_example
+** IDEA
+
+#+BEGIN_SRC sh
+sudo pacman -S intellij-idea-community-edition/intellij-idea-ultimate-edition
+#+END_SRC
 
 Output:
 
 #+begin_example
-  extra/eclipse-ecj          4.6.3-2        1.65 MiB       1.53 MiB
-  extra/java-commons-daemon  1.2.4-1        0.02 MiB       0.02 MiB
-  extra/java-jsvc            1.2.4-1        0.06 MiB       0.02 MiB
-  extra/tomcat8              8.5.70-1       9.83 MiB       5.54 MiB
+# select jdk11-openjdk
+extra/java-environment-common              3-3              0.00 MiB       0.00 MiB
+extra/java-runtime-common                  3-3              0.01 MiB       0.00 MiB
+extra/jdk11-openjdk                        11.0.12.u7-1    87.48 MiB      76.32 MiB
+extra/jre11-openjdk                        11.0.12.u7-1     0.52 MiB       0.19 MiB
+extra/jre11-openjdk-headless               11.0.12.u7-1   157.54 MiB      35.20 MiB
+extra/libnet                               1:1.1.6-1        0.30 MiB       0.09 MiB
+community/intellij-idea-community-edition  4:2021.1.3-1  1245.40 MiB     436.08 MiB
+For the complete set of Java binaries to be available in your PATH,
+you need to re-login or source /etc/profile.d/jre.sh
+Please note that this package does not support forcing JAVA_HOME as former package java-common did
 
-  Optional dependencies for tomcat8
-  tomcat-native: to allow optimal performance in production environments
-  \:\: Running post-transaction hooks...
-  (1/4) Creating system user accounts...
-  Creating group tomcat8 with gid 57.
-  Creating user tomcat8 (Tomcat 8 user) with uid 57 and gid 57.
+when you use a non-reparenting window manager,
+set _JAVA_AWT_WM_NONREPARENTING=1 in /etc/profile.d/jre.sh
 #+end_example
 
-*** MySQL
-    :PROPERTIES:
-    :CUSTOM_ID: mysql
-    :END:
-#+begin_example
-  sudo pacman -S mysql
-#+end_example
+** Sphinx
+Sphinx is a documentation generator or a tool that translates a set of plain text source files into various output formats, automatically producing cross-references, indices, etc.
 
-Output:
+#+BEGIN_SRC sh
+pip install sphinx-autobuild rstcheck # for VS Code extension: reStructuredText
+pip install sphinx-rtd-theme # sphinx-rtd-theme theme
+pip install sphinx-copybutton
+pip install m2r2 # converts a markdown file including reStructuredText (rst) markups to a valid rst format
+sudo pacman -S python-sphinx-issues python-sphinx-furo
+#+END_SRC
 
-#+begin_example
-  archlinuxcn/libmysqlclient  8.0.24-1       6.89 MiB       1.31 MiB
-  archlinuxcn/mysql-clients   8.0.24-1      52.30 MiB       2.12 MiB
-  archlinuxcn/mysql           8.0.24-1     172.41 MiB      19.10 MiB
+** exa
 
-  :: You need to initialize the MySQL data directory prior to starting
-  the service. This can be done with mysqld --initialize command, e.g.:
-  mysqld --initialize --user=mysql --basedir=/usr --datadir=/var/lib/mysql
-  :: Additionally you should secure your MySQL installation using
-  mysql_secure_installation command after starting the mysqld service
-  Optional dependencies for mysql
-  perl-dbd-mysql: for mysqlhotcopy, mysql_convert_table_format, mysql_setpermission, mysqldumpslow
-  :: Running post-transaction hooks...
-  (1/4) Creating system user accounts...
-  Creating group mysqlrouter with gid 88.
-  Creating user mysqlrouter (MySQL) with uid 88 and gid 88.
-  Creating group mysql with gid 89.
-  Creating user mysql (MySQL) with uid 89 and gid 89.
-  (2/4) Reloading system manager configuration...
-  (3/4) Creating temporary files...
-  (4/4) Arming ConditionNeedsUpdate...
-#+end_example
+A modern replacement for =ls= (List directory contents) [[https://the.exa.website]]
 
-删除 mysql，使用 percona-server 管理。
+#+BEGIN_SRC sh
+exa
+exa --oneline # List files one per line
+exa --all # List all files, including hidden files
+exa --long --all # Long format list (permissions, ownership, size and modification date) of all files
+exa --reverse --sort=size # List files with the largest at the top
+exa --long --tree --level=3 # Display a tree of files, three levels deep
+exa --long --sort=modified # List files sorted by modification date (oldest first)
+exa --long --header --icons --git # List files with their headers, icons, and Git statuses
+exa --git-ignore # Don't list files mentioned in `.gitignore`
+#+END_SRC
 
-#+begin_example
-  sudo pacman -S percona-server
-#+end_example
+** informant[fn:10]
+一个 Arch Linux 新闻阅读器和 pacman hook。可以帮你在更新包时检查是否还有没有阅读的 Arch Linux 新闻。
 
-Output:
-
-#+begin_example
-  extra/numactl             2.0.14-1       0.22 MiB       0.08 MiB
-  community/percona-server  8.0.25_15-2  167.91 MiB      25.30 MiB
-#+end_example
-
-*** IDEA
-    :PROPERTIES:
-    :CUSTOM_ID: idea
-    :END:
-#+begin_example
-  sudo pacman -S intellij-idea-community-edition/intellij-idea-ultimate-edition
-#+end_example
-
-Output:
-
-#+begin_example
-  # select jdk11-openjdk
-  extra/java-environment-common              3-3              0.00 MiB       0.00 MiB
-  extra/java-runtime-common                  3-3              0.01 MiB       0.00 MiB
-  extra/jdk11-openjdk                        11.0.12.u7-1    87.48 MiB      76.32 MiB
-  extra/jre11-openjdk                        11.0.12.u7-1     0.52 MiB       0.19 MiB
-  extra/jre11-openjdk-headless               11.0.12.u7-1   157.54 MiB      35.20 MiB
-  extra/libnet                               1:1.1.6-1        0.30 MiB       0.09 MiB
-  community/intellij-idea-community-edition  4:2021.1.3-1  1245.40 MiB     436.08 MiB
-  For the complete set of Java binaries to be available in your PATH,
-  you need to re-login or source /etc/profile.d/jre.sh
-  Please note that this package does not support forcing JAVA_HOME as former package java-common did
-
-  when you use a non-reparenting window manager,
-  set _JAVA_AWT_WM_NONREPARENTING=1 in /etc/profile.d/jre.sh
-#+end_example
-
-*** Sphinx
-    :PROPERTIES:
-    :CUSTOM_ID: sphinx
-    :END:
-Sphinx is a documentation generator or a tool that translates a set of
-plain text source files into various output formats, automatically
-producing cross-references, indices, etc.
-
-#+begin_example
-  pip install sphinx-autobuild rstcheck # for VS Code extension: reStructuredText
-  pip install sphinx-rtd-theme # sphinx-rtd-theme theme
-  pip install sphinx-copybutton
-  pip install m2r2 # converts a markdown file including reStructuredText (rst) markups to a valid rst format
-  sudo pacman -S python-sphinx-issues python-sphinx-furo
-#+end_example
-
-*** exa
-    :PROPERTIES:
-    :CUSTOM_ID: exa
-    :END:
-A modern replacement for =ls= (List directory contents)
-[[https://the.exa.website]]
-
-#+begin_example
-  exa
-  exa --oneline # List files one per line
-  exa --all # List all files, including hidden files
-  exa --long --all # Long format list (permissions, ownership, size and modification date) of all files
-  exa --reverse --sort=size # List files with the largest at the top
-  exa --long --tree --level=3 # Display a tree of files, three levels deep
-  exa --long --sort=modified # List files sorted by modification date (oldest first)
-  exa --long --header --icons --git # List files with their headers, icons, and Git statuses
-  exa --git-ignore # Don't list files mentioned in `.gitignore`
-#+end_example
-
-*** informant[fn:10]
-    :PROPERTIES:
-    :CUSTOM_ID: informant10
-    :END:
-一个 Arch Linux 新闻阅读器和 pacman
-hook。可以帮你在更新包时检查是否还有没有阅读的 Arch Linux 新闻。
-
-*** Virtualbox[fn:11]
-    :PROPERTIES:
-    :CUSTOM_ID: virtualbox11
-    :END:
+** Virtualbox[fn:11]
 Error message:
 
 #+begin_example
-  WARNING: The vboxdrv kernel module is not loaded. Either there is no module available for the current kernel (5.13.8-arch1-1) or it failed to load. Please recompile the kernel module and install it by
+WARNING: The vboxdrv kernel module is not loaded. Either there is no module available for the current kernel (5.13.8-arch1-1) or it failed to load. Please recompile the kernel module and install it by
 
-  sudo /sbin/vboxconfig
+sudo /sbin/vboxconfig
 
-  You will not be able to start VMs until this problem is fixed.
+You will not be able to start VMs until this problem is fixed.
 #+end_example
 
-exec:
-
-#+begin_example
-  sudo modprobe vboxdrv
-#+end_example
-
-No message now.
-
-*** earlyoom
-    :PROPERTIES:
-    :CUSTOM_ID: earlyoom
-    :END:
+运行命令解决：
+#+BEGIN_SRC sh
+sudo modprobe vboxdrv
+#+END_SRC
+** earlyoom
 如果是为了避免系统卡死，可以安装并使用 earlyoom[fn:12]。
 
-该软件默认将在空余内存、空余 swap 两者均低于 10%时，结束 oom_score
-值最高的进程，避免系统内存耗尽卡死。
+该软件默认将在空余内存、空余 swap 两者均低于 10%时，结束 oom_score 值最高的进程，避免系统内存耗尽卡死。
+
+#+BEGIN_SRC sh
+# after install
+sudo systemctl enable --now earlyoom
+#+END_SRC
+
+** Vagrant[fn:13]
+#+BEGIN_SRC sh
+sudo pacman -S vagrant
+mkdir arch-vagrant &&  cd $_
+vim Vagrantfile
+vagrant up
+#+END_SRC
+
+=Vagrantfile= :
+
+#+BEGIN_SRC conf
+Vagrant.configure("2") do |config|
+    config.vm.box = "archlinux/archlinux"
+end
+#+END_SRC
+
+运行 =vagrant up= 后的错误信息：
 
 #+begin_example
-  # after install
-  sudo systemctl enable --now earlyoom
+No usable default provider could be found for your system.
+
+Vagrant relies on interactions with 3rd party systems, known as
+
+"providers", to provide Vagrant with resources to run development
+
+environments. Examples are VirtualBox, VMware, Hyper-V.
+
+The easiest solution to this message is to install VirtualBox, which
+
+is available for free on all major platforms.
+
+If you believe you already have a provider available, make sure it
+
+is properly installed and configured. You can see more details about
+
+why a particular provider isn't working by forcing usage with
+
+`vagrant up --provider=PROVIDER`, which should give you a more specific
+
+error message for that particular provider.
 #+end_example
 
-*** Vagrant[fn:13]
-    :PROPERTIES:
-    :CUSTOM_ID: vagrant13
-    :END:
-#+begin_example
-  sudo pacman -S vagrant
-  mkdir arch-vagrant &&  cd $_
-  vim Vagrantfile
-  vagrant up
-#+end_example
+运行了 =sudo modprobe vboxdrv= 命令现在没有错误了。
 
-=Vagrantfile=:
-
-#+begin_example
-  Vagrant.configure("2") do |config|
-      config.vm.box = "archlinux/archlinux"
-  end
-#+end_example
-
-After exec =vagrant up=, error message:
-
-#+begin_example
-  No usable default provider could be found for your system.
-
-  Vagrant relies on interactions with 3rd party systems, known as
-
-  "providers", to provide Vagrant with resources to run development
-
-  environments. Examples are VirtualBox, VMware, Hyper-V.
-
-  The easiest solution to this message is to install VirtualBox, which
-
-  is available for free on all major platforms.
-
-  If you believe you already have a provider available, make sure it
-
-  is properly installed and configured. You can see more details about
-
-  why a particular provider isn't working by forcing usage with
-
-  `vagrant up --provider=PROVIDER`, which should give you a more specific
-
-  error message for that particular provider.
-#+end_example
-
-After exec =sudo modprobe vboxdrv=, no message now.
-
-#+begin_example
-  vagrant up
-#+end_example
+#+BEGIN_SRC sh
+vagrant up
+#+END_SRC
 
 Output:
 
 #+begin_example
-  Vagrant is currently configured to create VirtualBox synced folders with
-  the `SharedFoldersEnableSymlinksCreate` option enabled. If the Vagrant
-  guest is not trusted, you may want to disable this option. For more
-  information on this option, please refer to the VirtualBox manual:
+Vagrant is currently configured to create VirtualBox synced folders with
+the `SharedFoldersEnableSymlinksCreate` option enabled. If the Vagrant
+guest is not trusted, you may want to disable this option. For more
+information on this option, please refer to the VirtualBox manual:
 
-      https://www.virtualbox.org/manual/ch04.html#sharedfolders
+    https://www.virtualbox.org/manual/ch04.html#sharedfolders
 
-  This option can be disabled globally with an environment variable:
+This option can be disabled globally with an environment variable:
 
-      VAGRANT_DISABLE_VBOXSYMLINKCREATE=1
+    VAGRANT_DISABLE_VBOXSYMLINKCREATE=1
 
-  or on a per folder basis within the Vagrantfile:
+or on a per folder basis within the Vagrantfile:
 
-      config.vm.synced_folder '/host/path', '/guest/path', SharedFoldersEnableSymlinksCreate: false
+    config.vm.synced_folder '/host/path', '/guest/path', SharedFoldersEnableSymlinksCreate: false
 
-  NS_ERROR_INVALID_ARG
+NS_ERROR_INVALID_ARG
 #+end_example
 
-*** QEMU
-    :PROPERTIES:
-    :CUSTOM_ID: qemu
-    :END:
-#+begin_example
-  sudo pacman -S qemu
-#+end_example
+** QEMU
+#+BEGIN_SRC sh
+sudo pacman -S qemu
+#+END_SRC
 
 Output:
 
 #+begin_example
-  Please add your user to the brlapi group.
-  Optional dependencies for brltty
-      at-spi2-core: X11/GNOME Apps accessibility [installed]
-      atk: ATK bridge for X11/GNOME accessibility [installed]
-      espeak-ng: espeak-ng driver
-      java-runtime: Java support [installed]
-      libxaw: X11 support [installed]
-      libxt: X11 support [installed]
-      libx11: for xbrlapi [installed]
-      libxfixes: for xbrlapi [installed]
-      libxtst: for xbrlapi [installed]
-      ocaml: OCaml support
-      python: Python support [installed]
-      speech-dispatcher: speech-dispatcher driver [installed]
-  vde config files should be placed in /etc/vde, sample files are provided.
-  iptables and dhcpd sample files have been installed to '/usr/share/vde2'.
-  Merge those examples, if needed to the according config files.
+Please add your user to the brlapi group.
+Optional dependencies for brltty
+    at-spi2-core: X11/GNOME Apps accessibility [installed]
+    atk: ATK bridge for X11/GNOME accessibility [installed]
+    espeak-ng: espeak-ng driver
+    java-runtime: Java support [installed]
+    libxaw: X11 support [installed]
+    libxt: X11 support [installed]
+    libx11: for xbrlapi [installed]
+    libxfixes: for xbrlapi [installed]
+    libxtst: for xbrlapi [installed]
+    ocaml: OCaml support
+    python: Python support [installed]
+    speech-dispatcher: speech-dispatcher driver [installed]
+vde config files should be placed in /etc/vde, sample files are provided.
+iptables and dhcpd sample files have been installed to '/usr/share/vde2'.
+Merge those examples, if needed to the according config files.
 #+end_example
+** Anki[fn:15]
 
-*** Mutt[fn:14]
-    :PROPERTIES:
-    :CUSTOM_ID: mutt14
-    :END:
-终端邮件
+不支持 Wayland（我之前用的是 Xorg）。
 
-*** Flameshot
-    :PROPERTIES:
-    :CUSTOM_ID: flameshot
-    :END:
-可以配置下快捷键，使用起来更加快捷。去 Settings >
-Keyboard，然后下拉页面到底部，点击 =+= 号，Name 填 =Flameshot=，Command
-填 =flameshot gui=，然后点击下 Shortcut 的右方方块，按下 =Alt= +
-=Super/Win= + =P= 键
+** exercism
+#+BEGIN_SRC sh
+# https://github.com/exercism/cli/releases/ download exercism-linux-64bit.tgz
+tar -xf exercism-linux-64bit.tgz
+# Once you download and extract the archive, make it available in your $PATH
+cd ~/Downloads/exercism-linux-64bit
+mkdir -p ~/bin
+mv exercism ~/bin
+~/bin/exercism
+exercism configure --token=
+#+END_SRC
 
-*** Anki[fn:15]
-    :PROPERTIES:
-    :CUSTOM_ID: anki15
-    :END:
-#+begin_example
-  tar xjf ~/Downloads/anki-2.1.46-linux.tar.bz2
-  cd anki-2.1.46-linux
-  sudo ./install.sh
-#+end_example
+** Scheme Programming Language
 
-*** exercism
-    :PROPERTIES:
-    :CUSTOM_ID: exercism
-    :END:
-#+begin_example
-  # https://github.com/exercism/cli/releases/ download exercism-linux-64bit.tgz
-  tar -xf exercism-linux-64bit.tgz
-  # Once you download and extract the archive, make it available in your $PATH
-  cd ~/Downloads/exercism-linux-64bit
-  mkdir -p ~/bin
-  mv exercism ~/bin
-  ~/bin/exercism
-  exercism configure --token=
-#+end_example
+#+BEGIN_SRC sh
+guile hello-world.scm
+;;; note: source file /home/archie/exercism/scheme/hello-world/hello-world.scm
+;;;       newer than compiled /home/archie/.cache/guile/ccache/2.2-LE-8-3.A/home/archie/exercism/scheme/hello-world/hello-world.scm.go
+;;; note: auto-compilation is enabled, set GUILE_AUTO_COMPILE=0
+;;;       or pass the --no-auto-compile argument to disable.
+;;; compiling /home/archie/exercism/scheme/hello-world/hello-world.scm
+;;; compiled /home/archie/.cache/guile/ccache/2.2-LE-8-3.A/home/archie/exercism/scheme/hello-world/hello-world.scm.go
+Hello World!
 
-*** Scheme Programming Language
-    :PROPERTIES:
-    :CUSTOM_ID: scheme-programming-language
-    :END:
-#+begin_example
-  guile hello-world.scm
-  ;;; note: source file /home/archie/exercism/scheme/hello-world/hello-world.scm
-  ;;;       newer than compiled /home/archie/.cache/guile/ccache/2.2-LE-8-3.A/home/archie/exercism/scheme/hello-world/hello-world.scm.go
-  ;;; note: auto-compilation is enabled, set GUILE_AUTO_COMPILE=0
-  ;;;       or pass the --no-auto-compile argument to disable.
-  ;;; compiling /home/archie/exercism/scheme/hello-world/hello-world.scm
-  ;;; compiled /home/archie/.cache/guile/ccache/2.2-LE-8-3.A/home/archie/exercism/scheme/hello-world/hello-world.scm.go
-  Hello World!
+guile hello-world.scm --no-auto-compile
+#+END_SRC
 
-  guile hello-world.scm --no-auto-compile
-#+end_example
+如果关闭提示？在 =~/.zshrc= 文件中添加如下别名：
 
-How to close these info?
+#+BEGIN_SRC conf
+alias guile="guile --no-auto-compile"
+#+END_SRC
 
-=.zshrc=:
+[[https://www.linuxfromscratch.org/blfs/view/svn/general/guile.html][Guile Install guile]]
 
-#+begin_example
-  alias guile="guile --no-auto-compile"
-#+end_example
+** =nscd= 自启动
 
-[[https://www.linuxfromscratch.org/blfs/view/svn/general/guile.html][Install
-guile]]
+#+BEGIN_SRC sh
+systemctl enable nscd
+#+END_SRC
 
-*** =nscd= 自启动
-    :PROPERTIES:
-    :CUSTOM_ID: nscd-自启动
-    :END:
-#+begin_example
-  systemctl enable nscd
-#+end_example
+nscd is a daemon that provides a cache for the most common name service requests. The default configuration file, /etc/nscd.conf, determines the behavior of the cache daemon.
 
-nscd is a daemon that provides a cache for the most common name service
-requests. The default configuration file, /etc/nscd.conf, determines the
-behavior of the cache daemon.
+** redshift
+需要纬度，经度
 
-*** redshift
-    :PROPERTIES:
-    :CUSTOM_ID: redshift
-    :END:
-纬度，经度 115.622324,33.165395
+#+BEGIN_SRC sh
+mkdir ~/.config/redshift
+vim ~/.config/redshift/redshift.conf
+#+END_SRC
 
-#+begin_example
-  mkdir ~/.config/redshift
-  vim ~/.config/redshift/redshift.conf
-#+end_example
+=~/.config/redshift/redshift.conf= ：
 
-=~/.config/redshift/redshift.conf=:
+#+BEGIN_SRC sh
+[redshift]
+location-provider=manual
+temp-day=5500
+temp-night=3700
 
-#+begin_example
-  [redshift]
-  location-provider=manual
-  temp-day=5500
-  temp-night=3700
-
-  [manual]
-  lat=33.165395
-  lon=115.622324
-#+end_example
+[manual]
+lat=33.165395
+lon=115.622324
+#+END_SRC
 
 参考：
 
 1. [[https://wiki.archlinux.org/title/redshift]]
 2. [[https://io-oi.me/tech/hello-arch-linux/#redshift]]
 
-*** tldr
-    :PROPERTIES:
-    :CUSTOM_ID: tldr
-    :END:
+** tldr
 
 1. tldr-node-client
 
-#+begin_example
-  npm install -g tldr
-  cd ~/.nvm/versions/node/v14.18.1/lib/node_modules/tldr
-  mkdir -p $ZSH_CUSTOM/plugins/tldr
-  cp bin/completion/zsh/_tldr $ZSH_CUSTOM/plugins/tldr/_tldr
-#+end_example
+#+BEGIN_SRC sh
+npm install -g tldr
+cd ~/.nvm/versions/node/v14.18.1/lib/node_modules/tldr
+mkdir -p $ZSH_CUSTOM/plugins/tldr
+cp bin/completion/zsh/_tldr $ZSH_CUSTOM/plugins/tldr/_tldr
+#+END_SRC
 
 在 =~/.zshrc= 的 plugins 中加入 tldr。
 
 2. tldr-python-client
 
-#+begin_example
-  sudo pacman -S tldr
-#+end_example
+#+BEGIN_SRC sh
+sudo pacman -S tldr
+#+END_SRC
 
 在 =~/.zshrc= 中加入以下内容：
 
-#+begin_example
-  export TLDR_CACHE_ENABLED=1
-  export TLDR_CACHE_MAX_AGE=720
-  export TLDR_PAGES_SOURCE_LOCATION="https://raw.githubusercontent.com/tldr-pages/tldr/master/pages"
-  export TLDR_DOWNLOAD_CACHE_LOCATION="https://tldr-pages.github.io/assets/tldr.zip"
-#+end_example
+#+BEGIN_SRC conf
+export TLDR_CACHE_ENABLED=1
+export TLDR_CACHE_MAX_AGE=720
+export TLDR_PAGES_SOURCE_LOCATION="https://raw.githubusercontent.com/tldr-pages/tldr/master/pages"
+export TLDR_DOWNLOAD_CACHE_LOCATION="https://tldr-pages.github.io/assets/tldr.zip"
+#+END_SRC
 
-** 让 Arch Linux 系统和最新的镜像同步，从最快的镜像下载[fn:16]
-   :PROPERTIES:
-   :CUSTOM_ID: 让-arch-linux-系统和最新的镜像同步从最快的镜像下载 16
-   :END:
-#+begin_example
-  #!/bin/bash -e
+* 让 Arch Linux 系统和最新的镜像同步，从最快的镜像下载[fn:16]
+#+BEGIN_SRC sh
+#!/bin/bash -e
 
-  unshare -m bash <<'EOF'
-  mount --make-rprivate /
-  for f in /etc/pacman.d/\*.sync; do
+unshare -m bash <<'EOF'
+mount --make-rprivate /
+for f in /etc/pacman.d/\*.sync; do
 
-    filename="${f%.\*}"
-    mount --bind "$f" "$filename"
+  filename="${f%.\*}"
+  mount --bind "$f" "$filename"
 
-  done
-  pacman -Sy
-  EOF
-#+end_example
+done
+pacman -Sy
+EOF
+#+END_SRC
 
-** 使用国外 DNS 造成国内网站访问慢的解决方法
-   :PROPERTIES:
-   :CUSTOM_ID: 使用国外-dns-造成国内网站访问慢的解决方法
-   :END:
+* 使用国外 DNS 造成国内网站访问慢的解决方法
+
 [[https://wzyboy.im/post/874.html]]
 
-#+begin_example
-  systemctl status dnsmasq
-#+end_example
+#+BEGIN_SRC sh
+systemctl status dnsmasq
+#+END_SRC
 
 Output:
 
 #+begin_example
-  dnsmasq.service - dnsmasq - A lightweight DHCP and caching DNS server
-      Loaded: loaded (/usr/lib/systemd/system/dnsmasq.service; enabled; vendor preset: disabled)
-          Active: inactive (dead)
+dnsmasq.service - dnsmasq - A lightweight DHCP and caching DNS server
+    Loaded: loaded (/usr/lib/systemd/system/dnsmasq.service; enabled; vendor preset: disabled)
+        Active: inactive (dead)
 
-          Docs: man:dnsmasq(8)
+        Docs: man:dnsmasq(8)
 #+end_example
 
-=dnsmasq.service: Start request repeated too quickly.=:
+=dnsmasq.service: Start request repeated too quickly.= ：
 
-The default limit is to allow 5 restarts in a 10sec period. If a service
-goes over that threshold due to the =Restart== config option in the
-service definition, it will not attempt to restart any further.
+The default limit is to allow 5 restarts in a 10sec period. If a service goes over that threshold due to the =Restart== config option in the service definition, it will not attempt to restart any further.
 
 ref:
 
@@ -1149,76 +859,50 @@ ref:
 2. [[https://serverfault.com/a/845473]]
 3. [[https://web.archive.org/web/20191101231638/http://felixc.at:80/Dnsmasq]]
 
-** 备份
-   :PROPERTIES:
-   :CUSTOM_ID: 备份
-   :END:
+* 备份
 
 - [[https://blog.lilydjwg.me/2013/12/29/rsync-btrfs-dm-crypt-full-backup.42219.html]]
 - [[https://github.com/teejee2008/timeshift]]
 
-#+begin_example
-  sudo pacman -S timeshift
-#+end_example
+#+BEGIN_SRC sh
+sudo pacman -S timeshift
+#+END_SRC
 
-*** timeshift
-    :PROPERTIES:
-    :CUSTOM_ID: timeshift
-    :END:
+** timeshift
+1. Snapshot type: rsync (btrfs cannot use because of BTRFS snapts are saved on system partition)
+2. User home directories: root-include all files, user-include only hidden files
 
-1. Snapshot type: rsync (btrfs cannot use because of BTRFS snapts are
-   saved on system partition)
-2. User home directories: root-include all files, user-include only
-   hidden files
+* 自动更新 hosts GitHub 相关 IP
 
-** 自动更新 hosts GitHub 相关 IP
-   :PROPERTIES:
-   :CUSTOM_ID: 自动更新-hosts-github-相关-ip
-   :END:
 ref:
 
 1. [[https://bbs.archlinuxcn.org/viewtopic.php?pid=43366#p43366]]
 2. [[https://gist.github.com/lilydjwg/93d33ed04547e1b9f7a86b64ef2ed058]]
 3. [[https://github.com/rbew/github-host]]
 
-前提：=/etc/hosts= 文件中要先存在 =github.com=
+前提： =/etc/hosts= 文件中要先存在 =github.com=
 
-#+begin_example
-  sudo pacman -S python-aiohttp
-#+end_example
+#+BEGIN_SRC sh
+sudo pacman -S python-aiohttp
+#+END_SRC
 
-** Wayland 下的剪切板工具
+* Wayland 下的剪切板工具
 
 - https://github.com/bugaevc/wl-clipboard
 
 [fn:1] https://io-oi.me/tech/hello-arch-linux/#隐藏-grub-除非按下-shift-键
-
 [fn:2] https://www.reddit.com/r/linux4noobs/comments/5372gj/disable_arch_linux_grub_boot_menu/d7qjh6s
-
 [fn:3] https://bbs.archlinuxcn.org/viewtopic.php?pid=44067#p44067
-
 [fn:4] https://wiki.archlinux.org/title/reflector
-
 [fn:5] https://cfp.vim-cn.com/cb3wN/python
-
 [fn:6] https://zhuanlan.zhihu.com/p/341637818
-
 [fn:7] https://realdougwilson.com/writing/coding-with-character
-
 [fn:8] https://tonsky.me/blog/cursor-keys/
-
 [fn:9] https://github.com/archlinuxcn/mirrorlist-repo
-
 [fn:10] https://wiki.archlinux.org/title/System_maintenance#Read_before_upgrading_the_system
-
 [fn:11] https://wiki.archlinux.org/title/VirtualBox
-
 [fn:12] https://bbs.archlinuxcn.org/viewtopic.php?pid=45774#p45774
-
 [fn:13] https://wiki.archlinux.org/title/Vagrant
-
 [fn:14] http://www.mutt.org/
-
 [fn:15] https://apps.ankiweb.net/#download
-
 [fn:16] https://blog.lilydjwg.me/2020/10/29/pacsync.215578.html
