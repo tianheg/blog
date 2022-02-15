@@ -1,7 +1,7 @@
 +++
 title = "Arch 软件安装和用法"
 date = 2021-08-20T00:00:00+08:00
-lastmod = 2022-02-15T10:45:21+08:00
+lastmod = 2022-02-15T10:48:50+08:00
 tags = ["Archlinux", "技术"]
 draft = false
 toc = true
@@ -515,7 +515,7 @@ yay -S rpi-imager
 | python-sphinx                                   | a documentation generator                                                                                                                                         |
 | anki                                            | a spaced repetition system                                                                                                                                        |
 | informant                                       | arch news reader and pacman hook                                                                                                                                  |
-| dnsutils                                        | `dig`                                                                                                                                                             |
+| dnsutils                                        | provide `dig` command                                                                                                                                             |
 | dnsmasq                                         | 使用国外 DNS 造成国内网站访问慢的解决方法                                                                                                                         |
 | tldr                                            | Collaborative cheatsheets for console commands                                                                                                                    |
 | virtualbox                                      | Virtual Machine                                                                                                                                                   |
@@ -559,6 +559,7 @@ yay -S rpi-imager
 | bat                                             | A cat(1) clone with wings                                                                                                                                         |
 | htop                                            | Interactive process viewer                                                                                                                                        |
 | prettyping                                      | A ping wrapper making the output prettier, more colorful, more compact, and easier to read                                                                        |
+| cosbrowser(aur)                                 | COSBrowser 是腾讯云对象存储 COS 推出的可视化界面工具，让您可以使用更简单的交互轻松实现对 COS 资源的查看、传输和管理                                               |
 
 
 ### MongoDB {#mongodb}
