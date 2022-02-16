@@ -184,7 +184,7 @@ knowledge）"：真正的才能和学识。后常用于形容人富有才能及�
 
     （3）理性：分析、比较、概括、判断、推理、论证等等。
 
-![](/images/critical-thinking-1-yuwang.png "欲望")
+![](/critical-thinking-1-yuwang.png "欲望")
 
 人的行为受三种要素支配，欲望是第一动力。
 

@@ -24,7 +24,7 @@ draft = false
 
 批判的三个要素：对象，标准，目的
 
-![](/images/critical-thinking-0-pipan.png "")
+![](/critical-thinking-0-pipan.png "")
 
 批判的基本原则：
 

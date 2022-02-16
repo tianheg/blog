@@ -73,7 +73,7 @@ draft = false
 
 分析论证的结构：树状图解（I 型、T 型、V 型）
 
-![](/images/critical-thinking-3-tree-diagram.png "树状图解（I 型、T 型、V 型）")
+![](/critical-thinking-3-tree-diagram.png "树状图解（I 型、T 型、V 型）")
 
 
 ## 拷问论证 {#拷问论证}
@@ -84,7 +84,7 @@ draft = false
 
 -   从理由得出结论需要某种假设吗？
 
-![](/images/critical-thinking-3-assumption1-2.png "假设一二")
+![](/critical-thinking-3-assumption1-2.png "假设一二")
 
 -   这些假设合理吗？
 
@@ -120,17 +120,17 @@ draft = false
 
 -   限定（Qualifiers）：考虑到可能出现的反例，对结论的范围和强度进行限定。
 
-![](/images/critical-thinking-3-example-argument.png "举例论证")
+![](/critical-thinking-3-example-argument.png "举例论证")
 
-![](/images/critical-thinking-3-example-argument-2.png "举例论证 2")
+![](/critical-thinking-3-example-argument-2.png "举例论证 2")
 
-![](/images/critical-thinking-3-example-argument-3.png "举例论证 3")
+![](/critical-thinking-3-example-argument-3.png "举例论证 3")
 
 图尔明提供的论证模型更接近真实的论证。
 
-![](/images/critical-thinking-3-toulmin-model.png "图尔明模型")
+![](/critical-thinking-3-toulmin-model.png "图尔明模型")
 
-![](/images/critical-thinking-3-usage-toulmin-model.png "使用图尔明模型")
+![](/critical-thinking-3-usage-toulmin-model.png "使用图尔明模型")
 
 
 ### 图尔明模型的特点和优点 {#图尔明模型的特点和优点}
