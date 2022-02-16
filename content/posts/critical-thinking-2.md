@@ -85,7 +85,7 @@ draft = false
 
 以上九个思维任务的总结：
 
-![](/images/critical-thinking-2-pinggulunzheng.png "评估、论证")
+![](/critical-thinking-2-pinggulunzheng.png "评估、论证")
 
 
 ### 总结与回顾 {#总结与回顾}
