@@ -31,7 +31,7 @@ draft = false
 -   无法直接通过键盘输入中括号“「」”，初步估计是 fcitx 的问题
 -   这两朵花的区别在哪里
 
-![](https://images.yidajiabei.xyz/question-2021-16-0.jpg "")
-![](https://images.yidajiabei.xyz/question-2021-16-1.jpg "")
+![](/question-2021-16-0.jpg "")
+![](/question-2021-16-1.jpg "")
 
 -   当自然之声与人类之声碰撞的时候，会发生什么？在植物的叶子震动产生声音时，给它们播放人类的音乐

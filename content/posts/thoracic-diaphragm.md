@@ -12,7 +12,7 @@ draft = false
 
 其他哺乳动物有膈肌，其他脊椎动物如两栖动物和爬行动物有膈肌样的结构，但解剖学上的重要细节可能有所不同，例如肺在胸腔中的位置。
 
-![](https://images.yidajiabei.xyz/respiratory-system.png "Respiratory System")
+![](/respiratory-system.png "Respiratory System")
 
 Diaphragm 所指的部位即为横隔膜。
 

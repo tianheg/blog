@@ -181,15 +181,15 @@ Google Doodle 的寄语是这样的：
 
 Python 语言中的 **逻辑操作符** （Logical Operators）如下表所示——为了理解方便，也可以将其称为“/比较操作符/”。
 
-| 比较操作符 | 意义 | 示例             | 布尔值  |
-|-------|----|----------------|------|
-| `==`  | 等于 | `1 =` 2=         | `False` |
-| `!=`  | 不等于 | `1 !` 2=         | `True`  |
-| `>`   | 大于 | `1 > 2`          | `False` |
-| `>=`  | 大于等于 | `1 >` 1=         | `True`  |
-| `<`   | 小于 | `1 < 2`          | `True`  |
-| `<=`  | 小于等于 | `1 <` 2=         | `True`  |
-| `in`  | 属于 | `'a' in 'basic'` | `True`  |
+| 比较操作符 | 意义     | 示例             | 布尔值  |
+| ---------- | -------- | ---------------- | ------- |
+| `==`       | 等于     | `1 =` 2=         | `False` |
+| `!=`       | 不等于   | `1 !` 2=         | `True`  |
+| `>`        | 大于     | `1 > 2`          | `False` |
+| `>=`       | 大于等于 | `1 >` 1=         | `True`  |
+| `<`        | 小于     | `1 < 2`          | `True`  |
+| `<=`       | 小于等于 | `1 <` 2=         | `True`  |
+| `in`       | 属于     | `'a' in 'basic'` | `True`  |
 
 <!--list-separator-->
 
@@ -203,7 +203,7 @@ Python 语言中的 **逻辑操作符** （Logical Operators）如下表所示�
 
     \*注意\*：它们全部是小写。因为布尔值只有两个，所以布尔运算结果只有几种而已，如下图所示：
 
-    {{< figure src="https://cdn.jsdelivr.net/gh/tianheg/static@wikihttps://images.yidajiabei.xyz/ads/boolean-operators.jpeg" caption="<span class=\"figure-number\">Figure 1: </span>boolean-operators.png" >}}
+    {{< figure src="https://cdn.jsdelivr.net/gh/tianheg/static@wiki/ads/boolean-operators.jpeg" caption="<span class=\"figure-number\">Figure 1: </span>boolean-operators.png" >}}
 
 
 #### 流程控制 {#流程控制}
