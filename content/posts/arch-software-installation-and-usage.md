@@ -1,7 +1,7 @@
 +++
 title = "Arch 软件安装和用法"
 date = 2021-08-20T00:00:00+08:00
-lastmod = 2022-02-15T10:48:50+08:00
+lastmod = 2022-02-16T08:24:17+08:00
 tags = ["Archlinux", "技术"]
 draft = false
 toc = true
@@ -560,6 +560,11 @@ yay -S rpi-imager
 | htop                                            | Interactive process viewer                                                                                                                                        |
 | prettyping                                      | A ping wrapper making the output prettier, more colorful, more compact, and easier to read                                                                        |
 | cosbrowser(aur)                                 | COSBrowser 是腾讯云对象存储 COS 推出的可视化界面工具，让您可以使用更简单的交互轻松实现对 COS 资源的查看、传输和管理                                               |
+| beekeeper-studio-appimage(aur)                  | Cross platform SQL editor and database management app for Windows, Linux, and Mac                                                                                 |
+| dbeaver                                         | Free universal SQL Client for developers and database administrators (community edition)                                                                          |
+| sqlitebrowser                                   | SQLite Database browser is a light GUI editor for SQLite databases, built on top of Qt                                                                            |
+| adminer(aur)                                    | Adminer is available for MySQL, MariaDB, PostgreSQL, SQLite, MS SQL, Oracle, Elasticsearch, MongoDB and others via plugin                                         |
+| treeline(aur)                                   | Outliner and PIM which stores information in a tree structure                                                                                                     |
 
 
 ### MongoDB {#mongodb}

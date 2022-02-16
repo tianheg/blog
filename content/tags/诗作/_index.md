@@ -1,3 +1,3 @@
 +++
-slug = 'poetical-works'
+slug = "poetry"
 +++

@@ -1,0 +1,18 @@
++++
+title = "直角引号「」『』"
+date = 2021-04-15T00:00:00+08:00
+lastmod = 2022-02-16T15:21:04+08:00
+tags = ["咬文嚼字"]
+draft = false
++++
+
+双引号对应单层直角引号，单引号对应双层直角引号
+
+---
+
+**参考资料** ：
+
+1.  <https://zh.wikipedia.org/wiki/%E5%BC%95%E5%8F%B7>
+2.  [引号的逻辑的哲学](https://io-oi.me/tech/the-philosophy-of-the-logic-of-quotation-mark/)
+3.  [请正确使用直角引号与西文引号](https://zhuanlan.zhihu.com/p/20151625)
+4.  [中文的直角引号「」、『』 源自哪里？ - stevenliuyi 的回答 - 知乎](https://www.zhihu.com/question/19867627/answer/15592753)

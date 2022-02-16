@@ -1,3 +1,3 @@
 +++
-slug = 'open'
+slug = "open"
 +++

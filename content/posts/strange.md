@@ -1,9 +1,9 @@
 +++
-date = '2020-12-11T20:12:08+08:00'
-description = '一首突发奇想的诗'
-keywords = ['诗作']
-tags = ['诗作']
-title = '奇怪'
+title = "奇怪"
+date = 2020-12-11T00:00:00+08:00
+lastmod = 2022-02-16T14:54:24+08:00
+tags = ["诗作"]
+draft = false
 +++
 
 一、

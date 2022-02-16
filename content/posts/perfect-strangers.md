@@ -1,9 +1,9 @@
 +++
-date = '2020-11-27T20:19:42+08:00'
-description = '看完美陌生人'
-keywords = ['电影']
-tags = ['电影']
-title = 'Perfetti sconosciuti'
+title = "完美陌生人"
+date = 2020-11-27T00:00:00+08:00
+lastmod = 2022-02-16T15:41:36+08:00
+tags = ["电影"]
+draft = false
 +++
 
 Perfetti sconosciuti 完美陌生人 - 意大利

@@ -1,9 +1,9 @@
 +++
-date = '2021-03-28T16:41:39+08:00'
-description = '观看《本杰明·巴顿奇事》'
-keywords = ['电影']
-tags = ['电影']
-title = '本杰明·巴顿奇事'
+title = "本杰明·巴顿奇事"
+date = 2021-03-28T00:00:00+08:00
+lastmod = 2022-02-16T11:12:29+08:00
+tags = ["电影"]
+draft = false
 +++
 
 > You can be mad as a mad dog at the way things went.
@@ -24,7 +24,8 @@ title = '本杰明·巴顿奇事'
 >
 > You can change or stay the same. There are no rules to this thing.
 >
-> We can make the best or the worst of it. I hope you make the best of it.
+> We can make the best or the worst of it. I hope you make the best of
+> it.
 >
 > I hope you see things that startle you.
 >

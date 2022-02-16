@@ -1,7 +1,7 @@
 +++
 title = "JavaScript 工厂函数"
 date = 2021-11-26T00:00:00+08:00
-lastmod = 2022-02-12T21:25:03+08:00
+lastmod = 2022-02-16T15:33:07+08:00
 tags = ["JavaScript", "技术"]
 draft = false
 +++

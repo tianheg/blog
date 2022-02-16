@@ -1,8 +1,8 @@
 #+SETUPFILE: ./hugo_setup.org
 #+TITLE: Vue1 应用和组件实例
 #+DATE: <2021-12-19 Sun>
-https://v3.vuejs.org/guide/instance.html
-
+#+HUGO_TAGS: 技术 Vue3
+https://vuejs.org/guide/essentials/application.html
 * 创建一个应用实例
 
 每一个 Vue 应用的开始，都是通过 =createApp= 函数，创建一个新的应用实例：
@@ -31,13 +31,13 @@ Vue.createApp({})
   .use(LocalePlugin)
 #+END_SRC
 
-可以在 [[https://v3.vuejs.org/api/application-api.html][API reference]] 找到全部的应用 API。
+可以在 [[https://vuejs.org/api/application.html][API reference]] 找到全部的应用 API。
 
 * 根组件
 
 传递给 =createApp= 的选项被用于配置 *根组件* 。当我们安装应用程序时，该组件开始渲染。
 
-应用需要被安装进入一个 DOM 元素中。例如，如果我们想把 Vue 应用安装进 =<div id="app"></div>= ，我们应该传入 =#app= ：
+应用需要被安装进入一个 DOM 元素中。例如，如果我们想把 Vue 应用安装进 ~<div id="app"></div>~ ，我们应该传入 =#app= ：
 
 #+BEGIN_SRC javascript
 const RootComponent = {
@@ -116,7 +116,6 @@ Vue.createApp({
 * 生命周期图
 
 下面是一张生命周期实例图。
-
-#+BEGIN_EXPORT html
-<img src="https://v3.vuejs.org/images/lifecycle.svg" style="display: block;margin: auto;">
+#+BEGIN_EXPORT hugo
+![](https://images.yidajiabei.xyz/vue3-lifecycle.png "")
 #+END_EXPORT

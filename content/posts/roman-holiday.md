@@ -1,17 +1,17 @@
 +++
-date = '2021-01-01T20:19:42+08:00'
-description = '看罗马假日'
-keywords = ['电影']
-tags = ['电影']
-title = '罗马假日'
+title = "罗马假日"
+date = 2021-01-01T00:00:00+08:00
+lastmod = 2022-02-16T15:14:55+08:00
+tags = ["电影"]
+draft = false
 +++
 
 Roman Holiday - 1953 - 美国
 
 让我大笑：
 
-- 摄影师初见公主三次摔跤
-- 晚上的舞会：黑衣人没能带走公主
+-   摄影师初见公主三次摔跤
+-   晚上的舞会：黑衣人没能带走公主
 
 激情之吻、留恋之吻
 
@@ -19,6 +19,6 @@ Roman Holiday - 1953 - 美国
 
 她的美，世间难寻
 
-奥黛丽·赫本——女神！
+奥黛丽·赫本------女神！
 
-![audrey-hepburn.png](/images/audrey-hepburn.png)
+![](https://images.yidajiabei.xyz/audrey-hepburn.png "")

@@ -1,6 +1,7 @@
 #+SETUPFILE: ./hugo_setup.org
 #+TITLE: 如何从 Git 仓库中完全移除文件
 #+DATE: <2021-11-11 Thu>
+#+HUGO_TAGS: 技术 Git
 请注意：不要在重要仓库中尝试，可以先新建一个测试 Git
 仓库，以熟悉操作步骤（实际上只有一行命令）。
 
@@ -29,9 +30,6 @@ Ctrl+C 可在未执行命令以前取消，然后使用另一个可供选择的�
 =FILTER_BRANCH_SQUELCH_WARNING=1=。
 
 ** 了解 =git filter-repo=[fn:2]
-   :PROPERTIES:
-   :CUSTOM_ID: 了解-git-filter-repo2
-   :END:
 =git filter-repo= 是一个用于重写 Git 仓库历史的多功能工具。它和
 =git filter-branch=
 差不多，但是没有导致性能下降的问题，它的功能更强大，而且它的设计可以扩展可用性，而不是简单的重写情况。=git filter-repo=

@@ -30,3 +30,5 @@ http {
 如何检查网站是否支持 HTTP/2？
 
 可以通过开发者工具，对于 Firefox 可通过 F12 打开，在 Network 标签页下面，可以看到由 Status、Method、Domain 等组成的列表，其中有一项为 Protocol，如果修改成功，这一栏的值会由 HTTP/1.1 变为 HTTP/2。
+
+再后来，我把博客域名改为 =www.yidajiabei.xyz= 。我查看域名是否是 HTTP/2 协议时，发现它改变了：变成 =HTTP/1.1= 或者是 =HTTP1.1 + h2= 。当协议是 =HTTP/1.1= 我看到 Transferred 那一栏是 =service worker= ，也就是说：从目标服务器直接获取，协议是 HTTP/2，经过缓存则变为 HTTP/1.1。那么问题来了？缓存为什么能够改变协议呢？还有一个问题，为什么缓存里不能有 HTTP/2呢？

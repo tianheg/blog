@@ -1,13 +1,12 @@
 #+SETUPFILE: ./hugo_setup.org
 #+TITLE: Install WordPress With LAMP
 #+DATE: <2021-08-02 Mon>
-** LAMP
-   :PROPERTIES:
-   :CUSTOM_ID: lamp
-   :END:
+#+HUGO_TAGS: 技术 WordPress
+
+* LAMP
 Linux, Apache, MySQL, PHP
 
-#+begin_example
+#+begin_src sh
   sudo apt update
   sudo apt-get install apache2 -y # apache2
   sudo apt install php libapache2-mod-php # php, libapache2-mod-php
@@ -56,39 +55,31 @@ Linux, Apache, MySQL, PHP
   Query OK, 0 rows affected (0.001 sec)
   # Exit the MariaDB prompt with Ctrl + D
   sudo reboot # restart Raspberry Pi
-#+end_example
+#+end_src
 
 Write php file to test:
 
-#+begin_example
+#+begin_src php
   <?php
   phpinfo();
-#+end_example
+#+end_src
 
-Save to =test.php=, then access =http://ip/test.php=, will see the
-phpinfo.
+Save to =test.php= , then access =http://<ip>/test.php= , will see the phpinfo.
 
-After execute =sudo mysql_secure_installation=:
+After execute =sudo mysql_secure_installation= :
 
-- You will be asked =Enter current password for root (enter for none):=
-  --- If you had set root password jusst input, or you can press *Enter*
-  to set it.
-- Type in *Y* and press *Enter* to =Set root password?=.
-- Type in a password at the =New password:= prompt, and press *Enter*.
-  *Important:* remember this root password, as you will need it later to
-  set up WordPress.
-- Type in *Y* to =Remove anonymous users=.
-- Type in *Y* to =Disallow root login remotely=.
-- Type in *Y* to =Remove test database and access to it=.
-- Type in *Y* to =Reload privilege tables now=.
+- You will be asked =Enter current password for root (enter for none):= - If you had set root password jusst input, or you can press *Enter* to set it.
+- Type in *Y* and press *Enter* to =Set root password?= .
+- Type in a password at the =New password:= prompt, and press *Enter* .
+  *Important:* remember this root password, as you will need it later to set up WordPress.
+- Type in *Y* to =Remove anonymous users= .
+- Type in *Y* to =Disallow root login remotely= .
+- Type in *Y* to =Remove test database and access to it= .
+- Type in *Y* to =Reload privilege tables now= .
 
-When complete, you will see the message =All done!= and
-=Thanks for using MariaDB!=.
+When complete, you will see the message =All done!= and =Thanks for using MariaDB!= .
 
-** Install WordPress
-   :PROPERTIES:
-   :CUSTOM_ID: install-wordpress
-   :END:
+* Install WordPress
 Then begin the WordPress installation.
 
 #+begin_example
@@ -99,8 +90,7 @@ Then begin the WordPress installation.
   Table Prefix:       wp_
 #+end_example
 
-After input these, if you get =Server Down= error, just run
-=sudo systemctl restart apache2=.
+After input these, if you get =Server Down= error, just run =sudo systemctl restart apache2= .
 
 Then:
 
@@ -111,24 +101,16 @@ Then:
   Email: user@domain
 #+end_example
 
-I like [[https://zenhabits.net/]]'s theme, I
-[[https://zenhabits.net/theme/][download it]], install it.
+I like [[https://zenhabits.net/]]'s theme, I [[https://zenhabits.net/theme/][download it]], install it.
 
-** Install WordPress Theme
-   :PROPERTIES:
-   :CUSTOM_ID: install-wordpress-theme
-   :END:
-
+* Install WordPress Theme
 1. Access =http://address/wp-admin/=
 2. Click Appearance/Themes
 3. Find Add New/Upload Theme, you can just upload the zh2 zip file.
    That's it!
 4. Custom it as you want.
 
-** Support HTTPS
-   :PROPERTIES:
-   :CUSTOM_ID: support-https
-   :END:
+* Support HTTPS
 Before test these activity, must backup the site:
 
 ref:
