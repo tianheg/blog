@@ -81,13 +81,13 @@ manifest 文件：
   "name": "一大加贝",
   "icons": [
     {
-      "src": "https://images.yidajiabei.xyz/android-chrome-192x192.png",
+      "src": "/android-chrome-192x192.png",
       "type": "image/png",
       "sizes": "192x192",
       "purpose": "maskable"
     },
     {
-      "src": "https://images.yidajiabei.xyz/android-chrome-512x512.png",
+      "src": "/android-chrome-512x512.png",
       "sizes": "512x512",
       "type": "image/png"
     }
