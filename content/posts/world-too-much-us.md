@@ -1,8 +1,9 @@
 +++
-date = '2021-06-09T07:32:10+08:00'
-slug = 'world-too-much-us'
-tags = ['诗作']
-title = 'The World Is Too Much With Us'
+title = "The World Is Too Much With Us"
+date = 2021-06-09T00:00:00+08:00
+lastmod = 2022-02-15T22:52:08+08:00
+tags = ["诗作"]
+draft = false
 +++
 
 The world is too much with us; late and soon,
@@ -21,7 +22,7 @@ And are up-gathered now like sleeping flowers,
 
 For this, for everything, we are out of tune;
 
-It moves us not.—Great God! I'd rather be
+It moves us not.---Great God! I'd rather be
 
 A pagan suckled in a creed outworn;
 
@@ -59,7 +60,5 @@ Or hear old Triton blow his wreathèd horn.
 
 ---
 
-**参考资料**：
-
-1. <https://poets.org/poem/world-too-much-us>
-2. 《人的自我寻求》郭本禹译，中国人民大学出版社2013年9月第1版，第49页
+1.  <https://poets.org/poem/world-too-much-us>
+2.  《人的自我寻求》郭本禹译，中国人民大学出版社 2013 年 9 月第 1 版，第 49 页

@@ -1,3 +1,3 @@
 +++
-slug = 'life'
+slug = "life"
 +++

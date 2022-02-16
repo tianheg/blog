@@ -1,6 +1,7 @@
 #+SETUPFILE: ./hugo_setup.org
 #+TITLE: 为网站开启 PWA
 #+DATE: <2021-07-21 Wed>
+#+HUGO_TAGS: 技术 Web
 开启 PWA 需要三个部分：一个 JS 文件，一个 HTML 文件，一个 manifest 文件。我的网站使用 Hugo 构建。
 
 JS 文件：
@@ -76,13 +77,13 @@ manifest 文件：
     "name": "一大加贝",
     "icons": [
       {
-        "src": "/images/android-chrome-192x192.png",
+        "src": "https://images.yidajiabei.xyz/android-chrome-192x192.png",
         "type": "image/png",
         "sizes": "192x192",
         "purpose": "maskable"
       },
       {
-        "src": "/images/android-chrome-512x512.png",
+        "src": "https://images.yidajiabei.xyz/android-chrome-512x512.png",
         "sizes": "512x512",
         "type": "image/png"
       }

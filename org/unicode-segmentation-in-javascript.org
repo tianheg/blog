@@ -1,6 +1,8 @@
 #+SETUPFILE: ./hugo_setup.org
 #+TITLE: Unicode Segmentation in JavaScript
 #+DATE: <2021-12-18 Sat>
+#+HUGO_TAGS: 技术 JavaScript
+
 https://h3manth.com/posts/unicode-segmentation-in-javascript/
 
 Unicode 定义了一个字符分割算法来查找字符之间的边界。Unicode 还定义了一种算法，用于查找 [[https://en.wikipedia.org/wiki/Common_Locale_Data_Repository][CLDR]] 根据地区设置调整的词和句子之间的边界。这些边界可能是有用的，例如，在实现一个文本编辑器，其中有跳跃或突出单词和句子的命令，[[https://tc39.es/proposal-intl-segmenter/][Intl.Segmenter]] API 可以帮助我们轻松地分割这些代码点。

@@ -1,39 +1,42 @@
 +++
-date = '2021-02-02T21:06:47+08:00'
-description = '归类星际迷航'
-keywords = ['电影']
-tags = ['电影']
-title = '星际迷航系列'
+title = "星际迷航系列"
+date = 2021-02-02T00:00:00+08:00
+lastmod = 2022-02-16T14:56:10+08:00
+tags = ["电影"]
+draft = false
 +++
 
-- Star Trek I: The Motion Picture 星际迷航 1：无限太空（1979）
-- Star Trek II: The Wrath of Khan 星际迷航 2：可汗之怒（1982）
-- Star Trek III: The Search for Spock 星际迷航 3：寻找史波克（1984）
-- Star Trek IV: The Voyage Home 星际迷航 4：抢救未来（1986）
-- Star Trek V: The Final Frontier 星际迷航 5：终极先锋（1989）
-- Star Trek VI: The Undiscovered Country 星际迷航 6：未来之城（1991）
-- Star Trek Generations 星际迷航 7：斗转星移（1994）
-- Star Trek VIII: First Contact 星际迷航 8：第一次接触（1996）
-- Star Trek IX: Insurrection 星际迷航 9：起义（1998）
-- Star Trek Nemesis 星际迷航 10：复仇女神（2002）
-- Star Trek 星际迷航（2009）
-- Star Trek Into Darkness 星际迷航：暗黑无界（2013）
-- Star Trek Beyond 星际迷航：超越星辰（2016）
+-   Star Trek I: The Motion Picture 星际迷航 1：无限太空（1979）
+-   Star Trek II: The Wrath of Khan 星际迷航 2：可汗之怒（1982）
+-   Star Trek III: The Search for Spock 星际迷航 3：寻找史波克（1984）
+-   Star Trek IV: The Voyage Home 星际迷航 4：抢救未来（1986）
+-   Star Trek V: The Final Frontier 星际迷航 5：终极先锋（1989）
+-   Star Trek VI: The Undiscovered Country 星际迷航 6：未来之城（1991）
+-   Star Trek Generations 星际迷航 7：斗转星移（1994）
+-   Star Trek VIII: First Contact 星际迷航 8：第一次接触（1996）
+-   Star Trek IX: Insurrection 星际迷航 9：起义（1998）
+-   Star Trek Nemesis 星际迷航 10：复仇女神（2002）
+-   Star Trek 星际迷航（2009）
+-   Star Trek Into Darkness 星际迷航：暗黑无界（2013）
+-   Star Trek Beyond 星际迷航：超越星辰（2016）
 
-## Star Trek VIII: First Contact 星际迷航 8：第一次接触（1996）
+
+## Star Trek VIII: First Contact 星际迷航 8：第一次接触（1996） {#star-trek-viii-first-contact-星际迷航-8-第一次接触-1996}
 
 如果有一天，马斯克的公司能造出曲率飞船就好了，这样或许能和外星人来一次「第一次接触」
 
-## Star Trek Into Darkness 星际迷航：暗黑无界（2013）
+
+## Star Trek Into Darkness 星际迷航：暗黑无界（2013） {#star-trek-into-darkness-星际迷航-暗黑无界-2013}
 
 奇异博士演反派，挺精彩
 
-## Star Trek Beyond 星际迷航：超越星辰（2016）
+
+## Star Trek Beyond 星际迷航：超越星辰（2016） {#star-trek-beyond-星际迷航-超越星辰-2016}
 
 当人在宇宙中游荡了太长时间，会渐渐迷失，不知道自己为什么而出发
 
 ---
 
-**参考资料**：
+**参考资料** ：
 
-1. <https://intl.startrek.com/shows>
+1.  <https://intl.startrek.com/shows>

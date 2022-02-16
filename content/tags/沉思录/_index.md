@@ -1,3 +1,3 @@
 +++
-slug = 'meditations'
+slug = "meditations"
 +++

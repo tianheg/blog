@@ -1,3 +1,3 @@
 +++
-slug = 'tech'
+slug = "tech"
 +++

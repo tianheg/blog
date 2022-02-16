@@ -1,3 +1,3 @@
 +++
-slug = 'summary'
+slug = "summary"
 +++

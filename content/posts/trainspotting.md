@@ -1,9 +1,9 @@
 +++
-date = '2021-01-20T20:19:42+08:00'
-description = '看猜火车'
-keywords = ['电影']
-tags = ['电影']
-title = '猜火车'
+title = "猜火车"
+date = 2021-01-20T00:00:00+08:00
+lastmod = 2022-02-16T10:12:51+08:00
+tags = ["电影"]
+draft = false
 +++
 
 1996
@@ -14,16 +14,16 @@ Renton 钻进马桶真的要恶心死我。
 
 远离狐朋狗友
 
-![trainspotting-0](/images/trainspotting-0.jpeg)
+![](https://images.yidajiabei.xyz/trainspotting-0.jpeg "")
 
-![trainspotting-1](/images/trainspotting-1.jpeg)
+![](https://images.yidajiabei.xyz/trainspotting-1.jpeg "")
 
-![trainspotting-2](/images/trainspotting-2.jpeg)
+![](https://images.yidajiabei.xyz/trainspotting-2.jpeg "")
 
-![trainspotting-3](/images/trainspotting-3.jpeg)
+![](https://images.yidajiabei.xyz/trainspotting-3.jpeg "")
 
-![trainspotting-4](/images/trainspotting-4.jpeg)
+![](https://images.yidajiabei.xyz/trainspotting-4.jpeg "")
 
-![trainspotting-5](/images/trainspotting-5.jpeg)
+![](https://images.yidajiabei.xyz/trainspotting-5.jpeg "")
 
-![trainspotting-6](/images/trainspotting-6.jpeg)
+![](https://images.yidajiabei.xyz/trainspotting-6.jpeg "")

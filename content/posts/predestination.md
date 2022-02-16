@@ -1,8 +1,9 @@
 +++
-date = '2019-10-22T20:19:42+08:00'
-keywords = ['电影']
-tags = ['电影']
-title = 'Predestination'
+title = "前目的地"
+date = 2019-10-22T00:00:00+08:00
+lastmod = 2022-02-16T15:34:24+08:00
+tags = ["电影"]
+draft = false
 +++
 
 Predestination 前目的地 - 2014 - 澳大利亚 / 美国
