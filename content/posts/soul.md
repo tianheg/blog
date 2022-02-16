@@ -1,12 +1,13 @@
 +++
-date = '2021-04-11T15:42:07+08:00'
-description = '看《心灵奇旅》'
-keywords = ['电影']
-tags = ['电影']
-title = '心灵奇旅'
+title = "心灵奇旅"
+date = 2021-04-11T00:00:00+08:00
+lastmod = 2022-02-16T15:01:49+08:00
+tags = ["电影"]
+draft = false
 +++
 
-第 2 次看，依然不能有很深刻的体悟。这次回看是因为 Anyway.fm 的一次[播客](https://anyway.fm/soul-movie/)。
+第 2 次看，依然不能有很深刻的体悟。这次回看是因为 Anyway.fm
+的一次[播客](https://anyway.fm/soul-movie/)。
 
 > Hopefully, you will watch where you walk from now on.
 >

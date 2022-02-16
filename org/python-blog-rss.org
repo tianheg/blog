@@ -1,6 +1,7 @@
 #+SETUPFILE: ./hugo_setup.org
 #+TITLE: 通过 Python 为博客生成 RSS
 #+DATE: <2022-01-26 Wed>
+#+HUGO_TAGS: 技术 Python
 生成步骤：
 
 1. 通过 gen-json.js 文件，生成 blogs.json
@@ -98,7 +99,7 @@ def get_end_of_day(date):
     return datetime.strptime(
         f'{date} 08:00:00', '%Y-%m-%d %H:%M:%S').astimezone()
 
-# 读取json文件内容,返回字典格式
+# 读取 json 文件内容,返回字典格式
 with open('./scripts/blogs.json','r',encoding='utf8')as fp:
     json_data = json.load(fp)
     itemLines = ["<item><title>" + str(json_data[x]['title']) + "</title><link>" + site + str(json_data[x]['link']) + "</link><guid isPermaLink=\"true\">" + site + str(json_data[x]['link']) + "</guid><pubDate>" + get_end_of_day(str(json_data[x]['date'])).strftime("%a, %d %b %Y %I:%M:%S %Z") + "</pubDate><description type=\"html\">" + str(json_data[x]['desp']) + "</description></item>\n"for x in range(0, len(json_data) -1)]

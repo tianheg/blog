@@ -1,9 +1,9 @@
 +++
-date = '2021-03-26T21:38:06+08:00'
-description = '雨'
-keywords = ['诗作']
-tags = ['诗作']
-title = '雨'
+title = "雨"
+date = 2021-03-26T00:00:00+08:00
+lastmod = 2022-02-16T15:20:52+08:00
+tags = ["诗作"]
+draft = false
 +++
 
 戴着耳机

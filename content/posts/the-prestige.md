@@ -1,0 +1,28 @@
++++
+title = "致命魔术"
+date = 2021-07-01T00:00:00+08:00
+lastmod = 2022-02-16T10:58:49+08:00
+tags = ["电影"]
+draft = false
++++
+
+观影记录：
+
+1st：2020-03-18
+
+2nd：2021-07-01
+
+Borden 有表演魔术的天赋，Angier 和他都为 Cutter
+表演魔术。在一次表演水箱逃生时，因为 Borden
+系了一个难以解开的结，导致参与表演的女人，也是 Angier
+的妻子，死亡。Borden 自立门户，Angier 继续在 Cutter 的帮助下表演。
+
+Borden 策划了一个极好的魔术：移形换影。表演者在短时间内从 A 处到达 B
+处。Angier 想把它偷过来，于是他派女助手去 Borden
+那里找到魔术的秘密。但是，女助手爱上了 Borden，反过来她和 Borden
+一起陷害 Angier。
+
+Angier 绑架了 Borden 的双胞胎兄弟 Fallon，逼 Borden
+交出日记本的密匙和移形换影的秘密。但是 Borden 只给了他 Tesla 的名字。在
+Tesla 的帮助下，Angier
+获得一台可以复制自己的机器。在剧院表演时，他掉进水缸，被复制出的人再替换他。

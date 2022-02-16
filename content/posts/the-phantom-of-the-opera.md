@@ -1,9 +1,9 @@
 +++
-date = '2020-11-07T20:19:42+08:00'
-description = '看《歌剧魅影》'
-keywords = ['电影']
-tags = ['电影']
-title = '歌剧魅影'
+title = "歌剧魅影"
+date = 2020-11-07T00:00:00+08:00
+lastmod = 2022-02-16T11:10:51+08:00
+tags = ["电影"]
+draft = false
 +++
 
 The Phantom of the Opera(歌剧魅影) - 2004 - 英国
