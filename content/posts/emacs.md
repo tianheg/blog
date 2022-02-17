@@ -1,7 +1,7 @@
 +++
 title = "使用 Emacs"
 date = 2022-02-11T00:00:00+08:00
-lastmod = 2022-02-17T10:33:11+08:00
+lastmod = 2022-02-17T12:48:07+08:00
 tags = ["Emacs", "技术"]
 draft = false
 +++
@@ -174,5 +174,10 @@ draft = false
 2.  <https://emacs.stackexchange.com/a/7313>
 3.  <https://orgmode.org/guide/Tables.html#Tables>
 4.  <https://orgmode.org/manual/Tables.html#Tables>
+
+
+### 使用 Org Mode checkbox {#使用-org-mode-checkbox}
+
+`C-c C-x C-r (org-toggle-radio-button)`  添加新的 checkbox
 
 [^fn:1]: <https://stackoverflow.com/a/1331300>
