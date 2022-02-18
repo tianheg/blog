@@ -1,14 +1,13 @@
 +++
-description = "关于我"
-keywords = "我"
 meta = false
+title = "关于"
 +++
 
 ## 求职自我介绍
 
 博主是 22 届应届毕业生，正在寻求一份前端工程师的实习工作。
 
-对计算机技术感兴趣，学习笔记均在博客中。自认为前端基础不够扎实，前端学习一直在 JS、CSS、HTML。如果您觉得本人符合您的要求，可以联系我：
+对计算机技术感兴趣，学习笔记均在「[技术](/tags/tech/)」菜单中。自认为前端基础不够扎实，前端学习一直在 JS、CSS、HTML。如果您觉得本人符合您的要求，可以联系我：
 
 - Email: me+at+yidajiabei.xyz
 - [新建 GitHub issue](https://github.com/tianheg/blog/issues/new)
