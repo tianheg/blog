@@ -1,7 +1,7 @@
 +++
 title = "Arch 软件安装和用法"
 date = 2021-08-20T00:00:00+08:00
-lastmod = 2022-02-16T08:24:17+08:00
+lastmod = 2022-02-17T18:11:45+08:00
 tags = ["Archlinux", "技术"]
 draft = false
 toc = true
@@ -565,6 +565,8 @@ yay -S rpi-imager
 | sqlitebrowser                                   | SQLite Database browser is a light GUI editor for SQLite databases, built on top of Qt                                                                            |
 | adminer(aur)                                    | Adminer is available for MySQL, MariaDB, PostgreSQL, SQLite, MS SQL, Oracle, Elasticsearch, MongoDB and others via plugin                                         |
 | treeline(aur)                                   | Outliner and PIM which stores information in a tree structure                                                                                                     |
+| skopeo                                          | a command line utility that performs various operations on container images and image repositories                                                                |
+| umoci(aur)                                      | modifies Open Container images                                                                                                                                    |
 
 
 ### MongoDB {#mongodb}
