@@ -1,6 +1,8 @@
 #+SETUPFILE: ./hugo_setup.org
 #+TITLE: 常用脚本
 #+DATE: <2022-01-14 Fri>
+#+HUGO_TAGS: 技术
+
 * 批量删除 Pypi 包
 
 #+BEGIN_SRC sh
@@ -13,4 +15,10 @@ pip freeze | grep SOMETHING | xargs pip uninstall -y
 #+BEGIN_SRC sh
 sudo pacman -Rs $(pacman -Qq | grep some_words)
 # https://bbs.archlinux.org/viewtopic.php?pid=1533162#p1533162
+#+END_SRC
+
+* X.org 下读取文本到剪切板
+
+#+BEGIN_SRC sh
+xclip -sel c < text.txt
 #+END_SRC
