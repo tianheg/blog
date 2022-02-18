@@ -1,7 +1,7 @@
 +++
 title = "Arch Linux 下使用 Docker MySQL 占用过高内存"
 date = 2022-02-18T00:00:00+08:00
-lastmod = 2022-02-18T22:54:25+08:00
+lastmod = 2022-02-18T23:38:03+08:00
 tags = ["技术", "Docker", "MySQL", "Archlinux"]
 draft = false
 +++
@@ -75,3 +75,5 @@ docker stats
 只出不入，容易壅塞。
 
 一条相关 GitHub issue：<https://github.com/docker-library/mysql/issues/579>
+
+之后的测试过程中得到一个短语：memory trap
