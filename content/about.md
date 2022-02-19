@@ -37,9 +37,10 @@ title = "关于"
 
 ## 重要索引
 
-- [感谢清单](/posts/thanks/)
-- [观影](/posts/watch/)
-- [阅读](/posts/read/)
+- [感谢清单](/thanks/)
+- [观影](/watch/)
+- [阅读](/read/)
+- [听音](/listen/)
 
 ## 友链
 

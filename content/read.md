@@ -9,23 +9,23 @@ tocnum = false
 ## 读书分类 {#读书分类}
 
 
-### 软件开发 + 计算机科学 {#软件开发-计算机科学}
+### 软件开发 + 计算机科学 {#软件开发-plus-计算机科学}
 
--   [HTML5 权威指南](blog/2021/definitive-guide-to-html5.org)，by Adam Freeman
+-   [HTML5 权威指南](/posts/definitive-guide-to-html5/)，by Adam Freeman
 -   Introducing HTML5
 -   张鑫旭：CSS 世界 CSS 选择器世界 CSS 新世界
 -   CSS 解密
 -   CSS The Definitive Guide
--   [DOM Scripting](blog/2022/dom-scripting.org)
--   [JavaScript 高级程序设计第 4 版](blog/2021/professional-javascript-for-web-developers.org)，by Matt Frisbie
--   [深入 PHP 与 jQuery 开发](blog/2022/pro-php-and-jquery.org)，by Jason Lengstorf
+-   [DOM Scripting](/posts/dom-scripting/)
+-   [JavaScript 高级程序设计第 4 版](/posts/professional-javascript-for-web-developers/)，by Matt Frisbie
+-   [深入 PHP 与 jQuery 开发](/posts/pro-php-and-jquery/)，by Jason Lengstorf
 -   You Don't Know JS
 -   Computer Networking: A Top-Down Approach 计算机网络：自顶向下法
 -   图解 HTTP，by 上野宣
 -   Operating System Concepts
 -   Modern Operating Systems
 -   Operating Systems: Three Easy Pieces 操作系统导论
--   [鸟哥的 Linux 私房菜](blog/2020/birdman-linux.org)，by 鸟哥
+-   [鸟哥的 Linux 私房菜](/posts/birdman-linux/)，by 鸟哥
 -   Structure and Interpretation of Computer Programs(Scheme 语言)
 -   [Composing Programs](https://composingprograms.com/)(Python3 语言)
 -   [How to Design Programs, Second Edition](http://htdp.org/2021-11-15/Book/index.html)
@@ -49,7 +49,7 @@ tocnum = false
     -   Introduction to Linear Algebra
 -   Readings in Database Systems
 -   Crafting Interpreters
--   [How to be a Programmer 中文版](2021/how-to-be-a-programmer-zh.org)，by Robert L. Read
+-   [How to be a Programmer 中文版](/posts/how-to-be-a-programmer-zh/)，by Robert L. Read
 -   程序员修炼之道(第 2 版)(The Pragmatic Programmer: From Journeyman to Master)，by David Thomas, Andrew Hunt
 -   信息检索，by 黄如花
 -   参考资料
@@ -64,7 +64,7 @@ tocnum = false
 -   比尔・盖茨全传，by 于成龙
 -   加西亚·马尔克斯传，by 杰拉德·马丁
 -   牛津通识读本：罗素，by A.C.格雷林
--   [爱因斯坦自述](blog/2021/einstein-himself.org)，by 爱因斯坦
+-   [爱因斯坦自述](/posts/einstein-himself/)，by 爱因斯坦
 
 
 ### 社会科学 {#社会科学}
@@ -85,8 +85,8 @@ tocnum = false
 -   怪诞心理学(Quirkology: The Curious Science of Everyday Lives)，by 理查德·怀斯曼
 -   怪诞脑科学(Kluge: The Haphazard Construction of the Human Mind)，by 盖瑞·马库斯
 -   人的自我寻求，by 罗洛·梅
--   [道德经](blog/2021/tao-te-ching.org) by 老子
--   [极简个性心理学](blog/2021/making-sence-of-people.org)，by 塞缪尔·巴伦德斯
+-   [道德经](/posts/tao-te-ching/) by 老子
+-   [极简个性心理学](/posts/making-sence-of-people/)，by 塞缪尔·巴伦德斯
 -   荷马史诗
 -   亚里士多德
 -   卢梭
@@ -146,7 +146,7 @@ tocnum = false
 
 ### 自然学科 {#自然学科}
 
--   [阿西莫夫最新科学指南（上下册）](blog/2021/asimov-the-intelligent-mans-guide-to-science.org) by 阿西莫夫
+-   [阿西莫夫最新科学指南（上下册）](/posts/asimov-the-intelligent-mans-guide-to-science/) by 阿西莫夫
 -   智能科学，by 史忠植
 -   5G 时代，by 项立刚
 -   数学
@@ -156,9 +156,9 @@ tocnum = false
 
 ### 自我成长 {#自我成长}
 
--   [人人都能用英语](blog/2020/everyone-can-use-english.org) by 李笑来
+-   [人人都能用英语](/posts/everyone-can-use-english/) by 李笑来
 -   企业家爸爸写给女儿的信，by G.金斯利・沃德
--   [如何有效整理信息](blog/2021/how-to-organize-information-effectively.org) by 奥野宣之
+-   [如何有效整理信息](/posts/how-to-organize-information-effectively/) by 奥野宣之
 -   跃迁，by 古典
 -   好好学习，by 成甲
 -   影响力，by 罗伯特・西奥迪尼
@@ -172,26 +172,26 @@ tocnum = false
 -   财富自由之路，by 博多·舍费尔
 -   学会如何学习，by Barbara Oakley
 -   学习之道，by Barbara Oakley
--   [未来世界的幸存者](blog/2020/survivors-of-the-future.org) by 阮一峰
--   [黑客与画家](blog/2021/paul-graham-hackers-and-painters.org)，by Paul Graham
+-   [未来世界的幸存者](/posts/survivors-of-the-future/) by 阮一峰
+-   [黑客与画家](/posts/paul-graham-hackers-and-painters/)，by Paul Graham
 -   你凭什么做好互联网：从技术思维到商业逻辑，by caoz（曹大）（正确决策）
 -   硅谷之火——人与计算机的未来，by 保罗·弗赖伯格、迈克尔·斯韦因
 
 
 ### 文学创作 {#文学创作}
 
--   [朝花夕拾](blog/2021/luxun-zhaohuaxishi.org) by 鲁迅
--   [一个女人一生中的二十四小时](blog/2019/24-hours-in-the-life-of-a-woman.org) by 茨威格
--   [永恒的终结](blog/2021/asimov-the-end-of-eternity.org) by 阿西莫夫
--   [遥远的救世主](blog/2019/distant-savior.org) by 豆豆
--   [红楼梦](blog/2019/dream-of-the-red-chamber.org) by 曹雪芹
+-   [朝花夕拾](/posts/luxun-zhaohuaxishi/) by 鲁迅
+-   [一个女人一生中的二十四小时](/posts/24-hours-in-the-life-of-a-woman/) by 茨威格
+-   [永恒的终结](/posts/asimov-the-end-of-eternity/) by 阿西莫夫
+-   [遥远的救世主](/posts/distant-savior/) by 豆豆
+-   [红楼梦](/posts/dream-of-the-red-chamber/) by 曹雪芹
 -   毛姆
     -   月亮与六便士
     -   👍👍刀锋
     -   👍👍人性的枷锁
     -   面纱
     -   寻欢作乐
-    -   [读书随想录](blog/2021/maugham-thoughts-about-books.org)
+    -   [读书随想录](/posts/maugham-thoughts-about-books/)
 -   狼王梦，by 沈石溪
 -   哑舍全集，by 玄色
 -   没有星星，夜不滚烫，by 榛生
@@ -201,8 +201,8 @@ tocnum = false
 -   小窗幽记，by 陆绍珩
 -   二十首情诗和一首绝望的歌，by 巴勃罗・聂鲁达
 -   仓央嘉措诗传全集，by 闫晗
--   👍👍[牧羊少年奇幻之旅](blog/2021/o-alquimista.org)，by 保罗・柯艾略
--   [恍惚人间](blog/2019/huang-hu-ren-jian.org) by 小考拉
+-   👍👍[牧羊少年奇幻之旅](/posts/o-alquimista/)，by 保罗・柯艾略
+-   [恍惚人间](/posts/huang-hu-ren-jian/) by 小考拉
 -   世界文学名著英汉对照全译精选，by 英语学习大书虫研究室等
 -   沙漠里的爱情，by 巴尔扎克（士兵与母豹的奇妙爱情）
 -   谈美，by 朱光潜
@@ -221,8 +221,8 @@ tocnum = false
 -   时间之问，by 汪波
 -   傅雷家书，by 傅雷、朱敏馥、傅聪、傅敏
 -   看见，by 柴静
--   未解之谜（上），by 克雷格・P.鲍尔
--   未解之谜（下），by 克雷格・P.鲍尔
+-   未解之谜（上），by 克雷格・ P.鲍尔
+-   未解之谜（下），by 克雷格・ P.鲍尔
 -   流量是蓝海，by 毕胜
 -   👍👍 外婆的道歉信，by 弗雷德里克・巴克曼
 -   👍👍 过于喧嚣的孤独，by 博胡米尔·赫拉巴尔
@@ -269,12 +269,12 @@ tocnum = false
 -   银河帝国：苍穹一粟，by Isaac Asimov
 -   少数派报告(The Minority Report)，by Philip K. Dick
 -   莱根谭，by 洪应明
--   [天生有罪](blog/2021/trevor-noah-born-a-crime.org) by 特雷弗·诺亚
+-   [天生有罪](/posts/trevor-noah-born-a-crime/) by 特雷弗·诺亚
 -   新版名：活过，爱过，写过；旧版名：人间采蜜记（自传），by 李银河
 -   爱你就像爱生命，by 王小波
 -   无人生还，by 阿加莎·克里斯蒂
--   [雪崩](blog/2021/neal-stephenson-snow-crash.org)，by Neal Stephenson
--   [克拉拉与太阳](blog/2021/kazuo-shiguro-klara-and-the-sun.org)，by 石黑一雄
+-   [雪崩](/posts/neal-stephenson-snow-crash/)，by Neal Stephenson
+-   [克拉拉与太阳](/posts/kazuo-shiguro-klara-and-the-sun/)，by 石黑一雄
 -   编码宝典
 -   沙丘
 -   万有引力之虹
@@ -406,7 +406,7 @@ tocnum = false
 ## 很好的资源 {#很好的资源}
 
 1.  [中国哲学书电子化计划](https://ctext.org/zhs)
-2.  选择出版图书方法(包月服务)：微信读书(19)->亚马逊(12)
+2.  选择出版图书方法(包月服务)：微信读书(19)-&gt;亚马逊(12)
 3.  [Best-Books.dev](https://www.best-books.dev/) - 一个收录各种优质程序书籍的网站
 4.  [All IT eBooks - Best Free IT eBooks Download](https://allitebook.xyz/)
 5.  [free-programming-books](https://ebookfoundation.github.io/free-programming-books/)
@@ -415,7 +415,7 @@ tocnum = false
 8.  [前端精读周刊](https://github.com/ascoders/weekly)
 9.  [Web-Security-Learning](https://chybeta.github.io/2017/08/19/Web-Security-Learning/)
 10. [Z-lib](https://z-lib.org/)
-11. [虫部落](https://www.chongbuluo.com/) -> 搜书
+11. [虫部落](https://www.chongbuluo.com/) -&gt; 搜书
 12. [LoreFree ebook](https://ebook2.lorefree.com/)
 13. [走读派读书导航](http://www.zoudupai.com/)
 14. [图灵](https://www.ituring.com.cn/)
