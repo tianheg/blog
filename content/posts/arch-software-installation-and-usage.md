@@ -1,7 +1,7 @@
 +++
 title = "Arch 软件安装和用法"
 date = 2021-08-20T00:00:00+08:00
-lastmod = 2022-02-18T11:28:24+08:00
+lastmod = 2022-02-19T09:19:22+08:00
 tags = ["Archlinux", "技术"]
 draft = false
 toc = true
@@ -568,6 +568,7 @@ yay -S rpi-imager
 | skopeo                                          | a command line utility that performs various operations on container images and image repositories                                                                |
 | umoci(aur)                                      | modifies Open Container images                                                                                                                                    |
 | zeal-git(aur)                                   | A simple documentation browser                                                                                                                                    |
+| snyk(aur)                                       | CLI and build-time tool to find &amp; fix known vulnerabilities in open-source dependencies                                                                       |
 
 
 ### MongoDB {#mongodb}
