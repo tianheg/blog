@@ -1,7 +1,7 @@
 +++
 title = "LC2. 两数相加"
 date = 2022-02-12T00:00:00+08:00
-lastmod = 2022-02-14T18:24:42+08:00
+lastmod = 2022-02-20T21:21:01+08:00
 tags = ["LeetCode", "技术"]
 draft = false
 mermaid = true
@@ -34,6 +34,36 @@ graph LR
     C["3&nbsp; |#nbsp;"] --> D["NULL"]
     style D fill:#fff,stroke:#fff,color:#000
 </div>
+
+不知道链表的相关知识，这道题目不会做。照着题解抄了一遍。
+
+```js
+let addTwoNumbers = function (l1, l2) {
+  let head = null, tail = null;
+  let carry = 0;
+  while (l1 || l2) {
+    const n1 = l1 ? l1.val : 0;
+    const n2 = l2 ? l2.val : 0;
+    if (!head) {
+      head = tail = new ListNode(sum % 10);
+    } else {
+      tail.next = new ListNode(sum % 10);
+      tail = tail.next;
+    }
+    carry = Math.floor(sum / 10);
+    if (l1) {
+      l1 = l1.next;
+    }
+    if (l2) {
+      l2 = l2.next;
+    }
+  }
+  if (carry > 0) {
+    tail.next = new ListNode(carry);
+  }
+  return head;
+}
+```
 
 [^fn:1]: <https://leetcode-cn.com/problems/add-two-numbers/>
 [^fn:2]: <http://data.biancheng.net/view/160.html>
