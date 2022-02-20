@@ -73,8 +73,9 @@ sudo vim /usr/lib/systemd/system/docker.service
 
 找到 =ExecStart= 并按以下方式修改：
 
-#+BEGIN_SRC conf
-ExecStart=/usr/bin/dockerd -H fd:// -H tcp://127.0.0.1:2375
+#+BEGIN_SRC diff
+- ExecStart=/usr/bin/dockerd -H fd://
++ ExecStart=/usr/bin/dockerd -H fd:// -H tcp://127.0.0.1:2375
 #+END_SRC
 
 重载 =systemctl= 配置，重启 Docker：

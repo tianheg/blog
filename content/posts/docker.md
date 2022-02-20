@@ -1,7 +1,7 @@
 +++
 title = "Docker 基本使用"
 date = 2022-02-17T00:00:00+08:00
-lastmod = 2022-02-18T16:06:26+08:00
+lastmod = 2022-02-20T09:04:59+08:00
 tags = ["技术", "Docker"]
 draft = false
 +++
@@ -85,8 +85,9 @@ sudo vim /usr/lib/systemd/system/docker.service
 
 找到 `ExecStart` 并按以下方式修改：
 
-```cfg
-ExecStart=/usr/bin/dockerd -H fd:// -H tcp://127.0.0.1:2375
+```diff
+- ExecStart=/usr/bin/dockerd -H fd://
++ ExecStart=/usr/bin/dockerd -H fd:// -H tcp://127.0.0.1:2375
 ```
 
 重载 `systemctl` 配置，重启 Docker：
