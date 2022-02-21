@@ -23,6 +23,7 @@ tocnum = false
 - 图解 HTTP，by 上野宣
 - Operating System Concepts
 - Modern Operating Systems
+- [Operating System Concepts](/posts/operating-system-concepts/)
 - Operating Systems: Three Easy Pieces 操作系统导论
 - [鸟哥的 Linux 私房菜](/posts/birdman-linux/)，by 鸟哥
 - Structure and Interpretation of Computer Programs(Scheme 语言)
