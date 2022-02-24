@@ -1,9 +1,10 @@
 +++
 title = "学习《web.dev CSS 教程》"
 date = 2022-02-20T00:00:00+08:00
-lastmod = 2022-02-20T20:14:12+08:00
+lastmod = 2022-02-24T20:53:46+08:00
 tags = ["技术", "CSS"]
 draft = false
+toc = true
 +++
 
 <https://web.dev/learn/css/>
@@ -26,3 +27,38 @@ draft = false
 ### 盒子模型是如何划分区域的 {#盒子模型是如何划分区域的}
 
 ![](/web-dev-css-box-model-1.svg "from https://web.dev/learn/css/box-model/")
+
+box-sizing: border-box;
+
+
+## Selectors 选择器 {#selectors-选择器}
+
+-   通用选择器（通配符）
+-   属性选择器
+-   伪类，伪元素（它们的区别：后者通过 `::` 使用）
+-   Combinators
+    -   Descendant combinator
+    -   Next sibling combinator
+    -   Subsequent- sibling combinator
+    -   Child combinator
+-   Compound selectors
+
+如果 class 中含有不止目标 class 的其他类，在进行 CSS 设置时也会匹配。因为 CSS 查找 class 属性是否被包含，而不是恰好符合目标 class。
+
+
+## The cascade {#the-cascade}
+
+当同一个元素被多种 CSS 规则修改时，哪些规则的优先级更高？
+
+---
+
+
+## 参考资料 {#参考资料}
+
+1.  <https://developer.mozilla.org/en-US/docs/Web/CSS>
+2.  <https://flukeout.github.io/>
+3.  User agent stylesheets
+    -   [Chromium](https://chromium.googlesource.com/chromium/blink/+/master/Source/core/css/html.css)
+    -   [Firefox](https://searchfox.org/mozilla-central/source/layout/style/res/html.css)
+    -   [Webkit](https://trac.webkit.org/browser/trunk/Source/WebCore/css/html.css)
+4.  Selectors Explained <https://kittygiraudel.github.io/selectors-explained/>
