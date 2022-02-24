@@ -1,10 +1,8 @@
 #+SETUPFILE: ./hugo_setup.org
-#+TITLE: 学习《网道HTML教程》
+#+TITLE: 学习HTML
 #+DATE: <2022-02-21 Mon>
 #+HUGO_TAGS: 技术 HTML
 #+HUGO_CUSTOM_FRONT_MATTER: :toc true
-
-https://wangdoc.com/html/
 
 HTML 是网页使用的语言，定义了网页的结构和内容。
 * 网页基本概念
@@ -156,7 +154,126 @@ ol：
 - reversed 倒序数字
 - start 开始的数字
 - type：A、a、i、I、1
+* 图像标签
+** img
+#+BEGIN_SRC html
+<img src="" alt="">
+#+END_SRC
+默认是行内元素。
+
+如何让图片变成链接？
+
+#+BEGIN_SRC html
+<a href="">
+  <img src="" alt="">
+</a>
+#+END_SRC
+
+属性：
+- alt
+- width、height
+- srcset、sizes
+- referrerpolicy
+- crossorigin
+- loading
+
+一旦设置 width、height，浏览器会为图片预留出这些空间，但图片无法加载时就会很难看。
+
+如果只设置 width 或 height，则图片会等比例调整大小。
+** figure、figcaption
+#+BEGIN_SRC html
+<figure>
+  <img src="">
+  <figcaption>说明文字</figcaption>
+</figure>
+#+END_SRC
+除了图像，figure 还可以用于引用、代码、诗歌等场景。
+** 响应式图像
+响应式设计（responsive web design）：网页在不同尺寸的设备上，都能产生良好的显示效果；
+
+响应式设计中的图像部分，就是响应式图像（responsive image）。
+
+图片在不同尺寸的设备上显示时，显示效果不同。在电脑上显示正常的图片，在手机看着就很别扭。而响应式图像就是能够同时满足电脑和手机两类终端的图片设置方式。
+
+- srcset 用于指定多张图像，适应不同像素密度的屏幕
+#+BEGIN_SRC html
+<img srcset="a-320w.jpg, a-480w.jpg 1.5x, a-640w.jpg x2" src="a-640w.jpg">
+#+END_SRC
+
+=1.5x= 是 1.5 倍像素密度。
+
+- sizes 不同尺寸显示不同大小图像，配合 srcset 使用
+#+BEGIN_SRC html
+<img srcset="foo-160.jpg 160w,
+             foo-320.jpg 320w,
+             foo-640.jpg 640w,
+             foo-1280.jpg 1280w"
+sizes="(max-width: 440px) 100vw,
+(max-width: 900px) 33vw,
+254px"
+src="foo-1280.jpg">
+#+END_SRC
+** picture
+#+BEGIN_SRC html
+<picture>
+  <source media="(max-width: 500px)" srcset="a.jpg">
+  <source media="(min-width: 501px)" srcset="b.jpg">
+  <img src="c.jpg" alt="test">
+</picture>
+#+END_SRC
+还可以同时考虑屏幕尺寸和像素密度的适配进行操作。
+
+图片格式的调整：
+#+BEGIN_SRC html
+<picture>
+  <source type="image/svg+xml" srcset="logo.xml">
+  <source type="image/webp" srcset="logo.webp"> 
+  <img src="logo.png" alt="ACME Corp">
+</picture>
+#+END_SRC
+浏览器按照 picture 中的图片格式顺序，依次检查是否支持：svg、webp、png。
+* 链接标签
+- a
+
+rel：
+
+noreferrer 告诉浏览器打开链接时，不要将当前网址作为 HTTP 头信息的 Referer 字段发送出去，这样可以隐藏点击来源。
+
+noopener 告诉浏览器打开链接时，不让链接窗口通过 JS 的 window.opener 属性引用原始窗口，这样就提高了安全性。
+
+- mailto
+- tel
+- link
+- script
+- noscript
+* 多媒体标签
+- video
+- audio
+- track
+- source
+- embed
+- object, param
+* iframe
+用于嵌入其他网页。
+* 表格
+- table、caption
+- thead、tbody、tfoot
+- colgroup、col
+- tr
+- th、td
+* 表单
+- form
+* 其他标签
+- dialog
+- details、summary
 
 ---
-
-1. https://developer.mozilla.org/en-US/docs/Web/HTML
+* 参考资料
+1. https://wangdoc.com/html/
+2. https://developer.mozilla.org/en-US/docs/Web/HTML
+3. https://htmlhead.dev/
+4. http://html5doctor.com/
+5. https://www.w3schools.com/html/default.asp
+6. HTML 5 权威指南
+7. HTML 标准 https://html.spec.whatwg.org/multipage/
+8. https://github.com/diegocard/awesome-html5
