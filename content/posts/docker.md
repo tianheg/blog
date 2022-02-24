@@ -1,9 +1,10 @@
 +++
 title = "Docker 基本使用"
 date = 2022-02-17T00:00:00+08:00
-lastmod = 2022-02-20T09:04:59+08:00
+lastmod = 2022-02-23T15:02:55+08:00
 tags = ["技术", "Docker"]
 draft = false
+toc = true
 +++
 
 ## 安装 {#安装}
@@ -132,7 +133,25 @@ sudo netstat -lntp | grep dockerd
 可以把容器视为 `chroot` 的扩展。文件系统来自镜像，但比 `chroot` 多了一层隔离。
 
 
-### ToDo 应用 {#todo-应用}
+## 常用命令 {#常用命令}
+
+```sh
+docker ps # 列出所有正在运行的容器
+docker ps -a # 列出所有容器
+docker build -t image_name . # 根据当前目录下的 Dockerfile，构建镜像
+docker run -dp 3000:3000 image_name # 后台运行 image_name，本地端口 3000，容器内端口也是 3000
+
+## 在对 image 内容进行修改后，需要再次运行 docker build 以更新构建
+docker stop container_name # 停止正在运行容器
+docker rm -f container_name # 移除正在运行容器
+docker rm container_name # 移除已停止容器
+
+## 发布自己的 image
+docker push USER_NAME/image_name
+
+## 在容器内部执行命令
+docker exec <container-id> command
+```
 
 [^fn:1]: <https://docs.docker.com/engine/install/linux-postinstall/#manage-docker-as-a-non-root-user>
 [^fn:2]: <https://docs.docker.com/engine/install/linux-postinstall/#configure-docker-to-start-on-boot>
