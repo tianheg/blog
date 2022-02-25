@@ -1,17 +1,13 @@
 #+SETUPFILE: ./hugo_setup.org
 #+TITLE: 为 GitHub 主页添加「年进度」和「最近更新的博客文章」
 #+DATE: <2021-01-26 Tue>
-午饭前看到一个
-issue：[[https://github.com/ruanyf/weekly/issues/1616][[开源自荐] 利用
+#+HUGO_TAGS: 技术 GitHub
+
+午饭前看到一个 issue：[[https://github.com/ruanyf/weekly/issues/1616][[开源自荐] 利用
 Github Actions 获取网站的 RSS 数据，并更新到个人主页]]。
 
-标题勾起了我学习的兴趣。自己也想进一步学习
-[[/tags/github-actions/][GitHub Actions]] 的使用。
-
-** 添加「年进度」
-   :PROPERTIES:
-   :CUSTOM_ID: 添加年进度
-   :END:
+标题勾起了我学习的兴趣。自己也想进一步学习 [[/tags/github-actions/][GitHub Actions]] 的使用。
+* 添加「年进度」
 用到了 JavaScript 的知识，代码：
 
 #+begin_src js
@@ -48,12 +44,8 @@ Github Actions 获取网站的 RSS 数据，并更新到个人主页]]。
 7. =generateProgressBar= 生成进度条
 8. =function= 定义函数
 
-** 添加「最近更新的博客文章」
-   :PROPERTIES:
-   :CUSTOM_ID: 添加最近更新的博客文章
-   :END:
-使用了 [[https://github.com/pypa/pipenv][pipenv]] 这个 Python
-开发工作流。在与个人用户名相同的仓库中添加 =Pipfile=：
+* 添加「最近更新的博客文章」
+使用了 [[https://github.com/pypa/pipenv][pipenv]] 这个 Python 开发工作流。在与个人用户名相同的仓库中添加 =Pipfile= ：
 
 #+begin_example
   [[source]]
@@ -139,7 +131,7 @@ WSL2-Ubuntu20.04。我已经安装了最新版本的 pip，直接安装 pipenv �
       return result
 
   def main():
-      blog =  get_link_info("https://blog.yidajiabei.xyz/index.xml", 3)
+      blog =  get_link_info("https://www.yidajiabei.xyz/index.xml", 3)
       insert_info = blog
 
       # 替换 ---start--- 到 ---end--- 之间的内容
@@ -160,16 +152,12 @@ WSL2-Ubuntu20.04。我已经安装了最新版本的 pip，直接安装 pipenv �
   main()
 #+end_example
 
-它是一个 Python 源文件，主要作用就是在 =README.md= 文件的 =---start---=
-和 =---end---= 插入我最近更新的三篇文章。
+它是一个 Python 源文件，主要作用就是在 =README.md= 文件的 =---start---= 和 =---end---= 插入我最近更新的三篇文章。
 
-** 整合 GitHub Actions
-   :PROPERTIES:
-   :CUSTOM_ID: 整合-github-actions
-   :END:
+* 整合 GitHub Actions
 我想让 GitHub Actions 帮我完成这两件事。我需要怎么做呢？
 
-首先，新建文件 =~\.github\workflows\main.yml=，并添加以下内容：
+首先，新建文件 =~/.github/workflows/main.yml=，并添加以下内容：
 
 #+begin_example
   name: update tianheg profile
@@ -207,35 +195,22 @@ WSL2-Ubuntu20.04。我已经安装了最新版本的 pip，直接安装 pipenv �
             git push
 #+end_example
 
-*注释*：
+注释：
 
 1.  =name= 名字是任取的，能表达意思即可
-2.  =on= 何时运行。=workflow_dispatch=
-    能让我手动执行工作流，=0 */6 * * *=
-    是一种表示周期时间的语法，当前含义：每六个小时执行一次（[[https://crontab.guru/][了解更多]]）
+2.  =on= 何时运行。 =workflow_dispatch= 能让我手动执行工作流， =0 */6 * * *= 是一种表示周期时间的语法，当前含义：每六个小时执行一次（[[https://crontab.guru/][了解更多]]）
 3.  =jobs= 它后面就是具体的工作流
 4.  =build= 第一个工作的名称，单个任意单词即可
-5.  =runs-on: ubuntu-latest= 表示在 Ubuntu 最新版（此时最新版指
-    18.04LTS，不久将更换为 20.04LTS）运行
+5.  =runs-on: ubuntu-latest= 表示在 Ubuntu 最新版（最新版指 20.04LTS）运行
 6.  =steps= 步骤
-7.  =uses: actions/checkout@v2= 使用 actions/checkout@v2
-    将当前仓库复制到虚拟环境（ubuntu-latest）中。
-8.  =uses: actions/setup-node@v1=，=node-version: '14.x'= 安装 Node.js
-    14.x
+7.  =uses: actions/checkout@v2= 使用 actions/checkout@v2 将当前仓库复制到虚拟环境（ubuntu-latest）中。
+8.  =uses: actions/setup-node@v1=，=node-version: '14.x'= 安装 Node.js 14.x
 9.  =run: node index.js > README.md= 把「年进度」更新到 README.md 中
-10. =uses: tianheg/github-actions@pipenv=，=command: install --dev=，=command: run build=
-    安装 pipenv 环境（因为会用到很多 GitHub
-    Actions，于是就把有用的整成一个仓库），并执行命令
-    =pipenv install --dev=，然后执行命令 =pipenv run build=
-11. 最后一部分就是使用 github-actions[bot] 机器人作为提交者，提交这次
-    commit
+10. =uses: tianheg/github-actions@pipenv=，=command: install --dev=，=command: run build= 安装 pipenv 环境（因为会用到很多 GitHub Actions，于是就把有用的整成一个仓库），并执行命令 =pipenv install --dev= ，然后执行命令 =pipenv run build=
+11. 最后一部分就是使用 github-actions[bot] 机器人作为提交者，提交这次 commit
 
-** 解释 tianheg/github-actions@pipenv
-   :PROPERTIES:
-   :CUSTOM_ID: 解释-tianheggithub-actionspipenv
-   :END:
-这是我使用的关于 pipenv 的 GitHub Actions，它位于我的 GitHub 仓库的
-pipenv 分支中。
+* 解释 tianheg/github-actions@pipenv
+这是我使用的关于 pipenv 的 GitHub Actions，它位于我的 GitHub 仓库的 pipenv 分支中。
 
 文件结构：
 
@@ -247,7 +222,7 @@ pipenv 分支中。
   entrypoint.sh
 #+end_example
 
-主要发挥作用的是 =Dockerfile=，=entrypoint.sh=。
+主要发挥作用的是 =Dockerfile= ， =entrypoint.sh= 。
 
 =Dockerfile= 内容：
 
@@ -272,16 +247,12 @@ pipenv 分支中。
   sh -c "pipenv $*"
 #+end_example
 
-对于 Dockerfile
-我不了解它的使用细节，但从这个文件里，我看出它完成了这几件事：获得
-Python3；升级 pip；安装 pipenv；复制 entrypoint.sh 到根目录；给
-entrypoint.sh 执行权限。
+对于 Dockerfile 我不了解它的使用细节，但从这个文件里，我看出它完成了这几件事：获得 Python3；升级 pip；安装 pipenv；复制 entrypoint.sh 到根目录；给 entrypoint.sh 执行权限。
 
-对于 entrypoint.sh 它完成的是输入了
-=pipenv=。这样在执行命令时，才能够只输入 =install --dev=，=run build=。
+对于 entrypoint.sh 它完成的是输入了 =pipenv= 。这样在执行命令时，才能够只输入 =install --dev= ， =run build= 。
 
---------------
+---
 
-*参考资料*：
+参考资料
 
 1. [[https://github.com/zhaoolee/zhaoolee]]
