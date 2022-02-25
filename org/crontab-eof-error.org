@@ -1,0 +1,13 @@
+#+SETUPFILE: ./hugo_setup.org
+#+TITLE: crontab EOF错误
+#+DATE: <2022-02-25 Fri>
+#+HUGO_TAGS: 技术
+
+当出现以下错误提示时：
+#+BEGIN_SRC sh
+crontab: installing new crontab
+"/tmp/crontab.8jYVxO":1: premature EOF
+Invalid crontab file, can't install.
+#+END_SRC
+
+说明，写完第一行代码后，没有按空格键换行。 =premature EOF= 意为过早地结束文件。
