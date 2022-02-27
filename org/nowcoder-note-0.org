@@ -1,0 +1,182 @@
+#+SETUPFILE: ./hugo_setup.org
+#+TITLE: 牛客前端笔试题总结（零）
+#+DATE: <2022-02-21 Mon>
+#+HUGO_TAGS: 技术
+https://www.nowcoder.com/test/question/analytic?tid=51960893
+
+一、进程从运行状态进入就绪状态的原因可能是
+
+时间片用完。
+
+二、在可变式分区分配方案中，将空白区在空白区表中按地址递增次序排列的是
+
+最先适应算法
+
+三、在 MySQL 中 Replace 在相同的主键或者唯一键的时候相当于哪一个操作
+
+DELETE+INSERT
+
+四、在计算机操作系统中，信号量可以用来保证两个或多个关键代码段不被并发调用，而在进入一个关键代码段之前，线程必须获取到一个信号量。现假设有 4 个进程共享同一程序段，而且每次最多允许 3 个进程进入该程序段，则信号量的变化范围是多少
+
+-1~3
+
+五、主机 A 与主机 B 已建立 TCP 连接，A 的 cwnd（拥塞窗口）大小初始值为 1kb，ssthresh（阈值）为 16kb，B 的 rwnd（接收缓存窗口）初始值为 8kb，一个最大报文段为 1kb，假设传输过程中未出现超时，经过 3 个 RTT（3 轮传输）后，且 B 尚未从缓存中取出任何数据时，主机 A 的发送窗口大小为
+
+六、借助队列采用非递归的方式对二叉树进行层次遍历，遍历方向为从左至右，在遍历过程中，队列中的元素最多为多少个
+#+BEGIN_EXPORT hugo
+![](/binary-tree.svg "二叉树的结构")
+#+END_EXPORT
+
+七、在一棵普通的树上，a 与 b 互为兄弟节点。将树转为二叉树后，下列哪种情形最不可能发生（在将普通树转为二叉树过程中，节点在删除与自身子节点的连线时，只保留与最左侧子节点之间的连线）
+
+A a 是 b 的右孩子
+
+B a 是 b 的左孩子
+
+C a 是 b 的祖先节点
+
+D b 是 a 的祖先节点
+
+八、这里有一张中国高校院士数目信息表（院士姓名，高校所在省区）
+
++-----------+---------+
+|  name     | province|
++-----------+---------+
+| ad        |     GD  |
+| ws        |     ZJ  |
+| ge        |     FJ  |
+| MO        |     SX  |
+| wi        |     ZJ  |
++-----------+---------+
+
+写 SQL 语句，查询出哪个省区，出生院士人数最多？
+
+九、二叉树的中序遍历为[5,4,1,2,3,6]，后序遍历为[4,5,2,6,3,1]，新建平衡二叉树，按二叉树的前序遍历顺序将元素插入到平衡二叉树中，对于得到的平衡二叉树说法不正确的是
+
+A 有 3 个叶子结点
+
+B 度为 1 的结点只有结点 5
+
+C 前序遍历为[4,2,1,3,6,5]
+
+D 后序遍历为[1,3,2,6,5,4]
+
+十、以下关于 JavaScript 中数据类型的说法错误的是
+
+A 数据类型分为基本数据类型和引用数据类型
+
+B JavaScript 一共有 8 种数据类型
+
+C Object 是引用数据类型，且只存储于堆(heap)中
+
+D BigInt 是可以表示任意精度整数的基本数据类型，存储于栈(stack)中
+
+十一、以下输出结果
+#+BEGIN_SRC js
+const first = () => { console.log('first'); return false; }
+const second = () => { console.log('second'); return true; }
+console.log( first() && second() );
+console.log( second() || first() );
+#+END_SRC
+
+十二、两段代码的结果
+#+BEGIN_SRC js
+check('first');
+function check(ars){
+    console.log(ars);
+}
+#+END_SRC
+
+#+BEGIN_SRC js
+check('second');
+var check= function(ars){
+    console.log(ars);
+}
+#+END_SRC
+
+十三、
+#+BEGIN_SRC js
+const Book = {
+  price: 32
+}
+const book = Object.create(Book);
+book.type = 'Math';
+delete book.price;
+delete book.type;
+console.log(book.price);
+console.log(book.type);
+#+END_SRC
+
+十四、
+#+BEGIN_SRC js
+function side(arr) {
+    arr[0] = arr[2];
+}
+function func1(a, b, c = 3) {
+    c = 10;
+    side(arguments);
+    console.log(a + b + c);
+}
+function func2(a, b, c) {
+    c = 10;
+    side(arguments);
+    console.log(a + b + c);
+}
+func1(1, 1, 1);
+func2(1, 1, 1);
+#+END_SRC
+
+十六、以下主机可以和 202.115.112.218/28 直接通信的是
+
+A 202.115.112.205/28
+
+B 202.115.112.225/28
+
+C 202.115.112.195/28
+
+D 202.115.112.212/28
+
+十七、网络协议之间有规定的层次关系，下面选项中层次关系正确的是，上一层的网络的底层应该有下一层
+
+十八、某个有向图如下，从顶点 v1 出发对其进行深度优先遍历，可能得到的遍历序列是（1）；从顶点 v1 出发对其进行广度优先遍历，可能的到的序列是（2）
+#+BEGIN_EXPORT hugo
+![](/directed-graph.svg "")
+#+END_EXPORT
+
+十九、学生表
+#+BEGIN_SRC sql
+CREATE TABLE students (
+  s_id VARCHAR(20) PRIMARY KEY,
+  s_name VARCHAR(20) NOT NULL DEFAULT '',
+  s_birth VARCHAR(20) NOT NULL DEFAULT '',
+  s_sex VARCHAR(10) NOT NULL DEFAULT ''
+);
+#+END_SRC
+查询表中第 16-20 条数据。
+
+二十、什么是最小堆，符合什么特点的序列能构成最小堆
+
+二十一、 最近小明搬到了新家，他正在粉刷墙壁，但是不幸的是他粉刷的墙壁并不理想。他的墙壁是一个长度为 的格子，每个格子用 0 表示红色，用 1 表示蓝色。现在墙壁是一个非常混乱的颜色。他想将墙壁涂成左边全是蓝色右边全是红色，可以将墙壁刷成全是红色或者蓝色。请问他至少需要粉刷多少个格子墙壁刷成他想要的样子？
+
+题解：
+#+BEGIN_SRC js
+// 链接：https://www.nowcoder.com/questionTerminal/748b891f208744a7b1f98cb4c45bde11?answerType=1&f=discussion
+// 来源：牛客网
+
+var k=readline();//消耗掉元素个数的输入(第一行)
+var input=readline();//这行才是有用的 
+var count1=0
+//统计1的个数
+for(var i=0;i<input.length;i++){
+    if(parseInt(input[i])==1) count1++;
+}
+var min1=Math.min(count1,input.length-count1);//全蓝或者全红的最小值
+//左蓝右红
+var left1=0;
+for(var i=0;i<input.length;i++){
+    if(parseInt(input[i])==1) left1++;//统计1的个数
+    var min2=i+1-left1+count1-left1; //i+1-left1表示当前位置(索引从0开始)前面是0(红)的个数（即需要转换红为蓝的个数）；(count1-left1)表示当前位置后面1(蓝)的个数（即需要转换蓝为红的个数）
+    if(min2<min1) min1=min2
+}
+console.log(min1)
+#+END_SRC
