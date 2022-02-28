@@ -670,8 +670,170 @@ function f1() {
 var result = f1();
 result(); // 999
 #+END_SRC
+上面代码中，函数 f2 就在函数 f1 内部，这时 f1 内部的所有局部变量，对 f2 都是可见的。但是反过来就不行，f2 内部的局部变量，对 f1 就是不可见的。这就是 JavaScript 语言特有的"链式作用域"结构（chain scope），子对象会一级一级地向上寻找所有父对象的变量。所以，父对象的所有变量，对子对象都是可见的，反之则不成立。
+
 闭包就是函数 f2，即能够读取其他函数内部变量的函数。
 
-闭包的最大用处有两个，一个是可以读取外层函数内部的变量，另一个就是让这些变量始终保持在内存中，即闭包可以使得它诞生环境一直存在。闭包的另一个用处，是封装对象的私有属性和私有方法。
+#+BEGIN_SRC js
+function createIncrementor(start) {
+  return function () {
+    return start++;
+  }
+}
 
+var inc = createIncrementor(4)
+inc()
+inc()
+#+END_SRC
+为什么闭包能够返回外层函数的内部变量？原因是闭包（上例的 inc）用到了外层变量（start），导致外层函数（createIncrementor）不能从内存释放。只要闭包没有被垃圾回收机制清除，外层函数提供的运行环境也不会被清除，它的内部变量就始终保存着当前值，供闭包读取。
+
+闭包的最大用处有两个，一个是可以读取外层函数内部的变量，另一个就是让这些变量始终保持在内存中，即闭包可以使得它诞生环境一直存在。
+
+闭包的另一个用处，是封装对象的私有属性和私有方法。
+#+BEGIN_SRC js
+function Person(name) {
+  var _age;
+  function setAge(n) {
+    _age = n;
+  }
+  function getAge() {
+    return _age;
+  }
+  return {
+    name: name,
+    getAge: getAge,
+    setAge: setAge
+  }
+}
+
+var p1 = Person('Jim')
+p1.setAge(23)
+p1.getAge()
+p1
+#+END_SRC
+注意，外层函数每次运行，都会生成一个新的闭包，而这个闭包又会保留外层函数的内部变量，所以内存消耗很大。因此不能滥用闭包，否则会造成网页的性能问题。
 *** 立即调用的函数表达式
+Immediately-Invoked Function Expression
+
+#+BEGIN_SRC js
+var f = function () { return 1 }() // 或者这样写 (function f() {return 1}) 或者 (function f() {return 1}()) 或者 (function f() {return 1})()
+f
+#+END_SRC
+
+通常情况下，只对匿名函数使用这种“立即执行的函数表达式”。它的目的有两个：一是不必为函数命名，避免了污染全局变量；二是 IIFE 内部形成了一个单独的作用域，可以封装一些外部无法读取的私有变量。
+#+BEGIN_SRC js
+// 写法1
+var tmp = newData;
+processData(tmp);
+storeData(tmp)
+
+// 写法2
+(function () {
+  var tmp = newData;
+  processData(tmp);
+  storeData(tmp);
+}())
+#+END_SRC
+上面代码中，写法二比写法一更好，因为完全避免了污染全局变量。
+*** eval
+eval 命令接受一个字符串作为参数，并将这个字符串当作语句执行。
+
+如果参数非字符串，原样返回。
+
+eval 没有自己的作用域，都在当前作用域内执行，因此可能会修改当前作用域的变量的值，造成安全问题。由于这个原因，eval 有安全风险。为了防止这种风险，JavaScript 规定，如果使用严格模式，eval 内部声明的变量，不会影响到外部作用域。不过，即使在严格模式下，eval 依然可以读写当前作用域的变量。
+
+总之，eval 的本质是在当前作用域之中，注入代码。由于安全风险和不利于 JavaScript 引擎优化执行速度，一般不推荐使用。通常情况下，eval 最常见的场合是解析 JSON 数据的字符串，不过正确的做法应该是使用原生的 JSON.parse 方法。
+
+eval 的别名调用
+
+#+BEGIN_SRC js
+var m = eval;
+m('var x = 1')
+x
+#+END_SRC
+
+为了保证 eval 的别名不影响代码优化，JavaScript 的标准规定，凡是使用别名执行 eval，eval 内部一律是全局作用域。
+
+---
+参考资料
+2. John Dalziel, [[http://creativejs.com/2013/06/the-race-for-speed-part-4-the-future-for-javascript/][The race for speed part 4: The future for JavaScript]] | [[http://creativejs.com/2013/06/the-race-for-speed-part-2-how-javascript-compilers-work/][The race for speed part 2: How JavaScript compilers work]]
+3. http://kangax.github.io/compat-table/es6/ JS 标准兼容性表
+4. Dr. Axel Rauschmayer, [[https://2ality.com/2013/06/basic-javascript.html][Basic JavaScript for the impatient programmer]] | [[https://2ality.com/2013/06/basic-javascript.html][Basic JavaScript for the impatient programmer]] | [[https://2ality.com/2011/11/improving-typeof.html][Improving the JavaScript typeof operator]] | [[https://2ality.com/2013/01/categorizing-values.html][Categorizing values in JavaScript]] | [[https://2ality.com/2012/04/number-encoding.html][How numbers are encoded in JavaScript]] | [[https://2ality.com/2012/10/javascript-properties.html][Object properties in JavaScript]] | [[https://2ality.com/2011/06/with-statement.html][JavaScript’s with statement and why it’s deprecated]] | [[https://2ality.com/2014/01/eval.html][Evaluating JavaScript code via eval() and new Function()]] | [[https://2ality.com/2012/12/arrays.html][Arrays in JavaScript]] | [[https://2ality.com/2012/06/dense-arrays.html][JavaScript: sparse arrays vs. dense arrays]] | [[https://2ality.com/2012/01/object-plus-object.html][What is {} + {} in JavaScript?]] | [[https://2ality.com/2013/04/quirk-implicit-conversion.html][JavaScript quirk 1: implicit conversion of values]] | [[https://2ality.com/2013/07/meta-style-guide.html][A meta style guide for JavaScript]] | [[https://2ality.com/2011/05/semicolon-insertion.html][Automatic semicolon insertion in JavaScript]] | [[https://2ality.com/2011/11/significant-newlines.html][What JavaScript would be like with significant newlines]] | [[https://2ality.com/2013/10/console-api.html][The JavaScript console API]] | [[https://2ality.com/2013/08/protecting-objects.html][Protecting objects in JavaScript]] | [[https://2ality.com/2011/04/javascript-overview-of-regular.html][JavaScript: an overview of the regular expression API]] | [[https://2ality.com/2013/08/regexp-g.html][The flag /g of JavaScript’s regular expressions]] | [[https://2ality.com/2011/08/json-api.html][JavaScript’s JSON API]] | [[https://2ality.com/2014/05/this.html][JavaScript’s this: how it works, where it can trip you up]] | [[https://2ality.com/2011/07/js-properties.html][JavaScript properties: inheritance and enumerability]] | [[https://2ality.com/2011/10/strict-mode-hatred.html][JavaScript: Why the hatred for strict mode?]] | [[https://2ality.com/2011/01/javascripts-strict-mode-summary.html][JavaScript’s strict mode: a summary]] | [[https://2ality.com/2014/09/es6-promises-foundations.html][ECMAScript 6 promises (1/2): foundations]] | [[http://speakingjs.com/es5/index.html][Speaking JavaScript]](ES5) | [[https://exploringjs.com/][Exploring JS: JavaScript books for programmers]](ES6 and other versions): The Past, Present, and Future of JavaScript
+5. [[https://www.balena.io/blog/happy-18th-birthday-javascript/][Happy 18th Birthday JavaScript! A look at an unlikely past and bright future.]]
+6. Humphry, [[https://segmentfault.com/a/1190000000407658][JavaScript中Number的一些表示上/下限]]
+7. Mathias Bynens, [[https://mathiasbynens.be/notes/javascript-encoding][JavaScript’s internal character encoding: UCS-2 or UTF-16?]] | [[https://mathiasbynens.be/notes/javascript-unicode][JavaScript has a Unicode problem]]
+8. MDN Web Docs, [[https://developer.mozilla.org/en-US/docs/Web/API/btoa][btoa()]] | [[https://developer.mozilla.org/en-US/docs/Web/JavaScript/Guide/Regular_Expressions][Regular expressions]] | [[https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Operators][Expressions and operators]] | [[https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/JSON][JSON]] | [[https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Strict_mode][Strict mode]] | [[https://developer.mozilla.org/en-US/docs/Web/API/setTimeout][setTimeout()]] | [[https://developer.mozilla.org/en-US/docs/Web/HTTP/Cookies][Using HTTP cookies]] | [[https://developer.mozilla.org/en-US/docs/Web/API/Window/postMessage][Window.postMessage()]] | [[https://developer.mozilla.org/en-US/docs/Web/HTTP/CORS][Cross-Origin Resource Sharing (CORS)]] | [[https://developer.mozilla.org/en-US/docs/Web/API/Location][Location]] | [[https://developer.mozilla.org/en-US/docs/Web/API/URL][URL]] | [[https://developer.mozilla.org/en-US/docs/Web/API/URLSearchParams][URLSearchParams]]
+9. Lakshan Perera, [[https://www.laktek.com/2012/12/29/revisiting-javascript-objects/][Revisiting JavaScript Objects]]
+10. Angus Croll, [[https://javascriptweblog.wordpress.com/2010/09/27/the-secret-life-of-javascript-primitives/][The Secret Life of JavaScript Primitives]]
+11. Ben Alman, [[https://benalman.com/news/2010/11/immediately-invoked-function-expression/][Immediately-Invoked Function Expression (IIFE)]]
+12. Mark Daggett, [[https://web.archive.org/web/20160911170816/http://markdaggett.com/blog/2013/02/15/functions-explained][Functions Explained]]
+13. Juriy Zaytsev, [[https://kangax.github.io/nfe/][Named function expressions demystified]] | [[http://perfectionkills.com/global-eval-what-are-the-options/][Global eval. What are the options?]] | [[http://perfectionkills.com/how-ecmascript-5-still-does-not-allow-to-subclass-an-array/][How ECMAScript 5 still does not allow to subclass array]] | [[http://perfectionkills.com/understanding-delete/][Understanding delete]]
+14. Marco Rogers polotek, [[https://web.archive.org/web/20160322233747/http://docs.nodejitsu.com:80/articles/javascript-conventions/what-is-the-arguments-object][What is the arguments object?]]
+15. Felix Bohm, [[https://code.tutsplus.com/tutorials/what-they-didnt-tell-you-about-es5s-array-extras--net-28263][What They Didn't Tell You About ES5's Array Extras]]
+17. Michal Budzynski, [[https://michalbe.blogspot.com/2013/03/javascript-less-known-parts-bitwise.html][JavaScript: The less known parts. Bitwise Operators.]] | [[https://michalbe.blogspot.com/2013/04/javascript-less-known-parts-dom.html][JavaScript: The less known parts. DOM Mutations.]]
+18. Benjie Gillam, [[http://www.benjiegillam.com/2013/06/quantum-javascript/][Quantum JavaScript?]]
+19. Jani Hartikainen, [[https://davidwalsh.name/fix-javascript-errors][JavaScript Errors and How to Fix Them]]
+20. Eric Elliott, Programming JavaScript Applications, Chapter 2. JavaScript Style Guide, O'Reilly, 2014
+21. Rod Vagg, [[https://web.archive.org/web/20170517132624/http://dailyjs.com/post/semicolons][Semicolons, Objectively]]
+22. [[https://developer.chrome.com/docs/devtools/][Chrome Devtools]] | [[https://developer.chrome.com/docs/devtools/console/utilities/][Console Utilities API reference]]
+23. Matt West, [[https://blog.teamtreehouse.com/mastering-developer-tools-console][Mastering The Developer Tools Console]]
+24. [[https://developer.mozilla.org/en-US/docs/Web/API/console][Firefox Devtools - Console API]]
+25. Marius Schulz, [[https://mariusschulz.com/blog/advanced-javascript-debugging-with-console-table][Advanced JavaScript Debugging with console.table()]]
+26. Jon Bretman, [[https://web.archive.org/web/20201112014755/https://badoo.com/techblog/blog/2013/11/01/type-checking-in-javascript/][Type Checking in JavaScript]]
+27. Cody Lindley, [[https://web.archive.org/web/20150424141701/http://tech.pro:80/tutorial/1671/thinking-about-ecmascript-5-parts][Thinking About ECMAScript 5 Parts]]
+28. Bjorn Tipling, [[https://web.archive.org/web/20140828092110/http://bjorn.tipling.com/advanced-objects-in-javascript][Advanced objects in JavaScript]]
+29. Javier Márquez, [[http://arqex.com/967/javascript-properties-enumerable-writable-configurable][Javascript properties are enumerable, writable and configurable]]
+30. Sella Rafaeli, [[https://www.sellarafaeli.com/blog/native_javascript_data_binding][Native JavaScript Data-Binding]]
+31. Lea Verou, [[https://lea.verou.me/2015/08/copying-properties-the-robust-way/][Copying object properties, the robust way]]
+32. Nicolas Bevacqua, [[https://web.archive.org/web/20131130130119/http://flippinawesome.org/2013/11/25/fun-with-javascript-native-array-functions/][Fun with JavaScript Native Array Functions]]
+33. Ariya Hidayat, [[https://ariya.io/2014/02/javascript-string-substring-substr-slice][JavaScript String: substring, substr, slice]]
+34. Rakhitha Nimesh, [[https://www.sitepoint.com/beginners-guide-to-javascript-date-and-time/][JavaScript Date Object: The Beginner’s Guide to JavaScript Date and Time]]
+35. [[https://javascript.info/date][Date and time - javascript.info]]
+36. Sam Hughes, [[https://qntm.org/re_en][Learn regular expressions in about 55 minutes]]
+37. Jim Cowart, [[https://web.archive.org/web/20130201093823/http://freshbrewedcode.com/jimcowart/2013/01/29/what-you-might-not-know-about-json-stringify/][What You Might Not Know About JSON.stringify()]]
+38. Marco Rogers, [[https://web.archive.org/web/20110925123121/http://docs.nodejitsu.com/articles/javascript-conventions/what-is-json][What is JSON?]]
+39. Jonathan Creamer, [[https://web.archive.org/web/20130406213730/http://tech.pro/tutorial/1192/avoiding-the-this-problem-in-javascript][Avoiding the "this" problem in JavaScript]]
+40. Erik Kronberg, [[https://web.archive.org/web/20131113145406/https://variadic.me/posts/2013-10-22-bind-call-and-apply-in-javascript.html][Bind, Call and Apply in JavaScript]]
+41. [[https://www.freecodecamp.org/news/javascript-modules-a-beginner-s-guide-783f7d7a5fcc][JavaScript Modules: A Beginner’s Guide]]
+42. Douglas Crockford, [[https://web.archive.org/web/20101216151915/http://www.yuiblog.com/blog/2010/12/14/strict-mode-is-coming-to-town/][Strict Mode Is Coming To Town]]
+43. Sebastian Porto, [[https://sporto.github.io/blog/2012/12/09/callbacks-listeners-promises/][Asynchronous JS: Callbacks, Listeners, Control Flow Libs and Promises]]
+44. Rhys Brett-Bowen, [[https://modernjavascript.blogspot.com/2013/08/promisesa-understanding-by-doing.html][Promises/A+ - understanding the spec through implementation]]
+45. Marc Harter, [[https://gist.github.com//wavded/5692344][Promise A+ Implementation]]
+46. Matt Podwysocki, Amanda Silver, [[https://web.archive.org/web/20110923162652/http://blogs.msdn.com/b/ie/archive/2011/09/11/asynchronous-programming-in-javascript-with-promises.aspx][Asynchronous Programming in JavaScript with “Promises”]]
+47. Bryan Klimt, [[https://web.archive.org/web/20130203032915/http://blog.parse.com/2013/01/29/whats-so-great-about-javascript-promises/][What’s so great about JavaScript Promises?]]
+48. Jake Archibald, [[https://web.dev/promises/][JavaScript Promises: an introduction]]
+49. Mikito Takada, [[http://book.mixu.net/node/ch7.html][Control flow]]
+50. Craig Buckler, [[https://www.sitepoint.com/how-to-translate-from-dom-to-svg-coordinates-and-back-again/][How to Translate from DOM to SVG Coordinates and Back Again]]
+51. Paul Kinlan, [[https://developers.google.com/web/updates/2012/02/Detect-DOM-changes-with-Mutation-Observers][Detect DOM changes with Mutation Observers]]
+52. Tiffany Brown, [[https://dev.opera.com/articles/mutation-observers-tutorial/][Getting to Know Mutation Observers]]
+53. Jeff Griffiths, [[https://hacks.mozilla.org/2012/05/dom-mutationobserver-reacting-to-dom-changes-without-killing-browser-performance/][DOM MutationObserver – reacting to DOM changes without killing browser performance.]]
+54. Addy Osmani, [[https://addyosmani.com/blog/mutation-observers/][Detect, Undo And Redo DOM Changes With Mutation Observers]]
+55. Ryan Morr, [[http://ryanmorr.com/using-mutation-observers-to-watch-for-element-availability/][Using Mutation Observers to Watch for Element Availability]]
+56. Jake Archibald, [[https://www.html5rocks.com/en/tutorials/speed/script-loading/][Deep dive into the murky waters of script loading]]
+57. Remy Sharp, [[https://remysharp.com/2010/07/21/throttling-function-calls/][Throttling function calls]]
+58. Ayman Farhat, [[https://www.thecodeship.com/web-development/alternative-to-javascript-evil-setinterval/][An alternative to Javascript's evil setInterval]]
+59. Ilya Grigorik, [[https://www.igvita.com/2014/05/20/script-injected-async-scripts-considered-harmful/][Script-injected "async scripts" considered harmful]]
+60. Daniel Imms, [[https://www.growingwiththeweb.com/2014/02/async-vs-defer-attributes.html][async vs defer attributes]]
+61. Craig Buckler, [[https://www.sitepoint.com/non-blocking-async-defer/][Load Non-blocking JavaScript with HTML5 Async and Defer]]
+62. Domenico De Felice, [[https://domenicodefelice.blogspot.com/2015/08/how-browsers-work.html][How browsers work]]
+63. [[https://www.netsparker.com/blog/web-security/same-site-cookie-attribute-prevent-cross-site-request-forgery/][Using the Same-Site Cookie Attribute to Prevent CSRF Attacks]]
+64. [[https://web.dev/samesite-cookies-explained/][SameSite cookies explained]]
+65. [[https://scotthelme.co.uk/tough-cookies/][Tough Cookies]]
+66. [[https://scotthelme.co.uk/csrf-is-dead/][Cross-Site Request Forgery is dead!]]
+67. Jakub Jankiewicz, [[https://jcubic.wordpress.com/2014/06/20/cross-domain-localstorage/][Cross-Domain LocalStorage]]
+68. David Baron, [[https://dbaron.org/log/20100309-faster-timeouts][setTimeout with a shorter delay]]
+69. Monsur Hossain, [[https://web.dev/cross-origin-resource-sharing/][Cross-Origin Resource Sharing (CORS)]]
+70. https://frontendian.co/cors
+71. Grzegorz Mirek, [[https://web.archive.org/web/20180929153256/http://performantcode.com/web/do-you-really-know-cors][Do You Really Know CORS?]]
+72. [[https://web.archive.org/web/20111011045651/http://www.adobe.com/devnet/html5/articles/html5-storage-apis.html][Introducing the HTML5 storage APIs]]
+73. [[https://web.archive.org/web/20130105051751/http://codular.com/localstorage][Getting Started with LocalStorage]]
+74. [[https://feross.org/fill-disk/][Introducing the HTML5 Hard Disk Filler™ API]]
+75. [[https://web.archive.org/web/20130311215851/http://bens.me.uk/2013/localstorage-inter-window-messaging][Inter-window messaging using localStorage]]
+76. [[https://stackoverflow.com/q/18265556][Why does Internet Explorer fire the window "storage" event on the window that stored the data?]]
+77. [[https://stackoverflow.com/q/5370784][localStorage eventListener is not called]]
+78. [[https://developers.google.com/web/updates/2016/01/urlsearchparams][Easy URL Manipulation with URLSearchParams]]
+79. Thoriq Firdaus, [[https://webdesign.tutsplus.com/tutorials/html5-form-validation-with-the-pattern-attribute--cms-25145][HTML5 Form Validation With the “pattern” Attribute]]
+80. Raymond Camden, [[https://code.tutsplus.com/tutorials/working-with-indexeddb--net-34673][Working With IndexedDB]] | [[https://code.tutsplus.com/tutorials/working-with-indexeddb-part-2--net-35355][Working With IndexedDB - Part 2]] | [[https://code.tutsplus.com/tutorials/working-with-indexeddb-part-3--net-36220][Working With IndexedDB - Part 3]]
+81. Tiffany Brown, [[https://dev.opera.com/articles/introduction-to-indexeddb/][An Introduction to IndexedDB]]
+82. David Fahlander, [[https://hacks.mozilla.org/2014/06/breaking-the-borders-of-indexeddb/][Breaking the Borders of IndexedDB]]
+83. [[https://web.archive.org/web/20150716002214/http://www.tutorialspoint.com/html5/html5_indexeddb.htm][HTML5 - IndexedDB]]
