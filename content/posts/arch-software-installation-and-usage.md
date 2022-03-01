@@ -1,7 +1,7 @@
 +++
 title = "Arch 软件安装和用法"
 date = 2021-08-20T00:00:00+08:00
-lastmod = 2022-02-21T21:51:10+08:00
+lastmod = 2022-03-01T15:14:23+08:00
 tags = ["Archlinux", "技术"]
 draft = false
 toc = true
@@ -571,6 +571,7 @@ yay -S rpi-imager
 | snyk(aur)                                       | CLI and build-time tool to find &amp; fix known vulnerabilities in open-source dependencies                                                                       |
 | cloudflare-warp-bin(aur)                        | Cloudflare WARP client allows individuals and organizations to have a faster, more secure, and more private experience online                                     |
 | rnote                                           | A simple drawing application to create handwritten notes                                                                                                          |
+| yank-note-bin(aur)                              | A Hackable Markdown Note Application for Programmers                                                                                                              |
 
 
 ### MongoDB {#mongodb}
