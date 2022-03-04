@@ -1,6 +1,7 @@
 #+SETUPFILE: ./hugo_setup.org
 #+TITLE: 将 non-root 用户添加到开发容器中
 #+DATE: <2021-07-31 Sat>
+#+HUGO_TAGS: "VS Code" 技术 Docker
 *没有成功*
 
 non-root 即非 root，意思是没有管理员权限（根权限）。
@@ -10,7 +11,7 @@ non-root 用户，这样使运行环境更安全。
 
 ** 为 VS Code（server）指定用户
    :PROPERTIES:
-   :CUSTOM_ID: 为-vs-codeserver指定用户
+   :CUSTOM_ID: 为-vs-codeserver 指定用户
    :END:
 如果你使用的镜像或 Dockerfile 已经提供了一个可供选择的 non-root
 用户，但默认默认用户仍然是 =root=。可以选择让 VS
