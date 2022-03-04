@@ -1,7 +1,7 @@
 +++
 title = "常用脚本"
 date = 2022-01-14T00:00:00+08:00
-lastmod = 2022-02-25T14:38:43+08:00
+lastmod = 2022-03-04T10:49:47+08:00
 tags = ["技术"]
 draft = false
 +++
@@ -39,4 +39,25 @@ import rs
 sample = "I am from 美国。We should be friends. 朋友。"
 for n in re.findall(r'[\u4e00-\u9fff]+', sample):
   print(n)
+```
+
+
+## 新建文章 {#新建文章}
+
+```sh
+#!/bin/bash
+
+CURRENTDATE=`date +"%Y-%m-%d"`
+echo -n "Enter the Article Name: "
+read -r a
+echo "---
+layout: post
+title:
+tags:
+  -
+description:
+---" >> content/posts/"${CURRENTDATE}-$a.md"
+# 问题：
+# 如果文章名字含有空格，能够新建文章，但同时会新建其他文档
+# 如果 文件名字有 /，无法创建
 ```
