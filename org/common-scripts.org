@@ -49,3 +49,7 @@ description:
 # 如果文章名字含有空格，能够新建文章，但同时会新建其他文档
 # 如果 文件名字有 /，无法创建
 #+END_SRC
+* pandoc Org to Md
+#+BEGIN_SRC sh
+pandoc -f org -t markdown original_org_file -s -o converted_md_file
+#+END_SRC
