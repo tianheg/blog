@@ -1,7 +1,7 @@
 +++
 title = "常用脚本"
 date = 2022-01-14T00:00:00+08:00
-lastmod = 2022-03-04T10:49:47+08:00
+lastmod = 2022-03-04T15:02:03+08:00
 tags = ["技术"]
 draft = false
 +++
@@ -60,4 +60,11 @@ description:
 # 问题：
 # 如果文章名字含有空格，能够新建文章，但同时会新建其他文档
 # 如果 文件名字有 /，无法创建
+```
+
+
+## pandoc Org to Md {#pandoc-org-to-md}
+
+```sh
+pandoc -f org -t markdown original_org_file -s -o converted_md_file
 ```
