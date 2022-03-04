@@ -52,6 +52,7 @@ tocnum = false
 - [How to be a Programmer 中文版](/posts/how-to-be-a-programmer-zh/)，by Robert L. Read
 - 程序员修炼之道(第 2 版)(The Pragmatic Programmer: From Journeyman to Master)，by David Thomas, Andrew Hunt
 - 信息检索，by 黄如花
+- 构建之法，by 邹欣
 - 参考资料
   - <https://teachyourselfcs.com/>
   - [EP01.学前端的入门问题](https://www.xiaoyuzhoufm.com/episode/61684ce4d8fa23fb00fc4d3b)
