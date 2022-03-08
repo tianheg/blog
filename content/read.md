@@ -18,7 +18,27 @@ tocnum = false
 - [DOM Scripting](/posts/dom-scripting/)
 - [JavaScript 高级程序设计第 4 版](/posts/professional-javascript-for-web-developers/)，by Matt Frisbie
 - [深入 PHP 与 jQuery 开发](/posts/pro-php-and-jquery/)，by Jason Lengstorf
-- You Don't Know JS
+- [You Don't Know JS](https://github.com/getify/You-Dont-Know-JS)
+- JavaScript: The Definitive Guide
+- JavaScript: The Good Parts
+- JavaScript Patterns
+- [Eloquent JavaScript](https://eloquentjavascript.net/)
+- [JavaScript Testing Recipes – shop.jcoglan.com](https://shop.jcoglan.com/javascript-testing-recipes/)
+- High Performance JavaScript
+- Human JavaScript
+- Object Oriented JavaScript
+- Pro JavaScript Design Patterns
+- Secrets of the JavaScript Ninja
+- JavaScript Application Design
+- [Exploring JS: JavaScript books for programmers](https://exploringjs.com/)
+- Test-Driven JavaScript Development
+- [Learning JavaScript Design Patterns](https://www.patterns.dev/posts/classic-design-patterns/)
+- [You Might Not Need jQuery](https://youmightnotneedjquery.com/)
+- [JavaScript Garden](https://bonsaiden.github.io/JavaScript-Garden/)
+- Effective JavaScript
+- Functional JavaScript
+- JavaScript Allongé
+- https://jsbooks.revolunet.com/
 - Computer Networking: A Top-Down Approach 计算机网络：自顶向下法
 - 图解 HTTP，by 上野宣
 - Operating System Concepts
