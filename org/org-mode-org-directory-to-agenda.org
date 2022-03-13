@@ -3,8 +3,23 @@
 #+DATE: <2022-02-12 Sat>
 #+HUGO_TAGS: Orgmode 技术
 
-https://www.emacswiki.org/emacs/OrgMode
+1. https://www.emacswiki.org/emacs/OrgMode
+2. https://orgmode.org/manual/Agenda-Files.html
+3. https://orgmode.org/worg/org-tutorials/orgtutorial_dto.html
+4. http://doc.norang.ca/org-mode.html#AgendaSetup
 
 #+BEGIN_SRC elisp
 (setq org-agenda-files (file-expand-wildcards "~/org/*.org"))
 #+END_SRC
+
+这种方法不好用。
+
+最好还是 =M-x org-agenda-file-to-front= 添加一个个文件。
+
+终于找到错误原因了：
+
+#+BEGIN_QUOTE
+Ensure you don't have org-agenda-files set in a "customize" block in your .Emacs file. This is a common source of errors.
+
+-- https://stackoverflow.com/a/21376228
+#+END_QUOTE
