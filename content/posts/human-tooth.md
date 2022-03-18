@@ -1,7 +1,10 @@
-#+SETUPFILE: ./hugo_setup.org
-#+TITLE: 关注牙齿健康
-#+DATE: <2021-12-03 Fri>
-#+HUGO_TAGS: 健康
++++
+title = "关注牙齿健康"
+date = 2021-12-03T00:00:00+08:00
+lastmod = 2022-03-18T08:02:56+08:00
+tags = ["健康"]
+draft = false
++++
 
 建议：
 
@@ -11,7 +14,8 @@
 - 学习使用牙线
 
 ---
+
 参考资料
 
-- [[https://lutaonan.com/blog/dentist-exp/][我看牙医的经历]]
-- [[https://mp.weixin.qq.com/s/fxghyIy-JRQCoCzEOYaERw][你可以为你的牙花点什么钱？再谈牙齿健康]]
+- [我看牙医的经历](https://lutaonan.com/blog/dentist-exp/)
+- [你可以为你的牙花点什么钱？再谈牙齿健康](https://mp.weixin.qq.com/s/fxghyIy-JRQCoCzEOYaERw)
