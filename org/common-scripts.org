@@ -3,6 +3,19 @@
 #+DATE: <2022-01-14 Fri>
 #+HUGO_TAGS: 技术
 
+* 重命名后缀 .md.org to .org
+
+#+BEGIN_SRC sh
+#!/bin/bash
+
+for f in */*/*.md.org
+do 
+  # pandoc -f markdown -t org -o ${f}.org ${f};
+  mv "$f" "${f/.md.org/.org}"
+done
+# rename *.md.org to .org
+#+END_SRC
+
 * 批量删除 Pypi 包
 
 #+BEGIN_SRC sh
@@ -22,8 +35,10 @@ sudo pacman -Rs $(pacman -Qq | grep some_words)
 #+BEGIN_SRC sh
 xclip -sel c < text.txt
 #+END_SRC
+
 * 找到字符串中的汉字
 https://stackoverflow.com/a/2718203
+
 #+BEGIN_SRC py
 #!/usr/bin/env python
 import rs
@@ -31,7 +46,9 @@ sample = "I am from 美国。We should be friends. 朋友。"
 for n in re.findall(r'[\u4e00-\u9fff]+', sample):
   print(n)
 #+END_SRC
+
 * 新建文章
+
 #+BEGIN_SRC sh
 #!/bin/bash
 
@@ -49,7 +66,9 @@ description:
 # 如果文章名字含有空格，能够新建文章，但同时会新建其他文档
 # 如果 文件名字有 /，无法创建
 #+END_SRC
+
 * pandoc Org to Md
+
 #+BEGIN_SRC sh
 pandoc -f org -t markdown original_org_file -s -o converted_md_file
 #+END_SRC
