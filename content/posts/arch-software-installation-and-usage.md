@@ -1,7 +1,7 @@
 +++
 title = "Arch 软件安装和用法"
 date = 2021-08-20T00:00:00+08:00
-lastmod = 2022-03-23T08:17:54+08:00
+lastmod = 2022-03-24T17:40:43+08:00
 tags = ["Archlinux", "技术"]
 draft = false
 toc = true
@@ -551,6 +551,7 @@ yay -S rpi-imager
 | imv                                             | a command line image viewer intended for use with tiling window managers                                                                                                               |
 | umlet                                           | Free UML Tool for Fast UML Diagrams                                                                                                                                                    |
 | act                                             | Run your GitHub Actions locally                                                                                                                                                        |
+| speedtest-cli                                   | Command line interface for testing internet bandwidth using speedtest.net                                                                                                              |
 
 ### MongoDB {#mongodb}
 
