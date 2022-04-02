@@ -10,8 +10,8 @@ Roman Holiday - 1953 - 美国
 
 让我大笑：
 
--   摄影师初见公主三次摔跤
--   晚上的舞会：黑衣人没能带走公主
+- 摄影师初见公主三次摔跤
+- 晚上的舞会：黑衣人没能带走公主
 
 激情之吻、留恋之吻
 
@@ -21,4 +21,4 @@ Roman Holiday - 1953 - 美国
 
 奥黛丽·赫本------女神！
 
-![](/audrey-hepburn.png "")
+![](https://images.yidajiabei.xyz/audrey-hepburn.png)

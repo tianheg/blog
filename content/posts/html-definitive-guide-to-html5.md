@@ -8,19 +8,17 @@ draft = false
 
 ## 这本书的结构 {#这本书的结构}
 
--   Part I: HTML，CSS，JS 基本知识
--   Part II: HTML5 elements
--   Part III: Cascading Style Sheets
--   Part IV: Document Object Model
--   Part V: advanced HTML5 features, such as Ajax, multimedia, canvas
+- Part I: HTML，CSS，JS 基本知识
+- Part II: HTML5 elements
+- Part III: Cascading Style Sheets
+- Part IV: Document Object Model
+- Part V: advanced HTML5 features, such as Ajax, multimedia, canvas
 
 这本书没有涉及 Scalable Vector Graphics(SVG)——另一个 HTML5 相关的技术。可阅读由 Kurt Cagle 写的 _SVG Programming_ 。
-
 
 ## Part I: Getting Started {#part-i-getting-started}
 
 这一部分介绍的内容，是为了让我们能够顺利阅读这本书。
-
 
 ### HTML {#html}
 
@@ -30,10 +28,11 @@ draft = false
 
 二、它带来了什么改变？
 
--   原生支持多媒体
-    -   支持可编程内容 canvas
+- 原生支持多媒体
 
--   支持语义化
+  - 支持可编程内容 canvas
+
+- 支持语义化
 
 三、如何标记内容？
 
@@ -143,7 +142,6 @@ draft = false
 
 有些符号（比如 `<` ）容易和 HTML 标签的表达相混淆。
 
-
 ### CSS {#css}
 
 三十、如何定义一个样式？
@@ -194,7 +192,7 @@ draft = false
 
 ```css
 @charset "UTF-8";
-@import "other.css";
+@import 'other.css';
 ```
 
 在 CSS 样式表中可以出现在、@import 语句之前的只有、@charset 语句。后者用于声明样式表使用的字符编码。
@@ -205,17 +203,17 @@ draft = false
 
 四十、有哪些常用的颜色？
 
-![](/css-color.jpeg "")
+![](https://images.yidajiabei.xyz/css-color.jpeg)
 
 更多 CSS color 相关标准，见[这里](https://www.w3.org/TR/css-color-3/)。
 
 四十一、如何表示颜色
 
--   颜色名
--   十六进制、十进制
--   函数
+- 颜色名
+- 十六进制、十进制
+- 函数
 
-![](/css-color-function.jpeg "")
+![](https://images.yidajiabei.xyz/css-color-function.jpeg)
 
 四十二、如何表达 CSS 中的长度？
 
@@ -225,7 +223,7 @@ width, font-size
 
 绝对单位（现实世界中的度量单位）
 
-![](/css-absolute-unit.jpeg "")
+![](https://images.yidajiabei.xyz/css-absolute-unit.jpeg)
 
 一条样式可以混合使用绝对单位和相对单位。
 
@@ -235,7 +233,7 @@ width, font-size
 
 主流浏览器支持的一些 CSS 相对单位
 
-![](/css-relative-unit.jpeg "")
+![](https://images.yidajiabei.xyz/css-relative-unit.jpeg)
 
 **像素单位的问题** ：像素这个术语一般是指显示设备上可寻址的最小单元——图像的基本元素。CSS 却是另辟蹊径，其像素定义如下：参考像素是距读者一臂之遥的像素密度为 96dpi 的设备上一个像素的视角（visualangle）。CSS 中的 px [标准定义](https://drafts.csswg.org/css-values-3/#px)。
 
@@ -245,7 +243,7 @@ CSS 像素原本是相对单位，但在使用过程中被视为绝对单位，�
 
 缺乏浏览器支持的 CSS 相对度量单位
 
-![](/css-other-unit.jpeg "")
+![](https://images.yidajiabei.xyz/css-other-unit.jpeg)
 
 ① 这个单位已被重命名为 vmin，同时还增加了另一个单位 vmax。这两个单位分别等于 vw 和 vh 中较小和较大的那个。
 
@@ -255,7 +253,7 @@ CSS 像素原本是相对单位，但在使用过程中被视为绝对单位，�
 
 3）角度
 
-![](/css-angle-units.png "")
+![](https://images.yidajiabei.xyz/css-angle-units.png)
 
 4）时间
 
@@ -265,16 +263,15 @@ CSS 像素原本是相对单位，但在使用过程中被视为绝对单位，�
 
 四十三、如何测试 CSS 特性的支持程度？
 
--   <https://caniuse.com/> 查看 HTML5 和 CSS3 的支持情况
--   <https://modernizr.com/> 动态测试特性
+- <https://caniuse.com/> 查看 HTML5 和 CSS3 的支持情况
+- <https://modernizr.com/> 动态测试特性
 
 四十四、有哪些好用的 CSS 工具？
 
--   浏览器样式在 DevTools 可见
--   <https://selectorgadget.com/> 生成 CSS 选择器
--   Less 改进 CSS
--   使用 CSS 框架
-
+- 浏览器样式在 DevTools 可见
+- <https://selectorgadget.com/> 生成 CSS 选择器
+- Less 改进 CSS
+- 使用 CSS 框架
 
 ### JS {#js}
 
@@ -376,15 +373,15 @@ undefined 表示缺少值，就是此处应该有值，但是还未定义；典�
 
 字符串被用来表示一系列字符。相关用法：
 
--   str.length
--   new String("Something")
--   'cat'.charAt(1) // 'cat'[1]
--   ...
+- str.length
+- new String("Something")
+- 'cat'.charAt(1) // 'cat'[1]
+- ...
 
 六十五、Number 有哪些方法？
 
--   Number()
--   [从此处往下](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Number#constructor)
+- Number()
+- [从此处往下](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Number#constructor)
 
 六十六、BigInt？
 
@@ -398,29 +395,29 @@ true/false
 
 1）创建对象
 
--   new Object()
--   使用对象字面量：
+- new Object()
+- 使用对象字面量：
 
 <!--listend-->
 
 ```js
 let myData = {
-  name: "Amy",
-  weather: "Sunny"
+  name: 'Amy',
+  weather: 'Sunny',
 }
 ```
 
--   将函数作为方法：
+- 将函数作为方法：
 
 <!--listend-->
 
 ```js
 let myData = {
-  name: "A",
-  addr: "B",
-  print: function() {}
-};
-myData.print();
+  name: 'A',
+  addr: 'B',
+  print: function () {},
+}
+myData.print()
 ```
 
 2）处理对象
@@ -429,23 +426,23 @@ myData.print();
 
 ```js
 let myData = {
-  name: "A",
-  addr: "B"
+  name: 'A',
+  addr: 'B',
 }
-myData.name = "c";
-myData["addr"] = "d";
+myData.name = 'c'
+myData['addr'] = 'd'
 ```
 
 枚举对象属性：
 
 ```js
 let myData = {
-  name: "A",
-  addr: "B"
-};
+  name: 'A',
+  addr: 'B',
+}
 
 for (let prop in myData) {
-  return "Name: " + prop + " Value: " + myData[prop];
+  return 'Name: ' + prop + ' Value: ' + myData[prop]
 }
 ```
 
@@ -453,39 +450,39 @@ for (let prop in myData) {
 
 ```js
 let myData = {
-  name: "A",
-  addr: "B"
-};
-myData.dayOfWeek = "Monday";
-myData.sayHello = function() {};
+  name: 'A',
+  addr: 'B',
+}
+myData.dayOfWeek = 'Monday'
+myData.sayHello = function () {}
 
-delete myData.name;
-delete myData["addr"];
-delete myData.sayHello;
+delete myData.name
+delete myData['addr']
+delete myData.sayHello
 ```
 
 判断某属性是否存在（使用 =in=）：
 
 ```js
 let myData = {
-  name: "A",
-  addr: "B"
-};
-console.log("name" in myData); // true
-console.log("weather" in myData); // false
+  name: 'A',
+  addr: 'B',
+}
+console.log('name' in myData) // true
+console.log('weather' in myData) // false
 ```
 
 六十九、怎样为 JS 运算符分类（或者说排序）？
 
--   ++,-- 根据放在变量前后不同，加或减
--   +，-，\*，/，%
--   &lt;,&lt;=,&gt;,&gt;=
--   `==`,!= Equality and inequality tests
--   `===`,!== Identity and nonidentity tests
--   &amp;&amp;,||
--   = 赋值
--   + 字符串连接
--   x ? y : z 三元操作符
+- ++,-- 根据放在变量前后不同，加或减
+- +，-，\*，/，%
+- &lt;,&lt;=,&gt;,&gt;=
+- `==`,!= Equality and inequality tests
+- `===`,!== Identity and nonidentity tests
+- &amp;&amp;,||
+- = 赋值
+- - 字符串连接
+- x ? y : z 三元操作符
 
 七十、JS 的对象如何比较大小？
 
@@ -501,16 +498,16 @@ toString(),toString(2),toString(8),toString(16),toFixed(n),toExponential(n),toPr
 
 七十三、怎么把字符串转化为数字？
 
--   `Number(<str>)`
--   `parseInt(<str>)`
--   `parseFloat(<str>)`
+- `Number(<str>)`
+- `parseInt(<str>)`
+- `parseFloat(<str>)`
 
 七十四、怎么创建数组，并添加内容，读取/修改内容，迭代数组？
 
--   `let myArray = new Array()`
--   `let myArray = [100, "100"]`
--   `myArray[0]` `myArray[0] = 123`
--   `for (let i = 0; i < myArray.length; i++)`
+- `let myArray = new Array()`
+- `let myArray = [100, "100"]`
+- `myArray[0]` `myArray[0] = 123`
+- `for (let i = 0; i < myArray.length; i++)`
 
 七十五、怎么用内建的数组方法？
 
@@ -522,12 +519,12 @@ toString(),toString(2),toString(8),toString(16),toFixed(n),toExponential(n),toPr
 
 ```js
 try {
-    let aArray;
-    for (let i = 0; i < aArray.length; i++) {
-     //   console.log(aArray[i])
-    }
+  let aArray
+  for (let i = 0; i < aArray.length; i++) {
+    //   console.log(aArray[i])
+  }
 } catch (e) {
-    console.log(e)
+  console.log(e)
 }
 ```
 

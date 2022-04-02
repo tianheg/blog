@@ -10,27 +10,27 @@ draft = false
 
 月球距地球的平均距离约为 384,400 公里，但它的轨道是一个椭圆形，因此会有近地点和远地点，月亮因为距离不同造成视直径也不相同。
 
-![](/super-total-lunar-eclipse-1.webp "")
+![](https://images.yidajiabei.xyz/super-total-lunar-eclipse-1.webp)
 
 据天文测算，5 月 26 日 9 时 50 分，月球通过近地点，此时月地距离 35 万 7,310.96 公里。这使得 19 时 14 分的满月成为今年最大满月，视直径达 33.5 角分， **会较平日的满月大 7%** 。而今年最小满月则是发生在 12 月 19 日，视直径仅 29.1 角分。
 
-![](/super-total-lunar-eclipse-2.webp "")
+![](https://images.yidajiabei.xyz/super-total-lunar-eclipse-2.webp)
 
 另一种天文现象也需要在满月时发生，那就是月食。
 
 众所周知，月球本身不发光，月球的光芒来自它反射的太阳光。如果在满月时，地球运动到太阳和月球之间的位置，挡住射向月球的阳光，就会出现月食。 **如果太阳、地球、月亮呈直线，地球能把阳光几乎完全挡住，就是月全食** 。
 
-![](/super-total-lunar-eclipse-3.webp "")
+![](https://images.yidajiabei.xyz/super-total-lunar-eclipse-3.webp)
 
 由于月球轨道和地球轨道并不在同一平面，之间相差 5 度，所以月食并不那么常见。下一次我国境内可见的月食，是 2021 年 11 月 19 日发生的月偏食。而下一次可见的月全食，则要等到 2022 年 11 月 8 日。
 
-![](/super-total-lunar-eclipse-4.webp "")
+![](https://images.yidajiabei.xyz/super-total-lunar-eclipse-4.webp)
 
 正因为两者轨道的这种关系，月食和日食往往在同一个月球公转周期内成对出现。在下个月的 6 月 10 日，我们又将看到一次日环食。
 
 月全食的天文现象，可远不止小学课本里的「天狗吃月亮」，如果天气晴朗，你可以观测到壮丽的「血月」或红月亮现象。
 
-![](/super-total-lunar-eclipse-5.webp "")
+![](https://images.yidajiabei.xyz/super-total-lunar-eclipse-5.webp)
 
 月亮之所以会变红，是因为依然会有少数阳光通过地球大气层的散射和折射到达月球。 **在此过程中，波长较短的蓝光被散射掉，波长较长的红光则被大气层折射至月球表面，因而使月亮呈现红色** 。
 

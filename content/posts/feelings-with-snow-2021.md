@@ -18,9 +18,9 @@ draft = false
 
 随雪而舞，忘我！
 
-![](/photo/2021-11-08-1.jpg "")
-![](/photo/2021-11-08-2.jpg "")
-![](/photo/2021-11-08-3.jpg "")
-![](/photo/2021-11-08-4.jpg "")
-![](/photo/2021-11-08-5.jpg "")
-![](/photo/2021-11-08-6.jpg "")
+![](https://images.yidajiabei.xyz/photo/2021-11-08-1.jpg)
+![](https://images.yidajiabei.xyz/photo/2021-11-08-2.jpg)
+![](https://images.yidajiabei.xyz/photo/2021-11-08-3.jpg)
+![](https://images.yidajiabei.xyz/photo/2021-11-08-4.jpg)
+![](https://images.yidajiabei.xyz/photo/2021-11-08-5.jpg)
+![](https://images.yidajiabei.xyz/photo/2021-11-08-6.jpg)

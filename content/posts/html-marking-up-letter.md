@@ -8,7 +8,7 @@ draft = false
 
 <https://developer.mozilla.org/en-US/docs/Learn/HTML/Introduction_to_HTML/Marking_up_a_letter>
 
-![](/html-marking-up-letter.jpeg "")
+![](https://images.yidajiabei.xyz/html-marking-up-letter.jpeg)
 
 ```html
 <!DOCTYPE html>
@@ -37,11 +37,19 @@ draft = false
         font-size: 1.3em;
       }
 
-      p,ul,ol,dl,address {
+      p,
+      ul,
+      ol,
+      dl,
+      address {
         font-size: 1.1em;
       }
 
-      p, li, dd, dt, address {
+      p,
+      li,
+      dd,
+      dt,
+      address {
         line-height: 1.5;
       }
     </style>
@@ -176,8 +184,7 @@ draft = false
       <p>Yours sincerely,</p>
       <p>Dr Eleanor Gaye</p>
       <p>
-        University of Awesome motto: <q>Be awesome to each other</q
-        >. --
+        University of Awesome motto: <q>Be awesome to each other</q>. --
         <cite
           >The memoirs of Bill S Preston, <abbr title="Esquire">Esq</abbr></cite
         >

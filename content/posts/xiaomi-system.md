@@ -8,10 +8,9 @@ draft = false
 
 ## 找工作 {#找工作}
 
--   一份简历 通过
--   面试、笔试 通过
--   入职
-
+- 一份简历 通过
+- 面试、笔试 通过
+- 入职
 
 ### 面试过程 {#面试过程}
 
@@ -26,24 +25,22 @@ draft = false
 
 二、中小厂
 
--   初级程序员（技术面试）：一轮面试，北京就业 薪资&lt;=14k
--   中级程序员（技术面试）：二轮面试，北京就业 薪资 14-18
--   高级程序员（技术面试）：北京就业 薪资&gt;=18
+- 初级程序员（技术面试）：一轮面试，北京就业 薪资&lt;=14k
+- 中级程序员（技术面试）：二轮面试，北京就业 薪资 14-18
+- 高级程序员（技术面试）：北京就业 薪资&gt;=18
 
 工资+项目
 
 技术面试：一个自我介绍，项目介绍，底层算法（中级以上）
 
-
 ## 2 周实训 {#2-周实训}
 
 资料结构：
 
--   静态页面：HTML CSS JS
--   JS 框架：Vue
--   数据库：MySQL
--   框架模板
-
+- 静态页面：HTML CSS JS
+- JS 框架：Vue
+- 数据库：MySQL
+- 框架模板
 
 ### 软件安装及配置 {#软件安装及配置}
 
@@ -232,17 +229,15 @@ $ sudo pacman -S percona-server-clients
 
 获取 LICENSE 方式: GitHub Student Pack(thanks @GitHub)
 
-
 ### 作业 {#作业}
 
 txt 文本：姓名(第一天).txt
 
--   day1 课程感受；对 Java 方向的看法
--   day2 重新创建 maven 项目 1_高天贺 home，定义一个包 HelloMaven，写一个主方法，输出 `hello maven`
--   day3 在 day2 的项目中，重新操作当天的任务；记学习笔记
--   day4 完成「数组绑定 HTML」，在 day2 项目中操作一遍；笔记
--   day5 完成「今日操作」，在 day2 项目中操作一遍；笔记
-
+- day1 课程感受；对 Java 方向的看法
+- day2 重新创建 maven 项目 1\_高天贺 home，定义一个包 HelloMaven，写一个主方法，输出 `hello maven`
+- day3 在 day2 的项目中，重新操作当天的任务；记学习笔记
+- day4 完成「数组绑定 HTML」，在 day2 项目中操作一遍；笔记
+- day5 完成「今日操作」，在 day2 项目中操作一遍；笔记
 
 ### 第一天 {#第一天}
 
@@ -257,19 +252,17 @@ txt 文本：姓名(第一天).txt
 3.  Java 语言是一种工具，它能帮助公司开发更大型的项目、更易维护，虽然有 Go 语言这样的后起之秀，但是，Java 目前还占据主导地位。
 4.  编程语言是工具，能够通过它们做到一些从未做到的事，是令人感到喜悦的。
 
-
 ### 第二天 {#第二天}
 
--   软件配置 Maven，IDEA
-
+- 软件配置 Maven，IDEA
 
 ### 第三天 {#第三天}
 
 系统架构：
 
--   前端 Axios Ajax
--   后端 Java Spring SpringMVC MyBatis SpringBoot
--   数据库 MySQL
+- 前端 Axios Ajax
+- 后端 Java Spring SpringMVC MyBatis SpringBoot
+- 数据库 MySQL
 
 三方交互：用户（浏览器）访问前端「没有秘密」、前端访问后端「有秘密，用户不可见」、后端访问数据库。
 
@@ -351,7 +344,7 @@ Disconnected from the target VM, address: '127.0.0.1:47459', transport: 'socket'
 Process finished with exit code 1
 ```
 
-1） `WARN 50475 --- [main] o.m.s.mapper.ClassPathMapperScanner      : No MyBatis mapper was found in '[yidajiabei.xyz]' package`
+1） `WARN 50475 --- [main] o.m.s.mapper.ClassPathMapperScanner : No MyBatis mapper was found in '[yidajiabei.xyz]' package`
 
 这一警告的细节可以阅读 <https://www.cnblogs.com/yangshaoxiang/p/12974555.html>
 
@@ -378,9 +371,9 @@ Consider the following:
 
 ```yml
 spring:
-    datasource:
-        driver-class-name: com.mysql.cj.jdbc.Driver
-        url: jdbc:mysql://localhost:3306/Cibus?useSSL=true
+  datasource:
+    driver-class-name: com.mysql.cj.jdbc.Driver
+    url: jdbc:mysql://localhost:3306/Cibus?useSSL=true
 ```
 
 对于 `driver-class-name` 曾经的内容是 `com.mysql.jdbc.Driver` （已弃用），新的名称是 `com.mysql.cj.jdbc.Driver` 。
@@ -395,7 +388,6 @@ spring:
 
 POM 文件为 gav 格式，不允许中文字符或空格。仅使用下划线、数字、字母，将 artifactId 属性值改为符合要求的形式即可。
 
-
 ### 第四天 {#第四天}
 
 1.  静态资源访问动态资源 HTML 如何访问：Controller
@@ -408,9 +400,9 @@ AJAX(Asynchronous JavaScript And XML) 的作用：
 
 > AJAX 使用的是一种结合。
 
--   网页加载完成后，可以从 Web 服务器读取数据
--   不刷新页面更新 Web 网页
--   后台传递给 Web 服务器
+- 网页加载完成后，可以从 Web 服务器读取数据
+- 不刷新页面更新 Web 网页
+- 后台传递给 Web 服务器
 
 参考资料：
 
@@ -422,7 +414,7 @@ Vue: MVVM 框架，数据直接绑定，数据驱动视图。
 
 Vue 模型：
 
-![](/vue-mvvm.svg "")
+![](https://images.yidajiabei.xyz/vue-mvvm.svg)
 
 ```html
 <div id="app">
@@ -434,24 +426,24 @@ Vue 模型：
 
 ```js
 let app = new Vue({
-    el: '#app',
-    data: {
-        // mi_index: '京东商城',
-        // mi_url: 'https://www.jd.com',
-        mi_type: []
-    },
-    created:function() { // auto exec after Vue object load successfully
-        // data initialization
-        this.mi_type = [
-            {name: `小米`, url:`https://www.mi.com/`},
-            {name: `淘宝`, url:`https://www.taobao.com/`},
-            {name: `京东`, url:`https://www.jd.com/`},
-            {name: `拼多多`, url:`https://youhui.pinduoduo.com/`},
-        ]
-    }
+  el: '#app',
+  data: {
+    // mi_index: '京东商城',
+    // mi_url: 'https://www.jd.com',
+    mi_type: [],
+  },
+  created: function () {
+    // auto exec after Vue object load successfully
+    // data initialization
+    this.mi_type = [
+      { name: `小米`, url: `https://www.mi.com/` },
+      { name: `淘宝`, url: `https://www.taobao.com/` },
+      { name: `京东`, url: `https://www.jd.com/` },
+      { name: `拼多多`, url: `https://youhui.pinduoduo.com/` },
+    ]
+  },
 })
 ```
-
 
 ### 第五天 {#第五天}
 
@@ -577,7 +569,7 @@ public class ResultBean<T> {
 
 `src/main/java/yidajiabei.xyz/util/ResultBean.java` 的图形示意：
 
-![](/java-resultbean.svg "")
+![](https://images.yidajiabei.xyz/java-resultbean.svg)
 
 ```java
 // src/main/java/yidajiabei.xyz/domain/UrlBean.java
@@ -618,33 +610,34 @@ public class UrlBean {
 ```js
 // src/main/resources/static/js/system/index.js
 let app = new Vue({
-    el: '#app',
-    data: {
-        // mi_index: '京东商城',
-        // mi_url: 'https://www.jd.com/',
-        mi_type: []
-    },
-    created:function () {
-        // send ajax request
-        let _this = this;
-        axios.get("http://localhost:8000/typeList", {params: {}})
-            .then(function (ret) {
-                console.log(ret.data);
-                let dataType = ret.data;
-                dataType.msg = undefined;
-                if(dataType.sign===true) {
-                    _this.mi_type = dataType.data;
-                } else {
-                    alert(dataType.msg);
-                }
-        })
-    }
+  el: '#app',
+  data: {
+    // mi_index: '京东商城',
+    // mi_url: 'https://www.jd.com/',
+    mi_type: [],
+  },
+  created: function () {
+    // send ajax request
+    let _this = this
+    axios
+      .get('http://localhost:8000/typeList', { params: {} })
+      .then(function (ret) {
+        console.log(ret.data)
+        let dataType = ret.data
+        dataType.msg = undefined
+        if (dataType.sign === true) {
+          _this.mi_type = dataType.data
+        } else {
+          alert(dataType.msg)
+        }
+      })
+  },
 })
 ```
 
 axios 的图形示意：
 
-![](/axios.svg "")
+![](https://images.yidajiabei.xyz/axios.svg)
 
 ```html
 <!-- src/main/resources/static/index.html -->
@@ -652,7 +645,6 @@ axios 的图形示意：
   <a v-bind:href="type.url">{{ type.name }}</a><span>|</span>
 </li>
 ```
-
 
 ### 第六天 {#第六天}
 
@@ -749,10 +741,9 @@ pid-file        = /run/mysqld/mysqld.pid
 secure-file-priv = "/home/archie/"
 ```
 
-
 ### 第七天 {#第七天}
 
-![](/front-back-end-mysql-framework.svg "")
+![](https://images.yidajiabei.xyz/front-back-end-mysql-framework.svg)
 
 图示为项目架构：
 
@@ -761,7 +752,6 @@ secure-file-priv = "/home/archie/"
 3.  后端通过 MyBatis 的逆向工程获取到数据库数据
 4.  后端中，controller 负责与前端交互，mapper 负责与数据库沟通，它们之间隔着 service 层。
 5.  service 层提供接口，并提出具体实现类
-
 
 ### 第八天 {#第八天}
 
@@ -815,7 +805,6 @@ public class Resultbean<T> {
     7.  js
     8.  controller
 
-
 ### 第九天 {#第九天}
 
 一、制作项目
@@ -839,15 +828,14 @@ public class Resultbean<T> {
 
 通过实现三个需求，熟悉写程序的顺序。
 
--   第一步，根据 HTML 在数据库中加入数据；
--   第二步，项目初始化；
--   第三步，MyBatis 逆向工程生成 domain 下文件和 Mapper 文件；
--   第四步，写 Service 层接口和实现类；
--   第五步，按照 Vue 语法修改 HTML 文件；
--   第六步，添加 axios get,then 规则；最后一步，在 controller 中添加相应部分。
+- 第一步，根据 HTML 在数据库中加入数据；
+- 第二步，项目初始化；
+- 第三步，MyBatis 逆向工程生成 domain 下文件和 Mapper 文件；
+- 第四步，写 Service 层接口和实现类；
+- 第五步，按照 Vue 语法修改 HTML 文件；
+- 第六步，添加 axios get,then 规则；最后一步，在 controller 中添加相应部分。
 
 课堂按照老师的要求，一个需求一个需求地实现；课下对于作业的操作，则是按照写程序的顺序，三个需求同步推进。
-
 
 ### 第十天 {#第十天}
 
@@ -860,9 +848,7 @@ public class Resultbean<T> {
 
 Map 的数据结构：（Key,Value）
 
-
 ## 收获 {#收获}
-
 
 ### day3 {#day3}
 
@@ -874,31 +860,25 @@ Map 的数据结构：（Key,Value）
 
 我从这次经历里得出的重要教训就是：区分问题的优先级很重要。希望大家能够从我的经历中获得启发。
 
-
 ### day4 {#day4}
 
 有方向感的时候不会慌张。
-
 
 ### day5 {#day5}
 
 今天应用了 ajax 技术，ajax 帮助网页以异步形式获取数据，亦即当网页加载完成后还能够从后端获取数据，而不需要重新加载。
 
-
 ### day6 {#day6}
 
 今天终于解决了 MySQL 相关的报错问题，我能够跟着老师的步骤，得到期待的结果。
-
 
 ### day7 {#day7}
 
 今天见到了这个项目的全貌，从前端到后端，从后端到数据库。
 
-
 ### day8 {#day8}
 
 今天把过去 7 天学习的内容一次性完成，有一种纵览全局的感觉。
-
 
 ### day9 {#day9}
 
@@ -906,11 +886,9 @@ Map 的数据结构：（Key,Value）
 
 今天得到了老师的表扬（老师说适合当程序员），我很高兴。因为学习编程很久，受到别人的鼓励比较少，一般是自己给自己打气。
 
-
 ### day10 {#day10}
 
 第十天对项目代码进行了重构，进而阅读了《重构》这本书。以后还要再读。
-
 
 ## 实习总结 {#实习总结}
 
