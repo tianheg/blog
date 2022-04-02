@@ -14,16 +14,16 @@ Renton 钻进马桶真的要恶心死我。
 
 远离狐朋狗友
 
-![](/trainspotting-0.jpeg "")
+![](https://images.yidajiabei.xyz/trainspotting-0.jpeg)
 
-![](/trainspotting-1.jpeg "")
+![](https://images.yidajiabei.xyz/trainspotting-1.jpeg)
 
-![](/trainspotting-2.jpeg "")
+![](https://images.yidajiabei.xyz/trainspotting-2.jpeg)
 
-![](/trainspotting-3.jpeg "")
+![](https://images.yidajiabei.xyz/trainspotting-3.jpeg)
 
-![](/trainspotting-4.jpeg "")
+![](https://images.yidajiabei.xyz/trainspotting-4.jpeg)
 
-![](/trainspotting-5.jpeg "")
+![](https://images.yidajiabei.xyz/trainspotting-5.jpeg)
 
-![](/trainspotting-6.jpeg "")
+![](https://images.yidajiabei.xyz/trainspotting-6.jpeg)

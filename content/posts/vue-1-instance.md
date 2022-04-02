@@ -8,7 +8,6 @@ draft = false
 
 <https://vuejs.org/guide/essentials/application.html>
 
-
 ## 创建一个应用实例 {#创建一个应用实例}
 
 每一个 Vue 应用的开始，都是通过 `createApp` 函数，创建一个新的应用实例：
@@ -38,7 +37,6 @@ Vue.createApp({})
 ```
 
 可以在 [API reference](https://vuejs.org/api/application.html) 找到全部的应用 API。
-
 
 ## 根组件 {#根组件}
 
@@ -77,7 +75,6 @@ Root Component
 
 [组件系统](https://v3.vuejs.org/guide/component-basics.html)稍后可见。现在只需要知道，根组件和其他组件并无不同。配置选项与相应组件实例的行为相同。
 
-
 ## 组件实例属性 {#组件实例属性}
 
 `data` 中定义的属性会通过组件实例公开：
@@ -86,7 +83,7 @@ Root Component
 const app = Vue.createApp({
   data() {
     return { count: 4 }
-  }
+  },
 })
 
 const vm = app.mount('#app')
@@ -94,7 +91,6 @@ console.log(vm.count)
 ```
 
 还有其他可以添加的使用者定义选项，像 `methods` ， `props` ， `computed` ， `inject` ， `setup` 。组件实例的所有属性，无论如何定义，对组件的模板都是可见。Vue 还会通过组件实例公开一些内建属性，像 `$attrs` 和 `$emit` 。这些属性都有一个 `$` 前缀，以避免和使用者定义的属性名相混淆。
-
 
 ## 生命周期钩子 {#生命周期钩子}
 
@@ -110,7 +106,7 @@ Vue.createApp({
   created() {
     // `this` points to the vm instance
     console.log('count is: ' + this.count)
-  }
+  },
 })
 ```
 
@@ -120,9 +116,8 @@ Vue.createApp({
 
 不要在选项属性或回调中使用箭头函数。例如， `created: () => console.log(this.a)` 或 `vm.$watch('a', newValue => this.myMethod())` 。因为箭头函数没有 `this` ， `this` 将作为任何其他变量处理，并通过父作用域进行词法查找，直到找到，经常产生错误，如 `Uncaught TypeError: Cannot read property of undefined` 或 `Uncaught TypeError: this.myMethod is not a function` 。
 
-
 ## 生命周期图 {#生命周期图}
 
 下面是一张生命周期实例图。
 
-![](/vue3-lifecycle.png "")
+![](https://images.yidajiabei.xyz/vue3-lifecycle.png)

@@ -62,7 +62,7 @@ draft = false
 
 引力波。2016 年美国 ligo 宣布观测到引力波
 
-![](/ligo.jpg "LIGO")
+![](https://images.yidajiabei.xyz/ligo.jpg 'LIGO')
 
 现在世界上最著名的物理杂志《物理评论》，在美国
 
@@ -70,7 +70,7 @@ draft = false
 
 相对论的进展
 
-![](/theory-of-relativity.jpg "Theory of Relativity")
+![](https://images.yidajiabei.xyz/theory-of-relativity.jpg 'Theory of Relativity')
 
 广义相对论的诞生------1915 年
 
@@ -78,7 +78,7 @@ draft = false
 
 Riemannian geometry 黎氏几何
 
-![](/riemannian-geometry.jpeg "Riemannian Geometry")
+![](https://images.yidajiabei.xyz/riemannian-geometry.jpeg 'Riemannian Geometry')
 
 让勤于思考的人接受良好的教育；让接受教育的人勤于思考。
 
