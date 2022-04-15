@@ -1,0 +1,39 @@
+{{ if or (and .IsHome .Site.Params.displayFooterInHome) (and (not .IsHome) (.Site.Params.displayFooter | default .Site.Params.enableFooter)) }}
+    <footer id="footer" class="footer">
+        <div class="footer-inner">
+            <div class="site-info">
+              {{- if .Site.Params.displayCopyleftSymbol -}}
+                  <span class="copyleft-symbol">🄯</span>&nbsp;
+              {{- end -}}
+              {{- if .Site.Params.displayCopyrightSymbol -}}
+                  ©&nbsp;
+              {{- end -}}
+
+              {{- if .Site.Params.displaySiteCreatedYear -}}
+                  {{- dateFormat "2006" (time .Site.Params.siteCreatedTime) -}}–
+              {{- end -}}
+              {{- now.Format "2006" -}}
+
+              {{- with .Site.Params.iconBetweenYearAndAuthor -}}
+                  &nbsp;{{- partial "utils/icon.html" (dict "$" $ "name" . "class" "footer-icon") -}}&nbsp;
+              {{- else -}}
+                  &nbsp;
+              {{- end -}}
+
+              {{- .Site.Author.name -}}
+            </div>
+
+            {{- if .Site.Params.displaySiteCopyright }}
+                {{- $raw := .Site.Copyright -}}
+                <div class="site-copyright">{{ partial "utils/markdownify.html" (dict "$" $ "raw" $raw "isContent" false) }}</div>
+            {{- end }}
+
+            {{- with .Site.Params.customFooter }}
+                {{- $raw := . -}}
+                <div class="custom-footer">{{ partial "utils/markdownify.html" (dict "$" $ "raw" $raw "isContent" false) }}</div>
+            {{- end }}
+            
+            {{ partial "custom/footer.html" . }}
+        </div>
+    </footer>
+{{ end }}
