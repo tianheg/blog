@@ -7,3 +7,11 @@
 <a rel="license" href="https://creativecommons.org/licenses/by-nc-sa/4.0/"><img style="border-width:0" src="https://i.creativecommons.org/l/by-nc-sa/4.0/88x31.png" /></a>
 
 备忘：《电磁场与电磁波》C 考将在 2022 年 3/4 月份（毕业的那一学期）进行，勿忘！！！
+
+## References
+
+1. <https://github.com/reuixiy/hugo-theme-meme/tree/fdf98dfa6ed37d0e954bb50e076a2790c73fdb0c>
+2. <https://github.com/luizdepra/hugo-coder/tree/6581e860bde43960e3b6362001f270cd2e9db178>
+3. <https://www.regisphilibert.com/tags/hugo/>
+4. <https://gohugobrasil.netlify.app/themes/creating/>
+5. <https://gohugo.io/templates/introduction/>
