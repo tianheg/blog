@@ -1,0 +1,20 @@
+<main class="home">
+    <div class="poetry">
+        {{ with .Site.Params.logo }}
+        <div class="logo"><img src="{{ . | relURL }}" alt="logo" width="100px" height="100px"></div>
+        {{ end }}
+        {{ range .Site.Params.homePoetry }}
+            <p>{{ partial "utils/markdownify.html" (dict "$" $ "raw" . "isContent" false) }}</p>
+        {{ end }}
+    </div>
+    {{ with .Site.Menus.home }}
+        <div class="links">
+            {{ range . }}
+                {{- $linkType := (string .Pre) -}}
+                {{- $iconName := (string .Post) -}}
+                <a href="{{ .URL }}" class="links-item"{{ if eq $linkType "external" }} target="_blank" rel="noopener"{{ end }}>{{ partial "utils/icon.html" (dict "$" $ "name" $iconName "class" .Identifier) }}{{ .Name }}</a>
+            {{ end }}
+        </div>
+    {{ end }}
+</main>
+{{ partial "footer.html" . }}

@@ -1,0 +1,215 @@
+.main {
+    padding-bottom: 5em;
+}
+
+.post-body {
+    margin-top: 4em !important;
+}
+
+.list-title, .term-title, .list-year, .list-month {
+    font-family: 'jinkaiFont';
+}
+
+.nav {
+    font-size: 1em;
+    margin-top: 0.4em;
+}
+
+.home .poetry {
+    padding: 10em 1em;
+}
+
+.about {
+    color: #07b39b;
+}
+
+.menu-item {
+    .life, .tech, .about {
+        display: none;
+    }
+}
+
+[data-theme="dark"] {
+    .theme-icon-dark, #lang-switcher, .footer-icon {
+        opacity: 0.75;
+    }
+}
+
+#lang-switcher {
+    margin-left: 0.3em;
+}
+
+@media (max-width: $maxWidth) {
+    .nav {
+        margin: 2em 0;
+    }
+    .menu-item {
+        .life, .tech, .about {
+            display: inline-block;
+        }
+    }
+    .menu-item-name {
+        font-size: 80%;
+    }
+
+    :root {
+        .theme-icon-light {
+            display: inline;
+        }
+    }
+    [data-theme="dark"] {
+        .theme-icon-dark {
+            display: inline !important;
+        }
+    }
+    #lang-switcher {
+        margin: 0;
+    }
+}
+
+.nav-toggle {
+    transform: translateY(0.4em);
+}
+
+.footer {
+    letter-spacing: -0.1em;
+}
+
+
+// https://github.com/manateelazycat/manateelazycat.github.io/blob/c41b2ec702e4ccd9ff28e1b0ae1021f496e573b1/styles/font.css
+
+@font-face {
+    font-family: 'jinkaiFont';
+    font-display: swap;
+    src: url('#{$baseRelURL}/fonts/jinkai.ttf') format('TrueType');
+    font-weight: 100 900;
+    font-stretch: 50% 125%;
+    font-style: normal;
+}
+
+:root {
+    --text-wdth: 90;
+    --text-opsz: 40;
+    --text-YTLC: 460;
+}
+
+body {
+    font-variation-settings:
+        'wdth' var(--text-wdth),
+        'opsz' var(--text-opsz),
+        'YTLC' var(--text-YTLC);
+}
+
+.post-title {
+    font-family: 'jinkaiFont';
+    font-variation-settings:
+        'wght' 550,
+        'opsz' 60,
+        'YOPQ' 90;
+}
+
+.list-item-time {
+    font-feature-settings: 'tnum';
+}
+
+
+blockquote.quote {
+    position: relative;
+    margin: 2em auto !important;
+    padding-left: 3em;
+    color: inherit;
+    border: none;
+    p {
+        text-indent: 0 !important;
+    }
+    &::before {
+        position: absolute;
+        left: 0;
+        content: '“';
+        font-size: 3em;
+        font-weight: bold;
+        line-height: 1;
+    }
+    &.poetry {
+        display: table;
+        padding: 0;
+        &::before {
+            left: -1em;
+        }
+        p {
+            margin: 0 0 1em;
+        }
+        p:last-child {
+            margin: 0;
+        }
+    }
+    &.en {
+        p {
+            line-height: 1.618;
+            text-align: left;
+            hyphens: auto;
+            -webkit-hyphens: auto;
+            -moz-hyphens: auto;
+        }
+    }
+    &.italic {
+        p {
+            font-style: italic;
+        }
+    }
+}
+
+@media (max-width: $maxWidth) {
+    blockquote.quote {
+        &.poetry {
+            padding-left: 3em;
+            &::before {
+                left: 0;
+            }
+        }
+    }
+}
+
+// shortcode/github
+.github {
+    border: 1px solid var(--color-contrast-low);
+    border-radius: 3px;
+    margin: 0 auto;
+    margin-bottom: 1em;
+    padding: 1em;
+    .github-icon {
+        width: 1.2em;
+        height: 1.2em;
+        margin-right: 0.5em;
+        margin-bottom: 0.2em;
+        fill: var(--color-contrast-high);
+        transition: all .5s;
+    }
+    .name {
+        font-weight: bold;
+        color: var(--color-primary);
+        text-decoration: none;
+    }
+    .description {
+        margin-top: 0.5em;
+        margin-bottom: 1em;
+        color: var(--color-contrast-high);
+        text-align: justify;
+        font-size: 90%;
+        transition: all .5s;
+    }
+    .language-color {
+        position: relative;
+        top: 1px;
+        display: inline-block;
+        width: 0.75em;
+        height: 0.75em;
+        border-radius: 50%;
+    }
+    .language-name {
+        color: var(--color-contrast-high);
+        font-size: 90%;
+        margin-left: 0.5em;
+        transition: all .5s;
+    }
+}

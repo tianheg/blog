@@ -1,0 +1,21 @@
+{{ if .Params.katex | default .Site.Params.enableKaTeX }}
+    {{ partial "third-party/katex.html" . }}
+{{ end }}
+
+{{ if .Params.mathjax | default .Site.Params.enableMathJax }}
+    {{ partial "third-party/mathjax.html" . }}
+{{ end }}
+
+{{ if .Params.mermaid | default .Site.Params.enableMermaid }}
+    {{ partial "third-party/mermaid.html" . }}
+{{ end }}
+
+{{ if .Site.Params.enableMediumZoom }}
+    {{ partial "third-party/medium-zoom.html" . }}
+{{ end }}
+
+{{ if .Site.Params.enableInstantPage }}
+    {{ partial "third-party/instant-page.html" . }}
+{{ end }}
+
+{{ partial "custom/script.html" . }}

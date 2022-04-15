@@ -1,0 +1,18 @@
+{{ if and .Site.Params.enableMinimalFooter (in .Site.Params.mainSections .Section) }}
+    <footer class="minimal-footer">
+        {{ with .Params.tags }}
+            <div class="post-tag">
+                {{- range $index, $tag := . -}}
+                    <!-- Work-around for https://github.com/gohugoio/hugo/issues/6546 -->
+                    {{- $path := (urls.Parse ($tag | urlize)).Path -}}
+                    {{- with $.Site.GetPage (printf `/tags/%s` $path) -}}
+                        {{- if gt $index 0 -}}
+                            {{- " " -}}
+                        {{- end -}}
+                        <a href="{{ .RelPermalink }}" rel="tag" class="post-tag-link">#{{ .Slug | default .LinkTitle | default $path | lower | anchorize }}</a>
+                    {{- end -}}
+                {{- end -}}
+            </div>
+        {{ end }}
+    </footer>
+{{ end }}
