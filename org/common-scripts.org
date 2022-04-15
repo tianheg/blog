@@ -67,8 +67,49 @@ description:
 # 如果 文件名字有 /，无法创建
 #+END_SRC
 
+另一种需求：
+
+#+BEGIN_SRC sh
+#!/bin/bash
+
+CURRENTDATE=`date +"%Y-%m-%d"`
+echo -n "Enter the Article Name: "
+read -r a
+echo "---
+title: ''
+tags:
+  - 
+description: '用几个精确的字词概括文章内容，方便查找使用'
+date: $CURRENTDATE
+slug: $a
+---" > ~/repo/note/content/posts/"$a.md"
+emacs -nw ~/repo/note/content/posts/"$a.md"
+
+# 问题：
+# 如果文章名字含有空格，能够新建文章，但同时会新建其他文档
+# 如果 文件名字有 /，无法创建
+#+END_SRC
+
 * pandoc Org to Md
 
 #+BEGIN_SRC sh
 pandoc -f org -t markdown original_org_file -s -o converted_md_file
+#+END_SRC
+
+* 创建文件并打开
+
+在 `~/.zshrc` 文件中创建以下函数：
+
+#+BEGIN_SRC conf
+mkcd () {
+  mkdir "$1"
+  cd "$1"
+}
+#+END_SRC
+
+使用：
+
+#+BEGIN_SRC sh
+~ mkcd demo
+~/demo
 #+END_SRC
