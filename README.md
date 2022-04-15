@@ -1,5 +1,3 @@
-test
-
 # blog
 
 [![Netlify Status](https://api.netlify.com/api/v1/badges/3a8285ec-358b-49f2-8522-019e64b96377/deploy-status)](https://app.netlify.com/sites/tianheg-blog/deploys)
