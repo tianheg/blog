@@ -1,7 +1,7 @@
 +++
 title = "常用脚本"
 date = 2022-01-14T00:00:00+08:00
-lastmod = 2022-03-18T13:49:05+08:00
+lastmod = 2022-04-15T21:15:35+08:00
 tags = ["技术"]
 draft = false
 +++
@@ -71,8 +71,49 @@ description:
 # 如果 文件名字有 /，无法创建
 ```
 
+另一种需求：
+
+```sh
+#!/bin/bash
+
+CURRENTDATE=`date +"%Y-%m-%d"`
+echo -n "Enter the Article Name: "
+read -r a
+echo "---
+title: ''
+tags:
+  -
+description: '用几个精确的字词概括文章内容，方便查找使用'
+date: $CURRENTDATE
+slug: $a
+---" > ~/repo/note/content/posts/"$a.md"
+emacs -nw ~/repo/note/content/posts/"$a.md"
+
+# 问题：
+# 如果文章名字含有空格，能够新建文章，但同时会新建其他文档
+# 如果 文件名字有 /，无法创建
+```
+
 ## pandoc Org to Md {#pandoc-org-to-md}
 
 ```sh
 pandoc -f org -t markdown original_org_file -s -o converted_md_file
+```
+
+## 创建文件并打开 {#创建文件并打开}
+
+在 \`~/.zshrc\` 文件中创建以下函数：
+
+```cfg
+mkcd () {
+  mkdir "$1"
+  cd "$1"
+}
+```
+
+使用：
+
+```sh
+~ mkcd demo
+~/demo
 ```
