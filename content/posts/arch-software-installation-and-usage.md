@@ -1,7 +1,7 @@
 +++
 title = "Arch 软件安装和用法"
 date = 2021-08-20T00:00:00+08:00
-lastmod = 2022-03-25T18:20:41+08:00
+lastmod = 2022-04-16T11:52:52+08:00
 tags = ["Archlinux", "技术"]
 draft = false
 toc = true
@@ -553,6 +553,7 @@ yay -S rpi-imager
 | act                                             | Run your GitHub Actions locally                                                                                                                                                        |
 | speedtest-cli                                   | Command line interface for testing internet bandwidth using speedtest.net                                                                                                              |
 | rslsync(aur)                                    | Resilio Sync (ex:BitTorrent Sync) - automatically sync files via secure, distributed technology                                                                                        |
+| peek                                            | 录制 GIF 动图                                                                                                                                                                          |
 
 ### MongoDB {#mongodb}
 
