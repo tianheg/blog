@@ -2,9 +2,11 @@ version: "3.9"
 
 services:
   server:
-    image: klakegg/hugo:0.95.0-ext-alpine
-    command: server
+    image: tianheg/hugo
     volumes:
       - ".:/src"
     ports:
       - "1313:1313"
+    environment:
+      - HUGO_WATCH=true
+      - HUGO_BASEURL=http://127.0.0.1
