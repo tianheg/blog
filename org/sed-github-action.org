@@ -1,5 +1,5 @@
 #+SETUPFILE: ./hugo_setup.org
-#+TITLE: 在GitHub Action中使用sed
+#+TITLE: 在 GitHub Action 中使用 sed
 #+DATE: <2022-04-17 Sun>
 #+HUGO_TAGS: 技术
 
@@ -23,4 +23,4 @@
     sed -i 's/${{ steps.local_version.outputs.VERSION }}/${{ steps.hugo_version.outputs.VERSION }}/' Dockerfile
 #+END_SRC
 
-由此可见，是多余的 `HUGO_VERSIONN=`，当我仔细看这段代码，才发现多打了一个字母 N，难怪测试了那么多次都不行，一把前面的 `HUGO_VERSION=` 删掉就可以了。
+由此可见，是多余的 =HUGO_VERSIONN== ，当我仔细看这段代码，才发现多打了一个字母 N，难怪测试了那么多次都不行，一把前面的 =HUGO_VERSION== 删掉就可以了。
