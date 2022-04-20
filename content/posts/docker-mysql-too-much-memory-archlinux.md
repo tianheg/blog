@@ -1,8 +1,8 @@
 +++
-title = "Arch Linux 下使用 Docker MySQL 占用过高内存"
+title = "Arch Linux下使用Docker MySQL 占用过高内存"
 date = 2022-02-18T00:00:00+08:00
-lastmod = 2022-02-19T08:58:22+08:00
-tags = ["技术", "Docker", "MySQL", "Archlinux"]
+lastmod = 2022-04-20T11:25:40+08:00
+tags = ["技术", "Docker", "MySQL", "Arch Linux"]
 draft = false
 +++
 
@@ -50,18 +50,17 @@ Server:
   GitCommit:        de40ad0
 ```
 
-
 ## 复现步骤 {#复现步骤}
 
 ```sh
 docker run -d --rm --name mysql5.7 -e MYSQL_ROOT_PASSWORD=passwd mysql:5.7
-# 这里 mysql 版本为 5.7.37
+# 这里mysql版本为5.7.37
 
 docker run -d --rm --name mysql -e MYSQL_ROOT_PASSWORD=passwd mysql
-# 这里 mysql 版本为 8.0.27
+# 这里 mysql版本为 8.0.27
 
 docker stats
-# 实时 CPU、内存占用显示
+# 实时CPU、内存占用显示
 ```
 
 我的情况是：

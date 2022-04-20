@@ -1,8 +1,8 @@
 +++
 title = "Arch 安装指南"
 date = 2021-08-20T00:00:00+08:00
-lastmod = 2022-03-04T13:48:43+08:00
-tags = ["技术", "Archlinux"]
+lastmod = 2022-04-20T11:24:58+08:00
+tags = ["技术", "Arch Linux"]
 draft = false
 +++
 
@@ -15,30 +15,24 @@ draft = false
 除此之外，还有
 [archinstall](https://python-archinstall.readthedocs.io/en/latest/index.html)
 
-
 ## 初始安装 {#初始安装}
-
 
 ### 更改 BIOS，使用 USB 系统启动盘优先启动 {#更改-bios 使用-usb-系统启动盘优先启动}
 
 插入制作好的 arch linux USB 启动盘，当前目录下并无
 install.txt（详见参考资料 1）。
 
-
 ### 验证 UEFI {#验证-uefi}
 
 `ls /sys/firmware/efi/efivars` 有输出，说明启动模式为 UEFI。
-
 
 ### 验证网络 {#验证网络}
 
 `ping archlinux.org -c 3` 验证网络，0% packet loss 说明网络正常。
 
-
 ### 更新系统时间 {#更新系统时间}
 
 `timedatectl set-ntp true` 更新系统时间，=timedatectl status= 检查无误。
-
 
 ### 硬盘分区 {#硬盘分区}
 
@@ -63,7 +57,6 @@ Device      Start       End   Sectors  Size Type
 
 机械硬盘 sda 作为挂载硬盘存储文件。
 
-
 ### 硬盘格式化、新建文件系统 {#硬盘格式化新建文件系统}
 
 ```text
@@ -71,7 +64,6 @@ mkfs.fat -F32 /dev/sdb1
 mkfs.ext4 /dev/sdb2
 mkfs.ext4 /dev/sda
 ```
-
 
 ### 挂载分区 {#挂载分区}
 
@@ -81,7 +73,6 @@ mkdir -p /mnt/boot/efi
 mount /dev/sdb1 /mnt/boot/efi
 ```
 
-
 ### 选择镜像源 {#选择镜像源}
 
 ```text
@@ -90,23 +81,19 @@ reflector -c China -a 6 --sort rate --save /etc/pacman.d/mirrorlist # 这里的 
 pacman -Syyy # y 刷新本地缓存 yyy 强制刷新
 ```
 
-
 ### 安装基本系统和安装时要用的应用到硬盘 {#安装基本系统和安装时要用的应用到硬盘}
 
 ```text
 pacstrap -i /mnt base base-devel linux linux-firmware dhcpcd vim
 ```
 
-
 ## 配置系统 {#配置系统}
-
 
 ### 进入硬盘，而不在 U 盘 {#进入硬盘而不在-u-盘}
 
 ```text
 arch-chroot /mnt /bin/bash
 ```
-
 
 ### 生成挂载表 {#生成挂载表}
 
@@ -119,7 +106,6 @@ genfstab -U -p /mnt >> /mnt/etc/fstab
 ```text
 cat /mnt/etc/fstab
 ```
-
 
 ### 时区和语言 {#时区和语言}
 
@@ -154,7 +140,6 @@ locale-gen
 LANG=en_US.UTF-8
 ```
 
-
 ### 安装引导程序 {#安装引导程序}
 
 ```text
@@ -167,7 +152,6 @@ grub-mkconfig -o /boot/grub/grub.cfg
 相关操作时，会出现警告：=Warning: os-prober will not be executed to detect other bootable partitions.=。查
 arch wiki 后，可以在 /etc/default/grub 中设置
 =GRUB_DISABLE_OS_PROBER=false=。
-
 
 ### 设置主机名 {#设置主机名}
 
@@ -183,7 +167,6 @@ echo arch > /etc/hostname
 127.0.0.1 arch.localdomain arch
 ```
 
-
 ### 提前配置网络 {#提前配置网络}
 
 ```text
@@ -193,13 +176,11 @@ systemctl start NetworkManager
 systemctl status NetworkManager # 检查是否运行
 ```
 
-
 ### 设置 root 密码 {#设置-root-密码}
 
 ```text
 passwd
 ```
-
 
 ### 新建普通用户 {#新建普通用户}
 
@@ -231,13 +212,11 @@ EDITOR=vim visudo
 %wheel ALL=(ALL) NOPASSWD: ALL
 ```
 
-
 ### 返回 U 盘 {#返回-u-盘}
 
 ```text
 exit
 ```
-
 
 ## 重启系统 {#重启系统}
 
@@ -248,9 +227,7 @@ reboot
 
 开机后改动 BIOS，配置「系统启动」后，拔掉 U 盘。普通用户 archie 登录。
 
-
 ## 完善系统 {#完善系统}
-
 
 ### 启动微码更新 {#启动微码更新}
 
@@ -259,11 +236,9 @@ sudo pacman -S intel-ucode
 sudo grub-mkconfig -o /boot/grub/grub.cfg
 ```
 
-
 ### 完善显卡驱动 {#完善显卡驱动}
 
 这一步要在知道自己显卡配置的前提下执行。
-
 
 #### VA-API or VDPAU {#va-api-or-vdpau}
 
@@ -315,8 +290,8 @@ So mine is VA-API, I supposed to install
 [AMD/ATI] Topaz XT [Radeon R7 M260/M265 / M340/M360 / M440/M445 /
 530/535 / 620/625 Mobile] (rev c3)
 
--   Radeon R7 M260(Topaz)
-    <https://en.wikipedia.org/wiki/List_of_AMD_graphics_processing_units#Radeon_R5/R7/R9_M200_series>
+- Radeon R7 M260(Topaz)
+  <https://en.wikipedia.org/wiki/List_of_AMD_graphics_processing_units#Radeon_R5/R7/R9_M200_series>
 
 <!--listend-->
 
@@ -340,7 +315,6 @@ ref:
 2.  <https://wiki.archlinux.org/title/Vulkan>
 3.  <https://wiki.archlinux.org/title/Xorg#Driver_installation>
 4.  <https://wiki.archlinux.org/title/Hardware_video_acceleration#:~:text=VDPAU%20on%20Radeon%20R300%20and%20newer%20GPUs>
-
 
 ### 安装图形界面 {#安装图形界面}
 
@@ -377,9 +351,7 @@ Unable to init server: Could not connect: Connection refused
 
 解决：在配置系统语言环境时，选择了 es_US，而不是 en_US。
 
-
 ### SSD 优化 {#ssd-优化}
-
 
 #### 开启 TRIM {#开启 trim}
 
@@ -403,7 +375,6 @@ UUID=b182ad17-2f74-4bf0-95b6-a42884a4ff79 /          ext4       rw,noatime,disca
 UUID=EF6F-2E0C       /boot/efi  vfat       rw,noatime,discard,fmask=0022,dmask=0022,codepage=437,iocharset=ascii,shortname=mixed,utf8,errors=remount-ro 0 2
 ```
 
-
 #### 更换 I/O  scheduler {#更换-io-scheduler}
 
 ```text
@@ -419,7 +390,6 @@ GRUB_CMDLINE_LINUX_DEFAULT="elevator=noop loglevel=3 quiet"
 ```text
 sudo grub-mkconfig -o /boot/grub/grub.cfg
 ```
-
 
 #### 迁移高读写文件到 tmpfs {#迁移高读写文件到-tmpfs}
 
@@ -444,7 +414,6 @@ cd ~/.cache/google-chrome/Default/ && rm -rf Cache && ln -sf /tmp Cache
 cd ~/.cache/google-chrome/Default/ && unlink Cache # 取消 Symbolic Link
 ```
 
-
 ### 检查硬盘状况 {#检查硬盘状况}
 
 ```text
@@ -452,7 +421,6 @@ sudo pacman -S hdparm smartmontools
 sudo hdparm -I /dev/sdb
 sudo smartctl -t short /dev/sdb
 ```
-
 
 ### 测试固态硬盘速度 {#测试固态硬盘速度}
 
@@ -462,7 +430,6 @@ sudo dd if=/dev/zero of=/tmp/test.img bs=1G count=1 oflag=dsync
 
 至此系统完善到此告一段落。
 
-
 ## 其他 {#其他}
 
--   [在阿里云服务器上安装 Arch Linux](https://nyac.at/4)
+- [在阿里云服务器上安装 Arch Linux](https://nyac.at/4)
