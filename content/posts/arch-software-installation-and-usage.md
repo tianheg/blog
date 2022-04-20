@@ -1,8 +1,8 @@
 +++
 title = "Arch 软件安装和用法"
 date = 2021-08-20T00:00:00+08:00
-lastmod = 2022-04-16T11:59:42+08:00
-tags = ["Archlinux", "技术"]
+lastmod = 2022-04-20T11:25:24+08:00
+tags = ["Arch Linux", "技术"]
 draft = false
 toc = true
 +++
