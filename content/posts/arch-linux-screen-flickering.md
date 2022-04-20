@@ -1,7 +1,7 @@
 +++
 title = "Arch Linux KDE桌面屏幕闪烁"
 date = 2022-04-20T00:00:00+08:00
-lastmod = 2022-04-20T14:11:42+08:00
+lastmod = 2022-04-20T19:21:56+08:00
 tags = ["技术", "Arch Linux", "KDE"]
 draft = false
 +++
@@ -39,8 +39,26 @@ sudo grub-mkconfig -o /boot/grub/grub.c
 \`/etc/default/grub\`:
 
 ```cfg
+GRUB_CMDLINE_LINUX_DEFAULT="... i915.enable_psr=0 nomodeset"
+或
 GRUB_CMDLINE_LINUX_DEFAULT="... i915.enable_psr=0"
 ```
+
+以上办法行不通。
+
+又尝试：
+
+```cfg
+GRUB_CMDLINE_LINUX_DEFAULT="... nomodeset"
+```
+
+目前看没有屏幕闪烁，不知道以后会怎么样。
+
+nomodeset 的意思：
+
+> The newest kernels have moved the video mode setting into the kernel. So all the programming of the hardware specific clock rates and registers on the video card happen in the kernel rather than in the X driver when the X server starts.. This makes it possible to have high resolution nice looking splash (boot) screens and flicker free transitions from boot splash to login screen. Unfortunately, on some cards this doesn't work properly and you end up with a black screen. Adding the nomodeset parameter instructs the kernel to not load video drivers and use BIOS modes instead until X is loaded.
+>
+> 来自 <https://ubuntuforums.org/showthread.php?t=1613132>
 
 ---
 
