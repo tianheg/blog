@@ -1,7 +1,7 @@
 +++
 title = "Arch Linux KDE桌面屏幕闪烁"
 date = 2022-04-20T00:00:00+08:00
-lastmod = 2022-04-20T19:21:56+08:00
+lastmod = 2022-04-20T21:22:57+08:00
 tags = ["技术", "Arch Linux", "KDE"]
 draft = false
 +++
@@ -52,7 +52,7 @@ GRUB_CMDLINE_LINUX_DEFAULT="... i915.enable_psr=0"
 GRUB_CMDLINE_LINUX_DEFAULT="... nomodeset"
 ```
 
-目前看没有屏幕闪烁，不知道以后会怎么样。
+目前看没有屏幕闪烁，不知道以后会怎么样。没有解决，锁屏 20 分钟后开机再次闪烁。
 
 nomodeset 的意思：
 
