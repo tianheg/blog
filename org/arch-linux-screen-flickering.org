@@ -25,6 +25,20 @@ GPU: AMD ATI Radeon R7 M260/M265 / M340/M360 / M440/M445 / 530/535 / 620/625 Mob
 Memory: 6686MiB / 23924MiB
 #+END_SRC
 
+解决办法：
+
+#+BEGIN_SRC sh
+sudo vim /etc/default/grub
+sudo grub-mkconfig -o /boot/grub/grub.c
+# reboot
+#+END_SRC
+
+`/etc/default/grub`:
+
+#+BEGIN_SRC conf
+GRUB_CMDLINE_LINUX_DEFAULT="... i915.enable_psr=0"
+#+END_SRC
+
 ---
 参考资料
 
