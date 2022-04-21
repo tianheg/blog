@@ -1,7 +1,7 @@
 +++
 title = "Arch Linux KDE 桌面屏幕闪烁"
 date = 2022-04-20T00:00:00+08:00
-lastmod = 2022-04-20T21:40:00+08:00
+lastmod = 2022-04-21T12:36:52+08:00
 tags = ["技术", "Arch Linux", "KDE"]
 draft = false
 +++
@@ -36,7 +36,7 @@ sudo grub-mkconfig -o /boot/grub/grub.c
 # reboot
 ```
 
-\`/etc/default/grub\`:
+`/etc/default/grub` :
 
 ```cfg
 GRUB_CMDLINE_LINUX_DEFAULT="... i915.enable_psr=0 nomodeset"
