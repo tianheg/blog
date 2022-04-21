@@ -440,8 +440,9 @@ tocnum = false
 19. [读写人](http://www.duxieren.com/)
 20. [全国图书馆参考咨询联盟](http://www.ucdrs.superlib.net/)
 21. [Library Genesis](https://libgen.is/) <https://libgen.rs/> <https://libgen.st/> <http://libgen.gs/>
+22. http://haodoo.net/ https://www.pdfdrive.com/ https://thepiratebay.org/index.html
 
-### 外文书籍网站 {#外文书籍网站}
+### 外文书籍网站
 
 1.  [World Digital Library](https://www.loc.gov/collections/world-digital-library/about-this-collection/)
 2.  [Project Gutenberg](https://www.gutenberg.org/)
@@ -449,7 +450,7 @@ tocnum = false
 4.  [DigiLibraries.com - Free eBooks library](https://digilibraries.com/)
 5.  [MagazineLib](https://magazinelib.com/)
 
-### 网上书店 {#网上书店}
+### 网上书店
 
 1.  [亚马逊](https://www.amazon.cn/)
 2.  [当当图书](https://book.dangdang.com/)
@@ -460,7 +461,7 @@ tocnum = false
 7.  [博库网](https://www.bookuu.com/)
 8.  [商务印书馆](https://www.cp.com.cn/)
 
-### 找绝版书 {#找绝版书}
+### 找绝版书
 
 <https://mp.weixin.qq.com/s/PNjMNmD6M8xcpNr3WnJltw>
 
@@ -469,7 +470,7 @@ tocnum = false
 3.  联系出版社/作者（可以去「全国图书馆参考咨询联盟」搜书，在 _版权页_ 找到联系方式；通过出版社的社交媒体；联系作者/译者购买样书）。更好的做法，是找到出版社仍在持续更新，明显有人在打理的社交媒体，然后留言。
 4.  图书馆借阅后复印/淘宝买影印版
 
-### 论文检索 {#论文检索}
+### 论文检索
 
 1.  Sci-Hub <https://sci-hub.wf/> <https://sci-hub.ren/> <https://sci-hub.se/>
 2.  <https://arxiv.org/archive/cs>
