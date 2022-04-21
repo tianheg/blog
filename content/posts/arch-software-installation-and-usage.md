@@ -1,7 +1,7 @@
 +++
 title = "Arch 软件安装和用法"
 date = 2021-08-20T00:00:00+08:00
-lastmod = 2022-04-20T11:25:24+08:00
+lastmod = 2022-04-21T08:04:33+08:00
 tags = ["Arch Linux", "技术"]
 draft = false
 toc = true
@@ -555,6 +555,7 @@ yay -S rpi-imager
 | rslsync(aur)                                    | Resilio Sync (ex:BitTorrent Sync) - automatically sync files via secure, distributed technology                                                                                        |
 | peek                                            | 录制 GIF 动图                                                                                                                                                                          |
 | obs-studio                                      | 录屏软件                                                                                                                                                                               |
+| pkgstats                                        | Submit a list of installed packages to the Arch Linux project                                                                                                                          |
 
 ### MongoDB {#mongodb}
 
