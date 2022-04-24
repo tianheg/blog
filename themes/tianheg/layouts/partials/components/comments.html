@@ -1,0 +1,58 @@
+{{ if and (.Params.comments | default .Site.Params.enableComments) (eq
+hugo.Environment "production") }} {{ if or (in .Site.Params.mainSections
+.Section) .Params.comments }} {{ if not .Site.Params.autoLoadComments }}
+<div class="load-comments">
+  <div id="load-comments">{{ i18n "loadComments" }}</div>
+</div>
+{{ end }}
+
+<section class="comments">
+  <div class="tabs">
+    <input name="tabs" type="radio" id="tab-1" checked class="input" />
+    <label for="tab-1" class="label">Disqus</label>
+    <div class="panel">
+      <div id="disqus_thread"></div>
+    </div>
+    <input name="tabs" type="radio" id="tab-2" class="input" />
+    <label for="tab-2" class="label">Giscus</label>
+    <div class="panel">
+      <script
+        src="https://giscus.app/client.js"
+        data-repo="tianheg/blog"
+        data-repo-id="MDEwOlJlcG9zaXRvcnkyNzY5Mjk1OTM="
+        data-category="Comments"
+        data-category-id="DIC_kwDOEIGcOc4COv8X"
+        data-mapping="pathname"
+        data-reactions-enabled="1"
+        data-emit-metadata="0"
+        data-input-position="top"
+        data-theme="light"
+        data-lang="en"
+        data-loading="lazy"
+        crossorigin="anonymous"
+        async
+      ></script>
+    </div>
+    <input name="tabs" type="radio" id="tab-3" class="input" />
+    <label for="tab-3" class="label">Preferences</label>
+    <div class="panel">
+      <p class="title">Layout of comment panels</p>
+      <input name="layout" type="radio" id="layout-1" checked />
+      <label for="layout-1"
+        >Tabbed (wide screen) / Stacked (small screen)</label
+      >
+      <br />
+      <input name="layout" type="radio" id="layout-2" />
+      <label for="layout-2">Full display</label>
+    </div>
+  </div>
+  <script src="/js/custom-disqus.js" defer></script>
+  <noscript
+    >Please enable JavaScript to view the
+    <a href="https://disqus.com/?ref_noscript"
+      >comments powered by Disqus.</a
+    ></noscript
+  >
+</section>
+
+{{ end }} {{ end }}

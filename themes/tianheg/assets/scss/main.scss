@@ -351,6 +351,10 @@ $baseRelURL: "{{ strings.TrimSuffix (.Site.BaseURL | relURL) "/" }}";
     @import "components/post-nav";
 {{ end }}
 
+{{ if .Site.Params.enableComments }}
+    @import "components/comments";
+{{ end }}
+
 {{ if .Site.Params.enableBackToTop }}
     {{ if .Site.Params.enableBackToTopAutoHide }}
         $enableBackToTopAutoHide: true;
