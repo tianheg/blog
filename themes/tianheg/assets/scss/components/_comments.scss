@@ -1,0 +1,73 @@
+.load-comments {
+  margin-top: 5em;
+  text-align: center;
+}
+
+#load-comments {
+  cursor: pointer;
+  display: inline-block;
+  background-color: var(--color-contrast-lower);
+  padding: 0.5em 1em;
+  border-radius: 1em;
+  transition: background-color $duration;
+  &:hover {
+    background-color: alpha(var(--color-primary), 0.3);
+  }
+}
+
+.tabs {
+  display: flex;
+  flex-wrap: wrap;
+  background: #fafafa;
+  box-shadow: 0 20px 80px -50px rgba(0, 0, 0, 0.3);
+}
+
+.input {
+  position: absolute;
+  opacity: 0;
+}
+.label {
+  padding: 15px 20px;
+  background: #eee;
+  cursor: pointer;
+  font-weight: bold;
+  color: #7f7f7f;
+  transition: background 0.1s, color 0.1s;
+}
+.label:hover {
+  background: #d8d8d8;
+}
+.label:active {
+  background: #ccc;
+}
+.input:focus + .label {
+  box-shadow: inset 0px 0px 0px 3px #2aa1c0;
+  z-index: 1;
+}
+.input:checked + .label {
+  background: #fff;
+  color: #000;
+  border: 1px solid #eee;
+}
+.panel {
+  display: none;
+  padding: 10px;
+  background: #fff;
+  width: 100%;
+  order: 99;
+}
+.panel .title {
+  font-weight: bold;
+}
+.input:checked + .label + .panel,
+.comment-full .tabs,
+.comment-full .panel:not(:last-of-type) {
+  display: block;
+}
+.comment-full .panel {
+  order: inherit;
+}
+.comment-full .label {
+  width: 100%;
+  display: block;
+}
