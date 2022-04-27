@@ -1,7 +1,7 @@
 +++
 title = "为 GitHub 主页添加「年进度」和「最近更新的博客文章」"
 date = 2021-01-26T00:00:00+08:00
-lastmod = 2022-02-25T10:34:19+08:00
+lastmod = 2022-04-27T13:47:59+08:00
 tags = ["技术", "GitHub"]
 draft = false
 +++
@@ -11,31 +11,37 @@ Github Actions 获取网站的 RSS 数据，并更新到个人主页](https://gi
 
 标题勾起了我学习的兴趣。自己也想进一步学习 [GitHub Actions](/tags/github-actions/) 的使用。
 
-
 ## 添加「年进度」 {#添加-年进度}
 
 用到了 JavaScript 的知识，代码：
 
 ```js
 const thisYear = new Date().getFullYear()
-const startTimeOfThisYear = new Date(`${thisYear}-01-01T00:00:00+00:00`).getTime()
+const startTimeOfThisYear = new Date(
+  `${thisYear}-01-01T00:00:00+00:00`,
+).getTime()
 const endTimeOfThisYear = new Date(`${thisYear}-12-31T23:59:59+00:00`).getTime()
-const progressOfThisYear = (Date.now() - startTimeOfThisYear) / (endTimeOfThisYear - startTimeOfThisYear)
+const progressOfThisYear =
+  (Date.now() - startTimeOfThisYear) / (endTimeOfThisYear - startTimeOfThisYear)
 const progressBarOfThisYear = generateProgressBar()
 
 function generateProgressBar() {
-    const progressBarCapacity = 30
-    const passedProgressBarIndex = parseInt(progressOfThisYear * progressBarCapacity)
-    const progressBar = Array(progressBarCapacity)
-        .fill('_')
-        .map((value, index) => index < passedProgressBarIndex ? '█' : value)
-        .join('')
-    return ` ${progressBar}`
+  const progressBarCapacity = 30
+  const passedProgressBarIndex = parseInt(
+    progressOfThisYear * progressBarCapacity,
+  )
+  const progressBar = Array(progressBarCapacity)
+    .fill('_')
+    .map((value, index) => (index < passedProgressBarIndex ? '█' : value))
+    .join('')
+  return ` ${progressBar}`
 }
 
-const readme =`
-Annual balance  ${progressBarOfThisYear} ${(progressBarOfThisYear * 100).toFixed(2)} %
-⏰ Updated on ${new Date().toUTCString()}`;
+const readme = `
+Annual balance  ${progressBarOfThisYear} ${(
+  progressBarOfThisYear * 100
+).toFixed(2)} %
+⏰ Updated on ${new Date().toUTCString()}`
 console.log(readme)
 ```
 
@@ -49,7 +55,6 @@ console.log(readme)
 6.  `progressBarOfThisYear` 今年的进度条
 7.  `generateProgressBar` 生成进度条
 8.  `function` 定义函数
-
 
 ## 添加「最近更新的博客文章」 {#添加-最近更新的博客文章}
 
@@ -143,10 +148,10 @@ def main():
     insert_info = blog
 
     # 替换 ---start--- 到 ---end--- 之间的内容
-    # pytz.timezone('Asia/Shanghai')).strftime('%Y 年%m 月%d 日%H 时 M 分')
+    # pytz.timezone('Asia/Shanghai')).strftime('%Y年%m月%d日%H时M分')
     fmt = '%Y-%m-%d %H:%M:%S %Z%z'
-    insert_info = "---start---\n\n**最近更新文章(" + "更新时间:"+  datetime.fromtimestamp(int(time.time()),pytz.timezone('Asia/Shanghai')).strftime('%Y-%m-%d %H:%M:%S') + " | 通过 Github Actions 自动更新)**" +"\n" + insert_info + "\n---end---"
-    # 获取 README.md 内容
+    insert_info = "---start---\n\n**最近更新文章(" + "更新时间:"+  datetime.fromtimestamp(int(time.time()),pytz.timezone('Asia/Shanghai')).strftime('%Y-%m-%d %H:%M:%S') + " | 通过Github Actions自动更新)**" +"\n" + insert_info + "\n---end---"
+    # 获取README.md内容
     with open (os.path.join(os.getcwd(), "README.md"), 'r', encoding='utf-8') as f:
         readme_md_content = f.read()
 
@@ -161,7 +166,6 @@ main()
 ```
 
 它是一个 Python 源文件，主要作用就是在 `README.md` 文件的 `---start---` 和 `---end---` 插入我最近更新的三篇文章。
-
 
 ## 整合 GitHub Actions {#整合-github-actions}
 
@@ -218,7 +222,6 @@ jobs:
 9.  `run: node index.js > README.md` 把「年进度」更新到 README.md 中
 10. `uses: tianheg/github-actions@pipenv=，=command: install --dev=，=command: run build` 安装 pipenv 环境（因为会用到很多 GitHub Actions，于是就把有用的整成一个仓库），并执行命令 `pipenv install --dev` ，然后执行命令 `pipenv run build`
 11. 最后一部分就是使用 github-actions[bot] 机器人作为提交者，提交这次 commit
-
 
 ## 解释 tianheg/github-actions@pipenv {#解释-tianheg-github-actions-pipenv}
 
