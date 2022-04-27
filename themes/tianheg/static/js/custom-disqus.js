@@ -8,6 +8,5 @@ if (document.querySelector('#layout-2').checked == true) {
   comment.classList.remove('comment-full')
 }
 
-console.log(comment)
 // https://cdn.jsdelivr.net/npm/@xiee/utils/js/custom-disqus.js
 // TODO lazy loading
