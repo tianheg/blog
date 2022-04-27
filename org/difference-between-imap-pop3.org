@@ -1,6 +1,8 @@
 #+SETUPFILE: ./hugo_setup.org
 #+TITLE: IMAP 和 POP3 有什么区别？
 #+DATE: <2021-01-31 Sun>
+#+HUGO_TAGS: 技术 Procotol
+
 POP3 协议允许电子邮件客户端下载服务器上的邮件，但是在客户端的操作（如移动邮件、标记已读等），不会反馈到服务器上，比如通过客户端收取了邮箱中的
 3 封邮件并移动到其他文件夹，邮箱服务器上的这些邮件是没有同时被移动的。
 
@@ -12,8 +14,9 @@ POP3 协议允许电子邮件客户端下载服务器上的邮件，但是在客
 提供的摘要浏览功能可以让你在阅读完所有的邮件到达时间、主题、发件人、大小等信息后才作出是否下载的决定。此外，IMAP
 更好地支持了从多个不同设备中随时访问新邮件。
 
-#+caption: IMAP和POP3有什么区别?
-[[/difference-between-imap-pop3.jpg]]
+#+BEGIN_EXPORT hugo
+![](https://images.yidajiabei.xyz/difference-between-imap-pop3.jpg "IMAP和POP3有什么区别?")
+#+END_EXPORT
 
 总之，IMAP 整体上为用户带来更为便捷和可靠的体验。POP3
 更易丢失邮件或多次下载相同的邮件，但 IMAP 通过邮件客户端与 webmail
