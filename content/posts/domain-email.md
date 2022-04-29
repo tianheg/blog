@@ -1,14 +1,14 @@
 +++
 title = "域名邮箱"
 date = 2021-12-17T00:00:00+08:00
-lastmod = 2022-04-27T14:25:15+08:00
+lastmod = 2022-04-29T15:43:08+08:00
 tags = ["技术"]
 draft = false
 +++
 
 <https://antfu.me/posts/domain-email>
 
-一直以来都很想要一个域名邮箱，现在终于有了。域地址名：me@yidajiabei.xyz。
+一直以来都很想要一个域名邮箱，现在终于有了。域地址名：me@tianeg.xyz。
 
 使用 <https://forwardemail.net/en>（支持 GitHub 登录），只需要添加 3 条 DNS 记录：
 
@@ -27,3 +27,5 @@ Cloudflare 提供一种名为 [Email Routing](https://blog.cloudflare.com/introd
 2022-04-27 更新：
 
 使用了 Mailgun 的付费服务。
+
+<https://www.appmaildev.com/en/spf> SPF 测试工具。
