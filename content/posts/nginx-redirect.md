@@ -1,7 +1,8 @@
 +++
 title = "Nginx Redirect"
 date = 2021-12-03T00:00:00+08:00
-lastmod = 2022-04-30T09:31:26+08:00
+lastmod = 2022-04-30T09:33:02+08:00
+tags = ["Nginx"]
 draft = false
 +++
 
