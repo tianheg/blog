@@ -1,9 +1,13 @@
-#+SETUPFILE: ./hugo_setup.org
-#+TITLE: Nginx Redirect
-#+DATE: <2021-12-03 Fri>
-* http to https
++++
+title = "Nginx Redirect"
+date = 2021-12-03T00:00:00+08:00
+lastmod = 2022-04-30T09:31:26+08:00
+draft = false
++++
 
-#+BEGIN_SRC conf
+## http to https {#http-to-https}
+
+```cfg
 http {
   server {
     listen 443 ssl;
@@ -18,24 +22,24 @@ http {
     rewrite ^(.*) https://$server_name$1 permanent;
   }
 }
-#+END_SRC
+```
 
-* example.com to www.example.com
+## example.com to www.example.com {#example-dot-com-to-www-dot-example-dot-com}
 
-#+BEGIN_SRC conf
+```cfg
 http {
   server {
     listen 80;
     server_name www.example.com example.com;
     return 301 https://www.example.com$request_uri;
 }
-#+END_SRC
+```
 
 要记得为根域名添加 DNS 记录，如果不添加的话，怎么改 Nginx 的配置都是不行的。来自我亲身经历的教训：）
 
-* =https://example.com= to =https://www.example.com=
+## `https://example.com` to `https://www.example.com` {#https-example-dot-com-to-https-www-dot-example-dot-com}
 
-#+BEGIN_SRC conf
+```cfg
 http {
   server {
     listen 80;
@@ -58,9 +62,9 @@ http {
     }
   }
 }
-#+END_SRC
+```
 
-* References
+## References {#references}
 
-- [[https://www.linuxcapable.com/how-to-redirect-non-www-www-with-nginx/][How to Redirect NON-WWW & WWW with Nginx - LinuxCapable]]
-- [[https://www.linode.com/community/questions/18987/how-to-redirect-non-www-to-www-domain-in-nginx][How to redirect non-www to www domain in Nginx | Linode Questions]]
+- [How to Redirect NON-WWW &amp; WWW with Nginx - LinuxCapable](https://www.linuxcapable.com/how-to-redirect-non-www-www-with-nginx/)
+- [How to redirect non-www to www domain in Nginx | Linode Questions](https://www.linode.com/community/questions/18987/how-to-redirect-non-www-to-www-domain-in-nginx)
