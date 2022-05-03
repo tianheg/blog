@@ -278,3 +278,9 @@ try {
   console.error(err)
 }
 #+END_SRC
+
+* 使用欧路词典 API 为 curl 添加 user-agent
+
+#+BEGIN_SRC sh
+curl -H "Authorization: ${{ secrets.EUDIC_TOKEN }}" -A "Mozilla/5.0 (X11; Linux x86_64; rv:100.0) Gecko/20100101 Firefox/100.0" https://api.frdic.com/api/open/v1/studylist/words?language=en
+#+END_SRC
