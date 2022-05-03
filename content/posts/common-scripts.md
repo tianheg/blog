@@ -1,7 +1,7 @@
 +++
 title = "常用脚本"
 date = 2022-01-14T00:00:00+08:00
-lastmod = 2022-04-26T15:55:40+08:00
+lastmod = 2022-05-03T17:44:41+08:00
 tags = ["技术"]
 draft = false
 +++
@@ -289,4 +289,10 @@ try {
 } catch (err) {
   console.error(err)
 }
+```
+
+## 使用欧路词典 API 为 curl 添加 user-agent {#使用欧路词典-api-为-curl-添加-user-agent}
+
+```sh
+curl -H "Authorization: ${{ secrets.EUDIC_TOKEN }}" -A "Mozilla/5.0 (X11; Linux x86_64; rv:100.0) Gecko/20100101 Firefox/100.0" https://api.frdic.com/api/open/v1/studylist/words?language=en
 ```
