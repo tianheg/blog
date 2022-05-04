@@ -24,7 +24,7 @@
 
 <!-- External Links -->
 {{- if $.Site.Params.hrefTargetBlank -}}
-    {{- $Content = replaceRE `(<a href="https?:[^"]+")` `$1 target="_blank" rel="noopener noreferrer"` $Content -}}
+    {{- $Content = replaceRE `(<a href="https?:[^"]+")` `$1 target="_blank"` $Content -}}
 {{- end -}}
 
 {{- $Content | safeHTML -}}
