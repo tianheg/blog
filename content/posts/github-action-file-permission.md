@@ -1,7 +1,7 @@
 +++
 title = "GitHub Action 文件权限问题"
 date = 2022-05-01T10:08:00+08:00
-lastmod = 2022-05-01T11:42:59+08:00
+lastmod = 2022-05-04T08:21:27+08:00
 tags = ["技术", "GitHub"]
 draft = false
 +++
@@ -54,3 +54,7 @@ cat ./lychee/out.md | cut -c 1-60000 >> ./lychee/out.md
 ```
 
 这样，这个问题就算解决了。
+
+## 后记 {#后记}
+
+`cat ./lychee/out.md | cut -c 1-60000 >> ./lychee/out.md` 似乎还保留了文件的原内容，如果想要覆盖源文件的内容需要把 `>>` 改为 `>` 。

@@ -51,3 +51,7 @@ cat ./lychee/out.md | cut -c 1-60000 >> ./lychee/out.md
 #+END_SRC
 
 这样，这个问题就算解决了。
+
+* 后记
+
+=cat ./lychee/out.md | cut -c 1-60000 >> ./lychee/out.md= 似乎还保留了文件的原内容，如果想要覆盖源文件的内容需要把 =>>= 改为 =>= 。
