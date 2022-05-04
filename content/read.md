@@ -6,9 +6,9 @@ toc = true
 tocnum = false
 +++
 
-## 读书分类 {#读书分类}
+## 读书分类
 
-### 软件开发 + 计算机科学 {#软件开发-plus-计算机科学}
+### 软件开发 + 计算机科学
 
 - [HTML5 权威指南](/posts/definitive-guide-to-html5/)，by Adam Freeman
 - Introducing HTML5
@@ -78,7 +78,7 @@ tocnum = false
   - [EP01.学前端的入门问题](https://www.xiaoyuzhoufm.com/episode/61684ce4d8fa23fb00fc4d3b)
   - [一个合格的程序员应该读过哪些书](https://justjavac.com/other/2012/05/15/qualified-programmer-should-read-what-books.html)
 
-### 人物传记 {#人物传记}
+### 人物传记
 
 - 二十世纪美国第一夫人
 - 比尔・盖茨全传，by 于成龙
@@ -86,8 +86,10 @@ tocnum = false
 - 牛津通识读本：罗素，by A.C.格雷林
 - [爱因斯坦自述](/posts/einstein-himself/)，by 爱因斯坦
 
-### 社会科学 {#社会科学}
+### 社会科学
 
+- 标点符号使用规范
+- 现代汉语
 - 全球通史，by L. S. Stavrianos
 - 社会心理学，by David G.Myers
 - 你一定爱读的极简欧洲史，by 约翰·赫斯特
@@ -162,7 +164,7 @@ tocnum = false
 - 《卓有成效的管理者》彼得·德鲁克
 - 自我与防御机制，by 安娜·弗洛伊德（是精神分析学派创始人弗洛伊德的孩子）
 
-### 自然学科 {#自然学科}
+### 自然学科
 
 - [阿西莫夫最新科学指南（上下册）](/posts/asimov-the-intelligent-mans-guide-to-science/) by 阿西莫夫
 - 智能科学，by 史忠植
@@ -171,7 +173,7 @@ tocnum = false
   - 数学之美，by 吴军
 - [Anthropic Bias](https://www.anthropic-principle.com/q=book/table_of_contents/) 物理学等
 
-### 自我成长 {#自我成长}
+### 自我成长
 
 - [人人都能用英语](/posts/everyone-can-use-english/) by 李笑来
 - 企业家爸爸写给女儿的信，by G.金斯利・沃德
@@ -194,7 +196,7 @@ tocnum = false
 - 你凭什么做好互联网：从技术思维到商业逻辑，by caoz（曹大）（正确决策）
 - 硅谷之火——人与计算机的未来，by 保罗·弗赖伯格、迈克尔·斯韦因
 
-### 文学创作 {#文学创作}
+### 文学创作
 
 - [朝花夕拾](/posts/luxun-zhaohuaxishi/) by 鲁迅
 - [一个女人一生中的二十四小时](/posts/24-hours-in-the-life-of-a-woman/) by 茨威格
@@ -393,7 +395,7 @@ tocnum = false
 - 文明之光
 - 👍👍 房思琪的初恋乐园，by 林奕含
 
-## 年度阅读计划 {#年度阅读计划}
+## 年度阅读计划
 
 ✅
 
@@ -403,7 +405,7 @@ tocnum = false
 - 主题阅读书目不计算在内，因为主题阅读一定要阅读很多书籍和文章，有 10 本的限制太委屈了；
 - 技术书籍不算在内，也就是说阅读技术书籍数量不限；
 
-### 2022 {#2022}
+### 2022
 
 - 哲学的故事
 - 人性七论
@@ -417,7 +419,7 @@ tocnum = false
 - 穷查理宝典
 - 思考快与慢
 
-## 很好的资源 {#很好的资源}
+## 很好的资源
 
 1.  [中国哲学书电子化计划](https://ctext.org/zhs)
 2.  选择出版图书方法(包月服务)：微信读书(19)-&gt;亚马逊(12)
