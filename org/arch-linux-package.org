@@ -1,0 +1,67 @@
+#+SETUPFILE: ./hugo_setup.org
+#+TITLE: 如何打包，并发布到 AUR
+#+DATE: <2022-05-05 Thu 10:51>
+#+HUGO_TAGS: 技术 "Arch Linux"
+
+来自 [[https://gitlab.archlinux.org/pacman/pacman/raw/master/proto/PKGBUILD.proto][Example PKGBUILD file]]
+
+#+BEGIN_SRC proto
+# Maintainer: tianheg <me@tianheg.xyz>
+
+pkgname=NAME
+pkgver=VERSION
+pkgrel=1
+pkgdesc=""
+arch=()
+url=""
+license=('')
+groups=()
+depends=()
+makedepends=()
+checkdepends=()
+optdepends=()
+provides=()
+conflicts=()
+replaces=()
+backup=()
+options=()
+install=
+changelog=
+source=("$pkgname-$pkgver.tar.gz"
+        "$pkgname-$pkgver.patch")
+noextract=()
+md5sums=()
+validpgpkeys=()
+
+prepare() {
+	cd "$pkgname-$pkgver"
+	patch -p1 -i "$srcdir/$pkgname-$pkgver.patch"
+}
+
+build() {
+	cd "$pkgname-$pkgver"
+	./configure --prefix=/usr
+	make
+}
+
+check() {
+	cd "$pkgname-$pkgver"
+	make -k check
+}
+
+package() {
+	cd "$pkgname-$pkgver"
+	make DESTDIR="$pkgdir/" install
+}
+#+END_SRC
+
+本来想给 [[https://github.com/thesephist/rush][thesephist/rush]] 打包，尝试几次发现，解决不了构建环境（作者用了自己的编程语言 Oak）的问题。索性作罢，待到以后有时间再看。
+
+---
+
+参考资料
+
+1. [[https://wiki.archlinux.org/title/PKGBUILD][PKGBUILD - ArchWiki]]
+2. [[https://wiki.archlinux.org/title/Creating_packages][Creating packages - ArchWiki]]
+3. [[https://wiki.archlinux.org/title/Arch_package_guidelines][Arch package guidelines - ArchWiki]]
+4. [[https://wiki.archlinux.org/title/AUR_submission_guidelines][AUR submission guidelines - ArchWiki]]
