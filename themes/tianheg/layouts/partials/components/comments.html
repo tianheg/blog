@@ -37,7 +37,7 @@ hugo.Environment "production") }} {{ if or (in .Site.Params.mainSections
     <input name="tabs" type="radio" id="tab-3" class="input" />
     <label for="tab-3" class="label">Preferences</label>
     <div class="panel">
-      <p class="title">Layout of comment panels (need reload the page)</p>
+      <p class="title">Layout of comment panels</p>
       <input name="layout" type="radio" id="layout-1" checked />
       <label for="layout-1"
         >Tabbed (wide screen) / Stacked (small screen)</label
@@ -47,7 +47,8 @@ hugo.Environment "production") }} {{ if or (in .Site.Params.mainSections
       <label for="layout-2">Full display</label>
     </div>
   </div>
-  <script src="/js/custom-disqus.js" defer></script>
+  <script src="https://cdn.jsdelivr.net/npm/@xiee/utils/js/custom-disqus.min.js" defer></script>
+  <!-- ><script src="/js/custom-disqus.js" defer></script> -->
   <noscript
     >Please enable JavaScript to view the
     <a href="https://disqus.com/?ref_noscript"
