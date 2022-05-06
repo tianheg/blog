@@ -12,7 +12,7 @@
             {{ range . }}
                 {{- $linkType := (string .Pre) -}}
                 {{- $iconName := (string .Post) -}}
-                <a href="{{ .URL }}" class="links-item"{{ if eq $linkType "external" }} target="_blank" rel="noopener"{{ end }}>{{ partial "utils/icon.html" (dict "$" $ "name" $iconName "class" .Identifier) }}{{ .Name }}</a>
+                <a href="{{ .URL }}" class="links-item"{{ if eq $linkType "external" }} target="_blank"{{ end }}>{{ partial "utils/icon.html" (dict "$" $ "name" $iconName "class" .Identifier) }}{{ .Name }}</a>
             {{ end }}
         </div>
     {{ end }}
