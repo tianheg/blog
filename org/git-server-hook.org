@@ -116,6 +116,49 @@ git remote add origin git@server-ip:/home/git/blog.git
 git push -u origin main # first push
 #+END_SRC
 
+* 使用 Docker 配置 Hugo 部署
+
+#+BEGIN_SRC sh
+#!/bin/sh
+
+git --work-tree=/home/www --git-dir=/home/git/blog.git checkout -f
+cd /home/www/public
+sudo rm -rf * # 删除文件夹下的所有文件以保持最新 & 通过 Docker 生成文件权限为 root 需要加 sudo
+cd /home/git/docker-blog
+docker compose up -d
+#+END_SRC
+
+=/home/git/docker-blog= ：
+
+#+BEGIN_SRC sh
+docker-compose.yml  nginx.conf
+#+END_SRC
+
+=docker-compose.yml= ：
+
+#+BEGIN_SRC yml
+version: "3.9"
+
+services:
+  nginx:
+    image: nginx:stable
+    volumes:
+      - $PWD/nginx.conf:/etc/nginx/nginx.conf
+      - /etc/letsencrypt:/etc/letsencrypt
+      - /home/www/public:/home/www/public
+    ports:
+      - "80:80"
+      - "443:443"
+
+  blog:
+    image: tianheg/hugo:0.98.0
+    volumes:
+      - /home/www:/home/git
+      - /home/www/public:/output
+    environment:
+      - HUGO_BASEURL=https://www.yidajiabei.xyz/
+#+END_SRC
+
 ---
 参考资料
 
