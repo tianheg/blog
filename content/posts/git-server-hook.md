@@ -1,7 +1,7 @@
 +++
 title = "云服务器配置 Git 仓库托管并使用 Git Hooks 自动执行脚本"
 date = 2021-10-11T00:00:00+08:00
-lastmod = 2022-02-26T14:56:47+08:00
+lastmod = 2022-05-06T12:15:21+08:00
 tags = ["技术", "Git"]
 draft = false
 +++
@@ -124,6 +124,50 @@ hugo --minify -d /var/www/hugo
 ```sh
 git remote add origin git@server-ip:/home/git/blog.git
 git push -u origin main # first push
+```
+
+
+## 使用 Docker 配置 Hugo 部署 {#使用-docker-配置-hugo-部署}
+
+```sh
+#!/bin/sh
+
+git --work-tree=/home/www --git-dir=/home/git/blog.git checkout -f
+cd /home/www/public
+sudo rm -rf * # 删除文件夹下的所有文件以保持最新 & 通过 Docker 生成文件权限为 root 需要加 sudo
+cd /home/git/docker-blog
+docker compose up -d
+```
+
+`/home/git/docker-blog` ：
+
+```sh
+docker-compose.yml  nginx.conf
+```
+
+`docker-compose.yml` ：
+
+```yml
+version: "3.9"
+
+services:
+  nginx:
+    image: nginx:stable
+    volumes:
+      - $PWD/nginx.conf:/etc/nginx/nginx.conf
+      - /etc/letsencrypt:/etc/letsencrypt
+      - /home/www/public:/home/www/public
+    ports:
+      - "80:80"
+      - "443:443"
+
+  blog:
+    image: tianheg/hugo:0.98.0
+    volumes:
+      - /home/www:/home/git
+      - /home/www/public:/output
+    environment:
+      - HUGO_BASEURL=https://www.yidajiabei.xyz/
 ```
 
 ---
