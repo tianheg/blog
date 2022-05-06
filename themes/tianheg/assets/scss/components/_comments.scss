@@ -26,6 +26,7 @@
   position: absolute;
   opacity: 0;
 }
+
 .label {
   padding: 15px 20px;
   background: #eee;
@@ -33,13 +34,14 @@
   font-weight: bold;
   color: #7f7f7f;
   transition: background 0.1s, color 0.1s;
+  &:hover {
+    background: #d8d8d8;
+  }
+  &:active {
+    background: #ccc;
+  }
 }
-.label:hover {
-  background: #d8d8d8;
-}
-.label:active {
-  background: #ccc;
-}
+
 .input:focus + .label {
   box-shadow: inset 0px 0px 0px 3px #2aa1c0;
   z-index: 1;
@@ -49,6 +51,7 @@
   color: #000;
   border: 1px solid #eee;
 }
+
 .panel {
   display: none;
   padding: 10px;
@@ -56,6 +59,7 @@
   width: 100%;
   order: 99;
 }
+
 .panel .title {
   font-weight: bold;
 }
@@ -70,4 +74,13 @@
 .comment-full .label {
   width: 100%;
   display: block;
+}
+
+@media screen and (max-width: 960px) {
+  .panel {
+    order: inherit;
+  }
+  .label {
+    width: 100%;
+  }
 }
