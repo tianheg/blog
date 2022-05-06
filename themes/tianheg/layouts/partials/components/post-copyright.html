@@ -4,7 +4,7 @@
         <ul class="post-copyright">
             <li class="copyright-item author">
                 {{- with $author.website -}}
-                    <span class="copyright-item-text">{{ i18n "copyrightAuthor" }}</span>{{ i18n "colon" }}<a href="{{ . }}" class="p-author h-card" target="_blank" rel="noopener">{{ $author.name }}</a>
+                    <span class="copyright-item-text">{{ i18n "copyrightAuthor" }}</span>{{ i18n "colon" }}<a href="{{ . }}" class="p-author h-card" target="_blank">{{ $author.name }}</a>
                 {{- else -}}
                     <span class="copyright-item-text">{{ i18n "copyrightAuthor" }}</span>{{ i18n "colon" }}<span class="p-author h-card">{{ $author.name }}</span>
                 {{- end -}}
@@ -14,10 +14,10 @@
                 {{ $decodedPath := $url.Path }}
                 {{ $baseURLWithLangFix := (strings.TrimSuffix "/" (print `/` | absLangURL)) }}
                 {{ $decodedPermalink := (printf `%s%s` $baseURLWithLangFix $decodedPath) }}
-                <li class="copyright-item link"><span class="copyright-item-text">{{ i18n "copyrightLink" }}</span>{{ i18n "colon" }}<a href="{{ $.RelPermalink }}" target="_blank" rel="noopener">{{ $decodedPermalink }}</a></li>
+                <li class="copyright-item link"><span class="copyright-item-text">{{ i18n "copyrightLink" }}</span>{{ i18n "colon" }}<a href="{{ $.RelPermalink }}" target="_blank">{{ $decodedPermalink }}</a></li>
             {{ else }}
                 {{ with $.Params.link }}
-                    <li class="copyright-item link"><span class="copyright-item-text">{{ i18n "copyrightLink" }}</span>{{ i18n "colon" }}<a href="{{ . }}" target="_blank" rel="noopener">{{ . }}</a></li>
+                    <li class="copyright-item link"><span class="copyright-item-text">{{ i18n "copyrightLink" }}</span>{{ i18n "colon" }}<a href="{{ . }}" target="_blank">{{ . }}</a></li>
                 {{ end }}
             {{ end }}
             {{ with $author.copyright }}
