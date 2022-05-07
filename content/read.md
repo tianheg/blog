@@ -430,7 +430,7 @@ tocnum = false
 7.  [O'Reilly Learning Platform FAQs](https://learning.acm.org/faq/oreilly-faqs)
 8.  [前端精读周刊](https://github.com/ascoders/weekly)
 9.  [Web-Security-Learning](https://chybeta.github.io/2017/08/19/Web-Security-Learning/)
-10. [Z-lib](https://z-lib.org/)
+10. [Z-lib](https://z-lib.org/), https://zh.1lib.to/ , https://1lib.domains/
 11. [虫部落](https://www.chongbuluo.com/) -&gt; 搜书
 12. [LoreFree ebook](https://ebook2.lorefree.com/)
 13. [走读派读书导航](http://www.zoudupai.com/)
