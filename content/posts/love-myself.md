@@ -1,7 +1,10 @@
-#+SETUPFILE: ./hugo_setup.org
-#+TITLE: 爱自己
-#+DATE: <2021-12-11 Sat>
-#+HUGO_TAGS: 随笔 健康
++++
+title = "爱自己"
+date = 2021-12-11T00:00:00+08:00
+lastmod = 2022-05-16T12:17:37+08:00
+tags = ["随笔", "健康"]
+draft = false
++++
 
 你有多久没有关心自己了？有多久没有好好地听自己心里的话？
 
