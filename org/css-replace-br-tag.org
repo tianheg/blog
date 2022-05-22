@@ -1,0 +1,25 @@
+#+SETUPFILE: ./hugo_setup.org
+#+TITLE: CSS 取代 br
+#+DATE: <2022-05-22 Sun 08:02>
+#+HUGO_TAGS: 技术 CSS Hugo HTML
+
+在 Hugo 中添加一个 shortcode：
+
+#+BEGIN_SRC html
+<div style="display: block;margin-bottom: 3em"></div>
+#+END_SRC
+
+在 Hugo 文章中使用：
+
+#+BEGIN_SRC md
+{{< br >}}
+#+END_SRC
+
+测试：
+#+BEGIN_SRC md
+test{{< br >}}test
+#+END_SRC
+
+#+BEGIN_EXPORT hugo
+test{{< br >}}test
+#+END_EXPORT
