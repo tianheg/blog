@@ -1,0 +1,473 @@
++++
+title = "You Will Be Found"
+date = 2022-05-22T07:35:00+08:00
+lastmod = 2022-05-22T08:00:40+08:00
+tags = ["音乐"]
+draft = false
++++
+
+音乐出自音乐剧 _Dear Evan Hansen_
+
+Have you ever felt like nobody was there
+
+你是否感觉身旁空无一人
+
+Have you ever felt forgotten in the middle of nowhere
+
+你是否感觉被遗忘在偏僻之处
+
+Have you ever felt like you could disappear
+
+你是否感觉你即使消逝也无人在乎
+
+Like you could fall and no one would hear
+
+就像你坠落但没有人听到
+
+{{< br >}}
+
+Well let that lonely feeling wash away
+
+让那孤独从此远去
+
+Maybe there's a reason to believe you'll be okay
+
+也许有理由相信你会没事的
+
+'Cause when you don't feel strong enough to stand
+
+当你感觉无法支撑自己站立
+
+You can reach reach out your hand
+
+你可以伸出你的手
+
+And oh someone will coming running
+
+有人便会拉起你的手
+
+And I know they'll take you home
+
+我知道 他们会带你回家
+
+{{< br >}}
+
+Even when the dark comes crashing through
+
+即使当黑暗排山倒海而来
+
+When you need a friend to carry you
+
+当你需要一位好友携手向前
+
+And when you're broken on the ground
+
+当你在地面破碎不堪
+
+You will be found
+
+你会被找到的
+
+{{< br >}}
+
+So let the sun come streaming in
+
+让阳光流淌于心间
+
+'Cause you'll reach up and you'll rise again
+
+因为你会抬起手，你会再次站起来
+
+Lift your head and look around
+
+抬起头，环顾四周
+
+You will be found
+
+你会被找到
+
+You will be found
+
+你会被在乎
+
+You will be found
+
+你会有归属
+
+You will be found
+
+你会被发现
+
+You will be found
+
+你是被爱的
+
+{{< br >}}
+
+Have you seen this someone put a video of your speech online
+
+你看到你的演讲视频被发在网络上了吗
+
+My speech
+
+我的演讲？
+
+People started sharing it I guess
+
+我想人们已经开始转发了
+
+And now I mean
+
+我是说
+
+Connor is everywhere
+
+康纳已经无人不晓了
+
+Your speech is everywhere
+
+你的演讲被广泛传播
+
+This morning
+
+今早
+
+The Connor project page
+
+康纳计划的页面
+
+It only had 56 people following it
+
+只有56人关注
+
+Well how many does it have now
+
+现在有多少人？
+
+Four
+
+{{< br >}}
+
+Thousand five hundred eighty two
+
+4582人关注了！
+
+Sixteen thousand
+
+{{< br >}}
+
+Two hundred and thirty nine
+
+6239人关注了！
+
+I don't understand what happened
+
+我不知道发生了什么
+
+You did
+
+你做到了
+
+There's a place where we don't have to feel unknown
+
+这是一个我们不会感到陌生的地方
+
+And every time that you call out
+
+每一个小小的呼唤
+
+You're a little less alone
+
+就会消融一片孤独
+
+If you only say the word
+
+如果你在沉默中
+
+From across the silence
+
+说出那句话
+
+Your voice is heard
+
+你是被听见的
+
+Share it with the people you love
+
+分享给你爱的人
+
+Repost
+
+转发
+
+The world needs to hear this
+
+世界需要听到这个
+
+A beautiful tribute
+
+完美的致辞
+
+Favorite
+
+爱死了
+
+I know someone who really needed to hear this today
+
+我知道人们需要听见这个
+
+So thank you Evan Hansen
+
+谢谢你埃文
+
+For doing what you're doing
+
+为你正在做的事
+
+I never met you Connor but coming on here
+
+我未曾见过康纳但我来到这里
+
+Reading everyone's posts
+
+读大家的帖文
+
+It's so easy to feel alone
+
+真的很感同身受
+
+But Evan is exactly right
+
+埃文做得好
+
+We're not alone none of us
+
+我们并不孤单
+
+We're not alone none of us
+
+我们并不孤单
+
+None of us
+
+我们并不孤单
+
+None of us are alone
+
+我们并不孤单
+
+Like forward
+
+继续支持
+
+Especially now with everything that you hear in the news
+
+特别是现在的一切和你听到的新闻
+
+Like share repost forward
+
+点赞 分享 转发
+
+Thank you Evan Hansen for giving us a space to remember Connor
+
+谢谢埃文给我们一个平台去缅怀康纳
+
+To be together
+
+去连成一个整体
+
+To find each other
+
+去找到对方
+
+Sending prayers from Michigan
+
+在密歇根州佛蒙特・坦帕萨市
+
+Vermont Tampa Sacramento
+
+为康纳祈祷
+
+Thank you Evan Hansen
+
+谢谢埃文
+
+Repost
+
+转发
+
+Thank you Evan
+
+谢谢埃文
+
+Thank you Evan Hansen
+
+谢谢埃文
+
+This video is
+
+这个视频
+
+Thanks to Evan
+
+谢谢埃文
+
+This is about
+
+是关于
+
+Thank you
+
+谢谢你
+
+Evan Hansen
+
+埃文
+
+Even when the dark comes crashing through
+
+即使当黑夜降临
+
+When you need a friend to carry you
+
+当你需要一位好友携手向前
+
+When you're broken on the ground
+
+当你在地面破碎不堪
+
+You will be found
+
+你会被找到的
+
+So let the sun come streaming in
+
+让阳光流淌于心间
+
+'Cause you'll reach up and you'll rise again
+
+因为你会抬起手，你会再次站起来
+
+If you only look around
+
+抬起头，环顾四周
+
+You will be found you will be found
+
+你会被找到
+
+You will be found you will be found
+
+你会被发现
+
+You will be found
+
+你会被在乎
+
+Out of the shadows
+
+挣脱阴影
+
+The morning is breaking
+
+晨曦拂晓
+
+And all is new all is new
+
+一切都是新的
+
+It's filling up the empty
+
+填满所有空虚
+
+And suddenly I see that
+
+突然发现
+
+All is new all is new
+
+一切宛如新生
+
+You are not alone
+
+你并不孤单
+
+You are not alone
+
+你并不孤单
+
+You are not alone
+
+你并不孤单
+
+You are not alone
+
+你并不孤单
+
+You are not alone you are not alone
+
+你并不孤单
+
+You are not alone you are not alone
+
+你并不孤单
+
+You are not
+
+你并不孤单
+
+You are not alone you are not alone
+
+你并不孤单
+
+Even when the dark comes crashin' through
+
+即使当黑夜降临
+
+When you need someone to carry you
+
+当你需要一位好友携手向前
+
+When you're broken on the ground
+
+当你在地面破碎不堪
+
+You will be found
+
+你会被发现
+
+So when the sun comes streaming in
+
+让阳光流淌于心间
+
+'Cause you'll reach up and you'll rise again
+
+因为你会抬起手，你会再次站起来
+
+If you only look around
+
+抬起头，环顾四周
+
+You will be found
+
+你会被在乎
+
+Even when the dark comes crashin' through
+
+即使当黑夜降临
+
+You will be found
+
+你会被找到
+
+When you need someone to carry you
+
+当你需要一位好友携手向前
+
+You will be found
+
+你会被找到
+
+You will be found
+
+你是被爱的
