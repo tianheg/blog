@@ -92,6 +92,7 @@
     
     {{ partial "custom/head.html" . }}
 
+    {{ if  (eq hugo.Environment "production") }}
     <!-- Cloudflare Web Analytics -->
     <script defer src='https://static.cloudflareinsights.com/beacon.min.js' data-cf-beacon='{"token": "54275b445d534e2dac467508107f29dc"}'></script>
     <!-- End Cloudflare Web Analytics -->
@@ -99,4 +100,5 @@
     <!-- Umami Web Analytics -->
     <script async defer data-website-id="0c34105a-f52d-4ef5-81d3-b62ba8f8e932" src="https://wau.tianheg.xyz/umami.js"></script>
     <!-- End Umami Web Analytics -->
+    {{ end }}
 </head>
