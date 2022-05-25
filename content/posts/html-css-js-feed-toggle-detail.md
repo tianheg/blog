@@ -1,7 +1,7 @@
 +++
 title = "展开、收缩 details 标签"
 date = 2022-05-25T12:11:00+08:00
-lastmod = 2022-05-25T12:32:35+08:00
+lastmod = 2022-05-25T13:25:13+08:00
 tags = ["技术", "CSS", "HTML", "JavaScript"]
 draft = false
 +++
@@ -45,6 +45,18 @@ toggle_details.addEventListener('click', () => {
 })
 ```
 
+`setHTML` 目前还属于[实验特性](https://developer.mozilla.org/en-US/docs/Web/API/Element/setHTML)，Firefox 需要在 about:config 开启 `dom.security.sanitizer.enabled` ；Chrome 需要在 chrome://flags 开启 `enable-experimental-web-platform-features` 。
+
+`setHTML` 的旧有实现：
+
+```js
+toggle_details.innerHTML = expand
+```
+
+使用 `innerHTML` 插入简单 HTML 片段没问题，如果需要插入的内容很多，要操作大量 DOM 节点的话，建议使用 HTML [&lt;template&gt;](https://developer.mozilla.org/en-US/docs/Web/HTML/Element/template) 和 JavaScript [`document.importNode()`](https://developer.mozilla.org/en-US/docs/Web/API/Document/importNode)[^fn:1]。
+
+另外，以上代码在 Chrome 中只能展开收缩第一个 &lt;details&gt; 标签，但 **在把 setHTML 换成 innerHTML 后就正常收缩展开全部 &lt;details&gt; 标签了** 。
+
 
 ## 第三步，设置样式 {#第三步-设置样式}
 
@@ -86,3 +98,5 @@ toggle_details.addEventListener('click', () => {
   }
 }
 ```
+
+[^fn:1]: [Using innerHTML, and what are security concerns?](https://stackoverflow.com/a/47945729/12539782)
