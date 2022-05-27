@@ -394,6 +394,7 @@ tocnum = false
 - 数学之美
 - 文明之光
 - 👍👍 房思琪的初恋乐园，by 林奕含
+- 👍👍 [献给阿尔吉侬的花束](/posts/flowers-for-algernon/)，by 丹尼尔·凯斯
 
 ## 年度阅读计划
 
