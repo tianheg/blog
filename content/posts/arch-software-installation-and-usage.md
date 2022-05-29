@@ -1,7 +1,7 @@
 +++
 title = "Arch 软件安装和用法"
 date = 2021-08-20T00:00:00+08:00
-lastmod = 2022-05-27T11:02:29+08:00
+lastmod = 2022-05-29T14:08:32+08:00
 tags = ["Arch Linux", "技术"]
 draft = false
 toc = true
@@ -510,7 +510,7 @@ yay -S rpi-imager
 | inkscape                                        | 强大的矢量图形编辑软件                                                                                                                                            |
 | youtube-dl                                      | YouTube 视频下载工具                                                                                                                                              |
 | glances                                         | terminal monitoring tool                                                                                                                                          |
-| keepass                                         | password manager                                                                                                                                                  |
+| keepassxc                                       | password manager                                                                                                                                                  |
 | hugo                                            | static site generator                                                                                                                                             |
 | python-sphinx                                   | a documentation generator                                                                                                                                         |
 | anki                                            | a spaced repetition system                                                                                                                                        |
