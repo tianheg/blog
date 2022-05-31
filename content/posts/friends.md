@@ -1,12 +1,12 @@
 +++
 title = "老友记"
 date = 2022-04-15T00:00:00+08:00
-lastmod = 2022-04-15T18:51:54+08:00
-tags = ["电视剧"]
+lastmod = 2022-05-31T15:31:09+08:00
+tags = ["剧集"]
 draft = false
 +++
 
-![](https://images.yidajiabei.xyz/friends.png '《老友记》最终季，Ross 和 Rachel  在一起了')
+![](https://images.yidajiabei.xyz/friends.png "《老友记》最终季，Ross 和 Rachel  在一起了")
 
 2022-04-05 老友记 第一遍看完
 
