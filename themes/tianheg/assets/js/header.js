@@ -34,6 +34,21 @@ window.addEventListener(
       );
       {{ end }}
     }
+
+    const timeEl = document.querySelector('.time')
+
+    function setTime() {
+      const time = new Date()
+      const hours = time.getHours()
+      const minutes = time.getMinutes()
+
+      timeEl.innerHTML = `${hours}:${
+        minutes < 10 ? `0${minutes}` : minutes
+      }`
+    }
+
+    setTime()
+    setInterval(setTime, 1000)
   },
   { once: true }
 );
