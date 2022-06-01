@@ -3,6 +3,17 @@
 #+DATE: <2022-01-14 Fri>
 #+HUGO_TAGS: 技术
 
+* rg 搜索文件名
+
+https://github.com/BurntSushi/ripgrep/issues/193#issuecomment-513201558
+
+#+BEGIN_SRC bash
+# ~/.zshrc
+rgf () {
+  rg --files $1 | rg $2
+}
+#+END_SRC
+
 * 重命名后缀 .md.org to .org
 
 #+BEGIN_SRC sh

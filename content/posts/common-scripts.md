@@ -1,10 +1,22 @@
 +++
 title = "常用脚本"
 date = 2022-01-14T00:00:00+08:00
-lastmod = 2022-05-03T17:44:41+08:00
+lastmod = 2022-06-01T08:52:00+08:00
 tags = ["技术"]
 draft = false
 +++
+
+## rg 搜索文件名 {#rg-搜索文件名}
+
+<https://github.com/BurntSushi/ripgrep/issues/193#issuecomment-513201558>
+
+```bash
+# ~/.zshrc
+rgf () {
+  rg --files $1 | rg $2
+}
+```
+
 
 ## 重命名后缀 .md.org to .org {#重命名后缀-dot-md-dot-org-to-dot-org}
 
@@ -19,12 +31,14 @@ done
 # rename *.md.org to .org
 ```
 
+
 ## 批量删除 Pypi 包 {#批量删除-pypi-包}
 
 ```sh
 pip freeze | grep SOMETHING | xargs pip uninstall -y
 # https://stackoverflow.com/a/9406259
 ```
+
 
 ## 批量删除 Pacman 包 {#批量删除-pacman-包}
 
@@ -33,11 +47,13 @@ sudo pacman -Rs $(pacman -Qq | grep some_words)
 # https://bbs.archlinux.org/viewtopic.php?pid=1533162#p1533162
 ```
 
+
 ## X.org 下读取文本到剪切板 {#x-dot-org-下读取文本到剪切板}
 
 ```sh
 xclip -sel c < text.txt
 ```
+
 
 ## 找到字符串中的汉字 {#找到字符串中的汉字}
 
@@ -50,6 +66,7 @@ sample = "I am from 美国。We should be friends. 朋友。"
 for n in re.findall(r'[\u4e00-\u9fff]+', sample):
   print(n)
 ```
+
 
 ## 新建文章 {#新建文章}
 
@@ -94,11 +111,13 @@ emacs -nw ~/repo/note/content/posts/"$a.md"
 # 如果 文件名字有 /，无法创建
 ```
 
+
 ## pandoc Org to Md {#pandoc-org-to-md}
 
 ```sh
 pandoc -f org -t markdown original_org_file -s -o converted_md_file
 ```
+
 
 ## 创建文件并打开 {#创建文件并打开}
 
@@ -117,6 +136,7 @@ mkcd () {
 ~ mkcd demo
 ~/demo
 ```
+
 
 ## Node.js 操作文件 {#node-dot-js-操作文件}
 
@@ -179,20 +199,16 @@ try {
     // get date through filename
     fs.readFile(postsFolder + '/' + file, 'utf-8', (err, data) => {
       if (err) throw err
-      console.log(
-        data.replace(
-          data.slice(0, 4),
-          '---' + '\n' + 'slug: ' + file.slice(0, -3) + '\n',
-        ),
-      )
+      console.log(data.replace(
+	data.slice(0, 4), '---' + '\n' + 'slug: ' + file.slice(0, -3) + '\n',
+      ))
 
       let newData = data.replace(
-        data.slice(0, 4),
-        '---' + '\n' + 'slug: ' + file.slice(0, -3) + '\n',
+	data.slice(0, 4), '---' + '\n' + 'slug: ' + file.slice(0, -3) + '\n',
       )
       fs.writeFile(postsFolder + '/' + file, newData, 'utf-8', (err) => {
-        if (err) throw err
-        console.log('filelistAsync complete')
+	if (err) throw err
+	console.log('filelistAsync complete');
       })
     })
   }
@@ -201,6 +217,7 @@ try {
 }
 ```
 
+
 ## Bash 脚本获取第 3 行文本，并输出特定位置的字符 {#bash-脚本获取第-3-行文本-并输出特定位置的字符}
 
 ```sh
@@ -208,6 +225,7 @@ sed '3q;d' Dockerfile | cut -c18-23
 # https://stackoverflow.com/a/6022431/12539782
 # https://stackoverflow.com/a/46097022/12539782
 ```
+
 
 ## 修改文档 {#修改文档}
 
@@ -269,20 +287,16 @@ try {
     // get date through filename
     fs.readFile(postsFolder + '/' + file, 'utf-8', (err, data) => {
       if (err) throw err
-      console.log(
-        data.replace(
-          data.slice(0, 4),
-          '---' + '\n' + 'slug: ' + file.slice(0, -3) + '\n',
-        ),
-      )
+      console.log(data.replace(
+	data.slice(0, 4), '---' + '\n' + 'slug: ' + file.slice(0, -3) + '\n',
+      ))
 
       let newData = data.replace(
-        data.slice(0, 4),
-        '---' + '\n' + 'slug: ' + file.slice(0, -3) + '\n',
+	data.slice(0, 4), '---' + '\n' + 'slug: ' + file.slice(0, -3) + '\n',
       )
       fs.writeFile(postsFolder + '/' + file, newData, 'utf-8', (err) => {
-        if (err) throw err
-        console.log('filelistAsync complete')
+	if (err) throw err
+	console.log('filelistAsync complete');
       })
     })
   }
@@ -290,6 +304,7 @@ try {
   console.error(err)
 }
 ```
+
 
 ## 使用欧路词典 API 为 curl 添加 user-agent {#使用欧路词典-api-为-curl-添加-user-agent}
 
