@@ -2,7 +2,8 @@ version: "3.9"
 
 services:
   server:
-    image: tianheg/hugo:0.97.3
+    image: tianheg/hugo:0.100.2
+    container_name: blog_local
     volumes:
       - ".:/src"
     ports:
@@ -10,3 +11,4 @@ services:
     environment:
       - HUGO_WATCH=true
       - HUGO_BASEURL=http://127.0.0.1
+
