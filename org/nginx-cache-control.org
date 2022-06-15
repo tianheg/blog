@@ -1,0 +1,57 @@
+#+SETUPFILE: ./hugo_setup.org
+#+TITLE: Nginx(with nginx-proxy) 设置 Cache-Control
+#+DATE: <2022-06-15 Wed 12:13>
+#+HUGO_TAGS: 技术 Nginx Docker
+
+- Nginx：Web 服务器，[[http://nginx.org/][官网]]
+- nginx-proxy：使用 [[https://github.com/nginx-proxy/docker-gen][docker-gen]] 为 Docker Nginx 提供代理，[[https://github.com/nginx-proxy/nginx-proxy][官网]]
+- Cache-Control：HTTP 请求头，用于控制缓存，[[https://developer.mozilla.org/en-US/docs/Web/HTTP/Headers/Cache-Control][文档]]
+
+* 第一步：根据 nginx-proxy 文档设置 nginx.conf
+
+我需要设置单个 =VIRTUALHOST= 网站的配置，选择通过文件而不是环境变量设置，后者不够自由，可设置的选项有限。
+
+** 1 修改 nginx-proxy compose 文件
+
+=~/nginx-proxy/docker-compose.yml=
+
+#+BEGIN_SRC diff
+- vhost:/etc/nginx/vhost.d
++ /etc/nginx/vhost.d:/etc/nginx/vhost.d
+
+volumes:
+-  vhost:	  
+#+END_SRC
+
+** 2 写入配置
+
+#+BEGIN_SRC bash
+sudo mkdir /etc/nginx/vhost.d
+sudo vim /etc/nginx/vhost.d/www.yidajiabei.xyz
+sudo ln -s /etc/nginx/vhost.d/www.yidajiabei.xyz /etc/nginx/vhost.d/yidajiabei.xyz
+#+END_SRC
+
+=/etc/nginx/vhost.d/www.yidajiabei.xyz=
+
+#+BEGIN_SRC conf
+server_tokens off;
+add_header Cache-Control max-age=31536000;
+#+END_SRC
+
+* 第二步：重启 nginx-proxy 容器以及 Nginx 博客实例
+
+#+BEGIN_SRC bash
+cd /path/to/nginx-proxy
+docker-compose down && docker-compose up -d
+cd /path/to/docker-blog
+docker-compose down && docker-compose up -d
+#+END_SRC
+
+---
+
+参考资料：
+
+1. [[https://web.dev/uses-long-cache-ttl/][Serve static assets with an efficient cache policy]]
+2. [[https://web.dev/http-cache/][Prevent unnecessary network requests with the HTTP Cache]]
+3. [[https://www.howtogeek.com/devops/how-to-configure-cache-control-headers-in-nginx/][How to Configure Cache-Control Headers in NGINX]]
+
