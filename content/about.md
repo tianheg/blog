@@ -55,6 +55,16 @@ title = "关于"
 
 ---
 
+## 一些有趣或有意义的 badge
+
+<a href="https://www.foreverblog.cn/" target="_blank"><img src="/images/foreverblog_logo.png" alt="" style="width:auto;height:16px;"></a>
+
+[![](/images/512kb-orange.svg)](https://512kb.club/)
+
+<!-- https://codepen.io/kevquirk/pen/VwmVaKm -->
+
+---
+
 ## 留言
 
 - Email: me+at+tianheg.xyz
