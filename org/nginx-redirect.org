@@ -1,7 +1,7 @@
 #+SETUPFILE: ./hugo_setup.org
 #+TITLE: Nginx Redirect
 #+DATE: <2021-12-03 Fri>
-#+HUGO_TAGS: Nginx 技术
+#+HUGO_TAGS: Nginx 技术 Docker
 
 * http to https
 
@@ -62,7 +62,102 @@ http {
 }
 #+END_SRC
 
+* Configure with Docker
+
+用到了 [[https://hub.docker.com/r/nginxproxy/nginx-proxy][nginx-proxy]]。
+
+nginx-proxy 的 docker-compose 文件：
+
+#+BEGIN_SRC yml
+version: "3"
+
+services:
+  nginx-proxy:
+    image: nginxproxy/nginx-proxy:alpine
+    container_name: nginx-proxy
+    ports:
+      - "80:80"
+      - "443:443"
+    volumes:
+      - /var/run/docker.sock:/tmp/docker.sock:ro
+      - certs:/etc/nginx/certs:ro
+      - conf:/etc/nginx/conf.d
+      - /etc/nginx/vhost.d:/etc/nginx/vhost.d
+      - html:/usr/share/nginx/html
+    restart: always
+    environment:
+      - VIRTUAL_PROTO=https
+      - VIRTUAL_PORT=443
+
+  acme-companion:
+    image: nginxproxy/acme-companion
+    container_name: nginx-proxy-acme
+    depends_on:
+      - nginx-proxy
+    volumes:
+      - /etc/nginx/vhost.d:/etc/nginx/vhost.d
+      - html:/usr/share/nginx/html
+      - certs:/etc/nginx/certs:rw
+      - acme:/etc/acme.sh
+      - /var/run/docker.sock:/var/run/docker.sock:ro
+    network_mode: bridge
+    environment:
+      - DEFAULT_EMAIL=me@tianheg.xyz
+      - NGINX_PROXY_CONTAINER=nginx-proxy
+    restart: always
+
+volumes:
+  conf:
+  html:
+  certs:
+  acme:
+
+networks:
+  default:
+    name: nginx-proxy
+#+END_SRC
+
+博客的 docker-compose 文件：
+
+#+BEGIN_SRC yml
+version: "3.9"
+
+services:
+  nginx:
+    image: nginx:stable
+    restart: always
+    volumes:
+      - /home/www/public:/usr/share/nginx/html
+    expose:
+      - 80
+      - 443
+    environment:
+      - VIRTUAL_HOST=www.yidajiabei.xyz,yidajiabei.xyz
+      - LETSENCRYPT_HOST=www.yidajiabei.xyz,yidajiabei.xyz
+
+  blog:
+    image: tianheg/hugo:0.99.1
+    volumes:
+      - ...
+      - ...
+    environment:
+      - HUGO_BASEURL=https://www.yidajiabei.xyz/
+
+networks:
+  default:
+    name: nginx-proxy
+#+END_SRC
+
+在 vhost.d 中创建 yidajiabei.xyz 文件：
+
+#+BEGIN_SRC conf
+return 301 $scheme://www.yidajiabei.xyz$request_uri;
+#+END_SRC
+
+=$scheme= 包含了 http 和 https。
+
 * References
 
 - [[https://www.linuxcapable.com/how-to-redirect-non-www-www-with-nginx/][How to Redirect NON-WWW & WWW with Nginx - LinuxCapable]]
 - [[https://www.linode.com/community/questions/18987/how-to-redirect-non-www-to-www-domain-in-nginx][How to redirect non-www to www domain in Nginx | Linode Questions]]
+- [[https://stackoverflow.com/questions/35973947/how-to-redirect-no-www-to-www-under-jwilder-nginx-proxy][how to redirect no-www to www under jwilder/nginx-proxy?]]
