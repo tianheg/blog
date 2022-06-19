@@ -11,7 +11,7 @@ draft = false
 今天，分 3 次看完今敏的《未麻的部屋》，之所以看是因为看到豆瓣写着今天是今敏逝世 10
 周年。
 
-![](https://static-1258637336.cos.ap-shanghai.myqcloud.com/films/jinmin.jpeg)
+![](/images/films/jinmin.jpeg)
 
 我以前不熟悉今敏，现在也不熟悉。我看过他的 3
 （加上《未麻的部屋》）部电影，《红辣椒》是我特别喜欢的，《千年女优》是一场追逐爱的旅程。

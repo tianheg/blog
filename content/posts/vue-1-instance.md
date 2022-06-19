@@ -120,4 +120,4 @@ Vue.createApp({
 
 下面是一张生命周期实例图。
 
-![](https://static-1258637336.cos.ap-shanghai.myqcloud.com/vue3-lifecycle.png)
+![](/images/vue3-lifecycle.png)

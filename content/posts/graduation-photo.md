@@ -22,4 +22,4 @@ draft = false
 
 拍毕业照那天遗憾地没有自己的单人照，昨天恰好在操场遇到一个摄影师，就让他帮忙拍了一张。
 
-![](https://static-1258637336.cos.ap-shanghai.myqcloud.com/photo/single.jpg "这就是我")
+![](/images/photo/single.jpg "这就是我")

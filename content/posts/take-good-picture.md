@@ -20,7 +20,7 @@ draft = false
 
 @莫梦醒 x（bilibil）推荐的电影摄影师和电影导演（仅供参考）：
 
-![](https://static-1258637336.cos.ap-shanghai.myqcloud.com/cinematographer-and-film-director.png "Cinematographer and film director")
+![](/images/cinematographer-and-film-director.png "Cinematographer and film director")
 
 可以建立两个相册——「摄影审美」、「电影截图」，保存来自各处的我自己认可的摄影作品。
 

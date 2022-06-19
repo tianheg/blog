@@ -17,7 +17,7 @@ POP3 协议允许电子邮件客户端下载服务器上的邮件，但是在客
 提供的摘要浏览功能可以让你在阅读完所有的邮件到达时间、主题、发件人、大小等信息后才作出是否下载的决定。此外，IMAP
 更好地支持了从多个不同设备中随时访问新邮件。
 
-![](https://static-1258637336.cos.ap-shanghai.myqcloud.com/difference-between-imap-pop3.jpg "IMAP和POP3有什么区别?")
+![](/images/difference-between-imap-pop3.jpg "IMAP和POP3有什么区别?")
 
 总之，IMAP 整体上为用户带来更为便捷和可靠的体验。POP3
 更易丢失邮件或多次下载相同的邮件，但 IMAP 通过邮件客户端与 webmail

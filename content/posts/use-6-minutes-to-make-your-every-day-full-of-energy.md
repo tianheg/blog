@@ -8,7 +8,7 @@ draft = false
 
 **一个人怎样度过早晨，就会怎样度过一天** 。
 
-![](https://static-1258637336.cos.ap-shanghai.myqcloud.com/morning.jpeg)
+![](/images/morning.jpeg)
 
 ## 高频事件，一定要重视 {#高频事件-一定要重视}
 

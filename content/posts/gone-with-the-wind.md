@@ -12,4 +12,4 @@ Ashley 深爱着 Melanie，但 Scarlett 却以为 Ashley
 Rhett 自从初次见面就深深地被这位 Scarlett
 吸引，尽管她是这样任性，这样不顾一切地去追求 Ashley。
 
-![](https://static-1258637336.cos.ap-shanghai.myqcloud.com/gone-with-the-wind.jpg)
+![](/images/gone-with-the-wind.jpg)

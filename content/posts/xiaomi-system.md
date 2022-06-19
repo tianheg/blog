@@ -414,7 +414,7 @@ Vue: MVVM 框架，数据直接绑定，数据驱动视图。
 
 Vue 模型：
 
-![](https://static-1258637336.cos.ap-shanghai.myqcloud.com/vue-mvvm.svg)
+![](/images/vue-mvvm.svg)
 
 ```html
 <div id="app">
@@ -569,7 +569,7 @@ public class ResultBean<T> {
 
 `src/main/java/yidajiabei.xyz/util/ResultBean.java` 的图形示意：
 
-![](https://static-1258637336.cos.ap-shanghai.myqcloud.com/java-resultbean.svg)
+![](/images/java-resultbean.svg)
 
 ```java
 // src/main/java/yidajiabei.xyz/domain/UrlBean.java
@@ -637,7 +637,7 @@ let app = new Vue({
 
 axios 的图形示意：
 
-![](https://static-1258637336.cos.ap-shanghai.myqcloud.com/axios.svg)
+![](/images/axios.svg)
 
 ```html
 <!-- src/main/resources/static/index.html -->
@@ -743,7 +743,7 @@ secure-file-priv = "/home/archie/"
 
 ### 第七天 {#第七天}
 
-![](https://static-1258637336.cos.ap-shanghai.myqcloud.com/front-back-end-mysql-framework.svg)
+![](/images/front-back-end-mysql-framework.svg)
 
 图示为项目架构：
 

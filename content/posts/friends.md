@@ -6,7 +6,7 @@ tags = ["剧集"]
 draft = false
 +++
 
-![](https://static-1258637336.cos.ap-shanghai.myqcloud.com/friends.png "《老友记》最终季，Ross 和 Rachel  在一起了")
+![](/images/friends.png "《老友记》最终季，Ross 和 Rachel  在一起了")
 
 2022-04-05 老友记 第一遍看完
 
