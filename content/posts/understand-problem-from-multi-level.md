@@ -27,7 +27,7 @@ draft = false
 
 一个概念「NLP（Neuro-Logical Levels） 理解层次」，也就是逻辑层次[^fn:1]。进一步研究，可阅读罗伯特·迪尔茨《语言的魔力：谈话转变信念之 NLP 技巧》。
 
-![](https://images.yidajiabei.xyz/understand-problem-from-multi-level.jpg)
+![](https://static-1258637336.cos.ap-shanghai.myqcloud.com/understand-problem-from-multi-level.jpg)
 
 ## 第一层，环境 {#第一层-环境}
 

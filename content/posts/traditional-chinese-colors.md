@@ -88,12 +88,12 @@ draft = false
 
 一边是诗性的表达，一边是理性至上，两者都于我们有益，都有助于我们理解这个世界。
 
-![](https://images.yidajiabei.xyz/traditional-chinese-colors-0.jpg)
+![](https://static-1258637336.cos.ap-shanghai.myqcloud.com/traditional-chinese-colors-0.jpg)
 
-![](https://images.yidajiabei.xyz/traditional-chinese-colors-1.jpg)
+![](https://static-1258637336.cos.ap-shanghai.myqcloud.com/traditional-chinese-colors-1.jpg)
 
-![](https://images.yidajiabei.xyz/traditional-chinese-colors-2.jpg)
+![](https://static-1258637336.cos.ap-shanghai.myqcloud.com/traditional-chinese-colors-2.jpg)
 
 内容来自：
 
-![](https://images.yidajiabei.xyz/tangzhi.jpg)
+![](https://static-1258637336.cos.ap-shanghai.myqcloud.com/tangzhi.jpg)

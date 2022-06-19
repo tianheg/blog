@@ -15,25 +15,25 @@ draft = false
 ```javascript
 const app = Vue.createApp({
   /* options */
-})
+});
 ```
 
 该应用实例被用于注册「全局变量」，然后可以被应用内部的组件使用。一个例子：
 
 ```javascript
-const app = Vue.createApp({})
-app.component('SearchInput', SearchInputComponent)
-app.directive('focus', FocusDirective)
-app.use(LocalePlugin)
+const app = Vue.createApp({});
+app.component("SearchInput", SearchInputComponent);
+app.directive("focus", FocusDirective);
+app.use(LocalePlugin);
 ```
 
 大部分通过应用示例暴露的方法返回相同的示例，允许直接链接：
 
 ```javascript
 Vue.createApp({})
-  .component('SearchInput', SearchInputComponent)
-  .directive('focus', FocusDirective)
-  .use(LocalePlugin)
+  .component("SearchInput", SearchInputComponent)
+  .directive("focus", FocusDirective)
+  .use(LocalePlugin);
 ```
 
 可以在 [API reference](https://vuejs.org/api/application.html) 找到全部的应用 API。
@@ -47,9 +47,9 @@ Vue.createApp({})
 ```javascript
 const RootComponent = {
   /* options */
-}
-const app = Vue.createApp(RootComponent)
-const vm = app.mount('#app')
+};
+const app = Vue.createApp(RootComponent);
+const vm = app.mount("#app");
 ```
 
 与大多数应用方法不同， `mount` 不返回应用，它返回根组件实例。
@@ -82,12 +82,12 @@ Root Component
 ```javascript
 const app = Vue.createApp({
   data() {
-    return { count: 4 }
+    return { count: 4 };
   },
-})
+});
 
-const vm = app.mount('#app')
-console.log(vm.count)
+const vm = app.mount("#app");
+console.log(vm.count);
 ```
 
 还有其他可以添加的使用者定义选项，像 `methods` ， `props` ， `computed` ， `inject` ， `setup` 。组件实例的所有属性，无论如何定义，对组件的模板都是可见。Vue 还会通过组件实例公开一些内建属性，像 `$attrs` 和 `$emit` 。这些属性都有一个 `$` 前缀，以避免和使用者定义的属性名相混淆。
@@ -101,13 +101,13 @@ console.log(vm.count)
 ```javascript
 Vue.createApp({
   data() {
-    return { count: 1 }
+    return { count: 1 };
   },
   created() {
     // `this` points to the vm instance
-    console.log('count is: ' + this.count)
+    console.log("count is: " + this.count);
   },
-})
+});
 ```
 
 还有更多钩子可以在生命循环的不同阶段使用，比如 mounted，updated，unmounted。调用所有生命周期钩子时，它们的 this 上下文指向调用它的当前活动实例。
@@ -120,4 +120,4 @@ Vue.createApp({
 
 下面是一张生命周期实例图。
 
-![](https://images.yidajiabei.xyz/vue3-lifecycle.png)
+![](https://static-1258637336.cos.ap-shanghai.myqcloud.com/vue3-lifecycle.png)

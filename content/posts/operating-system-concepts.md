@@ -12,7 +12,7 @@ Process--A program in execution. It's the unit of work in a modern time-sharing 
 
 Process includes these things, process stack, data section, heap, text.
 
-![](https://images.yidajiabei.xyz/process-in-memory.svg 'Process in Memory')
+![](https://static-1258637336.cos.ap-shanghai.myqcloud.com/process-in-memory.svg "Process in Memory")
 
 A program by itself is not a process. A program is a passive entity. A process is an active entity.
 

@@ -28,7 +28,7 @@ DELETE+INSERT
 
 六、借助队列采用非递归的方式对二叉树进行层次遍历，遍历方向为从左至右，在遍历过程中，队列中的元素最多为多少个
 
-![](https://images.yidajiabei.xyz/binary-tree.svg '二叉树的结构')
+![](https://static-1258637336.cos.ap-shanghai.myqcloud.com/binary-tree.svg "二叉树的结构")
 
 七、在一棵普通的树上，a 与 b 互为兄弟节点。将树转为二叉树后，下列哪种情形最不可能发生（在将普通树转为二叉树过程中，节点在删除与自身子节点的连线时，只保留与最左侧子节点之间的连线）
 
@@ -96,31 +96,31 @@ D BigInt 是可以表示任意精度整数的基本数据类型，存储于栈(s
 
 ```js
 const first = () => {
-  console.log('first')
-  return false
-}
+  console.log("first");
+  return false;
+};
 const second = () => {
-  console.log('second')
-  return true
-}
-console.log(first() && second())
-console.log(second() || first())
+  console.log("second");
+  return true;
+};
+console.log(first() && second());
+console.log(second() || first());
 ```
 
 十二、两段代码的结果
 
 ```js
-check('first')
+check("first");
 function check(ars) {
-  console.log(ars)
+  console.log(ars);
 }
 ```
 
 ```js
-check('second')
+check("second");
 var check = function (ars) {
-  console.log(ars)
-}
+  console.log(ars);
+};
 ```
 
 十三、
@@ -128,33 +128,33 @@ var check = function (ars) {
 ```js
 const Book = {
   price: 32,
-}
-const book = Object.create(Book)
-book.type = 'Math'
-delete book.price
-delete book.type
-console.log(book.price)
-console.log(book.type)
+};
+const book = Object.create(Book);
+book.type = "Math";
+delete book.price;
+delete book.type;
+console.log(book.price);
+console.log(book.type);
 ```
 
 十四、
 
 ```js
 function side(arr) {
-  arr[0] = arr[2]
+  arr[0] = arr[2];
 }
 function func1(a, b, c = 3) {
-  c = 10
-  side(arguments)
-  console.log(a + b + c)
+  c = 10;
+  side(arguments);
+  console.log(a + b + c);
 }
 function func2(a, b, c) {
-  c = 10
-  side(arguments)
-  console.log(a + b + c)
+  c = 10;
+  side(arguments);
+  console.log(a + b + c);
 }
-func1(1, 1, 1)
-func2(1, 1, 1)
+func1(1, 1, 1);
+func2(1, 1, 1);
 ```
 
 十六、以下主机可以和 202.115.112.218/28 直接通信的是
@@ -171,7 +171,7 @@ D 202.115.112.212/28
 
 十八、某个有向图如下，从顶点 v1 出发对其进行深度优先遍历，可能得到的遍历序列是（1）；从顶点 v1 出发对其进行广度优先遍历，可能的到的序列是（2）
 
-![](https://images.yidajiabei.xyz/directed-graph.svg)
+![](https://static-1258637336.cos.ap-shanghai.myqcloud.com/directed-graph.svg)
 
 十九、学生表
 
@@ -196,20 +196,20 @@ CREATE TABLE students (
 // 链接：https://www.nowcoder.com/questionTerminal/748b891f208744a7b1f98cb4c45bde11?answerType=1&f=discussion
 // 来源：牛客网
 
-var k = readline() //消耗掉元素个数的输入(第一行)
-var input = readline() //这行才是有用的
-var count1 = 0
+var k = readline(); //消耗掉元素个数的输入(第一行)
+var input = readline(); //这行才是有用的
+var count1 = 0;
 //统计1的个数
 for (var i = 0; i < input.length; i++) {
-  if (parseInt(input[i]) == 1) count1++
+  if (parseInt(input[i]) == 1) count1++;
 }
-var min1 = Math.min(count1, input.length - count1) //全蓝或者全红的最小值
+var min1 = Math.min(count1, input.length - count1); //全蓝或者全红的最小值
 //左蓝右红
-var left1 = 0
+var left1 = 0;
 for (var i = 0; i < input.length; i++) {
-  if (parseInt(input[i]) == 1) left1++ //统计1的个数
-  var min2 = i + 1 - left1 + count1 - left1 //i+1-left1表示当前位置(索引从0开始)前面是0(红)的个数（即需要转换红为蓝的个数）；(count1-left1)表示当前位置后面1(蓝)的个数（即需要转换蓝为红的个数）
-  if (min2 < min1) min1 = min2
+  if (parseInt(input[i]) == 1) left1++; //统计1的个数
+  var min2 = i + 1 - left1 + count1 - left1; //i+1-left1表示当前位置(索引从0开始)前面是0(红)的个数（即需要转换红为蓝的个数）；(count1-left1)表示当前位置后面1(蓝)的个数（即需要转换蓝为红的个数）
+  if (min2 < min1) min1 = min2;
 }
-console.log(min1)
+console.log(min1);
 ```
