@@ -30,4 +30,4 @@ What's wrong with the society? What's wrong with the people?
 
 Pressure inside my body is driving me crazy.
 
-![](https://static-1258637336.cos.ap-shanghai.myqcloud.com/photo/2022-05-07.jpg)
+![](/images/photo/2022-05-07.jpg)

@@ -8,7 +8,7 @@ draft = false
 
 <https://developer.mozilla.org/en-US/docs/Learn/HTML/Introduction_to_HTML/Marking_up_a_letter>
 
-![](https://static-1258637336.cos.ap-shanghai.myqcloud.com/html-marking-up-letter.jpeg)
+![](/images/html-marking-up-letter.jpeg)
 
 ```html
 <!DOCTYPE html>

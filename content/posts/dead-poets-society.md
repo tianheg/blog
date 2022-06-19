@@ -10,7 +10,7 @@ draft = false
 
 这是一部好电影。本文结构：
 
-![](https://static-1258637336.cos.ap-shanghai.myqcloud.com/films/dead-poets-society.jpeg)
+![](/images/films/dead-poets-society.jpeg)
 
 ## 句子 {#句子}
 

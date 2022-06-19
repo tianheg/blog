@@ -21,4 +21,4 @@ Roman Holiday - 1953 - 美国
 
 奥黛丽·赫本------女神！
 
-![](https://static-1258637336.cos.ap-shanghai.myqcloud.com/audrey-hepburn.png)
+![](/images/audrey-hepburn.png)
