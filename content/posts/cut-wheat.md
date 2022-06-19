@@ -6,8 +6,8 @@ tags = ["随笔"]
 draft = false
 +++
 
-![](https://images.yidajiabei.xyz/night.jpg)
-![](https://images.yidajiabei.xyz/field.jpg)
+![](https://static-1258637336.cos.ap-shanghai.myqcloud.com/night.jpg)
+![](https://static-1258637336.cos.ap-shanghai.myqcloud.com/field.jpg)
 
 这两张照片不错，值得高兴的是：我决定在博客中使用图片了，不过是极少数情况下。
 

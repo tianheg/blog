@@ -6,7 +6,7 @@ tags = ["随笔"]
 draft = false
 +++
 
-![](https://images.yidajiabei.xyz/bookmark.jpg)
+![](https://static-1258637336.cos.ap-shanghai.myqcloud.com/bookmark.jpg)
 
 面前是一枚木质书签，矩形、棕褐色，四个角被打磨得圆滑。书签的一端钻有小孔，其间穿双股绳，绳的另一头是一颗斑驳的珠子。书签的一面刻有“南京大学”字样，紧挨着它，左边是校徽，下边是英文校名右边是一座庭院，一棵树在庭院旁。
 

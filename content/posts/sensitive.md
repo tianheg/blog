@@ -10,7 +10,7 @@ draft = false
 
 不能经常戴着耳机。如果经常用耳机听音乐，耳朵只会对鼓膜附近的声音敏感，而几乎听不到远处的（相对于整个耳朵）声音。
 
-![](https://images.yidajiabei.xyz/ear.jpeg)
+![](https://static-1258637336.cos.ap-shanghai.myqcloud.com/ear.jpeg)
 
 人耳的构造如图所示：外耳、中耳、内耳。中耳部位存在鼓膜，我们能够听到声音是因为声音携带的频率使鼓膜震动，进行一系列复杂的处理过程，转换成我们人能够理解的信息。
 

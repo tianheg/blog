@@ -414,7 +414,7 @@ Vue: MVVM 框架，数据直接绑定，数据驱动视图。
 
 Vue 模型：
 
-![](https://images.yidajiabei.xyz/vue-mvvm.svg)
+![](https://static-1258637336.cos.ap-shanghai.myqcloud.com/vue-mvvm.svg)
 
 ```html
 <div id="app">
@@ -426,7 +426,7 @@ Vue 模型：
 
 ```js
 let app = new Vue({
-  el: '#app',
+  el: "#app",
   data: {
     // mi_index: '京东商城',
     // mi_url: 'https://www.jd.com',
@@ -440,9 +440,9 @@ let app = new Vue({
       { name: `淘宝`, url: `https://www.taobao.com/` },
       { name: `京东`, url: `https://www.jd.com/` },
       { name: `拼多多`, url: `https://youhui.pinduoduo.com/` },
-    ]
+    ];
   },
-})
+});
 ```
 
 ### 第五天 {#第五天}
@@ -569,7 +569,7 @@ public class ResultBean<T> {
 
 `src/main/java/yidajiabei.xyz/util/ResultBean.java` 的图形示意：
 
-![](https://images.yidajiabei.xyz/java-resultbean.svg)
+![](https://static-1258637336.cos.ap-shanghai.myqcloud.com/java-resultbean.svg)
 
 ```java
 // src/main/java/yidajiabei.xyz/domain/UrlBean.java
@@ -610,7 +610,7 @@ public class UrlBean {
 ```js
 // src/main/resources/static/js/system/index.js
 let app = new Vue({
-  el: '#app',
+  el: "#app",
   data: {
     // mi_index: '京东商城',
     // mi_url: 'https://www.jd.com/',
@@ -618,26 +618,26 @@ let app = new Vue({
   },
   created: function () {
     // send ajax request
-    let _this = this
+    let _this = this;
     axios
-      .get('http://localhost:8000/typeList', { params: {} })
+      .get("http://localhost:8000/typeList", { params: {} })
       .then(function (ret) {
-        console.log(ret.data)
-        let dataType = ret.data
-        dataType.msg = undefined
+        console.log(ret.data);
+        let dataType = ret.data;
+        dataType.msg = undefined;
         if (dataType.sign === true) {
-          _this.mi_type = dataType.data
+          _this.mi_type = dataType.data;
         } else {
-          alert(dataType.msg)
+          alert(dataType.msg);
         }
-      })
+      });
   },
-})
+});
 ```
 
 axios 的图形示意：
 
-![](https://images.yidajiabei.xyz/axios.svg)
+![](https://static-1258637336.cos.ap-shanghai.myqcloud.com/axios.svg)
 
 ```html
 <!-- src/main/resources/static/index.html -->
@@ -743,7 +743,7 @@ secure-file-priv = "/home/archie/"
 
 ### 第七天 {#第七天}
 
-![](https://images.yidajiabei.xyz/front-back-end-mysql-framework.svg)
+![](https://static-1258637336.cos.ap-shanghai.myqcloud.com/front-back-end-mysql-framework.svg)
 
 图示为项目架构：
 
