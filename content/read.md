@@ -1,10 +1,10 @@
 +++
-title = "读过的书"
+title = "读过的书（Archived）"
 draft = false
 meta = false
-toc = true
-tocnum = false
 +++
+
+内容已迁移至此 [Notion](https://tianheg.notion.site/e9e5bc749dff495790f93810c88a81df)。
 
 ## 读书分类
 
