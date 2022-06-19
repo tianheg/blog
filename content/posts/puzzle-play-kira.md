@@ -8,7 +8,7 @@ draft = false
 
 拼图链接：<https://vlad.studio/puzzle/kira>
 
-![](https://images.yidajiabei.xyz/puzzles-kira.png 'Kira')
+![](https://static-1258637336.cos.ap-shanghai.myqcloud.com/puzzles-kira.png "Kira")
 
 拼图的过程中，我感到内心的平静。
 

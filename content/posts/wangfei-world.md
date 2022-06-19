@@ -6,7 +6,7 @@ tags = ["音乐"]
 draft = false
 +++
 
-![](https://images.yidajiabei.xyz/wangfei.jpg)
+![](https://static-1258637336.cos.ap-shanghai.myqcloud.com/wangfei.jpg)
 
 > 风雨过後不一定有美好的天空
 >
