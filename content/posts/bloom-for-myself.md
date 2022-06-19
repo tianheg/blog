@@ -44,4 +44,4 @@ draft = false
 
 学习你在盛开时，将芬芳分享给环境
 
-![](https://static-1258637336.cos.ap-shanghai.myqcloud.com/photo/2022-04-19.jpg "那花儿")
+![](/images/photo/2022-04-19.jpg "那花儿")

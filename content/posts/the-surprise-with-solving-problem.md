@@ -22,9 +22,9 @@ draft = false
 
 图一是博客的 console 显示的和 Google Analytics 有关的内容；图二则是个人主页下的 Google Analytics 的文件路径，可以清楚的看到 cdn-cgi（这是 Cloudflare 存放各种文件的虚拟路径）下的 App 里的 Google Analytics。
 
-![](https://static-1258637336.cos.ap-shanghai.myqcloud.com/cf-ga-0.png)
+![](/images/cf-ga-0.png)
 
-![](https://static-1258637336.cos.ap-shanghai.myqcloud.com/cf-ga-1.png)
+![](/images/cf-ga-1.png)
 
 ref:
 

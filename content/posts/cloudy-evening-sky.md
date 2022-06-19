@@ -10,7 +10,7 @@ Author: Caspar David Friedrich
 
 Year: 1824
 
-![](https://static-1258637336.cos.ap-shanghai.myqcloud.com/arts/cloudy-evening-sky.jpeg)
+![](/images/arts/cloudy-evening-sky.jpeg)
 
 Three oil studies by Friedrich of cloudy evening skies have survived, all of them dating from September to October, 1824. The impetus for these works probably came from his Norwegian fellow painter and friend Johan Christian Dahl, who from 1823 shared a house with Friedrich. In contrast to Dahl's studies, in which the clouds are presented as compact bodies, Friedrich was concerned with intangible optical phenomena. In this painting he used a scale of orange, violet, and blue shades to orchestrate a delicate, elusive color tone that spreads out over an extremely low horizon. His wife Caroline is once said to have remarked: "On the day he is painting air, he may not be spoken to!"
 

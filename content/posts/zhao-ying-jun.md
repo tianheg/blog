@@ -8,4 +8,4 @@ draft = false
 
 已经不记得什么时候认识的他，只听过他的音乐，他的音乐带给我欢笑，带给我深思，让我心伤
 
-![](https://static-1258637336.cos.ap-shanghai.myqcloud.com/zhao-ying-jun.jpeg)
+![](/images/zhao-ying-jun.jpeg)
