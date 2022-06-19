@@ -1,88 +1,83 @@
-#+SETUPFILE: ./hugo_setup.org
-#+TITLE: 图解 HTTP
-#+DATE: <2021-10-01 Fri>
-#+HUGO_TAGS: 技术 阅读
++++
+title = "图解 HTTP"
+date = 2021-10-01T00:00:00+08:00
+lastmod = 2022-06-19T23:09:11+08:00
+tags = ["技术", "阅读"]
+draft = false
++++
 
-获取图书途径：[[https://weread.qq.com/web/reader/3da32b505dd9f43da9a1acakc81322c012c81e728d9d180][微信读书]]
+获取图书途径：[微信读书](https://weread.qq.com/web/reader/3da32b505dd9f43da9a1acakc81322c012c81e728d9d180)
 
 文档中图片来自微信读书，版权归发行方所有，本人仅学习使用。
 
-** Terminology
-   :PROPERTIES:
-   :CUSTOM_ID: terminology
-   :END:
+
+## Terminology {#terminology}
+
 TCP/IP 协议族：HTTP
 
-*协议*（procotol）：不同硬件、操作系统之间的通信规则。
+\*协议\*（procotol）：不同硬件、操作系统之间的通信规则。
 
-*TCP/IP*：与互联网相关联的协议集合
+\*TCP/IP\*：与互联网相关联的协议集合
 
-*DNS*（Domain Name System）：域名系统，提供域名到 IP
+\*DNS\*（Domain Name System）：域名系统，提供域名到 IP
 地址之间的解析服务。
 
-*Client*（客户端）：请求访问资源的一端
+\*Client\*（客户端）：请求访问资源的一端
 
-*Server*（服务端）：提供响应资源的一端
+\*Server\*（服务端）：提供响应资源的一端
 
-** 了解 Web 及网络基础
-   :PROPERTIES:
-   :CUSTOM_ID: 了解-web-及网络基础
-   :END:
-*** 使用 HTTP 协议访问 Web
-    :PROPERTIES:
-    :CUSTOM_ID: 使用-http-协议访问-web
-    :END:
+
+## 了解 Web 及网络基础 {#了解-web-及网络基础}
+
+
+### 使用 HTTP 协议访问 Web {#使用-http-协议访问-web}
+
 Web 使用一种名为 HTTP（HyperText Transfer
 Protocol，超文本转移协议）的协议作为规范，完成从客户端到服务器等一系列运作流程。协议是指规则的约定。Web
 是建立在 HTTP 协议上通信的。
 
-*** HTTP 的诞生
-    :PROPERTIES:
-    :CUSTOM_ID: http-的诞生
-    :END:
+
+### HTTP 的诞生 {#http-的诞生}
+
 1989 年，CERN（欧洲核子研究组织）的 Tim Berners-Lee
 提出了一种能让远隔两地的研究者们共享知识的设想------借助多文档之间相互关联形成的超文本（HyperText），连成可相互参阅的
 WWW（World Wide Web, 万维网）。
 
 当时提出的 3 项 WWW 构建技术，分别是：
 
-- 把 SGML（Standard Generalized Markup
-  Language，标准通用标记语言）作为页面的文本标记语言的 HTML（HyperText
-  Markup Language，超文本标记语言）
-- 作为文档传递协议的 HTTP
-- 指定文档所在地址的 URL（Uniform Resource Locator，统一资源定位符）
+-   把 SGML（Standard Generalized Markup
+    Language，标准通用标记语言）作为页面的文本标记语言的 HTML（HyperText
+    Markup Language，超文本标记语言）
+-   作为文档传递协议的 HTTP
+-   指定文档所在地址的 URL（Uniform Resource Locator，统一资源定位符）
 
 WWW 首次使用是称呼具备 Web
 浏览器功能的客户端应用程序，现在用于表示这一系列的集合，也可简称为 Web。
 
-| 时间                                           | HTTP 版本/事件                     |
-|------------------------------------------------+------------------------------------|
-| 1990                                           | 发明 HTTP（作者：Tim Berners-Lee） |
-| 1991                                           | HTTP/0.9                           |
-| [[https://www.ietf.org/rfc/rfc1945.txt][1996]] | HTTP/1.0                           |
-| 1997                                           | HTTP/1.1（主流 HTTP 协议版本）     |
-| 2015                                           | HTTP/2                             |
-| 2020(draft)                                    | HTTP/3                             |
+| 时间                                         | HTTP 版本/事件              |
+|--------------------------------------------|-------------------------|
+| 1990                                         | 发明 HTTP（作者：Tim Berners-Lee） |
+| 1991                                         | HTTP/0.9                    |
+| [1996](https://www.ietf.org/rfc/rfc1945.txt) | HTTP/1.0                    |
+| 1997                                         | HTTP/1.1（主流 HTTP 协议版本） |
+| 2015                                         | HTTP/2                      |
+| 2020(draft)                                  | HTTP/3                      |
 
-*** 网络基础 TCP/IP
-    :PROPERTIES:
-    :CUSTOM_ID: 网络基础-tcpip
-    :END:
+
+### 网络基础 TCP/IP {#网络基础-tcpip}
+
 通常使用的网络（包括互联网）是在 TCP/IP 协议族的基础上运作的。而 HTTP
 属于它内部的一个子集。
 
-#+begin_quote
-  什么是协议？
-#+end_quote
+> 什么是协议？
 
-计算机与网络设备要相互通信，双方就必须基于相同的方法。不同的硬件、操作系统之间的通信，所有的这一切都需要一种规则，而这种规则被称为*协议*（protocol）。
+计算机与网络设备要相互通信，双方就必须基于相同的方法。不同的硬件、操作系统之间的通信，所有的这一切都需要一种规则，而这种规则被称为\*协议\*（protocol）。
 
-#+caption: TCP/IP 是互联网相关的各类协议族的总称
-[[https://cdn.jsdelivr.net/gh/tianheg/static@main/img/图解HTTP0.jpeg]]
+{{< figure src="https://cdn.jsdelivr.net/gh/tianheg/static@main/img/%E5%9B%BE%E8%A7%A3HTTP0.jpeg" caption="<span class=\"figure-number\">Figure 1: </span>TCP/IP 是互联网相关的各类协议族的总称" >}}
 
 一、TCP/IP 的分层管理
 
-*TCP/IP 协议族里重要的一点就是分层*。TCP/IP
+\*TCP/IP 协议族里重要的一点就是分层\*。TCP/IP
 协议族按层次分为以下四层：应用层、传输层、网络层和数据链路层。
 
 1）应用层
@@ -112,20 +107,17 @@ Card，网络适配器，即网卡），以及光纤等物理可见部分（还�
 
 二、TCP/IP 通信传输流
 
-#+caption: TCP/IP 通信传输流
-[[https://cdn.jsdelivr.net/gh/tianheg/static@main/img/图解HTTP1.jpeg]]
+{{< figure src="https://cdn.jsdelivr.net/gh/tianheg/static@main/img/%E5%9B%BE%E8%A7%A3HTTP1.jpeg" caption="<span class=\"figure-number\">Figure 2: </span>TCP/IP 通信传输流" >}}
 
 每一层利用的协议：应用层（HTTP）、传输层（TCP）、网络层（IP）、链路层
 
-#+caption: 封装过程
-[[https://cdn.jsdelivr.net/gh/tianheg/static@main/img/图解HTTP2.jpeg]]
+{{< figure src="https://cdn.jsdelivr.net/gh/tianheg/static@main/img/%E5%9B%BE%E8%A7%A3HTTP2.jpeg" caption="<span class=\"figure-number\">Figure 3: </span>封装过程" >}}
 
 这种把数据信息包装起来的做法称为封装（encapsulate）。
 
-*** 与 HTTP 关系密切的协议 : IP、TCP 和 DNS
-    :PROPERTIES:
-    :CUSTOM_ID: 与-http-关系密切的协议-iptcp-和-dns
-    :END:
+
+### 与 HTTP 关系密切的协议 : IP、TCP 和 DNS {#与-http-关系密切的协议-iptcp-和-dns}
+
 一、负责传输的 IP 协议
 
 按层次分，IP（Internet Protocol）网际协议位于网络层。IP
@@ -147,8 +139,7 @@ ARP 协议通过 MAC 地址搜索中转目标。
 
 中转过程中的路由选择（routing）。
 
-#+caption: 路由选择机制
-[[https://cdn.jsdelivr.net/gh/tianheg/static@main/img/图解HTTP3.jpeg]]
+{{< figure src="https://cdn.jsdelivr.net/gh/tianheg/static@main/img/%E5%9B%BE%E8%A7%A3HTTP3.jpeg" caption="<span class=\"figure-number\">Figure 4: </span>路由选择机制" >}}
 
 二、确保可靠性的 TCP 协议
 
@@ -169,63 +160,54 @@ SYN/ACK 标志的数据包以示传达确认信息。最后，发送端再回传
 若在握手过程中某个阶段莫名中断，TCP
 协议会再次以相同的顺序发送相同的数据包。
 
-- Post -->SYN Get
-- Post <--SYN/ACK Get
-- Post -->ACK Get
+-   Post --&gt;SYN Get
+-   Post &lt;--SYN/ACK Get
+-   Post --&gt;ACK Get
 
-#+caption: three-way handshaking
-[[https://cdn.jsdelivr.net/gh/tianheg/static@main/img/图解HTTP4-three-way-handshaking.svg]]
+{{< figure src="https://cdn.jsdelivr.net/gh/tianheg/static@main/img/%E5%9B%BE%E8%A7%A3HTTP4-three-way-handshaking.svg" caption="<span class=\"figure-number\">Figure 5: </span>three-way handshaking" >}}
 
-*** 负责域名解析的 DNS 服务
-    :PROPERTIES:
-    :CUSTOM_ID: 负责域名解析的-dns-服务
-    :END:
+
+### 负责域名解析的 DNS 服务 {#负责域名解析的-dns-服务}
+
 DNS 服务是为了让人类更容易记住计算机在网络中的位置。
 
-*** 各种协议与 HTTP 协议的关系
-    :PROPERTIES:
-    :CUSTOM_ID: 各种协议与-http-协议的关系
-    :END:
-#+caption: 各种协议与 HTTP 协议的关系
-[[https://cdn.jsdelivr.net/gh/tianheg/static@main/img/图解HTTP5-protocols.svg]]
 
-*** URI 和 URL
-    :PROPERTIES:
-    :CUSTOM_ID: uri-和-url
-    :END:
+### 各种协议与 HTTP 协议的关系 {#各种协议与-http-协议的关系}
+
+{{< figure src="https://cdn.jsdelivr.net/gh/tianheg/static@main/img/%E5%9B%BE%E8%A7%A3HTTP5-protocols.svg" caption="<span class=\"figure-number\">Figure 6: </span>各种协议与 HTTP 协议的关系" >}}
+
+
+### URI 和 URL {#uri-和-url}
+
 URI（统一资源标识符）与 URL（统一资源定位符）：Uniform Resource
 Identifier 与 Uniform Resource Locator。
 
 一、统一资源标识符
 
-- Uniform：统一的格式有利于处理不同类型的资源；
-- Resource：可标识的任何东西；
-- Identifier：可标识的对象，也称为标识符。
+-   Uniform：统一的格式有利于处理不同类型的资源；
+-   Resource：可标识的任何东西；
+-   Identifier：可标识的对象，也称为标识符。
 
 因此，URI 就是由协议表示的资源的定位标识符。（URI
 就是由某个协议方案表示的资源，的定位标识符。协议方案是指访问资源所使用的协议类型名称。采用
 HTTP 协议时，协议方案就是 http。）
 
-#+begin_quote
-  标准的 URI 协议方案有 30
-  种左右，由隶属于国际互联网资源管理的非营利社团 ICANN（Internet
-  Corporationfor Assigned Names and
-  Numbers，互联网名称与数字地址分配机构）的 IANA（InternetAssigned
-  Numbers Authority，互联网号码分配局）管理颁布。
-#+end_quote
+> 标准的 URI 协议方案有 30
+> 种左右，由隶属于国际互联网资源管理的非营利社团 ICANN（Internet
+> Corporationfor Assigned Names and
+> Numbers，互联网名称与数字地址分配机构）的 IANA（InternetAssigned
+> Numbers Authority，互联网号码分配局）管理颁布。
 
 URI 用字符串标识某一互联网资源，而 URL
 表示资源的地点（互联网上所处的位置）。可见 URL 是 URI 的子集。
 
 二、URI 格式
 
-#+caption: 绝对 URI
-[[https://cdn.jsdelivr.net/gh/tianheg/static@main/img/图解HTTP6-绝对URI.svg]]
+{{< figure src="https://cdn.jsdelivr.net/gh/tianheg/static@main/img/%E5%9B%BE%E8%A7%A3HTTP6-%E7%BB%9D%E5%AF%B9URI.svg" caption="<span class=\"figure-number\">Figure 7: </span>绝对 URI" >}}
 
-*** 并不是所有的应用程序都符合 RFC
-    :PROPERTIES:
-    :CUSTOM_ID: 并不是所有的应用程序都符合-rfc
-    :END:
+
+### 并不是所有的应用程序都符合 RFC {#并不是所有的应用程序都符合-rfc}
+
 有一些用来制定 HTTP 协议技术标准的文档，它们被称为 RFC（Request for
 Comments，征求修正意见书）。
 
@@ -236,55 +218,49 @@ RFC 是互联网的设计文档，如果不按照 RFC
 
 本书以后的 HTTP 协议内容，除去部分例外外，基本上都以 RFC 的标准为准。
 
-** 简单的 HTTP 协议
-   :PROPERTIES:
-   :CUSTOM_ID: 简单的-http-协议
-   :END:
+
+## 简单的 HTTP 协议 {#简单的-http-协议}
+
 主要使用 HTTP/1.1 版本。
 
-*** HTTP 协议用于客户端和服务器端之间的通信
-    :PROPERTIES:
-    :CUSTOM_ID: http-协议用于客户端和服务器端之间的通信
-    :END:
+
+### HTTP 协议用于客户端和服务器端之间的通信 {#http-协议用于客户端和服务器端之间的通信}
+
 客户端和服务端的角色并不固定，但在具体通信线路中，资源传输方向是确定的。HTTP
 协议能够明确区分哪端是客户端，哪端是服务端。
 
-*** 通过请求和响应的交换达成通信
-    :PROPERTIES:
-    :CUSTOM_ID: 通过请求和响应的交换达成通信
-    :END:
+
+### 通过请求和响应的交换达成通信 {#通过请求和响应的交换达成通信}
+
 通信请求由客户端发出，然后服务端才响应。服务端在没有接收到请求之前不会发送响应。
 
-#+begin_example
-  GET /index.html HTTP/1.1
-#+end_example
+```text
+GET /index.html HTTP/1.1
+```
 
-- =GET= 访问服务器的类型，称为方法（method）
-- =/index.html= 表示请求访问的资源对象，也叫请求 URI（request-URI）
-- =HTTP/1.1= HTTP 的版本号，用以提示客户端使用的 HTTP 协议功能
+-   `GET` 访问服务器的类型，称为方法（method）
+-   `/index.html` 表示请求访问的资源对象，也叫请求 URI（request-URI）
+-   `HTTP/1.1` HTTP 的版本号，用以提示客户端使用的 HTTP 协议功能
 
 我的网站的请求头：
 
-#+begin_example
-  GET / HTTP/2
-  Host: www.yidajiabei.xyz
-#+end_example
+```text
+GET / HTTP/2
+Host: www.yidajiabei.xyz
+```
 
 我网站的响应头：
 
-#+begin_example
-  HTTP/1.1 200 Connection established
-#+end_example
+```text
+HTTP/1.1 200 Connection established
+```
 
-#+begin_quote
-  请求报文由请求方法、请求
-  URI、协议版本、可选的请求首部字段和内容实体构成。响应报文由协议版本、状态码、原因短语、可选的响应首部字段以及实体主体构成。
-#+end_quote
+> 请求报文由请求方法、请求
+> URI、协议版本、可选的请求首部字段和内容实体构成。响应报文由协议版本、状态码、原因短语、可选的响应首部字段以及实体主体构成。
 
-*** HTTP 是不保存状态的协议
-    :PROPERTIES:
-    :CUSTOM_ID: http-是不保存状态的协议
-    :END:
+
+### HTTP 是不保存状态的协议 {#http-是不保存状态的协议}
+
 HTTP 是无状态（stateless）协议------HTTP
 协议对于发送过的请求或响应都不做持久化处理。
 
@@ -293,35 +269,31 @@ HTTP 是无状态（stateless）协议------HTTP
 
 于是，Cookie 技术便是为了解决这一问题而诞生的。
 
-*** 请求 URI 定位资源
-    :PROPERTIES:
-    :CUSTOM_ID: 请求-uri-定位资源
-    :END:
-#+begin_example
-  GET https://job.yidajiabei.xyz/#/ HTTP/3
 
-  GET / HTTP/3
-  Host: job.yidajiabei.xyz
+### 请求 URI 定位资源 {#请求-uri-定位资源}
 
-  # 对服务器发起请求
-  OPTIONS * HTTP/1.1
-#+end_example
+```text
+GET https://job.yidajiabei.xyz/#/ HTTP/3
 
-*** HTTP/1.1 中的可用方法
-    :PROPERTIES:
-    :CUSTOM_ID: http1.1-中的可用方法
-    :END:
+GET / HTTP/3
+Host: job.yidajiabei.xyz
+
+# 对服务器发起请求
+OPTIONS * HTTP/1.1
+```
+
+
+### HTTP/1.1 中的可用方法 {#http1.1-中的可用方法}
+
 一、GET 获取资源
 
 GET 方法用于请求已被 URI 识别的资源。
 
-#+caption: GET
-[[https://cdn.jsdelivr.net/gh/tianheg/static@main/img/图解HTTP7-GET.svg]]
+{{< figure src="https://cdn.jsdelivr.net/gh/tianheg/static@main/img/%E5%9B%BE%E8%A7%A3HTTP7-GET.svg" caption="<span class=\"figure-number\">Figure 8: </span>GET" >}}
 
 二、POST 传输实体主体
 
-#+caption: POST
-[[https://cdn.jsdelivr.net/gh/tianheg/static@main/img/图解HTTP8-POST.svg]]
+{{< figure src="https://cdn.jsdelivr.net/gh/tianheg/static@main/img/%E5%9B%BE%E8%A7%A3HTTP8-POST.svg" caption="<span class=\"figure-number\">Figure 9: </span>POST" >}}
 
 三、PUT 传输文件
 
@@ -332,45 +304,41 @@ Web 网站不使用该方法。
 
 使用该方法的场景：
 
-1. Web 应用程序具有验证机制
-2. 架构设计采用 REST（Representational State
-   Transfer，表征状态转移）标准
+1.  Web 应用程序具有验证机制
+2.  架构设计采用 REST（Representational State
+    Transfer，表征状态转移）标准
 
-#+caption: PUT
-[[https://cdn.jsdelivr.net/gh/tianheg/static@main/img/图解HTTP9-PUT.svg]]
+{{< figure src="https://cdn.jsdelivr.net/gh/tianheg/static@main/img/%E5%9B%BE%E8%A7%A3HTTP9-PUT.svg" caption="<span class=\"figure-number\">Figure 10: </span>PUT" >}}
 
-#+begin_quote
-  （PUT 的）响应：请求执行成功，但无数据返回
-#+end_quote
+> （PUT 的）响应：请求执行成功，但无数据返回
 
 四、HEAD 获得报文首部
 
 HEAD 和 GET 一样，只是不返回报文主体部分。用于确认 URI
 的有效性及资源更新的日期时间等。
 
-#+caption: HEAD
-[[https://cdn.jsdelivr.net/gh/tianheg/static@main/img/图解HTTP10-HEAD.svg]]
+{{< figure src="https://cdn.jsdelivr.net/gh/tianheg/static@main/img/%E5%9B%BE%E8%A7%A3HTTP10-HEAD.svg" caption="<span class=\"figure-number\">Figure 11: </span>HEAD" >}}
 
 五、DELETE 删除文件（类比 PUT）
 
 六、OPTIONS 询问支持的方法
 
-#+begin_example
-  curl -X OPTIONS https://example.org -i
-#+end_example
+```text
+curl -X OPTIONS https://example.org -i
+```
 
 Output:
 
-#+begin_example
-  HTTP/2 200
-  allow: OPTIONS, GET, HEAD, POST
-  cache-control: max-age=604800
-  content-type: text/html; charset=UTF-8
-  date: Tue, 07 Sep 2021 02:09:50 GMT
-  expires: Tue, 14 Sep 2021 02:09:50 GMT
-  server: EOS (vny/044E)
-  content-length: 0
-#+end_example
+```text
+HTTP/2 200
+allow: OPTIONS, GET, HEAD, POST
+cache-control: max-age=604800
+content-type: text/html; charset=UTF-8
+date: Tue, 07 Sep 2021 02:09:50 GMT
+expires: Tue, 14 Sep 2021 02:09:50 GMT
+server: EOS (vny/044E)
+content-length: 0
+```
 
 七、TRACE 追踪路径
 
@@ -391,22 +359,19 @@ protocol）进行 TCP 通信。主要使用 SSL（Secure Sockets
 Layer，安全套接层）和 TLS（Transport Layer
 Security,传输层安全）协议吧通信内容加密后经网络隧道传输。
 
-*** 使用方法下达命令
-    :PROPERTIES:
-    :CUSTOM_ID: 使用方法下达命令
-    :END:
+
+### 使用方法下达命令 {#使用方法下达命令}
+
 通过方法向请求 URI 指定的资源发送请求报文。
 
 一下列出 HTTP/1.0 和 HTTP/1.1
 支持的方法。要注意：方法名区分大小写，注意要用大写字母。
 
-#+caption: HTTP/1.0 HTTP/1.1
-[[https://cdn.jsdelivr.net/gh/tianheg/static@main/img/图解HTTP11-http1-http1.1.jpeg]]
+{{< figure src="https://cdn.jsdelivr.net/gh/tianheg/static@main/img/%E5%9B%BE%E8%A7%A3HTTP11-http1-http1.1.jpeg" caption="<span class=\"figure-number\">Figure 12: </span>HTTP/1.0 HTTP/1.1" >}}
 
-*** 持久连接节省通信量
-    :PROPERTIES:
-    :CUSTOM_ID: 持久连接节省通信量
-    :END:
+
+### 持久连接节省通信量 {#持久连接节省通信量}
+
 如果保证持久连接？
 
 在 HTTP/1.1 和部分的 HTTP/1.0 中提出了持久连接（HTTP Persistent
@@ -416,8 +381,8 @@ Connections，也称为 HTTP keep-alive 或 HTTP connection reuse）的方法。
 
 持久连接的好处：
 
-1. 减少了 TCP 连接的重复建立和断开所造成的额外开销，减轻了服务器段的负载
-2. 节省时间，Web 页面的显示速度也相应提高
+1.  减少了 TCP 连接的重复建立和断开所造成的额外开销，减轻了服务器段的负载
+2.  节省时间，Web 页面的显示速度也相应提高
 
 在 HTTP/1.1 中，所有的连接默认都是持久连接，但在 HTTP/1.0
 内并未标准化。只有客户端与服务器端都支持持久连接时，才能持久连接。
@@ -426,8 +391,7 @@ Connections，也称为 HTTP keep-alive 或 HTTP connection reuse）的方法。
 
 管线化让多个请求的发送成为现实。
 
-*** （重要）使用 Cookie 的状态管理
-    :PROPERTIES:
-    :CUSTOM_ID: 重要使用-cookie-的状态管理
-    :END:
+
+### （重要）使用 Cookie 的状态管理 {#重要使用-cookie-的状态管理}
+
 Cookie 技术通过在请求和响应报文中写入 Cookie 信息来控制客户端的状态。
