@@ -4,6 +4,7 @@ services:
   server:
     image: tianheg/hugo:0.100.2
     container_name: blog_local
+    restart: unless-stopped
     volumes:
       - ".:/src"
     ports:
