@@ -61,5 +61,7 @@ title = "关于"
 
 ## 赞助
 
-- [为 ❤️ 发电](https://afdian.net/@tianheg)
-- [请我吃饭 😋](https://dun.mianbaoduo.com/@tianheg)
+- [爱发电](https://afdian.net/@tianheg)
+- [面包多](https://dun.mianbaoduo.com/@tianheg)
+- [PayPal](https://paypal.me/tianheg)
+- [Patreon](https://patreon.com/tianheg)
