@@ -1,7 +1,7 @@
 +++
 title = "Arch 软件安装和用法"
 date = 2021-08-20T00:00:00+08:00
-lastmod = 2022-05-29T14:08:32+08:00
+lastmod = 2022-06-25T23:42:53+08:00
 tags = ["Arch Linux", "技术"]
 draft = false
 toc = true
@@ -338,6 +338,7 @@ pacman -Fl package_name # retrieve a list of the files installed by a remote pac
 ## Rarely use
 pacman -Qk package_name # verify the presence of the files installed by a package, Passing the k flag twice will perform a more thorough check
 pacman -Qo /path/to/file_name # query the database to know which package a file in the file system belongs to
+pacman -Qo command_name # 找到所属包
 pacman -F /path/to/file_name # query the database to know which remote package a file belongs to
 ```
 
