@@ -1,10 +1,11 @@
 +++
-title = "读过的书（Archived）"
-draft = false
+title = "我与阅读"
 meta = false
 +++
 
-内容已迁移至此 [Notion](https://tianheg.notion.site/e9e5bc749dff495790f93810c88a81df)。
+## 想读
+
+- Deng Xiaoping and the Transformation of China，by Ezra Vogel（傅高义）
 
 ## 读书分类
 
