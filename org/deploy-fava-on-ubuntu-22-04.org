@@ -1,0 +1,121 @@
+#+SETUPFILE: ./hugo_setup.org
+#+TITLE: 在 Ubuntu 22.04 上部署 fava（beancount 记账软件的 Web 版本）
+#+DATE: <2022-06-26 Sun 13:23>
+#+HUGO_TAGS: 技术 beancount Python
+
+主要参考资料：[[https://www.digitalocean.com/community/tutorials/how-to-serve-flask-applications-with-gunicorn-and-nginx-on-ubuntu-22-04][How To Serve Flask Applications with Gunicorn and Nginx on Ubuntu 22.04 | DigitalOcean]]
+
+[[https://github.com/beancount/fava][fava]] 本质是一个 Flask 应用，所以可以按照 Flask 应用的部署方式来。
+
+* 1. 更新系统环境，并安装依赖
+
+#+BEGIN_SRC sh
+sudo apt update
+sudo apt install python3-pip python3-dev build-essential libssl-dev libffi-dev python3-setuptools python3-venv
+#+END_SRC
+
+* 2. 创建虚拟环境
+
+#+BEGIN_SRC sh
+mkdir ~/fava-site && cd $_
+python3 -m venv venv --upgrade-deps
+. venv/bin/activate
+#+END_SRC
+
+* 3. 安装 Python 依赖
+
+#+BEGIN_SRC sh
+pip install wheel
+pip install gunicorn fava
+#+END_SRC
+
+* 4. 配置 fava
+
+#+BEGIN_SRC sh
+vim app.py
+sudo ufw allow 5000
+sudo vim /etc/systemd/system/fava-site.service
+sudo systemctl start fava-site
+sudo systemctl enable fava-site
+sudo systemctl status fava-site
+#+END_SRC
+
+=app.py=
+
+#+BEGIN_SRC python
+"""fava wsgi application"""
+from __future__ import annotations
+
+from fava.application import app as application
+
+application.config["BEANCOUNT_FILES"] = [
+  "ABSOLUTE_PATH_TO_BEANCOUNT_FILE",
+]
+#+END_SRC
+
+=fava-site.service=
+
+#+BEGIN_SRC conf
+[Unit]
+Description=Gunicorn instance to serve myproject
+After=network.target
+
+[Service]
+User=user
+Group=www-data
+WorkingDirectory=/home/user/fava-site
+Environment="PATH=/home/user/fava-site/venv/bin"
+ExecStart=/home/user/fava-site/venv/bin/gunicorn --workers 3 --bind unix:fava-site.sock -m 007 app
+
+[Install]
+WantedBy=multi-user.target
+#+END_SRC
+
+* 5. Nginx 配置反向代理
+
+#+BEGIN_SRC sh
+sudo apt update
+sudo apt install nginx
+sudo ufw app list
+sudo ufw allow 'Nginx HTTP'
+
+sudo vim /etc/nginx/sites-available/fava-site
+sudo ln -s /etc/nginx/sites-available/fava-site /etc/nginx/sites-enabled
+sudo nginx -t # 检查是否运行正常
+sudo systemctl restart nginx
+
+sudo ufw delete allow 5000
+sudo ufw allow 'Nginx Full'
+#+END_SRC
+
+一个注意事项：
+
+如果 Nginx 无法获取 gunicorn 的 socket 文件，会返回 HTTP 502 网关错误。这通常是因为用户的家目录不允许其他用户访问里面的文件。如果 socket 文件位于家目录，确保家目录的权限号码至少为 755。如果不是，修改方法：
+
+#+BEGIN_SRC sh
+sudo chmod 755 /home/user
+#+END_SRC
+
+=fava-site=
+
+#+BEGIN_SRC conf
+server {
+  listen 80;
+  server_name your_domain www.your_domain;
+
+  location / {
+    include proxy_params;
+    proxy_pass http://unix:/home/user/fava-site/fava-site.sock;
+  }
+}
+#+END_SRC
+
+* 6. 支持 HTTPS
+
+#+BEGIN_SRC sh
+sudo apt install python3-certbot-nginx
+
+sudo certbot --nginx -d your_domain
+
+sudo ufw delete allow 'Nginx HTTP'
+#+END_SRC
