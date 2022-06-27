@@ -3,307 +3,40 @@ title = "我与阅读"
 meta = false
 +++
 
+## 年度阅读计划
+
+✅
+
+选书标准：
+
+- 一年只能选择 10 本书阅读，思考并践行书中的见解；
+- 主题阅读书目不计算在内，因为主题阅读一定要阅读很多书籍和文章，有 10 本的限制太委屈了；
+- 技术书籍不算在内，也就是说阅读技术书籍数量不限；
+
+### 2022
+
+1. 哲学的故事
+2. 人性七论
+3. 十三邀 3：“我们都在给大问题做注脚”
+4. ✅ 以鸟兽之名
+5. 人间好玩
+6. 我生有涯愿无尽：梁漱溟自述文录
+7. ✅ 寂寞的游戏
+8. 高效能人士的七个习惯
+9.  穷查理宝典
+10. 思考快与慢
+
 ## 想读
 
-- Deng Xiaoping and the Transformation of China，by Ezra Vogel（傅高义）
-
-## 读书分类
-
-### 软件开发 + 计算机科学
-
-- [HTML5 权威指南](/posts/definitive-guide-to-html5/)，by Adam Freeman
-- Introducing HTML5
-- 张鑫旭：CSS 世界 CSS 选择器世界 CSS 新世界
-- CSS 解密
-- CSS The Definitive Guide
-- [DOM Scripting](/posts/dom-scripting/)
-- [JavaScript 高级程序设计第 4 版](/posts/professional-javascript-for-web-developers/)，by Matt Frisbie
-- [深入 PHP 与 jQuery 开发](/posts/pro-php-and-jquery/)，by Jason Lengstorf
-- [You Don't Know JS](https://github.com/getify/You-Dont-Know-JS)
-- JavaScript: The Definitive Guide
-- JavaScript: The Good Parts
-- JavaScript Patterns
-- [Eloquent JavaScript](https://eloquentjavascript.net/)
-- [JavaScript Testing Recipes – shop.jcoglan.com](https://shop.jcoglan.com/javascript-testing-recipes/)
-- High Performance JavaScript
-- Human JavaScript
-- Object Oriented JavaScript
-- Pro JavaScript Design Patterns
-- Secrets of the JavaScript Ninja
-- JavaScript Application Design
-- [Exploring JS: JavaScript books for programmers](https://exploringjs.com/)
-- Test-Driven JavaScript Development
-- [Learning JavaScript Design Patterns](https://www.patterns.dev/posts/classic-design-patterns/)
-- [You Might Not Need jQuery](https://youmightnotneedjquery.com/)
-- [JavaScript Garden](https://bonsaiden.github.io/JavaScript-Garden/)
-- Effective JavaScript
-- Functional JavaScript
-- JavaScript Allongé
-- https://jsbooks.revolunet.com/
-- Computer Networking: A Top-Down Approach 计算机网络：自顶向下法
-- 图解 HTTP，by 上野宣
-- Operating System Concepts
-- Modern Operating Systems
-- [Operating System Concepts](/posts/operating-system-concepts/)
-- Operating Systems: Three Easy Pieces 操作系统导论
-- [鸟哥的 Linux 私房菜](/posts/birdman-linux/)，by 鸟哥
-- Structure and Interpretation of Computer Programs(Scheme 语言)
-- [Composing Programs](https://composingprograms.com/)(Python3 语言)
-- [How to Design Programs, Second Edition](http://htdp.org/2021-11-15/Book/index.html)
-- 以上三本理解难度由难到易
-- 辅助练习平台 [exercism](https://exercism.org/)
-- Computer Systems: A Programmer's Perspective
-- The Elements of Computing Systems
-- [Algorithms, 4th Edition](https://algs4.cs.princeton.edu/home/)(可阅读全部)
-- Introduction to Algorithms(可阅读「基础」部分)
-- [VisuAlgo](https://visualgo.net/en) / <https://www.cs.usfca.edu/~galles/visualization/Algorithms.html>
-- [JavaScript Algorithms and Data Structures](https://github.com/trekhleb/javascript-algorithms)
-- [Analysis of Algorithms Lectures](https://www3.cs.stonybrook.edu/~skiena/373/videos/)
-- [LeetCode 热题 HOT 100](https://leetcode-cn.com/problem-list/2cktkvj/)
-- The Algorithm Design Manual
-- How to Solve It
-- 离散数学是数学领域中和计算机科学最密切相关的一个分支
-- 离散数学
-  - [lecture notes by László Lovász](https://cims.nyu.edu/~regev/teaching/discrete_math_fall_2005/dmbook.pdf)
-  - Mathematics for Computer Science
-- 线性代数
-  - Introduction to Linear Algebra
-- Readings in Database Systems
-- Crafting Interpreters
-- [How to be a Programmer 中文版](/posts/how-to-be-a-programmer-zh/)，by Robert L. Read
-- 程序员修炼之道(第 2 版)(The Pragmatic Programmer: From Journeyman to Master)，by David Thomas, Andrew Hunt
-- 信息检索，by 黄如花
-- 构建之法，by 邹欣
-- 参考资料
-  - <https://teachyourselfcs.com/>
-  - [EP01.学前端的入门问题](https://www.xiaoyuzhoufm.com/episode/61684ce4d8fa23fb00fc4d3b)
-  - [一个合格的程序员应该读过哪些书](https://justjavac.com/other/2012/05/15/qualified-programmer-should-read-what-books.html)
-
-### 人物传记
-
-- 二十世纪美国第一夫人
-- 比尔・盖茨全传，by 于成龙
-- 加西亚·马尔克斯传，by 杰拉德·马丁
-- 牛津通识读本：罗素，by A.C.格雷林
-- [爱因斯坦自述](/posts/einstein-himself/)，by 爱因斯坦
-
-### 社会科学
-
-- 标点符号使用规范
-- 现代汉语
-- 全球通史，by L. S. Stavrianos
-- 社会心理学，by David G.Myers
-- 你一定爱读的极简欧洲史，by 约翰·赫斯特
-- 意识的解释，by 丹尼尔・丹尼特
-- 幸福的方法，by Tal Ben-Shahar
-- 不焦虑了，by 安藤俊介
-- 非暴力沟通，by 马歇尔·卢森堡
-- 马斯洛论自我超越，by Abraham Maslow
-- 简单的逻辑学 Being Logical: A Guide to Good Thinking，by D.Q.麦克伦尼
-- 薛兆丰经济学讲义，by 薛兆丰
-- 生而贫穷，by 赵皓阳
-- 中国经济的定力，by 白重恩、蔡昉、樊纲
-- 小狗钱钱，by 博多·舍费尔
-- 怪诞心理学(Quirkology: The Curious Science of Everyday Lives)，by 理查德·怀斯曼
-- 怪诞脑科学(Kluge: The Haphazard Construction of the Human Mind)，by 盖瑞·马库斯
-- 人的自我寻求，by 罗洛·梅
-- [道德经](/posts/tao-te-ching/) by 老子
-- [极简个性心理学](/posts/making-sence-of-people/)，by 塞缪尔·巴伦德斯
-- 荷马史诗
-- 亚里士多德
-- 卢梭
-- 尼采
-- 波伏娃
-- 伍尔芙
-- 《大问题：简明哲学导论》（第 10 版）罗伯特·所罗门
-- 《做哲学：88 个思想实验中的哲学导论》小西奥多·希克；刘易斯·沃恩
-- 《想透彻：当代哲学导论》夸梅·安东尼·阿皮亚
-- 哲学的故事
-- 人性七论
-- 你的第一本哲学书，by Thomas Nagel
-- 哲学概论，by 杨方
-- 《经济学的思维方式》托马斯·索维尔
-- 《大历史》大卫·克里斯蒂安
-- 《世界观》（第 2 版）理查德·德威特
-- 《哲学·科学·常识》陈嘉映
-- 心理学与生活，by 理查德·格里格等
-- 这才是心理学，by 基思·斯坦诺维奇
-- 《社会心理学》戴维·迈尔斯、吉洛维奇
-- 《社会心理学》（第 3 版）Thomas Gilovich 等
-- 《不确定世界的理性选择》雷德·海斯蒂等
-- 《社会认知》齐瓦·孔达
-- 《认知心理学》E.Bruce Goldstein
-- 《认识天性》
-- 马丁·塞利格曼的书
-- 《理性情绪》阿尔伯特·埃利斯
-- 《情绪急救》盖伊·温奇
-- 《自我的追寻》 弗洛姆
-- 《心智探奇》史蒂芬·平克
-- 《人类活动中的理性》赫伯特·西蒙
-- 《表象与本质》侯世达，美国知名认知科学家
-- 《我们赖以生存的隐喻》乔治·莱考夫；马克· 约翰逊
-- 《思考，快与慢》丹尼尔·卡尼曼
-- 《超越智商》基思·斯坦诺维奇
-- 《不确定世界的理性选择》雷德·海斯蒂；罗宾·道斯
-- 如何高效学习
-- 《学会提问》尼尔·布朗
-- 专注力：化繁为简的惊人力量
-- 思考的艺术
-- 批判性思维工具
-- 逻辑思维简易入门
-- 《是思考，还是想太多》冀剑制
-- 《模型思维》斯科特·佩奇
-- 《社会学的邀请》威特
-- 《艺术的故事》贡布里希
-- 《写给大家看的设计书》（第 4 版）Robin Williams
-- 诺曼的《设计心理学》
-- 《营销管理》（第 15 版）菲利普·科特勒
-- 《定位》《重新定位》杰克·特劳特
-- 《在家就能读 MBA》乔希·考夫曼
-- 《卓有成效的管理者》彼得·德鲁克
-- 自我与防御机制，by 安娜·弗洛伊德（是精神分析学派创始人弗洛伊德的孩子）
-
-### 自然学科
-
-- [阿西莫夫最新科学指南（上下册）](/posts/asimov-the-intelligent-mans-guide-to-science/) by 阿西莫夫
-- 智能科学，by 史忠植
-- 5G 时代，by 项立刚
-- 数学
-  - 数学之美，by 吴军
-- [Anthropic Bias](https://www.anthropic-principle.com/q=book/table_of_contents/) 物理学等
-
-### 自我成长
-
-- [人人都能用英语](/posts/everyone-can-use-english/) by 李笑来
-- 企业家爸爸写给女儿的信，by G.金斯利・沃德
-- [如何有效整理信息](/posts/how-to-organize-information-effectively/) by 奥野宣之
-- 跃迁，by 古典
-- 好好学习，by 成甲
-- 影响力，by 罗伯特・西奥迪尼
-- 跨界学习，by 王烁
-- 高效能人士的笔记整理术，by 霁色
-- 如何成为一个学习忍者，by 格雷厄姆・奥尔科特
-- 如何学习，by Benedict Carey
-- 如何高效学习，by 斯科特·扬
-- 如何阅读一本书，by 莫提默·J. 艾德勒、查尔斯·范多伦
-- 刻意练习，by Anders Ericsson, Robert Pool
-- 财富自由之路，by 博多·舍费尔
-- 学会如何学习，by Barbara Oakley
-- 学习之道，by Barbara Oakley
-- [未来世界的幸存者](/posts/survivors-of-the-future/) by 阮一峰
-- [黑客与画家](/posts/paul-graham-hackers-and-painters/)，by Paul Graham
-- 你凭什么做好互联网：从技术思维到商业逻辑，by caoz（曹大）（正确决策）
-- 硅谷之火——人与计算机的未来，by 保罗·弗赖伯格、迈克尔·斯韦因
-
-### 文学创作
-
-- [朝花夕拾](/posts/luxun-zhaohuaxishi/) by 鲁迅
-- [一个女人一生中的二十四小时](/posts/24-hours-in-the-life-of-a-woman/) by 茨威格
-- [永恒的终结](/posts/asimov-the-end-of-eternity/) by 阿西莫夫
-- [遥远的救世主](/posts/distant-savior/) by 豆豆
-- [红楼梦](/posts/dream-of-the-red-chamber/) by 曹雪芹
-- 毛姆
-  - 月亮与六便士
-  - 👍👍 刀锋
-  - 👍👍 人性的枷锁
-  - 面纱
-  - 寻欢作乐
-  - [读书随想录](/posts/maugham-thoughts-about-books/)
-- 狼王梦，by 沈石溪
-- 哑舍全集，by 玄色
-- 没有星星，夜不滚烫，by 榛生
-- 致 D 情史，by 安德烈·高兹
-- 三体全集（三部），by 刘慈欣
-- 明天也是小春日和，by 津端英子、津端修一
-- 小窗幽记，by 陆绍珩
-- 二十首情诗和一首绝望的歌，by 巴勃罗・聂鲁达
-- 仓央嘉措诗传全集，by 闫晗
-- 👍👍[牧羊少年奇幻之旅](/posts/o-alquimista/)，by 保罗・柯艾略
-- [恍惚人间](/posts/huang-hu-ren-jian/) by 小考拉
-- 世界文学名著英汉对照全译精选，by 英语学习大书虫研究室等
-- 沙漠里的爱情，by 巴尔扎克（士兵与母豹的奇妙爱情）
-- 谈美，by 朱光潜
-- 时间的女儿，by 八月长安
-- 离开前请叫醒我，by 卢思浩
-- 谁的青春不迷茫，by 刘同
-- 总要习惯一个人，by 蕊希
-- 愿有人陪你颠沛流离，by 卢思浩
-- 瓦尔登湖，by 梭罗
-- 人生有何意义，by 胡适
-- 👍👍 林清玄散文精选，by 林清玄
-- 人间有味是清欢，by 林清玄
-- 白岩松：行走在爱与恨之间，by 白岩松
-- 👍 皮囊，by 蔡崇达
-- 青春电影手册：影史 100 佳青春电影，by 程青松
-- 时间之问，by 汪波
-- 傅雷家书，by 傅雷、朱敏馥、傅聪、傅敏
-- 看见，by 柴静
-- 未解之谜（上），by 克雷格・ P.鲍尔
-- 未解之谜（下），by 克雷格・ P.鲍尔
-- 流量是蓝海，by 毕胜
-- 👍👍 外婆的道歉信，by 弗雷德里克・巴克曼
-- 👍👍 过于喧嚣的孤独，by 博胡米尔·赫拉巴尔
-- 好兵帅克，by 雅洛斯拉夫·哈谢克
-- 圣经的故事，by 亨德里克・房龙
-- 👍👍 82 年生的金智英，by [韩] 赵南柱
-- 太古和其他的时间，by Olga Tokarczuk
-- 什锦拼盘，by 唐鲁孙
-- 太阳黑子，by 须一瓜
-- 给青年的十二封信，by 朱光潜
-- 未来世界的幸存者，by 阮一峰
-- 一九八四，by George Orwell
-- 天年，by 何夕
-- 海奥华预言，by Michelle Desmarckett
-- 查拉图斯特拉如是说，by Friedrich Nietzsche
-- 永隔一江水，by 邓安庆
-- 我在未来等你，by 刘同
-- 那些忧伤的年轻人，by 许知远
-- 借我一生，by 余秋雨
-- 👍👍 新版文化苦旅，by 余秋雨
-- 局外人，by 加缪
-- 以眨眼干杯，by 东野圭吾
-- 一只特立独行的猪，by 王小波
-- 江湖，by 凡悲鲁
-- 亲爱的三毛，by 三毛
-- 醉步男，by 小林泰三
-- 看海的人，by 小林泰三
-- 👍👍 寂寞的游戏，by 袁哲生
-- 时间机器，by 赫伯特·乔治·威尔斯
-- 银河帝国：基地，by Isaac Asimov
-- 银河帝国：基地与帝国，by Isaac Asimov
-- 银河帝国：第二基地，by Isaac Asimov
-- 银河帝国：基地前奏，by Isaac Asimov
-- 银河帝国：迈向基地，by Isaac Asimov
-- 银河帝国：基地边缘，by Isaac Asimov
-- 银河帝国：基地与地球，by Isaac Asimov
-- 银河帝国：我，机器人，by Isaac Asimov
-- 银河帝国：钢穴，by Isaac Asimov
-- 银河帝国：裸阳，by Isaac Asimov
-- 银河帝国：曙光中的机器人，by Isaac Asimov
-- 银河帝国：机器人与帝国，by Isaac Asimov
-- 银河帝国：繁星若尘，by Isaac Asimov
-- 银河帝国：星空暗流，by Isaac Asimov
-- 银河帝国：苍穹一粟，by Isaac Asimov
-- 少数派报告(The Minority Report)，by Philip K. Dick
-- 莱根谭，by 洪应明
-- [天生有罪](/posts/trevor-noah-born-a-crime/) by 特雷弗·诺亚
-- 新版名：活过，爱过，写过；旧版名：人间采蜜记（自传），by 李银河
-- 爱你就像爱生命，by 王小波
-- 无人生还，by 阿加莎·克里斯蒂
-- [雪崩](/posts/neal-stephenson-snow-crash/)，by Neal Stephenson
-- [克拉拉与太阳](/posts/kazuo-shiguro-klara-and-the-sun/)，by 石黑一雄
 - 编码宝典
 - 沙丘
 - 万有引力之虹
-- 基地
 - 大魔法师
-- 1984
 - 最后和最先的人
 - 造星者
 - 漫长的明天
 - 达尔格伦
 - 无尽的玩笑
-- 挽救计划
 - 纳尔奇思与歌尔得蒙，by [德] 赫尔曼·黑塞，2021 年 6 月
 - 你当像鸟飞往你的山，by [美] 塔拉·韦斯特弗，2021 年 6 月
 - 永生的操练——但丁《神曲》解析，by 残雪，2021 年 6 月
@@ -311,7 +44,6 @@ meta = false
 - The Innovation：How a Group of Hackers，Geniuses，and Greeks Created the Digital Revolution.，by Walter Isaacson，2021 年 7 月
 - How to Take Smart Notes，by Sönke Ahrens，2021 年 7 月
 - 夜晚的潜水艇，by 陈春成，2021 年 7 月
-- 邓小平时代，by 傅高义，2021 年 7 月
 - What I Wish I Knew When I Was 20，by Tina Seelig，2021 年 7 月 ⭐
 - The Peregrine，by J. A. Baker，2021 年 7 月（Werner Herzog 推荐）
 - 幸福之路，by 罗素，2021 年 7 月
@@ -392,32 +124,281 @@ meta = false
 - 浪潮之巅
 - 数学之美
 - 文明之光
+- 数学
+  - 数学之美，by 吴军
+- [Anthropic Bias](https://www.anthropic-principle.com/q=book/table_of_contents/) 物理学等
+- 人性七论
+- 《经济学的思维方式》托马斯·索维尔
+- 《大历史》大卫·克里斯蒂安
+- 《世界观》（第 2 版）理查德·德威特
+- 《哲学·科学·常识》陈嘉映
+- 心理学与生活，by 理查德·格里格等
+- 这才是心理学，by 基思·斯坦诺维奇
+- 《社会心理学》戴维·迈尔斯、吉洛维奇
+- 《社会心理学》（第 3 版）Thomas Gilovich 等
+- 《不确定世界的理性选择》雷德·海斯蒂等
+- 《社会认知》齐瓦·孔达
+- 《认知心理学》E.Bruce Goldstein
+- 《认识天性》
+- 马丁·塞利格曼的书
+- 《理性情绪》阿尔伯特·埃利斯
+- 《情绪急救》盖伊·温奇
+- 《自我的追寻》 弗洛姆
+- 《心智探奇》史蒂芬·平克
+- 《人类活动中的理性》赫伯特·西蒙
+- 《表象与本质》侯世达，美国知名认知科学家
+- 《我们赖以生存的隐喻》乔治·莱考夫；马克· 约翰逊
+- 《思考，快与慢》丹尼尔·卡尼曼
+- 《超越智商》基思·斯坦诺维奇
+- 《不确定世界的理性选择》雷德·海斯蒂；罗宾·道斯
+- 如何高效学习
+- 《学会提问》尼尔·布朗
+- 专注力：化繁为简的惊人力量
+- 思考的艺术
+- 批判性思维工具
+- 逻辑思维简易入门
+- 《是思考，还是想太多》冀剑制
+- 《模型思维》斯科特·佩奇
+- 《社会学的邀请》威特
+- 《艺术的故事》贡布里希
+- 《写给大家看的设计书》（第 4 版）Robin Williams
+- 诺曼的《设计心理学》
+- 《营销管理》（第 15 版）菲利普·科特勒
+- 《定位》《重新定位》杰克·特劳特
+- 《在家就能读 MBA》乔希·考夫曼
+- 《卓有成效的管理者》彼得·德鲁克
+- 自我与防御机制，by 安娜·弗洛伊德（是精神分析学派创始人弗洛伊德的孩子）
+- 荷马史诗
+- 亚里士多德
+- 卢梭
+- 尼采
+- 波伏娃
+- 伍尔芙
+- 《大问题：简明哲学导论》（第 10 版）罗伯特·所罗门
+- 《做哲学：88 个思想实验中的哲学导论》小西奥多·希克；刘易斯·沃恩
+- 《想透彻：当代哲学导论》夸梅·安东尼·阿皮亚
+- 不焦虑了，by 安藤俊介
+- 非暴力沟通，by 马歇尔·卢森堡
+- 意识的解释，by 丹尼尔・丹尼特
+- 标点符号使用规范
+- 现代汉语
+- Deng Xiaoping and the Transformation of China，by Ezra Vogel（傅高义）
+- CSS The Definitive Guide
+- JavaScript: The Definitive Guide
+- 张鑫旭：CSS 世界 CSS 选择器世界 CSS 新世界
+- CSS 解密
+- [You Don't Know JS](https://github.com/getify/You-Dont-Know-JS)
+- JavaScript: The Good Parts
+- JavaScript Patterns
+- [Eloquent JavaScript](https://eloquentjavascript.net/)
+- [JavaScript Testing Recipes – shop.jcoglan.com](https://shop.jcoglan.com/javascript-testing-recipes/)
+- High Performance JavaScript
+- Human JavaScript
+- Object Oriented JavaScript
+- Pro JavaScript Design Patterns
+- Secrets of the JavaScript Ninja
+- JavaScript Application Design
+- [Exploring JS: JavaScript books for programmers](https://exploringjs.com/)
+- Test-Driven JavaScript Development
+- [Learning JavaScript Design Patterns](https://www.patterns.dev/posts/classic-design-patterns/)
+- [You Might Not Need jQuery](https://youmightnotneedjquery.com/)
+- [JavaScript Garden](https://bonsaiden.github.io/JavaScript-Garden/)
+- Effective JavaScript
+- Functional JavaScript
+- JavaScript Allongé
+- https://jsbooks.revolunet.com/
+- Computer Networking: A Top-Down Approach 计算机网络：自顶向下法
+- Modern Operating Systems
+- Operating Systems: Three Easy Pieces 操作系统导论
+- Structure and Interpretation of Computer Programs(Scheme 语言)
+- [Composing Programs](https://composingprograms.com/)(Python3 语言)
+- [How to Design Programs, Second Edition](http://htdp.org/2021-11-15/Book/index.html)
+- Computer Systems: A Programmer's Perspective
+- The Elements of Computing Systems
+- [Algorithms, 4th Edition](https://algs4.cs.princeton.edu/home/)(可阅读全部)
+- Introduction to Algorithms(可阅读「基础」部分)
+- The Algorithm Design Manual
+- How to Solve It
+- 离散数学
+  - [lecture notes by László Lovász](https://cims.nyu.edu/~regev/teaching/discrete_math_fall_2005/dmbook.pdf)
+  - Mathematics for Computer Science
+- 线性代数
+  - Introduction to Linear Algebra
+- Readings in Database Systems
+- Crafting Interpreters
+
+## 读书分类（已读）
+
+### 软件开发 + 计算机科学
+
+- [HTML5 权威指南](/posts/definitive-guide-to-html5/)，by Adam Freeman
+- [DOM Scripting](/posts/dom-scripting/)
+- [JavaScript 高级程序设计第 4 版](/posts/professional-javascript-for-web-developers/)，by Matt Frisbie
+- [深入 PHP 与 jQuery 开发](/posts/pro-php-and-jquery/)，by Jason Lengstorf
+- 图解 HTTP，by 上野宣
+- [Operating System Concepts](/posts/operating-system-concepts/)
+- [鸟哥的 Linux 私房菜](/posts/birdman-linux/)，by 鸟哥
+- [How to be a Programmer 中文版](/posts/how-to-be-a-programmer-zh/)，by Robert L. Read
+- 程序员修炼之道(第 2 版)(The Pragmatic Programmer: From Journeyman to Master)，by David Thomas, Andrew Hunt
+- 信息检索，by 黄如花
+- 构建之法，by 邹欣
+
+### 人物传记
+
+- 二十世纪美国第一夫人
+- 比尔・盖茨全传，by 于成龙
+- 加西亚·马尔克斯传，by 杰拉德·马丁
+- 牛津通识读本：罗素，by A.C.格雷林
+- [爱因斯坦自述](/posts/einstein-himself/)，by 爱因斯坦
+
+### 社会科学
+
+- 全球通史，by L. S. Stavrianos
+- 社会心理学，by David G.Myers
+- 你一定爱读的极简欧洲史，by 约翰·赫斯特
+- 幸福的方法，by Tal Ben-Shahar
+- 马斯洛论自我超越，by Abraham Maslow
+- 简单的逻辑学 Being Logical: A Guide to Good Thinking，by D.Q.麦克伦尼
+- 薛兆丰经济学讲义，by 薛兆丰
+- 生而贫穷，by 赵皓阳
+- 中国经济的定力，by 白重恩、蔡昉、樊纲
+- 小狗钱钱，by 博多·舍费尔
+- 怪诞心理学(Quirkology: The Curious Science of Everyday Lives)，by 理查德·怀斯曼
+- 怪诞脑科学(Kluge: The Haphazard Construction of the Human Mind)，by 盖瑞·马库斯
+- 人的自我寻求，by 罗洛·梅
+- [道德经](/posts/tao-te-ching/) by 老子
+- [极简个性心理学](/posts/making-sence-of-people/)，by 塞缪尔·巴伦德斯
+- 你的第一本哲学书，by Thomas Nagel
+- 哲学概论，by 杨方
+
+### 自然学科
+
+- [阿西莫夫最新科学指南（上下册）](/posts/asimov-the-intelligent-mans-guide-to-science/) by 阿西莫夫
+- 智能科学，by 史忠植
+- 5G 时代，by 项立刚
+
+### 自我成长
+
+- [人人都能用英语](/posts/everyone-can-use-english/) by 李笑来
+- 企业家爸爸写给女儿的信，by G.金斯利・沃德
+- [如何有效整理信息](/posts/how-to-organize-information-effectively/) by 奥野宣之
+- 跃迁，by 古典
+- 好好学习，by 成甲
+- 影响力，by 罗伯特・西奥迪尼
+- 跨界学习，by 王烁
+- 高效能人士的笔记整理术，by 霁色
+- 如何成为一个学习忍者，by 格雷厄姆・奥尔科特
+- 如何学习，by Benedict Carey
+- 如何高效学习，by 斯科特·扬
+- 如何阅读一本书，by 莫提默·J. 艾德勒、查尔斯·范多伦
+- 刻意练习，by Anders Ericsson, Robert Pool
+- 财富自由之路，by 博多·舍费尔
+- 学会如何学习，by Barbara Oakley
+- 学习之道，by Barbara Oakley
+- [未来世界的幸存者](/posts/survivors-of-the-future/) by 阮一峰
+- [黑客与画家](/posts/paul-graham-hackers-and-painters/)，by Paul Graham
+- 你凭什么做好互联网：从技术思维到商业逻辑，by caoz（曹大）（正确决策）
+- 硅谷之火——人与计算机的未来，by 保罗·弗赖伯格、迈克尔·斯韦因
+
+### 文学创作
+
+- [朝花夕拾](/posts/luxun-zhaohuaxishi/) by 鲁迅
+- [一个女人一生中的二十四小时](/posts/24-hours-in-the-life-of-a-woman/) by 茨威格
+- [永恒的终结](/posts/asimov-the-end-of-eternity/) by 阿西莫夫
+- [遥远的救世主](/posts/distant-savior/) by 豆豆
+- [红楼梦](/posts/dream-of-the-red-chamber/) by 曹雪芹
+- 毛姆
+  - 月亮与六便士
+  - 👍👍 刀锋
+  - 👍👍 人性的枷锁
+  - 面纱
+  - 寻欢作乐
+  - [读书随想录](/posts/maugham-thoughts-about-books/)
+- 狼王梦，by 沈石溪
+- 哑舍全集，by 玄色
+- 没有星星，夜不滚烫，by 榛生
+- 致 D 情史，by 安德烈·高兹
+- 三体全集（三部），by 刘慈欣
+- 明天也是小春日和，by 津端英子、津端修一
+- 小窗幽记，by 陆绍珩
+- 二十首情诗和一首绝望的歌，by 巴勃罗・聂鲁达
+- 仓央嘉措诗传全集，by 闫晗
+- 👍👍[牧羊少年奇幻之旅](/posts/o-alquimista/)，by 保罗・柯艾略
+- [恍惚人间](/posts/huang-hu-ren-jian/) by 小考拉
+- 世界文学名著英汉对照全译精选，by 英语学习大书虫研究室等
+- 沙漠里的爱情，by 巴尔扎克（士兵与母豹的奇妙爱情）
+- 谈美，by 朱光潜
+- 时间的女儿，by 八月长安
+- 离开前请叫醒我，by 卢思浩
+- 谁的青春不迷茫，by 刘同
+- 总要习惯一个人，by 蕊希
+- 愿有人陪你颠沛流离，by 卢思浩
+- 瓦尔登湖，by 梭罗
+- 人生有何意义，by 胡适
+- 👍👍 林清玄散文精选，by 林清玄
+- 人间有味是清欢，by 林清玄
+- 白岩松：行走在爱与恨之间，by 白岩松
+- 👍 皮囊，by 蔡崇达
+- 青春电影手册：影史 100 佳青春电影，by 程青松
+- 时间之问，by 汪波
+- 傅雷家书，by 傅雷、朱敏馥、傅聪、傅敏
+- 看见，by 柴静
+- 未解之谜（上），by 克雷格・ P.鲍尔
+- 未解之谜（下），by 克雷格・ P.鲍尔
+- 流量是蓝海，by 毕胜
+- 👍👍 外婆的道歉信，by 弗雷德里克・巴克曼
+- 👍👍 过于喧嚣的孤独，by 博胡米尔·赫拉巴尔
+- 好兵帅克，by 雅洛斯拉夫·哈谢克
+- 圣经的故事，by 亨德里克・房龙
+- 👍👍 82 年生的金智英，by [韩] 赵南柱
+- 太古和其他的时间，by Olga Tokarczuk
+- 什锦拼盘，by 唐鲁孙
+- 太阳黑子，by 须一瓜
+- 给青年的十二封信，by 朱光潜
+- 一九八四，by George Orwell
+- 天年，by 何夕
+- 海奥华预言，by Michelle Desmarckett
+- 查拉图斯特拉如是说，by Friedrich Nietzsche
+- 永隔一江水，by 邓安庆
+- 我在未来等你，by 刘同
+- 那些忧伤的年轻人，by 许知远
+- 借我一生，by 余秋雨
+- 👍👍 新版文化苦旅，by 余秋雨
+- 局外人，by 加缪
+- 以眨眼干杯，by 东野圭吾
+- 一只特立独行的猪，by 王小波
+- 江湖，by 凡悲鲁
+- 亲爱的三毛，by 三毛
+- 醉步男，by 小林泰三
+- 看海的人，by 小林泰三
+- 👍👍 寂寞的游戏，by 袁哲生
+- 时间机器，by 赫伯特·乔治·威尔斯
+- 银河帝国：基地，by Isaac Asimov
+- 银河帝国：基地与帝国，by Isaac Asimov
+- 银河帝国：第二基地，by Isaac Asimov
+- 银河帝国：基地前奏，by Isaac Asimov
+- 银河帝国：迈向基地，by Isaac Asimov
+- 银河帝国：基地边缘，by Isaac Asimov
+- 银河帝国：基地与地球，by Isaac Asimov
+- 银河帝国：我，机器人，by Isaac Asimov
+- 银河帝国：钢穴，by Isaac Asimov
+- 银河帝国：裸阳，by Isaac Asimov
+- 银河帝国：曙光中的机器人，by Isaac Asimov
+- 银河帝国：机器人与帝国，by Isaac Asimov
+- 银河帝国：繁星若尘，by Isaac Asimov
+- 银河帝国：星空暗流，by Isaac Asimov
+- 银河帝国：苍穹一粟，by Isaac Asimov
+- 少数派报告(The Minority Report)，by Philip K. Dick
+- 莱根谭，by 洪应明
+- [天生有罪](/posts/trevor-noah-born-a-crime/) by 特雷弗·诺亚
+- 新版名：活过，爱过，写过；旧版名：人间采蜜记（自传），by 李银河
+- 爱你就像爱生命，by 王小波
+- 无人生还，by 阿加莎·克里斯蒂
+- [雪崩](/posts/neal-stephenson-snow-crash/)，by Neal Stephenson
+- [克拉拉与太阳](/posts/kazuo-shiguro-klara-and-the-sun/)，by 石黑一雄
+- 👍👍 挽救计划
 - 👍👍 房思琪的初恋乐园，by 林奕含
 - 👍👍 [献给阿尔吉侬的花束](/posts/flowers-for-algernon/)，by 丹尼尔·凯斯
-
-## 年度阅读计划
-
-✅
-
-选书标准：
-
-- 一年只能选择 10 本书阅读，思考并践行书中的见解；
-- 主题阅读书目不计算在内，因为主题阅读一定要阅读很多书籍和文章，有 10 本的限制太委屈了；
-- 技术书籍不算在内，也就是说阅读技术书籍数量不限；
-
-### 2022
-
-- 哲学的故事
-- 人性七论
-- 十三邀 3：“我们都在给大问题做注脚”
-- 以鸟兽之名
-- 人间好玩
-- 我生有涯愿无尽：梁漱溟自述文录
-- 寂寞的游戏
-- 少有人走的路
-- 高效能人士的七个习惯
-- 穷查理宝典
-- 思考快与慢
 
 ## 很好的资源
 
