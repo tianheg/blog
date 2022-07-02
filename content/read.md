@@ -399,6 +399,7 @@ meta = false
 - 👍👍 挽救计划
 - 👍👍 房思琪的初恋乐园，by 林奕含
 - 👍👍 [献给阿尔吉侬的花束](/posts/flowers-for-algernon/)，by 丹尼尔·凯斯
+- 赡养人类，by 刘慈欣
 
 ## 很好的资源
 
