@@ -60,9 +60,13 @@ title = "关于"
 - Email: me+at+tianheg.xyz
 - [新建 GitHub issue](https://github.com/tianheg/blog/issues/new)
 
+<!--
+
 ## 赞助
 
 - [爱发电](https://afdian.net/@tianheg)
 - [面包多](https://dun.mianbaoduo.com/@tianheg)
 - [PayPal](https://paypal.me/tianheg)
 - [Patreon](https://patreon.com/tianheg)
+
+-->
