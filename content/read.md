@@ -425,6 +425,7 @@ meta = false
 20. [全国图书馆参考咨询联盟](http://www.ucdrs.superlib.net/)
 21. [Library Genesis](https://libgen.is/) <https://libgen.rs/> <https://libgen.st/> <http://libgen.gs/>
 22. http://haodoo.net/ https://www.pdfdrive.com/ https://thepiratebay.org/index.html
+23. https://standardebooks.org/ebooks
 
 ### 外文书籍网站
 
