@@ -299,6 +299,7 @@ meta = false
 - [黑客与画家](/posts/paul-graham-hackers-and-painters/)，by Paul Graham
 - 你凭什么做好互联网：从技术思维到商业逻辑，by caoz（曹大）（正确决策）
 - 硅谷之火——人与计算机的未来，by 保罗·弗赖伯格、迈克尔·斯韦因
+- [只是为了好玩](/posts/just-for-fun/)，by Linus Torvalds
 
 ### 文学创作
 
@@ -396,15 +397,18 @@ meta = false
 - 无人生还，by 阿加莎·克里斯蒂
 - [雪崩](/posts/neal-stephenson-snow-crash/)，by Neal Stephenson
 - [克拉拉与太阳](/posts/kazuo-shiguro-klara-and-the-sun/)，by 石黑一雄
-- 👍👍 挽救计划
+- 👍👍 [挽救计划](/posts/project-hail-mary/)，by Andy Weir
 - 👍👍 房思琪的初恋乐园，by 林奕含
 - 👍👍 [献给阿尔吉侬的花束](/posts/flowers-for-algernon/)，by 丹尼尔·凯斯
 - 赡养人类，by 刘慈欣
+- [小偷家族](/posts/shoplifters/)，by 是枝裕和
+- [索拉里斯星](/posts/read-solaris/)，by Stanislaw Lem
+- 👍👍 [以鸟兽之名](/posts/book-in-the-name-of-birds-and-beasts/)，by 孙频
 
 ## 很好的资源
 
 1.  [中国哲学书电子化计划](https://ctext.org/zhs)
-2.  选择出版图书方法(包月服务)：微信读书(19)-&gt;亚马逊(12)
+2.  选择出版图书方法(包月服务)：微信读书(19)
 3.  [Best-Books.dev](https://www.best-books.dev/) - 一个收录各种优质程序书籍的网站
 4.  [All IT eBooks - Best Free IT eBooks Download](https://allitebook.xyz/)
 5.  [free-programming-books](https://ebookfoundation.github.io/free-programming-books/)
