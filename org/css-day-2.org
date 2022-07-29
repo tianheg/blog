@@ -1,0 +1,88 @@
+#+SETUPFILE: ./hugo_setup.org
+#+TITLE: CSS Day 2
+#+DATE: <2022-07-29 Fri 17:30>
+#+HUGO_TAGS: 技术 CSS
+
+今天主要用了动画 animation。想法来自 Twitter 上 @shuding_ 的分享[fn:1]。实际效果：
+
+#+BEGIN_EXPORT hugo
+<p class="codepen" data-height="381" data-default-tab="result" data-slug-hash="KKoyRaw" data-preview="true" data-editable="true" data-user="tianheg" style="height: 381px; box-sizing: border-box; display: flex; align-items: center; justify-content: center; border: 2px solid; margin: 1em 0; padding: 1em;">
+  <span>See the Pen <a href="https://codepen.io/tianheg/pen/KKoyRaw">
+  Fade-in animation that is not so boring</a> by tianheg (<a href="https://codepen.io/tianheg">@tianheg</a>)
+  on <a href="https://codepen.io">CodePen</a>.</span>
+</p>
+<script async src="https://cpwebassets.codepen.io/assets/embed/ei.js"></script>
+#+END_EXPORT
+
+介绍了两种图片动画的变化效果。
+
+* 笔记
+
+=height: 100vh= 和 =display: flex;align-items:center;= 搭配才能得到垂直居中的效果。
+
+最关键的部分在于怎么写好 keyframes，我写的还不行，对于 filter 的使用还不够熟练。还有对于选择分割点的时机问题。
+
+* 代码实现
+
+#+BEGIN_SRC html
+<div class="container">
+  <p>Boring Fade-in</p>
+  <img class="img-left" src="https://raw.githubusercontent.com/tianheg/blog/main/static/images/jungle-2.webp" alt="Star" width=400>
+</div>
+<div class="container">
+  <p>Not so Boring Fade-in</p>
+  <img class="img-right" src="https://raw.githubusercontent.com/tianheg/blog/main/static/images/jungle-2.webp" alt="Star" width=400>
+</div>
+#+END_SRC
+
+#+BEGIN_SRC css
+body {
+  background-color: #000;
+  color: #fff;
+  height: 100vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+.container {
+  text-align: center;
+  margin: 0 1rem;
+  .img-left {
+    animation-name: fastFadein;
+    animation-duration: 1.6s;
+    animation-iteration-count: infinite;
+  }
+  .img-right {
+    animation-name: slowFadein;
+    animation-duration: 1.6s;
+    animation-iteration-count: infinite;
+  }
+}
+
+@keyframes fastFadein {
+  0% {
+    opacity: 1;
+    filter: brightness(0) blur(0);
+  }
+  100% {
+    opacity: 1;
+    filter: brightness(1) blur(0);
+  }
+}
+@keyframes slowFadein {
+  0% {
+    opacity: 0;
+    filter: brightness(1) blur(3rem);
+  }
+  10% {
+    opacity: 1;
+    filter: brightness(2) blur(0.1rem);
+  }
+  100% {
+    opacity: 1;
+    filter: brightness(1) blur(0);
+  }
+}
+#+END_SRC
+
+[fn:1] https://twitter.com/shuding_/status/1552438750470340610
