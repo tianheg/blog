@@ -324,7 +324,7 @@ meta = false
 - 小窗幽记，by 陆绍珩
 - 二十首情诗和一首绝望的歌，by 巴勃罗・聂鲁达
 - 仓央嘉措诗传全集，by 闫晗
-- 👍👍[牧羊少年奇幻之旅](/posts/o-alquimista/)，by 保罗・柯艾略
+- 👍👍 [牧羊少年奇幻之旅](/posts/o-alquimista/)，by 保罗・柯艾略
 - [恍惚人间](/posts/huang-hu-ren-jian/) by 小考拉
 - 世界文学名著英汉对照全译精选，by 英语学习大书虫研究室等
 - 沙漠里的爱情，by 巴尔扎克（士兵与母豹的奇妙爱情）
@@ -372,7 +372,6 @@ meta = false
 - 亲爱的三毛，by 三毛
 - 醉步男，by 小林泰三
 - 看海的人，by 小林泰三
-- 👍👍 寂寞的游戏，by 袁哲生
 - 时间机器，by 赫伯特·乔治·威尔斯
 - 银河帝国：基地，by Isaac Asimov
 - 银河帝国：基地与帝国，by Isaac Asimov
@@ -404,6 +403,7 @@ meta = false
 - [小偷家族](/posts/shoplifters/)，by 是枝裕和
 - [索拉里斯星](/posts/read-solaris/)，by Stanislaw Lem
 - 👍👍 [以鸟兽之名](/posts/book-in-the-name-of-birds-and-beasts/)，by 孙频
+- 👍👍👍 [寂寞的游戏](/posts/book-the-lonely-game/)，by 袁哲生
 
 ## 很好的资源
 
