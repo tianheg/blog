@@ -6,7 +6,7 @@
 今天主要用了动画 animation。想法来自 Twitter 上 @shuding_ 的分享[fn:1]。实际效果：
 
 #+BEGIN_EXPORT hugo
-<p class="codepen" data-height="381" data-default-tab="result" data-slug-hash="KKoyRaw" data-preview="true" data-editable="true" data-user="tianheg" style="height: 381px; box-sizing: border-box; display: flex; align-items: center; justify-content: center; border: 2px solid; margin: 1em 0; padding: 1em;">
+<p class="codepen" data-height="537" data-default-tab="result" data-slug-hash="KKoyRaw" data-editable="true" data-user="tianheg" style="height: 537px; box-sizing: border-box; display: flex; align-items: center; justify-content: center; border: 2px solid; margin: 1em 0; padding: 1em;">
   <span>See the Pen <a href="https://codepen.io/tianheg/pen/KKoyRaw">
   Fade-in animation that is not so boring</a> by tianheg (<a href="https://codepen.io/tianheg">@tianheg</a>)
   on <a href="https://codepen.io">CodePen</a>.</span>
@@ -25,36 +25,80 @@
 * 代码实现
 
 #+BEGIN_SRC html
-<div class="container">
-  <p>Boring Fade-in</p>
-  <img class="img-left" src="https://raw.githubusercontent.com/tianheg/blog/main/static/images/jungle-2.webp" alt="Star" width=400>
-</div>
-<div class="container">
-  <p>Not so Boring Fade-in</p>
-  <img class="img-right" src="https://raw.githubusercontent.com/tianheg/blog/main/static/images/jungle-2.webp" alt="Star" width=400>
-</div>
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Day2 in CSS</title>
+    <link rel="stylesheet" href="style.css" />
+  </head>
+  <body>
+    <h2>
+      Inspired by
+      <a href="https://twitter.com/shuding_/status/1552438750470340610"
+        >@shuding_</a
+      >
+    </h2>
+    <div class="containers">
+      <div class="container">
+        <p>Boring Fade-in</p>
+        <img
+          class="img-left"
+          src="benjamin-voros-phIFdC6lA4E-unsplash.jpg"
+          alt="Star"
+          width="400"
+        />
+      </div>
+      <div class="container">
+        <p>Not so Boring Fade-in</p>
+        <img
+          class="img-right"
+          src="benjamin-voros-phIFdC6lA4E-unsplash.jpg"
+          alt="Star"
+          width="400"
+        />
+      </div>
+    </div>
+  </body>
+</html>
 #+END_SRC
 
 #+BEGIN_SRC css
 body {
   background-color: #000;
   color: #fff;
-  height: 100vh;
+}
+
+h2 {
+  text-align: center;
+}
+
+.containers {
   display: flex;
   justify-content: center;
   align-items: center;
 }
+@media (max-width: 600px) {
+  .containers {
+    flex-direction: column;
+  }
+}
+
 .container {
   text-align: center;
   margin: 0 1rem;
-  .img-left {
+}
+@media (prefers-reduced-motion) {
+  .container .img-left {
     animation-name: fastFadein;
-    animation-duration: 1.6s;
+    animation-duration: 3s;
     animation-iteration-count: infinite;
   }
-  .img-right {
+  .container .img-right {
     animation-name: slowFadein;
-    animation-duration: 1.6s;
+    animation-duration: 3s;
     animation-iteration-count: infinite;
   }
 }
@@ -72,15 +116,11 @@ body {
 @keyframes slowFadein {
   0% {
     opacity: 0;
-    filter: brightness(1) blur(3rem);
+    filter: brightness(1) blur(20px);
   }
-  10% {
+  15% {
     opacity: 1;
-    filter: brightness(2) blur(0.1rem);
-  }
-  100% {
-    opacity: 1;
-    filter: brightness(1) blur(0);
+    filter: brightness(2) blur(10px);
   }
 }
 #+END_SRC
