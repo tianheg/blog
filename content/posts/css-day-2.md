@@ -1,7 +1,7 @@
 +++
 title = "CSS Day 2"
 date = 2022-07-29T17:30:00+08:00
-lastmod = 2022-07-30T17:15:21+08:00
+lastmod = 2022-07-31T10:39:01+08:00
 tags = ["技术", "CSS"]
 draft = false
 +++
@@ -23,6 +23,14 @@ draft = false
 `height: 100vh` 和 `display: flex;align-items:center;` 搭配才能得到垂直居中的效果。
 
 最关键的部分在于怎么写好 keyframes，我写的还不行，对于 filter 的使用还不够熟练。还有对于选择分割点的时机问题。
+
+在手机上查看时，发现动画不起作用。猜测可能是 `prefers-reduced-motion` ，于是把它改成 `prefers-reduced-motion: no-preference` 。终于 work 了。
+
+找到 MDN 上关于 prefers-reduced-motion[^fn:2] 的页面：
+
+> The prefers-reduced-motion CSS media feature is used to detect if the user has requested that the system minimize the amount of non-essential motion it uses.
+
+了解到，将 prefers-reduced-motion 设置为 `reduce` 或者仅写 `prefers-reduced-motion` 都会使得浏览器减少/移除动画效果。
 
 
 ## 代码实现 {#代码实现}
@@ -93,7 +101,7 @@ h2 {
   text-align: center;
   margin: 0 1rem;
 }
-@media (prefers-reduced-motion) {
+@media (prefers-reduced-motion: no-preference) {
   .container .img-left {
     animation-name: fastFadein;
     animation-duration: 3s;
@@ -129,3 +137,4 @@ h2 {
 ```
 
 [^fn:1]: <https://twitter.com/shuding_/status/1552438750470340610>
+[^fn:2]: <https://developer.mozilla.org/en-US/docs/Web/CSS/@media/prefers-reduced-motion>

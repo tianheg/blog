@@ -22,6 +22,18 @@
 
 最关键的部分在于怎么写好 keyframes，我写的还不行，对于 filter 的使用还不够熟练。还有对于选择分割点的时机问题。
 
+在手机上查看时，发现动画不起作用。猜测可能是 =prefers-reduced-motion= ，于是把它改成 =prefers-reduced-motion: no-preference= 。终于 work 了。
+
+找到 MDN 上关于 prefers-reduced-motion[fn:2] 的页面：
+
+#+BEGIN_QUOTE
+The prefers-reduced-motion CSS media feature is used to detect if the user has requested that the system minimize the amount of non-essential motion it uses.
+#+END_QUOTE
+
+了解到，将 prefers-reduced-motion 设置为 =reduce= 或者仅写 =prefers-reduced-motion= 都会使得浏览器减少/移除动画效果。
+
+[fn:2] https://developer.mozilla.org/en-US/docs/Web/CSS/@media/prefers-reduced-motion
+
 * 代码实现
 
 #+BEGIN_SRC html
@@ -90,7 +102,7 @@ h2 {
   text-align: center;
   margin: 0 1rem;
 }
-@media (prefers-reduced-motion) {
+@media (prefers-reduced-motion: no-preference) {
   .container .img-left {
     animation-name: fastFadein;
     animation-duration: 3s;
