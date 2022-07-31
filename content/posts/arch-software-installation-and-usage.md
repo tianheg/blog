@@ -1,7 +1,7 @@
 +++
 title = "Arch 软件安装和用法"
 date = 2021-08-20T00:00:00+08:00
-lastmod = 2022-06-25T23:42:53+08:00
+lastmod = 2022-07-31T11:59:42+08:00
 tags = ["Arch Linux", "技术"]
 draft = false
 toc = true
@@ -582,6 +582,7 @@ yay -S rpi-imager
 | obs-studio                                      | 录屏软件                                                                                                                                                          |
 | pkgstats                                        | Submit a list of installed packages to the Arch Linux project                                                                                                     |
 | masterpdfeditor                                 | A complete solution for viewing, creating and editing PDF files                                                                                                   |
+| archmage(aur)                                   | converts CHM files to HTML, plain text and PDF                                                                                                                    |
 
 
 ### MongoDB {#mongodb}
