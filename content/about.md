@@ -61,8 +61,12 @@ title = "关于"
 
 ## 留言
 
-- Email: me+at+tianheg.xyz
-- [新建 GitHub issue](https://github.com/tianheg/blog/issues/new)
+- Email: `me@tianheg.xyz`（如果超过三天没有回复，试试 `yidajiabei@gmail.com`）
+- 任意选择一篇文章，写下你想说的即可。
+
+文章评论有两种：Disqus 和 Giscus，前者要能访问外网才能使用，后者要有 GitHub 账户才行。
+
+选择适合你的。
 
 <!--
 
