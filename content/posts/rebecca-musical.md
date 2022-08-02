@@ -1,0 +1,32 @@
++++
+title = "Rebecca"
+date = 2022-08-02T13:10:00+08:00
+lastmod = 2022-08-02T13:48:14+08:00
+tags = ["音乐剧"]
+draft = false
++++
+
+据维基百科[^fn:1]：
+
+> Rebecca is a German-language musical based on the 1938 novel of the same name by Daphne du Maurier. It was written by Michael Kunze (book and lyrics) and Sylvester Levay (music), the authors of the musicals Elisabeth, Mozart! and Marie Antoinette.
+
+Rebecca 是一部德语音乐剧，基于 Daphne du Maurier 于 1938 年写就的同名小说。书和歌词由 Michael Kunze 完成，音乐由 Sylvester Levay （他还是音乐剧 Elisabeth, Mozart! and Marie Antoinette 的作者）完成。
+
+此外，我不理解 Michael Kunze 写成了这本书（不是原著小说）是什么意思？于是，顺手点击了上文引用的维基页面中的 Book 那一项，出现一个解释[^fn:2]：
+
+> Since the 20th century, the "book musical" has been defined as a musical play where songs and dances are fully integrated into a well-made story with serious dramatic goals and which is able to evoke genuine emotions other than laughter.
+
+它的意思是：自 20 世纪以来，“书本音乐剧”一直被定义为一种音乐剧，在这种音乐剧中，歌舞完全融入了一个制作精良的故事，具有严肃的戏剧目的，能够唤起除笑声以外的真实情感。
+
+这部音乐剧讲述了，Maxim DeWinter 的妻子溺水身亡（真的是这样吗？），之后遇到他新的妻子 Ich，Maxim 向 Ich 求婚，他们度蜜月后回到 Manderley 的家中。但是，女管家 Mrs. Danvers 讨厌新来的女主人，希望死去的女主人 Rebecca 能够回来。
+
+Maxim 并不喜欢自己的第一任妻子 Rebecca，因为她当着他的面找情夫。其中一个还是 Rebecca 的表弟。Rebecca 美丽无比，男人趋之若鹜，而她当男人为玩物从不真心对待。最害怕的就是生病，然而该来的终究还是来了。她用化名让医生检查身体，她生病了，是癌症。于是，她设计陷害自己的丈夫 Maxim，让他人以为自己被丈夫谋杀。
+
+Mrs. Danvers 其实是 Rebecca 的知己，但最后她却发现自己也被 Rebecca 欺骗。于是，绝望中的 Mrs. Danvers 穿着 Rebecca 的衣服放火烧了 Manderley 庄园。
+
+---
+
+Mrs. Danvers 唱的这首《ich hör dich singen》很震撼。
+
+[^fn:1]: [Rebecca (musical) - Wikipedia](https://en.wikipedia.org/wiki/Rebecca_(musical))
+[^fn:2]: [Book musicals](https://en.wikipedia.org/wiki/Musical_theatre#Book_musicals)
