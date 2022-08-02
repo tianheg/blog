@@ -232,7 +232,7 @@ meta = false
 ### 软件开发 + 计算机科学
 
 - [HTML5 权威指南](/posts/definitive-guide-to-html5/)，by Adam Freeman
-- [DOM Scripting](/posts/dom-scripting/)
+- [DOM Scripting](/posts/dom-scripting/)，by Jeremy Keith，Jeffrey Sambells
 - [JavaScript 高级程序设计第 4 版](/posts/professional-javascript-for-web-developers/)，by Matt Frisbie
 - [深入 PHP 与 jQuery 开发](/posts/pro-php-and-jquery/)，by Jason Lengstorf
 - 图解 HTTP，by 上野宣
@@ -242,6 +242,7 @@ meta = false
 - 程序员修炼之道(第 2 版)(The Pragmatic Programmer: From Journeyman to Master)，by David Thomas, Andrew Hunt
 - 信息检索，by 黄如花
 - 构建之法，by 邹欣
+- The Zen of CSS Design: Visual Enlightenment for the Web，by Dave Shea，Molly E. Holzschlag
 
 ### 人物传记
 
