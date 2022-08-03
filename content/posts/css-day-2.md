@@ -1,7 +1,7 @@
 +++
 title = "CSS Day 2"
 date = 2022-07-29T17:30:00+08:00
-lastmod = 2022-07-31T10:39:01+08:00
+lastmod = 2022-08-03T15:38:57+08:00
 tags = ["技术", "CSS"]
 draft = false
 +++
@@ -31,6 +31,32 @@ draft = false
 > The prefers-reduced-motion CSS media feature is used to detect if the user has requested that the system minimize the amount of non-essential motion it uses.
 
 了解到，将 prefers-reduced-motion 设置为 `reduce` 或者仅写 `prefers-reduced-motion` 都会使得浏览器减少/移除动画效果。
+
+从 web.dev 的这篇《prefers-reduced-motion: Sometimes less movement is more》[^fn:3]可以将和动画有关的样式放到一个 CSS 文件 `animations.css` 里，然后这样设置：
+
+```html
+<link rel="stylesheet" href="animations.css" media="(prefers-reduced-motion: no-preference)">
+```
+
+一个 Demo： <https://prefers-reduced-motion.glitch.me/>
+
+如果想强制关闭动画，可以通过 [Stylus](https://add0n.com/stylus.html) 这样的插件扩展为所有网站插入以下样式，但 **风险自负** ！
+
+```css
+@media (prefers-reduced-motion: reduce) {
+  *, ::before, ::after {
+    animation-delay: -1ms !important;
+    animation-duration: 1ms !important;
+    animation-iteration-count: 1 !important;
+    background-attachment: initial !important;
+    scroll-behavior: auto !important;
+    transition-duration: 0s !important;
+    transition-delay: 0s !important;
+  }
+}
+```
+
+因为某些网站为了顺利加载会依赖于动画（某一步依赖于触发 [animationend](https://developer.mozilla.org/en-US/docs/Web/API/Element/animationend_event) 事件），更激进的 `animation: none !important;` 不起作用。即便是以上设置也不能保证所有网站都能屏蔽掉动画（这段代码无法屏蔽通过 Web Animation API 启动的动作）。
 
 
 ## 代码实现 {#代码实现}
@@ -91,6 +117,7 @@ h2 {
   justify-content: center;
   align-items: center;
 }
+
 @media (max-width: 600px) {
   .containers {
     flex-direction: column;
@@ -101,16 +128,26 @@ h2 {
   text-align: center;
   margin: 0 1rem;
 }
+
 @media (prefers-reduced-motion: no-preference) {
   .container .img-left {
     animation-name: fastFadein;
     animation-duration: 3s;
     animation-iteration-count: infinite;
   }
+
   .container .img-right {
     animation-name: slowFadein;
     animation-duration: 3s;
     animation-iteration-count: infinite;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+
+  .container .img-left,
+  .container .img-right {
+    animation: none;
   }
 }
 
@@ -119,16 +156,19 @@ h2 {
     opacity: 1;
     filter: brightness(0) blur(0);
   }
+
   100% {
     opacity: 1;
     filter: brightness(1) blur(0);
   }
 }
+
 @keyframes slowFadein {
   0% {
     opacity: 0;
     filter: brightness(1) blur(20px);
   }
+
   15% {
     opacity: 1;
     filter: brightness(2) blur(10px);
@@ -138,3 +178,4 @@ h2 {
 
 [^fn:1]: <https://twitter.com/shuding_/status/1552438750470340610>
 [^fn:2]: <https://developer.mozilla.org/en-US/docs/Web/CSS/@media/prefers-reduced-motion>
+[^fn:3]: <https://web.dev/prefers-reduced-motion/>
