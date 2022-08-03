@@ -1,7 +1,7 @@
 +++
 title = "如何考取中科院心理咨询师基础培训证书"
 date = 2021-06-12T00:00:00+08:00
-lastmod = 2022-08-03T09:43:21+08:00
+lastmod = 2022-08-03T09:50:35+08:00
 tags = ["备忘"]
 draft = false
 +++
@@ -38,6 +38,5 @@ draft = false
 
 **参考资料** ：
 
-1.  [如何考心理咨询师证？——知乎](https://zhuanlan.zhihu.com/p/344339445)
-2.  [中科院心理所心理咨询培训项目官网——报名考试查询服务系统](https://jcpx.psych.ac.cn/)
-3.  [中国心理科学信息中心](https://lib.psych.ac.cn/library/home)
+1.  [中科院心理所心理咨询培训项目官网——报名考试查询服务系统](https://jcpx.psych.ac.cn/)
+2.  [中国心理科学信息中心](https://lib.psych.ac.cn/library/home)
