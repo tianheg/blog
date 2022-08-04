@@ -28,6 +28,7 @@ meta = false
 
 ## 想读
 
+- Stop Reading the News: A Manifesto for a Happier, Calmer and Wiser Life，by Rolf Dobelli (Author), Caroline Waight (Translator)
 - 编码宝典
 - 沙丘
 - 万有引力之虹
@@ -417,7 +418,7 @@ meta = false
 7.  [O'Reilly Learning Platform FAQs](https://learning.acm.org/faq/oreilly-faqs)
 8.  [前端精读周刊](https://github.com/ascoders/weekly)
 9.  [Web-Security-Learning](https://chybeta.github.io/2017/08/19/Web-Security-Learning/)
-10. [Z-lib](https://z-lib.org/), https://zh.1lib.to/ , https://1lib.domains/
+10. [Z-lib](https://z-lib.org/), https://zh.1lib.to/ , https://1lib.domains/ , https://usa1lib.org/
 11. [虫部落](https://www.chongbuluo.com/) -&gt; 搜书
 12. [LoreFree ebook](https://ebook2.lorefree.com/)
 13. [走读派读书导航](http://www.zoudupai.com/)
