@@ -1,7 +1,10 @@
-#+SETUPFILE: ./hugo_setup.org
-#+TITLE: 大学的最后一节课
-#+DATE: <2021-12-02 Thu>
-#+HUGO_TAGS: 诗作
++++
+title = "大学的最后一节课"
+date = 2021-12-02T00:00:00+08:00
+lastmod = 2022-08-05T14:45:07+08:00
+tags = ["诗作"]
+draft = false
++++
 
 今天上大学的最后一堂课
 
