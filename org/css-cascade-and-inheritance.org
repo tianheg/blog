@@ -138,6 +138,10 @@ CSS 提供了五个通用属性值，用来控制 CSS 继承。每一个 CSS 属
 
 决定层叠优先级的三个要素：
 
+- Source order
+- Specificity
+- Importance
+
 1. Source order
 
 #+BEGIN_SRC css
@@ -194,7 +198,14 @@ h2 {
 
 *注意：通用选择器（ =*= ）、选择符（+, >, ~, ''）和某些特定选择器（:where()）不具备 specificity。*
 
+两个伪类 =:not()= 和 =:is()= 无法改变 specificity，但它们的参数能够改变。The specificity each contributes to the specificity algorithm is the specificity of the selector in parameter that has the greatest weight.(这句不理解)
 
+一些 specificity 计算的例子：
 
-3. Importance
-
+| Selector                                  | Identifiers | Classes | Elements | Total specificity |
+|-------------------------------------------+-------------+---------+----------+-------------------|
+| =h1=                                      |           0 |       0 |        1 |             0-0-1 |
+| =h1 + p::first-letter=                    |           0 |       0 |        3 |             0-0-3 |
+| ~li > a[href*="en-US"] > .inline-warning~ |           0 |       2 |        2 |             0-2-2 |
+| =#identifier=                             |           1 |       0 |        0 |             1-0-0 |
+| =button:not(#mainBtn, .cta)=              |           1 |       0 |        1 |             1-0-1 |
