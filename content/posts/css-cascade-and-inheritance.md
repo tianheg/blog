@@ -1,7 +1,7 @@
 +++
 title = "CSS 层叠与继承"
 date = 2022-08-11T15:02:00+08:00
-lastmod = 2022-08-14T11:34:11+08:00
+lastmod = 2022-08-14T22:58:21+08:00
 tags = ["技术", "CSS"]
 draft = false
 +++
@@ -149,7 +149,11 @@ CSS 提供了五个通用属性值，用来控制 CSS 继承。每一个 CSS 属
 
 决定层叠优先级的三个要素：
 
-1.  Source order
+-   Source order
+-   Specificity
+-   Importance
+
+-   Source order
 
 <!--listend-->
 
@@ -207,4 +211,14 @@ h2 {
 
 **注意：通用选择器（ `*` ）、选择符（+, &gt;, ~, ''）和某些特定选择器（:where()）不具备 specificity。**
 
-1.  Importance
+两个伪类 `:not()` 和 `:is()` 无法改变 specificity，但它们的参数能够改变。The specificity each contributes to the specificity algorithm is the specificity of the selector in parameter that has the greatest weight.(这句不理解)
+
+一些 specificity 计算的例子：
+
+| Selector                                  | Identifiers | Classes | Elements | Total specificity |
+|-------------------------------------------|-------------|---------|----------|-------------------|
+| `h1`                                      | 0           | 0       | 1        | 0-0-1             |
+| `h1 + p::first-letter`                    | 0           | 0       | 3        | 0-0-3             |
+| `li > a[href*="en-US"] > .inline-warning` | 0           | 2       | 2        | 0-2-2             |
+| `#identifier`                             | 1           | 0       | 0        | 1-0-0             |
+| `button:not(#mainBtn, .cta)`              | 1           | 0       | 1        | 1-0-1             |
