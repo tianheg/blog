@@ -1,0 +1,210 @@
++++
+title = "CSS 层叠与继承"
+date = 2022-08-11T15:02:00+08:00
+lastmod = 2022-08-14T11:34:11+08:00
+tags = ["技术", "CSS"]
+draft = false
++++
+
+本文为读 [Cascade and inheritance](https://developer.mozilla.org/en-US/docs/Learn/CSS/Building_blocks/Cascade_and_inheritance) 的笔记。
+
+着重理解 CSS 三个基础概念——cascade, specificity, inheritance。这三点控制 CSS 如何应用于 HTML，样式之间的冲突如何解决。
+
+
+## Conflicting rules {#conflicting-rules}
+
+CSS 的全称是 Cascading Style Sheets。当出现矛盾规则（两个不同的值应用到同一个选择器的同一个属性上）时，cascade, specificity 是解决这类问题的措施。
+
+
+### Cascade {#cascade}
+
+样式层叠意味着，原始样式、层叠的部分以及 CSS 规则的顺序是重要的。 **当两个规则来自相同的层叠层，并且有着相同的特异性，那么最后定义的那一个的样式会被用在 HTML 中。**
+
+举例：
+
+```css
+h1 {
+  color: red;
+}
+h1 {
+  color: blue;
+}
+```
+
+两个 style blocks 具有相同特异性，所以两者的顺序会决定哪一个的样式会被应用。根据前述规则，h1 最终的颜色会是蓝色。
+
+
+### Specificity {#specificity}
+
+特异性是浏览器使用的算法，用来决定将哪一个属性值应用到元素上。
+
+如果在多个样式块（有着不同选择器）中配置了相同属性的不同值。特异性决定哪一个属性值会被应用到元素上。特异性是一种方法——它能确定一个选择器有多特别。
+
+-   一个元素选择器的特异性最小，因为它会选择所有是该元素的元素。它的特异性权重最小。
+-   类选择器的权重提升一些，它只会选择具有某个类的元素，与元素选择器相比权重增大一些。
+
+举例：
+
+```css
+.main-heading {
+  color: red;
+}
+h1 {
+  color: blue;
+}
+```
+
+h1 元素的颜色是红色。因为 class 选择器的特异性权重更高，所以无视顺序问题。
+
+
+### Inheritance {#inheritance}
+
+什么是继承？
+
+一些为父元素设置的样式会由子元素继承，而另外一些样式（为父元素设置的）则不会被子元素继承。
+
+举例：
+
+```css
+body {
+  color: blue;
+}
+span {
+  color: black;
+}
+```
+
+```html
+<p>As the body has been set to have a color of blue this is inherited through the descendants.</p>
+<p>We can change the color by targeting the element with a selector, such as this <span>span</span>.</p>
+```
+
+这两段文字，除了 span 其余全是黑色。
+
+有些属性可继承，如 color, font-family；有些则不可以，如 width。
+
+如何查找？
+
+在每一个 CSS 属性的页面都有一个“Formal definition”。在那里可以找到当前属性是否可继承。
+
+
+## Understanding how the concepts work together {#understanding-how-the-concepts-work-together}
+
+通过 Firefox Developer Tools 可以很方便地查看、更改、调试，CSS 规则。
+
+
+## Understanding inheritance {#understanding-inheritance}
+
+```html
+<ul class="main">
+    <li>Item One</li>
+    <li>Item Two
+        <ul>
+            <li>2.1</li>
+            <li>2.2</li>
+        </ul>
+    </li>
+    <li>Item Three
+        <ul class="special">
+            <li>3.1
+                <ul>
+                    <li>3.1.1</li>
+                    <li>3.1.2</li>
+                </ul>
+            </li>
+            <li>3.2</li>
+        </ul>
+    </li>
+</ul>
+```
+
+```css
+.main {
+    color: rebeccapurple;
+    border: 2px solid #ccc;
+    padding: 1em;
+}
+
+.special {
+    color: black;
+    font-weight: bold;
+}
+```
+
+color 是可继承的。所以 `<li>` 继承了 .main 的样式；.special 的子元素变成了黑色。
+
+width、margin、padding、border 不可继承。
+
+
+### Controlling inheritance {#controlling-inheritance}
+
+CSS 提供了五个通用属性值，用来控制 CSS 继承。每一个 CSS 属性都适用。
+
+这五个属性值分别为：inherit, initial, revert, revert-layer, unset。
+
+通过快捷属性 all 能够一次性重置很多属性。
+
+
+### Understanding the cascade {#understanding-the-cascade}
+
+决定层叠优先级的三个要素：
+
+1.  Source order
+
+<!--listend-->
+
+```css
+p {
+  color: red;
+}
+p {
+  color: black;
+}
+```
+
+根据 Source order，两个 CSS block 内的 Specificity 权重是一致的。哪一个样式会被应用，取决于顺序，哪一个在后会被应用。因此，p 的颜色是黑色。
+
+1.  Specificity
+
+如果两个 Specificity 权重不一致，如下：
+
+```css
+.para {
+  color: red;
+}
+p {
+  color: black;
+}
+```
+
+只通过 Source order 确定 CSS 的样式选择就不可行了。由这段代码可得出结论： **类选择器比类选择器具有更大的权重** 。
+
+**注意：应用于 HTML 文本和组件的各 CSS block 的样式并非全被覆盖，只有那些在多个 CSS block 声明的属性会被覆盖。** 这样做的好处是避免重复设置样式。通常的实践是：先定义通用样式，然后再根据各组件需要修改部分。
+
+```css
+h2 {
+  font-size: 2em;
+  color: #000;
+  font-family: Georgia, "Times New Roman", Times, serif;
+}
+
+.small {
+  font-size: 1em;
+}
+
+.bright {
+  color: rebeccapurple;
+}
+```
+
+后两个类同样是应用在 h2 元素上。
+
+一个选择器的 specificity 数目由三个值确定：ID、CLASS、ELEMENT。
+
+-   Identifiers: 在整个选择器中，出现一个 id 选择器加 1
+-   Classes: 在整个选择器中，出现一个类、属性或伪类选择器加 1
+-   Elements: 在整个选择器中，出现一个元素或伪元素选择器加 1
+
+**注意：通用选择器（ `*` ）、选择符（+, &gt;, ~, ''）和某些特定选择器（:where()）不具备 specificity。**
+
+1.  Importance
