@@ -1,4 +1,4 @@
-<nav class="nav umami--click--navbar">
+<nav class="nav">
     <ul class="menu" id="menu">
         {{ if .Site.Params.activeInSection }}
             {{ .Scratch.Set "currentPage" (.Site.GetPage (printf `/%s` .Section)) }}
@@ -42,7 +42,7 @@
                         {{- $iconName := (string .Post) -}}
                         {{- partial "utils/icon.html" (dict "$" $ "name" $iconName "class" .Identifier) -}}
                         {{- with .Name -}}
-                            <span class="menu-item-name">{{ . }}</span>
+                            <span class="menu-item-name umami--click--navbar">{{ . }}</span>
                         {{- end -}}
                     </a>
                 </li>
