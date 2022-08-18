@@ -1,7 +1,7 @@
 +++
 title = "剩余价值SurplusValue：【051】瘟疫、语言和具体的人：与历史学家罗新的聊天"
 date = 2022-08-15T19:48:00+08:00
-lastmod = 2022-08-18T12:15:52+08:00
+lastmod = 2022-08-18T12:21:50+08:00
 tags = ["他山之石"]
 draft = false
 +++
@@ -12,8 +12,6 @@ draft = false
   <audio controls src="https://r2.tianheg.workers.dev/surplus-value-051.mp3" style="width: 100%;">Your browser does not support the <code>audio</code> element.</audio>
   <figcaption style="color: var(--color-contrast-medium); text-align: center; font-size: 90%;">剩余价值SurplusValue：【051】瘟疫、语言和具体的人：与历史学家罗新的聊天</figcaption>
 </figure>
-
-<a style="word-break: keep-all;" href="https://r2.tianheg.workers.dev/surplus-value-051.mp3" download="剩余价值SurplusValue：【051】瘟疫、语言和具体的人：与历史学家罗新的聊天.mp3">音频下载</a>
 
 罗新老师的很多话语，放到 2022 年也没有过时。疫情究竟会持续多长时间？从 2020 年算起，这真的很容易计算，到今年已经过去两年。
 
