@@ -1,4 +1,4 @@
-<head{{ if .Site.Params.openGraph }} prefix="og: http://ogp.me/ns# article: http://ogp.me/ns/article#"{{ end }}>
+<head{{ if .Site.Params.openGraph }} prefix="og: https://ogp.me/ns# article: https://ogp.me/ns/article#"{{ end }}>
     <meta charset="UTF-8" />
 
     {{ hugo.Generator }}
@@ -53,7 +53,7 @@
     {{- $msApplicationTileColor := .Site.Params.msApplicationTileColor -}}
     {{- $msApplicationTileImage := partial "utils/relative-url.html" (dict "$" . "filename" "icons/mstile-150x150.png") -}}
     {{- $manifest := "manifest.json" -}}
-    <link rel="shortcut icon" href="{{ $favicon | relURL }}" type="image/x-icon" />
+    <link rel="icon" href="{{ $favicon | relURL }}" type="image/x-icon" />
     <link rel="mask-icon" href="{{ $safariMaskIcon | relURL }}" color="{{ $safariMaskColor }}" />
     <link rel="apple-touch-icon" sizes="180x180" href="{{ $appleTouchIcon | relURL }}" />
     <meta name="apple-mobile-web-app-capable" content="yes" />
