@@ -28,6 +28,7 @@ meta = false
 
 ## 想读
 
+- 小尼古拉，by 勒内-戈西尼 文 / 让-雅克·桑贝 图
 - Stop Reading the News: A Manifesto for a Happier, Calmer and Wiser Life，by Rolf Dobelli (Author), Caroline Waight (Translator)
 - 编码宝典
 - 沙丘

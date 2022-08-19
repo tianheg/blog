@@ -6,25 +6,23 @@ meta = false
 
 ## 想看
 
-1.  [双层公寓](https://www.bilibili.com/video/BV1yJ411P7bD)
-2.  那山那人那狗, 1999
-3.  The Shape of Water 水形物语,2017
-4.  Malèna 西西里的美丽传说,2000
-5.  Anna 安娜,2019
-6.  Meet Joe Black 第六感生死缘,1998
-7.  The Devil Wears Prada 穿普拉达的女王,2006
-8.  Pulp Fiction 低俗小说,1994
-9.  Murder on the Orient Express 东方快车谋杀案,2017
-10. Bruce Almighty 冒牌天神,2003
-11. Hello！树先生,2011
-12. Pride &amp; Prejudice 傲慢与偏见,2005
-13. Scent of a Women 闻香识女人,1992
-14. Friends S1 - S10 老友记
-15. Isle of Dogs 犬之岛,2018
-16. 菊次郎の夏,1999
-17. About Time,2013
-18. 加勒比海盗系列
-19. 第十一回，by 陈建斌
+- 巴黎淘气帮 Le petit Nicolas，2009
+- [双层公寓](https://www.bilibili.com/video/BV1yJ411P7bD)
+- 那山那人那狗, 1999
+- Malèna 西西里的美丽传说,2000
+- Anna 安娜,2019
+- Meet Joe Black 第六感生死缘,1998
+- The Devil Wears Prada 穿普拉达的女王,2006
+- Pulp Fiction 低俗小说,1994
+- Murder on the Orient Express 东方快车谋杀案,2017
+- Bruce Almighty 冒牌天神,2003
+- Pride &amp; Prejudice 傲慢与偏见,2005
+- Scent of a Women 闻香识女人,1992
+- Isle of Dogs 犬之岛,2018
+- 菊次郎の夏,1999
+- About Time,2013
+- 加勒比海盗系列
+- 第十一回，by 陈建斌
 
 ## 喜欢的演员
 
