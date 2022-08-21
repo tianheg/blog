@@ -83,7 +83,7 @@ title = "关于"
 ## 留言
 
 - Email: `me@tianheg.xyz`（如果超过三天没有回复，试试 `yidajiabei@gmail.com`）
-- 任意选择一篇文章，写下你想说的即可。
+- 在本页 / 任意选择一篇文章，写下你想说的即可。
 
 文章评论有两种：Disqus 和 Giscus，前者要能访问外网才能使用，后者要有 GitHub 账户才行。
 
@@ -99,3 +99,53 @@ title = "关于"
 - [Patreon](https://patreon.com/tianheg)
 
 -->
+
+<section class="comments">
+  <div class="tabs">
+    <input name="tabs" type="radio" id="tab-1" checked class="input" />
+    <label for="tab-1" class="label">Disqus</label>
+    <div class="panel">
+      <div id="disqus_thread"></div>
+      <script data-src="//tianheg.disqus.com/embed.js" async></script>
+    </div>
+    <input name="tabs" type="radio" id="tab-2" class="input" />
+    <label for="tab-2" class="label">Giscus</label>
+    <div class="panel">
+      <script
+        src="https://giscus.app/client.js"
+        data-repo="tianheg/blog"
+        data-repo-id="MDEwOlJlcG9zaXRvcnkyNzY5Mjk1OTM="
+        data-category="Comments"
+        data-category-id="DIC_kwDOEIGcOc4COv8X"
+        data-mapping="pathname"
+        data-reactions-enabled="1"
+        data-emit-metadata="0"
+        data-theme="light"
+        data-lang="zh-CN"
+        data-loading="lazy"
+        crossorigin="anonymous"
+        async
+      ></script>
+    </div>
+    <input name="tabs" type="radio" id="tab-3" class="input" />
+    <label for="tab-3" class="label">Preferences</label>
+    <div class="panel">
+      <p class="title">Layout of comment panels</p>
+      <input name="layout" type="radio" id="layout-1" checked />
+      <label for="layout-1"
+        >Tabbed (wide screen) / Stacked (small screen)</label
+      >
+      <br />
+      <input name="layout" type="radio" id="layout-2" />
+      <label for="layout-2">Full display</label>
+    </div>
+  </div>
+  <script src="https://cdn.jsdelivr.net/npm/@xiee/utils/js/custom-disqus.min.js" defer></script>
+  <!-- ><script src="/js/custom-disqus.js" defer></script> -->
+  <noscript
+    >Please enable JavaScript to view the
+    <a href="https://disqus.com/?ref_noscript"
+      >comments powered by Disqus.</a
+    ></noscript
+  >
+</section>
