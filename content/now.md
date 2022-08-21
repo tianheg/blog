@@ -5,7 +5,7 @@ title = '我现在在做什么'
 meta = false
 +++
 
-更新于 August 21st, 2022, from 杭州
+更新于 2022 年 8 月 21 日，from 杭州
 
 ## 技术
 
