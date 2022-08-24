@@ -1,0 +1,91 @@
++++
+title = "解决一个不同寻常的 Wifi 问题(2020)"
+date = 2022-08-24T13:23:00+08:00
+lastmod = 2022-08-24T14:55:08+08:00
+tags = ["技术", "Wifi"]
+draft = false
++++
+
+<https://blog.ando.fyi/posts/diagnosing-an-unsual-wifi-issue/>
+
+这个问题很独特，作者排查问题的经过很是曲折，如果是我可能就放弃了（继续解决也有可能）。
+
+
+## TL; DR {#tl-dr}
+
+Qt5 仅仅通过运行 MediBang Paint Pro 就让作者的 Wifi 系统范围瘫痪长达七八个月。
+
+作者没有想到一个 Wifi 上的问题，竟然和 Qt 这样一个跨平台软件开发框架有关。
+
+
+## What? {#what}
+
+去年晚些时候，作者的电脑经历了一些不同寻常的断续的连接问题。通常，我的连接稳定且维持在平均延迟；然而，在一周（看似）随机的时间，作者开始遇到突然的每几秒出现的 2000ms+ 的延迟峰值。
+
+这使得全部的音视频通讯软件不可用，大多数在线游戏不能玩。
+
+这个问题似乎与作者从华盛顿州到南卡罗来纳州的越野旅行有关。因此，有太多的因素，很容易查明问题。然而，由于它主要只影响游戏和音频/视频通话，作者没有把太多的时间放在它上面。
+
+在过去的几个月里，作者试图弄明白为什么会发生这样的事情，但运气一直不好，直到今天才有所改观。
+
+
+## Why? {#why}
+
+最初，关于这个问题唯一清楚的是，它仅限于作者的台式电脑。笔记本电脑和其他连接到 Wifi 的设备没有这个问题，即使放置在与桌面完全相同的位置。
+
+首先，作者在亚马逊上购买了一个新的、评价很高的 Wifi 适配器。这并没有解决问题。不过，它确实附带了一个免费的 64GB 闪存驱动器，以换取好评。
+
+后来，(由于不相关的原因)作者组装了一台全新的台式电脑，除了新的 Wifi 适配器之外，没有使用旧的任何东西。这包括新安装的 Windows10。
+
+太棒了，这台新电脑一点问题都没有！作者曾经怀疑 Ta 的旧主板的 USB 端口可能已经损坏在移动到 SC，所以这一定是情况。现在一切都好了，对吧？
+
+> No. Everything is not good now.
+
+几周后，这个问题突然也开始在新电脑上发生，作者不知道会是什么原因。
+作者尝试使用 Ta 拥有的多个不同的 Wifi 适配器。还试着改变 Wifi 频道，因为它似乎与 Ta 的邻居重叠了。
+
+试着关闭 Windows 更新交付优化（p2p 更新共享）。在关闭这个功能并重新启动后，问题似乎得到了解决，但后来又重新出现了。
+
+有一次，Wifi 问题甚至让作者的一个兄弟非常恼火，由于 Skype 电话掉线，Ta兄弟在亚马逊上给 Ta 买了另一个（稍微不那么简陋的）Wifi 适配器。在安装了Realtek 驱动程序并重新启动后，这个问题似乎暂时得到了解决，但随后又出现了。
+
+> Nothing seemed to work.
+
+今天，作为解决这个问题的最后一搏，作者:
+
+-   关掉了房间里的电风扇
+-   拔掉了无线 Wacom 绘图平板电脑的 USB 接口
+-   关闭了 Firefox
+-   关闭了 MediBang Paint Pro
+
+**问题不再出现。**
+
+作者立刻怀疑是无线绘图平板电脑或电风扇的干扰，所以又试了一次，但都不是原因。
+
+Ta 无法想象一个网页浏览器或绘图应用程序怎么会导致这种情况，但 Ta 还是尝试了。
+
+首先 Ta 运行 Firefox，在不同的网站上打开多个标签页，然后等待……
+
+什么都没发生
+
+然后 Ta 运行了 MediBang Paint Pro。
+
+结果发现——MediBang Paint Pro 是问题产生的原因。
+
+
+## Why!? {#why}
+
+为什么一个数字画图软件，会导致无线网络的峰值提升？
+
+事实证明，已经有很多人抱怨过 MBPP 这个问题。
+
+当网络延迟增大时，MBPP 开始查询所有网络接口的注册表项。
+
+通过调试找到 qt5network。
+
+令人惊讶的是，不需要更多的调试，谷歌搜索“ `q5network ping issue` “会找到 QTBUG-40332（我尝试过没有找到）。
+
+> If I understand correctly, any Qt5 (&lt;5.14) application using QNetworkAccessManager will check for wifi interface changes every 10 seconds for the purpose of bearer management, causing massive lag spikes and/or packet drops entirely. Even if QNetworkAccessManager is instantiated internally for something simple, like an HTTP request.
+>
+> I suppose the workaround is simple enough, set the environment variable QT_BEARER_POLL_TIMEOUT to -1.
+>
+> I just wish I knew that around 8 months ago.
