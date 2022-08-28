@@ -5,13 +5,16 @@ title = '我现在在做什么'
 meta = false
 +++
 
-更新于 2022 年 8 月 21 日，from 杭州（[页面更新历史](https://github.com/tianheg/blog/commits/main/content/now.md)）
+更新于 2022 年 8 月 28 日，from 杭州（[页面更新历史](https://github.com/tianheg/blog/commits/main/content/now.md)）
 
 ## 技术
 
 在跟着 [MDN 的 Learn web development](https://developer.mozilla.org/en-US/docs/Learn) 学习 Web 开发基础知识，我想在 Web 方向上走得更远。
 
 曾经我一直对数据结构和算法，不那么感兴趣，不知道它的作用，学习过几次总是半途而废。这次我不想再这样了，我想让自己足够熟悉它们，为下一步打下基础。
+
+- 阅读并记笔记《算法设计手册》
+- LeetCode 练习
 
 ## 生活
 
