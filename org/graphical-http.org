@@ -7,39 +7,27 @@
 
 文档中图片来自微信读书，版权归发行方所有，本人仅学习使用。
 
-** Terminology
-   :PROPERTIES:
-   :CUSTOM_ID: terminology
-   :END:
+* Terminology
+
 TCP/IP 协议族：HTTP
 
-*协议*（procotol）：不同硬件、操作系统之间的通信规则。
+*协议* （procotol）：不同硬件、操作系统之间的通信规则。
 
-*TCP/IP*：与互联网相关联的协议集合
+*TCP/IP* ：与互联网相关联的协议集合
 
-*DNS*（Domain Name System）：域名系统，提供域名到 IP
+*DNS* （Domain Name System）：域名系统，提供域名到 IP
 地址之间的解析服务。
 
-*Client*（客户端）：请求访问资源的一端
+*Client* （客户端）：请求访问资源的一端
 
-*Server*（服务端）：提供响应资源的一端
+*Server* （服务端）：提供响应资源的一端
 
-** 了解 Web 及网络基础
-   :PROPERTIES:
-   :CUSTOM_ID: 了解-web-及网络基础
-   :END:
-*** 使用 HTTP 协议访问 Web
-    :PROPERTIES:
-    :CUSTOM_ID: 使用-http-协议访问-web
-    :END:
-Web 使用一种名为 HTTP（HyperText Transfer
-Protocol，超文本转移协议）的协议作为规范，完成从客户端到服务器等一系列运作流程。协议是指规则的约定。Web
+* 了解 Web 及网络基础
+** 使用 HTTP 协议访问 Web
+Web 使用一种名为 HTTP（HyperText Transfer Protocol，超文本转移协议）的协议作为规范，完成从客户端到服务器等一系列运作流程。协议是指规则的约定。Web
 是建立在 HTTP 协议上通信的。
 
-*** HTTP 的诞生
-    :PROPERTIES:
-    :CUSTOM_ID: http-的诞生
-    :END:
+** HTTP 的诞生
 1989 年，CERN（欧洲核子研究组织）的 Tim Berners-Lee
 提出了一种能让远隔两地的研究者们共享知识的设想------借助多文档之间相互关联形成的超文本（HyperText），连成可相互参阅的
 WWW（World Wide Web, 万维网）。
@@ -64,10 +52,7 @@ WWW 首次使用是称呼具备 Web
 | 2015                                           | HTTP/2                             |
 | 2020(draft)                                    | HTTP/3                             |
 
-*** 网络基础 TCP/IP
-    :PROPERTIES:
-    :CUSTOM_ID: 网络基础-tcpip
-    :END:
+** 网络基础 TCP/IP
 通常使用的网络（包括互联网）是在 TCP/IP 协议族的基础上运作的。而 HTTP
 属于它内部的一个子集。
 
@@ -77,8 +62,9 @@ WWW 首次使用是称呼具备 Web
 
 计算机与网络设备要相互通信，双方就必须基于相同的方法。不同的硬件、操作系统之间的通信，所有的这一切都需要一种规则，而这种规则被称为*协议*（protocol）。
 
-#+caption: TCP/IP 是互联网相关的各类协议族的总称
-[[https://cdn.jsdelivr.net/gh/tianheg/static@main/img/图解HTTP0.jpeg]]
+#+BEGIN_EXPORT hugo
+![TCP/IP 是互联网相关的各类协议族的总称](/images/图解HTTP0.jpeg "TCP/IP 是互联网相关的各类协议族的总称")
+#+END_EXPORT
 
 一、TCP/IP 的分层管理
 
@@ -112,20 +98,19 @@ Card，网络适配器，即网卡），以及光纤等物理可见部分（还�
 
 二、TCP/IP 通信传输流
 
-#+caption: TCP/IP 通信传输流
-[[https://cdn.jsdelivr.net/gh/tianheg/static@main/img/图解HTTP1.jpeg]]
+#+BEGIN_EXPORT hugo
+![TCP/IP 通信传输流](/images/图解HTTP1.jpeg "TCP/IP 通信传输流")
+#+END_EXPORT
 
 每一层利用的协议：应用层（HTTP）、传输层（TCP）、网络层（IP）、链路层
 
-#+caption: 封装过程
-[[https://cdn.jsdelivr.net/gh/tianheg/static@main/img/图解HTTP2.jpeg]]
+#+BEGIN_EXPORT hugo
+![封装过程](/images/图解HTTP2.jpeg "封装过程")
+#+END_EXPORT
 
 这种把数据信息包装起来的做法称为封装（encapsulate）。
 
-*** 与 HTTP 关系密切的协议 : IP、TCP 和 DNS
-    :PROPERTIES:
-    :CUSTOM_ID: 与-http-关系密切的协议-iptcp-和-dns
-    :END:
+** 与 HTTP 关系密切的协议 : IP、TCP 和 DNS
 一、负责传输的 IP 协议
 
 按层次分，IP（Internet Protocol）网际协议位于网络层。IP
@@ -147,8 +132,9 @@ ARP 协议通过 MAC 地址搜索中转目标。
 
 中转过程中的路由选择（routing）。
 
-#+caption: 路由选择机制
-[[https://cdn.jsdelivr.net/gh/tianheg/static@main/img/图解HTTP3.jpeg]]
+#+BEGIN_EXPORT hugo
+![路由选择机制](/images/图解HTTP3.jpeg "路由选择机制")
+#+END_EXPORT
 
 二、确保可靠性的 TCP 协议
 
@@ -173,26 +159,20 @@ SYN/ACK 标志的数据包以示传达确认信息。最后，发送端再回传
 - Post <--SYN/ACK Get
 - Post -->ACK Get
 
-#+caption: three-way handshaking
-[[https://cdn.jsdelivr.net/gh/tianheg/static@main/img/图解HTTP4-three-way-handshaking.svg]]
+#+BEGIN_EXPORT hugo
+![three-way handshaking](/images/图解HTTP4-three-way-handshaking.svg "three-way handshaking")
+#+END_EXPORT
 
-*** 负责域名解析的 DNS 服务
-    :PROPERTIES:
-    :CUSTOM_ID: 负责域名解析的-dns-服务
-    :END:
+** 负责域名解析的 DNS 服务
 DNS 服务是为了让人类更容易记住计算机在网络中的位置。
 
-*** 各种协议与 HTTP 协议的关系
-    :PROPERTIES:
-    :CUSTOM_ID: 各种协议与-http-协议的关系
-    :END:
-#+caption: 各种协议与 HTTP 协议的关系
-[[https://cdn.jsdelivr.net/gh/tianheg/static@main/img/图解HTTP5-protocols.svg]]
+** 各种协议与 HTTP 协议的关系
 
-*** URI 和 URL
-    :PROPERTIES:
-    :CUSTOM_ID: uri-和-url
-    :END:
+#+BEGIN_EXPORT hugo
+![各种协议与 HTTP 协议的关系](/images/图解HTTP5-protocols.svg "各种协议与 HTTP 协议的关系")
+#+END_EXPORT
+
+** URI 和 URL
 URI（统一资源标识符）与 URL（统一资源定位符）：Uniform Resource
 Identifier 与 Uniform Resource Locator。
 
@@ -219,13 +199,11 @@ URI 用字符串标识某一互联网资源，而 URL
 
 二、URI 格式
 
-#+caption: 绝对 URI
-[[https://cdn.jsdelivr.net/gh/tianheg/static@main/img/图解HTTP6-绝对URI.svg]]
+#+BEGIN_EXPORT hugo
+![绝对 URI](/images/图解HTTP6-绝对URI.svg "绝对 URI")
+#+END_EXPORT
 
-*** 并不是所有的应用程序都符合 RFC
-    :PROPERTIES:
-    :CUSTOM_ID: 并不是所有的应用程序都符合-rfc
-    :END:
+** 并不是所有的应用程序都符合 RFC
 有一些用来制定 HTTP 协议技术标准的文档，它们被称为 RFC（Request for
 Comments，征求修正意见书）。
 
@@ -236,23 +214,14 @@ RFC 是互联网的设计文档，如果不按照 RFC
 
 本书以后的 HTTP 协议内容，除去部分例外外，基本上都以 RFC 的标准为准。
 
-** 简单的 HTTP 协议
-   :PROPERTIES:
-   :CUSTOM_ID: 简单的-http-协议
-   :END:
+* 简单的 HTTP 协议
 主要使用 HTTP/1.1 版本。
 
-*** HTTP 协议用于客户端和服务器端之间的通信
-    :PROPERTIES:
-    :CUSTOM_ID: http-协议用于客户端和服务器端之间的通信
-    :END:
+** HTTP 协议用于客户端和服务器端之间的通信
 客户端和服务端的角色并不固定，但在具体通信线路中，资源传输方向是确定的。HTTP
 协议能够明确区分哪端是客户端，哪端是服务端。
 
-*** 通过请求和响应的交换达成通信
-    :PROPERTIES:
-    :CUSTOM_ID: 通过请求和响应的交换达成通信
-    :END:
+** 通过请求和响应的交换达成通信
 通信请求由客户端发出，然后服务端才响应。服务端在没有接收到请求之前不会发送响应。
 
 #+begin_example
@@ -281,10 +250,7 @@ RFC 是互联网的设计文档，如果不按照 RFC
   URI、协议版本、可选的请求首部字段和内容实体构成。响应报文由协议版本、状态码、原因短语、可选的响应首部字段以及实体主体构成。
 #+end_quote
 
-*** HTTP 是不保存状态的协议
-    :PROPERTIES:
-    :CUSTOM_ID: http-是不保存状态的协议
-    :END:
+** HTTP 是不保存状态的协议
 HTTP 是无状态（stateless）协议------HTTP
 协议对于发送过的请求或响应都不做持久化处理。
 
@@ -293,10 +259,7 @@ HTTP 是无状态（stateless）协议------HTTP
 
 于是，Cookie 技术便是为了解决这一问题而诞生的。
 
-*** 请求 URI 定位资源
-    :PROPERTIES:
-    :CUSTOM_ID: 请求-uri-定位资源
-    :END:
+** 请求 URI 定位资源
 #+begin_example
   GET https://job.yidajiabei.xyz/#/ HTTP/3
 
@@ -307,21 +270,20 @@ HTTP 是无状态（stateless）协议------HTTP
   OPTIONS * HTTP/1.1
 #+end_example
 
-*** HTTP/1.1 中的可用方法
-    :PROPERTIES:
-    :CUSTOM_ID: http1.1-中的可用方法
-    :END:
+** HTTP/1.1 中的可用方法
 一、GET 获取资源
 
 GET 方法用于请求已被 URI 识别的资源。
 
-#+caption: GET
-[[https://cdn.jsdelivr.net/gh/tianheg/static@main/img/图解HTTP7-GET.svg]]
+#+BEGIN_EXPORT hugo
+![GET](/images/图解HTTP7-GET.svg "GET")
+#+END_EXPORT
 
 二、POST 传输实体主体
 
-#+caption: POST
-[[https://cdn.jsdelivr.net/gh/tianheg/static@main/img/图解HTTP8-POST.svg]]
+#+BEGIN_EXPORT hugo
+![POST](/images/图解HTTP8-POST.svg "POST")
+#+END_EXPORT
 
 三、PUT 传输文件
 
@@ -336,8 +298,9 @@ Web 网站不使用该方法。
 2. 架构设计采用 REST（Representational State
    Transfer，表征状态转移）标准
 
-#+caption: PUT
-[[https://cdn.jsdelivr.net/gh/tianheg/static@main/img/图解HTTP9-PUT.svg]]
+#+BEGIN_EXPORT hugo
+![PUT](/images/图解HTTP9-PUT.svg "PUT")
+#+END_EXPORT
 
 #+begin_quote
   （PUT 的）响应：请求执行成功，但无数据返回
@@ -348,8 +311,9 @@ Web 网站不使用该方法。
 HEAD 和 GET 一样，只是不返回报文主体部分。用于确认 URI
 的有效性及资源更新的日期时间等。
 
-#+caption: HEAD
-[[https://cdn.jsdelivr.net/gh/tianheg/static@main/img/图解HTTP10-HEAD.svg]]
+#+BEGIN_EXPORT hugo
+![HEAD](/images/图解HTTP10-HEAD.svg "HEAD")
+#+END_EXPORT
 
 五、DELETE 删除文件（类比 PUT）
 
@@ -391,22 +355,17 @@ protocol）进行 TCP 通信。主要使用 SSL（Secure Sockets
 Layer，安全套接层）和 TLS（Transport Layer
 Security,传输层安全）协议吧通信内容加密后经网络隧道传输。
 
-*** 使用方法下达命令
-    :PROPERTIES:
-    :CUSTOM_ID: 使用方法下达命令
-    :END:
+** 使用方法下达命令
 通过方法向请求 URI 指定的资源发送请求报文。
 
 一下列出 HTTP/1.0 和 HTTP/1.1
 支持的方法。要注意：方法名区分大小写，注意要用大写字母。
 
-#+caption: HTTP/1.0 HTTP/1.1
-[[https://cdn.jsdelivr.net/gh/tianheg/static@main/img/图解HTTP11-http1-http1.1.jpeg]]
+#+BEGIN_EXPORT hugo
+![HTTP/1.0 HTTP/1.1](/images/图解HTTP11-http1-http1.1.jpeg "HTTP/1.0 HTTP/1.1")
+#+END_EXPORT
 
-*** 持久连接节省通信量
-    :PROPERTIES:
-    :CUSTOM_ID: 持久连接节省通信量
-    :END:
+** 持久连接节省通信量
 如果保证持久连接？
 
 在 HTTP/1.1 和部分的 HTTP/1.0 中提出了持久连接（HTTP Persistent
@@ -426,8 +385,6 @@ Connections，也称为 HTTP keep-alive 或 HTTP connection reuse）的方法。
 
 管线化让多个请求的发送成为现实。
 
-*** （重要）使用 Cookie 的状态管理
-    :PROPERTIES:
-    :CUSTOM_ID: 重要使用-cookie-的状态管理
-    :END:
+** （重要）使用 Cookie 的状态管理
+
 Cookie 技术通过在请求和响应报文中写入 Cookie 信息来控制客户端的状态。

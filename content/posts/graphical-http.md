@@ -1,7 +1,7 @@
 +++
 title = "图解 HTTP"
 date = 2021-10-01T00:00:00+08:00
-lastmod = 2022-06-19T23:09:11+08:00
+lastmod = 2022-08-29T09:45:10+08:00
 tags = ["技术", "阅读"]
 draft = false
 +++
@@ -15,16 +15,16 @@ draft = false
 
 TCP/IP 协议族：HTTP
 
-\*协议\*（procotol）：不同硬件、操作系统之间的通信规则。
+**协议** （procotol）：不同硬件、操作系统之间的通信规则。
 
-\*TCP/IP\*：与互联网相关联的协议集合
+**TCP/IP** ：与互联网相关联的协议集合
 
-\*DNS\*（Domain Name System）：域名系统，提供域名到 IP
+**DNS** （Domain Name System）：域名系统，提供域名到 IP
 地址之间的解析服务。
 
-\*Client\*（客户端）：请求访问资源的一端
+**Client** （客户端）：请求访问资源的一端
 
-\*Server\*（服务端）：提供响应资源的一端
+**Server** （服务端）：提供响应资源的一端
 
 
 ## 了解 Web 及网络基础 {#了解-web-及网络基础}
@@ -32,8 +32,7 @@ TCP/IP 协议族：HTTP
 
 ### 使用 HTTP 协议访问 Web {#使用-http-协议访问-web}
 
-Web 使用一种名为 HTTP（HyperText Transfer
-Protocol，超文本转移协议）的协议作为规范，完成从客户端到服务器等一系列运作流程。协议是指规则的约定。Web
+Web 使用一种名为 HTTP（HyperText Transfer Protocol，超文本转移协议）的协议作为规范，完成从客户端到服务器等一系列运作流程。协议是指规则的约定。Web
 是建立在 HTTP 协议上通信的。
 
 
@@ -64,7 +63,7 @@ WWW 首次使用是称呼具备 Web
 | 2020(draft)                                  | HTTP/3                      |
 
 
-### 网络基础 TCP/IP {#网络基础-tcpip}
+### 网络基础 TCP/IP {#网络基础-tcp-ip}
 
 通常使用的网络（包括互联网）是在 TCP/IP 协议族的基础上运作的。而 HTTP
 属于它内部的一个子集。
@@ -73,7 +72,7 @@ WWW 首次使用是称呼具备 Web
 
 计算机与网络设备要相互通信，双方就必须基于相同的方法。不同的硬件、操作系统之间的通信，所有的这一切都需要一种规则，而这种规则被称为\*协议\*（protocol）。
 
-{{< figure src="https://cdn.jsdelivr.net/gh/tianheg/static@main/img/%E5%9B%BE%E8%A7%A3HTTP0.jpeg" caption="<span class=\"figure-number\">Figure 1: </span>TCP/IP 是互联网相关的各类协议族的总称" >}}
+![TCP/IP 是互联网相关的各类协议族的总称](/images/图解HTTP0.jpeg "TCP/IP 是互联网相关的各类协议族的总称")
 
 一、TCP/IP 的分层管理
 
@@ -107,16 +106,16 @@ Card，网络适配器，即网卡），以及光纤等物理可见部分（还�
 
 二、TCP/IP 通信传输流
 
-{{< figure src="https://cdn.jsdelivr.net/gh/tianheg/static@main/img/%E5%9B%BE%E8%A7%A3HTTP1.jpeg" caption="<span class=\"figure-number\">Figure 2: </span>TCP/IP 通信传输流" >}}
+![TCP/IP 通信传输流](/images/图解HTTP1.jpeg "TCP/IP 通信传输流")
 
 每一层利用的协议：应用层（HTTP）、传输层（TCP）、网络层（IP）、链路层
 
-{{< figure src="https://cdn.jsdelivr.net/gh/tianheg/static@main/img/%E5%9B%BE%E8%A7%A3HTTP2.jpeg" caption="<span class=\"figure-number\">Figure 3: </span>封装过程" >}}
+![封装过程](/images/图解HTTP2.jpeg "封装过程")
 
 这种把数据信息包装起来的做法称为封装（encapsulate）。
 
 
-### 与 HTTP 关系密切的协议 : IP、TCP 和 DNS {#与-http-关系密切的协议-iptcp-和-dns}
+### 与 HTTP 关系密切的协议 : IP、TCP 和 DNS {#与-http-关系密切的协议-ip-tcp-和-dns}
 
 一、负责传输的 IP 协议
 
@@ -139,7 +138,7 @@ ARP 协议通过 MAC 地址搜索中转目标。
 
 中转过程中的路由选择（routing）。
 
-{{< figure src="https://cdn.jsdelivr.net/gh/tianheg/static@main/img/%E5%9B%BE%E8%A7%A3HTTP3.jpeg" caption="<span class=\"figure-number\">Figure 4: </span>路由选择机制" >}}
+![路由选择机制](/images/图解HTTP3.jpeg "路由选择机制")
 
 二、确保可靠性的 TCP 协议
 
@@ -164,7 +163,7 @@ SYN/ACK 标志的数据包以示传达确认信息。最后，发送端再回传
 -   Post &lt;--SYN/ACK Get
 -   Post --&gt;ACK Get
 
-{{< figure src="https://cdn.jsdelivr.net/gh/tianheg/static@main/img/%E5%9B%BE%E8%A7%A3HTTP4-three-way-handshaking.svg" caption="<span class=\"figure-number\">Figure 5: </span>three-way handshaking" >}}
+![three-way handshaking](/images/图解HTTP4-three-way-handshaking.svg "three-way handshaking")
 
 
 ### 负责域名解析的 DNS 服务 {#负责域名解析的-dns-服务}
@@ -174,7 +173,7 @@ DNS 服务是为了让人类更容易记住计算机在网络中的位置。
 
 ### 各种协议与 HTTP 协议的关系 {#各种协议与-http-协议的关系}
 
-{{< figure src="https://cdn.jsdelivr.net/gh/tianheg/static@main/img/%E5%9B%BE%E8%A7%A3HTTP5-protocols.svg" caption="<span class=\"figure-number\">Figure 6: </span>各种协议与 HTTP 协议的关系" >}}
+![各种协议与 HTTP 协议的关系](/images/图解HTTP5-protocols.svg "各种协议与 HTTP 协议的关系")
 
 
 ### URI 和 URL {#uri-和-url}
@@ -203,7 +202,7 @@ URI 用字符串标识某一互联网资源，而 URL
 
 二、URI 格式
 
-{{< figure src="https://cdn.jsdelivr.net/gh/tianheg/static@main/img/%E5%9B%BE%E8%A7%A3HTTP6-%E7%BB%9D%E5%AF%B9URI.svg" caption="<span class=\"figure-number\">Figure 7: </span>绝对 URI" >}}
+![绝对 URI](/images/图解HTTP6-绝对URI.svg "绝对 URI")
 
 
 ### 并不是所有的应用程序都符合 RFC {#并不是所有的应用程序都符合-rfc}
@@ -283,17 +282,17 @@ OPTIONS * HTTP/1.1
 ```
 
 
-### HTTP/1.1 中的可用方法 {#http1.1-中的可用方法}
+### HTTP/1.1 中的可用方法 {#http-1-dot-1-中的可用方法}
 
 一、GET 获取资源
 
 GET 方法用于请求已被 URI 识别的资源。
 
-{{< figure src="https://cdn.jsdelivr.net/gh/tianheg/static@main/img/%E5%9B%BE%E8%A7%A3HTTP7-GET.svg" caption="<span class=\"figure-number\">Figure 8: </span>GET" >}}
+![GET](/images/图解HTTP7-GET.svg "GET")
 
 二、POST 传输实体主体
 
-{{< figure src="https://cdn.jsdelivr.net/gh/tianheg/static@main/img/%E5%9B%BE%E8%A7%A3HTTP8-POST.svg" caption="<span class=\"figure-number\">Figure 9: </span>POST" >}}
+![POST](/images/图解HTTP8-POST.svg "POST")
 
 三、PUT 传输文件
 
@@ -308,7 +307,7 @@ Web 网站不使用该方法。
 2.  架构设计采用 REST（Representational State
     Transfer，表征状态转移）标准
 
-{{< figure src="https://cdn.jsdelivr.net/gh/tianheg/static@main/img/%E5%9B%BE%E8%A7%A3HTTP9-PUT.svg" caption="<span class=\"figure-number\">Figure 10: </span>PUT" >}}
+![PUT](/images/图解HTTP9-PUT.svg "PUT")
 
 > （PUT 的）响应：请求执行成功，但无数据返回
 
@@ -317,7 +316,7 @@ Web 网站不使用该方法。
 HEAD 和 GET 一样，只是不返回报文主体部分。用于确认 URI
 的有效性及资源更新的日期时间等。
 
-{{< figure src="https://cdn.jsdelivr.net/gh/tianheg/static@main/img/%E5%9B%BE%E8%A7%A3HTTP10-HEAD.svg" caption="<span class=\"figure-number\">Figure 11: </span>HEAD" >}}
+![HEAD](/images/图解HTTP10-HEAD.svg "HEAD")
 
 五、DELETE 删除文件（类比 PUT）
 
@@ -367,7 +366,7 @@ Security,传输层安全）协议吧通信内容加密后经网络隧道传输�
 一下列出 HTTP/1.0 和 HTTP/1.1
 支持的方法。要注意：方法名区分大小写，注意要用大写字母。
 
-{{< figure src="https://cdn.jsdelivr.net/gh/tianheg/static@main/img/%E5%9B%BE%E8%A7%A3HTTP11-http1-http1.1.jpeg" caption="<span class=\"figure-number\">Figure 12: </span>HTTP/1.0 HTTP/1.1" >}}
+![HTTP/1.0 HTTP/1.1](/images/图解HTTP11-http1-http1.1.jpeg "HTTP/1.0 HTTP/1.1")
 
 
 ### 持久连接节省通信量 {#持久连接节省通信量}
@@ -392,6 +391,6 @@ Connections，也称为 HTTP keep-alive 或 HTTP connection reuse）的方法。
 管线化让多个请求的发送成为现实。
 
 
-### （重要）使用 Cookie 的状态管理 {#重要使用-cookie-的状态管理}
+### （重要）使用 Cookie 的状态管理 {#重要-使用-cookie-的状态管理}
 
 Cookie 技术通过在请求和响应报文中写入 Cookie 信息来控制客户端的状态。
