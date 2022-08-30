@@ -14,4 +14,3 @@ window.addEventListener("DOMContentLoaded", event => {
         }
     {{  end }}
 }, {once: true});
-

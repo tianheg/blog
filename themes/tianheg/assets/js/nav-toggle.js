@@ -63,7 +63,7 @@ window.addEventListener(
       .getPropertyValue("--max-width");
     let mediaQuery = window.matchMedia(`(max-width: ${maxWidth})`);
 
-    mediaQuery.addListener((e) => {
+    mediaQuery.addListener(e => {
       if (!e.matches) {
         // We are no longer in responsive mode, close nav
         closeNav(true);
