@@ -146,7 +146,7 @@ sudo pacman -S fcitx5-im fcitx5-chinese-addons fcitx5-pinyin-zhwiki fcitx5-mater
 
 #+BEGIN_SRC sh
 sudo pacman -S noto-fonts noto-fonts-extra noto-fonts-emoji noto-fonts-cjk ttf-dejavu ttf-liberation ttf-roboto ttf-inconsolata ttf-linux-libertine ttf-droid adobe-source-han-sans-cn-fonts adobe-source-han-serif-cn-fonts
-yay -S otf-eb-garamond ttf-monaco otf-san-francisco consolas-font
+yay -S nerd-fonts-ibm-plex-mono
 #+END_SRC
 
 中文：
@@ -171,6 +171,8 @@ sudo systemctl enable --now bluetooth
 
 * Git
 #+BEGIN_SRC sh
+pacman -S openssh
+
 wget -O ~/.gitconfig https://github.com/tianheg/dotfiles/raw/main/gitconfig
 # 不要忘记 commit.gpgsign true
 
@@ -178,7 +180,7 @@ wget -O ~/.gitconfig https://github.com/tianheg/dotfiles/raw/main/gitconfig
 chmod 400 ~/.ssh/id_ed25519
 # 解决 sign_and_send_pubkey: signing failed for ED25519 "/home/user/.ssh/id_ed25519" from agent: agent refused operation; git@github.com: Permission denied (publickey).
 #+END_SRC
-
+    
 * GPG
 修改 =~/.gnupg/= 权限：
 
