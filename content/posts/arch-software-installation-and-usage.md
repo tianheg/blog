@@ -1,7 +1,7 @@
 +++
 title = "Arch 软件安装和用法"
 date = 2021-08-20T00:00:00+08:00
-lastmod = 2022-07-31T11:59:42+08:00
+lastmod = 2022-09-01T02:02:21+08:00
 tags = ["Arch Linux", "技术"]
 draft = false
 toc = true
@@ -168,7 +168,7 @@ sudo pacman -S fcitx5-im fcitx5-chinese-addons fcitx5-pinyin-zhwiki fcitx5-mater
 
 ```sh
 sudo pacman -S noto-fonts noto-fonts-extra noto-fonts-emoji noto-fonts-cjk ttf-dejavu ttf-liberation ttf-roboto ttf-inconsolata ttf-linux-libertine ttf-droid adobe-source-han-sans-cn-fonts adobe-source-han-serif-cn-fonts
-yay -S otf-eb-garamond ttf-monaco otf-san-francisco consolas-font
+yay -S nerd-fonts-ibm-plex-mono
 ```
 
 中文：
@@ -199,6 +199,8 @@ sudo systemctl enable --now bluetooth
 ## Git {#git}
 
 ```sh
+pacman -S openssh
+
 wget -O ~/.gitconfig https://github.com/tianheg/dotfiles/raw/main/gitconfig
 # 不要忘记 commit.gpgsign true
 
