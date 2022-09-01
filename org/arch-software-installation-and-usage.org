@@ -35,6 +35,13 @@ sudo grub-mkconfig -o /boot/grub/grub.cfg
 #+BEGIN_SRC sh
 systemctl enable reflector
 systemctl start reflector
+vim /usr/lib/systemd/system/reflector.service
+#+END_SRC
+
+在 =[Service] -> ExecStart= 值的开始添加 =/usr/bin/proxychains= 。这一步要在代理设置好完成。之所以这样做是因为中国的网络对国外内容不友好，如果不设置代理，直接执行 =systemctl start reflector= 会出现如下错误。
+
+#+BEGIN_SRC sh
+error: failed to retrieve mirrorstatus data: URLError: <urlopen error [Errno 101] Network is unreachable>
 #+END_SRC
 
 ** 通过 Pacman hook 自动化以上步骤

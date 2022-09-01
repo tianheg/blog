@@ -2,7 +2,7 @@
 title = "Arch 软件安装和用法"
 author = ["Tianhe Gao"]
 date = 2021-08-20T00:00:00+08:00
-lastmod = 2022-09-01T14:28:47+08:00
+lastmod = 2022-09-01T16:30:11+08:00
 tags = ["Arch Linux", "技术"]
 draft = false
 toc = true
@@ -47,6 +47,13 @@ sudo grub-mkconfig -o /boot/grub/grub.cfg
 ```sh
 systemctl enable reflector
 systemctl start reflector
+vim /usr/lib/systemd/system/reflector.service
+```
+
+在 `[Service] -> ExecStart` 值的开始添加 `/usr/bin/proxychains` 。这一步要在代理设置好完成。之所以这样做是因为中国的网络对国外内容不友好，如果不设置代理，直接执行 `systemctl start reflector` 会出现如下错误。
+
+```sh
+error: failed to retrieve mirrorstatus data: URLError: <urlopen error [Errno 101] Network is unreachable>
 ```
 
 
