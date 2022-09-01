@@ -102,11 +102,30 @@ def test_youtube(port: int) -Union[str, bool]:
     return 'US'
 #+end_example
 
+* z.lua
+
+#+BEGIN_SRC sh
+git clone https://github.com/skywind3000/z.lua.git ~/.z.lua
+pacman -S lua
+#+END_SRC
+
+* Emacs Hunspell
+
+https://github.com/hunspell/hunspell#usage
+
+#+BEGIN_SRC sh
+sudo mkdir /usr/share/hunspell
+cd /usr/share/hunspell
+wget -O en_US.aff  https://cgit.freedesktop.org/libreoffice/dictionaries/plain/en/en_US.aff?id=a4473e06b56bfe35187e302754f6baaa8d75e54f
+wget -O en_US.dic https://cgit.freedesktop.org/libreoffice/dictionaries/plain/en/en_US.dic?id=a4473e06b56bfe35187e302754f6baaa8d75e54f
+#+END_SRC
+
 * 输入法配置[fn:6]
+
 想把 ibus 移除，只使用 fcitx。后来发现 ibus 被很多程序依赖无法删除。
 
 #+BEGIN_SRC sh
-sudo pacman -S fcitx-im fcitx-configtool fcitx-googlepinyin
+sudo pacman -S fcitx-im fcitx-configtool fcitx-googlepinyin kcm-fcitx
 #+END_SRC
 
 Add support for gtk,qt:
@@ -120,7 +139,7 @@ export GTK_IM_MODULE="fcitx"
 export QT_IM_MODULE="fcitx"
 #+end_example
 
-升级 fcitx 版本 4->5，并安装词库、主题：
+Install fcitx5，并安装词库、主题：
 
 #+BEGIN_SRC sh
 sudo pacman -Rsc fcitx
@@ -128,6 +147,8 @@ sudo pacman -S fcitx5-im fcitx5-chinese-addons fcitx5-pinyin-zhwiki fcitx5-mater
 #+END_SRC
 
 配置开机启动；主题：material-color-black
+
+但是，当我安装好时，不能在 Konsole 这个命令行模拟器输入中文，尝试很多办法 =/etc/profile= （如上所示），在 =~/.profile= 等文件中加入以上相同的内容，但是（可能因为没有关机再开机）依然不可行。终于在 [[https://wiki.archlinux.org/title/Environment_variables#Wayland_environment][Wayland environment - Environment variables - ArchWiki]] 这里发现，需要设置 Wayland 环境变量。
 
 ** fcitx5 使用发现
 
