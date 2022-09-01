@@ -1,7 +1,8 @@
 +++
 title = "Arch 软件安装和用法"
+author = ["Tianhe Gao"]
 date = 2021-08-20T00:00:00+08:00
-lastmod = 2022-09-01T02:13:09+08:00
+lastmod = 2022-09-01T14:25:01+08:00
 tags = ["Arch Linux", "技术"]
 draft = false
 toc = true
@@ -120,12 +121,32 @@ def test_youtube(port: int) -Union[str, bool]:
 ```
 
 
+## z.lua {#z-dot-lua}
+
+```sh
+git clone https://github.com/skywind3000/z.lua.git ~/.z.lua
+pacman -S lua
+```
+
+
+## Emacs Hunspell {#emacs-hunspell}
+
+<https://github.com/hunspell/hunspell#usage>
+
+```sh
+sudo mkdir /usr/share/hunspell
+cd /usr/share/hunspell
+wget -O en_US.aff  https://cgit.freedesktop.org/libreoffice/dictionaries/plain/en/en_US.aff?id=a4473e06b56bfe35187e302754f6baaa8d75e54f
+wget -O en_US.dic https://cgit.freedesktop.org/libreoffice/dictionaries/plain/en/en_US.dic?id=a4473e06b56bfe35187e302754f6baaa8d75e54f
+```
+
+
 ## 输入法配置[^fn:6] {#输入法配置}
 
 想把 ibus 移除，只使用 fcitx。后来发现 ibus 被很多程序依赖无法删除。
 
 ```sh
-sudo pacman -S fcitx-im fcitx-configtool fcitx-googlepinyin
+sudo pacman -S fcitx-im fcitx-configtool fcitx-googlepinyin kcm-fcitx
 ```
 
 Add support for gtk,qt:
@@ -139,7 +160,7 @@ export GTK_IM_MODULE="fcitx"
 export QT_IM_MODULE="fcitx"
 ```
 
-升级 fcitx 版本 4-&gt;5，并安装词库、主题：
+Install fcitx5，并安装词库、主题：
 
 ```sh
 sudo pacman -Rsc fcitx
@@ -147,6 +168,8 @@ sudo pacman -S fcitx5-im fcitx5-chinese-addons fcitx5-pinyin-zhwiki fcitx5-mater
 ```
 
 配置开机启动；主题：material-color-black
+
+但是，当我安装好时，不能在 Konsole 这个命令行模拟器输入中文，尝试很多办法 `/etc/profile` （如上所示），在 `~/.profile` 等文件中加入以上相同的内容，但是（可能因为没有关机再开机）依然不可行。终于在 [Wayland environment - Environment variables - ArchWiki](https://wiki.archlinux.org/title/Environment_variables#Wayland_environment) 这里发现，需要设置 Wayland 环境变量。
 
 
 ### fcitx5 使用发现 {#fcitx5-使用发现}
@@ -168,7 +191,7 @@ sudo pacman -S fcitx5-im fcitx5-chinese-addons fcitx5-pinyin-zhwiki fcitx5-mater
 
 ```sh
 sudo pacman -S noto-fonts noto-fonts-extra noto-fonts-emoji noto-fonts-cjk ttf-dejavu ttf-liberation ttf-roboto ttf-inconsolata ttf-linux-libertine ttf-droid adobe-source-han-sans-cn-fonts adobe-source-han-serif-cn-fonts
-yay -S nerd-fonts-ibm-plex-mono
+yay -S otf-ibm-plex
 ```
 
 中文：
@@ -584,6 +607,7 @@ yay -S rpi-imager
 | obs-studio                                      | 录屏软件                                                                                                                                                          |
 | pkgstats                                        | Submit a list of installed packages to the Arch Linux project                                                                                                     |
 | masterpdfeditor                                 | A complete solution for viewing, creating and editing PDF files                                                                                                   |
+| EtchDroid                                       | ios2usb on android                                                                                                                                                |
 | archmage(aur)                                   | converts CHM files to HTML, plain text and PDF                                                                                                                    |
 
 
