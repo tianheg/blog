@@ -2,7 +2,7 @@
 title = "Arch 软件安装和用法"
 author = ["Tianhe Gao"]
 date = 2021-08-20T00:00:00+08:00
-lastmod = 2022-09-01T14:25:01+08:00
+lastmod = 2022-09-01T14:28:47+08:00
 tags = ["Arch Linux", "技术"]
 draft = false
 toc = true
@@ -257,6 +257,8 @@ wget -O github-web-flow.txt https://github.com/web-flow.gpg
 gpg --import tianheg-pubkeys.txt
 gpg --import github-web-flow.txt
 ```
+
+安装 seahorse 以防止每次 git commit 都要输入密码。
 
 
 ## 键盘映射[^fn:8] {#键盘映射}
