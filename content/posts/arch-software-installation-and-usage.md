@@ -1,7 +1,7 @@
 +++
 title = "Arch 软件安装和用法"
 date = 2021-08-20T00:00:00+08:00
-lastmod = 2022-09-01T02:02:21+08:00
+lastmod = 2022-09-01T02:13:09+08:00
 tags = ["Arch Linux", "技术"]
 draft = false
 toc = true
@@ -226,7 +226,7 @@ chmod 600 ~/.gnupg/*
 
 这几条命令解决 `gpg: WARNING: unsafe permissions on homedir '/home/user/.gnupg'` 。
 
-**把 ~/.gnupg 文件夹保存在安全的地方** ，然后导入 GitHub(user + web-flow)公匙：
+**把 `~/.gnupg` 文件夹保存在安全的地方** ，然后导入 GitHub(user + web-flow)公匙：
 
 ```sh
 wget -O tianheg-pubkeys.txt https://github.com/tianheg.gpg
