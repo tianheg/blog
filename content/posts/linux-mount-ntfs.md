@@ -2,7 +2,7 @@
 title = "Linux Mount NTFS"
 author = ["Tianhe Gao"]
 date = 2022-09-01T12:23:00+08:00
-lastmod = 2022-09-01T14:41:36+08:00
+lastmod = 2022-09-02T11:24:04+08:00
 tags = ["技术", "Linux", "File System"]
 draft = false
 +++
@@ -19,3 +19,82 @@ sudo mount -t ntfs3 /dev/sdc1 /mnt/elements-se
 在通过启动盘挂载本机系统后，我就通过命令行把一些重要文件放到我的移动硬盘。
 
 在新系统配置的差不多时，我插上移动硬盘（NTFS 文件系统），但 KDE 的硬盘挂载软件提醒我不支持 NTFS。于是，我开始搜索，在文首的链接里找到了挂载的方法。
+
+我第二次在 Arch Linux mount 移动硬盘（用的是上述第二个命令，sdc1 改成 sdd1），失败了。
+
+```sh
+mount: /mnt/elements-se: wrong fs type, bad option, bad superblock on /dev/sdd1, missing codepage or helper program, or other error.
+       dmesg(1) may have more information after failed mount system call.
+```
+
+通过 `sudo demsg` 命令看不出什么有用信息。
+
+通过 `lsblk` 命令可以查看硬盘挂载情况（这是最终成功挂载的结果）。
+
+```sh
+NAME   MAJ:MIN RM   SIZE RO TYPE MOUNTPOINTS
+sda      8:0    0 931.5G  0 disk
+└─sda1   8:1    0 931.5G  0 part /mnt/disk
+sdb      8:16   0 119.2G  0 disk
+├─sdb1   8:17   0   500M  0 part /boot/efi
+└─sdb2   8:18   0 118.8G  0 part /
+sdd      8:48   0 931.5G  0 disk
+└─sdd1   8:49   0 931.5G  0 part /mnt/elements-
+```
+
+最初通过 Udisks 的 udisksctl 命令（ `udisksctl mount -b /dev/sdd1` ）挂载，但总是报错。
+
+```sh
+Error mounting /dev/sdd1: GDBus.Error:org.freedesktop.UDisks2.Error.Failed: Error mounting /dev/sdd1 at /run/media/archie/Elements SE: Filesystem type ntfs3,ntfs not configured in kernel.
+
+Error mounting /dev/sdd1: GDBus.Error:org.freedesktop.UDisks2.Error.Failed: Error mounting /dev/sdd1 at /run/media/archie/Elements SE: wrong fs type, bad option, bad superblock on /dev/sdd1, missing codepage or helper program, or other error
+```
+
+这个错误我见过。
+
+于是，我安装了 NTFS-3G，之后通过 `sudo mount /dev/sdd1 /mnt/elements-se` 有报错。
+
+```sh
+$MFTMirr does not match $MFT (record 0).
+Failed to mount '/dev/sdd1': Input/output error
+NTFS is either inconsistent, or there is a hardware fault, or it's a
+SoftRAID/FakeRAID hardware. In the first case run chkdsk /f on Windows
+then reboot into Windows twice. The usage of the /f parameter is very
+important! If the device is a SoftRAID/FakeRAID then first activate
+it and mount a different device under the /dev/mapper/ directory, (e.g.
+/dev/mapper/nvidia_eahaabcc1). Please see the 'dmraid' documentation
+for more details.
+```
+
+通过 `sudo ntfs-3g /dev/sdd1 /mnt/elements-se` 挂载，也有报错，和以上信息一致。
+
+最终问题还是解决了，通过搜索 `$MFTMirr does not match $MFT` 找到命令 `ntfsfix` 出自之前的 NTFS-3G。
+
+```sh
+$ sudo ntfsfix /dev/sdd1
+Mounting volume... $MFTMirr does not match $MFT (record 0).
+FAILED
+Attempting to correct errors...
+Processing $MFT and $MFTMirr...
+Reading $MFT... OK
+Reading $MFTMirr... OK
+Comparing $MFTMirr to $MFT... FAILED
+Correcting differences in $MFTMirr record 0...OK
+Correcting differences in $MFTMirr record 3...OK
+Processing of $MFT and $MFTMirr completed successfully.
+Setting required flags on partition... OK
+Going to empty the journal ($LogFile)... OK
+Checking the alternate boot sector... OK
+NTFS volume version is 3.1.
+NTFS partition /dev/sdd1 was processed successfully.
+```
+
+最终通过 `ntfs-3g` 挂载成功。
+
+---
+
+参考资料：
+
+1.  <https://wiki.archlinux.org/title/NTFS-3G>
+2.  <https://wiki.archlinux.org/title/NTFS>
+3.  <https://wiki.archlinux.org/title/Udisks>
