@@ -1,7 +1,8 @@
 +++
 title = "Docker 基本使用"
+author = ["Tianhe Gao"]
 date = 2022-02-17T00:00:00+08:00
-lastmod = 2022-02-26T14:11:00+08:00
+lastmod = 2022-09-02T12:19:45+08:00
 tags = ["技术", "Docker"]
 draft = false
 toc = true
@@ -79,6 +80,8 @@ sudo netstat -lntp | grep dockerd
 ```
 
 在重启 Docker 这一步出错，通过 `sudo systemctl restart docker.service` 无法重启。再次阅读文档后，发现第一种方式适合不使用 systemd 的发行版。我的 Arch Linux 使用 systemd，所以无法通过第一种方式配置。
+
+如果想要尝试这一种配置方法， systemd 会不断出现 `docker.service: Start request repeated too quickly.` 错误。
 
 第二种配置方式：
 
