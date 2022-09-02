@@ -2,7 +2,7 @@
 title = "Linux Mount NTFS"
 author = ["Tianhe Gao"]
 date = 2022-09-01T12:23:00+08:00
-lastmod = 2022-09-02T11:24:04+08:00
+lastmod = 2022-09-02T14:55:06+08:00
 tags = ["技术", "Linux", "File System"]
 draft = false
 +++
@@ -39,7 +39,7 @@ sdb      8:16   0 119.2G  0 disk
 ├─sdb1   8:17   0   500M  0 part /boot/efi
 └─sdb2   8:18   0 118.8G  0 part /
 sdd      8:48   0 931.5G  0 disk
-└─sdd1   8:49   0 931.5G  0 part /mnt/elements-
+└─sdd1   8:49   0 931.5G  0 part /mnt/elemes-se
 ```
 
 最初通过 Udisks 的 udisksctl 命令（ `udisksctl mount -b /dev/sdd1` ）挂载，但总是报错。
