@@ -2,7 +2,7 @@
 title = "Arch 软件安装和用法"
 author = ["Tianhe Gao"]
 date = 2021-08-20T00:00:00+08:00
-lastmod = 2022-09-02T12:11:50+08:00
+lastmod = 2022-09-02T21:39:53+08:00
 tags = ["Arch Linux", "技术"]
 draft = false
 toc = true
@@ -718,6 +718,11 @@ exa --git-ignore # Don't list files mentioned in `.gitignore`
 
 
 ### Virtualbox[^fn:11] {#virtualbox}
+
+```sh
+sudo pacman -S virtualbox virtualbox-host-modules-arch virtualbox-ext-oracle
+# 这一次安装没有下面的错误消息
+```
 
 Error message:
 

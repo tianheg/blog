@@ -655,6 +655,12 @@ exa --git-ignore # Don't list files mentioned in `.gitignore`
 一个 Arch Linux 新闻阅读器和 pacman hook。可以帮你在更新包时检查是否还有没有阅读的 Arch Linux 新闻。
 
 ** Virtualbox[fn:11]
+
+#+BEGIN_SRC sh
+sudo pacman -S virtualbox virtualbox-host-modules-arch virtualbox-ext-oracle
+# 这一次安装没有下面的错误消息
+#+END_SRC
+
 Error message:
 
 #+begin_example
@@ -666,9 +672,11 @@ You will not be able to start VMs until this problem is fixed.
 #+end_example
 
 运行命令解决：
+
 #+BEGIN_SRC sh
 sudo modprobe vboxdrv
 #+END_SRC
+
 ** earlyoom
 如果是为了避免系统卡死，可以安装并使用 earlyoom[fn:12]。
 
