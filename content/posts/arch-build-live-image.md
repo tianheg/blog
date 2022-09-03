@@ -2,7 +2,7 @@
 title = "为 Arch Linux 定制启动镜像"
 author = ["Tianhe Gao"]
 date = 2022-09-02T12:31:00+08:00
-lastmod = 2022-09-02T19:21:03+08:00
+lastmod = 2022-09-04T00:03:45+08:00
 tags = ["技术", "Arch Linux"]
 draft = false
 +++
@@ -126,6 +126,15 @@ sudo cp /etc/os-release archlive_path/airootfs/etc
 ```sh
 # mkarchiso -v -w /path/to/work_dir -o /path/to/out_dir /path/to/profile/
 ```
+
+
+## 记录 {#记录}
+
+我的 profile 配置文件在 [GitHub](https://github.com/tianheg/archlive)。
+
+SDDM 登陆管理器已经配置好了，但是无法登陆 archie 用户，密码已确认是正确的。无法登录的表现——输入密码-&gt;黑屏-&gt;显示没有输入密码的登陆界面。
+
+通过 [VirtualBox](https://wiki.archlinux.org/title/VirtualBox) 创建虚拟机，启动镜像。
 
 参考资料：
 
