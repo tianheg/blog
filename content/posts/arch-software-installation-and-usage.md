@@ -2,7 +2,7 @@
 title = "Arch 软件安装和用法"
 author = ["Tianhe Gao"]
 date = 2021-08-20T00:00:00+08:00
-lastmod = 2022-09-03T14:50:08+08:00
+lastmod = 2022-09-03T15:03:49+08:00
 tags = ["Arch Linux", "技术"]
 draft = false
 toc = true
@@ -729,7 +729,7 @@ sudo pacman -S virtualbox virtualbox-host-modules-arch virtualbox-ext-oracle
 
 图片表示 virtualbox linux kernel driver not installed。
 
-但是，执行过几个命令好了，我不知道命令的作用：
+但是，执行过几个命令好了，我不知道命令的作用，参考 [这个链接](https://bbs.archlinux.org/viewtopic.php?id=210006)：
 
 ```sh
 sudo modprobe vboxdrv
