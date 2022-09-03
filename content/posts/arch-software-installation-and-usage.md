@@ -2,7 +2,7 @@
 title = "Arch 软件安装和用法"
 author = ["Tianhe Gao"]
 date = 2021-08-20T00:00:00+08:00
-lastmod = 2022-09-02T21:39:53+08:00
+lastmod = 2022-09-03T14:50:08+08:00
 tags = ["Arch Linux", "技术"]
 draft = false
 toc = true
@@ -523,6 +523,7 @@ yay -S rpi-imager
 
 | 名字                                            | 说明                                                                                                                                                              |
 |-----------------------------------------------|-----------------------------------------------------------------------------------------------------------------------------------------------------------------|
+| spectacle                                       | KDE 开发的截图软件                                                                                                                                                |
 | net-tools                                       | 提供 netstat 命令                                                                                                                                                 |
 | chromium                                        | 开源浏览器（基于 Blink 渲染引擎）                                                                                                                                 |
 | google-chrome                                   | 浏览器                                                                                                                                                            |
@@ -721,7 +722,18 @@ exa --git-ignore # Don't list files mentioned in `.gitignore`
 
 ```sh
 sudo pacman -S virtualbox virtualbox-host-modules-arch virtualbox-ext-oracle
-# 这一次安装没有下面的错误消息
+# 这一次安装没有下面的错误消息，但是当我在 Virtualbox 新建虚拟机时，却出现了错误
+```
+
+![](/images/arch-software-installation-and-usage-0.png "这次错误")
+
+图片表示 virtualbox linux kernel driver not installed。
+
+但是，执行过几个命令好了，我不知道命令的作用：
+
+```sh
+sudo modprobe vboxdrv
+sudo /sbin/rcvboxdrv setup
 ```
 
 Error message:
