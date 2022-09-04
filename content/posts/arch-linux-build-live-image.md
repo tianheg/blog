@@ -2,7 +2,7 @@
 title = "为 Arch Linux 定制启动镜像"
 author = ["Tianhe Gao"]
 date = 2022-09-02T12:31:00+08:00
-lastmod = 2022-09-04T16:58:19+08:00
+lastmod = 2022-09-04T19:32:56+08:00
 tags = ["技术", "Arch Linux"]
 draft = false
 +++
