@@ -2,7 +2,7 @@
 title = "为 Arch Linux 定制启动镜像"
 author = ["Tianhe Gao"]
 date = 2022-09-02T12:31:00+08:00
-lastmod = 2022-09-04T00:03:45+08:00
+lastmod = 2022-09-04T15:50:57+08:00
 tags = ["技术", "Arch Linux"]
 draft = false
 +++
@@ -135,6 +135,14 @@ sudo cp /etc/os-release archlive_path/airootfs/etc
 SDDM 登陆管理器已经配置好了，但是无法登陆 archie 用户，密码已确认是正确的。无法登录的表现——输入密码-&gt;黑屏-&gt;显示没有输入密码的登陆界面。
 
 通过 [VirtualBox](https://wiki.archlinux.org/title/VirtualBox) 创建虚拟机，启动镜像。
+
+后来我意识到，根本不需要在镜像中安装图形化界面，于是我对 packages.x86_64 进行了精简，但是我并不知道哪些包对镜像构建是必须的，所以只能根据安装镜像时返回的错误来判断。
+
+有一次，刚在 VirtualBox 启动镜像，界面显示找不到 /boot/intel-ucode.img 然后就无法继续进行了，图片内容如下。
+
+![](/images/arch-build-live-image-0.png "Kernel panic")
+
+于是，我就猜测可能是少了 intel-ucode 这个包。
 
 参考资料：
 
