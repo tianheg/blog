@@ -2,7 +2,7 @@
 title = "为 Arch Linux 定制启动镜像"
 author = ["Tianhe Gao"]
 date = 2022-09-02T12:31:00+08:00
-lastmod = 2022-09-04T15:50:57+08:00
+lastmod = 2022-09-04T16:58:19+08:00
 tags = ["技术", "Arch Linux"]
 draft = false
 +++
@@ -143,6 +143,12 @@ SDDM 登陆管理器已经配置好了，但是无法登陆 archie 用户，密�
 ![](/images/arch-build-live-image-0.png "Kernel panic")
 
 于是，我就猜测可能是少了 intel-ucode 这个包。
+
+还见过的错误。
+
+```sh
+# arch kernel: RETBleed: WARNING: Spectre v2 mitigation leaves CPU vulnerable to RETBleed attacks, data leakpossible!
+```
 
 参考资料：
 
