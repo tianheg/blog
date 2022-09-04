@@ -2,6 +2,8 @@
 #+TITLE: Arch 安装指南
 #+DATE: <2021-08-20 Fri>
 #+HUGO_TAGS: 技术 "Arch Linux"
+#+HUGO_CUSTOM_FRONT_MATTER: :toc true
+
 安装过程整体顺利，没有无法解决的问题，主要参考资料：
 
 1. [[https://io-oi.me/tech/hello-arch-linux/]]
@@ -108,13 +110,7 @@ install.txt（详见参考资料 1）。
    :PROPERTIES:
    :CUSTOM_ID: 配置系统
    :END:
-*** 进入硬盘，而不在 U 盘
-    :PROPERTIES:
-    :CUSTOM_ID: 进入硬盘而不在-u-盘
-    :END:
-#+begin_example
-  arch-chroot /mnt /bin/bash
-#+end_example
+
 
 *** 生成挂载表
     :PROPERTIES:
@@ -128,6 +124,14 @@ install.txt（详见参考资料 1）。
 
 #+begin_example
   cat /mnt/etc/fstab
+#+end_example
+
+*** 进入硬盘，而不在 U 盘
+    :PROPERTIES:
+    :CUSTOM_ID: 进入硬盘而不在-u-盘
+    :END:
+#+begin_example
+  arch-chroot /mnt /bin/bash
 #+end_example
 
 *** 时区和语言
@@ -203,8 +207,6 @@ arch wiki 后，可以在 /etc/default/grub 中设置
 #+begin_example
   pacman -S networkmanager
   systemctl enable NetworkManager
-  systemctl start NetworkManager
-  systemctl status NetworkManager # 检查是否运行
 #+end_example
 
 *** 设置 root 密码
