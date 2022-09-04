@@ -2,7 +2,7 @@
 title = "Arch 安装指南"
 author = ["Tianhe Gao"]
 date = 2021-08-20T00:00:00+08:00
-lastmod = 2022-09-04T19:39:28+08:00
+lastmod = 2022-09-04T20:57:01+08:00
 tags = ["技术", "Arch Linux"]
 draft = false
 toc = true
@@ -26,7 +26,7 @@ toc = true
 
 ## 进入 BIOS 界面并设置 {#进入-bios-界面并设置}
 
-每个品牌的笔记本进入 BIOS 界面的方式各不相同，我的笔记本是 HP。
+每个品牌的笔记本进入 BIOS 界面的方式各不相同，我的笔记本是 HP。此外，F9 是更改启动顺序。
 
 按下开机键 -&gt; 持续按 F10 直到出现 BIOS 设置页面
 
