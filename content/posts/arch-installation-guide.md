@@ -2,7 +2,7 @@
 title = "Arch 安装指南"
 author = ["Tianhe Gao"]
 date = 2021-08-20T00:00:00+08:00
-lastmod = 2022-09-04T20:57:01+08:00
+lastmod = 2022-09-04T21:34:08+08:00
 tags = ["技术", "Arch Linux"]
 draft = false
 toc = true
@@ -22,6 +22,8 @@ toc = true
 ## 准备安装介质 {#准备安装介质}
 
 我选择 U 盘。直接将 ISO 文件拷贝进 U 盘即可（也可用烧录软件烧录）。
+
+但是，当我通过 `dd` 、GNOME Disk Utility、直接拷贝，制作启动盘时，怎么也无法进入安装界面。结果是这些方法制作的启动盘有问题，最终我通过树莓派开发的软件——[rpi-imager](https://github.com/raspberrypi/rpi-imager) 解决了问题。
 
 
 ## 进入 BIOS 界面并设置 {#进入-bios-界面并设置}
