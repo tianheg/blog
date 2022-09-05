@@ -2,7 +2,7 @@
 title = "Arch Linux 软件安装和用法"
 author = ["Tianhe Gao"]
 date = 2021-08-20T00:00:00+08:00
-lastmod = 2022-09-05T16:07:11+08:00
+lastmod = 2022-09-05T16:54:06+08:00
 tags = ["Arch Linux", "技术"]
 draft = false
 toc = true
@@ -175,32 +175,21 @@ Install fcitx5，并安装词库、主题：
 所有安装的字体：
 
 ```sh
-# pacman -S noto-fonts noto-fonts-extra noto-fonts-emoji noto-fonts-cjk ttf-dejavu ttf-liberation ttf-roboto ttf-inconsolata libertinus-font ttf-droid adobe-source-han-sans-cn-fonts adobe-source-han-serif-cn-fonts wqy-microhei wqy-zenhei ttf-ms-win11-auto
-# yay -S otf-ibm-plex
+# pacman -S noto-fonts noto-fonts-emoji noto-fonts-cjk adobe-source-han-sans-cn-fonts adobe-source-han-serif-cn-fonts
+# yay -S nerd-fonts-ibm-plex-mono
 ```
 
-关于 wqy-zenhei 的安装提示：
+中文，英文：
 
-```sh
-# ==> Special Note: By default, we disabled the embedded bitmaps, so that the
-#     characters will be displayed as anti-aliased glyphs.  Those who want to
-#     use bitmap font rendering (for 9pt-12pt) can do the following:
-
-# cd /etc/fonts/conf.d
-# rm 65-wqy-zenhei.conf
-# ln -s /usr/share/fontconfig/conf.avail/43-wqy-zenhei-sharp.conf
-
-#     Remove the symlinks 43-wqy-zenhei-sharp.conf and 65-wqy-zenhei.conf from
-#     /etc/fonts/conf.d if you have problems with this package.
-```
-
-中文：
-
-noto-fonts, noto-fonts-cjk, noto-fonts-emoji, noto-fonts-extra
+noto-fonts, noto-fonts-cjk, adobe-source-han-sans-cn-fonts, adobe-source-han-serif-cn-fonts
 
 代码：
 
-monaco, menlo, hack, IBM Plex Mono
+IBM Plex Mono
+
+Emoji：
+
+-   noto-fonts-emoji
 
 -   命令行安装的字体所在的目录： `/usr/share/fonts/`
 -   手动安装的字体所在的目录： `~/.local/share/fonts/`
@@ -216,138 +205,129 @@ monaco, menlo, hack, IBM Plex Mono
 <https://wiki.archlinux.org/title/Font_configuration/Examples#Chinese_in_Noto_Fonts>
 
 ```cfg
-<?xml version="1.0"?>
-<!DOCTYPE fontconfig SYSTEM "urn:fontconfig:fonts.dtd">
+<?xml version='1.0'?>
+<!DOCTYPE fontconfig SYSTEM 'fonts.dtd'>
 <fontconfig>
-    <match target="font">
-        <edit name="embeddedbitmap" mode="assign">
-            <bool>false</bool>
-        </edit>
-    </match>
-    <match>
-        <test qual="any" name="family">
-            <string>serif</string>
-        </test>
-        <edit name="family" mode="prepend" binding="strong">
-            <string>Noto Serif</string>
-            <family>Noto Color Emoji</family>
-        </edit>
-    </match>
-    <match target="pattern">
-        <test qual="any" name="family">
-            <string>sans-serif</string>
-        </test>
-        <edit name="family" mode="prepend" binding="strong">
-            <string>Noto Sans</string>
-            <family>Noto Color Emoji</family>
-        </edit>
-    </match>
-    <match target="pattern">
-        <test qual="any" name="family">
-            <string>monospace</string>
-        </test>
-        <edit name="family" mode="prepend" binding="strong">
-            <string>Noto Sans Mono</string>
-            <family>Noto Color Emoji</family>
-        </edit>
-    </match>
-    <match>
-        <test name="lang" compare="contains">
-            <string>zh</string>
-        </test>
-        <test name="family">
-            <string>serif</string>
-        </test>
-        <edit name="family" mode="prepend">
-            <string>Noto Serif CJK SC</string>
-        </edit>
-    </match>
-    <match>
-        <test name="lang" compare="contains">
-            <string>zh</string>
-        </test>
-        <test name="family">
-            <string>sans-serif</string>
-        </test>
-        <edit name="family" mode="prepend">
-            <string>Noto Sans CJK SC</string>
-        </edit>
-    </match>
-    <match>
-        <test name="lang" compare="contains">
-            <string>zh</string>
-        </test>
-        <test name="family">
-            <string>monospace</string>
-        </test>
-        <edit name="family" mode="prepend">
-            <string>Noto Sans Mono CJK SC</string>
-        </edit>
-    </match>
 
-    <!--WenQuanYi Zen Hei -> WenQuanYi Micro Hei -->
-    <match target="pattern">
-        <test qual="any" name="family">
-            <string>WenQuanYi Zen Hei</string>
-        </test>
-        <edit name="family" mode="assign" binding="same">
-            <string>WenQuanYi Micro Hei</string>
-        </edit>
-    </match>
-    <match target="pattern">
-        <test qual="any" name="family">
-            <string>WenQuanYi Zen Hei Lite</string>
-        </test>
-        <edit name="family" mode="assign" binding="same">
-            <string>WenQuanYi Micro Hei Lite</string>
-        </edit>
-    </match>
-    <match target="pattern">
-        <test qual="any" name="family">
-            <string>WenQuanYi Zen Hei Mono</string>
-        </test>
-        <edit name="family" mode="assign" binding="same">
-            <string>WenQuanYi Micro Hei Mono</string>
-        </edit>
-    </match>
+  <match target="font">
+    <edit mode="assign" name="rgba">
+      <const>rgb</const>
+    </edit>
+  </match>
 
-    <!--Microsoft YaHei, SimHei, SimSun -> WenQuanYi Micro Hei -->
-    <match target="pattern">
-        <test qual="any" name="family">
-            <string>Microsoft YaHei</string>
-        </test>
-        <edit name="family" mode="assign" binding="same">
-            <string>WenQuanYi Micro Hei</string>
-        </edit>
-    </match>
-    <match target="pattern">
-        <test qual="any" name="family">
-            <string>SimHei</string>
-        </test>
-        <edit name="family" mode="assign" binding="same">
-            <string>WenQuanYi Micro Hei</string>
-        </edit>
-    </match>
-    <match target="pattern">
-        <test qual="any" name="family">
-            <string>SimSun</string>
-        </test>
-        <edit name="family" mode="assign" binding="same">
-            <string>WenQuanYi Micro Hei</string>
-        </edit>
-    </match>
-    <match target="pattern">
-        <test qual="any" name="family">
-            <string>SimSun-18030</string>
-        </test>
-        <edit name="family" mode="assign" binding="same">
-            <string>WenQuanYi Micro Hei</string>
-        </edit>
-    </match>
+  <match target="font">
+    <edit mode="assign" name="hintstyle">
+      <const>hintslight</const>
+    </edit>
+  </match>
+
+  <match target="font">
+    <edit mode="assign" name="antialias">
+      <bool>true</bool>
+    </edit>
+  </match>
+
+  <!-- Map fonts that are commonly used by web pages to our preferred fonts -->
+  <match target="pattern">
+    <test qual="any" name="family"><string>Cantarell</string></test>
+    <edit name="family" mode="assign" binding="same"><string>sans-serif</string></edit>
+  </match>
+
+  <match target="pattern">
+    <test qual="any" name="family"><string>BlexMono Nerd Font Mono</string></test>
+    <edit name="family" mode="assign" binding="same"><string>monospace</string></edit>
+  </match>
+
+  <!-- Default font for the zh_CN locale (no fc-match pattern) -->
+  <match>
+    <test compare="contains" name="lang">
+      <string>zh_CN</string>
+    </test>
+    <edit mode="prepend" name="family">
+      <string>Noto Sans CJK SC</string>
+    </edit>
+  </match>
+
+  <!-- Default sans-serif font -->
+  <match target="pattern">
+    <test qual="any" name="family">
+      <string>sans-serif</string></test>
+    <edit name="family" mode="prepend" binding="same">
+      <string>Noto Sans</string>
+    </edit>
+  </match>
+
+  <!-- Default serif fonts -->
+  <match target="pattern">
+    <test qual="any" name="family">
+      <string>serif</string>
+    </test>
+    <edit name="family" mode="prepend" binding="same">
+      <string>Noto Serif</string>
+    </edit>
+  </match>
+
+  <!-- Default monospace fonts -->
+  <match target="pattern">
+    <test qual="any" name="family">
+      <string>monospace</string>
+    </test>
+    <edit name="family" mode="prepend" binding="same">
+      <string>BlexMono Nerd Font Mono</string>
+    </edit>
+  </match>
+
+  <!-- Fallback fonts preference order -->
+  <alias>
+    <family>sans-serif</family>
+    <prefer>
+      <family>Noto Sans</family>
+      <family>Noto Sans CJK SC</family>
+      <family>Noto Sans CJK TC</family>
+      <family>Noto Sans CJK JP</family>
+      <family>Noto Sans CJK KR</family>
+      <family>Noto Color Emoji</family>
+      <family>Noto Emoji</family>
+    </prefer>
+  </alias>
+  <alias>
+    <family>serif</family>
+    <prefer>
+      <family>Noto Serif</family>
+      <family>Noto Serif CJK SC</family>
+      <family>Noto Serif CJK TC</family>
+      <family>Noto Serif CJK JP</family>
+      <family>Noto Serif CJK KR</family>
+      <family>Noto Color Emoji</family>
+      <family>Noto Emoji</family>
+    </prefer>
+  </alias>
+  <alias>
+    <family>monospace</family>
+    <prefer>
+      <family>BlexMono Nerd Font Mono</family>
+      <family>Noto Color Emoji</family>
+      <family>Noto Emoji</family>
+    </prefer>
+  </alias>
+
+  <selectfont>
+    <rejectfont>
+      <pattern>
+        <patelt name="family" >
+          <!-- This font is causing problem with GitHub -->
+          <string>Nimbus Sans</string>
+        </patelt>
+      </pattern>
+    </rejectfont>
+  </selectfont>
+
 </fontconfig>
 ```
 
 `exa --icons` 命令无法显示 icon（KDE 下的 konsole）：
+
+这其实是字体配置的问题，使用以上配置后，能够显示 icon 了。
 
 -   [Get emojis working on arch linux with noto-fonts-emoji](https://dev.to/darksmile92/get-emojis-working-on-arch-linux-with-noto-fonts-emoji-2a9)
 
@@ -357,6 +337,7 @@ monaco, menlo, hack, IBM Plex Mono
 2.  <https://wiki.archlinux.org/title/Fonts>
 3.  <https://wiki.archlinux.org/title/Font_configuration>
 4.  [fontconfig user docs](https://www.freedesktop.org/software/fontconfig/fontconfig-user.html)
+5.  <https://szclsya.me/zh-cn/posts/fonts/linux-config-guide/>
 
 
 ## 蓝牙 {#蓝牙}
