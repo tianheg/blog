@@ -2,7 +2,7 @@
 title = "Arch Linux 软件安装和用法"
 author = ["Tianhe Gao"]
 date = 2021-08-20T00:00:00+08:00
-lastmod = 2022-09-05T12:48:37+08:00
+lastmod = 2022-09-05T16:07:11+08:00
 tags = ["Arch Linux", "技术"]
 draft = false
 toc = true
@@ -175,8 +175,23 @@ Install fcitx5，并安装词库、主题：
 所有安装的字体：
 
 ```sh
-# pacman -S noto-fonts noto-fonts-extra noto-fonts-emoji noto-fonts-cjk ttf-dejavu ttf-liberation ttf-roboto ttf-inconsolata libertinus-font ttf-droid adobe-source-han-sans-cn-fonts adobe-source-han-serif-cn-fonts
+# pacman -S noto-fonts noto-fonts-extra noto-fonts-emoji noto-fonts-cjk ttf-dejavu ttf-liberation ttf-roboto ttf-inconsolata libertinus-font ttf-droid adobe-source-han-sans-cn-fonts adobe-source-han-serif-cn-fonts wqy-microhei wqy-zenhei ttf-ms-win11-auto
 # yay -S otf-ibm-plex
+```
+
+关于 wqy-zenhei 的安装提示：
+
+```sh
+# ==> Special Note: By default, we disabled the embedded bitmaps, so that the
+#     characters will be displayed as anti-aliased glyphs.  Those who want to
+#     use bitmap font rendering (for 9pt-12pt) can do the following:
+
+# cd /etc/fonts/conf.d
+# rm 65-wqy-zenhei.conf
+# ln -s /usr/share/fontconfig/conf.avail/43-wqy-zenhei-sharp.conf
+
+#     Remove the symlinks 43-wqy-zenhei-sharp.conf and 65-wqy-zenhei.conf from
+#     /etc/fonts/conf.d if you have problems with this package.
 ```
 
 中文：
@@ -195,6 +210,153 @@ monaco, menlo, hack, IBM Plex Mono
 ```sh
 # fc-cache -fv # 更新字体缓存
 ```
+
+用户配置字体配置文件位于 `~/.config/fontconfig/.fonts.conf`
+
+<https://wiki.archlinux.org/title/Font_configuration/Examples#Chinese_in_Noto_Fonts>
+
+```cfg
+<?xml version="1.0"?>
+<!DOCTYPE fontconfig SYSTEM "urn:fontconfig:fonts.dtd">
+<fontconfig>
+    <match target="font">
+        <edit name="embeddedbitmap" mode="assign">
+            <bool>false</bool>
+        </edit>
+    </match>
+    <match>
+        <test qual="any" name="family">
+            <string>serif</string>
+        </test>
+        <edit name="family" mode="prepend" binding="strong">
+            <string>Noto Serif</string>
+            <family>Noto Color Emoji</family>
+        </edit>
+    </match>
+    <match target="pattern">
+        <test qual="any" name="family">
+            <string>sans-serif</string>
+        </test>
+        <edit name="family" mode="prepend" binding="strong">
+            <string>Noto Sans</string>
+            <family>Noto Color Emoji</family>
+        </edit>
+    </match>
+    <match target="pattern">
+        <test qual="any" name="family">
+            <string>monospace</string>
+        </test>
+        <edit name="family" mode="prepend" binding="strong">
+            <string>Noto Sans Mono</string>
+            <family>Noto Color Emoji</family>
+        </edit>
+    </match>
+    <match>
+        <test name="lang" compare="contains">
+            <string>zh</string>
+        </test>
+        <test name="family">
+            <string>serif</string>
+        </test>
+        <edit name="family" mode="prepend">
+            <string>Noto Serif CJK SC</string>
+        </edit>
+    </match>
+    <match>
+        <test name="lang" compare="contains">
+            <string>zh</string>
+        </test>
+        <test name="family">
+            <string>sans-serif</string>
+        </test>
+        <edit name="family" mode="prepend">
+            <string>Noto Sans CJK SC</string>
+        </edit>
+    </match>
+    <match>
+        <test name="lang" compare="contains">
+            <string>zh</string>
+        </test>
+        <test name="family">
+            <string>monospace</string>
+        </test>
+        <edit name="family" mode="prepend">
+            <string>Noto Sans Mono CJK SC</string>
+        </edit>
+    </match>
+
+    <!--WenQuanYi Zen Hei -> WenQuanYi Micro Hei -->
+    <match target="pattern">
+        <test qual="any" name="family">
+            <string>WenQuanYi Zen Hei</string>
+        </test>
+        <edit name="family" mode="assign" binding="same">
+            <string>WenQuanYi Micro Hei</string>
+        </edit>
+    </match>
+    <match target="pattern">
+        <test qual="any" name="family">
+            <string>WenQuanYi Zen Hei Lite</string>
+        </test>
+        <edit name="family" mode="assign" binding="same">
+            <string>WenQuanYi Micro Hei Lite</string>
+        </edit>
+    </match>
+    <match target="pattern">
+        <test qual="any" name="family">
+            <string>WenQuanYi Zen Hei Mono</string>
+        </test>
+        <edit name="family" mode="assign" binding="same">
+            <string>WenQuanYi Micro Hei Mono</string>
+        </edit>
+    </match>
+
+    <!--Microsoft YaHei, SimHei, SimSun -> WenQuanYi Micro Hei -->
+    <match target="pattern">
+        <test qual="any" name="family">
+            <string>Microsoft YaHei</string>
+        </test>
+        <edit name="family" mode="assign" binding="same">
+            <string>WenQuanYi Micro Hei</string>
+        </edit>
+    </match>
+    <match target="pattern">
+        <test qual="any" name="family">
+            <string>SimHei</string>
+        </test>
+        <edit name="family" mode="assign" binding="same">
+            <string>WenQuanYi Micro Hei</string>
+        </edit>
+    </match>
+    <match target="pattern">
+        <test qual="any" name="family">
+            <string>SimSun</string>
+        </test>
+        <edit name="family" mode="assign" binding="same">
+            <string>WenQuanYi Micro Hei</string>
+        </edit>
+    </match>
+    <match target="pattern">
+        <test qual="any" name="family">
+            <string>SimSun-18030</string>
+        </test>
+        <edit name="family" mode="assign" binding="same">
+            <string>WenQuanYi Micro Hei</string>
+        </edit>
+    </match>
+</fontconfig>
+```
+
+`exa --icons` 命令无法显示 icon（KDE 下的 konsole）：
+
+-   [Get emojis working on arch linux with noto-fonts-emoji](https://dev.to/darksmile92/get-emojis-working-on-arch-linux-with-noto-fonts-emoji-2a9)
+
+参考：
+
+1.  <https://wiki.archlinux.org/title/Microsoft_fonts>
+2.  <https://wiki.archlinux.org/title/Fonts>
+3.  <https://wiki.archlinux.org/title/Font_configuration>
+4.  [fontconfig user docs](https://www.freedesktop.org/software/fontconfig/fontconfig-user.html)
 
 
 ## 蓝牙 {#蓝牙}
@@ -366,6 +528,11 @@ Server = https://repo.archlinuxcn.org/$arch
 在 Arch 中安装包时应避免没有升级系统就刷新包列表。这样做是为了避免出现依赖问题，比如，如果一个包被从官方仓库中移除，在进行包同步时就会报错。在实践中，不要执行 `pacman -Sy package_name` ，应该执行 `pacman -Syu package_name` 。
 
 
+### informant {#informant}
+
+一个 Arch Linux 新闻阅读器和 pacman hook。可以帮你在更新包时检查是否还有没有阅读的 Arch Linux 新闻。
+
+
 ### 执行 pacman 命令过程中，遇到的信息/警告/错误 {#执行-pacman-命令过程中-遇到的信息-警告-错误}
 
 循环依赖：
@@ -486,6 +653,8 @@ makepkg -si
 
 ## 备份 {#备份}
 
+通过 `rsync` 和 `crontab` 定时将 `/etc` , `~/.config` 备份到 Git 仓库 dotfiles 中。
+
 timeshift 在最近一次系统损坏中成为了罪魁祸首：新旧 GRUB 版本的冲突让我的系统不断进入 GRUB rescue 模式，只能重装，幸好通过 USB 启动盘将一些数据备份了出来。
 
 -   <https://blog.lilydjwg.me/2013/12/29/rsync-btrfs-dm-crypt-full-backup.42219.html>
@@ -548,6 +717,8 @@ timeshift 在最近一次系统损坏中成为了罪魁祸首：新旧 GRUB 版�
 A modern replacement for `ls` (List directory contents) <https://the.exa.website>
 
 ```sh
+# pacman -S exa
+
 exa
 exa --oneline # List files one per line
 exa --all # List all files, including hidden files
@@ -635,9 +806,28 @@ pacman -S lf
 ```
 
 
-## informant {#informant}
+### gh {#gh}
 
-一个 Arch Linux 新闻阅读器和 pacman hook。可以帮你在更新包时检查是否还有没有阅读的 Arch Linux 新闻。
+GitHub 的 Cli 工具
+
+```sh
+pacman -S gh
+```
+
+
+### 其他常用命令行工具 {#其他常用命令行工具}
+
+```sh
+# pacman -S htop neofetch cronie
+```
+
+设置 cronie：
+
+```sh
+# crontab -e
+
+# @hourly /path/to/backup_script_file
+```
 
 
 ## Virtualbox {#virtualbox}
@@ -792,7 +982,27 @@ Merge those examples, if needed to the according config files.
 音视频播放
 
 ```sh
-pacman -S vlc
+# pacman -S vlc
+```
+
+
+## gThumb {#gthumb}
+
+<https://wiki.gnome.org/action/show/Apps/Gthumb>
+
+gThumb is an image viewer and browser for the GNOME Desktop. It also includes an importer tool for transferring photos from cameras.
+
+```sh
+# pacman -S gthumb
+```
+
+
+## 其他常用软件 {#其他常用软件}
+
+```sh
+# pacman -S firefox-developer-edition keepassxc spectacle
+## aur
+# yay -S google-chrome
 ```
 
 
