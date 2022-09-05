@@ -2,7 +2,7 @@
 title = "Arch Linux 软件安装和用法"
 author = ["Tianhe Gao"]
 date = 2021-08-20T00:00:00+08:00
-lastmod = 2022-09-05T11:20:52+08:00
+lastmod = 2022-09-05T12:48:37+08:00
 tags = ["Arch Linux", "技术"]
 draft = false
 toc = true
@@ -507,6 +507,34 @@ timeshift 在最近一次系统损坏中成为了罪魁祸首：新旧 GRUB 版�
 ## 常用命令行工具 {#常用命令行工具}
 
 
+### ohmyzsh {#ohmyzsh}
+
+<https://github.com/ohmyzsh/ohmyzsh>
+
+安装前提：
+
+1.  [Zsh](https://www.zsh.org/)： `pacman -S zsh`
+2.  `curl` / `wget` installed
+3.  `git` installed
+
+<!--listend-->
+
+```sh
+# sh -c "$(curl -fsSL https://raw.githubusercontent.com/ohmyzsh/ohmyzsh/master/tools/install.sh)"
+## or
+# sh -c "$(wget -O- https://raw.githubusercontent.com/ohmyzsh/ohmyzsh/master/tools/install.sh)"
+
+## plugins
+# git clone https://github.com/zsh-users/zsh-autosuggestions ~/.oh-my-zsh/custom/plugins/zsh-autosuggestions
+# git clone https://github.com/zsh-users/zsh-syntax-highlighting.git ~/.oh-my-zsh/custom/plugins/zsh-syntax-highlighting
+# git clone https://gist.github.com/475ee7768efc03727f21.git ~/.oh-my-zsh/custom/plugins/git-auto-status
+# git clone https://github.com/jameshgrn/zshnotes/ ~/.oh-my-zsh/custom/plugins/zshnotes
+
+## my configuration
+# cp dotfiles/shell/zsh/zshrc ~/.zshrc
+```
+
+
 ### z.lua {#z-dot-lua}
 
 ```sh
@@ -756,6 +784,15 @@ Optional dependencies for brltty
 vde config files should be placed in /etc/vde, sample files are provided.
 iptables and dhcpd sample files have been installed to '/usr/share/vde2'.
 Merge those examples, if needed to the according config files.
+```
+
+
+## VLC {#vlc}
+
+音视频播放
+
+```sh
+pacman -S vlc
 ```
 
 
