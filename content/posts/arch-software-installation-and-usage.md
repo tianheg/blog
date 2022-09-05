@@ -2,7 +2,7 @@
 title = "Arch Linux 软件安装和用法"
 author = ["Tianhe Gao"]
 date = 2021-08-20T00:00:00+08:00
-lastmod = 2022-09-05T16:54:06+08:00
+lastmod = 2022-09-05T22:13:22+08:00
 tags = ["Arch Linux", "技术"]
 draft = false
 toc = true
@@ -978,6 +978,27 @@ gThumb is an image viewer and browser for the GNOME Desktop. It also includes an
 ```
 
 
+## 开发环境配置 {#开发环境配置}
+
+
+### JavaScript（Nodejs） {#javascript-nodejs}
+
+```sh
+## pnpm 设置镜像
+# pnpm config set registry https://registry.npmmirror.com
+
+```
+
+
+### Scheme {#scheme}
+
+<https://www.scheme.org/>
+
+Scheme 是一种 Lisp 变体。
+
+目前使用 Guile 编译。它是一种 Scheme 实现。
+
+
 ## 其他常用软件 {#其他常用软件}
 
 ```sh
@@ -992,15 +1013,13 @@ gThumb is an image viewer and browser for the GNOME Desktop. It also includes an
 
 ### exercism {#exercism}
 
+-   <https://exercism.org/>
+-   <https://github.com/exercism/cli>
+
+在线语言练习
+
 ```sh
-# https://github.com/exercism/cli/releases/ download exercism-linux-64bit.tgz
-tar -xf exercism-linux-64bit.tgz
-# Once you download and extract the archive, make it available in your $PATH
-cd ~/Downloads/exercism-linux-64bit
-mkdir -p ~/bin
-mv exercism ~/bin
-~/bin/exercism
-exercism configure --token=
+# yay -S exercism-bin
 ```
 
 

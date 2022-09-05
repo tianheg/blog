@@ -922,30 +922,22 @@ gThumb is an image viewer and browser for the GNOME Desktop. It also includes an
 # pacman -S gthumb
 #+END_SRC
 
-* 其他常用软件
+* 开发环境配置
+** JavaScript（Nodejs）
 
 #+BEGIN_SRC sh
-# pacman -S firefox-developer-edition keepassxc spectacle
-## aur
-# yay -S google-chrome
+## pnpm 设置镜像
+# pnpm config set registry https://registry.npmmirror.com
+
 #+END_SRC
 
-* 非常用软件
+** Scheme
 
-** exercism
+https://www.scheme.org/
 
-#+BEGIN_SRC sh
-# https://github.com/exercism/cli/releases/ download exercism-linux-64bit.tgz
-tar -xf exercism-linux-64bit.tgz
-# Once you download and extract the archive, make it available in your $PATH
-cd ~/Downloads/exercism-linux-64bit
-mkdir -p ~/bin
-mv exercism ~/bin
-~/bin/exercism
-exercism configure --token=
-#+END_SRC
+Scheme 是一种 Lisp 变体。
 
-** Scheme Programming Language
+目前使用 Guile 编译。它是一种 Scheme 实现。因为被很多核心程序依赖，所以已经安装好了。
 
 #+BEGIN_SRC sh
 guile hello-world.scm
@@ -966,7 +958,26 @@ guile hello-world.scm --no-auto-compile
 alias guile="guile --no-auto-compile"
 #+END_SRC
 
-[[https://www.linuxfromscratch.org/blfs/view/svn/general/guile.html][Guile Install guile]]
+* 其他常用软件
+
+#+BEGIN_SRC sh
+# pacman -S firefox-developer-edition keepassxc spectacle
+## aur
+# yay -S google-chrome
+#+END_SRC
+
+* 非常用软件
+
+** exercism
+
+- https://exercism.org/
+- https://github.com/exercism/cli
+
+在线语言练习
+
+#+BEGIN_SRC sh
+# yay -S exercism-bin
+#+END_SRC
 
 ** =nscd= 自启动
 
