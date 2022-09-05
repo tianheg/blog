@@ -2,7 +2,7 @@
 title = "读《The Linux Programming Interface》"
 author = ["Tianhe Gao"]
 date = 2022-09-05T01:54:00+08:00
-lastmod = 2022-09-05T10:25:52+08:00
+lastmod = 2022-09-05T21:23:22+08:00
 tags = ["技术", "阅读", "Linux"]
 draft = false
 toc = true
@@ -11,6 +11,13 @@ toc = true
 <https://man7.org/tlpi/index.html>
 
 这是一本手册，是用来查询的，如果每页都要阅读要花费不少时间。我先通读一下目录。
+
+
+## 历史和标准 {#历史和标准}
+
+Linux 是 Unix 系统的一员。
+
+两个重要事情：GNU 项目的出现和 Linux 内核的开发。
 
 
 ## 目录 {#目录}
