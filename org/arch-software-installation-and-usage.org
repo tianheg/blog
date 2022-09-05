@@ -92,11 +92,12 @@ ExecStart=/usr/local/bin/clash -d "/home/archie/.config/clash"
 WantedBy=multi-user.target
 #+end_src
 
-* z.lua
+** proxychains-ng
+
+https://github.com/rofl0r/proxychains-ng
 
 #+BEGIN_SRC sh
-# git clone https://github.com/skywind3000/z.lua.git ~/.z.lua
-# pacman -S lua
+pacman -S proxychains-ng
 #+END_SRC
 
 * Emacs Hunspell
@@ -104,10 +105,10 @@ WantedBy=multi-user.target
 https://github.com/hunspell/hunspell#usage
 
 #+BEGIN_SRC sh
-sudo mkdir /usr/share/hunspell
-cd /usr/share/hunspell
-wget -O en_US.aff  https://cgit.freedesktop.org/libreoffice/dictionaries/plain/en/en_US.aff?id=a4473e06b56bfe35187e302754f6baaa8d75e54f
-wget -O en_US.dic https://cgit.freedesktop.org/libreoffice/dictionaries/plain/en/en_US.dic?id=a4473e06b56bfe35187e302754f6baaa8d75e54f
+# mkdir /usr/share/hunspell
+# cd /usr/share/hunspell
+# wget -O en_US.aff  https://cgit.freedesktop.org/libreoffice/dictionaries/plain/en/en_US.aff?id=a4473e06b56bfe35187e302754f6baaa8d75e54f
+# wget -O en_US.dic https://cgit.freedesktop.org/libreoffice/dictionaries/plain/en/en_US.dic?id=a4473e06b56bfe35187e302754f6baaa8d75e54f
 #+END_SRC
 
 * 输入法配置
@@ -115,7 +116,7 @@ wget -O en_US.dic https://cgit.freedesktop.org/libreoffice/dictionaries/plain/en
 想把 ibus 移除，只使用 fcitx。后来发现 ibus 被很多程序依赖无法删除。
 
 #+BEGIN_SRC sh
-sudo pacman -S fcitx-im fcitx-configtool fcitx-googlepinyin kcm-fcitx
+# pacman -S fcitx-im fcitx-configtool fcitx-googlepinyin kcm-fcitx
 #+END_SRC
 
 Add support for gtk,qt:
@@ -132,8 +133,8 @@ export QT_IM_MODULE="fcitx"
 Install fcitx5，并安装词库、主题：
 
 #+BEGIN_SRC sh
-sudo pacman -Rsc fcitx
-sudo pacman -S fcitx5-im fcitx5-chinese-addons fcitx5-pinyin-zhwiki fcitx5-material-color
+# pacman -Rsc fcitx
+# pacman -S fcitx5-im fcitx5-chinese-addons fcitx5-pinyin-zhwiki fcitx5-material-color
 #+END_SRC
 
 配置开机启动；主题：material-color-black
@@ -159,7 +160,7 @@ sudo pacman -S fcitx5-im fcitx5-chinese-addons fcitx5-pinyin-zhwiki fcitx5-mater
 所有安装的字体：
 
 #+BEGIN_SRC sh
-# pacman -S noto-fonts noto-fonts-extra noto-fonts-emoji noto-fonts-cjk ttf-dejavu ttf-liberation ttf-roboto ttf-inconsolata ttf-linux-libertine ttf-droid adobe-source-han-sans-cn-fonts adobe-source-han-serif-cn-fonts
+# pacman -S noto-fonts noto-fonts-extra noto-fonts-emoji noto-fonts-cjk ttf-dejavu ttf-liberation ttf-roboto ttf-inconsolata libertinus-font ttf-droid adobe-source-han-sans-cn-fonts adobe-source-han-serif-cn-fonts
 # yay -S otf-ibm-plex
 #+END_SRC
 
@@ -181,7 +182,7 @@ monaco, menlo, hack, IBM Plex Mono
 * 蓝牙
 
 #+BEGIN_SRC sh
-sudo systemctl enable --now bluetooth
+# systemctl enable --now bluetooth
 #+END_SRC
 
 * Git
@@ -269,7 +270,7 @@ Server = https://repo.archlinuxcn.org/$arch
 导入 PGP 公匙（为了验证 archlinuxcn 库）:
 
 #+BEGIN_SRC sh
-sudo pacman -Syy && sudo pacman -S archlinuxcn-keyring
+# pacman -Syy && pacman -S archlinuxcn-keyring
 #+END_SRC
 
 ** pacman 命令
@@ -369,18 +370,18 @@ gpg: next trustdb check due at 2021-10-09
   -> Disabled 3 keys.
 
 ## try 1
-sudo pacman-key --refresh-keys
-sudo pacman -S archlinux-keyring archlinuxcn-keyring
+# pacman-key --refresh-keys
+# pacman -S archlinux-keyring archlinuxcn-keyring
 ## try 2
-sudo rm -R /etc/pacman.d/gnupg/ # No such file or directory
-sudo rm -rf /etc/pacman.d/gnupg/
-sudo rm -R /root/.gnupg/ 
-sudo rm -R /var/cache/pacman/pkg/
-sudo gpg --refresh-keys
-sudo pacman-key --init
-sudo pacman-key --populate archlinux # still display `gpg: key xxx: no user ID for key signature packet of class 10`
-sudo pacman-key --refresh-keys
-sudo pacman -Syyu
+# rm -R /etc/pacman.d/gnupg/ # No such file or directory
+# rm -rf /etc/pacman.d/gnupg/
+# rm -R /root/.gnupg/ 
+# rm -R /var/cache/pacman/pkg/
+# gpg --refresh-keys
+# pacman-key --init
+# pacman-key --populate archlinux # still display `gpg: key xxx: no user ID for key signature packet of class 10`
+# pacman-key --refresh-keys
+# pacman -Syyu
 #+END_SRC
 
 warning: /etc/pacman.d/mirrorlist installed as /etc/pacman.d/mirrorlist.pacnew
@@ -406,7 +407,7 @@ Yet Another Yogurt: 又一个从 Arch User Repository 下载包的工具。
 官方仓库：[[https://github.com/Jguer/yay]]
 
 #+BEGIN_SRC sh
-sudo pacman -S --needed git base-devel
+# pacman -S --needed git base-devel
 git clone https://aur.archlinux.org/yay.git
 cd yay
 makepkg -si
@@ -460,7 +461,7 @@ timeshift 在最近一次系统损坏中成为了罪魁祸首：新旧 GRUB 版�
 - [[https://github.com/teejee2008/timeshift]]
 
 #+BEGIN_SRC sh
-sudo pacman -S timeshift
+# pacman -S timeshift
 #+END_SRC
 
 ** timeshift
@@ -468,7 +469,16 @@ sudo pacman -S timeshift
 1. Snapshot type: rsync (btrfs cannot use because of BTRFS snapts are saved on system partition)
 2. User home directories: root-include all files, user-include only hidden files
 
-* exa
+* 常用命令行工具
+
+** z.lua
+
+#+BEGIN_SRC sh
+# git clone https://github.com/skywind3000/z.lua.git ~/.z.lua
+# pacman -S lua
+#+END_SRC
+
+** exa
 
 A modern replacement for =ls= (List directory contents) [[https://the.exa.website]]
 
@@ -482,6 +492,72 @@ exa --long --tree --level=3 # Display a tree of files, three levels deep
 exa --long --sort=modified # List files sorted by modification date (oldest first)
 exa --long --header --icons --git # List files with their headers, icons, and Git statuses
 exa --git-ignore # Don't list files mentioned in `.gitignore`
+#+END_SRC
+
+** bat
+
+https://github.com/sharkdp/bat
+
+cat 的替代
+
+#+BEGIN_SRC sh
+pacman -S bat
+#+END_SRC
+
+** tldr
+
+1. tldr-node-client
+
+#+BEGIN_SRC sh
+npm install -g tldr
+cd ~/.nvm/versions/node/v14.18.1/lib/node_modules/tldr
+mkdir -p $ZSH_CUSTOM/plugins/tldr
+cp bin/completion/zsh/_tldr $ZSH_CUSTOM/plugins/tldr/_tldr
+#+END_SRC
+
+在 =~/.zshrc= 的 plugins 中加入 tldr。
+
+2. tldr-python-client
+
+#+BEGIN_SRC sh
+# pacman -S tldr
+#+END_SRC
+
+在 =~/.zshrc= 中加入以下内容：
+
+#+BEGIN_SRC conf
+export TLDR_CACHE_ENABLED=1
+export TLDR_CACHE_MAX_AGE=720
+export TLDR_PAGES_SOURCE_LOCATION="https://raw.githubusercontent.com/tldr-pages/tldr/master/pages"
+export TLDR_DOWNLOAD_CACHE_LOCATION="https://tldr-pages.github.io/assets/tldr.zip"
+#+END_SRC
+
+** netstat
+
+查看网络接口的占用情况
+
+#+BEGIN_SRC sh
+pacman -S net-tools
+#+END_SRC
+
+** hugo
+
+https://gohugo.io
+
+本博客站的生成程序
+
+#+BEGIN_SRC sh
+pacman -S hugo
+#+END_SRC
+
+** lf
+
+https://github.com/gokcehan/lf
+
+终端文件管理器
+
+#+BEGIN_SRC sh
+pacman -S lf
 #+END_SRC
 
 * informant
@@ -504,8 +580,8 @@ exa --git-ignore # Don't list files mentioned in `.gitignore`
 但是，执行过几个命令好了，我不知道命令的作用，参考 [[https://bbs.archlinux.org/viewtopic.php?id=210006][这个链接]]：
 
 #+BEGIN_SRC sh
-sudo modprobe vboxdrv
-sudo /sbin/rcvboxdrv setup
+modprobe vboxdrv
+/sbin/rcvboxdrv setup
 #+END_SRC
 
 Error message:
@@ -521,7 +597,7 @@ You will not be able to start VMs until this problem is fixed.
 运行命令解决：
 
 #+BEGIN_SRC sh
-sudo modprobe vboxdrv
+modprobe vboxdrv
 #+END_SRC
 
 * earlyoom
@@ -532,7 +608,7 @@ sudo modprobe vboxdrv
 
 #+BEGIN_SRC sh
 # after install
-sudo systemctl enable --now earlyoom
+# systemctl enable --now earlyoom
 #+END_SRC
 
 * Vagrant
@@ -704,34 +780,6 @@ lon=115.622324
 
 1. [[https://wiki.archlinux.org/title/redshift]]
 2. [[https://io-oi.me/tech/hello-arch-linux/#redshift]]
-
-** tldr
-
-1. tldr-node-client
-
-#+BEGIN_SRC sh
-npm install -g tldr
-cd ~/.nvm/versions/node/v14.18.1/lib/node_modules/tldr
-mkdir -p $ZSH_CUSTOM/plugins/tldr
-cp bin/completion/zsh/_tldr $ZSH_CUSTOM/plugins/tldr/_tldr
-#+END_SRC
-
-在 =~/.zshrc= 的 plugins 中加入 tldr。
-
-2. tldr-python-client
-
-#+BEGIN_SRC sh
-sudo pacman -S tldr
-#+END_SRC
-
-在 =~/.zshrc= 中加入以下内容：
-
-#+BEGIN_SRC conf
-export TLDR_CACHE_ENABLED=1
-export TLDR_CACHE_MAX_AGE=720
-export TLDR_PAGES_SOURCE_LOCATION="https://raw.githubusercontent.com/tldr-pages/tldr/master/pages"
-export TLDR_DOWNLOAD_CACHE_LOCATION="https://tldr-pages.github.io/assets/tldr.zip"
-#+END_SRC
 
 * 一些文档
 
