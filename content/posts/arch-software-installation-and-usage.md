@@ -2,7 +2,7 @@
 title = "Arch Linux 软件安装和用法"
 author = ["Tianhe Gao"]
 date = 2021-08-20T00:00:00+08:00
-lastmod = 2022-09-04T20:26:49+08:00
+lastmod = 2022-09-05T11:20:52+08:00
 tags = ["Arch Linux", "技术"]
 draft = false
 toc = true
@@ -103,11 +103,12 @@ WantedBy=multi-user.target
 ```
 
 
-## z.lua {#z-dot-lua}
+### proxychains-ng {#proxychains-ng}
+
+<https://github.com/rofl0r/proxychains-ng>
 
 ```sh
-# git clone https://github.com/skywind3000/z.lua.git ~/.z.lua
-# pacman -S lua
+pacman -S proxychains-ng
 ```
 
 
@@ -116,10 +117,10 @@ WantedBy=multi-user.target
 <https://github.com/hunspell/hunspell#usage>
 
 ```sh
-sudo mkdir /usr/share/hunspell
-cd /usr/share/hunspell
-wget -O en_US.aff  https://cgit.freedesktop.org/libreoffice/dictionaries/plain/en/en_US.aff?id=a4473e06b56bfe35187e302754f6baaa8d75e54f
-wget -O en_US.dic https://cgit.freedesktop.org/libreoffice/dictionaries/plain/en/en_US.dic?id=a4473e06b56bfe35187e302754f6baaa8d75e54f
+# mkdir /usr/share/hunspell
+# cd /usr/share/hunspell
+# wget -O en_US.aff  https://cgit.freedesktop.org/libreoffice/dictionaries/plain/en/en_US.aff?id=a4473e06b56bfe35187e302754f6baaa8d75e54f
+# wget -O en_US.dic https://cgit.freedesktop.org/libreoffice/dictionaries/plain/en/en_US.dic?id=a4473e06b56bfe35187e302754f6baaa8d75e54f
 ```
 
 
@@ -128,7 +129,7 @@ wget -O en_US.dic https://cgit.freedesktop.org/libreoffice/dictionaries/plain/en
 想把 ibus 移除，只使用 fcitx。后来发现 ibus 被很多程序依赖无法删除。
 
 ```sh
-sudo pacman -S fcitx-im fcitx-configtool fcitx-googlepinyin kcm-fcitx
+# pacman -S fcitx-im fcitx-configtool fcitx-googlepinyin kcm-fcitx
 ```
 
 Add support for gtk,qt:
@@ -145,8 +146,8 @@ export QT_IM_MODULE="fcitx"
 Install fcitx5，并安装词库、主题：
 
 ```sh
-sudo pacman -Rsc fcitx
-sudo pacman -S fcitx5-im fcitx5-chinese-addons fcitx5-pinyin-zhwiki fcitx5-material-color
+# pacman -Rsc fcitx
+# pacman -S fcitx5-im fcitx5-chinese-addons fcitx5-pinyin-zhwiki fcitx5-material-color
 ```
 
 配置开机启动；主题：material-color-black
@@ -174,7 +175,7 @@ sudo pacman -S fcitx5-im fcitx5-chinese-addons fcitx5-pinyin-zhwiki fcitx5-mater
 所有安装的字体：
 
 ```sh
-# pacman -S noto-fonts noto-fonts-extra noto-fonts-emoji noto-fonts-cjk ttf-dejavu ttf-liberation ttf-roboto ttf-inconsolata ttf-linux-libertine ttf-droid adobe-source-han-sans-cn-fonts adobe-source-han-serif-cn-fonts
+# pacman -S noto-fonts noto-fonts-extra noto-fonts-emoji noto-fonts-cjk ttf-dejavu ttf-liberation ttf-roboto ttf-inconsolata libertinus-font ttf-droid adobe-source-han-sans-cn-fonts adobe-source-han-serif-cn-fonts
 # yay -S otf-ibm-plex
 ```
 
@@ -199,7 +200,7 @@ monaco, menlo, hack, IBM Plex Mono
 ## 蓝牙 {#蓝牙}
 
 ```sh
-sudo systemctl enable --now bluetooth
+# systemctl enable --now bluetooth
 ```
 
 
@@ -292,7 +293,7 @@ Server = https://repo.archlinuxcn.org/$arch
 导入 PGP 公匙（为了验证 archlinuxcn 库）:
 
 ```sh
-sudo pacman -Syy && sudo pacman -S archlinuxcn-keyring
+# pacman -Syy && pacman -S archlinuxcn-keyring
 ```
 
 
@@ -395,18 +396,18 @@ gpg: next trustdb check due at 2021-10-09
   -> Disabled 3 keys.
 
 ## try 1
-sudo pacman-key --refresh-keys
-sudo pacman -S archlinux-keyring archlinuxcn-keyring
+# pacman-key --refresh-keys
+# pacman -S archlinux-keyring archlinuxcn-keyring
 ## try 2
-sudo rm -R /etc/pacman.d/gnupg/ # No such file or directory
-sudo rm -rf /etc/pacman.d/gnupg/
-sudo rm -R /root/.gnupg/
-sudo rm -R /var/cache/pacman/pkg/
-sudo gpg --refresh-keys
-sudo pacman-key --init
-sudo pacman-key --populate archlinux # still display `gpg: key xxx: no user ID for key signature packet of class 10`
-sudo pacman-key --refresh-keys
-sudo pacman -Syyu
+# rm -R /etc/pacman.d/gnupg/ # No such file or directory
+# rm -rf /etc/pacman.d/gnupg/
+# rm -R /root/.gnupg/
+# rm -R /var/cache/pacman/pkg/
+# gpg --refresh-keys
+# pacman-key --init
+# pacman-key --populate archlinux # still display `gpg: key xxx: no user ID for key signature packet of class 10`
+# pacman-key --refresh-keys
+# pacman -Syyu
 ```
 
 warning: /etc/pacman.d/mirrorlist installed as /etc/pacman.d/mirrorlist.pacnew
@@ -434,7 +435,7 @@ Yet Another Yogurt: 又一个从 Arch User Repository 下载包的工具。
 官方仓库：<https://github.com/Jguer/yay>
 
 ```sh
-sudo pacman -S --needed git base-devel
+# pacman -S --needed git base-devel
 git clone https://aur.archlinux.org/yay.git
 cd yay
 makepkg -si
@@ -493,7 +494,7 @@ timeshift 在最近一次系统损坏中成为了罪魁祸首：新旧 GRUB 版�
 <!--listend-->
 
 ```sh
-sudo pacman -S timeshift
+# pacman -S timeshift
 ```
 
 
@@ -503,7 +504,18 @@ sudo pacman -S timeshift
 2.  User home directories: root-include all files, user-include only hidden files
 
 
-## exa {#exa}
+## 常用命令行工具 {#常用命令行工具}
+
+
+### z.lua {#z-dot-lua}
+
+```sh
+# git clone https://github.com/skywind3000/z.lua.git ~/.z.lua
+# pacman -S lua
+```
+
+
+### exa {#exa}
 
 A modern replacement for `ls` (List directory contents) <https://the.exa.website>
 
@@ -517,6 +529,81 @@ exa --long --tree --level=3 # Display a tree of files, three levels deep
 exa --long --sort=modified # List files sorted by modification date (oldest first)
 exa --long --header --icons --git # List files with their headers, icons, and Git statuses
 exa --git-ignore # Don't list files mentioned in `.gitignore`
+```
+
+
+### bat {#bat}
+
+<https://github.com/sharkdp/bat>
+
+cat 的替代
+
+```sh
+pacman -S bat
+```
+
+
+### tldr {#tldr}
+
+1.  tldr-node-client
+
+<!--listend-->
+
+```sh
+npm install -g tldr
+cd ~/.nvm/versions/node/v14.18.1/lib/node_modules/tldr
+mkdir -p $ZSH_CUSTOM/plugins/tldr
+cp bin/completion/zsh/_tldr $ZSH_CUSTOM/plugins/tldr/_tldr
+```
+
+在 `~/.zshrc` 的 plugins 中加入 tldr。
+
+1.  tldr-python-client
+
+<!--listend-->
+
+```sh
+# pacman -S tldr
+```
+
+在 `~/.zshrc` 中加入以下内容：
+
+```cfg
+export TLDR_CACHE_ENABLED=1
+export TLDR_CACHE_MAX_AGE=720
+export TLDR_PAGES_SOURCE_LOCATION="https://raw.githubusercontent.com/tldr-pages/tldr/master/pages"
+export TLDR_DOWNLOAD_CACHE_LOCATION="https://tldr-pages.github.io/assets/tldr.zip"
+```
+
+
+### netstat {#netstat}
+
+查看网络接口的占用情况
+
+```sh
+pacman -S net-tools
+```
+
+
+### hugo {#hugo}
+
+<https://gohugo.io>
+
+本博客站的生成程序
+
+```sh
+pacman -S hugo
+```
+
+
+### lf {#lf}
+
+<https://github.com/gokcehan/lf>
+
+终端文件管理器
+
+```sh
+pacman -S lf
 ```
 
 
@@ -539,8 +626,8 @@ exa --git-ignore # Don't list files mentioned in `.gitignore`
 但是，执行过几个命令好了，我不知道命令的作用，参考 [这个链接](https://bbs.archlinux.org/viewtopic.php?id=210006)：
 
 ```sh
-sudo modprobe vboxdrv
-sudo /sbin/rcvboxdrv setup
+modprobe vboxdrv
+/sbin/rcvboxdrv setup
 ```
 
 Error message:
@@ -556,7 +643,7 @@ You will not be able to start VMs until this problem is fixed.
 运行命令解决：
 
 ```sh
-sudo modprobe vboxdrv
+modprobe vboxdrv
 ```
 
 
@@ -568,7 +655,7 @@ sudo modprobe vboxdrv
 
 ```sh
 # after install
-sudo systemctl enable --now earlyoom
+# systemctl enable --now earlyoom
 ```
 
 
@@ -748,39 +835,6 @@ lon=115.622324
 
 1.  <https://wiki.archlinux.org/title/redshift>
 2.  <https://io-oi.me/tech/hello-arch-linux/#redshift>
-
-
-### tldr {#tldr}
-
-1.  tldr-node-client
-
-<!--listend-->
-
-```sh
-npm install -g tldr
-cd ~/.nvm/versions/node/v14.18.1/lib/node_modules/tldr
-mkdir -p $ZSH_CUSTOM/plugins/tldr
-cp bin/completion/zsh/_tldr $ZSH_CUSTOM/plugins/tldr/_tldr
-```
-
-在 `~/.zshrc` 的 plugins 中加入 tldr。
-
-1.  tldr-python-client
-
-<!--listend-->
-
-```sh
-sudo pacman -S tldr
-```
-
-在 `~/.zshrc` 中加入以下内容：
-
-```cfg
-export TLDR_CACHE_ENABLED=1
-export TLDR_CACHE_MAX_AGE=720
-export TLDR_PAGES_SOURCE_LOCATION="https://raw.githubusercontent.com/tldr-pages/tldr/master/pages"
-export TLDR_DOWNLOAD_CACHE_LOCATION="https://tldr-pages.github.io/assets/tldr.zip"
-```
 
 
 ## 一些文档 {#一些文档}

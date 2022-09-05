@@ -2,9 +2,10 @@
 title = "读《The Linux Programming Interface》"
 author = ["Tianhe Gao"]
 date = 2022-09-05T01:54:00+08:00
-lastmod = 2022-09-05T02:16:44+08:00
+lastmod = 2022-09-05T10:25:52+08:00
 tags = ["技术", "阅读", "Linux"]
 draft = false
+toc = true
 +++
 
 <https://man7.org/tlpi/index.html>
