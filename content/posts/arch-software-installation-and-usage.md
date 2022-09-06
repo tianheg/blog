@@ -2,7 +2,7 @@
 title = "Arch Linux 软件安装和用法"
 author = ["Tianhe Gao"]
 date = 2021-08-20T00:00:00+08:00
-lastmod = 2022-09-05T22:13:22+08:00
+lastmod = 2022-09-06T09:19:12+08:00
 tags = ["Arch Linux", "技术"]
 draft = false
 toc = true
@@ -329,8 +329,6 @@ Emoji：
 
 这其实是字体配置的问题，使用以上配置后，能够显示 icon 了。
 
--   [Get emojis working on arch linux with noto-fonts-emoji](https://dev.to/darksmile92/get-emojis-working-on-arch-linux-with-noto-fonts-emoji-2a9)
-
 参考：
 
 1.  <https://wiki.archlinux.org/title/Microsoft_fonts>
@@ -338,6 +336,8 @@ Emoji：
 3.  <https://wiki.archlinux.org/title/Font_configuration>
 4.  [fontconfig user docs](https://www.freedesktop.org/software/fontconfig/fontconfig-user.html)
 5.  <https://szclsya.me/zh-cn/posts/fonts/linux-config-guide/>
+6.  [Get emojis working on arch linux with noto-fonts-emoji](https://dev.to/darksmile92/get-emojis-working-on-arch-linux-with-noto-fonts-emoji-2a9) （文章里的配置步骤有点错误）
+7.  [Font configuration for CJK support in Ubuntu](https://wiki.ubuntu.com/BetterCJKSupportSpecification/FontConfig)
 
 
 ## 蓝牙 {#蓝牙}
@@ -996,7 +996,26 @@ gThumb is an image viewer and browser for the GNOME Desktop. It also includes an
 
 Scheme 是一种 Lisp 变体。
 
-目前使用 Guile 编译。它是一种 Scheme 实现。
+目前使用 Guile 编译。它是一种 Scheme 实现。因为被很多核心程序依赖，所以已经安装好了。
+
+```sh
+guile hello-world.scm
+;;; note: source file /home/archie/exercism/scheme/hello-world/hello-world.scm
+;;;       newer than compiled /home/archie/.cache/guile/ccache/2.2-LE-8-3.A/home/archie/exercism/scheme/hello-world/hello-world.scm.go
+;;; note: auto-compilation is enabled, set GUILE_AUTO_COMPILE=0
+;;;       or pass the --no-auto-compile argument to disable.
+;;; compiling /home/archie/exercism/scheme/hello-world/hello-world.scm
+;;; compiled /home/archie/.cache/guile/ccache/2.2-LE-8-3.A/home/archie/exercism/scheme/hello-world/hello-world.scm.go
+Hello World!
+
+guile hello-world.scm --no-auto-compile
+```
+
+如果关闭提示？在 `~/.zshrc` 文件中添加如下别名：
+
+```cfg
+alias guile="guile --no-auto-compile"
+```
 
 
 ## 其他常用软件 {#其他常用软件}
@@ -1021,30 +1040,6 @@ Scheme 是一种 Lisp 变体。
 ```sh
 # yay -S exercism-bin
 ```
-
-
-### Scheme Programming Language {#scheme-programming-language}
-
-```sh
-guile hello-world.scm
-;;; note: source file /home/archie/exercism/scheme/hello-world/hello-world.scm
-;;;       newer than compiled /home/archie/.cache/guile/ccache/2.2-LE-8-3.A/home/archie/exercism/scheme/hello-world/hello-world.scm.go
-;;; note: auto-compilation is enabled, set GUILE_AUTO_COMPILE=0
-;;;       or pass the --no-auto-compile argument to disable.
-;;; compiling /home/archie/exercism/scheme/hello-world/hello-world.scm
-;;; compiled /home/archie/.cache/guile/ccache/2.2-LE-8-3.A/home/archie/exercism/scheme/hello-world/hello-world.scm.go
-Hello World!
-
-guile hello-world.scm --no-auto-compile
-```
-
-如果关闭提示？在 `~/.zshrc` 文件中添加如下别名：
-
-```cfg
-alias guile="guile --no-auto-compile"
-```
-
-[Guile Install guile](https://www.linuxfromscratch.org/blfs/view/svn/general/guile.html)
 
 
 ### `nscd` 自启动 {#nscd-自启动}
