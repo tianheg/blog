@@ -2,7 +2,7 @@
 title = "Arch Linux 软件安装和用法"
 author = ["Tianhe Gao"]
 date = 2021-08-20T00:00:00+08:00
-lastmod = 2022-09-06T09:19:12+08:00
+lastmod = 2022-09-06T09:54:07+08:00
 tags = ["Arch Linux", "技术"]
 draft = false
 toc = true
@@ -337,7 +337,8 @@ Emoji：
 4.  [fontconfig user docs](https://www.freedesktop.org/software/fontconfig/fontconfig-user.html)
 5.  <https://szclsya.me/zh-cn/posts/fonts/linux-config-guide/>
 6.  [Get emojis working on arch linux with noto-fonts-emoji](https://dev.to/darksmile92/get-emojis-working-on-arch-linux-with-noto-fonts-emoji-2a9) （文章里的配置步骤有点错误）
-7.  [Font configuration for CJK support in Ubuntu](https://wiki.ubuntu.com/BetterCJKSupportSpecification/FontConfig)
+7.  [Noto Emoji Color fontconfig for Konsole](https://gist.github.com/IgnoredAmbience/7c99b6cf9a8b73c9312a71d1209d9bbb)
+8.  [Font configuration for CJK support in Ubuntu](https://wiki.ubuntu.com/BetterCJKSupportSpecification/FontConfig)
 
 
 ## 蓝牙 {#蓝牙}
