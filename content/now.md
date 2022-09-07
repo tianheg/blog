@@ -22,8 +22,6 @@ meta = false
 
 目前在读《哲学的故事》，看到了讲斯宾诺莎的那一章，他的一些观点我很感兴趣。为了消磨时间，看了不少电影电视剧，老友记 10 季在差不多一两个星期内看完了。
 
-想去 [杭州大名维森软件有限公司](https://www.damingsoft.com/default.aspx) 实习，在为之努力中。
-
 ---
 
 参考：[/now](https://nownownow.com/about)
