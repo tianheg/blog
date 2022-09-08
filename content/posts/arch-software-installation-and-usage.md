@@ -2,7 +2,7 @@
 title = "Arch Linux 软件安装和用法"
 author = ["Tianhe Gao"]
 date = 2021-08-20T00:00:00+08:00
-lastmod = 2022-09-06T09:54:07+08:00
+lastmod = 2022-09-08T10:41:25+08:00
 tags = ["Arch Linux", "技术"]
 draft = false
 toc = true
@@ -1187,4 +1187,5 @@ lon=115.622324
 | pkgstats                                        | Submit a list of installed packages to the Arch Linux project                                                                                                     |
 | masterpdfeditor                                 | A complete solution for viewing, creating and editing PDF files                                                                                                   |
 | EtchDroid                                       | ios2usb on android                                                                                                                                                |
+| haruna                                          | Video player built with Qt/QML on top of libmpv                                                                                                                   |
 | archmage(aur)                                   | converts CHM files to HTML, plain text and PDF                                                                                                                    |
