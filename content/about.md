@@ -45,12 +45,6 @@ title = "关于"
 
 ---
 
-## 重要索引
-
-- [观影](/watch/)
-- [阅读](/read/)
-- [听音](/listen/)
-
 ## 友链
 
 | title                                       | bio                                  |
@@ -63,8 +57,6 @@ title = "关于"
 | [木子的博客](https://blog.k8s.li)           | 垃圾佬、搬砖社畜、运维工程师         |
 | [长街短梦](https://www.wangyunzi.com/)     | 此行山高路远，我只剩口袋玫瑰一片     |
 
----
-
 ## 一些有趣或有意义的 badge
 
 <a href="https://www.foreverblog.cn/" target="_blank"><img src="/images/foreverblog_logo.png" alt="" style="width:auto;height:16px;"></a>
@@ -72,8 +64,6 @@ title = "关于"
 [![](/images/512kb-green.svg)](https://512kb.club/)
 
 <!-- https://codepen.io/kevquirk/pen/VwmVaKm -->
-
----
 
 ## 留言
 
