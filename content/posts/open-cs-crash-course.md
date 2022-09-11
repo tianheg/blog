@@ -1,0 +1,437 @@
++++
+title = "Crash Course: Computer Science"
+date = 2022-09-11T10:32:00+08:00
+lastmod = 2022-09-11T10:47:38+08:00
+tags = ["技术", "公开课"]
+draft = false
++++
+
+计算机大脑——ALU，计算机中负责运算的组件
+
+ALU（算术逻辑单元）有算术单元、逻辑单元组成，前者负责数字运算，后者负责逻辑运算。
+
+半加器、全加器
+
+8位 ripple carry adder
+
+溢出 overflow
+
+carry-look-ahead adder
+
+
+## Memory {#memory}
+
+与门保存 0，或门保存 1。
+
+组合起来，成为 AND-OR Latch
+
+进一步抽象，形成 Gated Latch。
+
+一组锁存器，构成寄存器。
+
+寄存器矩阵能够提高运行效率。
+
+
+## CPU {#cpu}
+
+缓存
+
+
+## Programming Basics - Statements &amp; Functions {#programming-basics-statements-and-functions}
+
+变量——对内存地址的抽象
+
+将通用的功能，封装进函数。
+
+模块化编程（Modularizing programs）
+
+
+## Intro to Algorithms {#intro-to-algorithms}
+
+算法：解决问题的步骤。
+
+算法复杂度。
+
+
+### Sorting {#sorting}
+
+-   选择排序
+-   归并排序（比选择排序更有效率）
+
+
+### Graph Search {#graph-search}
+
+Dijkstra‘s algorithm
+
+
+## Data Structures {#data-structures}
+
+结构体 Struct
+
+链表
+
+队列和栈
+
+树
+
+图
+
+
+## Alan Turing {#alan-turing}
+
+Lambda 算子数学表达系统
+
+Turing Machine 证明了如果资源充足，可以通过它做任何事情。
+
+Turing Complete
+
+Turing 证明”停机（halting）问题“是一个悖论。所以，并不是所有问题都能通过计算解决。
+
+可计算性理论，Church-Turing Thesis。
+
+Turing test，它的现代版本是在网站登录时经常见到的”CAPTCHA（completely automated public turing test to tell computers and humans apart）“
+
+图灵奖。
+
+
+## Software Engineering {#software-engineering}
+
+
+## Integrated Circuits &amp; Moore's Law {#integrated-circuits-and-moore-s-law}
+
+Silicon wafer
+
+现在的 CPU 中集成了数十亿晶体管。
+
+摩尔定律已达极限。
+
+
+## Operating Systems {#operating-systems}
+
+操作系统将硬件抽象为 API——设备驱动程序。
+
+批处理 -&gt; 多任务处理
+
+内存地址虚拟化，动态内存分配，内存保护
+
+Terminal
+
+分时操作系统 Time-Sharing
+
+Unix：由内核和其他库组成。
+
+kernel panic
+
+
+## Memory &amp; Storage {#memory-and-storage}
+
+延迟线存储器(delay line memory) -&gt; 磁芯存储器(magnetic core memory) -&gt; 磁带(magnetic type) -&gt; 磁鼓存储器(magnetic drum memory) -&gt; 机械硬盘(hard disk drive) -&gt; 固态硬盘
+
+软盘，光盘CD
+
+seek time
+
+
+## Files &amp; File Systems {#files-and-file-systems}
+
+Wav 文件：存储音频。
+
+Bmp 文件：存储图片。
+
+目录文件
+
+文件系统：目录文件，以及对目录文件的管理。
+
+碎片、碎片整理
+
+
+## Compression {#compression}
+
+压缩方法：
+
+1.  Run-Length Encoding(Lossless compression)
+2.  Dictionary coders - Using more compact representation(Lossless compression)
+
+这两种方法经常组合使用。
+
+高效编码——Huffman Tree：概率
+
+![Huffman Tree](/images/huffman-tree.png "Huffman Tree")
+
+有损压缩：压缩音频、图像压缩，比如，mp3、jpeg
+
+无损压缩格式：音频：wav、flac；图像：png、gif、pdf、zip
+
+视频的 Temporal Redundancy
+
+有损压缩视频格式：MPEG-4。
+
+
+## Keyboards &amp; Command Line Interfaces {#keyboards-and-command-line-interfaces}
+
+QWERTY 键盘布局
+
+键盘的转换成本。
+
+
+## Screens &amp; 2D Graphics {#screens-and-2d-graphics}
+
+阴极射线管 Cathode Ray Tubes
+
+通过以上技术，有两种绘制图形的方法：
+
+1.  矢量扫描：引导电子束描绘出形状
+2.  光栅扫描：按固定路径，一行一行扫描
+
+液晶显示器 Liquid Crystal Displays
+
+character generator 字符生成器——第一代显卡
+
+计算机把像素数据存在内存中一个特殊区域叫“帧缓冲区”。早期时，这些数据存在内存里，后来存在高速视频内存，简称 VRAM。VRAM 在显卡上。
+
+
+## The Cold War &amp; Consumerism {#the-cold-war-and-consumerism}
+
+
+## The Personal Computer Revolution {#the-personal-computer-revolution}
+
+IBM 的肮脏 12 人，引起了一系列创新。
+
+
+## Graphical User Interfaces {#graphical-user-interfaces}
+
+> 增强人类智能 Augmenting human intellect
+>
+> Engelbart
+
+
+## 3D Graphics {#3d-graphics}
+
+3D 投影
+
+Wireframe Rendering
+
+Scanline Rendering
+
+Antialiasing 抗锯齿
+
+表面法线
+
+textures 纹理
+
+GPU 专门为图形运算设计的一种处理单元。
+
+
+## Computer Networks {#computer-networks}
+
+局域网 LAN
+
+广泛使用的局域网：以太网 Ethernet
+
+以太网使用电线将一定范围内的电脑连在一起，通过电信号传输信息，通过 Media Access Control（MAC）地址唯一识别每一台电脑。
+
+Carrier Sense Multiple Access CSMA 载波监听多路访问
+
+Collision 冲突
+
+Exponential Backoff 指数回避
+
+Routing 路由
+
+Circuit Switching 电路交换
+
+Message Switching 报文交换
+
+Hop Count，Hop Limit
+
+IP Address
+
+Congestion control 阻塞控制
+
+TCP/IP 解决数据包到达目的地的时间不一致的问题
+
+Packet Switching
+
+Internet Control Message Procotol 因特网控制消息协议
+
+Border Gateway Protocol 边界网关协议
+
+
+## The Internet {#the-internet}
+
+LAN -&gt; WAN(ISP)
+
+IP 负责把数据包送到正确的计算机，UDP 负责把数据包送到正确的程序
+
+![UDP](/images/udp.png "UDP")
+
+UDP 不关心数据包是否完整到达
+
+如果想要知道数据包是否完整到达目的地，就要采用“传输控制协议（TCP）”
+
+![TCP](/images/tcp.png "TCP")
+
+TCP 的重要功能：
+
+1.  TCP 数据包有序号
+2.  TCP
+    要求接收方的电脑收到数据包并且“校验和”检查无误后（数据没有损坏）给发送方发一个确认码（ACK），代表收到了。得知上一个数据包成功到达后，发送方会发下一个数据包。
+
+Domain Name Service DNS
+
+![OSI 七层协议](/images/osi.png "OSI 七层协议")
+
+
+## The World Wide Web {#the-world-wide-web}
+
+它和 The Internet 不是一回事。
+
+万维网在互联网上运行。
+
+Hyperlink, Hypertext, Uniform Resource Locator
+
+Hypertext Transfer Protocol
+
+Hypertext Markup Language
+
+Web Browser
+
+network neutrality 网络中立性
+
+
+## Cypersecurity {#cypersecurity}
+
+计算机安全：保护系统和数据的「保密性」、「完整性」、「可用性」。
+
+-   保密性：只有有权限的人才能读取计算机系统和数据。
+
+黑客泄漏别人的信用卡信息，就是攻击保密性
+
+-   完整性：只有有权限的人才能使用和修改系统和数据
+
+黑客知道你的邮箱密码，假冒你发邮件，就是攻击完整性
+
+-   可用性：有权限的人应该随时可以访问系统和数据
+
+拒绝服务式攻击（DDoS）就是黑客发送大量假请求到服务器，让网站很慢或者不可访问。这就是攻击可用性
+
+threat model 威胁模式分析
+
+通过「授权」让计算机知晓，你是谁。
+
+三种授权方式：
+
+1.  What you know
+2.  What you have
+3.  What you are
+
+two-factor authentication
+
+Access Control Lists(ACL)
+
+Bell-LaPadula 不能向上读，不能向下写
+
+安全内核
+
+isolation
+
+
+## Hackers &amp; Cyper Attacks {#hackers-and-cyper-attacks}
+
+Social Engineering
+
+木马
+
+Exploit
+
+buffer overflow
+
+bound checking
+
+不用的内存空间被称为「金丝雀」（canaries）
+
+code injection
+
+如果软件制作者不知道软件有新漏洞被发现了，那么这个漏洞被称为「0 day vulnerability」
+
+
+## Cryptography {#cryptography}
+
+cipher 加密算法
+
+encryption/decryption
+
+加密算法种类：
+
+1.  替换加密（Caeser cipher）
+2.  移位加密 permutation cipher（columner transposition cipher）
+
+软件加密算法演化：
+
+1.  DES
+2.  AES
+
+key exchange
+
+Diffie-Hellman
+
+对称加密/非对称加密
+
+RSA
+
+
+## Machine Learning &amp; Artifical Intelligence {#machine-learning-and-artifical-intelligence}
+
+classifier
+
+features
+
+decision tree
+
+Artifical Neural Networks
+
+
+## Computer Vision {#computer-vision}
+
+Viola-Jones, Convolutional Neural Networks
+
+
+## Natural Language Processing {#natural-language-processing}
+
+语音识别系统
+
+FFT 快速傅立叶变换
+
+
+## Robots {#robots}
+
+自动机
+
+CNC 机器
+
+自动控制原理-负反馈回路
+
+proportional-integral-derivative controller 比例-积分-微分控制器 PID
+
+lethal autonomous weapons
+
+机器人是好，还是坏？如何看待这种两面性？
+
+利用计算机改善这个世界。
+
+
+## Psychology of Computing {#psychology-of-computing}
+
+usability, affordances
+
+如果把信息进行分块，会更加容易阅读。
+
+
+## Educational Technology {#educational-technology}
+
+Intelligent Tutoring Systems
+
+
+## The Singularity, Skynet, and the Future of Computing {#the-singularity-skynet-and-the-future-of-computing}
+
+智能科技的失控性发展——singularity
