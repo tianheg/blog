@@ -2,7 +2,7 @@
 title = "Arch Linux 软件安装和用法"
 author = ["Tianhe Gao"]
 date = 2021-08-20T00:00:00+08:00
-lastmod = 2022-09-08T10:41:25+08:00
+lastmod = 2022-09-12T11:50:44+08:00
 tags = ["Arch Linux", "技术"]
 draft = false
 toc = true
@@ -345,6 +345,49 @@ Emoji：
 
 ```sh
 # systemctl enable --now bluetooth
+```
+
+无法添加蓝牙耳机
+
+```sh
+# 来自 bluetooth.service 的 systemd log
+# ConfigurationDirectory 'bluetooth' already exists but the mode is different. (File system: 755 ConfigurationDirectoryMode: 555)
+# src/device.c:device_set_wake_support() Unable to set wake_support without RPA resolution
+# src/adapter.c:set_device_privacy_complete() Set device flags return status: Invalid Parameters
+```
+
+经过搜索发现一些人遇到过[类似问题](https://bbs.archlinux.org/viewtopic.php?id=270465)。
+
+```sh
+# dmesg | grep Bluetooth 输出
+[    2.357525] usb 1-8: Product: Bluetooth Radio
+[    3.057353] Bluetooth: Core ver 2.22
+[    3.057403] Bluetooth: HCI device and connection manager initialized
+[    3.057410] Bluetooth: HCI socket layer initialized
+[    3.057413] Bluetooth: L2CAP socket layer initialized
+[    3.057420] Bluetooth: SCO socket layer initialized
+[    3.716563] Bluetooth: hci0: RTL: examining hci_ver=08 hci_rev=000c lmp_ver=08 lmp_subver=8821
+[    3.717200] Bluetooth: hci0: RTL: rom_version status=0 version=1
+[    3.717204] Bluetooth: hci0: RTL: loading rtl_bt/rtl8821c_fw.bin
+[    3.722382] Bluetooth: hci0: RTL: loading rtl_bt/rtl8821c_config.bin
+[    3.723300] Bluetooth: hci0: RTL: cfg_sz 10, total sz 31990
+[    4.174265] Bluetooth: hci0: RTL: fw version 0x829a7644
+[    5.868007] Bluetooth: BNEP (Ethernet Emulation) ver 1.3
+[    5.868012] Bluetooth: BNEP filters: protocol multicast
+[    5.868017] Bluetooth: BNEP socket layer initialized
+[    6.136304] Bluetooth: hci0: Bad flag given (0x2) vs supported (0x1)
+[   17.200632] Bluetooth: RFCOMM TTY layer initialized
+[   17.200645] Bluetooth: RFCOMM socket layer initialized
+[   17.200654] Bluetooth: RFCOMM ver 1.11
+[   32.473238] Bluetooth: hci0: unexpected cc 0x0c7c length: 1 < 3
+[  962.089278] Bluetooth: hci0: Bad flag given (0x2) vs supported (0x1)
+[  971.016364] Bluetooth: hci0: unexpected cc 0x0c7c length: 1 < 3
+```
+
+之后按照[这里](https://bbs.archlinux.org/viewtopic.php?pid=2005851#p2005851)的说法，执行以下命令安装 bluedevil, bluez-utils, pulseaudio-bluetooth。重启之后， **问题解决了** 。
+
+```sh
+# yay -Syyuu bluedevil bluez-utils pulseaudio-bluetooth
 ```
 
 
