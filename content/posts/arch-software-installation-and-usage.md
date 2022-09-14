@@ -2,7 +2,7 @@
 title = "Arch Linux 软件安装和用法"
 author = ["Tianhe Gao"]
 date = 2021-08-20T00:00:00+08:00
-lastmod = 2022-09-12T11:50:44+08:00
+lastmod = 2022-09-14T10:36:27+08:00
 tags = ["Arch Linux", "技术"]
 draft = false
 toc = true
@@ -678,7 +678,18 @@ makepkg -si
 
 ## 备份 {#备份}
 
-通过 `rsync` 和 `crontab` 定时将 `/etc` , `~/.config` 备份到 Git 仓库 dotfiles 中。
+1.  通过 `rsync` 和 `crontab` 定时将 `/etc` , `~/.config` 等配置文件备份到 Git 仓库 dotfiles 中。
+2.  云服务和本地的双重备份，将 Dropbox 中的文件备份到另一磁盘。
+
+<!--listend-->
+
+```sh
+#!/usr/bin/env bash
+
+rsync -a ~/Dropbox/ /mnt/disk/repo/backup-dropbox
+cd /mnt/disk/repo/backup-dropbox
+tar czf dropbox-backup-$(date +"%F")-$(date +"%s").tar.gz --exclude='*.tar.gz' --exclude='.dropbox-cache/' --exclude='.dropbox' *
+```
 
 timeshift 在最近一次系统损坏中成为了罪魁祸首：新旧 GRUB 版本的冲突让我的系统不断进入 GRUB rescue 模式，只能重装，幸好通过 USB 启动盘将一些数据备份了出来。
 
