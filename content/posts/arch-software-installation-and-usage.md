@@ -2,7 +2,7 @@
 title = "Arch Linux 软件安装和用法"
 author = ["Tianhe Gao"]
 date = 2021-08-20T00:00:00+08:00
-lastmod = 2022-09-14T10:36:27+08:00
+lastmod = 2022-09-14T11:16:20+08:00
 tags = ["Arch Linux", "技术"]
 draft = false
 toc = true
@@ -1243,3 +1243,4 @@ lon=115.622324
 | EtchDroid                                       | ios2usb on android                                                                                                                                                |
 | haruna                                          | Video player built with Qt/QML on top of libmpv                                                                                                                   |
 | archmage(aur)                                   | converts CHM files to HTML, plain text and PDF                                                                                                                    |
+| nasm                                            | 在 mdn/content 仓库中安装依赖报错，缺少 nasm                                                                                                                      |
