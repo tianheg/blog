@@ -55,7 +55,8 @@ title = "关于"
 | [数学小兵儿](https://matnoble.me/)          | 数学＆计算机 我都爱                  |
 | [Power's Wiki](https://wiki-power.com/)     | 一位主动认识我的朋友，涉猎软硬件开发 |
 | [木子的博客](https://blog.k8s.li)           | 垃圾佬、搬砖社畜、运维工程师         |
-| [长街短梦](https://www.wangyunzi.com/)     | 此行山高路远，我只剩口袋玫瑰一片     |
+| [长街短梦](https://www.wangyunzi.com/)      | 此行山高路远，我只剩口袋玫瑰一片     |
+| [gq's blog](https://zgq.ink/)               | A place to think and write.          |
 
 ## 一些有趣或有意义的 badge
 
