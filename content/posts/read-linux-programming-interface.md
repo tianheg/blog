@@ -2,7 +2,7 @@
 title = "读《The Linux Programming Interface》"
 author = ["Tianhe Gao"]
 date = 2022-09-05T01:54:00+08:00
-lastmod = 2022-09-05T21:23:22+08:00
+lastmod = 2022-09-15T16:16:15+08:00
 tags = ["技术", "阅读", "Linux"]
 draft = false
 toc = true
@@ -15,9 +15,9 @@ toc = true
 
 ## 历史和标准 {#历史和标准}
 
-Linux 是 Unix 系统的一员。
+1969 年，UNIX 系统首次由贝尔实验室（AT&amp;T 的一部分）的 Ken Thompson 在一台数字 PDP-7 微型计算机实现。该操作系统从早期的 MULTICS 系统中汲取了许多想法，包括它的双关语名称。1973 年，UNIX 被移植到 PDP-11，并用 C 语言重写（一种编程语言，由贝尔实验室的 Dennis Ritchie 设计并实现）。在法律上被禁止销售 UNIX 的情况下，AT&amp;T 反而以象征性收费的方式向大学分发了完整的系统。这次分发包含了源代码，因为它提供了一种廉价的方式供计算机科学系的老师和学生们研究和修改操作系统，所以在大学内部变得极为受欢迎。
 
-两个重要事情：GNU 项目的出现和 Linux 内核的开发。
+在 UNIX 系统的开发过程中，加州大学伯克利分校扮演了重要角色。在那儿，Ken Thompson 和一群毕业生扩展了 UNIX 操作系统。1979 年，在大学里产生了自己的 UNIX 分发，BSD。这一分发在学术界广泛传播，为几个商业 UNIX 实现奠定基础。
 
 
 ## 目录 {#目录}
