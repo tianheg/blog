@@ -1,7 +1,7 @@
 #+SETUPFILE: ./hugo_setup.org
-#+TITLE: Arch Linux下使用Docker MySQL 占用过高内存
+#+TITLE: Arch Linux 下使用 Docker MySQL5 占用过高内存
 #+DATE: <2022-02-18 Fri>
-#+HUGO_TAGS: 技术 Docker MySQL "Arch Linux"
+#+HUGO_TAGS: 技术 Docker MySQL
 
 * 系统环境
 
@@ -46,7 +46,9 @@ Server:
   Version:          0.19.0
   GitCommit:        de40ad0
 #+END_EXAMPLE
+
 * 复现步骤
+
 #+BEGIN_SRC sh
 docker run -d --rm --name mysql5.7 -e MYSQL_ROOT_PASSWORD=passwd mysql:5.7
 # 这里mysql版本为5.7.37
@@ -71,3 +73,4 @@ docker stats
 一条相关 GitHub issue：https://github.com/docker-library/mysql/issues/579
 
 之后的测试过程中得到一个短语：memory trap，相关 issue：https://github.com/docker-library/mysql/issues/361
+                                     

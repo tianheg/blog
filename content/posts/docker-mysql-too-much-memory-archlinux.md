@@ -1,8 +1,9 @@
 +++
-title = "Arch Linux下使用Docker MySQL 占用过高内存"
+title = "Arch Linux 下使用 Docker MySQL5 占用过高内存"
+author = ["Tianhe Gao"]
 date = 2022-02-18T00:00:00+08:00
-lastmod = 2022-04-20T11:25:40+08:00
-tags = ["技术", "Docker", "MySQL", "Arch Linux"]
+lastmod = 2022-09-16T16:14:01+08:00
+tags = ["技术", "Docker", "MySQL"]
 draft = false
 +++
 
@@ -49,6 +50,7 @@ Server:
   Version:          0.19.0
   GitCommit:        de40ad0
 ```
+
 
 ## 复现步骤 {#复现步骤}
 
