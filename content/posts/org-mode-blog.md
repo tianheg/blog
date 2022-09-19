@@ -1,7 +1,8 @@
 +++
 title = "使用 Org Mode 写博客"
+author = ["Tianhe Gao"]
 date = 2021-12-08T00:00:00+08:00
-lastmod = 2022-02-12T21:41:38+08:00
+lastmod = 2022-09-19T14:50:35+08:00
 tags = ["Orgmode", "技术"]
 draft = false
 +++
@@ -12,6 +13,8 @@ draft = false
 4.  [使用 Org-Mode 生成博客](https://www.shellcodes.org/Emacs/%E4%BD%BF%E7%94%A8Org-Mode%E7%94%9F%E6%88%90%E5%8D%9A%E5%AE%A2.html)
 
 11 月 20 日，开始用 Org-mode 构建博客。
+
+2022-02-09 重新使用 Hugo。
 
 
 ## 如何构建 {#如何构建}
