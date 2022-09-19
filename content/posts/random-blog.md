@@ -1,8 +1,9 @@
 +++
 title = "随机展示写过的博客"
+author = ["Tianhe Gao"]
 date = 2021-12-14T00:00:00+08:00
-lastmod = 2022-02-16T15:20:21+08:00
-tags = ["技术"]
+lastmod = 2022-09-19T14:51:04+08:00
+tags = ["技术", "博客"]
 draft = false
 +++
 
@@ -16,6 +17,4 @@ draft = false
 
 整个代码中，最重要的就是 `Math.ceil(Math.random() * data.length)` ，它能生成不大于 data 对象长度的整数。接下来便是，把每一个 JSON 对象，通过 DOM 传入对应的 HTML 元素。
 
-页面在这里：[随机文章](https://tianheg.github.io/random-blog/)；
-
-GitHub 仓库在这里：[tianheg/random-blog](https://github.com/tianheg/random-blog)。
+页面在这里：[随机文章](https://tianheg.github.io/random-blog/)；GitHub 仓库在这里：[tianheg/random-blog](https://github.com/tianheg/random-blog)。
