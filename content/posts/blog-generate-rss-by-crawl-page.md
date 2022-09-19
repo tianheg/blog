@@ -1,15 +1,20 @@
-#+SETUPFILE: ./hugo_setup.org
-#+TITLE: 通过 Python 为博客生成 RSS
-#+DATE: <2022-01-26 Wed>
-#+HUGO_TAGS: 技术 Python
++++
+title = "通过抓取页面生成 RSS"
+author = ["Tianhe Gao"]
+date = 2022-01-26T00:00:00+08:00
+lastmod = 2022-09-19T14:42:30+08:00
+tags = ["技术", "博客"]
+draft = false
++++
+
 生成步骤：
 
-1. 通过 gen-json.js 文件，生成 blogs.json
-2. 通过 gen-rss.py 文件，生成 index.xml
+1.  通过 gen-json.js 文件，生成 blogs.json
+2.  通过 gen-rss.py 文件，生成 index.xml
 
-=gen-json.js= ：
+`gen-json.js` ：
 
-#+BEGIN_SRC js
+```js
 const axios = require('axios');
 const cheerio = require('cheerio');
 const fs = require('fs');
@@ -80,11 +85,11 @@ async function scrapeData() {
 }
 // Invoke the above function
 scrapeData();
-#+END_SRC
+```
 
-=gen-rss.py= ：
+`gen-rss.py` ：
 
-#+BEGIN_SRC python
+```python
 #!/usr/bin/env python
 
 import json
@@ -124,9 +129,9 @@ with open('./blog/index.xml', 'w') as fh:
   fh.writelines(itemLines[0:20])
   fh.write("""</channel>
 </rss>""")
-#+END_SRC
+```
 
 参考资料：
 
-1. http://johnbokma.com/blog/2019/10/09/hand-coding-an-rss-2-0-feed-in-python.html
-2. http://johnbokma.com/blog/2019/10/09/rfc-822-and-rfc-3339-dates-in-python.html
+1.  <http://johnbokma.com/blog/2019/10/09/hand-coding-an-rss-2-0-feed-in-python.html>
+2.  <http://johnbokma.com/blog/2019/10/09/rfc-822-and-rfc-3339-dates-in-python.html>
