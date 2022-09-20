@@ -2,7 +2,7 @@
 title = "常青博客"
 author = ["Tianhe Gao"]
 date = 2022-09-19T14:58:00+08:00
-lastmod = 2022-09-19T15:12:07+08:00
+lastmod = 2022-09-20T08:48:48+08:00
 tags = ["博客"]
 draft = false
 +++
@@ -15,4 +15,4 @@ draft = false
 
 每一篇博客都有其意义所在，每一篇博客都代表着那一时刻，我的变化。
 
-数日前，读过《[将博客改造成数字花园 - BlackGlory](https://blackglory.me/posts/from-blog-to-digital-garden#%E5%9C%A8%E6%95%B0%E5%AD%97%E8%8A%B1%E5%9B%AD%E7%9A%84%E5%9F%BA%E7%A1%80%E4%B8%8A%E6%94%B9%E8%BF%9B_%E4%B8%AA%E4%BA%BA%E7%9F%A5%E8%AF%86%E7%AE%A1%E7%90%86%E7%9A%84%E5%85%AC%E5%BC%80%E6%96%B9%E6%A1%88)》，深受启发，我会继续思考该如何记录、如何表达。
+数日前，读过《[将博客改造成数字花园 - BlackGlory](https://blackglory.me/posts/from-blog-to-digital-garden)》，深受启发，我会继续思考该如何记录、如何表达。
