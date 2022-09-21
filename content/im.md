@@ -3,11 +3,6 @@ meta: false
 title: 重要（关键事物）
 ---
 
-- [Emacs](https://www.gnu.org/software/emacs/)
-- https://news.ycombinator.com/best
-- https://aeon.co/
-- https://nautil.us/
-- https://web.dev/
-- https://javascript.info/
-- https://developer.mozilla.org/en-US/
-- https://vuejs.org/
+1. 身体健康、心理健康，没有不舒服的地方，精力充沛，有动力做想做的事情
+2. 技术成长，专精前端
+3. 阅读书籍
