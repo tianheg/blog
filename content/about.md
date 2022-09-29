@@ -58,6 +58,14 @@ title = "关于"
 | [长街短梦](https://www.wangyunzi.com/)      | 此行山高路远，我只剩口袋玫瑰一片     |
 | [gq's blog](https://zgq.ink/)               | A place to think and write.          |
 
+## 常读
+
+- [earfanfan | 袁凡](https://yuanfan.rbind.io/)
+- [博客 - Miao Yu | 于淼](https://yufree.cn/cn/)
+- [王登科-DK博客 - 布洛芬爱好者](https://greatdk.com/)
+- [日志 - Yihui Xie | 谢益辉](https://yihui.org/cn/)
+- [水八口的冥想盆 - Shuibaco’s Pensieve](https://blog.shuiba.co/)
+
 ## 一些有趣或有意义的 badge
 
 <a href="https://www.foreverblog.cn/" target="_blank"><img src="/images/foreverblog_logo.png" alt="" style="width:auto;height:16px;"></a>
