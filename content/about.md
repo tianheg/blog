@@ -66,6 +66,7 @@ title = "关于"
 - [日志 - Yihui Xie | 谢益辉](https://yihui.org/cn/)
 - [水八口的冥想盆 - Shuibaco’s Pensieve](https://blog.shuiba.co/)
 - [MacTalk-池建强的随想录 | 让创作成为一种生活方式](https://macshuo.com/)
+- [文浩·事不过三](https://via.zhubai.love/)
 
 ## 一些有趣或有意义的 badge
 
