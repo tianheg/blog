@@ -76,6 +76,13 @@ title = "关于"
 - [MacTalk-池建强的随想录 | 让创作成为一种生活方式](https://macshuo.com/)
 - [文浩·事不过三](https://via.zhubai.love/)
 - [Conge](https://conge.github.io/)
+- [Limboy](https://limboy.me/)
+- [Paul Graham](http://www.paulgraham.com/index.html)
+- [林海草原 – 愿我经历的苦难你不要经历，愿我已有的幸福你触手可及](https://lhcy.org/)
+- [苔原带 – 跨界是涌现的扳机](https://tundrazone.com/)
+- [An Amateur Programmer's Blogs](https://dirtysalt.github.io/html/blogs.html)
+- [zen habits - breathe zen habits](https://zenhabits.net/)
+- [Posts - Elizen](https://elizen.me/posts/)
 
 ## 一些有趣或有意义的 badge
 
