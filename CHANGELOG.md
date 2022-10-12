@@ -1,5 +1,9 @@
 # 博客改变记录
 
+## 2022-10-12
+
+- 改变博客域名为 [tianheg.xyz](https://tianheg.xyz)
+
 ## 2022-02-09
 
 - 借助 ox-hugo 重回 Hugo 怀抱
