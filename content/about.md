@@ -83,6 +83,7 @@ title = "关于"
 - [An Amateur Programmer's Blogs](https://dirtysalt.github.io/html/blogs.html)
 - [zen habits - breathe zen habits](https://zenhabits.net/)
 - [Posts - Elizen](https://elizen.me/posts/)
+- [BlackGlory and his digital garden](https://blackglory.me/)
 - [木遥的窗子](http://blog.farmostwood.net/)
 
 ## 一些有趣或有意义的 badge
