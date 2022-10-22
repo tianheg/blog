@@ -47,7 +47,7 @@
                     {{ end }}
                     {{ if .Site.Params.displayEditLink }}
                         {{ with .Site.Params.repoEditURL }}
-                            {{ $contentDir := (cond $.Site.IsMultiLingual (printf `/%s/` $.Site.Params.contentDir) "/content/") }}
+                            {{ $contentDir := (cond $.Site.IsMultiLingual (printf `/%s/` $.Site.Params.contentDir) "/org/") }}
                             <div class="gitinfo-item edit">
                                 <a href="{{ . }}{{ $contentDir }}{{ replace $path "\\" "/" }}" target="_blank">
                                     {{- partial "utils/icon.html" (dict "$" $ "name" $.Site.Params.editIcon "class" "edit-icon") -}}
