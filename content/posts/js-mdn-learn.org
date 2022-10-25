@@ -1,0 +1,39 @@
+#+TITLE: JS MDN Learn
+#+DATE: <2022-10-25 Tue 21:59>
+#+TAGS[]: 技术 JavaScript
+#+TOC: true
+
+系统学习 JavaScript 第一步——MDN 的 [[https://developer.mozilla.org/en-US/docs/Learn/JavaScript][Learn]] 部分，相当于基础入门。
+
+* 第一步
+
+** 什么是 JavaScript？
+
+从全局来看 JS，讨论 JS 是什么、你能用它做什么等问题，明确使用 JS 的目的。
+
+抽象定义：JS 是一种编程语言，允许你在网页中实现复杂功能。
+
+一段更新文本的 JS 代码：
+
+#+BEGIN_SRC js
+const para = document.querySelector('p');
+
+para.addEventListener('click', updateName);
+
+function updateName() {
+  const name = prompt('Enter a new name');
+  para.textContent = `Player 1: ${name}`;
+}
+#+END_SRC
+
+有一些被称为 APIs（Application Programming Interfaces，应用编程接口）功能，大致分为两类——[[https://developer.mozilla.org/en-US/docs/Web/API][浏览器 APIs]] 和第三方 APIs。
+
+JS 能在页面加载完毕后动态修改页面内容。每个浏览器标签都处在独立的执行环境互不干涉。JS 代码从上到下依次执行。
+
+解释（interpreted）型代码与编译（compiled）型代码：对于解释型编程语言，代码从上到下依次执行，代码的执行结果是即刻返回的；对于编译型编程语言，在由电脑运行以前先被转换为另一种形式，例如 C 语言会被编译成机器码再被电脑执行。JS 是轻量级的解释型编程语言。现代 JS 解释器使用了一种名为即时编译（just-in-time compiling）的技术来改善性能，在实际运行 JS 代码时，代码会被转换为一种二进制格式，执行速度更快。虽然应用了该种技术，但 JS 仍被视为解释型编程语言，因为这里的编译过程是在运行时进行的而不是提前完成。
+
+服务端（Server-side）代码与客户端（Client-side）代码：在本次 JS Learn 部分，讲述的全部是客户端 JS——运行在用户主机上的 JS 代码。服务端代码运行在服务器上，服务端编程语言有 PHP、Python。
+
+动态代码与静态代码：动态包括客户端 JS 和服务端语言，它们能够在不同情况下更新网页显示不同内容，按需生成新内容。服务端代码在服务器生成新内容，而客户端 JS 在客户端的浏览器内生成。不会动态更新内容的网页被称为动态网页，我的博客就是这样的静态网页组成的，进而可称为静态博客。
+
+** 第一次尝试 JavaScript
