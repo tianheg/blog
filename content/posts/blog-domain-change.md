@@ -34,3 +34,7 @@ Registrar: Namecheap
 ```
 
 更换域名受到了益辉的[启发](https://yihui.org/cn/2019/03/influence-focus/)。
+
+更新：
+
+后来在[叶寻](https://cyrusyip.org/zh-cn/)的提醒下，添加了链接跳转——旧博客链接除首页外均会自动跳转至新博客链接。
