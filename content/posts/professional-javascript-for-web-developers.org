@@ -1,0 +1,209 @@
+#+TITLE: JavaScript 高级程序设计第 4 版
+#+DATE: <2021-11-23 Tue 13:23>
+#+TAGS[]: 阅读 技术
+#+TOC[]: true
+
+「迭代」是指，按照顺序多次执行程序，一般有明确的终止条件。ES6
+规范新增了两个高级特性：迭代器和生成器。它们能帮助我们更好地实现迭代。
+
+* 第 7 章 迭代器与生成器
+** 什么是迭代？
+在 JS 中，计数循环是一种最为简单的迭代：
+
+#+begin_src js
+for (let i = 1; i <= 20; ++i) {
+    console.log(i);
+}
+#+end_src
+
+循环是迭代机制的基础，这是因为循环可以指定迭代次数，以及每次迭代的操作。
+
+迭代会在一个有序集合上进行。数组是 JS 中有序集合的典型例子：
+
+#+begin_src js
+let collection = ['foo', 'bar', 'baz'];
+
+for (let index = 0; index < collection.length; ++index) {
+    console.log(collection[index])
+}
+#+end_src
+
+数组的长度已知，且可以索引到每一项，所以整个数组可以通过递增索引来遍历。但是，通过这种循环执行例程并不理想，原因如下：
+
+1. 迭代之前需要事先知道如何使用数据结构
+2. 遍历顺序不是数据结构固有的
+
+ES5 新增了 =Array.prototype.forEach()=
+方法，部分解决了通过迭代的需要（但不够理想）：
+
+#+begin_src js
+let collection = ['foo', 'bar', 'baz'];
+
+collection.forEach((item) => console.log(item));
+#+end_src
+
+该方法解决了「单独记录索引」和「通过数组对象取值」的问题，但无法标识迭代的终止时间。故而它只适用于「数组」，且回调结构笨拙。
+
+迭代器就是为了解决「使用过多循环导致代码混乱度增加」而出现的。
+
+** 迭代器模式
+迭代器模式使某些结构被称为「可迭代对象」（iterable），因为它们实现了正式的
+Iterable 接口，而且可通过迭代器 Iterator 消费（？）。
+
+可迭代对象，具体来讲可理解为数组或集合，这样的集合类型对象。特点：「有限元素」，「无歧义的遍历顺序」。
+
+可迭代对象不仅可以是集合类型对象，也可以是仅仅具有类似数组行为的其他数据结构，比如文章开头的计数循环。该循环生成的值是暂时的，但循环本身在执行迭代。
+
+任何实现 Iterable 接口的数据结构都可以被实现 Iterator
+接口的结构「消费」（consume）。
+
+*迭代器（iterator）是按需创建的一次性对象。每个迭代器都会关联一个可迭代对象，而迭代器会暴露迭代其关联可迭代对象的
+API。迭代器不关心可迭代对象的内部结构，只关心如何取得连续的值。*
+
+*** 可迭代协议
+实现 Iterable
+接口（可迭代协议）要求同时具备两种能力：「支持迭代的自我识别」和「创建实现
+Iterator 接口的对象」。
+
+实现了 Iterable 接口的内置类型：
+
+- 字符串
+- 数组
+- 映射
+- 集合
+- arguments 对象
+- NodeList 等 DOM 集合类型
+
+问题：什么是工厂函数？
+
+解答：它是[[/posts/js-factory-function/][返回新对象的函数]]。
+
+实现可迭代协议的所有类型，都会自动兼容接收可迭代对象的任何语言特性。接收可迭代对象的原生语言特性包括：
+
+- for-of 循环
+- 数组解构
+- 扩展操作符
+- Array.form()
+- 创建集合
+- 创建映射
+- Promise.all() 接收由期约组成的可迭代对象
+- Promise.race() 接收由期约组成的可迭代对象
+- yield* 操作符，在生成器中使用
+
+这些原生语言结构会在后台调用提供的可迭代对象的这个工厂函数，从而创建一个迭代器：
+
+#+begin_src js
+let arr = ["foo", "bar", "baz"];
+
+// for...of 循环
+for (let el of arr) {
+    console.log(el);
+}
+
+// 数组解构
+let [a, b, c] = arr;
+console.log(a, b, c);
+
+// 扩展操作符
+let arr2 = [...arr];
+console.log(arr2);
+
+// Array.from()
+let arr3 = Array.from(arr);
+console.log(arr3);
+
+// Set 构造函数
+let set = new Set(arr);
+console.log(set);
+
+// Map 构造函数
+let pairs = arr.map((x, i) => [x,, i]);
+console.log(pairs);
+let map = new Map(pairs);
+console.log(map);
+#+end_src
+
+* 第 18 章 动画与 Canvas 图形
+
+主要内容：
+
+-  使用 requestAnimationFrame
+-  使用 =<canvas>=
+-  绘制 2D 图形
+-  使用 WebGL 绘制 3D 图形
+
+** requestAnimationFrame
+
+该方法 API 能够使浏览器通过最优方式确定重绘顺序。
+
+过去使用 setInterval 和 setTimeout
+实现动画，无法保证时间精度，延时参数确定的是将代码添加到浏览器的任务队列，不能确定代码的具体执行时间。
+
+*知道何时绘制下一帧是创造平滑动画的关键。* setInterval 和 setTimeout
+不够精确是第一个问题，浏览器的计时器也并不是精确统一的。
+
+Mozilla 的 Robert O' Callahan 创造了一个 mozRequestAnimationFrame()
+的新方法，用来通知浏览器某些 JS
+代码要执行动画了，这样浏览器就可以在运行某些代码后进行适当的优化。
+
+所有浏览器都支持标准的 requestAnimationFrame()
+方法，它接收一个函数参数，在重绘屏幕前调用。而在函数内部，又可以接收一个参数，用于确定动画重绘的具体时间。
+
+=cancelAnimationFrame= 取消重绘任务
+
+通过 requestAnimationFrame 节流（节省流量，减少加载时间）
+
+** canvas
+
+canvas 标签要设置 id、width、height，还有当 canvas 不被支持的说明文字。
+
+#+BEGIN_EXAMPLE
+    <canvas id="canvas" width="250" height="200">Sorry, your browser don't support canvas tag yet.</canvas>
+#+END_EXAMPLE
+
+*** 2D
+
+在画布上绘图前，要先获得绘图上下文：
+
+#+BEGIN_SRC js
+    const drawing = document.getElementById('canvas')
+
+    if (drawing.getContext) {
+      const context = drawing.getContext('2d')
+      // context 可以简写为 ctx
+      ...
+    }
+#+END_SRC
+
+在使用时，先确定绘图上下文是存在的。有些浏览器对 HTML
+规范中没有的元素会创建默认 HTML 元素对象。这样表示：即使 drawing
+包含一个有效的元素引用，getContext() 方法也未必存在。
+
+toDataURL() 方法能够导出 =<canvas>= 元素上的图像。默认编码为 png 格式。
+
+2D 上下文的坐标原点(0, 0)在 =<canvas>= 元素的左上角。
+
+填充和描边：fillStyle、strokeStyle，这两个属性的值，可以是字符串、渐变对象、图案对象，默认值为
+=#000=。字符串表示颜色时，支持 CSS
+支持的所有格式：名称、十六进制代码、rgb、rgba、hsl、hsla。
+
+绘制矩形：fillRect、strokeRect、clearRect。
+
+绘制路径：beginPath、arc(x, y, radius, startAngle, endAngle,
+counterclockwise)、arcTo(x1, y1, x2, y2, radius)、bezierCurveTo(c1x,
+c1y, c2x, c2y, x, y)、lineTo(x, y)、moveTo(x, y)、quadraticCurveTo(cx,
+cy, x, y)、rect(x, y, width, height)、closePath。
+
+isPointInPath 确定指定点是否在路径上，可以在关闭路径前随时调用。
+
+什么叫「2D 上下文的路径 API 非常可靠」？说它可靠，那么是和谁比较得出来的结论？
+
+绘制文本：fillText、strokeText。还有三个属性：font、textAlign、textBaseLine。属性有默认值，在一次绘图中，设置一次即可。
+
+measureText 辅助确定文本大小。
+
+变换：rotate、scale、translate、transform、setTransform。save 和 restore，保存和恢复「绘图上下文的设置和变换」。
+
+绘制图像：drawImage（最多 9 个参数）。
+
+阴影：shadowColor、shadowOffsetX、shadowOffsetY、shadowBlur。
