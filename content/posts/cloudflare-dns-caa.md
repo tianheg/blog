@@ -2,7 +2,7 @@
 title = "Cloudflare DNS 添加 CAA 记录"
 date = 2022-08-18T19:48:00+08:00
 lastmod = 2022-08-18T19:59:55+08:00
-tags = ["技术", "Cloudflare", "DNS"]
+tags = ["技术"]
 draft = false
 +++
 

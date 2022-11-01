@@ -2,7 +2,7 @@
 title = "Cloudflare Pages Badges"
 date = 2022-08-18T14:37:00+08:00
 lastmod = 2022-08-18T14:42:33+08:00
-tags = ["技术", "Cloudflare"]
+tags = ["技术"]
 draft = false
 +++
 
