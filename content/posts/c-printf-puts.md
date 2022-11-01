@@ -2,7 +2,7 @@
 title = "C 语言中 printf 与 puts 的区别"
 date = 2021-12-15T00:00:00+08:00
 lastmod = 2022-04-22T15:12:59+08:00
-tags = ["技术", "C"]
+tags = ["技术"]
 draft = false
 +++
 

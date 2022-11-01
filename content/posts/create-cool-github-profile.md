@@ -2,7 +2,7 @@
 title = "为 GitHub 主页添加「年进度」和「最近更新的博客文章」"
 date = 2021-01-26T00:00:00+08:00
 lastmod = 2022-04-27T13:47:59+08:00
-tags = ["技术", "GitHub"]
+tags = ["技术"]
 draft = false
 +++
 
