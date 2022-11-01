@@ -2,7 +2,7 @@
 title = "配置 GitHub Codespaces 初始环境"
 date = 2021-07-29T00:00:00+08:00
 lastmod = 2022-04-27T16:07:54+08:00
-tags = ["技术", "GitHub"]
+tags = ["技术"]
 draft = false
 +++
 

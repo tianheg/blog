@@ -2,7 +2,7 @@
 title = "GitHub Action 文件权限问题"
 date = 2022-05-01T10:08:00+08:00
 lastmod = 2022-05-04T08:21:27+08:00
-tags = ["技术", "GitHub"]
+tags = ["技术"]
 draft = false
 +++
 

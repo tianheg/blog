@@ -2,7 +2,7 @@
 title = "修复 KDE Plasma panel 崩溃问题"
 date = 2022-02-04T00:00:00+08:00
 lastmod = 2022-02-11T15:18:59+08:00
-tags = ["KDE"]
+tags = ["技术"]
 draft = false
 +++
 

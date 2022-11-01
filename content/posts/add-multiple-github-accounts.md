@@ -2,7 +2,7 @@
 title = "为本地添加多个 GitHub 账户"
 date = 2020-06-12T00:00:00+08:00
 lastmod = 2022-03-04T13:44:06+08:00
-tags = ["技术", "GitHub"]
+tags = ["技术"]
 draft = false
 +++
 

@@ -2,7 +2,7 @@
 title = "GitHub Code Search 搜索语法"
 date = 2022-01-11T00:00:00+08:00
 lastmod = 2022-04-27T16:07:32+08:00
-tags = ["技术", "GitHub"]
+tags = ["技术"]
 draft = false
 +++
 
