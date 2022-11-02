@@ -2,7 +2,7 @@
 title = "在 Ubuntu 22.04 上部署 fava（beancount 记账软件的 Web 版本）"
 date = 2022-06-26T13:23:00+08:00
 lastmod = 2022-06-26T14:12:31+08:00
-tags = ["技术", "beancount", "Python"]
+tags = ["技术"]
 draft = false
 +++
 

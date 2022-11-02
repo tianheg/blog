@@ -47,9 +47,4 @@ draft = false
 
 别总觉得只有自己可怜，只有自己委屈，为一点小挫折自怨自艾，自我否定。成大事者，要先过这关。
 
----
-
-\*参考资料\*：
-
-1.  [成大事者要经得起委屈
-    来自： caoz 的小密圈](https://articles.zsxq.com/id_ige9ztjcxm8s.html)
+参考资料：[成大事者要经得起委屈 - 来自： caoz 的小密圈](https://articles.zsxq.com/id_ige9ztjcxm8s.html)

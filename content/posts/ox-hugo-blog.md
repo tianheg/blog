@@ -43,7 +43,6 @@ Emacs 安装包有两个官方仓库：MELPA 和 MELPA Stable，后者中的包�
 现在每个 Org 文件的配置：
 
 ```org
-#+SETUPFILE: ./hugo_setup.org
 #+TITLE:
 #+DATE:
 #+HUGO_TAGS:

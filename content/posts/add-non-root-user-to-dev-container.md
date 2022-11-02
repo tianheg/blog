@@ -2,7 +2,7 @@
 title = "将 non-root 用户添加到开发容器中"
 date = 2021-07-31T00:00:00+08:00
 lastmod = 2022-03-04T13:44:38+08:00
-tags = ["VS Code", "技术", "Docker"]
+tags = ["技术"]
 draft = false
 +++
 

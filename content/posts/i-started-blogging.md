@@ -3,7 +3,7 @@ title = "我开始写博客了"
 author = ["Tianhe Gao"]
 date = 2019-12-22T00:00:00+08:00
 lastmod = 2022-09-19T14:46:04+08:00
-tags = ["博客"]
+tags = ["博客", "随笔"]
 draft = false
 +++
 

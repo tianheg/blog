@@ -18,10 +18,4 @@ draft = false
 
 有些知识，不仅要了解，还要深入了解。为了深入了解，不仅要学习，还要实践，更要反复试错，在成功中
 
----
-
-\*参考资料\*：
-
-[^fn:1]:
-    Everyone can use English :
-    <https://github.com/xiaolai/everyone-can-use-english>
+[^fn:1]: [Everyone can use English](https://github.com/xiaolai/everyone-can-use-english)

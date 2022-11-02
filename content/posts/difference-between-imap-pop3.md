@@ -2,7 +2,7 @@
 title = "IMAP 和 POP3 有什么区别？"
 date = 2021-01-31T00:00:00+08:00
 lastmod = 2022-04-27T14:19:01+08:00
-tags = ["技术", "Procotol"]
+tags = ["技术"]
 draft = false
 +++
 

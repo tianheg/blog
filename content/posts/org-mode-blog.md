@@ -95,11 +95,9 @@ draft = false
 生成路径的仓库在 [GitHub:tianheg/blog](https://github.com/tianheg/blog) 。blog 目录下的 script 文件夹里放置了生成 html 的脚本文件，tpl 文件夹下的文件内容被导入每一个博客文件：
 
 ```org
-#+SETUPFILE: ./hugo_setup.org
 
 或者
 
-#+SETUPFILE: ./hugo_setup.org
 ```
 
 主要配置文件 `publish.el` ：

@@ -29,3 +29,7 @@ Cloudflare 提供一种名为 [Email Routing](https://blog.cloudflare.com/introd
 使用了 Mailgun 的付费服务。
 
 <https://www.appmaildev.com/en/spf> SPF 测试工具。
+
+2022-11-02 更新：
+
+Mailgun 有免费服务，2022-04-27 所述的“付费”是使用，不需要付钱，但需要绑定银行卡。
