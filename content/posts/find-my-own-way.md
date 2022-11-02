@@ -14,4 +14,4 @@ draft = false
 
 选择适合自己的观点和方法，大步向前！
 
-ref: 幸福课的第二节 <https://b23.tv/CzwcrF>
+ref: 哈佛幸福课的第二节

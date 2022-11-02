@@ -10,5 +10,5 @@ draft = false
 
 **省减灾委特别提醒广大市民，** 《建议清单》中所列的家庭应急物资应选择质量合格、尽量阻燃防腐绝缘材质，建议居民家庭尽量储备基础版物资，并根据房屋类型、居住环境、地域特点、家庭成员构成及自身的经济状况科学选择，有针对性地扩充储备，定期检查保质期限，及时更新。
 
-![](https://cdn.jsdelivr.net/gh/tianheg/static@main/img/jia-ting-ying-ji-0.jpeg)
-![](https://cdn.jsdelivr.net/gh/tianheg/static@main/img/jia-ting-ying-ji-1.jpeg)
+![](/images/jia-ting-ying-ji-0.jpeg)
+![](/images/jia-ting-ying-ji-1.jpeg)
