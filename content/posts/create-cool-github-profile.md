@@ -6,10 +6,9 @@ tags = ["技术"]
 draft = false
 +++
 
-午饭前看到一个 issue：[[开源自荐] 利用
-Github Actions 获取网站的 RSS 数据，并更新到个人主页](https://github.com/ruanyf/weekly/issues/1616)。
+午饭前看到一个 issue：[[开源自荐] 利用 Github Actions 获取网站的 RSS 数据，并更新到个人主页](https://github.com/ruanyf/weekly/issues/1616)。
 
-标题勾起了我学习的兴趣。自己也想进一步学习 [GitHub Actions](/tags/github-actions/) 的使用。
+标题勾起了我学习的兴趣。自己也想进一步学习 GitHub Actions 的使用。
 
 ## 添加「年进度」 {#添加-年进度}
 

@@ -2,6 +2,7 @@
 title = "Bathers at Moritzburg"
 date = 2021-01-22T00:00:00+08:00
 lastmod = 2022-04-22T14:39:00+08:00
+tags = ["艺术"]
 draft = false
 +++
 

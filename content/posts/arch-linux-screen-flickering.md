@@ -2,7 +2,7 @@
 title = "Arch Linux KDE 桌面屏幕闪烁"
 date = 2022-04-20T00:00:00+08:00
 lastmod = 2022-04-21T12:36:52+08:00
-tags = ["技术", "Arch Linux", "KDE"]
+tags = ["技术", "Arch Linux"]
 draft = false
 +++
 

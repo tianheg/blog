@@ -3,7 +3,7 @@ title = "Arch Linux 下使用 Docker MySQL5 占用过高内存"
 author = ["Tianhe Gao"]
 date = 2022-02-18T00:00:00+08:00
 lastmod = 2022-09-16T16:14:01+08:00
-tags = ["技术", "Docker", "MySQL"]
+tags = ["技术", "Docker", "MySQL", "Arch Linux"]
 draft = false
 +++
 
