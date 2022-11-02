@@ -3,7 +3,7 @@ title = "Linux Mount NTFS"
 author = ["Tianhe Gao"]
 date = 2022-09-01T12:23:00+08:00
 lastmod = 2022-09-02T14:55:06+08:00
-tags = ["技术", "Linux", "File System"]
+tags = ["技术", "Linux"]
 draft = false
 +++
 
