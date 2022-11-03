@@ -2,7 +2,7 @@
 title = "Install WordPress With LAMP"
 date = 2021-08-02T00:00:00+08:00
 lastmod = 2022-02-15T23:13:34+08:00
-tags = ["技术", "WordPress"]
+tags = ["技术"]
 draft = false
 +++
 
