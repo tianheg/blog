@@ -1,5 +1,5 @@
 +++
-title = "读《The Linux Programming Interface》"
+title = "The Linux Programming Interface"
 author = ["Tianhe Gao"]
 date = 2022-09-05T01:54:00+08:00
 lastmod = 2022-09-15T16:16:15+08:00
