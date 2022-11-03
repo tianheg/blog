@@ -144,5 +144,4 @@ draft = false
 
 ---
 
-1.  <https://www.notion.so/Tombkeeper-Renew-71918259a4de4c97b6fbdc2ed2e81fd2>
-2.  <https://weibo.com/tombkeeper>
+1.  <https://weibo.com/tombkeeper>

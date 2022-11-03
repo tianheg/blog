@@ -2,7 +2,7 @@
 title = "KDE 开机自启 ssh agent，加载密匙"
 date = 2021-12-26T00:00:00+08:00
 lastmod = 2022-02-16T14:59:47+08:00
-tags = ["技术", "SSH", "KDE"]
+tags = ["技术", "SSH"]
 draft = false
 +++
 

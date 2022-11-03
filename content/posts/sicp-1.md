@@ -2,7 +2,7 @@
 title = "SICP1: 用过程构建抽象"
 date = 2021-07-01T00:00:00+08:00
 lastmod = 2022-02-16T15:03:45+08:00
-tags = ["技术", "SICP"]
+tags = ["技术", "阅读"]
 draft = false
 +++
 
@@ -11,18 +11,17 @@ draft = false
 > The acts of the mind, wherein it exerts its power over simple ideas, are
 > chiefly these three:
 >
-> 1.  Combining several simple ideas into one compound one, and thus all
+> 1. Combining several simple ideas into one compound one, and thus all
 >     complex ideas are made.
-> 2.  The second is bring two ideas, whether simple or complex, together,
+> 2. The second is bring two ideas, whether simple or complex, together,
 >     and setting them by one another so as to take a view of them at once,
 >     without uniting them into one, by which it gets all its ideas of
 >     relations.
-> 3.  The third is separating them from all other ideas that accompany them
+> 3. The third is separating them from all other ideas that accompany them
 >     in their real existence: this is called abstraction, and thus all its
 >     general ideas are made.
 >
 > ------John Locke, _An Essay Concerning Human Understanding_ (1690)
-
 
 ## Programming in Lisp {#programming-in-lisp}
 
@@ -31,7 +30,6 @@ the use of certain kinds of logical expressions.
 
 Lisp, whose name is an acronym for LISt Processing. Lisp is the second
 oldest language in widespread use today.
-
 
 ## 记单词 {#记单词}
 
@@ -62,10 +60,9 @@ oldest language in widespread use today.
 | algebraic     |                                                                                                                                                                                                                                                                                                                                                                       | 代数的        |
 | linguistic    | Use the adjective linguistic to describe anything related to language, like the linguistic difficulties you might have if you visit a place where you do not speak the same language as everyone else.                                                                                                                                                                | 语言的        |
 
-
 ## 学习进度 {#学习进度}
 
--   2021-07-03 08:00~11:30 读完
+- 2021-07-03 08:00~11:30 读完
     [1 Building Abstractions with Procedures](https://mitpress.mit.edu/sites/default/files/sicp/full-text/book/book-Z-H-9.html#%_chap_1)
--   2021-07-04 13:00~14:00 查阅
+- 2021-07-04 13:00~14:00 查阅
     [1 Building Abstractions with Procedures](https://mitpress.mit.edu/sites/default/files/sicp/full-text/book/book-Z-H-9.html#%_chap_1) 中不知道意思的生词

@@ -2,7 +2,7 @@
 title = "什么是 POP3、SMTP 及 IMAP？"
 date = 2021-01-31T00:00:00+08:00
 lastmod = 2022-02-16T08:55:18+08:00
-tags = ["技术", "Network Protocol"]
+tags = ["技术"]
 draft = false
 +++
 
