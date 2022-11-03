@@ -1,5 +1,5 @@
 +++
-title = "黑客与画家(Hackers and Painters)"
+title = "黑客与画家"
 date = 2021-02-23T00:00:00+08:00
 lastmod = 2022-02-16T16:16:27+08:00
 tags = ["阅读"]
