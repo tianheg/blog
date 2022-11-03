@@ -1,10 +1,12 @@
 +++
-title = "Linus Torvalds《只是为了好玩》"
+title = "只是为了好玩"
 date = 2022-06-10T20:42:00+08:00
 lastmod = 2022-06-10T21:28:36+08:00
 tags = ["阅读"]
 draft = false
 +++
+
+作者是 Linus Torvalds，Linux 系统的最初作者。
 
 > 战争是建立社会秩序的手段。
 
