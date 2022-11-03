@@ -2,7 +2,7 @@
 title = "The Road to 10K"
 date = 2021-05-03T00:00:00+08:00
 lastmod = 2022-08-28T12:00:54+08:00
-tags = ["他山之石", "技术"]
+tags = ["他山之石"]
 draft = false
 +++
 

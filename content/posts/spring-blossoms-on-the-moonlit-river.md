@@ -2,7 +2,7 @@
 title = "春江花月夜"
 date = 2021-06-12T00:00:00+08:00
 lastmod = 2022-02-16T15:00:14+08:00
-tags = ["诗作"]
+tags = ["古文"]
 draft = false
 +++
 
@@ -48,6 +48,6 @@ draft = false
 
 ---
 
-\*参考资料\*：
+**参考资料**：
 
 1.  <https://zh.wikipedia.org/wiki/%E5%BC%A0%E8%8B%A5%E8%99%9A>

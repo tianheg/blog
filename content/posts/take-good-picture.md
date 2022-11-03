@@ -10,8 +10,8 @@ draft = false
 
 途径：
 
-1.  看各类电影
-2.  看摄影作品
+1. 看各类电影
+2. 看摄影作品
 
 1）看电影
 
@@ -26,4 +26,4 @@ draft = false
 
 ---
 
-1.  <https://www.bilibili.com/video/BV1CK4y1Q7zs>
+1. <https://www.bilibili.com/video/BV1CK4y1Q7zs>

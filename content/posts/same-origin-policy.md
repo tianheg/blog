@@ -6,17 +6,15 @@ tags = ["技术", "Web"]
 draft = false
 +++
 
-1.  <https://www.anquanke.com/post/id/86078>
-2.  <https://lightless.me/archives/review-SOP.html>
-3.  [Same-origin policy - MDN](https://developer.mozilla.org/en-US/docs/Web/Security/Same-origin_policy)
-
+1. <https://www.anquanke.com/post/id/86078>
+2. <https://lightless.me/archives/review-SOP.html>
+3. [Same-origin policy - MDN](https://developer.mozilla.org/en-US/docs/Web/Security/Same-origin_policy)
 
 ## 什么是源和同源策略 {#什么是源和同源策略}
 
 源就是主机、协议和端口名的一个三元组。
 
 同源策略是一个重要的安全机制，它能约束由一个源加载的文档或脚本和其他源交互的机会。这种机制帮助隔离了含有潜在病毒的文档或脚本。
-
 
 ## 可继承的源 {#可继承的源}
 

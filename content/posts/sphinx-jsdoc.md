@@ -2,7 +2,7 @@
 title = "如何在 Sphinx 下使用 JSDoc"
 date = 2022-01-14T00:00:00+08:00
 lastmod = 2022-02-16T15:01:15+08:00
-tags = ["技术", "Sphinx", "JSDoc"]
+tags = ["技术"]
 draft = false
 +++
 
