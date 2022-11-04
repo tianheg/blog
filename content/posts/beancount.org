@@ -1,0 +1,71 @@
+#+TITLE: 使用 beancount
+#+DATE: <2022-11-04 Fri 22:42>
+#+TAGS[]: 随笔
+
+我是结合 Org-mode 进行使用的。用 Docker 在本地预览，我的 compose 文件：
+
+#+BEGIN_SRC yml
+services:
+  fava:
+    image: yegle/fava
+    ports:
+      - 5000:5000
+    volumes:
+      - $PWD:/bean
+    environment:
+      - BEANCOUNT_FILE=/bean/index.org
+#+END_SRC
+
+实例文档格式 index.org：
+
+#+BEGIN_SRC org
+;; -*- mode: beancount; coding: utf-8; fill-column: 400; -*-
+
+* Options
+
+option "title" "My Personal Ledger"
+option "operating_currency" "CNY"
+option "operating_currency" "USD"
+2022-01-01 open Assets:Checking
+2022-01-01 open Expenses:Books
+2022-01-04 open Expenses:Food
+2022-06-30 open Assets:Bank:AoC
+;; AoC 中国农业银行
+2022-06-30 open Income:Salary
+2022-06-30 open Expenses:Rent
+2022-06-30 open Expenses:Entertainment
+2022-06-30 open Expenses:Tech
+
+* Daily expenses
+
+2022-01-01 * "购买《JavaScript 语言精粹》"
+  Expenses:Books                                40.5 CNY
+  Assets:Checking
+
+2022-01-04 * "午饭：土豆牛肉盖浇面，豆泡，丸子"
+  Expenses:Food                                   15 CNY
+  Assets:Checking
+#+END_SRC
+
+* BYVoid-复式记账
+
+- https://byvoid.com/zhs/blog/beancount-bookkeeping-1/
+
+记账是为了提升对自我的认识。
+
+财务自由的一般定义是 *由资产产生的收入不少于生活开销* 。
+
+资产（Assets）和净资产（Net Assets）的区别：
+
+在有限的生命里，资产（不是净资产）产生的现金流能够满足生活所需的开销，这就是财务自由。
+
+资产产生现金流的定义：利息、分红、租金、版税、直接通过资产折现的收入，即净资产减少。
+
+想达到财富自由，需要三点要求，对支出的预期、对资产和收入的了解、对寿命的期望。
+
+Refers:
+
+1. https://beancount.github.io/
+2. http://furius.ca/beancount/doc/index
+3. https://beancount.github.io/fava/
+4. https://github.com/yegle/fava-docker
