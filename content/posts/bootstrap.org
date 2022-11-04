@@ -1,0 +1,250 @@
+#+TITLE: Bootstrap
+#+DATE: <2022-11-04 Fri 23:05>
+#+TAGS[]: 技术 CSS
+
+Bootstrap 是一个 CSS 框架。[[https://getbootstrap.com/]]
+
+* 准备开始
+
+** 重要的全局特性
+
+-  使用 HTML5 类型声明
+
+#+BEGIN_SRC html
+<!DOCTYPE html>
+<html lang="en"></html>
+#+END_SRC
+
+-  响应式元标签 ~<meta name="viewport" content="width=device-width, initial-scale=1.0">~
+-  Box-sizing =border-box=，确保 =padding= 不会影响对元素宽度的计算
+-  Reboot
+
+** JS 插件
+
+可以分开使用 =js/dist/*.js= ，也可以使用所有插件合并的 =bootstrap.min.js= ；使用 bundler (Webpack, Rollup...)的话，使用 =/js/dist/*.js= ，已经 UMD 完备。
+
+#+BEGIN_QUOTE
+UMD 是 JS 模块的通用模块定义方式。这些模块可以在任何地方工作，无论是客户端、服务器还是其他地方。——[[http://jargon.js.org/\_glossary/UMD.md]]
+#+END_QUOTE
+
+Bundle 是指把多个 JS 文件合并为 1 个。
+
+Bootstrap 也可用作 modules 和
+components。但是，有些插件（Dropdown、Tooltip、Popover）无法兼容
+module。
+
+使用 Bootstrap 要注意 CSS/JS 插件的依赖问题。
+
+Bootstrap v5 中是可以使用 jQuery 的。
+
+Bootstrap 的数据属性可直接通过 HTML 使用，更推荐通过 JS 使用。
+
+Bootstrap 提供对插件的自定义事件。
+
+Bootstrap 提供可编程 API。可以在构造器中直接选择 CSS 选择器。所有 API
+方法都是异步的且会进行变换。通过修改插件的 =Constructor.Default=
+对象改变插件的默认设置。
+
+通过 =bootstrap.Tooltip.VERSION= 获取每个插件的版本号。
+
+如果关闭 JS，Bootstrap 不提供开箱即用的回退措施。
+
+Sanitizer 是 Bootstrap 插件的净化器名词。
+
+** Webpack
+
+1. 安装 bootstrap
+
+#+BEGIN_SRC sh
+pnpm install bootstrap @popperjs/core
+#+END_SRC
+
+2. 导入 JS
+
+#+BEGIN_SRC js
+// app.js
+// 导入全部
+import 'bootstrap'
+
+// or get all of the named exports for further usage
+import * as bootstrap from 'bootstrap'
+
+// 仅导入使用的插件
+import Alert from 'bootstrap/js/dist/alert'
+
+// or, specify which plugins you need:
+import { Tooltip, Toast, Popover } from 'bootstrap'
+#+END_SRC
+
+3. 导入样式
+
+方式一：导入预编译的 Sass
+
+先创建 =_custom.scss= ，覆盖[[https://getbootstrap.com/docs/5.1/customize/sass/][默认设置]]，然后在 =main.scss= 中导入：
+
+#+BEGIN_SRC scss
+@import 'custom';
+@import '~bootstrap/scss/bootstrap';
+#+END_SRC
+
+为了编译 Bootstrap，确保安装并使用了相应的加载器：[[https://github.com/webpack-contrib/sass-loader][sass-loader]]、[[https://github.com/webpack-contrib/postcss-loader][postcss-loader]] + [[https://github.com/postcss/autoprefixer#webpack][Autoprefixer]]。Webpack 配置参考：
+
+#+BEGIN_SRC js
+// ...
+{
+  test: /\.(scss)$/,
+  use: [{
+    // inject CSS to page
+    loader: 'style-loader'
+  }, {
+    // translates CSS into CommonJS modules
+    loader: 'css-loader'
+  }, {
+    // Run postcss actions
+    loader: 'postcss-loader',
+    options: {
+      // `postcssOptions` is needed for postcss 8.x;
+      // if you use postcss 7.x skip the key
+      postcssOptions: {
+        // postcss plugins, can be exported to postcss.config.js
+        plugins: function () {
+          return [
+            require('autoprefixer')
+          ];
+        }
+      }
+    }
+  }, {
+    // compiles Sass to CSS
+    loader: 'sass-loader'
+  }]
+}
+// ...
+#+END_SRC
+
+方式二：导入编译好的 CSS
+
+直接导入 CSS 文件：
+
+#+BEGIN_SRC js
+import 'bootstrap/dist/css/bootstrap.min.css'
+#+END_SRC
+
+之后只需要改动一下 Webpack 的配置即可：
+
+#+BEGIN_SRC js
+// ...
+module: {
+  rules: [
+    {
+      test: /\.css$/,
+      use: [
+        'style-loader',
+        'css-loader'
+      ]
+    }
+  ]
+}
+// ...
+#+END_SRC
+
+** Parcel
+
+1. 安装 Parcel
+
+#+BEGIN_SRC sh
+pnpm install --save-dev parcel
+#+END_SRC
+
+2. 安装 Bootstrap
+
+项目结构：
+
+#+BEGIN_SRC txt
+project-name/
+├── build/
+├── node_modules/
+│   └── bootstrap/
+│   └── popper.js/
+├── scss/
+│   └── custom.scss
+├── src/
+│   └── index.html
+│   └── index.js
+└── package.json
+#+END_SRC
+
+3. 导入 JS
+4. 导入 CSS
+5. 在 HTML 中加入 =index.js=
+6. 修改 =package.json=
+
+#+BEGIN_SRC json
+"scripts": {
+  "dev": "parcel ./src/index.html",
+  "prebuild": "npx rimraf build",
+  "build": "parcel build --public-url ./ ./src/index.html --experimental-scope-hoisting --out-dir build"
+}
+#+END_SRC
+
+7. 运行命令
+
+#+BEGIN_SRC sh
+pnpm run dev
+pnpm run build
+#+END_SRC
+
+** 可访问性
+
+概述：使用 Bootstrap 项目的可访问性与作者使用的标记、增加的样式和脚本有关，如果这些修改能够符合 WCAG 2.1 (A/AA/AAA) 等可访问性标准，那么该项目的可访问性是大概率没有问题的。
+
+Bootstrap
+提供结构化标记；交互式组件；良好的颜色对比；视觉上隐藏内容；减速运动
+
+** RFS
+
+RFS 是 Bootstrap
+的小项目，是一个调整单位大小的引擎，最初用于调整字体大小（因此，它是
+Responsive Font Sizes 的缩写）。RFS 发展到现在这个阶段，它能调整大多数
+CSS 属性的单位值，比如 =margin= 、 =padding= 、 =border-radius= 、甚至包括 =box-shadow= 。
+
+如何使用？
+
+RFS 机制包含在 Bootstrap 的 SCSS 文件中；也可以在[[https://github.com/twbs/rfs#installation][这里]]找到安装方法。
+
+扩展文档在[[https://github.com/twbs/rfs/tree/v9.0.6][这里]]
+
+** RTL
+
+RTL(Right to Left)。Bootstrap 基于 [[https://rtlcss.com/][RTLCSS]] 实现
+RTL。
+
+需要设置 HTML：
+
+1. ~<html dir="rtl">~
+2. 添加合适的 =lang= 属性
+3. 导入 rtl css： =bootstrap.rtl.min.css=
+
+* 自定义
+
+学习如何用 Sass、大量的全局选项、广泛的色彩系统等来设计主题、定制和扩展
+Bootstrap。
+
+CSPs and embedded SVGs
+
+** Sass
+
+注意文件结构：使用包管理器和编译后文件。
+
+导入：全部导入和导入需要的部分。
+
+默认变量有 =!default= 标记，如需要覆盖可直接复制后修改属性值，并移除
+=!default= 。
+
+地图和循环。
+
+需要的键。
+
+函数：颜色（对比度）、Escape SVG、增减函数。
+
+Mixins：颜色规范。
