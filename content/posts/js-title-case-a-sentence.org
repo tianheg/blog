@@ -1,0 +1,62 @@
+#+TITLE: Title Case a Sentence
+#+DATE: <2022-11-05 Sat 21:36>
+#+TAGS[]: 技术 Algorithm
+
+[[https://www.freecodecamp.org/learn/javascript-algorithms-and-data-structures/basic-algorithm-scripting/title-case-a-sentence][Basic Algorithm Scripting: Title Case a Sentence | freeCodeCamp.org]]
+
+* 我的，没有完成要求
+
+#+BEGIN_SRC js
+function titleCase(str) {
+  let newStrArr = []
+  for (let i = 0; i < str.split(' ').length; i++) {
+    newStrArr.push(
+      str.split(' ')[i][0].toUpperCase() +
+        str.split(' ')[i].slice(1).toLowerCase(),
+    )
+  }
+  return newStrArr.join(' ')
+}
+
+console.log(titleCase("I'm a little tea pot"))
+#+END_SRC
+
+加了 =.toLowerCase()= 可以了。
+
+这样写有些繁琐。
+
+* for...in
+
+#+BEGIN_SRC js
+function titleCase(str) {
+  const newTitle = str.split(' ')
+  const updatedTitle = []
+  for (let st in newTitle) {
+    updatedTitle[st] =
+      newTitle[st][0].toUpperCase() + newTitle[st].slice(1).toLowerCase()
+  }
+  return updatedTitle.join(' ')
+}
+#+END_SRC
+
+* map()
+
+#+BEGIN_SRC js
+  function titleCase(str) {
+    return str
+      .toLowerCase()
+      .split(' ')
+      .map((val) => val.replace(val.charAt(0), val.charAt(0).toUpperCase()))
+      .join(' ')
+  }
+
+  titleCase("I'm a little tea pot")
+#+END_SRC
+
+* 正则表达式
+
+#+BEGIN_SRC js
+function titleCase(str) {
+  return str.toLowerCase().replace(/(^|\s)\S/g, (L) => L.toUpperCase())
+}
+#+END_SRC
