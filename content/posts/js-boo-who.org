@@ -1,0 +1,31 @@
+#+TITLE: Boo who
+#+DATE: <2022-11-05 Sat 21:41>
+#+TAGS[]: 技术 Algorithm
+
+1. [[https://www.freecodecamp.org/learn/javascript-algorithms-and-data-structures/basic-algorithm-scripting/boo-who][Basic Algorithm Scripting: Boo who | freeCodeCamp.org]]
+2. [[https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Boolean][Boolean - JavaScript | MDN]]
+3. [[https://forum.freecodecamp.org/t/freecodecamp-challenge-guide-boo-who/16000][freeCodeCamp Challenge Guide: Boo who - Guide - The freeCodeCamp Forum]]
+
+* 我写的
+
+#+BEGIN_SRC js
+function booWho(bool) {
+  if (bool === false || bool === true) {
+    return true
+  } else {
+    return false
+  }
+}
+
+console.log(booWho(1))
+#+END_SRC
+
+还可以这样写：
+
+#+BEGIN_SRC js
+function booWho(bool) {
+  return typeof bool === 'boolean'
+}
+
+console.log(booWho(1))
+#+END_SRC
