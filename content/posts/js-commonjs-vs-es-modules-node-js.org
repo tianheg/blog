@@ -1,0 +1,211 @@
+#+TITLE: CommonJS vs. ES modules in Node.js
+#+DATE: <2022-11-06 Sun 15:27>
+#+TAGS[]: 技术 JavaScript
+
+[[https://blog.logrocket.com/commonjs-vs-es-modules-node-js/]]
+
+在浏览器端的 JS，JS 模块的使用依靠 =import= 和 =export= 。这些语句依次加载并导出 ECMAScript modules(ES modules)。
+
+这种 ES 模块格式是一种官方格式，用于把可重复使用的 JS 代码打包，现在大部分浏览器原生支持这些模块。
+
+但是，Node.js 默认支持的是 CommonJS 模块格式。CommonJS 模块加载使用 =require()= 。在 CommonJS 模块中，变量和函数的导出使用 =module.exports= 。
+
+随着 JS 模块系统的标准化，Node.js 在 [[https://github.com/nodejs/node/blob/master/doc/changelogs/CHANGELOG_V8.md#8.5.0][v8.5.0]] 版本中引入了 ES 模块格式。作为一个实验性模块，要想成功在 Node.js 环境下执行 ES 模块需要添加 =--experimental-modules= 标记。
+
+然而，自从 13.2.0 版本，Node.js 对 ES 模块有稳定的支持。
+
+这篇文章的重点并不在于两种模块格式的详细用法。而在于，对这两种模块格式进行比较，据此判断在实际编码中，你应该使用哪一种。
+
+* 比较 CommonJS 模块和 ES 模块语法
+
+默认情况下，Node.js 对 JS 采用 CommonJS 模块。因此，CommonJS 模块的特征即为，=require()= 用于模块导入，=module.exports= 用于模块导出。
+
+例如，这里的 CommonJS 模块导出了两个函数：
+
+#+BEGIN_SRC js
+// util.js
+module.exports.add = function (a, b) {
+  return a + b
+}
+module.exports.subtract = function (a, b) {
+  return a - b
+}
+#+END_SRC
+
+我们还可以用 =require()= 将这两个公共函数导入另一个 Node.js 脚本：
+
+#+BEGIN_SRC js
+const { add, subtract } = require('./util')
+
+console.log(add(5, 5))
+console.log(subtract(5, 5))
+#+END_SRC
+
+深入学习 CommonJS 模块，见 [[https://blog.logrocket.com/es-modules-in-node-today/#commonjsmodulesystem][这里]]。
+
+另一方面，JS 库作者可以将文件扩展名从 =.js= 改为 =.mjs= 直接在这个 Node.js 包中启用 ES 模块。
+
+例如，以下是一个简单的 ES 模块（扩展名是 =.mjs= ），导出两个函数供大家使用。
+
+#+BEGIN_SRC js
+// util.mjs
+export function add(a, b) {
+  return a + b
+}
+export function subtract(a, b) {
+  return a - b
+}
+#+END_SRC
+
+然后，使用 =import= 语句导入两个函数：
+
+#+BEGIN_SRC js
+// app.mjs
+import { add, subtract } from './util.mjs'
+
+console.log(add(5, 5))
+console.log(subtract(5, 5))
+#+END_SRC
+
+另一种开启 ES 模块的方式：在包的根目录下的 =package.json= 文件中，加入 ="type: module"= ：
+
+#+BEGIN_SRC js
+{
+  "name": "my-library",
+  "version": "1.0.0",
+  "type": "module",
+  // ...
+}
+#+END_SRC
+
+有了它，该包下的所有 js 文件都被视为 ES 模块文件，不需要 mjs 扩展名。了解更多 ES 模块信息，见 [[https://blog.logrocket.com/how-to-use-ecmascript-modules-with-node-js/][这里]]。
+
+如果你想让这两种格式互相转换的话，可以 [[https://www.youtube.com/watch?v=7vGk8vFDGfA][通过 Babel 做到]]。像 Vue 和 React 这样的框架是支持 ES 模块的，因为它们 [[https://blog.logrocket.com/babel-vs-typescript/][使用 Babel 编译代码]]。
+
+* 在 Node.js 中使用 ES 模块 和 CommonJS 模块的好处和坏处
+
+** ES 模块是 JS 标准，而 CommonJS 模块是 Node.js 的默认格式
+
+ES 模块的产生是为了统一 JS 模块系统。它已经成为封装 JS 代码以便复用的标准格式。
+
+CommonJS 模块系统，则是内建于 Node.js。在 Node.js 引入 ES 模块以前，CommonJS 是 Node.js 模块的标准格式。因此，有很多 Node.js 库和模块使用 CommonJS 格式书写。
+
+在浏览器支持方面，所有浏览器都支持 ES 模块语法，你可以在 React 和 Vue.js 等框架中使用 =import= 和 =export=。这些框架使用像 Babel 这样的转换编译器，将 =import= 和 =export= 语法编译为 =require()= 。后者是老版本 Node.js 所支持的。
+
+就算不提 ES 模块是 JS 模块的标准，它的语法也较 =require()= 更为易读。主要在客户端写 JS 的开发者在使用 Node.js 模块时没有遇到太多问题，这要归功于相同的语法。
+
+** Node.js 对 ES 模块的支持
+
+一、老版本 Node.js 不支持 ES 模块
+
+尽管 ES 模块已经成为 JS 的标准模块格式，开发者应该考虑到老版本 Node.js 缺乏支持的问题（尤其是 Node.js v9 和之前的版本）。
+
+换句话说，一个用 ES 模块的应用不能在老版本 Node.js 上运行。
+
+但是有了新的条件导出，我们可以构建双模式库。这些库是由 ES 模块组成，但也向后兼容老版本 Node.js 支持的 CommonJS 模块格式。
+
+换句话说，我们可以构建一个库，它支持同时使用 =import= 和 =require()= ，这让我们解决了不兼容的问题。
+
+考虑以下库：
+
+#+BEGIN_EXAMPLE
+  my-node-library
+  ├── lib/
+  │   ├── browser-lib.js (iife format)
+  │   ├── module-a.js  (commonjs format)
+  │   ├── module-a.mjs  (es6 module format)
+  │   └── private/
+  │       ├── module-b.js
+  │       └── module-b.mjs
+  ├── package.json
+  └── …
+#+END_EXAMPLE
+
+在 =package.json= 文件中的 =exports= 位置，用两种格式导出公共模块（ =module-a= ），限制对私有模块（ =module-b= ）的访问。
+
+#+BEGIN_SRC json
+// package.json
+{
+  "name": "my-library",
+  "exports": {
+    ".": {
+        "browser": {
+          "default": "./lib/browser-module.js"
+        }
+    },
+    "module-a": {
+        "import": "./lib/module-a.mjs"
+        "require": "./lib/module-a.js"
+    }
+  }
+}
+#+END_SRC
+
+通过提供以下关于 =my-library= 的信息，我们可以在任何支持它的地方使用它：
+
+#+BEGIN_SRC js
+// For CommonJS
+const moduleA = require('my-library/module-a')
+
+// For ES6 Module
+import moduleA from 'my-library/module-a'
+
+// This will not work
+const moduleA = require('my-library/lib/module-a')
+import moduleA from 'my-awesome-lib/lib/public-module-a'
+const moduleB = require('my-library/private/module-b')
+import moduleB from 'my-library/private/module-b'
+#+END_SRC
+
+因为 =exports= 的路径，我们可以导入（和 =require()= ）我们的公共模块，而不需要指定绝对路径。通过导入 js 和 mjs 后缀的文件，我们可以解决不兼容的问题；我们可以将软件包映射到不同的环境，如浏览器和 Node.js，同时限制访问私有模块。
+
+二、较新版本的 Node.js 完全支持 ES 模块
+
+在大多数低版本 Node.js 中，ES 模块还处于试验阶段。这意味着这一阶段的 ES 模块并不完全，而且在使用时需要添加 =--experimental-modules= 标记。新版本则改进了这种设置。
+
+然而，在 Node.js 中记住这一点很重要，如果一个模块是 ES 模块，它必须符合这些要求：要么模块文件的扩展名由 =.js= （用于 CommonJS）改为 =.mjs= （用于 ES 模块），要么在最近的 =package.json= 文件中设置 ={"type": "module"}= 。
+
+这样的话，包中的所有代码都被视为 ES 模块的一部分，应该使用 =import/export= 语句不要使用 =require()= 。
+
+** CommonJS 使用模块导入提供灵活性
+
+在一个 ES 模块中，导入语句只能在文件开始调用。在其他位置调用会自动将表达式转移到文件开头，甚至可能报错。
+
+另一方面， =require()= 函数在运行时解析。因此， =require()= 可以在任何地方调用。
+
+#+BEGIN_EXAMPLE
+运行时解析，是否意味着编写代码时，是不需要关心 require 的包的内容的？
+#+END_EXAMPLE
+
+你可以将它用于各种情况下加载模块，比如 =if= 引导的条件句、条件循环语句、和函数等。
+
+例如，在条件语句中调用 =require()= ：
+
+#+BEGIN_SRC js
+if (user.length > 0) {
+  const userDetails = require('./userDetails.js')
+  // Do something...
+}
+#+END_SRC
+
+只有至少一个用户存在时，我们才能调用 =userDetails= 模块。
+
+** CommonJS 同步加载模块，ES 则是异步
+
+使用 =require()= 加载模块的限制之一就是，它是同步加载模块。这意味着模块被加载以后，是一个一个进行处理的。
+
+正如你猜测的那样，这会为拥有成百模块的大型应用带来性能上的问题。这种情况下， =import= 基于它的异步表现可能好过 =require()= 。
+
+然而， =require()= 的同步天性对于只使用几个模块的小型应用来说可能不算一个很大的问题。
+
+* 结论：选择 CommonJS 还是 ES？
+
+对于依然使用老版本 Node.js 的开发者，使用新的 ES 模块是不明智的。
+
+因为对 ES 模块的支持并不完全，将一个已有项目转换为 ES 模块可能导致应用无法运行在老版本的 Node.js 上。因此，将项目迁移到使用 ES 模块好处并不是那么大。
+
+作为初学者，学习 ES 模块是有益且方便的。因为它同时在客户端（Browser）和服务器端（Node.js）成为定义 JS 模块的标准格式。
+
+对于新的 Node.js 项目来说，ES 模块是 CommonJS 之外的另一个选择。ES 模块格式的确提供了一种更简单的路由来写同构的 JS，这些代码能够在浏览器和服务器端运行。
+
+一句话概括：ECMAScript 模块是 JS 的未来。
