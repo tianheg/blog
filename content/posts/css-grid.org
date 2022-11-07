@@ -1,0 +1,82 @@
+#+TITLE: CSS Grid
+#+DATE: <2022-11-07 Mon 15:15>
+#+TAGS: 技术 CSS
+
+* 学习路径
+
+1. [[https://web.dev/learn/css/grid/][Grid | WebDev]]
+2. [[https://developer.mozilla.org/en-US/docs/Web/CSS/CSS_Grid_Layout][CSS Grid Layout - CSS: Cascading Style Sheets | MDN]]
+3. [[https://css-tricks.com/snippets/css/complete-guide-grid/][A Complete Guide to Grid | CSS-Tricks]]
+4. [[https://www.smashingmagazine.com/2020/01/understanding-css-grid-container/][Understanding CSS Grid: Creating A Grid Container - Smashing Magazine]]
+5. [[https://gridbyexample.com/][Grid by Example]]
+
+* 笔记
+
+CSS Grid 是一个二维的页面布局系统，能够控制页面元素在行和列的排布。
+
+** Grid 布局特点
+
+1. A grid can be defined with rows and columns.
+2. Direct children of the grid container will be automatically placed onto this grid.
+3. Or, you can place the items in the precise location that you want.
+4. Lines and areas on the grid can be named to make placement easier.
+5. Spare space in the grid container can be distributed between the tracks.
+6. Grid items can be aligned within their area.
+
+** Grid 术语
+
+Grid lines
+
+Grid 线有水平和垂直的两种，它们共同构成 grid 格子。
+
+Grid tracks
+
+Grid 两条水平线/垂直线之间的格子区域就是 grid track。
+
+Grid cell
+
+一个 grid cell 就是 grid tracks 的最小单位。
+
+Grid area
+
+几个 grid cell 合成一个 grid area。
+
+Gaps
+
+Tracks 之间的分隔区域是 gap。
+
+Grid container
+
+应用了 =display: grid= 的 HTML 元素，因此为直接子元素创建了一个新的网格格式上下文。
+
+Grid item
+
+Grid 容器的直接子元素。
+
+** 行和列
+
+例子：
+
+#+BEGIN_SRC css
+.container {
+  display: grid;
+  grid-template-columns: 5em 100px 30%;
+  grid-template-rows: 200px auto;
+  gap: 10px;
+}
+#+END_SRC
+
+-  3 个 column tracks，每个 track 用了不同的长度
+-  2 个 row tracks，第二个用了 auto（默认值）
+
+内部大小关键字
+
+-  =min-content=: 内容没有溢出的情况下尽可能缩小 track
+-  =max-content=: 放大子元素
+-  =fit-content()=: 起初很像 =max-content= ，后来一旦 track 达到设定值，track 中的内容就开始换行
+
+=fr= 单位
+
+只在 grid 布局中有效。描述 grid 容器中可用空间的共享。
+
+=fr= 的工作方式和 flexbox 中的 =flex: auto;= 相似。
