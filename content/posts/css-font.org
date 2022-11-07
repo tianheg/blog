@@ -1,0 +1,25 @@
+#+TITLE: CSS font
+#+DATE: <2022-11-07 Mon 15:09>
+#+TAGS: 技术 CSS
+
+[[https://www.cssfontstack.com/]]
+
+#+BEGIN_SRC css
+body {
+  /* As long as these are defined before font-size, they can be placed in any order. Including line-height is likewise optional but may be declared only after font-size and only following a forward slash https://css-tricks.com/almanac/properties/f/font/ */
+  font: italic small-caps bold 50px/2 'Indie Flower', cursive;
+}
+
+/* Same as */
+
+body {
+  font-family: "Indie Flower", cursive;
+  line-height: 2;
+  font-weight: bold;
+  font-style: italic;
+  font-variant: small-caps;
+  font-size: 50px;
+}
+#+END_SRC
+
+[[https://developer.mozilla.org/en-US/docs/Web/CSS/font#syntax]]
