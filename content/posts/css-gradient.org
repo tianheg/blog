@@ -1,0 +1,45 @@
+#+TITLE: CSS 渐变
+#+DATE: <2022-11-07 Mon 15:10>
+#+TAGS: 技术 CSS
+
+[[https://developer.mozilla.org/en-US/docs/Web/CSS/gradient/linear-gradient]]
+
+The colors of the gradient are determined by two or more points: the starting point, the ending point, and, in between, optional color-stop points.
+
+* 使用例子
+
+#+BEGIN_SRC css
+linear-gradient(
+      217deg,
+      rgba(255, 0, 0, 0.6),
+      rgba(255, 0, 0, 0) 66%
+    ),
+    linear-gradient(127deg, rgba(0, 255, 0, 0.6), rgba(0, 255, 0, 0) 66%),
+    linear-gradient(336deg, rgba(0, 0, 255, 0.6), rgba(0, 0, 255, 0) 66%)
+
+linear-gradient(to left top, rgba(111, 222, 255, .6), rgba(222, 111, 255, .6))
+
+linear-gradient(0deg, blue, green 40%, red)
+
+linear-gradient(.25turn, red, 10%, blue)
+#+END_SRC
+
+* 疑问
+
+MDN 中的这句话是不是有问题？
+
+#+BEGIN_QUOTE
+Because <gradient>s belong to the <image> data type, they can only be used where <image>s can be used. For this reason, linear-gradient() won't work on background-color and other properties that use the <color> data type.
+#+END_QUOTE
+
+经过测试，没有问题。background-color 确实无法和 linear-gradient() 一起使用。但是，可以和 background 一起使用。
+
+* 有趣例子/深入理解
+
+- [[https://projects.verou.me/css3patterns/]]
+- [[http://standardista.com/cssgradients/]]
+- [[https://cssgenerator.org/gradient-css-generator.html]]
+- [[https://cssgradient.io/blog/css-gradient-examples/]]
+- [[https://kittygiraudel.com/2013/02/04/dig-deep-into-css-gradients/]]
+- [[https://www.bram.us/2021/10/13/how-to-create-the-stripe-website-gradient-effect/]]
+- [[https://whatamesh.vercel.app/]] 生成动画渐变效果
