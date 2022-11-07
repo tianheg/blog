@@ -1,0 +1,115 @@
+#+TITLE: CSS 技巧
+#+DATE: <2022-11-07 Mon 21:35>
+#+TAGS[]: 技术 CSS
+
+Refers:
+
+1. [[http://blog.kidwm.net/390][CSS 奇技淫巧十八招 -- WMの物語]]
+2. [[https://github.com/AllThingsSmitty/css-protips#table-of-contents]]
+
+* 1.
+
+#+BEGIN_SRC css
+html {
+  height: 100%;
+}
+
+body {
+  height: 100%;
+}
+#+END_SRC
+
+在找到别人的解答时，我以为对 html body 进行设置 height 只需要其中一个，但结果却不是。为什么只有当 2 个都设置时，才会出现那样的样子呢？
+
+#+BEGIN_EXPORT html
+<img src="/images/stanford-cs142-project1versionA.png" alt="斯坦福 CS142 课程相关图片">
+<span class="caption">◎ 斯坦福 CS142 课程相关图片</span>
+#+END_EXPORT
+
+* 2.
+
+#+BEGIN_SRC css
+elem {
+  line-height: 1.1;
+  font-size: 30px;
+}
+
+elem2 {
+  line-height: 1.1em;
+  font-size: 15px;
+}
+#+END_SRC
+
+两个元素的行高计算：1.1x30, 1.1x15。前者更大，行高更大。
+
+* 3. 区块居中
+
+#+BEGIN_SRC css
+.block {
+  margin: 0 auto;
+}
+#+END_SRC
+
+* 4. position 进行相对定位
+
+[[https://codepen.io/tianheg/pen/ExEvmXq]]
+
+* 5. 除第一项添加样式
+
+[[https://codepen.io/tianheg/pen/ExEvmXq]]
+
+* 6. 简化的 CSS reset
+
+#+BEGIN_SRC css
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+#+END_SRC
+
+比 [[http://necolas.github.io/normalize.css/][Normalize.css]] 简单不少。 =box-sizing= 能让我使用盒子模型。
+
+*注意* ：如果选择如下一个这般继承 =box-sizing= 的话，就不要在重置 CSS 中使用 =box-sizing= 。
+
+* 7. 继承 =box-sizing=
+
+#+BEGIN_SRC css
+html {
+  box-sizing: border-box;
+}
+*,
+*::before,
+*::after {
+  box-sizing: inherit;
+}
+#+END_SRC
+
+这使得改变插件或其他利用其他行为的组件的 =box-sizing= 变得更加容易。
+
+* 8. 使用 =unset= 而不是手动重置所有属性
+
+像这样一个属性一个属性地重置是不必要的。
+
+#+BEGIN_SRC css
+button {
+  background: none;
+  border: none;
+  color: inherit;
+  font: inherit;
+  outline: none;
+  padding: 0;
+}
+#+END_SRC
+
+选中所有属性有个快捷方式： =all= 。把它设为 =unset= 就可以实现上述那么长达成的效果。
+
+#+BEGIN_SRC css
+button {
+  all: unset;
+}
+#+END_SRC
+
+*注意* ： =all= 、 =unset= 在 IE11 不受支持。
