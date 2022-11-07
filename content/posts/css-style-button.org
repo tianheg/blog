@@ -1,0 +1,291 @@
+#+TITLE: CSS 设置按钮样式
+#+DATE: <2022-11-07 Mon 21:42>
+#+TAGS[]: 技术 CSS
+
+模板：
+
+#+BEGIN_SRC css
+button {
+  background: ; /* normal color: #fff or linear-gradient() */
+  text-decoration: ;
+}
+button:hover {
+}
+#+END_SRC
+
+* 实例
+
+** 透明背景按钮
+
+#+BEGIN_SRC html
+<button>Button</button>
+#+END_SRC
+
+--------------
+
+#+BEGIN_SRC scss
+button {
+  color: black;
+  background: transparent;
+  background-color: white;
+  border: 2px solid #0099cc;
+  border-radius: 10px;
+  padding: 16px 32px;
+  text-align: center;
+  font-size: 16px;
+  margin: 4px 2px;
+  transition-duration: 0.4s;
+  cursor: pointer;
+  text-decoration: none;
+  text-transform: uppercase;
+  &:hover {
+    color: white;
+    background-color: #008cba;
+  }
+}
+#+END_SRC
+
+[[https://codepen.io/tianheg/pen/ZEvmLJO][See the Pen]]
+
+** 在 CSS 中插入实体
+
+#+BEGIN_SRC html
+<button><span>Button</span></button>
+#+END_SRC
+
+--------------
+
+#+BEGIN_SRC scss
+$color: #ffffff;
+$background-color: #f4511e;
+
+button {
+  display: inline-block;
+  border-radius: 4px;
+  background-color: $background-color;
+  border: none;
+  color: $color;
+  text-align: center;
+  font-size: 28px;
+  padding: 20px;
+  width: 200px;
+  transition: all 0.5s;
+  cursor: pointer;
+  margin: 5px;
+  span {
+    cursor: pointer;
+    display: inline-block;
+    position: relative;
+    transition: 0.5s;
+    &:after {
+      content: '\00bb';
+      position: absolute;
+      opacity: 0;
+      top: 0;
+      right: -20px;
+      transition: 0.5s;
+    }
+  }
+  &:hover {
+    span {
+      padding-right: 25px;
+      &:after {
+        opacity: 1;
+        right: 0;
+      }
+    }
+  }
+}
+#+END_SRC
+
+[[https://codepen.io/tianheg/pen/yLpQgBB][See the Pen]]
+
+** 点击动画
+
+#+BEGIN_SRC html
+<button class="ripple">Click Me</button>
+#+END_SRC
+
+--------------
+
+#+BEGIN_SRC scss
+$color: #fff;
+$font-family: 'Roboto', sans-serif;
+$background-color_1: #000;
+$background-color_2: purple;
+$background-color_3: #fff;
+
+@import 'https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&display=swap';
+@keyframes scale {
+  to {
+    transform: translate(-50%, -50%) scale(3);
+    opacity: 0;
+  }
+}
+* {
+  box-sizing: border-box;
+}
+body {
+  background-color: $background-color_1;
+  font-family: $font-family;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  height: 100vh;
+  overflow: hidden;
+  margin: 0;
+}
+button {
+  background-color: $background-color_2;
+  color: $color;
+  border: 1px purple solid;
+  font-size: 14px;
+  text-transform: uppercase;
+  letter-spacing: 2px;
+  padding: 20px 30px;
+  overflow: hidden;
+  margin: 10px 0;
+  position: relative;
+  &:focus {
+    outline: none;
+  }
+  .circle {
+    position: absolute;
+    background-color: $background-color_3;
+    width: 100px;
+    height: 100px;
+    border-radius: 50%;
+    transform: translate(-50%, -50%) scale(0);
+    animation: scale 0.5s ease-out;
+  }
+}
+#+END_SRC
+
+--------------
+
+#+BEGIN_SRC js
+const buttons = document.querySelectorAll('.ripple')
+
+buttons.forEach((button) => {
+  button.addEventListener('click', function (e) {
+    const x = e.clientX
+    const y = e.clientY
+
+    const buttonTop = e.target.offsetTop
+    const buttonLeft = e.target.offsetLeft
+
+    const xInside = x - buttonLeft
+    const yInside = y - buttonTop
+
+    const circle = document.createElement('span')
+    circle.classList.add('circle')
+    circle.style.top = yInside + 'px'
+    circle.style.left = xInside + 'px'
+
+    this.appendChild(circle)
+
+    setTimeout(() => circle.remove(), 500)
+  })
+})
+#+END_SRC
+
+[[https://codepen.io/tianheg/pen/yLpQgPe][See the Pen]]
+
+** 按钮插入背景图片（ =background-image= ）
+
+** 带有 icons 的按钮
+
+#+BEGIN_SRC html
+<div class="main">
+  <button>
+    <div class="icon-button twitter">
+      <i class="icon-twitter fa-brands fa-twitter"></i>
+      <span> <i class="fa-brands fa-twitter"></i></span>
+    </div>
+  </button>
+</div>
+<!-- used https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.1.1/css/all.min.css -->
+#+END_SRC
+
+--------------
+
+#+BEGIN_SRC scss
+$color_1: #1565c0;
+$color_2: white;
+$color_3: #4099ff;
+$background-color_1: white;
+$background-color_2: #4099ff;
+
+button {
+  border: none;
+  border-radius: 50px;
+  background: transparent;
+}
+.icon-button {
+  border-radius: 3rem;
+  cursor: pointer;
+  display: inline-block;
+  font-size: 2rem;
+  height: 3.6rem;
+  // line-height: 3.6rem;
+  margin: 0 5px;
+  position: relative;
+  width: 3.6rem;
+  span {
+    border-radius: 0;
+    // display: block;
+    height: 0;
+    // left: 50%;
+    margin: 0;
+    position: absolute;
+    top: 50%;
+    transition: all 0.3s;
+    width: 0;
+  }
+  &:hover {
+    span {
+      width: 3.6rem;
+      height: 3.6rem;
+      border-radius: 3.6rem;
+      margin: -1.8rem;
+    }
+    .icon-twitter {
+      color: $color_2;
+    }
+  }
+  i {
+    background: none;
+    color: $color_2;
+    height: 3.6rem;
+    left: 0;
+    line-height: 3.6rem;
+    position: absolute;
+    top: 0;
+    width: 3.6rem;
+    z-index: 10;
+  }
+  .icon-twitter {
+    color: $color_3;
+  }
+}
+
+.twitter {
+  span {
+    background-color: $background-color_2;
+  }
+}
+#+END_SRC
+
+[[https://codepen.io/tianheg/pen/MWrzJxJ][See the Pen]]
+
+* 按钮相关工具
+
+- [[https://www.cssportal.com/css3-button-generator/]]
+- [[https://css3buttongenerator.com/index.html]]
+
+--------------
+
+参考资料
+
+1. [[https://www.freecodecamp.org/news/a-quick-guide-to-styling-buttons-using-css-f64d4f96337f/][CSS Button Tutorial -- How to Styling HTML Buttons with CSS]]
