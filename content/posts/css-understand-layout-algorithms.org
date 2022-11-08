@@ -1,0 +1,157 @@
+#+TITLE: CSS 理解布局算法
+#+DATE: <2022-11-08 Tue 14:13>
+#+TAGS[]: 技术 CSS
+
+[[https://www.joshwcomeau.com/css/understanding-layout-algorithms/][Understanding Layout Algorithms]]
+
+CSS 不仅仅是一系列属性的集合，它是一群相互连接的布局算法，每个算法都是一个复杂的系统，有着各自的规则和秘密机制。
+
+* 布局算法
+
+** 哪些是布局算法？
+
+1. Flexbox
+2. Positioned（例如，=position: absolute=）
+3. Grid
+4. Table
+5. Flow（除去 flex、grid 以外的布局）
+
+#+BEGIN_SRC css
+.box {
+  z-index: 10;
+}
+#+END_SRC
+
+以上 CSS 展示的是流式布局，但是 =z-index= 并不起作用，因为 =z-index= 要[[https://developer.mozilla.org/en-US/docs/Web/CSS/z-index][配合 =position= 才能使用]]。 =z-index= 在流式布局算法中并无实现，所以如果我想要其产生效果需要改成另外一种页面布局算法。
+
+Flow 是非表格元素的默认布局算法。如果在流式布局中设置宽高，那么它所表示的就是元素的实际宽高；而在 Flex 布局中，宽高则是一种假设的尺寸，如果窗口宽度足够（=2000px=），元素宽度就是 =2000px= ；反之，元素宽度会自动缩小以适应窗口宽度。
+
+对于 Flow 布局和 Flex 布局，它们以不同的方式实现 =width= 。
+
+我们写入的属性是输入，就像传递给函数的参数一样，如何处理这些输入依赖于布局算法。
+
+* 识别布局算法
+
+在某些情况下，一个 CSS 属性的使用就标志着使用了某种布局算法：
+
+#+BEGIN_SRC css
+.help-widget {
+  /* Uses Positioned layout, because of this declaration: */
+  position: fixed;
+  right: 0;
+  bottom: 0;
+}
+.floated {
+  /* Uses Float layout, because of this declaration: */
+  float: left;
+  margin-right: 32px;
+}
+#+END_SRC
+
+在其他情况下，需要看父元素的属性：
+
+#+BEGIN_SRC html
+<style>
+  .row {
+    display: flex;
+  }
+</style>
+<ul class="row">
+  <li class="item"></li>
+  <li class="item"></li>
+  <li class="item"></li>
+</ul>
+#+END_SRC
+
+当为父元素设置 =display: flex;= 时，我们不是为父元素 =.row= 设置 Flex 布局，相反，我们是为它的子元素设置了 Flex 布局。
+
+从技术角度， =display: flex;= 创建了一个弹性格式化上下文。所有的直接子元素都在这个上下文中，这意味着它们应用的是 Flex 布局，而不是默认的 Flow 布局。
+
+（ =display: flex;= 也会把行内元素变成块级元素，如 =<span>= ，所以它也对父级元素有一定影响。但这并不会改变所使用的布局算法。）
+
+** 布局算法变体
+
+一些布局算法可以分成几个变体。
+
+当使用 =Positioned= 布局时，它被分为几个定位方案：
+
+-  relative
+-  absolute
+-  fixed
+-  sticky
+
+** 冲突
+
+当一个元素被应用多种元素时会发生什么？
+
+#+BEGIN_SRC html
+<style>
+  .row {
+    display: flex;
+  }
+  .primary.item {
+    position: absolute;
+  }
+</style>
+<ul class="row">
+  <li class="item"></li>
+  <li class="primary item"></li>
+  <li class="item"></li>
+</ul>
+#+END_SRC
+
+中间那个子元素使用了 Positioned 布局，而这个布局的优先级高于 Flex 的，所以对于三个子元素来说，中间一个是 Positioned，上下两个是 Flex。
+
+* 行内魔法空格
+
+在 Flow 布局中，以下代码片段所展示的页面，会有一些空白在图片（ =<img>= ）和它的父元素（ =<div>= ）之间：
+
+#+BEGIN_SRC html
+<style>
+  .photo-wrapper {
+    border: 1px solid;
+  }
+
+  .cat-photo {
+    width: 250px;
+    max-width: 100%;
+  }
+</style>
+
+<div class="photo-wrapper">
+  <img class="cat-photo" alt="A basketful of cats" src="/images/cats.jpg" />
+</div>
+#+END_SRC
+
+为什么会有这种空白？
+
+So, bringing this back to our mystery: why does our image have a few extra pixels of space? Because images are inline elements by default!
+
+** Flow 布局
+
+Flow 布局是为文档设计的一种布局算法。
+
+文档的结构特点：
+
+-  单个字符组成单词和句子。当水平空间不足时，这些元素会呈现三种形态：行内、并列、换行
+-  段落被认为是块，像标题和图片一样。块将被垂直堆叠，一块接着一块，从上到下。
+
+Flow 布局基于这种结构。
+
+In order to make sure that inline elements don't negatively affect the legibility of the surrounding text, a bit of extra vertical space is added.
+
+So, bringing this back to our mystery: why does our image have a few extra pixels of space? Because images are inline elements by default!
+
+** 解决办法
+
+如何消除行内魔法空白？
+
+1. 将图片设置为 =display: block;=
+2. 将图片设置为 =display: flex;=
+3. 将图片设置为 =line-height: 0;= （这种做法不利于可访问性）
+
+* 构建直觉
+
+#+BEGIN_QUOTE
+If you were focusing exclusively on studying what specific CSS properties do, you'd never understand where this mysterious space is coming from. It isn't explained in the MDN pages for =display= or =line-height= .
+#+END_QUOTE

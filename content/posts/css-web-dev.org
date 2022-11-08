@@ -1,0 +1,98 @@
+#+TITLE: CSS web.dev 网站学习
+#+DATE: <2022-11-08 Tue 14:16>
+#+TAGS[]: 技术 CSS
+
+[[https://web.dev/learn/css/]]
+
+* Box Model 盒子模型
+
+#+BEGIN_QUOTE
+盒子模型是 CSS 的核心。
+#+END_QUOTE
+
+** 内容和大小
+
+=display= 的值不同，盒子的状态不同。盒子中有更多内容，比如更多盒子。这些盒子由子元素或纯文本生成。即使没有子元素，内容本身就会改变盒子的大小。
+
+自定义盒子大小 extrinsic sizing vs 使用浏览器默认大小 intrinsic sizing
+
+当内容太多，以至于盒子无法放下时，就会出现溢出。要处理这种情况就要用到 =overflow= 属性。
+
+** 盒子模型是如何划分区域的
+
+#+CAPTION: from https://web.dev/learn/css/box-model/
+[[/images/web-dev-css-box-model.svg]]
+
+box-sizing: border-box;
+
+* Selectors 选择器
+
+-  通用选择器（通配符）
+-  属性选择器
+-  伪类，伪元素（它们的区别：后者通过 =::= 使用）
+-  Combinators
+-  Descendant combinator
+-  Next sibling combinator
+-  Subsequent- sibling combinator
+-  Child combinator
+-  Compound selectors
+
+如果 class 中含有不止目标 class 的其他类，在进行 CSS 设置时也会匹配。因为 CSS 查找 class 属性是否被包含，而不是恰好符合目标 class。
+
+* The cascade 层叠
+
+当同一个元素被多种 CSS 规则修改时，哪些规则的优先级更高？用于解决这一问题的算法就是 cascade。
+
+层叠算法的四个阶段：
+
+1. Position and order of appearance
+2. Specificity
+3. Origin
+4. Importance
+
+** 位置
+
+If you have a =<link>= that includes CSS at the top of your HTML page, then another =<link>= that includes CSS at the bottom of your page: the bottom =<link>= will have the most specificity.
+
+** 特指/专一性
+
+优先级：id > 类 > 标签，因此一般情况下不建议通过 id 添加样式，它很难被覆盖掉。
+
+** CSS 来源
+
+CSS 样式来自浏览器默认样式、浏览器扩展添加的样式、通过系统添加的样式和我编写的样式。从最不专一到最专一性排序：
+
+1. User agent base styles: browser default styles
+2. Local user styles: extension, OS
+3. Authored CSS: 我写的 CSS
+4. 添加了 =!important= 的 CSS
+5. Local user styles =!important=
+6. User agent =!important=
+
+#+CAPTION: from https://web.dev/learn/css/the-cascade/
+[[/images/web-dev-css-cascade.svg]]
+
+** 重要性
+
+CSS 属性的重要性优先级（从普通到最重要）：
+
+1. 正常规则
+2. =animation=
+3. =!important= (following the same order as origin)
+4. =transition=
+
+--------------
+
+* 参考资料
+
+1. [[https://developer.mozilla.org/en-US/docs/Web/CSS]]
+2. [[https://flukeout.github.io/]]
+3. User agent stylesheets
+
+   -  [[https://chromium.googlesource.com/chromium/blink/+/master/Source/core/css/html.css][Chromium]]
+   -  [[https://searchfox.org/mozilla-central/source/layout/style/res/html.css][Firefox]]
+   -  [[https://trac.webkit.org/browser/trunk/Source/WebCore/css/html.css][Webkit]]
+
+4. Selectors Explained [[https://kittygiraudel.github.io/selectors-explained/]]
+5. [[https://wattenberger.com/blog/css-cascade][The CSS Cascade]]
+6. [[https://developer.mozilla.org/en-US/docs/Learn/CSS/Building_blocks/Cascade_and_inheritance][Cascade and inheritance - Learn web development | MDN]]

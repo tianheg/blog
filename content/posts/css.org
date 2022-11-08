@@ -1,0 +1,384 @@
+#+TITLE: CSS 总结
+#+DATE: <2022-11-08 Tue 14:17>
+#+TAGS[]: 技术 CSS
+#+TOC: true
+
+* Layout
+** Position
+通过 position 可以对正常的文档流产生影响。
+
+child 用 absolute，parent 就需要 relative
+
+使用 absolute 时，是相对于父级元素而言；对于 fixed ，则相对于视窗（viewport）
+
+position 属性不是默认继承的，color 是；inherit 可以让 position 变得可继承
+
+static 是默认情况，left/right/top/bottom/z-index 不起作用
+
+relative 可以使得 z-index 起作用，根据 left/right/top/bottom 属性，将元素从默认位置推走
+
+absolute 从正常文档流移除，left/right/top/bottom/z-index 起作用
+
+fixed 像 absolute 同样从文档流中移除，但滚动页面并不移动元素，仅相对于整个页面变化位置
+
+sticky ，先是 relative，直到滚动到 viewport 的指定位置，此时的行为更像 fixed
+** Legacy layout methods
+传统方法，创造网格系统（Gird System）
+
+通过百分比，设置流式布局（liquid layout）
+
+- 双栏布局
+- 传统网格框架
+
+Semantic versus "unsemantic" grid systems 这一节不理解
+
+使用 float 构建网格系统的限制：只能是一维
+
+第三方网格系统：Bootstrap。
+
+** Support older browser
+- 考虑网站的可访问性
+- 网站不可能在所有浏览器上都一样
+- 对不同种类浏览器显示不同水平内容：1, 老旧浏览器不支持新特性，要确保能阅读文本；2, 浏览器支持新特性，则应用新特性
+- 创建可回退的 CSS：grid to float；方法：float、clear，display: inline-block，display: table，多栏布局，flex as a fallback for grid
+- feature queries: =@supports (display: grid)= 在 @supports 之外写旧浏览器能懂的代码，现代浏览器使用 @supports 内部的 CSS 代码。这里 feature queries 检查浏览器是否支持某特性，还有有些属性检查浏览器是否不支持某特性
+- flex 迭代的旧有版本
+- IE10, IE11 前缀版本的grid
+- 测试旧浏览器：跨浏览器测试；使用虚拟机
+
+* Responsive Design
+https://developer.mozilla.org/en-US/docs/Learn/CSS/CSS_layout/Responsive_Design
+HTML 包含基础的响应式部分。例如，一段文字一开始位于大窗口，后来宽度变小，文字会被浏览器重新布局以适应。这叫「流体」布局。但是，当文字呈现在更窄的屏幕上时，文字呈现变得不自然。如果设定固定大小的布局，在多个屏幕上呈现会有水平滚动条，和很多被浪费掉的闲置空间。
+
+除去「流式」布局，还有「固定宽度」构建页面方法。
+
+在响应式设计之前的灵活布局，有根据分辨率判断布局的，等等。
+
+「响应式设计」，由 Ethan Marcotte 第一次于 2010 年提出。有三点：
+
+1. 流体网格
+2. 流式图像
+3. media query
+
+以下是在创建响应式站点时，可能用到的技术。
+
+一、Media Queries
+
+Media query 根据断点（breakpoints）切换布局。一个简单相反：为窄屏设计单列内容，为宽屏设计多列内容。
+
+二、Flexible grids
+
+响应式站点除去「断点」，还依赖灵活的网格。使用 float 设置。
+
+三、Modern layout tech
+
+多列、Flexbox、Grid 布局是默认响应式的。
+
+四、Responsive images
+
+#+BEGIN_SRC css
+img {
+  max-width: 100%;
+}
+#+END_SRC
+
+这种方法，可能导致图片过大超过视窗，进而浪费带宽。
+
+五、Responsive typography 响应式排版
+
+先对根元素 :root 也是 html，设置基本字体大小——单位可以是 px, %, em, rem。然后，对其他元素根据需要设计字体大小，单位是 rem，也就是相对于根元素。此外，还要通过 media query 调整不同屏幕大小上的同一元素大小。
+
+另一种方法，是把字体单位改为 vw，1vw 等于当前视窗宽度的 1%。也就是，如果窗口宽度改变，对应的使用 vw 单位的元素也会发生改变。缺陷：无法放大/缩小。因此，不该单独使用 vw、vh。可这样用 =calc(1.5rem + 3vw)= 。最佳实践！
+
+六、viewport meta tag
+
+#+BEGIN_SRC html
+<meta name="viewport" content="width=device-width,initial-scale=1" />
+#+END_SRC
+
+这段代码，告诉移动端浏览器，应该将视窗宽度设置为设备宽度，显示文档的对移动端优化后的大小。
+
+这段代码是必备的，在想要展示在移动端的情况下。
+
+https://alistapart.com/article/responsive-web-design/
+
+#+BEGIN_QUOTE
+Unlike the web, which often feels like aiming for next week, architecture is a discipline very much defined by its permanence.
+#+END_QUOTE
+
+2010 年之后，网页出现在更多不同屏幕的设备上。
+
+一、Meet media query
+
+#+BEGIN_SRC html
+<link rel="stylesheet" type="text/css" href="*.css" media="screen" />
+<link rel="stylesheet" type="text/css" href="*.css" media="print" />
+#+END_SRC
+
+这是最初的最直接的方法，后来 CSS 标准发展出以下写法：
+
+#+BEGIN_SRC html
+<link rel="stylesheet" type="text/css" href="*.css" media="screen and (max-device-width: 480px)" />
+#+END_SRC
+
+而且，不仅在 =<link>= 标签中写，还可以在 CSS 样式文件中写。
+
+#+BEGIN_SRC css
+@media screen and (max-device-width: 480px) {
+  .column {
+    float: none;
+  }
+}
+/* OR */
+@import url("*.css") screen and (max-device-width: 480px);
+#+END_SRC
+
+** Media queries
+https://developer.mozilla.org/en-US/docs/Learn/CSS/CSS_layout/Media_queries
+
+#+BEGIN_SRC css
+@media media-type and (media-feature-rule) {
+  /* CSS rules go here */
+}
+
+/* media-type 是可以省略的，如果省略，该样式默认适用于 screen, print */
+#+END_SRC
+
+而 meida-feature-rule 最常用于创建响应式的是宽度，高度更少见。有 max-width, min-width, width, max-height, min-height, height。width、height 几乎不用。
+
+还有 orientation(portrait or landscape 纵向/横向)；hover
+
+一、逻辑
+
+and、or、not 逻辑： =and= , =,= , =not=
+
+二、选择断点
+
+两种方式进行响应式设计：一种是从宽屏到窄屏，先以桌面端设计；一种是从窄屏到宽屏。后者被称为 mobile first。
+
+三、viewport
+
+#+BEGIN_SRC html
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+#+END_SRC
+
+四、不必用 media query
+
+Flexbox, Grid 和多栏布局自带响应式设计。
+
+* 特定 CSS 能产生什么效果
+** 居中对齐
+https://css-tricks.com/centering-css-complete-guide/
+https://www.w3schools.com/csS/css_align.asp
+*** 水平居中
+#+BEGIN_SRC css
+elem {
+  margin-left: auto;
+  margin-right: auto;
+  width: 50%;
+}
+
+elem {
+  margin: 0 auto;
+  width: 50%;
+}
+
+/* inline, inline-* 元素 */
+.text {
+  text-align: center;
+}
+
+/* 块级元素 需要指定宽度，前2个也是块级元素居中样式 */
+img {
+  display: block;
+  margin: 0 auto;
+}
+/* 多个块级元素排成一列横排 需要水平居中
+main > div
+.inline-block-center(main), .flex-center(main)
+1. 设置好标准的 div 元素样式
+*/
+.inline-block-center {
+  text-align: center;
+  div {
+    display: inline-block;
+    text-align: left;
+  }
+}
+.flex-center {
+  display: flex;
+  justify-content: center;
+}
+/* 多个块级元素排成一列竖排
+main > div
+*/
+main div {
+  margin: 5px auto;
+}
+/* 之后一定要指定每个 div 元素的宽度 */
+#+END_SRC
+*** 垂直居中
+#+BEGIN_SRC css
+/* inline, inline-*, 文本、链接等 */
+  /* single line */
+  .center-single-line-vertically {
+    padding: 50px 0;
+  }
+  .center-single-line-vertically {
+    height: 100px;
+    line-height: 100px;
+    white-space: nowrap;
+  }
+  /* multiple lines */
+  .center-multiple-lines-vertically {
+    padding: 50px 0;
+  }
+    /* 如果对多行设置 padding 无效，使用以下办法 */
+  .center-multiple-lines-vertically {
+    display: table;
+    height: 350px; /* 大于文字高度*/
+    p {
+      display: table-cell;
+      margin: 0;
+      vertical-align: middle;
+    }
+  }
+  .center-multiple-lines-vertically {
+    display: flex;
+    justify-center: center;
+    flex-direction: column;
+    height: 300px; /* 大于文字高度 */
+  }
+  .center-multiple-lines-vertically {
+    position: relative;
+    &::before {
+      content: " ";
+      display: inline-block;
+      height: 100%;
+      width: 1%;
+      vertical-align: middle;
+    }
+    p {
+      display: inline-block;
+      vertical-align: middle;
+    }
+  }
+/* 块级元素的垂直居中 */
+  /* height 已知 */
+  /* https://codepen.io/chriscoyier/pen/GRBVOj */
+  .center-vertically {
+    position: relative;
+    .child {
+      position: absolute;
+      top: 50%;
+      height: 100px;
+      margin-top: -70px; /* box-sizing 非 border-box 的解决办法 */
+    }
+  }
+  /* height 未知 */
+  .center-vertically {
+    position: relative;
+    .child {
+      position: absolute;
+      top: 50%;
+      transform: translateY(-50%);
+    }
+  }
+  /* 元素高度拉伸到父元素 */
+  .center-vertically {
+    display: table;
+    height: 300px;
+    div {
+      display: table-cell;
+      vertical-align: middle;
+    }
+  }
+  /* 与前文多行居中相同，使用 Flexbox */
+  .center-vertically {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+  }
+    /* 或者这样写 */
+    .center-vertically {
+      display: flex;
+      .child {
+        margin: auto 0;
+      }
+    }
+#+END_SRC
+** 水平+垂直居中
+#+BEGIN_SRC css
+.center {
+  padding: 50px 0;
+  text-align: center;
+}
+/* 元素宽高固定 */
+.center {
+  position: relative;
+  .child {
+    width: 300px;
+    height: 100px;
+    padding: 20px;
+
+    position: absolute;
+    top: 50%;
+    left: 50%;
+
+    margin: -70px 0 0 -170px; /* 这个缩进值是如何计算的 */
+  }
+}
+/* 元素宽高未知 */
+.center {
+  height: 200px;
+  width: 300px; /* 宽度要有 */
+  position: relative;
+  p {
+    margin: 0;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+  }
+}
+/* Flexbox */
+.center {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+/* Gird */
+body, html {
+  height: 100%;
+  display: grid;
+  .child {
+    margin: auto;
+  }
+}
+#+END_SRC
+** 左右对齐
+#+BEGIN_SRC css
+.right {
+  position: absolute;
+  right: 0;
+}
+
+.right {
+  float: right;
+}
+
+.left {
+  position: absolute;
+  left: 0;
+}
+
+.left {
+  float: left;
+}
+#+END_SRC
+** Clearing boxes wrapped around a float
+https://www.w3schools.com/csS/css_align.asp
+
+[[https://developer.mozilla.org/en-US/docs/Learn/CSS/CSS_layout/Floats#clearing_boxes_wrapped_around_a_float]]
+
+当使用 float 时，有时内部图片会溢出到父元素之外，这时就需要一些 hack

@@ -1,0 +1,39 @@
+#+TITLE: CSS Style Queries
+#+DATE: <2022-11-08 Tue 14:06>
+#+TAGS[]: 技术 CSS
+
+[[https://una.im/style-queries/]]
+
+Style Queries 允许查询同页面的父元素的样式。
+
+作者写这篇文章的目的：
+
+#+BEGIN_QUOTE
+  I want to investigate why and when style queries really make sense to
+  use, and provide a capability previously unavailable to us.
+#+END_QUOTE
+
+* Container Queries
+
+Container queries
+能够通过查询父选择器，得到它的大小和样式信息。让子元素有自己的内在响应逻辑，这种逻辑与其外在环境没有联系。
+
+demo: [[https://codepen.io/tianheg/pen/zYWZQQw]]
+
+* Style Queries
+
+1. 查询直接父级以将样式应用于子级
+2. 给不可继承的属性添加样式
+3. 选中特定父元素，为其子元素设置唯一样式（链式样式）
+4. 通过更高优先级的变量，为样式分组
+5. CSS 中的交互
+6. 结合大小和样式查询
+
+* 进一步了解
+
+- [[https://developer.mozilla.org/en-US/docs/Web/CSS/CSS_Container_Queries][MDN Docs on Container Queries]]
+- [[https://web.dev/shows/designing-in-the-browser/gCNMyYr7F6w/][Designing in the Browser: Container Queries]]
+- [[https://web.dev/shows/designing-in-the-browser/sdjT0K4sR4k/][Designing in the Browser: Macro & Micro Layouts]]
+- [[https://www.miriamsuzanne.com/speaking/responsive-components/][Container Queries & the future of CSS]]
+- [[https://css-tricks.com/next-gen-css-container/][Next Gen CSS: @container]]
+- [[https://web.dev/patterns/layout/]]
