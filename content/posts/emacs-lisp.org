@@ -1,0 +1,117 @@
+#+TITLE: Emacs Lisp(Elisp)
+#+DATE: <2022-11-09 Wed 15:28>
+#+TAGS[]: 技术 Emacs
+
+* Docs
+- [[https://www.gnu.org/software/emacs/manual/html_node/eintr/index.html][An Introduction to Programming in Emacs Lisp]]
+- [[https://www.gnu.org/software/emacs/manual/html_node/elisp/index.html][Emacs Lisp]]
+* Tutorials
+- [[https://learnxinyminutes.com/docs/elisp/][Learn elisp in Y Minutes]]
+
+* 总是出现的错误提示
+#+BEGIN_SRC sh
+Symbol’s function definition is void: greeting
+#+END_SRC
+
+* 练习文件
+
+#+BEGIN_SRC elisp
+(setq my-name "tianheg")
+(insert "Hello!")
+(insert "Hello " "world.")Hello world.
+(insert "Hello, I am " my-name)Hello, I am tianheg
+
+(defun hello() (insert "Hello, I am " name))
+(hello "tianheg")Hello, I am tianheg
+
+(switch-to-buffer-other-window "*test*")
+
+(progn
+  (switch-to-buffer-other-window "*test*")
+  (hello "boy"))
+
+(progn
+  (switch-to-buffer-other-window "*test*")
+  (erase-buffer)
+  (hello "there")
+  (other-window 1))
+
+(let ((local-name "you"))
+  (switch-to-buffer-other-window "*test*")
+  (erase-buffer)
+  (hello local-name)
+  (other-window 1))
+
+(format "Hello %s!\n" "visitor")
+"Hello visitor!
+"
+
+(defun greeting (name)
+  (let ((your-name "tianheg"))
+    (insert (format "Hello %s!\n\nI am %s."
+		    name
+		    your-name
+		    ))))
+(greeting "boys")
+
+
+(read-from-minibuffer "Enter your name: ")
+
+(defun greeting (from-name)
+  (let ((your-name (read-from-minibuffer "Enter your name: ")))
+    (insert (format "Hello!\n\nI am %s and you are %s."
+                    from-name
+                    your-name
+                    ))))
+(greeting "Tom")
+
+(defun greeting (from-name)
+  (let ((your-name (read-from-minibuffer "Enter your name: ")))
+    (switch-to-buffer-other-window "*test*")
+    (erase-buffer)
+    (insert (format "Hello %s!\n\nI am %s." your-name from-name))
+    (other-window 1)))
+
+(greeting "Amy")
+
+(setq list '("Sarah" "Chloe" "Mathilde"))
+(car list)
+(cdr list)
+(push "Amy" list)
+(mapcar 'hello list)
+
+(defun greeting ()
+  (switch-to-buffer-other-window "*test*")
+  (erase-buffer)
+  (mapcar 'hello list)
+  (other-window 1))
+(greeting)
+
+(defun replace-hello-by-bonjour ()
+  (switch-to-buffer-other-window "*test*")
+  (goto-char (point-min))
+  (while (search-forward "Hello")
+    (replace-match "Bonjour"))
+  (other-window 1))
+(replace-hello-by-bonjour)
+
+(defun hello-to-bonjour ()
+  (switch-to-buffer-other-window "*test*")
+  (erase-buffer)
+  (mapcar 'hello list)
+  (goto-cahr (point-min))
+  (while (search-forward "Hello" nil t)
+    (replace-match "Bonjour"))
+  (other-window 1))
+(hello-to-bonjour)
+
+(defun boldify-names ()
+  (switch-to-buffer-other-window "*test*")
+  (goto-char (point-min))
+  (while (re-search-forward "Bonjour \\(.+\\)!"nil t)
+    (add-text-properties (match-beginning 1)
+                         (match-end 1)
+                         (list 'face 'bold)))
+  (other-window 1))
+(boldify-names)
+#+END_SRC
