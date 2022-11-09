@@ -1,0 +1,86 @@
+#+TITLE: Firefox
+#+DATE: <2022-11-09 Wed 15:44>
+#+TAGS[]: 技术
+
+* 扩展
+** Manifest v3
+
+https://extensionworkshop.com/documentation/develop/manifest-v3-migration-guide/
+
+** Build
+
+*** 如何打开一个新标签
+
+[[https://github.com/tianheg/all-my-sites]]
+
+[[https://github.com/mdn/webextensions-examples/blob/69ae7494bb96825a7310d4900dbd67544b2985e0/open-my-page-button/manifest.json][refer]]
+
+#+BEGIN_EXAMPLE
+    {
+      "background": {
+        "scripts": ["background.js"]
+      },
+      "browser_action": {
+        "default_icon": "48.png"
+      }
+    }
+#+END_EXAMPLE
+
+从 Firefox 56 以后，扩展会自动获得自己 origin 的权限，所以不需要 tabs
+权限。（[[https://developer.mozilla.org/en-US/docs/Mozilla/Add-ons/WebExtensions/manifest.json/permissions#host_permissions][src]]）
+
+refer
+
+1. [[https://developer.mozilla.org/en-US/docs/Mozilla/Add-ons/WebExtensions][Browser
+   Extensions - Mozilla | MDN]]
+2. [[https://extensionworkshop.com/documentation/develop/getting-started-with-web-ext/#installation-section][Getting
+   started with web-ext | Firefox Extension Workshop]]
+
+** I used
+
+-  (not familar) https://github.com/onemen/TabMixPlus
+
+* 配置
+
+** 关闭 Reader View
+
+在地址栏输入 ~about:config~ ，搜索 reader.parse-on-load.enabled ，将其值设为 false。
+
+** 修改扩展是否开启的限制页面列表
+
+https://u.sb/firefox-no-webextensions/
+
+打开 =about:config= ，输入 extensions.webextensions.restrictedDomains，限制域名清单：
+
+#+BEGIN_SRC txt
+accounts-static.cdn.mozilla.net,accounts.firefox.com,addons.cdn.mozilla.net,addons.mozilla.org,api.accounts.firefox.com,content.cdn.mozilla.net,discovery.addons.mozilla.org,install.mozilla.org,oauth.accounts.firefox.com,profile.accounts.firefox.com,support.mozilla.org,sync.services.mozilla.com
+#+END_SRC
+
+需要添加，在后面加 =,example.com= 即可。
+
+** VPN 配置出错
+
+为 Firefox 的 Proxy SwitchyOmega 扩展加了 gfw list，结果导致
+=PR_END_OF_FILE_ERROR= 错误。属于 VPN 配置问题。
+
+Refers:
+
+-  [[https://www.hostinger.com/tutorials/pr_end_of_file_error][PR_END_OF_FILE_ERROR: 3 Ways to Fix It]]
+-  [[https://support.mozilla.org/en-US/questions/1315880][PR_END_OF_FILE_ERROR | Firefox Support Forum | Mozilla Support]]
+
+** 支持 Wayland
+
+为 Firefox 添加环境变量：=MOZ_ENABLE_WAYLAND=1=。
+
+=~/.config/environment.d/envvars.conf= ：
+
+#+BEGIN_SRC text
+MOZ_ENABLE_WAYLAND=1
+#+END_SRC
+
+--------------
+
+参考资料
+
+1. https://wiki.archlinux.org/title/Firefox#Wayland
+2. [[https://wiki.archlinux.org/title/Environment_variables#Wayland_environment]]

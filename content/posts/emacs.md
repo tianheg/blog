@@ -180,4 +180,43 @@ draft = false
 
 `C-c C-x C-r (org-toggle-radio-button)`  添加新的 checkbox
 
+## 输入法及字体
+
+我在终端环境下用 Emacs 更多，所以基本上系统输入法配置好 Fcitx5，使用我的
+.emacs.d
+配置，就可以正常输入中文了。但是，最近使用发现——输入中文引号时，会占据实际上没有的空白（终于找到原因：在启动
+Emacs 时设置了 `LC_CTYPE=zh_CN.UTF-8` ）。
+
+## 升级包
+
+<https://github.com/purcell/emacs.d/issues/33#issuecomment-6039572>
+
+通过定期执行 `M-x package-list-packages RET` ，然后按下 `U` 键，之后按下 `x` 键。
+
+## 不使用 use-package
+
+<https://github.com/jwiegley/use-package> 安装
+
+``` {.elisp}
+(require 'package)
+(add-to-list 'package-archives
+         '("melpa" . "https://melpa.org/packages/") t)
+
+(unless (package-installed-p 'use-package)
+  (package-install 'use-package))
+```
+
+配置入门
+
+当需要安装包的时候，输入：
+
+``` {.elisp}
+(use-package ox-hugo
+  :ensure t
+  :pin melpa)
+```
+
+-   `:init` 在加载包前执行代码
+-   `:config`
+
 [^fn:1]: <https://stackoverflow.com/a/1331300>
