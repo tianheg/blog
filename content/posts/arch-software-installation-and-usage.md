@@ -606,6 +606,17 @@ warning: /etc/pacman.d/mirrorlist installed as /etc/pacman.d/mirrorlist.pacnew
 
 /etc/mkinitcpio.d/linux.preset: 'default' and /etc/mkinitcpio.d/linux.preset: 'fallback'
 
+第 X 个提示：ERROR: A182F28FA78F70601453137BCF82E29597321B63 could not be locally signed.
+
+解决方法：
+
+```sh
+rm -rf /etc/pacman.d/gnupg
+pacman-key --init
+pacman-key --populate archlinux
+pacman-key --populate archlinuxcn
+```
+
 参考：
 
 1.  [Installing and upgrading packages](https://wiki.archlinux.org/title/Arch_User_Repository#Installing_and_upgrading_packages)
