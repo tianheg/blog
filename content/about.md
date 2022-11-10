@@ -84,15 +84,12 @@ title = "关于"
 - [earfanfan | 袁凡](https://yuanfan.rbind.io/)
 - [奇客资讯网](https://www.solidot.org/)
 - [V2EX](https://www.v2ex.com/)
-- [Slashdot: News for nerds, stuff that matters](https://slashdot.org/)
 - [文浩·事不过三](https://via.zhubai.love/)
 - [Conge](https://conge.github.io/)
 - [Elizen](https://elizen.me/posts/)
 - [于淼](https://yufree.cn/cn/)
-- [王登科-DK博客](https://greatdk.com/)
 - [日志 | 谢益辉](https://yihui.org/cn/)
 - [水八口的冥想盆](https://blog.shuiba.co/)
-- [MacTalk-池建强的随想录](https://macshuo.com/)
 - [Limboy](https://limboy.me/)
 - [Paul Graham](http://www.paulgraham.com/index.html)
 - [林海草原](https://lhcy.org/)
@@ -101,6 +98,7 @@ title = "关于"
 - [zen habits](https://zenhabits.net/)
 - [BlackGlory](https://blackglory.me/)
 - [木遥的窗子](http://blog.farmostwood.net/)
+- [何流·或许重要](https://probablygood.zhubai.love/)
 
 ## 一些有趣或有意义的 badge
 
