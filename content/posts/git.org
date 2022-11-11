@@ -1,0 +1,228 @@
+#+TITLE: Git
+#+DATE: <2022-11-11 Fri 15:03>
+#+TAGS[]: 技术
+
+https://stackoverflow.com/a/1260982/12539782
+
+仓库中只有一个子模块：
+
+#+BEGIN_EXAMPLE
+    git rm <path-to-submodule>
+    rm .gitmodules
+    rm -rf .git/modules
+    git config --remove-section submodule.<path-to-submodule>
+#+END_EXAMPLE
+
+* 修改 commit 信息
+
+https://stackoverflow.com/a/1186549/12539782
+
+想修改 =bbc643cd= 的信息
+
+#+BEGIN_EXAMPLE
+    git rebase --interactive 'bbc643cd^'
+#+END_EXAMPLE
+
+在默认编辑器打开后，将 pick 改为 r/reword 后保存，然后就可以修改 commit
+信息了。
+
+* 强制从远程仓库拉取内容到本地
+
+https://stackoverflow.com/q/70710729/12539782
+
+#+BEGIN_EXAMPLE
+    git remote -v
+    # origin  git@github.com:tianheg/running_page.git (fetch)
+    # origin  git@github.com:tianheg/running_page.git (push)
+    # upstream        git@github.com:yihong0618/running_page.git (fetch)
+    # upstream        git@github.com:yihong0618/running_page.git (push)
+    git reset --hard upstream/master
+#+END_EXAMPLE
+
+* Gitea
+
+** 原生
+
+选择：
+
+-  Gitea 1.16.8
+-  MariaDB 10.7.4
+
+*** 配置数据库
+
+https://docs.gitea.io/en-us/database-prep/
+
+#+BEGIN_EXAMPLE
+    pacman -S mariadb
+#+END_EXAMPLE
+
+修改 =bind-address=，登录 root 用户下的数据库。
+
+本地安装 Gitea：
+
+#+BEGIN_SRC sql
+    SET old_passwords=0;
+    CREATE USER 'gitea' IDENTIFIED BY 'gitea';
+    CREATE DATABASE giteadb CHARACTER SET 'utf8mb4' COLLATE 'utf8mb4_unicode_ci';
+    GRANT ALL PRIVILEGES ON giteadb.* TO 'gitea';
+    FLUSH PRIVILEGES;
+#+END_SRC
+
+*** 安装 Gitea
+
+#+BEGIN_EXAMPLE
+    pacman -S gitea
+    gitea # 浏览器打开 http://localhost:3000 进行配置
+    sudo cp /etc/gitea/app.example.ini /etc/gitea/app.ini
+    systemctl enable --now gitea
+#+END_EXAMPLE
+
+无法打开 gitea 服务。无法使用，安装失败。
+
+refer:
+
+1. https://forum.hostea.org/t/howto-gitea-upgrades-a-guide-for-admins/39
+
+** Docker
+
+https://docs.gitea.io/en-us/install-with-docker-rootless/
+
+* 理解 Merge & Rebase
+
+1. https://git-scm.com/book/en/v2/Git-Branching-Basic-Branching-and-Merging
+2. https://git-scm.com/book/en/v2/Git-Tools-Advanced-Merging#\_advanced\_merging
+3. https://git-scm.com/book/en/v2/Git-Branching-Rebasing
+
+Merge 是起初两条 branches 后来合并为一条，与此同时保留被合并的分支；
+
+Rebase 则是合并后不保留被合并的分支。
+
+第 2 个链接中的例子还没有完全理解。
+
+#+BEGIN_QUOTE
+  Do not rebase commits that exist outside your repository and that
+  people may have based work on.
+
+  If you only ever rebase commits that have never left your own
+  computer, you'll be just fine. If you rebase commits that have been
+  pushed, but that no one else has based commits from, you'll also be
+  fine. If you rebase commits that have already been pushed publicly,
+  and people may have based work on those commits, then you may be in
+  for some frustrating trouble, and the scorn of your teammates.
+#+END_QUOTE
+
+* 配置代理
+
+#+BEGIN_EXAMPLE
+    git config --global http.proxy http://<proxy-server>:<port>/
+    git config --global https.proxy https://<proxy-server>:<port>/
+#+END_EXAMPLE
+
+--------------
+
+参考资料：
+
+1. https://gist.github.com/coin8086/7228b177221f6db913933021ac33bb92
+2. https://cms-sw.github.io/tutorial-proxy.html
+3. https://riptutorial.com/git/example/17900/clone-using-a-proxy
+4. https://stackoverflow.com/q/128035/12539782
+
+* 对分支重命名（本地 & 远程）
+
+[[https://www.w3docs.com/snippets/git/how-to-rename-git-local-and-remote-branches.html][How
+to Rename Git Local and Remote Branches]]
+
+#+BEGIN_EXAMPLE
+    ## Local
+    git branch -m <old-name> <new-name>
+    ## Remote
+    # delete remote branch
+    git push origin --delete <old-name> # or git push origin :<old-name>
+    # push new remote branch
+    git push origin <new-name>
+    # To reset the upstream branch for the new-name local branch use the -u flag
+    git push origin -u <new-name>
+#+END_EXAMPLE
+
+* 重命名远程代号（origin）
+
+https://support.beanstalkapp.com/article/1000-how-do-i-rename-an-existing-git-remote
+
+#+BEGIN_SRC sh
+    git remote rename origin upstream
+#+END_SRC
+
+* 在历史中查找文件
+
+#+BEGIN_SRC sh
+    git log --all --full-history -- <FILE_PATH>
+    git log --all --full-history -- feeds.csv
+#+END_SRC
+
+* 设置全局 gitignore
+
+#+BEGIN_SRC sh
+    git config --global core.excludesfile '~/.gitignore'
+#+END_SRC
+
+* 子模块改变地址
+
+https://git-scm.com/docs/git-submodule#Documentation/git-submodule.txt-sync--recursive--ltpathgt82308203
+
+#+BEGIN_SRC sh
+    # step 1
+    # 手动改变 .gitmodules 中的 url
+    # step 2
+    git submodule sync
+#+END_SRC
+
+* 子模块更新
+
+https://git-scm.com/book/en/v2/Git-Tools-Submodules
+
+#+BEGIN_SRC sh
+    # way 1
+    git submodule init
+    git submodule update
+    # way 2
+    git submodule update --init
+    # way 3
+    git submodule update --init --recursive # 会 clone 所有子模块（也包括子模块的子模块）
+#+END_SRC
+
+* 与上游仓库同步
+
+#+BEGIN_SRC sh
+    git checkout -b new-branch main
+    git pull https://github.com/yihong0618/running_page.git upstream-branch
+    # after pulling, fix the CONFLICT
+    git checkout main
+    git merge --no-ff new-branch
+    git push origin main
+#+END_SRC
+
+* 使用 dura 每 5s 备份一次仓库
+
+https://github.com/tkellogg/dura
+
+** 配置
+
+#+BEGIN_SRC sh
+    # arch linux
+    yay -S dura-git
+    dura serve & # Run it in the background
+    cd /git/repo/
+    dura watch
+
+    ## watch all git repo under /home/user
+    find ~ -type d -name .git -prune | xargs -I= sh -c "cd =/..; dura watch" # BE CAREFUL!!! use when knowing what you are doing
+#+END_SRC
+
+* 不 Merge
+
+#+BEGIN_SRC sh
+# Since git version 1.7.4
+git merge --abort
+# prior git versions
+git reset --merge
+#+END_SRC
