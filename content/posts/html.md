@@ -9,6 +9,13 @@ toc = true
 
 HTML 是网页使用的语言，定义了网页的结构和内容。
 
+思考为什么是这样，而不是那样。
+
+Why &lt;h1&gt; should be one per page?
+
+- <https://github.com/orgs/mdn/discussions/232#discussion-4399306>
+- [What are the practical benefits of having just one &lt;h1&gt; per page](https://webmasters.stackexchange.com/q/115718)\
+- [Why should we only use only 1 &lt;H1&gt; header on a page?](https://www.quora.com/Why-should-we-only-use-only-1-H1-header-on-a-page)
 
 ## 网页基本概念 {#网页基本概念}
 
