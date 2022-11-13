@@ -1,0 +1,45 @@
+#+TITLE: Linux 下的 Shell
+#+DATE: <2022-11-13 Sun 15:31>
+#+TAGS[]: 技术
+
+Refers:
+
+-  https://www.cyberciti.biz/faq/how-to-change-shell-to-bash/
+
+#+BEGIN_SRC sh
+    sudo chsh -s /bin/bash $USERNAME
+    sudo chsh -s /bin/bash user
+#+END_SRC
+
+查看用户的默认 Shell：
+
+#+BEGIN_SRC sh
+    $ grep user /etc/passwd
+    user:x:1000:1000::/home/user:/bin/bash
+    # 或者
+    $ ps -p $$
+    PID TTY          TIME CMD
+    22572 pts/1    00:00:00 bash
+    # 或者
+    $ echo "$0"
+    bash
+#+END_SRC
+
+查看系统可用 Shell：
+
+#+BEGIN_SRC sh
+    $ cat /etc/shells
+    # /etc/shells: valid login shells
+    /bin/sh
+    /bin/bash
+    /usr/bin/bash
+    /bin/rbash
+    /usr/bin/rbash
+    /usr/bin/sh
+    /bin/dash
+    /usr/bin/dash
+    /usr/bin/tmux
+    /usr/bin/screen
+#+END_SRC
+
+通过 =type -a bash= 找到 bash 的所有位置。

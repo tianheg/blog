@@ -628,12 +628,11 @@ pacman-key --populate archlinuxcn
 7.  <https://wiki.archlinux.org/title/Mkinitcpio>
 
 
-## yay {#yay}
+## yay
 
 Yet Another Yogurt: 又一个从 Arch User Repository 下载包的工具。
 
-
-### 安装 yay {#安装-yay}
+### 安装 yay
 
 官方仓库：<https://github.com/Jguer/yay>
 
@@ -674,6 +673,12 @@ makepkg -si
 # yay -Ps
 ```
 
+### 代理 yay
+
+https://github.com/Jguer/yay/issues/951#issuecomment-1080206297
+
+1. =sudo vim /etc/proxychains.conf=
+2. 注释 =proxy_dns=
 
 ### yay 问题 {#yay-问题}
 
