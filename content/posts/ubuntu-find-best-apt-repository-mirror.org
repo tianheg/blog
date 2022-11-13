@@ -1,0 +1,16 @@
+#+TITLE: Ubuntu 找到最好镜像
+#+DATE: <2022-11-13 Sun 15:37>
+#+TAGS[]: 技术
+
+https://ostechnix.com/how-to-find-best-ubuntu-apt-repository-mirror/
+
+1. 备份原 =/etc/apt/sources.list= 文件
+2. =sudo apt install python3-pip=
+3. =pip install install apt-select=
+4. =apt-select --country SG= 新加坡
+
+通过以下命令可以得到自己当前 IP 的 Ubuntu 镜像地址：
+
+#+BEGIN_SRC sh
+    wget -qO - mirrors.ubuntu.com/mirrors.txt
+#+END_SRC

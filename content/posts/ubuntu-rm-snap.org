@@ -1,0 +1,26 @@
+#+TITLE: Ubuntu 移除 snap
+#+DATE: <2022-11-13 Sun 15:40>
+#+TAGS[]: 技术
+
+https://haydenjames.io/remove-snap-ubuntu-22-04-lts/
+
+#+BEGIN_SRC sh
+    snap list
+    sudo systemctl disable ...
+
+    snapd.service
+    snapd.apparmor.service
+    snapd.autoimport.service
+    snapd.core-fixup.service
+    snapd.recovery-chooser-trigger.service
+    snapd.snap-repair.timer
+    snapd.system-shutdown.service
+    snapd.socket
+    snapd.seeded.service
+#+END_SRC
+
+#+BEGIN_SRC sh
+    sudo rm -rf /var/cache/snapd/
+    sudo apt autoremove --purge snapd
+    rm -rf ~/snap
+#+END_SRC
