@@ -1,0 +1,800 @@
+#+TITLE: 数据库
+#+DATE: <2022-11-14 Mon 08:53>
+#+TAGS[]: 技术
+
+* MariaDB
+** 更改密码
+更改普通用户密码：
+
+#+BEGIN_SRC sh
+    $ mysql -u root -p
+    MariaDB [(none)]> ALTER USER 'user'@'localhost' IDENTIFIED BY 'new_password';
+    MariaDB [(none)]> FLUSH PRIVILEGES;
+#+END_SRC
+
+更改 root 密码：
+
+#+BEGIN_SRC sh
+    $ sudo systemctl stop mariadb
+    $ sudo mysqld_safe --skip-grant-tables --skip-networking &
+    $ mariadb -u root
+    MariaDB [(none)]> FLUSH PRIVILEGES;
+    MariaDB [(none)]> ALTER USER 'root'@'localhost' IDENTIFIED BY 'new_password_here';
+    MariaDB [(none)]> exit
+    $ sudo pkill mysqld 
+    $ sudo systemctl start mariadb
+    $ mariadb -u root -p
+#+END_SRC
+
+* MongoDB
+
+NoSQL 的面向文档的数据库。MongoDB 的数据存储的格式为 [[https://bsonspec.org/][BSON]]（a binary version of JSON）。
+
+[[https://www.mongodb.com/docs/manual/core/crud/][MongoDB CRUD 概念]]
+
+MongoDB 数据类型：Null, Boolean, Number, String, Date, Regular
+Expression, Array, Embeded Document, Object ID
+
+比较查询操作符：
+
+- $eq Equal
+- $lt less than
+- $lte less than or equal
+- $gt greater than
+- $gte greater than or equal
+- $ne not equal
+- $in in
+- $nin not in
+
+逻辑查询操作符：
+
+- $and
+- $or
+- $not
+- $nor
+
+元素查询操作符：
+
+- $exists
+- $type
+
+数组查询操作符：
+
+- $size
+- $all
+- $elemMatch
+
+分类与限制：
+
+- sort()
+- limit()
+
+聚合管道：
+
+- $avg
+- $count
+- $sum
+- $max
+- $min
+
+索引：
+
+- getIndexes()
+- explain()
+- createIndex()
+
+** 关系型数据库和 MongoDB 的对比
+[[https://www.mongodb.com/docs/manual/reference/sql-comparison/][重要官方文档]]
+
+数据表格式：
+
+#+caption: 数据表格式
+[[file:img/sql-nosql.jpg]]
+
+关键词：
+
+#+caption: 关键词
+[[file:img/sql-nosql-2.png]]
+
+------SQL terms and NoSQL terms by
+[[https://www.blogger.com/profile/18437865869379626284][Victoria
+Malaya]]
+
+** MongoDB Shell 的一些操作
+#+begin_src js
+# 命令行输入 mongosh
+> db
+test
+> show databases
+# 简单用 show dbs
+admin    size
+config   size
+local    size
+## 创建数据库
+> use myNewDatabase
+switched to db myNewDatabase
+## 新建数据表，并在数据表中插入数据
+myNewDatabase> db.myCollection.insertOne({"name": "tianheg", "age": "21"})
+{
+  acknowledged: true,
+  insertedIds: { '0': ObjectId("62a0388b921cfec2c6bf8cae") }
+}
+myNewDatabase> db.myCollection.insertMany([{ name: "tianheg2", age: "22"}, {name: "tianheg3", age: "23" }])
+{
+  acknowledged: true,
+  insertedIds: {
+    '0': ObjectId("62a0408f921cfec2c6bf8cb0"),
+    '1': ObjectId("62a0408f921cfec2c6bf8cb1")
+  }
+}
+## 仅新建数据表
+myNewDatabase> db.createCollection("secondCollection")
+{ ok: 1 }
+## 在数据表中查询
+myNewDatabase> db.myCollection.find({})
+# 显示全部数据
+# 相当于 `SELECT * FROM myCollection`
+myNewDatabase> db.myCollection.find({ name: "tianheg" })
+# 相当于 `SELECT * FROM myCollection WHERE name = "tianheg"`
+# 条件查询
+myNewDatabase> db.myCollection.find({ name: { $in: ["tianheg", "tianheg2" ]}})
+# 相当于 `SELECT * FROM myCollection WHERE name in ("tianheg", "tianheg2")`
+myNewDatabase> db.myCollection.find({ name: "tianheg", age: { $lt: "23" }})
+[
+  {
+    _id: ObjectId("62a0388b921cfec2c6bf8cae"),
+    name: 'tianheg',
+    age: '21'
+  }
+]
+# 相当于 `SELECT * FROM myCollection WHERE name = "tianheg" AND age < 23`
+myNewDatabase> db.myCollection.find({ $or: [{ name: "tianheg" } , { age: { $lt: "23" }} ]})
+[
+  {
+    _id: ObjectId("62a0388b921cfec2c6bf8cae"),
+    name: 'tianheg',
+    age: '21'
+  },
+  { _id: ObjectId("62a03955921cfec2c6bf8caf"), name: 'jim', age: '21' },
+  {
+    _id: ObjectId("62a0408f921cfec2c6bf8cb0"),
+    name: 'tianheg2',
+    age: '22'
+  }
+]
+# 相当于 `SELECT * FROM myCollection WHERE name = "tianheg" OR age < 23`
+myNewDatabase> db.myCollection.find({}, {_id: 0} )
+# 不显示 _id
+## 更新数据
+myNewDatabase> db.myCollection.updateOne({ name: "tianheg" }, { $set: { age: "22" }})
+# 通过 name 找到要修改的数据条目，通过 $set 修改对应的数据属性值
+myNewDatabase> db.myCollection.updateMany({ age: { $lt: "22" } }, { $set: { name: "hello" }})
+myNewDatabase> db.myCollection.replaceOne({ name: "hello" }, { name: "hello", age: "30"})
+## 删除数据（不删除索引）
+myNewDatabase> db.myCollection.deleteMany({})
+# 删除表中所有数据
+myNewDatabase> db.myCollection.deleteOne({ age: "22"})
+{ acknowledged: true, deletedCount: 1 }
+# 删除符合条件的第一条数据
+## Bulkwrite
+myNewDatabase> try {
+   db.myCollection.bulkWrite([
+      { insertOne: { "document": { "_id": 4, "char": "Dithras", "class": "barbarian", "lvl": 4 } } },
+      { insertOne: { "document": { "_id": 5, "char": "Taeln", "class": "fighter", "lvl": 3 } } },
+      { updateOne : {
+         "filter" : { "char" : "Eldon" },
+         "update" : { $set : { "status" : "Critical Injury" } }
+      } },
+      { deleteOne : { "filter" : { "char" : "Brisbane"} } },
+      { replaceOne : {
+         "filter" : { "char" : "Meldane" },
+         "replacement" : { "char" : "Tanys", "class" : "oracle", "lvl": 4 }
+      } }
+   ]);
+} catch (e) {
+   print(e);
+}
+{
+  acknowledged: true,
+  insertedCount: 2,
+  insertedIds: { '0': 4, '1': 5 },
+  matchedCount: 0,
+  modifiedCount: 0,
+  deletedCount: 0,
+  upsertedCount: 0,
+  upsertedIds: {}
+}
+#+end_src
+
+** MongoDB 大学课程------M001 MongoDB Basics
+:PROPERTIES:
+:CUSTOM_ID: mongodb-大学课程m001-mongodb-basics
+:END:
+[[https://university.mongodb.com/][Free MongoDB Official Courses |
+MongoDB University]]
+
+**** Chapter 1: What is MongoDB?
+:PROPERTIES:
+:CUSTOM_ID: chapter-1-what-is-mongodb
+:END:
+1. Why is MongoDB a NoSQL database?
+
+Because it does not utilize tables, rows and columns to organize data.
+
+Because it uses a structured way to store and access data
+
+2. [@2] What is the MongoDB Database?
+
+The MongoDB database is an organized way to store and access data.
+
+MongoDB is a NoSQL database that uses documents to store data in an
+organized way.
+
+3. [@3] In MongoDB how does a document relate to a collection?
+
+Collections consist of many documents.
+
+Documents are organized into collections, not the other way around.
+
+Rows, columns and tables are not part of the data organization in
+MongoDB.
+
+4. [@4] In a MongoDB Document what is the role of fields and values?
+
+A field is a unique identifier for a specific datapoint.
+
+Data is organized in field-value pairs, so each field has a value
+associated with it.
+
+--------------
+
+*Replica Set* - a few connected machines that store the same data to
+ensure that if something happens to one of the machines the data will
+remain intact. Comes from the word replicate - to copy something.
+
+*Instance* - a single machine locally or in the cloud, running a certain
+software, in our case it is the MongoDB database.
+
+*Cluster* - group of servers that store your data.
+
+--------------
+
+5. [@5] How is MongoDB Atlas related to MongoDB the Database?
+
+Atlas has many tools and services within it that are built specifically
+for the MongoDB Database.
+
+They both are MongoDB products.
+
+**** Chapter 2: Importing, Exporting, and Querying Data
+:PROPERTIES:
+:CUSTOM_ID: chapter-2-importing-exporting-and-querying-data
+:END:
+MongoDB stores data in BSON, and you can then view it in JSON.
+
+BSON is faster to parse and lighter to store than JSON.
+
+JSON supports fewer data types than BSON.
+
+#+begin_src sh
+mongodump --uri "mongodb+srv://<your username>:<your password>@<your cluster>.mongodb.net/sample_supplies"
+
+mongoexport --uri="mongodb+srv://<your username>:<your password>@<your cluster>.mongodb.net/sample_supplies" --collection=sales --out=sales.json
+
+mongorestore --uri "mongodb+srv://<your username>:<your password>@<your cluster>.mongodb.net/sample_supplies"  --drop dump
+
+mongoimport --uri="mongodb+srv://<your username>:<your password>@<your cluster>.mongodb.net/sample_supplies" --drop sales.json
+#+end_src
+
+1. Which of the following commands will add a collection that is stored
+   in animals.json to an Atlas cluster?
+
+mongoimport can import data from JSON, and other supported non BSON
+formats.
+
+mongodump exports data in its raw BSON form.
+
+mongorestore imports data from a mongodump created BSON format.
+
+mongoexport does work with JSON, but it would export it, thus making a
+copy of the data outside of the Atlas cluster, rather than adding a
+collection to the Atlas cluster.
+
+慢慢筛选数据：={ "birth year": 1961, "start station name": "Howard St & Centre St" }=。
+
+#+begin_src sh
+mongosh "mongodb+srv://<username>:<password>@<cluster>.mongodb.net/admin"
+#+end_src
+
+#+begin_src js
+show dbs
+
+use sample_training
+
+show collections
+
+db.zips.find({"state": "NY"})
+
+db.zips.find({"state": "NY"}).count()
+
+db.zips.find({"state": "NY", "city": "ALBANY"})（默认就是 pretty）
+
+db.zips.find({"state": "NY", "city": "ALBANY"}).pretty()
+#+end_src
+
+2. [@2] What does =it= do in the mongo shell?
+
+Iterates through the cursor results
+
+3. [@3] Which of the following statements are true about the
+   =mongo shell=?
+
+It allows you to interact with your MongoDB instance without using a
+Graphical User Interface.
+
+It is a fully functioning JavaScript interpreter
+
+The mongo shell does not automatically sort results nor does it return
+data in sorted order by default. However, you can get a sorted set of
+documents by using the sort() command which will be discussed later in
+this course.
+
+**** Chapter 3: Creating and Manipulating Documents
+:PROPERTIES:
+:CUSTOM_ID: chapter-3-creating-and-manipulating-documents
+:END:
+先讲的是
+[[https://www.mongodb.com/docs/manual/reference/method/ObjectId/#objectid][ObjectId]]
+数据类型。
+
+1. How does the value of =_id= get assigned to a document?
+
+#+begin_quote
+When a document is inserted a random field is picked to serve as the _id
+field.
+
+#+end_quote
+
+这句话错误，我选择了它。
+
+It is automatically generated as an ObjectId type value.
+
+MongoDB generates a value, so that there is one just in case. You can
+definitely change the default value to a different value or data type,
+as long as they are unique to this collection and not an array data
+type.
+
+MongoDB adds an _id field to any inserted document if it doesn't have
+one, and it does not utilize other fields for this purpose.
+
+You can assign the _id field values to be sequential integer values, but
+it is not the default behavior, nor is it best practice.
+
+db.collection.findOne() 用来查看当前 Collection 的 Schema。
+
+2. [@2] Select all true statements from the following list:
+
+If a document is inserted without a provided _id value, then the _id
+field and value will be automatically generated for the inserted
+document before insertion.
+
+MongoDB can store duplicate documents in the same collection, as long as
+their _id values are different.
+
+可以在 MongoDB 网页端进行数据的增删改查（CRUD）。
+
+3. [@3] 找出不属于 MongoDB 数据类型的一组：
+
+#+begin_example
+{
+  "_id": 1,
+  "pet": "cat",
+  "attributes": [
+    { "coat": "fur", "type": "soft" },
+    { "defense": "claws", "location": "paws", "nickname": "murder mittens" }
+  ],
+  "name": "Furball"
+}
+#+end_example
+
+我看 attributes 不太符合 JSON，结果却是符合的。
+
+这些操作符属于更新操作符。
+
+=$inc= =$set= =$push=
+
+给某属性增加数目：=db.zips.updateMany({ city: "HUDSON" }, { "$inc": { "pop": 10}})=
+
+某属性
+改变数目：=db.zips.updateMany({ city: "HUDSON" }, { "$set": { "pop": 12345}})=
+
+添加新项目：=db.grades.updateOne({ "student_id": 151, "class_id": 339 }, { "$push": { scores: { type: "extra credit", score: 100}}})=
+
+删除操作
+
+deleteOne(), deleteMany(), drop()
+
+Removing all collections in a database also remove the database.
+
+**** Chapter 4: Advanced CRUD Operations
+:PROPERTIES:
+:CUSTOM_ID: chapter-4-advanced-crud-operations
+:END:
+更新操作符：=$inc= =$set= =$unset=
+
+比较查询操作符：
+
+- $eq Equal
+- $lt less than
+- $lte less than or equal
+- $gt greater than
+- $gte greater than or equal
+- $ne not equal
+- $in in
+- $nin not in
+
+#+begin_src js
+db.trips.find({ 'birth year': { $gt: 1998 } }).count()
+db.trips.find({ 'birth year': 1998 }).count()
+#+end_src
+
+Query Operators - Logic
+
+除 =$not= 以外的语法：
+
+#+begin_src js
+{ "$<operator>": [{ <clause1> }, { <clause2> }, ...]}
+#+end_src
+
+=$not= 的语法：
+
+#+begin_src js
+{ $not: {<clause>}}
+#+end_src
+
+- $and 默认行为，不指定逻辑操作符时使用
+- $or
+- $not
+- $nor
+
+#+begin_src js
+db.routes
+  .find({
+    $and: [
+      { $or: [{ dst_airport: 'KZN' }, { src_airport: 'KZN' }] },
+      { $or: [{ airplane: 'CR2' }, { airplane: 'A81' }] },
+    ],
+  })
+  .pretty()
+#+end_src
+
+找到在某个数值区间的值：
+
+#+begin_src js
+// 我写的
+db.zips
+  .find({ $and: [{ pop: { $gte: 5000 } }, { pop: { $lte: 1000000 } }] })
+  .count()
+// 答案写的
+db.zips.find({ pop: { $gte: 5000, $lte: 1000000 } }).count()
+// 另一种
+db.zips
+  .find({ $nor: [{ pop: { $lt: 5000 } }, { pop: { $gt: 1000000 } }] })
+  .count()
+#+end_src
+
+目前最复杂的一个：
+
+#+begin_src js
+// 自己写的
+db.companies.find({
+  $or: [
+    {
+      $and: [
+        { founded_year: 2004 },
+        { $or: [{ category_code: 'web' }, { category_code: 'social' }] },
+      ],
+    },
+
+    {
+      $and: [
+        { founded_month: 10 },
+        { $or: [{ category_code: 'web' }, { category_code: 'social' }] },
+      ],
+    },
+  ],
+})
+
+// 答案
+db.companies
+  .find({
+    $and: [
+      { $or: [{ founded_year: 2004 }, { founded_month: 10 }] },
+      { $or: [{ category_code: 'web' }, { category_code: 'social' }] },
+    ],
+  })
+  .count()
+#+end_src
+
+答案更简洁。
+
+=$= 除了用在操作符上，还用于获取属性值。
+
+#+begin_src js
+db.trips
+  .find({
+    $expr: {
+      $and: [
+        { $gt: ['$tripduration', 1200] },
+        { $eq: ['$end station id', '$start station id'] },
+      ],
+    },
+  })
+  .count()
+#+end_src
+
+What are some of the uses for the =$= sign in MQL?
+
+- $ denotes an operator.
+- $ signifies that you are looking at the value of that field rather
+  than the field name.
+
+Array Operators
+
+#+begin_src js
+db.listingsAndReviews.find({
+  amenities: {
+    $size: 20,
+    $all: [
+      'Internet',
+      'Wifi',
+      'Kitchen',
+      'Heating',
+      'Family/kid friendly',
+      'Washer',
+      'Dryer',
+      'Essentials',
+      'Shampoo',
+      'Hangers',
+      'Hair dryer',
+      'Iron',
+      'Laptop friendly workspace',
+    ],
+  },
+})
+#+end_src
+
+题目不仔细读个三四遍，就匆忙解答，最后只能答错。
+
+#+begin_src js
+// 我写的
+db.listingsAndReviews
+  .find(
+    { property_type: 'House', amenities: { $all: ['Changing table'] } },
+    { amenities: 1 }
+  )
+  .count()
+// 答案
+db.listingsAndReviews
+  .find({ property_type: 'House', amenities: 'Changing table' })
+  .count()
+#+end_src
+
+#+begin_src js
+db.listingsAndReviews.find({
+  amenities: {
+    $all: ['Free parking on premises', 'Wifi', 'Airconditioning'],
+  },
+  bedrooms: { $gte: 2 },
+})
+#+end_src
+
+Array Operators and Projection
+
+projection 就是可以让属性显示或隐藏的设置区间。
+
+0 表示隐藏某属性，1 表示显示某属性。一般情况下，1 和 0
+不能同时出现，但是有例外，当属性为 _id 时。
+
+#+begin_src js
+db.listingsAndReviews
+  .find({ amenities: 'Wifi' }, { price: 1, address: 1, _id: 0 })
+  .count()
+
+db.listingsAndReviews.find(
+  { amenities: 'Wifi' },
+  { price: 1, address: 1, _id: 0, maximum_nights: 0 }
+)
+
+db.companies
+  .find({ offices: { $elemMatch: { city: 'Seattle' } } }, { _id: 0 })
+  .count()
+#+end_src
+
+Array Operators and Sub-Documents
+
+#+begin_src js
+db.trips.findOne({ 'start station location.type': 'Point' })
+
+db.companies.find({ 'relationships.0.person.first_name': 'Mark' }, { name: 1 })
+
+db.companies.find(
+  {
+    'relationships.0.person.first_name': 'Mark',
+    'relationships.0.title': { $regex: 'CEO' },
+  },
+  { name: 1 }
+)
+
+// 答案
+db.trips.find({ 'start station location.coordinates.0': { $lt: -74 } }).count()
+// 我写的错误答案
+db.trips
+  .find({
+    'start station location': { $elemMatch: { 'coordinates[0]': { $eq: 74 } } },
+  })
+  .count()
+#+end_src
+
+为什么会写错？
+
+1. 第一次学习不熟悉
+2. 没有多读几遍题目
+
+**** Chapter 5: Indexing and Aggregation Pipeline
+:PROPERTIES:
+:CUSTOM_ID: chapter-5-indexing-and-aggregation-pipeline
+:END:
+#+begin_src js
+db.listingsAndReviews.aggregate([
+  { $match: { amenities: 'Wifi' } },
+  { $project: { price: 1, address: 1, _id: 0 } },
+])
+
+db.listingsAndReviews.find(
+  { amenities: 'Wifi' },
+  { price: 1, address: 1, _id: 0 }
+)
+
+db.listingsAndReviews.aggregate([
+  { $project: { address: 1, _id: 0 } },
+  { $group: { _id: '$address.country' } },
+])
+
+db.listingsAndReviews.aggregate([
+  { $project: { address: 1, _id: 0 } },
+  { $group: { _id: '$address.country', count: { $sum: 1 } } },
+])
+
+db.listingsAndReviews.aggregate([
+  { $project: { reviews: 0 } },
+  { $group: { _id: '$room_type' } },
+])
+#+end_src
+
+- $group 通过 address.country 分组
+
+Aggregation Pipeline 为什么出现？
+
+aggregate() allows us to compute and reshape data in the cursor.
+
+aggregate() can do what find() can and more.
+
+删除当前数据库：=db.dropDatabase()=
+
+#+begin_src js
+use sample_training
+
+db.zips.find().sort({ "pop": 1 }).limit(1)
+
+db.zips.find({ "pop": 0 }).count()
+
+db.zips.find().sort({ "pop": -1 }).limit(1)
+
+db.zips.find().sort({ "pop": -1 }).limit(10)
+
+db.zips.find().sort({ "pop": 1, "city": -1 })
+#+end_src
+
+#+begin_src js
+db.companies
+  .find({ founded_year: { $ne: null } }, { name: 1, founded_year: 1 })
+  .sort({ founded_year: 1 })
+  .limit(5)
+db.companies
+  .find({ founded_year: { $ne: null } }, { name: 1, founded_year: 1 })
+  .limit(5)
+  .sort({ founded_year: 1 })
+db.trips
+  .find({ 'birth year': { $ne: '' } })
+  .sort({ 'birth year': -1 })
+  .limit(1)
+#+end_src
+
+Introduction to Indexes
+
+#+begin_src js
+db.trips.createIndex({ 'start station id': 1, 'birth year': 1 })
+#+end_src
+
+什么是 Data Modeling？
+
+它是一种对数据的组合方式，具体看应用要求。
+
+什么是 Upsert？
+
+Update +
+Insert。使用时确保数据库的空间足够。并且数据库中没有相同的数据项。
+
+#+begin_src js
+db.iot.updateOne(
+  { sensor: r.sensor, date: r.date, valcount: { $lt: 48 } },
+  {
+    $push: { readings: { v: r.value, t: r.time } },
+    $inc: { valcount: 1, total: r.value },
+  },
+  { upsert: true }
+)
+#+end_src
+
+When upsert is set to true and the query predicate returns an empty
+cursor, the update operation creates a new document using the directive
+from the query predicate and the update predicate.
+
+By default upsert is set to false.
+
+When upsert is set to false and the query predicate returns an empty
+cursor then there will be no updated documents as a result of this
+operation.
+
+如果通过 MongoDB 认证考试指南：https://university.mongodb.com/exam/guide
+
+*** M103 Basic Cluster Administration
+:PROPERTIES:
+:CUSTOM_ID: m103-basic-cluster-administration
+:END:
+1. 一些 Linux 基础
+
+文件系统，=/etc= 存放系统配置文件、=/home= 是用户家目录、=/var=
+存放变量文件。
+
+- =pwd= print working directory
+- =sudo= superuser do
+- =chmod= 改变文件/文件夹的权限、用户和用户组
+- =mkdir=
+- =rm=
+- =ls=
+- =cd=
+- =cat=
+
+https://chmod-calculator.com/
+
+|     | user | group | others |
+|-----+------+-------+--------|
+| 300 | -wx  | ---   | ---    |
+| 400 | r--  | ---   | ---    |
+| 500 | r-x  | ---   | ---    |
+| 600 | rw-  | ---   | ---    |
+| 700 | rwx  | ---   | ---    |
+| 730 | rwx  | -wx   | ---    |
+| 740 | rwx  | r--   | ---    |
+| 750 | rwx  | r-x   | ---    |
+| 760 | rwx  | rw-   | ---    |
+| 770 | rwx  | rwx   | ---    |
+| 773 | rwx  | rwx   | -wx    |
+| 774 | rwx  | rwx   | r--    |
+| 775 | rwx  | rwx   | r-x    |
+| 776 | rwx  | rwx   | rw-    |
+| 777 | rwx  | rwx   | rwx    |
+
+** systemd status 14
+
+[[https://stackoverflow.com/a/66107451/12539782]]
+
+解决办法
+
+#+BEGIN_SRC sh
+    sudo chown -R mongodb:mongodb /var/lib/mongodb
+    sudo chown mongodb:mongodb /tmp/mongodb-27017.sock
+    sudo systemctl restart mongodb
+#+END_SRC
