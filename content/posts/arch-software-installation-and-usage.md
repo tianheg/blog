@@ -1150,6 +1150,32 @@ lon=115.622324
 2.  <https://io-oi.me/tech/hello-arch-linux/#redshift>
 
 
+### KDE Font Viewer
+
+在 Wayland 环境下无法使用。
+
+
+https://ask.fedoraproject.org/t/problem-with-kde-font-viewer/13932
+
+This major bug occurs when running under Wayland. A workaround is to set `QT_QPA_PLATFORM=xcb` before starting kfontview so that it runs under X11/XWayland, see [KDE bug 439470](https://bugs.kde.org/show_bug.cgi?id=439470).
+
+在命令行使用 KDE Font Viewer：
+
+```sh
+QT_QPA_PLATFORM=xcb kfontview
+```
+### pulseaudio
+
+问题：开机后播放音频没有声音
+
+解决办法：
+
+```sh
+killall pulseaudio
+```
+
+refer <https://unix.stackexchange.com/a/171925>
+
 ## 一些文档 {#一些文档}
 
 -   [让 Arch Linux 系统和最新的镜像同步，从最快的镜像下载](https://blog.lilydjwg.me/2020/10/29/pacsync.215578.html)
@@ -1158,105 +1184,105 @@ lon=115.622324
 
 ## 软件安装列表 {#软件安装列表}
 
-| 名字                                            | 说明                                                                                                                                                              |
-|-----------------------------------------------|-----------------------------------------------------------------------------------------------------------------------------------------------------------------|
-| wl-clipboard                                    | Wayland clipboard utilities                                                                                                                                       |
-| spectacle                                       | KDE 开发的截图软件                                                                                                                                                |
-| net-tools                                       | 提供 netstat 命令                                                                                                                                                 |
-| chromium                                        | 开源浏览器（基于 Blink 渲染引擎）                                                                                                                                 |
-| google-chrome                                   | 浏览器                                                                                                                                                            |
-| firefox                                         | 浏览器                                                                                                                                                            |
-| firefox-esr                                     | Firefox(Extended Support Release)浏览器                                                                                                                           |
-| firefox-developer-edition                       | 具有开发者定制功能的 Firefox 浏览器                                                                                                                               |
-| brave-bin(aur)                                  | Web browser that blocks ads and trackers by default                                                                                                               |
-| lynx                                            | A text browser for the World Wide Web                                                                                                                             |
-| pulseaudio                                      | A featureful, general-purpose sound server                                                                                                                        |
-| kmix                                            | 修复 Firefox 没有声音                                                                                                                                             |
-| profile-cleaner                                 | Simple script to vacuum and reindex sqlite databases used by browsers 用于对浏览器使用的 sqlite 数据库进行清理和重新索引的简单脚本                                |
-| visual-studio-code-bin                          | Visual Studio Code                                                                                                                                                |
-| netease-cloud-music                             | 网易云音乐                                                                                                                                                        |
-| flameshot                                       | 现代、快捷、轻便的截图工具                                                                                                                                        |
-| proxychains-ng                                  | 终端内科学上网代理工具                                                                                                                                            |
-| redshift                                        | 显示屏色温调节工具                                                                                                                                                |
-| vlc                                             | 强大的多媒体播放工具                                                                                                                                              |
-| telegram-desktop                                | 客户端开源的加密聊天工具                                                                                                                                          |
-| gthumb                                          | 图片浏览工具，可简单编辑图片，可清除照片元数据                                                                                                                    |
-| libreoffice-fresh                               | 必备的办公软件                                                                                                                                                    |
-| inkscape                                        | 强大的矢量图形编辑软件                                                                                                                                            |
-| youtube-dl                                      | YouTube 视频下载工具                                                                                                                                              |
-| glances                                         | terminal monitoring tool                                                                                                                                          |
-| keepassxc                                       | password manager                                                                                                                                                  |
-| hugo                                            | static site generator                                                                                                                                             |
-| python-sphinx                                   | a documentation generator                                                                                                                                         |
-| anki                                            | a spaced repetition system                                                                                                                                        |
-| informant                                       | arch news reader and pacman hook                                                                                                                                  |
-| dnsutils                                        | provide `dig` command                                                                                                                                             |
-| dnsmasq                                         | 使用国外 DNS 造成国内网站访问慢的解决方法                                                                                                                         |
-| tldr                                            | Collaborative cheatsheets for console commands                                                                                                                    |
-| virtualbox                                      | Virtual Machine                                                                                                                                                   |
-| qemu                                            | A generic and open source machine emulator and virtualizer                                                                                                        |
-| earlyoom                                        | Early OOM Daemon for Linux                                                                                                                                        |
-| gtk2/3/4                                        | GObject-based multi-platform GUI toolkit                                                                                                                          |
-| lsb-release                                     | LSB version query program                                                                                                                                         |
-| exa                                             | A modern replacement for ls (List directory contents)                                                                                                             |
-| filezilla                                       | Fast and reliable FTP FTPS and SFTP client                                                                                                                        |
-| intellij-idea-community-edition                 | IDE                                                                                                                                                               |
-| mysql                                           | Database                                                                                                                                                          |
-| sagemath                                        | Open Source Mathematics Software free alternative to Magma Maple Mathematica and Matlab Matlab dkms Dynamic Kernel Modules System                                 |
-| maven                                           | Java project management and project comprehension tool                                                                                                            |
-| graphviz                                        | Graph visualization software                                                                                                                                      |
-| cmdpxl                                          | a totally practical command-line image editor 一个在命令行里画画的程序                                                                                            |
-| octave(GUI)                                     | A high-level language, primarily intended for numerical computations.                                                                                             |
-| asciiquarium                                    | An aquarium/sea animation in ASCII art                                                                                                                            |
-| lx-music-desktop-bin                            | A music software based on Electron + Vue. 一个基于 Electron + Vue 开发的音乐软件                                                                                  |
-| feeluown                                        | FeelUOwn Music Player(feeluown-netease feeluown-qqmusic feeluown-local)                                                                                           |
-| nuclear-player-bin                              | A free, multiplatform music player app that streams from multiple sources.                                                                                        |
-| beets                                           | Flexible music library manager and tagger                                                                                                                         |
-| mps-youtube                                     | Terminal based YouTube jukebox with playlist management                                                                                                           |
-| mopidy                                          | An extensible music server written in Python                                                                                                                      |
-| postman-bin                                     | Build, test, and document your APIs faster                                                                                                                        |
-| mongodb-bin                                     | A high-performance, open source, schema-free document-oriented database                                                                                           |
-| nginx                                           | Lightweight HTTP server and IMAP/POP3 proxy server                                                                                                                |
-| zellij(aur)                                     | A terminal multiplexer.                                                                                                                                           |
-| liferea                                         | A desktop news aggregator for online news feeds and weblogs                                                                                                       |
-| arch-wiki-man(aur)                              | The Arch Wiki as linux man pages                                                                                                                                  |
-| xterm                                           | X Terminal Emulator                                                                                                                                               |
-| konsole                                         | KDE terminal emulator                                                                                                                                             |
-| foliate                                         | ebook reader(EPUB, Mobipocket, Kindle, FictionBook, and Comicbook formats.)                                                                                       |
-| mupdf                                           | Lightweight PDF and XPS viewer                                                                                                                                    |
-| okular                                          | Document Viewer(pdf, mobi, equb)                                                                                                                                  |
-| freemind                                        | A Java mindmapping tool                                                                                                                                           |
-| wireshark-qt                                    | Network traffic and protocol analyzer/sniffer - Qt GUI                                                                                                            |
-| newsboat                                        | An RSS/Atom feed reader for text terminals                                                                                                                        |
+| 名字                                            | 说明                                                                                                                                                                                   |
+|-------------------------------------------------|----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
+| wl-clipboard                                    | Wayland clipboard utilities                                                                                                                                                            |
+| spectacle                                       | KDE 开发的截图软件                                                                                                                                                                     |
+| net-tools                                       | 提供 netstat 命令                                                                                                                                                                      |
+| chromium                                        | 开源浏览器（基于 Blink 渲染引擎）                                                                                                                                                      |
+| google-chrome                                   | 浏览器                                                                                                                                                                                 |
+| firefox                                         | 浏览器                                                                                                                                                                                 |
+| firefox-esr                                     | Firefox(Extended Support Release)浏览器                                                                                                                                                |
+| firefox-developer-edition                       | 具有开发者定制功能的 Firefox 浏览器                                                                                                                                                    |
+| brave-bin(aur)                                  | Web browser that blocks ads and trackers by default                                                                                                                                    |
+| lynx                                            | A text browser for the World Wide Web                                                                                                                                                  |
+| pulseaudio                                      | A featureful, general-purpose sound server                                                                                                                                             |
+| kmix                                            | 修复 Firefox 没有声音                                                                                                                                                                  |
+| profile-cleaner                                 | Simple script to vacuum and reindex sqlite databases used by browsers 用于对浏览器使用的 sqlite 数据库进行清理和重新索引的简单脚本                                                     |
+| visual-studio-code-bin                          | Visual Studio Code                                                                                                                                                                     |
+| netease-cloud-music                             | 网易云音乐                                                                                                                                                                             |
+| flameshot                                       | 现代、快捷、轻便的截图工具                                                                                                                                                             |
+| proxychains-ng                                  | 终端内科学上网代理工具                                                                                                                                                                 |
+| redshift                                        | 显示屏色温调节工具                                                                                                                                                                     |
+| vlc                                             | 强大的多媒体播放工具                                                                                                                                                                   |
+| telegram-desktop                                | 客户端开源的加密聊天工具                                                                                                                                                               |
+| gthumb                                          | 图片浏览工具，可简单编辑图片，可清除照片元数据                                                                                                                                         |
+| libreoffice-fresh                               | 必备的办公软件                                                                                                                                                                         |
+| inkscape                                        | 强大的矢量图形编辑软件                                                                                                                                                                 |
+| youtube-dl                                      | YouTube 视频下载工具                                                                                                                                                                   |
+| glances                                         | terminal monitoring tool                                                                                                                                                               |
+| keepassxc                                       | password manager                                                                                                                                                                       |
+| hugo                                            | static site generator                                                                                                                                                                  |
+| python-sphinx                                   | a documentation generator                                                                                                                                                              |
+| anki                                            | a spaced repetition system                                                                                                                                                             |
+| informant                                       | arch news reader and pacman hook                                                                                                                                                       |
+| dnsutils                                        | provide `dig` command                                                                                                                                                                  |
+| dnsmasq                                         | 使用国外 DNS 造成国内网站访问慢的解决方法                                                                                                                                              |
+| tldr                                            | Collaborative cheatsheets for console commands                                                                                                                                         |
+| virtualbox                                      | Virtual Machine                                                                                                                                                                        |
+| qemu                                            | A generic and open source machine emulator and virtualizer                                                                                                                             |
+| earlyoom                                        | Early OOM Daemon for Linux                                                                                                                                                             |
+| gtk2/3/4                                        | GObject-based multi-platform GUI toolkit                                                                                                                                               |
+| lsb-release                                     | LSB version query program                                                                                                                                                              |
+| exa                                             | A modern replacement for ls (List directory contents)                                                                                                                                  |
+| filezilla                                       | Fast and reliable FTP FTPS and SFTP client                                                                                                                                             |
+| intellij-idea-community-edition                 | IDE                                                                                                                                                                                    |
+| mysql                                           | Database                                                                                                                                                                               |
+| sagemath                                        | Open Source Mathematics Software free alternative to Magma Maple Mathematica and Matlab Matlab dkms Dynamic Kernel Modules System                                                      |
+| maven                                           | Java project management and project comprehension tool                                                                                                                                 |
+| graphviz                                        | Graph visualization software                                                                                                                                                           |
+| cmdpxl                                          | a totally practical command-line image editor 一个在命令行里画画的程序                                                                                                                 |
+| octave(GUI)                                     | A high-level language, primarily intended for numerical computations.                                                                                                                  |
+| asciiquarium                                    | An aquarium/sea animation in ASCII art                                                                                                                                                 |
+| lx-music-desktop-bin                            | A music software based on Electron + Vue. 一个基于 Electron + Vue 开发的音乐软件                                                                                                       |
+| feeluown                                        | FeelUOwn Music Player(feeluown-netease feeluown-qqmusic feeluown-local)                                                                                                                |
+| nuclear-player-bin                              | A free, multiplatform music player app that streams from multiple sources.                                                                                                             |
+| beets                                           | Flexible music library manager and tagger                                                                                                                                              |
+| mps-youtube                                     | Terminal based YouTube jukebox with playlist management                                                                                                                                |
+| mopidy                                          | An extensible music server written in Python                                                                                                                                           |
+| postman-bin                                     | Build, test, and document your APIs faster                                                                                                                                             |
+| mongodb-bin                                     | A high-performance, open source, schema-free document-oriented database                                                                                                                |
+| nginx                                           | Lightweight HTTP server and IMAP/POP3 proxy server                                                                                                                                     |
+| zellij(aur)                                     | A terminal multiplexer.                                                                                                                                                                |
+| liferea                                         | A desktop news aggregator for online news feeds and weblogs                                                                                                                            |
+| arch-wiki-man(aur)                              | The Arch Wiki as linux man pages                                                                                                                                                       |
+| xterm                                           | X Terminal Emulator                                                                                                                                                                    |
+| konsole                                         | KDE terminal emulator                                                                                                                                                                  |
+| foliate                                         | ebook reader(EPUB, Mobipocket, Kindle, FictionBook, and Comicbook formats.)                                                                                                            |
+| mupdf                                           | Lightweight PDF and XPS viewer                                                                                                                                                         |
+| okular                                          | Document Viewer(pdf, mobi, equb)                                                                                                                                                       |
+| freemind                                        | A Java mindmapping tool                                                                                                                                                                |
+| wireshark-qt                                    | Network traffic and protocol analyzer/sniffer - Qt GUI                                                                                                                                 |
+| newsboat                                        | An RSS/Atom feed reader for text terminals                                                                                                                                             |
 | [treesheets-bin](http://strlen.com/treesheets/) | TreeSheets free form data organizer [给你一张无限大可缩放的白纸, 你会在上面写什么?](https://hintsnet.com/pimgeek/2019/07/10/if-given-an-infinite-zoomable-paper-what-would-you-write/) |
-| python-pipenv                                   | Sacred Marriage of Pipfile, Pip, &amp; Virtualenv.                                                                                                                |
-| safeeyes(aur)                                   | Protect your eyes from eye strain using this simple and beautiful, yet extensible break reminder                                                                  |
-| bat                                             | A cat(1) clone with wings                                                                                                                                         |
-| htop                                            | Interactive process viewer                                                                                                                                        |
-| prettyping                                      | A ping wrapper making the output prettier, more colorful, more compact, and easier to read                                                                        |
-| cosbrowser(aur)                                 | COSBrowser 是腾讯云对象存储 COS 推出的可视化界面工具，让您可以使用更简单的交互轻松实现对 COS 资源的查看、传输和管理                                               |
-| beekeeper-studio-appimage(aur)                  | Cross platform SQL editor and database management app for Windows, Linux, and Mac                                                                                 |
-| dbeaver                                         | Free universal SQL Client for developers and database administrators (community edition)                                                                          |
-| sqlitebrowser                                   | SQLite Database browser is a light GUI editor for SQLite databases, built on top of Qt                                                                            |
-| adminer(aur)                                    | Adminer is available for MySQL, MariaDB, PostgreSQL, SQLite, MS SQL, Oracle, Elasticsearch, MongoDB and others via plugin                                         |
-| treeline(aur)                                   | Outliner and PIM which stores information in a tree structure                                                                                                     |
-| skopeo                                          | a command line utility that performs various operations on container images and image repositories                                                                |
-| umoci(aur)                                      | modifies Open Container images                                                                                                                                    |
-| zeal-git(aur)                                   | A simple documentation browser                                                                                                                                    |
-| snyk(aur)                                       | CLI and build-time tool to find &amp; fix known vulnerabilities in open-source dependencies                                                                       |
-| cloudflare-warp-bin(aur)                        | Cloudflare WARP client allows individuals and organizations to have a faster, more secure, and more private experience online                                     |
-| rnote                                           | A simple drawing application to create handwritten notes                                                                                                          |
-| yank-note-bin(aur)                              | A Hackable Markdown Note Application for Programmers                                                                                                              |
-| imv                                             | a command line image viewer intended for use with tiling window managers                                                                                          |
-| umlet                                           | Free UML Tool for Fast UML Diagrams                                                                                                                               |
-| act                                             | Run your GitHub Actions locally                                                                                                                                   |
-| speedtest-cli                                   | Command line interface for testing internet bandwidth using speedtest.net                                                                                         |
-| rslsync(aur)                                    | Resilio Sync (ex:BitTorrent Sync) - automatically sync files via secure, distributed technology                                                                   |
-| peek                                            | 录制 GIF 动图                                                                                                                                                     |
-| obs-studio                                      | 录屏软件                                                                                                                                                          |
-| pkgstats                                        | Submit a list of installed packages to the Arch Linux project                                                                                                     |
-| masterpdfeditor                                 | A complete solution for viewing, creating and editing PDF files                                                                                                   |
-| EtchDroid                                       | ios2usb on android                                                                                                                                                |
-| haruna                                          | Video player built with Qt/QML on top of libmpv                                                                                                                   |
-| archmage(aur)                                   | converts CHM files to HTML, plain text and PDF                                                                                                                    |
-| nasm                                            | 在 mdn/content 仓库中安装依赖报错，缺少 nasm                                                                                                                      |
+| python-pipenv                                   | Sacred Marriage of Pipfile, Pip, &amp; Virtualenv.                                                                                                                                     |
+| safeeyes(aur)                                   | Protect your eyes from eye strain using this simple and beautiful, yet extensible break reminder                                                                                       |
+| bat                                             | A cat(1) clone with wings                                                                                                                                                              |
+| htop                                            | Interactive process viewer                                                                                                                                                             |
+| prettyping                                      | A ping wrapper making the output prettier, more colorful, more compact, and easier to read                                                                                             |
+| cosbrowser(aur)                                 | COSBrowser 是腾讯云对象存储 COS 推出的可视化界面工具，让您可以使用更简单的交互轻松实现对 COS 资源的查看、传输和管理                                                                    |
+| beekeeper-studio-appimage(aur)                  | Cross platform SQL editor and database management app for Windows, Linux, and Mac                                                                                                      |
+| dbeaver                                         | Free universal SQL Client for developers and database administrators (community edition)                                                                                               |
+| sqlitebrowser                                   | SQLite Database browser is a light GUI editor for SQLite databases, built on top of Qt                                                                                                 |
+| adminer(aur)                                    | Adminer is available for MySQL, MariaDB, PostgreSQL, SQLite, MS SQL, Oracle, Elasticsearch, MongoDB and others via plugin                                                              |
+| treeline(aur)                                   | Outliner and PIM which stores information in a tree structure                                                                                                                          |
+| skopeo                                          | a command line utility that performs various operations on container images and image repositories                                                                                     |
+| umoci(aur)                                      | modifies Open Container images                                                                                                                                                         |
+| zeal-git(aur)                                   | A simple documentation browser                                                                                                                                                         |
+| snyk(aur)                                       | CLI and build-time tool to find &amp; fix known vulnerabilities in open-source dependencies                                                                                            |
+| cloudflare-warp-bin(aur)                        | Cloudflare WARP client allows individuals and organizations to have a faster, more secure, and more private experience online                                                          |
+| rnote                                           | A simple drawing application to create handwritten notes                                                                                                                               |
+| yank-note-bin(aur)                              | A Hackable Markdown Note Application for Programmers                                                                                                                                   |
+| imv                                             | a command line image viewer intended for use with tiling window managers                                                                                                               |
+| umlet                                           | Free UML Tool for Fast UML Diagrams                                                                                                                                                    |
+| act                                             | Run your GitHub Actions locally                                                                                                                                                        |
+| speedtest-cli                                   | Command line interface for testing internet bandwidth using speedtest.net                                                                                                              |
+| rslsync(aur)                                    | Resilio Sync (ex:BitTorrent Sync) - automatically sync files via secure, distributed technology                                                                                        |
+| peek                                            | 录制 GIF 动图                                                                                                                                                                          |
+| obs-studio                                      | 录屏软件                                                                                                                                                                               |
+| pkgstats                                        | Submit a list of installed packages to the Arch Linux project                                                                                                                          |
+| masterpdfeditor                                 | A complete solution for viewing, creating and editing PDF files                                                                                                                        |
+| EtchDroid                                       | ios2usb on android                                                                                                                                                                     |
+| haruna                                          | Video player built with Qt/QML on top of libmpv                                                                                                                                        |
+| archmage(aur)                                   | converts CHM files to HTML, plain text and PDF                                                                                                                                         |
+| nasm                                            | 在 mdn/content 仓库中安装依赖报错，缺少 nasm                                                                                                                                           |

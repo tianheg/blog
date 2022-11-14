@@ -1,0 +1,27 @@
+#+TITLE: Nginx 通过代理部署 Node.js 应用
+#+DATE: <2022-11-14 Mon 14:19>
+#+TAGS[]: 技术
+
+https://dev.to/jsstackacademy/deploy-nodejs-application-using-nginx-3jhh
+
+1. 确保 Node.js 应用能够生成最终要部署的静态页面。
+2. 配置好 pm2；并安装 Nginx
+3. =sudo vim  /etc/nginx/sites-available/default=
+
+#+BEGIN_SRC conf
+    server {
+     location / {
+            proxy_pass http://localhost:3000;
+            proxy_http_version 1.1;
+            proxy_set_header Upgrade $http_upgrade;
+            proxy_set_header Connection 'upgrade';
+            proxy_set_header Host $host;
+            proxy_cache_bypass $http_upgrade;
+        }
+    }
+#+END_SRC
+
+3000 是本地运行的端口号，根据需要更改。
+
+这样完成后，可以使用 =http://ip= 访问，而不需要加上端口号，例如
+=http://ip:3000= 。

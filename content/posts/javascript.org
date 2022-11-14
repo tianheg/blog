@@ -1762,6 +1762,78 @@ unrelated objects =bird= and =plane=.
 
 * JS 代码测试
 
+** playwright
+*** 配置（Node.js）
+
+#+BEGIN_EXAMPLE
+    npm init playwright@latest new-project # 自动配置
+
+    # 手动
+    npm i -D @playwright/test
+    # install supported browsers
+    npx playwright install # 这一步会安装所有支持的浏览器
+#+END_EXAMPLE
+
+=playwright.config.js=：
+
+#+BEGIN_SRC js
+    // @ts-check
+    const { devices } = require('@playwright/test')
+
+    /**
+     * Read environment variables from file.
+     * https://github.com/motdotla/dotenv
+     */
+    // require('dotenv').config();
+
+    /**
+     * @see https://playwright.dev/docs/test-configuration
+     * @type {import('@playwright/test').PlaywrightTestConfig}
+     */
+    const config = {
+      testDir: './tests',
+      /* Maximum time one test can run for. */
+      timeout: 30 * 1000,
+      expect: {
+        /**
+         * Maximum time expect() should wait for the condition to be met.
+         * For example in `await expect(locator).toHaveText();`
+         */
+        timeout: 5000,
+      },
+      /* Fail the build on CI if you accidentally left test.only in the source code. */
+      forbidOnly: !!process.env.CI,
+      /* Retry on CI only */
+      retries: process.env.CI ? 2 : 0,
+      /* Opt out of parallel tests on CI. */
+      workers: process.env.CI ? 1 : undefined,
+      /* Reporter to use. See https://playwright.dev/docs/test-reporters */
+      reporter: [['html', { outputFolder: 'reports' }]],
+      /* Shared settings for all the projects below. See https://playwright.dev/docs/api/class-testoptions. */
+      use: {
+        /* Maximum time each action such as `click()` can take. Defaults to 0 (no limit). */
+        actionTimeout: 0,
+        /* Base URL to use in actions like `await page.goto('/')`. */
+        // baseURL: 'http://localhost:3000',
+
+        /* Collect trace when retrying the failed test. See https://playwright.dev/docs/trace-viewer */
+        trace: 'on-first-retry',
+      },
+
+      /* Configure projects for major browsers */
+      projects: [
+        {
+          name: 'firefox',
+          use: {
+            ...devices['Desktop Firefox'],
+          },
+        },
+      ],
+    }
+
+    module.exports = config
+#+END_SRC
+
 ** 单个 JS 文件测试
 
 用 [[https://mochajs.org/][Mochajs]]。
@@ -3383,3 +3455,145 @@ freeCodeCamp Forum]]
 
 1. https://ihateregex.io/
 2. [[https://regex-vis.com/][Regex Vis]]
+
+* 深浅拷贝
+    
+** 定义
+
+一个对象的 shallow copy
+是一种分享相同属性的引用，原始对象和复制出的对象引用相同的潜在属性。也就是说，改变一个对象的属性，与之对应的对象属性也会被改变。这种表现与
+deep copy 是截然相反的。进行 deep copy
+后操作的对象，复制出的对象和原来对象不指向相同属性，因此当改变复制出的对象的属性时，原始对象的属性不会改变。
+
+对于 shallow copies
+来说，*有选择地改变对象中现有元素的共享属性的值与为现有元素分配一个全新的值是不同的*，理解这一点很重要。举例说明：
+
+在数组对象名为 copy 的浅拷贝中，=copy[0]= 的值为
+={"list":["butter","flour"]}=，之后进行操作
+=copy[0].list = ["a", "b"]=，然后源对象中相应的元素也会改变。因为你选择性地改变了一个对象属性，这一属性由源对象和它的浅拷贝共享。
+
+然而，如果你进行操作
+=copy[0] = {"list":["a", "b"]}=，源对象相应元素则*不会改变*。因为在这种情况下，并不是选择性改变一个数组的已存在元素（与浅拷贝共享），而是仅仅在浅拷贝数组上给
+=copy[0]= 数组元素赋予了一个全新的值。
+
+一个对 JS 对象进行深层拷贝的方式：先用 =JSON.stringify()= 将对象转化为
+JSON 字符串，然后使用 =JSON.parse()= 把字符串转换成一个全新的 JS 对象。
+
+#+BEGIN_SRC js
+    let list = ['noodles', { list: ['eggs', 'flour', 'water'] }]
+    let list_deepcopy = JSON.parse(JSON.stringify(list))
+    console.log(list_deepcopy)
+    // Array [ "noodles", {…} ]
+    list_deepcopy[1].list = ['rice flour', 'water']
+    console.log(list[1].list)
+    // Array(3) [ "eggs", "flour", "water" ]
+#+END_SRC
+
+上面的数组足够简单，可以序列化，但有些 JS
+对象无法被序列化，如闭包函数、Symbols、在 HTML DOM API 中表示 HTML
+元素的对象、递归数据和很多其他情况。所以无法对这些对象进行深拷贝。
+
+对于可以序列化的对象，还有一个可用的属性方法是
+=structuredClone()=，=structuredClone()= has the advantage of allowing
+[[https://developer.mozilla.org/en-US/docs/Glossary/Transferable_objects][transferable
+objects]] in the source to be /transferred/ to the new
+copy。记住，=structuredClone()= 并非 JS 语言的特性，而是一种浏览器和其他
+JS 运行时（实现了像 =window= 这样的全局对象）的特性。
+
+#+BEGIN_SRC js
+    let list = ['noodles', { list: ['eggs', 'flour', 'water'] }]
+    let list_deepcopy = structuredClone(list)
+    console.log(list_deepcopy)
+    // Array [ "noodles", {…} ]
+#+END_SRC
+
+深拷贝使用递归，与浅递归相比更耗时间。
+
+** 能够进行浅拷贝的 JS 内建属性
+
+浅：
+
+Spread syntax(=...=), =Array.prototype.concat()=,
+=Array.prototype.slice()=,=Array.from()=, =Object.assign()= 和
+=Ocject.create()=
+
+** 练习
+
+#+BEGIN_SRC js
+    let list = ['noodles', { list: ['eggs', 'flour', 'water'] }]
+    let list_copy = Array.from(list)
+    console.log(JSON.stringify(list_copy))
+    // ["noodles",{"list":["eggs","flour","water"]}]
+    list_copy[1].list = ['rice flour', 'water']
+    console.log(list[1].list)
+    // Array [ "rice flour", "water" ]
+    console.log(JSON.stringify(list))
+    // ["noodles",{"list":["rice flour","water"]}]
+    list_copy[0] = ['rice noodles']
+    console.log(list[0])
+    // noodles
+    console.log(JSON.stringify(list_copy))
+    // [["rice noodles"],{"list":["rice flour","water"]}]
+    console.log(JSON.stringify(list))
+    // ["noodles",{"list":["rice flour","water"]}]
+#+END_SRC
+
+** 实现浅拷贝
+
+#+BEGIN_SRC js
+    let shallowCopy = function (obj) {
+      if (typeof obj !== 'object') return
+      let newObj = obj instanceof Array ? [] : {}
+      for (let key in obj) {
+        if (obj.hasOwnProperty(key)) {
+          newObj[key] = obj[key]
+        }
+      }
+      return newObj
+    }
+#+END_SRC
+
+** 实现深拷贝
+
+#+BEGIN_SRC js
+    let deepCopy = function (obj) {
+      if (typeof obj !== 'object') return
+      let newObj = obj instanceof Array ? [] : {}
+      for (let key in obj) {
+        if (obj.hasOwnProperty(key)) {
+          newObj[key] = typeof obj[key] === 'object' ? deepCopy(obj[key]) : obj[key]
+        }
+      }
+      return newObj
+    }
+#+END_SRC
+
+** jQuery 中 extend 实现浅深拷贝
+
+使用方法：
+
+#+BEGIN_SRC js
+    jQuery.extend(target, object1[, objectN])
+    jQuery.extend([deep], target, object1[, objectN])
+#+END_SRC
+
+** =What is the most efficient way to deep clone an object in JavaScript?=
+
+使用
+[[https://developer.mozilla.org/en-US/docs/Web/API/structuredClone][=structuredClone()=]]。对于
+Node.js 在 v17.0.0
+版本引入。[[https://developer.mozilla.org/en-US/docs/Web/API/structuredClone#browser_compatibility][兼容性一览]]
+
+--------------
+
+参考资料
+
+1. [[https://developer.mozilla.org/en-US/docs/Glossary/Shallow_copy][Shallow
+   copy - MDN Web Docs Glossary: Definitions of Web-related terms |
+   MDN]]
+2. [[https://developer.mozilla.org/en-US/docs/Glossary/Deep_copy][Deep
+   copy - MDN Web Docs Glossary: Definitions of Web-related terms |
+   MDN]]
+3. [[https://github.com/mqyqingfeng/Blog/issues/32][JavaScript
+   专题之深浅拷贝 · Issue #32 · mqyqingfeng/Blog]]
+4. https://stackoverflow.com/q/122102/12539782
