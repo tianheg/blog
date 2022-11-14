@@ -1,0 +1,14 @@
+#+TITLE: 重定向通过 Vercel 部署的网站
+#+DATE: <2022-11-14 Mon 21:52>
+#+TAGS[]: 技术
+
+vercel.json:
+
+#+BEGIN_SRC json
+    {
+      "redirects": [
+          { "source": "/life", "destination": "/life/" },
+          { "source": "/tech", "destination": "/tech/" }
+      ]
+    }
+#+END_SRC
