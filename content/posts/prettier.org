@@ -1,0 +1,81 @@
+#+TITLE: Prettier
+#+DATE: <2022-11-14 Mon 21:58>
+#+TAGS[]: 技术
+
+https://prettier.io/docs/en/index.html
+
+目前的配置：
+
+.prettierrc:
+
+#+BEGIN_EXAMPLE
+    {
+      "$schema": "https://json.schemastore.org/prettierrc",
+      "tabWidth": 2,
+      "semi": false,
+      "singleQuote": true,
+      "trailingComma": "all",
+      "endOfLine": "lf"
+    }
+#+END_EXAMPLE
+
+.prettierignore:
+
+#+BEGIN_EXAMPLE
+    .cache
+    package.json
+    package-lock.json
+    public
+#+END_EXAMPLE
+
+** 安装配置
+
+#+BEGIN_EXAMPLE
+    pnpm install --save-dev prettier
+    echo {}> .prettierrc
+    touch .prettierignore
+#+END_EXAMPLE
+
+使用 Visual Studio Code 作为代码编辑器，安装 =Prettier - Code formatter=
+扩展。
+
+** Git Hooks
+
+https://prettier.io/docs/en/precommit.html
+
+#+BEGIN_EXAMPLE
+    pnpm install --save-dev husky lint-staged
+    pnpx husky install
+    npm pkg set scripts.prepare="husky install"
+    pnpx husky add .husky/pre-commit "pnpx lint-staged"
+#+END_EXAMPLE
+
+在 package.json 中加入：
+
+#+BEGIN_EXAMPLE
+    {
+      "lint-staged": {
+        "**/*.{js,jsx,ts,tsx,json,md,scss}": "prettier --write"
+      }
+    }
+#+END_EXAMPLE
+
+** Ignore Code
+
+https://prettier.io/docs/en/ignore.html
+
+** Integrating with Linters
+
+https://prettier.io/docs/en/integrating-with-linters.html
+
+** Plugins
+
+https://prettier.io/docs/en/plugins.html
+
+** CLI
+
+https://prettier.io/docs/en/cli.html
+
+** API
+
+https://prettier.io/docs/en/api.html

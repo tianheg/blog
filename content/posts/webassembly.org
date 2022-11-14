@@ -1,0 +1,75 @@
+#+TITLE: WebAssembly
+#+DATE: <2022-11-14 Mon 21:48>
+#+TAGS[]: 技术
+
+1. [[https://developer.mozilla.org/en-US/docs/WebAssembly]]
+2. [[https://webassembly.github.io/spec/core/]]
+3. [[https://webassembly.org/]]
+
+WebAssembly 是一种新型汇编代码，它能运行在 Web
+环境中。它是一种低级的、像汇编语言那样的语言，它是二进制格式，这些特点让它具备较高性能，使得它能够辅助
+JavaScript 完成一些在只有 JS 时完成得不够好的那些事情。
+
+WebAssembly 如何与 JS 搭配？
+
+使用 WebAssembly JS APIs 可以把 WebAssembly 模块载入 JS
+应用中共享性能提升。能够利用 WebAssembly 和 JS 各自的优点。
+
+** 概念
+
+WebAssembly 的目标：
+
+-  Be fast, efficient, and portable
+-  Be readable and debuggable
+-  Keep secure
+-  Don't break the web
+
+WebAssembly 如何融入 Web 平台？
+
+Web 平台分成两部分：一个运行 Web 应用代码的虚拟机，一系列 Web APIs（让
+Web 应用能够可以控制 Web
+浏览器或设备，使用其提供的功能，让一些事情发生）。
+
+在 3D 游戏方面，只有 JS 是不行的。
+
+关键概念：
+
+-  模块
+-  内存
+-  Table
+-  Instance
+
+在应用中如何使用 WebAssembly？
+
+-  Porting a C/C++ application with Emscripten.
+-  Writing or generating WebAssembly directly at the assembly level.
+-  Writing a Rust application and targeting WebAssembly as its output.
+-  Using AssemblyScript which looks similar to TypeScript and compiles
+   to WebAssembly binary.
+
+C/C++
+
+Tools: https://wasdk.github.io/WasmFiddle/
+，https://emscripten.org/docs/getting\_started/downloads.html
+(=sudo pacman -S emscripten=(Arch))
+
+Write WebAssembly
+
+-  https://developer.mozilla.org/en-US/docs/WebAssembly/Text\_format\_to\_wasm
+-  https://developer.mozilla.org/en-US/docs/WebAssembly/Understanding\_the\_text\_format
+
+stack machines
+
+#+BEGIN_SRC js
+    WebAssembly.instantiateStreaming(fetch('add.wasm')).then((obj) => {
+      console.log(obj.instance.exports.add(1, 2)) // "3"
+    })
+#+END_SRC
+
+Rust
+
+https://developer.mozilla.org/en-US/docs/WebAssembly/Rust\_to\_wasm
+
+AssemblyScript
+
+https://www.assemblyscript.org/

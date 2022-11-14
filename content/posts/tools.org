@@ -1,0 +1,55 @@
+#+TITLE: 工具
+#+DATE: <2022-11-14 Mon 22:00>
+#+TAGS[]: 技术
+
+** Pandoc
+https://pandoc.org/
+#+BEGIN_SRC sh
+pandoc -f markdown -t org -o output_file.org input_file.md
+#+END_SRC
+** Docker
+*** Docker Hub mirror
+[[https://gist.github.com/y0ngb1n/7e8f16af3242c7815e7ca2f0833d3ea6][Docker Hub 镜像加速器]]
+#+BEGIN_SRC sh
+sudo mkdir -p /etc/docker
+sudo tee /etc/docker/daemon.json <<-'EOF'
+{
+  "registry-mirrors": ["https://9natnp0v.mirror.aliyuncs.com"]
+}
+EOF
+sudo systemctl daemon-reload
+sudo systemctl restart docker
+#+END_SRC
+*** 一些实践
+- https://github.com/y0ngb1n/dockerized
+** Git
+*** Gitea
+https://github.com/go-gitea/gitea
+https://gitea.io/en-us/
+**** 安装
+
+** 科学上网
+** Emacs/Vim
+** GNU Make
+** CMake
+** LaTex -- 写文章
+** 画图
+- https://excalidraw.com/
+- [[https://github.com/mingrammer/diagrams][mingrammer/diagrams: Diagram as Code for prototyping cloud system architectures]]
+** 文件的压缩与解压缩
+https://wiki.archlinux.org/title/Archiving_and_compression
+** Misc
+- [google webfonts helper](https://google-webfonts-helper.herokuapp.com/fonts)
+- 为去不同的国家准备 SIM 卡 https://prepaid-data-sim-card.fandom.com/wiki/Prepaid_SIM_with_data
+* 音乐
+- https://github.com/navidrome/navidrome
+- https://github.com/rainner/soma-fm-player
+- https://www.lofi.cafe/
+- https://earth.fm/
+* 思考
+- [[https://untools.co/][Tools for better thinking | Untools]]
+* 代码共享
+
+https://github.com/screego/server
+
+很不错的软件，可以实时和别人交流所写的代码。
