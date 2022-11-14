@@ -1,0 +1,543 @@
+#+TITLE: Web 编程指南 from mdo
+#+DATE: <2022-11-14 Mon 08:56>
+#+TAGS[]: 技术
+
+-  https://codeguide.co/
+-  https://github.com/mdo/code-guide
+
+开发一致的、灵活的、sustainable（可持久的） 的 HTML 和 CSS。
+
+** 黄金法则
+
+强化既有规则，在任何时候都遵循这些规则。在小项目和大项目中寻找错误。
+
+#+BEGIN_QUOTE
+  Every line of code should appear to be written by a single person, no
+  matter the number of contributors.
+#+END_QUOTE
+
+不论贡献者多少，确保自己审核过每一行代码。
+
+** HTML
+
+*** 语法
+
+-  不要大写标签，包括 doctype（为什么？）。
+-  使用两个空格的软制表符------这样能保证代码在任何环境下格式都一致。
+-  嵌套元素彼此应缩进一次（两个空格）。
+-  总是在属性上使用双引号。
+-  不要在自闭和标签上加反斜线（=/=）------[[https://html.spec.whatwg.org/multipage/syntax.html#start-tags][HTML5
+   标准]]说这是可选项。
+-  不要省略可选的闭合标签（比如，=</li>= 或 =</body>=）。
+
+#+BEGIN_EXAMPLE
+    <!doctype html>
+    <html>
+      <head>
+        <title>Page Title</title>
+      </head>
+      <body>
+        <img src="images/logo.png" alt="logo">
+    	<h1 class="hello-world">Hello, World!</h1>
+      </body>
+    </html>
+#+END_EXAMPLE
+
+*** HTML5 文档类型
+
+强化[[https://developer.mozilla.org/en-US/docs/Web/HTML/Quirks_Mode_and_Standards_Mode][标准模式]]并尽可能在每个浏览器呈现一致的内容。保持小写。
+
+#+BEGIN_EXAMPLE
+    <!doctype html>
+    ...
+#+END_EXAMPLE
+
+*** 语言属性
+
+来自 HTML5 标准：
+
+#+BEGIN_QUOTE
+  网页作者被鼓励添加语言属性，赋予文档语言。这可以帮助语音合成工具选择正确的发音，翻译工具选择正确的语言等等。
+#+END_QUOTE
+
+可在[[https://html.spec.whatwg.org/multipage/semantics.html#the-html-element][标准]]中读到更多关于
+=lang= 的内容。在 IANA
+可以看到[[https://www.iana.org/assignments/language-subtag-registry/language-subtag-registry][语言代码列表]]。
+
+#+BEGIN_EXAMPLE
+    <html lang="en">
+    </html>
+#+END_EXAMPLE
+
+*** IE 兼容模式
+
+随着 Internet Explorer 的日渐衰退，不再需要添加 =<meta>= 以维持对 IE
+的兼容，除非需要兼容 IE10 及其以前的版本。这个标签在 IE11 中弃用，不再在
+Microsoft Edge 中使用（除非在传统浏览器中）。
+
+#+BEGIN_EXAMPLE
+    <!-- IE10 and below only -->
+    <meta http-equiv="x-ua-compatible" content="ie=edge">
+#+END_EXAMPLE
+
+*** 字符编码
+
+正确的字符编码可以节省很多字符，书写 =-= 而不是 =&emdash;=。
+
+对于一些保留的 XML 符号，仍需使用 HTML 实体。
+
+#+BEGIN_EXAMPLE
+    <head>
+      <meta charset="utf-8">
+    </head>
+    <body>
+    </body>
+#+END_EXAMPLE
+
+*** 包含 CSS 和 JS
+
+HTML 标准：
+
+-  [[https://html.spec.whatwg.org/multipage/semantics.html#the-link-element][=link=]]
+-  [[https://html.spec.whatwg.org/multipage/semantics.html#the-style-element][=style=]]
+-  [[https://html.spec.whatwg.org/multipage/scripting.html#the-script-element][=script=]]
+
+#+BEGIN_EXAMPLE
+    <link rel="stylesheet" href="style.css">
+
+    <style>
+    </style>
+
+    <script src="script.js"></script>
+#+END_EXAMPLE
+
+*** Practicality over purity
+
+Strive to maintain HTML standards and semantics, but not at the expense
+of practicality. Use the least amount of markup with the fewest
+intricacies whenever possible.
+
+#+BEGIN_EXAMPLE
+    <!-- Good -->
+    <button>...</button>
+
+    <!-- Not good -->
+    <div class="btn" onClick="...">...</div>
+#+END_EXAMPLE
+
+*** 属性顺序
+
+HTML 属性的大致较容易记忆的顺序：
+
+-  class
+-  id, name
+-  data-*
+-  src, for, type, href, value
+-  title, alt
+-  role, aria-*
+-  tabindex
+-  style
+
+以上的总结：
+
+识别元素的属性 --> 确定元素唯一性 --> 可访问性、样式相关属性
+
+#+BEGIN_EXAMPLE
+    <a class="..." id="..." data-toggle="modal" herf="#">Example link</a>
+
+    <input class="form-control" type="text">
+
+    <img src="..." alt="...">
+#+END_EXAMPLE
+
+*** 布尔属性
+
+布尔属性不需要一般的值。在 XHTML 中还需要声明值，在 HTML5 中完全不需要。
+
+#+BEGIN_EXAMPLE
+    <input type="text" disabled>
+
+    <input type="checkbox" value="1" checked>
+
+    <select>
+      <option value="1" selected>1</option>
+    </select>
+#+END_EXAMPLE
+
+*** 降低标签数量
+
+无论何时都不写多余的 HTML
+标签。很多情况下，这需要多次迭代和重构，但是值得这样做，因为它会减少
+HTML 的标签数量。
+
+#+BEGIN_EXAMPLE
+    <!-- Not so great -->
+    <span class="avatar">
+      <img src="...">
+    </span>
+
+    <!-- Better -->
+    <img class="avatar" src="...">
+#+END_EXAMPLE
+
+*** 配置好编辑器
+
+-  Use soft-tabs set to two spaces.
+-  Trim trailing white space on save.
+-  Set encoding to UTF-8.
+-  Add new line at end of files.
+
+考虑维护一个 =.editorconfig=。
+
+#+BEGIN_EXAMPLE
+    # editorconfig.org
+
+    root = true
+
+    [*]
+    charset = utf-8
+    end_of_line = lf
+    indent_size = 2
+    indent_style = space
+    insert_final_newline = true
+    trim_trailing_whitespace = true
+#+END_EXAMPLE
+
+** CSS
+
+*** 语法
+
+-  使用带有两个空格的软制表符------这能保证代码能够在任何环境下正常展示
+-  用 =,= 分隔多个选择器时，让每个选择器单列一行
+-  CSS block 的开括号前留一个空格，为了容易辨识
+-  在新的一行书写 CSS block 的闭括号
+-  在每个属性声明 =:= 后留一个空格
+-  每个声明应尽量保持在自己的特定行，以便获得正确的异常报告
+-  每个声明的最后以 =;= 结尾
+-  如果属性值很复杂，需要使用 =,=。那么 =,= 之后需要一个空格
+-  对于颜色属性来说，使用 =rgb(255 255 255 / .5)= 这种格式
+-  不要再小数点前前缀一个 0，使用 =.5= 而不是 =0.5=
+-  小写所有的 16 进制数值。Lowercase letters are much easier to discern
+   when scanning a document as they tend to have more unique shapes
+-  如果可以，使用 3 位 16 进制表示颜色，使用 =#fff= 而不是 =#ffffff=
+-  为选择器中的属性值添加引号，=input[type="text"]=。[[https://mathiasbynens.be/notes/unquoted-attribute-values#css][只在特定情况下可省略引号]]
+-  避免为 0 指定单位，使用 =margin: 0;= 而不是 =margin: 0px;=
+
+#+BEGIN_EXAMPLE
+    // Bad CSS
+    .selector, .selector-secondary, .selector[type=text]{
+        padding:15px;
+      margin: 0px 0px 15px;
+      background-color: rgba(0, 0, 0, 0.5);
+      box-shadow: 0px 1px 2px #CCC,inset 0 1px 0 #FFFFFF}
+
+    // Good one
+    .selector,
+    .selector-secondary,
+    .selector[type="text"] {
+      padding: 15px;
+      margin-bottom: 15px;
+      background-color: rgb(0 0 0 / .5);
+      box-shadow: 0 1px 2px #ccc, inset 0 1px 0 #fff;
+    }
+#+END_EXAMPLE
+
+*** 声明顺序
+
+属性声明的顺序：
+
+-  位置
+-  盒子模型
+-  字体
+-  视觉
+-  其余杂项
+
+#+BEGIN_EXAMPLE
+    .declaration-order {
+      // Positioning
+      position: absolute;
+      top: 0;
+      right: 0;
+      bottom: 0;
+      left: 0;
+      z-index: 100;
+      
+      // Box model
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+      width: 100px;
+      height: 100px;
+      
+      // Typography
+      font: normal 14px "Helvetica Neue", sans-serif;
+      line-height: 1.5;
+      color: #333;
+      text-align: center;
+      text-decoration: underline;
+      
+      // Visual
+      background-color: #f5f5f5;
+      border: 1px solid #e5e5e5;
+      border-radius: 3px;
+      
+      // Misc
+      opacity: 1;
+    }
+#+END_EXAMPLE
+
+*** 逻辑属性
+
+逻辑属性是一种快捷方式，能够节省很多代码。
+
+默认情况下，block 指代垂直方向（上和下），inline 指代水平方向（左右）。
+
+逻辑属性帮助我们为重新排列文本后的文本加入样式。
+
+#+BEGIN_EXAMPLE
+    // Without logical properties
+    .element {
+      margin-right: auto;
+      margin-left: auto;
+      border-top: 1px solid #eee;
+      border-bottom: 1px solid #eee;
+    }
+
+    // With logical properties
+    .element {
+      margin-inline: auto;
+      border-block: 1px solid #eee;
+    }
+#+END_EXAMPLE
+
+*** 颜色
+
+-  使用 =rgba()= 而非 =rgb()=
+-  使用 =rgba(255 255 255 / .5)= 而非 =rgba(255, 255, 255, .5)=
+-  确保网页中的颜色满足[[https://webaim.org/articles/contrast/][对比度]]
+
+#+BEGIN_EXAMPLE
+    .element {
+      color: rgba(255 255 255 / .65);
+      background-color: rgba(0 0 0 / .95);
+    }
+#+END_EXAMPLE
+
+*** 避免使用 =@import=
+
+与 =<link>= 相比，=@import=
+更慢。会增加多余的请求，导致一些意料之外的问题。解决方法：
+
+-  使用 =<link>= 元素
+-  使用 Sass 或 Less 将 CSS 放入一个文件里
+-  利用环境提供的可利用的部分简化 CSS
+
+[[https://web.archive.org/web/20150403124529/http://www.stevesouders.com/blog/2009/04/09/dont-use-import][阅读更多]]
+
+#+BEGIN_EXAMPLE
+    <!-- Use link elements -->
+    <link rel="stylesheet" href="core.css">
+
+    <!-- Avoid @imports -->
+    <style>
+      @import url("more.css")
+    </style>
+#+END_EXAMPLE
+
+*** Media query 位置
+
+尽可能将其放在靠近所设置的元素的近处。不要将它们放在一个文件里或文档的结束。
+
+#+BEGIN_EXAMPLE
+    .element {...}
+    .element-avatar {...}
+    .element-selected {...}
+
+    @media (min-width: 35em) {
+      .element {...}
+      .element-avatar {...}
+      .element-selected {...}
+    }
+#+END_EXAMPLE
+
+*** 单个声明
+
+单个声明的 CSS block 放在一行。
+
+#+BEGIN_EXAMPLE
+    .span1 { width: 5rem; }
+    .span2 { width: 5rem; }
+    .span3 { width: 5rem; }
+#+END_EXAMPLE
+
+多个声明的 CSS block 分行
+
+#+BEGIN_EXAMPLE
+    .sprite {
+      display: inline-block;
+      width: 16px;
+      height: 15px;
+      background-image: url("./img/sprite.png");
+    }
+#+END_EXAMPLE
+
+*** 速记标识
+
+有些速记表示需要显式设置所有值。频繁使用的速记属性：
+
+-  padding
+-  margin
+-  font
+-  background
+-  border
+-  border-radius
+
+不应过度使用速记属性。
+
+MDN
+的[[https://developer.mozilla.org/en-US/docs/Web/CSS/Shorthand_properties][一篇文章]]介绍里使用速记属性可能出现的问题。
+
+*** 预处理器中的嵌套
+
+尽可能避免任何不必要的嵌套------保持 CSS
+的简单和避免反向嵌套。只有当你确实需要将样式范围限定在某个选择器上并且有多个元素嵌套在一起。
+
+#+BEGIN_EXAMPLE
+    // Without nesting
+    .table > thead > tr > th {...}
+    .table > thead > tr > th {...}
+
+    // With nesting
+    .table > thead > tr {
+      > th {...}
+      > td {...}
+    }
+#+END_EXAMPLE
+
+[[https://markdotto.com/2015/07/20/css-nesting/][阅读更多]]
+
+*** 预处理器中的操作符
+
+为了可读性，用小括号包裹数学运算符，并在数值、变量和运算符间添加空格。
+
+#+BEGIN_EXAMPLE
+    // Bad example
+    .elem {
+      margin: 10px 0 @variable*2 10px;
+    }
+
+    // Good example
+    .elem {
+      margin: 10px 0 (@variable * 2) 10px;
+    }
+#+END_EXAMPLE
+
+*** 注释
+
+确保代码是描述性的、有着不错注释的内容。能够被他人轻易理解的。好的注释能够表达上下文或目的。不要简单地重述一个组件或类名。用于实际使用的代码不加注释。
+
+写大段评论时，句子要写完整。用简洁的短语进行一般注解。
+
+#+BEGIN_EXAMPLE
+    // Bad example
+    // Modal header
+    .modal-header {
+      ...
+    }
+
+    // Good example
+    // Wrapping element for .modal-title nad .modal-close
+    .modal-header {
+      ...
+    }
+#+END_EXAMPLE
+
+*** 类名
+
+-  使用小写，且用连字符分隔
+-  避免过多和任意的速记符号
+-  保持类名的短和简洁
+-  使用有意义的名字；使用结构化、目的化而非展示性的名字
+-  基于最近的父类或基类使用前缀类名
+-  使用 =.js-*= 表示行为，但不要放在 CSS 中
+
+以上规则也适用于创建自定义属性和预处理器变量名。
+
+#+BEGIN_EXAMPLE
+    // Bad example
+    .t {...}
+    .red {...}
+    .header {...}
+
+    // Good example
+    .tweet {...}
+    .important {...}
+    .tweet-header {...}
+#+END_EXAMPLE
+
+*** 选择器
+
+-  使用类选择器好过元素选择器
+-  避免在相同的组件使用多个选择器，这会严重影响浏览器加载网页的速度
+-  让选择器的名字尽可能短，并且努力降低选择器的数量到 3 个
+-  只在必要时，设置选择器包括父类
+
+阅读更多：
+
+1. [Scope CSS classes with prefixes |
+   @mdo](https://markdotto.com/2012/02/16/scope-css-classes-with-prefixes/)
+2. [Stop the cascade |
+   @mdo](https://markdotto.com/2012/03/02/stop-the-cascade/)
+
+#+BEGIN_EXAMPLE
+    // Bad example
+    span {...}
+    .page-container #stream .stream-item .tweet .tweet-header
+    .username {...}
+    .avatar {...}
+
+    // Good example
+    .avatar {...}
+    .tweet-header .usrname {...}
+    .tweet .avatar {...}
+#+END_EXAMPLE
+
+*** 子选择符和后代选择器
+
+使用 =>= 能够将样式限制在嵌套的最接近的子元素。
+
+#+BEGIN_EXAMPLE
+    .custom-table > tbody > tr > td,
+    .custom-table > tbody > tr > th {
+      /* ... */
+    }
+#+END_EXAMPLE
+
+*** 组织
+
+-  将样式按不同的组件组合
+-  建立一个一致的注释层次结构
+-  分割组件时，在彼此之间留下一致的空白符比较好
+-  使用多个 CSS
+   文件时，将它们按组件划分而非页面，页面需要被重新布局，而组件只需要移动即可
+
+#+BEGIN_EXAMPLE
+    //
+    // Component section heading
+    //
+
+    .element { ... }
+
+
+    //
+    // Component section heading
+    //
+    // Sometimes you need to include optional context for the entire component. Do that up here if it's important enough.
+    //
+
+    .element { ... }
+
+    // Contextual sub-component or modifer
+    .element-heading { ... }
+#+END_EXAMPLE

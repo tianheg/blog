@@ -43,3 +43,34 @@ Refers:
 #+END_SRC
 
 通过 =type -a bash= 找到 bash 的所有位置。
+
+** =chsh=
+
+更改当前用户 Shell
+
+#+BEGIN_EXAMPLE
+    chsh -s /bin/zsh
+    echo $SHELL
+#+END_EXAMPLE
+
+列出所有 Shell
+
+#+BEGIN_EXAMPLE
+    chsh -l
+#+END_EXAMPLE
+
+** =useradd=
+
+新建用户（有家目录）
+
+refer [[https://wiki.archlinux.org/title/Users_and_groups]]
+
+#+BEGIN_EXAMPLE
+    useradd -m example
+    passwd example
+#+END_EXAMPLE
+
+** =adduser=
+
+=adduser= provides a high level interface for adding new users, and
+=useradd= provides a low level interface.
