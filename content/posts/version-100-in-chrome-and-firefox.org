@@ -1,0 +1,80 @@
+#+TITLE: Version 100 in Chrome and Firefox
+#+DATE: <2022-11-14 Mon 21:51>
+#+TAGS[]: 技术
+
+1. [[https://hacks.mozilla.org/2022/02/version-100-in-chrome-and-firefox/][Version
+   100 in Chrome and Firefox - Mozilla Hacks - the Web developer blog]]
+2. [[https://developer.mozilla.org/en-US/docs/Web/HTTP/Headers/User-Agent][User-Agent
+   - HTTP | MDN]]
+
+** User-Agent string
+
+[[https://www.rfc-editor.org/rfc/rfc7231.html#section-5.5.3][User-Agent
+(UA)]] 是一个字符串，放在浏览器发送给服务器的 HTTP
+请求头中，它的作用是使服务器能够识别对应的浏览器。
+
+它也可以通过 JS 使用
+[[https://developer.mozilla.org/en-US/docs/Web/API/Navigator/userAgent][navigator.userAgent]]
+获得。
+
+#+BEGIN_EXAMPLE
+    browserName/majorVersion.minorVersion
+#+END_EXAMPLE
+
+*** Firefox
+
+#+BEGIN_EXAMPLE
+    User-Agent: Mozilla/5.0 (<system-information>) <platform> (<platform-details>) <extensions>
+
+    "Mozilla/5.0 (X11; Linux x86_64; rv:99.0) Gecko/20100101 Firefox/99.0"
+#+END_EXAMPLE
+
+*** Chrome
+
+#+BEGIN_EXAMPLE
+    Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/51.0.2704.103 Safari/537.36
+#+END_EXAMPLE
+
+*** Opera
+
+#+BEGIN_EXAMPLE
+    Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/51.0.2704.106 Safari/537.36 OPR/38.0.2220.41
+#+END_EXAMPLE
+
+*** Microsoft Edge
+
+#+BEGIN_EXAMPLE
+    Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/91.0.4472.124 Safari/537.36 Edg/91.0.864.59
+#+END_EXAMPLE
+
+*** Safari
+
+#+BEGIN_EXAMPLE
+    Mozilla/5.0 (iPhone; CPU iPhone OS 13_5_1 like Mac OS X) AppleWebKit/605.1.15 (KHTML, like Gecko) Version/13.1.1 Mobile/15E148 Safari/604.1
+#+END_EXAMPLE
+
+*** Crawler and bot
+
+#+BEGIN_EXAMPLE
+    Mozilla/5.0 (compatible; Googlebot/2.1; +http://www.google.com/bot.html)
+
+    Mozilla/5.0 (compatible; YandexAccessibilityBot/3.0; +http://yandex.com/bots)
+#+END_EXAMPLE
+
+*** Library and net tool
+
+#+BEGIN_EXAMPLE
+    curl/7.64.1
+
+    PostmanRuntime/7.26.5
+#+END_EXAMPLE
+
+** Major version 100---three-digit version number
+
+在浏览器版本从两位到三位改变时，一些工具库或软件可能会因此而出现工作异常。
+
+为什么会出现问题？
+
+和从一位变两位的情形类似，当版本由 99 变为 100
+时，因为针对特定浏览器版本工作那些软件还没有改变查看浏览器版本的方式，它们只能得到
+100 的前两位 10，所以很多软件会因为不兼容老旧版本浏览器而出现工作异常。

@@ -1,0 +1,126 @@
+#+TITLE: WebGL
+#+DATE: <2022-11-14 Mon 21:37>
+#+TAGS[]: 技术
+
+https://webglfundamentals.org/
+
+WebGL 是 Web Graphics Libray
+的缩写。WebGL只是一个栅格化（rasterization）引擎，算不上一个3D
+API。它只能画点、线和三角形。WebGL 运行在
+GPU（[[https://en.wikipedia.org/wiki/Graphics_processing_unit][Graphics
+processing unit]]）上。
+
+Code in the form of pairs of functions. 2 functions: a vertex shader and
+a fragment shader, written in very strictly typed C/C++ like language
+called GLSL. Paired together they are called a program.
+
+Role:
+
+-  vertex shader(顶点着色器) -- compute vertex position.
+   基于这些位置，函数输出 WebGL
+   可以栅格化各种基元，包括点、线或三角形。When rasterizing these
+   primitives it calls a second user supplied function called a fragment
+   shader.
+-  fragment shader(片段着色器) -- compute a color for each pixel of the
+   primitive currently being drawn.
+
+什么是 Shader？（[[https://en.wikipedia.org/wiki/Shader][Wikipedia]]）
+
+#+BEGIN_QUOTE
+  In computer graphics, a shader is a computer program that calculates
+  the appropriate levels of light, darkness, and color during the
+  rendering of a 3D scene - a process known as shading.
+#+END_QUOTE
+
+什么是 vertex
+shader？（[[https://en.wikipedia.org/wiki/Shader#Vertex_shaders][Wikipedia]]）
+
+#+BEGIN_QUOTE
+  Vertex shaders are the most established and common kind of 3D shader
+  and are run once for each vertex given to the graphics processor. The
+  purpose is to transform each vertex's 3D position in virtual space to
+  the 2D coordinate at which it appears on the screen (as well as a
+  depth value for the Z-buffer).
+#+END_QUOTE
+
+什么是 fragment
+shader？（[[https://en.wikipedia.org/wiki/Shader#Pixel_shaders][Wikipedia]]）
+
+#+BEGIN_QUOTE
+  Pixel shaders, also known as fragment shaders, compute color and other
+  attributes of each "fragment": a unit of rendering work affecting at
+  most a single output pixel.
+#+END_QUOTE
+
+几乎所有 WebGL API 都是关于配置状态的，这是为这对函数的运行做准备。WebGL
+is really just an API to run shaders. The only functions that actually
+write pixels are =gl.clear=, =gl.drawArrays= and =gl.drawElements=. All
+other API calls just setup internal state for when those 3 functions are
+called.（[[https://webglfundamentals.org/webgl/lessons/resources/webgl-state-diagram.html][WebGL
+State diagram]]）
+
+来自 WebGL State diagram 的一些提示：
+
+1. A programs only indirectly reference textures via texture units by
+   index. Similarly programs only indirectly reference buffers via
+   vertex array attribute index. The arrows showing these connection are
+   dotted to indicate they are not direct connections. Program
+   attributes are not connected to a specific vertex array nor are
+   program uniforms connected to a particular texture.
+2. Not all state is shown.
+
+For each thing you want to draw you setup a bunch of state then execute
+a pair of functions by calling =gl.drawArrays= or =gl.drawElements=
+which executes your shaders on the GPU.
+
+Any data you want those functions to have access to must be provided to
+the GPU. There are 4 ways a shader can receive data.
+
+1. Attributes and Buffers
+
+Buffers 是一组上传到 GPU 的二进制数据。
+
+Attributes 用于从 Buffers 中提取数据，并将其提供给你的顶点着色器。
+
+#+BEGIN_QUOTE
+  For example you might put positions in a buffer as three 32bit floats
+  per position. You would tell a particular attribute which buffer to
+  pull the positions out of, what type of data it should pull out (3
+  component 32 bit floating point numbers), what offset in the buffer
+  the positions start, and how many bytes to get from one position to
+  the next.
+#+END_QUOTE
+
+Buffers are not random access. Instead a vertex shader is executed a
+specified number of times. Each time it's executed the next value from
+each specified buffer is pulled out and assigned to an attribute.
+
+2. Uniforms(某种数学术语)
+
+韦氏词典解释中的较贴切的一条：
+
+#+BEGIN_QUOTE
+  relating to or being convergence of a series whose terms are functions
+  in such manner that the absolute value of the difference between the
+  sum of the first n terms of the series and the sum of all terms can be
+  made arbitrarily small for all values of the domain of the functions
+  by choosing the nth term sufficiently far along in the series
+#+END_QUOTE
+
+Uniforms are effectively global variables you set before you execute
+your shader program.
+
+3. Textures
+
+Sharder 程序中可以随机访问的一组数据。The most common thing to put in a
+texture is image data but textures are just data and can just as easily
+contain something other than colors.
+
+4. Varyings
+
+Varyings 是一种将数据从顶点着色器传递给片段着色器的方式。
+
+WebGL Hello World:
+
+WebGL只关心两件事：clip space coordinates and colors.
+其中，前者由顶点着色器提供，后者由片段着色器提供。

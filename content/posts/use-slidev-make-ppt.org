@@ -1,0 +1,74 @@
+#+TITLE: 使用 Slidev 制作 PPT
+#+DATE: <2022-11-14 Mon 21:57>
+#+TAGS[]: 技术
+
+截至 2022-05-28 处于公测阶段。
+
+** 安装配置
+
+*** 使用模板
+
+#+BEGIN_EXAMPLE
+    pnpm create slidev
+#+END_EXAMPLE
+
+*** 手动安装
+
+#+BEGIN_EXAMPLE
+    pnpm add @slidev/cli @slidev/theme-default
+    echo 'shamefully-hoist=true' >> .npmrc
+    touch slides.md
+    npx slidev -h
+#+END_EXAMPLE
+
+*** Docker
+
+#+BEGIN_EXAMPLE
+    docker run --name slidev --rm -it \
+        --user node \
+        -v ${PWD}:/slidev \
+        -p 3030:3030 \
+        tangramor/slidev:latest
+#+END_EXAMPLE
+
+** 特性支持
+
+-  Markdown 语法
+-  [[https://windicss.org/][Windi CSS]] 样式支持，可直接用 =<style>=
+   覆盖样式
+-  不同的
+   [[https://github.com/slidevjs/slidev/tree/main/packages/client/layouts][layout]]：cover,center
+   等
+-  背景图可以使用本地资源
+-  使用 [[https://prismjs.com/][Prism]] 和
+   [[https://github.com/shikijs/shiki][Shiki]]
+   支持代码高亮；行高亮（单次、多步骤）
+-  使用 [[https://github.com/Microsoft/monaco-editor][Monaco]]
+   支持在线修改内容
+-  静态资源：远程用 =![]()=；本地放在 public 文件夹，用 =/file.ext= 引用
+-  笔记：=<!-- Content --->= 中的内容作为笔记，在 Presenter Mode 显示
+-  多种 [[https://icones.js.org/][Icônes]] 可供添加
+-  支持 Latex，由 [[https://katex.org/][Katex]] 驱动
+-  支持 Diagrams，由 [[https://mermaid-js.github.io/mermaid/][Mermaid]]
+   驱动
+-  可以插入多个幻灯片文件：合并文档头部设置、复用幻灯片文档
+-  导航
+-  导航栏（左下角），快捷键
+-  幻灯片一览
+-  动画
+-  点击效果：定义点击次数、定义点击顺序
+-  运动效果
+-  导出 pdf, png
+-  单页面应用，可下载 pdf 设置，部署至 Netlify、Vercel、GitHub Pages
+-  支持录屏
+-  演示模式 Presenter Mode
+-  支持绘图和注释
+-  通过[[https://marketplace.visualstudio.com/items?itemName=antfu.slidev][扩展]]方便地在
+   VS Code 中查看（需要全局安装 =@slidev/cli=）
+
+** 问题
+
+1. 有些展示内容被覆盖了
+
+但是，这个仓库 https://github.com/cedric25/prisma-talk 的内容
+https://prisma-talk.netlify.app/4 没有覆盖。
