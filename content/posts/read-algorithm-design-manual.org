@@ -1,0 +1,158 @@
+#+TITLE: 算法设计手册
+#+DATE: <2022-11-14 Mon 15:34>
+#+TAGS[]: 阅读
+
+** 前言
+
+#+BEGIN_QUOTE
+  我能够使用某个算法解决我的问题吗？如果可以，那么怎么实现呢？
+#+END_QUOTE
+
+*** 原则：使用实际代码，而不是伪代码
+
+#+BEGIN_EXPORT html
+<img src="/images/ford-fulkerson-algorithm-wikipedia.png" alt="">
+<span class="caption">◎ </span>
+#+END_EXPORT
+
+这是描述最大流算法的伪代码，出自维基百科
+https://en.wikipedia.org/wiki/Ford%E2%80%93Fulkerson\_algorithm 。
+
+*** 原则：将算法和将要解决的问题分开
+
+算法的实现是基于某些具体的问题。给出算法的完整实现就意味着，该算法只能解决当前这一类问题。如果将泛化问题和特定问题纠结在一起，就很难分辨算法的原始结构。更糟的是，很多可用的实现依赖于特定的数据存储方式，但是却不易被人理解。
+
+在这本书中，使用了大量编程语言，并且遵循一种严格的设计规范，
+使得代码可读性高并且生成高效的解决方案。
+
+#+BEGIN_QUOTE
+  过早的优化是一切问题之源。
+
+  ------C. A. R. Hoare
+#+END_QUOTE
+
+*** 原则：仅仅讲述足够的数学
+
+本书关注如何将算法应用到实践中。
+
+*** 原则：用经验来支持数学分析
+
+本书从数学角度分析算法性能。
+
+将每个算法归到特定性能族中，并提供基准测试数据来得到算法的性能。
+
+*** 目标读者
+
+-  如果只能选择一本算法书，那就选 Donald Knuth
+   的《计算机程序设计艺术（卷1 ~ 3）》（1998）
+-  在面对一个算法问题，需要解决特定问题或者对现有解决方案进行改进时，选择这本书
+
+讨论算法时遵循的原则：
+
+-  使用模式化的统一格式描述每一个算法
+-  进行讨论并分析算法的重点
+-  使用不同编程语言
+-  描述算法的期望性能
+-  根据经验提供支持结论的证据
+
+*** 本书组织方式
+
+第一部分（第1～3章）介绍算法的必要数学基础。
+
+第二部分（第4～9章）介绍一系列算法。
+
+第三部分（第10, 11章）进一步阅读的索引。
+
+** 第 1 章：算法真的很重要
+
+在哪些情况下使用哪种算法会给编写的软件性能带来巨大差异。
+
+例子：编写程序用来检查程序是否出现内存泄露，malloc(), free(), exit()。
+
+*** 理解问题
+
+1. 理解问题
+2. 找出潜在原因
+3. 深入挖掘细节
+
+*** 如果需要，尽可能用实践检验
+
+测试程序 A：
+
+#+BEGIN_EXAMPLE
+    #include <stdio.h>
+    #include <stdlib.h>
+
+    int main(int argc, char **argv) {
+      int i = 0;
+      for (i = 0; i < 10000; i++) {
+        malloc(32);
+      }
+      exit(0);
+    }
+#+END_EXAMPLE
+
+出现警告：
+
+#+BEGIN_EXAMPLE
+    1.c: In function ‘main’:
+    1.c:7:5: warning: ignoring return value of ‘malloc’ declared with attribute ‘warn_unused_result’ [-Wunused-result]
+        7 |     malloc(32);
+          |     ^~~~~~~~~~
+#+END_EXAMPLE
+
+测试程序 B：
+
+#+BEGIN_EXAMPLE
+    #include <stdio.h>
+    #include <stdlib.h>
+
+    int main(int argc, char **argv) {
+      int i = 0;
+      for (i = 0; i < 10000; i++) {
+        void *x = malloc(32);
+        free(x);
+      }
+      exit(0);
+    }
+#+END_EXAMPLE
+
+测试程序 C：
+
+#+BEGIN_EXAMPLE
+    #include <stdio.h>
+    #include <stdlib.h>
+
+    int main(int argc, char **argv) {
+      int i = 0;
+      void *addrs[10000];
+      for (i = 0; i < 10000; i++) {
+        addrs[i] = malloc(32);
+      }
+      for (i = 0; i < 10000; i++) {
+        free(addrs[i]);
+      }
+      exit(0);
+    }
+#+END_EXAMPLE
+
+程序使用二叉树这一数据结构，但是并未进行*平衡处理*，这使得整个数据更像链表而非二叉树。
+
+*** 解决问题的算法
+
+二叉平衡查找树：一颗二叉查找树的根节点到任意一个叶子节点的路径长度都基本相等。
+
+*** 花絮
+
+每次请求的内存大小是否会影响 malloc() 和 free() 请求的性能？
+
+给出例子的目的：
+
+1. 内存分配以及释放背后的算法是惊人的复杂，这些算法也高度依赖操作系统的特性
+2. 在书中描述不同算法，并解释算法在具体场景中使用的侧重点
+
+*** 故事的寓意
+
+当选择一种解决方案时，必须在它的开销和带来的好处之间寻找平衡。
+
+** 第 2 章：算法的数学原理

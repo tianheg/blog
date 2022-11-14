@@ -1,0 +1,716 @@
+#+TITLE: Missing Semester of Your CS Education
+#+DATE: <2022-11-14 Mon 14:48>
+#+TAGS[]: 公开课
+
+** The Shell
+
+*** 常用命令
+
+cd、ls、pwd、echo、mv、rm、mkdir、rmdir
+
+**** 想做什么
+
+#+BEGIN_EXAMPLE
+    date
+#+END_EXAMPLE
+
+#+BEGIN_QUOTE
+  Fri May 13 12:15:07 PM CST 2022
+#+END_QUOTE
+
+#+BEGIN_EXAMPLE
+    echo hello
+    echo hello > hello.txt
+    echo hello >> hello.txt
+    cat < hello.txt
+    cat < hello.txt > hello2.txt
+#+END_EXAMPLE
+
+#+BEGIN_QUOTE
+  hello
+#+END_QUOTE
+
+第 2
+个命令：如果=hello.txt=不存在，新建后插入=hello=；如果存在用=hello=替换文件内容。
+
+第 3 个命令：与第 2
+个命令类似，唯一的区别在于，如果目标文件存在，不会覆盖文件内容，会在原来文本后附上=hello=。
+
+Shell
+通过环境变量搜寻可执行程序。=$PATH=、相对绝对路径、=ls=、=pwd=、=cd=。
+
+#+BEGIN_EXAMPLE
+    cd -
+#+END_EXAMPLE
+
+切换目录（2个）
+
+#+BEGIN_EXAMPLE
+    drwxr-xr-x
+#+END_EXAMPLE
+
+权限解释：
+
+1. 第一个字符表示是否是目录、软链接。
+2. 第二到四个字符表示当前用户的权限（是否可读、可写、可执行）。
+3. 第五到七个字符表示当前组的权限（是否可读、可写、可执行）。
+4. 最后三个字符表示除了当前用户和组以外的其他用户和组的权限。
+
+Input stream、output stream。
+
+=tee= 能够把输入输出 并把输出导入文件中。
+
+*** 管道 =|=
+
+#+BEGIN_EXAMPLE
+    ls -l | tail -n1
+#+END_EXAMPLE
+
+*** root user
+
+#+BEGIN_EXAMPLE
+    sudo su
+#+END_EXAMPLE
+
+=su=: super user
+
+** Shell Tools, Scripting
+
+#+BEGIN_SRC sh
+    $ foo=foer
+    $ echo "It's $foo"
+    It's foer
+    $ echo 'It is $foo'
+    It is $foo
+#+END_SRC
+
+注意彼此的区别。
+
+一个功能更全的 mkdir+cd 函数：
+
+#+BEGIN_SRC sh
+    mc () {
+      mkdir -p "$1"
+      cd "$1"
+    }
+#+END_SRC
+
+Shell 参数：
+
+-  =$0= - Name of the script
+-  =$1= to =$9= - Arguments to the script. =$1= is the first argument
+   and so on.
+-  =$@= - All the arguments
+-  =$#= - Number of arguments
+-  =$?= - Return code of the previous command
+-  =$$= - Process identification number (PID) for the current script
+-  =!!= - Entire last command, including arguments. A common pattern is
+   to execute a command only for it to fail due to missing permissions;
+   you can quickly re-execute the command with sudo by doing =sudo !!=
+-  =$_= - Last argument from the last command. If you are in an
+   interactive shell, you can also quickly get this value by typing
+   =Esc= followed by =.= or =Alt+.=
+
+Shell globbing:
+
+-  通配符
+-  ={}=
+
+发现一个图片格式转换利器：=convert=，由
+[[https://en.wikipedia.org/wiki/ImageMagick][imagemagick]] 提供。
+
+运行（=sh script.py=）了以下文件，电脑死机了。
+
+#+BEGIN_EXAMPLE
+    #!/usr/bin/env python
+
+    import sys
+    for arg in reversed(sys.argv[1:]):
+      print(arg)
+#+END_EXAMPLE
+
+Shell 脚本分析工具：[[https://www.shellcheck.net/][shellcheck]]。
+
+[[https://tldr.sh/][tldr]] 工具。
+
+ffmpeg 视频格式转换工具。
+
+find 更丰富的文件/目录查找工具。[[https://github.com/sharkdp/fd][fd]]:
+Simple, fast and user-friendly alternative to find.
+
+locate 是哪个软件包的？
+
+tree broot
+
+hstr
+
+take input from both arguments and STDIN: =ls | xargs rm=
+
+*** 练习
+
+1. 阅读 =man ls= 找到满足以下要求的命令：
+
+-  Includes all files, including hidden files
+-  Sizes are listed in human readable format (e.g. 454M instead of
+   454279954)
+-  Files are ordered by recency
+-  Output is colorized
+
+解答：
+
+#+BEGIN_SRC sh
+    ls -ahlt --color=auto
+#+END_SRC
+
+2. 在 marco.sh 文件中写两个函数 =marco=, =polo=。=marco=
+   能够保存当前工作目录，=polo= 能够让用户无论位于哪个文件夹下都能回到
+   =marco= 所保存的目录下
+
+解答：
+
+#+BEGIN_EXAMPLE
+    #!/usr/bin/env bash
+
+    currDir=null
+    marco () {
+      currDir=$(pwd)
+      echo $currDir
+    }
+    polo () {
+      cd $currDir
+      pwd
+    }
+#+END_EXAMPLE
+
+用 =source marco.sh= 将文件中的函数释放到当前 Shell 中。
+
+3. 调试一个很少失败的命令（UNRESOLVED）
+
+提供了一个脚本，不知道用来干嘛的。
+
+#+BEGIN_EXAMPLE
+    #!/usr/bin/env bash
+
+    n=$(( RANDOM % 100 ))
+
+    if [[ n -eq 42 ]]; then
+       echo "Something went wrong"
+       >&2 echo "The error was using magic numbers"
+       exit 1
+    fi
+
+    echo "Everything went according to plan"
+#+END_EXAMPLE
+
+提供的关键句子：
+
+-  runs the following script until it fails
+-  captures its standard output and error streams to files and prints
+   everything at the end
+
+4. xargs 将标准输出通过 =|= 作为标准输入，recursively finds all HTML
+   files in the folder and makes a zip with them
+
+Note that your command should work even if the files have spaces (hint:
+check -d flag for xargs).
+
+#+BEGIN_SRC sh
+    find . -name '*.html' -exec zip all.zip {} +
+#+END_SRC
+
+5. 找到当前文件夹下最近修改的那个文件
+
+一个脚本：
+
+#+BEGIN_SRC sh
+    find . -type f -printf '%T@ %p\n' \
+    | sort -n | tail -1 | cut -f2- -d" "
+    # https://stackoverflow.com/a/4561987
+#+END_SRC
+
+** Editors (Vim)
+
+*** Vim 哲学
+
+#+BEGIN_QUOTE
+  When programming, you spend most of your time reading/editing, not
+  writing. For this reason, Vim is a modal editor: it has different
+  modes for inserting text vs manipulating text. Vim is programmable
+  (with Vimscript and also other languages like Python), and Vim's
+  interface itself is a programming language: keystrokes (with mnemonic
+  names) are commands, and these commands are composable. Vim avoids the
+  use of the mouse, because it's too slow; Vim even avoids using the
+  arrow keys because it requires too much movement.
+
+  The end result is an editor that can match the speed at which you
+  think.
+#+END_QUOTE
+
+*** Modal editing
+
+Vim 有几种模式：
+
+-  normal Esc
+-  insert i
+-  replace R
+-  visual v
+-  plain
+-  line V
+-  block =<C-v>=
+-  command-line :
+
+=:help :w= 查看 =:w= 的相关内容，与 =:help w= 不同
+
+*** Basics
+
+1. 插入文本
+
+正常模式下，输入 i 即可。
+
+2. Buffers, tabs, and windows（split panes）
+3. Command-line
+
+-  :q quit (close window)
+-  :w save (“write”)
+-  :wq save and quit
+-  :e {name of file} open file for editing
+-  :ls show open buffers
+-  :help {topic} open help
+-  :help :w opens help for the :w command
+-  :help w opens help for the w movement
+
+*** Vim's interface is a programming language
+
+*** 移动
+
+-  Basic movement: =hjkl= (left, down, up, right)
+-  Words: =w= (next word), =b= (beginning of word), =e= (end of word)
+-  Lines: =0= (beginning of line), =^= (first non-blank character), =$=
+   (end of line)
+-  Screen: =H= (top of screen), =M= (middle of screen), =L= (bottom of
+   screen)
+-  Scroll: =Ctrl-u= (up), =Ctrl-d= (down)
+-  File: =gg= (beginning of file), =G= (end of file)
+-  Line numbers: =:{number}<CR>= or ={number}G= (line {number})
+-  Misc: =%= (corresponding item)
+-  Find: =f{character}=, =t{character}=, =F{character}=, =T{character}=
+
+   -  find/to forward/backward {character} on the current line
+   -  =,= / =;= for navigating matches
+
+-  Search: =/{regex}=, =n= / =N= for navigating matches
+
+*** 选择
+
+Visual modes:
+
+-  Visual: =v=
+-  Visual Line: =V=
+-  Visual Block: =Ctrl-v=
+
+Can use movement keys to make selection.
+
+*** 编辑
+
+-  =i= enter Insert mode
+
+   -  but for manipulating/deleting text, want to use something more
+      than backspace
+
+-  =o= / =O= insert line below / above
+-  =d{motion}= delete {motion}
+
+   -  e.g. =dw= is delete word, =d$= is delete to end of line, =d0= is
+      delete to beginning of line
+
+-  =c{motion}= change {motion}
+
+   -  e.g. =cw= is change word
+   -  like =d{motion}= followed by =i=
+
+-  =x= delete character (equal do =dl=)
+-  =s= substitute character (equal to =xi=)
+-  Visual mode + manipulation
+
+   -  select text, =d= to delete it or =c= to change it
+
+-  =u= to undo, =<C-r>= to redo
+-  =y= to copy / “yank” (some other commands like =d= also copy)
+-  =p= to paste
+-  Lots more to learn: e.g. =~= flips the case of a character
+
+*** 计数
+
+-  =3w= move 3 words forward
+-  =5j= move 5 lines down
+-  =7dw= delete 7 words
+
+*** Modifiers
+
+You can use modifiers to change the meaning of a noun. Some modifiers
+are =i=, which means “inner” or “inside”, and =a=, which means “around”.
+
+-  =ci(= change the contents inside the current pair of parentheses
+-  =ci[= change the contents inside the current pair of square brackets
+-  =da'= delete a single-quoted string, including the surrounding single
+   quotes
+
+*** 练习 Demo
+
+开始：
+
+#+BEGIN_EXAMPLE
+    def fizz_buzz(limit):
+        for i in range(limit):
+            if i % 3 == 0:
+                print('fizz')
+            if i % 5 == 0:
+                print('fizz')
+            if i % 3 and i % 5:
+                print(i)
+
+    def main():
+        fizz_buzz(10)
+#+END_EXAMPLE
+
+结束：
+
+#+BEGIN_EXAMPLE
+    def fizz_buzz(limit):
+      result = []
+      for i in range(0, limit):
+        if i % 3 == 0 and i % 5 == 0:
+          result.append('fizz-\nbuzz')
+        elif i % 3 == 0:
+          result.append('fizz')
+        elif i % 5 == 0:
+          result.append('buzz')
+        else:
+          result.append(str(i))
+      return result
+
+    print(fizz_buzz(10))
+#+END_EXAMPLE
+
+*** 自定义 Vim
+
+#+BEGIN_EXAMPLE
+    " Comments in Vimscript start with a `"`.
+
+    " If you open this file in Vim, it'll be syntax highlighted for you.
+
+    " Vim is based on Vi. Setting `nocompatible` switches from the default
+    " Vi-compatibility mode and enables useful Vim functionality. This
+    " configuration option turns out not to be necessary for the file named
+    " '~/.vimrc', because Vim automatically enters nocompatible mode if that file
+    " is present. But we're including it here just in case this config file is
+    " loaded some other way (e.g. saved as `foo`, and then Vim started with
+    " `vim -u foo`).
+    set nocompatible
+
+    " Turn on syntax highlighting.
+    syntax on
+
+    " Disable the default Vim startup message.
+    set shortmess+=I
+
+    " Show line numbers.
+    set number
+
+    " This enables relative line numbering mode. With both number and
+    " relativenumber enabled, the current line shows the true line number, while
+    " all other lines (above and below) are numbered relative to the current line.
+    " This is useful because you can tell, at a glance, what count is needed to
+    " jump up or down to a particular line, by {count}k to go up or {count}j to go
+    " down.
+    set relativenumber
+
+    " Always show the status line at the bottom, even if you only have one window open.
+    set laststatus=2
+
+    " The backspace key has slightly unintuitive behavior by default. For example,
+    " by default, you can't backspace before the insertion point set with 'i'.
+    " This configuration makes backspace behave more reasonably, in that you can
+    " backspace over anything.
+    set backspace=indent,eol,start
+
+    " By default, Vim doesn't let you hide a buffer (i.e. have a buffer that isn't
+    " shown in any window) that has unsaved changes. This is to prevent you from "
+    " forgetting about unsaved changes and then quitting e.g. via `:qa!`. We find
+    " hidden buffers helpful enough to disable this protection. See `:help hidden`
+    " for more information on this.
+    set hidden
+
+    " This setting makes search case-insensitive when all characters in the string
+    " being searched are lowercase. However, the search becomes case-sensitive if
+    " it contains any capital letters. This makes searching more convenient.
+    set ignorecase
+    set smartcase
+
+    " Enable searching as you type, rather than waiting till you press enter.
+    set incsearch
+
+    " Unbind some useless/annoying default key bindings.
+    nmap Q <Nop> " 'Q' in normal mode enters Ex mode. You almost never want this.
+
+    " Disable audible bell because it's annoying.
+    set noerrorbells visualbell t_vb=
+
+    " Enable mouse support. You should avoid relying on this too much, but it can
+    " sometimes be convenient.
+    set mouse+=a
+
+    " Try to prevent bad habits like using the arrow keys for movement. This is
+    " not the only possible bad habit. For example, holding down the h/j/k/l keys
+    " for movement, rather than using more efficient movement commands, is also a
+    " bad habit. The former is enforceable through a .vimrc, while we don't know
+    " how to prevent the latter.
+    " Do this in normal mode...
+    nnoremap <Left>  :echoe "Use h"<CR>
+    nnoremap <Right> :echoe "Use l"<CR>
+    nnoremap <Up>    :echoe "Use k"<CR>
+    nnoremap <Down>  :echoe "Use j"<CR>
+    " ...and in insert mode
+    inoremap <Left>  <ESC>:echoe "Use h"<CR>
+    inoremap <Right> <ESC>:echoe "Use l"<CR>
+    inoremap <Up>    <ESC>:echoe "Use k"<CR>
+    inoremap <Down>  <ESC>:echoe "Use j"<CR>
+#+END_EXAMPLE
+
+*** 扩展 Vim
+
+*** 高级使用
+
+#+BEGIN_QUOTE
+  *A good heuristic: whenever you're using your editor and you think
+  “there must be a better way of doing this”, there probably is: look it
+  up online.* {.is-success}
+#+END_QUOTE
+
+1. 查找替换
+
+=:s= (substitute) command
+([[https://vim.fandom.com/wiki/Search_and_replace][documentation]]).
+
+-  =%s/foo/bar/g=
+
+   -  replace foo with bar globally in file
+
+-  =%s/\[.*\](\(.*\))/\1/g=
+
+   -  replace named Markdown links with plain URLs
+
+2. 分割窗口
+
+=:sp=, =:vsp=
+
+3. 宏 Macros
+
+-  =q{character}= to start recording a macro in register ={character}=
+-  =q= to stop recording
+-  =@{character}= replays the macro
+-  Macro execution stops on error
+-  ={number}@{character}= executes a macro {number} times
+-  Macros can be recursive
+
+   -  first clear the macro with =q{character}q=
+   -  record the macro, with =@{character}= to invoke the macro
+      recursively (will be a no-op until recording is complete)
+
+-  Example: convert xml to json
+   ([[https://missing.csail.mit.edu/2020/files/example-data.xml][file]])
+
+   -  Array of objects with keys “name” / “email”
+   -  Use a Python program?
+   -  Use sed / regexes
+
+      -  =g/people/d=
+      -  =%s/<person>/{/g=
+      -  =%s/<name>\(.*\)<\/name>/"name": "\1",/g=
+      -  ...
+
+   -  Vim commands / macros
+
+      -  =Gdd=, =ggdd= delete first and last lines
+      -  Macro to format a single element (register =e=)
+
+         -  Go to line with =<name>=
+         -  =qe^r"f>s": "<ESC>f<C"<ESC>q=
+
+      -  Macro to format a person
+
+         -  Go to line with =<person>=
+         -  =qpS{<ESC>j@eA,<ESC>j@ejS},<ESC>q=
+
+      -  Macro to format a person and go to the next person
+
+         -  Go to line with =<person>=
+         -  =qq@pjq=
+
+      -  Execute macro until end of file
+
+         -  =999@q=
+
+      -  Manually remove last =,= and add =[= and =]= delimiters
+
+*** 资源
+
+-  =vimtutor= is a tutorial that comes installed with Vim - if Vim is
+   installed, you should be able to run =vimtutor= from your shell
+-  [[https://vim-adventures.com/][Vim Adventures]] is a game to learn
+   Vim
+-  [[https://vim.fandom.com/wiki/Vim_Tips_Wiki][Vim Tips Wiki]]
+-  [[https://web.archive.org/web/20220610123437/https://vimways.org/2019/][Vim
+   Advent Calendar]] has various Vim tips
+-  [[http://www.vimgolf.com/][Vim Golf]] is
+   [[https://en.wikipedia.org/wiki/Code_golf][code golf]], but where the
+   programming language is Vim's UI
+-  [[https://vi.stackexchange.com/][Vi/Vim Stack Exchange]]
+-  [[https://pragprog.com/titles/dnvim2/practical-vim-second-edition/][Practical
+   Vim]] (book)
+
+*** 练习
+
+1. 完成 =vimtutor=
+
+Lesson 1.3: TEXT EDITING - DELETION =x= 正常模式下按下，删除光标下的字符
+
+Lesson 1.5: TEXT EDITING - APPENDING =A=
+正常模式下按下，自动跳转到句子末尾并转为 insert 模式。
+
+Lesson 2.1: DELETION COMMANDS =dw= 删除一个单词（光标在单词首字母）
+
+Lesson 2.2: MORE DELETION COMMANDS =d$= 删除从光标到一行结尾的部分
+
+Lesson 2.3: ON OPERATORS AND MOTIONS 一个总结：=d motion= motion: - w
+删除到下一个单词的开始，不包括（下一个单词的）首字母 - e
+删除到当前单词的结束，包括当前单词的最后一个字符 - $
+删除从光标到一行结尾的部分
+
+Lesson 2.4: USING A COUNT FOR A MOTION =2w=
+向前移动2个单词，光标在单词首字母 =3e= 向前移动3个单词，光标在单词尾字母
+=0= 移动到一行的开头
+
+Lesson 2.5: USING A COUNT TO DELETE MORE 一个总结：=d number motion=
+motion: - d2w 删除光标之后的2个全大写单词
+
+Lesson 2.6: OPERATING ON LINES =dd= 删除光标所在行 =2dd=
+删除光标所在行+之后的一行
+
+Lesson 2.7: THE UNDO COMMAND =u= 撤销最后一次更改 =U=
+撤销当前行的所有更改
+
+Lesson 3.1: THE PUT COMMAND =p= 粘帖之前删除的内容
+
+Lesson 3.2: THE REPLACE COMMAND =rx= 将光标下的字符替换为 x
+
+Lesson 3.3: THE CHANGE OPERATOR =ce= 删除光标到单词结束的部分，自动转为
+insert 模式方便修改当前单词 =cc= 清空光标所在行的内容
+
+Lesson 3.4: MORE CHANGES USING c 一个总结：=c number motion= motion: - w
+word - $ 一行末尾
+
+Lesson 4.1: CURSOR LOCATION AND FILE STATUS CTRL-G
+显示光标所在行、文件状态 G 来到文件最后一行 gg 来到文件第一行 =num + G=
+跳到目标行 > Type the number of the line you were on and then G. This
+will return you to the line you were on when you first pressed CTRL-G.
+{.is-info}
+
+Lesson 4.2: THE SEARCH COMMAND / 搜索 n 再次向前搜索 N 再次向后搜索 ?
+向后搜索 CTRL-O takes you back to older positions, CTRL-I to newer
+positions
+
+Lesson 4.3: MATCHING PARENTHESES SEARCH %
+将光标放到括号（=(, [, {=）的前半部分，按下 %
+后光标会跳到对应括号的后半部分
+
+Lesson 4.4: THE SUBSTITUTE COMMAND =:s/old/new/g= 替换单词
+=:#,#s/old/new/g= # 代表改变的行号范围 =:%s/old/new/g= 改变文件全部内容
+=:%s/old/new/gc= 改变文件全部内容，逐个确认
+
+Lesson 5.1: HOW TO EXECUTE AN EXTERNAL COMMAND =:! command= 执行外部命令
+
+Lesson 5.2: MORE ON WRITING FILES =:w TEST= 在当前文件夹下新建一个名为
+TEST 的空文件 =:!ls= =:!rm TEST=
+
+Lesson 5.3: SELECTING TEXT TO WRITE =v= -> =:w FILE= 将选中的部分写入
+FILE 文件，如果文件已经存在用 =:w! FILE= 可以覆盖
+
+Lesson 5.4: RETRIEVING AND MERGING FILES =:r FILE= 将 FILE
+插入当前文件，=:r !ls= 将 ls 的输出插入当前文件
+
+Lesson 6.1: THE OPEN COMMAND =o= open up a line BELOW the cursor and
+place you in Insert mode =O= open up a line ABOVE the cursor and place
+you in Insert mode
+
+Lesson 6.2: THE APPEND COMMAND =e= 移动光标到下一个单词的最后一个字符
+=a= 移动到单词的下一个字符位，并进入 Insert 模式 =A=
+移动到一行的末尾，并进入 Insert 模式
+
+Lesson 6.3: ANOTHER WAY TO REPLACE 光标位于想替换的位置 -> =R= ->
+输入替换内容
+
+Lesson 6.4: COPY AND PASTE TEXT =v= -> 选择待复制文本 -> =y= ->
+移动光标到待粘贴位置 -> =p= =yy= 复制整行 =yw=
+赋值一个单词，光标要放在单词的开头
+
+Lesson 6.5: SET OPTION =/ignore= 搜索 ignore =:set ic= 'ic'(Ignore case)
+=:set hls is= 'hlsearch' 'incsearch' =:set noic= 关闭 Ignore case
+=:nohlsearch= =/ignore\c= 仅一次 Ignore case
+
+Lesson 7.1: GETTING HELP =<HELP>=，=<F1>= 按键，=:help= CTRL-W CTRL-W
+跳到另一个窗口 =:q= 退出当前窗口
+
+Lesson 7.2: CREATE A STARTUP SCRIPT =:e ~/.vimrc= ->
+=:r $VIMRUNTIME/vimrc_example.vim= -> =:w=
+
+Lesson 7.3: COMPLETION =:set nocp= -> =:!ls= -> =:e= -> CTRL-D
+
+2. Download our [[https://missing.csail.mit.edu/2020/files/vimrc][basic
+   vimrc]] and save it to =~/.vimrc=. Read through the well-commented
+   file (using Vim!), and observe how Vim looks and behaves slightly
+   differently with the new config.
+3. Install and configure a plugin:
+   [[https://github.com/ctrlpvim/ctrlp.vim][ctrlp.vim]].
+
+   1. Create the plugins directory with
+      =mkdir -p ~/.vim/pack/vendor/start=
+   2. Download the plugin:
+      =cd ~/.vim/pack/vendor/start; git clone https://github.com/ctrlpvim/ctrlp.vim=
+   3. Read the
+      [[https://github.com/ctrlpvim/ctrlp.vim/blob/master/readme.md][documentation]]
+      for the plugin. Try using CtrlP to locate a file by navigating to
+      a project directory, opening Vim, and using the Vim command-line
+      to start =:CtrlP=.
+   4. Customize CtrlP by adding
+      [[https://github.com/ctrlpvim/ctrlp.vim/blob/master/readme.md#basic-options][configuration]]
+      to your =~/.vimrc= to open CtrlP by pressing Ctrl-P.
+
+4. To practice using Vim, re-do the
+   [[https://missing.csail.mit.edu/2020/editors/#demo][Demo]] from
+   lecture on your own machine.
+5. Use Vim for /all/ your text editing for the next month. Whenever
+   something seems inefficient, or when you think “there must be a
+   better way”, try Googling it, there probably is. If you get stuck,
+   come to office hours or send us an email.
+6. Configure your other tools to use Vim bindings (see instructions
+   above).
+7. Further customize your =~/.vimrc= and install more plugins.
+8. (Advanced) Convert XML to JSON
+   ([[https://missing.csail.mit.edu/2020/files/example-data.xml][example
+   file]]) using Vim macros. Try to do this on your own, but you can
+   look at the
+   [[https://missing.csail.mit.edu/2020/editors/#macros][macros]]
+   section above if you get stuck.
+
+** Data Wrangling
+
+#+BEGIN_SRC sh
+    ssh myserver journalctl
+     | grep sshd
+     | grep "Disconnected from"
+     | sed -E 's/.*Disconnected from (invalid |authenticating )?user (.*) [^ ]+ port [0-9]+( \[preauth\])?$/\2/'
+     | sort | uniq -c
+     | sort -nk1,1 | tail -n10
+     | awk '{print $2}' | paste -sd,
+#+END_SRC
