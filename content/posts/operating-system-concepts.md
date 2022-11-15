@@ -1,8 +1,8 @@
 +++
-title = "阅读《Operating System Concepts 9ed》"
+title = "Operating System Concepts"
 date = 2022-02-21T00:00:00+08:00
 lastmod = 2022-02-21T22:13:58+08:00
-tags = ["技术", "Operating System"]
+tags = ["阅读"]
 draft = false
 +++
 

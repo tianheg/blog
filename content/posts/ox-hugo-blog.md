@@ -2,7 +2,7 @@
 title = "使用 ox-hugo 构建 Hugo blog 工作流"
 date = 2022-02-25T00:00:00+08:00
 lastmod = 2022-02-25T13:15:07+08:00
-tags = ["技术", "Hugo", "Orgmode"]
+tags = ["技术", "Hugo", "Org-mode"]
 draft = false
 +++
 

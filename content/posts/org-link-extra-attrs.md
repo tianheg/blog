@@ -2,7 +2,7 @@
 title = "为 Org 导出的 HTML Link 添加 target,rel 属性"
 date = 2021-11-27T00:00:00+08:00
 lastmod = 2022-02-16T16:18:07+08:00
-tags = ["Orgmode", "技术"]
+tags = ["Org-mode", "技术"]
 draft = false
 +++
 

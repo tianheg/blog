@@ -2,7 +2,7 @@
 title = "Bold in Org-mode"
 date = 2021-11-25T00:00:00+08:00
 lastmod = 2022-02-12T21:40:46+08:00
-tags = ["Orgmode", "技术"]
+tags = ["Org-mode", "技术"]
 draft = false
 +++
 

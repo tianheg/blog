@@ -2,7 +2,7 @@
 title = "Emacs 下将 Org 导出为 pdf"
 date = 2021-12-27T00:00:00+08:00
 lastmod = 2022-02-12T21:42:53+08:00
-tags = ["Orgmode", "技术"]
+tags = ["Org-mode", "技术"]
 draft = false
 +++
 

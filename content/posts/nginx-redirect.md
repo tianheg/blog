@@ -2,7 +2,7 @@
 title = "Nginx Redirect"
 date = 2021-12-03T00:00:00+08:00
 lastmod = 2022-06-18T17:07:28+08:00
-tags = ["Nginx", "技术", "Docker"]
+tags = ["技术"]
 draft = false
 +++
 
