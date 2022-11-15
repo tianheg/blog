@@ -2,7 +2,7 @@
 title = "使用 Org-mode 为文本添加高亮"
 date = 2021-12-10T00:00:00+08:00
 lastmod = 2022-02-12T21:43:44+08:00
-tags = ["Orgmode", "技术"]
+tags = ["Org-mode", "技术"]
 draft = false
 +++
 

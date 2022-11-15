@@ -2,7 +2,7 @@
 title = "Sass Basics"
 date = 2022-02-10T00:00:00+08:00
 lastmod = 2022-02-16T15:12:55+08:00
-tags = ["技术", "Sass"]
+tags = ["技术"]
 draft = false
 +++
 
