@@ -161,6 +161,8 @@ Email: `me@tianheg.xyz`（如果超过三天没有回复，试试 `yidajiabei@gm
 <details>
 <summary><span>博客改变记录</span></summary>
 
+2022-11-15 将所有他处的笔记移动到博客中，下一步计划——合并同类文章，删除无价值文章，简化标签分类。
+
 2022-10-22 在每页加上“编辑”链接，方便修改
 
 2022-10-12 改变博客域名为 [tianheg.xyz](https://tianheg.xyz)，原域名 `www.yidajiabei.xyz`
