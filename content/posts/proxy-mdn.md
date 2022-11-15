@@ -2,7 +2,7 @@
 title = "为 MDN 网站设置代理"
 date = 2022-08-09T11:13:00+08:00
 lastmod = 2022-08-09T12:38:52+08:00
-tags = ["技术", "Proxy"]
+tags = ["技术"]
 draft = false
 +++
 

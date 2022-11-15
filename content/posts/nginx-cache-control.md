@@ -2,7 +2,7 @@
 title = "Nginx(with nginx-proxy) 设置 Cache-Control"
 date = 2022-06-15T12:13:00+08:00
 lastmod = 2022-06-15T12:57:20+08:00
-tags = ["技术", "Nginx", "Docker"]
+tags = ["技术"]
 draft = false
 +++
 

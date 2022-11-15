@@ -2,7 +2,7 @@
 title = "深入 PHP 与 jQuery 开发"
 date = 2022-02-06T00:00:00+08:00
 lastmod = 2022-02-16T15:31:27+08:00
-tags = ["技术", "jQuery", "PHP"]
+tags = ["技术", "阅读"]
 draft = false
 +++
 

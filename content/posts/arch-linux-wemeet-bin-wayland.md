@@ -2,7 +2,7 @@
 title = "wemeet-bin 无法在 Wayland 下使用"
 date = 2022-05-04T14:29:00+08:00
 lastmod = 2022-05-04T14:31:58+08:00
-tags = ["技术", "Wayland", "Arch Linux"]
+tags = ["技术", "Arch Linux"]
 draft = false
 +++
 

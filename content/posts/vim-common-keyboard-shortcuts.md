@@ -2,7 +2,7 @@
 title = "Vim 常用快捷键总结"
 date = 2021-10-29T00:00:00+08:00
 lastmod = 2022-02-16T09:42:59+08:00
-tags = ["技术", "Vim"]
+tags = ["技术"]
 draft = false
 +++
 

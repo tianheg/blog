@@ -3,7 +3,7 @@ title = "Sioyek - 跨平台 PDF 阅读软件"
 author = ["Tianhe Gao"]
 date = 2022-09-03T15:10:00+08:00
 lastmod = 2022-09-03T18:31:52+08:00
-tags = ["技术", "Software"]
+tags = ["技术"]
 draft = false
 +++
 

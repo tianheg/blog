@@ -2,7 +2,7 @@
 title = "使用 Docker Nginx"
 date = 2022-02-17T00:00:00+08:00
 lastmod = 2022-02-26T21:22:42+08:00
-tags = ["技术", "Nginx", "Docker"]
+tags = ["技术"]
 draft = false
 +++
 

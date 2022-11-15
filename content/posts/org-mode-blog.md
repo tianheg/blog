@@ -3,7 +3,7 @@ title = "使用 Org Mode 写博客"
 author = ["Tianhe Gao"]
 date = 2021-12-08T00:00:00+08:00
 lastmod = 2022-09-19T14:50:35+08:00
-tags = ["Orgmode", "技术"]
+tags = ["Org-mode", "技术"]
 draft = false
 +++
 
