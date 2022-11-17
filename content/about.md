@@ -141,6 +141,7 @@ title = "关于"
 - [BlackGlory](https://blackglory.me/)
 - [木遥的窗子](http://blog.farmostwood.net/)
 - [何流·或许重要](https://probablygood.zhubai.love/)
+- [富于理性](https://havefun.zhubai.love/)
 
 ## 一些有趣或有意义的 badge
 
