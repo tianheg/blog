@@ -183,9 +183,31 @@ switch (true) {
 
 标准 for 循环：
 
+#+BEGIN_SRC js
+for (initializer; condition; final-expression) {
+  // code to run
+}
+#+END_SRC
+
+注意，与 for...of 的区别。
+
 break、continue
 
-while、do...while
+while:
+
+#+BEGIN_SRC js
+initializer
+while (condition) {
+  // code to run
+
+  final-expression
+}
+#+END_SRC
+
+如何选择循环句式：
+
+1. 迭代数组时，不需要特别指定次序，使用 for...of 最佳
+2. 其他情况，用 for while do...while 彼此大概率可互换
 
 ** 函数——可复用的代码块
 
