@@ -213,8 +213,51 @@ while (condition) {
 
 ~phonebook[i].name.toLowerCase()~ 可以， ~phonebook[i][name].toLowerCase()~ 报错，为何？
 
+#+BEGIN_SRC js
+while (i > 1) {
+  if (isPrime(i) === true) {
+    para.textContent += `${i} `
+  } else {
+    i--
+    continue
+  }
+
+  i--
+}
+
+// Refer:
+// https://discourse.mozilla.org/t/assessment-request-for-loops-3-skill-test-confused-on-using-continue-statement-with-loops/67100
+#+END_SRC
+
+上面代码，如果没有第一个 ~i--~ 就会陷入无限循环。
+
 ** 函数——可复用的代码块
 
 JS 有很多内建函数，比如 string.replace(), array.join(), Math.random() 等等。
 
 如果函数是属于对象的就被称为方法。函数表达式、函数参数、指定默认函数参数、匿名函数与箭头函数、函数作用域。
+
+可为函数指定默认参数。
+
+#+BEGIN_SRC js
+function hello(name = "Jim") {
+  console.log(`Hello ${name}!`);
+}
+
+hello();
+hello("tianheg");
+#+END_SRC
+
+匿名函数，函数表达式：
+
+#+BEGIN_SRC js
+(function () {
+ alert('hello');
+})
+
+const helloAlert = function () {
+  alert('hello');
+}
+#+END_SRC
+
+与函数声明不同，函数表达式不提升。
