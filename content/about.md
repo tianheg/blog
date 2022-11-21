@@ -123,6 +123,7 @@ title = "关于"
 
 ## 常读
 
+- [CSS Tricks](https://css-tricks.com/)
 - [earfanfan | 袁凡](https://yuanfan.rbind.io/)
 - [奇客资讯网](https://www.solidot.org/)
 - [V2EX](https://www.v2ex.com/)
