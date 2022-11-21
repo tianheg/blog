@@ -209,6 +209,10 @@ while (condition) {
 1. 迭代数组时，不需要特别指定次序，使用 for...of 最佳
 2. 其他情况，用 for while do...while 彼此大概率可互换
 
+~person === "Phil" || person === "Lola"~ 和 ~person === ("Phil" || "Lola")~ 在 if 句式中并不相同，为何？
+
+~phonebook[i].name.toLowerCase()~ 可以， ~phonebook[i][name].toLowerCase()~ 报错，为何？
+
 ** 函数——可复用的代码块
 
 JS 有很多内建函数，比如 string.replace(), array.join(), Math.random() 等等。
