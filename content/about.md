@@ -125,16 +125,11 @@ title = "关于"
 
 - [CSS Tricks](https://css-tricks.com/)
 - [earfanfan | 袁凡](https://yuanfan.rbind.io/)
-- [奇客资讯网](https://www.solidot.org/)
 - [V2EX](https://www.v2ex.com/)
 - [文浩·事不过三](https://via.zhubai.love/)
 - [Conge](https://conge.github.io/)
 - [于淼](https://yufree.cn/cn/)
-- [zen habits](https://zenhabits.net/)
-- [BlackGlory](https://blackglory.me/)
 - [木遥的窗子](http://blog.farmostwood.net/)
-- [何流·或许重要](https://probablygood.zhubai.love/)
-- [富于理性](https://havefun.zhubai.love/)
 
 ## 一些有趣或有意义的 badge
 
