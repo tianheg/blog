@@ -3,6 +3,105 @@
 #+TAGS[]: 他山之石
 #+TOC: true
 
+* [[https://quic.xargs.org/][The Illustrated QUIC Connection: Every Byte Explained]]
+
+QUIC 是一种安全的基于 UDP 的控制流协议，它构成了 HTTP/3 的基础。
+
+1, Client key exchange generation: 生成公私密钥对
+
+2, Client initial keys calc
+
+3, UDP 数据报 1 - Client hello
+
+- Client initial packet
+- TLS: ClientHello
+- Padding
+
+4, Server key exchange generation
+
+5, Server initial keys calc
+
+6, UDP 数据报 2 - Server hello and handshake
+
+- Server initial packet
+- TLS: ServerHello
+- Server handshake keys calc
+- Server handshake packet
+- TLS: EncryptedExtensions
+- TLS: Certificate
+
+7, UDP 数据报 3 - Server handshake finished
+
+- Server handshake packet
+- TLS: CertificateVerify
+- TLS: Handshake finished
+
+8, Client handshake keys calc
+
+9, UDP 数据报 4 - Acks
+
+- Client initial packet
+- Client handshake packet
+- Padding
+
+10, Server application keys calc
+
+11, Client application keys calc
+
+12, UDP 数据报 5 - Client handshake finished, "ping"
+
+- Client handshake packet
+- TLS: handshake finished
+- Client application packet
+
+13, UDP 数据报 6 -"pong"
+
+- Server handshake packet
+- Server application packet
+
+14, UDP 数据报 7 - Acks
+
+- Client application packet
+
+15, UDP 数据报 8 - Close connection
+
+- Server application packet
+
+** 数据报含义
+
+#+BEGIN_SRC txt
+cd
+packet header byte
+00 00 00 01
+QUIC version
+08 00 01 02 03 04 05 06 07
+Destination connection ID
+05 63 5f 63 69 64
+Source connection ID
+00
+Token
+41 03
+Packet length
+98
+Packet number
+1c 36 a7 ed 78 71 6b e9 71 1b a4 98 b7 ed 86 84 43 bb 2e 0c
+51 4d 4d 84 8e ad cc 7a 00 d2 5c e9 f9 af a4 83 97 80 88 de
+83 6b e6 8c 0b 32 a2 45 95 d7 81 3e a5 41 4a 91 99 32 9a 6d
+9f 7f 76 0d d8 bb 24 9b f3 f5 3d 9a 77 fb b7 b3 95 b8 d6 6d
+78 79 a5 1f e5 9e f9 60 1f 79 99 8e b3 56 8e 1f dc 78 9f 64
+0a ca b3 85 8a 82 ef 29 30 fa 5c e1 4b 5b 9e a0 bd b2 9f 45
+72 da 85 aa 3d ef 39 b7 ef af ff a0 74 b9 26 70 70 d5 0b 5d
+07 84 2e 49 bb a3 bc 78 7f f2 95 d6 ae 3b 51 43 05 f1 02 af
+e5 a0 47 b3 fb 4c 99 eb 92 a2 74 d2 44 d6 04 92 c0 e2 e6 e2
+12 ce f0 f9 e3 f6 2e fd 09 55 e7 1c 76 8a a6 bb 3c d8 0b bb
+37 55 c8 b7 eb ee 32 71 2f 40 f2 24 51 19 48 70 21 b4 b8 4e
+15 65 e3 ca 31 96 7a c8 60 4d 40 32 17 0d ec 28 0a ee fa 09
+5d 08
+Encrypted data
+b3 b7 24 1e f6 64 6a 6c 86 e5 c6 2c e0 8b e0 99
+Auth tag
+#+END_SRC
+
 * [[https://probablygood.zhubai.love/posts/2203759983047704576][共同世界：我的哲学之路（一） | 或许重要]]
 
 作者何流记述了自己的哲学之路，我发现在他的哲学旅程中，会阅读大量的哲学书籍并且进行思考辩论，甚至是哲学写作。我的哲学旅程刚刚起步，《哲学的故事》才刚读完，未来还有很多值得做的事情。
