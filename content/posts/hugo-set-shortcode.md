@@ -6,6 +6,34 @@ tags = ["技术", "Hugo"]
 draft = false
 +++
 
+## tasklist
+
+```html
+<div class="tasklist">
+  {{ (markdownify .Inner) }}
+</div>
+```
+
+```scss
+// list task box
+.tasklist ul {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+}
+```
+
+在 md/org 格式文件都通过相同方式使用（使用时删去所有的 `\`）：
+
+```md
+{{\< tasklist \>}}
+
+- [ ] test
+- [x] test
+
+{{\< \/tasklist \>}}
+```
+
 ## align {#align}
 
 对文字进行居中、居左、居右的设置。在 `~/layouts/shortcodes/` 下创建 `align.html` ，内容如下：
