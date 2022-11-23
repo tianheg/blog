@@ -3,6 +3,24 @@
 #+TAGS[]: 他山之石
 #+TOC: true
 
+* [[https://effective-shell.com/][Effective Shell]]
+
+** Transitioning to the Shell
+
+一、Navigating system
+
+pushd(进入其他目录), popd(回到之前目录), dirs(展示目录堆栈里的目录), cd -(回到上一次目录), pwd(print working directory)/$PWD, ls(list directory), cd(change directory)
+
+Paths(absolute, relative), ./.., cd ~/$HOME/cd(home directory)
+
+二、Managing files
+
+wget(web get), file(判断文件类型), unzip/zip, rm(remove, 如果要移除内部有文件的目录，需要加后缀 -r[recursive]), tree(显示当前目录结构), cp(copy), mv, mkdir( ~mkdir -p~ p[创建父目录] ), rmdir(如果目录中有文件会失败), cat(concatenated)
+
+- ~wget url -O download_location~
+- 使用 rm, rmdir 删去的目录文件，会永远消失
+
+
 * [[https://quic.xargs.org/][The Illustrated QUIC Connection: Every Byte Explained]]
 
 QUIC 是一种安全的基于 UDP 的控制流协议，它构成了 HTTP/3 的基础。
