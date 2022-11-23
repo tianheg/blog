@@ -123,7 +123,7 @@ title = "关于"
 
 ## 常读
 
-- [CSS Tricks](https://css-tricks.com/)
+- [CSS Tricks](https://css-tricks.com/) || [Smashing Magazine](https://www.smashingmagazine.com/)
 - [earfanfan | 袁凡](https://yuanfan.rbind.io/)
 - [V2EX](https://www.v2ex.com/)
 - [文浩·事不过三](https://via.zhubai.love/)
