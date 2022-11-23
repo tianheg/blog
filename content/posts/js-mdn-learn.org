@@ -261,3 +261,40 @@ const helloAlert = function () {
 #+END_SRC
 
 与函数声明不同，函数表达式不提升。
+
+函数作用域：
+
+全局作用域
+
+
+Test your skills: Functions 3 的解决办法：
+
+#+BEGIN_SRC js
+const names = [
+  "Chris",
+  "Li Kang",
+  "Anne",
+  "Francesca",
+  "Mustafa",
+  "Tina",
+  "Bert",
+  "Jada"
+];
+const para = document.createElement("p");
+const section = document.querySelector("section");
+
+// Add your code here
+// Refer https://codepen.io/MacNulty/project/editor/XxYjLw
+function random(lowerBound, upperBound) {
+  return Math.floor(Math.random() * (upperBound - lowerBound)) + lowerBound;
+}
+
+function chooseName() {
+  return names[random(0, 7)];
+}
+para.textContent = chooseName();
+
+// Don't edit the code below here!
+
+section.appendChild(para);
+#+END_SRC
