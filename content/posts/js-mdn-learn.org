@@ -301,3 +301,7 @@ section.appendChild(para);
 ** 构建自己的函数
 
 ~btn.addEventListener("click", funcName)~ 与 ~btn.addEventListener("click", funcName())~ 有区别，前者只有 click 事件发生时才执行，后者只要页面 reload 就立即执行不等待 click 事件发生，在此种上下文中 ~funcName()~ 中的括号还被称为“函数调用运算符（function invocation operator）”。 ~btn.addEventListener("click", () => funcName("sth"))~ 此种匿名函数形式，则不会如上述第二种立即执行，该种不在立即执行的作用域中。
+
+** 函数返回值
+
+有些函数无返回值。通过函数返回计算值。使用 return 返回值。
