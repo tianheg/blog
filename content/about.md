@@ -130,6 +130,7 @@ title = "关于"
 - [Conge](https://conge.github.io/)
 - [于淼](https://yufree.cn/cn/)
 - [木遥的窗子](http://blog.farmostwood.net/)
+- [BlogFun](https://bloghub.fun/) by shidenggui
 
 ## 一些有趣或有意义的 badge
 
