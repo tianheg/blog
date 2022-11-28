@@ -1,0 +1,48 @@
+#+TITLE: Operating Systems: Three Easy Pieces（READing）
+#+DATE: <2022-11-28 Mon 21:38>
+#+TAGS[]: 阅读
+#+TOC: true
+
+[[https://pages.cs.wisc.edu/~remzi/OSTEP/][书的主页]]，[[https://github.com/remzi-arpacidusseau/ostep-code][书的示例代码]]，[[https://github.com/remzi-arpacidusseau/ostep-projects][书的项目代码]]，[[https://github.com/remzi-arpacidusseau/ostep-homework][书的 Homework 代码]]
+
+[[https://pages.cs.wisc.edu/~remzi/OSTEP/toc.pdf][书的目录（PDF 文件）]]
+
+{{< tasklist >}}
+- [ ] Introduction to Operating Systems
+  - [x] Virtualizing The CPU
+  - [ ] Virtualizing Memory
+  - [ ] Concurrency
+  - [ ] Persistence
+  - [ ] Design Goals
+  - [ ] Some history
+  - [ ] Summary
+  - [ ] References
+  - [ ] Homework
+{{< /tasklist >}}
+
+* Intro
+** Virtualizing The CPU
+
+主文件 cpu.c：
+
+#+BEGIN_SRC c
+#include <stdio.h>
+#include <stdlib.h>
+#include <sys/time.h>
+#include <assert.h>
+#include "common.h"
+
+int main(int argc, char *argv[])
+{
+  if (argc != 2) {
+    fprintf(stderr, "usage: cpu <string>\n");
+    exit(1);
+  }
+  char *str = argv[1];
+  while(1) {
+    Spin(1);
+    printf("%s\n", str);
+  }
+  return 0;
+}
+#+END_SRC
