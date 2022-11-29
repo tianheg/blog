@@ -26,7 +26,7 @@
 - [x]  [Looping code](https://developer.mozilla.org/en-US/docs/Learn/JavaScript/Building_blocks/Looping_code)
 - [x]  [Functions — reusable blocks of code](https://developer.mozilla.org/en-US/docs/Learn/JavaScript/Building_blocks/Functions)
 - [x]  [Build your own function](https://developer.mozilla.org/en-US/docs/Learn/JavaScript/Building_blocks/Build_your_own_function)
-- [ ]  [Function return values](https://developer.mozilla.org/en-US/docs/Learn/JavaScript/Building_blocks/Return_values)
+- [x]  [Function return values](https://developer.mozilla.org/en-US/docs/Learn/JavaScript/Building_blocks/Return_values)
 - [ ]  [Introduction to events](https://developer.mozilla.org/en-US/docs/Learn/JavaScript/Building_blocks/Events)
 - [ ]  **Assessments** [Image gallery](https://developer.mozilla.org/en-US/docs/Learn/JavaScript/Building_blocks/Image_gallery)
 
@@ -365,3 +365,16 @@ section.appendChild(para);
 
 有些函数无返回值。通过函数返回计算值。使用 return 返回值。
 
+
+** 介绍事件
+
+#+BEGIN_SRC js
+btn.addEventListener("click", () => {
+  const rndCol = `rgb(${random(255)}, ${random(255)}, ${random(255)})`;
+  document.body.style.backgroundColor = rndCol;
+});
+#+END_SRC
+
+在 JS 中，面向网页的事件模型与用于其他环境的事件模型并不相同。
+
+addEventListener(), removeEventListener()
