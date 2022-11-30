@@ -377,4 +377,56 @@ btn.addEventListener("click", () => {
 
 在 JS 中，面向网页的事件模型与用于其他环境的事件模型并不相同。
 
-addEventListener(), removeEventListener()
+addEventListener(), removeEventListener() 第二个不明白如何使用，我以为添加一个事件，再通过第二个移除后，添加的事件会失效，但实际并非如此。使用 AbortController() 就可以：
+
+#+BEGIN_SRC js
+const clickTarget = document.querySelector("button");
+
+const controller = new AbortController();
+
+clickTarget.addEventListener("click", changeBackground, {
+  signal: controller.signal
+});
+
+controller.abort();
+
+function changeBackground() {
+  const rndCol = `rgb(${random(255)}, ${random(255)}, ${random(255)})`;
+  document.body.style.backgroundColor = rndCol;
+}
+
+function random(num) {
+  return Math.floor(Math.random() * (num + 1));
+}
+#+END_SRC
+
+#+BEGIN_SRC html
+<button>Change color</button>
+#+END_SRC
+
+** 为单独事件添加多个监听器
+
+#+BEGIN_SRC js
+myElement.addEventListener('click', functionA);
+myElement.addEventListener('click', functionB);
+#+END_SRC
+
+当事件发生，两个函数都会执行。
+
+** 其他注册事件处理程序的方式
+
+1, event handler properties
+
+#+BEGIN_SRC js
+btn.onclick = () => {
+  // ...
+}
+#+END_SRC
+
+此时就不能设置多个监听函数了。
+
+2, inline event handlers(不建议使用)
+
+#+BEGIN_SRC html
+<button onclick="bgChange()">Press me</button>
+#+END_SRC
