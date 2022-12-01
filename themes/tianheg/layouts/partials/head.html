@@ -89,8 +89,6 @@
     {{- with .Site.Params.openGraph -}}
         {{ partial "utils/open-graph.html" (dict "$" $ "description" $description) }}
     {{- end }}
-    
-    {{ partial "custom/head.html" . }}
 
     {{ if  (eq hugo.Environment "production") }}
         <!-- Cloudflare Web Analytics -->
