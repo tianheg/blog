@@ -1,61 +1,61 @@
 .main {
-    padding-bottom: 5em;
+  padding-bottom: 5em;
 }
 
 .post-body {
-    margin-top: 4em !important;
+  margin-top: 4em !important;
 }
 
 .nav {
-    font-size: 1em;
-    margin-top: 0.4em;
+  font-size: 1em;
+  margin-top: 0.4em;
 }
 
 [data-theme="dark"] {
 
-    .theme-icon-dark,
-    #lang-switcher,
-    .footer-icon {
-        opacity: 0.75;
-    }
+  .theme-icon-dark,
+  #lang-switcher,
+  .footer-icon {
+    opacity: 0.75;
+  }
 }
 
 #lang-switcher {
-    margin-left: 0.3em;
+  margin-left: 0.3em;
 }
 
 @media (max-width: $maxWidth) {
-    .nav {
-        margin: 2em 0;
-    }
+  .nav {
+    margin: 2em 0;
+  }
 
-    .menu-item-name {
-        font-size: 80%;
-    }
+  .menu-item-name {
+    font-size: 80%;
+  }
 
-    :root {
-        .theme-icon-light {
-            display: inline;
-        }
+  :root {
+    .theme-icon-light {
+      display: inline;
     }
+  }
 
-    [data-theme="dark"] {
-        .theme-icon-dark {
-            display: inline !important;
-        }
+  [data-theme="dark"] {
+    .theme-icon-dark {
+      display: inline !important;
     }
+  }
 
-    #lang-switcher {
-        margin: 0;
-    }
+  #lang-switcher {
+    margin: 0;
+  }
 }
 
 .nav-toggle {
-    transform: translateY(0.4em);
+  transform: translateY(0.4em);
 }
 
 .footer {
-    letter-spacing: -0.1em;
+  letter-spacing: -0.1em;
 }
 
 
@@ -71,16 +71,16 @@
 // }
 
 :root {
-    --text-wdth: 90;
-    --text-opsz: 40;
-    --text-YTLC: 460;
+  --text-wdth: 90;
+  --text-opsz: 40;
+  --text-YTLC: 460;
 }
 
 body {
-    font-variation-settings:
-        'wdth' var(--text-wdth),
-        'opsz' var(--text-opsz),
-        'YTLC' var(--text-YTLC);
+  font-variation-settings:
+    'wdth' var(--text-wdth),
+    'opsz' var(--text-opsz),
+    'YTLC' var(--text-YTLC);
 }
 
 // .post-title {
@@ -151,64 +151,64 @@ body {
 // }
 
 @media (max-width: $maxWidth) {
-    blockquote.quote {
-        &.poetry {
-            padding-left: 3em;
+  blockquote.quote {
+    &.poetry {
+      padding-left: 3em;
 
-            &::before {
-                left: 0;
-            }
-        }
+      &::before {
+        left: 0;
+      }
     }
+  }
 }
 
 // shortcode/github
 .github {
-    border: 1px solid var(--color-contrast-low);
-    border-radius: 3px;
-    margin: 0 auto;
+  border: 1px solid var(--color-contrast-low);
+  border-radius: 3px;
+  margin: 0 auto;
+  margin-bottom: 1em;
+  padding: 1em;
+
+  .github-icon {
+    width: 1.2em;
+    height: 1.2em;
+    margin-right: 0.5em;
+    margin-bottom: 0.2em;
+    fill: var(--color-contrast-high);
+    transition: all .5s;
+  }
+
+  .name {
+    font-weight: bold;
+    color: var(--color-primary);
+    text-decoration: none;
+  }
+
+  .description {
+    margin-top: 0.5em;
     margin-bottom: 1em;
-    padding: 1em;
+    color: var(--color-contrast-high);
+    text-align: justify;
+    font-size: 90%;
+    transition: all .5s;
+  }
 
-    .github-icon {
-        width: 1.2em;
-        height: 1.2em;
-        margin-right: 0.5em;
-        margin-bottom: 0.2em;
-        fill: var(--color-contrast-high);
-        transition: all .5s;
-    }
+  .language-color {
+    position: relative;
+    top: 1px;
+    display: inline-block;
+    width: 0.75em;
+    height: 0.75em;
+    border-radius: 50%;
+  }
 
-    .name {
-        font-weight: bold;
-        color: var(--color-primary);
-        text-decoration: none;
-    }
-
-    .description {
-        margin-top: 0.5em;
-        margin-bottom: 1em;
-        color: var(--color-contrast-high);
-        text-align: justify;
-        font-size: 90%;
-        transition: all .5s;
-    }
-
-    .language-color {
-        position: relative;
-        top: 1px;
-        display: inline-block;
-        width: 0.75em;
-        height: 0.75em;
-        border-radius: 50%;
-    }
-
-    .language-name {
-        color: var(--color-contrast-high);
-        font-size: 90%;
-        margin-left: 0.5em;
-        transition: all .5s;
-    }
+  .language-name {
+    color: var(--color-contrast-high);
+    font-size: 90%;
+    margin-left: 0.5em;
+    transition: all .5s;
+  }
 }
 
 // 卡片样式
@@ -218,4 +218,10 @@ body {
   word-break: break-all;
   background: transparent;
   box-shadow: 0 6px 10px 0 alpha(var(--color-contrast-high), .55);
+}
+
+// markmap
+svg.markmap {
+  width: 100%;
+  height: 100vh;
 }
