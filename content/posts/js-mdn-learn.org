@@ -404,7 +404,7 @@ function random(num) {
 <button>Change color</button>
 #+END_SRC
 
-** 为单独事件添加多个监听器
+为单独事件添加多个监听器：
 
 #+BEGIN_SRC js
 myElement.addEventListener('click', functionA);
@@ -413,7 +413,7 @@ myElement.addEventListener('click', functionB);
 
 当事件发生，两个函数都会执行。
 
-** 其他注册事件处理程序的方式
+其他注册事件处理程序的方式：
 
 1, event handler properties
 
@@ -425,8 +425,57 @@ btn.onclick = () => {
 
 此时就不能设置多个监听函数了。
 
-2, inline event handlers(不建议使用)
+2, inline event handlers(写 MDN 文档的人不建议使用)
 
 #+BEGIN_SRC html
 <button onclick="bgChange()">Press me</button>
 #+END_SRC
+
+事件对象
+
+#+BEGIN_SRC js
+function bgChange(e) {
+  const rndCol = `rgb(${random(255)}, ${random(255)}, ${random(255)})`;
+  e.target.style.backgroundColor = rndCol;
+  console.log(e.target);
+}
+#+END_SRC
+
+=e.target= 指代的就是，触发特定事件的元素，这里就是 =button= 。
+
+阻止事件默认行为
+
+#+BEGIN_SRC js
+const form = document.querySelector("form");
+const fname = document.getElementById("fname");
+const lname = document.getElementById("lname");
+const para = document.querySelector("p");
+
+form.addEventListener("submit", (e) => {
+  if (fname.value === "" || lname.value === "") {
+    e.preventDefault();
+    para.innerHTML += "You need to fill in both names!<br>";
+    para.style.color = "red";
+  }
+});
+#+END_SRC
+
+#+BEGIN_SRC html
+<form>
+  <div>
+    <label for="fname">First name: </label>
+    <input type="text" id="fname">
+  </div>
+  <div>
+    <label for="lname">Last name: </label>
+    <input type="text" id="lname">
+  </div>
+  <div>
+    <input type="submit" id="submit">
+  </div>
+
+</form>
+<p></p>
+#+END_SRC
+
+Event bubbling
