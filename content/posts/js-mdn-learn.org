@@ -28,7 +28,7 @@
 - [x]  [Build your own function](https://developer.mozilla.org/en-US/docs/Learn/JavaScript/Building_blocks/Build_your_own_function)
 - [x]  [Function return values](https://developer.mozilla.org/en-US/docs/Learn/JavaScript/Building_blocks/Return_values)
 - [x]  [Introduction to events](https://developer.mozilla.org/en-US/docs/Learn/JavaScript/Building_blocks/Events)
-- [ ]  **Assessments** [Image gallery](https://developer.mozilla.org/en-US/docs/Learn/JavaScript/Building_blocks/Image_gallery)
+- [x]  **Assessments** [Image gallery](https://developer.mozilla.org/en-US/docs/Learn/JavaScript/Building_blocks/Image_gallery)
 
 ## objects
 
@@ -513,3 +513,57 @@ Event capture - 事件繁殖的一种可选形式
 Event delegation - 不必单独为子元素设置事件，只需要设置父元素，子元素会被自动包含。
 
 ** 作业：图片库
+
+关键的 JS 内容：
+
+#+BEGIN_SRC js
+const displayedImage = document.querySelector(".displayed-img");
+const thumbBar = document.querySelector(".thumb-bar");
+
+const btn = document.querySelector("button");
+const overlay = document.querySelector(".overlay");
+
+/* Declaring the array of image filenames */
+const images = ["pic1.jpg", "pic2.jpg", "pic3.jpg", "pic4.jpg", "pic5.jpg"];
+/* Declaring the alternative text for each image file */
+const alts = {
+	"pic1.jpg": "Closeup of a human eye",
+	"pic2.jpg": "draw",
+	"pic3.jpg": "flower",
+	"pic4.jpg": "ancient",
+	"pic5.jpg": "butterfly",
+};
+/* Looping through images */
+for (const image of images) {
+	const newImage = document.createElement("img");
+	newImage.setAttribute("src", `./images/${image}`);
+	newImage.setAttribute("alt", alts[image]);
+	thumbBar.appendChild(newImage);
+
+	newImage.addEventListener("click", (event) => {
+		displayedImage.src = event.target.src;
+		displayedImage.alt = event.target.alt;
+	});
+}
+
+/* Wiring up the Darken/Lighten button */
+btn.addEventListener("click", (e) => {
+	const btnClass = btn.getAttribute("class")
+  if (btnClass === "dark") {
+    btn.setAttribute("class", "light")
+    btn.textContent = "Lighten"
+    overlay.style.backgroundColor = "rgba(0, 0, 0, 0.5)"
+  } else {
+    btn.setAttribute("class", "dark")
+    btn.textContent = "Darken"
+    overlay.style.backgroundColor = "rgba(0, 0, 0, 0)"
+  }
+});
+#+END_SRC
+
+
+
+* 对象
+
+** 基础
+
