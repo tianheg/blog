@@ -505,4 +505,9 @@ container.addEventListener("click", handleClick);
 button.addEventListener("click", handleClick);
 #+END_SRC
 
-事件触发的顺序是由内而外，依次进行的。正是因为这种元素间的包含关系，在部分情况下，会造成用户的困扰。例如，这个[[https://developer.mozilla.org/en-US/docs/Learn/JavaScript/Building_blocks/Events#video_player_example][视频播放器]]例子。例子中的问题可通过 ~stopPropagation()~ 解决。
+事件触发的顺序是由内而外，依次进行的。正是因为这种元素间的包含关系，在部分情况下，会造成用户的困扰。例如，这个[[https://developer.mozilla.org/en-US/docs/Learn/JavaScript/Building_blocks/Events#video_player_example][视频播放器]]例子。例子中的问题可通过 ~stopPropagation()~ 解决，它能阻止事件传递到父元素。
+
+Event capture - 事件繁殖的一种可选形式
+
+它像 event bubbling 但顺序是反过来的。
+
