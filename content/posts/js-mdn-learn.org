@@ -638,3 +638,65 @@ person.age = 34
 person["name"]["last"] = "Smith"
 #+END_SRC
 
+~this~ 指代什么
+
+#+BEGIN_QUOTE
+The =this= keyword refers to the current object the code is being written inside — so in this case =this= is equivalent to =person= .
+#+END_QUOTE
+
+#+BEGIN_SRC js
+const person1 = {
+  name: "Amy",
+  introduceSelf() {
+    console.log(`Hi! I'm ${this.name}.`)
+  }
+}
+const person2 = {
+  name: "Tom",
+  introduceSelf() {
+    console.log(`Hi! I'm ${this.name}.`)
+  }
+}
+person1.introduceSelf()
+person2.introduceSelf()
+#+END_SRC
+
+介绍构造器（constructors）
+
+创建多个对象的一般方法：
+
+#+BEGIN_SRC js
+function createPerson(name) {
+  const obj = {}
+  obj.name = name
+  obj.introduceSelf = function () {
+    console.log(`Hi! I'm ${this.name}.`)
+  }
+  return obj
+}
+
+const salva = createPerson("Salva")
+console.log(salva.name)
+salva.introduceSelf()
+const frankie = createPerson("Frankie")
+console.log(frankie.name)
+frankie.introduceSelf()
+#+END_SRC
+
+使用构造器创建多个对象：
+
+#+BEGIN_SRC js
+function Person(name) {
+  this.name = name
+  this.introduceSelf = function () {
+    console.log(`Hi! I'm ${this.name}.`)
+  }
+}
+
+const salva = new Person("Salva")
+console.log(salva.name)
+salva.introduceSelf()
+const frankie = new Person("Frankie")
+console.log(frankie.name)
+frankie.introduceSelf()
+#+END_SRC
