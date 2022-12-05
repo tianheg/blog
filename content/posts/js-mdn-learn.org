@@ -567,3 +567,74 @@ btn.addEventListener("click", (e) => {
 
 ** 基础
 
+#+BEGIN_SRC js
+const person = {
+  name: ["Bob", "Smith"],
+  age: 32,
+  bio: function() {
+    console.log(`${this.name[0]} ${this.name[1]} is ${this.age} years old.`)
+  },
+  introduceSelf: function() {
+    console.log(`Hi! I'm ${this.name[0]}.`)
+  }
+}
+person.bio()
+person.introduceSelf()
+
+// 当对象的键值是函数时，function 关键字可省略
+
+const person = {
+  name: ["Bob", "Smith"],
+  age: 32,
+  bio() {
+    console.log(`${this.name[0]} ${this.name[1]} is ${this.age} years old.`)
+  },
+  introduceSelf() {
+    console.log(`Hi! I'm ${this.name[0]}.`)
+  }
+}
+person.bio()
+person.introduceSelf()
+#+END_SRC
+
+以上定义出来的对象，被称为模板字面量。
+
+通过 ~.~ 或 ~[]~ 访问对象的键值。
+
+将对象设为对象属性
+
+#+BEGIN_SRC js
+const person = {
+  name: {
+    first: "Bob",
+    last: "Smith",
+  },
+  // ...
+}
+
+person.name.first
+person.name.last
+#+END_SRC
+
+对象有时被称为 associative arrays，就是因为可以用 ~[]~ 访问内部键值。例如， ~person["name"]["first"]~ 。在某些情况下，只能用 ~[]~ ，比如，如果通过变量访问对象内部键值。
+
+#+BEGIN_SRC js
+const person = {
+  name: ["Bob", "Smith"],
+  age: 32,
+};
+
+function logProperty(propertyName) {
+  console.log(person[propertyName])
+};
+
+logProperty("name")
+#+END_SRC
+
+设置对象键值
+
+#+BEGIN_SRC js
+person.age = 34
+person["name"]["last"] = "Smith"
+#+END_SRC
+
