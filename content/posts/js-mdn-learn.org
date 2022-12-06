@@ -32,7 +32,7 @@
 
 ## objects
 
-- [ ]  [Object basics](https://developer.mozilla.org/en-US/docs/Learn/JavaScript/Objects/Basics)
+- [x]  [Object basics](https://developer.mozilla.org/en-US/docs/Learn/JavaScript/Objects/Basics)
 - [ ]  [Object prototypes](https://developer.mozilla.org/en-US/docs/Learn/JavaScript/Objects/Object_prototypes)
 - [ ]  [Object-oriented programming](https://developer.mozilla.org/en-US/docs/Learn/JavaScript/Objects/Object-oriented_programming)
 - [ ]  [Classes in JavaScript](https://developer.mozilla.org/en-US/docs/Learn/JavaScript/Objects/Classes_in_JavaScript)
@@ -607,7 +607,7 @@ person.name.first
 person.name.last
 #+END_SRC
 
-对象有时被称为 associative arrays，就是因为可以用 ~[]~ 访问内部键值。例如， ~person["name"]["first"]~ 。在某些情况下，只能用 ~[]~ ，比如，如果通过变量访问对象内部键值。
+对象有时被称为 associative arrays，因为它可以用 ~[]~ 访问内部键值。例如， ~person["name"]["first"]~ 。在某些情况下，只能用 ~[]~ ，比如，如果通过变量访问对象内部键值。
 
 #+BEGIN_SRC js
 const person = {
@@ -691,3 +691,32 @@ const frankie = new Person("Frankie")
 console.log(frankie.name)
 frankie.introduceSelf()
 #+END_SRC
+
+Test your skills: 对象基础
+
+#+BEGIN_SRC js
+function Cat(name, breed, color) {
+  this.name = name;
+  this.breed = breed;
+  this.color = color;
+  this.greeting = function() {
+    console.log(`Hello, said ${this.name} the ${this.breed}.`)
+}
+}
+
+const cat1 = new Cat('Bertie','Cymric', 'white');
+
+// console.log(cat1.greeting());
+// 应改为
+cat1.greeting()
+#+END_SRC
+
+结果中为什么有 undefined。因为我在已有的 ~console.log()~ 上又套了一个。
+
+** 原型
+
+原型是 JS 对象彼此继承特性的关键机制。本节内容关于：
+
+1. 什么是「原型」
+2. 原型链的工作原理
+3. 如何设置一个对象的原型
