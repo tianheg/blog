@@ -720,3 +720,11 @@ cat1.greeting()
 1. 什么是「原型」
 2. 原型链的工作原理
 3. 如何设置一个对象的原型
+
+原型链
+
+#+BEGIN_QUOTE
+Every object in JavaScript has a built-in property, which is called its *prototype* . The prototype is itself an object, so the prototype will have its own prototype, making what's called a *prototype chain* . The chain ends when we reach a prototype that has =null=  for its own prototype.
+#+END_QUOTE
+
+当我们查找一个对象的属性时，如果对象本身不包含这个属性，就会查找对象的原型。如果仍然找不到，则搜索原型的原型。直到，要么找到目标属性，要么到达原型链的末端（返回 =undefined= ）。
