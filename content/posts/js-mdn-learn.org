@@ -33,7 +33,7 @@
 ## objects
 
 - [x]  [Object basics](https://developer.mozilla.org/en-US/docs/Learn/JavaScript/Objects/Basics)
-- [ ]  [Object prototypes](https://developer.mozilla.org/en-US/docs/Learn/JavaScript/Objects/Object_prototypes)
+- [x]  [Object prototypes](https://developer.mozilla.org/en-US/docs/Learn/JavaScript/Objects/Object_prototypes)
 - [ ]  [Object-oriented programming](https://developer.mozilla.org/en-US/docs/Learn/JavaScript/Objects/Object-oriented_programming)
 - [ ]  [Classes in JavaScript](https://developer.mozilla.org/en-US/docs/Learn/JavaScript/Objects/Classes_in_JavaScript)
 - [ ]  [Working with JSON data](https://developer.mozilla.org/en-US/docs/Learn/JavaScript/Objects/JSON)
@@ -727,4 +727,171 @@ cat1.greeting()
 Every object in JavaScript has a built-in property, which is called its *prototype* . The prototype is itself an object, so the prototype will have its own prototype, making what's called a *prototype chain* . The chain ends when we reach a prototype that has =null=  for its own prototype.
 #+END_QUOTE
 
-当我们查找一个对象的属性时，如果对象本身不包含这个属性，就会查找对象的原型。如果仍然找不到，则搜索原型的原型。直到，要么找到目标属性，要么到达原型链的末端（返回 =undefined= ）。
+当我们查找一个对象的属性时，如果对象本身不包含这个属性，就会查找对象的原型。如果仍然找不到，则搜索原型的原型。直到，要么找到目标属性，要么到达原型链的末端（返回 =undefined= ，或许不是 undefined，而是 null）。
+
+#+BEGIN_SRC js
+var myDate = new Date()
+var object = myDate
+do {
+  object = Object.getPrototypeOf(object)
+  console.log(object)
+} while (object)
+#+END_SRC
+
+属性覆盖（Shadowing properties）
+
+#+BEGIN_SRC js
+var myDate = new Date(2000, 12, 13)
+console.log(myDate.getYear()) // 101
+
+myDate.getYear = function() {
+  console.log("Something else!")
+}
+myDate.getYear() // Something else!
+#+END_SRC
+
+设置原型
+
+两种设置原型的方法：
+
+1. ~Object.create()~
+2. 构造器函数
+
+#+BEGIN_SRC js
+// 方法 1
+var personPrototype = {
+  greet() {
+    console.log("Hello!")
+  }
+}
+
+var carl = Object.create(personPrototype)
+carl.greet() // Hello!
+
+// 方法 2
+var personPrototype = {
+  greet() {
+    console.log(`Hello, my name is ${this.name}!`)
+  }
+}
+
+function Person(name) {
+  this.name = name
+}
+
+Object.assign(Person.prototype, personPrototype)
+
+var reuben = new Person("Reuben")
+reuben.greet() // Hello, my name is Reuben!
+#+END_SRC
+
+从方法 2 的创建过程中可见， ~name~ 属性直接在构造器中定义， ~greet()~ 方法则是在原型中定义。
+
+直接通过构造器函数定义的属性，被称为自有属性。可通过 ~Object.hasOwn()~ 方法确定自有属性：
+
+#+BEGIN_SRC js
+var personPrototype = {
+  greet() {
+    console.log(`Hello, my name is ${this.name}!`)
+  }
+}
+
+function Person(name) {
+  this.name = name
+}
+
+Object.assign(Person.prototype, personPrototype)
+
+var reuben = new Person("Reuben")
+console.log(Object.hasOwn(reuben, "name")) // true
+console.log(Object.hasOwn(reuben, "age")) // false
+#+END_SRC
+
+原型和继承
+
+原型支持某种继承方式。继承是面向对象编程语言的一个特点，它能表达出这样的想法——系统中的某些对象比其他对象更为特殊。
+** 面向对象编程
+
+面向对象编程（Object-oriented programming, OOP）是一种编程范式，是很多编程语言的基础内容，如 Java 和 C++。本节主要讨论：
+
+1. 类和实例（classes and instances）
+2. 继承（inheritance）
+3. 封装（encapsulation）
+4. 以上三个概念在 JS 中的体现
+
+面向对象编程是关于，将对象模型化一系列对象的集合，每个对象代表了系统的一个方面。对象包括函数（或方法）和数据。对象提供对外接口供其他代码使用，但也保持自己的私有内部状态。系统的其他部分无需关心该对象的内部状态。
+
+类和实例
+
+~Professor~ 类的伪代码：
+
+#+BEGIN_SRC txt
+class Professor
+    properties
+        name
+        teaches
+    constructor
+        Professor(name, teaches)
+    methods
+        grade(paper)
+        introduceSelf()
+#+END_SRC
+
+#+BEGIN_QUOTE
+Each concrete professor we create is called an *instance* of the =Professor= class. The process of creating an instance is performed by a special function called a *constructor* .
+#+END_QUOTE
+
+继承
+
+~Student~ 类的伪代码：
+
+#+BEGIN_SRC txt
+class Student
+    properties
+        name
+        year
+    constructor
+        Student(name, year)
+    methods
+        introduceSelf()
+#+END_SRC
+
+通过观察，发现 Professor 和 Student 有相同的部分，可以将他们提炼为 Person：
+
+#+BEGIN_SRC txt
+class Person
+    properties
+        name
+    constructor
+        Person(name)
+    methods
+        introduceSelf()
+
+class Professor : extends Person
+    properties
+        teaches
+    constructor
+        Professor(name, teaches)
+    methods
+        grade(paper)
+        introduceSelf()
+
+class Student : extends Person
+    properties
+        year
+    constructor
+        Student(name, year)
+    methods
+        introduceSelf()
+#+END_SRC
+
+#+BEGIN_QUOTE
+This feature - when a method has the same name but a different implementation in different classes - is called *polymorphism*. When a method in a subclass replaces the superclass's implementation, we say that the subclass *overrides* the version in the superclass.
+#+END_QUOTE
+
+封装
+
+#+BEGIN_QUOTE
+Keeping an object's internal state private, and generally making a clear division between its public interface and its private internal state, is called *encapsulation* .
+#+END_QUOTE
+
