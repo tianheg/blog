@@ -810,7 +810,7 @@ console.log(Object.hasOwn(reuben, "age")) // false
 原型和继承
 
 原型支持某种继承方式。继承是面向对象编程语言的一个特点，它能表达出这样的想法——系统中的某些对象比其他对象更为特殊。
-** 面向对象编程
+** 面向对象编程概念
 
 面向对象编程（Object-oriented programming, OOP）是一种编程范式，是很多编程语言的基础内容，如 Java 和 C++。本节主要讨论：
 
@@ -895,3 +895,72 @@ This feature - when a method has the same name but a different implementation in
 Keeping an object's internal state private, and generally making a clear division between its public interface and its private internal state, is called *encapsulation* .
 #+END_QUOTE
 
+封装的含义——将要用到的函数方法，初始化在最开始的 class 中。
+
+#+BEGIN_SRC txt
+class Student : extends Person
+    properties
+        private year
+    constructor
+        Student(name, year)
+    methods
+        introduceSelf()
+        canStudyArchery() { return this.year > 1 }
+
+student = new Student("Weber", 1)
+student.year // error: 'year' is a private property of Student
+#+END_SRC
+
+OOP 与 JS
+
+- JS 中的构造器和原型概念，与 OOP 中的 class 相似。通过构造器的原型属性定义的方法，可被通过构造器创建的对象继承
+- 原型链是一种实现继承的方法。例如，如果 Student 的原型是 Person，那么 Student 可以继承来自 Person 的 name 属性，并覆盖 Person 的 introduceSelf() 方法
+
+但要注意的是， *JS 的这些功能和经典 OOP 概念还是有所区别的* 。以下是进一步描述：
+
+首先，在基于类的 OOP 中，类和对象是两个独立的构造体，而对象总是作为类的实例而被创建。而且，用于定义类（类语法本身）的功能和用于实例化对象（构造器）的功能，两者是有区别的。在 JS 中，我们能够也经常无 class 定义而创建对象，要么通过函数，要么通过对象字面量。
+
+第二，虽然原型链长得像继承的层次并且在某方面表现得也像，但在其他方面却有所不同。实例化子类时，创建了一个单独的对象，它将子类中定义的属性与层次结构中进一步定义的属性结合起来。而对于原型，层次结构的每个层级都由独立的对象表示，它们通过 ~__proto__~ 属性连接。这种原型链的表现不太像继承，更像是代表（ *delegation* , 这个词在前述章节的学习中见过，在 Event delegation 中）。
+
+#+BEGIN_QUOTE
+Delegation is a programming pattern where an object, when asked to perform a task, can perform the task itself or ask another object (its *delegate* ) to perform the task on its behalf. In many ways, delegation is a more flexible way of combining objects than inheritance (for one thing, it's possible to change or completely replace the delegate at run time).
+#+END_QUOTE
+
+** JS 中的类
+
+类和构造器、继承
+
+#+BEGIN_SRC js
+class Person {
+  name;
+  constructor(name) {
+    this.name = name
+  }
+  introduceSelf() {
+    console.log(`Hi! I'm ${this.name}.`)
+  }
+}
+class Professor extends Person {
+  teaches;
+  constructor(name, teaches) {
+    super(name)
+    this.teaches = teaches
+  }
+  introduceSelf() {
+    console.log(`My name is ${this.name}, and I will be your ${this.teaches} professor.`)
+  }
+  grade(paper) {
+    const grade = Math.floor(Math.random() * (5 - 1) + 1)
+    console.log(grade)
+  }
+}
+
+// var giles = new Person("Giles")
+// giles.introduceSelf()
+
+var walsh = new Professor("Walsh", "Psychology")
+walsh.introduceSelf()
+walsh.grade('my paper')
+#+END_SRC
+
+封装
