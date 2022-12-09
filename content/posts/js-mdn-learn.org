@@ -1152,3 +1152,14 @@ populate();
 转换对象和文本
 
 内建的 JSON 对象，能够帮助将纯 JSON 字符与对象进行相互转化。JSON 对象的两个方法： ~parse()~ 和 ~stringify()~ ，前者输入纯 JSON 字符串输出 JS 对象，后者输入 JS 对象输出 JSON 字符串。
+
+#+BEGIN_SRC js
+let myObj = { name: "Chris", age: 38 }
+console.log(myObj)
+let myString = JSON.stringify(myObj)
+console.log(myString)
+let my2ndObj = JSON.parse(myString)
+console.log(my2ndObj)
+#+END_SRC
+
+Test your skills: JSON
