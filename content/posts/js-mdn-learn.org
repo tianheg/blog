@@ -35,7 +35,7 @@
 - [x]  [Object basics](https://developer.mozilla.org/en-US/docs/Learn/JavaScript/Objects/Basics)
 - [x]  [Object prototypes](https://developer.mozilla.org/en-US/docs/Learn/JavaScript/Objects/Object_prototypes)
 - [x]  [Object-oriented programming](https://developer.mozilla.org/en-US/docs/Learn/JavaScript/Objects/Object-oriented_programming)
-- [ ]  [Classes in JavaScript](https://developer.mozilla.org/en-US/docs/Learn/JavaScript/Objects/Classes_in_JavaScript)
+- [x]  [Classes in JavaScript](https://developer.mozilla.org/en-US/docs/Learn/JavaScript/Objects/Classes_in_JavaScript)
 - [ ]  [Working with JSON data](https://developer.mozilla.org/en-US/docs/Learn/JavaScript/Objects/JSON)
 - [ ]  [Object building practice](https://developer.mozilla.org/en-US/docs/Learn/JavaScript/Objects/Object_building_practice)
 - [ ]  **Assessments** [Adding features to our bouncing balls demo](https://developer.mozilla.org/en-US/docs/Learn/JavaScript/Objects/Adding_bouncing_balls_features)
@@ -1013,3 +1013,142 @@ myExample.#somePrivateMethod() // Uncaught SyntaxError: reference to undeclared 
 
 Test your skills: JS 中的类
 
+#+BEGIN_SRC js
+// OOJS 1
+class Shape {
+  name;
+  sides;
+  sideLength;
+  constructor(name, sides, sideLength) {
+    this.name = name
+    this.sides = sides
+    this.sideLength = sideLength
+  }
+  
+  calcPerimeter() {
+    const perimeter = this.sides * this.sideLength
+    console.log(`${this.name}'s perimeter is ${perimeter}.`)
+  }
+}
+
+const square = new Shape("square", 4, 5)
+square.calcPerimeter()
+const triangle = new Shape("triangle", 3, 3)
+triangle.calcPerimeter()
+
+// OOJS 2
+
+class Square extends Shape {
+  constructor(sideLength) {
+    super("square", 4, sideLength)
+  }
+  calcArea() {
+    console.log(`Square's area is ${this.sideLength ** 2}`)
+  }
+}
+
+const square = new Square(4)
+square.calcArea()
+#+END_SRC
+
+** 处理 JSON
+
+#+BEGIN_QUOTE
+Converting a string to a native object is called /deserialization/, while converting a native object to a string so it can be transmitted across the network is called /serialization/ .
+#+END_QUOTE
+
+#+BEGIN_SRC json
+{
+  "a": "b",
+  "c": "d"
+}
+#+END_SRC
+
+数组作 JSON：
+
+#+BEGIN_SRC json
+[
+  {
+    "a": "b",
+    "c": "d"
+  },
+  {
+    "a": "b",
+    "c": "d"
+  }
+]
+#+END_SRC
+
+注意：
+
+- JSON 是纯粹的字符串，包含特定的数据格式。它只有属性，并无方法
+- JSON 使用「双引号」，包裹字符串和属性名
+- 如果逗号/冒号放错了，JSON 格式就出错了
+- JSON 可以是除去数组或对象的其他形式
+- JSON 中只有被引号包裹的字符串才用作属性
+
+Active learning: 处理一个 JSON 例子
+
+#+BEGIN_SRC js
+async function populate() {
+  const requestURL =
+    "https://mdn.github.io/learning-area/javascript/oojs/json/superheroes.json";
+  const request = new Request(requestURL);
+  const response = await fetch(request);
+  const superHeroes = await response.json();
+
+  populateHeader(superHeroes);
+  populateHeroes(superHeroes);
+}
+
+function populateHeader(obj) {
+  const header = document.querySelector("header");
+  const myH1 = document.createElement("h1");
+  myH1.textContent = obj.squadName;
+  header.appendChild(myH1);
+
+  const myPara = document.createElement("p");
+  myPara.textContent = `Hometown: ${obj.homeTown} // Formed: ${obj.formed}`;
+  header.appendChild(myPara);
+}
+
+function populateHeroes(obj) {
+  const section = document.querySelector("section");
+  const heroes = obj.members;
+
+  for (const hero of heroes) {
+    const myArticle = document.createElement("article"),
+      myH2 = document.createElement("h2"),
+      myPara1 = document.createElement("p"),
+      myPara2 = document.createElement("p"),
+      myPara3 = document.createElement("p"),
+      myList = document.createElement("ul");
+
+    myH2.textContent = hero.name;
+    myPara1.textContent = `Secret identity: ${hero.secretIdentity}`;
+    myPara2.textContent = `Age: ${hero.age}`;
+    myPara3.textContent = `Superpowers:`;
+
+    const superPowers = hero.powers;
+    for (const power of superPowers) {
+      const listItem = document.createElement("li");
+      listItem.textContent = power;
+      myList.appendChild(listItem);
+    }
+
+    myArticle.appendChild(myH2);
+    myArticle.appendChild(myPara1);
+    myArticle.appendChild(myPara2);
+    myArticle.appendChild(myPara3);
+    myArticle.appendChild(myList);
+
+    section.appendChild(myArticle);
+  }
+}
+
+populate();
+#+END_SRC
+
+转换对象和文本
+
+内建的 JSON 对象，能够帮助将纯 JSON 字符与对象进行相互转化。JSON 对象的两个方法： ~parse()~ 和 ~stringify()~ ，前者输入纯 JSON 字符串输出 JS 对象，后者输入 JS 对象输出 JSON 字符串。
