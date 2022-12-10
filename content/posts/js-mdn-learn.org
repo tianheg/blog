@@ -1319,3 +1319,60 @@ loop();
 * 异步 JS
 
 ** 介绍异步 JS
+
+异步编程下，可以运行多个任务。不必等待即可执行下一个目标任务。很多由浏览器提供的函数会执行一定时间，因此它们是异步执行。例如：
+
+- 通过 ~fetch()~ 发起 HTTP 请求
+- 通过 ~getUserMedia()~ 接入用户的照相机或麦克风
+- 通过 ~showOpenFilePicker()~ 询问用户选择文件
+
+下文阐述长时间运行的同步函数造成的问题。
+
+同步编程
+
+按顺序执行的代码，即是同步编程代码。
+
+长时间执行的同步函数：
+
+#+BEGIN_SRC js
+const MAX_PRIME = 1000000;
+
+function isPrime(n) {
+  for (let i = 2; i <= Math.sqrt(n); i++) {
+    if (n % i === 0) {
+      return false;
+    }
+  }
+  return n > 1;
+}
+
+const random = (max) => Math.floor(Math.random() * max);
+
+function generatePrimes(quota) {
+  const primes = [];
+  while (primes.length < quota) {
+    const candidate = random(MAX_PRIME);
+    if (isPrime(candidate)) {
+      primes.push(candidate);
+    }
+  }
+  return primes;
+}
+
+const quota = document.querySelector("#quota");
+const output = document.querySelector("#output");
+
+document.querySelector("#generate").addEventListener("click", () => {
+  output.textContent = `Finished generating ${quota.value} primes!`;
+});
+
+document.querySelector("#reload").addEventListener("click", () => {
+  document.location.reload();
+});
+#+END_SRC
+
+在同步函数中，程序运行时无法响应其他操作。
+
+事件处理器
+
+它就是一种异步编程。
