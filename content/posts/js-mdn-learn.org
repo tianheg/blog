@@ -1376,3 +1376,50 @@ document.querySelector("#reload").addEventListener("click", () => {
 事件处理器
 
 它就是一种异步编程。
+
+回调
+
+什么是回调？
+
+#+BEGIN_QUOTE
+A callback is just a function that's passed into another function, with the expectation that the callback will be called at the appropriate time.
+#+END_QUOTE
+
+回调函数如果内嵌有回调函数，就会变得难以理解。
+
+#+BEGIN_SRC js
+function doStep1(init, callback) {
+	const result = init + 1;
+	callback(result);
+}
+function doStep2(init, callback) {
+	const result = init + 2;
+	callback(result);
+}
+function doStep3(init, callback) {
+	const result = init + 3;
+	callback(result);
+}
+
+function doOperation() {
+	doStep1(0, (result1) => {
+    doStep2(result1, (result2) => {
+      doStep3(result2, (result3) => {
+        console.log(`${result3}`)
+      })
+    })
+  })
+}
+
+doOperation();
+#+END_SRC
+
+期约的由来：
+
+#+BEGIN_QUOTE
+For these reasons, most modern asynchronous APIs don't use callbacks. Instead, the foundation of asynchronous programming in JavaScript is the Promise, and that's the subject of the next article.
+#+END_QUOTE
+
+** 如何使用期约
+
+期约是现代 JS 异步编程的基础。期约是异步函数的返回对象，表示操作的当前状态。当期约返回给调用者时，操作通常还没有完成，但是期约对象提供了处理操作最终成功或失败的方法。
