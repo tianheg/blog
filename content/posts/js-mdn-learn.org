@@ -42,7 +42,7 @@
 
 ## asynchronous JS
 
-- [ ]  [Introducing asynchronous JavaScript](https://developer.mozilla.org/en-US/docs/Learn/JavaScript/Asynchronous/Introducing)
+- [x]  [Introducing asynchronous JavaScript](https://developer.mozilla.org/en-US/docs/Learn/JavaScript/Asynchronous/Introducing)
 - [ ]  [How to use promises](https://developer.mozilla.org/en-US/docs/Learn/JavaScript/Asynchronous/Promises)
 - [ ]  [Implementing a promise-based API](https://developer.mozilla.org/en-US/docs/Learn/JavaScript/Asynchronous/Implementing_a_promise-based_API)
 - [ ]  [Introducing workers](https://developer.mozilla.org/en-US/docs/Learn/JavaScript/Asynchronous/Introducing_workers)
@@ -1423,3 +1423,63 @@ For these reasons, most modern asynchronous APIs don't use callbacks. Instead, t
 ** 如何使用期约
 
 期约是现代 JS 异步编程的基础。期约是异步函数的返回对象，表示操作的当前状态。当期约返回给调用者时，操作通常还没有完成，但是期约对象提供了处理操作最终成功或失败的方法。
+
+使用 fetch()
+
+#+BEGIN_SRC js
+const fetchPromise = fetch("https://mdn.github.io/learning-area/javascript/apis/fetching-data/can-store/products.json")
+console.log(fetchPromise)
+fetchPromise.then((response) => {
+  console.log(`Received response: ${response.status}`)
+})
+console.log("Started request...")
+#+END_SRC
+
+链式期约
+
+由
+
+#+BEGIN_SRC js
+const fetchPromise = fetch("https://mdn.github.io/learning-area/javascript/apis/fetching-data/can-store/products.json")
+
+fetchPromise.then((response) => {
+  const jsonPromise = response.json()
+  jsonPromise.then(data => {
+    console.log(data[0].name)
+  })
+})
+#+END_SRC
+
+到
+
+#+BEGIN_SRC js
+const fetchPromise = fetch("https://mdn.github.io/learning-area/javascript/apis/fetching-data/can-store/products.json")
+
+fetchPromise
+  .then(response => response.json())
+  .then(data => {
+  console.log(data[0].name)
+})
+#+END_SRC
+
+的转变。这样的转变就被称为「链式期约（promise chaining）」。这样在进行连续异步函数调用时，就可以避免不断缩进问题，使得代码易于理解。
+
+加上错误处理代码：
+
+#+BEGIN_SRC js
+const fetchPromise = fetch("https://mdn.github.io/learning-area/javascript/apis/fetching-data/can-store/products.json")
+
+fetchPromise
+  .then(response => {
+    if (!response.ok) {
+      throw new Error(`HTTP error: ${response.status}`)
+    }
+    return response.json()
+  })
+  .then(data => {
+    console.log(data[0].name)
+  })
+#+END_SRC
+
+捕捉错误
+
