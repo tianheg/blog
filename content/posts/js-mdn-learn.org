@@ -1483,3 +1483,28 @@ fetchPromise
 
 捕捉错误
 
+#+BEGIN_SRC js
+const fetchPromise = fetch("bad-scheme://mdn.github.io/learning-area/javascript/apis/fetching-data/can-store/products.json")
+
+fetchPromise
+  .then(response => {
+    if (!response.ok) {
+      throw new Error(`HTTP error: ${response.status}`)
+    }
+    return response.json()
+  })
+  .then(data => {
+    console.log(data[0].price)
+  })
+  .catch(error => {
+    console.error(`Could not get products: ${error}`)
+  })
+#+END_SRC
+
+期约术语
+
+期约可能处于三种状态：
+
+1. pending: 期约已经创建，相联系的异步函数运行结果尚未知晓。这就是期约在从 fetch() 调用返回时所处的状态，并且请求仍在执行。
+2. fulfilled: 异步函数成功执行。期约完成后，它会调用 then()。
+3. rejected: 异步函数执行失败。当期约被拒绝时，它会调用 catch()。
