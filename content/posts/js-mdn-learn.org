@@ -1508,3 +1508,62 @@ fetchPromise
 1. pending: 期约已经创建，相联系的异步函数运行结果尚未知晓。这就是期约在从 fetch() 调用返回时所处的状态，并且请求仍在执行。
 2. fulfilled: 异步函数成功执行。期约完成后，它会调用 then()。
 3. rejected: 异步函数执行失败。当期约被拒绝时，它会调用 catch()。
+
+异步函数执行成功或失败与否，要看具体的 API。比如，对于 fetch() 来说，一个请求成功的话，服务器要返回内容；如果是网络问题，请求没有发送出去，则此时认为请求失败。
+
+有时会用 *settled* 指代 fulfilled 或 rejected。如果一个期约处于 settled 状态，或者它已经被“锁定”以跟随另一个期约的状态，那么它就被解决了。
+
+一篇讲解期约的文章《 /[[https://thenewtoys.dev/blog/2021/02/08/lets-talk-about-how-to-talk-about-promises/][Let's talk about how to talk about promises | JavaScript: The New Toys]]/ 》：
+
+resolve 是什么含义？resolve 意味着决定期约的下一步行动取决于你。
+
+#+BEGIN_QUOTE
+When you resolve a promise with something like =42= or ="answer"= or ={"example": "result"}=, yes, you do fulfill the promise with that value. But if you resolve your promise to /another promise/ (or more generally a [[https://promisesaplus.com/#point-7][thenable]]), you're telling your promise to follow that other promise and do what it does:
+
+- If the other promise is fulfilled, your original promise will fulfill itself with the other promise's fulfillment value
+- If the other promise is rejected, your original promise will reject itself with the other promise's rejection reason
+- If the other promise never settles, your original promise won't either
+#+END_QUOTE
+
+这些内容，不理解。
+
+结合多个期约
+
+使用 ~Promise.any()~ , ~Promise.all()~ ，更多见 [[https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Promise][Promise]] 。
+
+async 和 await
+
+在一个 async 函数内部，将 await 放在返回期约的函数之前。这使得代码会等到期约 settled 时，返回期约的 fulfilled 值或抛出 rejected 值。
+
+重写之前的代码：
+
+#+BEGIN_SRC js
+async function fetchProducts() {
+  try {
+    const response = await fetch("https://mdn.github.io/learning-area/javascript/apis/fetching-data/can-store/products.json")
+    if (!response.ok) {
+      throw new Error(`HTTP error: ${response.status}`)
+    }
+    const data = await response.json()
+    console.log(data[0].name)
+  } catch (error) {
+    console.error(`Could not get products: ${error}`)
+  }
+}
+
+fetchProducts()
+#+END_SRC
+
+对于上述 fetchProducts() 函数的后续使用，错误用法：
+
+#+BEGIN_SRC js
+const promise = fetchProducts()
+console.log(promise[0].name)
+#+END_SRC
+
+正确用法：
+
+#+BEGIN_SRC js
+const promise = fetchProducts()
+promise.then((data) => console.log(data[0].name))
+#+END_SRC
