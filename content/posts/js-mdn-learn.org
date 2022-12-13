@@ -44,7 +44,7 @@
 
 - [x]  [Introducing asynchronous JavaScript](https://developer.mozilla.org/en-US/docs/Learn/JavaScript/Asynchronous/Introducing)
 - [x]  [How to use promises](https://developer.mozilla.org/en-US/docs/Learn/JavaScript/Asynchronous/Promises)
-- [ ]  [Implementing a promise-based API](https://developer.mozilla.org/en-US/docs/Learn/JavaScript/Asynchronous/Implementing_a_promise-based_API)
+- [x]  [Implementing a promise-based API](https://developer.mozilla.org/en-US/docs/Learn/JavaScript/Asynchronous/Implementing_a_promise-based_API)
 - [ ]  [Introducing workers](https://developer.mozilla.org/en-US/docs/Learn/JavaScript/Asynchronous/Introducing_workers)
 - [ ]  **Assessments** [Sequencing animations](https://developer.mozilla.org/en-US/docs/Learn/JavaScript/Asynchronous/Sequencing_animations)
 
@@ -1590,3 +1590,39 @@ function alarm(person, delay) {
 #+END_SRC
 
 使用 alarm() API
+
+#+BEGIN_SRC js
+function alarm(person, delay) {
+  return new Promise((resolve, reject) => {
+    if (delay < 0) {
+      throw new Error("Alarm delay must not be negative");
+    }
+    setTimeout(() => {
+      resolve(`Wake up, ${person}!`);
+    }, delay);
+  });
+}
+
+button.addEventListener("click", () => {
+  alarm(name.value, delay.value)
+    .then((message) => (output.textContent = message))
+    .catch((error) => (output.textContent = `Couldn't set alarm: ${error}`));
+});
+#+END_SRC
+
+搭配 async-await 使用 alarm()
+
+#+BEGIN_SRC js
+button.addEventListener("click", async () => {
+  try {
+    const message = await alarm(name.value, delay.value);
+    output.textContent = message;
+  } catch (error) {
+    output.textContent = `Couldn't set alarm: ${error}`;
+  }
+});
+#+END_SRC
+
+** 介绍 workers
+
+Workers 可以让你在单独的线程中执行内容。
