@@ -2,7 +2,7 @@
 title = "DOM Scripting"
 date = 2022-01-22T00:00:00+08:00
 lastmod = 2022-04-27T14:24:00+08:00
-tags = ["阅读", "技术"]
+tags = ["阅读"]
 draft = false
 +++
 
