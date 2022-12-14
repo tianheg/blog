@@ -46,7 +46,7 @@
 - [x]  [How to use promises](https://developer.mozilla.org/en-US/docs/Learn/JavaScript/Asynchronous/Promises)
 - [x]  [Implementing a promise-based API](https://developer.mozilla.org/en-US/docs/Learn/JavaScript/Asynchronous/Implementing_a_promise-based_API)
 - [x]  [Introducing workers](https://developer.mozilla.org/en-US/docs/Learn/JavaScript/Asynchronous/Introducing_workers)
-- [ ]  **Assessments** [Sequencing animations](https://developer.mozilla.org/en-US/docs/Learn/JavaScript/Asynchronous/Sequencing_animations)
+- [x]  **Assessments** [Sequencing animations](https://developer.mozilla.org/en-US/docs/Learn/JavaScript/Asynchronous/Sequencing_animations)
 
 ## Client-side web APIs
 
@@ -1697,3 +1697,43 @@ addEventListener("message", (message) => {
 ** 作业：动画排序
 
 Sequencing animations
+
+回调版本：
+
+#+BEGIN_SRC js
+function sequencingAnimations() {
+  alice1.animate(aliceTumbling, aliceTiming).finished.then(() => {
+    alice2.animate(aliceTumbling, aliceTiming).finished.then(() => {
+      alice3.animate(aliceTumbling, aliceTiming);
+    });
+  });
+}
+#+END_SRC
+
+期约链版本：
+
+#+BEGIN_SRC js
+function sequencingAnimations() {
+  const animation = alice1.animate(aliceTumbling, aliceTiming);
+  animation.finished
+    .then(() => alice2.animate(aliceTumbling, aliceTiming).finished)
+    .then(() => alice3.animate(aliceTumbling, aliceTiming));
+}
+#+END_SRC
+
+async-await 版本：
+
+#+BEGIN_SRC js
+async function sequencingAnimations() {
+  try {
+    await alice1.animate(aliceTumbling, aliceTiming).finished
+    await alice2.animate(aliceTumbling, aliceTiming).finished
+    alice3.animate(aliceTumbling, aliceTiming)
+  } catch (error) {
+    console.error(`Could not play the animation: ${error}`)
+  }
+}
+#+END_SRC
+
+* 客户端 Web APIs
+
