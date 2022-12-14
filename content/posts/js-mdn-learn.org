@@ -50,7 +50,7 @@
 
 ## Client-side web APIs
 
-- [ ]  [Introduction to web APIs](https://developer.mozilla.org/en-US/docs/Learn/JavaScript/Client-side_web_APIs/Introduction)
+- [x]  [Introduction to web APIs](https://developer.mozilla.org/en-US/docs/Learn/JavaScript/Client-side_web_APIs/Introduction)
 - [ ]  [Manipulating documents](https://developer.mozilla.org/en-US/docs/Learn/JavaScript/Client-side_web_APIs/Manipulating_documents)
 - [ ]  [Fetching data from the server](https://developer.mozilla.org/en-US/docs/Learn/JavaScript/Client-side_web_APIs/Fetching_data)
 - [ ]  [Third party APIs](https://developer.mozilla.org/en-US/docs/Learn/JavaScript/Client-side_web_APIs/Third_party_APIs)
@@ -1756,3 +1756,52 @@ APIs 能做什么？
 APIs 是如何工作的？
 
 - 基于对象
+
+#+BEGIN_SRC js
+const AudioContext = window.AudioContext || window.webkitAudioContext
+const audioCtx = new AudioContext()
+
+const audioElement = document.querySelector("audio")
+const playBtn = document.querySelector("button")
+const volumeSlider = document.querySelector(".volume")
+
+const audioSource = audioCtx.createMediaElementSource(audioElement)
+
+playBtn.addEventListener("click", () => {
+  if (audioCtx.state === 'suspended') {
+    audioCtx.resume()
+  }
+
+  if (playBtn.getAttribute("class") === "paused") {
+    audioElement.play()
+    playBtn.setAttribute("class", "playing")
+    playBtn.textContent = "Pause"
+  } else if (playBtn.getAttribute("class") === "playing") {
+    audioElement.pause()
+    playBtn.setAttribute("class", "paused")
+    playBtn.textContent = "Play"
+
+  }
+})
+
+audioElement.addEventListener("ended", () => {
+  playBtn.setAttribute("class", "paused")
+  playBtn.textContent = 'Play'
+})
+
+const gainNode = audioCtx.createGain()
+
+volumeSlider.addEventListener("input", () => {
+  gainNode.gain.value = volumeSlider.value
+})
+
+audioSource.connect(gainNode).connect(audioCtx.destination)
+#+END_SRC
+
+- 可识别的入口
+
+对于 Audio API 来说，AudioContext 就是入口；对于 DOM API 来说，Document 就是入口；对于 Canvas API 来说，HTMLCanvasElement.getContext() 是其入口。
+
+- 使用事件处理状态变化
+
+- 在适当的地方有额外的安全机制
