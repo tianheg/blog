@@ -45,7 +45,7 @@
 - [x]  [Introducing asynchronous JavaScript](https://developer.mozilla.org/en-US/docs/Learn/JavaScript/Asynchronous/Introducing)
 - [x]  [How to use promises](https://developer.mozilla.org/en-US/docs/Learn/JavaScript/Asynchronous/Promises)
 - [x]  [Implementing a promise-based API](https://developer.mozilla.org/en-US/docs/Learn/JavaScript/Asynchronous/Implementing_a_promise-based_API)
-- [ ]  [Introducing workers](https://developer.mozilla.org/en-US/docs/Learn/JavaScript/Asynchronous/Introducing_workers)
+- [x]  [Introducing workers](https://developer.mozilla.org/en-US/docs/Learn/JavaScript/Asynchronous/Introducing_workers)
 - [ ]  **Assessments** [Sequencing animations](https://developer.mozilla.org/en-US/docs/Learn/JavaScript/Asynchronous/Sequencing_animations)
 
 ## Client-side web APIs
@@ -1626,3 +1626,70 @@ button.addEventListener("click", async () => {
 ** 介绍 workers
 
 Workers 可以让你在单独的线程中执行内容。
+
+程序是单线程的，如果它长时间只运行一个任务，其他任务就无法执行。Workers 可以让我们在不同的线程运行任务。多线程代码有一个问题，如果两个线程修改同一个变量，就会造成错误结果，产生 bugs。为了避免这些问题，对 workers 代码进行了一定限制，它无法直接访问主代码的变量、只能与主代码交换信息、无法访问 DOM。
+
+有三种不同的 workers：
+
+- dedicated workers
+- 共享 workers
+- service workers
+
+使用 web workers（dedicated workers）
+
+main.js:
+
+#+BEGIN_SRC js
+const worker = new Worker("./generate.js")
+
+document.querySelector("#generate").addEventListener("click", () => {
+  const quota = document.querySelector("#quota").value
+  worker.postMessage({
+    command: "generate",
+    quota
+  })
+})
+
+worker.addEventListener("message", (message) => {
+  document.querySelector("#output").textContent = `Finished generating ${message.data} primes!`
+})
+
+document.querySelector("#reload").addEventListener("click", () => {
+  document.querySelector("#user-input").value = ""
+  document.location.reload()
+})
+#+END_SRC
+
+generate.js:
+
+#+BEGIN_SRC js
+addEventListener("message", (message) => {
+  if (message.data.command === "generate") {
+    generatePrimes(message.data.quota);
+  }
+
+  function generatePrimes(quota) {
+    function isPrime(n) {
+      for (let c = 2; c <= Math.sqrt(n); ++c) {
+        if (n % c === 0) return false;
+      }
+      return true;
+    }
+
+    const primes = [];
+    const maximum = 1000000;
+
+    while (primes.length < quota) {
+      const candidate = Math.floor(Math.random() * (maximum + 1));
+      if (isPrime(candidate)) primes.push(candidate);
+    }
+
+    postMessage(primes.length);
+  }
+});
+#+END_SRC
+
+其他类型 workers
+
+- Shared workers : 共享于几个运行于不同窗口的脚本
+- Service workers : 像代理服务器，能够缓存 Web 应用，以便无网络时仍能访问。是 PWA（Progressive Web Apps） 的关键组成部分。
