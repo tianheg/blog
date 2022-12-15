@@ -51,7 +51,7 @@
 ## Client-side web APIs
 
 - [x]  [Introduction to web APIs](https://developer.mozilla.org/en-US/docs/Learn/JavaScript/Client-side_web_APIs/Introduction)
-- [ ]  [Manipulating documents](https://developer.mozilla.org/en-US/docs/Learn/JavaScript/Client-side_web_APIs/Manipulating_documents)
+- [x]  [Manipulating documents](https://developer.mozilla.org/en-US/docs/Learn/JavaScript/Client-side_web_APIs/Manipulating_documents)
 - [ ]  [Fetching data from the server](https://developer.mozilla.org/en-US/docs/Learn/JavaScript/Client-side_web_APIs/Fetching_data)
 - [ ]  [Third party APIs](https://developer.mozilla.org/en-US/docs/Learn/JavaScript/Client-side_web_APIs/Third_party_APIs)
 - [ ]  [Drawing graphics](https://developer.mozilla.org/en-US/docs/Learn/JavaScript/Client-side_web_APIs/Drawing_graphics)
@@ -1816,3 +1816,55 @@ audioSource.connect(gainNode).connect(audioCtx.destination)
 - 同级（sibling）节点
 
 Active learning: 基本 DOM 操作
+
+#+BEGIN_SRC js
+const link = document.querySelector("a")
+link.textContent = "Mozilla Developer Network"
+link.href = "https://developer.mozilla.org/en-US/"
+
+const sect = document.querySelector("section")
+const para = document.createElement("p")
+para.textContent = "We hope you enjoy the ride."
+para.setAttribute("class", "highlight")
+sect.appendChild(para)
+
+const text = document.createTextNode(" — the premier source for web development knowledge.")
+const linkPara = document.querySelector("p")
+linkPara.appendChild(text)
+sect.appendChild(linkPara)
+// sect.removeChild(linkPara)
+// linkPara.remove()
+linkPara.parentNode.removeChild(linkPara)
+#+END_SRC
+
+Active learning: 动态购物清单
+
+#+BEGIN_SRC js
+const list = document.querySelector('ul'),
+  input = document.querySelector('input'),
+  button = document.querySelector('button')
+
+button.addEventListener('click', () => {
+  const myItem = input.value
+  input.value = ''
+
+  const listItem = document.createElement('li')
+  const listText = document.createElement('span')
+  const listBtn = document.createElement('button')
+
+  listItem.appendChild(listText)
+  listText.textContent = myItem
+  listItem.appendChild(listBtn)
+  listBtn.textContent = 'Delete'
+  list.appendChild(listItem)
+
+  listBtn.addEventListener('click', () => {
+    list.removeChild(listItem)
+  })
+
+  input.focus()
+})
+#+END_SRC
+
+** 从服务器获取数据
+
