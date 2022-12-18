@@ -1,6 +1,7 @@
 #+TITLE: Git
 #+DATE: <2022-11-11 Fri 15:03>
 #+TAGS[]: 技术
+#+TOC: true
 
 https://stackoverflow.com/a/1260982/12539782
 
@@ -230,3 +231,17 @@ git reset --merge
 * 等待整理
 
 - [[https://softwaredoug.com/blog/2022/11/09/idiot-proof-git-aliases.html][Idiot proof git]]
+
+* Change the author and committer name/email for multiple commits
+
+[[https://stackoverflow.com/a/1320317/12539782]]
+
+*NOTE: This operation will modify [[https://git-scm.com/docs/hash-function-transition/][SHA-1]], and commits date.*
+
+Steps:
+
+#+BEGIN_SRC sh
+git config --global user.name "New Author Name"
+git config --global user.email "email@address.example"
+git rebase -r --root --exec "git commit --amend --no-edit --reset-author"
+#+END_SRC
