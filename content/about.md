@@ -141,8 +141,6 @@ title = "关于"
 
 Email: `me@tianheg.xyz`（如果超过三天没有回复，试试 `yidajiabei@gmail.com`）
 
-文章评论有两种：Disqus 和 Giscus，前者要能访问外网才能使用，后者要有 GitHub 账户才行。选择适合你的一种。
-
 ---
 
 博客内容结构备忘：
