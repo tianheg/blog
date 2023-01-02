@@ -1,0 +1,21 @@
+#+TITLE: LC 9. Palindrome Number
+#+DATE: <2023-01-02 Mon 09:22>
+#+TAGS[]: LeetCode 技术
+
+#+BEGIN_SRC js
+/**
+ * @param {number} x
+ * @return {boolean}
+ */
+var isPalindrome = function(x) {
+  if (x < 0 || (!(x % 10) && x)) return false
+  let x2 = x, res = 0
+  while(x2) {
+    res = res * 10 + x2 % 10
+    x2 = ~~(x2 / 10)
+  }
+  return res === x
+};
+#+END_SRC
+
+=~~= 在数字范围为 -2147483649 < value < 2147483648 时，相当于 [[https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Math/trunc][Math.trunc()]]。
