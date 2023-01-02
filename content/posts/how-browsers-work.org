@@ -2,18 +2,34 @@
 #+DATE: <2023-01-02 Mon 15:18>
 #+TAGS[]: 技术 Web
 
+* 浏览器的主要功能
+
+浏览器的主要功能，在于显示从服务器请求的网络资源。通常是 HTML 文档，但也可能是 PDF、图片或其他格式内容。资源的位置由用户使用 URI （通用资源识别符）指定。HTML 和 CSS 标准定义了浏览器解析 HTML 文件的方式。这些标准由 W3C（World Wide Web Consortium）组织—— Web 标准化组织，维护。以往的多年时间，浏览器只采用部分标准，更多专注于开发他们自己的扩展。这给网页开发者制造了很多兼容性问题。现在，浏览器厂商在比以往采用了更多标准内容。
+
+浏览器用户界面大同小异。主要包含的元素有：
+
+1. 输入 URI 的地址栏
+2. 返回前进按钮
+3. 书签选项
+4. 刷新或暂停加载当前文档
+5. 家按钮回到家页面
+
+这些元素并未被标准化组织定义，但各个浏览器都拥有这些元素，可见这些元素是浏览器的最佳实践。
+
+* 浏览器的高级结构
+
 #+BEGIN_EXPORT html
 <img src="/images/how-browsers-work.png" alt="浏览器的七个主要部分">
 <span class="caption">◎ 浏览器的七个主要部分</span>
 #+END_EXPORT
 
-1. User Interface
-2. Browser engine
-3. Rendering engine
-4. Networking
-5. JavaScript Interpreter
-6. UI Backend
-7. Data Persistence
+1. User Interface：包括地址栏、后退前进按钮、书签菜单等等。除去请求页面 viewport 的其他部分。
+2. Browser engine：控制 UI 和渲染引擎的行为。
+3. Rendering engine：负责展示请求的内容。如果请求内容是 HTML，渲染引擎渲染 HTML 和 CSS，将渲染好的内容显示在屏幕上。
+4. Networking：对于 HTTP 请求之类的网络调用，在独立于平台的接口背后为不同平台使用不同的实现。
+5. JavaScript Interpreter：用于解析和执行 JS 代码。
+6. UI Backend：用于绘制组合框和窗口等基本小组件。这个后端公开了一个非平台特定的通用接口。在下面，它使用操作系统用户界面方法。
+7. Data persistence/storage：这是一个持久层。浏览器需要在本地保存各种类型数据，比如 cookies。浏览器还支持的存储机制有 localStorage, IndexedDB, WebSQL 和 FileSystem。
 
 参考资料：
 
