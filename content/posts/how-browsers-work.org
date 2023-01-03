@@ -31,7 +31,31 @@
 6. UI Backend：用于绘制组合框和窗口等基本小组件。这个后端公开了一个非平台特定的通用接口。在下面，它使用操作系统用户界面方法。
 7. Data persistence/storage：这是一个持久层。浏览器需要在本地保存各种类型数据，比如 cookies。浏览器还支持的存储机制有 localStorage, IndexedDB, WebSQL 和 FileSystem。
 
+要注意，像 Chrome 这样的浏览器会运行渲染引擎的多个实例：由 Tab 分隔。每个 Tab 运行在独立的进程中。
+
+* 渲染引擎
+
+渲染引擎的作用：将请求的内容渲染在屏幕上。渲染引擎可以渲染 HTML、XML 和图片。可以通过插件或扩展来显示其他文件格式。
+
+各大浏览器各自使用的渲染引擎：
+
+1. Google Chrome and Opera v.15+ and Microsoft Edge: Blink(a fork of WebKit)
+2. Mozilla Firefox: Gecko
+3. Chrome for iOS and Safari: WebKit
+
+** 主要工作流
+
+从网络层得到所请求文档的内容。大小通常在 8kB 块以内。之后的基本流程如下图：
+
+#+BEGIN_EXPORT html
+<img src="/images/how-browsers-work-1.avif" alt="Rendering engine basic flow">
+<span class="caption">◎ Rendering engine basic flow</span>
+#+END_EXPORT
+
+-----
+
 参考资料：
 
 1. [[https://web.dev/howbrowserswork/][How browsers work]]
 2. [[http://taligarsiel.com/Projects/howbrowserswork1.htm][How browsers work]]
+3. [[https://www.browserstack.com/guide/browser-rendering-engine][Role of Rendering Engines in Browsers | BrowserStack]]
