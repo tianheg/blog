@@ -1,0 +1,26 @@
+#+TITLE: Arch Linux 安装 deb 包
+#+DATE: <2023-01-05 Thu 15:02>
+#+TAGS[]: Arch-Linux 技术
+
+https://www.makeuseof.com/install-deb-packages-arch-linux/
+
+方法一：
+
+#+BEGIN_SRC sh
+yay -S debtap
+debtap yourfile.deb
+sudo pacman -U yourfile.zst
+#+END_SRC
+
+方法二：
+
+#+BEGIN_SRC sh
+ar x /path/to/file
+
+tar xvf control.tar.gz
+tar xvf data.tar.gz
+
+sudo cp -r ./etc/* /etc/
+sudo cp -r ./opt/* /opt/
+sudo cp -r ./usr/* /usr/
+#+END_SRC
