@@ -1,0 +1,24 @@
+#+TITLE: LC 283. Move Zeroes
+#+DATE: <2023-01-05 Thu 15:24>
+#+TAGS[]: 技术 LeetCode
+
+#+BEGIN_SRC js
+/**
+ * @param {number[]} nums
+ * @return {void} Do not return anything, modify nums in-place instead.
+ */
+var moveZeroes = function (nums) {
+  let len = nums.length
+  let count = 0
+  for (let i = 0; i < len; i++) {
+    if (nums[i] !== 0) {
+      nums[count] = nums[i]
+      count++
+    }
+  }
+  for (let j = count; j < len; j++) {
+    nums[j] = 0
+  }
+  return nums
+};
+#+END_SRC
