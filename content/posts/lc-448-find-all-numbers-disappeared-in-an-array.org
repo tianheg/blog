@@ -1,0 +1,24 @@
+#+TITLE: LC 448. Find All Numbers Disappeared in an Array
+#+DATE: <2023-01-05 Thu 15:32>
+#+TAGS[]: 技术 LeetCode
+
+#+BEGIN_SRC js
+/**
+ * @param {number[]} nums
+ * @return {number[]}
+ */
+var findDisappearedNumbers = function(nums) {
+  const n = nums.length
+  for (const num of nums) {
+    const x = (num - 1) % n
+    nums[x] += n
+  }
+  const ret = []
+  for (const [i, num] of nums.entries()) {
+    if (num <= n) {
+      ret.push(i + 1)
+    }
+  }
+  return ret
+};
+#+END_SRC

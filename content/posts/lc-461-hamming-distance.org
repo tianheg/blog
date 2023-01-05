@@ -1,0 +1,19 @@
+#+TITLE: LC 461. Hamming Distance
+#+DATE: <2023-01-05 Thu 15:39>
+#+TAGS[]: 技术 LeetCode
+
+#+BEGIN_SRC js
+/**
+ * @param {number} x
+ * @param {number} y
+ * @return {number}
+ */
+var hammingDistance = function (x, y) {
+  let s = x ^ y, ret = 0
+  while (s != 0) {
+    ret += s & 1
+    s >>= 1
+  }
+  return ret
+};
+#+END_SRC
