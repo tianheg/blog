@@ -1,0 +1,17 @@
+#+TITLE: LC 136. Single Number
+#+DATE: <2023-01-05 Thu 08:06>
+#+TAGS[]: 技术 LeetCode
+
+#+BEGIN_SRC js
+/**
+ * @param {number[]} nums
+ * @return {number}
+ */
+var singleNumber = function(nums) {
+  let ans = 0
+  for (const num of nums) {
+    ans ^= num
+  }
+  return ans
+};
+#+END_SRC
