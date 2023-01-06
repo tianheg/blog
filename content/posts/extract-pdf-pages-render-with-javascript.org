@@ -1,0 +1,137 @@
+#+TITLE: 使用 JS 提取 Pdf 指定范围页面
+#+DATE: <2023-01-06 Fri 14:29>
+#+TAGS[]: 技术 JavaScript
+
+[[https://www.freecodecamp.org/news/extract-pdf-pages-render-with-javascript/][How to Extract Pages from a PDF and Render Them with JavaScript]]
+
+在线 Demo：[[https://hrishiksh.github.io/modify-pdf-fcc/][Pdf Modification]]
+
+* 代码
+
+HTML
+
+#+BEGIN_SRC html
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Pdf Modification</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <div class="inputarea">
+    <input type="file" accept=".pdf" name="pdfinput" id="pdfinput">
+    <input type="text" id="rangeSelector" placeholder="eg. 1-3">
+    <button id="extractBtn">Extract</button>
+  </div>
+
+  <iframe id="pdfFrame"></iframe>
+
+  <script src="https://unpkg.com/pdf-lib@1.17.1/dist/pdf-lib.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/file-saver@2.0.5/dist/FileSaver.min.js"></script>
+  <script src="./script.js" type="module"></script>
+</body>
+</html>
+#+END_SRC
+
+JS
+
+#+BEGIN_SRC js
+const input = document.getElementById("pdfinput");
+const pdfFrame = document.getElementById("pdfFrame");
+const rangeSelector = document.getElementById("rangeSelector");
+const extractBtn = document.getElementById("extractBtn");
+
+let pdfArrayBuffer;
+
+// Read our file in async/await fashion
+function readAsyncFile(file) {
+	return new Promise((resolve, reject) => {
+		let reader = new FileReader();
+		reader.onload = () => {
+			resolve(reader.result);
+		};
+		reader.onerror = reject;
+		reader.readAsArrayBuffer(file);
+	});
+}
+
+// Render the pdf in an Iframe
+function renderPdf(arrayBuffer) {
+	const tempBlob = new Blob([new Uint8Array(arrayBuffer)], {
+		type: "application/pdf",
+	});
+	const docUrl = URL.createObjectURL(tempBlob);
+	pdfFrame.src = docUrl;
+}
+
+// Select page range
+function range(start, end) {
+	let length = end - start + 1;
+	return Array.from({ length }, (_, i) => start + i - 1);
+}
+
+// Get file from filePicker
+input.addEventListener("change", async (e) => {
+	const files = e.target.files;
+	if (files.length > 0) {
+		pdfArrayBuffer = await readAsyncFile(files[0]);
+		renderPdf(pdfArrayBuffer);
+	}
+});
+
+// Start extraction
+extractBtn.addEventListener("click", async () => {
+	const rawRange = rangeSelector.value;
+	const rangeList = rawRange.split("-");
+	const pdfSrcDoc = await PDFLib.PDFDocument.load(pdfArrayBuffer);
+	const pdfNewDoc = await PDFLib.PDFDocument.create();
+	const pages = await pdfNewDoc.copyPages(
+		pdfSrcDoc,
+		range(Number(rangeList[0]), Number(rangeList[1])),
+	);
+	pages.forEach((page) => pdfNewDoc.addPage(page));
+	const newPdf = await pdfNewDoc.save();
+	saveAs(new Blob([newPdf], { type: "application/pdf" }), "extracted.pdf");
+});
+#+END_SRC
+
+CSS
+
+#+BEGIN_SRC css
+*,
+*::before,
+*::after {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+.inputarea {
+  margin: 5rem 0 3rem 0;
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  position: relative;
+}
+
+#rangeSelector {
+  margin-left: 2rem;
+}
+
+#pdfFrame {
+  border-style: none;
+  border-spacing: 0;
+  width: 50%;
+  height: 80vh;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -40%);
+}
+
+button {
+  margin: 0 0 0 0.5rem;
+}
+#+END_SRC
