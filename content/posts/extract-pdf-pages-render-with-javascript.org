@@ -135,3 +135,34 @@ button {
   margin: 0 0 0 0.5rem;
 }
 #+END_SRC
+
+* 笔记
+
+~<iframe>~
+
+frameborder 属性已被弃用，用 CSS 属性 border 替代；
+
+cellspacing 属性已被弃用，用 CSS 属性 border-spacing 替代。
+
+~<input type="file">~
+
+通过 accept 属性，指定可接受的文件类型，格式 ~accept=".pdf"~ 。
+
+~<script src="" type="module">~
+
+使用 module 类型的 JS 语法。
+
+#+BEGIN_SRC js
+function readAsyncFile(file) {
+  return new Promise((resolve, reject) => {
+    let reader = new FileReader()
+    reader.onload = () => {
+      resolve(reader.result)
+    }
+    reader.onerror = reject
+    reader.readAsArrayBuffer(file)
+  })
+}
+#+END_SRC
+
+该函数使用了期约（Promise），它是 JS 异步编程的基础。
