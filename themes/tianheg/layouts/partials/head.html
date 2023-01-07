@@ -92,7 +92,7 @@
 
     {{ if  (eq hugo.Environment "production") }}
         <!-- Cloudflare Web Analytics -->
-        <script defer src='https://static.cloudflareinsights.com/beacon.min.js' data-cf-beacon='{"token": "3033066771d24ef4908b470caee29e83"}'></script>
+        <script defer src='https://static.cloudflareinsights.com/beacon.min.js' data-cf-beacon='{"token": "3033066771d24ef4908b470caee29e83"}' crossorigin=""></script>
         <!-- End Cloudflare Web Analytics -->
 
         <!-- Umami Web Analytics -->
@@ -101,5 +101,5 @@
     {{ end }}
 
     <!-- markmap -->
-    <script src="https://cdn.jsdelivr.net/npm/markmap-autoloader@0.14.4-alpha.1"></script>
+    <script src="https://cdn.jsdelivr.net/npm/markmap-autoloader@0.14.4-alpha.1" crossorigin=""></script>
 </head>
