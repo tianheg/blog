@@ -9,7 +9,6 @@
 line. It is intended to be used for contact details -->
 - <me@tianheg.xyz>
 - (+86) 198 5581 2775
-- [技术博客](https://www.yidajiabei.xyz/tags/tech/)
 
 ## 工作经历
 
