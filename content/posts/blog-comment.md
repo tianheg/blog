@@ -27,3 +27,7 @@ draft = false
 如你所见，我同时采用了 Disqus 和 Giscus 两种评论系统，前者是主力，后者是备用。当你无法访问 Disqus 时，可以使用 Giscus，注意 Giscus 需要你登录 GitHub 账号。
 
 UI 设计摘自谢益辉（[示例](https://yihui.org/cn/2021/07/existence/)），Preferences 提供设置选项。
+
+2023年1月9日更新：
+
+不久前，我关闭了博客评论。我的博客少有人评论，仅有的评论看起来可有可无。
