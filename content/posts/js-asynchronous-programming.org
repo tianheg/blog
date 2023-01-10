@@ -1,0 +1,71 @@
+#+TITLE: JavaScript 异步编程
+#+DATE: <2023-01-10 Tue 08:02>
+#+TAGS[]: 技术 JavaScript
+#+DRAFT: true
+
+-  什么是 promise state machine
+-  如何定义 Promise
+-  Promise 在 JS 中的作用
+-  Promise 在其他编程语言中，出现过吗，是否和在 JS 中的用法类似
+
+* 第11章 期约与异步函数 - JavaScript高级程序设计（第4版）
+
+在 ECMAScript 6 正式加入 Promise（期约）引用类型，之后的 ECMAScript 版本又加入了 async 和 await 关键字，用于定义异步函数。
+
+同步与异步是计算机科学的一对基本概念。在 JS 这样的单线程事件循环模型中，同步和异步操作更是核心。异步行为的存在是为了优化因计算量大而时间长的操作。然而，异步操作不一定计算量大而时间长。只要你不想为等待某个异步操作而阻塞线程执行，那么任何时候都可以使用。
+
+同步行为对应内存中顺序执行的处理器指令。同步情况下，每一步执行哪段代码是确定的。
+
+同步操作对应的低水平指令：
+
+1. 栈内存分配一段存储浮点数的地址空间
+2. 对值进行数学运算，把结果写回之前分配的内存
+
+异步行为类似于系统中断，即当前进程外部的实体可以触发代码执行。在实际应用中，进程不能长时间等待一个操作，所以需要异步逻辑，而同步逻辑必须要等。比如，代码要访问一些高延迟的资源，比如向远程服务器发送请求并等待响应，那么就会出现长时间等待。
+
+#+BEGIN_SRC js
+var x = 3;setTimeout(() => x = x + 4, 1000)
+#+END_SRC
+
+为什么上述这段代码，是立即出结果，而不是等 1 秒，这段代码有什么问题吗？加一层嵌套，就可以了：
+
+#+BEGIN_SRC js
+;(function() {
+  var x = 3;
+  setTimeout(() => setTimeout(console.log, 0, x = x + 4), 1000);
+})()
+#+END_SRC
+
+为了让后续代码能够使用 x ，异步执行的函数需要在更新 x 的值后通知其他代码。
+
+早期 JS 中，只支持回调函数定义异步逻辑。串联多个异步操作时需要深度嵌套的回调函数（俗称“回调地狱”）。
+
+- 异步返回值
+- 失败处理
+
+读到这里时，想知道 JavaScript 是如何被编译/解释成底层代码的，于是了解到两类引擎，一种是 JavaScript 引擎，一种是 layout 引擎（其他称谓，浏览器引擎、渲染引擎，作用是将网页的 HTML 和其他资源转化为用户设备上的可交互视觉呈现）。对于现在的 Firefox 浏览器，JavaScript 引擎使用 [[https://en.wikipedia.org/wiki/SpiderMonkey][SpiderMonkey]]，layout 引擎使用 [[https://en.wikipedia.org/wiki/Gecko_(software)][Gecko]]。
+
+关于 SpiderMonkey：A JavaScript engine in Mozilla Gecko applications, including Firefox. The engine currently includes the IonMonkey compiler and OdinMonkey optimization module, has previously included the TraceMonkey compiler (first JavaScript JIT) and JägerMonkey.
+
+读过的资料：
+
+有些是综合性文章，有些是博客内容，还有书籍。
+
+1.  [[https://javascript.plainenglish.io/javascript-promises-resolve-isnt-the-same-that-fulfill-3c6932a7a367]]
+2.  [[https://developer.mozilla.org/en-US/docs/Web/JavaScript/Guide/Using_promises]]
+3.  [[https://eloquentjavascript.net/11_async.html]]
+4.  [[https://developer.mozilla.org/en-US/docs/Learn/JavaScript/Asynchronous/Promises]]
+5.  [[https://thenewtoys.dev/blog/2021/02/08/lets-talk-about-how-to-talk-about-promises/]]
+6.  [[https://pouchdb.com/2015/05/18/we-have-a-problem-with-promises.html]]
+7.  [[https://javascript.info/async]]
+8.  [[https://web.dev/async-functions/]]
+9.  [[https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Statements/async_function]]
+10. [[https://web.dev/promises/]]
+11. [[https://exploringjs.com/es6/ch_async.html]]
+12. [[https://exploringjs.com/es6/ch_promises.html]]
+13. [[https://wangdoc.com/es6/promise]]
+14. [[https://www.xiabingbao.com/post/promise/promise-concurrency-limit-rg10kz.html]]
+15. [[https://github.com/mqyqingfeng/Blog/issues/98]]
+16. [[https://github.com/mqyqingfeng/Blog/issues/100]]
+17. [[https://github.com/mqyqingfeng/Blog/issues/101]]
+18. 第11章 期约与异步函数 - JavaScript高级程序设计（第4版）
