@@ -1,5 +1,22 @@
-{{ if and (.Params.comments | default .Site.Params.enableComments) (eq hugo.Environment "production") }}
+{{ if and (.Params.comments | default .Site.Params.enableComments)}}
+<!--  (eq hugo.Environment "production")  -->
   {{ if or (in .Site.Params.mainSections .Section) .Params.comments }}
-    
+  <br>
+  <br>
+  <hr>
+  <br>
+  <br>
+  <div style="text-align: center;">评论和交流请发送邮件到 me@tianheg.xyz</div>
+  <br>
+  <br>
+  <hr>
+  <br>
+  <br>
+  <div style="text-align: center;">通过以下渠道赞赏此文
+    <ul style="display: flex; list-style-type: none; justify-content: space-around;">
+      <li><a href="https://afdian.net/a/tianheg">爱发电</a></li>
+      <li><a href="https://paypal.me/tianheg/5">Paypal（定额 5 美元）</a></li>
+    </ul>
+  </div>
   {{ end }}
 {{ end }}
