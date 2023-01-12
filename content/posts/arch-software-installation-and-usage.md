@@ -1176,6 +1176,18 @@ killall pulseaudio
 
 refer <https://unix.stackexchange.com/a/171925>
 
+### GoldenDict
+
+- <https://wiki.archlinux.org/title/GoldenDict>
+- <https://wiki.archlinux.org/title/Dictd#Hosting_Offline_Dictionaries>
+
+```sh
+pacman -S dictd
+yay -S goldendict-webengine-git dict-wn dict-moby-thesaurus
+```
+
+在 Dropbox 存了两本 *.bgl 格式的词典，一份单词读音文件。
+
 ## 一些文档 {#一些文档}
 
 -   [让 Arch Linux 系统和最新的镜像同步，从最快的镜像下载](https://blog.lilydjwg.me/2020/10/29/pacsync.215578.html)
