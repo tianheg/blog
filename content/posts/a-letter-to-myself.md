@@ -2,7 +2,7 @@
 title = "给自己的一封信"
 date = 2020-11-20T00:00:00+08:00
 lastmod = 2022-08-05T15:02:58+08:00
-tags = ["随笔"]
+tags = ["随笔", "给自己的信"]
 draft = false
 +++
 
@@ -47,7 +47,4 @@ draft = false
 
 严于律己，宽以待人。为什么要对友苛求呢？怕是不敢承认自己平庸吧！
 
-
-## 引用 {#引用}
-
--   [心灵与灵魂](https://io-oi.me/life/heart-and-spirit/)
+引用：[心灵与灵魂](https://io-oi.me/life/heart-and-spirit/)
