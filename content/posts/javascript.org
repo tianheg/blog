@@ -3600,3 +3600,9 @@ Node.js 在 v17.0.0
 * 工具网址
 - [[https://pythontutor.com/javascript.html][JavaScript debugger and visualizer]] || [[https://github.com/latentflip/loupe][latentflip/loupe: Visualizing the javascript runtime at runtime]] || [[https://www.jsv9000.app/][JS Visualizer 9000]]
 
+
+* 通过 JS bookmarklet 获取当前页面 URL 和 title，并转成 Org-mode 格式
+
+#+BEGIN_SRC js
+javascript:(function(){var title=document.title;var url=window.location.href;var orgMode="[["+url+"]["+title+"]]";var textArea=document.createElement("textarea");textArea.value=orgMode;document.body.appendChild(textArea);textArea.select();document.execCommand("copy");document.body.removeChild(textArea);})();
+#+END_SRC
