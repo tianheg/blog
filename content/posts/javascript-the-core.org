@@ -4,6 +4,8 @@
 
 [[http://dmitrysoshnikov.com/ecmascript/javascript-the-core/][JavaScript. The Core. – Dmitry Soshnikov]]
 
+[[https://xcoder.in/2021/05/14/javascript-ao/][JavaScript 中的活跃对象（AO）浅谈及导读 · 一个伪宅级别的码畜。]]
+
 作者讲述了十个 JavaScript 的重要部分：
 
 1. 对象
@@ -40,3 +42,14 @@ var foo = {
 <img src="/images/javascript-the-core-0.svg" alt="图片1：有原型的基本对象">
 <span class="caption">◎ 图片1：有原型的基本对象</span>
 #+END_EXPORT
+
+检查对象是否为空：
+
+#+BEGIN_SRC js
+function isEmpty(obj) {
+  for (let prop in obj) {
+    return false
+  }
+  return true
+}
+#+END_SRC
