@@ -53,3 +53,64 @@ function isEmpty(obj) {
   return true
 }
 #+END_SRC
+
+将对象属性加在一起：
+
+#+BEGIN_SRC js
+var salaries = {
+  John: 100,
+  Ann: 160,
+  Pete: 130
+}
+
+function sumSalaries(obj) {
+  if (isEmpty(obj)) return 0
+  let sum = 0
+  for (let key in obj) {
+    sum += obj[key]
+  }
+  return sum
+}
+
+function isEmpty(obj) {
+  for (let key in obj) {
+    return false
+  }
+  return true
+}
+sumSalaries(salaries)
+#+END_SRC
+
+对值为数字的键进行乘法运算：
+
+#+BEGIN_SRC js
+var menu = {
+  width: 200,
+  height: 300,
+  title: "My menu"
+}
+
+function multiplyNumeric(obj) {
+  for (let key in obj) {
+    if (typeof obj[key] === "number") {
+      obj[key] *= 2
+    }
+  }
+}
+
+multiplyNumeric(menu)
+menu
+#+END_SRC
+
+如果函数写成：
+
+#+BEGIN_SRC js
+function multiplyNumeric(obj) {
+  for (let key in obj) {
+    if (typeof obj[key] !== "number") {}
+    obj[key] = obj[key] * 2
+  }
+}
+#+END_SRC
+
+最终经过处理的 menu 对象的 title 属性就变成 NaN。
