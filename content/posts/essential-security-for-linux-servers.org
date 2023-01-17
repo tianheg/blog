@@ -1,0 +1,173 @@
+#+TITLE: 为 Linux 服务器设置的重要安全措施
+#+DATE: <2023-01-17 Tue 21:29>
+#+TAGS[]: 技术 Linux
+
+[[https://sollove.com/2013/03/03/my-first-5-minutes-on-a-server-or-essential-security-for-linux-servers/][My First 5 Minutes On A Server; Or, Essential Security for Linux Servers – Sol Love]]
+
+作者的安全哲学：采取一些措施，它们必须能够阻止那些最频繁的攻击方向，同时让服务器管理不至于因为过于安全而繁琐。
+
+服务器只有两个用户：root 和部署用户。部署用户通过一段长密码获得 sudo 权限，它也是开发者登入的账户。开发者通过公匙而非密码登入，这样系统管理就变成在多个服务器之间保证 ~authorized_keys~ 文件的最新。root 用户无法通过 ssh 登入，部署用户只能从指定公司 IP 段登入。这种方法的缺点是，如果 ~authorized_keys~ 文件遭到破坏或被错误授权，需要登录到远程终端来修复它。
+
+作者声明这并非自己的主张，只是自己的经验：
+
+#+BEGIN_QUOTE
+Note: I’m not advocating this as the most secure approach – just that it balances security and management simplicity for our small team. From my experience, most security breaches are caused either by insufficient security procedures or sufficient procedures poorly maintained.
+#+END_QUOTE
+
+* 改变 root 密码
+
+密码要很长，可以记不住，但要保存在安全的地方。
+
+我通过 Vagrant 新建了 Ubuntu 22.04：
+
+#+BEGIN_SRC sh
+vagrant init generic/ubuntu2204
+vagrant up
+#+END_SRC
+
+默认情况下，无法使用 root 账户进行操作：
+
+#+BEGIN_SRC sh
+su root
+# su: Authentication failure
+#+END_SRC
+
+需要设置 root 密码：
+
+#+BEGIN_SRC sh
+sudo passwd root
+#+END_SRC
+
+解答来自：[[https://askubuntu.com/a/314098]]
+
+* 更新包
+
+通过包管理器更新包。Ubuntu 的更新命令：
+
+#+BEGIN_SRC sh
+apt-get update
+apt-get upgrade
+#+END_SRC
+
+* 安装 Fail2ban
+
+#+BEGIN_SRC sh
+apt-get install fail2ban
+#+END_SRC
+
+Fail2ban 是一种守护进程，用于监控登陆服务器的行为，并阻挡可疑的登陆。开箱即用。
+
+* 设置登陆用户
+
+用户名为 deploy，选择你喜欢的。
+
+#+BEGIN_SRC sh
+useradd deploy
+mkdir /home/deploy
+mkdir /home/deploy/.ssh
+chmod 700 /home/deploy/.ssh
+#+END_SRC
+
+* 公匙授权
+
+#+BEGIN_SRC sh
+vim /home/deploy/.ssh/authorized_keys
+#+END_SRC
+
+在文件中添加，你本地机器的 id_rsa.pub 文件或其他 ssh 公匙文件内容。
+
+#+BEGIN_SRC sh
+chmod 400 /home/deploy/.ssh/authorized_keys
+chown deploy:deploy /home/deploy -R
+#+END_SRC
+
+* 测试新用户并开启 sudo 权限
+
+#+BEGIN_SRC sh
+passwd deploy
+visudo
+#+END_SRC
+
+注释掉所有存在的 用户/组，并加上：
+
+#+BEGIN_SRC txt
+root    ALL=(ALL) ALL
+deploy  ALL=(ALL) ALL
+#+END_SRC
+
+* 锁定 SSH
+
+#+BEGIN_SRC sh
+vim /etc/ssh/sshd_config
+#+END_SRC
+
+修改/添加的内容：
+
+#+BEGIN_SRC txt
+PermitRootLogin no
+PasswordAuthentication no
+AllowUsers deploy@(your-ip) deploy@(another-ip-if-any)
+#+END_SRC
+
+重启 ssh：
+
+#+BEGIN_SRC sh
+service ssh restart
+#+END_SRC
+
+* 设置防火墙
+
+#+BEGIN_SRC sh
+ufw allow from {your-ip} to any port 22
+ufw allow 80
+ufw allow 443
+ufw enable
+#+END_SRC
+
+* 开启自动安全更新
+
+#+BEGIN_SRC sh
+apt-get install unattended-upgrades
+
+vim /etc/apt/apt.conf.d/10periodic
+#+END_SRC
+
+将文件更新为：
+
+#+BEGIN_SRC txt
+APT::Periodic::Update-Package-Lists "1";
+APT::Periodic::Download-Upgradeable-Packages "1";
+APT::Periodic::AutocleanInterval "7";
+APT::Periodic::Unattended-Upgrade "1";
+#+END_SRC
+
+#+BEGIN_SRC sh
+vim /etc/apt/apt.conf.d/50unattended-upgrades
+#+END_SRC
+
+将文件更新为：
+
+#+BEGIN_SRC txt
+Unattended-Upgrade::Allowed-Origins {
+        "Ubuntu lucid-security";
+//      "Ubuntu lucid-updates";
+};
+#+END_SRC
+
+* 安装 Logwatch 用于监控日志
+
+#+BEGIN_SRC sh
+apt-get install logwatch
+
+vim /etc/cron.daily/00logwatch
+#+END_SRC
+
+添加到文件下面的内容：
+
+#+BEGIN_SRC txt
+/usr/sbin/logwatch --output mail --mailto test@gmail.com --detail high
+#+END_SRC
+
+以上就是该文章的全部内容。
+
+Hacker News 关于此问题的讨论：[[https://news.ycombinator.com/item?id=5316093]]
