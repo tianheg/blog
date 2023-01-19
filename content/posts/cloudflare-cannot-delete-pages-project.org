@@ -1,0 +1,19 @@
+#+TITLE: Cloudflare Pages 无法删除某项目
+#+DATE: <2023-01-20 Fri 01:49>
+#+TAGS[]: 技术 Cloudflare
+
+部署在 Cloudflare Pages 的某个项目不需要了，想删除，点击删除后出现：
+
+#+BEGIN_SRC txt
+An unknown error occured. Contact your account team or Cloudflare support: https://cfl.re/3WgEyrH.(error code: 8000000)
+#+END_SRC
+
+重复试了几次，甚至删除 Cookies 重新登录，还是不行；通过 API 删除，还是出现一样的错误提示。
+
+删除之前的操作：
+
+更改了项目名称，删除了源代码仓库。
+
+最终在 [[https://community.cloudflare.com/t/pages-failed-to-create-new-project/314026/6]] 这里找到答案。
+
+我的做法：删除 Cloudflare Pages GitHub app，之后就能删除 Cloudflare Pages 项目了。
