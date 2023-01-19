@@ -7,7 +7,7 @@
 
 <!-- The unordered list immediately after the h1 will be formatted on a single
 line. It is intended to be used for contact details -->
-- <me@tianheg.xyz>
+- <me@tianhegao.com>
 - (+86) 198 5581 2775
 
 ## 工作经历
