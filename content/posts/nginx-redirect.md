@@ -108,7 +108,7 @@ services:
       - /var/run/docker.sock:/var/run/docker.sock:ro
     network_mode: bridge
     environment:
-      - DEFAULT_EMAIL=me@tianheg.xyz
+      - DEFAULT_EMAIL=me@tianhegao.com
       - NGINX_PROXY_CONTAINER=nginx-proxy
     restart: always
 
