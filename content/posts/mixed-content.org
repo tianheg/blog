@@ -1,0 +1,39 @@
+#+TITLE: 什么是「混合内容」及如何修复
+#+DATE: <2023-01-23 Mon 08:05>
+#+TAGS[]: 技术 Web 安全
+
+{{< feynman >}}
+
+我在 [[https://www.netlify.com/][Netlify]] 部署我的某个站点时，在部署（Deploy）详情页，它提示我：
+
+#+BEGIN_QUOTE
+Insecure mixed content detected
+
+Although you have enabled HTTPS on your site, we’ve detected some content that’s still being served over an HTTP connection. [[https://web.dev/what-is-mixed-content/][Learn more about mixed content.]]
+#+END_QUOTE
+
+大意是：我的站点启用了 HTTPS，但是还有些内容基于 HTTP 链接。而 HTTP 和 HTTPS 相比较来说，不太安全。
+
+通过引文中的链接文章（ /What is mixed content?/ ），了解到：
+
+混合内容的定义——HTML 初始化是基于安全的 HTTPS 链接，但其他文件（图片、视频、样式文件、脚本）是基于不安全的 HTTP 链接。之所以被称为「混合」是因为 HTTP 和 HTTPS 内容被加载至同一页面，且最初的请求是 HTTPS 链接。
+
+如果页面资源存在基于 HTTP 的链接，就会削弱整个页面的安全性。这些页面请求可能会被用于进行中间人攻击（Men-in-the-Middle），对页面资源进行修改，诱导用户进行黑客想要的操作。
+
+* 混合内容的两种类型
+
+一种是积极（或主动）的，一种是消极（或被动）的。
+
+被动指不与页面的剩余部分交互。因此中间人攻击受限。被动混合内容有图片、音视频。
+
+主动指与整个页面交互，允许攻击者在页面做任何事情。主动混合内容有脚本、样式表、iframes 和其他能下载和执行的代码。
+
+* 修复混合内容
+
+- [[https://passive-mixed-content.glitch.me/][Passive mixed content]]
+- [[https://active-mixed-content.glitch.me/][Active mixed content]]
+
+参考链接：
+
+1. [[https://web.dev/what-is-mixed-content/][What is mixed content?]]
+2. [[https://web.dev/fixing-mixed-content/][Fixing mixed content]]
