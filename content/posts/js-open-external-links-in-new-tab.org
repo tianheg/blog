@@ -1,0 +1,21 @@
+#+TITLE: JS 新标签页打开外部链接
+#+DATE: <2023-01-23 Mon 07:58>
+#+TAGS[]: 技术 JavaScript
+
+代码：
+
+#+BEGIN_SRC js
+function externalLinks() {
+  for (let c = document.getElementsByTagName("a"), a = 0; a < c.length; a++) {
+    let b = c[a];
+    b.getAttribute("href") &&
+      b.hostname !== location.hostname &&
+      (b.target = "_blank");
+  }
+}
+externalLinks();
+#+END_SRC
+
+来自：[[https://stackoverflow.com/a/13147238/12539782]]
+
+我找了它，以前曾在 [[https://www.sphinx-doc.org/en/master/][Sphinx]] 中用过。
