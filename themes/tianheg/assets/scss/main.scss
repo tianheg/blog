@@ -19,12 +19,6 @@
     $duration: {{ . }}s;
 {{ end }}
 
-{{ if eq .Site.Params.headerLayout "flex" }}
-    $headerLayoutFlex: true;
-{{ else }}
-    $headerLayoutFlex: false;
-{{ end }}
-
 {{ if .Site.Params.enableHeaderAutoHide }}
     $enableHeaderAutoHide: true;
 {{ else }}
@@ -429,11 +423,6 @@ $greaterWidth: null;
 // Data Attributes
 
 @import "base/data-attributes";
-
-
-// @supports()
-
-@import "base/supports";
 
 
 // Custom
