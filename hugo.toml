@@ -107,6 +107,9 @@ enableGitInfo = true
         weight = 8
         identifier = "theme-switcher"
     [[menu.main]]
+        weight = 9
+        identifier = "menu-time"
+    [[menu.main]]
         pageref = "/about"
         name = "关于"
         weight = 1
@@ -147,14 +150,13 @@ enableGitInfo = true
     enableHeaderAutoHide = false
     displayHeaderInHome = true
     headerBackground = "alpha(var(--color-bg), 0.8) linear-gradient(90deg, #f79533b0 0, #f37055b4 15%, #ef4e7b1a 30%, #a166ab23 44%, #5073b821 58%, #1098ad26 72%, #07b39b41 86%, #6dba82a1 100%)"
-    headerLayout = "flex"
-    enableNavToggle = true
+    headerLayout = "center"
     navHeight = "10em"
     siteBrandFontSize = 1
     siteBrandFontColor = "var(--color-contrast-high)"
-    enableMenu = false
-    displayMenuInHome = false
-    activeInSection = false
+    enableMenu = true
+    displayMenuInHome = true
+    activeInSection = true
     homeLayout = "poetry"
     homePoetry = ["探索的人", "了解自己，认识世界", "谨以此博客献给未来的自己"]
     logo = "images/logo.png"
@@ -173,7 +175,7 @@ enableGitInfo = true
 
     displayListTitle = false
 
-    listDateFormat = "01-02"
+    listDateFormat = "2006-01-02"
 
     listDatePosition = "left"
     groupByMonth = false
@@ -194,7 +196,7 @@ enableGitInfo = true
     msApplicationTileColor = "#fff"
     jsonLD = true
     openGraph = true
-    twitterCards = true
+    twitterCards = false
     autoDetectImages = true
     enableServiceWorker = true
     enableKaTeX = false

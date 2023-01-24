@@ -8,8 +8,6 @@
                 {{ if or (and .IsHome .Site.Params.displayMenuInHome) (and (not .IsHome) .Site.Params.enableMenu) }}
                     {{ partial "menu.html" . }}
                 {{ end }}
-                {{ partial "components/multilingual.html" . }}
-                {{ partial "components/dark-mode.html" . }}
             {{ end }}
             {{ block "main" . }}{{ end }}
             {{ partial "components/back-to-top.html" . }}

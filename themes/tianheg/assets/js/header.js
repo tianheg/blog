@@ -15,24 +15,6 @@ window.addEventListener(
         '--header-height',
         headerHeight
       );
-
-      {{ if and .Site.Params.enableHeaderAutoHide (eq .Site.Params.headerLayout "flex") }}
-      /**
-       * Auto hide header
-       */
-      let lastScrollY = 0;
-
-      window.addEventListener(
-        'scroll',
-        throttle(() => {
-          window.scrollY > lastScrollY
-            ? header.classList.add('hide')
-            : header.classList.remove('hide');
-
-          lastScrollY = window.scrollY;
-        }, delayTime)
-      );
-      {{ end }}
     }
 
     const timeEl = document.querySelector('.time')

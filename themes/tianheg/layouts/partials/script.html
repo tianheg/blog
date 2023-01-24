@@ -4,13 +4,13 @@
     {{- $scripts = union $scripts (slice "js/force-https.js") -}}
 {{- end -}}
 
-{{- if and .Site.Params.enableHeader (eq .Site.Params.headerLayout "flex") -}}
-    {{- $scripts = union $scripts (slice "js/header.js") -}}
 
-    {{- if .Site.Params.enableNavToggle -}}
-        {{- $scripts = union $scripts (slice "js/nav-toggle.js") -}}
-    {{- end -}}
+{{- $scripts = union $scripts (slice "js/header.js") -}}
+
+{{- if .Site.Params.enableNavToggle -}}
+    {{- $scripts = union $scripts (slice "js/nav-toggle.js") -}}
 {{- end -}}
+
 
 {{- if .Site.Params.enableBackToTopAutoHide -}}
     {{- $scripts = union $scripts (slice "js/back-to-top.js") -}}
