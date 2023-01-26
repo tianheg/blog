@@ -24,6 +24,16 @@ draft = false
 
 这样就可以实现「内链当前标签页打开，外链新标签页打开」。这可能是应用了「正则表达式」，我还不太了解。Hugo 的语法我还不了解。
 
+2023 年 1 月 26 日 Update：
+
+以上方法，我不理解。直接尝试用到另一个 Hugo 主题，发现不可行。找到另一种可行的方法：
+
+新建文件 `layouts/_default/_markup/render-link.html` ，加入内容：
+
+```html
+<a href="{{ .Destination | safeURL }}"{{ with .Title}} title="{{ . }}"{{ end }}{{ if strings.HasPrefix .Destination "http" }} target="_blank" {{ end }}>{{ .Text | safeHTML }}</a>
+```
+
 ---
 参考资料
 
@@ -31,3 +41,4 @@ draft = false
 2.  <https://github.com/reuixiy/hugo-theme-meme/blob/d392ab1814/layouts/partials/utils/markdownify.html?rgh-link-date=2021-01-12T04%3A02%3A06Z#L27>
 3.  <https://stackoverflow.com/a/4425214/12539782>
 4.  <https://discourse.gohugo.io/t/internal-links-in-same-tab-external-links-in-new-tab/11048/9>
+5. <https://gohugo.io/templates/render-hooks/>
