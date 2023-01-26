@@ -6,7 +6,7 @@ tags = ["诗作"]
 draft = false
 +++
 
-![](/images/poetry-yiyanwangdaotou.jpg)
+![](/images/poetry-yiyanwangdaotou.webp)
 
 路，一眼望到头
 
