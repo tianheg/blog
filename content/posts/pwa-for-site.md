@@ -2,7 +2,7 @@
 title = "为网站开启 PWA"
 date = 2021-07-21T00:00:00+08:00
 lastmod = 2022-02-16T15:30:57+08:00
-tags = ["技术", "Web"]
+tags = ["技术"]
 draft = false
 +++
 
