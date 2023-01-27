@@ -20,15 +20,9 @@
     {{- $scripts = union $scripts (slice "js/dark-mode.js") -}}
 {{- end -}}
 
-{{- if and .Site.IsMultiLingual .Site.Params.enableLangToggle -}}
-    {{- $scripts = union $scripts (slice "js/multilingual.js") -}}
-{{- end -}}
-
 {{- if .Site.Params.enableCopy -}}
     {{- $scripts = union $scripts (slice "js/copy.js") -}}
 {{- end -}}
-
-{{- $scripts = union $scripts (slice "js/custom.js") -}}
 
 {{- $processedScripts := slice ("" | resources.FromString "dummy.js") -}}
 {{- range $scripts -}}
