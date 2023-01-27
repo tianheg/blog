@@ -2,7 +2,7 @@
 title = "使用 robots.txt"
 date = 2020-05-17T00:00:00+08:00
 lastmod = 2022-02-16T15:16:28+08:00
-tags = ["技术", "Web"]
+tags = ["技术"]
 draft = false
 +++
 

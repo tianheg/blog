@@ -2,7 +2,7 @@
 title = "Draw Sky, Cloud"
 date = 2021-12-04T00:00:00+08:00
 lastmod = 2022-02-16T15:02:56+08:00
-tags = ["技术", "Web"]
+tags = ["技术"]
 draft = false
 +++
 
