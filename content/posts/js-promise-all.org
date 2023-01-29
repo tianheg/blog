@@ -253,6 +253,57 @@ Promise.all([p1.catch((error) => error), p2.catch((error) => error)]).then(
 This function returns a new promise which is fulfilled with an array of fulfillment values for the passed promises, or rejects with the reason of the first passed promise that rejects. It resolves all elements of the passed iterable to promises as it runs this algorithm.
 #+END_QUOTE
 
+* 实现 Promise.all()
+
+#+BEGIN_SRC js
+Promise.all = function (proms) {
+  return new Promise((resolve, reject) => {
+    try {
+      const results = []
+      let count = 0
+      let fulfilledCount = 0
+      for (const p of proms) {
+        let i = count
+        count++
+
+        Promise.resolve(p).then((data) => {
+          fulfilledCount++
+          results[i] = data
+          console.log(fulfilledCount)
+          if (fulfilledCount === count) {
+            console.log('全部完成')
+            resolve(results)
+          }
+        }, reject)
+      }
+      console.log(count, fulfilledCount)
+      if (count === 0) {
+        resolve(results)
+      }
+    } catch (error) {
+      reject(error)
+      console.error(error)
+    }
+  })
+}
+
+// 测试
+Promise.all([Promise.reject(1), Promise.resolve(2), Promise.resolve(3), 4])
+  .then((data) => {
+    console.log('成功', data)
+  },
+  (reason) => {
+    console.log('失败', reason)
+  }
+  )
+// 4 0
+// 1
+// 2
+// 3
+// 失败 1
+#+END_SRC
+
 参考资料
 
 1. [[https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Promise/all#specifications][Promise.all() - JavaScript | MDN]]
+2. [[https://github.com/Sunny-117/js-challenges/issues/1][1. 实现一个Promise.all · Issue #1 · Sunny-117/js-challenges]]
