@@ -1,0 +1,258 @@
+#+TITLE: JS Promise.all()
+#+DATE: <2023-01-27 Fri 14:45>
+#+TAGS[]: 技术 JavaScript
+
+{{< feynman >}}
+
+=Promise.all()= 静态方法，输入一系列可迭代期约，输出一个期约。
+
+1. 如果输入的系列期约都实现（fulfill），即使输入的是空的迭代，输出的期约状态是 fulfill，返回一个实现值数组。
+2. 如果有任何一个输入期约是拒绝状态，返回的也是拒绝状态，附带第一个拒绝期约的理由。
+
+Demo（示范）：
+
+#+BEGIN_SRC js
+const promise1 = Promise.resolve(3);
+const promise2 = 42;
+const promise3 = new Promise((resolve, reject) => {
+  setTimeout(resolve, 100, 'foo');
+});
+
+Promise.all([promise1, promise2, promise3]).then((values) => {
+  console.log(values);
+});
+#+END_SRC
+
+* 语法
+
+#+BEGIN_SRC js
+Promise.all(iterable)
+#+END_SRC
+
+** 参数
+
+- =iterable= 可迭代期约
+
+** 返回值
+
+返回一个期约：
+
+- 已完成的，传递的可迭代期约为空。
+- 异步完成，当所有可迭代期约完成时。返回的完成值，是所有可迭代完成值的次序排列。如果传入的可迭代期约非空但包含非 pending 期约，返回期约仍是异步完成（不是同步）。
+- 异步拒绝，传入期约有拒绝状态。拒绝原因来自传入的第一个拒绝状态的期约。
+
+* 描述
+
+=Promise.all()= 是几个期约并发方法之一。它能够聚合多个期约的运行结果。在执行多个异步任务时，我们希望每个任务都能成功执行，此时就可以用 =Promise.all()= 。如果输入的期约有 reject 状态的， =Promise.all()= 立刻返回 reject。与之对应的有 =Promise.allSettled()= ，它是只要输入一个 fulfill 状态的期约，就能返回 fulfill 状态期约。
+
+* 示例
+
+** 等待全部完成或出现 reject
+
+#+BEGIN_SRC js
+const p1 = Promise.resolve(3);
+const p2 = 1337;
+const p3 = new Promise((resolve, reject) => {
+  setTimeout(() => {
+    resolve("foo");
+  }, 100);
+});
+
+Promise.all([p1, p2, p3]).then((values) => {
+  console.log(values);
+});
+
+// Promise { <state>: "pending" }
+//   <state>: "fulfilled"
+// Array(3) [ 3, 1337, "foo" ]
+#+END_SRC
+
+可迭代部分包含非期约部分，会被忽略，但仍在返回值数组中保留。
+
+#+BEGIN_SRC js
+const p = Promise.all([1, 2, 3]);
+const p2 = Promise.all([1, 2, 3, Promise.resolve(444)]);
+const p3 = Promise.all([1, 2, 3, Promise.reject(555)]);
+
+setTimeout(() => {
+  console.log(p);
+  console.log(p2);
+  console.log(p3);
+});
+
+// Promise { <state>: "fulfilled", <value>: [1, 2, 3]}
+// Promise { <state>: "rejected", <reason>: 555 }
+// Uncaught (in promise) 555
+#+END_SRC
+
+** Promise.all 的异步与同步
+
+异步 resolve：
+
+#+BEGIN_SRC js
+const resolvedPromisesArray = [Promise.resolve(33), Promise.resolve(44)];
+const p = Promise.all(resolvedPromisesArray);
+console.log(p);
+
+// Promise { <state>: "pending" }
+
+setTimeout(() => {
+  console.log("the queue is now empty");
+  console.log(p)
+});
+
+// the queue is now empty
+// Promise { <state>: "fulfilled", <value>: [33, 44]}
+#+END_SRC
+
+异步 reject：
+
+#+BEGIN_SRC js
+const mixedPromisesArray = [Promise.resolve(33), Promise.reject(44)];
+const p = Promise.all(mixedPromisesArray);
+console.log(p);
+// Promise { <state>: "pending" }
+//   <state>: "rejected"
+//   <reason>: 44
+
+setTimeout(() => {
+  console.log("the queue is now empty");
+  console.log(p);
+)};
+// the queue is now empty
+// Promise { <state>: "rejected", <reason>: 44 }
+#+END_SRC
+
+同步：
+
+#+BEGIN_SRC js
+const p = Promise.all([]);
+const p2 = Promise.all([1337, "hi"]); // 非期约值会被忽略，但计算结果是异步的
+console.log(p);
+console.log(p2);
+// Promise { <state>: "fulfilled", <value>: [] }
+// Promise { <state>: "pending" }
+//   <state>: "fulfilled"
+//   <value>: Array [ 1337, "hi" ]
+
+setTimeout(() => {
+  console.log("the queue is now empty");
+  console.log(p2);
+});
+// the queue is now empty
+// Promise { <state>: "fulfilled", <value>: [1337, "hi"] }
+#+END_SRC
+
+为什么加个延时，Promise 就会从 pending 变为 fulfilled？
+
+** 用 Promise.all() 搭配 async 函数
+
+async 函数中，“过度等待”代码很常见。
+
+错误代码：
+
+#+BEGIN_SRC js
+async function getPrice() {
+  const choice = await promptForDishChoice();
+  const prices = await fetchPrices();
+  return prices[choice];
+#+END_SRC
+
+getPrice() 异步函数中的两个函数并不互相依赖。但是在以上代码中，await 的存在导致：如果 promptForDishChoice() 没有执行完成，下面的代码就无法执行。可以用 Promise.all() 并列执行这两个函数。
+
+正确写法：
+
+#+BEGIN_SRC js
+async function getPrice() {
+  const [choice, prices] = await Promise.all([
+    promptForDishChoice(),
+    fetchPrices(),
+  ]);
+  return prices[choice];
+#+END_SRC
+
+Promise.all() 用在这里是几个并发方法中最合适的，因为错误处理是直观的——如果输入的期约有 reject 状态的，返回的结果就不可用。
+
+Promise.all() 接受一系列可迭代期约，因此如果使用它来平行执行多个异步函数，需要调用 async 函数，并且使用可返回的期约。直接将函数传递给 Promise.all 行不通，因为它们不是期约。
+
+错误代码：
+
+#+BEGIN_SRC js
+async function getPrice() {
+  const [choice, prices] = await Promise.all([
+    promptForDishChoice,
+    fetchPrices,
+  ]);
+}
+#+END_SRC
+
+** Promise.all() 快速失败行为
+
+如果传入的期约有一个状态是 reject，就返回 reject 状态。
+
+四个 resolve，第五个 reject：
+
+#+BEGIN_SRC js
+const p1 = new Promise((resolve, reject) => {
+  setTimeout(() => resolve("one"), 1000);
+});
+const p2 = new Promise((resolve, reject) => {
+  setTimeout(() => resolve("two"), 2000);
+});
+const p3 = new Promise((resolve, reject) => {
+  setTimeout(() => resolve("three"), 3000);
+});
+const p4 = new Promise((resolve, reject) => {
+  setTimeout(() => resolve("four"), 4000);
+});
+const p5 = new Promise((resolve, reject) => {
+  reject(new Error("reject"));
+});
+
+Promise.all([p1, p2, p3, p4, p5])
+  .then((values) => {
+    console.log(values);
+  })
+  .catch((error) => {
+    console.error(error.message);
+  });
+#+END_SRC
+
+最终只输出了 reject 状态。
+
+可以通过修改 reject 细节，来增加输出内容：
+
+#+BEGIN_SRC js
+const p1 = new Promise((resolve, reject) => {
+  setTimeout(() => resolve('p1_delayed_resolution'), 1000)
+})
+const p2 = new Promise((resolve, reject) => {
+  reject(new Error('p2_immediate_rejection'))
+})
+
+Promise.all([p1.catch((error) => error), p2.catch((error) => error)]).then(
+  (values) => {
+    console.log(values[0])
+    console.log(values[1])
+  }
+)
+
+/**
+ * Promise { <state>: "pending" }
+ * p1_delayed_resolution
+ * Error: p2_immediate_rejection
+ */
+
+#+END_SRC
+
+* ES 标准
+
+[[https://tc39.es/ecma262/multipage/control-abstraction-objects.html#sec-promise.all]]
+
+#+BEGIN_QUOTE
+This function returns a new promise which is fulfilled with an array of fulfillment values for the passed promises, or rejects with the reason of the first passed promise that rejects. It resolves all elements of the passed iterable to promises as it runs this algorithm.
+#+END_QUOTE
+
+参考资料
+
+1. [[https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Promise/all#specifications][Promise.all() - JavaScript | MDN]]
