@@ -1,17 +1,13 @@
 {{ if and (.Params.comments | default .Site.Params.enableComments)}}
   {{ if or (in .Site.Params.mainSections .Section) .Params.comments }}
   <br>
+  <hr>
+  <br>
+  <div style="margin-inline: 10px;">如希望撰写评论，请发邮件至 <a href="mailto:me@tianhegao.com?subject=评论：{{ .Title }}">me@tianhegao.com</a> 并注明文章标题，我会挑选对读者有价值的评论附加到文章末尾。</div>
   <br>
   <hr>
   <br>
-  <br>
-  <div style="text-align: center;">评论和交流请发送邮件到 me@tianhegao.com</div>
-  <br>
-  <br>
-  <hr>
-  <br>
-  <br>
-  <div style="text-align: center;">通过以下渠道赞赏此文
+  <div style="text-align: center;">可通过以下渠道赞赏此文
     <ul style="display: flex; list-style-type: none; justify-content: space-around;">
       <li><a href="https://afdian.net/a/tianheg">爱发电</a></li>
       <li><a href="https://paypal.me/tianheg/5">Paypal（定额 5 美元）</a></li>
