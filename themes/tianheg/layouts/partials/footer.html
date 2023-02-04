@@ -1,12 +1,10 @@
-{{ if or (and .IsHome .Site.Params.displayFooterInHome) (and (not .IsHome) (.Site.Params.displayFooter | default .Site.Params.enableFooter)) }}
-    <footer id="footer" class="footer">
-        <div class="footer-inner">
-            <div class="site-info">
-              {{- if .Site.Params.displaySiteCreatedYear -}}
-                  写在&nbsp;{{- dateFormat "2006" (time .Site.Params.siteCreatedTime) -}}–
-              {{- end -}}
-              {{- now.Format "2006 " -}}&nbsp;by &nbsp; {{- .Site.Author.name -}}
-            </div>
-        </div>
-    </footer>
+{{ if or (and .IsHome) (and (not .IsHome) (.Site.Params.displayFooter | default .Site.Params.enableFooter)) }}
+  <footer id="footer" class="footer">
+    <div class="footer-inner">
+      <div class="site-info">
+        写在&nbsp;{{- dateFormat "2006" (time .Site.Params.siteCreatedTime) -}}–
+        {{- now.Format "2006 " -}}&nbsp;by &nbsp; {{- .Site.Author.name -}}
+      </div>
+    </div>
+  </footer>
 {{ end }}

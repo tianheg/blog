@@ -1,5 +1,3 @@
-{{ $src := partial "utils/lib.html" (dict "$" . "type" "clipboard") }}
-
 // Copy Button for Code Blocks
 
 // References
@@ -70,7 +68,7 @@ window.addEventListener("DOMContentLoaded", event => {
         addCopyButtons(navigator.clipboard);
     } else {
         const script = document.createElement('script');
-        script.src = '{{ $src }}';
+        script.src = 'https://cdn.jsdelivr.net/npm/clipboard-polyfill@2.8.6/dist/clipboard-polyfill.min.js';
         script.defer = true;
         script.onload = function() {
             addCopyButtons(clipboard);

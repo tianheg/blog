@@ -8,15 +8,6 @@
 {{- with $imgs -}}
     {{- $translated := slice -}}
     {{- range $index, $img := $imgs -}}
-        <!-- Image Hosting -->
-        {{- if and $.Site.Params.enableImageHost $.Site.Params.headAlso -}}
-            {{- if (eq hugo.Environment "production") -}}
-                {{- if ne (substr . 0 4) "http" -}}
-                    {{- $img = printf `%s/%s` (strings.TrimSuffix "/" $.Site.Params.imageHostURL) (strings.TrimPrefix "/" $img) -}}
-                {{- end -}}
-            {{- end -}}
-        {{- end -}}
-
         <!-- Make URLs absolute -->
         {{- $img = $img | absURL -}}
 

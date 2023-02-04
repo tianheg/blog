@@ -6,10 +6,6 @@ hasCJKLanguage = true
 theme = "tianheg"
 pluralizeListTitles = false
 summaryLength = 42
-footnoteReturnLinkContents = "↩"
-disablePathToLower = false
-relativeURLs = false
-uglyURLs = false
 enableGitInfo = true
 
 [permalinks]
@@ -55,20 +51,13 @@ enableGitInfo = true
     keepWhitespace = false
 
 [author]
-    # Name
     name = "tianheg"
-    # Email
     email = "me@tianhegao.com"
-    # Motto or introduction
-    motto = ""
-    # Avatar
+    motto = "了解自己，认识世界"
     avatar = "/icons/apple-touch-icon.png"
-    # Personal website, default: baseURL
-    website = "https://tianheg.xyz/"
-    # Twitter
+    website = "https://tianhegao.com/"
     twitter = "tianheg_"
 
-# Related content
 [related]
     threshold = 80
     includeNewer = true
@@ -147,65 +136,51 @@ enableGitInfo = true
 
 [params]
     enableHeader = true
-    enableHeaderAutoHide = false
-    displayHeaderInHome = true
     headerBackground = "alpha(var(--color-bg), 0.8) linear-gradient(90deg, #f79533b0 0, #f37055b4 15%, #ef4e7b1a 30%, #a166ab23 44%, #5073b821 58%, #1098ad26 72%, #07b39b41 86%, #6dba82a1 100%)"
-    headerLayout = "center"
-    navHeight = "10em"
     siteBrandFontSize = 1
     siteBrandFontColor = "var(--color-contrast-high)"
     enableMenu = true
     displayMenuInHome = true
-    activeInSection = true
-    homeLayout = "poetry"
     homePoetry = ["探索的人", "了解自己，认识世界", "谨以此博客献给未来的自己"]
     logo = "images/logo.png"
-    homeLinksPadding = 1
     siteLogo = "/icons/apple-touch-icon.png"
-    siteDescription = "学习技术，热爱生活"
+    siteDescription = "了解世界，认识自己"
     siteCreatedTime = "2018-12-23T20:17:43+08:00"
     siteTwitter = "tianheg_"
-    categoryBy = "sections"
-    enableTagCloud = true
+    ## Tags
     fontUnit = "em"
     largestFontSize = 2.5
     smallestFontSize = 1
-
+    ## List
     listWidth = 50
-
     displayListTitle = false
-
     listDateFormat = "2006-01-02"
-
     listDatePosition = "left"
-    groupByMonth = false
-    chineseZodiac = false
-    i18nYear = false
-    i18nMonth = false
     displayTaxonomyTermCount = true
     limitEntriesLimit = -1
-    includeContent = true
+    ## theme
     enableDarkMode = true
     defaultTheme = "light"
     hideThemeToggle = false
     hideThemeToggleInHome = false
     overrideSystemPreferences = false
+    primaryColorLight = "220, 90%, 56%"
+    primaryColorDark = "201, 65%, 62%"
+    ## PWA
     themeColor = "#fff"
     themeColorDark = "#16171d"
     safariMaskColor = "#fff"
     msApplicationTileColor = "#fff"
+    enableServiceWorker = true
+    ## meta data
     jsonLD = true
     openGraph = true
-    twitterCards = false
-    autoDetectImages = true
-    enableServiceWorker = true
+    twitterCards = true
+    ## animation
     duration = 0.5
-    primaryColorLight = "220, 90%, 56%"
-    primaryColorDark = "201, 65%, 62%"
+    ## Single post page
     postWidth = 50
-    original = false
-    displayPostDescription = false
-    
+    # post meta
     enablePostMeta = false
     enablePostMetaInHome = true
     postMetaDateFormat = "2006.1.2"
@@ -224,47 +199,31 @@ enableGitInfo = true
     readingTimeIcon = "clock"
     displayBusuanziPagePV = false
     busuanziPagePVIcon = "eye"
-    
+    # external links
     hrefTargetBlank = true
+    # TOC
     enableTOC = false
     displayTOCTitle = true
     displayTOCNum = true
     linkHeadingsToTOC = true
-
+    # header
     enableHeadingsAnchor = true
     headingsOpt = "1-6"
     anchorSymbol = "#"
     anchorIcon = ""
     enableAnchorLink = true
     enableAnchorAutoHide = true
+    # images
+    autoDetectImages = true
     enableCaption = true
-
     captionPrefix = "◎ "
-
-    ######################################
-    # Image Hosting
-
-    # Note: render only in production
-    #       environment
-    #
-    #       only support absolute URLs
-    #       relative to root, e.g.
-    #       /images/meme.jpg
-    #       (~/blog/static/images/meme.jpg)
-    enableImageHost = false
-    imageHostURL = ""
-    headAlso = false
-
+    # footnote
     squareBrackets = true
-
     footnoteReturnLinkIcon = "angle-up"
-
     insertHrBySelf = true
-    
-    ######################################
-    # Scrollbar
+    # scrollbar
     customizeScrollbar = true
-
+    ## font
     # Site brand
     fontFamilySiteBrand = ""
     # Menu bar
@@ -273,7 +232,6 @@ enableGitInfo = true
     fontFamilyTitle = ""
     # Headings, toc title
     fontFamilyHeadings = ""
-    #'
     # Code, superscript, post meta info, post updated badge, post gitinfo, minimal footer, busuanzi site view counter
     fontFamilyCode = "'Source Code Pro', 'Ubuntu Mono', 'DejaVu Sans Mono', 'Courier New', Monaco, monospace"
     # Blockquotes
@@ -286,101 +244,50 @@ enableGitInfo = true
     fontFamilyFooter = ""
     # Body
     fontFamilyBody = "-apple-system, system-ui, BlinkMacSystemFont, 'Noto Serif SC', Arial, 'Amstelvar', 'Josefin Sans', 'Hiragino Sans GB', 'Microsoft Yahei', 'ST Heiti', sans-serif, 'Apple Color Emoji', 'Segoe UI Emoji', 'Segoe UI Symbol'"
-
     fontSize = 16
-
-    tabSize = 4
-
+    ## para
+    tabSize = 2
     lineHeight = 2
-
     enableParagraphIndent = true
-
     indentFirstParagraph = false
-
     paragraphStyle = "margin"
     enableJustify = false
     enableDropCap = false
     enableDropCapAfterHr = false
     deleteHrBeforeDropCap = false
     enableSmallCaps = false
-    enableChinesePunctuationGlyphCorrection = false
-    enablePostCopyright = true
-
-    displayPostCopyright = false
-
-    enablePostUpdatedBadge = false
-
-    displayUpdatedBadge = true
-    enableBadgeTitle = true
-    badgeTitlePrefix = "Updated @ "
-
     enablePostGitInfo = true
     displayPostGitInfo = true
     repoURL = "https://github.com/tianheg/blog"
     repoEditURL = "https://github.com/tianheg/blog/edit/main"
-    gitIcon = "code-branch"
-    displayCommitHash = false
-    displayCommitMessage = false
-    msgIcon = "info"
-    displayFeedback = false
-    feedbackIcon = "question"
-    feedbackText = "Feedback"
     displayEditLink = true
     editIcon = "edit"
     editText = "编辑"
-
     enableRelatedPosts = true
     displayRelatedPosts = true
-    relatedPostsNumber = 5
+    relatedPostsNumber = 10
     relatedPostsIcon = "plus-circle"
-    enablePostTags = false
-    postTagsIcon = "tag"
     enablePostNav = true
-
     postNavInSection = true
-
     enableMinimalFooter = true
-    enableAboutPageMinimalFooter = true
-
     enableBackToTop = true
-
     enableBackToTopAutoHide = true
-
     displayBackToTopInHome = false
-
-    displayBackToTopOnMobile = false
-
+    displayBackToTopOnMobile = true
     backToTopIcon = "arrow-up"
-
     enableFooter = true
     displayFooter = true
-    displayFooterInHome = true
-    displaySiteCreatedYear = true
-
-    ######################################
     # Code Blocks
-
     enableHighlight = true
-
-    enableOverflowY = false
-    maxHeight = 20
-    # Unit: em
-
+    enableOverflowY = true
+    maxHeight = 20 # Unit: em
     enableCopy = true
     enableCopyAutoHide = true
-
-    enableFingerprint = false
-    enableSRI = false
-
+    enableFingerprint = true
+    enableSRI = true
+    # 404 page
     fofPoster = "./images/flying-clouds-720p.jpg"
     fofVideoWebm = "/videos/flying-clouds-720p.webm"
     fofVideoMp4 = "/videos/flying-clouds-720p.mp4"
-
     # Comments
     enableComments = true
-    autoLoadComments = true
-
-    [params.lib]
-        host = "https://cdn.jsdelivr.net"
-    [params.lib.path]
-        clipboard = "/npm/clipboard-polyfill@2.8.6/dist/clipboard-polyfill.min.js"

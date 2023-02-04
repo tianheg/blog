@@ -10,27 +10,15 @@
 
 $brandHeight: null;
 
-@if ($siteBrandSVG) {
-  .brand {
-    width: $siteBrandSVGWidth;
-    height: $siteBrandSVGHeight;
-    fill: $siteBrandSVGFill;
-  }
+.brand {
+  font-size: $siteBrandFontSize;
+  color: $siteBrandFontColor;
+  text-decoration: none;
 
-  $brandHeight: $siteBrandSVGHeight;
-}
-
-@else {
-  .brand {
-    font-size: $siteBrandFontSize;
+  &:hover {
     color: $siteBrandFontColor;
-    text-decoration: none;
-
-    &:hover {
-      color: $siteBrandFontColor;
-    }
   }
-
-  /* $siteBrandFontSize * {body line-height} */
-  $brandHeight: $fontSize * strip-unit($siteBrandFontSize) * 1.618;
 }
+
+/* $siteBrandFontSize * {body line-height} */
+$brandHeight: $fontSize * strip-unit($siteBrandFontSize) * 1.618;

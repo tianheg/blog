@@ -19,22 +19,6 @@
     $duration: {{ . }}s;
 {{ end }}
 
-{{ if .Site.Params.enableHeaderAutoHide }}
-    $enableHeaderAutoHide: true;
-{{ else }}
-    $enableHeaderAutoHide: false;
-{{ end }}
-
-{{ if .Site.Params.enableNavToggle }}
-    $enableNavToggle: true;
-
-    {{ with .Site.Params.navHeight | default "10em" }}
-        $navHeight: {{ . }};
-    {{ end }}
-{{ else }}
-    $enableNavToggle: false;
-{{ end }}
-
 {{ if .Site.Params.displayBackToTopOnMobile }}
     $displayBackToTopOnMobile: true;
 {{ else }}
@@ -88,12 +72,7 @@ $baseRelURL: "{{ strings.TrimSuffix (.Site.BaseURL | relURL) "/" }}";
 // Typography
 
 // Font Family
-
-{{ if .Site.Params.enableChinesePunctuationGlyphCorrection }}
-    {{ .Scratch.Set "glyph" "'glyph-correction', " }}
-{{ else }}
-    {{ .Scratch.Set "glyph" "" }}
-{{ end }}
+{{ .Scratch.Set "glyph" "" }}
 {{ $glyph := .Scratch.Get "glyph" }}
 
 {{ with .Site.Params.fontFamilySiteBrand }}
@@ -128,17 +107,6 @@ $baseRelURL: "{{ strings.TrimSuffix (.Site.BaseURL | relURL) "/" }}";
 {{ end }}
 
 @import "base/font-family";
-
-// Chinese Punctuation Glyph Correction
-
-{{ if .Site.Params.enableChinesePunctuationGlyphCorrection }}
-    @import "base/glyph-correction";
-
-    // Magic adjustment for zh-cn
-    .drop-cap {
-        margin-top: 1rem !important;
-    }
-{{ end }}
 
 // Emphasis Point
 
@@ -228,10 +196,6 @@ $baseRelURL: "{{ strings.TrimSuffix (.Site.BaseURL | relURL) "/" }}";
     {{ end }}
 
     @import 'layout/header';
-
-    {{ if and (eq .Site.Params.headerLayout "flex") .Site.Params.enableNavToggle }}
-        @import 'components/nav-toggle';
-    {{ end }}
 {{ end }}
 
 
@@ -298,14 +262,6 @@ $baseRelURL: "{{ strings.TrimSuffix (.Site.BaseURL | relURL) "/" }}";
     @import "components/post-meta";
 {{ end }}
 
-{{ if .Site.Params.enablePostCopyright }}
-    @import "components/post-copyright";
-{{ end }}
-
-{{ if .Site.Params.enablePostUpdatedBadge }}
-    @import "components/updated-badge";
-{{ end }}
-
 {{ if .Site.Params.enablePostGitInfo }}
     @import "components/post-gitinfo";
 {{ end }}
@@ -329,24 +285,12 @@ $baseRelURL: "{{ strings.TrimSuffix (.Site.BaseURL | relURL) "/" }}";
     @import "components/related-posts";
 {{ end }}
 
-{{ if .Site.Params.enablePostTags }}
-    @import "components/post-tags";
-{{ end }}
-
 {{ if .Site.Params.enableMinimalFooter }}
     @import "components/minimal-footer";
 {{ end }}
 
-{{ if .Site.Params.enableAboutPageMinimalFooter }}
-    @import "components/minimal-footer-about";
-{{ end }}
-
 {{ if .Site.Params.enablePostNav }}
     @import "components/post-nav";
-{{ end }}
-
-{{ if .Site.Params.enableComments }}
-    @import "components/comments";
 {{ end }}
 
 {{ if .Site.Params.enableBackToTop }}
@@ -365,19 +309,10 @@ $baseRelURL: "{{ strings.TrimSuffix (.Site.BaseURL | relURL) "/" }}";
 
 
 // Homepage Layout
-
-{{ if eq .Site.Params.homeLayout "poetry" }}
-    $homeLinksPadding: {{ .Site.Params.homeLinksPadding }}em;
-
-    @import "pages/home-poetry";
-{{ end }}
+@import "pages/home-poetry";
 
 // Tags Page
-
-{{ if .Site.Params.enableTagCloud }}
-    @import "pages/tag-cloud";
-{{ end }}
-
+@import "pages/tag-cloud";
 
 // 404 Page
 
