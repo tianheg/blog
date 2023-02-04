@@ -1,4 +1,4 @@
-{{ if or (or (and .IsHome .Site.Params.displayHeaderInHome) (eq .Site.Params.headerLayout "flex")) (and (not .IsHome) .Site.Params.enableHeader) }}
+{{ if or (or (and .IsHome)) (and (not .IsHome) .Site.Params.enableHeader) }}
   <header class="header">
     {{ template "site-brand" . }}
   </header>

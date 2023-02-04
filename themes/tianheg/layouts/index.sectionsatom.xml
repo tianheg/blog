@@ -56,20 +56,16 @@
             {{- end }}
             {{- $summary := .Description | default (partial "utils/summary.html" $page) -}}
             <summary type="html">{{ partial "utils/make-links-absolute.html" (dict "$" . "content" $summary) | html }}</summary>
-            {{ if $.Site.Params.includeContent }}
-                <content type="html">{{ partial "utils/make-links-absolute.html" (dict "$" . "content" .Content) | html }}</content>
-            {{ end }}
+              <content type="html">{{ partial "utils/make-links-absolute.html" (dict "$" . "content" .Content) | html }}</content>
             <!-- Sections -->
-            {{ if eq $.Site.Params.categoryBy "sections" }}
-                {{ $.Scratch.Delete "sectionDir" }}
-                {{ $sections := split (strings.TrimSuffix "/" .File.Dir) "/" }}
-                {{ range $sections }}
-                    {{ $section := . }}
-                    {{ $.Scratch.Add "sectionDir" (printf `/%s` .) }}
-                    {{ with $.Site.GetPage ($.Scratch.Get "sectionDir") }}
-                        {{ if (eq .Kind "section") }}
-                            <category scheme="{{ .Permalink }}" term="{{ $section }}" label="{{ $section }}" />
-                        {{ end }}
+            {{ $.Scratch.Delete "sectionDir" }}
+            {{ $sections := split (strings.TrimSuffix "/" .File.Dir) "/" }}
+            {{ range $sections }}
+                {{ $section := . }}
+                {{ $.Scratch.Add "sectionDir" (printf `/%s` .) }}
+                {{ with $.Site.GetPage ($.Scratch.Get "sectionDir") }}
+                    {{ if (eq .Kind "section") }}
+                        <category scheme="{{ .Permalink }}" term="{{ $section }}" label="{{ $section }}" />
                     {{ end }}
                 {{ end }}
             {{ end }}
