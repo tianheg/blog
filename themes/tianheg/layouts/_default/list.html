@@ -53,7 +53,7 @@
                     {{ range $pages.GroupByDate "2006" }}
                       {{ $.Scratch.Set "year" .Key }}
                       {{ $year := $.Scratch.Get "year" }}
-                      <h2 class="list-year">{{ $year }}</h2>
+                      <h2 class="list-year">{{ $year }} <span class="posts-per-year">({{ len .Pages }})</span></h2>
                       {{ partial "utils/list-item.html" (dict "$" .) }}
                     {{ end }}
                 </div>
