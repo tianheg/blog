@@ -13,11 +13,6 @@
 
             <h1 class="post-title p-name">{{ (partial "utils/title.html" (dict "$" $ "title" $.Title)).htmlTitle }}</h1>
 
-            {{ with .Params.subtitle }}
-                {{- $raw := . -}}
-                <div class="post-subtitle p-name">{{ partial "utils/markdownify.html" (dict "$" $ "raw" $raw "isContent" false) }}</div>
-            {{ end }}
-
             {{ if .Params.meta | default .Site.Params.enablePostMeta }}
                 {{ partial "components/post-meta.html" (dict "$" . "isHome" false) }}
             {{ end }}
