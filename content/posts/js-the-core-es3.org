@@ -1,0 +1,543 @@
+#+TITLE: JavaScript. The Core.(ES3)
+#+DATE: <2023-02-06 Mon 21:44>
+#+TAGS[]: ECMAScript 技术
+
+
+{{< feynman >}}
+
+[[http://dmitrysoshnikov.com/ecmascript/javascript-the-core/][JavaScript. The Core.]]
+
+本篇的 ES 版本为 3。
+
+* 1. 一个对象
+
+ECMAScript 是一种面向对象的语言，对象是这门语言的基础。那么，什么是对象，它是如何定义的？
+
+一个对象是很多属性的组合，除此之外，它还有一个名为 prototype 的子对象。prototype 要么是一个对象，要么是一个 null 值。
+
+对象的原型由内部的 =[[Prototype]]= 引用。但实际使用时，是另一种形式—— =__<internel-property>__= 下划线标记，特别是对于原型来说： =__proto__= 。
+
+#+begin_src js
+var foo = {
+  x: 10,
+  y: 20
+}
+#+end_src
+
+如下图所示，对象 foo 由三部分构成——x，y， =__proto__= 。前两个是公开的，最后一个是隐藏的。而 =__proto__= 对应之后的 foo 的原型。
+
+#+BEGIN_EXPORT html
+<img src="/images/js-the-core-es3-0.svg" alt="图一、一个拥有原型的基本对象">
+<span class="caption">◎ 图一、一个拥有原型的基本对象</span>
+#+END_EXPORT
+
+这些原型的作用是什么？原作者认为「原型链（prototype chain）」能回答这个问题。
+
+* 2. 一个原型链
+一个对象有名为 prototype 的子对象，而这个子对象又会有自己的 prototype 子对象，由此形成一条围绕 prototype 的原型链条。
+
+原型链条能够实现继承和分享属性。
+
+什么是继承？继承就是，对象能够从自己的原型获得属性，而该原型又能从它的原型获得属性。
+
+如果我们有两个对象，且这两个对象只有少部分属性不同，那么我们何不新建一个对象，将相同的属性包含进去，再通过构造函数新建不同的两个对象呢？
+
+在一些基于类的系统中，这种代码复用方式被称为「基于类的继承」。
+
+ECMAScript 有自己的代码复用逻辑，跟类并无区别。这种继承方式由原型链实现，称为「delegation based inheritance」（特定于 ECMAScript 的话，可称为「基于原型的继承」）。
+
+#+begin_src js
+var a = {
+  x: 10,
+  calculate: function (z) {
+    return this.x + this.y + z;
+  }
+};
+var b = {
+  y: 20,
+  __proto__: a
+};
+var c = {
+  y: 30,
+  __proto__: a
+};
+
+b.calculate(30);
+c.calculate(40);
+#+end_src
+
+如代码所示，对象 b 和 c 从 a 处继承了 calculate() 函数。
+
+很简单的规则：如果对象自身并没有相应的属性或方法，那它就会在原型链中寻找。第一个找到的属性或方法会被应用。因此，一个被找到的属性被称为「继承属性」。如果查询过整个原型链都没有找到，就返回 =undefined= 。
+
+要注意， =this= 和当前对象的值有关，而和继承属性的对象无关。在上面的例子里， =this.y= 是从 b 和 c 获得，而不是 a。但 =this.x= 是从 a 获得，因为在当前对象找不到对应的 a 值，根据原型链机制，会在 b 和 c 的原型中找到 a 。
+
+如果没有为一个对象设置原型，那 =__proto__= 的默认值是 =Object.prototype= 。对象 =Object.prototype= 也有一个 =__proto__= ，它是原型链的终点，值为 null。
+
+下图显示了 a、b 和 c 对象的继承层次结构：
+
+#+BEGIN_EXPORT html
+<img src="/images/js-the-core-es3-1.svg" alt="图二、一个原型链">
+<span class="caption">◎ 图二、一个原型链</span>
+#+END_EXPORT
+
+注意：ES5 提供了 =Object.create= 函数，亟此作为一种实现基于原型继承的可选方式。
+
+#+BEGIN_SRC js
+var a = {
+  x: 10,
+  calculate: function (z) {
+    console.log(this.x + this.y + z)
+  }
+}
+
+var b = Object.create(a, { y: { value: 20 }})
+var c = Object.create(a, { y: { value: 30 }})
+
+b.calculate(30) // 60
+c.calculate(40) // 80
+#+END_SRC
+
+ES6 虽然标准化了 =__proto__= 的行为，但它仍可用于对象的初始化。
+
+很多情况中，我们需要相同或类似的状态结构（比如，一组相同属性），它们有着不同的状态值。这种情况下，我们可以使用「构造器函数」，它能通过特定模式（相同的属性，不同的属性值）来创建对象。
+
+* 3. 构造器
+
+构造器函数不仅创建指定模型的对象，还自动为新建的对象设置原型对象。这个原型对象存储在 =ConstructorFunction.prototype= 属性中。
+
+比如，我们可以重写上面的例子。a 的作用被 ~Foo.prototype~ 替代了：
+
+#+BEGIN_SRC js
+function Foo(y) {
+  this.y = y
+}
+Foo.prototype.x = 10
+Foo.prototype.calculate = function (z) {
+  return this.x + this.y + z
+}
+
+var b = new Foo(20)
+var c = new Foo(30)
+
+b.calculate(30)
+c.calculate(40)
+
+console.log(
+  b.__proto__ === Foo.prototype,
+  c.__proto__ === Foo.prototype,
+  b.constructor === Foo,
+  c.constructor === Foo,
+  Foo.prototype.constructor === Foo,
+  b.calculate === b.__proto__.calculate,
+  b.__proto__.calculate === Foo.prototype.calculate
+)
+#+END_SRC
+
+下图是代码的关系图：
+
+#+BEGIN_EXPORT html
+<img src="/images/js-the-core-es3-2.svg" alt="图三、构造器与对象关系">
+<span class="caption">◎ 图三、构造器与对象关系</span>
+#+END_EXPORT
+
+这张图片再一次说明：每个对象都有原型。
+
+如果对构造器函数 =Foo= 进行严格分类的话，它是构造器函数和原型对象的结合，这种结合可称为「class」。
+
+注意：ES6 中「class」的概念被标准化了，由基于构造器函数的语法糖实现。从这种角度看原型链，它就是基于类继承的一个实现细节。
+
+#+BEGIN_SRC js
+// ES6
+class Foo {
+  constructor(name) {
+    this._name = name
+  }
+  getName() {
+    return this._name
+  }
+}
+
+class Bar extends Foo {
+  getName() {
+    return super.getName() + ' Doe'
+  }
+}
+
+var bar = new Bar('John')
+console.log(bar.getName()) // John Doe
+#+END_SRC
+
+* 4. 执行上下文堆栈
+
+英文是 Execution context stack，另一种英文解释是 runtime program execution。
+
+存在三种 ECMAScript 代码：全局范围、函数级、eval 级。每段代码都在各自上下文中执行。全局上下文只有一个，函数和 eval 上下文可以有多个。函数的每次调用，都是一次进入函数上下文判断函数代码类型的过程。eval 上下文和函数上下文类似。
+
+注意，一个函数可能产生无穷尽的上下文，因为对函数的每次调用都会生成一个新的上下文，它有着新的上下文状态（参数值变化了）：
+
+#+BEGIN_SRC js
+function foo(bar) {}
+
+foo(10);
+foo(20);
+foo(30);
+#+END_SRC
+
+一个执行上下文会激活其他上下文。比如，一个函数调用了另一个函数（或者全局上下文调用全局函数）。从逻辑上来看，这些是基于堆栈实现的，我们称之为执行上下文堆栈（execution context stack）。
+
+- caller 能激活其他上下文
+- callee 是被激活的上下文
+
+它们的称呼不固定，也就说，一个上下文可能既是一个 caller，也是一个 callee。比如，一个函数被全局上下文调用了，与此同时它也会调用自己内部的函数。
+
+当 caller 调用 callee 时，caller 会暂停执行当前上下文的代码，进入到此时的 callee 的上下文中（pass the control flow to the callee）。callee 被推入堆栈，变成当前活跃的执行上下文。在 callee 执行结束（callee 的上下文结束）以后，将控制权返回 caller，继续执行 caller 的上下文，直到 caller 的结束。callee 被调用方可以简单地返回或退出异常。抛出但未捕获的异常会使运行过程从一个或多个上下文退出（从堆栈弹出）。
+
+也就是说，所有的 ECMAScript 程序运行时都表示为执行上下文（EC，execution context）堆栈，其中堆栈的顶部是一个活动上下文：
+
+#+BEGIN_EXPORT html
+<img src="/images/js-the-core-es3-3.svg" alt="图四、一个执行上下文栈">
+<span class="caption">◎ 图四、一个执行上下文栈</span>
+#+END_EXPORT
+
+当程序开始时，它进入全局执行上下文，即堆栈的底部和第一个元素。然后全局代码提供一些初始化，创建所需的对象和函数。在全局上下文的执行过程中，它的代码可能会激活一些其他（已经创建的）函数，这些函数将进入它们的执行上下文，将新元素推入堆栈，等等。在初始化完成之后，运行时系统正在等待一些事件（例如用户的鼠标点击），这些事件将激活一些函数并进入一个新的执行上下文。
+
+在下一个图中，如果某个函数上下文为 =EC1= ，而全局上下文为 =Global EC= ，那么在从全局上下文进入和退出 =EC1=  时，将进行以下堆栈修改：
+
+#+BEGIN_EXPORT html
+<img src="/images/js-the-core-es3-4.svg" alt="图五、改变执行上下文栈">
+<span class="caption">◎ 改变执行上下文栈</span>
+#+END_EXPORT
+
+这正是 ECMAScript 的运行时系统管理代码执行的方式。
+
+如前所述，堆栈中的每个执行上下文都可以表示为一个对象。让我们看看它的结构以及执行代码需要什么样的状态（哪些属性）。
+
+* 5. 执行上下文
+
+执行上下文可以抽象地表示为一个简单的对象。每个执行上下文都有一组必要的属性（我们可以称之为上下文的状态），用于跟踪其关联代码的执行进度。下图显示了上下文的结构：
+
+#+BEGIN_EXPORT html
+<img src="/images/js-the-core-es3-5.svg" alt="图六、一个执行上下文结构">
+<span class="caption">◎ 图六、一个执行上下文结构</span>
+#+END_EXPORT
+
+除了这三个需要的属性（一个变量对象、一个 =this= 值和一个作用域链）之外，根据实现的不同，执行上下文可能具有任何额外的状态。
+
+* 6. 变量对象
+
+#+BEGIN_QUOTE
+变量对象是与执行上下文关联的数据容器。它是一个特殊的对象，存储在上下文中定义的变量和函数声明中。
+#+END_QUOTE
+
+注意，函数表达式（与函数声明不同）不包含在变量对象中。
+
+变量对象是一个抽象概念。在不同的上下文中由不同的对象表示。例如，在全局上下文中，变量对象就是全局对象本身（这就是为什么我们能够通过全局对象的属性名称来引用全局变量）。
+
+#+BEGIN_SRC js
+var foo = 10
+
+function bar() {} // function declaration, FD
+(function baz() {}) // function expression, FE
+
+console.log(
+  this.foo == foo,
+  window.bar == bar
+)
+
+console.log(baz)
+#+END_SRC
+
+全局上下文的变量对象（VO，variable object）有以下属性：
+
+#+BEGIN_EXPORT html
+<img src="/images/js-the-core-es3-6.svg" alt="图七、全局变量对象">
+<span class="caption">◎ 图七、全局变量对象</span>
+#+END_EXPORT
+
+函数表达式 =baz= 并未出现在上图的全局变量对象中，这是访问 =baz= 时出错（ =Uncaught ReferenceError: baz is not defined= ）的原因。
+
+注意，与其他语言（C/C++）相比，在 ECMAScript 中，只有函数能创建新的作用域。在函数范围内定义的变量和内部函数在外部是不可见的，并且不会污染全局变量对象。
+
+可以用 =eval= 创建新的（eval 的）执行上下文。但是， =eval= 能够使用全局的变量对象，或者调用方（当在函数内部调用时使用函数）的变量对象。
+
+关于函数以及它们的变量对象——在一个函数上下文中，变量对象由活跃对象（AO，activation object）表示。
+
+* 7. 活动对象
+
+Activation Object
+
+上下文中的代码在执行的时候，会创建变量对象的一个作用域链。这个作用域链决定了各级上下文中的代码在访问变量和函数时的顺序。代码正在执行的上下文的变量对象始终位于作用域链的最前端。如果上下文是函数，则其活动对象用作变量对象。
+
+当调用方激活（调用）一个函数时，将创建一个名为活动对象的特殊对象。由一般参数和 =arguments= 对象构成，后者是一般参数的映射，但它具有索引属性。然后，将活动对象用作函数上下文的变量对象。
+
+例如，函数的变量对象和活动对象是同一个简单的变量对象，但除了变量和函数声明外，它还存储一般参数和 =arguments= 对象，并称之为活动对象。
+
+代码示例：
+
+#+BEGIN_SRC js
+function foo(x, y) {
+  var z = 30
+  function bar() {}
+  (function baz() {})
+}
+foo(10, 20)
+#+END_SRC
+
+=foo= 函数上下文的活动对象图示：
+
+#+BEGIN_EXPORT html
+<img src="/images/js-the-core-es3-7.svg" alt="图八、活动对象">
+<span class="caption">◎ 图八、活动对象</span>
+#+END_EXPORT
+
+同样，函数表达式 =baz= 不包含在变量/活动对象中。
+
+注意，在 ES5 中，可变对象和活动对象的概念被组合到词法环境模型中。
+
+在 ECMAScript 中，我们可以使用内部函数，在这些内部函数中，我们可以引用父函数的变量或全局上下文的变量。当我们将一个变量对象命名为上下文的范围对象时，类似于上面讨论的原型链，存在所谓的作用域链（Scope chain）。
+
+* 8. 作用域链
+
+#+BEGIN_QUOTE
+作用域链是出现在上下文代码中搜索的标识符的对象列表。
+#+END_QUOTE
+
+规则类似于原型链：如果变量没有在自己的作用域（自己的变量/活动对象）中找到，将会继续查找父级变量对象。
+
+上下文的标识符：变量名、函数声明、形式参数等。当函数在其代码中引用非局部变量（或局部函数或形式参数）标识符时，这种变量被称为自由变量。作用域链的存在是为了搜索自由变量。
+
+通常情况下，作用域链是父级变量对象和（位于作用域链的前面）函数的自有变量/活动变量列表的集合。然而，作用域链也可能包含其他对象。比如，上下文执行过程中，动态添加到作用域链中的对象——with 对象或 catch 从句的特殊对象。
+
+解析（查找）标识符时，从活动对象开始搜索作用域链，直到（如果在自有活动对象中没有找到）作用域链的顶端——重复此步骤，和原型链类似。
+
+#+BEGIN_SRC js
+var x = 10
+
+(function foo() {
+  var y = 20
+  (function bar() {
+    var z = 30
+    console.log(x + y + z)
+  })()
+})()
+#+END_SRC
+
+我们可以通过隐式 =__parent__=  属性假定作用域链对象之间的链接，该属性引用链中的下一个对象。作用域链的另一种表示形式可以是简单的数组。使用 =__parent__= 概念，我们可以用下图表示上面的示例（因此父变量对象保存在函数的 =[[Scope]]=  属性中）：
+
+#+BEGIN_EXPORT html
+<img src="/images/js-the-core-es3-8.svg" alt="图九、作用域链">
+<span class="caption">◎ 图九、作用域链</span>
+#+END_EXPORT
+
+在代码执行时，作用域链可以使用 =with= 语句和 =catch=  子句对象进行扩展。由于这些对象是简单的对象，它们可能有原型（和原型链）。这个事实导致作用域链查找是二维的：(1) 首先考虑作用域链链接，然后 (2) 对每个作用域链的链接——进入链接原型链的深度（如果链接有原型的话）。
+
+例如：
+
+#+BEGIN_SRC js
+Object.prototype.x = 10
+
+var w = 20
+var y = 30
+
+
+;(function foo() {
+  var w = 40
+  var x = 100
+  
+  with ({z: 50}) {
+    console.log(w, x, y, z)
+  }
+  
+  console.log(x, w)
+  
+  console.log(window.w)
+})()
+#+END_SRC
+
+上述代码的图示结构：
+
+#+BEGIN_EXPORT html
+<img src="/images/js-the-core-es3-9.svg" alt="图十、with 从句作用域链">
+<span class="caption">◎ 图十、with 从句作用域链</span>
+#+END_EXPORT
+
+注意，并非在所有实现中，全局对象都会从 =Object.prototype= 继承。图片中描述的行为（带有引用来自全局上下文的未定义变量 x）是可复现测试的，比如，在 SpiderMonkey 中。
+
+在所有父变量对象都存在之前，从内部函数获取父数据并没有什么特别之处ーー我们只是遍历作用域链解析（搜索）所需的变量。然而，正如我们上面提到的，在一个上下文结束后，它的所有状态和它本身都被摧毁了。同时，可以从父函数返回一个内部函数。此外，这个返回的函数稍后可能会从另一个上下文激活。如果一个自由变量的上下文已经“消失”了，那么这样的激活会怎样呢？在一般理论中，有助于解决这个问题的概念称为（词法）闭包，在 ECMAScript 中，它与作用域链概念直接相关。
+
+* 9. 闭包
+
+在 ECMAScript 中，函数是第一类对象。这个术语意味着函数可以作为参数传递给其他函数（在这种情况下，它们被称为“funargs”，是“函数参数”的缩写）。接收“funargs”的函数被称为高阶函数，或者更接近数学的运算符。也可以从其他函数返回函数。返回其他函数的函数称为函数值函数（或具有函数值的函数）。
+
+与“funargs”和“function value”相关的概念问题有两个。这两个子问题被概括为一个叫做“Funarg 问题”（或“泛函论证问题”）的子问题。为了解决完全的“Funarg 问题”，闭包的概念被发明出来。让我们更详细地描述这两个子问题（我们将看到它们都是在 ECMAScript 中使用函数图中提到的 =[[Scope]]=  属性解决的）。
+
+“Funarg 问题”的第一个子类型是“向上的 Funarg 问题”。当一个函数从另一个函数返回“up”（向外）并使用上面已经提到的自由变量时，它就出现了。为了能够在父上下文结束后访问父上下文的变量，创建时的内部函数保存在它的 =[[Scope]]= 属性父上下文的范围链中。然后，当函数被激活时，其上下文的作用域链形成为激活对象和这个 =[[Scope]]=  属性的组合（实际上，我们在上面的图中已经看到了）：
+
+#+BEGIN_SRC txt
+Scope chain = Activation object + [[Scope]]
+#+END_SRC
+
+注意！正是在创建时ーー函数保存了父函数的作用域链，因为这个保存的作用域链将用于查找变量，然后在函数的进一步调用中使用。
+
+#+BEGIN_SRC js
+function foo() {
+  var x = 10
+  return function bar() {
+    console.log(x)
+  }
+}
+
+var returnedFunction = foo()
+var x = 20
+
+returnedFunction()
+#+END_SRC
+
+这种作用域样式称为静态（或词法）作用域。我们看到变量 =x= 位于返回的 =bar= 函数的保存的 =[[Scope]]= 中。在一般理论中，当上面例子中的变量 =x= 被解析为 =20= 而不是 =10=  时，也存在一个动态范围。但是，ECMAScript 中不使用动态范围。
+
+“Funarg 问题”的第二部分是“向下的 Funarg 问题”。在这种情况下，父上下文可能存在，但是在解析标识符时可能存在歧义。问题是：标识符的值应该从哪个作用域使用ーー是在函数创建时静态保存，还是在执行时动态形成（即调用方的作用域）？为了避免这种模糊性并形成闭包，决定使用静态范围：
+
+#+BEGIN_SRC js
+var x = 10
+function foo() {
+  console.log(x)
+}
+(function (funArg) {
+  var x = 20
+  
+  funArg()
+})(foo)
+#+END_SRC
+
+我们可以得出结论，静态作用域是语言中必须具有闭包的要求。但是，有些语言可能提供动态和静态作用域的组合，允许程序员选择ーー哪些内容要闭包，哪些不要闭包。因为在 ECMAScript 中只使用了一个静态作用域（也就是说，我们对“funarg 问题”的两个子类型都有解决方案），所以结论是：ECMAScript 完全支持闭包，从技术上讲，闭包是使用函数的 =[[Scope]]= 属性实现的。现在我们可以给闭包一个正确的定义：
+
+#+BEGIN_QUOTE
+闭包是一个代码块（在 ECMAScript 中这是一个函数）和静态/词法保存的所有父作用域的组合。因此，通过这些保存的作用域，函数可以很容易地引用自由变量。
+#+END_QUOTE
+
+注意，由于每个（普通）函数在创建时保存 =[[Scope]]= ，理论上，ECMAScript 中的所有函数都是闭包。
+
+另一个需要注意的重要事项是，几个函数可能具有相同的父作用域（当我们有两个内部/全局函数时，这是很正常的情况）。在这种情况下，存储在 =[[Scope]]= 属性中的变量在具有相同父范围链的所有函数之间共享。一个闭包中变量的变化反映在另一个闭包中读取这些变量时：
+
+#+BEGIN_SRC js
+function baz() {
+  var x = 1
+  return {
+    foo: function () { return ++x },
+    bar: function () { return --x }
+  }
+}
+
+var closures = baz()
+console.log(
+  closures.foo(),
+  closures.bar()
+)
+#+END_SRC
+
+代码可用下图说明：
+
+#+BEGIN_EXPORT html
+<img src="/images/js-the-core-es3-10.svg" alt="图十一、共享 [[Scope]]">
+<span class="caption">◎ 图十一、共享 [[Scope]]</span>
+#+END_EXPORT
+
+这个特性与在循环中创建多个函数的混淆恰好相关。在已创建的函数中使用循环计数器，当所有函数在函数中具有相同的计数器值时，一些程序员经常会得到意外的结果。现在应该很清楚为什么会这样ーー因为所有这些函数都具有相同的 =[[Scope]]=  ，其中循环计数器具有最后赋值。
+
+#+BEGIN_SRC js
+var data = []
+
+for (var k = 0; k < 3; k++) {
+  data[k] = function () {
+    console.log(k)
+  }
+}
+data[0]()
+data[1]()
+data[2]()
+#+END_SRC
+
+有几种技术可以解决这个问题。其中一种技术是在作用域链中提供一个附加对象ーー例如使用附加函数：
+
+#+BEGIN_SRC js
+var data = []
+
+for (var k = 0; k < 3; k++) {
+  data[k] = (function (x) {
+    return function() {
+      console.log(x)
+    }
+  })(k)
+}
+data[0]()
+data[1]()
+data[2]()
+#+END_SRC
+
+注意：ES6 引入了块范围绑定。这是通过 =let= 或 =const= 关键字完成的。上面的例子现在可以很容易和方便地改写为：
+
+#+BEGIN_SRC js
+let data = []
+
+for (let k = 0; k < 3; k++) {
+  data[k] = function () {
+    console.log(k)
+  }
+}
+data[0]()
+data[1]()
+data[2]()
+#+END_SRC
+
+* 10. =this= 值
+
+#+BEGIN_QUOTE
+=this= 值是与执行上下文相关的特殊对象。因此，它可以被命名为上下文对象（也就是说，执行上下文在其中被激活的对象）。
+#+END_QUOTE
+
+任何对象都可以用作上下文的 =this= 值。一个重要的注意事项是， =this= 值是执行上下文的属性，但不是变量对象的属性。
+
+此特性非常重要，因为与变量相比， =this= 值从不参与标识符解析过程。例如，当访问代码中的 =this= 时，它的值直接从执行上下文获取，而不需要进行任何作用域链查找。 =this= 的值只在进入上下文时确定一次。
+
+注意：在 ES6 中， =this= 实际上成为了词法环境的一个属性，即 ES3 术语中变量对象的属性。这样做是为了支持箭头函数，这些函数具有从父上下文继承的词法 =this= 。
+
+顺便说一下，与 ECMAScript 不同，Python 的 =self= 方法参数是一个简单的变量，解析结果相同，甚至可以在执行过程中更改为另一个值。在 ECMAScript 中，不可能将新值赋给 =this= ，因为它不是变量！也不放在变量对象中。
+
+在全局上下文中，当前的 =this= 值是全局对象本身（也就是说，这里的 =this= 值等于变量对象）：
+
+#+BEGIN_SRC js
+var x = 10
+console.log(
+  x,
+  this.x,
+  window.x
+)
+#+END_SRC
+
+对于函数上下文，每个函数调用中的 =this= 值可能不同。这里 =this= 值是由调用方通过调用表达式的形式提供的（即如何激活函数的方式）。例如，下面的函数 =foo= 是一个被调用方，从全局上下文调用，该上下文是一个调用方。让我们看看这个例子，对于一个函数的相同代码，不同调用（函数激活的不同方式）中的 =this= 值是如何由调用者以不同的方式提供的：
+
+#+BEGIN_SRC js
+function foo() {
+  console.log(this)
+}
+foo()
+foo.prototype.constructor()
+var bar = {
+  baz: foo
+}
+
+bar.baz();
+(bar.baz)();
+(bar.baz = bar.baz)();
+(bar.baz, bar.baz)();
+(false || bar.baz)();
+
+var otherFoo = bar.baz
+otherFoo()
+#+END_SRC
+
+参考资料
+
+1. [[https://en.wikipedia.org/wiki/Prototype-based_programming]]
+2. [[https://en.wikipedia.org/wiki/Class-based_programming]]
