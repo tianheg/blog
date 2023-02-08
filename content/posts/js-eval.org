@@ -1,0 +1,35 @@
+#+TITLE: JS 下的 eval() 函数
+#+DATE: <2023-02-06 Mon 22:08>
+#+TAGS[]: 技术 JavaScript
+
+[[https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/eval]]
+
+=eval()= 函数能将内部字符串看作脚本并执行。所以它很危险，能够在任意位置执行。其内部的 =script= 可以是 JS 表达式、语句或语句序列的字符串。表达式可以包含现有对象的变量和属性。因为是解析成脚本，所以不能包含只能用于模块的 =import= 。
+
+它能计算给定脚本的完成值，如果为空返回 =undefined= 。如果脚本不是字符串原语，直接返回脚本本身。
+
+如果执行过程中出现任何异常，都会报错，例如 =SyntaxError= 。
+
+=eval()= 是全局对象的属性。 =eval()= 的参数是字符串。它可以是语句或表达式。返回代码的运行结果。
+
+- 表达式，返回执行结果
+- 赋值，返回赋值结果
+- let，返回 =undefined=
+
+因为返回结果的不确定性，所以建议不要依赖语句的完成值。
+
+在严格模式中， =eval()= 是被限制使用的。
+
+#+BEGIN_SRC js
+"use strict"
+eval("2 + 3")
+// Uncaught EvalError: call to eval() blocked by CSP
+#+END_SRC
+
+#+BEGIN_SRC js
+"use strict"
+const eval = 1
+// Uncaught SyntaxError: 'eval' can't be defined or assigned to in strict mode code
+#+END_SRC
+
+如果 eval() 的参数不是字符串，其返回参数本身。
