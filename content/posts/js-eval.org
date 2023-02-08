@@ -32,4 +32,188 @@ const eval = 1
 // Uncaught SyntaxError: 'eval' can't be defined or assigned to in strict mode code
 #+END_SRC
 
-如果 eval() 的参数不是字符串，其返回参数本身。
+如果 eval() 的参数不是字符串，其返回参数本身。用通用的方式解决问题：
+
+#+BEGIN_SRC js
+const expression = new String("2 + 1")
+eval(String(expression))
+#+END_SRC
+
+* 直接 eval 和非直接 eval
+
+直接 eval 只有 =eval(script)= ，其他所有调用 eval 执行脚本的代码都是非直接：
+
+#+BEGIN_SRC js
+(0, eval)("x + y")
+
+eval?.("x + y")
+
+const geval = eval
+geval("x + y")
+
+const obj = { eval }
+obj.eval("x + y")
+#+END_SRC
+
+非直接 eval 看起来似乎是在 =<script>= 中执行。这意味着：
+
+- 非直接 eval 工作在全局作用域，而非局部作用域。所执行代码无法访问所调用作用域的局部变量。
+
+#+BEGIN_SRC js
+function test() {
+  const x = 2
+  const y = 2
+  console.log(eval("x + y"))
+  console.log(eval?.("x + y"))
+}
+test()
+#+END_SRC
+
+- 非直接 eval 不会继承所在上下文的严格状态，只有 eval 内部有 ="use strict"= 字样时才会进入严格状态。
+
+#+BEGIN_SRC js
+function strictContext() {
+  "use strict"
+  eval?.(`with (Math) console.log(PI)`)
+}
+function strictContextStrictEval() {
+  "use strict"
+  eval?.(`"use strict"; with (Math) console.log(PI)`)
+}
+strictContext()
+strictContextStrictEval()
+#+END_SRC
+
+因此直接 eval 会继承 ="use strict"= ：
+
+#+BEGIN_SRC js
+function nonStrictContext() {
+  eval(`with (Math) console.log(PI)`)
+}
+function strictContext() {
+  "use strict"
+  eval(`with (Math) console.log(PI)`)
+}
+nonStrictContext()
+strictContext()
+#+END_SRC
+
+- 如果源代码不在严格模式下， =var= 声明的变量和函数声明将进入周围的作用域——对于非直接 eval 来说，它们会变成全局变量。如果是处于严格模式下的直接 eval，或者 eval 内部的代码带有 ="use strict"= ， =var= 声明的变量和函数声明将不会进入周围的作用域：
+
+#+BEGIN_SRC js
+eval("var a = 1")
+console.log(a)
+
+eval("'use strict'; var b = 1")
+console.log(b)
+
+function strictContext() {
+  "use strict"
+  eval?.("var c = 1")
+  eval("var d = 1")
+}
+strictContext()
+console.log(c)
+console.log(d)
+#+END_SRC
+
+=let= 和 =const= 声明的代码一直被限制在 =eval= 中：
+
+#+BEGIN_SRC js
+eval("var a = 12")
+eval("let b = 13")
+eval("const c = 10")
+console.log(a)
+console.log(b)
+console.log(c)
+#+END_SRC
+
+- 直接 eval 有可能访问额外的上下文表达式。比如，在函数中，可有以下代码状态：
+
+#+BEGIN_SRC js
+function Ctor() {
+  eval("console.log(new.target)")
+}
+new Ctor()
+#+END_SRC
+
+* 不要用 =eval()= ！
+
+使用直接 eval 有几个问题：
+
+- =eval()= 使用调用方的特权执行它传递的代码。如果您使用可能受到恶意方影响的字符串运行 =eval()= ，可能最终会用网页/扩展的权限在用户的机器上运行恶意代码。更重要的是，允许第三方代码访问调用 =eval()=  的作用域（如果是直接 eval）可能导致读取或更改本地变量的攻击。
+- =eval()=  比其他替代方案要慢，因为它必须调用 JavaScript 解释器，而许多其他构造是由现代 JS 引擎优化的。
+- 现代 JavaScript 解释器将 JavaScript 转换为机器代码。这意味着变量命名的任何概念都会被抹去。因此，任何 =eval()= 的使用都会迫使浏览器执行长时间的代价高昂的变量名查找，以确定变量在机器代码中的位置并设置其值。此外，可以通过 =eval()= 向该变量引入新内容，例如更改该变量的类型，强制浏览器重新计算所有生成的机器代码以进行补偿。
+- 如果作用域传递依赖于 =eval()= ，则缩减符放弃任何缩减，否则 =eval()= 无法在运行时读取正确的变量。
+
+在许多情况下，可以完全优化或避免使用 =eval()= 或相关方法。
+
+** 使用非直接 eval()
+
+#+BEGIN_SRC js
+function looseJsonParse(obj) {
+  return eval(`(${obj})`);
+}
+console.log(looseJsonParse("{ a: 4 - 1, b: function () {}, c: new Date() }"));
+#+END_SRC
+
+简单地使用间接 eval 和强制严格模式可以使代码变得更好：
+
+#+BEGIN_SRC js
+function looseJsonParse(obj) {
+  return eval?.(`"use strict";(${obj})`);
+}
+console.log(looseJsonParse("{ a: 4 - 1, b: function () {}, c: new Date() }"));
+#+END_SRC
+
+上面的两个代码片段看起来工作方式相同，但实际上并非如此; 第一个使用直接 eval 的代码存在多个问题。
+
+- 由于进行了更多的范围检查，这个过程要慢得多。注意计算字符串中的 =c: new Date()= 。在间接 eval 版本中，对象是在全局作用域中求值的，因此解释器可以安全地假设 =Date= 引用全局 =Date()= 构造函数而不是称为 =Date= 的局部变量。但是，在使用直接 eval 的代码中，解释器不能假定这一点。例如，在下面的代码中，计算字符串中的 =Date= 不引用 =window.Date()= ：
+
+#+BEGIN_SRC js
+function looseJsonParse(obj) {
+  function Date() {}
+  return eval(`(${obj})`);
+}
+console.log(looseJsonParse(`{ a: 4 - 1, b: function () {}, c: new Date() }`));
+#+END_SRC
+
+因此，在代码的 =eval()= 版本中，浏览器必须执行代价高昂的查找调用，以检查是否有任何称为 =Date()= 的本地变量。
+
+- 如果不使用严格模式， =eval()= 源中的 =var= 声明将成为周围范围中的变量。如果字符串是从外部输入获取的，这将导致难以调试的问题，特别是如果存在具有相同名称的现有变量。
+- 直接计算可以读取和变更周围作用域中的绑定，这可能导致外部输入损坏本地数据。
+- 当使用直接 =eval= 时，特别是当无法证明 eval 源处于严格模式时，引擎ーー和构建工具ーー必须禁用与内联相关的所有优化，因为 =eval()= 源可以依赖于其周围作用域中的任何变量名。
+
+但是，使用间接 =eval()= 不允许传递除现有全局变量之外的其他绑定，以供计算的源读取。如果需要指定计算的源应具有访问权限的其他变量，请考虑使用 =Function()= 构造函数。
+
+** 使用 Function() 构造器
+
+=Function()= 构造函数非常类似于上面的间接计算示例：它还在全局范围内计算传递给它的 JavaScript 源代码，而不需要读取或变更任何本地绑定，因此允许引擎比直接 =eval()= 做更多的优化。
+
+=eval()= 和 =Function()= 之间的区别在于，传递给 =Function()= 的源字符串被解析为函数体，而不是脚本。有一些细微差别ーー例如，可以在函数体的顶级使用 =return= 语句，但不能在脚本中使用。
+
+如果希望通过将变量作为参数绑定传递，在 eval 源中创建本地绑定， =Function()= 构造函数非常有用。
+
+#+BEGIN_SRC js
+function Date(n) {
+  return [
+    "Monday",
+    "Tuesday",
+    "Wednesday",
+    "Thursday",
+    "Friday",
+    "Saturday",
+    "Sunday",
+  ][n % 7 || 0]
+}
+function runCodeWithDateFunction(obj) {
+  return Function("Date", `"use strict"; return (${obj})`)(Date)
+}
+console.log(runCodeWithDateFunction("Date(5)"))
+#+END_SRC
+
+=eval()= 和 =Function()= 都隐式计算任意代码，并且在严格的 CSP 设置中是禁止的。还有额外的安全（和更快!）用于常见用例的 =eval()= 或 =Function()= 的替代方案。
+
+** 使用括号访问符
+
+不应使用 =eval()= 动态访问属性。考虑下面的示例，其中要访问的对象的属性在执行代码之前是不知道的。这可以用 =eval()= 来完成：
