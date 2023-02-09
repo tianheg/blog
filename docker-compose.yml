@@ -10,3 +10,12 @@ services:
     environment:
       - HUGO_WATCH=true
       - HUGO_BASEURL=http://127.0.0.1
+  node:
+    image: "node:lts"
+    user: "node"
+    working_dir: /src
+    environment:
+      - NODE_ENV=production
+    volumes:
+      - ./:/src
+    command: "npm run all"
