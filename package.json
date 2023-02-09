@@ -3,7 +3,7 @@
 	"private": true,
 	"scripts": {
 		"clean": "rimraf public",
-		"pagefind": "./scripts/pagefind_extended --source public --bundle-dir search",
+		"pagefind": "./scripts/pagefind_extended --source public --bundle-dir ../static/_pagefind",
 		"build": "hugo --buildFuture",
 		"start": "hugo serve --disableFastRender --buildFuture",
 		"all": "npm-run-all clean build pagefind"
