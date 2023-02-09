@@ -1,0 +1,24 @@
+{{ define "main" }}
+    <h1>搜索</h1>
+
+    <link href="/_pagefind/pagefind-ui.css" rel="stylesheet">
+    <script src="/_pagefind/pagefind-ui.js" type="text/javascript"></script>
+    
+    <div id="search"></div>
+    <script>
+        window.addEventListener('DOMContentLoaded', (event) => {
+            new PagefindUI({ element: "#search" });
+        });
+    </script>
+
+    <ul>
+	{{ range sort (where .Site.Pages "Section") ".Params.num" }}
+        {{ if .Params.title }}
+            <li>
+                <h2><a href="{{ .Permalink | relURL }}">#{{ .Params.num }}: {{ .Params.title }}</a></h2>
+                <p class="date">{{ time.Format "January 2, 2006" .Params.date }}</p>
+            </li>
+        {{ end }}
+	{{ end }}
+    </ul>
+{{ end }}
