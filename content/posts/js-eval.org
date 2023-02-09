@@ -1,6 +1,9 @@
 #+TITLE: JS 下的 eval() 函数
 #+DATE: <2023-02-06 Mon 22:08>
 #+TAGS[]: 技术 JavaScript
+#+TOC: true
+
+{{< feynman >}}
 
 [[https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/eval]]
 
@@ -217,3 +220,144 @@ console.log(runCodeWithDateFunction("Date(5)"))
 ** 使用括号访问符
 
 不应使用 =eval()= 动态访问属性。考虑下面的示例，其中要访问的对象的属性在执行代码之前是不知道的。这可以用 =eval()= 来完成：
+
+#+BEGIN_SRC js
+const obj = { a: 20, b: 30 }
+const propName = getPropName()
+const result = eval(`obj.${propName}`)
+#+END_SRC
+
+但是这里并不需要 eval，如果 =propName= 不是一个有效的标识符，执行就会报错。而且，如果 =getPropName= 不是你能控制的函数，任意代码都可以通过这样执行。使用属性访问器，更快更安全：
+
+#+BEGIN_SRC js
+const obj = { a: 20, b: 30 }
+const propName = getPropName()
+const result = obj[propName]
+#+END_SRC
+
+还可以用这种方式访问子代属性。使用 eval：
+
+#+BEGIN_SRC js
+const obj = { a: { b: { c: 0 } } }
+const propPath = getPropPath() // return a.b.c
+const result = eval(`obj.${propPath}`)
+#+END_SRC
+
+不使用 eval：
+
+#+BEGIN_SRC js
+function getDescendantProp(obj, desc) {
+  const arr = desc.split(".")
+  while (arr.length) {
+    obj = obj[arr.shift()]
+  }
+  return obj
+}
+
+const obj = { a: { b: { c: 0 } } }
+const propPath = getPropPath()
+const result = getDescendantProp(obj, propPath)
+#+END_SRC
+
+设置属性：
+
+#+BEGIN_SRC js
+function setDescendantProp(obj, desc, value) {
+  const arr = desc.split(".")
+  while (arr.length > 1) {
+    obj = obj[arr.shift()]
+  }
+  return (obj[arr[0]] = value)
+}
+
+const obj = { a: { b: { c: 0 } } }
+const propPath = getPropPath()
+const result = setDescendantProp(obj, propPath, 1)
+#+END_SRC
+
+注意，使用带有无限制输入的方括号访问器也是不安全的。
+
+** 使用回调函数
+
+在 JS 中，函数也可以被视为变量的一种，这表示可以将函数作为参数传递给其他 APIs。
+
+#+BEGIN_SRC js
+// Not setTimeout("...", 1000)
+setTimeout(() => {
+  // ...
+}, 1000)
+
+// Not element.setAttribute("onclick", "...")
+element.addEventListener("click", () => {
+  // ...
+})
+#+END_SRC
+
+闭包也是一种参数化函数的手段。
+
+** 使用 JSON
+
+如果要在 eval 中包含某类数据，应该考虑使用 JSON。
+
+* 例子
+
+** 使用 eval
+
+#+BEGIN_SRC js
+const x = 2
+const y = 3
+const z = 4
+eval("x + y + z")
+eval(z)
+#+END_SRC
+
+** eval 返回语句的完成值
+
+#+BEGIN_SRC js
+const str = "if (a) { 1 + 1 } else { 1 + 2 }"
+let a = true
+let b = eval(str)
+console.log(`b is: ${b}`) // 2
+
+a = false
+b = eval(str)
+console.log(`b is: ${b}`) // 3
+#+END_SRC
+
+#+BEGIN_SRC js
+const x = 5
+const str = `if (x === 5) {
+  console.log("z is 42")
+  z = 42
+} else {
+  z = 0
+}`
+
+console.log(eval(str))
+#+END_SRC
+
+#+BEGIN_SRC js
+let x = 5
+const str = `if (x === 5) {
+  console.log("z is 42")
+  z = 42
+  x = 420
+} else {
+  z = 0
+}`
+
+console.log(eval(str))
+#+END_SRC
+
+** 将 eval 作用字符串参数定义函数
+
+#+BEGIN_SRC js
+const functionString1 = "function a() {}" // 函数声明
+const functionString2 = "(function b() {})" // 函数表达式
+const function1 = eval(functionString1) // undefined
+const function2 = eval(functionString2) // function b() {}
+#+END_SRC
+
+* 标准
+
+[[https://tc39.es/ecma262/multipage/global-object.html#sec-eval-x]]
