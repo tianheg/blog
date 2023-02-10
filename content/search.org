@@ -4,10 +4,13 @@
 <link href="/_pagefind/pagefind-ui.css" rel="stylesheet">
 <script src="/_pagefind/pagefind-ui.js"></script>
 
-<div id="search"></div>
+<div id="search" data-pagefind-ignore></div>
 <script>
-    window.addEventListener('DOMContentLoaded', (event) => {
-        new PagefindUI({ element: "#search" });
+  window.addEventListener('DOMContentLoaded', (event) => {
+    new PagefindUI({
+      element: "#search",
+      showImages: false
     });
+  });
 </script>
 #+END_EXPORT
