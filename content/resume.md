@@ -34,7 +34,7 @@ line. It is intended to be used for contact details -->
 - 使用 Bootstrap 构架界面样式
 - Vue 进行模板构建
 
-[代码仓库](https://github.com/tianheg/sims) &bull; [网站 Demo](https://student.tianheg.xyz/)
+[代码仓库](https://github.com/tianheg/sims) &bull; [网站 Demo](https://student.tianheg.org/)
 
 ## 教育经历
 
