@@ -1,0 +1,67 @@
+#+TITLE: 博客搜索 Pagefind + Hugo
+#+DATE: <2023-02-10 Fri 02:01>
+#+TAGS[]: 技术 博客
+
+我博客的内容是很丰富的，生活记录、读书笔记、技术进步等。以前也有过想要添加搜索功能的念头，也加上了，一段时间后又发现可有可无。而且，添加搜索功能需要了解很多内容，限于精力就暂时搁置了。
+
+最近，我开始觉得，搜索还是蛮重要的。我的文章有很多，有些时候想找某方面内容不知道从何下手。我只给博客设置了标签这一种分类方式，在查找的时候大致可以确定在某些文章，再想确定到是哪篇文章，就需要搜索了。我在 Hugo 官方站找到「[[https://gohugo.io/tools/search/][Search for your Hugo Website]]」，其中提供了一些工具，我没有对特定工具的喜好，本想用 Lunr.js 但是它一时没配置好，看了那几个工具的文档。然后尝试了 Pagefind。
+
+文档给了一个 [[https://xkcd.pagefind.app/][xkcd Demo]]，试用之后感觉不错。搜索速度快，通读过文档后，发现对中文还有特别支持。于是，开始配置。
+
+我的博客部署在 Netlify，安装 pagefind 是通过 npm。但是，pagefind 的 npm 包只是一个包装器，它在安装时是从 GitHub release 直接下载二进制文件。这一步总是失败，排查了 pnpm、package script 等可能问题，最终选择直接下载 pagefind extended （extended 版本对中文有特别支持）二进制文件，然后通过 package script 直接调用。
+
+=package.json= ：
+
+#+BEGIN_SRC json
+{
+	"name": "blog",
+	"private": true,
+	"scripts": {
+		"pagefind": "./scripts/pagefind_extended --source public --bundle-dir ../static/_pagefind",
+		"build": "hugo --buildFuture",
+		"start": "hugo serve --disableFastRender --buildFuture",
+		"all": "npm-run-all build pagefind build"
+	},
+	"devDependencies": {
+		"npm-run-all": "^4.1.5"
+	}
+}
+#+END_SRC
+
+=search.org= ：
+
+#+BEGIN_SRC org
+#+TITLE: 搜索
+
+#+BEGIN_EXPORT html
+<link href="/_pagefind/pagefind-ui.css" rel="stylesheet">
+<script src="/_pagefind/pagefind-ui.js"></script>
+
+<div id="search" data-pagefind-ignore></div>
+<script>
+  window.addEventListener('DOMContentLoaded', (event) => {
+    new PagefindUI({
+      element: "#search",
+      showImages: false
+    });
+  });
+</script>
+#+END_EXPORT
+#+END_SRC
+
+除此之外，_pagefind 文件夹的位置也不确定。一开始是直接生成在 public 文件夹，但是因为 hugo 构建时 public 中还没有 _pagefind 文件夹，找不到相关文件，无法使用搜索。解决办法：改变 _pagefind 文件夹的位置，让它位于 static 中，之后再构建。你会注意到 package.json 中 all 脚本： =npm-run-all build pagefind build= ，hugo build 两次，这是为什么？
+
+第一次 build 生成 public 文件夹作为 pagefind 的 source，生成 static/_pagefind 文件夹，第二次 build 将 static 文件夹下的 _pagefind，放到即将部署的 public 文件夹中。
+
+还要注意，需要设置 Node.js 版本的环境变量，我是在 =netlify.toml= 文件中设置：
+
+#+BEGIN_SRC toml
+[context.production.environment]
+  NODE_VERSION = "18.12.1"
+#+END_SRC
+
+参考资料
+
+1. [[https://pagefind.app/][Pagefind]]
+2. [[https://www.brycewray.com/posts/2022/07/pagefind-quite-find-site-search/][Pagefind is quite a find for site search | BryceWray.com]]
+3. [[https://www.fournoas.com/posts/adding-full-text-search-to-a-hugo-static-website/][为 Hugo 静态网站添加全文检索功能 · 白汤四物]]
