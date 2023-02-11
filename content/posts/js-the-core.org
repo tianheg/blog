@@ -24,7 +24,7 @@ var foo = {
 如下图所示，对象 foo 由三部分构成——x，y， =__proto__= 。前两个是公开的，最后一个是隐藏的。而 =__proto__= 对应之后的 foo 的原型。
 
 #+BEGIN_EXPORT html
-<img src="/images/js-the-core-es3-0.svg" alt="图一、一个拥有原型的基本对象">
+<img src="/images/js-the-core-0.svg" alt="图一、一个拥有原型的基本对象">
 <span class="caption">◎ 图一、一个拥有原型的基本对象</span>
 #+END_EXPORT
 
@@ -74,7 +74,7 @@ c.calculate(40);
 下图显示了 a、b 和 c 对象的继承层次结构：
 
 #+BEGIN_EXPORT html
-<img src="/images/js-the-core-es3-1.svg" alt="图二、一个原型链">
+<img src="/images/js-the-core-1.svg" alt="图二、一个原型链">
 <span class="caption">◎ 图二、一个原型链</span>
 #+END_EXPORT
 
@@ -134,7 +134,7 @@ console.log(
 下图是代码的关系图：
 
 #+BEGIN_EXPORT html
-<img src="/images/js-the-core-es3-2.svg" alt="图三、构造器与对象关系">
+<img src="/images/js-the-core-2.svg" alt="图三、构造器与对象关系">
 <span class="caption">◎ 图三、构造器与对象关系</span>
 #+END_EXPORT
 
@@ -193,7 +193,7 @@ foo(30);
 也就是说，所有的 ECMAScript 程序运行时都表示为执行上下文（EC，execution context）堆栈，其中堆栈的顶部是一个活动上下文：
 
 #+BEGIN_EXPORT html
-<img src="/images/js-the-core-es3-3.svg" alt="图四、一个执行上下文栈">
+<img src="/images/js-the-core-3.svg" alt="图四、一个执行上下文栈">
 <span class="caption">◎ 图四、一个执行上下文栈</span>
 #+END_EXPORT
 
@@ -202,7 +202,7 @@ foo(30);
 在下一个图中，如果某个函数上下文为 =EC1= ，而全局上下文为 =Global EC= ，那么在从全局上下文进入和退出 =EC1=  时，将进行以下堆栈修改：
 
 #+BEGIN_EXPORT html
-<img src="/images/js-the-core-es3-4.svg" alt="图五、改变执行上下文栈">
+<img src="/images/js-the-core-4.svg" alt="图五、改变执行上下文栈">
 <span class="caption">◎ 改变执行上下文栈</span>
 #+END_EXPORT
 
@@ -215,7 +215,7 @@ foo(30);
 执行上下文可以抽象地表示为一个简单的对象。每个执行上下文都有一组必要的属性（我们可以称之为上下文的状态），用于跟踪其关联代码的执行进度。下图显示了上下文的结构：
 
 #+BEGIN_EXPORT html
-<img src="/images/js-the-core-es3-5.svg" alt="图六、一个执行上下文结构">
+<img src="/images/js-the-core-5.svg" alt="图六、一个执行上下文结构">
 <span class="caption">◎ 图六、一个执行上下文结构</span>
 #+END_EXPORT
 
@@ -248,7 +248,7 @@ console.log(baz)
 全局上下文的变量对象（VO，variable object）有以下属性：
 
 #+BEGIN_EXPORT html
-<img src="/images/js-the-core-es3-6.svg" alt="图七、全局变量对象">
+<img src="/images/js-the-core-6.svg" alt="图七、全局变量对象">
 <span class="caption">◎ 图七、全局变量对象</span>
 #+END_EXPORT
 
@@ -284,7 +284,7 @@ foo(10, 20)
 =foo= 函数上下文的活动对象图示：
 
 #+BEGIN_EXPORT html
-<img src="/images/js-the-core-es3-7.svg" alt="图八、活动对象">
+<img src="/images/js-the-core-7.svg" alt="图八、活动对象">
 <span class="caption">◎ 图八、活动对象</span>
 #+END_EXPORT
 
@@ -323,7 +323,7 @@ var x = 10
 我们可以通过隐式 =__parent__=  属性假定作用域链对象之间的链接，该属性引用链中的下一个对象。作用域链的另一种表示形式可以是简单的数组。使用 =__parent__= 概念，我们可以用下图表示上面的示例（因此父变量对象保存在函数的 =[[Scope]]=  属性中）：
 
 #+BEGIN_EXPORT html
-<img src="/images/js-the-core-es3-8.svg" alt="图九、作用域链">
+<img src="/images/js-the-core-8.svg" alt="图九、作用域链">
 <span class="caption">◎ 图九、作用域链</span>
 #+END_EXPORT
 
@@ -355,7 +355,7 @@ var y = 30
 上述代码的图示结构：
 
 #+BEGIN_EXPORT html
-<img src="/images/js-the-core-es3-9.svg" alt="图十、with 从句作用域链">
+<img src="/images/js-the-core-9.svg" alt="图十、with 从句作用域链">
 <span class="caption">◎ 图十、with 从句作用域链</span>
 #+END_EXPORT
 
@@ -436,7 +436,7 @@ console.log(
 代码可用下图说明：
 
 #+BEGIN_EXPORT html
-<img src="/images/js-the-core-es3-10.svg" alt="图十一、共享 [[Scope]]">
+<img src="/images/js-the-core-10.svg" alt="图十一、共享 [[Scope]]">
 <span class="caption">◎ 图十一、共享 [[Scope]]</span>
 #+END_EXPORT
 
