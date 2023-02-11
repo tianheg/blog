@@ -48,7 +48,7 @@ sudo pacman -S docker-compose # so easy!
 2. [[https://github.com/docker/docker-ce-packaging/pull/553#issuecomment-906294789][[master] add docker-compose-plugin package (deb, rpm) by thaJeztah · Pull Request #553 · docker/docker-ce-packaging]]
 
 * 配置
-** non-root 执行命令[fn:1]
+** non-root 执行命令
 
 #+BEGIN_SRC sh
 sudo groupadd docker
@@ -58,12 +58,12 @@ newgrp docker
 ## 验证可以没有 sudo 运行 docker
 docker run hello-world
 #+END_SRC
-** 开机启动 Docker[fn:2]
+** 开机启动 Docker
 #+BEGIN_SRC sh
 sudo systemctl enable docker.service
 sudo systemctl enable containerd.service
 #+END_SRC
-** 自定义 Docker 守护进程[fn:3]
+** 自定义 Docker 守护进程
 #+BEGIN_SRC sh
 # 开启 Docker 守护进程
 sudo systemctl start docker
@@ -80,7 +80,7 @@ sudo systemctl start docker
 }
 #+END_SRC
 
-配置守护进程监听端口[fn:4]：
+配置守护进程监听端口：
 
 有两种方式，一种通过 =daemon.json= 一种通过 =systemd= 。只介绍第一种。
 
@@ -133,18 +133,18 @@ sudo netstat -lntp | grep dockerd
 
 * 入门指南
 ** 什么是容器？
-容器可以看作计算机的进程，但它与一般进程是隔离的。这种隔离策略使用了已经存在很多年的 Linux 内核的特性——命名空间[fn:7]和控制组 cgroups[fn:6]。
+容器可以看作计算机的进程，但它与一般进程是隔离的。这种隔离策略使用了已经存在很多年的 Linux 内核的特性——命名空间和控制组 cgroups。
 
 所有的 container 其实都是在共享主机 Linux 的内核。
 ** 什么是容器镜像？
 #+BEGIN_QUOTE
 A container image represents binary data that encapsulates an application and all its software dependencies. Container images are executable software bundles that can run standalone and that make very well defined assumptions about their runtime environment.
 
--- Kubernetes Documentation[fn:8]
+-- Kubernetes Documentation
 
 A container image is a static file with executable code that can create a container on a computing system. A container image is immutable—meaning it cannot be changed, and can be deployed consistently in any environment. It is a core component of a containerized architecture.
 
--- Container Images: Architecture and Best Practices - Aqua[fn:9]
+-- Container Images: Architecture and Best Practices - Aqua
 #+END_QUOTE
 
 镜像是二进制数据，它封装了应用运行所需的一切。
@@ -191,7 +191,7 @@ docker run -it --network todo-app nicolaka/netshoot
 dig mysql
 #+END_SRC
 
-注意：不要在生产环境中使用环境变量，更安全的做法是使用 .env 之类的文件[fn:10]。
+注意：不要在生产环境中使用环境变量，更安全的做法是使用 .env 之类的文件。
 
 ** 使用 Docker Compose
 
@@ -322,12 +322,20 @@ Tip: If you want to run multiple containers with different memory limits on the 
 - [[https://containrrr.dev/watchtower/][Watchtower]] 用于更新运行中的容器化应用
 - [[https://www.portainer.io/][Portainer]] 用于可视化操作容器应用
 
-[fn:1] https://docs.docker.com/engine/install/linux-postinstall/#manage-docker-as-a-non-root-user
-[fn:2] https://docs.docker.com/engine/install/linux-postinstall/#configure-docker-to-start-on-boot
-[fn:3] https://docs.docker.com/config/daemon/systemd/
-[fn:4] https://docs.docker.com/engine/install/linux-postinstall/#configure-where-the-docker-daemon-listens-for-connections
-[fn:6] https://medium.com/@saschagrunert/demystifying-containers-part-i-kernel-space-2c53d6979504
-[fn:7] https://man7.org/linux/man-pages/man7/namespaces.7.html
-[fn:8] https://kubernetes.io/docs/concepts/containers/images/
-[fn:9] https://www.aquasec.com/cloud-native-academy/container-security/container-images/
-[fn:10] https://diogomonica.com/2017/03/27/why-you-shouldnt-use-env-variables-for-secret-data/
+https://docs.docker.com/engine/install/linux-postinstall/#manage-docker-as-a-non-root-user
+
+https://docs.docker.com/engine/install/linux-postinstall/#configure-docker-to-start-on-boot
+
+https://docs.docker.com/config/daemon/systemd/
+
+https://docs.docker.com/engine/install/linux-postinstall/#configure-where-the-docker-daemon-listens-for-connections
+
+https://medium.com/@saschagrunert/demystifying-containers-part-i-kernel-space-2c53d6979504
+
+https://man7.org/linux/man-pages/man7/namespaces.7.html
+
+https://kubernetes.io/docs/concepts/containers/images/
+
+https://www.aquasec.com/cloud-native-academy/container-security/container-images/
+
+https://diogomonica.com/2017/03/27/why-you-shouldnt-use-env-variables-for-secret-data/

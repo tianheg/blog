@@ -18,7 +18,7 @@ sudo apt install certbot python3-certbot-nginx
 
 * 配置 Nginx
 
-我已经通过 Nginx 部署了一个站点——blog.yidajiabei.xyz，现在部署的是第二个站点——til.yidajiabei.xyz。我没有使用 server block[fn:1]，即新建 =/etc/nginx/sites-available/til.yidajiabei.xyz= 文件，并通过 =sudo ln -s /etc/nginx/sites-available/til.yidajiabei.xyz /etc/nginx/sites-enabled/= 命令链接至 =sites-enabled= 文件夹下。而是直接将配置写在 =/etc/nginx/nginx.conf= 文件中。
+我已经通过 Nginx 部署了一个站点——blog.yidajiabei.xyz，现在部署的是第二个站点——til.yidajiabei.xyz。我没有使用 server block，即新建 =/etc/nginx/sites-available/til.yidajiabei.xyz= 文件，并通过 =sudo ln -s /etc/nginx/sites-available/til.yidajiabei.xyz /etc/nginx/sites-enabled/= 命令链接至 =sites-enabled= 文件夹下。而是直接将配置写在 =/etc/nginx/nginx.conf= 文件中。
 
 #+BEGIN_SRC conf
 http {
@@ -85,4 +85,4 @@ Certbot 自动更新正常运行。还可以通过以下命令测试「更新证
 sudo certbot renew --dry-run
 #+END_SRC
 
-[fn:1] https://www.digitalocean.com/community/tutorials/how-to-install-nginx-on-ubuntu-20-04
+https://www.digitalocean.com/community/tutorials/how-to-install-nginx-on-ubuntu-20-04
