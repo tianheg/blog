@@ -329,15 +329,6 @@ $fofPoster: url({{ $fofPoster }});
 
 @import "pages/404";
 
-
-// Third Party
-
-// Medium Zoom
-
-{{ if .Site.Params.enableMediumZoom }}
-    @import "third-party/medium-zoom";
-{{ end }}
-
 // Responsive
 
 $greaterWidth: null;
@@ -352,13 +343,11 @@ $greaterWidth: null;
 :root {
     --max-width: #{$maxWidth};
 }
+
 @import "base/responsive";
 
-
 // Data Attributes
-
 @import "base/data-attributes";
-
 
 // Custom
 
