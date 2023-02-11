@@ -92,7 +92,7 @@ sudo nginx
 2021/09/19 08:55:04 [warn] 33400#33400: could not build optimal types_hash, you should increase either types_hash_max_size: 1024 or types_hash_bucket_size: 64; ignoring types_hash_bucket_size
 #+END_SRC
 
-Solution[fn:1]:
+Solution:
 
 #+BEGIN_SRC conf
 # /etc/nginx/nginx.conf
@@ -107,12 +107,13 @@ http {
 [emerg] 34338#34338: bind() to 0.0.0.0:80 failed (98: Address already in use)
 #+END_SRC
 
-Solution[fn:2]:
+Solution:
 
 #+BEGIN_SRC sh
 sudo pkill -f nginx & wait $!
 sudo systemctl start nginx
 #+END_SRC
 
-[fn:1] https://wiki.archlinux.org/title/nginx#Configuration_example
-[fn:2] https://stackoverflow.com/a/51664874
+https://wiki.archlinux.org/title/nginx#Configuration_example
+
+https://stackoverflow.com/a/51664874
