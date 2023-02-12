@@ -1,0 +1,420 @@
+#+TITLE: JavaScript. The Core.(2nd)
+#+DATE: <2023-02-10 Fri 16:44>
+#+TAGS[]: 技术 JavaScript
+
+{{< feynman >}}
+
+[[http://dmitrysoshnikov.com/ecmascript/javascript-the-core-2nd-edition/][JavaScript. The Core: 2nd Edition – Dmitry Soshnikov]]
+
+文章的[[http://dmitrysoshnikov.com/ecmascript/javascript-the-core/][第一版]]覆盖了 ECMAScript 的一般方面，主要使用来自遗留 ES3 规范的抽象，并提到了 ES5 和 ES6（又名 ES2015）中的适当更改。
+
+从 ES2015 开始，该规范改变了一些核心组件的描述和结构，引入了新的模型等。在这个版本中，我们关注于更新的抽象、更新的术语，但是仍然维护在规范版本中保持一致的非常基本的 JS 结构。
+
+这篇文章讨论 ES2017+ 运行时系统。
+
+* 1. 对象
+
+ECMAScript 是一种基于原型组织的面向对象编程语言，其核心概念是对象。
+
+#+BEGIN_QUOTE
+定义1：
+
+Object：对象是属性的集合，并且具有单个原型对象。原型可以是对象或 =null= 值。
+#+END_QUOTE
+
+对象的原型由内部的 =[[Prototype]]= 属性引用。该属性通过 =__proto__= 属性向用户级代码公开。
+
+#+BEGIN_SRC js
+let point = {
+  x: 10,
+  y: 20,
+}
+#+END_SRC
+
+代码有两个显示自由属性和一个隐式 =__proto__= 属性的结构， =__proto__= 属性是对 =point= 原型的引用：
+
+#+BEGIN_EXPORT html
+<img src="/images/js-the-core-2nd-edition-0.svg" alt="图一、具有原型的基本对象">
+<span class="caption">◎ 图一、具有原型的基本对象</span>
+#+END_EXPORT
+
+原型对象采用动态调度机制实现继承。
+
+* 2. 原型
+
+对象创建的时候都会拥有原型。如果原型没有显示设置，则对象将接受默认原型作为继承对象。
+
+#+BEGIN_QUOTE
+定义2：
+
+Prototype: 原型是用于实现基于原型的继承的委托对象。
+#+END_QUOTE
+
+原型可以通过 =__proto__= 属性或 =Object.create=  方法显式设置：
+
+#+BEGIN_SRC js
+let point = {
+  x: 10,
+  y: 20,
+}
+let point3D = {
+  z: 30,
+  __proto__: point,
+}
+console.log(
+  point3D.x,
+  point3D.y,
+  point3D.z
+)
+#+END_SRC
+
+注意，默认情况下，将 =Object.prototype= 作为对象的继承对象。
+
+任何对象都可以用作另一个对象的原型，原型本身也可以有自己的原型。如果原型具有对其原型的非空引用等，则称为原型链。
+
+#+BEGIN_QUOTE
+定义3：
+
+Prototype chain: 原型链是用于实现继承和共享属性的对象的有限链。
+#+END_QUOTE
+
+#+BEGIN_EXPORT html
+<img src="/images/js-the-core-2nd-edition-1.svg" alt="图二、一个原型链">
+<span class="caption">◎ 图二、一个原型链</span>
+#+END_EXPORT
+
+规则很简单：如果在对象本身中没有找到属性，则尝试在原型中解析它；在原型的原型中，等等——直到考虑到整个原型链。
+
+从技术上讲，这种机制称为动态分派（dynamic dispatch）或委派（delegation）。
+
+#+BEGIN_QUOTE
+定义4：
+
+Delegation: 用于解析继承链中的属性的机制。该过程发生在运行时，因此也称为动态分派。
+#+END_QUOTE
+
+注意：与静态分派在编译时解析引用不同，动态分派在运行时解析引用。
+
+如果最终在原型链中找不到属性，则返回 =undefined= 值。
+
+正如我们所看到的，默认对象实际上从不为空——它总是从 =Object.prototype= 继承一些东西。要创建一个无原型字典，我们必须显式地将其原型设置为 =null= ：
+
+#+BEGIN_SRC js
+let dict = Object.create(null)
+console.log(dict.toString)
+#+END_SRC
+
+动态分派机制允许继承链的完全可变性，提供改变委托对象的能力：
+
+#+BEGIN_SRC js
+let protoA = { x: 10 }
+let protoB = { x: 20 }
+
+let objectC = Object.create(protoA)
+console.log(objectC.x)
+Object.setPrototypeOf(objectC, protoB)
+console.log(objectC.x)
+#+END_SRC
+
+注意：为什么不再建议使用 =__proto__= 对原型进行操作，而是选择使用一些 APIs， =Object.create= 、 =Object.getPrototypeOf= 、 =Object.setPrototypeOf= ，与 =Reflect= 模块类似。
+
+在 =Object.prototype=  的例子中，我们看到同一个原型可以在多个对象之间共享。基于这一原则，在 ECMAScript 中实现了基于类的继承。
+
+* 3. 类
+
+当几个对象共享相同的初始状态和行为时，它们就形成了一个分类。
+
+#+BEGIN_QUOTE
+定义5：
+
+Class：类是一个形式化的抽象集合，它规定了它的对象的初始状态和行为。
+#+END_QUOTE
+
+如果我们需要从同一个原型继承多个对象，我们当然可以创建一个原型，并从新创建的对象显式继承它：
+
+#+BEGIN_SRC js
+let letter = {
+  getNumber() {
+    return this.number
+  }
+}
+let a = { number: 1, __proto__: letter }
+let b = { number: 2, __proto__: letter }
+console.log(
+  a.getNumber(),
+  b.getNumber()
+)
+#+END_SRC
+
+代码关系图：
+
+#+BEGIN_EXPORT html
+<img src="/images/js-the-core-2nd-edition-2.svg" alt="图三、共享原型">
+<span class="caption">◎ 图三、共享原型</span>
+#+END_EXPORT
+
+由图可以看出步骤的繁琐。而类可以简化这些步骤。它作为一种语法糖（syntactic sugar，a construct which semantically does the same, but in a much nicer syntactic form，一种在语义上做同样事情的构造，但以更好的语法形式），它允许用方便的模式创建这样的多个对象：
+
+#+BEGIN_SRC js
+class Letter {
+  constructor(number) {
+    this.number = number
+  }
+  getNumber() {
+    return this.number
+  }
+}
+let a = new Letter(1)
+let b = new Letter(2)
+console.log(
+  a.getNumber(),
+  b.getNumber(),
+)
+#+END_SRC
+
+注意：ECMAScript 中基于类的继承是在基于原型的委托之上实现的。
+
+注意：“类”只是理论上的抽象。从技术上讲，它可以用 Java 或 C++ 中的静态分派来实现，也可以用 JavaScript、Python、Ruby 等中的动态分派（委托）来实现。
+
+从技术上讲，“类”表示为“构造函数+原型”对。因此，构造函数创建对象，并自动为其新创建的实例设置原型。此原型存储在 =<ConstructorFunction>.prototype= 属性中。
+
+#+BEGIN_QUOTE
+定义6：
+
+Constructor：构造函数是用来创建实例并自动设置其原型的函数。
+#+END_QUOTE
+
+可以显式使用构造函数。此外，在类抽象被引入之前，JS 开发人员在没有更好的替代品的情况下常常这样做（我们仍然可以在互联网上找到很多这样的遗留代码）：
+
+#+BEGIN_SRC js
+function Letter(number) {
+  this.number = number
+}
+Letter.prototype.getNumber = function() {
+  return this.number
+}
+let a = new Letter(1)
+let b = new Letter(2)
+console.log(
+  a.getNumber(),
+  b.getNumber()
+)
+#+END_SRC
+
+虽然创建一个单层构造函数非常简单，但是从父类继承的模式需要更多的样板。目前，这个样板文件被隐藏为实现细节，这正是我们在 JavaScript 中创建类时所发生的事情。
+
+注意：构造函数只是基于类继承的实现细节。
+
+见下图对象和它们的类之间的关系：
+
+#+BEGIN_EXPORT html
+<img src="/images/js-the-core-2nd-edition-3.webp" alt="图四、构造函数和对象关系">
+<span class="caption">◎ 图四、构造函数和对象关系</span>
+#+END_EXPORT
+
+上图显示每个对象都有一个关联的原型。即使构造函数（类） =Letter= 也有自己的原型，即 =Function.prototype= 。请注意， =Letter.prototype= 是 Letter 实例的原型，即 =a= 、 =b= 。
+
+注意：任何对象的实际原型总是通过 =__proto__= 引用。构造函数上显式的 =prototype= 属性只是对其实例原型的引用；对于实例来说，仍引用自 =__proto__= 。
+
+* 4. 执行上下文
+
+为了执行 JS 代码并跟踪其运行时求值，ECMAScript 规范定义了执行上下文的概念。从逻辑上讲，执行上下文是使用堆栈（我们很快就会看到执行上下文堆栈）来维护的，它对应于调用堆栈的一般概念。
+
+#+BEGIN_QUOTE
+定义7：
+
+Execution context：执行上下文是用于跟踪代码的运行时评估的规范装置。
+#+END_QUOTE
+
+ECMAScript 代码有几种类型：全局代码、函数代码、eval 代码和模块代码；每段代码在其执行上下文中被评估。不同的代码类型及其相应的对象可能会影响执行上下文的结构：例如，生成器函数将它们的生成器对象保存在上下文中。
+
+一个递归函数调用：
+
+#+BEGIN_SRC js
+function recursive(flag) {
+  if (flag === 2) return
+  recursive(++flag)
+}
+recursive(0)
+#+END_SRC
+
+当一个函数被调用时，一个新的执行上下文被创建，并被推到堆栈上——此时它成为一个活跃的执行上下文。当函数返回时，它的上下文从堆栈中弹出。
+
+调用另一个上下文的上下文称为调用方。因此，正被调用的上下文是被调用者。在我们的示例中， =recursive= 函数扮演两个角色：被调用方和调用方的关系——当递归调用自身时。
+
+#+BEGIN_QUOTE
+定义8：
+
+Execution context stack：执行上下文堆栈是一种LIFO结构，用于维护控制流和执行顺序。
+#+END_QUOTE
+
+对以上例子，有以下堆栈“push-pop”修改：
+
+#+BEGIN_EXPORT html
+<img src="/images/js-the-core-2nd-edition-4.webp" alt="图五、执行上下文堆栈">
+<span class="caption">◎ 图五、执行上下文堆栈</span>
+#+END_EXPORT
+
+还可以看到，全局上下文总是在堆栈的底部，它是在执行任何其他上下文之前创建的。
+
+一般来说，一个上下文的代码会运行到完成，然而正如我们上面提到的，一些对象——比如生成器，可能会违反堆栈的 LIFO 顺序。生成器函数可以挂起其运行上下文，并在完成之前将其从堆栈中移除。生成器再次激活后，其上下文将恢复并再次压入堆栈：
+
+#+BEGIN_SRC js
+function *gen() {
+  yield 1
+  return 2
+}
+let g = gen()
+console.log(
+  g.next().value,
+  g.next().value
+)
+#+END_SRC
+
+这里的 =yield= 语句将值返回给调用者，并弹出上下文。在第二次 =next= 调用时，相同的上下文再次被压入堆栈，然后继续。这样的上下文可能比创建它的调用者活得更久，因此违反了 LIFO 结构。
+
+现在将讨论执行上下文的重要部分；特别是，明白 ECMAScript 运行时如何管理变量存储，以及由嵌套代码块创建的作用域。这就是词法环境（lexical environment）的一般概念，在 JS 中用于存储数据，并通过闭包机制解决“Funarg 问题”。
+
+* 5. 环境
+
+每个执行上下文都有一个关联的词法环境。
+
+#+BEGIN_QUOTE
+定义9：
+
+Lexical environment：词法环境是一种结构，用于定义上下文中出现的标识符与其值之间的关联。每个环境都可以引用一个可选的父环境。
+#+END_QUOTE
+
+因此，环境是定义在作用域中的变量、函数和类的存储。
+
+从技术上讲，环境是一对，由环境记录（将标识符映射到值的实际存储表）和对父对象的引用（可以是 =null= ）组成。
+
+代码：
+
+#+BEGIN_SRC js
+let x = 10
+let y = 20
+function foo(z) {
+  let x = 100
+  return x + y + z
+}
+foo(30)
+#+END_SRC
+
+全局上下文的环境结构和 =foo= 函数的上下文看起来如下：
+
+#+BEGIN_EXPORT html
+<img src="/images/js-the-core-2nd-edition-5.webp" alt="图五、环境链">
+<span class="caption">◎ 图五、环境链</span>
+#+END_EXPORT
+
+逻辑上，这类似于原型链。标识符解析的规则非常相似：如果在自己的环境中没有找到变量，则尝试在父环境中、在父环境的父环境中等等查找它——直到考虑了整个环境链。
+
+#+BEGIN_QUOTE
+定义10：
+
+Identifier resolution：解析环境链中变量（绑定）的过程。未解析的绑定结果为 =ReferenceError= 。
+#+END_QUOTE
+
+这解释了为什么变量 =x= 被解析为 =100= ，而不是 =10= ——它直接在 =foo= 的自身环境中找到；为什么我们可以访问参数 =z= ——它也只是存储在激活环境中；以及为什么我们可以访问变量 =y= ——它在父环境中找到。
+
+与原型类似，同一父环境可以由多个子环境共享：例如两个全局功能共享相同的全局环境。
+
+环境记录因类型而异。有对象环境记录和声明性环境记录。在声明性记录之上还有函数环境记录和模块环境记录。每种类型的记录都具有特定于它的属性。但是，标识符解析的通用机制在所有环境中都是通用的，并且不依赖于记录的类型。
+
+对象环境记录的示例可以是全局环境的记录。这样的记录也有关联的绑定对象，绑定对象可以存储记录的某些属性，但不存储其他属性，反之亦然。绑定对象也可以作为 =this= 值提供。
+
+#+BEGIN_SRC js
+var x = 10
+let y = 20
+console.log(
+  x,
+  y
+)
+console.log(
+  this.x,
+  this.y
+)
+this['not valid ID'] = 30
+console.log(
+  this['not valid ID'] // 30
+)
+#+END_SRC
+
+下图是对代码的描述：
+
+#+BEGIN_EXPORT html
+<img src="/images/js-the-core-2nd-edition-6.webp" alt="图七、绑定对象">
+<span class="caption">◎ 图七、绑定对象</span>
+#+END_EXPORT
+
+注意，绑定对象的存在是为了覆盖遗留结构，如 =var= -声明和 =with= -语句，它们也将其对象作为绑定对象提供。这些是历史原因，当环境被表示为简单对象时。目前，环境模型已经优化了很多，但是结果是我们不能再将绑定作为属性来访问。
+
+* 6. 闭包
+
+ECMAScript 中的函数是一等的。这个概念是函数式编程的基础。
+
+#+BEGIN_QUOTE
+定义11：
+
+First-class function：可以作为正常数据参与的函数：存储在变量中、作为参数传递或作为另一个函数的值返回。
+#+END_QUOTE
+
+与第一类函数的概念有关的是所谓的Funarg问题（或“函数论元问题”）。当一个函数必须处理自由变量时，问题就出现了。
+
+#+BEGIN_QUOTE
+定义12：
+
+Free variable：一个既不是参数也不是函数局部变量的变量。
+#+END_QUOTE
+
+通过代码了解 Funarg 问题：
+
+#+BEGIN_SRC js
+let x = 10
+function foo() {
+  console.log(x)
+}
+function bar(funArg) {
+  let x = 20
+  funArg()
+}
+bar(foo)
+#+END_SRC
+
+对于函数 =foo= ，变量 =x= 是自由的。当 =foo= 函数被激活时（通过 =funArg= 参数）——它应该在哪里解析 =x= 绑定？从创建函数的外部作用域，还是从调用函数的调用方作用域？正如我们所看到的，调用者，即 =bar= 函数，也为 =x= ——提供了值为 =20= 的绑定。
+
+上述用例被称为向下寻优问题，即在确定绑定的正确环境时的模糊性：它应该是创作时的环境，还是调用时的环境？
+
+这可以通过使用静态作用域（即创建时间的作用域）的协议来解决。
+
+#+BEGIN_QUOTE
+定义13：
+
+Static scope：一种语言实现了静态作用域，只要通过查看源代码就可以确定绑定在哪个环境中被解析。
+#+END_QUOTE
+
+静态作用域有时也被称为词法作用域，因此词法环境命名。
+
+从技术上讲，静态作用域是通过捕获创建函数的环境来实现的。
+
+示例中， =foo= 函数捕获的环境是全局环境：
+
+* 7. this
+
+* 8. Realm
+
+参考资料
+
+1. https://stackoverflow.com/questions/49832187/how-to-understand-js-realms
+2. https://weizman.github.io/page-what-is-a-realm-in-js/
+
+* 9. Job
+
+* 10. Agent
+
+#+BEGIN_QUOTE
+ECMAScript is a programming language and its runtime system has core components. It uses a prototype-based delegation mechanism to implement inheritance and shared properties. The concept of lexical environments is used to store data and solve the Funarg problem with the mechanism of closures. The this value is dynamically scoped and is implicitly passed to the code of a context. Execution contexts are associated with a particular code realm which provides the global environment for this context. The main entry point to a program is the initial script which is loaded and evaluated. Async functions can await for promises and enqueue promise jobs. SharedArrayBuffers can be used to share data between agents.
+
+Summarized by Universal Summarizer https://labs.kagi.com/ai/sum
+#+END_QUOTE
