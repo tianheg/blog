@@ -384,7 +384,7 @@ bar(foo)
 
 对于函数 =foo= ，变量 =x= 是自由的。当 =foo= 函数被激活时（通过 =funArg= 参数）——它应该在哪里解析 =x= 绑定？从创建函数的外部作用域，还是从调用函数的调用方作用域？正如我们所看到的，调用者，即 =bar= 函数，也为 =x= ——提供了值为 =20= 的绑定。
 
-上述用例被称为向下寻优问题，即在确定绑定的正确环境时的模糊性：它应该是创作时的环境，还是调用时的环境？
+上述用例被称为向下 funarg 问题，即在确定绑定的正确环境时的模糊性：它应该是创作时的环境，还是调用时的环境？
 
 这可以通过使用静态作用域（即创建时间的作用域）的协议来解决。
 
@@ -399,6 +399,67 @@ Static scope：一种语言实现了静态作用域，只要通过查看源代�
 从技术上讲，静态作用域是通过捕获创建函数的环境来实现的。
 
 示例中， =foo= 函数捕获的环境是全局环境：
+
+#+BEGIN_EXPORT html
+<img src="/images/js-the-core-2nd-edition-7.webp" alt="图八、闭包">
+<span class="caption">◎ 图八、闭包</span>
+#+END_EXPORT
+
+环境引用函数，函数反过来又引用回环境。
+
+#+BEGIN_QUOTE
+定义14：
+
+Closure：闭包是一个函数，它捕获定义它的环境。此外，该环境用于标识符解析。
+#+END_QUOTE
+
+注意：函数是在存储局部变量和参数的新激活环境中调用的。激活环境的父环境被设置为函数的封闭环境，从而产生词法作用域语义。
+
+Funarg 问题的第二个子类型称为向上 funarg 问题。这里唯一的区别是捕获环境比创建它的上下文更持久。
+
+#+BEGIN_SRC js
+function foo() {
+  let x = 10
+  function bar() {
+    return x
+  }
+  return bar
+}
+let x = 20
+let bar = foo()
+bar()
+#+END_SRC
+
+同样，从技术上讲，它与捕获定义环境的相同机制没有什么不同。在这种情况下，如果我们没有闭包， =foo= 的激活环境就会被破坏。但是我们捕获了它，所以它不能被释放，而是被保留下来——以支持静态作用域语义。
+
+通常对闭包的理解是不完全的——通常开发人员只从向上 funarg 问题的角度考虑闭包（实际上这更有意义）。然而，正如我们所看到的，向下和向上 funarg 问题的技术机制是完全相同的——而且是静态范围的机制。
+
+与原型类似，相同的父环境可以在多个闭包之间共享。这允许访问和修改共享数据：
+
+#+BEGIN_SRC js
+function createCounter() {
+  let count = 0
+  return {
+    increment() { count++; return count; },
+    decrement() { count--; return count; }
+  }
+}
+let counter = createCounter()
+console.log(
+  counter.increment(),
+  counter.decrement(),
+  counter.increment()
+)
+#+END_SRC
+
+因为闭包 =increment= 和 =decrement= 都是在包含 =count= 变量的作用域中创建的，所以它们共享这个父作用域。也就是说，捕获总是“通过引用（by-reference）”进行的，这意味着存储对整个父环境的引用。
+
+图示：
+
+#+BEGIN_EXPORT html
+<img src="/images/js-the-core-2nd-edition-8.webp" alt="图九、共享环境">
+<span class="caption">◎ 图九、共享环境</span>
+#+END_EXPORT
 
 * 7. this
 
