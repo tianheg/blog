@@ -461,7 +461,114 @@ console.log(
 <span class="caption">◎ 图九、共享环境</span>
 #+END_EXPORT
 
+有些语言可能会捕获 by-value，对捕获的变量进行复制，并且不允许在父作用域中更改它。但是在 JS 中，重复一遍，它总是父作用域的引用。
+
+注意：实现可能会优化此步骤，并且不会捕获整个环境。虽然只捕获使用过的自由变量，但它们仍然保持父作用域中可变数据的不变。
+
+所以所有标识符都是静态作用域。但是，有一个值在 ECMAScript 中动态确定范围。它是 =this= 的值。
+
 * 7. this
+
+=this= 值是一个特殊的对象，它被动态和隐式地传递给上下文的代码。我们可以把它看作是一个隐式的额外参数，我们可以访问它，但不能改变它。
+
+#+BEGIN_QUOTE
+定义15：
+
+this：可从执行上下文的代码访问的隐式上下文对象——以便将相同的代码应用于多个对象。
+#+END_QUOTE
+
+主要的用例是基于类的 OOP。实例方法（在原型上定义）存在于一个范例中，但在该类的所有实例之间共享。
+
+#+BEGIN_SRC js
+class Point {
+  constructor(x, y) {
+    this._x = x
+    this._y = y
+  }
+  getX() {
+    return this._x
+  }
+  getY() {
+    return this._y
+  }
+}
+let p1 = new Point(1, 2)
+let p2 = new Point(3, 4)
+console.log(
+  p1.getX(),
+  p2.getX()
+)
+#+END_SRC
+
+当 =getX= 方法被激活时，将创建一个新的环境来存储局部变量和参数。此外，函数环境记录获得传递的 =[[ThisValue]]= ，它是根据函数的调用方式动态绑定的。当用 =p1= 调用它时， =this= 的值正好是 =p1= ，而在第二种情况下，它是 =p2= 。
+
+=this= 的另一个应用是泛型接口函数，它可以用在 mixin 或 traits 中。
+
+在下面的示例中， =Movable= 接口包含泛型函数 =move= ，该函数期望此 mixin 的用户实现 =_x= 和 =_y= 属性：
+
+#+BEGIN_SRC js
+let Movable = {
+  move(x, y) {
+    this._x = x
+    this._y = y
+  }
+}
+let p1 = new Point(1, 2)
+Object.assign(p1, Movable)
+p1.move(100, 200)
+console.log(p1.getX())
+#+END_SRC
+
+作为一种替代方案，mixin 也可以在原型级别应用，而不是像在上面的示例中所做的那样在每个实例中应用。
+
+为了展示 =this= value 的动态特性，考虑这个例子：
+
+#+BEGIN_SRC js
+function foo() {
+  return this
+}
+let bar = {
+  foo,
+  baz() {
+    return this
+  }
+}
+console.log(
+  foo(),
+  bar.foo(),
+  (bar.foo)(),
+  (bar.foo = bar.foo)()
+)
+console.log(bar.baz())
+let saveBaz = bar.baz
+console.log(saveBaz())
+#+END_SRC
+
+由于仅通过查看 =foo= 函数的源代码，我们无法判断在特定调用中 =this= 的值是什么，因此称 =this= 值是动态作用域的。
+
+箭头函数在 =this= 值方面是特殊的：它们的 =this= 是词法的（静态的），但不是动态的。也就是说，它们的函数环境记录不提供该值 =this= 不提供该值，并且该值取自父环境。
+
+#+BEGIN_SRC js
+var x = 10
+let foo = {
+  x: 20,
+  bar() {
+    return this.x
+  },
+  baz: () => this.x,
+  qux() {
+    let arrow = () => this.x
+    return arrow()
+  }
+}
+console.log(
+  foo.bar(),
+  foo.baz(),
+  foo.qux()
+)
+#+END_SRC
+
+如前所述，在全局上下文中， =this= 值是全局对象（全局环境记录的绑定对象）。以前只有一个全局对象。在当前版本的规范中，可能有多个全局对象是代码领域（Realms）的一部分。
 
 * 8. Realm
 
