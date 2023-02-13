@@ -572,6 +572,40 @@ console.log(
 
 * 8. Realm
 
+在评估（evaluate）之前，所有 ECMAScript 代码都必须与领域关联。从技术上讲，领域只是为上下文提供全局环境。
+
+#+BEGIN_QUOTE
+定义15：
+
+Realm：代码领域是一个对象，它封装了一个单独的全局环境。
+#+END_QUOTE
+
+创建执行上下文时，它与特定的代码领域相关联，该代码领域为该上下文提供全局环境。这种关联进一步保持不变。
+
+注意：浏览器环境中的直接领域等价物是 iframe 元素，它确切地提供了一个自定义全局环境。在 Node.js 中，vm 模块的沙箱较像领域。
+
+当前版本的规范没有提供显式创建领域的能力，但是它们可以由实现隐式创建。
+
+从逻辑上讲，堆栈中的每个上下文总是与其领域相关联：
+
+#+BEGIN_EXPORT html
+<img src="/images/js-the-core-2nd-edition-9.webp" alt="图十、上下文和领域关联">
+<span class="caption">◎ 图十、上下文和领域关联</span>
+#+END_EXPORT
+
+使用 =vm=  模块的单独领域示例：
+
+#+BEGIN_SRC js
+const vm = require("vm")
+const realm1 = vm.createContext({ x: 10, console })
+const realm2 = vm.createContext({ x: 20, console })
+const code = `console.log(x)`
+vm.runInContext(code, realm1)
+vm.runInContext(code, realm2)
+#+END_SRC
+
+代码的入口点和初始化过程是由作业（Job）和作业队列（Job queues）机制管理的。
+
 参考资料
 
 1. https://stackoverflow.com/questions/49832187/how-to-understand-js-realms
