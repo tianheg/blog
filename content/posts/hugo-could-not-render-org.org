@@ -1,0 +1,15 @@
+#+TITLE: Hugo Could not render org
+#+DATE: <2023-02-14 Tue 00:04>
+#+TAGS[]: 技术 Hugo
+
+这个问题出现过几次，出现频次没有规律。我在 Hugo 论坛发了帖子，无人回复，可能没人遇到这样的问题。
+
+执行 hugo 或者 hugo server 命令时会出现：
+
+#+BEGIN_SRC sh
+ERROR 2023/02/12 08:48:55 Could not render org: could not write output: runtime error: invalid memory address or nil pointer dereference. Using unrendered content.
+#+END_SRC
+
+我不懂 Go 编程语言。无法找到问题所在。目前（<2023-02-14 Tue>），我的博客源码 content/posts 目录下，有 *.md, *.org 两种文件格式，计划后续将剩余的 *.md 文件转为 *.org。
+
+位于 Hugo 论坛的帖子地址：https://discourse.gohugo.io/t/hugo-could-not-render-org/42932
