@@ -90,7 +90,7 @@ blockquote {
   float: left;
   font-size: $fontSize * 3;
   margin-right: $lineHeight * $fontSize - $fontSize;
-  margin-top: $fontSize / $lineHeight;
+  margin-top: calc($fontSize / $lineHeight);
   line-height: $lineHeight * $fontSize;
 }
 
@@ -163,7 +163,7 @@ ul {
   }
   .anchor-link {
     opacity: var(--anchor-opacity);
-    transition: all ($duration / 2);
+    transition: all calc($duration / 2);
   }
   .post {
     h1,
@@ -214,7 +214,7 @@ dd {
 }
 
 code {
-  padding: ($fontSize / 8) ($fontSize / 4);
+  padding: calc($fontSize / 8) calc($fontSize / 4);
   background-color: alpha(var(--color-contrast-medium), .5);
   font-size: 80%;
 }
