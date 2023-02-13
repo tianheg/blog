@@ -613,7 +613,170 @@ vm.runInContext(code, realm2)
 
 * 9. Job
 
+有些操作可以推迟，只要执行上下文堆栈上有可用的位置就可以执行。
+
+#+BEGIN_QUOTE
+定义17：
+
+Job：作业是一种抽象操作，它在当前没有其他 ECMAScript 计算正在进行时启动 ECMAScript 计算。
+#+END_QUOTE
+
+作业在作业队列中排队，在当前规范版本中有两个作业队列：脚本作业（Script Jobs）和期约作业（Promise Jobs）。
+
+Script Jobs 队列中的初始作业是我们程序的主要入口点，即加载和评估的初始脚本：创建一个领域，创建一个全局上下文并与该领域相关联，将其推入堆栈，然后执行全局代码。
+
+注意，Script Jobs 队列同时管理脚本和模块。
+
+此外，此上下文可以执行其他上下文，或将其他作业入队。一个可以派生和排队的作业的例子是 Promise。
+
+当没有正在运行的执行上下文并且执行上下文堆栈为空时，ECMAScript 实现将从作业队列中删除第一个挂起的作业，创建一个执行上下文并开始执行。
+
+注意：作业队列通常由称为“事件循环”的抽象来处理。ECMAScript 标准没有指定事件循环，而是将其留给实现，但是您可以在这里找到一个教育[[https://gist.github.com/DmitrySoshnikov/26e54990e7df8c3ae7e6e149c87883e4][示例]]。
+
+#+BEGIN_SRC js
+const stack = []
+const jobs = []
+setInterval(function eventLoop() {
+  console.log(
+    `\n    Analyzing jobs queue:`,
+    `[${jobs.map(job => job.name).join(', ')}]\n`
+  )
+  if (stack.length) {
+    return
+  }
+  if (!jobs.length) {
+    return
+  }
+  const job = jobs.shift()
+  run(job)
+}, 1000)
+function run(activation) {
+  stack.push(activation)
+  console.log(
+  	`Running "${activation.name}", stack:`,
+    `[${stack.map(context => context.name).join(', ')}]`
+  )
+  activation()
+  stack.pop(activation)
+}
+function postponeCall(runnable, ms) {
+  setTimeout(() => jobs.push(runnable), ms)
+}
+
+function one() {
+  run(two)
+}
+function two() {
+  postponeCall(three, 10)
+}
+function three() {
+  postponeCall(four, 10)
+  postponeCall(five, 20)
+  run(six)
+}
+function four() { return }
+function five() { return }
+function six() { return }
+
+;(function start() {
+  postponeCall(one, 100)
+})()
+#+END_SRC
+
+[[https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Promise][期约]]示例：
+
+#+BEGIN_SRC js
+new Promise(resolve => setTimeout(() => resolve(10), 0))
+  .then(value => console.log(value))
+console.log(20)
+#+END_SRC
+
+[[https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Statements/async_function][异步函数]]也会等待期约：
+
+#+BEGIN_SRC js
+async function later() {
+  return await Promise.resolve(10)
+}
+;(async () => {
+  let data = await later()
+  console.log(data)
+})()
+console.log(20)
+#+END_SRC
+
+#+BEGIN_QUOTE
+Agents are main owners of all those components.
+#+END_QUOTE
+
 * 10. Agent
+
+ECMAScript 采用 Agent 模式实现了并发性和并行性。Agent 模式与 [[https://en.wikipedia.org/wiki/Actor_model][Actor 模式]]非常接近--Actor模式是一个轻量级进程，采用消息传递的通信方式。
+
+#+BEGIN_QUOTE
+定义18：
+
+Agent：代理是封装执行上下文栈、作业队列集和代码领域的抽象。
+#+END_QUOTE
+
+代理可以在同一线程上运行，也可以在单独的线程上运行。浏览器环境中的 =Worker= 代理是代理概念的一个示例。
+
+代理之间是状态隔离的，可以通过发送消息进行通信。有些数据可以在代理之间共享，例如 =SharedArrayBuffer= 。代理也可以联合成为代理集群。
+
+一个代码示例：
+
+=index.html=
+
+#+BEGIN_SRC html
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Agents example</title>
+</head>
+<body>
+  <script>
+    const sharedHeap = new SharedArrayBuffer(16)
+    let heapArray = new Int32Array(sharedHeap)
+    let agentSmith = new Worker('agent-smith.js')
+    agentSmith.onmessage = (message) => {
+      let modifiedIndex = message.data
+      console.log(heapArray[modifiedIndex])
+    }
+    agentSmith.postMessage(sharedHeap)
+  </script>
+</body>
+</html>
+#+END_SRC
+
+=agent-smith.js= ：
+
+#+BEGIN_SRC js
+onmessage = (message) => {
+  let heapArray = new Int32Array(message.data)
+  let indexToModify = 1
+  heapArray[indexToModify] = 100
+  postMessage(indexToModify)
+}
+#+END_SRC
+
+本地无法运行，运行在云端要修改 HTTP headers，我使用 Netlify 做示例：
+
+#+BEGIN_SRC toml
+# netlify.toml
+[[headers]]
+  for = "/javascript/agents-example/*"
+  [headers.values]
+    Cross-Origin-Opener-Policy = "same-origin"
+    Cross-Origin-Embedder-Policy = "require-corp"
+#+END_SRC
+
+代码的运行图示：
+
+#+BEGIN_EXPORT html
+<img src="/images/js-the-core-2nd-edition-10.webp" alt="图十、ECMAScript 运行时">
+<span class="caption">◎ 图十、ECMAScript 运行时</span>
+#+END_EXPORT
 
 #+BEGIN_QUOTE
 ECMAScript is a programming language and its runtime system has core components. It uses a prototype-based delegation mechanism to implement inheritance and shared properties. The concept of lexical environments is used to store data and solve the Funarg problem with the mechanism of closures. The this value is dynamically scoped and is implicitly passed to the code of a context. Execution contexts are associated with a particular code realm which provides the global environment for this context. The main entry point to a program is the initial script which is loaded and evaluated. Async functions can await for promises and enqueue promise jobs. SharedArrayBuffers can be used to share data between agents.
