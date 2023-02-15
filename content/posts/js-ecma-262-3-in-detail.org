@@ -79,3 +79,87 @@ ECStack = [
   globalContext
 ]
 #+END_SRC
+
+函数的每个返回都退出当前执行上下文，然后相应地弹出 =ECStack= ——连续地、颠倒地——堆栈的非常自然的实现。代码的工作完成后， =ECStack= 再次只包含 =globalContext= ——直到程序结束。
+
+抛出但未捕获的异常也可能退出一个或多个执行上下文：
+
+#+BEGIN_SRC js
+(function foo() {
+  (function bar() {
+    throw 'Exit from bar and foo contexts'
+  })()
+})()
+#+END_SRC
+
+三、 =Eval= code
+
+使用 =eval= 会存在一种调用上下文的概念。
+
+由 =eval= 执行的操作（如变量或函数定义）恰好影响调用上下文：
+
+#+BEGIN_SRC js
+eval('var x = 10')
+;(function foo() {
+  eval('var y = 20')
+})()
+
+alert(x)
+alert(y)
+#+END_SRC
+
+注意，ES5 的严格模式下， =eval= 已经不影响调用上下文，而是在本地沙箱中计算代码。
+
+ECStack 修改：
+
+#+BEGIN_SRC js
+ECStack = [
+  globalContext
+]
+// eval('var x = 10')
+ECStack.push({
+  context: evalContext,
+  callingContext: globalContext
+})
+// eval exited context
+ECStack.pop()
+// foo function call
+ECStack.push(<foo> functionContext)
+// eval('var y = 20')
+ECStack.push({
+  context: evalContext,
+  callingContext: <foo> functionContext
+})
+// return from eval
+ECStack.pop()
+// return from foo
+ECStack.pop()
+#+END_SRC
+
+ES2015+ 介绍了一个新的代码类型——模块代码。
+
+* 2. 变量对象
+
+在程序中声明函数和变量，对于我来说是很自然的。但是，我没有想过：解释器是怎样和去哪里找到数据（函数、变量）的？当引用那些对象时，在它背后发生了什么？
+
+变量和执行上下文是紧密相关的：
+
+#+BEGIN_SRC js
+var a = 10 // variable of the global context
+(function () {
+  var b = 20 // local variable of the function context
+})()
+alert(a)
+alert(b)
+#+END_SRC
+
+当前版本的规范中的隔离作用域只能由具有“函数”代码类型的执行上下文创建。例如，与 C/C + + 相比，ECMAScript 中的 for 循环块不会创建本地上下文：
+
+#+BEGIN_SRC js
+for (var k in { a: 1, b: 2 }) {
+  alert(k)
+}
+alert(k)
+#+END_SRC
+
+** 声明数据
