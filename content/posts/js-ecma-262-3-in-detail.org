@@ -1,0 +1,81 @@
+#+TITLE: ECMA-262-3 in detail
+#+DATE: <2023-02-15 Wed 08:43>
+#+TAGS[]: 技术 JavaScript
+
+{{< feynman >}}
+
+- [[http://dmitrysoshnikov.com/ecmascript/chapter-1-execution-contexts/][ECMA-262-3 in detail. Chapter 1. Execution Contexts. - Dmitry Soshnikov]]
+- [[http://dmitrysoshnikov.com/ecmascript/chapter-2-variable-object/][ECMA-262-3 in detail. Chapter 2. Variable object. - Dmitry Soshnikov]]
+- [[http://dmitrysoshnikov.com/ecmascript/chapter-3-this/][ECMA-262-3 in detail. Chapter 3. This. - Dmitry Soshnikov]]
+- [[http://dmitrysoshnikov.com/ecmascript/chapter-4-scope-chain/][ECMA-262-3 in detail. Chapter 4. Scope chain. - Dmitry Soshnikov]]
+- [[http://dmitrysoshnikov.com/ecmascript/chapter-5-functions/][ECMA-262-3 in detail. Chapter 5. Functions. - Dmitry Soshnikov]]
+- [[http://dmitrysoshnikov.com/ecmascript/chapter-6-closures/][ECMA-262-3 in detail. Chapter 6. Closures. – Dmitry Soshnikov]]
+- [[http://dmitrysoshnikov.com/ecmascript/chapter-7-1-oop-general-theory/][ECMA-262-3 in detail. Chapter 7.1. OOP: The general theory. - Dmitry Soshnikov]]
+- [[http://dmitrysoshnikov.com/ecmascript/chapter-7-2-oop-ecmascript-implementation/][ECMA-262-3 in detail. Chapter 7.2. OOP: ECMAScript implementation. - Dmitry Soshnikov]]
+- [[http://dmitrysoshnikov.com/ecmascript/chapter-8-evaluation-strategy/][ECMA-262-3 in detail. Chapter 8. Evaluation strategy - Dmitry Soshnikov]]
+
+* 1. 执行上下文
+
+每次当控制权转移到 ECMAScript 可执行代码时，控制权都会进入执行上下文。
+
+#+BEGIN_QUOTE
+执行上下文（Execution context，EC）是 ECMA-262 规范中用于对可执行代码进行类型化和区分的抽象概念。
+#+END_QUOTE
+
+该标准没有从技术实现的角度定义准确的 EC 结构和类型，这是一个需要 ECMAScirpt 引擎实现的问题。
+
+逻辑上，一组活跃的执行上下文形成一个堆栈。堆栈的底部始终是全局上下文，而顶部——是当前活动执行上下文。堆栈在进入和退出各种 EC 的过程中被修改（推入/弹出）。
+
+** 可执行代码的类型
+
+利用执行上下文的抽象概念，将可执行代码的类型概念联系起来。说到代码类型，在某些特定时刻指的可能是执行上下文。
+
+例如，将执行上下文堆栈定义为一个数组：
+
+#+BEGIN_SRC js
+ECStack = []
+#+END_SRC
+
+每次进入函数时（即使函数被递归调用或作为构造函数调用），以及在内置 =eval= 函数工作时，都会推入堆栈。
+
+一、全局代码
+
+该类型代码在 Program 级别处理：加载外部 *.js 文件或者局部行内代码（在 =<script></script>= 标签内）。全局代码不包括函数体中代码的任何部分。
+
+在初始化（程序启动）时， =ECStack= 的样子：
+
+#+BEGIN_SRC js
+ECStack = [
+  globalContext
+]
+#+END_SRC
+
+二、函数代码
+
+在执行函数代码时（适用于所有类型的函数），新元素被推入 =ECStack= 。The code of concrete function does not include codes of the inner functions.
+（这句是什么意思？内部函数不包括在内吗，内部函数也就是 nested function）。
+
+举例，递归调用自己一次的函数：
+
+#+BEGIN_SRC js
+(function foo(flag) {
+  if (flag) return
+  foo(true)
+)(false)
+#+END_SRC
+
+对 =ECStack= 的修改：
+
+#+BEGIN_SRC js
+// 第一次激活 foo
+ECStack = [
+  <foo> functionContext
+  globalContext
+]
+// 递归激活 foo
+ECStack = [
+  <foo> functionContext - recursively
+  <foo> functionContext
+  globalContext
+]
+#+END_SRC
