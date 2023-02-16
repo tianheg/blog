@@ -163,3 +163,124 @@ alert(k)
 #+END_SRC
 
 ** 声明数据
+
+如果变量是与执行上下文相关的，那么就应知道数据存储在哪里，并且知道如何获取。这种作用机制，被称为变量对象。
+
+#+BEGIN_QUOTE
+变量对象（英文简写为 VO）是与执行上下文关联的特殊对象，它存储着：
+
+- 变量（ =var= ，VariableDeclaration）
+- 函数声明（FunctionDeclaration，缩写为 FD）
+- 声明在上下文的函数形式参数
+#+END_QUOTE
+
+注意，在 ES5 版本中，变量对象的概念被词法环境模型替代了。
+
+举例，使用一般 ECMAScript 对象呈现变量对象：
+
+#+BEGIN_SRC js
+VO = {}
+#+END_SRC
+
+VO 是执行上下文的属性：
+
+#+BEGIN_SRC js
+activeExecutionContext = {
+  VO: {
+    // context data (var, FD, function arguments)
+  }
+}
+#+END_SRC
+
+Indirect referencing to variables (via property names of VO) allows only variable object of the global context (where the global object is itself the variable object).（这句不理解）对于其它上下文，直接引用 VO 并无可能，它只针对全局上下文进行实现。
+
+当声明变量或函数时，关键在于创建 VO 的新属性以及变量的名称和值。
+
+例子：
+
+#+BEGIN_SRC js
+var a = 10
+function test(x) {
+  var b = 20
+}
+test(30)
+#+END_SRC
+
+对应的变量对象：
+
+#+BEGIN_SRC js
+// Varibale object of the global context
+VO(globalContext) = {
+  a: 10,
+  test: <reference to function>
+}
+// Variable object of the "test" function context
+VO(test functionContext) = {
+  x: 30,
+  b: 20
+}
+#+END_SRC
+
+** 不同执行上下文中的变量对象
+
+变量对象的一些操作（变量实例化）和行为对所有执行上下文类型都是适用的。从这种角度看，将变量对象看成抽象的基本对象就很合适了。函数上下文还可以定义额外的变量对象相关内容。
+
+#+BEGIN_SRC js
+AbstractVO (generic behavior of the variable instantiation process)
+|
+|-> GlobalContextVO
+|       (VO === this === global)
+|-> FunctionContextVO
+        (VO === AO, <arguments> object and <formal parameters> are added)
+#+END_SRC
+
+一、全局上下文中的变量对象
+
+定义全局对象：
+
+#+BEGIN_QUOTE
+全局对象是进入任何上下文之前就定义的对象；这个对象是可以单独使用的，它的属性能在程序的任何地方获取。全局对象的生命周期结束于程序结束。
+#+END_QUOTE
+
+创建伊始，全局对象被初始化，并具有一些属性，比如， =Math= ， =String= ， =Date= 等；还可拥有一些对象，供全局对象引用，比如，在 BOM 下，全局对象的 =window= 属性就引用自全局对象：
+
+#+BEGIN_SRC js
+global = {
+  Math: <...>,
+  String: <...>,
+  ...
+  window: global
+}
+#+END_SRC
+
+因为全局对象无法直接通过名字访问，所以它的属性在应用中都是省略前缀的。但是，还可以通过全局上下文下的 =this= 值访问全局对象。也可以通过对它本身的递归引用，例如 BOM 中的 =window= ：
+
+#+BEGIN_SRC js
+String(10) // means global.String(10)
+
+// with prefixes
+window.a = 10 // === global.window.a === global.a = 10
+this.b = 20 // global.b = 20
+#+END_SRC
+
+回到变量对象：
+
+#+BEGIN_SRC js
+VO(globalContext) === global
+#+END_SRC
+
+可见，全局上下文的变量对象就是全局对象。
+
+理解这一点，就能让我们明白，为什么全局上下文下声明一个变量，可间接通过全局对象的属性来访问。
+
+#+BEGIN_SRC js
+var a = new String('test')
+alert(a)
+alert(window['a'])
+alert(a === this.a)
+
+var aKey = 'a'
+alert(window[aKey])
+#+END_SRC
+
+二、函数上下文下的变量对象
