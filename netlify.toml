@@ -1,15 +1,11 @@
 [build]
 publish = "public"
-command = """\
-  mkdir -p /opt/build/repo/node_modules/.bin && \
-  cp /opt/build/repo/node_modules/sass-embedded-linux-x64/dart-sass-embedded/dart-sass-embedded /opt/build/repo/node_modules/.bin && \
-  dart-sass-embedded --version && \
-  pnpm run all \
-"""
+command = "bash scripts/build.sh"
 
 [context.production.environment]
   HUGO_VERSION = "0.110.0"
   NODE_VERSION = "18.12.1"
+  PAGEFIND_VERSION = "0.11.0"
 
 [[headers]]
   for = "/*"
