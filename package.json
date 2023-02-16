@@ -2,7 +2,7 @@
 	"name": "blog",
 	"private": true,
 	"scripts": {
-		"pagefind": "cd scripts/ && tar xvf pagefind_extended-v0.11.0-x86_64-unknown-linux-musl.tar.gz && ./pagefind_extended --source public --bundle-dir ../static/_pagefind && cd ..",
+		"pagefind": "pagefind_extended --source public --bundle-dir ../static/_pagefind",
 		"build": "hugo --gc --buildFuture",
 		"start": "hugo serve --buildFuture --disableFastRender --renderStaticToDisk",
 		"all": "npm-run-all build pagefind build"
