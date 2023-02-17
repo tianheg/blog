@@ -1,0 +1,96 @@
+#+TITLE: How to Read the ECMAScript Specification
+#+DATE: <2023-02-17 Fri 13:35>
+#+TAGS[]: 技术 JavaScript
+
+[[https://timothygu.me/es-howto/][How to Read the ECMAScript Specification]]
+
+* 1. 前言
+
+注意：在本文档中，将仅使用术语“ECMAScript”来指代规范本身，并在其他任何地方使用“JavaScript”。然而，这两个术语指的是同一件事。
+
+** 为什么要阅读 ECMAScript 规范
+
+ECMAScript 规范是 JavaScript 实现的权威资源，不论是在浏览器、通过 Node.js 的服务器、还是物联网终端。JavaScript 引擎的所有开发人员都依赖于规范来确保他们闪亮的新特性按照预期的方式工作，就像其他 JavaScript 引擎一样。
+
+作者认为，了解 ECMAScript 规范不仅对 JavaScript 引擎开发者有帮助，对于仅使用 JavaScript 进行编码的人，了解 ECMAScript 规范也是非常有用的。
+
+举例：
+
+#+BEGIN_SRC js
+> Array.prototype.push(42)
+1
+> Array.prototype
+[ 42 ]
+> Array.isArray(Array.prototype)
+true
+> Set.prototypeadd(42)
+Uncaught TypeError: add method called on incompatible Set.prototype
+> Set.prototype
+Set {}
+#+END_SRC
+
+为什么 Array 的 push 方法可以作用到它的原型上，Set 的 add 方法就不行？Google 有时在你最需要的时候帮不了你，甚至是 Stack Overflow。
+
+读规范可以帮你。
+
+或者你想知道松散相等运算符的详细用法，MDN 帮不了你太多。
+
+读规范可以帮你。
+
+不推荐刚学习 JavaScript 的开发者读规范。
+
+** 什么属于 ECMAScript 规范，什么不属于
+
+|                                                                                                              | True/False |
+|--------------------------------------------------------------------------------------------------------------+------------|
+| Syntax of syntactic elements (i.e., what a valid =for= .. =in=  loop looks like)                             | T          |
+| Semantics of syntactic elements (i.e., what =typeof null=, or ={ a: b }=  returns)                           | T          |
+| =import a from 'a';=                                                                                         | F          |
+| Object, Array, Function, Number, Math, RegExp, Proxy, Map, Promise, ArrayBuffer, Uint8Array, globalThis, ... | T          |
+| console, setTimeout(), setInterval(), clearTimeout(), clearInterval()                                        | F          |
+| Buffer, process, global*                                                                                     | F          |
+| module, exports, require(), __dirname, __filename                                                            | F          |
+| window, alert(), confirm(), the DOM (document, HTMLElement, addEventListener(), Worker, ...)                 | F          |
+
+
+- =import a from 'a';= ECMAScript 规范指定了如此声明的语法，以及它们的意思，却没有指定模块是如何加载的。
+- console, setTimeout(), setInterval(), clearTimeout(), clearInterval() 这些内容存在于浏览器和 Node.js 端，但不是规范中的。
+- Buffer, process, global* 仅存在于 Node.js 中，在全局上下文起作用。与 =global= 不同， =globalThis= 是 ECMAScript 的一部分，在浏览器中也有实现。
+- module, exports, require(), __dirname, __filename 仅存在于 Node.js 的全局上下文。
+- window, alert(), confirm(), the DOM (document, HTMLElement, addEventListener(), Worker, ...) 仅存在于浏览器。
+
+** ECMAScript 在哪里
+
+** 导航规范
+
+#+BEGIN_QUOTE
+At this point, I’d like to point out that absolutely no one reads the spec from top to bottom. Rather, only look at the section corresponding to what you are trying to look for, and in that section only look at what you need. Try to determine which one of the five big sections your specific question relates to; and if you are having trouble determining which one it is, ask yourself the question "at which time is this (whatever you are trying to confirm) evaluated?" which may help.
+#+END_QUOTE
+
+* 2. 运行时语义（Runtime semantics）
+
+** 算法步骤
+
+** 抽象操作
+
+** =[[This]]= 是什么
+
+一、记录的字段
+
+二、JavaScript 对象的内部槽
+
+三、JavaScript 对象的内部方法
+
+** 完成记录； =?= 和 =!=
+
+** JavaScript 对象
+
+** 例子： =String.prototype.substring()=
+
+** 例子： =Boolean()= 和 =String()= 可以抛出例外吗
+
+** 例子： =typeof= 操作符
+
+参考资料
+
+- [[https://github.com/Pines-Cheng/blog/issues/63][怎样阅读 ECMAScript 规范？]]
