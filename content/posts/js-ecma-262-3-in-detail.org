@@ -284,3 +284,70 @@ alert(window[aKey])
 #+END_SRC
 
 二、函数上下文下的变量对象
+
+对于函数的执行上下文来说，VO 是无法直接访问的，它的作用被活动对象（AO）代替了。
+
+#+BEGIN_SRC js
+VO(functionContext) === AO
+#+END_SRC
+
+#+BEGIN_QUOTE
+在进入函数上下文时创建活动对象，同时由值为 Arguments 对象的属性 =arguments= 进行初始化：
+
+#+BEGIN_SRC js
+AO = {
+  arguments: <Arg0>
+}
+#+END_SRC
+#+END_QUOTE
+
+Arguments 对象是活动对象的属性。Arguments 对象包含以下属性：
+
+- callee ——对当前函数的引用；
+- length ——真正传递参数的数量；
+- 属性索引（整数，转换为字符串），值是函数参数的值（参数列表从左到右的顺序）。属性索引的数目 == arguments.length。Arguments 对象的属性索引的值和真正传递形式参数是共享的。
+
+例子：
+
+#+BEGIN_SRC js
+function foo(x, y, z) {
+  // quantity of defined function arguments (x, y, z)
+  alert(foo.length)
+  // quantity of really passed arguments (only x, y)
+  alert(arguments.length)
+  // reference of a function to itself
+  alert(arguments.callee === foo)
+  // parameters sharing
+  alert(x === arguments[0])
+  alert(x)
+  arguments[0] = 20
+  alert(x)
+  x = 30
+  alert(arguments[0])
+  // however, for not passed argument z,
+  // related index-property of the arguments
+  // object is not shared
+  z = 40
+  alert(arguments[2])
+  arguments[2] = 50
+  alert(z)
+}
+foo(10, 20)
+#+END_SRC
+
+在老版本 Google Chrome 中有一个 bug——参数 z 和 arguments[z] 也是共享的。
+
+** 处理上下文代码的各个阶段
+
+处理执行上下文的两个阶段：
+
+1. 进入执行上下文；
+2. 代码执行。
+
+变量对象的修改与这两个阶段密切相关。
+
+这两个阶段是普遍行为，与上下文类型无关。
+
+一、进入执行上下文
+
+进入执行上下文（但代码尚未执行）时，VO 有以下属性（它们在一开始描述）：
