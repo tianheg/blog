@@ -61,27 +61,107 @@ Set {}
 
 ** ECMAScript 在哪里
 
+最新更新：tc39.es/ecma262
+
 ** 导航规范
 
-#+BEGIN_QUOTE
-At this point, I’d like to point out that absolutely no one reads the spec from top to bottom. Rather, only look at the section corresponding to what you are trying to look for, and in that section only look at what you need. Try to determine which one of the five big sections your specific question relates to; and if you are having trouble determining which one it is, ask yourself the question "at which time is this (whatever you are trying to confirm) evaluated?" which may help.
-#+END_QUOTE
+不要从头到尾读规范，这样做费时间低效率。要有针对性地阅读规范，比如，你今天对字符串感兴趣，就专门找字符串相关的章节阅读，这样一个主题一个主题地读，不至于半途而废。
 
 * 2. 运行时语义（Runtime semantics）
 
+语言和 API 的运行时语义是规范中最重要的部分，通常也是人们最关心的部分。
+
 ** 算法步骤
+
+#+BEGIN_QUOTE
+1. Let a be 1.
+2. Let b be a+a.
+3. If b is 2, then
+   1. Hooray! Arithmetics isn’t broken.
+4. Else
+   1. Boo!
+#+END_QUOTE
+
+进一步阅读：[[https://tc39.es/ecma262/#sec-algorithm-conventions][5.2 Algorithm Conventions]]
 
 ** 抽象操作
 
+有时会在规范中看到一些像函数的调用。Boolean() 函数的第一步是：
+
+#+BEGIN_QUOTE
+例子：
+
+当 Boolean 带着参数值调用时，会采用以下步骤：
+
+1. Let b ! ToBoolean(value).
+2. ...
+#+END_QUOTE
+
+“ToBoolean”函数被称为抽象操作：说它抽象是因为，它并不是真的作为一个函数供 JavaScript 调用。这是一个标记，规范作者发明的避免重复写相同内容的方法。
+
 ** =[[This]]= 是什么
+
+=[[Notation]]= 是一个标记，在不同语境下有不同的含义。以下是三个主要意义：
 
 一、记录的字段
 
+ECMAScript 规范使用 Record 指代键值图，具有固定键的集合——有点像 C 语言中的结构体。Record 中的每个键值对被叫做 field。因为 Records 只出现在规范中，实际 JavaScript 代码并不存在。那使用 =[[Notation]]= 指代 Record 的 fields 就说得通了。
+
+#+BEGIN_QUOTE
+例子：
+
+很明显，属性描述符也由带有 fields =[[Value]]= , =[[Writable]]= , =[[Get]]= , =[[Set]]= , =[[Enumerable]]= , 和 =[[Configurable]]= 的 Records 建模。isDataDescriptor 抽象操作经常使用这种标记。
+
+当属性描述符 Desc 调用抽象操作 isDataDescriptor 时，会进行以下步骤：
+
+1. Desc undefiend，返回 false
+2. =Desc.[[Value]]= 和 =Desc.[[Writable]]= 未设定，返回 false
+3. 返回 true
+#+END_QUOTE
+
+进一步阅读：[[https://tc39.es/ecma262/#sec-list-and-record-specification-type][The List and Record Specification Types]]
+
 二、JavaScript 对象的内部槽
+
+#+BEGIN_QUOTE
+例子：
+
+大多数 JavaScript 对象有内部槽 =[[Prototype]]= 用来指代它们继承的对象，内部槽的值通常是 =Object.getPrototypeOf()= 返回值。在 OrdinaryGetPrototypeOf 抽象操作中，内部槽的值可以这样得到：
+
+对象 O 调用抽象操作 OrdinaryGetPrototypeOf，进行以下步骤：
+
+1. 返回 =O.[[Prototype]]= .
+#+END_QUOTE
+
+注意: Object 和 Record 字段的内部槽在外观上是相同的，但是可以通过查看这种表示法的前例（点之前的部分）来消除它们的歧义，无论它是 Object 还是 Record。从上下语境来看，这一点通常相当明显。
 
 三、JavaScript 对象的内部方法
 
+这些内部方法无法在 JavaScript 中直接访问到。
+
+#+BEGIN_QUOTE
+例子：
+
+所有 JavaScript 函数都有内部方法 =[[Call]]= ，用来执行该函数。Call 抽象操作的执行步骤：
+
+1. 返回 ? =F.[[Call]](V, argumentsList)=
+#+END_QUOTE
+
 ** 完成记录； =?= 和 =!=
+
+ECMAScript 规范中的每个运行时语义都显式或隐式地返回一个报告其结果的完成记录。这个完成记录是一个包含三个可能字段的记录：
+
+- a =[[Type]]= ( =normal= , =return= , =throw= , =break= 或 =continue= )
+- 如果 =[[Type]]= 是 nomral, return, throw，还会有 =[[Value]]= （看看返回或者抛出什么）
+- 如果 =[[Type]]= 是 break, continue，那么它可以有选择地携带一个 =[[Target]]= 标签，脚本执行从这里开始
+
+=[[Type]]= 是 normal 的完成记录是 normal completion，其他的情况称为 abrupt completion。
+
+很多时候，只需要处理 =[[Type]]= 为 throw 的 abrupt completion。其他三种 abrupt completion 类型只有在查看如何计算特定语法元素时才有用。实际上，在内置函数的定义中，你永远不会看到任何其他类型，因为 =break= , =continue= , =return= 不能跨函数边界工作。
+
+进一步阅读：[[https://tc39.es/ecma262/#sec-completion-record-specification-type][The Completion Record Specification Type]]
+
+
 
 ** JavaScript 对象
 
