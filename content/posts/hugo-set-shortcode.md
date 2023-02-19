@@ -6,6 +6,22 @@ tags = ["技术", "Hugo"]
 draft = false
 +++
 
+## monthly 月读模板
+
+```html
+<dl class="monthly">
+  <hr>
+  <dt style="margin-bottom: 20px;"><a href="{{ .Get 1 }}">{{ .Get 0 }}</a></dt>
+  <dd>{{ (markdownify .Inner) }}</dd>
+</dl>
+```
+
+```md
+{{\< monthly "入行 14 年，我还是觉得编程很难" "https://www.piglei.com/articles/programming-is-still-hard-after-14-years/" \>}}
+阅读记录
+{{\< \/monthly \>}}
+```
+
 ## tasklist
 
 ```html
