@@ -1,294 +1,294 @@
 baseURL = "https://tianheg.xyz/"
-title = "一大加贝"
-timeout = 60000
-languageCode = "zh-CN"
+enableGitInfo = true
 hasCJKLanguage = true
-theme = "tianheg"
+languageCode = "zh-CN"
 pluralizeListTitles = false
 summaryLength = 42
-enableGitInfo = true
+theme = "tianheg"
+timeout = 60000
+title = "一大加贝"
 
 [permalinks]
-    tags = "/tags/:slug/"
+tags = "/tags/:slug/"
 
 [taxonomies]
-    tag = "tags"
+tag = "tags"
 
 [frontmatter]
-    lastmod = ["lastmod", ":git", ":fileModTime", ":default"]
+lastmod = ["lastmod", ":git", ":fileModTime", ":default"]
 
 [markup]
-    defaultMarkdownHandler = "goldmark"
-    [markup.goldmark]
-        [markup.goldmark.extensions]
-            definitionList = true
-            footnote = true
-            linkify = true
-            strikethrough = true
-            table = true
-            taskList = true
-            typographer = false
-        [markup.goldmark.parser]
-            attribute = true
-            autoHeadingID = true
-            autoHeadingIDType = "github"
-        [markup.goldmark.renderer]
-            hardWraps = false
-            unsafe = true
-            xHTML = false
-    [markup.highlight]
-        codeFences = true
-        guessSyntax = true
-        lineNos = false
-        lineNumbersInTable = false
-        noClasses = false
-        noHl = false
-        tabWidth = 2
-    [markup.tableOfContents]
-        startLevel = 2
-        endLevel = 6
-        ordered = true
+defaultMarkdownHandler = "goldmark"
+[markup.goldmark]
+[markup.goldmark.extensions]
+definitionList = true
+footnote = true
+linkify = true
+strikethrough = true
+table = true
+taskList = true
+typographer = false
+[markup.goldmark.parser]
+attribute = true
+autoHeadingID = true
+autoHeadingIDType = "github"
+[markup.goldmark.renderer]
+hardWraps = false
+unsafe = true
+xHTML = false
+[markup.highlight]
+codeFences = true
+guessSyntax = true
+lineNos = false
+lineNumbersInTable = false
+noClasses = false
+noHl = false
+tabWidth = 2
+[markup.tableOfContents]
+endLevel = 6
+ordered = true
+startLevel = 2
 
 [minify.tdewolff.html]
-    keepWhitespace = false
+keepWhitespace = false
 
 [author]
-    name = "tianheg"
-    email = "me@tianhegao.com"
-    motto = "了解自己，认识世界"
-    avatar = "/icons/apple-touch-icon.png"
-    website = "https://tianhegao.com/"
-    twitter = "tianheg_"
+avatar = "/icons/apple-touch-icon.png"
+email = "me@tianhegao.com"
+motto = "了解自己，认识世界"
+name = "tianheg"
+twitter = "tianheg_"
+website = "https://tianhegao.com/"
 
 [related]
-    threshold = 80
-    includeNewer = true
-    toLower = true
-    [[related.indices]]
-        name = "tags"
-        weight = 95
-    [[related.indices]]
-        name = "date"
-        weight = 10
-        pattern = "2006"
+includeNewer = true
+threshold = 80
+toLower = true
+[[related.indices]]
+name = "tags"
+weight = 95
+[[related.indices]]
+name = "date"
+pattern = "2006"
+weight = 10
 
 [mediaTypes."application/atom+xml"]
-    suffixes = ["xml"]
+suffixes = ["xml"]
 
 [outputFormats.SectionsAtom]
-    mediaType = "application/atom+xml"
-    baseName = "atom"
+baseName = "atom"
+mediaType = "application/atom+xml"
 
 [outputFormats.SectionsRSS]
-    mediaType = "application/rss+xml"
-    baseName = "index"
+baseName = "index"
+mediaType = "application/rss+xml"
 
 [outputs]
-    page = ["HTML"]
-    home = ["HTML", "SectionsAtom", "SectionsRSS"]
-    section = ["HTML"]
-    taxonomy = ["HTML"]
-    term = ["HTML"]
+home = ["HTML", "SectionsAtom", "SectionsRSS"]
+page = ["HTML"]
+section = ["HTML"]
+taxonomy = ["HTML"]
+term = ["HTML"]
 
 [services.rss]
-    limit = 10
+limit = 10
 
 [menu]
-    [[menu.main]]
-        weight = 8
-        identifier = "theme-switcher"
-    [[menu.main]]
-        weight = 9
-        identifier = "menu-time"
-    [[menu.main]]
-        pageref = "/about"
-        name = "关于"
-        weight = 1
-        pre = "internal"
-    [[menu.main]]
-        pageref = "/now"
-        name = "现在"
-        weight = 2
-        pre = "internal"
-    [[menu.main]]
-        url = "/tags/reading/"
-        name = "阅读"
-        weight = 3
-        pre = "internal"
-    [[menu.main]]
-        pageref="/im"
-        name = "重要"
-        weight = 4
-        pre = "internal"
-    #[[menu.main]]
-    #    pageref = "/tags"
-     #   name = "标签"
-      #  weight = 5
-       # pre = "internal"
-    [[menu.main]]
-        url = "/tags/tech/"
-        name = "技术"
-        weight = 6
-        pre = "internal"
-    [[menu.main]]
-        pageref = "/posts"
-        name = "归档"
-        weight = 7
-        pre = "internal"
+[[menu.main]]
+identifier = "theme-switcher"
+weight = 8
+[[menu.main]]
+identifier = "menu-time"
+weight = 9
+[[menu.main]]
+name = "关于"
+pageref = "/about"
+pre = "internal"
+weight = 1
+[[menu.main]]
+name = "现在"
+pageref = "/now"
+pre = "internal"
+weight = 2
+[[menu.main]]
+name = "阅读"
+pre = "internal"
+url = "/tags/reading/"
+weight = 3
+[[menu.main]]
+name = "重要"
+pageref = "/im"
+pre = "internal"
+weight = 4
+[[menu.main]]
+name = "技术"
+pre = "internal"
+url = "/tags/tech/"
+weight = 5
+[[menu.main]]
+name = "实验室"
+pageref = "/lab"
+pre = "internal"
+weight = 6
+[[menu.main]]
+name = "归档"
+pageref = "/posts"
+pre = "internal"
+weight = 7
 
 [params]
-    enableHeader = true
-    headerBackground = "alpha(var(--color-bg), 0.8) linear-gradient(90deg, #f79533b0 0, #f37055b4 15%, #ef4e7b1a 30%, #a166ab23 44%, #5073b821 58%, #1098ad26 72%, #07b39b41 86%, #6dba82a1 100%)"
-    siteBrandFontSize = 1
-    siteBrandFontColor = "var(--color-contrast-high)"
-    enableMenu = true
-    displayMenuInHome = true
-    homePoetry = ["探索的人", "了解自己，认识世界", "谨以此博客献给未来的自己"]
-    logo = "images/logo.png"
-    siteLogo = "/icons/apple-touch-icon.png"
-    siteDescription = "了解世界，认识自己"
-    siteCreatedTime = "2018-12-23T20:17:43+08:00"
-    siteTwitter = "tianheg_"
-    ## Tags
-    fontUnit = "em"
-    largestFontSize = 2.5
-    smallestFontSize = 1
-    ## List
-    listWidth = 50
-    displayListTitle = false
-    listDateFormat = "2006/01/02"
-    listDatePosition = "left"
-    displayTaxonomyTermCount = true
-    limitEntriesLimit = -1
-    ## theme
-    enableDarkMode = true
-    defaultTheme = "light"
-    hideThemeToggle = false
-    hideThemeToggleInHome = false
-    primaryColorLight = "220, 90%, 56%"
-    primaryColorDark = "201, 65%, 62%"
-    ## PWA
-    themeColor = "#fff"
-    themeColorDark = "#16171d"
-    safariMaskColor = "#fff"
-    msApplicationTileColor = "#fff"
-    enableServiceWorker = true
-    ## meta data
-    jsonLD = true
-    openGraph = true
-    twitterCards = true
-    ## animation
-    duration = 0.5
-    ## Single post page
-    postWidth = 50
-    # post meta
-    enablePostMeta = false
-    enablePostMetaInHome = true
-    postMetaDateFormat = "2006.1.2"
-    displayPublishedDate = true
-    publishedDateIcon = "calendar-alt"
-    displayModifiedDate = true
-    modifiedDateIcon = "calendar-check"
-    displayExpiredDate = true
-    expiredDateIcon = "calendar-times"
-    displayCategory = false
-    categoryIcon = "folder"
-    categoryDelimiter = "/"
-    displayWordCount = false
-    wordCountIcon = "pencil-alt"
-    displayReadingTime = false
-    readingTimeIcon = "clock"
-    displayBusuanziPagePV = false
-    busuanziPagePVIcon = "eye"
-    # external links
-    hrefTargetBlank = true
-    # TOC
-    enableTOC = false
-    displayTOCTitle = true
-    displayTOCNum = true
-    linkHeadingsToTOC = true
-    # header
-    enableHeadingsAnchor = true
-    headingsOpt = "1-6"
-    anchorSymbol = "#"
-    anchorIcon = ""
-    enableAnchorLink = true
-    enableAnchorAutoHide = true
-    # images
-    autoDetectImages = true
-    enableCaption = true
-    captionPrefix = "◎ "
-    # footnote
-    squareBrackets = true
-    footnoteReturnLinkIcon = "angle-up"
-    insertHrBySelf = true
-    # scrollbar
-    customizeScrollbar = true
-    ## font
-    # Site brand
-    fontFamilySiteBrand = ""
-    # Menu bar
-    fontFamilyMenu = ""
-    # Post title, post subtitle, list title, year and month title of the list, related posts title, previous/next post title, header of table, term/name in a definition list
-    fontFamilyTitle = ""
-    # Headings, toc title
-    fontFamilyHeadings = ""
-    # Code, superscript, post meta info, post updated badge, post gitinfo, minimal footer, busuanzi site view counter
-    fontFamilyCode = "'Source Code Pro', 'Ubuntu Mono', 'DejaVu Sans Mono', 'Courier New', Monaco, monospace"
-    # Blockquotes
-    fontFamilyQuote = ""
-    # Table of contents
-    fontFamilyTOC = ""
-    # Caption
-    fontFamilyCaption = ""
-    # Footer
-    fontFamilyFooter = ""
-    # Body
-    fontFamilyBody = "-apple-system, system-ui, BlinkMacSystemFont, 'Noto Serif SC', Arial, 'Amstelvar', 'Josefin Sans', 'Hiragino Sans GB', 'Microsoft Yahei', 'ST Heiti', sans-serif, 'Apple Color Emoji', 'Segoe UI Emoji', 'Segoe UI Symbol'"
-    fontSize = 16
-    ## para
-    tabSize = 2
-    lineHeight = 2
-    enableParagraphIndent = true
-    indentFirstParagraph = false
-    paragraphStyle = "margin"
-    enableJustify = false
-    enableDropCap = false
-    enableDropCapAfterHr = false
-    deleteHrBeforeDropCap = false
-    enableSmallCaps = false
-    enablePostGitInfo = true
-    displayPostGitInfo = true
-    repoURL = "https://github.com/tianheg/blog"
-    repoEditURL = "https://github.com/tianheg/blog/edit/main"
-    displayEditLink = true
-    editIcon = "edit"
-    editText = "编辑"
-    enableRelatedPosts = true
-    displayRelatedPosts = true
-    relatedPostsNumber = 10
-    relatedPostsIcon = "plus-circle"
-    enablePostNav = true
-    postNavInSection = true
-    enableMinimalFooter = true
-    enableBackToTop = true
-    enableBackToTopAutoHide = true
-    displayBackToTopInHome = false
-    displayBackToTopOnMobile = true
-    backToTopIcon = "arrow-up"
-    enableFooter = true
-    displayFooter = true
-    # Code Blocks
-    enableHighlight = true
-    enableOverflowY = false
-    maxHeight = 20 # Unit: em
-    enableCopy = true
-    enableCopyAutoHide = true
-    enableFingerprint = true
-    enableSRI = true
-    # 404 page
-    fofPoster = "./images/flying-clouds-720p.jpg"
-    fofVideoWebm = "/videos/flying-clouds-720p.webm"
-    fofVideoMp4 = "/videos/flying-clouds-720p.mp4"
-    # Comments
-    enableComments = true
+displayMenuInHome = true
+enableHeader = true
+enableMenu = true
+headerBackground = "alpha(var(--color-bg), 0.8) linear-gradient(90deg, #f79533b0 0, #f37055b4 15%, #ef4e7b1a 30%, #a166ab23 44%, #5073b821 58%, #1098ad26 72%, #07b39b41 86%, #6dba82a1 100%)"
+homePoetry = ["探索的人", "了解自己，认识世界", "谨以此博客献给未来的自己"]
+logo = "images/logo.png"
+siteBrandFontColor = "var(--color-contrast-high)"
+siteBrandFontSize = 1
+siteCreatedTime = "2018-12-23T20:17:43+08:00"
+siteDescription = "了解世界，认识自己"
+siteLogo = "/icons/apple-touch-icon.png"
+siteTwitter = "tianheg_"
+## Tags
+fontUnit = "em"
+largestFontSize = 2.5
+smallestFontSize = 1
+## List
+displayListTitle = false
+displayTaxonomyTermCount = true
+limitEntriesLimit = -1
+listDateFormat = "2006/01/02"
+listDatePosition = "left"
+listWidth = 50
+## theme
+defaultTheme = "light"
+enableDarkMode = true
+hideThemeToggle = false
+hideThemeToggleInHome = false
+primaryColorDark = "201, 65%, 62%"
+primaryColorLight = "220, 90%, 56%"
+## PWA
+enableServiceWorker = true
+msApplicationTileColor = "#fff"
+safariMaskColor = "#fff"
+themeColor = "#fff"
+themeColorDark = "#16171d"
+## meta data
+jsonLD = true
+openGraph = true
+twitterCards = true
+## animation
+duration = 0.5
+## Single post page
+postWidth = 50
+# post meta
+busuanziPagePVIcon = "eye"
+categoryDelimiter = "/"
+categoryIcon = "folder"
+displayBusuanziPagePV = false
+displayCategory = false
+displayExpiredDate = true
+displayModifiedDate = true
+displayPublishedDate = true
+displayReadingTime = false
+displayWordCount = false
+enablePostMeta = false
+enablePostMetaInHome = true
+expiredDateIcon = "calendar-times"
+modifiedDateIcon = "calendar-check"
+postMetaDateFormat = "2006.1.2"
+publishedDateIcon = "calendar-alt"
+readingTimeIcon = "clock"
+wordCountIcon = "pencil-alt"
+# external links
+hrefTargetBlank = true
+# TOC
+displayTOCNum = true
+displayTOCTitle = true
+enableTOC = false
+linkHeadingsToTOC = true
+# header
+anchorIcon = ""
+anchorSymbol = "#"
+enableAnchorAutoHide = true
+enableAnchorLink = true
+enableHeadingsAnchor = true
+headingsOpt = "1-6"
+# images
+autoDetectImages = true
+captionPrefix = "◎ "
+enableCaption = true
+# footnote
+footnoteReturnLinkIcon = "angle-up"
+insertHrBySelf = true
+squareBrackets = true
+# scrollbar
+customizeScrollbar = true
+## font
+# Site brand
+fontFamilySiteBrand = ""
+# Menu bar
+fontFamilyMenu = ""
+# Post title, post subtitle, list title, year and month title of the list, related posts title, previous/next post title, header of table, term/name in a definition list
+fontFamilyTitle = ""
+# Headings, toc title
+fontFamilyHeadings = ""
+# Code, superscript, post meta info, post updated badge, post gitinfo, minimal footer, busuanzi site view counter
+fontFamilyCode = "'Source Code Pro', 'Ubuntu Mono', 'DejaVu Sans Mono', 'Courier New', Monaco, monospace"
+# Blockquotes
+fontFamilyQuote = ""
+# Table of contents
+fontFamilyTOC = ""
+# Caption
+fontFamilyCaption = ""
+# Footer
+fontFamilyFooter = ""
+# Body
+fontFamilyBody = "-apple-system, system-ui, BlinkMacSystemFont, 'Noto Serif SC', Arial, 'Amstelvar', 'Josefin Sans', 'Hiragino Sans GB', 'Microsoft Yahei', 'ST Heiti', sans-serif, 'Apple Color Emoji', 'Segoe UI Emoji', 'Segoe UI Symbol'"
+fontSize = 16
+## para
+backToTopIcon = "arrow-up"
+deleteHrBeforeDropCap = false
+displayBackToTopInHome = false
+displayBackToTopOnMobile = true
+displayEditLink = true
+displayFooter = true
+displayPostGitInfo = true
+displayRelatedPosts = true
+editIcon = "edit"
+editText = "编辑"
+enableBackToTop = true
+enableBackToTopAutoHide = true
+enableDropCap = false
+enableDropCapAfterHr = false
+enableFooter = true
+enableJustify = false
+enableMinimalFooter = true
+enableParagraphIndent = true
+enablePostGitInfo = true
+enablePostNav = true
+enableRelatedPosts = true
+enableSmallCaps = false
+indentFirstParagraph = false
+lineHeight = 2
+paragraphStyle = "margin"
+postNavInSection = true
+relatedPostsIcon = "plus-circle"
+relatedPostsNumber = 10
+repoEditURL = "https://github.com/tianheg/blog/edit/main"
+repoURL = "https://github.com/tianheg/blog"
+tabSize = 2
+# Code Blocks
+enableCopy = true 
+enableCopyAutoHide = true 
+enableFingerprint = true 
+enableHighlight = true 
+enableOverflowY = false 
+enableSRI = true 
+maxHeight = 20 # Unit: em
+# 404 page
+fofPoster = "./images/flying-clouds-720p.jpg"
+fofVideoMp4 = "/videos/flying-clouds-720p.mp4"
+fofVideoWebm = "/videos/flying-clouds-720p.webm"
+# Comments
+enableComments = true
