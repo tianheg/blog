@@ -1,0 +1,28 @@
+#+TITLE: 本地配置博客程序 Jekyll 环境
+#+DATE: <2023-02-21 Tue 00:12>
+#+TAGS[]: 技术 Jekyll
+
+使用 Arch Linux
+
+#+BEGIN_SRC sh
+sudo pacman -S ruby base-devel
+#+END_SRC
+
+在 =~/.zshrc= 中加入：
+
+#+BEGIN_SRC conf
+# Install Ruby Gems to ~/gems
+export GEM_HOME="$HOME/gems"
+export PATH="$HOME/gems/bin:$PATH"
+#+END_SRC
+
+安装 Jekyll：
+
+#+BEGIN_SRC sh
+gem install jekyll bundler
+#+END_SRC
+
+参考资料
+
+- https://jekyllrb.com/docs/installation/other-linux/
+- https://jekyllrb.com/docs/installation/ubuntu/
