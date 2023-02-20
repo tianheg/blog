@@ -1,0 +1,123 @@
+#+TITLE: ASTs是什么&怎么用
+#+DATE: <2023-02-19 Sun 14:33>
+#+TAGS[]: 技术 Compiler
+
+ASTs 是 Abstract Syntax Trees（抽象语法树） 的缩写。
+
+* 什么是 ASTs？
+
+ASTs 是代码的树状展示。它是编译器正常工作的基础部分之一。当编译器转换某些代码时，基本遵循以下步骤：
+
+1. 词法分析（Lexical Analysis）
+2. 语法分析（Syntax Analysis）
+3. 生成代码（Code Generation）
+
+#+BEGIN_EXPORT html
+<img src="/images/abstract-syntax-trees.svg" alt="编译器工作流程">
+<span class="caption">◎ 编译器工作流程</span>
+#+END_EXPORT
+
+** 词法分析也叫标记化
+
+标记化（Tokenization）是[[https://en.wikipedia.org/wiki/Lexical_analysis#Tokenization][对输入字符串的各个部分进行标定和可能的分类的过程]]。然后将生成的 tokens 传递给其他形式的处理。可以将该流程视为解析输入的子任务。这一步中，代码将会转换为一组标记，用以描述代码的不同部分。这和基本的代码高亮所使用的方法是一样的。标记并不知道代码为什么这样组合，它只是文件中的组成部分。可以想象成一组列表或一个数组，其中包含不同类型的标记。
+
+#+BEGIN_EXPORT html
+<img src="/images/abstract-syntax-trees.gif" alt="一个词法分析例子">
+<span class="caption">◎ 一个词法分析例子</span>
+#+END_EXPORT
+
+可以这样类比，得到一个文本，将它拆分成单词组。我可能会区分标点符号、动词、名词和数字等等。但此时我并不了解句子的组成，以及多个句子是怎样组合到一起的。
+
+** 语法分析也叫解析
+
+解析的英文是 parse，解析是一个正在发生的动作，所以用 parsing。
+
+这一步把标记列表变成抽象语法树（ASTs）。将标记变成一个树，这个树能反映代码的真正结构。之前只知道有 =()= ，现在知道了函数调用、函数定义、还有其他分组。
+
+#+BEGIN_EXPORT html
+<img src="/images/abstract-syntax-trees-2.gif" alt="一个语法分析例子">
+<span class="caption">◎ 一个语法分析例子</span>
+#+END_EXPORT
+
+这里的等价物是将标记组成的单词列表转换成一个数据结构，表示诸如句子之类的东西，某个名词在句子中扮演什么角色。
+
+另一个可类比的例子是 [[https://developer.mozilla.org/en-US/docs/Web/API/Document_Object_Model/Introduction][DOM]]。第一步是将 HTML 拆分为“标签”和“文本”，第二步是生成 DOM 树，以展示 DOM 的层次结构。
+
+注意，没有一种 AST 格式。它们可能会有所不同，这取决于要转换为 AST 的语言以及要用于解析的工具。在 JavaScript 中，一个常见的标准是 [[https://github.com/estree/estree][ESTree]]，但是您将看到不同的工具可能会添加额外的属性。
+
+例子的 AST 的 JSON 格式：
+
+#+BEGIN_SRC json
+{
+  "type": "Program",
+  "start": 0,
+  "end": 14,
+  "body": [
+    {
+      "type": "ExpressionStatement",
+      "start": 0,
+      "end": 14,
+      "expression": {
+        "type": "CallExpression",
+        "start": 0,
+        "end": 13,
+        "callee": {
+          "type": "Identifier",
+          "start": 0,
+          "end": 7,
+          "name": "isPanda"
+        },
+        "arguments": [
+          {
+            "type": "Literal",
+            "start": 8,
+            "end": 12,
+            "value": "🐼",
+            "raw": "'🐼'"
+          }
+        ],
+        "optional": false
+      }
+    }
+  ],
+  "sourceType": "module"
+}
+#+END_SRC
+
+一般来说，AST 是一种树形结构，其中每个节点至少有一个指定其表示内容的类型。例如，类型可以是表示实际值的 =Literal= 或表示函数调用的 =CallExpression= 。 =Literal= 节点可能只包含一个值，而 =CallExpression= 节点可能包含许多附加信息，这些信息可能与“正在调用的内容”( =callee= )或传入的 =arguments= 内容相关。
+
+** 代码生成
+
+此步骤本身可以是多个步骤。一旦有了一个抽象语法树，既可以操纵它，也可以“打印”成另一种代码。使用 AST 操作代码比直接对代码作为文本或对标记列表执行这些操作更安全。因为对于文本来说，它只是文本没有更多信息，它显示的上下文最少。 *如果尝试使用字符串替换或正则表达式来操作文本，容易出错* 。
+
+操作标记也并不容易。尽管知道变量是什么，如果想要重新命名变量，就会很麻烦。因为不知道变量的作用域，以及可能与哪些变量冲突。
+
+ASTs 提供了关于代码结构的所有信息，使得修改代码更为准确，更能达到目的。例如，可以确定变量声明的位置，通过树结构确定变量能够影响的作用域范围。
+
+一旦可以操纵树，就能够将代码按期待的方式输出。例如，如果想构建一个像 TypeScript 编译器的编译器，可能一个方向上输出 JavaScript，另一个方向输出机器码。
+
+要做到这样，通过 ASTs 更容易。因为不同输出对于同一结构可能具有不同的格式。使用更线性的输入（文本或标记组）生成输出将更加困难。
+
+* 如何处理 ASTs？
+
+这个理论涵盖了 ASTs 的实际用例是什么？我们谈到了编译器，但是我们并不是整天都在构建编译器。
+
+ASTs 的用例非常广泛，通常可以分为三个总体操作: 读取、修改和打印。它们是某种添加剂，这意味着如果你正在打印 ASTs，那么以前读取并修改 ASTs 的可能性很高。但是，我们将讨论主要集中在一个用例上的一个例子中。
+
+在这些部分中，还将讨论如何执行各自的操作。
+
+** 阅读/遍历 ASTs
+
+从技术上讲，使用 ASTs 的第一步是解析文本以创建 ASTs，但在大多数情况下，提供解析步骤的库也提供了遍历 ASTs 的方法。
+
+遍历一个 AST 意味着访问树的不同节点以获得内容或执行操作。
+
+最常见的用例之一就是 linting。例如，ESLint 使用 espree 生成一个 AST，如果你想编写任何自定义规则，能根据不同的 AST 节点编写这些规则。ESLint 文档中有大量关于如何构建自定义规则、插件和格式化程序的文档。
+
+** 修改/转换 ASTs
+
+** 打印 ASTs
+
+参考资料
+
+- [[https://www.twilio.com/blog/abstract-syntax-trees][Introduction to Abstract Syntax Trees]]
