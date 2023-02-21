@@ -6,6 +6,48 @@ tags = ["技术", "Hugo"]
 draft = false
 +++
 
+## lab 实验室卡片
+
+```html
+<div class="lab">
+  {{ if eq (.Get 1) ""}}
+    <div>{{ .Get 0 }}</div>
+  {{ else }}
+    <a href="{{ .Get 1 }}">{{ .Get 0 }}</a>
+  {{ end }}
+  
+  <p>{{ .Inner }}</p>
+</div>
+```
+
+```scss
+// lab shortcode
+.lab {
+  border-radius: 8px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-direction: column;
+  text-align: center;
+  position: relative;
+  overflow: hidden;
+  padding: 24px;
+  box-shadow: 0 0 0 1px rgba(0,0,0,.07),
+    0 2px 4px rgba(0,0,0,.05),
+    0 12px 24px rgba(0,0,0,.05);
+  
+  p {
+    color: grey;
+  }
+}
+```
+
+```md
+{{\< lab "Demo" "https://tianheg.org/demo/" \>}}
+使用基本的 HTML,CSS,JS 绘制的图案或小工具
+{{\< \/lab \>}}
+```
+
 ## monthly 月读模板
 
 ```html
