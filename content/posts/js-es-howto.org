@@ -161,7 +161,43 @@ ECMAScript 规范中的每个运行时语义都显式或隐式地返回一个报
 
 进一步阅读：[[https://tc39.es/ecma262/#sec-completion-record-specification-type][The Completion Record Specification Type]]
 
+由于完成记录的定义，JavaScript 中的细节就像冒泡错误，在 =try-catch= 块出现在规范以前，是不存在的。实际上，错误（或更确切地，abrupt completions）是显式处理的。
 
+如果没有任何简写，对抽象操作的普通调用（可能返回计算结果，也可能抛出错误）的规范文本如下：
+
+#+BEGIN_QUOTE
+例子：
+
+一些步骤可以调用一个抽象操作，它可以不使用任何速记方法而抛出：
+
+1. Let resultCompletionRecord be AbstractOp().
+2. If resultCompletionRecord is an abrupt completion, return resultCompletionRecord. 注意：如果是一个 abrupt completion，resultCompletionRecord 将直接返回。换句话说，转发 AbstractOp 中抛出的错误，并中止其余步骤。
+3. Let result be =resultCompletionRecord.[[Value]]= . 注意: 在确保获得 normal completion 之后，现在可以展开 Completion Record 以获得所需计算的实际结果。
+4. result is the result we need. We can now do more things with it.
+#+END_QUOTE
+
+但是为了减少这些繁琐的步骤，ECMAScript 规范的编辑器添加了一些简短的代码。自 ES2016 以来，相同的规范文本可以用以下两种等效的方式编写：
+
+#+BEGIN_QUOTE
+例子：
+
+调用一个抽象操作的几个步骤可能会与 ReturnIfAbrupt 一起抛出：
+
+1. Let result be AbstractOp().
+2. ReturnIfAbrupt(result). 注意：returnIfAbrupt 通过转发处理任何可能的 abrupt completions，并自动将结果打开到它的 =[[Value]]= 。
+3. result is the result we need. We can now do more things with it.
+#+END_QUOTE
+
+或者，采用更简洁的方式，用一个特殊的问号（?）标记：
+
+#+BEGIN_QUOTE
+例子：
+
+调用抽象操作的几个步骤可能会抛出一个问号（?）：
+
+1. Let result be ? AbstractOp(). 注意，在这个表示法中，我们根本不处理完成记录。? 标记会处理一切，结果可以立即使用。
+2. result is the result we need. We can now do more things with it.
+#+END_QUOTE
 
 ** JavaScript 对象
 
