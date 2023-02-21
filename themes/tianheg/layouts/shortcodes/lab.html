@@ -1,0 +1,9 @@
+<div class="lab">
+  {{ if eq (.Get 1) ""}}
+    <div>{{ .Get 0 }}</div>
+  {{ else }}
+    <a href="{{ .Get 1 }}">{{ .Get 0 }}</a>
+  {{ end }}
+  
+  <p>{{ .Inner }}</p>
+</div>
