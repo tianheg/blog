@@ -534,6 +534,9 @@ Server = https://repo.archlinuxcn.org/$arch
 #pacman -Ql package_name # retrieve a list of the files installed by a package
 #pacman -Fl package_name # retrieve a list of the files installed by a remote package
 
+# 批量删除 Pacman 包
+sudo pacman -Rs $(pacman -Qq | grep some_words)
+# https://bbs.archlinux.org/viewtopic.php?pid=1533162#p1533162
 
 ## Rarely use
 #pacman -Qk package_name # verify the presence of the files installed by a package, Passing the k flag twice will perform a more thorough check
