@@ -351,3 +351,164 @@ foo(10, 20)
 一、进入执行上下文
 
 进入执行上下文（但代码尚未执行）时，VO 有以下属性（它们在一开始描述）：
+
+- 针对每个函数的形式参数（如果位于函数执行上下文）——创建所述变量对象的具有形参名称和形参值的属性；对于未传递的参数——创建名为形参、值为 undefined 的变量对象的属性。
+- 对于每个函数声明（FunctionDeclaration，FD）——创建具有函数对象的名称和值的变量对象的属性；如果变量对象已包含同名属性，则替换其值和属性。
+- 对于每个变量声明（var，VariableDeclaration）——创建变量名和值未定义的变量对象的属性；如果变量名与已声明的形参或函数名相同，则变量声明不干扰现有属性。
+
+一个例子：
+
+#+BEGIN_SRC js
+function test(a, b) {
+  var c = 10
+  function d() {}
+  var e = function _e() {};
+  (function x() {})
+}
+test(10)
+#+END_SRC
+
+在使用传递的参数 10 进入 test 函数上下文时，AO 如下：
+
+#+BEGIN_SRC js
+AO(test) = {
+  a: 10,
+  b: undefined,
+  c: undefined,
+  d: <reference to FunctionDeclaration "d">,
+  e: undefined
+}
+#+END_SRC
+
+注意，AO 不包含函数 x。这是因为 x 不是函数声明，而是不影响 VO 的函数表达式（FunctionExpression，缩写为 FE）。
+
+然而，函数 _e 也是一个函数表达式，但正如我们将在下面看到的，因为将它赋给变量 e，所以它可以通过 e 名称访问。
+
+二、代码执行
+
+此时，AO/VO 已经被属性填充（尽管并非所有属性都具有我们传递的真实的值，但大多数属性仍然具有初始值 undefined）。
+
+考虑所有相同的示例，代码解释期间的 AO/VO 修改如下：
+
+#+BEGIN_SRC js
+AO['c'] = 10
+AO['e'] = <reference to FunctionDeclaration "_e">
+#+END_SRC
+
+函数表达式 _e 仍然在内存中，只是因为它被保存到声明的变量 _e 中。但函数表达式 x 不在 AO/VO 中。如果我们试图在定义之前甚至之后调用 x 函数，我们会得到一个错误： ="x" is not defined= 。未保存到变量的函数表达式只能使用其定义（原地）或递归调用。
+
+一个经典例子：
+
+#+BEGIN_SRC js
+alert(x) // function x() {}
+
+var x = 10
+alert(x) // 10
+
+x = 20
+
+function x() {}
+
+alert(x) // 20
+#+END_SRC
+
+为什么在第一个警告中 x 是一个函数，而且在声明之前是可访问的？为什么不是 10 或 20？因为，根据规则——VO 在进入上下文时用函数声明填充。同样，在同一阶段，在进入上下文时，有一个变量声明 x ，但是正如我们上面提到的，变量声明的步骤在语义上在函数和形参声明之后，并且在这个阶段不干扰已经声明的同名函数或形参的值。因此，在进入上下文 VO 时，填写如下：
+
+#+BEGIN_SRC js
+VO = {}
+VO['x'] = <reference to FunctionDeclaration "x">
+
+// found var x = 10;
+// if function "x" would not be already defined 
+// then "x" be undefined, but in our case
+// variable declaration does not disturb
+// the value of the function with the same name
+
+VO['x'] = <the value is not disturbed, still function>
+#+END_SRC
+
+然后在代码执行阶段，对 VO 进行如下修改：
+
+#+BEGIN_SRC js
+VO['x'] = 10
+VO['x'] = 20
+#+END_SRC
+
+我们在第二次和第三次 alert() 中看到的情况。
+
+在下面的例子中，我们再次看到变量在进入上下文阶段时被放入 VO 中（因此，else 块永远不会执行，但变量 b 仍然存在于 VO 中）：
+
+#+BEGIN_SRC js
+if (true) {
+  var a = 1
+} else {
+  var b = 2
+}
+alert(a) // 1
+alert(b) // undefined, but not "b is not defined"
+#+END_SRC
+
+
+** 关于变量
+
+#+BEGIN_QUOTE
+Variables are declared only with using var keyword.
+
+像这样：
+
+#+BEGIN_SRC js
+a = 10
+#+END_SRC
+#+END_QUOTE
+
+只需创建全局对象的新属性（而不是变量）。“非变量”并不是指它不能被更改，而是指ECMAScript中 =not the variable= 的概念（由于 VO（globalContext）=== global，因此变量也成为全局对象的属性）。
+
+不同之处（通过例子）：
+
+#+BEGIN_SRC js
+alert(a) // undefined
+alert(b) // Uncaught ReferenceError: b is not defined
+
+b = 10
+var a = 20
+#+END_SRC
+
+这一切又取决于 VO 及其修改阶段（进入上下文阶段和代码执行阶段）：
+
+#+BEGIN_SRC js
+// 进入上下文
+VO = {
+  a: undefined
+}
+#+END_SRC
+
+我们看到在这个阶段没有任何 b，因为它不是变量，b 只会在代码执行阶段出现（但在我们的例子中不会出现，因为有错误）。
+
+更改代码：
+
+#+BEGIN_SRC js
+alert(a) // undefined
+
+b = 10
+alert(b) // 10
+
+var a = 20
+alert(a) // 20
+#+END_SRC
+
+关于变量还有一点很重要。与简单属性相反，变量具有属性 ={DontDelete}= ，这意味着不可能通过 delete 运算符删除变量：
+
+#+BEGIN_SRC js
+a = 10
+alert(window.a) // 10
+alert(delete a) // true
+alert(window.a) // undefined
+
+var b = 20
+alert(window.b) // 20
+alert(delete b) // false
+alert(window.b) // 20
+#+END_SRC
+
+注意，在 ES5 中， ={DontDelete}= 被重命名为 =[[Configurable]]= ，并且可以通过 Object.defineProperty 方法手动管理。
+
