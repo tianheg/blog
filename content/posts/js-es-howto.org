@@ -222,6 +222,68 @@ ECMAScript 规范中的每个运行时语义都显式或隐式地返回一个报
 
 ** JavaScript 对象
 
+规范中，每个对象都有一些内定方法，以使规范的其他部分能够调用。这些内部方法有：
+
+- =[[Get]]= ，能获得对象属性（像 =obj.prop= ）
+- =[[Set]]= ，能设置对象属性（像 ~obj.prop = 42~ ）
+- =[[GetPrototypeOf]]= ，能得到对象的原型（像 =Object.getPrototypeOf(obj)= ）
+- =[[GetOwnProperty]]= ，能得到对象自有属性的属性描述符（像 =Object.getOwnPropertyDescriptor(obj, "prop")= ）
+- =[[Delete]]= ，能删除对象属性（像 =delete obj.prop= ）
+
+详细列表在：[[https://tc39.es/ecma262/#sec-object-internal-methods-and-internal-slots][Object Internal Methods and Internal Slots]]
+
+基于这些定义，函数对象（或只叫函数），只是对象附带上 =[[Call]]= 内部方法，可能也附带有 =[[Construct]]= 内部方法；因此，这些函数也被称为可调用对象（callable objects）。
+
+之后，规范将对象分成两类：普通的和外来的。大多数对象是普通对象，这意味着它们的内部方法是默认的那些。
+
+但是，ECMAScript 规范还定义了几种外来对象，它们可能会覆盖那些内部方法的默认实现。对于外来对象允许做什么，有一些最小的限制，但是一般来说，被覆盖的内部方法可以做很多更改而不违反规范。
+
+#+BEGIN_QUOTE
+例子：
+
+Array 就是外来对象。 Array 对象的 length 属性周围的一些特殊语义无法使用普通对象可用的工具来实现。
+
+其中之一是，设置 Array 对象的 length 属性可以从对象中删除属性，但 length 属性似乎只是一个普通的数据属性。与此相反， =new Map().size= 只是在 =Map.prototype= 上定义的 getter 函数，并没有 length 属性。
+
+#+BEGIN_SRC js
+const arr = [0, 1, 2, 3]
+arr.length = 1
+console.log(arr)
+console.log(Object.getOwnPropertyDescriptor([], "length"))
+console.log(Object.getOwnPropertyDescriptor(new Map(), "size"))
+console.log(Object.getOwnPropertyDescriptor(Map.prototype, "size"))
+#+END_SRC
+
+#+RESULTS:
+: [0]
+: { value: 0, writable: true, enumerable: false, configurable: false }
+: undefined
+: { get: size(), set: undefined, enumerable: false, configurable: true }
+
+这一行为通过覆盖 =[[DefineOwnProperty]]= 内部属性实现，进一步阅读：[[https://tc39.es/ecma262/#sec-array-exotic-objects][Array Exotic Objects]]。
+#+END_QUOTE
+
+ECMAScript 规范还允许其他规范定义自己的外来对象。正是通过这种机制，浏览器能指定对跨源 API 访问的限制（参见 [[https://html.spec.whatwg.org/multipage/nav-history-apis.html#windowproxy][WindowProxy]]）。JavaScript 程序员也可以通过 Proxy API 创建自己的外来对象。
+
+JavaScript 对象还可以具有定义为包含某些类型的值的内部槽。我倾向于认为内部插槽是 Symbol 命名的属性，甚至对 Object.getOwnPropertySymbols() 也是隐藏的。普通对象和外来对象都被允许有内部插槽。
+
+#+BEGIN_QUOTE
+两个内部槽（ =[[Prototype]]= 和 =[[GetPrototypeOf]]= ）的区别：
+
+虽然大多数对象都有 =[[Prototype]]= 内部槽，但所有对象都实现了 =[[GetPrototypeOf]]= 内部方法。值得注意的是，Proxy 对象没有自己的 =[[Prototype]]= ，它的 =[[GetPrototypeOf]]= 内部方法服从于注册的处理程序或存储在 Proxy 对象的 =[[ProxyTarget]]= 内部槽中的目标原型。
+
+因此，在处理 Object 时，引用适当的内部方法而不是直接查看内部插槽的值几乎总是一个好主意。
+#+END_QUOTE
+
+考虑对象、内部方法和内部槽之间关系的另一种方式是通过经典的面向对象透镜。“Object”就像一个接口，指定了几个必须实现的内部方法。普通对象提供默认实现，外来对象可以部分或全部重写这些实现。另一方面，内部槽就像对象的实例变量——对象的实现细节。
+
+所有这些关系，都由下面的 UML 图进行总结：
+
+#+BEGIN_EXPORT html
+<img src="/images/js-es-howto.svg" alt="对象、内部方法、内部槽关系图">
+<span class="caption">◎ 对象、内部方法、内部槽关系图</span>
+#+END_EXPORT
+
 ** 例子： =String.prototype.substring()=
 
 ** 例子： =Boolean()= 和 =String()= 可以抛出例外吗
