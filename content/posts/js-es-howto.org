@@ -199,6 +199,27 @@ ECMAScript 规范中的每个运行时语义都显式或隐式地返回一个报
 2. result is the result we need. We can now do more things with it.
 #+END_QUOTE
 
+有时，如果规范中使用了 ! 符号，就表明：针对 AbstractOp 的特别调用不会返回一个 abrupt completion。
+
+#+BEGIN_QUOTE
+例子：
+
+1. Let result be ! AbstractOp(). 主题：虽然 ? 转发了我们可能得到的任何错误，但是 ! 断言我们从未从这个调用中得到任何 abrupt completions，如果我们得到了，那将是规范中的一个错误。与 ? 的情况一样，我们根本就不处理 completion records。
+2. result is the result we need. We can now do more things with it.
+#+END_QUOTE
+
+#+BEGIN_QUOTE
+小心：
+
+诚然，如果它看起来像一个有效的 JavaScript 表达式，那么 ! 可能会变得相当令人困惑：
+
+1. Let b be ! ToBoolean(value). 节选自 Boolean()。
+
+这里 ! 只是意味着我们确信这个 ToBoolean 调用永远不会返回异常，而不是结果是反的！
+#+END_QUOTE
+
+进一步阅读：[[https://tc39.es/ecma262/#sec-returnifabrupt-shorthands][ReturnIfAbrupt Shorthands]]
+
 ** JavaScript 对象
 
 ** 例子： =String.prototype.substring()=
