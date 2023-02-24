@@ -448,7 +448,6 @@ alert(a) // 1
 alert(b) // undefined, but not "b is not defined"
 #+END_SRC
 
-
 ** 关于变量
 
 #+BEGIN_QUOTE
@@ -511,4 +510,40 @@ alert(window.b) // 20
 #+END_SRC
 
 注意，在 ES5 中， ={DontDelete}= 被重命名为 =[[Configurable]]= ，并且可以通过 Object.defineProperty 方法手动管理。
+
+=eval= 上下文中：变量没有 ={DontDelete}= 。
+
+#+BEGIN_SRC js
+eval("var a = 10")
+alert(window.a)
+alert(delete a)
+alert(window.a)
+#+END_SRC
+
+#+BEGIN_QUOTE
+/Firebug/ also /uses =eval=/ to execute your code from the console. So there /var/s also do not have ={DontDelete}=  and can be deleted.
+#+END_QUOTE
+
+Firebug 变成了 Firefox Devtools。
+
+** 实现 =__parent__=
+
+例子（SpiderMonkey，Rhino）：
+
+#+BEGIN_SRC js
+var global = this
+var a = 10
+
+function foo() {}
+
+console.log(foo.__parent__)
+
+var VO = foo.__parent__
+console.log(VO.a)
+console.log(VO === global)
+#+END_SRC
+
+此时（2023-02）已经不是预料的运行结果了。
+
+* 3. =this=
 
