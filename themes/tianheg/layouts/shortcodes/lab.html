@@ -5,5 +5,5 @@
     <a href="{{ .Get 1 }}">{{ .Get 0 }}</a>
   {{ end }}
   
-  <p>{{ .Inner }}</p>
+  <p>{{ (markdownify .Inner) }}</p>
 </div>
