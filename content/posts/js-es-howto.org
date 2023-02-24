@@ -291,7 +291,7 @@ JavaScript 对象还可以具有定义为包含某些类型的值的内部槽。
 现在有一个问题：
 
 #+BEGIN_QUOTE
-不执行代码，下面的代码片段返回什么？
+不执行代码，下面的代码片段返回什么？the given code fragment throws a TypeError exception
 
 #+BEGIN_SRC js
 String.prototype.substring.call(undefined, 2, 4)
@@ -303,11 +303,19 @@ String.prototype.substring.call(undefined, 2, 4)
 1. 以上调用，会把 undefined 转成字符串 ="undefined"= ，然后返回字符串的第三和第四个字符。
 2. 从其他方面看，以上用法会报错，拒绝将 undefined 作为输入。
 
+在规范左上方的搜索栏搜索“substring”，找到 [[https://tc39.es/ecma262/#sec-string.prototype.substring][String.prototype.substring(start, end)]]。先想想已知什么：知道 substring 是如何工作的（返回输入字符串的一部分）。不知道的是：当 this 值为 undefined 时，结果如何。所以，在接下来的算法步骤阅读过程中，会专注于思考有关 this 值的部分。
 
+#+BEGIN_QUOTE
+1. Let O be ? RequireObjectCoercible(this value).
+#+END_QUOTE
+
+? 标记表明，RequireObjectCoercible 抽象操作可能报错。如果它抛出一个错误，这将与我们上面的第二个假设相对应。
+
+当 RequireObjectCoercible 参数为 undefined 时，结果是抛出错误。
+
+该规范只指定抛出错误的类型，而不指定它包含的消息。这意味着实现可以有不同的错误消息，甚至是本地化的错误消息。
 
 ** 例子： =Boolean()= 和 =String()= 可以抛出例外吗
-
-** 例子： =typeof= 操作符
 
 参考资料
 
