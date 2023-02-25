@@ -317,6 +317,64 @@ String.prototype.substring.call(undefined, 2, 4)
 
 ** 例子： =Boolean()= 和 =String()= 可以抛出例外吗
 
+在编写关键任务代码时，必须将异常处理放在编程的最前面。因此，可能经常思考一个问题：“某些内置函数会抛出异常吗？”。
+
+这个例子，会通过两个内置函数 =Boolean()= 和 =String()= ，回答上面这个问题。
+
+只研究对这些函数的直接调用，而非构造器形态。这很容易成为 JavaScript 中最不受欢迎的特性之一，而且几乎所有的 JS 样式指南都非常不鼓励这种做法。
+
+看看规范中 =Boolean()= 的算法步骤：
+
+#+BEGIN_QUOTE
+This function performs the following steps when called:
+
+1. Let b be ToBoolean(value).
+2. If NewTarget is undefined, return b.
+3. Let O be ? OrdinaryCreateFromConstructor(NewTarget, "%Boolean.prototype%", « =[[BooleanData]]= »).
+4. Set =O.[[BooleanData]]= to b.
+5. Return O.
+#+END_QUOTE
+
+但另一方面，它并不完全简单明了，因为它涉及到一些围绕 OrdinaryCreateFromConstructor 的复杂技巧。更重要的是，还有一个 ? 简记在步骤 3 中可能表示此函数在某些情况下可能引发错误。
+
+步骤 1 将 value（函数参数）转换为布尔值。有趣的是没有 ? 或者 ! 在此步骤中，但通常没有完成记录简写的意思与存在 ! 相同。因此步骤 1 不能引发异常。
+
+第 2 步检查 NewTarget 是否是 =undefined= 。NewTarget 是规范中 new.target 元属性的等价物，它是在 ES2015 中首次添加的，允许规范区分 =new Boolean()= 调用（它是 Boolean）和 =Boolean()= 调用（它是 undefined）。因为我们现在只关注对 Boolean() 的直接调用，我们知道 NewTarget 总是未定义的，而且算法总是直接返回 b，不需要任何额外处理。
+
+因为不使用 new 调用 Boolean() 只能访问 Boolean() 算法的前两个步骤，而这两个步骤都不能抛出异常，所以我们得出结论：不管输入是什么，Boolean() 都不会抛出异常。
+
+现在看看 =String()= ：
+
+#+BEGIN_QUOTE
+This function performs the following steps when called:
+
+1. If value is not present, let s be the empty String.
+2. Else,
+    a. If NewTarget is undefined and value is a Symbol, return SymbolDescriptiveString(value).
+    b. Let s be ? ToString(value).
+3. If NewTarget is undefined, return s.
+4. Return StringCreate(s, ? GetPrototypeFromConstructor(NewTarget, "%String.prototype%")).
+#+END_QUOTE
+
+NewTarget 会返回 undefined，因此会跳过最后一步。Type and SymbolDescriptiveString 是安全的。因为 abrupt completions 不由它们俩处理。还有一个 ? 在 ToString() 前面。在规范中查找 ToString() 得到一个列表：
+
+1. If argument is a String, return argument.
+2. If argument is a Symbol, throw a TypeError exception.
+3. If argument is undefined, return "undefined".
+4. If argument is null, return "null".
+5. If argument is true, return "true".
+6. If argument is false, return "false".
+7. If argument is a Number, return Number::toString(argument, 10).
+8. If argument is a BigInt, return BigInt::toString(argument, 10).
+9. Assert: argument is an Object.
+10. Let primValue be ? ToPrimitive(argument, string).
+11. Assert: primValue is not an Object.
+12. Return ? ToString(primValue).
+
+在 String() 中调用 ToString 的地方，value 可以是除了“符号”以外的任何值（在之前的步骤中会过滤掉这个值）。然而，还有两个 ? 对象的行中。
+
+因此对于 String()，我们的结论是它从不抛出原始值的异常，但是可能抛出 Object 的错误。
+
 参考资料
 
 - [[https://github.com/Pines-Cheng/blog/issues/63][怎样阅读 ECMAScript 规范？]]
