@@ -2,8 +2,7 @@ const fs = require('fs')
 const ejs = require('ejs')
 
 // http://localhost:3000/playlist/track/all?id=967686417
-// 获取我喜欢歌单全部歌曲详情 
-// docs: https://neteasecloudmusicapi-docs.4everland.app/#/?id=获取歌单详情
+// 获取我喜欢歌单全部歌曲详情
 let songs = []
 fs.readFile('./scripts/likelist.json', 'utf8', (err, data) => {
   if (err) console.log(err)
