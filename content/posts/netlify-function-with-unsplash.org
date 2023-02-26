@@ -1,0 +1,65 @@
+#+TITLE: 通过 Netlify function 随机展示 Unsplash 上的图片
+#+DATE: <2023-02-26 Sun 21:52>
+#+TAGS[]: 技术
+
+{{< feynman >}}
+
+我本意是想通过 [[https://www.netlify.com/products/functions/][Netlify function]] 在线获取网易云音乐中“我喜欢”歌单，然后生成网页的，后来发现行不通。但是，又想温习一下 Netlify function 的用法。于是，就有了如题所说的内容。现在你可以通过 [[https://tianheg.xyz/.netlify/functions/unsplash][https://tianheg.xyz/.netlify/functions/unsplash]] 体验。
+
+* 完整配置
+
+=netlify.toml= ：
+
+#+BEGIN_SRC toml
+[build]
+functions = "functions"
+
+[context.production.environment]
+  NODE_VERSION = "18.12.1"
+
+[functions]
+  node_bundler = "esbuild"
+
+[[plugins]]
+package = "@netlify/plugin-functions-install-core"
+#+END_SRC
+
+=functions/unsplash.js= ：
+
+#+BEGIN_SRC js
+import serverless from "serverless-http"
+import { createApi } from "unsplash-js";
+import nodeFetch from 'node-fetch';
+import express from 'express'
+
+const unsplash = createApi({ accessKey: process.env.ACCESS_KEY, fetch: nodeFetch })
+
+const app = express()
+const PORT = 3000
+
+app.get('/.netlify/functions/unsplash/', (req, res) => {
+  unsplash.photos.getRandom()
+    .then(json => {
+      let imageUrl = json.response.urls.regular;
+      res.send(`<img src="${imageUrl}">`)
+    })
+})
+
+app.listen(PORT, () => {
+  console.log(`Unsplash app listening on port ${PORT}`)
+})
+
+exports.handler = serverless(app)
+#+END_SRC
+
+在 Web 端要添加环境变量 =ACCESS_KEY= 。如何获取 ACCESS_KEY？答案在[[https://unsplash.com/developers][这里]]。
+
+参考资料
+
+- [[https://github.com/netlify-labs/netlify-functions-express/blob/master/functions/react-express-ssr.js][functions/react-express-ssr.js]]
+- [[https://github.com/unsplash/unsplash-js][unsplash/unsplash-js]]
+- Netlify build error log
+- [[https://docs.netlify.com/functions/overview/][Netlify functions docs]]
+- [[https://functions.netlify.com/][functions.netlify.com]]
+- [[https://answers.netlify.com/t/runtime-importmoduleerror-cannot-find-module/68307][Runtime.ImportModuleError Cannot find module - Support - Netlify Support Forums]]
+- [[https://www.netlify.com/blog/2021/04/02/modern-faster-netlify-functions/][Modern, faster Netlify Functions: New bundler and JavaScript features]]
