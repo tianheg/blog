@@ -1,18 +1,23 @@
-import axios from 'axios'
+import serverless from "serverless-http"
+import { createApi } from "unsplash-js";
+import nodeFetch from 'node-fetch';
+import express from 'express'
 
-exports.handler = function (event, context, callback) {
-  const apiRoot = 'https://api.unsplash.com'
-  const accessKey = process.env.ACCESS_KEY || "AI2MSAoSGIbSoXLxV84Hqe6Z0N-nq2Jf0D4U7ohw5iw"
+const unsplash = createApi({ accessKey: process.env.ACCESS_KEY, fetch: nodeFetch })
 
-  const someEndpoint = `${apiRoot}/photos/random?client_id=${accessKey}&count=${10}&collections='3816141,1154337,1254279'`
+const app = express()
+const PORT = 3000
 
-  axios.get(someEndpoint)
-    .then(res => {
-      callback(null, {
-        statusCode: 200,
-        body: JSON.stringify({
-          images: res.data
-        })
-      })
+app.get('/.netlify/functions/unsplash/', (req, res) => {
+  unsplash.photos.getRandom()
+    .then(json => {
+      let imageUrl = json.response.urls.regular;
+      res.send(`<img src="${imageUrl}">`)
     })
-}
+})
+
+app.listen(PORT, () => {
+  console.log(`Example app listening on port ${PORT}`)
+})
+
+exports.handler = serverless(app)
