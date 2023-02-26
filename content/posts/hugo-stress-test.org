@@ -1,0 +1,34 @@
+#+TITLE: Hugo 压力测试
+#+DATE: <2023-02-26 Sun>
+#+TAGS[]: 技术 Hugo
+
+今天想到，如果我以后想永远用 Hugo 生成博客，可能吗？
+
+然后想给 Hugo 做一个压力测试——在 =content/posts= 文件夹下放 10000 个 markdown 文件，每个文件都有一定内容，看看最终生成网页的时间。先说结果：106118ms（大约1分钟46秒）。
+
+ChatGPT 告诉我用 [[https://github.com/joke2k/faker][joke2k/faker]] 生成这些文件，并给出了代码：
+
+#+BEGIN_SRC python
+import os
+import random
+from faker import Faker
+
+fake = Faker(['en_US', 'zh_CN'])
+
+if not os.path.exists('content/posts'):
+  os.makedirs('content/posts')
+
+for i in range(1, 10001):
+  title = fake.sentence()
+  content = fake.paragraphs(random.randint(1, 1000))
+  filename = f'content/posts/post{i}.md'
+
+with open(filename, 'w') as f:
+  f.write('---\n')
+  f.write(f'title: "{title}"\n')
+  f.write(f'date: {fake.date_this_year()}\n')
+  f.write('---\n\n')
+  f.write('\n\n'.join(content))
+#+END_SRC
+
+我现在 content/posts 下有 956 个文件（ =ls content/posts | wc -l= ）。这是从 2018 年 12 月开始，到 2023 年 2 月这段时间。相当于一年会写 225 篇文章。如果我打算再写 20 年，那时我的文件数会达到 4600。距离 10000 很远。也就是说，未来 20 年，我博客的构建时间不会超过1分46秒。还算是挺快的，更何况未来 Hugo 一定会继续优化，构建速度一定会更快。我看好 Hugo 的未来。
