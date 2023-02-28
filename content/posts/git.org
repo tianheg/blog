@@ -484,6 +484,7 @@ filter-repo= 现在被 Git 项目推荐，用于代替 =git filter-branch=。
 以上命令行中的演示，是使用 =git filter-repo=
 移除文件的过程，谨记：不要直接在生产环境或重要仓库使用，要先确保自己知道某个命令的执行结果。
 * 云服务器配置 Git 仓库托管并使用 Git Hooks 自动执行脚本
+
 上文见[[/posts/hugo-deploy-to-server/][部署 Hugo 博客到 Ubuntu 服务器]]。
 
 之前的博客更新思路是，本地提交修改至
@@ -491,7 +492,7 @@ GitHub，再登陆云服务器，手动执行脚本，达到更新博客内容�
 GitHub 拉取代码较慢，于是想到可以把本地的更改同时推送到 GitHub
 和云服务器。再通过 Git Hooks
 自动执行「更新博客」的脚本，以此达到提升效率的目的。
-
+    
 ** 更新 Git 至最新版本
 
 云服务器的系统是 Ubuntu 20.04，所以可以通过以下命令安装 Git 的最新版本：
@@ -650,8 +651,16 @@ GitHub 拉取代码较慢，于是想到可以把本地的更改同时推送到 
 参考资料
 
 1. [[https://segmentfault.com/a/1190000039676421]]
-2. [[https://www.saintsjd.com/2011/01/what-is-a-bare-git-repository/]]
-
+2. [[https://www.saintsjd.com/2011/01/what-is-a-bare-git-repository/]
+* 只 clone 远程 Git repo 的一部分
+- https://stackoverflow.com/a/52269934/12539782
+- https://www.git-scm.com/docs/git-clone
+#+BEGIN_SRC sh
+git clone --depth 1 --filter=blob:none --sparse REPOSITORY_URL
+cd DIRECTORY_NAME
+git sparse-checkout init --cone
+git sparse-checkout set DIRECTORY_NAME
+#+END_SRC
 * [[https://git-scm.com/docs][Git - Reference]]
 
 ** Guide - [[https://git-scm.com/docs/git#Documentation/git.txt-ahrefdocsgitcredentialsgitcredentials7a][gitcredentials[7]]]
