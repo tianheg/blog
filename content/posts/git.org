@@ -661,6 +661,15 @@ cd DIRECTORY_NAME
 git sparse-checkout init --cone
 git sparse-checkout set DIRECTORY_NAME
 #+END_SRC
+* 从历史commit中删除特定文件
+
+[[https://docs.github.com/en/authentication/keeping-your-account-and-data-secure/removing-sensitive-data-from-a-repository][Removing sensitive data from a repository - GitHub Docs]]
+
+#+BEGIN_SRC sh
+git filter-repo --invert-paths --path PATH-TO-YOUR-FILE-WANT-TO-DELETE
+git push origin --force --tags
+#+END_SRC
+
 * [[https://git-scm.com/docs][Git - Reference]]
 
 ** Guide - [[https://git-scm.com/docs/git#Documentation/git.txt-ahrefdocsgitcredentialsgitcredentials7a][gitcredentials[7]]]
