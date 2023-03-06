@@ -1,0 +1,70 @@
+#+TITLE: 如何在 Next.js 项目下将 Org-mode 多级文档转换成网页中的树状结构
+#+DATE: <2023-03-06 Mon 13:26>
+#+TAGS[]: 技术 Org-mode Reactjs Nextjs
+
+{{< feynman >}}
+
+去年 12 月份的一天，我遇到网站 =blackglory.me= ，读到了其中一篇文章《[[https://blackglory.me/posts/from-blog-to-digital-garden][将博客改造成数字花园]]》，并看到了作者的一个笔记页面——[[https://blackglory.me/notes/node.js]]。觉得这样的样式以前从未见过，好奇它的实现细节。想像往常一样，在 GitHub 上寻找网站的源代码，不过没有找到。于是，我就暂时放弃了对实现细节的探寻。
+
+过去的几个月，我时不时会想到这种树状结构，有过几次想要继续查找解决办法的行动，但都没有结果。
+
+上个月我实在是太想知道答案了，于是我放下不自信，发邮件问作者——这种树状结构的实现方式。
+
+我的发信：
+
+#+BEGIN_QUOTE
+关注你的网站几个月了，读过《如何解决信息过载》、《将博客改造成数字花园》，获益匪浅。注意到你的笔记结构，想实现一个一样的结构出来，苦于对于 Next.js 等框架了解不够，无法实现。
+
+所以，想直接向你询问：如何实现这种树状结构。
+#+END_QUOTE
+
+作者回复大意（感谢 Ta 回复这么多，让我知道很多背景知识）：
+
+#+BEGIN_QUOTE
+树状结构的渲染步骤：
+
+1. Org-mode 文本 => ASTs（抽象语法树，作为编译器实现中的一个名词出现）
+2. 在 Next.js 项目中编写组件，将 ASTs 转换为 HTML 界面
+
+第一步，有一个库——[[https://github.com/orgapp/orgajs][orgajs]]，可以用，而它恰好提供了一个关于 Next.js 的[[https://github.com/orgapp/orgajs/tree/main/examples/next][示例项目]]。
+
+但是 orgajs 没有预先定义 AST 结构，导致 AST 结构总是在变化。作者自己基于 orgajs 定义了 AST 结构，写了一个库——[[https://github.com/BlackGlory/romast][romast]]。
+
+作者写道：
+
+ROMAST 定义了一个容易被渲染的 AST 结构，虽然底层用的还是 orgajs，但如果未来有人实现别的 Org-mode 解析器，就可以在底层把 orgajs 换掉，而依赖 ROMAST 的代码不需要修改。
+
+现在问题只剩下怎么把 ROMAST 转换成 React 组件，这是一个很具体的问题，我没时间手把手教你怎么做，但这个难度本身不高，主要是体力活，所以交给你自己摸索。
+#+END_QUOTE
+
+我用那个示例项目建起了项目的基本骨架，目前是在 =pages/= 文件夹下编写 Org-mode 文件。两个链接：[[https://lt.tianheg.org/][网站]]，[[https://github.com/tianheg/learning-tree/tree/c369d5e7f938a8c5d60ca19156562431bd26c775][GitHub（c369d5e）源代码]]。
+
+在作者网站的源码中，我看到 =__NEXT_DATA__= id 对应的 script 元素内部，有些很关键的信息。 =pageProps= 的一部分值是 Org-mode 文本的 ASTs。并且，通过开发者工具的 Debugger 标签，我看到了 Next.js 生成的 JS 文件中，有 =pages/notes/[slug]-1179e5ff8f505607.js= 这样的一个文件，再结合其他 JS 文件，可以推测出作者的项目结构：
+
+#+BEGIN_SRC txt
+.
+├── components
+└── pages
+   ├── _app.tsx
+   ├── index.tsx
+   └── notes
+      └── [slug].tsx
+#+END_SRC
+
+-----
+
+在做出以上工作后，我的目标很清晰了——将通过 ROMAST 得到的 ASTs 转换为 React 组件，最终呈现到网页上。
+
+我接下来需要：
+
+1. 完成 React 官网的 Learn 部分，对其他内容有整体了解——即在需要的时候知道去哪个页面查找。
+2. 完成 Next 官网的 Learn 部分，对其他内容有整体了解——即在需要的时候知道去哪个页面查找。
+3. 把最终的组件树写出来。
+
+参考资料
+
+- https://blackglory.me/notes/node.js
+- https://blackglory.me/notes/node.js
+- https://github.com/orgapp/orgajs
+- https://beta.reactjs.org/
+- https://nextjs.org/docs/
