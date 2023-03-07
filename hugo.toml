@@ -66,11 +66,17 @@ threshold = 80
 toLower = true
 [[related.indices]]
 name = "tags"
-weight = 95
+weight = 100
 [[related.indices]]
 name = "date"
 pattern = "2006"
-weight = 10
+weight = 90
+[[related.indices]]
+name        = "fragmentrefs"
+type        = "fragments"
+applyFilter = false
+weight      = 80
+
 
 [mediaTypes."application/atom+xml"]
 suffixes = ["xml"]
