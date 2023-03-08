@@ -4,7 +4,7 @@ const ejs = require('ejs')
 // http://localhost:3000/playlist/track/all?id=967686417
 // 获取我喜欢歌单全部歌曲详情
 let songs = []
-fs.readFile('./scripts/likelist.json', 'utf8', (err, data) => {
+fs.readFile('./scripts/music/likelist.json', 'utf8', (err, data) => {
   if (err) console.log(err)
   const jsonData = JSON.parse(data)
   songs = jsonData.songs.map(song => {
@@ -26,7 +26,7 @@ fs.readFile('./scripts/likelist.json', 'utf8', (err, data) => {
     }
   })
   // console.log(songs)
-  ejs.renderFile('./scripts/template.ejs', { songs }, { "rmWhitespace": true }, function (err, org) {
+  ejs.renderFile('./scripts/music/template.ejs', { songs }, { "rmWhitespace": true }, function (err, org) {
     if (err) throw err;
     fs.writeFile('./content/music.org', org, function (err) {
       if (err) throw err;
