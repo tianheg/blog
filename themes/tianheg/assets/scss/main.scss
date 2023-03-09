@@ -184,16 +184,8 @@ $baseRelURL: "{{ strings.TrimSuffix (.Site.BaseURL | relURL) "/" }}";
         $headerBackground: {{ . }};
     {{ end }}
 
-    {{ if .Site.Params.siteBrandSVG }}
-        $siteBrandSVG: true;
-        $siteBrandSVGWidth: {{ .Site.Params.siteBrandSVGWidth }}px;
-        $siteBrandSVGHeight: {{ .Site.Params.siteBrandSVGHeight }}px;
-        $siteBrandSVGFill: {{ .Site.Params.siteBrandSVGFill }};
-    {{ else }}
-        $siteBrandSVG: false;
-        $siteBrandFontSize: {{ .Site.Params.siteBrandFontSize }}em;
-        $siteBrandFontColor: {{ .Site.Params.siteBrandFontColor }};
-    {{ end }}
+    $siteBrandFontSize: {{ .Site.Params.siteBrandFontSize }}em;
+    $siteBrandFontColor: {{ .Site.Params.siteBrandFontColor }};
 
     @import 'layout/header';
 {{ end }}
