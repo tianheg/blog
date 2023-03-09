@@ -14,17 +14,17 @@
 
 #+BEGIN_SRC json
 {
-	"name": "blog",
-	"private": true,
-	"scripts": {
-		"pagefind": "./scripts/pagefind_extended --source public --bundle-dir ../static/_pagefind",
-		"build": "hugo --buildFuture",
-		"start": "hugo serve --disableFastRender --buildFuture",
-		"all": "npm-run-all build pagefind build"
-	},
-	"devDependencies": {
-		"npm-run-all": "^4.1.5"
-	}
+  "name": "blog",
+  "private": true,
+  "scripts": {
+    "pagefind": "pagefind_extended --source public",
+	"build": "hugo --gc --buildFuture",
+	"start": "hugo serve --buildFuture --disableFastRender",
+	"all": "npm-run-all build pagefind"
+  },
+  "devDependencies": {
+    "npm-run-all": "^4.1.5"
+  }
 }
 #+END_SRC
 
@@ -49,9 +49,13 @@
 #+END_EXPORT
 #+END_SRC
 
-除此之外，_pagefind 文件夹的位置也不确定。一开始是直接生成在 public 文件夹，但是因为 hugo 构建时 public 中还没有 _pagefind 文件夹，找不到相关文件，无法使用搜索。解决办法：改变 _pagefind 文件夹的位置，让它位于 static 中，之后再构建。你会注意到 package.json 中 all 脚本： =npm-run-all build pagefind build= ，hugo build 两次，这是为什么？
+除此之外，_pagefind 文件夹的位置也不确定。一开始是直接生成在 public 文件夹，但是因为 hugo 构建时 public 中还没有 _pagefind 文件夹，找不到相关文件，无法使用搜索。解决办法：改变 _pagefind 文件夹的位置，让它位于 static 中，之后再构建。
+
+你会注意到 package.json 中 all 脚本： =npm-run-all build pagefind build= ，hugo build 两次，这是为什么？这是为了解决本地没有 search UI 的问题。
 
 第一次 build 生成 public 文件夹作为 pagefind 的 source，生成 static/_pagefind 文件夹，第二次 build 将 static 文件夹下的 _pagefind，放到即将部署的 public 文件夹中。
+
+如果是在 Netlify 部署，则不需要第二次 build。
 
 还要注意，需要设置 Node.js 版本的环境变量，我是在 =netlify.toml= 文件中设置：
 
