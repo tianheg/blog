@@ -67,32 +67,36 @@ draft = false
 ## tasklist
 
 ```html
+{{ $options := (dict "markup" "org" ) }}
 <div class="tasklist">
-  {{ (markdownify .Inner) }}
+  {{ .Inner | .Page.RenderString $options }}
 </div>
 ```
 
 ```scss
 // list task box
-.tasklist ul {
-  list-style: none;
+.tasklist>ul>li {
   margin: 0;
   padding: 0;
+
+  p {
+    all: unset;
+  }
 }
 ```
 
 在 md/org 格式文件都通过相同方式使用（使用时删去所有的 `\`）：
 
-```md
+```org
 {{\< tasklist \>}}
 
-- [ ] test
-- [x] test
+- test
+- +test+
 
 {{\< \/tasklist \>}}
 ```
 
-## align {#align}
+## align
 
 对文字进行居中、居左、居右的设置。在 `~/layouts/shortcodes/` 下创建 `align.html` ，内容如下：
 

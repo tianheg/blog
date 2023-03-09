@@ -1,3 +1,4 @@
+{{ $options := (dict "markup" "org" ) }}
 <div class="tasklist">
-  {{ (markdownify .Inner) }}
+  {{ .Inner | .Page.RenderString $options }}
 </div>
