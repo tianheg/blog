@@ -11,6 +11,9 @@
   margin-top: 0em;
 }
 
+.menu-item-name {
+  font-size: .9em;
+}
 [data-theme="dark"] {
 
   .theme-icon-dark,
@@ -22,10 +25,6 @@
 @media (max-width: $maxWidth) {
   .nav {
     margin: 0;
-  }
-
-  .menu-item-name {
-    font-size: 80%;
   }
 
   :root {
@@ -251,5 +250,11 @@ body {
   
   p {
     color: grey;
+  }
+}
+// shorter than 394px
+@media (max-width: 394px) {
+  #menu {
+    display: grid;
   }
 }
