@@ -2,11 +2,11 @@
 #+DATE: <2022-11-14 Mon 15:07>
 #+TAGS[]: 技术
 
-** Concept
+* Concept
 *** PAC(proxy auto-config)
 https://en.wikipedia.org/wiki/Proxy_auto-config
 根据给定访问地址，自动选择代理服务器
-** Set up a proxy for these software
+* Set up a proxy for these software
 *** Shell
 #+begin_src sh
 export http_proxy=http://127.0.0.1:1080
@@ -260,11 +260,20 @@ refer
 1. https://www.electronjs.org/docs/latest/tutorial/installation#proxies
 2. https://github.com/gajus/global-agent/blob/v2.1.5/README.md#environment-variables
 
-** Tools for Proxy
+* Tools for Proxy
 *** Clash
 *** v2ray-core
 *** ssrlocal, sslocal
-** 一些资源
+* 需要特别设置代理的网站
+
+clash.yaml
+
+#+BEGIN_SRC yaml
+rules:
+  - DOMAIN-SUFFIX,linkedin.com,Final
+#+END_SRC
+
+* 一些资源
 - https://github.com/aglent/autoproxy
 - https://wiki.archlinux.org/title/Proxy_server
 - https://github.com/FelisCatus/SwitchyOmega/wiki/GFWList
