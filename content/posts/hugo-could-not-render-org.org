@@ -2,7 +2,32 @@
 #+DATE: <2023-02-14 Tue 00:04>
 #+TAGS[]: 技术 Hugo
 
-这个问题出现过几次，出现频次没有规律。我在 Hugo 论坛发了帖子，无人回复，可能没人遇到这样的问题。
+问题得到解决。Hugo 依赖的 go-org 库作者进行了完善，他的 [[https://github.com/niklasfasching/go-org/commit/5464ab3/][commit 信息]]：
+
+#+BEGIN_QUOTE
+*Fix race condition surrounding global orgWriter*
+
+Since writers are normally only used synchronously (i.e. to write one document
+at a time), we don't guard modifications to their internal
+state (e.g. temporarily replacing the string.Builder in WriteNodesAsString)
+against race conditions.
+
+The package global `orgWriter` and corresponding use cases of it (`org.String`,
+`$node.String`) break that pattern - the writer is potentially used from
+multiple go routines at the same time. This results in race conditions that
+manifest as error messages like e.g.
+
+    could not write output: runtime error: invalid memory address or nil pointer dereference. Using unrendered content.
+
+Additionally, since we catch panics in `Document.Write`, the corresponding
+stack trace is lost and dependents of go-org never know what hit them.
+
+As using a writer across simultaneously across go routines is not a standard
+pattern, we'll sync the use of the global `orgWriter` instead of trying to make
+the actual writer threadsafe; less code noise for the common use case.
+#+END_QUOTE
+
+这个问题出现过几次，出现频次没有规律。我在 Hugo 论坛发了帖子，一段时间内无人回复，极少有人遇到这样的问题。
 
 执行 hugo 或者 hugo server 命令时会出现：
 
@@ -15,3 +40,7 @@ ERROR 2023/03/09 13:55:35 Could not render org: could not write output: runtime 
 我不懂 Go 编程语言。无法找到问题所在。目前（<2023-02-14 Tue>），我的博客源码 content/posts 目录下，有 *.md, *.org 两种文件格式，计划后续将剩余的 *.md 文件转为 *.org。
 
 位于 Hugo 论坛的帖子地址：https://discourse.gohugo.io/t/hugo-could-not-render-org/42932
+
+我在 go-org 发的 issue：https://github.com/niklasfasching/go-org/issues/99
+
+所以，在 Hugo 版本为 0.111.3 以及之后的版本中，不会出现以上错误信息。
