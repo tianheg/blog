@@ -50,7 +50,7 @@ HTML 是网页使用的语言，定义了网页的结构和内容。
 
 #+begin_src html
 <meta charset="utf-8">
-<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="viewport" content="width=device-width, initial-scale=1"> <!-- 使得移动端的样子和桌面端一致 -->
 #+end_src
 
 meta 的五个属性：
@@ -164,6 +164,15 @@ HTML 为了解决上述问题，允许使用 Unicode 码点表示字符，浏览
 - 空格：&nbsp;
 
 * 网页的语义结构
+
+涉及元素：header、main、article、footer、aside、section、nav、hgroup、h1-h6
+
+- article 想把一组相关内容放在一起时，可以用它
+
+** 可选的组织结构
+
+一、
+
 #+begin_src html
 <body>
   <header>页眉</header>
@@ -177,7 +186,19 @@ HTML 为了解决上述问题，允许使用 Unicode 码点表示字符，浏览
 </body>
 #+end_src
 
-除此之外还有，aside、section、nav、h1~h6、hgroup
+二、
+
+#+BEGIN_SRC html
+<body>
+  <main>
+    <h1>主题</h1>
+    <section>
+      <h2>次级主题</h2>
+    </section>
+  </main>
+  <footer></footer>
+</body>
+#+END_SRC
 
 * 文本标签
 div、p、span、br、wbr、hr（属于历史遗留、不建议使用。建议使用 CSS 表示水平线效果）、pre、strong、b（属于历史遗留的纯样式标签、不建议使用）、em、i（语义不强，用 em 代替）、sub、sup、var、u、s、blockquote、cite、q、code、kbd、samp、mark、small、time、data、address、abbr、ins、del、dfn、ruby、bdo、bdi
@@ -317,6 +338,14 @@ noopener 告诉浏览器打开链接时，不让链接窗口通过 JS 的 window
 
 * 表单
 - form
+- input
+  - radio
+    两个 type 为 radio 的表单组件，具有相同 name 时，只可二选一
+    #+BEGIN_SRC html
+    <label><input name="indoor-outdoor" id="indoor" type="radio"> Indoor</label>
+    <label><input name="indoor-outdoor" id="outdoor" type="radio"> Outdoor</label>
+    #+END_SRC
+- fieldset, legend
 
 * 其他标签
 
