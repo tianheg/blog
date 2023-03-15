@@ -382,7 +382,45 @@ https://www.w3schools.com/csS/css_align.asp
 [[https://developer.mozilla.org/en-US/docs/Learn/CSS/CSS_layout/Floats#clearing_boxes_wrapped_around_a_float]]
 
 当使用 float 时，有时内部图片会溢出到父元素之外，这时就需要一些 hack
+** 居中 div
 
+#+BEGIN_SRC css
+div {
+  width: 80%;
+  margin-left: auto;
+  margin-right: auto;
+}
+#+END_SRC
+** 两个元素分别位于左右两端
+
+#+BEGIN_SRC html
+<p class="flavor">French Vanilla</p><p class="price">3.00</p>
+#+END_SRC
+
+#+BEGIN_SRC css
+p {
+  display: inline-block;
+}
+
+.flavor {
+  text-align: left;
+  width: 50%;
+}
+
+.price {
+  text-align: right;
+  width: 50%;
+}
+#+END_SRC
+
+如果 HTML 是这样的
+
+#+BEGIN_SRC html
+<p>Caramel Macchiato</p>
+<p>3.75</p>
+#+END_SRC
+
+第二个 p 元素，就会进入下一行。
 * CSS 工具
 
 - [[https://arantius.github.io/web-color-wheel/][Named Colors Wheel]]
