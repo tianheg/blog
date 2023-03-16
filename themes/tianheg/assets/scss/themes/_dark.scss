@@ -3,7 +3,7 @@
 
 @mixin dark-theme {
   --theme-name: "dark";
-  
+
   // pagefind search
   --pagefind-ui-primary: #eeeeee;
   --pagefind-ui-text: #eeeeee;
@@ -11,24 +11,29 @@
   --pagefind-ui-border: #152028;
   --pagefind-ui-tag: #152028;
 
-  @include defineColorHSL(
-    --color-primary,
+  // form btn
+  --form-btn-bgcolor: #413543;
+  --form-btn-bghcolor: #2D2727;
+
+  @include defineColorHSL(--color-primary,
     $primaryColorDarkH,
     $primaryColorDarkS,
-    $primaryColorDarkL
-  );
+    $primaryColorDarkL );
   @include defineColorHSL(--color-bg, 231, 14%, 10%);
   @include defineColorHSL(--color-contrast-lower, 230, 12%, 18%);
   @include defineColorHSL(--color-contrast-low, 240, 2%, 37%);
   @include defineColorHSL(--color-contrast-medium, 80, 2%, 69%);
   @include defineColorHSL(--color-contrast-high, 69, 9%, 84%);
   @include defineColorHSL(--color-contrast-higher, 60, 6%, 90%);
+
   .theme-icon-light {
     display: none;
   }
+
   .theme-icon-dark {
     display: inline-block;
   }
+
   img {
     filter: brightness(75%);
   }
@@ -56,11 +61,13 @@
   }
 }
 
-@if ($defaultTheme == "dark") {
+@if ($defaultTheme =="dark") {
   :root {
     @include dark-theme;
   }
-} @else {
+}
+
+@else {
   :root[data-theme="dark"] {
     @include dark-theme;
   }

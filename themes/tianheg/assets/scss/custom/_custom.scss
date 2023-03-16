@@ -264,3 +264,50 @@ body {
     padding-block: 8px;
   }
 }
+
+// /msg form style
+//
+.msg-form {
+  width: 100%;
+  max-width: 500px;
+  margin: auto;
+  padding: 20px;
+  box-sizing: border-box;
+  border-radius: 10px;
+  box-shadow: 0 15px 25px var(--color-contrast-high);
+  // color: var(--color-contrast-high);
+  // background-color: var(--color-bg);
+
+  form {
+
+    input[type="text"],
+    input[type="email"],
+    textarea,
+    button {
+      display: block;
+      width: 100%;
+      margin-inline: 10px;
+      padding: 10px;
+      margin-bottom: 15px;
+      font-size: 1rem;
+      color: var(--color-contrast-high);
+      background-color: var(--color-bg);
+      border: 1px solid var(--color-contrast-high);
+      border-radius: 3px;
+    }
+
+    textarea {
+      height: 150px;
+      resize: vertical;
+    }
+
+    button {
+      cursor: pointer;
+      background-color: var(--form-btn-bgcolor);
+
+      &:hover {
+        background-color: var(--form-btn-bghcolor);
+      }
+    }
+  }
+}
