@@ -3,6 +3,10 @@
 #+TAGS[]: 技术 CSS
 #+TOC: true
 
+#+BEGIN_QUOTE
+Every browser understands that zero means no change.
+#+END_QUOTE
+
 * Layout
 ** Position
 通过 position 可以对正常的文档流产生影响。
@@ -165,6 +169,67 @@ and、or、not 逻辑： =and= , =,= , =not=
 四、不必用 media query
 
 Flexbox, Grid 和多栏布局自带响应式设计。
+
+* Color
+** RGB
+primary, secondary, and tertiary colors on a color wheel
+
+#+BEGIN_SRC txt
+rgb(  0,   0,   0)
+rgb(255, 255, 255)
+
+rgb(255,   0,   0)
+rgb(  0, 255,   0)
+rgb(  0,   0, 255)
+
+rgb(127,   0,   0)
+rgb(  0, 127,   0)
+rgb(  0,   0, 127)
+
+rgb(255, 127,   0)
+rgb(255,   0, 127)
+rgb(127, 255,   0)
+rgb(127,   0, 255)
+rgb(  0, 255, 127)
+rgb(  0, 127, 255)
+#+END_SRC
+
+Two colors that are opposite from each other on the color wheel are called complementary colors.
+
+A very common way to apply color to an element with CSS is with hexadecimal or hex values. While hex values sound complicated, they're really just another form of RGB values.
+
+
+
+** HSL
+
+The HSL color model, or hue, saturation, and lightness, is another way to represent colors.
+
+The CSS hsl function accepts 3 values: a number from 0 to 360 for hue, a percentage from 0 to 100 for saturation, and a percentage from 0 to 100 for lightness.
+
+blue hsl(240, 100%, 50%)
+** Transition/Gradient
+
+#+BEGIN_SRC txt
+linear-gradient
+#+END_SRC
+** Opacity
+#+BEGIN_SRC txt
+opacity
+#+END_SRC
+
+Another way to set the opacity for an element is with the alpha channel. Like rgba(), hsla().
+* Border
+#+BEGIN_SRC txt
+border-left-width
+border-left-style
+border-left-color
+
+border-left: width style color;
+#+END_SRC
+* Shadow
+#+BEGIN_SRC txt
+box-shadow
+#+END_SRC
 
 * 特定 CSS 能产生什么效果
 ** 居中对齐
