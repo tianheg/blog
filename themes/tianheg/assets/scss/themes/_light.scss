@@ -2,24 +2,30 @@
 
 @mixin light-theme {
   --theme-name: "light";
-  @include defineColorHSL(
-    --color-primary,
+
+  // form btn
+  --form-btn-bgcolor: #E9EDC9;
+  --form-btn-bghcolor: #FAEDCD;
+
+  @include defineColorHSL(--color-primary,
     $primaryColorLightH,
     $primaryColorLightS,
-    $primaryColorLightL
-  );
+    $primaryColorLightL );
   @include defineColorHSL(--color-bg, 0, 0%, 100%);
   @include defineColorHSL(--color-contrast-lower, 0, 0%, 95%);
   @include defineColorHSL(--color-contrast-low, 240, 1%, 83%);
   @include defineColorHSL(--color-contrast-medium, 240, 1%, 48%);
   @include defineColorHSL(--color-contrast-high, 240, 4%, 20%);
   @include defineColorHSL(--color-contrast-higher, 240, 8%, 12%);
+
   .theme-icon-light {
     display: inline-block;
   }
+
   .theme-icon-dark {
     display: none;
   }
+
   img {
     filter: none;
   }
@@ -47,11 +53,13 @@
   }
 }
 
-@if ($defaultTheme == "light") {
+@if ($defaultTheme =="light") {
   :root {
     @include light-theme;
   }
-} @else {
+}
+
+@else {
   :root[data-theme="light"] {
     @include light-theme;
   }
