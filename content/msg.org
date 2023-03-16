@@ -1,0 +1,13 @@
+#+TITLE: 留言
+
+#+BEGIN_EXPORT html
+<form name="msg" netlify-honeypot="bot-field" action="/thanks" method="POST" netlify>
+  <p class="hidden">
+    <label>Don’t fill this out: <input name="bot-field"></label>
+  </p>
+  <p><label>你的名字：<input type="text" name="name" /></label></p>
+  <p><label>你的邮箱：<input type="email" name="email" /></label></p>
+  <p><label>留言：<textarea name="msg"></textarea></label></p>
+  <p><button type="submit">发送</button></p>
+</form>
+#+END_EXPORT
