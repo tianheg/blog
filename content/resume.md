@@ -45,6 +45,11 @@
   - 修习课程：计算机网络、软件技术基础
   - 过四级
 
+### 在线课程
+1. [freeCodeCamp-Responsive Web Design](https://www.freecodecamp.org/certification/tianheg/responsive-web-design)
+2. [freeCodeCamp-JavaScript Algorithms and Data Structures](https://www.freecodecamp.org/certification/tianheg/javascript-algorithms-and-data-structures)
+3. [MongoDB University-MongoDB Basics](https://university.mongodb.com/course_completion/cebc75c5-080a-4abe-b6a2-04c3d447ed85)
+
 ## 个人技能
 
 <br>
@@ -71,9 +76,3 @@
     - 了解 Arch Linux 基本安装
     - 了解 Nginx 基本用法，能够设置反向代理
     - 了解 Docker 基本用法，了解 Docker Compose 使用
-
-## 在线课程
-
-1. [freeCodeCamp-Responsive Web Design](https://www.freecodecamp.org/certification/tianheg/responsive-web-design)
-2. [freeCodeCamp-JavaScript Algorithms and Data Structures](https://www.freecodecamp.org/certification/tianheg/javascript-algorithms-and-data-structures)
-3. [MongoDB University-MongoDB Basics](https://university.mongodb.com/course_completion/cebc75c5-080a-4abe-b6a2-04c3d447ed85)
