@@ -55,24 +55,18 @@
 <br>
 
   - 前端
-    - 熟悉 HTML5 元素
-    - 了解 CSS3 属性，如 Flexbox、Gird 布局
-    - 了解 CSS 层叠规则
-    - 了解 JavaScript 的数据类型
-    - 熟悉常用 DOM API，如 `getElementById`, `getElementsByTagName`
-    - 了解 Vue.js(v3) 核心知识，如模板语法、响应式基础、计算属性、类和样式绑定
+    - HTML5 3年，CSS3 2年，ES6 2年
+    - 熟悉常用 DOM API
 
 <br>
 
   - 后端
-    - 了解 Node.js 处理文件相关命令，如 writeFile, readFile, mkdir
-    - 使用过包管理器 npm, yarn, pnpm
+    - 了解 Node.js 文件处理相关 API，能够实现对文本的增删改
 
 <br>
 
   - 常用工具
     - 熟悉 Git 常用命令，如 `git add`, `git commit`, `git push`，[我的 GitHub](https://github.com/tianheg)
-    - 熟悉 Linux 终端常用命令，如 cd, mkdir, mv, grep(ripgrep)
-    - 了解 Arch Linux 基本安装
+    - 熟悉 Linux 终端常用命令，如 cd, mkdir, mv, grep(ripgrep)，日常使用 Arch Linux
     - 了解 Nginx 基本用法，能够设置反向代理
     - 了解 Docker 基本用法，了解 Docker Compose 使用
