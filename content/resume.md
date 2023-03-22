@@ -7,7 +7,7 @@
 
 - <me@tianhegao.com>
 - (+86) 198 5581 2775
-- [技术博客](https://tianheg.xyz/tags/tech/)
+- 技术博客：<https://tianheg.xyz/tags/tech/>
 
 ## 项目经历
 
@@ -78,6 +78,6 @@
     - 熟悉 Git 常用命令，如 `git add`, `git commit`, `git push`，[我的 GitHub](https://github.com/tianheg)
     - 熟悉 Linux 终端常用命令，如 cd, mkdir, mv, grep(ripgrep)
     - 日常使用 Arch Linux，桌面环境使用 KDE
-    - 使用 Emacs、VS Code 编辑器
+    - 日常使用 Emacs、VS Code 编辑器
     - 了解 Nginx 基本用法，能够设置反向代理
     - 了解 Docker 基本用法，了解 Docker Compose 使用
