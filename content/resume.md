@@ -16,16 +16,17 @@
 
 技术栈：MongoDB + Express.js + Vue.js(v2) + Node.js
 
-实现功能：添加、更改、删除学生信息
-
-- 使用 MongoDB 作为数据库
-- 将 Express.js 作为服务器
-- 使用 Bootstrap 构架界面样式
-- Vue 进行模板构建
+为了实现对学生信息的添加、更改、删除，使用 MVVM 设计方法，将 UI 和控制逻辑分离，达到了预期效果，能够对学生信息进行增删改查。
 
 <br />
 
 [代码仓库](https://github.com/tianheg/sims) &bull; [网站 Demo](https://student.tianheg.org/)
+
+#### <span>「福格行为模型」图片生成</span> <span>2023.03</span>
+
+技术栈：Canvas、CSS3、HTML
+
+为了实现一个不同行为的动机、能力、提示（MAP）对应关系图，使用 Canvas 2D 绘制，并能够通过移动，生成不同的关系图。
 
 ### 公司项目
 
@@ -33,10 +34,7 @@
 
 技术栈：MongoDB + Express.js + Socket.IO + Node.js
 
-实现功能：多玩家在线系统
-
-- 通过 Socket.IO 实现匿名聊天功能，并将聊天数据存储在数据库 MongoDB 中
-- 通过 Express.js 实现简单后端服务器
+为了实现一个多玩家在线聊天系统，使用了 Socket.IO 实现匿名聊天功能，并将聊天数据存储在数据库 MongoDB 中；通过 Express.js 实现简单后端服务器。
 
 ## 教育经历
 
