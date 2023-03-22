@@ -9,20 +9,10 @@
 - (+86) 198 5581 2775
 - [技术博客](https://tianheg.xyz/tags/tech/)
 
-## 工作经历
+## 项目经历
+### 个人项目
 
-### <span>杭州瞄鲸网络科技有限公司，前端工程师</span> <span>2022.06 - 2022.07</span>
-
-技术栈：MongoDB + Express.js + Socket.IO + Node.js
-
-实现功能：多玩家在线系统
-
-- 通过 Socket.IO 实现匿名聊天功能，并将聊天数据存储在数据库 MongoDB 中
-- 通过 Express.js 实现简单后端服务器
-
-## 个人项目
-
-### <span>基于 MEVN 的学生表单管理系统</span> <span>2021.10 -- 2021.11, 2022.05</span>
+#### <span>基于 MEVN 的学生表单管理系统</span> <span>2021.10 -- 2021.11, 2022.05</span>
 
 技术栈：MongoDB + Express.js + Vue.js(v2) + Node.js
 
@@ -36,6 +26,17 @@
 <br />
 
 [代码仓库](https://github.com/tianheg/sims) &bull; [网站 Demo](https://student.tianheg.org/)
+
+### 公司项目
+
+#### <span>杭州瞄鲸网络科技有限公司，前端工程师</span> <span>2022.06 - 2022.07</span>
+
+技术栈：MongoDB + Express.js + Socket.IO + Node.js
+
+实现功能：多玩家在线系统
+
+- 通过 Socket.IO 实现匿名聊天功能，并将聊天数据存储在数据库 MongoDB 中
+- 通过 Express.js 实现简单后端服务器
 
 ## 教育经历
 
