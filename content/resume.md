@@ -28,6 +28,10 @@
 
 为了实现一个不同行为的动机、能力、提示（MAP）对应关系图，使用 Canvas 2D 绘制，并能够通过移动，生成不同的关系图。
 
+<br />
+
+[代码仓库](https://github.com/tianheg/fogg-behavior-model) &bull; [网站](https://fbm.tianheg.org/)
+
 ### 公司项目
 
 #### <span>杭州瞄鲸网络科技有限公司，前端工程师</span> <span>2022.06 - 2022.07</span>
