@@ -5,10 +5,9 @@
 
 <h1 style="text-align: center">高天贺</h1>
 
-<!-- The unordered list immediately after the h1 will be formatted on a single
-line. It is intended to be used for contact details -->
 - <me@tianhegao.com>
 - (+86) 198 5581 2775
+- [技术博客](https://tianheg.xyz/tags/tech/)
 
 ## 工作经历
 
@@ -34,6 +33,8 @@ line. It is intended to be used for contact details -->
 - 使用 Bootstrap 构架界面样式
 - Vue 进行模板构建
 
+<br />
+
 [代码仓库](https://github.com/tianheg/sims) &bull; [网站 Demo](https://student.tianheg.org/)
 
 ## 教育经历
@@ -53,20 +54,21 @@ line. It is intended to be used for contact details -->
     - 了解 CSS3 属性，如 Flexbox、Gird 布局
     - 了解 CSS 层叠规则
     - 了解 JavaScript 的数据类型
-    - 了解常用 DOM API，如 `getElementById`, `getElementsByTagName`
+    - 熟悉常用 DOM API，如 `getElementById`, `getElementsByTagName`
     - 了解 Vue.js(v3) 核心知识，如模板语法、响应式基础、计算属性、类和样式绑定
 
 <br>
 
   - 后端
     - 了解 Node.js 处理文件相关命令，如 writeFile, readFile, mkdir
-    - 熟悉包管理器 npm, yarn, pnpm
+    - 使用过包管理器 npm, yarn, pnpm
 
 <br>
 
   - 常用工具
     - 熟悉 Git 常用命令，如 `git add`, `git commit`, `git push`，[我的 GitHub](https://github.com/tianheg)
-    - 熟悉 Linux 终端常用命令，如 cd, mkdir, mv, grep
+    - 熟悉 Linux 终端常用命令，如 cd, mkdir, mv, grep(ripgrep)
+    - 了解 Arch Linux 基本安装
     - 了解 Nginx 基本用法，能够设置反向代理
     - 了解 Docker 基本用法，了解 Docker Compose 使用
 
