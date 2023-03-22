@@ -13,19 +13,7 @@
 
 ### 个人项目
 
-#### <span>基于 MEVN 的学生表单管理系统</span> <span>2021.10 -- 2021.11, 2022.05</span>
-
-技术栈：Vue.js(v2) + MongoDB + Express.js + Node.js
-
-在学校期间，为了实现对学生信息的添加、更改、删除，使用 MVVM 设计方法，将 UI 和控制逻辑分离，达到了预期效果，能够对学生信息进行增删改查。
-
-<!-- MVC/MVVM -->
-
-<br />
-
-[代码仓库](https://github.com/tianheg/sims) &bull; [网站 Demo](https://student.tianheg.org/)
-
-#### <span>「福格行为模型」图片生成</span> <span>2023.03</span>
+#### <span>「福格行为模型」生成器</span> <span>2023.03</span>
 
 技术栈：Canvas、CSS3、HTML
 
@@ -36,6 +24,18 @@
 [代码仓库](https://github.com/tianheg/fogg-behavior-model) &bull; [网站](https://fbm.tianheg.org/)
 
 <!-- 有什么 canvas 库，能够解决什么问题；d3.js/three.js -->
+
+#### <span>学生信息管理系统</span> <span>2021.10 -- 2021.11, 2022.05</span>
+
+技术栈：Vue.js(v2) + MongoDB + Express.js + Node.js
+
+在学校期间，为了实现对学生信息的添加、更改、删除，使用 MVVM 设计方法，将 UI 和控制逻辑分离，达到了预期效果，能够对学生信息进行增删改查。
+
+<!-- MVC/MVVM -->
+
+<br />
+
+[代码仓库](https://github.com/tianheg/sims) &bull; [网站 Demo](https://student.tianheg.org/)
 
 ### 公司项目
 
@@ -81,3 +81,8 @@
     - 日常使用 Emacs、VS Code 编辑器
     - 了解 Nginx 基本用法，能够设置反向代理
     - 了解 Docker 基本用法，了解 Docker Compose 使用
+
+## 兴趣爱好
+
+1. 参与到 freeCodeCamp 新闻的翻译活动中，学习到技术文章的翻译方法，了解到 freeCodeCamp 这个全球性的社区。
+2. 喜欢阅读心理学、科幻类书籍。目前正在阅读读《社会心理学》。
