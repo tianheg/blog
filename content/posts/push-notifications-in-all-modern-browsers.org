@@ -1,0 +1,63 @@
+#+TITLE: Push notifications are now supported cross-browser
+#+DATE: <2023-03-29 Wed 21:21>
+#+TAGS[]: 技术
+
+{{< feynman >}}
+
+https://web.dev/push-notifications-in-all-modern-browsers/
+
+适用于向用户提供及时、相关信息的应用程序（如新闻和体育应用）或希望向用户发送特价或销售通知的电子商务网站。
+
+检查浏览器是否支持：
+
+#+BEGIN_SRC js
+console.log(window.PushManager)
+console.log(navigator.serviceWorker)
+#+END_SRC
+
+结果：
+
+#+BEGIN_SRC js
+// Firefox Dev v112.0b7
+/**
+ * function ()
+ * ServiceWorkerContainer
+ */
+
+// Chrome v111
+/**
+ * PushManager()
+ * ServiceWorkerContainer
+ */
+#+END_SRC
+
+如果浏览器支持，可以用 =async= 和 =await= 关键词注册 service worker 并订阅推送通知。一个 Demo：
+
+#+BEGIN_SRC js
+// 检查浏览器是否支持推送通知
+if ("serviceWorker" in navigator && "PushManager" in window) {
+  try {
+    // 注册 service worker
+    const swReg = await navigator.serviceWorker.register("/sw.js");
+
+    // 订阅推送通知
+    const pushSubscription = await swReg.pushManager.subscribe({
+      userVisibleOnly: true
+    });
+
+    // 保存推送订阅至数据库
+    savePushSubscription(pushSubscription);
+  } catch (error) {
+    // 处理错误
+    console.error("Error subscribing for push notifications.", error)
+  }
+} else {
+  // 当前浏览器不支持推送通知
+  console.error("Push notifications are not supported by the browser.");
+#+END_SRC
+
+进一步阅读
+
+- https://web.dev/push-notifications-overview/
+- https://developer.mozilla.org/en-US/docs/Web/API/Push_API
+- https://webkit.org/blog/13878/web-push-for-web-apps-on-ios-and-ipados/
