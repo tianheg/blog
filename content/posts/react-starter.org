@@ -12,6 +12,12 @@
 
 * React with Vite
 
+#+BEGIN_SRC sh
+pnpm create vite with-vite --template react
+cd with-vite
+pnpm i
+#+END_SRC
+
 [[https://vitejs.dev/][Vite]] 比 create-react-app (CRA) 要快，前者用 [[https://esbuild.github.io/][esbuild]]，后者用 [[https://webpack.js.org/][webpack]]。
 
 Vite 支持创建单页应用（SPA），并具备 client-side routing/rendering over SSR 能力。
@@ -34,6 +40,10 @@ Vite 搭配 React 就不用使用能够那些强观念的 React 框架。
 - 不能访问 React 为集成框架提供的架构特性，如 React Server Components (RSC)
 
 * React with Next
+
+#+BEGIN_SRC sh
+pnpx create-next-app@latest with-next
+#+END_SRC
 
 [[https://nextjs.org/][Next.js]] 是最成熟的 React 的框架，如果你想选择一个具备强观念的 React 框架，非它莫属。它有很多自己的设计（基于文件的路由），如果它不是你的菜，你可以选择 [[https://remix.run/][Remix]] ，Remix 完全遵循现行 Web 标准。
 
@@ -59,6 +69,11 @@ Next.js 将服务器端渲染（SSR）作为优先，但它也可用于静态网
 
 * React with Astro
 
+#+BEGIN_SRC sh
+pnpm create astro@latest
+pnpm astro add react
+#+END_SRC
+
 [[https://astro.build/][Astro]] 允许开发者创建专注内容的网站。
 
 从实现角度看，它基于多页应用（MPA）而非单页应用（SPA）。
@@ -81,8 +96,21 @@ Astro 是 Gatsby 的竞争者。
 * 更多选项开启新 React 项目
 
 - [[https://parceljs.org/][Parcel]] 替代 Vite
+
+#+BEGIN_SRC sh
+# https://parceljs.org/recipes/react/#getting-started
+pnpm add react react-dom
+pnpm add -D parcel
+pnpx parcel src/index.html
+#+END_SRC
+
 - [[https://www.robinwieruch.de/javascript-monorepos/][Monorepos]]
 - [[https://create.t3.gg/][create-t3-app]] for [[https://www.robinwieruch.de/react-trpc/][tRPC]]
+
+#+BEGIN_SRC sh
+pnpm create t3-app@latest
+#+END_SRC
+
 - [[https://reactnative.dev/][React Native]]/[[https://expo.dev/][Expo]] for mobile applications
 - [[https://tauri.app/][Tauri]]/[[https://www.electronjs.org/][Electron]] for desktop applications
 
