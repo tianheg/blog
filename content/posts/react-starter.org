@@ -1,0 +1,98 @@
+#+TITLE: How to start a React Project in 2023
+#+DATE: <2023-03-30 Thu 08:14>
+#+TAGS[]: 技术
+
+{{< feynman >}}
+
+[[https://www.robinwieruch.de/react-starter/][How to start a React Project in 2023]]
+
+新 React 官方文档已经发布了，[[https://react.dev/learn/start-a-new-react-project][推荐使用框架开启新项目，通过 Create React App 开启新项目的部分被删除]]。
+
+免责声明：从个人开发者的角度，作者完全支持 React 团队在他们的新文档中推进的框架和 SSR 议程。然而，他觉得最近的这个声明让 React 初学者和想采用 React 的公司处于不利地位。因此，作者想给这些人更多的开启新 React 项目的选择。
+
+* React with Vite
+
+[[https://vitejs.dev/][Vite]] 比 create-react-app (CRA) 要快，前者用 [[https://esbuild.github.io/][esbuild]]，后者用 [[https://webpack.js.org/][webpack]]。
+
+Vite 支持创建单页应用（SPA），并具备 client-side routing/rendering over SSR 能力。
+
+Vite 搭配 React 就不用使用能够那些强观念的 React 框架。
+
+优势：
+
+- 几乎能替换 create-react-app (CRA)
+- SPA/CSR 友好，SSR 可选
+- 不锁定框架/公司
+- 轻量级
+- 在特性层次上不与 React 混合，因此让开发者专注于 React 而不是框架
+- 新手友好的学习曲线，让初学者熟悉 React 的基础
+
+缺点：
+
+- 优先考虑 SPA/CSR
+- 不支持 React 框架
+- 不能访问 React 为集成框架提供的架构特性，如 React Server Components (RSC)
+
+* React with Next
+
+[[https://nextjs.org/][Next.js]] 是最成熟的 React 的框架，如果你想选择一个具备强观念的 React 框架，非它莫属。它有很多自己的设计（基于文件的路由），如果它不是你的菜，你可以选择 [[https://remix.run/][Remix]] ，Remix 完全遵循现行 Web 标准。
+
+Next.js 将服务器端渲染（SSR）作为优先，但它也可用于静态网站生成（SSG）和客户端渲染（CSR）。在顶层设计中，有着更先进的渲染技术，如增量静态再生（ISR），而且它支持 React 服务器组件（RSC）。更令人脑洞大开的是：你可以在一个 Next.js 应用中，混合使用这些渲染技术。一个购物页面使用 SSG，后面应用的注册登录部分使用 SSR。
+
+优势：
+
+- 内置库的固执己见的框架
+- SSR 和其他渲染技术
+  - 提升性能（如果做对了）
+  - 与 CSR 相比改善 SEO
+- Vercel 赞助 Next.js 的开发
+  - 与 React 核心成员紧密工作
+  - 很多 React 核心成员都加入过 Vercel
+- 研究最前沿的技术
+
+缺点：
+
+- 总是研究前沿技术
+- 开销/稳定性/可维护性（与 React with Vite 相比）
+- 更陡峭的学习曲线（与 React with Vite 相比），更专注于框架而非 React
+- 框架锁定，平台锁定
+
+* React with Astro
+
+[[https://astro.build/][Astro]] 允许开发者创建专注内容的网站。
+
+从实现角度看，它基于多页应用（MPA）而非单页应用（SPA）。
+
+Astro 本身是一个框架，它可以用 React、Vue 等库或框架构建 UI。框架（库）在这里的作用只是 SSR，并不会暴露到客户端。只有当开发者决定向客户端添加交互时，才会出现 JS。
+
+Astro 是 Gatsby 的竞争者。
+
+优势：
+
+- 注重内容
+- 性能
+- SEO
+- 无视框架
+
+缺点：
+
+- 不建议用作动态网站
+
+* 更多选项开启新 React 项目
+
+- [[https://parceljs.org/][Parcel]] 替代 Vite
+- [[https://www.robinwieruch.de/javascript-monorepos/][Monorepos]]
+- [[https://create.t3.gg/][create-t3-app]] for [[https://www.robinwieruch.de/react-trpc/][tRPC]]
+- [[https://reactnative.dev/][React Native]]/[[https://expo.dev/][Expo]] for mobile applications
+- [[https://tauri.app/][Tauri]]/[[https://www.electronjs.org/][Electron]] for desktop applications
+
+* 那么如何选择？
+
+- 如果你想学习 React，坚持 Vite + React 就好。同样适用于 SPA/CSR 方案。
+- 如果你想找一个强观念的 React 框架，推荐 Next。
+- 如果 Next 无法满足你，那么选择 Remix。
+- 如果你想要基于内容构建网站，选择 Astro。
+
+#+BEGIN_QUOTE
+Disclaimer: Writing this blog post in 2023 may be totally different from writing it in 2024 when Next's App Router and RSC become stable and therefore the status quo when creating server-side React applications. This is the tipping point in my personal opinion which may push Next as a all-in one solution for all previously listed cases.
+#+END_QUOTE
