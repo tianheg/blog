@@ -669,7 +669,11 @@ git sparse-checkout set DIRECTORY_NAME
 git filter-repo --invert-paths --path PATH-TO-YOUR-FILE-WANT-TO-DELETE
 git push origin --force --tags
 #+END_SRC
-
+* 查询commit msg
+#+BEGIN_SRC sh
+git log --grep="content_to_search"
+git log --grep="html5"
+#+END_SRC
 * [[https://git-scm.com/docs][Git - Reference]]
 
 ** Guide - [[https://git-scm.com/docs/git#Documentation/git.txt-ahrefdocsgitcredentialsgitcredentials7a][gitcredentials[7]]]
