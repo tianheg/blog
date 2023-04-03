@@ -793,7 +793,7 @@ exa --git-ignore # Don't list files mentioned in `.gitignore`
 cat 的替代
 
 ```sh
-pacman -S bat
+pacman -S bat bat-extras
 ```
 
 
