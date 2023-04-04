@@ -86,4 +86,23 @@
 
 前端包括 MVVM，设计模式有哪些？请从来源、意义、优缺点等各种维度具体介绍一下每一个，并说下哪些业务场景适用于哪些设计模式，以及哪些知名框架用了这个设计模式
 
+Overall, your resume looks good. Here are some suggestions for improvement:
+
+    It would be helpful to include a summary or objective statement at the top of your resume. This will give potential employers a quick overview of your skills and experience.
+
+    Consider adding bullet points to your project descriptions to make them easier to read.
+
+    Include more details about your role and responsibilities in your company project. What specific tasks did you perform?
+
+    Instead of just listing the courses you took in college, describe how they relate to your skills and experience as a front-end developer.
+
+    Try to quantify your skills and experience as much as possible. For example, instead of saying you have "2 years" of experience with ES6, you could say "proficient in ES6 with experience using it for x number of projects."
+
+    Consider adding a section on your resume for your professional certifications, such as your FreeCodeCamp and MongoDB University certificates.
+
+    You could also add a section for your relevant skills or technologies, such as "Proficient in HTML5, CSS3, ES6, and Vue.js, with experience using MongoDB and Node.js."
+
+    Lastly, consider adding a bit more detail about your hobbies and interests. This can help to give employers a better understanding of who you are as a person.
+
+
 -->
