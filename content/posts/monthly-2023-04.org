@@ -17,5 +17,82 @@
 {{< monthly "【大白话系列 #3】大白话聊 ChatGPT（Sarah & 王建硕） - Traders' Talk | 小宇宙" "https://www.xiaoyuzhoufm.com/episode/641183b5bb1fc0cb68f810c6" >}}
 文本：[[https://d58hixvcd6.feishu.cn/docx/HfMEds7Z1ov37wxqM19czTBinWg][2023/3/6 大白话聊 ChatGPT 直播逐字稿（Sarah & 王建硕） - Feishu Docs]]
 
+- Pre-training, fine tuning
+- GPT: 之前是 Generative Pre Training，后来改为 Generative Pre-trained Transformer
+- Transformer 的两大部分：encoder/decoder
+- AIGC: AI Generated Content
+- chatGPT 有没有人格？没有
+{{< /monthly >}}
+{{< monthly "The Age of AI has begun | Bill Gates" "https://www.gatesnotes.com/The-Age-of-AI-Has-Begun" >}}
+#+BEGIN_QUOTE
+Artificial intelligence is as revolutionary as mobile phones and the Internet.
+#+END_QUOTE
 
+盖茨提及一些人工智能可以解决的问题：削弱全球不平等问题
+
+- 改善美国教育，提升数学能力
+- 全球气候变化
+
+* 定义人工智能
+
+#+BEGIN_QUOTE
+AI: Artificial intelligence refers to a model created to solve a specific problem or provide a particular service.
+
+AGI: Artificial general intelligence refers to software that’s capable of learning any task or subject.
+#+END_QUOTE
+
+* 提高生产力
+
+通过完成一些简单重复的工作，提升人们的工作效率。人工智能将全方面接管个人日常琐事的处理。
+
+生产力的提高可以将人们从琐碎的事务中释放出来，并有精力完成过去没有时间完成的事情。
+
+* 健康
+
+AI能帮助医疗工作者处理文书工作，节省时间。
+
+AI还能在人类医生无法到达的地方，为当地人们提供医学指导。
+
+* 教育
+
+AI驱动的教学软件将改变人们的学习方式。
+
+* 人工智能的风险和问题
+{{< /monthly >}}
+{{< monthly "涌现" "https://mp.weixin.qq.com/s/cFQBqjKEnqnT6NMUMRZN9A" >}}
+[[https://mp.weixin.qq.com/s/Xn4cyugIrcBRN8VgJ6bIxg][涌现（续）]]
+
+大语言模型（大神经网络）的两个研究方向预示着通用智能的可能性——思维链条（chain of thought, CoT）；自发性地结构涌现（英文文献里的简称 emergence）。
+
+传统的大神经网络是标注的快思考模式。而人除了有快思考模式，还有慢思考（逐步推理）模式。
+
+只要神经网络的复杂性和训练样本的多样性都超过一个规模，就会有抽象的推理结构在神经网络里突然自发涌现出来。这个过程像所有的复杂性系统一样是非线性的。
+
+AI 的 CoT 能力基本上就是在 GPT3 和 GPT3.5 这两个版本之间的某处诞生的。
+
+同样在过去两年内出现的一个新的热词是 Grokking，中文可能可以翻译成「顿悟」，它描述了这样一种现象：一个高度复杂的神经网络在漫长的训练期内一直只能记住训练样本的信息，几乎没有泛化能力，但到了某一刻，它的泛化水平忽然跳了出来，而且非常完美。你可以想象成一个神经网络经历了一个「aha moment」，像是内部的某个齿轮忽然对上了一样。我的理解是 CoT 也可以看做是一种 Grokking。
+
+在一种很粗糙的意义上说，大语言模型的外部属性（也就是用户可以直接感知和评估的属性）可以分解为「知识基础」+「推理能力」+「表达能力」这三个层面。大多数关于 ChatGPT 的讨论把目光集中在第一项和第三项，忽视了第二项的革命性进展。当人们热衷于吐槽它的知识基础（比如竟然不知道某件事或者完全弄错了某个事实）的时候，多少有点 miss the point。事实上你完全可以想象未来的 AI 被分拆成模块，知识引擎被单独拿出来处理（让一个语言模型记住大量明明可以快速检索到的知识是没有意义的），而推理与表达才是它的能力重点。这种解耦也会大大加快模型的运算效率。
+
+说到模块解耦，甚至还有一个更有趣的例子，来自 UCSB 的 Wenhu Chen 最近的一篇论文 Program of Thoughts Prompting。他们觉得让 AI 通过 CoT 生成结果甚至都有些绕远了。应该让 AI 把原问题直接转化为程序代码，然后调用外部的代码运行模块来得出答案。这等于是把「计算」这一块也从语言模型中间剥离了出去。
+{{< /monthly >}}
+{{< monthly "An Uber-like Content Delivery Network | by Anton Lakhtikov | Medium" "https://medium.com/@anton.lakhtikov/uber-like-model-to-disrupt-the-cdn-industry-8d870362f0f6" >}}
+和传统CDN的解决方案不同
+{{< /monthly >}}
+{{< monthly "Repeat yourself, do more than one thing, and... — programming is terrible" "https://programmingisterrible.com/post/176657481103/repeat-yourself-do-more-than-one-thing-and" >}}
+- Repeat yourself to find abstractions
+- Gather responsibilities to simplify interactions between them
+- Modularity is more than reducing things to their smallest parts
+- Modularity is about limiting the options for growth
+- Rewrite Everything
+- null is true, everything is permitted
+{{< /monthly >}}
+{{< monthly "Reduce server response times (TTFB) - Chrome Developers" "https://developer.chrome.com/docs/lighthouse/performance/time-to-first-byte/" >}}
+如何缩短服务器响应时间？
+- 优化服务器的应用逻辑
+- 优化服务器查询数据库的方式，或者迁移到更快的数据库系统
+- 升级服务器硬件
+{{< /monthly >}}
+{{< monthly "Learning with ChatGPT | Globant Blog" "https://stayrelevant.globant.com/en/technology/scalable-platforms/learning-with-chatgpt/" >}}
+不应用ChatGPT编写复杂代码
 {{< /monthly >}}
