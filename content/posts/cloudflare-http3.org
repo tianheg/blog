@@ -1,0 +1,37 @@
+#+TITLE: Cloudflare 开启 HTTP/3
+#+DATE: <2023-04-06 Thu 14:00>
+#+TAGS[]: 技术
+
+{{< feynman >}}
+
+必备条件：
+
+- 支持 HTTPS
+- TLS版本为 1.3 或以上
+
+步骤：
+
+1. 新建 GitHub 仓库，新建一个 index.html，内容随意。
+2. 如果没有 Cloudflare 账户，点击[[https://dash.cloudflare.com/sign-up][创建]]，登陆后，找到侧边栏的 Pages，点击 Create a project，点击 Connect to Git，之后安装 Cloudflare Pages GitHub App，选择第一步的仓库，之后回到 Cloudflare Pages Connect to Git，选择那个仓库，点击 Begin setup。
+3. 在 Pages 页会看到新建的 project，点击名字进入设置界面，找到 Custom domains，添加你想要的自定义域名。这里有个前提，你的域名的 DNS 解析是通过 Cloudflare 管理的。
+4. 点击侧边栏的 Websites，点击第三步对应的域名，在侧边栏找到 DNS，确认自定义域名已经自动配置好（代理状态是通过 Cloudflare 代理，橙色）。
+5. 点击侧边栏的 SSL/TLS，在子选项下选择 Edge Certificates，确保以下设置正确：
+
+  - 开启 Always Use HTTPS
+  - 开启 TLS 1.3
+  - Minimum TLS Version 为 TLS 1.3
+6. 点击侧边栏的 Network，确保以下设置正确：
+
+  - 开启 HTTP/3 (with QUIC)
+
+如果配置好后，第一次访问发现依然是 HTTP/2，强制刷新一次（Ctrl+Shift+R）。
+
+#+BEGIN_EXPORT html
+<img src="/images/cloudflare-http3.webp" alt="我想要的结果">
+<span class="caption">◎ 我想要的结果</span>
+#+END_EXPORT
+
+参考资料
+
+- [[https://u.sb/debian-nginx-quic/][Debian 11 / Ubuntu 22.04 下体验 HTTP/3 协议的 Nginx QUIC - 烧饼博客]]
+- [[https://www.cloudflare.com/learning/performance/what-is-http3/][What is HTTP/3? | Cloudflare]]
