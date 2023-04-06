@@ -96,3 +96,67 @@ AI 的 CoT 能力基本上就是在 GPT3 和 GPT3.5 这两个版本之间的某�
 {{< monthly "Learning with ChatGPT | Globant Blog" "https://stayrelevant.globant.com/en/technology/scalable-platforms/learning-with-chatgpt/" >}}
 不应用ChatGPT编写复杂代码
 {{< /monthly >}}
+{{< monthly "Rendering on the Web" "https://web.dev/rendering-on-the-web/" >}}
+广泛意义上讲，作者推荐服务端渲染或静态渲染，而非完全重新生成。
+
+为了更好地理解我们在做这个决定时要选择的架构，我们需要对每种方法有一个扎实的了解，并在谈论它们时使用一致的术语。这些方法之间的差异有助于通过性能的角度来说明网络渲染的权衡问题。
+
+* 术语
+
+Rendering
+
+- SSR: Server-Side Rendering - 在服务器上将客户端或通用应用程序渲染成HTML。
+- CSR: Client-Side Rendering - 在浏览器中渲染应用，通常使用DOM。
+- Rehydration: 在客户端启动JavaScript视图，使其重新使用服务器渲染的HTML的DOM树和数据。
+- Prerendering: 在构建时运行客户端应用，将其初始状态捕捉为静态HTML。
+
+Performance
+
+- TTFB: Time to First Byte - 被视为从点击链接到显示第一bit内容的时间。
+- FP: First Paint - 任何像素第一次对用户可见。
+- FCP: First Contentful Paint - 请求的内容变得可见的时间。
+- TTI: Time To Interactive - 页面达到可交互状态需要的时间。
+
+* 服务端渲染
+
+服务器渲染通常能产生快速的首次绘制（FP）和首次内容绘制（FCP）。在服务器上运行页面逻辑和渲染，可以避免向客户端发送大量的JavaScript，这有助于实现快速的交互时间（TTI）。
+
+有了服务器渲染，用户就不可能在使用你的网站之前等待占用CPU的JavaScript的处理了。即使不能避免第三方JS，使用服务器渲染来减少你自己的第一方JS成本，也可以为其他方面提供更多的 "预算"。然而，这种方法有一个主要缺点：在服务器上生成页面需要时间，这往往会导致第一字节时间（TTFB）变慢。
+
+究竟使用服务端渲染还是客户端渲染，不能只看它们两个的区别，还要看具体的应用场景。有些时候，需要混合使用。
+
+很多现代的框架、库和架构让同时将应用渲染在客户端和服务端成为可能。
+
+这些技术可以用于服务器端渲染，但需要注意的是，既在服务器端又在客户端上进行渲染的架构是一类具有非常不同性能特征和权衡的解决方案。
+
+React 用户可以用 [[https://react.dev/reference/react-dom/server][Server React DOM APIs]] 或者基于 React 的 Next.js 框架实现服务端渲染。Vue 相关[[https://vuejs.org/guide/scaling-up/ssr.html][文档]]，以及基于 Vue 的 [[https://nuxt.com/][Nuxt.js]] 框架。
+
+* 静态渲染
+
+静态渲染发生在构建状态，提供快速的首次绘制（FP）、首次内容绘制（FCP）和可交互（TTI）——假设客户端 JS 是有限的。
+
+与服务器端渲染不同，静态渲染还可以实现始终如一的快速首字节时间，因为页面的 HTML 不必实时生成。一般而言，静态渲染意味着预先为每个 URL 生成单独的 HTML 文件。由于 HTML 响应是预先生成的，静态渲染可以部署到多个 CDN 上，以利用边缘缓存的优势。
+
+静态渲染的一个缺点是必须为每个可能的 URL 生成单独的 HTML 文件。当你无法预测这些 URL 时，或者对于具有大量唯一页面的站点而言，这可能是具有挑战性甚至不可行的。
+
+理解静态渲染和预渲染的不同：
+
+#+BEGIN_QUOTE
+Static rendered pages are interactive without the need to execute much client-side JS, whereas prerendering improves the First Paint or First Contentful Paint of a Single Page Application that must be booted on the client in order for pages to be truly interactive.
+#+END_QUOTE
+
+一个判断网站是静态渲染还是预渲染的办法：关闭JS，如果大部分功能还在，就是静态渲染；反之则是预渲染。
+
+还有种办法：通过开发者工具里的选项，降低网速，预渲染需要加载更多的 JS 使得网站变得具备可交互性。
+
+* 客户端渲染
+
+客户端渲染（CSR）是指直接使用 JS 在浏览器端渲染页面。全部逻辑、数据获取、模板和路由都在客户端处理，而不是在服务端处理。
+
+#+BEGIN_EXPORT html
+<img src="/images/monthly-2023-04.avif" alt="各种渲染方式对比列表">
+<span class="caption">◎ 各种渲染方式对比列表</span>
+#+END_EXPORT
+
+图片版权归 Web.Dev 编者团队，本人仅学习使用
+{{< /monthly >}}
