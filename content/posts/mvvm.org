@@ -1,0 +1,45 @@
+#+TITLE: 理解 MVVM 软件架构
+#+DATE: <2023-04-07 Fri 11:19>
+#+TAGS[]: 技术
+
+{{< feynman >}}
+
+[[https://addyosmani.com/blog/understanding-mvvm-a-guide-for-javascript-developers/][AddyOsmani.com - Understanding MVVM - A Guide For JavaScript Developers]] 写于 2012 年
+
+MVVM 是一种基于 MVC 和 MVP 的架构模式，它试图将用户界面（UI）的开发与应用程序中的业务逻辑和行为的开发更清晰地分离开来。为此，此模式的许多实现都使用声明性数据绑定，以便将视图上的工作与其他层分离。
+
+这使得 UI 和开发工作几乎可以同时在同一代码库中进行。UI 开发人员在他们的文档标记（HTML）中编写到 ViewModel 的绑定，而 Model 和 ViewModel 由负责应用程序逻辑的开发人员维护。
+
+* 历史
+
+MVVM 最初由微软定义，用于 WPF 和 Silverlight，由 John Grossman 在 2005 年关于 Avalon（WPF 的代号）的博客文章中正式宣布。它在 Adobe Flex 社区也有一定的流行度，作为使用 MVC 的替代方案。
+
+近年来，MVVM 已经在 JavaScript 中以结构化框架的形式实现，比如 KnockoutJS、 Kendo MVVM 和 Knockback.js，社区对此反应积极。
+
+现在让我们回顾组成 MVVM 的三个组件。
+
+* Model
+
+与 MV* 家族的其他成员一样，MVVM 中的 Model 代表着我们的应用程序将要处理的特定领域数据或信息。领域特定数据的典型例子可能是用户账户（例如名称、头像、电子邮件）或音乐曲目（例如标题、年份、专辑）。
+
+Model 承载信息，但通常不处理行为。它们不会格式化信息或影响数据在浏览器中的呈现方式，因为这不是它们的职责。相反，数据的格式由 View 处理，而行为被视为业务逻辑，应该封装在另一个与 Model 交互的层中——ViewModel。
+
+唯一的例外是验证，通常认为 Model 验证用于定义或更新现有模型的数据是可以接受的（例如，输入的电子邮件地址是否符合特定正则表达式的要求？）。
+
+* View
+
+与 MVC 类似，View 是应用程序中用户实际交互的唯一部分。它们是交互式 UI，表示 ViewModel 的状态。在这个意义上，MVVM 中的 View 被认为是主动的而不是被动的，但这是什么意思呢？
+
+这意味着 View 不仅仅是被动地呈现 ViewModel 的状态，而且还能够通过用户交互来影响 ViewModel 的状态。例如，当用户在 View 中输入数据时，ViewModel 的状态会随之而改变。因此，View 是一个能够响应用户交互并实时更新 ViewModel 状态的活跃组件。
+
+一种被动的 View 在我们的应用程序中没有真正的模型知识，它由控制器进行操作。MVVM 中的活跃 View 包含了数据绑定、事件和行为，这需要对 Model 和 ViewModel 有一定的理解。虽然这些行为可以映射到属性，但 View 仍然负责处理事件并将其传递给 ViewModel。
+
+重要的是要记住，View 不负责处理状态 - 它将状态与 ViewModel 保持同步。
+
+* ViewModel
+
+ViewModel 可以被认为是一个专门的控制器，它充当数据转换器的角色。它将 Model 信息转换为 View 信息，并将来自 View 的命令传递给 Model。
+
+参考资料
+
+- [[https://en.wikipedia.org/wiki/List_of_software_architecture_styles_and_patterns][List of software architecture styles and patterns - Wikipedia]]
