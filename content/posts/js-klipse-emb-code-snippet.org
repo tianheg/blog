@@ -1,0 +1,34 @@
+#+TITLE: Klipse 嵌入可执行代码片段
+#+DATE: <2023-04-10 Mon 13:38>
+#+TAGS[]: 技术
+
+{{< feynman >}}
+
+https://github.com/viebel/klipse
+
+新建一个 HTML 文档，输入以下内容：
+
+#+BEGIN_SRC html
+<div class="klipse">
+  function foo(name) {
+  return "Hello " + name;
+  }
+  foo("Klipse");
+</div>
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/viebel/klipse@master/dist/codemirror.css">
+<script>
+  window.klipse_settings = {
+    selector_eval_js: '.klipse', // css selector for the html elements you want to klipsify
+  };
+</script>
+<script src="https://cdn.jsdelivr.net/gh/viebel/klipse@master/dist/klipse_plugin.min.js"></script>
+#+END_SRC
+
+我通过 Hugo shortcode 插入的效果：
+
+{{< klipse >}}
+function hello(name) {
+  console.log(`hello ${name}`)
+}
+hello('tianheg')
+{{< /klipse >}}
