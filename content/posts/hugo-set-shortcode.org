@@ -8,6 +8,21 @@
 使用下面提供的 shortcode 模板时，要去掉 =\= 。
 #+END_QUOTE
 
+* Klipse 插入可执行代码片段
+
+#+BEGIN_SRC html
+<div class="klipse">
+  {{ .Inner }}
+</div>
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/viebel/klipse@master/dist/codemirror.css">
+<script>
+  window.klipse_settings = {
+    selector_eval_js: '.klipse', // css selector for the html elements you want to klipsify
+  };
+</script>
+<script src="https://cdn.jsdelivr.net/gh/viebel/klipse@master/dist/klipse_plugin.min.js"></script>
+#+END_SRC
+
 * lab 实验室卡片
 
 #+begin_src html
