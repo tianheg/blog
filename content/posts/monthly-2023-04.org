@@ -163,3 +163,36 @@ Static rendered pages are interactive without the need to execute much client-si
 {{< monthly "Priority Hints and optimizing LCP" "https://imkev.dev/fetchpriority-opportunity" >}}
 优先级提示用于指示浏览器资源的相对优先级。您可以通过将 fetchpriority 属性添加到 <img>、<link>、<script> 和 <iframe> 元素或通过 Fetch API 上的 priority 属性来设置优先级提示。
 {{< /monthly >}}
+{{< monthly "Rendering untrusted HTML email, safely | The Making of Close" "https://making.close.com/posts/rendering-untrusted-html-email-safely" >}}
+#+BEGIN_SRC html
+<iframe srcdoc="UNTRUSTED_HTML_HERE">
+#+END_SRC
+#+BEGIN_SRC html
+<html><head>
+<meta http-equiv="Content-Security-Policy" content="script-src 'none'">
+<base target="_blank">
+<style>
+  body { margin:0; font: 13px -apple-system, system-ui, "Segoe UI", Roboto, Oxygen-Sans, Ubuntu, Cantarell, "Helvetica Neue", sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol", sans-serif; overflow-y: hidden;}
+  html:not(.x),body:not(.x){height:auto!important}
+  p:first-child{margin-top:0;}
+  p:last-child{margin-bottom:0;}
+  a[href]{color: #3781B8;text-decoration:none;}
+  a[href]:hover{text-decoration:underline;}
+  blockquote[type=cite] {margin:0 0 0 .8ex;border-left: 1px #ccc solid;padding-left: 1ex;}
+  img { max-width: 100%; }
+  ul, ol { padding: 0; margin: 0 0 10px 25px; }
+  ul { list-style-type: disc; }
+</style>
+</head>
+<body>${bodyHtml}</body>
+</html>
+#+END_SRC
+
+#+BEGIN_SRC html
+<iframe
+  srcdoc="{{UNTRUSTED_HTML_HERE}}"
+  sandbox="allow-popups allow-popups-to-escape-sandbox allow-same-origin"
+  csp="script-src 'none'"
+/>
+#+END_SRC
+{{< /monthly >}}
