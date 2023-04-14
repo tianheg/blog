@@ -196,3 +196,48 @@ Static rendered pages are interactive without the need to execute much client-si
 />
 #+END_SRC
 {{< /monthly >}}
+{{< monthly "Shebang Shenanigans :: Linus Karlsson" "https://linuskarlsson.se/blog/shebang-shenanigans/" >}}
+在不同的系统下，shebang 行添加参数的作用不同。
+
+#+BEGIN_SRC txt
+#!/usr/local/bin/args -a -b --something
+
+hello i'm a line that doesn't matter
+#+END_SRC
+
+#+BEGIN_SRC sh
+chmod +x file.txt
+./file.txt
+## Linux
+# argv[0]: /usr/local/bin/args
+# argv[1]: -a -b --something
+# argv[2]: ./file.txt
+## macOS
+# argv[0]: /Users/linus/args
+# argv[1]: -a
+# argv[2]: -b
+# argv[3]: --something
+# argv[4]: ./file.txt
+#+END_SRC
+{{< /monthly >}}
+{{< monthly "The 18 biggest unsolved mysteries in physics | Live Science" "https://www.livescience.com/34052-unsolved-mysteries-physics.html" >}}
+物理学的18大未解之谜：
+- What is dark energy
+- What is dark matter
+- Why is there an arrow of time
+- Are there parallel universes
+- Why is there more matter than antimatter
+- What is the fate of the universe
+- How do measurements collapse quantum wavefunctions
+- Is string theory correct
+- Is there order in chaos
+- Do the universe's forces merge into one
+- What happens inside a black hole
+- Do naked singularities exist
+- Violating charge-parity symmetry
+- When sound waves make light
+- What lies beyond the Standard Model
+- Fundamental constants
+- What the heck is gravity, anyway
+- Do we live in a false vacuum
+{{< /monthly >}}
