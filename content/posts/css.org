@@ -246,6 +246,80 @@ box-shadow
 - flex-direction: row | row-reverse | column | column-reverse
 - flex-wrap: wrap | nowrap
 
+* Media Queries
+参考资料
+- [[https://css-tricks.com/a-complete-guide-to-css-media-queries/][A Complete Guide to CSS Media Queries | CSS-Tricks]]
+- [[https://developer.mozilla.org/en-US/docs/Web/CSS/Media_Queries][Media queries - CSS: Cascading Style Sheets | MDN]]
+- [[https://css-tricks.com/the-new-css-media-query-range-syntax/][The New CSS Media Query Range Syntax | CSS-Tricks]]
+- http://cssmediaqueries.com/
+
+CSS 媒体查询是一种通过某些特征、特性和用户偏好来定位浏览器的方法，然后根据它们应用样式或者执行其他代码。也许世界上最常见的媒体查询是那些针对特定视窗范围然后应用自定义样式的查询，它孕育了响应式设计的整个理念。
+
+#+BEGIN_SRC css
+/* 浏览器视窗宽度至少为 600px */
+@media screen and (min-width: 600px) {
+  .element {
+    /* 应用的样式 */
+  }
+}
+#+END_SRC
+
+处理视窗宽度，还可以调整其他条件。比如屏幕分辨率、设备方向、操作系统偏好。
+
+** 使用媒体查询
+
+用在 HTML：
+#+BEGIN_SRC html
+<html>
+  <head>
+    <!-- 用于全部用户 -->
+    <link rel="stylesheet" href="all.css" media="all" />
+    <!-- 用于屏幕至少 20em 宽 -->
+    <link rel="stylesheet" href="small.css" media="(min-width: 20em)" />
+    ...
+    <!-- 还可以分几种宽度类型 -->
+    ...
+    <!-- 用于打印界面 -->
+    <link rel="stylesheet" href="print.css" media="print" />
+  </head>
+  <!-- ... -->
+</html
+#+END_SRC
+
+这种划分方式可用于微调网站性能，通过分割样式的方式按需下载样式文件。但要注意，这并不阻止不符合当前设备样式表的下载，只是把它们排在了低优先级。因此，如果在小尺寸屏幕上会下载对应的样式文件，如果在稍微大些的屏幕上，它会下载包括小界面的样式表（这种说法适应于上面的例子），因为它与这些查询中不止一个相匹配。
+
+这只是 <link> 元素。媒体查询还可以用在与 <picture> 的 <source> 元素上，这样做能够告诉浏览器加载哪一个版本的图像。
+
+#+BEGIN_SRC html
+<picture>
+  <source srcset="cat-landscape.png" media="(min-width: 800px)">
+  <source srcset="cat-cropped.png" media="(min-width: 600px)">
+
+  <!-- 如果都不匹配，使用这一个 -->
+  <img src="cat.png" alt="Cat photo">
+</picture>
+#+END_SRC
+
+这样做能够让低配设备加载小图片，提升网站浏览体验。
+
+竟然可以直接在 <style> 上用 media 属性。
+
+#+BEGIN_SRC html
+<style>
+  p {
+    background-color: blue;
+    color: white;
+  }
+</style>
+
+<style media="all and (max-width: 500px)">
+  p {
+    background-color: yellow;
+    color: blue;
+  }
+</style>
+#+END_SRC
+
 * 特定 CSS 能产生什么效果
 ** 居中对齐
 https://css-tricks.com/centering-css-complete-guide/
