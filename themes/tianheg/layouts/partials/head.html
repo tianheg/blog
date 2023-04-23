@@ -41,7 +41,7 @@
     <meta name="description" content="{{ $description }}" />
 
     <!-- Favicon, Icons, Web App -->
-    {{- $favicon := "favicon.ico" -}}
+    {{- $favicon := "favicon.svg" -}}
     {{- $safariMaskIcon := "icons/safari-pinned-tab.svg" -}}
     {{- $safariMaskColor := .Site.Params.safariMaskColor -}}
     {{- $appleTouchIcon := "icons/apple-touch-icon.png" -}}
@@ -49,7 +49,8 @@
     {{- $msApplicationTileColor := .Site.Params.msApplicationTileColor -}}
     {{- $msApplicationTileImage := partial "utils/relative-url.html" (dict "$" . "filename" "icons/mstile-150x150.png") -}}
     {{- $manifest := "manifest.json" -}}
-    <link rel="icon" href="{{ $favicon | relURL }}" type="image/x-icon" />
+    <link rel="icon" href="{{ $favicon | relURL }}" type="image/svg+xml" />
+    <link rel="icon" href="/images/logo.png" type="image/png" />
     <link rel="mask-icon" href="{{ $safariMaskIcon | relURL }}" color="{{ $safariMaskColor }}" />
     <link rel="apple-touch-icon" sizes="180x180" href="{{ $appleTouchIcon | relURL }}" />
     <meta name="apple-mobile-web-app-capable" content="yes" />
