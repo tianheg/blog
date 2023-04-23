@@ -1,0 +1,295 @@
+#+TITLE: 开源软件的国内镜像站 powered by Vue3
+#+DATE: <2023-04-19 Wed 16:42>
+#+TAGS[]: 技术
+
+{{< feynman >}}
+
+这个项目的最初想法来自 [[https://github.com/lework/lemonitor][lework/lemonitor]]，这个项目用到的主要技术有 Vue CLI、Vue Router、Vuex 和 Vue2。我对构建这个镜像站产生了兴趣，想了解具体实现，但不想继续使用 Vue2，最终决定把这个项目用 Vue3 实现。用到的主要技术有 Vite、Vue Router、Pinia 和 Vue3。Vite 替代 Vue CLI，Pinia 替代 Vuex，Vue 使用当前最新版本。
+
+Vite 是一种项目构建工具，它能提升开发效率，让开发者更快乐。与之类似的有：Webpack、Rollup、Parcel 等。
+
+Vue Router 是一种 Vue.js 官方推荐的路由设置工具。v3 对应 Vue2，v4 对应 Vue3。简单来说，Vue Router 就像是网站的地图，当访客点击按钮或链接，就能被带到对应的网页。
+
+Pinia 是 Vue.js 官方推荐的存储库，它能让 Vue 组件之间共享同一个状态，帮助开发者管理 Web 应用的数据和状态。
+
+Vue3 是 JavaScript 框架 Vue.js 的最新主版本。它能帮助开发构建出更好的用户界面（UI）。
+
+src 文件夹文件层次：
+
+#+BEGIN_SRC txt
+├── src
+│  ├── App.vue
+│  ├── assets
+│  │  ├── base.css
+│  │  └── main.css
+│  ├── main.ts
+│  ├── router
+│  │  └── index.ts
+│  ├── stores
+│  │  └── loading.ts
+│  └── views
+│     └── HomeView.vue
+#+END_SRC
+
+主要文件是 main.ts, App.vue。
+
+#+BEGIN_SRC ts
+// main.ts
+import { createApp } from 'vue'
+import { createPinia } from 'pinia'
+
+import App from './App.vue'
+import router from './router'
+
+const app = createApp(App)
+
+app.use(createPinia())
+
+app.use(router)
+
+app.mount('#app')
+#+END_SRC
+
+根据 Vue，Vue Router 和 Pinia 网站的入门教程，可以得到以上结构。app.use() 的作用是：在项目的其他位置可以直接使用对应的模块。
+
+router:
+
+#+BEGIN_SRC ts
+// router/index.ts
+import { createRouter, createWebHistory } from 'vue-router'
+import HomeView from '../views/HomeView.vue'
+
+const router = createRouter({
+  history: createWebHistory(import.meta.env.BASE_URL),
+  routes: [
+    {
+      path: '/',
+      name: 'Home',
+      component: HomeView
+    }
+  ]
+})
+
+export default router
+#+END_SRC
+
+=createWebHistory= 产生的链接没有 #，这样更干净。
+
+pinia:
+
+#+BEGIN_SRC ts
+// stores/loading.ts
+import { ref } from 'vue'
+import { defineStore } from 'pinia'
+
+export const useLoadingStore = defineStore('loading', () => {
+  const isLoading = ref(false)
+
+  const updateLoadingStore = (flag) => {
+    isLoading.value = flag
+  }
+
+  function onLoading(flag) {
+    updateLoadingStore(flag)
+  }
+
+  return {
+    isLoading,
+    updateLoadingStore,
+    onLoading
+  }
+})
+#+END_SRC
+
+在定义 store 时，这里使用的是更灵活的 [[https://pinia.vuejs.org/core-concepts/#setup-stores][Setup Stores]] 写法。
+
+#+BEGIN_SRC vue
+<!-- App.vue -->
+<script setup>
+import { useLoadingStore } from '@/stores/loading'
+
+const store = useLoadingStore()
+</script>
+
+<template>
+  <header>
+    <div class="container">
+      <div class="title"><router-link to="/">Mirrors China</router-link></div>
+      <div class="title-desc">——开源软件的国内镜像站点</div>
+    </div>
+  </header>
+  <div class="main">
+    <a-spin tip="Loading..." :spinning="store.isLoading" style="margin: 20px">
+      <div class="content">
+        <a-back-top />
+        <router-view />
+      </div>
+    </a-spin>
+  </div>
+
+  <div class="footer">
+    Original from
+    <a href="https://github.com/lework/lemonitor" target="_blank">lework/lemonitor</a>, customed by
+    <a href="https://github.com/tianheg/mirrors-china" target="_blank">tianheg/mirrors-china</a>
+  </div>
+</template>
+#+END_SRC
+
+根据 lework/lemonitor 对应文件的代码结构，得到 template 中的内容。代码中 =a-spin= , =a-back-top= 标签来自 ant-design-vue 包。
+
+接下来，最主要的文件就是 views/HomeView.vue：
+
+#+BEGIN_SRC vue
+<script setup>
+import { reactive, ref, onMounted } from 'vue'
+import axios from 'axios'
+
+let monitorData = reactive([])
+let providerData = reactive([])
+let softwareList = reactive([])
+let softwareData = reactive({})
+let search_text = ref('')
+const spinning = ref(true)
+
+const pagination = reactive({
+  pageSize: 20,
+  responsive: true,
+  showSizeChanger: false,
+  size: 'small',
+  onChange: (page) => {
+    document.querySelector('#app')?.scrollIntoView({ behavior: 'smooth', block: 'start' })
+  }
+})
+
+const onSearch = (value) => {
+  if (typeof value === 'undefined' || value === null || value === '') {
+    _getData()
+  } else {
+    _getData(value)
+  }
+}
+
+const _getData = (search = '') => {
+  spinning.value = true
+  axios
+    .get('static/data.json')
+    .then((res) => {
+      monitorData = res.data
+      providerData = {}
+      softwareData = {}
+      monitorData.forEach((e) => {
+        let name = e.name
+        let color = e.tag_color
+        let url = e.url
+
+        providerData[name] = { tag_color: color, url: url }
+
+        for (let i = 0; i < e['item'].length; i++) {
+          e['item'][i] = e['item'][i].toLowerCase()
+          let softwareName = e['item'][i]
+          if (!Object.prototype.hasOwnProperty.call(softwareData, softwareName)) {
+            softwareData[softwareName] = []
+          }
+          softwareData[softwareName].push(name)
+        }
+      })
+      softwareList = Object.keys(softwareData)
+
+      if (search !== '') {
+        search = search.trim()
+        let resultList = []
+        softwareList.forEach((e) => {
+          if (e.toLowerCase().indexOf(search.toLowerCase()) !== -1) {
+            resultList.push(e)
+          }
+        })
+        monitorData.forEach((e) => {
+          if (e['name'].toLowerCase().indexOf(search.toLowerCase()) !== -1) {
+            resultList = resultList.concat(e['item'])
+          }
+        })
+
+        softwareList = Array.from(new Set(resultList))
+      }
+      spinning.value = false
+    })
+    .catch(() => {
+      message.error('获取数据失败！')
+    })
+}
+
+onMounted(() => {
+  _getData()
+})
+</script>
+
+<template>
+  <main>
+    <div class="search">
+      <a-input-search
+        v-model="search_text"
+        placeholder="输入软件名称或提供方"
+        enter-button="搜索..."
+        @search="onSearch"
+        allow-clear
+      />
+    </div>
+    <div class="content">
+      <a-spin :spinning="spinning">
+        <a-list item-layout="horizontal" :pagination="pagination" :data-source="softwareList">
+          <template #header>
+            <a-popover title="提供方列表" placement="rightTop">
+              <template #content>
+                <a-list
+                  :grid="{ gutter: 16, column: 2 }"
+                  :data-source="Object.keys(providerData)"
+                  style="width: 240px"
+                >
+                  <template #renderItem="{ item }">
+                    <a-list-item>
+                      <a target="_blank" :href="providerData[item]['url']">{{ item }} </a>
+                    </a-list-item></template
+                  >
+                </a-list>
+              </template>
+
+              <b>提供方：{{ Object.keys(providerData).length }} </b>
+            </a-popover>
+            <b> 软件数目：{{ softwareList.length }}</b>
+            <div class="header-switch"></div>
+          </template>
+
+          <template #renderItem="{ item }">
+            <a-list-item>
+              <a-list-item-meta>
+                <template #title>
+                  <div class="list-title">{{ item }}</div>
+                </template>
+                <template #description>
+                  <template v-for="tag in softwareData[item]" :key="`${Math.random()}-${tag}`">
+                    <a-tag :color="providerData[tag]['tag_color']" style="margin: 0 2px 2px">
+                      <a target="_blank" :href="providerData[tag]['url']">{{ tag }} </a>
+                    </a-tag>
+                  </template>
+                </template>
+              </a-list-item-meta>
+            </a-list-item>
+          </template>
+        </a-list>
+      </a-spin>
+    </div>
+  </main>
+</template>
+#+END_SRC
+
+关于数据处理的全部逻辑都在 script 中。主要操作：读取存在 static/data.json 文件中的 JSON 数据，通过一定转换反映到页面中。其中少不了 ant-design-vue 这个包提供的一些组件的帮助：List, ListItem, ListItemMeta, Tag。
+
+项目的初步完成不是结束，持续维护才是重要的。
+
+相关链接：
+
+- [[https://github.com/tianheg/mirrors-china][tianheg/mirrors-china]]
+- [[https://vitejs.dev/][Vite | Next Generation Frontend Tooling]]
+- [[https://router.vuejs.org/][Vue Router | The official Router for Vue.js]]
+- [[https://pinia.vuejs.org/][Pinia | The intuitive store for Vue.js]]
+- [[https://vuejs.org/][Vue.js - The Progressive JavaScript Framework | Vue.js]]
