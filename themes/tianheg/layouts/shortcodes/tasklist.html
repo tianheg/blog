@@ -1,4 +1,12 @@
+<style>
+  .tasklist > ul > li {
+    margin: 0;
+    padding: 0;
+  }
+
+  .tasklist > ul > li p {
+    all: unset;
+  }
+</style>
 {{ $options := (dict "markup" "org" ) }}
-<div class="tasklist">
-  {{ .Inner | .Page.RenderString $options }}
-</div>
+<div class="tasklist">{{ .Inner | .Page.RenderString $options }}</div>
