@@ -1,0 +1,105 @@
+<style>
+.flashcard {
+  /* layout and positioning */
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  position: relative;
+  margin-block: 1rem;
+  
+  /* notebook "paper" effect */
+  background-color: rgba(247, 244, 31, 0.5);
+  border-radius: 1rem;
+  text-shadow: #494f5c34 0.1em 0.1em 0.1em;
+  
+  /* lined grid effect */
+  background-image:
+      linear-gradient(90deg, #abced430 .1em, transparent .1em), 
+      linear-gradient(#abced430 .1em, transparent .1em);
+  background-size: 1rem 1rem;
+}
+
+.flashcard:before {
+  content: '';
+  position: absolute;
+  top: 0; bottom: 0; left: 0;
+  width: 60px;
+  background: radial-gradient(#494f5c 6px, transparent 7px) repeat-y;
+  background-size: 30px 30px;
+  box-sizing: border-box;
+}
+
+.notepad-line {
+  position: absolute;
+  width: 3px;
+  height: 100%;
+  background-color: rgba(255, 0, 0, 0.5);
+  left: 2rem;
+}
+
+.flashcard__front {
+  background: transparent;
+  border: 0;
+  padding-top: 1rem;
+  padding-bottom: 0.5rem;
+padding-inline: 4rem;
+  font-size: 1.25em;
+  text-shadow: #494f5c34 0.1em 0.1em 0.1em;
+  transition: 0.2s;
+  cursor: pointer;
+}
+
+.flashcard__front:hover {
+  text-shadow: #494f5c 0.1em 0.1em 0.1em;
+  transform: scale(1.05);
+  transition: 0.2s;    
+}
+
+.flashcard__back {
+  padding-bottom: 1rem;
+  padding-top:0.5rem;
+  padding-inline: 4rem;
+  align-self: start;
+  filter:blur(5px) opacity(0.5);
+  transition: 0.2s;
+}
+
+.unblur {
+  filter: blur(0px) opacity(1);
+  transition: 0.3s;
+}
+
+</style>
+
+<script>
+function toggleAnswer(id) {
+  let answerElement = document.getElementById(id);
+  if (answerElement.classList.contains('unblur')) {
+    answerElement.classList.remove('unblur');
+  } else {
+    answerElement.classList.add('unblur');
+  }
+}
+</script>
+
+{{ with .Get "question" }}
+{{ $optOrg := (dict "markup" "org" ) }}
+
+  {{ $seed := now.Format ":time_full" }} {{ $random := delimit (shuffle (split (md5 $seed) "" )) "" }}
+  {{ $questionSHA := . | sha1 }} {{ $answerID := printf "answer-id-%s-%s" $questionSHA $random }}
+  <div class="flashcard">
+    <div class="notepad-line"></div>
+    <button class="flashcard__front" onclick="toggleAnswer({{ $answerID }})" role="button">
+      {{ . }}
+    </button>
+    <div class="flashcard__back" id="{{ $answerID }}">
+      {{ $.Inner | $.Page.RenderString $optOrg }}
+    </div>
+  </div>
+
+{{ else }}
+
+  {{ errorf "missing value for param 'question': %s" .Position }}
+
+{{ end }}
