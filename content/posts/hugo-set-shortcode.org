@@ -142,19 +142,7 @@ function toggleAnswer(id) {
 * lab 实验室卡片
 
 #+begin_src html
-<div class="lab">
-  {{ if eq (.Get 1) ""}}
-    <div>{{ .Get 0 }}</div>
-  {{ else }}
-    <a href="{{ .Get 1 }}">{{ .Get 0 }}</a>
-  {{ end }}
-  
-  <p>{{ .Inner }}</p>
-</div>
-#+end_src
-
-#+begin_src scss
-// lab style
+<style>
 .lab {
   border-radius: 8px;
   display: flex;
@@ -165,14 +153,24 @@ function toggleAnswer(id) {
   position: relative;
   overflow: hidden;
   padding: 24px;
-  box-shadow: 0 0 0 1px rgba(0,0,0,.07),
-    0 2px 4px rgba(0,0,0,.05),
-    0 12px 24px rgba(0,0,0,.05);
-  
-  p {
-    color: grey;
-  }
+  box-shadow: 0 0 0 1px rgba(0, 0, 0, .07),
+    0 2px 4px rgba(0, 0, 0, .05),
+    0 12px 24px rgba(0, 0, 0, .05);
 }
+
+.lab p {
+  color: grey;
+}
+</style>
+<div class="lab">
+  {{ if eq (.Get 1) ""}}
+    <div>{{ .Get 0 }}</div>
+  {{ else }}
+    <a href="{{ .Get 1 }}">{{ .Get 0 }}</a>
+  {{ end }}
+  
+  <p>{{ (markdownify .Inner) }}</p>
+</div>
 #+end_src
 
 #+BEGIN_SRC org
@@ -209,22 +207,20 @@ function toggleAnswer(id) {
 * tasklist
 
 #+begin_src html
+<style>
+.tasklist>ul>li {
+  margin: 0;
+  padding: 0;
+}
+
+.tasklist>ul>li p {
+  all: unset;
+}
+</style>
 {{ $options := (dict "markup" "org" ) }}
 <div class="tasklist">
   {{ .Inner | .Page.RenderString $options }}
 </div>
-#+end_src
-
-#+begin_src scss
-// tasklist style
-.tasklist>ul>li {
-  margin: 0;
-  padding: 0;
-
-  p {
-    all: unset;
-  }
-}
 #+end_src
 
 #+begin_src org
@@ -270,67 +266,69 @@ function toggleAnswer(id) {
 * github
 
 #+begin_src html
-<div class="github">
-  <div class="logo">
-    {{ replace $.Site.Data.SVG.repository "icon" "icon github-icon" | safeHTML }}
-    <a class="name" href={{ .Get "link" }} target="_blank">{{ .Get "name" }}</a>
-  </div>
-  <div class="description">{{ .Get "description" }}</div>
-  <div class="language">
-    <span class="language-color" style="background-color: {{ .Get "color" }}"></span>
-    <span class="language-name">{{ .Get "language" }}</span>
-  </div>
-</div>
-#+end_src
-
-然后添加自定义 CSS 样式。在 =~/assets/scss/custom/_custom.scss= 文件中添加如下内容：
-
-#+begin_src scss
+<style>
 .github {
   border: 1px solid var(--color-contrast-low);
   border-radius: 3px;
   margin: 0 auto;
   margin-bottom: 1em;
   padding: 1em;
-  .github-icon {
-    width: 1.2em;
-    height: 1.2em;
-    margin-right: 0.5em;
-    margin-bottom: 0.2em;
-    fill: var(--color-contrast-high);
-    transition: all .5s;
-  }
-  .name {
-    font-weight: bold;
-    color: var(--color-primary);
-    text-decoration: none;
-  }
-  .description {
-    margin-top: 0.5em;
-    margin-bottom: 1em;
-    color: var(--color-contrast-high);
-    text-align: justify;
-    font-size: 90%;
-    transition: all .5s;
-  }
-  .language-color {
-    position: relative;
-    top: 1px;
-    display: inline-block;
-    width: 0.75em;
-    height: 0.75em;
-    border-radius: 50%;
-  }
-  .language-name {
-    color: var(--color-contrast-high);
-    font-size: 90%;
-    margin-left: 0.5em;
-    transition: all .5s;
-  }
 }
+.github .github-icon {
+  width: 1.2em;
+  height: 1.2em;
+  margin-right: 0.5em;
+  margin-bottom: 0.2em;
+  fill: var(--color-contrast-high);
+  transition: all .5s;
+}
+
+.github .name {
+  font-weight: bold;
+  color: var(--color-primary);
+  text-decoration: none;
+}
+
+.github .description {
+  margin-top: 0.5em;
+  margin-bottom: 1em;
+  color: var(--color-contrast-high);
+  text-align: justify;
+  font-size: 90%;
+  transition: all .5s;
+}
+
+.github .language-color {
+  position: relative;
+  top: 1px;
+  display: inline-block;
+  width: 0.75em;
+  height: 0.75em;
+  border-radius: 50%;
+}
+
+.github .language-name {
+  color: var(--color-contrast-high);
+  font-size: 90%;
+  margin-left: 0.5em;
+  transition: all .5s;
+}
+</style>
+
+<div class="github">
+    <div class="logo">
+        {{ replace $.Site.Data.SVG.repository "icon" "icon github-icon" | safeHTML }}
+        <a class="name" href={{ .Get "link" }} target="_blank">{{ .Get "name" }}</a>
+    </div>
+    <div class="description">{{ .Get "description" }}</div> 
+    <div class="language">
+        <span class="language-color" style="background-color: {{ .Get "color" }}"></span>
+        <span class="language-name">{{ .Get "language" }}</span>
+    </div>
+</div>
 #+end_src
 
-最后需要在 =~/data/SVG.toml= 文件中插入图标：
+还需要在 =~/data/SVG.toml= 文件中插入图标：
 
 #+begin_src toml
 # GitHub Icon
@@ -348,10 +346,8 @@ repository = '<svg xmlns="http://www.w3.org/2000/svg" class="icon" viewBox="0 0 
 {{< github name="blog" link="https://github.com/tianheg/blog"
 description="Blog Source Files" color="#E34C26" language="HTML">}}
 
-** highlight
-:PROPERTIES:
-:CUSTOM_ID: highlight
-:END:
+* highlight
+
 #+begin_src html
 添加/layouts/shortcodes/highlight.html：
 <highlight html >
