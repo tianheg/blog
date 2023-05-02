@@ -12,3 +12,4 @@
 3. <https://www.regisphilibert.com/tags/hugo/>
 4. <https://gohugobrasil.netlify.app/themes/creating/>
 5. <https://gohugo.io/templates/introduction/>
+6. <https://www.veriphor.com/articles/>
