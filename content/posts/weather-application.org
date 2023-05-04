@@ -1,0 +1,32 @@
+#+TITLE: 天气应用思考
+#+DATE: <2023-05-04 Thu 13:44>
+#+TAGS[]: 技术
+
+{{< feynman >}}
+
+本篇文章要解决的问题：汇总天气应用的构建思路，可用数据。
+
+-----
+
+使用习惯的技术构建各种 Web 应用、移动应用。
+
+目前在用彩云的天气 API 每天八点多给自己发 Email，报告今天的温度、空气质量。
+
+* 天气相关术语
+
+** AQI——空气质量指数
+
+彩云的天气 API 返回了中国和美国两种格式的 API，我问了一下 ChatGPT：
+
+#+BEGIN_QUOTE
+The Air Quality Index (AQI) is a measurement used to determine how polluted the air is in a specific location. Both China and the USA use the AQI, but there are some differences between the two.
+
+One notable difference is the measurement of the AQI. In China, the AQI is based on the concentrations of six pollutants: particulate matter (PM2.5 and PM10), nitrogen dioxide, sulfur dioxide, ozone, and carbon monoxide. In the USA, the AQI is based on five pollutants: ozone, particulate matter (PM2.5 and PM10), carbon monoxide, nitrogen dioxide, and sulfur dioxide. As a result, the range of concentrations for each pollutant that correspond to different AQI levels may differ slightly between the two countries.
+
+Another difference is the standards used to establish AQI levels. In China, the AQI levels are set by the National Environmental Protection Bureau, while in the USA, they are set by the Environmental Protection Agency. The AQI levels may differ as a result of the different standards used to determine them.
+#+END_QUOTE
+
+* API
+
+- [[https://openweathermap.org/][OpenWeather]]
+- [[https://dashboard.caiyunapp.com/v1/token/][彩云开发者平台]]
