@@ -6,6 +6,7 @@
 #+BEGIN_QUOTE
 Every browser understands that zero means no change.
 #+END_QUOTE
+
 * CSS concepts
 
 - [[https://defensivecss.dev/][Defensive CSS]]
@@ -501,11 +502,14 @@ body {
 6. 使用媒体查询进行条件加载
 7. 不要使用太多媒体加载
 
-* 特定 CSS 能产生什么效果
+* 技巧
 ** 居中对齐
-https://css-tricks.com/centering-css-complete-guide/
-https://www.w3schools.com/csS/css_align.asp
-*** 水平居中
+
+[[https://css-tricks.com/centering-css-complete-guide/]]
+
+[[https://www.w3schools.com/csS/css_align.asp]]
+
+一、水平居中
 #+BEGIN_SRC css
 elem {
   margin-left: auto;
@@ -552,7 +556,7 @@ main div {
 }
 /* 之后一定要指定每个 div 元素的宽度 */
 #+END_SRC
-*** 垂直居中
+二、垂直居中
 #+BEGIN_SRC css
 /* inline, inline-*, 文本、链接等 */
   /* single line */
@@ -642,7 +646,8 @@ main div {
       }
     }
 #+END_SRC
-** 水平+垂直居中
+
+三、水平+垂直居中
 #+BEGIN_SRC css
 .center {
   padding: 50px 0;
@@ -691,6 +696,7 @@ body, html {
   }
 }
 #+END_SRC
+
 ** 左右对齐
 #+BEGIN_SRC css
 .right {
@@ -771,107 +777,1345 @@ body {
   margin: 0;
 }
 #+END_SRC
-* CSS 工具
 
-- [[https://arantius.github.io/web-color-wheel/][Named Colors Wheel]]
+** html,body 对于 100% 的反应
 
-作者用一个圆，囊括了一些有名字的 CSS 颜色。很有趣，能够直观地看到颜色彼此的区别。
-* CSS 学习资源汇总
+#+BEGIN_SRC css
+html {
+  height: 100%;
+}
 
-DuckDuckGo 搜索「 =how to learn css= 」出现的条目：
+body {
+  height: 100%;
+}
+#+END_SRC
 
-- [[https://www.w3schools.com/Css/]]
-- [[https://web.dev/learn/css/]]
-- [[https://www.coursera.org/collections/learn-css]]
-- [[https://www.smashingmagazine.com/2019/01/how-to-learn-css/]]
+在找到别人的解答时，我以为对 html body 进行设置 height 只需要其中一个，但结果却不是。为什么只有当 2 个都设置时，才会出现那样的样子呢？
 
-从 [[https://uses.tech/]] 找到的学习资源：
+[[https://codepen.io/tianheg/pen/yLRPZqo]]
 
-- [[https://flexbox.io/]]
-- [[https://cssgrid.io/]]
-- [[https://ishadeed.com/article/grid-layout-flexbox-components/][Grid for layout, Flexbox for components - Ahmad Shadeed]]
+#+BEGIN_EXPORT html
+<img src="/images/stanford-cs142-project1versionA.png" alt="斯坦福 CS142 课程相关图片">
+<span class="caption">◎ 斯坦福 CS142 课程相关图片</span>
+#+END_EXPORT
+    
+** line-height 使用数值，不使用长度
 
-Google 搜索「 =how to learn css= 」出现的条目：
+#+BEGIN_SRC css
+/* Good */
+elem {
+  line-height: 1.1;
+  font-size: 30px;
+}
 
-- [[https://www.freecodecamp.org/news/follow-these-steps-to-become-a-css-superstar-837cd6cb9b1a/]]
-- [[https://bootcamp.uxdesign.cc/anyone-can-learn-css-8296b0764944][Anyone can learn CSS. As a self-taught developer, this is my... | by Vigneshwarar | Bootcamp]]
-- [[https://css-tricks.com/guides/]]
-- [[https://www.w3.org/Style/CSS/learning.en.html]]
-- [[https://ishadeed.com/articles/]]
-- [[https://www.joshwcomeau.com/tutorials/css/]]
-- [[https://nwalsh.com/docs/articles/css/]]
-- [[https://www.csszengarden.com/]]
-- [[https://learnxinyminutes.com/docs/css/]]
-- [[https://www.quirksmode.org/]]
-- [[https://vanseodesign.com/]]
+/* Bad */
+elem2 {
+  line-height: 1.1em;
+  font-size: 15px;
+}
+#+END_SRC
 
-从「[[https://meyerweb.com/]]」找到的文章：
+两个元素的行高计算：1.1x30, 1.1x15。前者字体更大，行高更大。
 
-- [[https://meyerweb.com/eric/thoughts/2021/05/25/25-years-of-css/]]
-- CSS: The Definitive Guide
+** 区块居中
 
-#+BEGIN_QUOTE
-Because I wasn't against tables for tabular data. I just didn't like the idea of using them solely for layout purposes.
-#+END_QUOTE
+#+BEGIN_SRC css
+.block {
+  margin: 0 auto;
+}
+#+END_SRC
 
-其他有关 CSS 的内容：
+** position 进行相对定位
 
-- [[https://meyerweb.com/eric/thoughts/category/tech/css/]]
-- [[https://blog.jim-nielsen.com/tags/#css]]
-- [[https://css-irl.info/tags/css/]]
-- [[https://24ways.org/]]
-- [[https://ryanseddon.com/]]
-- [[https://css-tricks.com/snippets/]]
+[[https://codepen.io/tianheg/pen/ExEvmXq]]
 
---------------
+#+BEGIN_SRC css
+ul {
+  position: absolute;
+  top: 100px;
+}
 
-CSS framework（[[https://github.com/troxler/awesome-css-frameworks][src]]）：
+li {
+  position: relative;
+  left: 100px;
+}
+#+END_SRC
 
-- [[https://purecss.io/][Pure]]
+** 除第一项添加样式
 
-CSS 的知识点（[[https://developer.mozilla.org/en-US/docs/Web/CSS][src]]）：
+[[https://codepen.io/tianheg/pen/wvYPLNy]]
 
-- Animations
-- Backgrounds and borders
-- Box alignment
-- Box model
-- Columns
-- Conditional rules
-- CSSOM view
-- Flexbox
-- Flow layout
-- Fonts
-- Grid
-- Images
-- Lists and counters
-- Logical properties
-- Media queries
-- Positioning
-- Scroll snap
-- Shapes
-- Text
-- Transforms
-- Transitions
-- Logical Properties
+#+BEGIN_SRC css
+li + li {
+  background: pink;
+}
+#+END_SRC
 
------
+** 简化的 CSS reset
 
-一、官方标准
+#+BEGIN_SRC css
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+#+END_SRC
 
-- [[https://www.w3.org/TR/][All Standards and Drafts - W3C]]
-- [[https://drafts.csswg.org/][CSS 工作组编辑草稿]] • [[https://andreubotella.com/csswg-auto-build/][backup]]
+比 [[http://necolas.github.io/normalize.css/][Normalize.css]] 简单不少。 =box-sizing= 能让我使用盒子模型。
 
-二、系统教程
+*注意* ：如果选择如下一个这般继承 =box-sizing= 的话，就不要在重置 CSS 中使用 =box-sizing= 。
 
-- [[https://developer.mozilla.org/en-US/docs/Web/CSS][MDN]]
-- [[https://web.dev/learn/css/][web.dev]]
+** 继承 =box-sizing=
 
-三、博客文章/有用资料
+#+BEGIN_SRC css
+html {
+  box-sizing: border-box;
+}
 
-- [[https://css-tricks.com/][CSS Tricks]]
-- [[https://una.im/][Una Kravets]]
-- [[http://youmightnotneedjs.com/]]
-- [[https://www.gridtoflex.com/]]
-- [[http://travels.surge.sh/]]
-- [[https://css.oddbird.net/][Miriam's CSS Sandbox]]
-- [[https://ishadeed.com/][Home - Ahmad Shadeed]]
+*,
+*::before,
+*::after {
+  box-sizing: inherit;
+}
+#+END_SRC
+
+这使得改变插件或其他利用其他行为的组件的 =box-sizing= 变得更加容易。
+
+** 使用 =unset= 而不是手动重置所有属性
+
+像这样一个属性一个属性地重置是不必要的。
+
+#+BEGIN_SRC css
+button {
+  background: none;
+  border: none;
+  color: inherit;
+  font: inherit;
+  outline: none;
+  padding: 0;
+}
+#+END_SRC
+
+选中所有属性有个快捷方式： =all= 。把它设为 =unset= 就可以实现上述那么长达成的效果。
+
+#+BEGIN_SRC css
+button {
+  all: unset;
+}
+#+END_SRC
+
+*注意* ： =all= 、 =unset= 在 IE11 不受支持。
+
+参考资料
+
+- [[https://github.com/AllThingsSmitty/css-protips#table-of-contents]]
+- [[http://blog.kidwm.net/390][CSS 奇技淫巧十八招 -- WMの物語]]
+
+** Accessible image replacement
+https://codepen.io/tianheg/pen/MWPrjJN
+
+#+BEGIN_SRC scss
+div {
+  margin: 5rem;
+}
+// https://web.archive.org/web/20030805051841/http://moronicbajebus.com/playground/cssplay/image-replacement/
+#one {
+  border: 1px solid yellow;
+  width: 100px;
+  padding-top: 100px;
+  height: 0;
+  background: url(https://source.unsplash.com/random/100x100/?img=1) no-repeat;
+}
+
+#two {
+  border: 1px solid yellow;
+  text-indent: 100%;
+  white-space: nowrap;
+  overflow: hidden;
+  background: url(https://picsum.photos/100/100) no-repeat;
+}
+// https://web.archive.org/web/20031002115428/http://www.mezzoblue.com/tests/revised-image-replacement/#gilderlevin
+#three {
+  width: 100px;
+  height: 100px;
+  position: relative;
+}
+#three span {
+  background: url(https://picsum.photos/100/100) no-repeat;
+  position: absolute;
+  width: 100%;
+  height: 100%;
+}
+#three-v2 {
+  width: 100px;
+  height: 100px;
+  position: relative;
+}
+#three-v2 span {
+  background: url(https://picsum.photos/100/100) no-repeat;
+  position: absolute;
+  width: 100%;
+  height: 100%;
+}
+
+// https://nicolasgallagher.com/css-image-replacement-with-pseudo-elements/
+#four {
+  height: 100px; /* height of replacement image */
+  padding: 0;
+  margin: 0;
+  overflow: hidden;
+}
+
+#four::before {
+  content: url(https://picsum.photos/100/100);
+  display: block;
+}
+
+/**
+Old method(text-indent: -9000px):
+
+.nir {
+   height: 100px;
+   padding: 0;
+   margin: 0;
+   overflow: hidden;
+   text-indent: -9000px;
+   background: url(image.gif) no-repeat 0 0;
+}
+*/
+#+END_SRC
+** counter 装饰有序清单
+
+1. https://codepen.io/tianheg/pen/wvYpzxR
+2. https://moderncss.dev/totally-custom-list-styles/
+
+** 伪元素做 drop shadow
+
+https://codepen.io/tianheg/pen/wvYpoaL
+
+* Shapes
+** 矩形
+https://codepen.io/tianheg/pen/yLRPmYr
+
+#+BEGIN_SRC css
+#square {
+  width: 100px;
+  height: 100px;
+  background: red;
+}
+
+#rectangle {
+  width: 200px;
+  height: 100px;
+  background: red;
+}
+#+END_SRC
+
+** 圆形
+https://codepen.io/tianheg/pen/ExdbqyV
+#+BEGIN_SRC css
+#circle {
+  width: 100px;
+  height: 100px;
+  background: red;
+  border-radius: 50%;
+}
+#+END_SRC
+
+** 椭圆形
+https://codepen.io/tianheg/pen/KKGyOME
+#+BEGIN_SRC css
+#oval {
+  width: 200px;
+  height: 100px;
+  background: red;
+  border-radius: 100px / 50px;
+}
+#+END_SRC
+
+** 三角形
+https://codepen.io/tianheg/pen/NWOwQdE
+
+#+BEGIN_SRC css
+#triangle-up {
+  width: 0;
+  height: 0;
+  border-left: 50px solid transparent;
+  border-right: 50px solid transparent;
+  border-bottom: 100px solid red;
+}
+
+#triangle-down {
+  width: 0;
+  height: 0;
+  border-left: 50px solid transparent;
+  border-right: 50px solid transparent;
+  border-top: 100px solid red;
+}
+
+#triangle-left {
+  width: 0;
+  height: 0;
+  border-top: 50px solid transparent;
+  border-right: 100px solid red;
+  border-bottom: 50px solid transparent;
+}
+
+#triangle-right {
+  width: 0;
+  height: 0;
+  border-top: 50px solid transparent;
+  border-left: 100px solid red;
+  border-bottom: 50px solid transparent;
+}
+
+#triangle-topleft {
+  width: 0;
+  height: 0;
+  border-top: 100px solid red;
+  border-right: 100px solid transparent;
+}
+
+#triangle-topright {
+  width: 0;
+  height: 0;
+  border-top: 100px solid red;
+  border-left: 100px solid transparent;
+}
+
+#triangle-bottomleft {
+  width: 0;
+  height: 0;
+  border-bottom: 100px solid red;
+  border-right: 100px solid transparent;
+}
+
+#triangle-bottomright {
+  width: 0;
+  height: 0;
+  border-bottom: 100px solid red;
+  border-left: 100px solid transparent;
+}
+#+END_SRC
+
+** 梯形
+https://codepen.io/tianheg/pen/jOeagmR
+
+#+BEGIN_SRC css
+#trapezoid {
+  border-bottom: 100px solid red;
+  border-left: 25px solid transparent;
+  border-right: 25px solid transparent;
+  height: 0;
+  width: 100px;
+}
+#+END_SRC
+
+** 平行四边形
+https://codepen.io/tianheg/pen/yLRpJoE
+
+#+BEGIN_SRC css
+#parallelogram {
+  width: 150px;
+  height: 100px;
+  transform: skew(20deg);
+  background: red;
+}
+#+END_SRC
+
+** 弧形尾箭头 Curved Tail Arrow
+https://codepen.io/tianheg/pen/oNapLGN
+
+#+BEGIN_SRC css
+#curvedarrow {
+  position: relative;
+  width: 0;
+  height: 0;
+  border-top: 9px solid transparent;
+  border-right: 9px solid red;
+  transform: rotate(10deg);
+}
+#curvedarrow::after {
+  content: "";
+  position: absolute;
+  border: 0 solid transparent;
+  border-top: 3px solid red;
+  border-radius: 20px 0 0 0;
+  top: -12px;
+  left: -9px;
+  width: 12px;
+  height: 12px;
+  transform: rotate(45deg);
+}
+#+END_SRC
+
+** 六角星
+https://codepen.io/tianheg/pen/wvYpWPe
+
+#+BEGIN_SRC css
+#star-six {
+  width: 0;
+  height: 0;
+  border-left: 50px solid transparent;
+  border-right: 50px solid transparent;
+  border-bottom: 100px solid red;
+  position: relative;
+}
+#star-six::after {
+  width: 0;
+  height: 0;
+  border-left: 50px solid transparent;
+  border-right: 50px solid transparent;
+  border-top: 100px solid red;
+  position: absolute;
+  content: "";
+  top: 30px;
+  left: -50px;
+}
+#+END_SRC
+
+** 五角星
+https://codepen.io/tianheg/pen/mdzpEpr
+
+#+BEGIN_SRC css
+#star-five {
+  margin: 50px 0;
+  position: relative;
+  display: block;
+  color: red;
+  width: 0px;
+  height: 0px;
+  border-right: 100px solid transparent;
+  border-bottom: 70px solid red;
+  border-left: 100px solid transparent;
+  transform: rotate(35deg);
+}
+#star-five::before {
+  border-bottom: 80px solid red;
+  border-left: 30px solid transparent;
+  border-right: 30px solid transparent;
+  position: absolute;
+  height: 0;
+  width: 0;
+  top: -45px;
+  left: -65px;
+  display: block;
+  content: '';
+  transform: rotate(-35deg);
+}
+#star-five::after {
+  position: absolute;
+  display: block;
+  color: red;
+  top: 3px;
+  left: -105px;
+  width: 0px;
+  height: 0px;
+  border-right: 100px solid transparent;
+  border-bottom: 70px solid red;
+  border-left: 100px solid transparent;
+  transform: rotate(-70deg);
+  content: '';
+}
+#+END_SRC
+
+** 正五边形
+https://codepen.io/tianheg/pen/zYmpBpb
+
+#+BEGIN_SRC css
+#pentagon {
+  position: relative;
+  width: 54px;
+  box-sizing: content-box;
+  border-width: 50px 18px 0;
+  border-style: solid;
+  border-color: red transparent;
+}
+#pentagon::before {
+  content: "";
+  position: absolute;
+  height: 0;
+  width: 0;
+  top: -85px;
+  left: -18px;
+  border-width: 0 45px 35px;
+  border-style: solid;
+  border-color: transparent transparent red;
+}
+#+END_SRC
+
+** 正六边形
+https://codepen.io/tianheg/pen/GRYyqQN
+
+#+BEGIN_SRC css
+#hexagon {
+  width: 100px;
+  height: 57.735px;
+  background: red;
+  position: relative;
+}
+#hexagon::before {
+  content: "";
+  position: absolute;
+  top: -28.8675px;
+  left: 0;
+  width: 0;
+  height: 0;
+  border-left: 50px solid transparent;
+  border-right: 50px solid transparent;
+  border-bottom: 28.8675px solid red;
+}
+#hexagon::after {
+  content: "";
+  position: absolute;
+  bottom: -28.8675px;
+  left: 0;
+  width: 0;
+  height: 0;
+  border-left: 50px solid transparent;
+  border-right: 50px solid transparent;
+  border-top: 28.8675px solid red;
+}
+#+END_SRC
+
+** 正八边形
+https://codepen.io/tianheg/pen/ExdoyQJ
+
+#+BEGIN_SRC css
+#octagon {
+  width: 100px;
+  height: 100px;
+  background: red;
+  position: relative;
+}
+#octagon::before {
+  content: "";
+  width: 42px;
+  height: 0;
+  position: absolute;
+  top: 0;
+  left: 0;
+  border-right: 29px solid #eee;
+  border-bottom: 29px solid red;
+  border-left: 29px solid #eee;
+}
+#octagon::after {
+  content: "";
+  width: 42px;
+  height: 0;
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  border-top: 29px solid red;
+  border-left: 29px solid #eee;
+  border-right: 29px solid #eee;
+}
+#+END_SRC
+
+** 心形
+https://codepen.io/tianheg/pen/PoyEzam
+
+#+BEGIN_SRC css
+#heart {
+  position: relative;
+  width: 100px;
+  height: 90px;
+}
+#heart::before,
+#heart::after {
+  position: absolute;
+  content: "";
+  left: 50px;
+  top: 0;
+  width: 50px;
+  height: 80px;
+  background: red;
+  border-radius: 50px 50px 0 0;
+  transform: rotate(-45deg);
+  transform-origin: 0 100%;
+}
+#heart::after {
+  left: 0;
+  transform: rotate(45deg);
+  transform-origin: 100% 100%;
+}
+#+END_SRC
+
+** 无穷大形
+https://codepen.io/tianheg/pen/PoyEzBm
+
+#+BEGIN_SRC css
+#infinity {
+  position: relative;
+  width: 212px;
+  height: 100px;
+  box-sizing: content-box;
+}
+#infinity::before,
+#infinity::after {
+  content: "";
+  box-sizing: content-box;
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 60px;
+  height: 60px;
+  border: 20px solid red;
+  border-radius: 50px 50px 0 50px;
+  transform: rotate(-45deg);
+}
+#infinity::after {
+  left: auto;
+  right: 0;
+  border-radius: 50px 50px 50px 0;
+  transform: rotate(45deg);
+}
+#+END_SRC
+
+** 菱形
+https://codepen.io/tianheg/pen/qBJpNME
+
+#+BEGIN_SRC css
+#diamond {
+  width: 0;
+  height: 0;
+  border: 50px solid transparent;
+  border-bottom-color: red;
+  position: relative;
+  top: -50px;
+}
+#diamond::after {
+  content: '';
+  position: absolute;
+  left: -50px;
+  top: 50px;
+  width: 0;
+  height: 0;
+  border: 50px solid transparent;
+  border-top-color: red;
+}
+#+END_SRC
+
+** 钻石盾形
+https://codepen.io/tianheg/pen/gOBoMdW
+
+#+BEGIN_SRC css
+#diamond-shield {
+  width: 0;
+  height: 0;
+  border: 50px solid transparent;
+  border-bottom: 20px solid red;
+  position: relative;
+  top: -50px;
+}
+#diamond-shield::after {
+  content: '';
+  position: absolute;
+  left: -50px;
+  top: 20px;
+  width: 0;
+  height: 0;
+  border: 50px solid transparent;
+  border-top: 70px solid red;
+}
+#+END_SRC
+
+** Diamond Narrow Shape
+https://codepen.io/tianheg/pen/ZEqvOMV
+
+#+BEGIN_SRC css
+#diamond-narrow {
+  width: 0;
+  height: 0;
+  border: 50px solid transparent;
+  border-bottom: 70px solid red;
+  position: relative;
+  top: -50px;
+}
+#diamond-narrow::after {
+  content: '';
+  position: absolute;
+  left: -50px;
+  top: 70px;
+  width: 0;
+  height: 0;
+  border: 50px solid transparent;
+  border-top: 70px solid red;
+}
+#+END_SRC
+
+** Cut Diamond Shape
+https://codepen.io/tianheg/pen/zYmpBJQ
+
+#+BEGIN_SRC css
+#cut-diamond {
+  border-style: solid;
+  border-color: transparent transparent red transparent;
+  border-width: 0 25px 25px 25px;
+  height: 0;
+  width: 50px;
+  box-sizing: content-box;
+  position: relative;
+  margin: 20px 0 50px 0;
+}
+#cut-diamond::after {
+  content: "";
+  position: absolute;
+  top: 25px;
+  left: -25px;
+  width: 0;
+  height: 0;
+  border-style: solid;
+  border-color: red transparent transparent transparent;
+  border-width: 70px 50px 0 50px;
+}
+#+END_SRC
+
+** 鸡蛋形
+https://codepen.io/tianheg/pen/oNapLaj
+
+#+BEGIN_SRC css
+#egg {
+  display: block;
+  width: 126px;
+  height: 180px;
+  background-color: #f7e6ca;
+  border-radius: 50% 50% 50% 50% / 60% 60% 40% 40%;
+}
+#+END_SRC
+
+** 吃豆人形状
+https://codepen.io/tianheg/pen/KKGZMbx
+
+#+BEGIN_SRC css
+#pacman {
+  width: 0px;
+  height: 0px;
+  border-right: 60px solid transparent;
+  border-top: 60px solid #ffd700;
+  border-left: 60px solid #ffd700;
+  border-bottom: 60px solid #ffd700;
+  border-top-left-radius: 60px;
+  border-top-right-radius: 60px;
+  border-bottom-left-radius: 60px;
+  border-bottom-right-radius: 60px;
+}
+#+END_SRC
+
+** 对话气泡形
+https://codepen.io/tianheg/pen/PoyEzVK
+
+#+BEGIN_SRC css
+#talkbubble {
+  width: 120px;
+  height: 80px;
+  background: red;
+  position: relative;
+  border-radius: 10px;
+  left: 100px;
+}
+#talkbubble::before {
+  content: "";
+  position: absolute;
+  right: 100%;
+  top: 16px;
+  width: 0;
+  height: 0;
+  border-top: 13px solid transparent;
+  border-right: 26px solid red;
+  border-bottom: 13px solid transparent;
+}
+#+END_SRC
+
+** RSS Feed
+https://codepen.io/tianheg/pen/PoyEzLK
+
+#+BEGIN_SRC css
+#rss {
+  width: 20em;
+  height: 20em;
+  border-radius: 3em;
+  background-color: #ff0000;
+  font-size: 14px;
+}
+#rss::before {
+  content: '';
+  z-index: 1;
+  display: block;
+  height: 5em;
+  width: 5em;
+  background: #fff;
+  border-radius: 50%;
+  position: relative;
+  top: 11.5em;
+  left: 3.5em;
+}
+#rss::after {
+  content: '';
+  display: block;
+  background: #ff0000;
+  width: 13em;
+  height: 13em;
+  top: -2em;
+  left: 3.8em;
+  border-radius: 2.5em;
+  position: relative;
+  box-shadow:
+    -2em 2em 0 0 #fff inset,
+    -4em 4em 0 0 #ff0000 inset,
+    -6em 6em 0 0 #fff inset
+}
+#+END_SRC
+
+** 12 点爆发形状
+https://codepen.io/tianheg/pen/MWPrexZ
+
+#+BEGIN_SRC css
+#burst-12 {
+  background: red;
+  width: 80px;
+  height: 80px;
+  position: relative;
+  text-align: center;
+}
+#burst-12::before,
+#burst-12::after {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 0;
+  height: 80px;
+  width: 80px;
+  background: red;
+}
+#burst-12::before {
+  transform: rotate(30deg);
+}
+#burst-12::after {
+  transform: rotate(60deg);
+}
+#+END_SRC
+
+** 8 点爆发形状
+[[https://codepen.io/tianheg/pen/abREZxb]]
+
+#+BEGIN_SRC css
+#burst-8 {
+  background: red;
+  width: 80px;
+  height: 80px;
+  position: relative;
+  text-align: center;
+  transform: rotate(20deg);
+}
+#burst-8::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 0;
+  height: 80px;
+  width: 80px;
+  background: red;
+  transform: rotate(135deg);
+}
+#+END_SRC
+
+** 阴阳
+https://codepen.io/tianheg/pen/GRYyqLE
+
+#+BEGIN_SRC css
+#yin-yang {
+  width: 96px;
+  box-sizing: content-box;
+  height: 48px;
+  background: #eee;
+  border-color: black;
+  border-style: solid;
+  border-width: 2px 2px 50px 2px;
+  border-radius: 100%;
+  position: relative;
+}
+#yin-yang::before {
+  content: "";
+  position: absolute;
+  top: 50%;
+  left: 0;
+  background: #eee;
+  border: 18px solid black;
+  border-radius: 100%;
+  width: 12px;
+  height: 12px;
+  box-sizing: content-box;
+}
+#yin-yang::after {
+  content: "";
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  background: black;
+  border: 18px solid #eee;
+  border-radius: 100%;
+  width: 12px;
+  height: 12px;
+  box-sizing: content-box;
+}
+#+END_SRC
+
+** 徽章丝带
+https://codepen.io/tianheg/pen/zYmpBXg
+
+#+BEGIN_SRC css
+#badge-ribbon {
+  position: relative;
+  background: red;
+  height: 100px;
+  width: 100px;
+  border-radius: 50px;
+}
+#badge-ribbon::before,
+#badge-ribbon::after {
+  content: '';
+  position: absolute;
+  border-bottom: 70px solid red;
+  border-left: 40px solid transparent;
+  border-right: 40px solid transparent;
+  top: 70px;
+  left: -10px;
+  transform: rotate(-140deg);
+}
+#badge-ribbon::after {
+  left: auto;
+  right: -10px;
+  transform: rotate(140deg);
+}
+#+END_SRC
+
+** 太空入侵者
+https://codepen.io/tianheg/pen/VwEyjOK
+
+#+BEGIN_SRC css
+#space-invader {
+  box-shadow: 0 0 0 1em red,
+    0 1em 0 1em red,
+    -2.5em 1.5em 0 .5em red,
+    2.5em 1.5em 0 .5em red,
+    -3em -3em 0 0 red,
+    3em -3em 0 0 red,
+    -2em -2em 0 0 red,
+    2em -2em 0 0 red,
+    -3em -1em 0 0 red,
+    -2em -1em 0 0 red,
+    2em -1em 0 0 red,
+    3em -1em 0 0 red,
+    -4em 0 0 0 red,
+    -3em 0 0 0 red,
+    3em 0 0 0 red,
+    4em 0 0 0 red,
+    -5em 1em 0 0 red,
+    -4em 1em 0 0 red,
+    4em 1em 0 0 red,
+    5em 1em 0 0 red,
+    -5em 2em 0 0 red,
+    5em 2em 0 0 red,
+    -5em 3em 0 0 red,
+    -3em 3em 0 0 red,
+    3em 3em 0 0 red,
+    5em 3em 0 0 red,
+    -2em 4em 0 0 red,
+    -1em 4em 0 0 red,
+    1em 4em 0 0 red,
+    2em 4em 0 0 red;
+  background: red;
+  width: 1em;
+  height: 1em;
+  overflow: hidden;
+  margin: 50px 0 70px 65px;
+}
+#+END_SRC
+
+** 电视
+https://codepen.io/tianheg/pen/WNadxBy
+
+#+BEGIN_SRC css
+#tv {
+  position: relative;
+  width: 200px;
+  height: 150px;
+  margin: 20px 0;
+  background: red;
+  border-radius: 50% / 10%;
+  color: white;
+  text-align: center;
+  text-indent: .1em;
+}
+#tv::before {
+  content: '';
+  position: absolute;
+  top: 10%;
+  bottom: 10%;
+  right: -5%;
+  left: -5%;
+  background: inherit;
+  border-radius: 5% / 50%;
+}
+#+END_SRC
+
+** V形
+https://codepen.io/tianheg/pen/XWxVKwL
+
+#+BEGIN_SRC css
+#chevron {
+  position: relative;
+  text-align: center;
+  padding: 12px;
+  margin-bottom: 6px;
+  height: 60px;
+  width: 200px;
+}
+#chevron::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  height: 100%;
+  width: 51%;
+  background: red;
+  transform: skew(0deg, 6deg);
+}
+#chevron::after {
+  content: '';
+  position: absolute;
+  top: 0;
+  right: 0;
+  height: 100%;
+  width: 50%;
+  background: red;
+  transform: skew(0deg, -6deg);
+}
+#+END_SRC
+
+** 放大镜
+https://codepen.io/tianheg/pen/PoyEzrJ
+
+#+BEGIN_SRC css
+#magnifying-glass {
+  font-size: 10em;
+  display: inline-block;
+  width: 0.4em;
+  box-sizing: content-box;
+  height: 0.4em;
+  border: 0.1em solid red;
+  position: relative;
+  border-radius: 0.35em;
+}
+#magnifying-glass::before {
+  content: "";
+  display: inline-block;
+  position: absolute;
+  right: -0.25em;
+  bottom: -0.1em;
+  border-width: 0;
+  background: red;
+  width: 0.35em;
+  height: 0.08em;
+  transform: rotate(45deg);
+}
+#+END_SRC
+
+** Facebook logo
+https://codepen.io/tianheg/pen/yLRpJdG
+
+#+BEGIN_SRC css
+#facebook-icon {
+  background: #4267b2;
+  text-indent: -999em;
+  width: 100px;
+  height: 110px;
+  box-sizing: content-box;
+  border-radius: 5px;
+  position: relative;
+  overflow: hidden;
+  border: 15px solid #4267b2;
+  border-bottom: 0;
+}
+#facebook-icon::before {
+  content: "/20";
+  position: absolute;
+  background: #4267b2;
+  width: 40px;
+  height: 90px;
+  bottom: -30px;
+  right: -37px;
+  border: 20px solid #eee;
+  border-radius: 25px;
+  box-sizing: content-box;
+}
+#facebook-icon::after {
+  content: "/20";
+  position: absolute;
+  width: 55px;
+  top: 50px;
+  height: 20px;
+  background: #eee;
+  right: 5px;
+  box-sizing: content-box;
+}
+#+END_SRC
+
+** 月牙
+https://codepen.io/tianheg/pen/QWZaEeV
+
+#+BEGIN_SRC css
+#moon {
+  width: 80px;
+  height: 80px;
+  border-radius: 50%;
+  box-shadow: 10px 15px #ffff99;
+}
+#+END_SRC
+
+** 旗帜
+https://codepen.io/tianheg/pen/qBJpaWb
+
+#+BEGIN_SRC css
+#flag {
+  width: 110px;
+  height: 56px;
+  box-sizing: content-box;
+  padding-top: 15px;
+  position: relative;
+  background: red;
+  color: white;
+  font-size: 11px;
+  letter-spacing: 0.2em;
+  text-align: center;
+  text-transform: uppercase;
+}
+#flag::after {
+  content: "";
+  position: absolute;
+  left: 0;
+  bottom: 0;
+  width: 0;
+  height: 0;
+  border-bottom: 13px solid #eee;
+  border-left: 55px solid transparent;
+  border-right: 55px solid transparent;
+}
+#+END_SRC
+
+** 扇形
+https://codepen.io/tianheg/pen/zYmpKKG
+
+#+BEGIN_SRC css
+#cone {
+  width: 0;
+  height: 0;
+  border-left: 70px solid transparent;
+  border-right: 70px solid transparent;
+  border-top: 100px solid red;
+  border-radius: 50%;
+}
+#+END_SRC
+
+** 十字
+https://codepen.io/tianheg/pen/oNapzzB
+
+#+BEGIN_SRC css
+#cross {
+  background: red;
+  height: 100px;
+  position: relative;
+  width: 20px;
+}
+#cross::after {
+  background: red;
+  content: "";
+  height: 20px;
+  left: -40px;
+  position: absolute;
+  top: 40px;
+  width: 100px;
+}
+#+END_SRC
+
+** 房子：三角形+矩形
+https://codepen.io/tianheg/pen/QWZaKKz
+
+#+BEGIN_SRC css
+#base {
+  background: red;
+  display: inline-block;
+  height: 55px;
+  margin-left: 20px;
+  margin-top: 55px;
+  position: relative;
+  width: 100px;
+}
+#base::before {
+  border-bottom: 35px solid red;
+  border-left: 50px solid transparent;
+  border-right: 50px solid transparent;
+  content: "";
+  height: 0;
+  left: 0;
+  position: absolute;
+  top: -35px;
+  width: 0;
+}
+#+END_SRC
+
+** 有指向性的丝带
+https://codepen.io/tianheg/pen/rNqpMWN
+
+#+BEGIN_SRC css
+#pointer {
+  width: 200px;
+  height: 40px;
+  position: relative;
+  background: red;
+}
+#pointer::after {
+  content: "";
+  position: absolute;
+  left: 0;
+  bottom: 0;
+  width: 0;
+  height: 0;
+  border-left: 20px solid white;
+  border-top: 20px solid transparent;
+  border-bottom: 20px solid transparent;
+}
+#pointer::before {
+  content: "";
+  position: absolute;
+  right: -20px;
+  bottom: 0;
+  width: 0;
+  height: 0;
+  border-left: 20px solid red;
+  border-top: 20px solid transparent;
+  border-bottom: 20px solid transparent;
+}
+#+END_SRC
+
+** 锁形
+https://codepen.io/tianheg/pen/qBJpaqa
+
+#+BEGIN_SRC css
+#lock {
+  font-size: 8px;
+  position: relative;
+  width: 18em;
+  height: 13em;
+  border-radius: 2em;
+  top: 10em;
+  box-sizing: border-box;
+  border: 3.5em solid red;
+  border-right-width: 7.5em;
+  border-left-width: 7.5em;
+  margin: 0 0 6rem 0;
+}
+#lock::before {
+  content: "";
+  box-sizing: border-box;
+  position: absolute;
+  border: 2.5em solid red;
+  width: 14em;
+  height: 12em;
+  left: 50%;
+  margin-left: -7em;
+  top: -12em;
+  border-top-left-radius: 7em;
+  border-top-right-radius: 7em;
+}
+#lock::after {
+  content: "";
+  box-sizing: border-box;
+  position: absolute;
+  border: 1em solid red;
+  width: 5em;
+  height: 8em;
+  border-radius: 2.5em;
+  left: 50%;
+  top: -1em;
+  margin-left: -2.5em;
+}
+#+END_SRC
+
+** 倒角
+https://codepen.io/tianheg/pen/wvYpzox
+
+#+BEGIN_SRC css
+#curved-corner-bottomleft,
+#curved-corner-bottomright,
+#curved-corner-topleft,
+#curved-corner-topright {
+  width: 100px;
+  height: 100px;
+  overflow: hidden;
+  position: relative;
+}
+#curved-corner-bottomleft::before,
+#curved-corner-bottomright::before,
+#curved-corner-topleft::before,
+#curved-corner-topright::before {
+  content: "";
+  display: block;
+  width: 200%;
+  height: 200%;
+  position: absolute;
+  border-radius: 50%;
+}
+#curved-corner-bottomleft::before {
+  bottom: 0;
+  left: 0;
+  box-shadow: -50px 50px 0 0 red;
+}
+#curved-corner-bottomright::before {
+  bottom: 0;
+  right: 0;
+  box-shadow: 50px 50px 0 0 red;
+}
+#curved-corner-topleft::before {
+  top: 0;
+  left: 0;
+  box-shadow: -50px -50px 0 0 red;
+}
+#curved-corner-topright::before {
+  top: 0;
+  right: 0;
+  box-shadow: 50px -50px 0 0 red;
+}
+#+END_SRC
+
+参考资料
+
+- https://css-tricks.com/the-shapes-of-css/
+
+* Libraries
+** Bootstrap
+
+Bootstrap 是一个 CSS 框架。[[https://getbootstrap.com/]]
+
+一、必要条件
+
+#+BEGIN_SRC html
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Bootstrap demo</title>
+  </head>
+  <body>
+    <h1>Hello, world!</h1>
+  </body>
+</html>
+#+END_SRC
+
+全局 CSS 样式： =box-sizing: border-box= ，保证 padding 不干扰最终元素宽度计算。但有些时候，对于特定元素，需要设为 =content-box= 。
+
+Reboot 提供类似 [[https://github.com/sindresorhus/modern-normalize][modern-normalize]] 的功能，重置浏览器默认样式，以此保证跨浏览器样式一致。
