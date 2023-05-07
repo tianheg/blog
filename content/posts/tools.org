@@ -3,6 +3,12 @@
 #+TAGS[]: 备忘
 #+TOC: true
 
+* convert .mkv to .webm
+https://emacs.ch/@skybert/110315637030153305
+
+#+BEGIN_SRC sh
+ffmpeg -i foo.mkv -c:v libvpx -crf 10 -b:v 1M -c:a libvorbis foo.webm
+#+END_SRC
 * 技术
 ** Password
 https://rot256.dev/post/pass/ pass 软件的安全风险
