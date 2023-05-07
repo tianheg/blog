@@ -1,0 +1,14 @@
+#+TITLE: 搜索技术方案
+#+DATE: <2023-05-07 Sun 18:44>
+#+TAGS[]: 技术 他山之石
+
+{{< feynman >}}
+
+网站搜索在目前的环境下，选择 Embedding 而非全文索引是更好的选择。对于数据量不大的网站，不需要搭建一系列数据存储设施或购买昂贵的第三方存储服务。采用向量数据库，只在每次更新内容时才对数据库执行操作。将普通数据转换为向量数据，更好地利用向量数据库的优势。
+
+思路来自：https://twitter.com/dotey/status/1654541499722260482
+
+介绍向量数据库的一些文章：
+
+- [[https://openai.com/blog/introducing-text-and-code-embeddings][Introducing text and code embeddings]]
+- [[https://www.pinecone.io/learn/vector-database/][What is a Vector Database? | Pinecone]]
