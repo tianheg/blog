@@ -171,6 +171,7 @@ Install fcitx5，并安装词库、主题：
 -   Cantarell Regular
 -   Source Code Pro Regular
 -   Cantarell Bold
+- VF Cantonese https://visual-fonts.com/
 
 所有安装的字体：
 
