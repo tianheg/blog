@@ -5,6 +5,7 @@ wget -q https://github.com/CloudCannon/pagefind/releases/download/v$PAGEFIND_VER
 mv pagefind_extended /opt/build/repo/node_modules/.bin
 ## dart-sass-embedded
 wget -q https://github.com/sass/dart-sass-embedded/releases/download/$DART_SASS_VERSION/sass_embedded-$DART_SASS_VERSION-linux-x64.tar.gz -O - | tar -xz
-mv dart-sass-embedded /opt/build/repo/node_modules/.bin
+ls -al
+mv sass_embedded/dart-sass-embedded /opt/build/repo/node_modules/.bin
 dart-sass-embedded --version
 pnpm run all
