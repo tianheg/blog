@@ -9,7 +9,7 @@
     {{ if and (eq .Kind "section") .Content }}
         {{ partial "pages/post.html" . }}
     {{ else }}
-        <main class="main list" id="main">
+        <main class="main list" id="main" data-pagefind-ignore>
             <div class="main-inner">
                 <div class="content list-group">
                     {{ if .Site.Params.displayListTitle }}
