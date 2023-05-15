@@ -8,5 +8,6 @@ cd node_modules/.bin
 pwd
 ls -al
 mv sass_embedded/* .
+ls -al
 dart-sass-embedded --version
 pnpm run all
