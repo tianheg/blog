@@ -5,9 +5,12 @@ wget -q https://github.com/CloudCannon/pagefind/releases/download/v$PAGEFIND_VER
 ## dart-sass-embedded
 wget -q https://github.com/sass/dart-sass-embedded/releases/download/$DART_SASS_VERSION/sass_embedded-$DART_SASS_VERSION-linux-x64.tar.gz -O - | tar -xz -C /opt/build/repo/node_modules/.bin
 cd node_modules/.bin
-pwd
-ls -al
-mv sass_embedded/* .
-ls -al
+if [ -d "./src" ]; then
+  echo "src folder exist"
+else
+  echo "src folder does not exist"
+  mv sass_embedded/* .
+fi
+cd ../..
 dart-sass-embedded --version
 pnpm run all
