@@ -3,7 +3,7 @@
 const HUGO_VERSION = "0.111.3";
 const HUGO_ID = `hugo_extended_${HUGO_VERSION}`;
 const HOME = "archie";
-const HUGO_DIR = `/home/${HOME}/Downloads/hugo-ex`
+const HUGO_DIR = `/home/${HOME}/Downloads/hugo-ex`;
 await $`pwd`;
 await $`rm -rf ${HUGO_DIR}`;
 await $`mkdir ${HUGO_DIR}`;
