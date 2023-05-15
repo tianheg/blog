@@ -9,7 +9,7 @@
     {{ $prev := .Scratch.Get "prev" }}
     {{ $next := .Scratch.Get "next" }}
     {{ if or $prev $next }}
-        <ul class="post-nav">
+        <ul class="post-nav" data-pagefind-ignore>
             {{ if $next }}
                 <li class="post-nav-prev">
                     <a href="{{ $next.RelPermalink }}" rel="prev">&lt; {{ (partial "utils/title.html" (dict "$" $next "title" $next.LinkTitle)).htmlTitle }}</a>
