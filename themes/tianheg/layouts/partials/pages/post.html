@@ -3,13 +3,13 @@
 
         {{ $attrs := partial "utils/data-attributes.html" . }}
 
-        <article data-pagefind-body class="content post h-entry"
+        <article class="content post h-entry"
         {{- if $attrs.smallCaps }} data-small-caps="true"{{ end }}
         {{- with $attrs.align }} data-align="{{ . }}"{{ end }}
         {{- with $attrs.type }} data-type="{{ . }}"{{ end }}
         {{- with $attrs.layout }} data-layout="{{ . }}"{{ end }}
         {{- if $attrs.indent }} data-indent="true"{{ end }}
-        {{- if $attrs.tocNum }} data-toc-num="true"{{ end }}>
+        {{- if $attrs.tocNum }} data-toc-num="true"{{ end }} data-pagefind-body>
 
             <h1 class="post-title p-name">{{ (partial "utils/title.html" (dict "$" $ "title" $.Title)).htmlTitle }}</h1>
 
