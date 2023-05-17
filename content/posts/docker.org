@@ -55,7 +55,7 @@ sudo pacman -S docker-compose# so easy!
 ** non-root 执行命令
 
 #+BEGIN_SRC sh
-sudo groupadd docker
+# sudo groupadd docker 无需执行，安装 docker 相关软件后，docker 组已经创建完毕
 sudo usermod -aG docker $USER # 把 $USER 替换成当前用户
 ## 登出再登陆，使更改生效。也可以运行以下命令激活改变
 newgrp docker
