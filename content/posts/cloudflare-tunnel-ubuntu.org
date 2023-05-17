@@ -1,0 +1,48 @@
+#+TITLE: 使用 Cloudflare Tunnel 将本地网页暴露在公网中
+#+DATE: <2023-05-17 Wed 10:14>
+#+TAGS[]: 技术 Cloudflare
+
+{{< feynman >}}
+
+记录自己的配置过程。参考文章：[[https://pimylifeup.com/raspberry-pi-cloudflare-tunnel/][Setting up a Cloudflare Tunnel on the Raspberry Pi - Pi My Life Up]]
+
+-----
+
+树莓派3b闲了很长时间，想把它利用起来。重装了 Ubuntu 22.04 LTS。
+
+所有依次执行的命令：
+
+#+BEGIN_SRC sh
+sudo apt update
+sudo apt upgrade
+sudo apt install curl lsb-release
+curl -L https://pkg.cloudflare.com/cloudflare-main.gpg | sudo tee /usr/share/keyrings/cloudflare-archive-keyring.gpg >/dev/null
+echo "deb [signed-by=/usr/share/keyrings/cloudflare-archive-keyring.gpg] https://pkg.cloudflare.com/cloudflared $(lsb_release -cs) main" | sudo tee  /etc/apt/sources.list.d/cloudflared.list
+sudo apt update
+sudo apt install cloudflared
+cloudflared tunnel login # 点击出现的链接，选择域名
+cloudflared tunnel create TUNNELNAME
+cloudflared tunnel route dns TUNNELNAME DOMAINNAME
+cloudflared tunnel run --url localhost:PORT TUNNELNAME
+#+END_SRC
+
+设置 systemd 服务，使得开机自启：
+
+#+BEGIN_SRC sh
+sudo vim ~/.cloudflared/config.yml
+sudo cloudflared --config ~/.cloudflared/config.yml service install
+sudo systemctl enable cloudflared
+sudo systemctl start cloudflared
+#+END_SRC
+
+~/.cloudflared/config.yml:
+
+#+BEGIN_SRC yml
+tunnel: [TUNNELNAME]
+credentials-file: /home/[USERNAME]/.cloudflared/[UUID].json
+
+ingress:
+    - hostname: [HOSTNAME]
+      service: [PROTOCOL]://localhost:[PORT]
+    - service: http_status:404
+#+END_SRC
