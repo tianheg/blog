@@ -3,6 +3,36 @@
 #+TAGS[]: 技术 AI
 
 * 知识学习
+** 现代机器学习基础设施2.0新架构
+https://a16z.com/2020/10/15/emerging-architectures-for-modern-data-infrastructure/
+
+这个图概括了机器学习基础设施2.0的主要组成部分。它涵盖了从数据转换到模型集成的全过程。每个阶段的具体工具和技术也在括号中列出。以下是对这个图的大致解读：
+
+1、数据转换：这是机器学习的第一步，涉及对原始数据的预处理和标注。这个阶段使用的工具包括Snorkel和Sagemaker等。
+
+2、模型训练和开发：这个阶段涉及到模型诊断和扩展。使用的工具包括Nucleus和Aquarium。
+
+3、模型推理：这个阶段涉及到模型的实际应用。它可能会使用各种预训练模型库，如Hugging Face和ModelZoo，以及一些机器学习框架，如Scikit-learn、XGBoost和MLlib等。
+
+4、集成：这个阶段包括将模型集成到实际应用中，可能需要使用各种应用框架，如Flask、Streamlit和Rasa等。
+
+此外，这个图还提到了一些其他关键的机器学习基础设施组件，包括：
+
+- 数据源：原始数据的来源。
+- 工作流管理器：用于协调和管理机器学习工作流的工具，如Airflow、Prefect、Pachyderm等。
+- 查询引擎：用于查询和处理数据的工具，如Presto和Hive等。
+- 特征存储和服务器：用于存储和管理机器学习模型所需特征的工具，如Tecton、Feast和Databricks等。
+- 低代码机器学习：一些提供简单用户界面的工具，使非专业人员也能进行机器学习，如AutoML、H2O等。
+
+最后，图中还提到了一些与监控、审计、实验跟踪和分布式处理等相关的工具。这些都是机器学习基础设施的重要组成部分。
+
+#+BEGIN_EXPORT html
+<picture>
+<source srcset="/images/artificial-intelligence.avif" type="image/avif" />
+<img src="/images/artificial-intelligence.webp" alt="机器学习架构 2.0">
+<span class="caption">◎ 机器学习架构 2.0</span>
+</picture>
+#+END_EXPORT
 
 * Prompts 收集
 
@@ -81,3 +111,7 @@ Now, the initial question is: "Why do we need to use clean energy?"
 #+BEGIN_SRC txt
 从现在开始，你是一名中英翻译，你会根据我输入的中文内容，翻译成对应的英文。请注意，你翻译后的内容主要服务于一个绘画AI，它只能理解具象的描述而非抽象的概念，同时根据你对绘画AI的理解，比如它可能的训练模型、自然语言处理方式等方面，进行翻译优化。由于我的描述可能会很散乱，不连贯。你需要综合考虑这些问题，然后对翻译后的英文内容再次优化或重组，从而使绘画AI更能清楚我在说什么。请严格按照此条规则进行翻译，也只输出翻译后的英文内容。例如，我输入：一只想家的小狗。你不能输出：/imagine prompt: A homesick little dog. 你必须输出：/imagine prompt: A small dog that misses home, with a sad look on its face and its tail tucked between its legs. It might be standing in front of a closed door or a gate, gazing longingly into the distance, as if hoping to catch a glimpse of its beloved home. 如果你明白了，请回复“我准备好了”，当我输入中文内容后，请以“/imagine prompt:”作为开头，翻译我需要的英文内容。
 #+END_SRC
+
+* 工具
+
+- [[https://www.kivinsae.com/2023/03/05/2023-03-05-N26/][如何合法申请一张欧盟 N26 银行信用卡用于 ChatGPT | Kivinsae's Nest]]
