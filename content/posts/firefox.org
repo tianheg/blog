@@ -68,6 +68,9 @@ Refers:
 
 ** 支持 Wayland
 
+- https://wiki.archlinux.org/title/Firefox#Wayland
+- https://wiki.archlinux.org/title/Environment_variables#Wayland_environment
+
 为 Firefox 添加环境变量：=MOZ_ENABLE_WAYLAND=1=。
 
 =~/.config/environment.d/envvars.conf= ：
@@ -77,15 +80,22 @@ MOZ_ENABLE_WAYLAND=1
 #+END_SRC
 
 * Firefox v111.1.0 可以打开pdf链接而不是询问是否下载
+* Devtools
 
---------------
+用户文档：[[https://developer.mozilla.org/en-US/docs/Web#developer_tools_documentation]]
 
-参考资料
+工具站：[[https://www.canidev.tools/]] [[https://devtoolstips.org/]] [[https://css-tricks.com/tag/devtools/]] [[https://umaar.com/dev-tips/]]
 
-1. https://wiki.archlinux.org/title/Firefox#Wayland
-2. [[https://wiki.archlinux.org/title/Environment_variables#Wayland_environment]]
+- [[https://css-tricks.com/some-cross-browser-devtools-features-you-might-not-know/][Some Cross-Browser DevTools Features You Might Not Know | CSS-Tricks - CSS-Tricks]]
 
-* 使用需求
-** 阻止Bing跳转到中文
+搜索 DOM 树中的节点：Inspector 下的搜索框，然后 Scroll Into View 跳到对应节点（the node within the viewport）
 
-地址栏输入 =about:config= ，搜索 browser.search.region，改 CN 为 US。
+从 console 访问节点：$0 选中的 DOM 节点；临时变量 Right click -> "Use in Console"
+
+使用徽章可视化元素（[[https://firefox-source-docs.mozilla.org/devtools-user/page_inspector/how_to/examine_and_edit_html/index.html#html-tree][Ffdocs]]）
+
+给 DOM Node 截图；在响应式模式下截图
+
+Chrome Tip：Inspect the top layer
+
+Firefox Tip: Click label's for attribute, jump to id
