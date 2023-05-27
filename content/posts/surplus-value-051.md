@@ -9,10 +9,7 @@ draft = false
 
 剩余价值被封杀后，改名为随机波动。时隔两年，再听这一期，依然感受深刻。
 
-<figure style="margin: 0;">
-  <audio controls src="https://r2.tianheg.workers.dev/surplus-value-051.mp3" style="width: 100%;">Your browser does not support the <code>audio</code> element.</audio>
-  <figcaption style="color: var(--color-contrast-medium); text-align: center; font-size: 90%;">剩余价值SurplusValue：【051】瘟疫、语言和具体的人：与历史学家罗新的聊天</figcaption>
-</figure>
+<https://archive.org/details/20200226_20200226_1220>
 
 罗新老师的很多话语，放到 2022 年也没有过时。疫情究竟会持续多长时间？从 2020 年算起，这真的很容易计算，到今年已经过去两年。
 
