@@ -694,11 +694,14 @@ sh -c "$(wget -O- https://raw.githubusercontent.com/ohmyzsh/ohmyzsh/master/tools
 
 ## plugins
 git clone https://github.com/zsh-users/zsh-autosuggestions ~/.oh-my-zsh/custom/plugins/zsh-autosuggestions
-git clone https://github.com/zsh-users/zsh-syntax-highlighting.git ~/.oh-my-zsh/custom/plugins/zsh-syntax-highlighting
+git clone https://github.com/zsh-users/zsh-syntax-highlighting ~/.oh-my-zsh/custom/plugins/zsh-syntax-highlighting
 git clone https://gist.github.com/475ee7768efc03727f21.git ~/.oh-my-zsh/custom/plugins/git-auto-status
+mkdir ~/.oh-my-zsh/custom/plugins/pnpm
+wget -O- https://raw.githubusercontent.com/ntnyq/omz-plugin-pnpm/main/pnpm.plugin.zsh ~/.oh-my-zsh/custom/plugins/pnpm
 
 ## my configuration
-cp dotfiles/shell/zsh/zshrc ~/.zshrc
+cd ~/dotfiles
+stow zsh
 #+END_SRC
 
 ** z.lua
@@ -800,6 +803,22 @@ crontab -e
 
 # @hourly /path/to/backup_script_file
 #+END_SRC
+
+* dotfiles
+
+- https://farseerfc.me/zhs/using-gnu-stow-to-manage-your-dotfiles.html
+- https://wiki.archlinux.org/title/Dotfiles
+- http://dotshare.it/
+- https://dotfiles.github.io/
+- https://github.com/webpro/awesome-dotfiles
+
+GNU stow
+
+#+BEGIN_SRC sh
+pacman -S stow
+#+END_SRC
+
+[[https://github.com/tianheg/dotfiles]]
 
 * Virtualbox
 
@@ -1010,6 +1029,9 @@ yay -S google-chrome
 #+END_SRC
 
 * 非常用软件
+
+** stellarium 看星星
+https://stellarium.org/
 
 ** exercism
 
