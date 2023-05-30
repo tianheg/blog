@@ -1,0 +1,59 @@
+#+TITLE: Hugo 安装 dart-sass-embedded
+#+DATE: <2023-05-30 Tue 09:02>
+#+TAGS[]: 技术 Hugo
+
+{{< feynman >}}
+
+记录现在我知道的安装 dart-sass-embedded 的方法。
+
+-----
+
+* 为什么需要安装 dart-sass-embedded
+
+[[https://gohugo.io/hugo-pipes/transform-to-css/#options][refer]]
+
+在第一个 transplier 中，因为默认的 libsass 已经被官方在 2020 年[[https://sass-lang.com/blog/libsass-is-deprecated][宣布弃用]]（Deprecated）。，根据 Hugo 文档，可供选择的只有 dart-sass-embedded。
+
+* sass/dart-sass-embedded(ARCHIVED)
+
+虽然该项目已经于 2023 年 5 月 16 日归档了，但是还是可以通过其 Releases 下载当前最新版本 v1.62.1。
+
+下载脚本：
+
+#+BEGIN_SRC sh
+#!/usr/bin/env bash
+
+## dart-sass-embedded
+wget -q https://github.com/sass/dart-sass-embedded/releases/download/$DART_SASS_VERSION/sass_embedded-$DART_SASS_VERSION-linux-x64.tar.gz -O - | tar -xz -C ./node_modules/.bin
+cd node_modules/.bin
+if [ -d "./src" ]; then
+  echo "src folder exist"
+else
+  echo "src folder does not exist"
+  mv sass_embedded/* .
+  rm -rf sass_embedded
+fi
+export PATH=/project_absolute_path/node_modules/.bin:$PATH
+dart-sass-embedded --version
+#+END_SRC
+
+你会看到的输出：
+
+#+BEGIN_SRC txt
+{
+  "protocolVersion": "1.2.0",
+  "compilerVersion": "1.62.1",
+  "implementationVersion": "1.62.1",
+  "implementationName": "Dart Sass",
+  "id": 0
+}
+#+END_SRC
+
+* dart-sass
+
+dart-sass-embedded 将合并到 dart-sass 未来发布版本中。
+
+* Hugo 社区关于将 Dart Sass 引入 Hugo 的讨论
+
+- [[https://github.com/gohugoio/hugo/issues/8299][Bundle Embedded Dart Sass into Hugo installation process]] from Mar 5, 2021 to
+- [[https://discourse.gohugo.io/t/first-stable-release-of-dart-sass-embedded/36911/2][通用的 Linux 安装 dart-sass-embedded 以及在 Hugo templates 中使用的方法]]
