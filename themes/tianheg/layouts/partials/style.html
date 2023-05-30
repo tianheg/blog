@@ -1,11 +1,7 @@
-{{- $path := (strings.TrimPrefix "/" (printf `%s/css/tianheg.min.css` .Site.LanguagePrefix)) -}}
+{{- $path := (strings.TrimPrefix "/" (printf `/css/tianheg.min.css`)) -}}
 {{- $options := (dict "targetPath" $path "outputStyle" "compressed" "transpiler" "dartsass") -}}
 
-{{- $style := resources.Get "scss/main.scss" | resources.ExecuteAsTemplate (printf "%s/styles/main-rendered.scss" .Lang) . | resources.ToCSS $options -}}
-{{- if .Site.Params.enableFingerprint -}}
-    {{- $style = $style | resources.Fingerprint -}}
-    <link rel="stylesheet" href="{{ $style.RelPermalink }}" {{- if .Site.Params.enableSRI }} integrity="{{ $style.Data.Integrity }}" crossorigin="anonymous"{{- end -}}
-    />
-{{- else -}}
-    <link rel="stylesheet" href="{{ $style.RelPermalink }}" />
-{{- end -}}
+{{- $style := resources.Get "scss/main.scss" | resources.ExecuteAsTemplate (printf "/styles/main-rendered.scss") . | resources.ToCSS $options -}}
+
+{{- $style = $style | resources.Fingerprint -}}
+<link rel="stylesheet" href="{{ $style.RelPermalink }}" integrity="{{ $style.Data.Integrity }}" crossorigin="anonymous"/>
