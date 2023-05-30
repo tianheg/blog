@@ -1,0 +1,20 @@
+#+TITLE: Hugo 安装 Go 模块
+#+DATE: <2023-05-31 Wed 07:51>
+#+TAGS[]: 技术 Hugo
+
+{{< feynman >}}
+
+梳理如何为 Hugo 安装 Go 模块
+
+-----
+
+#+BEGIN_SRC sh
+hugo mod init github.com/tianheg/blog
+# add below content to config.toml/hugo.toml
+#+END_SRC
+
+#+BEGIN_SRC toml
+[module]
+[[module.imports]]
+path = "github.com/gohugoio/hugo-mod-bootstrap-scss/v5"
+#+END_SRC
