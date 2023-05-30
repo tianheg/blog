@@ -60,13 +60,17 @@
     margin: 0;
     padding-left: 2em;
     line-height: $lineHeight;
+
+    li > p {
+      margin: 0;
+    }
   }
   hr {
     border: none;
     margin: 2.427em 0 1.5em;
     text-align: center;
     &::after {
-      content: "···";
+      content: '···';
       letter-spacing: 2em;
       padding-left: 2em;
     }
@@ -215,7 +219,7 @@ dd {
 
 code {
   padding: calc($fontSize / 8) calc($fontSize / 4);
-  background-color: alpha(var(--color-contrast-medium), .5);
+  background-color: alpha(var(--color-contrast-medium), 0.5);
   font-size: 80%;
 }
 pre {
@@ -265,7 +269,7 @@ pre {
 }
 
 .katex-display,
-mjx-container[jax="CHTML"][display="true"] {
+mjx-container[jax='CHTML'][display='true'] {
   overflow: auto hidden;
   text-indent: 0;
 }
