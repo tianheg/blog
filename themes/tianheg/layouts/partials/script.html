@@ -34,7 +34,7 @@
     {{- end -}}
 {{- end -}}
 
-{{- $path := (strings.TrimPrefix "/" (printf `%s/js/tianheg.js` .Site.LanguagePrefix)) -}}
+{{- $path := (strings.TrimPrefix "/" (printf `/js/script.js`)) -}}
 
 {{- $script := $processedScripts | resources.Concat $path | resources.Minify -}}
 {{- if .Site.Params.enableFingerprint -}}
