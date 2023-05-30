@@ -1,0 +1,21 @@
+#+TITLE: Web Share API
+#+DATE: <2023-05-30 Tue 16:51>
+#+TAGS[]: 技术
+
+{{< feynman >}}
+
+了解 Share API 的简单使用
+
+-----
+
+[[https://developer.mozilla.org/en-US/docs/Web/API/Web_Share_API]]
+
+Share API 能帮助我们分享文字、链接、文件，和其他内容到指定地方；这些地方包括：系统剪贴板、邮件、联系人或消息应用，还有蓝牙或 Wi-Fi。使用时需要 HTTPS。
+
+在使用时，先用 =navigator.canShare()= 方法检查数据能否分享，之后用 =navigator.share()= 方法执行实际操作。
+
+Demo: [[https://codepen.io/tianheg/pen/qBJGogK]]
+
+在移动端，主流浏览器都已经支持；在桌面端，除 Edge 和 Safari 已经支持，Firefox 需修改配置，Chrome 和 Opera 仅在部分操作系统。
+
+今天（30 May 2023），Web Share API 成为 W3C 推荐标准。
