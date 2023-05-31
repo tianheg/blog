@@ -4,7 +4,6 @@
     {{- $scripts = union $scripts (slice "js/force-https.js") -}}
 {{- end -}}
 
-
 {{- $scripts = union $scripts (slice "js/header.js") -}}
 
 {{- if .Site.Params.enableNavToggle -}}
@@ -37,10 +36,20 @@
 {{- $path := (strings.TrimPrefix "/" (printf `/js/script.js`)) -}}
 
 {{- $script := $processedScripts | resources.Concat $path | resources.Minify -}}
-{{- if .Site.Params.enableFingerprint -}}
-    {{- $script = $script | resources.Fingerprint -}}
-    <script src="{{ $script.RelPermalink }}" {{- if .Site.Params.enableSRI }} integrity="{{ $script.Data.Integrity }}" crossorigin="anonymous"{{- end -}}
-    ></script>
-{{- else -}}
-    <script src="{{ $script.RelPermalink }}"></script>
-{{- end }}
+{{- $script = $script | resources.Fingerprint -}}
+
+<script src="{{ $script.RelPermalink }}" integrity="{{ $script.Data.Integrity }}" crossorigin="anonymous"></script>
+
+{{/* Load Bootstrap JS. */}}
+
+<!-- 
+https://github.com/gohugoio/hugo-mod-bootstrap-scss/blob/main/exampleSite/layouts/index.html
+{{ $js := resources.Get "js/main.js" }}
+{{ $params := dict }}
+{{ $sourceMap := cond hugo.IsProduction "" "inline" }}
+{{ $opts := dict "sourceMap" $sourceMap "minify" hugo.IsProduction "target" "es2018" "params" $params }}
+{{ $js = $js | js.Build $opts }}
+{{ if hugo.IsProduction }}
+{{ $js = $js | fingerprint }}
+{{ end }}  
+<script src="{{ $js.RelPermalink }}" integrity="{{ $js.Data.Integrity }}" defer></script> -->
