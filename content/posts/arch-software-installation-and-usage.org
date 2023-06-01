@@ -363,6 +363,23 @@ chmod 400 ~/.ssh/id_ed25519
 # 解决 sign_and_send_pubkey: signing failed for ED25519 "/home/user/.ssh/id_ed25519" from agent: agent refused operation; git@github.com: Permission denied (publickey).
 #+END_SRC
 
+** git-credential-oauth
+https://github.com/hickford/git-credential-oauth
+
+#+BEGIN_SRC sh
+## way 1
+export GCO_VERSION=0.7.0
+wget -q https://github.com/hickford/git-credential-oauth/releases/download/v${GCO_VERSION}/git-credential-oauth_${GCO_VERSION}_linux_amd64.tar.gz -O - | tar -xz -C .
+# three files: git-credential-oauth*  LICENSE.txt  README.md
+sudo mv git-credential-oauth /usr/local/bin
+
+## way 2
+yay -S git-credential-oauth
+
+### next step
+echo url=https://github.com | git credential fill # complete the authentication process
+#+END_SRC
+
 * GPG
 
 修改 =~/.gnupg/= 权限：
