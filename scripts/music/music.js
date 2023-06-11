@@ -31,7 +31,7 @@ fs.readFile('./scripts/music/likelist.json', 'utf8', (err, data) => {
   ejs.renderFile(
     './scripts/music/template.ejs',
     { songs },
-    { rmWhitespace: true },
+    { rmWhitespace: false },
     function (err, org) {
       if (err) throw err
       fs.writeFile('./content/music.org', unescape(org), function (err) {
