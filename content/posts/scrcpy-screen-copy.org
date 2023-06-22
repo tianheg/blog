@@ -1,0 +1,42 @@
+#+TITLE: 使用 scrcpy 在 Linux 桌面端控制 Android11 设备
+#+DATE: <2023-06-22 Thu 08:38>
+#+TAGS[]: 技术 Android
+
+{{< feynman >}}
+
+记录使用 scrcpy 控制 Android 设备的初步内容。
+
+-----
+
+我的系统环境：
+
+- Linux：Arch Linux
+- Android：Android11 by VIVO
+
+第一步：用数据线连接手机和主机。
+
+第二步：打开开发者选项。
+
+第三步：在 Arch Linux 上安装 scrcpy。
+
+#+BEGIN_SRC sh
+pacman -S scrcpy
+#+END_SRC
+
+第四步：开启连接。
+
+#+BEGIN_SRC sh
+## 第一次运行命令，会出现如下注释内容
+adb devices
+# * daemon not running; starting now at tcp:5037
+# * daemon started successfully
+# List of devices attached
+# 34785455670005T unauthorized
+## 再次运行，则正常显示 devices
+adb devices
+# List of devices attached
+# 34785455670005T device
+
+## 连接
+scrcpy -s 34785455670005T
+#+END_SRC
