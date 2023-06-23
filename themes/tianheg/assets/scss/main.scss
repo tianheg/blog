@@ -252,10 +252,6 @@ $baseRelURL: "{{ strings.TrimSuffix (.Site.BaseURL | relURL) "/" }}";
     @import "components/multilingual";
 {{ end }}
 
-{{ if or .Site.Params.enablePostMeta .Site.Params.enablePostMetaInHome }}
-    @import "components/post-meta";
-{{ end }}
-
 {{ if .Site.Params.enablePostGitInfo }}
     @import "components/post-gitinfo";
 {{ end }}
