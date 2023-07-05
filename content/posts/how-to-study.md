@@ -231,3 +231,4 @@ A 的学习方法：
 - [Learning - Wikipedia](https://en.wikipedia.org/wiki/Learning)
 - [Study skills - Wikipedia](https://en.wikipedia.org/wiki/Study_skills)
 - [如何成为有效学习的高手——许岑](https://mubu.com/doc/7y_4U_LGHg)
+- [How to Learn Better in the Digital Age](https://giansegato.com/essays/edutainment-is-not-learning)
