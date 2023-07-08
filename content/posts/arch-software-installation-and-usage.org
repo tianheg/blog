@@ -439,6 +439,31 @@ keysym k = k K Down
 
 在 KDE 桌面环境下，有方便的系统设置菜单，可以设置键盘映射。
 
+* 声音
+
+[[https://wiki.archlinux.org/title/Sound_system]]
+
+用到的软件：ALSA（驱动接口）、PipeWire & PulseAudio（声音服务器）
+
+错误日志：
+
+#+BEGIN_SRC log
+vlcpulse audio output error: stream connection failure: Bad state
+main audio output error: module not functional
+main decoder error: failed to create audio output
+
+pulse audio output error: overflow, flushing
+
+pulseaudio[6402]: Failed to create sink input: sink is suspended.
+#+END_SRC
+
+我又试了一次下面的命令，竟然可以了！
+
+#+BEGIN_SRC sh
+pulseaudio -k
+# Kill a running daemon
+#+END_SRC
+
 * pacman
 
 ** 添加 archlinuxcn
