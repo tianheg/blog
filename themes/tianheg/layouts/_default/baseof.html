@@ -3,7 +3,6 @@
     {{ partial "head.html" . }}
     <body>
         <div class="container">
-            {{ partial "header.html" . }}
             {{ if ne .Site.Params.headerLayout "flex" }}
                 {{ if or (and .IsHome .Site.Params.displayMenuInHome) (and (not .IsHome) .Site.Params.enableMenu) }}
                     {{ partial "menu.html" . }}
