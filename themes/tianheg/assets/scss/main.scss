@@ -178,21 +178,6 @@ $baseRelURL: "{{ strings.TrimSuffix (.Site.BaseURL | relURL) "/" }}";
     @import "components/theme-switcher";
 {{ end }}
 
-
-// Header
-
-{{ if .Site.Params.enableHeader }}
-    {{ with .Site.Params.headerBackground }}
-        $headerBackground: {{ . }};
-    {{ end }}
-
-    $siteBrandFontSize: {{ .Site.Params.siteBrandFontSize }}em;
-    $siteBrandFontColor: {{ .Site.Params.siteBrandFontColor }};
-
-    @import 'layout/header';
-{{ end }}
-
-
 // Menu Bar
 
 {{ if or .Site.Params.enableMenu (eq .Site.Params.headerLayout "flex") }}
