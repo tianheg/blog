@@ -1,11 +1,14 @@
 <main class="home">
-    <div class="poetry">
-        {{ with .Site.Params.logo }}
-        <div class="logo"><img src="{{ . | relURL }}" alt="logo" width="100" height="100"></div>
-        {{ end }}
-        {{ range .Site.Params.homePoetry }}
-            <p>{{ partial "utils/markdownify.html" (dict "$" $ "raw" . "isContent" false) }}</p>
-        {{ end }}
-    </div>
+  <div class="home-title">一大加贝</div>
+  <!-- <div class="home-title">\ /</div>
+  <div class="home-title">天贺</div> -->
+
+  <div class="poetry">
+    {{ with .Site.Params.logo }}
+    <div class="logo"><img src="{{ . | relURL }}" alt="logo" width="100" height="100" /></div>
+    {{ end }} {{ range .Site.Params.homePoetry }}
+    <p>{{ partial "utils/markdownify.html" (dict "$" $ "raw" . "isContent" false) }}</p>
+    {{ end }}
+  </div>
 </main>
 {{ partial "footer.html" . }}
