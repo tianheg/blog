@@ -8,17 +8,11 @@ draft = false
 
 <https://antfu.me/posts/domain-email>
 
-一直以来都很想要一个域名邮箱，现在终于有了。域地址名：me@tianeg.xyz。
+2021-12-17：
 
-使用 <https://forwardemail.net/en>（支持 GitHub 登录），只需要添加 3 条 DNS 记录：
+一直以来都很想要一个域名邮箱，现在终于有了。域地址名：me@tianheg.xyz（已弃用，2023-07-27）。
 
-```text
-MX   @  mx1.forwardemail.net  10
-MX   @  mx2.forwardemail.net  10
-TXT  @  forward-email=me:youremail@example.com
-```
-
-10 是优先级，me 则表示 `me@yidajiabei.xyz` ，当向该域名邮箱发送邮件时，邮件会被转发至 `youremail@example.com` 。
+使用 <https://forwardemail.net/en>（支持 GitHub 登录）
 
 2022-01-13 更新：
 
@@ -33,3 +27,7 @@ Cloudflare 提供一种名为 [Email Routing](https://blog.cloudflare.com/introd
 2022-11-02 更新：
 
 Mailgun 有免费服务，2022-04-27 所述的“付费”是使用，不需要付钱，但需要绑定银行卡。
+
+2023-07-27 更新：
+
+终于，我停止使用域名邮箱。因为它增加了额外的维护成本，从长远来看是低价值的，更何况通过域名邮箱收发邮件对我来说是一个低频操作，也就不再需要了。
