@@ -1,6 +1,6 @@
 #!/usr/bin/env zx
 
-const HUGO_VERSION = "0.116.0";
+const HUGO_VERSION = "0.117.0";
 const HUGO_ID = `hugo_extended_${HUGO_VERSION}`;
 const HOME = "archie";
 const HUGO_DIR = `/home/${HOME}/Downloads/hugo-ex`;
