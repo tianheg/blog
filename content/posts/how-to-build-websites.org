@@ -1,0 +1,158 @@
+#+TITLE: 如何构建网站
+#+DATE: <2023-08-12 Sat 06:03>
+#+TAGS[]: 技术
+
+{{< feynman >}}
+
+总结构建网站的流程；讲明白构建网站的步骤；随时间变迁可采用的技术栈。
+
+-----
+
+* 网站特点
+
+- 加载速度非常快
+- 各端适配无缺点
+
+* 网站组成部分
+
+** Favicon
+
+Favicon 是 favorite icon 的缩写。
+
+这些是使用 favicon 的最小集合。
+
+#+BEGIN_SRC html
+<link rel="icon" href="/favicon.ico" sizes="32x32">
+<link rel="icon" href="/icon.svg" type="image/svg+xml">
+<link rel="apple-touch-icon" href="/apple-touch-icon.png"><!-- 180×180 -->
+<link rel="manifest" href="/manifest.webmanifest">
+#+END_SRC
+
+#+BEGIN_SRC json
+// manifest.webmanifest
+{
+  "icons": [
+    { "src": "/icon-192.png", "type": "image/png", "sizes": "192x192" },
+    { "src": "/icon-512.png", "type": "image/png", "sizes": "512x512" }
+  ]
+}
+#+END_SRC
+
+只依靠 SVG 和浏览器缩放来制作这些 favicons。
+
+关于性能担忧：
+
+- 浏览器下载 favicons 时并不阻碍网站加载，因此不会影响浏览器性能
+- 使用 SVG 格式能够极大降低图片体积
+- 只需使用最少三张 PNG 格式图片即可满足制作这些 favicons 的需求
+
+一、favicon.ico 用于传统 Windows 浏览器
+
+建议使用 32x32 像素大小的。不至于太过模糊。
+
+二、SVG 格式的 icon 用于现代浏览器的明暗主题
+
+使用了 =@media (prefers-color-scheme: dark)= CSS 的相关知识。
+
+三、180x180 大小的 PNG 格式图片用于苹果设备
+
+可以在 icon 四周填充（padding） 20 像素的空白，并设置合适的背景色。
+
+四、192x192, 512x512 大小的 PNG 图片用于 Android 设备
+
+- 这种图片多用于 PWA（渐进式网页应用）。
+- 网页还应添加一个标签： =<link rel="manifest" href="path.webmanifest">= 。
+- Manifest 文件的填写应该像下面这样：
+
+#+BEGIN_SRC json
+{
+  "icons": [
+    { "src": "/icon-192.png", "type": "image/png", "sizes": "192x192" },
+    { "src": "/icon-512.png", "type": "image/png", "sizes": "512x512" }
+  ]
+}
+#+END_SRC
+
+如何构建 Favicon？
+
+使用 SVG 编辑器制作一个 SVG 格式图片。
+
+要求：
+
+1. 图片形状是正方形
+2. 图片命名为 =icon.svg=
+3. 使用 =@media (prefers-color-scheme: dark)= 添加明暗变化
+
+生成 favicon.ico
+
+要求：
+
+1. 大小为 32x32
+2. 32 bpp, 8-bit alpha, no palette settings
+
+使用 Inkscape 和 ImageMagick 在命令行进行转换：
+
+#+BEGIN_SRC sh
+inkscape ./icon.svg --export-width=32 --export-filename="./tmp.png"
+# In Windows call `magick convert ./tmp.png ./favicon.ico`
+convert ./tmp.png ./favicon.ico
+rm ./tmp.png
+#+END_SRC
+
+把生成的 favicon.ico 缩小到 16x16，查看 icon 的清晰度。如果太模糊的话，则需要单独设计一个缩小版本的 icon。
+
+创建 PNG 图片
+
+#+BEGIN_SRC sh
+inkscape ./icon.svg --export-width=512 --export-filename="./icon-512.png"
+inkscape ./icon.svg --export-width=192 --export-filename="./icon-192.png"
+#+END_SRC
+
+优化 PNG 和 SVG 图像
+
+使用 [[https://github.com/svg/svgo][SVGO]] 优化 SVG（要安装 Node.js）：
+
+#+BEGIN_SRC sh
+npx svgo --multipass icon.svg
+#+END_SRC
+
+使用 [[https://squoosh.app/][Squoosh]] 优化光栅图像：
+
+1. 上传要优化的 PNG 图片
+2. 在 Compress 选项下选择 OxiPNG
+3. 勾选 Reduce palette
+4. 设置 Colors 为 64
+5. 滑动带有双色左右箭头按钮，观察左右两边图片是否有区别，如果有增加 Colors，直到没有区别时不再增加
+6. 保存文件
+
+添加 icons 到 HTML
+
+#+BEGIN_SRC html
+<link rel="icon" href="/favicon.ico" sizes="32x32">
+<link rel="icon" href="/icon.svg" type="image/svg+xml">
+<link rel="apple-touch-icon" href="/apple-touch-icon.png">
+#+END_SRC
+
+创建 Web 应用 manifest
+
+文件命名为： =manifest.webmanifest= 。
+
+#+BEGIN_SRC json
+{
+  "name": "My website",
+  "icons": [
+    { "src": "/icon-192.png", "type": "image/png", "sizes": "192x192" },
+    { "src": "/icon-512.png", "type": "image/png", "sizes": "512x512" }
+  ]
+}
+#+END_SRC
+
+加到 HTML 中：
+
+#+BEGIN_SRC html
+<link rel="manifest" href="/manifest.webmanifest">
+#+END_SRC
+
+参考资料
+
+- [[https://evilmartians.com/chronicles/how-to-favicon-in-2021-six-files-that-fit-most-needs][How to Favicon in 2023: Six files that fit most needs—Martian Chronicles, Evil Martians’ team blog]]
