@@ -28,40 +28,15 @@
         {{ partial "script.html" . }}
     {{ end }}
 
-    <!-- Fonts -->
-    {{- with .Site.Params.fontsLink -}}
-        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-
-        <link rel="stylesheet" href="{{ . }}" media="print" onload="this.media='all'" />
-        <noscript><link rel="stylesheet" href="{{ . }}" /></noscript>
-    {{- end }}
-
     <meta name="author" content="{{ .Params.author | default .Site.Author.name }}" />
     {{- $description := .Description | default (partial "utils/summary.html" .) | default .Site.Params.siteDescription | plainify | htmlUnescape -}}
     <meta name="description" content="{{ $description }}" />
 
     <!-- Favicon, Icons, Web App -->
-    {{- $favicon := "favicon.svg" -}}
-    {{- $safariMaskIcon := "icons/safari-pinned-tab.svg" -}}
-    {{- $safariMaskColor := .Site.Params.safariMaskColor -}}
-    {{- $appleTouchIcon := "icons/apple-touch-icon.png" -}}
-    {{- $msApplicationStartURL := partial "utils/relative-url.html" (dict "$" . "filename" "") -}}
-    {{- $msApplicationTileColor := .Site.Params.msApplicationTileColor -}}
-    {{- $msApplicationTileImage := partial "utils/relative-url.html" (dict "$" . "filename" "icons/mstile-150x150.png") -}}
-    {{- $manifest := "manifest.json" -}}
-    <link rel="icon" href="{{ $favicon | relURL }}" type="image/svg+xml" />
-    <link rel="icon" href="/images/logo.png" type="image/png" />
-    <link rel="mask-icon" href="{{ $safariMaskIcon | relURL }}" color="{{ $safariMaskColor }}" />
-    <link rel="apple-touch-icon" sizes="180x180" href="{{ $appleTouchIcon | relURL }}" />
-    <meta name="apple-mobile-web-app-capable" content="yes" />
-    <meta name="apple-mobile-web-app-title" content="{{ .Site.Title }}" />
-    <meta name="apple-mobile-web-app-status-bar-style" content="black" />
-    <meta name="mobile-web-app-capable" content="yes" />
-    <meta name="application-name" content="{{ .Site.Title }}" />
-    <meta name="msapplication-starturl" content="{{ $msApplicationStartURL }}" />
-    <meta name="msapplication-TileColor" content="{{ $msApplicationTileColor }}" />
-    <meta name="msapplication-TileImage" content="{{ $msApplicationTileImage }}" />
-    <link rel="manifest" href="{{ $manifest | relURL }}" />
+    <link rel="icon" href="/favicon.ico" sizes="32x32">
+    <link rel="icon" href="/icon.svg" type="image/svg+xml" />
+    <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png" />
+    <link rel="manifest" href="/manifest.webmanifest" />
 
     <!-- Atom / RSS -->
     {{ with .OutputFormats.Get "SectionsAtom" -}}
