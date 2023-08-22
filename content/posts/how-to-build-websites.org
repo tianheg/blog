@@ -32,6 +32,7 @@ Favicon 是 favorite icon 的缩写。
 // manifest.webmanifest
 {
   "icons": [
+    { "src": "/icon-64.png", "type": "image/png", "sizes": "64x64" },
     { "src": "/icon-192.png", "type": "image/png", "sizes": "192x192" },
     { "src": "/icon-512.png", "type": "image/png", "sizes": "512x512" }
   ]
@@ -61,12 +62,15 @@ Favicon 是 favorite icon 的缩写。
 四、192x192, 512x512 大小的 PNG 图片用于 Android 设备
 
 - 这种图片多用于 PWA（渐进式网页应用）。
-- 网页还应添加一个标签： =<link rel="manifest" href="path.webmanifest">= 。
+- 网页还应添加一个标签： ~<link rel="manifest" href="path.webmanifest">~。 
 - Manifest 文件的填写应该像下面这样：
+
+五、64x64 大小的 PNG 图片用于桌面端 Chrome 安装 PWA 时使用
 
 #+BEGIN_SRC json
 {
   "icons": [
+    { "src": "/icon-64.png", "type": "image/png", "sizes": "64x64" },
     { "src": "/icon-192.png", "type": "image/png", "sizes": "192x192" },
     { "src": "/icon-512.png", "type": "image/png", "sizes": "512x512" }
   ]
@@ -93,7 +97,7 @@ Favicon 是 favorite icon 的缩写。
 使用 Inkscape 和 ImageMagick 在命令行进行转换：
 
 #+BEGIN_SRC sh
-inkscape ./icon.svg --export-width=32 --export-filename="./tmp.png"
+inkscape ./icon.svg -w 32 -o "./tmp.png"
 # In Windows call `magick convert ./tmp.png ./favicon.ico`
 convert ./tmp.png ./favicon.ico
 rm ./tmp.png
@@ -104,8 +108,8 @@ rm ./tmp.png
 创建 PNG 图片
 
 #+BEGIN_SRC sh
-inkscape ./icon.svg --export-width=512 --export-filename="./icon-512.png"
-inkscape ./icon.svg --export-width=192 --export-filename="./icon-192.png"
+inkscape ./icon.svg -w 512 -h 512 -o "./icon-512.png"
+inkscape ./icon.svg -w 192 -h 192 -o "./icon-192.png"
 #+END_SRC
 
 优化 PNG 和 SVG 图像
@@ -141,6 +145,7 @@ npx svgo --multipass icon.svg
 {
   "name": "My website",
   "icons": [
+    { "src": "/icon-64.png", "type": "image/png", "sizes": "64x64" },
     { "src": "/icon-192.png", "type": "image/png", "sizes": "192x192" },
     { "src": "/icon-512.png", "type": "image/png", "sizes": "512x512" }
   ]
