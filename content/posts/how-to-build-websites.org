@@ -32,7 +32,6 @@ Favicon 是 favorite icon 的缩写。
 // manifest.webmanifest
 {
   "icons": [
-    { "src": "/icon-64.png", "type": "image/png", "sizes": "64x64" },
     { "src": "/icon-192.png", "type": "image/png", "sizes": "192x192" },
     { "src": "/icon-512.png", "type": "image/png", "sizes": "512x512" }
   ]
@@ -65,12 +64,9 @@ Favicon 是 favorite icon 的缩写。
 - 网页还应添加一个标签： ~<link rel="manifest" href="path.webmanifest">~。 
 - Manifest 文件的填写应该像下面这样：
 
-五、64x64 大小的 PNG 图片用于桌面端 Chrome 安装 PWA 时使用
-
 #+BEGIN_SRC json
 {
   "icons": [
-    { "src": "/icon-64.png", "type": "image/png", "sizes": "64x64" },
     { "src": "/icon-192.png", "type": "image/png", "sizes": "192x192" },
     { "src": "/icon-512.png", "type": "image/png", "sizes": "512x512" }
   ]
@@ -114,7 +110,7 @@ inkscape ./icon.svg -w 192 -h 192 -o "./icon-192.png"
 
 优化 PNG 和 SVG 图像
 
-使用 [[https://github.com/svg/svgo][SVGO]] 优化 SVG（要安装 Node.js）：
+使用 [[https://github.com/svg/svgo][SVGO]] 优化 SVG（要安装 Node.js）（或者使用[[https://jakearchibald.github.io/svgomg/][SVGOMG]]）：
 
 #+BEGIN_SRC sh
 npx svgo --multipass icon.svg
@@ -145,7 +141,6 @@ npx svgo --multipass icon.svg
 {
   "name": "My website",
   "icons": [
-    { "src": "/icon-64.png", "type": "image/png", "sizes": "64x64" },
     { "src": "/icon-192.png", "type": "image/png", "sizes": "192x192" },
     { "src": "/icon-512.png", "type": "image/png", "sizes": "512x512" }
   ]
