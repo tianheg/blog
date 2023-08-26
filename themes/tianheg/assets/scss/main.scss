@@ -241,21 +241,6 @@ $baseRelURL: "{{ strings.TrimSuffix (.Site.BaseURL | relURL) "/" }}";
     @import "components/post-gitinfo";
 {{ end }}
 
-{{ if .Site.Params.enablePostShare }}
-    {{ if and .Site.Params.displayShareOnText }}
-        $displayShareOnText: true;
-    {{ else }}
-        $displayShareOnText: false;
-    {{ end }}
-
-    {{ if and .Site.Params.shareViaQRCode }}
-        $shareViaQRCode: true;
-    {{ else }}
-        $shareViaQRCode: false;
-    {{ end }}
-
-{{ end }}
-
 {{ if .Site.Params.enableRelatedPosts }}
     @import "components/related-posts";
 {{ end }}
