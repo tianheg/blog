@@ -46,8 +46,14 @@ draft = false
 >
 > 设计出一个让自己满意的标志外观固然很重要，但这仅仅是第一步，如何让人们认可它、记住它、唤醒它，才是一个标志真正的价值所在。
 
----
+
+> What’s a good criterion and directionality for a logo rebrand?
+>
+> In any kind of redesign, not just of a logo but of anything visual, it should be obvious which is the before and which is the after. The after should be visibly better, and if you can't tell which is which, then it isn't.
+>
+> Logos specifically tend to get simpler and more legible over time. Inexperienced founders regularly make the mistake of trading legibility for distinctiveness. This then gets fixed in redesigns.
 
 参考资料
 
-1.  <https://www.bilibili.com/video/BV1aT4y1w7yL>
+1. <https://www.bilibili.com/video/BV1aT4y1w7yL>
+2. <https://twitter.com/paulg/status/1693848122878001471?s=20>
