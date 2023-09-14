@@ -1,15 +1,16 @@
 #+TITLE: 搜索
 
 #+BEGIN_EXPORT html
-<link href="/_pagefind/pagefind-ui.css" rel="stylesheet">
-<script src="/_pagefind/pagefind-ui.js"></script>
+<link href="/pagefind/pagefind-ui.css" rel="stylesheet">
+<script src="/pagefind/pagefind-ui.js"></script>
 
 <div id="search" data-pagefind-ignore></div>
 <script>
   window.addEventListener('DOMContentLoaded', (event) => {
     new PagefindUI({
       element: "#search",
-      showImages: false
+      showImages: false,
+      showSubResults: true
     });
   });
 </script>
