@@ -12,7 +12,6 @@ title = "一大加贝"
 #[[module.imports]]
 #path = "github.com/gohugoio/hugo-mod-bootstrap-scss/v5"
 ## Can't use it, because of the poor network
-
 [permalinks]
 tags = "/tags/:slug/"
 
@@ -24,7 +23,9 @@ lastmod = ["lastmod", ":git", ":fileModTime", ":default"]
 
 [markup]
 defaultMarkdownHandler = "goldmark"
+
 [markup.goldmark]
+
 [markup.goldmark.extensions]
 definitionList = true
 footnote = true
@@ -33,14 +34,17 @@ strikethrough = true
 table = true
 taskList = true
 typographer = false
+
 [markup.goldmark.parser]
 attribute = true
 autoHeadingID = true
 autoHeadingIDType = "github"
+
 [markup.goldmark.renderer]
 hardWraps = false
 unsafe = true
 xHTML = false
+
 [markup.highlight]
 codeFences = true
 guessSyntax = true
@@ -49,6 +53,7 @@ lineNumbersInTable = false
 noClasses = false
 noHl = false
 tabWidth = 2
+
 [markup.tableOfContents]
 endLevel = 6
 ordered = true
@@ -68,19 +73,21 @@ website = "https://tianheg.co/"
 includeNewer = true
 threshold = 80
 toLower = true
+
 [[related.indices]]
 name = "tags"
 weight = 100
+
 [[related.indices]]
 name = "date"
 pattern = "2006"
 weight = 90
-[[related.indices]]
-name        = "fragmentrefs"
-type        = "fragments"
-applyFilter = false
-weight      = 80
 
+[[related.indices]]
+name = "fragmentrefs"
+type = "fragments"
+applyFilter = false
+weight = 80
 
 [mediaTypes."application/atom+xml"]
 suffixes = ["xml"]
@@ -104,40 +111,49 @@ term = ["HTML"]
 limit = 10
 
 [menu]
+
 [[menu.main]]
 name = "首页"
 pageRef = "/"
 weight = 1
+
 [[menu.main]]
 name = "关于"
 pageRef = "/about"
-weight = 1
+weight = 2
+
 [[menu.main]]
 name = "现在"
 pageRef = "/now"
 weight = 3
+
 [[menu.main]]
 name = "阅读"
 url = "/tags/reading/"
-weight = 5
+weight = 4
+
 [[menu.main]]
 name = "技术"
 url = "/tags/tech/"
-weight = 7
+weight = 5
+
 [[menu.main]]
-name="服务"
-pageRef="/service"
-weight = 9
+name = "服务"
+pageRef = "/service"
+weight = 6
+
 [[menu.main]]
 name = "归档"
 pageRef = "/posts"
-weight = 11
+weight = 7
+
 [[menu.main]]
 identifier = "theme-switcher"
-weight = 13
+weight = 8
+
 [[menu.main]]
 identifier = "menu-time"
-weight = 15
+weight = 9
 
 [params]
 displayMenuInHome = true
@@ -274,12 +290,12 @@ repoEditURL = "https://github.com/tianheg/blog/edit/main"
 repoURL = "https://github.com/tianheg/blog"
 tabSize = 2
 # Code Blocks
-enableCopy = true 
-enableCopyAutoHide = true 
+enableCopy = true
+enableCopyAutoHide = true
 enableFingerprint = true
-enableHighlight = true 
-enableOverflowY = false 
-enableSRI = true 
+enableHighlight = true
+enableOverflowY = false
+enableSRI = true
 maxHeight = 20 # Unit: em
 # 404 page
 fofPoster = "./images/flying-clouds-720p.jpg"
