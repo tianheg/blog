@@ -1,5 +1,5 @@
 {{- $path := (strings.TrimPrefix "/" (printf `/css/tianheg.min.css`)) -}}
-{{- $options := (dict "targetPath" $path "outputStyle" "compressed" "transpiler" "dartsass") -}}
+{{- $options := (dict "targetPath" $path "outputStyle" "compressed" "transpiler" "dartsass"  "includePaths" (slice "node_modules/bootstrap/scss")) -}}
 
 {{- $style := resources.Get "scss/main.scss" | resources.ExecuteAsTemplate (printf "/styles/main-rendered.scss") . | resources.ToCSS $options -}}
 
