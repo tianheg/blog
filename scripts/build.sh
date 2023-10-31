@@ -7,4 +7,4 @@ mkdir -p ./bin
 wget -q https://github.com/sass/dart-sass/releases/download/$DART_SASS_VERSION/dart-sass-$DART_SASS_VERSION-linux-x64.tar.gz -O - | tar -xz -C ./bin
 export PATH=./bin/dart-sass:$PATH
 sass --embedded --version
-pnpm run all
+bun run all
