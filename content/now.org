@@ -13,25 +13,7 @@
 
 -----
 
-#+BEGIN_EXPORT html                                                                 
-<ul id="memos"></ul>
-
-<script>
-async function getMemos() {
-  const response = await fetch("https://m.tianheg.co/api/v1/memo?creatorId=1&rowStatus=NORMAL&limit=20");
-  const jsonData = await response.json();
-  const memosContainer = document.getElementById("memos");
-  
-  jsonData.forEach(item => {
-    const listItem = document.createElement('li');
-    listItem.innerText = item.content;
-    memosContainer.appendChild(listItem);
-  })
-}
-
-getMemos();
-</script>
-#+END_EXPORT
+- 向查理芒格学习，跨学科的思维方式
 
 -----
 
