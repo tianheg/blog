@@ -1,17 +1,27 @@
 #+TITLE: 留言
 
 #+BEGIN_EXPORT html
-<div class="msg-form">
-  <form name="msg" netlify-honeypot="bot-field" action="/thanks" method="POST" netlify>
-    <p style="display:none;">
-      <label>Don’t fill this out: <input name="bot-field"></label>
-    </p>
-    <p><label>你的名字：<input type="text" name="name" required></label></p>
-    <p><label>你的邮箱：<input type="email" name="email" required></label></p>
-    <p><label>留言：<textarea name="msg" required></textarea></label></p>
-    <p><button type="submit">发送</button></p>
-  </form>
-</div>
+<form class="needs-validation" name="msg" netlify-honeypot="bot-field" action="/thanks" method="POST" netlify>
+  <div style="display:none;">
+    <label>Don’t fill this out: <input name="bot-field"></label>
+  </div>
+  <div class="d-flex justify-content-between align-items-center my-1">
+  <div class="col-3">
+    <label class="form-label" for="id">Id</label>
+    <input type="text" class="form-control" id="id" aria-describedby="idHelp" required>
+  </div>
+  <div class="col-6">
+    <label class="form-label" for="email">Email</label>
+    <input type="email" class="form-control" id="email" aria-describedby="emailHelp" required>
+  </div>
+  </div>
+  <div class="w-100 my-1">
+    <label class="form-label" for="text">留言框</label>
+    <textarea class="form-control" id="text" required></textarea>
+  </div>
+  <input class="btn btn-primary w-10" type="submit" value="Send">
+</form>
+
 <script>
 window.onload = function() {
   document.forms[0].reset();
