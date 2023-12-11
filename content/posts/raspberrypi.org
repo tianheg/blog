@@ -1,0 +1,163 @@
+#+TITLE: 树莓派
+#+DATE: <2023-12-11 Mon 16:35>
+#+TAGS[]: 技术
+
+树莓派默认用户名 =pi= ，默认密码 =raspberry= 。
+
+微雪墨水屏控制代码仓库（[[https://github.com/waveshareteam/e-Paper][GitHub]]）。
+
+微雪2.7inch e-Paper HAT（2.7英寸电子墨水屏）文档（[[https://www.waveshare.net/wiki/2.7inch_e-Paper_HAT][Wiki]]）。
+
+以下操作需提前配置网络。
+
+* 运行程序
+
+运行的测试程序： =examples/epd_2in7_test.py= 。
+
+#+BEGIN_SRC sh
+git clone https://github.com/waveshareteam/e-Paper.git
+vim e-Paper/RaspberryPi_JetsonNano/python/app.py
+#+END_SRC
+
+#+BEGIN_SRC py
+### e-Paper/RaspberryPi_JetsonNano/python/app.py
+
+#!/usr/bin/python
+# -*- coding:utf-8 -*-
+
+import sys
+import os
+picdir = os.path.join(os.path.dirname(os.path.realpath(__file__)), 'pic')
+libdir = os.path.join(os.path.dirname(os.path.dirname(os.path.realpath(__file__))), 'lib')
+if os.path.exists(libdir):
+    sys.path.append(libdir)
+
+import logging
+from waveshare_epd import epd2in7
+import time
+from PIL import Image,ImageDraw,ImageFont
+import traceback
+
+# custom
+from datetime import datetime
+import requests
+import RPi.GPIO
+
+button1 = 5
+button2 = 6
+button3 = 13
+button4 = 19
+
+RPi.GPIO.setmode(RPi.GPIO.BCM)
+RPi.GPIO.setup(button1, RPi.GPIO.IN, pull_up_down=RPi.GPIO.PUD_UP)
+RPi.GPIO.setup(button2, RPi.GPIO.IN, pull_up_down=RPi.GPIO.PUD_UP)
+RPi.GPIO.setup(button3, RPi.GPIO.IN, pull_up_down=RPi.GPIO.PUD_UP)
+RPi.GPIO.setup(button4, RPi.GPIO.IN, pull_up_down=RPi.GPIO.PUD_UP)
+
+epd = epd2in7.EPD()
+    
+epd.init()
+epd.Clear(0xFF)
+    
+font24 = ImageFont.truetype(os.path.join(picdir, 'Font.ttc'), 24)
+font16 = ImageFont.truetype(os.path.join(picdir, 'Font.ttc'), 16)
+font36 = ImageFont.truetype(os.path.join(picdir, 'Font.ttc'), 36)
+font84 = ImageFont.truetype(os.path.join(picdir, 'Font.ttc'), 84)
+
+# Location
+Lct = ['hangzhou','beijing','tianjin','shanghai']
+lct = Lct[0]
+c = 0
+
+def refreshWeather():
+    Himage = Image.new('1', (epd.height, epd.width), 255)  # 255: clear the frame
+    draw = ImageDraw.Draw(Himage)
+    
+    key = "YOUR_KEY"
+    url = "https://api.seniverse.com/v3/weather/now.json?key=" + key + "&location=" + lct + "&language=zh-Hans&unit=c"
+    
+    weaData = requests.get(url)
+    cityName = weaData.json()['results'][0]['location']['name'] # city
+    cityWea = weaData.json()['results'][0]['now']['text'] # weather
+    cityTemp = weaData.json()['results'][0]['now']['temperature'] + '°C' # temp
+    
+    draw.text((10, 10), cityName, font = font36, fill = 0)
+    draw.text((90, 10), cityWea, font = font36, fill = 0)
+    draw.text((10, 50), cityTemp, font = font84, fill = 0)
+    
+    # show the refresh date
+    dayTime = datetime.now().strftime('%Y-%m-%d %H:%M:%S')
+    draw.text((10, 150), u'更新时间：', font = font16, fill = 0)
+    draw.text((100, 150), dayTime, font = font16, fill = 0)
+    
+    epd.display(epd.getbuffer(Himage))
+
+try:
+    refreshWeather()
+    while True:
+        if RPi.GPIO.input(button1) == 0:
+            time.sleep(0.1)
+            if RPi.GPIO.input(button1) == 0:
+                c = c - 1
+                if c < 0:
+                    c = 3
+                lct = Lct[c]
+                refreshWeather()
+        if RPi.GPIO.input(button2) == 0:
+            time.sleep(0.1)
+            if RPi.GPIO.input(button2) == 0:
+                c = c + 1
+                if c >= 4:
+                    c = 0
+                lct = Lct[c]
+                refreshWeather()
+        if RPi.GPIO.input(button3) == 0:
+            epd.Clear(0xFF)
+        if RPi.GPIO.input(button4) == 0:
+            time.sleep(0.1)
+            if RPi.GPIO.input(button4) == 0:
+                epd2in7.epdconfig.module_exit()
+                exit()
+    
+except IOError as e:
+    logging.info(e)
+    
+except KeyboardInterrupt:    
+    logging.info("ctrl + c:")
+    epd2in7.epdconfig.module_exit()
+    exit()
+#+END_SRC
+
+感谢 @guanqr 的《[[https://guanqr.com/tech/computer/raspberry-pie-shows-the-weather-through-e-paper/][树莓派利用水墨屏显示实时天气状况]]》。
+
+* 结合 systemd 实现打开树莓派自动运行
+
+#+BEGIN_SRC sh
+sudo vim /etc/systemd/system/e-paper.service
+#+END_SRC
+
+#+BEGIN_SRC conf
+# systemd unit file for the e-Paper
+[Unit]
+# Human readable name of the unit
+Description=e-Paper
+
+[Service]
+# Command to execute when the service is started
+ExecStart=/usr/bin/python /home/pi/e-Paper/RaspberryPi_JetsonNano/python/app.py
+# Disable Python's buffering of STDOUT and STDERR, so that output from the
+# service shows up immediately in systemd's logs
+Environment=PYTHONUNBUFFERED=1
+# Automatically restart the service if it crashes
+Restart=on-failure
+# Our service will notify systemd once it is up and running
+Type=notify
+User=pi
+
+[Install]
+# Tell systemd to automatically start this service when the system boots
+# (assuming the service is enabled)
+WantedBy=default.target
+#+END_SRC
+
+感谢 [[https://github.com/torfsen/python-systemd-tutorial][torfsen/python-systemd-tutorial]]。
