@@ -27,7 +27,7 @@ pandoc -f markdown -t org -o output_file.org input_file.md
 sudo mkdir -p /etc/docker
 sudo tee /etc/docker/daemon.json <<-'EOF'
 {
-  "registry-mirrors": ["https://9natnp0v.mirror.aliyuncs.com"]
+  "registry-mirrors": ["..."]
 }
 EOF
 sudo systemctl daemon-reload
