@@ -135,6 +135,28 @@ sudo netstat -lntp | grep dockerd
 # tcp        0      0 127.0.0.1:2375          0.0.0.0:*               LISTEN      8823/dockerd
 #+END_SRC
 
+** 更改 data-root
+
+这样做的原因：硬盘容量不足，将位置转移到另一块硬盘。
+
+#+BEGIN_SRC sh
+sudo systemctl stop docker
+sudo systemctl stop docker.socket
+sudo mv /var/lib/docker /mnt/disk/
+sudo ln -s /mnt/disk/docker /var/lib/docker
+sudo vim /etc/docker/daemon.json
+sudo systemctl start docker
+sudo systemctl start docker.socket
+#+END_SRC
+
+在 =/etc/docker/daemon.json= 中添加以下内容：
+
+#+BEGIN_SRC json
+{
+    "data-root": "/mnt/disk/docker"
+}
+#+END_SRC
+
 * 入门指南
 ** 什么是容器？
 容器可以看作计算机的进程，但它与一般进程是隔离的。这种隔离策略使用了已经存在很多年的 Linux 内核的特性——命名空间和控制组 cgroups。
