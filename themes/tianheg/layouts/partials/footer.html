@@ -2,8 +2,7 @@
   <footer id="footer" class="footer">
     <div class="footer-inner">
       <div class="site-info">
-        写在&nbsp;{{- dateFormat "2006" (time .Site.Params.siteCreatedTime) -}}–
-        {{- now.Format "2006 " -}}&nbsp;by &nbsp; {{- .Site.Author.name -}}
+      {{- dateFormat "2006" (time .Site.Params.siteCreatedTime) -}} – now &nbsp; by &nbsp; {{- .Site.Author.name -}}
       </div>
     </div>
   </footer>
