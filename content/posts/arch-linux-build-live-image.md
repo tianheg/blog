@@ -22,18 +22,18 @@ cp -r /usr/share/archiso/configs/releng/ archlive
 
 1.  配置文件结构
 
-<!--listend-->
-
 ```txt
+from https://gitlab.archlinux.org/archlinux/archiso/-/blob/master/docs/README.profile.rst
+
 profile/
-├── airoot
-├── efibo
-├── syslin
-├── gr
-├── bootstrap_packages.a
-├── packages.a
-├── pacman.c
-└── profiledef
+├── airootfs/
+├── efiboot/
+├── syslinux/
+├── grub/
+├── bootstrap_packages.arch
+├── packages.arch
+├── pacman.conf
+└── profiledef.sh
 ```
 
 1.  添加需要的包，在明确了解的情况下删除包
@@ -138,9 +138,7 @@ SDDM 登陆管理器已经配置好了，但是无法登陆 archie 用户，密�
 
 后来我意识到，根本不需要在镜像中安装图形化界面，于是我对 packages.x86_64 进行了精简，但是我并不知道哪些包对镜像构建是必须的，所以只能根据安装镜像时返回的错误来判断。
 
-有一次，刚在 VirtualBox 启动镜像，界面显示找不到 /boot/intel-ucode.img 然后就无法继续进行了，图片内容如下。
-
-![](/images/arch-build-live-image-0.png "Kernel panic")
+有一次，刚在 VirtualBox 启动镜像，界面显示找不到 /boot/intel-ucode.img 然后就无法继续进行。
 
 于是，我就猜测可能是少了 intel-ucode 这个包。
 
