@@ -62,6 +62,8 @@
         {{ partial "utils/open-graph.html" (dict "$" $ "description" $description) }}
     {{- end }}
 
-    <script async src="https://wa.tianheg.org/script.js" data-website-id="33e67c4a-ae20-46fe-9094-bdb971a5a709"></script>
-    <script defer src='https://static.cloudflareinsights.com/beacon.min.js' data-cf-beacon='{"token": "93ad60aec77748c9932fb0a960a666fa"}'></script>
+    {{- if hugo.IsProduction -}}
+      <script async src="https://wa.tianheg.org/script.js" data-website-id="33e67c4a-ae20-46fe-9094-bdb971a5a709"></script>
+      <script defer src='https://static.cloudflareinsights.com/beacon.min.js' data-cf-beacon='{"token": "93ad60aec77748c9932fb0a960a666fa"}'></script>
+    {{- end -}}
 </head>
