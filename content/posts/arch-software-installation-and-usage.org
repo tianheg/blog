@@ -494,6 +494,7 @@ Server = https://repo.archlinuxcn.org/$arch
 导入 PGP 公匙（为了验证 archlinuxcn 库）：
 
 #+BEGIN_SRC sh
+pacman-key --lsign-key "farseerfc@archlinux.org" # for error: ...is marginal trust
 pacman -Syy && pacman -S archlinuxcn-keyring
 #+END_SRC
 
