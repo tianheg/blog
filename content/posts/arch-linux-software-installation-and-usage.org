@@ -65,6 +65,66 @@ Depends = reflector
 Exec = /bin/sh -c 'systemctl start reflector.service; [ -f /etc/pacman.d/mirrorlist.pacnew ] && rm /etc/pacman.d/mirrorlist.pacnew'
 #+END_SRC
 
+* 网络
+
+中兴 F30 随身 Wifi 无法连接网络，显示 =Limited Connectivity（This device appears to be connected to a network but is unable to reach the internet.）= 。
+
+在英文 ArchLinux 论坛看到一个[[https://bbs.archlinux.org/viewtopic.php?id=88152][帖子]]与随身 Wifi 相关的。
+
+插上随身 Wifi 后，输入 =lsusb= 命令，找到对应的英文名称 =ZTE WCDMA Technologies MSM SZXF Mobile Boardband= 。经过搜索之后，我判断是近期和 NetworkManager 相关的包升级后出的问题。
+
+一些插上随身 Wifi 的 =journalctl -f= 的日志输出：
+
+#+BEGIN_SRC log
+Jan 21 22:50:39 arch kernel: usb 1-1.4: new high-speed USB device number 10 using xhci_hcd
+Jan 21 22:50:39 arch kernel: usb 1-1.4: New USB device found, idVendor=19d2, idProduct=1225, bcdDevice= 1.01
+Jan 21 22:50:39 arch kernel: usb 1-1.4: New USB device strings: Mfr=2, Product=4, SerialNumber=5
+Jan 21 22:50:39 arch kernel: usb 1-1.4: Product: SZXF Mobile Boardband
+Jan 21 22:50:39 arch kernel: usb 1-1.4: Manufacturer: SZXF,Incorporated
+Jan 21 22:50:39 arch kernel: usb 1-1.4: SerialNumber: 1234567890ABCDEF
+Jan 21 22:50:39 arch kernel: usb-storage 1-1.4:1.0: USB Mass Storage device detected
+Jan 21 22:50:39 arch kernel: usb-storage 1-1.4:1.0: Quirks match for vid 19d2 pid 1225: 1
+Jan 21 22:50:39 arch kernel: scsi host3: usb-storage 1-1.4:1.0
+Jan 21 22:50:39 arch mtp-probe[10214]: checking bus 1, device 10: "/sys/devices/pci0000:00/0000:00:14.0/usb1/1-1/1-1.4"
+Jan 21 22:50:39 arch mtp-probe[10214]: bus: 1, device: 10 was not an MTP device
+Jan 21 22:50:39 arch mtp-probe[10226]: checking bus 1, device 10: "/sys/devices/pci0000:00/0000:00:14.0/usb1/1-1/1-1.4"
+Jan 21 22:50:39 arch mtp-probe[10226]: bus: 1, device: 10 was not an MTP device
+Jan 21 22:50:40 arch kernel: scsi 3:0:0:0: CD-ROM            SZXF     USB SCSI CD-ROM  2.31 PQ: 0 ANSI: 2
+Jan 21 22:50:40 arch kernel: sr 3:0:0:0: Power-on or device reset occurred
+Jan 21 22:50:40 arch kernel: sr 3:0:0:0: [sr0] scsi-1 drive
+Jan 21 22:50:40 arch kernel: sr 3:0:0:0: Attached scsi CD-ROM sr0
+Jan 21 22:50:43 arch kernel: usb 1-1.4: USB disconnect, device number 10
+Jan 21 22:50:43 arch kernel: usb 1-1.4: new high-speed USB device number 11 using xhci_hcd
+Jan 21 22:50:44 arch kernel: usb 1-1.4: New USB device found, idVendor=19d2, idProduct=1557, bcdDevice= 1.01
+Jan 21 22:50:44 arch kernel: usb 1-1.4: New USB device strings: Mfr=2, Product=4, SerialNumber=5
+Jan 21 22:50:44 arch kernel: usb 1-1.4: Product: SZXF Mobile Boardband 
+Jan 21 22:50:44 arch kernel: usb 1-1.4: Manufacturer: SZXF,Incorporated
+Jan 21 22:50:44 arch kernel: usb 1-1.4: SerialNumber: 1234567890ABCDEF
+Jan 21 22:50:44 arch kernel: cdc_ether 1-1.4:1.0 eth0: register 'cdc_ether' at usb-0000:00:14.0-1.4, ZTE CDC Ethernet Device, 34:4b:50:00:00:00
+Jan 21 22:50:44 arch kernel: usb-storage 1-1.4:1.2: USB Mass Storage device detected
+Jan 21 22:50:44 arch kernel: scsi host3: usb-storage 1-1.4:1.2
+Jan 21 22:50:44 arch NetworkManager[511]: <info>  [1705848644.0628] manager: (eth0): new Ethernet device (/org/freedesktop/NetworkManager/Devices/67)
+Jan 21 22:50:44 arch mtp-probe[10245]: checking bus 1, device 11: "/sys/devices/pci0000:00/0000:00:14.0/usb1/1-1/1-1.4"
+Jan 21 22:50:44 arch mtp-probe[10245]: bus: 1, device: 11 was not an MTP device
+Jan 21 22:50:44 arch NetworkManager[511]: <info>  [1705848644.0764] audit: op="statistics" interface="eth0" ifindex=59 args="500" pid=1018 uid=1000 result="success"
+Jan 21 22:50:44 arch NetworkManager[511]: <info>  [1705848644.0848] audit: op="statistics" interface="eth0" ifindex=59 args="500" pid=1018 uid=1000 result="success"
+Jan 21 22:50:44 arch kernel: cdc_ether 1-1.4:1.0 enp0s20f0u1u4: renamed from eth0
+Jan 21 22:50:44 arch NetworkManager[511]: <info>  [1705848644.1406] device (eth0): interface index 59 renamed iface from 'eth0' to 'enp0s20f0u1u4'
+Jan 21 22:50:44 arch NetworkManager[511]: <info>  [1705848644.1626] device (enp0s20f0u1u4): state change: unmanaged -> unavailable (reason 'managed', sys-iface-state: 'external')
+Jan 21 22:50:44 arch NetworkManager[511]: <info>  [1705848644.1669] device (enp0s20f0u1u4): carrier: link connected 
+Jan 21 22:50:44 arch NetworkManager[511]: <info>  [1705848644.1680] device (enp0s20f0u1u4): state change: unavailable -> disconnected (reason 'carrier-changed', sys-iface-state: 'managed')
+Jan 21 22:50:44 arch tailscaled[669]: monitor: RTM_DELROUTE: src=, dst=ff00::/8, gw=, outif=59, table=255
+Jan 21 22:50:44 arch mtp-probe[10264]: checking bus 1, device 11: "/sys/devices/pci0000:00/0000:00:14.0/usb1/1-1/1-1.4"
+Jan 21 22:50:44 arch mtp-probe[10264]: bus: 1, device: 11 was not an MTP device
+Jan 21 22:50:44 arch NetworkManager[511]: <info>  [1705848644.1821] device (enp0s20f0u1u4): state change: disconnected -> unavailable (reason 'carrier-changed', sys-iface-state: 'managed')
+Jan 21 22:50:45 arch kernel: scsi 3:0:0:0: Direct-Access     SZXF MMC  Storage 2.31         PQ: 0 ANSI: 2
+Jan 21 22:50:45 arch kernel: sd 3:0:0:0: Power-on or device reset occurred
+Jan 21 22:50:45 arch kernel: sd 3:0:0:0: [sdc] Media removed, stopped polling
+Jan 21 22:50:45 arch kernel: sd 3:0:0:0: [sdc] Attached SCSI removable disk
+#+END_SRC
+
+也出现了 =wpa_supplicant[575]: wlp3s0: CTRL-EVENT-BEACON-LOSS=
+
 * 设置代理
 
 ** Clash
