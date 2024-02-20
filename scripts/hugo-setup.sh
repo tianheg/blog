@@ -1,6 +1,6 @@
 #!/usr/bin/env sh
 
-HUGO_VERSION="0.122.0"
+HUGO_VERSION="0.123.0"
 HUGO_ID="hugo_extended_${HUGO_VERSION}"
 HOME="archie"
 HUGO_DIR="/home/${HOME}/Downloads/hugo-ex"
