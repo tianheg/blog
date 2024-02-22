@@ -1107,6 +1107,31 @@ pacman -S gthumb
 # pnpm config set registry https://registry.npmmirror.com
 #+END_SRC
 
+** Go
+** Rust
+https://wiki.archlinux.org/title/Rust
+
+#+BEGIN_SRC sh
+pacman -S rustup && rustup default stable
+#+END_SRC
+
+China mirror( https://RsProxy.cn maintained by the ByteDance team.)
+
+设置 crates.io 镜像， 修改配置 ~/.cargo/config，已支持git协议和sparse协议，>=1.68 版本建议使用 sparse-index，速度更快
+
+#+BEGIN_SRC conf
+[source.crates-io]
+replace-with = 'rsproxy-sparse'
+[source.rsproxy]
+registry = "https://rsproxy.cn/crates.io-index"
+[source.rsproxy-sparse]
+registry = "sparse+https://rsproxy.cn/index/"
+[registries.rsproxy]
+index = "https://rsproxy.cn/crates.io-index"
+[net]
+git-fetch-with-cli = true
+#+END_SRC
+
 ** Scheme
 
 [[https://www.scheme.org/]]
