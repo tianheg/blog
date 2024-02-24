@@ -161,29 +161,6 @@ ul {
   vertical-align: baseline;
 }
 
-@if ($enableAnchorAutoHide) {
-  :root {
-    --anchor-opacity: 0;
-  }
-  .anchor-link {
-    opacity: var(--anchor-opacity);
-    transition: all calc($duration / 2);
-  }
-  .post {
-    h1,
-    h2,
-    h3,
-    h4,
-    h5,
-    h6,
-    .anchor-link {
-      &:hover {
-        --anchor-opacity: 1;
-      }
-    }
-  }
-}
-
 .table-container {
   margin: 2em 0;
   overflow-x: auto;
