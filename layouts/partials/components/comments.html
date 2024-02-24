@@ -1,4 +1,4 @@
-{{ if and (.Params.comments | default .Site.Params.enableComments)}}
+{{ if and (.Params.comments | default true)}}
   <div class="comments">
     {{ if or (in .Site.Params.mainSections .Section) .Params.comments }}
     <div style="padding-block: 50px; text-align: center; border-block: 1px dashed gray;">欢迎通过「<a href="mailto:i@tianheg.co?subject=评论：{{ .Title }}">邮件</a>」或者点击「<a href="/msg">这里</a>」告诉我你的想法</div>

@@ -1,41 +1,30 @@
 {{- $Content := partial "utils/markdownify.html" (dict "$" . "raw" .Content "isContent" true) -}}
 
 <!-- Link Headings to TOC -->
-{{- $enableTOC := .Params.toc | default .Site.Params.enableTOC -}}
+{{- $enableTOC := .Params.toc -}}
 {{- if and $enableTOC .Site.Params.linkHeadingsToTOC -}}
-    {{- $regexPatternLinkHeadings := `(<h[1-6] id="([^"]+)">)(.+)?(</h[1-6]+>)` -}}
-    {{- $regexReplacementLinkHeadings := `$1<a href="#contents:$2" class="headings">$3</a>$4` -}}
-    {{- $Content = $Content | replaceRE $regexPatternLinkHeadings $regexReplacementLinkHeadings -}}
+  {{- $regexPatternLinkHeadings := `(<h[1-6] id="([^"]+)">)(.+)?(</h[1-6]+>)` -}}
+  {{- $regexReplacementLinkHeadings := `$1<a href="#contents:$2" class="headings">$3</a>$4` -}}
+  {{- $Content = $Content | replaceRE $regexPatternLinkHeadings $regexReplacementLinkHeadings -}}
 {{- end -}}
 
 <!-- Headings Anchor -->
-{{- if .Params.anchor | default .Site.Params.enableHeadingsAnchor -}}
-    {{- with .Site.Params.headingsOpt -}}
-        {{- $headings := . -}}
-        {{- $.Scratch.Set "headings" $headings -}}
-    {{- end -}}
-    {{- $headings := .Scratch.Get "headings" -}}
-    {{- $headings := $headings | default "1-6" -}}
+{{- if .Params.anchor -}}
+  {{- $headings := .Scratch.Get "headings" -}}
+  {{- $headings := $headings | default "1-6" -}}
 
-    {{- with .Site.Params.anchorIcon -}}
-        {{- $icon := (replace (index $.Site.Data.SVG .) "icon" "icon anchor-icon") -}}
-        {{- $.Scratch.Set "icon" $icon -}}
-    {{- end -}}
-    {{- $icon := .Scratch.Get "icon" -}}
-    {{- $anchor := $icon | default .Site.Params.anchorSymbol | default "§" -}}
+  
+  {{- $icon := .Scratch.Get "icon" -}}
+  {{- $anchor := $icon | default "§" -}}
+  
+  {{- $replacement := (printf `$1<span class="anchor-link">%s</span>$3$4` $anchor) -}}
+  {{- $.Scratch.Set "replacement" $replacement -}}
+  
+  {{- $replacement := .Scratch.Get "replacement" -}}
 
-    {{- if .Site.Params.enableAnchorLink -}}
-        {{- $replacement := (printf `$1<a href="#$2" class="anchor-link">%s</a>$3$4` $anchor) -}}
-        {{- $.Scratch.Set "replacement" $replacement -}}
-    {{- else -}}
-        {{- $replacement := (printf `$1<span class="anchor-link">%s</span>$3$4` $anchor) -}}
-        {{- $.Scratch.Set "replacement" $replacement -}}
-    {{- end -}}
-    {{- $replacement := .Scratch.Get "replacement" -}}
-
-    {{- $regexPatternHeadingsAnchor := (printf `(<h[%s] id="([^"]+)">)(.+)?(</h[%s]+>)` $headings $headings) -}}
-    {{- $regexReplacementHeadingsAnchor := $replacement -}}
-    {{- $Content = $Content | replaceRE $regexPatternHeadingsAnchor $regexReplacementHeadingsAnchor -}}
+  {{- $regexPatternHeadingsAnchor := (printf `(<h[%s] id="([^"]+)">)(.+)?(</h[%s]+>)` $headings $headings) -}}
+  {{- $regexReplacementHeadingsAnchor := $replacement -}}
+  {{- $Content = $Content | replaceRE $regexPatternHeadingsAnchor $regexReplacementHeadingsAnchor -}}
 {{- end -}}
 
 <!-- Drop Cap -->
@@ -59,13 +48,7 @@
 {{- $enableDropCapAfterHr := .Params.dropCapAfterHr | default .Site.Params.enableDropCapAfterHr -}}
 {{- if ne .Type "poetry" -}}
     {{- if $enableDropCapAfterHr -}}
-        {{- if .Params.deleteHrBeforeDropCap | default .Site.Params.deleteHrBeforeDropCap -}}
-            {{- $replacement := `$3 style="text-indent:0"$4<span class="drop-cap">$5</span>` -}}
-            {{- $.Scratch.Set "replacement" $replacement -}}
-        {{- else -}}
-            {{- $replacement := `$1$3 style="text-indent:0"$4<span class="drop-cap">$5</span>` -}}
-            {{- $.Scratch.Set "replacement" $replacement -}}
-        {{- end -}}
+        
         {{- $replacement := .Scratch.Get "replacement" -}}
 
         {{- $regexPatternDropCapAfterHr := `(\n(<hr />|<hr>))(\n<p)(>)([^<])` -}}
@@ -102,15 +85,6 @@
 {{- $regexPatternFootnoteImage := `(<sup)(.+</sup><(img|video))` -}}
 {{- $regexReplacementFootnoteImage := `$1 style="float:right"$2` -}}
 {{- $Content = $Content | replaceRE $regexPatternFootnoteImage $regexReplacementFootnoteImage -}}
-
-<!-- Image & Video Caption -->
-{{- if .Site.Params.enableCaption -}}
-    {{- $captionPrefix := .Site.Params.captionPrefix -}}
-    {{- $regexPatternCaption := `(<(img|video).+) title="([^"]+)"( controls)?( />|>)(</video>)?` -}}
-    {{- $regexReplacementCaption := (printf `$1$4$5$6<span class="caption">%s$3</span>` $captionPrefix) -}}
-    {{- $Content = $Content | replaceRE $regexPatternCaption $regexReplacementCaption -}}
-{{- end -}}
-
 
 <!-- Video Hosting -->
 {{- if and .Site.Params.enableVideoHost (eq hugo.Environment "production") -}}

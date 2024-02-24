@@ -11,17 +11,13 @@
 {{- $toc = $toc | replaceRE $regexPatternTOC $regexReplacementTOC -}}
 
 <!-- Inject TOC Title -->
-{{- if .Site.Params.displayTOCTitle -}}
-    {{- $regexPatternTOC := `(<nav class="contents">\n.+)(<(ol|ul) class="toc">)` -}}
-    {{- $regexReplacementTOC := (printf `$1<h2 id="contents" class="contents-title">%s</h2>$2` (i18n "tocTitle")) -}}
-    {{- $toc = $toc | replaceRE $regexPatternTOC $regexReplacementTOC -}}
-{{- end -}}
+{{- $regexPatternTOC := `(<nav class="contents">\n.+)(<(ol|ul) class="toc">)` -}}
+{{- $regexReplacementTOC := (printf `$1<h2 id="contents" class="contents-title">%s</h2>$2` (i18n "tocTitle")) -}}
+{{- $toc = $toc | replaceRE $regexPatternTOC $regexReplacementTOC -}}
 
 <!-- Link Headings to TOC -->
-{{- if .Site.Params.linkHeadingsToTOC -}}
-    {{- $regexPatternTOC := `(<a)( href="#([^"]+)">)` -}}
-    {{- $regexReplacementTOC := `$1 id="contents:$3"$2` -}}
-    {{- $toc = $toc | replaceRE $regexPatternTOC $regexReplacementTOC -}}
-{{ end }}
+{{- $regexPatternTOC := `(<a)( href="#([^"]+)">)` -}}
+{{- $regexReplacementTOC := `$1 id="contents:$3"$2` -}}
+{{- $toc = $toc | replaceRE $regexPatternTOC $regexReplacementTOC -}}
 
 {{- $toc | safeHTML -}}

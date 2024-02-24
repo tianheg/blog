@@ -1,10 +1,5 @@
 {{- $imgs := .Params.images -}}
 
-<!-- Auto Detect Images -->
-{{- if and (not $imgs) .Site.Params.autoDetectImages -}}
-    {{- $imgs = partial "utils/auto-detect-images.html" . -}}
-{{- end -}}
-
 {{- with $imgs -}}
     {{- $translated := slice -}}
     {{- range $index, $img := $imgs -}}

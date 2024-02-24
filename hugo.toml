@@ -1,10 +1,9 @@
 baseURL = "https://tianheg.co/"
-enableGitInfo = true
+defaultContentLanguage = "zh"
 hasCJKLanguage = true
-languageCode = "zh-Hans"
 pluralizeListTitles = false
 summaryLength = 42
-title = "一大加贝"
+title = "一大加贝 · YI-DA-JIA-BEI"
 
 [permalinks]
 tags = "/tags/:slug/"
@@ -16,7 +15,6 @@ tag = "tags"
 lastmod = ["lastmod", ":git", ":fileModTime", ":default"]
 
 [markup]
-defaultMarkdownHandler = "goldmark"
 
 [markup.goldmark]
 
@@ -30,9 +28,12 @@ taskList = true
 typographer = false
 
 [markup.goldmark.parser]
-attribute = true
 autoHeadingID = true
 autoHeadingIDType = "github"
+
+[markup.goldmark.parser.attribute]
+block = false
+title = true
 
 [markup.goldmark.renderer]
 hardWraps = false
@@ -53,13 +54,10 @@ endLevel = 6
 ordered = true
 startLevel = 2
 
-[minify.tdewolff.html]
-keepWhitespace = false
-
 [author]
 avatar = "/icons/apple-touch-icon.png"
 email = "i@tianheg.co"
-motto = "了解自己，认识世界"
+motto = "Knowing oneself, grasp the world"
 name = "tianheg"
 website = "https://tianheg.co/"
 
@@ -83,19 +81,12 @@ type = "fragments"
 applyFilter = false
 weight = 80
 
-[mediaTypes."application/atom+xml"]
-suffixes = ["xml"]
-
-[outputFormats.SectionsAtom]
-baseName = "atom"
-mediaType = "application/atom+xml"
-
 [outputFormats.SectionsRSS]
 baseName = "index"
 mediaType = "application/rss+xml"
 
 [outputs]
-home = ["HTML", "SectionsAtom", "SectionsRSS"]
+home = ["HTML", "SectionsRSS"]
 page = ["HTML"]
 section = ["HTML"]
 taxonomy = ["HTML"]
@@ -137,7 +128,7 @@ pageRef = "/service"
 weight = 6
 
 [[menu.main]]
-name = "归档"
+name = "文章"
 pageRef = "/posts"
 weight = 7
 
@@ -150,25 +141,6 @@ identifier = "menu-time"
 weight = 9
 
 [params]
-displayMenuInHome = true
-enableMenu = true
-headerBackground = "alpha(var(--color-bg), 0.8) linear-gradient(90deg, #f79533b0 0, #f37055b4 15%, #ef4e7b1a 30%, #a166ab23 44%, #5073b821 58%, #1098ad26 72%, #07b39b41 86%, #6dba82a1 100%)"
-siteBrandFontColor = "var(--color-contrast-high)"
-siteBrandFontSize = 1.4
-siteCreatedTime = "2018-12-23T20:17:43+08:00"
-siteDescription = "了解世界，认识自己"
-siteLogo = "/icons/apple-touch-icon.png"
-## Tags
-fontUnit = "em"
-largestFontSize = 2.5
-smallestFontSize = 1
-## List
-displayListTitle = false
-displayTaxonomyTermCount = true
-limitEntriesLimit = -1
-listDateFormat = "Jan"
-listDatePosition = "left"
-listWidth = 50
 ## theme
 defaultTheme = "light"
 enableDarkMode = true
@@ -182,84 +154,13 @@ themeColorDark = "#16171d"
 ## meta data
 jsonLD = true
 openGraph = true
-## animation
-duration = 0.5
-## Single post page
-postWidth = 50
-# post meta
-busuanziPagePVIcon = "eye"
-categoryDelimiter = "/"
-categoryIcon = "folder"
-displayBusuanziPagePV = false
-displayCategory = false
-displayExpiredDate = true
-displayModifiedDate = true
-displayPublishedDate = true
-displayReadingTime = false
-displayWordCount = false
-expiredDateIcon = "calendar-times"
-modifiedDateIcon = "calendar-check"
-postMetaDateFormat = "2006.1.2"
-publishedDateIcon = "calendar-alt"
-readingTimeIcon = "clock"
-wordCountIcon = "pencil-alt"
-# external links
-hrefTargetBlank = true
-# TOC
-displayTOCNum = true
-displayTOCTitle = true
-enableTOC = false
-linkHeadingsToTOC = true
-# header
-anchorIcon = ""
-anchorSymbol = "#"
-enableAnchorAutoHide = true
-enableAnchorLink = true
-enableHeadingsAnchor = true
-headingsOpt = "1-6"
-# images
-autoDetectImages = true
-captionPrefix = "◎ "
-enableCaption = true
 # footnote
 footnoteReturnLinkIcon = "angle-up"
 insertHrBySelf = true
 squareBrackets = true
-# scrollbar
-customizeScrollbar = true
-## font
-# Site brand
-fontFamilySiteBrand = ""
-# Menu bar
-fontFamilyMenu = ""
-# Post title, post subtitle, list title, year and month title of the list, related posts title, previous/next post title, header of table, term/name in a definition list
-fontFamilyTitle = ""
-# Headings, toc title
-fontFamilyHeadings = ""
-# Code, superscript, post meta info, post updated badge, post gitinfo, minimal footer, busuanzi site view counter
-fontFamilyCode = "'Source Code Pro', 'Ubuntu Mono', 'DejaVu Sans Mono', 'Courier New', Monaco, monospace"
-# Blockquotes
-fontFamilyQuote = ""
-# Table of contents
-fontFamilyTOC = ""
-# Caption
-fontFamilyCaption = ""
-# Footer
-fontFamilyFooter = ""
-# Body
-fontFamilyBody = "-apple-system, system-ui, BlinkMacSystemFont, 'Noto Serif SC', Arial, 'Amstelvar', 'Josefin Sans', 'Hiragino Sans GB', 'Microsoft Yahei', 'ST Heiti', sans-serif, 'Apple Color Emoji', 'Segoe UI Emoji', 'Segoe UI Symbol'"
-fontSize = 16
 ## para
 backToTopIcon = "arrow-up"
-deleteHrBeforeDropCap = false
-displayBackToTopInHome = false
-displayBackToTopOnMobile = true
-displayEditLink = true
-displayFooter = true
-displayPostGitInfo = true
-displayRelatedPosts = true
-editIcon = "edit"
-editText = "编辑"
+### TODO
 enableBackToTop = true
 enableBackToTopAutoHide = true
 enableDropCap = false
@@ -280,7 +181,6 @@ relatedPostsIcon = "plus-circle"
 relatedPostsNumber = 10
 repoEditURL = "https://github.com/tianheg/blog/edit/main"
 repoURL = "https://github.com/tianheg/blog"
-tabSize = 2
 # Code Blocks
 enableCopy = true
 enableCopyAutoHide = true
@@ -293,5 +193,3 @@ maxHeight = 20 # Unit: em
 fofPoster = "./images/flying-clouds-720p.jpg"
 fofVideoMp4 = "/videos/flying-clouds-720p.mp4"
 fofVideoWebm = "/videos/flying-clouds-720p.webm"
-# Comments
-enableComments = true

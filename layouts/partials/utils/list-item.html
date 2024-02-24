@@ -1,12 +1,7 @@
-{{- $linkTarget := .linkTarget -}}
 {{- $ := index . "$" -}}
 {{- $pages := $.Pages -}}
+{{- $listDateFormat := "Jan" -}}
 {{- $limit := -1 -}}
-{{- with $linkTarget -}}
-  {{- if isset (index $pages 0).Site.Params "limitentrieslimit" -}}
-    {{- $limit = (index $pages 0).Site.Params.limitEntriesLimit -}}
-  {{- end -}}
-{{- end -}}
 {{- if ge $limit 0 -}}
   {{- $pages = $pages | first $limit -}}
 {{- end -}}
@@ -15,7 +10,7 @@
     {{ range . }}
       <li class="list-item">
         <a href="{{ .RelPermalink }}" class="list-item-title">{{ (partial "utils/title.html" (dict "$" . "title" .LinkTitle)).htmlTitle }}</a>
-        (in <time datetime="{{ .PublishDate.Format "2006-01-02T15:04:05-07:00" }}" class="list-item-time">{{ .PublishDate.Format .Site.Params.listDateFormat }}</time>)
+        (in <time datetime="{{ .PublishDate.Format "2006-01-02T15:04:05-07:00" }}" class="list-item-time">{{ .PublishDate.Format $listDateFormat }}</time>)
       </li>
     {{ end }}
   </ul>

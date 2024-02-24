@@ -1,16 +1,18 @@
 <!DOCTYPE html>
-<html lang="{{ .Site.LanguageCode }}"{{ if and .Site.Params.enableDarkMode }}{{ with .Site.Params.defaultTheme | default "light" }} data-theme="{{ . }}"{{ end }}{{ end }}>
-    {{ partial "head.html" . }}
-    <body>
-        <div class="container p-0">
-            {{ if ne .Site.Params.headerLayout "flex" }}
-                {{ if or (and .IsHome .Site.Params.displayMenuInHome) (and (not .IsHome) .Site.Params.enableMenu) }}
-                    {{ partial "menu.html" . }}
-                {{ end }}
-            {{ end }}
-            {{ block "main" . }}{{ end }}
-            {{ partial "components/back-to-top.html" . }}
-        </div>
-        {{ partial "components/service-worker.html" . }}
-    </body>
+<html lang="en-US"
+{{ if and .Site.Params.enableDarkMode }}
+  {{ with .Site.Params.defaultTheme | default "light" }} 
+    data-theme="{{ . }}"
+  {{ end }}
+{{ end }}>
+  {{ partial "head.html" . }}
+  <body>
+    <div class="container">
+      {{ partial "menu.html" . }}
+      
+      {{ block "main" . }}{{ end }}
+      {{ partial "components/back-to-top.html" . }}
+    </div>
+    {{ partial "components/service-worker.html" . }}
+  </body>
 </html>

@@ -1,13 +1,9 @@
 {{- $pubDate := .PublishDate -}}
-{{- if $pubDate.IsZero -}}
-    {{- $pubDate = .Site.Params.siteCreatedTime -}}
-{{- end -}}
+{{- $pubDate = "2018-12-23T20:17:43+08:00" -}}
 {{- $pubDate = dateFormat "2006-01-02T15:04:05-07:00" $pubDate -}}
 
 {{- $modDate := .Lastmod -}}
-{{- if $modDate.IsZero -}}
-    {{- $modDate = .Site.Params.siteCreatedTime -}}
-{{- end -}}
+{{- $modDate = "2018-12-23T20:17:43+08:00" -}}
 {{- $modDate = dateFormat "2006-01-02T15:04:05-07:00" $modDate -}}
 
 {{- return dict "pubDate" $pubDate "modDate" $modDate -}}

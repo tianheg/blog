@@ -24,11 +24,7 @@
 {{- end -}}
 
 {{- with $images -}}
-    <meta property="og:image" content="{{ index . 0 }}" />
-{{ else -}}
-    {{ with $.Site.Params.siteLogo -}}
-        <meta property="og:image" content="{{ . | absURL }}" />
-    {{ end -}}
+  <meta property="og:image" content="{{ index . 0 }}" />
 {{- end -}}
 
 {{- if and $.IsPage (in $.Site.Params.mainSections $.Section) -}}
