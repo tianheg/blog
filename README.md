@@ -6,7 +6,6 @@
 
 ## TODO
 
-- [ ] Convert all posts with *.md to *.org
 - [ ] Modify style, make the blog more aesthetic and readable; then Organize the style files
 
 ## Reminder
