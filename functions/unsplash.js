@@ -1,21 +1,25 @@
-import serverless from 'serverless-http'
 import { createApi } from 'unsplash-js'
-import nodeFetch from 'node-fetch'
+import fetch from 'node-fetch'
 import express from 'express'
+import serverless from 'serverless-http'
 
 const unsplash = createApi({
   accessKey: process.env.ACCESS_KEY,
-  fetch: nodeFetch
+  fetch
 })
 
 const app = express()
-const PORT = 3000
+const PORT = process.env.PORT || 3000
 
-app.get('/.netlify/functions/unsplash/', (req, res) => {
-  unsplash.photos.getRandom().then((json) => {
-    let imageUrl = json.response.urls.regular
+app.get('/.netlify/functions/unsplash/', async (req, res) => {
+  try {
+    const response = await unsplash.photos.getRandom()
+    const imageUrl = response.response.urls.regular
     res.send(`<img src="${imageUrl}">`)
-  })
+  } catch (error) {
+    console.error(error)
+    res.status(500).send('An error occurred while fetching the image.')
+  }
 })
 
 app.listen(PORT, () => {
