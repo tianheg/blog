@@ -1,0 +1,88 @@
+#+TITLE: Cloudflare 通过 Workers 访问 R2 中存储的文件
+#+DATE: <2022-08-18>
+#+TAGS[]: 技术
+
+代码在
+[[https://github.com/tianheg/cloudflare/tree/main/r2][tianheg/cloudflare/r2]]
+。文档 [[https://developers.cloudflare.com/r2/get-started/][R2 get
+started guide]] 。
+
+=wrangler.toml= ：
+
+#+BEGIN_EXAMPLE
+    name = "r2"
+    main = "src/index.js"
+    compatibility_date = "2022-08-18"
+
+    account_id = "PLACE YOUR ACCOUNT ID" # at workers page
+    workers_dev = true
+
+    [[r2_buckets]]
+    binding = 'MY_BUCKET' # <~ valid JavaScript variable name
+    bucket_name = 'cloudflare'
+#+END_EXAMPLE
+
+=index.js= ：
+
+#+BEGIN_SRC js
+    const ALLOW_LIST = ['surplus-value-051.mp3'];
+
+    // Check requests for a pre-shared secret
+    const hasValidHeader = (request, env) => {
+      return request.headers.get('X-Custom-Auth-Key') === env.AUTH_KEY_SECRET;
+    };
+
+    function authorizeRequest(request, env, key) {
+      switch (request.method) {
+        case 'PUT':
+        case 'DELETE':
+          return hasValidHeader(request, env);
+        case 'GET':
+          return ALLOW_LIST.includes(key);
+        default:
+          return false;
+      }
+    }
+
+    export default {
+      async fetch(request, env) {
+        const url = new URL(request.url);
+        const key = url.pathname.slice(1);
+
+        if (!authorizeRequest(request, env, key)) {
+          return new Response('Forbidden', { status: 403 });
+        }
+
+        switch (request.method) {
+          case 'PUT':
+            await env.MY_BUCKET.put(key, request.body);
+            return new Response(`Put ${key} successfully!`);
+          case 'GET':
+            const object = await env.MY_BUCKET.get(key);
+
+            if (object === null) {
+              return new Response('Object Not Found', { status: 404 });
+            }
+
+            const headers = new Headers();
+            object.writeHttpMetadata(headers);
+            headers.set('etag', object.httpEtag);
+
+            return new Response(object.body, {
+              headers,
+            });
+          case 'DELETE':
+            await env.MY_BUCKET.delete(key);
+            return new Response('Deleted!');
+
+          default:
+            return new Response('Method Not Allowed', {
+              status: 405,
+              headers: {
+                Allow: 'PUT, GET, DELETE',
+              },
+            });
+        }
+      },
+    };
+#+END_SRC

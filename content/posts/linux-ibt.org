@@ -1,0 +1,37 @@
+#+TITLE: Linux IBT(Indirect Branch Tracking)
+#+DATE: <2022-08-24>
+#+TAGS[]: 技术", "Linux
+
+** 什么是 IBT
+   :PROPERTIES:
+   :CUSTOM_ID: 什么是-ibt
+   :END:
+
+#+BEGIN_QUOTE
+  The ENDBR32 and ENDBR64 (collectively ENDBRANCH) are two new
+  instructions that are used to mark valid indirect CALL/JMP target
+  locations in the program. This instruction is a NOP on legacy
+  processors for backward compatibility.
+
+  The processor implements a state machine that tracks indirect JMP and
+  CALL instructions. When one of these instructions is seen, the state
+  machine moves from IDLE to WAIT_FOR_ENDBRANCH state. In
+  WAIT_FOR_ENDBRANCH state the next instruction in the program stream
+  must be an ENDBRANCH. If an ENDBRANCH is not seen the processor causes
+  a control protection fault (#CP), otherwise the state machine moves
+  back to IDLE state.[fn:1]
+#+END_QUOTE
+
+ENDBR32 和 ENDBR64（统称为
+ENDBRBRANCH）是两个新指令，用于标记程序中有效的间接 CALL/JMP
+位置。这一指令是 NOP 的向下兼容。
+
+该处理器实现了一种状态机，能够跟踪间接 JMP/CALL
+指令。当其中某个指令执行时，状态机会从 IDLE 移动到 WAIT_FOR_ENDBRANCH
+状态。在 WAIT_FOR_ENDBRANCH 状态，程序流中的下一个指令必须是一个
+ENDBRANCH。如果一个 ENDBRANCH
+对处理器不可见，这会导致一个控制保护错误（#CP），否则状态机会返回到 IDLE
+状态。
+
+[fn:1] [[https://edc.intel.com/content/www/us/en/design/ipla/software-development-platforms/client/platforms/alder-lake-desktop/12th-generation-intel-core-processors-datasheet-volume-1-of-2/009/indirect-branch-tracking/][Indirect
+       Branch Tracking - 12th Generation Intel® Core™ Processors]]
