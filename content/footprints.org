@@ -1,0 +1,66 @@
+#+TITLE: Footprints 足迹
+
+#+BEGIN_EXPORT html
+<iframe src="https://www.google.com/maps/d/u/0/embed?mid=1vfIGRM4Y_VTse_3Qr1X-l1jJU-6Wsv4&ehbc=2E312F&noprof=1" width="100%" height="480"></iframe>
+#+END_EXPORT
+
+#+BEGIN_EXPORT html
+<script src="https://api.mapbox.com/mapbox-gl-js/v3.2.0/mapbox-gl.js"></script>
+<link
+  href="https://api.mapbox.com/mapbox-gl-js/v3.2.0/mapbox-gl.css"
+  rel="stylesheet"
+/>
+
+<div id="map" style="width: 100%; height: 480px"></div>
+
+<script>
+  mapboxgl.accessToken =
+    "pk.eyJ1IjoiMTExMzkxMDIzOCIsImEiOiJjbHIyd2VhMmkxNWN4MmludmxrZmxoeTQ5In0._b0Tf89jQpd53ehg8pYH_Q";
+  const map = new mapboxgl.Map({
+    container: "map",
+    style: "mapbox://styles/mapbox/streets-v12",
+    projection: "mercator",
+    center: [109.68565477964833, 32.46069963176305],
+    zoom: 2,
+  });
+
+  const locations = [
+    {
+      name: "抚顺 Fushun",
+      coordinates: [123.93814909665134, 41.87909761152454],
+    },
+    {
+      name: "大连 Dalian",
+      coordinates: [121.56261564186624, 38.92249670667346],
+    },
+    {
+      name: "沈阳 Shenyang",
+      coordinates: [123.42275405246149, 41.82466010971171],
+    },
+    {
+      name: "北京 Beijing",
+      coordinates: [116.40190536931678, 39.883556107544834],
+    },
+    {
+      name: "阜阳 Fuyang",
+      coordinates: [115.7910888417611, 32.88926622652041],
+    },
+    { name: "合肥 Hefei", coordinates: [117.23633, 31.8208] },
+    {
+      name: "杭州 Hangzhou",
+      coordinates: [120.14578499654546, 30.24883186686932],
+    },
+    {
+      name: "广州 Guangzhou",
+      coordinates: [113.03552908020336, 23.07093772351523],
+    },
+  ];
+
+  locations.forEach((location) => {
+    new mapboxgl.Marker()
+      .setLngLat(location.coordinates)
+      .setPopup(new mapboxgl.Popup().setText(location.name))
+      .addTo(map);
+  });
+</script>
+#+END_EXPORT
