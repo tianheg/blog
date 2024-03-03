@@ -1,5 +1,60 @@
 #+TITLE: ChangeLog
 
+#+BEGIN_EXPORT html
+<button
+  id="randomPostButton"
+  style="
+    font-size: 20px;
+    padding: 10px 20px;
+    background-color: #4caf50;
+    color: white;
+    border: none;
+    cursor: pointer;
+  "
+>
+  Get Random Post
+</button>
+
+<script>
+  // Fetch the sitemap when the page loads
+  let urls = [];
+  fetch("/sitemap.xml")
+    .then((response) => response.text())
+    .then((data) => {
+      // Parse the XML data
+      let parser = new DOMParser();
+      let xmlDoc = parser.parseFromString(data, "text/xml");
+
+      // Get all the <loc> elements
+      let locs = xmlDoc.getElementsByTagName("loc");
+
+      // Convert the NodeList to an array and filter the URLs
+      urls = Array.from(locs)
+        .map((loc) => loc.textContent)
+        .filter(
+          (url) =>
+            url.startsWith(window.location.origin + "/posts/") &&
+            url !== window.location.origin + "/posts/",
+        );
+
+      // Enable the button
+      document.getElementById("randomPostButton").disabled = false;
+    })
+    .catch((error) => console.error("Error:", error));
+
+  // Add the event listener to the button
+  document
+    .getElementById("randomPostButton")
+    .addEventListener("click", function () {
+      // Select a random URL
+      let randomUrl = urls[Math.floor(Math.random() * urls.length)];
+
+      // Open the URL in a new tab
+      window.open(randomUrl, "_blank");
+    });
+</script>
+#+END_EXPORT
+
 博客相关的注意事项：
 
 1. 技术类文章、时效性强的文章，会随时间推移、我理解程度的加深，而改变文章链接，或者与其他文章合并，简化。如果你发现我的文章链接 404 了，最好在我博客上找找。我选择不做重定向，因为维护重定向列表不是一件能坚持很久的事。我的博客的此时此刻，代表了我此时的状态，博客内容的改变反映了我状态的改变。
