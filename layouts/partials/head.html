@@ -29,7 +29,7 @@
     {{ end }}
 
     <meta name="author" content="{{ .Params.author | default .Site.Author.name }}" />
-		{{- $description := .Description | default (partial "utils/summary.html" .) | default "Your static description goes here" | plainify | htmlUnescape -}}
+		{{- $description := .Description | default (partial "utils/summary.html" .) | default "了解自己，认识世界 Knowing oneself, grasp the world" | plainify | htmlUnescape -}}
     <meta name="description" content="{{ $description }}" />
 
     <!-- Favicon, Icons, Web App -->
