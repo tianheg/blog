@@ -97,7 +97,7 @@ Jan 21 22:50:43 arch kernel: usb 1-1.4: USB disconnect, device number 10
 Jan 21 22:50:43 arch kernel: usb 1-1.4: new high-speed USB device number 11 using xhci_hcd
 Jan 21 22:50:44 arch kernel: usb 1-1.4: New USB device found, idVendor=19d2, idProduct=1557, bcdDevice= 1.01
 Jan 21 22:50:44 arch kernel: usb 1-1.4: New USB device strings: Mfr=2, Product=4, SerialNumber=5
-Jan 21 22:50:44 arch kernel: usb 1-1.4: Product: SZXF Mobile Boardband 
+Jan 21 22:50:44 arch kernel: usb 1-1.4: Product: SZXF Mobile Boardband
 Jan 21 22:50:44 arch kernel: usb 1-1.4: Manufacturer: SZXF,Incorporated
 Jan 21 22:50:44 arch kernel: usb 1-1.4: SerialNumber: 1234567890ABCDEF
 Jan 21 22:50:44 arch kernel: cdc_ether 1-1.4:1.0 eth0: register 'cdc_ether' at usb-0000:00:14.0-1.4, ZTE CDC Ethernet Device, 34:4b:50:00:00:00
@@ -111,7 +111,7 @@ Jan 21 22:50:44 arch NetworkManager[511]: <info>  [1705848644.0848] audit: op="s
 Jan 21 22:50:44 arch kernel: cdc_ether 1-1.4:1.0 enp0s20f0u1u4: renamed from eth0
 Jan 21 22:50:44 arch NetworkManager[511]: <info>  [1705848644.1406] device (eth0): interface index 59 renamed iface from 'eth0' to 'enp0s20f0u1u4'
 Jan 21 22:50:44 arch NetworkManager[511]: <info>  [1705848644.1626] device (enp0s20f0u1u4): state change: unmanaged -> unavailable (reason 'managed', sys-iface-state: 'external')
-Jan 21 22:50:44 arch NetworkManager[511]: <info>  [1705848644.1669] device (enp0s20f0u1u4): carrier: link connected 
+Jan 21 22:50:44 arch NetworkManager[511]: <info>  [1705848644.1669] device (enp0s20f0u1u4): carrier: link connected
 Jan 21 22:50:44 arch NetworkManager[511]: <info>  [1705848644.1680] device (enp0s20f0u1u4): state change: unavailable -> disconnected (reason 'carrier-changed', sys-iface-state: 'managed')
 Jan 21 22:50:44 arch tailscaled[669]: monitor: RTM_DELROUTE: src=, dst=ff00::/8, gw=, outif=59, table=255
 Jan 21 22:50:44 arch mtp-probe[10264]: checking bus 1, device 11: "/sys/devices/pci0000:00/0000:00:14.0/usb1/1-1/1-1.4"
@@ -1097,6 +1097,11 @@ pacman -S gthumb
 * KDE
 
 因为网络问题，无法直接从 KDE 的主题商店直接安装，所以需要手动安装。[[https://gitlab.com/jomada/edna/-/blob/main/install.sh][ref]]
+* Trello
+
+#+BEGIN_SRC sh
+yay -S silos silo-trello
+#+END_SRC
 
 * 开发环境配置
 
