@@ -3,17 +3,13 @@
   flex-direction: column;
   justify-content: center;
   align-items: center;
-  height: 90vh;
+  height: 80vh;
   text-align: center;
 
   .home-title {
-    font-family: 'jinkaiFont';
+    font-family: "jinkaiFont";
     font-size: 40px;
-    font-variation-settings: 'wght' 550, 'opsz' 60, 'YOPQ' 90;
-
-    @media (max-width: 600px) or (max-height: 900px) {
-      display: none;
-    }
+    font-variation-settings: "wght" 550, "opsz" 60, "YOPQ" 90;
   }
 
   .poetry {
@@ -21,9 +17,15 @@
     width: auto;
     max-width: 26em;
     margin: 0 auto;
-    padding: 10em 1em;
   }
+
   .poetry .en {
     font-style: italic;
+  }
+
+  @media (max-width: 400px) or (max-height: 667px) {
+    .logo-and-title {
+      display: none;
+    }
   }
 }
