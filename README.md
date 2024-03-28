@@ -7,6 +7,7 @@
 ## TODO
 
 - [ ] Modify style, make the blog more aesthetic and readable; then Organize the style files
+- [ ] use pure css instead of sass
 
 ## Reminder
 
