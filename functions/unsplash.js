@@ -11,7 +11,7 @@ const unsplash = createApi({
 const app = express();
 const PORT = process.env.PORT || 3000;
 
-app.get("/.netlify/functions/unsplash/", async (req, res) => {
+app.get("/.netlify/functions/unsplash/", async (_, res) => {
   try {
     const response = await unsplash.photos.getRandom();
     const imageUrl = response.response.urls.regular;
