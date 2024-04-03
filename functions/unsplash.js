@@ -15,7 +15,7 @@ app.get('/.netlify/functions/unsplash/', async (req, res) => {
   try {
     const response = await unsplash.photos.getRandom()
     const imageUrl = response.response.urls.regular
-    res.send(`<img src="${imageUrl}">`)
+    res.send(`${imageUrl}`)
   } catch (error) {
     console.error(error)
     res.status(500).send('An error occurred while fetching the image.')
