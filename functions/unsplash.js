@@ -11,17 +11,11 @@ const unsplash = createApi({
 const app = express();
 const PORT = process.env.PORT || 3000;
 
-app.get("/.netlify/functions/unsplash/", async (_, res) => {
+app.get("/.netlify/functions/unsplash/", async (req, res) => {
   try {
     const response = await unsplash.photos.getRandom();
-    if (!response.ok) {
-      throw new Error(`Unsplash API error: ${response.errors.join(", ")}`);
-    }
     const imageUrl = response.response.urls.regular;
-    const imageResponse = await fetch(imageUrl);
-    const imageBuffer = Buffer.from(await imageResponse.arrayBuffer());
-    res.set("Content-Type", "image/jpeg");
-    res.send(imageBuffer);
+    res.send(`<img src="${imageUrl}">`);
   } catch (error) {
     console.error(error);
     res.status(500).send("An error occurred while fetching the image.");
