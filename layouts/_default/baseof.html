@@ -1,7 +1,7 @@
 <!DOCTYPE html>
-<html lang="en-US"
+<html lang="zh"
 {{ if and .Site.Params.enableDarkMode }}
-  {{ with .Site.Params.defaultTheme | default "light" }} 
+  {{ with .Site.Params.defaultTheme | default "light" }}
     data-theme="{{ . }}"
   {{ end }}
 {{ end }}>
@@ -9,7 +9,7 @@
   <body>
     <div class="container">
       {{ partial "menu.html" . }}
-      
+
       {{ block "main" . }}{{ end }}
       {{ partial "components/back-to-top.html" . }}
     </div>
