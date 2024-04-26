@@ -23,6 +23,8 @@
     {{- $scripts = union $scripts (slice "js/copy.js") -}}
 {{- end -}}
 
+{{- $scripts = union $scripts (slice "js/keyboard.js") -}}
+
 {{- $processedScripts := slice ("" | resources.FromString "dummy.js") -}}
 {{- range $scripts -}}
     {{- if findRE `^https?:` . -}}
