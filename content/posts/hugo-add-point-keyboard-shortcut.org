@@ -6,28 +6,29 @@ I read a [[https://garrit.xyz/posts/2022-10-05-simple-guestbook][post]], like th
 some modifications to the code, here is mine:
 
 #+BEGIN_SRC js
-window.addEventListener("keypress", (event) => {
-  const isEditKey = event.key === ".";
-  const isHomePage = window.location.pathname === "/";
-  const isPostsPage = window.location.pathname === "/posts/";
-  const isSinglePostPage = window.location.pathname.startsWith("/posts/");
-  const isTagsPage = window.location.pathname.startsWith("/tags/");
+  window.addEventListener("keypress", (event) => {
+    const isEditKey = event.key === ".";
+    const isHomePage = window.location.pathname === "/";
+    const isPostsPage = window.location.pathname === "/posts/";
+    const isTagsPage = window.location.pathname.startsWith("/tags/");
 
-  const isInputOrTextArea =
-    event.target.nodeName === "INPUT" || event.target.nodeName === "TEXTAREA";
+    const isInputOrTextArea =
+      event.target.nodeName === "INPUT" || event.target.nodeName === "TEXTAREA";
 
-  if (
-    isEditKey &&
-    !isHomePage &&
-    !isPostsPage &&
-    isSinglePostPage &&
-    !isTagsPage &&
-    !isInputOrTextArea
-  ) {
-    const contentPath = window.location.pathname.split("/");
-    const fileName = `${contentPath[contentPath.length - 2]}.org`;
-    const editUrl = `https://github.com/tianheg/blog/edit/main/content/${fileName}`;
-    window.location.href = editUrl;
-  }
-});
+    if (
+      isEditKey &&
+      !isHomePage &&
+      !isPostsPage &&
+      !isTagsPage &&
+      !isInputOrTextArea
+    ) {
+      const contentPath = window.location.pathname.split("/");
+      const fileName =
+        contentPath.length === 3
+          ? `${contentPath[contentPath.length - 2]}.org`
+          : `posts/${contentPath[contentPath.length - 2]}.org`;
+      const editUrl = `https://github.com/tianheg/blog/edit/main/content/${fileName}`;
+      window.location.href = editUrl;
+    }
+  });
 #+END_SRC
