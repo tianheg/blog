@@ -9,21 +9,25 @@ window.addEventListener(
     const setupEditHotkey = () => {
       window.addEventListener("keypress", (event) => {
         const isEditKey = event.key === ".";
-        const isOnPostPage = window.location.pathname.startsWith("/posts/");
-        const isOnHomePage = window.location.pathname === "/";
-        const isOnTagsPage = window.location.pathname.startsWith("/tags/");
+        const isHomePage = window.location.pathname === "/";
+        const isPostsPage = window.location.pathname === "/posts/";
+        const isSinglePostPage = window.location.pathname.startsWith("/posts/");
+        const isTagsPage = window.location.pathname.startsWith("/tags/");
+
         const isInputOrTextArea =
           event.target.nodeName === "INPUT" ||
           event.target.nodeName === "TEXTAREA";
 
         if (
           isEditKey &&
-          !isOnPostPage &&
-          !isOnHomePage &&
-          !isOnTagsPage &&
+          !isHomePage &&
+          !isPostsPage &&
+          isSinglePostPage &&
+          !isTagsPage &&
           !isInputOrTextArea
         ) {
-          const fileName = window.location.pathname.split("/")[2] + ".org";
+          const contentPath = window.location.pathname.split("/");
+          const fileName = `${contentPath[contentPath.length - 2]}.org`;
           const editUrl = `https://github.com/tianheg/blog/edit/main/content/${fileName}`;
           window.location.href = editUrl;
         }
