@@ -1,16 +1,29 @@
 window.addEventListener(
   "DOMContentLoaded",
   (event) => {
+    /**
+     * Sets up a hotkey to navigate to the GitHub edit page for the current post.
+     *
+     * @return {void} This function does not return anything.
+     */
     const setupEditHotkey = () => {
-      window.addEventListener("keypress", (e) => {
+      window.addEventListener("keypress", (event) => {
+        const isEditKey = event.key === ".";
+        const isOnPostPage = window.location.pathname.startsWith("/posts/");
+        const isOnHomePage = window.location.pathname === "/";
+        const isOnTagsPage = window.location.pathname.startsWith("/tags/");
+        const isInputOrTextArea =
+          event.target.nodeName === "INPUT" ||
+          event.target.nodeName === "TEXTAREA";
+
         if (
-          e.key === "." &&
-          window.location.pathname !== "/posts/" &&
-          window.location.pathname !== "/" &&
-          !window.location.pathname.startsWith("/tags/")
+          isEditKey &&
+          !isOnPostPage &&
+          !isOnHomePage &&
+          !isOnTagsPage &&
+          !isInputOrTextArea
         ) {
-          const contentPath = window.location.pathname.split("/");
-          const fileName = `${contentPath[contentPath.length - 2]}.org`;
+          const fileName = window.location.pathname.split("/")[2] + ".org";
           const editUrl = `https://github.com/tianheg/blog/edit/main/content/${fileName}`;
           window.location.href = editUrl;
         }
