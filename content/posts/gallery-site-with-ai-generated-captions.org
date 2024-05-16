@@ -28,6 +28,19 @@
 - 第二次修改（[[https://github.com/tianheg/img/commit/2d62d5057876720b8fe369b627ff5de73711d5c5][2d62d50]]）：这次修改了很多内容，这一步的修改导致了代码执行陷入死循环，经过排查发现是在处理图片时期约无法停止造成的。
 - 第三次修改（[[https://github.com/tianheg/img/commit/0184d83fef579adc6c7e472004553250e85efbf8][0184d83]]）：在这一步里对 =processImagesConcurrently= 函数进行了调整。
 
+另一个实现方法，使用 [[https://github.com/xenova/transformers.js][xenova/transformers.js]]：
+
+#+BEGIN_SRC js
+import { pipeline } from '@xenova/transformers';
+
+const captioner = await pipeline('image-to-text', 'Xenova/vit-gpt2-image-captioning');
+const url = 'https://huggingface.co/datasets/Xenova/transformers.js-docs/resolve/main/cats.jpg';
+const output = await captioner(url);
+// [{ generated_text: 'a cat laying on a couch with another cat' }]
+
+console.log(output);
+#+END_SRC
+
 * Remove exif info
 
 两天以后，我注意到一个问题：拍摄的图片都来自手机，那么如果不把图片中附带的手机型号等信息删除，是很大的安全隐患。于是，我又写了个脚本来移除所有图片的 exif 信息。大致流程：
