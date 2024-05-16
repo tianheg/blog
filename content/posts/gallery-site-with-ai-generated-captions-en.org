@@ -28,6 +28,19 @@ A condition is needed: if the text generation fails, do not upload. If this is n
 - Second modification ([[https://github.com/tianheg/img/commit/2d62d5057876720b8fe369b627ff5de73711d5c5][2d62d50]]): A lot of content was modified this time, and this modification caused the code execution to fall into an infinite loop. After troubleshooting, it was found that it was caused by the inability to stop the scheduling during image processing.
 - Third modification ([[https://github.com/tianheg/img/commit/0184d83fef579adc6c7e472004553250e85efbf8][0184d83]]): In this step, the =processImagesConcurrently= function was adjusted.
 
+Another implementation method is to use [[https://github.com/xenova/transformers.js][xenova/transformers.js]]:
+
+#+BEGIN_SRC js
+import { pipeline } from '@xenova/transformers';
+
+const captioner = await pipeline('image-to-text', 'Xenova/vit-gpt2-image-captioning');
+const url = 'https://huggingface.co/datasets/Xenova/transformers.js-docs/resolve/main/cats.jpg';
+const output = await captioner(url);
+// [{ generated_text: 'a cat laying on a couch with another cat' }]
+
+console.log(output);
+#+END_SRC
+
 * Remove exif info
 
 Two days later, I noticed an issue: the photos were all taken with a phone, and if I didn't remove the phone model and other information embedded in the images, it would be a significant security risk. So, I wrote another script to remove all the exif information from the images. The general process was:
