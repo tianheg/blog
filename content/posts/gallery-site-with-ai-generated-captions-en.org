@@ -1,0 +1,32 @@
+#+TITLE: Gallery site with AI-generated image captions
+#+DATE: <2024-05-15 Wed 16:20>
+#+TAGS[]: 技术 Cloudflare img.tianheg.org English
+
+As someone who occasionally takes photos, I've accumulated quite a few over the years with my phone. I've wanted to have an online photo album for a long time but was never quite sure which tools to use for building one. Recently, I came across this repository [[https://github.com/petrovicz/astro-photoswipe][petrovicz/astro-photoswipe]] in a newsletter, which I quite liked, and decided to give it a try along with [[https://astro.build/][Astro]], which was new to me. As for [[https://photoswipe.com/][PhotoSwipe]], it's an old friend; I used it for a while but then shifted my focus elsewhere.
+
+* Image to Text
+
+After deploying the photo album website, I noticed there were no captions for the images. Initially, I thought about writing them myself, but with so many photos, the workload seemed daunting. Then I wondered if there was an AI model that could convert images to text. Since the website is hosted on Cloudflare Pages, I naturally looked for models at Workers AI and found two (=@cf/llava-hf/llava-1.5-7b-hf= and =@cf/unum/uform-gen2-qwen-500m=).
+
+I considered the possibility of generating captions in real-time, where upon clicking an image, its description would be instantly created. However, I couldn't find a way to do this. After testing in bulk with a Node.js script, I found that generating captions for around 230 images took about 2 minutes, which included issues with images being too large to process and network connection problems.
+
+With the help of AI, I managed to write this script, encountering several issues along the way:
+
+1. My local network couldn't connect to Cloudflare's API, frequently timing out. Solution: Move the runtime environment to GitHub Action and add a 15-second timeout.
+2. Cloudflare Workers AI has a limit of 720 requests per minute for Image to Text models. Solution: Limit the maximum number of concurrent requests.
+3. How to upload all the image captions to Worker KV after obtaining them. Solution: Use =Promise.all()= (which can combine multiple iterations into one and output them).
+
+Some reflections:
+
+This script may not seem like much now, but before writing it, I was quite troubled, pondering how to solve the above problems. With the help of AI, I finally achieved my goal. When writing this script, I referred to [[https://github.com/dgurns/magic-ai-box][dgurns/magic-ai-box]] and used the REST API directly instead of Cloudflare's [[https://github.com/cloudflare/cloudflare-typescript][official SDK]].
+
+* Remove exif info
+
+Two days later, I noticed an issue: the photos were all taken with a phone, and if I didn't remove the phone model and other information embedded in the images, it would be a significant security risk. So, I wrote another script to remove all the exif information from the images. The general process was:
+
+1. Traverse all the images in the target folder and check if there is any exif information left.
+2. If there is none, no further action is needed; if there is, remove the exif information.
+
+-----
+
+The code repository is at [[https://github.com/tianheg/img][GitHub]]. The website address is also there.
