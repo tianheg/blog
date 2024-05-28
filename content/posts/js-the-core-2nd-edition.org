@@ -31,11 +31,6 @@ let point = {
 
 代码有两个显示自由属性和一个隐式 =__proto__= 属性的结构， =__proto__= 属性是对 =point= 原型的引用：
 
-#+BEGIN_EXPORT html
-<img src="/images/js-the-core-2nd-edition-0.svg" alt="图一、具有原型的基本对象">
-<span class="caption">◎ 图一、具有原型的基本对象</span>
-#+END_EXPORT
-
 原型对象采用动态调度机制实现继承。
 
 * 2. 原型
@@ -75,11 +70,6 @@ console.log(
 
 Prototype chain: 原型链是用于实现继承和共享属性的对象的有限链。
 #+END_QUOTE
-
-#+BEGIN_EXPORT html
-<img src="/images/js-the-core-2nd-edition-1.svg" alt="图二、一个原型链">
-<span class="caption">◎ 图二、一个原型链</span>
-#+END_EXPORT
 
 规则很简单：如果在对象本身中没有找到属性，则尝试在原型中解析它；在原型的原型中，等等——直到考虑到整个原型链。
 
@@ -144,13 +134,6 @@ console.log(
 )
 #+END_SRC
 
-代码关系图：
-
-#+BEGIN_EXPORT html
-<img src="/images/js-the-core-2nd-edition-2.svg" alt="图三、共享原型">
-<span class="caption">◎ 图三、共享原型</span>
-#+END_EXPORT
-
 由图可以看出步骤的繁琐。而类可以简化这些步骤。它作为一种语法糖（syntactic sugar，a construct which semantically does the same, but in a much nicer syntactic form，一种在语义上做同样事情的构造，但以更好的语法形式），它允许用方便的模式创建这样的多个对象：
 
 #+BEGIN_SRC js
@@ -205,11 +188,6 @@ console.log(
 
 见下图对象和它们的类之间的关系：
 
-#+BEGIN_EXPORT html
-<img src="/images/js-the-core-2nd-edition-3.webp" alt="图四、构造函数和对象关系">
-<span class="caption">◎ 图四、构造函数和对象关系</span>
-#+END_EXPORT
-
 上图显示每个对象都有一个关联的原型。即使构造函数（类） =Letter= 也有自己的原型，即 =Function.prototype= 。请注意， =Letter.prototype= 是 Letter 实例的原型，即 =a= 、 =b= 。
 
 注意：任何对象的实际原型总是通过 =__proto__= 引用。构造函数上显式的 =prototype= 属性只是对其实例原型的引用；对于实例来说，仍引用自 =__proto__= 。
@@ -246,12 +224,7 @@ recursive(0)
 Execution context stack：执行上下文堆栈是一种LIFO结构，用于维护控制流和执行顺序。
 #+END_QUOTE
 
-对以上例子，有以下堆栈“push-pop”修改：
-
-#+BEGIN_EXPORT html
-<img src="/images/js-the-core-2nd-edition-4.webp" alt="图五、执行上下文堆栈">
-<span class="caption">◎ 图五、执行上下文堆栈</span>
-#+END_EXPORT
+对以上例子，有以下堆栈“push-pop”修改
 
 还可以看到，全局上下文总是在堆栈的底部，它是在执行任何其他上下文之前创建的。
 
@@ -301,11 +274,6 @@ foo(30)
 
 全局上下文的环境结构和 =foo= 函数的上下文看起来如下：
 
-#+BEGIN_EXPORT html
-<img src="/images/js-the-core-2nd-edition-5.webp" alt="图五、环境链">
-<span class="caption">◎ 图五、环境链</span>
-#+END_EXPORT
-
 逻辑上，这类似于原型链。标识符解析的规则非常相似：如果在自己的环境中没有找到变量，则尝试在父环境中、在父环境的父环境中等等查找它——直到考虑了整个环境链。
 
 #+BEGIN_QUOTE
@@ -340,11 +308,6 @@ console.log(
 #+END_SRC
 
 下图是对代码的描述：
-
-#+BEGIN_EXPORT html
-<img src="/images/js-the-core-2nd-edition-6.webp" alt="图七、绑定对象">
-<span class="caption">◎ 图七、绑定对象</span>
-#+END_EXPORT
 
 注意，绑定对象的存在是为了覆盖遗留结构，如 =var= -声明和 =with= -语句，它们也将其对象作为绑定对象提供。这些是历史原因，当环境被表示为简单对象时。目前，环境模型已经优化了很多，但是结果是我们不能再将绑定作为属性来访问。
 
@@ -398,11 +361,6 @@ Static scope：一种语言实现了静态作用域，只要通过查看源代�
 
 示例中， =foo= 函数捕获的环境是全局环境：
 
-#+BEGIN_EXPORT html
-<img src="/images/js-the-core-2nd-edition-7.webp" alt="图八、闭包">
-<span class="caption">◎ 图八、闭包</span>
-#+END_EXPORT
-
 环境引用函数，函数反过来又引用回环境。
 
 #+BEGIN_QUOTE
@@ -453,11 +411,6 @@ console.log(
 因为闭包 =increment= 和 =decrement= 都是在包含 =count= 变量的作用域中创建的，所以它们共享这个父作用域。也就是说，捕获总是“通过引用（by-reference）”进行的，这意味着存储对整个父环境的引用。
 
 图示：
-
-#+BEGIN_EXPORT html
-<img src="/images/js-the-core-2nd-edition-8.webp" alt="图九、共享环境">
-<span class="caption">◎ 图九、共享环境</span>
-#+END_EXPORT
 
 有些语言可能会捕获 by-value，对捕获的变量进行复制，并且不允许在父作用域中更改它。但是在 JS 中，重复一遍，它总是父作用域的引用。
 
@@ -585,11 +538,6 @@ Realm：代码领域是一个对象，它封装了一个单独的全局环境。
 当前版本的规范没有提供显式创建领域的能力，但是它们可以由实现隐式创建。
 
 从逻辑上讲，堆栈中的每个上下文总是与其领域相关联：
-
-#+BEGIN_EXPORT html
-<img src="/images/js-the-core-2nd-edition-9.webp" alt="图十、上下文和领域关联">
-<span class="caption">◎ 图十、上下文和领域关联</span>
-#+END_EXPORT
 
 使用 =vm=  模块的单独领域示例：
 
@@ -768,13 +716,6 @@ onmessage = (message) => {
     Cross-Origin-Opener-Policy = "same-origin"
     Cross-Origin-Embedder-Policy = "require-corp"
 #+END_SRC
-
-代码的运行图示：
-
-#+BEGIN_EXPORT html
-<img src="/images/js-the-core-2nd-edition-10.webp" alt="图十、ECMAScript 运行时">
-<span class="caption">◎ 图十、ECMAScript 运行时</span>
-#+END_EXPORT
 
 #+BEGIN_QUOTE
 ECMAScript is a programming language and its runtime system has core components. It uses a prototype-based delegation mechanism to implement inheritance and shared properties. The concept of lexical environments is used to store data and solve the Funarg problem with the mechanism of closures. The this value is dynamically scoped and is implicitly passed to the code of a context. Execution contexts are associated with a particular code realm which provides the global environment for this context. The main entry point to a program is the initial script which is loaded and evaluated. Async functions can await for promises and enqueue promise jobs. SharedArrayBuffers can be used to share data between agents.

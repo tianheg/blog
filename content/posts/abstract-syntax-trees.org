@@ -12,19 +12,9 @@ ASTs 是代码的树状展示。它是编译器正常工作的基础部分之一
 2. 语法分析（Syntax Analysis）
 3. 生成代码（Code Generation）
 
-#+BEGIN_EXPORT html
-<img src="/images/abstract-syntax-trees.svg" alt="编译器工作流程">
-<span class="caption">◎ 编译器工作流程</span>
-#+END_EXPORT
-
 ** 词法分析也叫标记化
 
 标记化（Tokenization）是[[https://en.wikipedia.org/wiki/Lexical_analysis#Tokenization][对输入字符串的各个部分进行标定和可能的分类的过程]]。然后将生成的 tokens 传递给其他形式的处理。可以将该流程视为解析输入的子任务。这一步中，代码将会转换为一组标记，用以描述代码的不同部分。这和基本的代码高亮所使用的方法是一样的。标记并不知道代码为什么这样组合，它只是文件中的组成部分。可以想象成一组列表或一个数组，其中包含不同类型的标记。
-
-#+BEGIN_EXPORT html
-<img src="/images/abstract-syntax-trees.gif" alt="一个词法分析例子">
-<span class="caption">◎ 一个词法分析例子</span>
-#+END_EXPORT
 
 可以这样类比，得到一个文本，将它拆分成单词组。我可能会区分标点符号、动词、名词和数字等等。但此时我并不了解句子的组成，以及多个句子是怎样组合到一起的。
 
@@ -33,11 +23,6 @@ ASTs 是代码的树状展示。它是编译器正常工作的基础部分之一
 解析的英文是 parse，解析是一个正在发生的动作，所以用 parsing。
 
 这一步把标记列表变成抽象语法树（ASTs）。将标记变成一个树，这个树能反映代码的真正结构。之前只知道有 =()= ，现在知道了函数调用、函数定义、还有其他分组。
-
-#+BEGIN_EXPORT html
-<img src="/images/abstract-syntax-trees-2.gif" alt="一个语法分析例子">
-<span class="caption">◎ 一个语法分析例子</span>
-#+END_EXPORT
 
 这里的等价物是将标记组成的单词列表转换成一个数据结构，表示诸如句子之类的东西，某个名词在句子中扮演什么角色。
 

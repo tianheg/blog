@@ -21,11 +21,6 @@ var foo = {
 
 如下图所示，对象 foo 由三部分构成——x，y， =__proto__= 。前两个是公开的，最后一个是隐藏的。而 =__proto__= 对应之后的 foo 的原型。
 
-#+BEGIN_EXPORT html
-<img src="/images/js-the-core-0.svg" alt="图一、一个拥有原型的基本对象">
-<span class="caption">◎ 图一、一个拥有原型的基本对象</span>
-#+END_EXPORT
-
 这些原型的作用是什么？原作者认为「原型链（prototype chain）」能回答这个问题。
 
 * 2. 一个原型链
@@ -70,11 +65,6 @@ c.calculate(40);
 如果没有为一个对象设置原型，那 =__proto__= 的默认值是 =Object.prototype= 。对象 =Object.prototype= 也有一个 =__proto__= ，它是原型链的终点，值为 null。
 
 下图显示了 a、b 和 c 对象的继承层次结构：
-
-#+BEGIN_EXPORT html
-<img src="/images/js-the-core-1.svg" alt="图二、一个原型链">
-<span class="caption">◎ 图二、一个原型链</span>
-#+END_EXPORT
 
 注意：ES5 提供了 =Object.create= 函数，亟此作为一种实现基于原型继承的可选方式。
 
@@ -128,13 +118,6 @@ console.log(
   b.__proto__.calculate === Foo.prototype.calculate
 )
 #+END_SRC
-
-下图是代码的关系图：
-
-#+BEGIN_EXPORT html
-<img src="/images/js-the-core-2.svg" alt="图三、构造器与对象关系">
-<span class="caption">◎ 图三、构造器与对象关系</span>
-#+END_EXPORT
 
 这张图片再一次说明：每个对象都有原型。
 
@@ -190,19 +173,9 @@ foo(30);
 
 也就是说，所有的 ECMAScript 程序运行时都表示为执行上下文（EC，execution context）堆栈，其中堆栈的顶部是一个活动上下文：
 
-#+BEGIN_EXPORT html
-<img src="/images/js-the-core-3.svg" alt="图四、一个执行上下文栈">
-<span class="caption">◎ 图四、一个执行上下文栈</span>
-#+END_EXPORT
-
 当程序开始时，它进入全局执行上下文，即堆栈的底部和第一个元素。然后全局代码提供一些初始化，创建所需的对象和函数。在全局上下文的执行过程中，它的代码可能会激活一些其他（已经创建的）函数，这些函数将进入它们的执行上下文，将新元素推入堆栈，等等。在初始化完成之后，运行时系统正在等待一些事件（例如用户的鼠标点击），这些事件将激活一些函数并进入一个新的执行上下文。
 
 在下一个图中，如果某个函数上下文为 =EC1= ，而全局上下文为 =Global EC= ，那么在从全局上下文进入和退出 =EC1=  时，将进行以下堆栈修改：
-
-#+BEGIN_EXPORT html
-<img src="/images/js-the-core-4.svg" alt="图五、改变执行上下文栈">
-<span class="caption">◎ 改变执行上下文栈</span>
-#+END_EXPORT
 
 这正是 ECMAScript 的运行时系统管理代码执行的方式。
 
@@ -211,11 +184,6 @@ foo(30);
 * 5. 执行上下文
 
 执行上下文可以抽象地表示为一个简单的对象。每个执行上下文都有一组必要的属性（我们可以称之为上下文的状态），用于跟踪其关联代码的执行进度。下图显示了上下文的结构：
-
-#+BEGIN_EXPORT html
-<img src="/images/js-the-core-5.svg" alt="图六、一个执行上下文结构">
-<span class="caption">◎ 图六、一个执行上下文结构</span>
-#+END_EXPORT
 
 除了这三个需要的属性（一个变量对象、一个 =this= 值和一个作用域链）之外，根据实现的不同，执行上下文可能具有任何额外的状态。
 
@@ -244,11 +212,6 @@ console.log(baz)
 #+END_SRC
 
 全局上下文的变量对象（VO，variable object）有以下属性：
-
-#+BEGIN_EXPORT html
-<img src="/images/js-the-core-6.svg" alt="图七、全局变量对象">
-<span class="caption">◎ 图七、全局变量对象</span>
-#+END_EXPORT
 
 函数表达式 =baz= 并未出现在上图的全局变量对象中，这是访问 =baz= 时出错（ =Uncaught ReferenceError: baz is not defined= ）的原因。
 
@@ -280,11 +243,6 @@ foo(10, 20)
 #+END_SRC
 
 =foo= 函数上下文的活动对象图示：
-
-#+BEGIN_EXPORT html
-<img src="/images/js-the-core-7.svg" alt="图八、活动对象">
-<span class="caption">◎ 图八、活动对象</span>
-#+END_EXPORT
 
 同样，函数表达式 =baz= 不包含在变量/活动对象中。
 
@@ -320,11 +278,6 @@ var x = 10
 
 我们可以通过隐式 =__parent__=  属性假定作用域链对象之间的链接，该属性引用链中的下一个对象。作用域链的另一种表示形式可以是简单的数组。使用 =__parent__= 概念，我们可以用下图表示上面的示例（因此父变量对象保存在函数的 =[[Scope]]=  属性中）：
 
-#+BEGIN_EXPORT html
-<img src="/images/js-the-core-8.svg" alt="图九、作用域链">
-<span class="caption">◎ 图九、作用域链</span>
-#+END_EXPORT
-
 在代码执行时，作用域链可以使用 =with= 语句和 =catch=  子句对象进行扩展。由于这些对象是简单的对象，它们可能有原型（和原型链）。这个事实导致作用域链查找是二维的：(1) 首先考虑作用域链链接，然后 (2) 对每个作用域链的链接——进入链接原型链的深度（如果链接有原型的话）。
 
 例如：
@@ -351,11 +304,6 @@ var y = 30
 #+END_SRC
 
 上述代码的图示结构：
-
-#+BEGIN_EXPORT html
-<img src="/images/js-the-core-9.svg" alt="图十、with 从句作用域链">
-<span class="caption">◎ 图十、with 从句作用域链</span>
-#+END_EXPORT
 
 注意，并非在所有实现中，全局对象都会从 =Object.prototype= 继承。图片中描述的行为（带有引用来自全局上下文的未定义变量 x）是可复现测试的，比如，在 SpiderMonkey 中。
 
@@ -432,11 +380,6 @@ console.log(
 #+END_SRC
 
 代码可用下图说明：
-
-#+BEGIN_EXPORT html
-<img src="/images/js-the-core-10.svg" alt="图十一、共享 [[Scope]]">
-<span class="caption">◎ 图十一、共享 [[Scope]]</span>
-#+END_EXPORT
 
 这个特性与在循环中创建多个函数的混淆恰好相关。在已创建的函数中使用循环计数器，当所有函数在函数中具有相同的计数器值时，一些程序员经常会得到意外的结果。现在应该很清楚为什么会这样ーー因为所有这些函数都具有相同的 =[[Scope]]=  ，其中循环计数器具有最后赋值。
 
