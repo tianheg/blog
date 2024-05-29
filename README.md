@@ -9,6 +9,7 @@
 - [ ] Modify style, make the blog more aesthetic and readable; then Organize the style files
 - [ ] use pure css instead of sass
 - [ ] Remove dead links regularly([tool1](https://www.deadlinkchecker.com/website-dead-link-checker.asp), [tool2](https://www.brokenlinkcheck.com/broken-links.php))
+- [ ] zh to en
 
 ## Reminder
 
