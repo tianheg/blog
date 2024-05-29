@@ -1,0 +1,23 @@
+#+TITLE: TailwindCSS 在无 PostCSS 的情况下，无法使用
+#+DATE: <2024-05-29 Wed 11:27>
+#+TAGS[]: 技术
+
+在测试一个全栈 Demo 的时候，前端使用了 Vite + Vue + TailwindCSS，使用 Fastify 构建 API。
+
+遇到的问题：样式 class 不起作用。
+
+按照 TailwindCSS 官方的框架教程，重新创建一个 Vite + Vue + TailwindCSS 项目，比较了我的项目和模板项目各个文件的区别，尝试了
+
+- 更改 src/main.js 中 =import './style.css';= 和 =import App from './App.vue';= 的先后顺序
+- 移动 style.css 或对其进行重命名后，重新导入
+- 把 tailwindcss 包从 dependencies 移动到 devDependencies
+- 把 bun 换成 npm
+
+经过以上操作都没有效果后，我开始思考是不是遗漏了什么？经过 [[https://stackoverflow.com/a/66511993/12539782][stackoverflow]] 的提醒，我意识到：自己没有配置 PostCSS。于是，我按照 TailwindCSS 官方教程，重新操作了一遍：
+
+#+BEGIN_SRC sh
+bun add --dev tailwindcss postcss autoprefixer
+bunx tailwindcss init -p # 这一步会生成 tailwind.config.js，postcss.config.js
+#+END_SRC
+
+之后再对 tailwind.config.js 中的 content 路径进行修改，就可以愉快地在 *.vue 中使用 TailwindCSS 了。

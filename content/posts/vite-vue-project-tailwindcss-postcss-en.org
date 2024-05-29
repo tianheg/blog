@@ -1,0 +1,23 @@
+#+TITLE: TailwindCSS Cannot Be Used Without PostCSS
+#+DATE: <2024-05-29 Wed 11:51>
+#+TAGS[]: 技术 English
+
+While testing a full-stack demo, the front-end used Vite + Vue + TailwindCSS, and Fastify was used to build the API.
+
+The issue encountered: The style classes were not working.
+
+Following the official framework tutorial of TailwindCSS, I created a new Vite + Vue + TailwindCSS project, compared the differences between the files of my project and the template project, and tried:
+
+- Changing the order of =import './style.css';= and =import App from './App.vue';= in src/main.js
+- Moving style.css or renaming it, and then re-importing it
+- Moving the tailwindcss package from dependencies to devDependencies
+- Switching from bun to npm
+
+After none of the above operations had any effect, I started to think if I missed something? Prompted by a [[https://stackoverflow.com/a/66511993/12539782][stackoverflow]] answer, I realized: I had not configured PostCSS. So, I went through the official tutorial of TailwindCSS again:
+
+#+BEGIN_SRC sh
+bun add --dev tailwindcss postcss autoprefixer
+bunx tailwindcss init -p # This step generates tailwind.config.js and postcss.config.js
+#+END_SRC
+
+After that, I modified the content path in tailwind.config.js, and then I could happily use TailwindCSS in *.vue files.
