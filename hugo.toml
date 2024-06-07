@@ -85,8 +85,12 @@ weight = 80
 baseName = "index"
 mediaType = "application/rss+xml"
 
+[outputFormats.SearchIndex]
+    mediaType = "application/json"
+    baseName = "posts"
+
 [outputs]
-home = ["HTML", "SectionsRSS"]
+home = ["HTML", "SectionsRSS", "SearchIndex"]
 page = ["HTML"]
 section = ["HTML"]
 taxonomy = ["HTML"]
