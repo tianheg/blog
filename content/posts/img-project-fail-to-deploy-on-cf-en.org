@@ -1,0 +1,155 @@
+#+TITLE: Img project fail to deploy on Cloudflare
+#+DATE: <2024-06-26 Wed 20:26>
+#+TAGS[]: 技术 English
+
+Yesterday, I shared my portfolio with the Kaiyuanshe group. While discussing my img site, I encountered the first issue -- images are supposed to zoom in when clicked, but they actually open in a new tab.
+
+I checked the Git commits and reverted them one by one until I successfully resolved the issue. The problem stemmed from my attempt to implement view transitions using "@view-transition", inspired by an Astro blog post titled [[https://astro.build/blog/future-of-astro-zero-js-view-transitions/]["Zero-JavaScript View Transitions"]], which is not supported in my current browser.
+
+Just when I believed I had resolved all issues, I stumbled upon another problem -- all the alt texts I had assigned to images had vanished. Subsequently, upon examining the Cloudflare Pages deployment logs, I discovered the errors being displayed:
+
+#+BEGIN_SRC log
+23:58:47.472	 generating static routes 
+23:58:47.492	15:58:47 ▶ src/pages/internet.astro
+23:58:48.324	15:58:47   └─ /internet/index.htmlSyntaxError: Unexpected token 'o', "[object Obj"... is not valid JSON
+23:58:48.324	    at JSON.parse (<anonymous>)
+23:58:48.324	    at altTexts (file:///opt/buildhome/repo/dist/chunks/_layout_Dry1hoQ2.mjs:1045:19)
+23:58:48.324	    at process.processTicksAndRejections (node:internal/process/task_queues:95:5)
+23:58:48.325	    at async file:///opt/buildhome/repo/dist/chunks/_layout_Dry1hoQ2.mjs:1050:23
+23:58:48.364	 (+872ms)
+23:58:48.366	15:58:48 ▶ src/pages/index.astro
+23:58:48.548	15:58:48   └─ /index.htmlSyntaxError: Unexpected token 'o', "[object Obj"... is not valid JSON
+23:58:48.549	    at JSON.parse (<anonymous>)
+23:58:48.549	    at altTexts (file:///opt/buildhome/repo/dist/chunks/_layout_Dry1hoQ2.mjs:1045:19)
+23:58:48.549	    at process.processTicksAndRejections (node:internal/process/task_queues:95:5)
+23:58:48.549	    at async file:///opt/buildhome/repo/dist/chunks/_layout_Dry1hoQ2.mjs:1050:23
+23:58:48.628	 (+262ms)
+23:58:48.628	15:58:48 ✓ Completed in 1.16s.
+#+END_SRC
+
+At first, I was perplexed and unable to comprehend why this error had arisen. Nevertheless, I managed to identity the problematic code, which resembled the following:
+
+#+BEGIN_SRC js
+import Cloudflare from 'cloudflare';
+import dotenv from 'dotenv';
+dotenv.config();
+
+const client = new Cloudflare({
+  apiToken: process.env.CF_KV_API_TOKEN,
+});
+
+const kvOptions = {
+  account_id: 'xxx',
+};
+const altTexts = async () => {
+  try {
+    const data = await client.kv.namespaces.values.get(
+      'xxx',
+      'img-altTexts',
+      kvOptions,
+    );
+    return JSON.parse(data);
+  } catch (error) {
+    console.error(error);
+    return [];
+  }
+};
+
+const altTextData = await altTexts();
+#+END_SRC
+
+I didn't know how to debug this. With the help of , added =console.log(data)=, it get normal result locally but unexpected =Response()= object on Cloudflare:
+
+Uncertain about how to debug this problem, I sought help from [[https://github.com/luojiyin1987][@luojiyin1987]]. Together, we inserted =console.log(data)=, which successfully produced the desired outcome during local testing. However, upon deployment on Cloudflare, an unexpected =Response()= object was returned:
+
+#+BEGIN_SRC log
+23:00:19.726	15:00:19 ▶ src/pages/index.astro
+23:00:20.016	15:00:19   └─ /index.htmlResponse {
+23:00:20.016	  size: 0,
+23:00:20.017	  timeout: 0,
+23:00:20.017	  [Symbol(Body internals)]: {
+23:00:20.017	    body: PassThrough {
+23:00:20.017	      _events: [Object],
+23:00:20.017	      _readableState: [ReadableState],
+23:00:20.017	      _writableState: [WritableState],
+23:00:20.017	      allowHalfOpen: true,
+23:00:20.017	      _maxListeners: undefined,
+23:00:20.018	      _eventsCount: 5,
+23:00:20.018	      [Symbol(shapeMode)]: true,
+23:00:20.018	      [Symbol(kCapture)]: false,
+23:00:20.018	      [Symbol(kCallback)]: null
+23:00:20.018	    },
+23:00:20.018	    disturbed: false,
+23:00:20.018	    error: null
+23:00:20.018	  },
+23:00:20.018	  [Symbol(Response internals)]: {
+23:00:20.019	    url: 'https://api.cloudflare.com/client/v4/accounts/account_id/storage/kv/namespaces/namespace_id/values/img-altTexts',
+23:00:20.019	    status: 200,
+23:00:20.019	    statusText: 'OK',
+23:00:20.019	    headers: Headers { [Symbol(map)]: [Object: null prototype] },
+23:00:20.019	    counter: 0
+23:00:20.019	  }
+23:00:20.019	}
+23:00:20.019	SyntaxError: Unexpected token 'o', "[object Response]" is not valid JSON
+23:00:20.020	    at JSON.parse (<anonymous>)
+23:00:20.020	    at altTexts (file:///opt/buildhome/repo/dist/chunks/_layout_FKCzc6Aa.mjs:1050:19)
+23:00:20.020	    at process.processTicksAndRejections (node:internal/process/task_queues:95:5)
+23:00:20.020	    at async file:///opt/buildhome/repo/dist/chunks/_layout_FKCzc6Aa.mjs:1056:23
+23:00:20.078	 (+352ms)
+#+END_SRC
+
+I researched =JSON.parse()=, which converts a string containing text (string, boolean, JSON, array) into corresponding data types (string, boolean, JSON, array). It doesn't support trailing commas or single quotes. In contrast, =JSON.stringify()= is used to convert objects or other data types into strings.
+
+Following this, @luojiyin1987 suggested that utilizing the Cloudflare REST API might be a better approach. Consequently, I commenced updating the code, and the final version is provided below:
+
+#+BEGIN_SRC js
+import fetch from 'node-fetch';
+import dotenv from 'dotenv';
+
+dotenv.config();
+
+interface AltTextItem {
+	name: string;
+	altText: string;
+}
+
+const url =
+	'https://api.cloudflare.com/client/v4/accounts/account_id/storage/kv/namespaces/namespace_id/values/img-altTexts';
+
+const options = {
+	method: 'GET',
+	headers: {
+		'Content-Type': 'application/json',
+		Authorization: `Bearer ${process.env.CF_KV_API_TOKEN}`,
+	},
+};
+
+const altTexts = async (): Promise<AltTextItem[]> => {
+	try {
+		const response = await fetch(url, options);
+		if (!response.ok) throw new Error('Network response was not ok');
+		const data = (await response.json()) as AltTextItem[];
+		return data;
+	} catch (error) {
+		console.error(
+			'There was a problem with the fetch problem operation:',
+			error,
+		);
+		return [];
+	}
+};
+
+const altTextData = await altTexts();
+#+END_SRC
+
+To get this code spend me hours time. After this process of problem solving, I have some thoughts:
+
+- Pure is better. REST API better than SDK. Don't have much time to dig the Cloduflare SDK, just use REST API.
+- When solving the problem, @luojiyin1987 made me realized that my JS foundation is weak, need more work on it. I feel a little shame about it.
+- When I couldn't seek the right solution, I feel panic and inconfident about myself, and hate the problem which made me so uncomfortable. Then I persuade myself, made me blieve that If I want to make progress, this kind of situation will be more common. When I adopted in  this, I will chanllenge more difficult problems to make progress.
+
+Investing substantial time in refining the code underscored valuable insights:
+
+- Simple is better. Using REST API is preferable to SDK. Due to time constraints, opted for REST API over Cloudflare SDK.
+- Collaboration with @luojiyin1987 revealed gaps in my JavaScript skills, prompting a realization of the need for improvement. Experience prompted a sense of embarrassment.
+- Initial struggle with finding the right solution led to feelings of panic and self-doubt. Despite discomfort, realized such situations are necessary for growth. Embracing challenges will enable progerss.
