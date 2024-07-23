@@ -1,0 +1,60 @@
+#+TITLE: 学习 C 编程语言
+#+DATE: <2024-07-23 Tue 23:16>
+#+TAGS[]: 技术
+
+[[https://www.w3schools.com/c/index.php]]
+
+C 语言创造于 1972 年，至今仍在广泛使用。学习 C 语言可以帮助我理解 Linux 内核。
+
+* C 的 Hello World
+
+#+BEGIN_SRC c
+#include <stdio.h> // 头文件，用于引用需要的库文件
+
+int main () { // 声明一个函数
+  printf("Hello World!"); // ; 是每行语句必备的
+}
+#+END_SRC
+
+* 插入新行
+
+使用 \n，其他类似的用法 \t, \\, \"。
+
+* 声明变量
+
+- int
+- float
+- char 声明单字符
+
+变量声明后，变量对应的值可被更改。
+
+** 格式化输出
+
+- %d 输出整数
+- %f 输出小数，%.1f 输出一位小数
+- %c 输出单个字母
+
+例子：
+
+#+BEGIN_SRC c
+int studentId = 15;
+int studentAge = 23;
+float studentFee = 45.6;
+char studentGrade = 'C';
+
+printf("Student id: %d\n", studentId);
+printf("Student age: %d\n", studentAge);
+printf("Student fee: %f\n", studentFee);
+printf("Student grade: %c", studentGrade);
+#+END_SRC
+
+* 数据类型
+
+- 整型 2/4 字节 %d
+- 浮点型 4 字节 %f/%F
+- 双精度浮点 8 字节 %lf
+- 字符型 1 字节 %c
+
+还有个 %s 用于字符串。
+
+科学记数法： =34e2= ， =23E5= 。
