@@ -1,13 +1,13 @@
 {{ $related := .Site.RegularPages.Related . | first (.Site.Params.relatedPostsNumber | default 5) }}
 {{ with $related }}
-<div class="related-posts" data-pagefind-ignore>
-  <h2 class="related-title">{{ i18n "relatedPosts" }}{{ partial "utils/icon.html" (dict "$" $ "name" $.Site.Params.relatedPostsIcon "class" "related-icon") }}</h2>
-  <ul class="related-list">
+<div class="border border-[rgba(242,242,242,1)] p-[0.6em_1em] leading-[2em] mt-20 related-posts" data-pagefind-ignore>
+  <h2 class="text-[1em] m-0 related-title">{{ i18n "relatedPosts" }}{{ partial "utils/icon.html" (dict "$" $ "name" $.Site.Params.relatedPostsIcon "class" "float-right mt-[0.4em] related-icon") }}</h2>
+  <ul class="m-0 p-0 list-none related-list">
       {{ range . }}
-          <li class="related-item">
-              <a href="{{ .RelPermalink }}" class="related-link">{{ (partial "utils/title.html" (dict "$" . "title" .LinkTitle)).htmlTitle }}</a>
+          <li >
+              <a href="{{ .RelPermalink }}" class="leading-6 inline-block related-link">{{ (partial "utils/title.html" (dict "$" . "title" .LinkTitle)).htmlTitle }}</a>
           </li>
       {{ end }}
   </ul>
 </div>
-{{ end }}
+{{ end }}   

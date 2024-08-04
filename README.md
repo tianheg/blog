@@ -10,6 +10,7 @@
 - [ ] use pure css instead of sass
 - [ ] Remove dead links regularly([tool1](https://www.deadlinkchecker.com/website-dead-link-checker.asp), [tool2](https://www.brokenlinkcheck.com/broken-links.php))
 - [ ] zh to en
+- [ ] use shiki https://blog.puzzmo.com/posts/2024/06/23/shiki-hugo/ https://bojanz.github.io/better-hugo-syntax-highlighting-shiki/
 
 ## Reminder
 

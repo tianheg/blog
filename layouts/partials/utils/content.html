@@ -17,7 +17,7 @@
   {{- $icon := .Scratch.Get "icon" -}}
   {{- $anchor := $icon | default "§" -}}
   
-  {{- $replacement := (printf `$1<span class="anchor-link">%s</span>$3$4` $anchor) -}}
+  {{- $replacement := (printf `$1<span class="relative transform-none float-right">%s</span>$3$4` $anchor) -}}
   {{- $.Scratch.Set "replacement" $replacement -}}
   
   {{- $replacement := .Scratch.Get "replacement" -}}
@@ -27,35 +27,6 @@
   {{- $Content = $Content | replaceRE $regexPatternHeadingsAnchor $regexReplacementHeadingsAnchor -}}
 {{- end -}}
 
-<!-- Drop Cap -->
-{{- if eq .Type "poetry" -}}
-    {{- $enableDropCap := .Params.dropCap | default false -}}
-    {{- .Scratch.Set "enableDropCap" $enableDropCap -}}
-{{- else -}}
-    {{- $enableDropCap := .Params.dropCap | default .Site.Params.enableDropCap -}}
-    {{- .Scratch.Set "enableDropCap" $enableDropCap -}}
-{{- end -}}
-{{- $enableDropCap := .Scratch.Get "enableDropCap" -}}
-{{- if $enableDropCap -}}
-    {{- $regexPatternDropCap := `(<p)(>)([^<])(.+(</p>|\n))` -}}
-    {{- $regexReplacementDropCap := `$1 style="text-indent:0"$2<span class="drop-cap">$3</span>$4` -}}
-    {{- $firstParagraphOld := (delimit (findRE $regexPatternDropCap $Content 1) " ") -}}
-    {{- $firstParagraphNew := (replaceRE $regexPatternDropCap $regexReplacementDropCap $firstParagraphOld) -}}
-    {{- $Content = replace $Content $firstParagraphOld $firstParagraphNew 1 -}}
-{{- end -}}
-
-<!-- Drop Cap After `<hr />` -->
-{{- $enableDropCapAfterHr := .Params.dropCapAfterHr | default .Site.Params.enableDropCapAfterHr -}}
-{{- if ne .Type "poetry" -}}
-    {{- if $enableDropCapAfterHr -}}
-        
-        {{- $replacement := .Scratch.Get "replacement" -}}
-
-        {{- $regexPatternDropCapAfterHr := `(\n(<hr />|<hr>))(\n<p)(>)([^<])` -}}
-        {{- $regexReplacementDropCapAfterHr := $replacement -}}
-        {{- $Content = $Content | replaceRE $regexPatternDropCapAfterHr $regexReplacementDropCapAfterHr -}}
-    {{- end -}}
-{{- end -}}
 
 <!-- Footnote Ref with Square Brackets `[]` -->
 {{- if .Site.Params.squareBrackets -}}
@@ -64,71 +35,20 @@
     {{- $Content = $Content | replaceRE $regexPatternFootnoteRef $regexReplacementFootnoteRef -}}
 {{- end -}}
 
-<!-- Delete Footnote `<hr />` -->
-{{- if .Site.Params.insertHrBySelf -}}
-    {{- $regexPatternDeleteHr := `(<hr />|<hr>)\n(<(section|div) class="footnotes" role="doc-endnotes">)` -}}
-    {{- $regexReplacementDeleteHr := `$2` -}}
-    {{- $Content = $Content | replaceRE $regexPatternDeleteHr $regexReplacementDeleteHr -}}
-{{- end -}}
-
-<!-- Replace `footnoteReturnLinkContents` with icon -->
-{{- with .Site.Params.footnoteReturnLinkIcon -}}
-    {{- $icon := (partial "utils/icon.html" (dict "$" $ "name" . "class" "footnote-icon")) -}}
-    {{- $replacement := (printf `${1}%s$3` $icon) -}}
-
-    {{- $regexPatternfootnoteReturnLinkIcon := `(href="#fnref[^>]+>)([^<]+)(.+)` -}}
-    {{- $regexReplacementfootnoteReturnLinkIcon := $replacement -}}
-    {{- $Content = $Content | replaceRE $regexPatternfootnoteReturnLinkIcon $regexReplacementfootnoteReturnLinkIcon -}}
-{{- end -}}
-
-<!-- Image & Video Footnote -->
-{{- $regexPatternFootnoteImage := `(<sup)(.+</sup><(img|video))` -}}
-{{- $regexReplacementFootnoteImage := `$1 style="float:right"$2` -}}
-{{- $Content = $Content | replaceRE $regexPatternFootnoteImage $regexReplacementFootnoteImage -}}
-
-<!-- Video Hosting -->
-{{- if and .Site.Params.enableVideoHost (eq hugo.Environment "production") -}}
-    {{- $hostURL := strings.TrimSuffix "/" .Site.Params.videoHostURL -}}
-    {{- $temps := findRE `<(video) src="/?([^":]+)` $Content | uniq -}}
-    {{- with $temps -}}
-        {{- range . -}}
-            {{- if not (in (slice "http" "ttps") (substr . -1 4)) -}}
-                {{- $url := replaceRE `<(video) src="/?([^":]+)` `$2` . -}}
-                {{- $prefix := replaceRE `(<(video) src=")/?([^":]+)` `$1` . -}}
-                {{- $replacement := (printf `%s%s/%s` $prefix $hostURL $url) -}}
-                {{- $Content = replace $Content . $replacement -}}
-            {{- end -}}
-        {{- end -}}
-    {{- end -}}
-{{- end -}}
-
-<!-- Paragraph Indent -->
-{{- $enableIndent := (and .Site.Params.enableParagraphIndent .Params.indent) | default (and .Site.Params.enableParagraphIndent (eq .Site.Params.paragraphStyle "indent")) -}}
-{{- if ne .Type "poetry" -}}
-    {{- if $enableIndent -}}
-        {{- $regexPatternIndent := `((</p>|<blockquote>)\n<p)(>)(.+(<br />|<br>))` -}}
-        {{- $regexReplacementIndent := `$1 style="text-indent:0;padding-left:2em;margin:1em 0"$3$4` -}}
-        {{- $Content = $Content | replaceRE $regexPatternIndent $regexReplacementIndent -}}
-    {{- end -}}
-{{- end -}}
 
 <!-- Do NOT Indent The First Paragraph -->
-{{- if and (not (.Params.indentFirstParagraph | default .Site.Params.indentFirstParagraph)) $enableIndent -}}
+{{- if and (not (.Params.indentFirstParagraph | default .Site.Params.indentFirstParagraph)) -}}
     {{- if ne .Type "poetry" -}}
-        {{- if not $enableDropCap -}}
-            {{- $regex := `(<p)(>[^<]+)` -}}
-            {{- $replacement := `$1 style="text-indent:0"$2` -}}
-            {{- $firstParagraphOld := (delimit (findRE $regex $Content 1) " ") -}}
-            {{- $firstParagraphNew := (replaceRE $regex $replacement $firstParagraphOld) -}}
-            {{- $Content = replace $Content $firstParagraphOld $firstParagraphNew -}}
-        {{- end -}}
-        {{- if not $enableDropCapAfterHr -}}
-            {{- $regex := `((</h[1-6]>|<hr>|<hr />)\n(<blockquote>\n)?<p)(>[^<])` -}}
-            {{- $.Scratch.Set "regex" $regex -}}
-        {{- else -}}
-            {{- $regex := `((</h[1-6]>)\n(<blockquote>\n)?<p)(>[^<])` -}}
-            {{- $.Scratch.Set "regex" $regex -}}
-        {{- end -}}
+    
+        {{- $regex := `(<p)(>[^<]+)` -}}
+        {{- $replacement := `$1 style="text-indent:0"$2` -}}
+        {{- $firstParagraphOld := (delimit (findRE $regex $Content 1) " ") -}}
+        {{- $firstParagraphNew := (replaceRE $regex $replacement $firstParagraphOld) -}}
+        {{- $Content = replace $Content $firstParagraphOld $firstParagraphNew -}}
+        {{- $regex := `((</h[1-6]>|<hr>|<hr />)\n(<blockquote>\n)?<p)(>[^<])` -}}
+        {{- $.Scratch.Set "regex" $regex -}}
+        
+
         {{- $regex := .Scratch.Get "regex" -}}
         {{- $replacement := `$1 style="text-indent:0"$4` -}}
         {{- $Content = $Content | replaceRE $regex $replacement -}}
