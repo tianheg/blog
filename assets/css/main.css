@@ -1,0 +1,280 @@
+@import "tailwindcss";
+
+:root {
+  --text-wdth: 90;
+  --text-opsz: 40;
+  --text-YTLC: 460;
+}
+
+body {
+  font-family: -apple-system, system-ui, BlinkMacSystemFont, 'Noto Serif SC', Arial, 'Amstelvar', 'Josefin Sans', 'Hiragino Sans GB', 'Microsoft Yahei', 'ST Heiti', sans-serif, 'Apple Color Emoji', 'Segoe UI Emoji', 'Segoe UI Symbol';
+  font-variation-settings:
+    'wdth' var(--text-wdth),
+    'opsz' var(--text-opsz),
+    'YTLC' var(--text-YTLC);
+}
+
+svg {
+  vertical-align: middle;
+}
+
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+  margin: 1.618em 0 1em;
+
+  a {
+    text-decoration: none !important;
+  }
+}
+
+h1 {
+  font-size: 2em;
+}
+
+h2 {
+  font-size: 1.8em;
+}
+
+h3 {
+  font-size: 1.6em;
+}
+
+h4 {
+  font-size: 1.4em;
+}
+
+h5 {
+  font-size: 1.2em;
+}
+
+h6 {
+  font-size: 1em;
+}
+
+a {
+  text-decoration: none;
+  transition: all .5s;
+}
+
+
+code,
+pre,
+sup,
+.minimal-footer,
+.copy-button {
+  font-family: 'Source Code Pro', 'Ubuntu Mono', 'DejaVu Sans Mono', 'Courier New', Monaco, monospace;
+}
+
+#back-to-top {
+  &.show {
+    bottom: 0;
+  }
+}
+
+
+[data-theme="dark"] {
+
+  .theme-icon-dark,
+  .footer-icon {
+    opacity: 0.75;
+  }
+}
+
+@media (max-width: 800px) {
+  .nav {
+    margin: 0;
+  }
+
+  :root {
+    .theme-icon-light {
+      display: inline;
+    }
+  }
+
+  [data-theme="dark"] {
+    .theme-icon-dark {
+      display: inline !important;
+    }
+  }
+
+  #lang-switcher {
+    margin: 0;
+  }
+}
+
+@font-face {
+  font-family: 'jinkaiFont';
+  font-display: swap;
+  src: url('/fonts/jinkai03-W03-only-yidajiabei.woff2') format('woff2');
+  font-weight: 100 200 300 400 500 600 700 800 900;
+  font-stretch: 50% 125%;
+  font-style: normal;
+}
+
+@media (max-width: 800px) {
+  blockquote.quote {
+    &.poetry {
+      padding-left: 3em;
+
+      &::before {
+        left: 0;
+      }
+    }
+  }
+}
+
+@media (max-width: 394px) {
+  .menu .time {
+    display: none;
+  }
+
+  .menu {
+    padding-left: 1.42em;
+  }
+}
+
+.jinkaiFont {
+  font-family: "jinkaiFont";
+  font-size: 40px;
+  font-variation-settings: "wght" 550, "opsz" 60, "YOPQ" 90;
+}
+
+/* 
+.home {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  height: 80vh;
+  text-align: center;
+
+  .jinkaiFont {
+    font-family: "jinkaiFont";
+    font-size: 40px;
+    font-variation-settings: "wght" 550, "opsz" 60, "YOPQ" 90;
+  }
+
+  .poetry {
+    font-size: 1em;
+    width: auto;
+    max-width: 26em;
+    margin: 0 auto;
+  }
+
+  .poetry .en {
+    font-style: italic;
+  }
+
+  @media (max-width: 400px) or (max-height: 667px) {
+    .logo-and-title {
+      display: none;
+    }
+  }
+} */
+
+.tag-cloud {
+  text-align: center;
+}
+
+.tag-cloud-item {
+  margin: 0.5rem;
+  display: inline-block;
+  &:hover {
+    color: #548bf4;
+  }
+  .tag-cloud-item-count {
+    display: inline-block;
+    position: relative;
+    top: -15px;
+    color: #548bf4;
+  }
+}
+
+.fof {
+  &::before {
+    background-image: url("/images/flying-clouds-720p.jpg");
+    background-repeat: no-repeat;
+    background-size: cover;
+    background-position: 50% 50%;
+    content: " ";
+    position: fixed;
+    width: 100%;
+    height: 100%;
+    top: 0;
+    left: 0;
+    z-index: 1;
+  }
+  .main-inner {
+    background: rgba(0, 0, 0, 0.25);
+    min-height: 100%;
+    min-width: 100%;
+    position: absolute;
+    z-index: 3;
+  }
+  video {
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    min-width: 100%;
+    min-height: 100%;
+    width: auto;
+    height: auto;
+    z-index: 2;
+    transform: translateX(-50%) translateY(-50%);
+  }
+  h1 {
+    font-size: 3rem;
+    text-transform: uppercase;
+    letter-spacing: 0.3rem;
+    text-align: center;
+    top: 15%;
+    left: 5%;
+    right: 5%;
+    position: absolute;
+    color: #fff;
+    margin: 0.67em 0;
+  }
+  p {
+    font-size: 1.5rem;
+    letter-spacing: 0.3rem;
+    text-align: center;
+    top: 35%;
+    left: 5%;
+    right: 5%;
+    position: absolute;
+    color: #fff;
+    margin: 0.67em 0;
+
+    a {
+      text-decoration: underline dashed white;
+      text-underline-offset: 0.4rem;
+
+      &:hover {
+        text-decoration: none;
+      }
+    }
+  }
+  .fof-footer {
+    font-size: 2rem;
+    position: absolute;
+    bottom: 15%;
+    left: 10%;
+    right: 10%;
+    text-align: center;
+  }
+  a {
+    color: #eee;
+    &:hover {
+      color: #fff;
+    }
+  }
+  @media only screen and (max-device-width: 1024px) {
+    #bgvid {
+      display: none;
+    }
+  }
+}

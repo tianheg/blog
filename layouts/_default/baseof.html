@@ -1,18 +1,22 @@
 <!DOCTYPE html>
 <html lang="en"
-{{ if and .Site.Params.enableDarkMode }}
-  {{ with .Site.Params.defaultTheme | default "light" }}
-    data-theme="{{ . }}"
-  {{ end }}
-{{ end }}>
-  {{ partial "head.html" . }}
-  <body>
-    <div class="container">
-      {{ partial "menu.html" . }}
+  {{ if and .Site.Params.enableDarkMode }}
+    {{ with .Site.Params.defaultTheme | default "light" }}
+      data-theme="{{ . }}"
+    {{ end }}
+  {{ end }}>
 
-      {{ block "main" . }}{{ end }}
-      {{ partial "components/back-to-top.html" . }}
-    </div>
-    {{ partial "components/service-worker.html" . }}
-  </body>
+{{ partial "head.html" . }}
+
+<body class="pb-16 text-base text-[16px]  text-[rgba(49,49,53,1)] bg-[#ededed] break-words leading-relaxed transition-all duration-500 selection:bg-[rgba(42,109,244,0.3)]
+  ">
+  <div class="flex flex-col min-h-full min-w-full ">
+    {{ partial "menu.html" . }}
+
+    {{ block "main" . }}{{ end }}
+    {{ partial "components/back-to-top.html" . }}
+  </div>
+  {{ partial "components/service-worker.html" . }}
+</body>
+
 </html>
