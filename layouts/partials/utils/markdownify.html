@@ -22,5 +22,5 @@
     {{- end -}}
 {{- end -}}
 
-{{- $Content = replaceRE `(<a href="https?:[^"]+")` `$1 target="_blank"` $Content -}}
+{{- $Content = replaceRE `(<a class="underline decoration-dashed underline-offset-[0.4rem] hover:no-underline" href="https?:[^"]+")` `$1 target="_blank"` $Content -}}
 {{- $Content | safeHTML -}}

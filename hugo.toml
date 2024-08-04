@@ -14,6 +14,32 @@ tag = "tags"
 [frontmatter]
 lastmod = ["lastmod", ":git", ":fileModTime", ":default"]
 
+
+[module]
+    [module.hugoVersion]
+        min = "0.128.0"
+    [[module.mounts]]
+        source = "assets"
+        target = "assets"
+    [[module.mounts]]
+        source = "content"
+        target = "content"
+    [[module.mounts]]
+        source       = "hugo_stats.json"
+        target       = "assets/notwatching/hugo_stats.json"
+        disableWatch = true
+[build.buildStats]
+    enable = true
+[[build.cachebusters]]
+    source = "assets/notwatching/hugo_stats\\.json"
+    target = "css"
+[[build.cachebusters]]
+    source = 'layouts/.*'
+    target = 'css'
+[[build.cachebusters]]
+    source = "(postcss|tailwind)\\.config\\.js"
+    target = "css"
+
 [markup]
 
 [markup.goldmark]
@@ -192,7 +218,6 @@ enableFingerprint = true
 enableHighlight = true
 enableOverflowY = false
 enableSRI = true
-maxHeight = 20 # Unit: em
 # 404 page
 fofPoster = "./images/flying-clouds-720p.jpg"
 fofVideoMp4 = "/videos/flying-clouds-720p.mp4"

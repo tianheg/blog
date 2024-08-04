@@ -1,30 +1,30 @@
-<nav>
-    <ul class="menu">
+<nav class="">
+    <ul class="z-1  sticky top-0 p-0 m-0 list-none leading-6 font-medium text-center flex justify-center overflow-x-hidden break-all gap-1 sm:gap-8 bg-[rgba(242,242,242,1)] text-[1em]">
         {{ .Scratch.Set "currentPage" . }}
-        {{ $currentPage := .Scratch.Get "currentPage" }}
+        {{ $currentPage := .Scratch.Get "currentPage" }}    
         {{ $ctx := . }}
         {{ range .Site.Menus.main }}
-            {{ if and (eq .Identifier "theme-switcher") $.Site.Params.enableDarkMode }}
+            {{ if  and (eq .Identifier "theme-switcher") $.Site.Params.enableDarkMode }}
 
                 {{ $switcher := partial "components/dark-mode.html" $ctx }}
                 {{ with $switcher }}
-                    <li class="menu-item">
+                    <li class="inline-block m-0">
                         {{ . }}
                     </li>
                 {{ end }}
             {{ else if and (eq .Identifier "menu-time") }}
                {{ $switcher := partial "components/menu-time.html" $ctx }}
                {{ with $switcher }}
-                  <li class="menu-item">
+                  <li class="inline-block m-0">
                      {{ . }}
                   </li>
                {{ end }}
             {{ else }}
-                <li class="menu-item{{ if or ($currentPage.IsMenuCurrent "main" .) ($currentPage.HasMenuCurrent "main" .) }} active{{ end }}">
+                <li class="inline-block m-0 {{ if or ($currentPage.IsMenuCurrent "main" .) ($currentPage.HasMenuCurrent "main" .) }} text-[rgba(42,109,244,1)] active{{ end }}">
                     {{- $linkType := (string .Pre) -}}
                     <a href="{{ .URL }}"{{ if eq $linkType "external" }} target="_blank" rel="external"{{ end }}>
                         {{- with .Name -}}
-                            <span class="menu-item-name">{{ . }}</span>
+                            <span class="menu-item-name text-[0.9em]">{{ . }}</span>
                         {{- end -}}
                     </a>
                 </li>

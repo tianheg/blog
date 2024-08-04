@@ -1,6 +1,6 @@
 {{ define "main" }}
-<main class="main single" id="main">
-    <div class="main-inner">
+<main class="w-[50em] p-[2em_1em_15em] block pb-20" id="main">
+    <div class="m-0 mx-auto sm:w-auto block">
 
         {{ $attrs := partial "utils/data-attributes.html" . }}
 
@@ -12,14 +12,14 @@
         {{- if $attrs.indent }} data-indent="true"{{ end }}
         {{- if $attrs.tocNum }} data-toc-num="true"{{ end }} data-pagefind-body>
 
-            <h1 class="post-title p-name">{{ (partial "utils/title.html" (dict "$" $ "title" $.Title)).htmlTitle }}</h1>
+            <h1 class="text-center post-title p-name">{{ (partial "utils/title.html" (dict "$" $ "title" $.Title)).htmlTitle }}</h1>
 
             {{ $enableTOC := .Params.toc -}}
             {{- if $enableTOC -}}
                 {{- partial "utils/toc.html" . -}}
             {{- end -}}
 
-            <div class="post-body e-content">
+            <div class="mt-16 post-body e-content">
                 {{ partial "utils/content.html" . }}
             </div>
 

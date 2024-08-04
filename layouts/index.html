@@ -1,19 +1,21 @@
 {{ define "main" }}
-  <main class="home">
-    <div class="logo-and-title">
+<main class="text-center flex flex-col">
+  <div class="flex-grow flex flex-col justify-center items-center py-12">
+    <div class="flex flex-col justify-center items-center">
       <div class="logo"><img src="/images/logo.png" alt="logo" width="100" height="100"></div>
-      <div class="home-title">一大加贝</div>
+      <div class="jinkaiFont">一大加贝</div>
     </div>
 
-    <div class="poetry">
+    <div class="text-1xl leading-10 max-w-md mx-auto">
       <p>探索的人</p>
-      <p class="en">The Explorer</p>
+      <p class="italic font-serif">The Explorer</p>
       <p>了解自己，认识世界</p>
-      <p class="en">Knowing oneself, grasp the world</p>
+      <p class="italic font-serif">Knowing oneself, grasp the world</p>
       <p>谨以此博客献给此时的自己</p>
-      <p class="en">Dedicated to the present self</p>
+      <p class="italic font-serif">Dedicated to the present self</p>
     </div>
-  </main>
-
+  </div>
   {{ partial "footer.html" . }}
+</main>
+
 {{ end }}

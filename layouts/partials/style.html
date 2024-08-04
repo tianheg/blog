@@ -1,7 +1,23 @@
-{{- $path := (strings.TrimPrefix "/" (printf `/css/tianheg.min.css`)) -}}
-{{- $options := (dict "targetPath" $path "outputStyle" "compressed" "transpiler" "dartsass"  "includePaths" (slice "node_modules/bootstrap/scss")) -}}
-
-{{- $style := resources.Get "scss/main.scss" | resources.ExecuteAsTemplate (printf "/styles/main-rendered.scss") . | resources.ToCSS $options -}}
-
-{{- $style = $style | resources.Fingerprint -}}
-<link rel="stylesheet" href="{{ $style.RelPermalink }}" integrity="{{ $style.Data.Integrity }}" crossorigin="anonymous"/>
+{{ with (templates.Defer (dict "key" "global")) }}
+{{ $t := debug.Timer "tailwindcss" }}
+{{ with resources.Get "css/main.css" }}
+  {{ $opts := dict
+    "inlineImports" true
+    "optimize" (not hugo.IsDevelopment)
+  }}
+  {{ with . | css.TailwindCSS $opts }}
+    {{ if hugo.IsDevelopment }}
+      <link rel="stylesheet" href="{{ .RelPermalink }}" />
+    {{ else }}
+      {{ with . | minify | fingerprint }}
+        <link
+          rel="stylesheet"
+          href="{{ .RelPermalink }}"
+          integrity="{{ .Data.Integrity }}"
+          crossorigin="anonymous" />
+      {{ end }}
+    {{ end }}
+  {{ end }}
+{{ end }}
+{{ $t.Stop }}
+{{ end }}
