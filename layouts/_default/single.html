@@ -1,10 +1,10 @@
 {{ define "main" }}
-<main class="w-[50em] p-[2em_1em_15em] block pb-20" id="main">
-    <div class="m-0 mx-auto sm:w-auto block">
+<main class="max-w-screen-md p-[2em_1em_15em]  flex flex-auto justify-center pb-20" id="main">
+    <div class="m-auto">
 
         {{ $attrs := partial "utils/data-attributes.html" . }}
 
-        <article class="content post h-entry"
+        <article class="content post h-entry "
         {{- if $attrs.smallCaps }} data-small-caps="true"{{ end }}
         {{- with $attrs.align }} data-align="{{ . }}"{{ end }}
         {{- with $attrs.type }} data-type="{{ . }}"{{ end }}
@@ -33,6 +33,6 @@
 
         {{ partial "components/comments.html" . }}
     </div>
-</main>
+</main> 
 
 {{ end }}
