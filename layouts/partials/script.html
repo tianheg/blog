@@ -1,16 +1,8 @@
 {{- $scripts := slice "js/main.js" -}}
 
-{{- if (not hugo.IsDevelopment) -}}
-    {{- $scripts = union $scripts (slice "js/force-https.js") -}}
-{{- end -}}
-
 {{- $scripts = union $scripts (slice "js/menu-time.js") -}}
-
-
 {{- $scripts = union $scripts (slice "js/back-to-top.js") -}}
-
 {{- $scripts = union $scripts (slice "js/copy.js") -}}
-
 {{- $scripts = union $scripts (slice "js/keyboard.js") -}}
 
 {{- $processedScripts := slice ("" | resources.FromString "dummy.js") -}}
