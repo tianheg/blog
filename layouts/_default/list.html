@@ -9,8 +9,8 @@
     {{ if and (eq .Kind "section") .Content }}
         {{ partial "pages/post.html" . }}
     {{ else }}
-        <main class="max-w-[880px] mx-auto p-[2em_1em_15em] block single pb-20 main list" id="main" data-pagefind-ignore>
-            <div class="w-[50em] main-inner">
+        <main class="mx-auto sm:max-w-[880px] p-[2em_1em_15em] pb-20 list" id="main" data-pagefind-ignore>
+            <div class="main-inner">
                 <div class="content list-group">
 
                     {{ .Scratch.Delete "pages" }}
