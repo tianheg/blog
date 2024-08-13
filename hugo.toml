@@ -1,5 +1,4 @@
 baseURL = "https://tianheg.co/"
-defaultContentLanguage = "zh"
 hasCJKLanguage = true
 pluralizeListTitles = false
 summaryLength = 42
@@ -14,25 +13,38 @@ tag = "tags"
 [frontmatter]
 lastmod = ["lastmod", ":git", ":fileModTime", ":default"]
 
-
 [module]
-    [module.hugoVersion]
-        min = "0.128.0"
-    [[module.mounts]]
-        source = "assets"
-        target = "assets"
-    [[module.mounts]]
-        source = "content"
-        target = "content"
+[module.hugoVersion]
+min = "0.128.0"
+[[module.mounts]]
+source = "assets"
+target = "assets"
+
+[[module.mounts]]
+source = "content"
+target = "content"
+
+[[module.mounts]]
+source = "hugo_stats.json"
+target = "assets/notwatching/hugo_stats.json"
+disableWatch = true
+
+[build.buildStats]
+enable = true
+
 [[build.cachebusters]]
-    source = 'layouts/.*'
-    target = 'css'
+source = "assets/notwatching/hugo_stats\\.json"
+target = "css"
+
 [[build.cachebusters]]
-    source = "(postcss|tailwind)\\.config\\.js"
-    target = "css"
+source = 'layouts/.*'
+target = 'css'
+
+[[build.cachebusters]]
+source = "(postcss|tailwind)\\.config\\.js"
+target = "css"
 
 [markup]
-
 [markup.goldmark]
 
 [markup.goldmark.extensions]
@@ -48,9 +60,9 @@ typographer = false
 autoHeadingID = true
 autoHeadingIDType = "github"
 
-[markup.goldmark.parser.attribute]
+[markup.goldmark  .parser.attribute]
 block = false
-title = true
+title = false
 
 [markup.goldmark.renderer]
 hardWraps = false
@@ -67,9 +79,8 @@ noHl = false
 tabWidth = 2
 
 [markup.tableOfContents]
-endLevel = 6
-ordered = true
 startLevel = 2
+endLevel = 3
 
 [author]
 avatar = "/icons/apple-touch-icon.png"
@@ -102,8 +113,8 @@ baseName = "index"
 mediaType = "application/rss+xml"
 
 [outputFormats.SearchIndex]
-    mediaType = "application/json"
-    baseName = "posts"
+mediaType = "application/json"
+baseName = "posts"
 
 [outputs]
 home = ["HTML", "SectionsRSS", "SearchIndex"]
@@ -157,54 +168,10 @@ identifier = "menu-time"
 weight = 9
 
 [params]
-## theme
-defaultTheme = "light"
-enableDarkMode = true
-hideThemeToggle = false
-hideThemeToggleInHome = false
-primaryColorDark = "201, 65%, 62%"
-primaryColorLight = "220, 90%, 56%"
-## PWA
-themeColor = "#fff"
-themeColorDark = "#16171d"
-## meta data
-jsonLD = true
-openGraph = true
 # footnote
-footnoteReturnLinkIcon = "angle-up"
-insertHrBySelf = true
 squareBrackets = true
 ## para
 backToTopIcon = "arrow-up"
 ### TODO
 enableBackToTop = true
-enableBackToTopAutoHide = true
-enableDropCap = false
-enableDropCapAfterHr = false
-enableFooter = true
 enableJustify = false
-enableMinimalFooter = true
-enableParagraphIndent = true
-enablePostGitInfo = true
-enablePostNav = true
-enableRelatedPosts = true
-enableSmallCaps = false
-indentFirstParagraph = false
-lineHeight = 2
-paragraphStyle = "margin"
-postNavInSection = true
-relatedPostsIcon = "plus-circle"
-relatedPostsNumber = 10
-repoEditURL = "https://github.com/tianheg/blog/edit/main"
-repoURL = "https://github.com/tianheg/blog"
-# Code Blocks
-enableCopy = true
-enableCopyAutoHide = true
-enableFingerprint = true
-enableHighlight = true
-enableOverflowY = false
-enableSRI = true
-# 404 page
-fofPoster = "./images/flying-clouds-720p.jpg"
-fofVideoMp4 = "/videos/flying-clouds-720p.mp4"
-fofVideoWebm = "/videos/flying-clouds-720p.webm"

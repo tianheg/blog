@@ -7,25 +7,12 @@
 {{- $description := .description -}}
 <!-- Date -->
 {{- $dates := partial "utils/date.html" $ -}}
-<!-- Images -->
-{{- $images := partial "utils/images.html" $ -}}
 
 <meta property="og:title" content="{{ (partial "utils/title.html" (dict "$" $ "title" $.Title)).rawTitle }}" />
 <meta property="og:description" content="{{ $description }}" />
 <meta property="og:url" content="{{ $.Permalink }}" />
 <meta property="og:site_name" content="{{ $.Site.Title }}" />
 <meta property="og:locale" content="{{ $.Site.Language.Lang }}" />
-{{- if and  hugo.IsMultilingual $.IsTranslated -}}
-    {{- range $.Site.Languages -}}
-        {{ if ne .Lang $.Site.Language.Lang }}
-            <meta property="og:locale:alternate" content="{{ . }}" />
-        {{ end }}
-    {{- end -}}
-{{- end -}}
-
-{{- with $images -}}
-  <meta property="og:image" content="{{ index . 0 }}" />
-{{- end -}}
 
 {{- if and $.IsPage (in $.Site.Params.mainSections $.Section) -}}
     <meta property="og:type" content="article" />

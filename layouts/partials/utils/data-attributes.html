@@ -1,6 +1,3 @@
-<!-- Small Caps -->
-{{- $smallCaps := .Params.smallCaps | default .Site.Params.enableSmallCaps | default false -}}
-
 <!-- Align -->
 {{- $align := .Params.align | default "default" -}}
 {{- if ne .Type "poetry" -}}
@@ -15,13 +12,4 @@
 <!-- Layout -->
 {{- $layout := .Params.layout -}}
 
-<!-- Paragraph Indent -->
-{{- $indent := false -}}
-{{- if and .Site.Params.enableParagraphIndent (ne .Type "poetry") -}}
-    {{- if .Params.indent | default (eq .Site.Params.paragraphStyle "indent") -}}
-        {{- $indent = true -}}
-    {{- end -}}
-{{- end -}}
-
-
-{{- return dict "smallCaps" $smallCaps "align" $align "type" $type "layout" $layout "indent" $indent -}}
+{{- return dict "align" $align "type" $type "layout" $layout -}}
