@@ -6,50 +6,47 @@
         {{- $path = .Path -}}
     {{- end -}}
 
-    {{ if and (eq .Kind "section") .Content }}
-        {{ partial "pages/post.html" . }}
-    {{ else }}
-        <main class="mx-auto sm:max-w-[880px] p-[2em_1em_15em] pb-20 list" id="main" data-pagefind-ignore>
-            <div class="main-inner">
-                <div class="content list-group">
 
-                    {{ .Scratch.Delete "pages" }}
+    <main class="mx-auto sm:max-w-[880px] p-[2em_1em_15em] pb-20 list" id="main" data-pagefind-ignore>
+        <div class="main-inner">
+            <div class="content list-group">
 
-                    <!-- Section -->
-                    {{ if (eq .Kind "section") }}
-                        <!-- Archives -->
-                        {{ if (eq .Section "archives") }}
-                            {{ $pages := (where .Site.RegularPages "Section" "in" .Site.Params.mainSections) }}
-                            {{ .Scratch.Set "pages" $pages }}
-                        <!-- Regular Section -->
-                        {{ else }}
-                            {{ $sectionPage := .CurrentSection }}
-                            {{ range .Site.RegularPages }}
-                                {{ if (.IsDescendant $sectionPage) }}
-                                    {{ $.Scratch.Add "pages" (slice .) }}
-                                {{ end }}
+                {{ .Scratch.Delete "pages" }}
+
+                <!-- Section -->
+                {{ if (eq .Kind "section") }}
+                    <!-- Archives -->
+                    {{ if (eq .Section "archives") }}
+                        {{ $pages := (where .Site.RegularPages "Section" "in" .Site.Params.mainSections) }}
+                        {{ .Scratch.Set "pages" $pages }}
+                    <!-- Regular Section -->
+                    {{ else }}
+                        {{ $sectionPage := .CurrentSection }}
+                        {{ range .Site.RegularPages }}
+                            {{ if (.IsDescendant $sectionPage) }}
+                                {{ $.Scratch.Add "pages" (slice .) }}
                             {{ end }}
                         {{ end }}
                     {{ end }}
+                {{ end }}
 
-                    <!-- Taxonomy (See `taxonomy` folder) -->
+                <!-- Taxonomy (See `taxonomy` folder) -->
 
-                    <!-- Taxonomy Term -->
-                    {{ if (eq .Kind "term") }}
-                        {{ $pages := .Pages }}
-                        {{ $.Scratch.Set "pages" $pages }}
-                    {{ end }}
+                <!-- Taxonomy Term -->
+                {{ if (eq .Kind "term") }}
+                    {{ $pages := .Pages }}
+                    {{ $.Scratch.Set "pages" $pages }}
+                {{ end }}
 
-                    <!-- Start List -->
-                    {{ $pages := .Scratch.Get "pages" }}
-                    {{ range $pages.GroupByDate "2006" }}
-                      {{ $.Scratch.Set "year" .Key }}
-                      {{ $year := $.Scratch.Get "year" }}
-                      <h2 class="list-year">{{ $year }}</h2>
-                      {{ partial "utils/list-item.html" (dict "$" .) }}
-                    {{ end }}
-                </div>
+                <!-- Start List -->
+                {{ $pages := .Scratch.Get "pages" }}
+                {{ range $pages.GroupByDate "2006" }}
+                    {{ $.Scratch.Set "year" .Key }}
+                    {{ $year := $.Scratch.Get "year" }}
+                    <h2 class="list-year">{{ $year }}</h2>
+                    {{ partial "utils/list-item.html" (dict "$" .) }}
+                {{ end }}
             </div>
-        </main>
-    {{ end }}
+        </div>
+    </main>
 {{ end }}

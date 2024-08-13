@@ -1,4 +1,4 @@
-  {{ with (templates.Defer (dict "key" "global")) }}
+{{ with (templates.Defer (dict "key" "global")) }}
 {{ $t := debug.Timer "tailwindcss" }}
 {{ with resources.Get "css/main.css" }}
   {{ $opts := dict

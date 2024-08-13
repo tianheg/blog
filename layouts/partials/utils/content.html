@@ -36,25 +36,6 @@
 {{- end -}}
 
 
-<!-- Do NOT Indent The First Paragraph -->
-{{- if and (not (.Params.indentFirstParagraph | default .Site.Params.indentFirstParagraph)) -}}
-    {{- if ne .Type "poetry" -}}
-    
-        {{- $regex := `(<p)(>[^<]+)` -}}
-        {{- $replacement := `$1 style="text-indent:0"$2` -}}
-        {{- $firstParagraphOld := (delimit (findRE $regex $Content 1) " ") -}}
-        {{- $firstParagraphNew := (replaceRE $regex $replacement $firstParagraphOld) -}}
-        {{- $Content = replace $Content $firstParagraphOld $firstParagraphNew -}}
-        {{- $regex := `((</h[1-6]>|<hr>|<hr />)\n(<blockquote>\n)?<p)(>[^<])` -}}
-        {{- $.Scratch.Set "regex" $regex -}}
-        
-
-        {{- $regex := .Scratch.Get "regex" -}}
-        {{- $replacement := `$1 style="text-indent:0"$4` -}}
-        {{- $Content = $Content | replaceRE $regex $replacement -}}
-    {{- end -}}
-{{- end -}}
-
 <!-- Responsive tables -->
 {{- $Content = $Content | replaceRE `<table\b` `<div class="table-container"><table` -}}
 {{- $Content = $Content | replaceRE `</table>` `</table></div>` -}}
