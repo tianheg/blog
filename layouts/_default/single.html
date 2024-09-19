@@ -1,5 +1,5 @@
 {{ define "main" }}
-<main class="mx-auto sm:max-w-[880px] p-[2em_1em_15em] flex justify-center pb-20" id="main">
+<main class="mx-auto sm:max-w-[900px] p-[2em_1em_15em] flex justify-center pb-20" id="main">
     <div class="m-auto">
 
         {{ $attrs := partial "utils/data-attributes.html" . }}
@@ -25,11 +25,7 @@
 
         </article>
 
-        {{ partial "components/related-posts.html" . }}
-
         {{ partial "components/minimal-footer.html" . }}
-
-        {{ partial "components/post-nav.html" . }}
 
         {{ partial "components/comments.html" . }}
     </div>
