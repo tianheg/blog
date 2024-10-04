@@ -25,6 +25,8 @@ $ gpg --keyserver-options auto-key-retrieve --verify archlinux-version-x86_64.is
 
 ** 制作启动盘
 
+可能的 USB ID：usb-SMI_USB_DISK-0:0，不要在后面加上形似 -part1 的内容（[[https://wiki.archlinux.org/title/USB_flash_installation_medium#Using_basic_command_line_utilities][参考]]）。
+
 #+BEGIN_SRC txt
 # dd bs=4M if=archlinux-version-x86_64.iso of=/dev/disk/by-id/usb-* conv=fsync oflag=direct status=progress
 #+END_SRC
