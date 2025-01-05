@@ -1,6 +1,6 @@
 export async function onRequest(context) {
   const { fetch } = context; // Use the fetch from context
-  const { UNSPLASH_ACCESS_KEY } = process.env;
+  const { UNSPLASH_ACCESS_KEY } = context.env;
 
   try {
     const response = await fetch(`https://api.unsplash.com/photos/random?client_id=${UNSPLASH_ACCESS_KEY}`);
