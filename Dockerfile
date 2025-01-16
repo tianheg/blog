@@ -15,7 +15,7 @@ ENV PAGEFIND_VERSION=1.0.4
 ENV HUGO_VERSION=0.141.0
 
 # Install Hugo with explicit permissions
-RUN curl -L https://github.com/gohugoio/hugo/releases/download/v${HUGO_VERSION}/hugo_extended_${HUGO_VERSION}_linux-amd64.tar.gz | tar -xz -C /usr/local/bin hugo \
+RUN curl -L https://github.com/gohugoio/hugo/releases/download/v${HUGO_VERSION}/hugo_extended_${HUGO_VERSION}_linux-amd64.tar.gz | tar -xz -C /usr/local/bin \
     && chmod +x /usr/local/bin/hugo \
     && hugo version
 
