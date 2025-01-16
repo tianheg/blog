@@ -13,8 +13,15 @@ RUN apk add --no-cache \
 # Install Pagefind and Hugo 
 ENV PAGEFIND_VERSION=1.0.4
 ENV HUGO_VERSION=0.141.0
-RUN curl -L https://github.com/gohugoio/hugo/releases/download/v${HUGO_VERSION}/hugo_extended_${HUGO_VERSION}_linux-amd64.tar.gz | tar -xz -C /usr/local/bin hugo
-RUN wget -q https://github.com/CloudCannon/pagefind/releases/download/v${PAGEFIND_VERSION}/pagefind_extended-v${PAGEFIND_VERSION}-x86_64-unknown-linux-musl.tar.gz -O - | tar -xz -C /usr/local/bin
+
+# Install Hugo with explicit permissions
+RUN curl -L https://github.com/gohugoio/hugo/releases/download/v${HUGO_VERSION}/hugo_extended_${HUGO_VERSION}_linux-amd64.tar.gz | tar -xz -C /usr/local/bin hugo \
+    && chmod +x /usr/local/bin/hugo \
+    && hugo version
+
+# Install Pagefind
+RUN curl -L https://github.com/CloudCannon/pagefind/releases/download/v${PAGEFIND_VERSION}/pagefind_extended-v${PAGEFIND_VERSION}-x86_64-unknown-linux-musl.tar.gz | tar -xz -C /usr/local/bin \
+    && chmod +x /usr/local/bin/pagefind_extended
 
 # Copy package files
 COPY package*.json ./
