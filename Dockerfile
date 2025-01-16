@@ -19,11 +19,14 @@ RUN wget -q https://github.com/CloudCannon/pagefind/releases/download/v${PAGEFIN
 # Copy package files
 COPY package*.json ./
 
-# Install Node.js dependencies
-RUN npm install && npm run all
+# Install Node.js dependencies only
+RUN npm install
 
 # Copy the rest of the application
 COPY . .
+
+# Now run the build after all files are copied
+RUN npm run all
 
 # Deploy stage
 FROM nginx:alpine
