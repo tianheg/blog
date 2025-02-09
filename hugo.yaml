@@ -1,0 +1,142 @@
+baseURL: "https://tianheg.co/"
+hasCJKLanguage: true
+pluralizeListTitles: false
+summaryLength: 42
+title: "Tianhe Gao | 高天贺"
+
+permalinks:
+  tags: "/tags/:slug/"
+
+taxonomies:
+  tag: "tags"
+
+frontmatter:
+  lastmod:
+    - lastmod
+    - :git
+    - :fileModTime
+    - :default
+
+module:
+  hugoVersion:
+    min: "0.128.0"
+  mounts:
+    - source: assets
+      target: assets
+    - source: content
+      target: content
+
+build:
+  cachebusters:
+    - source: 'layouts/.*'
+      target: css
+    - source: "(postcss|tailwind)\\.config\\.js"
+      target: css
+
+markup:
+  goldmark:
+    extensions:
+      definitionList: true
+      footnote: true
+      linkify: true
+      strikethrough: true
+      table: true
+      taskList: true
+      typographer: false
+    parser:
+      autoHeadingID: true
+      autoHeadingIDType: "github"
+      attribute:
+        block: false
+        title: false
+    renderer:
+      hardWraps: false
+      unsafe: true
+  highlight:
+    codeFences: true
+    guessSyntax: true
+    lineNos: false
+    lineNumbersInTable: false
+    noClasses: false
+    noHl: false
+    tabWidth: 2
+  tableOfContents:
+    startLevel: 2
+    endLevel: 3
+
+author:
+  avatar: "/icons/apple-touch-icon.png"
+  email: "i@tianheg.co"
+  motto: "Knowing oneself, grasp the world"
+  website: "https://tianheg.co/"
+
+related:
+  includeNewer: true
+  threshold: 80
+  toLower: true
+  indices:
+    - name: tags
+      weight: 100
+    - name: date
+      pattern: "2006"
+      weight: 90
+    - name: fragmentrefs
+      type: fragments
+      applyFilter: false
+      weight: 80
+
+outputFormats:
+  SectionsRSS:
+    baseName: index
+    mediaType: "application/rss+xml"
+  SearchIndex:
+    mediaType: "application/json"
+    baseName: posts
+
+outputs:
+  home:
+    - HTML
+    - SectionsRSS
+    - SearchIndex
+  page:
+    - HTML
+  section:
+    - HTML
+  taxonomy:
+    - HTML
+  term:
+    - HTML
+
+services:
+  rss:
+    limit: 10
+
+menu:
+  main:
+    - name: Home
+      pageRef: "/"
+      weight: 1
+    - name: Now
+      pageRef: "/now"
+      weight: 3
+    - name: Read
+      url: "https://read.tianheg.org"
+      weight: 4
+    - name: Tech
+      url: "/tags/tech/"
+      weight: 5
+    - name: Service
+      pageRef: "/service"
+      weight: 6
+    - name: Posts
+      pageRef: "/posts"
+      weight: 7
+
+params:
+  # footnote
+  squareBrackets: true
+  ## para
+  backToTopIcon: "arrow-up"
+  ### TODO
+  enableBackToTop: true
+  enableJustify: false 
