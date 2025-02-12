@@ -1,5 +1,4 @@
 export async function onRequest(context) {
-  const { fetch } = context; // Use the fetch from context
   const { UNSPLASH_ACCESS_KEY } = context.env;
 
   try {
