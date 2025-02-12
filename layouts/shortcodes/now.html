@@ -1,5 +1,5 @@
 {{ $data := dict }}
-{{ $url := "https://fogg.tianheg.org/api/list" }}
+{{ $url := "https://tianheg.co/api/list" }}
 {{ with resources.GetRemote $url }}
   {{ if .Err }}
     {{ errorf "%s" .Err }}
