@@ -1,9 +1,9 @@
-{{ $data := dict }}
 {{ $url := "https://tianheg.co/api/list" }}
-{{ with resources.GetRemote $url }}
-  {{ if .Err }}
-    {{ errorf "%s" .Err }}
-  {{ else }}
+{{ $data := dict }}
+{{ with try (resources.GetRemote $url) }}
+  {{ with .Err }}
+    {{ errorf "%s" . }}
+  {{ else with .Value}}
     {{ $data = . | transform.Unmarshal }}
 
     <div class="task-list">
@@ -12,7 +12,7 @@
             <p>[({{ .date }})]&nbsp;&nbsp;{{ .title | safeHTML }} &nbsp;</p> 
           </div>
       {{ end }}
-      </div>
+    </div>
   {{ end }}
 {{ else }}
   {{ errorf "Unable to get remote resource %q" $url }}
