@@ -16,11 +16,16 @@ export async function onRequestGet(context) {
       return new Response('API request failed', { status: response.status });
     }
     
-    // 3. Parse JSON data
+    // 3. Parse JSON data and filter fields
     const data = await response.json();
+    const filteredData = data.map(post => ({
+      created_at: post.created_at,
+      url: post.url,
+      text: post.text
+    }));
     
-    // 4. Return response with proper headers
-    return new Response(JSON.stringify(data), {
+    // 4. Return filtered response with proper headers
+    return new Response(JSON.stringify(filteredData), {
       headers: {
         'Content-Type': 'application/json',
         'Access-Control-Allow-Origin': '*'
