@@ -1,4 +1,4 @@
-{{ $url := "https://tianheg.co/fogg/list" }}
+{{ $url := "https://tianheg.co/api/fogg/list" }}
 {{ $data := dict }}
 {{ with try (resources.GetRemote $url) }}
   {{ with .Err }}
