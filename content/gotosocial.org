@@ -1,0 +1,39 @@
+#+TITLE: Social Statues
+
+#+BEGIN_EXPORT html
+<div id="posts" class="space-y-4"></div>
+
+<script>
+// Load and display statuses
+fetch('https://tianheg.co/api/gts')
+  .then(response => response.json())
+  .then(statuses => {
+    const postsContainer = document.getElementById('posts');
+    
+    const postsHTML = statuses.map(status => `
+  <article class="rounded-lg p-6 shadow-sm ">
+    <p class="whitespace-pre-wrap mb-4">${status.text}</p>
+
+    
+    <a href="${status.url}" 
+      class="ml-2 no-underline" 
+      target="_blank" 
+      rel="noopener">
+        <time class="text-xs text-gray-500" datetime="${status.created_at}">
+        ${new Date(status.created_at).toLocaleDateString('en-US', { 
+            year: 'numeric', 
+            month: 'long', 
+            day: 'numeric',
+            hour: '2-digit',
+            minute: '2-digit'
+        })}
+        </time>
+    </a>  
+  </article>
+`).join('');
+
+    postsContainer.innerHTML = postsHTML;
+  })
+  .catch(error => console.error('Error loading statuses:', error));
+</script>
+#+END_EXPORT
