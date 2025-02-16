@@ -2,13 +2,13 @@ export async function onRequest(context) {
   try {
     // 1. Fetch tasks from KV store
     const tasks = await context.env.TASKS.get('tasks');
-    
+
     // 2. Handle missing tasks
     if (!tasks) {
       return new Response(JSON.stringify({
         status: "err",
         message: "No tasks found"
-      }), { 
+      }), {
         status: 404,
         headers: { 'Content-Type': 'application/json' }
       });
@@ -22,11 +22,18 @@ export async function onRequest(context) {
     const allowedOrigin = `https://${apiHost}`;
     const requestOrigin = context.request.headers.get('Origin');
 
+    // Allow local development origins
+    const isLocalDevelopment = [
+      'http://localhost:1313',
+      'http://127.0.0.1:1313'
+    ].includes(requestOrigin);
+
     const corsHeaders = {
       'Content-Type': 'application/json',
       'Access-Control-Allow-Methods': 'GET',
       'Vary': 'Origin',
-      'Access-Control-Allow-Origin': requestOrigin === allowedOrigin ? allowedOrigin : 'none'
+      'Access-Control-Allow-Origin': isLocalDevelopment ? requestOrigin :
+        (requestOrigin === allowedOrigin ? allowedOrigin : 'none')
     };
 
     // 5. Return successful response
