@@ -48,13 +48,16 @@ document.addEventListener('DOMContentLoaded', () => {
   fetch('https://tianheg.co/api/fogg/list')
     .then(response => {
       if (!response.ok) {
-        throw new Error('Network response was not ok');
+        throw new Error(`HTTP error! status: ${response.status}`);
       }
-      console.log(response)
       return response.json();
     })
-    .then(tasks => {
-      tasks.forEach(task => {
+    .then(result => {
+      if (result.status !== "ok") {
+        throw new Error(result.message || 'API response error');
+      }
+      
+      result.data.forEach(task => {
         const taskElement = document.createElement('div');
         taskElement.className = `task-item ${task.completed ? 'completed' : ''}`;
         
