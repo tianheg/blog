@@ -50,8 +50,8 @@ document.addEventListener('DOMContentLoaded', () => {
       if (!response.ok) {
         throw new Error('Network response was not ok');
       }
-      console.log(response.data)
-      return response.data.json();
+      console.log(response)
+      return response.json();
     })
     .then(tasks => {
       tasks.forEach(task => {
