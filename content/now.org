@@ -8,6 +8,67 @@ Updated at any time, from my apartment in Shenzhen, China.
 
 #+BEGIN_EXPORT html
 <img src="https://mermaid.ink/img/pako:eNpVkF1LwmAUx7_KOFcTpunci3sugtS666qual08uEc3cJusjTIRFEMveiHIuoiiG-mioAihZBJ9menWt2h7HEF_zsU553feOB2o2RoBBPWmfVTTseMyu1XVYmJt7Ae-H44fl_e9n9FF9NQP706D2SSYfwT-2QGTza6X2eh1Er0No9Hz4vM9k7YlhKmkKJjdhjfnKSpTVGUj_yX4uv6X3GQX34Pwari27D0sB9OUVSjbYoPZ5WpHfELUH4fTeQY4MIljYkOLj-8k5Sq4OjGJCih2m0ZDd1VQrW5ciD3X3mlbNUCu4xEOHNtr6IDquHkYR15Lwy6pGrjhYPMvSzTDtZ3t1XPojzhoYQtQB44B8bySE4sFQREKQl7iRQ7agPK5fKKSKMUm8LxUEPmiLHY5OLFtM-EKVUkWJUURZFmhI_copGu7v95plJY?type=png)](https://mermaid.live/edit#pako:eNpVkF1LwmAUx7_KOFcTpunci3sugtS666qual08uEc3cJusjTIRFEMveiHIuoiiG-mioAihZBJ9menWt2h7HEF_zsU553feOB2o2RoBBPWmfVTTseMyu1XVYmJt7Ae-H44fl_e9n9FF9NQP706D2SSYfwT-2QGTza6X2eh1Er0No9Hz4vM9k7YlhKmkKJjdhjfnKSpTVGUj_yX4uv6X3GQX34Pwari27D0sB9OUVSjbYoPZ5WpHfELUH4fTeQY4MIljYkOLj-8k5Sq4OjGJCih2m0ZDd1VQrW5ciD3X3mlbNUCu4xEOHNtr6IDquHkYR15Lwy6pGrjhYPMvSzTDtZ3t1XPojzhoYQtQB44B8bySE4sFQREKQl7iRQ7agPK5fKKSKMUm8LxUEPmiLHY5OLFtM-EKVUkWJUURZFmhI_copGu7v95plJY" style="width: 80%; margin: 0 auto;" alt="Now">
-#+END_EXPORT
 
-{{< now >}}
+<div class="task-list" id="task-list"></div>
+
+<style>
+.task-list {
+  max-width: 600px;
+  margin: 20px auto;
+  font-family: Arial, sans-serif;
+}
+
+.task-item {
+  background: #e0e0e0;
+  border-left: 4px solid #888;
+  margin: 8px 0;
+  padding: 12px 16px;
+  border-radius: 4px;
+  display: flex;
+  align-items: center;
+  transition: all 0.3s ease;
+}
+
+.task-item:hover {
+  transform: translateX(5px);
+  box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+}
+
+.task-item.completed {
+  background: #f8f9fa;
+  border-left-color: #4CAF50;
+  opacity: 0.7;
+}
+</style>
+
+<script>
+document.addEventListener('DOMContentLoaded', () => {
+  const container = document.getElementById('task-list');
+  
+  fetch('https://tianheg.co/api/fogg/list')
+    .then(response => {
+      if (!response.ok) {
+        throw new Error('Network response was not ok');
+      }
+      console.log(response.data)
+      return response.data.json();
+    })
+    .then(tasks => {
+      tasks.forEach(task => {
+        const taskElement = document.createElement('div');
+        taskElement.className = `task-item ${task.completed ? 'completed' : ''}`;
+        
+        const content = document.createElement('p');
+        content.innerHTML = `[(${new Date(task.date).toLocaleDateString()})]&nbsp;&nbsp;${task.title}&nbsp;`;
+        
+        taskElement.appendChild(content);
+        container.appendChild(taskElement);
+      });
+    })
+    .catch(error => {
+      console.error('Error:', error);
+      container.innerHTML = `<div class="error">Error loading tasks: ${error.message}</div>`;
+    });
+});
+</script>
+#+END_EXPORT
