@@ -61,8 +61,8 @@ document.addEventListener('DOMContentLoaded', () => {
         const taskElement = document.createElement('div');
         taskElement.className = `task-item ${task.completed ? 'completed' : ''}`;
         
-        const content = document.createElement('p');
-        content.innerHTML = `[(${new Date(task.date).toLocaleDateString()})]&nbsp;&nbsp;${task.title}&nbsp;`;
+        const content = document.createElement('span');
+        content.innerHTML = `[${task.date}]${task.title}`;
         
         taskElement.appendChild(content);
         container.appendChild(taskElement);
