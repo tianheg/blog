@@ -24,20 +24,28 @@ export async function onRequestGet(context) {
       text: post.text
     }));
     
-    // 4. Return filtered response with proper headers
-    return new Response(JSON.stringify(filteredData), {
-      headers: {
-        'Content-Type': 'application/json',
-        'Access-Control-Allow-Origin': '*'
-      }
-    });
+    // 4. Derive allowed origin from request host
+    const apiHost = new URL(context.request.url).hostname;
+    const allowedOrigin = `https://${apiHost}`;
+    const requestOrigin = context.request.headers.get('Origin');
+    
+    // 5. Validate origin and set headers
+    const corsHeaders = {
+      'Content-Type': 'application/json',
+      'Access-Control-Allow-Methods': 'GET',
+      'Vary': 'Origin',
+      'Access-Control-Allow-Origin': requestOrigin === allowedOrigin ? allowedOrigin : 'none'
+    };
+    
+    return new Response(JSON.stringify(filteredData), { headers: corsHeaders });
     
   } catch (error) {
-    // 5. Handle errors
+    // 6. Handle errors with CORS restrictions
     return new Response(JSON.stringify({ error: error.message }), {
       status: 500,
       headers: {
-        'Content-Type': 'application/json'
+        'Content-Type': 'application/json',
+        'Access-Control-Allow-Origin': 'none'
       }
     });
   }
