@@ -1,8 +1,7 @@
 export async function onRequestGet(context) {
   try {
-    // 0. Get API tokens from environment variables
+    // 0. Get API token from environment variables
     const token = context.env.GTS_ACCESS_TOKEN;
-    const flomoApiUrl = context.env.FLOMO_API_URL;
     
     // 1. Fetch from external API with auth header
     const response = await fetch('https://social.tianheg.co/api/v1/accounts/01J6578X3CGB280NRDH89ZEH3A/statuses?exclude_replies=true&exclude_reblogs=true', {
@@ -24,20 +23,6 @@ export async function onRequestGet(context) {
       url: post.url,
       text: post.text
     }));
-    
-    // NEW: Post to Flomo for each status
-    if (flomoApiUrl) {
-      for (const post of filteredData) {
-        const flomoContent = `#gts\n${post.text}\n${post.url}`;
-        await fetch(flomoApiUrl, {
-          method: 'POST',
-          headers: {
-            'Content-Type': 'application/json'
-          },
-          body: JSON.stringify({ content: flomoContent })
-        });
-      }
-    }
     
     // 4. Derive allowed origin from request host
     const apiHost = new URL(context.request.url).hostname;
