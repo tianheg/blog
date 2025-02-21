@@ -26,7 +26,7 @@ export async function onRequestGet(context) {
     }));
     
     // NEW: Post to Flomo for each status
-    if (flomoApiUrl && flomoToken) {
+    if (flomoApiUrl) {
       for (const post of filteredData) {
         const flomoContent = `#gts\n${post.text}\n${post.url}`;
         await fetch(flomoApiUrl, {
