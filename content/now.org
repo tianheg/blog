@@ -57,15 +57,16 @@ document.addEventListener('DOMContentLoaded', () => {
         throw new Error(result.message || 'API response error');
       }
       
-      result.data.forEach(task => {
-        const taskElement = document.createElement('div');
-        taskElement.className = `task-item ${task.completed ? 'completed' : ''}`;
-        
-        const content = document.createElement('span');
-        content.innerHTML = `[${task.date}]${task.title}`;
-        
-        taskElement.appendChild(content);
-        container.appendChild(taskElement);
+      // Reverse the array before processing
+      result.data.reverse().forEach(task => {
+      const taskElement = document.createElement('div');
+      taskElement.className = `task-item ${task.completed ? 'completed' : ''}`;
+      
+      const content = document.createElement('span');
+      content.innerHTML = `[${task.date}]${task.title}`;
+      
+      taskElement.appendChild(content);
+      container.appendChild(taskElement);
       });
     })
     .catch(error => {
