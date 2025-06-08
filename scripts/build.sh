@@ -24,7 +24,7 @@ main() {
 
   # Verify installed versions
   echo "Verifying installations..."
-  echo Pagefind: "$(pagefind_extended --version)"
+  echo Pagefind: "$(pagefind --version)"
   echo Go: "$(go version)"
   echo Hugo: "$(hugo version)"
   echo Node.js: "$(node --version)"
