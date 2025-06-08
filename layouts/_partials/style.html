@@ -1,23 +1,19 @@
 {{ with (templates.Defer (dict "key" "global")) }}
-{{ $t := debug.Timer "tailwindcss" }}
-{{ with resources.Get "css/main.css" }}
-  {{ $opts := dict
+	{{ $t := debug.Timer "tailwindcss" }}
+	{{ with resources.Get "css/main.css" }}
+		{{ $opts := dict
     "inlineImports" true
     "optimize" (not hugo.IsDevelopment)
   }}
-  {{ with . | css.TailwindCSS $opts }}
-    {{ if hugo.IsDevelopment }}
-      <link rel="stylesheet" href="{{ .RelPermalink }}" />
-    {{ else }}
-      {{ with . | minify | fingerprint }}
-        <link
-          rel="stylesheet"
-          href="{{ .RelPermalink }}"
-          integrity="{{ .Data.Integrity }}"
-          crossorigin="anonymous" />
-      {{ end }}
-    {{ end }}
-  {{ end }}
-{{ end }}
-{{ $t.Stop }}
+		{{ with . | css.TailwindCSS $opts }}
+			{{ if hugo.IsDevelopment }}
+				<link rel="stylesheet" href="{{ .RelPermalink }}"/>
+			{{ else }}
+				{{ with . | minify | fingerprint }}
+					<link rel="stylesheet" href="{{ .RelPermalink }}" integrity="{{ .Data.Integrity }}" crossorigin="anonymous"/>
+				{{ end }}
+			{{ end }}
+		{{ end }}
+	{{ end }}
+	{{ $t.Stop }}
 {{ end }}

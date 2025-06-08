@@ -1,18 +1,18 @@
 {{ if and (in .Site.Params.mainSections .Section) }}
-    <footer class="text-[80%] mt-20 flex justify-between items-baseline leading-8 minimal-footer">
-        {{ with .Params.tags }}
-            <div class="max-w-[42%] post-tag">
-                {{- range $index, $tag := . -}}
-                    <!-- Work-around for https://github.com/gohugoio/hugo/issues/6546 -->
-                    {{- $path := (urls.Parse ($tag | urlize)).Path -}}
-                    {{- with $.Site.GetPage (printf `/tags/%s` $path) -}}
-                        {{- if gt $index 0 -}}
-                            {{- " " -}}
-                        {{- end -}}
-                        <a href="{{ .RelPermalink }}" rel="tag" class="inline-block text-[rgba(121,121,124,1)] post-tag-link">#{{ .Slug | default .LinkTitle | default $path | lower | anchorize }}</a>
-                    {{- end -}}
-                {{- end -}}
-            </div>
-        {{ end }}
-    </footer>
+	<footer class="text-[80%] mt-20 flex justify-between items-baseline leading-8 minimal-footer">
+		{{ with .Params.tags }}
+			<div class="max-w-[42%] post-tag">
+				{{- range $index, $tag := . -}}
+					<!-- Work-around for https://github.com/gohugoio/hugo/issues/6546 -->
+					{{- $path := (urls.Parse ($tag | urlize)).Path -}}
+					{{- with $.Site.GetPage (printf `/tags/%s` $path) -}}
+						{{- if gt $index 0 -}}
+							{{- " " -}}
+						{{- end -}}
+						<a href="{{ .RelPermalink }}" rel="tag" class="inline-block text-[rgba(121,121,124,1)] post-tag-link">#{{ .Slug | default .LinkTitle | default $path | lower | anchorize }}</a>
+					{{- end -}}
+				{{- end -}}
+			</div>
+		{{ end }}
+	</footer>
 {{ end }}

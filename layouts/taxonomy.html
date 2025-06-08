@@ -1,21 +1,20 @@
 {{ define "main" }}
-<main class="mx-auto sm:max-w-[880px] p-[2em_1em_15em] main list" id="main">
-  <div class="main-inner">
-      <div class="content tag-cloud">
-          {{ if ne (len $.Site.Taxonomies.tags) 0 }}
-              {{ $max := add (len (index $.Site.Taxonomies.tags.ByCount 0).Pages) 1 }}
-              {{ $min := len (index $.Site.Taxonomies.tags.ByCount.Reverse 0).Pages }}
-              {{ range $name, $taxonomy := $.Site.Taxonomies.tags }}
-                  {{ $currentTagCount := len $taxonomy.Pages }}
-                  {{ $count := len $taxonomy.Pages }}
-                  {{ with $.Site.GetPage (printf "/tags/%s" $name) }}
-                      <a href="{{ .RelPermalink }}" class="tag-cloud-item">{{ .LinkTitle | default .Data.Term | default $name }}<span class="tag-cloud-item-count">{{ $currentTagCount }}</span></a>
-                  {{ end }}
-              {{ end }}
-          {{ end }}
-
-
-      </div>
-  </div>
-</main>
+	<main class="mx-auto sm:max-w-[880px] p-[2em_1em_15em] main list" id="main">
+		<div class="main-inner">
+			<div class="content tag-cloud">
+				{{ if ne (len $.Site.Taxonomies.tags) 0 }}
+					{{ $max := add (len (index $.Site.Taxonomies.tags.ByCount 0).Pages) 1 }}
+					{{ $min := len (index $.Site.Taxonomies.tags.ByCount.Reverse 0).Pages }}
+					{{ range $name, $taxonomy := $.Site.Taxonomies.tags }}
+						{{ $currentTagCount := len $taxonomy.Pages }}
+						{{ $count := len $taxonomy.Pages }}
+						{{ with $.Site.GetPage (printf "/tags/%s" $name) }}
+							<a href="{{ .RelPermalink }}" class="tag-cloud-item">{{ .LinkTitle | default .Data.Term | default $name }}<span class="tag-cloud-item-count">{{ $currentTagCount }}</span>
+							</a>
+						{{ end }}
+					{{ end }}
+				{{ end }}
+			</div>
+		</div>
+	</main>
 {{ end }}

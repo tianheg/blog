@@ -1,6 +1,8 @@
 {{ $options := (dict "markup" "org" ) }}
 <dl class="monthly">
-  <hr>
-  <dt style="margin-bottom: 20px;"><a href="{{ .Get 1 }}">{{ .Get 0 }}</a></dt>
-  <dd>{{ .Inner | .Page.RenderString $options }}</dd>
+	<hr>
+	<dt style="margin-bottom: 20px;">
+		<a href="{{ .Get 1 }}">{{ .Get 0 }}</a>
+	</dt>
+	<dd>{{ .Inner | .Page.RenderString $options }}</dd>
 </dl>
