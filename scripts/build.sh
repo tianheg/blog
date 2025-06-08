@@ -9,7 +9,7 @@ main() {
 
   # Install Pagefind
   echo "Installing Pagefind v${PAGEFIND_VERSION}..."
-  wget -q https://github.com/CloudCannon/pagefind/releases/download/v${PAGEFIND_VERSION}/pagefind_extended-v${PAGEFIND_VERSION}-x86_64-unknown-linux-musl.tar.gz -O - | tar -xz -C ./node_modules/.bin
+  wget -q https://github.com/CloudCannon/pagefind/releases/download/v${PAGEFIND_VERSION}/pagefind_extended-v${PAGEFIND_VERSION}-x86_64-unknown-linux-musl.tar.gz -O - | tar -xz -C /opt/buildhome
 
   # Install Hugo
   echo "Installing Hugo v${HUGO_VERSION}..."
@@ -24,7 +24,7 @@ main() {
 
   # Verify installed versions
   echo "Verifying installations..."
-  echo Pagefind: "$(pagefind --version)"
+  echo Pagefind: "$(pagefind_extended --version)"
   echo Go: "$(go version)"
   echo Hugo: "$(hugo version)"
   echo Node.js: "$(node --version)"
