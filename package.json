@@ -5,11 +5,14 @@
     "pagefind": "pagefind_extended --site public",
     "build": "hugo --gc --buildFuture",
     "dev": "hugo serve --buildFuture",
-    "all": "run-s build pagefind"
+    "all": "run-s build pagefind",
+    "lint": "biome check --write ."
   },
   "devDependencies": {
-    "@tailwindcss/cli": "4.1.7",
+    "@biomejs/biome": "1.9.4",
+    "@tailwindcss/cli": "^4.1.8",
+    "daisyui": "^5.0.43",
     "npm-run-all": "^4.1.5",
-    "tailwindcss": "4.1.7"
+    "tailwindcss": "^4.1.8"
   }
 }

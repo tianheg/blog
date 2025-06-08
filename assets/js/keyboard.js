@@ -36,5 +36,5 @@ window.addEventListener(
     };
     setupEditHotkey();
   },
-  { once: true }
+  { once: true },
 );

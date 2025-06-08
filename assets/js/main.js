@@ -1,22 +1,25 @@
 // https://www.30secondsofcode.org/js/s/throttle/
 
 const throttle = (fn, wait) => {
-  let inThrottle, lastFn, lastTime;
-  return function () {
-    const context = this,
-      args = arguments;
+  let inThrottle;
+  let lastFn;
+  let lastTime;
+  return function (...args) {
     if (!inThrottle) {
-      fn.apply(context, args);
+      fn.apply(this, args);
       lastTime = Date.now();
       inThrottle = true;
     } else {
       clearTimeout(lastFn);
-      lastFn = setTimeout(function () {
-        if (Date.now() - lastTime >= wait) {
-          fn.apply(context, args);
-          lastTime = Date.now();
-        }
-      }, Math.max(wait - (Date.now() - lastTime), 0));
+      lastFn = setTimeout(
+        () => {
+          if (Date.now() - lastTime >= wait) {
+            fn.apply(this, args);
+            lastTime = Date.now();
+          }
+        },
+        Math.max(wait - (Date.now() - lastTime), 0),
+      );
     }
   };
 };
