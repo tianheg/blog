@@ -1,15 +1,8 @@
-
-  <div class="comments">
-    {{ if or (in .Site.Params.mainSections .Section) }}
-    <div style="padding-block: 50px; text-align: center; border-block: 1px dashed gray;">
-      <div>欢迎通过「<a href="mailto:i@tianheg.co?subject=Comment: {{ .Title }}">邮件</a>」告诉我你的想法</div>
-      <div>Welcome to tell me your thoughts via "<a href="mailto:i@tianheg.co?subject=Comment: {{ .Title }}">email</a>"</div>
-    </div>
-    <!-- <div style="text-align: center;">可通过以下渠道赞赏此文
-      <ul style="display: flex; list-style-type: none; justify-content: space-around;">
-        <li><a href="https://afdian.net/a/tianheg">爱发电</a></li>
-        <li><a href="https://paypal.me/tianheg/5">Paypal（定额 5 美元）</a></li>
-      </ul>
-    </div> -->
-    {{ end }}
-  </div>
+<div class="comments">
+	{{ if or (in .Site.Params.mainSections .Section) }}
+		<div style="padding-block: 50px; text-align: center; border-block: 1px dashed gray;">
+			<div>欢迎通过「<a href="mailto:i@tianheg.co?subject=Comment: {{ .Title }}">邮件</a>」告诉我你的想法</div>
+			<div>Welcome to tell me your thoughts via "<a href="mailto:i@tianheg.co?subject=Comment: {{ .Title }}">email</a>"</div>
+		</div>
+	{{ end }}
+</div>

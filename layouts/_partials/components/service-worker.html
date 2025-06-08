@@ -2,9 +2,9 @@
 {{- $dummy := "" | resources.FromString "dummy.js" -}}
 {{- $url := (slice $sw $dummy | resources.Concat "sw.js").RelPermalink -}}
 <script>
-  if ('serviceWorker' in navigator) {
-    window.addEventListener('load', function() {
-      navigator.serviceWorker.register('{{ $url }}');
+	if ('serviceWorker' in navigator) {
+    window.addEventListener('load', function () {
+    navigator.serviceWorker.register('{{ $url }}');
     });
-  }
+}
 </script>
