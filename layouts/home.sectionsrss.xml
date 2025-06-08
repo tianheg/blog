@@ -21,16 +21,6 @@
     {{ with .OutputFormats.Get "SectionsRSS" }}
       <atom:link rel="self" type="{{ .MediaType }}" href="{{ .Permalink }}" />
     {{ end }}
-    {{ range $pages }}
-      {{ $page := . }}
-      {{- $author := partial "utils/author.html" $page -}}
-      <item>
-        <title>{{ (partial "utils/title.html" (dict "$" . "title" .Title)).rawTitle }}</title>
-        <link>{{ .Permalink }}</link>
-        <guid isPermaLink="true">{{ .Permalink }}</guid>
-        <pubDate>{{ .PublishDate.Format "Mon, 02 Jan 2006 15:04:05 -0700" }}</pubDate>
-        <description>{{ partial "utils/make-links-absolute.html" (dict "$" . "content" .Content) | html }}</description>
-      </item>
-    {{ end }}
+    
   </channel>
 </rss>

@@ -1,0 +1,19 @@
+<nav>
+  <ul
+    class="z-1  sticky top-0 p-0 m-0 list-none leading-6 font-medium text-center flex justify-center overflow-x-hidden break-all gap-1 sm:gap-8 bg-[rgba(242,242,242,1)] dark:bg-[#1d232a] text-[1em]">
+    {{ .Store.Set "currentPage" . }}
+    {{ $currentPage := .Store.Get "currentPage" }}
+    {{ $ctx := . }}
+    {{ range .Site.Menus.main }}
+    <li class="inline-block m-0 {{ if or ($currentPage.IsMenuCurrent " main" .) ($currentPage.HasMenuCurrent "main" .)
+      }} text-[rgba(42,109,244,1)] active{{ end }}">
+      {{- $linkType := (string .Pre) -}}
+      <a href="{{ .URL }}" {{ if eq $linkType "external" }} target="_blank" rel="external" {{ end }}>
+        {{- with .Name -}}
+        <span class="menu-item-name text-[0.9em]">{{ . }}</span>
+        {{- end -}}
+      </a>
+    </li>
+    {{ end }}
+  </ul>
+</nav>

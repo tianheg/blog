@@ -1,0 +1,13 @@
+{{ define "main" }}
+
+	<h1 class="text-center">{{ .Title }}</h1>
+	<ul class="mx-auto sm:max-w-[880px] p-[2em_1em_15em] pb-20 list">
+
+		{{ range .Pages }}
+			<li class="list-item mb-[5px] list-square leading-8">
+				<a href="{{ .RelPermalink }}" class="text-[1.2em] list-item-title visited:text-gray-500 list-item-title">{{ (partial "utils/title.html" (dict "$" . "title" .LinkTitle)).htmlTitle }}</a>
+			</li>
+
+		{{ end }}
+	</ul>
+{{ end }}

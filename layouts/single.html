@@ -1,0 +1,26 @@
+{{ define "main" }}
+	<main class="mx-auto sm:max-w-[900px] p-[2em_1em_15em] flex justify-center pb-20" id="main">
+		<div class="m-auto">
+			<article class="content post h-entry " data-pagefind-body>
+
+				<h1 class="text-center post-title p-name">{{ (partial "utils/title.html" (dict "$" $ "title"
+                $.Title)).htmlTitle }}</h1>
+
+				{{ $enableTOC := .Params.toc -}}
+				{{- if $enableTOC -}}
+					{{- partial "utils/toc.html" . -}}
+				{{- end -}}
+
+				<div class="mt-16 post-body e-content">
+					{{ .Content }}
+				</div>
+
+			</article>
+      
+			{{ partial "components/minimal-footer.html" . }}
+
+			{{ partial "components/comments.html" . }}
+		</div>
+	</main>
+
+{{ end }}
