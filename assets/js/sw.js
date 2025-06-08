@@ -38,6 +38,6 @@ self.addEventListener("fetch", (event) => {
 
         return cachedResponse;
       }
-    })()
+    })(),
   );
 });

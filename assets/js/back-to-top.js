@@ -6,13 +6,13 @@ window.addEventListener(
     if (backToTop !== null) {
       window.addEventListener(
         "scroll",
-        throttle(function () {
+        throttle(() => {
           window.scrollY > 100
             ? backToTop.classList.add("show")
             : backToTop.classList.remove("show");
-        }, delayTime)
+        }, delayTime),
       );
     }
   },
-  { once: true }
+  { once: true },
 );
