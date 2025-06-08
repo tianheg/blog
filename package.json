@@ -3,7 +3,7 @@
   "private": true,
   "scripts": {
     "pagefind": "pagefind_extended --site public",
-    "build": "hugo --gc --buildFuture",
+    "build": "hugo --gc --minify --buildFuture",
     "dev": "hugo serve --buildFuture",
     "all": "run-s build pagefind",
     "lint": "biome check --write ."
