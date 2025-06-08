@@ -1,17 +1,14 @@
-<!DOCTYPE html>
-<html lang="{{ .Site.LanguageCode }}">
-{{ partial "head.html" . }}
+{{ define "main" }}
+	<div class="flex items-center justify-center min-h-screen">
+		<div class="text-center p-10">
+			<h1>404 - Page not found</h1>
+			<p>The post URL has been updated or deleted, please
+        <a href="/search" class="underline hover:no-underline">search</a>
+				to find it</p>
 
-<body>
-    <main class="fof">
-        <div class="">
-            <h1>404 - Page not found</h1>
-            <p>The post URL has been updated or deleted, please <a href="/search">search</a> to find it</p>
-            <div class="fof-footer">
-                <a href="{{ print `/` | relLangURL }}">Take Me Home</a>
-            </div>
-        </div>
-    </main>
-</body>
-
-</html>
+			<div class="text-xl font-bold">
+				<a href="/">Take Me Home</a>
+			</div>
+		</div>
+	</div>
+{{ end }}

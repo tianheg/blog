@@ -1,0 +1,42 @@
+{{ define "main" }}
+	{{- $path := "" -}}
+	{{- with .File -}}
+		{{- $path = .Path -}}
+	{{- else -}}
+		{{- $path = .Path -}}
+	{{- end -}}
+
+
+	<main class="mx-auto sm:max-w-[880px] p-[2em_1em_15em] pb-20 list" id="main" data-pagefind-ignore>
+		<div class="main-inner">
+			<div class="content list-group">
+
+				{{ .Store.Delete "pages" }}
+
+				<!-- Section -->
+				{{ if (eq .Kind "section") }}
+					<!-- Archives -->
+
+					{{ $sectionPage := .CurrentSection }}
+					{{ range .Site.RegularPages }}
+						{{ if (.IsDescendant $sectionPage) }}
+							{{ $.Store.Add "pages" (slice .) }}
+						{{ end }}
+					{{ end }}
+
+				{{ end }}
+
+
+				<!-- Start List -->
+				{{ $pages := .Store.Get "pages" }}
+				{{ range $pages.GroupByDate "2006" }}
+					{{ $.Store.Set "year" .Key }}
+					{{ $year := $.Store.Get "year" }}
+					<h2 class="list-year">{{ $year }}</h2>
+					{{ partial "utils/list-item.html" (dict "$" .) }}
+				{{ end }}
+			</div>
+		</div>
+
+	</main>
+{{ end }}

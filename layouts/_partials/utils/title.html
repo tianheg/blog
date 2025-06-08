@@ -25,7 +25,7 @@
     {{- $htmlTitle = $htmlTitle | default (delimit (last 1 (split (strings.TrimSuffix "/_index.md" $path) "/")) " ") -}}
 {{- end -}}
 
-{{- $htmlTitle = partial "utils/markdownify.html" (dict "$" $ "raw" $htmlTitle "isContent" false) -}}
+
 
 {{- $rawTitle := $htmlTitle | plainify | htmlUnescape -}}
 
