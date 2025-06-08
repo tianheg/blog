@@ -1,7 +1,8 @@
 @import "tailwindcss";
+/* @plugin "daisyui"; */
 
 /* @theme {
-  
+
 } */
 
 :root {
@@ -10,12 +11,30 @@
   --text-YTLC: 460;
 }
 
+/* Satoshi https://fontshare.com/fonts/satoshi */
+@font-face {
+  font-family: "Satoshi";
+  src: url("/fonts/Satoshi-Variable.woff2") format("woff2"),
+    url("/fonts/Satoshi-Variable.woff") format("woff");
+  font-weight: 400 700;
+  font-display: swap;
+  font-style: normal;
+}
+
+@font-face {
+  font-family: "Satoshi";
+  src: url("/fonts/Satoshi-VariableItalic.woff2") format("woff2"),
+    url("/fonts/Satoshi-VariableItalic.woff") format("woff");
+  font-weight: 400 700;
+  font-display: swap;
+  font-style: italic;
+}
+
 body {
-  font-family: 'Satoshi', -apple-system, system-ui, BlinkMacSystemFont, 'Noto Serif SC', Arial, 'Amstelvar', 'Josefin Sans', 'Hiragino Sans GB', 'Microsoft Yahei', 'ST Heiti', sans-serif, 'Apple Color Emoji', 'Segoe UI Emoji', 'Segoe UI Symbol';
-  font-variation-settings:
-    'wdth' var(--text-wdth),
-    'opsz' var(--text-opsz),
-    'YTLC' var(--text-YTLC);
+  font-family:
+    "Satoshi", -apple-system, system-ui, BlinkMacSystemFont, "Noto Serif SC", Arial, "Amstelvar", "Josefin Sans", "Hiragino Sans GB", "Microsoft Yahei", "ST Heiti", sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol";
+  font-variation-settings: "wdth" var(--text-wdth), "opsz" var(--text-opsz),
+    "YTLC" var(--text-YTLC);
 }
 
 svg {
@@ -68,7 +87,8 @@ main {
   }
 
   ul,
-  ol,li,
+  ol,
+  li,
   blockquote {
     all: revert;
   }
@@ -82,7 +102,8 @@ main {
     position: relative;
   }
 
-  .outline-2,.outline-3 {
+  .outline-2,
+  .outline-3 {
     outline: unset;
   }
 }
@@ -96,7 +117,8 @@ pre,
 sup,
 .minimal-footer,
 .copy-button {
-  font-family: 'Source Code Pro', 'Ubuntu Mono', 'DejaVu Sans Mono', 'Courier New', Monaco, monospace;
+  font-family: "Source Code Pro", "Ubuntu Mono", "DejaVu Sans Mono",
+    "Courier New", Monaco, monospace;
 }
 
 #back-to-top {
@@ -105,9 +127,7 @@ sup,
   }
 }
 
-
 [data-theme="dark"] {
-
   .theme-icon-dark,
   .footer-icon {
     opacity: 0.75;
@@ -146,7 +166,7 @@ blockquote.quote {
   }
 }
 
-/* 
+/*
 .home {
   display: flex;
   flex-direction: column;
@@ -211,7 +231,7 @@ blockquote.quote {
     height: 100%;
     top: 0;
     left: 0;
-    z-index: 1;
+    z-index: -1;
   }
 
   .main-inner {
@@ -279,10 +299,10 @@ blockquote.quote {
 
   a {
     color: #eee;
+  }
 
-    &:hover {
-      color: #fff;
-    }
+  a:hover {
+    color: #fff;
   }
 
   @media only screen and (max-device-width: 1024px) {
