@@ -11,7 +11,7 @@
   <div class="">
     {{ $content := .Content }}
     {{ $baseURL := cond hugo.IsProduction .Site.BaseURL "http://localhost:1313/" }}
-    {{ $content = $content | replaceRE `<a href="(https?://(?:[^/]+\.)*[^/]*[^"]*)"` (printf `<a href="$1" target="_blank" rel="noreferrer"`) }}
+    {{ $content = $content | replaceRE `<a href="(https?://[^"]+)"` `<a href="$1" target="_blank" rel="noreferrer"` }}
     {{ $content | safeHTML }}
   </div>
 
