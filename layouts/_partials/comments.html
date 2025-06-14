@@ -1,0 +1,6 @@
+<div class="comments">
+  {{ if or (in .Site.Params.mainSections .Section) }}
+  <div>Welcome to tell me your thoughts via "<a href="mailto:i@tianheg.co?subject=Comment: {{ .Title }}">email</a>"
+  </div>
+  {{ end }}
+</div>

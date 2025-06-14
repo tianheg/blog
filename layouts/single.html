@@ -1,26 +1,22 @@
 {{ define "main" }}
-	<main class="mx-auto sm:max-w-[900px] p-[2em_1em_15em] flex justify-center pb-20" id="main">
-		<div class="m-auto">
-			<article class="content post h-entry " data-pagefind-body>
+<article data-pagefind-body>
+  <h1>{{ .Title }}</h1>
+  <p>
+    {{ if eq .Section "posts" }}
+    <time datetime='{{ .Date.Format "2006-01-02" }}'>
+      {{ .Date.Format (default "02 Jan, 2006" .Site.Params.dateFormat) }}
+    </time>
+    {{ end }}
+  </p>
+  <div class="">
+    {{ $content := .Content }}
+    {{ $baseURL := cond hugo.IsProduction .Site.BaseURL "http://localhost:1313/" }}
+    {{ $content = $content | replaceRE `<a href="(https?://(?:[^/]+\.)*[^/]*[^"]*)"` (printf `<a href="$1" target="_blank" rel="noreferrer"`) }}
+    {{ $content | safeHTML }}
+  </div>
 
-				<h1 class="text-center post-title p-name">{{ (partial "utils/title.html" (dict "$" $ "title"
-                $.Title)).htmlTitle }}</h1>
+</article>
 
-				{{ $enableTOC := .Params.toc -}}
-				{{- if $enableTOC -}}
-					{{- partial "utils/toc.html" . -}}
-				{{- end -}}
-
-				<div class="mt-16 post-body e-content">
-					{{ .Content }}
-				</div>
-
-			</article>
-
-			{{ partial "components/minimal-footer.html" . }}
-
-			{{ partial "components/comments.html" . }}
-		</div>
-	</main>
-
+  {{ partial "minimal-footer.html" . }}
+  {{ partial "comments.html" . }}
 {{ end }}

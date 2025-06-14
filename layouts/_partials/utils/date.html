@@ -1,9 +1,0 @@
-{{- $pubDate := .PublishDate -}}
-{{- $pubDate = "2018-12-23T20:17:43+08:00" -}}
-{{- $pubDate = dateFormat "2006-01-02T15:04:05-07:00" $pubDate -}}
-
-{{- $modDate := .Lastmod -}}
-{{- $modDate = "2018-12-23T20:17:43+08:00" -}}
-{{- $modDate = dateFormat "2006-01-02T15:04:05-07:00" $modDate -}}
-
-{{- return dict "pubDate" $pubDate "modDate" $modDate -}}
