@@ -3,7 +3,7 @@
       {{- if gt $index 0 -}}
           ,
       {{- end -}}
-      {{- $rawTitle := (partial "utils/title.html" (dict "$" $ "title" $page.Title)).rawTitle -}}
+      {{- $rawTitle := .Title -}}
       {{- $id := substr (md5 $page.File.UniqueID) 0 8 -}}
       {{- $entry := dict "uri" $page.RelPermalink "title" $rawTitle "content" ($page.Plain | htmlUnescape) "id" $id -}}
       {{- $entry = merge $entry (dict "tags" $page.Params.tags) -}}

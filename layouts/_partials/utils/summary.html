@@ -1,8 +1,0 @@
-{{- $summary := .Summary -}}
-{{- if .Truncated -}}
-	<!-- For the CJK language, add ellipsis. -->
-	{{- if .Params.isCJKLanguage -}}
-		{{- $summary = printf `%s%s` .Summary (i18n "ellipsis") | safeHTML -}}
-	{{- end -}}
-{{- end -}}
-{{- return $summary -}}
