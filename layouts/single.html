@@ -14,7 +14,8 @@
     {{ $content = $content | replaceRE `<a href="(https?://[^"]+)"` `<a href="$1" target="_blank" rel="noreferrer"` }}
     {{ $content | safeHTML }}
   </div>
-
+  <hr>
+  {{- partial "backlinks.html" . -}}
 </article>
 
   {{ partial "minimal-footer.html" . }}
