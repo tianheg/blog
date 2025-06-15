@@ -1,0 +1,44 @@
+* js-ternary-operator
+:PROPERTIES:
+:CUSTOM_ID: js-ternary-operator
+:END:
+问题：判断 target 是否是 str 的最后几位字符，如果是返回 `true`，否则返回 `false`。
+
+```js function confirmEnding(str, target) { str.substring(str.length - target.length) == target ? true : false }
+
+console.log(confirmEnding('Bastian', 'n')) ```
+
+为什么上述代码片段，返回 `undefined`？因为 `str.substring(str.length - target.length) == target` 中有未定义的部分。
+
+三元操作符的原始结构：
+
+```js condition ? exprIfTrue : exprIfFalse ```
+
+参数 `condition` 必须是一个表达式。
+
+`str.substring(str.length - target.length) == target` 应该是表达式，它满足表达式的一个要求：一段能够返回结果的代码。但并不完全。表达式的所有类型：
+
+1. 算术表达式：计算结果为数字的（通常使用[算术操作符]([[https://developer.mozilla.org/en-US/docs/Web/JavaScript/Guide/Expressions_and_Operators#arithmetic_operators]])）
+2. 字符串：计算结果为字符串（通常使用[字符串操作符]([[https://developer.mozilla.org/en-US/docs/Web/JavaScript/Guide/Expressions_and_Operators#string_operators]])）
+3. 逻辑运算：计算结果为 `true` 或 `false`（通常使用[逻辑操作符]([[https://developer.mozilla.org/en-US/docs/Web/JavaScript/Guide/Expressions_and_Operators#logical_operators]])）
+4. 基本/原始表达式：JS 中的基本关键字和通用表达式
+   1. `this`
+   2. Grouping operator `( )`
+5. Left-hand-side expressions
+   1. `new`
+   2. super
+
+```js function confirmEnding(str, target) { ;(str.substring(str.length - target.length) == target ? true : false) ?? 'not undefined' }
+
+console.log(confirmEnding('Bastian', 'n')) ```
+
+我使用了空值合并操作符，发现 `str.substring(str.length - target.length) == target ? true : false` 的结果是 `undefined`。
+
+目前无法解决。
+
+--------------
+
+参考资料
+
+1. [Conditional (ternary) operator - JavaScript | MDN]([[https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Operators/Conditional_Operator#examples]])
+2. [Expressions and operators - JavaScript | MDN]([[https://developer.mozilla.org/en-US/docs/Web/JavaScript/Guide/Expressions_and_Operators]])

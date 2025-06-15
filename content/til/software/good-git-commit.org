@@ -1,0 +1,62 @@
+* Good Git commit
+:PROPERTIES:
+:CUSTOM_ID: good-git-commit
+:END:
+Something about writing good git commit msgs.
+
+** My favourite Git commit
+:PROPERTIES:
+:CUSTOM_ID: my-favourite-git-commit
+:END:
+[[https://dhwthompson.com/2019/my-favourite-git-commit]]
+
+Git commit messages can tell us many things. Dan Carley wrote a good commit message about "[[https://github.com/alphagov/govuk-puppet/commit/63b36f93bf75a848e2125008aa1e880c5861cf46][=Convert template to US-ASCII to fix error=]]":
+
+#+begin_src log
+I introduced some tests in a feature branch to match the contents of
+`/etc/nginx/router_routes.conf`. They worked fine when run with `bundle exec
+rake spec` or `bundle exec rspec modules/router/spec`. But when run as
+`bundle exec rake` each should block failed with:
+
+    ArgumentError:
+      invalid byte sequence in US-ASCII
+
+I eventually found that removing the `.with_content(//)` matchers made the
+errors go away. That there weren't any weird characters in the spec file. And
+that it could be reproduced by requiring Puppet in the same interpreter with:
+
+    rake -E 'require "puppet"' spec
+
+That particular template appears to be the only file in our codebase with an
+identified encoding of `utf-8`. All others are `us-ascii`:
+
+    dcarley-MBA:puppet dcarley$ find modules -type f -exec file --mime {} \+ | grep utf
+    modules/router/templates/routes.conf.erb:                                         text/plain; charset=utf-8
+
+Attempting to convert that file back to US-ASCII identified the offending
+character as something that looked like a whitespace:
+
+    dcarley-MBA:puppet dcarley$ iconv -f UTF8 -t US-ASCII modules/router/templates/routes.conf.erb 2>&1 | tail -n5
+      proxy_intercept_errors off;
+
+      # Set proxy timeout to 50 seconds as a quick fix for problems
+      #
+    iconv: modules/router/templates/routes.conf.erb:458:3: cannot convert
+
+After replacing it (by hand) the file identifies as `us-ascii` again:
+
+    dcarley-MBA:puppet dcarley$ file --mime modules/router/templates/routes.conf.erb
+    modules/router/templates/routes.conf.erb: text/plain; charset=us-ascii
+
+Now the tests work! One hour of my life I won't get back..
+#+end_src
+
+Write a commit is to comunicate, is to get work done and tell people about it.
+
+** [[https://blog.mocoso.co.uk/talks/2015/01/12/telling-stories-through-your-commits/][Telling stories through your commits]]
+:PROPERTIES:
+:CUSTOM_ID: telling-stories-through-your-commits
+:END:
+1. Make atomic commits.
+2. Write good commit messages.
+3. Revise your development history before sharing

@@ -1,0 +1,241 @@
+* First time using Golang
+:PROPERTIES:
+:CUSTOM_ID: first-time-using-golang
+:END:
+** Golang Wikipedia
+:PROPERTIES:
+:CUSTOM_ID: golang-wikipedia
+:END:
+#+begin_src go
+package main
+
+import "fmt"
+
+func main() {
+  fmt.Println("Hello World!")
+}
+#+end_src
+
+#+begin_src go
+// Concurrency
+package main
+
+import (
+  "fmt"
+  "time"
+)
+
+func readword(ch chan string) {
+  fmt.Println("Type a word, then hit Enter.")
+  var word string
+  fmt.Scanf("%s", &word)
+  ch <- word
+}
+
+func timeout(t chan bool) {
+  time.Sleep(5 * time.Second)
+  t <- false
+}
+
+func main() {
+  t := make(chan bool)
+  go timeout(t)
+  
+  ch := make(chan string)
+  go readword(ch)
+  
+  select {
+  case word := <-ch:
+    fmt.Println("Received", word)
+  case <-t:
+    fmt.Println("Timeout.")
+  }
+}
+#+end_src
+
+#+begin_src go
+// testing
+func ExtractUsername(email string) string {
+  at := strings.Index(email, "@")
+  return email[:at]
+}
+
+//----
+
+import (
+  "testing"
+)
+
+func TestExtractUsername(t *testing.T) {
+  t.Run("withoutDot", func(t *testing.T) {
+    username := ExtractUsername("r@google.com")
+    if username != "r" {
+      t.Fatalf("Got: %v\n", username)
+    }
+  })
+  
+  t.Run("withDot", func(t *testing.T) {
+    username := ExtractUsername("john.smith@example.com")
+    if username != "john.smith" {
+      t.Fatalf("Got: %v\n", username)
+    }
+  })
+}
+#+end_src
+
+#+begin_src go
+// web app
+package main
+
+import (
+  "fmt"
+  "log"
+  "net/http"
+)
+
+func helloFunc(w http.ResponseWriter, r *http.Request) {
+  fmt.Fprintf(w, "Hello World!")
+}
+
+func main() {
+  http.HandleFunc("/", helloFunc)
+  log.Fatal(http.ListenAndServe(":8080", nil))
+}
+#+end_src
+
+** A Tour of Go
+:PROPERTIES:
+:CUSTOM_ID: a-tour-of-go
+:END:
+[[https://go.dev/tour/list]]
+
+- packages, variables, functions
+- flow control statements: for, if, else, switch and defer
+- structs, slices, and maps
+- methods, interfaces
+- generics
+- concurrency
+
+#+begin_src go
+// packages.go
+package main
+
+import (
+    "fmt"
+    "math/rand"
+)
+
+func main() {
+    fmt.Println("My favorite number is", rand.Intn(10))
+}
+#+end_src
+
+#+begin_src go
+// imports.go
+package main
+
+import (
+    "fmt"
+    "math"
+)
+
+func main() {
+    fmt.Println("Now you have %g problems.\n", math.Sqrt(7))
+}
+#+end_src
+
+#+begin_src go
+// exported-names.go
+package main
+
+import (
+    "fmt"
+    "math"
+)
+
+func main() {
+    fmt.Println(math.Pi)
+}
+#+end_src
+
+#+begin_src go
+// functions.go
+package main
+
+import "fmt"
+
+func add(x, y int) int {
+    return x + y
+}
+
+func main() {
+    fmt.Println(add(42, 13))
+}
+#+end_src
+
+#+begin_src go
+// multiple-results.go
+package main
+
+import "fmt"
+
+func swap(x, y, z string) (string, string, string) {
+    return y, x, z
+}
+
+func main() {
+    a, b, c := swap("Hello", "World", "!")
+    fmt.Println(a,b,c)
+#+end_src
+
+2. [@2] 再找一个官方教程
+
+refer
+
+- [Essential Go - a free Go programming book]([[https://www.programming-books.io/essential/go/]])
+- [The Little Go Book]([[https://www.openmymind.net/The-Little-Go-Book/]])
+- [[https://github.com/quii/learn-go-with-tests]]
+- [The Go Programming Language]([[https://go.dev/]])
+- [The Go Programming Language Specification - The Go Programming Language]([[https://go.dev/ref/spec]])
+- [A Tour of Go]([[https://go.dev/tour/welcome/1]])
+- [Learn Go Programming by Building 11 Projects]([[https://www.freecodecamp.org/news/learn-go-by-building-11-projects/]])
+- [Go - ArchWiki]([[https://wiki.archlinux.org/title/Go]])
+- [Go cross compilation · rakyll.org]([[https://rakyll.org/cross-compilation/]])
+- [IDEsAndTextEditorPlugins · golang/go Wiki]([[https://github.com/golang/go/wiki/IDEsAndTextEditorPlugins]])
+- [Go by Example]([[https://gobyexample.com/]])
+- [[https://en.wikipedia.org/wiki/Go_(programming_language)][Go (programming language) - Wikipedia]]
+- [[https://golangexample.com/]]
+
+** 作为一位对Go语言一点也不了解的人，如何入门Go语言
+:PROPERTIES:
+:CUSTOM_ID: 作为一位对go语言一点也不了解的人如何入门go语言
+:END:
+如果您是Go语言的初学者，以下是一些建议来帮助您入门：
+
+了解Go语言的特点：Go语言因其简洁、高效、并发处理能力强等特点而受到关注。了解这些特点可以帮助您理解为什么Go语言在开发中受到青睐。
+
+安装Go语言环境：前往Go语言的官方网站下载并安装Go语言环境。这是一个简单的过程，只需按照指示操作即可。
+
+学习基本语法：开始学习Go语言的基本语法，包括变量声明、数据类型、控制结构（if、for、switch等）、函数定义等。您可以通过在线教程、书籍或官方文档来学习。
+
+动手实践：理论知识需要通过实践来巩固。尝试编写一些简单的程序，如“Hello World”、计算器等，来熟悉Go语言的编程范式。
+
+理解并发编程：Go语言的并发模型是其一大特色，通过Goroutines和Channels可以轻松实现并发编程。理解这些概念对于掌握Go语言至关重要。
+
+学习标准库：Go语言有一个强大的标准库，涵盖了网络编程、文件操作、加密等多种功能。熟悉这些库可以大大提高开发效率。
+
+参与社区：加入Go语言的社区，如Go语言中国、Stack Overflow上的Go标签等。在这些社区中，您可以提问、回答问题、分享经验，与其他Go开发者交流。
+
+项目实战：通过实际项目来应用Go语言。可以从一些简单的Web应用开始，逐步尝试更复杂的项目。
+
+持续学习：Go语言仍在快速发展中，持续关注Go语言的最新动态，学习新的特性和最佳实践。
+
+通过以上步骤，您可以逐步建立起对Go语言的了解，并能够在实践中不断提升技能。记住，学习编程语言需要时间和耐心，不断实践和积累经验是提高编程技能的关键。
+
+--------------
+
+https://commandcenter.blogspot.com/2024/01/what-we-got-right-what-we-got-wrong.html
+
+https://geektutu.com/post/quick-golang.html
+
+https://geektutu.com/post/gee.html

@@ -1,0 +1,28 @@
+* firefox-addon
+:PROPERTIES:
+:CUSTOM_ID: firefox-addon
+:END:
+​## Manifest v3
+
+[[https://extensionworkshop.com/documentation/develop/manifest-v3-migration-guide/]]
+
+​## Build
+
+​### 如何打开一个新标签
+
+[[https://github.com/tianheg/all-my-sites]]
+
+[refer]([[https://github.com/mdn/webextensions-examples/blob/69ae7494bb96825a7310d4900dbd67544b2985e0/open-my-page-button/manifest.json]])
+
+```json { "background": { "scripts": ["background.js"] }, "browser_{action}": { "default_{icon}": "48.png" } } ```
+
+从 Firefox 56 以后，扩展会自动获得自己 origin 的权限，所以不需要 tabs 权限。（[src]([[https://developer.mozilla.org/en-US/docs/Mozilla/Add-ons/WebExtensions/manifest.json/permissions#host_permissions]])）
+
+refer
+
+1. [Browser Extensions - Mozilla | MDN]([[https://developer.mozilla.org/en-US/docs/Mozilla/Add-ons/WebExtensions]])
+2. [Getting started with web-ext | Firefox Extension Workshop]([[https://extensionworkshop.com/documentation/develop/getting-started-with-web-ext/#installation-section]])
+
+​## I used
+
+- (not familar) [[https://github.com/onemen/TabMixPlus]]

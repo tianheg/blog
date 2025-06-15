@@ -1,0 +1,9 @@
+* mongodb-archlinux-systemd-status-14
+:PROPERTIES:
+:CUSTOM_ID: mongodb-archlinux-systemd-status-14
+:END:
+[[https://stackoverflow.com/a/66107451/12539782]]
+
+解决办法
+
+```bash sudo chown -R [[mongodb:mongodb]] /var/lib/mongodb sudo chown [[mongodb:mongodb]] /tmp/mongodb-27017.sock sudo systemctl restart mongodb ```

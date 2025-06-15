@@ -1,0 +1,18 @@
+* create-publish-scoped-public-packages
+:PROPERTIES:
+:CUSTOM_ID: create-publish-scoped-public-packages
+:END:
+- [[https://docs.npmjs.com/creating-and-publishing-scoped-public-packages]]
+- [[https://docs.npmjs.com/creating-and-publishing-unscoped-public-packages]]
+
+有用户名（[cite/t:@tianheg/package]）
+
+```bash npm login npm init --scope=[cite/t:@tianheg] touch README.md
+
+npm install /path/to/package
+
+cd /path/to/package npm publish --access public ```
+
+无用户名（package）
+
+```bash ... npm init ... npm publish ```

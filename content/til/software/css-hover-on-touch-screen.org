@@ -1,0 +1,21 @@
+* css-hover-on-touch-screen
+:PROPERTIES:
+:CUSTOM_ID: css-hover-on-touch-screen
+:END:
+触屏上的 CSS hover 问题。（Chrome Android）点击一下会选中可 hover 的文本。
+
+从这篇文章[^{1}]找到一处 CodePen 演示[^{2}]。代码：
+
+```html <button data-title="Hello guys!" data-help="My name is @tianheg" >Subscribe</button> ```
+
+```css button { color: #333; font-size: 1.3rem; padding: 2rem; background-color: #eee; border: 1px solid #ddd; position: relative; transition: all ease 200ms; }
+
+@media (pointer: fine) { button:hover { color: #fff; border-color: #000; background-color: #333; } button:hover::after { top: 90%; background: #aaa; border-radius: 0.25rem; content: attr(data-title); position: absolute; font-size: 0.7rem; padding: 0.5rem 0.8rem; width: max(100%, 200px); max-width: max-content; } }
+
+@media (pointer: coarse) { button::after { content: attr(data-title); display: block; font-size: 0.75rem; } button:hover { color: #ddd; border-color: #aaa; background-color: #999; } }
+
+@media (pointer: none) { button::before, button::after { display: block; font-size: 0.75rem; } button::after { content: attr(data-title); } button::before { content: attr(data-help); } } ```
+
+我自己做的一个 Demo。
+
+[^{1}]: [[https://medium.com/time2hack/can-i-use-hover-on-touch-devices-d9f039e24899]] [^{2}]: [[https://codepen.io/pankajpatel/pen/rNYQJBw]]

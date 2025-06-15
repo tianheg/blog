@@ -1,0 +1,25 @@
+* missing-letters
+:PROPERTIES:
+:CUSTOM_ID: missing-letters
+:END:
+[Intermediate Algorithm Scripting: Missing letters | freeCodeCamp.org]([[https://www.freecodecamp.org/learn/javascript-algorithms-and-data-structures/intermediate-algorithm-scripting/missing-letters]])
+
+自己写的！！！
+
+```js function fearNotLetter(str) { const allLetters = 'abcdefghijklmnopqrstuvwxyz' const index = allLetters.indexOf(str[0]) if (str.match(/a-z/)) { return undefined }
+
+for (let i = 0; i < str.length; i++) { if (str[i] !== allLetters[index + i]) { return allLetters[index + i] } } } ```
+
+用到了 `match`、正则表达式、for 循环、if 语句。
+
+答案
+
+```js function fearNotLetter(str) { for (let i = 0; i < str.length; i++) { let code = str.charCodeAt(i) if (code !== str.charCodeAt(0) + i) { return String.fromCharCode(code - 1) } } return undefined } ```
+
+```js function fearNotLetter(str) { let currCharCode = str.charCodeAt(0) let missing = undefined
+
+str.split('').forEach((letter) => {     if (letter.charCodeAt(0) === currCharCode) { currCharCode++ } else { missing = String.fromCharCode(currCharCode) } })
+
+return missing } ```
+
+```js function fearNotLetter(str) { for (let i = 1; i < str.length; ++i) { if (str.charCodeAt(i) - str.charCodeAt(i - 1) > 1) { return String.fromCharCode(str.charCodeAt(i - 1) + 1) } } } ```

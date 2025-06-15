@@ -1,0 +1,11 @@
+* linux-ubuntu22-04-remove-snap
+:PROPERTIES:
+:CUSTOM_ID: linux-ubuntu22-04-remove-snap
+:END:
+[[https://haydenjames.io/remove-snap-ubuntu-22-04-lts/]]
+
+```sh snap list sudo systemctl disable ...
+
+snapd.service snapd.apparmor.service snapd.autoimport.service snapd.core-fixup.service snapd.recovery-chooser-trigger.service snapd.snap-repair.timer snapd.system-shutdown.service snapd.socket snapd.seeded.service ```
+
+```sh sudo rm -rf /var/cache/snapd/ sudo apt autoremove --purge snapd rm -rf ~/snap ```

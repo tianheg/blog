@@ -1,0 +1,70 @@
+* animation-and-canvas
+:PROPERTIES:
+:CUSTOM_ID: animation-and-canvas
+:END:
+主要内容：
+
+- 使用 requestAnimationFrame
+- 使用 `<canvas>`
+- 绘制 2D 图形
+- 使用 WebGL 绘制 3D 图形
+
+​## requestAnimationFrame
+
+该方法 API 能够使浏览器通过最优方式确定重绘顺序。
+
+过去使用 setInterval 和 setTimeout 实现动画，无法保证时间精度，延时参数确定的是将代码添加到浏览器的任务队列，不能确定代码的具体执行时间。
+
+​****知道何时绘制下一帧是创造平滑动画的关键。**** setInterval 和 setTimeout 不够精确是第一个问题，浏览器的计时器也并不是精确统一的。
+
+Mozilla 的 Robert O' Callahan 创造了一个 mozRequestAnimationFrame() 的新方法，用来通知浏览器某些 JS 代码要执行动画了，这样浏览器就可以在运行某些代码后进行适当的优化。
+
+所有浏览器都支持标准的 requestAnimationFrame() 方法，它接收一个函数参数，在重绘屏幕前调用。而在函数内部，又可以接收一个参数，用于确定动画重绘的具体时间。
+
+`cancelAnimationFrame` 取消重绘任务
+
+通过 requestAnimationFrame 节流（节省流量，减少加载时间）
+
+​## canvas
+
+canvas 标签要设置 id、width、height，还有当 canvas 不被支持的说明文字。
+
+```html <canvas id="canvas" width="250" height="200">Sorry, your browser don't support canvas tag yet.</canvas> ```
+
+​### 2D
+
+在画布上绘图前，要先获得绘图上下文：
+
+```js const drawing = document.getElementById('canvas')
+
+if (drawing.getContext) { const context = drawing.getContext('2d') // context 可以简写为 ctx ... } ```
+
+在使用时，先确定绘图上下文是存在的。有些浏览器对 HTML 规范中没有的元素会创建默认 HTML 元素对象。这样表示：即使 drawing 包含一个有效的元素引用，getContext() 方法也未必存在。
+
+toDataURL() 方法能够导出 `<canvas>` 元素上的图像。默认编码为 png 格式。
+
+2D 上下文的坐标原点(0, 0)在 `<canvas>` 元素的左上角。
+
+填充和描边：fillStyle、strokeStyle，这两个属性的值，可以是字符串、渐变对象、图案对象，默认值为 `#000`。字符串表示颜色时，支持 CSS 支持的所有格式：名称、十六进制代码、rgb、rgba、hsl、hsla。
+
+绘制矩形：fillRect、strokeRect、clearRect。
+
+绘制路径：beginPath、arc(x, y, radius, startAngle, endAngle, counterclockwise)、arcTo(x1, y1, x2, y2, radius)、bezierCurveTo(c1x, c1y, c2x, c2y, x, y)、lineTo(x, y)、moveTo(x, y)、quadraticCurveTo(cx, cy, x, y)、rect(x, y, width, height)、closePath。
+
+isPointInPath 确定指定点是否在路径上，可以在关闭路径前随时调用。
+
+什么叫「2D 上下文的路径 API 非常可靠」？说它可靠，那么是和谁比较得出来的结论？
+
+绘制文本：fillText、strokeText。还有三个属性：font、textAlign、textBaseLine。属性有默认值，在一次绘图中，设置一次即可。
+
+measureText 辅助确定文本大小。
+
+变换：rotate、scale、translate、transform、setTransform。save 和 restore，保存和恢复「绘图上下文的设置和变换」。
+
+绘制图像：drawImage（最多 9 个参数）。
+
+阴影：shadowColor、shadowOffsetX、shadowOffsetY、shadowBlur。
+
+渐变：
+
+​### 3D------WebGL

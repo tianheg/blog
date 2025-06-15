@@ -1,0 +1,67 @@
+* vagrant
+:PROPERTIES:
+:CUSTOM_ID: vagrant
+:END:
+​## 安装
+
+```bash pacman -S vagrant ```
+
+​## 两个 Vagrantfile 文件
+
+​### Pure cli archlinux
+
+```text Vagrant.configure("2") do |config| config.vm.box = "archlinux/archlinux" end ```
+
+​### Archlinux with GUI
+
+```text
+
+Vagrant.configure("2") do |config| config.vm.box = "archlinux/archlinux" config.vm.box_{checkupdate} = false
+
+config.vm.provider "virtualbox" do |vb|
+
+vb.gui = true
+
+vb.memory = "4096" end
+
+config.vm.provision "shell", path: "bootstrap1.sh"
+
+config.vm.provision "shell", path: "bootstrap2.sh"
+
+config.vm.provision "shell", path: "bootstrap3.sh" end ```
+
+`bootstrap1.sh`
+
+```bash #!/usr/bin/env bash
+
+ln -sf /usr/share/zoneinfo/Asia/Shanghai /etc/localtime mv /etc/locale.gen /etc/locale.gen.old echo -e "en_{US}.UTF-8 UTF-8" > /etc/locale.gen echo "LANG=en_{US}.UTF-8" > /etc/locale.conf locale-gen
+
+if [ -e /vagrant/pkg.tgz ] then cd /var/cache/pacman/pkg tar -xzvf /vagrant/pkg.tgz cd fi
+
+pacman -Syu --noconfirm ```
+
+`bootstrap2.sh`
+
+```bash #!/usr/bin/env bash
+
+pacman -S --noconfirm xorg-server gnome alsa-utils lightdm lightdm-gtk-greeter
+
+pacman -S --noconfirm ttf-liberation
+
+pacman -S --noconfirm firefox firefox-adblock-plus
+
+pacman -Rns --noconfirm virtualbox-guest-utils-nox pacman -S --noconfirm virtualbox-guest-utils
+
+amixer sset Master 100%+ unmute alsactl store
+
+systemctl disable gdm systemctl enable lightdm
+
+pacman -S --noconfirm pulseaudio pulseaudio-alsa
+
+```
+
+`bootstrap3.sh`
+
+```bash #!/usr/bin/env bash
+
+pacman -Sc --noconfirm cd /var/cache/pacman/pkg tar -czvf /vagrant/pkg.tgz * ```

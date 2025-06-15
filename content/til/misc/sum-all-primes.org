@@ -1,0 +1,19 @@
+* sum-all-primes
+:PROPERTIES:
+:CUSTOM_ID: sum-all-primes
+:END:
+[Intermediate Algorithm Scripting: Sum All Primes | freeCodeCamp.org]([[https://www.freecodecamp.org/learn/javascript-algorithms-and-data-structures/intermediate-algorithm-scripting/sum-all-primes]])
+
+```js function primes(n) { // Validate input if (isNaN(n) || n < 1 || Math.floor(n) != n) { return 'The input number must be a positive integer, please enter a correct value' } if (n === 2) { return true } if (n % 2 === 0 || n === 1) { return false } // Check if number is prime for (let i = 3, limit = Math.sqrt(n); i <= limit; i += 2) { if (n % i === 0) { return false } } return true }
+
+function sumPrimes(num) { let sum = 0 for (let i = 2; i <= num; i++) { if (primes(i)) { sum += i } } return sum }
+
+console.log(sumPrimes(977)) // 2 3 5 7 // [[https://forum.freecodecamp.org/t/freecodecamp-challenge-guide-sum-all-primes/16085]] // [[https://stackoverflow.com/a/12287599/12539782]] ```
+
+答案
+
+```js function sumPrimes(num) { // Check all numbers for primality let primes = [] for (let i = 2; i <= num; i++) { if (primes.every((prime) => i % prime !== 0)) primes.push(i) } return primes.reduce((sum, prime) => sum + prime, 0) } ```
+
+```js function sumPrimes(num) { // Prime number sieve let isPrime = Array(num + 1).fill(true) // 0 and 1 are not prime isPrime[0] = false isPrime[1] = false for (let i = 2; i <= Math.sqrt(num); i++) { if (isPrime[i]) { // i has not been marked false -- it is prime for (let j = i * i; j <= num; j += i) isPrime[j] = false } }
+
+// Sum all values still marked prime return isPrime.reduce((sum, prime, index) => (prime ? sum + index : sum), 0) } ```

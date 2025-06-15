@@ -1,0 +1,9 @@
+* fix-pacman-key
+:PROPERTIES:
+:CUSTOM_ID: fix-pacman-key
+:END:
+```bash rm -rf /etc/pacman.d/gnupg pacman-key --init pacman-key --populate archlinux pacman-key --populate archlinuxcn ```
+
+用于解决
+
+```text -> Locally signing key A182F28FA78F70601453137BCF82E29597321B63... ==> ERROR: A182F28FA78F70601453137BCF82E29597321B63 could not be locally signed. ```

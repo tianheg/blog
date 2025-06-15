@@ -1,0 +1,13 @@
+* linux-temporary-failure-resolving-url
+:PROPERTIES:
+:CUSTOM_ID: linux-temporary-failure-resolving-url
+:END:
+很久没用的树莓派。更新时出现的问题：
+
+```bash $ sudo apt-get update Err:1 [[http://raspbian.raspberrypi.org/raspbian]] buster InRelease Temporary failure resolving 'raspbian.raspberrypi.org' Err:2 [[http://archive.raspberrypi.org/debian]] buster InRelease Temporary failure resolving 'archive.raspberrypi.org' Reading package lists... Done W: Failed to fetch [[http://raspbian.raspberrypi.org/raspbian/dists/buster/InRelease]] Temporary failure resolving 'raspbian.raspberrypi.org' W: Failed to fetch [[http://archive.raspberrypi.org/debian/dists/buster/InRelease]] Temporary failure resolving 'archive.raspberrypi.org' W: Some index files failed to download. They have been ignored, or old ones used instead. ```
+
+通过([src]([[https://askubuntu.com/a/91595]]))：
+
+```bash echo "nameserver 8.8.8.8" | sudo tee /etc/resolv.conf > /dev/null ```
+
+解决。

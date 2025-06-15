@@ -1,0 +1,119 @@
+* GPG keys backup
+:PROPERTIES:
+:CUSTOM_ID: gpg-keys-backup
+:END:
+https://www.howtogeek.com/816878/how-to-back-up-and-restore-gpg-keys-on-linux/ https://gock.net/blog/2020/gpg-cheat-sheet
+
+GPG: GNU Privacy Guard
+
+#+begin_src sh
+$ tree ~/.gnupg
+/home/archie/.gnupg
+├── common.conf
+├── gpg-agent.conf
+├── gpg.conf
+├── openpgp-revocs.d
+│   └── 5D58F91F8C34E8E26A8F96C6D56175D4B81A264C.rev
+├── private-keys-v1.d
+│   ├── D9E02B82115D70EFC105E43A6DA87FBAA70289FB.key
+│   └── E97714F4E8DD2BE5917628DE053831FB1B116A55.key
+├── public-keys.d
+│   ├── pubring.db
+│   └── pubring.db.lock
+├── pubring.kbx
+└── trustdb.gpg
+
+4 directories, 10 files
+#+end_src
+
+- openpgp-revocs.d: This subdirectory contains your revocation certificate. You'll need this if your private key ever becomes common knowledge or otherwise compromised. Your revocation certificate is used in the process of retiring your old keys and adopting new keys.
+- private-keys-v1.d: This subdirectory stores your private keys.
+- pubring.kbx: An encrypted file. It contains public keys, including yours, and some metadata about them.
+- pubring.kbx~: This is a backup copy of "pubring.kbx." It is updated just before changes are made to "pubring.kbx."
+- trustdb.gpg: This holds the trust relationships you have established for your own keys and for any accepted public keys belonging to other people.
+
+** Files should be backup
+:PROPERTIES:
+:CUSTOM_ID: files-should-be-backup
+:END:
+https://www.gnupg.org/documentation/manuals/gnupg/GPG-Configuration.html
+
+#+begin_src txt
+gpg.conf
+pubring.kbx
+not backup up trustdb.gpg, but should export owertrust use 'gpg --export-ownertrust > otrust.txt'
+openpgp-revocs.d/
+#+end_src
+
+** Determining Which Keys to Back Up
+:PROPERTIES:
+:CUSTOM_ID: determining-which-keys-to-back-up
+:END:
+#+begin_src sh
+$ gpg --list-secret-keys --keyid-format LONG
+[keyboxd]
+---------
+sec   ed25519/D56175D4B81A264C 2024-06-21 [SC] [expires: 2025-06-21]
+      5D58F91F8C34E8E26A8F96C6D56175D4B81A264C
+uid                 [ultimate] tianheg <i@tianheg.co>
+ssb   cv25519/D8D0FDE0A5C69978 2024-06-21 [E] [expires: 2025-06-21]
+#+end_src
+
+- The "sec" (secret) line shows the number of bits in the encryption (4096 in this example), the key ID, the date the key was created, and "[SC]." The "S" means the key can be used for digital signatures and the "C" means it can be used for certification.
+- The next line is the key fingerprint.
+- The "uid" line holds the ID of the key's owner.
+- The "ssb" line shows the secret subkey, when it was created, and "E." The "E" indicates it can be used for encryption.
+
+** Backing Up
+:PROPERTIES:
+:CUSTOM_ID: backing-up
+:END:
+*** public keys
+:PROPERTIES:
+:CUSTOM_ID: public-keys
+:END:
+#+begin_src sh
+$ gpg --export --export-options backup --output public.gpg
+$ gpg --export --export-options backup --output public.gpg email # backup someone
+#+end_src
+
+*** private keys
+:PROPERTIES:
+:CUSTOM_ID: private-keys
+:END:
+#+begin_src sh
+$ gpg --export-secret-keys --export-options backup --output private.gpg
+#+end_src
+
+*** Owertrust
+:PROPERTIES:
+:CUSTOM_ID: owertrust
+:END:
+#+begin_src sh
+$ gpg --export-ownertrust > otrust.txt
+#+end_src
+
+** Then setup gpgp key on a new PC
+:PROPERTIES:
+:CUSTOM_ID: then-setup-gpgp-key-on-a-new-pc
+:END:
+#+begin_src sh
+$ gpg --import public.gpg
+$ gpg --import private.gpg
+$ gpg --import-ownertrust otrust.txt
+#+end_src
+
+** Encrypt these files and upload to cloud
+:PROPERTIES:
+:CUSTOM_ID: encrypt-these-files-and-upload-to-cloud
+:END:
+https://linuxconfig.org/how-to-create-compressed-encrypted-archives-with-tar-and-gpg
+
+#+begin_src sh
+# gnupg/otrust.txt
+# gnupg/private.gpg
+# gnupg/public.gpg
+$ tar -cvzf - gnupg | gpg -c --batch --passphrase-fd 0 --passphrase-file passwd.txt > gnupg.tar.gz.gpg
+#+end_src
+
+upload the gnupg.tar.gz.gpg file to cloud

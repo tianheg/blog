@@ -6,35 +6,80 @@
 		{{- $path = .Path -}}
 	{{- end -}}
 
-	<main class="" id="main" data-pagefind-ignore>
-		<div class="">
-			<div class="">
+	<div id="main" data-pagefind-ignore>
+  {{ .Store.Delete "pages" }}
 
-				{{ .Store.Delete "pages" }}
+  {{ if (eq .Kind "section") }}
+    {{ $sectionPage := .CurrentSection }}
+    {{ range .Site.RegularPages }}
+      {{ if (.IsDescendant $sectionPage) }}
+        {{ $.Store.Add "pages" (slice .) }}
+      {{ end }}
+    {{ end }}
+  {{ end }}
 
-				<!-- Section -->
-				{{ if (eq .Kind "section") }}
-					<!-- Archives -->
+  {{ $section := .Section }}
+  {{ $pages := .Store.Get "pages" }}
 
-					{{ $sectionPage := .CurrentSection }}
-					{{ range .Site.RegularPages }}
-						{{ if (.IsDescendant $sectionPage) }}
-							{{ $.Store.Add "pages" (slice .) }}
-						{{ end }}
-					{{ end }}
+  {{ if eq $section "til" }}
+    {{ $.Store.Delete "categories" }}
+    {{ $allFolders := slice }}
+    {{ $totalTILs := len $pages }}
 
-				{{ end }}
+    <!-- Display TIL count at the top of the section -->
+    <p class="my-6 text-lg opacity-80 italic">{{ $totalTILs }} TILs and counting...</p>
 
-				<!-- Start List -->
-				{{ $pages := .Store.Get "pages" }}
-				{{ range $pages.GroupByDate "2006" }}
-					{{ $.Store.Set "year" .Key }}
-					{{ $year := $.Store.Get "year" }}
-					<h2 class="">{{ $year }}</h2>
-					{{ partial "list-item.html" (dict "$" .) }}
-				{{ end }}
-			</div>
-		</div>
+    {{ range $pages }}
+      {{ $category := index (split .File.Dir "/") 1 }}
+      {{ if and $category (ne $category "_index.org") }}
+        {{ if not (in $allFolders $category) }}
+          {{ $allFolders = $allFolders | append $category }}
+        {{ end }}
 
-	</main>
+        {{ if not ($.Store.Get $category) }}
+          {{ $.Store.Set $category (slice .) }}
+        {{ else }}
+          {{ $existingSlice := $.Store.Get $category }}
+          {{ $.Store.Set $category ($existingSlice | append .) }}
+        {{ end }}
+      {{ end }}
+    {{ end }}
+
+    {{ $sortedFolders := sort $allFolders }}
+
+    {{ range $sortedFolders }}
+      {{ $category := . }}
+      {{ $categoryPages := $.Store.Get $category }}
+      {{ if $categoryPages }}
+        <h2>{{ $category | title }}</h2>
+        <ul>
+          {{ range $categoryPages }}
+            <li>
+              <a href="{{ .RelPermalink }}">
+                {{- if .Title -}}
+                  {{- .Title -}}
+                {{- else if .RawContent -}}
+                  {{- $firstLine := index (split .RawContent "\n") 0 -}}
+                  {{- if (hasPrefix $firstLine "* ") -}}
+                    {{- trim (strings.TrimPrefix "* " $firstLine) " " -}}
+                  {{- end -}}
+                {{- else -}}
+                  {{- .Params.title -}}
+                {{- end -}}
+              </a>
+            </li>
+          {{ end }}
+        </ul>
+      {{ end }}
+    {{ end }}
+
+  {{ else }}
+    {{ range $pages.GroupByDate "2006" }}
+      {{ $.Store.Set "year" .Key }}
+      {{ $year := $.Store.Get "year" }}
+      <h2>{{ $year }}</h2>
+      {{ partial "list-item.html" (dict "$" .) }}
+    {{ end }}
+  {{ end }}
+	</div>
 {{ end }}

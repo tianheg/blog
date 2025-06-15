@@ -1,0 +1,45 @@
+* css-box-model
+:PROPERTIES:
+:CUSTOM_ID: css-box-model
+:END:
+[[https://css-tricks.com/the-css-box-model/]]
+
+Margin 并不影响盒子大小，但影响其他元素与盒子的交互。
+
+盒子的大小计算方式：
+
+```text Width = width + padding-left + padding-right + border-left + border-right Height = height + padding-top + padding-bottom + border-top + border-bottom ```
+
+​## 如果这些值未声明，怎么办？
+
+如果不声明 padding，borders，它们可能为 0（使用了 CSS reset 规则），可能是浏览器默认值（可能并不为 0，尤其是表格类元素）。
+
+如果盒子的 width 未声明（并且盒子是块级元素），事情就变得棘手了。从这里开始，讲一些对于盒子模型，最好知道的事情。
+
+​## 块级盒子的默认宽度
+
+不写明宽度，盒子会有一个静态 / 相对位置，width 是 100%，padding 和 border 是 push inwards。但如果，显示设置 width 是 100%，padding 则变为 push outward。
+
+![css-box-model.webp](./img/css-box-model.webp)
+
+这里的原文需要再次阅读。
+
+​## 没有宽度的绝对盒子
+
+这些盒子的宽度是内容的宽度，直到盒子宽度达到最近的父元素（相对位置）/浏览器窗口的宽度，然后开始换行（wrap）。
+
+​## 没有宽度的浮动盒子
+
+The box is only as wide as it needs to be to accommodate the content, up to as wide as its parent element (doesn't need to be relatively positioned though).
+
+​## 行内元素也可以是盒子
+
+​## 查看页面所有盒子
+
+```css
+
+* {
+:PROPERTIES:
+:CUSTOM_ID: section-1
+:END:
+outline: 2px solid red !important; } ```

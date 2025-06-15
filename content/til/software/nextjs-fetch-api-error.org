@@ -1,0 +1,43 @@
+* Next.js fetch API error
+:PROPERTIES:
+:CUSTOM_ID: next.js-fetch-api-error
+:END:
+- https://vercel.com/docs/projects/environment-variables/system-environment-variables
+- https://laros.io/how-to-get-the-current-url-with-nextjs-on-vercel
+
+fetch 了全部的URL：=https://docs-vector-search-demo.vercel.app/api/vectorSearch=，错误的使用是只有 =/api/vectorSearch=。
+
+一个 work 的步骤：
+
+1. 在 Vercel 设置环境变量：=NEXT_PUBLIC_URL=https://$NEXT_PUBLIC_VERCEL_PROJECT_PRODUCTION_URL=
+2. 本地环境变量 .env.development:
+
+#+begin_src conf
+NEXT_PUBLIC_URL=http://localhost:3000
+#+end_src
+
+3. [@3] 使用 dotenv-expand 处理
+
+#+begin_src sh
+npm install dotenv-expand
+#+end_src
+
+#+begin_src js
+// next.config.js
+
+const dotenvExpand = require("dotenv-expand");
+
+dotenvExpand.expand({ parsed: { ...process.env } });
+
+// The rest of your config
+#+end_src
+
+4. [@4] 最终效果
+
+#+begin_src sh
+console.log(process.env.NEXT_PUBLIC_URL);
+
+// Output localhost: http://localhost:3000
+// Output preview: https://random-url.vercel.app
+// Output production: https://your-website.com
+#+end_src

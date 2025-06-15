@@ -1,0 +1,86 @@
+* learn-js-regexp
+:PROPERTIES:
+:CUSTOM_ID: learn-js-regexp
+:END:
+```js /word/ 匹配整个单词 /word/.test("hello word") 测试字符中是否包含正则匹配，是返回 true,否返回 false "Hello World!".match(/Hello/) 返回 Array [ "Hello" ] /a|b|c/ 匹配 a b c 中的任何一个 /Ww/i 忽略大小写 /word/g 全部匹配 /hu./ 匹配所有以 hu 开头的单词 /[aeiou]/ig 匹配所有符合条件的字母
+
+"Hello World!".match(/[a-z]/gi)
+
+"Hello World123".match(/[a-z0-9]/gi)
+
+/[^{aeiou0}-9]/gi matches all characters that are not a vowel. Note that characters like ., !, [, @, / and white space are matched /^{Amy}/ 匹配开头是 Amy 的字符串 /Amy$/ 匹配结尾是 Amy 的字符串
+
+"Mississippi".match(/s+/g) 不理解，返回 [ 'ss', 'ss' ]
+
+"Aaaaaaa".match(/Aa*/) 返回 Array [ "Aaaaaaa" ]
+
+懒匹配 "<h1>Winter is coming</h1>".match(/<[a-z0-9]*>/)
+
+/\w/g <==> /[A-Za-z0-9_]/g 匹配所有大小写字母、数字、`_` /\W/g 匹配除（大小写字母、数字、`_`）以外的字符
+
+//̣g 匹配所有数字 /\D/g 匹配非数字
+
+/\s/g 匹配全部空格 /§/g 匹配全部非空格
+
+/Oh{3,6}\sno/g.test("Ohhh no")
+
+/Haz{4,}ah/g z 至少重复 4 次
+
+/Tim{4}ber/ m 只重复 4 次
+
+/favou?rite/ 匹配有无 u ```
+
+- caret character (`^`)
+- greedy regex (`/C+/`)
+
+​## 用户名匹配
+
+[[https://www.freecodecamp.org/learn/javascript-algorithms-and-data-structures/regular-expressions/restrict-possible-usernames]]
+
+要求：
+
+1. 用户名只使用字符、数字
+2. 唯一的数字必须放在结尾，数字不能作为开头，结尾可以一个/多个数字
+3. 字母大小写任意
+4. 用户名最短 2 位
+5. 如果用户名只有两位，必须全部使用字母
+
+试了几十次，找不到完美通过所有测试的方法：`/^[a-zA-Z][a-zA-Z]̣$/gm`
+
+答案：
+
+1. `/^[a-z][a-z]+̣$|^[a-z]+̣̣$/igm`
+2. `/^[a-z]([0-9]{2,}|[a-z]+)̣$/`（这一个更加简洁）
+
+​## [Positive and Negative Lookahead]([[https://www.freecodecamp.org/learn/javascript-algorithms-and-data-structures/regular-expressions/positive-and-negative-lookahead]])
+
+[freeCodeCamp Challenge Guide: Positive and Negative Lookahead - Guide - The freeCodeCamp Forum]([[https://forum.freecodecamp.org/t/freecodecamp-challenge-guide-positive-and-negative-lookahead/301360]])
+
+如何使用 Positive（`(?=...)`） 和 Negative（`(?!...)`） Lookahead？`(?=\w{6})(?=\w*2̣)`
+
+​## [Check For Mixed Grouping of Characters]([[https://www.freecodecamp.org/learn/javascript-algorithms-and-data-structures/regular-expressions/check-for-mixed-grouping-of-characters]])
+
+[freeCodeCamp Challenge Guide: Check For Mixed Grouping of Characters - Guide - The freeCodeCamp Forum]([[https://forum.freecodecamp.org/t/freecodecamp-challenge-guide-check-for-mixed-grouping-of-characters/301339]])
+
+`(Franklin|Eleanor).*\sRoosevelt`
+
+​## [Reuse Patterns Using Capture Groups]([[https://www.freecodecamp.org/learn/javascript-algorithms-and-data-structures/regular-expressions/reuse-patterns-using-capture-groups]])
+
+[freeCodeCamp Challenge Guide: Reuse Patterns Using Capture Groups - Guide - The freeCodeCamp Forum]([[https://forum.freecodecamp.org/t/freecodecamp-challenge-guide-reuse-patterns-using-capture-groups/301364]])
+
+`^{(+̣)}\s\1\s\1$`
+
+​## [Use Capture Groups to Search and Replace]([[https://www.freecodecamp.org/learn/javascript-algorithms-and-data-structures/regular-expressions/use-capture-groups-to-search-and-replace]])
+
+```js let str = 'one two three' let fixRegex = /(\w+)\s(\w+)\s(\w+)/ // Change this line let replaceText = '$3 $2 $1' // Change this line let result = str.replace(fixRegex, replaceText) ```
+
+​## [Remove Whitespace from Start and End]([[https://www.freecodecamp.org/learn/javascript-algorithms-and-data-structures/regular-expressions/remove-whitespace-from-start-and-end]])
+
+[freeCodeCamp Challenge Guide: Remove Whitespace from Start and End - Guide - The freeCodeCamp Forum]([[https://forum.freecodecamp.org/t/freecodecamp-challenge-guide-remove-whitespace-from-start-and-end/301362]])
+
+```js let hello = ' Hello, World! ' let wsRegex = /^\s+|\s+$/g // Change this line let result = hello.replace(wsRegex, '') // Change this line ```
+
+​## 工具
+
+1. [[https://ihateregex.io/]]
+2. [Regex Vis]([[https://regex-vis.com/]])

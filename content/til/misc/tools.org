@@ -1,0 +1,91 @@
+* Tools
+:PROPERTIES:
+:CUSTOM_ID: tools
+:END:
+** Pandoc
+:PROPERTIES:
+:CUSTOM_ID: pandoc
+:END:
+[[https://pandoc.org/]]
+
+#+begin_src sh
+pandoc -f markdown -t org -o output_file.org input_file.md
+#+end_src
+
+** Docker
+:PROPERTIES:
+:CUSTOM_ID: docker
+:END:
+*** Docker Hub mirror
+:PROPERTIES:
+:CUSTOM_ID: docker-hub-mirror
+:END:
+[[https://gist.github.com/y0ngb1n/7e8f16af3242c7815e7ca2f0833d3ea6][Docker Hub 镜像加速器]]
+
+#+begin_src sh
+sudo mkdir -p /etc/docker
+sudo tee /etc/docker/daemon.json <<-'EOF'
+{
+  "registry-mirrors": ["https://9natnp0v.mirror.aliyuncs.com"]
+}
+EOF
+sudo systemctl daemon-reload
+sudo systemctl restart docker
+#+end_src
+
+*** 一些实践
+:PROPERTIES:
+:CUSTOM_ID: 一些实践
+:END:
+- [[https://github.com/y0ngb1n/dockerized]]
+
+** Git
+:PROPERTIES:
+:CUSTOM_ID: git
+:END:
+*** Gitea
+:PROPERTIES:
+:CUSTOM_ID: gitea
+:END:
+[[https://github.com/go-gitea/gitea]] [[https://gitea.io/en-us/]]
+
+1. 安装
+
+** 科学上网
+:PROPERTIES:
+:CUSTOM_ID: 科学上网
+:END:
+** Emacs/Vim
+:PROPERTIES:
+:CUSTOM_ID: emacsvim
+:END:
+** GNU Make
+:PROPERTIES:
+:CUSTOM_ID: gnu-make
+:END:
+** CMake
+:PROPERTIES:
+:CUSTOM_ID: cmake
+:END:
+** LaTex -- 写文章
+:PROPERTIES:
+:CUSTOM_ID: latex-写文章
+:END:
+** 画图
+:PROPERTIES:
+:CUSTOM_ID: 画图
+:END:
+- [[https://excalidraw.com/]]
+
+** 文件的压缩与解压缩
+:PROPERTIES:
+:CUSTOM_ID: 文件的压缩与解压缩
+:END:
+[[https://wiki.archlinux.org/title/Archiving_and_compression]]
+
+** Misc
+:PROPERTIES:
+:CUSTOM_ID: misc
+:END:
+- [google webfonts helper]([[https://google-webfonts-helper.herokuapp.com/fonts]])
+- 为去不同的国家准备 SIM 卡 [[https://prepaid-data-sim-card.fandom.com/wiki/Prepaid_SIM_with_data]]

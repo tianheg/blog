@@ -1,0 +1,484 @@
+* Simple tutorial about WASM
+:PROPERTIES:
+:CUSTOM_ID: simple-tutorial-about-wasm
+:END:
+WASM(webassembly) is a virtual assembly language for the browser. It is closer to the Hardware than JavaScript.
+
+- [[https://golangbot.com/webassembly-using-go/][WebAssembly using Go (Golang) | Run Go programs in the browser]]
+- [[https://golangbot.com/go-webassembly-dom-access/][Access the browser's DOM from Go (Golang) using WebAssembly | golangbot.com]]
+- [[https://github.com/golangbot/webassembly][golangbot/webassembly: Webassembly using Go]]
+
+We'll create a application that is used to format JSON.
+
+Before:
+
+#+begin_src json
+{"website":"golangbot.com", "tutorials": [{"title": "Strings", "url":"/strings/"}, {"title":"maps", "url":"/maps/"}, {"title": "goroutines","url":"/goroutines/"}]}
+#+end_src
+
+After:
+
+#+begin_src json
+{
+  "website": "golangbot.com",
+  "tutorials": [
+    {
+      "title": "Strings",
+      "url": "/strings/"
+    },
+    {
+      "title": "maps",
+      "url": "/maps/"
+    },
+    {
+      "title": "goroutines",
+      "url": "/goroutines/"
+    }
+  ]
+}
+#+end_src
+
+** HelloWorld WASM Program Cross Compiled from Go
+:PROPERTIES:
+:CUSTOM_ID: helloworld-wasm-program-cross-compiled-from-go
+:END:
+Here is the file structure:
+
+#+begin_src txt
+Documents/
+└── webassembly
+    ├── assets
+    └── cmd
+        ├── server
+        └── wasm
+#+end_src
+
+#+begin_src sh
+mkdir -p ~/Documents/webassembly/assets \
+~/Documents/webassembly/cmd  \
+~/Documents/webassembly/cmd/server \
+~/Documents/webassembly/cmd/wasm
+#+end_src
+
+First create a go module named =github.com/golangbot/webassembly=.
+
+#+begin_src sh
+cd ~/Documents/webassembly
+go mod init github.com/golangbot/webassembly
+#+end_src
+
+=go mod init github.com/golangbot/webassembly= will create a file named =go.mod=:
+
+#+begin_src mod
+module github.com/golangbot/webassembly
+
+go 1.22.0
+#+end_src
+
+Create =main.go= with the following contents inside =~/Documents/webassembly/cmd/wasm=:
+
+#+begin_src go
+package main
+
+import (
+    "fmt"
+)
+
+func main() {
+    fmt.Println("Go Web Assembly")
+}
+#+end_src
+
+Let's cross compile the above Go program into WebAssembly.
+
+#+begin_src sh
+cd ~/Documents/webassembly/cmd/wasm/
+GOOS=js GOARCH=wasm go build -o  ../../assets/json.wasm
+#+end_src
+
+Only cross compiling the =main= package to WebAssembly.
+
+#+begin_src sh
+./assets/json.wasm
+# bash: ./assets/json.wasm: cannot execute binary file: Exec format error
+#+end_src
+
+Why we got this error?
+
+Because the binary is a =wasm= related binary and is supposed to be run inside a browser sandbox. The Linux OSes don't understand the format of this binary.
+
+*** JS Glue
+:PROPERTIES:
+:CUSTOM_ID: js-glue
+:END:
+We need some JS glue code to run =json.wasm=.
+
+#+begin_src sh
+cp "$(go env GOROOT)/misc/wasm/wasm_exec.js" ~/Documents/webassembly/assets/
+#+end_src
+
+*** index.html
+:PROPERTIES:
+:CUSTOM_ID: index.html
+:END:
+#+begin_src html
+<!doctype html>
+<html>
+    <head>
+        <meta charset="utf-8"/>
+        <script src="wasm_exec.js"></script>
+        <script>
+            const go = new Go();
+            WebAssembly.instantiateStreaming(fetch("json.wasm"), go.importObject).then((result) => {
+                go.run(result.instance);
+            });
+        </script>
+    </head>
+    <body></body>
+</html>
+#+end_src
+
+Now see the file structure:
+
+#+begin_src txt
+Documents/
+└──webassembly/
+        ├── assets
+        │   ├── index.html
+        │   ├── json.wasm
+        │   └── wasm_exec.js
+        ├── cmd
+        │   ├── server
+        │   └── wasm
+        │       └── main.go
+        └── go.mod
+#+end_src
+
+*** WebServer
+:PROPERTIES:
+:CUSTOM_ID: webserver
+:END:
+Create =main.go= inside the =server= directory. The directory structure after creating =main.go= is provided below.
+
+#+begin_src txt
+Documents/
+└── webassembly
+        ├── assets
+        │   ├── index.html
+        │   ├── json.wasm
+        │   └── wasm_exec.js
+        ├── cmd
+        │   ├── server
+        │   │   └── main.go
+        │   └── wasm
+        │       └── main.go
+        └── go.mod
+#+end_src
+
+Copy the following code to =~/Documents/webassembly/cmd/server/main.go=.
+
+#+begin_src go
+package main
+
+import (
+    "fmt"
+    "net/http"
+)
+
+func main() {
+    err := http.ListenAndServe(":9090", http.FileServer(http.Dir("../../assets")))
+    if err != nil {
+        fmt.Println("Failed to start server", err)
+        return
+    }
+}
+#+end_src
+
+The above program creates a file server listening at port =9090= with the root at our =assets= folder. Let's run the server and see our first WebAssembly program running.
+
+#+begin_src sh
+cd ~/Documents/webassembly/cmd/server/
+go run main.go
+#+end_src
+
+Now we can see the output(=Go Web Assembly=) in the =http://localhost:9090/= page's console.
+
+** Coding the JSON formatter
+:PROPERTIES:
+:CUSTOM_ID: coding-the-json-formatter
+:END:
+Add the following function to =~/Documents/webassembly/cmd/wasm/main.go=.
+
+#+begin_src go
+func prettyJson(input string) (string, error) {
+    var raw any
+    if err := json.Unmarshal([]byte(input), &raw); err != nil {
+        return "", err
+    }
+    pretty, err := json.MarshalIndent(raw, "", "  ")
+    if err != nil {
+        return "", err
+    }
+    return string(pretty), nil
+}
+#+end_src
+
+The =MarshalIndent= function takes 3 parameters as input. The first one is the raw unformatted JSON, the second one is the prefix to add to each new line of the JSON. In this case, we don't add a prefix. The third parameter is the string to be appended for each indent of our JSON.
+
+*** Exposing a function from Go to Javascript
+:PROPERTIES:
+:CUSTOM_ID: exposing-a-function-from-go-to-javascript
+:END:
+Now we have the function ready but we are yet to expose this function to Javascript so that it can be called from the front end.
+
+Go provides the [[https://pkg.go.dev/syscall/js][syscall/js]] package which helps in exposing functions from Go to Javascript.
+
+The first step in exposing a function from =Go= to =JavaScript= is to create a [[https://pkg.go.dev/syscall/js#Func][Func]] type. Func is a wrapped Go function that can be called by JavaScript. The [[https://pkg.go.dev/syscall/js#FuncOf][FuncOf]] function can be used to create a =Func= type.
+
+Add the following function to =~/Documents/webassembly/cmd/wasm/main.go=.
+
+#+begin_src go
+func jsonWrapper() js.Func {
+        jsonFunc := js.FuncOf(func(this js.Value, args []js.Value) any {
+                if len(args) != 1 {
+                        return "Invalid no of arguments passed"
+                }
+                inputJSON := args[0].String()
+                fmt.Printf("input %s\n", inputJSON)
+                pretty, err := prettyJson(inputJSON)
+                if err != nil {
+                        fmt.Printf("unable to convert to json %s\n", err)
+                        return err.Error()
+                }
+                return pretty
+        })
+        return jsonFunc
+}
+#+end_src
+
+Here is the completed code.
+
+#+begin_src go
+package main
+
+import (
+    "fmt"
+    "encoding/json"
+    "syscall/js"
+)
+
+func prettyJson(input string) (string, error) {
+        var raw any
+        if err := json.Unmarshal([]byte(input), &raw); err != nil {
+                return "", err
+        }
+        pretty, err := json.MarshalIndent(raw, "", "  ")
+        if err != nil {
+                return "", err
+        }
+        return string(pretty), nil
+}
+
+func jsonWrapper() js.Func {
+        jsonFunc := js.FuncOf(func(this js.Value, args []js.Value) any {
+                if len(args) != 1 {
+                        return "Invalid no of arguments passed"
+                }
+                inputJSON := args[0].String()
+                fmt.Printf("input %s\n", inputJSON)
+                pretty, err := prettyJson(inputJSON)
+                if err != nil {
+                        fmt.Printf("unable to convert to json %s\n", err)
+                        return err.Error()
+                }
+                return pretty
+        })
+        return jsonFunc
+}
+
+func main() {
+    fmt.Println("Go Web Assembly")
+    js.Global().Set("formatJSON", jsonWrapper())
+    <-make(chan struct{})
+}
+#+end_src
+
+Compile and test the program.
+
+#+begin_src sh
+cd ~/Documents/webassembly/cmd/wasm/
+GOOS=js GOARCH=wasm go build -o  ../../assets/json.wasm
+cd ~/Documents/webassembly/cmd/server/
+go run main.go
+#+end_src
+
+*** Calling the Go function from JavaScript
+:PROPERTIES:
+:CUSTOM_ID: calling-the-go-function-from-javascript
+:END:
+Open the devtools, select console tab, input:
+
+#+begin_src js
+formatJSON('{"website":"golangbot.com", "tutorials": [{"title": "Strings", "url":"/strings/"}]}')
+#+end_src
+
+Output:
+
+#+begin_src txt
+'{
+ "tutorials": [
+  {
+   "title": "Strings",
+   "url": "/strings/"
+  }
+ ],
+ "website": "golangbot.com"
+}'
+#+end_src
+
+** Creating the UI and calling the wasm function
+:PROPERTIES:
+:CUSTOM_ID: creating-the-ui-and-calling-the-wasm-function
+:END:
+Let's modify the existing =~/Documents/webassembly/assets/index.html= in the =assets= folder to include the UI.
+
+#+begin_src html
+<!doctype html>
+<html>  
+    <head>
+        <meta charset="utf-8"/>
+        <script src="wasm_exec.js"></script>
+        <script>
+            const go = new Go();
+            WebAssembly.instantiateStreaming(fetch("json.wasm"), go.importObject).then((result) => {
+                go.run(result.instance);
+            });
+        </script>
+    </head>
+    <body>
+         <textarea id="jsoninput" name="jsoninput" cols="80" rows="20"></textarea>
+         <input id="button" type="submit" name="button" value="pretty json" onclick="json(jsoninput.value)"/>
+         <textarea id="jsonoutput" name="jsonoutput" cols="80" rows="20"></textarea>
+    </body>
+    <script>
+        var json = function(input) {
+            jsonoutput.value = formatJSON(input)
+        }
+     </script>
+</html>
+#+end_src
+
+Compile and run this program.
+
+#+begin_src sh
+cd ~/Documents/webassembly/cmd/wasm/
+GOOS=js GOARCH=wasm go build -o  ../../assets/json.wasm
+cd ~/Documents/webassembly/cmd/server/
+go run main.go
+#+end_src
+
+Input:
+
+#+begin_src json
+{"website":"golangbot.com", "tutorials": [{"title": "Strings", "url":"/strings/"}, {"title":"maps", "url":"/maps/"}]}
+#+end_src
+
+Output:
+
+#+begin_src json
+{
+  "tutorials": [
+    {
+      "title": "Strings",
+      "url": "/strings/"
+    },
+    {
+      "title": "maps",
+      "url": "/maps/"
+    }
+  ],
+  "website": "golangbot.com"
+}
+#+end_src
+
+*** Accessing the DOM from Go using JavaScript
+:PROPERTIES:
+:CUSTOM_ID: accessing-the-dom-from-go-using-javascript
+:END:
+In the above section, we called the =wasm= function, got the formatted JSON string output, and set the output text area with the formatted JSON using JavaScript.
+
+There is one more way to achieve the same output. Instead of passing the formatted JSON string to javascript, it is possible to access the browser's [[https://developer.mozilla.org/en-US/docs/Web/API/Document_Object_Model][DOM]] from Go and set the formatted JSON string to the output text area.
+
+Let's see how this is done.
+
+We need to modify the =jsonWrapper= function in =~/Documents/webassembly/cmd/wasm/main.go= to achieve this.
+
+#+begin_src go
+func jsonWrapper() js.Func {
+    jsonfunc := js.FuncOf(func(this js.Value, args []js.Value) any {
+        if len(args) != 1 {
+            return "Invalid no of arguments passed"
+        }
+        jsDoc := js.Global().Get("document")
+        if !jsDoc.Truthy() {
+            return "Unable to get document object"
+        }
+        jsonOuputTextArea := jsDoc.Call("getElementById", "jsonoutput")
+        if !jsonOuputTextArea.Truthy() {
+            return "Unable to get output text area"
+        }
+        inputJSON := args[0].String()
+        fmt.Printf("input %s\n", inputJSON)
+        pretty, err := prettyJson(inputJSON)
+        if err != nil {
+            errStr := fmt.Sprintf("unable to parse JSON. Error %s occurred\n", err)
+            return errStr
+        }
+        jsonOuputTextArea.Set("value", pretty)
+        return nil
+    })
+
+    return jsonfunc
+}
+#+end_src
+
+Run this program again.
+
+#+begin_src sh
+cd ~/Documents/webassembly/cmd/wasm/  
+GOOS=js GOARCH=wasm go build -o  ../../assets/json.wasm  
+cd ~/Documents/webassembly/cmd/server/  
+go run main.go 
+#+end_src
+
+*** Error Handling
+:PROPERTIES:
+:CUSTOM_ID: error-handling
+:END:
+#+begin_src go
+func jsonWrapper() js.Func {
+    jsonfunc := js.FuncOf(func(this js.Value, args []js.Value) any {
+        if len(args) != 1  {
+            return errors.New("Invalid no of arguments passed")
+        }
+        jsDoc := js.Global().Get("document")
+        if !jsDoc.Truthy() {
+            return errors.New("Unable to get document object")
+        }
+        jsonOuputTextArea := jsDoc.Call("getElementById", "jsonoutput")
+        if !jsonOuputTextArea.Truthy() {
+            return errors.New("Unable to get output text area")
+        }
+        inputJSON := args[0].String()
+        fmt.Printf("input %s\n", inputJSON)
+        pretty, err := prettyJson(inputJSON)
+        if err != nil {
+            errStr := fmt.Sprintf("unable to parse JSON. Error %s occurred\n", err)
+            return errors.New(errStr)
+        }
+        jsonOuputTextArea.Set("value", pretty)
+        return nil
+    })
+    return jsonfunc
+}
+#+end_src

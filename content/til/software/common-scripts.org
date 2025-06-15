@@ -1,0 +1,13 @@
+* Common scripts
+:PROPERTIES:
+:CUSTOM_ID: common-scripts
+:END:
+common
+
+** 免 sudo 密码
+:PROPERTIES:
+:CUSTOM_ID: 免-sudo-密码
+:END:
+```sh echo "`whoami` ALL=(ALL) NOPASSWD:ALL" | sudo tee "/etc/sudoers.d/dont-prompt-$USER-for-sudo-password"
+
+```

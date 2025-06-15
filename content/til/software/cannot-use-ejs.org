@@ -1,0 +1,56 @@
+* Want to use ejs with [cite/t:@fastify/view] on Vercel, always get error: no such file or directory, open '/var/task/views/index.ejs'
+:PROPERTIES:
+:CUSTOM_ID: want-to-use-ejs-with-fastifyview-on-vercel-always-get-error-no-such-file-or-directory-open-vartaskviewsindex.ejs
+:END:
+finally search, got this:
+
+https://github.com/vercel/vercel/discussions/4541
+
+TLDR: Don't use EJS on vercel, use HTML or Next/Vue
+
+Hey, I searched a lot, and there is absolutely no way to work with EJS on vercel, we need to build the pages in order for vercel to provide the content in a static manner.
+
+The alternatives I used were using HTML, and I also learnt Next.JS which is very powerful and is more useful than EJS.
+
+-- https://github.com/vercel/vercel/discussions/4541#discussioncomment-5369468
+
+Why cannot use ejs or handlebars on vercel?
+
+When deploying applications on Vercel, especially those using templating engines like Handlebars or EJS, you might encounter issues where these engines don't seem to work as expected. This is primarily due to the nature of how Vercel handles serverless functions and static file serving.
+
+*** Understanding the Issue with Handlebars and EJS on Vercel
+:PROPERTIES:
+:CUSTOM_ID: understanding-the-issue-with-handlebars-and-ejs-on-vercel
+:END:
+1. *Serverless Architecture:* Vercel is optimized for serverless deployments, which means each request is handled by a serverless function. Templating engines like Handlebars and EJS are typically used in server-based applications where the server renders HTML pages dynamically. In a serverless environment, the conventional setup of these templating engines might not align with the stateless and ephemeral nature of serverless functions.
+
+2. *Path Resolution Issues:* In serverless functions, the file system behaves differently compared to a traditional server. The file paths used in your local development environment might not correctly resolve in a serverless environment. This can lead to errors where the templating engine cannot find the template files [[https://stackoverflow.com/questions/76701896/how-should-i-change-the-views-directory-for-vercel-deployment][2]].
+
+3. *Deployment Configuration:* Vercel requires specific configurations for projects, especially when dealing with static files and serverless functions. If the configuration does not explicitly handle the routing and serving of static assets or views, the templating engine might fail to locate these files [[https://vercel.com/guides/how-do-i-resolve-a-module-not-found-error][3]].
+
+*** Solutions and Workarounds
+:PROPERTIES:
+:CUSTOM_ID: solutions-and-workarounds
+:END:
+1. *Correct File Path Configuration:* Ensure that the paths to your templates are correctly configured to reflect the structure of the deployed environment on Vercel. You might need to use absolute paths or configure your templating setup to adapt to the serverless environment.
+
+   #+begin_src javascript
+   const path = require('path');
+   app.set('views', path.join(__dirname, 'views'));
+   #+end_src
+
+2. *Custom Server Setup:* For applications that heavily rely on server-side rendering with templating engines, consider using a custom server setup on Vercel, such as an Express.js server. This allows more traditional handling of routes and file serving, which can be configured to work with templating engines.
+
+   #+begin_src javascript
+   const express = require('express');
+   const app = express();
+   app.set('view engine', 'ejs');
+   // Setup other middleware and routes
+   module.exports = app;
+   #+end_src
+
+3. *Static Site Generation (SSG):* If possible, consider pre-rendering your pages at build time using Static Site Generation techniques. This approach is well-suited for serverless platforms like Vercel and can improve performance by serving static HTML files instead of rendering them on-the-fly.
+
+4. *Debugging and Logs:* Utilize Vercel's deployment logs to identify and troubleshoot issues related to file paths or configuration problems. Adjustments based on the logs can often resolve issues with templating engines.
+
+By understanding these limitations and configuring your deployment appropriately, you can effectively use templating engines like Handlebars and EJS on Vercel. It's crucial to adapt your application's architecture and deployment strategy to fit the serverless model that Vercel supports.

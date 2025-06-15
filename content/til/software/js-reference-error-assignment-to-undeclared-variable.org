@@ -1,0 +1,17 @@
+* js-reference-error-assignment-to-undeclared-variable
+:PROPERTIES:
+:CUSTOM_ID: js-reference-error-assignment-to-undeclared-variable
+:END:
+** --- title: "JS ReferenceError -- Assignment to undeclared variable"
+:PROPERTIES:
+:CUSTOM_ID: title-js-referenceerror-assignment-to-undeclared-variable
+:END:
+错误代码：
+
+```js index = game.initialisingPlayers.indexOf(data.id) ```
+
+正确代码：
+
+```js let index = game.initialisingPlayers.indexOf(data.id) ```
+
+或者使用 const。

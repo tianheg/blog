@@ -1,0 +1,65 @@
+* ssh-tips-and-tricks
+:PROPERTIES:
+:CUSTOM_ID: ssh-tips-and-tricks
+:END:
+[[https://carlosbecker.com/posts/ssh-tips-and-tricks/]]
+
+​## Forward Yubikey Agent
+
+To manage the agent, I strongly recommend [yubikey\-agent]([[https://github.com/FiloSottile/yubikey-agent]]).
+
+~/.ssh/config
+
+```config Host example.org ForwardAgent true ```
+
+查看是否工作
+
+```sh ssh-add -L ```
+
+~/.ssh/rc
+
+```sh #!/bin/bash if test "$SSH_{AUTHSOCK}" ; then ln -sf $SSH_{AUTHSOCK} ~/.ssh/ssh_{authsock} fi ```
+
+​## Reuse connections
+
+~/.ssh/config
+
+```conf Host example.org ControlMaster auto ControlPath ~/.ssh/%r@%h:%p.sock ControlPersist yes ```
+
+这样会创建一个 Unix Socket ~/.ssh/user@host:port.sock
+
+​## 使用别名
+
+~/.ssh/config
+
+```conf Host ex HostName example.org User foo Port 2223 ```
+
+​## Do not add testing stuff to `~/.ssh/known_{hosts}`
+
+如果在本地调试 SSH 程序，会弄乱 `~/.ssh/known_{hosts}`，也会导致密钥检查失败。
+
+通过关闭密匙检查解决问题`~/.ssh/config`：
+
+```conf Host localhost UserKnownHostsFile /dev/null StrictHostKeyChecking no ```
+
+​## 让连接持续更长时间
+
+如果服务器的空闲超时时间较短，它可能提前断连。你可以通过 ping 服务器来保持连接。
+
+也可以这样`~/.ssh/config`：
+
+```conf Host * ServerAliveInterval 60
+
+```
+
+​## 规范化主机名
+
+如果想接入在同一个 TLD（Top-level domain）下的多台机器，，可能要开启主机名规范化设置`~/.ssh/config`：
+
+```conf Host * CanonicalizeHostName yes CanonicalizeFallbackLocal yes CanonicalDomains mytld.foo.bar ```
+
+这样登录 `host1.mytld.foo.bar` 可以直接输入：
+
+```sh ssh host1 ```
+
+这样对本地网络中的主机是友好的。

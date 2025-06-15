@@ -1,0 +1,25 @@
+* linux-user
+:PROPERTIES:
+:CUSTOM_ID: linux-user
+:END:
+​## `chsh`
+
+更改当前用户 Shell
+
+```bash chsh -s /bin/zsh echo $SHELL ```
+
+列出所有 Shell
+
+```bash chsh -l ```
+
+​## `useradd`
+
+新建用户（有家目录）
+
+refer [[https://wiki.archlinux.org/title/Users_and_groups]]
+
+```bash useradd -m example passwd example ```
+
+​## `adduser`
+
+`adduser` provides a high level interface for adding new users, and `useradd` provides a low level interface.

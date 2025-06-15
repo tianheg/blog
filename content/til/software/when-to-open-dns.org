@@ -1,0 +1,22 @@
+* when-to-open-dns
+:PROPERTIES:
+:CUSTOM_ID: when-to-open-dns
+:END:
+[[https://web.archive.org/web/20081226074242/http://www.netwidget.net/books/apress/dns/info/open.html]]
+
+If your DNS does not need to be available to the world i.e. you are not an ISP or a generous human being, then limit recursive (or all) queries to your DNS using any of the following techniques.
+
+如何开放？
+
+1. Inhibit incoming DNS (port 53) queries for caching or forwarding only DNS servers using a firewall
+2. If you run master or slave domains limit the scope of recursion by adding the following statement to the global options clause:
+
+```
+
+allow-recursion {192.168.2.0/24;}; ```
+
+1. If you run only a caching or forwarding DNS then limit the scope of all queries by adding the following statement to the global options clause:
+
+```
+
+allow-query {192.168.2.0/24;}; ```

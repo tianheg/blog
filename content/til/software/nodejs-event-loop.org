@@ -1,0 +1,62 @@
+* Node.js Event Loop
+:PROPERTIES:
+:CUSTOM_ID: node.js-event-loop
+:END:
+https://nodejs.org/en/learn/asynchronous-work/event-loop-timers-and-nexttick
+
+https://www.freecodecamp.org/news/a-guide-to-the-node-js-event-loop/
+
+https://nodejs.org/en/learn/asynchronous-work/understanding-setimmediate
+
+#+begin_src js
+const baz = () => console.log('baz');
+const foo = () => console.log('foo');
+const zoo = () => console.log('zoo');
+
+const start = () => {
+  console.log('start');
+  setImmediate(baz);
+  new Promise((resolve, reject) => {
+    resolve('bar');
+  }).then(resolve => {
+    console.log(resolve);
+    process.nextTick(zoo);
+  });
+  process.nextTick(foo);
+};
+
+start();
+
+// start foo bar zoo baz
+#+end_src
+
+but in *.mjs is different:
+
+#+begin_src mjs
+// start bar foo zoo baz
+#+end_src
+
+because ES Module is asyncchronous, second output is 'bar', not 'foo'
+
+Event loop's order of operations:
+
+#+begin_src txt
+   ┌───────────────────────────┐
+┌─>│           timers          │
+│  └─────────────┬─────────────┘
+│  ┌─────────────┴─────────────┐
+│  │     pending callbacks     │
+│  └─────────────┬─────────────┘
+│  ┌─────────────┴─────────────┐
+│  │       idle, prepare       │
+│  └─────────────┬─────────────┘      ┌───────────────┐
+│  ┌─────────────┴─────────────┐      │   incoming:   │
+│  │           poll            │<─────┤  connections, │
+│  └─────────────┬─────────────┘      │   data, etc.  │
+│  ┌─────────────┴─────────────┐      └───────────────┘
+│  │           check           │
+│  └─────────────┬─────────────┘
+│  ┌─────────────┴─────────────┐
+└──┤      close callbacks      │
+   └───────────────────────────┘
+#+end_src

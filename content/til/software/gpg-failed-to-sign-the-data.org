@@ -1,0 +1,16 @@
+* GPG
+:PROPERTIES:
+:CUSTOM_ID: gpg
+:END:
+#+begin_src sh
+error: gpg failed to sign the data:
+[GNUPG:] KEY_CONSIDERED A47EAD5ACA5C2017C81149F834B5D16A1EE7FAB9 2
+[GNUPG:] BEGIN_SIGNING H10
+gpg: signing failed: Permission denied
+[GNUPG:] FAILURE sign 67141633
+gpg: signing failed: Permission denied
+#+end_src
+
+Above came from git commit -m ““, when signing with GPG
+
+Fix it with =gpgconf --kill gpg-agent=

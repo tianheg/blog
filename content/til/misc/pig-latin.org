@@ -1,0 +1,43 @@
+* pig-latin
+:PROPERTIES:
+:CUSTOM_ID: pig-latin
+:END:
+1. [Intermediate Algorithm Scripting: Pig Latin | freeCodeCamp.org]([[https://www.freecodecamp.org/learn/javascript-algorithms-and-data-structures/intermediate-algorithm-scripting/pig-latin]])
+2. [freeCodeCamp Challenge Guide: Pig Latin - Guide - The freeCodeCamp Forum]([[https://forum.freecodecamp.org/t/freecodecamp-challenge-guide-pig-latin/16039]])
+
+```js function translatePigLatin(str) { return str }
+
+translatePigLatin('consonant') ```
+
+规则：
+
+1. 如果开头的一个或多个字母是辅音，将它们移动到单词末尾，并在末尾添加 `ay`
+2. 如果以元音字母开头，则直接在末尾添加 `way`
+
+答案：
+
+```js function translatePigLatin(str) { let consonantRegex = /^[^{aeiou}]+/ let myConsonants = str.match(consonantRegex) return myConsonants !== null ? str.replace(myConsonants, '').concat(myConsonants).concat('ay')
+
+#+begin_example
+str.concat('way')
+#+end_example
+
+}
+
+console.log(translatePigLatin('paragraphs')) ```
+
+我没有做到的部分：
+
+1. 想到用这样的正则表达式寻找辅音字母
+2. 我不知道可以用三元操作符来表示 if...else...
+3. replace 也不知道使用
+
+唯一知道的就是用了 concat。
+
+```js function translatePigLatin(str) { let pigLatin = '' let regex = /[aeiou]/gi if (str[0].match(regex)) { pigLatin = str + 'way' } else if (str.match(regex) === null) { pigLatin = str + 'ay' } else { let vowelIndex = str.indexOf(str.match(regex)[0]) pigLatin = str.substring(vowelIndex) + str.substring(0, vowelIndex) + 'ay' } return pigLatin } ```
+
+我没有做到：
+
+1. 用 indexOf 获取索引
+2. 用 substring 获取子字符串
+3. 正则表达式用法

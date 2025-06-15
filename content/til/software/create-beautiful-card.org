@@ -1,0 +1,38 @@
+* Create beautiful card
+:PROPERTIES:
+:CUSTOM_ID: create-beautiful-card
+:END:
+Get some card style with pure CSS.
+
+#+begin_src css
+.card {
+  display: grid;
+  grid-template-rows: max-content 200px 1fr;
+  height: 500px;
+  padding: 15px;
+  border-radius: 10px;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+  color: #333;
+  font-family: Arial, sans-serif;
+  a {
+    text-underline-offset: .4rem;
+    text-decoration: underline dashed;
+    color: #333;
+  }
+  a:hover {
+    text-decoration: none;
+    color: hsl(220, 90%, 56%);
+  }
+}
+.cards {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(230px, 1fr));
+  grid-gap: 20px;
+}
+#+end_src
+
+** Online service
+:PROPERTIES:
+:CUSTOM_ID: online-service
+:END:
+- Codepen

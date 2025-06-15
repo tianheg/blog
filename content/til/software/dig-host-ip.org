@@ -1,0 +1,94 @@
+* dig-host-ip
+:PROPERTIES:
+:CUSTOM_ID: dig-host-ip
+:END:
+```bash $ pacman -Qo dig /usr/bin/dig is owned by bind 9.18.0-1 $ pacman -Qo host /usr/bin/host is owned by bind 9.18.0-1 ```
+
+在 Arch Linux 下使用上述命令查询命令所属的包。
+
+Bind 提供了一个完整的，高度可移植的 DNS 协议的实现。BIND is an implementation of the Domain Name System (DNS) protocols. The name BIND stands for "Berkeley Internet Name Domain", because the software originated in the early 1980s at the University of California at Berkeley.
+
+​## DNSSEC and BIND
+
+DNSSEC extends standard DNS to prove the data is not modified and came from the official source. ISC BIND supports the full DNSSEC standard.
+
+​### What is DNSSEC?
+
+DNSSEC (Domain Name System Security Extensions) adds resource records and message header bits which can be used to verify that the requested data matches what the zone administrator put in the zone and has not been altered in transit.
+
+DNSSEC doesn't provide a secure tunnel; it doesn't encrypt or hide DNS data. It was designed with backwards compatibility in mind. The original standard DNS protocol continues to work the same.
+
+The new resource record types are: RRSIG (for digital signature), DNSKEY (the public key), DS (Delegation Signer), and NSEC (pointer to next secure record). The new message header bits are: AD (for authenticated data) and CD (checking disabled). A DNSSEC validating resolver uses these records and public key (asymmetric) cryptography to prove the integrity of the DNS data.
+
+​### DNSSEC Software and Tools
+
+- [DNSSEC - DNS Security Extensions]([[https://www.dnssec.net/]])
+- [Projet IDsA]([[http://idsa.irisa.fr/index.php?page=kro&lang=en]])
+- [Internet Society (ISOC) Publications: Internet Report]([[https://web.archive.org/web/20080813191530/http://ietfreport.isoc.org/ids-wg-dnsext.html]])
+- [Net::DNS]([[https://www.net-dns.org/]])
+- [DNSSEC Home Page December 2008]([[https://web.archive.org/web/20081220052431/http://dnssec-deployment.org/]])
+- [DNSSEC-Tools]([[https://dnssec-tools.org/]])
+
+​## dig - domain information groper
+
+```bash dig yidajiabei.xyz dig @8.8.8.8 yidajiabei.xyz # 指定 DNS 服务器 dig yidajiabei.xyz ANY # 返回所有类型的结果 dig yidajiabei.xyz +short # 返回 A 记录的 IP dig yidajiabei.xyz +noall +answer # ANSWER 部分的详细信息
+
+dig yidajiabei.xyz +trace dig -x <ip_{addr}> # Reverse DNS Lookup dig +noall +answer -x 172.217.14.238 # 这个 IP 有输出，测试的另一个 IP 沒有输出 dig -t type65 +dnssec @ns1.cloudflare.com odoh.cloudflare-dns.com # [[https://blog.cloudflare.com/oblivious-dns/]] ```
+
+查询多个域名 IP：
+
+新建文件 domain_{search}.txt：
+
+```text example.com abc.com def.com ```
+
+```bash dig -f domain_{search}.txt +short ```
+
+修改默认设置：
+
+```bash vim ~/.digrc ```
+
+~/.digrc：
+
+``text` +noall +answer
+
+````
+
+​## host
+
+```bash host yidajiabei.xyz host -a yidajiabei.xyz host -v yidajiabei.xyz host -t ns yidajiabei.xyz host -t SOA yidajiabei.xyz host -t txt yidajiabei.xyz host -C yidajiabei.xyz # compare the SOA records on authoritative nameservers, 有时会报错 host -R 3 yidajiabei.xyz # specify the number of retries you can do in case one try fails host -l yidajiabei.xyz # In order to list all hosts in a domain.For this command to work you need to be either an admin or a node server ````
+
+​## nslookup
+
+```bash nslookup yidajiabei.xyz nslookup <ip_{addr}> # 反向 DNS 查询 nslookup -type=any google.com nslookup -type=soa redhat.com nslookup -type=ns google.com nslookup -type=a google.com nslookup -type=mx google.com nslookup -type=txt google.com ```
+
+​## drill(ldns 包提供）
+
+```bash drill @8.8.8.8 CNAME yidajiabei.xyz ```
+
+The world of DNS is on the verge of three significant changes - IPv6, VoIP and DNSSEC.
+
+​## IPv6 Information
+
+[The IPv6 Forum Releases The IPv6 Security (IPsec) Ready Logo Program - Administration - IPv6 Forum]([[https://www.ipv6forum.com/]])
+
+​## DNS 安全
+
+在过去有人通过 DNS 污染，让人进入假的网站。
+
+--------------
+
+参考资料：
+
+1. [[https://wiki.archlinux.org/title/BIND]]
+2. [[https://wiki.archlinux.org/title/Domain_name_resolution#Lookup_utilities]]
+3. [[https://web.archive.org/web/20081118071603/https://www.isc.org/software/bind/whatis]]
+4. [[https://web.archive.org/web/20081118071519/https://www.isc.org/software/bind/dnssec]]
+5. [[https://web.archive.org/web/20081118165839/https://www.isc.org/files/DNSSEC_in_6_minutes.pdf]]
+6. [[https://web.archive.org/web/20081103093752/http://www.netwidget.net/books/apress/dns/]]
+7. [Name Service and Resolver Configuration]([[https://tldp.org/LDP/nag2/x-087-2-resolv.html]])
+8. [The Development Of The DNSSEC (Domain Name System Security Extension) - Verisign]([[https://www.verisign.com/en_US/domain-names/dnssec/index.xhtml]])
+9. [IPv6 - Wikipedia]([[https://en.wikipedia.org/wiki/IPv6]])
+10. [Linux IPv6 HOWTO (en)]([[https://tldp.org/HOWTO/Linux+IPv6-HOWTO/index.html]])
+11. [How to Use Linux dig Command (DNS Lookup) {With Examples}]([[https://phoenixnap.com/kb/linux-dig-command-examples]])
+12. [host command in Linux with examples - GeeksforGeeks]([[https://www.geeksforgeeks.org/host-command-in-linux-with-examples/]])
+13. [nslookup command in Linux with Examples - GeeksforGeeks]([[https://www.geeksforgeeks.org/nslookup-command-in-linux-with-examples/]])

@@ -1,0 +1,23 @@
+* roman-numeral-converter
+:PROPERTIES:
+:CUSTOM_ID: roman-numeral-converter
+:END:
+1. [JavaScript Algorithms and Data Structures Projects: Roman Numeral Converter | freeCodeCamp.org]([[https://www.freecodecamp.org/learn/javascript-algorithms-and-data-structures/javascript-algorithms-and-data-structures-projects/roman-numeral-converter]])
+2. [Roman Numerals]([[https://www.mathsisfun.com/roman-numerals.html]])
+
+要求
+
+1. 将给定阿拉伯数字转换为罗马数字
+2. 所有罗马数字应该是大写
+
+终于通过所有测试用例
+
+```js function convertToRoman(num) { if (num >= 1000) { let a = num / 1000 let int = Math.floor(a) if (a == 1) { return 'M' } if (a > 1) { return 'M'.repeat(int) + thousand(num % 1000) } } else if (num < 1000 && num >= 100) { return thousand(num) } else if (num < 100 && num >= 10) { return hundred(num) } else { return ten(num) } }
+
+function thousand(num) { let a = num / 100 let int = Math.floor(a) if (a == 4) { return 'CD' } else if (a == 5) { return 'D' } else if (a == 9) { return 'CM' } else if (a < 4) { return 'C'.repeat(a) + hundred(num - int * 100) } else if (a > 4 && a < 5) { return 'CD' + hundred(num - int * 100) } else if (a > 5 && a < 9) { return ( 'D' + 'C'.repeat(Math.floor((num - 500) / 100)) + hundred(num - int * 100) ) } else if (a > 9 && a < 10) { return 'CM' + hundred(num - int * 100) } }
+
+function hundred(num) { if (num == 40) { return 'XL' } else if (num == 90) { return 'XC' } else if (num < 40) { return 'X'.repeat(num / 10) + ten(num % 10) } else if (num > 40 && num < 50) { return 'XL' + ten(num % 10) } else if (num == 50) { return 'L' } else if (num > 50 && num < 90) { return 'L' + 'X'.repeat((num - 50) / 10) + ten(num % 10) } else if (num > 90) { return 'XC' + ten(num % 90) } }
+
+function ten(num) { if (num == 4) { return 'IV' } else if (num == 9) { return 'IX' } else if (num < 4) { return 'I'.repeat(num) } else if (num > 4 && num < 9) { return 'V' + 'I'.repeat(num - 5) } }
+
+console.log(convertToRoman(649)) ```

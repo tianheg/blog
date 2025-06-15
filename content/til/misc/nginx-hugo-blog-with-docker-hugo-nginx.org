@@ -1,0 +1,70 @@
+* nginx-hugo-blog-with-docker-hugo-nginx
+:PROPERTIES:
+:CUSTOM_ID: nginx-hugo-blog-with-docker-hugo-nginx
+:END:
+​## Docker
+
+Docker Nginx 运行命令：
+
+```bash docker run -d --name nginx -p 80:80 -p 443:443 -v /etc/nginx/nginx.conf:/etc/nginx/nginx.conf -v /etc/letsencrypt:/etc/letsencrypt -v /home/www/public:/home/www/public nginx:stable docker run --rm -it \ -v $(pwd):/src \ klakegg/hugo:0.95.0-ext-alpine ```
+
+​## Docker Compose
+
+`docker-compose.yml`:
+
+```yml version: '3.9'
+
+services: nginx: image: nginx:stable volumes:
+
+- '$PWD/nginx.conf:/etc/nginx/nginx.conf'
+- './public:/usr/share/nginx/html/'
+
+ports:
+
+- '80:80'
+
+blog: image: klakegg/hugo:0.95.0-ext-alpine volumes:
+
+- '.:/src'
+
+```
+
+`nginx.conf`:
+
+下面的 Nginx 配置用于运行 non-root Nginx
+
+```nginx worker_{processes} auto; worker_{cpuaffinity} auto;
+
+pid /tmp/nginx.pid;
+
+events { multi_{accept} on; worker_{connections} 1024; }
+
+http { client_{bodytemppath} /tmp/client_{temp}; proxy_{temppath} /tmp/proxy_{temppath}; fastcgi_{temppath} /tmp/fastcgi_{temp}; uwsgi_{temppath} /tmp/uwsgi_{temp}; scgi_{temppath} /tmp/scgi_{temp};
+
+charset utf-8; sendfile on; tcp_{nopush} on; tcp_{nodelay} on;
+
+log_{notfound} off; types_{hashmaxsize} 4096; client_{maxbodysize} 16M;
+
+include mime.types; default_{type} application/octet-stream;
+
+access_{log} /var/log/nginx/access.log; error_{log} /var/log/nginx/error.log warn;
+
+include /etc/nginx/conf.d/*.conf; include /etc/nginx/sites-enabled/*; } ```
+
+​## 搭配 Git Hooks
+
+`$GIT_{BAREREPO}/.hooks/post-receive`(blog.git/hooks/post-receive):
+
+```text #!/bin/bash git --work-tree=/home/www --git-dir=/home/git/blog.git checkout -f cd /home/git/docker-blog docker compose up -d ```
+
+​### 安装 Docker Compose v2
+
+[在这里](/docs/tech/docker-compose-install)
+
+--------------
+
+参考资料
+
+1. [Nginx - Official Image | Docker Hub]([[https://hub.docker.com/_/nginx/]])
+2. [nginxinc/docker-nginx: Official NGINX Dockerfiles]([[https://github.com/nginxinc/docker-nginx]])
+3. [klakegg/hugo - Docker Image | Docker Hub]([[https://hub.docker.com/r/klakegg/hugo/]])

@@ -1,0 +1,193 @@
+* How to use GitHub Copilot
+:PROPERTIES:
+:CUSTOM_ID: how-to-use-github-copilot
+:END:
+https://mp.weixin.qq.com/s/dpfGh7AzfCRn1zrYgsl_pQ
+
+https://docs.github.com/en/copilot
+
+github copilot 是 gpt3 针对代码场景优化而来的 Codex 模型，其基础性能不如 gpt4，但在代码场景效果更好 github copilot is a Codex model optimized for code scenarios by gpt3. Its foundational performance is not as good as gpt4, but it performs better in code scenarios
+
+将 50% 的工作时间替换成了 10% 的 prompt/chat 时间 Replaced 50% of working time with 10% of prompt/chat time
+
+认清 copilot 的定位，其是一个副驾驶的角色，自己的思维方式要从“如何去做这件事” => "如何激发 copilot 去做这件事" Recognize the positioning of the copilot, which is a role of the co-pilot. The way of thinking should shift from "how to do this thing" to "how to inspire the copilot to do this thing."
+
+尝试 ai-native 的开发方式，从自己编码 + ai copilot 到自己编写 prompt、copilot 编码，然后自己去进行修改 Try the ai-native development approach, from coding on your own + ai copilot to writing your own prompts and copilot code, and then making modifications on your own
+
+不要高看也不要低看，一个学习过所有开源代码的 llm 编程能力是很强的。但依旧需要人类去“激活”和引导，且人类也有其独特的优势。 Do not overestimate or underestimate, someone with the programming ability of llm who has studied all open source code is very strong. However, they still need humans to "activate" and guide them, as humans also have their unique advantages.
+
+#+begin_example
+•
+基本使用思路 Basic usage ideas
+#+end_example
+
+通过不断试错来节省自己的思考时间。在不擅长的领域不能完全采用其代码，在擅长的领域采用其代码时能够取其精华。 Save your thinking time by constantly trial and error. Do not fully adopt its code in areas where you are not proficient, but extract the essence when using its code in areas where you are proficient.
+
+prompt越长越能够得到需要的结果 The longer the prompt, the more likely it is to obtain the desired results
+
+#+begin_example
+•
+变量命名 Variable naming
+#+end_example
+
+在copilot chat输入要求，并附加“给我十个答案并解释”，选择copilot的输出即可 Enter the request in copilot chat and add "give me ten answers and explain", then select the output from copilot
+
+#+begin_example
+•
+代码速读，代码精读，加注释解析，寻找修改项 Code speed reading, code deep reading, annotated analysis, finding modifications
+#+end_example
+
+接收其他人项目、读开源项目等情况，找到需要读的文件，全选，然后打开 copilot chat（它会读取你选中的代码），使用内置的 /explian 命令，这个会内置一些 prompt 让输出质量更好 Receive other people's projects, read open source projects, etc., find the files that need to be read, select all, and then open copilot chat (it will read the code you selected). Use the built-in /explain command, which will provide some prompts to improve the output quality
+
+我常用的几句话是 The few phrases I often use are:
+
+"从架构设计角度，分析这段代码的设计思路，并讲解这种思路的优劣" "From the perspective of architectural design, analyze the design ideas behind this piece of code and explain the advantages and disadvantages of this approach."
+
+"分析 xxx 函数的详细逻辑，以及在整个文件中起到的作用" "Analyze the detailed logic of the xxx function and its role throughout the entire file."
+
+"给 xxx 函数每一行加上注释，以详细解析该函数" "Add comments to each line of the xxx function to provide a detailed explanation of the function."
+
+"我现在需要通过修改这个文件以实现 xxx 功能，如何修改？" "I now need to modify this file to implement the xxx feature. How can I make the modifications?"
+
+"我现在需要用 ts 重写这段 python 代码，详细解析这段 python 代码的设计逻辑，并分析如何在 ts 中实现" "I now need to rewrite this Python code in TypeScript, analyze the design logic of this Python code in detail, and analyze how to implement it in TypeScript."
+
+"解析这段代码中可能有哪些风险" "What risks may be present in analyzing this code?"
+
+"在这段代码中， run 和 test 方法有什么区别" "What is the difference between the run and test methods in this code?"
+
+所以在我修一个大系统的 bug 时，我会对多个可能的文件问类似于 "我的需求是 xxx，能通过修改这个文件实现么？"，直到找到我需要修改的地方和方案。 So when I fix a bug in a large system, I will ask questions like "My requirement is xxx, can it be achieved by modifying this file?" for multiple possible files, until I find the place and solution I need to modify.
+
+llm 读懂代码逻辑的速度极快，可以快速给你一个 80 分的答案，你再判断是否有必要精读。然后再使用 copilot 辅助精读。 The speed at which LLM understands code logic is extremely fast. It can quickly give you an 80% answer, and then you can determine if it is necessary to read it in detail. Then, use Copilot to assist in a more thorough reading.
+
+#+begin_example
+•
+代码改写，用 xx 库实现整体逻辑 Code rewriting, implement the overall logic using the xx library
+#+end_example
+
+在要用 b 库改写使用 a 库实现的逻辑时，copilot 做的非常快，因为你 a 库写的逻辑就是最完美的 prompt，在实现完往往只需要通读一边确认答案即可。 When rewriting the logic implemented using library a with library b, copilot is very fast because the logic you wrote with library a is the perfect prompt, often only requiring a quick read through to confirm the answer after implementation.
+
+这里涉及到对 context 的应用，而因为 codex 的数据库更新并不及时，可能并不了解 b 库。那一个常用的小技巧： This involves the application of context, and because the codex database is not updated in a timely manner, it may not be familiar with library b. Here's a handy little trick:
+
+"这是 b 库这个函数的文档，帮我改写这部分用 a 库写的逻辑" "This is the documentation for the function in library B. Help me rewrite this part using the logic written in library A."
+
+"这是 b 库的官方实例，我想用 b 实现 xx 功能，帮我实现" "This is an official example of library B. I want to use B to achieve XX functionality. Please help me implement it."
+
+这种 few shot 的 prompt 技巧，可以极大程度提高输出质量。不只是在这种场景，很多场景可以应用 This few-shot prompt technique can greatly improve the quality of output. It can be applied not only in this scenario, but also in many other scenarios.
+
+- ai-native 的开发方式 The development approach of AI-native
+
+"我需要一个 ts 类，他的使用方式和调用方式是：[[https://m.tianheg.org/%E4%BC%AA%E4%BB%A3%E7%A0%81][伪代码]]，帮我实现一个最基础的版本" "I need a TypeScript class with usage and invocation methods as follows: pseudocode. Help me implement a basic version."
+
+全选所有类代码，然后 "我给这个类添加一个 xxx 函数，帮我参考现有代码，进行实现" Select all class codes, then "I want to add a xxx function to this class, help me refer to the existing code and implement it."
+
+"在这个 class 内，我想记录一个逐步产生的 xxx 数据，应该用什么结构比较符合 ts 的编程模式，帮我设计解释你的思路" "In this class, I want to record an evolving xxx data. What data structure would be more suitable for the programming pattern in TypeScript? Please help me design and explain your approach."
+
+"这是我设计的 class/架构/数据结构，目的是 xxx，从优点和缺点各提五点理由，并详细解释原因" "This is the class/architecture/data structure that I designed, with the purpose of xxx. Please provide five reasons for both the advantages and disadvantages, and explain the reasons in detail."
+
+所以先让 copilot 替你思考，很多时候他给的架构非常优秀。即使给的质量比较差，一个错误的答案对你的思考也是有益的。更何况廉价的劳动力，你可以引导他生成非常多，也可以质疑他的架构，并提出你看到的问题，多次沟通直到生成有意义的架构或者理清楚自己的思路。 So let Copilot do the thinking for you first, as often times it provides excellent architecture. Even if the quality is not great, an incorrect answer can still be beneficial for your own thinking. Moreover, with cheap labor, you can guide it to generate a lot and question its architecture, and raise the issues you see, communicating multiple times until a meaningful architecture is generated or your own thinking is clarified.
+
+ai-native 不是让 ai 设计架构，而是与 ai 多次讨论，让自己的思路更加清晰。 ai-native is not about letting ai design architecture, but rather discussing with ai multiple times to make one's own thinking clearer.
+
+- •
+
+  报错解析 Error parsing
+
+除了非常基础的报错信息，先复制给 copilot chat，使用内置的 /explain 命令，让他分析报错。如果是 vsc 用户，现在已经有一键操作了 In addition to very basic error messages, first copy them to Copilot chat and use the built-in /explain command to let it analyze the errors. If you are a VSC user, there is now a one-click operation available.
+
+常用的几句话 Several commonly used phrases
+
+"解释这个报错，并分析可能的原因和修改方式" "Explain this error message and analyze possible causes and ways to fix it."
+
+"我认为这不是报错的根源，根据你的知识，给出三种可能的出错根源" "I believe this is not the root cause of the error. Based on your knowledge, provide three possible sources of error."
+
+尝试一次，你就会发现，与其自己花时间去思考和分析报错，不让先让 llm 给你一个 80 分的答案，在大多数时间他的答案已经可以帮你解决问题了 Try it once, and you will find that instead of spending time thinking and analyzing the error yourself, let llm give you an 80% correct answer first. Most of the time, his answer can already help you solve the problem
+
+- •
+
+  解释 review message
+
+无论是作为一个 junior sde 还是一个开源新人，外加人类语言表达的局限性。很多 review message 并没有那么明确，与其自己想半天，不如先让 llm 分析下。 Whether as a junior SDE or a newcomer to open source, in addition to the limitations of human language expression, many review messages are not so clear. Instead of pondering for a long time, it's better to let LLM analyze it first.
+
+复制对应的 diff 和你认为合适的上下文，附加上 review message Copy the corresponding diff and the appropriate context, and add a review message
+
+"这是我的前辈对我的 pr 的 comments，帮我分析意思，并提出合适的解决方案" "These are the comments on my PR from my senior. Please help me analyze the meaning and suggest appropriate solutions."
+
+llm 的知识库对此做出的解析，以及对 review 黑话/缩写 的分析，往往结果还不错 The analysis made by the llm knowledge base on this, as well as the analysis of review jargon/abbreviations, often yields good results
+
+- •
+
+  提高代码质量，设计优化 Improve code quality, optimize design
+
+llm 读过的代码太多了，常用的几句话 I have read too much code, here are a few commonly used phrases
+
+"这个 class 的设计有没有考虑到 xxx 的问题" "Has the design of this class taken into consideration the issue of xxx?"
+
+"解析这个 class 是否有安全风险" "Analyze whether this class has any security risks."
+
+"...， 在哪些场景场景在可能会有泄露风险" "..., in which scenarios there may be a risk of leakage."
+
+"这个 class 如何针对 xxx 做优化" "How to optimize this class for xxx?"
+
+注意，一般直接问可能并不能拿到高质量的回答，需要人类做方向性的引导，比如提示在什么问题、什么方面等 prompt，可以帮助 llm 沿着具体思路思考 Note that simply asking directly may not result in high-quality answers. It is necessary for humans to provide directional guidance, such as prompting specific questions or aspects, to help LLM think along specific lines of thought
+
+并且要灵活使用 "给我 5 个 xx，并详细解释原因" And be flexible in using "Give me 5 xx, and explain the reasons in detail."
+
+- •
+
+  灵活使用 cmd+i Flexible use of cmd+i
+
+最新的 copilot 支持了直接在代码上唤起 chat，你可以选中一段代码，然后 cmd + i，输出你的 prompt，比如 "使用 promise.all 改写" "添加类型注释" The latest copilot supports invoking chat directly on the code. You can select a piece of code, then press cmd + i, and enter your prompt, such as "rewrite using promise.all" or "add type annotations".
+
+这个很多人没注意到这个功能，结合前面提到的 prompt 技巧很好用。 Many people haven't noticed this feature, which is very useful when combined with the prompt techniques mentioned earlier.
+
+但目前 diff 功能有些 bug，在部分时候会删改不需要的代码，注意灵活应对。 But currently, the diff function has some bugs and sometimes it will delete or modify unnecessary code. Please be flexible in dealing with it.
+
+我一般是把需要代码复制出来，然后 ctrl z 掉他所有更改，然后再粘贴进去。 I usually copy the code that needs to be copied, then undo all the changes with Ctrl+Z, and then paste it back in.
+
+因为这个功能没有上下文，但也有多次对话的能力。适合比较小的需求点，大的最好是用 copliot chat Because this feature lacks context, but it also has the ability to have multiple conversations. It is suitable for smaller requirements, for larger ones it is best to use Copilot Chat.
+
+- •
+
+  写 commit message
+
+这个已经在最新的 vsc 中集成，根据你本次的 diff 生成 commit message。 This is already integrated in the latest VSC, generating commit message based on your current diff.
+
+这个思路非常好，但实测其风格不太符合我日常的风格，我相信这个未来会有风格选型，或者以你之前的 commit message 作为上下文进行生成。 This idea is very good, but in practice, its style does not quite match my daily style. I believe in the future there will be style selection, or generation based on your previous commit message as context.
+
+目前我推荐在这个 generate 的基础上自己修改，或通过 chat 的方式生成 Currently, I recommend making modifications based on this generate, or generating through chat
+
+- •
+
+  基础脚手架、基础 poc Basic scaffolding, basic proof of concept
+
+这也是 ai-native 的一部分，也是我最近用起来比较顺手的 This is also part of ai-native and it is something I have been using quite conveniently recently
+
+"我要写一个 nodejs 库，帮我写 一个基础的 rollup 配置、tsconfig 和 package.json 的配置" "帮我用 react 写一个基础的 xxx 组件" "I want to write a Node.js library to help me write a basic Rollup configuration, tsconfig, and package.json configuration." "Help me write a basic xxx component using React."
+
+前者是，很多时候没有好用的现成配置，用 llm 就很方便。后者是有一个迅速能看到的基础代码，会帮助你思考和工作。 The former is that there are often no readily available configurations, so using llm is very convenient. The latter is having a basic code that you can quickly see, which will help you think and work.
+
+- •
+
+  一定要问 llm 自己能够判断基础对错的问题 Be sure to ask llm if he can determine the correctness of the foundation himself
+
+这里的工具就不限于的 copilot chat 了，我一般也会混着 new bing （有联网能力）使用。 The tools here are not limited to copilot chat. I usually also use new bing (with internet connectivity) mixed in.
+
+比如
+
+"ts 中，interface 和 type 的区别" "The difference between interface and type in TypeScript"
+
+"ts decorators 是否 stable？现在进入 stage 几了？"（new bing） "Are ts decorators stable? What stage are they currently in?" (new bing)
+
+几个非常好用的 magic word："举例详细说明"、"详细对比这两个的优缺点"、"举出实际场景对比这两个区别"、"使用 xxx 函数，写一个简单 demo，介绍其优势" Several very useful magic words: "detailed explanation with examples", "detailed comparison of the advantages and disadvantages of these two", "provide a practical scenario to compare the differences between these two", "use the xxx function to write a simple demo and introduce its advantages"
+
+作完调研后，"用 xx 实现我的 xx 需求"，从调研到实现，几分钟 几轮对话，就结束了 After completing the investigation, "Using xx to meet my xx needs," from research to implementation, it only took a few minutes and a few rounds of conversation to finish
+
+一定要有基础的技术视野和知识去判断其输出的质量。我遇到过好几次，llm 硬着脖子非要用 moment 去处理 ts 中的时间，直接被我喷回去，然后乖乖用 dayjs 了 You must have a basic technical perspective and knowledge to judge the quality of its output. I have encountered several times when LLM stubbornly insisted on using Moment to handle time in TypeScript, but I immediately criticized it and then obediently switched to Dayjs.
+
+- •
+
+  vsc plugin 开发
+
+copilot chat 已经内置了 plugin 相关的文档，你可以直接用自然语言提问你的问题和需要开发的功能在 vsc 中如何实现。 Copilot chat already includes documentation related to plugins. You can directly ask your questions and inquire about how to implement the desired functionality in VSC using natural language.
+
+也可以通过 /help 命令，看看 chat 内置的一些功能，这些功能往往伴随着内置的 prompt 和数据库，对特定任务有增强copilot 实现 You can also use the /help command to see some built-in features of chat, which are often accompanied by built-in prompts and databases, enhancing copilot implementation for specific tasks

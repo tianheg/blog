@@ -1,0 +1,75 @@
+* bugs-in-hello-world
+:PROPERTIES:
+:CUSTOM_ID: bugs-in-hello-world
+:END:
+[[https://blog.sunfishcode.online/bugs-in-hello-world/]]
+
+​## 所有版本的 Hello World 程序
+
+维基百科
+
+```c #include <stdio.h>
+
+int main() { printf("Hello, World!\n"); return 0; } ```
+
+hello world in the K&R book
+
+```c #include <stdio.h>
+
+main() { printf("hello, world\n") } ```
+
+the oldest known C hello world program from 1974
+
+```c main() { printf("hello, world"); } ```
+
+另一种，ANSI C 样式的
+
+```c #include <stdio.h> #include <stdlib.h>
+
+int main(void) { puts("Hello World!"); return EXIT_{SUCCESS}; } ```
+
+以上所有程序都有 bug
+
+​## 证明 Hello World 程序存在 bug
+
+Linux 上有一个位置 `/dev/full`，想起写入数据会失败，所以可用来验证一些程序的输出。
+
+```bash echo "Hello World" > /dev/full
+
+echo $?
+
+```
+
+但是对 Hello World 程序来说，并无以上特征
+
+```bash gcc -Wall hello.c -o hello ./hello > /dev/full
+
+echo $?
+
+```
+
+0 说明 `hello` 程序被认为执行成功了，但并非如此。
+
+使用 strace（`pacman -S strace`）查看原因
+
+```bash strace -etrace=write ./hello > /dev/full
+
+```
+
+系统报告了 `No space` 错误，但程序却默认一切正常了，**这就是 bug**！
+
+这个 bug 有多严重？可以说 Hello World 程序在任何地方都不会是安全的。However, hello world does do something that programs in the real world do: print to standard output, which might be redirected to a file. And files in the real world can run out of space. If a program doesn't detect this kind of error and report it through its return code, its parent process won't know that the child failed, and will continue running as if nothing was wrong, even though the output it expected to have been produced has silently lost data.
+
+For example, consider a program that prints a yaml file to standard output. If standard output runs out of space, the output may be truncated at some arbitrary point, though it may still be valid yaml. So we should expect programs to detect and report this kind of situation.
+
+​## How to Fix
+
+```c #include <stdio.h> #include <stdlib.h>
+
+int main(void) { printf("Hello, World!\n");
+
+if (fflush(stdout) != 0 || ferror(stdout) != 0) { return EXIT_{FAILURE}; }
+
+return EXIT_{SUCCESS}; } ```
+
+```bash ./hello2 > /dev/full # 无错误提示 ```

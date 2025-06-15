@@ -1,0 +1,12 @@
+* 在 DNS over HTTPS 下，选择提供者的时候只有一个custom，没有默认的备选
+:PROPERTIES:
+:CUSTOM_ID: 在-dns-over-https-下选择提供者的时候只有一个custom没有默认的备选
+:END:
+在经过一些操作：
+
+- 通过 UI 界面修改无线网的 DNS 为 =8.8.8.8,8.8.4.4=
+- 在高级设置中进行了一些网络的配置
+  - network.trr.default_provider_uri = https://mozilla.cloudflare-dns.com/dns-query 这个是默认选项
+- 重启了电脑
+
+后出现了两个备选：Cloudflare、NextDNS

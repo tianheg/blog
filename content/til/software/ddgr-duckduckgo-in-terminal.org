@@ -1,0 +1,39 @@
+* =ddgr= - DuckDuckGo in Terminal
+:PROPERTIES:
+:CUSTOM_ID: ddgr---duckduckgo-in-terminal
+:END:
+#+begin_src sh
+##
+ddgr hello
+# not set -n, default 10 results per page
+##
+ddgr hello -n 0
+# show actual results per page
+##
+ddgr hello -r us-en(default)
+# region
+##
+# same as
+ddgr hello --reg us-en
+##
+ddgr hello --colorize=auto(default)/always/never
+show color or not
+##
+ddgr hello -C/--nocolor
+# same as
+ddgr hello --colorize=never
+##
+ddgr hello --colors COLORS(see man page for details)
+##
+ddgr hello -j/--ducky(implies --np(--noprompt))
+# open first result in a web browser
+##
+ddgr hello -t/--time SPAN
+# time limit search[d(1 day), w(1 week), m(1 month), y(1 year)]
+##
+ddgr hello -w/--site SITE
+# search in a SITE
+##
+ddgr hello -x/--expand
+# show complete url in search results
+#+end_src

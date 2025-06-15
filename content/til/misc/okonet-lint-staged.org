@@ -1,0 +1,17 @@
+* okonet-lint-staged
+:PROPERTIES:
+:CUSTOM_ID: okonet-lint-staged
+:END:
+[[https://github.com/okonet/lint-staged]]
+
+终于明白了：这个包只会检查暂存区内的文件是否符合 lint 规则。
+
+​## 配置
+
+```bash npm install --save-dev husky lint-staged npx husky install npm set-script prepare "husky install" npx husky add .husky/pre-commit "npx lint-staged"
+
+```
+
+在 `package.json` 中添加：
+
+```json { "lint-staged": { "**/*.{js,md,scss}": "prettier --write" } } ```

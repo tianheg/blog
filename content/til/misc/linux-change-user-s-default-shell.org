@@ -1,0 +1,25 @@
+* linux-change-user-s-default-shell
+:PROPERTIES:
+:CUSTOM_ID: linux-change-user-s-default-shell
+:END:
+Refers:
+
+- [[https://www.cyberciti.biz/faq/how-to-change-shell-to-bash/]]
+
+```sh sudo chsh -s /bin/bash $USERNAME sudo chsh -s /bin/bash user ```
+
+查看用户的默认 Shell：
+
+```sh $ grep user /etc/passwd user:x:1000:1000::/home/user:/bin/bash
+
+$ ps -p $$ PID TTY TIME CMD 22572 pts/1 00:00:00 bash
+
+$ echo "$0" bash ```
+
+查看系统可用 Shell：
+
+```sh $ cat /etc/shells
+
+/bin/sh /bin/bash /usr/bin/bash /bin/rbash /usr/bin/rbash /usr/bin/sh /bin/dash /usr/bin/dash /usr/bin/tmux /usr/bin/screen ```
+
+通过 `type -a bash` 找到 bash 的所有位置。

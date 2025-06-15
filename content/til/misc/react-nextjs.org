@@ -1,0 +1,73 @@
+* react-nextjs
+:PROPERTIES:
+:CUSTOM_ID: react-nextjs
+:END:
+`{' '}` adds an empty space, which is used to divide text over multiple lines.
+
+from [[https://nextjs.org/learn/basics/navigate-between-pages/link-component]]
+
+The [`Link`]([[https://nextjs.org/docs/api-reference/next/link]]) component enables ****client\-side navigation**** between two pages in the same Next.js app.
+
+Client\-side navigation means that the page transition happens *using JavaScript*, which is faster than the default navigation done by the browser.
+
+​****Note:**** If you need to link to an *external* page outside the Next.js app, just use an `<a>` tag without `Link`.
+
+If you need to add attributes like, for example, `className`, add it to the `a` tag, *not* to the `Link` tag. [Here's an example]([[https://github.com/vercel/next-learn/blob/master/basics/snippets/link-classname-example.js]]).
+
+from [[https://nextjs.org/learn/basics/navigate-between-pages/client-side]]
+
+> Why are CSS Modules useful?
+
+They scope styles at the component level
+
+> Each generated HTML is associated with minimal JavaScript code necessary for that page. When a page is loaded by the browser, its JavaScript code runs and makes the page fully interactive. (This process is called hydration.)
+
+​## Pre-rendering
+
+![pre-rendering.png](img/pre-rendering.png) ![no-pre-rendering.png](img/no-pre-rendering.png)
+
+​### Two Forms of Pre-rendering
+
+Static Generation and Server-side Rendering
+
+> In development mode (when you run npm run dev or yarn dev), every page is pre-rendered on each request --- even for pages that use Static Generation.
+
+![static-generation.png](img/static-generation.png) ![server-side-rendering.png](img/server-side-rendering.png)
+
+> Importantly, Next.js lets you choose which pre-rendering form to use for each page. You can create a "hybrid" Next.js app by using Static Generation for most pages and using Server-side Rendering for others.
+
+![per-page-basis.png](img/per-page-basis.png)
+
+> We recommend using Static Generation (with and without data) whenever possible because your page can be built once and served by CDN, which makes it much faster than having a server render the page on every request. > > You should ask yourself: "Can I pre-render this page ahead of a user's request?" If the answer is yes, then you should choose Static Generation.
+
+> On the other hand, Static Generation is not a good idea if you cannot pre-render a page ahead of a user's request. Maybe your page shows frequently updated data, and the page content changes on every request. > > In that case, you can use Server-side Rendering. It will be slower, but the pre-rendered page will always be up-to-date. Or you can skip pre-rendering and use client-side JavaScript to populate frequently updated data.
+
+​### Static Generation
+
+![static-generation-without-data.png](img/static-generation-without-data.png)
+
+> However, for some pages, you might not be able to render the HTML without first fetching some external data. Maybe you need to access the file system, fetch external API, or query your database at build time. Next.js supports this case --- Static Generation with data --- out of the box.
+
+![static-generation-with-data.png](img/static-generation-with-data.png)
+
+> In development mode, getStaticProps runs on each request instead.
+
+​### Implement getStaticProps
+
+> ****Note:**** In Next.js, the `lib` folder does not have an assigned name like the `pages` folder, so you can name it anything. It's usually convention to use `lib` or `utils`.
+
+​## Dynamic Routes
+
+> ****Important****: We added the ****`async`**** keyword to `getPostData` because we need to use `await` for `remark`. `async`/`await` allow you to fetch data [asynchronously]([[https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Statements/async_function]]).
+
+- Fetch External API or Query Database
+- Fallback
+- Router
+
+​## API Routes
+
+- Do Not Fetch an API Route from `getStaticProps` or `getStaticPaths`
+
+​## 错误
+
+1. 把 `()` 打成了 `{}`，结果就是该出现的内容，不能显示在页面上

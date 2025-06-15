@@ -1,0 +1,48 @@
+* GitHub
+:PROPERTIES:
+:CUSTOM_ID: github
+:END:
+=https://github.com/tianheg.keys=
+
+#+begin_src sh
+mkdir -m 700 ~/.ssh
+curl https://github.com/USERNAME.keys >> ~/.ssh/authorized_keys
+chown 600 ~/.ssh/authorized_keys
+#+end_src
+
+=https://github.com/tianheg.gpg=
+
+GPG 公钥
+
+#+begin_src sh
+curl https://github.com/USERNAME.gpg >> ./gpg-pub.txt
+gpg --import ./gpg-pub.txt
+#+end_src
+
+To import a GPG public key and set permissions, you can follow these steps:
+
+1. Obtain the GPG public key file (.asc or .gpg file) from the person or source you want to import the key from.
+
+2. Open a terminal or command prompt on your computer.
+
+3. Navigate to the directory where the GPG public key file is located using the =cd= command. For example, if the file is in your Downloads folder, you can use the command =cd Downloads= to navigate to that directory.
+
+4. Import the GPG public key by running the following command:
+
+=gpg --import <keyfile>=
+
+Replace =<keyfile>= with the name of the GPG public key file you obtained. This command will import the key into your GPG keyring.
+
+1. Set the appropriate permissions for the imported key by running the following command:
+
+=gpg --edit-key <keyID>=
+
+Replace =<keyID>= with the ID or email associated with the imported key. This command will open the GPG key editor.
+
+1. In the GPG key editor, enter the command =trust= to change the trust level of the key.
+
+2. You will be prompted to select a trust level for the key. Choose the appropriate level based on your level of trust in the key owner.
+
+3. Save the changes and exit the GPG key editor.
+
+Once you have imported the GPG public key and set the appropriate permissions, you can use it to verify signatures or encrypt messages with the corresponding private key.

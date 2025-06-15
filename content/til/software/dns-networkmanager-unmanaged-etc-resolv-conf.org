@@ -1,0 +1,13 @@
+* dns-networkmanager-unmanaged-etc-resolv-conf
+:PROPERTIES:
+:CUSTOM_ID: dns-networkmanager-unmanaged-etc-resolv-conf
+:END:
+vim /etc/NetworkManager/conf.d/dns.conf
+
+add:
+
+[main] dns=none
+
+also add `systemd-resolved=false`
+
+refer [[https://wiki.archlinux.org/title/NetworkManager#Unmanaged_/etc/resolv.conf]]

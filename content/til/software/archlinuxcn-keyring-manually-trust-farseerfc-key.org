@@ -1,0 +1,25 @@
+* Before installing the archlinuxcn-keyring package in the new system, you need to manually trust farseerfc's key
+:PROPERTIES:
+:CUSTOM_ID: before-installing-the-archlinuxcn-keyring-package-in-the-new-system-you-need-to-manually-trust-farseerfcs-key
+:END:
+[[https://www.archlinuxcn.org/archlinuxcn-keyring-manually-trust-farseerfc-key/]]
+
+The keyring package archlinuxcn-keyring of the archlinuxcn community repository is signed and verified by the key of farseerfc, which is included in the Arch Linux official keyring. However, the removal of a retired master key from the archlinux-keyring in early December resulted in insufficient trust for farseerfc's key, as calculated by GnuPG's web of trust, leading to the automatic trust of the signature of the archlinuxcn-keyring package no longer being possible.
+
+If you encounter the following error when trying to install the archlinuxcn-keyring package in the new system:
+
+#+begin_src txt
+error: archlinuxcn-keyring: Signature from "Jiachen YANG (Arch Linux Packager Signing Key) " is marginal trust
+#+end_src
+
+Please use the following command to trust the key of farseerfc locally. This key has been installed in the system with archlinux-keyring, it just lacks trust.
+
+#+begin_src txt
+sudo pacman-key --lsign-key "farseerfc@archlinux.org"
+#+end_src
+
+Afterwards, continue installing archlinuxcn-keyring:
+
+#+begin_src txt
+sudo pacman -S archlinuxcn-keyring
+#+end_src
