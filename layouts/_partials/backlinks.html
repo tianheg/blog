@@ -1,0 +1,40 @@
+{{ $re := $.File.BaseFileName }}
+{{ $backlinks := slice }}
+
+{{ $urlPath := .RelPermalink }}
+{{ range .Site.AllPages }}
+   {{ $pattern := printf "\\[\\[%s(\\][^\\]]*)?\\]\\]" $urlPath }}
+   {{ if and (findRE $pattern .RawContent) (not (eq $re .File.BaseFileName)) }}
+      {{ $backlinks = $backlinks | append . }}
+   {{ end }}
+{{ end }}
+
+{{ if gt (len $backlinks) 0 }}
+  <div>
+    <h4>Links to this note</h4>
+    <div class="backlinks">
+      <ul>
+       {{ range $backlinks }}
+          <li>
+            <a href="{{ .RelPermalink }}">
+              {{- if .Title -}}
+                {{- .Title -}}
+              {{- else if .RawContent -}}
+                {{- $firstLine := index (split .RawContent "\n") 0 -}}
+                {{- if (hasPrefix $firstLine "* ") -}}
+                  {{- trim (strings.TrimPrefix "* " $firstLine) " " -}}
+                {{- end -}}
+              {{- else -}}
+                {{- .Params.title -}}
+              {{- end -}}
+            </a>
+          </li>
+       {{ end }}
+     </ul>
+    </div>
+  </div>
+{{ else  }}
+  <div>
+    <h4>No notes link to this note</h4>
+  </div>
+{{ end }}
