@@ -1,0 +1,35 @@
+* workers
+:PROPERTIES:
+:CUSTOM_ID: workers
+:END:
+​## 配置
+
+1.安装Workers CLI
+
+```sh pnpm add -g wrangler ```
+
+2.Hello World 程序
+
+```js addEventListener("fetch", (event) => { event.respondWith(handleRequest(event.request)) })
+
+async function handleRequest(request) { return new Response("Hello World") } ```
+
+​## Workers 如何工作
+
+refer [How Workers works · Cloudflare Workers docs]([[https://developers.cloudflare.com/workers/learning/how-workers-works/]])
+
+基于 V8 引擎，利用 V8 的沙箱功能提高安全性，直接在 V8 上运行 JS 函数提高执行效率。
+
+在[这篇文章]([[https://www.cloudflare.com/learning/serverless/glossary/client-side-vs-server-side/)中，解释了]] client/server 和 frontend/backend：
+
+Client-side 仅指进程运行的位置在客户端；Frontend 指在客户端运行的进程的类型。
+
+Server side 指一切发生在服务器的事情。在过去，几乎全部的业务逻辑都在服务端执行，比如，渲染动态页面、链接数据库、身份授权和推送通知。
+
+Server-side 指进程运行的位置在服务器；Backend 指在服务器运行的进程的类型。
+
+Workers 与其他应用不同的方面在这三点：隔离、对每个请求进行计算、分布式执行。
+
+​### 隔离
+
+由 V8 提供。内存也隔离。

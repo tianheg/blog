@@ -1,0 +1,21 @@
+* sum-all-numbers-in-a-range
+:PROPERTIES:
+:CUSTOM_ID: sum-all-numbers-in-a-range
+:END:
+[Intermediate Algorithm Scripting: Sum All Numbers in a Range | freeCodeCamp.org]([[https://www.freecodecamp.org/learn/javascript-algorithms-and-data-structures/intermediate-algorithm-scripting/sum-all-numbers-in-a-range]])
+
+```js function sumAll(arr) {}
+
+sumAll([1, 4]) ```
+
+我做出来了！
+
+```js function sumAll(arr) { const newArr = arr.sort((a, b) => a - b) return ((newArr[1] + newArr[0]) * (newArr[1] - newArr[0] + 1)) / 2 }
+
+sumAll([5, 10]) ```
+
+思路：
+
+我在想如果是我要计算，应该怎么做？我会这样：
+
+(上底 + 下底) x 高/2

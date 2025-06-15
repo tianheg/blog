@@ -1,0 +1,17 @@
+* telephone-number-validator
+:PROPERTIES:
+:CUSTOM_ID: telephone-number-validator
+:END:
+[JavaScript Algorithms and Data Structures Projects: Telephone Number Validator | freeCodeCamp.org]([[https://www.freecodecamp.org/learn/javascript-algorithms-and-data-structures/javascript-algorithms-and-data-structures-projects/telephone-number-validator]])
+
+完全不知道怎么写！
+
+可行的解法
+
+```js function telephoneCheck(str) { let reg1 = /^{(1\s?)}?3̣([-\s]?)3̣\24̣$/, reg2 = /^{(1\s?)}?\(\d{3}\)\s?3̣[-\s]?4̣$/
+
+- if (reg1.test(str)) { return true } else { return reg2.test(str) ? true :: false } }
+
+telephoneCheck('555-555-5555') ```
+
+不知道 reg1 中的 `\2` 的用意。它对通过测试起到决定性作用。

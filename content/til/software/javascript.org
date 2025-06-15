@@ -1,0 +1,200 @@
+* JavaScript
+:PROPERTIES:
+:CUSTOM_ID: javascript
+:END:
+** 语言基础
+:PROPERTIES:
+:CUSTOM_ID: 语言基础
+:END:
+*** 变量
+:PROPERTIES:
+:CUSTOM_ID: 变量
+:END:
+1. var
+
+   #+begin_src javascript
+   var message
+   // define variable 'message', not initialized, message == undefined
+   // ---------
+   var message = 'string'
+   // /\
+   // ||
+   // \/
+   var message
+   message = 'string'
+   // ---------
+   // ..., initialized, message == 'string'
+   #+end_src
+
+   1. var 声明作用域
+
+      var 声明函数作用域，let 声明块作用域，块作用域是函数作用域的子集。
+
+      #+begin_src javascript
+      function test() {
+        var message = 'hi'
+      }
+      test()
+      console.log(message)
+      // or
+      function test() {
+        message = 'hi'
+      }
+      // 在这里，message 被声明为全局变量
+      #+end_src
+
+   2. var 的声明提升
+
+      #+begin_src javascript
+      function foo() {
+        console.log(age)
+        var age = 26
+      }
+      foo()
+
+      // 等价于
+
+      function foo() {
+        var age
+        console.log(age)
+        age = 26
+      }
+      ...
+      #+end_src
+
+2. let
+
+   - let 声明块作用域，var 声明函数作用域。块作用域是函数作用域的子集，因此适用于 var 的作用域限制，同样适用于 let。
+   - let 不允许在同一块作用域中重复声明
+
+   let 和 var 混用，重复声明同样报错，它们并不是声明不同变量，而是变量在相关作用域中如何存在。
+
+   #+begin_src javascript
+   // var
+   if (true) {
+     var name = 'Matt'
+     console.log(name)
+   )
+   console.log(name)
+   // let
+   if (true) {
+     let name = 'Matt'
+     console.log(name)
+   }
+   console.log(name)
+   #+end_src
+
+   1. 暂时性死区 temporal dead zone
+
+      let 与 var 相比的另一区别：let 声明的变量不会在作用域中被提升。
+
+      #+begin_src javascript
+      // var
+      console.log(age)
+      var age = 23
+      // let
+      console.log(age)
+      let age = 23
+      #+end_src
+
+   2. 全局声明
+
+      let 在全局作用域中声明的变量不会成为 window 对象的属性，而 var 声明的变量则会。
+
+      #+begin_src javascript
+      // var
+      var name = 'Matt'
+      console.log(window.name)
+      // let
+      let age = 23
+      console.log(window.age)
+      #+end_src
+
+      在全局作用域中的 let 声明，相应变量会在页面的生命周期内延续。
+
+   3. 条件声明
+
+      let 不宜用在条件声明语句块中
+
+   4. for 循环中的 let 声明
+
+      #+begin_src javascript
+      for(var i = 0; i < 5; ++i) {
+        setTimeout(() => console.log(i), 0)
+      }
+      #+end_src
+
+      退出循环时，循环变量保存的是导致循环退出的值。
+
+      而对于 let 声明的 for 循环，JS 引擎在后台会为每个迭代循环声明一个新的迭代变量。
+
+3. const
+
+   const 和 let 基本相同，唯一的重要区别：const 声明变量的同时必须初始化变量，而且尝试修改 const 声明的变量会报错。 const 声明的限制只适用于它指向的变量的引用。如果 const 变量引用的是一个对象，那么修改这个对象内部的属性并不违反 const 的限制。
+
+   仅在 for-of/for-in 语句中声明一个不会被修改的 for 循环变量：
+
+   #+begin_src javascript
+   // 1
+   let i = 0
+   for (const j = 7; i < 5; ++i) {
+     console.log(j)
+   }
+   // 2
+   for (const key in (a: 1, b: 2)) {
+     console.log(key)
+   }
+   // 3
+   for (const value of [1,2,3,4,5,6]) {
+     console.log(value)
+   }
+   #+end_src
+
+*** 数据类型
+:PROPERTIES:
+:CUSTOM_ID: 数据类型
+:END:
+8 种数据类型：7 种原始（基本）数据类型：Boolean, null, undefined, Number, BigInt, String, Symbol；1 种引用数据类型：Object。
+
+** Standard built-in objects
+:PROPERTIES:
+:CUSTOM_ID: standard-built-in-objects
+:END:
+*** Proxy
+:PROPERTIES:
+:CUSTOM_ID: proxy
+:END:
+=Proxy= 对象可为其他对象创建代理，拦截并重新定义该对象的基本操作。
+
+** 其他
+:PROPERTIES:
+:CUSTOM_ID: 其他
+:END:
+#+begin_src javascript
+var a = 1
+function b() {
+  a = 10
+  return
+  function a() {}
+}
+b()
+alert(a)
+#+end_src
+
+这代码里， =function a() {}= 这样写产生了怎样的影响？它和 =a = 10= 的关系是什么？
+
+#+begin_src javascript
+// function hoisting
+function test() {
+  foo()
+  bar()
+  var foo = function () {
+    alert("this won't run ")
+  }
+
+  function bar() {
+    alert('this will run')
+  }
+}
+test()
+#+end_src

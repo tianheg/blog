@@ -1,0 +1,50 @@
+* css-style-queries
+:PROPERTIES:
+:CUSTOM_ID: css-style-queries
+:END:
+[[https://una.im/style-queries/]]
+
+Style Queries 允许查询同页面的父元素的样式。
+
+作者写这篇文章的目的：
+
+> I want to investigate why and when style queries really make sense to use, and provide a capability previously unavailable to us.
+
+​## Container Queries
+
+Container queries 能够通过查询父选择器，得到它的大小和样式信息。让子元素有自己的内在响应逻辑，这种逻辑与其外在环境没有联系。
+
+demo: [[https://codepen.io/tianheg/pen/zYWZQQw]]
+
+​## Style Queries
+
+1. 查询直接父级以将样式应用于子级
+2. 给不可继承的属性添加样式
+3. 选中特定父元素，为其子元素设置唯一样式（链式样式）
+4. 通过更高优先级的变量，为样式分组
+5. CSS 中的交互
+6. 结合大小和样式查询
+
+​## 进一步了解
+
+* [MDN Docs on Container Queries]([[https://developer.mozilla.org/en-US/docs/Web/CSS/CSS_Container_Queries]])
+:PROPERTIES:
+:CUSTOM_ID: mdn-docs-on-container-querieshttpsdeveloper.mozilla.orgen-usdocswebcsscss_container_queries
+:END:
+* [Designing in the Browser: Container Queries]([[https://web.dev/shows/designing-in-the-browser/gCNMyYr7F6w/]])
+:PROPERTIES:
+:CUSTOM_ID: designing-in-the-browser-container-querieshttpsweb.devshowsdesigning-in-the-browsergcnmyyr7f6w
+:END:
+* [Designing in the Browser: Macro & Micro Layouts]([[https://web.dev/shows/designing-in-the-browser/sdjT0K4sR4k/]])
+:PROPERTIES:
+:CUSTOM_ID: designing-in-the-browser-macro-micro-layoutshttpsweb.devshowsdesigning-in-the-browsersdjt0k4sr4k
+:END:
+* [Container Queries & the future of CSS]([[https://www.miriamsuzanne.com/speaking/responsive-components/]])
+:PROPERTIES:
+:CUSTOM_ID: container-queries-the-future-of-csshttpswww.miriamsuzanne.comspeakingresponsive-components
+:END:
+* [Next Gen CSS: @container]([[https://css-tricks.com/next-gen-css-container/]])
+:PROPERTIES:
+:CUSTOM_ID: next-gen-css-containerhttpscss-tricks.comnext-gen-css-container
+:END:
+- [[https://web.dev/patterns/layout/]]

@@ -1,0 +1,30 @@
+* repeat-a-string
+:PROPERTIES:
+:CUSTOM_ID: repeat-a-string
+:END:
+1. [Basic Algorithm Scripting: Repeat a String Repeat a String | freeCodeCamp.org]([[https://www.freecodecamp.org/learn/javascript-algorithms-and-data-structures/basic-algorithm-scripting/repeat-a-string-repeat-a-string]])
+2. [Three ways to repeat a string in JavaScript]([[https://www.freecodecamp.org/news/three-ways-to-repeat-a-string-in-javascript-2a9053b93a2d/]])
+
+​## 我写的，用了 padEnd()
+
+```js function repeatStringNumTimes(str, num) { if (num <= 0) { return '' } else { return str.padEnd(num * str.length, str) } }
+
+console.log(repeatStringNumTimes('abc', 2)) ```
+
+​## repeat()
+
+```js function repeatStringNumTimes(str, num) { if (num <= 0) { return '' } else { return str.repeat(num) } }
+
+console.log(repeatStringNumTimes('abc', 2)) ```
+
+​## while
+
+```js function repeatStringNumTimes(str, num) { let repeatedStr = '' while (num > 0) { repeatedStr = repeatedStr + str num-- } w return repeatedStr }
+
+console.log(repeatStringNumTimes('abc', 2)) ```
+
+​## 递归
+
+```js function repeatStringNumTimes(str, num) { if (num < 0) { return '' } if (num === 1) { return str } else { return str + repeatStringNumTimes(str, num - 1) } }
+
+console.log(repeatStringNumTimes('abc', 20)) ```

@@ -1,0 +1,40 @@
+* playwright-test
+:PROPERTIES:
+:CUSTOM_ID: playwright-test
+:END:
+​## 配置（Node.js）
+
+```bash npm init playwright@latest new-project # 自动配置
+
+npm i -D @playwright/test
+
+npx playwright install # 这一步会安装所有支持的浏览器 ```
+
+`playwright.config.js`：
+
+```js // @ts-check const { devices } = require('[cite/t:@playwright/test]')
+
+/**
+
+- Read environment variables from file.
+- [[https://github.com/motdotla/dotenv]]
+
+​*/ // require('dotenv').config();
+
+/**
+
+- @see [[https://playwright.dev/docs/test-configuration]]
+- @type {import('[cite/t:@playwright/test]').PlaywrightTestConfig}
+
+​*/ const config = { testDir: './tests', /* Maximum time one test can run for. */ timeout: 30 * 1000, expect: { /**
+
+- Maximum time expect() should wait for the condition to be met.
+- For example in `await expect(locator).toHaveText();`
+
+​*/ timeout: 5000, }, /* Fail the build on CI if you accidentally left test.only in the source code. */ forbidOnly: !!process.env.CI, /* Retry on CI only */ retries: process.env.CI ? 2 : 0, /* Opt out of parallel tests on CI. */ workers: process.env.CI ? 1 : undefined, /* Reporter to use. See [[https://playwright.dev/docs/test-reporters]] */ reporter: /'html', { outputFolder: 'reports' }/, /* Shared settings for all the projects below. See [[https://playwright.dev/docs/api/class-testoptions]]. */ use: { /* Maximum time each action such as `click()` can take. Defaults to 0 (no limit). */ actionTimeout: 0, /* Base URL to use in actions like `await page.goto('/')`. */ // baseURL: '[[http://localhost:3000]]',
+
+/* Collect trace when retrying the failed test. See [[https://playwright.dev/docs/trace-viewer]] */ trace: 'on-first-retry', },
+
+/* Configure projects for major browsers */ projects: [ { name: 'firefox', use: { ...devices['Desktop Firefox'], }, }, ], }
+
+module.exports = config ```

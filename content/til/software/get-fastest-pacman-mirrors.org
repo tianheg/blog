@@ -1,0 +1,45 @@
+* Get fastest pacman mirrors
+:PROPERTIES:
+:CUSTOM_ID: get-fastest-pacman-mirrors
+:END:
+Way 2&3 need =rankmirrors=, which provided by pacman-contrib
+
+** Way 1
+:PROPERTIES:
+:CUSTOM_ID: way-1
+:END:
+1. Go to successfully syncing mirrors of archlinux mirror status page: [[https://archlinux.org/mirrors/status/#successful]]
+
+2. Copy the first several mirrors, https protocol for privacy, 100% completion needed, the less mirror score, the better
+
+3. Organize mirrors into this format:
+
+   #+begin_src txt
+   Server = MIRROR_URL_COPIED/$repo/os/$arch
+
+   example:
+
+   Server = https://mirror.osbeck.com/archlinux/$repo/os/$arch
+   #+end_src
+
+4. Save this file to =/etc/pacman.d/mirrorlist=
+
+** Way 2
+:PROPERTIES:
+:CUSTOM_ID: way-2
+:END:
+#+begin_src txt
+curl -s "https://archlinux.org/mirrorlist/?country=CN&protocol=https&ip_version=4&use_mirror_status=on" | sed -e 's/^#Server/Server/' -e '/^#/d' | rankmirrors -n 5 -
+#+end_src
+
+Save the output to way 1 step 4 file location
+
+** Way 3
+:PROPERTIES:
+:CUSTOM_ID: way-3
+:END:
+1. Install reflector
+
+2. =txt     reflector --sort rate --protocol https --latest 5 | rankmirrors -=
+
+3. Save the output to way 1 step 4 file location

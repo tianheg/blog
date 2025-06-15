@@ -1,0 +1,39 @@
+* package-browser-field-spec
+:PROPERTIES:
+:CUSTOM_ID: package-browser-field-spec
+:END:
+[[https://github.com/defunctzombie/package-browser-field-spec]]
+
+当为客户端使用而打包时，`browser` 作为由模块作者提供的、一种对 JavaScript 打包器或者组件工具提示的部分。
+
+​## 提及的术语
+
+​### server
+
+基于无 DOM 的 JavaScript 运行环境。通常只包含基础的 JavaScript 语言库和用于与操作系统交互的模块。
+
+​### client
+
+浏览器运行环境。提供额外的内建对象暴露在全局命名空间。它是一个专门的执行环境，提供了超出基本 JavaScript 语言规范的内置功能。
+
+​### commonjs
+
+一个需求系统，指定某些模块需要哪些文件。
+
+​### bundler
+
+一种工具，输入普通 JavaScript 包，输出可用于客户端的文件。包括且不限于：将模块或文件替换为客户端版本，将所有依赖文件合并为单个等等。
+
+​### package.json
+
+一个模块的元数据信息。通常位于项目的根路径下。
+
+​### packaging
+
+使用打包器创建可用于客户端的文件。
+
+​## Overview
+
+When a javascript module is prepared for use on a client there are two major concerns: certain features are already provided by the client, and certain features are not available. Features provided by a client can include http requests, websockets, dom manipulation. Features not available would include tcp sockets, system disk IO.
+
+The browser field is where the module author can hint to the bundler which elements (other modules or source files) need to be replaced when packaging.

@@ -1,0 +1,35 @@
+* create-proxy-server
+:PROPERTIES:
+:CUSTOM_ID: create-proxy-server
+:END:
+[Creating and deploying a tiny proxy server on Vercel in 10 minutes · mmazzarolo.com]([[https://mmazzarolo.com/blog/2022-02-05-creating-and-deploying-a-proxy-server-in-5-minutes/]])
+
+​## 项目设置
+
+```bash mkdir my-proxy && cd my-proxy npm init npm install -D vercel mkdir api && touch api/index.js touch vercel.json ```
+
+`my-proxy/package.json`
+
+```json { "name": "my-proxy", "version": "1.0.0", "scripts": {
+
+- "start": "vercel dev" },
+
+```
+
+> Vercel serverless functions use a [file\-system\-based convention]([[https://vercel.com/docs/concepts/functions/serverless-functions]]). So the `api/index.js` file you just created will automatically handle all requests of the `/api` endpoint:
+
+`my-proxy/api/index.js`
+
+```js // In Vercel, any file inside the "api" directory is exposed on an "/api" endpoint. // For an API route to work, you need to export a function as default (a.k.a request handler), // which then receives the following parameters: // - req: The request object. // - res: The response object. // See [[https://vercel.com/docs/serverless-functions/supported-languages#node.js]] for details. export default async function handler(req, res) { res.status(200).send(`Hello world!`) } ```
+
+`my-proxy/vercel.json`
+
+```json { "rewrites": [{ "source": "/api/(.*)", "destination": "/api" }] } ```
+
+​## 代理逻辑设置
+
+```bash npm i http-proxy-middleware ```
+
+修改 `my-proxy/api/index.js`
+
+```js // Create a proxy to redirect requests of the "/api/*" path to "[[https://example.org]]". // // Examples: // GET /api/hello → GET [[https://example.org/hello]] // POST /api/test?color=red → POST [[https://example.org/test?color=red]] // // Additionally, the proxy will: // - Add an "x-added" header // - Remove the "x-removed" header // From the proxied response. // // You can/should update the proxy to suit your needs. // See [[https://github.com/chimurai/http-proxy-middleware]] for more details. const { createProxyMiddleware } = require('http-proxy-middleware') const apiProxy = createProxyMiddleware({ target: '[[https://example.org]]', changeOrigin: true, pathRewrite: { '^/api': '', // strip "/api" from the URL }, onProxyRes(proxyRes) { proxyRes.headers['x-added'] = 'foobar' // add new header to response delete proxyRes.headers['x-removed'] // remove header from response }, }) // Expose the proxy on the "/api/*" endpoint. export default function (req, res) { return apiProxy(req, res) } ```

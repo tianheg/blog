@@ -1,0 +1,19 @@
+* nginx-deploy-nodejs-app-use-nginx
+:PROPERTIES:
+:CUSTOM_ID: nginx-deploy-nodejs-app-use-nginx
+:END:
+[[https://dev.to/jsstackacademy/deploy-nodejs-application-using-nginx-3jhh]]
+
+1. 确保 Node.js 应用能够生成最终要部署的静态页面。
+2. 配置好 pm2；并安装 Nginx
+3. `sudo vim /etc/nginx/sites-available/default`
+
+```conf server { location / { proxy_{pass} [[http://localhost:3000]]; proxy_{httpversion} 1.1; proxy_{setheader} Upgrade $http_{upgrade}; proxy_{setheader} Connection 'upgrade'; proxy_{setheader} Host $host; proxy_{cachebypass} $http_{upgrade}; } } ```
+
+3000 是本地运行的端口号，根据需要更改。
+
+这样完成后，可以使用 `http://ip` 访问，而不需要加上端口号，例如 `http://ip:3000`。
+
+​## 支持 HTTPS
+
+[[https://www.rosehosting.com/blog/how-to-secure-nginx-with-lets-encrypt-on-ubuntu-20-04/]]

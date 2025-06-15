@@ -1,0 +1,13 @@
+* git-use-dura
+:PROPERTIES:
+:CUSTOM_ID: git-use-dura
+:END:
+[[https://github.com/tkellogg/dura]]
+
+​## 配置
+
+```bash
+
+yay -S dura-git dura serve & # Run it in the background cd /git/repo/ dura watch
+
+​## watch all git repo under /home/user find ~ -type d -name .git -prune | xargs -I= sh -c "cd =/..; dura watch" # BE CAREFUL!!! use when knowing what you are doing ```

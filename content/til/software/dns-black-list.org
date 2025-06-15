@@ -1,0 +1,25 @@
+* dns-black-list
+:PROPERTIES:
+:CUSTOM_ID: dns-black-list
+:END:
+[[https://web.archive.org/web/20081226214006/http://www.netwidget.net/books/apress/dns/info/dnsbl.html]]
+
+Black Lists are used in the context of email to define the IP addresses or netblocks of well known sources of SPAM. DNSBL defines a method of using standard DNS zone files to store such IP addresses. Standard DNS A RR queries are used to interrogate the black list which is organised as a reverse mapping zone file. Assuming the blacklist is held at the domain name blacklist.example.com, the process works as follows:
+
+1. The receiving SMTP Agent extracts the IP address of the sending SMTP Agent, for example 192.168.2.135.
+2. The address is reversed to create a label, in the above case this becomes 135.2.168.192
+3. The reversed label is prepended to the DNSRBL name to give a domain name of 135.2.168.192.blacklist.example.com
+4. A DNS A RR query is issued to the domain name of 135.2.168.192.blacklist.example.com
+5. The responding name server either returns a valid A RR (confirming the IP address is in the black list) or an NXDOMAIN error (the IP address is not in the blacklist).
+6. For those IP addresses which appear in the black list the DNSBL may optionally store a standard TXT RR at the same name giving some explanation for the black listing.
+7. The fact that an A RR is returned confirms that the queried IP address does appear in the specific blacklist. The actual address returned is by convention in the loopback range 127/8 - each address may have a specific meaning - it is used as a return code - some of which are defined in the list below.
+
+​## Example black list zone file
+
+```text $TTL 2d # default RR TTL $ORIGIN blacklist.example.com IN SOA ns1.example.com. hostmaster.example.com.( 2003080800 ; se = serial number 3h ; ref = refresh 15m ; ret = update retry 3w ; ex = expiry 3h ; min = minimum ) IN NS ns1.example.com. IN NS ns2.example.com.
+
+2.0.0.127 IN A 127.0.0.2
+
+135.2.168.192 IN A 127.0.0.2 # or some specific result code address IN TXT "Optional - Some explanation for black listing"
+
+... 135.17.168.192 IN A 127.0.0.2 # generic list ... ```

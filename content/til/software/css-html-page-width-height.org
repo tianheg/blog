@@ -1,0 +1,29 @@
+* css-html-page-width-height
+:PROPERTIES:
+:CUSTOM_ID: css-html-page-width-height
+:END:
+[[https://www.freecodecamp.org/news/html-page-width-height/]]
+
+Setting min-height to 100% on both elements does not allow the body element to fill the page like you might expect. If you check the computed style values in dev tools, the body element has a height of zero.
+
+Using a percentage as a size value requires the element to reference a parent to base that percentage on.
+
+The HTML element references the viewport which has a height value equal to the visible viewport height. However, we only set a min-height on the HTML element... NOT a height property value.
+
+Therefore, the body element has no parent height value to reference when deciding what 100% is equal to.
+
+```css html, body { min-height: 100%; } body { background-color: dodgerblue; } ```
+
+​## Ideal Height Setting for a Full Responsive Page
+
+```css html { height: 100%; } body { min-height: 100%; } ```
+
+更现代的做法：
+
+```css body { min-height: 100vh; } ```
+
+This example uses `vh` (viewport height) units to allow the body to set a minimum height value based upon the full height of the viewport.
+
+高度和宽度都设置：
+
+```css html { background-color: #000; } body { min-height: 100vh; max-width: 400px; background-color: papayawhip; margin: 0 auto; } ```

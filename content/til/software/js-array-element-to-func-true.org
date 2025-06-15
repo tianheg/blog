@@ -1,0 +1,40 @@
+* js-array-element-to-func-true
+:PROPERTIES:
+:CUSTOM_ID: js-array-element-to-func-true
+:END:
+1. [Basic Algorithm Scripting: Finders Keepers | freeCodeCamp.org]([[https://www.freecodecamp.org/learn/javascript-algorithms-and-data-structures/basic-algorithm-scripting/finders-keepers]])
+2. [freeCodeCamp Challenge Guide: Finders Keepers - Guide - The freeCodeCamp Forum]([[https://forum.freecodecamp.org/t/freecodecamp-challenge-guide-finders-keepers/16016]])
+
+原始代码：
+
+```js function findElement(arr, func) { let num = 0 return num }
+
+console.log(findElement([1, 2, 3, 4], (num) => num % 2 === 0)) ```
+
+看过参考答案后，发现：原来还可以这样！
+
+​## for
+
+```js function findElement(arr, func) { let num = 0
+
+for (let i = 0; i < arr.length; i++) { num = arr[i] if (func(num)) { return num } } return undefined }
+
+console.log(findElement([1, 2, 3, 4], (num) => num % 2 === 0)) ```
+
+​## find()
+
+```js function findElement(arr, func) { return arr.find(func) }
+
+console.log(findElement([1, 2, 3, 4], (num) => num % 2 === 0)) ```
+
+​## map()
+
+```js function findElement(arr, func) { return arr[arr.map(func).indexOf(true)] }
+
+console.log(findElement([1, 2, 3, 4], (num) => num % 2 === 0)) ```
+
+​## 递归
+
+```js function findElement(arr, func) { return arr.length && !func(arr[0]) ? findElement(arr.slice(1), func) : arr[0] }
+
+console.log(findElement([1, 2, 3, 4], (num) => num % 2 === 2)) ```

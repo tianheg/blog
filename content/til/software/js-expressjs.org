@@ -1,0 +1,66 @@
+* js-expressjs
+:PROPERTIES:
+:CUSTOM_ID: js-expressjs
+:END:
+--- title: Express.js description: published: true date: 2022-08-03T12:46:29.872Z tags: editor: markdown dateCreated: 2022-08-03T12:46:27.269Z ---
+
+[[https://expressjs.com/]]
+
+Express 能干什么：
+
+- Web 服务器：静态资源
+- 路由
+- API
+
+​### helloworld 例子
+
+学习到如何开启 Express：`const express = require("express"); const app = express()`
+
+如何设置根路由：`app.get("/", (req, res) => { res.send("Hello World")})`，[在 Node.js 中 req(request) 和 res(response) 是相同功能的对象]([[https://expressjs.com/en/starter/hello-world.html#running-locally]])，因此在不使用 Express 的情况下，可以调用 `req.pipe().req.on("date", callback)`。Node 中的 res 和 req 在一般情况下指 http 的请求和响应，后续所有的框架和库为了简单和方便学习，也采用了相同的命名，其实也可以不是 res,req[^{1}]。
+
+如何设置监听端口：`` app.listen(PORT, () => console.log(`Server is running at port ${PORT}`)) ``
+
+​### basicrouting 例子
+
+Routing 指一个应用如何响应客户端对特定端点的请求，这个端点可能是 URI/路径 和 一个指定的 HTTP 请求方式（GET、POST、等等）。
+
+每个路由可以有一个或多个处理程序函数，当请求路由匹配时，处理程序函数执行。
+
+路由定义：`app.METHOD(PATH, HANDLER)`
+
+- app 是一个 Express 实例
+- METHOD 是一个 HTTP 请求方法（options, get, head, post, put, delete, trace, connect, patch），小写字母
+- PATH 就是待访问的路径
+- HANDLER 是当路由匹配时的执行函数
+
+​### static 例子
+
+> To serve static files such as images, CSS files, and JavaScript files, use the express.static built-in middleware function in Express.
+
+什么是 middleware？
+
+它是计算机软件的一种类型，为软件提供超出操作系统可用范围的服务。可被称为”软件胶水”[^{2}]。中间件让开发者更容易实现通讯和输入输出，以便让开发者专注于特定的系统实现。
+
+> In a distributed computing system, middleware is defined as the software layer that lies between the operating system and the applications on each site of the system.[^{3}]
+
+提供静态文件：`express.static(root, [options])`
+
+- root 的文件路径是相对于 express 服务的运行路径的，如果为了避免路径错误，可以使用 `const path = require("path"); app.use("/static", express.static(path.join(__{dirname}, "public")))`
+
+​### auth 例子
+
+```js const hash = require('pbkdf2-password')() // 代码写完，始终不能登录，检查了几遍才发现，这句的最后还需要 `()` ```
+
+`!module.parent` 已弃用，如何升级？
+
+​### content-negotiation 例子
+
+不理解什么是内容协商？
+
+[[https://developer.mozilla.org/en-US/docs/Web/HTTP/Content_negotiation]]
+
+​### cookie-sessions 例子
+
+在一个 Cookie 中进行计数操作
+
+[^{1}]: [[https://stackoverflow.com/a/54114725/12539782]] [^{2}]: [[https://en.wikipedia.org/wiki/Middleware]] [^{3}]: [[https://web.archive.org/web/20050507151935/http://middleware.objectweb.org/]]

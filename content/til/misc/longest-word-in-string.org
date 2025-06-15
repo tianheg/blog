@@ -1,0 +1,39 @@
+* longest-word-in-string
+:PROPERTIES:
+:CUSTOM_ID: longest-word-in-string
+:END:
+[Basic Algorithm Scripting: Find the Longest Word in a String | freeCodeCamp.org]([[https://www.freecodecamp.org/learn/javascript-algorithms-and-data-structures/basic-algorithm-scripting/find-the-longest-word-in-a-string]])
+
+​## 我想出来的办法
+
+```js function findLongestWordLength(str) { const strArray = str.split(' ') const strLength = strArray.length let numArray = [] for (let a = 0; a < strLength; a++) { numArray.push(strArray[a].length) } return Math.max(...numArray) }
+
+console.log( findLongestWordLength('The quick brown fox jumped over the lazy dog'), ) ```
+
+​## 另一种 for 循环
+
+```js function findLongestWordLength(str) { const strArray = str.split(' ') const strLength = strArray.length let longestWordLength = 0 for (let a = 0; a < strLength; a++) { if (strArray[a].length > longestWordLength) { longestWordLength = strArray[a].length } } return longestWordLength }
+
+console.log( findLongestWordLength('The quick brown fox jumped over the lazy dog'), ) ```
+
+​## sort()
+
+`sort()` 内部可以添加排序规则
+
+```js function findLongestWordLength(str) { let longestWord = str.split(' ').sort((first, second) => { return second.length - first.length }) return longestWord[0].length }
+
+console.log( findLongestWordLength('The quick brown fox jumped over the lazy dog'), ) ```
+
+​## reduce()
+
+```js function findLongestWordLength(str) { let longestWord = str.split(' ').reduce(function (a, b) { if (b.length > a.length) { return b } else { return a } }, '') return longestWord.length }
+
+console.log( findLongestWordLength('The quick brown fox jumped over the lazy dog'), ) ```
+
+--------------
+
+参考资料
+
+1. [Math.max() - JavaScript | MDN]([[https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Math/max]])
+2. [Three Ways to Find the Longest Word in a String in JavaScript]([[https://www.freecodecamp.org/news/three-ways-to-find-the-longest-word-in-a-string-in-javascript-a2fb04c9757c/]])
+3. [Array.prototype.sort() - JavaScript | MDN]([[https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array/sort]])

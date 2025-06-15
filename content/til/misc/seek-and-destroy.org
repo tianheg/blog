@@ -1,0 +1,22 @@
+* seek-and-destroy
+:PROPERTIES:
+:CUSTOM_ID: seek-and-destroy
+:END:
+[Intermediate Algorithm Scripting: Seek and Destroy | freeCodeCamp.org]([[https://www.freecodecamp.org/learn/javascript-algorithms-and-data-structures/intermediate-algorithm-scripting/seek-and-destroy]])
+
+```js function destroyer(arr) { return arr }
+
+destroyer([1, 2, 3, 1, 2, 3], 2, 3) ```
+
+```js function destroyer(arr) { let i = 1 while (i < arguments.length) { if (arr.includes(arguments[i])) { arr = arr.filter((item) => item !== arguments[i]) } else { ++i } } return arr }
+
+console.log(destroyer([1, 2, 3, 1, 2, 3], 2, 3)) ```
+
+使用了 `filter`，筛选符合条件（不在待移除元素范围内）的元素。
+
+--------------
+
+参考资料
+
+1. [[https://stackoverflow.com/a/5767357/12539782]]
+2. [[https://stackoverflow.com/a/20690490/12539782]]

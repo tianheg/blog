@@ -1,0 +1,25 @@
+* spinal-tap-case
+:PROPERTIES:
+:CUSTOM_ID: spinal-tap-case
+:END:
+[Intermediate Algorithm Scripting: Spinal Tap Case | freeCodeCamp.org]([[https://www.freecodecamp.org/learn/javascript-algorithms-and-data-structures/intermediate-algorithm-scripting/spinal-tap-case]])
+
+```js function spinalCase(str) { return str }
+
+spinalCase('This Is Spinal Tap') ```
+
+```js str = str.replace(/([a-z])([A-Z])/g, '$1 $2') ```
+
+这一句是我不会的地方。主要涉及正则表达式的使用。
+
+答案：
+
+```js function spinalCase(str) { let regex = /\s+|_+/g str = str.replace(/([a-z])([A-Z])/g, '$1 $2') return str.replace(regex, '-').toLowerCase() }
+
+console.log(spinalCase('ThisIsSpinalTap')) ```
+
+```js function spinalCase(str) { // Replace low-upper case to low-space-uppercase str = str.replace(/([a-z])([A-Z])/g, '$1 $2') // Split on whitespace and underscores and join with dash return str .toLowerCase() .split(/(?:_| )+/) .join('-') } ```
+
+```js function spinalCase(str) { // "It's such a fine line between stupid, and clever." // --David St. Hubbins
+
+return str .split(/\s|_|(?=[A-Z])/) .join('-') .toLowerCase() } ```

@@ -1,0 +1,38 @@
+* smallest-common-multiple
+:PROPERTIES:
+:CUSTOM_ID: smallest-common-multiple
+:END:
+1. [Intermediate Algorithm Scripting: Smallest Common Multiple | freeCodeCamp.org]([[https://www.freecodecamp.org/learn/javascript-algorithms-and-data-structures/intermediate-algorithm-scripting/smallest-common-multiple]])
+2. [freeCodeCamp Challenge Guide: Smallest Common Multiple - Guide - The freeCodeCamp Forum]([[https://forum.freecodecamp.org/t/freecodecamp-challenge-guide-smallest-common-multiple/16075]])
+
+```js function smallestCommons(arr) { let newArr = arr.sort((a, b) => a - b) let newNumArr = [] for (let i = newArr[0]; i <= newArr[1]; i++) { newNumArr.push(i) } newNumArr.reduce((prev, next) => prev * next) return newNumArr }
+
+console.log(smallestCommons([2, 10])) ```
+
+我能够列举出两数之间的数字。
+
+​## 求解两数的最小公倍数
+
+[[https://stackoverflow.com/a/38407734/12539782]]
+
+```js // gcd greatest common divisor 最大公约数 // lcm least common multiple 最小公倍数 // lcm(a, b) = a * b / gcd(a, b) // gcd(a, b) = gcd(b, a % b) function gcd(a, b) { if (b === 0) { return a } else { return gcd(b, a % b) } } function lcm(a, b) { return (a * b) / gcd(a, b) } ```
+
+```js function smallestCommons(arr) { let min = Math.min(...arr) let max = Math.max(...arr) let array = [] for (min; min <= max; min++) { array.push(min) } const lowestCommon = (currentValue) => n % currentValue === 0 let common = false let n = max * (max - 1) common = array.every(lowestCommon) while (common === false) { n++ common = array.every(lowestCommon) } return n }
+
+console.log(smallestCommons([2, 10])) // [[https://medium.com/swlh/finding-the-smallest-common-multiple-in-javascript-and-also-in-ruby-e82ae53494d7]] ```
+
+​## 求解数字数组的最小公倍数
+
+[[https://stackoverflow.com/a/38407734/12539782]]
+
+以下函数不能求解数字数组的最小公倍数
+
+方式一
+
+```js function lcmOfRange(a, b) { let result = a for (let i = a + 1; i < b; i++) { result = lcm(result, i) } return result } ```
+
+方式二
+
+```js function lcmOfRange(a, b) { let range = [] for (let i = a; i <= b; i++) { range.push(i) } return lcmOfList(range) }
+
+function lcmOfList(arr) { return arr.reduce(lcm) } ```

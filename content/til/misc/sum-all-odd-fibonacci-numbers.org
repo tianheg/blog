@@ -1,0 +1,25 @@
+* sum-all-odd-fibonacci-numbers
+:PROPERTIES:
+:CUSTOM_ID: sum-all-odd-fibonacci-numbers
+:END:
+[Intermediate Algorithm Scripting: Sum All Odd Fibonacci Numbers | freeCodeCamp.org]([[https://www.freecodecamp.org/learn/javascript-algorithms-and-data-structures/intermediate-algorithm-scripting/sum-all-odd-fibonacci-numbers]])
+
+```js function fibonacci(num) { let num1 = 0, num2 = 1, sum, i = 0 for (i = 0; i < num; i++) { sum = num1 + num2 num1 = num2 num2 = sum } return num2 }
+
+function sumFibs(num) { let sum = 0 for (let i = 0; i < num; i++) { if (fibonacci(i) % 2 !== 0 && fibonacci(i) <= num) { sum += fibonacci(i) } } return sum }
+
+sumFibs(10) // [[https://www.geeksforgeeks.org/fibonacci-series-program-in-javascript/]] ```
+
+答案
+
+```js function sumFibs(num) { let prevNumber = 0 let currNumber = 1 let result = 0 while (currNumber <= num) { if (currNumber % 2 !== 0) { result += currNumber } currNumber += prevNumber prevNumber = currNumber - prevNumber }
+
+return result } ```
+
+```js function sumFibs(num) { // Perform checks for the validity of the input if (num <= 0) return 0
+
+// Create an array of fib numbers till num const arrFib = [1, 1] let nextFib = 0
+
+// We put the new Fibonacci numbers to the front so we // don't need to calculate the length of the array on each // iteration while ((nextFib = arrFib[0] + arrFib[1]) <= num) { arrFib.unshift(nextFib) }
+
+// We filter the array to get the odd numbers and reduce them to get their sum. return arrFib.filter((x) => x % 2 != 0).reduce((a, b) => a + b) } ```

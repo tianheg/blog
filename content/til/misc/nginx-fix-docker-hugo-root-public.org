@@ -1,0 +1,10 @@
+* nginx-fix-docker-hugo-root-public
+:PROPERTIES:
+:CUSTOM_ID: nginx-fix-docker-hugo-root-public
+:END:
+两次修改：
+
+- [fix `HUGO_{DESTINATION}` · tianheg/docker-hugo@f802d38]([[https://github.com/tianheg/docker-hugo/commit/f802d38f89f3be6f498a671607c312bfb70eb663]])
+- [fix root public · tianheg/docker-hugo@d238bc7]([[https://github.com/tianheg/docker-hugo/commit/d238bc757e5eeab25fd1f040ba46e1f91c75e163]])
+
+但我发现，只要 public 文件夹本身权限和当前用户相同，内部文件为 root 时， Nginx 也能正常工作，而不会返回 404。

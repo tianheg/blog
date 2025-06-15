@@ -1,0 +1,78 @@
+* mediawiki
+:PROPERTIES:
+:CUSTOM_ID: mediawiki
+:END:
+​## Docker
+
+`docker-compose.yml`:
+
+```yml
+
+version: '3' services: mediawiki: image: mediawiki restart: always ports:
+
+- 8080:80
+
+links:
+
+- database
+
+volumes:
+
+- /var/www/html/images
+
+database: image: mariadb restart: always environment:
+
+MYSQL_{DATABASE}: my_{wiki} MYSQL_{USER}: wikiuser MYSQL_{PASSWORD}: example ```
+
+执行完初始化安装后，会生成 LocalSettings.php，把这个文件放到根目录。
+
+```txt
+
+- 
+
+```
+
+refer
+
+1. [[https://hub.docker.com/_/mediawiki]]
+2. [[https://hub.docker.com/_/mariadb]]
+
+​### 无法使用可视化编辑
+
+``` Error contacting the Parsoid/RESTBase server: (curl error: 7) Couldn't connect to server
+
+Error contacting the Parsoid/RESTBase server: (curl error: 6) Couldn't resolve host name
+
+Error contacting the Parsoid/RESTBase server (HTTP 404) # (这个错误只出现一次) ```
+
+refer
+
+1. [[https://www.mediawiki.org/wiki/MediaWiki-Docker/Extension/VisualEditor]]
+2. [[https://www.mediawiki.org/wiki/Topic:Vv35plp6g16qno0s]]
+3. [[https://www.mediawiki.org/wiki/Extension:VisualEditor]]
+
+没有解决，暂时放下。
+
+尝试过在 LocalSettings.php 最末尾添加：
+
+```php if ( isset( $_{SERVER}['REMOTE_{ADDR}'] ) && in_{array}( $_{SERVER}['REMOTE_{ADDR}'], [ $_{SERVER}['SERVER_{ADDR}'], '127.0.0.1' ] ) ) { $wgGroupPermissions['*']['read'] = true; $wgGroupPermissions['*']['edit'] = true; $wgGroupPermissions['*']['writeapi'] = true; }
+
+$wgDefaultUserOptions['visualeditor-editor'] = "visualeditor"; ```
+
+把 `127.0.0.1` 改成 `localhost` 也不行。
+
+在[这里]([[https://www.mediawiki.org/wiki/Extension:VisualEditor#Troubleshooting)找到相关错误解释]]。
+
+``` Error contacting the Parsoid/RESTBase server (curl error: 7) Couldn't connect to server
+
+Ensure that the mediawiki native hostname does not equal to the domain the wiki is running on. If both names are equal, the api will try to connect to the domain the wiki is running on, but will have difficulty resolving the domain. ```
+
+目前不理解。
+
+目前不设置可视化编辑。
+
+​### Cannot access the database: :real_{connect}(): (HY000/2002): No such file or directory。
+
+请检查下列的主机、用户名和密码设置后重试。若使用"localhost"作为数据库主机，请尝试"127.0.0.1"（反之亦然）。
+
+把 Database host 改为 `database`。refer [[https://stackoverflow.com/a/57312266/12539782]]

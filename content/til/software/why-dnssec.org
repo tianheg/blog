@@ -1,0 +1,44 @@
+* why-dnssec
+:PROPERTIES:
+:CUSTOM_ID: why-dnssec
+:END:
+[[https://web.archive.org/web/20081226213924/http://www.netwidget.net/books/apress/dns/info/why-dnssec.html]]
+
+​## The case against DNSSEC
+
+I was talking to my good friend Verner Entwhistle the other day when he suddenly turned to me and said "I don't think we need DNSSEC". Sharp intake of breath. Transpired after a long and involved discussion his case boiled down to four points:
+
+1. SSL provides known and trusted security, DNSSEC is superfluous
+2. DNSSEC is complex and potentially prone to errors
+3. DNSSEC makes DoS attacks worse
+4. DNSSEC does not solve the last mile problem
+
+​## SSL provides known and trusted security, DNSSEC is superflous
+
+Untrue.
+
+DNSSEC is not superfluous, it is an essential feature the Internet has long lacked.
+
+​## DNSSEC is complex and potentially prone to errors
+
+True.
+
+One of the underlying principles of security is that more code = more errors and security holes.
+
+Some things that are good for us, like medecines, are not always pleasant experiences.
+
+​## DNSSEC makes DoS Attacks Worse
+
+Untrue.
+
+DNSSEC Authoritative name servers (serving signed zones), at whatever level, would do a trivial amount more work by sending more zone records per request and thus, at worst, would be marginally more vulnerable to DoS attacks.
+
+If DNSSEC security is end-to-end, which many of us argue is the only way forward, the signature validation work (the heavy lifting) is done in the end-user's computer. Any intermediate caching DNS in this scenario is told to keep its hands off (via the Checking Disabled flag) and incurs a relatively trivial overhead through handling a higher volume of zone records.
+
+The DoS problem is designed out by the right implementation of the DNSSEC standards.
+
+​## DNSSEC does not solve the last mile problem
+
+Untrue.
+
+DNSSEC provides end-to-end security covering the last millimetre not just the last mile - if I am permitted to mix my metrics.

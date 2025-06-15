@@ -1,0 +1,13 @@
+* git-rename-branch-local-remote
+:PROPERTIES:
+:CUSTOM_ID: git-rename-branch-local-remote
+:END:
+[How to Rename Git Local and Remote Branches]([[https://www.w3docs.com/snippets/git/how-to-rename-git-local-and-remote-branches.html]])
+
+```bash ## Local git branch -m <old-name> <new-name> ## Remote
+
+git push origin --delete <old-name> # or git push origin :<old-name>
+
+git push origin <new-name>
+
+git push origin -u <new-name> ```

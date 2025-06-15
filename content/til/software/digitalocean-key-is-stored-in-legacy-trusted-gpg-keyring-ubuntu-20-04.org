@@ -1,0 +1,28 @@
+* digitalocean-key-is-stored-in-legacy-trusted-gpg-keyring-ubuntu-20-04
+:PROPERTIES:
+:CUSTOM_ID: digitalocean-key-is-stored-in-legacy-trusted-gpg-keyring-ubuntu-20-04
+:END:
+我开始用 Digitalocean 的 ubuntu 22.04。`apt-get update` 的时候出现错误：
+
+```bash W: [[https://repos.insights.digitalocean.com/apt/do-agent/dists/main/InRelease]]: Key is stored in legacy trusted.gpg keyring (/etc/apt/trusted.gpg), see the DEPRECATION section in apt-key(8) for details. ```
+
+从这里 [[https://askubuntu.com/a/1403964]] 找到解决办法。
+
+```bash
+
+sudo apt-key export A4C6383F | sudo gpg --dearmour -o /usr/share/keyrings/digitalocean-agent.gpg
+
+sudo apt-get update
+
+sudo apt-key del A4C6383F ```
+
+`/etc/apt/sources.list.d/digitalocean-agent.list` 修改后的样子：
+
+```bash deb [arch=amd64 signed-by=/usr/share/keyrings/digitalocean-agent.gpg] [[https://repos.insights.digitalocean.com/apt/do-agent]] main main ```
+
+这样就一切正常了。
+
+更多资料：
+
+1. [[https://wiki.debian.org/DebianRepository/UseThirdParty]]
+2. [[https://unix.stackexchange.com/a/582853]]

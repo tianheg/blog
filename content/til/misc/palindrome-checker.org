@@ -1,0 +1,19 @@
+* palindrome-checker
+:PROPERTIES:
+:CUSTOM_ID: palindrome-checker
+:END:
+[JavaScript Algorithms and Data Structures Projects: Palindrome Checker | freeCodeCamp.org]([[https://www.freecodecamp.org/learn/javascript-algorithms-and-data-structures/javascript-algorithms-and-data-structures-projects/palindrome-checker]])
+
+要求
+
+1. 忽略标点、大小写和空格
+2. 要去除所有非字母数字字符（标点、大小写和空格、其他符号）
+3. 将所有字符转为大写/小写
+
+如果字符串长度为奇数/偶数，则 length = 长度/2，前半部分的 length = 反向后的后半部分的 length。
+
+我的解法
+
+```js function palindrome(str) { str = str.replace(/[^{A}-Za-z0-9]/g, '').toLowerCase() if (str.length % 2 !== 0) { return ( str.substring(0, str.length / 2) === str .substring(str.length / 2 + 1, str.length) .split('') .reverse() .join('') ) } else { return ( str.substring(0, str.length / 2) === str .substring(str.length / 2, str.length) .split('') .reverse() .join('') ) } }
+
+console.log(palindrome('A man, a plan, a canal. Panama')) ```

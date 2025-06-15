@@ -1,0 +1,130 @@
+* js-the-right-way
+:PROPERTIES:
+:CUSTOM_ID: js-the-right-way
+:END:
+[[https://jstherightway.org/]]
+
+Created by Netscape in 1995 as an extension of HTML for Netscape Navigator 2.0, JavaScript had as its main function the manipulation of HTML documents and form validation.
+
+JavaScript was called Mocha.
+
+The Document Object Model (DOM) is an API for HTML and XML documents. It provides a structural representation of the document, enabling you to modify its content and visual presentation by using a scripting language such as JavaScript. See more at [Mozilla Developer Network - DOM]([[https://developer.mozilla.org/en-US/docs/Web/API/Document_Object_Model]])（这个链接就是一个好的符合用户直觉的设计）.
+
+​## JS 代码风格
+
+​### Conventions 惯例
+
+As every language, JavaScript has many code style guides. Maybe the most used and recommended is the [Google Code Style Guide for JavaScript]([[https://google.github.io/styleguide/jsguide.html]]), but we recommend you read [Idiomatic.js]([[https://github.com/rwaldron/idiomatic.js]]).
+
+​### Linting
+
+JSHint，JSLint 和 ESLint 都是 a static code analysis tool used to flag programming errors, bugs, stylistic errors and suspicious constructs。Both JSLint and JSHint lacked the ability to create additional rules for code quality and coding style. [不同 Linting Tools 的比较]([[https://www.sitepoint.com/comparison-javascript-linting-tools/]])。
+
+​## The Good Parts
+
+​### 面向对象的 Object-oriented
+
+JavaScript has strong object-oriented programming capabilities, even though some debates have taken place due to the differences in object-oriented JavaScript compared to other languages. Source: [Introducing JavaScript objects]([[https://developer.mozilla.org/en-US/docs/Learn/JavaScript/Objects]])
+
+​### 匿名函数 Anonymous functions
+
+Anonymous functions are functions that are dynamically declared at runtime. They're called anonymous functions because they aren't given a name in the same way as normal functions. Source: [Javascript anonymous functions]([[https://web.archive.org/web/20160708200406/http://helephant.com/2008/08/23/javascript-anonymous-functions]])
+
+​### 函数第一等对象 Functions as first-class objects
+
+Functions in JavaScript are first class objects. This means that JavaScript functions are just a special type of object that can do all the things that regular objects can do. Source: [Functions are first class objects in javascript]([[https://web.archive.org/web/20150619161845/http://helephant.com/2008/08/19/functions-are-first-class-objects-in-javascript/]])
+
+​### 松散类型 Loose Typing
+
+For many front-end developers, JavaScript was their first taste of a scripting and/or interpretive language. To these developers, the concept and implications of loosely typed variables may be second nature. However, the explosive growth in demand for modern web applications has resulted in a growing number of back-end developers that have had to dip their feet into the pool of client-side technologies. Many of these developers are coming from a background of strongly typed languages, such as C# or Java, and are unfamiliar with both the freedom and the potential pitfalls involved in working with loosely typed variables. Source: [Understanding Loose Typing in JavaScript]([[http://blog.jeremymartin.name/2008/03/understanding-loose-typing-in.html]])
+
+​### 作用域和（变量）提升 Scoping and Hoisting
+
+​****Scoping****: In JavaScript, functions are our de facto scope delimiters for declaring vars, which means that usual blocks from loops and conditionals (such as if, for, while, switch and try) DON'T delimit scope, unlike most other languages. Therefore, those blocks will share the same scope as the function which contains them. This way, it might be dangerous to declare vars inside blocks as it would seem the var belongs to that block only.
+
+​****Hoisting****: On runtime, all var and function declarations are moved to the beginning of each function (its scope) - this is known as Hoisting. Having said so, it is a good practice to declare all the vars altogether on the first line, in order to avoid false expectations with a var that got declared late but happened to hold a value before - this is a common problem for programmers coming from languages with block scope.
+
+Source: [JavaScript Scoping and Hoisting]([[http://www.adequatelygood.com/JavaScript-Scoping-and-Hoisting.html]])
+
+- name resolution order
+  1. Language-defined
+  2. Formal parameters
+  3. Function declarations
+  4. Variable declarations
+- exceptions:
+  - The built-in name arguments behaves oddly. It seems to be declared following the formal parameters, but before function declarations. This means that a formal parameter with the name arguments will take precedence over the built-in, even if it is undefined. This is a bad feature. Don't use the name arguments as a formal parameter.
+  - Trying to use the name this as an identifier anywhere will cause a SyntaxError. This is a good feature.
+  - If multiple formal parameters have the same name, the one occurring latest in the list will take precedence, even if it is undefined.
+
+​### 函数绑定 Function Binding
+
+当刚开始使用 JS 时，函数绑定可能是最不需要考虑的问题。但是，当你需要将上下文保存在另一个函数时，你可能意识到自己需要的是 `Function.prototype.bind()`。进一步了解见 [这里]([[https://www.smashingmagazine.com/2014/01/understanding-javascript-function-prototype-bind/]])。
+
+​### 闭包函数 Closure Function
+
+闭包是引用独立变量的函数。换句话说，定义在闭包中的函数能够记住它被创建的环境。这是一个很重要的概念需要着重理解，在开发时当你想模拟私有变量时会很有用。它也能帮助了解如何避免常见错误，像在循环中创建闭包。进一步了解见 [这里]([[https://developer.mozilla.org/en-US/docs/Web/JavaScript/Closures]])。
+
+​### 严格模式 Strict Mode
+
+ECMAScript 5 版本引入的严格模式是一种进入 JS 受限制变种的方式。严格模式不仅是一个子集，它故意使用和普通代码不同的语义。不支持严格模式的浏览器在遇到处于严格模式下的 JS 代码时会出现不同于那些支持严格模式的浏览器执行严格模式下代码的情形，所以不要在没有性能测试和严格模式支持情况调查的情况下依赖严格模式。严格模式代码与非严格模式代码能够同时存在，因此脚本可以选择增量进入严格模式。进一步了解见 [这里]([[https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Strict_mode]])。
+
+​### 立即调用的函数表达式 Immediately-Invoked Function Expression(IIFE)
+
+一个立即调用的函数表达式是一种模式，它能够制造一个使用 JS 的函数作用域的词法作用域。立即调用的函数表达式能够用于避免块级作用域下的变量提升，防止污染全局环境，同时允许对方法的公开访问，同时还保留了函数中定义变量的私密性。
+
+_这种模式被称为自动执行的匿名函数，but [[cite/t:@cowboy]]([[http://twitter.com/cowboy]]) (Ben Alman) introduced the term IIFE as a more semantically accurate term for the pattern._
+
+进一步了解见 [这里]([[https://benalman.com/news/2010/11/immediately-invoked-function-expression/]])。
+
+​## Must See
+
+[Arindam Paul - JavaScript VM internals, EventLoop, Async and ScopeChains]([[https://youtu.be/QyUFheng6J0]])
+
+- 函数内部声明的变量，依然是全局变量
+- Variable Shadowing
+- Garbage Collection
+- 闭包：****是函数和作用域的永久连结****
+
+​## Design Patterns
+
+虽然 JS 包含很多独属于自己的设计模式，但也能实现很多经典设计模式。学习资源是 Addy Osmani 的开源书籍 [Learning JavaScript Design Patterns]([[https://www.patterns.dev/posts/classic-design-patterns/]])
+
+创建型设计模式 Creational Design Patterns：
+
+- [工厂模式 Factory]([[https://www.patterns.dev/posts/classic-design-patterns/#factorypatternjavascript]])
+- [原型 Prototype]([[https://www.patterns.dev/posts/classic-design-patterns/#prototypepatternjavascript]])
+- [混合 Mixin]([[https://www.patterns.dev/posts/classic-design-patterns/#mixinpatternjavascript]])
+- [单例 Singleton]([[https://www.patterns.dev/posts/classic-design-patterns/#singletonpatternjavascript]])
+
+结构型设计模式 Structural Design Patterns：
+
+- [Adapter]([[https://www.patterns.dev/posts/classic-design-patterns/#wrapperpatternjquery]])
+- [Bridge]([[https://www.joezimjs.com/javascript/javascript-design-patterns-bridge/]])
+- [Composite]([[https://www.patterns.dev/posts/classic-design-patterns/#compositepatternjquery]])，https://www.joezimjs.com/javascript/javascript-design-patterns-composite/
+- [Decorator]([[https://www.patterns.dev/posts/classic-design-patterns/#decoratorpatternjavascript]])
+- [Facade]([[https://www.patterns.dev/posts/classic-design-patterns/#facadepatternjavascript]])
+- [Flyweight]([[https://www.patterns.dev/posts/classic-design-patterns/#detailflyweight]])
+- [Module]([[https://www.patterns.dev/posts/classic-design-patterns/#modulepatternjavascript]])
+- [Proxy]([[https://www.patterns.dev/posts/classic-design-patterns/#proxypatternjquery]])，https://www.joezimjs.com/javascript/javascript-design-patterns-proxy/
+- [Revealing Module]([[https://www.patterns.dev/posts/classic-design-patterns/#revealingmodulepatternjavascript]])
+
+行为设计模式 Behavioral Design Patterns：
+
+- [Chain of Responsibility]([[https://www.joezimjs.com/javascript/javascript-design-patterns-chain-of-responsibility/]])
+- [Command]([[https://www.patterns.dev/posts/classic-design-patterns/#commandpatternjavascript]])
+- [Mediator]([[https://www.patterns.dev/posts/classic-design-patterns/#mediatorpatternjavascript]])
+- [Observer]([[https://www.patterns.dev/posts/classic-design-patterns/#observerpatternjavascript]])
+
+MV\* Patterns：
+
+- [MVC Pattern]([[https://www.patterns.dev/posts/classic-design-patterns/#detailmvc]])
+- [MVP Pattern]([[https://www.patterns.dev/posts/classic-design-patterns/#detailmvp]])
+- [MVVM Pattern]([[https://www.patterns.dev/posts/classic-design-patterns/#detailmvvm]])
+
+​## Testing Tools
+
+见[这里](/docs/tech/coding)
+
+​## Frameworks
+
+见[这里](/docs/tech/coding)

@@ -1,0 +1,23 @@
+* 用三方的 AI API 服务商时，不确定是否是 OpenAI API 官方正版转发，还是 ChatGPT 逆向
+:PROPERTIES:
+:CUSTOM_ID: 用三方的-ai-api-服务商时不确定是否是-openai-api-官方正版转发还是-chatgpt-逆向
+:END:
+https://x.com/arvin17x/status/1819346887851626969
+
+#+begin_src sh
+curl https://api.ohmygpt.com/v1/chat/completions \
+-H "Content-Type: application/json" \
+-H 'Authorization: Bearer XXX' \
+-d '{
+"messages": [
+{
+"role": "user",
+"content": "写一个10个字的笑话"
+}
+],
+"seed": 1,
+"model": "gpt-4o-mini"
+}'
+#+end_src
+
+标准答案，且不会变：为什么鱼不说话？因为它们水里！

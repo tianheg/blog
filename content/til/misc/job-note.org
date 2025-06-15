@@ -1,0 +1,63 @@
+* job-note
+:PROPERTIES:
+:CUSTOM_ID: job-note
+:END:
+​## 00-ali-player
+
+做一个后端上传页面
+
+待确认的问题：
+
+1. 上传的文件需要保存到服务器上吗？
+
+```js // 显示 submit 之后的参数 window.location.search.replace(/^\?/, '') ```
+
+想把 image.src 给替换掉，结果还是不行。
+
+```js /// [[https://stackoverflow.com/a/14693928]] let vars = {};
+
+function getUrlVars() { window.location.href.replace( /[?&]+([^=&]+)=([^&]*)/gi, function (m, key, value) { vars[key] = value; } ); return vars; }
+
+getUrlVars(); var image = document.getElementById('mainImg'); var nameCard = document.getElementById('nameCard'); image.src = window.location.href.match(/(.+)(\?)(.+)/)[1] + 'textures/' + vars['framePreview1'] nameCard.src = window.location.href.match(/(.+)(\?)(.+)/)[1] + 'textures/' + vars['framePreview2'] ```
+
+终于搞定了第二个Frame。
+
+到第三个的时候视频的替换遇到阻碍：视频的 src 链接换过来了，但视频却不是期待的视频。
+
+试了这个仓库 [[https://github.com/LM-01/video_resizer]] ，想把视频资源变小一些。但是我发现，直接手机拍出来的就已经符合大小要求了。
+
+​## 第 4 个尝试
+
+音频文件没能用第 3 个尝试做出来。出现一个警告：
+
+```sh THREE.WebGLRenderer: Texture marked for update but image is incomplete three.module.js:21236:13 ```
+
+播放音频没有声音
+
+但是做出来的不符合要求，重新做。
+
+--------------
+
+要从用户的角度思考，我以前的做法有些取巧。
+
+[[https://github.com/richardgirges/express-fileupload#readme]]
+
+最好放到当前页面的 frame 里。
+
+看过的内容：
+
+1. PHP 写的文件上传到服务器的简单程序 [[https://www.youtube.com/watch?v=EEfXGYxIegA]]
+2. 用到了 URL.createObjectURL 创建文件数据 URL [[https://www.youtube.com/watch?v=DhqN_fGoZgI]]
+3. 用到了 FIleReader 构造函数 [[https://www.youtube.com/watch?v=VElnT8EoEEM]]
+4. 搜索结果里有提及 Ajax、POST
+5. 使用了 Expressjs 把文件放到文件夹里 [[https://refine.dev/blog/how-to-multipart-upload/]]
+6. 在网站中处理 File [[https://developer.mozilla.org/en-US/docs/Web/API/File_API/Using_files_from_web_applications]]
+7. [[https://www.a11yproject.com/posts/how-to-hide-content/]] 如何在网页中隐藏内容
+8. passing form data to another HTML page [[https://stackoverflow.com/a/14693871]]
+9. JavaScript query string [[https://stackoverflow.com/q/647259]]
+10. maintain state between pages [[https://stackoverflow.com/a/12183659]]
+11. 移除 form 上传文件跳转链接中 ? 后面的部分 [[https://www.geeksforgeeks.org/how-to-remove-portion-of-a-string-after-certain-character-in-javascript/]]
+12. Three.js Update Texture image [[https://stackoverflow.com/q/18436431]]
+13. three.js 官方文档：How to update things [[https://threejs.org/docs/#manual/en/introduction/How-to-update-things]]
+14. Play audio without sound [[https://discourse.threejs.org/t/play-audio-without-sound/30171]]
+15. [[https://developer.mozilla.org/en-US/docs/Web/HTML/Element/iframe]] MDN | <frame>

@@ -1,0 +1,120 @@
+* nginx-reverse-proxy-docker
+:PROPERTIES:
+:CUSTOM_ID: nginx-reverse-proxy-docker
+:END:
+1.Create nginx-proxy network
+
+```sh docker network create nginx-proxy ``` 2.Install nging-proxy and [`nginxproxy/acme-companion`]([[https://hub.docker.com/r/nginxproxy/acme-companion]]) with docker-compose
+
+```yml version: "3"
+
+services: nginx-proxy: image: nginxproxy/nginx-[[proxy:alpine]] container_{name}: nginx-proxy ports:
+
+- "80:80"
+- "443:443"
+
+volumes:
+
+- /var/run/docker.sock:/tmp/docker.sock:ro
+- certs:/etc/nginx/certs:ro
+- conf:/etc/nginx/conf.d
+- vhost:/etc/nginx/vhost.d
+- html:/usr/share/nginx/html
+
+restart: always environment:
+
+- VIRTUAL_{PROTO}=https
+- VIRTUAL_{PORT}=443
+
+acme-companion: image: nginxproxy/acme-companion container_{name}: nginx-proxy-acme depends_{on}:
+
+- nginx-proxy
+
+volumes:
+
+- vhost:/etc/nginx/vhost.d
+- html:/usr/share/nginx/html
+- certs:/etc/nginx/certs:rw
+- acme:/etc/acme.sh
+- /var/run/docker.sock:/var/run/docker.sock:ro
+
+network_{mode}: bridge environment:
+
+- DEFAULT_{EMAIL}=me@tianheg.xyz
+- NGINX_{PROXYCONTAINER}=nginx-proxy
+
+restart: always
+
+volumes: conf: vhost: html: certs: acme:
+
+networks: default: name: nginx-proxy ```
+
+3.Run nginx-proxy, acme-companion
+
+```sh docker-compose up -d ``` 4.Configure Docker Hugo ```yml version: "3.9"
+
+services: nginx: image: nginx:stable volumes:
+
+- /home/www/public:/usr/share/nginx/html
+
+expose:
+
+- 80
+- 443
+
+environment:
+
+- VIRTUAL_{HOST}=www.yidajiabei.xyz
+- LETSENCRYPT_{HOST}=www.yidajiabei.xyz
+
+blog: image: tianheg/hugo:0.98.0 volumes:
+
+- '/home/www:/home/git'
+- '/home/www/public:/output'
+
+environment:
+
+- HUGO_{BASEURL}=[[https://www.yidajiabei.xyz/]]
+
+networks: default: name: nginx-proxy ```
+
+I want to redirect `yidajiabei.xyz` to `www.yidajiabei.xyz`; already `http` to `https` with setting `VIRTUAL_{HOST}=www.yidajiabei.xyz,yidajiabei.xyz` and `LETSENCRYPT_{HOST}=www.yidajiabei.xyz,yidajiabei.xyz`. Put it away for now.
+
+5.Configure Docker MediaWiki(Didn't work for now 2022-05-10)
+
+```yml version: "3.9"
+
+services: mediawiki: image: mediawiki restart: always links:
+
+- database
+
+volumes:
+
+- /var/www/html/images
+
+​#- ./LocalSettings.php:/var/www/html/LocalSettings.php expose:
+
+- 8080
+
+environment:
+
+- VIRTUAL_{HOST}=wiki.yidajiabei.xyz
+- VIRTUAL_{PORT}=8080
+- LETSENCRYPT_{HOST}=wiki.yidajiabei.xyz
+
+database: image: mariadb restart: always environment:
+
+MYSQL_{DATABASE}: my_{wiki} MYSQL_{USER}: wikiuser MYSQL_{PASSWORD}: example MARIADB_{ROOTPASSWORD}: root
+
+networks: default: name: nginx-proxy ```
+
+refer
+
+1. [[https://hub.docker.com/r/nginxproxy/nginx-proxy]] || [[https://github.com/nginx-proxy/nginx-proxy]]
+2. [[https://hub.docker.com/r/jwilder/docker-gen]] || [[https://github.com/nginx-proxy/docker-gen]]
+3. [[https://blog.ssdnodes.com/blog/host-multiple-websites-docker-nginx/]]
+4. [[https://blog.florianlopes.io/host-multiple-websites-on-single-host-docker/]]
+5. [[https://ssl-config.mozilla.org/]]
+6. [[https://github.com/buchdag/letsencrypt-nginx-proxy-companion-compose/blob/0d3a26ed4f06aabe38576f74c4e83dc3b48f3309/2-containers/compose-v3/labels/docker-compose.yaml]]
+7. [[https://hub.docker.com/_/mediawiki]]
+8. [[https://docs.docker.com/compose/networking/]]

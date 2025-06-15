@@ -1,0 +1,73 @@
+* Some cold knowledge about Email
+:PROPERTIES:
+:CUSTOM_ID: some-cold-knowledge-about-email
+:END:
+https://quail.ink/lyric/p/some-cold-knowledge-about-email
+
+** Many, many people misspell their own email addresses
+:PROPERTIES:
+:CUSTOM_ID: many-many-people-misspell-their-own-email-addresses
+:END:
+Common mistakes include:
+
+- Write =.com= as =.con= , =.cmo= , =.cm= , =.comm=
+- Write =gmail= as =gmial= , =gmal= , =gmmail= , =gmil= , =gnail=
+- Write =qq.com= as =q.com= , =qq.cn=
+
+All of these situations are obviously unable to receive emails. Because once these situations are identified, there will be no attempt to send out emails, naturally resulting in not receiving them.
+
+In addition, there are also cases where people misspell their own email prefixes (the part before the @ symbol). Some of these cases can be identified, and it can also result in not receiving emails.
+
+** The recipient's email address also has a rating
+:PROPERTIES:
+:CUSTOM_ID: the-recipients-email-address-also-has-a-rating
+:END:
+Many email delivery services provide Email Validation services. For example, Sendgrid and Mailgun, which are used by Quail. Taking Sendgrid as an example, providing an email address can yield the following judgments:
+
+1. Determine if this address can send emails: can send, risky, do not send
+2. Score: When the address is identified as "risky", the lower the score, the higher the risk. If the risk is high, the email may not be sent.
+3. Detailed information, including but not limited to the following reasons:
+   - No MX record configured
+   - It is a disposable address (mentioned below)
+   - This email has previously rejected emails
+   - The domain name is very rare
+   - The domain name is too new
+   - A lot of spam emails have been sent under this domain
+   - Top-level domains carry risks (which will be discussed below)
+   - Email does not exist (commonly seen when one misspells their own email)
+
+So not only will the person sending the email be rated, but the person receiving the email will also be rated.
+
+** Using a special domain name will lower the credibility of the email
+:PROPERTIES:
+:CUSTOM_ID: using-a-special-domain-name-will-lower-the-credibility-of-the-email
+:END:
+Now there are many trendy domain names, such as =.xyz= , =.cf= , =.cloud= , and so on.
+
+Using these domain names as your email domain carries a certain level of risk.
+
+Some domain names have a relatively high overall risk. If the email configuration is not set properly, or if the corresponding website of the domain name is not well managed, or if TLS is not implemented, it may be considered high risk by some email verification services and therefore be rejected by email services.
+
+Because email services (such as Quail) need to maintain the reputation of their sending service, they may choose not to send emails to these addresses that are considered high risk.
+
+** Use temporary email
+:PROPERTIES:
+:CUSTOM_ID: use-temporary-email
+:END:
+There are many temporary email and temporary phone number services available online now. If you use them to register, you may not receive emails or text messages.
+
+Because these can also be detected. It is also for the sake of maintaining the reputation of our own email service that we will not send emails to these addresses (Quail is one of them). Because sending them would be meaningless.
+
+** Email relay services are considered to be low to medium risk
+:PROPERTIES:
+:CUSTOM_ID: email-relay-services-are-considered-to-be-low-to-medium-risk
+:END:
+Typical examples include =kill-the-newsletter.com= , =readwise.io= , =omnivore.app= , =ino.to= , and Apple's =privaterelay.appleid.com= . It's not that they are bad, but they are indeed considered as medium to low risk by the mentioned validation, resulting in a lower score.
+
+If the email service has its own risk control strategy, because this type of service has a higher risk level, you may not receive the email.
+
+** Many people's mailboxes are full
+:PROPERTIES:
+:CUSTOM_ID: many-peoples-mailboxes-are-full
+:END:
+It sounds a bit unbelievable, but these days, can email accounts actually get full? Based on the sending situation, I have found that some people's email accounts are already full... Naturally, they won't be able to receive any emails.

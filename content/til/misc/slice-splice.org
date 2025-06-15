@@ -1,0 +1,24 @@
+* slice-splice
+:PROPERTIES:
+:CUSTOM_ID: slice-splice
+:END:
+1. [Basic Algorithm Scripting: Slice and Splice | freeCodeCamp.org]([[https://www.freecodecamp.org/learn/javascript-algorithms-and-data-structures/basic-algorithm-scripting/slice-and-splice]])
+2. [freeCodeCamp Challenge Guide: Slice and Splice - Guide - The freeCodeCamp Forum]([[https://forum.freecodecamp.org/t/freecodecamp-challenge-guide-slice-and-splice/301148]])
+
+有两个数组和一个索引数字 n。将第一个数组插入第二个数组的 n 位置。两个原始数组保持原样，仅输出变化后的数组。
+
+如果把一个数组的元素放进另一个数组？可以用 `Array.prototype.concat()`。再配合 `slice()` 进行截取。
+
+发现了 `splice`。用 `splice()` 插入第一个数组，然后用 `slice()` 让被改变的原始数组恢复原状。
+
+1. 要在函数中创建一个第二个数组的复制，这样可以保证原始数组不变 `slice()` Shallow Copy
+
+```js function frankenSplice(arr1, arr2, n) { const arr3 = arr2.slice() arr3.splice(n, 0, ...arr1) return arr3 }
+
+console.log(frankenSplice([1, 2, 3], [4, 5, 6], 1)) ```
+
+```js function frankenSplice(arr1, arr2, n) { const arr3 = arr2.slice() arr3.splice(n, 0, arr1) return arr3.flat() }
+
+console.log(frankenSplice([1, 2, 3], [4, 5, 6], 1)) ```
+
+```js function frankenSplice(arr1, arr2, n) { // It's alive. It's alive! let localArray = arr2.slice() for (let i = 0; i < arr1.length; i++) { localArray.splice(n, 0, arr1[i]) n++ } return localArray } ```

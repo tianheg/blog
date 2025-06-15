@@ -1,0 +1,37 @@
+* git-github-act
+:PROPERTIES:
+:CUSTOM_ID: git-github-act
+:END:
+[nektos/act: Run your GitHub Actions locally 🚀]([[https://github.com/nektos/act]])
+
+​## 配置
+
+```bash
+
+yay -S act act
+
+```
+
+​## 使用
+
+```bash
+
+act [<event>] [options] If no event name passed, will default to "on: push"
+
+act -l
+
+act workflow_{dispatch} -l
+
+act
+
+act pull_{request}
+
+act -j test
+
+act -n
+
+act -v ```
+
+在 GitHub 上运行 Actions 时，`GITHUB_{TOKEN}` 是自动生成的，本地运行则需要添加：
+
+```bash act -s GITHUB_{TOKEN}=[insert token or leave blank for secure input] ```

@@ -1,0 +1,16 @@
+* steamroller
+:PROPERTIES:
+:CUSTOM_ID: steamroller
+:END:
+1. [Intermediate Algorithm Scripting: Steamroller | freeCodeCamp.org]([[https://www.freecodecamp.org/learn/javascript-algorithms-and-data-structures/intermediate-algorithm-scripting/steamroller]])
+2. [freeCodeCamp Challenge Guide: Steamroller - Guide - The freeCodeCamp Forum]([[https://forum.freecodecamp.org/t/freecodecamp-challenge-guide-steamroller/16079]])
+
+```js function steamrollArray(arr) { return flatDeep(arr, Infinity) } function flatDeep(arr, d = 1) { return d > 0 ? arr.reduce( (acc, val) => acc.concat(Array.isArray(val) ? flatDeep(val, d - 1) : val), [], )
+
+#+begin_example
+arr.slice()
+#+end_example
+
+}
+
+console.log(steamrollArray([/'a'/, /'b'/])) // [[https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array/flat#reduce_concat_isarray_recursivity]] ```
