@@ -1,0 +1,9 @@
+* PVE: Upgrade
+
+#+BEGIN_SRC sh
+pveversion
+apt-get update && apt-get upgrade
+# make sure use a mirror repo at /etc/apt/sources.list.d/pve-enterprise.list
+apt-get dist-upgrade
+reboot
+#+END_SRC
