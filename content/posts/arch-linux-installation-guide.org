@@ -3,32 +3,22 @@
 #+TAGS[]: 技术 Arch-Linux
 #+TOC: true
 
-在进行 Arch Linux 安装以前，可能需要了解一些关于 Linux 的知识，这些内容可通过中科大 Linux 用户协会编写的《[[https://101.lug.ustc.edu.cn/][Linux 101]]》了解，除此之外 ChatGPT & 搜索是你获取 Linux 知识的最好办法。
-
-表达说明（[[https://wiki.archlinux.org/title/Help:Reading#Root,_regular_user_or_another_user][来源]]）：
-
-如果命令开头是 =$= 说明普通用户可执行，如果命令开头是 =#= 说明用户执行该命令需要 root 权限。
-
-在烧录好的系统中，默认是 root 用户，所以可以执行所有命令。
-
-【准备安装】中的工作是在命令行下进行的。
-
 * 准备安装
 
-** 下载 *.iso 镜像
+** 下载镜像
 
 从[[https://archlinux.org/download/][官网 Download 页面]]提供的镜像站下载。然后[[https://wiki.archlinux.org/title/Installation_guide#Verify_signature][验证镜像]]。
 
-#+BEGIN_SRC txt
-$ gpg --keyserver-options auto-key-retrieve --verify archlinux-version-x86_64.iso.sig
+#+BEGIN_SRC sh
+gpg --keyserver-options auto-key-retrieve --verify archlinux-version-x86_64.iso.sig
 #+END_SRC
 
 ** 制作启动盘
 
 可能的 USB ID：usb-SMI_USB_DISK-0:0，不要在后面加上形似 -part1 的内容（[[https://wiki.archlinux.org/title/USB_flash_installation_medium#Using_basic_command_line_utilities][参考]]）。
 
-#+BEGIN_SRC txt
-# dd bs=4M if=archlinux-version-x86_64.iso of=/dev/disk/by-id/usb-* conv=fsync oflag=direct status=progress
+#+BEGIN_SRC sh
+cat path/to/archlinux-version-x86_64.iso > /dev/disk/by-id/usb-My_flash_drive
 #+END_SRC
 
 ** 更改 BIOS 设置——关闭安全启动
@@ -47,8 +37,8 @@ $ gpg --keyserver-options auto-key-retrieve --verify archlinux-version-x86_64.is
 
 把烧录好系统的 U 盘，通过 USB 接口插到主机上，启动后会看到 Arch Linux 的安装界面。选择默认的第一个按下回车。接下来的所有过程都是通过命令行进行操作，而这正是 Arch Linux 富有魅力的地方。
 
-#+BEGIN_SRC txt
-# cat /sys/firmware/efi/fw_platform_size
+#+BEGIN_SRC sh
+cat /sys/firmware/efi/fw_platform_size
 #+END_SRC
 
 有输出，说明启动模式为 UEFI。
@@ -66,7 +56,7 @@ $ gpg --keyserver-options auto-key-retrieve --verify archlinux-version-x86_64.is
 然后验证是否连接网络：
 
 #+BEGIN_SRC txt
-# ping archlinux.org -c 3
+ping archlinux.org -c 3
 #+END_SRC
 
 0% packet loss 说明网络正常。
@@ -79,36 +69,36 @@ $ gpg --keyserver-options auto-key-retrieve --verify archlinux-version-x86_64.is
 
 使用的是 fdisk。
 
-#+BEGIN_SRC txt
-# fdisk -l
-# fdisk /dev/sdX
+#+BEGIN_SRC sh
+# 查看硬盘信息
+fdisk -l
+# 固态硬盘分区，X 会因为插入硬盘类型不同，而变为不同字母，比如 /dev/sda
+fdisk /dev/sdX
+# 进入 fdisk 操作界面后，需要创建至少两个分区，一个是系统启动的引导分区（分区类型为 EFI System），一个是剩下的存储空间（分区类型为 Linux filesystem）。还可能有一个 swap 分区，用于物理内存不够时使用
 #+END_SRC
 
-1. =fdisk -l= 查看硬盘信息
-2. =fdisk /dev/sdX= 固态硬盘分区，X 会因为插入硬盘类型不同，而变为不同字母，比如 =/dev/sda=
-
-进入 fdisk 操作界面后，需要创建至少两个分区，一个是系统启动的引导分区（分区类型为 EFI System），一个是剩下的存储空间（分区类型为 Linux filesystem）。还可能有一个 swap 分区，用于物理内存不够时使用（[[https://web.archive.org/web/20211202130113/https://bbs.archlinuxcn.org/viewtopic.php?id=10472][by 依云]]），更深的关于 swap 的解释（[[https://farseerfc.me/zhs/followup-about-swap.html][by farseerfc]]）。
+以下是分区命令：
 
 - m 查看命令帮助
 - p 显示目标硬盘分区
 - g 新建 GPT 分区表
-- 创建 sdX1 分区，n 创建分区、分区序号、类型起始扇区默认，结束扇区 +256M（这个根据自己需要更改大小）。t 修改分区类型，1 为 EFI System，p 确认为 EFI System
-- 创建 sdX2 分区，全部默认，分区类型为 Linux filesystem。
+- 创建 sdX1 分区，n 创建分区、分区序号、类型起始扇区默认，结束扇区 +1G。t 修改分区类型，1 为 EFI System，p 确认为 EFI System
+- 创建 sdX2 分区，全部默认，分区类型为 Linux filesystem
 - w 写入硬盘
 
 分区结果：
 
 #+BEGIN_SRC txt
 Device      Start       End   Sectors  Size Type
-/dev/sdX1    2048    526335    524288  256M EFI System
-/dev/sda2  526336 250069646 249543311  119G Linux filesystem
+/dev/sda1     2048    2099199    2097152     1G EFI System
+/dev/sda2  2099200 1953523711 1951424512 930.5G Linux filesystem
 #+END_SRC
 
 ** 硬盘格式化、新建文件系统
 
-#+BEGIN_SRC txt
-# mkfs.fat -F32 /dev/sdX1
-# mkfs.ext4 /dev/sdX2
+#+BEGIN_SRC sh
+mkfs.fat -F32 /dev/sdX1
+mkfs.ext4 /dev/sdX2
 #+END_SRC
 
 ** 挂载分区
@@ -125,22 +115,18 @@ mount /dev/sdX1 /mnt/boot
 
 从官网[[https://archlinux.org/mirrorlist/?country=CN&protocol=https&ip_version=4&use_mirror_status=on][地址]]可以看到，为中国用户设置的 Arch Linux 镜像地址。这是按照镜像得分进行排序的。
 
-#+BEGIN_SRC txt
-# reflector --save /etc/pacman.d/mirrorlist --country CN --protocol https --latest 10 --sort rate
+#+BEGIN_SRC sh
+reflector --save /etc/pacman.d/mirrorlist --country CN --protocol https --latest 10 --sort rate
 #+END_SRC
 
-使用 reflector 将最近同步的中国镜像按速率排序，保存在配置文件中，使用的是加密的 HTTPS 协议
+使用 reflector 将最近同步的中国镜像按速率排序，保存在配置文件中，使用的是加密的 HTTPS 协议。
 
 ** 安装关键包
 
-#+BEGIN_SRC txt
-# pacstrap -K /mnt base base-devel linux linux-firmware intel-ucode git vim
-#+END_SRC
-
-- pacstrap 在安装上述包时会初始化根目录 /mnt，会在 /mnt 目录中创建 Linux 的文件目录
-
-#+BEGIN_SRC txt
-bin/  boot/  dev/  etc/  home/  lib/  lib64/  mnt/  opt/  proc/  root/  run/  sbin/  srv/  sys/  tmp/  usr/  var/
+#+BEGIN_SRC sh
+# pacstrap 在安装上述包时会初始化根目录 /mnt，会在 /mnt 目录中创建 Linux 的文件目录
+pacstrap -K /mnt base base-devel linux linux-firmware intel-ucode git vim
+## bin/  boot/  dev/  etc/  home/  lib/  lib64/  mnt/  opt/  proc/  root/  run/  sbin/  srv/  sys/  tmp/  usr/  var/
 #+END_SRC
 
 - -K 的作用：不复制启动盘中的 pacman keyring，初始化空的 pacman keyring
@@ -154,14 +140,17 @@ bin/  boot/  dev/  etc/  home/  lib/  lib64/  mnt/  opt/  proc/  root/  run/  sb
 ** 生成挂载表
 
 #+BEGIN_SRC txt
-# genfstab -U -p /mnt >> /mnt/etc/fstab
-# cat /mnt/etc/fstab
+genfstab -U -p /mnt >> /mnt/etc/fstab
+# 把第2块硬盘也挂载
+vim /mnt/etc/fstab
+## UUID=16519c74-08f6-4101-a9bd-9d23c2148aa5       /mnt/second-disk   ext4   rw,relatime     0 2
+cat /mnt/etc/fstab
 #+END_SRC
 
 ** 进入硬盘，而不在启动 U 盘
 
-#+BEGIN_SRC txt
-# arch-chroot /mnt
+#+BEGIN_SRC sh
+arch-chroot /mnt
 #+END_SRC
 
 ** 时间
@@ -173,38 +162,37 @@ ln -sf /usr/share/zoneinfo/Asia/Hong_Kong /etc/localtime
 hwclock --systohc --utc
 #+END_SRC
 
-** 本地化（配置系统语言）
-
-#+BEGIN_SRC txt
-# vim /etc/locale.gen
-## press '/', input 'en_US', cursor will appear at the right position
-## 'zh_CN' same with above
-#+END_SRC
-
-在 locale.gen 中取消注释：
-
-#+BEGIN_SRC conf
-en_US.UTF-8 UTF-8
-...
-zh_CN.UTF-8 UTF-8
-#+END_SRC
-
-生成配置：
-
-#+BEGIN_SRC txt
-# locale-gen
-#+END_SRC
-
-设置本地语言环境:
+** 本地化（配置系统语言+安装字体输入法）
 
 #+BEGIN_SRC sh
+# 在 locale.gen 中取消注释：en_US.UTF-8 UTF-8，zh_CN.UTF-8 UTF-8
+vim /etc/locale.gen
+# 生成配置
+locale-gen
+# 设置本地语言环境， LANG=en_US.UTF-8
 vim /etc/locale.conf
+# 字体
+pacman -S noto-fonts noto-fonts-emoji noto-fonts-cjk adobe-source-han-sans-cn-fonts adobe-source-han-serif-cn-fonts otf-monaspace-nerd nerd-fonts-fontconfig
+fc-cache -fv
+# 输入法
+pacman -S fcitx5-im fcitx5-chinese-addons fcitx5-pinyin-zhwiki fcitx5-material-color fcitx5-rime rime-ice
 #+END_SRC
 
-在 locale.conf 中输入：
+添加对 gtk，qt 类（指通过 gtk、qt 编程得到的软件）软件的支持：
 
-#+BEGIN_SRC conf
-LANG=en_US.UTF-8
+#+BEGIN_SRC sh
+# /etc/profile
+export XMODIFIERS="@im=fcitx"
+export GTK_IM_MODULE="fcitx"
+export QT_IM_MODULE="fcitx"
+#+END_SRC
+
+Rime 配置（ =~/.local/share/fcitx5/rime/default.custom.yaml= ）：
+
+#+BEGIN_SRC yaml
+patch:
+  schema_list:
+    - schema: rime_ice
 #+END_SRC
 
 ** 网络配置
@@ -212,8 +200,7 @@ LANG=en_US.UTF-8
 一、主机名
 
 #+BEGIN_SRC txt
-# echo arch > /etc/hostname
-## change 'arch' to anything if you want
+echo arch > /etc/hostname
 #+END_SRC
 
 二、Hosts
@@ -229,29 +216,29 @@ LANG=en_US.UTF-8
 三、使用 NetworkManager 管理网络
 
 #+BEGIN_SRC txt
-# pacman -S networkmanager
-# systemctl enable NetworkManager
+pacman -S networkmanager
+systemctl enable NetworkManager
 #+END_SRC
 
 ** 用户相关
 
 一、更改 root 密码
 
-#+BEGIN_SRC txt
-# passwd
+#+BEGIN_SRC sh
+passwd
 #+END_SRC
 
 二、新建用户，设置用户密码
 
-#+BEGIN_SRC txt
-# useradd -m -g users -G wheel -s /bin/bash archie
-# passwd archie
+#+BEGIN_SRC sh
+useradd -m -g users -G wheel -s /bin/bash archie
+passwd archie
 #+END_SRC
 
 三、设置用户权限
 
 #+BEGIN_SRC txt
-# EDITOR=vim visudo
+EDITOR=vim visudo
 #+END_SRC
 
 取消注释：
@@ -268,10 +255,10 @@ LANG=en_US.UTF-8
 
 ** 安装引导程序
 
-#+BEGIN_SRC txt
-# pacman -S grub efibootmgr
-# grub-install --target=x86_64-efi --efi-directory=/boot --bootloader-id=GRUB
-# grub-mkconfig -o /boot/grub/grub.cfg
+#+BEGIN_SRC sh
+pacman -S grub efibootmgr
+grub-install --target=x86_64-efi --efi-directory=/boot --bootloader-id=GRUB
+grub-mkconfig -o /boot/grub/grub.cfg
 #+END_SRC
 
 运行 grub-mkconfig 操作时，会出现警告： =Warning: os-prober will not be executed to detect other bootable partitions.= 。如果不是双系统，不用关注这个警告。
@@ -280,31 +267,22 @@ LANG=en_US.UTF-8
 
 ** 返回 U 盘
 
-#+BEGIN_SRC txt
-# exit
+#+BEGIN_SRC sh
+exit
 #+END_SRC
 
 ** 重启系统
 
-#+BEGIN_SRC txt
-# umount -R /mnt
-# reboot
+#+BEGIN_SRC sh
+umount -R /mnt
+reboot
 #+END_SRC
 
 开机后改动 BIOS，配置「系统启动」后，拔掉 U 盘。普通用户 archie 登录。
 
 ** 安装 KDE
 
-#+BEGIN_SRC txt
-# pacman -S plasma-meta plasma-wayland-session konsole dolphin
-# systemctl enable sddm
+#+BEGIN_SRC sh
+pacman -S plasma-meta konsole dolphin
+systemctl enable sddm
 #+END_SRC
-
-* 参考资料
-
-- [[https://wiki.archlinux.org/title/Installation_guide][Installation guide - ArchWiki]]
-- [[https://io-oi.me/tech/hello-arch-linux/][Hello, Arch Linux!]]
-
------
-
-如果你对 Arch Linux 感兴趣，按照我的教程安装出现了问题，欢迎向我求助。关于求助费用的问题，见[[/service][咨询服务]]页面。
