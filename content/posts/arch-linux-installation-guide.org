@@ -55,7 +55,7 @@ cat /sys/firmware/efi/fw_platform_size
 
 然后验证是否连接网络：
 
-#+BEGIN_SRC txt
+#+BEGIN_SRC sh
 ping archlinux.org -c 3
 #+END_SRC
 
@@ -88,7 +88,7 @@ fdisk /dev/sdX
 
 分区结果：
 
-#+BEGIN_SRC txt
+#+BEGIN_SRC sh
 Device      Start       End   Sectors  Size Type
 /dev/sda1     2048    2099199    2097152     1G EFI System
 /dev/sda2  2099200 1953523711 1951424512 930.5G Linux filesystem
@@ -139,7 +139,7 @@ pacstrap -K /mnt base base-devel linux linux-firmware intel-ucode git vim
 
 ** 生成挂载表
 
-#+BEGIN_SRC txt
+#+BEGIN_SRC sh
 genfstab -U -p /mnt >> /mnt/etc/fstab
 # 把第2块硬盘也挂载
 vim /mnt/etc/fstab
@@ -162,7 +162,7 @@ ln -sf /usr/share/zoneinfo/Asia/Hong_Kong /etc/localtime
 hwclock --systohc --utc
 #+END_SRC
 
-** 本地化（配置系统语言+安装字体输入法）
+** 本地化（配置系统语言+安装字体、输入法）
 
 #+BEGIN_SRC sh
 # 在 locale.gen 中取消注释：en_US.UTF-8 UTF-8，zh_CN.UTF-8 UTF-8
@@ -182,9 +182,9 @@ pacman -S fcitx5-im fcitx5-chinese-addons fcitx5-pinyin-zhwiki fcitx5-material-c
 
 #+BEGIN_SRC sh
 # /etc/profile
-export XMODIFIERS="@im=fcitx"
-export GTK_IM_MODULE="fcitx"
-export QT_IM_MODULE="fcitx"
+export XMODIFIERS="@im=fcitx5"
+export GTK_IM_MODULE="fcitx5"
+export QT_IM_MODULE="fcitx5"
 #+END_SRC
 
 Rime 配置（ =~/.local/share/fcitx5/rime/default.custom.yaml= ）：
@@ -195,11 +195,25 @@ patch:
     - schema: rime_ice
 #+END_SRC
 
+*** KDE Font Viewer
+
+在 Wayland 环境下无法使用（未来在 KDE Plasma 6 修复）。
+
+https://ask.fedoraproject.org/t/problem-with-kde-font-viewer/13932
+
+This major bug occurs when running under Wayland. A workaround is to set =QT_QPA_PLATFORM=xcb= before starting kfontview so that it runs under X11/XWayland, see [[https://bugs.kde.org/show_bug.cgi?id=439470][KDE bug 439470]].
+
+在命令行使用 KDE Font Viewer：
+
+#+BEGIN_SRC sh
+QT_QPA_PLATFORM=xcb kfontview
+#+END_SRC
+
 ** 网络配置
 
 一、主机名
 
-#+BEGIN_SRC txt
+#+BEGIN_SRC sh
 echo arch > /etc/hostname
 #+END_SRC
 
@@ -215,7 +229,7 @@ echo arch > /etc/hostname
 
 三、使用 NetworkManager 管理网络
 
-#+BEGIN_SRC txt
+#+BEGIN_SRC sh
 pacman -S networkmanager
 systemctl enable NetworkManager
 #+END_SRC
@@ -237,7 +251,7 @@ passwd archie
 
 三、设置用户权限
 
-#+BEGIN_SRC txt
+#+BEGIN_SRC sh
 EDITOR=vim visudo
 #+END_SRC
 
@@ -286,3 +300,614 @@ reboot
 pacman -S plasma-meta konsole dolphin
 systemctl enable sddm
 #+END_SRC
+
+** 隐藏 GRUB 加载
+
+[[https://www.reddit.com/r/linux4noobs/comments/5372gj/comment/d7qjh6s/]]
+
+#+BEGIN_SRC sh
+vim /etc/default/grub
+grub-mkconfig -o /boot/grub/grub.cfg
+#+END_SRC
+
+修改 =/etc/default/grub= ：
+
+#+BEGIN_SRC diff
+-GRUB_TIMEOUT=1
++GRUB_TIMEOUT=0
+#+END_SRC
+
+** Reflector 更新镜像
+
+[[https://wiki.archlinux.org/title/reflector]]
+
+一、开机自动执行
+
+=/etc/xdg/reflector/reflector.conf= ：
+
+#+BEGIN_SRC conf
+--save /etc/pacman.d/mirrorlist
+--country China
+--protocol https
+--latest 5
+#+END_SRC
+
+#+BEGIN_SRC sh
+systemctl enable reflector
+systemctl start reflector
+vim /usr/lib/systemd/system/reflector.service
+#+END_SRC
+
+二、通过 Pacman hook 自动化以上步骤
+
+这样每次升级软件包时，都会自动更新软件镜像。
+
+=/etc/pacman.d/hooks/mirrorupgrade.hook= ：
+
+#+BEGIN_SRC hook
+[Trigger]
+Operation = Upgrade
+Type = Package
+Target = pacman-mirrorlist
+
+[Action]
+Description = Updating pacman-mirrorlist with reflector and removing pacnew...
+When = PostTransaction
+Depends = reflector
+Exec = /bin/sh -c 'systemctl start reflector.service; [ -f /etc/pacman.d/mirrorlist.pacnew ] && rm /etc/pacman.d/mirrorlist.pacnew'
+#+END_SRC
+
+** 蓝牙
+
+#+BEGIN_SRC sh
+systemctl enable --now bluetooth
+#+END_SRC
+
+无法添加蓝牙耳机
+
+#+BEGIN_SRC log
+# 来自 bluetooth.service 的 systemd log
+# ConfigurationDirectory 'bluetooth' already exists but the mode is different. (File system: 755 ConfigurationDirectoryMode: 555)
+# src/device.c:device_set_wake_support() Unable to set wake_support without RPA resolution
+# src/adapter.c:set_device_privacy_complete() Set device flags return status: Invalid Parameters
+#+END_SRC
+
+经过搜索发现一些人遇到过[[https://bbs.archlinux.org/viewtopic.php?id=270465][类似问题]]。
+
+#+BEGIN_SRC sh
+# dmesg | grep Bluetooth 输出
+[    2.357525] usb 1-8: Product: Bluetooth Radio
+[    3.057353] Bluetooth: Core ver 2.22
+[    3.057403] Bluetooth: HCI device and connection manager initialized
+[    3.057410] Bluetooth: HCI socket layer initialized
+[    3.057413] Bluetooth: L2CAP socket layer initialized
+[    3.057420] Bluetooth: SCO socket layer initialized
+[    3.716563] Bluetooth: hci0: RTL: examining hci_ver=08 hci_rev=000c lmp_ver=08 lmp_subver=8821
+[    3.717200] Bluetooth: hci0: RTL: rom_version status=0 version=1
+[    3.717204] Bluetooth: hci0: RTL: loading rtl_bt/rtl8821c_fw.bin
+[    3.722382] Bluetooth: hci0: RTL: loading rtl_bt/rtl8821c_config.bin
+[    3.723300] Bluetooth: hci0: RTL: cfg_sz 10, total sz 31990
+[    4.174265] Bluetooth: hci0: RTL: fw version 0x829a7644
+[    5.868007] Bluetooth: BNEP (Ethernet Emulation) ver 1.3
+[    5.868012] Bluetooth: BNEP filters: protocol multicast
+[    5.868017] Bluetooth: BNEP socket layer initialized
+[    6.136304] Bluetooth: hci0: Bad flag given (0x2) vs supported (0x1)
+[   17.200632] Bluetooth: RFCOMM TTY layer initialized
+[   17.200645] Bluetooth: RFCOMM socket layer initialized
+[   17.200654] Bluetooth: RFCOMM ver 1.11
+[   32.473238] Bluetooth: hci0: unexpected cc 0x0c7c length: 1 < 3
+[  962.089278] Bluetooth: hci0: Bad flag given (0x2) vs supported (0x1)
+[  971.016364] Bluetooth: hci0: unexpected cc 0x0c7c length: 1 < 3
+#+END_SRC
+
+之后按照[[https://bbs.archlinux.org/viewtopic.php?pid=2005851#p2005851][这里]]的说法，执行以下命令安装 bluedevil, bluez-utils, pulseaudio-bluetooth。重启之后问题解决了。
+
+#+BEGIN_SRC sh
+yay -Syyuu bluedevil bluez-utils pulseaudio-bluetooth
+#+END_SRC
+
+关于KDE的一些设置：
+
+- 关闭进入桌面动画
+- 更换锁屏主题
+- 安装variety自动更换桌面壁纸
+- 自启动一些app
+
+* emacs
+
+* vscode
+
+* konsole
+
+* 常用命令行工具
+
+* Git
+
+#+BEGIN_SRC sh
+pacman -S openssh
+wget -O ~/.gitconfig https://github.com/tianheg/dotfiles/raw/main/gitconfig
+# 不要忘记 commit.gpgsign true
+
+## SSH
+chmod 400 ~/.ssh/id_ed25519
+# 解决 sign_and_send_pubkey: signing failed for ED25519 "/home/user/.ssh/id_ed25519" from agent: agent refused operation; git@github.com: Permission denied (publickey).
+#+END_SRC
+
+** git-credential-oauth
+https://github.com/hickford/git-credential-oauth
+
+#+BEGIN_SRC sh
+## way 1
+export GCO_VERSION=0.7.0
+wget -q https://github.com/hickford/git-credential-oauth/releases/download/v${GCO_VERSION}/git-credential-oauth_${GCO_VERSION}_linux_amd64.tar.gz -O - | tar -xz -C .
+# three files: git-credential-oauth*  LICENSE.txt  README.md
+sudo mv git-credential-oauth /usr/local/bin
+
+## way 2
+yay -S git-credential-oauth
+
+### next step
+echo url=https://github.com | git credential fill # complete the authentication process
+#+END_SRC
+
+* GPG
+
+修改 =~/.gnupg/= 权限：
+
+#+BEGIN_SRC sh
+# https://superuser.com/a/954536 ; https://superuser.com/a/954639
+# Set ownership to your own user and primary group
+chown -R "$USER:$(id -gn)" ~/.gnupg
+# Set permissions to read, write, execute for only yourself, no others
+chmod 700 ~/.gnupg
+# Set permissions to read, write for only yourself, no others
+chmod 600 ~/.gnupg/*
+#+END_SRC
+
+这几条命令解决 =gpg: WARNING: unsafe permissions on homedir '/home/user/.gnupg'= 。
+
+*把 =~/.gnupg= 文件夹保存在安全的地方* ，然后导入 GitHub(user + web-flow)公匙：
+
+#+BEGIN_SRC sh
+wget -O tianheg-pubkeys.txt https://github.com/tianheg.gpg
+wget -O github-web-flow.txt https://github.com/web-flow.gpg
+gpg --import tianheg-pubkeys.txt
+gpg --import github-web-flow.txt
+#+END_SRC
+
+安装 seahorse 以防止每次 git commit 都要输入密码（不必麻烦，通过设置 =~/.gnupg/gpg-agent.conf= 可以延长密码时效）。
+
+#+BEGIN_SRC conf
+default-cache-ttl 28800
+max-cache-ttl 28800
+#+END_SRC
+
+* 键盘映射——Swap left ctrl with Caps Lock(Emacs)
+
+在 KDE 桌面环境下，有方便的系统设置菜单，可以设置键盘映射。
+
+* 声音
+
+[[https://wiki.archlinux.org/title/Sound_system]]
+
+用到的软件：ALSA（驱动接口）、PipeWire & PulseAudio（声音服务器）
+
+错误日志：
+
+#+BEGIN_SRC log
+vlcpulse audio output error: stream connection failure: Bad state
+main audio output error: module not functional
+main decoder error: failed to create audio output
+
+pulse audio output error: overflow, flushing
+
+pulseaudio[6402]: Failed to create sink input: sink is suspended.
+#+END_SRC
+
+我又试了一次下面的命令，竟然可以了！
+
+#+BEGIN_SRC sh
+pulseaudio -k
+# Kill a running daemon
+#+END_SRC
+
+目前问题未解决，声音时有时无。
+
+在 KDE 的音量设置界面，先设置成其他声卡输出，然后再设置成 Analog Stereo Duplex。可能有效果。
+
+=~/.config/pulse/default.pa= ：
+
+#+BEGIN_SRC pa
+.include /etc/pulse/default.pa
+
+set-default-source alsa_output.pci-0000_00_1f.3.analog-stereo.monitor
+set-card-profile alsa_card.pci-0000_00_1f.3 output:analog-stereo+input:analog-stereo
+set-default-sink alsa_output.pci-0000_00_1f.3.analog-stereo
+#+END_SRC
+
+根据 ArchWiki 进行上述配置。
+** pulseaudio
+
+问题：开机后播放音频没有声音
+
+解决办法：
+
+#+BEGIN_SRC sh
+killall pulseaudio
+#+END_SRC
+
+refer [[https://unix.stackexchange.com/a/171925]]
+
+* pacman
+
+** 添加 archlinuxcn
+
+添加库 =/etc/pacman.conf= ：
+
+#+BEGIN_SRC conf
+[archlinuxcn]
+Server = https://repo.archlinuxcn.org/$arch
+#+END_SRC
+
+导入 PGP 公匙（为了验证 archlinuxcn 库）：
+
+#+BEGIN_SRC sh
+pacman-key --lsign-key "farseerfc@archlinux.org" # for error: ...is marginal trust
+pacman -Syy && pacman -S archlinuxcn-keyring
+#+END_SRC
+
+** pacman 命令
+
+#+BEGIN_SRC sh
+## 常用
+pacman -Qe # List all explicitly installed packages
+pacman -Qet # list all packages explicitly installed and not required as dependencies
+pacman -Qent # List all explicitly installed native packages (i.e. present in the sync database) that are not direct or optional dependencies
+pacman -Qn # List all native packages (installed from the sync database(s))
+pacman -Qm # List all foreign packages (typically manually downloaded and installed or packages removed from the repositories)
+#+END_SRC
+
+** 应该避免执行的 pacman 指令
+
+#+BEGIN_SRC sh
+pacman -Sy # never run!!!
+pacman -Rdd package # never run!!!
+#+END_SRC
+
+在 Arch 中安装包时应避免没有升级系统就刷新包列表。这样做是为了避免出现依赖问题，比如，如果一个包被从官方仓库中移除，在进行包同步时就会报错。在实践中，不要执行 =pacman -Sy package_name= ，应该执行 =pacman -Syu package_name= 。
+
+** 执行 pacman 命令过程中，遇到的信息/警告/错误
+
+循环依赖：
+
+#+BEGIN_SRC sh
+warning: dependency cycle detected
+#+END_SRC
+
+执行 =sudo pacman -Syu= 时：
+
+#+BEGIN_SRC sh
+WARNING: Possibly missing firmware for module
+#+END_SRC
+
+这是一种警告。
+
+参考：
+
+1. [[https://wiki.archlinux.org/title/Mkinitcpio#Possibly_missing_firmware_for_module_XXXX]]
+2. [[https://arcolinuxforum.com/viewtopic.php?t=1174]]
+
+gpg: key 786C63F330D7CB92: no user ID for key signature packet of class
+10
+
+#+BEGIN_SRC sh
+gpg: key 786C63F330D7CB92: no user ID for key signature packet of class 10
+gpg: key 1EB2638FF56C0C53: no user ID for key signature packet of class 10
+gpg: next trustdb check due at 2021-10-09
+  -> Disabled 3 keys.
+
+## try 1
+# pacman-key --refresh-keys
+# pacman -S archlinux-keyring archlinuxcn-keyring
+## try 2
+# rm -R /etc/pacman.d/gnupg/ # No such file or directory
+# rm -rf /etc/pacman.d/gnupg/
+# rm -R /root/.gnupg/
+# rm -R /var/cache/pacman/pkg/
+# gpg --refresh-keys
+# pacman-key --init
+# pacman-key --populate archlinux # still display `gpg: key xxx: no user ID for key signature packet of class 10`
+# pacman-key --refresh-keys
+# pacman -Syyu
+#+END_SRC
+
+warning: /etc/pacman.d/mirrorlist installed as /etc/pacman.d/mirrorlist.pacnew
+
+/etc/mkinitcpio.d/linux.preset: 'default' and /etc/mkinitcpio.d/linux.preset: 'fallback'
+
+第 X 个提示：ERROR: A182F28FA78F70601453137BCF82E29597321B63 could not be locally signed.
+
+解决方法：
+
+#+BEGIN_SRC sh
+rm -rf /etc/pacman.d/gnupg
+pacman-key --init
+pacman-key --populate archlinux
+pacman-key --populate archlinuxcn
+#+END_SRC
+
+参考：
+
+1. [[https://wiki.archlinux.org/title/Arch_User_Repository#Installing_and_upgrading_packages][Installing and upgrading packages]]
+2. [[https://wiki.archlinux.org/title/Frequently_asked_questions#Is_it_possible_that_there_is_a_major_kernel_update_in_the_repository,_and_that_some_of_the_driver_packages_have_not_been_updated?][Is it possible that there is a major kernel update in the repository, and that some of the driver packages have not been updated?]]
+3. [[https://wiki.archlinux.org/title/Pacman/Tips_and_tricks]]
+4. [[https://wiki.archlinux.org/title/Pacman]]
+5. [[https://wiki.archlinux.org/title/System_maintenance#Avoid_certain_pacman_commands]]
+6. [[https://wiki.archlinux.org/title/Pacman/Rosetta]]
+7. [[https://wiki.archlinux.org/title/Mkinitcpio]]
+
+* yay
+
+Yet Another Yogurt: 又一个从 Arch User Repository 下载包的工具。
+
+官方仓库：[[https://github.com/Jguer/yay]]
+
+#+BEGIN_SRC sh
+# pacman -S --needed git base-devel
+git clone https://aur.archlinux.org/yay.git
+cd yay
+makepkg -si
+#+END_SRC
+
+如果想通过 pacman 官方仓库里的 yay 包安装，在版本升级时可能会有滞后。可以在通过 pacman 安装 yay 后，运行命令：
+
+#+BEGIN_SRC sh
+yay -S yay
+#+END_SRC
+
+保证得到 yay 的最新版本。
+
+* 常用命令行工具
+
+** ohmyzsh
+
+[[https://github.com/ohmyzsh/ohmyzsh]]
+
+安装前提：
+
+1. [[https://www.zsh.org/][Zsh]]： =pacman -S zsh=
+2. =curl= / =wget= installed
+3. =git= installed
+
+#+BEGIN_SRC sh
+sh -c "$(curl -fsSL https://raw.githubusercontent.com/ohmyzsh/ohmyzsh/master/tools/install.sh)"
+## or
+sh -c "$(wget -O- https://raw.githubusercontent.com/ohmyzsh/ohmyzsh/master/tools/install.sh)"
+
+## plugins
+git clone https://github.com/zsh-users/zsh-autosuggestions ~/.oh-my-zsh/custom/plugins/zsh-autosuggestions
+git clone https://github.com/zsh-users/zsh-syntax-highlighting ~/.oh-my-zsh/custom/plugins/zsh-syntax-highlighting
+git clone https://gist.github.com/475ee7768efc03727f21.git ~/.oh-my-zsh/custom/plugins/git-auto-status
+mkdir ~/.oh-my-zsh/custom/plugins/pnpm
+wget -O- https://raw.githubusercontent.com/ntnyq/omz-plugin-pnpm/main/pnpm.plugin.zsh ~/.oh-my-zsh/custom/plugins/pnpm
+
+## my configuration
+cd ~/dotfiles
+stow zsh
+#+END_SRC
+
+** z.lua
+
+#+BEGIN_SRC sh
+git clone https://github.com/skywind3000/z.lua.git ~/.z.lua
+pacman -S lua
+#+END_SRC
+
+** eza
+
+A modern replacement for =ls= (List directory contents) [[https://the.exa.website]]
+
+#+BEGIN_SRC sh
+pacman -S eza
+
+eza
+eza --oneline # List files one per line
+eza --all # List all files, including hidden files
+eza --long --all # Long format list (permissions, ownership, size and modification date) of all files
+eza --reverse --sort=size # List files with the largest at the top
+eza --long --tree --level=3 # Display a tree of files, three levels deep
+eza --long --sort=modified # List files sorted by modification date (oldest first)
+eza --long --header --icons --git # List files with their headers, icons, and Git statuses
+eza --git-ignore # Don't list files mentioned in `.gitignore`
+#+END_SRC
+
+** bat
+
+[[https://github.com/sharkdp/bat]]
+
+cat 的替代
+
+#+BEGIN_SRC sh
+pacman -S bat bat-extras
+#+END_SRC
+
+** tldr
+
+#+BEGIN_SRC sh
+pacman -S tldr
+#+END_SRC
+
+在 =~/.zshrc= 中加入以下内容：
+
+#+BEGIN_SRC conf
+export TLDR_CACHE_ENABLED=1
+export TLDR_CACHE_MAX_AGE=720
+export TLDR_PAGES_SOURCE_LOCATION="https://raw.githubusercontent.com/tldr-pages/tldr/master/pages"
+export TLDR_DOWNLOAD_CACHE_LOCATION="https://tldr-pages.github.io/assets/tldr.zip"
+#+END_SRC
+
+* GitHub 的CLI
+
+#+BEGIN_SRC sh
+pacman -S gh
+#+END_SRC
+
+* 系统状态
+
+#+BEGIN_SRC sh
+pacman -S btop
+#+END_SRC
+
+* 系统信息查看
+
+#+BEGIN_SRC sh
+pacman -S fastfetch
+#+END_SRC
+
+
+** netstat
+
+查看网络接口的占用情况
+
+#+BEGIN_SRC sh
+pacman -S net-tools
+#+END_SRC
+
+* rm 替代
+
+#+BEGIN_SRC sh
+pacman -S trash-cli
+#+END_SRC
+
+* dotfiles
+
+- https://farseerfc.me/zhs/using-gnu-stow-to-manage-your-dotfiles.html
+- https://wiki.archlinux.org/title/Dotfiles
+- http://dotshare.it/
+- https://dotfiles.github.io/
+- https://github.com/webpro/awesome-dotfiles
+- [[https://www.gnu.org/software/stow/manual/html_node/index.html][GNU stow]]
+
+#+BEGIN_SRC sh
+pacman -S stow
+#+END_SRC
+
+[[https://github.com/tianheg/dotfiles]]
+
+@farseerfc 邮件跟我说过，还可以试试 [[https://www.chezmoi.io/][chezmoi]]，系统级别的配置和同步可以用 [[https://www.ansible.com/][Ansible]]。
+
+* 系统优化
+** earlyoom
+
+如果是为了避免系统卡死，可以安装并使用 earlyoom。
+
+该软件默认将在空余内存、空余 swap 两者均低于 10% 时，结束 oom_score 值最高的进程，避免系统内存耗尽卡死。
+
+#+BEGIN_SRC sh
+# after install
+systemctl enable --now earlyoom
+#+END_SRC
+
+* gThumb
+
+[[https://wiki.gnome.org/action/show/Apps/Gthumb]]
+
+gThumb is an image viewer and browser for the GNOME Desktop. It also includes an importer tool for transferring photos from cameras.
+
+#+BEGIN_SRC sh
+pacman -S gthumb
+#+END_SRC
+
+
+* 浏览器
+
+#+BEGIN_SRC sh
+pacman -S firefox-developer-edition
+## aur
+yay -S google-chrome
+#+END_SRC
+
+* 密码管理
+
+[[https://keepassxc.org/]]
+
+#+BEGIN_SRC sh
+pacman -S keepassxc
+# 可以通过浏览器插件访问密码库
+#+END_SRC
+
+* 截图
+
+[[https://apps.kde.org/spectacle/]]
+
+
+* 播放器
+
+在装 KDE 的时候会装 mpv。
+
+* 软件安装列表
+
+| 名字                      | 说明                                                                                                                               |
+|---------------------------+------------------------------------------------------------------------------------------------------------------------------------|
+| wl-clipboard              | Wayland clipboard utilities                                                                                                        |
+| spectacle                 | KDE 开发的截图软件                                                                                                                 |
+| net-tools                 | 提供 netstat 命令                                                                                                                  |
+| chromium                  | 开源浏览器（基于 Blink 渲染引擎）                                                                                                  |
+| google-chrome             | 浏览器                                                                                                                             |
+| firefox-developer-edition | 具有开发者定制功能的 Firefox 浏览器                                                                                                |
+| pulseaudio                | A featureful, general-purpose sound server                                                                                         |
+| kmix                      | 修复 Firefox 没有声音                                                                                                              |
+| profile-cleaner           | Simple script to vacuum and reindex sqlite databases used by browsers 用于对浏览器使用的 sqlite 数据库进行清理和重新索引的简单脚本 |
+| visual-studio-code-bin    | Visual Studio Code                                                                                                                 |
+| proxychains-ng            | 终端内科学上网代理工具                                                                                                             |
+| vlc                       | 强大的多媒体播放工具                                                                                                               |
+| telegram-desktop          | 客户端开源的加密聊天工具                                                                                                           |
+| gthumb                    | 图片浏览工具，可简单编辑图片，可清除照片元数据                                                                                     |
+| inkscape                  | 强大的矢量图形编辑软件                                                                                                             |
+| yt-dlp                    | YouTube 视频下载工具                                                                                                               |
+| glances                   | terminal monitoring tool                                                                                                           |
+| keepassxc                 | password manager                                                                                                                   |
+| hugo                      | static site generator                                                                                                              |
+| informant                 | arch news reader and pacman hook                                                                                                   |
+| dnsutils                  | provide =dig= command                                                                                                              |
+| dnsmasq                   | 使用国外 DNS 造成国内网站访问慢的解决方法                                                                                          |
+| tldr                      | Collaborative cheatsheets for console commands                                                                                     |
+| virtualbox                | Virtual Machine                                                                                                                    |
+| qemu                      | A generic and open source machine emulator and virtualizer                                                                         |
+| earlyoom                  | Early OOM Daemon for Linux                                                                                                         |
+| gtk2/3/4                  | GObject-based multi-platform GUI toolkit                                                                                           |
+| lsb-release               | LSB version query program                                                                                                          |
+| eza                       | A modern replacement for ls (List directory contents)                                                                              |
+| sagemath                  | Open Source Mathematics Software free alternative to Magma Maple Mathematica and Matlab Matlab dkms Dynamic Kernel Modules System  |
+| cmdpxl                    | a totally practical command-line image editor 一个在命令行里画画的程序                                                             |
+| octave(GUI)               | A high-level language, primarily intended for numerical computations.                                                              |
+| asciiquarium              | An aquarium/sea animation in ASCII art                                                                                             |
+| arch-wiki-man(aur)        | The Arch Wiki as linux man pages                                                                                                   |
+| konsole                   | KDE terminal emulator                                                                                                              |
+| python-pipenv             | Sacred Marriage of Pipfile, Pip, & Virtualenv.                                                                                     |
+| safeeyes(aur)             | Protect your eyes from eye strain using this simple and beautiful, yet extensible break reminder                                   |
+| bat                       | A cat(1) clone with wings                                                                                                          |
+| htop                      | Interactive process viewer                                                                                                         |
+| prettyping                | A ping wrapper making the output prettier, more colorful, more compact, and easier to read                                         |
+| dbeaver                   | Free universal SQL Client for developers and database administrators (community edition)                                           |
+| sqlitebrowser             | SQLite Database browser is a light GUI editor for SQLite databases, built on top of Qt                                             |
+| adminer(aur)              | Adminer is available for MySQL, MariaDB, PostgreSQL, SQLite, MS SQL, Oracle, Elasticsearch, MongoDB and others via plugin          |
+| rnote                     | A simple drawing application to create handwritten notes                                                                           |
+| imv                       | a command line image viewer intended for use with tiling window managers                                                           |
+| umlet                     | Free UML Tool for Fast UML Diagrams                                                                                                |
+| speedtest-cli             | Command line interface for testing internet bandwidth using speedtest.net                                                          |
+| rslsync(aur)              | Resilio Sync (ex:BitTorrent Sync) - automatically sync files via secure, distributed technology                                    |
+| peek                      | 录制 GIF 动图                                                                                                                      |
+| obs-studio                | 录屏软件                                                                                                                           |
+| pkgstats                  | Submit a list of installed packages to the Arch Linux project                                                                      |
+| EtchDroid                 | ios2usb on android                                                                                                                 |
+| archmage(aur)             | converts CHM files to HTML, plain text and PDF                                                                                     |
+| kernel-modules-hook       | Keeps your system fully functional after a kernel upgrade                                                                          |
+| wireshark-cli             |                                                                                                                                    |
+| pdm                       | A modern Python package and dependency manager supporting the latest PEP standards                                                 |
+| onlyoffice-bin(aur)       | Office                                                                                                                             |
+| trash-cli                 | replace rm                                                                                                                         |
+| variety                   | 自动换壁纸                                                                                                                         |
+| ddgr                      | DuckDuckGo in the Terminal                                                                                                         |
+| appimagelauncher(aur)     | Helper for running and integrating AppImages                                                                                       |
+|                           |                                                                                                                                    |
