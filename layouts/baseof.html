@@ -13,7 +13,26 @@
   <!-- Avoid Automatic Format Detection -->
   <meta name="format-detection" content="telephone=no, date=no, address=no, email=no"/>
 
-  <title>{{- block "title" . }}{{ with .Title }}{{ . }} | {{ end }}{{ .Site.Title }}{{- end }}</title>
+  <title>
+  {{- block "title" . }}
+    {{- if .Title -}}
+      {{- .Title -}}
+    {{- else if .RawContent -}}
+      {{- $firstLine := index (split .RawContent "\n") 0 -}}
+      {{- if (hasPrefix $firstLine "* ") -}}
+        {{- trim (strings.TrimPrefix "* " $firstLine) " " -}}
+      {{- else -}}
+        {{- .Params.title | default .Site.Title -}}
+      {{- end -}}
+    {{- else -}}
+      {{- .Params.title | default .Site.Title -}}
+    {{- end -}}
+
+    {{- " | " -}}
+
+    {{- .Site.Title -}}
+  {{- end -}}
+  </title>
 
   {{- $description := .Description | default "Knowing oneself, grasp the world" | plainify | htmlUnescape -}}
   <meta name="description" content="{{ $description }}"/>
