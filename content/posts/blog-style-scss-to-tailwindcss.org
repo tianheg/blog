@@ -1,18 +1,33 @@
-#+TITLE: 把博客样式从 Scss 改到 TailwindCSS
+#+TITLE: Change blog style from Scss to TailwindCSS 把博客样式从 Scss 改到 TailwindCSS
 #+DATE: <2024-08-08 Thu 22:52>
 #+TAGS[]: 技术 博客
 
-  今年关于博客的规划里，有一项是改变博客样式的书写方式。[[https://sass-lang.com/][Sass（Scss）]]对于我来说有些多余了，CSS 本身的功能已经足够强大，主流浏览器都已经[[https://caniuse.com/css-nesting][支持嵌套（Nesting）样式]]。
+In this year's blog planning, one item is to change the way blog styles are written. For me, [[https://sass-lang.com/][Sass (Scss)]] is somewhat redundant now, as CSS itself is powerful enough, and mainstream browsers already [[https://caniuse.com/css-nesting][support nested styles]].
 
-  那么，我是想使用纯 CSS 书写样式吗？不，我不想，我想尝试另外一种写样式的方式——class。在 HTML 标签的 class 属性中使用 [[https://tailwindcss.com/][TailwindCSS]] 预定好的各种样式，实现我需要的功能，对于我这种个人博客很合适。
+Do I want to write styles using pure CSS? No, I don't. I want to try another way of writing styles—using classes. By using the pre-defined styles of [[https://tailwindcss.com/][TailwindCSS]] in the class attribute of HTML tags, I can achieve the functionality I need, which is quite suitable for my personal blog.
 
-  因为我不想维护大段的样式文件，只有模板文件（layouts/*）就足够了。所以，我选择了 TailwindCSS。选择它的原因有两个：
+I don't want to maintain large style files; having just the template files (layouts/*) is enough. Therefore, I chose TailwindCSS. There are two reasons for this choice:
 
-  1. 曾经用 TailwindCSS 给 yihong 的 running_page 贡献过代码，比较熟悉用法；
-  2. Hugo 官方开始了对 TailwindCSS 新版本（v4，目前处于 alpha 阶段）的实验性支持，并提供了[[https://github.com/bep/hugo-testing-tailwindcss-v4][测试仓库]]。
+1. I have previously contributed code to yihong's running_page using TailwindCSS, so I am familiar with its usage.
+2. Hugo has started experimental support for the new version of TailwindCSS (v4, currently in the alpha stage) and provides a [[https://github.com/bep/hugo-testing-tailwindcss-v4][test repository]].
 
-  修改样式的过程，可谓是大刀阔斧，先把原来的所有样式都删除，然后借助 ChatGPT 一点点把样式转换成 classes。过程繁复，分了几次完成。
+The process of modifying styles was quite drastic: I first deleted all the original styles and then gradually converted them into classes with the help of ChatGPT. The process was complex and completed in several stages.
 
-  当然，这次迁移肯定有遗漏的地方，有些地方的样式和以前不一样、很简陋。有些地方的样式则变丑了。
+Of course, there are bound to be some omissions during this migration. Some styles may look different or quite simple compared to before, and some may even look worse.
 
-  所以，我想借助大家的力量：阅读到这篇文章的朋友，希望你抽出一点时间，提个样式 BUG，反馈地址在[[https://tianheg.canny.io/bug-report][这里]]。
+Therefore, I would like to ask for everyone's help: if you are reading this article, please take a moment to report any style bugs. You can provide feedback [[https://tianheg.canny.io/bug-report][here]].
+
+今年关于博客的规划里，有一项是改变博客样式的书写方式。[[https://sass-lang.com/][Sass（Scss）]]对于我来说有些多余了，CSS 本身的功能已经足够强大，主流浏览器都已经[[https://caniuse.com/css-nesting][支持嵌套（Nesting）样式]]。
+
+那么，我是想使用纯 CSS 书写样式吗？不，我不想，我想尝试另外一种写样式的方式——class。在 HTML 标签的 class 属性中使用 [[https://tailwindcss.com/][TailwindCSS]] 预定好的各种样式，实现我需要的功能，对于我这种个人博客很合适。
+
+因为我不想维护大段的样式文件，只有模板文件（layouts/*）就足够了。所以，我选择了 TailwindCSS。选择它的原因有两个：
+
+1. 曾经用 TailwindCSS 给 yihong 的 running_page 贡献过代码，比较熟悉用法；
+2. Hugo 官方开始了对 TailwindCSS 新版本（v4，目前处于 alpha 阶段）的实验性支持，并提供了[[https://github.com/bep/hugo-testing-tailwindcss-v4][测试仓库]]。
+
+修改样式的过程，可谓是大刀阔斧，先把原来的所有样式都删除，然后借助 ChatGPT 一点点把样式转换成 classes。过程繁复，分了几次完成。
+
+当然，这次迁移肯定有遗漏的地方，有些地方的样式和以前不一样、很简陋。有些地方的样式则变丑了。
+
+所以，我想借助大家的力量：阅读到这篇文章的朋友，希望你抽出一点时间，提个样式 BUG，反馈地址在[[https://tianheg.canny.io/bug-report][这里]]。
