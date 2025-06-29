@@ -1,5 +1,49 @@
 {{ define "main" }}
 <article data-pagefind-body>
+  {{ if eq .Section "til" }}
+  <!-- Breadcrumb Navigation -->
+  <nav aria-label="breadcrumb" class="mb-6">
+    <ul class="flex list-none items-center text-sm text-gray-600 dark:text-gray-400">
+      <li class="flex items-center space-x-2">
+        <span class="text-gray-400">/</span>
+        <a href="/til/" class="hover:text-gray-900 dark:hover:text-gray-200 transition-colors">
+          TIL
+        </a>
+      </li>
+
+      {{ if .File }}
+        {{ $category := index (split .File.Dir "/") 1 }}
+        {{ if and $category (ne $category "_index.org") }}
+          <li class="flex items-center space-x-2">
+            <span class="text-gray-400">/</span>
+            <a href="/til/#{{ $category | urlize }}" class="hover:text-gray-900 dark:hover:text-gray-200 transition-colors">
+              {{ $category | title }}
+            </a>
+          </li>
+        {{ end }}
+      {{ end }}
+
+      <li class="flex items-center space-x-2">
+        <span class="text-gray-400">/</span>
+        <span class="text-gray-900 dark:text-gray-100 font-medium">
+          {{- if .Title -}}
+            {{- .Title -}}
+          {{- else if .RawContent -}}
+            {{- $firstLine := index (split .RawContent "\n") 0 -}}
+            {{- if (hasPrefix $firstLine "* ") -}}
+              {{- trim (strings.TrimPrefix "* " $firstLine) " " -}}
+            {{- else -}}
+              {{- .Params.title -}}
+            {{- end -}}
+          {{- else -}}
+            {{- .Params.title -}}
+          {{- end -}}
+        </span>
+      </li>
+    </ul>
+  </nav>
+  {{ end }}
+
   <h1>{{ .Title }}</h1>
   <p>
     {{ if eq .Section "posts" }}
@@ -8,7 +52,7 @@
     </time>
     {{ end }}
   </p>
-  <div class="">
+  <div>
     {{ $content := .Content }}
     {{ $baseURL := cond hugo.IsProduction .Site.BaseURL "http://localhost:1313/" }}
     {{ $content = $content | replaceRE `<a href="(https?://[^"]+)"` `<a href="$1" target="_blank" rel="noreferrer"` }}
