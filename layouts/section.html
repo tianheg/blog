@@ -29,6 +29,31 @@
     <!-- Display TIL count at the top of the section -->
     <p class="my-6 text-lg opacity-80 italic">{{ $totalTILs }} TILs and counting...</p>
 
+    <!-- TIL Section TOC -->
+    <div class="section-toc mb-8">
+      <h2 class="text-xl font-bold mb-4">Categories</h2>
+      <ul class="flex flex-wrap gap-2 list-none">
+        {{ $allFolders := slice }}
+        {{ range $pages }}
+          {{ $category := index (split .File.Dir "/") 1 }}
+          {{ if and $category (ne $category "_index.org") }}
+            {{ if not (in $allFolders $category) }}
+              {{ $allFolders = $allFolders | append $category }}
+            {{ end }}
+          {{ end }}
+        {{ end }}
+
+        {{ $sortedFolders := sort $allFolders }}
+        {{ range $sortedFolders }}
+          <li class="inline-block">
+            <a href="#{{ . | urlize }}" class="px-3 py-1 bg-gray-100 hover:bg-gray-200 dark:bg-gray-800 dark:hover:bg-gray-700 rounded-md transition-colors duration-200 text-sm font-medium">
+              {{ . | title }}
+            </a>
+          </li>
+        {{ end }}
+      </ul>
+    </div>
+
     {{ range $pages }}
       {{ $category := index (split .File.Dir "/") 1 }}
       {{ if and $category (ne $category "_index.org") }}
@@ -51,7 +76,7 @@
       {{ $category := . }}
       {{ $categoryPages := $.Store.Get $category }}
       {{ if $categoryPages }}
-        <h2>{{ $category | title }}</h2>
+        <h2 id="{{ $category | urlize }}">{{ $category | title }}</h2>
         <ul>
           {{ range $categoryPages }}
             <li>
