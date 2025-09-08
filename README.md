@@ -5,3 +5,8 @@
 [![Source on GitHub](https://img.shields.io/badge/Source%20on-GitHub-181717?&logo=github)](https://github.com/tianheg/blog)
 
 [![Built with Cloudflare Workers](https://img.shields.io/badge/Built%20with-Cloudflare_Workers-orange?&logo=cloudflare)](https://workers.cloudflare.com/) [ref](https://github.com/jmooring/hosting-cloudflare-worker)
+
+内容命名规则：
+
+- 不能有大写字母
+- 不能有空格
