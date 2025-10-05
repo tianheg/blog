@@ -1,0 +1,258 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>TIL to Blog</title>
+  <style>
+    :root {
+      --primary: #1a73e8;
+      --primary-hover: #1557b0;
+      --border: #e1e4e8;
+      --background: #f8f9fa;
+    }
+
+    body {
+      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, Arial, sans-serif;
+      max-width: 900px;
+      margin: 0 auto;
+      padding: 20px;
+      line-height: 1.5;
+      color: #24292e;
+    }
+
+    h1 {
+      text-align: center;
+      margin-bottom: 30px;
+      color: #24292e;
+    }
+
+    .container {
+      width: 100%;
+    }
+
+    .input-section {
+      display: flex;
+      flex-direction: column;
+    }
+
+    textarea {
+      width: 100%;
+      height: 300px;
+      padding: 12px;
+      border: 1px solid var(--border);
+      border-radius: 6px;
+      resize: vertical;
+      font-family: monospace;
+      font-size: 14px;
+    }
+
+
+
+    .config-form {
+      grid-column: 1 / -1;
+      background: var(--background);
+      padding: 20px;
+      border-radius: 6px;
+      margin-bottom: 20px;
+    }
+
+    .form-group {
+      margin-bottom: 15px;
+    }
+
+    label {
+      display: block;
+      margin-bottom: 5px;
+      font-weight: 600;
+    }
+
+    input[type="text"],
+    input[type="password"],
+    select.form-control {
+      width: 100%;
+      padding: 8px 12px;
+      border: 1px solid var(--border);
+      border-radius: 6px;
+      font-size: 14px;
+    }
+
+    .btn {
+      background-color: var(--primary);
+      color: white;
+      border: none;
+      padding: 10px 20px;
+      border-radius: 6px;
+      cursor: pointer;
+      font-size: 14px;
+      font-weight: 600;
+      transition: background-color 0.2s;
+    }
+
+    .btn:hover {
+      background-color: var(--primary-hover);
+    }
+
+    .btn:disabled {
+      background-color: #94d3a2;
+      cursor: not-allowed;
+    }
+
+    .status {
+      margin-top: 20px;
+      padding: 10px;
+      border-radius: 6px;
+      display: none;
+    }
+
+    .success {
+      background-color: #d4edda;
+      color: #155724;
+      border: 1px solid #c3e6cb;
+    }
+
+    .error {
+      background-color: #f8d7da;
+      color: #721c24;
+      border: 1px solid #f5c6cb;
+    }
+
+    .token-info {
+      font-size: 12px;
+      color: #586069;
+      margin-top: 5px;
+    }
+  </style>
+</head>
+
+<body>
+  <h1>TIL to Blog Converter</h1>
+
+  <div class="config-form">
+    <div class="form-group">
+      <label for="tilFolder">TIL Category</label>
+      <select id="tilFolder" class="form-control">
+        <option value="backup">Backup</option>
+        <option value="health">Health</option>
+        <option value="learning">Learning</option>
+        <option value="life">Life</option>
+        <option value="misc">Misc</option>
+        <option value="music">Music</option>
+        <option value="software">Software</option>
+        <option value="writing">Writing</option>
+      </select>
+    </div>
+
+    <div class="form-group">
+      <label for="filename">File Name (without .org extension)</label>
+      <input type="text" id="filename" placeholder="e.g.: my-til">
+    </div>
+
+    <div class="form-group">
+      <label for="token">GitHub Personal Access Token</label>
+      <input type="password" id="token" placeholder="ghp_xxxxxxxxxxxxxxxx">
+      <div class="token-info">Token needs repo permissions. Tutorial: <a
+          href="https://docs.github.com/en/authentication/keeping-your-account-and-data-secure/creating-a-personal-access-token"
+          target="_blank">View Official Docs</a></div>
+    </div>
+
+  </div>
+
+  <div class="container">
+    <div class="input-section">
+      <h2>Org Mode Content</h2>
+      <textarea id="orgContent" placeholder="Write your TIL content here...">
+</textarea>
+    </div>
+  </div>
+
+  <div style="text-align: center; margin: 20px 0;">
+    <button id="saveBtn" class="btn">Save to Blog</button>
+  </div>
+
+  <div id="status" class="status"></div>
+
+  <script>
+    document.addEventListener('DOMContentLoaded', function () {
+      const saveBtn = document.getElementById('saveBtn');
+      saveBtn.addEventListener('click', saveToGitHub);
+    });
+
+    async function saveToGitHub() {
+      const repo = 'tianheg/blog';
+      const tilFolder = document.getElementById('tilFolder').value;
+      const filename = document.getElementById('filename').value;
+      const path = `content/til/${tilFolder}/${filename}.org`;
+      const branch = 'main';
+      const token = document.getElementById('token').value;
+      const commitMsg = `TIL: ${filename}`;
+      const markdownContent = document.getElementById('orgContent').value;
+
+      // 验证输入
+      if (!filename || !token || !markdownContent) {
+        showStatus('Please fill in all required fields', 'error');
+        return;
+      }
+
+      const saveBtn = document.getElementById('saveBtn');
+      saveBtn.disabled = true;
+      saveBtn.textContent = '保存中...';
+
+      try {
+        // 将内容转换为Base64
+        const base64Content = btoa(unescape(encodeURIComponent(markdownContent)));
+
+        // GitHub API URL
+        const apiUrl = `https://api.github.com/repos/${repo}/contents/${path}`;
+
+        // 请求数据
+        const requestData = {
+          message: commitMsg,
+          content: base64Content,
+          branch: branch
+        };
+
+        // 调用GitHub API
+        const response = await fetch(apiUrl, {
+          method: 'PUT',
+          headers: {
+            'Authorization': `token ${token}`,
+            'Content-Type': 'application/json',
+          },
+          body: JSON.stringify(requestData)
+        });
+
+        const result = await response.json();
+
+        if (response.ok) {
+          // 获取文件原始URL（非下载链接）
+          const rawUrl = `https://raw.githubusercontent.com/${repo}/${branch}/${path}`;
+          showStatus(`保存成功！文件地址: <a href="${rawUrl}" target="_blank">${rawUrl}</a>`, 'success');
+        } else {
+          throw new Error(result.message || '保存失败');
+        }
+      } catch (error) {
+        console.error('保存错误:', error);
+        showStatus(`错误: ${error.message}`, 'error');
+      } finally {
+        saveBtn.disabled = false;
+        saveBtn.textContent = '保存到 GitHub';
+      }
+    }
+
+    function showStatus(message, type) {
+      const statusEl = document.getElementById('status');
+      statusEl.innerHTML = message;
+      statusEl.className = `status ${type}`;
+      statusEl.style.display = 'block';
+
+      // 5秒后自动隐藏
+      setTimeout(() => {
+        statusEl.style.display = 'none';
+      }, 5000);
+    }
+  </script>
+</body>
+
+</html>
