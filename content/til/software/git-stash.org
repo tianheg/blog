@@ -1,0 +1,26 @@
+* Git stash
+
+=git stash= is Git's “clipboard” for uncommitted work.
+
+What it actually does:
+1. Takes every *tracked* file that is modified (staged or unstaged) and saves the changes away in a special area (the “stash”).
+2. Reverts those files back to the state of the last commit, so your working tree and index look clean again.
+3. Leaves *untracked* files and *ignored* files alone unless you add options (=-u=, =-a=).
+
+The result: you can switch branches, pull, merge, etc. without committing half-done work.
+
+Later you can bring the changes back with =git stash pop= (apply + drop) or =git stash apply= (keep a copy in the stash).
+
+Quick recipe:
+
+#+BEGIN_SRC sh
+# save current dirty state
+git stash push -m "WIP on login feature"
+
+# …do something else…
+
+# restore it
+git stash pop
+#+END_SRC
+
+Think of it as “pause & bookmark” for your uncommitted edits.
