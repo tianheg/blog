@@ -1,13 +1,41 @@
 * 身体数据
 
-统计体重变化
-
-    2020-05-15 73.0
-    2020-11-04 78.6
-    2023-05-06 73.5
-    2024-03-11 82.2
-    2024-03-25 81.7
-    2024-04-01 81.4
-    2024-04-06 81.5
+** 统计体重变化
 
 使用 https://timqian.com/chart.xkcd/
+
+#+BEGIN_EXPORT html
+<svg class="line-chart"></svg>
+<script src="https://cdn.jsdelivr.net/npm/chart.xkcd@1.1/dist/chart.xkcd.min.js"></script>
+<script>
+  // Data structure for weight measurements
+  const weightData = [
+    { date: '2020-05-15', weight: 73.0 },
+    { date: '2020-11-04', weight: 78.6 },
+    { date: '2023-05-06', weight: 73.5 },
+    { date: '2024-03-11', weight: 82.2 },
+    { date: '2024-03-25', weight: 81.7 },
+    { date: '2024-04-01', weight: 81.4 },
+    { date: '2024-04-06', weight: 81.5 },
+    { date: '2025-07-30', weight: 67.0 },
+  ];
+  
+  // Extract labels and data from the JSON structure
+  const labels = weightData.map(item => item.date);
+  const data = weightData.map(item => item.weight);
+  
+  const svg = document.querySelector('.line-chart')
+  const lineChart = new chartXkcd.Line(svg, {
+    title: 'Daily weight change',
+    xLabel: 'Day',
+    yLabel: 'Weight/kg',
+    data: {
+      labels: labels,
+      datasets: [{
+        label: 'Weight value',
+        data: data,
+      }],
+    }
+  });
+</script>
+#+END_EXPORT
