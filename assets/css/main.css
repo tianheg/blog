@@ -18,50 +18,53 @@
    ========================================================================== */
 
 :root {
-  /* Colors - Light Mode */
-  --toc-border-light: rgb(229 231 235);
-  --toc-text-primary-light: rgb(75 85 99);
-  --toc-text-secondary-light: rgb(107 114 128);
-  --toc-link-active-light: rgb(37 99 235);
-  --toc-link-bg-light: rgb(239 246 255);
-  --toc-scrollbar-light: rgb(203 213 225);
-  --toc-scrollbar-hover-light: rgb(148 163 184);
-  --toc-shadow-light: rgba(0, 0, 0, 0.04);
+  /* Layout */
+  --header-height: 5rem;
+  --toc-width: 350px;
+  --toc-padding: 1.5rem;
+  --toc-mobile-drawer-height: 80vh;
+  --toc-mobile-header-height: 4rem;
 
-  /* Colors - Dark Mode */
-  --toc-border-dark: rgb(55 65 81);
-  --toc-text-primary-dark: rgb(209 213 219);
-  --toc-text-secondary-dark: rgb(200 205 210);
-  --toc-link-active-dark: rgb(147 197 253);
-  --toc-link-bg-dark: rgb(30 41 59);
-  --toc-scrollbar-dark: rgb(75 85 99);
-  --toc-scrollbar-hover-dark: rgb(107 114 128);
-  --toc-shadow-dark: rgba(0, 0, 0, 0.4);
+  /* UI Constants */
+  --scrollbar-width: 6px;
+  --scrollbar-radius: 3px;
+  --border-radius-sm: 0.5rem;
+  --border-radius-lg: 1.5rem;
+  --transition-fast: 0.2s ease;
+  --transition-slow: 0.3s ease;
+
+  /* Base Colors - Light Mode */
+  --toc-gray: rgb(229 231 235);
+  --toc-text: rgb(75 85 99);
+  --toc-blue: rgb(37 99 235);
+
+  /* Derived Colors - Light Mode (from base colors) */
+  --toc-border: var(--toc-gray);
+  --toc-text-primary: var(--toc-text);
+  --toc-text-secondary: rgb(from var(--toc-text) calc(r + 32) calc(g + 29) calc(b + 29));
+  --toc-link-active: var(--toc-blue);
+  --toc-link-bg: rgb(from var(--toc-blue) calc(r + 202) calc(g + 147) calc(b + 20));
+  --toc-scrollbar: rgb(from var(--toc-gray) calc(r - 26) calc(g - 18) calc(b - 10));
+  --toc-scrollbar-hover: rgb(from var(--toc-gray) calc(r - 81) calc(g - 68) calc(b - 51));
+  --toc-shadow: rgba(0 0 0 / 0.04);
 }
 
 @media (prefers-color-scheme: dark) {
   :root {
-    --toc-border: var(--toc-border-dark);
-    --toc-text-primary: var(--toc-text-primary-dark);
-    --toc-text-secondary: var(--toc-text-secondary-dark);
-    --toc-link-active: var(--toc-link-active-dark);
-    --toc-link-bg: var(--toc-link-bg-dark);
-    --toc-scrollbar: var(--toc-scrollbar-dark);
-    --toc-scrollbar-hover: var(--toc-scrollbar-hover-dark);
-    --toc-shadow: var(--toc-shadow-dark);
-  }
-}
+    /* Base Colors - Dark Mode */
+    --toc-gray: rgb(55 65 81);
+    --toc-text: rgb(209 213 219);
+    --toc-blue: rgb(147 197 253);
 
-@media (prefers-color-scheme: light) {
-  :root {
-    --toc-border: var(--toc-border-light);
-    --toc-text-primary: var(--toc-text-primary-light);
-    --toc-text-secondary: var(--toc-text-secondary-light);
-    --toc-link-active: var(--toc-link-active-light);
-    --toc-link-bg: var(--toc-link-bg-light);
-    --toc-scrollbar: var(--toc-scrollbar-light);
-    --toc-scrollbar-hover: var(--toc-scrollbar-hover-light);
-    --toc-shadow: var(--toc-shadow-light);
+    /* Derived Colors - Dark Mode (from base colors) */
+    --toc-border: var(--toc-gray);
+    --toc-text-primary: var(--toc-text);
+    --toc-text-secondary: rgb(from var(--toc-text) calc(r - 9) calc(g - 8) calc(b - 9));
+    --toc-link-active: var(--toc-blue);
+    --toc-link-bg: rgb(from var(--toc-gray) calc(r - 25) calc(g - 24) calc(b - 22));
+    --toc-scrollbar: rgb(from var(--toc-gray) calc(r + 20) calc(g + 20) calc(b + 18));
+    --toc-scrollbar-hover: rgb(from var(--toc-gray) calc(r + 52) calc(g + 48) calc(b + 47));
+    --toc-shadow: rgba(0 0 0 / 0.4);
   }
 }
 
@@ -96,13 +99,26 @@ html {
   scroll-behavior: smooth;
 }
 
+@media (prefers-reduced-motion: reduce) {
+  html {
+    scroll-behavior: auto;
+  }
+
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+  }
+}
+
 body {
   font-family:
     "Satoshi", -apple-system, system-ui, BlinkMacSystemFont, "Noto Serif SC", Arial, "Amstelvar", "Josefin Sans", "Hiragino Sans GB", "Microsoft Yahei", "ST Heiti", sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol";
   margin: auto;
   padding: 20px;
   max-width: 720px;
-  word-wrap: break-word;
   overflow-wrap: break-word;
 }
 
@@ -110,24 +126,31 @@ header {
   background-color: var(--color-base-100);
 }
 
+/* Scroll offset for headings to account for sticky header */
+h1[id],
+h2[id],
+h3[id],
+h4[id],
+h5[id],
+h6[id] {
+  scroll-margin-top: calc(var(--header-height) + 3rem);
+}
+
 /* ==========================================================================
    TABLE OF CONTENTS (TOC) SIDEBAR
    ========================================================================== */
 
-/* --------------------------------------------------------------------------
-   TOC Sidebar Container
-   -------------------------------------------------------------------------- */
-
+/* TOC Sidebar */
 .toc-sidebar {
   position: fixed;
   left: 0;
   top: 0;
-  width: 280px;
+  width: var(--toc-width);
   height: 100vh;
+  padding: var(--toc-padding);
+  padding-top: var(--header-height);
   overflow-y: auto;
-  overflow-x: hidden;
-  padding: 1.5rem;
-  padding-top: 5rem; /* Adjusted dynamically by JavaScript based on header height */
+  overflow-x: auto;
   z-index: 10;
   background-color: var(--color-base-100);
   border-right: 1px solid var(--toc-border);
@@ -136,9 +159,8 @@ header {
   scrollbar-color: var(--toc-scrollbar) transparent;
 }
 
-/* TOC Sidebar Scrollbar Styling */
 .toc-sidebar::-webkit-scrollbar {
-  width: 6px;
+  width: var(--scrollbar-width);
 }
 
 .toc-sidebar::-webkit-scrollbar-track {
@@ -147,25 +169,18 @@ header {
 
 .toc-sidebar::-webkit-scrollbar-thumb {
   background-color: var(--toc-scrollbar);
-  border-radius: 3px;
+  border-radius: var(--scrollbar-radius);
 }
 
 .toc-sidebar::-webkit-scrollbar-thumb:hover {
   background-color: var(--toc-scrollbar-hover);
 }
 
-/* --------------------------------------------------------------------------
-   TOC Navigation Container
-   -------------------------------------------------------------------------- */
-
+/* TOC Content */
 .toc {
   line-height: 1.6;
   font-size: 0.875rem;
 }
-
-/* --------------------------------------------------------------------------
-   TOC Title
-   -------------------------------------------------------------------------- */
 
 .toc-title {
   font-size: 0.75rem;
@@ -178,17 +193,13 @@ header {
   border-bottom: 2px solid var(--toc-border);
 }
 
-/* --------------------------------------------------------------------------
-   TOC Content Container
-   -------------------------------------------------------------------------- */
-
 .toc-content {
   color: var(--toc-text-secondary);
 }
 
 .toc-content ul {
   list-style: none;
-  padding-left: 0;
+  padding: 0;
   margin: 0;
 }
 
@@ -197,34 +208,28 @@ header {
   position: relative;
 }
 
-/* --------------------------------------------------------------------------
-   TOC Links (Top Level)
-   -------------------------------------------------------------------------- */
-
 .toc-content ul li a {
+  display: block;
   color: inherit;
   text-decoration: none;
-  transition: all 0.2s ease;
-  display: block;
-  padding: 0.375rem 0.5rem;
-  border-radius: 0.375rem;
-  position: relative;
+  padding: calc(var(--toc-padding) / 4) calc(var(--toc-padding) / 3);
+  border-radius: calc(var(--toc-padding) / 4);
   line-height: 1.5;
+  transition: color var(--transition-fast), background-color var(--transition-fast), transform var(--transition-fast);
+  white-space: nowrap;
 }
 
-.toc-content ul li a:hover {
+.toc-content ul li a:hover,
+.toc-content ul li a.active {
   color: var(--toc-link-active);
   background-color: var(--toc-link-bg);
   transform: translateX(2px);
 }
 
 .toc-content ul li a.active {
-  color: var(--toc-link-active);
-  background-color: var(--toc-link-bg);
   font-weight: 600;
 }
 
-/* Active link indicator bar */
 .toc-content ul li a.active::before {
   content: '';
   position: absolute;
@@ -237,19 +242,14 @@ header {
   border-radius: 0 2px 2px 0;
 }
 
-/* --------------------------------------------------------------------------
-   TOC Nested Lists (Sub-items)
-   -------------------------------------------------------------------------- */
-
+/* Nested Lists */
 .toc-content ul ul {
-  padding-left: 0.75rem;
-  margin-top: 0.5rem;
-  margin-left: 0.5rem;
+  padding-left: calc(var(--toc-padding) / 2);
+  margin: 0.5rem 0 0 calc(var(--toc-padding) / 2);
   border-left: 2px solid var(--toc-border);
   position: relative;
 }
 
-/* Gradient border effect for nested lists */
 .toc-content ul ul::before {
   content: '';
   position: absolute;
@@ -257,11 +257,7 @@ header {
   top: 0;
   bottom: 0;
   width: 2px;
-  background: linear-gradient(to bottom, 
-    transparent 0%, 
-    var(--toc-border) 10%, 
-    var(--toc-border) 90%, 
-    transparent 100%);
+  background: linear-gradient(to bottom, transparent 0%, var(--toc-border) 10%, var(--toc-border) 90%, transparent 100%);
 }
 
 .toc-content ul ul li {
@@ -270,7 +266,7 @@ header {
 }
 
 .toc-content ul ul li a {
-  padding: 0.25rem 0.5rem;
+  padding: calc(var(--toc-padding) / 6) calc(var(--toc-padding) / 3);
   opacity: 0.85;
 }
 
@@ -280,41 +276,35 @@ header {
 }
 
 /* ==========================================================================
-   MOBILE TOC DESIGN
+   MOBILE TOC
    ========================================================================== */
 
-/* Mobile TOC Floating Button */
+/* Mobile Button */
 .toc-mobile-button {
-  position: fixed !important;
-  top: 5.5rem !important; /* Dynamically adjusted by JavaScript based on header height */
-  left: -1.5rem !important; /* Half hidden - negative left position */
-  z-index: 50 !important;
-  background-color: var(--toc-link-active) !important;
-  color: white !important;
-  border: none !important;
-  border-radius: 50% !important; /* Circle */
-  width: 3rem !important;
-  height: 3rem !important;
-  padding: 0 !important;
-  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.12), 0 1px 3px rgba(0, 0, 0, 0.08) !important;
-  cursor: pointer !important;
-  font-size: 0.8125rem !important;
-  font-weight: 600 !important;
-  display: flex !important;
-  align-items: center !important;
-  justify-content: center !important;
-  gap: 0 !important;
-  transition: all 0.2s ease !important;
-  backdrop-filter: blur(10px) !important;
-  -webkit-backdrop-filter: blur(10px) !important;
-  user-select: none !important;
-  -webkit-user-select: none !important;
-  -webkit-tap-highlight-color: transparent !important;
-  /* Override DaisyUI button styles */
-  line-height: normal !important;
-  text-align: center !important;
-  text-transform: none !important;
-  letter-spacing: normal !important;
+  position: fixed;
+  top: calc(var(--header-height) + 0.5rem);
+  left: calc(var(--toc-padding) * -1);
+  z-index: 50;
+  width: 3rem;
+  height: 3rem;
+  padding: 0;
+  border: none;
+  border-radius: 50%;
+  background-color: var(--toc-link-active);
+  color: white;
+  font-size: 0.8125rem;
+  font-weight: 600;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.12), 0 1px 3px rgba(0, 0, 0, 0.08);
+  backdrop-filter: blur(10px);
+  -webkit-backdrop-filter: blur(10px);
+  user-select: none;
+  -webkit-user-select: none;
+  -webkit-tap-highlight-color: transparent;
+  transition: transform var(--transition-fast), box-shadow var(--transition-fast);
 }
 
 .toc-mobile-button:hover {
@@ -325,103 +315,77 @@ header {
 .toc-mobile-button:active {
   transform: translateY(0);
   box-shadow: 0 1px 4px rgba(0, 0, 0, 0.12);
-  cursor: pointer;
-}
-
-.toc-mobile-button:focus {
-  outline: none;
-  cursor: pointer;
 }
 
 .toc-mobile-button:focus-visible {
   outline: 2px solid var(--toc-link-active);
   outline-offset: 2px;
-  cursor: pointer;
 }
 
-.toc-mobile-button:not(:hover):not(:active):not(:focus) {
-  cursor: pointer;
-}
-
-/* When drawer is open, button should not show pointer cursor */
 .toc-mobile-button.drawer-open {
-  cursor: default !important;
+  cursor: default;
   pointer-events: none;
 }
 
 .toc-mobile-button svg {
-  flex-shrink: 0;
   width: 20px;
   height: 20px;
 }
 
 .toc-mobile-button span {
-  display: none !important; /* Hide text label for circular button */
+  display: none;
 }
 
-/* Mobile TOC Overlay */
+/* Mobile Overlay */
 .toc-mobile-overlay {
-  display: none !important;
-  position: fixed !important;
-  top: 0 !important;
-  left: 0 !important;
-  right: 0 !important;
-  bottom: 0 !important;
-  background-color: rgba(0, 0, 0, 0.5) !important;
-  z-index: 60 !important;
-  opacity: 0 !important;
-  transition: opacity 0.3s ease !important;
-  backdrop-filter: blur(4px) !important;
-  pointer-events: none !important;
-  cursor: default !important;
-  /* Override DaisyUI modal overlay styles */
-  width: 100% !important;
-  height: 100% !important;
-  margin: 0 !important;
-  padding: 0 !important;
+  position: fixed;
+  inset: 0;
+  z-index: 60;
+  background-color: rgba(0, 0, 0, 0.5);
+  backdrop-filter: blur(4px);
+  opacity: 0;
+  pointer-events: none;
+  transition: opacity var(--transition-slow);
 }
 
 .toc-mobile-overlay.active {
-  opacity: 1 !important;
-  pointer-events: auto !important;
-  cursor: default !important;
-  display: block !important;
+  opacity: 1;
+  pointer-events: auto;
 }
 
-/* Mobile TOC Drawer */
+/* Mobile Drawer */
 .toc-mobile-drawer {
-  position: fixed !important;
-  bottom: 0 !important;
-  left: 0 !important;
-  right: 0 !important;
-  max-height: 80vh !important;
-  height: 80vh !important;
-  background-color: var(--color-base-100) !important;
-  border-top-left-radius: 1.5rem !important;
-  border-top-right-radius: 1.5rem !important;
-  z-index: 70 !important;
-  transform: translateY(100%) !important;
-  transition: transform 0.3s cubic-bezier(0.4, 0, 0.2, 1) !important;
-  box-shadow: 0 -4px 20px rgba(0, 0, 0, 0.15) !important;
-  display: flex !important;
-  flex-direction: column !important;
-  overflow: hidden !important;
-  /* Override DaisyUI drawer/modal styles */
-  width: 100% !important;
-  margin: 0 !important;
-  padding: 0 !important;
+  position: fixed;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  z-index: 70;
+  width: 100%;
+  height: var(--toc-mobile-drawer-height);
+  max-height: var(--toc-mobile-drawer-height);
+  padding: 0;
+  margin: 0;
+  background-color: var(--color-base-100);
+  border-top-left-radius: var(--border-radius-lg);
+  border-top-right-radius: var(--border-radius-lg);
+  box-shadow: 0 -4px 20px rgba(0, 0, 0, 0.15);
+  display: flex;
+  flex-direction: column;
+  overflow: hidden;
+  transform: translateY(100%);
+  transition: transform var(--transition-slow) cubic-bezier(0.4, 0, 0.2, 1);
 }
 
 .toc-mobile-drawer.active {
-  transform: translateY(0) !important;
+  transform: translateY(0);
 }
 
-/* Mobile TOC Header */
+/* Mobile Header */
 .toc-mobile-header {
   display: flex;
   align-items: center;
   justify-content: space-between;
-  padding: 1.25rem 1.5rem;
+  padding: 1.25rem var(--toc-padding);
   border-bottom: 1px solid var(--toc-border);
   flex-shrink: 0;
 }
@@ -434,25 +398,16 @@ header {
 }
 
 .toc-mobile-close {
-  background: none !important;
-  border: none !important;
-  color: var(--toc-text-primary) !important;
-  cursor: pointer !important;
-  padding: 0.5rem !important;
-  display: flex !important;
-  align-items: center !important;
-  justify-content: center !important;
-  border-radius: 0.5rem !important;
-  transition: background-color 0.2s ease !important;
-  /* Override DaisyUI button styles */
-  font-size: inherit !important;
-  font-weight: normal !important;
-  line-height: normal !important;
-  text-transform: none !important;
-  letter-spacing: normal !important;
-  min-height: auto !important;
-  height: auto !important;
-  width: auto !important;
+  padding: 0.5rem;
+  border: none;
+  background: none;
+  color: var(--toc-text-primary);
+  cursor: pointer;
+  border-radius: var(--border-radius-sm);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: background-color var(--transition-fast);
 }
 
 .toc-mobile-close:hover {
@@ -464,28 +419,23 @@ header {
   height: 20px;
 }
 
-/* Mobile TOC Content */
+/* Mobile Content */
 .toc-mobile-content {
-  flex: 1 !important;
-  min-height: 0 !important;
-  overflow-y: scroll !important;
-  overflow-x: hidden !important;
-  padding: 1rem 1.5rem 2rem !important;
-  -webkit-overflow-scrolling: touch !important;
-  scrollbar-width: thin !important;
-  scrollbar-color: var(--toc-scrollbar) transparent !important;
-  touch-action: pan-y !important;
-  overscroll-behavior: contain !important;
-  position: relative !important;
-  max-height: calc(80vh - 4rem) !important;
-  /* Override DaisyUI content styles */
-  width: 100% !important;
-  margin: 0 !important;
+  flex: 1;
+  min-height: 0;
+  padding: 1rem var(--toc-padding) 2rem;
+  overflow-y: auto;
+  overflow-x: hidden;
+  max-height: calc(var(--toc-mobile-drawer-height) - var(--toc-mobile-header-height));
+  -webkit-overflow-scrolling: touch;
+  touch-action: pan-y;
+  overscroll-behavior: contain;
+  scrollbar-width: thin;
+  scrollbar-color: var(--toc-scrollbar) transparent;
 }
 
-/* Mobile TOC Content Scrollbar Styling */
 .toc-mobile-content::-webkit-scrollbar {
-  width: 6px;
+  width: var(--scrollbar-width);
 }
 
 .toc-mobile-content::-webkit-scrollbar-track {
@@ -494,7 +444,7 @@ header {
 
 .toc-mobile-content::-webkit-scrollbar-thumb {
   background-color: var(--toc-scrollbar);
-  border-radius: 3px;
+  border-radius: var(--scrollbar-radius);
 }
 
 .toc-mobile-content::-webkit-scrollbar-thumb:hover {
@@ -510,20 +460,19 @@ header {
 }
 
 .toc-mobile-content .toc-content ul li a {
-  padding: 0.5rem 0.75rem;
+  padding: calc(var(--toc-padding) / 3) calc(var(--toc-padding) / 2);
   font-size: 0.9375rem;
 }
 
 .toc-mobile-content .toc-content ul ul li a {
   font-size: 0.875rem;
-  padding: 0.375rem 0.75rem;
+  padding: calc(var(--toc-padding) / 4) calc(var(--toc-padding) / 2);
 }
 
 /* ==========================================================================
-   RESPONSIVE DESIGN
+   RESPONSIVE
    ========================================================================== */
 
-/* Hide desktop TOC sidebar on mobile/tablet devices */
 @media (max-width: 1024px) {
   .toc-sidebar {
     display: none;
@@ -536,11 +485,10 @@ header {
   }
 }
 
-/* Show desktop TOC on larger screens */
 @media (min-width: 1025px) {
   .toc-mobile-button,
   .toc-mobile-overlay,
   .toc-mobile-drawer {
-    display: none !important;
+    display: none;
   }
 }
