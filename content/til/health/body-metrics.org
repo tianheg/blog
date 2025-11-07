@@ -1,15 +1,20 @@
 * 身体数据
 
+身高：169cm
+
 ** 统计体重变化
 
-使用 https://timqian.com/chart.xkcd/
+使用 https://www.chartjs.org/
 
 #+BEGIN_EXPORT html
-<svg class="line-chart"></svg>
-<script src="https://cdn.jsdelivr.net/npm/chart.xkcd@1.1/dist/chart.xkcd.min.js"></script>
+<div>
+  <canvas id="weightChart"></canvas>
+</div>
+
+<script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+
 <script>
-  // Data structure for weight measurements
-  const weightData = [
+const weightData = [
     { date: '2020-05-15', weight: 73.0 },
     { date: '2020-11-04', weight: 78.6 },
     { date: '2023-05-06', weight: 73.5 },
@@ -18,23 +23,55 @@
     { date: '2024-04-01', weight: 81.4 },
     { date: '2024-04-06', weight: 81.5 },
     { date: '2025-07-30', weight: 67.0 },
+    { date: '2025-08-06', weight: 65.6 },
+    { date: '2025-08-21', weight: 65.2 },
+    { date: '2025-09-10', weight: 64.6 },
+    { date: '2025-09-21', weight: 65.0 },
+    { date: '2025-11-03', weight: 67.1 },
   ];
-  
-  // Extract labels and data from the JSON structure
+
+  const ctx = document.getElementById('weightChart');
+
+  // Extract dates and weights from weightData
   const labels = weightData.map(item => item.date);
-  const data = weightData.map(item => item.weight);
-  
-  const svg = document.querySelector('.line-chart')
-  const lineChart = new chartXkcd.Line(svg, {
-    title: 'Daily weight change',
-    xLabel: 'Day',
-    yLabel: 'Weight/kg',
+  const weights = weightData.map(item => item.weight);
+
+  new Chart(ctx, {
+    type: 'line',
     data: {
       labels: labels,
       datasets: [{
-        label: 'Weight value',
-        data: data,
-      }],
+        label: 'Weight (kg)',
+        data: weights,
+        borderColor: 'rgb(75, 192, 192)',
+        backgroundColor: 'rgba(75, 192, 192, 0.2)',
+        borderWidth: 2,
+        fill: true,
+        tension: 0.1
+      }]
+    },
+    options: {
+      responsive: true,
+      plugins: {
+        legend: {
+          display: true
+        }
+      },
+      scales: {
+        y: {
+          beginAtZero: false,
+          title: {
+            display: true,
+            text: 'Weight (kg)'
+          }
+        },
+        x: {
+          title: {
+            display: true,
+            text: 'Date'
+          }
+        }
+      }
     }
   });
 </script>
