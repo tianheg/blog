@@ -2,6 +2,7 @@
 
 {{- $scripts = union $scripts (slice "js/back-to-top.js") -}}
 {{- $scripts = union $scripts (slice "js/keyboard.js") -}}
+{{- $scripts = union $scripts (slice "js/toc.js") -}}
 
 {{- $processedScripts := slice ("" | resources.FromString "dummy.js") -}}
 {{- range $scripts -}}

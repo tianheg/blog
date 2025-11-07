@@ -1,4 +1,15 @@
 {{ define "main" }}
+  {{ if .TableOfContents }}
+  <aside class="toc-sidebar">
+    <nav aria-label="Table of contents" class="toc">
+      <h2 class="toc-title">Contents</h2>
+      <div class="toc-content">
+        {{ .TableOfContents }}
+      </div>
+    </nav>
+  </aside>
+  {{ end }}
+
 <article data-pagefind-body>
   {{ if eq .Section "til" }}
   <!-- Breadcrumb Navigation -->
