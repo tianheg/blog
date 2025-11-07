@@ -2,125 +2,185 @@
 (function() {
   'use strict';
 
-  const tocSidebar = document.querySelector('.toc-sidebar');
-  const tocMobileButton = document.querySelector('.toc-mobile-button');
-  const tocMobileDrawer = document.querySelector('.toc-mobile-drawer');
-  const tocMobileOverlay = document.querySelector('.toc-mobile-overlay');
-  const tocMobileClose = document.querySelector('.toc-mobile-close');
-  
-  // Use mobile drawer if available, otherwise use sidebar
-  const tocContainer = tocMobileDrawer || tocSidebar;
+  const SELECTORS = {
+    sidebar: '.toc-sidebar',
+    mobileButton: '.toc-mobile-button',
+    mobileDrawer: '.toc-mobile-drawer',
+    mobileOverlay: '.toc-mobile-overlay',
+    mobileClose: '.toc-mobile-close',
+    mobileContent: '.toc-mobile-content',
+    tocContent: '.toc-content',
+    header: 'header'
+  };
+
+  const CONSTANTS = {
+    scrollOffset: 3 * 16, // 3rem - matches CSS scroll-margin-top
+    closeDelay: 300,
+    throttleDelay: 100,
+    paddingTop: 1.5 * 16, // 1.5rem
+    buttonSpacing: 0.5 * 16 // 0.5rem
+  };
+
+  const elements = {
+    sidebar: document.querySelector(SELECTORS.sidebar),
+    mobileButton: document.querySelector(SELECTORS.mobileButton),
+    mobileDrawer: document.querySelector(SELECTORS.mobileDrawer),
+    mobileOverlay: document.querySelector(SELECTORS.mobileOverlay),
+    mobileClose: document.querySelector(SELECTORS.mobileClose),
+    header: document.querySelector(SELECTORS.header)
+  };
+
+  const tocContainer = elements.mobileDrawer || elements.sidebar;
   if (!tocContainer) return;
 
   // Mobile TOC functionality
-  if (tocMobileButton && tocMobileDrawer && tocMobileOverlay) {
-    function openMobileTOC() {
-      // Set drawer height to 80vh
-      tocMobileDrawer.style.height = '80vh';
-      tocMobileDrawer.classList.add('active');
-      tocMobileOverlay.classList.add('active');
+  if (elements.mobileButton && elements.mobileDrawer && elements.mobileOverlay) {
+    const openMobileTOC = () => {
+      elements.mobileDrawer.classList.add('active');
+      elements.mobileOverlay.classList.add('active');
       document.body.style.overflow = 'hidden';
-      tocMobileButton.setAttribute('aria-expanded', 'true');
-      tocMobileButton.classList.add('drawer-open');
-      
-      // Reset cursor by blurring button and resetting body cursor
-      setTimeout(() => {
-        tocMobileButton.blur();
-        document.body.style.cursor = 'default';
-      }, 0);
-    }
+      elements.mobileButton.setAttribute('aria-expanded', 'true');
+      elements.mobileButton.classList.add('drawer-open');
+    };
 
-    function closeMobileTOC() {
-      tocMobileDrawer.classList.remove('active');
-      tocMobileOverlay.classList.remove('active');
+    const closeMobileTOC = () => {
+      elements.mobileDrawer.classList.remove('active');
+      elements.mobileOverlay.classList.remove('active');
       document.body.style.overflow = '';
-      document.body.style.cursor = '';
-      tocMobileButton.setAttribute('aria-expanded', 'false');
-      tocMobileButton.classList.remove('drawer-open');
-    }
+      elements.mobileButton.setAttribute('aria-expanded', 'false');
+      elements.mobileButton.classList.remove('drawer-open');
+    };
 
-    tocMobileButton.addEventListener('click', function(e) {
+    const handleOverlayClose = (e) => {
+      e.preventDefault();
+      e.stopPropagation();
+      closeMobileTOC();
+    };
+
+    elements.mobileButton.addEventListener('click', (e) => {
       e.preventDefault();
       e.stopPropagation();
       openMobileTOC();
     });
-    if (tocMobileClose) {
-      tocMobileClose.addEventListener('click', closeMobileTOC);
-    }
-    
-    // Handle overlay clicks (both mouse and touch)
-    function handleOverlayClose(e) {
-      e.preventDefault();
-      e.stopPropagation();
-      closeMobileTOC();
-    }
-    
-    tocMobileOverlay.addEventListener('click', handleOverlayClose);
-    tocMobileOverlay.addEventListener('touchend', handleOverlayClose);
 
-    // Close on escape key
+    if (elements.mobileClose) {
+      elements.mobileClose.addEventListener('click', closeMobileTOC);
+    }
+
+    elements.mobileOverlay.addEventListener('click', handleOverlayClose);
+    elements.mobileOverlay.addEventListener('touchend', handleOverlayClose);
+
     document.addEventListener('keydown', (e) => {
-      if (e.key === 'Escape' && tocMobileDrawer.classList.contains('active')) {
+      if (e.key === 'Escape' && elements.mobileDrawer.classList.contains('active')) {
         closeMobileTOC();
       }
     });
 
-    // Close mobile TOC when clicking a link (on mobile)
-    const mobileTocLinks = tocMobileDrawer.querySelectorAll('a[href^="#"]');
+    // Close mobile TOC when clicking a link
+    const mobileTocLinks = elements.mobileDrawer.querySelectorAll('a[href^="#"]');
     mobileTocLinks.forEach(link => {
       link.addEventListener('click', () => {
-        // Small delay to allow smooth scroll to start
-        setTimeout(closeMobileTOC, 300);
+        setTimeout(closeMobileTOC, CONSTANTS.closeDelay);
       });
     });
 
-    // Prevent drawer from closing when clicking inside the drawer content
-    const mobileTocContent = tocMobileDrawer.querySelector('.toc-mobile-content');
+    // Prevent drawer from closing when clicking inside content
+    const mobileTocContent = elements.mobileDrawer.querySelector(SELECTORS.mobileContent);
     if (mobileTocContent) {
-      mobileTocContent.addEventListener('click', (e) => {
-        e.stopPropagation();
-      });
-      mobileTocContent.addEventListener('touchstart', (e) => {
-        e.stopPropagation();
-      });
+      mobileTocContent.addEventListener('click', (e) => e.stopPropagation());
+      mobileTocContent.addEventListener('touchstart', (e) => e.stopPropagation());
     }
   }
 
-  // Dynamically calculate header height and adjust TOC position
-  function adjustTocPosition() {
-    const header = document.querySelector('header');
-    if (header) {
-      const headerHeight = header.offsetHeight;
-      
-      // Adjust desktop sidebar
-      if (tocSidebar) {
-        tocSidebar.style.paddingTop = `${headerHeight + 1.5 * 16}px`; // header height + 1.5rem padding
-      }
-      
-      // Adjust mobile button position
-      if (tocMobileButton) {
-        // Position button below header with 0.5rem spacing
-        tocMobileButton.style.top = `${headerHeight + 0.5 * 16}px`;
-      }
-    }
-  }
+  // Adjust TOC position based on header height
+  const adjustTocPosition = () => {
+    if (!elements.header) return;
+    const headerHeight = elements.header.offsetHeight;
 
-  // Adjust on load and resize
+    if (elements.sidebar) {
+      elements.sidebar.style.paddingTop = `${headerHeight + CONSTANTS.paddingTop}px`;
+    }
+
+    if (elements.mobileButton) {
+      elements.mobileButton.style.top = `${headerHeight + CONSTANTS.buttonSpacing}px`;
+    }
+  };
+
   adjustTocPosition();
   window.addEventListener('resize', adjustTocPosition);
 
+  // Get all TOC links and their corresponding headings
   const tocLinks = tocContainer.querySelectorAll('a[href^="#"]');
   if (tocLinks.length === 0) return;
 
   const headings = Array.from(tocLinks).map(link => {
     const id = link.getAttribute('href').substring(1);
     const heading = document.getElementById(id);
-    return { id, link, heading };
-  }).filter(item => item.heading !== null);
+    return heading ? { id, link, heading } : null;
+  }).filter(Boolean);
 
   if (headings.length === 0) return;
 
-  // Smooth scroll behavior for TOC links
+  // Scroll element into view within container
+  const scrollIntoView = (link, container) => {
+    if (!container || !link.offsetParent) return;
+
+    const linkTop = link.getBoundingClientRect().top;
+    const containerTop = container.getBoundingClientRect().top;
+    const containerHeight = container.clientHeight;
+    const linkHeight = link.offsetHeight;
+
+    if (linkTop < containerTop + CONSTANTS.scrollOffset) {
+      container.scrollTo({
+        top: container.scrollTop + (linkTop - containerTop) - CONSTANTS.scrollOffset,
+        behavior: 'smooth'
+      });
+    } else if (linkTop + linkHeight > containerTop + containerHeight - CONSTANTS.scrollOffset) {
+      container.scrollTo({
+        top: container.scrollTop + (linkTop + linkHeight - containerTop - containerHeight) + CONSTANTS.scrollOffset,
+        behavior: 'smooth'
+      });
+    }
+  };
+
+  // Update active link state
+  const updateActiveLink = (activeLink) => {
+    tocLinks.forEach(link => link.classList.remove('active'));
+    
+    if (activeLink) {
+      activeLink.classList.add('active');
+      
+      if (elements.sidebar) {
+        const tocContent = elements.sidebar.querySelector(SELECTORS.tocContent);
+        if (tocContent) scrollIntoView(activeLink, elements.sidebar);
+      }
+      
+      if (elements.mobileDrawer?.classList.contains('active')) {
+        const mobileTocContent = elements.mobileDrawer.querySelector(SELECTORS.mobileContent);
+        if (mobileTocContent) scrollIntoView(activeLink, mobileTocContent);
+      }
+    }
+  };
+
+  // Get currently active heading based on scroll position
+  const getActiveHeading = () => {
+    // Match CSS scroll-margin-top: calc(var(--header-height) + 3rem)
+    const headerOffset = elements.header 
+      ? elements.header.offsetHeight + CONSTANTS.scrollOffset 
+      : 5 * 16 + CONSTANTS.scrollOffset; // 5rem (--header-height) + 3rem
+    const scrollPosition = window.scrollY + headerOffset;
+
+    for (let i = headings.length - 1; i >= 0; i--) {
+      const { heading, link } = headings[i];
+      if (heading && heading.offsetTop <= scrollPosition) {
+        return link;
+      }
+    }
+
+    return headings[0]?.link || null;
+  };
+
+  // Handle TOC link clicks
   tocLinks.forEach(link => {
     link.addEventListener('click', function(e) {
       const href = this.getAttribute('href');
@@ -128,117 +188,16 @@
         const target = document.querySelector(href);
         if (target) {
           e.preventDefault();
-          const header = document.querySelector('header');
-          const offset = header ? header.offsetHeight + 20 : 100; // Account for sticky header + padding
-          const targetPosition = target.getBoundingClientRect().top + window.pageYOffset - offset;
-          
-          window.scrollTo({
-            top: targetPosition,
-            behavior: 'smooth'
-          });
-
-          // Update active state immediately
+          // Use scrollIntoView which respects CSS scroll-margin-top
+          target.scrollIntoView({ behavior: 'smooth', block: 'start' });
           updateActiveLink(this);
         }
       }
     });
   });
 
-  function updateActiveLink(activeLink) {
-    tocLinks.forEach(link => {
-      link.classList.remove('active');
-    });
-    if (activeLink) {
-      activeLink.classList.add('active');
-      
-      // Scroll TOC to show active link if needed (desktop sidebar only)
-      if (tocSidebar) {
-        const tocContent = tocSidebar.querySelector('.toc-content');
-        if (tocContent && activeLink.offsetParent !== null) {
-          const linkTop = activeLink.getBoundingClientRect().top;
-          const sidebarTop = tocSidebar.getBoundingClientRect().top;
-          const sidebarHeight = tocSidebar.clientHeight;
-          
-          if (linkTop < sidebarTop + 20) {
-            tocSidebar.scrollTo({
-              top: tocSidebar.scrollTop + (linkTop - sidebarTop) - 20,
-              behavior: 'smooth'
-            });
-          } else if (linkTop + activeLink.offsetHeight > sidebarTop + sidebarHeight - 20) {
-            tocSidebar.scrollTo({
-              top: tocSidebar.scrollTop + (linkTop + activeLink.offsetHeight - sidebarTop - sidebarHeight) + 20,
-              behavior: 'smooth'
-            });
-          }
-        }
-      }
-      
-      // Scroll mobile drawer to show active link
-      if (tocMobileDrawer && tocMobileDrawer.classList.contains('active')) {
-        const mobileTocContent = tocMobileDrawer.querySelector('.toc-mobile-content');
-        if (mobileTocContent && activeLink.offsetParent !== null) {
-          const linkTop = activeLink.getBoundingClientRect().top;
-          const drawerTop = mobileTocContent.getBoundingClientRect().top;
-          const drawerHeight = mobileTocContent.clientHeight;
-          
-          if (linkTop < drawerTop + 20) {
-            mobileTocContent.scrollTo({
-              top: mobileTocContent.scrollTop + (linkTop - drawerTop) - 20,
-              behavior: 'smooth'
-            });
-          } else if (linkTop + activeLink.offsetHeight > drawerTop + drawerHeight - 20) {
-            mobileTocContent.scrollTo({
-              top: mobileTocContent.scrollTop + (linkTop + activeLink.offsetHeight - drawerTop - drawerHeight) + 20,
-              behavior: 'smooth'
-            });
-          }
-        }
-      }
-    }
-  }
-
-  function getActiveHeading() {
-    const header = document.querySelector('header');
-    const headerOffset = header ? header.offsetHeight + 20 : 120;
-    const scrollPosition = window.scrollY + headerOffset; // Offset for header + some padding
-    
-    // Find the heading that's currently in view
-    for (let i = headings.length - 1; i >= 0; i--) {
-      const { heading, link } = headings[i];
-      if (heading && heading.offsetTop <= scrollPosition) {
-        return link;
-      }
-    }
-    
-    // If no heading found, return the first one
-    return headings[0]?.link || null;
-  }
-
-  // Throttled scroll handler
-  const handleScroll = throttle(() => {
-    const activeLink = getActiveHeading();
-    updateActiveLink(activeLink);
-  }, 100);
-
-  // Initial active state
-  handleScroll();
-
-  // Listen for scroll events
-  window.addEventListener('scroll', handleScroll, { passive: true });
-
-  // Also listen for hash changes (when clicking TOC links)
-  window.addEventListener('hashchange', () => {
-    const hash = window.location.hash;
-    if (hash) {
-      const link = tocContainer.querySelector(`a[href="${hash}"]`);
-      if (link) {
-        updateActiveLink(link);
-      }
-    }
-  });
-
-  // Throttle function (reuse from main.js if available, otherwise define here)
-  function throttle(func, wait) {
+  // Throttle function
+  const throttle = (func, wait) => {
     let timeout;
     return function executedFunction(...args) {
       const later = () => {
@@ -248,6 +207,22 @@
       clearTimeout(timeout);
       timeout = setTimeout(later, wait);
     };
-  }
-})();
+  };
 
+  // Handle scroll events
+  const handleScroll = throttle(() => {
+    updateActiveLink(getActiveHeading());
+  }, CONSTANTS.throttleDelay);
+
+  handleScroll();
+  window.addEventListener('scroll', handleScroll, { passive: true });
+
+  // Handle hash changes
+  window.addEventListener('hashchange', () => {
+    const hash = window.location.hash;
+    if (hash) {
+      const link = tocContainer.querySelector(`a[href="${hash}"]`);
+      if (link) updateActiveLink(link);
+    }
+  });
+})();
