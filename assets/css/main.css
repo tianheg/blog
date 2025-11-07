@@ -280,12 +280,267 @@ header {
 }
 
 /* ==========================================================================
+   MOBILE TOC DESIGN
+   ========================================================================== */
+
+/* Mobile TOC Floating Button */
+.toc-mobile-button {
+  position: fixed !important;
+  top: 5.5rem !important; /* Dynamically adjusted by JavaScript based on header height */
+  left: -1.5rem !important; /* Half hidden - negative left position */
+  z-index: 50 !important;
+  background-color: var(--toc-link-active) !important;
+  color: white !important;
+  border: none !important;
+  border-radius: 50% !important; /* Circle */
+  width: 3rem !important;
+  height: 3rem !important;
+  padding: 0 !important;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.12), 0 1px 3px rgba(0, 0, 0, 0.08) !important;
+  cursor: pointer !important;
+  font-size: 0.8125rem !important;
+  font-weight: 600 !important;
+  display: flex !important;
+  align-items: center !important;
+  justify-content: center !important;
+  gap: 0 !important;
+  transition: all 0.2s ease !important;
+  backdrop-filter: blur(10px) !important;
+  -webkit-backdrop-filter: blur(10px) !important;
+  user-select: none !important;
+  -webkit-user-select: none !important;
+  -webkit-tap-highlight-color: transparent !important;
+  /* Override DaisyUI button styles */
+  line-height: normal !important;
+  text-align: center !important;
+  text-transform: none !important;
+  letter-spacing: normal !important;
+}
+
+.toc-mobile-button:hover {
+  transform: translateY(-1px);
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.16), 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+.toc-mobile-button:active {
+  transform: translateY(0);
+  box-shadow: 0 1px 4px rgba(0, 0, 0, 0.12);
+  cursor: pointer;
+}
+
+.toc-mobile-button:focus {
+  outline: none;
+  cursor: pointer;
+}
+
+.toc-mobile-button:focus-visible {
+  outline: 2px solid var(--toc-link-active);
+  outline-offset: 2px;
+  cursor: pointer;
+}
+
+.toc-mobile-button:not(:hover):not(:active):not(:focus) {
+  cursor: pointer;
+}
+
+/* When drawer is open, button should not show pointer cursor */
+.toc-mobile-button.drawer-open {
+  cursor: default !important;
+  pointer-events: none;
+}
+
+.toc-mobile-button svg {
+  flex-shrink: 0;
+  width: 20px;
+  height: 20px;
+}
+
+.toc-mobile-button span {
+  display: none !important; /* Hide text label for circular button */
+}
+
+/* Mobile TOC Overlay */
+.toc-mobile-overlay {
+  display: none !important;
+  position: fixed !important;
+  top: 0 !important;
+  left: 0 !important;
+  right: 0 !important;
+  bottom: 0 !important;
+  background-color: rgba(0, 0, 0, 0.5) !important;
+  z-index: 60 !important;
+  opacity: 0 !important;
+  transition: opacity 0.3s ease !important;
+  backdrop-filter: blur(4px) !important;
+  pointer-events: none !important;
+  cursor: default !important;
+  /* Override DaisyUI modal overlay styles */
+  width: 100% !important;
+  height: 100% !important;
+  margin: 0 !important;
+  padding: 0 !important;
+}
+
+.toc-mobile-overlay.active {
+  opacity: 1 !important;
+  pointer-events: auto !important;
+  cursor: default !important;
+  display: block !important;
+}
+
+/* Mobile TOC Drawer */
+.toc-mobile-drawer {
+  position: fixed !important;
+  bottom: 0 !important;
+  left: 0 !important;
+  right: 0 !important;
+  max-height: 80vh !important;
+  height: 80vh !important;
+  background-color: var(--color-base-100) !important;
+  border-top-left-radius: 1.5rem !important;
+  border-top-right-radius: 1.5rem !important;
+  z-index: 70 !important;
+  transform: translateY(100%) !important;
+  transition: transform 0.3s cubic-bezier(0.4, 0, 0.2, 1) !important;
+  box-shadow: 0 -4px 20px rgba(0, 0, 0, 0.15) !important;
+  display: flex !important;
+  flex-direction: column !important;
+  overflow: hidden !important;
+  /* Override DaisyUI drawer/modal styles */
+  width: 100% !important;
+  margin: 0 !important;
+  padding: 0 !important;
+}
+
+.toc-mobile-drawer.active {
+  transform: translateY(0) !important;
+}
+
+/* Mobile TOC Header */
+.toc-mobile-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 1.25rem 1.5rem;
+  border-bottom: 1px solid var(--toc-border);
+  flex-shrink: 0;
+}
+
+.toc-mobile-header .toc-title {
+  margin: 0;
+  padding: 0;
+  border: none;
+  font-size: 1rem;
+}
+
+.toc-mobile-close {
+  background: none !important;
+  border: none !important;
+  color: var(--toc-text-primary) !important;
+  cursor: pointer !important;
+  padding: 0.5rem !important;
+  display: flex !important;
+  align-items: center !important;
+  justify-content: center !important;
+  border-radius: 0.5rem !important;
+  transition: background-color 0.2s ease !important;
+  /* Override DaisyUI button styles */
+  font-size: inherit !important;
+  font-weight: normal !important;
+  line-height: normal !important;
+  text-transform: none !important;
+  letter-spacing: normal !important;
+  min-height: auto !important;
+  height: auto !important;
+  width: auto !important;
+}
+
+.toc-mobile-close:hover {
+  background-color: var(--toc-link-bg);
+}
+
+.toc-mobile-close svg {
+  width: 20px;
+  height: 20px;
+}
+
+/* Mobile TOC Content */
+.toc-mobile-content {
+  flex: 1 !important;
+  min-height: 0 !important;
+  overflow-y: scroll !important;
+  overflow-x: hidden !important;
+  padding: 1rem 1.5rem 2rem !important;
+  -webkit-overflow-scrolling: touch !important;
+  scrollbar-width: thin !important;
+  scrollbar-color: var(--toc-scrollbar) transparent !important;
+  touch-action: pan-y !important;
+  overscroll-behavior: contain !important;
+  position: relative !important;
+  max-height: calc(80vh - 4rem) !important;
+  /* Override DaisyUI content styles */
+  width: 100% !important;
+  margin: 0 !important;
+}
+
+/* Mobile TOC Content Scrollbar Styling */
+.toc-mobile-content::-webkit-scrollbar {
+  width: 6px;
+}
+
+.toc-mobile-content::-webkit-scrollbar-track {
+  background: transparent;
+}
+
+.toc-mobile-content::-webkit-scrollbar-thumb {
+  background-color: var(--toc-scrollbar);
+  border-radius: 3px;
+}
+
+.toc-mobile-content::-webkit-scrollbar-thumb:hover {
+  background-color: var(--toc-scrollbar-hover);
+}
+
+.toc-mobile-content .toc-content {
+  font-size: 0.9375rem;
+}
+
+.toc-mobile-content .toc-content ul li {
+  margin: 0.75rem 0;
+}
+
+.toc-mobile-content .toc-content ul li a {
+  padding: 0.5rem 0.75rem;
+  font-size: 0.9375rem;
+}
+
+.toc-mobile-content .toc-content ul ul li a {
+  font-size: 0.875rem;
+  padding: 0.375rem 0.75rem;
+}
+
+/* ==========================================================================
    RESPONSIVE DESIGN
    ========================================================================== */
 
-/* Hide TOC sidebar on mobile/tablet devices */
+/* Hide desktop TOC sidebar on mobile/tablet devices */
 @media (max-width: 1024px) {
   .toc-sidebar {
     display: none;
+  }
+
+  .toc-mobile-button,
+  .toc-mobile-overlay,
+  .toc-mobile-drawer {
+    display: block;
+  }
+}
+
+/* Show desktop TOC on larger screens */
+@media (min-width: 1025px) {
+  .toc-mobile-button,
+  .toc-mobile-overlay,
+  .toc-mobile-drawer {
+    display: none !important;
   }
 }
