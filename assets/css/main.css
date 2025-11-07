@@ -1,3 +1,7 @@
+/* ==========================================================================
+   IMPORTS & PLUGINS
+   ========================================================================== */
+
 @import "tailwindcss";
 @plugin "@tailwindcss/typography";
 @plugin "daisyui" {
@@ -9,7 +13,63 @@
   --color-base-100: oklch(97% 0.0035 67.78);
 }
 
-/* Satoshi https://fontshare.com/fonts/satoshi */
+/* ==========================================================================
+   CSS CUSTOM PROPERTIES (Design Tokens)
+   ========================================================================== */
+
+:root {
+  /* Colors - Light Mode */
+  --toc-border-light: rgb(229 231 235);
+  --toc-text-primary-light: rgb(75 85 99);
+  --toc-text-secondary-light: rgb(107 114 128);
+  --toc-link-active-light: rgb(37 99 235);
+  --toc-link-bg-light: rgb(239 246 255);
+  --toc-scrollbar-light: rgb(203 213 225);
+  --toc-scrollbar-hover-light: rgb(148 163 184);
+  --toc-shadow-light: rgba(0, 0, 0, 0.04);
+
+  /* Colors - Dark Mode */
+  --toc-border-dark: rgb(55 65 81);
+  --toc-text-primary-dark: rgb(209 213 219);
+  --toc-text-secondary-dark: rgb(200 205 210);
+  --toc-link-active-dark: rgb(147 197 253);
+  --toc-link-bg-dark: rgb(30 41 59);
+  --toc-scrollbar-dark: rgb(75 85 99);
+  --toc-scrollbar-hover-dark: rgb(107 114 128);
+  --toc-shadow-dark: rgba(0, 0, 0, 0.4);
+}
+
+@media (prefers-color-scheme: dark) {
+  :root {
+    --toc-border: var(--toc-border-dark);
+    --toc-text-primary: var(--toc-text-primary-dark);
+    --toc-text-secondary: var(--toc-text-secondary-dark);
+    --toc-link-active: var(--toc-link-active-dark);
+    --toc-link-bg: var(--toc-link-bg-dark);
+    --toc-scrollbar: var(--toc-scrollbar-dark);
+    --toc-scrollbar-hover: var(--toc-scrollbar-hover-dark);
+    --toc-shadow: var(--toc-shadow-dark);
+  }
+}
+
+@media (prefers-color-scheme: light) {
+  :root {
+    --toc-border: var(--toc-border-light);
+    --toc-text-primary: var(--toc-text-primary-light);
+    --toc-text-secondary: var(--toc-text-secondary-light);
+    --toc-link-active: var(--toc-link-active-light);
+    --toc-link-bg: var(--toc-link-bg-light);
+    --toc-scrollbar: var(--toc-scrollbar-light);
+    --toc-scrollbar-hover: var(--toc-scrollbar-hover-light);
+    --toc-shadow: var(--toc-shadow-light);
+  }
+}
+
+/* ==========================================================================
+   FONTS
+   ========================================================================== */
+
+/* Satoshi Variable Font - https://fontshare.com/fonts/satoshi */
 @font-face {
   font-family: "Satoshi";
   src: url("/fonts/Satoshi-Variable.woff2") format("woff2"),
@@ -27,6 +87,10 @@
   font-display: swap;
   font-style: italic;
 }
+
+/* ==========================================================================
+   BASE STYLES
+   ========================================================================== */
 
 html {
   scroll-behavior: smooth;
@@ -46,7 +110,14 @@ header {
   background-color: var(--color-base-100);
 }
 
-/* Table of Contents Sidebar Styling - Fixed at viewport's left side */
+/* ==========================================================================
+   TABLE OF CONTENTS (TOC) SIDEBAR
+   ========================================================================== */
+
+/* --------------------------------------------------------------------------
+   TOC Sidebar Container
+   -------------------------------------------------------------------------- */
+
 .toc-sidebar {
   position: fixed;
   left: 0;
@@ -56,15 +127,16 @@ header {
   overflow-y: auto;
   overflow-x: hidden;
   padding: 1.5rem;
-  padding-top: 5rem; /* Will be adjusted dynamically by JavaScript based on header height */
+  padding-top: 5rem; /* Adjusted dynamically by JavaScript based on header height */
   z-index: 10;
   background-color: var(--color-base-100);
-  border-right: 1px solid rgb(229 231 235);
-  box-shadow: 2px 0 8px rgba(0, 0, 0, 0.04);
+  border-right: 1px solid var(--toc-border);
+  box-shadow: 2px 0 8px var(--toc-shadow);
   scrollbar-width: thin;
-  scrollbar-color: rgb(203 213 225) transparent;
+  scrollbar-color: var(--toc-scrollbar) transparent;
 }
 
+/* TOC Sidebar Scrollbar Styling */
 .toc-sidebar::-webkit-scrollbar {
   width: 6px;
 }
@@ -74,60 +146,44 @@ header {
 }
 
 .toc-sidebar::-webkit-scrollbar-thumb {
-  background-color: rgb(203 213 225);
+  background-color: var(--toc-scrollbar);
   border-radius: 3px;
 }
 
 .toc-sidebar::-webkit-scrollbar-thumb:hover {
-  background-color: rgb(148 163 184);
+  background-color: var(--toc-scrollbar-hover);
 }
 
-@media (prefers-color-scheme: dark) {
-  .toc-sidebar {
-    border-right-color: rgb(55 65 81);
-    box-shadow: 2px 0 8px rgba(0, 0, 0, 0.4);
-  }
-
-  .toc-sidebar::-webkit-scrollbar-thumb {
-    background-color: rgb(75 85 99);
-  }
-
-  .toc-sidebar::-webkit-scrollbar-thumb:hover {
-    background-color: rgb(107 114 128);
-  }
-}
+/* --------------------------------------------------------------------------
+   TOC Navigation Container
+   -------------------------------------------------------------------------- */
 
 .toc {
   line-height: 1.6;
   font-size: 0.875rem;
 }
 
+/* --------------------------------------------------------------------------
+   TOC Title
+   -------------------------------------------------------------------------- */
+
 .toc-title {
   font-size: 0.75rem;
   font-weight: 700;
   text-transform: uppercase;
   letter-spacing: 0.1em;
-  color: rgb(75 85 99);
+  color: var(--toc-text-primary);
   margin-bottom: 1rem;
   padding-bottom: 0.75rem;
-  border-bottom: 2px solid rgb(229 231 235);
+  border-bottom: 2px solid var(--toc-border);
 }
 
-@media (prefers-color-scheme: dark) {
-  .toc-title {
-    color: rgb(209 213 219);
-    border-bottom-color: rgb(55 65 81);
-  }
-}
+/* --------------------------------------------------------------------------
+   TOC Content Container
+   -------------------------------------------------------------------------- */
 
 .toc-content {
-  color: rgb(107 114 128);
-}
-
-@media (prefers-color-scheme: dark) {
-  .toc-content {
-    color: rgb(200 205 210);
-  }
+  color: var(--toc-text-secondary);
 }
 
 .toc-content ul {
@@ -141,6 +197,10 @@ header {
   position: relative;
 }
 
+/* --------------------------------------------------------------------------
+   TOC Links (Top Level)
+   -------------------------------------------------------------------------- */
+
 .toc-content ul li a {
   color: inherit;
   text-decoration: none;
@@ -153,31 +213,18 @@ header {
 }
 
 .toc-content ul li a:hover {
-  color: rgb(37 99 235);
-  background-color: rgb(239 246 255);
+  color: var(--toc-link-active);
+  background-color: var(--toc-link-bg);
   transform: translateX(2px);
 }
 
-@media (prefers-color-scheme: dark) {
-  .toc-content ul li a:hover {
-    color: rgb(147 197 253);
-    background-color: rgb(30 41 59);
-  }
-}
-
 .toc-content ul li a.active {
-  color: rgb(37 99 235);
-  background-color: rgb(239 246 255);
+  color: var(--toc-link-active);
+  background-color: var(--toc-link-bg);
   font-weight: 600;
 }
 
-@media (prefers-color-scheme: dark) {
-  .toc-content ul li a.active {
-    color: rgb(147 197 253);
-    background-color: rgb(30 41 59);
-  }
-}
-
+/* Active link indicator bar */
 .toc-content ul li a.active::before {
   content: '';
   position: absolute;
@@ -186,24 +233,23 @@ header {
   transform: translateY(-50%);
   width: 3px;
   height: 60%;
-  background-color: rgb(37 99 235);
+  background-color: var(--toc-link-active);
   border-radius: 0 2px 2px 0;
 }
 
-@media (prefers-color-scheme: dark) {
-  .toc-content ul li a.active::before {
-    background-color: rgb(147 197 253);
-  }
-}
+/* --------------------------------------------------------------------------
+   TOC Nested Lists (Sub-items)
+   -------------------------------------------------------------------------- */
 
 .toc-content ul ul {
   padding-left: 0.75rem;
   margin-top: 0.5rem;
   margin-left: 0.5rem;
-  border-left: 2px solid rgb(229 231 235);
+  border-left: 2px solid var(--toc-border);
   position: relative;
 }
 
+/* Gradient border effect for nested lists */
 .toc-content ul ul::before {
   content: '';
   position: absolute;
@@ -213,23 +259,9 @@ header {
   width: 2px;
   background: linear-gradient(to bottom, 
     transparent 0%, 
-    rgb(229 231 235) 10%, 
-    rgb(229 231 235) 90%, 
+    var(--toc-border) 10%, 
+    var(--toc-border) 90%, 
     transparent 100%);
-}
-
-@media (prefers-color-scheme: dark) {
-  .toc-content ul ul {
-    border-left-color: rgb(55 65 81);
-  }
-
-  .toc-content ul ul::before {
-    background: linear-gradient(to bottom, 
-      transparent 0%, 
-      rgb(55 65 81) 10%, 
-      rgb(55 65 81) 90%, 
-      transparent 100%);
-  }
 }
 
 .toc-content ul ul li {
@@ -247,7 +279,11 @@ header {
   opacity: 1;
 }
 
-/* Responsive: Hide TOC on mobile or position it differently */
+/* ==========================================================================
+   RESPONSIVE DESIGN
+   ========================================================================== */
+
+/* Hide TOC sidebar on mobile/tablet devices */
 @media (max-width: 1024px) {
   .toc-sidebar {
     display: none;
