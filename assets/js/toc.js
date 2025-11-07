@@ -3,14 +3,105 @@
   'use strict';
 
   const tocSidebar = document.querySelector('.toc-sidebar');
-  if (!tocSidebar) return;
+  const tocMobileButton = document.querySelector('.toc-mobile-button');
+  const tocMobileDrawer = document.querySelector('.toc-mobile-drawer');
+  const tocMobileOverlay = document.querySelector('.toc-mobile-overlay');
+  const tocMobileClose = document.querySelector('.toc-mobile-close');
+  
+  // Use mobile drawer if available, otherwise use sidebar
+  const tocContainer = tocMobileDrawer || tocSidebar;
+  if (!tocContainer) return;
+
+  // Mobile TOC functionality
+  if (tocMobileButton && tocMobileDrawer && tocMobileOverlay) {
+    function openMobileTOC() {
+      // Set drawer height to 80vh
+      tocMobileDrawer.style.height = '80vh';
+      tocMobileDrawer.classList.add('active');
+      tocMobileOverlay.classList.add('active');
+      document.body.style.overflow = 'hidden';
+      tocMobileButton.setAttribute('aria-expanded', 'true');
+      tocMobileButton.classList.add('drawer-open');
+      
+      // Reset cursor by blurring button and resetting body cursor
+      setTimeout(() => {
+        tocMobileButton.blur();
+        document.body.style.cursor = 'default';
+      }, 0);
+    }
+
+    function closeMobileTOC() {
+      tocMobileDrawer.classList.remove('active');
+      tocMobileOverlay.classList.remove('active');
+      document.body.style.overflow = '';
+      document.body.style.cursor = '';
+      tocMobileButton.setAttribute('aria-expanded', 'false');
+      tocMobileButton.classList.remove('drawer-open');
+    }
+
+    tocMobileButton.addEventListener('click', function(e) {
+      e.preventDefault();
+      e.stopPropagation();
+      openMobileTOC();
+    });
+    if (tocMobileClose) {
+      tocMobileClose.addEventListener('click', closeMobileTOC);
+    }
+    
+    // Handle overlay clicks (both mouse and touch)
+    function handleOverlayClose(e) {
+      e.preventDefault();
+      e.stopPropagation();
+      closeMobileTOC();
+    }
+    
+    tocMobileOverlay.addEventListener('click', handleOverlayClose);
+    tocMobileOverlay.addEventListener('touchend', handleOverlayClose);
+
+    // Close on escape key
+    document.addEventListener('keydown', (e) => {
+      if (e.key === 'Escape' && tocMobileDrawer.classList.contains('active')) {
+        closeMobileTOC();
+      }
+    });
+
+    // Close mobile TOC when clicking a link (on mobile)
+    const mobileTocLinks = tocMobileDrawer.querySelectorAll('a[href^="#"]');
+    mobileTocLinks.forEach(link => {
+      link.addEventListener('click', () => {
+        // Small delay to allow smooth scroll to start
+        setTimeout(closeMobileTOC, 300);
+      });
+    });
+
+    // Prevent drawer from closing when clicking inside the drawer content
+    const mobileTocContent = tocMobileDrawer.querySelector('.toc-mobile-content');
+    if (mobileTocContent) {
+      mobileTocContent.addEventListener('click', (e) => {
+        e.stopPropagation();
+      });
+      mobileTocContent.addEventListener('touchstart', (e) => {
+        e.stopPropagation();
+      });
+    }
+  }
 
   // Dynamically calculate header height and adjust TOC position
   function adjustTocPosition() {
     const header = document.querySelector('header');
     if (header) {
       const headerHeight = header.offsetHeight;
-      tocSidebar.style.paddingTop = `${headerHeight + 1.5 * 16}px`; // header height + 1.5rem padding
+      
+      // Adjust desktop sidebar
+      if (tocSidebar) {
+        tocSidebar.style.paddingTop = `${headerHeight + 1.5 * 16}px`; // header height + 1.5rem padding
+      }
+      
+      // Adjust mobile button position
+      if (tocMobileButton) {
+        // Position button below header with 0.5rem spacing
+        tocMobileButton.style.top = `${headerHeight + 0.5 * 16}px`;
+      }
     }
   }
 
@@ -18,7 +109,7 @@
   adjustTocPosition();
   window.addEventListener('resize', adjustTocPosition);
 
-  const tocLinks = tocSidebar.querySelectorAll('a[href^="#"]');
+  const tocLinks = tocContainer.querySelectorAll('a[href^="#"]');
   if (tocLinks.length === 0) return;
 
   const headings = Array.from(tocLinks).map(link => {
@@ -60,23 +151,47 @@
     if (activeLink) {
       activeLink.classList.add('active');
       
-      // Scroll TOC to show active link if needed
-      const tocContent = tocSidebar.querySelector('.toc-content');
-      if (tocContent && activeLink.offsetParent !== null) {
-        const linkTop = activeLink.getBoundingClientRect().top;
-        const sidebarTop = tocSidebar.getBoundingClientRect().top;
-        const sidebarHeight = tocSidebar.clientHeight;
-        
-        if (linkTop < sidebarTop + 20) {
-          tocSidebar.scrollTo({
-            top: tocSidebar.scrollTop + (linkTop - sidebarTop) - 20,
-            behavior: 'smooth'
-          });
-        } else if (linkTop + activeLink.offsetHeight > sidebarTop + sidebarHeight - 20) {
-          tocSidebar.scrollTo({
-            top: tocSidebar.scrollTop + (linkTop + activeLink.offsetHeight - sidebarTop - sidebarHeight) + 20,
-            behavior: 'smooth'
-          });
+      // Scroll TOC to show active link if needed (desktop sidebar only)
+      if (tocSidebar) {
+        const tocContent = tocSidebar.querySelector('.toc-content');
+        if (tocContent && activeLink.offsetParent !== null) {
+          const linkTop = activeLink.getBoundingClientRect().top;
+          const sidebarTop = tocSidebar.getBoundingClientRect().top;
+          const sidebarHeight = tocSidebar.clientHeight;
+          
+          if (linkTop < sidebarTop + 20) {
+            tocSidebar.scrollTo({
+              top: tocSidebar.scrollTop + (linkTop - sidebarTop) - 20,
+              behavior: 'smooth'
+            });
+          } else if (linkTop + activeLink.offsetHeight > sidebarTop + sidebarHeight - 20) {
+            tocSidebar.scrollTo({
+              top: tocSidebar.scrollTop + (linkTop + activeLink.offsetHeight - sidebarTop - sidebarHeight) + 20,
+              behavior: 'smooth'
+            });
+          }
+        }
+      }
+      
+      // Scroll mobile drawer to show active link
+      if (tocMobileDrawer && tocMobileDrawer.classList.contains('active')) {
+        const mobileTocContent = tocMobileDrawer.querySelector('.toc-mobile-content');
+        if (mobileTocContent && activeLink.offsetParent !== null) {
+          const linkTop = activeLink.getBoundingClientRect().top;
+          const drawerTop = mobileTocContent.getBoundingClientRect().top;
+          const drawerHeight = mobileTocContent.clientHeight;
+          
+          if (linkTop < drawerTop + 20) {
+            mobileTocContent.scrollTo({
+              top: mobileTocContent.scrollTop + (linkTop - drawerTop) - 20,
+              behavior: 'smooth'
+            });
+          } else if (linkTop + activeLink.offsetHeight > drawerTop + drawerHeight - 20) {
+            mobileTocContent.scrollTo({
+              top: mobileTocContent.scrollTop + (linkTop + activeLink.offsetHeight - drawerTop - drawerHeight) + 20,
+              behavior: 'smooth'
+            });
+          }
         }
       }
     }
@@ -115,7 +230,7 @@
   window.addEventListener('hashchange', () => {
     const hash = window.location.hash;
     if (hash) {
-      const link = tocSidebar.querySelector(`a[href="${hash}"]`);
+      const link = tocContainer.querySelector(`a[href="${hash}"]`);
       if (link) {
         updateActiveLink(link);
       }
