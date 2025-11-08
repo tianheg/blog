@@ -14,7 +14,6 @@
   };
 
   const CONSTANTS = {
-    scrollOffset: 3 * 16, // 3rem - matches CSS scroll-margin-top
     closeDelay: 300,
     throttleDelay: 100,
     paddingTop: 1.5 * 16, // 1.5rem
@@ -129,15 +128,16 @@
     const containerTop = container.getBoundingClientRect().top;
     const containerHeight = container.clientHeight;
     const linkHeight = link.offsetHeight;
+    const scrollOffset = 32; // 2rem offset for TOC navigation
 
-    if (linkTop < containerTop + CONSTANTS.scrollOffset) {
+    if (linkTop < containerTop + scrollOffset) {
       container.scrollTo({
-        top: container.scrollTop + (linkTop - containerTop) - CONSTANTS.scrollOffset,
+        top: container.scrollTop + (linkTop - containerTop) - scrollOffset,
         behavior: 'smooth'
       });
-    } else if (linkTop + linkHeight > containerTop + containerHeight - CONSTANTS.scrollOffset) {
+    } else if (linkTop + linkHeight > containerTop + containerHeight - scrollOffset) {
       container.scrollTo({
-        top: container.scrollTop + (linkTop + linkHeight - containerTop - containerHeight) + CONSTANTS.scrollOffset,
+        top: container.scrollTop + (linkTop + linkHeight - containerTop - containerHeight) + scrollOffset,
         behavior: 'smooth'
       });
     }
@@ -146,15 +146,15 @@
   // Update active link state
   const updateActiveLink = (activeLink) => {
     tocLinks.forEach(link => link.classList.remove('active'));
-    
+
     if (activeLink) {
       activeLink.classList.add('active');
-      
+
       if (elements.sidebar) {
         const tocContent = elements.sidebar.querySelector(SELECTORS.tocContent);
         if (tocContent) scrollIntoView(activeLink, elements.sidebar);
       }
-      
+
       if (elements.mobileDrawer?.classList.contains('active')) {
         const mobileTocContent = elements.mobileDrawer.querySelector(SELECTORS.mobileContent);
         if (mobileTocContent) scrollIntoView(activeLink, mobileTocContent);
@@ -162,23 +162,10 @@
     }
   };
 
-  // Get currently active heading based on scroll position
-  const getActiveHeading = () => {
-    // Match CSS scroll-margin-top: calc(var(--header-height) + 3rem)
-    const headerOffset = elements.header 
-      ? elements.header.offsetHeight + CONSTANTS.scrollOffset 
-      : 5 * 16 + CONSTANTS.scrollOffset; // 5rem (--header-height) + 3rem
-    const scrollPosition = window.scrollY + headerOffset;
-
-    for (let i = headings.length - 1; i >= 0; i--) {
-      const { heading, link } = headings[i];
-      if (heading && heading.offsetTop <= scrollPosition) {
-        return link;
-      }
-    }
-
-    return headings[0]?.link || null;
-  };
+  // Active heading calculation is handled by an IntersectionObserver below.
+  // The previous offsetTop-based implementation was removed in favor of
+  // a more robust, performant IntersectionObserver approach that accounts
+  // for the header height using rootMargin.
 
   // Handle TOC link clicks
   tocLinks.forEach(link => {
@@ -188,7 +175,7 @@
         const target = document.querySelector(href);
         if (target) {
           e.preventDefault();
-          // Use scrollIntoView which respects CSS scroll-margin-top
+          // Let CSS scroll-margin-top handle the offset
           target.scrollIntoView({ behavior: 'smooth', block: 'start' });
           updateActiveLink(this);
         }
@@ -209,15 +196,73 @@
     };
   };
 
-  // Handle scroll events
-  const handleScroll = throttle(() => {
-    updateActiveLink(getActiveHeading());
-  }, CONSTANTS.throttleDelay);
+  // IntersectionObserver-based active heading tracking
+  // We'll observe the headings and maintain a set of currently-visible
+  // headings (relative to a top rootMargin equal to the header height).
+  // The active heading is chosen as the visible heading closest to the
+  // top of the viewport (i.e. largest boundingClientRect.top). If none
+  // are intersecting (rare), we fall back to picking the last heading
+  // scrolled past the header using getBoundingClientRect.
 
-  handleScroll();
-  window.addEventListener('scroll', handleScroll, { passive: true });
+  let observer = null;
+  const visible = new Set();
 
-  // Handle hash changes
+  const updateActiveFromVisible = () => {
+    if (visible.size > 0) {
+      const chosen = Array.from(visible).sort((a, b) => {
+        return b.getBoundingClientRect().top - a.getBoundingClientRect().top;
+      })[0];
+      const match = headings.find(h => h.heading === chosen);
+      if (match) {
+        updateActiveLink(match.link);
+        return;
+      }
+    }
+
+    // Fallback: choose last heading that is above the header line
+    const headerHeight = elements.header ? elements.header.offsetHeight : 5 * 16;
+    for (let i = headings.length - 1; i >= 0; i--) {
+      const rect = headings[i].heading.getBoundingClientRect();
+      if (rect.top <= headerHeight) {
+        updateActiveLink(headings[i].link);
+        return;
+      }
+    }
+
+    // As a last resort, pick the first heading
+    updateActiveLink(headings[0].link);
+  };
+
+  const createObserver = () => {
+    if (observer) observer.disconnect();
+
+    const headerHeight = elements.header ? elements.header.offsetHeight : 5 * 16;
+    const rootMargin = `-${headerHeight}px 0px 0px 0px`;
+
+    observer = new IntersectionObserver((entries) => {
+      entries.forEach(entry => {
+        if (entry.isIntersecting) visible.add(entry.target);
+        else visible.delete(entry.target);
+      });
+      // throttle DOM-heavy update calls slightly
+      throttle(updateActiveFromVisible, CONSTANTS.throttleDelay)();
+    }, { root: null, rootMargin, threshold: [0, 0.1, 0.5, 1] });
+
+    headings.forEach(({ heading }) => {
+      observer.observe(heading);
+    });
+
+    // Run an initial pass to set the active link
+    updateActiveFromVisible();
+  };
+
+  // Create observer now and recreate on resize (debounced)
+  createObserver();
+  window.addEventListener('resize', throttle(() => {
+    createObserver();
+  }, CONSTANTS.throttleDelay));
+
+  // Handle hash changes: ensure TOC highlights the correct link
   window.addEventListener('hashchange', () => {
     const hash = window.location.hash;
     if (hash) {
