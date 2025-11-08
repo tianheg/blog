@@ -5,175 +5,139 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>TIL to Blog</title>
-  <style>
-    :root {
-      --primary: #1a73e8;
-      --primary-hover: #1557b0;
-      --border: #e1e4e8;
-      --background: #f8f9fa;
+  <script src="https://cdn.jsdelivr.net/npm/@tailwindcss/browser@4"></script>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/7.0.1/css/all.min.css">
+  <style type="text/tailwindcss">
+    @theme {
+      --color-primary: #1a73e8;
     }
 
-    body {
-      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, Arial, sans-serif;
-      max-width: 900px;
-      margin: 0 auto;
-      padding: 20px;
-      line-height: 1.5;
-      color: #24292e;
+    /* 恢复按钮的指针样式 - Tailwind CSS v4 修复 */
+    @layer base {
+      button:not(:disabled),
+      [role="button"]:not(:disabled) {
+        cursor: pointer;
+      }
     }
 
-    h1 {
-      text-align: center;
-      margin-bottom: 30px;
-      color: #24292e;
+    /* 输入框文字换行和溢出处理 */
+    input[type="password"] {
+      word-wrap: break-word;
+      overflow-wrap: break-word;
+      text-overflow: ellipsis;
+      overflow: hidden;
     }
 
-    .container {
-      width: 100%;
-    }
-
-    .input-section {
-      display: flex;
-      flex-direction: column;
-    }
-
+    /* 文本框自动换行样式 */
     textarea {
-      width: 100%;
-      height: 300px;
-      padding: 12px;
-      border: 1px solid var(--border);
-      border-radius: 6px;
-      resize: vertical;
-      font-family: monospace;
-      font-size: 14px;
+      word-wrap: break-word;
+      overflow-wrap: break-word;
+      white-space: pre-wrap;
     }
 
-
-
-    .config-form {
-      grid-column: 1 / -1;
-      background: var(--background);
-      padding: 20px;
-      border-radius: 6px;
-      margin-bottom: 20px;
-    }
-
-    .form-group {
-      margin-bottom: 15px;
-    }
-
-    label {
-      display: block;
-      margin-bottom: 5px;
-      font-weight: 600;
-    }
-
-    input[type="text"],
-    input[type="password"],
-    select.form-control {
-      width: 100%;
-      padding: 8px 12px;
-      border: 1px solid var(--border);
-      border-radius: 6px;
-      font-size: 14px;
-    }
-
-    .btn {
-      background-color: var(--primary);
-      color: white;
-      border: none;
-      padding: 10px 20px;
-      border-radius: 6px;
-      cursor: pointer;
-      font-size: 14px;
-      font-weight: 600;
-      transition: background-color 0.2s;
-    }
-
-    .btn:hover {
-      background-color: var(--primary-hover);
-    }
-
-    .btn:disabled {
-      background-color: #94d3a2;
-      cursor: not-allowed;
-    }
-
-    .status {
-      margin-top: 20px;
-      padding: 10px;
-      border-radius: 6px;
-      display: none;
-    }
-
-    .success {
-      background-color: #d4edda;
-      color: #155724;
-      border: 1px solid #c3e6cb;
-    }
-
-    .error {
-      background-color: #f8d7da;
-      color: #721c24;
-      border: 1px solid #f5c6cb;
-    }
-
-    .token-info {
-      font-size: 12px;
-      color: #586069;
-      margin-top: 5px;
+    /* 确保输入框在移动端正确显示 */
+    @media (max-width: 768px) {
+      input[type="password"],
+      textarea {
+        width: 100%;
+        box-sizing: border-box;
+      }
     }
   </style>
 </head>
 
-<body>
-  <h1>TIL to Blog Converter</h1>
-
-  <div class="config-form">
-    <div class="form-group">
-      <label for="tilFolder">TIL Category</label>
-      <select id="tilFolder" class="form-control">
-        <option value="backup">Backup</option>
-        <option value="emacs">Emacs</option>
-        <option value="health">Health</option>
-        <option value="homelab">Homelab</option>
-        <option value="learning">Learning</option>
-        <option value="life">Life</option>
-        <option value="misc">Misc</option>
-        <option value="music">Music</option>
-        <option value="software">Software</option>
-        <option value="writing">Writing</option>
-      </select>
+<body class="bg-gray-50 min-h-screen text-gray-900">
+  <header class="bg-white shadow-sm border-b border-gray-200">
+    <div class="container mx-auto px-4 py-6">
+      <h1 class="text-3xl font-bold text-gray-900 text-center">TIL to Blog</h1>
     </div>
+  </header>
 
-    <div class="form-group">
-      <label for="filename">File Name (without .org extension)</label>
-      <input type="text" id="filename" placeholder="e.g.: my-til">
+  <!-- 主要内容 -->
+  <main class="container mx-auto px-4 py-8">
+    <div class="max-w-4xl mx-auto">
+      <!-- 表单卡片 -->
+      <div class="bg-white rounded-xl shadow-sm border border-gray-200 overflow-hidden mb-8">
+        <form id="tilForm" class="space-y-8 p-6">
+          <!-- GitHub Token -->
+          <section class="space-y-4">
+            <h2 class="text-xl font-semibold text-gray-900 flex items-center gap-2">
+              <i class="fab fa-github text-gray-600"></i>
+              GitHub Personal Access Token
+            </h2>
+            <div class="bg-blue-50 rounded-lg p-4 border border-blue-100">
+              <p class="text-sm text-blue-800">Token needs repo permissions. Tutorial: <a
+                  href="https://docs.github.com/en/authentication/keeping-your-account-and-data-secure/creating-a-personal-access-token"
+                  target="_blank" class="underline hover:text-blue-900">View Official Docs</a></p>
+            </div>
+            <input type="password" id="token" name="token" placeholder="ghp_xxxxxxxxxxxxxxxx"
+              class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-primary focus:border-primary transition-colors">
+          </section>
+
+          <!-- TIL Configuration -->
+          <section class="space-y-6">
+            <h2 class="text-xl font-semibold text-gray-900 flex items-center gap-2">
+              <i class="fas fa-cog text-gray-600"></i>
+              TIL Configuration
+            </h2>
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-5">
+              <div>
+                <label for="tilFolder" class="block text-sm font-medium text-gray-700 mb-2">TIL Category</label>
+                <select id="tilFolder" name="tilFolder"
+                  class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-primary focus:border-primary transition-colors">
+                  <option value="backup">Backup</option>
+                  <option value="emacs">Emacs</option>
+                  <option value="health">Health</option>
+                  <option value="homelab">Homelab</option>
+                  <option value="learning">Learning</option>
+                  <option value="life">Life</option>
+                  <option value="misc">Misc</option>
+                  <option value="music">Music</option>
+                  <option value="software">Software</option>
+                  <option value="writing">Writing</option>
+                </select>
+              </div>
+              <div>
+                <label for="filename" class="block text-sm font-medium text-gray-700 mb-2">File Name (without .org extension)</label>
+                <input type="text" id="filename" name="filename" placeholder="e.g.: my-til"
+                  class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-primary focus:border-primary transition-colors">
+              </div>
+            </div>
+          </section>
+
+          <!-- Org Mode Content -->
+          <section class="space-y-4">
+            <h2 class="text-xl font-semibold text-gray-900 flex items-center gap-2">
+              <i class="fas fa-file-alt text-gray-600"></i>
+              Org Mode Content
+            </h2>
+            <textarea id="orgContent" name="orgContent" rows="12" placeholder="Write your TIL content here..."
+              class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-primary focus:border-primary resize-y transition-colors font-mono text-sm"
+              style="white-space: pre-wrap; word-wrap: break-word; overflow-wrap: break-word;"></textarea>
+          </section>
+
+          <!-- 操作按钮 -->
+          <div class="flex flex-col sm:flex-row justify-between items-center gap-4 pt-4 border-t border-gray-200">
+            <button type="button" id="saveBtn"
+              class="px-8 py-3 bg-primary text-white rounded-lg hover:bg-blue-700 transition-all duration-200 transform hover:scale-[1.02] active:scale-[0.98] flex items-center gap-2 w-full sm:w-auto justify-center">
+              <i class="fas fa-save"></i>
+              Save to Blog
+            </button>
+            <div id="githubLinkContainer" class="hidden w-full sm:w-auto">
+              <a href="#" target="_blank" id="githubLink"
+                class="text-sm text-blue-600 hover:text-blue-800 hover:underline flex items-center gap-1 justify-center sm:justify-start">
+                <i class="fab fa-github"></i>
+                View on GitHub
+              </a>
+            </div>
+          </div>
+        </form>
+      </div>
     </div>
+  </main>
 
-    <div class="form-group">
-      <label for="token">GitHub Personal Access Token</label>
-      <input type="password" id="token" placeholder="ghp_xxxxxxxxxxxxxxxx">
-      <div class="token-info">Token needs repo permissions. Tutorial: <a
-          href="https://docs.github.com/en/authentication/keeping-your-account-and-data-secure/creating-a-personal-access-token"
-          target="_blank">View Official Docs</a></div>
-    </div>
-
-  </div>
-
-  <div class="container">
-    <div class="input-section">
-      <h2>Org Mode Content</h2>
-      <textarea id="orgContent" placeholder="Write your TIL content here...">
-</textarea>
-    </div>
-  </div>
-
-  <div style="text-align: center; margin: 20px 0;">
-    <button id="saveBtn" class="btn">Save to Blog</button>
-  </div>
-
-  <div id="status" class="status"></div>
+  <!-- Status Message -->
+  <div id="status" class="hidden fixed bottom-4 right-4 max-w-md p-4 rounded-lg shadow-lg z-50"></div>
 
   <script>
     document.addEventListener('DOMContentLoaded', function () {
@@ -199,7 +163,10 @@
 
       const saveBtn = document.getElementById('saveBtn');
       saveBtn.disabled = true;
-      saveBtn.textContent = '保存中...';
+      saveBtn.innerHTML = `
+        <i class="fas fa-spinner fa-spin"></i>
+        Saving...
+      `;
 
       try {
         // 将内容转换为Base64
@@ -230,28 +197,72 @@
         if (response.ok) {
           // 获取文件原始URL（非下载链接）
           const rawUrl = `https://raw.githubusercontent.com/${repo}/${branch}/${path}`;
-          showStatus(`保存成功！文件地址: <a href="${rawUrl}" target="_blank">${rawUrl}</a>`, 'success');
+          const githubUrl = `https://github.com/${repo}/blob/${branch}/${path}`;
+          
+          // 显示GitHub链接
+          const githubLinkContainer = document.getElementById('githubLinkContainer');
+          const githubLink = document.getElementById('githubLink');
+          githubLink.href = githubUrl;
+          githubLinkContainer.classList.remove('hidden');
+          
+          showStatus(`Success! File saved: <a href="${rawUrl}" target="_blank" class="underline font-semibold">${rawUrl}</a>`, 'success');
+          
+          // 成功视觉反馈
+          saveBtn.innerHTML = `
+            <i class="fas fa-check"></i>
+            Saved Successfully
+          `;
+          saveBtn.classList.remove('bg-primary', 'hover:bg-blue-700');
+          saveBtn.classList.add('bg-green-500', 'hover:bg-green-600');
+          
+          // 3秒后恢复按钮状态
+          setTimeout(() => {
+            saveBtn.innerHTML = `
+              <i class="fas fa-save"></i>
+              Save to Blog
+            `;
+            saveBtn.classList.remove('bg-green-500', 'hover:bg-green-600');
+            saveBtn.classList.add('bg-primary', 'hover:bg-blue-700');
+            saveBtn.disabled = false;
+          }, 3000);
         } else {
-          throw new Error(result.message || '保存失败');
+          throw new Error(result.message || 'Save failed');
         }
       } catch (error) {
-        console.error('保存错误:', error);
-        showStatus(`错误: ${error.message}`, 'error');
-      } finally {
+        console.error('Save error:', error);
+        showStatus(`Error: ${error.message}`, 'error');
+        
+        // 恢复按钮状态
+        saveBtn.innerHTML = `
+          <i class="fas fa-save"></i>
+          Save to Blog
+        `;
+        saveBtn.classList.remove('bg-green-500', 'hover:bg-green-600');
+        saveBtn.classList.add('bg-primary', 'hover:bg-blue-700');
         saveBtn.disabled = false;
-        saveBtn.textContent = '保存到 GitHub';
       }
     }
 
     function showStatus(message, type) {
       const statusEl = document.getElementById('status');
       statusEl.innerHTML = message;
-      statusEl.className = `status ${type}`;
-      statusEl.style.display = 'block';
+      
+      // 移除所有状态类
+      statusEl.classList.remove('bg-green-50', 'text-green-800', 'border-green-200', 
+                                 'bg-red-50', 'text-red-800', 'border-red-200');
+      
+      // 添加对应的状态类
+      if (type === 'success') {
+        statusEl.classList.add('bg-green-50', 'text-green-800', 'border', 'border-green-200');
+      } else {
+        statusEl.classList.add('bg-red-50', 'text-red-800', 'border', 'border-red-200');
+      }
+      
+      statusEl.classList.remove('hidden');
 
       // 5秒后自动隐藏
       setTimeout(() => {
-        statusEl.style.display = 'none';
+        statusEl.classList.add('hidden');
       }, 5000);
     }
   </script>
