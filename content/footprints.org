@@ -1,14 +1,89 @@
 #+TITLE: Footprints 足迹
 
-2024 Update:
-
-- 深圳  
-
 #+BEGIN_EXPORT html
-<iframe src="https://www.google.com/maps/d/u/0/embed?mid=1vfIGRM4Y_VTse_3Qr1X-l1jJU-6Wsv4&ehbc=2E312F&noprof=1" width="100%" height="480"></iframe>
+<script src="https://unpkg.com/leaflet/dist/leaflet.js"></script>
+<link rel="stylesheet" href="https://unpkg.com/leaflet/dist/leaflet.css" />
+
+<div id="mapid" style="width: 100%; height: 480px"></div>
+
+<script>
+  // Create the map
+  var mymap = L.map("mapid").setView([33.436385, 108.301464], 3);
+
+  // Set up the OSM layer
+  L.tileLayer("https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png", {
+    maxZoom: 16,
+    attribution:
+      'Map data © <a href="https://openstreetmap.org" target="_blank">OpenStreetMap</a> contributors',
+  }).addTo(mymap);
+
+  const leafletLoc = [
+    {
+      name: "太和 Taihe",
+      coordinates: [33.150195918863474, 115.61220423941631],
+    },
+    {
+      name: "抚顺 Fushun",
+      coordinates: [41.858923412245694, 123.79061031539925],
+    },
+    {
+      name: "大连 Dalian",
+      coordinates: [38.940409946222836, 121.55039950984383],
+    },
+    {
+      name: "沈阳 Shenyang",
+      coordinates: [41.798456000000044, 123.45565399999998],
+    },
+    {
+      name: "北京 Beijing",
+      coordinates: [39.915405206237885, 116.43789973190474],
+    },
+    {
+      name: "阜阳 Fuyang",
+      coordinates: [32.80351582671196, 115.89661194295184],
+    },
+    { name: "合肥 Hefei",
+      coordinates: [31.846548000000016, 117.13713800000005],
+    },
+    {
+      name: "杭州 Hangzhou",
+      coordinates: [30.285686317849407, 120.16002609969007],
+    },
+    {
+      name: "广州 Guangzhou",
+      coordinates: [23.124143561045006, 113.36049367674502],
+    },
+    {
+      name: "深圳 Shenzhen",
+      coordinates: [22.6782820435405, 113.84100192813844],
+    },
+    {
+      name: "香港 Hongkong",
+      coordinates: [22.294219844639095, 114.176947970465],
+    },
+  ];
+
+  // Iterate over the locations array
+  for (let location of leafletLoc) {
+    // Create a marker for each location
+    let marker = L.marker(location.coordinates).addTo(mymap);
+
+    // Add a popup to the marker
+    marker.bindPopup(`<b>${location.name}</b>`);
+  }
+</script>
 #+END_EXPORT
 
+
+* 展示足迹的办法
+
+1. Google地图
+2. Mapbox
+3. Leaflet
+
 #+BEGIN_EXPORT html
+<!--
+<iframe src="https://www.google.com/maps/d/u/0/embed?mid=1vfIGRM4Y_VTse_3Qr1X-l1jJU-6Wsv4&ehbc=2E312F&noprof=1" width="100%" height="480"></iframe>
 <script src="https://api.mapbox.com/mapbox-gl-js/v3.2.0/mapbox-gl.js"></script>
 <link
   href="https://api.mapbox.com/mapbox-gl-js/v3.2.0/mapbox-gl.css"
@@ -67,64 +142,5 @@
       .addTo(map);
   });
 </script>
-#+END_EXPORT
-
-#+BEGIN_EXPORT html
-<script src="https://unpkg.com/leaflet/dist/leaflet.js"></script>
-<link rel="stylesheet" href="https://unpkg.com/leaflet/dist/leaflet.css" />
-
-<div id="mapid" style="width: 100%; height: 480px"></div>
-
-<script>
-  // Create the map
-  var mymap = L.map("mapid").setView([33.436385, 108.301464], 3);
-
-  // Set up the OSM layer
-  L.tileLayer("https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png", {
-    maxZoom: 16,
-    attribution:
-      'Map data © <a href="https://openstreetmap.org" target="_blank">OpenStreetMap</a> contributors',
-  }).addTo(mymap);
-
-  const leafletLoc = [
-    {
-      name: "抚顺 Fushun",
-      coordinates: [41.87909761152454, 123.93814909665134],
-    },
-    {
-      name: "大连 Dalian",
-      coordinates: [38.92249670667346, 121.56261564186624],
-    },
-    {
-      name: "沈阳 Shenyang",
-      coordinates: [41.82466010971171, 123.42275405246149],
-    },
-    {
-      name: "北京 Beijing",
-      coordinates: [39.883556107544834, 116.40190536931678],
-    },
-    {
-      name: "阜阳 Fuyang",
-      coordinates: [32.88926622652041, 115.7910888417611],
-    },
-    { name: "合肥 Hefei", coordinates: [31.8208, 117.23633] },
-    {
-      name: "杭州 Hangzhou",
-      coordinates: [30.24883186686932, 120.14578499654546],
-    },
-    {
-      name: "广州 Guangzhou",
-      coordinates: [23.07093772351523, 113.03552908020336],
-    },
-  ];
-
-  // Iterate over the locations array
-  for (let location of leafletLoc) {
-    // Create a marker for each location
-    let marker = L.marker(location.coordinates).addTo(mymap);
-
-    // Add a popup to the marker
-    marker.bindPopup(`<b>${location.name}</b>`);
-  }
-</script>
+-->
 #+END_EXPORT
