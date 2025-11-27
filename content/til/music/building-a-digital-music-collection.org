@@ -1,0 +1,65 @@
+* 构建音乐收藏库
+
+主推FLAC无损压缩格式，有损的话常见的有MP3, 不常见的有个Opus。
+
+** 构建方式
+
+电脑端存储一份FLAC，手机上存一份MP3/Opus。
+
+** 音乐来源
+
+- Bandcamp
+- 网易云音乐
+
+** FLAC、MP3和Opus
+
+| 维度         | FLAC (无损)      | Opus (现代有损)               | MP3 (传统有损)            |
+|--------------+------------------+-------------------------------+--------------------------|
+| **核心定位**   | 母带存档、高保真       | 移动/网络/语音                  | **全设备兼容**             |
+| **文件体积**   | **大** (5MB/分钟) | **极小** (2MB/分钟@192k)      | **中** (3.5MB/分钟@192k) |
+| **典型码率**   | 500-1100 kbps    | 64-192 kbps                   | **128-320 kbps**         |
+| **等效音质码率** | -                | **128kbps ≈ MP3 192kbps**   | 192kbps (良好)           |
+| **压缩效率**   | 50-60% (无损)      | **优于MP3 30-50%**            | 基准                       |
+| **专利状态**   | 开源免费             | **免专利费**                    | 专利已过期 (2017)            |
+
+** FLAC转Opus
+
+#+BEGIN_SRC sh
+ffmpeg -y -loglevel 'error' -i '*.flac' -vn -acodec libopus -b:a 64k '*.opus'
+#+END_SRC
+
+| 参数              | 含义       | 说明                                      |
+|-------------------+------------+-------------------------------------------|
+| =-y=                | 覆盖输出   | 若目标文件已存在，直接覆盖不提示          |
+| =-loglevel 'error'= | 日志级别   | 仅显示错误信息，屏蔽转码过程的详细信息    |
+| =-i '...flac'=      | 输入文件   | 指定源FLAC音频文件                        |
+| =-vn=               | 禁用视频   | 不处理可能存在的视频/封面流（纯音频场景） |
+| =-acodec libopus=   | 音频编码器 | 使用Opus编码器（高质量有损压缩）          |
+| =-b:a 96k=          | 音频比特率 | 设置输出码率为96kbps（每秒96千比特）      |
+| ='...opus'=       | 输出文件   | 生成的Opus格式文件名                      |
+
+
+*** 比特率不同值差异
+
+来源：https://wiki.hydrogenaudio.org/?title=Opus#Music_encoding_quality
+
+| Bitrate target | Stereo mode | Bandwidth | typ SILK/CELT use | Music quality notes | Use cases/notes/competitive codecs |
+|----------------+-------------+-----------+-------------------+---------------------+------------------------------------|
+| 4 kbps         | mono        | 6 kHz     | SILK              | Poor, muffled sound but intelligible lyrics. | — |
+| 9 kbps         | mono        | 8 kHz     | SILK              | Poor, muffled but OK for bitrate | — |
+| 14 to 16 kbps  | mono        | 20 kHz    | hybrid/CELT       | Fairly poor but OK for bitrate | Perhaps acceptable for incidental music |
+| 22 to 24 kbps  | mono        | 20 kHz    | hybrid/CELT       | Fair but OK for bitrate | OK for incidental music |
+| 32 to 40 kbps  | stereo      | 20 kHz    | CELT              | Moderately good stereo, some artifacts, rarely nasty | Stereo podcasts, audiobooks, very low bitrate music |
+| 48 kbps        | stereo      | 20 kHz    | CELT              | Full bandwidth stereo music, nice sound, may have problems with cymbals | Stereo podcasts, audiobooks, low bitrate music |
+| 64 kbps        | stereo      | 20 kHz    | CELT              | Full bandwidth stereo music, nice sound, detectable differences to original (mostly 'not annoying') | Music storage & streaming. Beat HE-AAC, Vorbis, MP3 in listening test |
+| 96 kbps        | stereo      | 20 kHz    | CELT              | Full bandwidth stereo music, good quality approaching transparency | Music storage & high quality streaming. Beat LC-AAC, Vorbis, MP3 in listening test |
+| 112 kbps       | stereo      | 20 kHz    | CELT              | Fairly close to transparency (needs more testing) | Music storage & high quality streaming. Very low-latency stereo networked music performance/jam sessions at OK quality |
+| 128 kbps       | stereo      | 20 kHz    | CELT              | Very close to transparency (needs more testing). Most modern codecs competitive (AAC-LC, Vorbis, MP3) | Music storage & streaming. Future download music sales. |
+| 160 to 192 kbps| stereo      | 20 kHz    | CELT              | Transparent with very low chance of artifacts (a few killer samples still detectable). Most old & new lossy codecs competitive. | Music storage & streaming, dedicated limited-bandwidth audio links (e.g. wireless, A2DP-bluetooth type links). |
+| 510 kbps       | stereo      | 20 kHz    | CELT              | Maximum possible stereo bitrate target (actual rate often less than 510 for default frame size). Most old and new lossy codecs competitive, plus near-lossless lossyWAV and WavPack lossy | Music storage, dedicated limited-bitrate audio links (e.g. wireless, minimum latency high quality audio. LossyWAV and WavPack lossy are very competitive for storage, and WavPack lossy =256= may be competitive with minimum latency mode also. |
+| >510 kbps      | —           | —         | —                 | Above Opus bitrate range allowed for stereo sources | Settle for 510 kbps or use lossless, lossyWAV, WavPack lossy or lossy transform/subband codecs like Vorbis, Musepack at very high settings. |
+
+** 参考资料
+
+- [[https://www.worthe-it.co.za/blog/2023-08-20-building-a-digital-music-collection-in-2023.html][Building a digital music collection in 2023]]
+- [[https://trac.ffmpeg.org/wiki/Encode/HighQualityAudio][Encode/HighQualityAudio – FFmpeg]]
