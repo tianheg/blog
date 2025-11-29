@@ -1,0 +1,87 @@
+* 在Railway平台创建CORS代理
+
+一个要点：需要手动指定域名的端口为80, 只在Caddyfile中设置是不行的。不这样做，访问代理地址会报502错误。
+
+相关代码：
+
+Caddyfile
+
+#+BEIGN_SRC conf
+# Caddyfile for Hetzner StorageBox CORS proxy
+# This creates a proxy that adds CORS headers to WebDAV requests
+
+{
+    # Global options
+    auto_https off
+}
+
+# Main server block
+:80 {
+    # WebDAV proxy location - root path
+    handle /* {
+        
+        # Reverse proxy to Hetzner StorageBox
+        reverse_proxy https://xxx {
+            header_up Host xxx
+            header_up Authorization {http.request.header.Authorization}
+        }
+        
+        # CORS headers
+        header {
+            Access-Control-Allow-Origin "*"
+            Access-Control-Allow-Methods "GET, POST, PUT, DELETE, OPTIONS, PROPFIND, PROPPATCH, MKCOL, COPY, MOVE, LOCK, UNLOCK"
+            Access-Control-Allow-Headers "Authorization, Depth, DNT, User-Agent, X-Requested-With, If-Modified-Since, Cache-Control, Content-Type, Range, X-CSRF-Token"
+            Access-Control-Expose-Headers "Content-Length, Content-Range, DAV"
+            Access-Control-Allow-Credentials "true"
+        }
+        
+        # Cache control headers - disable caching for real-time updates
+        header {
+            Cache-Control "no-cache, no-store, must-revalidate, private"
+            Pragma "no-cache"
+            Expires "0"
+        }
+        
+        # Handle preflight OPTIONS requests
+        @options {
+            method OPTIONS
+        }
+        respond @options 204
+    }
+}
+#+END_SRC
+
+Dockerfile
+
+#+BEIGN_SRC conf
+# Dockerfile for Caddy CORS proxy for Hetzner StorageBox
+FROM caddy:2-alpine
+
+# Copy the Caddyfile
+COPY Caddyfile /etc/caddy/Caddyfile
+
+# Expose port 80
+EXPOSE 80
+
+# Caddy will automatically start with the Caddyfile
+CMD ["caddy", "run", "--config", "/etc/caddy/Caddyfile", "--adapter", "caddyfile"]
+#+END_SRC
+
+railway.json
+
+dockerfilePath是相对整个仓库而言的，如果代理相关代码在子文件，需要修正相对路径，否则Railway会无法构建。
+
+#+BEGIN_SRC json
+{
+  "$schema": "https://railway.app/railway.schema.json",
+  "build": {
+    "builder": "DOCKERFILE",
+    "dockerfilePath": "/proxy/Dockerfile"
+  },
+  "deploy": {
+    "startCommand": "caddy run --config /etc/caddy/Caddyfile --adapter caddyfile",
+    "restartPolicyType": "ON_FAILURE",
+    "restartPolicyMaxRetries": 10
+  }
+}
+#+END_SRC
