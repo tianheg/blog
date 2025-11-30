@@ -1,0 +1,119 @@
+* 配置imgproxy
+
+Railway的bucket目前还没有提供公开可访问的功能，所以需要自己想办法支持，[[https://imgproxy.net/][imgproxy]]就是一个方案。完整的模板在[[https://railway.com/deploy/public-bucket-image-proxy][public-bucket-image-proxy]]。
+
+imgproxy默认会把传入的图片质量压缩到原有的80%。所以，不需要添加额外的配置就能使用。只是其他部分比如环境变量还是非常多要根据需要修改使用。
+
+找AI汇总了一些最佳配置实践：
+
+#+BEGIN_SRC conf
+# 必须设置，防止 DoS 攻击
+IMGPROXY_KEY=你的16进制密钥  # 32字节，用 xxd -g 2 -l 64 -p /dev/random 生成
+IMGPROXY_SALT=你的16进制盐值 # 16字节以上
+
+# 限制图片来源域名（白名单）
+IMGPROXY_ALLOWED_SOURCES="https://your-cdn.com,https://api.your.com"
+
+# 绑定地址
+IMGPROXY_BIND=0.0.0.0:8080
+
+# 超时设置（根据网络状况调整）
+IMGPROXY_TIMEOUT=30              # 总超时 30 秒
+IMGPROXY_DOWNLOAD_TIMEOUT=15     # 下载源图超时 15 秒
+IMGPROXY_WRITE_RESPONSE_TIMEOUT=20  # 响应写入超时 20 秒
+
+# 并发控制
+IMGPROXY_WORKERS=8               # 4核CPU推荐设为 8（核心数×2）
+IMGPROXY_MAX_CLIENTS=4096        # 最大并发连接数
+IMGPROXY_REQUESTS_QUEUE_SIZE=1024  # 请求队列长度
+
+# 限制源图大小（必须设置，否则可能被大文件拖垮）
+IMGPROXY_MAX_SRC_FILE_SIZE=10485760  # 10MB，根据业务调整
+IMGPROXY_MAX_SRC_RESOLUTION=100      # 百万像素（100MP），对应约 10000×10000 像素
+
+# 缓冲区优化
+IMGPROXY_BUFFER_POOL_SIZE=100       # 复用缓冲区，减少 GC 压力
+IMGPROXY_FREE_MEMORY_INTERVAL=10    # 定期释放内存间隔（秒）
+
+# ARM 架构优化（Graviton 3）
+ENV VIPS_VECTOR=167772160           # 禁用 SVE 指令，使用 NEON [^4^]
+ENV MALLOC_ARENA_MAX=2              # 减少内存碎片
+ENV IMGPROXY_MALLOC=jemalloc        # 使用 jemalloc 分配器
+
+# 启用多阶段并行处理（高并发场景收益明显）[^6^]
+IMGPROXY_MAX_PARALLEL_STEPS=12      # 建议设为 CPU 核心数的 1.5 倍
+
+# 启用 SO_REUSEPORT（Linux 下优化连接分发）
+IMGPROXY_SO_REUSEPORT=true
+
+# 下载结果缓存（推荐）
+IMGPROXY_CACHE_ETAG_ENABLED=true
+IMGPROXY_CACHE_CONTROL_PUBIC=true
+IMGPROXY_CACHE_CONTROL_MAX_AGE=31536000  # 1 年
+
+# 处理结果缓存（需配合外部存储）
+IMGPROXY_RESULT_CACHE_TTL=3600           # 缓存 1 小时
+
+# 优先使用现代格式
+IMGPROXY_AUTO_WEBP=true          # 对支持 WebP 的浏览器自动返回 WebP
+IMGPROXY_AUTO_AVIF=true          # 对支持 AVIF 的浏览器自动返回 AVIF
+IMGPROXY_ENABLE_JXL=true         # 启用 JPEG XL 格式（未来趋势）
+
+# 差异化质量设置（平衡体积与画质）[^2^]
+IMGPROXY_QUALITY=75              # 全局默认质量
+IMGPROXY_FORMAT_QUALITY="webp:70,avif:60,jxl:72"  # 各格式专用质量
+
+# WebP 专项优化（电商场景）[^5^]
+IMGPROXY_WEBP_COMPRESSION=6      # 压缩级别 0-6，6 最慢但体积最小
+IMGPROXY_WEBP_SMART_SUBSAMPLE=true  # 智能色度子采样，减少 30% 体积
+
+# PNG 量化（大幅减小文件大小）[^2^]
+IMGPROXY_PNG_QUANTIZE=true
+IMGPROXY_PNG_QUANTIZATION_COLORS=224  # 颜色数 224，透明度保留
+
+# JPEG 渐进式加载
+IMGPROXY_JPEG_PROGRESSIVE=true
+IMGPROXY_JPEG_NO_SUBSAMPLE=false      # 文字类图片设为 true 保真
+
+# 禁用动画（减少资源消耗）
+IMGPROXY_MAX_ANIMATION_FRAMES=1       # 只取第一帧
+IMGPROXY_MAX_ANIMATION_FRAME_RESOLUTION=1  # 限制动图分辨率
+
+# 定义业务场景预设
+IMGPROXY_PRESETS="thumbnail:resize:fit:100:100:0:quality:60,product:resize:fit:800:800:1:quality:85,hd:resize:fit:1920::1:quality:90"
+## 调用方式：/preset:product/plain/https://example.com/image.jpg
+
+# 限制处理维度（防止生成超大图）
+IMGPROXY_MAX_SRC_DIMENSION=8192       # 原图最大边长
+IMGPROXY_MAX_DST_DIMENSION=4096       # 输出图最大边长
+
+# 限制处理复杂度
+IMGPROXY_MAX_PROCESSING_RESOLUTION=300  # 300 MP，防止过度放大
+IMGPROXY_MAX_ANIMATION_FRAMES_LIMIT=100 # 动图最多 100 帧
+
+# SVG 安全
+IMGPROXY_SANITIZE_SVG=true            # 清理 SVG 中的恶意脚本
+
+# 并发限速（保护后端存储）
+IMGPROXY_MAX_PARALLEL_DOWNLOADS=10    # 同时下载源图数
+IMGPROXY_DOWNLOAD_BUFFER_SIZE=5000000  # 5MB 下载缓冲区
+
+# IP 黑白名单（配合反向代理）
+IMGPROXY_TRUSTED_IPS="10.0.0.0/8,172.16.0.0/12"  # 信任内网 IP
+
+# 启用指标导出
+IMGPROXY_PROMETHEUS_ENABLED=true
+IMGPROXY_PROMETHEUS_BIND=:9090       # 独立端口避免干扰业务
+# 关键指标：
+# - imgproxy_requests_total（总请求数）
+# - imgproxy_request_duration_seconds（处理耗时）
+# - imgproxy_images_in_progress（当前处理中）
+# - imgproxy_buffer_pool_size（缓冲池占用）
+
+# 配置健康检查端点
+IMGPROXY_HEALTH_CHECK_PATH=/health   # K8s 或 LB 探测用
+IMGPROXY_READY_CHECK_PATH=/ready     # 就绪探针
+
+IMGPROXY_LOG_LEVEL=warn              # 生产环境用 warn 或 error
+IMGPROXY_LOG_FORMAT=json             # 便于日志收集系统解析
+#+END_SRC
