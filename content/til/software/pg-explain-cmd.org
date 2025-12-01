@@ -1,0 +1,88 @@
+* PG学习EXPLAIN命令
+
+** 核心命令
+#+BEGIN_SRC sql
+-- 基础执行计划查看
+EXPLAIN SELECT * FROM users WHERE id = 1;
+
+-- 完整性能分析（推荐）
+EXPLAIN (ANALYZE, BUFFERS, VERBOSE) 
+SELECT * FROM orders 
+WHERE created_at > NOW() - INTERVAL '7 days';
+#+END_SRC
+
+** 参数详解
+| 参数      | 说明                         | 使用场景           |
+|-----------|------------------------------|--------------------|
+| ANALYZE   | 实际执行查询并显示统计信息     | 需要真实耗时数据时 |
+| BUFFERS   | 显示缓存使用情况             | 分析IO性能时      |
+| VERBOSE   | 显示详细信息                 | 需要完整计划树时   |
+| FORMAT    | 指定输出格式                 | 需要程序解析时     |
+| TIMING    | 显示各节点执行时间           | 分析耗时分布时     |
+
+** 执行计划关键节点解读
+#+BEGIN_SRC sql
+-- 示例输出关键信息解读
+Seq Scan on users  (cost=0.00..150.00 rows=5000 width=36)
+                   ^          ^         ^          ^
+                   |          |         |          列宽度
+                   |          |         预估返回行数
+                   |          总成本
+                   初始成本
+#+END_SRC
+
+** 实战技巧
+*** 技巧1：比较查询优化效果
+#+BEGIN_SRC sql
+-- 优化前
+EXPLAIN ANALYZE 
+SELECT * FROM log 
+WHERE DATE(created_at) = '2024-01-01';
+
+-- 优化后（使用范围查询）
+EXPLAIN ANALYZE 
+SELECT * FROM log 
+WHERE created_at >= '2024-01-01' 
+  AND created_at < '2024-01-02';
+#+END_SRC
+
+*** 技巧2：检查索引使用情况
+#+BEGIN_SRC sql
+-- 强制不使用索引（用于测试）
+SET enable_indexscan = off;
+EXPLAIN ANALYZE SELECT * FROM users WHERE email = 'test@example.com';
+SET enable_indexscan = on;
+#+END_SRC
+
+*** 技巧3：JSON格式输出（便于程序处理）
+#+BEGIN_SRC sql
+EXPLAIN (FORMAT JSON, ANALYZE)
+SELECT * FROM products 
+WHERE category_id IN (1, 2, 3);
+#+END_SRC
+
+** 性能优化要点
+1. =Seq Scan=（全表扫描）通常需要优化
+   - 考虑添加合适索引
+   - 检查WHERE条件选择性
+
+2. =Index Scan=（索引扫描）的注意点
+   - 检查索引选择率
+   - 注意回表（Heap Fetches）成本
+
+3. 缓存命中率分析
+   - shared hit：缓存命中
+   - shared read：磁盘读取
+   - hit率越高越好
+
+** 常用分析模式
+#+BEGIN_SRC sql
+-- 快速性能分析模板
+EXPLAIN (ANALYZE, BUFFERS, TIMING) 
+/* 你的查询语句 */
+SELECT ...
+
+-- 仅分析结构（不实际执行）
+EXPLAIN (COSTS, VERBOSE) 
+SELECT ...
+#+END_SRC
