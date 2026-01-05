@@ -5,8 +5,8 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>TIL to Blog</title>
-  <script src="https://cdn.jsdelivr.net/npm/@tailwindcss/browser@4"></script>
-  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/7.0.1/css/all.min.css">
+  <script src="./tw.js"></script>
+  <script src="./iconify-icon.min.js"></script>
   <style type="text/tailwindcss">
     @theme {
       --color-primary: #1a73e8;
@@ -62,7 +62,7 @@
           <!-- GitHub Token -->
           <section class="space-y-4">
             <h2 class="text-xl font-semibold text-gray-900 flex items-center gap-2">
-              <i class="fab fa-github text-gray-600"></i>
+              <iconify-icon icon="fa6-brands:github" class="text-gray-600"></iconify-icon>
               GitHub Personal Access Token
             </h2>
             <div class="bg-blue-50 rounded-lg p-4 border border-blue-100">
@@ -77,7 +77,7 @@
           <!-- TIL Configuration -->
           <section class="space-y-6">
             <h2 class="text-xl font-semibold text-gray-900 flex items-center gap-2">
-              <i class="fas fa-cog text-gray-600"></i>
+              <iconify-icon icon="fa6-solid:gear" class="text-gray-600"></iconify-icon>
               TIL Configuration
             </h2>
             <div class="grid grid-cols-1 md:grid-cols-2 gap-5">
@@ -108,7 +108,7 @@
           <!-- Org Mode Content -->
           <section class="space-y-4">
             <h2 class="text-xl font-semibold text-gray-900 flex items-center gap-2">
-              <i class="fas fa-file-alt text-gray-600"></i>
+              <iconify-icon icon="fa6-solid:file-lines" class="text-gray-600"></iconify-icon>
               Org Mode Content
             </h2>
             <textarea id="orgContent" name="orgContent" rows="12" placeholder="Write your TIL content here..."
@@ -120,13 +120,13 @@
           <div class="flex flex-col sm:flex-row justify-between items-center gap-4 pt-4 border-t border-gray-200">
             <button type="button" id="saveBtn"
               class="px-8 py-3 bg-primary text-white rounded-lg hover:bg-blue-700 transition-all duration-200 transform hover:scale-[1.02] active:scale-[0.98] flex items-center gap-2 w-full sm:w-auto justify-center">
-              <i class="fas fa-save"></i>
+              <iconify-icon icon="fa6-solid:floppy-disk"></iconify-icon>
               Save to Blog
             </button>
             <div id="githubLinkContainer" class="hidden w-full sm:w-auto">
               <a href="#" target="_blank" id="githubLink"
                 class="text-sm text-blue-600 hover:text-blue-800 hover:underline flex items-center gap-1 justify-center sm:justify-start">
-                <i class="fab fa-github"></i>
+                <iconify-icon icon="fa6-brands:github"></iconify-icon>
                 View on GitHub
               </a>
             </div>
@@ -164,7 +164,7 @@
       const saveBtn = document.getElementById('saveBtn');
       saveBtn.disabled = true;
       saveBtn.innerHTML = `
-        <i class="fas fa-spinner fa-spin"></i>
+        <iconify-icon icon="fa6-solid:spinner" class="animate-spin"></iconify-icon>
         Saving...
       `;
 
@@ -198,27 +198,27 @@
           // 获取文件原始URL（非下载链接）
           const rawUrl = `https://raw.githubusercontent.com/${repo}/${branch}/${path}`;
           const githubUrl = `https://github.com/${repo}/blob/${branch}/${path}`;
-          
+
           // 显示GitHub链接
           const githubLinkContainer = document.getElementById('githubLinkContainer');
           const githubLink = document.getElementById('githubLink');
           githubLink.href = githubUrl;
           githubLinkContainer.classList.remove('hidden');
-          
+
           showStatus(`Success! File saved: <a href="${rawUrl}" target="_blank" class="underline font-semibold">${rawUrl}</a>`, 'success');
-          
+
           // 成功视觉反馈
           saveBtn.innerHTML = `
-            <i class="fas fa-check"></i>
+            <iconify-icon icon="fa6-solid:check"></iconify-icon>
             Saved Successfully
           `;
           saveBtn.classList.remove('bg-primary', 'hover:bg-blue-700');
           saveBtn.classList.add('bg-green-500', 'hover:bg-green-600');
-          
+
           // 3秒后恢复按钮状态
           setTimeout(() => {
             saveBtn.innerHTML = `
-              <i class="fas fa-save"></i>
+              <iconify-icon icon="fa6-solid:floppy-disk"></iconify-icon>
               Save to Blog
             `;
             saveBtn.classList.remove('bg-green-500', 'hover:bg-green-600');
@@ -231,10 +231,10 @@
       } catch (error) {
         console.error('Save error:', error);
         showStatus(`Error: ${error.message}`, 'error');
-        
+
         // 恢复按钮状态
         saveBtn.innerHTML = `
-          <i class="fas fa-save"></i>
+          <iconify-icon icon="fa6-solid:floppy-disk"></iconify-icon>
           Save to Blog
         `;
         saveBtn.classList.remove('bg-green-500', 'hover:bg-green-600');
@@ -246,18 +246,18 @@
     function showStatus(message, type) {
       const statusEl = document.getElementById('status');
       statusEl.innerHTML = message;
-      
+
       // 移除所有状态类
-      statusEl.classList.remove('bg-green-50', 'text-green-800', 'border-green-200', 
+      statusEl.classList.remove('bg-green-50', 'text-green-800', 'border-green-200',
                                  'bg-red-50', 'text-red-800', 'border-red-200');
-      
+
       // 添加对应的状态类
       if (type === 'success') {
         statusEl.classList.add('bg-green-50', 'text-green-800', 'border', 'border-green-200');
       } else {
         statusEl.classList.add('bg-red-50', 'text-red-800', 'border', 'border-red-200');
       }
-      
+
       statusEl.classList.remove('hidden');
 
       // 5秒后自动隐藏
