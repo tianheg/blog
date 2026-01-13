@@ -2,14 +2,14 @@
 
 main() {
 
-  PAGEFIND_VERSION=1.4.0
+  PAGEFIND_VERSION=1.5.0-beta.1
   HUGO_VERSION=0.153.0
 
   export TZ=Asia/Hong_Kong
 
   # Install Pagefind
   echo "Installing Pagefind v${PAGEFIND_VERSION}..."
-  wget -q https://github.com/CloudCannon/pagefind/releases/download/v${PAGEFIND_VERSION}/pagefind_extended-v${PAGEFIND_VERSION}-x86_64-unknown-linux-musl.tar.gz -O - | tar -xz -C /opt/buildhome
+  wget -q https://github.com/Pagefind/pagefind/releases/download/v${PAGEFIND_VERSION}/pagefind_extended-v${PAGEFIND_VERSION}-x86_64-unknown-linux-musl.tar.gz -O - | tar -xz -C /opt/buildhome
 
   # Install Hugo
   echo "Installing Hugo v${HUGO_VERSION}..."
