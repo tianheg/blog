@@ -1,6 +1,15 @@
 <div class="comments">
+  {{/*  Comments -- Remark42 */}}
+  <script>
+    var remark_config = {
+      host: "https://comments.tianheg.co",
+      site_id: "remark",
+      no_footer: true,
+    }
+  </script>
+  <script>!function(e,n){for(var o=0;o<e.length;o++){var r=n.createElement("script"),c=".js",d=n.head||n.body;"noModule"in r?(r.type="module",c=".mjs"):r.async=!0,r.defer=!0,r.src=remark_config.host+"/web/"+e[o]+c,d.appendChild(r)}}(remark_config.components||["embed"],document);</script>
+
   {{ if or (in .Site.Params.mainSections .Section) }}
-  <div>Welcome to tell me your thoughts via "<a href="mailto:i@tianheg.co?subject=Comment: {{ .Title }}">email</a>"
-  </div>
+  <div id="remark42"></div>
   {{ end }}
 </div>
