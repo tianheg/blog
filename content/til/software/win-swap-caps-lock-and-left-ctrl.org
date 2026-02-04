@@ -1,0 +1,9 @@
+* Swap Caps Lock with left Ctrl on Win
+
+#+BEGIN_SRC sh
+# 换CapsLock和Left Ctrl位置
+$regPath="HKLM:\SYSTEM\CurrentControlSet\Control\Keyboard Layout"; $scancodeMap=[byte[]](0x00,0x00,0x00,0x00,0x00,0x00,0x00,0x00,0x03,0x00,0x00,0x00,0x1D,0x00,0x3A,0x00,0x3A,0x00,0x1D,0x00,0x00,0x00,0x00,0x00); New-ItemProperty -Path $regPath -Name "Scancode Map" -PropertyType Binary -Value $scancodeMap -Force
+
+# 移除定制键盘映射
+Remove-ItemProperty -Path "HKLM:\SYSTEM\CurrentControlSet\Control\Keyboard Layout" -Name "Scancode Map" -Force
+#+END_SRC
