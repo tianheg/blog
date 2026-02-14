@@ -6,20 +6,120 @@ I want to deploy [[https://forgejo.org/][Forgejo]] for about two years, never wa
 
 Now let me show the way how I deploy Forgejo.
 
-* Forgejo self-host
+* Prepare the server
 
-Use a Hetzner server deploy Forgejo.
-
-Install PG not config it, config it through Forgejo initial web page.
-
-Config DB: https://forgejo.org/docs/latest/admin/database-preparation/#postgresql
-
-Use Caddy as reverse proxy https://idroot.us/install-caddy-ubuntu-24-04/#Step_1_Install_Caddy_on_Ubuntu_2404
-
-Steps:
+Use a Hetzner server(Ubuntu 24.04 LTS) deploy Forgejo. Donot forget to add SSH key.
 
 ** 1. Ubuntu initial setup
 
+Edit local =~/.ssh/config=:
+
+#+BEGIN_SRC conf
+Host forgejo
+  Hostname IP
+  User root
+  IdentityFile ~/.ssh/id_ed25519
+#+END_SRC
+
+Then run =ssh forgejo= login the server. Run below cmd to complete initial setup:
+
 #+BEGIN_SRC sh
+apt-get update && apt-get upgrade
+## rm snapd, donot like it, never use it
 apt autoremove snapd --purge -y
+## install Docker
+# https://docs.docker.com/engine/install/ubuntu/#install-using-the-repository
+install -m 0755 -d /etc/apt/keyrings
+curl -fsSL https://download.docker.com/linux/ubuntu/gpg -o /etc/apt/keyrings/docker.asc
+chmod a+r /etc/apt/keyrings/docker.asc
+tee /etc/apt/sources.list.d/docker.sources <<EOF
+Types: deb
+URIs: https://download.docker.com/linux/ubuntu
+Suites: $(. /etc/os-release && echo "${UBUNTU_CODENAME:-$VERSION_CODENAME}")
+Components: stable
+Signed-By: /etc/apt/keyrings/docker.asc
+EOF
+
+apt-get update
+apt-get install docker-ce docker-ce-cli containerd.io docker-buildx-plugin docker-compose-plugin
+#+END_SRC
+
+** 2. Create a git user
+
+#+BEGIN_SRC sh
+sudo adduser \
+  --system \
+  --group \
+  --disabled-password \
+  --shell /bin/bash \
+  --home /home/git \
+  git
+#+END_SRC
+
+* Write docker-compose.yml file
+
+Prepare the folder:
+
+#+BEGIN_SRC sh
+mkdir -p ./forgejo
+sudo chown -R 1000:1000 ./forgejo
+mkdir -p ./conf
+sudo chown -R 1000:1000 ./conf
+#+END_SRC
+
+Create =Caddyfile=:
+
+#+BEGIN_SRC conf
+git.example.com {
+    encode gzip zstd
+    reverse_proxy forgejo:3000
+}
+#+END_SRC
+
+Create =docker-compose.yml=:
+
+#+BEGIN_SRC yml
+services:
+  server:
+    image: codeberg.org/forgejo/forgejo:14-rootless
+    container_name: forgejo
+    user: 1000:1000
+    environment:
+      - USER_UID=1000
+      - USER_GID=1000
+      - FORGEJO__database__DB_TYPE=sqlite3
+      - FORGEJO__server__SSH_PORT=222
+    restart: unless-stopped
+    networks:
+      - forgejo
+    volumes:
+      - ./forgejo:/var/lib/gitea
+      - ./conf:/etc/gitea
+      - /etc/localtime:/etc/localtime:ro
+    ports:
+      - "3000:3000"
+      - "222:2222"
+
+  caddy:
+    image: caddy:2-alpine
+    container_name: caddy
+    network_mode: 'host'
+    restart: unless-stopped
+    logging:
+      driver: 'json-file'
+      options:
+        max-size: '10m'
+        max-file: '10'
+    ports:
+      - "80:80"
+      - "443:443"
+      - "443:443/udp"
+    volumes:
+      - ./Caddyfile:/Caddyfile:ro
+      - caddy_data:/data
+    command: 'caddy run --config /Caddyfile --adapter caddyfile'
+
+volumes:
+  caddy_data:
+  caddy_config:
 #+END_SRC
