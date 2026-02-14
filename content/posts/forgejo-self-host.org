@@ -47,14 +47,19 @@ apt-get install docker-ce docker-ce-cli containerd.io docker-buildx-plugin docke
 ** 2. Create a git user
 
 #+BEGIN_SRC sh
-sudo adduser \
+adduser \
   --system \
   --group \
   --disabled-password \
   --shell /bin/bash \
   --home /home/git \
   git
+usermod -aG docker git
 #+END_SRC
+
+* Add a A DNS record
+
+On the domain DNS manage site, mine is Cloudflare, add a A record to your domain that point to your server IPv4 IP.
 
 * Write docker-compose.yml file
 
@@ -62,9 +67,11 @@ Prepare the folder:
 
 #+BEGIN_SRC sh
 mkdir -p ./forgejo
-sudo chown -R 1000:1000 ./forgejo
+sudo chown -R git:git ./forgejo
 mkdir -p ./conf
-sudo chown -R 1000:1000 ./conf
+sudo chown -R git:git ./conf
+id git
+# uid=108(git) gid=110(git) groups=110(git),988(docker)
 #+END_SRC
 
 Create =Caddyfile=:
@@ -76,6 +83,36 @@ git.example.com {
 }
 #+END_SRC
 
+Setup port forward, so that SSH url will be =ssh://git@git.example.com/xxx/xxx.git= not =ssh://git@git.example.com:2222/xxx/xxx.git=:
+
+#+BEGIN_SRC sh
+vim forgejo-shell.sh
+chmod +x /path_to/forgejo-shell.sh
+usermod -s /abs_path_to/forgejo-shell.sh git
+vim /etc/ssh/sshd_config
+systemctl restart ssh
+sudo -u git /path_to/forgejo-shell.sh
+# enter forgejo container shell
+ssh -T git@git.example.com
+# run above cmd in local PC
+# Hi there, tianheg! You've successfully authenticated with the key named xxxxxx, but Forgejo does not provide shell access.
+# If this is unexpected, please log in with password and setup Forgejo under another user.
+#+END_SRC
+
+#+BEGIN_SRC sh
+# forgejo-shell.sh
+#!/bin/sh
+/usr/bin/docker exec -i --env SSH_ORIGINAL_COMMAND="$SSH_ORIGINAL_COMMAND" forgejo sh "$@"
+#+END_SRC
+
+#+BEGIN_SRC sh
+# /etc/ssh/sshd_config
+## add to bottom
+Match User git
+    AuthorizedKeysCommandUser git
+    AuthorizedKeysCommand /usr/bin/docker exec -i forgejo /usr/local/bin/forgejo keys -u %u -t %t -k %k
+#+END_SRC
+
 Create =docker-compose.yml=:
 
 #+BEGIN_SRC yml
@@ -83,12 +120,13 @@ services:
   server:
     image: codeberg.org/forgejo/forgejo:14-rootless
     container_name: forgejo
-    user: 1000:1000
+    user: 108:110
     environment:
-      - USER_UID=1000
-      - USER_GID=1000
+      - USER_UID=108
+      - USER_GID=110
       - FORGEJO__database__DB_TYPE=sqlite3
-      - FORGEJO__server__SSH_PORT=222
+      - FORGEJO__server__SSH_PORT=22
+      - FORGEJO__server__SSH_LISTEN_PORT=2222 # port forward
     restart: unless-stopped
     networks:
       - forgejo
@@ -98,7 +136,6 @@ services:
       - /etc/localtime:/etc/localtime:ro
     ports:
       - "3000:3000"
-      - "222:2222"
 
   caddy:
     image: caddy:2-alpine
