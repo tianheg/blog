@@ -1,1 +1,16 @@
 * Use SSH key to sign Git commits
+
+#+BEGIN_SRC sh
+ssh-keygen -t ed25519 -C "your_email@example.com"
+git config --global gpg.format ssh
+git config --global user.signingkey ~/.ssh/id_ed25519.pub
+git config --global commit.gpgsign true
+vim ~/.ssh/allowed_signers
+git config --global gpg.ssh.allowedSignersFile ~/.ssh/allowed_signers
+#+END_SRC
+
+=~/.ssh/allowed_signers='s content:
+
+#+BEGIN_SRC txt
+your_email@example.com ssh-ed25519 AAAAC3...(public key content)
+#+END_SRC
