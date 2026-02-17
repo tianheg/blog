@@ -79,7 +79,12 @@ Create =Caddyfile=:
 #+BEGIN_SRC conf
 git.example.com {
     encode gzip zstd
-    reverse_proxy forgejo:3000
+    reverse_proxy localhost:3001 {
+        header_up Host {host}
+        header_up X-Real-IP {remote_host}
+        header_up X-Forwarded-For {remote_host}
+        header_up X-Forwarded-Proto {scheme}
+    }
 }
 #+END_SRC
 
@@ -117,7 +122,7 @@ Create =docker-compose.yml=:
 
 #+BEGIN_SRC yml
 services:
-  server:
+  forgejo:
     image: codeberg.org/forgejo/forgejo:14-rootless
     container_name: forgejo
     user: 108:110
@@ -147,14 +152,28 @@ services:
       options:
         max-size: '10m'
         max-file: '10'
-    ports:
-      - "80:80"
-      - "443:443"
-      - "443:443/udp"
     volumes:
       - ./Caddyfile:/Caddyfile:ro
       - caddy_data:/data
     command: 'caddy run --config /Caddyfile --adapter caddyfile'
+
+anubis:
+    image: ghcr.io/techarohq/anubis:latest
+    container_name: anubis
+    restart: unless-stopped
+    environment:
+      BIND: ":3000"
+      TARGET: "http://forgejo:3000"
+      SERVE_ROBOTS_TXT: "true"
+      TRUSTED_PROXIES: "127.0.0.1,::1"
+    networks:
+      - forgejo
+    ports:
+      - "3001:3000"
+
+networks:
+  forgejo:
+    external: false
 
 volumes:
   caddy_data:
