@@ -1,0 +1,738 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Simple Text Saver</title>
+  <script src="https://cdn.jsdelivr.net/npm/@tailwindcss/browser@4"></script>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+  <style>
+    /* 隐藏滚动条但保持滚动功能 */
+    textarea {
+      scrollbar-width: none; /* Firefox */
+      -ms-overflow-style: none; /* IE and Edge */
+    }
+    textarea::-webkit-scrollbar {
+      display: none; /* Chrome, Safari, Opera */
+    }
+
+    /* 隐藏浏览器自带的密码显示按钮 */
+    input[type="password"]::-ms-reveal,
+    input[type="password"]::-ms-clear,
+    input[type="password"]::-webkit-credentials-auto-fill-button,
+    input[type="password"]::-webkit-caps-lock-indicator {
+      display: none !important;
+      visibility: hidden !important;
+      opacity: 0 !important;
+    }
+
+    /* 特别处理Chrome/Safari/Edge的密码显示按钮 */
+    input[type="password"]::-webkit-contacts-auto-fill-button,
+    input[type="password"]::-webkit-credentials-auto-fill-button {
+      display: none !important;
+      visibility: hidden !important;
+      pointer-events: none !important;
+      position: absolute !important;
+      right: -9999px !important;
+    }
+
+    /* 动画效果 */
+    @keyframes fadeIn {
+      from { opacity: 0; transform: translateY(-10px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+
+    .fade-in {
+      animation: fadeIn 0.3s ease-out;
+    }
+
+    /* 文件列表项悬停效果 */
+    .file-item {
+      transition: all 0.2s ease;
+    }
+
+    .file-item:hover {
+      transform: translateX(5px);
+    }
+
+    /* 加载动画 */
+    @keyframes spin {
+      from { transform: rotate(0deg); }
+      to { transform: rotate(360deg); }
+    }
+
+    .spinner {
+      animation: spin 1s linear infinite;
+    }
+
+    /* 隐藏笔记列表水平轴 */
+    #notesList {
+      overflow-x: hidden;
+    }
+
+    /* 隐藏文件项水平溢出 */
+    .file-item {
+      overflow-x: hidden;
+    }
+  </style>
+</head>
+<body class="bg-gradient-to-br from-blue-50 to-gray-100 min-h-screen p-4">
+  <div class="w-full">
+    <div class="grid grid-cols-1 lg:grid-cols-[auto_1fr] gap-6">
+      <!-- 左侧：笔记列表 -->
+      <div class="lg:order-1 lg:sticky lg:top-0 lg:self-start w-full lg:w-auto lg:min-w-[280px] lg:h-screen overflow-x-hidden">
+        <div class="bg-white rounded-2xl shadow-lg p-6">
+          <div class="flex justify-between items-center mb-4">
+            <h2 class="text-xl font-bold text-gray-800">
+              <i class="fas fa-list mr-2"></i>笔记列表
+            </h2>
+            <div class="flex gap-2">
+              <button
+                id="refreshListBtn"
+                class="px-3 py-2 bg-blue-100 text-blue-700 hover:bg-blue-200 rounded-lg transition-colors text-sm"
+                type="button"
+                title="刷新列表"
+              >
+                <i class="fas fa-sync-alt"></i>
+                <span class="ml-1 hidden md:inline">刷新</span>
+              </button>
+              <button
+                id="clearListBtn"
+                class="px-3 py-2 bg-gray-100 text-gray-700 hover:bg-gray-200 rounded-lg transition-colors text-sm"
+                type="button"
+                title="清空列表"
+              >
+                <i class="fas fa-trash"></i>
+                <span class="ml-1 hidden md:inline">清空</span>
+              </button>
+            </div>
+          </div>
+
+          <!-- 列表状态信息 -->
+          <div id="listStatus" class="mb-4 text-center">
+            <div id="listEmpty" class="hidden">
+              <div class="text-gray-500 py-8">
+                <i class="fas fa-folder-open text-4xl mb-3"></i>
+                <p class="text-lg">暂无笔记</p>
+                <p class="text-sm mt-2">保存第一条笔记后，它会在这里显示</p>
+              </div>
+            </div>
+            <div id="listLoading" class="hidden">
+              <div class="text-blue-600 py-8">
+                <i class="fas fa-spinner spinner text-3xl mb-3"></i>
+                <p>正在加载笔记列表...</p>
+              </div>
+            </div>
+            <div id="listError" class="hidden">
+              <div class="text-red-600 py-4">
+                <i class="fas fa-exclamation-triangle text-2xl mb-2"></i>
+                <p id="listErrorText"></p>
+                <button
+                  id="retryListBtn"
+                  class="mt-3 px-4 py-2 bg-red-100 text-red-700 hover:bg-red-200 rounded-lg transition-colors text-sm"
+                  type="button"
+                >
+                  重试
+                </button>
+              </div>
+            </div>
+          </div>
+
+          <!-- 笔记列表容器 -->
+          <div id="notesList" class="max-h-[400px] overflow-y-auto space-y-2">
+            <!-- 笔记项将通过JavaScript动态添加 -->
+          </div>
+
+          <!-- 列表统计 -->
+          <div id="listStats" class="mt-4 pt-4 border-t border-gray-100 text-sm text-gray-500 hidden">
+            <span>共 <span id="totalNotes">0</span> 个文件</span>
+          </div>
+        </div>
+      </div>
+
+      <!-- 右侧：输入区域 -->
+      <div class="lg:order-2">
+        <div class="bg-white rounded-2xl shadow-lg p-6">
+          <!-- Token 输入（初始隐藏） -->
+          <div id="tokenSection" class="mb-4 transition-all duration-300">
+            <label class="block text-sm font-medium text-gray-700 mb-2">
+              <i class="fas fa-key mr-1"></i>GitHub Token
+            </label>
+            <div class="relative">
+              <input
+                type="password"
+                id="githubToken"
+                placeholder="输入 GitHub 个人访问令牌 (需要 repo 权限)"
+                class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-blue-500 transition-colors pr-10"
+              >
+              <button
+                id="toggleTokenVisibility"
+                class="absolute right-3 top-3 text-gray-500 hover:text-gray-700"
+                type="button"
+              >
+                <i class="fas fa-eye"></i>
+              </button>
+            </div>
+            <div class="flex justify-between items-center mt-2">
+              <p class="text-xs text-gray-500">
+                令牌仅存储在本地
+              </p>
+              <button
+                id="saveTokenBtn"
+                class="text-sm bg-blue-100 text-blue-700 hover:bg-blue-200 px-3 py-1 rounded-lg transition-colors"
+                type="button"
+              >
+                保存令牌
+              </button>
+            </div>
+          </div>
+
+          <!-- 文本输入 -->
+          <div class="mb-4">
+            <div class="flex justify-between items-center mb-2">
+              <label class="block text-sm font-medium text-gray-700">
+                <i class="fas fa-edit mr-1"></i>输入文本
+              </label>
+              <span id="charCount" class="text-sm text-gray-500">0/5000</span>
+            </div>
+            <textarea
+              id="textInput"
+              rows="10"
+              placeholder="在这里输入您的文本..."
+              class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-blue-500 transition-colors resize-none"
+              maxlength="5000"
+            ></textarea>
+          </div>
+
+          <!-- 提交按钮 -->
+          <div class="flex justify-center">
+            <button
+              id="submitBtn"
+              disabled
+              class="px-8 py-3 bg-gradient-to-r from-blue-500 to-blue-600 text-white font-medium rounded-lg shadow-md hover:from-blue-600 hover:to-blue-700 hover:shadow-lg transform hover:-translate-y-0.5 transition-all duration-200 disabled:opacity-50 disabled:cursor-not-allowed disabled:transform-none disabled:hover:shadow-md flex items-center gap-2"
+              type="button"
+            >
+              <i class="fas fa-cloud-upload-alt"></i>
+              <span>保存到 GitHub</span>
+              <span id="loadingSpinner" class="hidden">
+                <i class="fas fa-spinner fa-spin"></i>
+              </span>
+            </button>
+          </div>
+
+          <!-- 结果消息 -->
+          <div id="resultMessage" class="mt-4 text-center hidden">
+            <div id="successMessage" class="hidden">
+              <div class="inline-flex items-center gap-2 bg-green-100 text-green-800 px-4 py-2 rounded-lg">
+                <i class="fas fa-check-circle"></i>
+                <span>保存成功！</span>
+                <a id="githubLink" href="#" target="_blank" class="text-green-600 hover:text-green-800 hover:underline ml-2">
+                  <i class="fab fa-github"></i> 查看文件
+                </a>
+              </div>
+            </div>
+            <div id="errorMessage" class="hidden">
+              <div class="inline-flex items-center gap-2 bg-red-100 text-red-800 px-4 py-2 rounded-lg">
+                <i class="fas fa-exclamation-circle"></i>
+                <span id="errorText"></span>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <script>
+    document.addEventListener('DOMContentLoaded', function() {
+      // 元素引用
+      const githubTokenInput = document.getElementById('githubToken');
+      const toggleTokenVisibility = document.getElementById('toggleTokenVisibility');
+      const saveTokenBtn = document.getElementById('saveTokenBtn');
+      const tokenSection = document.getElementById('tokenSection');
+      const textInput = document.getElementById('textInput');
+      const charCount = document.getElementById('charCount');
+      const submitBtn = document.getElementById('submitBtn');
+      const loadingSpinner = document.getElementById('loadingSpinner');
+      const resultMessage = document.getElementById('resultMessage');
+      const successMessage = document.getElementById('successMessage');
+      const errorMessage = document.getElementById('errorMessage');
+      const errorText = document.getElementById('errorText');
+      const githubLink = document.getElementById('githubLink');
+      
+      // 笔记列表相关元素
+      const refreshListBtn = document.getElementById('refreshListBtn');
+      const clearListBtn = document.getElementById('clearListBtn');
+      const notesList = document.getElementById('notesList');
+      const listEmpty = document.getElementById('listEmpty');
+      const listLoading = document.getElementById('listLoading');
+      const listError = document.getElementById('listError');
+      const listErrorText = document.getElementById('listErrorText');
+      const retryListBtn = document.getElementById('retryListBtn');
+      const listStats = document.getElementById('listStats');
+      const totalNotes = document.getElementById('totalNotes');
+
+      // GitHub 配置
+      const GITHUB_CONFIG = {
+        username: 'tianheg',
+        repository: 'simple-text-saver',
+        branch: 'main',
+        basePath: 'src'
+      };
+
+      // 自动保存相关变量
+      let saveTimeout = null;
+      const SAVE_DELAY = 500; // 延迟保存时间（毫秒）
+
+      // 笔记列表缓存
+      let notesCache = JSON.parse(localStorage.getItem('github_notes_cache') || '[]');
+      let lastFetchTime = localStorage.getItem('github_notes_last_fetch') || 0;
+
+      // 初始化 - 检查是否已保存令牌和草稿
+      function initialize() {
+        // 恢复令牌
+        const savedToken = localStorage.getItem('github_simple_token');
+        if (savedToken) {
+          githubTokenInput.value = savedToken;
+          tokenSection.classList.add('hidden');
+        } else {
+          tokenSection.classList.remove('hidden');
+        }
+
+        // 恢复草稿
+        const savedDraft = localStorage.getItem('github_draft_text');
+        if (savedDraft) {
+          textInput.value = savedDraft;
+          charCount.textContent = `${savedDraft.length}/5000`;
+        }
+
+        updateSubmitButton();
+        
+        // 如果有令牌，加载笔记列表
+        if (savedToken) {
+          // 检查缓存是否过期（5分钟）
+          const now = Date.now();
+          const cacheAge = now - parseInt(lastFetchTime);
+          const CACHE_EXPIRE_TIME = 5 * 60 * 1000; // 5分钟
+          
+          if (notesCache.length > 0 && cacheAge < CACHE_EXPIRE_TIME) {
+            displayNotesList(notesCache);
+          } else {
+            fetchNotesList();
+          }
+        }
+      }
+
+      // 从GitHub获取笔记列表
+      async function fetchNotesList() {
+        const token = localStorage.getItem('github_simple_token') || githubTokenInput.value.trim();
+        
+        if (!token) {
+          showListEmpty();
+          return;
+        }
+
+        showListLoading();
+        hideListError();
+        hideListEmpty();
+
+        try {
+          const apiUrl = `https://api.github.com/repos/${GITHUB_CONFIG.username}/${GITHUB_CONFIG.repository}/contents/${GITHUB_CONFIG.basePath}`;
+          
+          const response = await fetch(apiUrl, {
+            headers: {
+              'Authorization': `token ${token}`,
+              'Accept': 'application/vnd.github.v3+json'
+            }
+          });
+
+          if (response.ok) {
+            const files = await response.json();
+            
+            // 过滤出.md文件并按修改时间排序
+            const markdownFiles = files
+              .filter(file => file.name.endsWith('.md'))
+              .sort((a, b) => new Date(b.updated_at || b.created_at) - new Date(a.updated_at || a.created_at));
+            
+            // 更新缓存
+            notesCache = markdownFiles;
+            lastFetchTime = Date.now();
+            localStorage.setItem('github_notes_cache', JSON.stringify(notesCache));
+            localStorage.setItem('github_notes_last_fetch', lastFetchTime.toString());
+            
+            displayNotesList(markdownFiles);
+          } else if (response.status === 404) {
+            // 目录不存在（可能是第一次使用）
+            showListEmpty();
+            notesCache = [];
+            localStorage.setItem('github_notes_cache', JSON.stringify([]));
+          } else {
+            const errorData = await response.json();
+            throw new Error(errorData.message || '获取列表失败');
+          }
+        } catch (error) {
+          console.error('获取笔记列表错误:', error);
+          showListError(`获取失败: ${error.message}`);
+        }
+      }
+
+      // 显示笔记列表
+      function displayNotesList(files) {
+        hideListLoading();
+        hideListError();
+        hideListEmpty();
+        notesList.innerHTML = '';
+
+        if (files.length === 0) {
+          showListEmpty();
+          listStats.classList.add('hidden');
+          return;
+        }
+
+        files.forEach((file, index) => {
+          const fileItem = createFileItem(file, index);
+          notesList.appendChild(fileItem);
+        });
+
+        // 更新统计信息
+        updateListStats(files);
+      }
+
+      // 创建文件列表项
+      function createFileItem(file, index) {
+        const div = document.createElement('div');
+        div.className = 'file-item bg-gray-50 hover:bg-blue-50 rounded-lg p-3 border border-gray-100 fade-in';
+        div.style.animationDelay = `${index * 0.05}s`;
+        
+        const fileName = file.name.replace(/\.md$/, '');
+        const fileDate = new Date(file.updated_at || file.created_at);
+        const formattedDate = fileDate.toLocaleDateString('zh-CN', {
+          month: 'short',
+          day: 'numeric',
+          hour: '2-digit',
+          minute: '2-digit'
+        });
+        
+        const fileSize = formatFileSize(file.size);
+        const fileUrl = file.html_url || `https://github.com/${GITHUB_CONFIG.username}/${GITHUB_CONFIG.repository}/blob/${GITHUB_CONFIG.branch}/${GITHUB_CONFIG.basePath}/${file.name}`;
+        
+        div.innerHTML = `
+          <div class="flex justify-between items-center">
+            <a href="${fileUrl}" target="_blank" class="text-blue-600 hover:text-blue-800 hover:underline font-medium truncate block flex-1 min-w-0">
+              <i class="far fa-file-alt mr-2"></i>${fileName}
+            </a>
+            <button class="ml-2 text-gray-400 hover:text-gray-600 flex-shrink-0" title="复制链接" onclick="copyToClipboard('${fileUrl}', this)">
+              <i class="fas fa-link"></i>
+            </button>
+          </div>
+        `;
+        
+        return div;
+      }
+
+      // 格式化文件大小
+      function formatFileSize(bytes) {
+        if (bytes === 0) return '0 B';
+        const k = 1024;
+        const sizes = ['B', 'KB', 'MB', 'GB'];
+        const i = Math.floor(Math.log(bytes) / Math.log(k));
+        return parseFloat((bytes / Math.pow(k, i)).toFixed(1)) + ' ' + sizes[i];
+      }
+
+      // 更新列表统计信息
+      function updateListStats(files) {
+        totalNotes.textContent = files.length;
+        
+        if (files.length > 0) {
+          listStats.classList.remove('hidden');
+        } else {
+          listStats.classList.add('hidden');
+        }
+      }
+
+      // 显示列表为空状态
+      function showListEmpty() {
+        listEmpty.classList.remove('hidden');
+        notesList.innerHTML = '';
+        listStats.classList.add('hidden');
+      }
+
+      // 隐藏列表为空状态
+      function hideListEmpty() {
+        listEmpty.classList.add('hidden');
+      }
+
+      // 显示列表加载状态
+      function showListLoading() {
+        listLoading.classList.remove('hidden');
+      }
+
+      // 隐藏列表加载状态
+      function hideListLoading() {
+        listLoading.classList.add('hidden');
+      }
+
+      // 显示列表错误状态
+      function showListError(message) {
+        listErrorText.textContent = message;
+        listError.classList.remove('hidden');
+        notesList.innerHTML = '';
+        listStats.classList.add('hidden');
+      }
+
+      // 隐藏列表错误状态
+      function hideListError() {
+        listError.classList.add('hidden');
+      }
+
+      // 自动保存草稿
+      function autoSaveDraft() {
+        const text = textInput.value;
+        if (text.trim()) {
+          localStorage.setItem('github_draft_text', text);
+        } else {
+          localStorage.removeItem('github_draft_text');
+        }
+      }
+
+      // 清除草稿
+      function clearDraft() {
+        localStorage.removeItem('github_draft_text');
+      }
+
+      // 处理输入（带防抖）
+      function handleInput() {
+        const length = textInput.value.length;
+        charCount.textContent = `${length}/5000`;
+        updateSubmitButton();
+
+        // 清除之前的定时器
+        if (saveTimeout) {
+          clearTimeout(saveTimeout);
+        }
+
+        // 设置新的定时器进行自动保存
+        saveTimeout = setTimeout(() => {
+          autoSaveDraft();
+        }, SAVE_DELAY);
+      }
+
+      // 切换令牌可见性
+      toggleTokenVisibility.addEventListener('click', function() {
+        const type = githubTokenInput.type === 'password' ? 'text' : 'password';
+        githubTokenInput.type = type;
+        toggleTokenVisibility.innerHTML = type === 'password'
+          ? '<i class="fas fa-eye"></i>'
+          : '<i class="fas fa-eye-slash"></i>';
+      });
+
+      // 保存令牌
+      saveTokenBtn.addEventListener('click', function() {
+        const token = githubTokenInput.value.trim();
+        if (token) {
+          localStorage.setItem('github_simple_token', token);
+          tokenSection.classList.add('hidden');
+          updateSubmitButton();
+
+          // 显示保存成功提示
+          saveTokenBtn.innerHTML = '<i class="fas fa-check"></i> 已保存';
+          saveTokenBtn.classList.remove('bg-blue-100', 'text-blue-700');
+          saveTokenBtn.classList.add('bg-green-100', 'text-green-700');
+
+          setTimeout(() => {
+            saveTokenBtn.innerHTML = '保存令牌';
+            saveTokenBtn.classList.remove('bg-green-100', 'text-green-700');
+            saveTokenBtn.classList.add('bg-blue-100', 'text-blue-700');
+          }, 2000);
+
+          // 获取笔记列表
+          fetchNotesList();
+        }
+      });
+
+      // 刷新笔记列表
+      refreshListBtn.addEventListener('click', function() {
+        refreshListBtn.querySelector('i').classList.add('spinner');
+        fetchNotesList().finally(() => {
+          setTimeout(() => {
+            refreshListBtn.querySelector('i').classList.remove('spinner');
+          }, 500);
+        });
+      });
+
+      // 清空笔记列表（仅清空缓存）
+      clearListBtn.addEventListener('click', function() {
+        if (confirm('确定要清空笔记列表缓存吗？这将不会删除GitHub上的文件。')) {
+          notesCache = [];
+          localStorage.removeItem('github_notes_cache');
+          localStorage.removeItem('github_notes_last_fetch');
+          showListEmpty();
+        }
+      });
+
+      // 重试获取列表
+      retryListBtn.addEventListener('click', function() {
+        fetchNotesList();
+      });
+
+      // 清除令牌（通过点击令牌输入框的清空按钮）
+      githubTokenInput.addEventListener('input', function() {
+        if (this.value === '') {
+          localStorage.removeItem('github_simple_token');
+          // 清空笔记列表
+          showListEmpty();
+        }
+      });
+
+      // 字符计数和自动保存
+      textInput.addEventListener('input', handleInput);
+
+      // 更新提交按钮状态
+      function updateSubmitButton() {
+        const hasToken = localStorage.getItem('github_simple_token') || githubTokenInput.value.trim();
+        const hasText = textInput.value.trim().length > 0;
+        submitBtn.disabled = !(hasToken && hasText);
+      }
+
+      // 生成文件名（基于当前时间）
+      function generateFileName() {
+        const now = new Date();
+        const year = now.getFullYear();
+        const month = String(now.getMonth() + 1).padStart(2, '0');
+        const day = String(now.getDate()).padStart(2, '0');
+        const hours = String(now.getHours()).padStart(2, '0');
+        const minutes = String(now.getMinutes()).padStart(2, '0');
+        const seconds = String(now.getSeconds()).padStart(2, '0');
+        return `note_${year}${month}${day}_${hours}${minutes}${seconds}.md`;
+      }
+
+      // 提交文本到 GitHub
+      submitBtn.addEventListener('click', async function() {
+        // 获取令牌（优先使用本地存储的）
+        const token = localStorage.getItem('github_simple_token') || githubTokenInput.value.trim();
+        const text = textInput.value.trim();
+
+        if (!token || !text) {
+          showError('请提供GitHub令牌并输入文本');
+          return;
+        }
+
+        // 生成文件名和完整路径
+        const fileName = generateFileName();
+        const filePath = `${GITHUB_CONFIG.basePath}/${fileName}`;
+
+        // 显示加载状态
+        submitBtn.disabled = true;
+        loadingSpinner.classList.remove('hidden');
+        hideMessages();
+
+        try {
+          // 准备API请求
+          const apiUrl = `https://api.github.com/repos/${GITHUB_CONFIG.username}/${GITHUB_CONFIG.repository}/contents/${filePath}`;
+
+          // 编码内容为Base64
+          const content = `# 保存于 ${new Date().toLocaleString('zh-CN')}\n\n${text}`;
+          const encodedContent = btoa(unescape(encodeURIComponent(content)));
+
+          // 发送请求
+          const response = await fetch(apiUrl, {
+            method: 'PUT',
+            headers: {
+              'Authorization': `token ${token}`,
+              'Accept': 'application/vnd.github.v3+json',
+              'Content-Type': 'application/json'
+            },
+            body: JSON.stringify({
+              message: `添加文本文件: ${fileName}`,
+              content: encodedContent,
+              branch: GITHUB_CONFIG.branch
+            })
+          });
+
+          const data = await response.json();
+
+          if (response.ok) {
+            // 成功
+            showSuccess();
+
+            // 设置GitHub链接
+            const fileUrl = `https://github.com/${GITHUB_CONFIG.username}/${GITHUB_CONFIG.repository}/blob/${GITHUB_CONFIG.branch}/${filePath}`;
+            githubLink.href = fileUrl;
+
+            // 清空输入框和草稿
+            textInput.value = '';
+            charCount.textContent = '0/5000';
+            clearDraft();
+            updateSubmitButton();
+
+            // 刷新笔记列表
+            setTimeout(() => {
+              fetchNotesList();
+            }, 1000);
+
+            // 5秒后隐藏成功消息
+            setTimeout(hideMessages, 5000);
+          } else {
+            // 错误处理
+            const errorMsg = data.message || '保存失败';
+            showError(`GitHub API错误: ${errorMsg}`);
+
+            // 如果令牌无效，清除本地存储的令牌
+            if (response.status === 401) {
+              localStorage.removeItem('github_simple_token');
+              tokenSection.classList.remove('hidden');
+              showListEmpty();
+            }
+          }
+        } catch (error) {
+          console.error('保存错误:', error);
+          showError(`网络错误: ${error.message}`);
+        } finally {
+          // 恢复按钮状态
+          loadingSpinner.classList.add('hidden');
+          updateSubmitButton();
+        }
+      });
+
+      // 显示成功消息
+      function showSuccess() {
+        successMessage.classList.remove('hidden');
+        errorMessage.classList.add('hidden');
+        resultMessage.classList.remove('hidden');
+      }
+
+      // 显示错误消息
+      function showError(message) {
+        errorText.textContent = message;
+        successMessage.classList.add('hidden');
+        errorMessage.classList.remove('hidden');
+        resultMessage.classList.remove('hidden');
+      }
+
+      // 隐藏所有消息
+      function hideMessages() {
+        resultMessage.classList.add('hidden');
+        successMessage.classList.add('hidden');
+        errorMessage.classList.add('hidden');
+      }
+
+      // 复制到剪贴板函数（全局可用）
+      window.copyToClipboard = function(text, button) {
+        navigator.clipboard.writeText(text).then(() => {
+          const originalIcon = button.innerHTML;
+          button.innerHTML = '<i class="fas fa-check text-green-500"></i>';
+          setTimeout(() => {
+            button.innerHTML = originalIcon;
+          }, 2000);
+        });
+      };
+
+      // 初始化应用
+      initialize();
+
+      // 实时更新按钮状态
+      githubTokenInput.addEventListener('input', updateSubmitButton);
+    });
+  </script>
+</body>
+</html>
