@@ -132,6 +132,9 @@ services:
       - FORGEJO__database__DB_TYPE=sqlite3
       - FORGEJO__server__SSH_PORT=22
       - FORGEJO__server__SSH_LISTEN_PORT=2222 # port forward
+      - FORGEJO__repository__DEFAULT_REPO_UNITS=repo.code
+      - FORGEJO__repository__DISABLE_MIGRATIONS=true
+      - FORGEJO__repository__DISABLE_STARS=true
     restart: unless-stopped
     networks:
       - forgejo
@@ -178,4 +181,97 @@ networks:
 volumes:
   caddy_data:
   caddy_config:
+#+END_SRC
+* Backup Forgejo
+
+First, create SSH key, add pub key to Storagebox.
+
+Second, run below script.
+
+#+BEGIN_SRC sh
+#!/bin/bash
+
+# Configuration
+STORAGE_USER="uxx"
+STORAGE_HOST="uxx.your-storagebox.de"
+STORAGE_PORT="23"
+REMOTE_DIR="forgejo_backup"
+LOCAL_BACKUP_DIR="/tmp"
+
+echo "[$(date '+%Y-%m-%d %H:%M:%S')] === Starting Forgejo backup process ==="
+
+# need at /home/git
+if [ "$PWD" != "/home/git" ]; then
+    echo "Changing directory to /home/git"
+    cd /home/git
+else
+    echo "Already in /home/git"
+fi
+
+# Stop service
+echo "Stopping Forgejo service (docker compose stop)..."
+docker compose stop
+if [ $? -eq 0 ]; then
+    echo "Service stopped successfully."
+else
+    echo "WARNING: Failed to stop service, continuing anyway..."
+fi
+
+# Create timestamp and archive name
+TIMESTAMP=$(date +%Y%m%d-%H%M%S)
+ARCHIVE_NAME="forgejo-backup-$TIMESTAMP.tar.gz"
+ARCHIVE_PATH="$LOCAL_BACKUP_DIR/$ARCHIVE_NAME"
+
+# Create compressed archive
+echo "Creating archive: $ARCHIVE_PATH (from ./forgejo and ./conf)"
+tar -czf "$ARCHIVE_PATH" ./forgejo ./conf
+if [ $? -eq 0 ]; then
+    echo "Archive created successfully."
+else
+    echo "ERROR: Failed to create archive. Exiting."
+    exit 1
+fi
+
+# Upload to Storage Box
+echo "Uploading archive to $STORAGE_USER@$STORAGE_HOST:$REMOTE_DIR/ using rsync (port $STORAGE_PORT)..."
+rsync -avh --delete -e "ssh -p$STORAGE_PORT" "$ARCHIVE_PATH" "$STORAGE_USER@$STORAGE_HOST:$REMOTE_DIR/"
+RSYNC_EXIT=$?
+
+if [ $RSYNC_EXIT -eq 0 ]; then
+    echo "Upload completed successfully."
+
+    # Remove local archive if upload succeeded
+    echo "Removing local archive: $ARCHIVE_PATH"
+    rm "$ARCHIVE_PATH"
+    if [ $? -eq 0 ]; then
+        echo "Local archive removed."
+    else
+        echo "WARNING: Failed to remove local archive (permissions?)."
+    fi
+
+    echo "Backup successful: $ARCHIVE_NAME"
+else
+    echo "ERROR: Upload failed (rsync exit code: $RSYNC_EXIT). Keeping local archive at $ARCHIVE_PATH"
+fi
+
+# Start service
+echo "Starting Forgejo service (docker compose start)..."
+docker compose start
+if [ $? -eq 0 ]; then
+    echo "Service started successfully."
+else
+    echo "ERROR: Failed to start service. Please check manually."
+    exit 1
+fi
+
+echo "[$(date '+%Y-%m-%d %H:%M:%S')] === Backup process finished ==="
+#+END_SRC
+
+Third, make it backup repeatly.
+
+#+BEGIN_SRC sh
+crontab -e
+## add below line to edit area
+# 0 2 * * * /home/git/backup.sh >> /home/git/backup.log 2>&1
+crontab -l
 #+END_SRC
