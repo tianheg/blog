@@ -1,15 +1,10 @@
 * git-delete-branch-locally-remotely
-:PROPERTIES:
-:CUSTOM_ID: git-delete-branch-locally-remotely
-:END:
-[[https://stackoverflow.com/a/2003515/12539782]] ## Local
 
-```bash git branch -d <branch_{tobedeleted}> git branch -D <branch_{tobedeleted}>(force) ```
-
-​## Remote
-
-```bash git push origin --delete <branch_{tobedeleted}>
-
-git push origin :<branch_{tobedeleted}>
-
-​## Next step git fetch --all --prune # remove remote branched still at locally ```
+#+BEGIN_SRC sh
+## local
+git branch -d BRANCH
+git branch -D BRANCH # force delete
+## Remote
+git push origin --delete BRANCH
+git remote prune origin
+#+END_SRC
