@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Wavesurfer.js demo</title>
+</head>
+
+<body>
+  <h1>Wavesurfer.js demo</h1>
+  <div id="waveform">
+    <!-- the waveform will be rendered here -->
+  </div>
+
+  <script type="module">
+    import WaveSurfer from 'https://cdn.jsdelivr.net/npm/wavesurfer.js@7/dist/wavesurfer.esm.js'
+
+    const wavesurfer = WaveSurfer.create({
+      container: '#waveform',
+      waveColor: '#4F4A85',
+      progressColor: '#383351',
+      url: './sample-15s.mp3',
+    })
+
+    wavesurfer.on('interaction', () => {
+      wavesurfer.play()
+    })
+  </script>
+</body>
+
+</html>

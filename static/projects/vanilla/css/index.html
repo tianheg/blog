@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="description" content="尝试使用 CSS 的各种能力">
+    <title>CSS demo</title>
+    <!-- <link rel="stylesheet" href="../../../assets/fonts.css"> use @import replace -->
+    <link rel="stylesheet" href="style.css" />
+  </head>
+  <body>
+    <main>
+      <div class="flexbox">
+        <h1>Firefox is cool!</h1>
+        <img src="firefox-dev-edition-logo.svg" alt="" />
+      </div>
+      <p class="para1" id="para1">
+        I use Firefox Developer Edition as my daily web browser.
+      </p>
+      <p>
+        This is a paragraph of text. In the text is a
+        <span>span element</span> and also a
+        <a href="https://#" title="This is a link">link</a>.
+      </p>
+      <div class="lists">
+        <ul role="list">
+          <li data-icon="🦄">Apple</li>
+          <li data-icon="🌈">Banana</li>
+          <li data-icon="😎">Orange</li>
+        </ul>
+
+        <ol role="list">
+          <li>Apple</li>
+          <li style="--li-bg: darkcyan">Banana</li>
+          <li style="--li-bg: navy">Orange</li>
+        </ol>
+      </div>
+      <div class="function outer">
+        <div class="box">The inner box is 90% - 3rem.</div>
+      </div>
+      <div class="flexbox2">
+        <div class="outer">
+          <div class="box"></div>
+        </div>
+        <div class="outer">
+          <div class="box"></div>
+        </div>
+      </div>
+      <div class="counter-style">
+        <p>@counter-style</p>
+        <ul>
+          <li>a</li>
+          <li>b</li>
+          <li>c</li>
+        </ul>
+      </div>
+      <div class="shorthands">
+        <p>
+          font, background, padding, margin, border.
+          如果在用这些快捷属性时，少设置一个子属性，该子属性的值会被重置。此前如果已经对该子属性进行设置，需要重新设置。
+        </p>
+        <div>Hello World</div>
+      </div>
+      <div class="css-work">
+        <p>How CSS Work?</p>
+        <ol>
+          <li>浏览器加载 HTML</li>
+          <li>将 HTML 转化为 DOM</li>
+          <li>将 HTML 中链接的 CSS 从服务器下载下来</li>
+          <li>
+            解析获得 CSS
+            文件，根据不同的选择器进行分类，对各选择器进行渲染，形成渲染树
+          </li>
+          <li>展示在屏幕上</li>
+        </ol>
+        <img src="./rendering.svg" alt="How CSS Work?" />
+        <p>
+          DOM 是一种树状结构。HTML 中的所有元素、属性和文本等都会在 DOM
+          中成为一个个节点，由于元素、属性和文本等是存在级别的，所以由此形成了一个
+          DOM 节点树。
+        </p>
+      </div>
+      <details class="get-scss-content">
+        <summary>css style file</summary>
+        <div id="scssFile"></div>
+      </details>
+    </main>
+    <script src="script.js"></script>
+  </body>
+</html>

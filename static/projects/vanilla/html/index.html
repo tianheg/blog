@@ -1,0 +1,1116 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="尝试使用 HTML 的各种能力">
+  <title>HTML demo</title>
+  <!-- 在 title 中放标签会被忽略，所以不需要 HTML entity -->
+  <style>
+    body {
+      max-width: 800px;
+      margin: 0 auto;
+    }
+  </style>
+  <base href="./">
+  <link rel="stylesheet" href="style.css">
+</head>
+
+<body>
+  <h1>HTML demo</h1>
+  <section>
+    <h2>&lt;a&gt;</h2>
+    <ul>
+      <li><a href="https://devdocs.io/html/element/a" hreflang="en" download="">link with hreflang, not download</a>
+        <p>didnot download, reason: only same origin or blob:,data:</p>
+      </li>
+      <li><a href="./sample.html" hreflang="en" download="">link with hreflang, download</a></li>
+      <li><a href="./sample.html" hreflang="en" download="smaple.htm">link with hreflang, download="sample.htm"</a></li>
+      <li><a href="javascript:alert(1)">href="javascript:alert(1)"</a></li>
+      <li><a href="file:/mnt/disk/MAIN/repo/vanilla/html/sample.html">href="file:sample.html"</a></li>
+      <li><a
+          href="data:text/plain;charset=utf-8;base64,SGVsbG8gV29ybGQ=">href="data:text/plain;charset=utf-8;base64,SGVsbG8gV29ybGQ=",
+          which is 'Hello World'</a></li>
+      <li>Didn't work <a
+          href="https://www.youtube.com/watch?v=qUHdqpdgZl4#t=00:01:30">href="https://www.youtube.com/watch?v=qUHdqpdgZl4#t=00:01:30"
+          Pieces of media files with media fragments</a></li>
+      <li>didnot work <a href="sample.mp4#t=00:01:30,00:02:00">href="sample.mp4#t=00:01:30,00:02:00"</a></li>
+      <li><a href="web+burger:deluxe_bacon_cheeseburger">href="web+burger:deluxe_bacon_cheeseburger"</a>
+      </li>
+      <script>
+        navigator.registerProtocolHandler(
+          'web+burger',
+          'https://burgers.example.com/?burger=%s',
+          'Burger Menu' // Optional title for the handler
+        );
+
+      </script>
+      <li><a href="https://www.example.com"
+          ping="https://analytics.example.com/track">ping="https://analytics.example.com/track"</a>
+      </li>
+
+
+    </ul>
+    <p>add filename to suggest</p>
+    <p>href support: data:, blob:, http:, https:, mailto:, tel:, sms:, javascript:, text fragmemts,
+      registerProtocolHandler(scheme, url)
+    </p>
+    <p>ping for tracking, send POST request to ping="URL"</p>
+    <p>referrerpolicy: no-referrer, no-referrer-when-downgrade, origin, origin-when-corss-origin, same-origin,
+      strict-origin, strict-origin-when-corss-origin, unsafe-url</p>
+    <p>rel, target, type</p>
+
+  </section>
+
+  <section>
+    <h2>&lt;area&gt;, &lt;map&gt;</h2>
+    <map name="single-map">
+      <area shape="poly" coords="129,0,260,95,129,138" href="https://developer.mozilla.org/docs/Web/HTTP"
+        target="_blank" alt="HTTP">
+      <area shape="poly" coords="260,96,209,249,130,138" href="https://developer.mozilla.org/docs/Web/HTML"
+        target="_blank" alt="HTML" />
+      <area shape="poly" coords="209,249,49,249,130,139" href="https://developer.mozilla.org/docs/Web/JavaScript"
+        target="_blank" alt="JavaScript" />
+      <area shape="poly" coords="48,249,0,96,129,138" href="https://developer.mozilla.org/docs/Web/API" target="_blank"
+        alt="Web APIs" />
+      <area shape="poly" coords="0,95,128,0,128,137" href="https://developer.mozilla.org/docs/Web/CSS" target="_blank"
+        alt="CSS" />
+    </map>
+    <img src="./mdn-info.png" usemap="#single-map" />
+  </section>
+
+  <section>
+    <h2>&lt;article&gt;, &lt;aside&gt;</h2>
+    <p>主要用来放置内容，可以内嵌article包裹article</p>
+    <p>Do not use the &lt;aside&gt; element to tag parenthesized text, as this kind of text is considered part of the
+      main flow.
+    </p>
+    <article>
+      blog post
+      <time datetime=" 2022-01-01">pubDate/Time</time>
+
+      <aside>
+        content that not post but related to post
+      </aside>
+      <article>
+        post's comment
+      </article>
+      <address>
+        author info
+      </address>
+    </article>
+  </section>
+
+  <section>
+    <h2>&lt;audio&gt;</h2>
+
+    <audio controls autoplay loop muted preload="auto" src="./sample.mp3"></audio>
+  </section>
+
+  <section>
+    <h2>&lt;bdo&gt;</h2>
+
+    <p>Hello World</p>
+    <p><bdo dir="rtl">Hello World</bdo></p>
+  </section>
+  <section>
+    <h2>&lt;blockquote&gt;</h2>
+
+    <blockquote cite="https://jack-vanlightly.com/blog/2022/1/25/write-for-others-but-mostly-for-yourself">
+      <p>It is like training for your thinking, it makes you more powerful which translates to better understanding and
+        greater insight. Blogging is less popular now than it was but don’t let that stop you, in the end the person
+        that benefits most, even if few people read it, is you.</p>
+      <footer>--Jack Vanlightly, <cite>Write for others but mostly for yourself</cite></footer>
+    </blockquote>
+  </section>
+  <section>
+    <h2>&lt;button&gt; and Popover API</h2>
+
+    <p>The Popover API provides developers with a standard, consistent, flexible mechanism for displaying popover
+      content on top of other page content. Popover content can be controlled either declaratively using HTML
+      attributes, or via JavaScript.</p>
+    <button autofocus disabled>click</button>
+
+    <button popovertarget="mypopover">Toggle the popover</button>
+    <div id="mypopover" popover>Popover content</div>
+    <button name="favorite">
+      <svg aria-hidden="true" viewBox="0 0 10 10">
+        <path d="M7 9L5 8 3 9V6L1 4h3l1-3 1 3h3L7 6z" />
+      </svg>
+      Add to favorites
+    </button>
+  </section>
+
+  <section>
+    <h2>&lt;canvas&gt;</h2>
+
+    <canvas width="120" height="120">
+      An alternative text describing what your canvas displays.
+    </canvas>
+    <script>
+      const canvas = document.querySelector("canvas");
+      const ctx = canvas.getContext("2d");
+      ctx.fillStyle = "green";
+      // Add a rectangle at (10, 10) with size 100x100 pixels
+      ctx.fillRect(10, 10, 100, 100);
+    </script>
+  </section>
+
+  <section>
+    <h2>Table: &lt;caption&gt;, &lt;col&gt;, &lt;colgroup&gt;, &lt;td&gt;, &lt;th&gt;, &lt;tr&gt;</h2>
+
+    <table>
+      <caption>My Table caption(must be the first child of its parent &lt;table&gt; element)</caption>
+      <colgroup>
+        <col />
+        <col span="2" class="batman" />
+        <col span="2" class="flash" />
+      </colgroup>
+      <tr>
+        <td></td>
+        <th scope="col">Batman</th>
+        <th scope="col">Robin</th>
+        <th scope="col">The Flash</th>
+        <th scope="col">Kid Flash</th>
+      </tr>
+      <tr>
+        <th scope="row">Skill</th>
+        <td>Smarts, strong</td>
+        <td>Dex, acrobat</td>
+        <td>Super speed</td>
+        <td>Super speed</td>
+      </tr>
+    </table>
+  </section>
+
+  <section>
+    <h2>&lt;datalist&gt;, &lt;option&gt;, &lt;optgroup&gt;, &lt;select&gt;</h2>
+
+    <label for="ico">Choose:</label>
+    <input list="ico1" name="ico2" id="ico">
+    <datalist id="ico1">
+      <option value="Abc"></option>
+      <option value="Def"></option>
+      <option value="Ghi"></option>
+      <option value="Jkl"></option>
+    </datalist>
+    <input type="time" list="popularHours" />
+    <datalist id="popularHours">
+      <option value="12:00"></option>
+      <option value="13:00"></option>
+      <option value="14:00"></option>
+    </datalist>
+
+    <label for="pwd">Enter a password:</label>
+    <input type="password" list="randomPassword" id="pwd" />
+    <datalist id="randomPassword">
+      <option value="5Mg[_3DnkgSu@!q#"></option>
+    </datalist>
+
+    <label for="dino-select">Choose a dinosaur:</label>
+    <select id="dino-select">
+      <optgroup label="Theropods">
+        <option>Tyrannosaurus</option>
+        <option>Velociraptor</option>
+        <option>Deinonychus</option>
+      </optgroup>
+      <optgroup label="Sauropods" disabled>
+        <option>Diplodocus</option>
+        <option>Saltasaurus</option>
+        <option>Apatosaurus</option>
+      </optgroup>
+    </select>
+  </section>
+
+  <section>
+    <h2>&lt;dl&gt;, &lt;dt&gt;, &lt;dd&gt;</h2>
+
+    <dl>
+      <dt>Beast of Bodmin</dt>
+      <dd>A large feline inhabiting Bodmin Moor.</dd>
+
+      <dt>Morgawr</dt>
+      <dd>A sea serpent.</dd>
+
+      <dt>Owlman</dt>
+      <dd>A giant owl-like creature.</dd>
+    </dl>
+  </section>
+
+
+  <section>
+    <h2>&lt;del&gt;</h2>
+
+    <p><del cite="https://example.com" datetime="2020-01-01">This line of text is deleted.</del></p>
+  </section>
+
+  <section>
+    <h2>&lt;details&gt;</h2>
+
+    <details>
+      <summary>Summary</summary>
+      <p>Details</p>
+    </details>
+    <style>
+      details {
+        border: 1px solid black;
+        border-radius: 4px;
+        padding: .5em .5em 0;
+      }
+
+      summary {
+        font-weight: bold;
+        margin: -.5em -.5em 0;
+        padding: .5em;
+      }
+
+      details[open] {
+        padding: .5em;
+      }
+
+      details[open] summary {
+        border-bottom: 1px solid black;
+        margin-bottom: .5em;
+      }
+    </style>
+  </section>
+
+  <section>
+    <h2>&lt;dialog&gt;</h2>
+
+    <!-- <dialog open>
+      <p>Greetings, one and all!</p>
+      <form method="dialog">
+        <button>OK</button>
+      </form>
+    </dialog> -->
+
+    <hr>
+
+    <dialog>
+      <button autofocus>Close</button>
+      <p>This modal dialog has a groovy backdrop!</p>
+    </dialog>
+    <button>Show the dialog</button>
+    <style>
+      ::backdrop {
+        background-image: linear-gradient(45deg,
+            magenta,
+            rebeccapurple,
+            dodgerblue,
+            green);
+        opacity: 0.75;
+      }
+    </style>
+    <script>
+      const dialog = document.querySelector("dialog");
+      const showButton = document.querySelector("dialog + button");
+      const closeButton = document.querySelector("dialog button");
+
+      // "Show the dialog" button opens the dialog modally
+      showButton.addEventListener("click", () => {
+        dialog.showModal();
+      });
+
+      // "Close" button closes the dialog
+      closeButton.addEventListener("click", () => {
+        dialog.close();
+      });
+    </script>
+  </section>
+
+
+  <section>
+    <h2>&lt;dfn&gt;, &lt;code&gt;</h2>
+
+    <p>
+      The <strong>HTML Definition element (<dfn>&lt;dfn&gt;</dfn>)</strong> is used
+      to indicate the term being defined within the context of a definition phrase
+      or sentence.
+    </p>
+    <p>
+      The
+      <strong>HTML Definition element (<dfn id="definition-dfn">&lt;dfn&gt;</dfn>)</strong>
+      is used to indicate the term being defined within the context of a definition
+      phrase or sentence.
+    </p>
+
+    <p>
+      Lorem ipsum dolor sit amet, consectetur adipiscing elit. Graece donan, Latine
+      voluptatem vocant. Confecta res esset. Duo Reges: constructio interrete.
+      Scrupulum, inquam, abeunti;
+    </p>
+
+    <p>
+      Because of all of that, we decided to use the
+      <code><a href="#definition-dfn">&lt;dfn&gt;</a></code> element for this
+      project.
+    </p>
+    <p>
+      The <dfn><abbr title="Hubble Space Telescope">HST</abbr></dfn> is among the
+      most productive scientific instruments ever constructed. It has been in orbit
+      for over 20 years, scanning the sky and returning data and photographs of
+      unprecedented quality and detail.
+    </p>
+
+    <p>
+      Indeed, the <abbr title="Hubble Space Telescope">HST</abbr> has arguably done
+      more to advance science than any device ever built.
+    </p>
+  </section>
+
+  <section>
+    <h2>&lt;div&gt;</h2>
+    <p>The &lt;div&gt; HTML element is the generic container for flow content. It has no effect on the content or layout
+      until styled
+      in some way using CSS (e.g. styling is directly applied to it, or some kind of layout model like Flexbox is
+      applied to its parent element).</p>
+  </section>
+
+  <section>
+    <h2>&lt;em&gt; and &lt;i&gt;</h2>
+
+    <p>em: Ice cream is made with milk, sweetener, and cream. Frozen custard, on the
+      other hand, is made of milk, cream, sweetener, and <em>egg yolks</em>.
+    </p>
+    <p>i: The <i>Queen Mary</i> sailed last night</p>
+  </section>
+
+  <section>
+    <h2>&lt;embed&gt;, &lt;iframe&gt;, &lt;object&gt;</h2>
+
+    <embed type="video/webm" src="./flower.mp4" width="250" height="200" />
+
+    <iframe src="./sample.html" width="250" height="200"></iframe>
+    <iframe allowfullscreen id="inlineFrameExample" title="Inline Frame Example" width="300" height="200"
+      src="https://www.openstreetmap.org/export/embed.html?bbox=-0.004017949104309083%2C51.47612752641776%2C0.00030577182769775396%2C51.478569861898606&layer=mapnik">
+    </iframe>
+
+    <object type="application/pdf" data="/media/examples/In-CC0.pdf" width="250" height="200"></object>
+    <object type="video/mp4" data="https://interactive-examples.mdn.mozilla.net/media/cc0-videos/flower.webm"
+      width="600" height="140">
+      <img src="path/image.jpg" alt="useful image description" />
+    </object>
+  </section>
+
+  <section>
+    <h2>Form: &lt;fieldset&gt;, &lt;label&gt;, &lt;legend&gt;, &lt;input&gt;</h2>
+
+    <p>The &lt;fieldset&gt; HTML element is used to group several controls as well as labels within a web form.</p>
+    <form action="">
+
+      <fieldset disabled>
+        <legend>Legend</legend>
+        <p>
+          <label for="name">Name:</label>
+          <input type="text" name="name" id="name" />
+        </p>
+        <p>
+          <label for="email">Email:</label>
+          <input type="text" name="email" id="email" />
+        </p>
+        <p>
+          <label for="message">Message:</label>
+          <textarea name="message" id="message"></textarea>
+        </p>
+
+        <p>
+          <input type="submit" value="Submit" />
+        </p>
+      </fieldset>
+    </form>
+
+    <form action="">
+      <input type="button" name="" id="">
+      <input type="checkbox" name="" id="">
+      <input type="color" name="" id="">
+      <input type="date" name="" id="">
+      <input type="datetime-local" name="" id="">
+      <input type="email" name="" id="">
+      <input type="file" name="" id="">
+      <input type="hidden" name="" id="">
+      <input type="image" src="" alt="">
+      <input type="month" name="" id="">
+      <input type="number" name="" id="">
+      <input type="password" name="" id="">
+      <input type="radio" name="" id="">
+      <input type="range" name="" id="">
+      <input type="reset" name="" id="">
+      <input type="search" name="" id="">
+      <input type="submit" name="" id="">
+      <input type="tel" name="" id="">
+      <input type="text" name="" id="">
+      <input type="time" name="" id="">
+      <input type="url" name="" id="">
+      <input type="week" name="" id="">
+    </form>
+  </section>
+
+  <section>
+    <h2>&lt;figure&gt;</h2>
+
+    <figure>
+      <img src="./mdn-info.png" alt="MDN info" />
+      <figcaption>MDN info</figcaption>
+    </figure>
+
+    <figure>
+      <figcaption>Get browser details using <code>navigator</code>.</figcaption>
+      <pre>
+    function NavigatorExample() {
+      var txt;
+      txt = "Browser CodeName: " + navigator.appCodeName + "; ";
+      txt+= "Browser Name: " + navigator.appName + "; ";
+      txt+= "Browser Version: " + navigator.appVersion  + "; ";
+      txt+= "Cookies Enabled: " + navigator.cookieEnabled  + "; ";
+      txt+= "Platform: " + navigator.platform  + "; ";
+      txt+= "User-agent header: " + navigator.userAgent  + "; ";
+      console.log("NavigatorExample", txt);
+    }
+      </pre>
+    </figure>
+  </section>
+
+  <section>
+    <h2>&lt;footer&gt;</h2>
+
+    <article>
+      <h1>How to be a wizard</h1>
+      <ol>
+        <li>Grow a long, majestic beard.</li>
+        <li>Wear a tall, pointed hat.</li>
+        <li>Have I mentioned the beard?</li>
+      </ol>
+      <footer>
+        <p>© 2018 Gandalf</p>
+      </footer>
+    </article>
+    <p>&lt;small&gt; and CSS: depend on the situation</p>
+  </section>
+
+  <section>
+    <h2>&lt;h1&gt;-&lt;h6&gt; and &lt;header&gt; and &lt;hgroup&gt;, &lt;nav&gt;</h2>
+    <p>Donot jump nums</p>
+    <p>It's not necessary for all links to be contained in a &lt;nav&gt; element. &lt;nav&gt; is intended only for a
+      major block of navigation links; typically the &lt;footer&gt; element often has a list of links that don't need to
+      be in a &lt;nav&gt; element.</p>
+    <header>
+      <nav aria-labelledby="primary-navigation">
+        <h2 id="primary-navigation">Primary navigation</h2>
+        <!-- navigation items -->
+      </nav>
+    </header>
+
+    <!-- page content -->
+
+    <footer>
+      <nav aria-labelledby="footer-navigation">
+        <h2 id="footer-navigation">Footer navigation</h2>
+        <!-- navigation items -->
+      </nav>
+    </footer>
+  </section>
+
+  <section>
+    <h2>&lt;head&gt;: title, base, link, style, meta, script, noscript, template(slot)</h2>
+    <p>link: rss,style,font</p>
+    <p>meta: opengraph, twitter</p>
+
+    <template id="element-details-template">
+      <style>
+        details {
+          font-family: "Open Sans Light", Helvetica, Arial, sans-serif;
+        }
+
+        .name {
+          font-weight: bold;
+          color: #217ac0;
+          font-size: 120%;
+        }
+
+        h4 {
+          margin: 10px 0 -8px 0;
+          background: #217ac0;
+          color: white;
+          padding: 2px 6px;
+          border: 1px solid #cee9f9;
+          border-radius: 4px;
+        }
+
+        .attributes {
+          margin-left: 22px;
+          font-size: 90%;
+        }
+
+        .attributes p {
+          margin-left: 16px;
+          font-style: italic;
+        }
+      </style>
+      <details>
+        <summary>
+          <code class="name">
+            &lt;<slot name="element-name">NEED NAME</slot>&gt;
+          </code>
+          <span class="desc">
+            <slot name="description">NEED DESCRIPTION</slot>
+          </span>
+        </summary>
+        <div class="attributes">
+          <h4>Attributes</h4>
+          <slot name="attributes">
+            <p>None</p>
+          </slot>
+        </div>
+      </details>
+      <hr />
+    </template>
+    <element-details>
+      <span slot="element-name">slot</span>
+      <span slot="description">A placeholder inside a web
+        component that users can fill with their own markup,
+        with the effect of composing different DOM trees
+        together.</span>
+      <dl slot="attributes">
+        <dt>name</dt>
+        <dd>The name of the slot.</dd>
+      </dl>
+    </element-details>
+    <style>
+      dl {
+        margin-left: 6px;
+      }
+
+      dt {
+        font-weight: bold;
+        color: #217ac0;
+        font-size: 110%
+      }
+
+      dt {
+        font-family: Consolas, "Liberation Mono", Courier
+      }
+
+      dd {
+        margin-left: 16px
+      }
+    </style>
+    <script>customElements.define('element-details',
+        class extends HTMLElement {
+          constructor() {
+            super();
+            const template = document
+              .getElementById('element-details-template')
+              .content;
+            const shadowRoot = this.attachShadow({ mode: 'open' })
+              .appendChild(template.cloneNode(true));
+          }
+        });
+    </script>
+  </section>
+
+  <section>
+    <h2>&lt;hr&gt;</h2>
+    <p>Horizontal line, more semantically, than visually</p>
+
+    <p>
+      This is the first paragraph of text. This is the first paragraph of text. This
+      is the first paragraph of text. This is the first paragraph of text.
+    </p>
+    <hr />
+    <p>
+      This is the second paragraph of text. This is the second paragraph of text.
+      This is the second paragraph of text. This is the second paragraph of text.
+    </p>
+  </section>
+
+  <section>
+    <h2>&lt;ins&gt;</h2>
+
+    <p>“You're late!”</p>
+    <del>
+      <p>“I apologize for the delay.”</p>
+    </del>
+    <ins cite="../howtobeawizard.html" datetime="2018-05">
+      <p>“A wizard is never late …”</p>
+    </ins>
+    <style>
+      del,
+      ins {
+        display: block;
+        text-decoration: none;
+        position: relative;
+      }
+
+      del {
+        background-color: #fbb;
+      }
+
+      ins {
+        background-color: #d4fcbc;
+      }
+
+      del::before,
+      ins::before {
+        position: absolute;
+        left: 0.5rem;
+        font-family: monospace;
+      }
+
+      del::before {
+        content: '−';
+      }
+
+      ins::before {
+        content: '+';
+      }
+
+      p {
+        margin: 0 1.8rem 0;
+        font-family: Georgia, serif;
+        font-size: 1rem;
+      }
+    </style>
+  </section>
+
+  <section>
+    <h2>&lt;kbd&gt;</h2>
+
+    <p>Press <kbd>Ctrl</kbd> + <kbd>Alt</kbd> + <kbd>Delete</kbd> to end the session.</p>
+  </section>
+
+  <section>
+    <h2>&lt;mark&gt;</h2>
+
+    <p>This is <mark>important</mark> text.</p>
+    <style>
+      mark::before,
+      mark::after {
+        clip-path: inset(100%);
+        clip: rect(1px, 1px, 1px, 1px);
+        height: 1px;
+        overflow: hidden;
+        position: absolute;
+        white-space: nowrap;
+        width: 1px;
+      }
+
+      mark::before {
+        content: " [highlight start] ";
+      }
+
+      mark::after {
+        content: " [highlight end] ";
+      }
+    </style>
+  </section>
+
+  <section>
+    <h2>&lt;menu&gt;</h2>
+    <p>The &lt;menu&gt; HTML element is described in the HTML specification as a semantic alternative to &lt;ul&gt;, but
+      treated by browsers (and exposed through the accessibility tree) as no different than &lt;ul&gt;. It represents an
+      unordered list of items (which are represented by &lt;li&gt; elements).</p>
+
+    <div class="news">
+      <a href="#">NASA’s Webb Delivers Deepest Infrared Image of Universe Yet</a>
+      <menu>
+        <li><button id="save">Save for later</button></li>
+        <li><button id="share">Share this news</button></li>
+      </menu>
+    </div>
+  </section>
+
+  <section>
+    <h2>&lt;meter&gt; and &lt;progress&gt;</h2>
+
+    <meter min="0" max="100" value="50" low="30" high="70" optimum="90">
+      <span>50%</span>
+    </meter>
+    <meter min="0" max="100" value="90" low="30" high="70" optimum="90">
+      <span>50%</span>
+    </meter>
+
+    <progress max="100" value="50">
+      <span>50%</span>
+    </progress>
+    <label>
+      Uploading Document: <progress value="70" max="100">70 %</progress>
+    </label>
+
+    <br />
+
+    <label for="progress-bar">Uploading Document</label>
+    <progress id="progress-bar" value="70" max="100">70 %</progress>
+
+    <div aria-busy="true" aria-describedby="progress-bar">
+      <progress id="progress-bar" aria-label="Content loading…"></progress>
+    </div>
+  </section>
+
+  <section>
+    <h2>&lt;ul&gt;, &lt;ol&gt;, &lt;li&gt;</h2>
+
+    <ol type="i" start="4">
+      <li>Mix flour, baking powder, sugar, and salt.</li>
+      <li>In another bowl, mix eggs, milk, and oil.</li>
+      <li>Stir both mixtures together.</li>
+      <li>Fill muffin tray 3/4 full.</li>
+      <li>Bake for 20 minutes.</li>
+    </ol>
+    <ol>
+      <li>first item</li>
+      <li>
+        second item
+        <!-- closing </li> tag is not here! -->
+        <ol>
+          <li>second item first subitem</li>
+          <li>second item second subitem</li>
+          <li>second item third subitem</li>
+        </ol>
+      </li>
+      <!-- Here's the closing </li> tag -->
+      <li>third item</li>
+    </ol>
+
+    <ol reversed>
+      <li>first item
+        <ul>
+          <li>second item first subitem</li>
+          <li>second item second subitem</li>
+        </ul>
+      </li>
+
+      <li>
+        second item
+        <!-- closing </li> tag is not here! -->
+        <ul>
+          <li>second item first subitem</li>
+          <li>second item second subitem</li>
+          <li>second item third subitem</li>
+        </ul>
+      </li>
+      <!-- Here's the closing </li> tag -->
+      <li>third item</li>
+    </ol>
+
+  </section>
+
+  <section>
+    <h2>&lt;output&gt;</h2>
+    <p>It is a container element into which a site or app can inject the results of a calculation or the outcome of a
+      user action.</p>
+
+    <form oninput="result.value=parseInt(a.value)+parseInt(b.value)">
+      <input type="range" id="b" name="b" value="50" /> +
+      <input type="number" id="a" name="a" value="10" /> =
+      <output name="result" for="a b">60</output>
+    </form>
+  </section>
+
+  <section>
+    <h2>&lt;p&gt;</h2>
+    <p>The p HTML element represents a paragraph. Paragraphs are usually represented in visual media as blocks of text
+      separated from adjacent blocks by blank lines and/or first-line indentation, but HTML paragraphs can be any
+      structural grouping of related content, such as images or form fields.</p>
+  </section>
+
+  <section>
+    <h2>&lt;pre&gt;</h2>
+    <p>pre: preserve whitespace and line breaks</p>
+    <p>If you have to display reserved characters such as &lt;, &gt;, &amp;, and " within the &lt;pre&gt; tag, the
+      characters must be escaped using their respective HTML entity.</p>
+
+    <pre>
+      L          TE
+        A       A
+          C    V
+           R A
+           DOU
+           LOU
+          REUSE
+          QUE TU
+          PORTES
+        ET QUI T'
+        ORNE O CI
+         VILISÉ
+        OTE-  TU VEUX
+         LA    BIEN
+        SI      RESPI
+                RER       - Apollinaire
+    </pre>
+    <figure>
+      <pre role="img" aria-label="ASCII COW">
+          ___________________________
+      &lt; I'm an expert in my field. &gt;
+          ---------------------------
+              \   ^__^
+               \  (oo)\_______
+                  (__)\       )\/\
+                      ||----w |
+                      ||     ||
+      </pre>
+      <figcaption id="cow-caption">
+        A cow saying, "I'm an expert in my field." The cow is illustrated using
+        preformatted text characters.
+      </figcaption>
+    </figure>
+  </section>
+
+  <section>
+    <h2>&lt;q&gt;</h2>
+    <p>The q HTML element indicates that the enclosed text is a short inline quotation. Most modern browsers implement
+      this by surrounding the text in quotation marks. This element is intended for short quotations that don't require
+      paragraph breaks; for long quotations use the blockquote element.</p>
+
+    <p>
+      When Dave asks HAL to open the pod bay door, HAL answers:
+      <q cite="https://www.imdb.com/title/tt0062622/quotes/?item=qt0396921&ref_=ext_shr_lnk">
+        I'm sorry, Dave. I'm afraid I can't do that.
+      </q>
+    </p>
+  </section>
+
+  <section>
+    <h2>&lt;ruby&gt;: &lt;rp&gt;, &lt;rt&gt;</h2>
+    <p>The ruby HTML element represents a ruby annotation or pronunciation (for East Asian typography).</p>
+
+    <ruby> 漢 <rp>(</rp>
+      <rt>kan</rt>
+      <rp>)</rp> 字 <rp>(</rp>
+      <rt>ji</rt>
+      <rp>)</rp>
+    </ruby>
+    <ruby> 明日 <rp>(</rp>
+      <rt>Ashita</rt>
+      <rp>)</rp>
+    </ruby>
+  </section>
+
+  <section>
+    <h2>&lt;s&gt;</h2>
+    <p>The &lt;s&gt; HTML element renders text with a strikethrough, or a line through it. Use the &lt;s&gt; element to
+      represent things that are no longer relevant or no longer accurate. However, &lt;s&gt; is not appropriate when
+      indicating document edits; for that, use the &lt;del&gt; and &lt;ins&gt; elements, as appropriate.
+    </p>
+
+    <p><s>There will be a few tickets available at the box office tonight.</s></p>
+    <p>SOLD OUT!</p>
+
+    <style>
+      s::before,
+      s::after {
+        clip-path: inset(100%);
+        clip: rect(1px, 1px, 1px, 1px);
+        height: 1px;
+        overflow: hidden;
+        position: absolute;
+        white-space: nowrap;
+        width: 1px;
+      }
+
+      s::before {
+        content: " [start of stricken text] ";
+      }
+
+      s::after {
+        content: " [end of stricken text] ";
+      }
+    </style>
+  </section>
+
+  <section>
+    <h2>&lt;samp&gt;</h2>
+    <p>The &lt;samp&gt; HTML element is used to present sample (or quoted) output from a computer program. Its contents
+      are typically rendered using the browser's default monospaced font.</p>
+
+    <p>I was trying to boot my computer, but I got this hilarious message:</p>
+
+    <p>
+      <samp>Keyboard not found <br />Press F1 to continue</samp>
+    </p>
+
+    <pre>
+      <samp><span class="prompt">mike@interwebz:~$</span> <kbd>md5 -s "Hello world"</kbd>
+      MD5 ("Hello world") = 3e25960a79dbc69b674cd4ec67a72c62
+      
+      <span class="prompt">mike@interwebz:~$</span> <span class="cursor">█</span></samp>
+    </pre>
+    <style>
+      .prompt {
+        color: #b00;
+      }
+
+      samp>kbd {
+        font-weight: bold;
+      }
+
+      .cursor {
+        color: #00b;
+      }
+    </style>
+  </section>
+
+  <section>
+    <h2>&lt;script&gt;</h2>
+
+    <script async defer crossorigin="anonymous" fetchpriority="high"
+      integrity="sha384-3B3lJ2n9nLpLW9wVqkqKU0HbTJjY6RQyv4IyDf8Y9c2z+PQOyO9aZSvqQ==" nomodule="" nonce=""
+      referrerpolicy="no-referrer" src="./sample.js" type="module">
+        console.log("Hello World!");
+      </script>
+
+    <script type="module" src="main.js"></script>
+    <script nomodule src="fallback.js"></script>
+
+    <script type="importmap">
+      {
+        "imports": {
+          "square": "./shapes/square.js",
+          "circle": "https://example.com/shapes/circle.js"
+        }
+      }
+    </script>
+    <script>
+      import { name as squareName, draw } from "./shapes/square.js";
+      import { name as circleName } from "https://example.com/shapes/circle.js";
+    </script>
+
+    <p>You can include render token inside a blocking attribute; the rendering of the page will be blocked till the
+      script is fetched and executed. In the example below, we block rendering on an async script, so that the script
+      doesn't block parsing but is guaranteed to be evaluated before rendering starts.</p>
+    <script blocking="render" async src="async-script.js"></script>
+  </section>
+
+  <section>
+    <h2>&lt;search&gt;</h2>
+
+    <header>
+      <h1>Movie website</h1>
+      <search>
+        <form action="./search/">
+          <label for="movie">Find a Movie</label>
+          <input type="search" id="movie" name="q" />
+          <button type="submit">Search</button>
+        </form>
+      </search>
+    </header>
+  </section>
+
+  <section>
+    <h2>&lt;section&gt;</h2>
+    <p>The section HTML element represents a generic standalone section of a document, which doesn't have a more
+      specific
+      semantic element to represent it.</p>
+  </section>
+
+  <section>
+    <h2>&lt;small&gt;</h2>
+    <p>The small HTML element represents side comments that are of general importance.</p>
+
+    <p>MDN Web Docs is a learning platform for Web technologies and the software that powers the Web.</p>
+
+    <hr />
+
+    <p><small>The content is licensed under a Creative Commons Attribution-ShareAlike 2.5 Generic License.</small></p>
+  </section>
+
+  <section>
+    <h2>&lt;source&gt;, &lt;track&gt;, &lt;video&gt;</h2>
+
+    <audio controls>
+      <source src="./music.ogg" type="audio/ogg" />
+      <source src="./music.mp3" type="audio/mpeg" />
+    </audio>
+
+    <video controls>
+      <source src="./movie.mp4" type="video/mp4" />
+      <source src="./movie.webm" type="video/webm" />
+    </video>
+
+    <video controls src="/media/cc0-videos/friday.mp4">
+      <track default kind="captions" srclang="en" src="/media/examples/friday.vtt" />
+      Download the
+      <a href="/media/cc0-videos/friday.mp4">MP4</a>
+      video, and
+      <a href="/media/examples/friday.vtt">subtitles</a>.
+    </video>
+
+    <video controls poster="/images/sample.gif">
+      <source src="sample.mp4" type="video/mp4" />
+      <source src="sample.ogv" type="video/ogv" />
+      <track kind="captions" src="sampleCaptions.vtt" srclang="en" />
+      <track kind="descriptions" src="sampleDescriptions.vtt" srclang="en" />
+      <track kind="chapters" src="sampleChapters.vtt" srclang="en" />
+      <track kind="subtitles" src="sampleSubtitles_de.vtt" srclang="de" />
+      <track kind="subtitles" src="sampleSubtitles_en.vtt" srclang="en" />
+      <track kind="subtitles" src="sampleSubtitles_ja.vtt" srclang="ja" />
+      <track kind="subtitles" src="sampleSubtitles_oz.vtt" srclang="oz" />
+      <track kind="metadata" src="keyStage1.vtt" srclang="en" label="Key Stage 1" />
+      <track kind="metadata" src="keyStage2.vtt" srclang="en" label="Key Stage 2" />
+      <track kind="metadata" src="keyStage3.vtt" srclang="en" label="Key Stage 3" />
+      <!-- Fallback -->
+      …
+    </video>
+    <picture>
+      <source media="(max-width: 500px)" srcset="./small.jpg" />
+      <source media="(max-width: 800px)" srcset="./medium.jpg" />
+      <img src="./large.jpg" />
+    </picture>
+  </section>
+
+  <section>
+    <h2>&lt;span&gt;, &lt;style&gt;</h2>
+    <p>include inline words</p>
+
+    <p><span style="color:red;">inline words</span> <span>inline words</span></p>
+  </section>
+
+  <section>
+    <h2>&lt;sub&gt;, &lt;sup&gt;</h2>
+    <p>上标，下标，常见于数学、化学表达</p>
+
+    <p>3<sup>2</sup> = 9</p>
+    <p>H<sub>2</sub>O</p>
+  </section>
+
+  <section>
+    <h2>&lt;time&gt;</h2>
+    <p>time: display date and time</p>
+
+    <time datetime="2019-11-11">November 11, 2019</time>
+  </section>
+
+  <section>
+    <h2>&lt;var&gt;</h2>
+
+    <p>
+      The volume of a box is <var>l</var> × <var>w</var> × <var>h</var>, where <var>l</var> represents the length,
+      <var>w</var> the width and <var>h</var> the height of the box.
+    </p>
+  </section>
+
+  <section>
+    <h2>&lt;wbr&gt;</h2>
+    <p>wbr: break line, element represents a word break opportunity—a position within text where the browser may
+      optionally break a line, though its line-breaking rules would not otherwise create a break at that location.</p>
+
+    <div id="example-paragraphs">
+      <p>Fernstraßenbauprivatfinanzierungsgesetz</p>
+      <p>Fernstraßen<wbr />bau<wbr />privat<wbr />finanzierungs<wbr />gesetz</p>
+      <p>Fernstraßen&shy;bau&shy;privat&shy;finanzierungs&shy;gesetz</p>
+    </div>
+
+    <style>
+      #example-paragraphs {
+        background-color: white;
+        overflow: hidden;
+        resize: horizontal;
+        width: 9rem;
+        border: 2px dashed #999;
+      }
+    </style>
+  </section>
+</body>
+
+</html>

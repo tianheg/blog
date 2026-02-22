@@ -1,0 +1,21 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="来自 &lt;a href='http://dmitrysoshnikov.com/ecmascript/javascript-the-core-2nd-edition/#agent'  target='_blank'&gt;JavaScript. The Core: 2nd Edition&lt;/a&gt;">
+  <title>Agents example</title>
+</head>
+<body>
+  <script>
+    const sharedHeap = new SharedArrayBuffer(16)
+    let heapArray = new Int32Array(sharedHeap)
+    let agentSmith = new Worker('agent-smith.js')
+    agentSmith.onmessage = (message) => {
+      let modifiedIndex = message.data
+      console.log(heapArray[modifiedIndex])
+    }
+    agentSmith.postMessage(sharedHeap)
+  </script>
+</body>
+</html>

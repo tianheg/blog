@@ -1,0 +1,75 @@
+@charset "UTF-8";
+.attribute li[class] {
+  background-color: grey;
+}
+.attribute li[class=a] {
+  background-color: purple;
+}
+.attribute li[class~=a] {
+  color: yellow;
+}
+.attribute li[class*=b] {
+  color: darkorange;
+}
+.attribute li[class^=b] {
+  color: bisque;
+}
+.attribute li[class$=b] {
+  color: brown;
+}
+
+.case-sensitivity li[class^=a] {
+  background-color: yellow;
+}
+.case-sensitivity li[class^=a i] {
+  color: red;
+}
+
+.pseudo-class article p:first-child {
+  font-weight: bold;
+}
+.pseudo-class article p:last-child {
+  font-style: italic;
+}
+.pseudo-class article p:nth-child(2) {
+  font-family: "Courier New", Courier, monospace;
+}
+.pseudo-class article li:only-child {
+  text-decoration: underline;
+}
+.pseudo-class article form {
+  display: flex;
+}
+.pseudo-class article form label {
+  margin-inline: 1rem 1rem;
+}
+.pseudo-class article form input:invalid {
+  background-color: ivory;
+  border: none;
+  outline: 0.1rem solid red;
+  border-radius: 0.2rem;
+}
+.pseudo-class a:hover {
+  color: hotpink;
+}
+
+.pseudo-element article p::first-line {
+  font-weight: bold;
+}
+
+.before-after .box::before {
+  content: "Hello World!(from ::before) ";
+  color: red;
+}
+.before-after .box::after {
+  content: " Hello Coding!(from ::after)  ➥";
+  color: rgb(140, 140, 9);
+}
+
+.empty .box::before {
+  content: "";
+  display: block;
+  width: 10rem;
+  height: 10rem;
+  background-color: rebeccapurple;
+}
