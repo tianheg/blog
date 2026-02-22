@@ -1,0 +1,84 @@
+<!--
+  1. https://openai.com/blog/chatgpt-plus
+  2. https://codepen.io/yuanchuan/pen/NWLaOQq
+-->
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="description" content="使用 CSS doodle 画出来">
+    <title>ChatGPT Plus poster picture</title>
+    <script src="https://unpkg.com/css-doodle/css-doodle.min.js"></script>
+    <style>
+      *,
+      ::before,
+      ::after {
+        box-sizing: border-box;
+      }
+
+      body {
+        margin: 0;
+        padding: 0;
+
+        display: grid;
+        place-items: center;
+        grid-template-columns: 1fr 1fr;
+
+        height: 100vh;
+
+        background: var(--bg, #000);
+      }
+      @media (max-width: 1054px) {
+        body {
+          grid-template-columns: 1fr;
+        }
+      }
+
+      css-doodle {
+        min-width: 350px;
+        margin: 10px;
+      }
+
+      css-doodle[click-to-update] {
+        cursor: pointer;
+      }
+    </style>
+  </head>
+  <body style="--bg: #400140">
+    <css-doodle click-to-update>
+      @grid: 21x1 / 60vmin auto 1 / #091608;
+      @gap: calc(60% / @I);
+      background-blend-mode: multiply;
+      background-size: 100% 110%;
+      background-image:
+        @doodle(
+          filter: @svg-filter(.12);
+          opacity: .2;
+        ),
+        linear-gradient(
+          0deg,
+          @p(#14ff2e, #f452ea) @rn(±100%, 5, 2),
+          #091608,
+          @P
+        )
+    </css-doodle>
+    <css-doodle click-to-update>
+      @grid: 1x21 / 60vmin auto 1 / #091608;
+      @gap: calc(60% / @I);
+      background-blend-mode: multiply;
+      background-size: 100% 110%;
+      background-image:
+        @doodle(
+          filter: @svg-filter(.12);
+          opacity: .2;
+        ),
+        linear-gradient(
+          90deg,
+          @p(#14ff2e, #f452ea) @rn(±100%, 5, 2),
+          #091608,
+          @P
+        )
+    </css-doodle>
+  </body>
+</html>

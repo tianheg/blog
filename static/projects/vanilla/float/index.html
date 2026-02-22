@@ -1,0 +1,113 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="float 练习">
+  <title>float</title>
+  <style>
+    section.a,
+    section.b {
+      box-sizing: border-box;
+      border: 1px solid blue;
+      width: 100%;
+
+      div {
+        margin: 5px;
+        width: 50px;
+        height: 150px;
+      }
+
+      .left {
+        float: left;
+        background: pink;
+      }
+
+      .right {
+        float: right;
+        background: cyan;
+      }
+    }
+
+    section.a {
+      float: left;
+    }
+
+    .wrapper {
+      border: 1px solid black;
+      padding: 10px;
+
+      .left {
+        border: 1px solid black;
+        clear: left;
+      }
+
+      .black {
+        float: left;
+        margin: 0;
+        background: black;
+        color: #fff;
+        width: 20%;
+      }
+
+      .red {
+        float: left;
+        margin: 0;
+        background: pink;
+        width: 20%;
+      }
+
+      p {
+        width: 50%;
+      }
+    }
+  </style>
+</head>
+
+<body>
+  <p>如果为元素设置了 float 属性，该元素就不再属于一般文档流。可以被任意放置到视界的左边或右边</p>
+  <hr>
+
+
+  <p>为section设置了 float: left：</p>
+
+  <section class="a">
+    <div class="left">1</div>
+    <div class="left">2</div>
+    <div class="right">3</div>
+    <p>
+      Lorem ipsum dolor sit amet, consectetur adipiscing elit. Morbi tristique
+      sapien ac erat tincidunt, sit amet dignissim lectus vulputate. Donec id
+      iaculis velit. Aliquam vel malesuada erat. Praesent non magna ac massa
+      aliquet tincidunt vel in massa. Phasellus feugiat est vel leo finibus
+      congue.
+    </p>
+  </section>
+  <p>不设置的效果：</p>
+  <section class="b">
+    <div class="left">1</div>
+    <div class="left">2</div>
+    <div class="right">3</div>
+    <p>
+      Lorem ipsum dolor sit amet, consectetur adipiscing elit. Morbi tristique
+      sapien ac erat tincidunt, sit amet dignissim lectus vulputate. Donec id
+      iaculis velit. Aliquam vel malesuada erat. Praesent non magna ac massa
+      aliquet tincidunt vel in massa. Phasellus feugiat est vel leo finibus
+      congue.
+    </p>
+  </section>
+  <hr style="margin-top: 120px;">
+  <p>设置clear</p>
+  <div class="wrapper">
+    <p class="black">
+      Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Phasellus sit amet
+      diam. Duis mattis varius dui. Suspendisse eget dolor.
+    </p>
+    <p class="red">Lorem ipsum dolor sit amet, consectetuer adipiscing elit.</p>
+    <p class="left">This paragraph clears left.</p>
+  </div>
+
+</body>
+
+</html>

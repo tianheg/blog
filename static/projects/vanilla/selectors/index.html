@@ -1,0 +1,169 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="description" content="在学习 MDN 时的练习">
+    <title>Selectors</title>
+    <link rel="stylesheet" href="style.css" />
+  </head>
+  <body>
+    <h1>CSS Selectors</h1>
+    <section>
+      <h2>Selector lists</h2>
+      <p>
+        Merge two CSS block into one, form a selector list. If a selector in a
+        selector list is invalid, then the whole selector list will be invalid.
+      </p>
+    </section>
+    <section>
+      <h2>Types of selectors</h2>
+      <p>Overview:</p>
+      <ol>
+        <li>Type, class, and ID selectors</li>
+        <li>Attribute selectors</li>
+        <li>Pseudo-classes and pseudo-elements</li>
+        <li>Combinators</li>
+      </ol>
+      <h3>Type, class, and ID selectors</h3>
+      <p>类型选择器实际上就是标签（或元素）选择器</p>
+      <p>
+        通用选择器就是<code>*</code>。如果单独使用，指代文档中的所有 DOM
+        节点；如果和选择符一起放在某元素之后，那么它就指代该元素下的所有内容
+      </p>
+      <p>* 的一个用途就是让选择器更易读，更明显地发现他们的功能</p>
+      <p>一个例子（还不太理解）：</p>
+      <iframe
+        height="300"
+        style="width: 100%"
+        scrolling="no"
+        title="Use * to easily read selectors"
+        src="https://codepen.io/tianheg/embed/QWmJvJQ?default-tab=css%2Cresult&editable=true"
+        frameborder="no"
+        loading="lazy"
+        allowtransparency="true"
+        allowfullscreen="true"
+      >
+        See the Pen
+        <a href="https://codepen.io/tianheg/pen/QWmJvJQ">
+          Use * to easily read selectors</a
+        >
+        by tianheg (<a href="https://codepen.io/tianheg">@tianheg</a>) on
+        <a href="https://codepen.io">CodePen</a>.
+      </iframe>
+      <p>
+        类选择器以 . 开始，一个类选择器可以在多个地方出现。通过
+        <code>span.box</code> 仅选择 &lt;span&gt; 下具有类名为 box
+        的元素。也可以通过
+        <code>.clasename-1.classname-2</code>
+        为多个类名选中的元素设置不同样式。<a
+          href="https://developer.mozilla.org/en-US/docs/Learn/CSS/Building_blocks/Selectors/Type_Class_and_ID_Selectors#target_an_element_if_it_has_more_than_one_class_applied"
+          >例子</a
+        >
+      </p>
+      <p>
+        ID 选择器以 <code>#</code> 作为开头。但和类选择器不同的是，ID
+        选择器一个页面不能有多个相同 ID 名。一个元素只可以有一个 ID
+      </p>
+      <p>
+        注意：ID
+        比其他选择器具有更高的特异性。大多数情况下，更倾向于为元素添加类名
+      </p>
+      <h3>Attribute selectors</h3>
+      <ul class="attribute">
+        <li>[attr] - a[title]</li>
+        <li class="a">[attr=value] - a[href="https://example.com"]</li>
+        <li class="a c">[attr~=value] - p[class~="special"]</li>
+        <li class="ac">[attr|=value] - div[lang|="zh"]</li>
+        <li class="bc">[attr^=value] - li[class^="box-"]</li>
+        <li class="cb">[attr$=value] - li[class$="-box"]</li>
+        <li class="cbd">[attr*=value] - li[class*="box"]</li>
+      </ul>
+      <p>
+        属性和属性值是大小写敏感性的，如果想改成不敏感，要在闭合中括号前加上 i
+      </p>
+      <ul class="case-sensitivity">
+        <li class="a">list item 1</li>
+        <li class="A">list item 2</li>
+        <li class="Ab">list item 3</li>
+      </ul>
+      <h3>Pseudo-classes and pseudo-elements</h3>
+      <p>伪类选择的是元素的特定状态</p>
+      <p>如果这样写 CSS</p>
+      <pre><code>
+        article :first-child {
+          ...
+        }
+      </code></pre>
+      <p>就会选中 article 元素子代的第一个元素</p>
+      <div class="pseudo-class">
+        <p>例子：</p>
+        <article>
+          <p>
+            :first-child Veggies es bonus vobis, proinde vos postulo essum magis
+            kohlrabi welsh onion daikon amaranth tatsoi tomatillo melon azuki
+            bean garlic.
+          </p>
+          <p>
+            :nth-child(2) Gumbo beet greens corn soko endive gumbo gourd.
+            Parsley shallot courgette tatsoi pea sprouts fava bean collard
+            greens dandelion okra wakame tomato. Dandelion cucumber earthnut pea
+            peanut soko zucchini.
+          </p>
+          <p>
+            :last-child Gumbo beet greens corn soko endive gumbo gourd. Parsley
+            shallot courgette tatsoi pea sprouts fava bean collard greens
+            dandelion okra wakame tomato. Dandelion cucumber earthnut pea peanut
+            soko zucchini.
+          </p>
+          <ol>
+            <li>:only-child test</li>
+          </ol>
+          <form>
+            <label for="email">:invalid - Email Address:</label>
+            <input name="email" type="email" value="na@me@example.com" />
+          </form>
+        </article>
+      </div>
+      <p>用户行为向的伪类：<code>:hover, :focus</code></p>
+      <div class="pseudo-class">
+        <a href="">Hover me</a>
+      </div>
+      <p>伪元素：</p>
+      <p>
+        它就像直接操作 HTML 元素，它是以
+        <code>::</code> 开头的，但是为了兼容早期的 CSS 实现，有些伪元素也可以用
+        <code>:</code> 开头
+      </p>
+      <div class="pseudo-element">
+        <p>::first-line ⬇️</p>
+        <article>
+          <p>
+            Veggies es bonus vobis, proinde vos postulo essum magis kohlrabi
+            welsh onion daikon amaranth tatsoi tomatillo melon azuki bean
+            garlic.
+          </p>
+          <p>
+            Gumbo beet greens corn soko endive gumbo gourd. Parsley shallot
+            courgette tatsoi pea sprouts fava bean collard greens dandelion okra
+            wakame tomato. Dandelion cucumber earthnut pea peanut soko zucchini.
+          </p>
+        </article>
+      </div>
+      <p>可以将伪类和伪元素结合在一起使用</p>
+      <pre><code>
+        article p:first-child::first-line {
+          ...
+        }
+      </code></pre>
+      <p>通过 <code>::before, ::after</code> 生成内容：与 content 属性结合</p>
+      <div class="before-after">
+        <p class="box">Content in the box in my HTML page.</p>
+      </div>
+      <p>通过 CSS 插入字符串并不经常使用，因为屏幕阅读器无法识别，而且未来更改比较困难。更常见的用法是通过 ::before, ::after 插入 icon。还可以插入空字符串，进而添加喜欢的样式</p>
+      <div class="empty">
+        <div class="box">Styled box, added through ::before</div>
+      </div>
+    </section>
+  </body>
+</html>
