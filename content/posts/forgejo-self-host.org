@@ -184,7 +184,25 @@ volumes:
 #+END_SRC
 * Backup Forgejo
 
+I backup data to Hetzner Storagebox.
+
 First, create SSH key, add pub key to Storagebox.
+
+#+BEGIN_SRC sh
+ssh-keygen -t ed25519 -f ~/.ssh/hetzner_storagebox
+cat ~/.ssh/hetzner_storagebox.pub | ssh -p23 uxx@uxx.your-storagebox.de install-ssh-key
+# type passwd
+#+END_SRC
+
+Note, if the key name is not id__ed25519, need add config in =~/.ssh/config=:
+
+#+BEGIN_SRC conf
+Host storagebox
+  HostName uxx.your-storagebox.de
+  User uxx
+  Port 23
+  IdentityFile ~/.ssh/hetzner_storagebox
+#+END_SRC
 
 Second, run below script.
 
