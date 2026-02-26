@@ -1,7 +1,21 @@
-* PostgREST 的使用教程
-:PROPERTIES:
-:CUSTOM_ID: postgrest-的使用教程
-:END:
-https://docs.postgrest.org/en/v12/tutorials/tut1.html#tut1
+* How to use PostgREST
 
-在这篇教程里，对jwt.io的使用印象深刻。通过提供需要的payload，最终生成重要的编码后的token。
+Set up PostgREST use docker, env:
+
+#+BEGIN_SRC conf
+PGRST_DB_URI=${DATABASE_URL}            # provided when you attach Railway Postgres
+PGRST_DB_SCHEMAS=public                 # comma-separated list, e.g. "public,api"
+PGRST_DB_ANON_ROLE=web_anon             # role used for unauthenticated requests
+PGRST_SERVER_HOST=0.0.0.0               # listen on all interfaces
+PGRST_SERVER_PORT=${PORT}               # Railway sets PORT automatically
+#+END_SRC
+
+Minimal SQL setup:
+
+#+BEGIN_SRC sql
+-- Anonymous, read-only role
+CREATE ROLE web_anon NOLOGIN;
+GRANT USAGE ON SCHEMA public TO web_anon;
+GRANT SELECT ON ALL TABLES IN SCHEMA public TO web_anon;
+ALTER DEFAULT PRIVILEGES IN SCHEMA public GRANT SELECT ON TABLES TO web_anon;
+#+END_SRC
