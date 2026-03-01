@@ -2,11 +2,21 @@
 
 首先 youtube 的视频数据分 video, audio, video with audio 三种，有的时候高码率的视频是没有音频的，因此会有一个用 ffmpeg 合并的过程，要想灵活使用 yt-dlp, 务必安装 ffmpeg。
 
-yt-dlp 有一套复杂的格式选择语法，比如我目前用的 bv*[height<=720][ext=mp4]+ba[ext=m4a], 其效果就是「从高度小于 720p 且格式为 mp4 的所有视频（无论是否包含音频）中选择最佳质量，从格式为 m4a 的音频中选择最佳质量，下载后合并」。
-
-合并后的格式不一定是所指定的视频格式，因此还需要通过 --merge-output-format 参数来确保 ffmpeg 输出的文件是你想要的格式
-最后别忘了带上 🍪，可以用浏览器插件 Open Cookies.txt 来下载。完整命令如下：
+yt-dlp 有一套复杂的格式选择语法，比如我目前用的 bv*[height<=720][ext=mp4]+ba[ext=m4a], 其效果就是「从高度小于 720p 且格式为 mp4 的所有视频（无论是否包含音频）中选择最佳质量，从格式为 m4a 的音频中选择最佳质量，下载后合并」。合并后的格式不一定是所指定的视频格式，因此还需要通过 --merge-output-format 参数来确保 ffmpeg 输出的文件是你想要的格式。
 
 #+BEGIN_SRC sh
-yt-dlp --cookies youtube.com_cookies.txt -f 'bv*[height<=720][ext=mp4]+ba[ext=m4a]' --merge-output-format mp4 $URL
+## 如果有中英双语字幕，下载字幕合并到视频里
+yt-dlp -f "bv*+ba/b" --write-subs --sub-langs "en,zh-Hans,zh-CN,zh" --embed-subs $URL # URL cannot contains \
+## 指定下载质量
+yt-dlp -f "best[height<=720]" <URL>
+## 列出可下载的格式
+yt-dlp -F <URL>
+## 仅下载音频
+yt-dlp -x --audio-format mp3 <URL>
+## 自定义输出文件名
+yt-dlp -o "%(title)s.%(ext)s" <URL>
+## 下载整个播放列表
+yt-dlp <playlist_url>
+## 使用浏览器 Cookie（用于观看年龄限制视频）
+yt-dlp --cookies-from-browser chrome <URL>
 #+END_SRC
