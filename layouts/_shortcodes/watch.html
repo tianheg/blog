@@ -1,0 +1,25 @@
+{{ $url := "https://postgrest-tianheg.up.railway.app/watch" }}
+{{ $resource := resources.GetRemote $url }}
+{{ if $resource }}
+  {{ $data := transform.Unmarshal $resource.Content }}
+  {{ if (or (eq (len $data) 0) (not $data)) }}
+    <p>暂无观看记录</p>
+  {{ else }}
+    <table>
+      <thead>
+        <tr><th>Name</th> <th>Review</th> <th>Release year</th></tr>
+      </thead>
+      <tbody>
+        {{ range $data }}
+        <tr>
+          <td>{{ .name }}</td>
+          <td>{{ .review }}</td>
+          <td>{{ .release_year }}</td>
+        </tr>
+        {{ end }}
+      </tbody>
+    </table>
+  {{ end }}
+{{ else }}
+  <p>无法获取远程资源</p>
+{{ end }}
