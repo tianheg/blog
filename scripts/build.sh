@@ -3,7 +3,7 @@
 main() {
 
   PAGEFIND_VERSION=1.5.0-beta.1
-  HUGO_VERSION=0.155.3
+  HUGO_VERSION=0.157.0
 
   export TZ=Asia/Hong_Kong
 
