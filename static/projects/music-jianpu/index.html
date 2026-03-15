@@ -3,36 +3,14 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>简谱展示</title>
+    <title>简谱</title>
     <link rel="stylesheet" href="style.css">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
-    <script src="https://unpkg.com/jianpurender@1.2.0/dist/jianpurender.js"></script>
 </head>
 <body>
-    <main class="container">
-        <section id="scores">
-            <div class="categories">
-                <button class="category-btn active" data-category="all">全部</button>
-                <button class="category-btn" data-category="folk">民歌</button>
-                <button class="category-btn" data-category="pop">流行</button>
-                <button class="category-btn" data-category="classical">古典</button>
-                <button class="category-btn" data-category="children">儿歌</button>
-            </div>
-
-            <div class="search-box">
-                <input type="text" id="search-input" placeholder="搜索曲目名称或作曲家...">
-                <button id="search-btn"><i class="fas fa-search"></i></button>
-            </div>
-
-            <div class="scores-grid" id="scores-container">
-                <div class="loading">
-                    <i class="fas fa-spinner fa-spin"></i>
-                    <p>正在加载简谱...</p>
-                </div>
-            </div>
-        </section>
-    </main>
-
+    <div class="container">
+        <div id="score-container"></div>
+    </div>
+    <script src="./simple-notation.umd.cjs"></script>
     <script src="script.js"></script>
 </body>
 </html>
