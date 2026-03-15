@@ -4,7 +4,13 @@ document.addEventListener('DOMContentLoaded', async function() {
 
     const sn = new SN.SimpleNotation(container, {
         resize: true,
-        debug: false
+        debug: false,
+        score: {
+            chordType: "default",
+            scoreType: "simple",
+            showChordLine: true,
+            chordLineHeight: 70
+        }
     });
 
     // 从 JSON 文件加载歌曲数据
