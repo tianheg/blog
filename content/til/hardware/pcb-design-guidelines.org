@@ -49,6 +49,40 @@ PCB：Printed Circuit Board 印刷电路板
 
 焊盘可以是圆形、方形、不规格图形，用来放置元器件。焊盘能承受280℃高温不脱落。
 
-2，
+2，线（Line）和导线（Track）
+
+线在信号层会导电，不具备电路节点对应关系。不显示不会被推挤移除。任何层都可以画线。
+
+导线具有和原理图对应的网络连接关系，导线带有网标（NetLabel），对应电路图节点。在布线时，导线可以被自动推挤、环绕等。只有在信号层才能画导线。
+
+3，填充（Fill）、区块（Region）和铺铜（Polygon）
+
+- 填充和区块都可以设定是否裸露，是否涂覆焊锡，主要用于绘制大块导电体
+- 铺铜，自动填满区域并避让，用于填充PCB剩余部分
+
+四、PCB层（Layer）的分类
+
+1，导电层
+
+- Top Layer 顶信号层
+- Bottom Layer 底信号层
+- Internal Plane 内层
+- Middle Layer 中间层
+
+2，掩模（Mask）层
+
+- Top Overlay 顶丝印层
+- Bottom Overlay 底丝印层
+- Top Solder 顶阻焊层
+- Bottom Solder 底阻焊层
+- Top Paste 顶锡浆层
+- Bottom Paste 底锡浆层
+
+3，绘图辅助层
+
+- keep-out Layer 禁布层
+- Multi-Layer 多层
+- Mechanical Layer 机械层
+- Drill Layer 钻孔层
 
 * 高速电路
