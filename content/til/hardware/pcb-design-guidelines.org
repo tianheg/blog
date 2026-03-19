@@ -85,4 +85,50 @@ PCB：Printed Circuit Board 印刷电路板
 - Mechanical Layer 机械层
 - Drill Layer 钻孔层
 
+五、常用层的功能
+
+1，信号层
+
+对于插件元件来说，顶层是放置元件的，底层是焊接的。
+
+2，内层
+
+Layer：一部分是导电铜箔，一部分是刻蚀绝缘区域
+
+Plane：与Layer反过来，Layer是导电铜箔的部分对Plane来说是刻蚀区域，Layer是绝缘的部分对Plane来说是导电铜箔
+
+Layer适合画信号线，Plane适合画电源层
+
+3，丝印层 Top/Bot Overlay
+
+工艺和用途：
+- 采用丝网印刷工艺涂印
+- 作为装配图、注释标记、Logo
+- 作为切割装配标记
+- 局部覆盖，增加绝缘性
+
+4，阻焊层（绿油） Top/Bot Solder
+
+Solder层比焊盘略大一些
+
+工艺和用途：
+- Solder层划线部分为裸露金属，空白部分为阻焊层
+- 大电流导线可以用Solder层裸露出来加锡加厚
+
+5，锡浆层 Top/Bot Paste
+
+直插元件没有焊膏，表贴元件焊盘上需涂覆锡浆。钢网就是根据Top Solder层制作的
+
+工艺和用途：
+- Paste层划线部分为钢网刻孔部分
+- 用于SMT工艺刷锡浆
+-大电流导线可以用Solder层裸露并加Paste锡浆加厚
+
+6，多层 Multi-Layer
+
+用途：
+- 多层上画的实体在每个Layer都有（Plane除外）
+- 常用于直插焊盘、过孔等需要穿透每个层
+- 用于焊盘时，可定义电镀孔 PTH（Plated Through Hole） 和非电镀孔 UPTH（Non-Plated Through Hole）
+
 * 高速电路
