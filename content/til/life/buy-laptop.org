@@ -1,87 +1,219 @@
-* 买能安装Arch的笔记本
-:PROPERTIES:
-:CUSTOM_ID: 买能安装arch的笔记本
-:END:
-现在不买，什么时候现在的笔记本用坏了，什么时候买
+* 买笔记本
 
-如果资金充足，尽量买能够运行LLM模型的配置。
+** 需求分析
 
-当前笔记本信息：[[https://linux-hardware.org/?probe=f95d67a702]]
+随着AI的发展，以前自己觉得不需要一台高性能笔记本，不需要有独立显卡——现在不买，什么时候现在的笔记本用坏了，什么时候买。为此我给旧笔记本做了清洁，买了致态的1T SATA固态硬盘。但是，为了未来的个人职业发展考虑，我需要一台高性能笔记本来拓宽我的技能树（主要是硬件领域）。旧笔记本用起来已经比较卡了，日常写文章没问题，浏览器窗口打开多就卡了。
 
-[[https://ark.intel.com/content/www/us/en/ark/products/124967/intel-core-i58250u-processor-6m-cache-up-to-3-40-ghz.html][Intel® Core™ i5-8250U Processor (6M Cache, up to 3.40 GHz) Product Specifications]]
+AI从ChatGPT发布以来，已经有了长足的发展。不论是出于职业考虑还是个人兴趣，都需要掌握从原理到应用的全流程。
 
-可供选择的品牌：
+所以，一台高性能笔记本就显得至关重要。这关系着我未来五年的职业发展。我需要不断push自己学习新东西，掌握新能力，构建自己的职业护城河，使得自己不会被轻易替代。
 
-- Dell
-- Lenovo:ThinkPad
-- Slimbook(only for Linux) https://kde.slimbook.es/
+** 我用过的笔记本
 
-[[https://frame.work/products/laptop-diy-13-gen-amd?tab=specs]]
+| 购买于     | 生产年份 | 品牌型号                  | CPU                              | GPU                                                | LinuxHardware probe                          |
+|------------+----------+---------------------------+----------------------------------+----------------------------------------------------+----------------------------------------------|
+| 2019/01/01 |     2018 | [[https://h10032.www1.hp.com/ctg/Manual/c06146792.pdf][HP Laptop 14s-cr0xxx(PDF)]] | Intel Core i5-8250U CPU @1.60GHz | Intel UHD Graphics 620 + AMD Radeon R5 M445 Series | https://linux-hardware.org/?probe=f95d67a702 |
 
-不要买英伟达显卡
 
-评估指标：
+
+** 评估指标
+
+一、CPU
+
+AMD
+
+#+BEGIN_EXPORT html
+<table border="1" cellpadding="6" cellspacing="0">
+  <thead>
+    <tr>
+      <th>年份</th>
+      <th>CPU架构</th>
+      <th>工艺制程</th>
+      <th>核心代号</th>
+      <th>U / HS / H / HX 系列型号 (移动端)</th>
+      <th>市场定位 / 备注说明</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>2022</td>
+      <td>Zen 3+ (全大核)</td>
+      <td>TSMC 6nm FinFET</td>
+      <td>Rembrandt</td>
+      <td>
+        Ryzen 5 6***H/HS<br />
+        Ryzen 7 6***H/HS<br />
+        Ryzen 9 6***H/HS
+      </td>
+      <td>锐龙6000系列 · 全大核设计 · DDR5/LPDDR5 · RDNA2核显</td>
+    </tr>
+    <tr>
+      <td>2023</td>
+      <td>Zen 3+ (全大核)<br />〝马甲版〞</td>
+      <td>TSMC 6nm FinFET</td>
+      <td>Rembrandt-R (Refresh)</td>
+      <td>
+        Ryzen 5 7*35H/HS<br />
+        Ryzen 7 7*35H/HS<br />
+        Ryzen 9 7*35H/HS
+      </td>
+      <td>伪·锐龙7000 · 锐龙6000马甲 · 全大核设计 · 仅命名升级</td>
+    </tr>
+    <tr>
+      <td>2023</td>
+      <td>Zen 4 (全大核)</td>
+      <td>TSMC 4nm FinFET</td>
+      <td>Phoenix</td>
+      <td>
+        Ryzen 5 7*4*H/HS<br />
+        Ryzen 7 7*4*H/HS<br />
+        Ryzen 9 7*4*H/HS
+      </td>
+      <td>真·锐龙7000 · 全大核设计 · 一代神U · RDNA3核显 · 集成AI引擎</td>
+    </tr>
+    <tr>
+      <td>2023/2024</td>
+      <td>Zen 4 (全大核)</td>
+      <td>TSMC 5nm FinFET</td>
+      <td>Dragon Range</td>
+      <td>
+        Ryzen 5 7***HX<br />
+        Ryzen 7 7***HX<br />
+        Ryzen 9 7***HX<br />
+        Ryzen 9 7***HX3D
+      </td>
+      <td>锐龙7000 · 积热</td>
+    </tr>
+
+    <tr>
+      <td>2024</td>
+      <td>Zen 4 (全大核)</td>
+      <td>TSMC 4nm FinFET</td>
+      <td>Hawk Point</td>
+      <td>
+        Ryzen 5 8***H/HS<br />
+        Ryzen 7 8***H/HS<br />
+        Ryzen 9 8***H/HS
+      </td>
+      <td>伪·锐龙8000 · 锐龙7000马甲风格 · 全大核设计 · 能效小幅优化</td>
+    </tr>
+    <tr>
+      <td>2025</td>
+      <td>Zen 4</td>
+      <td>TSMC 4nm FinFET</td>
+      <td>Hawk Point</td>
+      <td>
+        Ryzen 5 2**H / Ryzen 7 2**H<br />
+        Ryzen 5 H 2** / Ryzen 7 H 2**
+      </td>
+      <td>锐龙7000二次马甲 · 全大核设计</td>
+    </tr>
+    <tr>
+      <td>2025</td>
+      <td>Zen 5</td>
+      <td>TSMC 5nm FinFET</td>
+      <td>Krackan Point</td>
+      <td>
+        Ryzen AI 5 3*0<br />
+        Ryzen AI 7 3*0<br />
+        Ryzen AI 5 H 3*0<br />
+        Ryzen AI 7 H 3*0
+      </td>
+      <td>CPU规格缩水 · iGPU规格缩水 · 鸡肋NPU规格增加 · 大小核设计</td>
+    </tr>
+    <tr>
+      <td>2025</td>
+      <td>Zen 5</td>
+      <td>TSMC 4nm FinFET</td>
+      <td>Strix Point</td>
+      <td>
+        Ryzen AI 9 H 3**<br />
+        Ryzen AI 9 HX 3**
+      </td>
+      <td>CPU规格增加 · iGPU规格增加 · 鸡肋NPU规格增加 · 大小核设计</td>
+    </tr>
+    <tr>
+      <td>2025</td>
+      <td>Zen 4 (全大核)</td>
+      <td>TSMC 5nm FinFET</td>
+      <td>Dragon Range</td>
+      <td>
+        Ryzen 7 8***HX<br />
+        Ryzen 9 8***HX
+      </td>
+      <td>伪·锐龙8000 · 锐龙7000马甲 · 积热</td>
+    </tr>
+    <tr>
+      <td>2025</td>
+      <td>Zen 5</td>
+      <td>TSMC 4nm FinFET</td>
+      <td>Fire Range</td>
+      <td>
+        Ryzen 9 9***HX<br />
+        Ryzen 9 9***HX3D
+      </td>
+      <td>锐龙9000</td>
+    </tr>
+    <tr>
+      <td>2026</td>
+      <td>Zen 3+ (全大核)</td>
+      <td>TSMC 6nm FinFET</td>
+      <td>Rembrandt</td>
+      <td>
+        Ryzen 3 1*0<br />
+        Ryzen 5 1*0<br />
+        Ryzen 7 1*0
+      </td>
+      <td>锐龙6000二次马甲 · 全大核设计</td>
+    </tr>
+    <tr>
+      <td>2026</td>
+      <td>Zen 5 (全大核优化)</td>
+      <td>TSMC 4nm FinFET</td>
+      <td>Gorgon Point</td>
+      <td>
+        Ryzen AI 5 4*0 / Ryzen AI 7 4*0 [Krackan Point马甲]<br />
+        Ryzen AI 9 HX 4*0 / Ryzen AI 9 4*5 [Strix Point马甲]
+      </td>
+      <td>NPU提升 · 强化AI吞吐 · 主流AI笔记本</td>
+    </tr>
+  </tbody>
+</table>
+#+END_EXPORT
+
+二、GPU
+
+RTX5060
+
+三、内存
+
+32G
+
+四、硬盘
+
+1T
+
+最好的固态盘：PCIe 4.0 + M.2 2280 + TLC
+
+固态硬盘有哪些颗粒类型？哪种最好？
+
+综合性能与寿命：SLC>MLC>TLC>QLC。主流是TLC。
 
 - CPU、GPU、内存、显示屏大小、硬盘、摄像头、NIC、电池、接口、键盘、电源适配器
-- 无线网卡必须是Linux已经支持的，否则装上Arch后无法连接无线网
 
-买到电脑后，要先更新Windows，确保所有的firmware都更新了。
+** 买电脑后
 
-如何识别Intel芯片代号：
-
-i5-8250U------第8代i5处理器
-
-** 一些言论
-:PROPERTIES:
-:CUSTOM_ID: 一些言论
-:END:
-
-#+begin_quote
-The Intel 12th generation chipset is still too new for most stable Linux distros: asymmetric core scheduling, its integrated Xe GPU, the webcam, and perhaps worst of all, the need for fractional display scaling with such a high-DPI screen, which caused problems for GNOME on Wayland on kernel 5.15, and both Xfce and KDE on Xorg. Its integration of fractional scaling is a key advantage for the Cinnamon desktop and Mint in general, and the poor HiDPI handling of MATE and Xfce will prove to be critical weaknesses for these older desktops as such displays become more common, unless the projects make rapid improvements in this area. At least KDE has the workaround of using Wayland to get fractional scaling working. There's a lot you can do to improve the experience, but it shouldn't be necessary. To be fair, though, we are sure that this will improve markedly in a year or so. ---from [[https://www.theregister.com/2023/03/10/thinkpad_x1c_g10_linux/]]
-
-#+end_quote
-
-#+begin_quote
-Thinkpad一次性安装成功，无需多余配置的情况占绝大多数，越是小众的品牌(例如东芝，松下这类的)，驱动不起来的情况越严重；型号越新，越容易出问题。 ---from [[https://www.zhihu.com/question/451231221/answer/1830076883]]
-
-#+end_quote
-
-linux 6.5 新增支持的笔记本 https://9to5linux.com/linux-kernel-6-5-officially-released-this-is-whats-new
+1. 不激活，确保笔记本无明显问题：屏幕问题、风扇异常、散热不行
+2. 要先更新Windows，确保所有的firmware都更新了
+3. 烤机，保证笔记本性能
 
 ** 参考资料
-:PROPERTIES:
-:CUSTOM_ID: 参考资料
-:END:
-[[https://wiki.archlinux.org/title/Laptop][Laptop - ArchWiki]]
 
-[[https://www.thinkwiki.org/wiki/ThinkWiki][ThinkWiki]]
-
-[[https://www.typemylife.com/thinkbook-14-amd-2021/][入手联想Thinkbook 14锐龙版（2021年款）]]
-
-[[https://wiki.archlinux.org/title/Installation_guide][Installation guide - ArchWiki]]
-
-[[https://www.linux.com/news/dell-xps-13-7390-review-the-best-laptop-for-desktop-linux-user/][Dell XPS 13 7390 Review: The Best Laptop For Desktop Linux Users - Linux.com]]
-
-[[https://www.theregister.com/2023/03/10/thinkpad_x1c_g10_linux/][The ThinkPad X1 Carbon Gen 10 as a Linux laptop]]
-
-[[https://en.wikipedia.org/wiki/Alder_Lake][Alder Lake]]
-
-[[https://www.intel.com/content/www/us/en/products/systems-devices/laptops/view-all.html][Shop Intel®-Based Laptops - Buy a Laptop Computer]]
-
-[[https://linux-hardware.org/][Linux Hardware Database]]
-
-[[https://linux-hardware.org/?view=timeline&d=Arch]]
-
-购买笔记本电脑,“lunar lake 下一代intel处理器，将于今年第三季度发布
-
-惠普-不买，买thinkpad ，继续观望，不用定决心买thinkpadhttps://www.lenovo.com/us/en/configurator/cto/index.html?bundleId=21LUCTO1WWUS1 从海外买
-
-明年或许可以买 lunar lake处理器的笔记本
-
-https://www.chiphell.com/thread-2611442-1-1.html
-
-可以买amd但注意npu的linux驱动兼容问题
-
-https://www.thinkwiki.org/wiki/ThinkWiki
-
-购买ThinkPad海外版本并希望在中国大陆享受保修服务，可以通过以下步骤操作： 1. 购买海外版本：首先，您可以通过海外的联想官网或者授权经销商购买ThinkPad笔记本。在购买时，请注意选择支持全球联保服务（IWS）的机型，以确保可以在中国大陆享受保修服务 。 2. 验证全球联保服务：在购买前，您需要确认所购机型是否支持在中国大陆的全球联保服务。可以通过访问美国联想官网，输入您的机型Type，查询保修服务的可用性 。 3. 准备必要文件：为了在中国大陆注册全球联保服务，您需要准备以下文件： 购买确认函（由Lenovo提供） 护照照片页和签证页（包含出入中国大陆和购买国家的海关盖章） 机器底部的COA（Certificate of Authenticity）号码 。 4. 注册全球联保服务：携带上述文件，通过联想的全球联保服务（IWS）进行注册。您可以通过联想的免费服务热线400-100-6000或发送电子邮件至iws@lenovo.com联系客服进行注册 。 5. 遵守海关法规：在将ThinkPad笔记本进口至中国大陆时，请确保遵守中国海关的法律和法规 。 6. 享受保修服务：一旦注册成功，您的ThinkPad笔记本就可以在中国大陆享受全球联保服务了。如果需要维修，可以联系联想Think售后服务中心或通过官网查询服务中心联系方式并直接联系当地服务中心 。 请注意，全球联保服务是硬件保修服务，不包括软件和捆绑的操作系统，该服务应由产品原购买地负责提供支持 。同时，Lenovo坚持合法经营，对于非法进入中国的机器，Lenovo拒绝为其提供任何形式的服务 。
+- [[https://www.kdocs.cn/l/chzEHrH90jRz][笔记本购机指南]] by 夏蒙乾
+- [[https://blog.huan99.com/post/20250215172536/][笔记本电脑开箱验货烤机流程 | Huan's Blog]]
+- [[https://blog.huan99.com/post/20250217000458/][机械革命翼龙15Pro配置信息一览及简单优化 | Huan's Blog]]
+- [[https://wiki.archlinux.org/title/Laptop][Laptop - ArchWiki]]
+- [[https://linux-hardware.org/][Linux Hardware Database]]
+- 图吧工具箱 https://www.tbtool.cn/
+- CPU对比
+  - https://www.cpubenchmark.net/singleCompare.php
