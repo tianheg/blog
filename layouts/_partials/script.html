@@ -1,29 +1,18 @@
-{{- $scripts := slice "js/main.js" -}}
-
-{{- $scripts = union $scripts (slice "js/back-to-top.js") -}}
-{{- $scripts = union $scripts (slice "js/keyboard.js") -}}
-
-
-{{- $processedScripts := slice ("" | resources.FromString "dummy.js") -}}
-{{- range $scripts -}}
-	{{- if findRE `^https?:` . -}}
-		<script src="{{ . }}" defer></script>
-	{{- else -}}
-		{{- $path := printf "%s/%s" $.Lang (. | replaceRE `\.js$` "-rendered.js") -}}
-		{{- $processedScripts = union $processedScripts (slice (resources.Get . | resources.ExecuteAsTemplate $path $)) -}}
-	{{- end -}}
-{{- end -}}
-
-{{- $path := (strings.TrimPrefix "/" (printf `/js/script.js`)) -}}
-
-{{ if hugo.IsDevelopment }}
-	{{- $script := $processedScripts | resources.Concat $path -}}
-	{{- $script = $script | resources.Fingerprint -}}
-	<script src="{{ $script.RelPermalink }}"></script>
-{{ else }}
-
-	{{- $script := $processedScripts | resources.Concat $path | resources.Minify -}}
-	{{- $script = $script | resources.Fingerprint -}}
-
-	<script src="{{ $script.RelPermalink }}" integrity="{{ $script.Data.Integrity }}" crossorigin="anonymous"></script>
-{{ end }}
+{{- with resources.Get "ts/main.ts" }}
+  {{- $opts := dict "targetPath" "js/main.js" -}}
+  {{- if hugo.IsDevelopment }}
+    {{- with . | js.Build $opts }}
+      <script src="{{ .RelPermalink }}" defer></script>
+    {{- end }}
+  {{- else }}
+    {{- $opts = merge $opts (dict "minify" true) -}}
+    {{- with . | js.Build $opts | fingerprint }}
+      <script
+        src="{{ .RelPermalink }}"
+        integrity="{{ .Data.Integrity }}"
+        crossorigin="anonymous"
+        defer
+      ></script>
+    {{- end }}
+  {{- end }}
+{{- end }}

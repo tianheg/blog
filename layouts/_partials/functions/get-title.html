@@ -1,0 +1,13 @@
+{{/* Get page title with fallback to first heading for TIL */}}
+{{- $page := . -}}
+{{- $title := $page.Title -}}
+{{- if not $title -}}
+  {{- $rawContent := $page.RawContent -}}
+  {{- $firstLine := index (split $rawContent "\n") 0 -}}
+  {{- if (hasPrefix $firstLine "* ") -}}
+    {{- $title = trim (strings.TrimPrefix "* " $firstLine) " " -}}
+  {{- else -}}
+    {{- $title = $page.File.BaseFileName -}}
+  {{- end -}}
+{{- end -}}
+{{- return $title -}}

@@ -1,6 +1,5 @@
 {{ define "main" }}
 
-
 <article data-pagefind-body>
   {{ if eq .Section "til" }}
   <!-- Breadcrumb Navigation -->
@@ -67,6 +66,16 @@
     {{ partial "edit-link.html" . }}
 </article>
 
+  {{ partial "backlinks.html" . }}
+
+  <section class="flex flex-col space-y-4" aria-hidden="true">
+      <h2 class="flex flex-row items-center space-x-2 text-lg font-semibold">
+        {{ partial "svg/chart-network" }}
+        <span>Graph</span>
+      </h2>
+
+      {{ partial "graph" ( dict "page" . "class" "h-64 ml-6" ) }}
+  </section>
   {{ partial "minimal-footer.html" . }}
   {{ partial "comments.html" . }}
 {{ end }}
