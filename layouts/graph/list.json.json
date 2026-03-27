@@ -1,0 +1,47 @@
+{{- $pages := partialCached "functions/linkable-pages" "linkable-pages-key" -}}
+{{- $pageDict := dict -}}
+{{- $graphDict := dict -}}
+
+{{/* Build page dictionary */}}
+{{- range $pages -}}
+  {{- $title := .Title -}}
+  {{- /* Fallback: extract title from first heading if .Title is empty */ -}}
+  {{- if not $title -}}
+    {{- $rawContent := .RawContent -}}
+    {{- $lines := split $rawContent "\n" -}}
+    {{- range $lines -}}
+      {{- if and (not $title) (strings.HasPrefix . "* ") -}}
+        {{- $title = strings.TrimPrefix "* " . -}}
+      {{- end -}}
+    {{- end -}}
+  {{- end -}}
+  {{- /* Final fallback: use filename if still no title */ -}}
+  {{- if not $title -}}
+    {{- $title = .File.BaseFileName -}}
+  {{- end -}}
+  {{- $pageDict = merge $pageDict ( dict .RelPermalink ( dict
+    "permalink" .RelPermalink
+    "title" ( $title | plainify | htmlUnescape | chomp | title )
+    "section" .Section
+    )
+    )
+    -}}
+{{- end -}}
+
+{{/* Build graph dictionary from Scratch data */}}
+{{- range $pages -}}
+  {{- $incoming := slice -}}
+  {{- $outgoing := slice -}}
+  {{- range .Scratch.Get "incoming" -}}
+    {{- if . }}
+      {{- $incoming = $incoming | append .RelPermalink -}}
+    {{- end -}}
+  {{- end -}}
+  {{- range .Scratch.Get "outgoing" -}}
+    {{- if . }}
+      {{- $outgoing = $outgoing | append .RelPermalink -}}
+    {{- end -}}
+  {{- end -}}
+  {{- $graphDict = merge $graphDict ( dict .RelPermalink ( dict "in" $incoming "out" $outgoing ) ) -}}
+{{- end -}}
+{{ jsonify (dict "indent" "  ") ( dict "pages" $pageDict "graph" $graphDict ) }}

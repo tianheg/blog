@@ -1,0 +1,12 @@
+{{/* 
+  Returns linkable pages and ensures all backlinks are properly registered.
+  Uses partialCached to ensure this only runs once per build.
+*/}}
+{{- $pages := where site.RegularPages ".Section" "in" (slice "posts" "til") -}}
+
+{{/* Process all pages once to trigger shortcode execution */}}
+{{- range $pages -}}
+  {{- $content := .Content -}}
+{{- end -}}
+
+{{- return $pages -}}

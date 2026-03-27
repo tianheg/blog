@@ -1,0 +1,59 @@
+{{/* Get incoming and outgoing links from Scratch */}}
+{{- $incoming := .Scratch.Get "incoming" -}}
+{{- $outgoing := .Scratch.Get "outgoing" -}}
+
+{{/* Only show section if there are any backlinks */}}
+{{- if or $incoming $outgoing -}}
+<section class="backlinks mt-8 pt-6 border-t border-gray-200 dark:border-gray-700">
+  <h2 class="flex flex-row items-center space-x-2 text-lg font-semibold mb-4">
+    {{ partial "svg/chart-network" }}
+    <span>Posts</span>
+  </h2>
+  
+  <div class="space-y-4">
+    {{/* Outgoing links - links FROM this page TO others */}}
+    {{- if $outgoing -}}
+    <div>
+      <h3 class="text-sm font-medium text-gray-600 dark:text-gray-400 mb-2 flex items-center space-x-1">
+        <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 10l7-7m0 0l7 7m-7-7v18" />
+        </svg>
+        <span>Outgoing</span>
+      </h3>
+      <ul class="space-y-1 ml-5">
+        {{- range $outgoing -}}
+          {{- if . -}}
+          {{- $linkTitle := partial "functions/get-title" . -}}
+          <li>
+            <a href="{{ .RelPermalink }}" class="text-blue-600 dark:text-blue-400 hover:underline">{{ $linkTitle }}</a>
+          </li>
+          {{- end -}}
+        {{- end -}}
+      </ul>
+    </div>
+    {{- end -}}
+    
+    {{/* Incoming links - links TO this page FROM others */}}
+    {{- if $incoming -}}
+    <div>
+      <h3 class="text-sm font-medium text-gray-600 dark:text-gray-400 mb-2 flex items-center space-x-1">
+        <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 14l-7 7m0 0l-7-7m7 7V3" />
+        </svg>
+        <span>Incoming</span>
+      </h3>
+      <ul class="space-y-1 ml-5">
+        {{- range $incoming -}}
+          {{- if . -}}
+          {{- $linkTitle := partial "functions/get-title" . -}}
+          <li>
+            <a href="{{ .RelPermalink }}" class="text-blue-600 dark:text-blue-400 hover:underline">{{ $linkTitle }}</a>
+          </li>
+          {{- end -}}
+        {{- end -}}
+      </ul>
+    </div>
+    {{- end -}}
+  </div>
+</section>
+{{- end -}}

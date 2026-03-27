@@ -9,6 +9,10 @@ build:
       target: css
 
 frontmatter:
+  date:
+    - date
+    - :filename
+    - :default
   lastmod:
     - lastmod
     - :git
@@ -21,6 +25,9 @@ markup:
   tableOfContents:
     startLevel: 2
     endLevel: 3
+  goldmark:
+    renderer:
+      unsafe: true
 
 menu:
   main:
@@ -53,10 +60,15 @@ outputs:
     - HTML
   section:
     - HTML
+    - JSON
   taxonomy:
     - HTML
   term:
     - HTML
+
+  # graph:
+  #   - HTML
+  #   - JSON
 
 permalinks:
   tags: "/tags/:slug/"
