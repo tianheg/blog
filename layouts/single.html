@@ -15,20 +15,20 @@
   {{- $inner := strings.TrimSuffix "]]" $inner -}}
   {{- $parts := split $inner "][" -}}
   {{- $linkPath := index $parts 0 -}}
-  
+
   {{/* Skip external links (starting with http/https) */}}
   {{- if not (hasPrefix $linkPath "http") -}}
-    
+
     {{/* Clean path: remove leading slashes */}}
     {{- $cleanPath := $linkPath -}}
     {{- if hasPrefix $linkPath "/" -}}
       {{- $cleanPath = strings.TrimPrefix "/" $linkPath -}}
     {{- end -}}
-    
+
     {{/* Only search for target pages in allowed sections */}}
     {{- $target := "" -}}
     {{- $allowedSections := slice "posts" "til" -}}
-    
+
     {{/* Method 1: Direct path lookup */}}
     {{- range $allowedSections -}}
       {{- if not $target -}}
@@ -36,7 +36,7 @@
         {{- $target = site.GetPage $tryPath -}}
       {{- end -}}
     {{- end -}}
-    
+
     {{/* Method 2: Match by filename or permalink */}}
     {{- if not $target -}}
       {{- range where site.RegularPages "Section" "in" $allowedSections -}}
@@ -47,7 +47,7 @@
         {{- end -}}
       {{- end -}}
     {{- end -}}
-    
+
     {{/* After finding the target, establish bidirectional link relationships */}}
     {{- if $target -}}
       {{/* Add "incoming" link to target page (current page links to it) */}}
@@ -56,7 +56,7 @@
       {{- else -}}
         {{- $target.Scratch.Set "incoming" (slice $.Page) -}}
       {{- end -}}
-      
+
       {{/* Add "outgoing" link from current page (links to target page) */}}
       {{- with $.Page.Scratch.Get "outgoing" -}}
         {{- $.Page.Scratch.Add "outgoing" $target -}}
@@ -64,7 +64,7 @@
         {{- $.Page.Scratch.Set "outgoing" (slice $target) -}}
       {{- end -}}
     {{- end -}}
-    
+
   {{- end -}}
 {{- end -}}
 
@@ -74,7 +74,7 @@
      ============================================ */}}
 
 <article data-pagefind-body>
-  
+
   {{/* --- Breadcrumb navigation for TIL section --- */}}
   {{ if eq .Section "til" }}
   <nav aria-label="breadcrumb" class="mb-6">
@@ -147,6 +147,7 @@
     <hr>
   {{ end }}
 
+  {{ partial "minimal-footer.html" . }}
 </article>
 
 
@@ -171,7 +172,7 @@
 
 
 {{/* --- Footer and comments --- */}}
-{{ partial "minimal-footer.html" . }}
+
 {{ partial "comments.html" . }}
 
 {{ end }}
