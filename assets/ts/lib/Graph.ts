@@ -3,14 +3,27 @@ import type { GraphData, PageGraph, Permalink } from './types';
 import { DataSet } from 'vis-network/standalone';
 import type { Edge, Node } from 'vis-network/standalone';
 
-/** 节点最小尺寸 */
+/**
+ * Minimum node size for graph visualization.
+ * Used for nodes with few or no incoming links.
+ */
 const NODE_MIN_SIZE = 4;
-/** 节点最大尺寸 */
+
+/**
+ * Maximum node size for graph visualization.
+ * Used for nodes with many incoming links.
+ */
 const NODE_MAX_SIZE = 16;
-/** 当前页面节点的突出显示尺寸 */
+
+/**
+ * Highlighted node size for the current/focused page.
+ * Makes the active page stand out in the visualization.
+ */
 const NODE_FOCUS_SIZE = 8;
 
-/** 页面不存在错误 */
+/**
+ * Error thrown when a requested page cannot be found in the graph data.
+ */
 export class PageNotFoundError extends Error {
   constructor(permalink: string) {
     super(`Page '${permalink}' not found in graph data`);
@@ -19,8 +32,13 @@ export class PageNotFoundError extends Error {
 }
 
 /**
- * 内容图谱管理类
- * 负责解析图谱数据、构建节点和边、计算节点大小等
+ * Manages the content graph structure and provides data for visualization.
+ * 
+ * This class handles:
+ * - Parsing graph data from JSON
+ * - Building nodes and edges for the network visualization
+ * - Calculating node sizes based on link popularity
+ * - Extracting subgraphs for specific pages
  */
 export default class Graph {
   public readonly pages: Map<Permalink, Page>;
@@ -34,7 +52,7 @@ export default class Graph {
     this.initializeGraph();
   }
 
-  // ============== 初始化 ==============
+  // ============== Initialization ==============
 
   private initializePages(): void {
     for (const [permalink, pageData] of Object.entries(this._data.pages)) {
@@ -48,11 +66,14 @@ export default class Graph {
     }
   }
 
-  // ============== 查询方法 ==============
+  // ============== Query Methods ==============
 
   /**
-   * 获取指定页面
-   * @throws {PageNotFoundError} 当页面不存在时抛出
+   * Retrieves a specific page by its permalink.
+   * 
+   * @param permalink - The unique identifier for the page
+   * @returns The Page instance
+   * @throws {PageNotFoundError} When the page doesn't exist in the graph
    */
   page(permalink: Permalink): Page {
     const page = this.pages.get(permalink);
@@ -63,7 +84,10 @@ export default class Graph {
   }
 
   /**
-   * 获取指向该页面的所有页面（入链）
+   * Gets all pages that link to the specified page (incoming links).
+   * 
+   * @param permalink - The target page's permalink
+   * @returns Array of pages that link to the target
    */
   incomingFor(permalink: Permalink): Page[] {
     const pageGraph = this.graph.get(permalink);
@@ -73,7 +97,10 @@ export default class Graph {
   }
 
   /**
-   * 获取该页面指向的所有页面（出链）
+   * Gets all pages that the specified page links to (outgoing links).
+   * 
+   * @param permalink - The source page's permalink
+   * @returns Array of pages linked from the source
    */
   outgoingFor(permalink: Permalink): Page[] {
     const pageGraph = this.graph.get(permalink);
@@ -82,10 +109,14 @@ export default class Graph {
     return pageGraph.out.map((toPermalink) => this.page(toPermalink));
   }
 
-  // ============== 数据生成 ==============
+  // ============== Data Generation ==============
 
   /**
-   * 生成特定页面的局部图谱数据（包含当前页面及其关联页面）
+   * Generates a subgraph centered on a specific page.
+   * Includes the current page and all directly connected pages (both incoming and outgoing links).
+   * 
+   * @param permalink - The permalink of the page to center the subgraph on
+   * @returns Network data with nodes and edges for visualization
    */
   dataForPage(permalink: Permalink): {
     nodes: DataSet<Node>;
@@ -95,7 +126,7 @@ export default class Graph {
     const nodes = new DataSet<Node>();
     const edges = new DataSet<Edge>();
 
-    // 收集相关页面：当前页面 + 入链页面 + 出链页面
+    // Collect related pages: current page + incoming links + outgoing links
     const relatedPages = [
       ...new Set([
         currentPage,
@@ -104,7 +135,7 @@ export default class Graph {
       ])
     ];
 
-    // 创建节点
+    // Create nodes for all related pages
     for (const page of relatedPages) {
       const isCurrentPage = permalink === page.permalink;
       nodes.add({
@@ -115,7 +146,7 @@ export default class Graph {
       });
     }
 
-    // 创建边（只包含相关页面之间的连接）
+    // Create edges (only connections between related pages)
     for (const page of relatedPages) {
       for (const incoming of this.incomingFor(page.permalink)) {
         if (relatedPages.includes(incoming)) {
@@ -128,13 +159,16 @@ export default class Graph {
   }
 
   /**
-   * 生成完整图谱数据
+   * Generates data for the complete graph including all pages.
+   * Node sizes are calculated based on the number of incoming links (popularity).
+   * 
+   * @returns Network data with all nodes and edges
    */
   data(): { nodes: DataSet<Node>; edges: DataSet<Edge> } {
     const nodes = new DataSet<Node>();
     const edges = new DataSet<Edge>();
 
-    // 创建所有节点和边
+    // Create all nodes and edges
     for (const page of this.pages.values()) {
       nodes.add({
         id: page.id,
@@ -147,17 +181,18 @@ export default class Graph {
       }
     }
 
-    // 根据入链数量计算节点大小
+    // Calculate node sizes based on incoming link count
     const inDegreeCount = this.calculateInDegree(nodes, edges);
     this.scaleNodeSizes(nodes, inDegreeCount);
 
     return { nodes, edges };
   }
 
-  // ============== 私有辅助方法 ==============
+  // ============== Private Helper Methods ==============
 
   /**
-   * 计算每个节点的入链数量
+   * Calculates the number of incoming links (in-degree) for each node.
+   * This metric indicates how popular or central a page is in the graph.
    */
   private calculateInDegree(
     nodes: DataSet<Partial<Node>>,
@@ -165,12 +200,12 @@ export default class Graph {
   ): Record<string, number> {
     const count: Record<string, number> = {};
 
-    // 初始化所有节点的计数为0
+    // Initialize all node counts to zero
     nodes.forEach((node) => {
       count[node.id!] = 0;
     });
 
-    // 统计入链
+    // Count incoming links for each node
     edges.forEach((edge) => {
       if (count[edge.to] !== undefined) {
         count[edge.to] += 1;
@@ -181,7 +216,8 @@ export default class Graph {
   }
 
   /**
-   * 根据入链数量按比例缩放节点大小
+   * Scales node sizes proportionally based on their in-degree count.
+   * More popular pages (with more incoming links) get larger nodes.
    */
   private scaleNodeSizes(
     nodes: DataSet<Partial<Node>>,

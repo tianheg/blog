@@ -1,6 +1,8 @@
 /**
- * SVG 图标集合
- * 用于 ContentNetworkGraph 组件
+ * SVG Icon Collection
+ * 
+ * Icons used by the ContentNetworkGraph component for loading states,
+ * error display, and expand/collapse actions.
  */
 
 export const SPINNER_SVG = `<svg

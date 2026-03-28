@@ -1,13 +1,12 @@
+{{/* Individual taxonomy term page layout (e.g., a specific tag page) */}}
 {{ define "main" }}
-
 	<h1 class="">{{ .Title }}</h1>
 	<ul class="">
-
+		{{/* List all pages tagged with this term */}}
 		{{ range .Pages }}
 			<li class="">
 				<a href="{{ .RelPermalink }}" class="">{{ .LinkTitle }}</a>
 			</li>
-
 		{{ end }}
 	</ul>
 {{ end }}

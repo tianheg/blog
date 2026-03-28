@@ -1,7 +1,9 @@
+{{/* Tag cloud/taxonomy listing page layout */}}
 {{ define "main" }}
 	<main class="" id="main">
 		<div class="">
 			<div class="">
+				{{/* Generate tag cloud if tags exist */}}
 				{{ if ne (len $.Site.Taxonomies.tags) 0 }}
 					{{ $max := add (len (index $.Site.Taxonomies.tags.ByCount 0).Pages) 1 }}
 					{{ $min := len (index $.Site.Taxonomies.tags.ByCount.Reverse 0).Pages }}

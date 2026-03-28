@@ -1,3 +1,4 @@
+{{/* Section listing page layout - displays grouped content for a section */}}
 {{ define "main" }}
 	{{- $path := "" -}}
 	{{- with .File -}}
@@ -7,8 +8,10 @@
 	{{- end -}}
 
 	<div id="main" data-pagefind-ignore>
+  {{/* Clear any existing pages storage */}}
   {{ .Store.Delete "pages" }}
 
+  {{/* Collect all pages that belong to this section */}}
   {{ if (eq .Kind "section") }}
     {{ $sectionPage := .CurrentSection }}
     {{ range .Site.RegularPages }}
@@ -21,16 +24,17 @@
   {{ $section := .Section }}
   {{ $pages := .Store.Get "pages" }}
 
+  {{/* Special handling for TIL (Today I Learned) section with category grouping */}}
   {{ if eq $section "til" }}
     {{ $.Store.Delete "categories" }}
     {{ $allFolders := slice }}
     {{ $totalTILs := len $pages }}
 
-    <!-- Display TIL count at the top of the section -->
+    {{/* Display TIL count at the top of the section */}}
     <p class="my-6 text-lg opacity-80 italic">{{ $totalTILs }} TILs and counting...</p>
-    <p class="my-6 text-lg opacity-80 italic">TIL: Today I learned</p>
+    <p class="my-6 text-lg opacity-80 italic">TIL: Today I Learned</p>
 
-    <!-- TIL Section TOC -->
+    {{/* TIL Section Category Navigation (TOC) */}}
     <div class="section-toc mb-8">
       <h2 class="text-xl font-bold mb-4">Categories</h2>
       <ul class="flex flex-wrap gap-2 list-none">
@@ -55,6 +59,7 @@
       </ul>
     </div>
 
+    {{/* Group TILs by category */}}
     {{ range $pages }}
       {{ $category := index (split .File.Dir "/") 1 }}
       {{ if and $category (ne $category "_index.org") }}
@@ -73,6 +78,7 @@
 
     {{ $sortedFolders := sort $allFolders }}
 
+    {{/* Render each category with its TILs */}}
     {{ range $sortedFolders }}
       {{ $category := . }}
       {{ $categoryPages := $.Store.Get $category }}
@@ -100,6 +106,7 @@
     {{ end }}
 
   {{ else }}
+    {{/* Default section listing: group by year */}}
     {{ range $pages.GroupByDate "2006" }}
       {{ $.Store.Set "year" .Key }}
       {{ $year := $.Store.Get "year" }}
@@ -109,6 +116,7 @@
   {{ end }}
 	</div>
 
+  {{/* Show edit link except for TIL section */}}
 	{{ if ne .Section "til" }}
 		{{ partial "edit-link.html" . }}
 	{{ end }}
