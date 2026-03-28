@@ -1,8 +1,8 @@
-{{/* Get incoming and outgoing links from Scratch */}}
+{{/* Retrieve incoming and outgoing links from the page's scratch storage */}}
 {{- $incoming := .Scratch.Get "incoming" -}}
 {{- $outgoing := .Scratch.Get "outgoing" -}}
 
-{{/* Only show section if there are any backlinks */}}
+{{/* Only render this section if there are any backlinks to display */}}
 {{- if or $incoming $outgoing -}}
 <section class="backlinks mt-8 pt-6 border-t border-gray-200 dark:border-gray-700">
   <h2 class="flex flex-row items-center space-x-2 text-lg font-semibold mb-4">
@@ -11,7 +11,7 @@
   </h2>
   
   <div class="space-y-4">
-    {{/* Outgoing links - links FROM this page TO others */}}
+    {{/* Outgoing links - links FROM this page TO other pages */}}
     {{- if $outgoing -}}
     <div>
       <h3 class="text-sm font-medium text-gray-600 dark:text-gray-400 mb-2 flex items-center space-x-1">
@@ -33,7 +33,7 @@
     </div>
     {{- end -}}
     
-    {{/* Incoming links - links TO this page FROM others */}}
+    {{/* Incoming links - links TO this page FROM other pages */}}
     {{- if $incoming -}}
     <div>
       <h3 class="text-sm font-medium text-gray-600 dark:text-gray-400 mb-2 flex items-center space-x-1">

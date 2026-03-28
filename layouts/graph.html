@@ -1,36 +1,36 @@
 {{/*
-  Graph 页面布局模板
-  ==================
-  功能：为 /graph/ 路径提供专用布局，展示博客内容之间的关系图谱
+  Graph page layout template
+  ==========================
+  Purpose: Provides a dedicated layout for the /graph/ path to display the blog content relationship graph
 
-  关联文件：
+  Related files:
   ---------
-  1. content/graph/_index.org - 页面内容源文件，定义标题和描述
-  2. layouts/_partials/graph.html - 图谱组件 partial 模板
-  3. layouts/graph/list.json.json - 生成图谱所需 JSON 数据的模板
-  4. assets/ts/components/ContentNetworkGraph.ts - content-network-graph Web 组件
+  1. content/graph/_index.org - Page content source file, defines title and description
+  2. layouts/_partials/graph.html - Graph component partial template
+  3. layouts/graph/list.json.json - Template that generates JSON data required for the graph
+  4. assets/ts/components/ContentNetworkGraph.ts - content-network-graph Web Component
 
-  工作原理：
+  How it works:
   ---------
-  该模板通过调用 "graph" partial，渲染 <content-network-graph> Web 组件，
-  组件从 graph/index.json 获取数据，可视化展示内容间的链接关系。
+  This template calls the "graph" partial to render the <content-network-graph> Web Component,
+  which fetches data from graph/index.json and visualizes the link relationships between content.
 */}}
 
 {{ define "main" }}
   <article class="main">
-    {{/* 页面标题区域 */}}
+    {{/* Page title area */}}
     <header>
       <h1 class="!mb-1">{{ .Title | title }}</h1>
     </header>
 
-    {{/* 渲染 content/graph/_index.org 中的页面描述内容 */}}
+    {{/* Render page description content from content/graph/_index.org */}}
     {{ .Content }}
 
     {{/*
-      关系图谱展示区域
-      参数说明：
-      - scaleNodes: true - 启用节点缩放
-      - class: "h-96" - 设置图谱高度为 24rem (384px)
+      Relationship graph display area
+      Parameter description:
+      - scaleNodes: true - Enable node scaling
+      - class: "h-96" - Set graph height to 24rem (384px)
     */}}
     <section class="mt-8">
       {{ partial "graph" ( dict "scaleNodes" true "class" "h-96" ) }}

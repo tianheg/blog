@@ -6,6 +6,7 @@
 
   {{ hugo.Generator }}
 
+  <!-- Color scheme support for light/dark mode -->
   <!-- https://web.dev/color-scheme/ -->
   <meta name="color-scheme" content="light dark">
   <!-- Responsive Web Design -->
@@ -60,12 +61,15 @@
     {{- block "main" . }}{{- end }}
   </main>
 
+  <!-- Back to top button (only for posts section) -->
   {{ if eq .Section "posts" }}
     {{- partial "back-to-top.html" . -}}
   {{ end }}
 
+  <!-- Service Worker registration -->
   {{- partial "service-worker.html" . -}}
 
+  <!-- Scripts (exclude 404 page) -->
   {{ if ne .Kind "404" }}
     {{- partial "script.html" . -}}
   {{ end }}

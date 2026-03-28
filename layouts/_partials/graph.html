@@ -1,3 +1,9 @@
+{{/* Render the interactive network graph web component */}}
+{{/* 
+   Parameters:
+   - class: CSS height class (default: h-96)
+   - page: Current page object (optional) - when provided, shows subgraph centered on this page
+*/}}
 <content-network-graph
   class="{{ .class | default "h-96" }}"
   data-endpoint="{{ relURL "graph/index.json" }}"

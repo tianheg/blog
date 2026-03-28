@@ -1,6 +1,8 @@
 import type { PageSection, PageData } from './types';
 
-/** 页面数据不完整错误 */
+/**
+ * Error thrown when page data is missing a required permalink.
+ */
 export class IncompletePageDataError extends Error {
   constructor() {
     super('Received page data without a permalink');
@@ -8,7 +10,9 @@ export class IncompletePageDataError extends Error {
   }
 }
 
-/** 无法确定页面类型错误 */
+/**
+ * Error thrown when the page section cannot be determined from the permalink.
+ */
 export class UnknownPageSectionError extends Error {
   constructor(permalink: string) {
     super(`Unable to determine page section from '${permalink}' permalink`);
@@ -17,8 +21,12 @@ export class UnknownPageSectionError extends Error {
 }
 
 /**
- * 页面实体类
- * 封装页面元数据和类型推断逻辑
+ * Represents a blog page with its metadata and inferred properties.
+ * 
+ * This class encapsulates page data and provides logic to:
+ * - Validate required fields
+ * - Infer the page section (posts/notes) from the permalink if not explicitly set
+ * - Provide consistent access to page properties
  */
 export default class Page {
   public readonly permalink: string;
@@ -39,20 +47,33 @@ export default class Page {
     this.tags = pageData.tags ?? [];
   }
 
+  /**
+   * Validates that the page data includes a required permalink.
+   * 
+   * @throws {IncompletePageDataError} When permalink is missing
+   */
   private validate(pageData: Partial<PageData>): asserts pageData is { permalink: string } {
     if (!pageData.permalink) {
       throw new IncompletePageDataError();
     }
   }
 
-  /** 使用 permalink 作为唯一标识 */
+  /**
+   * Unique identifier for the page.
+   * Uses the permalink as the canonical ID.
+   */
   get id(): string {
     return this.permalink;
   }
 
   /**
-   * 页面类型（posts/notes）
-   * 优先使用显式声明的类型，否则从 permalink 推断
+   * The page section/category: either 'posts' or 'notes'.
+   * 
+   * If explicitly set in the data, uses that value. Otherwise, infers from the permalink structure:
+   * - URLs containing '/posts/' -> 'posts'
+   * - URLs containing '/notes/' -> 'notes'
+   * 
+   * @throws {UnknownPageSectionError} When section cannot be determined
    */
   get section(): PageSection {
     if (this._section) {
@@ -63,6 +84,12 @@ export default class Page {
     return this._section;
   }
 
+  /**
+   * Infers the page section from the permalink URL structure.
+   * 
+   * @returns The inferred section type
+   * @throws {UnknownPageSectionError} When permalink doesn't match known patterns
+   */
   private inferSectionFromPermalink(): PageSection {
     if (this.permalink.includes('/posts/')) {
       return 'posts';
