@@ -116,8 +116,4 @@
   {{ end }}
 	</div>
 
-  {{/* Show edit link except for TIL section */}}
-	{{ if ne .Section "til" }}
-		{{ partial "edit-link.html" . }}
-	{{ end }}
 {{ end }}
