@@ -1,125 +1,13 @@
 {{ define "main" }}
 
-{{/* ============================================
-     Part 1: Parse Org-mode links and build page relationships
-     ============================================ */}}
-
-{{/* Extract all org-mode format links [[path][title]] from raw content */}}
-{{- $rawContent := .RawContent -}}
-{{- $orgLinkPattern := `\[\[([^\]]+)\]\[[^\]]*\]\]` -}}
-{{- $matches := findRE $orgLinkPattern $rawContent -}}
-
-{{- range $matches -}}
-  {{/* Parse link format and extract the path portion */}}
-  {{- $inner := strings.TrimPrefix "[[" . -}}
-  {{- $inner := strings.TrimSuffix "]]" $inner -}}
-  {{- $parts := split $inner "][" -}}
-  {{- $linkPath := index $parts 0 -}}
-
-  {{/* Skip external links (starting with http/https) */}}
-  {{- if not (hasPrefix $linkPath "http") -}}
-
-    {{/* Clean path: remove leading slashes */}}
-    {{- $cleanPath := $linkPath -}}
-    {{- if hasPrefix $linkPath "/" -}}
-      {{- $cleanPath = strings.TrimPrefix "/" $linkPath -}}
-    {{- end -}}
-
-    {{/* Only search for target pages in allowed sections */}}
-    {{- $target := "" -}}
-    {{- $allowedSections := slice "posts" "til" -}}
-
-    {{/* Method 1: Direct path lookup */}}
-    {{- range $allowedSections -}}
-      {{- if not $target -}}
-        {{- $tryPath := printf "%s/%s" . $cleanPath -}}
-        {{- $target = site.GetPage $tryPath -}}
-      {{- end -}}
-    {{- end -}}
-
-    {{/* Method 2: Match by filename or permalink */}}
-    {{- if not $target -}}
-      {{- range where site.RegularPages "Section" "in" $allowedSections -}}
-        {{- if not $target -}}
-          {{- if or (eq .File.BaseFileName $cleanPath) (hasSuffix .RelPermalink $cleanPath) -}}
-            {{- $target = . -}}
-          {{- end -}}
-        {{- end -}}
-      {{- end -}}
-    {{- end -}}
-
-    {{/* After finding the target, establish bidirectional link relationships */}}
-    {{- if $target -}}
-      {{/* Add "incoming" link to target page (current page links to it) */}}
-      {{- with $target.Scratch.Get "incoming" -}}
-        {{- $target.Scratch.Add "incoming" $.Page -}}
-      {{- else -}}
-        {{- $target.Scratch.Set "incoming" (slice $.Page) -}}
-      {{- end -}}
-
-      {{/* Add "outgoing" link from current page (links to target page) */}}
-      {{- with $.Page.Scratch.Get "outgoing" -}}
-        {{- $.Page.Scratch.Add "outgoing" $target -}}
-      {{- else -}}
-        {{- $.Page.Scratch.Set "outgoing" (slice $target) -}}
-      {{- end -}}
-    {{- end -}}
-
-  {{- end -}}
-{{- end -}}
-
-
-{{/* ============================================
-     Part 2: Article main content
-     ============================================ */}}
+{{/* Build page link relationships */}}
+{{ partial "link-relationships.html" . }}
 
 <article data-pagefind-body>
 
-  {{/* --- Breadcrumb navigation for TIL section --- */}}
+  {{/* Breadcrumb navigation for TIL section */}}
   {{ if eq .Section "til" }}
-  <nav aria-label="breadcrumb" class="mb-6">
-    <ul class="flex list-none items-center text-sm text-gray-600 dark:text-gray-400">
-      {{/* Home link */}}
-      <li class="flex items-center space-x-2">
-        <span class="text-gray-400">/</span>
-        <a href="/til/" class="hover:text-gray-900 dark:hover:text-gray-200 transition-colors">
-          TIL
-        </a>
-      </li>
-
-      {{/* Category link */}}
-      {{ if .File }}
-        {{ $category := index (split .File.Dir "/") 1 }}
-        {{ if and $category (ne $category "_index.org") }}
-          <li class="flex items-center space-x-2">
-            <span class="text-gray-400">/</span>
-            <a href="/til/#{{ $category | urlize }}" class="hover:text-gray-900 dark:hover:text-gray-200 transition-colors">
-              {{ $category | title }}
-            </a>
-          </li>
-        {{ end }}
-      {{ end }}
-
-      {{/* Current page title */}}
-      <li class="flex items-center space-x-2">
-        <span class="text-gray-400">/</span>
-        <span class="text-gray-900 dark:text-gray-100 font-medium">
-          {{- if .Title -}}
-            {{- .Title -}}
-          {{- else if .RawContent -}}
-            {{- $firstLine := index (split .RawContent "\n") 0 -}}
-            {{- if (hasPrefix $firstLine "* ") -}}
-              {{- trim (strings.TrimPrefix "* " $firstLine) " " -}}
-            {{- else -}}
-              {{- .Params.title -}}
-            {{- end -}}
-          {{- else -}}
-            {{- .Params.title -}}
-          {{- end -}}
-        </span>
-      </li>
-    </ul>
-  </nav>
+    {{ partial "article/breadcrumb.html" . }}
   {{ end }}
 
   {{/* --- Article title --- */}}
@@ -147,7 +35,7 @@
     <hr>
   {{ end }}
 
-  {{ partial "minimal-footer.html" . }}
+  {{ partial "post-tags.html" . }}
 </article>
 
 
@@ -173,6 +61,6 @@
 
 {{/* --- Footer and comments --- */}}
 
-{{ partial "comments.html" . }}
+{{ partial "email-reply.html" . }}
 
 {{ end }}
