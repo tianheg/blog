@@ -1,10 +1,85 @@
 {{ define "main" }}
 
+{{/* ============================================
+     第一部分：解析 Org-mode 链接，构建页面关系
+     ============================================ */}}
+
+{{/* 从原始内容中提取所有 org-mode 格式的链接 [[path][title]] */}}
+{{- $rawContent := .RawContent -}}
+{{- $orgLinkPattern := `\[\[([^\]]+)\]\[[^\]]*\]\]` -}}
+{{- $matches := findRE $orgLinkPattern $rawContent -}}
+
+{{- range $matches -}}
+  {{/* 解析链接格式，提取路径部分 */}}
+  {{- $inner := strings.TrimPrefix "[[" . -}}
+  {{- $inner := strings.TrimSuffix "]]" $inner -}}
+  {{- $parts := split $inner "][" -}}
+  {{- $linkPath := index $parts 0 -}}
+  
+  {{/* 跳过外部链接（以 http/https 开头） */}}
+  {{- if not (hasPrefix $linkPath "http") -}}
+    
+    {{/* 清理路径：移除前导斜杠 */}}
+    {{- $cleanPath := $linkPath -}}
+    {{- if hasPrefix $linkPath "/" -}}
+      {{- $cleanPath = strings.TrimPrefix "/" $linkPath -}}
+    {{- end -}}
+    
+    {{/* 只在允许的栏目中查找目标页面 */}}
+    {{- $target := "" -}}
+    {{- $allowedSections := slice "posts" "til" -}}
+    
+    {{/* 方法1：按路径直接查找 */}}
+    {{- range $allowedSections -}}
+      {{- if not $target -}}
+        {{- $tryPath := printf "%s/%s" . $cleanPath -}}
+        {{- $target = site.GetPage $tryPath -}}
+      {{- end -}}
+    {{- end -}}
+    
+    {{/* 方法2：按文件名/永久链接匹配 */}}
+    {{- if not $target -}}
+      {{- range where site.RegularPages "Section" "in" $allowedSections -}}
+        {{- if not $target -}}
+          {{- if or (eq .File.BaseFileName $cleanPath) (hasSuffix .RelPermalink $cleanPath) -}}
+            {{- $target = . -}}
+          {{- end -}}
+        {{- end -}}
+      {{- end -}}
+    {{- end -}}
+    
+    {{/* 找到目标后，建立双向链接关系 */}}
+    {{- if $target -}}
+      {{/* 为目标页面添加"入链"（当前页面链接到它） */}}
+      {{- with $target.Scratch.Get "incoming" -}}
+        {{- $target.Scratch.Add "incoming" $.Page -}}
+      {{- else -}}
+        {{- $target.Scratch.Set "incoming" (slice $.Page) -}}
+      {{- end -}}
+      
+      {{/* 为当前页面添加"出链"（它链接到目标页面） */}}
+      {{- with $.Page.Scratch.Get "outgoing" -}}
+        {{- $.Page.Scratch.Add "outgoing" $target -}}
+      {{- else -}}
+        {{- $.Page.Scratch.Set "outgoing" (slice $target) -}}
+      {{- end -}}
+    {{- end -}}
+    
+  {{- end -}}
+{{- end -}}
+
+
+{{/* ============================================
+     第二部分：文章主体内容
+     ============================================ */}}
+
 <article data-pagefind-body>
+  
+  {{/* --- TIL 栏目的面包屑导航 --- */}}
   {{ if eq .Section "til" }}
-  <!-- Breadcrumb Navigation -->
   <nav aria-label="breadcrumb" class="mb-6">
     <ul class="flex list-none items-center text-sm text-gray-600 dark:text-gray-400">
+      {{/* 首页链接 */}}
       <li class="flex items-center space-x-2">
         <span class="text-gray-400">/</span>
         <a href="/til/" class="hover:text-gray-900 dark:hover:text-gray-200 transition-colors">
@@ -12,6 +87,7 @@
         </a>
       </li>
 
+      {{/* 分类链接 */}}
       {{ if .File }}
         {{ $category := index (split .File.Dir "/") 1 }}
         {{ if and $category (ne $category "_index.org") }}
@@ -24,6 +100,7 @@
         {{ end }}
       {{ end }}
 
+      {{/* 当前页面标题 */}}
       <li class="flex items-center space-x-2">
         <span class="text-gray-400">/</span>
         <span class="text-gray-900 dark:text-gray-100 font-medium">
@@ -45,37 +122,59 @@
   </nav>
   {{ end }}
 
+  {{/* --- 文章标题 --- */}}
   <h1>{{ .Title }}</h1>
+
+  {{/* --- 发布日期（仅 posts 栏目显示）--- */}}
+  {{ if eq .Section "posts" }}
   <p>
-    {{ if eq .Section "posts" }}
     <time datetime='{{ .Date.Format "2006-01-02" }}'>
       {{ .Date.Format (default "02 Jan, 2006" .Site.Params.dateFormat) }}
     </time>
-    {{ end }}
   </p>
+  {{ end }}
+
+  {{/* --- 正文内容 --- */}}
   <div>
     {{ $content := .Content }}
-    {{ $baseURL := cond hugo.IsProduction .Site.BaseURL "http://localhost:1313/" }}
+    {{/* 为外部链接添加 target="_blank" 和 rel="noreferrer" */}}
     {{ $content = $content | replaceRE `<a href="(https?://[^"]+)"` `<a href="$1" target="_blank" rel="noreferrer"` }}
     {{ $content | safeHTML }}
   </div>
-    {{ if eq .Section "posts" }}
-    <hr>
-    {{ end }}
 
-    {{ partial "edit-link.html" . }}
+  {{/* --- 分隔线（仅 posts 栏目显示）--- */}}
+  {{ if eq .Section "posts" }}
+    <hr>
+  {{ end }}
+
+  {{/* --- 编辑链接 --- */}}
+  {{ partial "edit-link.html" . }}
+  
 </article>
 
-  {{ partial "backlinks.html" . }}
 
-  <section class="flex flex-col space-y-4" aria-hidden="true">
-      <h2 class="flex flex-row items-center space-x-2 text-lg font-semibold">
-        {{ partial "svg/chart-network" }}
-        <span>Graph</span>
-      </h2>
+{{/* ============================================
+     第三部分：相关组件
+     ============================================ */}}
 
-      {{ partial "graph" ( dict "page" . "class" "h-64 ml-6" ) }}
-  </section>
-  {{ partial "minimal-footer.html" . }}
-  {{ partial "comments.html" . }}
+{{/* --- 反向链接列表 --- */}}
+{{ partial "backlinks.html" . }}
+
+
+{{/* --- 知识图谱（仅 posts 和 til 栏目显示）--- */}}
+{{ if or (eq .Section "posts") (eq .Section "til") }}
+<section class="flex flex-col space-y-4" aria-hidden="true">
+  <h2 class="flex flex-row items-center space-x-2 text-lg font-semibold">
+    {{ partial "svg/chart-network" }}
+    <span>Graph</span>
+  </h2>
+  {{ partial "graph" (dict "page" . "class" "h-64 ml-6") }}
+</section>
+{{ end }}
+
+
+{{/* --- 页脚和评论 --- */}}
+{{ partial "minimal-footer.html" . }}
+{{ partial "comments.html" . }}
+
 {{ end }}
