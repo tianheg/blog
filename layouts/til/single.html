@@ -1,10 +1,12 @@
-{{/* Generic single page layout - fallback for content types without specific templates */}}
 {{ define "main" }}
 
 {{/* Build page link relationships */}}
 {{ partial "components/link-relationships.html" . }}
 
 <article data-pagefind-body>
+
+  {{/* Breadcrumb navigation for TIL section */}}
+  {{ partial "content/breadcrumb.html" . }}
 
   {{/* --- Article title --- */}}
   <h1>{{ .Title }}</h1>
@@ -21,8 +23,22 @@
 </article>
 
 
+{{/* ============================================
+     Related components
+     ============================================ */}}
+
 {{/* --- Backlinks list --- */}}
 {{ partial "content/backlinks.html" . }}
+
+
+{{/* --- Knowledge graph --- */}}
+<section class="flex flex-col space-y-4" aria-hidden="true">
+  <h2 class="flex flex-row items-center space-x-2 text-lg font-semibold">
+    {{ partial "svg/chart-network" }}
+    <span>Graph</span>
+  </h2>
+  {{ partial "components/graph.html" (dict "page" . "class" "h-64 ml-6") }}
+</section>
 
 
 {{/* --- Footer and comments --- */}}

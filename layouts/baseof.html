@@ -1,3 +1,52 @@
+{{/*
+
+  LAYOUTS DIRECTORY STRUCTURE
+
+  layouts/
+  ├── baseof.html              # Base template (inherited by all pages)
+  ├── home.html                # Homepage
+  ├── single.html              # Generic single page (fallback)
+  ├── section.html             # Section listing page (with TIL handling)
+  ├── taxonomy.html            # Taxonomy page
+  ├── term.html                # Term page
+  ├── graph.html               # Knowledge graph page
+  ├── 404.html                 # Error page
+  ├── home.sectionsrss.xml     # RSS feed
+  ├── posts/
+  │   └── single.html          # Posts-specific single page
+  ├── til/
+  │   └── single.html          # TIL-specific single page
+  ├── _default/
+  │   └── section.json.json    # JSON output format
+  ├── _partials/
+  │   ├── layout/
+  │   │   └── header.html      # Site header navigation
+  │   ├── content/
+  │   │   ├── breadcrumb.html  # Breadcrumb navigation
+  │   │   ├── post-list-item.html  # Post list item
+  │   │   ├── post-tags.html   # Post tags
+  │   │   └── backlinks.html   # Backlinks list
+  │   ├── components/
+  │   │   ├── back-to-top.html # Back to top button
+  │   │   ├── graph.html       # Knowledge graph component
+  │   │   ├── link-relationships.html  # Page link relationships
+  │   │   ├── service-worker.html      # Service Worker registration
+  │   │   └── email-reply.html         # Email reply section
+  │   ├── head/
+  │   │   ├── styles.html      # CSS styles loading
+  │   │   └── scripts.html     # JS scripts loading
+  │   ├── functions/
+  │   │   ├── get-title.html   # Title getter function
+  │   │   └── linkable-pages.html      # Linkable pages function
+  │   └── svg/
+  │       └── chart-network.html       # Chart SVG icon
+  ├── _shortcodes/
+  │   └── watch.html           # Shortcode: watch list
+  └── graph/
+      └── list.json.json       # Graph JSON data
+
+*/}}
+
 <!DOCTYPE html>
 <html lang="zh">
 
@@ -39,7 +88,7 @@
   <meta name="description" content="{{ $description }}"/>
 
   <!-- CSS -->
-  {{- partialCached "style.html" . -}}
+  {{- partialCached "head/styles.html" . -}}
 
   <!-- Favicon, Icons, Web App -->
   <link rel="icon" href="/favicon.ico" sizes="32x32">
@@ -55,7 +104,7 @@
 <body class="prose md:prose-base lg:prose-sm prose-a:no-underline prose-a:hover:underline prose-a:text-blue-600 dark:prose-a:text-blue-400 prose-a:hover:text-blue-700 dark:prose-a:hover:text-blue-300">
 
   <header class="sticky py-4 top-0 z-1">
-    {{- partial "header.html" . -}}
+    {{- partial "layout/header.html" . -}}
   </header>
   <main class="">
     {{- block "main" . }}{{- end }}
@@ -63,15 +112,15 @@
 
   <!-- Back to top button (only for posts section) -->
   {{ if eq .Section "posts" }}
-    {{- partial "back-to-top.html" . -}}
+    {{- partial "components/back-to-top.html" . -}}
   {{ end }}
 
   <!-- Service Worker registration -->
-  {{- partial "service-worker.html" . -}}
+  {{- partial "components/service-worker.html" . -}}
 
   <!-- Scripts (exclude 404 page) -->
   {{ if ne .Kind "404" }}
-    {{- partial "script.html" . -}}
+    {{- partial "head/scripts.html" . -}}
   {{ end }}
 </body>
 
