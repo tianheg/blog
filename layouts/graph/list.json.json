@@ -28,20 +28,78 @@
     -}}
 {{- end -}}
 
-{{/* Build graph dictionary from Scratch data */}}
+{{/* Parse org-mode links and build graph relationships */}}
 {{- range $pages -}}
+  {{- $currentPage := . -}}
   {{- $incoming := slice -}}
   {{- $outgoing := slice -}}
-  {{- range .Scratch.Get "incoming" -}}
-    {{- if . }}
-      {{- $incoming = $incoming | append .RelPermalink -}}
+
+  {{/* Parse org-mode links from raw content using findRE */}}
+  {{- $rawContent := .RawContent -}}
+  {{- $orgLinkPattern := `\[\[([^\]]+)\]\[[^\]]*\]\]` -}}
+  {{- $matches := findRE $orgLinkPattern $rawContent -}}
+
+  {{- range $matches -}}
+    {{/* Extract path from [[path][title]] format */}}
+    {{- $inner := strings.TrimPrefix "[[" . -}}
+    {{- $inner := strings.TrimSuffix "]]" $inner -}}
+    {{- $parts := split $inner "][" -}}
+    {{- $linkPath := index $parts 0 -}}
+
+    {{/* Skip external links (http/https) */}}
+    {{- if not (hasPrefix $linkPath "http") -}}
+      {{/* Clean up the path - remove leading slash if present */}}
+      {{- $cleanPath := $linkPath -}}
+      {{- if hasPrefix $linkPath "/" -}}
+        {{- $cleanPath = strings.TrimPrefix "/" $linkPath -}}
+      {{- end -}}
+
+      {{/* Only allow links to posts and til sections */}}
+      {{- $allowedSections := slice "posts" "til" -}}
+
+      {{/* Try to find the target page in allowed sections */}}
+      {{- $target := "" -}}
+
+      {{/* Method 1: Try in allowed sections */}}
+      {{- range $allowedSections -}}
+        {{- if not $target -}}
+          {{- $tryPath := printf "%s/%s" . $cleanPath -}}
+          {{- $target = site.GetPage $tryPath -}}
+        {{- end -}}
+      {{- end -}}
+
+      {{/* Method 2: Try to match by filename/permalink in allowed sections */}}
+      {{- if not $target -}}
+        {{- range $pages -}}
+          {{- if not $target -}}
+            {{- if or (eq .File.BaseFileName $cleanPath) (hasSuffix .RelPermalink $cleanPath) -}}
+              {{- $target = . -}}
+            {{- end -}}
+          {{- end -}}
+        {{- end -}}
+      {{- end -}}
+
+      {{/* If found, add to outgoing links */}}
+      {{- if $target -}}
+        {{- $outgoing = $outgoing | append $target.RelPermalink -}}
+      {{- end -}}
     {{- end -}}
   {{- end -}}
-  {{- range .Scratch.Get "outgoing" -}}
-    {{- if . }}
-      {{- $outgoing = $outgoing | append .RelPermalink -}}
-    {{- end -}}
-  {{- end -}}
+
   {{- $graphDict = merge $graphDict ( dict .RelPermalink ( dict "in" $incoming "out" $outgoing ) ) -}}
 {{- end -}}
+
+{{/* Build incoming links from outgoing links */}}
+{{- range $relPermalink, $data := $graphDict -}}
+  {{- range $data.out -}}
+    {{- $targetPermalink := . -}}
+    {{- $targetData := index $graphDict $targetPermalink -}}
+    {{- if $targetData -}}
+      {{- $newIncoming := $targetData.in | append $relPermalink -}}
+      {{- $newTargetData := dict "in" $newIncoming "out" $targetData.out -}}
+      {{- $graphDict = merge $graphDict (dict $targetPermalink $newTargetData) -}}
+    {{- end -}}
+  {{- end -}}
+{{- end -}}
+
 {{ jsonify (dict "indent" "  ") ( dict "pages" $pageDict "graph" $graphDict ) }}
