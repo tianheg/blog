@@ -26,12 +26,12 @@
     {{- $outCount := len $links.out -}}
     {{- if or (gt $inCount 0) (gt $outCount 0) -}}
       {{- $pageInfo := index $pages $path -}}
-      {{- $linkedArticles = $linkedArticles | append (dict 
-        "path" $path 
-        "title" $pageInfo.title 
-        "section" $pageInfo.section 
-        "in" $inCount 
-        "out" $outCount 
+      {{- $linkedArticles = $linkedArticles | append (dict
+        "path" $path
+        "title" $pageInfo.title
+        "section" $pageInfo.section
+        "in" $inCount
+        "out" $outCount
         "total" (add $inCount $outCount)
       ) -}}
     {{- end -}}
@@ -47,19 +47,30 @@
     {{/* Render page description content from content/graph/_index.org */}}
     {{ .Content }}
 
+    {{/*
+      Relationship graph display area
+      Parameter description:
+      - scaleNodes: true - Enable node scaling
+      - class: "h-96" - Set graph height to 24rem (384px)
+    */}}
+    <section class="mt-12">
+      <h2>Graph Visualization (Zoom required, please wait)</h2>
+      {{ partial "components/graph" ( dict "scaleNodes" true "class" "h-96" ) }}
+    </section>
+
     {{/* Linked articles statistics */}}
     <section class="mt-8">
-      <h2>有网络链接的文章</h2>
-      <p class="text-sm opacity-80 mb-4">共找到 {{ len $linkedArticles }} 篇文章存在链接关系</p>
-      
+      <h2>Articles with Network Links</h2>
+      <p class="text-sm opacity-80 mb-4">Found {{ len $linkedArticles }} articles with link relationships</p>
+
       <div class="overflow-x-auto">
         <table class="w-full text-sm">
           <thead>
             <tr class="border-b border-gray-300 dark:border-gray-700">
-              <th class="text-left py-2 px-2">文章标题</th>
-              <th class="text-center py-2 px-2">入链</th>
-              <th class="text-center py-2 px-2">出链</th>
-              <th class="text-center py-2 px-2">总计</th>
+              <th class="text-left py-2 px-2">Article Title</th>
+              <th class="text-center py-2 px-2">Inlinks</th>
+              <th class="text-center py-2 px-2">Outlinks</th>
+              <th class="text-center py-2 px-2">Total</th>
             </tr>
           </thead>
           <tbody>
@@ -78,17 +89,6 @@
           </tbody>
         </table>
       </div>
-    </section>
-
-    {{/*
-      Relationship graph display area
-      Parameter description:
-      - scaleNodes: true - Enable node scaling
-      - class: "h-96" - Set graph height to 24rem (384px)
-    */}}
-    <section class="mt-12">
-      <h2>关系图可视化</h2>
-      {{ partial "components/graph" ( dict "scaleNodes" true "class" "h-96" ) }}
     </section>
   </article>
 {{ end }}
