@@ -1,0 +1,94 @@
+{{/*
+  Graph page layout template
+  ==========================
+  Purpose: Provides a dedicated layout for the /graph/ path to display the blog content relationship graph
+
+  Related files:
+  ---------
+  1. content/graph/_index.org - Page content source file, defines title and description
+  2. layouts/_partials/graph.html - Graph component partial template
+  3. layouts/graph/list.json.json - Template that generates JSON data required for the graph
+  4. assets/ts/components/ContentNetworkGraph.ts - content-network-graph Web Component
+
+  How it works:
+  ---------
+  This template calls the "graph" partial to render the <content-network-graph> Web Component,
+  which fetches data from graph/index.json and visualizes the link relationships between content.
+*/}}
+
+{{ define "main" }}
+  {{- $graphData := partialCached "functions/graph-data" "graph-data-key" -}}
+  {{- $pages := $graphData.pages -}}
+  {{- $graph := $graphData.graph -}}
+  {{- $linkedArticles := slice -}}
+  {{- range $path, $links := $graph -}}
+    {{- $inCount := len $links.in -}}
+    {{- $outCount := len $links.out -}}
+    {{- if or (gt $inCount 0) (gt $outCount 0) -}}
+      {{- $pageInfo := index $pages $path -}}
+      {{- $linkedArticles = $linkedArticles | append (dict 
+        "path" $path 
+        "title" $pageInfo.title 
+        "section" $pageInfo.section 
+        "in" $inCount 
+        "out" $outCount 
+        "total" (add $inCount $outCount)
+      ) -}}
+    {{- end -}}
+  {{- end -}}
+  {{- $sortedArticles := sort $linkedArticles "total" "desc" -}}
+
+  <article class="main">
+    {{/* Page title area */}}
+    <header>
+      <h1 class="!mb-1">{{ .Title | title }}</h1>
+    </header>
+
+    {{/* Render page description content from content/graph/_index.org */}}
+    {{ .Content }}
+
+    {{/* Linked articles statistics */}}
+    <section class="mt-8">
+      <h2>有网络链接的文章</h2>
+      <p class="text-sm opacity-80 mb-4">共找到 {{ len $linkedArticles }} 篇文章存在链接关系</p>
+      
+      <div class="overflow-x-auto">
+        <table class="w-full text-sm">
+          <thead>
+            <tr class="border-b border-gray-300 dark:border-gray-700">
+              <th class="text-left py-2 px-2">文章标题</th>
+              <th class="text-center py-2 px-2">入链</th>
+              <th class="text-center py-2 px-2">出链</th>
+              <th class="text-center py-2 px-2">总计</th>
+            </tr>
+          </thead>
+          <tbody>
+            {{- range $sortedArticles -}}
+            <tr class="border-b border-gray-200 dark:border-gray-800 hover:bg-gray-100 dark:hover:bg-gray-900">
+              <td class="py-2 px-2">
+                <a href="{{ .path }}" class="text-blue-600 dark:text-blue-400 hover:underline">
+                  {{- .title -}}
+                </a>
+              </td>
+              <td class="text-center py-2 px-2">{{ .in }}</td>
+              <td class="text-center py-2 px-2">{{ .out }}</td>
+              <td class="text-center py-2 px-2 font-medium">{{ .total }}</td>
+            </tr>
+            {{- end -}}
+          </tbody>
+        </table>
+      </div>
+    </section>
+
+    {{/*
+      Relationship graph display area
+      Parameter description:
+      - scaleNodes: true - Enable node scaling
+      - class: "h-96" - Set graph height to 24rem (384px)
+    */}}
+    <section class="mt-12">
+      <h2>关系图可视化</h2>
+      {{ partial "components/graph" ( dict "scaleNodes" true "class" "h-96" ) }}
+    </section>
+  </article>
+{{ end }}
