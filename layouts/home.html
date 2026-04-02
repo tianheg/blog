@@ -4,7 +4,7 @@
 <div class="mb-12">
   <h1 class="text-3xl font-bold mb-6">Welcome</h1>
   <p class="text-lg mb-4">Hi, I'm tianheg. I write this blog in both Chinese and English to share my life experiences.</p>
-  <p class="">I hope you enjoy reading it!</p>
+  <p class="text-lg">I hope you enjoy reading it!</p>
 </div>
 
 <hr class="my-8">
@@ -15,10 +15,10 @@
     <h2 class="text-2xl font-bold">Recent Posts</h2>
     <a href="/posts" class="text-blue-600 dark:text-blue-400 hover:underline">View all →</a>
   </div>
-  
+
   {{ $posts := where .Site.RegularPages "Section" "posts" }}
   {{ $recentPosts := first 5 $posts }}
-  
+
   {{ if $recentPosts }}
     <ul class="space-y-4">
       {{ range $recentPosts }}
@@ -43,11 +43,11 @@
     <h2 class="text-2xl font-bold">Recent TIL</h2>
     <a href="/til" class="text-blue-600 dark:text-blue-400 hover:underline">View all →</a>
   </div>
-  
+
   {{ $til := where .Site.RegularPages "Section" "til" }}
   {{ $sortedTil := sort $til ".Lastmod" "desc" }}
   {{ $recentTil := first 5 $sortedTil }}
-  
+
   {{ if $recentTil }}
     <ul class="space-y-4">
       {{ range $recentTil }}
