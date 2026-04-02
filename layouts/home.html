@@ -45,7 +45,7 @@
   </div>
 
   {{ $til := where .Site.RegularPages "Section" "til" }}
-  {{ $sortedTil := sort $til ".Lastmod" "desc" }}
+  {{ $sortedTil := sort $til ".GitInfo.AuthorDate" "desc" }}
   {{ $recentTil := first 5 $sortedTil }}
 
   {{ if $recentTil }}
