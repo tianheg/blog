@@ -2,6 +2,7 @@ baseURL: "https://tianheg.co/"
 pluralizeListTitles: false
 summaryLength: 42
 title: "Tianhe Gao"
+enableGitInfo: true
 
 build:
   cachebusters:
@@ -12,11 +13,10 @@ frontmatter:
   date:
     - date
     - :filename
-    - :default
   lastmod:
     - lastmod
     - :git
-    - :default
+    - :fileModTime
 
 markup:
   highlight:
