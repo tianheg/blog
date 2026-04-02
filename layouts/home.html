@@ -45,8 +45,8 @@
   </div>
 
   {{ $til := where .Site.RegularPages "Section" "til" }}
-  {{ $sortedTil := sort $til ".GitInfo.AuthorDate" "desc" }}
-  {{ $recentTil := first 5 $sortedTil }}
+  {{ $shuffledTil := shuffle $til }}
+  {{ $recentTil := first 5 $shuffledTil }}
 
   {{ if $recentTil }}
     <ul class="space-y-4">
