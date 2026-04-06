@@ -1,0 +1,30 @@
+* Git abort merge
+
+** 💡 重述理解
+#+BEGIN_QUOTE
+核心是：中止正在进行的合并操作，让工作区回到合并前的干净状态
+记它是为了：在合并出现冲突或发现合错分支时快速回滚
+#+END_QUOTE
+
+** 📋 内容主体
+
+【重点】仅在合并过程中有效（存在 .git/MERGE_HEAD 文件时）
+
+【代码】
+#+BEGIN_SRC bash
+git merge --abort
+#+END_SRC
+
+【步骤】1. 开始合并分支
+#+BEGIN_SRC bash
+git merge feature
+#+END_SRC
+
+【步骤】2. 发现冲突太多或合并错了分支，放弃合并
+#+BEGIN_SRC bash
+git merge --abort
+#+END_SRC
+
+【警告】会丢弃已解决的冲突修改，谨慎使用
+
+【提示】如果合并已经完成（已提交），需要使用 =git reset= 回退
