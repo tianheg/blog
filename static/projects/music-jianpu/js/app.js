@@ -521,7 +521,7 @@ function renderCategory(type, filter) {
   return fragment;
 }
 
-// 渲染曲谱详情
+// 渲染曲谱详情（直接显示乐谱查看器）
 function renderScoreDetail(scoreId) {
   const score = getScoreById(scoreId);
   
@@ -555,46 +555,26 @@ function renderScoreDetail(scoreId) {
   });
   fragment.appendChild(breadcrumb);
   
-  // 详情头部
-  const detailHeader = document.createElement('header');
-  detailHeader.className = 'detail-header';
-  detailHeader.innerHTML = `
-    <img src="${escapeHtml(score.cover)}" 
-         alt="${escapeHtml(score.title)} 封面" 
-         class="detail-cover">
-    <div class="detail-info">
-      <h1 class="detail-title">${escapeHtml(score.title)}</h1>
-      <p class="detail-composer">${escapeHtml(score.composer)}${score.opus ? ` · ${escapeHtml(score.opus)}` : ''}</p>
-      <div class="detail-meta">
+  // 曲谱信息头部
+  const infoHeader = document.createElement('div');
+  infoHeader.className = 'detail-header';
+  infoHeader.style.marginBottom = '1rem';
+  infoHeader.innerHTML = `
+    <div class="detail-info" style="flex: 1;">
+      <h1 class="detail-title" style="font-size: 1.25rem; margin-bottom: 0.25rem;">${escapeHtml(score.title)}</h1>
+      <p class="detail-composer" style="font-size: 0.875rem; margin-bottom: 0.5rem;">${escapeHtml(score.composer)}${score.opus ? ` · ${escapeHtml(score.opus)}` : ''}</p>
+      <div class="detail-meta" style="margin-bottom: 0;">
         <span class="difficulty-badge difficulty-${escapeHtml(score.difficulty)}">${escapeHtml(score.difficulty)}</span>
-        <span class="detail-tag">${escapeHtml(score.period)}</span>
-        ${score.tags.map(tag => `<span class="detail-tag">${escapeHtml(tag)}</span>`).join('')}
-      </div>
-      <p class="detail-notes">${escapeHtml(score.notes)}</p>
-      <div class="detail-actions">
-        <button class="btn btn-primary" id="btn-view">
-          <span>👁</span> 查看乐谱
-        </button>
-        <button class="btn btn-secondary" onclick="history.back()">
-          <span>←</span> 返回
-        </button>
+        <span class="period-tag">${escapeHtml(score.period)}</span>
       </div>
     </div>
   `;
-  fragment.appendChild(detailHeader);
+  fragment.appendChild(infoHeader);
   
-  // 图片查看器
+  // 图片查看器（直接显示）
   const viewer = document.createElement('div');
   viewer.className = 'image-viewer';
   viewer.innerHTML = `
-    <div class="viewer-toolbar">
-      <span class="viewer-title">${escapeHtml(score.title)}</span>
-      <div class="viewer-controls">
-        <button class="viewer-btn" id="viewer-zoom-out" aria-label="缩小">−</button>
-        <button class="viewer-btn" id="viewer-zoom-in" aria-label="放大">+</button>
-        <button class="viewer-btn" id="viewer-fullscreen" aria-label="全屏">⛶</button>
-      </div>
-    </div>
     <div class="viewer-content" id="viewer-content">
       <button class="viewer-nav prev" id="viewer-prev" aria-label="上一页">‹</button>
       <img src="${escapeHtml(score.pages[state.currentPage])}" 
@@ -678,40 +658,19 @@ function renderScoreDetail(scoreId) {
     }
   }, { passive: true });
   
-  // 滚轮缩放
-  let scale = 1;
-  const img = viewer.querySelector('#viewer-image');
-  
-  viewer.querySelector('#viewer-zoom-in').addEventListener('click', () => {
-    scale = Math.min(scale + 0.2, 3);
-    img.style.transform = `scale(${scale})`;
-  });
-  
-  viewer.querySelector('#viewer-zoom-out').addEventListener('click', () => {
-    scale = Math.max(scale - 0.2, 0.5);
-    img.style.transform = `scale(${scale})`;
-  });
-  
-  // 全屏
-  viewer.querySelector('#viewer-fullscreen').addEventListener('click', () => {
-    if (!document.fullscreenElement) {
-      viewerContent.requestFullscreen?.();
-    } else {
-      document.exitFullscreen?.();
-    }
-  });
-  
   // 初始状态
   updateViewer();
   
-  // 默认隐藏查看器，点击按钮后显示
-  viewer.style.display = 'none';
-  detailHeader.querySelector('#btn-view').addEventListener('click', () => {
-    viewer.style.display = 'block';
-    viewer.scrollIntoView({ behavior: 'smooth', block: 'start' });
-  });
-  
   fragment.appendChild(viewer);
+  
+  // 曲谱说明（折叠显示）
+  if (score.notes) {
+    const notesSection = document.createElement('div');
+    notesSection.className = 'detail-notes';
+    notesSection.style.marginTop = '1rem';
+    notesSection.innerHTML = `<p>${escapeHtml(score.notes)}</p>`;
+    fragment.appendChild(notesSection);
+  }
   
   return fragment;
 }

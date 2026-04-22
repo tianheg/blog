@@ -10,22 +10,22 @@
   --color-text: #1a1a1a;
   --color-text-secondary: #666666;
   --color-border: #e0e0e0;
-  --color-primary: #2563eb;
-  --color-primary-hover: #1d4ed8;
+  --color-primary: #14b8a6;
+  --color-primary-hover: #0d9488;
   --color-accent: #f59e0b;
   --color-success: #10b981;
   --color-error: #ef4444;
-  
+
   --sidebar-width: 260px;
   --sidebar-collapsed: 60px;
   --header-height: 56px;
   --border-radius: 12px;
   --border-radius-sm: 8px;
-  
+
   --shadow-sm: 0 1px 2px rgba(0,0,0,0.05);
   --shadow-md: 0 4px 6px -1px rgba(0,0,0,0.1);
   --shadow-lg: 0 10px 15px -3px rgba(0,0,0,0.1);
-  
+
   --transition: all 0.2s ease;
 }
 
@@ -752,28 +752,41 @@ body {
   position: absolute;
   top: 50%;
   transform: translateY(-50%);
-  width: 44px;
-  height: 44px;
+  width: 40px;
+  height: 40px;
   display: flex;
   align-items: center;
   justify-content: center;
   background: rgba(255,255,255,0.9);
   border: none;
   border-radius: 50%;
-  color: var(--color-text);
+  color: #333;
   cursor: pointer;
   font-size: 1.25rem;
   transition: var(--transition);
-  box-shadow: var(--shadow-md);
+  box-shadow: 0 2px 8px rgba(0,0,0,0.3);
 }
 
 .viewer-nav:hover {
-  background: white;
-  transform: translateY(-50%) scale(1.1);
+  background: rgba(255,255,255,1);
 }
 
-.viewer-nav.prev { left: 1rem; }
-.viewer-nav.next { right: 1rem; }
+.viewer-nav:disabled {
+  opacity: 0.3;
+  cursor: not-allowed;
+}
+
+.viewer-nav.prev { left: 0.5rem; }
+.viewer-nav.next { right: 0.5rem; }
+
+@media (min-width: 768px) {
+  .viewer-nav {
+    width: 44px;
+    height: 44px;
+  }
+  .viewer-nav.prev { left: 1rem; }
+  .viewer-nav.next { right: 1rem; }
+}
 
 .viewer-pagination {
   text-align: center;
@@ -933,40 +946,40 @@ body {
   .hero-title {
     font-size: 2.25rem;
   }
-  
+
   .stats-grid {
     grid-template-columns: repeat(3, 1fr);
     gap: 1rem;
   }
-  
+
   .stat-card {
     padding: 1.5rem;
   }
-  
+
   .stat-number {
     font-size: 2rem;
   }
-  
+
   .score-grid {
     grid-template-columns: repeat(2, 1fr);
     gap: 1.25rem;
   }
-  
+
   .detail-header {
     flex-direction: row;
     align-items: flex-start;
   }
-  
+
   .detail-cover {
     width: 240px;
     margin: 0;
     flex-shrink: 0;
   }
-  
+
   .btn {
     flex: 0 0 auto;
   }
-  
+
   .viewer-image {
     max-height: 70vh;
   }
@@ -982,9 +995,10 @@ body {
   }
   
   .nav-sidebar {
-    position: relative;
+    position: fixed;
     transform: none;
     width: var(--sidebar-width);
+    height: 100vh;
   }
   
   .nav-close-btn {
@@ -992,34 +1006,34 @@ body {
   }
   
   .main-content {
-    margin-left: 0;
+    margin-left: var(--sidebar-width);
   }
-  
+
   .menu-toggle {
     display: none;
   }
-  
+
   .content-area {
     padding: 1.5rem;
   }
-  
+
   .hero-section {
     padding: 3rem 1rem;
   }
-  
+
   .hero-title {
     font-size: 2.5rem;
   }
-  
+
   .score-grid {
     grid-template-columns: repeat(3, 1fr);
     gap: 1.5rem;
   }
-  
+
   .detail-title {
     font-size: 1.75rem;
   }
-  
+
   .viewer-image {
     max-height: 80vh;
   }
@@ -1033,7 +1047,7 @@ body {
   .score-grid {
     grid-template-columns: repeat(4, 1fr);
   }
-  
+
   .content-area {
     padding: 2rem;
   }
@@ -1047,19 +1061,19 @@ body {
   .nav-sidebar {
     width: 240px;
   }
-  
+
   .nav-header {
     padding: 0.75rem;
   }
-  
+
   .nav-link {
     padding: 0.625rem 0.75rem;
   }
-  
+
   .hero-section {
     padding: 1rem;
   }
-  
+
   .hero-title {
     font-size: 1.5rem;
   }
@@ -1079,7 +1093,7 @@ body {
   .menu-toggle {
     min-height: 44px;
   }
-  
+
   .viewer-nav {
     width: 48px;
     height: 48px;
@@ -1104,6 +1118,30 @@ body {
   .detail-cover {
     background: linear-gradient(135deg, #2a2a2a 0%, #1a1a1a 100%);
   }
+  
+  .viewer-nav {
+    background: rgba(30, 30, 30, 0.9);
+    color: var(--color-text);
+  }
+  
+  .viewer-nav:hover {
+    background: rgba(50, 50, 50, 0.95);
+  }
+  
+  .search-input {
+    background: var(--color-surface);
+    color: var(--color-text);
+    border-color: var(--color-border);
+  }
+  
+  .search-input::placeholder {
+    color: var(--color-text-secondary);
+  }
+  
+  .search-input:focus {
+    background: var(--color-surface);
+    border-color: var(--color-primary);
+  }
 }
 
 /* ============================================
@@ -1119,15 +1157,15 @@ body {
   .btn {
     display: none !important;
   }
-  
+
   .main-content {
     margin-left: 0;
   }
-  
+
   .viewer-content {
     background: white;
   }
-  
+
   .viewer-image {
     max-height: none;
     page-break-inside: avoid;
