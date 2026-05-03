@@ -1,0 +1,39 @@
+#+TITLE: WIP: How to Deploy LobeHub on Railway
+#+DATE: <2026-05-01 Fri 22:13>
+#+TAGS[]: 技术 English
+
+I finally figured out how to deploy LobeHub on Railway. LobeHub is an open-source AI agent platform that helps me build my own knowledgebase. Railway is my main SaaS platform for deploying Docker apps.
+
+I did find some templates on the [[https://railway.com/deploy?q=lobe][Railway Marketplace]]. However, I didn't find the right one for me, so I chose to create one myself. I used LobeHub(v2.1.56) to build it.
+
+Choosing the database was a bit troublesome. I couldn't use the Railway official PostgreSQL template, because it doesn't support the =pg_search= extension. After some research, I chose [[https://github.com/paradedb/paradedb][ParadeDB]] for my PostgreSQL database, since it supports. I use the Docker image =lobehub/lobehub= for faster build times. The variables are listed below:
+
+#+BEGIN_SRC conf
+APP_URL="https://${{RAILWAY_PUBLIC_DOMAIN}}"
+DATABASE_URL="postgres://${{ParadeDB.PGUSER}}:${{ParadeDB.PGPASSWORD}}@${{ParadeDB.PGHOST}}:${{ParadeDB.PGPORT}}/${{ParadeDB.PGDATABASE}}"
+QSTASH_TOKEN=""
+## deployed a SearXNG instance on Railway
+SEARCH_PROVIDERS="searxng"
+SEARXNG_URL=""
+## the following can be obtained from https://lobehub.com/docs/self-hosting/platform/docker#deploying-on-a-linux-server
+KEY_VAULTS_SECRET=""
+AUTH_SECRET=""
+JWKS_KEY=""
+## chose Cloudflare R2
+S3_ACCESS_KEY_ID=""
+S3_SECRET_ACCESS_KEY=""
+S3_ENDPOINT=""
+S3_BUCKET=""
+#+END_SRC
+
+Then set the port in the networking settings to =8080= .
+
+After the above setup, you will have a LobeHub instance up and running!
+
+However, I can't run commands on my self-hosted instance because the market authorization failed:
+
+#+BEGIN_QUOTE
+Market authorization expired. An authorization dialog has been shown to the user. Please wait for the user to complete authorization and then retry the current task.
+#+END_QUOTE
+
+I'm thinking about how to remove that part so that I can run cmds freely. I'm working on it.
