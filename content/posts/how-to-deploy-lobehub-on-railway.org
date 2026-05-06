@@ -1,6 +1,8 @@
-#+TITLE: WIP: How to Deploy LobeHub on Railway
+#+TITLE: How to Deploy LobeHub on Railway
 #+DATE: <2026-05-01 Fri 22:13>
 #+TAGS[]: 技术 English
+
+* How to Deploy LobeHub on Railway
 
 I finally figured out how to deploy LobeHub on Railway. LobeHub is an open-source AI agent platform that helps me build my own knowledgebase. Railway is my main SaaS platform for deploying Docker apps.
 
@@ -37,3 +39,7 @@ Market authorization expired. An authorization dialog has been shown to the user
 #+END_QUOTE
 
 I'm thinking about how to remove that part so that I can run cmds freely. I'm working on it.
+
+* Add third-party sandbox(AIO Sandbox) to LobeHub
+
+I'm not going to remove the official cloud-sandbox -- it's too much trouble. I deployed [[https://github.com/agent-infra/sandbox][AIO sandbox]] on Railway, accessing it through MCP(streamable HTTP). But it needs a lot of memory to run, so I need to enable serverless mode to reduce resource usage. And it takes about 20 minutes to deploy, so don't worry if it doesn't deploy quickly.
