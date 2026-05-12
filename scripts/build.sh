@@ -1,4 +1,5 @@
 #!/usr/bin/env bash
+set -euo pipefail
 
 main() {
 
@@ -37,5 +38,4 @@ main() {
 
 }
 
-set -euo pipefail
 main "$@"
