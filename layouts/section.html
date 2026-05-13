@@ -88,16 +88,7 @@
           {{ range $categoryPages }}
             <li>
               <a href="{{ .RelPermalink }}">
-                {{- if .Title -}}
-                  {{- .Title -}}
-                {{- else if .RawContent -}}
-                  {{- $firstLine := index (split .RawContent "\n") 0 -}}
-                  {{- if (hasPrefix $firstLine "* ") -}}
-                    {{- trim (strings.TrimPrefix "* " $firstLine) " " -}}
-                  {{- end -}}
-                {{- else -}}
-                  {{- .Params.title -}}
-                {{- end -}}
+                {{- partial "functions/get-title" (dict "page" .) -}}
               </a>
             </li>
           {{ end }}

@@ -65,21 +65,8 @@
 
   <title>
   {{- block "title" . }}
-    {{- if .Title -}}
-      {{- .Title -}}
-    {{- else if .RawContent -}}
-      {{- $firstLine := index (split .RawContent "\n") 0 -}}
-      {{- if (hasPrefix $firstLine "* ") -}}
-        {{- trim (strings.TrimPrefix "* " $firstLine) " " -}}
-      {{- else -}}
-        {{- .Params.title | default .Site.Title -}}
-      {{- end -}}
-    {{- else -}}
-      {{- .Params.title | default .Site.Title -}}
-    {{- end -}}
-
+    {{- partial "functions/get-title" (dict "page" . "fallback" .Site.Title) -}}
     {{- " | " -}}
-
     {{- .Site.Title -}}
   {{- end -}}
   </title>
@@ -101,12 +88,14 @@
   <link rel="canonical" href="{{ .Permalink }}"/>
 </head>
 
-<body class="prose md:prose-base lg:prose-sm prose-a:no-underline prose-a:hover:underline prose-a:text-blue-600 dark:prose-a:text-blue-400 prose-a:hover:text-blue-700 dark:prose-a:hover:text-blue-300">
+<body class="prose md:prose-base lg:prose-sm max-w-none prose-a:no-underline prose-a:hover:underline prose-a:text-blue-600 dark:prose-a:text-blue-400 prose-a:hover:text-blue-700 dark:prose-a:hover:text-blue-300">
 
   <header class="sticky py-4 top-0 z-1">
+    <div class="max-w-3xl mx-auto px-5">
     {{- partial "layout/header.html" . -}}
+    </div>
   </header>
-  <main class="">
+  <main class="max-w-3xl mx-auto px-5">
     {{- block "main" . }}{{- end }}
   </main>
 

@@ -7,7 +7,7 @@
 <article data-pagefind-body>
 
   {{/* --- Article title --- */}}
-  <h1>{{ .Title }}</h1>
+  <h1>{{ partial "functions/get-title" (dict "page" .) }}</h1>
 
   {{/* --- Main content --- */}}
   <div>

@@ -23,7 +23,7 @@
     <ul class="space-y-4">
       {{ range $recentPosts }}
         <li class="border-b border-gray-200 dark:border-gray-700 pb-4 last:border-0">
-          <a href="{{ .RelPermalink }}" class="text-lg font-medium hover:underline block mb-1">{{ .Title }}</a>
+          <a href="{{ .RelPermalink }}" class="text-lg font-medium hover:underline block mb-1">{{ partial "functions/get-title" (dict "page" .) }}</a>
           <time class="text-sm text-gray-500 dark:text-gray-400" datetime="{{ .Date.Format "2006-01-02" }}">
             {{ .Date.Format "2006-01-02" }}
           </time>
@@ -52,18 +52,9 @@
     <ul class="space-y-4">
       {{ range $recentTil }}
         {{ if ne .Title "Tils" }}
-        {{ $firstLine := index (split .RawContent "\n") 0 }}
-        {{ $tilTitle := "" }}
-        {{ if hasPrefix $firstLine "* " }}
-          {{ $tilTitle = trim (strings.TrimPrefix "* " $firstLine) " " }}
-        {{ else if .Title }}
-          {{ $tilTitle = .Title }}
-        {{ else }}
-          {{ $tilTitle = .File.BaseFileName }}
-        {{ end }}
         <li class="border-b border-gray-200 dark:border-gray-700 pb-4 last:border-0 flex items-center justify-between gap-4">
           <a href="{{ .RelPermalink }}" class="text-lg font-medium hover:underline">
-            {{ $tilTitle }}
+            {{ partial "functions/get-title" (dict "page" .) }}
           </a>
           {{ $dirPath := .File.Dir | strings.TrimPrefix "til/" | strings.TrimSuffix "/" }}
           {{ $category := index (split $dirPath "/") 0 }}
