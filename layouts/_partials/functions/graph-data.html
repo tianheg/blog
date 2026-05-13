@@ -9,21 +9,7 @@
 
 {{/* Build page dictionary */}}
 {{- range $pages -}}
-  {{- $title := .Title -}}
-  {{- /* Fallback: extract title from first heading if .Title is empty */ -}}
-  {{- if not $title -}}
-    {{- $rawContent := .RawContent -}}
-    {{- $lines := split $rawContent "\n" -}}
-    {{- range $lines -}}
-      {{- if and (not $title) (strings.HasPrefix . "* ") -}}
-        {{- $title = strings.TrimPrefix "* " . -}}
-      {{- end -}}
-    {{- end -}}
-  {{- end -}}
-  {{- /* Final fallback: use filename if still no title */ -}}
-  {{- if not $title -}}
-    {{- $title = .File.BaseFileName -}}
-  {{- end -}}
+  {{- $title := partial "functions/get-title" (dict "page" .) -}}
   {{- $pageDict = merge $pageDict ( dict .RelPermalink ( dict
     "permalink" .RelPermalink
     "title" ( $title | plainify | htmlUnescape | chomp | title )
