@@ -2,11 +2,17 @@ baseURL: "https://tianheg.co/"
 pluralizeListTitles: false
 summaryLength: 42
 title: "Tianhe Gao"
-enableGitInfo: true
+# enableGitInfo: 关掉以加速构建（每篇文章都会触发 git log）
+# 如需恢复，改为 true 即可
+enableGitInfo: false
 
 build:
   cachebusters:
     - source: "layouts/.*"
+      target: css
+    - source: "assets/ts/.*"
+      target: js
+    - source: "assets/css/.*"
       target: css
 
 frontmatter:

@@ -6,6 +6,7 @@
 // Import custom web components and utility functions
 import ContentNetworkGraph from "./components/ContentNetworkGraph";
 import { setupBackToTop } from "./components/BackToTop";
+import { initBacklinks } from "./components/Backlinks";
 
 /**
  * Register the ContentNetworkGraph as a custom element.
@@ -26,6 +27,9 @@ window.addEventListener(
   () => {
     // Set up the "back to top" button functionality
     setupBackToTop();
+
+    // Load backlinks from pre-computed graph JSON
+    initBacklinks();
   },
   { once: true },
 );

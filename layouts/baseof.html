@@ -13,7 +13,7 @@
   ├── 404.html                 # Error page
   ├── home.sectionsrss.xml     # RSS feed
   ├── posts/
-  │   └── single.html          # Posts-specific single page
+  │   └── single.html          # Posts-specific single page (includes SW registration)
   ├── til/
   │   └── single.html          # TIL-specific single page
   ├── _default/
@@ -28,12 +28,12 @@
   │   │   └── backlinks.html   # Backlinks list
   │   ├── components/
   │   │   ├── back-to-top.html # Back to top button
-  │   │   ├── graph.html       # Knowledge graph component
+  │   │   ├── graph.html       # Knowledge graph component (lazy loaded)
   │   │   ├── link-relationships.html  # Page link relationships
-  │   │   ├── service-worker.html      # Service Worker registration
+  │   │   ├── service-worker.html      # Service Worker registration (moved to posts/single.html)
   │   │   └── email-reply.html         # Email reply section
   │   ├── head/
-  │   │   ├── styles.html      # CSS styles loading
+  │   │   ├── styles.html      # CSS styles loading (simplified)
   │   │   └── scripts.html     # JS scripts loading
   │   ├── functions/
   │   │   ├── get-title.html   # Title getter function
@@ -82,6 +82,9 @@
   <link rel="icon" href="/icon.svg" type="image/svg+xml"/>
   <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png"/>
   <link rel="manifest" href="/manifest.webmanifest"/>
+  <!-- Preload fonts to reduce FOUT (flash of unstyled text) -->
+  <link rel="preload" href="/fonts/Satoshi-Variable.woff2" as="font" type="font/woff2" crossorigin="anonymous">
+  <link rel="preload" href="/fonts/Satoshi-VariableItalic.woff2" as="font" type="font/woff2" crossorigin="anonymous">
   {{ with .OutputFormats.Get "SectionsRSS" -}}
     <link rel="{{ .Rel }}" type="{{ .MediaType }}" href="{{ .Permalink }}" title="{{ $.Site.Title }}"/>
   {{ end }}
@@ -104,8 +107,7 @@
     {{- partial "components/back-to-top.html" . -}}
   {{ end }}
 
-  <!-- Service Worker registration -->
-  {{- partial "components/service-worker.html" . -}}
+  <!-- Service Worker registration: moved to layouts/posts/single.html -->
 
   <!-- Scripts (exclude 404 page) -->
   {{ if ne .Kind "404" }}

@@ -1,8 +1,11 @@
 {{/* Render the interactive network graph web component */}}
-{{/* 
+{{/*
    Parameters:
    - class: CSS height class (default: h-96)
    - page: Current page object (optional) - when provided, shows subgraph centered on this page
+
+   Note: Lazy loading is handled internally by the web component via Intersection Observer.
+   The component only fetches graph data when it becomes visible in the viewport.
 */}}
 <content-network-graph
   class="{{ .class | default "h-96" }}"

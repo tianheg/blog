@@ -1,5 +1,6 @@
 {{/* ============================================
      Parse Org-mode links and build page relationships
+     Note: This runs at build time via cache to avoid repeated parsing
      ============================================ */}}
 
 {{/* Extract all org-mode format links [[path][title]] from raw content */}}
@@ -46,20 +47,20 @@
       {{- end -}}
     {{- end -}}
 
-    {{/* After finding the target, establish bidirectional link relationships */}}
+    {{/* After finding the target, establish bidirectional link relationships using Store */}}
     {{- if $target -}}
       {{/* Add "incoming" link to target page (current page links to it) */}}
-      {{- with $target.Scratch.Get "incoming" -}}
-        {{- $target.Scratch.Add "incoming" $.Page -}}
+      {{- with $target.Store.Get "incoming" -}}
+        {{- $target.Store.Add "incoming" $.Page -}}
       {{- else -}}
-        {{- $target.Scratch.Set "incoming" (slice $.Page) -}}
+        {{- $target.Store.Set "incoming" (slice $.Page) -}}
       {{- end -}}
 
       {{/* Add "outgoing" link from current page (links to target page) */}}
-      {{- with $.Page.Scratch.Get "outgoing" -}}
-        {{- $.Page.Scratch.Add "outgoing" $target -}}
+      {{- with $.Page.Store.Get "outgoing" -}}
+        {{- $.Page.Store.Add "outgoing" $target -}}
       {{- else -}}
-        {{- $.Page.Scratch.Set "outgoing" (slice $target) -}}
+        {{- $.Page.Store.Set "outgoing" (slice $target) -}}
       {{- end -}}
     {{- end -}}
 

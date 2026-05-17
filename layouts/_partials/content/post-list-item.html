@@ -1,5 +1,6 @@
-{{- $ := index . "$" -}}
-{{- $pages := $.Pages -}}
+{{/* Post list item template for section pages */}}
+{{- $ctx := index . "$" -}}
+{{- $pages := $ctx.Pages -}}
 {{- $listDateFormat := "Jan" -}}
 {{- $limit := -1 -}}
 {{- if ge $limit 0 -}}
@@ -8,10 +9,10 @@
 {{- with $pages -}}
 	<ul>
 		{{ range . }}
-			<li class="">
-				<a href="{{ .RelPermalink }}" class="">{{ .LinkTitle }}</a>
+			<li>
+				<a href="{{ .RelPermalink }}">{{ .LinkTitle }}</a>
 				(in
-				<time datetime="{{ .PublishDate.Format "2006-01-02T15:04:05-07:00" }}" class="">{{ .PublishDate.Format $listDateFormat }}</time>)
+				<time datetime="{{ .PublishDate.Format "2006-01-02T15:04:05-07:00" }}">{{ .PublishDate.Format $listDateFormat }}</time>)
 			</li>
 		{{ end }}
 	</ul>
