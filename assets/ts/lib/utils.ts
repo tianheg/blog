@@ -39,11 +39,8 @@ export const throttle = <T extends (...args: unknown[]) => unknown>(
 
 /**
  * Delay interval (in milliseconds) for throttling scroll events.
- * 
- * This value balances responsiveness with performance:
- * - Too low: Frequent updates may cause performance issues
- * - Too high: UI may feel unresponsive
- * 
- * 420ms provides a good balance for the back-to-top button visibility toggle.
+ *
+ * 150ms provides responsive scrolling feedback (~6-7 updates per second)
+ * while still being performant for the back-to-top button visibility toggle.
  */
-export const SCROLL_THROTTLE_DELAY = 420;
+export const SCROLL_THROTTLE_DELAY = 150;

@@ -115,3 +115,35 @@ h6[id] {
     scroll-margin-top: calc(var(--header-height) + 6rem);
   }
 }
+
+/* ==========================================================================
+   BACK TO TOP BUTTON
+   ========================================================================== */
+
+/* ==========================================================================
+   BACK TO TOP BUTTON
+   ========================================================================== */
+
+#back-to-top {
+  opacity: 0;
+  transition: opacity var(--transition-slow);
+  pointer-events: none;
+}
+
+#back-to-top.show {
+  opacity: 1;
+  pointer-events: auto;
+}
+
+/* ==========================================================================
+   COMPONENTS: EMAIL REPLY
+   ========================================================================== */
+
+div.comments a {
+  display: block;
+  margin: 1em auto;
+  width: fit-content;
+  background: var(--comments-bg);
+  padding: 5px 10px;
+  border-radius: 2px;
+}

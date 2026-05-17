@@ -1,7 +1,7 @@
 {{ if and (in .Site.Params.mainSections .Section) }}
-	<footer class="">
+	<footer>
 		{{ with .Params.tags }}
-			<div class="">
+			<div>
 				{{- range $index, $tag := . -}}
 					<!-- Work-around for https://github.com/gohugoio/hugo/issues/6546 -->
 					{{- $path := (urls.Parse ($tag | urlize)).Path -}}
@@ -9,7 +9,7 @@
 						{{- if gt $index 0 -}}
 							{{- " " -}}
 						{{- end -}}
-						<a href="{{ .RelPermalink }}" rel="tag" class="">#{{ .Slug | default .LinkTitle | default $path | lower | anchorize }}</a>
+						<a href="{{ .RelPermalink }}" rel="tag">#{{ .Slug | default .LinkTitle | default $path | lower | anchorize }}</a>
 					{{- end -}}
 				{{- end -}}
 			</div>
