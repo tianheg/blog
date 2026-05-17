@@ -68,7 +68,7 @@ blog/
 
 | 类别 | 技术 | 说明 |
 |------|------|------|
-| 静态生成 | Hugo | Extended 版本，支持 PostCSS/Tailwind |
+| 静态生成 | Hugo | 标准版，支持 PostCSS/Tailwind |
 | 样式 | Tailwind CSS v4 + DaisyUI | 通过 `@tailwindcss/cli` 构建 |
 | 搜索 | Pagefind | 静态搜索索引，基于构建后的 `public/` |
 | 图谱可视化 | vis-network | 分类页 JSON 数据驱动 |
@@ -78,7 +78,7 @@ blog/
 
 | 依赖 | 版本 | 说明 |
 |------|------|------|
-| Hugo | Extended ≥ v0.140 | 必须 extended 版，Tailwind v4 需要 |
+| Hugo | ≥ v0.140 | 标准版即可，Tailwind v4 需要 |
 | Node.js | ≥ 18 | pnpm 管理依赖 |
 | pnpm | ≥ 8 | 包管理器（`npm install -g pnpm`） |
 
