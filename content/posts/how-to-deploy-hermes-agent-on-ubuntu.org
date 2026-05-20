@@ -1,0 +1,61 @@
+#+TITLE: How to deploy Hermes Agent on Ubuntu
+#+DATE: <2026-05-20 Wed 12:53>
+#+TAGS[]: 技术 English
+
+* Phase 1: Server Initialization & Base Setup
+
+1. Purchase a VPS, deploy Ubuntu 24.04 LTS
+2. Create system user =tianhe=, add to sudo group
+3. Go to [[https://hermes-agent.nousresearch.com/][https://hermes-agent.nousresearch.com/]], run the install script to complete setup
+
+* Phase 2: Data Migration (from old Railway deployment)
+
+1. Download backup from Cloudflare R2 via AWS CLI
+2. Restore =.hermes= directory from backup tarball
+3. Rebuild corrupted =state.db= — reimport from sessions/*.json files
+4. Honcho was originally on Railway; later migrated to local Docker Compose(PostgreSQL + pgvector + Redis)
+
+* Phase 3: R2 Backup Script Adaptation
+
+1. Update =backup-to-r2.py= paths from old user home to =/home/tianhe=
+2. Set up cron: daily at 03:00 UTC, keep 14 most recent backups
+3. Optimize backup: exclude venv/node_modules (119 MB → 27.5 MB)
+
+* Phase 4: Security Hardening
+
+1. Bind Dashboard to =0.0.0.0= with =--insecure= flag (due to DNS rebinding protection interfering with reverse proxy)
+2. Harden SSH: =PermitRootLogin prohibit-password=, force publickey auth, disable password auth, disable X11 forwarding, limit MaxAuthTries to 3
+3. Enable UFW firewall: allow only 22/tcp (SSH) and 443/tcp (HTTPS)
+4. Configure fail2ban: 3 failures → 24-hour ban((sshd jail only))
+5. Enable unattended-upgrades for automatic security patches
+
+* Phase 5: Dashboard + Caddy Reverse Proxy
+
+1. Build Web UI: npm install → npm run build
+2. Create =systemd= service for hermes-dashboard on =127.0.0.1:9119=
+3. Configure Caddy reverse proxy: =herma.tianheg.co:443= → localhost:9119
+4. Host Header issue: Dashboard's built-in DNS rebinding protection rejects the forwarded hostname. Bind =0.0.0.0= with =--insecure= flag
+5. Integrate Cloudflare: SSL mode =Full=, Cloudflare Access auth layer
+
+* Phase 6: Gateway / Telegram Integration
+
+1. Clear stale =gateway_state.json= (draining state from old environment)
+2. Install Gateway as user-level systemd service; fix service file path (was written to wrong location by =hermes gateway install=)
+3. Configure Telegram Bot Token in =.env=
+4. Enable linger (=loginctl enable-linger=) to keep user services alive after SSH logout
+5. Verify: send /start to the bot, confirm auto-response and zero errors
+
+* Phase 7: Cleanup
+
+1. Remove Railway leftovers: RAILWAY_TOKEN env var, railway CLI binary(11 MB)
+2. Create / update DevOps skills (security audit, Dashboard, Caddy proxy, Gateway service, data maintenance, R2 ops — 6 skills total)
+
+* Final System State
+
+- 6 services all active (Dashboard, Gateway, Caddy, SSH, fail2ban, UFW)
+- Dashboard: =0.0.0.0:9119= with =--insecure= (behind Caddy + Cloudflare)
+- Telegram platform: connected and responding
+- Dashboard accessible via =https://xxx= (Cloudflare Access)
+- Backup: daily at 03:00 UTC via Hermes internal cron (successful)
+- Daily automatic backup to Cloudflare R2 at 03:00 UTC
+- Memory provider: Honcho (self-hosted on local Docker)
