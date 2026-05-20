@@ -171,24 +171,24 @@ pnpm install
 
 ```bash
 # 开发服务器（含热重载）
-npm run dev
+pnpm run dev
 
 # 构建站点（生产环境）
-npm run build
+pnpm run build
 
 # 构建 + 生成搜索索引（完整发布流程）
-npm run all
+pnpm run all
 
 # 仅生成搜索索引（需先构建）
-npm run pagefind
+pnpm run pagefind
 ```
 
 ### 新建内容工作流程
 
 1. 根据内容类型选择 `content/posts/` 或 `content/til/` 下的正确分类
 2. 按命名规范创建 `.org` 文件，填写 frontmatter
-3. 运行 `npm run dev` 本地预览
-4. 内容完成后运行 `npm run all` 构建并更新搜索索引
+3. 运行 `pnpm run dev` 本地预览
+4. 内容完成后运行 `pnpm run all` 构建并更新搜索索引
 5. 提交变更
 
 ### 质量检查
@@ -225,7 +225,7 @@ npm run pagefind
 
 - 搜索由 **Pagefind** 提供
 - 索引基于 `public/` 构建后的 HTML 生成
-- **必须先 `npm run build`，再 `npm run pagefind`**
+- **必须先 `pnpm run build`，再 `pnpm run pagefind`**
 - `pagefind_extended` 命令还会生成搜索 playground（本地调试搜索）
 
 ### 知识图谱
@@ -238,7 +238,7 @@ npm run pagefind
 
 - **平台**: Cloudflare Workers
 - **参考实现**: [hosting-cloudflare-worker](https://github.com/jmooring/hosting-cloudflare-worker)
-- **构建命令**: `npm run all`（Hugo 构建 + Pagefind 索引）
+- **构建命令**: `pnpm run all`（Hugo 构建 + Pagefind 索引）
 - **输出目录**: `public/`
 - **部署方式**: 将 `public/` 内容上传至 Cloudflare Workers
 

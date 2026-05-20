@@ -38,7 +38,7 @@ main() {
   bash scripts/fetch-watch-data.sh
 
   # Build the site.
-  bun run all
+  pnpm run all
 
 }
 
