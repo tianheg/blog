@@ -32,14 +32,25 @@ blog/
 │   │   ├── software/    # 软件/工具/编程类（使用前缀命名）
 │   │   ├── life/        # 生活常识
 │   │   ├── health/      # 健康相关
-│   │   ├── emacs/       # Emacs 编辑器
-│   │   ├── career/      # 职业发展
-│   │   ├── homelab/     # 家庭实验室
 │   │   ├── learning/    # 学习方法
-│   │   ├── music/       # 音乐相关
-│   │   ├── writing/     # 写作相关
+│   │   ├── career/      # 职业发展
+│   │   ├── emacs/       # Emacs 编辑器
+│   │   ├── hardware/    # 硬件相关
+│   │   ├── homelab/     # 家庭实验室
 │   │   ├── backup/      # 数据备份
-│   │   └── misc/        # 杂项
+│   │   ├── writing/     # 写作相关
+│   │   ├── music/       # 音乐相关
+│   │   ├── media/       # 影视记录
+│   │   ├── courses/     # 公开课笔记
+│   │   ├── reading/     # 阅读/周刊
+│   │   ├── science/     # 科学/技术
+│   │   ├── finance/     # 金融/支付
+│   │   ├── history/     # 历史/哲学
+│   │   ├── society/     # 社会话题
+│   │   ├── culture/     # 文化/艺术
+│   │   ├── series/      # 系列节目
+│   │   ├── people/      # 人物
+│   │   └── knowledge/   # 百科知识
 │   └── *.org            # 独立页面（about, now, projects 等）
 ├── layouts/             # Hugo 模板
 │   ├── _default/        # 基础模板（list.html, single.html）
