@@ -13,7 +13,6 @@
 - [环境要求](#环境要求)
 - [内容规范](#内容规范)
 - [模板体系](#模板体系)
-- [AI 工作流（skills/）](#ai-工作流skills)
 - [常用命令](#常用命令)
 - [资源存放](#资源存放)
 - [输出格式](#输出格式)
@@ -68,11 +67,15 @@ blog/
 │   ├── fonts/           # 字体文件
 │   └── projects/        # 项目展示相关文件
 ├── scripts/             # 构建和工具脚本
-│   ├── build.sh         # 构建脚本
+│   ├── build.sh         # CI 构建脚本（Cloudflare Workers）
+│   ├── fetch-watch-data.sh  # 外部数据抓取
+│   ├── fix-tailwindcss-bin.sh  # Tailwind CSS 兼容性修复
 │   ├── hugo-setup.sh    # Hugo 环境设置
+│   ├── subset-fonts.py  # 字体子集化
+│   ├── subset-fonts.sh  # 字体子集化脚本
 │   ├── til-lint.sh      # TIL 质量检查
 │   └── til-fix-titles.sh # TIL 标题修复
-└── skills/              # AI Agent 技能文档（元知识）
+└── wrangler.jsonc       # Cloudflare Workers 配置
 ```
 
 ## 技术栈
@@ -106,7 +109,7 @@ pnpm install
 | 目录 | 格式 | 原因 |
 |------|------|------|
 | `content/` 及根目录独立页面 | Org Mode (`.org`) | Hugo 原生渲染，个人偏好 |
-| `skills/` | Markdown (`.md`) | AI Agent 技能标准格式，便于跨项目复用 |
+| `content/til/` | Org Mode (`.org`) | 笔记类内容，按分类文件夹组织 |
 
 ### 文件命名规则
 
@@ -158,25 +161,6 @@ pnpm install
 | `_default/list.html` | 默认列表模板 |
 | `_default/single.html` | 默认单页模板 |
 | `_shortcodes/` | 自定义 Hugo 短代码 |
-
-## AI 工作流（skills/）
-
-`skills/` 目录存放 AI Agent 的元知识文档，是给 AI 看的操作手册。
-
-**Agent 操作原则：**
-1. 进入 `skills/` 后**先读 `SKILLS_INDEX.md`** — 统一索引，含快速决策表和调用策略
-2. 根据场景选择对应 Skill，按需读取具体文件
-3. 创建 `til/` 内容时，必须读取 `SKILL_TIL_编写规范.md`
-
-| 文件 | 用途 |
-|------|------|
-| `SKILLS_INDEX.md` | **Skill 统一索引 — Agent 入口（必读）** |
-| `SKILL_TIL_编写规范.md` | TIL 内容的结构化编写标准（P0 优先级） |
-| `01-META-反思.md` | 内容质量审查与迭代修正（P1 优先级） |
-| `02-META-迭代工作流.md` | 多轮优化策略设计（P1 优先级） |
-| `03-META-冷启动.md` | 从零启动新任务 |
-| `04-META-柳叶刀方法.md` | 复杂任务分解 |
-| `00/05-13 META` | 其他通用方法论（按需读取） |
 
 ## 常用命令
 
