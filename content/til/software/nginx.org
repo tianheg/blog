@@ -1,0 +1,250 @@
+* Nginx
+:PROPERTIES:
+:CUSTOM_ID: nginx
+:END:
+** Deployment Basics
+:PROPERTIES:
+:CUSTOM_ID: deployment-basics
+:END:
+*** Deploy Node.js App with Nginx
+:PROPERTIES:
+:CUSTOM_ID: deploy-nodejs
+:END:
+https://dev.to/jsstackacademy/deploy-nodejs-application-using-nginx-3jhh
+
+1. 确保 Node.js 应用能够生成最终要部署的静态页面。
+2. 配置好 pm2；并安装 Nginx
+3. `sudo vim /etc/nginx/sites-available/default`
+
+```conf
+server {
+  location / {
+    proxy_pass http://localhost:3000;
+    proxy_http_version 1.1;
+    proxy_set_header Upgrade $http_upgrade;
+    proxy_set_header Connection 'upgrade';
+    proxy_set_header Host $host;
+    proxy_cache_bypass $http_upgrade;
+  }
+}
+```
+
+3000 是本地运行的端口号，根据需要更改。完成后可以使用 `http://ip` 访问，不需要加端口号。
+
+支持 HTTPS：https://www.rosehosting.com/blog/how-to-secure-nginx-with-lets-encrypt-on-ubuntu-20-04/
+
+** Hugo Blog with Docker & Nginx
+:PROPERTIES:
+:CUSTOM_ID: hugo-docker-nginx
+:END:
+*** Docker Run
+:PROPERTIES:
+:CUSTOM_ID: docker-run
+:END:
+```bash
+docker run -d --name nginx \
+  -p 80:80 -p 443:443 \
+  -v /etc/nginx/nginx.conf:/etc/nginx/nginx.conf \
+  -v /etc/letsencrypt:/etc/letsencrypt \
+  -v /home/www/public:/home/www/public \
+  nginx:stable
+```
+
+*** Docker Compose
+:PROPERTIES:
+:CUSTOM_ID: docker-compose
+:END:
+```yml
+version: '3.9'
+services:
+  nginx:
+    image: nginx:stable
+    volumes:
+      - /etc/nginx/nginx.conf:/etc/nginx/nginx.conf
+      - /etc/letsencrypt:/etc/letsencrypt
+      - /home/www/public:/home/www/public
+    ports:
+      - '80:80'
+      - '443:443'
+```
+
+Hugo + Nginx Compose：
+
+```yml
+version: '3.9'
+services:
+  nginx:
+    image: nginx:stable
+    volumes:
+      - '$PWD/nginx.conf:/etc/nginx/nginx.conf'
+      - './public:/usr/share/nginx/html/'
+    ports:
+      - '80:80'
+  blog:
+    image: klakegg/hugo:0.95.0-ext-alpine
+    volumes:
+      - '.:/src'
+```
+
+Nginx 配置（non-root）：
+
+```nginx
+worker_processes auto;
+worker_cpuaffinity auto;
+pid /tmp/nginx.pid;
+
+events {
+  multi_accept on;
+  worker_connections 1024;
+}
+
+http {
+  client_body_temp_path /tmp/client_temp;
+  proxy_temp_path /tmp/proxy_temp_path;
+  fastcgi_temp_path /tmp/fastcgi_temp;
+  uwsgi_temp_path /tmp/uwsgi_temp;
+  scgi_temp_path /tmp/scgi_temp;
+
+  charset utf-8;
+  sendfile on;
+  tcp_nopush on;
+  tcp_nodelay on;
+  log_not_found off;
+  types_hash_max_size 4096;
+  client_max_body_size 16M;
+
+  include mime.types;
+  default_type application/octet-stream;
+
+  access_log /var/log/nginx/access.log;
+  error_log /var/log/nginx/error.log warn;
+
+  include /etc/nginx/conf.d/*.conf;
+  include /etc/nginx/sites-enabled/*;
+}
+```
+
+搭配 Git Hooks (`blog.git/hooks/post-receive`)：
+
+```sh
+#!/bin/bash
+git --work-tree=/home/www --git-dir=/home/git/blog.git checkout -f
+cd /home/git/docker-blog
+docker compose up -d
+```
+
+参考：
+1. [Nginx - Official Image | Docker Hub](https://hub.docker.com/_/nginx/)
+2. [nginxinc/docker-nginx](https://github.com/nginxinc/docker-nginx)
+3. [klakegg/hugo - Docker Image](https://hub.docker.com/r/klakegg/hugo/)
+
+*** Fix Hugo Public Directory Permission
+:PROPERTIES:
+:CUSTOM_ID: fix-public-permission
+:END:
+两次修复：
+- https://github.com/tianheg/docker-hugo/commit/f802d38
+- https://github.com/tianheg/docker-hugo/commit/d238bc7
+
+只要 public 文件夹本身权限和当前用户相同，内部文件为 root 时，Nginx 也能正常工作，不会返回 404。
+
+** Reverse Proxy with Docker
+:PROPERTIES:
+:CUSTOM_ID: reverse-proxy
+:END:
+*** nginx-proxy Setup
+:PROPERTIES:
+:CUSTOM_ID: nginx-proxy
+:END:
+1. Create nginx-proxy network：
+
+```sh
+docker network create nginx-proxy
+```
+
+2. Install nginx-proxy and acme-companion with docker-compose：
+
+```yml
+version: "3"
+services:
+  nginx-proxy:
+    image: nginxproxy/nginx-proxy:alpine
+    container_name: nginx-proxy
+    ports:
+      - "80:80"
+      - "443:443"
+    volumes:
+      - /var/run/docker.sock:/tmp/docker.sock:ro
+      - certs:/etc/nginx/certs:ro
+      - conf:/etc/nginx/conf.d
+      - vhost:/etc/nginx/vhost.d
+      - html:/usr/share/nginx/html
+    restart: always
+    environment:
+      - VIRTUAL_PROTO=https
+      - VIRTUAL_PORT=443
+
+  acme-companion:
+    image: nginxproxy/acme-companion
+    container_name: nginx-proxy-acme
+    depends_on:
+      - nginx-proxy
+    volumes:
+      - vhost:/etc/nginx/vhost.d
+      - html:/usr/share/nginx/html
+      - certs:/etc/nginx/certs:rw
+      - acme:/etc/acme.sh
+      - /var/run/docker.sock:/var/run/docker.sock:ro
+    network_mode: bridge
+    environment:
+      - DEFAULT_EMAIL=me@tianheg.xyz
+      - NGINX_PROXY_CONTAINER=nginx-proxy
+    restart: always
+
+volumes:
+  conf:
+  vhost:
+  html:
+  certs:
+  acme:
+
+networks:
+  default:
+    name: nginx-proxy
+```
+
+3. Configure Docker Hugo with reverse proxy：
+
+```yml
+version: "3.9"
+services:
+  nginx:
+    image: nginx:stable
+    volumes:
+      - /home/www/public:/usr/share/nginx/html
+    expose:
+      - 80
+      - 443
+    environment:
+      - VIRTUAL_HOST=www.yidajiabei.xyz
+      - LETSENCRYPT_HOST=www.yidajiabei.xyz
+
+  blog:
+    image: tianheg/hugo:0.98.0
+    volumes:
+      - '/home/www:/home/git'
+      - '/home/www/public:/output'
+    environment:
+      - HUGO_BASEURL=https://www.yidajiabei.xyz/
+
+networks:
+  default:
+    name: nginx-proxy
+```
+
+参考：
+1. https://hub.docker.com/r/nginxproxy/nginx-proxy
+2. https://github.com/nginx-proxy/nginx-proxy
+3. https://blog.ssdnodes.com/blog/host-multiple-websites-docker-nginx/
+4. https://blog.florianlopes.io/host-multiple-websites-on-single-host-docker/
+5. https://ssl-config.mozilla.org/
