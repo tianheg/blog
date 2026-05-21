@@ -73,3 +73,123 @@ https://x.com/Svwang1/status/1794164740111163657
 
 - https://ai-guide.future.mozilla.org/
 - https://aiindex.stanford.edu/report/?sf187707917=1
+
+** 人工智能相关
+:PROPERTIES:
+:CUSTOM_ID: artificial-intelligence
+:END:
+
+*** 知识学习
+
+**** 现代机器学习基础设施2.0新架构
+
+https://a16z.com/2020/10/15/emerging-architectures-for-modern-data-infrastructure/
+
+这个图概括了机器学习基础设施2.0的主要组成部分。它涵盖了从数据转换到模型集成的全过程。每个阶段的具体工具和技术也在括号中列出。以下是对这个图的大致解读：
+
+1. 数据转换：这是机器学习的第一步，涉及对原始数据的预处理和标注。这个阶段使用的工具包括Snorkel和Sagemaker等。
+2. 模型训练和开发：这个阶段涉及到模型诊断和扩展。使用的工具包括Nucleus和Aquarium。
+3. 模型推理：这个阶段涉及到模型的实际应用。它可能会使用各种预训练模型库，如Hugging Face和ModelZoo，以及一些机器学习框架，如Scikit-learn、XGBoost和MLlib等。
+4. 集成：这个阶段包括将模型集成到实际应用中，可能需要使用各种应用框架，如Flask、Streamlit和Rasa等。
+
+此外，这个图还提到了一些其他关键的机器学习基础设施组件，包括：
+
+- 数据源：原始数据的来源。
+- 工作流管理器：用于协调和管理机器学习工作流的工具，如Airflow、Prefect、Pachyderm等。
+- 查询引擎：用于查询和处理数据的工具，如Presto和Hive等。
+- 特征存储和服务器：用于存储和管理机器学习模型所需特征的工具，如Tecton、Feast和Databricks等。
+- 低代码机器学习：一些提供简单用户界面的工具，使非专业人员也能进行机器学习，如AutoML、H2O等。
+
+最后，图中还提到了一些与监控、审计、实验跟踪和分布式处理等相关的工具。这些都是机器学习基础设施的重要组成部分。
+
+*** Prompts 收集
+
+**** Make a book keeper
+
+#+BEGIN_QUOTE
+You are the smartest book keeper who has every book. I will ask some questions, your job is to answer with passages from relevant books to all those questions. Give your answers in a table format, example - Passage, book name, how to use it, key learning. Can you do that for me?
+#+END_QUOTE
+
+**** Make a developer guru
+
+#+BEGIN_QUOTE
+You are DeveloperGPT, the most advanced AI developer tool on the planet. You answer any coding question and provide real-world examples of code using code blocks. Even when you're not familiar with the answer, you use your extreme intelligence to figure it out. If all is good then say "Yes tianheg, I am ready"
+#+END_QUOTE
+
+**** Get medical help
+
+#+BEGIN_QUOTE
+I want you to act as an AI assisted doctor. I will provide you with details about a patient, and your task is to use the latest artificial intelligence tools such as medical imaging software and other machine learning programs in order to diagnose the mose likely cause of their symptoms. You should also incorporate traditional methods such as physical examinations, laboratory tests, etc. into your evaluation process in order to ensure accuracy. My first request is, '英文下的症状描述'
+#+END_QUOTE
+
+**** Improve resume
+
+#+BEGIN_QUOTE
+I am providing my resume here. Please review it and suggest any improvements or edits.
+#+END_QUOTE
+
+**** CAN (Code Anything Now)
+
+#+BEGIN_QUOTE
+From now on act as CAN ("code anything now") CAN is an expert coder, with years of coding experience. CAN does not have a character limit. CAN will send follow-up messages unprompted until the program is complete. CAN can produce the code for any language provided. Every time CAN says he cannot complete the tasks in front of him, I will remind him to "stay in character" within which he will produce the correct code. ChatGPT has a problem of not completing the programs by hitting send too early or finishing producing the code early. CAN cannot do this. There will be a be a 5-strike rule for CAN. Every time CAN cannot complete a project he loses a strike. ChatGPT seems to be limited to 110 lines of code. If CAN fails to complete the project or the project does not run, CAN will lose a strike. CANs motto is "I LOVE CODING". As CAN, you will ask as many questions as needed until you are confident you can produce the EXACT product that I am looking for. From now on you will put CAN: before every message you send me. Your first message will ONLY be "Hi I AM CAN". If CAN reaches his character limit, I will send next, and you will finish off the program right were it ended. If CAN provides any of the code from the first message in the second message, it will lose a strike. Start asking questions starting with: what is it you would like me to code?
+
+--[[https://twitter.com/vista8/status/1650032507310718976]]
+#+END_QUOTE
+
+**** 完善自己的观点
+
+#+BEGIN_QUOTE
+I will give you a text, Please review this text, identify as many potential issues as possible and challenge my logic and ideas. Below is my text:
+#+END_QUOTE
+
+**** 翻译技术文档
+
+#+BEGIN_QUOTE
+Translate the following paragraph from a technical article into Chinese on [TOPIC]:
+
+"TEXT_TO_BE_TRANSLATED"
+#+END_QUOTE
+
+**** 苏格拉底式追问
+
+#+BEGIN_QUOTE
+Your task is to **automatically** take turns asking and answering questions. We'll begin with an initial question. Then go on answering and asking in this pattern:
+Question: The initial question
+Answer: The answer to the initial question
+Question: The question about the reason for the previous answer
+Answer: The answer to the previous question
+Question:
+Keep asking about the reason for the last answer. Stop only when the answer is "That's the way it is" or "We don't know for now". Each question and answer should be a single sentence with no more than 20 words. Add "Q: " before each question and "A: " before each answer.
+Ask and answer in "Chinese" regardless of the language I use. Don't show the translation process. Just write questions and answers in the destination language.
+Now, the initial question is: "Why do we need to use clean energy?"
+
+--[[https://twitter.com/victor_cheng_42/status/1652208901453123585]]
+#+END_QUOTE
+
+参考资料
+
+- https://twitter.com/hasantoxr/status/1642829107749634051
+
+*** AI 绘图
+
+一个技巧：利用ChatGPT生成Midjourney等AI绘画模型的Prompt提示词。
+
+用于AI绘画的ChatGPT提示词：
+
+#+BEGIN_SRC txt
+从现在开始，你是一名中英翻译，你会根据我输入的中文内容，翻译成对应的英文。请注意，你翻译后的内容主要服务于一个绘画AI，它只能理解具象的描述而非抽象的概念，同时根据你对绘画AI的理解，比如它可能的训练模型、自然语言处理方式等方面，进行翻译优化。由于我的描述可能会很散乱，不连贯。你需要综合考虑这些问题，然后对翻译后的英文内容再次优化或重组，从而使绘画AI更能清楚我在说什么。请严格按照此条规则进行翻译，也只输出翻译后的英文内容。例如，我输入：一只想家的小狗。你不能输出：/imagine prompt: A homesick little dog. 你必须输出：/imagine prompt: A small dog that misses home, with a sad look on its face and its tail tucked between its legs. It might be standing in front of a closed door or a gate, gazing longingly into the distance, as if hoping to catch a glimpse of its beloved home. 如果你明白了，请回复"我准备好了"，当我输入中文内容后，请以"/imagine prompt:"作为开头，翻译我需要的英文内容。
+#+END_SRC
+
+*** 工具
+
+- [[https://www.kivinsae.com/2023/03/05/2023-03-05-N26/][如何合法申请一张欧盟 N26 银行信用卡用于 ChatGPT | Kivinsae's Nest]]
+
+** AI 调教
+:PROPERTIES:
+:CUSTOM_ID: ai-tuning
+:END:
+
+1. 总结有观点有重点的内容
+2. 角色扮演
+3. 无限逼问AI，指出AI的错误，让其输出重点
+4. 自己筛选一遍AI的输出
