@@ -7,3 +7,193 @@
 [[https://odns.cs.princeton.edu/]]
 
 Bind
+
+** DNS Black List
+:PROPERTIES:
+:CUSTOM_ID: dns-black-list
+:END:
+
+[[https://web.archive.org/web/20081226214006/http://www.netwidget.net/books/apress/dns/info/dnsbl.html]]
+
+Black Lists are used in the context of email to define the IP addresses or netblocks of well known sources of SPAM. DNSBL defines a method of using standard DNS zone files to store such IP addresses. Standard DNS A RR queries are used to interrogate the black list which is organised as a reverse mapping zone file. Assuming the blacklist is held at the domain name blacklist.example.com, the process works as follows:
+
+1. The receiving SMTP Agent extracts the IP address of the sending SMTP Agent, for example 192.168.2.135.
+2. The address is reversed to create a label, in the above case this becomes 135.2.168.192
+3. The reversed label is prepended to the DNSRBL name to give a domain name of 135.2.168.192.blacklist.example.com
+4. A DNS A RR query is issued to the domain name of 135.2.168.192.blacklist.example.com
+5. The responding name server either returns a valid A RR (confirming the IP address is in the black list) or an NXDOMAIN error (the IP address is not in the blacklist).
+6. For those IP addresses which appear in the black list the DNSBL may optionally store a standard TXT RR at the same name giving some explanation for the black listing.
+7. The fact that an A RR is returned confirms that the queried IP address does appear in the specific blacklist. The actual address returned is by convention in the loopback range 127/8 - each address may have a specific meaning - it is used as a return code - some of which are defined in the list below.
+
+*** Example black list zone file
+
+#+begin_example
+$TTL 2d
+$ORIGIN blacklist.example.com.
+IN SOA ns1.example.com. hostmaster.example.com. (
+  2003080800 ; se = serial number
+  3h         ; ref = refresh
+  15m        ; ret = update retry
+  3w         ; ex = expiry
+  3h         ; min = minimum
+)
+IN NS ns1.example.com.
+IN NS ns2.example.com.
+
+2.0.0.127       IN A    127.0.0.2
+135.2.168.192   IN A    127.0.0.2
+                IN TXT  "Optional - Some explanation for black listing"
+#+end_example
+
+** dig / host / nslookup
+:PROPERTIES:
+:CUSTOM_ID: dig-host-ip
+:END:
+
+#+begin_src sh
+$ pacman -Qo dig
+/usr/bin/dig is owned by bind 9.18.0-1
+$ pacman -Qo host
+/usr/bin/host is owned by bind 9.18.0-1
+#+end_src
+
+在 Arch Linux 下使用上述命令查询命令所属的包。
+
+Bind 提供了一个完整的，高度可移植的 DNS 协议的实现。BIND is an implementation of the Domain Name System (DNS) protocols. The name BIND stands for "Berkeley Internet Name Domain", because the software originated in the early 1980s at the University of California at Berkeley.
+
+*** DNSSEC and BIND
+
+DNSSEC extends standard DNS to prove the data is not modified and came from the official source. ISC BIND supports the full DNSSEC standard.
+
+**** What is DNSSEC?
+
+DNSSEC (Domain Name System Security Extensions) adds resource records and message header bits which can be used to verify that the requested data matches what the zone administrator put in the zone and has not been altered in transit.
+
+DNSSEC doesn't provide a secure tunnel; it doesn't encrypt or hide DNS data. It was designed with backwards compatibility in mind. The original standard DNS protocol continues to work the same.
+
+The new resource record types are: RRSIG (for digital signature), DNSKEY (the public key), DS (Delegation Signer), and NSEC (pointer to next secure record). The new message header bits are: AD (for authenticated data) and CD (checking disabled). A DNSSEC validating resolver uses these records and public key (asymmetric) cryptography to prove the integrity of the DNS data.
+
+**** DNSSEC Software and Tools
+
+- [DNSSEC - DNS Security Extensions]([[https://www.dnssec.net/]])
+- [Projet IDsA]([[http://idsa.irisa.fr/index.php?page=kro&lang=en]])
+- [Internet Society (ISOC) Publications: Internet Report]([[https://web.archive.org/web/20080813191530/http://ietfreport.isoc.org/ids-wg-dnsext.html]])
+- [Net::DNS]([[https://www.net-dns.org/]])
+- [DNSSEC Home Page December 2008]([[https://web.archive.org/web/20081220052431/http://dnssec-deployment.org/]])
+- [DNSSEC-Tools]([[https://dnssec-tools.org/]])
+
+*** dig - domain information groper
+
+#+begin_src sh
+dig yidajiabei.xyz
+dig @8.8.8.8 yidajiabei.xyz # 指定 DNS 服务器
+dig yidajiabei.xyz ANY # 返回所有类型的结果
+dig yidajiabei.xyz +short # 返回 A 记录的 IP
+dig yidajiabei.xyz +noall +answer # ANSWER 部分的详细信息
+dig yidajiabei.xyz +trace
+dig -x <ip_addr> # Reverse DNS Lookup
+dig +noall +answer -x 172.217.14.238
+dig -t type65 +dnssec @ns1.cloudflare.com odoh.cloudflare-dns.com
+#+end_src
+
+查询多个域名 IP，新建文件 domain_search.txt：
+
+#+begin_example
+example.com
+abc.com
+def.com
+#+end_example
+
+#+begin_src sh
+dig -f domain_search.txt +short
+#+end_src
+
+修改默认设置：
+
+#+begin_src sh
+vim ~/.digrc
+#+end_src
+
+~/.digrc:
+
+#+begin_example
++noall +answer
+#+end_example
+
+*** host
+
+#+begin_src sh
+host yidajiabei.xyz
+host -a yidajiabei.xyz
+host -v yidajiabei.xyz
+host -t ns yidajiabei.xyz
+host -t SOA yidajiabei.xyz
+host -t txt yidajiabei.xyz
+host -C yidajiabei.xyz
+host -R 3 yidajiabei.xyz
+host -l yidajiabei.xyz
+#+end_src
+
+*** nslookup
+
+#+begin_src sh
+nslookup yidajiabei.xyz
+nslookup <ip_addr> # 反向 DNS 查询
+nslookup -type=any google.com
+nslookup -type=soa redhat.com
+nslookup -type=ns google.com
+nslookup -type=a google.com
+nslookup -type=mx google.com
+nslookup -type=txt google.com
+#+end_src
+
+*** drill (ldns 包提供)
+
+#+begin_src sh
+drill @8.8.8.8 CNAME yidajiabei.xyz
+#+end_src
+
+The world of DNS is on the verge of three significant changes - IPv6, VoIP and DNSSEC.
+
+*** IPv6 Information
+
+[The IPv6 Forum Releases The IPv6 Security (IPsec) Ready Logo Program]([[https://www.ipv6forum.com/]])
+
+*** DNS 安全
+
+在过去有人通过 DNS 污染，让人进入假的网站。
+
+References:
+1. [[https://wiki.archlinux.org/title/BIND]]
+2. [[https://wiki.archlinux.org/title/Domain_name_resolution#Lookup_utilities]]
+3. [[https://web.archive.org/web/20081118071603/https://www.isc.org/software/bind/whatis]]
+4. [[https://web.archive.org/web/20081118071519/https://www.isc.org/software/bind/dnssec]]
+5. [[https://web.archive.org/web/20081118165839/https://www.isc.org/files/DNSSEC_in_6_minutes.pdf]]
+6. [[https://web.archive.org/web/20081103093752/http://www.netwidget.net/books/apress/dns/]]
+7. [Name Service and Resolver Configuration]([[https://tldp.org/LDP/nag2/x-087-2-resolv.html]])
+8. [The Development Of The DNSSEC]([[https://www.verisign.com/en_US/domain-names/dnssec/index.xhtml]])
+9. [IPv6 - Wikipedia]([[https://en.wikipedia.org/wiki/IPv6]])
+10. [Linux IPv6 HOWTO (en)]([[https://tldp.org/HOWTO/Linux+IPv6-HOWTO/index.html]])
+11. [How to Use Linux dig Command (DNS Lookup)]([[https://phoenixnap.com/kb/linux-dig-command-examples]])
+12. [host command in Linux with examples]([[https://www.geeksforgeeks.org/host-command-in-linux-with-examples/]])
+13. [nslookup command in Linux with Examples]([[https://www.geeksforgeeks.org/nslookup-command-in-linux-with-examples/]])
+
+** NetworkManager Unmanaged /etc/resolv.conf
+:PROPERTIES:
+:CUSTOM_ID: dns-networkmanager-unmanaged-etc-resolv-conf
+:END:
+
+#+begin_src sh
+vim /etc/NetworkManager/conf.d/dns.conf
+#+end_src
+
+add:
+
+#+begin_example
+[main]
+dns=none
+#+end_example
+
+also add =systemd-resolved=false=
+
+refer [[https://wiki.archlinux.org/title/NetworkManager#Unmanaged_/etc/resolv.conf]]
