@@ -4,7 +4,7 @@ set -euo pipefail
 main() {
 
   PAGEFIND_VERSION=1.5.0-beta.1
-  HUGO_VERSION=0.161.0
+  HUGO_VERSION=0.162.1
 
   export TZ=Asia/Hong_Kong
 
