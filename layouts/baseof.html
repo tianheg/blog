@@ -29,8 +29,6 @@
   │   ├── components/
   │   │   ├── back-to-top.html # Back to top button
   │   │   ├── graph.html       # Knowledge graph component (lazy loaded)
-  │   │   ├── link-relationships.html  # Page link relationships
-  │   │   ├── service-worker.html      # Service Worker registration (moved to posts/single.html)
   │   │   └── email-reply.html         # Email reply section
   │   ├── head/
   │   │   ├── styles.html      # CSS styles loading (simplified)
@@ -106,8 +104,6 @@
   {{ if eq .Section "posts" }}
     {{- partial "components/back-to-top.html" . -}}
   {{ end }}
-
-  <!-- Service Worker registration: moved to layouts/posts/single.html -->
 
   <!-- Scripts (exclude 404 page) -->
   {{ if ne .Kind "404" }}

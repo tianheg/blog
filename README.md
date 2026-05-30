@@ -158,8 +158,8 @@ pnpm install
 | `posts/single.html` | 博客文章详情页 |
 | `til/single.html` | TIL 笔记详情页 |
 | `section.html` | 分类列表页（Posts, TIL 索引等） |
-| `_default/list.html` | 默认列表模板 |
-| `_default/single.html` | 默认单页模板 |
+| `_default/section.json.json` | 默认分类 JSON 输出 |
+| `graph/list.json.json` | 知识图谱 JSON 数据 |
 | `_shortcodes/` | 自定义 Hugo 短代码 |
 
 ## 常用命令
@@ -226,8 +226,9 @@ pnpm run pagefind
 ### 知识图谱
 
 - Graph 页面（`/graph`）使用 vis-network 可视化内容关联
-- 数据来源于分类页的 JSON 输出（`section` output format）
-- 标签（tags）作为节点关联的依据
+- 数据来源于分类页的 JSON 输出（`graph-data` partial → `graph/index.json`）
+- Org-mode 内链（`[[path][title]]`）作为节点关联的依据
+- vis-network 仅在含 `<content-network-graph>` 的页面加载（独立 `graph.ts` 入口）
 
 ## 部署
 
