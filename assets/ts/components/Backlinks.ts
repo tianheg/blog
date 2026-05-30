@@ -48,6 +48,18 @@ function escapeHref(permalink: string): string {
 }
 
 /**
+ * Escapes HTML entities in text to prevent XSS when using innerHTML.
+ */
+function escapeHtml(text: string): string {
+  return text
+    .replace(/&/g, "&amp;")
+    .replace(/</g, "&lt;")
+    .replace(/>/g, "&gt;")
+    .replace(/"/g, "&quot;")
+    .replace(/'/g, "&#039;");
+}
+
+/**
  * Builds the backlinks section HTML string.
  */
 function buildBacklinksHTML(
@@ -101,7 +113,7 @@ function buildLinkSection(
   for (const permalink of links) {
     const pageData = pages[permalink];
     const title = pageData?.title || permalink;
-    html += `<li><a href="${escapeHref(permalink)}" class="text-blue-600 dark:text-blue-400 hover:underline">${title}</a></li>`;
+    html += `<li><a href="${escapeHref(permalink)}" class="text-blue-600 dark:text-blue-400 hover:underline">${escapeHtml(title)}</a></li>`;
   }
 
   html += "</ul></div>";
