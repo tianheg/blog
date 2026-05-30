@@ -4,9 +4,31 @@
    - class: CSS height class (default: h-96)
    - page: Current page object (optional) - when provided, shows subgraph centered on this page
 
-   Note: Lazy loading is handled internally by the web component via Intersection Observer.
-   The component only fetches graph data when it becomes visible in the viewport.
+   Note: vis-network (~300KB) is only loaded by graph.ts on pages that include this partial.
+   The main bundle does NOT include vis-network.
 */}}
+
+{{/* Build and load graph.ts (includes vis-network) only where needed */}}
+{{- with resources.Get "ts/graph.ts" }}
+  {{- $opts := dict "targetPath" "js/graph.js" "format" "esm" -}}
+  {{- if hugo.IsDevelopment }}
+    {{- with . | js.Build $opts }}
+      <script type="module" src="{{ .RelPermalink }}" defer></script>
+    {{- end }}
+  {{- else }}
+    {{- $opts = merge $opts (dict "minify" true) -}}
+    {{- with . | js.Build $opts | fingerprint }}
+      <script
+        type="module"
+        src="{{ .RelPermalink }}"
+        integrity="{{ .Data.Integrity }}"
+        crossorigin="anonymous"
+        defer
+      ></script>
+    {{- end }}
+  {{- end }}
+{{- end }}
+
 <content-network-graph
   class="{{ .class | default "h-96" }}"
   data-endpoint="{{ relURL "graph/index.json" }}"

@@ -6,7 +6,14 @@ set -euo pipefail
 # Replace it with a tiny Node.js wrapper that imports the real ESM entry.
 
 BIN="node_modules/.bin/tailwindcss"
-TARGET="../.pnpm/@tailwindcss+cli@4.3.0/node_modules/@tailwindcss/cli/dist/index.mjs"
+
+# Find the actual @tailwindcss/cli entry point (version-independent)
+TARGET=$(find ../.pnpm -path '*/@tailwindcss/cli/dist/index.mjs' 2>/dev/null | head -1)
+
+if [[ -z "$TARGET" ]]; then
+  echo "Warning: @tailwindcss/cli entry point not found, skipping fix"
+  exit 0
+fi
 
 if [[ -f "$BIN" ]] && head -1 "$BIN" | grep -q '^#!/bin/sh'; then
   cat > "$BIN" <<EOF
