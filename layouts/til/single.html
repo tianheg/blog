@@ -10,10 +10,7 @@
 
   {{/* --- Main content --- */}}
   <div>
-    {{ $content := .Content }}
-    {{/* Add target="_blank" and rel="noreferrer" to external links */}}
-    {{ $content = $content | replaceRE `<a href="(https?://[^"]+)"` `<a href="$1" target="_blank" rel="noreferrer"` }}
-    {{ $content | safeHTML }}
+    {{ partial "content/render-content" .Content }}
   </div>
 
   {{ partial "content/post-tags.html" . }}

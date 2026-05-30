@@ -1,0 +1,6 @@
+{{/* Render page content with external links opening in new tab.
+     Usage: {{ partial "content/render-content" .Content }}
+*/}}
+{{- $content := . -}}
+{{- $content = $content | replaceRE `<a href="(https?://[^"]+)"` `<a href="$1" target="_blank" rel="noreferrer"` -}}
+{{- $content | safeHTML -}}
