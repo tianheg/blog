@@ -1,0 +1,12 @@
+{{/* Site footer with secondary navigation */}}
+<footer class="max-w-3xl mx-auto px-5 mt-16 pt-8 border-t border-gray-200 dark:border-gray-700 text-sm text-gray-500">
+  <nav class="flex flex-wrap gap-x-5 gap-y-1 mb-4">
+    <a href="{{ "now" | relURL }}">Now</a>
+    <a href="{{ "uses" | relURL }}">Uses</a>
+    <a href="{{ "links" | relURL }}">Links</a>
+    <a href="{{ "changelog" | relURL }}">Changelog</a>
+    <a href="{{ "support" | relURL }}">Support</a>
+    <a href="{{ "service" | relURL }}">Service</a>
+  </nav>
+  <p>© {{ now.Format "2006" }} {{ .Site.Title }}</p>
+</footer>
