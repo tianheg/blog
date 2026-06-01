@@ -8,18 +8,21 @@ set -euo pipefail
 BIN="node_modules/.bin/tailwindcss"
 
 # Find the actual @tailwindcss/cli entry point (version-independent)
-TARGET=$(find ../.pnpm -path '*/@tailwindcss/cli/dist/index.mjs' 2>/dev/null | head -1)
+TARGET=$(find node_modules/.pnpm -path '*/@tailwindcss/cli/dist/index.mjs' 2>/dev/null | head -1)
 
 if [[ -z "$TARGET" ]]; then
   echo "Warning: @tailwindcss/cli entry point not found, skipping fix"
   exit 0
 fi
 
+# Convert to path relative to node_modules/.bin/ (__dirname)
+RELPATH=$(echo "$TARGET" | sed 's|^node_modules/|../|')
+
 if [[ -f "$BIN" ]] && head -1 "$BIN" | grep -q '^#!/bin/sh'; then
   cat > "$BIN" <<EOF
 #!/usr/bin/env node
 const path = require('path');
-const target = path.join(__dirname, '${TARGET}');
+const target = path.join(__dirname, '${RELPATH}');
 import(target);
 EOF
   chmod +x "$BIN"
