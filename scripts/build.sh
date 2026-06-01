@@ -38,7 +38,7 @@ main() {
   bash scripts/fetch-watch-data.sh
 
   # Build the site.
-  pnpm run all
+  npm run all
 
 }
 
