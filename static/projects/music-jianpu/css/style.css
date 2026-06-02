@@ -126,7 +126,6 @@ body {
   font-size: 1rem;
 }
 
-/* 移动端关闭菜单按钮 */
 .nav-close-btn {
   display: flex;
   width: 36px;
@@ -339,6 +338,22 @@ body {
   margin: 0 auto;
 }
 
+/* 页面切换动画 */
+.content-area.fade-in {
+  animation: viewFadeIn 0.25s ease-out;
+}
+
+@keyframes viewFadeIn {
+  from {
+    opacity: 0;
+    transform: translateY(8px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
 /* ============================================
    首页样式
    ============================================ */
@@ -417,7 +432,7 @@ body {
 }
 
 .view-all-btn:hover {
-  background: rgba(37, 99, 235, 0.1);
+  background: rgba(20, 184, 166, 0.1);
 }
 
 /* ============================================
@@ -436,7 +451,7 @@ body {
   overflow: hidden;
   border: 1px solid var(--color-border);
   box-shadow: var(--shadow-sm);
-  transition: var(--transition);
+  transition: transform 0.2s ease, box-shadow 0.2s ease;
   cursor: pointer;
 }
 
@@ -519,7 +534,7 @@ body {
   padding: 1rem;
   border-bottom: 1px solid var(--color-border);
   cursor: pointer;
-  transition: var(--transition);
+  transition: background 0.2s ease;
 }
 
 .list-item:last-child {
@@ -584,17 +599,6 @@ body {
   margin-bottom: 1.5rem;
 }
 
-.detail-cover {
-  width: 100%;
-  max-width: 280px;
-  margin: 0 auto;
-  aspect-ratio: 4/3;
-  object-fit: cover;
-  border-radius: var(--border-radius);
-  box-shadow: var(--shadow-lg);
-  background: linear-gradient(135deg, #e0e0e0 0%, #f0f0f0 100%);
-}
-
 .detail-info {
   flex: 1;
 }
@@ -619,6 +623,21 @@ body {
   margin-bottom: 1rem;
 }
 
+/* 详情页紧凑版（曲谱查看器场景） */
+.detail-compact .detail-title {
+  font-size: 1.25rem;
+  margin-bottom: 0.25rem;
+}
+
+.detail-compact .detail-composer {
+  font-size: 0.875rem;
+  margin-bottom: 0.5rem;
+}
+
+.detail-compact .detail-meta {
+  margin-bottom: 0;
+}
+
 .detail-tag {
   font-size: 0.875rem;
   padding: 0.375rem 0.875rem;
@@ -634,7 +653,7 @@ body {
   padding: 1rem;
   background: var(--color-bg);
   border-radius: var(--border-radius);
-  margin-bottom: 1rem;
+  margin-top: 1rem;
 }
 
 .detail-actions {
@@ -687,52 +706,6 @@ body {
   margin-top: 1.5rem;
 }
 
-.viewer-toolbar {
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  padding: 0.75rem 1rem;
-  border-bottom: 1px solid var(--color-border);
-  background: var(--color-bg);
-  flex-wrap: wrap;
-  gap: 0.5rem;
-}
-
-.viewer-title {
-  font-size: 0.875rem;
-  font-weight: 500;
-}
-
-.viewer-controls {
-  display: flex;
-  align-items: center;
-  gap: 0.25rem;
-}
-
-.viewer-btn {
-  width: 36px;
-  height: 36px;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  background: var(--color-surface);
-  border: 1px solid var(--color-border);
-  border-radius: var(--border-radius-sm);
-  color: var(--color-text);
-  cursor: pointer;
-  font-size: 1rem;
-  transition: var(--transition);
-}
-
-.viewer-btn:hover {
-  background: var(--color-bg);
-}
-
-.viewer-btn:disabled {
-  opacity: 0.5;
-  cursor: not-allowed;
-}
-
 .viewer-content {
   position: relative;
   background: #1a1a1a;
@@ -763,8 +736,21 @@ body {
   color: #333;
   cursor: pointer;
   font-size: 1.25rem;
-  transition: var(--transition);
+  transition: opacity 0.2s ease, background 0.2s ease;
   box-shadow: 0 2px 8px rgba(0,0,0,0.3);
+  opacity: 0;
+}
+
+.viewer-content:hover .viewer-nav,
+.viewer-nav:focus-visible {
+  opacity: 1;
+}
+
+/* 触摸设备总是显示导航按钮 */
+@media (pointer: coarse) {
+  .viewer-nav {
+    opacity: 1;
+  }
 }
 
 .viewer-nav:hover {
@@ -778,15 +764,6 @@ body {
 
 .viewer-nav.prev { left: 0.5rem; }
 .viewer-nav.next { right: 0.5rem; }
-
-@media (min-width: 768px) {
-  .viewer-nav {
-    width: 44px;
-    height: 44px;
-  }
-  .viewer-nav.prev { left: 1rem; }
-  .viewer-nav.next { right: 1rem; }
-}
 
 .viewer-pagination {
   text-align: center;
@@ -983,6 +960,13 @@ body {
   .viewer-image {
     max-height: 70vh;
   }
+
+  .viewer-nav {
+    width: 44px;
+    height: 44px;
+  }
+  .viewer-nav.prev { left: 1rem; }
+  .viewer-nav.next { right: 1rem; }
 }
 
 /* ============================================
@@ -993,18 +977,18 @@ body {
   .overlay {
     display: none !important;
   }
-  
+
   .nav-sidebar {
     position: fixed;
     transform: none;
     width: var(--sidebar-width);
     height: 100vh;
   }
-  
+
   .nav-close-btn {
     display: none;
   }
-  
+
   .main-content {
     margin-left: var(--sidebar-width);
   }
@@ -1086,8 +1070,6 @@ body {
 @media (pointer: coarse) {
   .nav-link,
   .btn,
-  .viewer-btn,
-  .viewer-nav,
   .score-card,
   .list-item,
   .menu-toggle {
@@ -1098,6 +1080,166 @@ body {
     width: 48px;
     height: 48px;
   }
+}
+
+/* ============================================
+   简谱渲染 —— 传统简谱视觉风格
+   ============================================ */
+
+.jp-score {
+  background: var(--color-surface);
+  border-radius: var(--border-radius);
+  border: 1px solid var(--color-border);
+  overflow: hidden;
+  min-height: 80px;
+}
+
+.jp-score svg {
+  display: block;
+  width: 100% !important;
+  height: auto !important;
+}
+
+.jp-header {
+  font-size: 0.8125rem;
+  color: var(--color-text-secondary);
+  margin-bottom: 0.75rem;
+  font-family: 'Courier New', Courier, monospace;
+}
+
+.jp-empty {
+  text-align: center;
+  padding: 2rem;
+  color: var(--color-text-secondary);
+  font-size: 0.9375rem;
+}
+
+/* ---- 谱行 ---- */
+
+.jp-line {
+  display: flex;
+  flex-wrap: nowrap;
+  align-items: center;
+  margin-bottom: 0.5rem;
+  white-space: nowrap;
+  padding: 0.15rem 0;
+}
+
+/* ---- 音符 ---- */
+
+.jp-note {
+  display: inline-flex;
+  align-items: center;
+  position: relative;
+  vertical-align: middle;
+  margin: 0 0.12em;
+}
+
+/* 音高数字 */
+.jp-p {
+  font-size: 1.5rem;
+  font-weight: 600;
+  font-family: 'Times New Roman', 'Noto Serif CJK SC', 'STSong', 'SimSun', serif;
+  color: var(--color-text);
+  line-height: 1.2;
+}
+
+/* ---- 八度点 ---- */
+.jp-dot {
+  position: absolute;
+  left: 50%;
+  width: 4px;
+  height: 4px;
+  border-radius: 50%;
+  background: var(--color-text);
+  margin-left: -2px;
+}
+
+.jp-dot-t {
+  top: -0.15em;
+}
+
+.jp-dot-b {
+  bottom: -0.15em;
+}
+
+/* ---- 减时线（下划线） ---- */
+.jp-beam {
+  display: block;
+  position: absolute;
+  left: 0.1em;
+  right: 0.1em;
+  bottom: -0.1em;
+  height: 2px;
+  background: var(--color-text);
+}
+
+.jp-beam-2 {
+  height: 2px;
+  box-shadow: 0 4px 0 var(--color-text);
+}
+
+/* ---- 附点 ---- */
+.jp-dotted {
+  font-size: 1.2rem;
+  font-weight: 700;
+  color: var(--color-text);
+  line-height: 1;
+  margin-left: 0.05em;
+  align-self: center;
+}
+
+/* ---- 增时线（延长横线） ---- */
+.jp-ext {
+  display: inline-flex;
+  align-items: center;
+  gap: 0;
+}
+
+.jp-ext-h {
+  display: inline-block;
+  font-size: 1rem;
+  color: var(--color-text);
+  line-height: 1;
+  width: 0.6em;
+  text-align: center;
+  opacity: 0.5;
+}
+
+/* ---- 小节线 ---- */
+.jp-bar {
+  display: inline-block;
+  width: 0;
+  height: 1.6em;
+  border-left: 1.5px solid var(--color-text);
+  margin: 0 0.35em;
+  opacity: 0.3;
+  vertical-align: middle;
+  flex-shrink: 0;
+}
+
+/* ---- 延音 ---- */
+.jp-tie {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  min-width: 0.7em;
+  font-size: 0.9rem;
+  color: var(--color-text);
+  opacity: 0.35;
+  margin: 0 0.05em;
+}
+
+/* ---- 休止 ---- */
+.jp-rest .jp-p {
+  opacity: 0.45;
+}
+
+/* ---- 暗色模式 ---- */
+@media (prefers-color-scheme: dark) {
+  .jp-dot { background: var(--color-text); }
+  .jp-beam { background: var(--color-text); }
+  .jp-beam-2 { box-shadow: 0 4px 0 var(--color-text); }
 }
 
 /* ============================================
@@ -1112,32 +1254,32 @@ body {
     --color-text-secondary: #a0a0a0;
     --color-border: #333333;
   }
-  
+
   .score-cover,
   .list-cover,
   .detail-cover {
     background: linear-gradient(135deg, #2a2a2a 0%, #1a1a1a 100%);
   }
-  
+
   .viewer-nav {
     background: rgba(30, 30, 30, 0.9);
     color: var(--color-text);
   }
-  
+
   .viewer-nav:hover {
     background: rgba(50, 50, 50, 0.95);
   }
-  
+
   .search-input {
     background: var(--color-surface);
     color: var(--color-text);
     border-color: var(--color-border);
   }
-  
+
   .search-input::placeholder {
     color: var(--color-text-secondary);
   }
-  
+
   .search-input:focus {
     background: var(--color-surface);
     border-color: var(--color-primary);
@@ -1151,7 +1293,6 @@ body {
 @media print {
   .nav-sidebar,
   .top-nav,
-  .viewer-toolbar,
   .viewer-nav,
   .detail-actions,
   .btn {
@@ -1186,13 +1327,11 @@ body {
   }
 }
 
-/* 焦点样式 */
 :focus-visible {
   outline: 2px solid var(--color-primary);
   outline-offset: 2px;
 }
 
-/* 跳过链接 */
 .skip-link {
   position: absolute;
   top: -40px;
