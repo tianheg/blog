@@ -132,9 +132,6 @@
     {{- partial "components/back-to-top.html" . -}}
   {{ end }}
 
-  <!-- Footer -->
-  {{- partial "layout/footer.html" . -}}
-
   <!-- Scripts (exclude 404 page) -->
   {{ if ne .Kind "404" }}
     {{- partial "head/scripts.html" . -}}
