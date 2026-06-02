@@ -8,7 +8,8 @@ const state = {
   searchQuery: '',
   filter: null,
   currentPage: 0,
-  isMenuOpen: false
+  isMenuOpen: false,
+  keyboardHandler: null
 };
 
 // DOM 元素
@@ -27,13 +28,13 @@ function renderLayout() {
   const stats = getStats();
   const periods = getPeriods();
   const difficulties = getDifficulties();
-  
+
   app.innerHTML = `
     <a href="#main" class="skip-link">跳转到主内容</a>
-    
+
     <!-- 遮罩层 -->
     <div class="overlay" id="overlay"></div>
-    
+
     <!-- 导航侧边栏 -->
     <aside class="nav-sidebar" id="nav-sidebar" aria-label="主导航">
       <div class="nav-header">
@@ -43,7 +44,7 @@ function renderLayout() {
         </div>
         <button class="nav-close-btn" id="nav-close-btn" aria-label="关闭菜单">✕</button>
       </div>
-      
+
       <div class="nav-content">
         <nav class="nav-section" aria-label="浏览">
           <div class="nav-section-title">浏览</div>
@@ -62,7 +63,7 @@ function renderLayout() {
             </li>
           </ul>
         </nav>
-        
+
         <nav class="nav-section" aria-label="时期">
           <div class="nav-section-title">时期</div>
           <ul class="nav-menu" id="period-menu">
@@ -77,7 +78,7 @@ function renderLayout() {
             `).join('')}
           </ul>
         </nav>
-        
+
         <nav class="nav-section" aria-label="难度">
           <div class="nav-section-title">难度</div>
           <ul class="nav-menu" id="difficulty-menu">
@@ -93,40 +94,40 @@ function renderLayout() {
           </ul>
         </nav>
       </div>
-      
+
       <footer class="nav-footer">
         <div>共 ${stats.total} 首曲谱</div>
         <div style="margin-top: 0.25rem; opacity: 0.7;">${stats.composers} 位作曲家</div>
       </footer>
     </aside>
-    
+
     <!-- 主内容区域 -->
     <main class="main-content" id="main-content">
       <header class="top-nav" role="banner">
         <button class="menu-toggle" id="menu-toggle" aria-label="打开菜单" aria-expanded="false" aria-controls="nav-sidebar">
           <span>☰</span>
         </button>
-        
+
         <div class="search-box">
           <span class="search-icon">🔍</span>
-          <input type="search" class="search-input" id="search-input" 
-                 placeholder="搜索曲谱、作曲家..." 
+          <input type="search" class="search-input" id="search-input"
+                 placeholder="搜索曲谱、作曲家..."
                  autocomplete="off"
                  aria-label="搜索曲谱">
           <button class="search-clear" id="search-clear" aria-label="清除搜索">✕</button>
         </div>
       </header>
-      
+
       <div class="content-area" id="content-area" role="main" tabindex="-1">
         <!-- 动态内容 -->
       </div>
-      
+
       <footer class="page-footer">
         <p>律谱 - 钢琴乐谱收藏</p>
       </footer>
     </main>
   `;
-  
+
   // 缓存 DOM 引用
   sidebar = document.getElementById('nav-sidebar');
   overlay = document.getElementById('overlay');
@@ -138,7 +139,7 @@ function bindEvents() {
   document.getElementById('menu-toggle').addEventListener('click', toggleMenu);
   document.getElementById('nav-close-btn').addEventListener('click', closeMenu);
   overlay.addEventListener('click', closeMenu);
-  
+
   // 导航链接
   document.querySelectorAll('.nav-link').forEach(link => {
     link.addEventListener('click', (e) => {
@@ -146,9 +147,9 @@ function bindEvents() {
       e.stopPropagation();
       const view = link.dataset.view;
       const filter = link.dataset.filter;
-      
+
       closeMenu();
-      
+
       setTimeout(() => {
         if (view === 'period' || view === 'difficulty') {
           navigate(view, { filter });
@@ -158,15 +159,15 @@ function bindEvents() {
       }, 50);
     });
   });
-  
+
   // 搜索
   const searchInput = document.getElementById('search-input');
   const searchClear = document.getElementById('search-clear');
-  
+
   searchInput.addEventListener('input', debounce((e) => {
     const query = e.target.value.trim();
     searchClear.classList.toggle('visible', query.length > 0);
-    
+
     if (query) {
       state.searchQuery = query;
       navigate('search');
@@ -174,56 +175,52 @@ function bindEvents() {
       navigate('home');
     }
   }, 300));
-  
+
   searchInput.addEventListener('focus', () => {
     if (searchInput.value.trim()) {
       navigate('search');
     }
   });
-  
+
   searchClear.addEventListener('click', () => {
     searchInput.value = '';
     searchClear.classList.remove('visible');
     searchInput.focus();
     navigate('home');
   });
-  
+
   // 键盘快捷键
   document.addEventListener('keydown', (e) => {
     // ESC 关闭菜单
     if (e.key === 'Escape') {
       closeMenu();
     }
-    
+
     // / 聚焦搜索
     if (e.key === '/' && document.activeElement !== searchInput) {
       e.preventDefault();
       searchInput.focus();
     }
   });
-  
+
   // 触摸滑动支持
   let touchStartX = 0;
-  let touchEndX = 0;
-  
+
   document.addEventListener('touchstart', (e) => {
     touchStartX = e.changedTouches[0].screenX;
   }, { passive: true });
-  
+
   document.addEventListener('touchend', (e) => {
-    touchEndX = e.changedTouches[0].screenX;
-    handleSwipe();
+    const touchEndX = e.changedTouches[0].screenX;
+    handleSwipe(touchEndX - touchStartX);
   }, { passive: true });
-  
-  function handleSwipe() {
+
+  function handleSwipe(diff) {
     const swipeThreshold = 50;
-    const diff = touchEndX - touchStartX;
-    
     // 从左边缘右滑打开菜单
     if (diff > swipeThreshold && touchStartX < 50) {
       openMenu();
     }
-    
     // 左滑关闭菜单
     if (diff < -swipeThreshold && state.isMenuOpen) {
       closeMenu();
@@ -246,10 +243,10 @@ function openMenu() {
   sidebar.classList.add('open');
   overlay.classList.add('active');
   document.body.style.overflow = 'hidden';
-  
+
   const toggleBtn = document.getElementById('menu-toggle');
   toggleBtn.setAttribute('aria-expanded', 'true');
-  
+
   // 聚焦到关闭按钮，提升可访问性
   setTimeout(() => {
     document.getElementById('nav-close-btn')?.focus();
@@ -262,20 +259,23 @@ function closeMenu() {
   sidebar.classList.remove('open');
   overlay.classList.remove('active');
   document.body.style.overflow = '';
-  
+
   const toggleBtn = document.getElementById('menu-toggle');
   toggleBtn.setAttribute('aria-expanded', 'false');
 }
 
 // 导航
 function navigate(view, params = {}) {
+  // 清理旧页面的事件监听
+  cleanupKeyboardHandler();
+
   state.currentView = view;
-  
+
   // 更新导航激活状态
   document.querySelectorAll('.nav-link').forEach(link => {
     link.classList.remove('active');
     link.removeAttribute('aria-current');
-    
+
     if (link.dataset.view === view) {
       if (!params.filter || link.dataset.filter === params.filter) {
         link.classList.add('active');
@@ -283,11 +283,11 @@ function navigate(view, params = {}) {
       }
     }
   });
-  
+
   // 渲染对应视图
   const contentArea = document.getElementById('content-area');
   contentArea.innerHTML = '';
-  
+
   switch (view) {
     case 'home':
       contentArea.appendChild(renderHome());
@@ -305,21 +305,35 @@ function navigate(view, params = {}) {
       contentArea.appendChild(renderScoreDetail(params.scoreId));
       break;
   }
-  
+
   // 滚动到顶部
   contentArea.scrollIntoView({ behavior: 'smooth', block: 'start' });
-  
+
+  // 淡入动画
+  contentArea.classList.remove('fade-in');
+  // 触发回流使动画重新生效
+  void contentArea.offsetWidth;
+  contentArea.classList.add('fade-in');
+
   // 更新页面标题
   updatePageTitle(view, params);
+}
+
+// 清理键盘事件处理器
+function cleanupKeyboardHandler() {
+  if (state.keyboardHandler) {
+    document.removeEventListener('keydown', state.keyboardHandler);
+    state.keyboardHandler = null;
+  }
 }
 
 // 渲染首页
 function renderHome() {
   const stats = getStats();
   const recentScores = [...SCORES].reverse().slice(0, 6);
-  
+
   const fragment = document.createDocumentFragment();
-  
+
   // Hero 区域
   const hero = document.createElement('section');
   hero.className = 'hero-section';
@@ -328,7 +342,7 @@ function renderHome() {
     <p class="hero-subtitle">探索经典与现代的钢琴乐谱，开启您的音乐之旅</p>
   `;
   fragment.appendChild(hero);
-  
+
   // 统计
   const statsGrid = document.createElement('div');
   statsGrid.className = 'stats-grid';
@@ -347,7 +361,7 @@ function renderHome() {
     </div>
   `;
   fragment.appendChild(statsGrid);
-  
+
   // 最近添加
   const recentSection = document.createElement('section');
   recentSection.innerHTML = `
@@ -357,14 +371,14 @@ function renderHome() {
     </div>
   `;
   recentSection.appendChild(renderScoreGrid(recentScores));
-  
+
   recentSection.querySelector('[data-action="view-all"]').addEventListener('click', () => {
     navigate('search');
     document.getElementById('search-input').focus();
   });
-  
+
   fragment.appendChild(recentSection);
-  
+
   return fragment;
 }
 
@@ -372,7 +386,7 @@ function renderHome() {
 function renderScoreGrid(scores) {
   const grid = document.createElement('div');
   grid.className = 'score-grid';
-  
+
   if (scores.length === 0) {
     grid.innerHTML = `
       <div class="empty-state" style="grid-column: 1 / -1;">
@@ -382,13 +396,13 @@ function renderScoreGrid(scores) {
     `;
     return grid;
   }
-  
+
   scores.forEach(score => {
     const card = document.createElement('article');
     card.className = 'score-card';
     card.innerHTML = `
-      <img src="${escapeHtml(score.cover)}" 
-           alt="${escapeHtml(score.title)} 封面" 
+      <img src="${escapeHtml(score.cover)}"
+           alt="${escapeHtml(score.title)} 封面"
            class="score-cover"
            loading="lazy">
       <div class="score-info">
@@ -400,14 +414,14 @@ function renderScoreGrid(scores) {
         </div>
       </div>
     `;
-    
+
     card.addEventListener('click', () => {
       navigate('score', { scoreId: score.id });
     });
-    
+
     grid.appendChild(card);
   });
-  
+
   return grid;
 }
 
@@ -415,7 +429,7 @@ function renderScoreGrid(scores) {
 function renderScoreList(scores) {
   const list = document.createElement('div');
   list.className = 'score-list';
-  
+
   if (scores.length === 0) {
     list.innerHTML = `
       <div class="empty-state">
@@ -425,13 +439,13 @@ function renderScoreList(scores) {
     `;
     return list;
   }
-  
+
   scores.forEach(score => {
     const item = document.createElement('article');
     item.className = 'list-item';
     item.innerHTML = `
-      <img src="${escapeHtml(score.cover)}" 
-           alt="" 
+      <img src="${escapeHtml(score.cover)}"
+           alt=""
            class="list-cover"
            loading="lazy">
       <div class="list-info">
@@ -444,14 +458,14 @@ function renderScoreList(scores) {
       </div>
       <span class="list-arrow">›</span>
     `;
-    
+
     item.addEventListener('click', () => {
       navigate('score', { scoreId: score.id });
     });
-    
+
     list.appendChild(item);
   });
-  
+
   return list;
 }
 
@@ -459,7 +473,7 @@ function renderScoreList(scores) {
 function renderSearchResults(query) {
   const results = searchScores(query);
   const fragment = document.createDocumentFragment();
-  
+
   const header = document.createElement('div');
   header.className = 'search-results-header';
   header.innerHTML = `
@@ -467,7 +481,7 @@ function renderSearchResults(query) {
     <p class="search-count">找到 ${results.length} 个结果</p>
   `;
   fragment.appendChild(header);
-  
+
   if (results.length === 0) {
     const noResults = document.createElement('div');
     noResults.className = 'no-results';
@@ -480,18 +494,18 @@ function renderSearchResults(query) {
   } else {
     fragment.appendChild(renderScoreGrid(results));
   }
-  
+
   return fragment;
 }
 
 // 渲染分类页面
 function renderCategory(type, filter) {
-  const scores = type === 'period' 
-    ? getScoresByPeriod(filter) 
+  const scores = type === 'period'
+    ? getScoresByPeriod(filter)
     : getScoresByDifficulty(filter);
-  
+
   const fragment = document.createDocumentFragment();
-  
+
   // 面包屑
   const breadcrumb = document.createElement('nav');
   breadcrumb.className = 'breadcrumb';
@@ -506,7 +520,7 @@ function renderCategory(type, filter) {
     navigate('home');
   });
   fragment.appendChild(breadcrumb);
-  
+
   // 标题
   const header = document.createElement('div');
   header.className = 'category-header';
@@ -515,16 +529,16 @@ function renderCategory(type, filter) {
     <p class="category-subtitle">共 ${scores.length} 首曲谱</p>
   `;
   fragment.appendChild(header);
-  
+
   fragment.appendChild(renderScoreGrid(scores));
-  
+
   return fragment;
 }
 
-// 渲染曲谱详情（直接显示乐谱查看器）
+// 渲染曲谱详情（支持 DSL 简谱和图片两种模式）
 function renderScoreDetail(scoreId) {
   const score = getScoreById(scoreId);
-  
+
   if (!score) {
     const error = document.createElement('div');
     error.className = 'empty-state';
@@ -535,11 +549,11 @@ function renderScoreDetail(scoreId) {
     `;
     return error;
   }
-  
+
   state.currentPage = 0;
-  
+
   const fragment = document.createDocumentFragment();
-  
+
   // 面包屑
   const breadcrumb = document.createElement('nav');
   breadcrumb.className = 'breadcrumb';
@@ -554,124 +568,124 @@ function renderScoreDetail(scoreId) {
     navigate('home');
   });
   fragment.appendChild(breadcrumb);
-  
-  // 曲谱信息头部
+
+  // 曲谱信息头部（使用 detail-compact 模式）
   const infoHeader = document.createElement('div');
-  infoHeader.className = 'detail-header';
-  infoHeader.style.marginBottom = '1rem';
+  infoHeader.className = 'detail-header detail-compact';
   infoHeader.innerHTML = `
-    <div class="detail-info" style="flex: 1;">
-      <h1 class="detail-title" style="font-size: 1.25rem; margin-bottom: 0.25rem;">${escapeHtml(score.title)}</h1>
-      <p class="detail-composer" style="font-size: 0.875rem; margin-bottom: 0.5rem;">${escapeHtml(score.composer)}${score.opus ? ` · ${escapeHtml(score.opus)}` : ''}</p>
-      <div class="detail-meta" style="margin-bottom: 0;">
+    <div class="detail-info">
+      <h1 class="detail-title">${escapeHtml(score.title)}</h1>
+      <p class="detail-composer">${escapeHtml(score.composer)}${score.opus ? ` · ${escapeHtml(score.opus)}` : ''}</p>
+      <div class="detail-meta">
         <span class="difficulty-badge difficulty-${escapeHtml(score.difficulty)}">${escapeHtml(score.difficulty)}</span>
         <span class="period-tag">${escapeHtml(score.period)}</span>
       </div>
     </div>
   `;
   fragment.appendChild(infoHeader);
-  
-  // 图片查看器（直接显示）
-  const viewer = document.createElement('div');
-  viewer.className = 'image-viewer';
-  viewer.innerHTML = `
-    <div class="viewer-content" id="viewer-content">
-      <button class="viewer-nav prev" id="viewer-prev" aria-label="上一页">‹</button>
-      <img src="${escapeHtml(score.pages[state.currentPage])}" 
-           alt="乐谱第 ${state.currentPage + 1} 页" 
-           class="viewer-image"
-           id="viewer-image">
-      <button class="viewer-nav next" id="viewer-next" aria-label="下一页">›</button>
-    </div>
-    <div class="viewer-pagination">
-      第 <span id="current-page">${state.currentPage + 1}</span> / <span id="total-pages">${score.pages.length}</span> 页
-    </div>
-  `;
-  
-  // 查看器控制
-  const updateViewer = () => {
-    const img = viewer.querySelector('#viewer-image');
-    const currentPageEl = viewer.querySelector('#current-page');
-    const prevBtn = viewer.querySelector('#viewer-prev');
-    const nextBtn = viewer.querySelector('#viewer-next');
-    
-    img.src = score.pages[state.currentPage];
-    img.alt = `乐谱第 ${state.currentPage + 1} 页`;
-    currentPageEl.textContent = state.currentPage + 1;
-    
-    prevBtn.disabled = state.currentPage === 0;
-    nextBtn.disabled = state.currentPage >= score.pages.length - 1;
-  };
-  
-  viewer.querySelector('#viewer-prev').addEventListener('click', () => {
-    if (state.currentPage > 0) {
-      state.currentPage--;
-      updateViewer();
+
+  // DSL 简谱渲染优先
+  if (score.jianpu) {
+    const parsed = parseJianpu(score.jianpu);
+    if (parsed && parsed.notation.length > 0) {
+      const jianpuEl = renderJianpu(parsed);
+      fragment.appendChild(jianpuEl);
     }
-  });
-  
-  viewer.querySelector('#viewer-next').addEventListener('click', () => {
-    if (state.currentPage < score.pages.length - 1) {
-      state.currentPage++;
-      updateViewer();
-    }
-  });
-  
-  // 键盘导航
-  const handleKeyNav = (e) => {
-    if (e.key === 'ArrowLeft' && state.currentPage > 0) {
-      state.currentPage--;
-      updateViewer();
-    } else if (e.key === 'ArrowRight' && state.currentPage < score.pages.length - 1) {
-      state.currentPage++;
-      updateViewer();
-    }
-  };
-  
-  document.addEventListener('keydown', handleKeyNav);
-  
-  // 清理事件监听
-  viewer.addEventListener('remove', () => {
-    document.removeEventListener('keydown', handleKeyNav);
-  });
-  
-  // 触摸滑动翻页
-  let touchStartX = 0;
-  const viewerContent = viewer.querySelector('#viewer-content');
-  
-  viewerContent.addEventListener('touchstart', (e) => {
-    touchStartX = e.changedTouches[0].screenX;
-  }, { passive: true });
-  
-  viewerContent.addEventListener('touchend', (e) => {
-    const touchEndX = e.changedTouches[0].screenX;
-    const diff = touchEndX - touchStartX;
-    
-    if (Math.abs(diff) > 50) {
-      if (diff > 0 && state.currentPage > 0) {
+  }
+  // 图片查看器（仅当无 DSL 简谱时）
+  else if (score.pages && score.pages.length > 0) {
+    const viewer = document.createElement('div');
+    viewer.className = 'image-viewer';
+    viewer.innerHTML = `
+      <div class="viewer-content" id="viewer-content">
+        <button class="viewer-nav prev" id="viewer-prev" aria-label="上一页">‹</button>
+        <img src="${escapeHtml(score.pages[state.currentPage])}"
+             alt="乐谱第 ${state.currentPage + 1} 页"
+             class="viewer-image"
+             id="viewer-image">
+        <button class="viewer-nav next" id="viewer-next" aria-label="下一页">›</button>
+      </div>
+      <div class="viewer-pagination">
+        第 <span id="current-page">${state.currentPage + 1}</span> / <span id="total-pages">${score.pages.length}</span> 页
+      </div>
+    `;
+
+    const updateViewer = () => {
+      const img = viewer.querySelector('#viewer-image');
+      const currentPageEl = viewer.querySelector('#current-page');
+      const prevBtn = viewer.querySelector('#viewer-prev');
+      const nextBtn = viewer.querySelector('#viewer-next');
+
+      img.src = score.pages[state.currentPage];
+      img.alt = `乐谱第 ${state.currentPage + 1} 页`;
+      currentPageEl.textContent = state.currentPage + 1;
+
+      prevBtn.disabled = state.currentPage === 0;
+      nextBtn.disabled = state.currentPage >= score.pages.length - 1;
+    };
+
+    viewer.querySelector('#viewer-prev').addEventListener('click', () => {
+      if (state.currentPage > 0) {
         state.currentPage--;
         updateViewer();
-      } else if (diff < 0 && state.currentPage < score.pages.length - 1) {
+      }
+    });
+
+    viewer.querySelector('#viewer-next').addEventListener('click', () => {
+      if (state.currentPage < score.pages.length - 1) {
         state.currentPage++;
         updateViewer();
       }
-    }
-  }, { passive: true });
-  
-  // 初始状态
-  updateViewer();
-  
-  fragment.appendChild(viewer);
-  
-  // 曲谱说明（折叠显示）
+    });
+
+    // 键盘导航
+    state.keyboardHandler = (e) => {
+      if (e.key === 'ArrowLeft' && state.currentPage > 0) {
+        state.currentPage--;
+        updateViewer();
+      } else if (e.key === 'ArrowRight' && state.currentPage < score.pages.length - 1) {
+        state.currentPage++;
+        updateViewer();
+      }
+    };
+
+    document.addEventListener('keydown', state.keyboardHandler);
+
+    // 触摸滑动翻页
+    let touchStartX = 0;
+    const viewerContent = viewer.querySelector('#viewer-content');
+
+    viewerContent.addEventListener('touchstart', (e) => {
+      touchStartX = e.changedTouches[0].screenX;
+    }, { passive: true });
+
+    viewerContent.addEventListener('touchend', (e) => {
+      const touchEndX = e.changedTouches[0].screenX;
+      const diff = touchEndX - touchStartX;
+
+      if (Math.abs(diff) > 50) {
+        if (diff > 0 && state.currentPage > 0) {
+          state.currentPage--;
+          updateViewer();
+        } else if (diff < 0 && state.currentPage < score.pages.length - 1) {
+          state.currentPage++;
+          updateViewer();
+        }
+      }
+    }, { passive: true });
+
+    updateViewer();
+    fragment.appendChild(viewer);
+  }
+
+  // 曲谱说明
   if (score.notes) {
     const notesSection = document.createElement('div');
     notesSection.className = 'detail-notes';
-    notesSection.style.marginTop = '1rem';
     notesSection.innerHTML = `<p>${escapeHtml(score.notes)}</p>`;
     fragment.appendChild(notesSection);
   }
-  
+
   return fragment;
 }
 
@@ -679,7 +693,7 @@ function renderScoreDetail(scoreId) {
 function updatePageTitle(view, params = {}) {
   const baseTitle = '律谱 - 钢琴乐谱';
   let title = baseTitle;
-  
+
   switch (view) {
     case 'home':
       title = baseTitle;
@@ -698,7 +712,7 @@ function updatePageTitle(view, params = {}) {
       }
       break;
   }
-  
+
   document.title = title;
 }
 
