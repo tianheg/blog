@@ -222,8 +222,6 @@ echo "[$(date '+%Y-%m-%d %H:%M:%S')] === Starting Forgejo backup process ==="
 if [ "$PWD" != "/home/git" ]; then
     echo "Changing directory to /home/git"
     cd /home/git
-else
-    echo "Already in /home/git"
 fi
 
 # Stop service
@@ -240,20 +238,30 @@ TIMESTAMP=$(date +%Y%m%d-%H%M%S)
 ARCHIVE_NAME="forgejo-backup-$TIMESTAMP.tar.gz"
 ARCHIVE_PATH="$LOCAL_BACKUP_DIR/$ARCHIVE_NAME"
 
+# Collect SSH forwarding config (needs sudo to read /etc/ssh/sshd_config)
+sudo cp /etc/ssh/sshd_config ./sshd_config.backup 2>/dev/null || \
+  echo "Warning: cannot copy /etc/ssh/sshd_config (run backup as root or add sudo)"
+
+# Save current git user's shell setting for reference
+getent passwd git | cut -d: -f7 > ./git-shell.backup 2>/dev/null || true
+
 # Create compressed archive
-echo "Creating archive: $ARCHIVE_PATH (from ./forgejo and ./conf)"
-tar -czf "$ARCHIVE_PATH" ./forgejo ./conf
-if [ $? -eq 0 ]; then
-    echo "Archive created successfully."
-else
-    echo "ERROR: Failed to create archive. Exiting."
-    exit 1
-fi
+tar -czf "$ARCHIVE_PATH" \
+  ./forgejo \
+  ./conf \
+  ./Caddyfile \
+  ./docker-compose.yaml \
+  ./forgejo-shell.sh \
+  ./sshd_config.backup \
+  ./git-shell.backup
 
 # Upload to Storage Box
 echo "Uploading archive to $STORAGE_USER@$STORAGE_HOST:$REMOTE_DIR/ using rsync (port $STORAGE_PORT)..."
 rsync -avh --delete -e "ssh -p$STORAGE_PORT" "$ARCHIVE_PATH" "$STORAGE_USER@$STORAGE_HOST:$REMOTE_DIR/"
 RSYNC_EXIT=$?
+
+# Clean up temp files
+rm -f ./sshd_config.backup ./git-shell.backup
 
 if [ $RSYNC_EXIT -eq 0 ]; then
     echo "Upload completed successfully."
