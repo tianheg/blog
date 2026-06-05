@@ -1,0 +1,57 @@
+* Hermes 每日备份管线
+
+** 脚本
+
+- 路径：~/.hermes/scripts/backup-hermes.py
+- 定时：每日 21:00 CEST（cron job，no_agent: true）
+- 三路输出：StorageBox（主要）→ R2（次要）→ Dotfiles Git
+- 保留：14 份，两地同步清理
+
+** Part 1 — 全量 tar.gz
+
+Hermes 核心配置：
+- state.db、config.yaml、.env、auth.json
+- honcho.json、kanban.db、channel_directory.json
+- .admin_creds、.cookie_secret、SOUL.md、gateway_state.json、.hermes_history
+
+Hermes 目录（非空时自动打包）：
+- skills/、memories/、plugins/、profiles/、scripts/、images/
+- cron/jobs.json、cron/.tick.lock（仅配置，不含日志）
+
+PostgreSQL Dump（pg_dump → gzip 打入 tar.gz）：
+- Honcho — 本地 Docker
+- Atuin — Railway PG
+- API — Railway/Shuttle PG
+
+Anki 数据：
+- collection.anki2、media.db、media/
+
+** Part 2 — Dotfiles Git
+
+推送到 Forgejo：
+- config.yaml、SOUL.md
+- scripts/、skills/、profiles/、plugins/、memories/、images/
+- cron/（仅配置）、backup-hermes.py 自身
+
+** 目的地
+
+| 目的地 | 角色 | 保留 | 认证 |
+|--------|------|------|------|
+| Hetzner StorageBox | 主要 | 14 份 | SSH key |
+| Cloudflare R2 | 次要 | 14 份 | S3 API key |
+| Forgejo Git | 配置版本化 | 永久 | SSH key |
+
+StorageBox 连接信息保存在 .env 中，SSH 公钥需提前添加到 StorageBox。
+
+** 手机照片备份
+
+Android 照片不走 VPS 中转，通过 [[https://play.google.com/store/apps/details?id=dk.tacit.android.foldersync.lite][FolderSync App]] 以 SFTP 协议直推 Hetzner StorageBox，定时自动同步 DCIM/Camera 目录。
+
+备选方案：rclone、Termux + rsync。
+
+** 不备份的内容
+
+- home/、models_dev_cache.json
+- cron/output/
+- .npm、.cache、.local、.aws、.docker、.step、projects、honcho、sessions
+- __pycache__/*、*.pyc、node_modules
