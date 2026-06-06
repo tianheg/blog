@@ -100,7 +100,7 @@ sudo -u git /path_to/forgejo-shell.sh
 # enter forgejo container shell
 ssh -T git@git.example.com
 # run above cmd in local PC
-# Hi there, tianheg! You've successfully authenticated with the key named xxxxxx, but Forgejo does not provide shell access.
+# Hi there, youruser! You've successfully authenticated with the key named xxxxxx, but Forgejo does not provide shell access.
 # If this is unexpected, please log in with password and setup Forgejo under another user.
 #+END_SRC
 
@@ -190,7 +190,7 @@ First, create SSH key, add pub key to Storagebox.
 
 #+BEGIN_SRC sh
 ssh-keygen -t ed25519 -f ~/.ssh/hetzner_storagebox
-cat ~/.ssh/hetzner_storagebox.pub | ssh -p23 uxx@uxx.your-storagebox.de install-ssh-key
+cat ~/.ssh/hetzner_storagebox.pub | ssh -p23 u000000@u000000.your-storagebox.de install-ssh-key
 # type passwd
 #+END_SRC
 
@@ -198,8 +198,8 @@ Note, if the key name is not id_ed25519, need add config in =~/.ssh/config=:
 
 #+BEGIN_SRC conf
 Host storagebox
-  HostName uxx.your-storagebox.de
-  User uxx
+  HostName u000000.your-storagebox.de
+  User u000000
   Port 23
   IdentityFile ~/.ssh/hetzner_storagebox
 #+END_SRC
@@ -210,8 +210,8 @@ Second, run below script.
 #!/bin/bash
 
 # Configuration
-STORAGE_USER="uxx"
-STORAGE_HOST="uxx.your-storagebox.de"
+STORAGE_USER="u000000"
+STORAGE_HOST="u000000.your-storagebox.de"
 STORAGE_PORT="23"
 REMOTE_DIR="forgejo_backup"
 LOCAL_BACKUP_DIR="/tmp"
@@ -323,8 +323,8 @@ Place =forgejo-restore.sh= at =/home/git/=:
 set -euo pipefail
 
 # ── Config (adjust before using) ──
-STORAGE_USER="uxx"
-STORAGE_HOST="uxx.your-storagebox.de"
+STORAGE_USER="u000000"
+STORAGE_HOST="u000000.your-storagebox.de"
 STORAGE_PORT="23"
 REMOTE_DIR="./backups/forgejo"
 SSH_KEY="/home/git/.ssh/hetzner_storagebox"
@@ -441,7 +441,7 @@ restore() {
     echo "  3. Restart SSH:"
     echo "     sudo systemctl restart ssh"
     echo "  4. Verify:"
-    echo "     ssh -T git@git.tianheg.co"
+    echo "     ssh -T git@git.example.com"
     echo "================================================================"
 }
 
