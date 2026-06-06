@@ -301,3 +301,205 @@ crontab -e
 # 0 2 * * * /home/git/backup.sh >> /home/git/backup.log 2>&1
 crontab -l
 #+END_SRC
+
+* Restore Forgejo
+
+The backup script above creates a complete snapshot of the Forgejo instance
+(data, config, Caddyfile, compose file, SSH forwarding setup). When you need
+to restore on a new machine or recover from data loss, the script below pulls
+the latest backup from StorageBox and reinstates everything.
+
+Place =forgejo-restore.sh= at =/home/git/=:
+
+#+BEGIN_SRC sh
+#!/bin/bash
+# forgejo-restore.sh -- Restore Forgejo from Hetzner StorageBox backup
+#
+# Usage:
+#   ./forgejo-restore.sh --list              # List available backups
+#   ./forgejo-restore.sh                     # Restore latest backup
+#   ./forgejo-restore.sh forgejo-backup-20260606-120000.tar.gz  # Specific file
+
+set -euo pipefail
+
+# ── Config (adjust before using) ──
+STORAGE_USER="uxx"
+STORAGE_HOST="uxx.your-storagebox.de"
+STORAGE_PORT="23"
+REMOTE_DIR="./backups/forgejo"
+SSH_KEY="/home/git/.ssh/hetzner_storagebox"
+
+# ── Colors ──
+RED='\033[0;31m'; GREEN='\033[0;32m'; YELLOW='\033[1;33m'; CYAN='\033[0;36m'; NC='\033[0m'
+info()  { echo -e "${CYAN}[INFO]${NC}  $*"; }
+ok()    { echo -e "${GREEN}[OK]${NC}    $*"; }
+warn()  { echo -e "${YELLOW}[WARN]${NC}  $*"; }
+err()   { echo -e "${RED}[ERR]${NC}   $*"; }
+
+confirm() { echo -en "${YELLOW}[?]${NC} $* [y/N] "; read -r resp; case "$resp" in y|Y|yes|Yes) return 0 ;; *) exit 1 ;; esac; }
+
+check_prerequisites() {
+    local missing=0
+    command -v docker &>/dev/null || { err "Docker not found"; missing=1; }
+    docker compose version &>/dev/null || { err "Docker Compose not found"; missing=1; }
+    if ! ssh -i "$SSH_KEY" -p "$STORAGE_PORT" -o BatchMode=yes -o ConnectTimeout=5 \
+         "$STORAGE_USER@$STORAGE_HOST" exit 2>/dev/null; then
+        warn "Cannot reach StorageBox at $STORAGE_HOST:$STORAGE_PORT"; missing=1
+    fi
+    [ "$missing" -eq 1 ] && { err "Prerequisites not met. Aborting."; exit 1; }
+    ok "Prerequisites check passed"
+}
+
+list_backups() {
+    echo ""
+    info "Available backups on StorageBox:"
+    ssh -i "$SSH_KEY" -p "$STORAGE_PORT" -o BatchMode=yes \
+        "$STORAGE_USER@$STORAGE_HOST" \
+        "ls -lh $REMOTE_DIR/forgejo-backup-*.tar.gz 2>/dev/null || echo '(none)'"
+}
+
+fetch_backup() {
+    local archive_name="$1" dest="$2"
+    info "Downloading $archive_name..."
+    rsync -avh --progress -e "ssh -i $SSH_KEY -p $STORAGE_PORT" \
+        "$STORAGE_USER@$STORAGE_HOST:$REMOTE_DIR/$archive_name" "$dest"
+}
+
+restore() {
+    local archive_path="$1"
+    local restore_dir
+    restore_dir="$(mktemp -d)"
+    trap 'rm -rf "$restore_dir"' EXIT
+
+    info "Extracting archive..."
+    tar -xzf "$archive_path" -C "$restore_dir"
+
+    # Detect compose filename
+    local compose_file=""
+    for f in docker-compose.yaml docker-compose.yml compose.yml; do
+        [ -f "$restore_dir/$f" ] && compose_file="$f" && break
+    done
+    [ -z "$compose_file" ] && { err "No docker-compose file in backup"; exit 1; }
+
+    # Stop existing
+    docker compose down 2>/dev/null || true
+    ok "Forgejo stopped"
+
+    # Backup current data defensively
+    local ts
+    ts="$(date +%Y%m%d-%H%M%S)"
+    if [ -d forgejo ] || [ -d conf ]; then
+        confirm "Existing data found, proceed with restore?"
+        mkdir -p "/tmp/forgejo-pre-restore-$ts"
+        [ -d forgejo ] && cp -a forgejo "/tmp/forgejo-pre-restore-$ts/"
+        [ -d conf ]    && cp -a conf    "/tmp/forgejo-pre-restore-$ts/"
+        ok "Current data backed up to /tmp/forgejo-pre-restore-$ts/"
+    fi
+
+    # Restore core data
+    [ -d "$restore_dir/forgejo" ] && cp -a "$restore_dir/forgejo" ./forgejo
+    [ -d "$restore_dir/conf" ]    && cp -a "$restore_dir/conf"    ./conf
+    [ -f "$restore_dir/Caddyfile" ] && cp "$restore_dir/Caddyfile" ./
+    cp "$restore_dir/$compose_file" "./$compose_file"
+
+    # Fix ownership (Forgejo container runs as uid=108/gid=110)
+    chown -R 108:110 ./forgejo ./conf 2>/dev/null || \
+        warn "Could not set ownership (run as root to fix)"
+
+    ok "Data restored"
+
+    # Restore forgejo-shell.sh if present
+    if [ -f "$restore_dir/forgejo-shell.sh" ]; then
+        cp "$restore_dir/forgejo-shell.sh" "/home/git/forgejo-shell.sh"
+        chmod +x "/home/git/forgejo-shell.sh"
+        chown git:git "/home/git/forgejo-shell.sh" 2>/dev/null || true
+        ok "forgejo-shell.sh restored"
+    fi
+
+    # Start services
+    docker compose up -d
+    for i in $(seq 1 30); do
+        sleep 2
+        if curl -sf -o /dev/null "http://127.0.0.1:3000/api/healthz" 2>/dev/null; then
+            ok "Forgejo is healthy"
+            break
+        fi
+    done
+
+    echo ""
+    echo "================================================================"
+    echo "  Data restore complete."
+    echo ""
+    echo "  SSH forwarding needs manual steps (requires root):"
+    echo ""
+    if [ -f "$restore_dir/sshd_config.backup" ]; then
+        echo "  1. Append Match User git block to /etc/ssh/sshd_config:"
+        echo "     sudo tee -a /etc/ssh/sshd_config < $restore_dir/sshd_config.backup"
+    fi
+    echo "  2. Set git user shell:"
+    echo "     sudo usermod -s /home/git/forgejo-shell.sh git"
+    echo "  3. Restart SSH:"
+    echo "     sudo systemctl restart ssh"
+    echo "  4. Verify:"
+    echo "     ssh -T git@git.tianheg.co"
+    echo "================================================================"
+}
+
+main() {
+    if [ "$1" = "--list" ] || [ "$1" = "-l" ]; then
+        check_prerequisites; list_backups; return
+    fi
+
+    check_prerequisites
+
+    if [ -n "${1:-}" ] && [ "${1#--}" = "$1" ]; then
+        # Use local archive
+        [ -f "$1" ] || { err "File not found: $1"; exit 1; }
+        restore "$(realpath "$1")"
+    else
+        # Fetch latest from StorageBox
+        local latest
+        latest=$(ssh -i "$SSH_KEY" -p "$STORAGE_PORT" -o BatchMode=yes \
+            "$STORAGE_USER@$STORAGE_HOST" \
+            "ls -t $REMOTE_DIR/forgejo-backup-*.tar.gz 2>/dev/null | head -1" || true)
+        [ -z "$latest" ] && { err "No backups found"; exit 1; }
+        local temp_dir; temp_dir="$(mktemp -d)"
+        fetch_backup "$(basename "$latest")" "$temp_dir"
+        restore "$temp_dir/$(basename "$latest")"
+        rm -rf "$temp_dir"
+    fi
+}
+
+main "$@"
+#+END_SRC
+
+Usage:
+
+#+BEGIN_SRC sh
+# List available backups
+./forgejo-restore.sh --list
+
+# Restore the latest backup
+./forgejo-restore.sh
+
+# Restore a specific backup archive
+./forgejo-restore.sh /path/to/forgejo-backup-20260606-120000.tar.gz
+#+END_SRC
+
+The script handles the full restore automatically:
+
+| Step            | What it does                                          |
+|-----------------+-------------------------------------------------------|
+| Prerequisites   | Checks Docker, Docker Compose, StorageBox connectivity |
+| Fetch           | Downloads the backup archive from StorageBox           |
+| Extract         | Untars the archive to a temporary directory            |
+| Stop            | Runs =docker compose down= to stop any running service |
+| Defensive copy  | Backs up current =./forgejo= and =./conf= before overwriting |
+| Restore data    | Copies forgejo/, conf/, Caddyfile, compose file back   |
+| Restore shell   | Restores =forgejo-shell.sh= for SSH forwarding         |
+| Fix ownership   | Sets =108:110= on data directories                     |
+| Start           | Runs =docker compose up -d= and waits for health check |
+| Print SSH steps | Shows the remaining root-required SSH config steps     |
+
+After the script finishes, two SSH config steps are left for you to do manually
+(because they need root), but the script tells you exactly what to run.
