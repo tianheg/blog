@@ -50,12 +50,81 @@
 1. Remove Railway leftovers: RAILWAY_TOKEN env var, railway CLI binary(11 MB)
 2. Create / update DevOps skills (security audit, Dashboard, Caddy proxy, Gateway service, data maintenance, R2 ops — 6 skills total)
 
+* Phase 8: Hermes Desktop Remote Access
+
+[[https://hermes-agent.nousresearch.com/desktop][Hermes Desktop]] is an Electron GUI for Hermes Agent. Shares the same =~/.hermes/= config, sessions, skills, and memory as the CLI. Runs on macOS, Windows, Linux.
+
+Desktop defaults to local mode (starts a local =hermes dashboard= backend). Remote mode turns Desktop into a thin client — agent runs on VPS, Desktop renders UI via WebSocket.
+
+**Server-side Setup**
+
+The dashboard must bind to =0.0.0.0= (not =127.0.0.1=) so Tailscale IPs can reach the WebSocket endpoint. =--insecure= disables Host header validation which rejects non-loopback connections.
+
+1. Restart dashboard on 0.0.0.0:
+#+BEGIN_SRC bash
+hermes dashboard --host 0.0.0.0 --port 9120 --no-open --insecure
+#+END_SRC
+
+2. Get session token (used by Desktop for auth):
+#+BEGIN_SRC bash
+# from terminal (run on VPS):
+curl -s http://127.0.0.1:9120/ | grep -oP '__HERMES_SESSION_TOKEN__="\K[^"]+'
+
+# or open http://127.0.0.1:9120/ in browser, open console, type:
+__HERMES_SESSION_TOKEN__
+#+END_SRC
+
+3. Pin the token (optional — avoids token change after restart):
+#+BEGIN_SRC bash
+# Add to ~/.hermes/.env:
+HERMES_DASHBOARD_SESSION_TOKEN=<token-from-step-2>
+#+END_SRC
+
+Fixed token lets Desktop use a stable =HERMES_DESKTOP_REMOTE_TOKEN= that survives dashboard restarts.
+
+**Network: Tailscale**
+
+SSH tunnel (=ssh -L 9120:localhost:9120=) works but breaks on disconnect. Tailscale is more stable — zero port exposure, auto-reconnection.
+
+Install native Tailscale on VPS:
+#+BEGIN_SRC bash
+curl -fsSL https://tailscale.com/install.sh | sh
+sudo tailscale up
+#+END_SRC
+
+Desktop connects via =http://<tailscale-ip>:9120=. No basic auth needed — port is only reachable inside tailnet.
+
+**tailscale serve trap**: If you previously ran =tailscale serve= on this port, the rule persists in state and intercepts traffic silently, returning 404. Fix:
+#+BEGIN_SRC bash
+sudo tailscale serve --http=9120 off
+#+END_SRC
+
+**Desktop Client Setup**
+
+On Arch (CLI already installed):
+#+BEGIN_SRC bash
+hermes desktop
+#+END_SRC
+
+On Windows: download .exe from =https://hermes-agent.nousresearch.com/desktop=.
+
+In Desktop settings → Gateway → Remote Gateway:
+- Remote URL: =http://<tailscale-ip>:9120=
+- No auth (open inside tailnet), or use token from step 2
+
+**Experience Notes**
+
+- First connection: session list loads slowly (initial sync of all history)
+- After warm-up: chat is smooth, no perceptible latency
+- Both Arch and Windows work
+- Thin client — all tools (terminal, file ops) execute on VPS
+
 * Final System State
 
-- 6 services all active (Dashboard, Gateway, Caddy, SSH, fail2ban, UFW)
-- Dashboard: =0.0.0.0:9119= with =--insecure= (behind Caddy + Cloudflare)
+- 8 services active (Dashboard, Gateway, Caddy, SSH, fail2ban, UFW, Tailscale, Desktop)
+- Dashboard: =0.0.0.0:9120= with =--insecure= (Tailscale-only, no public reverse proxy)
 - Telegram platform: connected and responding
-- Dashboard accessible via =https://xxx= (Cloudflare Access)
+- Hermes Desktop connected via Tailscale: Arch + Windows clients
 - Backup: daily at 03:00 UTC via Hermes internal cron (successful)
 - Daily automatic backup to Cloudflare R2 at 03:00 UTC
 - Memory provider: Honcho (self-hosted on local Docker)
