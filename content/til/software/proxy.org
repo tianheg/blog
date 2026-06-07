@@ -332,6 +332,52 @@ refer
 :PROPERTIES:
 :CUSTOM_ID: clash
 :END:
+
+**** Clash Verge TUN 模式可能导致 Tailscale 内网 IP 无法访问
+
+**Source:** 个人故障排查经验
+**Reflection:** 多 VPN/虚拟网卡工具共存时，从路由表优先级、DNS 接管、流量劫持三条链路排查
+
+开启 Clash Verge 的 TUN 模式后，如果没有针对 Tailscale 配置例外规则，访问 Tailscale 内网 IP（100.64.0.0/10）可能失败。
+
+Tailscale 通过虚拟网卡维护 100.64.0.0/10 网段的路由，实现设备间的私有网络通信。
+
+Clash Verge 的 TUN 模式会创建自己的虚拟网卡并接管系统流量，根据规则决定流量是直连还是代理。
+
+当发往 Tailscale 的流量被 Clash 接管后，可能出现以下问题：
+
+- 100.64.0.0/10 被错误匹配到代理规则
+- Clash TUN 抢占了 Tailscale 路由优先级
+- Fake-IP DNS 模式干扰 *.ts.net 域名解析
+
+最终表现为：
+- 无法访问 Tailscale 设备的 100.x.x.x 地址
+- 无法访问 MagicDNS 主机名
+- Tailnet 内部服务连接超时
+
+** 解决方法
+
+在 Clash 规则最前面添加：
+
+#+begin_src yaml
+IP-CIDR,100.64.0.0/10,DIRECT,no-resolve
+#+end_src
+
+如果使用 MagicDNS，再增加：
+
+#+begin_src yaml
+DOMAIN-SUFFIX,ts.net,DIRECT
+#+end_src
+
+如果开启 Fake-IP：
+
+#+begin_src yaml
+fake-ip-filter:
+  - '*.ts.net'
+#+end_src
+
+必要时在 TUN 配置中排除 Tailscale 网段，避免 Clash 接管对应路由。
+
 *** v2ray-core
 :PROPERTIES:
 :CUSTOM_ID: v2ray-core
