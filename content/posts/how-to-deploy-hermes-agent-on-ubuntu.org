@@ -68,7 +68,7 @@ hermes dashboard --host 0.0.0.0 --port 9120 --no-open --insecure
 2. Get session token (used by Desktop for auth):
 #+BEGIN_SRC bash
 # from terminal (run on VPS):
-curl -s http://127.0.0.1:9120/ | grep -oP '__HERMES_SESSION_TOKEN__="\K[^"]+'
+curl -s http://127.0.0.1:9120/ | grep -oP '__HERMES_SESSION_TOKEN__="\\K[^"]+'
 
 # or open http://127.0.0.1:9120/ in browser, open console, type:
 __HERMES_SESSION_TOKEN__
@@ -98,6 +98,13 @@ Desktop connects via =http://<tailscale-ip>:9120=. No basic auth needed — port
 #+BEGIN_SRC bash
 sudo tailscale serve --http=9120 off
 #+END_SRC
+
+**Clash Verge conflict**: If you use Clash Verge TUN mode on the same machine, it may hijack Tailscale traffic (100.64.0.0/10) and route it through the proxy, making the Tailscale IP unreachable. Fix: add bypass rules at the top of Clash config:
+#+BEGIN_SRC yaml
+IP-CIDR,100.64.0.0/10,DIRECT,no-resolve
+DOMAIN-SUFFIX,ts.net,DIRECT
+#+END_SRC
+If using Fake-IP DNS mode, also add =*.ts.net= to =fake-ip-filter=.
 
 **Desktop Client Setup**
 
