@@ -69,12 +69,7 @@ blog/
 ├── scripts/             # 构建和工具脚本
 │   ├── build.sh         # CI 构建脚本（Cloudflare Workers）
 │   ├── fetch-watch-data.sh  # 外部数据抓取
-│   ├── fix-tailwindcss-bin.sh  # Tailwind CSS 兼容性修复
-│   ├── hugo-setup.sh    # Hugo 环境设置
-│   ├── subset-fonts.py  # 字体子集化
-│   ├── subset-fonts.sh  # 字体子集化脚本
-│   ├── til-lint.sh      # TIL 质量检查
-│   └── til-fix-titles.sh # TIL 标题修复
+│   └── hugo-setup.sh    # Hugo 环境设置
 └── wrangler.jsonc       # Cloudflare Workers 配置
 ```
 
@@ -83,7 +78,7 @@ blog/
 | 类别 | 技术 | 说明 |
 |------|------|------|
 | 静态生成 | Hugo | 标准版，支持 PostCSS/Tailwind |
-| 样式 | Tailwind CSS v4 + DaisyUI | 通过 `@tailwindcss/cli` 构建 |
+| 样式 | Tailwind CSS v4 | 通过 `@tailwindcss/cli` 构建 |
 | 搜索 | Pagefind | 静态搜索索引，基于构建后的 `public/` |
 | 图谱可视化 | vis-network | 分类页 JSON 数据驱动 |
 | 部署 | Cloudflare Workers | 参考 hosting-cloudflare-worker |
@@ -93,13 +88,12 @@ blog/
 | 依赖 | 版本 | 说明 |
 |------|------|------|
 | Hugo | ≥ v0.140 | 标准版即可，Tailwind v4 需要 |
-| Node.js | ≥ 18 | pnpm 管理依赖 |
-| pnpm | ≥ 8 | 包管理器（`npm install -g pnpm`） |
+| Node.js | ≥ 18 | npm 管理依赖（`npm install`） |
 
 首次克隆后执行：
 
 ```bash
-pnpm install
+npm install
 ```
 
 ## 内容规范
@@ -166,32 +160,25 @@ pnpm install
 
 ```bash
 # 开发服务器（含热重载）
-pnpm run dev
+npm run dev
 
 # 构建站点（生产环境）
-pnpm run build
+npm run build
 
 # 构建 + 生成搜索索引（完整发布流程）
-pnpm run all
+npm run all
 
 # 仅生成搜索索引（需先构建）
-pnpm run pagefind
+npm run pagefind
 ```
 
 ### 新建内容工作流程
 
 1. 根据内容类型选择 `content/posts/` 或 `content/til/` 下的正确分类
 2. 按命名规范创建 `.org` 文件，填写 frontmatter
-3. 运行 `pnpm run dev` 本地预览
-4. 内容完成后运行 `pnpm run all` 构建并更新搜索索引
+3. 运行 `npm run dev` 本地预览
+4. 内容完成后运行 `npm run all` 构建并更新搜索索引
 5. 提交变更
-
-### 质量检查
-
-```bash
-# 检查 TIL 质量（临时文件、空文件、Org 标题、统计分布）
-./scripts/til-lint.sh
-```
 
 ## 资源存放
 
@@ -234,7 +221,7 @@ pnpm run pagefind
 
 - **平台**: Cloudflare Workers
 - **参考实现**: [hosting-cloudflare-worker](https://github.com/jmooring/hosting-cloudflare-worker)
-- **构建命令**: `pnpm run all`（Hugo 构建 + Pagefind 索引）
+- **构建命令**: `npm run all`（Hugo 构建 + Pagefind 索引）
 - **输出目录**: `public/`
 - **部署方式**: 将 `public/` 内容上传至 Cloudflare Workers
 
