@@ -4,16 +4,13 @@
 
 @import "tailwindcss";
 @plugin "@tailwindcss/typography";
-
-/* ponytail: was daisyUI themes (silk/sunset) — ~20 lines of CSS replaces 3 npm packages */
-:root {
-  --color-base-100: oklch(97% 0.0035 67.78);
+@plugin "daisyui" {
+  themes: silk --light, sunset --prefersdark;
 }
-
-@media (prefers-color-scheme: dark) {
-  :root {
-    --color-base-100: oklch(14.14% 0.004 49.25);
-  }
+@plugin "daisyui/theme" {
+  name: "silk";
+  default: true;
+  --color-base-100: oklch(97% 0.0035 67.78);
 }
 
 /* ==========================================================================
