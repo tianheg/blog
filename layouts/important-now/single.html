@@ -1,7 +1,7 @@
-{{/* important-now single page layout - CSS counter for uninterrupted ordered lists */}}
+{{/* important-now single page layout */}}
 {{ define "main" }}
 
-<article data-pagefind-body class="page-important-now">
+<article data-pagefind-body>
 
   <h1>{{ partial "functions/get-title" (dict "page" .) }}</h1>
 
@@ -15,19 +15,5 @@
 {{ partial "content/backlinks.html" . }}
 
 {{ partial "components/email-reply.html" . }}
-
-<style>
-  .page-important-now > div ol {
-    list-style: none;
-    counter-reset: important-counter;
-  }
-  .page-important-now > div ol > li {
-    counter-increment: important-counter;
-  }
-  .page-important-now > div ol > li::before {
-    content: counter(important-counter) ". ";
-    font-weight: 600;
-  }
-</style>
 
 {{ end }}
