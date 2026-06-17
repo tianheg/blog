@@ -1,0 +1,33 @@
+{{/* important-now single page layout - CSS counter for uninterrupted ordered lists */}}
+{{ define "main" }}
+
+<article data-pagefind-body class="page-important-now">
+
+  <h1>{{ partial "functions/get-title" (dict "page" .) }}</h1>
+
+  <div>
+    {{ partial "content/render-content" .Content }}
+  </div>
+
+  {{ partial "content/post-tags.html" . }}
+</article>
+
+{{ partial "content/backlinks.html" . }}
+
+{{ partial "components/email-reply.html" . }}
+
+<style>
+  .page-important-now > div ol {
+    list-style: none;
+    counter-reset: important-counter;
+  }
+  .page-important-now > div ol > li {
+    counter-increment: important-counter;
+  }
+  .page-important-now > div ol > li::before {
+    content: counter(important-counter) ". ";
+    font-weight: 600;
+  }
+</style>
+
+{{ end }}
