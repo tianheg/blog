@@ -51,7 +51,6 @@
       {{ range $recentTil }}
         {{ if ne .Title "Tils" }}
         <div class="flex items-baseline gap-4 py-2">
-          <time class="text-sm text-gray-400 dark:text-gray-500 shrink-0 w-10 tabular-nums whitespace-nowrap">{{ .Date.Format "01/02" }}</time>
           <a href="{{ .RelPermalink }}" class="text-base">
             {{ partial "functions/get-title" (dict "page" .) }}
           </a>

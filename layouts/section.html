@@ -79,7 +79,6 @@
         <div class="space-y-1 mb-8">
           {{ range $categoryPages }}
             <div class="flex items-baseline gap-4 py-1.5">
-              <time class="text-sm text-gray-400 dark:text-gray-500 shrink-0 w-10 tabular-nums whitespace-nowrap">{{ .Date.Format "01/02" }}</time>
               <a href="{{ .RelPermalink }}" class="">
                 {{- partial "functions/get-title" (dict "page" .) -}}
               </a>

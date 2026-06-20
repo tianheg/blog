@@ -8,13 +8,6 @@
   {{/* --- Article title --- */}}
   <h1>{{ partial "functions/get-title" (dict "page" .) }}</h1>
 
-  {{/* --- Date --- */}}
-  <div class="not-prose mb-8 pb-6 border-b border-gray-200 dark:border-gray-800">
-    <time class="text-sm text-gray-400 dark:text-gray-500" datetime='{{ .Date.Format "2006-01-02" }}'>
-      {{ .Date.Format "2006-01-02" }}
-    </time>
-  </div>
-
   {{/* --- Main content --- */}}
   <div>
     {{ partial "content/render-content" .Content }}
