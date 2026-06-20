@@ -1,19 +1,17 @@
 {{/* Post list item template for section pages */}}
 {{- $ctx := index . "$" -}}
 {{- $pages := $ctx.Pages -}}
-{{- $listDateFormat := "Jan" -}}
-{{- $limit := -1 -}}
-{{- if ge $limit 0 -}}
-	{{- $pages = $pages | first $limit -}}
-{{- end -}}
 {{- with $pages -}}
-	<ul>
+	<div class="space-y-1">
 		{{ range . }}
-			<li>
-				<a href="{{ .RelPermalink }}">{{ .LinkTitle }}</a>
-				(in
-				<time datetime="{{ .PublishDate.Format "2006-01-02T15:04:05-07:00" }}">{{ .PublishDate.Format $listDateFormat }}</time>)
-			</li>
+		<div class="flex items-baseline gap-4 py-1.5">
+			<time class="text-sm text-gray-400 dark:text-gray-500 shrink-0 w-10 tabular-nums" datetime="{{ .PublishDate.Format "2006-01-02T15:04:05-07:00" }}">
+				{{ .PublishDate.Format "01/02" }}
+			</time>
+			<a href="{{ .RelPermalink }}" class="hover:underline decoration-gray-400 underline-offset-2">
+				{{ .LinkTitle }}
+			</a>
+		</div>
 		{{ end }}
-	</ul>
+	</div>
 {{ end }}

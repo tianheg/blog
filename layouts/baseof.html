@@ -116,14 +116,15 @@
   <meta name="twitter:description" content="{{ $description }}"/>
 </head>
 
-<body class="prose md:prose-base lg:prose-sm max-w-none prose-a:no-underline prose-a:hover:underline prose-a:text-blue-600 dark:prose-a:text-blue-400 prose-a:hover:text-blue-700 dark:prose-a:hover:text-blue-300">
-
-  <header class="sticky py-4 top-0 z-1">
+<body class="prose md:prose-base lg:prose-sm max-w-none">
+  <div class="border-b border-gray-200 dark:border-gray-800">
+  <header class="sticky py-0 top-0 z-1">
     <div class="max-w-3xl mx-auto px-5">
     {{- partial "layout/header.html" . -}}
     </div>
   </header>
-  <main class="max-w-3xl mx-auto px-5">
+  </div>
+  <main class="max-w-3xl mx-auto px-5 mt-10">
     {{- block "main" . }}{{- end }}
   </main>
 

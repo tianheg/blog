@@ -87,10 +87,14 @@ body {
   font-family:
     "Satoshi", -apple-system, system-ui, BlinkMacSystemFont, "Noto Serif SC", Arial, "Amstelvar", "Josefin Sans", "Hiragino Sans GB", "Microsoft Yahei", "ST Heiti", sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol";
   overflow-wrap: break-word;
+  transition: background-color 0.3s ease, color 0.3s ease;
 }
 
+/* Header background matches body for seamless transition */
 header {
-  background-color: var(--color-base-100);
+  background-color: inherit;
+  backdrop-filter: blur(8px);
+  -webkit-backdrop-filter: blur(8px);
 }
 
 /* Scroll offset for headings to account for sticky header */

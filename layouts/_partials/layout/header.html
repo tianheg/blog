@@ -1,15 +1,17 @@
 {{/* Site header with logo and navigation */}}
-<a href="{{ "" | relURL }}" class="title">
-  <h2>{{ .Site.Title }}</h2>
-</a>
-<nav class="flex flex-wrap">
-  {{/* Render main navigation menu items */}}
-  {{ range .Site.Menus.main }}
-  {{- $linkType := (string .Params.rel) -}}
-  <a href="{{ .URL }}" {{ if eq $linkType "external" }} target="_blank" rel="external" {{ end }} class="mr-5">
-    {{- with .Name -}}
-      {{ . }}
-    {{- end -}}
+<div class="flex items-center justify-between py-4">
+  <a href="{{ "" | relURL }}" class="font-semibold text-lg tracking-tight">
+    {{ .Site.Title }}
   </a>
-  {{ end }}
-</nav>
+  <nav class="flex items-center gap-6">
+    {{ range .Site.Menus.main }}
+    {{- $linkType := (string .Params.rel) -}}
+    {{- $isActive := or (eq $.Page.RelPermalink .URL) (and (ne .URL "/") (hasPrefix $.Page.RelPermalink .URL)) -}}
+    <a href="{{ .URL }}"
+       {{ if eq $linkType "external" }} target="_blank" rel="external" {{ end }}
+       class="text-sm {{ if $isActive }}font-medium text-gray-900 dark:text-gray-100{{ else }}text-gray-500 dark:text-gray-400 hover:text-gray-900 dark:hover:text-gray-100{{ end }} transition-colors">
+      {{- with .Name -}}{{ . }}{{- end -}}
+    </a>
+    {{ end }}
+  </nav>
+</div>
