@@ -1,7 +1,7 @@
 {{/* Section listing page layout - displays grouped content for a section */}}
 {{ define "main" }}
 
-	<div id="main" data-pagefind-ignore>
+<div id="main" data-pagefind-ignore>
 
   {{/* Use Store for build-time data storage (replacement for deprecated Scratch) */}}
   {{ .Store.Delete "pages" }}
@@ -26,14 +26,13 @@
     {{ $allFolders := slice }}
     {{ $totalTILs := len $pages }}
 
-    {{/* Display TIL count at the top of the section */}}
-    <p class="my-6 text-lg opacity-80 italic">{{ $totalTILs }} TILs and counting...</p>
-    <p class="my-6 text-lg opacity-80 italic">TIL: Today I Learned</p>
+    <div class="mb-8">
+      <p class="text-gray-500 dark:text-gray-400">{{ $totalTILs }} TILs and counting...</p>
+    </div>
 
     {{/* TIL Section Category Navigation (TOC) */}}
-    <div class="section-toc mb-8">
-      <h2 class="text-xl font-bold mb-4">Categories</h2>
-      <ul class="flex flex-wrap gap-2 list-none">
+    <div class="section-toc mb-10">
+      <div class="flex flex-wrap gap-2">
         {{ range $pages }}
           {{ $category := index (split .File.Dir "/") 1 }}
           {{ if and $category (ne $category "_index.org") }}
@@ -45,13 +44,11 @@
 
         {{ $sortedFolders := sort $allFolders }}
         {{ range $sortedFolders }}
-          <li class="inline-block">
-            <a href="#{{ . | urlize }}" class="px-3 py-1 bg-gray-100 hover:bg-gray-200 dark:bg-gray-800 dark:hover:bg-gray-700 rounded-md transition-colors duration-200 text-sm font-medium">
-              {{ . | title }}
-            </a>
-          </li>
+          <a href="#{{ . | urlize }}" class="px-3 py-1 text-sm bg-gray-100 hover:bg-gray-200 dark:bg-gray-800 dark:hover:bg-gray-700 rounded-md transition-colors text-gray-700 dark:text-gray-300">
+            {{ . | title }}
+          </a>
         {{ end }}
-      </ul>
+      </div>
     </div>
 
     {{/* Group TILs by category using Store */}}
@@ -78,26 +75,27 @@
       {{ $category := . }}
       {{ $categoryPages := $.Store.Get $category }}
       {{ if $categoryPages }}
-        <h2 id="{{ $category | urlize }}">{{ $category | title }}</h2>
-        <ul>
+        <h2 id="{{ $category | urlize }}" class="text-xl font-semibold mt-10 mb-4">{{ $category | title }}</h2>
+        <div class="space-y-1 mb-8">
           {{ range $categoryPages }}
-            <li>
-              <a href="{{ .RelPermalink }}">
+            <div class="flex items-baseline gap-4 py-1.5">
+              <time class="text-sm text-gray-400 dark:text-gray-500 shrink-0 w-10 tabular-nums">{{ .Date.Format "01/02" }}</time>
+              <a href="{{ .RelPermalink }}" class="hover:underline decoration-gray-400 underline-offset-2">
                 {{- partial "functions/get-title" (dict "page" .) -}}
               </a>
-            </li>
+            </div>
           {{ end }}
-        </ul>
+        </div>
       {{ end }}
     {{ end }}
 
   {{ else }}
     {{/* Default section listing: group by year */}}
     {{ range $pages.GroupByDate "2006" }}
-      <h2>{{ .Key }}</h2>
+      <h2 class="text-xl font-semibold mt-10 mb-4">{{ .Key }}</h2>
       {{ partial "content/post-list-item.html" (dict "$" .) }}
     {{ end }}
   {{ end }}
-	</div>
+</div>
 
 {{ end }}
