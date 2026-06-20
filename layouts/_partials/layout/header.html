@@ -9,7 +9,7 @@
     {{- $isActive := or (eq $.Page.RelPermalink .URL) (and (ne .URL "/") (hasPrefix $.Page.RelPermalink .URL)) -}}
     <a href="{{ .URL }}"
        {{ if eq $linkType "external" }} target="_blank" rel="external" {{ end }}
-       class="text-sm {{ if $isActive }}font-medium text-gray-900 dark:text-gray-100{{ else }}text-gray-500 dark:text-gray-400 hover:text-gray-900 dark:hover:text-gray-100{{ end }} transition-colors">
+       class="text-sm no-underline {{ if $isActive }}font-medium text-gray-900 dark:text-gray-100{{ else }}text-gray-500 dark:text-gray-400 hover:text-gray-900 dark:hover:text-gray-100{{ end }} transition-colors">
       {{- with .Name -}}{{ . }}{{- end -}}
     </a>
     {{ end }}

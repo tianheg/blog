@@ -19,10 +19,10 @@
     <div class="space-y-1">
       {{ range $recentPosts }}
         <div class="flex items-baseline gap-4 py-2">
-          <time class="text-sm text-gray-400 dark:text-gray-500 shrink-0 w-10 tabular-nums" datetime="{{ .Date.Format "2006-01-02" }}">
+          <time class="text-sm text-gray-400 dark:text-gray-500 shrink-0 w-10 tabular-nums whitespace-nowrap" datetime="{{ .Date.Format "2006-01-02" }}">
             {{ .Date.Format "01/02" }}
           </time>
-          <a href="{{ .RelPermalink }}" class="text-base hover:underline decoration-gray-400 underline-offset-2">
+          <a href="{{ .RelPermalink }}" class="text-base">
             {{ partial "functions/get-title" (dict "page" .) }}
           </a>
         </div>
@@ -49,8 +49,8 @@
       {{ range $recentTil }}
         {{ if ne .Title "Tils" }}
         <div class="flex items-baseline gap-4 py-2">
-          <time class="text-sm text-gray-400 dark:text-gray-500 shrink-0 w-10 tabular-nums">{{ .Date.Format "01/02" }}</time>
-          <a href="{{ .RelPermalink }}" class="text-base hover:underline decoration-gray-400 underline-offset-2">
+          <time class="text-sm text-gray-400 dark:text-gray-500 shrink-0 w-10 tabular-nums whitespace-nowrap">{{ .Date.Format "01/02" }}</time>
+          <a href="{{ .RelPermalink }}" class="text-base">
             {{ partial "functions/get-title" (dict "page" .) }}
           </a>
           {{ $dirPath := .File.Dir | strings.TrimPrefix "til/" | strings.TrimSuffix "/" }}
