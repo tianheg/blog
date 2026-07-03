@@ -1,6 +1,6 @@
 {{/* Site header with logo and navigation */}}
 <div class="flex items-center justify-between py-4">
-  <a href="{{ "" | relURL }}" class="font-semibold text-lg tracking-tight">
+  <a href="{{ "" | relURL }}" class="font-semibold text-lg tracking-tight{{ if not .IsHome }} max-sm:hidden{{ end }}">
     {{ .Site.Title }}
   </a>
   <nav class="flex items-center gap-2 sm:gap-6">
