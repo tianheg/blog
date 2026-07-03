@@ -98,6 +98,18 @@ header {
   -webkit-backdrop-filter: blur(8px);
 }
 
+/* Mobile: tighter nav and container padding */
+@media (max-width: 640px) {
+  nav a {
+    font-size: 0.75rem;
+  }
+  header .max-w-3xl,
+  main.max-w-3xl {
+    padding-left: 0.75rem;
+    padding-right: 0.75rem;
+  }
+}
+
 /* Scroll offset for headings to account for sticky header */
 /* Account for: header height (5rem) + py-4 padding (2rem) + extra buffer (2rem) = 9rem total */
 h1[id],
