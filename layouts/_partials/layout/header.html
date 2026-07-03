@@ -3,7 +3,7 @@
   <a href="{{ "" | relURL }}" class="font-semibold text-lg tracking-tight">
     {{ .Site.Title }}
   </a>
-  <nav class="flex items-center gap-6">
+  <nav class="flex items-center gap-2 sm:gap-6">
     {{ range .Site.Menus.main }}
     {{- $linkType := (string .Params.rel) -}}
     {{- $isActive := or (eq $.Page.RelPermalink .URL) (and (ne .URL "/") (hasPrefix $.Page.RelPermalink .URL)) -}}
