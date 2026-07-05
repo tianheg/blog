@@ -1,15 +1,47 @@
-{{/* Site header with logo and navigation */}}
-<div class="flex items-center justify-center sm:justify-between py-4">
+{{/* Site header with logo, desktop nav, and mobile hamburger menu */}}
+<div class="flex items-center justify-between py-4">
   <a href="{{ "" | relURL }}" class="font-semibold text-lg tracking-tight{{ if not .IsHome }} max-sm:hidden{{ end }}">
     {{ .Site.Title }}
   </a>
-  <nav class="flex items-center gap-4 sm:gap-6">
+
+  {{/* Desktop navigation — always visible above sm breakpoint */}}
+  <nav class="hidden sm:flex items-center gap-6">
     {{ range .Site.Menus.main }}
     {{- $linkType := (string .Params.rel) -}}
     {{- $isActive := or (eq $.Page.RelPermalink .URL) (and (ne .URL "/") (hasPrefix $.Page.RelPermalink .URL)) -}}
     <a href="{{ .URL }}"
        {{ if eq $linkType "external" }} target="_blank" rel="external" {{ end }}
-       class="text-base no-underline py-3 px-1 sm:py-0 sm:px-0 rounded-sm focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-blue-500 {{ if $isActive }}font-medium text-gray-900 dark:text-gray-100{{ else }}text-gray-500 dark:text-gray-400 hover:text-gray-900 dark:hover:text-gray-100{{ end }} transition-colors">
+       class="text-base no-underline rounded-sm focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-blue-500 {{ if $isActive }}font-medium text-gray-900 dark:text-gray-100{{ else }}text-gray-500 dark:text-gray-400 hover:text-gray-900 dark:hover:text-gray-100{{ end }} transition-colors">
+      {{- with .Name -}}{{ . }}{{- end -}}
+    </a>
+    {{ end }}
+  </nav>
+
+  {{/* Mobile hamburger button — hidden above sm */}}
+  <button id="menu-btn"
+    class="sm:hidden p-2 rounded-md focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-blue-500"
+    aria-label="Menu" aria-expanded="false">
+    <svg class="w-6 h-6 text-gray-700 dark:text-gray-300" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+      {{/* Three horizontal lines — visible when collapsed */}}
+      <path class="menu-line" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16"/>
+      <path class="menu-line" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 12h16"/>
+      <path class="menu-line" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 18h16"/>
+      {{/* X — hidden when collapsed, shown when expanded */}}
+      <path class="menu-x hidden" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6"/>
+      <path class="menu-x hidden" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 6l12 12"/>
+    </svg>
+  </button>
+</div>
+
+{{/* Mobile menu panel — shown below header when hamburger is toggled */}}
+<div id="mobile-menu" class="hidden sm:hidden border-t border-gray-200 dark:border-gray-800">
+  <nav class="flex flex-col items-center gap-1 py-5">
+    {{ range .Site.Menus.main }}
+    {{- $linkType := (string .Params.rel) -}}
+    {{- $isActive := or (eq $.Page.RelPermalink .URL) (and (ne .URL "/") (hasPrefix $.Page.RelPermalink .URL)) -}}
+    <a href="{{ .URL }}"
+       {{ if eq $linkType "external" }} target="_blank" rel="external" {{ end }}
+       class="block w-full text-center text-base no-underline py-4 rounded-sm focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-blue-500 {{ if $isActive }}font-medium text-gray-900 dark:text-gray-100{{ else }}text-gray-600 dark:text-gray-400 hover:text-gray-900 dark:hover:text-gray-100{{ end }} transition-colors">
       {{- with .Name -}}{{ . }}{{- end -}}
     </a>
     {{ end }}

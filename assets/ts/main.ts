@@ -7,6 +7,7 @@
  */
 
 import { setupBackToTop } from "./components/BackToTop";
+import { setupMobileMenu } from "./components/MobileMenu";
 import { initBacklinks } from "./components/Backlinks";
 
 /**
@@ -16,6 +17,7 @@ window.addEventListener(
   "DOMContentLoaded",
   () => {
     setupBackToTop();
+    setupMobileMenu();
     initBacklinks();
   },
   { once: true },
