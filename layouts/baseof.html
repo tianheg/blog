@@ -117,6 +117,10 @@
 </head>
 
 <body class="prose md:prose-base lg:prose-sm max-w-none prose-a:no-underline">
+  <a href="#main-content"
+     class="sr-only focus:not-sr-only focus:fixed focus:top-2 focus:left-2 focus:z-50 focus:px-4 focus:py-2 focus:bg-white focus:text-gray-900 focus:rounded focus:shadow-md focus:outline-2 focus:outline-blue-500">
+    Skip to content
+  </a>
   <div class="border-b border-gray-200 dark:border-gray-800">
   <header class="sticky py-0 top-0 z-1">
     <div class="max-w-3xl mx-auto px-5">
@@ -124,7 +128,7 @@
     </div>
   </header>
   </div>
-  <main class="max-w-3xl mx-auto px-5 mt-10">
+  <main id="main-content" class="max-w-3xl mx-auto px-5 mt-10">
     {{- block "main" . }}{{- end }}
   </main>
 

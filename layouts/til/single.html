@@ -26,12 +26,14 @@
 
 
 {{/* --- Knowledge graph --- */}}
-<section class="flex flex-col space-y-4" aria-hidden="true">
+<section class="flex flex-col space-y-4">
   <h2 class="flex flex-row items-center space-x-2 text-lg font-semibold">
     {{ partial "svg/chart-network" }}
     <span>Graph</span>
   </h2>
+  <div aria-hidden="true">
   {{ partial "components/graph.html" (dict "page" . "class" "h-64 ml-6") }}
+  </div>
 </section>
 
 

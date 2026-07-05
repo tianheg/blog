@@ -75,6 +75,12 @@ html {
     scroll-behavior: auto;
   }
 
+  body,
+  #back-to-top,
+  #back-to-top a {
+    transition: none !important;
+  }
+
   *,
   *::before,
   *::after {
@@ -98,10 +104,21 @@ header {
   -webkit-backdrop-filter: blur(8px);
 }
 
-/* Mobile: tighter nav and container padding */
+/* Global focus indicator for keyboard users */
+:focus-visible {
+  outline: 2px solid oklch(0.546 0.245 262.881);
+  outline-offset: 2px;
+}
+
+/* Remove focus outline for mouse clicks (keeps :focus-visible only) */
+:focus:not(:focus-visible) {
+  outline: none;
+}
+
+/* Mobile: centered nav and tighter padding */
 @media (max-width: 640px) {
   nav a {
-    font-size: 0.75rem;
+    font-size: 1rem;
   }
   header .max-w-3xl,
   main.max-w-3xl {
