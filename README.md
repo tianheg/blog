@@ -207,7 +207,7 @@ npm run pagefind
 
 - 搜索由 **Pagefind** 提供
 - 索引基于 `public/` 构建后的 HTML 生成
-- **必须先 `pnpm run build`，再 `pnpm run pagefind`**
+- **必须先 `npm run build`，再 `npm run pagefind`**
 - `pagefind_extended` 命令还会生成搜索 playground（本地调试搜索）
 
 ### 知识图谱
