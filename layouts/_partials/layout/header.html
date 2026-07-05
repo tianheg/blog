@@ -1,15 +1,15 @@
 {{/* Site header with logo and navigation */}}
-<div class="flex items-center justify-between py-4">
+<div class="flex items-center justify-center sm:justify-between py-4">
   <a href="{{ "" | relURL }}" class="font-semibold text-lg tracking-tight{{ if not .IsHome }} max-sm:hidden{{ end }}">
     {{ .Site.Title }}
   </a>
-  <nav class="flex items-center gap-2 sm:gap-6">
+  <nav class="flex items-center gap-4 sm:gap-6">
     {{ range .Site.Menus.main }}
     {{- $linkType := (string .Params.rel) -}}
     {{- $isActive := or (eq $.Page.RelPermalink .URL) (and (ne .URL "/") (hasPrefix $.Page.RelPermalink .URL)) -}}
     <a href="{{ .URL }}"
        {{ if eq $linkType "external" }} target="_blank" rel="external" {{ end }}
-       class="text-sm no-underline {{ if $isActive }}font-medium text-gray-900 dark:text-gray-100{{ else }}text-gray-500 dark:text-gray-400 hover:text-gray-900 dark:hover:text-gray-100{{ end }} transition-colors">
+       class="text-base no-underline py-3 px-1 sm:py-0 sm:px-0 rounded-sm focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-blue-500 {{ if $isActive }}font-medium text-gray-900 dark:text-gray-100{{ else }}text-gray-500 dark:text-gray-400 hover:text-gray-900 dark:hover:text-gray-100{{ end }} transition-colors">
       {{- with .Name -}}{{ . }}{{- end -}}
     </a>
     {{ end }}
