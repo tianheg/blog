@@ -7,11 +7,9 @@
   </h1>
 
   {{/* --- Reading time --- */}}
-  {{ if gt .ReadingTime 0 }}
+  {{ if gt (len .RawContent) 50 }}
   <div class="mb-8 pb-6 border-b border-gray-200 dark:border-gray-800">
-    <span class="text-sm text-gray-400 dark:text-gray-500">
-      {{ .ReadingTime }} min read · {{ .WordCount }} words
-    </span>
+    {{ partial "functions/reading-time" . }}
   </div>
   {{ end }}
 
