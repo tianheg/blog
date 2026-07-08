@@ -23,6 +23,24 @@
               prose-code:text-sm prose-pre:bg-gray-50 dark:prose-pre:bg-gray-900 prose-pre:border prose-pre:border-gray-200 dark:prose-pre:border-gray-800">
     {{ partial "content/render-content" .Content }}
   </div>
+
+  {{- /* Intl.Segmenter progressive word count enhancement */ -}}
+  <script>
+  (function() {
+    var rtEl = document.getElementById('reading-time');
+    var wcEl = document.getElementById('word-count');
+    if (!rtEl && !wcEl) return;
+    try {
+      var text = document.querySelector('[data-pagefind-body]').textContent;
+      var segments = new Intl.Segmenter('zh-CN', { granularity: 'word' });
+      var words = 0;
+      for (var seg of segments.segment(text)) { if (seg.isWordLike) words++; }
+      var mins = Math.max(1, Math.round(words / 200));
+      if (wcEl) wcEl.textContent = words + ' words';
+      if (rtEl) rtEl.textContent = mins + ' min read';
+    } catch(e) { /* fallback to server values */ }
+  })();
+  </script>
 </article>
 
 {{ end }}

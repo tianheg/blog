@@ -1,8 +1,11 @@
 {{- /*
+
   Custom reading time and word count for mixed CJK/English content.
   Strips Org code blocks (#+BEGIN_SRC ... #+END_SRC) and frontmatter.
-  Total chars as proxy: CJK chars ≈ 1 word each, English ≈ 1 word per 5 chars.
-  Mixed average ~1 word per 2 chars. Reading speed ~300 cpm mixed.
+  Word count: CJK chars (matched via \p{Han}) = 1 word each,
+              remaining whitespace-separated tokens = 1 word each.
+  Reading speed: ~200 wpm (mixed CJK/English).
+
 */ -}}
 {{- $raw := .RawContent -}}
 
@@ -27,16 +30,27 @@
   {{- end -}}
 {{- end -}}
 
-{{- $chars := len (trim $clean " ") -}}
+{{- /* CJK words: each Han character = 1 word */ -}}
+{{- $cjkMatches := findRE "\\p{Han}" $clean -}}
+{{- $cjkWords := len $cjkMatches -}}
 
-{{- /* Word estimate: CJK = 1 word/char, English ≈ 1 word/5 chars. Mixed avg ~1 word/2 chars */ -}}
-{{- $words := div (add $chars 1) 2 -}}
+{{- /* Non-CJK words: strip Han chars, split whitespace, count tokens */ -}}
+{{- $asciiOnly := replaceRE "\\p{Han}" " " $clean -}}
+{{- $asciiWords := 0 -}}
+{{- range split $asciiOnly " " -}}
+  {{- $token := trim . " \t\n\r,.!?;:\"'()[]{}…—-–" -}}
+  {{- if gt (len $token) 0 -}}
+    {{- $asciiWords = add $asciiWords 1 -}}
+  {{- end -}}
+{{- end -}}
+
+{{- $words := add $cjkWords $asciiWords -}}
 {{- if lt $words 3 -}}{{- $words = 3 -}}{{- end -}}
 
-{{- /* Reading time: ~300 chars/min for mixed CJK/English */ -}}
-{{- $mins := div (add $chars 299) 300 -}}
+{{- /* Reading time: ~200 wpm for mixed content */ -}}
+{{- $mins := div (add $words 199) 200 -}}
 {{- if lt $mins 1 -}}{{- $mins = 1 -}}{{- end -}}
 
 <span class="text-sm text-gray-400 dark:text-gray-500">
-{{ $mins }} min read · {{ $words }} words
+  <span id="reading-time">{{ $mins }} min read</span> · <span id="word-count">{{ $words }} words</span>
 </span>
