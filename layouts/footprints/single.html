@@ -17,9 +17,10 @@
 
 {{/* Group posts by location using Store */}}
 {{ range where .Site.RegularPages "Section" "posts" }}
+  {{ $post := . }}
   {{ with .Params.location }}
     {{ $existing := $.Store.Get . | default slice }}
-    {{ $.Store.Set . ($existing | append $) }}
+    {{ $.Store.Set . ($existing | append $post) }}
   {{ end }}
 {{ end }}
 
