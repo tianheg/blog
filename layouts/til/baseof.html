@@ -20,6 +20,7 @@
   <meta property="og:title" content="{{ .Title }}"/>
   <meta property="og:url" content="{{ .Permalink }}"/>
   <meta property="og:site_name" content="{{ .Site.Title }}"/>
+  <link href="/pagefind/pagefind-ui.css" rel="stylesheet">
   <style>
   /* TOC sidebar styling */
   #TableOfContents ul { list-style: none; padding: 0; margin: 0; }
@@ -50,7 +51,15 @@
         <a href="/til" class="font-semibold text-base tracking-tight text-emerald-600 dark:text-emerald-400">
           TIL
         </a>
-        <nav class="flex items-center gap-6">
+        <div class="flex items-center gap-4">
+          <button id="til-search-btn"
+            class="text-sm text-gray-400 dark:text-gray-500 hover:text-emerald-600 dark:hover:text-emerald-400 transition-colors cursor-pointer"
+            aria-label="Search TIL">
+            <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+              <circle cx="11" cy="11" r="8"/><path d="m21 21-4.3-4.3"/>
+            </svg>
+          </button>
+          <nav class="flex items-center gap-6">
           {{ range .Site.Menus.main }}
           <a href="{{ .URL }}"
              class="text-sm no-underline text-gray-500 dark:text-gray-400 hover:text-gray-900 dark:hover:text-gray-100 transition-colors">
@@ -116,6 +125,31 @@
       </aside>
     </div>
   </div>
+
+  <div id="til-search-dialog"></div>
+
+  <script src="/pagefind/pagefind-ui.js"></script>
+  <script>
+    window.addEventListener('DOMContentLoaded', () => {
+      const btn = document.getElementById('til-search-btn');
+      const container = document.getElementById('til-search-dialog');
+      if (btn && container && typeof PagefindUI !== 'undefined') {
+        const ui = new PagefindUI({
+          element: '#til-search-dialog',
+          pageSize: 5,
+          resetStyles: false,
+          showImages: false,
+          showSubResults: true,
+          dialog: true
+        });
+        btn.addEventListener('click', () => {
+          const input = container.querySelector('.pagefind-ui__search-input');
+          if (input) { input.focus(); }
+          if (ui && ui.triggerSearch) { ui.triggerSearch(); }
+        });
+      }
+    });
+  </script>
 
   {{ partial "head/scripts.html" . }}
 </body>
