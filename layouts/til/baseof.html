@@ -1,0 +1,122 @@
+<!DOCTYPE html>
+<html lang="zh">
+<head>
+  <meta charset="UTF-8"/>
+  {{ hugo.Generator }}
+  <meta name="color-scheme" content="light dark">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover"/>
+  <title>
+    {{- block "title" . -}}
+      {{- partial "functions/get-title" (dict "page" . "fallback" .Site.Title) -}}
+      {{- " | " -}}
+      {{- .Site.Title -}}
+    {{- end -}}
+  </title>
+  <meta name="description" content="{{ .Description | default "Knowing oneself, grasp the world" | plainify | htmlUnescape }}"/>
+  {{- partialCached "head/styles.html" . -}}
+  <link rel="icon" href="/favicon.ico" sizes="32x32">
+  <link rel="icon" href="/icon.svg" type="image/svg+xml"/>
+  <link rel="canonical" href="{{ .Permalink }}"/>
+  <meta property="og:title" content="{{ .Title }}"/>
+  <meta property="og:url" content="{{ .Permalink }}"/>
+  <meta property="og:site_name" content="{{ .Site.Title }}"/>
+  <style>
+  /* TOC sidebar styling */
+  #TableOfContents ul { list-style: none; padding: 0; margin: 0; }
+  #TableOfContents ul ul { padding-left: 1rem; }
+  #TableOfContents li { margin: 0; }
+  #TableOfContents a {
+    display: block;
+    padding: 2px 0;
+    font-size: 0.875rem;
+    line-height: 1.5;
+    color: #6b7280;
+    text-decoration: none;
+    transition: color 0.15s;
+  }
+  #TableOfContents a:hover { color: #059669; }
+  .dark #TableOfContents a { color: #9ca3af; }
+  .dark #TableOfContents a:hover { color: #34d399; }
+  #TableOfContents .active a { color: #059669; font-weight: 500; }
+  .dark #TableOfContents .active a { color: #34d399; }
+</style>
+</head>
+<body class="bg-white dark:bg-gray-950 antialiased">
+
+  <!-- Header -->
+  <header class="sticky top-0 z-10 border-b border-gray-200 dark:border-gray-800 bg-white/95 dark:bg-gray-950/95 backdrop-blur supports-backdrop-blur:bg-white/80">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      <div class="flex items-center justify-between h-14">
+        <a href="/til" class="font-semibold text-base tracking-tight text-emerald-600 dark:text-emerald-400">
+          TIL
+        </a>
+        <nav class="flex items-center gap-6">
+          {{ range .Site.Menus.main }}
+          <a href="{{ .URL }}"
+             class="text-sm no-underline text-gray-500 dark:text-gray-400 hover:text-gray-900 dark:hover:text-gray-100 transition-colors">
+            {{ .Name }}
+          </a>
+          {{ end }}
+        </nav>
+      </div>
+    </div>
+  </header>
+
+  {{/* Collect TIL categories from page directories */}}
+  {{ $categories := slice }}
+  {{ range where .Site.Pages "Section" "til" }}
+    {{ $p := . }}
+    {{ with .File }}
+      {{ $cat := index (split .Dir "/") 1 }}
+      {{ if and $cat (not (in $categories $cat)) }}
+        {{ $categories = $categories | append $cat }}
+      {{ end }}
+    {{ end }}
+  {{ end }}
+  {{ $categories = sort $categories }}
+
+  {{/* Determine current category from current page's file path */}}
+  {{ $currentCategory := "" }}
+  {{ with .File }}{{ $currentCategory = index (split .Dir "/") 1 }}{{ end }}
+
+  <!-- Three-column layout -->
+  <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+    <div class="flex gap-8">
+      <!-- Left sidebar -->
+      <aside class="hidden lg:block w-56 shrink-0 pt-8">
+        <nav class="sticky top-20 space-y-1">
+          <div class="text-xs font-medium text-gray-400 dark:text-gray-500 uppercase tracking-wider mb-3 px-3">
+            Categories
+          </div>
+          {{ range $categories }}
+            {{ $cat := . }}
+            <a href="/til/#{{ $cat }}"
+               class="block px-3 py-1.5 text-sm rounded-md transition-colors
+                      {{ if eq $currentCategory $cat }}
+                        bg-emerald-50 dark:bg-emerald-900/20 text-emerald-700 dark:text-emerald-300 font-medium
+                      {{ else }}
+                        text-gray-600 dark:text-gray-400 hover:text-gray-900 dark:hover:text-gray-100 hover:bg-gray-50 dark:hover:bg-gray-800
+                      {{ end }}">
+              {{ $cat | title }}
+            </a>
+          {{ end }}
+        </nav>
+      </aside>
+
+      <!-- Main content -->
+      <main class="flex-1 min-w-0 pt-8 pb-16">
+        {{ block "main" . }}{{ end }}
+      </main>
+
+      <!-- Right sidebar (TOC - only on single pages) -->
+      <aside class="hidden xl:block w-56 shrink-0 pt-8">
+        <div class="sticky top-20">
+          {{ block "right" . }}{{ end }}
+        </div>
+      </aside>
+    </div>
+  </div>
+
+  {{ partial "head/scripts.html" . }}
+</body>
+</html>
