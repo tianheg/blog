@@ -1,6 +1,9 @@
 {{ define "main" }}
 
 <article data-pagefind-body>
+  {{/* --- Breadcrumb --- */}}
+  {{ partial "content/breadcrumb.html" . }}
+
   {{/* --- Title --- */}}
   <h1 class="text-2xl font-bold text-gray-900 dark:text-gray-100 mb-2">
     {{ partial "functions/get-title" (dict "page" .) }}
