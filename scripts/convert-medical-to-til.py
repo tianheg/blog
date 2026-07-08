@@ -8,22 +8,47 @@ import shutil
 MEDICAL_DIR = "/home/tianhe/projects/medical-knowledge"
 TIL_DIR = "/home/tianhe/projects/blog/content/til/health"
 
-# Map: source_md_path → output_org_name
-FILES = [
-    ("药理学/nsaids.md", "nsaids.org"),
-    ("药理学/prostaglandins-ibuprofen.md", "prostaglandins-ibuprofen.org"),
-    ("生理学/kidney.md", "kidney-physiology.org"),
-    ("生理学/erythropoiesis-epo.md", "erythropoiesis-epo.org"),
-    ("病理生理学/ckd.md", "ckd.org"),
-    ("病理生理学/renal-anemia.md", "renal-anemia.org"),
-    ("生活常识/常见指标/blood-pressure.md", "blood-pressure.org"),
-    ("生活常识/常见指标/blood-glucose-diabetes.md", "blood-glucose-diabetes.org"),
-    ("生活常识/常见指标/lab-tests.md", "lab-tests.org"),
-    ("生活常识/常见症状/fever.md", "fever.org"),
-    ("生活常识/常见症状/sleep-insomnia.md", "sleep-insomnia.org"),
-    ("生活常识/营养代谢/vitamins-minerals.md", "vitamins-minerals.org"),
-    ("生活常识/营养代谢/阴茎锻炼手册.md", "penis-exercise-manual.org"),
-]
+# Auto-discover source files, excluding category index pages
+IGNORE_FILES = {
+    # category index pages (just TOCs, no content)
+    "index.md",
+    "药理学/index.md", "生理学/index.md",
+    "病理生理学/index.md", "生活常识/index.md",
+}
+# content mapping: source_md_path → output_org_name
+FILES = []
+
+# Known medical articles (under subdirectories)
+for dirname in ["药理学", "生理学", "病理生理学", "生活常识/常见指标",
+                 "生活常识/常见症状", "生活常识/营养代谢"]:
+    d = os.path.join(MEDICAL_DIR, dirname)
+    if not os.path.isdir(d):
+        continue
+    for fn in sorted(os.listdir(d)):
+        if not fn.endswith(".md"):
+            continue
+        rel = os.path.join(dirname, fn)
+        if rel in IGNORE_FILES:
+            continue
+        org_name = fn[:-3].replace(" ", "-") + ".org"
+        # manual name overrides
+        OVERRIDES = {
+            "生活常识/营养代谢/阴茎锻炼手册.md": "penis-exercise-manual.org",
+        }
+        org_name = OVERRIDES.get(rel, org_name)
+        FILES.append((rel, org_name))
+
+# 参考来源/ — index.md as references-index.org, plus individual bookmarks
+ref_dir = os.path.join(MEDICAL_DIR, "参考来源")
+if os.path.isdir(ref_dir):
+    for fn in sorted(os.listdir(ref_dir)):
+        if not fn.endswith(".md"):
+            continue
+        if fn == "index.md":
+            FILES.append(("参考来源/index.md", "references-index.org"))
+        else:
+            org_name = "ref-" + fn[:-3].replace(" ", "-") + ".org"
+            FILES.append(("参考来源/" + fn, org_name))
 
 
 def md_to_org(text: str) -> str:
