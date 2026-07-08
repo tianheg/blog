@@ -3,14 +3,9 @@ set -euo pipefail
 
 main() {
 
-  PAGEFIND_VERSION=1.5.0-beta.1
   HUGO_VERSION=0.162.1
 
   export TZ=Asia/Hong_Kong
-
-  # Install Pagefind
-  echo "Installing Pagefind v${PAGEFIND_VERSION}..."
-  wget -q https://github.com/Pagefind/pagefind/releases/download/v${PAGEFIND_VERSION}/pagefind_extended-v${PAGEFIND_VERSION}-x86_64-unknown-linux-musl.tar.gz -O - | tar -xz -C /opt/buildhome
 
   # Install Hugo
   echo "Installing Hugo v${HUGO_VERSION}..."
@@ -25,7 +20,6 @@ main() {
 
   # Verify installed versions
   echo "Verifying installations..."
-  echo Pagefind: "$(pagefind_extended --version)"
   echo Go: "$(go version)"
   echo Hugo: "$(hugo version)"
   echo Node.js: "$(node --version)"
