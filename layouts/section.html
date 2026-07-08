@@ -75,20 +75,14 @@
       {{ $category := . }}
       {{ $categoryPages := $.Store.Get $category }}
       {{ if $categoryPages }}
-        <h2 id="{{ $category | urlize }}" class="text-lg font-semibold mt-10 mb-3 pb-2 border-b border-gray-100 dark:border-gray-800">{{ $category | title }}</h2>
-        <div class="mb-8">
+        <h2 id="{{ $category | urlize }}" class="text-xl font-semibold mt-10 mb-4">{{ $category | title }}</h2>
+        <div class="space-y-1 mb-8">
           {{ range $categoryPages }}
-            <a href="{{ .RelPermalink }}"
-               class="group flex items-center justify-between py-2 px-3 -mx-3 rounded-lg transition-colors hover:bg-gray-50 dark:hover:bg-gray-800/40">
-              <span class="text-gray-900 dark:text-gray-100 group-hover:text-blue-600 dark:group-hover:text-blue-400 transition-colors">
+            <div class="flex items-baseline gap-4 py-1.5">
+              <a href="{{ .RelPermalink }}" class="">
                 {{- partial "functions/get-title" (dict "page" .) -}}
-              </span>
-              {{ if gt .ReadingTime 0 }}
-              <span class="text-xs text-gray-400 dark:text-gray-500 shrink-0 ml-4 tabular-nums">
-                {{ .ReadingTime }}min
-              </span>
-              {{ end }}
-            </a>
+              </a>
+            </div>
           {{ end }}
         </div>
       {{ end }}
