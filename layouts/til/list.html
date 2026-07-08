@@ -1,0 +1,60 @@
+{{ define "main" }}
+
+<div data-pagefind-ignore>
+  {{ $section := .Section }}
+  {{ $pages := .RegularPages }}
+
+  <div class="mb-6">
+    <h1 class="text-2xl font-bold text-gray-900 dark:text-gray-100">TIL</h1>
+    <p class="text-sm text-gray-500 dark:text-gray-400 mt-1">{{ len $pages }} notes and counting</p>
+  </div>
+
+  {{/* Group by category directory using Store */}}
+  {{ .Store.Delete "til-groups" }}
+  {{ .Store.Delete "til-categories" }}
+
+  {{ $categories := slice }}
+  {{ range $pages }}
+    {{ $page := . }}
+    {{ with .File }}
+      {{ $cat := index (split .Dir "/") 1 }}
+      {{ if $cat }}
+        {{ if not (in $categories $cat) }}
+          {{ $categories = $categories | append $cat }}
+        {{ end }}
+        {{ $existing := $.Store.Get $cat | default slice }}
+        {{ $.Store.Set $cat ($existing | append $page) }}
+      {{ end }}
+    {{ end }}
+  {{ end }}
+
+  {{ $sortedCategories := sort $categories }}
+
+  {{ range $sortedCategories }}
+    {{ $cat := . }}
+    {{ $catPages := $.Store.Get $cat }}
+    <section class="mb-10">
+      <h2 id="{{ $cat }}" class="text-base font-semibold text-gray-900 dark:text-gray-100 mb-3 pb-2 border-b border-gray-100 dark:border-gray-800">
+        {{ $cat | title }}
+        <span class="text-xs font-normal text-gray-400 dark:text-gray-500 ml-2">{{ len $catPages }}</span>
+      </h2>
+      <div class="space-y-0.5">
+        {{ range $catPages }}
+        <a href="{{ .RelPermalink }}"
+           class="group flex items-center justify-between py-1.5 px-2 -mx-2 rounded-md transition-colors hover:bg-gray-50 dark:hover:bg-gray-800/40">
+          <span class="text-sm text-gray-700 dark:text-gray-300 group-hover:text-emerald-600 dark:group-hover:text-emerald-400 transition-colors">
+            {{- partial "functions/get-title" (dict "page" .) -}}
+          </span>
+          {{ if gt .ReadingTime 0 }}
+          <span class="text-xs text-gray-400 dark:text-gray-500 shrink-0 ml-4 tabular-nums">
+            {{ .ReadingTime }}min
+          </span>
+          {{ end }}
+        </a>
+        {{ end }}
+      </div>
+    </section>
+  {{ end }}
+</div>
+
+{{ end }}
