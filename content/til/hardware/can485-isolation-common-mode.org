@@ -1,0 +1,53 @@
+* CAN与485隔离设计 & 电流采样精度单位
+
+** 电流采样精度 ≤2%@FS 的含义
+
+FS = Full Scale（满量程）。精度是满量程的百分比，不是读数的百分比。
+
+举例：满量程 ±100A，精度 2%@FS = ±2A
+- 充 50A 时显示 48A~52A 合格
+- 放 30A（显示 -30A）时实际 -28A~-32A 合格
+- 充 2A 小电流时误差仍为 ±2A（占读数 100%）
+
+| 类型 | 含义 | 小电流表现 |
+|------|------|-----------|
+| ≤2%@FS | 满量程精度 | 小电流误差大（±2A 不变） |
+| ≤2% of reading | 读数精度 | 小电流误差小（2A 时 ±0.04A） |
+
+BMS 中用 FS 精度是因为过流保护门槛需要绝对准确性，而非相对读数。
+
+** CAN_GND 与 485_GND 不连通的原因
+
+这是隔离设计，核心目的是消除地环路（ground loop）。CAN 和 485 分布在不同的物理位置（如 CAN 连电池包内部从控，485 连外部上位机/显示屏），两个节点的地电位不同（地电位差 ΔVgnd）。来源：
+- 大电流回流路径上的 IR 压降
+- MOSFET 开关产生的 di/dt 噪声通过寄生电感耦合到地
+- 两个设备接入不同大地参考点
+
+如果直连，地环路共模电流会在信号线上乱窜，轻则通信误码，重则烧收发器。
+
+** 共模电流详解
+
+共模电流与差模电流的区别：
+
+- 差模（Differential）：一对线上方向相反，传有用信号
+- 共模（Common-mode）：一对线上方向相同，是噪声/干扰
+
+地环路中，ΔVgnd 作为电压源，通过直连路径产生共模电流 I_cm = ΔVgnd / R_路径。这个电流沿信号线回流，导致：
+1. 超出 CAN 收发器共模范围（TJA1050 为 -2V~+7V），通信挂死
+2. 差分电压被偏移，误判逻辑电平
+3. 长期可靠性问题（连接器腐蚀、收发器烧毁）
+
+** 隔离方案
+
+两端各走各的参考地，中间用隔离 DC-DC 模块（如 B0505S）分别供电，用数字隔离器（如 ISO1050、ADM2483）传信号。物理上切断共模电流回路，信号靠隔离器无损通过。
+
+隔离后万用表量 CAN_GND 与 485_GND：开路（MΩ 级）。偶尔串 1MΩ~10MΩ 电阻 + 1nF 电容（iso-ground），给浮地弱参考路径防静电积累，但不形成地环路。
+
+** 参考来源
+
+- TI, "Controller Area Network (CAN) Transceivers Application Report" (SLLA337)
+  https://www.ti.com/lit/an/slla337/slla337.pdf
+- ADI, "RS-485 Grounding and Isolation"
+  https://www.analog.com/en/resources/technical-articles/rs485-grounding-and-isolation.html
+- Maxim Integrated, "Ground Loop Prevention in CAN Systems"
+  https://www.maximintegrated.com/en/design/technical-documents/tutorials/4/4443.html
