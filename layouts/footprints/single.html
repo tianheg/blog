@@ -1,11 +1,13 @@
 {{ define "main" }}
 
-{{/* Group posts by location using Store */}}
+{{/* Group posts by location using Store — filter out English (-en) posts */}}
 {{ range where .Site.RegularPages "Section" "posts" }}
   {{ $post := . }}
+  {{ if not (strings.HasSuffix .File.Path "-en.org") }}
   {{ with .Params.location }}
     {{ $existing := $.Store.Get . | default slice }}
     {{ $.Store.Set . ($existing | append $post) }}
+  {{ end }}
   {{ end }}
 {{ end }}
 
