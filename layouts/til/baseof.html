@@ -71,22 +71,21 @@
     </div>
   </header>
 
-  {{/* Collect TIL categories from page directories */}}
-  {{ $categories := slice }}
-  {{ range where .Site.Pages "Section" "til" }}
-    {{ $p := . }}
-    {{ with .File }}
-      {{ $cat := index (split .Dir "/") 1 }}
-      {{ if and $cat (not (in $categories $cat)) }}
-        {{ $categories = $categories | append $cat }}
-      {{ end }}
+  {{/* Collect TIL sections */}}
+  {{ $tilSection := .Site.GetPage "/til" }}
+  {{ $allSections := slice }}
+  {{ if $tilSection }}
+    {{ $allSections = $tilSection.Sections }}
+  {{ end }}
+
+  {{/* Determine current section */}}
+  {{ $currentSection := "" }}
+  {{ with .File }}
+    {{ $parts := split .Dir "/" }}
+    {{ if ge (len $parts) 2 }}
+      {{ $currentSection = index $parts 1 }}
     {{ end }}
   {{ end }}
-  {{ $categories = sort $categories }}
-
-  {{/* Determine current category from current page's file path */}}
-  {{ $currentCategory := "" }}
-  {{ with .File }}{{ $currentCategory = index (split .Dir "/") 1 }}{{ end }}
 
   <!-- Three-column layout -->
   <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
@@ -97,16 +96,16 @@
           <div class="text-xs font-medium text-gray-400 dark:text-gray-500 uppercase tracking-wider mb-3 px-3">
             Categories
           </div>
-          {{ range $categories }}
+          {{ range $allSections }}
             {{ $cat := . }}
-            <a href="/til/#{{ $cat }}"
+            <a href="{{ .RelPermalink }}"
                class="block px-3 py-1.5 text-sm rounded-md transition-colors
-                      {{ if eq $currentCategory $cat }}
+                      {{ if eq $currentSection (index (split .File.Dir "/") 1) }}
                         bg-emerald-50 dark:bg-emerald-900/20 text-emerald-700 dark:text-emerald-300 font-medium
                       {{ else }}
                         text-gray-600 dark:text-gray-400 hover:text-gray-900 dark:hover:text-gray-100 hover:bg-gray-50 dark:hover:bg-gray-800
                       {{ end }}">
-              {{ $cat | title }}
+              {{ .Title }}
             </a>
           {{ end }}
         </nav>
