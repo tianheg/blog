@@ -15,7 +15,7 @@
       {{ if and $category (ne $category "_index.org") }}
         <li class="flex items-center space-x-2">
           <span class="text-gray-500">/</span>
-          <a href="/til/#{{ $category | urlize }}" class="hover:text-gray-900 dark:hover:text-gray-200 transition-colors">
+          <a href="/til/{{ $category }}/" class="hover:text-gray-900 dark:hover:text-gray-200 transition-colors">
             {{ $category | title }}
           </a>
         </li>
