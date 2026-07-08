@@ -1,0 +1,42 @@
+{{- /*
+  Custom reading time and word count for mixed CJK/English content.
+  Strips Org code blocks (#+BEGIN_SRC ... #+END_SRC) and frontmatter.
+  Total chars as proxy: CJK chars ≈ 1 word each, English ≈ 1 word per 5 chars.
+  Mixed average ~1 word per 2 chars. Reading speed ~300 cpm mixed.
+*/ -}}
+{{- $raw := .RawContent -}}
+
+{{- /* Strip Org code blocks */ -}}
+{{- $noCode := "" -}}
+{{- $inCode := false -}}
+{{- range (split $raw "\n") -}}
+  {{- if or (hasPrefix . "#+BEGIN_SRC") (hasPrefix . "```") -}}
+    {{- $inCode = true -}}
+  {{- else if or (hasPrefix . "#+END_SRC") (hasPrefix . "```") -}}
+    {{- $inCode = false -}}
+  {{- else if not $inCode -}}
+    {{- $noCode = print $noCode . " " -}}
+  {{- end -}}
+{{- end -}}
+
+{{- /* Strip Org frontmatter (#+ lines) */ -}}
+{{- $clean := "" -}}
+{{- range (split $noCode "\n") -}}
+  {{- if not (hasPrefix . "#+") -}}
+    {{- $clean = print $clean . " " -}}
+  {{- end -}}
+{{- end -}}
+
+{{- $chars := len (trim $clean " ") -}}
+
+{{- /* Word estimate: CJK = 1 word/char, English ≈ 1 word/5 chars. Mixed avg ~1 word/2 chars */ -}}
+{{- $words := div (add $chars 1) 2 -}}
+{{- if lt $words 3 -}}{{- $words = 3 -}}{{- end -}}
+
+{{- /* Reading time: ~300 chars/min for mixed CJK/English */ -}}
+{{- $mins := div (add $chars 299) 300 -}}
+{{- if lt $mins 1 -}}{{- $mins = 1 -}}{{- end -}}
+
+<span class="text-sm text-gray-400 dark:text-gray-500">
+{{ $mins }} min read · {{ $words }} words
+</span>
