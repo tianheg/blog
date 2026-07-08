@@ -1,7 +1,4 @@
 #+TITLE: Open Missing Semester of Cs
-:PROPERTIES:
-:CUSTOM_ID: open-missing-semester-of-cs
-:END:
 ​## The Shell
 
 ​### 常用命令
@@ -104,21 +101,9 @@ take input from both arguments and STDIN: `ls | xargs rm`
 1. 阅读 `man ls` 找到满足以下要求的命令：
 
 * Includes all files, including hidden files
-:PROPERTIES:
-:CUSTOM_ID: includes-all-files-including-hidden-files
-:END:
 * Sizes are listed in human readable format (e.g. 454M instead of 454279954)
-:PROPERTIES:
-:CUSTOM_ID: sizes-are-listed-in-human-readable-format-e.g.-454m-instead-of-454279954
-:END:
 * Files are ordered by recency
-:PROPERTIES:
-:CUSTOM_ID: files-are-ordered-by-recency
-:END:
 * Output is colorized
-:PROPERTIES:
-:CUSTOM_ID: output-is-colorized
-:END:
 解答：
 
 ```sh ls -ahlt --color=auto ```
@@ -210,151 +195,61 @@ Vim 有几种模式：
 ​### 移动
 
 * Basic movement: `hjkl` (left, down, up, right)
-:PROPERTIES:
-:CUSTOM_ID: basic-movement-hjkl-left-down-up-right
-:END:
 * Words: `w` (next word), `b` (beginning of word), `e` (end of word)
-:PROPERTIES:
-:CUSTOM_ID: words-w-next-word-b-beginning-of-word-e-end-of-word
-:END:
 * Lines: `0` (beginning of line), `^` (first non\-blank character), `$` (end of line)
-:PROPERTIES:
-:CUSTOM_ID: lines-0-beginning-of-line-first-non-blank-character-end-of-line
-:END:
 * Screen: `H` (top of screen), `M` (middle of screen), `L` (bottom of screen)
-:PROPERTIES:
-:CUSTOM_ID: screen-h-top-of-screen-m-middle-of-screen-l-bottom-of-screen
-:END:
 * Scroll: `Ctrl-u` (up), `Ctrl-d` (down)
-:PROPERTIES:
-:CUSTOM_ID: scroll-ctrl-u-up-ctrl-d-down
-:END:
 * File: `gg` (beginning of file), `G` (end of file)
-:PROPERTIES:
-:CUSTOM_ID: file-gg-beginning-of-file-g-end-of-file
-:END:
 * Line numbers: `:{number}<CR>` or `{number}G` (line {number})
-:PROPERTIES:
-:CUSTOM_ID: line-numbers-numbercr-or-numberg-line-number
-:END:
 * Misc: `%` (corresponding item)
-:PROPERTIES:
-:CUSTOM_ID: misc-corresponding-item
-:END:
 * Find: `f{character}`, `t{character}`, `F{character}`, `T{character}`
-:PROPERTIES:
-:CUSTOM_ID: find-fcharacter-tcharacter-fcharacter-tcharacter
-:END:
 - find/to forward/backward {character} on the current line
 - `,` / `;` for navigating matches
 
 * Search: `/{regex}`, `n` / `N` for navigating matches
-:PROPERTIES:
-:CUSTOM_ID: search-regex-n-n-for-navigating-matches
-:END:
 ​### 选择
 
 Visual modes:
 
 * Visual: `v`
-:PROPERTIES:
-:CUSTOM_ID: visual-v
-:END:
 * Visual Line: `V`
-:PROPERTIES:
-:CUSTOM_ID: visual-line-v
-:END:
 * Visual Block: `Ctrl-v`
-:PROPERTIES:
-:CUSTOM_ID: visual-block-ctrl-v
-:END:
 Can use movement keys to make selection.
 
 ​### 编辑
 
 * `i` enter Insert mode
-:PROPERTIES:
-:CUSTOM_ID: i-enter-insert-mode
-:END:
 - but for manipulating/deleting text, want to use something more than backspace
 
 * `o` / `O` insert line below / above
-:PROPERTIES:
-:CUSTOM_ID: o-o-insert-line-below-above
-:END:
 * `d{motion}` delete {motion}
-:PROPERTIES:
-:CUSTOM_ID: dmotion-delete-motion
-:END:
 - e.g. `dw` is delete word, `d$` is delete to end of line, `d0` is delete to beginning of line
 
 * `c{motion}` change {motion}
-:PROPERTIES:
-:CUSTOM_ID: cmotion-change-motion
-:END:
 - e.g. `cw` is change word
 - like `d{motion}` followed by `i`
 
 * `x` delete character (equal do `dl`)
-:PROPERTIES:
-:CUSTOM_ID: x-delete-character-equal-do-dl
-:END:
 * `s` substitute character (equal to `xi`)
-:PROPERTIES:
-:CUSTOM_ID: s-substitute-character-equal-to-xi
-:END:
 * Visual mode + manipulation
-:PROPERTIES:
-:CUSTOM_ID: visual-mode-manipulation
-:END:
 - select text, `d` to delete it or `c` to change it
 
 * `u` to undo, `<C-r>` to redo
-:PROPERTIES:
-:CUSTOM_ID: u-to-undo-c-r-to-redo
-:END:
 * `y` to copy / "yank" (some other commands like `d` also copy)
-:PROPERTIES:
-:CUSTOM_ID: y-to-copy-yank-some-other-commands-like-d-also-copy
-:END:
 * `p` to paste
-:PROPERTIES:
-:CUSTOM_ID: p-to-paste
-:END:
 * Lots more to learn: e.g. `~` flips the case of a character
-:PROPERTIES:
-:CUSTOM_ID: lots-more-to-learn-e.g.-flips-the-case-of-a-character
-:END:
 ​### 计数
 
 * `3w` move 3 words forward
-:PROPERTIES:
-:CUSTOM_ID: w-move-3-words-forward
-:END:
 * `5j` move 5 lines down
-:PROPERTIES:
-:CUSTOM_ID: j-move-5-lines-down
-:END:
 * `7dw` delete 7 words
-:PROPERTIES:
-:CUSTOM_ID: dw-delete-7-words
-:END:
 ​### Modifiers
 
 You can use modifiers to change the meaning of a noun. Some modifiers are `i`, which means "inner" or "inside", and `a`, which means "around".
 
 * `ci(` change the contents inside the current pair of parentheses
-:PROPERTIES:
-:CUSTOM_ID: ci-change-the-contents-inside-the-current-pair-of-parentheses
-:END:
 * `ci[` change the contents inside the current pair of square brackets
-:PROPERTIES:
-:CUSTOM_ID: ci-change-the-contents-inside-the-current-pair-of-square-brackets
-:END:
 * `da'` delete a single\-quoted string, including the surrounding single quotes
-:PROPERTIES:
-:CUSTOM_ID: da-delete-a-single-quoted-string-including-the-surrounding-single-quotes
-:END:
 ​### 练习 Demo
 
 开始：
@@ -414,15 +309,9 @@ print(fizz_{buzz}(10)) ```
 `:s` (substitute) command ([documentation]([[https://vim.fandom.com/wiki/Search_and_replace]])).
 
 * `%s/foo/bar/g`
-:PROPERTIES:
-:CUSTOM_ID: sfoobarg
-:END:
 - replace foo with bar globally in file
 
 * `%s/\[.*\](\(.*\))/\1/g`
-:PROPERTIES:
-:CUSTOM_ID: s..1g
-:END:
 - replace named Markdown links with plain URLs
 
 1. 分割窗口
@@ -432,36 +321,15 @@ print(fizz_{buzz}(10)) ```
 1. 宏 Macros
 
 * `q{character}` to start recording a macro in register `{character}`
-:PROPERTIES:
-:CUSTOM_ID: qcharacter-to-start-recording-a-macro-in-register-character
-:END:
 * `q` to stop recording
-:PROPERTIES:
-:CUSTOM_ID: q-to-stop-recording
-:END:
 * `[cite/t:@character]` replays the macro
-:PROPERTIES:
-:CUSTOM_ID: character-replays-the-macro
-:END:
 * Macro execution stops on error
-:PROPERTIES:
-:CUSTOM_ID: macro-execution-stops-on-error
-:END:
 * `{number}[cite/t:@character]` executes a macro {number} times
-:PROPERTIES:
-:CUSTOM_ID: numbercharacter-executes-a-macro-number-times
-:END:
 * Macros can be recursive
-:PROPERTIES:
-:CUSTOM_ID: macros-can-be-recursive
-:END:
 - first clear the macro with `q{character}q`
 - record the macro, with `[cite/t:@character]` to invoke the macro recursively (will be a no\-op until recording is complete)
 
 * Example: convert xml to json ([file]([[https://missing.csail.mit.edu/2020/files/example-data.xml]]))
-:PROPERTIES:
-:CUSTOM_ID: example-convert-xml-to-json-filehttpsmissing.csail.mit.edu2020filesexample-data.xml
-:END:
 - Array of objects with keys "name" / "email"
 - Use a Python program?
 - Use sed / regexes
@@ -487,33 +355,12 @@ print(fizz_{buzz}(10)) ```
 ​### 资源
 
 * `vimtutor` is a tutorial that comes installed with Vim \- if Vim is installed, you should be able to run `vimtutor` from your shell
-:PROPERTIES:
-:CUSTOM_ID: vimtutor-is-a-tutorial-that-comes-installed-with-vim---if-vim-is-installed-you-should-be-able-to-run-vimtutor-from-your-shell
-:END:
 * [Vim Adventures]([[https://vim-adventures.com/]]) is a game to learn Vim
-:PROPERTIES:
-:CUSTOM_ID: vim-adventureshttpsvim-adventures.com-is-a-game-to-learn-vim
-:END:
 * [Vim Tips Wiki]([[https://vim.fandom.com/wiki/Vim_Tips_Wiki]])
-:PROPERTIES:
-:CUSTOM_ID: vim-tips-wikihttpsvim.fandom.comwikivim_tips_wiki
-:END:
 * [Vim Advent Calendar]([[https://web.archive.org/web/20220610123437/https://vimways.org/2019/]]) has various Vim tips
-:PROPERTIES:
-:CUSTOM_ID: vim-advent-calendarhttpsweb.archive.orgweb20220610123437httpsvimways.org2019-has-various-vim-tips
-:END:
 * [Vim Golf]([[http://www.vimgolf.com/]]) is [code golf]([[https://en.wikipedia.org/wiki/Code_golf]]), but where the programming language is Vim's UI
-:PROPERTIES:
-:CUSTOM_ID: vim-golfhttpwww.vimgolf.com-is-code-golfhttpsen.wikipedia.orgwikicode_golf-but-where-the-programming-language-is-vims-ui
-:END:
 * [Vi/Vim Stack Exchange]([[https://vi.stackexchange.com/]])
-:PROPERTIES:
-:CUSTOM_ID: vivim-stack-exchangehttpsvi.stackexchange.com
-:END:
 * [Practical Vim]([[https://pragprog.com/titles/dnvim2/practical-vim-second-edition/]]) (book)
-:PROPERTIES:
-:CUSTOM_ID: practical-vimhttpspragprog.comtitlesdnvim2practical-vim-second-edition-book
-:END:
 ​### 练习
 
 1. 完成 `vimtutor`

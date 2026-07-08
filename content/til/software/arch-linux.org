@@ -1,15 +1,6 @@
 #+TITLE: Arch Linux
-:PROPERTIES:
-:CUSTOM_ID: arch-linux
-:END:
 ** System Management
-:PROPERTIES:
-:CUSTOM_ID: system-management
-:END:
 *** Kernel Downgrade
-:PROPERTIES:
-:CUSTOM_ID: kernel-downgrade
-:END:
 因卡顿回退 Linux 内核。设置 BIOS U 盘启动，插入制作好的 USB 启动盘，进入 U 盘中的 arch 系统，然后执行：
 
 ```sh
@@ -23,9 +14,6 @@ pacman -U linux-5.13.9.arch1-1-x86_64.pkg.tar.zst
 参考：https://wiki.archlinux.org/title/Downgrading_packages#Downgrading_the_kernel
 
 *** Get Fastest Pacman Mirrors
-:PROPERTIES:
-:CUSTOM_ID: pacman-mirrors
-:END:
 三种方式：
 
 Way 1 - 手动从 mirror status 页面选择：
@@ -46,9 +34,6 @@ Way 3 - 使用 reflector：
 3. 保存到 mirrorlist
 
 *** Man Pages
-:PROPERTIES:
-:CUSTOM_ID: man-pages
-:END:
 ```sh
 pacman -S man-db man-pages
 ```
@@ -62,27 +47,15 @@ man boot.7
 https://wiki.archlinux.org/title/Man_page
 
 *** Arch Linux in LXC
-:PROPERTIES:
-:CUSTOM_ID: arch-in-lxc
-:END:
 - https://github.com/lxc/lxc
 - https://blog.lilydjwg.me/tag/lxc
 - https://www.kissuki.com/blog/2013/06/30/arch-in-lxc
 
 *** CPU Microcode
-:PROPERTIES:
-:CUSTOM_ID: cpu-microcode
-:END:
 安装 Intel/AMD CPU 微码更新以修复安全漏洞和稳定性问题。
 
 ** Package Management
-:PROPERTIES:
-:CUSTOM_ID: package-management
-:END:
 *** PKGBUILD
-:PROPERTIES:
-:CUSTOM_ID: pkgbuild
-:END:
 来自 [Example PKGBUILD file](https://gitlab.archlinux.org/pacman/pacman/raw/master/proto/PKGBUILD.proto)
 
 ```proto
@@ -106,27 +79,18 @@ makedepends=()
 4. [AUR submission guidelines - ArchWiki](https://wiki.archlinux.org/title/AUR_submission_guidelines)
 
 *** AUR Helpers
-:PROPERTIES:
-:CUSTOM_ID: aur-helpers
-:END:
 https://wiki.archlinux.org/title/AUR_helpers
 
 - [yay](https://github.com/Jguer/yay)
 - [paru](https://github.com/morganamilo/paru)
 
 *** Yay Proxy Support
-:PROPERTIES:
-:CUSTOM_ID: yay-proxy
-:END:
 https://github.com/Jguer/yay/issues/951#issuecomment-1080206297
 
 1. `sudo vim /etc/proxychains.conf`
 2. 注释 `proxy_dns`
 
 *** Fix Pacman Key
-:PROPERTIES:
-:CUSTOM_ID: fix-pacman-key
-:END:
 解决 `ERROR: key could not be locally signed` 错误：
 
 ```bash
@@ -137,9 +101,6 @@ pacman-key --populate archlinuxcn
 ```
 
 *** archlinuxcn Keyring Manual Trust
-:PROPERTIES:
-:CUSTOM_ID: archlinuxcn-keyring
-:END:
 在新系统中安装 archlinuxcn-keyring 之前，需要手动信任 farseerfc 的 key。
 
 遇到 `error: archlinuxcn-keyring: Signature from "Jiachen YANG ..." is marginal trust` 时：
@@ -152,9 +113,6 @@ sudo pacman -S archlinuxcn-keyring
 https://www.archlinuxcn.org/archlinuxcn-keyring-manually-trust-farseerfc-key/
 
 *** Install .deb Packages on Arch
-:PROPERTIES:
-:CUSTOM_ID: install-deb
-:END:
 https://www.makeuseof.com/install-deb-packages-arch-linux/
 
 方法一（使用 debtap）：
@@ -177,13 +135,7 @@ sudo cp -r ./usr/* /usr/
 ```
 
 ** Hardware & Drivers
-:PROPERTIES:
-:CUSTOM_ID: hardware-drivers
-:END:
 *** Screen Flickering (Intel GPU)
-:PROPERTIES:
-:CUSTOM_ID: screen-flickering
-:END:
 Arch Linux 屏幕闪烁问题，Intel UHD Graphics 620。
 
 尝试一 - 添加内核参数：
@@ -212,9 +164,6 @@ sudo grub-mkconfig -o /boot/grub/grub.cfg
 - https://bbs.archlinux.org/viewtopic.php?id=228815
 
 *** Bluetooth Stops Working After Some Time
-:PROPERTIES:
-:CUSTOM_ID: bluetooth-issue
-:END:
 Bluetooth 在使用一段时间后停止工作。
 
 来源：
@@ -224,9 +173,6 @@ Bluetooth 在使用一段时间后停止工作。
 4. https://wiki.archlinux.org/title/bluetooth
 
 *** System Freeze After Connecting WiFi
-:PROPERTIES:
-:CUSTOM_ID: wifi-freeze
-:END:
 Arch Linux 在连接 WiFi 后系统冻结。
 
 来源：
@@ -235,13 +181,7 @@ Arch Linux 在连接 WiFi 后系统冻结。
 3. https://github.com/tomaspinho/rtl8821ce/issues/142
 
 ** Font Configuration
-:PROPERTIES:
-:CUSTOM_ID: font-configuration
-:END:
 *** Font Concepts
-:PROPERTIES:
-:CUSTOM_ID: font-concepts
-:END:
 - Stylistic Sets: 一种特性，让使用字体的可选字符变得更简单。
 - OpenType: 可伸缩计算机字体的格式，基于 TrueType 构建，由 Microsoft 和 Adobe 开发。
 - TrueType: 苹果在 20 世纪 80 年代末开发的一种大纲字体标准。
@@ -251,9 +191,6 @@ Arch Linux 在连接 WiFi 后系统冻结。
 - HarfBuzz: 用于文本整形的软件开发库。
 
 *** Install Chinese Fonts
-:PROPERTIES:
-:CUSTOM_ID: chinese-fonts
-:END:
 安装字体包：
 
 ```bash
@@ -271,21 +208,12 @@ yay -S ttf-ms-win11-auto-zh_cn
 https://wiki.archlinux.org/title/Font_Configuration/Chinese
 
 ** Desktop & Applications
-:PROPERTIES:
-:CUSTOM_ID: desktop-apps
-:END:
 *** Wayland Setup
-:PROPERTIES:
-:CUSTOM_ID: wayland-setup
-:END:
 [Full Wayland Setup on Arch Linux](https://www.fosskers.ca/en/blog/wayland)
 
 注意：腾讯会议（wemeet-bin）不支持 Wayland，屏幕共享功能不可用。切换到 Xorg 下则可以共享屏幕。
 
 *** Key Remapping with evremap
-:PROPERTIES:
-:CUSTOM_ID: key-remapping
-:END:
 安装 [evremap](https://github.com/wez/evremap)：
 
 ```sh
@@ -326,9 +254,6 @@ sudo systemctl enable evremap.service --now
 https://wiki.archlinux.org/title/Wayland#Remap_keyboard_or_mouse_keys
 
 *** Install KiCad
-:PROPERTIES:
-:CUSTOM_ID: kicad
-:END:
 https://www.kicad.org/download/linux/#_arch_linux
 
 ```sh
@@ -337,13 +262,7 @@ sudo pacman -Syu --asdeps kicad-library kicad-library-3d
 ```
 
 ** Containers & Virtualization
-:PROPERTIES:
-:CUSTOM_ID: containers
-:END:
 *** Docker MySQL Memory Issue
-:PROPERTIES:
-:CUSTOM_ID: docker-mysql-memory
-:END:
 Arch Linux 下 Docker MySQL 5.7 占用过高内存（最高到 16G）。MySQL 8.0 则正常（约 382M）。
 
 相关 issue：
@@ -351,13 +270,7 @@ Arch Linux 下 Docker MySQL 5.7 占用过高内存（最高到 16G）。MySQL 8.
 - https://github.com/docker-library/mysql/issues/361
 
 ** Building Custom Images
-:PROPERTIES:
-:CUSTOM_ID: building-custom-images
-:END:
 *** Custom Archiso Live Image
-:PROPERTIES:
-:CUSTOM_ID: archiso
-:END:
 为 Arch Linux 定制启动镜像。
 
 安装 Archiso：

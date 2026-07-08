@@ -1,7 +1,4 @@
 #+TITLE: Simple tutorial about WASM
-:PROPERTIES:
-:CUSTOM_ID: simple-tutorial-about-wasm
-:END:
 WASM(webassembly) is a virtual assembly language for the browser. It is closer to the Hardware than JavaScript.
 
 - [[https://golangbot.com/webassembly-using-go/][WebAssembly using Go (Golang) | Run Go programs in the browser]]
@@ -39,9 +36,6 @@ After:
 #+end_src
 
 ** HelloWorld WASM Program Cross Compiled from Go
-:PROPERTIES:
-:CUSTOM_ID: helloworld-wasm-program-cross-compiled-from-go
-:END:
 Here is the file structure:
 
 #+begin_src txt
@@ -108,9 +102,6 @@ Why we got this error?
 Because the binary is a =wasm= related binary and is supposed to be run inside a browser sandbox. The Linux OSes don't understand the format of this binary.
 
 *** JS Glue
-:PROPERTIES:
-:CUSTOM_ID: js-glue
-:END:
 We need some JS glue code to run =json.wasm=.
 
 #+begin_src sh
@@ -118,9 +109,6 @@ cp "$(go env GOROOT)/misc/wasm/wasm_exec.js" ~/Documents/webassembly/assets/
 #+end_src
 
 *** index.html
-:PROPERTIES:
-:CUSTOM_ID: index.html
-:END:
 #+begin_src html
 <!doctype html>
 <html>
@@ -155,9 +143,6 @@ Documents/
 #+end_src
 
 *** WebServer
-:PROPERTIES:
-:CUSTOM_ID: webserver
-:END:
 Create =main.go= inside the =server= directory. The directory structure after creating =main.go= is provided below.
 
 #+begin_src txt
@@ -204,9 +189,6 @@ go run main.go
 Now we can see the output(=Go Web Assembly=) in the =http://localhost:9090/= page's console.
 
 ** Coding the JSON formatter
-:PROPERTIES:
-:CUSTOM_ID: coding-the-json-formatter
-:END:
 Add the following function to =~/Documents/webassembly/cmd/wasm/main.go=.
 
 #+begin_src go
@@ -226,9 +208,6 @@ func prettyJson(input string) (string, error) {
 The =MarshalIndent= function takes 3 parameters as input. The first one is the raw unformatted JSON, the second one is the prefix to add to each new line of the JSON. In this case, we don't add a prefix. The third parameter is the string to be appended for each indent of our JSON.
 
 *** Exposing a function from Go to Javascript
-:PROPERTIES:
-:CUSTOM_ID: exposing-a-function-from-go-to-javascript
-:END:
 Now we have the function ready but we are yet to expose this function to Javascript so that it can be called from the front end.
 
 Go provides the [[https://pkg.go.dev/syscall/js][syscall/js]] package which helps in exposing functions from Go to Javascript.
@@ -313,9 +292,6 @@ go run main.go
 #+end_src
 
 *** Calling the Go function from JavaScript
-:PROPERTIES:
-:CUSTOM_ID: calling-the-go-function-from-javascript
-:END:
 Open the devtools, select console tab, input:
 
 #+begin_src js
@@ -337,9 +313,6 @@ Output:
 #+end_src
 
 ** Creating the UI and calling the wasm function
-:PROPERTIES:
-:CUSTOM_ID: creating-the-ui-and-calling-the-wasm-function
-:END:
 Let's modify the existing =~/Documents/webassembly/assets/index.html= in the =assets= folder to include the UI.
 
 #+begin_src html
@@ -402,9 +375,6 @@ Output:
 #+end_src
 
 *** Accessing the DOM from Go using JavaScript
-:PROPERTIES:
-:CUSTOM_ID: accessing-the-dom-from-go-using-javascript
-:END:
 In the above section, we called the =wasm= function, got the formatted JSON string output, and set the output text area with the formatted JSON using JavaScript.
 
 There is one more way to achieve the same output. Instead of passing the formatted JSON string to javascript, it is possible to access the browser's [[https://developer.mozilla.org/en-US/docs/Web/API/Document_Object_Model][DOM]] from Go and set the formatted JSON string to the output text area.
@@ -452,9 +422,6 @@ go run main.go
 #+end_src
 
 *** Error Handling
-:PROPERTIES:
-:CUSTOM_ID: error-handling
-:END:
 #+begin_src go
 func jsonWrapper() js.Func {
     jsonfunc := js.FuncOf(func(this js.Value, args []js.Value) any {

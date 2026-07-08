@@ -1,11 +1,5 @@
 #+TITLE: Docker
-:PROPERTIES:
-:CUSTOM_ID: docker
-:END:
 ** 安装
-:PROPERTIES:
-:CUSTOM_ID: 安装
-:END:
 按系统安装：
 
 - Ubuntu：https://docs.docker.com/engine/install/ubuntu/
@@ -14,9 +8,6 @@
 需要安装：Docker + Docker Compose
 
 *** Docker Compose
-:PROPERTIES:
-:CUSTOM_ID: docker-compose
-:END:
 1. Ubuntu 20.04.4 LTS
 
    #+begin_src sh
@@ -55,13 +46,7 @@
    2. [[[[https://github.com/docker/docker-ce-packaging/pull/553#issuecomment-906294789]]][[master] add docker-compose-plugin package (deb, rpm) by thaJeztah · Pull Request #553 · docker/docker-ce-packaging]]
 
 ** 配置
-:PROPERTIES:
-:CUSTOM_ID: 配置
-:END:
 *** non-root 执行命令[fn:1]
-:PROPERTIES:
-:CUSTOM_ID: non-root-执行命令1
-:END:
 #+begin_src sh
 sudo groupadd docker
 sudo usermod -aG docker $USER # 把 $USER 替换成当前用户
@@ -72,18 +57,12 @@ docker run hello-world
 #+end_src
 
 *** 开机启动 Docker[fn:2]
-:PROPERTIES:
-:CUSTOM_ID: 开机启动-docker2
-:END:
 #+begin_src sh
 sudo systemctl enable docker.service
 sudo systemctl enable containerd.service
 #+end_src
 
 *** 自定义 Docker 守护进程[fn:3]
-:PROPERTIES:
-:CUSTOM_ID: 自定义-docker-守护进程3
-:END:
 #+begin_src sh
 # 开启 Docker 守护进程
 sudo systemctl start docker
@@ -152,21 +131,12 @@ sudo netstat -lntp | grep dockerd
 #+end_src
 
 ** 入门指南
-:PROPERTIES:
-:CUSTOM_ID: 入门指南
-:END:
 *** 什么是容器？
-:PROPERTIES:
-:CUSTOM_ID: 什么是容器
-:END:
 容器可以看作计算机的进程，但它与一般进程是隔离的。这种隔离策略使用了已经存在很多年的 Linux 内核的特性------命名空间[fn:5]和控制组 cgroups[fn:6]。
 
 所有的 container 其实都是在共享主机 Linux 的内核。
 
 *** 什么是容器镜像？
-:PROPERTIES:
-:CUSTOM_ID: 什么是容器镜像
-:END:
 
 #+begin_quote
 A container image represents binary data that encapsulates an application and all its software dependencies. Container images are executable software bundles that can run standalone and that make very well defined assumptions about their runtime environment.
@@ -186,17 +156,11 @@ A container image is a static file with executable code that can create a contai
 可以把容器视为 =chroot= 的扩展。文件系统来自镜像，但比 =chroot= 多了一层隔离。
 
 *** 什么是容器 volumes？
-:PROPERTIES:
-:CUSTOM_ID: 什么是容器-volumes
-:END:
 每次容器从镜像中构建时，都会是一个全新的开始，过去对旧有的容器做过的更改无法保存在新创建的容器上。当我们希望保存这些更改时，volumes 就出现了。它可以将容器的目标路径，挂载至主机系统中。当我们对当前容器中的文件进行修改时，这些修改会被保存至主机系统的特定 volume 中，即便当前容器被销毁，重新创建同样容器时，因为使用的还是之前的 volume，所以那些修改还在，也就达到了我们跨容器保存数据修改的目的。
 
 volumes 有两种主要类型：named volumes 和 bind mounts。前者可以不必关心数据在主机的位置，但当我们想把主机的一些内容放到容器中时，named volumes 就无法达到目的。于是，bind mounts 就有了用武之地。它能把主机中的数据载入容器中，使得我们可以在容器中对数据进行操作。
 
 *** 多容器应用（TODO + MySQL）
-:PROPERTIES:
-:CUSTOM_ID: 多容器应用todo-mysql
-:END:
 一个容器是一个进程，最好只做一件事。
 
 容器之间是互相隔离的，怎样才能通信呢？通过网络。 *如果两个容器在相同网络环境下，它们便能互相通信；反之则不能。*
@@ -234,9 +198,6 @@ dig mysql
 注意：不要在生产环境中使用环境变量，更安全的做法是使用 .env 之类的文件[fn:9]。
 
 *** 使用 Docker Compose
-:PROPERTIES:
-:CUSTOM_ID: 使用-docker-compose
-:END:
 在应用跟路径新建文件 =docker-compose.yml= ：
 
 #+begin_src yml
@@ -291,17 +252,11 @@ docker-compose down --volumes # 该命令删除创建的volumes
 #+end_src
 
 *** 安全检查
-:PROPERTIES:
-:CUSTOM_ID: 安全检查
-:END:
 #+begin_src sh
 docker scan image_name
 #+end_src
 
 ** 常用命令
-:PROPERTIES:
-:CUSTOM_ID: 常用命令
-:END:
 #+begin_src sh
 docker version # 输出Docker版本、系统等信息
 
@@ -349,13 +304,7 @@ COPY --from=docker:20.10.12-dind-rootless /usr/local/bin/docker /usr/local/bin/d
 1. [[https://docs.docker.com/get-started/]]
 
 ** 技巧
-:PROPERTIES:
-:CUSTOM_ID: 技巧
-:END:
 *** 6 Docker Compose Best Practices for Dev and Prod
-:PROPERTIES:
-:CUSTOM_ID: docker-compose-best-practices-for-dev-and-prod
-:END:
 [[https://prod.releasehub.com/blog/6-docker-compose-best-practices-for-dev-and-prod]]
 
 1. for Dev
@@ -373,16 +322,10 @@ COPY --from=docker:20.10.12-dind-rootless /usr/local/bin/docker /usr/local/bin/d
    Tip: If you want to run multiple containers with different memory limits on the same machine, ensure that all your containers have different memory limits. This is because each container views how much memory it needs.
 
 ** 应用
-:PROPERTIES:
-:CUSTOM_ID: 应用
-:END:
 - [[https://containrrr.dev/watchtower/][Watchtower]] 用于更新运行中的容器化应用
 - [[https://www.portainer.io/][Portainer]] 用于可视化操作容器应用
 
 ** how to rm images
-:PROPERTIES:
-:CUSTOM_ID: how-to-rm-images
-:END:
 To remove Docker images that are not used by any containers, you can use the =docker image prune= command. This command allows you to clean up unused images effectively. Here's how to do it:
 
 1. *Remove Dangling Images*: By default, =docker image prune= will remove only dangling images, which are images that are not tagged and are not referenced by any container. You can run the following command:

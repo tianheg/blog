@@ -1,15 +1,6 @@
 #+TITLE: Nginx
-:PROPERTIES:
-:CUSTOM_ID: nginx
-:END:
 ** Deployment Basics
-:PROPERTIES:
-:CUSTOM_ID: deployment-basics
-:END:
 *** Deploy Node.js App with Nginx
-:PROPERTIES:
-:CUSTOM_ID: deploy-nodejs
-:END:
 https://dev.to/jsstackacademy/deploy-nodejs-application-using-nginx-3jhh
 
 1. 确保 Node.js 应用能够生成最终要部署的静态页面。
@@ -34,13 +25,7 @@ server {
 支持 HTTPS：https://www.rosehosting.com/blog/how-to-secure-nginx-with-lets-encrypt-on-ubuntu-20-04/
 
 ** Hugo Blog with Docker & Nginx
-:PROPERTIES:
-:CUSTOM_ID: hugo-docker-nginx
-:END:
 *** Docker Run
-:PROPERTIES:
-:CUSTOM_ID: docker-run
-:END:
 ```bash
 docker run -d --name nginx \
   -p 80:80 -p 443:443 \
@@ -51,9 +36,6 @@ docker run -d --name nginx \
 ```
 
 *** Docker Compose
-:PROPERTIES:
-:CUSTOM_ID: docker-compose
-:END:
 ```yml
 version: '3.9'
 services:
@@ -139,9 +121,6 @@ docker compose up -d
 3. [klakegg/hugo - Docker Image](https://hub.docker.com/r/klakegg/hugo/)
 
 *** Fix Hugo Public Directory Permission
-:PROPERTIES:
-:CUSTOM_ID: fix-public-permission
-:END:
 两次修复：
 - https://github.com/tianheg/docker-hugo/commit/f802d38
 - https://github.com/tianheg/docker-hugo/commit/d238bc7
@@ -149,13 +128,7 @@ docker compose up -d
 只要 public 文件夹本身权限和当前用户相同，内部文件为 root 时，Nginx 也能正常工作，不会返回 404。
 
 ** Reverse Proxy with Docker
-:PROPERTIES:
-:CUSTOM_ID: reverse-proxy
-:END:
 *** nginx-proxy Setup
-:PROPERTIES:
-:CUSTOM_ID: nginx-proxy
-:END:
 1. Create nginx-proxy network：
 
 ```sh

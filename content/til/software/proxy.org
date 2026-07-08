@@ -1,25 +1,10 @@
 #+TITLE: Proxy
-:PROPERTIES:
-:CUSTOM_ID: proxy
-:END:
 ** Concept
-:PROPERTIES:
-:CUSTOM_ID: concept
-:END:
 *** PAC(proxy auto-config)
-:PROPERTIES:
-:CUSTOM_ID: pacproxy-auto-config
-:END:
 [[https://en.wikipedia.org/wiki/Proxy_auto-config]] 根据给定访问地址，自动选择代理服务器
 
 ** Set up a proxy for these software
-:PROPERTIES:
-:CUSTOM_ID: set-up-a-proxy-for-these-software
-:END:
 *** Shell
-:PROPERTIES:
-:CUSTOM_ID: shell
-:END:
 #+begin_src sh
 export http_proxy=http://127.0.0.1:1080
 export https_proxy=http://127.0.0.1:1080
@@ -32,9 +17,6 @@ export https_proxy_pass=pass
 #+end_src
 
 *** pip
-:PROPERTIES:
-:CUSTOM_ID: pip
-:END:
 =~/.config/pip/pip.conf=
 
 #+begin_example
@@ -47,9 +29,6 @@ proxy=http://localhost:1087
 refer [[https://pip.pypa.io/en/stable/user_guide/#using-a-proxy-server]]
 
 *** Git
-:PROPERTIES:
-:CUSTOM_ID: git
-:END:
 1. Clone with ssh
 
    在文件 =~/.ssh/config= 后添加下面两行：
@@ -75,9 +54,6 @@ refer [[https://pip.pypa.io/en/stable/user_guide/#using-a-proxy-server]]
    refer [[https://gist.github.com/laispace/666dd7b27e9116faece6]]
 
 *** cargo
-:PROPERTIES:
-:CUSTOM_ID: cargo
-:END:
 Cargo 会依次检查以下位置
 
 1. 环境变量 =CARGO_HTTP_PROXY=
@@ -109,9 +85,6 @@ Cargo 使用 libcurl，故可接受任何符合 [[https://everything.curl.dev/us
 refer [[https://doc.rust-lang.org/cargo/reference/config.html#httpproxy]]
 
 *** apt (apt-get)
-:PROPERTIES:
-:CUSTOM_ID: apt-apt-get
-:END:
 在 =/etc/apt/apt.conf.d/= 目录下新增 =proxy.conf= 文件，加入：
 
 #+begin_example
@@ -124,9 +97,6 @@ Acquire::https::Proxy "http://127.0.0.1:8080/";
 refer [[https://askubuntu.com/a/349765/883355]]
 
 *** curl
-:PROPERTIES:
-:CUSTOM_ID: curl
-:END:
 #+begin_src sh
 socks5 = "127.0.0.1:1080"
 #+end_src
@@ -136,9 +106,6 @@ add to =~/.curlrc=
 refer [[https://www.zhihu.com/question/31360766]]
 
 *** Gradle
-:PROPERTIES:
-:CUSTOM_ID: gradle
-:END:
 =~/.gradle/gradle.properties=：
 
 #+begin_example
@@ -151,9 +118,6 @@ systemProp.https.proxyPort=1087
 refer [[https://stackoverflow.com/q/5991194/12539782]]
 
 *** Maven
-:PROPERTIES:
-:CUSTOM_ID: maven
-:END:
 =%Maven 安装目录%/conf/settings.xml=：
 
 #+begin_example
@@ -190,9 +154,6 @@ refer [[https://stackoverflow.com/q/5991194/12539782]]
 refer [[https://maven.apache.org/guides/mini/guide-proxies.html]]
 
 *** go get
-:PROPERTIES:
-:CUSTOM_ID: go-get
-:END:
 #+begin_src sh
 HTTP_PROXY=socks5://localhost:1080 go get
 #+end_src
@@ -202,9 +163,6 @@ HTTP_PROXY=socks5://localhost:1080 go get
 OR 使用[[https://goproxy.io/][goproxy.io]]
 
 *** npm
-:PROPERTIES:
-:CUSTOM_ID: npm
-:END:
 #+begin_src sh
 npm config set proxy http://127.0.0.1:1087
 npm config set https-proxy http://127.0.0.1:1087
@@ -217,9 +175,6 @@ npm config set https-proxy http://127.0.0.1:1087
 refer [[https://stackoverflow.com/q/7559648/12539782]]
 
 *** yarn
-:PROPERTIES:
-:CUSTOM_ID: yarn
-:END:
 #+begin_src sh
 yarn config set proxy http://XX
 yarn config set https-proxy http://XX
@@ -230,17 +185,11 @@ yarn config set https-proxy http://XX
 refer [[https://github.com/yarnpkg/yarn/issues/3418]]
 
 *** rustup
-:PROPERTIES:
-:CUSTOM_ID: rustup
-:END:
 #+begin_src sh
 export https_proxy=http://127.0.0.1:1080
 #+end_src
 
 *** gem
-:PROPERTIES:
-:CUSTOM_ID: gem
-:END:
 =~/.gemrc=：
 
 #+begin_example
@@ -250,17 +199,11 @@ http_proxy: http://localhost:1087
 #+end_example
 
 *** brew
-:PROPERTIES:
-:CUSTOM_ID: brew
-:END:
 #+begin_example
 ALL_PROXY=socks5://localhost:1080 brew ...
 #+end_example
 
 *** wget
-:PROPERTIES:
-:CUSTOM_ID: wget
-:END:
 =~/.wgetrc=：
 
 #+begin_example
@@ -272,9 +215,6 @@ https_proxy=127.0.0.1:1087
 refer [[https://stackoverflow.com/q/11211705/12539782]]
 
 *** snap
-:PROPERTIES:
-:CUSTOM_ID: snap
-:END:
 #+begin_src sh
 sudo snap set system proxy.http="http://127.0.0.1:1087"
 sudo snap set system proxy.https="http://127.0.0.1:1087"
@@ -283,9 +223,6 @@ sudo snap set system proxy.https="http://127.0.0.1:1087"
 refer [[https://snapcraft.io/docs/system-options]]
 
 *** docker
-:PROPERTIES:
-:CUSTOM_ID: docker
-:END:
 #+begin_src sh
 sudo mkdir -p /etc/systemd/system/docker.service.d
 sudo vim /etc/systemd/system/docker.service.d/proxy.conf
@@ -309,9 +246,6 @@ refer
 2. [[https://elegantinfrastructure.com/docker/ultimate-guide-to-docker-http-proxy-configuration/]]
 
 *** Electron Dev Dependency
-:PROPERTIES:
-:CUSTOM_ID: electron-dev-dependency
-:END:
 设置环境变量
 
 #+begin_src sh
@@ -325,13 +259,7 @@ refer
 2. [[https://github.com/gajus/global-agent/blob/v2.1.5/README.md#environment-variables]]
 
 ** Tools for Proxy
-:PROPERTIES:
-:CUSTOM_ID: tools-for-proxy
-:END:
 *** Clash
-:PROPERTIES:
-:CUSTOM_ID: clash
-:END:
 
 **** Clash Verge TUN 模式可能导致 Tailscale 内网 IP 无法访问
 
@@ -379,17 +307,8 @@ fake-ip-filter:
 必要时在 TUN 配置中排除 Tailscale 网段，避免 Clash 接管对应路由。
 
 *** v2ray-core
-:PROPERTIES:
-:CUSTOM_ID: v2ray-core
-:END:
 *** ssrlocal, sslocal
-:PROPERTIES:
-:CUSTOM_ID: ssrlocal-sslocal
-:END:
 ** 一些资源
-:PROPERTIES:
-:CUSTOM_ID: 一些资源
-:END:
 - [[https://github.com/aglent/autoproxy]]
 - [[https://wiki.archlinux.org/title/Proxy_server]]
 - [[https://github.com/FelisCatus/SwitchyOmega/wiki/GFWList]]
