@@ -8,23 +8,23 @@
 
 **** My solution (substring + concat)
 
-#+begin_src js
+#+BEGIN_SRC js
 function truncateString(str, num) {
   if (str.length <= num) { return str }
   return str.substring(0, num).concat('...')
 }
 console.log(truncateString('A-tisket a-tasket A green and yellow basket', 8))
-#+end_src
+#+END_SRC
 
 **** Solution with slice()
 
-#+begin_src js
+#+BEGIN_SRC js
 function truncateString(str, num) {
   if (str.length <= num) { return str }
   return str.slice(0, num).concat('...')
 }
 console.log(truncateString('A-tisket a-tasket A green and yellow basket', 8))
-#+end_src
+#+END_SRC
 
 *** Repeat a String
 
@@ -33,27 +33,27 @@ console.log(truncateString('A-tisket a-tasket A green and yellow basket', 8))
 
 **** My solution (padEnd)
 
-#+begin_src js
+#+BEGIN_SRC js
 function repeatStringNumTimes(str, num) {
   if (num <= 0) { return '' }
   else { return str.padEnd(num * str.length, str) }
 }
 console.log(repeatStringNumTimes('abc', 2))
-#+end_src
+#+END_SRC
 
 **** Solution with repeat()
 
-#+begin_src js
+#+BEGIN_SRC js
 function repeatStringNumTimes(str, num) {
   if (num <= 0) { return '' }
   else { return str.repeat(num) }
 }
 console.log(repeatStringNumTimes('abc', 2))
-#+end_src
+#+END_SRC
 
 **** Solution with while loop
 
-#+begin_src js
+#+BEGIN_SRC js
 function repeatStringNumTimes(str, num) {
   let repeatedStr = ''
   while (num > 0) {
@@ -63,18 +63,18 @@ function repeatStringNumTimes(str, num) {
   return repeatedStr
 }
 console.log(repeatStringNumTimes('abc', 2))
-#+end_src
+#+END_SRC
 
 **** Recursive solution
 
-#+begin_src js
+#+BEGIN_SRC js
 function repeatStringNumTimes(str, num) {
   if (num < 0) { return '' }
   if (num === 1) { return str }
   else { return str + repeatStringNumTimes(str, num - 1) }
 }
 console.log(repeatStringNumTimes('abc', 20))
-#+end_src
+#+END_SRC
 
 *** Find the Longest Word in a String
 
@@ -82,7 +82,7 @@ console.log(repeatStringNumTimes('abc', 20))
 
 **** My solution
 
-#+begin_src js
+#+BEGIN_SRC js
 function findLongestWordLength(str) {
   const strArray = str.split(' ')
   const strLength = strArray.length
@@ -93,11 +93,11 @@ function findLongestWordLength(str) {
   return Math.max(...numArray)
 }
 console.log(findLongestWordLength('The quick brown fox jumped over the lazy dog'))
-#+end_src
+#+END_SRC
 
 **** Alternative for loop
 
-#+begin_src js
+#+BEGIN_SRC js
 function findLongestWordLength(str) {
   const strArray = str.split(' ')
   const strLength = strArray.length
@@ -110,11 +110,11 @@ function findLongestWordLength(str) {
   return longestWordLength
 }
 console.log(findLongestWordLength('The quick brown fox jumped over the lazy dog'))
-#+end_src
+#+END_SRC
 
 **** Solution with sort()
 
-#+begin_src js
+#+BEGIN_SRC js
 function findLongestWordLength(str) {
   let longestWord = str.split(' ').sort((first, second) => {
     return second.length - first.length
@@ -122,11 +122,11 @@ function findLongestWordLength(str) {
   return longestWord[0].length
 }
 console.log(findLongestWordLength('The quick brown fox jumped over the lazy dog'))
-#+end_src
+#+END_SRC
 
 **** Solution with reduce()
 
-#+begin_src js
+#+BEGIN_SRC js
 function findLongestWordLength(str) {
   let longestWord = str.split(' ').reduce(function (a, b) {
     if (b.length > a.length) { return b }
@@ -135,7 +135,7 @@ function findLongestWordLength(str) {
   return longestWord.length
 }
 console.log(findLongestWordLength('The quick brown fox jumped over the lazy dog'))
-#+end_src
+#+END_SRC
 
 References:
 1. [Math.max() - MDN]([[https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Math/max]])
@@ -148,7 +148,7 @@ References:
 
 **** First attempt (failed all tests)
 
-#+begin_src js
+#+BEGIN_SRC js
 function mutation(arr) {
   let str1 = arr[0]
   let arr2 = arr[1].split('')
@@ -158,11 +158,11 @@ function mutation(arr) {
   return true
 }
 mutation(['hello', 'hey'])
-#+end_src
+#+END_SRC
 
 **** Second attempt (passed)
 
-#+begin_src js
+#+BEGIN_SRC js
 function mutation(arr) {
   let str1 = arr[0].toLowerCase()
   let arr2 = arr[1].split('')
@@ -172,7 +172,7 @@ function mutation(arr) {
   return true
 }
 console.log(mutation(['Mary', 'Army']))
-#+end_src
+#+END_SRC
 
 *** Slice and Splice
 
@@ -181,25 +181,25 @@ console.log(mutation(['Mary', 'Army']))
 
 Two arrays and an index n. Insert first array into second array at index n. Both original arrays stay unchanged.
 
-#+begin_src js
+#+BEGIN_SRC js
 function frankenSplice(arr1, arr2, n) {
   const arr3 = arr2.slice()
   arr3.splice(n, 0, ...arr1)
   return arr3
 }
 console.log(frankenSplice([1, 2, 3], [4, 5, 6], 1))
-#+end_src
+#+END_SRC
 
-#+begin_src js
+#+BEGIN_SRC js
 function frankenSplice(arr1, arr2, n) {
   const arr3 = arr2.slice()
   arr3.splice(n, 0, arr1)
   return arr3.flat()
 }
 console.log(frankenSplice([1, 2, 3], [4, 5, 6], 1))
-#+end_src
+#+END_SRC
 
-#+begin_src js
+#+BEGIN_SRC js
 function frankenSplice(arr1, arr2, n) {
   let localArray = arr2.slice()
   for (let i = 0; i < arr1.length; i++) {
@@ -208,7 +208,7 @@ function frankenSplice(arr1, arr2, n) {
   }
   return localArray
 }
-#+end_src
+#+END_SRC
 
 ** Intermediate Algorithm Scripting
 
@@ -218,13 +218,13 @@ function frankenSplice(arr1, arr2, n) {
 
 My solution - arithmetic series formula:
 
-#+begin_src js
+#+BEGIN_SRC js
 function sumAll(arr) {
   const newArr = arr.sort((a, b) => a - b)
   return ((newArr[1] + newArr[0]) * (newArr[1] - newArr[0] + 1)) / 2
 }
 sumAll([5, 10])
-#+end_src
+#+END_SRC
 
 (上底 + 下底) x 高 / 2
 
@@ -232,7 +232,7 @@ sumAll([5, 10])
 
 [Intermediate Algorithm Scripting: Sum All Odd Fibonacci Numbers | freeCodeCamp.org]([[https://www.freecodecamp.org/learn/javascript-algorithms-and-data-structures/intermediate-algorithm-scripting/sum-all-odd-fibonacci-numbers]])
 
-#+begin_src js
+#+BEGIN_SRC js
 function sumFibs(num) {
   let prevNumber = 0
   let currNumber = 1
@@ -246,9 +246,9 @@ function sumFibs(num) {
   }
   return result
 }
-#+end_src
+#+END_SRC
 
-#+begin_src js
+#+BEGIN_SRC js
 function sumFibs(num) {
   if (num <= 0) return 0
   const arrFib = [1, 1]
@@ -258,13 +258,13 @@ function sumFibs(num) {
   }
   return arrFib.filter((x) => x % 2 != 0).reduce((a, b) => a + b)
 }
-#+end_src
+#+END_SRC
 
 *** Sum All Primes
 
 [Intermediate Algorithm Scripting: Sum All Primes | freeCodeCamp.org]([[https://www.freecodecamp.org/learn/javascript-algorithms-and-data-structures/intermediate-algorithm-scripting/sum-all-primes]])
 
-#+begin_src js
+#+BEGIN_SRC js
 function primes(n) {
   if (isNaN(n) || n < 1 || Math.floor(n) != n) {
     return 'The input number must be a positive integer, please enter a correct value'
@@ -285,13 +285,13 @@ function sumPrimes(num) {
   return sum
 }
 console.log(sumPrimes(977))
-#+end_src
+#+END_SRC
 
 References: [[https://forum.freecodecamp.org/t/freecodecamp-challenge-guide-sum-all-primes/16085]], [[https://stackoverflow.com/a/12287599/12539782]]
 
 Alternative solutions:
 
-#+begin_src js
+#+BEGIN_SRC js
 function sumPrimes(num) {
   let primes = []
   for (let i = 2; i <= num; i++) {
@@ -299,9 +299,9 @@ function sumPrimes(num) {
   }
   return primes.reduce((sum, prime) => sum + prime, 0)
 }
-#+end_src
+#+END_SRC
 
-#+begin_src js
+#+BEGIN_SRC js
 function sumPrimes(num) {
   let isPrime = Array(num + 1).fill(true)
   isPrime[0] = false
@@ -313,7 +313,7 @@ function sumPrimes(num) {
   }
   return isPrime.reduce((sum, prime, index) => (prime ? sum + index : sum), 0)
 }
-#+end_src
+#+END_SRC
 
 *** Spinal Tap Case
 
@@ -321,16 +321,16 @@ function sumPrimes(num) {
 
 Key regex: =str.replace(/([a-z])([A-Z])/g, '$1 $2')=
 
-#+begin_src js
+#+BEGIN_SRC js
 function spinalCase(str) {
   let regex = /\s+|_+/g
   str = str.replace(/([a-z])([A-Z])/g, '$1 $2')
   return str.replace(regex, '-').toLowerCase()
 }
 console.log(spinalCase('ThisIsSpinalTap'))
-#+end_src
+#+END_SRC
 
-#+begin_src js
+#+BEGIN_SRC js
 function spinalCase(str) {
   str = str.replace(/([a-z])([A-Z])/g, '$1 $2')
   return str
@@ -338,22 +338,22 @@ function spinalCase(str) {
     .split(/(?:_| )+/)
     .join('-')
 }
-#+end_src
+#+END_SRC
 
-#+begin_src js
+#+BEGIN_SRC js
 function spinalCase(str) {
   return str
     .split(/\s|_|(?=[A-Z])/)
     .join('-')
     .toLowerCase()
 }
-#+end_src
+#+END_SRC
 
 *** Sorted Union
 
 [Intermediate Algorithm Scripting: Sorted Union | freeCodeCamp.org]([[https://www.freecodecamp.org/learn/javascript-algorithms-and-data-structures/intermediate-algorithm-scripting/sorted-union]])
 
-#+begin_src js
+#+BEGIN_SRC js
 function uniteUnique(arr) {
   for (let i = 1; i < arguments.length; i++) {
     arr.push(arguments[i])
@@ -364,9 +364,9 @@ function uniteUnique(arr) {
     .map((x) => Number(x))
 }
 console.log(uniteUnique([1, 3, 2], [5, 2, 1, 4], [2, 1]))
-#+end_src
+#+END_SRC
 
-#+begin_src js
+#+BEGIN_SRC js
 function uniteUnique(arr) {
   const finalArray = []
   for (let i = 0; i < arguments.length; i++) {
@@ -380,9 +380,9 @@ function uniteUnique(arr) {
   }
   return finalArray
 }
-#+end_src
+#+END_SRC
 
-#+begin_src js
+#+BEGIN_SRC js
 function uniteUnique(arr) {
   const args = [...arguments]
   const result = []
@@ -395,28 +395,28 @@ function uniteUnique(arr) {
   }
   return result
 }
-#+end_src
+#+END_SRC
 
-#+begin_src js
+#+BEGIN_SRC js
 function uniteUnique(...arr) {
   return [...new Set(arr.flat())]
 }
-#+end_src
+#+END_SRC
 
-#+begin_src js
+#+BEGIN_SRC js
 function uniteUnique() {
   return [...arguments]
     .flat()
     .filter((item, ind, arr) => arr.indexOf(item) === ind)
 }
-#+end_src
+#+END_SRC
 
 *** Steamroller (Flatten Array)
 
 1. [Intermediate Algorithm Scripting: Steamroller | freeCodeCamp.org]([[https://www.freecodecamp.org/learn/javascript-algorithms-and-data-structures/intermediate-algorithm-scripting/steamroller]])
 2. [freeCodeCamp Challenge Guide: Steamroller]([[https://forum.freecodecamp.org/t/freecodecamp-challenge-guide-steamroller/16079]])
 
-#+begin_src js
+#+BEGIN_SRC js
 function steamrollArray(arr) {
   return flatDeep(arr, Infinity)
 }
@@ -430,7 +430,7 @@ function flatDeep(arr, d = 1) {
     : arr.slice()
 }
 console.log(steamrollArray(['a', ['b']]))
-#+end_src
+#+END_SRC
 
 Reference: [[https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array/flat#reduce_concat_isarray_recursivity]]
 
@@ -440,7 +440,7 @@ Reference: [[https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/G
 
 My solution:
 
-#+begin_src js
+#+BEGIN_SRC js
 function fearNotLetter(str) {
   const allLetters = 'abcdefghijklmnopqrstuvwxyz'
   const index = allLetters.indexOf(str[0])
@@ -451,9 +451,9 @@ function fearNotLetter(str) {
     }
   }
 }
-#+end_src
+#+END_SRC
 
-#+begin_src js
+#+BEGIN_SRC js
 function fearNotLetter(str) {
   for (let i = 0; i < str.length; i++) {
     let code = str.charCodeAt(i)
@@ -463,9 +463,9 @@ function fearNotLetter(str) {
   }
   return undefined
 }
-#+end_src
+#+END_SRC
 
-#+begin_src js
+#+BEGIN_SRC js
 function fearNotLetter(str) {
   let currCharCode = str.charCodeAt(0)
   let missing = undefined
@@ -478,9 +478,9 @@ function fearNotLetter(str) {
   })
   return missing
 }
-#+end_src
+#+END_SRC
 
-#+begin_src js
+#+BEGIN_SRC js
 function fearNotLetter(str) {
   for (let i = 1; i < str.length; ++i) {
     if (str.charCodeAt(i) - str.charCodeAt(i - 1) > 1) {
@@ -488,7 +488,7 @@ function fearNotLetter(str) {
     }
   }
 }
-#+end_src
+#+END_SRC
 
 *** Pig Latin
 
@@ -499,7 +499,7 @@ Rules:
 1. If word starts with consonant(s), move them to the end and add =ay=
 2. If word starts with a vowel, add =way= to the end
 
-#+begin_src js
+#+BEGIN_SRC js
 function translatePigLatin(str) {
   let consonantRegex = /^[^aeiou]+/
   let myConsonants = str.match(consonantRegex)
@@ -508,9 +508,9 @@ function translatePigLatin(str) {
     : str.concat('way')
 }
 console.log(translatePigLatin('paragraphs'))
-#+end_src
+#+END_SRC
 
-#+begin_src js
+#+BEGIN_SRC js
 function translatePigLatin(str) {
   let pigLatin = ''
   let regex = /[aeiou]/gi
@@ -524,7 +524,7 @@ function translatePigLatin(str) {
   }
   return pigLatin
 }
-#+end_src
+#+END_SRC
 
 *** Search and Replace
 
@@ -533,7 +533,7 @@ function translatePigLatin(str) {
 
 Given three parameters: sentence, word to replace, replacement word. If the word to replace starts with uppercase, the replacement should also start with uppercase.
 
-#+begin_src js
+#+BEGIN_SRC js
 function myReplace(str, before, after) {
   const index = str.indexOf(before)
   if (str[index] === str[index].toUpperCase()) {
@@ -543,9 +543,9 @@ function myReplace(str, before, after) {
   }
   return str.replace(before, after)
 }
-#+end_src
+#+END_SRC
 
-#+begin_src js
+#+BEGIN_SRC js
 function myReplace(str, before, after) {
   if (/^[A-Z]/.test(before)) {
     after = after[0].toUpperCase() + after.slice(1)
@@ -554,14 +554,14 @@ function myReplace(str, before, after) {
   }
   return str.replace(before, after)
 }
-#+end_src
+#+END_SRC
 
 *** Make a Person
 
 1. [Intermediate Algorithm Scripting: Make a Person | freeCodeCamp.org]([[https://www.freecodecamp.org/learn/javascript-algorithms-and-data-structures/intermediate-algorithm-scripting/make-a-person]])
 2. [freeCodeCamp Challenge Guide: Make a Person]([[https://forum.freecodecamp.org/t/freecodecamp-challenge-guide-make-a-person/16020]])
 
-#+begin_src js
+#+BEGIN_SRC js
 const Person = function (firstAndLast) {
   let fullName = firstAndLast
   this.getFirstName = function () { return fullName.split(' ')[0] }
@@ -577,14 +577,14 @@ const Person = function (firstAndLast) {
 }
 const bob = new Person('Bob Ross')
 bob.getFullName()
-#+end_src
+#+END_SRC
 
 *** Map the Debris
 
 1. [Intermediate Algorithm Scripting: Map the Debris | freeCodeCamp.org]([[https://www.freecodecamp.org/learn/javascript-algorithms-and-data-structures/intermediate-algorithm-scripting/map-the-debris]])
 2. [freeCodeCamp Challenge Guide: Map the Debris]([[https://forum.freecodecamp.org/t/freecodecamp-challenge-guide-map-the-debris/16021]])
 
-#+begin_src js
+#+BEGIN_SRC js
 function orbitalPeriod(arr) {
   const GM = 398600.4418
   const earthRadius = 6367.4447
@@ -602,13 +602,13 @@ function orbitalPeriod(arr) {
   return newArr
 }
 console.log(orbitalPeriod([{ name: 'sputnik', avgAlt: 35873.5553 }]))
-#+end_src
+#+END_SRC
 
 *** Seek and Destroy
 
 [Intermediate Algorithm Scripting: Seek and Destroy | freeCodeCamp.org]([[https://www.freecodecamp.org/learn/javascript-algorithms-and-data-structures/intermediate-algorithm-scripting/seek-and-destroy]])
 
-#+begin_src js
+#+BEGIN_SRC js
 function destroyer(arr) {
   let i = 1
   while (i < arguments.length) {
@@ -621,7 +621,7 @@ function destroyer(arr) {
   return arr
 }
 console.log(destroyer([1, 2, 3, 1, 2, 3], 2, 3))
-#+end_src
+#+END_SRC
 
 References: [[https://stackoverflow.com/a/5767357/12539782]], [[https://stackoverflow.com/a/20690490/12539782]]
 
@@ -632,7 +632,7 @@ References: [[https://stackoverflow.com/a/5767357/12539782]], [[https://stackove
 
 Using GCD / LCM:
 
-#+begin_src js
+#+BEGIN_SRC js
 function gcd(a, b) {
   if (b === 0) { return a }
   else { return gcd(b, a % b) }
@@ -640,9 +640,9 @@ function gcd(a, b) {
 function lcm(a, b) {
   return (a * b) / gcd(a, b)
 }
-#+end_src
+#+END_SRC
 
-#+begin_src js
+#+BEGIN_SRC js
 function smallestCommons(arr) {
   let min = Math.min(...arr)
   let max = Math.max(...arr)
@@ -661,13 +661,13 @@ function smallestCommons(arr) {
   return n
 }
 console.log(smallestCommons([2, 10]))
-#+end_src
+#+END_SRC
 
 Reference: [[https://medium.com/swlh/finding-the-smallest-common-multiple-in-javascript-and-also-in-ruby-e82ae53494d7]]
 
 Using reduce:
 
-#+begin_src js
+#+BEGIN_SRC js
 function lcmOfRange(a, b) {
   let result = a
   for (let i = a + 1; i < b; i++) {
@@ -675,9 +675,9 @@ function lcmOfRange(a, b) {
   }
   return result
 }
-#+end_src
+#+END_SRC
 
-#+begin_src js
+#+BEGIN_SRC js
 function lcmOfRange(a, b) {
   let range = []
   for (let i = a; i <= b; i++) {
@@ -688,7 +688,7 @@ function lcmOfRange(a, b) {
 function lcmOfList(arr) {
   return arr.reduce(lcm)
 }
-#+end_src
+#+END_SRC
 
 ** JavaScript Algorithms and Data Structures Projects
 
@@ -703,7 +703,7 @@ Requirements:
 
 My solution:
 
-#+begin_src js
+#+BEGIN_SRC js
 function palindrome(str) {
   str = str.replace(/[^A-Za-z0-9]/g, '').toLowerCase()
   if (str.length % 2 !== 0) {
@@ -727,7 +727,7 @@ function palindrome(str) {
   }
 }
 console.log(palindrome('A man, a plan, a canal. Panama'))
-#+end_src
+#+END_SRC
 
 *** Roman Numeral Converter
 
@@ -736,7 +736,7 @@ console.log(palindrome('A man, a plan, a canal. Panama'))
 
 My solution:
 
-#+begin_src js
+#+BEGIN_SRC js
 function convertToRoman(num) {
   if (num >= 1000) {
     let a = num / 1000
@@ -780,13 +780,13 @@ function ten(num) {
   else if (num > 4 && num < 9) { return 'V' + 'I'.repeat(num - 5) }
 }
 console.log(convertToRoman(649))
-#+end_src
+#+END_SRC
 
 *** Telephone Number Validator
 
 [JavaScript Algorithms and Data Structures Projects: Telephone Number Validator | freeCodeCamp.org]([[https://www.freecodecamp.org/learn/javascript-algorithms-and-data-structures/javascript-algorithms-and-data-structures-projects/telephone-number-validator]])
 
-#+begin_src js
+#+BEGIN_SRC js
 function telephoneCheck(str) {
   let reg1 = /^(1\s?)?\d{3}[-\s]?\d{3}[-\s]?\d{4}$/
   let reg2 = /^(1\s?)?\(\d{3}\)\s?\d{3}[-\s]?\d{4}$/
@@ -794,4 +794,4 @@ function telephoneCheck(str) {
   else { return reg2.test(str) ? true : false }
 }
 telephoneCheck('555-555-5555')
-#+end_src
+#+END_SRC

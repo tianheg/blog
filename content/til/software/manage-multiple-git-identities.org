@@ -3,7 +3,7 @@ https://garrit.xyz/posts/2023-10-13-organizing-multiple-git-identities
 
 global config file, ~/.gitconfig
 
-#+begin_src conf
+#+BEGIN_SRC
 [user]
     name = Garrit Franke
     email = garrit@slashdev.space
@@ -13,15 +13,15 @@ global config file, ~/.gitconfig
     path = ~/.gitconfig-client2
 [includeIf "gitdir:~/sources/"]
     path = ~/.gitconfig-personal
-#+end_src
+#+END_SRC
 
 If the repository is located inside the ~/work directory, a file named ~/.gitconfig-work is included. This is just another gitconfig file. This is what that looks like in my case:
 
-#+begin_src conf
+#+BEGIN_SRC
 [user]
     name = Garrit Franke
     signingkey = 12345678
     email = garrit@work.de
 [commit]
     gpgsign = true
-#+end_src
+#+END_SRC

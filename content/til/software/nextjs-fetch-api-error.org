@@ -9,17 +9,17 @@ fetch 了全部的URL：=https://docs-vector-search-demo.vercel.app/api/vectorSe
 1. 在 Vercel 设置环境变量：=NEXT_PUBLIC_URL=https://$NEXT_PUBLIC_VERCEL_PROJECT_PRODUCTION_URL=
 2. 本地环境变量 .env.development:
 
-#+begin_src conf
+#+BEGIN_SRC
 NEXT_PUBLIC_URL=http://localhost:3000
-#+end_src
+#+END_SRC
 
 3. [@3] 使用 dotenv-expand 处理
 
-#+begin_src sh
+#+BEGIN_SRC sh
 npm install dotenv-expand
-#+end_src
+#+END_SRC
 
-#+begin_src js
+#+BEGIN_SRC js
 // next.config.js
 
 const dotenvExpand = require("dotenv-expand");
@@ -27,14 +27,14 @@ const dotenvExpand = require("dotenv-expand");
 dotenvExpand.expand({ parsed: { ...process.env } });
 
 // The rest of your config
-#+end_src
+#+END_SRC
 
 4. [@4] 最终效果
 
-#+begin_src sh
+#+BEGIN_SRC sh
 console.log(process.env.NEXT_PUBLIC_URL);
 
 // Output localhost: http://localhost:3000
 // Output preview: https://random-url.vercel.app
 // Output production: https://your-website.com
-#+end_src
+#+END_SRC

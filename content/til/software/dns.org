@@ -41,12 +41,12 @@ IN NS ns2.example.com.
 
 ** dig / host / nslookup
 
-#+begin_src sh
+#+BEGIN_SRC sh
 $ pacman -Qo dig
 /usr/bin/dig is owned by bind 9.18.0-1
 $ pacman -Qo host
 /usr/bin/host is owned by bind 9.18.0-1
-#+end_src
+#+END_SRC
 
 在 Arch Linux 下使用上述命令查询命令所属的包。
 
@@ -75,7 +75,7 @@ The new resource record types are: RRSIG (for digital signature), DNSKEY (the pu
 
 *** dig - domain information groper
 
-#+begin_src sh
+#+BEGIN_SRC sh
 dig yidajiabei.xyz
 dig @8.8.8.8 yidajiabei.xyz # 指定 DNS 服务器
 dig yidajiabei.xyz ANY # 返回所有类型的结果
@@ -85,7 +85,7 @@ dig yidajiabei.xyz +trace
 dig -x <ip_addr> # Reverse DNS Lookup
 dig +noall +answer -x 172.217.14.238
 dig -t type65 +dnssec @ns1.cloudflare.com odoh.cloudflare-dns.com
-#+end_src
+#+END_SRC
 
 查询多个域名 IP，新建文件 domain_search.txt：
 
@@ -95,15 +95,15 @@ abc.com
 def.com
 #+end_example
 
-#+begin_src sh
+#+BEGIN_SRC sh
 dig -f domain_search.txt +short
-#+end_src
+#+END_SRC
 
 修改默认设置：
 
-#+begin_src sh
+#+BEGIN_SRC sh
 vim ~/.digrc
-#+end_src
+#+END_SRC
 
 ~/.digrc:
 
@@ -113,7 +113,7 @@ vim ~/.digrc
 
 *** host
 
-#+begin_src sh
+#+BEGIN_SRC sh
 host yidajiabei.xyz
 host -a yidajiabei.xyz
 host -v yidajiabei.xyz
@@ -123,11 +123,11 @@ host -t txt yidajiabei.xyz
 host -C yidajiabei.xyz
 host -R 3 yidajiabei.xyz
 host -l yidajiabei.xyz
-#+end_src
+#+END_SRC
 
 *** nslookup
 
-#+begin_src sh
+#+BEGIN_SRC sh
 nslookup yidajiabei.xyz
 nslookup <ip_addr> # 反向 DNS 查询
 nslookup -type=any google.com
@@ -136,13 +136,13 @@ nslookup -type=ns google.com
 nslookup -type=a google.com
 nslookup -type=mx google.com
 nslookup -type=txt google.com
-#+end_src
+#+END_SRC
 
 *** drill (ldns 包提供)
 
-#+begin_src sh
+#+BEGIN_SRC sh
 drill @8.8.8.8 CNAME yidajiabei.xyz
-#+end_src
+#+END_SRC
 
 The world of DNS is on the verge of three significant changes - IPv6, VoIP and DNSSEC.
 
@@ -171,9 +171,9 @@ References:
 
 ** NetworkManager Unmanaged /etc/resolv.conf
 
-#+begin_src sh
+#+BEGIN_SRC sh
 vim /etc/NetworkManager/conf.d/dns.conf
-#+end_src
+#+END_SRC
 
 add:
 

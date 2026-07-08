@@ -14,20 +14,20 @@
 
 1. 安装 Workers CLI
 
-#+begin_src sh
+#+BEGIN_SRC sh
 pnpm add -g wrangler
-#+end_src
+#+END_SRC
 
 2. Hello World 程序
 
-#+begin_src js
+#+BEGIN_SRC js
 addEventListener("fetch", (event) => {
   event.respondWith(handleRequest(event.request))
 })
 async function handleRequest(request) {
   return new Response("Hello World")
 }
-#+end_src
+#+END_SRC
 
 *** Workers 如何工作
 

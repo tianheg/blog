@@ -13,9 +13,9 @@
 {{- $noCode := "" -}}
 {{- $inCode := false -}}
 {{- range (split $raw "\n") -}}
-  {{- if or (hasPrefix . "#+BEGIN_SRC") (hasPrefix . "```") -}}
+  {{- if or (hasPrefix . "#+BEGIN_SRC") (hasPrefix . "#+begin_src") (hasPrefix . "```") -}}
     {{- $inCode = true -}}
-  {{- else if or (hasPrefix . "#+END_SRC") (hasPrefix . "```") -}}
+  {{- else if or (hasPrefix . "#+END_SRC") (hasPrefix . "#+end_src") (hasPrefix . "```") -}}
     {{- $inCode = false -}}
   {{- else if not $inCode -}}
     {{- $noCode = print $noCode . " " -}}
