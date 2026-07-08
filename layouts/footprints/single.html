@@ -1,0 +1,85 @@
+{{ define "main" }}
+
+{{/* Coordinate lookup for known places */}}
+{{ $coords := dict
+  "太和 Taihe"    "33.1502,115.6122"
+  "抚顺 Fushun"   "41.8589,123.7906"
+  "大连 Dalian"   "38.9404,121.5504"
+  "沈阳 Shenyang" "41.7985,123.4557"
+  "北京 Beijing"  "39.9154,116.4379"
+  "阜阳 Fuyang"   "32.8035,115.8966"
+  "合肥 Hefei"    "31.8465,117.1371"
+  "杭州 Hangzhou" "30.2857,120.1600"
+  "广州 Guangzhou" "23.1241,113.3605"
+  "深圳 Shenzhen" "22.6783,113.8410"
+  "香港 Hongkong" "22.2942,114.1769"
+}}
+
+{{/* Group posts by location using Store */}}
+{{ range where .Site.RegularPages "Section" "posts" }}
+  {{ with .Params.location }}
+    {{ $existing := $.Store.Get . | default slice }}
+    {{ $.Store.Set . ($existing | append $) }}
+  {{ end }}
+{{ end }}
+
+<article>
+  <h1 class="text-2xl font-bold text-gray-900 dark:text-gray-100 mb-6">{{ .Title }}</h1>
+
+  <div id="mapid" style="width: 100%; height: 480px; border-radius: 8px; overflow: hidden;"></div>
+
+  <div class="mt-6 text-sm text-gray-500 dark:text-gray-400 space-y-2">
+    <p>给文章添加 <code class="text-xs px-1.5 py-0.5 bg-gray-100 dark:bg-gray-800 rounded">#+LOCATION: 地点名</code> 即可自动关联到此地图。</p>
+    <p>新增地点需在坐标表中添加对应坐标。</p>
+  </div>
+</article>
+
+<script src="https://unpkg.com/leaflet/dist/leaflet.js"></script>
+<link rel="stylesheet" href="https://unpkg.com/leaflet/dist/leaflet.css" />
+
+<script>
+  var mymap = L.map("mapid").setView([33.436385, 108.301464], 3);
+  L.tileLayer("https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png", {
+    maxZoom: 16,
+    attribution: 'Map data © <a href="https://openstreetmap.org">OpenStreetMap</a> contributors',
+  }).addTo(mymap);
+
+  // Posts by location (from Hugo Store)
+  const locationPosts = {
+    {{ range $loc, $_ := $coords }}
+      {{ $pages := $.Store.Get $loc }}
+      "{{ $loc }}": [
+        {{ range $pages }}
+        { title: "{{ .Title | plainify }}", url: "{{ .RelPermalink }}" },
+        {{ end }}
+      ],
+    {{ end }}
+  };
+
+  // Markers
+  const markers = [
+    {{ range $name, $coord := $coords }}
+      {{ $parts := split $coord "," }}
+      {{ $lat := index $parts 0 }}
+      {{ $lng := index $parts 1 }}
+      { name: "{{ $name }}", lat: {{ $lat }}, lng: {{ $lng }} },
+    {{ end }}
+  ];
+
+  for (let m of markers) {
+    let popupHtml = `<b>${m.name}</b>`;
+    const posts = locationPosts[m.name];
+    if (posts && posts.length > 0) {
+      popupHtml += `<div class="mt-2 pt-2 border-t border-gray-200">`;
+      for (let p of posts) {
+        popupHtml += `<div class="mt-1.5 text-sm"><a href="${p.url}" class="text-blue-600 hover:underline">${p.title}</a></div>`;
+      }
+      popupHtml += `</div>`;
+    } else {
+      popupHtml += `<div class="mt-1 text-xs text-gray-400">暂无关联文章</div>`;
+    }
+    L.marker(m.lat, m.lng).addTo(mymap).bindPopup(popupHtml);
+  }
+</script>
+
+{{ end }}
