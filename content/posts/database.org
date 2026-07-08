@@ -207,16 +207,10 @@ myNewDatabase> try {
 #+end_src
 
 ** MongoDB 大学课程------M001 MongoDB Basics
-:PROPERTIES:
-:CUSTOM_ID: mongodb-大学课程m001-mongodb-basics
-:END:
 [[https://university.mongodb.com/][Free MongoDB Official Courses |
 MongoDB University]]
 
 **** Chapter 1: What is MongoDB?
-:PROPERTIES:
-:CUSTOM_ID: chapter-1-what-is-mongodb
-:END:
 1. Why is MongoDB a NoSQL database?
 
 Because it does not utilize tables, rows and columns to organize data.
@@ -267,9 +261,6 @@ for the MongoDB Database.
 They both are MongoDB products.
 
 **** Chapter 2: Importing, Exporting, and Querying Data
-:PROPERTIES:
-:CUSTOM_ID: chapter-2-importing-exporting-and-querying-data
-:END:
 MongoDB stores data in BSON, and you can then view it in JSON.
 
 BSON is faster to parse and lighter to store than JSON.
@@ -340,9 +331,6 @@ documents by using the sort() command which will be discussed later in
 this course.
 
 **** Chapter 3: Creating and Manipulating Documents
-:PROPERTIES:
-:CUSTOM_ID: chapter-3-creating-and-manipulating-documents
-:END:
 先讲的是
 [[https://www.mongodb.com/docs/manual/reference/method/ObjectId/#objectid][ObjectId]]
 数据类型。
@@ -417,9 +405,6 @@ deleteOne(), deleteMany(), drop()
 Removing all collections in a database also remove the database.
 
 **** Chapter 4: Advanced CRUD Operations
-:PROPERTIES:
-:CUSTOM_ID: chapter-4-advanced-crud-operations
-:END:
 更新操作符：=$inc= =$set= =$unset=
 
 比较查询操作符：
@@ -642,9 +627,6 @@ db.trips
 2. 没有多读几遍题目
 
 **** Chapter 5: Indexing and Aggregation Pipeline
-:PROPERTIES:
-:CUSTOM_ID: chapter-5-indexing-and-aggregation-pipeline
-:END:
 #+begin_src js
 db.listingsAndReviews.aggregate([
   { $match: { amenities: 'Wifi' } },
@@ -750,9 +732,6 @@ operation.
 如果通过 MongoDB 认证考试指南：https://university.mongodb.com/exam/guide
 
 *** M103 Basic Cluster Administration
-:PROPERTIES:
-:CUSTOM_ID: m103-basic-cluster-administration
-:END:
 1. 一些 Linux 基础
 
 文件系统，=/etc= 存放系统配置文件、=/home= 是用户家目录、=/var=

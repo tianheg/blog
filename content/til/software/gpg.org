@@ -1,12 +1,6 @@
 #+TITLE: GPG
-:PROPERTIES:
-:CUSTOM_ID: gpg
-:END:
 
 ** GPG keys backup
-:PROPERTIES:
-:CUSTOM_ID: gpg-keys-backup
-:END:
 
 https://www.howtogeek.com/816878/how-to-back-up-and-restore-gpg-keys-on-linux/ https://gock.net/blog/2020/gpg-cheat-sheet
 
@@ -37,9 +31,6 @@ $ tree ~/.gnupg
 - trustdb.gpg: This holds the trust relationships you have established for your own keys and for any accepted public keys belonging to other people.
 
 *** Files should be backup
-:PROPERTIES:
-:CUSTOM_ID: files-should-be-backup
-:END:
 
 https://www.gnupg.org/documentation/manuals/gnupg/GPG-Configuration.html
 
@@ -51,9 +42,6 @@ openpgp-revocs.d/
 #+end_example
 
 *** Determining Which Keys to Back Up
-:PROPERTIES:
-:CUSTOM_ID: determining-which-keys-to-back-up
-:END:
 
 #+begin_src sh
 $ gpg --list-secret-keys --keyid-format LONG
@@ -113,9 +101,6 @@ $ tar -cvzf - gnupg | gpg -c --batch --passphrase-fd 0 --passphrase-file passwd.
 upload the gnupg.tar.gz.gpg file to cloud
 
 ** GPG failed to sign the data
-:PROPERTIES:
-:CUSTOM_ID: gpg-failed-to-sign-the-data
-:END:
 
 #+begin_src sh
 error: gpg failed to sign the data:
