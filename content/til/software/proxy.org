@@ -5,7 +5,7 @@
 
 ** Set up a proxy for these software
 *** Shell
-#+begin_src sh
+#+BEGIN_SRC sh
 export http_proxy=http://127.0.0.1:1080
 export https_proxy=http://127.0.0.1:1080
 
@@ -14,7 +14,7 @@ export http_proxy_pass=pass
 
 export https_proxy_user=user
 export https_proxy_pass=pass
-#+end_src
+#+END_SRC
 
 *** pip
 =~/.config/pip/pip.conf=
@@ -33,21 +33,21 @@ refer [[https://pip.pypa.io/en/stable/user_guide/#using-a-proxy-server]]
 
    在文件 =~/.ssh/config= 后添加下面两行：
 
-   #+begin_src sh
+   #+BEGIN_SRC sh
    Host github.com
    # Mac下
    ProxyCommand nc -X 5 -x 127.0.0.1:1080 %h %p
    # Linux下
    ProxyCommand nc --proxy-type socks5 --proxy 127.0.0.1:1080 %h %p
-   #+end_src
+   #+END_SRC
 
    注意 Linux 和 Mac 下 ncat/netcat 区别，详见 [[https://unix.stackexchange.com/q/368155]]
 
 2. Clone with http
 
-   #+begin_src sh
+   #+BEGIN_SRC sh
    git config --global http.proxy http://127.0.0.1:1087
-   #+end_src
+   #+END_SRC
 
    建议使用 http，因为 Socks5 在使用 git-lfs 时会报错 =proxyconnect tcp: dial tcp: lookup socks5: no such host=
 
@@ -58,23 +58,23 @@ Cargo 会依次检查以下位置
 
 1. 环境变量 =CARGO_HTTP_PROXY=
 
-#+begin_src sh
+#+BEGIN_SRC sh
 export CARGO_HTTP_PROXY=http://127.0.0.1:1080
-#+end_src
+#+END_SRC
 
 1. [[https://doc.rust-lang.org/cargo/reference/config.html#hierarchical-structure][任意 config.toml]] 中的 =http.proxy=
 
-#+begin_src sh
+#+BEGIN_SRC sh
 [http]
 proxy = "127.0.0.1:1080"
-#+end_src
+#+END_SRC
 
 1. 环境变量 =HTTPS_PROXY= & =https_proxy= & =http_proxy=
 
-#+begin_src sh
+#+BEGIN_SRC sh
 export https_proxy=http://127.0.0.1:1080
 export http_proxy=http://127.0.0.1:1080
-#+end_src
+#+END_SRC
 
 =http_proxy= 一般来讲没必要，除非使用基于 HTTP 的 Crate Repository
 
@@ -97,9 +97,9 @@ Acquire::https::Proxy "http://127.0.0.1:8080/";
 refer [[https://askubuntu.com/a/349765/883355]]
 
 *** curl
-#+begin_src sh
+#+BEGIN_SRC sh
 socks5 = "127.0.0.1:1080"
-#+end_src
+#+END_SRC
 
 add to =~/.curlrc=
 
@@ -154,19 +154,19 @@ refer [[https://stackoverflow.com/q/5991194/12539782]]
 refer [[https://maven.apache.org/guides/mini/guide-proxies.html]]
 
 *** go get
-#+begin_src sh
+#+BEGIN_SRC sh
 HTTP_PROXY=socks5://localhost:1080 go get
-#+end_src
+#+END_SRC
 
 测试了下 =HTTPS_PROXY= 和 =ALL_PROXY= 都不起作用
 
 OR 使用[[https://goproxy.io/][goproxy.io]]
 
 *** npm
-#+begin_src sh
+#+BEGIN_SRC sh
 npm config set proxy http://127.0.0.1:1087
 npm config set https-proxy http://127.0.0.1:1087
-#+end_src
+#+END_SRC
 
 用 Socks5 就报错- -
 
@@ -175,19 +175,19 @@ npm config set https-proxy http://127.0.0.1:1087
 refer [[https://stackoverflow.com/q/7559648/12539782]]
 
 *** yarn
-#+begin_src sh
+#+BEGIN_SRC sh
 yarn config set proxy http://XX
 yarn config set https-proxy http://XX
-#+end_src
+#+END_SRC
 
 不支持 socks5
 
 refer [[https://github.com/yarnpkg/yarn/issues/3418]]
 
 *** rustup
-#+begin_src sh
+#+BEGIN_SRC sh
 export https_proxy=http://127.0.0.1:1080
-#+end_src
+#+END_SRC
 
 *** gem
 =~/.gemrc=：
@@ -215,28 +215,28 @@ https_proxy=127.0.0.1:1087
 refer [[https://stackoverflow.com/q/11211705/12539782]]
 
 *** snap
-#+begin_src sh
+#+BEGIN_SRC sh
 sudo snap set system proxy.http="http://127.0.0.1:1087"
 sudo snap set system proxy.https="http://127.0.0.1:1087"
-#+end_src
+#+END_SRC
 
 refer [[https://snapcraft.io/docs/system-options]]
 
 *** docker
-#+begin_src sh
+#+BEGIN_SRC sh
 sudo mkdir -p /etc/systemd/system/docker.service.d
 sudo vim /etc/systemd/system/docker.service.d/proxy.conf
-#+end_src
+#+END_SRC
 
 #+begin_example
 [Service]
 Environment="ALL_PROXY=socks5://localhost:1080"
 #+end_example
 
-#+begin_src sh
+#+BEGIN_SRC sh
 sudo systemctl daemon-reload
 sudo systemctl restart docker
-#+end_src
+#+END_SRC
 
 必须是 Socks5，http 不生效
 
@@ -248,10 +248,10 @@ refer
 *** Electron Dev Dependency
 设置环境变量
 
-#+begin_src sh
+#+BEGIN_SRC sh
 ELECTRON_GET_USE_PROXY=true
 GLOBAL_AGENT_HTTPS_PROXY=http://localhost:1080
-#+end_src
+#+END_SRC
 
 refer
 
@@ -287,22 +287,22 @@ Clash Verge 的 TUN 模式会创建自己的虚拟网卡并接管系统流量，
 
 在 Clash 规则最前面添加：
 
-#+begin_src yaml
+#+BEGIN_SRC yaml
 IP-CIDR,100.64.0.0/10,DIRECT,no-resolve
-#+end_src
+#+END_SRC
 
 如果使用 MagicDNS，再增加：
 
-#+begin_src yaml
+#+BEGIN_SRC yaml
 DOMAIN-SUFFIX,ts.net,DIRECT
-#+end_src
+#+END_SRC
 
 如果开启 Fake-IP：
 
-#+begin_src yaml
+#+BEGIN_SRC yaml
 fake-ip-filter:
   - '*.ts.net'
-#+end_src
+#+END_SRC
 
 必要时在 TUN 配置中排除 Tailscale 网段，避免 Clash 接管对应路由。
 

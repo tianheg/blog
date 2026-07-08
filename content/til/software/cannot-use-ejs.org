@@ -25,20 +25,20 @@ When deploying applications on Vercel, especially those using templating engines
 *** Solutions and Workarounds
 1. *Correct File Path Configuration:* Ensure that the paths to your templates are correctly configured to reflect the structure of the deployed environment on Vercel. You might need to use absolute paths or configure your templating setup to adapt to the serverless environment.
 
-   #+begin_src javascript
+   #+BEGIN_SRC javascript
    const path = require('path');
    app.set('views', path.join(__dirname, 'views'));
-   #+end_src
+   #+END_SRC
 
 2. *Custom Server Setup:* For applications that heavily rely on server-side rendering with templating engines, consider using a custom server setup on Vercel, such as an Express.js server. This allows more traditional handling of routes and file serving, which can be configured to work with templating engines.
 
-   #+begin_src javascript
+   #+BEGIN_SRC javascript
    const express = require('express');
    const app = express();
    app.set('view engine', 'ejs');
    // Setup other middleware and routes
    module.exports = app;
-   #+end_src
+   #+END_SRC
 
 3. *Static Site Generation (SSG):* If possible, consider pre-rendering your pages at build time using Static Site Generation techniques. This approach is well-suited for serverless platforms like Vercel and can improve performance by serving static HTML files instead of rendering them on-the-fly.
 

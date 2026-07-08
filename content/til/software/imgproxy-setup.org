@@ -6,7 +6,7 @@ imgproxy默认会把传入的图片质量压缩到原有的80%。所以，不需
 
 找AI汇总了一些最佳配置实践：
 
-#+BEGIN_SRC conf
+#+BEGIN_SRC
 # 必须设置，防止 DoS 攻击
 IMGPROXY_KEY=你的16进制密钥  # 32字节，用 xxd -g 2 -l 64 -p /dev/random 生成
 IMGPROXY_SALT=你的16进制盐值 # 16字节以上

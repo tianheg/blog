@@ -9,13 +9,13 @@ We'll create a application that is used to format JSON.
 
 Before:
 
-#+begin_src json
+#+BEGIN_SRC json
 {"website":"golangbot.com", "tutorials": [{"title": "Strings", "url":"/strings/"}, {"title":"maps", "url":"/maps/"}, {"title": "goroutines","url":"/goroutines/"}]}
-#+end_src
+#+END_SRC
 
 After:
 
-#+begin_src json
+#+BEGIN_SRC json
 {
   "website": "golangbot.com",
   "tutorials": [
@@ -33,45 +33,45 @@ After:
     }
   ]
 }
-#+end_src
+#+END_SRC
 
 ** HelloWorld WASM Program Cross Compiled from Go
 Here is the file structure:
 
-#+begin_src txt
+#+BEGIN_SRC txt
 Documents/
 └── webassembly
     ├── assets
     └── cmd
         ├── server
         └── wasm
-#+end_src
+#+END_SRC
 
-#+begin_src sh
+#+BEGIN_SRC sh
 mkdir -p ~/Documents/webassembly/assets \
 ~/Documents/webassembly/cmd  \
 ~/Documents/webassembly/cmd/server \
 ~/Documents/webassembly/cmd/wasm
-#+end_src
+#+END_SRC
 
 First create a go module named =github.com/golangbot/webassembly=.
 
-#+begin_src sh
+#+BEGIN_SRC sh
 cd ~/Documents/webassembly
 go mod init github.com/golangbot/webassembly
-#+end_src
+#+END_SRC
 
 =go mod init github.com/golangbot/webassembly= will create a file named =go.mod=:
 
-#+begin_src mod
+#+BEGIN_SRC mod
 module github.com/golangbot/webassembly
 
 go 1.22.0
-#+end_src
+#+END_SRC
 
 Create =main.go= with the following contents inside =~/Documents/webassembly/cmd/wasm=:
 
-#+begin_src go
+#+BEGIN_SRC go
 package main
 
 import (
@@ -81,21 +81,21 @@ import (
 func main() {
     fmt.Println("Go Web Assembly")
 }
-#+end_src
+#+END_SRC
 
 Let's cross compile the above Go program into WebAssembly.
 
-#+begin_src sh
+#+BEGIN_SRC sh
 cd ~/Documents/webassembly/cmd/wasm/
 GOOS=js GOARCH=wasm go build -o  ../../assets/json.wasm
-#+end_src
+#+END_SRC
 
 Only cross compiling the =main= package to WebAssembly.
 
-#+begin_src sh
+#+BEGIN_SRC sh
 ./assets/json.wasm
 # bash: ./assets/json.wasm: cannot execute binary file: Exec format error
-#+end_src
+#+END_SRC
 
 Why we got this error?
 
@@ -104,12 +104,12 @@ Because the binary is a =wasm= related binary and is supposed to be run inside a
 *** JS Glue
 We need some JS glue code to run =json.wasm=.
 
-#+begin_src sh
+#+BEGIN_SRC sh
 cp "$(go env GOROOT)/misc/wasm/wasm_exec.js" ~/Documents/webassembly/assets/
-#+end_src
+#+END_SRC
 
 *** index.html
-#+begin_src html
+#+BEGIN_SRC html
 <!doctype html>
 <html>
     <head>
@@ -124,11 +124,11 @@ cp "$(go env GOROOT)/misc/wasm/wasm_exec.js" ~/Documents/webassembly/assets/
     </head>
     <body></body>
 </html>
-#+end_src
+#+END_SRC
 
 Now see the file structure:
 
-#+begin_src txt
+#+BEGIN_SRC txt
 Documents/
 └──webassembly/
         ├── assets
@@ -140,12 +140,12 @@ Documents/
         │   └── wasm
         │       └── main.go
         └── go.mod
-#+end_src
+#+END_SRC
 
 *** WebServer
 Create =main.go= inside the =server= directory. The directory structure after creating =main.go= is provided below.
 
-#+begin_src txt
+#+BEGIN_SRC txt
 Documents/
 └── webassembly
         ├── assets
@@ -158,11 +158,11 @@ Documents/
         │   └── wasm
         │       └── main.go
         └── go.mod
-#+end_src
+#+END_SRC
 
 Copy the following code to =~/Documents/webassembly/cmd/server/main.go=.
 
-#+begin_src go
+#+BEGIN_SRC go
 package main
 
 import (
@@ -177,21 +177,21 @@ func main() {
         return
     }
 }
-#+end_src
+#+END_SRC
 
 The above program creates a file server listening at port =9090= with the root at our =assets= folder. Let's run the server and see our first WebAssembly program running.
 
-#+begin_src sh
+#+BEGIN_SRC sh
 cd ~/Documents/webassembly/cmd/server/
 go run main.go
-#+end_src
+#+END_SRC
 
 Now we can see the output(=Go Web Assembly=) in the =http://localhost:9090/= page's console.
 
 ** Coding the JSON formatter
 Add the following function to =~/Documents/webassembly/cmd/wasm/main.go=.
 
-#+begin_src go
+#+BEGIN_SRC go
 func prettyJson(input string) (string, error) {
     var raw any
     if err := json.Unmarshal([]byte(input), &raw); err != nil {
@@ -203,7 +203,7 @@ func prettyJson(input string) (string, error) {
     }
     return string(pretty), nil
 }
-#+end_src
+#+END_SRC
 
 The =MarshalIndent= function takes 3 parameters as input. The first one is the raw unformatted JSON, the second one is the prefix to add to each new line of the JSON. In this case, we don't add a prefix. The third parameter is the string to be appended for each indent of our JSON.
 
@@ -216,7 +216,7 @@ The first step in exposing a function from =Go= to =JavaScript= is to create a [
 
 Add the following function to =~/Documents/webassembly/cmd/wasm/main.go=.
 
-#+begin_src go
+#+BEGIN_SRC go
 func jsonWrapper() js.Func {
         jsonFunc := js.FuncOf(func(this js.Value, args []js.Value) any {
                 if len(args) != 1 {
@@ -233,11 +233,11 @@ func jsonWrapper() js.Func {
         })
         return jsonFunc
 }
-#+end_src
+#+END_SRC
 
 Here is the completed code.
 
-#+begin_src go
+#+BEGIN_SRC go
 package main
 
 import (
@@ -280,27 +280,27 @@ func main() {
     js.Global().Set("formatJSON", jsonWrapper())
     <-make(chan struct{})
 }
-#+end_src
+#+END_SRC
 
 Compile and test the program.
 
-#+begin_src sh
+#+BEGIN_SRC sh
 cd ~/Documents/webassembly/cmd/wasm/
 GOOS=js GOARCH=wasm go build -o  ../../assets/json.wasm
 cd ~/Documents/webassembly/cmd/server/
 go run main.go
-#+end_src
+#+END_SRC
 
 *** Calling the Go function from JavaScript
 Open the devtools, select console tab, input:
 
-#+begin_src js
+#+BEGIN_SRC js
 formatJSON('{"website":"golangbot.com", "tutorials": [{"title": "Strings", "url":"/strings/"}]}')
-#+end_src
+#+END_SRC
 
 Output:
 
-#+begin_src txt
+#+BEGIN_SRC txt
 '{
  "tutorials": [
   {
@@ -310,12 +310,12 @@ Output:
  ],
  "website": "golangbot.com"
 }'
-#+end_src
+#+END_SRC
 
 ** Creating the UI and calling the wasm function
 Let's modify the existing =~/Documents/webassembly/assets/index.html= in the =assets= folder to include the UI.
 
-#+begin_src html
+#+BEGIN_SRC html
 <!doctype html>
 <html>  
     <head>
@@ -339,26 +339,26 @@ Let's modify the existing =~/Documents/webassembly/assets/index.html= in the =as
         }
      </script>
 </html>
-#+end_src
+#+END_SRC
 
 Compile and run this program.
 
-#+begin_src sh
+#+BEGIN_SRC sh
 cd ~/Documents/webassembly/cmd/wasm/
 GOOS=js GOARCH=wasm go build -o  ../../assets/json.wasm
 cd ~/Documents/webassembly/cmd/server/
 go run main.go
-#+end_src
+#+END_SRC
 
 Input:
 
-#+begin_src json
+#+BEGIN_SRC json
 {"website":"golangbot.com", "tutorials": [{"title": "Strings", "url":"/strings/"}, {"title":"maps", "url":"/maps/"}]}
-#+end_src
+#+END_SRC
 
 Output:
 
-#+begin_src json
+#+BEGIN_SRC json
 {
   "tutorials": [
     {
@@ -372,7 +372,7 @@ Output:
   ],
   "website": "golangbot.com"
 }
-#+end_src
+#+END_SRC
 
 *** Accessing the DOM from Go using JavaScript
 In the above section, we called the =wasm= function, got the formatted JSON string output, and set the output text area with the formatted JSON using JavaScript.
@@ -383,7 +383,7 @@ Let's see how this is done.
 
 We need to modify the =jsonWrapper= function in =~/Documents/webassembly/cmd/wasm/main.go= to achieve this.
 
-#+begin_src go
+#+BEGIN_SRC go
 func jsonWrapper() js.Func {
     jsonfunc := js.FuncOf(func(this js.Value, args []js.Value) any {
         if len(args) != 1 {
@@ -410,19 +410,19 @@ func jsonWrapper() js.Func {
 
     return jsonfunc
 }
-#+end_src
+#+END_SRC
 
 Run this program again.
 
-#+begin_src sh
+#+BEGIN_SRC sh
 cd ~/Documents/webassembly/cmd/wasm/  
 GOOS=js GOARCH=wasm go build -o  ../../assets/json.wasm  
 cd ~/Documents/webassembly/cmd/server/  
 go run main.go 
-#+end_src
+#+END_SRC
 
 *** Error Handling
-#+begin_src go
+#+BEGIN_SRC go
 func jsonWrapper() js.Func {
     jsonfunc := js.FuncOf(func(this js.Value, args []js.Value) any {
         if len(args) != 1  {
@@ -448,4 +448,4 @@ func jsonWrapper() js.Func {
     })
     return jsonfunc
 }
-#+end_src
+#+END_SRC

@@ -1,6 +1,6 @@
 #+TITLE: First time using Golang
 ** Golang Wikipedia
-#+begin_src go
+#+BEGIN_SRC go
 package main
 
 import "fmt"
@@ -8,9 +8,9 @@ import "fmt"
 func main() {
   fmt.Println("Hello World!")
 }
-#+end_src
+#+END_SRC
 
-#+begin_src go
+#+BEGIN_SRC go
 // Concurrency
 package main
 
@@ -45,9 +45,9 @@ func main() {
     fmt.Println("Timeout.")
   }
 }
-#+end_src
+#+END_SRC
 
-#+begin_src go
+#+BEGIN_SRC go
 // testing
 func ExtractUsername(email string) string {
   at := strings.Index(email, "@")
@@ -75,9 +75,9 @@ func TestExtractUsername(t *testing.T) {
     }
   })
 }
-#+end_src
+#+END_SRC
 
-#+begin_src go
+#+BEGIN_SRC go
 // web app
 package main
 
@@ -95,7 +95,7 @@ func main() {
   http.HandleFunc("/", helloFunc)
   log.Fatal(http.ListenAndServe(":8080", nil))
 }
-#+end_src
+#+END_SRC
 
 ** A Tour of Go
 [[https://go.dev/tour/list]]
@@ -107,7 +107,7 @@ func main() {
 - generics
 - concurrency
 
-#+begin_src go
+#+BEGIN_SRC go
 // packages.go
 package main
 
@@ -119,9 +119,9 @@ import (
 func main() {
     fmt.Println("My favorite number is", rand.Intn(10))
 }
-#+end_src
+#+END_SRC
 
-#+begin_src go
+#+BEGIN_SRC go
 // imports.go
 package main
 
@@ -133,9 +133,9 @@ import (
 func main() {
     fmt.Println("Now you have %g problems.\n", math.Sqrt(7))
 }
-#+end_src
+#+END_SRC
 
-#+begin_src go
+#+BEGIN_SRC go
 // exported-names.go
 package main
 
@@ -147,9 +147,9 @@ import (
 func main() {
     fmt.Println(math.Pi)
 }
-#+end_src
+#+END_SRC
 
-#+begin_src go
+#+BEGIN_SRC go
 // functions.go
 package main
 
@@ -162,9 +162,9 @@ func add(x, y int) int {
 func main() {
     fmt.Println(add(42, 13))
 }
-#+end_src
+#+END_SRC
 
-#+begin_src go
+#+BEGIN_SRC go
 // multiple-results.go
 package main
 
@@ -177,7 +177,7 @@ func swap(x, y, z string) (string, string, string) {
 func main() {
     a, b, c := swap("Hello", "World", "!")
     fmt.Println(a,b,c)
-#+end_src
+#+END_SRC
 
 2. [@2] 再找一个官方教程
 

@@ -69,7 +69,7 @@ MongoDB 数据类型：Null, Boolean, Number, String, Date, Regular Expression, 
 ------SQL terms and NoSQL terms by [[https://www.blogger.com/profile/18437865869379626284][Victoria Malaya]]
 
 ** MongoDB Shell 的一些操作
-#+begin_src javascript
+#+BEGIN_SRC javascript
 # 命令行输入 mongosh
 > db
 test
@@ -172,7 +172,7 @@ myNewDatabase> try {
   upsertedCount: 0,
   upsertedIds: {}
 }
-#+end_src
+#+END_SRC
 
 ** MongoDB 大学课程------M001 MongoDB Basics
 [[https://university.mongodb.com/][Free MongoDB Official Courses | MongoDB University]]
@@ -229,7 +229,7 @@ BSON is faster to parse and lighter to store than JSON.
 
 JSON supports fewer data types than BSON.
 
-#+begin_src sh
+#+BEGIN_SRC sh
 mongodump --uri "mongodb+srv://<your username>:<your password>@<your cluster>.mongodb.net/sample_supplies"
 
 mongoexport --uri="mongodb+srv://<your username>:<your password>@<your cluster>.mongodb.net/sample_supplies" --collection=sales --out=sales.json
@@ -237,7 +237,7 @@ mongoexport --uri="mongodb+srv://<your username>:<your password>@<your cluster>.
 mongorestore --uri "mongodb+srv://<your username>:<your password>@<your cluster>.mongodb.net/sample_supplies"  --drop dump
 
 mongoimport --uri="mongodb+srv://<your username>:<your password>@<your cluster>.mongodb.net/sample_supplies" --drop sales.json
-#+end_src
+#+END_SRC
 
 1. Which of the following commands will add a collection that is stored in animals.json to an Atlas cluster?
 
@@ -251,11 +251,11 @@ mongoexport does work with JSON, but it would export it, thus making a copy of t
 
 慢慢筛选数据：={ "birth year": 1961, "start station name": "Howard St & Centre St" }=。
 
-#+begin_src sh
+#+BEGIN_SRC sh
 mongosh "mongodb+srv://<username>:<password>@<cluster>.mongodb.net/admin"
-#+end_src
+#+END_SRC
 
-#+begin_src javascript
+#+BEGIN_SRC javascript
 show dbs
 
 use sample_training
@@ -269,7 +269,7 @@ db.zips.find({"state": "NY"}).count()
 db.zips.find({"state": "NY", "city": "ALBANY"})（默认就是 pretty）
 
 db.zips.find({"state": "NY", "city": "ALBANY"}).pretty()
-#+end_src
+#+END_SRC
 
 2. [@2] What does =it= do in the mongo shell?
 
@@ -361,31 +361,31 @@ Chapter 4: Advanced CRUD Operations
 - $in in
 - $nin not in
 
-#+begin_src javascript
+#+BEGIN_SRC javascript
 db.trips.find({ 'birth year': { $gt: 1998 } }).count()
 db.trips.find({ 'birth year': 1998 }).count()
-#+end_src
+#+END_SRC
 
 Query Operators - Logic
 
 除 =$not= 以外的语法：
 
-#+begin_src javascript
+#+BEGIN_SRC javascript
 { "$<operator>": [{ <clause1> }, { <clause2> }, ...]}
-#+end_src
+#+END_SRC
 
 =$not= 的语法：
 
-#+begin_src javascript
+#+BEGIN_SRC javascript
 { $not: {<clause>}}
-#+end_src
+#+END_SRC
 
 - $and 默认行为，不指定逻辑操作符时使用
 - $or
 - $not
 - $nor
 
-#+begin_src javascript
+#+BEGIN_SRC javascript
 db.routes
   .find({
     $and: [
@@ -394,11 +394,11 @@ db.routes
     ],
   })
   .pretty()
-#+end_src
+#+END_SRC
 
 找到在某个数值区间的值：
 
-#+begin_src javascript
+#+BEGIN_SRC javascript
 // 我写的
 db.zips
   .find({ $and: [{ pop: { $gte: 5000 } }, { pop: { $lte: 1000000 } }] })
@@ -409,11 +409,11 @@ db.zips.find({ pop: { $gte: 5000, $lte: 1000000 } }).count()
 db.zips
   .find({ $nor: [{ pop: { $lt: 5000 } }, { pop: { $gt: 1000000 } }] })
   .count()
-#+end_src
+#+END_SRC
 
 目前最复杂的一个：
 
-#+begin_src javascript
+#+BEGIN_SRC javascript
 // 自己写的
 db.companies.find({
   $or: [
@@ -442,13 +442,13 @@ db.companies
     ],
   })
   .count()
-#+end_src
+#+END_SRC
 
 答案更简洁。
 
 =$= 除了用在操作符上，还用于获取属性值。
 
-#+begin_src javascript
+#+BEGIN_SRC javascript
 db.trips
   .find({
     $expr: {
@@ -459,7 +459,7 @@ db.trips
     },
   })
   .count()
-#+end_src
+#+END_SRC
 
 What are some of the uses for the =$= sign in MQL?
 
@@ -468,7 +468,7 @@ What are some of the uses for the =$= sign in MQL?
 
 Array Operators
 
-#+begin_src javascript
+#+BEGIN_SRC javascript
 db.listingsAndReviews.find({
   amenities: {
     $size: 20,
@@ -489,11 +489,11 @@ db.listingsAndReviews.find({
     ],
   },
 })
-#+end_src
+#+END_SRC
 
 题目不仔细读个三四遍，就匆忙解答，最后只能答错。
 
-#+begin_src javascript
+#+BEGIN_SRC javascript
 // 我写的
 db.listingsAndReviews
   .find(
@@ -505,16 +505,16 @@ db.listingsAndReviews
 db.listingsAndReviews
   .find({ property_type: 'House', amenities: 'Changing table' })
   .count()
-#+end_src
+#+END_SRC
 
-#+begin_src javascript
+#+BEGIN_SRC javascript
 db.listingsAndReviews.find({
   amenities: {
     $all: ['Free parking on premises', 'Wifi', 'Airconditioning'],
   },
   bedrooms: { $gte: 2 },
 })
-#+end_src
+#+END_SRC
 
 Array Operators and Projection
 
@@ -522,7 +522,7 @@ projection 就是可以让属性显示或隐藏的设置区间。
 
 0 表示隐藏某属性，1 表示显示某属性。一般情况下，1 和 0 不能同时出现，但是有例外，当属性为 _{id} 时。
 
-#+begin_src javascript
+#+BEGIN_SRC javascript
 db.listingsAndReviews
   .find({ amenities: 'Wifi' }, { price: 1, address: 1, _id: 0 })
   .count()
@@ -535,11 +535,11 @@ db.listingsAndReviews.find(
 db.companies
   .find({ offices: { $elemMatch: { city: 'Seattle' } } }, { _id: 0 })
   .count()
-#+end_src
+#+END_SRC
 
 Array Operators and Sub-Documents
 
-#+begin_src javascript
+#+BEGIN_SRC javascript
 db.trips.findOne({ 'start station location.type': 'Point' })
 
 db.companies.find({ 'relationships.0.person.first_name': 'Mark' }, { name: 1 })
@@ -560,7 +560,7 @@ db.trips
     'start station location': { $elemMatch: { 'coordinates[0]': { $eq: 74 } } },
   })
   .count()
-#+end_src
+#+END_SRC
 
 为什么会写错？
 
@@ -569,7 +569,7 @@ db.trips
 
 Chapter 5: Indexing and Aggregation Pipeline
 
-#+begin_src javascript
+#+BEGIN_SRC javascript
 db.listingsAndReviews.aggregate([
   { $match: { amenities: 'Wifi' } },
   { $project: { price: 1, address: 1, _id: 0 } },
@@ -594,7 +594,7 @@ db.listingsAndReviews.aggregate([
   { $project: { reviews: 0 } },
   { $group: { _id: '$room_type' } },
 ])
-#+end_src
+#+END_SRC
 
 - $group 通过 address.country 分组
 
@@ -606,7 +606,7 @@ aggregate() can do what find() can and more.
 
 删除当前数据库：=db.dropDatabase()=
 
-#+begin_src javascript
+#+BEGIN_SRC javascript
 use sample_training
 
 db.zips.find().sort({ "pop": 1 }).limit(1)
@@ -618,9 +618,9 @@ db.zips.find().sort({ "pop": -1 }).limit(1)
 db.zips.find().sort({ "pop": -1 }).limit(10)
 
 db.zips.find().sort({ "pop": 1, "city": -1 })
-#+end_src
+#+END_SRC
 
-#+begin_src javascript
+#+BEGIN_SRC javascript
 db.companies
   .find({ founded_year: { $ne: null } }, { name: 1, founded_year: 1 })
   .sort({ founded_year: 1 })
@@ -633,13 +633,13 @@ db.trips
   .find({ 'birth year': { $ne: '' } })
   .sort({ 'birth year': -1 })
   .limit(1)
-#+end_src
+#+END_SRC
 
 Introduction to Indexes
 
-#+begin_src javascript
+#+BEGIN_SRC javascript
 db.trips.createIndex({ 'start station id': 1, 'birth year': 1 })
-#+end_src
+#+END_SRC
 
 什么是 Data Modeling？
 
@@ -649,7 +649,7 @@ db.trips.createIndex({ 'start station id': 1, 'birth year': 1 })
 
 Update + Insert。使用时确保数据库的空间足够。并且数据库中没有相同的数据项。
 
-#+begin_src javascript
+#+BEGIN_SRC javascript
 db.iot.updateOne(
   { sensor: r.sensor, date: r.date, valcount: { $lt: 48 } },
   {
@@ -658,7 +658,7 @@ db.iot.updateOne(
   },
   { upsert: true }
 )
-#+end_src
+#+END_SRC
 
 When upsert is set to true and the query predicate returns an empty cursor, the update operation creates a new document using the directive from the query predicate and the update predicate.
 

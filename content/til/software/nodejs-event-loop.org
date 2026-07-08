@@ -5,7 +5,7 @@ https://www.freecodecamp.org/news/a-guide-to-the-node-js-event-loop/
 
 https://nodejs.org/en/learn/asynchronous-work/understanding-setimmediate
 
-#+begin_src js
+#+BEGIN_SRC js
 const baz = () => console.log('baz');
 const foo = () => console.log('foo');
 const zoo = () => console.log('zoo');
@@ -25,19 +25,19 @@ const start = () => {
 start();
 
 // start foo bar zoo baz
-#+end_src
+#+END_SRC
 
 but in *.mjs is different:
 
-#+begin_src mjs
+#+BEGIN_SRC mjs
 // start bar foo zoo baz
-#+end_src
+#+END_SRC
 
 because ES Module is asyncchronous, second output is 'bar', not 'foo'
 
 Event loop's order of operations:
 
-#+begin_src txt
+#+BEGIN_SRC txt
    ┌───────────────────────────┐
 ┌─>│           timers          │
 │  └─────────────┬─────────────┘
@@ -56,4 +56,4 @@ Event loop's order of operations:
 │  ┌─────────────┴─────────────┐
 └──┤      close callbacks      │
    └───────────────────────────┘
-#+end_src
+#+END_SRC

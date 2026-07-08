@@ -6,7 +6,7 @@ https://www.howtogeek.com/816878/how-to-back-up-and-restore-gpg-keys-on-linux/ h
 
 GPG: GNU Privacy Guard
 
-#+begin_src sh
+#+BEGIN_SRC sh
 $ tree ~/.gnupg
 /home/archie/.gnupg
 ├── common.conf
@@ -22,7 +22,7 @@ $ tree ~/.gnupg
 │   └── pubring.db.lock
 ├── pubring.kbx
 └── trustdb.gpg
-#+end_src
+#+END_SRC
 
 - openpgp-revocs.d: This subdirectory contains your revocation certificate. You'll need this if your private key ever becomes common knowledge or otherwise compromised. Your revocation certificate is used in the process of retiring your old keys and adopting new keys.
 - private-keys-v1.d: This subdirectory stores your private keys.
@@ -43,7 +43,7 @@ openpgp-revocs.d/
 
 *** Determining Which Keys to Back Up
 
-#+begin_src sh
+#+BEGIN_SRC sh
 $ gpg --list-secret-keys --keyid-format LONG
 [keyboxd]
 ---------
@@ -51,7 +51,7 @@ sec   ed25519/D56175D4B81A264C 2024-06-21 [SC] [expires: 2025-06-21]
       5D58F91F8C34E8E26A8F96C6D56175D4B81A264C
 uid                 [ultimate] tianheg <i@tianheg.co>
 ssb   cv25519/D8D0FDE0A5C69978 2024-06-21 [E] [expires: 2025-06-21]
-#+end_src
+#+END_SRC
 
 - The "sec" (secret) line shows the number of bits in the encryption (4096 in this example), the key ID, the date the key was created, and "[SC]." The "S" means the key can be used for digital signatures and the "C" means it can be used for certification.
 - The next line is the key fingerprint.
@@ -62,54 +62,54 @@ ssb   cv25519/D8D0FDE0A5C69978 2024-06-21 [E] [expires: 2025-06-21]
 
 **** Public keys
 
-#+begin_src sh
+#+BEGIN_SRC sh
 $ gpg --export --export-options backup --output public.gpg
 $ gpg --export --export-options backup --output public.gpg email # backup someone
-#+end_src
+#+END_SRC
 
 **** Private keys
 
-#+begin_src sh
+#+BEGIN_SRC sh
 $ gpg --export-secret-keys --export-options backup --output private.gpg
-#+end_src
+#+END_SRC
 
 **** Ownertrust
 
-#+begin_src sh
+#+BEGIN_SRC sh
 $ gpg --export-ownertrust > otrust.txt
-#+end_src
+#+END_SRC
 
 *** Setup gpg key on a new PC
 
-#+begin_src sh
+#+BEGIN_SRC sh
 $ gpg --import public.gpg
 $ gpg --import private.gpg
 $ gpg --import-ownertrust otrust.txt
-#+end_src
+#+END_SRC
 
 *** Encrypt these files and upload to cloud
 
 https://linuxconfig.org/how-to-create-compressed-encrypted-archives-with-tar-and-gpg
 
-#+begin_src sh
+#+BEGIN_SRC sh
 # gnupg/otrust.txt
 # gnupg/private.gpg
 # gnupg/public.gpg
 $ tar -cvzf - gnupg | gpg -c --batch --passphrase-fd 0 --passphrase-file passwd.txt > gnupg.tar.gz.gpg
-#+end_src
+#+END_SRC
 
 upload the gnupg.tar.gz.gpg file to cloud
 
 ** GPG failed to sign the data
 
-#+begin_src sh
+#+BEGIN_SRC sh
 error: gpg failed to sign the data:
 [GNUPG:] KEY_CONSIDERED A47EAD5ACA5C2017C81149F834B5D16A1EE7FAB9 2
 [GNUPG:] BEGIN_SIGNING H10
 gpg: signing failed: Permission denied
 [GNUPG:] FAILURE sign 67141633
 gpg: signing failed: Permission denied
-#+end_src
+#+END_SRC
 
 Above came from git commit -m "", when signing with GPG
 

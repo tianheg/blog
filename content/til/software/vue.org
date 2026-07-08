@@ -5,73 +5,73 @@
 
    1. Creating an Application
 
-      #+begin_src javascript
+      #+BEGIN_SRC javascript
       import { createApp } from 'vue'
 
       const app = createApp({
         /* root component options */
       })
-      #+end_src
+      #+END_SRC
 
       单独 App.vue
 
-      #+begin_src javascript
+      #+BEGIN_SRC javascript
       import { createApp } from 'vue'
       import App from './App.vue'
 
       const app = createApp(App)
-      #+end_src
+      #+END_SRC
 
       Mount 挂载
 
-      #+begin_src html
+      #+BEGIN_SRC html
       <div id="app"></div>
-      #+end_src
+      #+END_SRC
 
-      #+begin_src javascript
+      #+BEGIN_SRC javascript
       app.mount('#app')
-      #+end_src
+      #+END_SRC
 
       App 配置
 
-      #+begin_src javascript
+      #+BEGIN_SRC javascript
       app.config.errorHandler = (err) => {
         /* handle error */
       }
-      #+end_src
+      #+END_SRC
 
       App 范围内组件
 
-      #+begin_src javascript
+      #+BEGIN_SRC javascript
       app.component('TodoDeleteButton', TodoDeleteButton)
-      #+end_src
+      #+END_SRC
 
       这个组件可以在 App 的任何地方使用。
 
       多个 App 实例
 
-      #+begin_src javascript
+      #+BEGIN_SRC javascript
       const app1 = createApp({ /* ... */ })
       app1.mount('#container-1')
 
       const app1 = createApp({ /* ... */ })
       app2.mount('#container-2')
-      #+end_src
+      #+END_SRC
 
    2. Template Syntax
 
       文本插值
 
-      #+begin_src html
+      #+BEGIN_SRC html
       <span>Message: {{ msg }}</span>
-      #+end_src
+      #+END_SRC
 
       原始 HTML
 
-      #+begin_src html
+      #+BEGIN_SRC html
       <p>Using text interpolation: {{ rawHtml }}</p>
       <p>Using v-html directive: <span v-html="rawHtml"></span></p>
-      #+end_src
+      #+END_SRC
 
       =v-html= Vue 指令的一种。
 
@@ -82,32 +82,32 @@
 
       属性绑定
 
-      #+begin_src html
+      #+BEGIN_SRC html
       <div v-bind:id="dynamicId"></div>
 
       <!--- v-bind:id  可简写为 :id --->
 
       <button :disabled="isButtonDisabled">Button</button>
-      #+end_src
+      #+END_SRC
 
       v-bind（用于无法使用 {{}} 的 HTML 属性中） 使 id 与组件同步，如果 id 为 null/undefined，则渲染后的页面无属性 id。
 
       动态绑定多个属性
 
-      #+begin_src javascript
+      #+BEGIN_SRC javascript
       const objectOfAttrs = {
         id: 'container',
         class: 'wrapper',
       }
-      #+end_src
+      #+END_SRC
 
-      #+begin_src html
+      #+BEGIN_SRC html
       <div v-bind="objectOfAttrs"></div>
-      #+end_src
+      #+END_SRC
 
       JS 表达式（支持数据绑定的 JS 表达式，可用于文本插值、属性绑定，只能键入表达式，可以调用组件中暴漏的函数，此处的表达式可使用的[[https://github.com/vuejs/core/blob/main/packages/shared/src/globalsWhitelist.ts]["全局对象"]][但是，可以通过 =app.config.globalProperties= 显示添加]）。
 
-      #+begin_src html
+      #+BEGIN_SRC html
       {{ number + 1 }}
 
       {{ ok ? 'YES' : 'NO' }}
@@ -119,7 +119,7 @@
       <span :title="toTitleDate(date)">
         {{ formatDate(date) }}
       </span>
-      #+end_src
+      #+END_SRC
 
       指令（ =v-= 前缀的属性，参数[动态参数值约束、动态参数语法约束、避免属性名大写]，修饰语 =@submit.prevent <=> event.preventDefault()= ）
 
@@ -128,7 +128,7 @@
 
       #+end_quote
 
-      #+begin_src html
+      #+BEGIN_SRC html
       <a v-bind:href="url"> ... </a>
       <a :href="url"> ... </a>
 
@@ -142,21 +142,21 @@
       <a @[eventName]="doSomething"> ... </a>
 
       <form @submit.prevent="onSubmit"> ... </form>
-      #+end_src
+      #+END_SRC
 
    3. Reactivity Fundamentals
 
       1. 声明响应式状态
 
-         #+begin_src javascript
+         #+BEGIN_SRC javascript
          import { reactive } from 'vue'
 
          const state = reactive({ count: 0 )}
-         #+end_src
+         #+END_SRC
 
          1. 使用 =<script setup>= 与否的对比
 
-            #+begin_src html
+            #+BEGIN_SRC html
             <!--- 不使用 --->
             <script>
             import { reactive } from 'vue'
@@ -192,11 +192,11 @@
                 {{ state.count }}
               </button>
             </template>
-            #+end_src
+            #+END_SRC
 
          2. DOM Update Timing
 
-            #+begin_src html
+            #+BEGIN_SRC html
             <script setup>
             import { reactive, nextTick } from 'vue'
 
@@ -217,13 +217,13 @@
                 BUTTON
               </button>
             </template>
-            #+end_src
+            #+END_SRC
 
          3. Deep Reactivity
 
             In Vue, state is deeply reactive by default.
 
-            #+begin_src javascript
+            #+BEGIN_SRC javascript
             import { reactive } from 'vue'
 
             const obj = reactive({
@@ -234,11 +234,11 @@
               obj.nested.count++
               obj.arr.push('baz')
             }
-            #+end_src
+            #+END_SRC
 
          4. Reactive Proxy vs. Original
 
-            #+begin_src javascript
+            #+BEGIN_SRC javascript
             import { reactive } from 'vue'
             const  raw = {}
             const proxy = reactive(raw)
@@ -252,14 +252,14 @@
             const raw = {}
             proxy.nested = raw
             console.log(proxy.nested === raw)
-            #+end_src
+            #+END_SRC
 
          5. =reactive()= 的限制
 
             1. 数据类型仅限于对象
             2. 无法替换响应式（代理）对象，一旦替换原来的响应式对象会失去连接
 
-            #+begin_src javascript
+            #+BEGIN_SRC javascript
             import { reactive } from 'vue'
 
             const state = reactive({ count: 0})
@@ -271,46 +271,46 @@
             count++
             // won't be able to track changes to state.count
             callSomeFunc(state.count)
-            #+end_src
+            #+END_SRC
 
       2. 通过 =ref()= 声明的响应式变量
 
          为了解决 =reactive()= 的局限性，Vue 提供了 =ref()= 用于对任何数据类型创建响应式。
 
-         #+begin_src javascript
+         #+BEGIN_SRC javascript
          import { ref } from 'vue'
          const count = ref(0)
          console.log(count)
          console.log(count.value)
          count.value++
          console.log(count.value)
-         #+end_src
+         #+END_SRC
 
          和对象中的属性类似，一个 ref 的 =.value= 属性也是响应式的。另外，当值为对象类型时，会用 =reactive()= 自动转换它的 =.value= 。
 
          ref 保存对象
 
-         #+begin_src javascript
+         #+BEGIN_SRC javascript
          import { ref } from 'vue'
          const objectRef = ref({ count: 0 })
          objectRef.value = { count: 1 }
          console.log(objectRef.value) // Proxy
-         #+end_src
+         #+END_SRC
 
          Refs 也可传入函数、从纯对象中结构却不失去响应状态
 
-         #+begin_src javascript
+         #+BEGIN_SRC javascript
          const obj = {
            foo: ref(1),
            bar: ref(2)
          }
          callSomeFunction(obj.foo)
          const { foo, bar } = obj
-         #+end_src
+         #+END_SRC
 
          1. ref 在模板中的解包
 
-            #+begin_src html
+            #+BEGIN_SRC html
             <script setup>
             import { ref } from 'vue'
             const count = ref(0)
@@ -323,9 +323,9 @@
                 {{ count }} <!--- no .value needed --->
               </button>
             </template>
-            #+end_src
+            #+END_SRC
 
-            #+begin_src html
+            #+BEGIN_SRC html
             <script setup>
             import { ref } from 'vue'
             const object = { foo: ref(1) }
@@ -361,11 +361,11 @@
                 {{ foo + 1 }} <!--- no .value needed --->
               </button>
             </template>
-            #+end_src
+            #+END_SRC
 
          2. ref 在响应式对象中的解包
 
-            #+begin_src javascript
+            #+BEGIN_SRC javascript
             import { ref, reactive } from 'vue'
             const count = ref(0)
             const state = reactive({
@@ -374,11 +374,11 @@
             console.log(state.count)
             state.count = 1
             console.log(state.count)
-            #+end_src
+            #+END_SRC
 
             如果新的 ref 赋给了 state.count 则原来的会断开连接
 
-            #+begin_src javascript
+            #+BEGIN_SRC javascript
             import { ref, reactive } from 'vue'
             const count = ref(0)
             const otherCount = ref(2)
@@ -391,13 +391,13 @@
             state.count = otherCount
             console.log(state.count)
             console.log(count.value)
-            #+end_src
+            #+END_SRC
 
             Ref unwrapping only happens when nested inside a deep reactive object.
 
             ref 在数组、集合中的解包
 
-            #+begin_src javascript
+            #+BEGIN_SRC javascript
             import { ref, reactive } from 'vue'
             const books = reactive([ref('Vue 3 Guide')])
             // 需要 .value
@@ -405,7 +405,7 @@
             const map = reactive(new Map([['count', ref(0)]]))
             // 需要 .value
             console.log(map.get('count').value)
-            #+end_src
+            #+END_SRC
 
    4. Computed Properties
 
@@ -413,7 +413,7 @@
 
          如果使用包含响应式数据的复杂逻辑的话，推荐使用 =computed()= 函数。
 
-         #+begin_src html
+         #+BEGIN_SRC html
          <script setup>
          import { computed, reactive } from 'vue'
          const author = reactive({
@@ -432,13 +432,13 @@
            <p>Has published books:</p>
            <span>{{ publishedBooksMessage }}</span>
          </template>
-         #+end_src
+         #+END_SRC
 
       2. Computed Caching vs. Methods
 
          如果不使用 =computed()= 函数，还可以用方法函数。
 
-         #+begin_src html
+         #+BEGIN_SRC html
          <script setup>
          import { reactive } from 'vue'
          const author = reactive({
@@ -458,15 +458,15 @@
            <p>Has published books?</p>
            <span>{{ publishedBooksMessage() }}</span>
          </template>
-         #+end_src
+         #+END_SRC
 
          两种方法都能产生最终结果，但是 computed properties are cached based on their reactive dependencies。计算属性在 author.books 不改变的情况下，不发生变化。This means as long as =author.books= has not changed, multiple access to =publishedBooksMessage= will immediately return the previously computed result without having to run the getter function again.
 
          This also means the following computed property will never update, because =Date.now()= is not a reactive dependency:
 
-         #+begin_src javascript
+         #+BEGIN_SRC javascript
          const now = computed(() => Date.now())
-         #+end_src
+         #+END_SRC
 
          与计算属性不同，每当页面重绘时，方法总会运行。
 
@@ -474,7 +474,7 @@
 
          计算属性默认 getter-only，如果对计算属性赋新值，会有运行时警告。
 
-         #+begin_src html
+         #+BEGIN_SRC html
          <script setup>
          import { ref, computed } from 'vue'
          const firstName = ref('John')
@@ -491,7 +491,7 @@
          fullName.value = 'Evan You'
          console.log(fullName.value)
          </script>
-         #+end_src
+         #+END_SRC
 
       4. 最佳实践
 
@@ -506,13 +506,13 @@
 
          1. Binding to Objects
 
-            #+begin_src html
+            #+BEGIN_SRC html
             <div :class="{ active: isActive }"></div>
-            #+end_src
+            #+END_SRC
 
             还可有多个 class 属性，以及在一个 class 属性中添加多个对象属性。
 
-            #+begin_src html
+            #+BEGIN_SRC html
             <script setup>
             import { ref } from 'vue'
             const isActive = ref(true)
@@ -530,11 +530,11 @@
 
             <!--- 如果 hasError 为真，则渲染成 --->
             <div class="static active text-danger"></div>
-            #+end_src
+            #+END_SRC
 
             对象绑定不必是行内：
 
-            #+begin_src html
+            #+BEGIN_SRC html
             <script setup>
             import { reactive } from 'vue'
             const classObject = reactive({
@@ -545,11 +545,11 @@
             <template>
               <div :class="classObject"></div>
             </template>
-            #+end_src
+            #+END_SRC
 
             还能绑定到计算属性：
 
-            #+begin_src html
+            #+BEGIN_SRC html
             <script setup>
             import { ref, computed } from 'vue'
             const isActive = ref(false)
@@ -562,11 +562,11 @@
             <template>
               <div :class="classObject"></div>
             </template>
-            #+end_src
+            #+END_SRC
 
          2. Binding to Arrays
 
-            #+begin_src html
+            #+BEGIN_SRC html
             <script setup>
             import { ref } from 'vue'
             const activeClass = ref('active')
@@ -579,7 +579,7 @@
             <!--- 模板中的 binding class 可改成(2种写法) --->
             <div :class="[isActive ? activeClass : '', errorClass]"></div>
             <div :class="[{ active: isActive }, errorClass]"></div>
-            #+end_src
+            #+END_SRC
 
          3. With Components
 
@@ -589,7 +589,7 @@
 
          1. 对象
 
-         #+begin_src html
+         #+BEGIN_SRC html
          <script setup>
          import { ref } from 'vue'
          const activeColor = ref('red')
@@ -607,20 +607,20 @@
            fontSize: '13px'
          })
          <div :style="styleObject">
-         #+end_src
+         #+END_SRC
 
          1. 数组
 
-         #+begin_src html
+         #+BEGIN_SRC html
          <div :style="[baseStyles, overridingStyles]">
-         #+end_src
+         #+END_SRC
 
          1. 自动前缀，最大浏览器支持
          2. 多个值在一起，渲染最后的浏览器支持的值
 
-         #+begin_src html
+         #+BEGIN_SRC html
          <div :style="{ display: ['-webkit-box', '-ms-flexbox', 'flex'] }"></div>
-         #+end_src
+         #+END_SRC
 
          在这里，渲染结果 =display: flex= 。
 
@@ -632,7 +632,7 @@
 
       v-show 所在元素会被渲染成 DOM 树；v-show 只是在切换 CSS display 属性；不支持用在 =<template>= ，也不和 v-else 搭配使用。
 
-      #+begin_src html
+      #+BEGIN_SRC html
       <button @click="awe = !awe">Toggle</button>
       <h1 v-if="awe">You are good</h1>
       <h1 v-else>You are not good</h1>
@@ -658,7 +658,7 @@
 
 
       <h1 v-show="ok">Hello!</h1>
-      #+end_src
+      #+END_SRC
 
       1. v-if vs. v-show
 
@@ -683,7 +683,7 @@
 
       1. v-for
 
-      #+begin_src html
+      #+BEGIN_SRC html
       <script setup>
       import { ref } from 'vue'
       const parentMessage = ref('Parent')
@@ -696,11 +696,11 @@
           </li>
         </ul>
       </template>
-      #+end_src
+      #+END_SRC
 
       1. v-for + Object
 
-      #+begin_src html
+      #+BEGIN_SRC html
       <script setup>
       import { ref, reactive } from 'vue'
       const myObject = reactive({
@@ -717,22 +717,22 @@
           </li>
         </ul>
       </template>
-      #+end_src
+      #+END_SRC
 
       1. v-for with Range
 
-      #+begin_src html
+      #+BEGIN_SRC html
       <template>
         <span v-for="n in 10">
           <span v-if="n === 10">{{ n }}</span>
           <span v-else>{{ n }}, </span>
         </span>
       </template>
-      #+end_src
+      #+END_SRC
 
       1. v-for on =<template>=
 
-      #+begin_src html
+      #+BEGIN_SRC html
       <script setup>
       import { ref } from 'vue'
       const items = ref([{ msg: 'hello'}, {msg: 'hell'}, {msg: 'hel'}, {msg: 'he'}, {msg: 'h'}])
@@ -746,7 +746,7 @@
           </template>
         </ul>
       </template>
-      #+end_src
+      #+END_SRC
 
       1. v-for + v-if
 
@@ -754,17 +754,17 @@
 
       错误用法：
 
-      #+begin_src html
+      #+BEGIN_SRC html
       <template>
         <ul>
           <li v-for="todo in todos" v-if="!todo.isComplete">{{ todo.name }}</li>
         </ul>
       </template>
-      #+end_src
+      #+END_SRC
 
       Fixed：
 
-      #+begin_src html
+      #+BEGIN_SRC html
       <template>
         <ul>
           <template v-for="todo in todos">
@@ -772,13 +772,13 @@
           </template>
         </ul>
       </template>
-      #+end_src
+      #+END_SRC
 
       1. key ------维持状态/条件
 
       更新列表的默认模式只，适用于列表输出不依靠子组件状态或有限 DOM 状态
 
-      #+begin_src html
+      #+BEGIN_SRC html
       <script setup>
       import { ref } from 'vue'
       const items = ref([{ msg: 'hello'}, {msg: 'hell'}, {msg: 'hel'}, {msg: 'he'}, {msg: 'h'}])
@@ -790,15 +790,15 @@
           </li>
         </ul>
       </template>
-      #+end_src
+      #+END_SRC
 
       当使用 =<template v-for>= 时，key 应位于 =<template>= 容器。
 
-      #+begin_src html
+      #+BEGIN_SRC html
       <template v-for="todo in todos" :key="todo.name">
         <li>{{ todo.name }}</li>
       </template>
-      #+end_src
+      #+END_SRC
 
       每当用 v-for 时都加上 key。
 
@@ -806,7 +806,7 @@
 
       1. v-for + Component
 
-      #+begin_src html
+      #+BEGIN_SRC html
       <MyComponent v-for="item in items" :key="item.id" />
 
       <MyComponent
@@ -815,7 +815,7 @@
         :index="index"
         :key="item.id"
       />
-      #+end_src
+      #+END_SRC
 
       Component 不会自动将 item 值插入，这样利用复用组件。
 
@@ -825,7 +825,7 @@
 
       1. 展示过滤后/分类后的结果
 
-      #+begin_src html
+      #+BEGIN_SRC html
       <script setup>
       import { ref, computed } from 'vue'
       const numbers = ref([1,2,3,4,5])
@@ -836,14 +836,14 @@
       <template>
         <li v-for="n in evenNumbers">{{ n }}</li>
       </template>
-      #+end_src
+      #+END_SRC
 
       在可计算属性中使用 reverse(),sort() 会改变原有数组，在使用前要对其进行拷贝。
 
-      #+begin_src diff
+      #+BEGIN_SRC diff
       - return numbers.reverse()
       + return [...numbers].reverse()
-      #+end_src
+      #+END_SRC
 
    8. Event Handling
 
@@ -858,7 +858,7 @@
 
       1. 行内 handlers
 
-      #+begin_src html
+      #+BEGIN_SRC html
       <script setup>
       import { ref } from 'vue'
       const counter = ref(0)
@@ -867,11 +867,11 @@
         <button @click="counter++">Add 1</button>
         <p>The button above has been clicked {{ counter }} times.</p>
       </template>
-      #+end_src
+      #+END_SRC
 
       1. 方法 handlers
 
-      #+begin_src html
+      #+BEGIN_SRC html
       <script setup>
       import { ref } from 'vue'
       const name = ref('Vue.js')
@@ -886,7 +886,7 @@
       <template>
         <button @click="greet">Greet</button>
       </template>
-      #+end_src
+      #+END_SRC
 
       方法 vs. 行内
 
@@ -894,7 +894,7 @@
 
       1. 行内 handlers 调用方法
 
-      #+begin_src html
+      #+BEGIN_SRC html
       <script setup>
       function say(msg) {
         alert(msg)
@@ -903,13 +903,13 @@
       <template>
         <button @click="say('Hello!')">SAY</button>
       </template>
-      #+end_src
+      #+END_SRC
 
       1. 访问行内 handlers 的事件参数
 
       需要访问原始 DOM 事件
 
-      #+begin_src html
+      #+BEGIN_SRC html
       <script setup>
       function warn(msg, event) {
         if (event) {
@@ -923,11 +923,11 @@
         <button @click="warn('Form cannot be submitted yet.', $event)">Submit</button>
         <button @click="(event) => warn('Form cannot be submitted yet.', event)">Submit</button>
       </template>
-      #+end_src
+      #+END_SRC
 
       1. 事件修改器
 
-      #+begin_src html
+      #+BEGIN_SRC html
       <a @click.stop="doThis"></a>
 
       <form @submit.prevent="onSubmit"></a>
@@ -945,16 +945,16 @@
       <a @click.once="doThis"></a>
 
       <div @scroll.passive="onScroll">...</div>
-      #+end_src
+      #+END_SRC
 
       .passive 和 .prevent 不能一起用，两者起相反效果。
 
       1. 键修改器
 
-      #+begin_src html
+      #+BEGIN_SRC html
       <input @keyup.enter="submit" />
       <input @keyup.page-down="onPageDown" />
-      #+end_src
+      #+END_SRC
 
       常用 key：
 
@@ -989,7 +989,7 @@
 
       1.1 Text
 
-      #+begin_src html
+      #+BEGIN_SRC html
       <script setup>
       import { ref } from 'vue'
       const txt = ref('')
@@ -1000,11 +1000,11 @@
           Message is: {{ txt }}
         </p>
       </template>
-      #+end_src
+      #+END_SRC
 
       1.2 Multiline Text
 
-      #+begin_src html
+      #+BEGIN_SRC html
       <script setup>
       import { ref } from 'vue'
       const txt = ref('')
@@ -1014,13 +1014,13 @@
         <p style="white-space: pre-line;">{{ txt }}</p>
         <textarea v-model="txt"></textarea>
       </template>
-      #+end_src
+      #+END_SRC
 
       别用 =<textarea>{{ txt }}</textarea>=
 
       1.3 Checkbox
 
-      #+begin_src html
+      #+BEGIN_SRC html
       <script setup>
       import { ref } from 'vue'
       const checked = ref(false)
@@ -1029,11 +1029,11 @@
         <input type="checkbox" id="checkbox" v-model="checked"/>
         <label for="checkbox">{{ checked }}</label>
       </template>
-      #+end_src
+      #+END_SRC
 
       多个 checkbox
 
-      #+begin_src html
+      #+BEGIN_SRC html
       <script setup>
       import { ref } from 'vue'
       const checkedNames = ref([])
@@ -1047,11 +1047,11 @@
         <input type="checkbox" id="mike" value="Mike" v-model="checkedNames" />
         <label for="mike">Mike</label>
       </template>
-      #+end_src
+      #+END_SRC
 
       1.4 Radio
 
-      #+begin_src html
+      #+BEGIN_SRC html
       <script setup>
       import { ref } from 'vue'
       const picked = ref('One')
@@ -1063,13 +1063,13 @@
           <input type="radio" id="two" value="Two" v-model="picked" />
         <label for="two">Two</label>
       </template>
-      #+end_src
+      #+END_SRC
 
       1.5 Select
 
       Single
 
-      #+begin_src html
+      #+BEGIN_SRC html
       <script setup>
       import { ref } from 'vue'
       const picked = ref('One')
@@ -1081,11 +1081,11 @@
           <input type="radio" id="two" value="Two" v-model="picked" />
         <label for="two">Two</label>
       </template>
-      #+end_src
+      #+END_SRC
 
       Multiple
 
-      #+begin_src html
+      #+BEGIN_SRC html
       <script setup>
       import { ref } from 'vue'
       const selected = ref([])
@@ -1103,11 +1103,11 @@
         width: 100px;
       }
       </style>
-      #+end_src
+      #+END_SRC
 
       v-for 动态渲染
 
-      #+begin_src html
+      #+BEGIN_SRC html
       <script setup>
       import { ref } from 'vue'
       const selected = ref('A')
@@ -1125,7 +1125,7 @@
         </select>
           <div>Selected: {{ selected }}</div>
       </template>
-      #+end_src
+      #+END_SRC
 
       1. Value Bindings
 
@@ -1133,38 +1133,38 @@
 
       2.1 Checkbox
 
-      #+begin_src html
+      #+BEGIN_SRC html
       <input
         type="checkbox"
         v-model="toggle"
         :true-value="dynamicTrueValue"
         :false-value="dynamicFalseValue" />
-      #+end_src
+      #+END_SRC
 
       2.2 Radio
 
-      #+begin_src html
+      #+BEGIN_SRC html
       <input type="radio" v-model="pick" :value="first">
       <input type="radio" v-model="pick" :value="second">
-      #+end_src
+      #+END_SRC
 
       2.3 Select Options
 
-      #+begin_src html
+      #+BEGIN_SRC html
       <select v-model="selected">
         <option :value="{ number: 123 }">123</option>
       </select>
-      #+end_src
+      #+END_SRC
 
       1. Modifiers
 
       3.1 .lazy 3.2 .number 3.3 .trim
 
-      #+begin_src html
+      #+BEGIN_SRC html
       <input v-model.lazy="msg">
       <input v-model.number="age">
       <input v-model.trim="msg">
-      #+end_src
+      #+END_SRC
 
       1. v-model + Component
 
@@ -1176,14 +1176,14 @@
 
        1. 注册生命周期钩子
 
-       #+begin_src html
+       #+BEGIN_SRC html
        <script setup>
        import { onMounted } from 'vue'
        onMounted(() => {
          console.log(`The component is now mounted.`)
        })
        </script>
-       #+end_src
+       #+END_SRC
 
        与 onMounted 一样常用的生命周期 Hooks，有 onUpdated, onUnmounted。
 
@@ -1212,7 +1212,7 @@
 
        如果想在 Vue 组件更新以后，在 watcher 回调函数中改变 DOM。需要指定 =flush: 'post'= 。
 
-       #+begin_src javascript
+       #+BEGIN_SRC javascript
        // watch
        watch(source, callback, {
          flush: 'post'
@@ -1229,7 +1229,7 @@
        watchPostEffect(() => {
          /* executed after Vue updates */
        })
-       #+end_src
+       #+END_SRC
 
        1. Stopping a Watcher
 
