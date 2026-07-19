@@ -8,42 +8,40 @@
   {{ $totalMin = add $totalMin .ReadingTime }}
 {{ end }}
 
-{{/* Accurate word counts from build-time script */}}
-{{ $wc := index site.Data "til-wordcounts" }}
+{{/* Accurate word counts from build-time script (hugo.Data avoids .Site.Data deprecation) */}}
+{{ $wc := index hugo.Data "til-wordcounts" }}
 {{ $totalWords := 0 }}
-{{ $catWordCounts := dict }}
 {{ $pageWordCounts := dict }}
 {{ with $wc }}
   {{ $totalWords = .total }}
-  {{ range $slug, $data := .perCategory }}
-    {{ $catWordCounts = merge $catWordCounts (dict $slug $data.words) }}
-  {{ end }}
   {{ range .perPage }}
     {{ $pageWordCounts = merge $pageWordCounts (dict .path .words) }}
   {{ end }}
 {{ end }}
 
-{{/* Category distribution (by file count + word count from accurate data) */}}
-{{ $catCount := dict }}
+{{/* Category distribution: merge Hugo sections with accurate word counts */}}
+{{ $catAgg := dict }}
 {{ range $tilPages }}
   {{ $sec := .CurrentSection }}
-  {{ $title := $sec.Title }}
-  {{ $count := index $catCount $title | default (dict "count" 0 "slug" "") }}
+  {{ $t := $sec.Title }}
   {{ $slug := index (split (strings.TrimPrefix "/til/" $sec.RelPermalink) "/") 0 }}
-  {{ $catCount = merge $catCount (dict $title (dict "count" (add $count.count 1) "slug" $slug)) }}
+  {{ $cur := index $catAgg $t | default (dict "count" 0 "slug" "") }}
+  {{ $catAgg = merge $catAgg (dict $t (dict "count" (add $cur.count 1) "slug" $slug)) }}
 {{ end }}
 
 {{ $sortedCats := slice }}
-{{ range $k, $v := $catCount }}
+{{ range $t, $v := $catAgg }}
   {{ $w := 0 }}
   {{ with $wc }}{{ with index .perCategory $v.slug }}{{ $w = .words }}{{ end }}{{ end }}
-  {{ $sortedCats = $sortedCats | append (dict "name" $k "count" $v.count "slug" $v.slug "words" $w) }}
+  {{ $sortedCats = $sortedCats | append (dict "name" $t "count" $v.count "slug" $v.slug "words" $w) }}
 {{ end }}
-{{ $sortedCats = sort $sortedCats "count" "desc" }}
 
-{{ $maxCatWords := 0 }}
+{{/* Sort by word count (bar chart uses words) */}}
+{{ $sortedCats = sort $sortedCats "words" "desc" }}
+
+{{ $maxWords := 0 }}
 {{ range $sortedCats }}
-  {{ if gt .words $maxCatWords }}{{ $maxCatWords = .words }}{{ end }}
+  {{ if gt .words $maxWords }}{{ $maxWords = .words }}{{ end }}
 {{ end }}
 
 {{/* Stats cards */}}
@@ -66,31 +64,34 @@
   </div>
 </div>
 
-{{/* Category bar chart — bars = word count, label = file count */}}
+{{/* Category bar chart — bar width = word count, label = words / files */}}
+{{ if $sortedCats }}
 <div class="mb-8">
   <h3 class="text-xs font-medium text-gray-400 dark:text-gray-500 uppercase tracking-wider mb-3">分类分布</h3>
   <div class="space-y-2">
     {{ range $sortedCats }}
     <div class="flex items-center gap-3">
       <span class="text-xs text-gray-600 dark:text-gray-400 w-28 shrink-0 truncate" title="{{ .name }}">{{ .name }}</span>
-      <div class="flex-1 h-5 bg-gray-100 dark:bg-gray-800 rounded-sm overflow-hidden relative">
-        {{ $pct := 0 }}
-        {{ if gt $maxCatWords 0 }}{{ $pct = div (mul .words 100) $maxCatWords }}{{ end }}
+      <div class="flex-1 h-5 bg-gray-100 dark:bg-gray-800 rounded-sm overflow-hidden">
+        {{ $pct := 0 }}{{ if gt $maxWords 0 }}{{ $pct = div (mul .words 100) $maxWords }}{{ end }}
         <div class="h-full bg-emerald-400/60 dark:bg-emerald-600/40 rounded-sm" style="width: {{ $pct }}%"></div>
       </div>
-      <span class="text-xs text-gray-400 dark:text-gray-500 w-16 text-right shrink-0 tabular-nums">{{ .words }}<span class="text-gray-300 dark:text-gray-600 ml-0.5">/{{ .count }}</span></span>
+      <span class="text-xs text-gray-400 dark:text-gray-500 w-20 text-right shrink-0 tabular-nums">{{ .words }}<span class="text-gray-300 dark:text-gray-600 ml-0.5">/{{ .count }}</span></span>
     </div>
     {{ end }}
   </div>
 </div>
+{{ end }}
 
 {{/* Top 5 longest & shortest — using accurate word counts */}}
 {{ if $pageWordCounts }}
 {{ $sorted := slice }}
 {{ range $tilPages }}
-  {{ $fname := .File.LogicalName }}
-  {{ $w := index $pageWordCounts $fname | default 0 }}
-  {{ $sorted = $sorted | append (dict "page" . "words" $w) }}
+  {{ with .File }}
+    {{ $fname := .LogicalName }}
+    {{ $w := index $pageWordCounts $fname | default 0 }}
+    {{ $sorted = $sorted | append (dict "page" $ "words" $w) }}
+  {{ end }}
 {{ end }}
 {{ $sortedByWords := sort $sorted "words" "desc" }}
 
@@ -112,9 +113,8 @@
   <div>
     <h3 class="text-xs font-medium text-gray-400 dark:text-gray-500 uppercase tracking-wider mb-3">最短 Top 5</h3>
     <div class="space-y-1">
-      {{ $minWords := 20 }}
       {{ range last 5 $sortedByWords }}
-      {{ if gt .words $minWords }}
+      {{ if gt .words 10 }}
       <a href="{{ .page.RelPermalink }}"
          class="group flex items-center justify-between py-1 px-2 -mx-2 rounded-md transition-colors hover:bg-gray-50 dark:hover:bg-gray-800/40">
         <span class="text-xs text-gray-600 dark:text-gray-400 truncate group-hover:text-emerald-600 dark:group-hover:text-emerald-400 transition-colors">
