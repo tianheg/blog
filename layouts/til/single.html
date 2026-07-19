@@ -17,6 +17,35 @@
     {{ partial "content/render-content" .Content }}
   </div>
 
+  {{/* --- Previous / Next navigation --- */}}
+  {{ $section := .CurrentSection }}
+  {{ $sorted := $section.RegularPages.ByTitle }}
+  {{ $idx := -1 }}
+  {{ range $i, $p := $sorted }}{{ if eq $p.RelPermalink $.RelPermalink }}{{ $idx = $i }}{{ end }}{{ end }}
+  {{ $prev := index $sorted (sub $idx 1) }}
+  {{ $next := index $sorted (add $idx 1) }}
+  {{ if or $prev $next }}
+  <nav class="mt-10 pt-6 border-t border-gray-200 dark:border-gray-800 flex justify-between">
+    <div>
+      {{ with $prev }}
+      <a href="{{ .RelPermalink }}"
+         class="group flex items-center gap-1 text-sm text-gray-500 dark:text-gray-400 hover:text-emerald-600 dark:hover:text-emerald-400 transition-colors">
+        <svg class="w-4 h-4 shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 19l-7-7 7-7"/></svg>
+        <span class="truncate">{{ partial "functions/get-title" (dict "page" .) }}</span>
+      </a>
+      {{ end }}
+    </div>
+    <div class="text-right">
+      {{ with $next }}
+      <a href="{{ .RelPermalink }}"
+         class="group flex items-center gap-1 text-sm text-gray-500 dark:text-gray-400 hover:text-emerald-600 dark:hover:text-emerald-400 transition-colors">
+        <span class="truncate">{{ partial "functions/get-title" (dict "page" .) }}</span>
+        <svg class="w-4 h-4 shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"/></svg>
+      </a>
+      {{ end }}
+    </div>
+  </nav>
+  {{ end }}
 </article>
 
 {{ end }}
