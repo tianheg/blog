@@ -194,6 +194,7 @@ function main() {
   const avg = perPage.length > 0 ? Math.round(total / perPage.length) : 0;
 
   const output = {
+    generatedAt: new Date().toISOString(),
     total,
     avg,
     pages: perPage.length,
