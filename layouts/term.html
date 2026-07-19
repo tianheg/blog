@@ -1,12 +1,18 @@
-{{/* Individual taxonomy term page layout (e.g., a specific tag page) */}}
+{{/* Individual taxonomy term page (e.g., a specific tag) */}}
 {{ define "main" }}
-	<h1>{{ .Title }}</h1>
-	<ul>
-		{{/* List all pages tagged with this term */}}
-		{{ range .Pages }}
-			<li>
-				<a href="{{ .RelPermalink }}">{{ .LinkTitle }}</a>
-			</li>
-		{{ end }}
-	</ul>
+<div>
+  <h1 class="text-2xl font-bold mb-8">{{ .Title }}</h1>
+  <div class="space-y-1">
+    {{ range .Pages }}
+    <div class="flex items-baseline gap-4 py-1.5">
+      <time class="text-sm text-gray-500 dark:text-gray-400 shrink-0 w-10 tabular-nums whitespace-nowrap" datetime="{{ .Date.Format "2006-01-02" }}">
+        {{ .Date.Format "01/02" }}
+      </time>
+      <a href="{{ .RelPermalink }}" class="text-base">
+        {{ partial "functions/get-title" (dict "page" .) }}
+      </a>
+    </div>
+    {{ end }}
+  </div>
+</div>
 {{ end }}

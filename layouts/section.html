@@ -3,11 +3,6 @@
 
 <div id="main" data-pagefind-ignore>
 
-  {{/* Use Store for build-time data storage (replacement for deprecated Scratch) */}}
-  {{ .Store.Delete "pages" }}
-  {{ .Store.Delete "categories" }}
-  {{ .Store.Delete "til-groups" }}
-
   {{/* Collect all pages that belong to this section */}}
   {{ if (eq .Kind "section") }}
     {{ $sectionPage := .CurrentSection }}
@@ -18,82 +13,12 @@
     {{ end }}
   {{ end }}
 
-  {{ $section := .Section }}
   {{ $pages := .Store.Get "pages" }}
 
-  {{/* Special handling for TIL (Today I Learned) section with category grouping */}}
-  {{ if eq $section "til" }}
-    {{ $allFolders := slice }}
-    {{ $totalTILs := len $pages }}
-
-    <div class="mb-8">
-      <p class="text-gray-500 dark:text-gray-400">{{ $totalTILs }} TILs and counting...</p>
-    </div>
-
-    {{/* TIL Section Category Navigation (TOC) */}}
-    <div class="section-toc mb-10">
-      <div class="flex flex-wrap gap-2">
-        {{ range $pages }}
-          {{ $category := index (split .File.Dir "/") 1 }}
-          {{ if and $category (ne $category "_index.org") }}
-            {{ if not (in $allFolders $category) }}
-              {{ $allFolders = $allFolders | append $category }}
-            {{ end }}
-          {{ end }}
-        {{ end }}
-
-        {{ $sortedFolders := sort $allFolders }}
-        {{ range $sortedFolders }}
-          <a href="#{{ . | urlize }}" class="px-3 py-1 text-sm bg-gray-100 hover:bg-gray-200 dark:bg-gray-800 dark:hover:bg-gray-700 rounded-md transition-colors text-gray-700 dark:text-gray-300">
-            {{ . | title }}
-          </a>
-        {{ end }}
-      </div>
-    </div>
-
-    {{/* Group TILs by category using Store */}}
-    {{ range $pages }}
-      {{ $category := index (split .File.Dir "/") 1 }}
-      {{ if and $category (ne $category "_index.org") }}
-        {{ if not (in $allFolders $category) }}
-          {{ $allFolders = $allFolders | append $category }}
-        {{ end }}
-
-        {{ if not ($.Store.Get $category) }}
-          {{ $.Store.Set $category (slice .) }}
-        {{ else }}
-          {{ $existingSlice := $.Store.Get $category }}
-          {{ $.Store.Set $category ($existingSlice | append .) }}
-        {{ end }}
-      {{ end }}
-    {{ end }}
-
-    {{ $sortedFolders := sort $allFolders }}
-
-    {{/* Render each category with its TILs */}}
-    {{ range $sortedFolders }}
-      {{ $category := . }}
-      {{ $categoryPages := $.Store.Get $category }}
-      {{ if $categoryPages }}
-        <h2 id="{{ $category | urlize }}" class="text-xl font-semibold mt-10 mb-4">{{ $category | title }}</h2>
-        <div class="space-y-1 mb-8">
-          {{ range $categoryPages }}
-            <div class="flex items-baseline gap-4 py-1.5">
-              <a href="{{ .RelPermalink }}" class="">
-                {{- partial "functions/get-title" (dict "page" .) -}}
-              </a>
-            </div>
-          {{ end }}
-        </div>
-      {{ end }}
-    {{ end }}
-
-  {{ else }}
-    {{/* Default section listing: group by year */}}
-    {{ range $pages.GroupByDate "2006" }}
-      <h2 class="text-xl font-semibold mt-10 mb-4">{{ .Key }}</h2>
-      {{ partial "content/post-list-item.html" (dict "$" .) }}
-    {{ end }}
+  {{/* Default section listing: group by year */}}
+  {{ range $pages.GroupByDate "2006" }}
+    <h2 class="text-xl font-semibold mt-10 mb-4">{{ .Key }}</h2>
+    {{ partial "content/post-list-item.html" (dict "$" .) }}
   {{ end }}
 </div>
 
