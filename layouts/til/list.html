@@ -4,9 +4,8 @@
 
 {{/* Check if pages have the new "header" param */}}
 {{ $hasHeaders := false }}
-{{ $hasNoHeader := false }}
 {{ range $pages }}
-  {{ if .Params.header }}{{ $hasHeaders = true }}{{ else }}{{ $hasNoHeader = true }}{{ end }}
+  {{ if .Params.header }}{{ $hasHeaders = true }}{{ end }}
 {{ end }}
 
 <div data-pagefind-ignore>
