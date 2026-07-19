@@ -38,7 +38,7 @@
 
 > 网页作者被鼓励添加语言属性，赋予文档语言。这可以帮助语音合成工具选择正确的发音，翻译工具选择正确的语言等等。
 
-可在[标准]([[https://html.spec.whatwg.org/multipage/semantics.html#the-html-element)中读到更多关于]] `lang` 的内容。在 <abbr title="Internet Assigned Numbers Authority">IANA</abbr> 可以看到[语言代码列表]([[https://www.iana.org/assignments/language-subtag-registry/language-subtag-registry]])。
+可在[标准]([[https://html.spec.whatwg.org/multipage/semantics.html#the-html-element)中读到更多关于]] `lang` 的内容。在 <abbr title="Internet Assigned Numbers Authority">IANA</abbr> 可以看到[[https://www.iana.org/assignments/language-subtag-registry/language-subtag-registry][语言代码列表]]。
 
 ```html <html lang="en"> </html> ```
 
@@ -60,9 +60,9 @@
 
 HTML 标准：
 
-- [`link`]([[https://html.spec.whatwg.org/multipage/semantics.html#the-link-element]])
-- [`style`]([[https://html.spec.whatwg.org/multipage/semantics.html#the-style-element]])
-- [`script`]([[https://html.spec.whatwg.org/multipage/scripting.html#the-script-element]])
+- [[https://html.spec.whatwg.org/multipage/semantics.html#the-link-element][`link`]]
+- [[https://html.spec.whatwg.org/multipage/semantics.html#the-style-element][`style`]]
+- [[https://html.spec.whatwg.org/multipage/scripting.html#the-script-element][`script`]]
 
 ```html <link rel="stylesheet" href="style.css">
 
@@ -150,7 +150,7 @@ root = true
 - 不要再小数点前前缀一个 0，使用 `.5` 而不是 `0.5`
 - 小写所有的 16 进制数值。Lowercase letters are much easier to discern when scanning a document as they tend to have more unique shapes
 - 如果可以，使用 3 位 16 进制表示颜色，使用 `#fff` 而不是 `#ffffff`
-- 为选择器中的属性值添加引号，`input[type="text"]`。[只在特定情况下可省略引号]([[https://mathiasbynens.be/notes/unquoted-attribute-values#css]])
+- 为选择器中的属性值添加引号，`input[type="text"]`。[[https://mathiasbynens.be/notes/unquoted-attribute-values#css][只在特定情况下可省略引号]]
 - 避免为 0 指定单位，使用 `margin: 0;` 而不是 `margin: 0px;`
 
 ```scss // Bad CSS .selector, .selector-secondary, .selector[type=text]{ padding:15px; margin: 0px 0px 15px; background-color: rgba(0, 0, 0, 0.5); box-shadow: 0px 1px 2px #CCC,inset 0 1px 0 #FFFFFF}
@@ -193,7 +193,7 @@ root = true
 
 - 使用 `rgba()` 而非 `rgb()`
 - 使用 `rgba(255 255 255 / .5)` 而非 `rgba(255, 255, 255, .5)`
-- 确保网页中的颜色满足[对比度]([[https://webaim.org/articles/contrast/]])
+- 确保网页中的颜色满足[[https://webaim.org/articles/contrast/][对比度]]
 
 ```scss .element { color: rgba(255 255 255 / .65); background-color: rgba(0 0 0 / .95); } ```
 
@@ -205,7 +205,7 @@ root = true
 - 使用 Sass 或 Less 将 CSS 放入一个文件里
 - 利用环境提供的可利用的部分简化 CSS
 
-[阅读更多]([[https://web.archive.org/web/20150403124529/http://www.stevesouders.com/blog/2009/04/09/dont-use-import]])
+[[https://web.archive.org/web/20150403124529/http://www.stevesouders.com/blog/2009/04/09/dont-use-import][阅读更多]]
 
 ```html <!-- Use link elements --> <link rel="stylesheet" href="core.css">
 
@@ -252,7 +252,7 @@ MDN 的[一篇文章]([[https://developer.mozilla.org/en-US/docs/Web/CSS/Shortha
 
 // With nesting .table > thead > tr { > th {...} > td {...} } ```
 
-[阅读更多]([[https://markdotto.com/2015/07/20/css-nesting/]])
+[[https://markdotto.com/2015/07/20/css-nesting/][阅读更多]]
 
 ​### 预处理器中的操作符
 
@@ -296,8 +296,8 @@ MDN 的[一篇文章]([[https://developer.mozilla.org/en-US/docs/Web/CSS/Shortha
 
 阅读更多：
 
-1. [Scope CSS classes with prefixes | @mdo]([[https://markdotto.com/2012/02/16/scope-css-classes-with-prefixes/]])
-2. [Stop the cascade | @mdo]([[https://markdotto.com/2012/03/02/stop-the-cascade/]])
+1. [[https://markdotto.com/2012/02/16/scope-css-classes-with-prefixes/][Scope CSS classes with prefixes | @mdo]]
+2. [[https://markdotto.com/2012/03/02/stop-the-cascade/][Stop the cascade | @mdo]]
 
 ```scss // Bad example span {...} .page-container #stream .stream-item .tweet .tweet-header .username {...} .avatar {...}
 

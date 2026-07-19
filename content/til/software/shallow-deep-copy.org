@@ -16,7 +16,7 @@
 
 上面的数组足够简单，可以序列化，但有些 JS 对象无法被序列化，如闭包函数、Symbols、在 HTML DOM API 中表示 HTML 元素的对象、递归数据和很多其他情况。所以无法对这些对象进行深拷贝。
 
-对于可以序列化的对象，还有一个可用的属性方法是 `structuredClone()`，`structuredClone()` has the advantage of allowing [transferable objects]([[https://developer.mozilla.org/en-US/docs/Glossary/Transferable_objects]]) in the source to be _transferred_ to the new copy。记住，`structuredClone()` 并非 JS 语言的特性，而是一种浏览器和其他 JS 运行时（实现了像 `window` 这样的全局对象）的特性。
+对于可以序列化的对象，还有一个可用的属性方法是 `structuredClone()`，`structuredClone()` has the advantage of allowing [[https://developer.mozilla.org/en-US/docs/Glossary/Transferable_objects][transferable objects]] in the source to be _transferred_ to the new copy。记住，`structuredClone()` 并非 JS 语言的特性，而是一种浏览器和其他 JS 运行时（实现了像 `window` 这样的全局对象）的特性。
 
 ```js let list = ['noodles', { list: ['eggs', 'flour', 'water'] }] let list_{deepcopy} = structuredClone(list) console.log(list_{deepcopy}) // Array [ "noodles", {...} ] ```
 
@@ -48,13 +48,13 @@ Spread syntax(`...`), `Array.prototype.concat()`, `Array.prototype.slice()`,`Arr
 
 ​## `What is the most efficient way to deep clone an object in JavaScript?`
 
-使用 [`structuredClone()`]([[https://developer.mozilla.org/en-US/docs/Web/API/structuredClone]])。对于 Node.js 在 v17.0.0 版本引入。[兼容性一览]([[https://developer.mozilla.org/en-US/docs/Web/API/structuredClone#browser_compatibility]])
+使用 [[https://developer.mozilla.org/en-US/docs/Web/API/structuredClone][`structuredClone()`]]。对于 Node.js 在 v17.0.0 版本引入。[[https://developer.mozilla.org/en-US/docs/Web/API/structuredClone#browser_compatibility][兼容性一览]]
 
 --------------
 
 参考资料
 
-1. [Shallow copy - MDN Web Docs Glossary: Definitions of Web-related terms | MDN]([[https://developer.mozilla.org/en-US/docs/Glossary/Shallow_copy]])
-2. [Deep copy - MDN Web Docs Glossary: Definitions of Web-related terms | MDN]([[https://developer.mozilla.org/en-US/docs/Glossary/Deep_copy]])
-3. [JavaScript 专题之深浅拷贝 · Issue #32 · mqyqingfeng/Blog]([[https://github.com/mqyqingfeng/Blog/issues/32]])
+1. [[https://developer.mozilla.org/en-US/docs/Glossary/Shallow_copy][Shallow copy - MDN Web Docs Glossary: Definitions of Web-related terms | MDN]]
+2. [[https://developer.mozilla.org/en-US/docs/Glossary/Deep_copy][Deep copy - MDN Web Docs Glossary: Definitions of Web-related terms | MDN]]
+3. [[https://github.com/mqyqingfeng/Blog/issues/32][JavaScript 专题之深浅拷贝 · Issue #32 · mqyqingfeng/Blog]]
 4. [[https://stackoverflow.com/q/122102/12539782]]

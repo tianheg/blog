@@ -72,7 +72,7 @@ Shell globbing:
 - 通配符
 - `{}`
 
-发现一个图片格式转换利器：`convert`，由 [imagemagick]([[https://en.wikipedia.org/wiki/ImageMagick]]) 提供。
+发现一个图片格式转换利器：`convert`，由 [[https://en.wikipedia.org/wiki/ImageMagick][imagemagick]] 提供。
 
 运行（`sh script.py`）了以下文件，电脑死机了。
 
@@ -80,13 +80,13 @@ Shell globbing:
 
 import sys for arg in reversed(sys.argv[1:]): print(arg) ```
 
-Shell 脚本分析工具：[shellcheck]([[https://www.shellcheck.net/]])。
+Shell 脚本分析工具：[[https://www.shellcheck.net/][shellcheck]]。
 
-[tldr]([[https://tldr.sh/]]) 工具。
+[[https://tldr.sh/][tldr]] 工具。
 
 ffmpeg 视频格式转换工具。
 
-find 更丰富的文件/目录查找工具。[fd]([[https://github.com/sharkdp/fd]]): Simple, fast and user-friendly alternative to find.
+find 更丰富的文件/目录查找工具。[[https://github.com/sharkdp/fd][fd]]: Simple, fast and user-friendly alternative to find.
 
 locate 是哪个软件包的？
 
@@ -306,7 +306,7 @@ print(fizz_{buzz}(10)) ```
 
 1. 查找替换
 
-`:s` (substitute) command ([documentation]([[https://vim.fandom.com/wiki/Search_and_replace]])).
+`:s` (substitute) command ([[https://vim.fandom.com/wiki/Search_and_replace][documentation]]).
 
 * `%s/foo/bar/g`
 - replace foo with bar globally in file
@@ -329,7 +329,7 @@ print(fizz_{buzz}(10)) ```
 - first clear the macro with `q{character}q`
 - record the macro, with `[cite/t:@character]` to invoke the macro recursively (will be a no\-op until recording is complete)
 
-* Example: convert xml to json ([file]([[https://missing.csail.mit.edu/2020/files/example-data.xml]]))
+* Example: convert xml to json ([[https://missing.csail.mit.edu/2020/files/example-data.xml][file]])
 - Array of objects with keys "name" / "email"
 - Use a Python program?
 - Use sed / regexes
@@ -355,12 +355,12 @@ print(fizz_{buzz}(10)) ```
 ​### 资源
 
 * `vimtutor` is a tutorial that comes installed with Vim \- if Vim is installed, you should be able to run `vimtutor` from your shell
-* [Vim Adventures]([[https://vim-adventures.com/]]) is a game to learn Vim
-* [Vim Tips Wiki]([[https://vim.fandom.com/wiki/Vim_Tips_Wiki]])
-* [Vim Advent Calendar]([[https://web.archive.org/web/20220610123437/https://vimways.org/2019/]]) has various Vim tips
-* [Vim Golf]([[http://www.vimgolf.com/]]) is [code golf]([[https://en.wikipedia.org/wiki/Code_golf]]), but where the programming language is Vim's UI
-* [Vi/Vim Stack Exchange]([[https://vi.stackexchange.com/]])
-* [Practical Vim]([[https://pragprog.com/titles/dnvim2/practical-vim-second-edition/]]) (book)
+* [[https://vim-adventures.com/][Vim Adventures]] is a game to learn Vim
+* [[https://vim.fandom.com/wiki/Vim_Tips_Wiki][Vim Tips Wiki]]
+* [[https://web.archive.org/web/20220610123437/https://vimways.org/2019/][Vim Advent Calendar]] has various Vim tips
+* [[http://www.vimgolf.com/][Vim Golf]] is [[https://en.wikipedia.org/wiki/Code_golf][code golf]], but where the programming language is Vim's UI
+* [[https://vi.stackexchange.com/][Vi/Vim Stack Exchange]]
+* [[https://pragprog.com/titles/dnvim2/practical-vim-second-edition/][Practical Vim]] (book)
 ​### 练习
 
 1. 完成 `vimtutor`
@@ -432,17 +432,17 @@ Lesson 7.2: CREATE A STARTUP SCRIPT `:e ~/.vimrc` -> `:r $VIMRUNTIME/vimrc_{exam
 
 Lesson 7.3: COMPLETION `:set nocp` -> `:!ls` -> `:e` -> CTRL-D
 
-1. Download our [basic vimrc]([[https://missing.csail.mit.edu/2020/files/vimrc]]) and save it to `~/.vimrc`. Read through the well\-commented file (using Vim!), and observe how Vim looks and behaves slightly differently with the new config.
-2. Install and configure a plugin: [ctrlp.vim]([[https://github.com/ctrlpvim/ctrlp.vim]]).
+1. Download our [[https://missing.csail.mit.edu/2020/files/vimrc][basic vimrc]] and save it to `~/.vimrc`. Read through the well\-commented file (using Vim!), and observe how Vim looks and behaves slightly differently with the new config.
+2. Install and configure a plugin: [[https://github.com/ctrlpvim/ctrlp.vim][ctrlp.vim]].
    1. Create the plugins directory with `mkdir -p ~/.vim/pack/vendor/start`
    2. Download the plugin: `cd ~/.vim/pack/vendor/start; git clone [[https://github.com/ctrlpvim/ctrlp.vim]]`
-   3. Read the [documentation]([[https://github.com/ctrlpvim/ctrlp.vim/blob/master/readme.md]]) for the plugin. Try using CtrlP to locate a file by navigating to a project directory, opening Vim, and using the Vim command\-line to start `:CtrlP`.
-   4. Customize CtrlP by adding [configuration]([[https://github.com/ctrlpvim/ctrlp.vim/blob/master/readme.md#basic-options]]) to your `~/.vimrc` to open CtrlP by pressing Ctrl\-P.
-3. To practice using Vim, re\-do the [Demo]([[https://missing.csail.mit.edu/2020/editors/#demo]]) from lecture on your own machine.
+   3. Read the [[https://github.com/ctrlpvim/ctrlp.vim/blob/master/readme.md][documentation]] for the plugin. Try using CtrlP to locate a file by navigating to a project directory, opening Vim, and using the Vim command\-line to start `:CtrlP`.
+   4. Customize CtrlP by adding [[https://github.com/ctrlpvim/ctrlp.vim/blob/master/readme.md#basic-options][configuration]] to your `~/.vimrc` to open CtrlP by pressing Ctrl\-P.
+3. To practice using Vim, re\-do the [[https://missing.csail.mit.edu/2020/editors/#demo][Demo]] from lecture on your own machine.
 4. Use Vim for *all* your text editing for the next month. Whenever something seems inefficient, or when you think "there must be a better way", try Googling it, there probably is. If you get stuck, come to office hours or send us an email.
 5. Configure your other tools to use Vim bindings (see instructions above).
 6. Further customize your `~/.vimrc` and install more plugins.
-7. (Advanced) Convert XML to JSON ([example file]([[https://missing.csail.mit.edu/2020/files/example-data.xml]])) using Vim macros. Try to do this on your own, but you can look at the [macros]([[https://missing.csail.mit.edu/2020/editors/#macros]]) section above if you get stuck.
+7. (Advanced) Convert XML to JSON ([[https://missing.csail.mit.edu/2020/files/example-data.xml][example file]]) using Vim macros. Try to do this on your own, but you can look at the [[https://missing.csail.mit.edu/2020/editors/#macros][macros]] section above if you get stuck.
 
 ​## Data Wrangling
 
