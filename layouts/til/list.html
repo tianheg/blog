@@ -34,7 +34,15 @@
     {{/* Category title */}}
     <h1 class="text-2xl font-bold text-gray-900 dark:text-gray-100 mb-6">{{ .Title }}</h1>
 
-    {{/* Build per-header word count lookup */}}
+    {{/* Per-header word count lookup */}}
+    {{ $headerWords := dict }}
+    {{ with index hugo.Data "til-wordcounts" }}
+      {{ range .perHeader }}
+        {{ $headerWords = merge $headerWords (dict .header .words) }}
+      {{ end }}
+    {{ end }}
+
+    {{/* Mobile header filter (visible below xl breakpoint) */}}
     {{ $grouped := $pages.GroupByParam "header" }}
     <div class="xl:hidden flex gap-2 overflow-x-auto pb-3 mb-4 scrollbar-none">
       {{ range $grouped }}
