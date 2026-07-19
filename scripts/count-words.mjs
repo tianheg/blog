@@ -160,14 +160,23 @@ function processFile(filePath) {
 // ── Main ──────────────────────────────────────────────────────────────
 
 function main() {
+  const checkOnly = process.argv.includes('--check');
   const files = collectFiles(TIL_DIR);
 
   // Validate
   validate(files);
 
-  // Process — parallel batch (Node.js I/O is async-capable via worker threads,
-  // but for filesystem readFileSync the main difference is startup overhead.
-  // With 533 files the sequential cost is ~200ms, not worth parallelizing.)
+  if (checkOnly) {
+    // --check mode: only validate, exit with code 1 on warnings
+    if (warnings.length > 0) {
+      for (const w of warnings) console.error(w);
+      process.exit(1);
+    }
+    console.log(`OK: ${files.length} files, no issues`);
+    return;
+  }
+
+  // Process
   process.stdout.write(`Counting ${files.length} files`);
   const results = files.map(f => {
     process.stdout.write('.');
