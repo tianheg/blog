@@ -1,50 +1,69 @@
-/* ==========================================================================
-   IMPORTS & PLUGINS
-   ========================================================================== */
-
 @import "tailwindcss";
 @plugin "@tailwindcss/typography";
-@plugin "daisyui" {
-  themes: silk --light, sunset --prefersdark;
-}
-@plugin "daisyui/theme" {
-  name: "silk";
-  default: true;
-  --color-base-100: oklch(97% 0.0035 67.78);
-}
 
-/* ==========================================================================
-   CSS CUSTOM PROPERTIES (Design Tokens)
-   ========================================================================== */
-
+/* Silk (light) — manually extracted from daisyUI */
 :root {
-  /* Layout */
-  --header-height: 5rem;
+  color-scheme: light;
+  --color-base-100: oklch(97% 0.0035 67.78);
+  --color-base-200: oklch(95% 0.0081 61.42);
+  --color-base-300: oklch(90% 0.0081 61.42);
+  --color-base-content: oklch(40% 0.0081 61.42);
+  --color-primary: oklch(23.27% 0.0249 284.3);
+  --color-primary-content: oklch(94.22% 0.2505 117.44);
+  --color-secondary: oklch(23.27% 0.0249 284.3);
+  --color-secondary-content: oklch(73.92% 0.2135 50.94);
+  --color-accent: oklch(23.27% 0.0249 284.3);
+  --color-accent-content: oklch(88.92% 0.2061 189.9);
+  --color-neutral: oklch(20% 0 0);
+  --color-neutral-content: oklch(80% 0.0081 61.42);
+  --color-info: oklch(80.39% 0.1148 241.68);
+  --color-info-content: oklch(30.39% 0.1148 241.68);
+  --color-success: oklch(83.92% 0.0901 136.87);
+  --color-success-content: oklch(23.92% 0.0901 136.87);
+  --color-warning: oklch(83.92% 0.1085 80);
+  --color-warning-content: oklch(43.92% 0.1085 80);
+  --color-error: oklch(75.1% 0.1814 22.37);
+  --color-error-content: oklch(35.1% 0.1814 22.37);
 
-  /* UI Constants */
+  --header-height: 5rem;
   --scrollbar-width: 6px;
   --scrollbar-radius: 3px;
   --border-radius-sm: 0.5rem;
   --border-radius-lg: 1.5rem;
   --transition-fast: 0.2s ease;
   --transition-slow: 0.3s ease;
-
-  /* reply by email */
   --comments-bg: rgb(255 255 255);
 }
 
+/* Sunset (dark) — manually extracted from daisyUI */
 @media (prefers-color-scheme: dark) {
   :root {
-    /* reply by email */
+    color-scheme: dark;
+    --color-base-100: oklch(22% 0.019 237.69);
+    --color-base-200: oklch(20% 0.019 237.69);
+    --color-base-300: oklch(18% 0.019 237.69);
+    --color-base-content: oklch(77.383% 0.043 245.096);
+    --color-primary: oklch(74.703% 0.158 39.947);
+    --color-primary-content: oklch(14.94% 0.031 39.947);
+    --color-secondary: oklch(72.537% 0.177 2.72);
+    --color-secondary-content: oklch(14.507% 0.035 2.72);
+    --color-accent: oklch(71.294% 0.166 299.844);
+    --color-accent-content: oklch(14.258% 0.033 299.844);
+    --color-neutral: oklch(26% 0.019 237.69);
+    --color-neutral-content: oklch(70% 0.019 237.69);
+    --color-info: oklch(85.559% 0.085 206.015);
+    --color-info-content: oklch(17.111% 0.017 206.015);
+    --color-success: oklch(85.56% 0.085 144.778);
+    --color-success-content: oklch(17.112% 0.017 144.778);
+    --color-warning: oklch(85.569% 0.084 74.427);
+    --color-warning-content: oklch(17.113% 0.016 74.427);
+    --color-error: oklch(85.511% 0.078 16.886);
+    --color-error-content: oklch(17.102% 0.015 16.886);
+
     --comments-bg: rgb(17 24 39);
   }
 }
 
-/* ==========================================================================
-   FONTS
-   ========================================================================== */
-
-/* Satoshi Variable Font - https://fontshare.com/fonts/satoshi */
 @font-face {
   font-family: "Satoshi";
   src: url("/fonts/Satoshi-Variable.woff2") format("woff2");
@@ -61,29 +80,15 @@
   font-style: italic;
 }
 
-/* ==========================================================================
-   BASE STYLES
-   ========================================================================== */
-
 html {
   scroll-behavior: smooth;
   overflow-x: hidden;
 }
 
 @media (prefers-reduced-motion: reduce) {
-  html {
-    scroll-behavior: auto;
-  }
-
-  body,
-  #back-to-top,
-  #back-to-top a {
-    transition: none !important;
-  }
-
-  *,
-  *::before,
-  *::after {
+  html { scroll-behavior: auto; }
+  body, #back-to-top, #back-to-top a { transition: none !important; }
+  *, *::before, *::after {
     animation-duration: 0.01ms !important;
     animation-iteration-count: 1 !important;
     transition-duration: 0.01ms !important;
@@ -91,35 +96,26 @@ html {
 }
 
 body {
-  font-family:
-    "Satoshi", -apple-system, system-ui, BlinkMacSystemFont, "Noto Serif SC", Arial, "Amstelvar", "Josefin Sans", "Hiragino Sans GB", "Microsoft Yahei", "ST Heiti", sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol";
+  font-family: "Satoshi", -apple-system, system-ui, BlinkMacSystemFont, "Noto Serif SC", Arial, "Hiragino Sans GB", "Microsoft Yahei", "ST Heiti", sans-serif;
   overflow-wrap: break-word;
   transition: background-color 0.3s ease, color 0.3s ease;
 }
 
-/* Header background matches body for seamless transition */
 header {
   background-color: inherit;
   backdrop-filter: blur(8px);
   -webkit-backdrop-filter: blur(8px);
 }
 
-/* Global focus indicator for keyboard users */
 :focus-visible {
   outline: 2px solid oklch(0.546 0.245 262.881);
   outline-offset: 2px;
 }
 
-/* Remove focus outline for mouse clicks (keeps :focus-visible only) */
-:focus:not(:focus-visible) {
-  outline: none;
-}
+:focus:not(:focus-visible) { outline: none; }
 
-/* Mobile: centered nav and tighter padding */
 @media (max-width: 640px) {
-  nav a {
-    font-size: 1rem;
-  }
+  nav a { font-size: 1rem; }
   header .max-w-3xl,
   main.max-w-3xl {
     padding-left: 0.75rem;
@@ -127,32 +123,15 @@ header {
   }
 }
 
-/* Scroll offset for headings to account for sticky header */
-/* Account for: header height (5rem) + py-4 padding (2rem) + extra buffer (2rem) = 9rem total */
-h1[id],
-h2[id],
-h3[id],
-h4[id],
-h5[id],
-h6[id] {
+h1[id], h2[id], h3[id], h4[id], h5[id], h6[id] {
   scroll-margin-top: calc(var(--header-height) + 2rem + 2rem);
 }
 
-/* Mobile-specific scroll offset - more conservative for mobile browsers */
 @media (max-width: 1024px) {
-  h1[id],
-  h2[id],
-  h3[id],
-  h4[id],
-  h5[id],
-  h6[id] {
+  h1[id], h2[id], h3[id], h4[id], h5[id], h6[id] {
     scroll-margin-top: calc(var(--header-height) + 6rem);
   }
 }
-
-/* ==========================================================================
-   BACK TO TOP BUTTON
-   ========================================================================== */
 
 #back-to-top {
   opacity: 0;
@@ -164,10 +143,6 @@ h6[id] {
   opacity: 1;
   pointer-events: auto;
 }
-
-/* ==========================================================================
-   COMPONENTS: EMAIL REPLY
-   ========================================================================== */
 
 div.comments a {
   display: block;
