@@ -116,8 +116,8 @@
   <div>
     <h3 class="text-xs font-medium text-gray-400 dark:text-gray-500 uppercase tracking-wider mb-3">最短 Top 5</h3>
     <div class="space-y-1">
-      {{ range last 5 $sortedByWords }}
-      {{ if gt .words 10 }}
+      {{ $shortest := where $sortedByWords "words" "gt" 10 | last 5 }}
+      {{ range $shortest }}
       <a href="{{ .page.RelPermalink }}"
          class="group flex items-center justify-between py-1 px-2 -mx-2 rounded-md transition-colors hover:bg-gray-50 dark:hover:bg-gray-800/40">
         <span class="text-xs text-gray-600 dark:text-gray-400 truncate group-hover:text-emerald-600 dark:group-hover:text-emerald-400 transition-colors">
@@ -125,7 +125,8 @@
         </span>
         <span class="text-xs text-gray-400 dark:text-gray-500 shrink-0 ml-2 tabular-nums">{{ .words | lang.FormatNumber 0 }}w</span>
       </a>
-      {{ end }}
+      {{ else }}
+      <p class="text-xs text-gray-400 dark:text-gray-500 italic">暂无数据</p>
       {{ end }}
     </div>
   </div>
