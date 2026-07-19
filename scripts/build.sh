@@ -31,10 +31,6 @@ main() {
   echo "Fetching external data..."
   bash scripts/fetch-watch-data.sh
 
-  # CJK-aware word count for TIL dashboard
-  echo "Counting TIL words..."
-  node scripts/count-words.mjs
-
   # Build the site.
   npm run all
 
