@@ -201,6 +201,9 @@
           showAllHeaders();
           return;
         }
+        // Clear search when filtering by header
+        var si = document.getElementById('til-search');
+        if (si && si.value) { si.value = ''; si.dispatchEvent(new Event('input')); }
         groups.forEach(function(g) { g.style.display = g === target ? 'block' : 'none'; });
         document.querySelectorAll('.header-btn').forEach(function(b) {
           b.classList.toggle('active', b.getAttribute('data-header-btn') === name);
@@ -209,6 +212,9 @@
       window.showAllHeaders = function() {
         document.querySelectorAll('[data-header]').forEach(function(g) { g.style.display = 'block'; });
         document.querySelectorAll('.header-btn').forEach(function(b) { b.classList.remove('active'); });
+        // Also clear search filter if active
+        var si = document.getElementById('til-search');
+        if (si && si.value) { si.value = ''; si.dispatchEvent(new Event('input')); }
       };
 
       // Search filter
