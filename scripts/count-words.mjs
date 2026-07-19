@@ -101,6 +101,18 @@ function categorySlug(filePath) {
 }
 
 /**
+ * Parse comma/space-separated header values from Org frontmatter.
+ * #+HEADER: Linux → ["Linux"]
+ * #+HEADER: Git DevOps → ["Git", "DevOps"]
+ * Returns empty array if no header found.
+ */
+function parseHeaders(content) {
+  const m = content.match(/^#\+HEADER:\s*(.+)/m);
+  if (!m) return [];
+  return m[1].trim().split(/[\s,]+/).filter(Boolean);
+}
+
+/**
  * Parse the Org-mode title from frontmatter.
  * Org frontmatter is at the top of the file: #+TITLE: Some Title
  * Returns null if no title found.
@@ -149,12 +161,13 @@ function validate(files) {
 
 function processFile(filePath) {
   const raw = readFileSync(filePath, 'utf-8');
+  const headers = parseHeaders(raw);
   const body = raw.split('\n').filter(l => !l.startsWith('#+')).join('\n');
   const cleaned = clean(body);
   const wc = countWords(cleaned);
   const cat = categorySlug(filePath);
   const rel = 'til/' + relative(TIL_DIR, filePath);
-  return { rel, cat, wc };
+  return { rel, cat, headers, wc };
 }
 
 // ── Main ──────────────────────────────────────────────────────────────
@@ -187,6 +200,7 @@ function main() {
   // Aggregate
   let total = 0;
   const catAgg = {};
+  const headerAgg = {};
   const perPage = [];
 
   for (const r of results) {
@@ -194,6 +208,14 @@ function main() {
     catAgg[r.cat] = catAgg[r.cat] || { count: 0, words: 0 };
     catAgg[r.cat].count++;
     catAgg[r.cat].words += r.wc;
+
+    for (const h of r.headers) {
+      const key = r.cat + '/' + h;
+      headerAgg[key] = headerAgg[key] || { category: r.cat, header: h, count: 0, words: 0 };
+      headerAgg[key].count++;
+      headerAgg[key].words += r.wc;
+    }
+
     perPage.push({ path: r.rel, words: r.wc });
   }
 
@@ -208,6 +230,7 @@ function main() {
     avg,
     pages: perPage.length,
     perCategory: catAgg,
+    perHeader: Object.values(headerAgg),
     perPage,
   };
 
