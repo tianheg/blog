@@ -196,5 +196,16 @@
     }
   })();
   </script>
+<script>
+window.randomTIL = function() {
+  var links = document.querySelectorAll('[data-pagefind-body] a[href*="/til/"]');
+  if (!links.length) {
+    links = document.querySelectorAll('main a[href*="/til/"]');
+  }
+  if (links.length) {
+    location.href = links[Math.floor(Math.random() * links.length)].getAttribute('href');
+  }
+};
+</script>
 </body>
 </html>
