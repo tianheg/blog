@@ -11,17 +11,12 @@
     {{ $hasMore := gt (len $segments) 1 }}
 
     {{ if and $catSlug (gt (len $catSlug) 0) }}
-      {{ $catPage := $.Site.GetPage (printf "/til/%s" $catSlug) }}
       <li class="flex items-center space-x-2">
         <span class="text-gray-500">/</span>
         {{ if $hasMore }}
-          <a href="/til/{{ $catSlug }}/" class="hover:text-gray-900 dark:hover:text-gray-200 transition-colors">
-            {{ with $catPage }}{{ .Title }}{{ else }}{{ $catSlug | title }}{{ end }}
-          </a>
+          <a href="/til/{{ $catSlug }}/" class="hover:text-gray-900 dark:hover:text-gray-200 transition-colors">{{ $catSlug | upper }}</a>
         {{ else }}
-          <span class="text-gray-900 dark:text-gray-100 font-medium">
-            {{ with $catPage }}{{ .Title }}{{ else }}{{ $catSlug | title }}{{ end }}
-          </span>
+          <span class="text-gray-900 dark:text-gray-100 font-medium">{{ $catSlug | upper }}</span>
         {{ end }}
       </li>
     {{ end }}
