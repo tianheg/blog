@@ -43,32 +43,6 @@
 </section>
 
 
-{{/* ============================================
-     Service Worker registration (only for posts)
-     ============================================ */}}
-{{- with resources.Get "ts/sw.ts" }}
-  {{- $opts := dict "targetPath" "sw.js" -}}
-  {{- if hugo.IsDevelopment }}
-    {{- with . | js.Build $opts }}
-      <script>
-        if ('serviceWorker' in navigator) {
-          navigator.serviceWorker.register('{{ .RelPermalink }}');
-        }
-      </script>
-    {{- end }}
-  {{- else }}
-    {{- $opts = merge $opts (dict "minify" true) -}}
-    {{- with . | js.Build $opts | fingerprint }}
-      <script>
-        if ('serviceWorker' in navigator) {
-          navigator.serviceWorker.register('{{ .RelPermalink }}');
-        }
-      </script>
-    {{- end }}
-  {{- end }}
-{{- end }}
-
-
 {{/* --- Footer and comments --- */}}
 {{ partial "components/email-reply.html" . }}
 
