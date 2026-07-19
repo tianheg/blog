@@ -133,8 +133,13 @@
 </div>
 {{ end }}
 
-{{/* Recent additions (last 30 days) */}}
-{{ $recent := where $tilPages "Date" "ge" (now.AddDate 0 0 -30) }}
+{{/* Recent additions (last 30 days) — uses Lastmod (file mtime) when Date is unavailable */}}
+{{ $cutoff := now.AddDate 0 0 -30 }}
+{{ $recent := where $tilPages "Date" "ge" $cutoff }}
+{{/* Fallback: if no dated pages in 30 days, use Lastmod */}}
+{{ if not $recent }}
+  {{ $recent = where $tilPages "Lastmod" "ge" $cutoff }}
+{{ end }}
 {{ if $recent }}
 <div class="mb-8">
   <h3 class="text-xs font-medium text-gray-400 dark:text-gray-500 uppercase tracking-wider mb-3">最近新增（30天）</h3>
@@ -145,7 +150,7 @@
       <span class="text-xs text-gray-600 dark:text-gray-400 group-hover:text-emerald-600 dark:group-hover:text-emerald-400 transition-colors">
         {{ partial "functions/get-title" (dict "page" .) }}
       </span>
-      <span class="text-xs text-gray-400 dark:text-gray-500 shrink-0 ml-2 tabular-nums">{{ .Date.Format "01-02" }}</span>
+      <span class="text-xs text-gray-400 dark:text-gray-500 shrink-0 ml-2 tabular-nums">{{ if not .Date.IsZero }}{{ .Date.Format "01-02" }}{{ else }}{{ .Lastmod.Format "01-02" }}{{ end }}</span>
     </a>
     {{ end }}
   </div>
