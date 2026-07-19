@@ -54,7 +54,7 @@
   </div>
   <div class="p-4 rounded-lg border border-gray-200 dark:border-gray-800">
     <div class="text-xs text-gray-400 dark:text-gray-500 uppercase tracking-wider mb-1">总字数</div>
-    <div class="text-2xl font-semibold text-gray-900 dark:text-gray-100 tabular-nums">{{ $totalWords }}</div>
+    <div class="text-2xl font-semibold text-gray-900 dark:text-gray-100 tabular-nums">{{ $totalWords | lang.FormatNumber 0 }}</div>
   </div>
   <div class="p-4 rounded-lg border border-gray-200 dark:border-gray-800">
     <div class="text-xs text-gray-400 dark:text-gray-500 uppercase tracking-wider mb-1">总时长</div>
@@ -62,7 +62,7 @@
   </div>
   <div class="p-4 rounded-lg border border-gray-200 dark:border-gray-800">
     <div class="text-xs text-gray-400 dark:text-gray-500 uppercase tracking-wider mb-1">平均</div>
-    <div class="text-2xl font-semibold text-gray-900 dark:text-gray-100 tabular-nums">{{ $avgWords }}<span class="text-sm font-normal text-gray-400 dark:text-gray-500 ml-1">/篇</span></div>
+    <div class="text-2xl font-semibold text-gray-900 dark:text-gray-100 tabular-nums">{{ $avgWords | lang.FormatNumber 0 }}<span class="text-sm font-normal text-gray-400 dark:text-gray-500 ml-1">/篇</span></div>
   </div>
 </div>
 
@@ -78,7 +78,7 @@
         {{ $pct := 0 }}{{ if gt $maxWords 0 }}{{ $pct = div (mul .words 100) $maxWords }}{{ end }}
         <div class="h-full bg-emerald-400/60 dark:bg-emerald-600/40 rounded-sm" style="width: {{ $pct }}%"></div>
       </div>
-      <span class="text-xs text-gray-400 dark:text-gray-500 w-20 text-right shrink-0 tabular-nums">{{ .words }}<span class="text-gray-300 dark:text-gray-600 ml-0.5">/{{ .count }}</span></span>
+      <span class="text-xs text-gray-400 dark:text-gray-500 w-20 text-right shrink-0 tabular-nums">{{ .words | lang.FormatNumber 0 }}<span class="text-gray-300 dark:text-gray-600 ml-0.5">/{{ .count }}</span></span>
     </div>
     {{ end }}
   </div>
@@ -107,7 +107,7 @@
         <span class="text-xs text-gray-600 dark:text-gray-400 truncate group-hover:text-emerald-600 dark:group-hover:text-emerald-400 transition-colors">
           {{ partial "functions/get-title" (dict "page" .page) }}
         </span>
-        <span class="text-xs text-gray-400 dark:text-gray-500 shrink-0 ml-2 tabular-nums">{{ .words }}w</span>
+        <span class="text-xs text-gray-400 dark:text-gray-500 shrink-0 ml-2 tabular-nums">{{ .words | lang.FormatNumber 0 }}w</span>
       </a>
       {{ end }}
     </div>
@@ -122,7 +122,7 @@
         <span class="text-xs text-gray-600 dark:text-gray-400 truncate group-hover:text-emerald-600 dark:group-hover:text-emerald-400 transition-colors">
           {{ partial "functions/get-title" (dict "page" .page) }}
         </span>
-        <span class="text-xs text-gray-400 dark:text-gray-500 shrink-0 ml-2 tabular-nums">{{ .words }}w</span>
+        <span class="text-xs text-gray-400 dark:text-gray-500 shrink-0 ml-2 tabular-nums">{{ .words | lang.FormatNumber 0 }}w</span>
       </a>
       {{ end }}
       {{ end }}

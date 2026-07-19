@@ -153,7 +153,7 @@ function processFile(filePath) {
   const cleaned = clean(body);
   const wc = countWords(cleaned);
   const cat = categorySlug(filePath);
-  const rel = relative(TIL_DIR, filePath);
+  const rel = 'til/' + relative(TIL_DIR, filePath);
   return { rel, cat, wc };
 }
 
