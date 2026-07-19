@@ -5,16 +5,9 @@
   {{ partial "content/breadcrumb.html" . }}
 
   {{/* --- Title --- */}}
-  <h1 class="text-2xl font-bold text-gray-900 dark:text-gray-100 mb-2">
+  <h1 class="text-2xl font-bold text-gray-900 dark:text-gray-100 mb-6">
     {{ partial "functions/get-title" (dict "page" .) }}
   </h1>
-
-  {{/* --- Reading time --- */}}
-  {{ if gt (len .RawContent) 50 }}
-  <div class="mb-8 pb-6 border-b border-gray-200 dark:border-gray-800">
-    {{ partial "functions/reading-time" . }}
-  </div>
-  {{ end }}
 
   {{/* --- Content --- */}}
   <div class="prose prose-gray dark:prose-invert max-w-none
@@ -24,23 +17,6 @@
     {{ partial "content/render-content" .Content }}
   </div>
 
-  {{- /* Intl.Segmenter progressive word count enhancement */ -}}
-  <script>
-  (function() {
-    var rtEl = document.getElementById('reading-time');
-    var wcEl = document.getElementById('word-count');
-    if (!rtEl && !wcEl) return;
-    try {
-      var text = document.querySelector('[data-pagefind-body]').textContent;
-      var segments = new Intl.Segmenter('zh-CN', { granularity: 'word' });
-      var words = 0;
-      for (var seg of segments.segment(text)) { if (seg.isWordLike) words++; }
-      var mins = Math.max(1, Math.round(words / 200));
-      if (wcEl) wcEl.textContent = words + ' words';
-      if (rtEl) rtEl.textContent = mins + ' min read';
-    } catch(e) { /* fallback to server values */ }
-  })();
-  </script>
 </article>
 
 {{ end }}
