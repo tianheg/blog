@@ -3,82 +3,87 @@
  * CJK-aware word counter for TIL content.
  * Uses Intl.Segmenter for accurate Chinese/English mixed word counting.
  *
- * Cleaning pipeline:
+ * Pipeline:
  *   1. Strip Org frontmatter (#+KEY: value)
  *   2. Strip Org link syntax: [[url][text]] → text, [[url]] → ∅
  *   3. Strip bare URLs (http://, https://, www.)
  *   4. Strip Org inline markup with word-boundary guards
  *   5. Strip Org table and hr structural markers
- *   6. Segment and count only isWordLike tokens
+ *   6. Segment and count only word-like tokens (excl. pure numbers/punct)
  *
- * Outputs to data/til-wordcounts.json for Hugo to consume.
+ * Output: data/til-wordcounts.json
+ *   { total, perCategory: { slug: { count, words } }, perPage: [{ path, words }] }
  */
-import { readFileSync, readdirSync, writeFileSync } from 'fs';
+import { readFileSync, readdirSync, writeFileSync, statSync } from 'fs';
 import { join } from 'path';
 
-const tilDir = new URL('../content/til', import.meta.url).pathname;
+const ROOT = new URL('..', import.meta.url).pathname;
+const TIL_DIR = join(ROOT, 'content/til');
+const OUT_PATH = join(ROOT, 'data/til-wordcounts.json');
 
-// Intl.Segmenter: CJK-aware word segmentation
 const segmenter = new Intl.Segmenter('zh-CN', { granularity: 'word' });
 
-/**
- * Strip Org-mode frontmatter lines.
- */
+// ── Cleaning ──────────────────────────────────────────────────────────
+
 function stripFrontmatter(content) {
   return content.split('\n').filter(l => !l.startsWith('#+')).join('\n');
 }
 
-/**
- * Clean Org-mode markup from text, leaving only readable content.
- * Handles: links, URLs, inline markup, tables, horizontal rules.
- */
 function cleanOrgMarkup(text) {
-  // Org links: [[url][description]] → description
+  // [[url][desc]] → desc
   text = text.replace(/\[\[([^\]]*)\]\[([^\]]*)\]\]/g, '$2');
-  // Bare Org links: [[url]] → ∅
+  // [[url]] → ∅
   text = text.replace(/\[\[[^\]]*\]\]/g, '');
-  // Bare URLs
+  // bare URLs
   text = text.replace(/https?:\/\/[^\s\]\[]+/gi, '');
   text = text.replace(/(?:www\.)[^\s\]\[]+/gi, '');
-  // Org inline markup with word-boundary guards
-  // /italic/ — not between alphanumeric chars (avoids amd64/arm64 false positives)
+  // /italic/ — not between alnum (avoids amd64/arm64)
   text = text.replace(/(?:^|(?<=[\s([{>「」『』【】]))\/([^\s\/]+)\/(?=[\s)\]}"':;,!?<]|$)/g, '$1');
-  // *bold* — not ** or *** (literal asterisks in code)
+  // *bold*
   text = text.replace(/(?:^|(?<=[\s([{>「」『』【】]))\*([^\s*]+)\*(?=[\s)\]}"':;,!?<]|$)/g, '$1');
-  // ~code~ and =verbatim=
+  // ~code~, =verbatim=
   text = text.replace(/(?:^|(?<=[\s([{>「」『』【】]))[~=]([^\s~=]+)[~=](?=[\s)\]}"':;,!?<]|$)/g, '$1');
-  // +strike-through+
+  // +strike+
   text = text.replace(/(?:^|(?<=[\s([{>「」『』【】]))\+([^\s+]+)\+(?=[\s)\]}"':;,!?<]|$)/g, '$1');
-  // Org horizontal rules: -----, -----
+  // horizontal rules
   text = text.replace(/^[-\s_]{3,}$/gm, '');
-  // Org table structural markers
-  text = text.replace(/[|+]/g, ' ');          // table cell separators → space
-  text = text.replace(/[-]{3,}/g, ' ');       // table dash-rows → space  
+  // table markers  
+  text = text.replace(/[|+]/g, ' ');
+  text = text.replace(/[-]{3,}/g, ' ');
   return text;
 }
 
-/**
- * Count word-like tokens in text.
- * Uses Intl.Segmenter and filters out pure-punctuation tokens.
- */
+// ── Counting ──────────────────────────────────────────────────────────
+
 function countWords(text) {
   let count = 0;
   for (const seg of segmenter.segment(text)) {
-    if (seg.isWordLike) {
-      const w = seg.segment;
-      // Exclude pure punctuation
-      if (/^[\-–—/\\|~*=_\[\]{}():;,.!?@#$%^&+<>'\"·…「」『』【】《》（）\u2018-\u201d\u3000-\u303f\uff00-\uffef]+$/.test(w)) continue;
-      // Exclude bare numbers
-      if (/^[0-9.,+\-]+$/.test(w)) continue;
-      count++;
-    }
+    if (!seg.isWordLike) continue;
+    const w = seg.segment;
+    if (/^[\-–—/\\|~*=_\[\]{}():;,.!?@#$%^&+<>'"·…「」『』【】《》（）\u2018-\u201d\u3000-\u303f\uff00-\uffef]+$/.test(w)) continue;
+    if (/^[0-9.,+\-]+$/.test(w)) continue;
+    count++;
   }
   return count;
+}
+
+// ── File walker ───────────────────────────────────────────────────────
+
+/**
+ * Extract category slug from file path relative to content/til/.
+ * e.g. "content/til/software/debian.org" → "software"
+ */
+function getCategorySlug(filePath) {
+  const rel = filePath.replace(TIL_DIR, '');
+  const parts = rel.split('/').filter(Boolean);
+  return parts[0] || 'uncategorized';
 }
 
 function walk(dir) {
   let total = 0;
   const perPage = [];
+  const catTotals = {};
+
   const entries = readdirSync(dir, { withFileTypes: true });
   for (const entry of entries) {
     const path = join(dir, entry.name);
@@ -86,18 +91,43 @@ function walk(dir) {
       const r = walk(path);
       total += r.total;
       perPage.push(...r.perPage);
+      for (const [cat, c] of Object.entries(r.catTotals)) {
+        catTotals[cat] = (catTotals[cat] || { count: 0, words: 0 });
+        catTotals[cat].count += c.count;
+        catTotals[cat].words += c.words;
+      }
     } else if (entry.name.endsWith('.org') && entry.name !== '_index.org') {
+      process.stdout.write('.');
       const raw = readFileSync(path, 'utf-8');
       const cleaned = cleanOrgMarkup(stripFrontmatter(raw));
       const wc = countWords(cleaned);
       total += wc;
       perPage.push({ path: entry.name, words: wc });
+
+      const cat = getCategorySlug(path);
+      catTotals[cat] = catTotals[cat] || { count: 0, words: 0 };
+      catTotals[cat].count++;
+      catTotals[cat].words += wc;
     }
   }
-  return { total, perPage };
+
+  return { total, perPage, catTotals };
 }
 
-const stats = walk(tilDir);
-const outPath = new URL('../data/til-wordcounts.json', import.meta.url).pathname;
-writeFileSync(outPath, JSON.stringify(stats));
-console.log(`Total: ${stats.total} words across ${stats.perPage.length} pages`);
+// ── Main ──────────────────────────────────────────────────────────────
+
+process.stdout.write('Counting');
+const stats = walk(TIL_DIR);
+process.stdout.write('\n');
+
+// Sort perPage by words descending for longest/shortest lookups
+stats.perPage.sort((a, b) => b.words - a.words);
+
+const output = {
+  total: stats.total,
+  perCategory: stats.catTotals,
+  perPage: stats.perPage,
+};
+
+writeFileSync(OUT_PATH, JSON.stringify(output));
+console.log(`Total: ${stats.total} words across ${stats.perPage.length} pages in ${Object.keys(stats.catTotals).length} categories`);
