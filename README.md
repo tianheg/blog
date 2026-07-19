@@ -68,8 +68,7 @@ blog/
 │   └── projects/        # 项目展示相关文件
 ├── scripts/             # 构建和工具脚本
 │   ├── build.sh         # CI 构建脚本（Cloudflare Workers）
-│   ├── fetch-watch-data.sh  # 外部数据抓取
-│   └── hugo-setup.sh    # Hugo 环境设置
+│   └── fetch-watch-data.sh  # 外部数据抓取
 └── wrangler.jsonc       # Cloudflare Workers 配置
 ```
 

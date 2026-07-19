@@ -93,6 +93,35 @@
   <!-- Scripts (exclude 404 page) -->
   {{ if ne .Kind "404" }}
     {{- partial "head/scripts.html" . -}}
+
+    <!-- Inlined: mobile menu + back-to-top (was TS components) -->
+    <script defer>
+    (function(){
+      // Mobile menu
+      var btn = document.getElementById('menu-btn');
+      var menu = document.getElementById('mobile-menu');
+      if (btn && menu) {
+        var open = function(){ btn.setAttribute('aria-expanded','true'); menu.classList.remove('hidden'); };
+        var close = function(){ btn.setAttribute('aria-expanded','false'); menu.classList.add('hidden'); };
+        btn.addEventListener('click', function(){
+          btn.getAttribute('aria-expanded') === 'true' ? close() : open();
+        });
+        menu.querySelectorAll('a').forEach(function(a){ a.addEventListener('click', close); });
+        document.addEventListener('click', function(e){
+          if (!btn.contains(e.target) && !menu.contains(e.target) && btn.getAttribute('aria-expanded') === 'true') close();
+        });
+        document.addEventListener('keydown', function(e){
+          if (e.key === 'Escape' && btn.getAttribute('aria-expanded') === 'true') close();
+        });
+      }
+      // Back to top
+      var btt = document.getElementById('back-to-top');
+      if (btt) {
+        var toggle = function(){ btt.classList.toggle('show', window.scrollY > 100); };
+        window.addEventListener('scroll', toggle, {passive:true});
+      }
+    })();
+    </script>
   {{ end }}
 </body>
 
