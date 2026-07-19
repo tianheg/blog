@@ -3,10 +3,6 @@ common
 
 ** 免 sudo 密码
 
-#+begin_quote
-来源参考：https://oneuptime.com/blog/post/2026-03-02-how-to-configure-sudo-access-without-a-password-on-ubuntu/view
-#+end_quote
-
 **原则：** 永远用 `visudo` 编辑配置文件（自动校验语法，错误不会保存）。
 
 **方法一：完整 sudo 免密（不推荐用于生产服务器）**
@@ -49,3 +45,5 @@ ls -la /etc/sudoers.d/    # 列出所有配置文件
 - 尽量限制到具体命令路径，而非通配 ALL
 - 对可能被 shell escape 的命令，考虑加 NOEXEC 选项
 - sudo 日志默认通过 syslog 记录，可用 `journalctl | grep sudo` 查看
+
+来源: [[https://oneuptime.com/blog/post/2026-03-02-how-to-configure-sudo-access-without-a-password-on-ubuntu/view][How to Configure Sudo Access Without a Password on Ubuntu]]
