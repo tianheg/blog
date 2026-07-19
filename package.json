@@ -3,8 +3,9 @@
   "private": true,
   "scripts": {
     "words": "node scripts/count-words.mjs",
+    "prebuild": "node scripts/count-words.mjs",
+    "build": "hugo --gc --minify --buildFuture",
     "pagefind": "pagefind --site public --write-playground",
-    "build": "node scripts/count-words.mjs && hugo --gc --minify --buildFuture",
     "dev": "hugo serve --buildFuture",
     "all": "npm run build && npm run pagefind"
   },
