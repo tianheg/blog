@@ -39,7 +39,18 @@
   .dark #TableOfContents a:hover { color: #34d399; }
   #TableOfContents .active a { color: #059669; font-weight: 500; }
   .dark #TableOfContents .active a { color: #34d399; }
-</style>
+
+  /* Collapsible header filter */
+  .header-btn.active {
+    background-color: rgb(236 253 245);
+    color: rgb(5 150 105);
+    font-weight: 500;
+  }
+  .dark .header-btn.active {
+    background-color: rgb(6 78 59 / 0.2);
+    color: rgb(52 211 153);
+  }
+  </style>
 </head>
 <body class="bg-white dark:bg-gray-950 antialiased">
 
@@ -78,13 +89,12 @@
     {{ $allSections = $tilSection.Sections }}
   {{ end }}
 
-  {{/* Determine current section */}}
-  {{ $currentSection := "" }}
-  {{ with .File }}
-    {{ $parts := split .Dir "/" }}
-    {{ if ge (len $parts) 2 }}
-      {{ $currentSection = index $parts 1 }}
-    {{ end }}
+  {{/* Determine current category slug from URL path */}}
+  {{ $catSlug := "" }}
+  {{ $trimmed := strings.TrimPrefix "/til/" .RelPermalink }}
+  {{ $parts := split $trimmed "/" }}
+  {{ if gt (len (index $parts 0)) 0 }}
+    {{ $catSlug = index $parts 0 }}
   {{ end }}
 
   <!-- Three-column layout -->
@@ -97,10 +107,10 @@
             Categories
           </div>
           {{ range $allSections }}
-            {{ $cat := . }}
+            {{ $sectionSlug := index (split (strings.TrimPrefix "/til/" .RelPermalink) "/") 0 }}
             <a href="{{ .RelPermalink }}"
                class="block px-3 py-1.5 text-sm rounded-md transition-colors
-                      {{ if eq $currentSection (index (split .File.Dir "/") 1) }}
+                      {{ if eq $catSlug $sectionSlug }}
                         bg-emerald-50 dark:bg-emerald-900/20 text-emerald-700 dark:text-emerald-300 font-medium
                       {{ else }}
                         text-gray-600 dark:text-gray-400 hover:text-gray-900 dark:hover:text-gray-100 hover:bg-gray-50 dark:hover:bg-gray-800
@@ -116,7 +126,7 @@
         {{ block "main" . }}{{ end }}
       </main>
 
-      <!-- Right sidebar (TOC - only on single pages) -->
+      <!-- Right sidebar -->
       <aside class="hidden xl:block w-56 shrink-0 pt-8">
         <div class="sticky top-20">
           {{ block "right" . }}{{ end }}

@@ -1,0 +1,127 @@
+{{/* Dashboard: TIL stats overview */}}
+{{ $tilPages := where .Site.RegularPages "Section" "til" }}
+{{ $total := len $tilPages }}
+
+{{/* Total word count */}}
+{{ $totalWords := 0 }}
+{{ range $tilPages }}
+  {{ $totalWords = add $totalWords (countwords .Plain) }}
+{{ end }}
+
+{{/* Total reading time (minutes) */}}
+{{ $totalMin := 0 }}
+{{ range $tilPages }}
+  {{ $totalMin = add $totalMin .ReadingTime }}
+{{ end }}
+
+{{/* Category distribution */}}
+{{ $catCount := dict }}
+{{ range $tilPages }}
+  {{ $sec := .CurrentSection }}
+  {{ $title := $sec.Title }}
+  {{ $count := index $catCount $title | default 0 }}
+  {{ $catCount = merge $catCount (dict $title (add $count 1)) }}
+{{ end }}
+
+{{/* Sort categories by count descending */}}
+{{ $sortedCats := slice }}
+{{ range $k, $v := $catCount }}
+  {{ $sortedCats = $sortedCats | append (dict "name" $k "count" $v) }}
+{{ end }}
+{{ $sortedCats = sort $sortedCats "count" "desc" }}
+
+{{/* Max category count for bar widths */}}
+{{ $maxCat := 0 }}
+{{ range $sortedCats }}
+  {{ if gt .count $maxCat }}{{ $maxCat = .count }}{{ end }}
+{{ end }}
+
+<div class="grid grid-cols-2 sm:grid-cols-4 gap-3 mb-8">
+  <div class="p-4 rounded-lg border border-gray-200 dark:border-gray-800">
+    <div class="text-xs text-gray-400 dark:text-gray-500 uppercase tracking-wider mb-1">总数</div>
+    <div class="text-2xl font-semibold text-gray-900 dark:text-gray-100 tabular-nums">{{ $total }}</div>
+  </div>
+  <div class="p-4 rounded-lg border border-gray-200 dark:border-gray-800">
+    <div class="text-xs text-gray-400 dark:text-gray-500 uppercase tracking-wider mb-1">总字数</div>
+    <div class="text-2xl font-semibold text-gray-900 dark:text-gray-100 tabular-nums">{{ $totalWords }}</div>
+  </div>
+  <div class="p-4 rounded-lg border border-gray-200 dark:border-gray-800">
+    <div class="text-xs text-gray-400 dark:text-gray-500 uppercase tracking-wider mb-1">总时长</div>
+    <div class="text-2xl font-semibold text-gray-900 dark:text-gray-100 tabular-nums">{{ $totalMin }}<span class="text-sm font-normal text-gray-400 dark:text-gray-500 ml-1">min</span></div>
+  </div>
+  <div class="p-4 rounded-lg border border-gray-200 dark:border-gray-800">
+    <div class="text-xs text-gray-400 dark:text-gray-500 uppercase tracking-wider mb-1">分类</div>
+    <div class="text-2xl font-semibold text-gray-900 dark:text-gray-100 tabular-nums">{{ len $catCount }}</div>
+  </div>
+</div>
+
+{{/* Category bar chart */}}
+<div class="mb-8">
+  <h3 class="text-xs font-medium text-gray-400 dark:text-gray-500 uppercase tracking-wider mb-3">分类分布</h3>
+  <div class="space-y-2">
+    {{ range $sortedCats }}
+    <div class="flex items-center gap-3">
+      <span class="text-xs text-gray-600 dark:text-gray-400 w-28 shrink-0 truncate" title="{{ .name }}">{{ .name }}</span>
+      <div class="flex-1 h-5 bg-gray-100 dark:bg-gray-800 rounded-sm overflow-hidden">
+        {{ $pct := div (mul .count 100) $maxCat }}
+        <div class="h-full bg-emerald-400/60 dark:bg-emerald-600/40 rounded-sm" style="width: {{ $pct }}%"></div>
+      </div>
+      <span class="text-xs text-gray-400 dark:text-gray-500 w-8 text-right shrink-0 tabular-nums">{{ .count }}</span>
+    </div>
+    {{ end }}
+  </div>
+</div>
+
+{{/* Top 5 longest & shortest */}}
+{{ $sortedByWord := sort $tilPages "WordCount" "desc" }}
+<div class="grid grid-cols-1 sm:grid-cols-2 gap-6 mb-8">
+  <div>
+    <h3 class="text-xs font-medium text-gray-400 dark:text-gray-500 uppercase tracking-wider mb-3">最长 Top 5</h3>
+    <div class="space-y-1">
+      {{ range first 5 $sortedByWord }}
+      <a href="{{ .RelPermalink }}"
+         class="group flex items-center justify-between py-1 px-2 -mx-2 rounded-md transition-colors hover:bg-gray-50 dark:hover:bg-gray-800/40">
+        <span class="text-xs text-gray-600 dark:text-gray-400 truncate group-hover:text-emerald-600 dark:group-hover:text-emerald-400 transition-colors">
+          {{ partial "functions/get-title" (dict "page" .) }}
+        </span>
+        <span class="text-xs text-gray-400 dark:text-gray-500 shrink-0 ml-2 tabular-nums">{{ .WordCount }}w</span>
+      </a>
+      {{ end }}
+    </div>
+  </div>
+  <div>
+    <h3 class="text-xs font-medium text-gray-400 dark:text-gray-500 uppercase tracking-wider mb-3">最短 Top 5</h3>
+    <div class="space-y-1">
+      {{ range last 5 $sortedByWord }}
+      {{ if gt (len .Plain) 20 }}
+      <a href="{{ .RelPermalink }}"
+         class="group flex items-center justify-between py-1 px-2 -mx-2 rounded-md transition-colors hover:bg-gray-50 dark:hover:bg-gray-800/40">
+        <span class="text-xs text-gray-600 dark:text-gray-400 truncate group-hover:text-emerald-600 dark:group-hover:text-emerald-400 transition-colors">
+          {{ partial "functions/get-title" (dict "page" .) }}
+        </span>
+        <span class="text-xs text-gray-400 dark:text-gray-500 shrink-0 ml-2 tabular-nums">{{ .WordCount }}w</span>
+      </a>
+      {{ end }}
+      {{ end }}
+    </div>
+  </div>
+</div>
+
+{{/* Recent additions (last 30 days) */}}
+{{ $recent := where $tilPages "Date" "ge" (now.AddDate 0 0 -30) }}
+{{ if $recent }}
+<div class="mb-8">
+  <h3 class="text-xs font-medium text-gray-400 dark:text-gray-500 uppercase tracking-wider mb-3">最近新增（30天）</h3>
+  <div class="space-y-1">
+    {{ range $recent.ByDate.Reverse }}
+    <a href="{{ .RelPermalink }}"
+       class="group flex items-center justify-between py-1 px-2 -mx-2 rounded-md transition-colors hover:bg-gray-50 dark:hover:bg-gray-800/40">
+      <span class="text-xs text-gray-600 dark:text-gray-400 group-hover:text-emerald-600 dark:group-hover:text-emerald-400 transition-colors">
+        {{ partial "functions/get-title" (dict "page" .) }}
+      </span>
+      <span class="text-xs text-gray-400 dark:text-gray-500 shrink-0 ml-2 tabular-nums">{{ .Date.Format "01-02" }}</span>
+    </a>
+    {{ end }}
+  </div>
+</div>
+{{ end }}

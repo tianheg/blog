@@ -1,0 +1,6 @@
+#+TITLE: Pandoc md2org
+#+HEADER: Tools
+
+#+BEGIN_SRC sh
+pandoc input.md -f markdown -t org | sed -e '/^:PROPERTIES:/,/^:END:/d' > output.org
+#+END_SRC
