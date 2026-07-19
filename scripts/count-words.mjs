@@ -224,8 +224,11 @@ function main() {
 
   const avg = perPage.length > 0 ? Math.round(total / perPage.length) : 0;
 
-  const output = {
-    generatedAt: new Date().toISOString(),
+    // generatedAt in Asia/Shanghai (UTC+8)
+    const now = new Date();
+    const shanghaiStr = now.toLocaleString('zh-CN', { timeZone: 'Asia/Shanghai', hour12: false, year: 'numeric', month: '2-digit', day: '2-digit', hour: '2-digit', minute: '2-digit' });
+    const output = {
+    generatedAt: shanghaiStr.replace(/\//g, '-'),
     total,
     avg,
     pages: perPage.length,
