@@ -142,6 +142,27 @@ npm install
 - 在 `posts/` 中使用 `#+TAGS[]:` 添加
 - `til/` 不推荐使用标签，文件夹分类已足够
 
+### TIL 引用来源格式
+
+TIL 的信息源链接统一放在文件末尾：
+
+- **单一来源** → `来源: [[URL][描述文字]]`
+- **多个来源** → `* 参考` 小节，Org link 列表
+
+```org
+// 单一来源
+来源: [[https://en.wikipedia.org/wiki/Asperger_syndrome][Wikipedia: Asperger syndrome]]
+
+// 多个来源
+* 参考
+- [[https://en.wikipedia.org/wiki/Information_retrieval][Wikipedia: Information retrieval]]
+- [[https://scholar.google.com/intl/en/scholar/help.html][Google Scholar Search Tips]]
+```
+
+注意：
+- 内联引用（正文中随文出现的链接）不受此约束
+- 推荐阅读/延伸资源不属于"信息源"，不用加到 `* 参考`，用 `** 推荐资源` 或其他合适的小节标题
+
 ## 模板体系
 
 | 模板 | 用途 |
