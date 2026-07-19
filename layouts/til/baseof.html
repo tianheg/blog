@@ -70,17 +70,44 @@
               <circle cx="11" cy="11" r="8"/><path d="m21 21-4.3-4.3"/>
             </svg>
           </a>
-          <nav class="flex items-center gap-6">
+          {{/* Desktop navigation — always visible above sm breakpoint */}}
+          <nav class="hidden sm:flex items-center gap-6">
           {{ range .Site.Menus.main }}
           <a href="{{ .URL }}"
              class="text-sm no-underline text-gray-500 dark:text-gray-400 hover:text-gray-900 dark:hover:text-gray-100 transition-colors">
             {{ .Name }}
           </a>
           {{ end }}
-        </nav>
+          </nav>
+          {{/* Mobile hamburger button */}}
+          <button id="menu-btn"
+            class="sm:hidden p-2 rounded-md focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-blue-500"
+            aria-label="Menu" aria-expanded="false">
+            <svg class="w-6 h-6 text-gray-700 dark:text-gray-300" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path class="menu-line" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16"/>
+              <path class="menu-line" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 12h16"/>
+              <path class="menu-line" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 18h16"/>
+              <path class="menu-x hidden" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6"/>
+              <path class="menu-x hidden" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 6l12 12"/>
+            </svg>
+          </button>
+        </div>
       </div>
     </div>
   </header>
+
+  {{/* Mobile menu panel */}}
+  <div id="mobile-menu" class="hidden sm:hidden border-b border-gray-200 dark:border-gray-800 bg-white/95 dark:bg-gray-950/95">
+    <nav class="flex flex-col items-center gap-1 py-5">
+      {{ range .Site.Menus.main }}
+      <a href="{{ .URL }}"
+         class="block w-full text-center text-base no-underline py-4 rounded-sm focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-blue-500
+                text-gray-600 dark:text-gray-400 hover:text-gray-900 dark:hover:text-gray-100 transition-colors">
+        {{ .Name }}
+      </a>
+      {{ end }}
+    </nav>
+  </div>
 
   {{/* Collect TIL sections */}}
   {{ $tilSection := .Site.GetPage "/til" }}
@@ -136,5 +163,38 @@
   </div>
 
   {{ partial "head/scripts.html" . }}
+
+  <script defer>
+  (function(){
+    var btn = document.getElementById('menu-btn');
+    var menu = document.getElementById('mobile-menu');
+    if (btn && menu) {
+      var lines = btn.querySelectorAll('.menu-line');
+      var xs = btn.querySelectorAll('.menu-x');
+      var open = function(){
+        btn.setAttribute('aria-expanded','true');
+        menu.classList.remove('hidden');
+        lines.forEach(function(l){ l.classList.add('hidden'); });
+        xs.forEach(function(x){ x.classList.remove('hidden'); });
+      };
+      var close = function(){
+        btn.setAttribute('aria-expanded','false');
+        menu.classList.add('hidden');
+        lines.forEach(function(l){ l.classList.remove('hidden'); });
+        xs.forEach(function(x){ x.classList.add('hidden'); });
+      };
+      btn.addEventListener('click', function(){
+        btn.getAttribute('aria-expanded') === 'true' ? close() : open();
+      });
+      menu.querySelectorAll('a').forEach(function(a){ a.addEventListener('click', close); });
+      document.addEventListener('click', function(e){
+        if (!btn.contains(e.target) && !menu.contains(e.target) && btn.getAttribute('aria-expanded') === 'true') close();
+      });
+      document.addEventListener('keydown', function(e){
+        if (e.key === 'Escape' && btn.getAttribute('aria-expanded') === 'true') close();
+      });
+    }
+  })();
+  </script>
 </body>
 </html>
