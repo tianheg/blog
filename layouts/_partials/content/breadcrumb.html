@@ -5,7 +5,7 @@
   {{ $path := strings.TrimPrefix "/til/" .RelPermalink }}
   {{ $segments := split $path "/" }}
   {{ $catSlug := index $segments 0 }}
-  {{ $hasMore := gt (len $segments) 1 }}
+  {{ $hasMore := gt (len $segments) 2 }}
 
   {{ if and $catSlug (gt (len $catSlug) 0) }}
     <span class="mx-1">/</span>
