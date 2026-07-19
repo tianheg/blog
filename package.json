@@ -6,6 +6,7 @@
     "prebuild": "node scripts/count-words.mjs",
     "build": "hugo --gc --minify --buildFuture",
     "pagefind": "pagefind --site public --write-playground",
+    "predev": "node scripts/count-words.mjs",
     "dev": "hugo serve --buildFuture",
     "all": "npm run build && npm run pagefind"
   },
