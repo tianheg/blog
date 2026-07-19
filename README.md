@@ -28,28 +28,20 @@ blog/
 ├── content/             # 网站内容
 │   ├── posts/           # 博客文章（长文、随笔、年度总结）
 │   ├── til/             # Today I Learned 笔记（知识点、操作步骤）
-│   │   ├── software/    # 软件/工具/编程类（使用前缀命名）
-│   │   ├── life/        # 生活常识
-│   │   ├── health/      # 健康相关
-│   │   ├── learning/    # 学习方法
-│   │   ├── career/      # 职业发展
-│   │   ├── emacs/       # Emacs 编辑器
-│   │   ├── hardware/    # 硬件相关
+│   │   ├── software/    # 软件/工具/编程类（flat files, header-based grouping）
+│   │   ├── life/        # 生活经验与技巧
+│   │   ├── health/      # 健康与医学
+│   │   ├── learning/    # 学习方法与思维模型
+│   │   ├── career/      # 职业发展与思考
+│   │   ├── hardware/    # 硬件设计与工程
 │   │   ├── homelab/     # 家庭实验室
-│   │   ├── backup/      # 数据备份
-│   │   ├── writing/     # 写作相关
-│   │   ├── music/       # 音乐相关
-│   │   ├── media/       # 影视记录
-│   │   ├── courses/     # 公开课笔记
-│   │   ├── reading/     # 阅读/周刊
-│   │   ├── science/     # 科学/技术
-│   │   ├── finance/     # 金融/支付
-│   │   ├── history/     # 历史/哲学
-│   │   ├── society/     # 社会话题
-│   │   ├── culture/     # 文化/艺术
-│   │   ├── series/      # 系列节目
-│   │   ├── people/      # 人物
-│   │   └── knowledge/   # 百科知识
+│   │   ├── backup/      # 备份方案与策略
+│   │   ├── writing/     # 写作
+│   │   ├── music/       # 音乐
+│   │   ├── media/       # 媒体与内容
+│   │   ├── courses/     # 课程笔记
+│   │   ├── science/     # 科学
+│   │   └── history/     # 历史
 │   └── *.org            # 独立页面（about, now, projects 等）
 ├── layouts/             # Hugo 模板
 │   ├── _default/        # 基础模板（list.html, single.html）
@@ -68,7 +60,10 @@ blog/
 │   └── projects/        # 项目展示相关文件
 ├── scripts/             # 构建和工具脚本
 │   ├── build.sh         # CI 构建脚本（Cloudflare Workers）
-│   └── fetch-watch-data.sh  # 外部数据抓取
+│   ├── fetch-watch-data.sh  # 外部数据抓取
+│   └── count-words.mjs  # CJK 准确 TIL 字数统计
+├── data/                # 构建时生成的数据
+│   └── til-wordcounts.json  # TIL 字数（Intl.Segmenter 分词）
 └── wrangler.jsonc       # Cloudflare Workers 配置
 ```
 
@@ -102,15 +97,26 @@ npm install
 | 目录 | 格式 | 原因 |
 |------|------|------|
 | `content/` 及根目录独立页面 | Org Mode (`.org`) | Hugo 原生渲染，个人偏好 |
-| `content/til/` | Org Mode (`.org`) | 笔记类内容，按分类文件夹组织 |
+| `content/til/` | Org Mode (`.org`) | 笔记类内容，按分类文件夹组织，子分类用 `#+HEADER` 标记 |
 
 ### 文件命名规则
 
 | 目录 | 推荐格式 | 示例 |
 |------|----------|------|
 | `posts/` | `{主题词}.org` | `2025.org`, `a-dream.org`, `about-good-posts.org` |
-| `til/software/` | `{前缀}-{描述}.org` | `git-rebase.org`, `css-flexbox.org`, `python-decorator.org` |
+| `til/软件/` | `{前缀}-{描述}.org` | `git-rebase.org`, `css-flexbox.org` |
 | `til/其他分类/` | `{描述}.org` | `sleep.org`, `iptables.org` |
+
+### TIL header 标记
+
+扁平化结构下，子分类用 `#+HEADER` 标记，不建立子目录：
+
+```org
+#+TITLE: Git merge 与 rebase
+#+HEADER: Git
+```
+
+分类页按 header 分组展示，右侧边栏可折叠筛选。支持多 header（空格分隔）。
 
 **通用约束：**
 - ❌ 不能有大写字母
@@ -182,7 +188,7 @@ TIL 的信息源链接统一放在文件末尾：
 # 开发服务器（含热重载）
 npm run dev
 
-# 构建站点（生产环境）
+# 构建站点（自动运行字数统计 → Hugo）
 npm run build
 
 # 构建 + 生成搜索索引（完整发布流程）
@@ -190,6 +196,9 @@ npm run all
 
 # 仅生成搜索索引（需先构建）
 npm run pagefind
+
+# 单独运行 TIL 字数统计（CJK 准确分词）
+npm run words
 ```
 
 ### 新建内容工作流程
