@@ -5,9 +5,16 @@
   {{ partial "content/breadcrumb.html" . }}
 
   {{/* --- Title --- */}}
-  <h1 class="text-2xl font-bold text-gray-900 dark:text-gray-100 mb-6">
+  <h1 class="text-2xl font-bold text-gray-900 dark:text-gray-100 mb-2">
     {{ partial "functions/get-title" (dict "page" .) }}
   </h1>
+
+  {{/* --- Header badge --- */}}
+  {{ with .Params.header }}
+  <div class="flex items-center gap-2 mb-6">
+    <span class="px-2 py-0.5 text-xs font-medium rounded-full bg-emerald-50 dark:bg-emerald-900/20 text-emerald-700 dark:text-emerald-300">{{ . }}</span>
+  </div>
+  {{ end }}
 
   {{/* --- Content --- */}}
   <div class="prose prose-gray dark:prose-invert max-w-none
