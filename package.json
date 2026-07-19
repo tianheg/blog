@@ -2,8 +2,9 @@
   "name": "blog",
   "private": true,
   "scripts": {
+    "words": "node scripts/count-words.mjs",
     "pagefind": "pagefind --site public --write-playground",
-    "build": "hugo --gc --minify --buildFuture",
+    "build": "node scripts/count-words.mjs && hugo --gc --minify --buildFuture",
     "dev": "hugo serve --buildFuture",
     "all": "npm run build && npm run pagefind"
   },
