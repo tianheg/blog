@@ -1,32 +1,23 @@
 {{/* TIL breadcrumb — flat-structure compatible */}}
-<nav aria-label="breadcrumb" class="mb-6">
-  <ul class="flex list-none items-center text-sm text-gray-600 dark:text-gray-400">
-    <li class="flex items-center space-x-2">
-      <a href="/til/" class="hover:text-gray-900 dark:hover:text-gray-200 transition-colors">TIL</a>
-    </li>
+<nav aria-label="breadcrumb" class="mb-6 text-sm text-gray-500">
+  <a href="/til/" class="hover:text-gray-900 dark:hover:text-gray-200 transition-colors">TIL</a>
 
-    {{ $path := strings.TrimPrefix "/til/" .RelPermalink }}
-    {{ $segments := split $path "/" }}
-    {{ $catSlug := index $segments 0 }}
-    {{ $hasMore := gt (len $segments) 1 }}
+  {{ $path := strings.TrimPrefix "/til/" .RelPermalink }}
+  {{ $segments := split $path "/" }}
+  {{ $catSlug := index $segments 0 }}
+  {{ $hasMore := gt (len $segments) 1 }}
 
-    {{ if and $catSlug (gt (len $catSlug) 0) }}
-      <li class="flex items-center space-x-2">
-        <span class="text-gray-500">/</span>
-        {{ if $hasMore }}
-          <a href="/til/{{ $catSlug }}/" class="hover:text-gray-900 dark:hover:text-gray-200 transition-colors">{{ $catSlug | upper }}</a>
-        {{ else }}
-          <span class="text-gray-900 dark:text-gray-100 font-medium">{{ $catSlug | upper }}</span>
-        {{ end }}
-      </li>
-    {{ end }}
-
+  {{ if and $catSlug (gt (len $catSlug) 0) }}
+    <span class="mx-1">/</span>
     {{ if $hasMore }}
-      {{ $pageTitle := partial "functions/get-title" (dict "page" .) }}
-      <li class="flex items-center space-x-2">
-        <span class="text-gray-500">/</span>
-        <span class="text-gray-900 dark:text-gray-100 font-medium">{{ $pageTitle }}</span>
-      </li>
+      <a href="/til/{{ $catSlug }}/" class="hover:text-gray-900 dark:hover:text-gray-200 transition-colors">{{ $catSlug | upper }}</a>
+    {{ else }}
+      <span class="text-gray-900 dark:text-gray-100 font-medium">{{ $catSlug | upper }}</span>
     {{ end }}
-  </ul>
+  {{ end }}
+
+  {{ if $hasMore }}
+    <span class="mx-1">/</span>
+    <span class="text-gray-900 dark:text-gray-100 font-medium">{{ partial "functions/get-title" (dict "page" .) }}</span>
+  {{ end }}
 </nav>
