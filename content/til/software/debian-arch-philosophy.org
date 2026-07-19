@@ -1,0 +1,33 @@
+#+TITLE: Debian 与 Arch Linux 设计哲学对比
+#+DATE: <2026-07-19 Sun 21:30>
+#+TAGS[]: linux debian arch philosophy
+
+两套完全不同的设计哲学，本质是"自由软件价值观"与"工程简洁性价值观"的碰撞。
+
+**Debian** — 社会契约与自由优先
+- 核心文档是 [[https://www.debian.org/social_contract][Debian Social Contract]]（1997），而非技术白皮书
+- DFSG（Debian Free Software Guidelines）定义何为自由软件，系统本身不允许依赖非自由组件
+- DFSG 后来脱胎为 Open Source Definition，成为整个开源运动的官方定义标准
+- 意识形态驱动：社区民主投票制，有宪法级别的契约文档约束成员
+- 代价：软件版本必然滞后（Stable 发布周期漫长）
+
+**Arch** — KISS 与实用主义
+- 核心文档是 [[https://wiki.archlinux.org/title/Arch_Linux#Principles][The Arch Way]]，五个原则：
+  - Simplicity：不加不必要的修改或添加，upstream 什么样系统就什么样
+  - Modernity：rolling release，始终跑最新稳定版
+  - Pragmatism：非意识形态，不谈政治谈技术论证
+  - User centrality：面向 DIY 精神的 proficient user，不搞"对新手友好"
+  - Versatility：装完只有 CLI，从零构建而非从臃肿卸载
+- 设计决策追求代码正确性和架构简洁，抵制不必要的抽象/过度工程化
+- 代价：没有隔板，rolling release 意味着偶尔被上游 break 是常态
+
+| 维度 | Debian | Arch |
+|------|--------|------|
+| 驱动 | 意识形态（自由软件是社会使命） | 实用主义（技术正确是唯一标准） |
+| 稳定性来源 | 严格 Release 周期 + 冻结测试 | 上游代码就是最终形态 |
+| 对用户要求 | 中等（apt 处理依赖，默认配置能用） | 高（决定装什么、怎么配） |
+| 包数量 | ~60K+，质量审查极严格 | ~14K 官方 + AUR 海量社区脚本 |
+| 哲学文档 | Social Contract（契约治理） | The Arch Way（设计原则） |
+| 非自由软件 | 明确二等公民（non-free 不属于系统本身） | 一视同仁（官方仓库就有） |
+
+实际应用：PVE 主机用 Debian 系（稳定），工作站/日常用 Arch（新），正好踩在两套哲学各自适用的边界上。
