@@ -8,12 +8,14 @@
   {{ $totalMin = add $totalMin .ReadingTime }}
 {{ end }}
 
-{{/* Accurate word counts from build-time script (hugo.Data avoids .Site.Data deprecation) */}}
+{{/* Accurate word counts from build-time script */}}
 {{ $wc := index hugo.Data "til-wordcounts" }}
 {{ $totalWords := 0 }}
+{{ $avgWords := 0 }}
 {{ $pageWordCounts := dict }}
 {{ with $wc }}
   {{ $totalWords = .total }}
+  {{ $avgWords = .avg }}
   {{ range .perPage }}
     {{ $pageWordCounts = merge $pageWordCounts (dict .path .words) }}
   {{ end }}
@@ -59,8 +61,8 @@
     <div class="text-2xl font-semibold text-gray-900 dark:text-gray-100 tabular-nums">{{ $totalMin }}<span class="text-sm font-normal text-gray-400 dark:text-gray-500 ml-1">min</span></div>
   </div>
   <div class="p-4 rounded-lg border border-gray-200 dark:border-gray-800">
-    <div class="text-xs text-gray-400 dark:text-gray-500 uppercase tracking-wider mb-1">分类</div>
-    <div class="text-2xl font-semibold text-gray-900 dark:text-gray-100 tabular-nums">{{ len $sortedCats }}</div>
+    <div class="text-xs text-gray-400 dark:text-gray-500 uppercase tracking-wider mb-1">平均</div>
+    <div class="text-2xl font-semibold text-gray-900 dark:text-gray-100 tabular-nums">{{ $avgWords }}<span class="text-sm font-normal text-gray-400 dark:text-gray-500 ml-1">/篇</span></div>
   </div>
 </div>
 
@@ -88,8 +90,8 @@
 {{ $sorted := slice }}
 {{ range $tilPages }}
   {{ with .File }}
-    {{ $fname := .LogicalName }}
-    {{ $w := index $pageWordCounts $fname | default 0 }}
+    {{ $key := .Path }}
+    {{ $w := index $pageWordCounts $key | default 0 }}
     {{ $sorted = $sorted | append (dict "page" $ "words" $w) }}
   {{ end }}
 {{ end }}

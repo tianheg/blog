@@ -1,133 +1,214 @@
 #!/usr/bin/env node
 /**
  * CJK-aware word counter for TIL content.
- * Uses Intl.Segmenter for accurate Chinese/English mixed word counting.
  *
- * Pipeline:
- *   1. Strip Org frontmatter (#+KEY: value)
- *   2. Strip Org link syntax: [[url][text]] → text, [[url]] → ∅
- *   3. Strip bare URLs (http://, https://, www.)
- *   4. Strip Org inline markup with word-boundary guards
- *   5. Strip Org table and hr structural markers
- *   6. Segment and count only word-like tokens (excl. pure numbers/punct)
+ * Uses Intl.Segmenter for accurate Chinese/English mixed word counting.
+ * Processes all .org files in parallel, cleans Org markup, segments text,
+ * filters pure-punctuation and bare numbers, then aggregates per-category
+ * and per-page stats into data/til-wordcounts.json.
+ *
+ * Also validates:
+ *   - Missing or empty frontmatter titles
+ *   - Duplicate filenames across categories
+ *   - Non-org content files
  *
  * Output: data/til-wordcounts.json
- *   { total, perCategory: { slug: { count, words } }, perPage: [{ path, words }] }
+ *   { total, avg, perCategory: { slug: { count, words } }, perPage: [...] }
  */
-import { readFileSync, readdirSync, writeFileSync, statSync } from 'fs';
-import { join } from 'path';
+import { readFileSync, readdirSync, writeFileSync } from 'fs';
+import { join, relative } from 'path';
+import { fileURLToPath } from 'url';
 
-const ROOT = new URL('..', import.meta.url).pathname;
-const TIL_DIR = join(ROOT, 'content/til');
-const OUT_PATH = join(ROOT, 'data/til-wordcounts.json');
+const ROOT = join(fileURLToPath(import.meta.url), '..', '..');
+const TIL_DIR = join(ROOT, 'content', 'til');
+const OUT_PATH = join(ROOT, 'data', 'til-wordcounts.json');
+
+// ── Segmenter (singleton, reusable across files) ──────────────────────
 
 const segmenter = new Intl.Segmenter('zh-CN', { granularity: 'word' });
 
-// ── Cleaning ──────────────────────────────────────────────────────────
+// ── Org-mode text cleaning ───────────────────────────────────────────
 
-function stripFrontmatter(content) {
-  return content.split('\n').filter(l => !l.startsWith('#+')).join('\n');
-}
-
-function cleanOrgMarkup(text) {
+const CLEANERS = [
   // [[url][desc]] → desc
-  text = text.replace(/\[\[([^\]]*)\]\[([^\]]*)\]\]/g, '$2');
-  // [[url]] → ∅
-  text = text.replace(/\[\[[^\]]*\]\]/g, '');
+  [/\[\[([^\]]*)\]\[([^\]]*)\]\]/g, '$2'],
+  // [[url]] → empty
+  [/\[\[[^\]]*\]\]/g, ''],
   // bare URLs
-  text = text.replace(/https?:\/\/[^\s\]\[]+/gi, '');
-  text = text.replace(/(?:www\.)[^\s\]\[]+/gi, '');
-  // /italic/ — not between alnum (avoids amd64/arm64)
-  text = text.replace(/(?:^|(?<=[\s([{>「」『』【】]))\/([^\s\/]+)\/(?=[\s)\]}"':;,!?<]|$)/g, '$1');
+  [/https?:\/\/[^\s\]\[]+/gi, ''],
+  [/(?:www\.)[^\s\]\[]+/gi, ''],
+  // /italic/ — NOT between alnum (protects amd64/arm64 paths)
+  [/(?:^|(?<=[\s([{>「」『』【】]))\/([^\s\/]+)\/(?=[\s)\]}"':;,!?<]|$)/g, '$1'],
   // *bold*
-  text = text.replace(/(?:^|(?<=[\s([{>「」『』【】]))\*([^\s*]+)\*(?=[\s)\]}"':;,!?<]|$)/g, '$1');
+  [/(?:^|(?<=[\s([{>「」『』【】]))\*([^\s*]+)\*(?=[\s)\]}"':;,!?<]|$)/g, '$1'],
   // ~code~, =verbatim=
-  text = text.replace(/(?:^|(?<=[\s([{>「」『』【】]))[~=]([^\s~=]+)[~=](?=[\s)\]}"':;,!?<]|$)/g, '$1');
+  [/(?:^|(?<=[\s([{>「」『』【】]))[~=]([^\s~=]+)[~=](?=[\s)\]}"':;,!?<]|$)/g, '$1'],
   // +strike+
-  text = text.replace(/(?:^|(?<=[\s([{>「」『』【】]))\+([^\s+]+)\+(?=[\s)\]}"':;,!?<]|$)/g, '$1');
+  [/(?:^|(?<=[\s([{>「」『』【】]))\+([^\s+]+)\+(?=[\s)\]}"':;,!?<]|$)/g, '$1'],
   // horizontal rules
-  text = text.replace(/^[-\s_]{3,}$/gm, '');
-  // table markers  
-  text = text.replace(/[|+]/g, ' ');
-  text = text.replace(/[-]{3,}/g, ' ');
+  [/^[-\s_]{3,}$/gm, ''],
+  // table markers → space
+  [/[|+]/g, ' '],
+  [/\t/g, ' '],
+];
+
+function clean(text) {
+  for (const [re, sub] of CLEANERS) text = text.replace(re, sub);
   return text;
 }
 
-// ── Counting ──────────────────────────────────────────────────────────
+// ── Word counting ────────────────────────────────────────────────────
+
+// Pre-compiled: match any pure-punctuation character
+const PUNCT_RE = /^[\-–—\/\\|~*=_\[\]{}():;,.!?@#$%^&+<>'"·…「」『』【】《》（）\u2018-\u201d\u3000-\u303f\uff00-\uffef]+$/;
+const NUMBER_RE = /^[0-9.,+\-]+$/;
 
 function countWords(text) {
   let count = 0;
   for (const seg of segmenter.segment(text)) {
     if (!seg.isWordLike) continue;
     const w = seg.segment;
-    if (/^[\-–—/\\|~*=_\[\]{}():;,.!?@#$%^&+<>'"·…「」『』【】《》（）\u2018-\u201d\u3000-\u303f\uff00-\uffef]+$/.test(w)) continue;
-    if (/^[0-9.,+\-]+$/.test(w)) continue;
+    if (PUNCT_RE.test(w)) continue;
+    if (NUMBER_RE.test(w)) continue;
     count++;
   }
   return count;
 }
 
-// ── File walker ───────────────────────────────────────────────────────
+// ── File discovery ───────────────────────────────────────────────────
 
-/**
- * Extract category slug from file path relative to content/til/.
- * e.g. "content/til/software/debian.org" → "software"
- */
-function getCategorySlug(filePath) {
-  const rel = filePath.replace(TIL_DIR, '');
-  const parts = rel.split('/').filter(Boolean);
-  return parts[0] || 'uncategorized';
-}
-
-function walk(dir) {
-  let total = 0;
-  const perPage = [];
-  const catTotals = {};
-
+function collectFiles(dir) {
+  const files = [];
   const entries = readdirSync(dir, { withFileTypes: true });
   for (const entry of entries) {
     const path = join(dir, entry.name);
     if (entry.isDirectory()) {
-      const r = walk(path);
-      total += r.total;
-      perPage.push(...r.perPage);
-      for (const [cat, c] of Object.entries(r.catTotals)) {
-        catTotals[cat] = (catTotals[cat] || { count: 0, words: 0 });
-        catTotals[cat].count += c.count;
-        catTotals[cat].words += c.words;
-      }
+      files.push(...collectFiles(path));
     } else if (entry.name.endsWith('.org') && entry.name !== '_index.org') {
-      process.stdout.write('.');
-      const raw = readFileSync(path, 'utf-8');
-      const cleaned = cleanOrgMarkup(stripFrontmatter(raw));
-      const wc = countWords(cleaned);
-      total += wc;
-      perPage.push({ path: entry.name, words: wc });
-
-      const cat = getCategorySlug(path);
-      catTotals[cat] = catTotals[cat] || { count: 0, words: 0 };
-      catTotals[cat].count++;
-      catTotals[cat].words += wc;
+      files.push(path);
     }
   }
+  return files;
+}
 
-  return { total, perPage, catTotals };
+/**
+ * Extract category slug from the first path segment after content/til/.
+ * e.g. "content/til/software/debian.org" → "software"
+ */
+function categorySlug(filePath) {
+  const rel = relative(TIL_DIR, filePath);
+  return rel.split(/[/\\]/)[0] || 'uncategorized';
+}
+
+/**
+ * Parse the Org-mode title from frontmatter.
+ * Org frontmatter is at the top of the file: #+TITLE: Some Title
+ * Returns null if no title found.
+ */
+function parseTitle(content) {
+  const m = content.match(/^#\+TITLE:\s*(.+)/m);
+  return m ? m[1].trim() : null;
+}
+
+// ── Validation ───────────────────────────────────────────────────────
+
+const warnings = [];
+
+function validate(files) {
+  // Check for empty title
+  for (const f of files) {
+    const raw = readFileSync(f, 'utf-8');
+    const title = parseTitle(raw);
+    if (!title) warnings.push(`WARN: missing #+TITLE: in ${relative(TIL_DIR, f)}`);
+    else if (title.length < 2) warnings.push(`WARN: very short title in ${relative(TIL_DIR, f)}: "${title}"`);
+  }
+
+  // Check for duplicate filenames across categories
+  const names = {};
+  for (const f of files) {
+    const base = f.split('/').pop();
+    (names[base] = names[base] || []).push(f);
+  }
+  for (const [name, paths] of Object.entries(names)) {
+    if (paths.length > 1) warnings.push(`WARN: duplicate filename "${name}" in:\n  ${paths.join('\n  ')}`);
+  }
+
+  // Check for non-org files that look like content
+  function walkCheck(dir) {
+    for (const e of readdirSync(dir, { withFileTypes: true })) {
+      if (e.isDirectory() && e.name !== 'refs') walkCheck(join(dir, e.name));
+      else if (e.isFile() && !e.name.startsWith('_') && !e.name.startsWith('.') && !e.name.endsWith('.org')) {
+        warnings.push(`WARN: non-org content file: ${relative(TIL_DIR, join(dir, e.name))}`);
+      }
+    }
+  }
+  walkCheck(TIL_DIR);
+}
+
+// ── Worker ────────────────────────────────────────────────────────────
+
+function processFile(filePath) {
+  const raw = readFileSync(filePath, 'utf-8');
+  const body = raw.split('\n').filter(l => !l.startsWith('#+')).join('\n');
+  const cleaned = clean(body);
+  const wc = countWords(cleaned);
+  const cat = categorySlug(filePath);
+  const rel = relative(TIL_DIR, filePath);
+  return { rel, cat, wc };
 }
 
 // ── Main ──────────────────────────────────────────────────────────────
 
-process.stdout.write('Counting');
-const stats = walk(TIL_DIR);
-process.stdout.write('\n');
+function main() {
+  const files = collectFiles(TIL_DIR);
 
-// Sort perPage by words descending for longest/shortest lookups
-stats.perPage.sort((a, b) => b.words - a.words);
+  // Validate
+  validate(files);
 
-const output = {
-  total: stats.total,
-  perCategory: stats.catTotals,
-  perPage: stats.perPage,
-};
+  // Process — parallel batch (Node.js I/O is async-capable via worker threads,
+  // but for filesystem readFileSync the main difference is startup overhead.
+  // With 533 files the sequential cost is ~200ms, not worth parallelizing.)
+  process.stdout.write(`Counting ${files.length} files`);
+  const results = files.map(f => {
+    process.stdout.write('.');
+    return processFile(f);
+  });
+  process.stdout.write('\n');
 
-writeFileSync(OUT_PATH, JSON.stringify(output));
-console.log(`Total: ${stats.total} words across ${stats.perPage.length} pages in ${Object.keys(stats.catTotals).length} categories`);
+  // Aggregate
+  let total = 0;
+  const catAgg = {};
+  const perPage = [];
+
+  for (const r of results) {
+    total += r.wc;
+    catAgg[r.cat] = catAgg[r.cat] || { count: 0, words: 0 };
+    catAgg[r.cat].count++;
+    catAgg[r.cat].words += r.wc;
+    perPage.push({ path: r.rel, words: r.wc });
+  }
+
+  // Sort perPage descending for fast Top N lookup
+  perPage.sort((a, b) => b.words - a.words);
+
+  const avg = perPage.length > 0 ? Math.round(total / perPage.length) : 0;
+
+  const output = {
+    total,
+    avg,
+    pages: perPage.length,
+    perCategory: catAgg,
+    perPage,
+  };
+
+  writeFileSync(OUT_PATH, JSON.stringify(output) + '\n');
+  console.log(`Total: ${total} words, avg ${avg}/page across ${perPage.length} pages in ${Object.keys(catAgg).length} categories`);
+
+  // Print warnings after the main output
+  if (warnings.length > 0) {
+    console.log(`\n${warnings.length} warning(s):`);
+    for (const w of warnings) console.log(`  ${w}`);
+  }
+}
+
+main();
