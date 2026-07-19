@@ -1,0 +1,18 @@
+#+TITLE: Git Add two push remote
+#+HEADER: Git
+
+#+BEGIN_SRC sh
+git remote add origin git@github.com:xxx/a.git
+git remote -v
+#origin git@github.com:xxx/a.git (fetch)
+#origin git@github.com:xxx/a.git (push)
+git remote set-url --add --push origin git@codeberg.org:xxx/a.git
+git remote -v
+#origin git@github.com:xxx/a.git (fetch)
+#origin git@codeberg.org:xxx/a.git (push)
+git remote set-url --add --push origin git@codeberg.org:xxx/b.git
+git remote -v
+#origin git@github.com:xxx/a.git (fetch)
+#origin git@codeberg.org:xxx/a.git (push)
+#origin git@codeberg.org:xxx/b.git (push)
+#+END_SRC

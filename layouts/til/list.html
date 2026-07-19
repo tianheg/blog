@@ -1,24 +1,25 @@
 {{ define "main" }}
+{{ $isRoot := eq .RelPermalink "/til/" }}
+{{ $pages := .RegularPages }}
+
+{{/* Check if pages have the new "header" param */}}
+{{ $hasHeaders := false }}
+{{ $hasNoHeader := false }}
+{{ range $pages }}
+  {{ if .Params.header }}{{ $hasHeaders = true }}{{ else }}{{ $hasNoHeader = true }}{{ end }}
+{{ end }}
 
 <div data-pagefind-ignore>
-  {{ $sections := .Sections }}
-  {{ $pages := .RegularPages }}
-  {{ $isRoot := eq .RelPermalink "/til/" }}
-
-  {{/* --- Section header --- */}}
-  <div class="mb-6">
-    <h1 class="text-2xl font-bold text-gray-900 dark:text-gray-100">
-      {{- with .Title }}{{ . }}{{ else }}TIL{{ end -}}
-    </h1>
-    {{ if .Content }}
-    <div class="text-sm text-gray-500 dark:text-gray-400 mt-1 prose prose-gray dark:prose-invert max-w-none prose-a:text-emerald-600">
-      {{ .Content }}
-    </div>
-    {{ end }}
-  </div>
-
-  {{/* --- Root /til/ → section grid --- */}}
   {{ if $isRoot }}
+    {{/* === ROOT /til/ page === */}}
+    <div class="mb-6">
+      <h1 class="text-2xl font-bold text-gray-900 dark:text-gray-100">TIL</h1>
+    </div>
+
+    {{ partial "til/dashboard.html" . }}
+
+    {{ $sections := .Sections }}
+    <h2 class="text-base font-semibold text-gray-900 dark:text-gray-100 mb-4 mt-8">分类</h2>
     <div class="grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
     {{ range $sections.ByTitle }}
       {{ $pageCount := len .RegularPages }}
@@ -30,33 +31,24 @@
     {{ end }}
     </div>
 
-  {{ else }}
-    {{/* --- Category page: has sub-sections? show grid, else show flat list --- */}}
-    {{ if $sections }}
-      {{/* Sub-category grid (e.g., health/pharma, physio, ...) */}}
-      <div class="grid gap-4 sm:grid-cols-2">
-      {{ range $sections.ByTitle }}
-        {{ $subPages := .RegularPages }}
-        <a href="{{ .RelPermalink }}"
-           class="block p-4 rounded-lg border border-gray-200 dark:border-gray-800 hover:border-emerald-300 dark:hover:border-emerald-700 transition-colors">
-          <h2 class="text-sm font-semibold text-gray-900 dark:text-gray-100 mb-1">{{ .Title }}</h2>
-          <p class="text-xs text-gray-400 dark:text-gray-500">{{ len $subPages }} notes</p>
-        </a>
-      {{ end }}
-      </div>
-    {{ end }}
+  {{ else if $hasHeaders }}
+    {{/* === CATEGORY page — new flat structure with headers === */}}
 
-    {{/* Regular pages at this level */}}
-    {{ if $pages }}
-    <section class="{{ if $sections }}mt-8{{ end }}">
-      {{ if $sections }}
-      <h2 class="text-base font-semibold text-gray-900 dark:text-gray-100 mb-3 pb-2 border-b border-gray-100 dark:border-gray-800">
-        Uncategorized
-        <span class="text-xs font-normal text-gray-400 dark:text-gray-500 ml-2">{{ len $pages }}</span>
-      </h2>
-      {{ end }}
+    {{/* Category title */}}
+    <h1 class="text-2xl font-bold text-gray-900 dark:text-gray-100 mb-6">{{ .Title }}</h1>
+
+    {{ $grouped := $pages.GroupByParam "header" }}
+    {{ range $grouped }}
+    <section class="mb-8" data-header="{{ .Key }}">
+      <div class="flex items-baseline gap-2 mb-1">
+        <h2 class="text-sm font-semibold text-gray-900 dark:text-gray-100 uppercase tracking-wide">
+          {{ .Key }}
+        </h2>
+        <span class="text-xs text-gray-400 dark:text-gray-500">（属于{{ $.Title }}分类）</span>
+      </div>
+      <div class="h-px bg-gray-200 dark:bg-gray-800 mb-3"></div>
       <div class="space-y-0.5">
-        {{ range $pages }}
+        {{ range .Pages.ByTitle }}
         <a href="{{ .RelPermalink }}"
            class="group flex items-center justify-between py-1.5 px-2 -mx-2 rounded-md transition-colors hover:bg-gray-50 dark:hover:bg-gray-800/40">
           <span class="text-sm text-gray-700 dark:text-gray-300 group-hover:text-emerald-600 dark:group-hover:text-emerald-400 transition-colors">
@@ -72,7 +64,127 @@
       </div>
     </section>
     {{ end }}
+
+    {{/* No-header pages (flat list) — for categories with mixed headers & flat files */}}
+    {{ $noHeader := where $pages "Params.header" nil }}
+    {{ if $noHeader }}
+    <section class="mb-8" data-header="">
+      <div class="flex items-baseline gap-2 mb-1">
+        <h2 class="text-sm font-semibold text-gray-900 dark:text-gray-100 uppercase tracking-wide">其他</h2>
+        <span class="text-xs text-gray-400 dark:text-gray-500">（属于{{ $.Title }}分类）</span>
+      </div>
+      <div class="h-px bg-gray-200 dark:bg-gray-800 mb-3"></div>
+      <div class="space-y-0.5">
+        {{ range $noHeader.ByTitle }}
+        <a href="{{ .RelPermalink }}"
+           class="group flex items-center justify-between py-1.5 px-2 -mx-2 rounded-md transition-colors hover:bg-gray-50 dark:hover:bg-gray-800/40">
+          <span class="text-sm text-gray-700 dark:text-gray-300 group-hover:text-emerald-600 dark:group-hover:text-emerald-400 transition-colors">
+            {{- partial "functions/get-title" (dict "page" .) -}}
+          </span>
+          {{ if gt .ReadingTime 0 }}
+          <span class="text-xs text-gray-400 dark:text-gray-500 shrink-0 ml-4 tabular-nums">
+            {{ .ReadingTime }}min
+          </span>
+          {{ end }}
+        </a>
+        {{ end }}
+      </div>
+    </section>
+    {{ end }}
+
+  {{ else }}
+    {{/* === FALLBACK: old sub-section grid / flat list (for non-header categories) === */}}
+    {{ $sections := .Sections }}
+
+    <h1 class="text-2xl font-bold text-gray-900 dark:text-gray-100 mb-6">{{ .Title }}</h1>
+
+    {{ if $sections }}
+    <div class="grid gap-4 sm:grid-cols-2 mb-8">
+    {{ range $sections.ByTitle }}
+      {{ $subPages := .RegularPages }}
+      <a href="{{ .RelPermalink }}"
+         class="block p-4 rounded-lg border border-gray-200 dark:border-gray-800 hover:border-emerald-300 dark:hover:border-emerald-700 transition-colors">
+        <h2 class="text-sm font-semibold text-gray-900 dark:text-gray-100 mb-1">{{ .Title }}</h2>
+        <p class="text-xs text-gray-400 dark:text-gray-500">{{ len $subPages }} notes</p>
+      </a>
+    {{ end }}
+    </div>
+    {{ end }}
+
+    {{ if $pages }}
+    <div class="space-y-0.5">
+      {{ range $pages.ByTitle }}
+      <a href="{{ .RelPermalink }}"
+         class="group flex items-center justify-between py-1.5 px-2 -mx-2 rounded-md transition-colors hover:bg-gray-50 dark:hover:bg-gray-800/40">
+        <span class="text-sm text-gray-700 dark:text-gray-300 group-hover:text-emerald-600 dark:group-hover:text-emerald-400 transition-colors">
+          {{- partial "functions/get-title" (dict "page" .) -}}
+        </span>
+        {{ if gt .ReadingTime 0 }}
+        <span class="text-xs text-gray-400 dark:text-gray-500 shrink-0 ml-4 tabular-nums">
+          {{ .ReadingTime }}min
+        </span>
+        {{ end }}
+      </a>
+      {{ end }}
+    </div>
+    {{ end }}
   {{ end }}
 </div>
+{{ end }}
 
+
+{{ define "right" }}
+{{/* Right sidebar: header filter on category pages, TOC elsewhere */}}
+{{ if not (eq .RelPermalink "/til/") }}
+  {{ $pages := .RegularPages }}
+  {{ $hasHeaders := false }}
+  {{ range $pages }}
+    {{ if .Params.header }}{{ $hasHeaders = true }}{{ end }}
+  {{ end }}
+
+  {{ if $hasHeaders }}
+    <div class="text-xs font-medium text-gray-400 dark:text-gray-500 uppercase tracking-wider mb-3 px-3">
+      子分类
+    </div>
+    <nav id="header-nav" class="space-y-1">
+      {{ $grouped := $pages.GroupByParam "header" }}
+      {{ range $grouped }}
+      <button onclick="toggleHeader('{{ .Key | htmlEscape }}')"
+              class="header-btn block w-full text-left px-3 py-1.5 text-sm rounded-md transition-colors
+                     text-gray-600 dark:text-gray-400 hover:text-gray-900 dark:hover:text-gray-100 hover:bg-gray-50 dark:hover:bg-gray-800"
+              data-header-btn="{{ .Key }}">
+        {{ .Key }}
+        <span class="text-xs text-gray-400 dark:text-gray-500 ml-1">{{ len .Pages }}</span>
+      </button>
+      {{ end }}
+      <button onclick="showAllHeaders()"
+              class="block w-full text-left px-3 py-1.5 text-sm rounded-md transition-colors
+                     text-emerald-600 dark:text-emerald-400 hover:bg-gray-50 dark:hover:bg-gray-800 mt-2">
+        全部显示
+      </button>
+    </nav>
+    <script>
+    (function() {
+      window.toggleHeader = function(name) {
+        var groups = document.querySelectorAll('[data-header]');
+        var target = document.querySelector('[data-header="' + name + '"]');
+        if (!target) return;
+        var visible = [...groups].filter(function(g) { return g.style.display !== 'none'; });
+        if (visible.length === 1 && visible[0] === target) {
+          showAllHeaders();
+          return;
+        }
+        groups.forEach(function(g) { g.style.display = g === target ? 'block' : 'none'; });
+        document.querySelectorAll('.header-btn').forEach(function(b) {
+          b.classList.toggle('active', b.getAttribute('data-header-btn') === name);
+        });
+      };
+      window.showAllHeaders = function() {
+        document.querySelectorAll('[data-header]').forEach(function(g) { g.style.display = 'block'; });
+        document.querySelectorAll('.header-btn').forEach(function(b) { b.classList.remove('active'); });
+      };
+    })();
+    </script>
+  {{ end }}
+{{ end }}
 {{ end }}

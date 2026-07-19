@@ -1,0 +1,309 @@
+#+TITLE: Arch Linux
+#+HEADER: Linux
+** System Management
+*** Kernel Downgrade
+因卡顿回退 Linux 内核。设置 BIOS U 盘启动，插入制作好的 USB 启动盘，进入 U 盘中的 arch 系统，然后执行：
+
+```sh
+mount /dev/sdb2 /mnt
+arch-chroot /mnt /bin/bash
+cd /var/cache/pacman/pkg
+ls -a | grep linux
+pacman -U linux-5.13.9.arch1-1-x86_64.pkg.tar.zst
+```
+
+参考：https://wiki.archlinux.org/title/Downgrading_packages#Downgrading_the_kernel
+
+*** Get Fastest Pacman Mirrors
+三种方式：
+
+Way 1 - 手动从 mirror status 页面选择：
+1. 访问 https://archlinux.org/mirrors/status/#successful
+2. 复制前几个镜像（https 协议，100% completion，低 score）
+3. 组织成 `Server = MIRROR_URL/$repo/os/$arch` 格式
+4. 保存到 `/etc/pacman.d/mirrorlist`
+
+Way 2 - 使用 curl 和 rankmirrors：
+
+```txt
+curl -s "https://archlinux.org/mirrorlist/?country=CN&protocol=https&ip_version=4&use_mirror_status=on" | sed -e 's/^#Server/Server/' -e '/^#/d' | rankmirrors -n 5 -
+```
+
+Way 3 - 使用 reflector：
+1. 安装 reflector
+2. `reflector --sort rate --protocol https --latest 5 | rankmirrors -`
+3. 保存到 mirrorlist
+
+*** Man Pages
+```sh
+pacman -S man-db man-pages
+```
+
+man pages 有多个部分，比如选择第七个部分：
+
+```sh
+man boot.7
+```
+
+https://wiki.archlinux.org/title/Man_page
+
+*** Arch Linux in LXC
+- https://github.com/lxc/lxc
+- https://blog.lilydjwg.me/tag/lxc
+- https://www.kissuki.com/blog/2013/06/30/arch-in-lxc
+
+*** CPU Microcode
+安装 Intel/AMD CPU 微码更新以修复安全漏洞和稳定性问题。
+
+** Package Management
+*** PKGBUILD
+来自 [Example PKGBUILD file](https://gitlab.archlinux.org/pacman/pacman/raw/master/proto/PKGBUILD.proto)
+
+```proto
+pkgname=NAME
+pkgver=VERSION
+pkgrel=1
+pkgdesc=""
+arch=()
+url=""
+license=('')
+groups=()
+depends=()
+makedepends=()
+...
+```
+
+参考：
+1. [PKGBUILD - ArchWiki](https://wiki.archlinux.org/title/PKGBUILD)
+2. [Creating packages - ArchWiki](https://wiki.archlinux.org/title/Creating_packages)
+3. [Arch package guidelines - ArchWiki](https://wiki.archlinux.org/title/Arch_package_guidelines)
+4. [AUR submission guidelines - ArchWiki](https://wiki.archlinux.org/title/AUR_submission_guidelines)
+
+*** AUR Helpers
+https://wiki.archlinux.org/title/AUR_helpers
+
+- [yay](https://github.com/Jguer/yay)
+- [paru](https://github.com/morganamilo/paru)
+
+*** Yay Proxy Support
+https://github.com/Jguer/yay/issues/951#issuecomment-1080206297
+
+1. `sudo vim /etc/proxychains.conf`
+2. 注释 `proxy_dns`
+
+*** Fix Pacman Key
+解决 `ERROR: key could not be locally signed` 错误：
+
+```bash
+rm -rf /etc/pacman.d/gnupg
+pacman-key --init
+pacman-key --populate archlinux
+pacman-key --populate archlinuxcn
+```
+
+*** archlinuxcn Keyring Manual Trust
+在新系统中安装 archlinuxcn-keyring 之前，需要手动信任 farseerfc 的 key。
+
+遇到 `error: archlinuxcn-keyring: Signature from "Jiachen YANG ..." is marginal trust` 时：
+
+```txt
+sudo pacman-key --lsign-key "farseerfc@archlinux.org"
+sudo pacman -S archlinuxcn-keyring
+```
+
+https://www.archlinuxcn.org/archlinuxcn-keyring-manually-trust-farseerfc-key/
+
+*** Install .deb Packages on Arch
+https://www.makeuseof.com/install-deb-packages-arch-linux/
+
+方法一（使用 debtap）：
+
+```sh
+yay -S debtap
+debtap yourfile.deb
+sudo pacman -U yourfile.zst
+```
+
+方法二（手动解压）：
+
+```sh
+ar x /path/to/file
+tar xvf control.tar.gz
+tar xvf data.tar.gz
+sudo cp -r ./etc/* /etc/
+sudo cp -r ./opt/* /opt/
+sudo cp -r ./usr/* /usr/
+```
+
+** Hardware & Drivers
+*** Screen Flickering (Intel GPU)
+Arch Linux 屏幕闪烁问题，Intel UHD Graphics 620。
+
+尝试一 - 添加内核参数：
+
+```sh
+GRUB_CMDLINE_LINUX_DEFAULT="... i915.enable_psr=0 nomodeset"
+```
+
+尝试二（可能有效）：
+
+```sh
+GRUB_CMDLINE_LINUX_DEFAULT="... i915.enable_psr=0"
+```
+
+修改后执行：
+
+```sh
+sudo grub-mkconfig -o /boot/grub/grub.cfg
+```
+
+注意：设置 `i915.enable_psr=0` 会让内核被污染（tainted）。
+
+参考：
+- https://wiki.archlinux.org/title/intel_graphics#Screen_flickering
+- https://bbs.archlinux.org/viewtopic.php?id=243307
+- https://bbs.archlinux.org/viewtopic.php?id=228815
+
+*** Bluetooth Stops Working After Some Time
+Bluetooth 在使用一段时间后停止工作。
+
+来源：
+1. https://forum.manjaro.org/t/bluetooth-stop-working-after-some-time/89078/2
+2. https://github.com/lwfinger/rtw88/issues/72#issuecomment-962876460
+3. https://wiki.archlinux.org/title/Power_management#USB_autosuspend
+4. https://wiki.archlinux.org/title/bluetooth
+
+*** System Freeze After Connecting WiFi
+Arch Linux 在连接 WiFi 后系统冻结。
+
+来源：
+1. https://github.com/tianheg/blog/issues/147
+2. https://github.com/lwfinger/rtw88/issues/72
+3. https://github.com/tomaspinho/rtl8821ce/issues/142
+
+** Font Configuration
+*** Font Concepts
+- Stylistic Sets: 一种特性，让使用字体的可选字符变得更简单。
+- OpenType: 可伸缩计算机字体的格式，基于 TrueType 构建，由 Microsoft 和 Adobe 开发。
+- TrueType: 苹果在 20 世纪 80 年代末开发的一种大纲字体标准。
+- Typography: 字体设计的艺术和技术。
+- Web Open Font Format (WOFF): 一种用于网页的字体格式。
+- FreeType: 用于将文本呈现到位图上的软件开发库。
+- HarfBuzz: 用于文本整形的软件开发库。
+
+*** Install Chinese Fonts
+安装字体包：
+
+```bash
+pacman -S ttf-roboto noto-fonts noto-fonts-cjk adobe-source-han-sans-cn-fonts adobe-source-han-serif-cn-fonts ttf-dejavu
+```
+
+配置文件：`/etc/fonts/local.conf` 或 `~/.config/fontconfig/fonts.conf`
+
+安装微软字体：
+
+```bash
+yay -S ttf-ms-win11-auto-zh_cn
+```
+
+https://wiki.archlinux.org/title/Font_Configuration/Chinese
+
+** Desktop & Applications
+*** Wayland Setup
+[Full Wayland Setup on Arch Linux](https://www.fosskers.ca/en/blog/wayland)
+
+注意：腾讯会议（wemeet-bin）不支持 Wayland，屏幕共享功能不可用。切换到 Xorg 下则可以共享屏幕。
+
+*** Key Remapping with evremap
+安装 [evremap](https://github.com/wez/evremap)：
+
+```sh
+yay -S evremap
+mkdir ~/evremap && cd $_
+touch remap.toml
+```
+
+`remap.toml`：
+
+```txt
+device_name = "USB Keyboard"
+
+[[remap]]
+input = ["KEY_RIGHTALT"]
+output = ["KEY_Z"]
+```
+
+- `device_name` 是键盘型号，通过 `sudo evremap list-devices` 查找。
+- `input`/`output` 按键名通过 `sudo evremap list-keys` 查找。
+
+配置 systemd 自启动：创建 `/usr/lib/systemd/system/evremap.service`：
+
+```sh
+[Service]
+WorkingDirectory=/
+ExecStart=bash -c "/usr/bin/evremap remap /home/$USER/evremap/remap.toml"
+Restart=always
+```
+
+然后：
+
+```sh
+sudo systemctl daemon-reload
+sudo systemctl enable evremap.service --now
+```
+
+https://wiki.archlinux.org/title/Wayland#Remap_keyboard_or_mouse_keys
+
+*** Install KiCad
+https://www.kicad.org/download/linux/#_arch_linux
+
+```sh
+sudo pacman -Syu kicad
+sudo pacman -Syu --asdeps kicad-library kicad-library-3d
+```
+
+** Containers & Virtualization
+*** Docker MySQL Memory Issue
+Arch Linux 下 Docker MySQL 5.7 占用过高内存（最高到 16G）。MySQL 8.0 则正常（约 382M）。
+
+相关 issue：
+- https://github.com/docker-library/mysql/issues/579
+- https://github.com/docker-library/mysql/issues/361
+
+** Building Custom Images
+*** Custom Archiso Live Image
+为 Arch Linux 定制启动镜像。
+
+安装 Archiso：
+
+```sh
+cp -r /usr/share/archiso/configs/releng/ archlive
+```
+
+配置文件结构：
+
+```
+profile/
+├── airootfs/
+├── efiboot/
+├── syslinux/
+├── grub/
+├── bootstrap_packages.arch
+├── packages.arch
+├── pacman.conf
+└── profiledef.sh
+```
+
+添加用户 `archie`：修改 passwd、shadow、group、gshadow 文件，并在 profiledef.sh 中设置权限。
+
+构建镜像：
+
+```sh
+mkarchiso -v -w /path/to/work_dir -o /path/to/out_dir /path/to/profile/
+```
+
+我的 profile 在 https://github.com/tianheg/archlive
+
+参考：
+1. https://wiki.archlinux.org/title/Archiso
+2. https://gitlab.archlinux.org/archlinux/archiso/-/blob/master/docs/README.profile.rst

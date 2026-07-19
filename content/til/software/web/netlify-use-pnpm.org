@@ -1,8 +1,0 @@
-#+TITLE: Netlify Use PNPM
-[[https://github.com/netlify/build/issues/1633]]
-
-netlify.toml:
-
-```toml [build.environment] NODE_{VERSION} = "16" NPM_{FLAGS} = "--version"
-
-[build] publish = "dist" command = "npx pnpm install --store=node_{modules}/.pnpm-store && npx pnpm build" ```

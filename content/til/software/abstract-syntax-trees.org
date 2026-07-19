@@ -1,0 +1,208 @@
+#+TITLE: ASTs是什么&怎么用
+#+HEADER: Programming
+
+ASTs 是 Abstract Syntax Trees（抽象语法树） 的缩写。
+
+* 什么是 ASTs？
+
+ASTs 是代码的树状展示。它是编译器正常工作的基础部分之一。当编译器转换某些代码时，基本遵循以下步骤：
+
+1. 词法分析（Lexical Analysis）
+2. 语法分析（Syntax Analysis）
+3. 生成代码（Code Generation）
+
+** 词法分析也叫标记化
+
+标记化（Tokenization）是[[https://en.wikipedia.org/wiki/Lexical_analysis#Tokenization][对输入字符串的各个部分进行标定和可能的分类的过程]]。然后将生成的 tokens 传递给其他形式的处理。可以将该流程视为解析输入的子任务。这一步中，代码将会转换为一组标记，用以描述代码的不同部分。这和基本的代码高亮所使用的方法是一样的。标记并不知道代码为什么这样组合，它只是文件中的组成部分。可以想象成一组列表或一个数组，其中包含不同类型的标记。
+
+可以这样类比，得到一个文本，将它拆分成单词组。我可能会区分标点符号、动词、名词和数字等等。但此时我并不了解句子的组成，以及多个句子是怎样组合到一起的。
+
+** 语法分析也叫解析
+
+解析的英文是 parse，解析是一个正在发生的动作，所以用 parsing。
+
+这一步把标记列表变成抽象语法树（ASTs）。将标记变成一个树，这个树能反映代码的真正结构。之前只知道有 =()= ，现在知道了函数调用、函数定义、还有其他分组。
+
+这里的等价物是将标记组成的单词列表转换成一个数据结构，表示诸如句子之类的东西，某个名词在句子中扮演什么角色。
+
+另一个可类比的例子是 [[https://developer.mozilla.org/en-US/docs/Web/API/Document_Object_Model/Introduction][DOM]]。第一步是将 HTML 拆分为“标签”和“文本”，第二步是生成 DOM 树，以展示 DOM 的层次结构。
+
+注意，没有一种 AST 格式。它们可能会有所不同，这取决于要转换为 AST 的语言以及要用于解析的工具。在 JavaScript 中，一个常见的标准是 [[https://github.com/estree/estree][ESTree]]，但是您将看到不同的工具可能会添加额外的属性。
+
+例子的 AST 的 JSON 格式：
+
+#+BEGIN_SRC json
+{
+  "type": "Program",
+  "start": 0,
+  "end": 14,
+  "body": [
+    {
+      "type": "ExpressionStatement",
+      "start": 0,
+      "end": 14,
+      "expression": {
+        "type": "CallExpression",
+        "start": 0,
+        "end": 13,
+        "callee": {
+          "type": "Identifier",
+          "start": 0,
+          "end": 7,
+          "name": "isPanda"
+        },
+        "arguments": [
+          {
+            "type": "Literal",
+            "start": 8,
+            "end": 12,
+            "value": "🐼",
+            "raw": "'🐼'"
+          }
+        ],
+        "optional": false
+      }
+    }
+  ],
+  "sourceType": "module"
+}
+#+END_SRC
+
+一般来说，AST 是一种树形结构，其中每个节点至少有一个指定其表示内容的类型。例如，类型可以是表示实际值的 =Literal= 或表示函数调用的 =CallExpression= 。 =Literal= 节点可能只包含一个值，而 =CallExpression= 节点可能包含许多附加信息，这些信息可能与“正在调用的内容”( =callee= )或传入的 =arguments= 内容相关。
+
+** 代码生成
+
+此步骤本身可以是多个步骤。一旦有了一个抽象语法树，既可以操纵它，也可以“打印”成另一种代码。使用 AST 操作代码比直接对代码作为文本或对标记列表执行这些操作更安全。因为对于文本来说，它只是文本没有更多信息，它显示的上下文最少。 *如果尝试使用字符串替换或正则表达式来操作文本，容易出错* 。
+
+操作标记也并不容易。尽管知道变量是什么，如果想要重新命名变量，就会很麻烦。因为不知道变量的作用域，以及可能与哪些变量冲突。
+
+ASTs 提供了关于代码结构的所有信息，使得修改代码更为准确，更能达到目的。例如，可以确定变量声明的位置，通过树结构确定变量能够影响的作用域范围。
+
+一旦可以操纵树，就能够将代码按期待的方式输出。例如，如果想构建一个像 TypeScript 编译器的编译器，可能一个方向上输出 JavaScript，另一个方向输出机器码。
+
+要做到这样，通过 ASTs 更容易。因为不同输出对于同一结构可能具有不同的格式。使用更线性的输入（文本或标记组）生成输出将更加困难。
+
+* 如何处理 ASTs？
+
+一个 ASTs 在线工具：https://astexplorer.net/
+
+这个理论涵盖了 ASTs 的实际用例是什么？我们谈到了编译器，但是我们并不是整天都在构建编译器。
+
+ASTs 的用例非常广泛，通常可以分为三个总体操作: 读取、修改和打印。它们是某种添加剂，这意味着如果你正在打印 ASTs，那么以前读取并修改 ASTs 的可能性很高。但是，我们将讨论主要集中在一个用例上的一个例子中。
+
+在这些部分中，还将讨论如何执行各自的操作。
+
+** 阅读/遍历 ASTs
+
+从技术上讲，使用 ASTs 的第一步是解析文本以创建 ASTs，但在大多数情况下，提供解析步骤的库也提供了遍历 ASTs 的方法。
+
+遍历一个 AST 意味着访问树的不同节点以获得内容或执行操作。
+
+最常见的用例之一就是 linting。例如，ESLint 使用 espree 生成一个 AST，如果你想编写任何自定义规则，能根据不同的 AST 节点编写这些规则。ESLint 文档中有大量关于如何构建自定义规则、插件和格式化程序的文档。
+
+这里是一个例子：[[https://astexplorer.net/#/gist/7c72d5f7dc7443f3ec2a80f3f3b4ea27/52ede077fdf3c0bdd87e25cba826f6a037d4b06a][You shouldn't use more than one class]]：
+
+#+BEGIN_SRC js
+let numberOfClasses = 0
+export default function (context) {
+  return {
+    ClassDeclaration(node) {
+      numberOfClasses = numberOfClasses + 1;
+      if (numberOfClasses > 1) {
+        context.report({
+          node,
+          message: "You shouldn't use more than one class",
+        });
+      }
+    }
+  };
+}
+#+END_SRC
+
+在这个代码片段中，寻找 =ClassDeclaration= 节点，每次给全局计数器加 1。一旦达到设定值，就使用 ESLint 的 reporter API 来报告。
+
+现在，这是一个非常特定于 ESLint 的语法，但是您可以构建一个类似的脚本，而无需构建 ESLint 插件。例如，我们可以使用底层的 =espree= 库使用基本的 Node.js 脚本手动地解析和遍历节点。
+
+#+BEGIN_SRC js
+const fs = require("fs").promises
+const path = require("path")
+const espree = require("espree")
+
+function checkTopLevelClasses(ast) {
+  let topLevelClassCounter = ast.body.reduce((counter, node) => {
+    if (node.type === "ClassDeclaration") {
+      counter++
+    }
+    return counter
+  }, 0)
+  if (topLevelClassCounter > 1) {
+    throw new Error(
+      `Found ${topLevelClassCounter} top level classes. Expected not more than one.`
+    )
+  }
+}
+
+async function run() {
+  const fileName = path.resolve(process.cwd(), process.argv[2])
+  const content = await fs.readFile(fileName, "utf8")
+  console.log(fileName)
+
+  const ast = espree.parse(content, { ecmaVersion: 2019 })
+  checkTopLevelClasses(ast)
+}
+
+run().catch(console.error)
+#+END_SRC
+
+这个脚本手动读取一个文件，使用 espree 解析它，然后检查每个顶级节点，以及它是否是 =ClassDeclaration= ，此时它将增加一个本地计数器。一旦完成，它检查计数是否大于预期，并将抛出一个错误。
+
+如果搜索 npm，还会找到一组其他工具来解析和遍历 AST。它们通常在 API 设计上有所不同，有时在 JavaScript 解析能力上也有所不同。一些常见的示例是用于解析的 =acorn= 和 =esprima= 或用于遍历 ESTree 兼容树的 =estree-walker= 。
+
+** 修改/转换 ASTs
+
+处理 ASTs 要比处理标记或原始字符串要更容易且安全。
+
+例如，Babel 修改 AST 以向下移动较新的特性，或者将 JSX 转换为函数调用。例如，当您编译 React 或 Preact 代码时就会发生这种情况。
+
+另一个用例是捆绑代码。在模块世界中，捆绑代码通常比仅仅将文件附加在一起要复杂得多。更好地理解各个文件的结构可以更容易地合并这些文件，并在必要时调整导入和函数调用。如果检查诸如 =webpack= 、 =parcel= 或 =rollup= 之类的工具的代码库，您会发现它们都使用 ASTs 作为捆绑工作流的一部分。
+
+一个看起来不那么明显的用例是测试覆盖率。这些代码为每一行、函数和语句增加不同的计数器。在所有的测试运行之后，他们可以检查所说的计数器，并给你一个详细的洞察，什么已经执行，什么没有执行。在没有 AST 的情况下进行这项工作既难以置信地困难，也难以预测。
+
+这些工具很复杂，不大可能自己重新写一个。但是有一种情况，对平时的开发是有好处的。这就是为了优化、宏或者同时更新代码库的更大部分而对代码进行修改。
+
+例如，React 团队维护一个名为 response-codemod 的脚本集合，该脚本可以执行与更新 React 版本相关的常见操作。他们在底层使用的工具叫做 =jscodeshift= ，我们也可以使用它来编写我们自己的转换脚本。
+
+例如，我们喜欢使用 =alert()= 进行调试，但是我们希望避免将其发送给客户。我们可以编写下面这样的脚本，用 =console.error= 替换对 =alert= 的所有调用，而不用担心可能会重写类似 =myalert()= 的内容。请看例子：[[https://astexplorer.net/#/gist/e31b467ff904a96eda7d82247a8d8c4f/1d6cd026831a95f8273d6a5c29cb71db3b2a5837][alert() to console.error()]]。
+
+#+BEGIN_SRC js
+export default function transformer(file, api) {
+  const j = api.jscodeshift
+  return j(file.source)
+    .find(j.CallExpression)
+    .forEach((path) => {
+      const callee = path.node.callee
+      console.log(callee)
+      if (callee.type !== "Identifier" || callee.name !== "alert") {
+        return
+      }
+      j(path).replaceWith(
+        j.callExpression(j.identifier('console.error'), path.node.arguments)
+      )
+    })
+    .toString()
+}
+#+END_SRC
+
+** 打印 ASTs
+
+在大多数情况下，打印和修改 ASTs 是密切相关的，因为您必须输出刚才修改的 ASTs。但是，虽然像 =recast= 这样的一些库显式地将重点放在以与原始代码相同的代码样式打印 ASTs 上，但是也有很多用例希望以不同的方式显式地打印 ASTs。
+
+例如，Prettier 使用 ASTs 根据您的配置重新格式化代码，而不改变代码的内容/含义。他们的方法是将您的代码转换成一个完全格式不可知的 ASTs，然后根据您的规则重写它。
+
+常见的其他用例是用不同的目标语言打印代码或构建自己的压缩工具。
+
+您可以使用两个不同的工具来打印 AST，例如 =escodegen= 或 =astring= 。您也可以全力以赴，根据您的用例构建您自己的格式化程序，或者为 Prettier 构建一个插件。
+
+参考资料
+
+- [[https://www.twilio.com/blog/abstract-syntax-trees][Introduction to Abstract Syntax Trees]]
