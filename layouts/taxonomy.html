@@ -1,16 +1,22 @@
-{{/* Tag cloud/taxonomy listing page layout */}}
+{{/* Tag cloud / taxonomy listing page */}}
 {{ define "main" }}
-	<main id="main">
-		{{/* Generate tag cloud if tags exist */}}
-		{{ if ne (len $.Site.Taxonomies.tags) 0 }}
-			{{ $max := add (len (index $.Site.Taxonomies.tags.ByCount 0).Pages) 1 }}
-			{{ $min := len (index $.Site.Taxonomies.tags.ByCount.Reverse 0).Pages }}
-			{{ range $name, $taxonomy := $.Site.Taxonomies.tags }}
-				{{ $currentTagCount := len $taxonomy.Pages }}
-				{{ with $.Site.GetPage (printf "/tags/%s" $name) }}
-					<a href="{{ .RelPermalink }}">{{ .LinkTitle | default .Data.Term | default $name }}<span class="tag-cloud-item-count">{{ $currentTagCount }}</span></a>
-				{{ end }}
-			{{ end }}
-		{{ end }}
-	</main>
+<div data-pagefind-ignore>
+  <h1 class="text-2xl font-bold mb-8">Tags</h1>
+  {{ if ne (len $.Site.Taxonomies.tags) 0 }}
+    <div class="flex flex-wrap gap-3">
+      {{ range $name, $taxonomy := $.Site.Taxonomies.tags }}
+        {{ $count := len $taxonomy.Pages }}
+        {{ with $.Site.GetPage (printf "/tags/%s" $name) }}
+          <a href="{{ .RelPermalink }}"
+             class="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-full border border-gray-200 dark:border-gray-800 text-gray-700 dark:text-gray-300 hover:border-gray-300 dark:hover:border-gray-700 hover:bg-gray-50 dark:hover:bg-gray-800 transition-colors">
+            {{ .LinkTitle | default .Data.Term | default $name }}
+            <span class="text-xs text-gray-400 dark:text-gray-500">{{ $count }}</span>
+          </a>
+        {{ end }}
+      {{ end }}
+    </div>
+  {{ else }}
+    <p class="text-gray-500 dark:text-gray-400">No tags yet.</p>
+  {{ end }}
+</div>
 {{ end }}

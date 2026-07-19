@@ -1,13 +1,16 @@
 {{/* 404 Not Found page layout */}}
 {{ define "main" }}
-	<div>
-		<h1>404 - Page not found</h1>
-		<p>The post URL has been updated or deleted, please
-			<a href="/search">search</a>
-			to find it</p>
-
-		<div>
-			<a href="/">Take Me Home</a>
-		</div>
-	</div>
+<div class="text-center py-16">
+  <h1 class="text-4xl font-bold mb-4">404</h1>
+  <p class="text-gray-600 dark:text-gray-400 mb-2">Page not found</p>
+  <p class="text-gray-500 dark:text-gray-500 mb-8">
+    The page may have been moved or deleted. Try
+    <a href="/search" class="text-blue-600 dark:text-blue-400 hover:underline">searching</a>
+    for what you need.
+  </p>
+  <a href="/"
+     class="inline-block px-4 py-2 rounded-md border border-gray-200 dark:border-gray-800 text-gray-700 dark:text-gray-300 hover:bg-gray-50 dark:hover:bg-gray-800 transition-colors">
+    Take me home
+  </a>
+</div>
 {{ end }}
