@@ -1,0 +1,20 @@
+#+TITLE: apt vs apt-get：什么时候用哪个
+
+两个都是 Debian 系包管理前端，底层调同一个 dpkg。~~apt~~ 是 ~~apt-get~~ + ~~apt-cache~~ 的精简版，面向交互使用。
+
+| | ~~apt-get~~ | ~~apt~~ |
+|---|---|---|
+| 出身 | 1998，传统工具 | 2014 (Debian 8)，后起 |
+| 输出 | 啰嗦原始 | 彩色进度条，人类友好 |
+| 合并更新 | ~~apt-get upgrade~~ | ~~apt upgrade~~（自动处理依赖变更） |
+| 搜索 | 需 ~~apt-cache search~~ | 内置 ~~apt search~~ |
+| 查看依赖 | 需 ~~apt-cache depends~~ | 内置 ~~apt depends~~ |
+| 脚本兼容 | **稳定**，输出格式固定 | **不稳定**，输出格式可能随版本改 |
+| 干跑 | ~~--dry-run~~ | ~~--dry-run~~ / ~~--simulate~~ |
+
+**原则：手敲用 ~~apt~~，脚本用 ~~apt-get~~。**
+
+* 参考
+- [[https://en.wikipedia.org/wiki/APT_(software)][Wikipedia: APT (software)]] — 1997 Deity 项目始, `apt` / `apt-get` / `apt-cache` 三者并列
+- [[https://wiki.debian.org/AptCLI][Debian Wiki: AptCLI]] — "apt: good for manual install, apt-get: good for scripts"
+- [[https://man7.org/linux/man-pages/man8/apt.8.html][apt(8) — Differences to apt-get(8)]]
