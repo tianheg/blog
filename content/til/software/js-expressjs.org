@@ -14,7 +14,7 @@ Express 能干什么：
 
 学习到如何开启 Express：`const express = require("express"); const app = express()`
 
-如何设置根路由：`app.get("/", (req, res) => { res.send("Hello World")})`，[在 Node.js 中 req(request) 和 res(response) 是相同功能的对象]([[https://expressjs.com/en/starter/hello-world.html#running-locally]])，因此在不使用 Express 的情况下，可以调用 `req.pipe().req.on("date", callback)`。Node 中的 res 和 req 在一般情况下指 http 的请求和响应，后续所有的框架和库为了简单和方便学习，也采用了相同的命名，其实也可以不是 res,req[^{1}]。
+如何设置根路由：`app.get("/", (req, res) => { res.send("Hello World")})`，[[https://expressjs.com/en/starter/hello-world.html#running-locally][在 Node.js 中 req(request) 和 res(response) 是相同功能的对象]]，因此在不使用 Express 的情况下，可以调用 `req.pipe().req.on("date", callback)`。Node 中的 res 和 req 在一般情况下指 http 的请求和响应，后续所有的框架和库为了简单和方便学习，也采用了相同的命名，其实也可以不是 res,req[^{1}]。
 
 如何设置监听端口：`` app.listen(PORT, () => console.log(`Server is running at port ${PORT}`)) ``
 

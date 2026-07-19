@@ -8,7 +8,7 @@
 
 但是，Node.js 默认支持的是 CommonJS 模块格式。CommonJS 模块加载使用 `require()`。在 CommonJS 模块中，变量和函数的导出使用 `module.exports`。
 
-随着 JS 模块系统的标准化，Node.js 在 [v8.5.0]([[https://github.com/nodejs/node/blob/master/doc/changelogs/CHANGELOG_V8.md#8.5.0]]) 版本中引入了 ES 模块格式。作为一个实验性模块，要想成功在 Node.js 环境下执行 ES 模块需要添加 `--experimental-modules` 标记。
+随着 JS 模块系统的标准化，Node.js 在 [[https://github.com/nodejs/node/blob/master/doc/changelogs/CHANGELOG_V8.md#8.5.0][v8.5.0]] 版本中引入了 ES 模块格式。作为一个实验性模块，要想成功在 Node.js 环境下执行 ES 模块需要添加 `--experimental-modules` 标记。
 
 然而，自从 13.2.0 版本，Node.js 对 ES 模块有稳定的支持。
 
@@ -28,7 +28,7 @@
 
 console.log(add(5, 5)) console.log(subtract(5, 5)) ```
 
-深入学习 CommonJS 模块，见 [这里]([[https://blog.logrocket.com/es-modules-in-node-today/#commonjsmodulesystem]])。
+深入学习 CommonJS 模块，见 [[https://blog.logrocket.com/es-modules-in-node-today/#commonjsmodulesystem][这里]]。
 
 另一方面，JS 库作者可以将文件扩展名从 `.js` 改为 `.mjs` 直接在这个 Node.js 包中启用 ES 模块。
 
@@ -46,9 +46,9 @@ console.log(add(5, 5)) console.log(subtract(5, 5)) ```
 
 ```js { "name": "my-library", "version": "1.0.0", "type": "module", // ... } ```
 
-有了它，该包下的所有 js 文件都被视为 ES 模块文件，不需要 mjs 扩展名。了解更多 ES 模块信息，见 [这里]([[https://blog.logrocket.com/how-to-use-ecmascript-modules-with-node-js/]])。
+有了它，该包下的所有 js 文件都被视为 ES 模块文件，不需要 mjs 扩展名。了解更多 ES 模块信息，见 [[https://blog.logrocket.com/how-to-use-ecmascript-modules-with-node-js/][这里]]。
 
-如果你想让这两种格式互相转换的话，可以 [通过 Babel 做到]([[https://www.youtube.com/watch?v=7vGk8vFDGfA]])。像 Vue 和 React 这样的框架是支持 ES 模块的，因为它们 [使用 Babel 编译代码]([[https://blog.logrocket.com/babel-vs-typescript/]])。
+如果你想让这两种格式互相转换的话，可以 [[https://www.youtube.com/watch?v=7vGk8vFDGfA][通过 Babel 做到]]。像 Vue 和 React 这样的框架是支持 ES 模块的，因为它们 [[https://blog.logrocket.com/babel-vs-typescript/][使用 Babel 编译代码]]。
 
 ​## 在 Node.js 中使用 ES 模块 和 CommonJS 模块的好处和坏处
 

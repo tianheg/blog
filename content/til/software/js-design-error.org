@@ -2,7 +2,7 @@
 #+HEADER: Web
 --- title: "JS 的设计失误" ---
 
-[JavaScript 的设计失误 - Offline]([[https://haoqun.blog/zh/2016/javascript-design-regrets-cf9619ba]])
+[[https://haoqun.blog/zh/2016/javascript-design-regrets-cf9619ba][JavaScript 的设计失误 - Offline]]
 
 1. typeof null === 'object'
 2. typeof NaN === 'number' [[https://github.com/lewisjellis/nantalk]]
@@ -26,8 +26,8 @@
 
 具体可以参考这两篇文章：
 
-* [Array iteration and holes in JavaScript]([[http://www.2ality.com/2013/07/array-iteration-holes.html]])
-* [ECMAScript 6: holes in Arrays]([[http://www.2ality.com/2015/09/holes-arrays-es6.html]])
+* [[http://www.2ality.com/2013/07/array-iteration-holes.html][Array iteration and holes in JavaScript]]
+* [[http://www.2ality.com/2015/09/holes-arrays-es6.html][ECMAScript 6: holes in Arrays]]
 1. Array-like objects
 
 JavaScript 中，类数组但不是数组的对象不少，这类对象往往有 length 属性、可以被遍历，但缺乏一些数组原型上的方法，用起来非常不便。
@@ -84,12 +84,12 @@ eval 的问题不在于可以动态执行代码，这种能力无论如何也不
 
 但是，window.eval() 这样的调用 不算是 直接调用，因为这个调用的 base 是全局对象而不是一个 "environment record"。
 
-间接调用 eval 最大的用处（可能也是唯一的实际用处）是在任意地方获取到全局对象（然而 Function('return this')() 也能做到这一点），如果 Jordan Harband 的 [`System.global` 提案]([[https://github.com/tc39/proposal-global]])（发布于 ES2020）能进入到标准的话，这最后一点用处也用不到了......
+间接调用 eval 最大的用处（可能也是唯一的实际用处）是在任意地方获取到全局对象（然而 Function('return this')() 也能做到这一点），如果 Jordan Harband 的 [[https://github.com/tc39/proposal-global][`System.global` 提案]]（发布于 ES2020）能进入到标准的话，这最后一点用处也用不到了......
 
 1. 非严格模式下，赋值给未声明的变量会导致产生一个新的全局变量
 2. Value Properties of the Global Object
 
-我们平时用到的 `NaN`, `Infinity`, `undefined` 并不是作为 primitive value 被使用（而 `null` 是 primitive value），[而是定义在全局对象上的属性名]([[https://es5.github.io/#x15.1.1]])。
+我们平时用到的 `NaN`, `Infinity`, `undefined` 并不是作为 primitive value 被使用（而 `null` 是 primitive value），[[https://es5.github.io/#x15.1.1][而是定义在全局对象上的属性名]]。
 
 在 ES5 之前，这几个属性甚至可以被覆盖，直到 ES5 之后它们才被改成 non-configurable、non-writable。
 
@@ -105,7 +105,7 @@ JavaScript 中，正则对象上的函数是有状态的，这使得这些方法
 4. Date Object
 5. prototype
 
-作为对象属性的 `prototype`，其实根本就不是我们讨论原型继承机制时说的「原型」概念。 [`fallbackOfObjectsCreatedWithNew` would be a better name.]([[https://johnkpaul.github.io/presentations/empirejs/javascript-bad-parts/#/11]])
+作为对象属性的 `prototype`，其实根本就不是我们讨论原型继承机制时说的「原型」概念。 [[https://johnkpaul.github.io/presentations/empirejs/javascript-bad-parts/#/11][`fallbackOfObjectsCreatedWithNew` would be a better name.]]
 
 而对象真正意义上的原型，在 ES5 引入 Object.getPrototypeOf() 方法之前，我们并没有常规的方法可以获取。
 

@@ -2,7 +2,7 @@
 #+HEADER: Web
 [[https://webglfundamentals.org/]]
 
-WebGL 是 Web Graphics Libray 的缩写。WebGL只是一个栅格化（rasterization）引擎，算不上一个3D API。它只能画点、线和三角形。WebGL 运行在 GPU（[Graphics processing unit]([[https://en.wikipedia.org/wiki/Graphics_processing_unit]])）上。
+WebGL 是 Web Graphics Libray 的缩写。WebGL只是一个栅格化（rasterization）引擎，算不上一个3D API。它只能画点、线和三角形。WebGL 运行在 GPU（[[https://en.wikipedia.org/wiki/Graphics_processing_unit][Graphics processing unit]]）上。
 
 Code in the form of pairs of functions. 2 functions: a vertex shader and a fragment shader, written in very strictly typed C/C++ like language called GLSL. Paired together they are called a program.
 
@@ -11,19 +11,19 @@ Role:
 - vertex shader(顶点着色器) -- compute vertex position. 基于这些位置，函数输出 WebGL 可以栅格化各种基元，包括点、线或三角形。When rasterizing these primitives it calls a second user supplied function called a fragment shader.
 - fragment shader(片段着色器) -- compute a color for each pixel of the primitive currently being drawn.
 
-什么是 Shader？（[Wikipedia]([[https://en.wikipedia.org/wiki/Shader]])）
+什么是 Shader？（[[https://en.wikipedia.org/wiki/Shader][Wikipedia]]）
 
 > In computer graphics, a shader is a computer program that calculates the appropriate levels of light, darkness, and color during the rendering of a 3D scene - a process known as shading.
 
-什么是 vertex shader？（[Wikipedia]([[https://en.wikipedia.org/wiki/Shader#Vertex_shaders]])）
+什么是 vertex shader？（[[https://en.wikipedia.org/wiki/Shader#Vertex_shaders][Wikipedia]]）
 
 > Vertex shaders are the most established and common kind of 3D shader and are run once for each vertex given to the graphics processor. The purpose is to transform each vertex's 3D position in virtual space to the 2D coordinate at which it appears on the screen (as well as a depth value for the Z-buffer).
 
-什么是 fragment shader？（[Wikipedia]([[https://en.wikipedia.org/wiki/Shader#Pixel_shaders]])）
+什么是 fragment shader？（[[https://en.wikipedia.org/wiki/Shader#Pixel_shaders][Wikipedia]]）
 
 > Pixel shaders, also known as fragment shaders, compute color and other attributes of each "fragment": a unit of rendering work affecting at most a single output pixel.
 
-几乎所有 WebGL API 都是关于配置状态的，这是为这对函数的运行做准备。WebGL is really just an API to run shaders. The only functions that actually write pixels are `gl.clear`, `gl.drawArrays` and `gl.drawElements`. All other API calls just setup internal state for when those 3 functions are called.（[WebGL State diagram]([[https://webglfundamentals.org/webgl/lessons/resources/webgl-state-diagram.html]])）
+几乎所有 WebGL API 都是关于配置状态的，这是为这对函数的运行做准备。WebGL is really just an API to run shaders. The only functions that actually write pixels are `gl.clear`, `gl.drawArrays` and `gl.drawElements`. All other API calls just setup internal state for when those 3 functions are called.（[[https://webglfundamentals.org/webgl/lessons/resources/webgl-state-diagram.html][WebGL State diagram]]）
 
 来自 WebGL State diagram 的一些提示：
 
