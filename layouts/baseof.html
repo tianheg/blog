@@ -119,6 +119,10 @@
       if (btt) {
         var toggle = function(){ btt.classList.toggle('show', window.scrollY > 100); };
         window.addEventListener('scroll', toggle, {passive:true});
+        btt.addEventListener('click', function(e){
+          e.preventDefault();
+          window.scrollTo({top: 0, behavior: 'smooth'});
+        });
       }
     })();
     </script>
