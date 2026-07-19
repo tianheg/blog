@@ -1,44 +1,38 @@
-{{/* TIL section breadcrumb navigation */}}
+{{/* TIL breadcrumb — flat-structure compatible */}}
 <nav aria-label="breadcrumb" class="mb-6">
   <ul class="flex list-none items-center text-sm text-gray-600 dark:text-gray-400">
-    {{/* Home link */}}
     <li class="flex items-center space-x-2">
       <span class="text-gray-500">/</span>
-      <a href="/til/" class="hover:text-gray-900 dark:hover:text-gray-200 transition-colors">
-        TIL
-      </a>
+      <a href="/til/" class="hover:text-gray-900 dark:hover:text-gray-200 transition-colors">TIL</a>
     </li>
 
-    {{/* Category link */}}
-    {{ if .File }}
-      {{ $category := index (split .File.Dir "/") 1 }}
-      {{ if and $category (ne $category "_index.org") }}
-        <li class="flex items-center space-x-2">
-          <span class="text-gray-500">/</span>
-          <a href="/til/{{ $category }}/" class="hover:text-gray-900 dark:hover:text-gray-200 transition-colors">
-            {{ $category | title }}
+    {{ $path := strings.TrimPrefix "/til/" .RelPermalink }}
+    {{ $segments := split $path "/" }}
+    {{ $catSlug := index $segments 0 }}
+    {{ $hasMore := gt (len $segments) 1 }}
+
+    {{ if and $catSlug (gt (len $catSlug) 0) }}
+      {{ $catPage := $.Site.GetPage (printf "/til/%s" $catSlug) }}
+      <li class="flex items-center space-x-2">
+        <span class="text-gray-500">/</span>
+        {{ if $hasMore }}
+          <a href="/til/{{ $catSlug }}/" class="hover:text-gray-900 dark:hover:text-gray-200 transition-colors">
+            {{ with $catPage }}{{ .Title }}{{ else }}{{ $catSlug | title }}{{ end }}
           </a>
-        </li>
-      {{ end }}
+        {{ else }}
+          <span class="text-gray-900 dark:text-gray-100 font-medium">
+            {{ with $catPage }}{{ .Title }}{{ else }}{{ $catSlug | title }}{{ end }}
+          </span>
+        {{ end }}
+      </li>
     {{ end }}
 
-    {{/* Current page title */}}
-    <li class="flex items-center space-x-2">
-      <span class="text-gray-500">/</span>
-      <span class="text-gray-900 dark:text-gray-100 font-medium">
-        {{- if .Title -}}
-          {{- .Title -}}
-        {{- else if .RawContent -}}
-          {{- $firstLine := index (split .RawContent "\n") 0 -}}
-          {{- if (hasPrefix $firstLine "* ") -}}
-            {{- trim (strings.TrimPrefix "* " $firstLine) " " -}}
-          {{- else -}}
-            {{- .Params.title -}}
-          {{- end -}}
-        {{- else -}}
-          {{- .Params.title -}}
-        {{- end -}}
-      </span>
-    </li>
+    {{ if $hasMore }}
+      {{ $pageTitle := partial "functions/get-title" (dict "page" .) }}
+      <li class="flex items-center space-x-2">
+        <span class="text-gray-500">/</span>
+        <span class="text-gray-900 dark:text-gray-100 font-medium">{{ $pageTitle }}</span>
+      </li>
+    {{ end }}
   </ul>
 </nav>
