@@ -1,0 +1,79 @@
+/* ── Org-mode table: Desktop ── */
+.prose :where(table) {
+  display: block;
+  max-width: 100%;
+  overflow-x: auto;
+  -webkit-overflow-scrolling: touch;
+  border-collapse: collapse;
+}
+
+.prose :where(thead th) {
+  background-color: var(--color-base-200);
+  font-weight: 600;
+  text-align: left;
+  padding: 0.625rem 0.75rem;
+  border-bottom: 2px solid var(--color-base-300);
+  white-space: nowrap;
+}
+
+.prose :where(tbody td) {
+  padding: 0.5rem 0.75rem;
+  border-bottom: 1px solid var(--color-base-200);
+  vertical-align: top;
+}
+
+.prose :where(tbody tr:nth-child(odd)) {
+  background-color: var(--color-base-200);
+}
+
+.prose :where(tbody tr:hover) {
+  background-color: var(--color-base-300);
+}
+
+/* ── Mobile: Card layout ── */
+@media (max-width: 640px) {
+  .prose :where(table) {
+    display: block;
+    overflow: visible;
+  }
+
+  .prose :where(thead) {
+    display: none;
+  }
+
+  .prose :where(tbody tr) {
+    display: block;
+    padding: 0.625rem 0.75rem;
+    margin-bottom: 0.5rem;
+    border: 1px solid var(--color-base-300);
+    border-radius: var(--border-radius-sm);
+    background-color: var(--color-base-100) !important;
+  }
+
+  .prose :where(tbody tr:hover) {
+    background-color: var(--color-base-300) !important;
+  }
+
+  .prose :where(tbody td) {
+    display: block;
+    padding: 0.125rem 0;
+    border: none;
+    vertical-align: baseline;
+  }
+
+  .prose :where(tbody td:first-child) {
+    padding-left: 0;
+    font-weight: 500;
+  }
+
+  .prose :where(tbody td + td) {
+    color: var(--color-base-content);
+    opacity: 0.75;
+    font-size: 0.8125rem;
+  }
+
+  .prose :where(tbody td + td)::before {
+    content: "· ";
+    opacity: 0.4;
+  }
+}
