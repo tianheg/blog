@@ -27,10 +27,6 @@ main() {
   # https://github.com/gohugoio/hugo/issues/9810
   git config core.quotepath false
 
-  # Fetch external data before building
-  echo "Fetching external data..."
-  bash scripts/fetch-watch-data.sh
-
   # Build the site.
   npm run all
 
