@@ -140,10 +140,17 @@ export default {
 
     // Semantic search API
     if (url.pathname === '/api/semantic/search' && request.method === 'POST') {
-      const resp = await handleSearch(request, env);
-      const corsResp = new Response(resp.body, resp);
-      corsResp.headers.set('Access-Control-Allow-Origin', '*');
-      return corsResp;
+      try {
+        const resp = await handleSearch(request, env);
+        const corsResp = new Response(resp.body, resp);
+        corsResp.headers.set('Access-Control-Allow-Origin', '*');
+        return corsResp;
+      } catch (err) {
+        return new Response(err.stack || err.message || String(err), {
+          status: 500,
+          headers: { 'Content-Type': 'text/plain;charset=utf-8' },
+        });
+      }
     }
 
     // Fall through to static assets
