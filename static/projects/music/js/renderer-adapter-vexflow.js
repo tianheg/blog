@@ -8,7 +8,7 @@
  * 依赖: RendererAdapter (定义在 renderer-adapter.js 中)
  */
 
-const VEXFLOW_CDN = 'https://cdn.jsdelivr.net/npm/vexflow@5/dist/vexflow-min.js';
+const VEXFLOW_CDN = 'https://cdn.jsdelivr.net/npm/vexflow@5/build/cjs/vexflow.js';
 
 // 各调式的音名映射 (movable do → actual pitch name)
 const SCALE_MAP = {
