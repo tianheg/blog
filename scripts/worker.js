@@ -15,25 +15,40 @@ const EMBEDDING_DIM = 1024;
 const KV_KEY = 'embeddings:v1';
 const MAX_RESULTS = 10;
 const BATCH_SIZE = 16;
+const MANIFEST_PATH = '/pagefind-semantic/manifest.json';
 
 // In-memory cache for page data + embeddings (lives as long as the isolate)
 let pageCache = null;
 
+async function loadManifest(env) {
+  const resp = await env.ASSETS.fetch('https://fake' + MANIFEST_PATH);
+  if (!resp.ok) return null;
+  return resp.json();
+}
+
 async function loadPageData(env) {
   if (pageCache) return pageCache;
+
+  // Check current asset version via manifest
+  const manifest = await loadManifest(env);
 
   // Try KV first
   const cached = await env.EMBEDDINGS_KV.get(KV_KEY, { type: 'text' });
   if (cached) {
     const parsed = JSON.parse(cached);
-    const buf = Uint8Array.from(atob(parsed.data), c => c.charCodeAt(0)).buffer;
-    const embeddings = new Float32Array(buf);
-    pageCache = {
-      pages: parsed.pages,
-      embeddings,
-      dim: parsed.dim,
-    };
-    return pageCache;
+    // Check if manifest count matches — if not, KV is stale
+    if (!manifest || parsed.count === manifest.count) {
+      const buf = Uint8Array.from(atob(parsed.data), c => c.charCodeAt(0)).buffer;
+      const embeddings = new Float32Array(buf);
+      pageCache = {
+        pages: parsed.pages,
+        embeddings,
+        dim: parsed.dim,
+      };
+      return pageCache;
+    }
+    // Stale cache — clear and regenerate
+    await env.EMBEDDINGS_KV.delete(KV_KEY);
   }
 
   // Load from static assets
@@ -69,6 +84,7 @@ async function loadPageData(env) {
   await env.EMBEDDINGS_KV.put(KV_KEY, JSON.stringify({
     v: 1,
     dim: EMBEDDING_DIM,
+    count: pages.length,
     pages,
     data: b64Data,
   }));

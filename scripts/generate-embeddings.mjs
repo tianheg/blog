@@ -118,6 +118,14 @@ function main() {
   console.log(`Written to ${OUT_DIR}/`);
   console.log(`  pages.json: ${(Buffer.byteLength(JSON.stringify(pagesMeta), 'utf-8') / 1024).toFixed(1)} KB`);
   console.log(`  pages-content.json: ${contentSize} MB`);
+
+  // Generate manifest for KV cache invalidation
+  const manifest = {
+    count: pages.length,
+    updated: new Date().toISOString(),
+  };
+  writeFileSync(join(OUT_DIR, 'manifest.json'), JSON.stringify(manifest));
+  console.log(`  manifest.json: count=${manifest.count}, updated=${manifest.updated}`);
 }
 
 main();

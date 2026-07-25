@@ -133,18 +133,21 @@
 </div>
 {{ end }}
 
-{{/* Recent additions (last 30 days) — uses Lastmod (file mtime) when Date is unavailable */}}
+{{/* Recent additions (last 30 days) — uses Lastmod when Date is unavailable */}}
 {{ $cutoff := now.AddDate 0 0 -30 }}
-{{ $recent := where $tilPages "Date" "ge" $cutoff }}
-{{/* Fallback: if no dated pages in 30 days, use Lastmod */}}
-{{ if not $recent }}
-  {{ $recent = where $tilPages "Lastmod" "ge" $cutoff }}
+{{ $recent := slice }}
+{{ range $tilPages }}
+  {{ $d := .Date }}
+  {{ if $d.IsZero }}{{ $d = .Lastmod }}{{ end }}
+  {{ if and (not $d.IsZero) (ge $d $cutoff) }}
+    {{ $recent = $recent | append . }}
+  {{ end }}
 {{ end }}
 {{ if $recent }}
 <div class="mb-8">
   <h3 class="text-xs font-medium text-gray-400 dark:text-gray-500 uppercase tracking-wider mb-3">最近新增（30天）</h3>
   <div class="space-y-1">
-    {{ range $recent.ByDate.Reverse }}
+    {{ range sort $recent "Date" "desc" }}
     <a href="{{ .RelPermalink }}"
        class="group flex items-center justify-between py-1 px-2 -mx-2 rounded-md transition-colors hover:bg-gray-50 dark:hover:bg-gray-800/40">
       <span class="text-xs text-gray-600 dark:text-gray-400 group-hover:text-emerald-600 dark:group-hover:text-emerald-400 transition-colors">
