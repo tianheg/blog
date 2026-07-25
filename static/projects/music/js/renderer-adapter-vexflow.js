@@ -8,7 +8,7 @@
  * 依赖: RendererAdapter (定义在 renderer-adapter.js 中)
  */
 
-const VEXFLOW_CDN = 'https://cdn.jsdelivr.net/npm/vexflow@5/build/cjs/vexflow.js';
+const VEXFLOW_CDN = 'https://cdn.jsdelivr.net/npm/vexflow@4.2.5/releases/vexflow-min.js';
 
 // 各调式的音名映射 (movable do → actual pitch name)
 const SCALE_MAP = {
@@ -27,7 +27,7 @@ const SCALE_MAP = {
 };
 
 function loadVexFlow(callback) {
-  if (typeof VF !== 'undefined' || typeof VexFlow !== 'undefined') {
+  if (typeof Vex !== 'undefined' && Vex.Flow) {
     callback();
     return;
   }
@@ -61,7 +61,7 @@ RendererAdapter.register('vexflow', {
 });
 
 function renderVexFlow(container, score) {
-  const VF = typeof VexFlow !== 'undefined' ? VexFlow : window.VF;
+  const VF = Vex.Flow;
   if (!VF) {
     container.textContent = '五线谱引擎未加载';
     return container;
