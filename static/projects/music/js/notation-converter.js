@@ -5,27 +5,31 @@
  */
 
 function buildScore(parsed) {
-  if (!parsed || !parsed.notation || !parsed.notation.length) {
+  const scoreData = parseScoreData(parsed);
+  if (!scoreData) {
     const emptyEl = document.createElement('div');
     emptyEl.className = 'jp-empty';
     emptyEl.textContent = '暂无乐谱';
     return emptyEl;
   }
 
+  const container = document.createElement('div');
+  container.className = 'jp-score';
+  return RendererAdapter.render(container, scoreData);
+}
+
+// 只解析不渲染，返回结构化 scoreData（供音频播放等场景使用）
+function parseScoreData(parsed) {
+  if (!parsed || !parsed.notation || !parsed.notation.length) return null;
   const meta = parsed.meta;
   const timeParts = (meta.time || '4/4').split('/');
-
-  const scoreData = {
+  return {
     key: meta.key || 'C',
     time: parseInt(timeParts[0]) || 4,
     beat: parseInt(timeParts[1]) || 4,
     tempo: parseInt(meta.tempo) || 100,
     staves: buildStaves(parsed.notation)
   };
-
-  const container = document.createElement('div');
-  container.className = 'jp-score';
-  return RendererAdapter.render(container, scoreData);
 }
 
 // 构建通用谱行结构

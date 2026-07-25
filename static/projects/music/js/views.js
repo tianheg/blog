@@ -139,7 +139,7 @@ function buildScoreList(scores) {
   return list;
 }
 
-// DSL 渲染 + 模式切换
+// DSL 渲染 + 模式切换 + 播放
 function buildScoreWithMode(parsed) {
   const section = document.createElement('div');
 
@@ -148,10 +148,13 @@ function buildScoreWithMode(parsed) {
   modeBar.innerHTML = `
     <button class="mode-btn active" data-mode="simple-notation">简谱</button>
     <button class="mode-btn" data-mode="vexflow">五线谱</button>
+    <button class="play-btn" id="play-btn">▶ 播放</button>
   `;
 
   const container = document.createElement('div');
   container.className = 'score-container';
+
+  const scoreData = parseScoreData(parsed);
 
   function renderMode() {
     container.innerHTML = '';
@@ -167,6 +170,23 @@ function buildScoreWithMode(parsed) {
       RendererAdapter.use(btn.dataset.mode);
       renderMode();
     });
+  });
+
+  // 播放按钮
+  const playBtn = modeBar.querySelector('#play-btn');
+  playBtn.addEventListener('click', () => {
+    if (playBtn.textContent === '⏹ 停止') {
+      AudioPlayer.stop();
+      playBtn.textContent = '▶ 播放';
+      return;
+    }
+    AudioPlayer.play(scoreData);
+    playBtn.textContent = '⏹ 停止';
+    // 播放结束后自动恢复按钮文字
+    const duration = scoreData.staves.reduce((t, s) =>
+      t + s.measures.reduce((m, me) =>
+        m + me.notes.reduce((n, no) => n + (no.duration || 0), 0), 0), 0) * (60000 / scoreData.tempo);
+    setTimeout(() => { playBtn.textContent = '▶ 播放'; }, duration + 500);
   });
 
   section.appendChild(modeBar);
