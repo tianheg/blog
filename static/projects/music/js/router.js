@@ -4,8 +4,7 @@ const state = {
   currentView: 'home',
   searchQuery: '',
   currentPage: 0,
-  keyboardHandler: null,
-  _ignoreNextHash: false
+  keyboardHandler: null
 };
 
 function navigate(view, params = {}) {
@@ -41,33 +40,39 @@ function navigate(view, params = {}) {
   content.scrollIntoView({ behavior: 'smooth', block: 'start' });
   updateTitle(view, params);
 
-  // 更新 URL hash（抑制 hashchange 事件回环）
-  const hash = view === 'home' ? '#/' : view === 'score' ? `#/score/${params.scoreId}` : `#/${view}/${params.filter || ''}`;
-  state._ignoreNextHash = true;
-  location.hash = hash;
+  // 更新 URL（pushState 保持无 # 历史记录）
+  const url = view === 'home' ? basePath() : view === 'score' ? `${basePath()}${params.scoreId}` : `${basePath()}${view}/${encodeURIComponent(params.filter || '')}`;
+  history.pushState({ view, params }, '', url);
 }
 
-function handleHashChange() {
-  if (state._ignoreNextHash) {
-    state._ignoreNextHash = false;
-    return;
-  }
-  const hash = location.hash || '#/';
-  const parts = hash.replace(/^#\//, '').split('/');
+function basePath() {
+  // 取 /projects/music/ 作为基路径
+  const p = location.pathname;
+  return p.endsWith('/') ? p : p.substring(0, p.lastIndexOf('/') + 1);
+}
 
-  if (!parts[0]) {
+function handlePopState(e) {
+  const path = location.pathname.replace(basePath(), '');
+  resolvePath(path);
+}
+
+function resolvePath(path) {
+  if (!path || path === '') {
     navigate('home');
-  } else if (parts[0] === 'score' && parts[1]) {
-    navigate('score', { scoreId: parts[1] });
-  } else if (parts[0] === 'search') {
-    state.searchQuery = decodeURIComponent(parts[1] || '');
-    navigate('search');
-  } else if (parts[0] === 'period' && parts[1]) {
-    navigate('period', { filter: decodeURIComponent(parts[1]) });
-  } else if (parts[0] === 'difficulty' && parts[1]) {
-    navigate('difficulty', { filter: decodeURIComponent(parts[1]) });
+  } else if (/^\d+$/.test(path)) {
+    navigate('score', { scoreId: path });
   } else {
-    navigate('home');
+    const parts = path.split('/');
+    if (parts[0] === 'search') {
+      state.searchQuery = decodeURIComponent(parts[1] || '');
+      navigate('search');
+    } else if (parts[0] === 'period' && parts[1]) {
+      navigate('period', { filter: decodeURIComponent(parts[1]) });
+    } else if (parts[0] === 'difficulty' && parts[1]) {
+      navigate('difficulty', { filter: decodeURIComponent(parts[1]) });
+    } else {
+      navigate('home');
+    }
   }
 }
 

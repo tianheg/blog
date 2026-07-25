@@ -43,14 +43,14 @@ function renderShell(app) {
 }
 
 // 启动
-window.addEventListener('hashchange', handleHashChange);
+window.addEventListener('popstate', handlePopState);
 
 if (document.readyState === 'loading') {
   document.addEventListener('DOMContentLoaded', () => {
     init();
-    handleHashChange();
+    resolvePath(location.pathname.replace(basePath(), ''));
   });
 } else {
   init();
-  handleHashChange();
+  resolvePath(location.pathname.replace(basePath(), ''));
 }
