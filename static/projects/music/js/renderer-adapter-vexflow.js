@@ -1,6 +1,6 @@
 /**
  * renderer-adapter-vexflow.js
- * 五线谱渲染后端 — VexFlow
+ * 五线谱渲染后端 — VexFlow v4
  *
  * 懒加载 VexFlow (CDN)，首次 use/register 时拉取。
  * 注册后端名: 'vexflow'
@@ -68,77 +68,74 @@ function renderVexFlow(container, score) {
   }
 
   try {
-    const width = container.clientWidth || 800;
-    const renderer = new VF.Renderer(container, VF.Renderer.Backends.SVG);
-    renderer.resize(width, 200);
+    const width = container.parentElement?.clientWidth || container.clientWidth || 800;
+    const scale = SCALE_MAP[score.key] || SCALE_MAP['C'];
+    const baseOctave = 4;
+    const lineHeight = 100;
+    const staveCount = score.staves.length;
+    const totalHeight = staveCount * lineHeight + 40;
 
+    const renderer = new VF.Renderer(container, VF.Renderer.Backends.SVG);
+    renderer.resize(width, totalHeight);
     const ctx = renderer.getContext();
     ctx.setFont('Arial', 10);
 
-    const scale = SCALE_MAP[score.key] || SCALE_MAP['C'];
-    const baseOctave = 4;
-
-    // 时间签名
     const timeSig = `${score.time}/${score.beat}`;
 
-    let yOffset = 40;
     score.staves.forEach((stave, si) => {
-      const staveEl = new VF.Stave(10, yOffset, width - 20);
+      const y = si * lineHeight + 30;
+      const staveEl = new VF.Stave(10, y, width - 20);
       staveEl.addClef('treble');
-
-      if (si === 0) {
-        staveEl.addTimeSignature(timeSig);
-      }
-
+      if (si === 0) staveEl.addTimeSignature(timeSig);
       staveEl.setContext(ctx).draw();
 
-      // 构建 VexFlow 音符
-      const vexNotes = [];
-
-      stave.measures.forEach(measure => {
+      // 构建每个小节的音符
+      const allVexNotes = [];
+      stave.measures.forEach((measure, mi) => {
+        const measureNotes = [];
         measure.notes.forEach(n => {
           if (n.type === 'note') {
             const pitchName = scale[(n.pitch - 1) % 7];
             const octave = baseOctave + n.octave;
             const durStr = durationToVex(n.duration, n.dotted);
 
-            // 创建 VexFlow note
             const vn = new VF.StaveNote({
               keys: [`${pitchName}/${octave}`],
               duration: durStr,
               clef: 'treble'
             });
 
-            // 临时记号（升降号）
             if (pitchName.length > 1) {
-              // e.g., "F#" or "Bb" — VexFlow auto-accidentals
-              vn.addAccidental(0, new VF.Accidental(pitchName.includes('#') ? '#' : 'b'));
+              vn.addAccidental(0, new VF.Accidental(
+                pitchName.includes('#') ? '#' : 'b'
+              ));
             }
-
-            if (n.dotted) {
-              vn.addDot(0);
-            }
-
-            vexNotes.push(vn);
+            if (n.dotted) vn.addDot(0);
+            measureNotes.push(vn);
           } else if (n.type === 'rest') {
             const durStr = durationToVex(n.duration, false);
-            vexNotes.push(
+            measureNotes.push(
               new VF.StaveNote({ keys: ['B/4'], duration: durStr, type: 'r' })
             );
           }
         });
-      });
 
-      // 格式化和渲染
-      if (vexNotes.length > 0) {
-        try {
-          VF.Formatter.FormatAndDraw(ctx, staveEl, vexNotes);
-        } catch (e) {
-          // 某些音符组合可能格式不兼容，直接跳过格式化
+        // 每小节音符放入独立 Voice，自动处理小节线
+        if (measureNotes.length > 0) {
+          const voice = new VF.Voice({
+            num_beats: score.time,
+            beat_value: score.beat
+          });
+          voice.addTickables(measureNotes);
+
+          try {
+            new VF.Formatter().joinVoices([voice]).format([voice], width / stave.measures.length - 20);
+            voice.draw(ctx, staveEl);
+          } catch (e) {
+            // 跳过格式不兼容的声部
+          }
         }
-      }
-
-      yOffset += 120;
+      });
     });
 
     return container;
@@ -155,7 +152,5 @@ function durationToVex(beats, dotted) {
   else if (beats >= 1) base = 'q';
   else if (beats >= 0.5) base = '8';
   else base = '16';
-
-  if (dotted) base += 'd';
-  return base;
+  return dotted ? base + 'd' : base;
 }
