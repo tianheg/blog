@@ -4,6 +4,7 @@
 let contentEl;
 
 function init() {
+  setRoot(location.pathname.replace(/\/?$/, '/'));
   const app = document.getElementById('app');
   renderShell(app);
   contentEl = document.getElementById('content');
@@ -48,9 +49,9 @@ window.addEventListener('popstate', handlePopState);
 if (document.readyState === 'loading') {
   document.addEventListener('DOMContentLoaded', () => {
     init();
-    resolvePath(location.pathname.replace(basePath(), ''));
+    resolvePath(location.pathname.replace(ROOT, ''));
   });
 } else {
   init();
-  resolvePath(location.pathname.replace(basePath(), ''));
+  resolvePath(location.pathname.replace(ROOT, ''));
 }
