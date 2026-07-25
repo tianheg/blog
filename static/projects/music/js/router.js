@@ -1,5 +1,12 @@
 // 律谱 — 路由与状态管理（极简版）
 
+// 应用根路径（初始化时确定，固定不变）
+let ROOT = '/projects/music/';
+
+function setRoot(path) {
+  ROOT = path.endsWith('/') ? path : path + '/';
+}
+
 const state = {
   currentView: 'home',
   searchQuery: '',
@@ -40,19 +47,13 @@ function navigate(view, params = {}) {
   content.scrollIntoView({ behavior: 'smooth', block: 'start' });
   updateTitle(view, params);
 
-  // 更新 URL（pushState 保持无 # 历史记录）
-  const url = view === 'home' ? basePath() : view === 'score' ? `${basePath()}${params.scoreId}` : `${basePath()}${view}/${encodeURIComponent(params.filter || '')}`;
+  // 更新 URL（pushState 保持无 # 历史记录，使用固定 ROOT）
+  const url = view === 'home' ? ROOT : view === 'score' ? `${ROOT}${params.scoreId}` : `${ROOT}${view}/${encodeURIComponent(params.filter || '')}`;
   history.pushState({ view, params }, '', url);
 }
 
-function basePath() {
-  // 取 /projects/music/ 作为基路径
-  const p = location.pathname;
-  return p.endsWith('/') ? p : p.substring(0, p.lastIndexOf('/') + 1);
-}
-
 function handlePopState(e) {
-  const path = location.pathname.replace(basePath(), '');
+  const path = location.pathname.replace(ROOT, '');
   resolvePath(path);
 }
 
