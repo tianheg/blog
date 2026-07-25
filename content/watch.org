@@ -83,11 +83,18 @@ function filterWatch(type) {
   var tbl = document.querySelector('#watch-content table');
   if (!tbl) return;
   var rows = tbl.querySelectorAll('tbody tr, tr:not(:first-child)');
+  var hideType = type !== 'all';
   rows.forEach(function(row) {
     var c = row.querySelector('td:first-child, th:first-child');
     if (!c) return;
     var t = c.textContent.trim();
     row.style.display = (type === 'all' || t === type) ? '' : 'none';
+  });
+  // Hide/show Type column
+  var allRows = tbl.querySelectorAll('tr');
+  allRows.forEach(function(row) {
+    var first = row.querySelector('td:first-child, th:first-child');
+    if (first) first.style.display = hideType ? 'none' : '';
   });
 }
 </script>
