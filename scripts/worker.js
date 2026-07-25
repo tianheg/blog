@@ -47,11 +47,9 @@ async function loadPageData(env) {
   for (let i = 0; i < texts.length; i += BATCH_SIZE) {
     const batch = texts.slice(i, i + BATCH_SIZE);
     const aiResp = await env.AI.run(EMBEDDING_MODEL, {
-      query: '',
-      contexts: batch,
-      truncate_inputs: true,
+      text: batch,
     });
-    // BGE-M3 returns dense embeddings array per context
+    // BGE-M3 returns { data: [...], shape: [...] }
     const batchEmbeddings = aiResp.data || aiResp;
     for (const emb of batchEmbeddings) {
       allEmbeddings.push(...emb);
@@ -101,9 +99,7 @@ async function handleSearch(request, env) {
 
   // Embed the query
   const aiResp = await env.AI.run(EMBEDDING_MODEL, {
-    query,
-    contexts: [query],
-    truncate_inputs: true,
+    text: [query],
   });
   const queryEmbedding = new Float32Array(aiResp.data[0]);
 
