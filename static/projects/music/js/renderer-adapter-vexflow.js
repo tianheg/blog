@@ -89,7 +89,7 @@ function renderVexFlow(container, score) {
       if (si === 0) staveEl.addTimeSignature(timeSig);
       staveEl.setContext(ctx).draw();
 
-      // 构建每个小节的音符
+      // 构建每个小节的音符（SOFT mode 不校验拍数）
       const allVexNotes = [];
       stave.measures.forEach((measure, mi) => {
         const measureNotes = [];
@@ -120,20 +120,26 @@ function renderVexFlow(container, score) {
           }
         });
 
-        // 每小节音符放入独立 Voice，自动处理小节线
         if (measureNotes.length > 0) {
+          // 每小节独立 Voice，SOFT mode 允许任意时值
           const voice = new VF.Voice({
             num_beats: score.time,
             beat_value: score.beat
           });
+          voice.setMode(VF.Voice.Mode.SOFT);
           voice.addTickables(measureNotes);
+          allVexNotes.push({ voice, index: mi });
+        }
+      });
 
-          try {
-            new VF.Formatter().joinVoices([voice]).format([voice], width / stave.measures.length - 20);
-            voice.draw(ctx, staveEl);
-          } catch (e) {
-            // 跳过格式不兼容的声部
-          }
+      // 渲染每个小节
+      allVexNotes.forEach(({ voice, index }) => {
+        try {
+          const mWidth = (width - 20) / stave.measures.length - 4;
+          new VF.Formatter().joinVoices([voice]).format([voice], mWidth);
+          voice.draw(ctx, staveEl);
+        } catch (e) {
+          // 跳过单个小节渲染错误
         }
       });
     });
