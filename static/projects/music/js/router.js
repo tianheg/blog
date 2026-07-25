@@ -4,7 +4,8 @@ const state = {
   currentView: 'home',
   searchQuery: '',
   currentPage: 0,
-  keyboardHandler: null
+  keyboardHandler: null,
+  _ignoreNextHash: false
 };
 
 function navigate(view, params = {}) {
@@ -14,7 +15,6 @@ function navigate(view, params = {}) {
   const content = document.getElementById('content');
   content.innerHTML = '';
 
-  // 显示/隐藏返回按钮
   const backBtn = document.getElementById('back-btn');
   if (backBtn) {
     backBtn.style.display = view === 'home' ? 'none' : 'flex';
@@ -40,6 +40,35 @@ function navigate(view, params = {}) {
 
   content.scrollIntoView({ behavior: 'smooth', block: 'start' });
   updateTitle(view, params);
+
+  // 更新 URL hash（抑制 hashchange 事件回环）
+  const hash = view === 'home' ? '#/' : view === 'score' ? `#/score/${params.scoreId}` : `#/${view}/${params.filter || ''}`;
+  state._ignoreNextHash = true;
+  location.hash = hash;
+}
+
+function handleHashChange() {
+  if (state._ignoreNextHash) {
+    state._ignoreNextHash = false;
+    return;
+  }
+  const hash = location.hash || '#/';
+  const parts = hash.replace(/^#\//, '').split('/');
+
+  if (!parts[0]) {
+    navigate('home');
+  } else if (parts[0] === 'score' && parts[1]) {
+    navigate('score', { scoreId: parts[1] });
+  } else if (parts[0] === 'search') {
+    state.searchQuery = decodeURIComponent(parts[1] || '');
+    navigate('search');
+  } else if (parts[0] === 'period' && parts[1]) {
+    navigate('period', { filter: decodeURIComponent(parts[1]) });
+  } else if (parts[0] === 'difficulty' && parts[1]) {
+    navigate('difficulty', { filter: decodeURIComponent(parts[1]) });
+  } else {
+    navigate('home');
+  }
 }
 
 function cleanupKeyboard() {

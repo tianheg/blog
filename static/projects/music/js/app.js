@@ -43,8 +43,14 @@ function renderShell(app) {
 }
 
 // 启动
+window.addEventListener('hashchange', handleHashChange);
+
 if (document.readyState === 'loading') {
-  document.addEventListener('DOMContentLoaded', init);
+  document.addEventListener('DOMContentLoaded', () => {
+    init();
+    handleHashChange();
+  });
 } else {
   init();
+  handleHashChange();
 }
