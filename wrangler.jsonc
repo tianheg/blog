@@ -1,11 +1,22 @@
 {
   "name": "blog",
   "compatibility_date": "2025-06-08",
+  "main": "./src/worker.js",
   "build": {
     "command": "./scripts/build.sh"
   },
   "assets": {
     "directory": "./public",
-    "not_found_handling": "404-page"
-  }
+    "not_found_handling": "404-page",
+    "binding": "ASSETS"
+  },
+  "ai": {
+    "binding": "AI"
+  },
+  "kv_namespaces": [
+    {
+      "binding": "EMBEDDINGS_KV",
+      "id": "c68eda84f1254da9adaa1c055c9eff27"
+    }
+  ]
 }
