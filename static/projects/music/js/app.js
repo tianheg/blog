@@ -1,5 +1,5 @@
 // 律谱 — 极简入口
-// 加载顺序: data.js → data-service.js → notation-parser.js → simple-notation → renderer-adapter → notation-converter → renderer-adapter-vexflow.js → router.js → views.js → app.js
+// 加载顺序: data.js → data-service.js → notation-parser.js → renderer-adapter → notation-converter → audio-player → renderer-adapter-vexflow → router → views → app
 
 let contentEl;
 
