@@ -27,8 +27,12 @@ main() {
   # https://github.com/gohugoio/hugo/issues/9810
   git config core.quotepath false
 
-  # Build the site.
+  # Build the site + PageFind index
   npm run all
+
+  # Generate semantic search page content (extracts text for Workers AI embedding)
+  echo "Generating semantic search index..."
+  node scripts/generate-embeddings.mjs
 
 }
 
