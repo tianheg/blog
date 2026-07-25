@@ -167,6 +167,16 @@ export default {
 
     // Fall through to static assets
     const asset = await env.ASSETS.fetch(request);
+    // SPA fallback: 如果 /projects/music/* 返回 404，serve index.html
+    if (!asset.ok && url.pathname.startsWith('/projects/music/')) {
+      const spaUrl = new URL('/projects/music/index.html', url);
+      const spaAsset = await env.ASSETS.fetch(spaUrl);
+      if (spaAsset.ok) {
+        const resp = new Response(spaAsset.body, spaAsset);
+        resp.headers.set('Cache-Control', 'no-cache');
+        return resp;
+      }
+    }
     // Add CORS for /pagefind-semantic/ assets (used by client-side JS)
     const resp = new Response(asset.body, asset);
     if (url.pathname.startsWith('/pagefind-semantic/')) {
