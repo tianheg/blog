@@ -53,7 +53,17 @@ const CLEANERS = [
 ];
 
 function clean(text) {
-  for (const [re, sub] of CLEANERS) text = text.replace(re, sub);
+  // Run multiple passes to handle nested Org markup (e.g. */bold italic/*)
+  for (let pass = 0; pass < 3; pass++) {
+    let changed = false;
+    for (const [re, sub] of CLEANERS) {
+      const before = text;
+      text = text.replace(re, sub);
+      if (text !== before) changed = true;
+    }
+    // Early exit if no changes in this pass
+    if (!changed) break;
+  }
   return text;
 }
 
