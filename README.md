@@ -23,8 +23,8 @@
 ```
 blog/
 ├── assets/              # 构建时处理的资源
-│   ├── css/             # Tailwind CSS 入口（`main.css`）
-│   └── ts/              # TypeScript 组件和库
+│   ├── css/             # Tailwind CSS 入口（`main.css`）+ 独立样式（`table.css`）
+│   └── ts/              # TypeScript 组件（`main.ts`, `graph.ts`）
 ├── content/             # 网站内容
 │   ├── posts/           # 博客文章（长文、随笔、年度总结）
 │   ├── til/             # Today I Learned 笔记（知识点、操作步骤）
@@ -43,28 +43,38 @@ blog/
 │   │   ├── science/     # 科学
 │   │   └── history/     # 历史
 │   └── *.org            # 独立页面（about, now, projects 等）
+├── data/                # 构建时生成的数据
+│   └── til-wordcounts.json  # TIL 字数（Intl.Segmenter 分词）
 ├── layouts/             # Hugo 模板
-│   ├── _default/        # 基础模板（list.html, single.html）
-│   ├── _partials/       # 可复用组件
-│   ├── _shortcodes/     # 自定义 Hugo 短代码
-│   ├── posts/           # 文章专用模板
-│   ├── til/             # TIL 专用模板
-│   ├── graph/           # 知识图谱可视化
+│   ├── _default/        # 基础模板（section.json.json）
+│   ├── _partials/       # 可复用组件（head, components）
+│   ├── posts/           # 文章专用模板（single.html）
+│   ├── til/             # TIL 专用模板（baseof, list, single）
+│   ├── footprints/      # 足迹地图（single.html）
+│   ├── important-now/   # 当前重点（single.html）
+│   ├── graph/           # 知识图谱（list.json.json）
+│   ├── section/         # 分类页（graph.html）
 │   ├── baseof.html      # 所有页面基础框架
 │   ├── home.html        # 首页
 │   ├── single.html      # 独立单页（About, Now 等）
-│   └── section.html     # 分类列表页
+│   ├── section.html     # 分类列表页
+│   ├── taxonomy.html    # 标签聚合
+│   ├── term.html        # 单标签详情
+│   └── 404.html         # 404 页面
+├── scripts/             # 构建和工具脚本
+│   ├── build.sh         # CI 构建脚本（Cloudflare Workers）
+│   ├── worker.js        # Cloudflare Worker（静态托管 + 语义搜索 API）
+│   ├── generate-embeddings.mjs  # 语义搜索嵌入生成
+│   └── count-words.mjs  # CJK 准确 TIL 字数统计
 ├── static/              # 静态文件（直接复制到 public/）
 │   ├── images/          # 图片资源
 │   ├── fonts/           # 字体文件
-│   └── projects/        # 项目展示相关文件
-├── scripts/             # 构建和工具脚本
-│   ├── build.sh         # CI 构建脚本（Cloudflare Workers）
-│   ├── fetch-watch-data.sh  # 外部数据抓取
-│   └── count-words.mjs  # CJK 准确 TIL 字数统计
-├── data/                # 构建时生成的数据
-│   └── til-wordcounts.json  # TIL 字数（Intl.Segmenter 分词）
-└── wrangler.jsonc       # Cloudflare Workers 配置
+│   ├── projects/        # 项目展示相关文件
+│   └── pagefind-semantic/  # 语义搜索原始文本数据
+├── hugo.yaml            # Hugo 配置
+├── package.json         # npm 依赖和脚本
+├── wrangler.jsonc       # Cloudflare Workers 配置
+└── AGENTS.md            # AI agent 上下文（symlink → README）
 ```
 
 ## 技术栈

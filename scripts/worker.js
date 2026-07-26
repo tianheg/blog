@@ -17,6 +17,33 @@ const MAX_RESULTS = 10;
 const BATCH_SIZE = 16;
 const MANIFEST_PATH = '/pagefind-semantic/manifest.json';
 
+// Simple in-memory rate limiter (per-worker-isolate, resets on cold start)
+const RATE_LIMIT_WINDOW_MS = 60_000;
+const RATE_LIMIT_MAX = 30; // requests per window per IP
+const rateMap = new Map();
+
+function checkRateLimit(request) {
+  const ip = request.headers.get('cf-connecting-ip') || 'unknown';
+  const now = Date.now();
+  const entry = rateMap.get(ip);
+  if (!entry || now - entry.windowStart > RATE_LIMIT_WINDOW_MS) {
+    rateMap.set(ip, { windowStart: now, count: 1 });
+    return null;
+  }
+  entry.count++;
+  if (entry.count > RATE_LIMIT_MAX) {
+    return new Response(JSON.stringify({ error: 'Too many requests. Try again later.' }), {
+      status: 429,
+      headers: {
+        'Content-Type': 'application/json',
+        'Retry-After': '60',
+        'Access-Control-Allow-Origin': '*',
+      },
+    });
+  }
+  return null;
+}
+
 // In-memory cache for page data + embeddings (lives as long as the isolate)
 let pageCache = null;
 
@@ -36,8 +63,8 @@ async function loadPageData(env) {
   const cached = await env.EMBEDDINGS_KV.get(KV_KEY, { type: 'text' });
   if (cached) {
     const parsed = JSON.parse(cached);
-    // Check if manifest count matches — if not, KV is stale
-    if (!manifest || parsed.count === manifest.count) {
+    // Check if manifest count/updated matches — if not, KV is stale
+    if (!manifest || (parsed.count === manifest.count && parsed.updated === manifest.updated)) {
       const buf = Uint8Array.from(atob(parsed.data), c => c.charCodeAt(0)).buffer;
       const embeddings = new Float32Array(buf);
       pageCache = {
@@ -85,6 +112,7 @@ async function loadPageData(env) {
     v: 1,
     dim: EMBEDDING_DIM,
     count: pages.length,
+    updated: manifest.updated,
     pages,
     data: b64Data,
   }));
@@ -152,6 +180,10 @@ export default {
 
     // Semantic search API
     if (url.pathname === '/api/semantic/search' && request.method === 'POST') {
+      // Rate limit check
+      const rateLimitResp = checkRateLimit(request);
+      if (rateLimitResp) return rateLimitResp;
+
       try {
         const resp = await handleSearch(request, env);
         const corsResp = new Response(resp.body, resp);
