@@ -27,6 +27,59 @@ const OUT_PATH = join(ROOT, 'data', 'til-wordcounts.json');
 
 const segmenter = new Intl.Segmenter('zh-CN', { granularity: 'word' });
 
+// ── Org block stripping (state machine, runs before regex clean) ──────
+
+const BLOCK_BEGIN_RE = /^[ \t]*#\+BEGIN_(SRC|EXAMPLE|QUOTE|VERSE|CENTER|COMMENT|EXPORT|NOTES)/i;
+const BLOCK_END_RE = /^[ \t]*#\+END_/i;
+const DRAWER_BEGIN_RE = /^[ \t]*:(PROPERTIES|LOGBOOK):/;
+const DRAWER_END_RE = /^[ \t]*:END:/;
+const KEEP_BLOCK_TYPES = new Set(['QUOTE']);
+
+function stripBlocks(text) {
+  const lines = text.split('\n');
+  const out = [];
+  let inBlock = false;
+  let blockType = '';
+  let inDrawer = false;
+  for (const line of lines) {
+    // Drawer handling (higher priority — :PROPERTIES: can appear anywhere)
+    if (!inBlock) {
+      const drawerMatch = line.match(DRAWER_BEGIN_RE);
+      if (drawerMatch) { inDrawer = true; continue; }
+    }
+    if (inDrawer) {
+      if (DRAWER_END_RE.test(line)) { inDrawer = false; }
+      continue;
+    }
+    // Block handling
+    if (!inBlock) {
+      const blockMatch = line.match(BLOCK_BEGIN_RE);
+      if (blockMatch) {
+        inBlock = true;
+        blockType = blockMatch[1].toUpperCase();
+        // Keep quote content — include the BEGIN/END markers too
+        if (KEEP_BLOCK_TYPES.has(blockType)) {
+          out.push(line);
+        }
+        continue;
+      }
+    } else {
+      if (BLOCK_END_RE.test(line)) {
+        if (KEEP_BLOCK_TYPES.has(blockType)) {
+          out.push(line);
+        }
+        inBlock = false;
+        blockType = '';
+        continue;
+      }
+      // Inside a stripped block: skip
+      if (!KEEP_BLOCK_TYPES.has(blockType)) continue;
+    }
+    out.push(line);
+  }
+  return out.join('\n');
+}
+
 // ── Org-mode text cleaning ───────────────────────────────────────────
 
 const CLEANERS = [
@@ -172,7 +225,9 @@ function validate(files) {
 function processFile(filePath) {
   const raw = readFileSync(filePath, 'utf-8');
   const headers = parseHeaders(raw);
-  const body = raw.split('\n').filter(l => !l.startsWith('#+')).join('\n');
+  // Strip Org blocks (code, drawers, etc.) before regex cleaning
+  const stripped = stripBlocks(raw);
+  const body = stripped.split('\n').filter(l => !l.startsWith('#+') && !l.startsWith('# ')).join('\n');
   const cleaned = clean(body);
   const wc = countWords(cleaned);
   const cat = categorySlug(filePath);
