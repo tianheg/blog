@@ -18,6 +18,7 @@
 import { readFileSync, readdirSync, writeFileSync } from 'fs';
 import { join, relative } from 'path';
 import { fileURLToPath } from 'url';
+import { execSync } from 'child_process';
 
 const ROOT = join(fileURLToPath(import.meta.url), '..', '..');
 const TIL_DIR = join(ROOT, 'content', 'til');
@@ -220,6 +221,30 @@ function validate(files) {
   walkCheck(TIL_DIR);
 }
 
+// ── Git timestamp (last commit date, UTC epoch) ────────────────────────
+
+const GIT_CACHE = new Map();
+
+function gitTimestamp(filePath) {
+  const rel = relative(ROOT, filePath);
+  if (GIT_CACHE.has(rel)) return GIT_CACHE.get(rel);
+  try {
+    const out = execSync(`git log -1 --format=%ct "${rel}"`, {
+      cwd: ROOT,
+      encoding: 'utf-8',
+      stdio: ['ignore', 'pipe', 'ignore'],
+      timeout: 5000,
+    }).trim();
+    const ts = parseInt(out, 10);
+    const result = isNaN(ts) ? null : ts * 1000; // ms for JS Date
+    GIT_CACHE.set(rel, result);
+    return result;
+  } catch {
+    GIT_CACHE.set(rel, null);
+    return null;
+  }
+}
+
 // ── Worker ────────────────────────────────────────────────────────────
 
 function processFile(filePath) {
@@ -232,7 +257,8 @@ function processFile(filePath) {
   const wc = countWords(cleaned);
   const cat = categorySlug(filePath);
   const rel = 'til/' + relative(TIL_DIR, filePath);
-  return { rel, cat, headers, wc };
+  const ts = gitTimestamp(filePath);
+  return { rel, cat, headers, wc, ts };
 }
 
 // ── Main ──────────────────────────────────────────────────────────────
@@ -281,11 +307,19 @@ function main() {
       headerAgg[key].words += r.wc;
     }
 
-    perPage.push({ path: r.rel, words: r.wc });
+    perPage.push({ path: r.rel, words: r.wc, ts: r.ts });
   }
 
   // Sort perPage descending for fast Top N lookup
   perPage.sort((a, b) => b.words - a.words);
+
+  // Recent additions (last 90 days, sorted by commit time)
+  const ninetyDaysAgo = Date.now() - 90 * 24 * 60 * 60 * 1000;
+  const recent = results
+    .filter(r => r.ts && r.ts >= ninetyDaysAgo)
+    .sort((a, b) => b.ts - a.ts)
+    .slice(0, 10)
+    .map(r => ({ path: r.rel, words: r.wc, ts: r.ts }));
 
   const avg = perPage.length > 0 ? Math.round(total / perPage.length) : 0;
 
@@ -300,6 +334,7 @@ function main() {
     perCategory: catAgg,
     perHeader: Object.values(headerAgg),
     perPage,
+    recent,
   };
 
   writeFileSync(OUT_PATH, JSON.stringify(output) + '\n');

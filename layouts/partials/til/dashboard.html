@@ -133,28 +133,32 @@
 </div>
 {{ end }}
 
-{{/* Recent additions (last 30 days) — uses Lastmod when Date is unavailable */}}
-{{ $cutoff := now.AddDate 0 0 -30 }}
+{{/* Recent additions — from build-time word counter (git log timestamps) */}}
 {{ $recent := slice }}
-{{ range $tilPages }}
-  {{ $d := .Date }}
-  {{ if $d.IsZero }}{{ $d = .Lastmod }}{{ end }}
-  {{ if and (not $d.IsZero) (ge $d $cutoff) }}
+{{ with index hugo.Data "til-wordcounts" }}
+  {{ range .recent }}
     {{ $recent = $recent | append . }}
   {{ end }}
 {{ end }}
 {{ if $recent }}
 <div class="mb-8">
-  <h3 class="text-xs font-medium text-gray-400 dark:text-gray-500 uppercase tracking-wider mb-3">最近新增（30天）</h3>
+  <h3 class="text-xs font-medium text-gray-400 dark:text-gray-500 uppercase tracking-wider mb-3">最近新增（90天）</h3>
   <div class="space-y-1">
-    {{ range first 5 (sort $recent "Date" "desc") }}
-    <a href="{{ .RelPermalink }}"
+    {{ range $recent }}
+    {{ $path := .path }}
+    {{ $page := where $tilPages "File.Path" $path | first }}
+    {{ if $page }}
+    <a href="{{ (index $page 0).RelPermalink }}"
        class="group flex items-center justify-between py-1 px-2 -mx-2 rounded-md transition-colors hover:bg-gray-50 dark:hover:bg-gray-800/40">
       <span class="text-xs text-gray-600 dark:text-gray-400 group-hover:text-emerald-600 dark:group-hover:text-emerald-400 transition-colors">
-        {{ partial "functions/get-title" (dict "page" .) }}
+        {{ partial "functions/get-title" (dict "page" (index $page 0)) }}
       </span>
-      <span class="text-xs text-gray-400 dark:text-gray-500 shrink-0 ml-2 tabular-nums">{{ if not .Date.IsZero }}{{ .Date.Format "01-02" }}{{ else }}{{ .Lastmod.Format "01-02" }}{{ end }}</span>
+      <span class="text-xs text-gray-400 dark:text-gray-500 shrink-0 ml-2 tabular-nums">
+        {{- $t := .ts | time | time.Format "01-02" -}}
+        {{- $t -}}
+      </span>
     </a>
+    {{ end }}
     {{ end }}
   </div>
 </div>
