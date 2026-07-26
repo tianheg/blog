@@ -236,7 +236,7 @@ function gitTimestamp(filePath) {
       timeout: 5000,
     }).trim();
     const ts = parseInt(out, 10);
-    const result = isNaN(ts) ? null : ts * 1000; // ms for JS Date
+    const result = isNaN(ts) ? null : ts; // Unix seconds — Hugo time() expects seconds
     GIT_CACHE.set(rel, result);
     return result;
   } catch {
@@ -314,12 +314,12 @@ function main() {
   perPage.sort((a, b) => b.words - a.words);
 
   // Recent additions (last 90 days, sorted by commit time)
-  const ninetyDaysAgo = Date.now() - 90 * 24 * 60 * 60 * 1000;
+  const ninetyDaysAgo = (Date.now() - 90 * 24 * 60 * 60 * 1000) / 1000; // Unix seconds
   const recent = results
     .filter(r => r.ts && r.ts >= ninetyDaysAgo)
     .sort((a, b) => b.ts - a.ts)
     .slice(0, 10)
-    .map(r => ({ path: r.rel, words: r.wc, ts: r.ts }));
+    .map(r => ({ path: r.rel, words: r.wc, ts: new Date(r.ts * 1000).toISOString().slice(0, 10) }));
 
   const avg = perPage.length > 0 ? Math.round(total / perPage.length) : 0;
 
