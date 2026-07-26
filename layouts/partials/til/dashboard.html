@@ -146,17 +146,14 @@
   <div class="space-y-1">
     {{ range $recent }}
     {{ $path := .path }}
-    {{ $page := where $tilPages "File.Path" $path | first }}
+    {{ $page := where $tilPages "File.Path" $path | first 1 }}
     {{ if $page }}
     <a href="{{ (index $page 0).RelPermalink }}"
        class="group flex items-center justify-between py-1 px-2 -mx-2 rounded-md transition-colors hover:bg-gray-50 dark:hover:bg-gray-800/40">
       <span class="text-xs text-gray-600 dark:text-gray-400 group-hover:text-emerald-600 dark:group-hover:text-emerald-400 transition-colors">
         {{ partial "functions/get-title" (dict "page" (index $page 0)) }}
       </span>
-      <span class="text-xs text-gray-400 dark:text-gray-500 shrink-0 ml-2 tabular-nums">
-        {{- $t := .ts | time | time.Format "01-02" -}}
-        {{- $t -}}
-      </span>
+      <span class="text-xs text-gray-400 dark:text-gray-500 shrink-0 ml-2 tabular-nums">{{ .ts }}</span>
     </a>
     {{ end }}
     {{ end }}
