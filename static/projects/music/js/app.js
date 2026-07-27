@@ -8,7 +8,6 @@ function init() {
   const app = document.getElementById('app');
   renderShell(app);
   contentEl = document.getElementById('content');
-  navigate('home');
 }
 
 function renderShell(app) {
