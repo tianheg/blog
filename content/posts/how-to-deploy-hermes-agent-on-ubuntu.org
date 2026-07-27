@@ -56,7 +56,7 @@
 
 Desktop defaults to local mode (starts a local =hermes dashboard= backend). Remote mode turns Desktop into a thin client — agent runs on VPS, Desktop renders UI via WebSocket.
 
-**Server-side Setup**
+*Server-side Setup*
 
 The dashboard must bind to =0.0.0.0= (not =127.0.0.1=) so Tailscale IPs can reach the WebSocket endpoint. =--insecure= disables Host header validation which rejects non-loopback connections.
 
@@ -82,7 +82,7 @@ HERMES_DASHBOARD_SESSION_TOKEN=<token-from-step-2>
 
 Fixed token lets Desktop use a stable =HERMES_DESKTOP_REMOTE_TOKEN= that survives dashboard restarts.
 
-**Network: Tailscale**
+*Network: Tailscale*
 
 SSH tunnel (=ssh -L 9120:localhost:9120=) works but breaks on disconnect. Tailscale is more stable — zero port exposure, auto-reconnection.
 
@@ -94,19 +94,19 @@ sudo tailscale up
 
 Desktop connects via =http://<tailscale-ip>:9120=. No basic auth needed — port is only reachable inside tailnet.
 
-**tailscale serve trap**: If you previously ran =tailscale serve= on this port, the rule persists in state and intercepts traffic silently, returning 404. Fix:
+*tailscale serve trap*: If you previously ran =tailscale serve= on this port, the rule persists in state and intercepts traffic silently, returning 404. Fix:
 #+BEGIN_SRC bash
 sudo tailscale serve --http=9120 off
 #+END_SRC
 
-**Clash Verge conflict**: If you use Clash Verge TUN mode on the same machine, it may hijack Tailscale traffic (100.64.0.0/10) and route it through the proxy, making the Tailscale IP unreachable. Fix: add bypass rules at the top of Clash config:
+*Clash Verge conflict*: If you use Clash Verge TUN mode on the same machine, it may hijack Tailscale traffic (100.64.0.0/10) and route it through the proxy, making the Tailscale IP unreachable. Fix: add bypass rules at the top of Clash config:
 #+BEGIN_SRC yaml
 IP-CIDR,100.64.0.0/10,DIRECT,no-resolve
 DOMAIN-SUFFIX,ts.net,DIRECT
 #+END_SRC
 If using Fake-IP DNS mode, also add =*.ts.net= to =fake-ip-filter=.
 
-**Desktop Client Setup**
+*Desktop Client Setup*
 
 On Arch (CLI already installed):
 #+BEGIN_SRC bash
@@ -119,7 +119,7 @@ In Desktop settings → Gateway → Remote Gateway:
 - Remote URL: =http://<tailscale-ip>:9120=
 - No auth (open inside tailnet), or use token from step 2
 
-**Experience Notes**
+*Experience Notes*
 
 - First connection: session list loads slowly (initial sync of all history)
 - After warm-up: chat is smooth, no perceptible latency

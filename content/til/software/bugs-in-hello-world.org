@@ -54,7 +54,7 @@ echo $?
 
 ```
 
-系统报告了 `No space` 错误，但程序却默认一切正常了，**这就是 bug**！
+系统报告了 `No space` 错误，但程序却默认一切正常了，*这就是 bug*！
 
 这个 bug 有多严重？可以说 Hello World 程序在任何地方都不会是安全的。However, hello world does do something that programs in the real world do: print to standard output, which might be redirected to a file. And files in the real world can run out of space. If a program doesn't detect this kind of error and report it through its return code, its parent process won't know that the child failed, and will continue running as if nothing was wrong, even though the output it expected to have been produced has silently lost data.
 

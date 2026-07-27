@@ -13,7 +13,7 @@
 
 过去使用 setInterval 和 setTimeout 实现动画，无法保证时间精度，延时参数确定的是将代码添加到浏览器的任务队列，不能确定代码的具体执行时间。
 
-​****知道何时绘制下一帧是创造平滑动画的关键。**** setInterval 和 setTimeout 不够精确是第一个问题，浏览器的计时器也并不是精确统一的。
+​*知道何时绘制下一帧是创造平滑动画的关键。* setInterval 和 setTimeout 不够精确是第一个问题，浏览器的计时器也并不是精确统一的。
 
 Mozilla 的 Robert O' Callahan 创造了一个 mozRequestAnimationFrame() 的新方法，用来通知浏览器某些 JS 代码要执行动画了，这样浏览器就可以在运行某些代码后进行适当的优化。
 
