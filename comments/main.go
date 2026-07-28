@@ -511,13 +511,12 @@ func renderComments(comments []Comment) []byte {
 }
 
 func renderComment(b *strings.Builder, c Comment, children map[int64][]Comment, byID map[int64]Comment, depth int) {
-	b.WriteString(`<div class="comment"`)
+	b.WriteString(`<div class="comment`)
 	if depth > 0 {
-		b.WriteString(` style="margin-left:`)
-		b.WriteString(strconv.Itoa(depth * 24))
-		b.WriteString(`px"`)
+		b.WriteString(` comment-depth-`)
+		b.WriteString(strconv.Itoa(depth))
 	}
-	b.WriteString(` data-id="`)
+	b.WriteString(`" data-id="`)
 	b.WriteString(strconv.FormatInt(c.ID, 10))
 	b.WriteString(`"`)
 
