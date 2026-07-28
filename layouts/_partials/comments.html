@@ -9,7 +9,7 @@
   </div>
 
   {{/* Submit form */}}
-  <form id="comment-form" method="post" action="{{ .Site.Params.commentsServer | default "/comments" }}/api/comment"
+  <form id="comment-form" method="post" action="/api/comment"
         class="space-y-4 max-w-lg">
     <input type="hidden" name="slug"
            value="{{ .Page.RelPermalink | replaceRE "/" "_" | replaceRE "(^_|_$)" "" | default "index" }}">

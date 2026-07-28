@@ -18,7 +18,4 @@
 {{- end }}
 
 {{- /* Comments system */}}
-{{- with .Site.Params.commentsServer }}
-<script>window.COMMENTS_SERVER = {{ . | jsonify | safeJS }};</script>
-{{- end }}
 <script src="/js/comments.js" defer></script>

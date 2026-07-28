@@ -16,6 +16,7 @@ const KV_KEY = 'embeddings:v1';
 const MAX_RESULTS = 10;
 const BATCH_SIZE = 16;
 const MANIFEST_PATH = '/pagefind-semantic/manifest.json';
+const COMMENTS_BACKEND = 'https://comments.tianheg.co';
 
 // Simple in-memory rate limiter (per-worker-isolate, resets on cold start)
 const RATE_LIMIT_WINDOW_MS = 60_000;
@@ -197,6 +198,14 @@ export default {
       }
     }
 
+    // Comments API proxy — same-origin, no CORS needed
+    if (url.pathname === '/api/comment' && request.method === 'POST') {
+      return proxyComments(request, url);
+    }
+    if (url.pathname.startsWith('/comments/')) {
+      return proxyComments(request, url);
+    }
+
     // Fall through to static assets
     const asset = await env.ASSETS.fetch(request);
     // SPA fallback: 如果 /projects/music/* 返回 404，serve index.html
@@ -217,3 +226,22 @@ export default {
     return resp;
   },
 };
+
+/** Proxy comment API requests to the backend server */
+async function proxyComments(request, url) {
+  const backend = COMMENTS_BACKEND + url.pathname + url.search;
+  const headers = new Headers(request.headers);
+  headers.set('X-Forwarded-Host', url.hostname);
+  headers.set('X-Forwarded-Proto', url.protocol);
+
+  const resp = await fetch(backend, {
+    method: request.method,
+    headers,
+    body: request.method === 'POST' ? request.body : undefined,
+  });
+
+  // Copy response and add CORS for local dev
+  const proxyResp = new Response(resp.body, resp);
+  proxyResp.headers.set('Access-Control-Allow-Origin', '*');
+  return proxyResp;
+}
