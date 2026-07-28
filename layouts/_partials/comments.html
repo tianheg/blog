@@ -1,22 +1,20 @@
 {{/* Artalk comment system */}}
-{{ if and .Page (not .Params.nocomment) }}
+{{ if not .Params.nocomment }}
 <section id="comments" class="my-12">
   <h2 class="text-xl font-semibold mb-6">Comments</h2>
-  <div id="ArtalkComments"></div>
+  <div id="Comments"></div>
 </section>
 
-{{- $pageTitle := .Page.Title }}
-{{- $pageKey := .Page.RelPermalink }}
+<link href="https://comments.tianheg.co/dist/Artalk.css" rel="stylesheet">
+<script src="https://comments.tianheg.co/dist/Artalk.js"></script>
 <script>
-  var ArtalkConfig = {
-    el: '#ArtalkComments',
-    pageKey: '{{ $pageKey }}',
-    pageTitle: '{{ $pageTitle }}',
+  Artalk.init({
+    el: '#Comments',
+    pageKey: '{{ .Permalink }}',
+    pageTitle: '{{ .Title }}',
     server: 'https://comments.tianheg.co',
     site: 'Tianhe Gao',
     darkMode: 'auto',
-    useStickyEditor: true,
-  };
+  })
 </script>
-<script src="https://comments.tianheg.co/dist/Artalk.js"></script>
 {{ end }}
