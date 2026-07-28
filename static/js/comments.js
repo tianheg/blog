@@ -21,9 +21,25 @@
         var el = document.getElementById('comments-list');
         if (el) el.innerHTML = xhr.responseText;
         wireReplyButtons();
+        checkReplyParam();
       }
     };
     xhr.send();
+  }
+
+  /** Auto-open reply form if ?reply=N is in the URL */
+  function checkReplyParam() {
+    var params = new URLSearchParams(window.location.search);
+    var replyId = params.get('reply');
+    if (!replyId) return;
+
+    var btn = document.querySelector('.comment-reply-btn[data-id="' + replyId + '"]');
+    if (btn) {
+      setTimeout(function () {
+        btn.click();
+        CONTAINER.scrollIntoView({ behavior: 'smooth', block: 'start' });
+      }, 100);
+    }
   }
 
   function wireReplyButtons() {
