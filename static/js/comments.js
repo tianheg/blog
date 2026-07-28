@@ -24,19 +24,40 @@
 
   function setupForm() {
     var form = document.getElementById('comment-form');
+    var btn = form && form.querySelector('button[type="submit"]');
     if (!form) return;
+
     form.addEventListener('submit', function (e) {
-      if (!window.fetch) return;
       e.preventDefault();
-      var data = new URLSearchParams(new FormData(form));
-      data.set('slug', SLUG);
+      if (!window.fetch || btn.disabled) return;
+
+      btn.disabled = true;
+      btn.textContent = 'Posting…';
+
+      var data = {};
+      data.slug = SLUG;
+      data.name = form.querySelector('[name="name"]').value;
+      data.body = form.querySelector('[name="body"]').value;
+      data.email = form.querySelector('[name="email"]').value || '';
+
       fetch('/api/comment', {
         method: 'POST',
-        headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
-        body: data.toString()
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify(data)
       })
-        .then(function (r) { if (!r.ok) throw Error(); form.reset(); loadComments(); })
-        .catch(function () { form.submit(); });
+        .then(function (r) {
+          if (!r.ok) throw new Error('Post failed');
+          form.reset();
+          loadComments();
+        })
+        .catch(function () {
+          var el = document.getElementById('comments-error');
+          if (el) el.style.display = 'block';
+        })
+        .finally(function () {
+          btn.disabled = false;
+          btn.textContent = 'Post Comment';
+        });
     });
   }
 
