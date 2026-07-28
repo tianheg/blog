@@ -1,0 +1,50 @@
+{{/* Comment section — backed by Go server + SQLite */}}
+{{ if and .Page (not .Params.nocomment) }}
+<section id="comments" class="my-12">
+  <h2 class="text-xl font-semibold mb-6">Comments</h2>
+
+  {{/* Comment list — populated by JS, server-rendered HTML */}}
+  <div id="comments-list" class="mb-8">
+    <p class="text-gray-500 dark:text-gray-400 italic">Loading comments…</p>
+  </div>
+
+  {{/* Submit form */}}
+  <form id="comment-form" method="post" action="{{ .Site.Params.commentsServer | default "/comments" }}/api/comment"
+        class="space-y-4 max-w-lg">
+    <input type="hidden" name="slug"
+           value="{{ .Page.RelPermalink | replaceRE "/" "_" | replaceRE "(^_|_$)" "" | default "index" }}">
+
+    {{/* Honeypot — hidden from real users */}}
+    <div style="display:none" aria-hidden="true">
+      <input type="text" name="website" tabindex="-1" autocomplete="off">
+    </div>
+
+    <div>
+      <label for="comment-name" class="block text-sm font-medium mb-1">Name *</label>
+      <input type="text" id="comment-name" name="name" required maxlength="100"
+             class="w-full px-3 py-2 border border-gray-300 dark:border-gray-700 rounded-md
+                    bg-white dark:bg-gray-900 focus:ring-2 focus:ring-blue-500">
+    </div>
+
+    <div>
+      <label for="comment-email" class="block text-sm font-medium mb-1">Email (not published)</label>
+      <input type="email" id="comment-email" name="email" maxlength="200"
+             class="w-full px-3 py-2 border border-gray-300 dark:border-gray-700 rounded-md
+                    bg-white dark:bg-gray-900 focus:ring-2 focus:ring-blue-500">
+    </div>
+
+    <div>
+      <label for="comment-body" class="block text-sm font-medium mb-1">Comment *</label>
+      <textarea id="comment-body" name="body" required rows="5" maxlength="10000"
+                class="w-full px-3 py-2 border border-gray-300 dark:border-gray-700 rounded-md
+                       bg-white dark:bg-gray-900 focus:ring-2 focus:ring-blue-500"></textarea>
+    </div>
+
+    <button type="submit"
+            class="px-4 py-2 bg-blue-600 text-white rounded-md hover:bg-blue-700
+                   transition-colors text-sm font-medium">
+      Post Comment
+    </button>
+  </form>
+</section>
+{{ end }}
