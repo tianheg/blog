@@ -1,108 +1,57 @@
-#+TITLE: 给博客加上评论区
-#+DATE: <2026-07-29 Wed 00:00>
-#+TAGS[]: 博客 评论 Artalk
+#+TITLE: 关于博客评论
+#+DATE: <2022-05-04 Wed 18:32>
+#+TAGS[]: 博客
 
-从零开始，给这个静态博客加一套评论区。前后折腾了整整一天，中间走了一段弯路，最后落定在一个成熟方案上。
+是否添加评论，这个问题我思考了很久。曾经添加过评论，后来又移除，又加上，再移除。如此反复多次。
 
-* 自建还是用现成的
+曾经读过 reuixiy 的《[[https://io-oi.me/tech/on-three-questions-about-blogging/][博客三问]]》：
 
-一开始想自己写。参考 Derek Sivers 的 [[https://sive.rs/shc][Static HTML comments]] 思路——评论写入时预渲染成静态 HTML，读取时零数据库查询。用 Go 写了一个 ~200 行的服务端，JSON 文件持久化，in-memory cache。
+#+begin_quote
+如果你开了评论，就不要再去「政治审核」筛选，不然评论其实是完全没有必要的，如微信公众号一样。最后，世界是有对立两面的，互联网上的言论也是如此。
 
-功能依次加上：
+事实上，联接彼此的互联网是一个更为冲突的世界，但千万不要被别人的「恶意言论」击倒！要像 Taylor Swift 告诫的「Just keep making things」那样——千万不要停止创作新文章！
+#+end_quote
 
-- 邮件通知（Mailgun SMTP, 465 端口 TLS）
-- 嵌套回复（parent_id + 递归渲染）
-- 删除评论（X-Admin-Key 鉴权）
+想了很多：别人的评论对我来说意味着什么、如果遇到恶意评论应该怎么办等等。
 
-跑在 Docker 上，通过 CF Tunnel 暴露到 comments.tianheg.co。
+现在（2022-05-06）的看法是， *以最大的善意，感受对方的评论* 。
 
-但自建的坑比预想的多：
+如果我存心寻找恶意评论，一定能找到。就像莎士比亚戏剧 /Othello/ 中男主角 Othello 那样寻找妻子不轨的证据，真的找到了，但背后的缘由，他并不清楚。
 
-- 时区问题（Alpine 没装 tzdata，时间显示 UTC）
-- <ol> 序号不好看
-- 嵌套缩进不生效（内联 style 被 Tailwind prose 覆盖）
-- 子回复渲染在父级 div 外面（DOM 结构不对）
-- 表单跨域跳转
+逐字逐句地琢磨对方是否对自己恶言相向，这种行为令我害怕，我不想这样做。
 
-修到第三个问题时我意识到：**写一个能用的评论系统和写一个好用的评论系统，中间差着几个数量级的工作量。**
+评论是一种反馈，对方的评论可以让我知道自己在哪些方面还可以做得更好。
 
-Artalk 这个项目关注很久了，Go 后端，SQLite，功能齐全，中文友好。不再犹豫，切过去。
+如你所见，我同时采用了 Disqus 和 Giscus 两种评论系统，前者是主力，后者是备用。当你无法访问 Disqus 时，可以使用 Giscus，注意 Giscus 需要你登录 GitHub 账号。
 
-* 部署 Artalk
+UI 设计摘自谢益辉（[[https://yihui.org/cn/2021/07/existence/][示例]]），Preferences 提供设置选项。
 
-Artalk 容器跑在同一个 Docker VM 上（192.168.8.2:23366），数据挂 volume，SQLite 单文件持久化。
+2023年1月9日更新：
 
-```yaml
-# artalk.yml 核心配置
-host: "0.0.0.0"
-port: 23366
-locale: zh-CN
-timezone: Asia/Shanghai
-site_url: "https://tianheg.co"
+不久前，我关闭了博客评论。我的博客少有人评论，仅有的评论看起来可有可无。
 
-db:
-  type: sqlite
-  file: ./data/artalk.db
+2023年3月16日更新：
 
-email:
-  enabled: true
-  send_type: smtp
-  send_addr: noreply@tianheg.co
-  smtp:
-    host: smtp.eu.mailgun.org
-    port: 465
-    username: i@tianheg.co
-```
+添加在线留言，点击[[/msg][这里]]向我发送信息。
 
-管理员通过命令行创建：
+**2026年7月29日更新：**
 
-```bash
-docker exec artalk artalk admin \
-  --email i@tianheg.co \
-  --password <password> \
-  --name tianhe \
-  -c /data/artalk.yml
-```
+这次换上了 [[https://artalk.js.org][Artalk]]，自托管评论系统，部署在自己的 VPS 上。
 
-后台在 [[https://comments.tianheg.co/]]。
+架构很简单：
 
-* 前端集成
+- Go 单二进制 + SQLite
+- Docker 容器跑在 PVE 下的 VM 102
+- 通过 CF Tunnel 暴露到 comments.tianheg.co
+- Hugo 模板通过 blog Worker 同域代理加载前端资源
 
-Hugo 的 partial 模板引入 Artalk：
+替换了之前的 Disqus 和 Giscus。数据全部在自己手里，管理员后台在 [[https://comments.tianheg.co/]]。
 
-```html
-<link href="/dist/Artalk.css" rel="stylesheet">
-<script src="/dist/Artalk.js"></script>
-<script>
-Artalk.init({
-  el: '#Comments',
-  pageKey: '{{ .Permalink }}',
-  pageTitle: '{{ .Title }}',
-  server: 'https://comments.tianheg.co',
-  site: 'Tianhe Gao',
-  darkMode: 'auto',
-})
-</script>
-```
+选择 Artalk 的原因：
 
-这里遇到一个坑：博客有 CSP，限制了跨域加载资源。Artalk 的 JS/CSS 从 comments.tianheg.co 加载被 CSP 拦截。
+- 自托管，数据完全可控
+- Go + SQLite，和自建一样的轻量级路线
+- 原生中文，功能完整（嵌套回复、邮件通知、管理后台）
+- 八年维护，成熟稳定
 
-修法：让 blog 的 Cloudflare Worker 代理 /dist/Artalk.\* 到 comments.tianheg.co，变成同域加载，CSP 的 'self' 允许通过。
-
-* 备份
-
-Artalk 的数据全部在 SQLite 文件里，纳入每日备份脚本：
-
-```bash
-ssh root@192.168.8.2 "tar czf - -C /data artalk"
-```
-
-SQLite 单文件备份和恢复都非常简单。
-
-* 几点感受
-
-**自建的成本不在写代码，在维护。** 评论系统看着简单，但邮件通知、反垃圾、嵌套回复、管理后台、暗色模式——每一个都是要花时间打磨的细节。成熟方案替你付了这些成本。
-
-**Artalk 的 Go 单二进制 + SQLite 设计很对胃口。** 和自建方案同样的技术路线，但人家做了八年，一万多次提交。不该自大的时候别自大。
-
-**CSP 是好事。** 虽然拦了我一下，但这种安全默认严格的态度是对的。加个同域代理就好了。
+配置好 SMTP 后（Mailgun），新评论会发邮件通知到 i@tianheg.co。备份也简单，`/data/artalk/` 整个目录打包就行。
