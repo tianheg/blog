@@ -1,25 +1,21 @@
-{{/* Comment section — backed by Go server + SQLite */}}
+{{/* Comment section — backed by Go server */}}
 {{ if and .Page (not .Params.nocomment) }}
 <section id="comments" class="my-12">
   <h2 class="text-xl font-semibold mb-6">Comments</h2>
 
-  {{/* Comment list — populated by JS, server-rendered HTML */}}
   <div id="comments-list" class="mb-8">
     <p class="text-gray-500 dark:text-gray-400 italic">Loading comments…</p>
   </div>
 
-  {{/* Error message — hidden by default, shown by JS on failure */}}
-  <div id="comments-error" class="hidden mb-4 p-3 bg-red-50 dark:bg-red-900/20 border border-red-200 dark:border-red-800 rounded-md text-red-700 dark:text-red-300 text-sm">
-    Failed to post comment. Please try again.
-  </div>
+  <div id="comments-error" class="hidden mb-4 p-3 bg-red-50 dark:bg-red-900/20 border border-red-200 dark:border-red-800 rounded-md text-red-700 dark:text-red-300 text-sm"></div>
 
-  {{/* Submit form */}}
-  <form id="comment-form" method="post" action="/api/comment"
-        class="space-y-4 max-w-lg">
+  <form id="comment-form" method="post" action="/api/comment" class="space-y-4 max-w-lg">
     <input type="hidden" name="slug"
            value="{{ .Page.RelPermalink | replaceRE "/" "_" | replaceRE "(^_|_$)" "" | default "index" }}">
+    <input type="hidden" name="parent_id" value="0">
 
-    {{/* Honeypot — hidden from real users */}}
+    <div id="reply-indicator" class="hidden text-sm text-gray-600 dark:text-gray-400 mb-2"></div>
+
     <div style="display:none" aria-hidden="true">
       <input type="text" name="website" tabindex="-1" autocomplete="off">
     </div>
