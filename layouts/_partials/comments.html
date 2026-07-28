@@ -1,56 +1,22 @@
-{{/* Comment section — backed by Go server */}}
+{{/* Artalk comment system */}}
 {{ if and .Page (not .Params.nocomment) }}
 <section id="comments" class="my-12">
   <h2 class="text-xl font-semibold mb-6">Comments</h2>
-
-  {{/* Comment depth indentation — nested inside parent */}}
-  <style>
-    .comments-list .comment .comment { margin-left: 1.5rem; }
-  </style>
-
-  <div id="comments-list" class="mb-8">
-    <p class="text-gray-500 dark:text-gray-400 italic">Loading comments…</p>
-  </div>
-
-  <div id="comments-error" class="hidden mb-4 p-3 bg-red-50 dark:bg-red-900/20 border border-red-200 dark:border-red-800 rounded-md text-red-700 dark:text-red-300 text-sm"></div>
-
-  <form id="comment-form" method="post" action="/api/comment" class="space-y-4 max-w-lg">
-    <input type="hidden" name="slug"
-           value="{{ .Page.RelPermalink | replaceRE "/" "_" | replaceRE "(^_|_$)" "" | default "index" }}">
-    <input type="hidden" name="parent_id" value="0">
-
-    <div id="reply-indicator" class="hidden text-sm text-gray-600 dark:text-gray-400 mb-2"></div>
-
-    <div style="display:none" aria-hidden="true">
-      <input type="text" name="website" tabindex="-1" autocomplete="off">
-    </div>
-
-    <div>
-      <label for="comment-name" class="block text-sm font-medium mb-1">Name *</label>
-      <input type="text" id="comment-name" name="name" required maxlength="100"
-             class="w-full px-3 py-2 border border-gray-300 dark:border-gray-700 rounded-md
-                    bg-white dark:bg-gray-900 focus:ring-2 focus:ring-blue-500">
-    </div>
-
-    <div>
-      <label for="comment-email" class="block text-sm font-medium mb-1">Email (not published)</label>
-      <input type="email" id="comment-email" name="email" maxlength="200"
-             class="w-full px-3 py-2 border border-gray-300 dark:border-gray-700 rounded-md
-                    bg-white dark:bg-gray-900 focus:ring-2 focus:ring-blue-500">
-    </div>
-
-    <div>
-      <label for="comment-body" class="block text-sm font-medium mb-1">Comment *</label>
-      <textarea id="comment-body" name="body" required rows="5" maxlength="10000"
-                class="w-full px-3 py-2 border border-gray-300 dark:border-gray-700 rounded-md
-                       bg-white dark:bg-gray-900 focus:ring-2 focus:ring-blue-500"></textarea>
-    </div>
-
-    <button type="submit"
-            class="px-4 py-2 bg-blue-600 text-white rounded-md hover:bg-blue-700
-                   transition-colors text-sm font-medium">
-      Post Comment
-    </button>
-  </form>
+  <div id="ArtalkComments"></div>
 </section>
+
+{{- $pageTitle := .Page.Title }}
+{{- $pageKey := .Page.RelPermalink }}
+<script>
+  var ArtalkConfig = {
+    el: '#ArtalkComments',
+    pageKey: '{{ $pageKey }}',
+    pageTitle: '{{ $pageTitle }}',
+    server: 'https://comments.tianheg.co',
+    site: 'Tianhe Gao',
+    darkMode: 'auto',
+    useStickyEditor: true,
+  };
+</script>
+<script src="https://comments.tianheg.co/dist/Artalk.js"></script>
 {{ end }}
