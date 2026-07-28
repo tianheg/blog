@@ -205,6 +205,10 @@ export default {
     if (url.pathname.startsWith('/comments/')) {
       return proxyComments(request, url);
     }
+    // Artalk static assets proxy (same-origin)
+    if (url.pathname.startsWith('/dist/Artalk.')) {
+      return proxyArtalkAsset(request, url);
+    }
 
     // Fall through to static assets
     const asset = await env.ASSETS.fetch(request);
@@ -243,5 +247,15 @@ async function proxyComments(request, url) {
   // Copy response and add CORS for local dev
   const proxyResp = new Response(resp.body, resp);
   proxyResp.headers.set('Access-Control-Allow-Origin', '*');
+  return proxyResp;
+}
+
+/** Proxy Artalk static assets (JS/CSS) */
+async function proxyArtalkAsset(request, url) {
+  const backend = COMMENTS_BACKEND + url.pathname + url.search;
+  const resp = await fetch(backend);
+  const proxyResp = new Response(resp.body, resp);
+  // Cache for 1 year on CDN
+  proxyResp.headers.set('Cache-Control', 'public, max-age=31536000, immutable');
   return proxyResp;
 }
