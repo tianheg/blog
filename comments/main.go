@@ -511,12 +511,7 @@ func renderComments(comments []Comment) []byte {
 }
 
 func renderComment(b *strings.Builder, c Comment, children map[int64][]Comment, byID map[int64]Comment, depth int) {
-	b.WriteString(`<div class="comment`)
-	if depth > 0 {
-		b.WriteString(` comment-depth-`)
-		b.WriteString(strconv.Itoa(depth))
-	}
-	b.WriteString(`" data-id="`)
+	b.WriteString(`<div class="comment" data-id="`)
 	b.WriteString(strconv.FormatInt(c.ID, 10))
 	b.WriteString(`"`)
 
@@ -558,14 +553,14 @@ func renderComment(b *strings.Builder, c Comment, children map[int64][]Comment, 
 	b.WriteString(html.EscapeString(c.Name))
 	b.WriteString(`">Reply</button>`)
 
-	b.WriteString(`</div>`)
-
-	// Children
+	// Children (render INSIDE parent div)
 	if kids, ok := children[c.ID]; ok {
 		for _, kid := range kids {
 			renderComment(b, kid, children, byID, depth+1)
 		}
 	}
+
+	b.WriteString(`</div>`)
 }
 
 func writeJSON(w http.ResponseWriter, status int, v any) {
