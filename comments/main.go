@@ -215,25 +215,28 @@ func (s *Server) handlePostComment(w http.ResponseWriter, r *http.Request) {
 	}
 
 	var slug, name, body, email string
+	var honeypot string
 
 	switch r.Header.Get("Content-Type") {
 	case "application/json":
 		var req struct {
-			Slug  string `json:"slug"`
-			Name  string `json:"name"`
-			Body  string `json:"body"`
-			Email string `json:"email,omitempty"`
+			Slug    string `json:"slug"`
+			Name    string `json:"name"`
+			Body    string `json:"body"`
+			Email   string `json:"email,omitempty"`
+			Website string `json:"website,omitempty"`
 		}
 		if err := json.NewDecoder(r.Body).Decode(&req); err != nil {
 			http.Error(w, `{"error":"bad json"}`, http.StatusBadRequest)
 			return
 		}
-		slug, name, body, email = req.Slug, req.Name, req.Body, req.Email
+		slug, name, body, email, honeypot = req.Slug, req.Name, req.Body, req.Email, req.Website
 	default:
 		slug = r.FormValue("slug")
 		name = r.FormValue("name")
 		body = r.FormValue("body")
 		email = r.FormValue("email")
+		honeypot = r.FormValue("website")
 	}
 
 	slug = strings.TrimSpace(slug)
@@ -250,23 +253,13 @@ func (s *Server) handlePostComment(w http.ResponseWriter, r *http.Request) {
 	}
 
 	// Honeypot
-	if r.FormValue("website") != "" {
+	if honeypot != "" {
 		writeJSON(w, http.StatusOK, map[string]any{"ok": true})
 		return
 	}
 
 	s.store.Insert(slug, name, body, email)
 	s.cache.Delete(slug)
-
-	// Form POST: redirect back
-	if r.Header.Get("Content-Type") != "application/json" {
-		referer := r.Header.Get("Referer")
-		if referer == "" {
-			referer = "/"
-		}
-		http.Redirect(w, r, referer, http.StatusFound)
-		return
-	}
 
 	writeJSON(w, http.StatusOK, map[string]any{"ok": true})
 }

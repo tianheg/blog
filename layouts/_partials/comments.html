@@ -8,6 +8,11 @@
     <p class="text-gray-500 dark:text-gray-400 italic">Loading comments…</p>
   </div>
 
+  {{/* Error message — hidden by default, shown by JS on failure */}}
+  <div id="comments-error" class="hidden mb-4 p-3 bg-red-50 dark:bg-red-900/20 border border-red-200 dark:border-red-800 rounded-md text-red-700 dark:text-red-300 text-sm">
+    Failed to post comment. Please try again.
+  </div>
+
   {{/* Submit form */}}
   <form id="comment-form" method="post" action="/api/comment"
         class="space-y-4 max-w-lg">
