@@ -1,6 +1,7 @@
 package main
 
 import (
+	"crypto/tls"
 	"encoding/json"
 	"fmt"
 	"html"
@@ -193,45 +194,90 @@ func (m *Mailer) SendCommentNotification(c *Comment) {
 	}
 
 	slug := c.Slug
-	if slug == "index" {
-		slug = ""
-	} else {
-		slug = "/" + slug
+	pageURL := m.siteURL
+	if slug != "" && slug != "index" {
+		pageURL += "/" + strings.ReplaceAll(slug, "_", "/")
 	}
-	pageURL := m.siteURL + "/" + strings.ReplaceAll(slug, "_", "/")
 	pageURL = strings.TrimRight(pageURL, "/") + "/"
 
-	subject := fmt.Sprintf("[Blog] New comment from %s", c.Name)
-	body := fmt.Sprintf(`New comment on your blog:
-
-  Page: %s
-  Author: %s (%s)
-  Date: %s
-
-  ———————————————————
-  %s
-  ———————————
-
-  Manage: %s
-`,
+	msg := fmt.Sprintf("From: %s\r\nTo: %s\r\nSubject: [Blog] New comment from %s\r\n\r\n"+
+		"New comment on your blog:\r\n\r\n"+
+		"  Page: %s\r\n"+
+		"  Author: %s (%s)\r\n"+
+		"  Date: %s\r\n\r\n"+
+		"  \u2014\u2014\u2014\u2014\u2014\u2014\u2014\u2014\u2014\u2014\u2014\u2014\u2014\u2014\u2014\u2014\u2014\u2014\u2014\u2014\u2014\u2014\u2014\u2014\u2014\u2014\u2014\u2014\u2014\u2014\u2014\u2014"+
+		"\u2014\u2014\u2014\u2014\u2014\u2014\u2014\u2014\u2014\u2014\u2014\u2014\u2014\u2014\u2014\u2014\u2014\u2014\u2014\u2014\u2014\u2014\u2014\u2014\u2014\u2014\u2014\u2014\u2014\u2014\u2014\u2014\r\n"+
+		"  %s\r\n"+
+		"  \u2014\u2014\u2014\u2014\u2014\u2014\u2014\u2014\u2014\u2014\u2014\u2014\u2014\u2014\u2014\u2014\u2014\u2014\u2014\u2014\u2014\u2014\u2014\u2014\u2014\u2014\u2014\u2014\u2014\u2014\u2014\u2014"+
+		"\u2014\u2014\u2014\u2014\u2014\u2014\u2014\u2014\u2014\u2014\u2014\u2014\u2014\u2014\u2014\u2014\u2014\u2014\u2014\u2014\u2014\u2014\u2014\u2014\u2014\u2014\u2014\u2014\u2014\u2014\u2014\u2014\r\n\r\n"+
+		"  Manage: %s#comments\r\n",
+		m.user, m.adminEmail, c.Name,
 		pageURL,
 		c.Name, c.Email,
 		c.CreatedAt,
 		c.Body,
-		pageURL+"#comments",
+		pageURL,
 	)
 
-	msg := fmt.Sprintf("From: %s\r\nTo: %s\r\nSubject: %s\r\n\r\n%s",
-		m.user, m.adminEmail, subject, body)
-
 	addr := m.host + ":" + m.port
-	auth := smtp.PlainAuth("", m.user, m.pass, m.host)
 
+	if m.port == "465" {
+		m.sendTLS(addr, msg, c.ID)
+	} else {
+		m.sendSTARTTLS(addr, msg, c.ID)
+	}
+}
+
+func (m *Mailer) sendTLS(addr, msg string, commentID int64) {
+	tlsConfig := &tls.Config{ServerName: m.host}
+	conn, err := tls.Dial("tcp", addr, tlsConfig)
+	if err != nil {
+		log.Printf("mail tls dial: %v", err)
+		return
+	}
+	client, err := smtp.NewClient(conn, m.host)
+	if err != nil {
+		log.Printf("mail client: %v", err)
+		return
+	}
+	defer client.Close()
+
+	auth := smtp.PlainAuth("", m.user, m.pass, m.host)
+	if err = client.Auth(auth); err != nil {
+		log.Printf("mail auth: %v", err)
+		return
+	}
+	if err = client.Mail(m.user); err != nil {
+		log.Printf("mail from: %v", err)
+		return
+	}
+	if err = client.Rcpt(m.adminEmail); err != nil {
+		log.Printf("mail rcpt: %v", err)
+		return
+	}
+	w, err := client.Data()
+	if err != nil {
+		log.Printf("mail data: %v", err)
+		return
+	}
+	if _, err = w.Write([]byte(msg)); err != nil {
+		log.Printf("mail write: %v", err)
+		return
+	}
+	if err = w.Close(); err != nil {
+		log.Printf("mail close: %v", err)
+		return
+	}
+	log.Printf("mail sent via TLS to %s about comment #%d", m.adminEmail, commentID)
+}
+
+func (m *Mailer) sendSTARTTLS(addr, msg string, commentID int64) {
+	auth := smtp.PlainAuth("", m.user, m.pass, m.host)
 	if err := smtp.SendMail(addr, auth, m.user, []string{m.adminEmail}, []byte(msg)); err != nil {
 		log.Printf("mail send: %v", err)
-	} else {
-		log.Printf("mail sent to %s about comment #%d", m.adminEmail, c.ID)
+		return
 	}
+	log.Printf("mail sent via STARTTLS to %s about comment #%d", m.adminEmail, commentID)
 }
 
 // --- Server ---
