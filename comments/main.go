@@ -210,7 +210,7 @@ func (m *Mailer) SendCommentNotification(c *Comment) {
 		"%s\r\n"+
 		"\u2014\u2014\u2014\u2014\u2014\u2014\u2014\u2014\u2014\u2014\u2014\u2014\u2014\u2014\u2014\u2014\u2014\u2014\u2014\u2014\u2014\u2014\u2014\u2014\u2014\u2014\u2014\u2014\u2014\u2014\u2014\u2014"+
 		"\u2014\u2014\u2014\u2014\u2014\u2014\u2014\u2014\u2014\u2014\u2014\u2014\u2014\u2014\u2014\u2014\u2014\u2014\u2014\u2014\u2014\u2014\u2014\u2014\u2014\u2014\u2014\u2014\u2014\u2014\u2014\u2014\r\n\r\n"+
-		"Reply: %s#comments?reply=%d\r\n"+
+		"Reply: %s?reply=%d#comments\r\n"+
 		"Delete: curl -X DELETE https://tianheg.co/api/comment/%d -H \"X-Admin-Key: <key>\"\r\n",
 		m.fromEmail, m.adminEmail,
 		c.Name,
