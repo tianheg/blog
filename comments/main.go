@@ -502,16 +502,16 @@ func renderComments(comments []Comment) []byte {
 	}
 
 	var b strings.Builder
-	b.WriteString(`<ol class="comments-list">`)
+	b.WriteString(`<div class="comments-list">`)
 	for _, c := range topLevel {
 		renderComment(&b, c, children, byID, 0)
 	}
-	b.WriteString(`</ol>`)
+	b.WriteString(`</div>`)
 	return []byte(b.String())
 }
 
 func renderComment(b *strings.Builder, c Comment, children map[int64][]Comment, byID map[int64]Comment, depth int) {
-	b.WriteString(`<li class="comment"`)
+	b.WriteString(`<div class="comment"`)
 	if depth > 0 {
 		b.WriteString(` style="margin-left:`)
 		b.WriteString(strconv.Itoa(depth * 24))
@@ -538,13 +538,9 @@ func renderComment(b *strings.Builder, c Comment, children map[int64][]Comment, 
 		b.WriteString(` <span class="comment-reply-arrow">↩</span> `)
 		b.WriteString(html.EscapeString(parentName))
 	}
-	b.WriteString(` · <time>`)
-	if len(c.CreatedAt) >= 10 {
-		b.WriteString(c.CreatedAt[:10])
-	} else {
-		b.WriteString(c.CreatedAt)
-	}
-	b.WriteString(`</time></footer>`)
+	b.WriteString(` · `)
+	b.WriteString(formatTime(c.CreatedAt))
+	b.WriteString(`</footer>`)
 
 	// Body
 	b.WriteString(`<div class="comment-body">`)
@@ -563,7 +559,7 @@ func renderComment(b *strings.Builder, c Comment, children map[int64][]Comment, 
 	b.WriteString(html.EscapeString(c.Name))
 	b.WriteString(`">Reply</button>`)
 
-	b.WriteString(`</li>`)
+	b.WriteString(`</div>`)
 
 	// Children
 	if kids, ok := children[c.ID]; ok {
@@ -577,4 +573,21 @@ func writeJSON(w http.ResponseWriter, status int, v any) {
 	w.Header().Set("Content-Type", "application/json")
 	w.WriteHeader(status)
 	json.NewEncoder(w).Encode(v)
+}
+
+// formatTime converts a UTC timestamp string to Asia/Shanghai and formats it.
+func formatTime(utcTime string) string {
+	t, err := time.Parse("2006-01-02 15:04:05", utcTime)
+	if err != nil {
+		// If parsing fails, return raw string as-is
+		if len(utcTime) >= 10 {
+			return utcTime[:10]
+		}
+		return utcTime
+	}
+	loc, err := time.LoadLocation("Asia/Shanghai")
+	if err != nil {
+		return t.Format("2006-01-02 15:04")
+	}
+	return t.In(loc).Format("2006-01-02 15:04")
 }
