@@ -1,33 +1,44 @@
 package main
 
 import (
-	"database/sql"
 	"encoding/json"
 	"html"
 	"log"
 	"net/http"
 	"os"
+	"path/filepath"
 	"strings"
 	"sync"
 	"time"
-
-	_ "modernc.org/sqlite"
 )
 
-type Server struct {
-	db     *sql.DB
-	cache  sync.Map // map[slug][]byte — pre-rendered HTML
-	origin string
-	rl     *rateLimiter
+// --- Data types ---
+
+type Comment struct {
+	ID        int64  `json:"id"`
+	Slug      string `json:"slug"`
+	Name      string `json:"name"`
+	Body      string `json:"body"`
+	Email     string `json:"email,omitempty"`
+	CreatedAt string `json:"created_at"`
 }
 
-type rateLimiter struct {
+type Store struct {
+	mu       sync.RWMutex
+	path     string
+	comments []Comment // flat list, sorted by id asc
+	nextID   int64
+}
+
+// --- Rate limiter ---
+
+type RateLimiter struct {
 	mu     sync.Mutex
 	counts map[string]int
 }
 
-func newRateLimiter() *rateLimiter {
-	rl := &rateLimiter{counts: make(map[string]int)}
+func NewRateLimiter() *RateLimiter {
+	rl := &RateLimiter{counts: make(map[string]int)}
 	go func() {
 		for {
 			time.Sleep(1 * time.Minute)
@@ -39,55 +50,115 @@ func newRateLimiter() *rateLimiter {
 	return rl
 }
 
-func (rl *rateLimiter) allow(ip string, limit int) bool {
+func (rl *RateLimiter) Allow(ip string, limit int) bool {
 	rl.mu.Lock()
 	defer rl.mu.Unlock()
 	rl.counts[ip]++
 	return rl.counts[ip] <= limit
 }
 
+// --- JSON store ---
+
+func NewStore(path string) (*Store, error) {
+	s := &Store{path: path}
+	if err := os.MkdirAll(filepath.Dir(path), 0755); err != nil {
+		return nil, err
+	}
+	data, err := os.ReadFile(path)
+	if err == nil {
+		if err := json.Unmarshal(data, &s.comments); err != nil {
+			return nil, err
+		}
+		for _, c := range s.comments {
+			if c.ID >= s.nextID {
+				s.nextID = c.ID + 1
+			}
+		}
+	}
+	return s, nil
+}
+
+func (s *Store) save() error {
+	data, err := json.MarshalIndent(s.comments, "", "  ")
+	if err != nil {
+		return err
+	}
+	// atomic write: write to temp, then rename
+	tmp := s.path + ".tmp"
+	if err := os.WriteFile(tmp, data, 0644); err != nil {
+		return err
+	}
+	return os.Rename(tmp, s.path)
+}
+
+func (s *Store) Insert(slug, name, body, email string) *Comment {
+	s.mu.Lock()
+	defer s.mu.Unlock()
+
+	c := &Comment{
+		ID:        s.nextID,
+		Slug:      slug,
+		Name:      name,
+		Body:      body,
+		Email:     email,
+		CreatedAt: time.Now().UTC().Format("2006-01-02 15:04:05"),
+	}
+	s.nextID++
+	s.comments = append(s.comments, *c)
+
+	if err := s.save(); err != nil {
+		log.Printf("save: %v", err)
+	}
+	return c
+}
+
+func (s *Store) GetBySlug(slug string) []Comment {
+	s.mu.RLock()
+	defer s.mu.RUnlock()
+
+	var result []Comment
+	for _, c := range s.comments {
+		if c.Slug == slug {
+			result = append(result, c)
+		}
+	}
+	return result
+}
+
+// --- Server ---
+
+type Server struct {
+	store  *Store
+	cache  sync.Map // map[slug][]byte
+	origin string
+	rl     *RateLimiter
+}
+
 func main() {
-	dbPath := getEnv("DATABASE_PATH", "/data/comments.db")
+	storePath := getEnv("STORE_PATH", "/data/comments.json")
 	port := getEnv("PORT", "8080")
 	origin := getEnv("ORIGIN", "*")
 
-	db, err := sql.Open("sqlite", dbPath)
+	store, err := NewStore(storePath)
 	if err != nil {
-		log.Fatalf("open db: %v", err)
-	}
-	defer db.Close()
-
-	// WAL mode for better concurrent performance
-	if _, err := db.Exec("PRAGMA journal_mode=WAL"); err != nil {
-		log.Printf("wal hint: %v", err)
-	}
-	if _, err := db.Exec(`
-		CREATE TABLE IF NOT EXISTS comments (
-			id         INTEGER PRIMARY KEY AUTOINCREMENT,
-			slug       TEXT    NOT NULL,
-			name       TEXT    NOT NULL,
-			body       TEXT    NOT NULL,
-			email      TEXT    DEFAULT '',
-			created_at TEXT    NOT NULL DEFAULT (datetime('now'))
-		);
-		CREATE INDEX IF NOT EXISTS idx_comments_slug ON comments(slug);
-	`); err != nil {
-		log.Fatalf("schema: %v", err)
+		log.Fatalf("store: %v", err)
 	}
 
-	srv := &Server{db: db, origin: origin, rl: newRateLimiter()}
+	srv := &Server{
+		store:  store,
+		origin: origin,
+		rl:     NewRateLimiter(),
+	}
 
 	mux := http.NewServeMux()
-	mux.HandleFunc("GET /comments/{slug}.html", srv.handleGetComments)
+	mux.HandleFunc("GET /comments/", srv.handleGetComments)
 	mux.HandleFunc("POST /api/comment", srv.handlePostComment)
 	mux.HandleFunc("GET /health", func(w http.ResponseWriter, _ *http.Request) {
 		w.Write([]byte("ok"))
 	})
 
-	handler := corsMiddleware(srv.origin, mux)
-
-	log.Printf("listening on :%s", port)
-	log.Fatal(http.ListenAndServe(":"+port, handler))
+	log.Printf("listening on :%s (store: %s)", port, storePath)
+	log.Fatal(http.ListenAndServe(":"+port, corsMiddleware(srv.origin, mux)))
 }
 
 func getEnv(key, fallback string) string {
@@ -110,10 +181,11 @@ func corsMiddleware(origin string, next http.Handler) http.Handler {
 	})
 }
 
-// handleGetComments returns pre-rendered comment HTML for a slug.
-// Serves from in-memory cache; only hits SQLite on cache miss.
 func (s *Server) handleGetComments(w http.ResponseWriter, r *http.Request) {
-	slug := strings.TrimSpace(r.PathValue("slug"))
+	// Parse slug from path: /comments/{slug}.html
+	slug := strings.TrimPrefix(r.URL.Path, "/comments/")
+	slug = strings.TrimSuffix(slug, ".html")
+	slug = strings.TrimSpace(slug)
 	if slug == "" {
 		http.Error(w, "bad slug", http.StatusBadRequest)
 		return
@@ -125,26 +197,19 @@ func (s *Server) handleGetComments(w http.ResponseWriter, r *http.Request) {
 		return
 	}
 
-	html, err := s.renderComments(slug)
-	if err != nil {
-		log.Printf("render %s: %v", slug, err)
-		http.Error(w, "internal error", http.StatusInternalServerError)
-		return
-	}
+	html := renderComments(s.store.GetBySlug(slug))
 	s.cache.Store(slug, html)
 	w.Header().Set("Content-Type", "text/html; charset=utf-8")
 	w.Write(html)
 }
 
-// handlePostComment accepts a new comment via JSON or form POST.
-// On success it invalidates the slug's cache entry.
 func (s *Server) handlePostComment(w http.ResponseWriter, r *http.Request) {
-	// Rate limit: max 5 comments per minute per IP
+	// Rate limit
 	ip := r.RemoteAddr
 	if idx := strings.LastIndex(ip, ":"); idx != -1 {
 		ip = ip[:idx]
 	}
-	if !s.rl.allow(ip, 5) {
+	if !s.rl.Allow(ip, 5) {
 		http.Error(w, `{"error":"rate limited"}`, http.StatusTooManyRequests)
 		return
 	}
@@ -179,28 +244,18 @@ func (s *Server) handlePostComment(w http.ResponseWriter, r *http.Request) {
 		http.Error(w, `{"error":"slug, name, body required"}`, http.StatusBadRequest)
 		return
 	}
-
 	if len(name) > 100 || len(body) > 10000 || len(email) > 200 {
 		http.Error(w, `{"error":"fields too long"}`, http.StatusBadRequest)
 		return
 	}
 
-	// Honeypot: if "website" is filled, silently accept but don't save
+	// Honeypot
 	if r.FormValue("website") != "" {
 		writeJSON(w, http.StatusOK, map[string]any{"ok": true})
 		return
 	}
 
-	if _, err := s.db.Exec(
-		"INSERT INTO comments (slug, name, body, email) VALUES (?, ?, ?, ?)",
-		slug, name, body, email,
-	); err != nil {
-		log.Printf("insert: %v", err)
-		http.Error(w, `{"error":"db error"}`, http.StatusInternalServerError)
-		return
-	}
-
-	// Invalidate cache — next read re-renders from DB
+	s.store.Insert(slug, name, body, email)
 	s.cache.Delete(slug)
 
 	// Form POST: redirect back
@@ -216,35 +271,10 @@ func (s *Server) handlePostComment(w http.ResponseWriter, r *http.Request) {
 	writeJSON(w, http.StatusOK, map[string]any{"ok": true})
 }
 
-// renderComments queries DB and returns full <ol> HTML.
-func (s *Server) renderComments(slug string) ([]byte, error) {
-	rows, err := s.db.Query(
-		`SELECT name, body, created_at
-		 FROM comments
-		 WHERE slug = ?
-		 ORDER BY id ASC`,
-		slug,
-	)
-	if err != nil {
-		return nil, err
-	}
-	defer rows.Close()
-
-	type row struct{ name, body, createdAt string }
-	var comments []row
-	for rows.Next() {
-		var c row
-		if err := rows.Scan(&c.name, &c.body, &c.createdAt); err != nil {
-			return nil, err
-		}
-		comments = append(comments, c)
-	}
-	if err := rows.Err(); err != nil {
-		return nil, err
-	}
-
+// renderComments renders comment list to HTML. No DB reads at request time.
+func renderComments(comments []Comment) []byte {
 	if len(comments) == 0 {
-		return []byte(`<p class="comments-empty">还没有评论。来写第一条吧 ✍️</p>`), nil
+		return []byte(`<p class="comments-empty">还没有评论。来写第一条吧 ✍️</p>`)
 	}
 
 	var b strings.Builder
@@ -252,12 +282,16 @@ func (s *Server) renderComments(slug string) ([]byte, error) {
 	for _, c := range comments {
 		b.WriteString(`<li class="comment">`)
 		b.WriteString(`<footer class="comment-meta">`)
-		b.WriteString(html.EscapeString(c.name))
+		b.WriteString(html.EscapeString(c.Name))
 		b.WriteString(` · <time>`)
-		b.WriteString(c.createdAt[:10]) // YYYY-MM-DD only
+		if len(c.CreatedAt) >= 10 {
+			b.WriteString(c.CreatedAt[:10])
+		} else {
+			b.WriteString(c.CreatedAt)
+		}
 		b.WriteString(`</time></footer>`)
 		b.WriteString(`<div class="comment-body">`)
-		body := html.EscapeString(c.body)
+		body := html.EscapeString(c.Body)
 		body = strings.ReplaceAll(body, "\n\n", "</p><p>")
 		body = strings.ReplaceAll(body, "\n", "<br>")
 		b.WriteString(`<p>`)
@@ -267,7 +301,7 @@ func (s *Server) renderComments(slug string) ([]byte, error) {
 		b.WriteString(`</li>`)
 	}
 	b.WriteString(`</ol>`)
-	return []byte(b.String()), nil
+	return []byte(b.String())
 }
 
 func writeJSON(w http.ResponseWriter, status int, v any) {
