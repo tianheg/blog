@@ -166,6 +166,7 @@ type Mailer struct {
 	port       string
 	user       string
 	pass       string
+	fromEmail  string
 	adminEmail string
 	siteURL    string
 }
@@ -176,6 +177,7 @@ func NewMailer() *Mailer {
 		port:       getEnv("SMTP_PORT", "587"),
 		user:       getEnv("SMTP_USER", ""),
 		pass:       getEnv("SMTP_PASS", ""),
+		fromEmail:  getEnv("FROM_EMAIL", "noreply@tianheg.co"),
 		adminEmail: getEnv("ADMIN_EMAIL", ""),
 		siteURL:    getEnv("SITE_URL", "https://tianheg.co"),
 	}
@@ -200,23 +202,23 @@ func (m *Mailer) SendCommentNotification(c *Comment) {
 	}
 	pageURL = strings.TrimRight(pageURL, "/") + "/"
 
-	msg := fmt.Sprintf("From: %s\r\nTo: %s\r\nSubject: [Blog] New comment from %s\r\n\r\n"+
-		"New comment on your blog:\r\n\r\n"+
-		"  Page: %s\r\n"+
-		"  Author: %s (%s)\r\n"+
-		"  Date: %s\r\n\r\n"+
-		"  \u2014\u2014\u2014\u2014\u2014\u2014\u2014\u2014\u2014\u2014\u2014\u2014\u2014\u2014\u2014\u2014\u2014\u2014\u2014\u2014\u2014\u2014\u2014\u2014\u2014\u2014\u2014\u2014\u2014\u2014\u2014\u2014"+
+	msg := fmt.Sprintf("From: %s\r\nTo: %s\r\nSubject: [Blog] %s commented on your post\r\n\r\n"+
+		"Hi,\r\n\r\n"+
+		"%s left a comment on %s:\r\n\r\n"+
+		"\u2014\u2014\u2014\u2014\u2014\u2014\u2014\u2014\u2014\u2014\u2014\u2014\u2014\u2014\u2014\u2014\u2014\u2014\u2014\u2014\u2014\u2014\u2014\u2014\u2014\u2014\u2014\u2014\u2014\u2014\u2014\u2014"+
 		"\u2014\u2014\u2014\u2014\u2014\u2014\u2014\u2014\u2014\u2014\u2014\u2014\u2014\u2014\u2014\u2014\u2014\u2014\u2014\u2014\u2014\u2014\u2014\u2014\u2014\u2014\u2014\u2014\u2014\u2014\u2014\u2014\r\n"+
-		"  %s\r\n"+
-		"  \u2014\u2014\u2014\u2014\u2014\u2014\u2014\u2014\u2014\u2014\u2014\u2014\u2014\u2014\u2014\u2014\u2014\u2014\u2014\u2014\u2014\u2014\u2014\u2014\u2014\u2014\u2014\u2014\u2014\u2014\u2014\u2014"+
+		"%s\r\n"+
+		"\u2014\u2014\u2014\u2014\u2014\u2014\u2014\u2014\u2014\u2014\u2014\u2014\u2014\u2014\u2014\u2014\u2014\u2014\u2014\u2014\u2014\u2014\u2014\u2014\u2014\u2014\u2014\u2014\u2014\u2014\u2014\u2014"+
 		"\u2014\u2014\u2014\u2014\u2014\u2014\u2014\u2014\u2014\u2014\u2014\u2014\u2014\u2014\u2014\u2014\u2014\u2014\u2014\u2014\u2014\u2014\u2014\u2014\u2014\u2014\u2014\u2014\u2014\u2014\u2014\u2014\r\n\r\n"+
-		"  Manage: %s#comments\r\n",
-		m.user, m.adminEmail, c.Name,
+		"Reply: %s#comments?reply=%d\r\n"+
+		"Delete: curl -X DELETE https://tianheg.co/api/comment/%d -H \"X-Admin-Key: <key>\"\r\n",
+		m.fromEmail, m.adminEmail,
+		c.Name,
+		c.Name,
 		pageURL,
-		c.Name, c.Email,
-		c.CreatedAt,
 		c.Body,
-		pageURL,
+		pageURL, c.ID,
+		c.ID,
 	)
 
 	addr := m.host + ":" + m.port
