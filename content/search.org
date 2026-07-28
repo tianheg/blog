@@ -1,8 +1,8 @@
 #+TITLE: Search
 
 #+BEGIN_EXPORT html
-<link href="/pagefind/pagefind-ui.css" rel="stylesheet">
-<script src="/pagefind/pagefind-ui.js"></script>
+<link href="/pagefind/pagefind-component-ui.css" rel="stylesheet">
+<script src="/pagefind/pagefind-component-ui.js" type="module"></script>
 <style>
   .search-tabs { display: flex; gap: 0; margin-bottom: 1.5rem; border-bottom: 1px solid #e5e7eb; }
   .search-tab { padding: 0.5rem 1rem; font-size: 0.875rem; cursor: pointer; border: none; background: none; color: #6b7280; border-bottom: 2px solid transparent; transition: all 0.15s; }
@@ -26,7 +26,6 @@
 
   /* Dark mode — blog uses prefers-color-scheme, not data-theme */
   @media (prefers-color-scheme: dark) {
-    :root { --pagefind-ui-background: #1f2937; --pagefind-ui-border: #374151; --pagefind-ui-primary: #93c5fd; --pagefind-ui-text: #93c5fd; }
     .search-tabs { border-bottom-color: #374151; }
     .search-tab { color: #9ca3af; }
     .search-tab:hover { color: #d1d5db; }
@@ -38,20 +37,23 @@
     #semantic-input { background: #1f2937; border-color: #4b5563; color: #f3f4f6; }
     #semantic-input:focus { border-color: #60a5fa; }
 
-    /* Pagefind UI */
-    .pagefind-ui__drawer { color: #d1d5db; }
-    .pagefind-ui__search-clear { background: #374151; color: #d1d5db; }
-    .pagefind-ui__message { color: #9ca3af; }
-    .pagefind-ui__result-excerpt { color: #9ca3af; }
-    .pagefind-ui__result-excerpt mark { background: #3b3b1f; color: #fef08a; }
-    .pagefind-ui__result { border-top-color: #374151; }
-    .pagefind-ui__result:last-of-type { border-bottom-color: #374151; }
-    .pagefind-ui__result-nested { border-color: #374151; }
-    .pagefind-ui__button { background: #1f2937; color: #d1d5db; border-color: #4b5563; }
-    .pagefind-ui__button:hover { background: #374151; }
-    .pagefind-ui__button:focus { border-color: #60a5fa; }
-    .pagefind-ui__button.pagefind-ui__button--disabled { background: #111827; color: #6b7280; border-color: #374151; }
-    .pagefind-ui__result-thumb { border-color: #374151; }
+    /* Pagefind Component UI — dark mode */
+    :root {
+      --pf-text: #d1d5db;
+      --pf-text-secondary: #9ca3af;
+      --pf-text-muted: #6b7280;
+      --pf-background: #1f2937;
+      --pf-border: #374151;
+      --pf-border-focus: #60a5fa;
+      --pf-hover: #374151;
+      --pf-mark: #fef08a;
+      --pf-skeleton: #374151;
+      --pf-skeleton-shine: #4b5563;
+      --pf-outline-focus: #60a5fa;
+      --pf-scroll-shadow: rgba(255, 255, 255, 0.1);
+      --pf-result-excerpt-color: #9ca3af;
+      --pf-result-title-color: #60a5fa;
+    }
   }
 </style>
 
@@ -61,7 +63,9 @@
 </div>
 
 <div id="keyword-panel" class="search-panel active">
-  <div id="search" data-pagefind-ignore></div>
+  <pagefind-input data-pagefind-ignore></pagefind-input>
+  <pagefind-summary default-message="输入关键词开始搜索"></pagefind-summary>
+  <pagefind-results show-sub-results></pagefind-results>
 </div>
 
 <div id="semantic-panel" class="search-panel">
@@ -82,15 +86,6 @@
       tab.classList.add('active');
       document.getElementById(tab.getAttribute('data-tab') + '-panel').classList.add('active');
     });
-  });
-
-  // --- PageFind init (keyword tab) ---
-  new PagefindUI({
-    element: "#search",
-    pageSize: 10,
-    resetStyles: false,
-    showImages: false,
-    showSubResults: true
   });
 
   // --- Semantic search ---
