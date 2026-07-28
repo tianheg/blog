@@ -227,6 +227,9 @@ export default {
     if (url.pathname.startsWith('/pagefind-semantic/')) {
       resp.headers.set('Access-Control-Allow-Origin', '*');
     }
+    // Content Security Policy
+    resp.headers.set('Content-Security-Policy',
+      "object-src 'none'; base-uri 'none'; frame-ancestors 'none';");
     return resp;
   },
 };
