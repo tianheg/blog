@@ -16,3 +16,25 @@
     {{- end }}
   {{- end }}
 {{- end }}
+
+{{- /* Canvas UI Glass effect — only on /about */}}
+{{- if eq .Page.File.Path "about.org" }}
+  {{- with resources.Get "ts/canvas-ui-init.ts" }}
+    {{- $opts := dict "targetPath" "js/canvas-ui-init.js" -}}
+    {{- if hugo.IsDevelopment }}
+      {{- with . | js.Build $opts }}
+        <script src="{{ .RelPermalink }}" defer></script>
+      {{- end }}
+    {{- else }}
+      {{- $opts = merge $opts (dict "minify" true) -}}
+      {{- with . | js.Build $opts | fingerprint }}
+        <script
+          src="{{ .RelPermalink }}"
+          integrity="{{ .Data.Integrity }}"
+          crossorigin="anonymous"
+          defer
+        ></script>
+      {{- end }}
+    {{- end }}
+  {{- end }}
+{{- end }}
