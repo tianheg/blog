@@ -1,27 +1,28 @@
 import { createGlass, supportsHtmlInCanvas, type GlassOptions } from "./canvas-ui/glass";
 
 window.addEventListener("DOMContentLoaded", () => {
-  const container = document.getElementById("glass-container");
-  const contentRoot = document.getElementById("glass-content-root");
   const output = document.getElementById("glass-output") as HTMLCanvasElement | null;
+  if (!output) return;
 
-  if (!container || !contentRoot || !output) return;
-
+  const pageContent = document.getElementById("page-content")!;
   const native = supportsHtmlInCanvas();
+
   let source: HTMLCanvasElement;
   let contentEl: HTMLElement;
 
   if (native) {
-    // html-in-canvas: wrap content inside a canvas with layoutsubtree
+    // Move all page content inside a source canvas with layoutsubtree
     source = document.createElement("canvas");
     source.id = "glass-source";
     source.setAttribute("layoutsubtree", "true");
     Object.assign(source.style, {
-      position: "absolute",
+      position: "fixed",
       inset: "0",
-      width: "100%",
-      height: "100%",
+      width: "100vw",
+      height: "100vh",
       display: "block",
+      border: "none",
+      overflow: "hidden",
     });
 
     const inner = document.createElement("div");
@@ -30,32 +31,32 @@ window.addEventListener("DOMContentLoaded", () => {
       position: "relative",
       width: "100%",
       height: "100%",
+      overflow: "auto",
     });
 
-    // Move content children into the canvas wrapper
-    const children = [...contentRoot.children];
+    // Move children from page-content into the canvas inner div
+    const children = [...pageContent.children];
     for (const child of children) {
       inner.appendChild(child);
     }
     source.appendChild(inner);
-    container.insertBefore(source, output);
-    container.removeChild(contentRoot);
+    document.body.insertBefore(source, output);
 
     contentEl = inner;
   } else {
-    // Fallback: content stays as-is, create an invisible canvas for the API
+    // Fallback: invisible source canvas, use body as content
     source = document.createElement("canvas");
     source.id = "glass-source";
     Object.assign(source.style, {
-      position: "absolute",
+      position: "fixed",
       inset: "0",
-      width: "100%",
-      height: "100%",
+      width: "100vw",
+      height: "100vh",
       opacity: "0",
       pointerEvents: "none",
     });
-    container.insertBefore(source, output);
-    contentEl = contentRoot;
+    document.body.insertBefore(source, output);
+    contentEl = pageContent;
   }
 
   const options: GlassOptions = {
@@ -73,20 +74,20 @@ window.addEventListener("DOMContentLoaded", () => {
   const instance = createGlass({ source, content: contentEl, output }, options);
 
   if (!instance) {
-    console.warn("Canvas UI Glass: WebGL2 not available, removing canvas wrappers");
-    // Restore original content if we moved it
+    console.warn("Canvas UI Glass: WebGL2 not available");
     if (native && source.parentNode) {
+      // Restore content
       const restored = document.createElement("div");
-      restored.id = "glass-content-root";
+      restored.id = "page-content";
       while (contentEl.firstChild) {
         restored.appendChild(contentEl.firstChild);
       }
-      source.parentNode.insertBefore(restored, source);
-      source.parentNode.removeChild(source);
+      document.body.insertBefore(restored, source);
+      document.body.removeChild(source);
     }
+    output.style.display = "none";
     return;
   }
 
-  // Expose for experimentation via console
   (window as any).__glass = instance;
 }, { once: true });
