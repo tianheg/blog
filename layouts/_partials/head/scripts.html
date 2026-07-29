@@ -18,7 +18,7 @@
 {{- end }}
 
 {{- /* Canvas UI Glass effect — only on /about */}}
-{{- if eq .Page.File.Path "about.org" }}
+{{- if and .Page.File (eq .Page.File.Path "about.org") }}
   {{- with resources.Get "ts/canvas-ui-init.ts" }}
     {{- $opts := dict "targetPath" "js/canvas-ui-init.js" -}}
     {{- if hugo.IsDevelopment }}
