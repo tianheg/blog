@@ -1,0 +1,63 @@
+#+TITLE: Intel I219-LM e1000e NIC Hardware Unit Hang 修复
+#+HEADER: PVE
+
+Intel I219-LM 网卡（e1000e 驱动）在 Linux 下存在 Hardware Unit Hang 缺陷，表现为网卡周期性卡死约 30 秒，内核日志反复出现：
+
+#+BEGIN_EXAMPLE
+e1000e 0000:00:1f.6 eno1: Detected Hardware Unit Hang:
+#+END_EXAMPLE
+
+不影响 DHCP/IP 配置（PVE 静态 IP 也会触发），本质是节能特性与驱动兼容性问题。
+
+* 修复方案
+
+** 立即生效（无需重启）：关 TSO/GSO/GRO
+
+#+BEGIN_SRC bash
+ethtool -K eno1 tso off gso off gro off
+#+END_SRC
+
+持久化 systemd 服务：
+
+#+BEGIN_SRC bash
+cat > /etc/systemd/system/ethtool-fix.service << 'EOF'
+[Unit]
+Description=Fix e1000e NIC hangs by disabling TSO/GSO/GRO
+After=network.target
+
+[Service]
+Type=oneshot
+ExecStart=/usr/sbin/ethtool -K eno1 tso off gso off gro off
+RemainAfterExit=true
+
+[Install]
+WantedBy=multi-user.target
+EOF
+systemctl daemon-reload
+systemctl enable --now ethtool-fix
+#+END_SRC
+
+** 内核参数（需重启）：关 EEE + CRCStrip
+
+在 {{{/etc/default/grub}}} 的 {{{GRUB_CMDLINE_LINUX_DEFAULT}}} 追加参数：
+
+#+BEGIN_SRC bash
+GRUB_CMDLINE_LINUX_DEFAULT="quiet e1000e.EEE=0 e1000e.CRCStrip=0"
+update-grub
+#+END_SRC
+
+* 验证
+
+关掉 offload 后查看：
+
+#+BEGIN_SRC bash
+ethtool -k eno1 | grep -E "tso|gso|gro"
+#+END_SRC
+
+所有应为 {{{off}}。重启后可检查内核参数生效：
+
+#+BEGIN_SRC bash
+cat /proc/cmdline | grep e1000e
+#+END_SRC
+
+来源: [[https://wiki.archlinux.org/title/Network_configuration#Link_lost_after_network_traffic][Arch Wiki: Network configuration]]
