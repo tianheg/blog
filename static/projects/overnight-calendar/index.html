@@ -320,12 +320,6 @@
       color: var(--accent2);
       font-family: "SF Mono", "Cascadia Code", monospace;
     }
-    .data-file .dirty-mark {
-      color: var(--accent);
-      display: none;
-    }
-    .data-file .dirty-mark.show { display: inline; }
-
     .btn-download {
       background: var(--surface);
       border: 1px solid var(--border);
@@ -338,10 +332,6 @@
     }
     .btn-download:hover {
       background: var(--surface2);
-    }
-    .btn-download:disabled {
-      opacity: 0.4;
-      cursor: not-allowed;
     }
 
     @media (max-width: 500px) {
@@ -394,8 +384,8 @@
 
   <div class="data-bar">
     <div class="data-file">
-      <span>📄 <code>data.json</code></span>
-      <span class="dirty-mark" id="dirty-mark">· 未同步 ⚠️</span>
+      <span>📄 <code>data.json</code> — 浏览器本地存储 | 远端同步</span>
+      <span id="sync-status"></span>
     </div>
     <button class="btn-download" id="download-btn">💾 下载 data.json</button>
   </div>
@@ -429,8 +419,9 @@
 
 <script>
 (function() {
+  const STORAGE_KEY = 'overnight_calendar';
+
   let data = {};
-  let dirty = false;
   let currentYear, currentMonth;
 
   function dateKey(y, m, d) {
@@ -443,8 +434,7 @@
     const k = dateKey(y, m, d);
     if (entry) { data[k] = entry; }
     else { delete data[k]; }
-    dirty = true;
-    updateDirtyMark();
+    persist();
     updateStats();
     render();
   }
@@ -455,14 +445,62 @@
     return sorted;
   }
 
-  function markSynced() {
-    dirty = false;
-    updateDirtyMark();
+  function persist() {
+    localStorage.setItem(STORAGE_KEY, JSON.stringify(data));
   }
 
-  function updateDirtyMark() {
-    document.getElementById('dirty-mark').classList.toggle('show', dirty);
-    document.getElementById('download-btn').disabled = !dirty;
+  function loadFromLocal() {
+    try {
+      const raw = localStorage.getItem(STORAGE_KEY);
+      if (raw) { return JSON.parse(raw); }
+    } catch {}
+    return null;
+  }
+
+  function mergeByTimestamp(local, remote) {
+    const merged = {};
+    const allKeys = new Set([...Object.keys(local || {}), ...Object.keys(remote || {})]);
+    for (const k of allKeys) {
+      const l = local?.[k], r = remote?.[k];
+      if (!r) { merged[k] = l; continue; }
+      if (!l) { merged[k] = r; continue; }
+      merged[k] = (l.timestamp || 0) >= (r.timestamp || 0) ? l : r;
+    }
+    return merged;
+  }
+
+  async function syncData() {
+    const local = loadFromLocal();
+    let remote = null;
+
+    try {
+      const res = await fetch('data.json?' + Date.now());
+      if (res.ok) remote = await res.json();
+    } catch {}
+
+    if (local && remote) {
+      const merged = mergeByTimestamp(local, remote);
+      const conflicts = Object.keys(merged).filter(k => {
+        const l = local[k], r = remote[k];
+        return l && r && l.timestamp !== r.timestamp;
+      });
+      data = merged;
+      document.getElementById('sync-status').textContent =
+        `✓ 合并完成${conflicts.length ? `（${conflicts.length} 条冲突已自动裁决）` : ''}`;
+    } else if (remote) {
+      data = remote;
+      document.getElementById('sync-status').textContent = '✓ 从远端同步';
+    } else if (local) {
+      data = local;
+      document.getElementById('sync-status').textContent = '✓ 本地存储';
+    } else {
+      data = {};
+      document.getElementById('sync-status').textContent = '暂无数据';
+    }
+
+    persist();
+    updateStats();
+    render();
   }
 
   function updateStats() {
@@ -631,19 +669,6 @@
     a.click();
     document.body.removeChild(a);
     URL.revokeObjectURL(url);
-    markSynced();
-  }
-
-  async function loadData() {
-    try {
-      const res = await fetch('data.json');
-      if (!res.ok) throw new Error('not found');
-      data = await res.json();
-    } catch {
-      data = {};
-    }
-    updateStats();
-    render();
   }
 
   function bindEvents() {
@@ -693,7 +718,7 @@
     const now = new Date();
     currentYear = now.getFullYear();
     currentMonth = now.getMonth();
-    await loadData();
+    await syncData();
     bindEvents();
   }
 
