@@ -20,8 +20,6 @@
       --tag-coding: #c0392b;
       --tag-reading: #2c6e49;
       --tag-writing: #b8860b;
-      --tag-gaming: #2563eb;
-      --tag-social: #7c3aed;
       --tag-work: #6366f1;
       --tag-thinking: #a0522d;
       --tag-other: #8a7e74;
@@ -195,8 +193,6 @@
     .day-cell.has-entry.tag-coding::before { background: var(--tag-coding); }
     .day-cell.has-entry.tag-reading::before { background: var(--tag-reading); }
     .day-cell.has-entry.tag-writing::before { background: var(--tag-writing); }
-    .day-cell.has-entry.tag-gaming::before { background: var(--tag-gaming); }
-    .day-cell.has-entry.tag-social::before { background: var(--tag-social); }
     .day-cell.has-entry.tag-work::before { background: var(--tag-work); }
     .day-cell.has-entry.tag-thinking::before { background: var(--tag-thinking); }
     .day-cell.has-entry.tag-other::before { background: var(--tag-other); }
@@ -339,8 +335,6 @@
     .tag-btn[data-tag="coding"].active { background: var(--tag-coding); }
     .tag-btn[data-tag="reading"].active { background: var(--tag-reading); }
     .tag-btn[data-tag="writing"].active { background: var(--tag-writing); }
-    .tag-btn[data-tag="gaming"].active { background: var(--tag-gaming); }
-    .tag-btn[data-tag="social"].active { background: var(--tag-social); }
     .tag-btn[data-tag="work"].active { background: var(--tag-work); }
     .tag-btn[data-tag="thinking"].active { background: var(--tag-thinking); }
     .tag-btn[data-tag="other"].active { background: var(--tag-other); }
@@ -422,8 +416,6 @@
     <span class="legend-item"><span class="legend-bar" style="background:var(--tag-coding)"></span>编码</span>
     <span class="legend-item"><span class="legend-bar" style="background:var(--tag-reading)"></span>阅读</span>
     <span class="legend-item"><span class="legend-bar" style="background:var(--tag-writing)"></span>写作</span>
-    <span class="legend-item"><span class="legend-bar" style="background:var(--tag-gaming)"></span>游戏</span>
-    <span class="legend-item"><span class="legend-bar" style="background:var(--tag-social)"></span>社交</span>
     <span class="legend-item"><span class="legend-bar" style="background:var(--tag-work)"></span>工作</span>
     <span class="legend-item"><span class="legend-bar" style="background:var(--tag-thinking)"></span>胡思乱想</span>
     <span class="legend-item"><span class="legend-bar" style="background:var(--tag-other)"></span>其他</span>
@@ -446,8 +438,6 @@
       <button class="tag-btn" data-tag="coding">💻 编码</button>
       <button class="tag-btn" data-tag="reading">📖 阅读</button>
       <button class="tag-btn" data-tag="writing">✍️ 写作</button>
-      <button class="tag-btn" data-tag="gaming">🎮 游戏</button>
-      <button class="tag-btn" data-tag="social">💬 社交</button>
       <button class="tag-btn" data-tag="work">⚙️ 工作</button>
       <button class="tag-btn" data-tag="thinking">🤔 胡思乱想</button>
       <button class="tag-btn" data-tag="other">📌 其他</button>
@@ -591,8 +581,8 @@
       const tag = document.createElement('span');
       tag.className = 'day-tag';
       const labels = {
-        coding:'编码', reading:'阅读', writing:'写作', gaming:'游戏',
-        social:'社交', work:'工作', thinking:'胡思乱想', other:'其他'
+        coding:'编码', reading:'阅读', writing:'写作',
+        work:'工作', thinking:'胡思乱想', other:'其他'
       };
       tag.textContent = labels[e.tag] || '其他';
       if (e.note) tag.textContent = e.note.slice(0, 10) + (e.note.length > 10 ? '..' : '');
