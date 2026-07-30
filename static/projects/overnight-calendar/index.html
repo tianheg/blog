@@ -6,168 +6,276 @@
   <title>熬夜日历 · Overnight Calendar</title>
   <style>
     :root {
-      --bg: #1a1a2e;
-      --surface: #16213e;
-      --surface2: #0f3460;
-      --accent: #e94560;
-      --accent2: #f5a623;
-      --text: #e8e8e8;
-      --text2: #8892b0;
-      --border: #2a2a4a;
-      --tag-coding: #e94560;
-      --tag-reading: #0f3460;
-      --tag-writing: #f5a623;
-      --tag-gaming: #00b4d8;
-      --tag-social: #7209b7;
-      --tag-work: #2d6a4f;
-      --tag-thinking: #6b4f3c;
-      --tag-other: #5a5a7a;
+      --bg: #f5f0eb;
+      --surface: #ffffff;
+      --surface2: #faf7f4;
+      --border: #e8e0d8;
+      --border2: #d4cac0;
+      --text: #2c2420;
+      --text2: #8a7e74;
+      --text3: #b0a69c;
+      --accent: #c0392b;
+      --today-border: #c0392b;
+      /* tag colors - soft, muted */
+      --tag-coding: #c0392b;
+      --tag-reading: #2c6e49;
+      --tag-writing: #b8860b;
+      --tag-gaming: #2563eb;
+      --tag-social: #7c3aed;
+      --tag-work: #6366f1;
+      --tag-thinking: #a0522d;
+      --tag-other: #8a7e74;
     }
 
     * { box-sizing: border-box; margin: 0; padding: 0; }
 
     body {
-      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Noto Sans SC", sans-serif;
+      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", "Noto Sans SC", system-ui, sans-serif;
       background: var(--bg);
       color: var(--text);
-      min-height: 100vh;
-      display: flex;
-      justify-content: center;
-      padding: 2rem 1rem;
+      -webkit-font-smoothing: antialiased;
     }
 
-    .container {
-      max-width: 900px;
-      width: 100%;
+    .page-wrap {
+      max-width: 820px;
+      margin: 0 auto;
+      padding: 2rem 1.5rem;
     }
 
-    header {
+    /* Header */
+    .header {
+      margin-bottom: 2rem;
+    }
+    .header-top {
       display: flex;
       justify-content: space-between;
-      align-items: center;
-      margin-bottom: 2rem;
+      align-items: flex-start;
       flex-wrap: wrap;
       gap: 1rem;
     }
-
-    header h1 {
-      font-size: 1.5rem;
+    .header h1 {
+      font-size: 1.35rem;
       font-weight: 600;
+      letter-spacing: -0.02em;
     }
-    header h1 small {
-      font-size: 0.875rem;
-      color: var(--text2);
+    .header h1 span {
       font-weight: 400;
-      margin-left: 0.5rem;
+      font-size: 0.85rem;
+      color: var(--text2);
+      letter-spacing: 0;
+      margin-left: 0.4rem;
     }
-
     .stats {
       display: flex;
-      gap: 1.5rem;
-      font-size: 0.875rem;
+      gap: 1.25rem;
+      font-size: 0.8rem;
       color: var(--text2);
+      padding-top: 0.25rem;
     }
-    .stats span { white-space: nowrap; }
-    .stats strong { color: var(--text); }
+    .stats strong {
+      color: var(--text);
+      font-weight: 600;
+    }
 
-    .nav-bar {
+    /* Nav */
+    .nav {
       display: flex;
       justify-content: space-between;
       align-items: center;
-      margin-bottom: 1.5rem;
+      margin-bottom: 1.25rem;
     }
-    .nav-bar .month-label {
-      font-size: 1.25rem;
+    .month-label {
+      font-size: 1.1rem;
       font-weight: 500;
     }
-    .nav-bar button {
+    .nav-group {
+      display: flex;
+      align-items: center;
+      gap: 0.25rem;
+    }
+    .nav-btn {
       background: var(--surface);
       border: 1px solid var(--border);
-      color: var(--text);
-      padding: 0.4rem 1rem;
+      color: var(--text2);
+      padding: 0.3rem 0.7rem;
       border-radius: 6px;
       cursor: pointer;
-      font-size: 0.875rem;
-      transition: background 0.15s;
+      font-size: 0.8rem;
+      transition: all 0.12s;
+      font-family: inherit;
     }
-    .nav-bar button:hover {
-      background: var(--surface2);
+    .nav-btn:hover {
+      border-color: var(--border2);
+      color: var(--text);
     }
-    .nav-bar button.today-btn {
-      margin: 0 0.5rem;
+    .nav-btn.today {
       font-size: 0.75rem;
+      padding: 0.3rem 0.6rem;
     }
 
+    /* Weekdays */
     .weekdays {
       display: grid;
       grid-template-columns: repeat(7, 1fr);
-      gap: 2px;
-      margin-bottom: 2px;
+      gap: 4px;
+      margin-bottom: 4px;
+    }
+    .weekdays span {
       text-align: center;
-      font-size: 0.75rem;
-      color: var(--text2);
-      text-transform: uppercase;
-      letter-spacing: 0.05em;
-      padding: 0.5rem 0;
+      font-size: 0.7rem;
+      color: var(--text3);
+      padding: 0.4rem 0;
+      font-weight: 500;
+      letter-spacing: 0.04em;
     }
 
-    .calendar-grid {
+    /* Calendar */
+    .calendar {
       display: grid;
       grid-template-columns: repeat(7, 1fr);
-      gap: 2px;
+      gap: 4px;
     }
 
     .day-cell {
-      aspect-ratio: 1;
       background: var(--surface);
-      border-radius: 6px;
+      border-radius: 8px;
+      padding: 6px;
+      aspect-ratio: 1;
       display: flex;
       flex-direction: column;
       align-items: center;
       justify-content: center;
       cursor: pointer;
+      border: 1.5px solid transparent;
+      transition: box-shadow 0.12s, transform 0.1s;
       position: relative;
-      font-size: 0.875rem;
-      transition: background 0.15s, transform 0.1s;
-      min-height: 60px;
-      border: 1px solid transparent;
+      min-height: 56px;
     }
     .day-cell:hover {
-      background: var(--surface2);
-      transform: scale(1.03);
-      z-index: 1;
+      box-shadow: 0 2px 8px rgba(0,0,0,0.06);
+      transform: translateY(-1px);
     }
-    .day-cell.other-month {
-      opacity: 0.25;
+    .day-cell.other {
+      opacity: 0.3;
       pointer-events: none;
     }
     .day-cell.today {
-      border-color: var(--accent);
-      box-shadow: 0 0 8px rgba(233, 69, 96, 0.3);
+      border-color: var(--today-border);
     }
-    .day-cell .date-num {
-      font-size: 0.8rem;
+    .day-cell .day-num {
+      font-size: 0.85rem;
       font-weight: 500;
+      line-height: 1;
     }
-    .day-cell .dot {
-      width: 6px;
-      height: 6px;
-      border-radius: 50%;
+    .day-cell .day-tag {
       margin-top: 3px;
+      font-size: 0.55rem;
+      color: var(--text3);
+      max-width: 90%;
+      overflow: hidden;
+      text-overflow: ellipsis;
+      white-space: nowrap;
+      text-align: center;
+      line-height: 1.2;
     }
-
+    /* Entry indicator: top colored bar */
     .day-cell.has-entry {
-      border-color: var(--accent2);
+      position: relative;
+    }
+    .day-cell.has-entry::before {
+      content: '';
+      position: absolute;
+      top: -1.5px;
+      left: 20%;
+      right: 20%;
+      height: 3px;
+      border-radius: 3px;
+      background: var(--accent);
+    }
+    .day-cell.has-entry.tag-coding::before { background: var(--tag-coding); }
+    .day-cell.has-entry.tag-reading::before { background: var(--tag-reading); }
+    .day-cell.has-entry.tag-writing::before { background: var(--tag-writing); }
+    .day-cell.has-entry.tag-gaming::before { background: var(--tag-gaming); }
+    .day-cell.has-entry.tag-social::before { background: var(--tag-social); }
+    .day-cell.has-entry.tag-work::before { background: var(--tag-work); }
+    .day-cell.has-entry.tag-thinking::before { background: var(--tag-thinking); }
+    .day-cell.has-entry.tag-other::before { background: var(--tag-other); }
+
+    /* Legend */
+    .legend {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 0.6rem 1rem;
+      margin-top: 1.25rem;
+      font-size: 0.72rem;
+      color: var(--text2);
+    }
+    .legend-item {
+      display: flex;
+      align-items: center;
+      gap: 0.35rem;
+    }
+    .legend-bar {
+      display: block;
+      width: 14px;
+      height: 3px;
+      border-radius: 2px;
     }
 
+    /* Data bar */
+    .data-bar {
+      margin-top: 1.25rem;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      flex-wrap: wrap;
+      gap: 0.75rem;
+      padding: 0.6rem 0.9rem;
+      background: var(--surface);
+      border-radius: 8px;
+      border: 1px solid var(--border);
+    }
+    .data-info {
+      font-size: 0.72rem;
+      color: var(--text2);
+      display: flex;
+      align-items: center;
+      gap: 0.4rem;
+    }
+    .data-info code {
+      font-family: "SF Mono", "Cascadia Code", "JetBrains Mono", monospace;
+      font-size: 0.68rem;
+      color: var(--text);
+      background: var(--surface2);
+      padding: 0.1rem 0.35rem;
+      border-radius: 3px;
+    }
+    .btn-download {
+      background: var(--surface2);
+      border: 1px solid var(--border);
+      color: var(--text2);
+      padding: 0.35rem 0.8rem;
+      border-radius: 6px;
+      cursor: pointer;
+      font-size: 0.72rem;
+      transition: all 0.12s;
+      font-family: inherit;
+    }
+    .btn-download:hover {
+      border-color: var(--border2);
+      color: var(--text);
+    }
+
+    /* Modal */
     .modal-overlay {
       display: none;
       position: fixed;
-      top: 0; left: 0; right: 0; bottom: 0;
-      background: rgba(0,0,0,0.6);
+      inset: 0;
+      background: rgba(44, 36, 32, 0.4);
       z-index: 100;
       justify-content: center;
       align-items: center;
+      padding: 1rem;
     }
     .modal-overlay.show { display: flex; }
 
@@ -175,79 +283,67 @@
       background: var(--surface);
       border-radius: 12px;
       padding: 1.5rem;
-      width: 90%;
-      max-width: 420px;
-      border: 1px solid var(--border);
+      width: 100%;
+      max-width: 400px;
+      box-shadow: 0 8px 30px rgba(0,0,0,0.08);
     }
     .modal h2 {
-      font-size: 1.1rem;
-      margin-bottom: 1rem;
-    }
-    .modal h2 small {
-      color: var(--text2);
-      font-weight: 400;
-    }
-    .modal label {
-      display: block;
-      font-size: 0.8rem;
-      color: var(--text2);
-      margin-bottom: 0.4rem;
-      margin-top: 1rem;
+      font-size: 1rem;
+      font-weight: 600;
+      margin-bottom: 1.25rem;
+      color: var(--text);
     }
     .modal textarea {
       width: 100%;
-      background: var(--bg);
+      background: var(--surface2);
       border: 1px solid var(--border);
-      border-radius: 6px;
+      border-radius: 8px;
       color: var(--text);
-      padding: 0.6rem;
-      font-size: 0.875rem;
+      padding: 0.7rem;
+      font-size: 0.85rem;
       resize: vertical;
-      min-height: 60px;
+      min-height: 80px;
       font-family: inherit;
+      line-height: 1.5;
+      transition: border-color 0.12s;
     }
     .modal textarea:focus {
       outline: none;
-      border-color: var(--accent);
+      border-color: var(--border2);
     }
 
-    .tag-selector {
+    .tag-group {
       display: flex;
       flex-wrap: wrap;
-      gap: 0.4rem;
-      margin: 0.5rem 0;
+      gap: 0.35rem;
+      margin: 0.75rem 0;
     }
     .tag-btn {
-      padding: 0.25rem 0.6rem;
-      border-radius: 12px;
+      padding: 0.25rem 0.55rem;
+      border-radius: 5px;
       border: 1px solid var(--border);
       background: transparent;
       color: var(--text2);
-      font-size: 0.75rem;
+      font-size: 0.72rem;
       cursor: pointer;
-      transition: all 0.15s;
+      transition: all 0.12s;
+      font-family: inherit;
+    }
+    .tag-btn:hover {
+      border-color: var(--border2);
     }
     .tag-btn.active {
-      background: var(--surface2);
-      color: var(--text);
-      border-color: var(--text2);
+      color: #fff;
+      border-color: transparent;
     }
-    .tag-btn[data-tag="coding"] { border-color: var(--tag-coding); }
-    .tag-btn[data-tag="coding"].active { background: var(--tag-coding); color: #fff; }
-    .tag-btn[data-tag="reading"] { border-color: var(--tag-reading); }
-    .tag-btn[data-tag="reading"].active { background: var(--tag-reading); color: #fff; }
-    .tag-btn[data-tag="writing"] { border-color: var(--tag-writing); }
-    .tag-btn[data-tag="writing"].active { background: var(--tag-writing); color: #000; }
-    .tag-btn[data-tag="gaming"] { border-color: var(--tag-gaming); }
-    .tag-btn[data-tag="gaming"].active { background: var(--tag-gaming); color: #000; }
-    .tag-btn[data-tag="social"] { border-color: var(--tag-social); }
-    .tag-btn[data-tag="social"].active { background: var(--tag-social); color: #fff; }
-    .tag-btn[data-tag="work"] { border-color: var(--tag-work); }
-    .tag-btn[data-tag="work"].active { background: var(--tag-work); color: #fff; }
-    .tag-btn[data-tag="thinking"] { border-color: var(--tag-thinking); }
-    .tag-btn[data-tag="thinking"].active { background: var(--tag-thinking); color: #fff; }
-    .tag-btn[data-tag="other"] { border-color: var(--tag-other); }
-    .tag-btn[data-tag="other"].active { background: var(--tag-other); color: #fff; }
+    .tag-btn[data-tag="coding"].active { background: var(--tag-coding); }
+    .tag-btn[data-tag="reading"].active { background: var(--tag-reading); }
+    .tag-btn[data-tag="writing"].active { background: var(--tag-writing); }
+    .tag-btn[data-tag="gaming"].active { background: var(--tag-gaming); }
+    .tag-btn[data-tag="social"].active { background: var(--tag-social); }
+    .tag-btn[data-tag="work"].active { background: var(--tag-work); }
+    .tag-btn[data-tag="thinking"].active { background: var(--tag-thinking); }
+    .tag-btn[data-tag="other"].active { background: var(--tag-other); }
 
     .modal-actions {
       display: flex;
@@ -256,14 +352,15 @@
       margin-top: 1rem;
     }
     .modal-actions button {
-      padding: 0.4rem 1rem;
+      padding: 0.35rem 1rem;
       border-radius: 6px;
       border: none;
       cursor: pointer;
-      font-size: 0.8rem;
-      transition: opacity 0.15s;
+      font-size: 0.78rem;
+      font-family: inherit;
+      transition: opacity 0.12s;
     }
-    .modal-actions button:hover { opacity: 0.85; }
+    .modal-actions button:hover { opacity: 0.8; }
     .btn-save {
       background: var(--accent);
       color: #fff;
@@ -278,127 +375,74 @@
       color: var(--text2);
     }
 
-    .legend {
-      display: flex;
-      flex-wrap: wrap;
-      gap: 0.75rem;
-      margin-top: 1.5rem;
-      font-size: 0.75rem;
-      color: var(--text2);
-      align-items: center;
-    }
-    .legend-item {
-      display: flex;
-      align-items: center;
-      gap: 0.3rem;
-    }
-    .legend-dot {
-      width: 8px;
-      height: 8px;
-      border-radius: 50%;
-    }
-
-    .data-bar {
-      margin-top: 1.5rem;
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-      flex-wrap: wrap;
-      gap: 0.75rem;
-    }
-    .data-file {
-      padding: 0.6rem 1rem;
-      background: var(--surface);
-      border-radius: 8px;
-      font-size: 0.75rem;
-      color: var(--text2);
-      display: flex;
-      align-items: center;
-      gap: 0.5rem;
-    }
-    .data-file code {
-      color: var(--accent2);
-      font-family: "SF Mono", "Cascadia Code", monospace;
-    }
-    .btn-download {
-      background: var(--surface);
-      border: 1px solid var(--border);
-      color: var(--text);
-      padding: 0.5rem 1rem;
-      border-radius: 6px;
-      cursor: pointer;
-      font-size: 0.8rem;
-      transition: background 0.15s;
-    }
-    .btn-download:hover {
-      background: var(--surface2);
-    }
-
-    @media (max-width: 500px) {
-      body { padding: 1rem 0.5rem; }
-      .day-cell { min-height: 48px; font-size: 0.8rem; }
-      header h1 { font-size: 1.2rem; }
-      .stats { font-size: 0.75rem; gap: 0.75rem; flex-wrap: wrap; }
-      .modal { padding: 1rem; }
+    @media (max-width: 520px) {
+      .page-wrap { padding: 1.25rem 0.75rem; }
+      .day-cell { min-height: 44px; padding: 4px; }
+      .day-cell .day-num { font-size: 0.78rem; }
+      .day-cell .day-tag { font-size: 0.5rem; }
+      .header h1 { font-size: 1.1rem; }
+      .stats { gap: 0.75rem; font-size: 0.72rem; }
       .data-bar { flex-direction: column; align-items: stretch; }
-      .data-file { justify-content: center; }
+      .data-info { justify-content: center; }
+      .modal { padding: 1.2rem; }
     }
   </style>
 </head>
 <body>
-<div class="container">
-  <header>
-    <h1>🌙 熬夜日历 <small>Overnight Calendar</small></h1>
-    <div class="stats" id="stats">
-      <span>本月熬夜 <strong id="month-count">0</strong> 天</span>
-      <span>连续 <strong id="streak">0</strong> 天</span>
-      <span>总计 <strong id="total-count">0</strong> 天</span>
+<div class="page-wrap">
+  <div class="header">
+    <div class="header-top">
+      <h1>🌙 熬夜日历 <span>Overnight Calendar</span></h1>
+      <div class="stats">
+        <span>本月 <strong id="month-count">0</strong></span>
+        <span>连续 <strong id="streak">0</strong> 天</span>
+        <span>总计 <strong id="total-count">0</strong></span>
+      </div>
     </div>
-  </header>
+  </div>
 
-  <div class="nav-bar">
-    <button id="prev-btn">‹ 上月</button>
-    <div>
-      <span class="month-label" id="month-label"></span>
-      <button class="today-btn" id="today-btn">今天</button>
+  <div class="nav">
+    <div class="nav-group">
+      <button class="nav-btn" id="prev-btn">‹ 上月</button>
     </div>
-    <button id="next-btn">下月 ›</button>
+    <span class="month-label" id="month-label"></span>
+    <div class="nav-group">
+      <button class="nav-btn today" id="today-btn">今天</button>
+      <button class="nav-btn" id="next-btn">下月 ›</button>
+    </div>
   </div>
 
   <div class="weekdays">
     <span>日</span><span>一</span><span>二</span><span>三</span><span>四</span><span>五</span><span>六</span>
   </div>
 
-  <div class="calendar-grid" id="calendar-grid"></div>
+  <div class="calendar" id="calendar-grid"></div>
 
   <div class="legend">
-    <span class="legend-item"><span class="legend-dot" style="background:var(--tag-coding)"></span> 编码</span>
-    <span class="legend-item"><span class="legend-dot" style="background:var(--tag-reading)"></span> 阅读</span>
-    <span class="legend-item"><span class="legend-dot" style="background:var(--tag-writing)"></span> 写作</span>
-    <span class="legend-item"><span class="legend-dot" style="background:var(--tag-gaming)"></span> 游戏</span>
-    <span class="legend-item"><span class="legend-dot" style="background:var(--tag-social)"></span> 社交</span>
-    <span class="legend-item"><span class="legend-dot" style="background:var(--tag-work)"></span> 工作</span>
-    <span class="legend-item"><span class="legend-dot" style="background:var(--tag-thinking)"></span> 胡思乱想</span>
-    <span class="legend-item"><span class="legend-dot" style="background:var(--tag-other)"></span> 其他</span>
+    <span class="legend-item"><span class="legend-bar" style="background:var(--tag-coding)"></span>编码</span>
+    <span class="legend-item"><span class="legend-bar" style="background:var(--tag-reading)"></span>阅读</span>
+    <span class="legend-item"><span class="legend-bar" style="background:var(--tag-writing)"></span>写作</span>
+    <span class="legend-item"><span class="legend-bar" style="background:var(--tag-gaming)"></span>游戏</span>
+    <span class="legend-item"><span class="legend-bar" style="background:var(--tag-social)"></span>社交</span>
+    <span class="legend-item"><span class="legend-bar" style="background:var(--tag-work)"></span>工作</span>
+    <span class="legend-item"><span class="legend-bar" style="background:var(--tag-thinking)"></span>胡思乱想</span>
+    <span class="legend-item"><span class="legend-bar" style="background:var(--tag-other)"></span>其他</span>
   </div>
 
   <div class="data-bar">
-    <div class="data-file">
-      <span>📄 <code>data.json</code> — 浏览器本地存储 | 远端同步</span>
+    <div class="data-info">
+      <span>📄 <code>data.json</code></span>
       <span id="sync-status"></span>
     </div>
-    <button class="btn-download" id="download-btn">💾 下载 data.json</button>
+    <button class="btn-download" id="download-btn">💾 下载</button>
   </div>
 </div>
 
 <div class="modal-overlay" id="modal">
   <div class="modal">
-    <h2 id="modal-title">日期 <small id="modal-date"></small></h2>
-    <label>熬到几点？做了什么？</label>
-    <textarea id="modal-note" placeholder="写点什么… 比如「写博客到凌晨 3 点」「打游戏到 2 点」「读完了《XXX》」"></textarea>
-
-    <label>标签</label>
-    <div class="tag-selector" id="tag-selector">
+    <h2 id="modal-title">🌙 记录</h2>
+    <textarea id="modal-note" placeholder="熬到几点？做了什么？&#10;比如「写博客到凌晨 3 点」「打游戏到 2 点」"></textarea>
+    <div class="tag-group" id="tag-group">
       <button class="tag-btn" data-tag="coding">💻 编码</button>
       <button class="tag-btn" data-tag="reading">📖 阅读</button>
       <button class="tag-btn" data-tag="writing">✍️ 写作</button>
@@ -408,7 +452,6 @@
       <button class="tag-btn" data-tag="thinking">🤔 胡思乱想</button>
       <button class="tag-btn" data-tag="other">📌 其他</button>
     </div>
-
     <div class="modal-actions">
       <button class="btn-cancel" id="modal-cancel">取消</button>
       <button class="btn-delete" id="modal-delete" style="display:none">删除</button>
@@ -420,179 +463,146 @@
 <script>
 (function() {
   const STORAGE_KEY = 'overnight_calendar';
-
   let data = {};
   let currentYear, currentMonth;
 
-  function dateKey(y, m, d) {
+  function key(y, m, d) {
     return `${y}-${String(m+1).padStart(2,'0')}-${String(d).padStart(2,'0')}`;
   }
 
-  function getEntry(y, m, d) { return data[dateKey(y, m, d)] || null; }
+  function get(y, m, d) { return data[key(y, m, d)] || null; }
 
-  function setEntry(y, m, d, entry) {
-    const k = dateKey(y, m, d);
-    if (entry) { data[k] = entry; }
-    else { delete data[k]; }
+  function set(y, m, d, entry) {
+    const k = key(y, m, d);
+    if (entry) data[k] = entry;
+    else delete data[k];
     persist();
     updateStats();
     render();
   }
 
-  function sortData(obj) {
-    const sorted = {};
-    Object.keys(obj).sort().forEach(k => { sorted[k] = obj[k]; });
-    return sorted;
+  function sort(obj) {
+    const r = {};
+    Object.keys(obj).sort().forEach(k => { r[k] = obj[k]; });
+    return r;
   }
 
   function persist() {
     localStorage.setItem(STORAGE_KEY, JSON.stringify(data));
   }
 
-  function loadFromLocal() {
+  function local() {
     try {
       const raw = localStorage.getItem(STORAGE_KEY);
-      if (raw) { return JSON.parse(raw); }
+      if (raw) return JSON.parse(raw);
     } catch {}
     return null;
   }
 
-  function mergeByTimestamp(local, remote) {
+  function merge(l, r) {
     const merged = {};
-    const allKeys = new Set([...Object.keys(local || {}), ...Object.keys(remote || {})]);
-    for (const k of allKeys) {
-      const l = local?.[k], r = remote?.[k];
-      if (!r) { merged[k] = l; continue; }
-      if (!l) { merged[k] = r; continue; }
-      merged[k] = (l.timestamp || 0) >= (r.timestamp || 0) ? l : r;
+    const ks = new Set([...Object.keys(l||{}), ...Object.keys(r||{})]);
+    for (const k of ks) {
+      const a = l?.[k], b = r?.[k];
+      if (!b) { merged[k] = a; continue; }
+      if (!a) { merged[k] = b; continue; }
+      merged[k] = (a.timestamp||0) >= (b.timestamp||0) ? a : b;
     }
     return merged;
   }
 
-  async function syncData() {
-    const local = loadFromLocal();
-    let remote = null;
-
+  async function sync() {
+    const l = local();
+    let r = null;
     try {
       const res = await fetch('data.json?' + Date.now());
-      if (res.ok) remote = await res.json();
+      if (res.ok) r = await res.json();
     } catch {}
+    const status = document.getElementById('sync-status');
 
-    if (local && remote) {
-      const merged = mergeByTimestamp(local, remote);
-      const conflicts = Object.keys(merged).filter(k => {
-        const l = local[k], r = remote[k];
-        return l && r && l.timestamp !== r.timestamp;
+    if (l && r) {
+      const m = merge(l, r);
+      const c = Object.keys(m).filter(k => {
+        const a = l[k], b = r[k];
+        return a && b && a.timestamp !== b.timestamp;
       });
-      data = merged;
-      document.getElementById('sync-status').textContent =
-        `✓ 合并完成${conflicts.length ? `（${conflicts.length} 条冲突已自动裁决）` : ''}`;
-    } else if (remote) {
-      data = remote;
-      document.getElementById('sync-status').textContent = '✓ 从远端同步';
-    } else if (local) {
-      data = local;
-      document.getElementById('sync-status').textContent = '✓ 本地存储';
+      data = m;
+      status.textContent = c.length ? `合并 ${c.length} 条冲突` : '已同步';
+    } else if (r) {
+      data = r;
+      status.textContent = '已同步';
+    } else if (l) {
+      data = l;
+      status.textContent = '本地';
     } else {
       data = {};
-      document.getElementById('sync-status').textContent = '暂无数据';
+      status.textContent = '暂无数据';
     }
-
     persist();
     updateStats();
     render();
   }
 
   function updateStats() {
-    const now = new Date();
-    const y = now.getFullYear(), m = now.getMonth();
-    let monthCount = 0, totalCount = 0;
-    let currentStreak = 0;
-
-    for (let d = 1; d <= 31; d++) {
-      if (getEntry(y, m, d)) monthCount++;
-    }
-    for (const k in data) { totalCount++; }
-
-    const today = new Date();
+    const n = new Date();
+    let mc = 0, tc = 0, s = 0;
+    for (let d = 1; d <= 31; d++) { if (get(n.getFullYear(), n.getMonth(), d)) mc++; }
+    for (const k in data) { tc++; }
     for (let i = 0; i < 365; i++) {
-      const d = new Date(today);
-      d.setDate(d.getDate() - i);
-      if (getEntry(d.getFullYear(), d.getMonth(), d.getDate())) {
-        currentStreak++;
-      } else if (i > 0) {
-        break;
-      }
+      const d = new Date(n); d.setDate(d.getDate() - i);
+      if (get(d.getFullYear(), d.getMonth(), d.getDate())) s++;
+      else if (i > 0) break;
     }
-
-    document.getElementById('month-count').textContent = monthCount;
-    document.getElementById('total-count').textContent = totalCount;
-    document.getElementById('streak').textContent = currentStreak;
+    document.getElementById('month-count').textContent = mc;
+    document.getElementById('total-count').textContent = tc;
+    document.getElementById('streak').textContent = s;
   }
 
   function render() {
     const grid = document.getElementById('calendar-grid');
     grid.innerHTML = '';
-
-    const firstDay = new Date(currentYear, currentMonth, 1).getDay();
-    const daysInMonth = new Date(currentYear, currentMonth + 1, 0).getDate();
-    const daysInPrev = new Date(currentYear, currentMonth, 0).getDate();
-
+    const fd = new Date(currentYear, currentMonth, 1).getDay();
+    const dim = new Date(currentYear, currentMonth + 1, 0).getDate();
+    const dip = new Date(currentYear, currentMonth, 0).getDate();
     document.getElementById('month-label').textContent =
       `${currentYear} 年 ${currentMonth + 1} 月`;
 
-    for (let i = firstDay - 1; i >= 0; i--) {
-      grid.appendChild(createCell(currentYear, currentMonth - 1, daysInPrev - i, true));
-    }
+    for (let i = fd - 1; i >= 0; i--)
+      grid.appendChild(cell(currentYear, currentMonth - 1, dip - i, true));
 
-    const today = new Date();
-    for (let d = 1; d <= daysInMonth; d++) {
-      const isToday = currentYear === today.getFullYear() &&
-                      currentMonth === today.getMonth() &&
-                      d === today.getDate();
-      grid.appendChild(createCell(currentYear, currentMonth, d, false, isToday));
-    }
+    const t = new Date();
+    for (let d = 1; d <= dim; d++)
+      grid.appendChild(cell(currentYear, currentMonth, d, false,
+        currentYear===t.getFullYear() && currentMonth===t.getMonth() && d===t.getDate()));
 
-    const totalCells = firstDay + daysInMonth;
-    const remaining = (7 - totalCells % 7) % 7;
-    for (let d = 1; d <= remaining; d++) {
-      grid.appendChild(createCell(currentYear, currentMonth + 1, d, true));
-    }
+    const rem = (7 - (fd + dim) % 7) % 7;
+    for (let d = 1; d <= rem; d++)
+      grid.appendChild(cell(currentYear, currentMonth + 1, d, true));
   }
 
-  function createCell(year, month, day, isOther, isToday) {
+  function cell(year, month, day, other, today) {
     const div = document.createElement('div');
     div.className = 'day-cell';
-    if (isOther) div.classList.add('other-month');
-    if (isToday) div.classList.add('today');
-
-    const entry = getEntry(year, month, day);
-    if (entry) {
-      div.classList.add('has-entry');
-      const dot = document.createElement('div');
-      dot.className = 'dot';
-      const colors = {
-        coding: 'var(--tag-coding)',
-        reading: 'var(--tag-reading)',
-        writing: 'var(--tag-writing)',
-        gaming: 'var(--tag-gaming)',
-        social: 'var(--tag-social)',
-        work: 'var(--tag-work)',
-        thinking: 'var(--tag-thinking)',
-        other: 'var(--tag-other)'
+    if (other) div.classList.add('other');
+    if (today) div.classList.add('today');
+    const e = get(year, month, day);
+    if (e) {
+      div.classList.add('has-entry', 'tag-' + e.tag);
+      const tag = document.createElement('span');
+      tag.className = 'day-tag';
+      const labels = {
+        coding:'编码', reading:'阅读', writing:'写作', gaming:'游戏',
+        social:'社交', work:'工作', thinking:'胡思乱想', other:'其他'
       };
-      dot.style.background = colors[entry.tag] || 'var(--tag-other)';
-      div.appendChild(dot);
+      tag.textContent = labels[e.tag] || '其他';
+      if (e.note) tag.textContent = e.note.slice(0, 10) + (e.note.length > 10 ? '..' : '');
+      div.appendChild(tag);
     }
-
     const num = document.createElement('span');
-    num.className = 'date-num';
+    num.className = 'day-num';
     num.textContent = day;
     div.prepend(num);
-
-    div.dataset.year = year;
-    div.dataset.month = month;
-    div.dataset.day = day;
+    div.dataset.year = year; div.dataset.month = month; div.dataset.day = day;
     div.addEventListener('click', () => openModal(year, month, day));
     return div;
   }
@@ -600,133 +610,79 @@
   function openModal(year, month, day) {
     const overlay = document.getElementById('modal');
     const note = document.getElementById('modal-note');
-    const delBtn = document.getElementById('modal-delete');
-    const tagBtns = document.querySelectorAll('.tag-btn');
+    const del = document.getElementById('modal-delete');
+    const tags = document.querySelectorAll('.tag-btn');
     const title = document.getElementById('modal-title');
-
-    const entry = getEntry(year, month, day);
-    title.textContent = `🌙 ${year} 年 ${month + 1} 月 ${day} 日`;
-
-    note.value = entry ? entry.note || '' : '';
-    delBtn.style.display = entry ? 'inline-block' : 'none';
-
-    tagBtns.forEach(b => b.classList.remove('active'));
-    if (entry && entry.tag) {
-      tagBtns.forEach(b => {
-        if (b.dataset.tag === entry.tag) b.classList.add('active');
-      });
-    }
-
+    const e = get(year, month, day);
+    title.textContent = `🌙 ${year} 年 ${month+1} 月 ${day} 日`;
+    note.value = e ? e.note||'' : '';
+    del.style.display = e ? 'inline-block' : 'none';
+    tags.forEach(b => b.classList.remove('active'));
+    if (e && e.tag) tags.forEach(b => { if (b.dataset.tag === e.tag) b.classList.add('active'); });
     overlay.classList.add('show');
-    overlay.dataset.year = year;
-    overlay.dataset.month = month;
-    overlay.dataset.day = day;
-
+    overlay.dataset.year = year; overlay.dataset.month = month; overlay.dataset.day = day;
     note.focus();
   }
 
-  function closeModal() {
-    document.getElementById('modal').classList.remove('show');
-  }
+  function closeModal() { document.getElementById('modal').classList.remove('show'); }
 
   function saveModal() {
-    const overlay = document.getElementById('modal');
-    const year = parseInt(overlay.dataset.year);
-    const month = parseInt(overlay.dataset.month);
-    const day = parseInt(overlay.dataset.day);
+    const o = document.getElementById('modal');
+    const y = parseInt(o.dataset.year), m = parseInt(o.dataset.month), d = parseInt(o.dataset.day);
     const note = document.getElementById('modal-note').value.trim();
-    const activeTag = document.querySelector('.tag-btn.active');
-
-    if (!note && !activeTag) {
-      setEntry(year, month, day, null);
-    } else {
-      setEntry(year, month, day, {
-        note: note || '',
-        tag: activeTag ? activeTag.dataset.tag : 'other',
-        timestamp: Date.now()
-      });
-    }
+    const at = document.querySelector('.tag-btn.active');
+    if (!note && !at) { set(y, m, d, null); }
+    else { set(y, m, d, { note: note||'', tag: at ? at.dataset.tag : 'other', timestamp: Date.now() }); }
     closeModal();
   }
 
   function deleteEntry() {
-    const overlay = document.getElementById('modal');
-    const year = parseInt(overlay.dataset.year);
-    const month = parseInt(overlay.dataset.month);
-    const day = parseInt(overlay.dataset.day);
-    setEntry(year, month, day, null);
+    const o = document.getElementById('modal');
+    set(parseInt(o.dataset.year), parseInt(o.dataset.month), parseInt(o.dataset.day), null);
     closeModal();
   }
 
-  function downloadData() {
-    const sorted = sortData(data);
-    const blob = new Blob([JSON.stringify(sorted, null, 2) + '\n'], { type: 'application/json' });
-    const url = URL.createObjectURL(blob);
-    const a = document.createElement('a');
-    a.href = url;
-    a.download = 'data.json';
-    document.body.appendChild(a);
-    a.click();
-    document.body.removeChild(a);
-    URL.revokeObjectURL(url);
+  function download() {
+    const b = new Blob([JSON.stringify(sort(data), null, 2) + '\n'], {type:'application/json'});
+    const u = URL.createObjectURL(b), a = document.createElement('a');
+    a.href = u; a.download = 'data.json';
+    document.body.appendChild(a); a.click();
+    document.body.removeChild(a); URL.revokeObjectURL(u);
   }
 
-  function bindEvents() {
+  function bind() {
     document.getElementById('prev-btn').addEventListener('click', () => {
-      currentMonth--;
-      if (currentMonth < 0) { currentMonth = 11; currentYear--; }
-      render();
+      if (--currentMonth < 0) { currentMonth=11; currentYear--; } render();
     });
     document.getElementById('next-btn').addEventListener('click', () => {
-      currentMonth++;
-      if (currentMonth > 11) { currentMonth = 0; currentYear++; }
-      render();
+      if (++currentMonth > 11) { currentMonth=0; currentYear++; } render();
     });
     document.getElementById('today-btn').addEventListener('click', () => {
-      const now = new Date();
-      currentYear = now.getFullYear();
-      currentMonth = now.getMonth();
-      render();
+      const n = new Date(); currentYear=n.getFullYear(); currentMonth=n.getMonth(); render();
     });
-
     document.getElementById('modal-cancel').addEventListener('click', closeModal);
     document.getElementById('modal-save').addEventListener('click', saveModal);
     document.getElementById('modal-delete').addEventListener('click', deleteEntry);
-
     document.querySelectorAll('.tag-btn').forEach(btn => {
       btn.addEventListener('click', () => {
         document.querySelectorAll('.tag-btn').forEach(b => b.classList.remove('active'));
         btn.classList.add('active');
       });
     });
-
-    document.getElementById('download-btn').addEventListener('click', downloadData);
-
-    document.addEventListener('keydown', (e) => {
+    document.getElementById('download-btn').addEventListener('click', download);
+    document.addEventListener('keydown', e => {
       if (e.key === 'Escape') closeModal();
-      if ((e.metaKey || e.ctrlKey) && e.key === 'Enter') {
-        if (document.getElementById('modal').classList.contains('show')) saveModal();
-      }
+      if ((e.metaKey||e.ctrlKey) && e.key === 'Enter' && document.getElementById('modal').classList.contains('show')) saveModal();
     });
-
-    document.getElementById('modal').addEventListener('click', (e) => {
-      if (e.target === e.currentTarget) closeModal();
-    });
+    document.getElementById('modal').addEventListener('click', e => { if (e.target === e.currentTarget) closeModal(); });
   }
 
-  async function init() {
-    const now = new Date();
-    currentYear = now.getFullYear();
-    currentMonth = now.getMonth();
-    await syncData();
-    bindEvents();
-  }
-
-  if (document.readyState === 'loading') {
-    document.addEventListener('DOMContentLoaded', init);
-  } else {
-    init();
-  }
+  (async function init() {
+    const n = new Date();
+    currentYear = n.getFullYear(); currentMonth = n.getMonth();
+    await sync();
+    bind();
+  })();
 })();
 </script>
 </body>
