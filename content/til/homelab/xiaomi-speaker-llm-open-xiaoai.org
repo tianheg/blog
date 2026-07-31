@@ -1,0 +1,89 @@
+#+TITLE: 小米音箱接入任意 LLM（open-xiaoai-bridge 刷机方案）
+#+HEADER: PVE
+
+小爱音箱（Xiaomi 智能音箱 Pro / OH2P）刷补丁固件后，通过 open-xiaoai-bridge 把语音链路完全接管到自托管 LLM（DeepSeek / Hermes / OpenClaw），唤醒词、ASR、LLM 全部不经过小米云端。
+
+背景：MiGPT（云端 MIoT 接口，免刷机）项目已停维护，open-xiaoai 系是活跃继任方案。
+
+* 架构
+
+#+BEGIN_SRC txt
+[OH2P 音箱: Rust Client] ←WebSocket:4399→ [Bridge 容器 @ Docker 主机] → DeepSeek / Hermes / OpenClaw
+    唤醒: 本地 KWS（自定义词）    ASR: sense_voice INT8 离线    TTS: 小爱原生（tts_speaker: xiaoai）
+#+END_SRC
+
+- 硬性门槛：仅支持两款机型——小爱音箱 Pro（LX06，旧款需拆机）和 Xiaomi 智能音箱 Pro（OH2P，新款 Type-C 免拆）
+- 服务端 open-xiaoai-bridge（coderzc）活跃维护，默认 openai 段 `session_header: X-Hermes-Session-Key` 开箱直指 Hermes Agent API Server
+- HTTP API :9092 可远程播放（/api/play/text）
+
+* 自制补丁固件（固件版本 > 官方支持时）
+
+官方 release 只到 OH2P v1.58.6 / LX06 v1.94.13，版本更高必须自制。构建脚本自动拉设备当前 romVersion 的 OTA，天然版本匹配。
+
+#+BEGIN_SRC bash
+git clone https://github.com/idootop/open-xiaoai.git
+cd packages/client-patch
+# .env:
+#   MI_USER=小米数字ID        # ⚠️ 必须数字 ID，邮箱/手机号报 NumberFormatException
+#   MI_PASS=密码              # 密码登录必触发异地验证码 → 改用 MI_TOKEN
+#   MI_TOKEN=V1:xxx           # passToken：Chrome 登录 account.xiaomi.com → F12 → Cookies
+#   MI_DID=音箱DID            # 如 2181598983
+#   SSH_PASSWORD=自定义
+docker run --rm --platform linux/amd64 --env-file .env \
+  -v $(pwd)/assets:/app/assets -v $(pwd)/patches:/app/patches \
+  idootop/open-xiaoai:latest
+# 产物: assets/mico_all_*_<版本>/root-patched.squashfs（刷这个）+ root.squashfs（原版备用）
+#+END_SRC
+
+* 刷机（Windows）
+
+必须 cmd / PowerShell / Git Bash，**不能用 WSL**（interop 干扰 uboot 通信时序，bulkcmd 报 `strncmp != 0`）。
+
+#+BEGIN_SRC cmd
+cd /d Amlogic_Flash_Tool_v6.0.0\bin
+update.exe identify                 :: 拔插电源后立即执行，直到显示版本号
+update.exe bulkcmd "setenv bootdelay 15"
+update.exe bulkcmd "setenv boot_part boot0"
+update.exe bulkcmd "saveenv"
+update.exe partition system0 root_patched.squashfs
+#+END_SRC
+
+- 双系统保障：`boot_part boot1` 切回原厂，刷机失败可回滚
+- 刷完 SSH：`ssh -o HostKeyAlgorithms=+ssh-rsa root@<音箱IP>`（密码 open-xiaoai）
+- 恢复出厂设置不改变固件版本，米家 App 设备信息页是准的
+
+* Client 安装（音箱 root shell）
+
+#+BEGIN_SRC bash
+mkdir /data/open-xiaoai
+echo 'ws://<bridge主机IP>:4399' > /data/open-xiaoai/server.txt   # 服务端 IP，不是音箱 IP
+curl -sSfL https://gitee.com/idootop/artifacts/releases/download/open-xiaoai-client/init.sh | sh
+curl -L -o /data/init.sh https://gitee.com/idootop/artifacts/releases/download/open-xiaoai-client/boot.sh
+reboot    # 开机自启
+#+END_SRC
+
+* 服务端部署
+
+#+BEGIN_SRC bash
+mkdir -p /root/docker/open-xiaoai-bridge/models
+# 模型: release vad-kws-asr-models（~470MB）；zip 解压后是嵌套 models/models/，须移出来删 __MACOSX
+curl -O https://raw.githubusercontent.com/coderzc/open-xiaoai-bridge/main/config.py
+curl -O https://raw.githubusercontent.com/coderzc/open-xiaoai-bridge/main/docker-compose.yml
+# compose 里 OPENCLAW_ENABLE=1 → 换 OPENAI_ENABLE=1 即 DeepSeek 直连
+# config.py openai 段: base_url=https://api.deepseek.com/v1, model=deepseek-v4-flash, input_mode=local_asr
+docker compose up -d
+#+END_SRC
+
+* 排障（实战踩坑）
+
+1. **唤醒词路由**：默认 before_wakeup 把"小智"→ xiaozhi 后端（禁用）、"小爪"→ qwenpaw（禁用），只有"小黑"→ openai。唤醒"你好小智"后无响应就是这个。改 config.py 对应 `return "openai"`。
+2. **VAD 切碎**：min_silence_duration 500ms 太敏感，一句话切成多段分别请求。改 1000ms。
+3. **<2 字空识别发空请求**：ASR 把残响识别成"。"。容器内 external_conversation.py `if not text:` 改为 `if not text or len(text.strip()) < 2:`，docker cp 出来改后挂载覆盖。
+4. **断连后服务假死**：音箱连接断开（`Connection reset by peer` + TTS 错误）后 OpenAI 模块状态污染，后续请求 4-6 秒即报"抱歉，我没有收到回复"，`docker compose restart` 即愈。建议挂 watchdog（ping 音箱在线 + 日志近 3 分钟有 No response → 自动 restart）。
+5. **INFO 日志看不到 TTS 播报**：Speak 事件是 DEBUG 级，日志停在"我说：xxx"不代表没播，判断成功与否直接听音箱。
+6. 容器内调试用 `/app/.venv/bin/python`（默认 python3 缺 aiohttp），backend 类名是 OpenAIManager。
+
+* 参考
+
+- [[https://github.com/coderzc/open-xiaoai-bridge][coderzc/open-xiaoai-bridge]]
+- [[https://github.com/idootop/open-xiaoai][idootop/open-xiaoai（刷机教程/Client）]]
