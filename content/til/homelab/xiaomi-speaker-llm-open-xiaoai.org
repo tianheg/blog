@@ -8,13 +8,15 @@
 * 架构
 
 #+BEGIN_SRC txt
-[OH2P 音箱: Rust Client] ←WebSocket:4399→ [Bridge 容器 @ Docker 主机] → DeepSeek / Hermes / OpenClaw
+[OH2P 音箱: Rust Client] ←WebSocket:4399→ [Bridge 容器 @ Docker 主机] → Hermes Agent API Server（本机，带联网/工具）
     唤醒: 本地 KWS（自定义词）    ASR: sense_voice INT8 离线    TTS: 小爱原生（tts_speaker: xiaoai）
 #+END_SRC
 
 - 硬性门槛：仅支持两款机型——小爱音箱 Pro（LX06，旧款需拆机）和 Xiaomi 智能音箱 Pro（OH2P，新款 Type-C 免拆）
 - 服务端 open-xiaoai-bridge（coderzc）活跃维护，默认 openai 段 `session_header: X-Hermes-Session-Key` 开箱直指 Hermes Agent API Server
 - HTTP API :9092 可远程播放（/api/play/text）
+- **当前部署（2026-08）：后端已切 Hermes Agent API Server**（`http://192.168.8.10:8642/v1`，model `hermes-agent`）——音箱"你好小智"获得联网搜索/工具/记忆能力（DeepSeek API 本身无联网搜索，网页端才有）
+- **双通道共存**：说"小爱同学 xxx"走小米云端（原功能不变），说"你好小智 xxx"走本地链路，互不干扰
 
 * 自制补丁固件（固件版本 > 官方支持时）
 
@@ -69,10 +71,17 @@ mkdir -p /root/docker/open-xiaoai-bridge/models
 # 模型: release vad-kws-asr-models（~470MB）；zip 解压后是嵌套 models/models/，须移出来删 __MACOSX
 curl -O https://raw.githubusercontent.com/coderzc/open-xiaoai-bridge/main/config.py
 curl -O https://raw.githubusercontent.com/coderzc/open-xiaoai-bridge/main/docker-compose.yml
-# compose 里 OPENCLAW_ENABLE=1 → 换 OPENAI_ENABLE=1 即 DeepSeek 直连
-# config.py openai 段: base_url=https://api.deepseek.com/v1, model=deepseek-v4-flash, input_mode=local_asr
+# compose 里 OPENCLAW_ENABLE=1 → 换 OPENAI_ENABLE=1
 docker compose up -d
 #+END_SRC
+
+**接入 Hermes Agent API Server（联网方案，2026-08 实战）**：
+
+- Hermes gateway 启用 api_server 平台：环境变量 `API_SERVER_ENABLED=1` + `API_SERVER_KEY=<key>`（**无 key 拒绝启动**）+ `API_SERVER_HOST=0.0.0.0`（跨主机访问），写入 ~/.hermes/.env 后重启 gateway
+- ⚠️ gateway 进程内不能自杀：`systemctl restart hermes-gateway` 会被 Hermes 拦截，需外部 shell 执行，或写脚本 + `systemd-run --on-active=3s <script>` 绕过
+- 端点：`POST /v1/chat/completions`（OpenAI 兼容，默认端口 8642），认证 `Authorization: Bearer $API_SERVER_KEY`
+- bridge config.py openai 段：`base_url: http://<PVE host IP>:8642/v1`、`api_key: <API_SERVER_KEY>`、`model: hermes-agent`
+- 效果：音箱问话走 Hermes agent（联网搜索/工具/记忆）；max_tokens 512 也够用（实测联网正常）；agent 响应慢属正常（工具循环）
 
 * 排障（实战踩坑）
 
@@ -82,6 +91,8 @@ docker compose up -d
 4. **断连后服务假死**：音箱连接断开（`Connection reset by peer` + TTS 错误）后 OpenAI 模块状态污染，后续请求 4-6 秒即报"抱歉，我没有收到回复"，`docker compose restart` 即愈。建议挂 watchdog（ping 音箱在线 + 日志近 3 分钟有 No response → 自动 restart）。
 5. **INFO 日志看不到 TTS 播报**：Speak 事件是 DEBUG 级，日志停在"我说：xxx"不代表没播，判断成功与否直接听音箱。
 6. 容器内调试用 `/app/.venv/bin/python`（默认 python3 缺 aiohttp），backend 类名是 OpenAIManager。
+7. **两个超时别搞混**：连续对话静默退出 = `wakeup.timeout`（默认 20 秒，改 120 即 2 分钟不说话才"再见"）；等 LLM 回复 = openai 段 `response_timeout`（120→300 给 agent 工具循环留时间）。
+8. **xiaomusic 共存**：音箱双通道下 xiaomusic 可能"自动播放"——列表续播（`continue_play=True`）是设计；搜歌请求看来源 IP（iWebPlayer 网页 vs 音箱语音劫持 `get_ask_by_mina`/`enable_pull_ask`）。
 
 * 参考
 
