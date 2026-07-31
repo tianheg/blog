@@ -29,7 +29,7 @@ cd packages/client-patch
 #   MI_USER=小米数字ID        # ⚠️ 必须数字 ID，邮箱/手机号报 NumberFormatException
 #   MI_PASS=密码              # 密码登录必触发异地验证码 → 改用 MI_TOKEN
 #   MI_TOKEN=V1:xxx           # passToken：Chrome 登录 account.xiaomi.com → F12 → Cookies
-#   MI_DID=音箱DID            # 如 2181598983
+#   MI_DID=音箱DID            # 米家 App 设备信息页可查
 #   SSH_PASSWORD=自定义
 docker run --rm --platform linux/amd64 --env-file .env \
   -v $(pwd)/assets:/app/assets -v $(pwd)/patches:/app/patches \
@@ -93,6 +93,49 @@ docker compose up -d
 6. 容器内调试用 `/app/.venv/bin/python`（默认 python3 缺 aiohttp），backend 类名是 OpenAIManager。
 7. *两个超时别搞混* ：连续对话静默退出 = `wakeup.timeout`（默认 20 秒，改 120 即 2 分钟不说话才"再见"）；等 LLM 回复 = openai 段 `response_timeout`（120→300 给 agent 工具循环留时间）。
 8. *xiaomusic 共存* ：音箱双通道下 xiaomusic 可能"自动播放"——列表续播（`continue_play=True`）是设计；搜歌请求看来源 IP（iWebPlayer 网页 vs 音箱语音劫持 `get_ask_by_mina`/`enable_pull_ask`）。
+
+* 音箱 root shell 内部探索（2026-08）
+
+刷机后音箱本身就是个可 SSH 的 Linux 小盒子（`ssh -o HostKeyAlgorithms=+ssh-rsa root@<音箱IP>`），实际翻了一遍：
+
+** 系统底子
+
+- OpenWrt/LEDE 系：PID 1 是 *procd*，SSH 是 *dropbear*，Amlogic 4 核 aarch64
+- 内存仅 ~241MB（可用 ~150MB），跑不了重东西
+- 根分区 `/` 只读且 30.6M 已满；`/data`（ubi）可写 125.8M，只用了 ~3M
+
+** 跑着的服务与端口
+
+| 端口 | 进程 | 说明 |
+|------|------|------|
+| 22 | dropbear | SSH（刷机加的） |
+| 53 | dnsmasq | 局域网 DNS/DHCP，改配置会影响全家 |
+| 8899 | mpas | 小米 *MiPlay* 多音箱同步协议，对外监听 |
+| 54322/54323 | miio_client | 小米 IoT 协议，仅本地回环 |
+| 8888 | nano_httpd | mico 内置微 HTTP，仅 127.0.0.1 |
+
+- *mpas（:8899）*：`/etc/init.d/miplay` 启动的 MiPlay ServerApp，负责多音箱组队/全屋播放（strings 里全是 `MultiGroupDeviceInfo`、`SpeakerSeek`、`MediaInfo`、`P2PStatus`、`handleCmd_SyncState`）。协议是私有二进制帧（握手即回 `$(\0j...` + 13 位毫秒时间戳），不是 HTTP。只有组第二台音箱才有用，单音箱场景是空闲端口。
+- *nano_httpd（:8888）*：小米 mico 框架自带微 HTTP server，只支持 GET，外部不可达，实测各路径无响应——内部调试残件，无实际 handler。
+- *adbd 是假的*：`/etc/init.d/adbd` 内容只有 `setusbconfig boot`（USB 配置），不是 ADB daemon，无 adb 端口——ADB over WiFi 不存在。
+
+** 配置都在哪
+
+| 路径 | 内容 |
+|------|------|
+| `/data/etc/device.info` | SN、MAC、miio_did、miio_key（小米 IoT 设备凭证） |
+| `/data/etc/nightmode.cfg` | 夜间模式时段（默认 21:50–06:50），可降音量/灯光 |
+| `/data/etc/sound.cfg` | 音效模式：0 强劲低音 / 1 均衡全频 / 2 清晰纯净（注释提示用 `micocfg_*` 工具读写） |
+| `/data/wifi/wpa.conf` | WiFi 密码明文 |
+| `/data/TOKEN` | 小米账号 token |
+| `/data/ai-crontab/crontab.dat` | 小米 AI 定时任务（二进制） |
+
+** 结论：shell 真正有价值的就三类
+
+1. 配置读写：sound.cfg（音效）、nightmode.cfg（夜间时段）
+2. 网络排障：tcpdump 抓包（`-i wlan0`）、nc 测端口
+3. client 生命周期：重启 `/data/init.sh`、改 `/data/open-xiaoai/server.txt` 换服务端
+
+别碰：根分区只读区（改系统文件 = 变砖路径）、device.info / TOKEN（小米云端绑定凭证）。busybox 缺 nohup/setsid/sshpass，`timeout` 语法是 `timeout -t <秒>`。
 
 * 参考
 
