@@ -15,8 +15,8 @@
 - 硬性门槛：仅支持两款机型——小爱音箱 Pro（LX06，旧款需拆机）和 Xiaomi 智能音箱 Pro（OH2P，新款 Type-C 免拆）
 - 服务端 open-xiaoai-bridge（coderzc）活跃维护，默认 openai 段 `session_header: X-Hermes-Session-Key` 开箱直指 Hermes Agent API Server
 - HTTP API :9092 可远程播放（/api/play/text）
-- **当前部署（2026-08）：后端已切 Hermes Agent API Server**（`http://192.168.8.10:8642/v1`，model `hermes-agent`）——音箱"你好小智"获得联网搜索/工具/记忆能力（DeepSeek API 本身无联网搜索，网页端才有）
-- **双通道共存**：说"小爱同学 xxx"走小米云端（原功能不变），说"你好小智 xxx"走本地链路，互不干扰
+- *当前部署（2026-08）：后端已切 Hermes Agent API Server*（`http://192.168.8.10:8642/v1`，model `hermes-agent`）——音箱"你好小智"获得联网搜索/工具/记忆能力（DeepSeek API 本身无联网搜索，网页端才有）
+- *双通道共存*：说"小爱同学 xxx"走小米云端（原功能不变），说"你好小智 xxx"走本地链路，互不干扰
 
 * 自制补丁固件（固件版本 > 官方支持时）
 
@@ -39,7 +39,7 @@ docker run --rm --platform linux/amd64 --env-file .env \
 
 * 刷机（Windows）
 
-必须 cmd / PowerShell / Git Bash，**不能用 WSL**（interop 干扰 uboot 通信时序，bulkcmd 报 `strncmp != 0`）。
+必须 cmd / PowerShell / Git Bash，*不能用 WSL*（interop 干扰 uboot 通信时序，bulkcmd 报 `strncmp != 0`）。
 
 #+BEGIN_SRC cmd
 cd /d Amlogic_Flash_Tool_v6.0.0\bin
@@ -75,9 +75,9 @@ curl -O https://raw.githubusercontent.com/coderzc/open-xiaoai-bridge/main/docker
 docker compose up -d
 #+END_SRC
 
-**接入 Hermes Agent API Server（联网方案，2026-08 实战）**：
+** 接入 Hermes Agent API Server（联网方案，2026-08 实战）
 
-- Hermes gateway 启用 api_server 平台：环境变量 `API_SERVER_ENABLED=1` + `API_SERVER_KEY=<key>`（**无 key 拒绝启动**）+ `API_SERVER_HOST=0.0.0.0`（跨主机访问），写入 ~/.hermes/.env 后重启 gateway
+- Hermes gateway 启用 api_server 平台：环境变量 `API_SERVER_ENABLED=1` + `API_SERVER_KEY=<key>`（*无 key 拒绝启动*）+ `API_SERVER_HOST=0.0.0.0`（跨主机访问），写入 ~/.hermes/.env 后重启 gateway
 - ⚠️ gateway 进程内不能自杀：`systemctl restart hermes-gateway` 会被 Hermes 拦截，需外部 shell 执行，或写脚本 + `systemd-run --on-active=3s <script>` 绕过
 - 端点：`POST /v1/chat/completions`（OpenAI 兼容，默认端口 8642），认证 `Authorization: Bearer $API_SERVER_KEY`
 - bridge config.py openai 段：`base_url: http://<PVE host IP>:8642/v1`、`api_key: <API_SERVER_KEY>`、`model: hermes-agent`
@@ -85,14 +85,14 @@ docker compose up -d
 
 * 排障（实战踩坑）
 
-1. **唤醒词路由**：默认 before_wakeup 把"小智"→ xiaozhi 后端（禁用）、"小爪"→ qwenpaw（禁用），只有"小黑"→ openai。唤醒"你好小智"后无响应就是这个。改 config.py 对应 `return "openai"`。
-2. **VAD 切碎**：min_silence_duration 500ms 太敏感，一句话切成多段分别请求。改 1000ms。
-3. **<2 字空识别发空请求**：ASR 把残响识别成"。"。容器内 external_conversation.py `if not text:` 改为 `if not text or len(text.strip()) < 2:`，docker cp 出来改后挂载覆盖。
-4. **断连后服务假死**：音箱连接断开（`Connection reset by peer` + TTS 错误）后 OpenAI 模块状态污染，后续请求 4-6 秒即报"抱歉，我没有收到回复"，`docker compose restart` 即愈。建议挂 watchdog（ping 音箱在线 + 日志近 3 分钟有 No response → 自动 restart）。
-5. **INFO 日志看不到 TTS 播报**：Speak 事件是 DEBUG 级，日志停在"我说：xxx"不代表没播，判断成功与否直接听音箱。
+1. *唤醒词路由*：默认 before_wakeup 把"小智"→ xiaozhi 后端（禁用）、"小爪"→ qwenpaw（禁用），只有"小黑"→ openai。唤醒"你好小智"后无响应就是这个。改 config.py 对应 `return "openai"`。
+2. *VAD 切碎*：min_silence_duration 500ms 太敏感，一句话切成多段分别请求。改 1000ms。
+3. *<2 字空识别发空请求*：ASR 把残响识别成"。"。容器内 external_conversation.py `if not text:` 改为 `if not text or len(text.strip()) < 2:`，docker cp 出来改后挂载覆盖。
+4. *断连后服务假死*：音箱连接断开（`Connection reset by peer` + TTS 错误）后 OpenAI 模块状态污染，后续请求 4-6 秒即报"抱歉，我没有收到回复"，`docker compose restart` 即愈。建议挂 watchdog（ping 音箱在线 + 日志近 3 分钟有 No response → 自动 restart）。
+5. *INFO 日志看不到 TTS 播报*：Speak 事件是 DEBUG 级，日志停在"我说：xxx"不代表没播，判断成功与否直接听音箱。
 6. 容器内调试用 `/app/.venv/bin/python`（默认 python3 缺 aiohttp），backend 类名是 OpenAIManager。
-7. **两个超时别搞混**：连续对话静默退出 = `wakeup.timeout`（默认 20 秒，改 120 即 2 分钟不说话才"再见"）；等 LLM 回复 = openai 段 `response_timeout`（120→300 给 agent 工具循环留时间）。
-8. **xiaomusic 共存**：音箱双通道下 xiaomusic 可能"自动播放"——列表续播（`continue_play=True`）是设计；搜歌请求看来源 IP（iWebPlayer 网页 vs 音箱语音劫持 `get_ask_by_mina`/`enable_pull_ask`）。
+7. *两个超时别搞混*：连续对话静默退出 = `wakeup.timeout`（默认 20 秒，改 120 即 2 分钟不说话才"再见"）；等 LLM 回复 = openai 段 `response_timeout`（120→300 给 agent 工具循环留时间）。
+8. *xiaomusic 共存*：音箱双通道下 xiaomusic 可能"自动播放"——列表续播（`continue_play=True`）是设计；搜歌请求看来源 IP（iWebPlayer 网页 vs 音箱语音劫持 `get_ask_by_mina`/`enable_pull_ask`）。
 
 * 参考
 
