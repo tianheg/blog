@@ -100,24 +100,24 @@ Github Actions 获取网站的 RSS 数据，并更新到个人主页]]。
     ValueError: invalid literal for int() with base 10: '3.x'
 #+END_EXAMPLE
 
-本地运行的话，需要使用 =pip=，=pipenv= 命令。我的本地环境是
+本地运行的话，需要使用 =pip= ，=pipenv= 命令。我的本地环境是
 WSL2-Ubuntu20.04。我已经安装了最新版本的 pip，直接安装 pipenv 即可：
 
 #+BEGIN_EXAMPLE
     pip install pipenv
 #+END_EXAMPLE
 
-然后，在本地仓库中新建上述文件 =Pipfile=，执行：
+然后，在本地仓库中新建上述文件 =Pipfile= ，执行：
 
 #+BEGIN_EXAMPLE
     pipenv install
 #+END_EXAMPLE
 
 安装依赖，会自动生成
-=Pipfile.lock=，可以选择不同步至远程仓库，因为在运行 GitHub Actions
+=Pipfile.lock= ，可以选择不同步至远程仓库，因为在运行 GitHub Actions
 时，环境会自动生成相关依赖文件。
 
-另外一个主要文件就是 =main.py=：
+另外一个主要文件就是 =main.py= ：
 
 #+BEGIN_EXAMPLE
     import feedparser
@@ -179,7 +179,7 @@ WSL2-Ubuntu20.04。我已经安装了最新版本的 pip，直接安装 pipenv �
 
 我想让 GitHub Actions 帮我完成这两件事。我需要怎么做呢？
 
-首先，新建文件 =~/.github/workflows/main.yml=，并添加以下内容：
+首先，新建文件 =~/.github/workflows/main.yml= ，并添加以下内容：
 
 #+BEGIN_EXAMPLE
     name: update tianheg profile
@@ -230,10 +230,10 @@ WSL2-Ubuntu20.04。我已经安装了最新版本的 pip，直接安装 pipenv �
 6.  =steps= 步骤
 7.  =uses: actions/checkout@v2= 使用 actions/checkout@v2
     将当前仓库复制到虚拟环境（ubuntu-latest）中。
-8.  =uses: actions/setup-node@v1=，=node-version: '14.x'= 安装 Node.js
+8.  =uses: actions/setup-node@v1= ，=node-version: '14.x'= 安装 Node.js
     14.x
 9.  =run: node index.js > README.md= 把「年进度」更新到 README.md 中
-10. =uses: tianheg/github-actions@pipenv=，=command: install --dev=，=command: run build=
+10. =uses: tianheg/github-actions@pipenv= ，=command: install --dev=，=command: run build=
     安装 pipenv 环境（因为会用到很多 GitHub
     Actions，于是就把有用的整成一个仓库），并执行命令
     =pipenv install --dev= ，然后执行命令 =pipenv run build=

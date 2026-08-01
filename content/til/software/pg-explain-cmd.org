@@ -63,11 +63,11 @@ WHERE category_id IN (1, 2, 3);
 #+END_SRC
 
 ** 性能优化要点
-1. =Seq Scan=（全表扫描）通常需要优化
+1. =Seq Scan= （全表扫描）通常需要优化
    - 考虑添加合适索引
    - 检查WHERE条件选择性
 
-2. =Index Scan=（索引扫描）的注意点
+2. =Index Scan= （索引扫描）的注意点
    - 检查索引选择率
    - 注意回表（Heap Fetches）成本
 

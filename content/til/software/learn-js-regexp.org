@@ -1,6 +1,7 @@
 #+TITLE: Learn JS REGEXP
 #+HEADER: Programming
-```js /word/ 匹配整个单词 /word/.test("hello word") 测试字符中是否包含正则匹配，是返回 true,否返回 false "Hello World!".match(/Hello/) 返回 Array [ "Hello" ] /a|b|c/ 匹配 a b c 中的任何一个 /Ww/i 忽略大小写 /word/g 全部匹配 /hu./ 匹配所有以 hu 开头的单词 /[aeiou]/ig 匹配所有符合条件的字母
+#+BEGIN_SRC js
+/word/ 匹配整个单词 /word/.test("hello word") 测试字符中是否包含正则匹配，是返回 true,否返回 false "Hello World!".match(/Hello/) 返回 Array [ "Hello" ] /a|b|c/ 匹配 a b c 中的任何一个 /Ww/i 忽略大小写 /word/g 全部匹配 /hu./ 匹配所有以 hu 开头的单词 /[aeiou]/ig 匹配所有符合条件的字母
 
 "Hello World!".match(/[a-z]/gi)
 
@@ -26,7 +27,8 @@
 
 /Tim{4}ber/ m 只重复 4 次
 
-/favou?rite/ 匹配有无 u ```
+/favou?rite/ 匹配有无 u
+#+END_SRC
 
 - caret character (`^`)
 - greedy regex (`/C+/`)
@@ -70,13 +72,17 @@
 
 ​## [[https://www.freecodecamp.org/learn/javascript-algorithms-and-data-structures/regular-expressions/use-capture-groups-to-search-and-replace][Use Capture Groups to Search and Replace]]
 
-```js let str = 'one two three' let fixRegex = /(\w+)\s(\w+)\s(\w+)/ // Change this line let replaceText = '$3 $2 $1' // Change this line let result = str.replace(fixRegex, replaceText) ```
+#+BEGIN_SRC js
+let str = 'one two three' let fixRegex = /(\w+)\s(\w+)\s(\w+)/ // Change this line let replaceText = '$3 $2 $1' // Change this line let result = str.replace(fixRegex, replaceText)
+#+END_SRC
 
 ​## [[https://www.freecodecamp.org/learn/javascript-algorithms-and-data-structures/regular-expressions/remove-whitespace-from-start-and-end][Remove Whitespace from Start and End]]
 
 [[https://forum.freecodecamp.org/t/freecodecamp-challenge-guide-remove-whitespace-from-start-and-end/301362][freeCodeCamp Challenge Guide: Remove Whitespace from Start and End - Guide - The freeCodeCamp Forum]]
 
-```js let hello = ' Hello, World! ' let wsRegex = /^\s+|\s+$/g // Change this line let result = hello.replace(wsRegex, '') // Change this line ```
+#+BEGIN_SRC js
+let hello = ' Hello, World! ' let wsRegex = /^\s+|\s+$/g // Change this line let result = hello.replace(wsRegex, '') // Change this line
+#+END_SRC
 
 ​## 工具
 
