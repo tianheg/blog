@@ -100,7 +100,7 @@ docker compose up -d
 
 ** 系统底子
 
-- OpenWrt/LEDE 系：PID 1 是 *procd*，SSH 是 *dropbear*，Amlogic 4 核 aarch64
+- OpenWrt/LEDE 系：PID 1 是 *procd* ，SSH 是 *dropbear* ，Amlogic 4 核 aarch64
 - 内存仅 ~241MB（可用 ~150MB），跑不了重东西
 - 根分区 `/` 只读且 30.6M 已满；`/data`（ubi）可写 125.8M，只用了 ~3M
 
@@ -114,9 +114,9 @@ docker compose up -d
 | 54322/54323 | miio_client | 小米 IoT 协议，仅本地回环 |
 | 8888 | nano_httpd | mico 内置微 HTTP，仅 127.0.0.1 |
 
-- *mpas（:8899）*：`/etc/init.d/miplay` 启动的 MiPlay ServerApp，负责多音箱组队/全屋播放（strings 里全是 `MultiGroupDeviceInfo`、`SpeakerSeek`、`MediaInfo`、`P2PStatus`、`handleCmd_SyncState`）。协议是私有二进制帧（握手即回 `$(\0j...` + 13 位毫秒时间戳），不是 HTTP。只有组第二台音箱才有用，单音箱场景是空闲端口。
-- *nano_httpd（:8888）*：小米 mico 框架自带微 HTTP server，只支持 GET，外部不可达，实测各路径无响应——内部调试残件，无实际 handler。
-- *adbd 是假的*：`/etc/init.d/adbd` 内容只有 `setusbconfig boot`（USB 配置），不是 ADB daemon，无 adb 端口——ADB over WiFi 不存在。
+- *mpas（:8899）* ：`/etc/init.d/miplay` 启动的 MiPlay ServerApp，负责多音箱组队/全屋播放（strings 里全是 `MultiGroupDeviceInfo`、`SpeakerSeek`、`MediaInfo`、`P2PStatus`、`handleCmd_SyncState`）。协议是私有二进制帧（握手即回 `$(\0j...` + 13 位毫秒时间戳），不是 HTTP。只有组第二台音箱才有用，单音箱场景是空闲端口。
+- *nano_httpd（:8888）* ：小米 mico 框架自带微 HTTP server，只支持 GET，外部不可达，实测各路径无响应——内部调试残件，无实际 handler。
+- *adbd 是假的* ：`/etc/init.d/adbd` 内容只有 `setusbconfig boot`（USB 配置），不是 ADB daemon，无 adb 端口——ADB over WiFi 不存在。
 
 ** 配置都在哪
 

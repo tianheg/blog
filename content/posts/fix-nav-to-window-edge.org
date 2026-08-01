@@ -34,11 +34,11 @@ Ctrl + Page Up，但还是不方便。于是，今天我开始实现这个想法
 #+END_EXAMPLE
 
 - 固定导航栏，需要用到 =position: fixed;= 它的含义就是固定
-- =top=：如果没有定义 =position=，定义 =top= 不会有任何效果。=top: 0;=
+- =top= ：如果没有定义 =position= ，定义 =top= 不会有任何效果。=top: 0;=
   意为与上边界（此处指窗口）的距离为 0
-- =z-index=：它能让导航栏显示在窗口的最上层（上下的坐标是垂直于窗口的 z
+- =z-index= ：它能让导航栏显示在窗口的最上层（上下的坐标是垂直于窗口的 z
   轴），从而不会被下面的内容遮住
-- =background-color=：它能改变导航栏的背景色。默认背景色是透明，在页面滚动时，导航栏的下层（上下的坐标是垂直于窗口的
+- =background-color= ：它能改变导航栏的背景色。默认背景色是透明，在页面滚动时，导航栏的下层（上下的坐标是垂直于窗口的
   z
   轴）也会有文字，这样不够美观。把背景色设为白色，能够让整个界面在滚动时更加统一
 - =top:
@@ -49,7 +49,7 @@ Ctrl + Page Up，但还是不方便。于是，今天我开始实现这个想法
 
 [[/fix-nav-to-window-edge-0.png]] [[/fix-nav-to-window-edge-1.png]]
 
-两张照片的区别在于，后者的 =z-index=，=background-color=
+两张照片的区别在于，后者的 =z-index= ，=background-color=
 都被注释掉。显而易见导航栏和正文内容交叠在一起，看起来不够简洁。
 
 [[/fix-nav-to-window-edge-2.png]] [[/fix-nav-to-window-edge-3.png]]
@@ -71,7 +71,7 @@ Ctrl + Page Up，但还是不方便。于是，今天我开始实现这个想法
 
 [[/fix-nav-to-window-edge-4.png]] [[/fix-nav-to-window-edge-5.png]]
 
-- =margin-top=：它作用是改变盒子外边距
+- =margin-top= ：它作用是改变盒子外边距
 
 1.6 不足够把"共计 x 篇日志"显示出来，所以就按照 1.6
 的整数倍挨个试，又因为 =margin-bottom: 3.2rem;= 所以下意识就试了
@@ -88,6 +88,6 @@ Ctrl + Page Up，但还是不方便。于是，今天我开始实现这个想法
     }
 #+END_EXAMPLE
 
-- =line-height=：自然是行高
+- =line-height= ：自然是行高
 
 当我通过移动端视图测试导航栏时，我发现页脚行与行之间太窄，两行的文字都粘到一起了，于是我增大了行高。

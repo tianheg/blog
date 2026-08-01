@@ -436,14 +436,14 @@ JavaScript
 23. prototype
 
 作为对象属性的
-=prototype=，其实根本就不是我们讨论原型继承机制时说的「原型」概念。
+=prototype= ，其实根本就不是我们讨论原型继承机制时说的「原型」概念。
 [[https://johnkpaul.github.io/presentations/empirejs/javascript-bad-parts/#/11][=fallbackOfObjectsCreatedWithNew=
 would be a better name.]]
 
 而对象真正意义上的原型，在 ES5 引入 Object.getPrototypeOf()
 方法之前，我们并没有常规的方法可以获取。
 
-不过很多浏览器都实现了非标准的 *proto*（IE 除外），在 ES2015
+不过很多浏览器都实现了非标准的 *proto* （IE 除外），在 ES2015
 中，这一扩展属性也得以标准化了。
 
 24. Object destructuring syntax
@@ -468,7 +468,7 @@ Express：=const express = require("express"); const app = express()=
 如何设置根路由：=app.get("/", (req, res) => { res.send("Hello World")})=，[[https://expressjs.com/en/starter/hello-world.html#running-locally][在
 Node.js 中 req(request) 和 res(response)
 是相同功能的对象]]，因此在不使用 Express 的情况下，可以调用
-=req.pipe().req.on("date", callback)=。Node 中的 res 和 req
+=req.pipe().req.on("date", callback)= 。Node 中的 res 和 req
 在一般情况下指 http
 的请求和响应，后续所有的框架和库为了简单和方便学习，也采用了相同的命名，其实也可以不是
 res,req [1]。
@@ -1224,7 +1224,7 @@ the outcome caussed by changing or altering things
     console.log(getRating(watchList))
 #+END_SRC
 
-** 用 =map=、=filter=、=reduce= 解决实际问题
+** 用 =map= 、=filter= 、=reduce= 解决实际问题
 
 #+BEGIN_SRC js
     const squareList = (arr) => {
@@ -1358,7 +1358,7 @@ JS
 #+BEGIN_QUOTE
   =Object.create(obj)= creates a new object, and sets =obj= as the new
   object's =prototype=. Recall that the =prototype= is like the "recipe"
-  for creating an object. By setting the =prototype= of =animal=to be
+  for creating an object. By setting the =prototype= of =animal= to be
   the =prototype= of =Animal=, you are effectively giving the =animal=
   instance the same "recipe" as any other instance of =Animal=.
 
@@ -1700,8 +1700,8 @@ unrelated objects =bird= and =plane=.
 
 * [UNSOLVED]JS 三元操作符：为什么我写的这行代码结果是 undefined
 
-问题：判断 target 是否是 str 的最后几位字符，如果是返回 =true=，否则返回
-=false=。
+问题：判断 target 是否是 str 的最后几位字符，如果是返回 =true= ，否则返回
+=false= 。
 
 #+BEGIN_SRC js
     function confirmEnding(str, target) {
@@ -1711,7 +1711,7 @@ unrelated objects =bird= and =plane=.
     console.log(confirmEnding('Bastian', 'n'))
 #+END_SRC
 
-为什么上述代码片段，返回 =undefined=？因为
+为什么上述代码片段，返回 =undefined= ？因为
 =str.substring(str.length - target.length) == target= 中有未定义的部分。
 
 三元操作符的原始结构：
@@ -1728,7 +1728,7 @@ unrelated objects =bird= and =plane=.
 1. 算术表达式：计算结果为数字的（通常使用[[https://developer.mozilla.org/en-US/docs/Web/JavaScript/Guide/Expressions_and_Operators#arithmetic_operators][算术操作符]]）
 2. 字符串：计算结果为字符串（通常使用[[https://developer.mozilla.org/en-US/docs/Web/JavaScript/Guide/Expressions_and_Operators#string_operators][字符串操作符]]）
 3. 逻辑运算：计算结果为 =true= 或
-   =false=（通常使用[[https://developer.mozilla.org/en-US/docs/Web/JavaScript/Guide/Expressions_and_Operators#logical_operators][逻辑操作符]]）
+   =false= （通常使用[[https://developer.mozilla.org/en-US/docs/Web/JavaScript/Guide/Expressions_and_Operators#logical_operators][逻辑操作符]]）
 4. 基本/原始表达式：JS 中的基本关键字和通用表达式
 5. =this=
 6. Grouping operator =( )=
@@ -1747,7 +1747,7 @@ unrelated objects =bird= and =plane=.
 
 我使用了空值合并操作符，发现
 =str.substring(str.length - target.length) == target ? true : false=
-的结果是 =undefined=。
+的结果是 =undefined= 。
 
 目前无法解决。
 
@@ -1774,7 +1774,7 @@ unrelated objects =bird= and =plane=.
     npx playwright install # 这一步会安装所有支持的浏览器
 #+END_EXAMPLE
 
-=playwright.config.js=：
+=playwright.config.js= ：
 
 #+BEGIN_SRC js
     // @ts-check
@@ -1985,7 +1985,7 @@ Scoping and Hoisting]]
 
 当刚开始使用 JS
 时，函数绑定可能是最不需要考虑的问题。但是，当你需要将上下文保存在另一个函数时，你可能意识到自己需要的是
-=Function.prototype.bind()=。进一步了解见
+=Function.prototype.bind()= 。进一步了解见
 [[https://www.smashingmagazine.com/2014/01/understanding-javascript-function-prototype-bind/][这里]]。
 
 *** 闭包函数 Closure Function
@@ -3398,7 +3398,7 @@ https://www.freecodecamp.org/learn/javascript-algorithms-and-data-structures/reg
 答案：
 
 1. =/^[a-z][a-z]+\d*$|^[a-z]\d\d+$/igm=
-2. =/^[a-z]([0-9]{2,}|[a-z]+\d*)$/=（这一个更加简洁）
+2. =/^[a-z]([0-9]{2,}|[a-z]+\d*)$/= （这一个更加简洁）
 
 ** [[https://www.freecodecamp.org/learn/javascript-algorithms-and-data-structures/regular-expressions/positive-and-negative-lookahead][Positive
 and Negative Lookahead]]
@@ -3469,7 +3469,7 @@ deep copy 是截然相反的。进行 deep copy
 来说，*有选择地改变对象中现有元素的共享属性的值与为现有元素分配一个全新的值是不同的* ，理解这一点很重要。举例说明：
 
 在数组对象名为 copy 的浅拷贝中，=copy[0]= 的值为
-={"list":["butter","flour"]}=，之后进行操作
+={"list":["butter","flour"]}= ，之后进行操作
 =copy[0].list = ["a", "b"]=，然后源对象中相应的元素也会改变。因为你选择性地改变了一个对象属性，这一属性由源对象和它的浅拷贝共享。
 
 然而，如果你进行操作
@@ -3494,7 +3494,7 @@ JSON 字符串，然后使用 =JSON.parse()= 把字符串转换成一个全新�
 元素的对象、递归数据和很多其他情况。所以无法对这些对象进行深拷贝。
 
 对于可以序列化的对象，还有一个可用的属性方法是
-=structuredClone()=，=structuredClone()= has the advantage of allowing
+=structuredClone()= ，=structuredClone()= has the advantage of allowing
 [[https://developer.mozilla.org/en-US/docs/Glossary/Transferable_objects][transferable
 objects]] in the source to be /transferred/ to the new
 copy。记住，=structuredClone()= 并非 JS 语言的特性，而是一种浏览器和其他
