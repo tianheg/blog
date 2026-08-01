@@ -468,7 +468,7 @@ chmod 600 ~/.gnupg/*
 
 这几条命令解决 =gpg: WARNING: unsafe permissions on homedir '/home/user/.gnupg'= 。
 
-*把 =~/.gnupg= 文件夹保存在安全的地方* ，然后导入 GitHub(user + web-flow)公匙：
+*把 =~/.gnupg= 文件夹保存在安全的地方* ，然后导入 GitHub(user + web-flow)公钥：
 
 #+BEGIN_SRC sh
 wget -O tianheg-pubkeys.txt https://github.com/tianheg.gpg
@@ -551,7 +551,7 @@ refer [[https://unix.stackexchange.com/a/171925]]
 Server = https://repo.archlinuxcn.org/$arch
 #+END_SRC
 
-导入 PGP 公匙（为了验证 archlinuxcn 库）：
+导入 PGP 公钥（为了验证 archlinuxcn 库）：
 
 #+BEGIN_SRC sh
 pacman-key --lsign-key "farseerfc@archlinux.org" # for error: ...is marginal trust

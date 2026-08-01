@@ -6,7 +6,7 @@
 
 作者的安全哲学：采取一些措施，它们必须能够阻止那些最频繁的攻击方向，同时让服务器管理不至于因为过于安全而繁琐。
 
-服务器只有两个用户：root 和部署用户。部署用户通过一段长密码获得 sudo 权限，它也是开发者登入的账户。开发者通过公匙而非密码登入，这样系统管理就变成在多个服务器之间保证 ~authorized_keys~ 文件的最新。root 用户无法通过 ssh 登入，部署用户只能从指定公司 IP 段登入。这种方法的缺点是，如果 ~authorized_keys~ 文件遭到破坏或被错误授权，需要登录到远程终端来修复它。
+服务器只有两个用户：root 和部署用户。部署用户通过一段长密码获得 sudo 权限，它也是开发者登入的账户。开发者通过公钥而非密码登入，这样系统管理就变成在多个服务器之间保证 ~authorized_keys~ 文件的最新。root 用户无法通过 ssh 登入，部署用户只能从指定公司 IP 段登入。这种方法的缺点是，如果 ~authorized_keys~ 文件遭到破坏或被错误授权，需要登录到远程终端来修复它。
 
 作者声明这并非自己的主张，只是自己的经验：
 
@@ -55,9 +55,9 @@ apt-get upgrade
 apt-get install fail2ban
 #+END_SRC
 
-Fail2ban 是一种守护进程，用于监控登陆服务器的行为，并阻挡可疑的登陆。开箱即用。
+Fail2ban 是一种守护进程，用于监控登录服务器的行为，并阻挡可疑的登录。开箱即用。
 
-* 设置登陆用户
+* 设置登录用户
 
 用户名为 deploy，选择你喜欢的。
 
@@ -68,13 +68,13 @@ mkdir /home/deploy/.ssh
 chmod 700 /home/deploy/.ssh
 #+END_SRC
 
-* 公匙授权
+* 公钥授权
 
 #+BEGIN_SRC sh
 vim /home/deploy/.ssh/authorized_keys
 #+END_SRC
 
-在文件中添加，你本地机器的 id_rsa.pub 文件或其他 ssh 公匙文件内容。
+在文件中添加，你本地机器的 id_rsa.pub 文件或其他 ssh 公钥文件内容。
 
 #+BEGIN_SRC sh
 chmod 400 /home/deploy/.ssh/authorized_keys

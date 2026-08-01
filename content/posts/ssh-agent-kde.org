@@ -1,4 +1,4 @@
-#+TITLE: KDE 开机自启 ssh agent，加载密匙
+#+TITLE: KDE 开机自启 ssh agent，加载密钥
 #+DATE: <2021-12-26 Sun>
 #+TAGS[]: 技术 SSH
 
@@ -42,9 +42,9 @@
     sudo chmod +x ~/.config/plasma-workspace/env/ssh-agent-startup.sh
 #+END_SRC
 
-** 开机添加 ssh 密匙
+** 开机添加 ssh 密钥
    :PROPERTIES:
-   :CUSTOM_ID: 开机添加-ssh-密匙
+   :CUSTOM_ID: 开机添加-ssh-密钥
    :END:
 
 新建文件 =~/.config/autostart/ssh-add.desktop= ：
@@ -62,4 +62,4 @@
    :END:
 
 启动 ssh agent 要比添加 ssh
-密匙提前。因为前者使用的是环境变量，后者使用的只是普通应用自启动。
+密钥提前。因为前者使用的是环境变量，后者使用的只是普通应用自启动。
