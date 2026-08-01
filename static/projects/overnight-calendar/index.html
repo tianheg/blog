@@ -33,21 +33,15 @@
       background-attachment: fixed;
     }
     /* 月亮 */
-    body::before {
-      content: '';
+    #moon {
       position: fixed;
       top: 36px; right: 9%;
       width: 88px; height: 88px;
-      border-radius: 50%;
-      background: radial-gradient(circle at 36% 34%, #fff7dc, #f3dfa8 52%, #d9c088 100%);
-      box-shadow:
-        inset -7px -5px 10px rgba(170, 140, 85, 0.28),
-        inset 14px 10px 22px rgba(255, 252, 230, 0.5),
-        0 0 60px 18px rgba(240, 200, 120, 0.16),
-        0 0 140px 60px rgba(150, 145, 255, 0.05);
       z-index: 0;
       pointer-events: none;
+      filter: drop-shadow(0 0 18px rgba(240,200,120,0.28)) drop-shadow(0 0 60px rgba(150,145,255,0.08));
     }
+    #moon svg { width: 100%; height: 100%; display: block; }
     /* 星星 */
     body::after {
       content: '';
@@ -177,6 +171,23 @@
   </style>
 </head>
 <body>
+<div id="moon" title="">
+  <svg viewBox="-50 -50 100 100" aria-hidden="true">
+    <defs>
+      <radialGradient id="moonDark" cx="38%" cy="34%" r="80%">
+        <stop offset="0%" stop-color="#232034"/>
+        <stop offset="100%" stop-color="#0c0b18"/>
+      </radialGradient>
+      <radialGradient id="moonLight" cx="36%" cy="34%" r="90%">
+        <stop offset="0%" stop-color="#fff7dc"/>
+        <stop offset="55%" stop-color="#f3dfa8"/>
+        <stop offset="100%" stop-color="#d9c088"/>
+      </radialGradient>
+    </defs>
+    <circle r="48" fill="url(#moonDark)"/>
+    <path id="moonFace" fill="url(#moonLight)"/>
+  </svg>
+</div>
 <div class="page">
   <div class="hd">
     <h1>熬夜日历 <span>Overnight Calendar</span></h1>
@@ -243,6 +254,31 @@
   let data = {}, cy, cm;
   const TC = { coding:'#f05454', reading:'#4ecdc4', writing:'#f0b429', work:'#7c8cf0', thinking:'#e89a5e', other:'#6e6a86' };
   const TL = { coding:'编码', reading:'阅读', writing:'写作', work:'工作', thinking:'胡思乱想', other:'其他' };
+
+  /* 实时月相（纯前端计算，朔望月近似） */
+  const MOON_NAMES = ['新月','蛾眉月','上弦月','盈凸月','满月','亏凸月','下弦月','残月'];
+  function moonPhase(date) {
+    const jd = date.getTime() / 86400000 + 2440587.5;
+    const l = (jd - 2451550.09766) / 29.530588853;
+    return l - Math.floor(l);
+  }
+  function moonPath(p) {
+    const R = 48, M = 2 * Math.PI * p;
+    if (p < 0.015 || p > 0.985) return '';
+    const a = R * Math.abs(Math.cos(M));
+    const sweep = p < 0.5 ? (M <= Math.PI / 2 ? 1 : 0) : (M < 3 * Math.PI / 2 ? 1 : 0);
+    const outer = p < 0.5 ? `A ${R},${R} 0 0 1 0,${R}` : `A ${R},${R} 0 0 0 0,${R}`;
+    return `M 0,${-R} ${outer} A ${a},${R} 0 0 ${sweep} 0,${-R} Z`;
+  }
+  function updateMoon() {
+    const el = document.getElementById('moon'), f = document.getElementById('moonFace');
+    if (!el || !f) return;
+    const p = moonPhase(new Date());
+    const illum = Math.round((1 - Math.cos(2 * Math.PI * p)) / 2 * 100);
+    const idx = Math.round(p * 8) % 8;
+    f.setAttribute('d', moonPath(p));
+    el.title = `${MOON_NAMES[idx]} · 照亮 ${illum}%`;
+  }
 
   function k(y,m,d) { return `${y}-${String(m+1).padStart(2,'0')}-${String(d).padStart(2,'0')}`; }
   function g(y,m,d) { return data[k(y,m,d)] || null; }
@@ -352,7 +388,7 @@
 
   (async function init() {
     const n = new Date(); cy=n.getFullYear(); cm=n.getMonth();
-    await sync(); render(); bind();
+    updateMoon(); await sync(); render(); bind();
   })();
 })();
 </script>
