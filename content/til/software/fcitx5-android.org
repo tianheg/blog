@@ -22,26 +22,43 @@ fcitx5-android 是桌面 fcitx5 的 Android 移植版，拼音/双拼/Rime/五�
 - 共享输入状态（全局选项）：All = 所有应用同一输入法；Program = 按应用记住；No = 默认
 - "默认状态为激活"：英文放第一但首次打开键盘落在中文
 
-** 词库 / 码表
+** 导入拼音词库（.scel / .txt / .dict）
 
-拼音词库目录 ~data/pinyin/dictionaries/~，应用注册了 ~.dict~ / ~.scel~ / ~.txt~ 的打开方式，直接点文件即可导入：
+1. 准备词库文件：
+   - ~.scel~ 搜狗细胞词库，pinyin.sogou.com/dict/ 下载
+   - ~.txt~ libime 文本格式，三列排布：词条 全拼 权重（自制推荐）
+   - ~.dict~ libime 二进制格式，如 fcitx5-pinyin-zhwiki 的发布包
+2. 导入二选一：
+   - 直接点文件：fcitx5 注册了 ~.dict~ / ~.scel~ / ~.txt~ 的打开方式，文件管理器里点开或分享给 fcitx5 即自动导入
+   - 设置里管理：拼音设置 → 词库 → 添加
+3. ~.scel~ 和 ~.txt~ 导入时自动转换为 ~.dict~，无需手动转换
+4. 词库文件落在 ~data/pinyin/dictionaries/~
 
-- ~.scel~ 搜狗细胞词库（pinyin.sogou.com/dict/ 下载）
-- ~.txt~ libime 文本格式，三列排布：词条 全拼 权重（自制推荐）
-- ~.dict~ libime 二进制格式
+推荐第三方词库：fcitx5-pinyin-zhwiki（felixonmars）、mw2fcitx（outloudvi）。
 
-推荐第三方词库：fcitx5-pinyin-zhwiki（felixonmars）、mw2fcitx（outloudvi）。管理入口在拼音设置 → 词库。
+** 导入码表（五笔/郑码等，0.0.3-43+）
 
-码表（五笔/郑码等）：0.0.3-43+ 支持 GUI 导入——附加组件 → 码表 → 管理码表输入法 → 右下角加号 → "从单独的文件中导入"，选 ~.conf~ / ~.conf.in~ 配置文件 + ~.dict~ / ~.txt~ 词典即可。手动方式：改 conf 中 ~File=~ 为 ~table/xxx.dict~，用 ~libime_tabledict xxx.txt xxx.dict~ 转格式，分别放入 ~inputmethod/~ 和 ~table/~ 目录，重启输入法。
+1. 从 fcitx/fcitx5-table-extra 仓库下载 ~.conf~ / ~.conf.in~ 配置文件 + ~.dict~ / ~.txt~ 词典（郑码即 zhengma.conf.in + zhengma.txt）
+2. 附加组件 → 码表（点齿轮）→ 管理码表输入法 → 右下角加号
+3. 选"从单独的文件中导入" → 分别选配置文件和词典 → 确定
+4. 通知提示导入完成后，列表出现新输入法
 
-** 数据文件与备份
+手动方式（老版本）：改 conf 中 ~File=~ 为 ~table/xxx.dict~，用 ~libime_tabledict xxx.txt xxx.dict~ 转格式，分别放入 ~inputmethod/~ 和 ~table/~ 目录，重启输入法。
 
-所有数据在 ~/sdcard/Android/data/org.fcitx.fcitx5.android/files/~：
+** 备份与恢复
 
-- 拼音/双拼用户词库与输入历史：~data/pinyin/user.{dict,history}~
-- 码表：~data/table/${name}.{dict,user.history}~
+所有数据在 ~/sdcard/Android/data/org.fcitx.fcitx5.android/files/~，整个目录拷走即是完整备份：
 
-整个 files/ 目录拷走即是完整备份（词库+配置+习惯），换机直接搬。不需要 root/adb：系统自带文件管理器（DocumentsUI）侧边栏选择"小企鹅输入法5"即可访问该目录。
+- ~data/pinyin/user.{dict,history}~ — 拼音/双拼用户词库 + 输入历史
+- ~data/pinyin/dictionaries/~ — 导入的第三方词库
+- ~data/table/~ — 码表词典 + 各码表用户历史
+- 其余为设置、快捷键、主题等配置
+
+不需要 root/adb，两种方式访问：
+- 系统自带文件管理器（DocumentsUI）侧边栏选择"小企鹅输入法5"直接进入该目录
+- 手机连电脑开 USB 文件传输，Android/data 目录电脑上可直接访问
+
+换机流程：旧机拷出 files/ → 新机装好 fcitx5 跑一次初始化 → 覆盖回新机同路径 → 重启输入法（设置里划掉后台或强行停止），词库和输入习惯全回来。
 
 ** 简繁转换
 
