@@ -488,7 +488,7 @@ filter-repo= 现在被 Git 项目推荐，用于代替 =git filter-branch= 。
 上文见[[/posts/hugo-deploy-to-server/][部署 Hugo 博客到 Ubuntu 服务器]]。
 
 之前的博客更新思路是，本地提交修改至
-GitHub，再登陆云服务器，手动执行脚本，达到更新博客内容的目的。但是，从
+GitHub，再登录云服务器，手动执行脚本，达到更新博客内容的目的。但是，从
 GitHub 拉取代码较慢，于是想到可以把本地的更改同时推送到 GitHub
 和云服务器。再通过 Git Hooks
 自动执行「更新博客」的脚本，以此达到提升效率的目的。
@@ -519,7 +519,7 @@ GitHub 拉取代码较慢，于是想到可以把本地的更改同时推送到 
     git  ALL=(ALL:ALL) NOPASSWD: ALL # add
 #+END_EXAMPLE
 
-** 配置 ssh 公匙
+** 配置 ssh 公钥
 
 在本地主机执行以下命令：
 
@@ -536,15 +536,15 @@ GitHub 拉取代码较慢，于是想到可以把本地的更改同时推送到 
     vim ~/.ssh/authorized_keys
 #+END_SRC
 
-然后在本地添加私匙：
+然后在本地添加私钥：
 
 #+BEGIN_SRC sh
     ssh-add ~/.ssh/ssh_rsa
 #+END_SRC
 
-如果不添加私匙，还是提示输入密码。
+如果不添加私钥，还是提示输入密码。
 
-注意： =~= 代表 =/home/git= 。只有 git 用户才能使用这个公匙。
+注意： =~= 代表 =/home/git= 。只有 git 用户才能使用这个公钥。
 
 修改权限：
 
@@ -714,7 +714,7 @@ SSH 密钥，不使用用户名和密码。
 *** 使用 SSH 密钥
 
 创建好一个 SSH
-密钥对，私匙保存在本地，公匙存放在目标服务器。在本地添加私匙到 ssh-agent
+密钥对，私钥保存在本地，公钥存放在目标服务器。在本地添加私钥到 ssh-agent
 ：
 
 #+BEGIN_SRC sh

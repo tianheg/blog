@@ -19,7 +19,7 @@
 调用例子： =/playlist/track/all?id=24381616=
 #+END_QUOTE
 
-id 后的数字是歌单的 id。在浏览器输入 =https://music.163.com= ，登陆后进入“个人主页”，在“我创建的歌单”下会有“XX喜欢的音乐”，点击后地址栏是这样的： =https://music.163.com/#/playlist?id=967686417= 。最后的这串数字，就是上面调用例子中需要的数字。
+id 后的数字是歌单的 id。在浏览器输入 =https://music.163.com= ，登录后进入“个人主页”，在“我创建的歌单”下会有“XX喜欢的音乐”，点击后地址栏是这样的： =https://music.163.com/#/playlist?id=967686417= 。最后的这串数字，就是上面调用例子中需要的数字。
 
 按照文档部署运行在本地后，要先二维码登录，然后才能获取到列表；否则，会提示操作过于频繁之类的话语。我本想部署在在线平台——Vercel 或者腾讯云 Serverless。最后都不能像在本地一样正常工作。[[http://localhost:3000/playlist/track/all?id=967686417][http://localhost:3000/playlist/track/all?id=967686417]] 是我要请求的本地地址，一切正常的话，页面会出现类 JSON 数据，保存到本地就是 likelist.json。
 

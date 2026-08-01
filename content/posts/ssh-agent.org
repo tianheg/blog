@@ -10,11 +10,11 @@
    :END:
 
 =ssh-agent=
-是一个帮助程序，帮助记录用户们的身份密钥和对应的密匙。记录之后，用户便能够登陆对应服务器，而不需要重复输入密码或密匙。这是单点登陆（SSO，single-sign-on）的一种实现方式。
+是一个帮助程序，帮助记录用户们的身份密钥和对应的密钥。记录之后，用户便能够登录对应服务器，而不需要重复输入密码或密钥。这是单点登录（SSO，single-sign-on）的一种实现方式。
 
 SSH agent 被用于 SSH 公钥验证。它使用 SSH 密钥进行身份验证。用户可以通过
 =ssh-keygen= 新建 SSH 密钥，通过 =ssh-copy-id=
-将对应的公匙上传至待登录服务器的 =.ssh/authorized_keys= 文件中。
+将对应的公钥上传至待登录服务器的 =.ssh/authorized_keys= 文件中。
 
 ** 启动 =ssh-agent=
    :PROPERTIES:
