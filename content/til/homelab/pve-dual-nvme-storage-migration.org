@@ -1,0 +1,102 @@
+#+TITLE: PVE 双 NVMe 存储：系统/备份与 VM 镜像分离
+
+单盘部署 PVE 时，系统、VM 镜像、备份挤在同一块盘上：既是性能瓶颈，也是单点故障（盘坏 = 全部丢失）。本文记录把两块 NVMe 按职责分离的迁移过程。
+
+* 背景与问题
+
+初始布局（单块 256G NVMe）：
+
+- `pve-root` 69G（ext4）— 系统 + `local` 存储（ISO、vztmpl、vzdump 备份都在这）
+- `pve-data` 141G（lvmthin）— VM 镜像，thin 池实际只用了 17%
+
+问题：
+
+1. 备份与系统同盘，VM 与系统同盘 — 盘坏全没
+2. VM 扩容需求（100G+）直接撞上 141G 池的天花板
+3. 第二块 500G NVMe 完全闲置
+
+* local 与 local-lvm 的区别
+
+| | local | local-lvm |
+|--|-------|-----------|
+| 类型 | dir（普通目录） | lvmthin（逻辑卷池） |
+| 存储内容 | iso、vztmpl、backup（文件） | images、rootdir（VM 磁盘） |
+| 数据形态 | 普通文件，可 ls/cp 直接操作 | 逻辑卷，PVE 管理 |
+| 空间分配 | 立即占用 | thin 按需分配 |
+| 能否放备份 | 能 | 不能（界面选项灰掉） |
+
+关键认知：**备份是"文件"，只能进 dir 存储**；VM 磁盘是"逻辑卷"，进 lvmthin。备份挤在 root 分区里，是因为 local 就建在 root 上。
+
+* 目标布局
+
+| 盘 | 角色 | 布局 |
+|----|------|------|
+| 256G（系统盘） | 系统 + 备份 | root 扩到 234G，local 存储（ISO/备份） |
+| 500G（Samsung 980） | VM 镜像 | VG → 450G thin 池 → lvmthin 存储 |
+
+原则：备份与 VM 镜像异盘；系统盘物理故障时不至于连 VM 备份一起丢（剩余风险：备份仍与系统同盘，需异地推送管道补足）。
+
+* 迁移步骤
+
+** 1. 新盘建存储
+
+#+BEGIN_SRC bash
+lsblk -f /dev/nvme1n1        # 确认空盘
+pvcreate /dev/nvme1n1
+vgcreate pve2 /dev/nvme1n1
+lvcreate -L 450G -T pve2/thin    # 留 ~15G 余量给元数据/快照
+pvesm add lvmthin local-ssd --vgname pve2 --thinpool thin --content images,rootdir
+#+END_SRC
+
+** 2. 迁移 VM 磁盘（在线）
+
+#+BEGIN_SRC bash
+qm move-disk 102 scsi0 local-ssd --delete 1    # thin 池支持在线迁移，32G 约 30s
+qm move-disk 102 ide2 local-ssd --delete 1     # cloudinit 盘（4M）
+#+END_SRC
+
+** 3. 迁移 LXC（必须停机）
+
+#+BEGIN_SRC bash
+pct stop 101
+pct move-volume 101 rootfs local-ssd --delete 1
+pct start 101
+#+END_SRC
+
+** 4. 扩容 VM
+
+#+BEGIN_SRC bash
+qm resize 102 scsi0 150G
+# guest 内扩文件系统（Debian cloud-init 镜像）：
+growpart /dev/sda 1 && resize2fs /dev/sda1
+#+END_SRC
+
+** 5. 释放旧池，扩 root
+
+#+BEGIN_SRC bash
+lvs pve                      # 确认 data 池内已无卷
+lvremove /dev/pve/data       # 不可逆，先确认
+lvextend -l +100%FREE /dev/pve/root
+resize2fs /dev/pve/root      # ext4 在线扩
+pvesm remove local-lvm       # 清理 storage.cfg 死条目
+#+END_SRC
+
+* 关键坑：cloudinit 盘迁移后旧卷 in use
+
+`qm move-disk` 迁移 cloudinit 盘时，目标卷复制成功，但删除源卷报：
+
+#+BEGIN_EXAMPLE
+Logical volume pve/vm-102-cloudinit in use.
+#+END_EXAMPLE
+
+原因：运行中的 QEMU 进程持有旧卷 fd，move-disk 不热释放。**必须重启 VM**（`qm reboot <vmid>`）后 open 标志才消失（`lvs` 属性从 `aotz` → `a-tz`），此时才能 `lvremove` 清理残留，否则整个旧池删不掉。
+
+* 验证
+
+#+BEGIN_SRC bash
+pvesm status                 # 只剩 local + local-ssd
+qm config 102 | grep scsi0   # 指向 local-ssd
+df -h /                      # root 234G，可用 177G
+#+END_SRC
+
+备份配置随之调整：keep-last 从 2 提到 3（root 空间充裕），并新增 LXC 的每周备份任务。
