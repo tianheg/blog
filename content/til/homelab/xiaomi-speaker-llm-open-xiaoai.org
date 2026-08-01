@@ -15,8 +15,8 @@
 - 硬性门槛：仅支持两款机型——小爱音箱 Pro（LX06，旧款需拆机）和 Xiaomi 智能音箱 Pro（OH2P，新款 Type-C 免拆）
 - 服务端 open-xiaoai-bridge（coderzc）活跃维护，默认 openai 段 `session_header: X-Hermes-Session-Key` 开箱直指 Hermes Agent API Server
 - HTTP API :9092 可远程播放（/api/play/text）
-- *当前部署（2026-08）：后端已切 Hermes Agent API Server* （`http://192.168.8.10:8642/v1`，model `hermes-agent`）——音箱"你好小智"获得联网搜索/工具/记忆能力（DeepSeek API 本身无联网搜索，网页端才有）
-- *双通道共存* ：说"小爱同学 xxx"走小米云端（原功能不变），说"你好小智 xxx"走本地链路，互不干扰
+- *当前部署（2026-08）：后端已切 Hermes Agent API Server* （`http://<bridge_host>:8642/v1`，model `hermes-agent`）——音箱"你好小明"获得联网搜索/工具/记忆能力（DeepSeek API 本身无联网搜索，网页端才有）
+- *双通道共存* ：说"小爱同学 xxx"走小米云端（原功能不变），说"你好小明 xxx"走本地链路，互不干扰
 
 * 自制补丁固件（固件版本 > 官方支持时）
 
@@ -93,6 +93,11 @@ docker compose up -d
 6. 容器内调试用 `/app/.venv/bin/python`（默认 python3 缺 aiohttp），backend 类名是 OpenAIManager。
 7. *两个超时别搞混* ：连续对话静默退出 = `wakeup.timeout`（默认 20 秒，改 120 即 2 分钟不说话才"再见"）；等 LLM 回复 = openai 段 `response_timeout`（120→300 给 agent 工具循环留时间）。
 8. *xiaomusic 共存* ：音箱双通道下 xiaomusic 可能"自动播放"——列表续播（`continue_play=True`）是设计；搜歌请求看来源 IP（iWebPlayer 网页 vs 音箱语音劫持 `get_ask_by_mina`/`enable_pull_ask`）。
+9. *bridge 僵尸态（2026-08 实测，watchdog 盲区）* ：容器活着、4399/9092 LISTEN、TCP 握手正常，但 bridge 只回 TCP 层 ACK、无任何应用层响应（无 `101 Switching Protocols`、无 `已连接` 日志），事件循环不再处理新连接。判定法：bridge 日志从最后一次活动后**完全空白**（无断开/无重连/无 No response——原 watchdog 找 No response 所以失灵）+ 音箱侧 `tcpdump -i wlan0 -n 'tcp port 4399'` 抓到握手后无数据流。修法：`docker compose restart`。**音箱侧 client 进程活着但 0 packets = 同款僵尸**：先 `kill <pid>` + `sh /data/init.sh >/dev/null 2>&1 &` 重启 client，无效则僵尸在 bridge 侧。
+10. *唤醒词选词（sherpa-onnx KWS 实测）* ：只有"你好小X"四字模式识别稳定（"你好小智"4 次全中）；"小智小智"（重复音节、卷舌音"智"音素边界被吞）和"小智同学"都匹配不上，keywords_score 加到 4.0 也救不回来；且"小智同学"会误触发原生"小爱同学"抢答（发音太像，日志见 `[XiaoAI] 触发唤醒: 小爱同学` + `returned: None`）。换词要同步改 config.py 三处：keywords 列表、before_wakeup 路由判断（`if "小明" in text`）、提示语/退出语文案。
+11. *距离 1 米唤醒失效 = 增益问题* ：50cm 能唤醒、1m 不行，但"小爱同学"1m 正常——原生唤醒是硬件 DSP+波束成形，本地 KWS 靠 client 裸音频流。修法：config.py `audio_input.gain` 1.0→**4.0**（上限 8.0，`core/xiaoai.py` 处理，作用于 VAD/KWS/ASR 全链路）。放音乐时本地唤醒失败同理（mic 采到外放+人声，信噪比差），排查先暂停音乐。
+12. *"音乐自动播放"溯源链* ：说"播放音乐"→ Hermes agent 工具调用**已执行**（curl xiaomusic 播歌）→ 但 LLM 回复超时（response_timeout 120 太短）→ 用户听到"抱歉，我没有收到回复"以为 AI 没理 → 歌单已起来 + `continue_play=True` 续播 → 音乐盖住后续唤醒测试，形成"AI 听不见"假象。停播：`POST :8090/cmd` 必须带 `did`（否则 422）。
+13. *docker compose restart 不重载环境变量* ：改 compose 的 LOGLEVEL 后必须 `up -d` 重建才生效；改挂载的 config.py 则 restart 即可。
 
 * 音箱 root shell 内部探索（2026-08）
 
