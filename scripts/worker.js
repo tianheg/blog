@@ -4,18 +4,19 @@
  * POST /api/semantic/search  { query } -> { results: [{ url, title, score }] }
  * GET  /*                       -> static assets from public/
  *
+ * Semantic search: embeddings are pre-generated at build time
+ * (scripts/generate-embeddings.mjs -> static/pagefind-semantic/embeddings.bin)
+ * and served as static assets. The Worker only embeds the query and computes
+ * dot products — no KV, no cold-start re-embedding of the corpus.
+ *
  * Prerequisites:
- *   - KV namespace "BLOG_EMBEDDINGS" bound as env.EMBEDDINGS_KV
  *   - Workers AI enabled
- *   - static/pagefind-semantic/ assets deployed under ASSETS binding
+ *   - static/pagefind-semantic/{embeddings.bin,pages.json} deployed under ASSETS
  */
 
 const EMBEDDING_MODEL = '@cf/baai/bge-m3';
 const EMBEDDING_DIM = 1024;
-const KV_KEY = 'embeddings:v1';
 const MAX_RESULTS = 10;
-const BATCH_SIZE = 16;
-const MANIFEST_PATH = '/pagefind-semantic/manifest.json';
 const COMMENTS_BACKEND = 'https://comments.tianheg.co';
 
 // Simple in-memory rate limiter (per-worker-isolate, resets on cold start)
@@ -48,89 +49,23 @@ function checkRateLimit(request) {
 // In-memory cache for page data + embeddings (lives as long as the isolate)
 let pageCache = null;
 
-async function loadManifest(env) {
-  const resp = await env.ASSETS.fetch('https://fake' + MANIFEST_PATH);
-  if (!resp.ok) return null;
-  return resp.json();
-}
-
 async function loadPageData(env) {
   if (pageCache) return pageCache;
 
-  // Check current asset version via manifest
-  const manifest = await loadManifest(env);
-
-  // Try KV first
-  const cached = await env.EMBEDDINGS_KV.get(KV_KEY, { type: 'text' });
-  if (cached) {
-    const parsed = JSON.parse(cached);
-    // Check if manifest count/updated matches — if not, KV is stale
-    if (!manifest || (parsed.count === manifest.count && parsed.updated === manifest.updated)) {
-      const buf = Uint8Array.from(atob(parsed.data), c => c.charCodeAt(0)).buffer;
-      const embeddings = new Float32Array(buf);
-      pageCache = {
-        pages: parsed.pages,
-        embeddings,
-        dim: parsed.dim,
-      };
-      return pageCache;
-    }
-    // Stale cache — clear and regenerate
-    await env.EMBEDDINGS_KV.delete(KV_KEY);
+  const [binResp, metaResp] = await Promise.all([
+    env.ASSETS.fetch('https://fake/pagefind-semantic/embeddings.bin'),
+    env.ASSETS.fetch('https://fake/pagefind-semantic/pages.json'),
+  ]);
+  if (!binResp.ok || !metaResp.ok) {
+    throw new Error(`semantic index missing (bin=${binResp.status}, pages=${metaResp.status})`);
   }
 
-  // Load from static assets
-  const resp = await env.ASSETS.fetch('https://fake/pagefind-semantic/pages-content.json');
-  const pagesContent = await resp.json();
-  const pages = pagesContent.map(p => ({ url: p.url, title: p.title }));
-  const texts = pagesContent.map(p => p.text);
+  const buf = await binResp.arrayBuffer();
+  const embeddings = new Float32Array(buf); // already L2-normalized at build time
+  const pages = await metaResp.json();
 
-  // Batch-embed all texts via Workers AI
-  const allEmbeddings = [];
-  for (let i = 0; i < texts.length; i += BATCH_SIZE) {
-    const batch = texts.slice(i, i + BATCH_SIZE);
-    const aiResp = await env.AI.run(EMBEDDING_MODEL, {
-      text: batch,
-    });
-    // BGE-M3 returns { data: [...], shape: [...] }
-    const batchEmbeddings = aiResp.data || aiResp;
-    for (const emb of batchEmbeddings) {
-      allEmbeddings.push(...emb);
-    }
-  }
-
-  const flatEmbeddings = new Float32Array(allEmbeddings);
-
-  // Cache in KV as base64
-  const bytes = new Uint8Array(flatEmbeddings.buffer);
-  let binary = '';
-  for (let i = 0; i < bytes.length; i++) {
-    binary += String.fromCharCode(bytes[i]);
-  }
-  const b64Data = btoa(binary);
-
-  await env.EMBEDDINGS_KV.put(KV_KEY, JSON.stringify({
-    v: 1,
-    dim: EMBEDDING_DIM,
-    count: pages.length,
-    updated: manifest.updated,
-    pages,
-    data: b64Data,
-  }));
-
-  pageCache = { pages, embeddings: flatEmbeddings, dim: EMBEDDING_DIM };
+  pageCache = { pages, embeddings, dim: EMBEDDING_DIM };
   return pageCache;
-}
-
-function cosineSimilarity(a, b) {
-  let dot = 0, magA = 0, magB = 0;
-  for (let i = 0; i < a.length; i++) {
-    dot += a[i] * b[i];
-    magA += a[i] * a[i];
-    magB += b[i] * b[i];
-  }
-  const denom = Math.sqrt(magA) * Math.sqrt(magB);
-  return denom === 0 ? 0 : dot / denom;
 }
 
 async function handleSearch(request, env) {
@@ -142,20 +77,25 @@ async function handleSearch(request, env) {
 
   const cache = await loadPageData(env);
 
-  // Embed the query
+  // Embed the query, then L2-normalize to match the pre-normalized doc vectors
   const aiResp = await env.AI.run(EMBEDDING_MODEL, {
     text: [query],
   });
-  const queryEmbedding = new Float32Array(aiResp.data[0]);
+  const q = new Float32Array(aiResp.data[0]);
+  let mag = 0;
+  for (let i = 0; i < q.length; i++) mag += q[i] * q[i];
+  mag = Math.sqrt(mag) || 1;
+  for (let i = 0; i < q.length; i++) q[i] /= mag;
 
-  // Compute similarity
+  // Dot product = cosine similarity (both vectors normalized)
+  const { pages, embeddings, dim } = cache;
   const scored = [];
-  const dim = cache.dim;
-  for (let i = 0; i < cache.pages.length; i++) {
+  for (let i = 0; i < pages.length; i++) {
     const start = i * dim;
-    const docVec = cache.embeddings.subarray(start, start + dim);
-    const score = cosineSimilarity(queryEmbedding, docVec);
-    scored.push({ ...cache.pages[i], score: +score.toFixed(4) });
+    let dot = 0;
+    const doc = embeddings.subarray(start, start + dim);
+    for (let j = 0; j < dim; j++) dot += q[j] * doc[j];
+    scored.push({ ...pages[i], score: +dot.toFixed(4) });
   }
 
   scored.sort((a, b) => b.score - a.score);
