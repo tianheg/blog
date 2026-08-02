@@ -8,7 +8,7 @@
  * Run: node scripts/generate-embeddings.mjs
  */
 
-import { readFileSync, writeFileSync, mkdirSync, existsSync, readdirSync, statSync } from 'node:fs';
+import { readFileSync, writeFileSync, mkdirSync, existsSync, readdirSync, statSync, copyFileSync } from 'node:fs';
 import { join, relative } from 'node:path';
 
 const PUBLIC_DIR = join(import.meta.dirname, '..', 'public');
@@ -126,6 +126,19 @@ function main() {
   };
   writeFileSync(join(OUT_DIR, 'manifest.json'), JSON.stringify(manifest));
   console.log(`  manifest.json: count=${manifest.count}, updated=${manifest.updated}`);
+
+  // Mirror to public/ — wrangler.jsonc serves ./public as ASSETS, so the
+  // deployed semantic index must live there. static/ copy stays in git as
+  // the canonical source; without this mirror, CI-generated indexes never
+  // reach production (hugo copies static/->public/ *before* this script runs).
+  const publicSemDir = join(PUBLIC_DIR, 'pagefind-semantic');
+  if (existsSync(PUBLIC_DIR)) {
+    mkdirSync(publicSemDir, { recursive: true });
+    for (const f of ['pages.json', 'pages-content.json', 'manifest.json']) {
+      copyFileSync(join(OUT_DIR, f), join(publicSemDir, f));
+    }
+    console.log(`Mirrored 3 files to ${publicSemDir}/`);
+  }
 }
 
 main();
