@@ -1,0 +1,52 @@
+#+TITLE: 用 MusicBrainz Picard 整理凌乱音乐库
+
+音乐库整理的标准流水线：采集 → 整理（元数据规范化 + 统一命名）→ 服务（Navidrome 等）→ 客户端。整理环节最值得投入，两个主流工具：
+
+- *MusicBrainz Picard*（GUI）— 按专辑/音轨匹配 MusicBrainz 数据库，声纹识别无标签老文件
+- *beets*（CLI）— 自动匹配 + Last.fm 补 genre + ReplayGain + 封面，自带数据库
+
+** 与播放器的边界
+
+播放器自带的 tag 编辑（如 Dopamine）是"手动改标签"，不重命名/移动文件；Picard/beets 是"按规范批量重排"。只有存量文件多、tag 乱、需要统一目录结构时才需要 Picard。播放器改好的 tag 服务端（Navidrome/xiaomusic）扫描时都能读到，不冲突。
+
+** 使用流程
+
+*** 0. 备份
+
+Picard 会覆写文件 tag 和移动文件，整理前把整个音乐库复制一份。
+
+*** 1. 配置（一次性）
+
+- 元数据：勾选"将艺术家名称翻译为本地区域"（日/中文艺术家转拼音或英文，方便检索）
+- 封面：勾选"将封面图片嵌入标签" + "将封面图片保存为单独文件"（存 =cover.jpg= ，播放器和服务端都喜欢）
+- 指纹识别：获取 AcoustID API key——无 tag 老文件靠它识别，整理乱库的核心
+- 文件命名：勾选"保存时移动文件"，目标目录设为音乐库根目录，用下面命名脚本
+
+*** 2. 整理工作流
+
+1. 把要整理的文件夹复制到 =to-sort= 目录（不要直接开原目录，Picard 会动文件）
+2. 添加文件夹，一次 10~20 张专辑一批
+3. 聚类（Cluster）— 文件按专辑自动分组
+4. 查找（Lookup）— 自动从 MusicBrainz 匹配
+5. 点开单曲看改动，错的改或拖到正确专辑
+6. 保存（Save）— 文件按命名脚本写入目标目录
+
+匹配不到的（尤其中文老歌）手动编辑 tag 后保存，别硬凑错误条目。
+
+*** 3. 命名脚本
+
+#+BEGIN_SRC text
+$if($eq(%compilation%,1),Compilations,$if2(%albumartist%,%artist%,Unknown Artist))/$if(%albumartist%,%album%/,Unknown Album/)$if($gt(%totaldiscs%,1),%discnumber%-)$if($and(%albumartist%,%tracknumber%),$num(%tracknumber%,2) ,)$if(%_multiartist%,%artist% - ,)%title%
+#+END_SRC
+
+效果：=Artist/Album/01 Title.mp3= ，多碟带碟号，合辑归 Compilations，多艺术家标注演唱者。
+
+** 坑
+
+- *华语/日语老歌匹配率低* — MusicBrainz 主库偏欧美，中文老专辑常无条目或残缺。匹配不到就手动
+- *播放器同时开着会冲突* — Dopamine 和 Picard 同时操作同一批文件（都持有句柄），整理时关掉播放器扫描
+
+* 参考
+- [[http://www.thedreaming.org/2020/11/22/musicbrainz-picard/][Organizing music with Musicbrainz Picard (thedreaming.org)]]
+- [[https://chameth.com/further-adventures-in-music-organisation/][Further Adventures in Music Organisation (Chameth)]]
+- [[https://www.navidrome.org/docs/faq/][Navidrome FAQ — 推荐 Picard/beets]]
