@@ -1,0 +1,320 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>练琴记录 · Piano Practice</title>
+  <style>
+    :root {
+      --bg: #0b0b14;
+      --surface: #141421;
+      --surface2: #1c1c2e;
+      --border: #2a2a3e;
+      --text: #e2e0e8;
+      --text2: #8a86a0;
+      --text3: #5e5a78;
+      --accent: #f0b429;
+    }
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+    body {
+      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", "Noto Sans SC", system-ui, sans-serif;
+      background:
+        radial-gradient(1000px 700px at 80% -8%, rgba(120, 140, 255, 0.12), transparent 60%),
+        linear-gradient(180deg, #05050e 0%, var(--bg) 55%, #0d0d18 100%);
+      color: var(--text);
+      -webkit-font-smoothing: antialiased;
+      min-height: 100vh;
+      background-attachment: fixed;
+    }
+    /* 星星 */
+    body::after {
+      content: '';
+      position: fixed; inset: 0;
+      z-index: 0;
+      pointer-events: none;
+      background:
+        radial-gradient(1.5px 1.5px at 12% 12%, rgba(255,255,255,0.8), transparent 60%),
+        radial-gradient(1px 1px at 24% 6%, rgba(255,255,255,0.5), transparent 60%),
+        radial-gradient(1px 1px at 33% 18%, rgba(255,255,255,0.6), transparent 60%),
+        radial-gradient(1.5px 1.5px at 47% 9%, rgba(255,255,255,0.45), transparent 60%),
+        radial-gradient(1px 1px at 61% 15%, rgba(255,255,255,0.7), transparent 60%),
+        radial-gradient(1px 1px at 72% 7%, rgba(255,255,255,0.4), transparent 60%),
+        radial-gradient(1.5px 1.5px at 92% 22%, rgba(255,255,255,0.55), transparent 60%),
+        radial-gradient(1px 1px at 8% 30%, rgba(255,255,255,0.35), transparent 60%),
+        radial-gradient(1px 1px at 55% 26%, rgba(255,255,255,0.4), transparent 60%);
+    }
+    .page {
+      position: relative;
+      z-index: 1;
+      max-width: 800px;
+      margin: 0 auto;
+      padding: 1.5rem 1rem;
+    }
+    @media (max-width: 480px) {
+      .page { padding: 1rem 0.5rem; }
+    }
+
+    /* Header */
+    .hd { margin-bottom: 1.5rem; display: flex; justify-content: space-between; align-items: flex-start; flex-wrap: wrap; gap: 0.5rem; }
+    .hd h1 { font-size: 1.2rem; font-weight: 600; }
+    .hd h1 span { font-weight: 400; font-size: 0.75rem; color: var(--text2); margin-left: 0.3rem; }
+    .stats { display: flex; gap: 0.75rem; font-size: 0.75rem; color: var(--text2); }
+    .stats strong { color: var(--text); font-weight: 600; }
+
+    /* Nav */
+    .nav { display: flex; justify-content: space-between; align-items: center; margin-bottom: 0.75rem; }
+    .nav-label { font-size: 0.95rem; font-weight: 500; }
+    .nav-group { display: flex; gap: 0.15rem; }
+    .nav-btn {
+      background: transparent; border: 1px solid var(--border); color: var(--text2);
+      padding: 0.25rem 0.55rem; border-radius: 5px; cursor: pointer;
+      font-size: 0.75rem; font-family: inherit; transition: all 0.1s;
+    }
+    .nav-btn:hover { border-color: var(--text3); color: var(--text); }
+    .nav-btn.today { font-size: 0.65rem; padding: 0.25rem 0.45rem; }
+
+    /* Weekdays */
+    .wd { display: grid; grid-template-columns: repeat(7, 1fr); gap: 2px; margin-bottom: 2px; }
+    .wd span { text-align: center; font-size: 0.65rem; color: var(--text3); padding: 0.25rem 0; font-weight: 500; }
+
+    /* Grid */
+    .cal { display: grid; grid-template-columns: repeat(7, 1fr); gap: 2px; width: 100%; }
+
+    .cell {
+      background: var(--surface); border-radius: 6px; padding: 4px;
+      min-height: 44px; min-width: 0; display: flex; flex-direction: column; align-items: center;
+      justify-content: center; cursor: pointer; border: 1px solid transparent;
+      transition: background 0.1s; position: relative;
+    }
+    .cell:active { background: var(--surface2); }
+    .cell.other { opacity: 0.2; pointer-events: none; }
+    .cell.today { border-color: var(--accent); }
+    .cell .num { font-size: 0.8rem; font-weight: 500; line-height: 1.2; }
+    .cell .tag { font-size: 0.48rem; color: var(--text3); max-width: 95%; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; text-align: center; line-height: 1.1; margin-top: 1px; }
+
+    .cell.marked::before {
+      content: ''; position: absolute; top: -1px; left: 25%; right: 25%;
+      height: 2px; border-radius: 2px; background: var(--accent);
+    }
+    .cell.marked .min { color: var(--accent); font-weight: 600; }
+
+    @media (max-width: 480px) {
+      .cell { min-height: 38px; padding: 2px; border-radius: 4px; }
+      .cell .num { font-size: 0.7rem; }
+      .cell .tag { font-size: 0.4rem; }
+      .cell.marked::before { left: 30%; right: 30%; height: 2px; }
+      .wd span { font-size: 0.58rem; padding: 0.2rem 0; }
+    }
+    @media (max-width: 360px) {
+      .cell { min-height: 34px; }
+      .cell .num { font-size: 0.62rem; }
+      .cell .tag { font-size: 0.38rem; }
+    }
+
+    /* Data bar */
+    .bar { margin-top: 0.75rem; display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 0.5rem; padding: 0.4rem 0.7rem; background: var(--surface); border-radius: 6px; border: 1px solid var(--border); }
+    .bar-info { font-size: 0.68rem; color: var(--text2); display: flex; align-items: center; gap: 0.3rem; }
+    .bar-info code { font-family: "SF Mono", "Cascadia Code", monospace; font-size: 0.62rem; color: var(--text); background: var(--surface2); padding: 0.1rem 0.3rem; border-radius: 3px; }
+    .btn-dl { background: var(--surface2); border: 1px solid var(--border); color: var(--text2); padding: 0.3rem 0.7rem; border-radius: 5px; cursor: pointer; font-size: 0.68rem; font-family: inherit; }
+    .btn-dl:active { background: var(--border); }
+    @media (max-width: 480px) { .bar { flex-direction: column; align-items: stretch; } .bar-info { justify-content: center; } .btn-dl { width: 100%; text-align: center; } }
+
+    /* Modal */
+    .overlay { display: none; position: fixed; inset: 0; background: rgba(0,0,0,0.6); z-index: 100; justify-content: center; align-items: center; padding: 1rem; }
+    .overlay.show { display: flex; }
+    .modal { background: var(--surface); border-radius: 10px; padding: 1.2rem; width: 100%; max-width: 360px; box-shadow: 0 8px 30px rgba(0,0,0,0.3); border: 1px solid var(--border); }
+    .modal h2 { font-size: 0.9rem; font-weight: 600; margin-bottom: 1rem; color: var(--text); }
+    .modal .row { display: flex; align-items: center; gap: 0.5rem; margin-bottom: 0.6rem; }
+    .modal .row label { font-size: 0.75rem; color: var(--text2); flex-shrink: 0; }
+    .modal input[type=number] {
+      width: 100%; background: var(--surface2); border: 1px solid var(--border); border-radius: 6px;
+      color: var(--text); padding: 0.5rem 0.55rem; font-size: 0.9rem; font-family: inherit;
+    }
+    .modal input[type=number]:focus, .modal textarea:focus { outline: none; border-color: #3a3a52; }
+    .modal input[type=number]::-webkit-inner-spin-button { opacity: 0.4; }
+    .modal textarea { width: 100%; background: var(--surface2); border: 1px solid var(--border); border-radius: 6px; color: var(--text); padding: 0.55rem; font-size: 0.82rem; resize: vertical; min-height: 56px; font-family: inherit; line-height: 1.5; }
+    .hint { font-size: 0.62rem; color: var(--text3); margin-top: 0.35rem; }
+    .acts { display: flex; gap: 0.4rem; justify-content: flex-end; margin-top: 0.75rem; }
+    .acts button { padding: 0.3rem 0.85rem; border-radius: 5px; border: none; cursor: pointer; font-size: 0.75rem; font-family: inherit; }
+    .btn-save { background: var(--accent); color: #0b0b14; font-weight: 500; }
+    .btn-del { background: transparent; color: var(--text2); border: 1px solid var(--border) !important; }
+    .btn-cancel { background: transparent; color: var(--text2); }
+    @media (max-width: 480px) { .modal { padding: 1rem; } }
+  </style>
+</head>
+<body>
+<div class="page">
+  <div class="hd">
+    <h1>练琴记录 <span>Piano Practice</span></h1>
+    <div class="stats">
+      <span>本月 <strong id="mmin">0m</strong></span>
+      <span>连续 <strong id="streak">0</strong> 天</span>
+      <span>总计 <strong id="tmin">0m</strong></span>
+    </div>
+  </div>
+
+  <div class="nav">
+    <button class="nav-btn" id="prev">‹ 上月</button>
+    <span class="nav-label" id="label"></span>
+    <div class="nav-group">
+      <button class="nav-btn today" id="today">今天</button>
+      <button class="nav-btn" id="next">下月 ›</button>
+    </div>
+  </div>
+
+  <div class="wd"><span>日</span><span>一</span><span>二</span><span>三</span><span>四</span><span>五</span><span>六</span></div>
+  <div class="cal" id="grid"></div>
+
+  <div class="bar">
+    <div class="bar-info">
+      <span>📄 <code>data.json</code></span>
+      <span id="sync"></span>
+    </div>
+    <button class="btn-dl" id="dl">💾 下载</button>
+  </div>
+</div>
+
+<div class="overlay" id="modal">
+  <div class="modal">
+    <h2 id="mtitle">记录</h2>
+    <div class="row">
+      <label>时长</label>
+      <input type="number" id="mmin-input" min="1" max="600" placeholder="分钟">
+    </div>
+    <textarea id="mnote" placeholder="练了什么（可选）"></textarea>
+    <div class="hint" id="mhint"></div>
+    <div class="acts">
+      <button class="btn-cancel" id="cancel">取消</button>
+      <button class="btn-del" id="del" style="display:none">删除</button>
+      <button class="btn-save" id="save">保存</button>
+    </div>
+  </div>
+</div>
+
+<script>
+(function() {
+  const KEY = 'piano_practice';
+  let data = {}, cy, cm;
+
+  function k(y,m,d) { return `${y}-${String(m+1).padStart(2,'0')}-${String(d).padStart(2,'0')}`; }
+  function g(y,m,d) { return data[k(y,m,d)] || null; }
+  function persist() { localStorage.setItem(KEY, JSON.stringify(data)); }
+
+  function set(y,m,d,e) {
+    const kk = k(y,m,d);
+    if (e) data[kk] = e; else delete data[kk];
+    persist(); stats(); render();
+  }
+
+  function local() { try { const r = localStorage.getItem(KEY); if (r) return JSON.parse(r); } catch {} return null; }
+
+  function merge(l,r) {
+    const m = {}, ks = new Set([...Object.keys(l||{}), ...Object.keys(r||{})]);
+    for (const kk of ks) { const a=l?.[kk], b=r?.[kk]; if (!b) m[kk]=a; else if (!a) m[kk]=b; else m[kk]=(a.timestamp||0)>=(b.timestamp||0)?a:b; }
+    return m;
+  }
+
+  async function sync() {
+    const l = local(); let r = null;
+    try { const res = await fetch('data.json?'+Date.now()); if (res.ok) r = await res.json(); } catch {}
+    const s = document.getElementById('sync');
+    if (l && r) { const m = merge(l,r); const c = Object.keys(m).filter(kk=>l[kk]&&r[kk]&&l[kk].timestamp!==r[kk].timestamp); data=m; s.textContent=c.length?`合并 ${c.length} 条冲突`:'已同步'; }
+    else if (r) { data=r; s.textContent='已同步'; }
+    else if (l) { data=l; s.textContent='本地'; }
+    else { data={}; s.textContent='暂无数据'; }
+    persist(); stats();
+  }
+
+  function fmtMin(t) { return t>=60 ? `${Math.floor(t/60)}h${t%60?String(t%60).padStart(2,'0'):''}` : `${t}m`; }
+
+  function stats() {
+    const n = new Date(); let mm=0, tm=0, st=0, md=0;
+    for (let d=1;d<=31;d++){const e=g(n.getFullYear(),n.getMonth(),d); if(e){mm+=e.minutes||0;md++;}}
+    for (const kk in data) tm += (data[kk].minutes||0);
+    for (let i=0;i<365;i++){const d=new Date(n);d.setDate(d.getDate()-i);const e=g(d.getFullYear(),d.getMonth(),d.getDate());if(e)st++;else if(i>0)break;}
+    document.getElementById('mmin').textContent=fmtMin(mm);
+    document.getElementById('tmin').textContent=fmtMin(tm);
+    document.getElementById('streak').textContent=st;
+  }
+
+  function render() {
+    const grid = document.getElementById('grid'); grid.innerHTML = '';
+    const fd = new Date(cy,cm,1).getDay(), dim = new Date(cy,cm+1,0).getDate(), dip = new Date(cy,cm,0).getDate();
+    document.getElementById('label').textContent = `${cy} 年 ${cm+1} 月`;
+    for (let i=fd-1;i>=0;i--) grid.appendChild(cell(cy,cm-1,dip-i,true));
+    const t = new Date();
+    for (let d=1;d<=dim;d++) grid.appendChild(cell(cy,cm,d,false,cy===t.getFullYear()&&cm===t.getMonth()&&d===t.getDate()));
+    const rem = (7-(fd+dim)%7)%7;
+    for (let d=1;d<=rem;d++) grid.appendChild(cell(cy,cm+1,d,true));
+  }
+
+  function cell(y,m,d,oth,tod) {
+    const div = document.createElement('div');
+    div.className = 'cell'+(oth?' other':'')+(tod?' today':'');
+    const e = g(y,m,d);
+    if (e) {
+      div.classList.add('marked');
+      const min = document.createElement('span'); min.className='min';
+      min.textContent = `${e.minutes||0}m`; div.appendChild(min);
+      if (e.note) {
+        const tag = document.createElement('span'); tag.className='tag';
+        tag.textContent = e.note.slice(0,8)+(e.note.length>8?'..':'');
+        div.appendChild(tag);
+      }
+    }
+    const num = document.createElement('span'); num.className='num'; num.textContent=d; div.prepend(num);
+    div.dataset.y=y; div.dataset.m=m; div.dataset.d=d;
+    div.addEventListener('click',()=>open(y,m,d));
+    return div;
+  }
+
+  function open(y,m,d) {
+    const o=document.getElementById('modal'), e=g(y,m,d);
+    document.getElementById('mtitle').textContent=`${y} 年 ${m+1} 月 ${d} 日`;
+    document.getElementById('mmin-input').value=e?(e.minutes||''):'';
+    document.getElementById('mnote').value=e?(e.note||''):'';
+    document.getElementById('mhint').textContent=e?`已练 ${e.minutes||0} 分钟`:'';
+    document.getElementById('del').style.display=e?'inline-block':'none';
+    o.classList.add('show'); o.dataset.y=y; o.dataset.m=m; o.dataset.d=d;
+    document.getElementById('mmin-input').focus();
+  }
+  function closeModal() { document.getElementById('modal').classList.remove('show'); }
+  function saveModal() {
+    const o=document.getElementById('modal');
+    const y=parseInt(o.dataset.y),m=parseInt(o.dataset.m),d=parseInt(o.dataset.d);
+    const minutes=parseInt(document.getElementById('mmin-input').value);
+    const note=document.getElementById('mnote').value.trim();
+    if (!minutes || minutes<=0) { set(y,m,d,null); }
+    else { set(y,m,d,{minutes:minutes,note:note||'',timestamp:Date.now()}); }
+    closeModal();
+  }
+  function delEntry() {
+    const o=document.getElementById('modal'); set(parseInt(o.dataset.y),parseInt(o.dataset.m),parseInt(o.dataset.d),null); closeModal();
+  }
+  function dl() {
+    const s={}; Object.keys(data).sort().forEach(k=>{s[k]=data[k];});
+    const b=new Blob([JSON.stringify(s,null,2)+'\n'],{type:'application/json'}), u=URL.createObjectURL(b), a=document.createElement('a');
+    a.href=u;a.download='data.json';document.body.appendChild(a);a.click();document.body.removeChild(a);URL.revokeObjectURL(u);
+  }
+
+  function bind() {
+    document.getElementById('prev').addEventListener('click',()=>{if(--cm<0){cm=11;cy--;}render();});
+    document.getElementById('next').addEventListener('click',()=>{if(++cm>11){cm=0;cy++;}render();});
+    document.getElementById('today').addEventListener('click',()=>{const n=new Date();cy=n.getFullYear();cm=n.getMonth();render();});
+    document.getElementById('cancel').addEventListener('click',closeModal);
+    document.getElementById('save').addEventListener('click',saveModal);
+    document.getElementById('del').addEventListener('click',delEntry);
+    document.getElementById('dl').addEventListener('click',dl);
+    document.addEventListener('keydown',e=>{if(e.key==='Escape')closeModal();if((e.metaKey||e.ctrlKey)&&e.key==='Enter'&&document.getElementById('modal').classList.contains('show'))saveModal();});
+    document.getElementById('modal').addEventListener('click',e=>{if(e.target===e.currentTarget)closeModal();});
+    document.getElementById('mmin-input').addEventListener('keydown',e=>{if(e.key==='Enter'){e.preventDefault();saveModal();}});
+  }
+
+  (async function init() {
+    const n = new Date(); cy=n.getFullYear(); cm=n.getMonth();
+    await sync(); render(); bind();
+  })();
+})();
+</script>
+</body>
+</html>
