@@ -1,0 +1,46 @@
+#+TITLE: ID3 标签 GBK 编码乱码修复（Dopamine 中文歌名乱码）
+
+现象：同一首中文歌，Windows 资源管理器文件名正常、Mp3tag 标签正常，但 Dopamine 里歌名/歌手乱码（如 `ÀîÖ¾`、`¶\xad×¿Ñþ`）。
+
+** 根因
+
+老工具（2011-2013 年下载资源常见）写 ID3v2.2 标签时，把中文按 GBK 字节写入文本帧，但 encoding 标志位留了 0（Latin-1）。规范要求中文用 UTF-16，写标签的软件违规了。三个软件行为不同：
+
+| 软件 | 底层 | 行为 | 结果 |
+|------|------|------|------|
+| Windows 资源管理器 | NTFS 文件名（UTF-16 存储） | 不碰标签 | 永远正常 |
+| Mp3tag | 自带启发式编码检测 | 自动识别 GBK | 正常 |
+| Dopamine | TagLib | 严格按 encoding 标志解码，Latin-1 就按 Latin-1 | 乱码 |
+
+所以「Mp3tag 正常」不能排除标签编码问题——Mp3tag 太聪明了，Dopamine 的 TagLib 是严格派。
+
+** 诊断
+
+mutagen 打印帧的 encoding 与原始字节：
+
+#+BEGIN_SRC python
+from mutagen.id3 import ID3
+tags = ID3("song.mp3")
+print(tags.version)          # (2, 2, 0) 老版本
+for k, v in tags.items():
+    if hasattr(v, "text"):
+        raw = v.text[0].encode("latin-1")   # 拿回原始字节
+        print(k, v.encoding, raw.hex(), raw.decode("gbk"))  # GBK 可解出中文即实锤
+#+END_SRC
+
+** 修复
+
+round-trip 重编码：帧字节 encode('latin-1') 拿回 → decode('gbk') 得正确中文 → 以 UTF-16（encoding=1）写回。ID3v2.2 顺带升级 v2.3/v2.4（保存时 mutagen 自动处理帧 ID 映射）。脚本：=fix_gbk_tags.py=。
+
+** 三个坑（全部实测翻过车）
+
+1. GBK 试探会误伤法语/西语标签。Édith Piaf、Céline Dion 这批歌标签是 latin-1 编码写的（Vorbis/ID3 违规但播放器 fallback 正常显示）。é 的 latin-1 字节 `\xe9` 在 GBK 里恰好拼成合法汉字（`閘`），CJK 检查也会误判。对策：先 dry-run 人工审输出，确认全是「乱码 → 正确中文」再 fix
+2. flac 的 Vorbis comment 规范强制 UTF-8，老工具若违规写 latin-1，mutagen/TagLib 都会 latin-1 fallback 正常显示——不需要修，别被 dry-run 误报带偏
+3. WSL 每次空闲回收实例，/tmp 是每实例独立的临时目录，脚本别放 /tmp；直接部署到 Windows 侧（/mnt/c/Users/<user>/）。ssh 内联 base64 传多个脚本会撞 cmd 8191 字符限制，用 scp
+
+** 实战数据
+
+417 首 mp3 中 78 首中招（190 帧），全部是李志 2011-2013 老资源。修复后 Dopamine 刷新索引即正常，无需重建数据库。残留检测：全库扫 U+FFFD（replace 解码铁证）为 0 即干净。
+
+* 参考
+- [[https://mutagen.readthedocs.io/][mutagen 文档 - Python 音频标签库]]
