@@ -207,6 +207,9 @@ npm run all
 # 仅生成搜索索引（需先构建）
 npm run pagefind
 
+# 生成语义搜索索引（调 Cloudflare Workers AI，需先 build；改动内容后发布前必跑）
+npm run embed
+
 # 单独运行 TIL 字数统计（CJK 准确分词）
 npm run words
 ```
@@ -216,7 +219,7 @@ npm run words
 1. 根据内容类型选择 `content/posts/` 或 `content/til/` 下的正确分类
 2. 按命名规范创建 `.org` 文件，填写 frontmatter
 3. 运行 `npm run dev` 本地预览
-4. 内容完成后运行 `npm run all` 构建并更新搜索索引
+4. 内容完成后运行 `npm run all && npm run embed` 构建并更新搜索索引（关键词 + 语义）
 5. 提交变更
 
 ## 资源存放
@@ -244,10 +247,17 @@ npm run words
 
 ### 搜索索引
 
-- 搜索由 **Pagefind** 提供
+- 关键词搜索由 **Pagefind** 提供
 - 索引基于 `public/` 构建后的 HTML 生成
 - **必须先 `npm run build`，再 `npm run pagefind`**
 - `pagefind_extended` 命令还会生成搜索 playground（本地调试搜索）
+
+### 语义搜索索引
+
+- 语义搜索（`/search` 的 AI tab）由 **构建时预生成的 embeddings** 驱动
+- `npm run embed` 调 Cloudflare Workers AI（BGE-M3）生成全部页面向量 → `static/pagefind-semantic/embeddings.bin`（L2 归一化，提交 git）
+- Worker 运行时只嵌入 query + dot product，**无冷启动、无 KV 缓存**
+- ⚠️ 改内容后必须重新 `npm run embed` 并提交，否则语义搜索结果缺新内容
 
 ### 知识图谱
 
