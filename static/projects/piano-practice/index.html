@@ -43,10 +43,10 @@
         radial-gradient(1px 1px at 8% 30%, rgba(255,255,255,0.35), transparent 60%),
         radial-gradient(1px 1px at 55% 26%, rgba(255,255,255,0.4), transparent 60%);
     }
-    /* 钢琴键（顶部装饰条） */
+    /* 钢琴键（顶部装饰条，垫底 z=-1 在文本之下） */
     .keys {
       position: fixed; top: 0; left: 0; right: 0;
-      height: 72px; z-index: 0; pointer-events: none;
+      height: 72px; z-index: -1; pointer-events: none;
       opacity: 0.09;
       background:
         repeating-linear-gradient(90deg,
