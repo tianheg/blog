@@ -1,0 +1,59 @@
+#+TITLE: 给本地音乐库批量补 LRC 歌词（中文歌实战）
+
+本地播放器（如 Dopamine）没有在线歌词功能，只读取与音频文件同名同目录的 .lrc 文件。给音乐库补歌词 = 批量生成同名 .lrc，没有捷径。本文记录 3400+ 首音乐库的实战经验，最终覆盖率 96.5%。
+
+** 桌面播放器的歌词机制
+
+| 播放器 | 在线歌词 | 本地歌词来源 |
+|--------|---------|-------------|
+| Dopamine 3 | 无（LRCLIB 集成 issue 挂了两年未实现） | 同名同目录 .lrc + 内嵌标签；3.x 对 .lrc 只做静态全文显示，滚动高亮未恢复 |
+| Screenbox | 无歌词面板 | 不显示歌词 |
+| MusicBee / foobar | 有插件（闭源系） | 各种 |
+
+** 工具链选择
+
+- lrcget（lrclib 官方工具，英文歌）：选目录自动匹配 lrclib.net，批量生成同名 .lrc，免费无 key。中文歌覆盖率低
+- 163MusicLyrics（开源 Windows GUI，中文歌）：网易云 + QQ 双源，扫盘搜索只读文件名（不解析标签），文件名乱就废
+- 自写脚本（大规模/自动化推荐）：读标签 + 双源 API + 相似度校验，可挂进自动化流程
+
+** 核心 API（实测可用，无需登录）
+
+网易云两个公开 GET 接口，带 User-Agent + Referer 头：
+
+#+BEGIN_SRC sh
+# 搜索拿 id
+curl "https://music.163.com/api/search/get?s=<歌名 歌手>&type=1&limit=8" -H "Referer: https://music.163.com/"
+# 拉歌词（标准 LRC 文本）
+curl "https://music.163.com/api/song/lyric?id=<id>&lv=1&kv=1&tv=-1" -H "Referer: https://music.163.com/"
+#+END_SRC
+
+QQ 音乐兜底（网易云没有的歌）：
+
+#+BEGIN_SRC sh
+# 搜索拿 songmid
+curl "https://c.y.qq.com/soso/fcgi-bin/client_search_cp?w=<关键词>&format=json&n=8&p=1" -H "Referer: https://y.qq.com/"
+# 拉歌词（nobase64=1 直接明文 LRC）
+curl "https://c.y.qq.com/lyric/fcgi-bin/fcg_query_lyric_new.fcg?songmid=<songmid>&format=json&nobase64=1" -H "Referer: https://y.qq.com/"
+#+END_SRC
+
+** 实战踩坑（每一条都真实翻过车）
+
+1. 网易云/QQ 都不认繁体歌名：周华健老歌（鐘聲）简体能搜到、繁体 0 结果。搜索前用 zhconv 转简体
+2. 网易云伴奏版常排搜索结果第一且无歌词：要候选遍历，按相似度排序逐个试歌词，第一个有歌词的才用
+3. 歌名带版本括注会带偏匹配：(96新版)/(Live)/(粤) 可能匹配到 DJ 版/伴奏版，搜索前剥离括注只留歌名主体
+4. 相似度阈值太松会张冠李戴：0.5 阈值会把《幸福的芝麻》匹配成张浅潜的另一首歌《愿》；收紧到歌名相似度 0.55+ 综合 0.6，宁可 MISS 不可错配
+5. 文件名解析：首段歌手/末段歌名（编号-歌手-专辑-歌名结构），歌手位去编号前缀（07 王菲 → 王菲）
+6. 版权下架的歌双源都没有（李志全系列），直接跳过不要浪费时间
+
+** 覆盖率参考
+
+3400+ 首音乐库最终 96.5%。剩余缺失全部可解释：版权下架 + 纯音乐/古典/演唱会 Talking/空白轨 + 中英混排冷门歌名，属于正常缺失。
+
+** 审计
+
+校验脚本对比文件名与 .lrc 的 [ti:] 元数据相似度，低于 0.5 列入可疑。实战抓出 2 个真错配（爱相随 96 新版匹配成 DJ 版、李志的歌匹配成他人同名歌），其余假阳性多为 Live/cover 版本标注差异，歌词内容正确可接受。
+
+* 参考
+- [[https://github.com/tranxuanthang/lrcget][lrcget - lrclib 官方批量歌词工具]]
+- [[https://github.com/jitwxs/163MusicLyrics][163MusicLyrics - 网易云/QQ 歌词批量获取]]
+- [[https://github.com/tranxuanthang/lrclib][LRCLIB - 开源歌词库]]
