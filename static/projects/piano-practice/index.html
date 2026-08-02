@@ -111,6 +111,29 @@
       .cell .tag { font-size: 0.38rem; }
     }
 
+    /* Contrib graph */
+    .contrib { margin-bottom: 1.5rem; }
+    .contrib h2 { font-size: 0.75rem; font-weight: 500; color: var(--text2); margin-bottom: 0.5rem; }
+    .contrib-wrap { overflow-x: auto; padding-bottom: 2px; }
+    .contrib-grid { display: grid; grid-template-columns: repeat(53, 1fr); gap: 2px; min-width: 530px; }
+    .c-cell {
+      aspect-ratio: 1; border-radius: 2px; background: var(--surface);
+      cursor: pointer; border: none; padding: 0; transition: opacity 0.1s;
+    }
+    .c-cell:hover { opacity: 0.8; }
+    .c-cell.l1 { background: #2e2a1c; }
+    .c-cell.l2 { background: #6b5a1e; }
+    .c-cell.l3 { background: #a8871f; }
+    .c-cell.l4 { background: var(--accent); }
+    .contrib-months { display: grid; grid-template-columns: repeat(53, 1fr); gap: 2px; min-width: 530px; margin-top: 2px; }
+    .contrib-months span { font-size: 0.55rem; color: var(--text3); white-space: nowrap; }
+    .contrib-legend { display: flex; align-items: center; gap: 0.25rem; margin-top: 0.5rem; font-size: 0.62rem; color: var(--text3); }
+    .contrib-legend .c-cell { width: 10px; aspect-ratio: 1; cursor: default; }
+    .contrib-legend .c-cell:hover { opacity: 1; }
+    @media (max-width: 480px) {
+      .contrib-grid, .contrib-months { min-width: 490px; }
+    }
+
     /* Data bar */
     .bar { margin-top: 0.75rem; display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 0.5rem; padding: 0.4rem 0.7rem; background: var(--surface); border-radius: 6px; border: 1px solid var(--border); }
     .bar-info { font-size: 0.68rem; color: var(--text2); display: flex; align-items: center; gap: 0.3rem; }
@@ -150,6 +173,19 @@
       <span>本月 <strong id="mmin">0m</strong></span>
       <span>连续 <strong id="streak">0</strong> 天</span>
       <span>总计 <strong id="tmin">0m</strong></span>
+    </div>
+  </div>
+
+  <div class="contrib">
+    <h2 id="contrib-title">本年练琴</h2>
+    <div class="contrib-wrap">
+      <div class="contrib-grid" id="contrib"></div>
+      <div class="contrib-months" id="contrib-months"></div>
+    </div>
+    <div class="contrib-legend">
+      <span>少</span>
+      <span class="c-cell l1"></span><span class="c-cell l2"></span><span class="c-cell l3"></span><span class="c-cell l4"></span>
+      <span>多</span>
     </div>
   </div>
 
@@ -203,7 +239,7 @@
   function set(y,m,d,e) {
     const kk = k(y,m,d);
     if (e) data[kk] = e; else delete data[kk];
-    persist(); stats(); render();
+    persist(); stats(); render(); renderContrib();
   }
 
   function local() { try { const r = localStorage.getItem(KEY); if (r) return JSON.parse(r); } catch {} return null; }
@@ -222,10 +258,57 @@
     else if (r) { data=r; s.textContent='已同步'; }
     else if (l) { data=l; s.textContent='本地'; }
     else { data={}; s.textContent='暂无数据'; }
-    persist(); stats();
+    persist(); stats(); renderContrib();
   }
 
   function fmtMin(t) { return t>=60 ? `${Math.floor(t/60)}h${t%60?String(t%60).padStart(2,'0'):''}` : `${t}m`; }
+
+  /* 年度贡献图：53 列 × 7 行，行=周日..周六，列=周 */
+  function renderContrib() {
+    const grid = document.getElementById('contrib'), mrow = document.getElementById('contrib-months');
+    grid.innerHTML = ''; mrow.innerHTML = '';
+    const t = new Date();
+    // 起点：今天所在周的周日，往前 52 周（53 列，周日开头，与 GitHub 一致）
+    const start = new Date(t);
+    start.setDate(start.getDate() - t.getDay() - 52 * 7);
+    let months = [], lastMonth = null;
+    const cur = new Date(start);
+    for (let w = 0; w < 53; w++) {
+      if (cur.getMonth() !== lastMonth) { months.push({w, m: cur.getMonth()}); lastMonth = cur.getMonth(); }
+      for (let d = 0; d < 7; d++) {
+        const day = new Date(cur); day.setDate(day.getDate() + d);
+        const btn = document.createElement('button');
+        btn.type = 'button'; btn.className = 'c-cell';
+        btn.title = '';
+        if (day > t) { btn.disabled = true; btn.style.visibility = 'hidden'; }
+        else {
+          const e = g(day.getFullYear(), day.getMonth(), day.getDate());
+          if (e) {
+            const mins = e.minutes || 0;
+            btn.classList.add('l' + (mins >= 60 ? 4 : mins >= 30 ? 3 : mins >= 15 ? 2 : 1));
+            btn.title = `${k(day.getFullYear(),day.getMonth(),day.getDate())} · ${fmtMin(mins)}${e.note?' · '+e.note:''}`;
+          } else {
+            btn.title = k(day.getFullYear(),day.getMonth(),day.getDate());
+          }
+          btn.addEventListener('click', () => {
+            cy = day.getFullYear(); cm = day.getMonth(); render();
+            open(day.getFullYear(), day.getMonth(), day.getDate());
+          });
+        }
+        grid.appendChild(btn);
+      }
+      cur.setDate(cur.getDate() + 7);
+    }
+    // 月份行：53 个 cell，有月份的列显示缩写
+    const MON = ['1月','2月','3月','4月','5月','6月','7月','8月','9月','10月','11月','12月'];
+    for (let w = 0; w < 53; w++) {
+      const s = document.createElement('span');
+      const mm = months.find(x => x.w === w);
+      s.textContent = mm ? MON[mm.m] : '';
+      mrow.appendChild(s);
+    }
+    document.getElementById('contrib-title').textContent = `${t.getFullYear()-1} 底 – ${t.getFullYear()} 练琴`;
+  }
 
   function stats() {
     const n = new Date(); let mm=0, tm=0, st=0, md=0;
