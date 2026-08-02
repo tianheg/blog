@@ -34,11 +34,9 @@ main() {
   npm run words:check
 
   # Build the site + PageFind index
+  # (semantic index is generated locally via `npm run embed` and committed to
+  # static/pagefind-semantic/ — Hugo copies it into public/ automatically)
   npm run all
-
-  # Generate semantic search page content (extracts text for Workers AI embedding)
-  echo "Generating semantic search index..."
-  node scripts/generate-embeddings.mjs
 
 }
 
