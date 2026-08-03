@@ -88,6 +88,10 @@
     {{- block "main" . }}{{- end }}
   </main>
 
+  <footer class="max-w-3xl mx-auto px-5 mt-16 pb-8 text-sm text-gray-500 dark:text-gray-400">
+    <p>© 2018–{{ now.Format "2006" }} {{ .Site.Title }}</p>
+  </footer>
+
   <!-- Back to top button (only for posts section) -->
   {{ if eq .Section "posts" }}
     {{- partial "components/back-to-top.html" . -}}
