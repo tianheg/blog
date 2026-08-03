@@ -1,0 +1,74 @@
+#+TITLE: 自托管 RSS 聚合站：osmosfeed fork + CF Pages
+#+HEADER: DevOps
+** 背景
+个人 RSS 聚合站 [[https://feed-tianheg.pages.dev][feed-tianheg.pages.dev]]，基于 osmosfeed（[[https://github.com/osmoscraft/osmosfeed][GitHub]]）的 fork [[https://www.npmjs.com/package/@tianheg/osmosfeed][@tianheg/osmosfeed]] 构建。上游 2023-10 后停更，fork 自维护。
+
+*** 架构
+#+BEGIN_SRC text
+本地/Forgejo push
+  → Forgejo push mirror 同步到 GitHub (tianheg/feed)
+    → CF Pages 检测 GitHub push 自动构建 (npm run build)
+      → 定时更新: CF cron-for-others worker (每天 UTC 0点)
+          → POST deploy hook → 触发 rebuild
+#+END_SRC
+
+关键点：CF Pages 的 Git 集成只支持 GitHub/GitLab，不支持 Forgejo，所以靠 Forgejo 的 push mirror 做桥。
+
+** 构建与部署
+*** 本地构建（调试用）
+#+BEGIN_SRC sh
+cd ~/projects/feed
+# 注意：走代理（PVE 直连部分源 3-12s 超时，代理 0.7-2.4s）
+export http_proxy=http://192.168.8.6:7892 https_proxy=http://192.168.8.6:7892
+npm run build
+#+END_SRC
+
+构建产物 public/，111 个源约 100-150s（并发 8）。
+
+*** CF Pages 部署
+- 项目：feed-tianheg，构建命令 `npm run build`，输出目录 `public`
+- 本地手动部署：wrangler pages deploy public --project-name feed-tianheg
+- Git 集成：连 GitHub tianheg/feed，push 自动构建
+
+** fork 扩展的配置项（osmosfeed.yaml）
+#+BEGIN_SRC yaml
+concurrency: 8        # 并发抓取数，默认 8（上游全并发会打爆源站）
+timeoutMs: 15000      # 单次下载超时，直连部分源 3-12s 需加大
+userAgent: "Mozilla/5.0 ..."  # 覆盖 axios/0.27.2 UA（部分站拒收）
+cachePriority: local  # local=本机用 public/cache.json 引导；remote=CI 用线上 cache
+# 源分组标签（前端按组筛选）
+- href: https://...
+  group: emacs
+#+END_SRC
+
+*** 踩坑：axios 自动读 http_proxy 环境变量
+osmosfeed 用 axios 0.27.2，自动读 `http_proxy`/`https_proxy`。PVE 上有 mihomo 代理时：
+- 111 源全并发走代理 → 打爆代理 → ECONNRESET
+- 直连又超时（3-12s > 默认 10s 超时线）
+- 修复：fork 加 concurrency 限流（worker pool），直连/代理都能稳定跑
+
+*** 踩坑：cache 引导
+osmosfeed 每次构建先从 cacheUrl（线上 cache.json）恢复旧状态。首次构建/换机器时，新源全部重抓 → 慢且失败多。
+- 解法：先部署一版让线上 cache 更新，之后增量
+- fork 加 cachePriority: local，本机构建直接用本地 public/cache.json
+
+** 定时更新（CF 侧，本地不跑）
+发现 CF 上已有现成 worker：`cron-for-others`（每天 UTC 0 点）：
+#+BEGIN_SRC js
+// DEPLOY_HOOK_URLS
+feed: 'https://api.cloudflare.com/client/v4/pages/webhooks/deploy_hooks/<hook_id>'
+#+END_SRC
+
+触发 Pages 构建的正确 URL 格式是带 `webhooks/` 路径：
+`https://api.cloudflare.com/client/v4/pages/webhooks/deploy_hooks/<hook_id>`
+（API 文档里写的 /workers/builds/deploy_hooks 是 Workers Builds 的，不是 Pages 的）
+
+Pages deploy hook 创建：POST /accounts/{account}/pages/projects/{project}/deploy_hooks
+
+** 其他
+- 保存文章功能（saved-articles）写操作需 Bearer token（SAVED_ARTICLES_TOKEN 环境变量），前端 ?token=xxx 传参存 localStorage
+- 源信息来自博客 feeds.org（85 站） + FEED_REGISTRY（ai-daily-fetch.py），无 RSS 的源（18 个）暂未处理
+
+* 参考
+- [[https://github.com/osmoscraft/osmosfeed][osmosfeed 上游]]
+- [[https://www.npmjs.com/package/@tianheg/osmosfeed][@tianheg/osmosfeed npm]]
