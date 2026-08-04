@@ -221,7 +221,7 @@
 
   <div class="bar">
     <div class="bar-info">
-      <span>📄 <code>data.json</code></span>
+      <span>📄 <code>overnight-calendar-data.json</code></span>
       <span id="sync"></span>
     </div>
     <button class="btn-dl" id="dl">💾 下载</button>
@@ -370,7 +370,7 @@
   function dl() {
     const s={}; Object.keys(data).sort().forEach(k=>{s[k]=data[k];});
     const b=new Blob([JSON.stringify(s,null,2)+'\n'],{type:'application/json'}), u=URL.createObjectURL(b), a=document.createElement('a');
-    a.href=u;a.download='data.json';document.body.appendChild(a);a.click();document.body.removeChild(a);URL.revokeObjectURL(u);
+    a.href=u;a.download='overnight-calendar-data.json';document.body.appendChild(a);a.click();document.body.removeChild(a);URL.revokeObjectURL(u);
   }
 
   function bind() {
