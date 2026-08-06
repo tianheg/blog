@@ -5,11 +5,30 @@
   {{/* --- Article title --- */}}
   <h1>{{ partial "functions/get-title" (dict "page" .) }}</h1>
 
-  {{/* --- Publication date --- */}}
-  <div class="not-prose mb-8 pb-6 border-b border-gray-200 dark:border-gray-800">
+  {{/* --- Publication date + language counterpart link --- */}}
+  {{ $pair := false }}
+  {{ $pairLabel := "" }}
+  {{ if .File }}
+    {{ if strings.HasSuffix .File.BaseFileName "-en" }}
+      {{ with .Site.GetPage (printf "/posts/%s" (strings.TrimSuffix "-en" .File.BaseFileName)) }}
+        {{ $pair = . }}
+        {{ $pairLabel = "中文版" }}
+      {{ end }}
+    {{ else }}
+      {{ with .Site.GetPage (printf "/posts/%s-en" .File.BaseFileName) }}
+        {{ $pair = . }}
+        {{ $pairLabel = "Read in English" }}
+      {{ end }}
+    {{ end }}
+  {{ end }}
+
+  <div class="not-prose mb-8 pb-6 border-b border-gray-200 dark:border-gray-800 flex items-center justify-between">
     <time class="text-sm text-gray-500 dark:text-gray-400" datetime='{{ .Date.Format "2006-01-02" }}'>
       {{ .Date.Format (default "02 Jan, 2006" .Site.Params.dateFormat) }}
     </time>
+    {{ with $pair }}
+    <a href="{{ .RelPermalink }}" class="text-sm text-blue-600 dark:text-blue-400 hover:underline no-underline">{{ $pairLabel }} →</a>
+    {{ end }}
   </div>
 
   {{/* --- Main content --- */}}

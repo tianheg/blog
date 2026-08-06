@@ -5,6 +5,12 @@
   <h1 class="text-3xl font-bold mb-6">Welcome</h1>
   <p class="text-lg mb-4 text-gray-700 dark:text-gray-300">Hi, I'm tianheg. I write this blog in both Chinese and English to share my life experiences.</p>
   <p class="text-lg text-gray-700 dark:text-gray-300">I hope you enjoy reading it!</p>
+  <p class="mt-4 flex flex-wrap gap-2 text-sm">
+    <a href="/start/" class="text-gray-600 dark:text-gray-400 hover:text-gray-900 dark:hover:text-gray-100 transition-colors">从这里开始 →</a>
+    {{ range $tag := (slice "随笔" "技术" "诗作" "电影" "音乐") }}
+    <a href="{{ printf "/tags/%s/" $tag | relURL }}" class="px-2 py-0.5 rounded-full bg-gray-100 dark:bg-gray-800 text-gray-600 dark:text-gray-400 hover:text-gray-900 dark:hover:text-gray-100 no-underline transition-colors">{{ $tag }}</a>
+    {{ end }}
+  </p>
 </div>
 
 <!-- Recent Posts Section -->
