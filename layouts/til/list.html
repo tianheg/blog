@@ -46,7 +46,7 @@
     {{ $grouped := $pages.GroupByParam "header" }}
     <div class="xl:hidden flex gap-2 overflow-x-auto pb-3 mb-4 scrollbar-none">
       {{ range $grouped }}
-      <button onclick="toggleHeader('{{ .Key | htmlEscape }}')"
+      <button onclick="toggleHeader(this.getAttribute('data-header-btn'))"
               class="header-btn shrink-0 px-3 py-1 text-xs rounded-full border border-gray-200 dark:border-gray-800
                      text-gray-600 dark:text-gray-400 hover:text-gray-900 dark:hover:text-gray-100
                      hover:bg-gray-50 dark:hover:bg-gray-800 transition-colors whitespace-nowrap"
@@ -165,7 +165,7 @@
     <nav id="header-nav" class="space-y-1">
       {{ $grouped := $pages.GroupByParam "header" }}
       {{ range $grouped }}
-      <button onclick="toggleHeader('{{ .Key | htmlEscape }}')"
+      <button onclick="toggleHeader(this.getAttribute('data-header-btn'))"
               class="header-btn block w-full text-left px-3 py-1.5 text-sm rounded-md transition-colors
                      text-gray-600 dark:text-gray-400 hover:text-gray-900 dark:hover:text-gray-100 hover:bg-gray-50 dark:hover:bg-gray-800"
               data-header-btn="{{ .Key }}">
@@ -183,7 +183,10 @@
     (function() {
       window.toggleHeader = function(name) {
         var groups = document.querySelectorAll('[data-header]');
-        var target = document.querySelector('[data-header="' + name + '"]');
+        var target = null;
+        for (var i = 0; i < groups.length; i++) {
+          if (groups[i].getAttribute('data-header') === name) { target = groups[i]; break; }
+        }
         if (!target) return;
         var visible = [...groups].filter(function(g) { return g.style.display !== 'none'; });
         if (visible.length === 1 && visible[0] === target) {

@@ -398,6 +398,13 @@
         updateListStats(files);
       }
 
+      // HTML 转义，防止 GitHub API 返回的文件名/URL 注入 DOM
+      function escapeHtml(s) {
+        return String(s).replace(/[&<>"']/g, c => ({
+          '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;'
+        }[c]));
+      }
+
       // 创建文件列表项
       function createFileItem(file, index) {
         const div = document.createElement('div');
@@ -415,13 +422,15 @@
         
         const fileSize = formatFileSize(file.size);
         const fileUrl = file.html_url || `https://github.com/${GITHUB_CONFIG.username}/${GITHUB_CONFIG.repository}/blob/${GITHUB_CONFIG.branch}/${GITHUB_CONFIG.basePath}/${file.name}`;
+        const escName = escapeHtml(fileName);
+        const escUrl = escapeHtml(fileUrl);
         
         div.innerHTML = `
           <div class="flex justify-between items-center">
-            <a href="${fileUrl}" target="_blank" class="text-blue-600 hover:text-blue-800 hover:underline font-medium truncate block flex-1 min-w-0">
-              <i class="far fa-file-alt mr-2"></i>${fileName}
+            <a href="${escUrl}" target="_blank" class="text-blue-600 hover:text-blue-800 hover:underline font-medium truncate block flex-1 min-w-0">
+              <i class="far fa-file-alt mr-2"></i>${escName}
             </a>
-            <button class="ml-2 text-gray-400 hover:text-gray-600 flex-shrink-0" title="复制链接" onclick="copyToClipboard('${fileUrl}', this)">
+            <button class="ml-2 text-gray-400 hover:text-gray-600 flex-shrink-0" title="复制链接" data-url="${escUrl}" onclick="copyToClipboard(this.getAttribute('data-url'), this)">
               <i class="fas fa-link"></i>
             </button>
           </div>

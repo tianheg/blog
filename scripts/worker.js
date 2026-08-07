@@ -18,6 +18,19 @@ const EMBEDDING_MODEL = '@cf/baai/bge-m3';
 const EMBEDDING_DIM = 1024;
 const MAX_RESULTS = 10;
 const COMMENTS_BACKEND = 'https://comments.tianheg.co';
+// 允许通过 worker 代理访问评论后端的来源（同站 + 本地开发）
+const ALLOWED_COMMENT_ORIGINS = [
+  'https://tianheg.co',
+  'https://www.tianheg.co',
+  'http://localhost:1313',
+  'http://127.0.0.1:1313',
+];
+
+function originAllowed(request) {
+  const origin = request.headers.get('Origin');
+  if (!origin) return true; // 非浏览器请求（curl 等）不校验 Origin，后端自身负责鉴权
+  return ALLOWED_COMMENT_ORIGINS.includes(origin);
+}
 
 // Simple in-memory rate limiter (per-worker-isolate, resets on cold start)
 const RATE_LIMIT_WINDOW_MS = 60_000;
@@ -27,6 +40,14 @@ const rateMap = new Map();
 function checkRateLimit(request) {
   const ip = request.headers.get('cf-connecting-ip') || 'unknown';
   const now = Date.now();
+
+  // 惰性清理：移除已过窗口期的条目，防止 rateMap 无限增长
+  if (rateMap.size > 0 && rateMap.size % 64 === 0) {
+    for (const [k, v] of rateMap) {
+      if (now - v.windowStart > RATE_LIMIT_WINDOW_MS) rateMap.delete(k);
+    }
+  }
+
   const entry = rateMap.get(ip);
   if (!entry || now - entry.windowStart > RATE_LIMIT_WINDOW_MS) {
     rateMap.set(ip, { windowStart: now, count: 1 });
@@ -131,9 +152,10 @@ export default {
         corsResp.headers.set('Access-Control-Allow-Origin', '*');
         return corsResp;
       } catch (err) {
-        return new Response(err.stack || err.message || String(err), {
+        console.error('semantic search error:', err);
+        return Response.json({ error: 'Internal server error' }, {
           status: 500,
-          headers: { 'Content-Type': 'text/plain;charset=utf-8' },
+          headers: { 'Access-Control-Allow-Origin': '*' },
         });
       }
     }
@@ -176,6 +198,11 @@ export default {
 
 /** Proxy comment API requests to the backend server */
 async function proxyComments(request, url) {
+  // 只允许白名单来源（同站 + 本地开发）访问评论代理，防跨站滥用
+  if (!originAllowed(request)) {
+    return Response.json({ error: 'Forbidden origin' }, { status: 403 });
+  }
+
   const backend = COMMENTS_BACKEND + url.pathname + url.search;
   const headers = new Headers(request.headers);
   headers.set('X-Forwarded-Host', url.hostname);
@@ -187,9 +214,13 @@ async function proxyComments(request, url) {
     body: request.method === 'POST' ? request.body : undefined,
   });
 
-  // Copy response and add CORS for local dev
+  // Copy response and add CORS only for allowed origins (not wildcard)
   const proxyResp = new Response(resp.body, resp);
-  proxyResp.headers.set('Access-Control-Allow-Origin', '*');
+  const origin = request.headers.get('Origin');
+  if (origin && ALLOWED_COMMENT_ORIGINS.includes(origin)) {
+    proxyResp.headers.set('Access-Control-Allow-Origin', origin);
+    proxyResp.headers.set('Vary', 'Origin');
+  }
   return proxyResp;
 }
 
