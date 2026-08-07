@@ -18,7 +18,7 @@
 import { readFileSync, readdirSync, writeFileSync } from 'fs';
 import { join, relative } from 'path';
 import { fileURLToPath } from 'url';
-import { execSync } from 'child_process';
+import { execFileSync } from 'child_process';
 
 const ROOT = join(fileURLToPath(import.meta.url), '..', '..');
 const TIL_DIR = join(ROOT, 'content', 'til');
@@ -229,7 +229,7 @@ function gitTimestamp(filePath) {
   const rel = relative(ROOT, filePath);
   if (GIT_CACHE.has(rel)) return GIT_CACHE.get(rel);
   try {
-    const out = execSync(`git log -1 --format=%ct "${rel}"`, {
+    const out = execFileSync('git', ['log', '-1', '--format=%ct', rel], {
       cwd: ROOT,
       encoding: 'utf-8',
       stdio: ['ignore', 'pipe', 'ignore'],
