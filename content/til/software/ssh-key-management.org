@@ -25,9 +25,9 @@ The need to manually run `ssh-add` to load your SSH keys into the agent typicall
 **** *C. Key Not in Default Location*
 - If your key is stored outside `~/.ssh/` (e.g., `~/.config/ssh/my_key`), SSH won't find it automatically.
 - *Fix*:
-  ```bash
+  #+BEGIN_SRC bash
   ssh-add ~/.config/ssh/my_key  # Load it manually
-  ```
+  #+END_SRC
   Or configure SSH to always use it for a specific host (see *Step 3* below).
 
 **** *D. SSH Agent Forwarding*
@@ -39,18 +39,18 @@ The need to manually run `ssh-add` to load your SSH keys into the agent typicall
 *** *3. Permanent Solutions*
 **** *A. Configure `~/.ssh/config`*
 Specify keys for specific hosts to avoid manual loading:
-```bash
+#+BEGIN_SRC bash
 # ~/.ssh/config
 Host myserver
   HostName example.com
   User myuser
   IdentityFile ~/.ssh/custom_key  # Path to your non-default key
-```
+#+END_SRC
 SSH will automatically use this key for `myserver`.
 
 **** *B. Auto-Load Keys on Startup*
 Add the following to your shell profile (e.g., `~/.bashrc`, `~/.zshrc`) to load keys on login:
-```bash
+#+BEGIN_SRC bash
 # Start ssh-agent if not running
 if [ -z "$SSH_AUTH_SOCK" ]; then
   eval "$(ssh-agent -s)"
@@ -58,27 +58,27 @@ fi
 
 # Add default keys (e.g., id_rsa, id_ed25519)
 ssh-add ~/.ssh/id_rsa 2>/dev/null
-```
+#+END_SRC
 
 **** *C. Use `keychain` (Linux/macOS)*
 The `keychain` utility manages `ssh-agent` and persists keys across sessions:
 1. Install `keychain` (e.g., `brew install keychain` or `sudo apt install keychain`).
 2. Add to your shell profile:
-   ```bash
+   #+BEGIN_SRC bash
    eval "$(keychain --eval --quiet ~/.ssh/custom_key)"
-   ```
+   #+END_SRC
 
 ---
 
 *** *4. Troubleshooting*
 - Check loaded keys:
-  ```bash
+  #+BEGIN_SRC bash
   ssh-add -L  # List loaded keys
-  ```
+  #+END_SRC
 - Debug SSH connections:
-  ```bash
+  #+BEGIN_SRC bash
   ssh -vvv user@host  # Verbose output to see which keys are offered
-  ```
+  #+END_SRC
 
 ---
 

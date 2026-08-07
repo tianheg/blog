@@ -66,14 +66,14 @@ Grid 术语：
 
 行和列：
 
-```css
+#+BEGIN_SRC css
 .container {
   display: grid;
   grid-template-columns: 5em 100px 30%;
   grid-template-rows: 200px auto;
   gap: 10px;
 }
-```
+#+END_SRC
 
 内部大小关键字：`min-content`, `max-content`, `fit-content()`
 
@@ -101,11 +101,11 @@ Height = height + padding-top + padding-bottom + border-top + border-bottom
 
 查看页面所有盒子：
 
-```css
+#+BEGIN_SRC css
 * {
   outline: 2px solid red !important;
 }
-```
+#+END_SRC
 
 *** Understanding Layout Algorithms
 [[https://www.joshwcomeau.com/css/understanding-layout-algorithms/][Understanding Layout Algorithms]]
@@ -114,11 +114,11 @@ CSS 不仅仅是一系列属性的集合，它是一群相互连接的布局算�
 
 布局算法包括：Flexbox、Positioned（例如 `position: absolute`）、Grid、Table、Flow（除去 flex、grid 以外的布局）。
 
-```css
+#+BEGIN_SRC css
 .box {
   z-index: 10;
 }
-```
+#+END_SRC
 
 以上 CSS 展示的是流式布局，但是 `z-index` 并不起作用，因为 `z-index` 要配合 `position` 才能使用。`z-index` 在流式布局算法中并无实现。
 
@@ -126,7 +126,7 @@ Flow 是非表格元素的默认布局算法。如果在流式布局中设置宽
 
 识别布局算法：
 
-```css
+#+BEGIN_SRC css
 .help-widget {
   position: fixed;
   right: 0;
@@ -136,7 +136,7 @@ Flow 是非表格元素的默认布局算法。如果在流式布局中设置宽
   float: left;
   margin-right: 32px;
 }
-```
+#+END_SRC
 
 冲突处理：当一个元素被应用多种布局时，优先级更高的布局生效。
 
@@ -169,28 +169,28 @@ HTML 包含基础的响应式部分。例如，一段文字一开始位于大窗
 
 四、Responsive images：
 
-```css
+#+BEGIN_SRC css
 img {
   max-width: 100%;
 }
-```
+#+END_SRC
 
 五、Responsive typography 响应式排版：先对根元素设置基本字体大小，再对其他元素用 rem。或者使用 vw 单位，或 `calc(1.5rem + 3vw)`。
 
 六、viewport meta tag：
 
-```html
+#+BEGIN_SRC html
 <meta name="viewport" content="width=device-width,initial-scale=1" />
-```
+#+END_SRC
 
 *** Media Queries
 https://developer.mozilla.org/en-US/docs/Learn/CSS/CSS_layout/Media_queries
 
-```css
+#+BEGIN_SRC css
 @media media-type and (media-feature-rule) {
   /* CSS rules go here */
 }
-```
+#+END_SRC
 
 media-type 是可以省略的，如果省略，该样式默认适用于 screen, print。
 
@@ -225,7 +225,7 @@ Style Queries 能力：
 *** Background
 https://developer.mozilla.org/en-US/docs/Web/CSS/background
 
-```css
+#+BEGIN_SRC css
 background: linear-gradient(#223344);
 background-attachment: ;
 background-clip: ;
@@ -235,7 +235,7 @@ background-origin: ;
 background-position: ;
 background-repeat: ;
 background-size: ;
-```
+#+END_SRC
 
 对 html 和 body 设置 background 的区别：注意这两者之间的差异。
 
@@ -244,7 +244,7 @@ https://css-tricks.com/just-one-of-those-weird-things-about-css-background-on-bo
 *** Font
 https://www.cssfontstack.com/
 
-```css
+#+BEGIN_SRC css
 body {
   font: italic small-caps bold 50px/2 'Indie Flower', cursive;
 }
@@ -258,7 +258,7 @@ body {
   font-variant: small-caps;
   font-size: 50px;
 }
-```
+#+END_SRC
 
 https://developer.mozilla.org/en-US/docs/Web/CSS/font#syntax
 
@@ -269,7 +269,7 @@ The colors of the gradient are determined by two or more points: the starting po
 
 使用例子：
 
-```css
+#+BEGIN_SRC css
 linear-gradient(217deg, rgba(255,0,0,0.6), rgba(255,0,0,0) 66%),
 linear-gradient(127deg, rgba(0,255,0,0.6), rgba(0,255,0,0) 66%),
 linear-gradient(336deg, rgba(0,0,255,0.6), rgba(0,0,255,0) 66%)
@@ -277,7 +277,7 @@ linear-gradient(336deg, rgba(0,0,255,0.6), rgba(0,0,255,0) 66%)
 linear-gradient(to left top, rgba(111,222,255,.6), rgba(222,111,255,.6))
 linear-gradient(0deg, blue, green 40%, red)
 linear-gradient(.25turn, red, 10%, blue)
-```
+#+END_SRC
 
 注意：`linear-gradient()` 属于 `<image>` 类型，无法在 `background-color` 上使用，只能在 `background` 使用。
 
@@ -306,31 +306,31 @@ Refers:
 *** Transitions
 https://developer.mozilla.org/en-US/docs/Web/CSS/CSS_Transitions
 
-```css
+#+BEGIN_SRC css
 transition: <property> <duration> <timing-function> <delay>
 transition-delay:
 transition-duration:
 transition-property:
 transition-timing-function:
-```
+#+END_SRC
 
 *** Image Rendering
-```html
+#+BEGIN_SRC html
 <img class="nes-avatar is-large" src="https://www.gravatar.com/avatar?s=15" alt="Gravatar image example" style="image-rendering: pixelated;">
-```
+#+END_SRC
 
 没有 `?s=15` 就无法让 `image-rendering: pixelated;` 发挥作用。
 
 *** Buttons
 模板：
 
-```css
+#+BEGIN_SRC css
 button {
   background: ; /* normal color: #fff or linear-gradient() */
   text-decoration: ;
 }
 button:hover { }
-```
+#+END_SRC
 
 透明背景按钮、插入实体动画按钮、点击动画按钮、插入背景图片的按钮、带有 icons 的按钮。
 
@@ -350,15 +350,15 @@ https://www.w3schools.com/csS/css_align.asp
 
 水平居中：
 
-```css
+#+BEGIN_SRC css
 elem { margin: 0 auto; width: 50%; }
 .text { text-align: center; }
 img { display: block; margin: 0 auto; }
-```
+#+END_SRC
 
 垂直居中（块级元素 height 未知）：
 
-```css
+#+BEGIN_SRC css
 .center-vertically {
   position: relative;
 }
@@ -367,31 +367,31 @@ img { display: block; margin: 0 auto; }
   top: 50%;
   transform: translateY(-50%);
 }
-```
+#+END_SRC
 
 Flexbox 垂直居中：
 
-```css
+#+BEGIN_SRC css
 .center-vertically {
   display: flex;
   flex-direction: column;
   justify-content: center;
 }
-```
+#+END_SRC
 
 水平 + 垂直居中（Flexbox）：
 
-```css
+#+BEGIN_SRC css
 .center {
   display: flex;
   justify-content: center;
   align-items: center;
 }
-```
+#+END_SRC
 
 Grid 居中：
 
-```css
+#+BEGIN_SRC css
 body, html {
   height: 100%;
   display: grid;
@@ -399,15 +399,15 @@ body, html {
 .child {
   margin: auto;
 }
-```
+#+END_SRC
 
 左右对齐：
 
-```css
+#+BEGIN_SRC css
 .right { float: right; }
 .left { float: left; }
 .right { position: absolute; right: 0; }
-```
+#+END_SRC
 
 Clearing boxes wrapped around a float：
 https://www.w3schools.com/csS/css_align.asp
@@ -422,28 +422,28 @@ Setting min-height to 100% on both html and body does not allow the body element
 
 理想设置：
 
-```css
+#+BEGIN_SRC css
 html { height: 100%; }
 body { min-height: 100%; }
-```
+#+END_SRC
 
 现代做法：
 
-```css
+#+BEGIN_SRC css
 body { min-height: 100vh; }
-```
+#+END_SRC
 
 高度和宽度都设置：
 
-```css
+#+BEGIN_SRC css
 html { background-color: #000; }
 body { min-height: 100vh; max-width: 400px; background-color: papayawhip; margin: 0 auto; }
-```
+#+END_SRC
 
 *** Hide Scrollbar
 https://www.w3schools.com/howto/howto_css_hide_scrollbars.asp
 
-```css
+#+BEGIN_SRC css
 /* Hide scrollbar for Chrome, Safari and Opera */
 .example::-webkit-scrollbar {
   display: none;
@@ -454,12 +454,12 @@ https://www.w3schools.com/howto/howto_css_hide_scrollbars.asp
   -ms-overflow-style: none;  /* IE and Edge */
   scrollbar-width: none;  /* Firefox */
 }
-```
+#+END_SRC
 
 *** Hover on Touch Screen
 触屏上的 CSS hover 问题。（Chrome Android）点击一下会选中可 hover 的文本。
 
-```css
+#+BEGIN_SRC css
 @media (pointer: fine) {
   /* 鼠标设备 */
   button:hover { color: #fff; }
@@ -468,7 +468,7 @@ https://www.w3schools.com/howto/howto_css_hide_scrollbars.asp
   /* 触屏设备 */
   button:hover { color: #ddd; }
 }
-```
+#+END_SRC
 
 参考：https://medium.com/time2hack/can-i-use-hover-on-touch-devices-d9f039e24899
 
@@ -498,26 +498,26 @@ Refers:
 
 简化的 CSS reset：
 
-```css
+#+BEGIN_SRC css
 *, *::before, *::after {
   box-sizing: border-box;
   margin: 0;
   padding: 0;
 }
-```
+#+END_SRC
 
 继承 `box-sizing`：
 
-```css
+#+BEGIN_SRC css
 html { box-sizing: border-box; }
 *, *::before, *::after { box-sizing: inherit; }
-```
+#+END_SRC
 
 使用 `unset` 重置按钮：
 
-```css
+#+BEGIN_SRC css
 button { all: unset; }
-```
+#+END_SRC
 
 注意：`all`、`unset` 在 IE11 不受支持。
 
@@ -533,7 +533,7 @@ CSS 学习榜样：https://github.com/cyanharlow
 *** Sass
 在 SASS 中定义属性选择器：
 
-```scss
+#+BEGIN_SRC txt
 .bg-brand-3 {
   background-color: black;
   &[type='button']:enabled {
@@ -544,7 +544,7 @@ CSS 学习榜样：https://github.com/cyanharlow
     // css
   }
 }
-```
+#+END_SRC
 
 https://stackoverflow.com/a/69444953/12539782
 
@@ -594,9 +594,9 @@ Box Model：盒子模型是 CSS 的核心。`display` 的值不同，盒子的�
 
 当内容太多，盒子无法放下时，使用 `overflow` 处理。
 
-```css
+#+BEGIN_SRC css
 box-sizing: border-box;
-```
+#+END_SRC
 
 Selectors 选择器：通用选择器、属性选择器、伪类/伪元素（`::`）、Combinators（子代、相邻兄弟、后续兄弟、子组合器）。
 

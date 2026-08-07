@@ -12,7 +12,7 @@
 
 安装：
 
-```bash
+#+BEGIN_SRC bash
 
 sudo pacman -S nix nix-channel --add [[https://nixos.org/channels/nixpkgs-unstable]] nix-channel --update nix-env -u source /etc/profile.d/nix{,-daemon}.sh sudo systemctl enable nix-daemon.service sudo usermod -aG nix-users archie ```
 
@@ -22,4 +22,4 @@ If you installed Nix from the official repositories, you must add the `~/.nix-pr
 
 ```bash sudo pacman -Rs nix rm -r ~/.nix-channels ~/.nix-defexpr ~/.nix-profile sudo rm -r /nix
 
-```
+#+END_SRC
