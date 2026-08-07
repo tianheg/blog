@@ -4,13 +4,13 @@
 *** Kernel Downgrade
 因卡顿回退 Linux 内核。设置 BIOS U 盘启动，插入制作好的 USB 启动盘，进入 U 盘中的 arch 系统，然后执行：
 
-```sh
+#+BEGIN_SRC sh
 mount /dev/sdb2 /mnt
 arch-chroot /mnt /bin/bash
 cd /var/cache/pacman/pkg
 ls -a | grep linux
 pacman -U linux-5.13.9.arch1-1-x86_64.pkg.tar.zst
-```
+#+END_SRC
 
 参考：https://wiki.archlinux.org/title/Downgrading_packages#Downgrading_the_kernel
 
@@ -25,9 +25,9 @@ Way 1 - 手动从 mirror status 页面选择：
 
 Way 2 - 使用 curl 和 rankmirrors：
 
-```txt
+#+BEGIN_SRC txt
 curl -s "https://archlinux.org/mirrorlist/?country=CN&protocol=https&ip_version=4&use_mirror_status=on" | sed -e 's/^#Server/Server/' -e '/^#/d' | rankmirrors -n 5 -
-```
+#+END_SRC
 
 Way 3 - 使用 reflector：
 1. 安装 reflector
@@ -35,15 +35,15 @@ Way 3 - 使用 reflector：
 3. 保存到 mirrorlist
 
 *** Man Pages
-```sh
+#+BEGIN_SRC sh
 pacman -S man-db man-pages
-```
+#+END_SRC
 
 man pages 有多个部分，比如选择第七个部分：
 
-```sh
+#+BEGIN_SRC sh
 man boot.7
-```
+#+END_SRC
 
 https://wiki.archlinux.org/title/Man_page
 
@@ -59,7 +59,7 @@ https://wiki.archlinux.org/title/Man_page
 *** PKGBUILD
 来自 [[https://gitlab.archlinux.org/pacman/pacman/raw/master/proto/PKGBUILD.proto][Example PKGBUILD file]]
 
-```proto
+#+BEGIN_SRC txt
 pkgname=NAME
 pkgver=VERSION
 pkgrel=1
@@ -71,7 +71,7 @@ groups=()
 depends=()
 makedepends=()
 ...
-```
+#+END_SRC
 
 参考：
 1. [[https://wiki.archlinux.org/title/PKGBUILD][PKGBUILD - ArchWiki]]
@@ -94,22 +94,22 @@ https://github.com/Jguer/yay/issues/951#issuecomment-1080206297
 *** Fix Pacman Key
 解决 `ERROR: key could not be locally signed` 错误：
 
-```bash
+#+BEGIN_SRC bash
 rm -rf /etc/pacman.d/gnupg
 pacman-key --init
 pacman-key --populate archlinux
 pacman-key --populate archlinuxcn
-```
+#+END_SRC
 
 *** archlinuxcn Keyring Manual Trust
 在新系统中安装 archlinuxcn-keyring 之前，需要手动信任 farseerfc 的 key。
 
 遇到 `error: archlinuxcn-keyring: Signature from "Jiachen YANG ..." is marginal trust` 时：
 
-```txt
+#+BEGIN_SRC txt
 sudo pacman-key --lsign-key "farseerfc@archlinux.org"
 sudo pacman -S archlinuxcn-keyring
-```
+#+END_SRC
 
 https://www.archlinuxcn.org/archlinuxcn-keyring-manually-trust-farseerfc-key/
 
@@ -118,22 +118,22 @@ https://www.makeuseof.com/install-deb-packages-arch-linux/
 
 方法一（使用 debtap）：
 
-```sh
+#+BEGIN_SRC sh
 yay -S debtap
 debtap yourfile.deb
 sudo pacman -U yourfile.zst
-```
+#+END_SRC
 
 方法二（手动解压）：
 
-```sh
+#+BEGIN_SRC sh
 ar x /path/to/file
 tar xvf control.tar.gz
 tar xvf data.tar.gz
 sudo cp -r ./etc/* /etc/
 sudo cp -r ./opt/* /opt/
 sudo cp -r ./usr/* /usr/
-```
+#+END_SRC
 
 ** Hardware & Drivers
 *** Screen Flickering (Intel GPU)
@@ -141,21 +141,21 @@ Arch Linux 屏幕闪烁问题，Intel UHD Graphics 620。
 
 尝试一 - 添加内核参数：
 
-```sh
+#+BEGIN_SRC sh
 GRUB_CMDLINE_LINUX_DEFAULT="... i915.enable_psr=0 nomodeset"
-```
+#+END_SRC
 
 尝试二（可能有效）：
 
-```sh
+#+BEGIN_SRC sh
 GRUB_CMDLINE_LINUX_DEFAULT="... i915.enable_psr=0"
-```
+#+END_SRC
 
 修改后执行：
 
-```sh
+#+BEGIN_SRC sh
 sudo grub-mkconfig -o /boot/grub/grub.cfg
-```
+#+END_SRC
 
 注意：设置 `i915.enable_psr=0` 会让内核被污染（tainted）。
 
@@ -194,17 +194,17 @@ Arch Linux 在连接 WiFi 后系统冻结。
 *** Install Chinese Fonts
 安装字体包：
 
-```bash
+#+BEGIN_SRC bash
 pacman -S ttf-roboto noto-fonts noto-fonts-cjk adobe-source-han-sans-cn-fonts adobe-source-han-serif-cn-fonts ttf-dejavu
-```
+#+END_SRC
 
 配置文件：`/etc/fonts/local.conf` 或 `~/.config/fontconfig/fonts.conf`
 
 安装微软字体：
 
-```bash
+#+BEGIN_SRC bash
 yay -S ttf-ms-win11-auto-zh_cn
-```
+#+END_SRC
 
 https://wiki.archlinux.org/title/Font_Configuration/Chinese
 
@@ -217,50 +217,50 @@ https://wiki.archlinux.org/title/Font_Configuration/Chinese
 *** Key Remapping with evremap
 安装 [[https://github.com/wez/evremap][evremap]]：
 
-```sh
+#+BEGIN_SRC sh
 yay -S evremap
 mkdir ~/evremap && cd $_
 touch remap.toml
-```
+#+END_SRC
 
 `remap.toml`：
 
-```txt
+#+BEGIN_SRC txt
 device_name = "USB Keyboard"
 
 [[remap]]
 input = ["KEY_RIGHTALT"]
 output = ["KEY_Z"]
-```
+#+END_SRC
 
 - `device_name` 是键盘型号，通过 `sudo evremap list-devices` 查找。
 - `input`/`output` 按键名通过 `sudo evremap list-keys` 查找。
 
 配置 systemd 自启动：创建 `/usr/lib/systemd/system/evremap.service`：
 
-```sh
+#+BEGIN_SRC sh
 [Service]
 WorkingDirectory=/
 ExecStart=bash -c "/usr/bin/evremap remap /home/$USER/evremap/remap.toml"
 Restart=always
-```
+#+END_SRC
 
 然后：
 
-```sh
+#+BEGIN_SRC sh
 sudo systemctl daemon-reload
 sudo systemctl enable evremap.service --now
-```
+#+END_SRC
 
 https://wiki.archlinux.org/title/Wayland#Remap_keyboard_or_mouse_keys
 
 *** Install KiCad
 https://www.kicad.org/download/linux/#_arch_linux
 
-```sh
+#+BEGIN_SRC sh
 sudo pacman -Syu kicad
 sudo pacman -Syu --asdeps kicad-library kicad-library-3d
-```
+#+END_SRC
 
 ** Containers & Virtualization
 *** Docker MySQL Memory Issue
@@ -276,13 +276,13 @@ Arch Linux 下 Docker MySQL 5.7 占用过高内存（最高到 16G）。MySQL 8.
 
 安装 Archiso：
 
-```sh
+#+BEGIN_SRC sh
 cp -r /usr/share/archiso/configs/releng/ archlive
-```
+#+END_SRC
 
 配置文件结构：
 
-```
+#+BEGIN_SRC txt
 profile/
 ├── airootfs/
 ├── efiboot/
@@ -292,15 +292,15 @@ profile/
 ├── packages.arch
 ├── pacman.conf
 └── profiledef.sh
-```
+#+END_SRC
 
 添加用户 `archie`：修改 passwd、shadow、group、gshadow 文件，并在 profiledef.sh 中设置权限。
 
 构建镜像：
 
-```sh
+#+BEGIN_SRC sh
 mkarchiso -v -w /path/to/work_dir -o /path/to/out_dir /path/to/profile/
-```
+#+END_SRC
 
 我的 profile 在 https://github.com/tianheg/archlive
 

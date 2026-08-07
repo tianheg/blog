@@ -38,9 +38,9 @@
 
 `~/.config/environment.d/envvars.conf`：
 
-```conf
+#+BEGIN_SRC txt
 MOZ_ENABLE_WAYLAND=1
-```
+#+END_SRC
 
 参考：
 1. https://wiki.archlinux.org/title/Firefox#Wayland
@@ -65,9 +65,9 @@ https://u.sb/firefox-no-webextensions/
 打开 `about:config`，输入 `extensions.webextensions.restrictedDomains`，在后面加 `,example.com` 即可限制扩展在指定域运行。
 
 默认限制域名：
-```
+#+BEGIN_SRC txt
 accounts-static.cdn.mozilla.net,accounts.firefox.com,addons.cdn.mozilla.net,addons.mozilla.org,api.accounts.firefox.com,content.cdn.mozilla.net,discovery.addons.mozilla.org,install.mozilla.org,oauth.accounts.firefox.com,profile.accounts.firefox.com,support.mozilla.org,sync.services.mozilla.com
-```
+#+END_SRC
 
 ** Extensions & Add-ons
 *** Manifest v3
@@ -94,16 +94,16 @@ https://github.com/onemen/TabMixPlus
 *** Hide Tabbar (userChrome.css)
 ~/.mozilla/firefox/***.dev-edition-default/chrome/userChrome.css:
 
-```css
+#+BEGIN_SRC css
 #TabsToolbar {visibility: collapse;}
-```
+#+END_SRC
 
 *** View Dark PDF
 Bookmarklet 反转 PDF 颜色：
 
-```js
+#+BEGIN_SRC js
 javascript:(function(){var el = typeof viewer !== 'undefined' ? viewer : document.body; el.style.filter = 'grayscale(1) invert(1) sepia(1) contrast(75%)';})()
-```
+#+END_SRC
 
 https://scottpaterson.ca/firefox-dark-mode-pdf/
 

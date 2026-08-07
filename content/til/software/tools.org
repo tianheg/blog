@@ -3,15 +3,15 @@
 ** Pandoc
 https://pandoc.org/
 
-```sh
+#+BEGIN_SRC sh
 pandoc -f markdown -t org -o output_file.org input_file.md
-```
+#+END_SRC
 
 ** Docker
 *** Docker Hub mirror
 https://gist.github.com/y0ngb1n/7e8f16af3242c7815e7ca2f0833d3ea6
 
-```sh
+#+BEGIN_SRC sh
 sudo mkdir -p /etc/docker
 sudo tee /etc/docker/daemon.json <<-'EOF'
 {
@@ -20,7 +20,7 @@ sudo tee /etc/docker/daemon.json <<-'EOF'
 EOF
 sudo systemctl daemon-reload
 sudo systemctl restart docker
-```
+#+END_SRC
 
 *** 一些实践
 - https://github.com/y0ngb1n/dockerized
@@ -48,9 +48,9 @@ https://wiki.archlinux.org/title/Archiving_and_compression
 
 ** SSH
 *** Quickly Setup SSH Agent
-```sh
+#+BEGIN_SRC sh
 eval `ssh-agent` && ssh-add
-```
+#+END_SRC
 
 https://twitter.com/slicknet/status/1555246335883767808
 
