@@ -126,9 +126,11 @@
       }
       var html = '';
       data.results.forEach(function(r) {
+        // 只允许站内路径，且 URL 转义后进 href（防 pages.json 被注入恶意 URL）
+        if (typeof r.url !== 'string' || r.url.charAt(0) !== '/') return;
         html += '<div class="semantic-result">'
           + '<span class="score">' + r.score.toFixed(2) + '</span>'
-          + '<a href="' + r.url + '">' + escapeHtml(r.title) + '</a>'
+          + '<a href="' + escapeHtml(r.url) + '">' + escapeHtml(r.title) + '</a>'
           + '</div>';
       });
       results.innerHTML = html;
