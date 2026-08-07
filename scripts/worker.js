@@ -18,8 +18,8 @@ const EMBEDDING_MODEL = '@cf/baai/bge-m3';
 const EMBEDDING_DIM = 1024;
 const MAX_RESULTS = 10;
 const COMMENTS_BACKEND = 'https://comments.tianheg.co';
-// 允许通过 worker 代理访问评论后端的来源（同站 + 本地开发）
-const ALLOWED_COMMENT_ORIGINS = [
+// 允许通过 worker 访问 API 的来源（同站 + 本地开发）；白名单是 allow-list，无 Origin 一律拒绝
+const ALLOWED_ORIGINS = [
   'https://tianheg.co',
   'https://www.tianheg.co',
   'http://localhost:1313',
@@ -28,8 +28,16 @@ const ALLOWED_COMMENT_ORIGINS = [
 
 function originAllowed(request) {
   const origin = request.headers.get('Origin');
-  if (!origin) return true; // 非浏览器请求（curl 等）不校验 Origin，后端自身负责鉴权
-  return ALLOWED_COMMENT_ORIGINS.includes(origin);
+  return ALLOWED_ORIGINS.includes(origin);
+}
+
+// 按来源回显 CORS 头；非白名单来源不加 CORS（浏览器跨站调用拿不到响应）
+function corsFor(request) {
+  const origin = request.headers.get('Origin');
+  if (origin && ALLOWED_ORIGINS.includes(origin)) {
+    return { 'Access-Control-Allow-Origin': origin, 'Vary': 'Origin' };
+  }
+  return null;
 }
 
 // Simple in-memory rate limiter (per-worker-isolate, resets on cold start)
@@ -60,7 +68,7 @@ function checkRateLimit(request) {
       headers: {
         'Content-Type': 'application/json',
         'Retry-After': '60',
-        'Access-Control-Allow-Origin': '*',
+        ...(corsFor(request) || {}),
       },
     });
   }
@@ -90,7 +98,17 @@ async function loadPageData(env) {
 }
 
 async function handleSearch(request, env) {
-  const body = await request.json();
+  // 限制请求体大小，防止无界 JSON body 造成内存压力
+  const bodyText = await request.text();
+  if (bodyText.length > 10_000) {
+    return Response.json({ error: 'Request body too large' }, { status: 413 });
+  }
+  let body;
+  try {
+    body = JSON.parse(bodyText);
+  } catch {
+    return Response.json({ error: 'Invalid JSON' }, { status: 400 });
+  }
   const query = (body.query || '').trim();
   if (!query) {
     return Response.json({ error: 'Missing query' }, { status: 400 });
@@ -129,11 +147,13 @@ export default {
   async fetch(request, env, ctx) {
     const url = new URL(request.url);
 
-    // CORS preflight
+    // CORS preflight — 只对白名单来源回 CORS 头
     if (request.method === 'OPTIONS') {
+      const cors = corsFor(request);
+      if (!cors) return new Response(null, { status: 403 });
       return new Response(null, {
         headers: {
-          'Access-Control-Allow-Origin': '*',
+          ...cors,
           'Access-Control-Allow-Methods': 'GET, POST, OPTIONS',
           'Access-Control-Allow-Headers': 'Content-Type',
         },
@@ -142,6 +162,9 @@ export default {
 
     // Semantic search API
     if (url.pathname === '/api/semantic/search' && request.method === 'POST') {
+      const cors = corsFor(request);
+      // 非白名单来源拒绝调用（防任何网站消耗 AI 配额）
+      if (!cors) return new Response(JSON.stringify({ error: 'Forbidden origin' }), { status: 403 });
       // Rate limit check
       const rateLimitResp = checkRateLimit(request);
       if (rateLimitResp) return rateLimitResp;
@@ -149,13 +172,14 @@ export default {
       try {
         const resp = await handleSearch(request, env);
         const corsResp = new Response(resp.body, resp);
-        corsResp.headers.set('Access-Control-Allow-Origin', '*');
+        corsResp.headers.set('Access-Control-Allow-Origin', cors['Access-Control-Allow-Origin']);
+        corsResp.headers.set('Vary', 'Origin');
         return corsResp;
       } catch (err) {
         console.error('semantic search error:', err);
         return Response.json({ error: 'Internal server error' }, {
           status: 500,
-          headers: { 'Access-Control-Allow-Origin': '*' },
+          headers: { 'Access-Control-Allow-Origin': cors['Access-Control-Allow-Origin'], 'Vary': 'Origin' },
         });
       }
     }
@@ -187,7 +211,11 @@ export default {
     // Add CORS for /pagefind-semantic/ assets (used by client-side JS)
     const resp = new Response(asset.body, asset);
     if (url.pathname.startsWith('/pagefind-semantic/')) {
-      resp.headers.set('Access-Control-Allow-Origin', '*');
+      const cors = corsFor(request);
+      if (cors) {
+        resp.headers.set('Access-Control-Allow-Origin', cors['Access-Control-Allow-Origin']);
+        resp.headers.set('Vary', 'Origin');
+      }
     }
     // Content Security Policy
     resp.headers.set('Content-Security-Policy',
@@ -205,6 +233,10 @@ async function proxyComments(request, url) {
 
   const backend = COMMENTS_BACKEND + url.pathname + url.search;
   const headers = new Headers(request.headers);
+  // 清除客户端可控的敏感头，防止伪造转发到后端
+  headers.delete('X-Forwarded-For');
+  headers.delete('Authorization');
+  headers.delete('Cookie');
   headers.set('X-Forwarded-Host', url.hostname);
   headers.set('X-Forwarded-Proto', url.protocol);
 
@@ -216,9 +248,9 @@ async function proxyComments(request, url) {
 
   // Copy response and add CORS only for allowed origins (not wildcard)
   const proxyResp = new Response(resp.body, resp);
-  const origin = request.headers.get('Origin');
-  if (origin && ALLOWED_COMMENT_ORIGINS.includes(origin)) {
-    proxyResp.headers.set('Access-Control-Allow-Origin', origin);
+  const cors = corsFor(request);
+  if (cors) {
+    proxyResp.headers.set('Access-Control-Allow-Origin', cors['Access-Control-Allow-Origin']);
     proxyResp.headers.set('Vary', 'Origin');
   }
   return proxyResp;
