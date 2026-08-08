@@ -1,0 +1,77 @@
+#+TITLE: 专注时长与注意力保持
+#+DATE: <2026-08-08 Sat>
+
+** 核心数据（Gloria Mark, UC Irvine）
+
+加州大学尔湾分校 Gloria Mark 团队 2003 年起用计算机日志追踪信息工作者的屏幕切换行为（早期用秒表跟人），发现屏幕级专注时长持续缩短：
+
+| 年份 | 平均屏幕专注时长 |
+|------|------------------|
+| 2004 | 150 秒（2.5 分钟） |
+| 2012 | 75 秒 |
+| 最近 5-6 年 | 47 秒 |
+
+补充细节：中位数 40 秒（一半观测 ≤40 秒）；其他团队复现 50 秒、44 秒，结论稳健。这是屏幕级注意力，不是任务级——人们在同一项目上平均能保持 10.5 分钟。
+
+** 与原始研究的出入（中文转述常失真）
+
+- "2016 年 47 秒 / 2025 年 47 秒"：错误。47 秒是最近五六年（约 2018-2023）测得，非特定年份
+- "回到专注状态平均 25 分 26 秒"：出处为 CHI 2008 论文 The Cost of Interrupted Work——82% 被中断工作当天恢复，回到原任务平均 23 分 15 秒（访谈中约 25 分钟指项目级回返）。且这 23 分钟并非发呆，而是在处理其他任务后绕回原任务
+- "一天最多五六次高效"：无直接出处。Gloria 的实际发现是 focused attention 有昼夜节律——上午晚些时候一个峰值、下午 2-3 点第二个峰值；"五六次"更接近超昼夜节律（ultradian rhythm）的 4-6 个 90 分钟深度块的说法
+
+** 注意力机制
+
+Gloria Mark 的四象限注意力模型：
+
+- focused attention：投入 + 挑战（写代码、写文章）
+- rote attention：投入但不挑战（刷游戏、看视频）
+- boredom：都不投入
+- frustration：高挑战低投入（技术问题卡壳）
+
+三个迷思：
+
+1. "非连续专注"是迷思——人本就不能长时间不间断专注，必须休息，类似举重不能不停
+2. "用科技时的理想状态是心流"是迷思——心流（Csikszentmihalyi）需要挑战-技能平衡 + 内在动机，知识工作者很少达到；程序员和游戏玩家是例外
+3. "分心都是算法的错"是迷思——通知只解释一部分。互联网按联想结构设计（Memex，1945），且人们自我打断与外部打断一样多（检查邮件是社会资本交换）
+
+** 如何保持专注（按证据强度分级）
+
+A 级（元分析 / RCT 支持）：
+
+- 冥想训练：元分析确认冥想改善持续注意力（Sumantry & Stewart 2021）；Headspace 每天 10 分钟 × 30 天 → +20%（Axelsen 2022）
+- 睡眠：24 小时睡眠剥夺显著损害持续注意力与反应时间（Nature Sci Rep 2021）。睡眠不足是专注力第一杀手
+- 避免多任务切换：任务切换损失时间且任务越复杂损失越大（Rubinstein, Meyer & Evans 2001）；Meyer 估计切换可消耗高达 40% 生产力
+
+B 级（机制扎实的领域理论）：
+
+- 注意力恢复理论（ART, Kaplan & Kaplan）：定向注意力会疲劳，自然环境（哪怕看窗外）通过 soft fascination 恢复
+- 超昼夜节律：90 分钟深度块 + 10-30 分钟真休息，一天 4-6 个块
+- 心流条件：挑战略高于技能、清晰目标、即时反馈
+
+C 级（Gloria Mark 实操建议）：
+
+- 元觉知（meta-awareness）：觉察"想切屏"的冲动，把无意识行为变成有意识选择——她最强调的方法
+- 预想（forethought）：想清楚今天结束时希望自己处于什么状态，再决定要不要点开新闻
+- hooks：设外部钩子（如"下个会议前必须停"）把自己从兔子洞拉出来
+- 心理脱离（psychological detachment）：下班后真下班，注意力资源才能重建
+- rote 活动有恢复价值：刻意用几分钟无脑活动补充注意力，不是浪费时间
+
+** 落地建议（开发者适用）
+
+1. 把一天压成 2-3 个 90 分钟块，放生理峰值（上午晚些 + 下午 2-3 点）
+2. 写代码是心流豁免区——Gloria 明确说程序员能进入 flow，进入流后拒绝切换
+3. 物理隔离手机/通知；重点练元觉知，因为自我打断和外部打断一样多
+4. 睡眠优先于一切技巧
+5. 别信"10 小时连续专注"鸡汤——做不到不是意志力问题，人不是那样设计的
+
+* 参考
+
+- [[https://gloriamark.com/attention-span/][Gloria Mark: Attention Span（作者官网）]]
+- [[https://www.universityofcalifornia.edu/news/cant-pay-attention-youre-not-alone][UCI 播客：Can't pay attention? You're not alone（原始数据出处）]]
+- [[https://www.apa.org/news/podcasts/speaking-of-psychology/attention-spans][APA Speaking of Psychology：Why our attention spans are shrinking]]
+- [[https://www.apa.org/topics/research/multitasking][APA：Multitasking: Switching costs]]
+- [[https://www.ics.uci.edu/~gmark/chi08-mark.pdf][CHI 2008：The Cost of Interrupted Work（23 分 15 秒出处）]]
+- [[https://pmc.ncbi.nlm.nih.gov/articles/PMC7551835/][Neuroscience of Flow States 综述]]
+- [[https://en.wikipedia.org/wiki/Attention_restoration_theory][Attention Restoration Theory]]
+- [[https://pmc.ncbi.nlm.nih.gov/articles/PMC10940317/][冥想训练 RCT（Frontiers in Aging 2024）]]
+- [[https://www.nature.com/articles/s41598-021-00188-8][Nature Sci Rep 2021：睡眠剥夺损害持续注意力]]
