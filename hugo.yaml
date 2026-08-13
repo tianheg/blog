@@ -5,6 +5,18 @@ title: "Tianhe Gao"
 enableGitInfo: true
 hasCJKLanguage: true
 
+security:
+  exec:
+    # v0.165.0 起 tailwindcss 移出默认白名单 (#15178)，此处显式恢复
+    # 注意：此列表整体替换默认值，必须列全
+    allow:
+      - "^(dart-)?sass$"
+      - "^go$"
+      - "^git$"
+      - "^node$"
+      - "^postcss$"
+      - "^tailwindcss$"
+
 build:
   cachebusters:
     - source: "layouts/.*"
