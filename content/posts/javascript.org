@@ -246,7 +246,7 @@ Linux，部署环境要花费很长时间，而“容器化”改变了这一切
 
 作者提到浏览器 JS 或许是一统 Web 开发，改变目前混乱的局面：Node.js
 生态、Deno 生态。另一个例子是 Cloudflare 的 Worker------把 JS
-作为一种新型的自适容器。
+作为一种新型的自适应容器。
 
 作者接下来设想 JS Containers 如何在未来得到应用。
 
@@ -257,7 +257,7 @@ Linux，部署环境要花费很长时间，而“容器化”改变了这一切
 越来越多的人类基础设施和 Web App 联结，而它们（Web App）的基础技术
 HTML、CSS、JS 10 年后一定还存在。所以，JavaScript 会继续被使用和改善。
 
-脚本语言大都很像，而它们中的 JS 用广泛用于与人类息息相关的 Web，所以 JS
+脚本语言大都很像，而它们中的 JS 广泛用于与人类息息相关的 Web，所以 JS
 会成为未来的通用脚本语言。
 
 ** Shell : Executables :: JavaScript : WebAssembly
@@ -284,7 +284,7 @@ JavaScript 沙盒可能是未来一种更高级别的容器。它通过 Wasm 执
     函数调用时，多个参数传递的次序错乱
     Off by one errors (sometimes called OBOE) crop up when you're trying to target a specific index of a string or array (to slice or access a segment), or when looping over the indices of them. JavaScript indexing starts at zero, not one, which means the last index is always one less than the length of the item. If you try to access an index equal to the length, the program may throw an "index out of range" reference error or print `undefined`.
     要小心：在一个循环内部重置一个全局变量
-    无限循环：1. 错误地增加/减小记数变量；2. 错误地重置计数器值/索引值，而不是加减它们
+    无限循环：1. 错误地增加/减小计数变量；2. 错误地重置计数器值/索引值，而不是加减它们
 #+END_SRC
 
 * [[https://haoqun.blog/zh/2016/javascript-design-regrets-cf9619ba][JavaScript 的设计失误 - Offline]]
@@ -343,7 +343,7 @@ operator 处理。
 
 11. 函数级作用域 与 变量提升（Variable hoisting）
 
-函数级作用域本身没有问题，但是如果如果只能使用函数级作用域的话，在很多代码中它会显得非常
+函数级作用域本身没有问题，但是如果只能使用函数级作用域的话，在很多代码中它会显得非常
 反直觉，比如上面这个循环的例子，对程序员来说，根据花括号的位置确定变量作用域远比找到外层函数容易得多。
 
 JavaScript
