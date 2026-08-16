@@ -1,29 +1,38 @@
 @import "tailwindcss";
 @plugin "@tailwindcss/typography";
 
-/* Silk (light) — manually extracted from daisyUI */
+/* ── Color tokens (daisyUI silk/sunset, merged via light-dark()) ──
+   MDN: light-dark() selects color by active color-scheme, no
+   prefers-color-scheme media query needed.
+   color-mix(): dark base-200 derived exactly from base-100/base-300
+   (dark trio shares chroma/hue, only lightness differs). */
 :root {
-  color-scheme: light;
-  --color-base-100: oklch(97% 0.0035 67.78);
-  --color-base-200: oklch(95% 0.0081 61.42);
-  --color-base-300: oklch(90% 0.0081 61.42);
-  --color-base-content: oklch(40% 0.0081 61.42);
-  --color-primary: oklch(23.27% 0.0249 284.3);
-  --color-primary-content: oklch(94.22% 0.2505 117.44);
-  --color-secondary: oklch(23.27% 0.0249 284.3);
-  --color-secondary-content: oklch(73.92% 0.2135 50.94);
-  --color-accent: oklch(23.27% 0.0249 284.3);
-  --color-accent-content: oklch(88.92% 0.2061 189.9);
-  --color-neutral: oklch(20% 0 0);
-  --color-neutral-content: oklch(80% 0.0081 61.42);
-  --color-info: oklch(80.39% 0.1148 241.68);
-  --color-info-content: oklch(30.39% 0.1148 241.68);
-  --color-success: oklch(83.92% 0.0901 136.87);
-  --color-success-content: oklch(23.92% 0.0901 136.87);
-  --color-warning: oklch(83.92% 0.1085 80);
-  --color-warning-content: oklch(43.92% 0.1085 80);
-  --color-error: oklch(75.1% 0.1814 22.37);
-  --color-error-content: oklch(35.1% 0.1814 22.37);
+  color-scheme: light dark;
+  --color-base-100: light-dark(oklch(97% 0.0035 67.78), oklch(22% 0.019 237.69));
+  --color-base-200: light-dark(
+    oklch(95% 0.0081 61.42),
+    color-mix(in oklab, var(--color-base-100) 50%, var(--color-base-300))
+  );
+  --color-base-300: light-dark(oklch(90% 0.0081 61.42), oklch(18% 0.019 237.69));
+  --color-base-content: light-dark(oklch(40% 0.0081 61.42), oklch(77.383% 0.043 245.096));
+  --color-primary: light-dark(oklch(23.27% 0.0249 284.3), oklch(74.703% 0.158 39.947));
+  --color-primary-content: light-dark(oklch(94.22% 0.2505 117.44), oklch(14.94% 0.031 39.947));
+  --color-secondary: light-dark(oklch(23.27% 0.0249 284.3), oklch(72.537% 0.177 2.72));
+  --color-secondary-content: light-dark(oklch(73.92% 0.2135 50.94), oklch(14.507% 0.035 2.72));
+  --color-accent: light-dark(oklch(23.27% 0.0249 284.3), oklch(71.294% 0.166 299.844));
+  --color-accent-content: light-dark(oklch(88.92% 0.2061 189.9), oklch(14.258% 0.033 299.844));
+  --color-neutral: light-dark(oklch(20% 0 0), oklch(26% 0.019 237.69));
+  --color-neutral-content: light-dark(oklch(80% 0.0081 61.42), oklch(70% 0.019 237.69));
+  --color-info: light-dark(oklch(80.39% 0.1148 241.68), oklch(85.559% 0.085 206.015));
+  --color-info-content: light-dark(oklch(30.39% 0.1148 241.68), oklch(17.111% 0.017 206.015));
+  --color-success: light-dark(oklch(83.92% 0.0901 136.87), oklch(85.56% 0.085 144.778));
+  --color-success-content: light-dark(oklch(23.92% 0.0901 136.87), oklch(17.112% 0.017 144.778));
+  --color-warning: light-dark(oklch(83.92% 0.1085 80), oklch(85.569% 0.084 74.427));
+  --color-warning-content: light-dark(oklch(43.92% 0.1085 80), oklch(17.113% 0.016 74.427));
+  --color-error: light-dark(oklch(75.1% 0.1814 22.37), oklch(85.511% 0.078 16.886));
+  --color-error-content: light-dark(oklch(35.1% 0.1814 22.37), oklch(17.102% 0.015 16.886));
+
+  --comments-bg: light-dark(rgb(255 255 255), rgb(17 24 39));
 
   --header-height: 5rem;
   --scrollbar-width: 6px;
@@ -32,36 +41,6 @@
   --border-radius-lg: 1.5rem;
   --transition-fast: 0.2s ease;
   --transition-slow: 0.3s ease;
-  --comments-bg: rgb(255 255 255);
-}
-
-/* Sunset (dark) — manually extracted from daisyUI */
-@media (prefers-color-scheme: dark) {
-  :root {
-    color-scheme: dark;
-    --color-base-100: oklch(22% 0.019 237.69);
-    --color-base-200: oklch(20% 0.019 237.69);
-    --color-base-300: oklch(18% 0.019 237.69);
-    --color-base-content: oklch(77.383% 0.043 245.096);
-    --color-primary: oklch(74.703% 0.158 39.947);
-    --color-primary-content: oklch(14.94% 0.031 39.947);
-    --color-secondary: oklch(72.537% 0.177 2.72);
-    --color-secondary-content: oklch(14.507% 0.035 2.72);
-    --color-accent: oklch(71.294% 0.166 299.844);
-    --color-accent-content: oklch(14.258% 0.033 299.844);
-    --color-neutral: oklch(26% 0.019 237.69);
-    --color-neutral-content: oklch(70% 0.019 237.69);
-    --color-info: oklch(85.559% 0.085 206.015);
-    --color-info-content: oklch(17.111% 0.017 206.015);
-    --color-success: oklch(85.56% 0.085 144.778);
-    --color-success-content: oklch(17.112% 0.017 144.778);
-    --color-warning: oklch(85.569% 0.084 74.427);
-    --color-warning-content: oklch(17.113% 0.016 74.427);
-    --color-error: oklch(85.511% 0.078 16.886);
-    --color-error-content: oklch(17.102% 0.015 16.886);
-
-    --comments-bg: rgb(17 24 39);
-  }
 }
 
 @font-face {
@@ -102,6 +81,11 @@ body {
   color: var(--color-base-content);
   transition: background-color 0.3s ease, color 0.3s ease;
 }
+
+/* MDN: text-wrap balance/pretty — balanced heading breaks, ragged-right
+   paragraph optimization (Baseline 2023, zero visual risk) */
+h1, h2, h3, h4 { text-wrap: balance; }
+p { text-wrap: pretty; }
 
 header {
   background-color: inherit;
