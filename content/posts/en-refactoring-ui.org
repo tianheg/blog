@@ -1,0 +1,94 @@
+#+TITLE: 【读书记68】Refactoring UI by Adam Wathan & Steve Schoger
+#+DATE: <2025-12-30 Tue 12:00>
+#+TAGS[]: 读书记
+
+
+https://www.refactoringui.com/
+
+** 从头开始布局
+
+以构建功能为主，而不是布局
+
+细节不用着急，先确定好自己的应用需要哪些功能，然后以功能为主进行设计。
+
+颜色在最开始也是不必要的，可以设置灰度来暂时屏蔽掉颜色。
+
+最开始的设计就是快速构建，不要慢。
+
+不要过度设计，设计出一个大概，就可以开始实现功能了。在设计阶段，就开始想象各种边界条件对设计的影响，这有点太早了。
+
+设计与实现应该是彼此循环的过程，确定好下一个功能，先设计一个简单的版本，之后开始实现，再然后开始丰富第一次的设计，然后继续实现。
+
+不要在设计阶段，引入还没有准备构建的功能。比如，你在写一个评论功能，你知道自己未来某天可能需要能够在评论框上传文件，但是你现在是不需要的，但是你现在就加上了这个功能。这是不必要的。因为实现这样一个功能，是比较困难的，会花费超出计划的时间。
+
+当我们构建一个新功能时，可以把它想象得比较困难，这样我们开始构建时就会更加专注，我只能要一样东西，多了时间不够。如果某些小功能只是锦上添花，现阶段不加也OK。
+
+每一种设计都有设计师想要表达的个性在里面。这种个性的表达初一听很抽象，但内在是有些决定因素的。
+
+1. 字体。衬线与非衬线的选择
+2. 颜色。大胆地使用颜色表达自己的个性， 这个网站 https://ayu.land/ 的颜色就很丰富。一些资料：https://kimi.moonshot.cn/share/csojl1c4avenu4s193l0 。颜色的选择并无绝对，多思考为什么A颜色与B颜色相比更适合自己。
+3. 边缘弧度。弧度越大越偏向轻松
+4. 语言风格。
+
+先进行功能设计，在草稿纸上进行规划
+
+我的blog的功能，以内容即文字为重点内容：
+
+- 单篇博客文章
+
+- 文章列表
+
+- 首页的自我介绍
+
+- 咨询服务
+
+通过设计系统来局限自己的选择。设计颜色、字体范围
+
+一个例子 https://sass-lang.com/styleguide/
+
+当进行系统构建时，所有的样式都是预设好的，这样是最有效率的
+
+需要为以下内容设定好范围：
+
+Font size, Font weight, Line height, Color, Margin, Padding, Width, Height, Box shadows, Border radius, Border width, Opacity
+
+确保自己在系统层面设计，而不是更低水平
+
+** Hierarchy is Everything 层次就是一切
+
+设计时，一个页面，哪些区域是dashboard，哪些区域是概览，哪些区域是细节。应该通过样式让人一眼就能区分，重点在哪里。
+
+在突出重点内容时，字体大小不能作为主要表达方式，字重也是一种巧妙的方法。用淡颜色表达不那么重要的文本。
+
+推荐使用：
+
+#+BEGIN_SRC
+
+Try and stick to two or three colors:
+
+• A dark color for primary content (like the headline of an article)
+
+• A grey for secondary content (like the date an article was published)
+
+• A lighter grey for tertiary content (maybe the copyright notice in a
+
+footer)
+
+Similarly, two font weights are usually enough for UI work:
+
+• A normal font weight (400 or 500 depending on the font) for most text
+
+• A heavier font weight (600 or 700) for text you want to emphasize
+
+#+END_SRC
+
+在非黑白色背景上不要使用灰色。这样会降低对比度，无法辨认文本内容。
+
+通过忽略元素来强调某个具体元素。
+
+从数据库中获取的数据，很容易让我们给它加上标签。比如一个人名Amy，在展示在页面中时会加上 Name，最后的效果：`Name: Amy`。
+
+但这样并不是我们想要的。我们只需要Amy，不需要Name，这造成了重复。需要通过一定的设计规避掉。
+
+
+2025年读完的第68本,总阅读量第68本
