@@ -43,8 +43,6 @@ blog/
 │   │   ├── science/     # 科学
 │   │   └── history/     # 历史
 │   └── *.org            # 独立页面（about, now, projects 等）
-├── data/                # 构建时生成的数据
-│   └── til-wordcounts.json  # TIL 字数（Intl.Segmenter 分词）
 ├── layouts/             # Hugo 模板
 │   ├── _default/        # 基础模板（section.json.json）
 │   ├── _partials/       # 可复用组件（head, components）
@@ -65,7 +63,6 @@ blog/
 │   ├── build.sh         # CI 构建脚本（Cloudflare Workers）
 │   ├── worker.js        # Cloudflare Worker（静态托管 + 语义搜索 API）
 │   ├── generate-embeddings.mjs  # 语义搜索嵌入生成
-│   └── count-words.mjs  # CJK 准确 TIL 字数统计
 ├── static/              # 静态文件（直接复制到 public/）
 │   ├── images/          # 图片资源
 │   ├── fonts/           # 字体文件
@@ -198,7 +195,7 @@ TIL 的信息源链接统一放在文件末尾：
 # 开发服务器（含热重载）
 npm run dev
 
-# 构建站点（自动运行字数统计 → Hugo）
+# 构建站点
 npm run build
 
 # 构建 + 生成搜索索引（完整发布流程）
@@ -209,9 +206,6 @@ npm run pagefind
 
 # 生成语义搜索索引（调 Cloudflare Workers AI，需先 build；改动内容后发布前必跑）
 npm run embed
-
-# 单独运行 TIL 字数统计（CJK 准确分词）
-npm run words
 ```
 
 ### 新建内容工作流程
