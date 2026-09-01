@@ -80,17 +80,9 @@ html {
 body {
   font-family: "Satoshi", -apple-system, system-ui, BlinkMacSystemFont, "Noto Serif SC", Arial, "Hiragino Sans GB", "Microsoft Yahei", "ST Heiti", sans-serif;
   overflow-wrap: break-word;
-  /* canvas: system fallback for browsers without light-dark() support
-     (Chrome <123 etc.) — keeps background opaque in any case.
-     Wrapped in @supports so the minifier can't drop the fallback. */
-  background-color: canvas;
+  background-color: var(--color-base-100);
   color: var(--color-base-content);
   transition: background-color 0.3s ease, color 0.3s ease;
-}
-@supports (background-color: light-dark(#fff, #000)) {
-  body {
-    background-color: var(--color-base-100);
-  }
 }
 
 /* MDN: text-wrap balance/pretty — balanced heading breaks, ragged-right
@@ -105,15 +97,9 @@ header {
 }
 
 /* Mobile menu panel: absolute within sticky header wrapper — solid
-   background (canvas fallback + theme bg, covers content underneath).
-   @supports keeps the fallback from being minified away. */
+   background (matches page bg, light/dark via light-dark()) */
 #mobile-menu {
-  background-color: canvas;
-}
-@supports (background-color: light-dark(#fff, #000)) {
-  #mobile-menu {
-    background-color: var(--color-base-100);
-  }
+  background-color: var(--color-base-100);
 }
 
 :focus-visible {
