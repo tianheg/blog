@@ -96,6 +96,14 @@ header {
   -webkit-backdrop-filter: blur(8px);
 }
 
+/* Mobile menu panel: absolute within sticky header wrapper, so it needs its
+   own background (no longer inside header's backdrop region) */
+#mobile-menu {
+  background-color: inherit;
+  backdrop-filter: blur(8px);
+  -webkit-backdrop-filter: blur(8px);
+}
+
 :focus-visible {
   outline: 2px solid oklch(0.546 0.245 262.881);
   outline-offset: 2px;
