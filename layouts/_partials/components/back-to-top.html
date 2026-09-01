@@ -1,5 +1,9 @@
 {{/* Back to top button component */}}
-{{/* Fixed position button that appears when scrolling down, controlled by CSS + BackToTop.ts */}}
+{{/* Fixed position button that appears when scrolling down, controlled by CSS + inline JS */}}
+{{/* Usage: {{ partial "components/back-to-top.html" . }} (default gray) or {{ partial "components/back-to-top.html" (dict "accent" "emerald") }} */}}
+{{ $accent := "" }}
+{{ if reflect.IsMap . }}{{ $accent = .accent | default "" }}{{ end }}
 <div id="back-to-top" class="fixed bottom-4 right-4 z-40">
-	<a href="javascript:void(0)" aria-label="Back to top" class="bg-white dark:bg-gray-800 border border-gray-200 dark:border-gray-600 rounded px-3 py-1.5 text-sm shadow hover:shadow-md transition-shadow">↑ Top</a>
+	<a href="javascript:void(0)" aria-label="Back to top"
+	   class="{{ if eq $accent "emerald" }}bg-emerald-50 dark:bg-emerald-900/30 border border-emerald-200 dark:border-emerald-700 text-emerald-700 dark:text-emerald-300{{ else }}bg-white dark:bg-gray-800 border border-gray-200 dark:border-gray-600 text-gray-700 dark:text-gray-300{{ end }} rounded px-3 py-1.5 text-sm shadow hover:shadow-md transition-shadow">↑ Top</a>
 </div>

@@ -162,6 +162,9 @@
     </div>
   </div>
 
+  <!-- Back to top button (TIL emerald variant) -->
+  {{- partial "components/back-to-top.html" (dict "accent" "emerald") -}}
+
   {{ partial "head/scripts.html" . }}
 
   <script defer>
@@ -192,6 +195,16 @@
       });
       document.addEventListener('keydown', function(e){
         if (e.key === 'Escape' && btn.getAttribute('aria-expanded') === 'true') close();
+      });
+    }
+    // Back to top
+    var btt = document.getElementById('back-to-top');
+    if (btt) {
+      var toggle = function(){ btt.classList.toggle('show', window.scrollY > 100); };
+      window.addEventListener('scroll', toggle, {passive:true});
+      btt.addEventListener('click', function(e){
+        e.preventDefault();
+        window.scrollTo({top: 0, behavior: 'smooth'});
       });
     }
   })();
