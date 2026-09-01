@@ -96,12 +96,10 @@ header {
   -webkit-backdrop-filter: blur(8px);
 }
 
-/* Mobile menu panel: absolute within sticky header wrapper, so it needs its
-   own background (no longer inside header's backdrop region) */
+/* Mobile menu panel: absolute within sticky header wrapper — solid
+   background (matches page bg, light/dark via light-dark()) */
 #mobile-menu {
-  background-color: inherit;
-  backdrop-filter: blur(8px);
-  -webkit-backdrop-filter: blur(8px);
+  background-color: var(--color-base-100);
 }
 
 :focus-visible {
