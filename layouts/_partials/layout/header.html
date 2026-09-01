@@ -34,7 +34,7 @@
 </div>
 
 {{/* Mobile menu panel — shown below header when hamburger is toggled */}}
-<div id="mobile-menu" class="hidden sm:hidden absolute top-full left-0 right-0 max-w-3xl mx-auto border-t border-gray-200 dark:border-gray-800">
+<div id="mobile-menu" class="hidden sm:hidden border-t border-gray-200 dark:border-gray-800">
   <nav class="flex flex-col items-center gap-1 py-5">
     {{ range .Site.Menus.main }}
     {{- $linkType := (string .Params.rel) -}}
