@@ -32,9 +32,6 @@ main() {
   # Deepen shallow clone for accurate git lastmod
   git fetch --unshallow || true
 
-  # Check org files for missing titles before building
-  npm run words:check
-
   # Build the site + PageFind index
   # (semantic index is generated locally via `npm run embed` and committed to
   # static/pagefind-semantic/ — Hugo copies it into public/ automatically)

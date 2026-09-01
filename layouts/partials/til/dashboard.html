@@ -8,20 +8,7 @@
   {{ $totalMin = add $totalMin .ReadingTime }}
 {{ end }}
 
-{{/* Accurate word counts from build-time script */}}
-{{ $wc := index hugo.Data "til-wordcounts" }}
-{{ $totalWords := 0 }}
-{{ $avgWords := 0 }}
-{{ $pageWordCounts := dict }}
-{{ with $wc }}
-  {{ $totalWords = .total }}
-  {{ $avgWords = .avg }}
-  {{ range .perPage }}
-    {{ $pageWordCounts = merge $pageWordCounts (dict .path .words) }}
-  {{ end }}
-{{ end }}
-
-{{/* Category distribution: merge Hugo sections with accurate word counts */}}
+{{/* Category distribution (by file count) */}}
 {{ $catAgg := dict }}
 {{ range $tilPages }}
   {{ $sec := .CurrentSection }}
@@ -33,40 +20,28 @@
 
 {{ $sortedCats := slice }}
 {{ range $t, $v := $catAgg }}
-  {{ $w := 0 }}
-  {{ with $wc }}{{ with index .perCategory $v.slug }}{{ $w = .words }}{{ end }}{{ end }}
-  {{ $sortedCats = $sortedCats | append (dict "name" $t "count" $v.count "slug" $v.slug "words" $w) }}
+  {{ $sortedCats = $sortedCats | append (dict "name" $t "count" $v.count "slug" $v.slug) }}
 {{ end }}
+{{ $sortedCats = sort $sortedCats "count" "desc" }}
 
-{{/* Sort by word count (bar chart uses words) */}}
-{{ $sortedCats = sort $sortedCats "words" "desc" }}
-
-{{ $maxWords := 0 }}
+{{ $maxCount := 0 }}
 {{ range $sortedCats }}
-  {{ if gt .words $maxWords }}{{ $maxWords = .words }}{{ end }}
+  {{ if gt .count $maxCount }}{{ $maxCount = .count }}{{ end }}
 {{ end }}
 
 {{/* Stats cards */}}
-<div class="grid grid-cols-2 sm:grid-cols-4 gap-3 mb-8">
+<div class="grid grid-cols-2 gap-3 mb-8">
   <div class="p-4 rounded-lg border border-gray-200 dark:border-gray-800">
     <div class="text-xs text-gray-400 dark:text-gray-500 uppercase tracking-wider mb-1">总数</div>
     <div class="text-2xl font-semibold text-gray-900 dark:text-gray-100 tabular-nums">{{ $total }}</div>
   </div>
   <div class="p-4 rounded-lg border border-gray-200 dark:border-gray-800">
-    <div class="text-xs text-gray-400 dark:text-gray-500 uppercase tracking-wider mb-1">总字数</div>
-    <div class="text-2xl font-semibold text-gray-900 dark:text-gray-100 tabular-nums">{{ $totalWords | lang.FormatNumber 0 }}</div>
-  </div>
-  <div class="p-4 rounded-lg border border-gray-200 dark:border-gray-800">
     <div class="text-xs text-gray-400 dark:text-gray-500 uppercase tracking-wider mb-1">总时长</div>
     <div class="text-2xl font-semibold text-gray-900 dark:text-gray-100 tabular-nums">{{ $totalMin }}<span class="text-sm font-normal text-gray-400 dark:text-gray-500 ml-1">min</span></div>
   </div>
-  <div class="p-4 rounded-lg border border-gray-200 dark:border-gray-800">
-    <div class="text-xs text-gray-400 dark:text-gray-500 uppercase tracking-wider mb-1">平均</div>
-    <div class="text-2xl font-semibold text-gray-900 dark:text-gray-100 tabular-nums">{{ $avgWords | lang.FormatNumber 0 }}<span class="text-sm font-normal text-gray-400 dark:text-gray-500 ml-1">/篇</span></div>
-  </div>
 </div>
 
-{{/* Category bar chart — bar width = word count, label = words / files */}}
+{{/* Category bar chart — bar width = file count */}}
 {{ if $sortedCats }}
 <div class="mb-8">
   <h3 class="text-xs font-medium text-gray-400 dark:text-gray-500 uppercase tracking-wider mb-3">分类分布</h3>
@@ -75,97 +50,31 @@
     <div class="flex items-center gap-3">
       <span class="text-xs text-gray-600 dark:text-gray-400 w-28 shrink-0 truncate" title="{{ .name }}">{{ .name }}</span>
       <div class="flex-1 h-5 bg-gray-100 dark:bg-gray-800 rounded-sm overflow-hidden">
-        {{ $pct := 0 }}{{ if gt $maxWords 0 }}{{ $pct = div (mul .words 100) $maxWords }}{{ end }}
+        {{ $pct := 0 }}{{ if gt $maxCount 0 }}{{ $pct = div (mul .count 100) $maxCount }}{{ end }}
         <div class="h-full bg-emerald-400/60 dark:bg-emerald-600/40 rounded-sm" style="width: {{ $pct }}%"></div>
       </div>
-      <span class="text-xs text-gray-400 dark:text-gray-500 w-20 text-right shrink-0 tabular-nums">{{ .words | lang.FormatNumber 0 }}<span class="text-gray-300 dark:text-gray-600 ml-0.5">/{{ .count }}</span></span>
+      <span class="text-xs text-gray-400 dark:text-gray-500 w-10 text-right shrink-0 tabular-nums">{{ .count }}</span>
     </div>
     {{ end }}
   </div>
 </div>
 {{ end }}
 
-{{/* Top 5 longest & shortest — using accurate word counts */}}
-{{ if $pageWordCounts }}
-{{ $sorted := slice }}
-{{ range $tilPages }}
-  {{ $p := . }}
-  {{ with .File }}
-    {{ $key := .Path }}
-    {{ $w := index $pageWordCounts $key | default 0 }}
-    {{ $sorted = $sorted | append (dict "page" $p "words" $w) }}
-  {{ end }}
-{{ end }}
-{{ $sortedByWords := sort $sorted "words" "desc" }}
-
-<div class="grid grid-cols-1 sm:grid-cols-2 gap-6 mb-8">
-  <div>
-    <h3 class="text-xs font-medium text-gray-400 dark:text-gray-500 uppercase tracking-wider mb-3">最长 Top 5</h3>
-    <div class="space-y-1">
-      {{ range first 5 $sortedByWords }}
-      <a href="{{ .page.RelPermalink }}"
-         class="group flex items-center justify-between py-1 px-2 -mx-2 rounded-md transition-colors hover:bg-gray-50 dark:hover:bg-gray-800/40">
-        <span class="text-xs text-gray-600 dark:text-gray-400 truncate group-hover:text-emerald-600 dark:group-hover:text-emerald-400 transition-colors">
-          {{ partial "functions/get-title" (dict "page" .page) }}
-        </span>
-        <span class="text-xs text-gray-400 dark:text-gray-500 shrink-0 ml-2 tabular-nums">{{ .words | lang.FormatNumber 0 }}w</span>
-      </a>
-      {{ end }}
-    </div>
-  </div>
-  <div>
-    <h3 class="text-xs font-medium text-gray-400 dark:text-gray-500 uppercase tracking-wider mb-3">最短 Top 5</h3>
-    <div class="space-y-1">
-      {{ $shortest := where $sortedByWords "words" "gt" 10 | last 5 }}
-      {{ range $shortest }}
-      <a href="{{ .page.RelPermalink }}"
-         class="group flex items-center justify-between py-1 px-2 -mx-2 rounded-md transition-colors hover:bg-gray-50 dark:hover:bg-gray-800/40">
-        <span class="text-xs text-gray-600 dark:text-gray-400 truncate group-hover:text-emerald-600 dark:group-hover:text-emerald-400 transition-colors">
-          {{ partial "functions/get-title" (dict "page" .page) }}
-        </span>
-        <span class="text-xs text-gray-400 dark:text-gray-500 shrink-0 ml-2 tabular-nums">{{ .words | lang.FormatNumber 0 }}w</span>
-      </a>
-      {{ else }}
-      <p class="text-xs text-gray-400 dark:text-gray-500 italic">暂无数据</p>
-      {{ end }}
-    </div>
-  </div>
-</div>
-{{ end }}
-
-{{/* Recent additions — from build-time word counter (git log timestamps) */}}
-{{ $recent := slice }}
-{{ with index hugo.Data "til-wordcounts" }}
-  {{ range .recent }}
-    {{ $recent = $recent | append . }}
-  {{ end }}
-{{ end }}
+{{/* Recent additions — by creation date */}}
+{{ $recent := sort $tilPages "Date" "desc" | first 10 }}
 {{ if $recent }}
 <div class="mb-8">
-  <h3 class="text-xs font-medium text-gray-400 dark:text-gray-500 uppercase tracking-wider mb-3">最近新增（90天）</h3>
+  <h3 class="text-xs font-medium text-gray-400 dark:text-gray-500 uppercase tracking-wider mb-3">最近新增</h3>
   <div class="space-y-1">
     {{ range $recent }}
-    {{ $path := .path }}
-    {{ $page := where $tilPages "File.Path" $path | first 1 }}
-    {{ if $page }}
-    <a href="{{ (index $page 0).RelPermalink }}"
+    <a href="{{ .RelPermalink }}"
        class="group flex items-center justify-between py-1 px-2 -mx-2 rounded-md transition-colors hover:bg-gray-50 dark:hover:bg-gray-800/40">
-      <span class="text-xs text-gray-600 dark:text-gray-400 group-hover:text-emerald-600 dark:group-hover:text-emerald-400 transition-colors">
-        {{ partial "functions/get-title" (dict "page" (index $page 0)) }}
+      <span class="text-xs text-gray-600 dark:text-gray-400 truncate group-hover:text-emerald-600 dark:group-hover:text-emerald-400 transition-colors">
+        {{ partial "functions/get-title" (dict "page" .) }}
       </span>
-      <span class="text-xs text-gray-400 dark:text-gray-500 shrink-0 ml-2 tabular-nums">{{ .ts }}</span>
+      <span class="text-xs text-gray-400 dark:text-gray-500 shrink-0 ml-2 tabular-nums">{{ .Date.Format "2006-01-02" }}</span>
     </a>
-    {{ end }}
     {{ end }}
   </div>
 </div>
-{{ end }}
-
-{{/* Data freshness */}}
-{{ with index hugo.Data "til-wordcounts" }}
-  {{ if .generatedAt }}
-  <div class="text-xs text-gray-400 dark:text-gray-500 text-right mt-6">
-    数据更新于 {{ .generatedAt }}
-  </div>
-  {{ end }}
 {{ end }}

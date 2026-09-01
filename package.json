@@ -2,12 +2,8 @@
   "name": "blog",
   "private": true,
   "scripts": {
-    "words": "node scripts/count-words.mjs",
-    "words:check": "node scripts/count-words.mjs --check",
-    "prebuild": "node scripts/count-words.mjs",
     "build": "hugo --gc --minify --buildFuture",
     "pagefind": "pagefind --site public",
-    "predev": "node scripts/count-words.mjs",
     "dev": "hugo serve --buildFuture",
     "all": "npm run build && npm run pagefind",
     "embed": "node scripts/generate-embeddings.mjs"
