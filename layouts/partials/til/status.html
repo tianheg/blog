@@ -1,0 +1,7 @@
+{{- /* TIL status badge: small label before title. draft=amber, reviewed=emerald. */ -}}
+{{- $s := .Params.status | default "" -}}
+{{- if eq $s "draft" -}}
+<span class="inline-block align-baseline text-[10px] font-semibold uppercase tracking-wide px-1.5 py-[1px] rounded bg-amber-100 text-amber-700 dark:bg-amber-900/30 dark:text-amber-300 mr-1.5">draft</span>
+{{- else if eq $s "reviewed" -}}
+<span class="inline-block align-baseline text-[10px] font-semibold uppercase tracking-wide px-1.5 py-[1px] rounded bg-emerald-100 text-emerald-700 dark:bg-emerald-900/30 dark:text-emerald-300 mr-1.5">reviewed</span>
+{{- end -}}
