@@ -141,6 +141,18 @@ npm install
 
 独立页面（如 `about.org`）通常只需要 `#+TITLE`。
 
+**TIL 必带整理状态**（2026-09-01 起，全库强制）：
+
+```org
+#+TITLE: 某知识点
+#+STATUS: draft      # AI 生成/代写，未经人工整理
+#+STATUS: reviewed   # 人工审核整理过
+```
+
+- `til/` 下所有文件必须有 `#+STATUS`，位于 `#+TITLE:` 下一行
+- AI 代写一律 `draft`；用户用自己的话复核/补充后改为 `reviewed`
+- 页面标题开头显示状态小字（draft=amber，reviewed=emerald，见 `layouts/partials/til/status.html`）
+
 ### Posts vs TIL 选择标准
 
 | 类型 | 适合内容 | 示例 |

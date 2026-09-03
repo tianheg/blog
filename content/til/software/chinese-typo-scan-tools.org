@@ -1,4 +1,5 @@
 #+TITLE: 中文错别字扫描工具实测：开源全灭，LLM 是正解
+#+STATUS: draft
 
 给 860 篇博客文章做全量错别字扫描时，实测了三类方案：pycorrector+kenlm（统计模型）、pycorrector+MacBERT（深度模型）、DeepSeek API 直扫。结论明确：开源纠错工具为输入法/OCR 场景设计，对博客文本误报率极高；LLM 是唯一靠谱的路线，误报率 <10% 且能抓语义级错误。
 
