@@ -1,0 +1,82 @@
+#+TITLE: 电池均衡（Cell Balancing）：从失配机理到工程实现
+#+STATUS: draft
+
+串联电池包的能力由最弱电芯决定。均衡通过拉齐电芯状态，把整包的可用容量、功率和寿命从"短板效应"里救回来。本文综合 TI/ADI/MPS 应用资料、学术综述与开源 BMS 实现（foxBMS/Batrium），按失配机理 → 均衡判据 → 平衡点 → 拓扑 → 控制算法 → 工程细节 → 安全与失效组织。
+
+* 失配从哪来
+- 容量失配：电芯可存电量不同，充满/放空时小容量芯先到边界，锁死整包充放电
+- SOC 失配：自放电率、内阻、温度差异造成各芯 SOC 错位
+- 温度梯度是最大的实际失配源：pack 中心热边缘冷，自放电与内阻都不同，失配被持续制造
+- 后果一句话：充电时最高电芯先触发保护 → 整包充不满；放电时最低电芯先截止 → 整包放不尽
+
+* 均衡判据三选（用什么量决定"均衡谁"）
+- OCV 判据：准确不漂移，但要长时间静置，无法在线；老化/温度不同后 OCV-SOC 曲线不一致，标定复杂
+- 工作电压（OV）判据：实时可测，但受极化影响——负载突变会误动作；电压平台期（10%～90% SOC）小压差对应大 SOC 差，该均时不启动；充放电末期反过来，SOC 微变电压剧变，易均衡不足
+- SOC 判据：直接反映电量，能保证整组同时充满/放空，但依赖 SOC 估算精度
+- 工程结论：温度均衡优先，平台期做 SOC 均衡，充放电末期做电压均衡——不同阶段用不同判据
+
+* 平衡点策略：把电芯对齐到哪个 SOC
+- Top balancing：最大化可存能量（EV 场景），但高 SOC 本身加速老化
+- Mid-SOC：最大化功率吞吐（HEV 场景）
+- Bottom balancing 的坑：弱芯每次循环仍会经历高 SOC 段（充电时全组一起上去），弱芯老得更快，一致性发散加速——放空端对齐反而不推荐
+- 快速主动均衡的自调节效应：强芯承担更多负载、老得更快，整包趋向均匀寿终，pack 寿命不再由最弱芯单方面决定
+
+* 被动均衡（量产主流）
+- 原理：MOSFET + 泄放电阻把高 SOC 芯的能量烧掉，只减不加
+- 电流量级 35～200mA；TI BQ769x2 内置均衡 abs max 100mA；均衡发热量 ≈ 电芯正常运行发热，热管理预算必须计入
+- 只能在充电末期/静置时做：泄放消耗能量，放电中均衡等于白烧续航
+- 控制：压差超阈值开启，回落到阈值+迟滞才关（防振荡）；多芯轮流泄放防单点过热
+- 优点：便宜、简单、可靠；缺点：热、慢、只够处理小失配
+
+* 主动均衡拓扑谱系
+
+| 类型 | 储能元件 | 特点 | 代表 |
+| 电容飞渡 | 电容 | 简单无磁件，但每步只搬 ΔV/2，慢 | 教科书为主 |
+| 相邻双向 buck-boost | 电感 | 每两节一颗 IC；级效率 85%～90%，长串接力端到端 η^(N-1) 衰减 | MPS MP264x |
+| 反激变压器 | 变压器 | 任意芯↔整组单级搬能，效率 90%+，串数增加效率不掉；漏感尖峰是设计难点 | ADI LTC3300 |
+| 开关矩阵+共享变换器 | 电容/电感 | 任意芯直连，灵活但贵且复杂 | TI EMB1428Q |
+
+- 对比维度：效率 / 速度 / 成本 / 复杂度，加可扩展串数
+- 主动 vs 被动本质：被动用电阻+时间换简单；主动用功率级+控制换效率，且能在放电中搬能延长运行时间
+- 学术定量结论（IEEE TTE 2024）：计入动态参数后电容/电感/变压器拓扑的均衡速度相对静态分析偏差达 26.75% / 80% / 108%，纯静态分析会严重误判拓扑性能
+
+* 均衡策略与控制算法
+- 电压极差 + 迟滞（量产，foxBMS/Batrium 同款）：超过最低芯+阈值的电芯全部开启均衡，关断点在阈值+迟滞
+- 电量差法（foxBMS SOC-history）：静置约 3 小时电压完全松弛 → OCV 查 SOC → 换算电量差 → 每秒按泄放电流（电压除以泄放电阻）积分扣减到零。比纯电压判据精确，能区分"电压高但电量少"的芯
+- Latched bypass（Batrium）：触发均衡后保持最小均衡时长，即使电压回落到阈值下——防充电末期电压急升导致的反复启停
+- 论文前沿：K-Means/DBSCAN 聚类群组均衡；定电流 vs 变电流控制（变电流按负载与失配调节力度，避免欠/过均衡）
+- 均衡日志：每芯累计均衡时间是售后诊断线索——哪颗总被均衡，往往意味着老化或自放电异常
+
+* 采样与均衡互斥（TI 应用笔记实锤）
+- 测量被均衡芯及其相邻芯时均衡暂停；顶芯均衡时整串电压测量也暂停 → 实际平均均衡电流显著低于标称
+- 解法：均衡期间主动降采样率（BQ769x2 的 CB_LOOP_SLOW，1/2 或 1/4 速）换取更高的平均均衡电流
+- 防失控机制：均衡定时器（host 失联自动停）、同时均衡芯数上限（控功耗）、温度窗口限制
+
+* 量化设计
+- 失配电量由 ΔSOC 乘容量得出。例：100Ah 差 5% 即 5Ah → 被动 100mA 需 50 小时，主动 2A 只需 2.5 小时
+- 均衡能力设计准则：至少和失配产生速度一样快（例：7.7Ah pack 每周期产生约 77mAh/芯失配，按此设计并留裕量；失配速率可用蒙特卡洛仿真统计）
+- 实测参考：泄放电阻约 16000s vs 开关电容约 500s 收敛到 0.01V；温度 +20K 使均衡时间增加约 2.32%
+
+* 安全与失效模式
+- 被动均衡 MOSFET 击穿短路 → 电芯经电阻持续放电，需开关自检（开路/短路诊断）
+- 主动均衡功率级上下管直通即两颗电芯短路（千安级），必须有过流保护/保险丝兜底——这是主动均衡复杂度税的大头
+- 泄放电阻过热是热失控链上的一环：轮询泄放 + 温度保护关均衡
+- 均衡是改善一致性的手段，不是安全装置，其失效反而引入新风险——均衡回路要纳入自检和故障注入测试
+
+* 产品格局
+- TI：BQ769x2 系列只支持被动均衡（官方确认），主动方案需搭配 EMB1428Q 开关矩阵芯片
+- ADI：LTC3300-1/-2 同步反激主动均衡，每颗管 6 芯、共模 36V，可菊花链 32 颗；多变压器模式可同时均衡多芯，单变压器共享模式器件最少但一次只能均一颗；峰值电流由检流电阻设定（50mV 检测阈值），磁件有现成配套（Coilcraft MA5421）
+- MPS：MP264x 双向 buck-boost，每颗管相邻两芯，电流 0.5～2A 电阻可配，待机功耗极低，定位低成本中端（户储/备电/叉车）
+- 现状：被动均衡是车规与消费的量产主流，主动均衡主战场在储能与重载；国产 AFE 目前以被动为主
+
+* 参考
+- [[https://www.ti.com/lit/an/sluaa81a/sluaa81a.pdf][TI SLUAA81A: Cell Balancing With BQ769x2 Battery Monitors]]
+- [[https://media.monolithicpower.com/mps_cms_document/a/c/active-balancing-how-it-works-and-advantages_r1.0.pdf][MPS: Active Balancing — How It Works and Its Advantages (2024)]]
+- [[https://www.monolithicpower.cn/cn/documentview/productdocument/index/version/2/document_type/Datasheet/lang/en/sku/MP2643GR/document_id/12324/][MPS MP2643 数据手册]]
+- [[https://www.analog.com/media/en/technical-documentation/data-sheets/LTC3300-2.pdf][ADI LTC3300-2 数据手册]]
+- [[https://dgjsxb.ces-transaction.com/fileup/HTML/2024-13-4204.htm][郭向伟等：电池储能系统均衡方法研究综述（电工技术学报 2024）]]
+- [[http://mocha-java.uccs.edu/ECE5720/ECE5720-Notes05.pdf][UCCS ECE5720 课程笔记：Cell Balancing]]
+- [[https://iisb-foxbms.iisb.fraunhofer.de/foxbms/gen2/docs/html/v1.3.0/software/modules/application/bal/bal.html][foxBMS 2 文档：Balancing Module]]
+- [[https://www.mdpi.com/1996-1073/18/13/3321][MDPI Energies: A Comprehensive Review of Cell Balancing Techniques (2025)]]
+- [[https://doi.org/10.1109/tte.2024.3455767][IEEE TTE: Power Losses-Aware Active Cell Balancing Networks (2024)]]
+- [[https://wiki.batrium.com/en/balancing-algorithms][Batrium Wiki: Balancing Algorithms]]
