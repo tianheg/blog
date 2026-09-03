@@ -1,0 +1,52 @@
+#+TITLE: 机械革命 EC 充电限制寄存器
+#+DATE: 2026-09-03T08:17:05
+
+机械革命（同方代工）笔记本的 EC 里藏着原生充电限制功能：一个 7-bit 寄存器，写入目标百分比后，电池充到该值 EC 硬件自动停充。翼龙 15 Pro 实测有效（写 65% → 充到 65% 纹丝不动）。
+
+* CGLM 寄存器位置与语义
+
+地址是 EC 的 MMIO 窗口：0xFED50000 + 0x7B9，7-bit 值 0-100（bit7 是 EC 自置的状态标志，读回时可能被置位，值要 ~& 0x7F~ 取）。
+
+DSDT 证据：EC0 设备里定义 ~CGLM, 7~ 字段，且 BAT0 的 _BST（电池状态查询）显式引用——CGLM 在 1-99 之间时给电池状态强置 bit3（停充位），Windows 就认为电池满了：
+
+#+BEGIN_SRC
+If ((CGLM <= 0x63) && (CGLM >= One)) {
+    Local0 = XST0
+    Local0 |= 0x08    ; 强制停充状态
+    BFB0 [Zero] = Local0
+}
+#+END_SRC
+
+* 怎么发现的：DSDT 提取与反编译
+
+Windows 运行中的 DSDT 在注册表里，导出后反编译：
+
+1. 读 HKLM:\HARDWARE\ACPI\DSDT\ALASKA\A_M_I_\01072009 键的 00000000 二进制值，存成 .aml
+2. Linux 上 iasl -d dsdt.aml 反编译（apt install acpica-tools）
+3. 在 .dsl 里搜 EmbeddedControl / Battery / charge 相关字段
+
+同方系 EC 设计同源：无界 14X 的逆向资料（w568w gist）确认 0x07B9 是有效充电限制、0x0742[2] 是 enable gate、0x07C3 是状态值，与本机 DSDT 里被跳过的偏移吻合。
+
+* Windows 侧写入路径：内核驱动是硬门槛
+
+用户态禁止访问物理 MMIO，需要内核驱动。三条路的现实：
+
+- RWEverything / 老 WinRing0：驱动签名 2023 年起被微软批量吊销，Win11 加载报 0x800b010c（CERT_E_REVOKED）
+- LibreHardwareMonitor 新版已移除 Ring0（作者放弃这条路）
+- 自签驱动 + bcdedit /set testsigning on：可行
+
+WinRing0 源码在 OpenHardwareMonitor repo，编译时必须定义 ~_PHYSICAL_MEMORY_SUPPORT~ ，否则驱动只允许读写 0xC0000-0xFFFFF（ISA 区），到不了 EC 的 0xFED50000。工具链需要 VS Build Tools（MSVC）+ Windows SDK + WDK 26100（注意 WDK 必须用独立 wdksetup.exe 装，VS 组件通道在 BuildTools 环境不生效；版本要和 VS 匹配，VS2022 配 26100 而非 28000）。
+
+驱动加载后通过 IOCTL 读写（IOCTL_OLS_READ_MEMORY 0x841 / WRITE 0x842），用户态 C# DeviceIoControl 即可，不需要 WinRing0 的用户态 dll。
+
+* 实测结果
+
+写入 0x41（65%）后插电：电量从 61% 正常充到 65%，之后 3 分钟采样纹丝不动——EC 硬件停充生效。写回 0x00 解除限制恢复默认。
+
+* 安全警示（重要）
+
+测试签名模式 + 全物理内存读写驱动是高危组合：任何能打开驱动的进程都能读写任意物理内存（等于任意提权）。验证完机制后应完整 revert：停驱动服务、删自签证书（CurrentUser\My + LocalMachine\Root）、bcdedit /set testsigning off、EC 寄存器写回 0。不建议日常保留这套环境。
+
+* 参考
+- [[https://gist.github.com/w568w/957976b59906e0ce5d6c13ad342e1593][w568w: MECHREVO Wujie 14XA battery charging limit fix]]
+- [[https://github.com/OpenHardwareMonitor/OpenHardwareMonitor][OpenHardwareMonitor (含 WinRing0 源码)]]
