@@ -17,6 +17,11 @@
 
 - 手动拔插 + 带开关的排插：桌面固定使用时，用带独立开关的排插控制物理断电，避免频繁拔插 DC/Type-C 口导致焊点松动或脱焊
 - 第三方"充电限制"软件基本无效：充电截止由 EC/BIOS 硬件层控制，通用软件（如 Battery Limiter）只能在达到设定电量时发提醒让你手动拔，无法硬件层面阻断充电
+- 定期生成电池报告核查健康度：管理员 CMD 运行
+#+BEGIN_SRC
+powercfg /batteryreport /output "C:\battery-report.html"
+#+END_SRC
+浏览器打开生成的 HTML 报告，重点看 INSTALLED BATTERIES 区的 DESIGN CAPACITY（设计容量）与 FULL CHARGE CAPACITY（当前满充容量），后者跌到前者的 80% 以下说明电池已明显衰减；CYCLE COUNT 是完整循环次数。下方的容量历史和使用曲线还能验证充电上限是否真的生效——长期插电时满充电量曲线应稳定在设定上限，而不是持续顶到 100%
 
 * 散热与物理维护
 
