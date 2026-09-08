@@ -1,5 +1,5 @@
 #+TITLE: 笔记本保养——如何尽可能延长使用寿命
-#+STATUS: draft
+#+STATUS: reviewed
 #+HEADER: Consumption
 
 以机械革命翼龙 15 Pro 2026（AMD Ryzen 7 H 255 + RTX 5060 115W）这类高功耗密度性能本为例。寿命瓶颈集中在四个地方：高温衰减、供电模组老化、电池损耗、散热通道堵塞。笔记本寿命的四大杀手：高温、满电高压、深度放电、灰尘。
@@ -47,7 +47,6 @@ fsutil behavior query DisableDeleteNotify
 #+BEGIN_SRC
 fsutil behavior set DisableDeleteNotify 0
 #+END_SRC
-- 禁用休眠：Win11 默认休眠每次把内存数据完整写入 SSD，管理员 CMD 运行 =powercfg -h off= ，立即删除系统盘根目录的 hiberfil.sys，既省空间又大幅减少写入磨损
 - 保留余量：SSD 至少保留 15% - 20% 空闲空间，方便主控做垃圾回收（GC）和磨损均衡，防止写放大
 - 不要碎片整理：Win11 对 SSD 只执行 TRIM 优化（设置里搜"优化驱动器"确认优化类型为 TRIM），绝对不要手动对 SSD 做传统磁盘碎片整理
 - 迁移高频写入：浏览器缓存、下载目录等频繁写入的文件夹迁移到非系统盘
