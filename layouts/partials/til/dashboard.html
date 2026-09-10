@@ -13,14 +13,13 @@
 {{ range $tilPages }}
   {{ $sec := .CurrentSection }}
   {{ $t := $sec.Title }}
-  {{ $slug := index (split (strings.TrimPrefix "/til/" $sec.RelPermalink) "/") 0 }}
-  {{ $cur := index $catAgg $t | default (dict "count" 0 "slug" "") }}
-  {{ $catAgg = merge $catAgg (dict $t (dict "count" (add $cur.count 1) "slug" $slug)) }}
+  {{ $cur := index $catAgg $t | default (dict "count" 0 "url" "") }}
+  {{ $catAgg = merge $catAgg (dict $t (dict "count" (add $cur.count 1) "url" $sec.RelPermalink)) }}
 {{ end }}
 
 {{ $sortedCats := slice }}
 {{ range $t, $v := $catAgg }}
-  {{ $sortedCats = $sortedCats | append (dict "name" $t "count" $v.count "slug" $v.slug) }}
+  {{ $sortedCats = $sortedCats | append (dict "name" $t "count" $v.count "url" $v.url) }}
 {{ end }}
 {{ $sortedCats = sort $sortedCats "count" "desc" }}
 
@@ -47,14 +46,15 @@
   <h3 class="text-xs font-medium text-gray-400 dark:text-gray-500 uppercase tracking-wider mb-3">分类分布</h3>
   <div class="space-y-2">
     {{ range $sortedCats }}
-    <div class="flex items-center gap-3">
-      <span class="text-xs text-gray-600 dark:text-gray-400 w-28 shrink-0 truncate" title="{{ .name }}">{{ .name }}</span>
+    <a href="{{ .url }}"
+       class="group flex items-center gap-3 rounded-md -mx-2 px-2 py-1 transition-colors hover:bg-gray-50 dark:hover:bg-gray-800/40">
+      <span class="text-xs text-gray-600 dark:text-gray-400 w-28 shrink-0 truncate group-hover:text-emerald-600 dark:group-hover:text-emerald-400 transition-colors" title="{{ .name }}">{{ .name }}</span>
       <div class="flex-1 h-5 bg-gray-100 dark:bg-gray-800 rounded-sm overflow-hidden">
         {{ $pct := 0 }}{{ if gt $maxCount 0 }}{{ $pct = div (mul .count 100) $maxCount }}{{ end }}
         <div class="h-full bg-emerald-400/60 dark:bg-emerald-600/40 rounded-sm" style="width: {{ $pct }}%"></div>
       </div>
       <span class="text-xs text-gray-400 dark:text-gray-500 w-10 text-right shrink-0 tabular-nums">{{ .count }}</span>
-    </div>
+    </a>
     {{ end }}
   </div>
 </div>
