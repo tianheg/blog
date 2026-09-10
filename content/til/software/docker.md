@@ -49,7 +49,7 @@ header: DevOps
    参考资料
 
 1. [Compose V2 | Docker Documentation](https://docs.docker.com/compose/cli-command/#install-on-linux)
-2. [[[https://github.com/docker/docker-ce-packaging/pull/553#issuecomment-906294789]([[https://github.com/docker/docker-ce-packaging/pull/553#issuecomment-906294789)][[master] add docker-compose-plugin package (deb, rpm) by thaJeztah · Pull Request #553 · docker/docker-ce-packaging]]
+2. [https://github.com/docker/docker-ce-packaging/pull/553#issuecomment-906294789](https://github.com/docker/docker-ce-packaging/pull/553#issuecomment-906294789)[[master] add docker-compose-plugin package (deb, rpm) by thaJeztah · Pull Request #553 · docker/docker-ce-packaging]]
 
 ### 配置
 #### non-root 执行命令[^1]

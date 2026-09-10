@@ -97,7 +97,7 @@ header: Programming
   - [BrowserStack](https://www.browserstack.com/)
   - [Intern](https://theintern.io/)
   - [Istanbul](https://gotwarlost.github.io/istanbul)
-  - [[[https://sinonjs.org/]([[https://sinonjs.org/)][Sinon.JS - Standalone test fakes, spies, stubs and mocks for JavaScript. Works with any unit testing framework.]]
+  - [Sinon.JS - Standalone test fakes, spies, stubs and mocks for JavaScript. Works with any unit testing framework.](https://sinonjs.org/)
   - [Dexter JS](https://github.com/leobalter/DexterJS)
   - [ava](https://github.com/avajs/ava)
   - [Jest](https://github.com/facebook/jest)
@@ -741,7 +741,7 @@ AI-Assisted Isomorphic Application Engine
 
    了解这个问题，并了解操作系统是如何通过多路复用的技术来解决这个问题的，有助于你了解各种 I/O 和异步模型，这对于你未来的编程和架构能力是相当重要的。
 
-   另外，现在，整个世界都在解决 C10M 问题，推荐看看 [[[http://highscalability.com/blog/2013/5/13/the-secret-to-10-million-concurrent-connections-the-kernel-i.html]([[http://highscalability.com/blog/2013/5/13/the-secret-to-10-million-concurrent-connections-the-kernel-i.html)][The Secret To 10 Million Concurrent Connections -The Kernel Is The Problem, Not The Solution]] 一文。
+   另外，现在，整个世界都在解决 C10M 问题，推荐看看 [The Secret To 10 Million Concurrent Connections -The Kernel Is The Problem, Not The Solution](http://highscalability.com/blog/2013/5/13/the-secret-to-10-million-concurrent-connections-the-kernel-i.html) 一文。
 
 3. 实践项目
 
@@ -793,8 +793,8 @@ AI-Assisted Isomorphic Application Engine
    其他内容：
 
 - [Programming paradigm](https://en.wikipedia.org/wiki/Programming_paradigm)
-- [[[https://www.ybrikman.com/writing/2014/04/09/six-programming-paradigms-that-will/]([[https://www.ybrikman.com/writing/2014/04/09/six-programming-paradigms-that-will/)][Six programming paradigms that will change how you think about coding]]，这篇文章讲了默认支持并发（Concurrent by default）、依赖类型（Dependent types）、连接性语言（Concatenative languages）、声明式编程（Declarative programming）、符号式编程（Symbolic programming）、基于知识的编程（Knowledge-based programming）等六种不太常见的编程范式
-- [[[https://www.info.ucl.ac.be/~pvr/VanRoyChapter.pdf]([[https://www.info.ucl.ac.be/~pvr/VanRoyChapter.pdf)][Programming Paradigms for Dummies: What Every Programmer Should Know]]，这篇文章的作者彼得·范·罗伊（Peter Van Roy）是比利时鲁汶大学的计算机科学教师。他在这篇文章里分析了编程语言在历史上的演进，有哪些典型的、值得研究的案例，里面体现了哪些值得学习的范式
+- [Six programming paradigms that will change how you think about coding](https://www.ybrikman.com/writing/2014/04/09/six-programming-paradigms-that-will/)，这篇文章讲了默认支持并发（Concurrent by default）、依赖类型（Dependent types）、连接性语言（Concatenative languages）、声明式编程（Declarative programming）、符号式编程（Symbolic programming）、基于知识的编程（Knowledge-based programming）等六种不太常见的编程范式
+- [Programming Paradigms for Dummies: What Every Programmer Should Know](https://www.info.ucl.ac.be/~pvr/VanRoyChapter.pdf)，这篇文章的作者彼得·范·罗伊（Peter Van Roy）是比利时鲁汶大学的计算机科学教师。他在这篇文章里分析了编程语言在历史上的演进，有哪些典型的、值得研究的案例，里面体现了哪些值得学习的范式
 - 斯坦福大学公开课：编程范式，这是一门比较基础且很详细的课程，适合学习编程语言的初学者。它通过讲述 C、C++、并发编程、Scheme、Python 这 5 门语言，介绍了它们各自不同的编程范式。以 C 语言为例，它解释了 C 语言的基本要素，如指针、内存分配、堆、C 风格的字符串等，并解释了为什么 C 语言会在泛型编程、多态等方面有局限性
 
 2. 一些软件设计的相关原则
@@ -812,8 +812,8 @@ AI-Assisted Isomorphic Application Engine
     - DIP（Dependency Inversion Principle）- 依赖倒置原则
   - [Common Closure Principle(CCP) - 共同封闭原则](https://wiki.c2.com/?CommonClosurePrinciple)
   - [Common Reuse Principle(CRP) - 共同重用原则](https://wiki.c2.com/?CommonReusePrinciple)
-  - [[[https://en.wikipedia.org/wiki/Inversion_of_control]([[https://en.wikipedia.org/wiki/Inversion_of_control)][Inversion of Control (IoC)]]，[Inversion of Control Containers and the Dependency Injection pattern](https://martinfowler.com/articles/injection.html)
-  - [[[https://medium.com/clarityhub/low-coupling-high-cohesion-3610e35ac4a6]([[https://medium.com/clarityhub/low-coupling-high-cohesion-3610e35ac4a6)][Low Coupling, High Cohesion]]，[Cohesion and Coupling](http://www.math-cs.gordon.edu/courses/cs211/lectures-2009/Cohesion,Coupling,MVC.pdf)
+  - [Inversion of Control (IoC)](https://en.wikipedia.org/wiki/Inversion_of_control)，[Inversion of Control Containers and the Dependency Injection pattern](https://martinfowler.com/articles/injection.html)
+  - [Low Coupling, High Cohesion](https://medium.com/clarityhub/low-coupling-high-cohesion-3610e35ac4a6)，[Cohesion and Coupling](http://www.math-cs.gordon.edu/courses/cs211/lectures-2009/Cohesion,Coupling,MVC.pdf)
   - [Convention over configuration - 惯例优于配置原则](https://en.wikipedia.org/wiki/Convention_over_configuration)
   - [Separation of Concerns(SoC) - 关注点分离](https://web.archive.org/web/20110903221739/http://sulong.me:80/archives/99)
   - [Design by contract (DbC) - 契约式设计](https://en.wikipedia.org/wiki/Design_by_contract)
@@ -835,8 +835,8 @@ AI-Assisted Isomorphic Application Engine
     - [Microsoft REST API Guidelines](https://github.com/Microsoft/api-guidelines/blob/vNext/Guidelines.md)
     - [IBM Watson REST API Guidelines](https://github.com/watson-developer-cloud/api-guidelines)
     - [Zalando RESTful API and Event Guidelines](https://opensource.zalando.com/restful-api-guidelines/)
-  - [[[https://blog.codinghorror.com/the-problem-with-logging/]([[https://blog.codinghorror.com/the-problem-with-logging/)][The Problem With Logging]]，一篇关于程序打日志的短文，可以让你知道一些可能以往不知道的打日志需要注意的问题
-  - [[[https://berb.github.io/diploma-thesis/community/index.html]([[https://berb.github.io/diploma-thesis/community/index.html)][Concurrent Programming for Scalable Web Architectures]]，这是一本在线的免费书，教你如何架构一个可扩展的高性能的网站。其中谈到了一些不错的设计方法和知识
+  - [The Problem With Logging](https://blog.codinghorror.com/the-problem-with-logging/)，一篇关于程序打日志的短文，可以让你知道一些可能以往不知道的打日志需要注意的问题
+  - [Concurrent Programming for Scalable Web Architectures](https://berb.github.io/diploma-thesis/community/index.html)，这是一本在线的免费书，教你如何架构一个可扩展的高性能的网站。其中谈到了一些不错的设计方法和知识
 
 #### 之后就是术业专攻了
 - 底层方向：操作系统、文件系统、数据库、网络......
@@ -954,8 +954,8 @@ AI-Assisted Isomorphic Application Engine
     - [RFC 7540 - Hypertext Transfer Protocol Version 2 (HTTP/2)](https://httpwg.org/specs/rfc7540.html)，HTTP/2 的协议本身
     - [RFC 7541 - HPACK: Header Compression for HTTP/2](https://httpwg.org/specs/rfc7541.html)，HTTP/2 的压缩算法
 - 新的 HTML5 支持 [WebSocket](https://en.wikipedia.org/wiki/WebSocket)
-  - [[[https://web.archive.org/web/20200501012012/http://www.websocket.org/quantum.html]([[https://web.archive.org/web/20200501012012/http://www.websocket.org/quantum.html)][HTML5 WebSocket: A Quantum Leap in Scalability for the Web]]，这篇文章比较了 HTTP 的几种链接方式，Polling、Long Polling 和 Streaming，并引入了终级解决方案 WebSocket
-  - [[[https://stackoverflow.com/q/12555043]([[https://stackoverflow.com/q/12555043)][Stack Overflow: My Understanding of HTTP Polling, Long Polling, HTTP Streaming and WebSockets]]
+  - [HTML5 WebSocket: A Quantum Leap in Scalability for the Web](https://web.archive.org/web/20200501012012/http://www.websocket.org/quantum.html)，这篇文章比较了 HTTP 的几种链接方式，Polling、Long Polling 和 Streaming，并引入了终级解决方案 WebSocket
+  - [Stack Overflow: My Understanding of HTTP Polling, Long Polling, HTTP Streaming and WebSockets](https://stackoverflow.com/q/12555043)
   - [WebSocket Basics: An Introduction](https://blog.teamtreehouse.com/an-introduction-to-websockets)，一个 WebSocket 的简单教程
   - [Awesome WebSockets](https://github.com/facundofarias/awesome-websockets)
   - 一些和 WebSocket 相关的想法
@@ -1032,7 +1032,7 @@ AI-Assisted Isomorphic Application Engine
 - **函数式编程**
   - [Professor Frisby's Mostly Adequate Guide to Functional Programming](https://github.com/MostlyAdequate/mostly-adequate-guide) [中文版](https://jigsawye.gitbooks.io/mostly-adequate-guide/content/)
   - [Master the JavaScript Interview: What is Functional Programming?](https://medium.com/javascript-scene/master-the-javascript-interview-what-is-functional-programming-7f218c68b3a0)
-  - [[[https://medium.com/javascript-scene/the-rise-and-fall-and-rise-of-functional-programming-composable-software-c2d91b424c8c]([[https://medium.com/javascript-scene/the-rise-and-fall-and-rise-of-functional-programming-composable-software-c2d91b424c8c)][The Rise and Fall and Rise of Functional Programming (Composing Software)]]
+  - [The Rise and Fall and Rise of Functional Programming (Composing Software)](https://medium.com/javascript-scene/the-rise-and-fall-and-rise-of-functional-programming-composable-software-c2d91b424c8c)
   - [Functional UI and Components as Higher Order Functions](https://blog.risingstack.com/functional-ui-and-components-as-higher-order-functions/)
   - [Functional JavaScript Reverse-engineering the Hype](https://banderson.github.io/functional-js-reverse-engineering-the-hype/)
   - [Some Thoughts on Function Components in React](https://medium.com/javascript-inside/some-thoughts-on-function-components-in-react-cb2938686bc7)
@@ -1043,7 +1043,7 @@ AI-Assisted Isomorphic Application Engine
   - [Controlled and uncontrolled form inputs in React don't have to be complicated](https://goshacmd.com/controlled-vs-uncontrolled-inputs-react/)
   - [Function as Child Components](https://medium.com/merrickchristensen/function-as-child-components-5f3920a9ace9)
   - [Writing Scalable React Apps with the Component Folder Pattern](https://medium.com/styled-components/component-folder-pattern-ee42df37ec68)
-  - [[[https://www.freecodecamp.org/news/reusable-web-application-strategies-d51517ea68c8/]([[https://www.freecodecamp.org/news/reusable-web-application-strategies-d51517ea68c8/)][Reusable Web Application Strategies: three patterns for running the same app in multiple spots]]
+  - [Reusable Web Application Strategies: three patterns for running the same app in multiple spots](https://www.freecodecamp.org/news/reusable-web-application-strategies-d51517ea68c8/)
   - [Characteristics of an Ideal React Architecture](https://medium.com/@robftw/characteristics-of-an-ideal-react-architecture-883b9b92be0b)
 - **实践和经验**
   - [9 things every React.js beginner should know](https://camjackson.net/post/9-things-every-reactjs-beginner-should-know)
@@ -1171,7 +1171,7 @@ AI-Assisted Isomorphic Application Engine
 #### 如何读
 - [How to Read an Academic Article](https://organizationsandmarkets.com/2010/08/31/how-to-read-an-academic-article/)
 - [Advice on Reading Academic Papers](https://www.cc.gatech.edu/~akmassey/posts/2012-02-15-advice-on-reading-academic-papers.html)
-- [[[https://violentmetaphors.com/2013/08/25/how-to-read-and-understand-a-scientific-paper-2/]([[https://violentmetaphors.com/2013/08/25/how-to-read-and-understand-a-scientific-paper-2/)][How to read and understand a scientific paper: a guide for non-scientists]]
+- [How to read and understand a scientific paper: a guide for non-scientists](https://violentmetaphors.com/2013/08/25/how-to-read-and-understand-a-scientific-paper-2/)
 - [Should I read papers?](https://michaelrbernste.in/2014/10/21/should-i-read-papers.html)
 - [The Refreshingly Rewarding Realm of Research Papers](https://www.youtube.com/watch?v=8eRx5Wo3xYA)
 
@@ -1370,7 +1370,7 @@ AI-Assisted Isomorphic Application Engine
 - 内存管理方面的 lib 库
   - [ptmalloc](http://www.malloc.de/en/) 是 glibc 的内存分配管理
   - [gperftools](https://github.com/gperftools/gperftools) 是 Google 的内存分配管理模块，全称是 Thread-Caching malloc，基本上来说比 glibc 的 ptmalloc 快两倍以上
-  - [jemalloc](http://jemalloc.net/) 是 BSD 提供的内存分配管理。其论文为 [[[https://people.freebsd.org/~jasone/jemalloc/bsdcan2006/jemalloc.pdf]([[https://people.freebsd.org/~jasone/jemalloc/bsdcan2006/jemalloc.pdf)][A Scalable Concurrent malloc(3) Implementation for FreeBSD]]，这是一个可以并行处理的内存分配管理器
+  - [jemalloc](http://jemalloc.net/) 是 BSD 提供的内存分配管理。其论文为 [A Scalable Concurrent malloc(3) Implementation for FreeBSD](https://people.freebsd.org/~jasone/jemalloc/bsdcan2006/jemalloc.pdf)，这是一个可以并行处理的内存分配管理器
   - [关于 C 的这些内存分配器](https://en.wikipedia.org/wiki/C_dynamic_memory_allocation#Thread-caching_malloc_(tcmalloc))
   - 上面那三种内存分配器的一些比较和工程实践
     - [ptmalloc,tcmalloc 和 jemalloc 内存分配策略研究](https://owent.net/2013/867.html)
@@ -1478,7 +1478,7 @@ Java 相关的 I/O 模型的文章：[Thousands of Threads and Blocking I/O](htt
 
 - [Understanding Reactor Pattern: Thread-Based and Event-Driven](https://dzone.com/articles/understanding-reactor-pattern-thread-based-and-eve)
 - [The Design and Implementation of the Reactor](https://www.dre.vanderbilt.edu/~schmidt/PDF/Reactor2-93.pdf)
-- [[[http://highscalability.com/blog/2013/5/13/the-secret-to-10-million-concurrent-connections-the-kernel-i.html]([[http://highscalability.com/blog/2013/5/13/the-secret-to-10-million-concurrent-connections-the-kernel-i.html)][The Secret To 10 Million Concurrent Connections -The Kernel Is The Problem, Not The Solution]]
+- [The Secret To 10 Million Concurrent Connections -The Kernel Is The Problem, Not The Solution](http://highscalability.com/blog/2013/5/13/the-secret-to-10-million-concurrent-connections-the-kernel-i.html)
 - [Select is fundamentally broken](https://idea.popcount.org/2017-01-06-select-is-fundamentally-broken/)
 - [Epoll is fundamentally broken 1/2](https://idea.popcount.org/2017-02-20-epoll-is-fundamentally-broken-12/)
 - [Epoll is fundamentally broken 2/2](https://idea.popcount.org/2017-03-20-epoll-is-fundamentally-broken-22/)
@@ -1491,14 +1491,14 @@ Lock-Free - 无锁技术越来越被开发人员重视，因为锁对于性能�
 - [Lock-Free Data Structures](https://www.drdobbs.com/lock-free-data-structures/184401865)
 - [Lock-Free Data Structures](https://erdani.com/publications/cuj-2004-10.pdf)
 
-然后强烈推荐一本免费的电子书：[[[https://mirrors.edge.kernel.org/pub/linux/kernel/people/paulmck/perfbook/perfbook.html]([[https://mirrors.edge.kernel.org/pub/linux/kernel/people/paulmck/perfbook/perfbook.html)][Is Parallel Programming Hard, And, If So, What Can You Do About It?]]，这是大牛 保罗·麦肯尼（[Paul E. McKenney](https://www.linkedin.com/in/paulmckenney/)） 写的书。这本书堪称并行编程的经典书，必看。
+然后强烈推荐一本免费的电子书：[Is Parallel Programming Hard, And, If So, What Can You Do About It?](https://mirrors.edge.kernel.org/pub/linux/kernel/people/paulmck/perfbook/perfbook.html)，这是大牛 保罗·麦肯尼（[Paul E. McKenney](https://www.linkedin.com/in/paulmckenney/)） 写的书。这本书堪称并行编程的经典书，必看。
 
 此时，Wikipedia 上有三个词条你要看一下，以此了解并发编程中的一些概念：[Non-blocking algorithm](https://en.wikipedia.org/wiki/Non-blocking_algorithm)、[Read-copy-update](https://en.wikipedia.org/wiki/Read-copy-update) 和 [Seqlock](https://en.wikipedia.org/wiki/Seqlock)。
 
 接下来，读一下以下两篇论文。
 
 - [Implementing Lock-Free Queues](https://citeseerx.ist.psu.edu/viewdoc/download?doi=10.1.1.53.8674&rep=rep1&type=pdf) [无锁队列的实现](https://coolshell.cn/articles/8239.html)
-- [[[https://www.cs.rochester.edu/~scott/papers/1996_PODC_queues.pdf]([[https://www.cs.rochester.edu/~scott/papers/1996_PODC_queues.pdf)][Simple, Fast, and Practical Non-Blocking and Blocking Concurrent Queue Algorithms]]，这篇论文给出了一个无阻塞和阻塞的并发队列算法
+- [Simple, Fast, and Practical Non-Blocking and Blocking Concurrent Queue Algorithms](https://www.cs.rochester.edu/~scott/papers/1996_PODC_queues.pdf)，这篇论文给出了一个无阻塞和阻塞的并发队列算法
 
 博客订阅：
 
@@ -1527,14 +1527,14 @@ Lock-Free - 无锁技术越来越被开发人员重视，因为锁对于性能�
 - [What Scalable Programs Need from Transactional Memory](https://dl.acm.org/doi/10.1145/3093336.3037750)
 - [Improving OpenSSL Performance](https://www.intel.com/content/dam/develop/external/us/en/documents/open-ssl-performance-paper-393156.pdf)
 - 关于压缩的内容
-  - [[[https://tech.ebayinc.com/engineering/how-ebays-shopping-cart-used-compression-techniques-to-solve-network-io-bottlenecks/]([[https://tech.ebayinc.com/engineering/how-ebays-shopping-cart-used-compression-techniques-to-solve-network-io-bottlenecks/)][How eBay's Shopping Cart used compression techniques to solve network I/O bottlenecks]]
+  - [How eBay's Shopping Cart used compression techniques to solve network I/O bottlenecks](https://tech.ebayinc.com/engineering/how-ebays-shopping-cart-used-compression-techniques-to-solve-network-io-bottlenecks/)
   - [Boosting Site Speed Using Brotli Compression](https://engineering.linkedin.com/blog/2017/05/boosting-site-speed-using-brotli-compression)，LinkedIn 在 2017 年早些时候开始使用 Brotli 来替换 gzip，以此带来更快的访问，这篇文章讲述了什么是 [Brotli](https://en.wikipedia.org/wiki/Brotli) 以及与其它压缩程序的比较和所带来的性能提升
 - 有两篇关于 SSD 硬盘性能测试的文章。Performance Testing with SSDs, Part 1 和 Performance Testing with SSDs Part 2，这两篇文章介绍了测试 SSD 硬盘性能以及相关的操作系统调优方法。
 - [Secure Programming HOWTO - Creating Secure Software](https://dwheeler.com/secure-programs/)
 
 #### 相关论文
 - [Hints for Computer System Design](https://www.microsoft.com/en-us/research/wp-content/uploads/2016/02/acrobat-17.pdf)，计算机设计的忠告，这是 ACM 图灵奖得主 Butler Lampson 在 Xerox PARC 工作时的一篇论文。这篇论文简明扼要地总结了他在做系统设计时的一些想法，非常值得一读。（用他的话来说，"Studying the design and implementation of a number of computer has led to some general hints for system design. They are described here and illustrated by many examples, ranging from hardware such as the Alto and the Dorado to application programs such as Bravo and Star"。）
-- [[[https://www.hpl.hp.com/techreports/tandem/TR-86.1.pdf]([[https://www.hpl.hp.com/techreports/tandem/TR-86.1.pdf)][The 5 minute rule for trading memory for disc accesses and the 5 byte rule for trading memory for CPU time]]，根据文章名称也可以看出，5 分钟法则是用来衡量内存与磁盘的，而 5 字节法则则是在内存和 CPU 之间的权衡。这两个法则是 Jim Gray 和 Franco Putzolu 在 1986 年的文章。 在该论文发表 10 年后的 1997 年，Jim Gray 和 Goetz Graefe 又在 [[[https://jimgray.azurewebsites.net/5_min_rule_sigmod.pdf]([[https://jimgray.azurewebsites.net/5_min_rule_sigmod.pdf)][The Five-Minute Rule Ten Years Later and Other Computer Storage Rules of Thumb]] 中对该法则进行了重新审视。2007 年，也就是该论文发表 20 年后，这年的 1 月 28 日，Jim Gray 驾驶一艘 40 英尺长的船从旧金山港出海，目的是航行到附近的费拉隆岛，在那里撒下母亲的骨灰。出海之后，他就同朋友和亲属失去了联系。为了纪念和向大师致敬，时隔 10 多年后的 2009 年 Goetz Graefe 又发表了 [The Five-Minute Rule 20 Years Later](https://cacm.acm.org/magazines/2009/7/32091-the-five-minute-rule-20-years-later/fulltext) (and How Falsh Memory Changes the Rules)。 注明一下，Jim Gray 是关系型数据库领域的大师。因在数据库和事务处理研究和实现方面的开创性贡献而获得 1998 年图灵奖。美国科学院、工程院两院院士，ACM 和 IEEE 两会会士。他 25 岁成为加州大学伯克利分校计算机科学学院第一位博士。在 IBM 工作期间参与和主持了 IMS、System R、SQL／DS、DB2 等项目的开发。后任职于微软研究院，主要关注应用数据库技术来处理各学科的海量信息。
+- [The 5 minute rule for trading memory for disc accesses and the 5 byte rule for trading memory for CPU time](https://www.hpl.hp.com/techreports/tandem/TR-86.1.pdf)，根据文章名称也可以看出，5 分钟法则是用来衡量内存与磁盘的，而 5 字节法则则是在内存和 CPU 之间的权衡。这两个法则是 Jim Gray 和 Franco Putzolu 在 1986 年的文章。 在该论文发表 10 年后的 1997 年，Jim Gray 和 Goetz Graefe 又在 [The Five-Minute Rule Ten Years Later and Other Computer Storage Rules of Thumb](https://jimgray.azurewebsites.net/5_min_rule_sigmod.pdf) 中对该法则进行了重新审视。2007 年，也就是该论文发表 20 年后，这年的 1 月 28 日，Jim Gray 驾驶一艘 40 英尺长的船从旧金山港出海，目的是航行到附近的费拉隆岛，在那里撒下母亲的骨灰。出海之后，他就同朋友和亲属失去了联系。为了纪念和向大师致敬，时隔 10 多年后的 2009 年 Goetz Graefe 又发表了 [The Five-Minute Rule 20 Years Later](https://cacm.acm.org/magazines/2009/7/32091-the-five-minute-rule-20-years-later/fulltext) (and How Falsh Memory Changes the Rules)。 注明一下，Jim Gray 是关系型数据库领域的大师。因在数据库和事务处理研究和实现方面的开创性贡献而获得 1998 年图灵奖。美国科学院、工程院两院院士，ACM 和 IEEE 两会会士。他 25 岁成为加州大学伯克利分校计算机科学学院第一位博士。在 IBM 工作期间参与和主持了 IMS、System R、SQL／DS、DB2 等项目的开发。后任职于微软研究院，主要关注应用数据库技术来处理各学科的海量信息。
 
 ### Java 底层知识
 #### Java 字节码相关
@@ -1549,7 +1549,7 @@ Lock-Free - 无锁技术越来越被开发人员重视，因为锁对于性能�
 
 #### JVM 相关
 - 阅读说明书：[The Java® Virtual Machine Specification Java SE 8 Edition](https://docs.oracle.com/javase/specs/jvms/se8/jvms8.pdf)
-- [[[https://github.com/waylau/java-virtual-machine-specification]([[https://github.com/waylau/java-virtual-machine-specification)][The Java® Virtual Machine Specification.《Java 虚拟机规范（第 11 版）》中文翻译及示例]]
+- [The Java® Virtual Machine Specification.《Java 虚拟机规范（第 11 版）》中文翻译及示例](https://github.com/waylau/java-virtual-machine-specification)
 - [JVM Anatomy Quarks](https://shipilev.net/jvm/anatomy-quarks/)
 - [Java 的内存模型](https://www.jcp.org/en/jsr/detail?id=133)
 - [The Java Memory Model](http://www.cs.umd.edu/~pugh/java/memoryModel/)
@@ -1610,7 +1610,7 @@ MySQL 有两个比较有名的分支，一个是 Percona，另一个是 MariaDB�
 
 - [Booking.com: Evolution of MySQL System Design](https://silo.tips/download/bookingcom-evolution-of-mysql-system-design-nicolai-plum)，Booking.com 的 MySQL 数据库使用的演化，其中有很多不错的经验分享，我相信也是很多公司会遇到的的问题
 - [Tracking the Money - Scaling Financial Reporting at Airbnb](https://medium.com/airbnb-engineering/tracking-the-money-scaling-financial-reporting-at-airbnb-6d742b80f040)，Airbnb 的数据库扩展的经验分享
-- [[[https://eng.uber.com/postgres-to-mysql-migration/]([[https://eng.uber.com/postgres-to-mysql-migration/)][Why Uber Engineering Switched from Postgres to MySQL]]，无意比较两个数据库谁好谁不好，推荐这篇 Uber 的长文，主要是想让你从中学习到一些经验和技术细节，这是一篇很不错的文章
+- [Why Uber Engineering Switched from Postgres to MySQL](https://eng.uber.com/postgres-to-mysql-migration/)，无意比较两个数据库谁好谁不好，推荐这篇 Uber 的长文，主要是想让你从中学习到一些经验和技术细节，这是一篇很不错的文章
 
 关于 MySQL 的集群复制，下面有这些文章供你学习一下，都是很不错的实践性比较强的文章。
 
@@ -1633,7 +1633,7 @@ MySQL 有两个比较有名的分支，一个是 Percona，另一个是 MariaDB�
 然后，再看看各个公司做 MySQL Sharding 的一些经验分享。
 
 - MailChimp: Using Shards to Accommodate Millions of Users
-- [[[https://eng.uber.com/schemaless-rewrite/]([[https://eng.uber.com/schemaless-rewrite/)][Uber: Code Migration in Production: Rewriting the Sharding Layer of Uber's Schemaless Datastore]]
+- [Uber: Code Migration in Production: Rewriting the Sharding Layer of Uber's Schemaless Datastore](https://eng.uber.com/schemaless-rewrite/)
 - [Sharding & IDs at Instagram](https://instagram-engineering.com/sharding-ids-at-instagram-1cf5a71e5a5c)
 - [Airbnb: How We Partitioned Airbnb's Main Database in Two Weeks](https://medium.com/airbnb-engineering/how-we-partitioned-airbnb-s-main-database-in-two-weeks-55f7e006ff21)
 
@@ -1641,9 +1641,9 @@ MySQL 有两个比较有名的分支，一个是 Percona，另一个是 MariaDB�
 关于 NoSQL 数据库，其最初目的就是解决大数据的问题。然而，也有人把其直接用来替换掉关系型数据库。所以在学习这个技术之前，我们需要对这个技术的一些概念和初衷有一定的了解。下面是一些推荐资料。
 
 - Martin Fowler 在 YouTube 上分享的 NoSQL 介绍 [Introduction To NoSQL](https://www.youtube.com/watch?v=qI_g07C_Q5I)， 以及他参与编写的 NoSQL Distilled - NoSQL 精粹，这本书才 100 多页，是本难得的关于 NoSQL 的书，很不错，非常易读。
-- [[[https://medium.baqend.com/nosql-databases-a-survey-and-decision-guidance-ea7823a822d#.nhzop4d23]([[https://medium.baqend.com/nosql-databases-a-survey-and-decision-guidance-ea7823a822d#.nhzop4d23)][NoSQL Databases: a Survey and Decision Guidance]]，这篇文章可以带你自上而下地从 CAP 原理到开始了解 NoSQL 的种种技术，是一篇非常不错的文章。
-- [[[https://web.archive.org/web/20160313152316/https://resources.sei.cmu.edu/asset_files/WhitePaper/2014_019_001_90915.pdf]([[https://web.archive.org/web/20160313152316/https://resources.sei.cmu.edu/asset_files/WhitePaper/2014_019_001_90915.pdf)][Distribution, Data, Deployment: Software Architecture Convergence in Big Data Systems]]，这是卡内基·梅隆大学的一篇讲分布式大数据系统的论文。其中主要讨论了在大数据时代下的软件工程中的一些关键点，也说到了 NoSQL 数据库。
-- [[[http://ianvarley.com/UT/MR/Varley_MastersReport_Full_2009-08-07.pdf]([[http://ianvarley.com/UT/MR/Varley_MastersReport_Full_2009-08-07.pdf)][No Relation: The Mixed Blessings of Non-Relational Databases]]，这篇论文虽然有点年代久远。但这篇论文是 HBase 的基础，你花上一点时间来读读，就可以了解到，对各种非关系型数据存储优缺点的一个很好的比较。
+- [NoSQL Databases: a Survey and Decision Guidance](https://medium.baqend.com/nosql-databases-a-survey-and-decision-guidance-ea7823a822d#.nhzop4d23)，这篇文章可以带你自上而下地从 CAP 原理到开始了解 NoSQL 的种种技术，是一篇非常不错的文章。
+- [Distribution, Data, Deployment: Software Architecture Convergence in Big Data Systems](https://web.archive.org/web/20160313152316/https://resources.sei.cmu.edu/asset_files/WhitePaper/2014_019_001_90915.pdf)，这是卡内基·梅隆大学的一篇讲分布式大数据系统的论文。其中主要讨论了在大数据时代下的软件工程中的一些关键点，也说到了 NoSQL 数据库。
+- [No Relation: The Mixed Blessings of Non-Relational Databases](http://ianvarley.com/UT/MR/Varley_MastersReport_Full_2009-08-07.pdf)，这篇论文虽然有点年代久远。但这篇论文是 HBase 的基础，你花上一点时间来读读，就可以了解到，对各种非关系型数据存储优缺点的一个很好的比较。
 - [NoSQL Data Modeling Techniques](https://highlyscalable.wordpress.com/2012/03/01/nosql-data-modeling-techniques/)，NoSQL 建模技术。
   - [MongoDB - Data Modeling Introduction](https://docs.mongodb.com/manual/core/data-modeling-introduction/)，虽然这是 MongoDB 的数据建模介绍，但是其很多观点可以用于其它的 NoSQL 数据库。
   - [Firebase - Structure Your Database](https://firebase.google.com/docs/database/android/structure-data)，Google 的 Firebase 数据库使用 JSON 建模的一些最佳实践。
@@ -1666,7 +1666,7 @@ MySQL 有两个比较有名的分支，一个是 Percona，另一个是 MariaDB�
     - [Yelp: How We Scaled Our Ad Analytics with Apache Cassandra](https://engineeringblog.yelp.com/2016/08/how-we-scaled-our-ad-analytics-with-cassandra.html)，Yelp 的这篇博客也有一些相关的经验和教训。
     - [Discord: How Discord Stores Billions of Messages](https://blog.discord.com/how-discord-stores-billions-of-messages-7fa6ec7ee4c7)，Discord 公司分享的一个如何存储十亿级消息的技术文章。
     - [Cassandra at Instagram](https://www.slideshare.net/DataStax/cassandra-at-instagram-2016)，Instagram 的一个 PPT，其中介绍了 Instagram 中是怎么使用 Cassandra 的。
-    - [[[https://netflixtechblog.com/benchmarking-cassandra-scalability-on-aws-over-a-million-writes-per-second-39f45f066c9e]([[https://netflixtechblog.com/benchmarking-cassandra-scalability-on-aws-over-a-million-writes-per-second-39f45f066c9e)][Netflix: Benchmarking Cassandra Scalability on AWS --- Over a million writes per second]]，Netflix 公司在 AWS 上给 Cassandra 做的一个 Benchmark。
+    - [Netflix: Benchmarking Cassandra Scalability on AWS --- Over a million writes per second](https://netflixtechblog.com/benchmarking-cassandra-scalability-on-aws-over-a-million-writes-per-second-39f45f066c9e)，Netflix 公司在 AWS 上给 Cassandra 做的一个 Benchmark。
   - HBase 相关
     - [Imgur Notifications: From MySQL to HBase](https://medium.com/imgur-engineering/imgur-notifications-from-mysql-to-hbase-9dba6fc44183)
     - [Pinterest: Improving HBase Backup Efficiency](https://medium.com/pinterest-engineering/improving-hbase-backup-efficiency-at-pinterest-86159da4b954)
@@ -1686,7 +1686,7 @@ MySQL 有两个比较有名的分支，一个是 Percona，另一个是 MariaDB�
 2. 文档数据库 Document Database - MongoDB, SimpleDB, CouchDB
 
   - [Data Points - What the Heck Are Document Databases?](https://docs.microsoft.com/en-us/archive/msdn-magazine/2011/november/data-points-what-the-heck-are-document-databases)
-  - [[[https://www.mongodb.com/blog/post/ebay-building-mission-critical-multi-data-center-applications-with-mongodb]([[https://www.mongodb.com/blog/post/ebay-building-mission-critical-multi-data-center-applications-with-mongodb)][eBay: Building Mission-Critical Multi-Data Center Applications with MongoDB]]
+  - [eBay: Building Mission-Critical Multi-Data Center Applications with MongoDB](https://www.mongodb.com/blog/post/ebay-building-mission-critical-multi-data-center-applications-with-mongodb)
   - [The AWS and MongoDB Infrastructure of Parse: Lessons Learned](https://medium.baqend.com/parse-is-gone-a-few-secrets-about-their-infrastructure-91b3ab2fcf71)
   - [Migrating Mountains of Mongo Data](https://medium.com/build-addepar/migrating-mountains-of-mongo-data-63e530539952)
   - [Couchbase Ecosystem at LinkedIn](https://engineering.linkedin.com/blog/2017/12/couchbase-ecosystem-at-linkedin)
@@ -1696,8 +1696,8 @@ MySQL 有两个比较有名的分支，一个是 Percona，另一个是 MariaDB�
 3. 数据结构数据库 Data structure Database - Redis
 
   - [Learn Redis the hard way (in production) at Trivago](https://tech.trivago.com/2017/01/25/learn-redis-the-hard-way-in-production/)
-  - [[[http://highscalability.com/blog/2014/9/8/how-twitter-uses-redis-to-scale-105tb-ram-39mm-qps-10000-ins.html]([[http://highscalability.com/blog/2014/9/8/how-twitter-uses-redis-to-scale-105tb-ram-39mm-qps-10000-ins.html)][Twitter: How Twitter Uses Redis To Scale - 105TB RAM, 39MM QPS, 10,000+ Instances]]
-  - [[[https://slack.engineering/scaling-slacks-job-queue/]([[https://slack.engineering/scaling-slacks-job-queue/)][Slack: Scaling Slack's Job Queue - Robustly Handling Billions of Tasks in Milliseconds Using Kafka and Redis]]
+  - [Twitter: How Twitter Uses Redis To Scale - 105TB RAM, 39MM QPS, 10,000+ Instances](http://highscalability.com/blog/2014/9/8/how-twitter-uses-redis-to-scale-105tb-ram-39mm-qps-10000-ins.html)
+  - [Slack: Scaling Slack's Job Queue - Robustly Handling Billions of Tasks in Milliseconds Using Kafka and Redis](https://slack.engineering/scaling-slacks-job-queue/)
   - [GitHub: Moving persistent data out of Redis at GitHub](https://github.blog/2017-01-10-moving-persistent-data-out-of-redis/)
   - [Instagram: Storing Hundreds of Millions of Simple Key-Value Pairs in Redis](https://instagram-engineering.com/storing-hundreds-of-millions-of-simple-key-value-pairs-in-redis-1091ae80f74c)
   - [Redis in Chat Architecture of Twitch (from 27:22)](https://www.infoq.com/presentations/twitch-pokemon/)
@@ -1708,7 +1708,7 @@ MySQL 有两个比较有名的分支，一个是 Percona，另一个是 MariaDB�
 4. 时序数据库 Time-Series Database
 
   - [What is Time-Series Data & Why We Need a Time-Series Database](https://blog.timescale.com/blog/what-the-heck-is-time-series-data-and-why-do-i-need-a-time-series-database-dcf3b1b18563/)
-  - [[[https://blog.timescale.com/blog/time-series-data-why-and-how-to-use-a-relational-database-instead-of-nosql-d0cd6975e87c/]([[https://blog.timescale.com/blog/time-series-data-why-and-how-to-use-a-relational-database-instead-of-nosql-d0cd6975e87c/)][Time Series Data: Why and How to Use a Relational Database instead of NoSQL]]
+  - [Time Series Data: Why and How to Use a Relational Database instead of NoSQL](https://blog.timescale.com/blog/time-series-data-why-and-how-to-use-a-relational-database-instead-of-nosql-d0cd6975e87c/)
   - [Beringei: High-performance Time Series Storage Engine [cite/t:[cite/t:@Facebook](https://engineering.fb.com/2017/02/03/core-data/beringei-a-high-performance-time-series-storage-engine/)]]
   - [Introducing Atlas: Netflix's Primary Telemetry Platform [cite/t:[cite/t:@Netflix](https://netflixtechblog.com/introducing-atlas-netflixs-primary-telemetry-platform-bd31f4d8ed9a)]]
   - [Building a Scalable Time Series Database on PostgreSQL](https://blog.timescale.com/blog/when-boring-is-awesome-building-a-scalable-time-series-database-on-postgresql-2900ea453ee2/)
@@ -1719,7 +1719,7 @@ MySQL 有两个比较有名的分支，一个是 Percona，另一个是 MariaDB�
 5. 图数据库 - Graph Platform
 
   - 首先是 IBM Devloperworks 上的两个简介性的 PPT。
-    - [[[https://web.archive.org/web/20191010034703/https://www.ibm.com/developerworks/library/cl-graph-database-1/cl-graph-database-1-pdf.pdf]([[https://web.archive.org/web/20191010034703/https://www.ibm.com/developerworks/library/cl-graph-database-1/cl-graph-database-1-pdf.pdf)][Intro to graph databases, Part 1, Graph databases and the CRUD operations]]
+    - [Intro to graph databases, Part 1, Graph databases and the CRUD operations](https://web.archive.org/web/20191010034703/https://www.ibm.com/developerworks/library/cl-graph-database-1/cl-graph-database-1-pdf.pdf)
     - Intro to graph databases, Part 2, Building a recommendation engine with a graph database
   - 然后是一本免费的电子书《[Graph Database](https://graphdatabases.com/)》。
   - 接下来是一些图数据库的介绍文章。
