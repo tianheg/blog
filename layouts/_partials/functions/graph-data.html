@@ -3,91 +3,48 @@
   Usage: {{ partial "functions/graph-data" "graph-data-key" }}
 */}}
 
-{{- $pages := partialCached "functions/linkable-pages" "linkable-pages-key" -}}
-{{- $pageDict := dict -}}
-{{- $graphDict := dict -}}
+{{- $pages := site.RegularPages -}}
+{{- $pairs := partialCached "functions/backlink-index" "backlink-index-key" -}}
 
 {{/* Build page dictionary */}}
+{{- $ps := newScratch -}}
 {{- range $pages -}}
   {{- $title := partial "functions/get-title" (dict "page" .) -}}
-  {{- $pageDict = merge $pageDict ( dict .RelPermalink ( dict
+  {{- $ps.SetInMap "pages" .RelPermalink (dict
     "permalink" .RelPermalink
-    "title" ( $title | plainify | htmlUnescape | chomp | title )
+    "title" ($title | plainify | htmlUnescape | chomp | replaceRE `\s+` " " | title)
     "section" .Section
-    )
-    )
-    -}}
+    ) -}}
 {{- end -}}
 
-{{/* Parse markdown links and build graph relationships */}}
+{{/* Build graph relationships from the site-wide relation index
+     (functions/backlink-index.html).
+
+     That index understands both Markdown links [text](/path) and wikilinks
+     [[note]] — the parser that used to live here only matched `](/path)`, so
+     once content moved to wikilinks this graph silently lost every edge.
+     Reusing the index also drops the per-link site.GetPage scanning and the
+     1500-entry dict merging that made this partial expensive. */}}
+{{- $gs := newScratch -}}
 {{- range $pages -}}
-  {{- $currentPage := . -}}
-  {{- $incoming := slice -}}
-  {{- $outgoing := slice -}}
-
-  {{/* Parse markdown links from raw content using findRE */}}
-  {{- $rawContent := .RawContent -}}
-  {{- $mdLinkPattern := `\]\(/[^)\s]+\)` -}}
-  {{- $matches := findRE $mdLinkPattern $rawContent -}}
-
-  {{- range $matches -}}
-    {{/* Extract path from [text](/path) format */}}
-    {{- $linkPath := strings.TrimSuffix ")" (strings.TrimPrefix "](" .) -}}
-
-    {{/* Skip external links (http/https) */}}
-    {{- if not (hasPrefix $linkPath "http") -}}
-      {{/* Clean up the path - remove leading slash if present */}}
-      {{- $cleanPath := $linkPath -}}
-      {{- if hasPrefix $linkPath "/" -}}
-        {{- $cleanPath = strings.TrimPrefix "/" $linkPath -}}
-      {{- end -}}
-
-      {{/* Only allow links to posts and til sections */}}
-      {{- $allowedSections := slice "posts" "til" -}}
-
-      {{/* Try to find the target page in allowed sections */}}
-      {{- $target := "" -}}
-
-      {{/* Method 1: Try in allowed sections */}}
-      {{- range $allowedSections -}}
-        {{- if not $target -}}
-          {{- $tryPath := printf "%s/%s" . $cleanPath -}}
-          {{- $target = site.GetPage $tryPath -}}
-        {{- end -}}
-      {{- end -}}
-
-      {{/* Method 2: Try to match by filename/permalink in allowed sections */}}
-      {{- if not $target -}}
-        {{- range $pages -}}
-          {{- if not $target -}}
-            {{- if or (eq .File.BaseFileName $cleanPath) (hasSuffix .RelPermalink $cleanPath) -}}
-              {{- $target = . -}}
-            {{- end -}}
-          {{- end -}}
-        {{- end -}}
-      {{- end -}}
-
-      {{/* If found, add to outgoing links */}}
-      {{- if $target -}}
-        {{- $outgoing = $outgoing | append $target.RelPermalink -}}
-      {{- end -}}
+  {{- $gs.SetInMap "graph" .RelPermalink (dict "in" slice "out" slice) -}}
+{{- end -}}
+{{- range $pairs -}}
+  {{- $s := .s -}}
+  {{- $t := .t -}}
+  {{- $graph := $gs.Get "graph" -}}
+  {{- $src := index $graph $s -}}
+  {{- $dst := index $graph $t -}}
+  {{- if $src -}}
+    {{- if not (in $src.out $t) -}}
+      {{- $gs.SetInMap "graph" $s (dict "in" $src.in "out" ($src.out | append $t)) -}}
     {{- end -}}
   {{- end -}}
-
-  {{- $graphDict = merge $graphDict ( dict .RelPermalink ( dict "in" $incoming "out" $outgoing ) ) -}}
-{{- end -}}
-
-{{/* Build incoming links from outgoing links */}}
-{{- range $relPermalink, $data := $graphDict -}}
-  {{- range $data.out -}}
-    {{- $targetPermalink := . -}}
-    {{- $targetData := index $graphDict $targetPermalink -}}
-    {{- if $targetData -}}
-      {{- $newIncoming := $targetData.in | append $relPermalink -}}
-      {{- $newTargetData := dict "in" $newIncoming "out" $targetData.out -}}
-      {{- $graphDict = merge $graphDict (dict $targetPermalink $newTargetData) -}}
+  {{- if $dst -}}
+    {{- if not (in $dst.in $s) -}}
+      {{- $gs.SetInMap "graph" $t (dict "in" ($dst.in | append $s) "out" $dst.out) -}}
     {{- end -}}
   {{- end -}}
 {{- end -}}
 
-{{ return (dict "pages" $pageDict "graph" $graphDict) }}
+{{- return (dict "pages" ($ps.Get "pages") "graph" ($gs.Get "graph")) }}
