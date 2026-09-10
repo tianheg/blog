@@ -4,7 +4,7 @@ date: 2021-11-03
 tags: ['技术', Nginx]
 ---
 
-承接上篇文章[通过 Nginx 让网站支持 HTTP/2](/posts/nginx-http2/)，当我完成文章中的操作时，有一次我好奇网站 HTTP 是否能够自动跳转到 HTTPS，于是我输入 `http://blog.yidajiabei.xyz/` ，意外发生了——没有跳转到 HTTPS，还下载了一个名字为 `download` 且文件类型为 `application/octet-stream` 。
+承接上篇文章[[nginx-http2|通过 Nginx 让网站支持 HTTP/2]]，当我完成文章中的操作时，有一次我好奇网站 HTTP 是否能够自动跳转到 HTTPS，于是我输入 `http://blog.yidajiabei.xyz/` ，意外发生了——没有跳转到 HTTPS，还下载了一个名字为 `download` 且文件类型为 `application/octet-stream` 。
 
 我很意外，思考这是为什么。把这个问题记下来，过了几个小时，我从网络中找到答案：[HTTP2 不需要加密](https://http2.github.io/faq/#does-http2-require-encryption)，当然这只是肤浅的说法，一定还有深层次的理解。
 

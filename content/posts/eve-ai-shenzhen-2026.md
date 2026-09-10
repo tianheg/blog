@@ -41,6 +41,6 @@ location: '深圳 Shenzhen'
 22. 逃生计划
 23. 偷故事的人（清唱）
 
-我去年只看了两场livehouse，一场是[李上安](/posts/first-time-at-a-livehouse/)，一场是[简约情人](/posts/simplicity-lover-shenzhen-2025/)，想看的两场演唱会——张悬和王菀之，都被取消，这让我念念不忘。
+我去年只看了两场livehouse，一场是[[first-time-at-a-livehouse|李上安]]，一场是[[simplicity-lover-shenzhen-2025|简约情人]]，想看的两场演唱会——张悬和王菀之，都被取消，这让我念念不忘。
 
 今年为自己安排了三场演唱会，第一场是今天艾怡良的深圳演唱会，第二场是新裤子乐队的广州演出，第三场是王菀之的佛山演唱会。是的，念念不忘，终有回响。欣赏完这三次演出，今年不会再看演唱会了。

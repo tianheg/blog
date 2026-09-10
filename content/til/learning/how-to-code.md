@@ -14,7 +14,7 @@ date: 2022-02-09T20:38:02+08:00
 关注自己微小的但十分关键的进步。
 
 ### 高效处理新信息 {#高效处理新信息}
-在开始学习如何编程之前，你需要学习[如何「学习」](/posts/how-to-study/)。
+在开始学习如何编程之前，你需要学习[[how-to-study|如何「学习」]]。
 
 当观看课程或者读文档时感到沮丧困惑是完全正常的，每个人都会在第一步挣扎。
 
@@ -57,7 +57,7 @@ Syndrome（不懂）。你可能觉得身边的每个人知道的都比你多，
 
 1. [How To Successfully Teach Yourself How To Code - Medium](https://medium.com/free-code-camp/successfully-teaching-yourself-how-to-code-f6aac23db44a)
 
-2. [如何学习](/posts/how-to-study/)
+2. [[how-to-study|如何学习]]
 
 3. [side project]：a side-project is something that you are doing aside
    from your main objective or job

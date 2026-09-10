@@ -13,7 +13,7 @@ tags: ['随笔']
 - 大学同学时应武借钱给我
 - 大学同学余继政借钱给我
 - 初中同学纪晓剑借钱给我
-- 木子同学的文章《[毕业后的一些思考](https://blog.k8s.li/thinking-2019.html)》，让我做出了一些[改变](/posts/first-step-about-free/)
+- 木子同学的文章《[毕业后的一些思考](https://blog.k8s.li/thinking-2019.html)》，让我做出了一些[[first-step-about-free|改变]]
 - 初中同学罗帅借钱给我
 - 大学同学丁苗借钱给我
 - 大学同学马嘉良借钱给我

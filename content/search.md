@@ -146,5 +146,17 @@ title: Search
     div.appendChild(document.createTextNode(str));
     return div.innerHTML;
   }
+
+  // --- Deep link: /search/?q=… (未解析的 wikilink 会落到这里) ---
+  var initial = '';
+  try {
+    initial = (new URLSearchParams(window.location.search).get('q') || '').trim();
+  } catch (e) { initial = ''; }
+  if (initial) {
+    var semanticTab = document.querySelector('[data-tab="semantic"]');
+    if (semanticTab) semanticTab.click();
+    input.value = initial;
+    doSemanticSearch(initial);
+  }
 })();
 </script>

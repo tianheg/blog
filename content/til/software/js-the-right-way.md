@@ -126,8 +126,8 @@ MV\* Patterns：
 
 ## Testing Tools
 
-见[这里](/docs/tech/coding)
+见[[til/software/coding|这里]]
 
 ## Frameworks
 
-见[这里](/docs/tech/coding)
+见[[til/software/coding|这里]]

@@ -6,7 +6,7 @@ tags: ['随笔']
 
 ## \<2025-11-23 Sun\>
 
-法语罗密欧与朱丽叶音乐剧欣赏完了，感想在[罗密欧与朱丽叶 Roméo et Juliette (musical)](/posts/romeo-and-juliet-musical/)这篇文章里。
+法语罗密欧与朱丽叶音乐剧欣赏完了，感想在[[romeo-and-juliet-musical|罗密欧与朱丽叶 Roméo et Juliette (musical)]]这篇文章里。
 
 ## \<2025-10-24 Fri\>
 

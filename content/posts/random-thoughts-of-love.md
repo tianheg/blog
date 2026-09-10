@@ -48,7 +48,7 @@ tags: ['随笔']
 - [谈谈我对恋爱/结婚的想法 - 保罗的小宇宙](https://paugram.com/essay/my-thoughts-about-fall-in-love-or-get-married.html)
 - hayami关于爱情的很多文章——在微信公众号：Hayami
 - [进入长期关系所需的品质与长期关系对人生的意义](https://stephenleng.com/long-term-relationships-and-meaning-of-life/)
-- [/posts/monthly-2023-06/](/posts/monthly-2023-06/) 这里有多篇摘录
+- 2023 年 6 月的月记（已下线）里有多篇摘录
 - [流动的盛宴：一个校园社交活动的尝试](https://stephenleng.com/a-moveable-feast/)
 - [避免婚前同居：这在理论上是对的，但不适合实践？](https://stephenleng.com/on-cohabitation/)
 - [你爱过我吗？ — 心的道理](https://stephenleng.com/have-you-ever-loved-me/)

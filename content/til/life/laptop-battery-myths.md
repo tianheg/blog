@@ -69,6 +69,6 @@ header: Consumption
 
 ## 相关
 
-- [笔记本保养——如何尽可能延长使用寿命](/til/life/laptop-maintenance/)
-- [米家智能插座实现笔记本电池 80% 保持充电](/til/homelab/smart-plug-battery-guard/)
-- [机械革命 EC 充电限制寄存器](/til/hardware/mechrevo-ec-charge-limit/)
+- [[laptop-maintenance|笔记本保养——如何尽可能延长使用寿命]]
+- [[smart-plug-battery-guard|米家智能插座实现笔记本电池 80% 保持充电]]
+- [[mechrevo-ec-charge-limit|机械革命 EC 充电限制寄存器]]

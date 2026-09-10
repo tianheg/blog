@@ -110,7 +110,7 @@ tags: ['技术', Hugo]
 
 ### 另一种部署方式------Git Hooks {#另一种部署方式-git-hooks}
 
-参见[云服务器配置 Git 仓库托管并使用 Git Hooks 自动执行脚本](/posts/git-server-hook/)
+参见云服务器配置 Git 仓库托管并使用 Git Hooks 自动执行脚本
 
 ---
 

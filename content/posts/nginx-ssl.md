@@ -10,7 +10,7 @@ tags: ['技术', Nginx]
    的用户和防火墙
 2. 一个已注册的域名
 3. 域名已经和当前服务器 IP 绑定
-4. [Nginx 已经安装并能够正常使用](/posts/nginx-1st/)
+4. [[nginx-1st|Nginx 已经安装并能够正常使用]]
 
 ## 安装 Certbot
 

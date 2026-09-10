@@ -483,7 +483,7 @@ filter-repo= 现在被 Git 项目推荐，用于代替 `git filter-branch` 。
 移除文件的过程，谨记：不要直接在生产环境或重要仓库使用，要先确保自己知道某个命令的执行结果。
 ## 云服务器配置 Git 仓库托管并使用 Git Hooks 自动执行脚本
 
-上文见[部署 Hugo 博客到 Ubuntu 服务器](/posts/hugo-deploy-to-server/)。
+上文见[[hugo-deploy-to-server|部署 Hugo 博客到 Ubuntu 服务器]]。
 
 之前的博客更新思路是，本地提交修改至
 GitHub，再登录云服务器，手动执行脚本，达到更新博客内容的目的。但是，从

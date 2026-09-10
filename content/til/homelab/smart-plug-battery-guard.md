@@ -100,4 +100,4 @@ evaluate: pct=100 ac=1 → send off → evaluate: pct=100 ac=0 → verify OK: ac
 
 - [python-miio](https://github.com/rytilahti/python-miio)
 - [Xiaomi Cloud Tokens Extractor](https://github.com/PiotrMachowski/Xiaomi-cloud-tokens-extractor)
-- 相关：[笔记本保养](/til/life/laptop-maintenance/)
+- 相关：[[laptop-maintenance|笔记本保养]]

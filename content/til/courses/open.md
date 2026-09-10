@@ -19,16 +19,16 @@ date: 2025-06-15T19:22:54+08:00
 ## 对应页面
 
 - 思维能力
-  - [Learning How to Learn-Barbara Oakley](/til/courses/open-learning-how-to-learn/)
-  - [批判性思维-谷振诣](/til/courses/open-critical-thinking/)
-  - [心理学导论 - 耶鲁大学](/til/courses/open-introduction-to-psychology-with-paul-bloom/)
+  - [[til/courses/open-learning-how-to-learn|Learning How to Learn-Barbara Oakley]]
+  - [[til/courses/open-critical-thinking|批判性思维-谷振诣]]
+  - [[open-introduction-to-psychology-with-paul-bloom|心理学导论 - 耶鲁大学]]
 - 人文修养:
-  - [红楼梦-欧丽娟](/til/courses/open-dream-of-the-red-chamber/)
+  - [[til/courses/open-dream-of-the-red-chamber|红楼梦-欧丽娟]]
   - 影视鉴赏-张晓敏
 - 科技博览:
-  - [从爱因斯坦到霍金的宇宙-赵峥](/til/courses/open-einstein-to-hawking/)
-  - [数学的思维方式与创新-丘维声](/til/courses/open-math-think-innovate/)
-  - [积极心理学-Tal Ben-Shahar](/til/courses/open-positive-psychology/)
+  - [[til/courses/open-einstein-to-hawking|从爱因斯坦到霍金的宇宙-赵峥]]
+  - [[til/courses/open-math-think-innovate|数学的思维方式与创新-丘维声]]
+  - [[open-positive-psychology|积极心理学-Tal Ben-Shahar]]
 - 专业技术（出现的顺序即学习的先后顺序）:
   - Crash Course: Computer Science-Carrie Anne
-  - [The Missing Semester of Your CS Education](/til/courses/open-missing-semester-of-cs/)
+  - [[til/courses/open-missing-semester-of-cs|The Missing Semester of Your CS Education]]
