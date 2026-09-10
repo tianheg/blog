@@ -86,9 +86,11 @@ export default class Page {
 
   /**
    * Infers the page section from the permalink URL structure.
-   * 
-   * @returns The inferred section type
-   * @throws {UnknownPageSectionError} When permalink doesn't match known patterns
+   *
+   * Falls back to the first path segment so that notes (`/til/…`) and root
+   * pages (`/about/`, `/start/`, …) get their own grouping instead of throwing:
+   * the graph legitimately contains more than just posts, and one unfamiliar
+   * permalink used to take the whole visualization down.
    */
   private inferSectionFromPermalink(): PageSection {
     if (this.permalink.includes('/posts/')) {
@@ -97,6 +99,7 @@ export default class Page {
     if (this.permalink.includes('/notes/')) {
       return 'notes';
     }
-    throw new UnknownPageSectionError(this.permalink);
+    const segment = this.permalink.split('/').filter(Boolean)[0];
+    return (segment ?? 'pages') as PageSection;
   }
 }
