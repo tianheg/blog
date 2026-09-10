@@ -1,15 +1,14 @@
 #!/usr/bin/env python3
 """把 content/ 里指向站内笔记的 Markdown 链接改造成 wikilink。
 
+源：content/ 下所有 .md（含 posts/、til/、以及根目录独立页面如 start.md / watch.md）
+目标：只能是 posts/til 笔记（wikilink-map 的解析范围）；指向 section 页、tag 页、
+      静态文件、外站的链接原样保留。
+
 规则：
   [文字](/til/software/git-rebase/)        → [[git-rebase|文字]]
   [文字](/til/life/laptop-maintenance/#锚点) → [[laptop-maintenance#锚点|文字]]
   重名 basename（posts 与 til 同名等）      → [[til/courses/open-xxx|文字]]（路径形式；Obsidian 也认）
-
-跳过（原样保留）：
-  - 目标不是 posts/til 笔记（静态文件、tag 页、老站路径）
-  - 目标不存在（现有死链，交给 check-links 逐条处理）
-  - 图片 ![alt](url)
 
 用法：
   python3 scripts/migrate-to-wikilink.py --dry-run   # 只预览
@@ -22,16 +21,19 @@ ROOT = os.path.normpath(ROOT)
 LINK = re.compile(r"(?<!!)\[([^\[\]]+)\]\((/[^)\s]*)\)")
 dry = "--dry-run" in sys.argv
 
-# ── 建立目标索引 ────────────────────────────────────────────────
-pages = {}
+# ── 目标索引（只有 posts/til 能被 wikilink 解析） ─────────────────
+targets = {}
 basename_count = collections.Counter()
+sources = []
 for dirpath, _, files in os.walk(ROOT):
     for f in files:
         if not f.endswith(".md") or f.startswith("_index"):
             continue
-        rel = os.path.relpath(os.path.join(dirpath, f), ROOT)
+        full = os.path.join(dirpath, f)
+        rel = os.path.relpath(full, ROOT)
+        sources.append((rel, full))
         if rel.startswith(("til/", "posts/")):
-            pages[rel] = os.path.join(dirpath, f)
+            targets[rel] = full
             basename_count[os.path.splitext(f)[0].lower()] += 1
 dups = {k for k, v in basename_count.items() if v > 1}
 
@@ -39,7 +41,7 @@ dups = {k for k, v in basename_count.items() if v > 1}
 changed, skipped = [], collections.Counter()
 touched_files = set()
 
-for rel, full in sorted(pages.items()):
+for rel, full in sorted(sources):
     text = open(full, encoding="utf-8").read()
 
     def repl(m):
@@ -49,7 +51,7 @@ for rel, full in sorted(pages.items()):
             skipped["空路径"] += 1
             return m.group(0)
         target = path + ".md"
-        if target not in pages:
+        if target not in targets:
             skipped["目标不是笔记/不存在"] += 1
             return m.group(0)
 

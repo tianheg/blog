@@ -8,49 +8,49 @@ title: '从这里开始'
 
 ## 生活与思考
 
-- [确定性的忧伤](/posts/melancholy-of-certainty/)
-- [当我写日记时，我在记录什么](/posts/write-a-diary/)
-- [人生危机](/posts/life-crisis/)
-- [深圳三月，人间亦三月](/posts/three-months-in-shenzhen-three-months-in-world/)
-- [父亲住院笔记](/posts/fathers-hospital-stay-journal/)
-- [终于和父亲说了真心话](/posts/heartfelt-talk-with-father/)
-- [死亡是一件不必急于求成的事](/posts/death-is-matter-of-not-rushing-for/)
-- [2025 年终总结](/posts/2025/)
+- [[melancholy-of-certainty|确定性的忧伤]]
+- [[write-a-diary|当我写日记时，我在记录什么]]
+- [[life-crisis|人生危机]]
+- [[three-months-in-shenzhen-three-months-in-world|深圳三月，人间亦三月]]
+- [[fathers-hospital-stay-journal|父亲住院笔记]]
+- [[heartfelt-talk-with-father|终于和父亲说了真心话]]
+- [[death-is-matter-of-not-rushing-for|死亡是一件不必急于求成的事]]
+- [[2025|2025 年终总结]]
 
 ## 诗
 
-- [园区的猫](/posts/park-cat/)
-- [地铁遐思](/posts/subway-reverie/)
-- [工作上见到的女孩](/posts/girl-from-work/)
-- [绿灯时奔跑](/posts/run-during-light-is-green/)
+- [[park-cat|园区的猫]]
+- [[subway-reverie|地铁遐思]]
+- [[girl-from-work|工作上见到的女孩]]
+- [[run-during-light-is-green|绿灯时奔跑]]
 
 ## 跑步与观星
 
-- [傍晚跑步](/posts/evening-run/)
-- [参加26年香港马拉松](/posts/hong-kong-marathon-in-2026/)
-- [跑步七公里，木星冲日](/posts/run-7km/)
-- [观星记-251105](/posts/stargazing-diary-251105/)
+- [[evening-run|傍晚跑步]]
+- [[hong-kong-marathon-in-2026|参加26年香港马拉松]]
+- [[run-7km|跑步七公里，木星冲日]]
+- [[stargazing-diary-251105|观星记-251105]]
 
 ## 音乐剧与演出
 
-- [荐《给阿嬷的情书》](/posts/recommend-dear-you/)
-- [看话剧《恋爱的犀牛》](/posts/rhinoceros-in-love-spoken-drama/)
-- [罗密欧与朱丽叶](/posts/romeo-and-juliet-musical/)
-- [巴黎圣母院](/posts/notre-dame-de-paris-musical/)
+- [[recommend-dear-you|荐《给阿嬷的情书》]]
+- [[rhinoceros-in-love-spoken-drama|看话剧《恋爱的犀牛》]]
+- [[romeo-and-juliet-musical|罗密欧与朱丽叶]]
+- [[notre-dame-de-paris-musical|巴黎圣母院]]
 
 ## 技术与自托管
 
-- [How to deploy Hermes Agent on Ubuntu](/posts/how-to-deploy-hermes-agent-on-ubuntu/)
-- [How to self-host Forgejo with docker on Ubuntu 24.04](/posts/forgejo-self-host/)
-- [How I Backup](/posts/how-i-backup/)
-- [Img project fail to deploy on Cloudflare](/posts/img-project-fail-to-deploy-on-cf-en/)
-- [把博客样式从 Scss 改到 TailwindCSS](/posts/blog-style-scss-to-tailwindcss/)
-- [我与计算机之缘](/posts/my-relationship-with-computers/)
+- [[how-to-deploy-hermes-agent-on-ubuntu|How to deploy Hermes Agent on Ubuntu]]
+- [[forgejo-self-host|How to self-host Forgejo with docker on Ubuntu 24.04]]
+- [[how-i-backup|How I Backup]]
+- [[img-project-fail-to-deploy-on-cf-en|Img project fail to deploy on Cloudflare]]
+- [[blog-style-scss-to-tailwindcss|把博客样式从 Scss 改到 TailwindCSS]]
+- [[my-relationship-with-computers|我与计算机之缘]]
 
 ## 读书记
 
-- [读书记：道德经](/posts/cn-dao-de-jing/)
-- [读书记：爱你就像爱生命](/posts/cn-aini-jiuxiang-aishengming/)
+- [[cn-dao-de-jing|读书记：道德经]]
+- [[cn-aini-jiuxiang-aishengming|读书记：爱你就像爱生命]]
 
 ## 更多
 
