@@ -227,6 +227,7 @@ wikilink 依次按 **文件名 → 完整标题 → 标题主名（`——`/`：
 
 - 数据由 `layouts/previews/list.json.json` 在构建时生成（`/previews/index.json`，约 1540 条 / 580KB，gzip ~150KB）
 - 客户端 `assets/ts/components/PagePreview.ts`：懒加载 + 内存缓存 + 空闲预取，不为单个链接发请求；220ms 延迟防误触；视口内智能定位；Esc / 滚动 / 点击即收
+- **只在文章/笔记详情页启用**（`baseof.html` 与 `til/baseof.html` 按 `.Kind == "page"` 给 body 打 `data-page-preview`），列表页、首页、图谱页、搜索页不响应悬停
 - 只在真实鼠标指针出现时启用（判 `pointerType === "mouse"`，不依赖 `hover: hover` 媒体查询），触摸设备完全不受影响
 - 想给某个链接关掉预览：在 `<a>` 上加 `data-no-preview`
 

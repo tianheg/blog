@@ -52,7 +52,9 @@
   }
   </style>
 </head>
-<body class="bg-white dark:bg-gray-950 antialiased">
+{{- /* 悬浮预览只在笔记详情页启用（/til/ 列表页、分类页不启用） */ -}}
+{{- $pagePreview := eq .Kind "page" -}}
+<body{{ if $pagePreview }} data-page-preview{{ end }} class="bg-white dark:bg-gray-950 antialiased">
 
   <!-- Header -->
   <header class="sticky top-0 z-10 border-b border-gray-200 dark:border-gray-800 bg-white/95 dark:bg-gray-950/95 backdrop-blur supports-backdrop-blur:bg-white/80">

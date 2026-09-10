@@ -273,6 +273,10 @@ function onMouseOver(event: MouseEvent): void {
 
 /** Initialises page previews. Dormant until a real pointer shows up. */
 export function initPagePreview(): void {
+  // 只在文章/笔记详情页启用（layouts/baseof.html 按 .Kind/.Section 打标记），
+  // 列表页、首页、图谱页等不加载预览。
+  if (!document.body.hasAttribute("data-page-preview")) return;
+
   let enabled = false;
   const enable = (): void => {
     if (enabled) return;
