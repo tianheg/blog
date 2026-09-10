@@ -155,15 +155,19 @@ Blackglory 的笔记 = 每主题单页深层可折叠概念树（如 Linux 页 1
 
 独立页面（如 `about.org`）通常只需要 `#+TITLE`。
 
-**TIL 必带整理状态**（2026-09-01 起，全库强制）：
+**TIL 必带整理状态与日期**（状态 2026-09-01 起 / 日期 2026-09-10 起，全库强制）：
 
 ```org
 #+TITLE: 某知识点
-#+STATUS: draft      # AI 生成/代写，未经人工整理
-#+STATUS: reviewed   # 人工审核整理过
+#+STATUS: draft      # AI 生成/代写，未经人工整理；人工复核后改 reviewed
+#+DATE: 2026-07-19T10:36:24   # 首次入库时间
+#+HEADER: Linux      # 可选，子分类
 ```
 
 - `til/` 下所有文件必须有 `#+STATUS`，位于 `#+TITLE:` 下一行
+- `#+DATE:` 紧随 `#+STATUS:`（有 `#+HEADER:` 时在其前），ISO8601 格式 `YYYY-MM-DDThh:mm:ss`
+- 日期语义是**首次入库时间**：新建 TIL 用当天时间；历史文件取 git 首次提交时间（`git log --diff-filter=A --follow`），无 git 历史时回退文件 mtime。2026-09-10 已全库补齐 574 篇
+- 日期驱动 `/til/` 的「最近新增」排序（此前 fallback 到文件 mtime，克隆/检出后无意义）
 - AI 代写一律 `draft`；用户用自己的话复核/补充后改为 `reviewed`
 - 页面标题开头显示状态小字（draft=amber，reviewed=emerald，见 `layouts/partials/til/status.html`）
 
