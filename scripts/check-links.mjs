@@ -46,7 +46,14 @@ if (/ERROR/.test(log) && !/^WARN/m.test(log)) {
 
 const unresolved = [
   ...new Set(
-    [...log.matchAll(/WARN\s+wikilink: unresolved \[\[(.+?)\]\]/g)].map((m) => m[1].trim())
+    // 宽松匹配到行尾再剥掉固定后缀：畸形内容（如表格里被切成
+    // [[x</td><td>别名]] 的链接）不会因为没有以 ]] 结尾而漏检
+    [...log.matchAll(/^WARN\s+wikilink: unresolved \[\[(.*)$/gm)].map((m) =>
+      m[1]
+        .replace(/\s+—\s+站内没有.*$/, "")
+        .replace(/\]\]$/, "")
+        .trim()
+    )
   ),
 ];
 const deadLinks = [...log.matchAll(/WARN\s+link: unresolved internal link "([^"]+)" on (\S+)/g)]
