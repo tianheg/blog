@@ -1,0 +1,536 @@
+---
+title: 'ECMA-262-3 in detail'
+date: 2023-02-15T08:43:00+08:00
+tags: ['技术', JavaScript]
+---
+
+- [ECMA-262-3 in detail. Chapter 1. Execution Contexts. - Dmitry Soshnikov](http://dmitrysoshnikov.com/ecmascript/chapter-1-execution-contexts/)
+- [ECMA-262-3 in detail. Chapter 2. Variable object. - Dmitry Soshnikov](http://dmitrysoshnikov.com/ecmascript/chapter-2-variable-object/)
+- [ECMA-262-3 in detail. Chapter 3. This. - Dmitry Soshnikov](http://dmitrysoshnikov.com/ecmascript/chapter-3-this/)
+- [ECMA-262-3 in detail. Chapter 4. Scope chain. - Dmitry Soshnikov](http://dmitrysoshnikov.com/ecmascript/chapter-4-scope-chain/)
+- [ECMA-262-3 in detail. Chapter 5. Functions. - Dmitry Soshnikov](http://dmitrysoshnikov.com/ecmascript/chapter-5-functions/)
+- [ECMA-262-3 in detail. Chapter 6. Closures. – Dmitry Soshnikov](http://dmitrysoshnikov.com/ecmascript/chapter-6-closures/)
+- [ECMA-262-3 in detail. Chapter 7.1. OOP: The general theory. - Dmitry Soshnikov](http://dmitrysoshnikov.com/ecmascript/chapter-7-1-oop-general-theory/)
+- [ECMA-262-3 in detail. Chapter 7.2. OOP: ECMAScript implementation. - Dmitry Soshnikov](http://dmitrysoshnikov.com/ecmascript/chapter-7-2-oop-ecmascript-implementation/)
+- [ECMA-262-3 in detail. Chapter 8. Evaluation strategy - Dmitry Soshnikov](http://dmitrysoshnikov.com/ecmascript/chapter-8-evaluation-strategy/)
+
+## 1. 执行上下文
+
+每次当控制权转移到 ECMAScript 可执行代码时，控制权都会进入执行上下文。
+
+> 执行上下文（Execution context，EC）是 ECMA-262 规范中用于对可执行代码进行类型化和区分的抽象概念。
+
+该标准没有从技术实现的角度定义准确的 EC 结构和类型，这是一个需要 ECMAScirpt 引擎实现的问题。
+
+逻辑上，一组活跃的执行上下文形成一个堆栈。堆栈的底部始终是全局上下文，而顶部——是当前活动执行上下文。堆栈在进入和退出各种 EC 的过程中被修改（推入/弹出）。
+
+### 可执行代码的类型
+
+利用执行上下文的抽象概念，将可执行代码的类型概念联系起来。说到代码类型，在某些特定时刻指的可能是执行上下文。
+
+例如，将执行上下文堆栈定义为一个数组：
+
+```javascript
+ECStack = []
+```
+
+每次进入函数时（即使函数被递归调用或作为构造函数调用），以及在内置 `eval` 函数工作时，都会推入堆栈。
+
+一、全局代码
+
+该类型代码在 Program 级别处理：加载外部 *.js 文件或者局部行内代码（在 `&lt;script&gt;</script>` 标签内）。全局代码不包括函数体中代码的任何部分。
+
+在初始化（程序启动）时， `ECStack` 的样子：
+
+```javascript
+ECStack = [
+  globalContext
+]
+```
+
+二、函数代码
+
+在执行函数代码时（适用于所有类型的函数），新元素被推入 `ECStack` 。The code of concrete function does not include codes of the inner functions.
+（这句是什么意思？内部函数不包括在内吗，内部函数也就是 nested function）。
+
+举例，递归调用自己一次的函数：
+
+```javascript
+(function foo(flag) {
+  if (flag) return
+  foo(true)
+)(false)
+```
+
+对 `ECStack` 的修改：
+
+```javascript
+// 第一次激活 foo
+ECStack = [
+  <foo> functionContext
+  globalContext
+]
+// 递归激活 foo
+ECStack = [
+  <foo> functionContext - recursively
+  <foo> functionContext
+  globalContext
+]
+```
+
+函数的每个返回都退出当前执行上下文，然后相应地弹出 `ECStack` ——连续地、颠倒地——堆栈的非常自然的实现。代码的工作完成后， `ECStack` 再次只包含 `globalContext` ——直到程序结束。
+
+抛出但未捕获的异常也可能退出一个或多个执行上下文：
+
+```javascript
+(function foo() {
+  (function bar() {
+    throw 'Exit from bar and foo contexts'
+  })()
+})()
+```
+
+三、 `eval` code
+
+使用 `eval` 会存在一种调用上下文的概念。
+
+由 `eval` 执行的操作（如变量或函数定义）恰好影响调用上下文：
+
+```javascript
+eval('var x = 10')
+;(function foo() {
+  eval('var y = 20')
+})()
+
+alert(x)
+alert(y)
+```
+
+注意，ES5 的严格模式下， `eval` 已经不影响调用上下文，而是在本地沙箱中计算代码。
+
+ECStack 修改：
+
+```javascript
+ECStack = [
+  globalContext
+]
+// eval('var x = 10')
+ECStack.push({
+  context: evalContext,
+  callingContext: globalContext
+})
+// eval exited context
+ECStack.pop()
+// foo function call
+ECStack.push(<foo> functionContext)
+// eval('var y = 20')
+ECStack.push({
+  context: evalContext,
+  callingContext: <foo> functionContext
+})
+// return from eval
+ECStack.pop()
+// return from foo
+ECStack.pop()
+```
+
+ES2015+ 介绍了一个新的代码类型——模块代码。
+
+## 2. 变量对象
+
+在程序中声明函数和变量，对于我来说是很自然的。但是，我没有想过：解释器是怎样和去哪里找到数据（函数、变量）的？当引用那些对象时，在它背后发生了什么？
+
+变量和执行上下文是紧密相关的：
+
+```javascript
+var a = 10 // variable of the global context
+(function () {
+  var b = 20 // local variable of the function context
+})()
+alert(a)
+alert(b)
+```
+
+当前版本的规范中的隔离作用域只能由具有“函数”代码类型的执行上下文创建。例如，与 C/C + + 相比，ECMAScript 中的 for 循环块不会创建本地上下文：
+
+```javascript
+for (var k in { a: 1, b: 2 }) {
+  alert(k)
+}
+alert(k)
+```
+
+### 声明数据
+
+如果变量是与执行上下文相关的，那么就应知道数据存储在哪里，并且知道如何获取。这种作用机制，被称为变量对象。
+
+> 变量对象（英文简写为 VO）是与执行上下文关联的特殊对象，它存储着：
+>
+> - 变量（ `var` ，VariableDeclaration）
+> - 函数声明（FunctionDeclaration，缩写为 FD）
+> - 声明在上下文的函数形式参数
+
+注意，在 ES5 版本中，变量对象的概念被词法环境模型替代了。
+
+举例，使用一般 ECMAScript 对象呈现变量对象：
+
+```javascript
+VO = {}
+```
+
+VO 是执行上下文的属性：
+
+```javascript
+activeExecutionContext = {
+  VO: {
+    // context data (var, FD, function arguments)
+  }
+}
+```
+
+Indirect referencing to variables (via property names of VO) allows only variable object of the global context (where the global object is itself the variable object).（这句不理解）对于其它上下文，直接引用 VO 并无可能，它只针对全局上下文进行实现。
+
+当声明变量或函数时，关键在于创建 VO 的新属性以及变量的名称和值。
+
+例子：
+
+```javascript
+var a = 10
+function test(x) {
+  var b = 20
+}
+test(30)
+```
+
+对应的变量对象：
+
+```javascript
+// Varibale object of the global context
+VO(globalContext) = {
+  a: 10,
+  test: <reference to function>
+}
+// Variable object of the "test" function context
+VO(test functionContext) = {
+  x: 30,
+  b: 20
+}
+```
+
+### 不同执行上下文中的变量对象
+
+变量对象的一些操作（变量实例化）和行为对所有执行上下文类型都是适用的。从这种角度看，将变量对象看成抽象的基本对象就很合适了。函数上下文还可以定义额外的变量对象相关内容。
+
+```javascript
+AbstractVO (generic behavior of the variable instantiation process)
+|
+|-> GlobalContextVO
+|       (VO === this === global)
+|-> FunctionContextVO
+        (VO === AO, <arguments> object and <formal parameters> are added)
+```
+
+一、全局上下文中的变量对象
+
+定义全局对象：
+
+> 全局对象是进入任何上下文之前就定义的对象；这个对象是可以单独使用的，它的属性能在程序的任何地方获取。全局对象的生命周期结束于程序结束。
+
+创建伊始，全局对象被初始化，并具有一些属性，比如， `Math` ， `String` ， `Date` 等；还可拥有一些对象，供全局对象引用，比如，在 BOM 下，全局对象的 `window` 属性就引用自全局对象：
+
+```javascript
+global = {
+  Math: <...>,
+  String: <...>,
+  ...
+  window: global
+}
+```
+
+因为全局对象无法直接通过名字访问，所以它的属性在应用中都是省略前缀的。但是，还可以通过全局上下文下的 `this` 值访问全局对象。也可以通过对它本身的递归引用，例如 BOM 中的 `window` ：
+
+```javascript
+String(10) // means global.String(10)
+
+// with prefixes
+window.a = 10 // === global.window.a === global.a = 10
+this.b = 20 // global.b = 20
+```
+
+回到变量对象：
+
+```javascript
+VO(globalContext) === global
+```
+
+可见，全局上下文的变量对象就是全局对象。
+
+理解这一点，就能让我们明白，为什么全局上下文下声明一个变量，可间接通过全局对象的属性来访问。
+
+```javascript
+var a = new String('test')
+alert(a)
+alert(window['a'])
+alert(a === this.a)
+
+var aKey = 'a'
+alert(window[aKey])
+```
+
+二、函数上下文下的变量对象
+
+对于函数的执行上下文来说，VO 是无法直接访问的，它的作用被活动对象（AO）代替了。
+
+```javascript
+VO(functionContext) === AO
+```
+
+> 在进入函数上下文时创建活动对象，同时由值为 Arguments 对象的属性 `arguments` 进行初始化：
+>
+> #+BEGIN_SRC js
+> AO = {
+> arguments: &lt;Arg0&gt;
+> }
+> #+END_SRC
+
+Arguments 对象是活动对象的属性。Arguments 对象包含以下属性：
+
+- callee ——对当前函数的引用；
+- length ——真正传递参数的数量；
+- 属性索引（整数，转换为字符串），值是函数参数的值（参数列表从左到右的顺序）。属性索引的数目 == arguments.length。Arguments 对象的属性索引的值和真正传递形式参数是共享的。
+
+例子：
+
+```javascript
+function foo(x, y, z) {
+  // quantity of defined function arguments (x, y, z)
+  alert(foo.length)
+  // quantity of really passed arguments (only x, y)
+  alert(arguments.length)
+  // reference of a function to itself
+  alert(arguments.callee === foo)
+  // parameters sharing
+  alert(x === arguments[0])
+  alert(x)
+  arguments[0] = 20
+  alert(x)
+  x = 30
+  alert(arguments[0])
+  // however, for not passed argument z,
+  // related index-property of the arguments
+  // object is not shared
+  z = 40
+  alert(arguments[2])
+  arguments[2] = 50
+  alert(z)
+}
+foo(10, 20)
+```
+
+在老版本 Google Chrome 中有一个 bug——参数 z 和 arguments[z] 也是共享的。
+
+### 处理上下文代码的各个阶段
+
+处理执行上下文的两个阶段：
+
+1. 进入执行上下文；
+2. 代码执行。
+
+变量对象的修改与这两个阶段密切相关。
+
+这两个阶段是普遍行为，与上下文类型无关。
+
+一、进入执行上下文
+
+进入执行上下文（但代码尚未执行）时，VO 有以下属性（它们在一开始描述）：
+
+- 针对每个函数的形式参数（如果位于函数执行上下文）——创建所述变量对象的具有形参名称和形参值的属性；对于未传递的参数——创建名为形参、值为 undefined 的变量对象的属性。
+- 对于每个函数声明（FunctionDeclaration，FD）——创建具有函数对象的名称和值的变量对象的属性；如果变量对象已包含同名属性，则替换其值和属性。
+- 对于每个变量声明（var，VariableDeclaration）——创建变量名和值未定义的变量对象的属性；如果变量名与已声明的形参或函数名相同，则变量声明不干扰现有属性。
+
+一个例子：
+
+```javascript
+function test(a, b) {
+  var c = 10
+  function d() {}
+  var e = function _e() {};
+  (function x() {})
+}
+test(10)
+```
+
+在使用传递的参数 10 进入 test 函数上下文时，AO 如下：
+
+```javascript
+AO(test) = {
+  a: 10,
+  b: undefined,
+  c: undefined,
+  d: <reference to FunctionDeclaration "d">,
+  e: undefined
+}
+```
+
+注意，AO 不包含函数 x。这是因为 x 不是函数声明，而是不影响 VO 的函数表达式（FunctionExpression，缩写为 FE）。
+
+然而，函数 _e 也是一个函数表达式，但正如我们将在下面看到的，因为将它赋给变量 e，所以它可以通过 e 名称访问。
+
+二、代码执行
+
+此时，AO/VO 已经被属性填充（尽管并非所有属性都具有我们传递的真实的值，但大多数属性仍然具有初始值 undefined）。
+
+考虑所有相同的示例，代码解释期间的 AO/VO 修改如下：
+
+```javascript
+AO['c'] = 10
+AO['e'] = <reference to FunctionDeclaration "_e">
+```
+
+函数表达式 _e 仍然在内存中，只是因为它被保存到声明的变量 _e 中。但函数表达式 x 不在 AO/VO 中。如果我们试图在定义之前甚至之后调用 x 函数，我们会得到一个错误： `"x" is not defined` 。未保存到变量的函数表达式只能使用其定义（原地）或递归调用。
+
+一个经典例子：
+
+```javascript
+alert(x) // function x() {}
+
+var x = 10
+alert(x) // 10
+
+x = 20
+
+function x() {}
+
+alert(x) // 20
+```
+
+为什么在第一个警告中 x 是一个函数，而且在声明之前是可访问的？为什么不是 10 或 20？因为，根据规则——VO 在进入上下文时用函数声明填充。同样，在同一阶段，在进入上下文时，有一个变量声明 x ，但是正如我们上面提到的，变量声明的步骤在语义上在函数和形参声明之后，并且在这个阶段不干扰已经声明的同名函数或形参的值。因此，在进入上下文 VO 时，填写如下：
+
+```javascript
+VO = {}
+VO['x'] = <reference to FunctionDeclaration "x">
+
+// found var x = 10;
+// if function "x" would not be already defined 
+// then "x" be undefined, but in our case
+// variable declaration does not disturb
+// the value of the function with the same name
+
+VO['x'] = <the value is not disturbed, still function>
+```
+
+然后在代码执行阶段，对 VO 进行如下修改：
+
+```javascript
+VO['x'] = 10
+VO['x'] = 20
+```
+
+我们在第二次和第三次 alert() 中看到的情况。
+
+在下面的例子中，我们再次看到变量在进入上下文阶段时被放入 VO 中（因此，else 块永远不会执行，但变量 b 仍然存在于 VO 中）：
+
+```javascript
+if (true) {
+  var a = 1
+} else {
+  var b = 2
+}
+alert(a) // 1
+alert(b) // undefined, but not "b is not defined"
+```
+
+### 关于变量
+
+> Variables are declared only with using var keyword.
+>
+> 像这样：
+>
+> #+BEGIN_SRC js
+> a = 10
+> #+END_SRC
+
+只需创建全局对象的新属性（而不是变量）。“非变量”并不是指它不能被更改，而是指ECMAScript中 `not the variable` 的概念（由于 VO（globalContext）=== global，因此变量也成为全局对象的属性）。
+
+不同之处（通过例子）：
+
+```javascript
+alert(a) // undefined
+alert(b) // Uncaught ReferenceError: b is not defined
+
+b = 10
+var a = 20
+```
+
+这一切又取决于 VO 及其修改阶段（进入上下文阶段和代码执行阶段）：
+
+```javascript
+// 进入上下文
+VO = {
+  a: undefined
+}
+```
+
+我们看到在这个阶段没有任何 b，因为它不是变量，b 只会在代码执行阶段出现（但在我们的例子中不会出现，因为有错误）。
+
+更改代码：
+
+```javascript
+alert(a) // undefined
+
+b = 10
+alert(b) // 10
+
+var a = 20
+alert(a) // 20
+```
+
+关于变量还有一点很重要。与简单属性相反，变量具有属性 `{DontDelete}` ，这意味着不可能通过 delete 运算符删除变量：
+
+```javascript
+a = 10
+alert(window.a) // 10
+alert(delete a) // true
+alert(window.a) // undefined
+
+var b = 20
+alert(window.b) // 20
+alert(delete b) // false
+alert(window.b) // 20
+```
+
+注意，在 ES5 中， `{DontDelete}` 被重命名为 `[[Configurable]]` ，并且可以通过 Object.defineProperty 方法手动管理。
+
+`eval` 上下文中：变量没有 `{DontDelete}` 。
+
+```javascript
+eval("var a = 10")
+alert(window.a)
+alert(delete a)
+alert(window.a)
+```
+
+> *Firebug* also *uses* `eval` to execute your code from the console. So there /var/s also do not have `{DontDelete}`  and can be deleted.
+
+Firebug 变成了 Firefox Devtools。
+
+### 实现 `__parent__`
+
+例子（SpiderMonkey，Rhino）：
+
+```javascript
+var global = this
+var a = 10
+
+function foo() {}
+
+console.log(foo.__parent__)
+
+var VO = foo.__parent__
+console.log(VO.a)
+console.log(VO === global)
+```
+
+此时（2023-02）已经不是预料的运行结果了。
+
+## 3. `this`

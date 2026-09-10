@@ -1,0 +1,14 @@
+---
+title: Sound
+status: draft
+date: 2025-06-15T19:22:54+08:00
+header: Tools
+---
+
+- Fix Archlinux sound system
+
+插上麦克风后的一些 journalctl -f 输出
+
+wireplumber[739]: The decibel volume range for element 'Mic' (-5200 dB - -200 dB) has negative maximum. Disabling the decibel range.
+
+用的是闪克的USB麦克风，有的时候能录音，有的时候不能

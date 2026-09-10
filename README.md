@@ -42,7 +42,7 @@ blog/
 │   │   ├── courses/     # 课程笔记
 │   │   ├── science/     # 科学
 │   │   └── history/     # 历史
-│   └── *.org            # 独立页面（about, now, projects 等）
+│   └── *.md             # 独立页面（about, now, projects 等）
 ├── layouts/             # Hugo 模板
 │   ├── _default/        # 基础模板（section.json.json）
 │   ├── _partials/       # 可复用组件（head, components）
@@ -103,24 +103,28 @@ npm install
 
 | 目录 | 格式 | 原因 |
 |------|------|------|
-| `content/` 及根目录独立页面 | Org Mode (`.org`) | Hugo 原生渲染，个人偏好 |
-| `content/til/` | Org Mode (`.org`) | 笔记类内容，按分类文件夹组织，子分类用 `#+HEADER` 标记 |
+| `content/` 及根目录独立页面 | Markdown (`.md`) | Hugo 原生渲染（Goldmark），2026-09 由 Org Mode 迁移 |
+| `content/til/` | Markdown (`.md`) | 笔记类内容，按分类文件夹组织，子分类用 front matter `header` 标记 |
+
+> 2026-09-10 完成 `.org` → `.md` 迁移：1581 篇内容 + 模板（graph-data 链接解析、`about.md` / `-en.md` 判断）+ hugo.yaml（`parser.attribute.block`、typographer 对齐 go-org、脚注 backlinkHTML、TOC endLevel）。转换脚本见 `scripts/org2md.py`。
 
 ### 文件命名规则
 
 | 目录 | 推荐格式 | 示例 |
 |------|----------|------|
-| `posts/` | `{主题词}.org` | `2025.org`, `a-dream.org`, `about-good-posts.org` |
-| `til/软件/` | `{前缀}-{描述}.org` | `git-rebase.org`, `css-flexbox.org` |
-| `til/其他分类/` | `{描述}.org` | `sleep.org`, `iptables.org` |
+| `posts/` | `{主题词}.md` | `2025.md`, `a-dream.md`, `about-good-posts.md` |
+| `til/软件/` | `{前缀}-{描述}.md` | `git-rebase.md`, `css-flexbox.md` |
+| `til/其他分类/` | `{描述}.md` | `sleep.md`, `iptables.md` |
 
 ### TIL header 标记
 
 扁平化结构下，子分类用 `#+HEADER` 标记，不建立子目录：
 
-```org
-#+TITLE: Git merge 与 rebase
-#+HEADER: Git
+```yaml
+---
+title: Git merge 与 rebase
+header: Git
+---
 ```
 
 分类页按 header 分组展示，右侧边栏可折叠筛选。支持多 header（空格分隔）。
@@ -129,7 +133,7 @@ npm install
 - ❌ 不能有大写字母
 - ❌ 不能有空格
 - ❌ 不能有中文标点
-- ❌ 避免无意义编号（`001.org`, `note1.org`）
+- ❌ 避免无意义编号（`001.md`, `note1.md`）
 
 ### TIL 笔记边界纪律（2026-09 对照 blackglory.me 树形笔记结论）
 
@@ -139,33 +143,37 @@ Blackglory 的笔记 = 每主题单页深层可折叠概念树（如 Linux 页 1
 
 1. **边界后置、就地生长** — 同主题碎片别急着开新文件或建目录，优先合进现有文件做 `*` 小节。只有文件内部层级到 4 层以上、且各小节需要独立引用时，才拆成新文件。
 2. **检索宽容** — 一条内容同属多个 header 时随手放任意一处即可，不纠结归属（Pagefind 兜底）。多 header 参数支持真实多归属，但默认不为此花时间。
-3. **深链可用** — go-org 给每个 `*` 标题自动生成 `#headline-N` 锚点，文件内小节可被 URL 直达，cross-link 时直接使用。
+3. **深链可用** — Goldmark 按标题文本生成锚点（`#标题文本`，CJK 原样保留；重复标题自动加 `-1` 后缀），文件内小节可被 URL 直达。需要固定锚点时用 `{#custom-id}` 属性。
 
 触发阈值（动边界的信号）：
 - header 组 > ~60 篇且成员互相引用频繁 → 合小为大，内部 `*` 树结构化
 - 单文件 > ~6 个平级 `*` 小节且语义独立 → 拆文件
 
-### Org Mode Frontmatter 示例
+### Markdown Frontmatter 示例
 
-```org
-#+TITLE: 文章标题
-#+DATE: 2026-01-01T00:00:00
-#+TAGS[]: 标签1 标签2
+```yaml
+---
+title: 文章标题
+date: 2026-01-01T00:00:00+08:00
+tags: [标签1, 标签2]
+---
 ```
 
-独立页面（如 `about.org`）通常只需要 `#+TITLE`。
+独立页面（如 `about.md`）通常只需要 `title`。
 
 **TIL 必带整理状态与日期**（状态 2026-09-01 起 / 日期 2026-09-10 起，全库强制）：
 
-```org
-#+TITLE: 某知识点
-#+STATUS: draft      # AI 生成/代写，未经人工整理；人工复核后改 reviewed
-#+DATE: 2026-07-19T10:36:24   # 首次入库时间
-#+HEADER: Linux      # 可选，子分类
+```yaml
+---
+title: 某知识点
+status: draft      # AI 生成/代写，未经人工整理；人工复核后改 reviewed
+date: 2026-07-19T10:36:24+08:00   # 首次入库时间
+header: Linux      # 可选，子分类
+---
 ```
 
-- `til/` 下所有文件必须有 `#+STATUS`，位于 `#+TITLE:` 下一行
-- `#+DATE:` 紧随 `#+STATUS:`（有 `#+HEADER:` 时在其前），ISO8601 格式 `YYYY-MM-DDThh:mm:ss`
+- `til/` 下所有文件必须有 `status`，位于 `title` 下一行
+- `date` 紧随 `status`（有 `header` 时在其前），ISO8601 格式 `YYYY-MM-DDThh:mm:ss+08:00`
 - 日期语义是**首次入库时间**：新建 TIL 用当天时间；历史文件取 git 首次提交时间（`git log --diff-filter=A --follow`），无 git 历史时回退文件 mtime。2026-09-10 已全库补齐 574 篇
 - 日期驱动 `/til/` 的「最近新增」排序（此前 fallback 到文件 mtime，克隆/检出后无意义）
 - AI 代写一律 `draft`；用户用自己的话复核/补充后改为 `reviewed`
@@ -181,29 +189,29 @@ Blackglory 的笔记 = 每主题单页深层可折叠概念树（如 Linux 页 1
 ### 标签（Tags）
 
 - `tags` 是唯一的 taxonomy
-- 在 `posts/` 中使用 `#+TAGS[]:` 添加
+- 在 `posts/` 中使用 front matter `tags: [a, b]` 添加
 - `til/` 不推荐使用标签，文件夹分类已足够
 
 ### TIL 引用来源格式
 
 TIL 的信息源链接统一放在文件末尾：
 
-- **单一来源** → `来源: [[URL][描述文字]]`
-- **多个来源** → `* 参考` 小节，Org link 列表
+- **单一来源** → `来源: [描述文字](URL)`
+- **多个来源** → `## 参考` 小节，Markdown 链接列表
 
-```org
+```markdown
 // 单一来源
-来源: [[https://en.wikipedia.org/wiki/Asperger_syndrome][Wikipedia: Asperger syndrome]]
+来源: [Wikipedia: Asperger syndrome](https://en.wikipedia.org/wiki/Asperger_syndrome)
 
 // 多个来源
-* 参考
-- [[https://en.wikipedia.org/wiki/Information_retrieval][Wikipedia: Information retrieval]]
-- [[https://scholar.google.com/intl/en/scholar/help.html][Google Scholar Search Tips]]
+## 参考
+- [Wikipedia: Information retrieval](https://en.wikipedia.org/wiki/Information_retrieval)
+- [Google Scholar Search Tips](https://scholar.google.com/intl/en/scholar/help.html)
 ```
 
 注意：
 - 内联引用（正文中随文出现的链接）不受此约束
-- 推荐阅读/延伸资源不属于"信息源"，不用加到 `* 参考`，用 `** 推荐资源` 或其他合适的小节标题
+- 推荐阅读/延伸资源不属于"信息源"，不用加到 `## 参考`，用 `### 推荐资源` 或其他合适的小节标题
 
 ## 模板体系
 
@@ -241,7 +249,7 @@ npm run embed
 ### 新建内容工作流程
 
 1. 根据内容类型选择 `content/posts/` 或 `content/til/` 下的正确分类
-2. 按命名规范创建 `.org` 文件，填写 frontmatter
+2. 按命名规范创建 `.md` 文件，填写 YAML frontmatter
 3. 运行 `npm run dev` 本地预览
 4. 内容完成后运行 `npm run all && npm run embed` 构建并更新搜索索引（关键词 + 语义）
 5. 提交变更

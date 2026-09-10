@@ -1,0 +1,20 @@
+---
+title: 'Learn Others Org Mode Workflow'
+status: draft
+date: 2025-06-15T19:22:54+08:00
+header: Tools
+---
+
+## Jethro Kuan
+
+<https://blog.jethro.dev/posts/org_mode_workflow_preview/>
+
+> Trust that everything you will need to think about is captured somewhere. > > Filling up the inbox should be fun! If you feel dread when you do this, you're probably doing this wrong.
+
+## www.cachestocaches.com
+
+<http://www.cachestocaches.com/2016/9/my-workflow-org-agenda/>
+
+## Lean to use Clock
+
+<https://writequit.org/denver-emacs/presentations/2017-04-11-time-clocking-with-org.html>

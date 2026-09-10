@@ -1,0 +1,11 @@
+---
+title: '【读书记47】追忆似水年华 by Marcel Proust'
+date: 2025-11-15T12:00:00+08:00
+tags: ['读书记']
+---
+
+https://en.wikipedia.org/wiki/In_Search_of_Lost_Time
+
+> 他有一个令人钦佩的母亲，对他无比宠爱，因此他遇到最细微的不和谐也如同受到伤害，最淡薄的敌意或者最不经意的可笑行径都会在他心头留下痛苦的记录。
+
+&lt;span style="color:var(--dushuji-count-color)"&gt;2025年读完的第47本，总阅读量第47本</span>

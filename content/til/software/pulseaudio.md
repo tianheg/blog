@@ -1,0 +1,16 @@
+---
+title: Pulseaudio
+status: draft
+date: 2025-06-15T19:22:54+08:00
+header: Linux
+---
+
+## 问题
+
+### 开机后播放音频没有声音
+
+解决办法：
+
+\`\`\`sh killall pulseaudio \`\`\`
+
+来源: <https://unix.stackexchange.com/a/171925>

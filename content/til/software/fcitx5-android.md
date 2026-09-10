@@ -1,0 +1,78 @@
+---
+title: 'Fcitx5 for Android（小企鹅输入法）'
+status: draft
+date: 2026-08-01T20:49:58+08:00
+header: Tools
+---
+
+fcitx5-android 是桌面 fcitx5 的 Android 移植版，拼音/双拼/Rime/五笔引擎齐全，词库格式与桌面版通用（libime）。开源、无广告、无云同步，数据全在本地。
+
+### 安装渠道
+
+- GitHub Release（github.com/fcitx5-android/fcitx5-android/releases）：与 F-Droid 版签名一致，可互相覆盖安装
+- F-Droid（org.fcitx.fcitx5.android）：项目可重复构建
+- Google Play：闭源组件、传数据到 Google；签名不同，不能与其他渠道互装
+
+尝鲜最新版可去 Jenkins CI（jenkins.fcitx-im.org/job/android/job/fcitx5-android/），或装独立的 fcitx5-android-updater 更新器。
+
+### 基础操作
+
+- 调整顺序：设置里长按输入法条目，出现阴影后上下拖动
+- 删除：左滑条目变红；0.0.3-37+ 支持铅笔图标进多选批量删
+- 重置输入状态（清空拼音串/候选）：按住退格键向左划一下
+- 修改未提交的文本：候选区滑动空格键移光标；或在应用设置开"在程序中展示预编辑文本"、行为里关闭"忽略系统光标位置"
+- 颜文字/emoji/Unicode：按住左下角 `,` 键上滑，三个按钮分别是 Unicode 搜索、emoji 列表（点 `:-)` 切颜文字）、快速输入
+- 语音输入：键盘设置开"显示语音输入按钮"，可用 Sayboard（开源，Vosk 本地识别）或 Google 语音输入（闭源）
+- 共享输入状态（全局选项）：All = 所有应用同一输入法；Program = 按应用记住；No = 默认
+- "默认状态为激活"：英文放第一但首次打开键盘落在中文
+
+### 导入拼音词库（.scel / .txt / .dict）
+
+1. 准备词库文件：
+  - `.scel` 搜狗细胞词库，pinyin.sogou.com/dict/ 下载
+  - `.txt` libime 文本格式，三列排布：词条 全拼 权重（自制推荐）
+  - `.dict` libime 二进制格式，如 fcitx5-pinyin-zhwiki 的发布包
+2. 导入二选一：
+  - 直接点文件：fcitx5 注册了 `.dict` / `.scel` / `.txt` 的打开方式，文件管理器里点开或分享给 fcitx5 即自动导入
+  - 设置里管理：拼音设置 → 词库 → 添加
+3. `.scel` 和 `.txt` 导入时自动转换为 `.dict` ，无需手动转换
+4. 词库文件落在 `data/pinyin/dictionaries/`
+
+推荐第三方词库：fcitx5-pinyin-zhwiki（felixonmars）、mw2fcitx（outloudvi）。
+
+### 导入码表（五笔/郑码等，0.0.3-43+）
+
+1. 从 fcitx/fcitx5-table-extra 仓库下载 `.conf` / `.conf.in` 配置文件 + `.dict` / `.txt` 词典（郑码即 zhengma.conf.in + zhengma.txt）
+2. 附加组件 → 码表（点齿轮）→ 管理码表输入法 → 右下角加号
+3. 选"从单独的文件中导入" → 分别选配置文件和词典 → 确定
+4. 通知提示导入完成后，列表出现新输入法
+
+手动方式（老版本）：改 conf 中 `File=` 为 `table/xxx.dict` ，用 `libime_tabledict xxx.txt xxx.dict` 转格式，分别放入 `inputmethod/` 和 `table/` 目录，重启输入法。
+
+### 备份与恢复
+
+所有数据在 `/sdcard/Android/data/org.fcitx.fcitx5.android/files/` ，整个目录拷走即是完整备份：
+
+- `data/pinyin/user.{dict,history}` — 拼音/双拼用户词库 + 输入历史
+- `data/pinyin/dictionaries/` — 导入的第三方词库
+- `data/table/` — 码表词典 + 各码表用户历史
+- 其余为设置、快捷键、主题等配置
+
+不需要 root/adb，两种方式访问：
+- 系统自带文件管理器（DocumentsUI）侧边栏选择"小企鹅输入法5"直接进入该目录
+- 手机连电脑开 USB 文件传输，Android/data 目录电脑上可直接访问
+
+换机流程：旧机拷出 files/ → 新机装好 fcitx5 跑一次初始化 → 覆盖回新机同路径 → 重启输入法（设置里划掉后台或强行停止），词库和输入习惯全回来。
+
+### 简繁转换
+
+附加组件 → 简繁转换，引擎选 OpenCC。简转繁可选 s2hk（香港）/ s2t（繁体）/ s2tw（台湾正体）/ s2twp（台湾正体+常用词）；繁转简常用 t2s、tw2sp（台湾正体→简体+大陆词汇）。
+
+### 已知问题
+
+键盘与导航栏重叠：主题设置里把"导航栏背景"改为"跟随键盘背景色"。小米/红米上键盘偶尔弹不出，先查后台管理里 fcitx5 是否被杀进程。
+
+## 参考
+- [Fcitx5 for Android 官方文档](https://fcitx5-android.github.io/)
+- [官方文档：安装](https://fcitx5-android.github.io/installation/)
+- [官方文档：常见问题](https://fcitx5-android.github.io/faq/)

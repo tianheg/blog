@@ -1,0 +1,29 @@
+---
+title: '在 GitHub Action 中使用 sed'
+date: 2022-04-17
+tags: ['技术']
+---
+
+[源文件地址](https://github.com/tianheg/docker-hugo/blob/de93b960f0e472ee4a7a8cacb9449bdfb2b57764/.github/workflows/check-release.yml)
+
+关键修改之前：
+
+```
+    - name: Upgrade Hugo
+      if: ${{ steps.hugo_version.outputs.VERSION }} != ${{ steps.local_version.outputs.VERSION }}
+      run: |
+        sed -i 's/HUGO_VERSIONN=${{ steps.local_version.outputs.VERSION }}/HUGO_VERSION=${{ steps.hugo_version.outputs.VERSION }}/' Dockerfile
+```
+
+关键修改之后：
+
+```
+    - name: Upgrade Hugo
+      if: ${{ steps.hugo_version.outputs.VERSION }} != ${{ steps.local_version.outputs.VERSION }}
+      run: |
+        sed -i 's/${{ steps.local_version.outputs.VERSION }}/${{ steps.hugo_version.outputs.VERSION }}/' Dockerfile
+```
+
+由此可见，是多余的 =HUGO_VERSIONN==
+，当我仔细看这段代码，才发现多打了一个字母
+N，难怪测试了那么多次都不行，把前面的 =HUGO_VERSION== 删掉就可以了。

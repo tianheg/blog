@@ -1,0 +1,507 @@
+---
+title: 'How to self-host Forgejo with docker on Ubuntu 24.04'
+date: 2026-02-14T14:20:00+08:00
+tags: ['技术', English]
+---
+
+I want to deploy [Forgejo](https://forgejo.org/) for about two years, never want to write a post about it. Now I finally deploy it. Why I want to self-host this GitHub alternative? Because I hate complexity, I donot like GitHub which has more 'features' but users donot benefit from them. I want something certain, I'm sure I own the data when I have a Forgejo instance. If I host my code on GitHub, I have to deal with the terible UX. I couldn't stand with it anymore.
+
+Now let me show the way how I deploy Forgejo.
+
+## Prepare the server
+
+Use a Hetzner server(Ubuntu 24.04 LTS) deploy Forgejo. Donot forget to add SSH key.
+
+### 1. Ubuntu initial setup
+
+Edit local =~/.ssh/config=:
+
+```ini
+Host forgejo
+  Hostname IP
+  User root
+  IdentityFile ~/.ssh/id_ed25519
+```
+
+Then run `ssh forgejo` login the server. Run below cmd to complete initial setup:
+
+```bash
+apt-get update && apt-get upgrade
+## rm snapd, donot like it, never use it
+apt autoremove snapd --purge -y
+## install Docker
+# https://docs.docker.com/engine/install/ubuntu/#install-using-the-repository
+install -m 0755 -d /etc/apt/keyrings
+curl -fsSL https://download.docker.com/linux/ubuntu/gpg -o /etc/apt/keyrings/docker.asc
+chmod a+r /etc/apt/keyrings/docker.asc
+tee /etc/apt/sources.list.d/docker.sources <<EOF
+Types: deb
+URIs: https://download.docker.com/linux/ubuntu
+Suites: $(. /etc/os-release && echo "${UBUNTU_CODENAME:-$VERSION_CODENAME}")
+Components: stable
+Signed-By: /etc/apt/keyrings/docker.asc
+EOF
+
+apt-get update
+apt-get install docker-ce docker-ce-cli containerd.io docker-buildx-plugin docker-compose-plugin
+```
+
+### 2. Create a git user
+
+```bash
+adduser \
+  --system \
+  --group \
+  --disabled-password \
+  --shell /bin/bash \
+  --home /home/git \
+  git
+usermod -aG docker git
+```
+
+## Add a A DNS record
+
+On the domain DNS manage site, mine is Cloudflare, add a A record to your domain that point to your server IPv4 IP.
+
+## Write docker-compose.yml file
+
+Prepare the folder:
+
+```bash
+mkdir -p ./forgejo
+sudo chown -R git:git ./forgejo
+mkdir -p ./conf
+sudo chown -R git:git ./conf
+id git
+# uid=108(git) gid=110(git) groups=110(git),988(docker)
+```
+
+Create `Caddyfile`:
+
+```ini
+git.example.com {
+    encode gzip zstd
+    reverse_proxy localhost:3001 {
+        header_up Host {host}
+        header_up X-Real-IP {remote_host}
+        header_up X-Forwarded-For {remote_host}
+        header_up X-Forwarded-Proto {scheme}
+    }
+}
+```
+
+Setup port forward, so that SSH url will be `ssh://git@git.example.com/xxx/xxx.git` not `ssh://git@git.example.com:2222/xxx/xxx.git`:
+
+```bash
+vim forgejo-shell.sh
+chmod +x /path_to/forgejo-shell.sh
+usermod -s /abs_path_to/forgejo-shell.sh git
+vim /etc/ssh/sshd_config
+systemctl restart ssh
+sudo -u git /path_to/forgejo-shell.sh
+# enter forgejo container shell
+ssh -T git@git.example.com
+# run above cmd in local PC
+# Hi there, youruser! You've successfully authenticated with the key named xxxxxx, but Forgejo does not provide shell access.
+# If this is unexpected, please log in with password and setup Forgejo under another user.
+```
+
+```bash
+# forgejo-shell.sh
+#!/bin/sh
+/usr/bin/docker exec -i --env SSH_ORIGINAL_COMMAND="$SSH_ORIGINAL_COMMAND" forgejo sh "$@"
+```
+
+```bash
+# /etc/ssh/sshd_config
+## add to bottom
+Match User git
+    AuthorizedKeysCommandUser git
+    AuthorizedKeysCommand /usr/bin/docker exec -i forgejo /usr/local/bin/forgejo keys -u %u -t %t -k %k
+```
+
+Create `docker-compose.yml`:
+
+```yaml
+services:
+  forgejo:
+    image: codeberg.org/forgejo/forgejo:14-rootless
+    container_name: forgejo
+    user: 108:110
+    environment:
+      - USER_UID=108
+      - USER_GID=110
+      - FORGEJO__database__DB_TYPE=sqlite3
+      - FORGEJO__server__SSH_PORT=22
+      - FORGEJO__server__SSH_LISTEN_PORT=2222 # port forward
+      - FORGEJO__repository__DEFAULT_REPO_UNITS=repo.code
+      - FORGEJO__repository__DISABLE_MIGRATIONS=true
+      - FORGEJO__repository__DISABLE_STARS=true
+    restart: unless-stopped
+    networks:
+      - forgejo
+    volumes:
+      - ./forgejo:/var/lib/gitea
+      - ./conf:/etc/gitea
+      - /etc/localtime:/etc/localtime:ro
+    ports:
+      - "3000:3000"
+
+  caddy:
+    image: caddy:2-alpine
+    container_name: caddy
+    network_mode: 'host'
+    restart: unless-stopped
+    logging:
+      driver: 'json-file'
+      options:
+        max-size: '10m'
+        max-file: '10'
+    volumes:
+      - ./Caddyfile:/Caddyfile:ro
+      - caddy_data:/data
+    command: 'caddy run --config /Caddyfile --adapter caddyfile'
+
+anubis:
+    image: ghcr.io/techarohq/anubis:latest
+    container_name: anubis
+    restart: unless-stopped
+    environment:
+      BIND: ":3000"
+      TARGET: "http://forgejo:3000"
+      SERVE_ROBOTS_TXT: "true"
+      TRUSTED_PROXIES: "127.0.0.1,::1"
+    networks:
+      - forgejo
+    ports:
+      - "3001:3000"
+
+networks:
+  forgejo:
+    external: false
+
+volumes:
+  caddy_data:
+  caddy_config:
+```
+## Backup Forgejo
+
+I backup data to Hetzner Storagebox.
+
+First, create SSH key, add pub key to Storagebox.
+
+```bash
+ssh-keygen -t ed25519 -f ~/.ssh/hetzner_storagebox
+cat ~/.ssh/hetzner_storagebox.pub | ssh -p23 u000000@u000000.your-storagebox.de install-ssh-key
+# type passwd
+```
+
+Note, if the key name is not id_ed25519, need add config in =~/.ssh/config=:
+
+```ini
+Host storagebox
+  HostName u000000.your-storagebox.de
+  User u000000
+  Port 23
+  IdentityFile ~/.ssh/hetzner_storagebox
+```
+
+Second, run below script.
+
+```bash
+#!/bin/bash
+
+# Configuration
+STORAGE_USER="u000000"
+STORAGE_HOST="u000000.your-storagebox.de"
+STORAGE_PORT="23"
+REMOTE_DIR="forgejo_backup"
+LOCAL_BACKUP_DIR="/tmp"
+
+echo "[$(date '+%Y-%m-%d %H:%M:%S')] === Starting Forgejo backup process ==="
+
+# need at /home/git
+if [ "$PWD" != "/home/git" ]; then
+    echo "Changing directory to /home/git"
+    cd /home/git
+fi
+
+# Stop service
+echo "Stopping Forgejo service (docker compose stop)..."
+docker compose stop
+if [ $? -eq 0 ]; then
+    echo "Service stopped successfully."
+else
+    echo "WARNING: Failed to stop service, continuing anyway..."
+fi
+
+# Create timestamp and archive name
+TIMESTAMP=$(date +%Y%m%d-%H%M%S)
+ARCHIVE_NAME="forgejo-backup-$TIMESTAMP.tar.gz"
+ARCHIVE_PATH="$LOCAL_BACKUP_DIR/$ARCHIVE_NAME"
+
+# Collect SSH forwarding config (needs sudo to read /etc/ssh/sshd_config)
+sudo cp /etc/ssh/sshd_config ./sshd_config.backup 2>/dev/null || \
+  echo "Warning: cannot copy /etc/ssh/sshd_config (run backup as root or add sudo)"
+
+# Save current git user's shell setting for reference
+getent passwd git | cut -d: -f7 > ./git-shell.backup 2>/dev/null || true
+
+# Create compressed archive
+tar -czf "$ARCHIVE_PATH" \
+  ./forgejo \
+  ./conf \
+  ./Caddyfile \
+  ./docker-compose.yaml \
+  ./forgejo-shell.sh \
+  ./sshd_config.backup \
+  ./git-shell.backup
+
+# Upload to Storage Box
+echo "Uploading archive to $STORAGE_USER@$STORAGE_HOST:$REMOTE_DIR/ using rsync (port $STORAGE_PORT)..."
+rsync -avh --delete -e "ssh -p$STORAGE_PORT" "$ARCHIVE_PATH" "$STORAGE_USER@$STORAGE_HOST:$REMOTE_DIR/"
+RSYNC_EXIT=$?
+
+# Clean up temp files
+rm -f ./sshd_config.backup ./git-shell.backup
+
+if [ $RSYNC_EXIT -eq 0 ]; then
+    echo "Upload completed successfully."
+
+    # Remove local archive if upload succeeded
+    echo "Removing local archive: $ARCHIVE_PATH"
+    rm "$ARCHIVE_PATH"
+    if [ $? -eq 0 ]; then
+        echo "Local archive removed."
+    else
+        echo "WARNING: Failed to remove local archive (permissions?)."
+    fi
+
+    echo "Backup successful: $ARCHIVE_NAME"
+else
+    echo "ERROR: Upload failed (rsync exit code: $RSYNC_EXIT). Keeping local archive at $ARCHIVE_PATH"
+fi
+
+# Start service
+echo "Starting Forgejo service (docker compose start)..."
+docker compose start
+if [ $? -eq 0 ]; then
+    echo "Service started successfully."
+else
+    echo "ERROR: Failed to start service. Please check manually."
+    exit 1
+fi
+
+echo "[$(date '+%Y-%m-%d %H:%M:%S')] === Backup process finished ==="
+```
+
+Third, make it backup repeatly.
+
+```bash
+crontab -e
+## add below line to edit area
+# 0 2 * * * /home/git/backup.sh >> /home/git/backup.log 2>&1
+crontab -l
+```
+
+## Restore Forgejo
+
+The backup script above creates a complete snapshot of the Forgejo instance
+(data, config, Caddyfile, compose file, SSH forwarding setup). When you need
+to restore on a new machine or recover from data loss, the script below pulls
+the latest backup from StorageBox and reinstates everything.
+
+Place `forgejo-restore.sh` at `/home/git/`:
+
+```bash
+#!/bin/bash
+# forgejo-restore.sh -- Restore Forgejo from Hetzner StorageBox backup
+#
+# Usage:
+#   ./forgejo-restore.sh --list              # List available backups
+#   ./forgejo-restore.sh                     # Restore latest backup
+#   ./forgejo-restore.sh forgejo-backup-20260606-120000.tar.gz  # Specific file
+
+set -euo pipefail
+
+# ── Config (adjust before using) ──
+STORAGE_USER="u000000"
+STORAGE_HOST="u000000.your-storagebox.de"
+STORAGE_PORT="23"
+REMOTE_DIR="./backups/forgejo"
+SSH_KEY="/home/git/.ssh/hetzner_storagebox"
+
+# ── Colors ──
+RED='\033[0;31m'; GREEN='\033[0;32m'; YELLOW='\033[1;33m'; CYAN='\033[0;36m'; NC='\033[0m'
+info()  { echo -e "${CYAN}[INFO]${NC}  $*"; }
+ok()    { echo -e "${GREEN}[OK]${NC}    $*"; }
+warn()  { echo -e "${YELLOW}[WARN]${NC}  $*"; }
+err()   { echo -e "${RED}[ERR]${NC}   $*"; }
+
+confirm() { echo -en "${YELLOW}[?]${NC} $* [y/N] "; read -r resp; case "$resp" in y|Y|yes|Yes) return 0 ;; *) exit 1 ;; esac; }
+
+check_prerequisites() {
+    local missing=0
+    command -v docker &>/dev/null || { err "Docker not found"; missing=1; }
+    docker compose version &>/dev/null || { err "Docker Compose not found"; missing=1; }
+    if ! ssh -i "$SSH_KEY" -p "$STORAGE_PORT" -o BatchMode=yes -o ConnectTimeout=5 \
+         "$STORAGE_USER@$STORAGE_HOST" exit 2>/dev/null; then
+        warn "Cannot reach StorageBox at $STORAGE_HOST:$STORAGE_PORT"; missing=1
+    fi
+    [ "$missing" -eq 1 ] && { err "Prerequisites not met. Aborting."; exit 1; }
+    ok "Prerequisites check passed"
+}
+
+list_backups() {
+    echo ""
+    info "Available backups on StorageBox:"
+    ssh -i "$SSH_KEY" -p "$STORAGE_PORT" -o BatchMode=yes \
+        "$STORAGE_USER@$STORAGE_HOST" \
+        "ls -lh $REMOTE_DIR/forgejo-backup-*.tar.gz 2>/dev/null || echo '(none)'"
+}
+
+fetch_backup() {
+    local archive_name="$1" dest="$2"
+    info "Downloading $archive_name..."
+    rsync -avh --progress -e "ssh -i $SSH_KEY -p $STORAGE_PORT" \
+        "$STORAGE_USER@$STORAGE_HOST:$REMOTE_DIR/$archive_name" "$dest"
+}
+
+restore() {
+    local archive_path="$1"
+    local restore_dir
+    restore_dir="$(mktemp -d)"
+    trap 'rm -rf "$restore_dir"' EXIT
+
+    info "Extracting archive..."
+    tar -xzf "$archive_path" -C "$restore_dir"
+
+    # Detect compose filename
+    local compose_file=""
+    for f in docker-compose.yaml docker-compose.yml compose.yml; do
+        [ -f "$restore_dir/$f" ] && compose_file="$f" && break
+    done
+    [ -z "$compose_file" ] && { err "No docker-compose file in backup"; exit 1; }
+
+    # Stop existing
+    docker compose down 2>/dev/null || true
+    ok "Forgejo stopped"
+
+    # Backup current data defensively
+    local ts
+    ts="$(date +%Y%m%d-%H%M%S)"
+    if [ -d forgejo ] || [ -d conf ]; then
+        confirm "Existing data found, proceed with restore?"
+        mkdir -p "/tmp/forgejo-pre-restore-$ts"
+        [ -d forgejo ] && cp -a forgejo "/tmp/forgejo-pre-restore-$ts/"
+        [ -d conf ]    && cp -a conf    "/tmp/forgejo-pre-restore-$ts/"
+        ok "Current data backed up to /tmp/forgejo-pre-restore-$ts/"
+    fi
+
+    # Restore core data
+    [ -d "$restore_dir/forgejo" ] && cp -a "$restore_dir/forgejo" ./forgejo
+    [ -d "$restore_dir/conf" ]    && cp -a "$restore_dir/conf"    ./conf
+    [ -f "$restore_dir/Caddyfile" ] && cp "$restore_dir/Caddyfile" ./
+    cp "$restore_dir/$compose_file" "./$compose_file"
+
+    # Fix ownership (Forgejo container runs as uid=108/gid=110)
+    chown -R 108:110 ./forgejo ./conf 2>/dev/null || \
+        warn "Could not set ownership (run as root to fix)"
+
+    ok "Data restored"
+
+    # Restore forgejo-shell.sh if present
+    if [ -f "$restore_dir/forgejo-shell.sh" ]; then
+        cp "$restore_dir/forgejo-shell.sh" "/home/git/forgejo-shell.sh"
+        chmod +x "/home/git/forgejo-shell.sh"
+        chown git:git "/home/git/forgejo-shell.sh" 2>/dev/null || true
+        ok "forgejo-shell.sh restored"
+    fi
+
+    # Start services
+    docker compose up -d
+    for i in $(seq 1 30); do
+        sleep 2
+        if curl -sf -o /dev/null "http://127.0.0.1:3000/api/healthz" 2>/dev/null; then
+            ok "Forgejo is healthy"
+            break
+        fi
+    done
+
+    echo ""
+    echo "================================================================"
+    echo "  Data restore complete."
+    echo ""
+    echo "  SSH forwarding needs manual steps (requires root):"
+    echo ""
+    if [ -f "$restore_dir/sshd_config.backup" ]; then
+        echo "  1. Append Match User git block to /etc/ssh/sshd_config:"
+        echo "     sudo tee -a /etc/ssh/sshd_config < $restore_dir/sshd_config.backup"
+    fi
+    echo "  2. Set git user shell:"
+    echo "     sudo usermod -s /home/git/forgejo-shell.sh git"
+    echo "  3. Restart SSH:"
+    echo "     sudo systemctl restart ssh"
+    echo "  4. Verify:"
+    echo "     ssh -T git@git.example.com"
+    echo "================================================================"
+}
+
+main() {
+    if [ "$1" = "--list" ] || [ "$1" = "-l" ]; then
+        check_prerequisites; list_backups; return
+    fi
+
+    check_prerequisites
+
+    if [ -n "${1:-}" ] && [ "${1#--}" = "$1" ]; then
+        # Use local archive
+        [ -f "$1" ] || { err "File not found: $1"; exit 1; }
+        restore "$(realpath "$1")"
+    else
+        # Fetch latest from StorageBox
+        local latest
+        latest=$(ssh -i "$SSH_KEY" -p "$STORAGE_PORT" -o BatchMode=yes \
+            "$STORAGE_USER@$STORAGE_HOST" \
+            "ls -t $REMOTE_DIR/forgejo-backup-*.tar.gz 2>/dev/null | head -1" || true)
+        [ -z "$latest" ] && { err "No backups found"; exit 1; }
+        local temp_dir; temp_dir="$(mktemp -d)"
+        fetch_backup "$(basename "$latest")" "$temp_dir"
+        restore "$temp_dir/$(basename "$latest")"
+        rm -rf "$temp_dir"
+    fi
+}
+
+main "$@"
+```
+
+Usage:
+
+```bash
+# List available backups
+./forgejo-restore.sh --list
+
+# Restore the latest backup
+./forgejo-restore.sh
+
+# Restore a specific backup archive
+./forgejo-restore.sh /path/to/forgejo-backup-20260606-120000.tar.gz
+```
+
+The script handles the full restore automatically:
+
+| Step            | What it does                                          |
+| --- | --- |
+| Prerequisites   | Checks Docker, Docker Compose, StorageBox connectivity |
+| Fetch           | Downloads the backup archive from StorageBox           |
+| Extract         | Untars the archive to a temporary directory            |
+| Stop            | Runs `docker compose down` to stop any running service |
+| Defensive copy  | Backs up current `./forgejo` and `./conf` before overwriting |
+| Restore data    | Copies forgejo/, conf/, Caddyfile, compose file back   |
+| Restore shell   | Restores `forgejo-shell.sh` for SSH forwarding         |
+| Fix ownership   | Sets `108:110` on data directories                     |
+| Start           | Runs `docker compose up -d` and waits for health check |
+| Print SSH steps | Shows the remaining root-required SSH config steps     |
+
+After the script finishes, two SSH config steps are left for you to do manually
+(because they need root), but the script tells you exactly what to run.

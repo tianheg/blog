@@ -1,0 +1,32 @@
+---
+title: '如何理解 JS 中的 (e)'
+date: 2021-12-01
+tags: ['技术', JavaScript]
+---
+
+`e` 是将传递给事件处理程序的 `event` 对象的短 var 引用。
+
+事件对象本质上有许多有趣的方法和属性，可以在事件处理程序中使用。
+
+一些小例子：
+
+```javascript
+function doSomething(e) {
+  if (!e) var e = window.event;
+  alert(e.type);
+}
+```
+
+```javascript
+function doSomething(e) {
+  var targ;
+  if (!e) var e = window.event;
+  if (e.target) targ = e.target;
+  else if (e.srcElement) targ = e.srcElement;
+  if (targ.nodeType == 3) targ = targ.parentNode;
+}
+```
+
+https://stackoverflow.com/a/10323409/12539782
+
+https://www.quirksmode.org/js/events_properties.html

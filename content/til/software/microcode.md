@@ -1,0 +1,11 @@
+---
+title: Microcode
+status: draft
+date: 2025-06-15T19:22:54+08:00
+header: Programming
+---
+
+- <https://en.wikipedia.org/wiki/Microcode>
+- <https://wiki.archlinux.org/title/Microcode>
+
+有些微码是附在内核中，有些则需要单独安装一个软件包，这在Arch Linux中就是intel-ucode/amd-ucode。

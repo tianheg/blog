@@ -1,8 +1,0 @@
-#+TITLE: Pandoc md2org
-#+STATUS: draft
-#+DATE: 2025-06-15T19:22:54
-#+HEADER: Tools
-
-#+BEGIN_SRC sh
-pandoc input.md -f markdown -t org | sed -e '/^:PROPERTIES:/,/^:END:/d' > output.org
-#+END_SRC

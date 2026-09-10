@@ -1,0 +1,49 @@
+---
+title: '图片备份'
+status: draft
+date: 2025-10-24T21:46:26+08:00
+---
+
+目前需要备份的图片有两类：照片、网络图片。只有照片需要备份，网图丢了也可以找到。
+
+### 照片的备份
+
+手机/相机拍摄的照片重命名（YYYYMMDD_Location-City_Num）后，原图（小于10MiB，超过就要先压缩）先存到Hetzner StorageBox，两种途径：
+
+一、电脑端用Rclone备份图片到Hetzner StorageBox
+
+<https://docs.hetzner.com/storage/storage-box/access/access-ssh-rsync-borg/#rclone>
+
+基础配置很简单，复杂起来也挺头痛。
+
+=~/.config/rclone/rclone.conf= ：
+
+```
+[storagebox]
+type = sftp
+host = uXXXXX.your-storagebox.de
+user = uXXXXX
+port = 23
+pass = <obscured-password>
+```
+
+```bash
+## 本地同步到Box，会覆盖
+rclone sync ~/Pictures/pics storagebox:
+## 拉取Box上的新增图片
+rclone copy storagebox: ~/Pictures/pics
+```
+
+二、手机端通过支持WebDAV的文件浏览器，把图片上传到Hetzner StorageBox
+
+我用的是 <https://github.com/zhanghai/MaterialFiles>
+
+三、还可以用[OpenList](https://github.com/OpenListTeam/OpenList)挂载WebDav后上传图片
+
+四、手机端用FolderSync通过SFTP自动同步到Hetzner StorageBox
+
+使用 [FolderSync App](https://play.google.com/store/apps/details?id=dk.tacit.android.foldersync.lite)，配置 SFTP 连接到 StorageBox（端口 22），定时任务自动同步 DCIM/Camera 目录下的照片到 StorageBox 根目录。
+
+### 图片的浏览
+
+电脑原图大小的图片会放在~/Pictures/pics，之后会对这些图片进行压缩（2MiB左右），压缩完上传到Cloudflare R2 bucket，以备后面相册网站使用。

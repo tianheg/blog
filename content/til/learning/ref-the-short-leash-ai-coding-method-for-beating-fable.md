@@ -1,0 +1,13 @@
+---
+title: 'The Short Leash AI Coding Method For Beating Fable'
+status: draft
+date: 2026-07-08T20:33:17+08:00
+---
+
+Greg Slepak 的 Short Leash 方法论：不用 YOLO mode，AI 工作必须人在场审每一步 diff，频繁 Deny 防止跑偏，每个子任务后 commit，PR 必须 human+AI 双重审查且作者亲自 line-by-line review。评论区 Roshan 补充了关键痛点：会话间 dead ends 知识丢失。
+
+**标签** ：reading
+
+---
+
+**来源** ：[https://blog.okturtles.org/2026/07/short-leash-ai-method/](https://blog.okturtles.org/2026/07/short-leash-ai-method/)

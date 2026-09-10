@@ -1,0 +1,14 @@
+---
+title: 'Ness Letters: Build a Joy List - Ness Labs'
+status: draft
+date: 2026-07-08T20:33:17+08:00
+header: Labs
+---
+
+Happiness comes from small daily moments, not major milestones. Build a Joy List — capture ordinary joy triggers (a favorite song, first sip of tea) as they happen, keep them actionable, and reach for them when stressed.
+
+**标签** ：happiness、mental-health、reading、self-improvement
+
+---
+
+**来源** ：[https://nesslabs.com/newsletter/joy-list](https://nesslabs.com/newsletter/joy-list)

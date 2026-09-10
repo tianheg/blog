@@ -1,0 +1,55 @@
+---
+title: 'Support me & I support people'
+---
+
+## Support me
+
+<div class="support-img">
+  <div class="b">
+    <img src="/images/alipay.webp" alt="支付宝收款码">
+    <img src="/images/wechatpay.webp" alt="微信赞赏码">
+  </div>
+</div>
+<style>
+.b {
+  display: flex;
+  justify-content: center;
+
+  img {
+    width: 50%;
+    margin-inline: 20px;
+  }
+}
+</style>
+
+Long press the picture to save, open Alipay(left) or WeChat(right) and scan
+
+People support me:
+
+- [Yihui Xie | 谢益辉](https://yihui.org/)
+
+## I support people
+
+| Date             | Creator                    | Amount |
+| --- | --- | --- |
+| \<2024-02-13 Tue\> | 邓安庆《送别的余哀》       | 5CNY   |
+| \<2024-02-15 Thu\> | 邓安庆《幸福的无力》       | 5CNY   |
+| \<2024-02-16 Fri\> | golangbot.com              | 5USD   |
+| \<2024-02-17 Sat\> | 邓安庆《离别的牵扯》       | 5CNY   |
+| \<2024-02-18 Sun\> | 邓安庆《写作的生计与意义》 | 5CNY   |
+| \<2024-02-21 Wed\> | 城堡阅读                   | 10CNY  |
+| \<2024-03-18 Mon\> | Zlibrary                   | 10USD  |
+| \<2024-03-20 Wed\> | Internet Archive           | 10USD  |
+| \<2024-03-23 Sat\> | Tampermonkey               | 5USD   |
+| \<2024-08-10 Sat\> | 邓安庆《非必要的苦难》     | 5CNY   |
+| \<2024-11-08 Fri\> | freeCodeCamp               | 5USD   |
+| \<2024-12-08 Sun\> | freeCodeCamp               | 5USD   |
+| \<2025-01-08 Wed\> | freeCodeCamp               | 5USD   |
+| \<2025-02-08 Sat\> | freeCodeCamp               | 5USD   |
+| \<2025-03-08 Sat\> | freeCodeCamp               | 5USD   |
+| \<2025-04-08 Tue\> | freeCodeCamp               | 5USD   |
+| \<2025-05-08 Thu\> | freeCodeCamp               | 5USD   |
+| \<2025-06-08 Sun\> | freeCodeCamp               | 5USD   |
+| \<2025-06-20 Fri\> | Codeberg                   | 15USD  |
+| \<2025-06-20 Fri\> | Internet Archive           | 5USD   |
+|                  |                            |        |

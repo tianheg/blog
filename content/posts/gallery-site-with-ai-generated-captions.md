@@ -1,0 +1,55 @@
+---
+title: '为图片网站添加 AI 生成的说明'
+date: 2024-05-15T16:20:00+08:00
+tags: ['技术', Cloudflare, img]
+---
+
+作为一个偶尔拍照的人，拥有手机这么多年，手头也是积攒了很多照片的。想有一个在线相册很久了，一直不太确定使用哪些工具构建。最近在一封 newsletter 中遇到了这个代码库 [petrovicz/astro-photoswipe](https://github.com/petrovicz/astro-photoswipe)，我挺喜欢的，顺便尝试一下以前没接触过的 [Astro](https://astro.build/)。至于 [PhotoSwipe](https://photoswipe.com/)，它可是老朋友了，曾经用过一段时间，后来精力放在其他地方就没再使用。
+
+## Image to text
+
+部署好整相册网站后，我注意到没有图片说明。一开始想的是可以手写，但这么多图片工作量很大，后来想着想着就想到：有没有可以图片转文字的 AI 模型呢？这个网站部署在 Cloudflare Pages 上，很自然地就去 Workers AI 那里找模型，有两个模型（ `@cf/llava-hf/llava-1.5-7b-hf`  和 `@cf/unum/uform-gen2-qwen-500m` ）。
+
+本来想着能不能实时生成呢？就是我点击一张图片，瞬间生成这张图片的说明，没找到办法。我通过 Node.js 脚本测试批量后发现生成 230 张左右的图片需要 2 分钟，其中包括了因为图片太大而无法生成、网络连接问题的情况。
+
+在借助 AI 的帮助下完成了这个脚本的编写，遇到的一些问题：
+
+1. 本地网络无法连接 Cloudflare 的 API，动不动就超时，解决办法：将运行环境放到 GitHub Action 中，还添加了 15 秒的超时；
+2. Cloudflare Workers AI 对于 Image to Text 类模型有每分钟 720 次请求的限制，解决办法：限制最大并发请求频次；
+3. 怎样在得到图片说明后，把所有图片的说明文本上传到 Worker KV 中，解决办法：使用 `Promise.all()` （它可以将多个迭代期约合并为一个并输出）。
+
+一些感受：
+
+这个脚本现在看起来不觉得有什么了不起，但在写出来以前，我也是很头疼，思考怎么解决上面这几个问题。在 AI 的帮助下，总算是完成了我的目的。写这个脚本时，参考了 [dgurns/magic-ai-box](https://github.com/dgurns/magic-ai-box) 才直接用的 REST API，而不是 Cloudflare 的[官方 SDK](https://github.com/cloudflare/cloudflare-typescript)。
+
+后来想到：
+
+需要一个限定条件：如果生成文本失败就不上传了。如果不这样做会出现一个问题：如果同一张图片前一次生成成功、这一次生成失败，会使得原有的文本被移除。在实现的时候遇到一个 BUG——执行代码无法停止。
+
+- 第一次修改（[40b7a92](https://github.com/tianheg/img/commit/40b7a929a5b9a3803819115da10b6bb78d464f94)）：使用了 `data.result.description` 进行过滤，后来通过日志发现 `data.success` 更简洁。
+- 第二次修改（[2d62d50](https://github.com/tianheg/img/commit/2d62d5057876720b8fe369b627ff5de73711d5c5)）：这次修改了很多内容，这一步的修改导致了代码执行陷入死循环，经过排查发现是在处理图片时期约无法停止造成的。
+- 第三次修改（[0184d83](https://github.com/tianheg/img/commit/0184d83fef579adc6c7e472004553250e85efbf8)）：在这一步里对 `processImagesConcurrently` 函数进行了调整。
+
+另一个实现方法，使用 [xenova/transformers.js](https://github.com/xenova/transformers.js)：
+
+```javascript
+import { pipeline } from '@xenova/transformers';
+
+const captioner = await pipeline('image-to-text', 'Xenova/vit-gpt2-image-captioning');
+const url = 'https://huggingface.co/datasets/Xenova/transformers.js-docs/resolve/main/cats.jpg';
+const output = await captioner(url);
+// [{ generated_text: 'a cat laying on a couch with another cat' }]
+
+console.log(output);
+```
+
+## Remove exif info
+
+两天以后，我注意到一个问题：拍摄的图片都来自手机，那么如果不把图片中附带的手机型号等信息删除，是很大的安全隐患。于是，我又写了个脚本来移除所有图片的 exif 信息。大致流程：
+
+1. 遍历目标文件夹下的所有图片，判断还有没有 exif 信息；
+2. 如果没有就不用处理，如果还有就移除 exif 信息。
+
+---
+
+代码仓库在[GitHub](https://github.com/tianheg/img)。网址也在那里。

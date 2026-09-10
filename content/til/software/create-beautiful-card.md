@@ -1,0 +1,38 @@
+---
+title: 'Create beautiful card'
+status: draft
+date: 2025-06-15T19:22:54+08:00
+header: Web
+---
+
+Get some card style with pure CSS.
+
+```css
+.card {
+  display: grid;
+  grid-template-rows: max-content 200px 1fr;
+  height: 500px;
+  padding: 15px;
+  border-radius: 10px;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+  color: #333;
+  font-family: Arial, sans-serif;
+  a {
+    text-underline-offset: .4rem;
+    text-decoration: underline dashed;
+    color: #333;
+  }
+  a:hover {
+    text-decoration: none;
+    color: hsl(220, 90%, 56%);
+  }
+}
+.cards {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(230px, 1fr));
+  grid-gap: 20px;
+}
+```
+
+### Online service
+- Codepen

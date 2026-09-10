@@ -1,0 +1,22 @@
+---
+title: 'Konsole Support Emoji'
+status: draft
+date: 2025-06-15T19:22:54+08:00
+header: Linux
+---
+
+<https://gist.github.com/IgnoredAmbience/7c99b6cf9a8b73c9312a71d1209d9bbb>
+
+1. Ensure that the Noto fonts are installed on your machine.
+2. Install this file to ~/.config/fontconfig/conf.d/99-noto-mono-color-emoji.conf
+3. Run `fc-cache`
+4. Set Konsole to use "IBM Plex Mono" as the font.
+5. Restart Konsole.
+
+\`\`\`bash sudo pacman -S noto-fonts-emoji nerd-fonts-ibm-plex-mono mkdir -p ~/.config/fontconfig/conf.d/ emacs -nw ~/.config/fontconfig/conf.d/99-noto-mono-color-emoji.conf fc-cache \`\`\`
+
+`99-noto-mono-color-emoji.conf`:
+
+\`\`\`text <?xml version="1.0" encoding="UTF-8"?> <!DOCTYPE fontconfig SYSTEM "fonts.dtd">
+
+&lt;fontconfig&gt; &lt;match&gt; &lt;test name="family"&gt;&lt;string&gt;IBM Plex Mono</string></test> &lt;edit name="family" mode="prepend" binding="strong"&gt; &lt;string&gt;Noto Color Emoji</string> </edit> </match> </fontconfig> ```

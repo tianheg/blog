@@ -1,0 +1,12 @@
+---
+title: '如何在Linux上更新HP BIOS'
+status: draft
+date: 2025-06-15T19:22:54+08:00
+header: Linux
+---
+
+https://gist.github.com/eNV25/c8001491dc0440656ff7b0ae18993ba1
+
+https://h30434.www3.hp.com/t5/Notebook-Operating-System-and-Recovery/How-do-I-update-the-BIOS-in-Linux/m-p/6499025/highlight/true#M517053
+
+https://support.hp.com/us-en/drivers/selfservice/hp-14s-cr0000-laptop-pc/20395779/model/22218748?sku=4JA40PA&serialnumber=5CG8501QT9

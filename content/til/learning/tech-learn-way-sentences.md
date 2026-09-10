@@ -1,0 +1,9 @@
+---
+title: 'Tech Learn Way Sentences'
+status: draft
+date: 2025-06-15T19:22:54+08:00
+---
+
+You don't have to learn programming in order. Being excited about it is the most important thing. Feel free to race ahead in some areas, while remaining woefully ignorant of the fundamentals in others. You can come back and pick up the stuff you're missing later. Or not.
+
+-- Paul Graham <https://twitter.com/paulg/status/1433725939071004704?s=20>

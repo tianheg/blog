@@ -1,0 +1,7 @@
+---
+title: 'Stargazing Diary 251105'
+date: 2025-11-06T22:48:00+08:00
+tags: ['随笔', '天文', English]
+---
+
+Yesterday, almost twelve o'clock in the middle of the night just finished the supper, suddenly remembered that today has the largest full moon of the year, picked up a long unused telescope, came to the balcony. Seeing a lot of stars with a telescope, the weather is really good today. The moon was above my head, and the telescope was raised to look hard, but it was hard to shake, so I had to put down the telescope and look at the round moon. Think about something I don’t know so-called.

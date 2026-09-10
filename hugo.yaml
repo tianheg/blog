@@ -41,10 +41,27 @@ markup:
     style: dracula
   tableOfContents:
     startLevel: 2
-    endLevel: 3
+    endLevel: 6
   goldmark:
     renderer:
       unsafe: true
+    parser:
+      # md 属性语法 {#id} / {.class}：CUSTOM_ID 锚点与块级属性依赖此开关
+      attribute:
+        block: true
+        title: true
+    extensions:
+      # org 的脚注没有返回箭头，置空以对齐渲染
+      footnote:
+        backlinkHTML: ''
+      # 与 go-org 的智能标点行为对齐：转换 ... / -- / --- 为 … / – / —，但不动引号
+      typographer:
+        disable: false
+        apostrophe: "'"
+        leftDoubleQuote: '"'
+        rightDoubleQuote: '"'
+        leftSingleQuote: "'"
+        rightSingleQuote: "'"
 
 menu:
   main:

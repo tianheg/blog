@@ -1,0 +1,11 @@
+---
+title: Medscape
+status: draft
+date: 2026-07-08T20:33:17+08:00
+---
+
+Today on Medscape : Get the latest medical news, clinical trial coverage, drug updates, journal articles, CME activities & more on Medscape. A free resource for physicians.
+
+---
+
+**来源** ：[原文](https://www.medscape.com)

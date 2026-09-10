@@ -19,23 +19,20 @@
     -}}
 {{- end -}}
 
-{{/* Parse org-mode links and build graph relationships */}}
+{{/* Parse markdown links and build graph relationships */}}
 {{- range $pages -}}
   {{- $currentPage := . -}}
   {{- $incoming := slice -}}
   {{- $outgoing := slice -}}
 
-  {{/* Parse org-mode links from raw content using findRE */}}
+  {{/* Parse markdown links from raw content using findRE */}}
   {{- $rawContent := .RawContent -}}
-  {{- $orgLinkPattern := `\[\[([^\]]+)\]\[[^\]]*\]\]` -}}
-  {{- $matches := findRE $orgLinkPattern $rawContent -}}
+  {{- $mdLinkPattern := `\]\(/[^)\s]+\)` -}}
+  {{- $matches := findRE $mdLinkPattern $rawContent -}}
 
   {{- range $matches -}}
-    {{/* Extract path from [[path][title]] format */}}
-    {{- $inner := strings.TrimPrefix "[[" . -}}
-    {{- $inner := strings.TrimSuffix "]]" $inner -}}
-    {{- $parts := split $inner "][" -}}
-    {{- $linkPath := index $parts 0 -}}
+    {{/* Extract path from [text](/path) format */}}
+    {{- $linkPath := strings.TrimSuffix ")" (strings.TrimPrefix "](" .) -}}
 
     {{/* Skip external links (http/https) */}}
     {{- if not (hasPrefix $linkPath "http") -}}

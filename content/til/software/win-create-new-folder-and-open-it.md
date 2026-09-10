@@ -1,0 +1,29 @@
+---
+title: 'Win Create new folder and open it'
+status: draft
+date: 2026-02-06T23:09:28+08:00
+header: Tools
+---
+
+```batch
+@echo off
+chcp 65001 >nul
+
+:: Get current date in proper YYMMDD format
+for /f "tokens=2 delims==" %%I in ('wmic os get localdatetime /value') do set datetime=%%I
+set foldername=%datetime:~2,2%%datetime:~4,2%%datetime:~6,2%
+
+:: Create folder on Desktop
+set "desktop=%USERPROFILE%\Desktop\00项目"
+mkdir "%desktop%\%foldername%" 2>nul
+
+if exist "%desktop%\%foldername%" (
+    echo Folder created: %desktop%\%foldername%
+    explorer "%desktop%\%foldername%"
+) else (
+    echo Folder already exists!
+)
+
+timeout /t 2 >nul
+exit
+```

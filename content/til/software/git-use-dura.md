@@ -1,0 +1,16 @@
+---
+title: 'Git Use Dura'
+status: draft
+date: 2025-06-15T19:22:54+08:00
+header: Git
+---
+
+<https://github.com/tkellogg/dura>
+
+## 配置
+
+\`\`\`bash
+
+yay -S dura-git dura serve & # Run it in the background cd /git/repo/ dura watch
+
+## watch all git repo under /home/user find ~ -type d -name .git -prune | xargs -I= sh -c "cd =/..; dura watch" # BE CAREFUL!!! use when knowing what you are doing ```

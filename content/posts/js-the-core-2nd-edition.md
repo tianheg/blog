@@ -1,0 +1,686 @@
+---
+title: 'JavaScript. The Core.(2nd)'
+date: 2023-02-10T16:44:00+08:00
+tags: ['技术', JavaScript]
+---
+
+[JavaScript. The Core: 2nd Edition – Dmitry Soshnikov](http://dmitrysoshnikov.com/ecmascript/javascript-the-core-2nd-edition/)
+
+文章的[第一版](http://dmitrysoshnikov.com/ecmascript/javascript-the-core/)覆盖了 ECMAScript 的一般方面，主要使用来自遗留 ES3 规范的抽象，并提到了 ES5 和 ES6（又名 ES2015）中的适当更改。
+
+从 ES2015 开始，该规范改变了一些核心组件的描述和结构，引入了新的模型等。在这个版本中，我们关注于更新的抽象、更新的术语，但是仍然维护在规范版本中保持一致的非常基本的 JS 结构。
+
+这篇文章讨论 ES2017+ 运行时系统。
+
+## 1. 对象
+
+ECMAScript 是一种基于原型组织的面向对象编程语言，其核心概念是对象。
+
+> 定义1：
+>
+> Object：对象是属性的集合，并且具有单个原型对象。原型可以是对象或 `null` 值。
+
+对象的原型由内部的 `[[Prototype]]` 属性引用。该属性通过 `__proto__` 属性向用户级代码公开。
+
+```javascript
+let point = {
+  x: 10,
+  y: 20,
+}
+```
+
+代码有两个显式自由属性和一个隐式 `__proto__` 属性的结构， `__proto__` 属性是对 `point` 原型的引用：
+
+原型对象采用动态调度机制实现继承。
+
+## 2. 原型
+
+对象创建的时候都会拥有原型。如果原型没有显式设置，则对象将接受默认原型作为继承对象。
+
+> 定义2：
+>
+> Prototype: 原型是用于实现基于原型的继承的委托对象。
+
+原型可以通过 `__proto__` 属性或 `Object.create`  方法显式设置：
+
+```javascript
+let point = {
+  x: 10,
+  y: 20,
+}
+let point3D = {
+  z: 30,
+  __proto__: point,
+}
+console.log(
+  point3D.x,
+  point3D.y,
+  point3D.z
+)
+```
+
+注意，默认情况下，将 `Object.prototype` 作为对象的继承对象。
+
+任何对象都可以用作另一个对象的原型，原型本身也可以有自己的原型。如果原型具有对其原型的非空引用等，则称为原型链。
+
+> 定义3：
+>
+> Prototype chain: 原型链是用于实现继承和共享属性的对象的有限链。
+
+规则很简单：如果在对象本身中没有找到属性，则尝试在原型中解析它；在原型的原型中，等等——直到考虑到整个原型链。
+
+从技术上讲，这种机制称为动态分派（dynamic dispatch）或委派（delegation）。
+
+> 定义4：
+>
+> Delegation: 用于解析继承链中的属性的机制。该过程发生在运行时，因此也称为动态分派。
+
+注意：与静态分派在编译时解析引用不同，动态分派在运行时解析引用。
+
+如果最终在原型链中找不到属性，则返回 `undefined` 值。
+
+正如我们所看到的，默认对象实际上从不为空——它总是从 `Object.prototype` 继承一些东西。要创建一个无原型字典，我们必须显式地将其原型设置为 `null` ：
+
+```javascript
+let dict = Object.create(null)
+console.log(dict.toString)
+```
+
+动态分派机制允许继承链的完全可变性，提供改变委托对象的能力：
+
+```javascript
+let protoA = { x: 10 }
+let protoB = { x: 20 }
+
+let objectC = Object.create(protoA)
+console.log(objectC.x)
+Object.setPrototypeOf(objectC, protoB)
+console.log(objectC.x)
+```
+
+注意：为什么不再建议使用 `__proto__` 对原型进行操作，而是选择使用一些 APIs， `Object.create` 、 `Object.getPrototypeOf` 、 `Object.setPrototypeOf` ，与 `Reflect` 模块类似。
+
+在 `Object.prototype`  的例子中，我们看到同一个原型可以在多个对象之间共享。基于这一原则，在 ECMAScript 中实现了基于类的继承。
+
+## 3. 类
+
+当几个对象共享相同的初始状态和行为时，它们就形成了一个分类。
+
+> 定义5：
+>
+> Class：类是一个形式化的抽象集合，它规定了它的对象的初始状态和行为。
+
+如果我们需要从同一个原型继承多个对象，我们当然可以创建一个原型，并从新创建的对象显式继承它：
+
+```javascript
+let letter = {
+  getNumber() {
+    return this.number
+  }
+}
+let a = { number: 1, __proto__: letter }
+let b = { number: 2, __proto__: letter }
+console.log(
+  a.getNumber(),
+  b.getNumber()
+)
+```
+
+由图可以看出步骤的繁琐。而类可以简化这些步骤。它作为一种语法糖（syntactic sugar，a construct which semantically does the same, but in a much nicer syntactic form，一种在语义上做同样事情的构造，但以更好的语法形式），它允许用方便的模式创建这样的多个对象：
+
+```javascript
+class Letter {
+  constructor(number) {
+    this.number = number
+  }
+  getNumber() {
+    return this.number
+  }
+}
+let a = new Letter(1)
+let b = new Letter(2)
+console.log(
+  a.getNumber(),
+  b.getNumber(),
+)
+```
+
+注意：ECMAScript 中基于类的继承是在基于原型的委托之上实现的。
+
+注意：“类”只是理论上的抽象。从技术上讲，它可以用 Java 或 C++ 中的静态分派来实现，也可以用 JavaScript、Python、Ruby 等中的动态分派（委托）来实现。
+
+从技术上讲，“类”表示为“构造函数+原型”对。因此，构造函数创建对象，并自动为其新创建的实例设置原型。此原型存储在 `&lt;ConstructorFunction&gt;.prototype` 属性中。
+
+> 定义6：
+>
+> Constructor：构造函数是用来创建实例并自动设置其原型的函数。
+
+可以显式使用构造函数。此外，在类抽象被引入之前，JS 开发人员在没有更好的替代品的情况下常常这样做（我们仍然可以在互联网上找到很多这样的遗留代码）：
+
+```javascript
+function Letter(number) {
+  this.number = number
+}
+Letter.prototype.getNumber = function() {
+  return this.number
+}
+let a = new Letter(1)
+let b = new Letter(2)
+console.log(
+  a.getNumber(),
+  b.getNumber()
+)
+```
+
+虽然创建一个单层构造函数非常简单，但是从父类继承的模式需要更多的样板。目前，这个样板文件被隐藏为实现细节，这正是我们在 JavaScript 中创建类时所发生的事情。
+
+注意：构造函数只是基于类继承的实现细节。
+
+见下图对象和它们的类之间的关系：
+
+上图显示每个对象都有一个关联的原型。即使构造函数（类） `Letter` 也有自己的原型，即 `Function.prototype` 。请注意， `Letter.prototype` 是 Letter 实例的原型，即 `a` 、 `b` 。
+
+注意：任何对象的实际原型总是通过 `__proto__` 引用。构造函数上显式的 `prototype` 属性只是对其实例原型的引用；对于实例来说，仍引用自 `__proto__` 。
+
+## 4. 执行上下文
+
+为了执行 JS 代码并跟踪其运行时求值，ECMAScript 规范定义了执行上下文的概念。从逻辑上讲，执行上下文是使用堆栈（我们很快就会看到执行上下文堆栈）来维护的，它对应于调用堆栈的一般概念。
+
+> 定义7：
+>
+> Execution context：执行上下文是用于跟踪代码的运行时评估的规范装置。
+
+ECMAScript 代码有几种类型：全局代码、函数代码、eval 代码和模块代码；每段代码在其执行上下文中被评估。不同的代码类型及其相应的对象可能会影响执行上下文的结构：例如，生成器函数将它们的生成器对象保存在上下文中。
+
+一个递归函数调用：
+
+```javascript
+function recursive(flag) {
+  if (flag === 2) return
+  recursive(++flag)
+}
+recursive(0)
+```
+
+当一个函数被调用时，一个新的执行上下文被创建，并被推到堆栈上——此时它成为一个活跃的执行上下文。当函数返回时，它的上下文从堆栈中弹出。
+
+调用另一个上下文的上下文称为调用方。因此，正被调用的上下文是被调用者。在我们的示例中， `recursive` 函数扮演两个角色：被调用方和调用方的关系——当递归调用自身时。
+
+> 定义8：
+>
+> Execution context stack：执行上下文堆栈是一种LIFO结构，用于维护控制流和执行顺序。
+
+对以上例子，有以下堆栈“push-pop”修改
+
+还可以看到，全局上下文总是在堆栈的底部，它是在执行任何其他上下文之前创建的。
+
+一般来说，一个上下文的代码会运行到完成，然而正如我们上面提到的，一些对象——比如生成器，可能会违反堆栈的 LIFO 顺序。生成器函数可以挂起其运行上下文，并在完成之前将其从堆栈中移除。生成器再次激活后，其上下文将恢复并再次压入堆栈：
+
+```javascript
+function *gen() {
+  yield 1
+  return 2
+}
+let g = gen()
+console.log(
+  g.next().value,
+  g.next().value
+)
+```
+
+这里的 `yield` 语句将值返回给调用者，并弹出上下文。在第二次 `next` 调用时，相同的上下文再次被压入堆栈，然后继续。这样的上下文可能比创建它的调用者活得更久，因此违反了 LIFO 结构。
+
+现在将讨论执行上下文的重要部分；特别是，明白 ECMAScript 运行时如何管理变量存储，以及由嵌套代码块创建的作用域。这就是词法环境（lexical environment）的一般概念，在 JS 中用于存储数据，并通过闭包机制解决“Funarg 问题”。
+
+## 5. 环境
+
+每个执行上下文都有一个关联的词法环境。
+
+> 定义9：
+>
+> Lexical environment：词法环境是一种结构，用于定义上下文中出现的标识符与其值之间的关联。每个环境都可以引用一个可选的父环境。
+
+因此，环境是定义在作用域中的变量、函数和类的存储。
+
+从技术上讲，环境是一对，由环境记录（将标识符映射到值的实际存储表）和对父对象的引用（可以是 `null` ）组成。
+
+代码：
+
+```javascript
+let x = 10
+let y = 20
+function foo(z) {
+  let x = 100
+  return x + y + z
+}
+foo(30)
+```
+
+全局上下文的环境结构和 `foo` 函数的上下文看起来如下：
+
+逻辑上，这类似于原型链。标识符解析的规则非常相似：如果在自己的环境中没有找到变量，则尝试在父环境中、在父环境的父环境中等等查找它——直到考虑了整个环境链。
+
+> 定义10：
+>
+> Identifier resolution：解析环境链中变量（绑定）的过程。未解析的绑定结果为 `ReferenceError` 。
+
+这解释了为什么变量 `x` 被解析为 `100` ，而不是 `10` ——它直接在 `foo` 的自身环境中找到；为什么我们可以访问参数 `z` ——它也只是存储在激活环境中；以及为什么我们可以访问变量 `y` ——它在父环境中找到。
+
+与原型类似，同一父环境可以由多个子环境共享：例如两个全局函数共享相同的全局环境。
+
+环境记录因类型而异。有对象环境记录和声明性环境记录。在声明性记录之上还有函数环境记录和模块环境记录。每种类型的记录都具有特定于它的属性。但是，标识符解析的通用机制在所有环境中都是通用的，并且不依赖于记录的类型。
+
+对象环境记录的示例可以是全局环境的记录。这样的记录也有关联的绑定对象，绑定对象可以存储记录的某些属性，但不存储其他属性，反之亦然。绑定对象也可以作为 `this` 值提供。
+
+```javascript
+var x = 10
+let y = 20
+console.log(
+  x,
+  y
+)
+console.log(
+  this.x,
+  this.y
+)
+this['not valid ID'] = 30
+console.log(
+  this['not valid ID'] // 30
+)
+```
+
+下图是对代码的描述：
+
+注意，绑定对象的存在是为了覆盖遗留结构，如 `var` -声明和 `with` -语句，它们也将其对象作为绑定对象提供。这些是历史原因，当环境被表示为简单对象时。目前，环境模型已经优化了很多，但是结果是我们不能再将绑定作为属性来访问。
+
+## 6. 闭包
+
+ECMAScript 中的函数是一等的。这个概念是函数式编程的基础。
+
+> 定义11：
+>
+> First-class function：可以作为正常数据参与的函数：存储在变量中、作为参数传递或作为另一个函数的值返回。
+
+与第一类函数的概念有关的是所谓的Funarg问题（或“函数论元问题”）。当一个函数必须处理自由变量时，问题就出现了。
+
+> 定义12：
+>
+> Free variable：一个既不是参数也不是函数局部变量的变量。
+
+通过代码了解 Funarg 问题：
+
+```javascript
+let x = 10
+function foo() {
+  console.log(x)
+}
+function bar(funArg) {
+  let x = 20
+  funArg()
+}
+bar(foo)
+```
+
+对于函数 `foo` ，变量 `x` 是自由的。当 `foo` 函数被激活时（通过 `funArg` 参数）——它应该在哪里解析 `x` 绑定？从创建函数的外部作用域，还是从调用函数的调用方作用域？正如我们所看到的，调用者，即 `bar` 函数，也为 `x` ——提供了值为 `20` 的绑定。
+
+上述用例被称为向下 funarg 问题，即在确定绑定的正确环境时的模糊性：它应该是创作时的环境，还是调用时的环境？
+
+这可以通过使用静态作用域（即创建时间的作用域）的协议来解决。
+
+> 定义13：
+>
+> Static scope：一种语言实现了静态作用域，只要通过查看源代码就可以确定绑定在哪个环境中被解析。
+
+静态作用域有时也被称为词法作用域，因此词法环境命名。
+
+从技术上讲，静态作用域是通过捕获创建函数的环境来实现的。
+
+示例中， `foo` 函数捕获的环境是全局环境：
+
+环境引用函数，函数反过来又引用回环境。
+
+> 定义14：
+>
+> Closure：闭包是一个函数，它捕获定义它的环境。此外，该环境用于标识符解析。
+
+注意：函数是在存储局部变量和参数的新激活环境中调用的。激活环境的父环境被设置为函数的封闭环境，从而产生词法作用域语义。
+
+Funarg 问题的第二个子类型称为向上 funarg 问题。这里唯一的区别是捕获环境比创建它的上下文更持久。
+
+```javascript
+function foo() {
+  let x = 10
+  function bar() {
+    return x
+  }
+  return bar
+}
+let x = 20
+let bar = foo()
+bar()
+```
+
+同样，从技术上讲，它与捕获定义环境的相同机制没有什么不同。在这种情况下，如果我们没有闭包， `foo` 的激活环境就会被破坏。但是我们捕获了它，所以它不能被释放，而是被保留下来——以支持静态作用域语义。
+
+通常对闭包的理解是不完全的——通常开发人员只从向上 funarg 问题的角度考虑闭包（实际上这更有意义）。然而，正如我们所看到的，向下和向上 funarg 问题的技术机制是完全相同的——而且是静态范围的机制。
+
+与原型类似，相同的父环境可以在多个闭包之间共享。这允许访问和修改共享数据：
+
+```javascript
+function createCounter() {
+  let count = 0
+  return {
+    increment() { count++; return count; },
+    decrement() { count--; return count; }
+  }
+}
+let counter = createCounter()
+console.log(
+  counter.increment(),
+  counter.decrement(),
+  counter.increment()
+)
+```
+
+因为闭包 `increment` 和 `decrement` 都是在包含 `count` 变量的作用域中创建的，所以它们共享这个父作用域。也就是说，捕获总是“通过引用（by-reference）”进行的，这意味着存储对整个父环境的引用。
+
+图示：
+
+有些语言可能会捕获 by-value，对捕获的变量进行复制，并且不允许在父作用域中更改它。但是在 JS 中，重复一遍，它总是父作用域的引用。
+
+注意：实现可能会优化此步骤，并且不会捕获整个环境。虽然只捕获使用过的自由变量，但它们仍然保持父作用域中可变数据的不变。
+
+所以所有标识符都是静态作用域。但是，有一个值在 ECMAScript 中动态确定范围。它是 `this` 的值。
+
+## 7. this
+
+`this` 值是一个特殊的对象，它被动态和隐式地传递给上下文的代码。我们可以把它看作是一个隐式的额外参数，我们可以访问它，但不能改变它。
+
+> 定义15：
+>
+> this：可从执行上下文的代码访问的隐式上下文对象——以便将相同的代码应用于多个对象。
+
+主要的用例是基于类的 OOP。实例方法（在原型上定义）存在于一个范例中，但在该类的所有实例之间共享。
+
+```javascript
+class Point {
+  constructor(x, y) {
+    this._x = x
+    this._y = y
+  }
+  getX() {
+    return this._x
+  }
+  getY() {
+    return this._y
+  }
+}
+let p1 = new Point(1, 2)
+let p2 = new Point(3, 4)
+console.log(
+  p1.getX(),
+  p2.getX()
+)
+```
+
+当 `getX` 方法被激活时，将创建一个新的环境来存储局部变量和参数。此外，函数环境记录获得传递的 `[[ThisValue]]` ，它是根据函数的调用方式动态绑定的。当用 `p1` 调用它时， `this` 的值正好是 `p1` ，而在第二种情况下，它是 `p2` 。
+
+`this` 的另一个应用是泛型接口函数，它可以用在 mixin 或 traits 中。
+
+在下面的示例中， `Movable` 接口包含泛型函数 `move` ，该函数期望此 mixin 的用户实现 `_x` 和 `_y` 属性：
+
+```javascript
+let Movable = {
+  move(x, y) {
+    this._x = x
+    this._y = y
+  }
+}
+let p1 = new Point(1, 2)
+Object.assign(p1, Movable)
+p1.move(100, 200)
+console.log(p1.getX())
+```
+
+作为一种替代方案，mixin 也可以在原型级别应用，而不是像在上面的示例中所做的那样在每个实例中应用。
+
+为了展示 `this` value 的动态特性，考虑这个例子：
+
+```javascript
+function foo() {
+  return this
+}
+let bar = {
+  foo,
+  baz() {
+    return this
+  }
+}
+console.log(
+  foo(),
+  bar.foo(),
+  (bar.foo)(),
+  (bar.foo = bar.foo)()
+)
+console.log(bar.baz())
+let saveBaz = bar.baz
+console.log(saveBaz())
+```
+
+由于仅通过查看 `foo` 函数的源代码，我们无法判断在特定调用中 `this` 的值是什么，因此称 `this` 值是动态作用域的。
+
+箭头函数在 `this` 值方面是特殊的：它们的 `this` 是词法的（静态的），但不是动态的。也就是说，它们的函数环境记录不提供该值 `this` 不提供该值，并且该值取自父环境。
+
+```javascript
+var x = 10
+let foo = {
+  x: 20,
+  bar() {
+    return this.x
+  },
+  baz: () => this.x,
+  qux() {
+    let arrow = () => this.x
+    return arrow()
+  }
+}
+console.log(
+  foo.bar(),
+  foo.baz(),
+  foo.qux()
+)
+```
+
+如前所述，在全局上下文中， `this` 值是全局对象（全局环境记录的绑定对象）。以前只有一个全局对象。在当前版本的规范中，可能有多个全局对象是代码领域（Realms）的一部分。
+
+## 8. Realm
+
+在评估（evaluate）之前，所有 ECMAScript 代码都必须与领域关联。从技术上讲，领域只是为上下文提供全局环境。
+
+> 定义15：
+>
+> Realm：代码领域是一个对象，它封装了一个单独的全局环境。
+
+创建执行上下文时，它与特定的代码领域相关联，该代码领域为该上下文提供全局环境。这种关联进一步保持不变。
+
+注意：浏览器环境中的直接领域等价物是 iframe 元素，它确切地提供了一个自定义全局环境。在 Node.js 中，vm 模块的沙箱较像领域。
+
+当前版本的规范没有提供显式创建领域的能力，但是它们可以由实现隐式创建。
+
+从逻辑上讲，堆栈中的每个上下文总是与其领域相关联：
+
+使用 `vm`  模块的单独领域示例：
+
+```javascript
+const vm = require("vm")
+const realm1 = vm.createContext({ x: 10, console })
+const realm2 = vm.createContext({ x: 20, console })
+const code = `console.log(x)`
+vm.runInContext(code, realm1)
+vm.runInContext(code, realm2)
+```
+
+代码的入口点和初始化过程是由作业（Job）和作业队列（Job queues）机制管理的。
+
+参考资料
+
+1. https://stackoverflow.com/questions/49832187/how-to-understand-js-realms
+2. https://weizman.github.io/page-what-is-a-realm-in-js/
+
+## 9. Job
+
+有些操作可以推迟，只要执行上下文堆栈上有可用的位置就可以执行。
+
+> 定义17：
+>
+> Job：作业是一种抽象操作，它在当前没有其他 ECMAScript 计算正在进行时启动 ECMAScript 计算。
+
+作业在作业队列中排队，在当前规范版本中有两个作业队列：脚本作业（Script Jobs）和期约作业（Promise Jobs）。
+
+Script Jobs 队列中的初始作业是我们程序的主要入口点，即加载和评估的初始脚本：创建一个领域，创建一个全局上下文并与该领域相关联，将其推入堆栈，然后执行全局代码。
+
+注意，Script Jobs 队列同时管理脚本和模块。
+
+此外，此上下文可以执行其他上下文，或将其他作业入队。一个可以派生和排队的作业的例子是 Promise。
+
+当没有正在运行的执行上下文并且执行上下文堆栈为空时，ECMAScript 实现将从作业队列中删除第一个挂起的作业，创建一个执行上下文并开始执行。
+
+注意：作业队列通常由称为“事件循环”的抽象来处理。ECMAScript 标准没有指定事件循环，而是将其留给实现，但是您可以在这里找到一个教育[示例](https://gist.github.com/DmitrySoshnikov/26e54990e7df8c3ae7e6e149c87883e4)。
+
+```javascript
+const stack = []
+const jobs = []
+setInterval(function eventLoop() {
+  console.log(
+    `\n    Analyzing jobs queue:`,
+    `[${jobs.map(job => job.name).join(', ')}]\n`
+  )
+  if (stack.length) {
+    return
+  }
+  if (!jobs.length) {
+    return
+  }
+  const job = jobs.shift()
+  run(job)
+}, 1000)
+function run(activation) {
+  stack.push(activation)
+  console.log(
+  	`Running "${activation.name}", stack:`,
+    `[${stack.map(context => context.name).join(', ')}]`
+  )
+  activation()
+  stack.pop(activation)
+}
+function postponeCall(runnable, ms) {
+  setTimeout(() => jobs.push(runnable), ms)
+}
+
+function one() {
+  run(two)
+}
+function two() {
+  postponeCall(three, 10)
+}
+function three() {
+  postponeCall(four, 10)
+  postponeCall(five, 20)
+  run(six)
+}
+function four() { return }
+function five() { return }
+function six() { return }
+
+;(function start() {
+  postponeCall(one, 100)
+})()
+```
+
+[期约](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Promise)示例：
+
+```javascript
+new Promise(resolve => setTimeout(() => resolve(10), 0))
+  .then(value => console.log(value))
+console.log(20)
+```
+
+[异步函数](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Statements/async_function)也会等待期约：
+
+```javascript
+async function later() {
+  return await Promise.resolve(10)
+}
+;(async () => {
+  let data = await later()
+  console.log(data)
+})()
+console.log(20)
+```
+
+> Agents are main owners of all those components.
+
+## 10. Agent
+
+ECMAScript 采用 Agent 模式实现了并发性和并行性。Agent 模式与 [Actor 模式](https://en.wikipedia.org/wiki/Actor_model)非常接近--Actor模式是一个轻量级进程，采用消息传递的通信方式。
+
+> 定义18：
+>
+> Agent：代理是封装执行上下文栈、作业队列集和代码领域的抽象。
+
+代理可以在同一线程上运行，也可以在单独的线程上运行。浏览器环境中的 `Worker` 代理是代理概念的一个示例。
+
+代理之间是状态隔离的，可以通过发送消息进行通信。有些数据可以在代理之间共享，例如 `SharedArrayBuffer` 。代理也可以联合成为代理集群。
+
+一个代码示例：
+
+`index.html`
+
+```html
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Agents example</title>
+</head>
+<body>
+  <script>
+    const sharedHeap = new SharedArrayBuffer(16)
+    let heapArray = new Int32Array(sharedHeap)
+    let agentSmith = new Worker('agent-smith.js')
+    agentSmith.onmessage = (message) => {
+      let modifiedIndex = message.data
+      console.log(heapArray[modifiedIndex])
+    }
+    agentSmith.postMessage(sharedHeap)
+  </script>
+</body>
+</html>
+```
+
+`agent-smith.js` ：
+
+```javascript
+onmessage = (message) => {
+  let heapArray = new Int32Array(message.data)
+  let indexToModify = 1
+  heapArray[indexToModify] = 100
+  postMessage(indexToModify)
+}
+```
+
+本地无法运行，运行在云端要修改 HTTP headers，我使用 Netlify 做示例：
+
+```toml
+# netlify.toml
+[[headers]]
+  for = "/javascript/agents-example/*"
+  [headers.values]
+    Cross-Origin-Opener-Policy = "same-origin"
+    Cross-Origin-Embedder-Policy = "require-corp"
+```
+
+> ECMAScript is a programming language and its runtime system has core components. It uses a prototype-based delegation mechanism to implement inheritance and shared properties. The concept of lexical environments is used to store data and solve the Funarg problem with the mechanism of closures. The this value is dynamically scoped and is implicitly passed to the code of a context. Execution contexts are associated with a particular code realm which provides the global environment for this context. The main entry point to a program is the initial script which is loaded and evaluated. Async functions can await for promises and enqueue promise jobs. SharedArrayBuffers can be used to share data between agents.
+>
+> Summarized by Universal Summarizer https://labs.kagi.com/ai/sum

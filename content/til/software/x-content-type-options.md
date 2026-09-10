@@ -1,0 +1,12 @@
+---
+title: 'X Content Type Options'
+status: draft
+date: 2025-06-15T19:22:54+08:00
+header: Tools
+---
+
+1. `The resource from "http://localhost:1237/<sub>assets</sub>/js/prism/prism-sh.min.js" was blocked due to MIME type ("text/plain") mismatch (X-Content-Type-Options: nosniff).`
+
+[X-Content-Type-Options - HTTP | MDN](https://developer.mozilla.org/en-US/docs/Web/HTTP/Headers/X-Content-Type-Options)
+
+当 `X-Content-Type-Options` 的值为 nosniff 时，如果一个样式文件的 `Content-Type` 不是 `text/css`，或者一个脚本文件的 `Content-Type` 不是 [`text/javascript`](https://mimesniff.spec.whatwg.org/#javascript-mime-type)，那么加载当前文件的请求就会被阻挡，当前文件也就无法发挥作用。

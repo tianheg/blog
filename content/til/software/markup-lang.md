@@ -1,0 +1,38 @@
+---
+title: 'Markup Lang'
+status: draft
+date: 2025-06-15T19:22:54+08:00
+header: Programming
+---
+
+- XML: Extensible Markup Language
+
+---
+
+- HTML
+- SVG
+- MathML
+
+---
+
+## SVG
+
+[官方文档](https://developer.mozilla.org/en-US/docs/Web/SVG) || [Learn | Inkscape](https://inkscape.org/learn/)
+
+SVG 创造于 1999 年。
+
+### 基本组成
+
+## `&lt;svg&gt;` 根元素
+## 元素构成各种基本形状（`&lt;g&gt;` 用于对 SVG 元素进行分组）
+### 开始之前
+
+## XML 大小写敏感
+## SVG 的属性值必须放在括号内
+### 一些链接
+
+1. [Using CSS animations \- CSS: Cascading Style Sheets | MDN](https://developer.mozilla.org/en-US/docs/Web/CSS/CSS_Animations/Using_CSS_animations)
+2. [SvgPathEditor](https://yqnn.github.io/svg-path-editor/)
+3. <https://www.svgbackgrounds.com/>
+4. <https://jakearchibald.github.io/svgomg/>
+5. <https://squircley.app/>

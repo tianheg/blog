@@ -1,0 +1,34 @@
+---
+title: 'What it''s like to run'
+date: 2024-04-17T21:06:00+08:00
+tags: ['随笔', English]
+---
+
+I'm talking about my latest two times running. As the time of order, first time was feeling bad, I coundn't run 5km,
+only 3km. second was great, I could run 5km. I think it's because I'm listening a podcast episode. It transferred my
+attention to the podcast content, then I didn't feel tired. I even recover the habit of singing after the run.
+
+This sunday I will run 5km at a maronthon. I am exciting about it. Hope I'll enjoy.
+
+After the first run, I recorded some feelings:
+
+> gradually in the process of tired, slowly, didn't want to continue to run. Don't
+> want to run, the leg felt weigh too much, at last stop and breath with big mouth.
+
+---
+
+Revised by AI:
+
+I'm talking about my two most recent runs. In chronological order, the first run
+didn't go well; I couldn't run 5km, only 3km. The second run was great; I was
+able to complete 5km. I believe this was because I was listening to a podcast
+episode. This shifted my attention to the podcast content, so I didn't feel
+tired. I even rediscovered the habit of singing after my runs.
+
+This Sunday, I will run a 5km race in a marathon. I am excited about it and hope I'll enjoy it.
+
+After my first run, I noted the following feelings:
+
+> Gradually became tired, and slowly, I no longer wanted to continue running.
+> First, mind turns negative, then legs start feeling heavier and heavier, until
+> finally come to a stop, gasping for breath, needing to take a break.

@@ -1,0 +1,38 @@
+---
+title: 'Command Line Tools'
+status: draft
+date: 2025-06-15T19:22:54+08:00
+header: Linux
+---
+
+## exa/ls/broot {#exa-ls-broot}
+
+## zoxide/cd {#zoxide-cd}
+
+## bat/cat {#bat-cat}
+
+## fx/jq/hexyl {#fx-jq-hexyl}
+
+## diff-so-fancy/git diff {#diff-so-fancy-git-diff}
+
+## fd/find {#fd-find}
+
+## ripgrep/grep {#ripgrep-grep}
+
+## McFly/ctrl-r {#mcfly-ctrl-r}
+
+## choose/cut {#choose-cut}
+
+## duf/df {#duf-df}
+
+## ncdu/du {#ncdu-du}
+
+## htop/top {#htop-top}
+
+## procs/ps {#procs-ps}
+
+## httpie/curl {#httpie-curl}
+
+## dog/dig {#dog-dig}
+
+<https://mp.weixin.qq.com/s/gkPbQTyhAHwYrpzJjftJVQ>

@@ -1,0 +1,3538 @@
+---
+title: JavaScript
+date: 2022-11-12T22:36:00+08:00
+tags: ['技术']
+---
+
+## 一些计划
+
+https://developer.mozilla.org/en-US/docs/Web/JavaScript/A_re-introduction_to_JavaScript
+
+### 数据类型
+
+- Number
+- BigInt
+- String
+- Boolean
+- Symbol
+- Object
+- Function
+- Array
+- Date
+- RegExp
+- null
+- undefined
+
+还有 Error 对象，用于运行时抛出错误。
+
+### 闭包
+
+A closure is the combination of a function and the scope object in which
+it was created. Closures let you save state --- as such, they can often
+be used in place of objects.
+
+## Getting Started
+
+1. 以《JavaScript 高级程序设计》作为母本学习 JS
+2. http://jstherightway.org/
+3. The Modern JavaScript Tutorial: https://javascript.info/
+
+### 参考资料
+
+#### 官方标准
+
+- [ECMAScript® Latest Language Specification](https://262.ecma-international.org/) or https://tc39.es/ecma262/
+
+#### 系统教程
+
+- [React - web.dev](https://web.dev/react/)
+
+#### 别人的规划
+
+- https://github.com/upupming/frontend-learning-map
+- https://roadmap.sh/frontend
+
+### 语言基础
+#### 变量
+##### var
+```javascript
+var message
+// define variable 'message', not initialized, message == undefined
+// ---------
+var message = 'string'
+// /\
+// ||
+// \/
+var message
+message = 'string'
+// ---------
+// ..., initialized, message == 'string'
+```
+###### var 声明作用域
+var 声明函数作用域，let 声明块作用域，块作用域是函数作用域的子集。
+```javascript
+function test() {
+  var message = 'hi'
+}
+test()
+console.log(message)
+// or
+function test() {
+  message = 'hi'
+}
+// 在这里，message 被声明为全局变量
+```
+
+###### var 的声明提升
+```javascript
+function foo() {
+  console.log(age)
+  var age = 26
+}
+foo()
+
+// 等价于
+
+function foo() {
+  var age
+  console.log(age)
+  age = 26
+}
+...
+```
+##### let
+- let 声明块作用域，var 声明函数作用域。块作用域是函数作用域的子集，因此适用于 var 的作用域限制，同样适用于 let。
+- let 不允许在同一块作用域中重复声明
+
+let 和 var 混用，重复声明同样报错，它们并不是声明不同变量，而是变量在相关作用域中如何存在。
+```javascript
+// var
+if (true) {
+  var name = 'Matt'
+  console.log(name)
+)
+console.log(name)
+// let
+if (true) {
+  let name = 'Matt'
+  console.log(name)
+}
+console.log(name)
+```
+###### 暂时性死区 temporal dead zone
+let 与 var 相比的另一区别：let 声明的变量不会在作用域中被提升。
+```javascript
+// var
+console.log(age)
+var age = 23
+// let
+console.log(age)
+let age = 23
+```
+###### 全局声明
+let 在全局作用域中声明的变量不会成为 window 对象的属性，而 var 声明的变量则会。
+```javascript
+// var
+var name = 'Matt'
+console.log(window.name)
+// let
+let age = 23
+console.log(window.age)
+```
+在全局作用域中的 let 声明，相应变量会在页面的生命周期内延续。
+###### 条件声明
+let 不宜用在条件声明语句块中
+###### for 循环中的 let 声明
+```javascript
+for(var i = 0; i < 5; ++i) {
+  setTimeout(() => console.log(i), 0)
+}
+```
+退出循环时，循环变量保存的是导致循环退出的值。
+
+而对于 let 声明的 for 循环，JS 引擎在后台会为每个迭代循环声明一个新的迭代变量。
+##### const
+const 和 let 基本相同，唯一的重要区别：const 声明变量的同时必须初始化变量，而且尝试修改 const 声明的变量会报错。
+const 声明的限制只适用于它指向的变量的引用。如果 const 变量引用的是一个对象，那么修改这个对象内部的属性并不违反 const 的限制。
+
+仅在 for-of/for-in 语句中声明一个不会被修改的 for 循环变量：
+```javascript
+// 1
+let i = 0
+for (const j = 7; i < 5; ++i) {
+  console.log(j)
+}
+// 2
+for (const key in (a: 1, b: 2)) {
+  console.log(key)
+}
+// 3
+for (const value of [1,2,3,4,5,6]) {
+  console.log(value)
+}
+```
+
+#### 数据类型
+8 种数据类型：7 种原始（基本）数据类型：Boolean, null, undefined, Number, BigInt, String, Symbol；1 种引用数据类型：Object。
+
+### Standard built-in objects
+#### Proxy
+`Proxy` 对象可为其他对象创建代理，拦截并重新定义该对象的基本操作。
+
+### 其他
+
+```javascript
+    var a = 1
+    function b() {
+      a = 10
+      return
+      function a() {}
+    }
+    b()
+    alert(a)
+```
+
+这代码里， `function a() {}` 这样写产生了怎样的影响？它和 `a = 10` 的关系是什么？
+
+```javascript
+    // function hoisting
+    function test() {
+      foo()
+      bar()
+      var foo = function () {
+        alert("this won't run ")
+      }
+
+      function bar() {
+        alert('this will run')
+      }
+    }
+    test()
+```
+
+## JS 中的异步和同步
+
+异步是指两个或两个以上的对象或事件，并不同时存在或不同时发生。换句话说，很多相关事情发生了，并没有等前一个完成才发生。计算机领域，`asynchronous`
+主要用于两种上下文。
+
+1. 网络和通信
+2. 软件设计
+
+同步是实时通信，发送的同时也在接收。
+
+---
+
+参考资料
+
+1. [Asynchronous JavaScript - Learn web development | MDN](https://developer.mozilla.org/en-US/docs/Learn/JavaScript/Asynchronous)
+2. [Async functions - making promises friendly  |  Web Fundamentals  |  Google Developers](https://developers.google.com/web/fundamentals/primers/async-functions)
+3. JavaScript 高级程序设计-第 4 版-第 11 章
+
+## JavaScript Containers
+
+## JavaScript Containers
+
+[JavaScript Containers](https://tinyclouds.org/javascript_containers)
+
+Node.js、Deno 作者提出一种 JavaScript Containers 的概念。
+
+大多数服务器都是
+Linux，部署环境要花费很长时间，而“容器化”改变了这一切，将操作依赖的繁琐步骤都封装进容器中，可以做到一次安装依赖，永久无痛部署。
+
+服务器程序需要系统资源和相关配置，容器化简化了这一步骤。
+
+作者提到浏览器 JS 或许是一统 Web 开发，改变目前混乱的局面：Node.js
+生态、Deno 生态。另一个例子是 Cloudflare 的 Worker------把 JS
+作为一种新型的自适应容器。
+
+作者接下来设想 JS Containers 如何在未来得到应用。
+
+### 通用脚本语言
+
+科技无法被预测，但万维网 10 年后还存在是肯定的。
+
+越来越多的人类基础设施和 Web App 联结，而它们（Web App）的基础技术
+HTML、CSS、JS 10 年后一定还存在。所以，JavaScript 会继续被使用和改善。
+
+脚本语言大都很像，而它们中的 JS 广泛用于与人类息息相关的 Web，所以 JS
+会成为未来的通用脚本语言。
+
+### Shell : Executables :: JavaScript : WebAssembly
+
+JavaScript 沙盒可能是未来一种更高级别的容器。它通过 Wasm 执行 Linux
+程序。
+
+### The North Star
+
+未来的脚本语言是浏览器 JS。随着新的 API 被标准化，Node.js
+的根本错误在于发明了太多。
+
+## JS 学习调试
+
+```javascript
+    console.log()
+    console.clear()
+    console.log(typeof var)
+    变量名拼写错误
+    丢失的括号
+    单双引号混用，`\`来帮忙
+    本应用 `==` 却错为 `=`
+    函数调用不加 `()`
+    函数调用时，多个参数传递的次序错乱
+    Off by one errors (sometimes called OBOE) crop up when you're trying to target a specific index of a string or array (to slice or access a segment), or when looping over the indices of them. JavaScript indexing starts at zero, not one, which means the last index is always one less than the length of the item. If you try to access an index equal to the length, the program may throw an "index out of range" reference error or print `undefined`.
+    要小心：在一个循环内部重置一个全局变量
+    无限循环：1. 错误地增加/减小计数变量；2. 错误地重置计数器值/索引值，而不是加减它们
+```
+
+## [JavaScript 的设计失误 - Offline](https://haoqun.blog/zh/2016/javascript-design-regrets-cf9619ba)
+
+1. typeof null === 'object'
+2. typeof NaN === 'number' https://github.com/lewisjellis/nantalk
+3. NaN, isNaN(), Number.isNaN()
+4. 分号自动插入（Automatic Semicolon insertion，ASI）机制
+
+- Restricted Productions
+- 漏加分号的情况
+- semicolon-less 风格
+
+5. ==, === 与 Object.is()：隐式类型转换，对比
+   https://dorey.github.io/JavaScript-Equality-Table/
+6. Falsy values：JavaScript 中至少有六种假值（在条件表达式中与 false
+   等价）：0, null, undefined, false, '' 以及 NaN。
+7. +、- 操作符相关的隐式类型转换：大致可以这样记：作为二元操作符的 +
+   会尽可能地把两边的值转为字符串，而 - 和作为一元操作符的 +
+   则会尽可能地把值转为数字。
+8. null、undefined 以及数组的 "holes"
+
+不过数组里的 "holes" 就非常难以理解了。
+
+产生 holes
+的方法有两种：一是定义数组字面量时写两个连续的逗号：=var a = [1, , 2]=；二是使用
+`Array` 对象的构造器，`new Array(3)`。
+
+数组的各种方法对于 holes
+的处理非常非常非常不一致，有的会跳过（`forEach`），有的不处理但是保留（`map`），有的会消除掉
+holes（`filter`），还有的会当成 undefined 来处理（`join`）。这可以说是
+JavaScript 中最大的坑之一，不看文档很难自己理清楚。
+
+具体可以参考这两篇文章：
+
+- [Array iteration and holes in JavaScript](http://www.2ality.com/2013/07/array-iteration-holes.html)
+- [ECMAScript 6: holes in Arrays](http://www.2ality.com/2015/09/holes-arrays-es6.html)
+
+9. Array-like objects
+
+JavaScript 中，类数组但不是数组的对象不少，这类对象往往有 length
+属性、可以被遍历，但缺乏一些数组原型上的方法，用起来非常不便。
+
+在 ES2015 中，arguments 对象不再被建议使用，我们可以用 rest parameter
+（function f(...args) {}）代替，这样拿到的对象就直接是数组了。
+
+不过在语言标准之外，DOM 标准中也定义了不少 Array-like 的对象，比如
+NodeList 和 HTMLCollection。 对于这些对象，在 ES2015 中我们可以用 spread
+operator 处理。
+
+10. arguments
+
+在非严格模式（sloppy mode）下，对 arguments 赋值会改变对应的 形参。
+
+11. 函数级作用域 与 变量提升（Variable hoisting）
+
+函数级作用域本身没有问题，但是如果只能使用函数级作用域的话，在很多代码中它会显得非常
+反直觉，比如上面这个循环的例子，对程序员来说，根据花括号的位置确定变量作用域远比找到外层函数容易得多。
+
+JavaScript
+引擎在执行代码的时候，会先处理作用域内所有的变量声明，给变量分配空间（在标准里叫
+binding），然后再执行代码。
+
+这本来没什么问题，但是 var 声明在被分配空间的同时也会被初始化成
+undefined（ES5 中的 CreateMutableBinding），这就相当于把 var
+声明的变量提升到了函数作用域的开头，也就是所谓的 "hoisting"。
+
+ES2015 中引入的 let / const 则实现了 temporal dead
+zone，虽然进入作用域时用 let 和 const
+声明的变量也会被分配空间，但不会被初始化。在初始化语句之前，如果出现对变量的引用，会报
+ReferenceError。
+
+在标准层面，这是通过把 CreateMutableBing 内部方法分拆成
+CreateMutableBinding 和 InitializeBinding 两步实现的，只有
+VarDeclaredNames 才会执行 InitializeBinding 方法。
+
+12. let / const
+
+然而，let 和 const
+的引入也带来了一个坑。主要是这两个关键词的命名不够精确合理。
+
+const 关键词所定义的是一个 immutable binding（类似于 Java 中的 final
+关键词），而非真正的常量（ constant
+），这一点对于很多人来说也是反直觉的。
+
+ES2015 规范的主笔 Allen Wirfs-Brock 在 ESDiscuss 的一个帖子里
+表示，如果可以从头再来的话，他会更倾向于选择 let var / let 或者 mut /
+let 替代现在的这两个关键词，可惜这只能是一个美好的空想了。
+
+13. for...in
+
+for...in
+的问题在于它会遍历到原型链上的属性，这个大家应该都知道的，使用时需要加上
+obj.hasOwnProperty(key) 判断才安全。
+
+在 ES2015+ 中，使用 for (const key of Object.keys(obj)) 或者 for (const
+[key, value] of Object.entries()) 可以绕开这个问题。
+
+14. with
+
+依赖运行时语义，影响优化。
+
+15. eval
+
+eval
+的问题不在于可以动态执行代码，这种能力无论如何也不能算是语言的缺陷。
+
+- 作用域
+
+它的第一个坑在于传给 eval 作为参数的代码段能够接触到当前语句所在的闭包。
+
+- Direct Call vs Indirect Call
+
+首先，eval 是全局对象上的一个成员函数；
+
+但是，window.eval() 这样的调用 不算是 直接调用，因为这个调用的 base
+是全局对象而不是一个 "environment record"。
+
+间接调用 eval
+最大的用处（可能也是唯一的实际用处）是在任意地方获取到全局对象（然而
+Function('return this')() 也能做到这一点），如果 Jordan Harband 的
+[`System.global` 提案](https://github.com/tc39/proposal-global)（发布于 ES2020）能进入到标准的话，这最后一点用处也用不到了......
+
+16. 非严格模式下，赋值给未声明的变量会导致产生一个新的全局变量
+17. Value Properties of the Global Object
+
+我们平时用到的 `NaN`, `Infinity`, `undefined` 并不是作为 primitive value
+被使用（而 `null` 是 primitive
+value），[而是定义在全局对象上的属性名](https://es5.github.io/#x15.1.1)。
+
+在 ES5 之前，这几个属性甚至可以被覆盖，直到 ES5 之后它们才被改成
+non-configurable、non-writable。
+
+然而，因为这几个属性名都不是 JavaScript
+的保留字，所以可以被用来当做变量名使用。即使全局变量上的这几个属性不可被更改，我们仍然可以在自己的作用域里面对这几个名字进行覆盖。
+
+18. Stateful RegExps
+
+JavaScript
+中，正则对象上的函数是有状态的，这使得这些方法难以调试、无法做到线程安全。
+
+19. weird syntax of import
+20. Array constructor inconsistency
+21. Primitive type wrappers
+22. Date Object
+23. prototype
+
+作为对象属性的
+`prototype` ，其实根本就不是我们讨论原型继承机制时说的「原型」概念。
+[`fallbackOfObjectsCreatedWithNew` would be a better name.](https://johnkpaul.github.io/presentations/empirejs/javascript-bad-parts/#/11)
+
+而对象真正意义上的原型，在 ES5 引入 Object.getPrototypeOf()
+方法之前，我们并没有常规的方法可以获取。
+
+不过很多浏览器都实现了非标准的 **proto** （IE 除外），在 ES2015
+中，这一扩展属性也得以标准化了。
+
+24. Object destructuring syntax
+
+解构赋值时给变量起别名的语法有点让人费解，虽然这并不能算作是设计失误（毕竟很多其他语言也这么做），但毕竟不算直观。
+
+## Express.js
+
+https://expressjs.com/
+
+Express 能干什么：
+
+- Web 服务器：静态资源
+- 路由
+- API
+
+#### helloworld 例子
+
+学习到如何开启
+Express：=const express = require("express"); const app = express()=
+
+如何设置根路由：=app.get("/", (req, res) `> { res.send("Hello World")})`，[在 Node.js 中 req(request) 和 res(response) 是相同功能的对象](https://expressjs.com/en/starter/hello-world.html#running-locally)，因此在不使用 Express 的情况下，可以调用
+`req.pipe().req.on("date", callback)` 。Node 中的 res 和 req
+在一般情况下指 http
+的请求和响应，后续所有的框架和库为了简单和方便学习，也采用了相同的命名，其实也可以不是
+res,req [1]。
+
+如何设置监听端口：=app.listen(PORT, () `` > console.log(`Server is running at port ${PORT}`)) ``
+
+#### basicrouting 例子
+
+Routing 指一个应用如何响应客户端对特定端点的请求，这个端点可能是
+URI/路径 和 一个指定的 HTTP 请求方式（GET、POST、等等）。
+
+每个路由可以有一个或多个处理程序函数，当请求路由匹配时，处理程序函数执行。
+
+路由定义：`app.METHOD(PATH, HANDLER)`
+
+- app 是一个 Express 实例
+- METHOD 是一个 HTTP 请求方法（options, get, head, post, put, delete,
+   trace, connect, patch），小写字母
+- PATH 就是待访问的路径
+- HANDLER 是当路由匹配时的执行函数
+
+#### static 例子
+
+> To serve static files such as images, CSS files, and JavaScript files,
+> use the express.static built-in middleware function in Express.
+
+什么是 middleware？
+
+它是计算机软件的一种类型，为软件提供超出操作系统可用范围的服务。可被称为“软件胶水” [2]。中间件让开发者更容易实现通讯和输入输出，以便让开发者专注于特定的系统实现。
+
+> In a distributed computing system, middleware is defined as the
+> software layer that lies between the operating system and the
+> applications on each site of the system. [3]
+
+提供静态文件：`express.static(root, [options])`
+
+- root 的文件路径是相对于 express
+   服务的运行路径的，如果为了避免路径错误，可以使用
+   =const path = require("path"); app.use("/static", express.static(path.join(__dirname, "public")))=
+
+#### auth 例子
+
+```javascript
+    const hash = require('pbkdf2-password')()
+    // 代码写完，始终不能登录，检查了几遍才发现，这句的最后还需要 `()`
+```
+
+`!module.parent` 已弃用，如何升级？
+
+#### content-negotiation 例子
+
+不理解什么是内容协商？
+
+https://developer.mozilla.org/en-US/docs/Web/HTTP/Content_negotiation
+
+#### cookie-sessions 例子
+
+在一个 Cookie 中进行计数操作
+
+[1] https://stackoverflow.com/a/54114725/12539782
+
+[2] https://en.wikipedia.org/wiki/Middleware
+
+[3] https://web.archive.org/web/20050507151935/http://middleware.objectweb.org/
+
+## 工厂函数
+
+<https://www.javascripttutorial.net/javascript-factory-functions/>
+
+工厂函数能够返回新的对象。创建一个名为 `xiaoming` 的人物对象：
+
+```javascript
+    let xiaoming = {
+      firstName: 'xiaoming',
+      lastName: 'Li',
+      getFullName() {
+        return this.lastName + ' ' + this.firstName
+      },
+    }
+    console.log(xiaoming.getFullName())
+```
+
+Output:
+
+```
+    Li xiaoming
+```
+
+`xiaoming` 对象有两个属性 `firstName` 和 `lastName`
+，和一个用于返回全名的方法 `getFullName()` 。
+
+假设你想新建一个类似对象 `xiaohua`
+，可以直接替换以上代码的关键字。如果你想创建更多人物，直接复制就好。
+
+为了避免重复复制相同代码，可以创建一个创建 `person` 对象的函数：
+
+```javascript
+    function createPerson(firstName, lastName) {
+      return {
+        firstName: firstName,
+        lastName: lastName,
+        getFullName() {
+          return lastName + ' ' + firstName
+        },
+      }
+    }
+```
+
+能够创建对象的函数，就是工厂函数。 `createPerson()`
+是一个工厂函数，因为它返回了新的 `person` 对象。
+
+现在使用 `createPerson()` 工厂函数创建两个对象 `xiaoming` 和 `xiaohua`
+：
+
+```javascript
+    let xiaoming = createPerson('xiaoming', 'Li'),
+      xiaohua = createPerson('xiaohua', 'Li')
+    console.log(xiaoming.getFullName())
+    console.log(xiaohua.getFullName())
+```
+
+对象的创建是在内存中开辟出一块空间，如果你有很多个对象，就会占用大量的内存空间。具体到
+`person` 对象，它有一个重复的 `getFullName()` 方法。
+
+为了避免在内存中重复相同的 `getFullName()` 函数，可以从 `person`
+对象中移除它，另创建一个新的对象表达它：
+
+```javascript
+    function createPerson(firstName, lastName) {
+      return {
+        firstName: firstName,
+        lastName: lastName,
+      }
+    }
+```
+
+```javascript
+    const behavior = {
+      getFullName() {
+        return this.lastName + ' ' + this.firstName
+      },
+    }
+```
+
+修改后的全部代码：
+
+```javascript
+    function createPerson(firstName, lastName) {
+      return {
+        firstName: firstName,
+        lastName: lastName,
+      }
+    }
+
+    const behavior = {
+      getFullName() {
+        return this.lastName + ' ' + this.firstName
+      },
+    }
+
+    let xiaoming = createPerson('xiaoming', 'Li'),
+      xiaohua = createPerson('xiaohua', 'Li')
+
+    xiaoming.getFullName = behavior.getFullName
+    xiaohua.getFullName = behavior.getFullName
+
+    console.log(xiaoming.getFullName())
+    console.log(xiaohua.getFullName())
+```
+
+但是这样做并不利于添加更多方法，于是就有了 `Object.create()` 方法。
+
+### `Object.create()` 方法
+
+`Object.create()`
+方法创建新的对象，将已存在的对象作为新对象的原型（prototype）：
+
+```javascript
+    Object.create(proto, [propertiesObject])
+```
+
+加入 `Object.create()` 以后的代码：
+
+```javascript
+    const behavior = {
+      getFullName() {
+        return this.lastName + ' ' + this.firstName
+      },
+    }
+
+    function createPerson(firstName, lastName) {
+      let person = Object.create(behavior)
+      person.firstName = firstName
+      person.lastName = lastName
+      return person
+    }
+
+    let xiaoming = createPerson('xiaoming', 'Li'),
+      xiaohua = createPerson('xiaohua', 'Li')
+
+    console.log(xiaoming.getFullName())
+    console.log(xiaohua.getFullName())
+```
+
+不是很理解这段代码。
+
+但是在实践中，很少见到「工厂函数」，更多见的是「函数构造函数（function
+constructors）」或「类」。
+
+## JS 函数式编程
+
+https://www.freecodecamp.org/learn/javascript-algorithms-and-data-structures/#functional-programming
+
+> Functional programming is a style of programming where solutions are
+> simple, isolated functions, without any side effects outside of the
+> function scope: `INPUT -> PROCESS -> OUTPUT`
+
+### 术语 Terminology
+
+- Callbacks
+
+functions that are slipped or passed into another function to decide the
+invocation of that function
+
+- `first class` functions
+
+functions that can be assigned to a variable, passed into another
+function, or returned from another function just like any other normal
+value
+
+In JavaScript, all functions are first class functions.
+
+- `higher order` functions
+
+functions that take a function as an argument, or return a function as a
+return value
+
+- lambda
+
+when functions are passed in to or returned from another function, then
+those functions which were passed in or returned
+
+- mutation
+
+changing or altering things
+
+- side effect
+
+the outcome caussed by changing or altering things
+
+### 不要使用命令式代码
+
+### 函数式编程的核心原则------不要改变事物
+
+使用函数式编程避免突变和副作用
+
+### 函数式编程的另一原则------总是显示声明依赖
+
+在函数中传递参数以避免外部依赖
+
+```javascript
+    // The global variable
+    let fixedValue = 4
+
+    // Only change code below this line
+    function incrementer(param) {
+      return param + 1
+      // Only change code above this line
+    }
+
+    console.log(incrementer(fixedValue))
+```
+
+### 使用 `map` 从数组中提取数据
+
+无法采取合适的对数据元素进行操作的方法。
+
+最终还是做出来了
+
+```javascript
+    // The global variable
+    const watchList = [
+      {
+        Title: 'Inception',
+        Year: '2010',
+        Rated: 'PG-13',
+        Released: '16 Jul 2010',
+        Runtime: '148 min',
+        Genre: 'Action, Adventure, Crime',
+        Director: 'Christopher Nolan',
+        Writer: 'Christopher Nolan',
+        Actors: 'Leonardo DiCaprio, Joseph Gordon-Levitt, Elliot Page, Tom Hardy',
+        Plot: 'A thief, who steals corporate secrets through use of dream-sharing technology, is given the inverse task of planting an idea into the mind of a CEO.',
+        Language: 'English, Japanese, French',
+        Country: 'USA, UK',
+        Awards: 'Won 4 Oscars. Another 143 wins & 198 nominations.',
+        Poster:
+          'http://ia.media-imdb.com/images/M/MV5BMjAxMzY3NjcxNF5BMl5BanBnXkFtZTcwNTI5OTM0Mw@@._V1_SX300.jpg',
+        Metascore: '74',
+        imdbRating: '8.8',
+        imdbVotes: '1,446,708',
+        imdbID: 'tt1375666',
+        Type: 'movie',
+        Response: 'True',
+      },
+      {
+        Title: 'Interstellar',
+        Year: '2014',
+        Rated: 'PG-13',
+        Released: '07 Nov 2014',
+        Runtime: '169 min',
+        Genre: 'Adventure, Drama, Sci-Fi',
+        Director: 'Christopher Nolan',
+        Writer: 'Jonathan Nolan, Christopher Nolan',
+        Actors: 'Ellen Burstyn, Matthew McConaughey, Mackenzie Foy, John Lithgow',
+        Plot: "A team of explorers travel through a wormhole in space in an attempt to ensure humanity's survival.",
+        Language: 'English',
+        Country: 'USA, UK',
+        Awards: 'Won 1 Oscar. Another 39 wins & 132 nominations.',
+        Poster:
+          'http://ia.media-imdb.com/images/M/MV5BMjIxNTU4MzY4MF5BMl5BanBnXkFtZTgwMzM4ODI3MjE@._V1_SX300.jpg',
+        Metascore: '74',
+        imdbRating: '8.6',
+        imdbVotes: '910,366',
+        imdbID: 'tt0816692',
+        Type: 'movie',
+        Response: 'True',
+      },
+      {
+        Title: 'The Dark Knight',
+        Year: '2008',
+        Rated: 'PG-13',
+        Released: '18 Jul 2008',
+        Runtime: '152 min',
+        Genre: 'Action, Adventure, Crime',
+        Director: 'Christopher Nolan',
+        Writer:
+          'Jonathan Nolan (screenplay), Christopher Nolan (screenplay), Christopher Nolan (story), David S. Goyer (story), Bob Kane (characters)',
+        Actors: 'Christian Bale, Heath Ledger, Aaron Eckhart, Michael Caine',
+        Plot: 'When the menace known as the Joker wreaks havoc and chaos on the people of Gotham, the caped crusader must come to terms with one of the greatest psychological tests of his ability to fight injustice.',
+        Language: 'English, Mandarin',
+        Country: 'USA, UK',
+        Awards: 'Won 2 Oscars. Another 146 wins & 142 nominations.',
+        Poster:
+          'http://ia.media-imdb.com/images/M/MV5BMTMxNTMwODM0NF5BMl5BanBnXkFtZTcwODAyMTk2Mw@@._V1_SX300.jpg',
+        Metascore: '82',
+        imdbRating: '9.0',
+        imdbVotes: '1,652,832',
+        imdbID: 'tt0468569',
+        Type: 'movie',
+        Response: 'True',
+      },
+      {
+        Title: 'Batman Begins',
+        Year: '2005',
+        Rated: 'PG-13',
+        Released: '15 Jun 2005',
+        Runtime: '140 min',
+        Genre: 'Action, Adventure',
+        Director: 'Christopher Nolan',
+        Writer:
+          'Bob Kane (characters), David S. Goyer (story), Christopher Nolan (screenplay), David S. Goyer (screenplay)',
+        Actors: 'Christian Bale, Michael Caine, Liam Neeson, Katie Holmes',
+        Plot: 'After training with his mentor, Batman begins his fight to free crime-ridden Gotham City from the corruption that Scarecrow and the League of Shadows have cast upon it.',
+        Language: 'English, Urdu, Mandarin',
+        Country: 'USA, UK',
+        Awards: 'Nominated for 1 Oscar. Another 15 wins & 66 nominations.',
+        Poster:
+          'http://ia.media-imdb.com/images/M/MV5BNTM3OTc0MzM2OV5BMl5BanBnXkFtZTYwNzUwMTI3._V1_SX300.jpg',
+        Metascore: '70',
+        imdbRating: '8.3',
+        imdbVotes: '972,584',
+        imdbID: 'tt0372784',
+        Type: 'movie',
+        Response: 'True',
+      },
+      {
+        Title: 'Avatar',
+        Year: '2009',
+        Rated: 'PG-13',
+        Released: '18 Dec 2009',
+        Runtime: '162 min',
+        Genre: 'Action, Adventure, Fantasy',
+        Director: 'James Cameron',
+        Writer: 'James Cameron',
+        Actors: 'Sam Worthington, Zoe Saldana, Sigourney Weaver, Stephen Lang',
+        Plot: 'A paraplegic marine dispatched to the moon Pandora on a unique mission becomes torn between following his orders and protecting the world he feels is his home.',
+        Language: 'English, Spanish',
+        Country: 'USA, UK',
+        Awards: 'Won 3 Oscars. Another 80 wins & 121 nominations.',
+        Poster:
+          'http://ia.media-imdb.com/images/M/MV5BMTYwOTEwNjAzMl5BMl5BanBnXkFtZTcwODc5MTUwMw@@._V1_SX300.jpg',
+        Metascore: '83',
+        imdbRating: '7.9',
+        imdbVotes: '876,575',
+        imdbID: 'tt0499549',
+        Type: 'movie',
+        Response: 'True',
+      },
+    ]
+
+    // Only change code below this line
+
+    const ratings = watchList.map((key) => ({
+      title: key.Title,
+      rating: key.imdbRating,
+    }))
+
+    // Only change code above this line
+
+    console.log(JSON.stringify(ratings))
+```
+
+### 在原型上实现 `map`
+
+```javascript
+    // the global Array
+    let s = [23, 65, 98, 5]
+
+    Array.prototype.myMap = function (callback) {
+      var newArray = []
+      // Add your code below this line
+      this.forEach((a) => newArray.push(callback(a)))
+      // Add your code above this line
+      return newArray
+    }
+
+    let new_s = s.myMap(function (item) {
+      return item * 2
+    })
+```
+
+### 使用 `filter` 从数组中提取数据
+
+```javascript
+    // The global variable
+    const watchList = [
+      {
+        Title: 'Inception',
+        Year: '2010',
+        Rated: 'PG-13',
+        Released: '16 Jul 2010',
+        Runtime: '148 min',
+        Genre: 'Action, Adventure, Crime',
+        Director: 'Christopher Nolan',
+        Writer: 'Christopher Nolan',
+        Actors: 'Leonardo DiCaprio, Joseph Gordon-Levitt, Elliot Page, Tom Hardy',
+        Plot: 'A thief, who steals corporate secrets through use of dream-sharing technology, is given the inverse task of planting an idea into the mind of a CEO.',
+        Language: 'English, Japanese, French',
+        Country: 'USA, UK',
+        Awards: 'Won 4 Oscars. Another 143 wins & 198 nominations.',
+        Poster:
+          'http://ia.media-imdb.com/images/M/MV5BMjAxMzY3NjcxNF5BMl5BanBnXkFtZTcwNTI5OTM0Mw@@._V1_SX300.jpg',
+        Metascore: '74',
+        imdbRating: '8.8',
+        imdbVotes: '1,446,708',
+        imdbID: 'tt1375666',
+        Type: 'movie',
+        Response: 'True',
+      },
+      {
+        Title: 'Interstellar',
+        Year: '2014',
+        Rated: 'PG-13',
+        Released: '07 Nov 2014',
+        Runtime: '169 min',
+        Genre: 'Adventure, Drama, Sci-Fi',
+        Director: 'Christopher Nolan',
+        Writer: 'Jonathan Nolan, Christopher Nolan',
+        Actors: 'Ellen Burstyn, Matthew McConaughey, Mackenzie Foy, John Lithgow',
+        Plot: "A team of explorers travel through a wormhole in space in an attempt to ensure humanity's survival.",
+        Language: 'English',
+        Country: 'USA, UK',
+        Awards: 'Won 1 Oscar. Another 39 wins & 132 nominations.',
+        Poster:
+          'http://ia.media-imdb.com/images/M/MV5BMjIxNTU4MzY4MF5BMl5BanBnXkFtZTgwMzM4ODI3MjE@._V1_SX300.jpg',
+        Metascore: '74',
+        imdbRating: '8.6',
+        imdbVotes: '910,366',
+        imdbID: 'tt0816692',
+        Type: 'movie',
+        Response: 'True',
+      },
+      {
+        Title: 'The Dark Knight',
+        Year: '2008',
+        Rated: 'PG-13',
+        Released: '18 Jul 2008',
+        Runtime: '152 min',
+        Genre: 'Action, Adventure, Crime',
+        Director: 'Christopher Nolan',
+        Writer:
+          'Jonathan Nolan (screenplay), Christopher Nolan (screenplay), Christopher Nolan (story), David S. Goyer (story), Bob Kane (characters)',
+        Actors: 'Christian Bale, Heath Ledger, Aaron Eckhart, Michael Caine',
+        Plot: 'When the menace known as the Joker wreaks havoc and chaos on the people of Gotham, the caped crusader must come to terms with one of the greatest psychological tests of his ability to fight injustice.',
+        Language: 'English, Mandarin',
+        Country: 'USA, UK',
+        Awards: 'Won 2 Oscars. Another 146 wins & 142 nominations.',
+        Poster:
+          'http://ia.media-imdb.com/images/M/MV5BMTMxNTMwODM0NF5BMl5BanBnXkFtZTcwODAyMTk2Mw@@._V1_SX300.jpg',
+        Metascore: '82',
+        imdbRating: '9.0',
+        imdbVotes: '1,652,832',
+        imdbID: 'tt0468569',
+        Type: 'movie',
+        Response: 'True',
+      },
+      {
+        Title: 'Batman Begins',
+        Year: '2005',
+        Rated: 'PG-13',
+        Released: '15 Jun 2005',
+        Runtime: '140 min',
+        Genre: 'Action, Adventure',
+        Director: 'Christopher Nolan',
+        Writer:
+          'Bob Kane (characters), David S. Goyer (story), Christopher Nolan (screenplay), David S. Goyer (screenplay)',
+        Actors: 'Christian Bale, Michael Caine, Liam Neeson, Katie Holmes',
+        Plot: 'After training with his mentor, Batman begins his fight to free crime-ridden Gotham City from the corruption that Scarecrow and the League of Shadows have cast upon it.',
+        Language: 'English, Urdu, Mandarin',
+        Country: 'USA, UK',
+        Awards: 'Nominated for 1 Oscar. Another 15 wins & 66 nominations.',
+        Poster:
+          'http://ia.media-imdb.com/images/M/MV5BNTM3OTc0MzM2OV5BMl5BanBnXkFtZTYwNzUwMTI3._V1_SX300.jpg',
+        Metascore: '70',
+        imdbRating: '8.3',
+        imdbVotes: '972,584',
+        imdbID: 'tt0372784',
+        Type: 'movie',
+        Response: 'True',
+      },
+      {
+        Title: 'Avatar',
+        Year: '2009',
+        Rated: 'PG-13',
+        Released: '18 Dec 2009',
+        Runtime: '162 min',
+        Genre: 'Action, Adventure, Fantasy',
+        Director: 'James Cameron',
+        Writer: 'James Cameron',
+        Actors: 'Sam Worthington, Zoe Saldana, Sigourney Weaver, Stephen Lang',
+        Plot: 'A paraplegic marine dispatched to the moon Pandora on a unique mission becomes torn between following his orders and protecting the world he feels is his home.',
+        Language: 'English, Spanish',
+        Country: 'USA, UK',
+        Awards: 'Won 3 Oscars. Another 80 wins & 121 nominations.',
+        Poster:
+          'http://ia.media-imdb.com/images/M/MV5BMTYwOTEwNjAzMl5BMl5BanBnXkFtZTcwODc5MTUwMw@@._V1_SX300.jpg',
+        Metascore: '83',
+        imdbRating: '7.9',
+        imdbVotes: '876,575',
+        imdbID: 'tt0499549',
+        Type: 'movie',
+        Response: 'True',
+      },
+    ]
+
+    // Only change code below this line
+
+    const newWatchList = watchList.map((key) => ({
+      title: key.Title,
+      rating: key.imdbRating,
+    }))
+    const filteredList = newWatchList.filter((key) => key.rating >= 8.0)
+
+    // Only change code above this line
+
+    console.log(filteredList)
+```
+
+### 在原型上实现 `filter`
+
+```javascript
+    // The global variable
+    const s = [23, 65, 98, 5]
+
+    Array.prototype.myFilter = function (callback) {
+      // Only change code below this line
+      let newArray = []
+      this.forEach(function (a) {
+        if (callback(a) == true) {
+          newArray.push(a)
+        }
+      })
+      // Only change code above this line
+      return newArray
+    }
+
+    const new_s = s.myFilter(function (item) {
+      return item % 2 === 1
+    })
+```
+
+### 使用 `slice` 返回部分字符串、移除元素
+
+### `concat`
+
+### 使用 `reduce` 分析数据
+
+这段代码中的解答没看答案，在前面几个练习的帮助下完成。
+
+```javascript
+    // The global variable
+    const watchList = [
+      {
+        Title: 'Inception',
+        Year: '2010',
+        Rated: 'PG-13',
+        Released: '16 Jul 2010',
+        Runtime: '148 min',
+        Genre: 'Action, Adventure, Crime',
+        Director: 'Christopher Nolan',
+        Writer: 'Christopher Nolan',
+        Actors: 'Leonardo DiCaprio, Joseph Gordon-Levitt, Elliot Page, Tom Hardy',
+        Plot: 'A thief, who steals corporate secrets through use of dream-sharing technology, is given the inverse task of planting an idea into the mind of a CEO.',
+        Language: 'English, Japanese, French',
+        Country: 'USA, UK',
+        Awards: 'Won 4 Oscars. Another 143 wins & 198 nominations.',
+        Poster:
+          'http://ia.media-imdb.com/images/M/MV5BMjAxMzY3NjcxNF5BMl5BanBnXkFtZTcwNTI5OTM0Mw@@._V1_SX300.jpg',
+        Metascore: '74',
+        imdbRating: '8.8',
+        imdbVotes: '1,446,708',
+        imdbID: 'tt1375666',
+        Type: 'movie',
+        Response: 'True',
+      },
+      {
+        Title: 'Interstellar',
+        Year: '2014',
+        Rated: 'PG-13',
+        Released: '07 Nov 2014',
+        Runtime: '169 min',
+        Genre: 'Adventure, Drama, Sci-Fi',
+        Director: 'Christopher Nolan',
+        Writer: 'Jonathan Nolan, Christopher Nolan',
+        Actors: 'Ellen Burstyn, Matthew McConaughey, Mackenzie Foy, John Lithgow',
+        Plot: "A team of explorers travel through a wormhole in space in an attempt to ensure humanity's survival.",
+        Language: 'English',
+        Country: 'USA, UK',
+        Awards: 'Won 1 Oscar. Another 39 wins & 132 nominations.',
+        Poster:
+          'http://ia.media-imdb.com/images/M/MV5BMjIxNTU4MzY4MF5BMl5BanBnXkFtZTgwMzM4ODI3MjE@._V1_SX300.jpg',
+        Metascore: '74',
+        imdbRating: '8.6',
+        imdbVotes: '910,366',
+        imdbID: 'tt0816692',
+        Type: 'movie',
+        Response: 'True',
+      },
+      {
+        Title: 'The Dark Knight',
+        Year: '2008',
+        Rated: 'PG-13',
+        Released: '18 Jul 2008',
+        Runtime: '152 min',
+        Genre: 'Action, Adventure, Crime',
+        Director: 'Christopher Nolan',
+        Writer:
+          'Jonathan Nolan (screenplay), Christopher Nolan (screenplay), Christopher Nolan (story), David S. Goyer (story), Bob Kane (characters)',
+        Actors: 'Christian Bale, Heath Ledger, Aaron Eckhart, Michael Caine',
+        Plot: 'When the menace known as the Joker wreaks havoc and chaos on the people of Gotham, the caped crusader must come to terms with one of the greatest psychological tests of his ability to fight injustice.',
+        Language: 'English, Mandarin',
+        Country: 'USA, UK',
+        Awards: 'Won 2 Oscars. Another 146 wins & 142 nominations.',
+        Poster:
+          'http://ia.media-imdb.com/images/M/MV5BMTMxNTMwODM0NF5BMl5BanBnXkFtZTcwODAyMTk2Mw@@._V1_SX300.jpg',
+        Metascore: '82',
+        imdbRating: '9.0',
+        imdbVotes: '1,652,832',
+        imdbID: 'tt0468569',
+        Type: 'movie',
+        Response: 'True',
+      },
+      {
+        Title: 'Batman Begins',
+        Year: '2005',
+        Rated: 'PG-13',
+        Released: '15 Jun 2005',
+        Runtime: '140 min',
+        Genre: 'Action, Adventure',
+        Director: 'Christopher Nolan',
+        Writer:
+          'Bob Kane (characters), David S. Goyer (story), Christopher Nolan (screenplay), David S. Goyer (screenplay)',
+        Actors: 'Christian Bale, Michael Caine, Liam Neeson, Katie Holmes',
+        Plot: 'After training with his mentor, Batman begins his fight to free crime-ridden Gotham City from the corruption that Scarecrow and the League of Shadows have cast upon it.',
+        Language: 'English, Urdu, Mandarin',
+        Country: 'USA, UK',
+        Awards: 'Nominated for 1 Oscar. Another 15 wins & 66 nominations.',
+        Poster:
+          'http://ia.media-imdb.com/images/M/MV5BNTM3OTc0MzM2OV5BMl5BanBnXkFtZTYwNzUwMTI3._V1_SX300.jpg',
+        Metascore: '70',
+        imdbRating: '8.3',
+        imdbVotes: '972,584',
+        imdbID: 'tt0372784',
+        Type: 'movie',
+        Response: 'True',
+      },
+      {
+        Title: 'Avatar',
+        Year: '2009',
+        Rated: 'PG-13',
+        Released: '18 Dec 2009',
+        Runtime: '162 min',
+        Genre: 'Action, Adventure, Fantasy',
+        Director: 'James Cameron',
+        Writer: 'James Cameron',
+        Actors: 'Sam Worthington, Zoe Saldana, Sigourney Weaver, Stephen Lang',
+        Plot: 'A paraplegic marine dispatched to the moon Pandora on a unique mission becomes torn between following his orders and protecting the world he feels is his home.',
+        Language: 'English, Spanish',
+        Country: 'USA, UK',
+        Awards: 'Won 3 Oscars. Another 80 wins & 121 nominations.',
+        Poster:
+          'http://ia.media-imdb.com/images/M/MV5BMTYwOTEwNjAzMl5BMl5BanBnXkFtZTcwODc5MTUwMw@@._V1_SX300.jpg',
+        Metascore: '83',
+        imdbRating: '7.9',
+        imdbVotes: '876,575',
+        imdbID: 'tt0499549',
+        Type: 'movie',
+        Response: 'True',
+      },
+    ]
+
+    function getRating(watchList) {
+      // Only change code below this line
+
+      const new1WatchList = watchList.map((key) => ({
+        title: key.Title,
+        Director: key.Director,
+        rating: key.imdbRating,
+      }))
+      const new2WatchList = new1WatchList.filter(function (key) {
+        if (key.Director == 'Christopher Nolan') {
+          return key
+        }
+      })
+
+      const sumRating = new2WatchList.reduce(
+        (sum, key) => Number(sum) + Number(key.rating),
+        0,
+      )
+      const averageRating = sumRating / new2WatchList.length
+
+      // Only change code above this line
+      return averageRating
+    }
+
+    console.log(getRating(watchList))
+```
+
+### 用 `map` 、`filter` 、`reduce` 解决实际问题
+
+```javascript
+    const squareList = (arr) => {
+      // Only change code below this line
+      return arr
+        .filter((elem) => elem > 0)
+        .filter((elem) => Number.parseInt(elem) == elem)
+        .map((elem) => elem * elem)
+      // Only change code above this line
+    }
+
+    const squaredIntegers = squareList([4, 5.6, -9.8, 3.14, 42, 6, 8.34, -2])
+    console.log(squaredIntegers)
+```
+
+### `sort` 为数组按字母顺序排列
+
+```javascript
+    function alphabeticalOrder(arr) {
+      // Only change code below this line
+      return arr.sort(function (a, b) {
+        return a === b ? 0 : a > b ? 1 : -1
+      })
+      // Only change code above this line
+    }
+
+    console.log(alphabeticalOrder(['a', 'd', 'c', 'a', 'z', 'g']))
+```
+
+### `split`
+
+`/\W/` matches any non-word character
+
+### 将字符串转换为字符串链接，并在其中应用函数式编程思想
+
+我的做法（没有问题，也能输出正确答案）：
+
+```javascript
+    // Only change code below this line
+    function urlSlug(title) {
+      return title
+        .trim()
+        .split(' ')
+        .reduce(function (prev, next) {
+          return prev + '-' + next
+        })
+        .toLowerCase()
+    }
+    // Only change code above this line
+    console.log(urlSlug(' Winter Is Coming'))
+```
+
+参考答案：
+
+```javascript
+    function urlSlug(title) {
+      return title.toLowerCase().trim().split(/\s+/).join('-')
+    }
+```
+
+```javascript
+    function urlSlug(title) {
+      return title
+        .split(' ')
+        .filter((substr) => substr !== '')
+        .join('-')
+        .toLowerCase()
+    }
+```
+
+### `every` 和 `some`
+
+```javascript
+    function checkPositive(arr) {
+      return arr.every((currentValue) => currentValue > 0)
+    }
+
+    checkPositive([1, 2, 3, -4, 5])
+```
+
+### 局部套用和部分应用 Currying and Partial Application
+
+https://www.freecodecamp.org/learn/javascript-algorithms-and-data-structures/functional-programming/introduction-to-currying-and-partial-application
+
+```javascript
+    function add(x) {
+      // Only change code below this line
+      return function (y) {
+        return function (z) {
+          return x + y + z
+        }
+      }
+      // Only change code above this line
+    }
+
+    add(10)(20)(30)
+```
+
+```javascript
+    function add(x) {
+      return (y) => (z) => x + y + z
+    }
+```
+
+## JS 面向对象编程
+
+https://www.freecodecamp.org/learn/javascript-algorithms-and-data-structures/#object-oriented-programming
+
+面向对象，对象是核心组件。
+
+构造器是创建新对象的函数。每次通过构造函数新建一个对象，该对象可被称为该构造函数的一个实例（instance）。构造器属性是创建该实例的构造函数对自身的引用，通过它可以确定对象所属的构造函数，但是它是可以被覆盖的，所以最好使用
+`instanceof` 确定对象所属。
+
+自有属性（own properties）：直接在实例对象中定义。
+
+原型属性（prototype
+properties）：减少重复代码。将原型的定义扩展成一个对象。
+
+一个对象的原型从何处继承？从创建它的构造器处继承。
+
+### Prototype Chain
+
+JS
+中除少数例外，其他对象都有原型，而且对象的原型也是对象。构造函数是定义对象的模板。因为原型是对象，所以原型也有原型。
+
+### Don't Repeat Yourself (DRY)
+
+1. 减少重复工作
+2. 减少错误数量
+
+> `Object.create(obj)` creates a new object, and sets `obj` as the new
+> object's `prototype`. Recall that the `prototype` is like the "recipe"
+> for creating an object. By setting the `prototype` of `animal` to be
+> the `prototype` of `Animal`, you are effectively giving the `animal`
+> instance the same "recipe" as any other instance of `Animal`.
+>
+> from
+> https://www.freecodecamp.org/learn/javascript-algorithms-and-data-structures/object-oriented-programming/inherit-behaviors-from-a-supertype
+
+### 继承
+
+```javascript
+    ChildObject.prototype = Object.create(ParentObject.prototype)
+```
+
+### Mixin
+
+### 闭包
+
+In JavaScript, a function always has access to the context in which it
+was created. This is called `closure`.
+
+### Immediately Invoked Function Expression 立即调用函数表达式
+
+创建模块。The advantage of the module pattern is that all of the motion
+behaviors can be packaged into a single object that can then be used by
+other parts of your code. Here is an example using it:
+
+```javascript
+    let motionModule = (function () {
+      return {
+        glideMixin: function (obj) {
+          obj.glide = function () {
+            console.log('Gliding on the water')
+          }
+        },
+        flyMixin: function (obj) {
+          obj.fly = function () {
+            console.log('Flying, wooosh!')
+          }
+        },
+      }
+    })()
+
+    motionModule.glideMixin(duck)
+    duck.glide()
+```
+
+### 示例代码
+
+对象内部的函数调用
+
+```javascript
+    let dog = {
+      name: 'Spot',
+      numLegs: 4,
+      sayLegs() {
+        return 'This dog has ' + this.numLegs + ' legs.'
+      },
+    }
+
+    dog.sayLegs()
+```
+
+创建构造器、通过构造器新建对象
+
+```javascript
+    function Dog() {
+      this.name = 'Dogy'
+      this.color = 'black'
+      this.numLegs = 4
+    }
+    let blackDog = new Dog()
+```
+
+让构造器能够接收参数
+
+```javascript
+    function Dog(name, color) {
+      this.name = name
+      this.color = color
+      this.numLegs = 4
+    }
+    let terrier = new Dog('Dogy', 'black')
+```
+
+验证是否为构造函数的实例
+
+```javascript
+    function House(numBedrooms) {
+      this.numBedrooms = numBedrooms
+    }
+
+    // Only change code below this line
+    let myHouse = new House(3)
+    console.log(myHouse instanceof House)
+```
+
+确定是否为自有属性（`hasOwnProperty()`）
+
+```javascript
+    function Bird(name) {
+      this.name = name
+      this.numLegs = 2
+    }
+
+    let canary = new Bird('Tweety')
+    let ownProps = []
+    // Only change code below this line
+    for (let property in canary) {
+      if (canary.hasOwnProperty(property)) {
+        ownProps.push(property)
+      }
+    }
+
+    console.log(ownProps)
+```
+
+原型属性定义
+
+```javascript
+    function Dog(name) {
+      this.name = name
+    }
+
+    Dog.prototype.numLegs = 4
+
+    let beagle = new Dog('Snoopy')
+```
+
+输出自有属性和原型属性
+
+```javascript
+    function Dog(name) {
+      this.name = name
+    }
+
+    Dog.prototype.numLegs = 4
+
+    let beagle = new Dog('Snoopy')
+
+    let ownProps = []
+    let prototypeProps = []
+
+    // Only change code below this line
+    for (let property in beagle) {
+      if (beagle.hasOwnProperty(property)) {
+        ownProps.push(property)
+      } else {
+        prototypeProps.push(property)
+      }
+    }
+
+    console.log(ownProps)
+    console.log(prototypeProps)
+```
+
+通过对象定义原型、设置构造器属性
+
+```javascript
+    function Dog(name) {
+      this.name = name
+    }
+
+    Dog.prototype = {
+      constructor: Dog,
+      numLegs: 4,
+      eat() {
+        console.log('nom nom nom')
+      },
+      describe() {
+        console.log('My name is ' + this.name)
+      },
+    }
+```
+
+理解对象的原型从构造函数那里来
+
+```javascript
+    function Dog(name) {
+      this.name = name
+    }
+
+    let beagle = new Dog('Snoopy')
+    console.log(Dog.prototype.isPrototypeOf(beagle))
+```
+
+子对象的原型设置为父对象的实例
+
+```javascript
+    function Animal() {}
+
+    Animal.prototype = {
+      constructor: Animal,
+      eat: function () {
+        console.log('nom nom nom')
+      },
+    }
+
+    function Dog() {}
+
+    Dog.prototype = Object.create(Animal.prototype)
+
+    let beagle = new Dog()
+```
+
+纠正继承的构造器属性
+
+```javascript
+    function Animal() {}
+    function Bird() {}
+    function Dog() {}
+
+    Bird.prototype = Object.create(Animal.prototype)
+    Dog.prototype = Object.create(Animal.prototype)
+
+    Bird.prototype.constructor = Bird
+    Dog.prototype.constructor = Dog
+
+    let duck = new Bird()
+    let beagle = new Dog()
+
+    console.log(duck.constructor)
+    console.log(beagle.constructor)
+```
+
+继承后，为构造器单独添加方法
+
+```javascript
+    function Animal() {}
+    Animal.prototype.eat = function () {
+      console.log('nom nom nom')
+    }
+
+    function Dog() {}
+
+    // Only change code below this line
+
+    Dog.prototype = Object.create(Animal.prototype)
+    Dog.prototype.constructor = Dog
+    Dog.prototype.bark = function () {
+      console.log('Woof!')
+    }
+
+    // Only change code above this line
+
+    let beagle = new Dog()
+```
+
+覆盖已继承方法
+
+```javascript
+    function Bird() {}
+
+    Bird.prototype.fly = function () {
+      return 'I am flying!'
+    }
+
+    function Penguin() {}
+    Penguin.prototype = Object.create(Bird.prototype)
+    Penguin.prototype.constructor = Penguin
+
+    // Only change code below this line
+
+    Penguin.prototype.fly = function () {
+      return 'Alas, this is a flightless bird.'
+    }
+
+    // Only change code above this line
+
+    let penguin = new Penguin()
+    console.log(penguin.fly())
+```
+
+The `flyMixin` takes any object and gives it the `fly` method.
+
+Note how the mixin allows for the same `fly` method to be reused by
+unrelated objects `bird` and `plane`.
+
+```javascript
+    let flyMixin = function (obj) {
+      obj.fly = function () {
+        console.log('Flying, wooosh!')
+      }
+    }
+
+    let bird = {
+      name: 'Donald',
+      numLegs: 2,
+    }
+
+    let plane = {
+      name: '777',
+      numPassengers: 524,
+    }
+
+    flyMixin(bird)
+    flyMixin(plane)
+
+    bird.fly()
+    plane.fly()
+```
+
+用闭包保护私有变量
+
+```javascript
+    function Bird() {
+      let weight = 15
+      this.getWeight = function () {
+        return weight
+      }
+    }
+```
+
+立即调用函数表达式
+
+```javascript
+    ;(function () {
+      console.log('Chirp, chirp!')
+    })()
+```
+
+使用 IIFE 创建模块
+
+```javascript
+    let funModule = (function () {
+      return {
+        isCuteMixin: function (obj) {
+          obj.isCute = function () {
+            return true
+          }
+        },
+        singMixin: function (obj) {
+          obj.sing = function () {
+            console.log('Singing to an awesome tune')
+          }
+        },
+      }
+    })()
+```
+
+## [UNSOLVED]JS 三元操作符：为什么我写的这行代码结果是 undefined
+
+问题：判断 target 是否是 str 的最后几位字符，如果是返回 `true` ，否则返回
+`false` 。
+
+```javascript
+    function confirmEnding(str, target) {
+      str.substring(str.length - target.length) == target ? true : false
+    }
+
+    console.log(confirmEnding('Bastian', 'n'))
+```
+
+为什么上述代码片段，返回 `undefined` ？因为
+=str.substring(str.length - target.length) == target= 中有未定义的部分。
+
+三元操作符的原始结构：
+
+```javascript
+    condition ? exprIfTrue : exprIfFalse
+```
+
+参数 `condition` 必须是一个表达式。
+
+=str.substring(str.length - target.length) == target=
+应该是表达式，它满足表达式的一个要求：一段能够返回结果的代码。但并不完全。表达式的所有类型：
+
+1. 算术表达式：计算结果为数字的（通常使用[算术操作符](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Guide/Expressions_and_Operators#arithmetic_operators)）
+2. 字符串：计算结果为字符串（通常使用[字符串操作符](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Guide/Expressions_and_Operators#string_operators)）
+3. 逻辑运算：计算结果为 `true` 或
+   `false` （通常使用[逻辑操作符](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Guide/Expressions_and_Operators#logical_operators)）
+4. 基本/原始表达式：JS 中的基本关键字和通用表达式
+5. `this`
+6. Grouping operator `( )`
+7. Left-hand-side expressions
+8. `new`
+9. super
+
+```javascript
+    function confirmEnding(str, target) {
+      ;(str.substring(str.length - target.length) == target ? true : false) ??
+        'not undefined'
+    }
+
+    console.log(confirmEnding('Bastian', 'n'))
+```
+
+我使用了空值合并操作符，发现
+=str.substring(str.length - target.length) == target ? true : false=
+的结果是 `undefined` 。
+
+目前无法解决。
+
+---
+
+参考资料
+
+1. [Conditional (ternary) operator - JavaScript | MDN](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Operators/Conditional_Operator#examples)
+2. [Expressions and operators - JavaScript | MDN](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Guide/Expressions_and_Operators)
+
+## JS 代码测试
+
+### playwright
+#### 配置（Node.js）
+
+```
+    npm init playwright@latest new-project # 自动配置
+
+    # 手动
+    npm i -D @playwright/test
+    # install supported browsers
+    npx playwright install # 这一步会安装所有支持的浏览器
+```
+
+`playwright.config.js` ：
+
+```javascript
+    // @ts-check
+    const { devices } = require('@playwright/test')
+
+    /**
+     * Read environment variables from file.
+     * https://github.com/motdotla/dotenv
+     */
+    // require('dotenv').config();
+
+    /**
+     * @see https://playwright.dev/docs/test-configuration
+     * @type {import('@playwright/test').PlaywrightTestConfig}
+     */
+    const config = {
+      testDir: './tests',
+      /* Maximum time one test can run for. */
+      timeout: 30 * 1000,
+      expect: {
+        /**
+         * Maximum time expect() should wait for the condition to be met.
+         * For example in `await expect(locator).toHaveText();`
+         */
+        timeout: 5000,
+      },
+      /* Fail the build on CI if you accidentally left test.only in the source code. */
+      forbidOnly: !!process.env.CI,
+      /* Retry on CI only */
+      retries: process.env.CI ? 2 : 0,
+      /* Opt out of parallel tests on CI. */
+      workers: process.env.CI ? 1 : undefined,
+      /* Reporter to use. See https://playwright.dev/docs/test-reporters */
+      reporter: [['html', { outputFolder: 'reports' }]],
+      /* Shared settings for all the projects below. See https://playwright.dev/docs/api/class-testoptions. */
+      use: {
+        /* Maximum time each action such as `click()` can take. Defaults to 0 (no limit). */
+        actionTimeout: 0,
+        /* Base URL to use in actions like `await page.goto('/')`. */
+        // baseURL: 'http://localhost:3000',
+
+        /* Collect trace when retrying the failed test. See https://playwright.dev/docs/trace-viewer */
+        trace: 'on-first-retry',
+      },
+
+      /* Configure projects for major browsers */
+      projects: [
+        {
+          name: 'firefox',
+          use: {
+            ...devices['Desktop Firefox'],
+          },
+        },
+      ],
+    }
+
+    module.exports = config
+```
+
+### 单个 JS 文件测试
+
+用 [Mochajs](https://mochajs.org/)。
+
+```
+    pnpm init -y
+    pnpm install --save-dev mocha
+    mkdir test
+    code test/test.js
+```
+
+`package.json`:
+
+```
+    "scripts": {
+      "test": "mocha"
+    }
+```
+
+```
+    pnpm test
+```
+
+---
+
+参考资料：
+
+1. https://stackoverflow.com/a/43188403/12539782
+2. [How to Start Unit Testing Your JavaScript Code](https://www.freecodecamp.org/news/how-to-start-unit-testing-javascript/)
+
+## JavaScript: The Right Way
+
+https://jstherightway.org/
+
+Created by Netscape in 1995 as an extension of HTML for Netscape
+Navigator 2.0, JavaScript had as its main function the manipulation of
+HTML documents and form validation.
+
+JavaScript was called Mocha.
+
+The Document Object Model (DOM) is an API for HTML and XML documents. It
+provides a structural representation of the document, enabling you to
+modify its content and visual presentation by using a scripting language
+such as JavaScript. See more at
+[Mozilla Developer Network - DOM](https://developer.mozilla.org/en-US/docs/Web/API/Document_Object_Model)（这个链接就是一个好的符合用户直觉的设计）.
+
+### JS 代码风格
+
+#### Conventions 惯例
+
+As every language, JavaScript has many code style guides. Maybe the most
+used and recommended is the
+[Google Code Style Guide for JavaScript](https://google.github.io/styleguide/jsguide.html), but we recommend you read
+[Idiomatic.js](https://github.com/rwaldron/idiomatic.js).
+
+#### Linting
+
+JSHint，JSLint 和 ESLint 都是 a static code analysis tool used to flag
+programming errors, bugs, stylistic errors and suspicious
+constructs。Both JSLint and JSHint lacked the ability to create
+additional rules for code quality and coding style.
+[不同 Linting Tools 的比较](https://www.sitepoint.com/comparison-javascript-linting-tools/)。
+
+### The Good Parts
+
+#### 面向对象的 Object-oriented
+
+JavaScript has strong object-oriented programming capabilities, even
+though some debates have taken place due to the differences in
+object-oriented JavaScript compared to other languages. Source:
+[Introducing JavaScript objects](https://developer.mozilla.org/en-US/docs/Learn/JavaScript/Objects)
+
+#### 匿名函数 Anonymous functions
+
+Anonymous functions are functions that are dynamically declared at
+runtime. They're called anonymous functions because they aren't given a
+name in the same way as normal functions. Source:
+[Javascript anonymous functions](https://web.archive.org/web/20160708200406/http://helephant.com/2008/08/23/javascript-anonymous-functions)
+
+#### 函数第一等对象 Functions as first-class objects
+
+Functions in JavaScript are first class objects. This means that
+JavaScript functions are just a special type of object that can do all
+the things that regular objects can do. Source:
+[Functions are first class objects in javascript](https://web.archive.org/web/20150619161845/http://helephant.com/2008/08/19/functions-are-first-class-objects-in-javascript/)
+
+#### 松散类型 Loose Typing
+
+For many front-end developers, JavaScript was their first taste of a
+scripting and/or interpretive language. To these developers, the concept
+and implications of loosely typed variables may be second nature.
+However, the explosive growth in demand for modern web applications has
+resulted in a growing number of back-end developers that have had to dip
+their feet into the pool of client-side technologies. Many of these
+developers are coming from a background of strongly typed languages,
+such as C# or Java, and are unfamiliar with both the freedom and the
+potential pitfalls involved in working with loosely typed variables.
+Source:
+[Understanding Loose Typing in JavaScript](http://blog.jeremymartin.name/2008/03/understanding-loose-typing-in.html)
+
+#### 作用域和（变量）提升 Scoping and Hoisting
+
+**Scoping**: In JavaScript, functions are our de facto scope delimiters
+for declaring vars, which means that usual blocks from loops and
+conditionals (such as if, for, while, switch and try) DON'T delimit
+scope, unlike most other languages. Therefore, those blocks will share
+the same scope as the function which contains them. This way, it might
+be dangerous to declare vars inside blocks as it would seem the var
+belongs to that block only.
+
+**Hoisting**: On runtime, all var and function declarations are moved to
+the beginning of each function (its scope) - this is known as Hoisting.
+Having said so, it is a good practice to declare all the vars altogether
+on the first line, in order to avoid false expectations with a var that
+got declared late but happened to hold a value before - this is a common
+problem for programmers coming from languages with block scope.
+
+Source:
+[JavaScript Scoping and Hoisting](http://www.adequatelygood.com/JavaScript-Scoping-and-Hoisting.html)
+
+- name resolution order
+
+1. Language-defined
+2. Formal parameters
+3. Function declarations
+4. Variable declarations
+
+- exceptions:
+- The built-in name arguments behaves oddly. It seems to be declared
+   following the formal parameters, but before function declarations.
+   This means that a formal parameter with the name arguments will take
+   precedence over the built-in, even if it is undefined. This is a bad
+   feature. Don't use the name arguments as a formal parameter.
+- Trying to use the name this as an identifier anywhere will cause a
+   SyntaxError. This is a good feature.
+- If multiple formal parameters have the same name, the one occurring
+   latest in the list will take precedence, even if it is undefined.
+
+#### 函数绑定 Function Binding
+
+当刚开始使用 JS
+时，函数绑定可能是最不需要考虑的问题。但是，当你需要将上下文保存在另一个函数时，你可能意识到自己需要的是
+`Function.prototype.bind()` 。进一步了解见
+[这里](https://www.smashingmagazine.com/2014/01/understanding-javascript-function-prototype-bind/)。
+
+#### 闭包函数 Closure Function
+
+闭包是引用独立变量的函数。换句话说，定义在闭包中的函数能够记住它被创建的环境。这是一个很重要的概念需要着重理解，在开发时当你想模拟私有变量时会很有用。它也能帮助了解如何避免常见错误，像在循环中创建闭包。进一步了解见
+[这里](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Closures)。
+
+#### 严格模式 Strict Mode
+
+ECMAScript 5 版本引入的严格模式是一种进入 JS
+受限制变种的方式。严格模式不仅是一个子集，它故意使用和普通代码不同的语义。不支持严格模式的浏览器在遇到处于严格模式下的
+JS
+代码时会出现不同于那些支持严格模式的浏览器执行严格模式下代码的情形，所以不要在没有性能测试和严格模式支持情况调查的情况下依赖严格模式。严格模式代码与非严格模式代码能够同时存在，因此脚本可以选择增量进入严格模式。进一步了解见
+[这里](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Strict_mode)。
+
+#### 立即调用的函数表达式 Immediately-Invoked Function Expression(IIFE)
+
+一个立即调用的函数表达式是一种模式，它能够制造一个使用 JS
+的函数作用域的词法作用域。立即调用的函数表达式能够用于避免块级作用域下的变量提升，防止污染全局环境，同时允许对方法的公开访问，同时还保留了函数中定义变量的私密性。
+
+/这种模式被称为自动执行的匿名函数，but
+[@cowboy](http://twitter.com/cowboy) (Ben Alman) introduced the term
+IIFE as a more semantically accurate term for the pattern./
+
+进一步了解见
+[这里](https://benalman.com/news/2010/11/immediately-invoked-function-expression/)。
+
+### Must See
+
+[Arindam Paul - JavaScript VM internals, EventLoop, Async and ScopeChains](https://youtu.be/QyUFheng6J0)
+
+- 函数内部声明的变量，依然是全局变量
+- Variable Shadowing
+- Garbage Collection
+- 闭包：**是函数和作用域的永久连结**
+
+### Design Patterns
+
+虽然 JS
+包含很多独属于自己的设计模式，但也能实现很多经典设计模式。学习资源是
+Addy Osmani 的开源书籍
+[Learning JavaScript Design Patterns](https://www.patterns.dev/posts/classic-design-patterns/)
+
+创建型设计模式 Creational Design Patterns：
+
+- [工厂模式 Factory](https://www.patterns.dev/posts/classic-design-patterns/#factorypatternjavascript)
+- [原型 Prototype](https://www.patterns.dev/posts/classic-design-patterns/#prototypepatternjavascript)
+- [混合 Mixin](https://www.patterns.dev/posts/classic-design-patterns/#mixinpatternjavascript)
+- [单例 Singleton](https://www.patterns.dev/posts/classic-design-patterns/#singletonpatternjavascript)
+
+结构型设计模式 Structural Design Patterns：
+
+- [Adapter](https://www.patterns.dev/posts/classic-design-patterns/#wrapperpatternjquery)
+- [Bridge](https://www.joezimjs.com/javascript/javascript-design-patterns-bridge/)
+- [Composite](https://www.patterns.dev/posts/classic-design-patterns/#compositepatternjquery)，https://www.joezimjs.com/javascript/javascript-design-patterns-composite/
+- [Decorator](https://www.patterns.dev/posts/classic-design-patterns/#decoratorpatternjavascript)
+- [Facade](https://www.patterns.dev/posts/classic-design-patterns/#facadepatternjavascript)
+- [Flyweight](https://www.patterns.dev/posts/classic-design-patterns/#detailflyweight)
+- [Module](https://www.patterns.dev/posts/classic-design-patterns/#modulepatternjavascript)
+- [Proxy](https://www.patterns.dev/posts/classic-design-patterns/#proxypatternjquery)，https://www.joezimjs.com/javascript/javascript-design-patterns-proxy/
+- [Revealing Module](https://www.patterns.dev/posts/classic-design-patterns/#revealingmodulepatternjavascript)
+
+行为设计模式 Behavioral Design Patterns：
+
+- [Chain of Responsibility](https://www.joezimjs.com/javascript/javascript-design-patterns-chain-of-responsibility/)
+- [Command](https://www.patterns.dev/posts/classic-design-patterns/#commandpatternjavascript)
+- [Mediator](https://www.patterns.dev/posts/classic-design-patterns/#mediatorpatternjavascript)
+- [Observer](https://www.patterns.dev/posts/classic-design-patterns/#observerpatternjavascript)
+
+MV* Patterns：
+
+- [MVC Pattern](https://www.patterns.dev/posts/classic-design-patterns/#detailmvc)
+- [MVP Pattern](https://www.patterns.dev/posts/classic-design-patterns/#detailmvp)
+- [MVVM Pattern](https://www.patterns.dev/posts/classic-design-patterns/#detailmvvm)
+
+### Testing Tools
+
+见[这里](/docs/tech/coding)
+
+### Frameworks
+
+见[这里](/docs/tech/coding)
+
+## 不需要 JS/后端 就能实现的想法
+
+- https://lexoral.com/blog/you-dont-need-js/
+- https://news.ycombinator.com/item?id=30512512
+- [History for frontend/landing/src/routes/blog/you-dont-need-js/index.svelte - stevenwaterman/Lexoral](https://github.com/stevenwaterman/Lexoral/commits/stage/frontend/landing/src/routes/blog/you-dont-need-js/index.svelte)
+
+介绍一些不需要 JS/后端 就能实现的想法。
+
+1、动画 SVG
+
+2、Sidebars
+
+3、Sticky Positioning
+
+4、Accordion Menus
+
+5、Dark Mode
+
+## Vue
+### 3
+#### Vue.js v3 guide
+##### Essentials
+###### Creating an Application
+```javascript
+import { createApp } from 'vue'
+
+const app = createApp({
+  /* root component options */
+})
+```
+
+单独 App.vue
+
+```javascript
+import { createApp } from 'vue'
+import App from './App.vue'
+
+const app = createApp(App)
+```
+
+Mount 挂载
+
+```html
+<div id="app"></div>
+```
+```javascript
+app.mount('#app')
+```
+
+App 配置
+
+```javascript
+app.config.errorHandler = (err) => {
+  /* handle error */
+}
+```
+
+App 范围内组件
+
+```javascript
+app.component('TodoDeleteButton', TodoDeleteButton)
+```
+
+这个组件可以在 App 的任何地方使用。
+
+多个 App 实例
+
+```javascript
+const app1 = createApp({ /* ... */ })
+app1.mount('#container-1')
+
+const app1 = createApp({ /* ... */ })
+app2.mount('#container-2')
+```
+
+###### Template Syntax
+文本插值
+
+```html
+<span>Message: {{ msg }}</span>
+```
+
+原始 HTML
+
+```html
+<p>Using text interpolation: {{ rawHtml }}</p>
+<p>Using v-html directive: <span v-html="rawHtml"></span></p>
+```
+
+`v-html` Vue 指令的一种。
+
+> Note that you cannot use `v-html`  to compose template partials, because Vue is not a string-based templating engine. Instead, components are preferred as the fundamental unit for UI reuse and composition.
+
+属性绑定
+
+```html
+<div v-bind:id="dynamicId"></div>
+
+<!--- v-bind:id  可简写为 :id --->
+
+<button :disabled="isButtonDisabled">Button</button>
+```
+
+v-bind（用于无法使用 {{}} 的 HTML 属性中） 使 id 与组件同步，如果 id 为 null/undefined，则渲染后的页面无属性 id。
+
+动态绑定多个属性
+
+```javascript
+const objectOfAttrs = {
+  id: 'container',
+  class: 'wrapper',
+}
+```
+
+```html
+<div v-bind="objectOfAttrs"></div>
+```
+
+JS 表达式（支持数据绑定的 JS 表达式，可用于文本插值、属性绑定，只能键入表达式，可以调用组件中暴漏的函数，此处的表达式可使用的[“全局对象”](https://github.com/vuejs/core/blob/main/packages/shared/src/globalsWhitelist.ts)[但是，可以通过 `app.config.globalProperties` 显示添加]）。
+
+```html
+{{ number + 1 }}
+
+{{ ok ? 'YES' : 'NO' }}
+
+{{ message.split('').reverse().join('') }}
+
+<div :id="`list-${id}`"></div>
+
+<span :title="toTitleDate(date)">
+  {{ formatDate(date) }}
+</span>
+```
+
+指令（ `v-` 前缀的属性，参数[动态参数值约束、动态参数语法约束、避免属性名大写]，修饰语 `@submit.prevent <=> event.preventDefault()` ）
+
+> 内建属性：v-text, v-html, v-show, v-if, v-else, v-else-if, v-for, v-on, v-bind, v-model, v-slot, v-pre, v-once, v-memo, v-cloak
+
+```html
+<a v-bind:href="url"> ... </a>
+<a :href="url"> ... </a>
+
+<a v-on:click="doSomething"> ... </a>
+<a @click="doSomething"> ... </a>
+
+<a v-bind:[attributeName]="url"> ... </a>
+<a :[attributeName]="url"> ... </a>
+
+<a v-on:[eventName]="doSomething"> ... </a>
+<a @[eventName]="doSomething"> ... </a>
+
+<form @submit.prevent="onSubmit"> ... </form>
+```
+###### Reactivity Fundamentals
+####### 声明响应式状态
+
+```javascript
+import { reactive } from 'vue'
+
+const state = reactive({ count: 0 )}
+```
+
+******* 使用 `&lt;script setup&gt;` 与否的对比
+
+```html
+<!--- 不使用 --->
+<script>
+import { reactive } from 'vue'
+export default {
+  setup() {
+    const state = reactive({ count: 0 })
+    function incrment() {
+      state.count++
+    }
+    return {
+      state,
+      increment
+    }
+  }
+}
+</script>
+<template>
+  <button @click="increment">
+    {{ state.count }}
+  </button>
+<template>
+
+<!--- 使用 --->
+<script setup>
+import { reactive } from 'vue'
+const state = reactive({ count: 0 })
+function increment() {
+  state.count++
+}
+</script>
+<template>
+  <button @click="increment">
+    {{ state.count }}
+  </button>
+</template>
+```
+
+******* DOM Update Timing
+
+```html
+<script setup>
+import { reactive, nextTick } from 'vue'
+  
+const state = reactive({ count: 0 })
+function increment() {
+  state.count++
+  nextTick(() => {
+    console.log(state.count)
+  })
+}
+</script>
+
+<template>
+  <div>
+    {{ state.count }}
+  </div>
+  <button @click="increment">
+    BUTTON
+  </button>
+</template>
+```
+
+******* Deep Reactivity
+
+In Vue, state is deeply reactive by default.
+
+```javascript
+import { reactive } from 'vue'
+  
+const obj = reactive({
+  nested: { count: 0 },
+  arr: ['foo', 'bar']
+})
+function mutateDeeply() {
+  obj.nested.count++
+  obj.arr.push('baz')
+}
+```
+
+******* Reactive Proxy vs. Original
+
+```javascript
+import { reactive } from 'vue'
+const  raw = {}
+const proxy = reactive(raw)
+// proxy is NOT equal to the original
+console.log(proxy === raw)
+console.log(proxy === reactive(raw))
+console.log(proxy === reactive(proxy))
+
+import { reactive } from 'vue'
+const proxy = reactive({})
+const raw = {}
+proxy.nested = raw
+console.log(proxy.nested === raw)
+```
+
+******* `reactive()` 的限制
+
+1. 数据类型仅限于对象
+2. 无法替换响应式（代理）对象，一旦替换原来的响应式对象会失去连接
+
+```javascript
+import { reactive } from 'vue'
+
+const state = reactive({ count: 0})
+let n = state.count
+n++
+console.log(n)
+
+let { count } = state
+count++
+// won't be able to track changes to state.count
+callSomeFunc(state.count)
+```
+
+####### 通过 `ref()` 声明的响应式变量
+为了解决 `reactive()` 的局限性，Vue 提供了 `ref()` 用于对任何数据类型创建响应式。
+```javascript
+import { ref } from 'vue'
+const count = ref(0)
+console.log(count)
+console.log(count.value)
+count.value++
+console.log(count.value)
+```
+和对象中的属性类似，一个 ref 的 `.value` 属性也是响应式的。另外，当值为对象类型时，会用 `reactive()` 自动转换它的 `.value` 。
+
+ref 保存对象
+
+```javascript
+import { ref } from 'vue'
+const objectRef = ref({ count: 0 })
+objectRef.value = { count: 1 }
+console.log(objectRef.value) // Proxy
+```
+
+Refs 也可传入函数、从纯对象中结构却不失去响应状态
+
+```javascript
+const obj = {
+  foo: ref(1),
+  bar: ref(2)
+}
+callSomeFunction(obj.foo)
+const { foo, bar } = obj
+```
+
+******* ref 在模板中的解包
+```html
+<script setup>
+import { ref } from 'vue'
+const count = ref(0)
+function increment() {
+  count.value++
+}
+</script>
+<template>
+  <button @click="increment">
+    {{ count }} <!--- no .value needed --->
+  </button>
+</template>
+```
+
+```html
+<script setup>
+import { ref } from 'vue'
+const object = { foo: ref(1) }
+function increment() {
+  object.foo.value++
+}
+</script>
+<template>
+  <button @click="increment">
+    {{ object.foo }} <!--- no .value needed --->
+  </button>
+</template>
+
+<script setup>
+import { ref } from 'vue'
+const object = { foo: ref(1) }
+</script>
+<template>
+  <button>
+-   {{ object.foo + 1 }} <!--- but this need .value --->
++   {{ object.foo.value + 1 }} 
+  </button>
+</template>
+
+<!--- 让 foo 成为顶级属性 --->
+<script setup>
+import { ref } from 'vue'
+const object = { foo: ref(1) }
+const { foo } = object
+</script>
+<template>
+  <button>
+    {{ foo + 1 }} <!--- no .value needed --->
+  </button>
+</template>
+```
+
+******* ref 在响应式对象中的解包
+```javascript
+import { ref, reactive } from 'vue'
+const count = ref(0)
+const state = reactive({
+  count
+})
+console.log(state.count)
+state.count = 1
+console.log(state.count)
+```
+
+如果新的 ref 赋给了 state.count 则原来的会断开连接
+
+```javascript
+import { ref, reactive } from 'vue'
+const count = ref(0)
+const otherCount = ref(2)
+const state = reactive({
+  count
+})
+console.log(state.count)
+state.count = 1
+console.log(state.count)
+state.count = otherCount
+console.log(state.count)
+console.log(count.value)
+```
+
+Ref unwrapping only happens when nested inside a deep reactive object.
+
+ref 在数组、集合中的解包
+
+```javascript
+import { ref, reactive } from 'vue'
+const books = reactive([ref('Vue 3 Guide')])
+// 需要 .value
+console.log(books[0].value)
+const map = reactive(new Map([['count', ref(0)]]))
+// 需要 .value
+console.log(map.get('count').value)
+```
+###### Computed Properties
+####### 基本例子
+如果使用包含响应式数据的复杂逻辑的话，推荐使用 `computed()` 函数。
+
+```html
+<script setup>
+import { computed, reactive } from 'vue'
+const author = reactive({
+  name: 'John Doe',
+  books: [
+    'Vue 2',
+    'Vue 3',
+    'Vue 4'
+  ]
+})
+const publishedBooksMessage = computed(() => {
+  return author.books.length > 0 ? 'Yes' : 'No'
+})
+</script>
+<template>
+  <p>Has published books:</p>
+  <span>{{ publishedBooksMessage }}</span>
+</template>
+```
+####### Computed Caching vs. Methods
+如果不使用 `computed()` 函数，还可以用方法函数。
+
+```html
+<script setup>
+import { reactive } from 'vue'
+const author = reactive({
+  name: 'John Doe',
+  books: [
+    'Vue 2',
+    'Vue 3',
+    'Vue 4',
+    'Vue 5'
+  ]
+})
+const publishedBooksMessage = () => {
+  return author.books.length > 3 ? 'Yes' : 'No'
+}
+</script>
+<template>
+  <p>Has published books?</p>
+  <span>{{ publishedBooksMessage() }}</span>
+</template>
+```
+
+两种方法都能产生最终结果，但是 computed properties are cached based on their reactive dependencies。计算属性在 author.books 不改变的情况下，不发生变化。This means as long as `author.books` has not changed, multiple access to `publishedBooksMessage` will immediately return the previously computed result without having to run the getter function again.
+
+This also means the following computed property will never update, because `Date.now()`  is not a reactive dependency:
+
+```javascript
+const now = computed(() => Date.now())
+```
+
+与计算属性不同，每当页面重绘时，方法总会运行。
+####### 可写计算属性
+计算属性默认 getter-only，如果对计算属性赋新值，会有运行时警告。
+
+```html
+<script setup>
+import { ref, computed } from 'vue'
+const firstName = ref('John')
+const lastName = ref('Doe')
+const fullName = computed({
+  get() {
+    return firstName.value + ' ' + lastName.value
+  },
+  set(newValue) {
+    [firstName.value, lastName.value] = newValue.split(' ')
+  }
+})
+console.log(fullName.value)
+fullName.value = 'Evan You'
+console.log(fullName.value)
+</script>
+```
+####### 最佳实践
+- Getters should be side-effect free
+- Avoid mutating computed value
+###### Class and Style Bindings
+数据绑定的常见应用就是操作元素的类列表和行内样式。但是，在处理比较复杂的绑定时，通过拼接生成字符串是麻烦且易出错的。因此，Vue 专门为 `class` 和 `style` 的 `v-bind`  用法提供了特殊的功能增强。除了字符串外，表达式的值也可以是对象或数组。
+####### Binding HTML Classes
+******* Binding to Objects
+```html
+<div :class="{ active: isActive }"></div>
+```
+
+还可有多个 class 属性，以及在一个 class 属性中添加多个对象属性。
+```html
+<script setup>
+import { ref } from 'vue'
+const isActive = ref(true)
+const hasError = ref(false)
+</script>
+<template>
+  <div
+    class="static"
+    :class="{ active: isActive, 'text-danger': hasError }"
+  ></div>
+</template>
+
+<!--- 模板部分会渲染成 --->
+<div class="static active"></div>
+
+<!--- 如果 hasError 为真，则渲染成 --->
+<div class="static active text-danger"></div>
+```
+
+对象绑定不必是行内：
+```html
+<script setup>
+import { reactive } from 'vue'
+const classObject = reactive({
+  active: true,
+  'text-danger': false
+})
+</script>
+<template>
+  <div :class="classObject"></div>
+</template>
+```
+还能绑定到计算属性：
+```html
+<script setup>
+import { ref, computed } from 'vue'
+const isActive = ref(false)
+const error = ref(true)
+const classObject = computed(() => ({
+  active: isActive.value && !error.value,
+  'text-danger': error.value 
+}))
+</script>
+<template>
+  <div :class="classObject"></div>
+</template>
+```
+
+******* Binding to Arrays
+
+```html
+<script setup>
+import { ref } from 'vue'
+const activeClass = ref('active')
+const errorClass = ref('text-danger')
+</script>
+<template>
+  <div :class="[activeClass, errorClass]"></div>
+</template>
+
+<!--- 模板中的 binding class 可改成(2种写法) --->
+<div :class="[isActive ? activeClass : '', errorClass]"></div>
+<div :class="[{ active: isActive }, errorClass]"></div>
+```
+
+******* With Components
+
+组件内部对一个元素添加 class，使用组件时又添加一次，两次的 class 会合并。可以用 `$attrs.class` 只应用“使用组件”时的 class。
+
+####### Binding Inline Styles
+
+1. 对象
+
+```html
+<script setup>
+import { ref } from 'vue'
+const activeColor = ref('red')
+const fontSize = ref(30)
+</script>
+<template>
+  <div :style="{ color: activeColor, fontSize: fontSize + 'px' }">nihao</div>
+</template>
+
+<!--- 其他表达方式 --->
+<div :style="{ 'font-size': fontSize + 'px' }">
+
+const styleObject = reactive({
+  color: 'red',
+  fontSize: '13px'
+})
+<div :style="styleObject">
+```
+
+2. 数组
+
+```html
+<div :style="[baseStyles, overridingStyles]">
+```
+
+3. 自动前缀，最大浏览器支持
+4. 多个值在一起，渲染最后的浏览器支持的值
+
+```html
+<div :style="{ display: ['-webkit-box', '-ms-flexbox', 'flex'] }"></div>
+```
+
+在这里，渲染结果 `display: flex` 。
+
+###### Conditional Rendering
+
+条件渲染，命令：v-if, v-else, v-else-if, v-show, v-for
+
+v-else 必须和 v-if/v-else-if 搭配使用
+
+v-show 所在元素会被渲染成 DOM 树；v-show 只是在切换 CSS display 属性；不支持用在 `&lt;template&gt;` ，也不和 v-else 搭配使用。
+
+```html
+<button @click="awe = !awe">Toggle</button>
+<h1 v-if="awe">You are good</h1>
+<h1 v-else>You are not good</h1>
+
+<div v-if="type === 'A'">
+  A
+</div>
+<div v-else-if="type === 'B'">
+  B
+</div>
+<div v-else-if="type === 'C'">
+  C
+</div>
+<div v-else>
+  Not A/B/C
+</div>
+
+<template v-if="ok">
+  ...
+</template>
+
+<h1 v-show="ok">Hello!</h1>
+```
+
+1. v-if vs. v-show
+
+- v-if 是真正的条件渲染，在条件变换时，条件块内部的元素会不断销毁和重新创建
+- v-if 是懒加载的，如果初始条件为 false，什么都不会做，只有条件第一次变为真时才会开始销毁重建过程
+- 相对看，v-show 更简单，它的条件块总是渲染，显示与否依靠的是 CSS 的属性值切换
+- 两者综合来看：
+
+  v-if 与 v-show 相比，切换成本更高，因此，如果需要经常切换某种状态，使用 v-show，如果状态不太经常改变，使用 v-if
+
+2. v-if with v-for
+
+不推荐用在一起，解释文档：
+
+- [Priority A Rules: Essential | Vue.js](https://vuejs.org/style-guide/rules-essential.html#avoid-v-if-with-v-for)
+- [List Rendering | Vue.js](https://vuejs.org/guide/essentials/list.html#v-for-with-v-if)
+
+###### List Rendering
+
+1. v-for
+
+```html
+<script setup>
+import { ref } from 'vue'
+const parentMessage = ref('Parent')
+const items = ref([{ message: 'Foo'}, { message: 'Bar'}])
+</script>
+<template>
+  <ul>
+    <li v-for="({ message }, index) of items">
+      {{ parentMessage }} - {{ index + 1 }} - {{ message }}
+    </li>
+  </ul>
+</template>
+```
+
+2. v-for + Object
+
+```html
+<script setup>
+import { ref, reactive } from 'vue'
+const myObject = reactive({
+  title: 'How to do lists in Vue',
+  author: 'John Doe',
+  publishedAt: '2022-09-13'
+})
+</script>
+<template>
+  <ul>
+    <!--- value, key, index 的顺序的改变会影响结果 --->
+    <li v-for="(value, key, index) of myObject">
+      {{ index }} - {{ key }} - {{ value }}
+    </li>
+  </ul>
+</template>
+```
+
+3. v-for with Range
+
+```html
+<template>
+  <span v-for="n in 10">
+    <span v-if="n === 10">{{ n }}</span>
+    <span v-else>{{ n }}, </span>
+  </span>
+</template>
+```
+
+4. v-for on `&lt;template&gt;`
+
+```html
+<script setup>
+import { ref } from 'vue'
+const items = ref([{ msg: 'hello'}, {msg: 'hell'}, {msg: 'hel'}, {msg: 'he'}, {msg: 'h'}])
+const textColor = ref('#904cbc')
+</script>
+<template>
+  <ul>
+    <template v-for="item in items">
+      <li :style="{ color: textColor }">{{ item.msg }}</li>
+      <li class="divider" role="presentation"></li>
+    </template>
+  </ul>
+</template>
+```
+
+5. v-for + v-if
+
+说是不推荐，我看看原因
+
+错误用法：
+```html
+<template>
+  <ul>
+    <li v-for="todo in todos" v-if="!todo.isComplete">{{ todo.name }}</li>
+  </ul>
+</template>
+```
+
+Fixed：
+```html
+<template>
+  <ul>
+    <template v-for="todo in todos">
+      <li v-if="!todo.isComplete">{{ todo.name }}</li>
+    </template>
+  </ul>
+</template>
+```
+
+6. key ——维持状态/条件
+
+更新列表的默认模式只，适用于列表输出不依靠子组件状态或有限 DOM 状态
+
+```html
+<script setup>
+import { ref } from 'vue'
+const items = ref([{ msg: 'hello'}, {msg: 'hell'}, {msg: 'hel'}, {msg: 'he'}, {msg: 'h'}])
+</script>
+<template>
+  <ul>
+    <li v-for="item in items" :key="item.id">
+      {{ item.msg }}
+    </li>
+  </ul>
+</template>
+```
+
+当使用 `&lt;template v-for&gt;` 时，key 应位于 `&lt;template&gt;` 容器。
+
+```html
+<template v-for="todo in todos" :key="todo.name">
+  <li>{{ todo.name }}</li>
+</template>
+```
+
+每当用 v-for 时都加上 key。
+
+key 绑定原始类型——字符串或数字，而非对象。
+
+7. v-for + Component
+
+```html
+<MyComponent v-for="item in items" :key="item.id" />
+
+<MyComponent
+  v-for="(item, index) in items"
+  :item="item"
+  :index="index"
+  :key="item.id"
+/>
+```
+
+Component 不会自动将 item 值插入，这样利用复用组件。
+
+8. 数组变化检测
+
+用到的方法：push, pop, shift, unshift, splice, sort, reverse。它们会改变元数组；而 filter、concat、slice 不改变，会返回新数组。
+
+9. 展示过滤后/分类后的结果
+
+```html
+<script setup>
+import { ref, computed } from 'vue'
+const numbers = ref([1,2,3,4,5])
+const evenNumbers = computed(() => {
+  return numbers.value.filter((n) => n % 2 === 0)
+})
+</script>
+<template>
+  <li v-for="n in evenNumbers">{{ n }}</li>
+</template>
+```
+
+在可计算属性中使用 reverse(),sort() 会改变原有数组，在使用前要对其进行拷贝。
+
+```diff
+- return numbers.reverse()
++ return [...numbers].reverse()
+```
+
+###### Event Handling
+1. 监听事件
+
+v-on 简写成 @，用法： `v-on:click="handler"` / `@click="handler"` 。
+
+handler 值可以是以下两种：
+- 行内 handlers
+- 方法 handlers
+
+2. 行内 handlers
+
+```html
+<script setup>
+import { ref } from 'vue'
+const counter = ref(0)
+</script>
+<template>
+  <button @click="counter++">Add 1</button>
+  <p>The button above has been clicked {{ counter }} times.</p>
+</template>
+```
+
+3. 方法 handlers
+
+```html
+<script setup>
+import { ref } from 'vue'
+const name = ref('Vue.js')
+function greet(event) {
+  alert(`Hello ${name.value}!`)
+  // `event` is the native DOM event
+  if (event) {
+    alert(event.target.tagName)
+  }
+}
+</script>
+<template>
+  <button @click="greet">Greet</button>
+</template>
+```
+
+方法 vs. 行内
+
+模板编译器的检测标准：如果检测到确定的函数则是方法，如果检测到 `foo()` ， `count++` 则是行内。
+
+4. 行内 handlers 调用方法
+
+```html
+<script setup>
+function say(msg) {
+  alert(msg)
+}
+</script>
+<template>
+  <button @click="say('Hello!')">SAY</button>
+</template>
+```
+
+5. 访问行内 handlers 的事件参数
+
+需要访问原始 DOM 事件
+
+```html
+<script setup>
+function warn(msg, event) {
+  if (event) {
+    event.preventDefault()
+  }
+  alert(msg)
+}
+</script>
+<template>
+  <!--- 2 种方式 --->
+  <button @click="warn('Form cannot be submitted yet.', $event)">Submit</button>
+  <button @click="(event) => warn('Form cannot be submitted yet.', event)">Submit</button>
+</template>
+```
+
+6. 事件修改器
+
+```html
+<a @click.stop="doThis"></a>
+
+<form @submit.prevent="onSubmit"></a>
+
+<a @click.stop.prevent="doThat"></a>
+
+顺序也是重要的，stop 和 prevent 的先后顺序
+
+<form @submit.prevent></form>
+
+<div @click.self="doThat">...</div>
+
+<div @click.capture="doThis">...</div>
+
+<a @click.once="doThis"></a>
+
+<div @scroll.passive="onScroll">...</div>
+```
+
+.passive 和 .prevent 不能一起用，两者起相反效果。
+
+7. 键修改器
+
+```html
+<input @keyup.enter="submit" />
+<input @keyup.page-down="onPageDown" />
+```
+
+常用 key：
+- .enter
+- .tab
+- .delete
+- .esc
+- .space
+- .up
+- .down
+- .left
+- .right
+
+系统 key 修改器：
+- .ctrl
+- .alt
+- .shift
+- .meta
+
+.exact 修改器
+
+8. 鼠标修饰符
+
+- .left
+- .right
+- .middle
+
+###### Form Input Bindings
+
+1. 基本用法
+
+1.1 Text
+
+```html
+<script setup>
+import { ref } from 'vue'
+const txt = ref('')
+</script>
+<template>
+  <input v-model="txt" />
+  <p>
+    Message is: {{ txt }}
+  </p>
+</template>
+```
+
+1.2 Multiline Text
+
+```html
+<script setup>
+import { ref } from 'vue'
+const txt = ref('')
+</script>
+<template>
+  <span>Multiline message is:</span>
+  <p style="white-space: pre-line;">{{ txt }}</p>
+  <textarea v-model="txt"></textarea>
+</template>
+```
+
+别用 `&lt;textarea&gt;{{ txt }}</textarea>`
+
+1.3 Checkbox
+
+```html
+<script setup>
+import { ref } from 'vue'
+const checked = ref(false)
+</script>
+<template>
+  <input type="checkbox" id="checkbox" v-model="checked"/>
+  <label for="checkbox">{{ checked }}</label>
+</template>
+```
+
+多个 checkbox
+
+```html
+<script setup>
+import { ref } from 'vue'
+const checkedNames = ref([])
+</script>
+<template>
+  <div>Checked names: {{ checkedNames }}</div>
+  <input type="checkbox" id="jack" value="Jack" v-model="checkedNames" />
+  <label for="jack">Jack</label>
+  <input type="checkbox" id="john" value="John" v-model="checkedNames" />
+  <label for="john">John</label>
+  <input type="checkbox" id="mike" value="Mike" v-model="checkedNames" />
+  <label for="mike">Mike</label>
+</template>
+```
+
+1.4 Radio
+
+```html
+<script setup>
+import { ref } from 'vue'
+const picked = ref('One')
+</script>
+<template>
+  <div>Picked: {{ picked }}</div>
+	<input type="radio" id="one" value="One" v-model="picked" />
+	<label for="one">One</label>
+	<input type="radio" id="two" value="Two" v-model="picked" />
+  <label for="two">Two</label>
+</template>
+```
+
+1.5 Select
+
+Single
+
+```html
+<script setup>
+import { ref } from 'vue'
+const picked = ref('One')
+</script>
+<template>
+  <div>Picked: {{ picked }}</div>
+	<input type="radio" id="one" value="One" v-model="picked" />
+	<label for="one">One</label>
+	<input type="radio" id="two" value="Two" v-model="picked" />
+  <label for="two">Two</label>
+</template>
+```
+
+Multiple
+
+```html
+<script setup>
+import { ref } from 'vue'
+const selected = ref([])
+</script>
+<template>
+  <div>Selected: {{ selected }}</div>
+  <select v-model="selected" multiple>
+    <option>A</option>
+    <option>B</option>
+    <option>C</option>
+  </select>
+</template>
+<style>
+select[multiple] {
+  width: 100px;
+}
+</style>
+```
+
+v-for 动态渲染
+
+```html
+<script setup>
+import { ref } from 'vue'
+const selected = ref('A')
+const options = ref([
+  { text: 'One', value: 'A' },
+  { text: 'Two', value: 'B' },
+  { text: 'Three', value: 'C' }
+])
+</script>
+<template>
+  <select v-model="selected">
+    <option v-for="option in options" :value="option.value">
+      {{ option.text }}
+    </option>
+  </select>
+	<div>Selected: {{ selected }}</div>
+</template>
+```
+
+2. Value Bindings
+
+将值和动态属性进行绑定。
+
+2.1 Checkbox
+
+```html
+<input
+  type="checkbox"
+  v-model="toggle"
+  :true-value="dynamicTrueValue"
+  :false-value="dynamicFalseValue" />
+```
+
+2.2 Radio
+
+```html
+<input type="radio" v-model="pick" :value="first">
+<input type="radio" v-model="pick" :value="second">
+```
+
+2.3 Select Options
+
+```html
+<select v-model="selected">
+  <option :value="{ number: 123 }">123</option>
+</select>
+```
+
+3. Modifiers
+
+3.1 .lazy
+3.2 .number
+3.3 .trim
+
+```html
+<input v-model.lazy="msg">
+<input v-model.number="age">
+<input v-model.trim="msg">
+```
+
+4. v-model + Component
+
+见后续“组件”部分。
+
+###### Lifecycle Hooks
+
+每个 Vue 组件实例创建时会经历一系列初始化步骤。比如，建立数据观测系统、编译模板、挂载实例到 DOM、当数据改变时更新 DOM。随着一系列过程，还会有生命周期挂钩的函数。让用户能够在指定阶段添加自己的代码。
+
+1. 注册生命周期钩子
+
+```html
+<script setup>
+import { onMounted } from 'vue'
+onMounted(() => {
+  console.log(`The component is now mounted.`)
+})
+</script>
+```
+
+与 onMounted 一样常用的生命周期 Hooks，有 onUpdated, onUnmounted。
+
+此类 Hooks 使用条件：调用栈是同步的，创建于 setup() 内部。
+
+###### Watchers
+
+1. 基本例子
+
+`watch()` 函数：监听一个或多个响应式数据源，当数据变化时，触发回调函数。
+
+2. Deep Watchers
+
+使用的时候注意性能损耗。
+
+3. watchEffect()
+
+watch() 和 watchEffect() 的区别：
+
+- watch 只监听显式的可监听源。不会追踪接入回调函数内部的事物。另外，回调函数只在源真的改变时才触发。
+- watchEffect 将跟踪依赖和边际效果结合在一起。自动跟踪每个接入的响应式属性（在同步执行过程中）。更方便，代码更简洁，但不容易看出响应式依赖。
+
+4. Cackback Flush Timing
+
+默认情况下，用户创建的 watcher 回调函数在 Vue 组件更新以前被调用。
+
+如果想在 Vue 组件更新以后，在 watcher 回调函数中改变 DOM。需要指定 `flush: 'post'` 。
+
+```javascript
+// watch
+watch(source, callback, {
+  flush: 'post'
+})
+
+/// watchEffect
+// way 1
+watchEffect(callback, {
+  flush: 'post'
+})
+// way 2
+import { watchPostEffect } from 'vue'
+
+watchPostEffect(() => {
+  /* executed after Vue updates */
+})
+```
+
+5. Stopping a Watcher
+
+###### Template Refs
+
+### Scaling Up
+https://vuejs.org/guide/scaling-up/sfc.html
+#### SFC
+#### Tooling
+##### Create Vue project
+- Vue CLI(webpack)
+- create-vue(vite)
+##### Browser Devtools
+##### Testing
+- Cypress
+- Vitest
+- Jest
+##### Linting
+- eslint-plugin-vue
+##### Formatting
+- Volar
+- Prettier
+#### Routing
+- vue-router@4(vue3)
+- vue-router@3(vue2)
+#### State Management
+- Reactivity API
+- Pinia
+#### Testing
+
+- Unit | Vitest, Jest
+- Component | Vitest, Cypress
+- End-to-end | Cypress, Playwright
+
+#### SSR: basic, nuxt, quasar, vite-ssr
+  Hydration([wikipedia](https://en.wikipedia.org/wiki/Hydration_(web_development))):In web development, hydration or rehydration is a technique in which client-side JavaScript converts a static HTML web page, delivered either through static hosting or server-side rendering, into a dynamic web page by attaching event handlers to the HTML elements.
+
+## 正则表达式
+
+```javascript
+    /word/ 匹配整个单词
+    /word/.test("hello word") 测试字符中是否包含正则匹配，是返回 true,否返回 false
+    "Hello World!".match(/Hello/) 返回 Array [ "Hello" ]
+    /a|b|c/ 匹配 a b c 中的任何一个
+    /Ww/i 忽略大小写
+    /word/g 全部匹配
+    /hu./ 匹配所有以 hu 开头的单词
+    /[aeiou]/ig 匹配所有符合条件的字母
+
+    "Hello World!".match(/[a-z]/gi)
+
+    "Hello World123".match(/[a-z0-9]/gi)
+
+    /[^aeiou0-9]/gi matches all characters that are not a vowel. Note that characters like ., !, [, @, / and white space are matched
+    /^Amy/ 匹配开头是 Amy 的字符串
+    /Amy$/ 匹配结尾是 Amy 的字符串
+
+    "Mississippi".match(/s+/g) 不理解，返回 [ 'ss', 'ss' ]
+
+    "Aaaaaaa".match(/Aa*/) 返回 Array [ "Aaaaaaa" ]
+
+    懒匹配
+    "<h1>Winter is coming</h1>".match(/<[a-z0-9]*>/)
+
+    /\w/g <==> /[A-Za-z0-9_]/g 匹配所有大小写字母、数字、`_`
+    /\W/g 匹配除（大小写字母、数字、`_`）以外的字符
+
+    /\d/g 匹配所有数字
+    /\D/g 匹配非数字
+
+    /\s/g 匹配全部空格
+    /\S/g 匹配全部非空格
+
+    /Oh{3,6}\sno/g.test("Ohhh no")
+
+    /Haz{4,}ah/g z 至少重复 4 次
+
+    /Tim{4}ber/ m 只重复 4 次
+
+    /favou?rite/ 匹配有无 u
+```
+
+- caret character (`^`)
+- greedy regex (`/C+/`)
+
+### 用户名匹配
+
+https://www.freecodecamp.org/learn/javascript-algorithms-and-data-structures/regular-expressions/restrict-possible-usernames
+
+要求：
+
+1. 用户名只使用字符、数字
+2. 唯一的数字必须放在结尾，数字不能作为开头，结尾可以一个/多个数字
+3. 字母大小写任意
+4. 用户名最短 2 位
+5. 如果用户名只有两位，必须全部使用字母
+
+试了几十次，找不到完美通过所有测试的方法：`/^[a-zA-Z][a-zA-Z]\d$/gm`
+
+答案：
+
+1. `/^[a-z][a-z]+\d*$|^[a-z]\d\d+$/igm`
+2. `/^[a-z]([0-9]{2,}|[a-z]+\d*)$/` （这一个更加简洁）
+
+### [Positive and Negative Lookahead](https://www.freecodecamp.org/learn/javascript-algorithms-and-data-structures/regular-expressions/positive-and-negative-lookahead)
+
+[freeCodeCamp Challenge Guide: Positive and Negative Lookahead - Guide - The freeCodeCamp Forum](https://forum.freecodecamp.org/t/freecodecamp-challenge-guide-positive-and-negative-lookahead/301360)
+
+如何使用 Positive（`(?`...)`） 和 Negative（`(?!...)=）
+Lookahead？`(?`\w{6})(?`\w*\d{2})`
+
+### [Check For Mixed Grouping of Characters](https://www.freecodecamp.org/learn/javascript-algorithms-and-data-structures/regular-expressions/check-for-mixed-grouping-of-characters)
+
+[freeCodeCamp Challenge Guide: Check For Mixed Grouping of Characters - Guide - The freeCodeCamp Forum](https://forum.freecodecamp.org/t/freecodecamp-challenge-guide-check-for-mixed-grouping-of-characters/301339)
+
+`(Franklin|Eleanor).*\sRoosevelt`
+
+### [Reuse Patterns Using Capture Groups](https://www.freecodecamp.org/learn/javascript-algorithms-and-data-structures/regular-expressions/reuse-patterns-using-capture-groups)
+
+[freeCodeCamp Challenge Guide: Reuse Patterns Using Capture Groups - Guide - The freeCodeCamp Forum](https://forum.freecodecamp.org/t/freecodecamp-challenge-guide-reuse-patterns-using-capture-groups/301364)
+
+`^(\d+)\s\1\s\1$`
+
+### [Use Capture Groups to Search and Replace](https://www.freecodecamp.org/learn/javascript-algorithms-and-data-structures/regular-expressions/use-capture-groups-to-search-and-replace)
+
+```javascript
+    let str = 'one two three'
+    let fixRegex = /(\w+)\s(\w+)\s(\w+)/ // Change this line
+    let replaceText = '$3 $2 $1' // Change this line
+    let result = str.replace(fixRegex, replaceText)
+```
+
+### [Remove Whitespace from Start and End](https://www.freecodecamp.org/learn/javascript-algorithms-and-data-structures/regular-expressions/remove-whitespace-from-start-and-end)
+
+[freeCodeCamp Challenge Guide: Remove Whitespace from Start and End - Guide - The freeCodeCamp Forum](https://forum.freecodecamp.org/t/freecodecamp-challenge-guide-remove-whitespace-from-start-and-end/301362)
+
+```javascript
+    let hello = '   Hello, World!  '
+    let wsRegex = /^\s+|\s+$/g // Change this line
+    let result = hello.replace(wsRegex, '') // Change this line
+```
+
+### 工具
+
+1. https://ihateregex.io/
+2. [Regex Vis](https://regex-vis.com/)
+
+## 深浅拷贝
+
+### 定义
+
+一个对象的 shallow copy
+是一种分享相同属性的引用，原始对象和复制出的对象引用相同的潜在属性。也就是说，改变一个对象的属性，与之对应的对象属性也会被改变。这种表现与
+deep copy 是截然相反的。进行 deep copy
+后操作的对象，复制出的对象和原来对象不指向相同属性，因此当改变复制出的对象的属性时，原始对象的属性不会改变。
+
+对于 shallow copies
+来说，**有选择地改变对象中现有元素的共享属性的值与为现有元素分配一个全新的值是不同的** ，理解这一点很重要。举例说明：
+
+在数组对象名为 copy 的浅拷贝中，`copy[0]` 的值为
+`{"list":["butter","flour"]}` ，之后进行操作
+=copy[0].list = ["a", "b"]=，然后源对象中相应的元素也会改变。因为你选择性地改变了一个对象属性，这一属性由源对象和它的浅拷贝共享。
+
+然而，如果你进行操作
+=copy[0] = {"list":["a", "b"]}=，源对象相应元素则*不会改变* 。因为在这种情况下，并不是选择性改变一个数组的已存在元素（与浅拷贝共享），而是仅仅在浅拷贝数组上给
+`copy[0]` 数组元素赋予了一个全新的值。
+
+一个对 JS 对象进行深层拷贝的方式：先用 `JSON.stringify()` 将对象转化为
+JSON 字符串，然后使用 `JSON.parse()` 把字符串转换成一个全新的 JS 对象。
+
+```javascript
+    let list = ['noodles', { list: ['eggs', 'flour', 'water'] }]
+    let list_deepcopy = JSON.parse(JSON.stringify(list))
+    console.log(list_deepcopy)
+    // Array [ "noodles", {…} ]
+    list_deepcopy[1].list = ['rice flour', 'water']
+    console.log(list[1].list)
+    // Array(3) [ "eggs", "flour", "water" ]
+```
+
+上面的数组足够简单，可以序列化，但有些 JS
+对象无法被序列化，如闭包函数、Symbols、在 HTML DOM API 中表示 HTML
+元素的对象、递归数据和很多其他情况。所以无法对这些对象进行深拷贝。
+
+对于可以序列化的对象，还有一个可用的属性方法是
+`structuredClone()` ，`structuredClone()` has the advantage of allowing
+[transferable objects](https://developer.mozilla.org/en-US/docs/Glossary/Transferable_objects) in the source to be *transferred* to the new
+copy。记住，`structuredClone()` 并非 JS 语言的特性，而是一种浏览器和其他
+JS 运行时（实现了像 `window` 这样的全局对象）的特性。
+
+```javascript
+    let list = ['noodles', { list: ['eggs', 'flour', 'water'] }]
+    let list_deepcopy = structuredClone(list)
+    console.log(list_deepcopy)
+    // Array [ "noodles", {…} ]
+```
+
+深拷贝使用递归，与浅递归相比更耗时间。
+
+### 能够进行浅拷贝的 JS 内建属性
+
+浅：
+
+Spread syntax(`...`), `Array.prototype.concat()`,
+`Array.prototype.slice()`,`Array.from()`, `Object.assign()` 和
+`Ocject.create()`
+
+### 练习
+
+```javascript
+    let list = ['noodles', { list: ['eggs', 'flour', 'water'] }]
+    let list_copy = Array.from(list)
+    console.log(JSON.stringify(list_copy))
+    // ["noodles",{"list":["eggs","flour","water"]}]
+    list_copy[1].list = ['rice flour', 'water']
+    console.log(list[1].list)
+    // Array [ "rice flour", "water" ]
+    console.log(JSON.stringify(list))
+    // ["noodles",{"list":["rice flour","water"]}]
+    list_copy[0] = ['rice noodles']
+    console.log(list[0])
+    // noodles
+    console.log(JSON.stringify(list_copy))
+    // [["rice noodles"],{"list":["rice flour","water"]}]
+    console.log(JSON.stringify(list))
+    // ["noodles",{"list":["rice flour","water"]}]
+```
+
+### 实现浅拷贝
+
+```javascript
+    let shallowCopy = function (obj) {
+      if (typeof obj !== 'object') return
+      let newObj = obj instanceof Array ? [] : {}
+      for (let key in obj) {
+        if (obj.hasOwnProperty(key)) {
+          newObj[key] = obj[key]
+        }
+      }
+      return newObj
+    }
+```
+
+### 实现深拷贝
+
+```javascript
+    let deepCopy = function (obj) {
+      if (typeof obj !== 'object') return
+      let newObj = obj instanceof Array ? [] : {}
+      for (let key in obj) {
+        if (obj.hasOwnProperty(key)) {
+          newObj[key] = typeof obj[key] === 'object' ? deepCopy(obj[key]) : obj[key]
+        }
+      }
+      return newObj
+    }
+```
+
+### jQuery 中 extend 实现浅深拷贝
+
+使用方法：
+
+```javascript
+    jQuery.extend(target, object1[, objectN])
+    jQuery.extend([deep], target, object1[, objectN])
+```
+
+### `What is the most efficient way to deep clone an object in JavaScript?`
+
+使用
+[`structuredClone()`](https://developer.mozilla.org/en-US/docs/Web/API/structuredClone)。对于
+Node.js 在 v17.0.0
+版本引入。[兼容性一览](https://developer.mozilla.org/en-US/docs/Web/API/structuredClone#browser_compatibility)
+
+---
+
+参考资料
+
+1. [Shallow copy - MDN Web Docs Glossary: Definitions of Web-related terms | MDN](https://developer.mozilla.org/en-US/docs/Glossary/Shallow_copy)
+2. [Deep copy - MDN Web Docs Glossary: Definitions of Web-related terms | MDN](https://developer.mozilla.org/en-US/docs/Glossary/Deep_copy)
+3. [JavaScript 专题之深浅拷贝 · Issue #32 · mqyqingfeng/Blog](https://github.com/mqyqingfeng/Blog/issues/32)
+4. https://stackoverflow.com/q/122102/12539782
+## 工具网址
+- [JavaScript debugger and visualizer](https://pythontutor.com/javascript.html) || [latentflip/loupe: Visualizing the javascript runtime at runtime](https://github.com/latentflip/loupe) || [JS Visualizer 9000](https://www.jsv9000.app/)
+
+## 通过 JS bookmarklet 获取当前页面 URL 和 title，并转成 Org-mode 格式
+
+```javascript
+javascript:(function(){var title=document.title;var url=window.location.href;var orgMode="[["+url+"]["+title+"]]";var textArea=document.createElement("textarea");textArea.value=orgMode;document.body.appendChild(textArea);textArea.select();document.execCommand("copy");document.body.removeChild(textArea);})();
+```

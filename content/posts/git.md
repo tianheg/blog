@@ -1,0 +1,736 @@
+---
+title: Git
+date: 2022-11-11T15:03:00+08:00
+tags: ['技术']
+---
+
+## tag,branch,submodule 基本使用
+
+### Tag[来源1](https://github.com/git-tips/tips#create-local-tag),[来源2](https://github.com/k88hudson/git-flight-rules)
+
+```bash
+    git tag <tag-name> # create local tag
+    git tag -d <tag-name> # delete local tag
+    git push origin :refs/tags/<tag-name> # delete remote tag
+    git fsck --unreachable | grep tag && git update-ref refs/tags/<tag_name> <hash> # recover a deleted tag
+
+    git describe --tags --abbrev=0 # show the most recent tag on the current branch
+    git tag --contains <commitid> # find all tags containing a specific commit
+```
+
+### Branch
+
+分支不能含空格，见[这里](https://stackoverflow.com/a/6619113)。
+
+#### [本地和远程创建空分支](https://stackoverflow.com/a/34100189)
+
+```bash
+    # UPDATE(git > 2.27)
+    git switch --orphan <new branch>
+    git commit --allow-empty -m "Initial commit on orphan branch"
+    git push -u origin <new branch>
+
+    ## Old Way
+
+    # local
+    git checkout --orphan empty-branch
+    git rm -rf .
+    # remote
+    git commit --allow-empty -m "root commit"
+    git push origin empty-branch
+```
+
+#### 本地和远程删除分支
+
+```bash
+    # delete branch locally
+    git branch -d localBranchName
+    # delete a local branch that has not been merged to the current branch or an upstream
+    git branch -D localBranchName
+
+    # delete branch remotely
+    git push origin --delete remoteBranchName
+    # same as
+    git push origin :remoteBranchName
+
+    # delete multiple branches
+    git branch | grep 'fix/' | xargs git branch -d
+
+    # rename current branch
+    git branch -m new-name
+    # rename a different(local) branch
+    git branch -m old-name new-name
+
+    # delete the old-name remote branch and push the new-name local branch
+    git push origin :old_name new_name
+```
+
+#### 克隆特定远程分支
+
+```bash
+    git clone --branch <branchname> <remote-repo-url>
+```
+
+#### 删除仅存在本地（远程仓库中不存在）的分支
+
+```bash
+    $ git branch -a
+    * main
+
+      remotes/origin/articles-main
+      remotes/origin/gh-pages
+      remotes/origin/main
+
+    # remote branch articles-main, gh-pages has been deleted
+    $ git remote prune origin
+    Pruning origin
+    URL: git@github.com:tianheg/wiki.git
+
+    * [pruned] origin/articles-main
+    * [pruned] origin/gh-pages
+```
+
+Others:
+
+```bash
+    git branch # list local branches
+    git branch -r # list remote branches
+    git branch -a # list local and remote branches
+    git checkout -b <branch> <SHA1_OF_COMMIT> # create a branch from a commit
+```
+
+### Submodule
+
+```bash
+    # clone all submodules
+    git clone --recursive git://github.com/foo/bar.git
+    # already cloned
+    git submodule update --init --recursive
+```
+
+#### 移除 Submodule
+
+```bash
+    git submodule deinit submodulename
+    git rm submodulename
+    git rm --cached submodulename
+    rm -rf .git/modules/submodulename
+```
+
+## 移除子模块
+
+https://stackoverflow.com/a/1260982/12539782
+
+仓库中只有一个子模块：
+
+```
+    git rm <path-to-submodule>
+    rm .gitmodules
+    rm -rf .git/modules
+    git config --remove-section submodule.<path-to-submodule>
+```
+
+## 修改 commit 信息
+
+https://stackoverflow.com/a/1186549/12539782
+
+想修改 `bbc643cd` 的信息
+
+```
+    git rebase --interactive 'bbc643cd^'
+```
+
+在默认编辑器打开后，将 pick 改为 r/reword 后保存，然后就可以修改 commit
+信息了。
+
+## 强制从远程仓库拉取内容到本地
+
+https://stackoverflow.com/q/70710729/12539782
+
+```
+    git remote -v
+    # origin  git@github.com:tianheg/running_page.git (fetch)
+    # origin  git@github.com:tianheg/running_page.git (push)
+    # upstream        git@github.com:yihong0618/running_page.git (fetch)
+    # upstream        git@github.com:yihong0618/running_page.git (push)
+    git reset --hard upstream/master
+```
+
+## Gitea
+
+### 原生
+
+选择：
+
+- Gitea 1.16.8
+- MariaDB 10.7.4
+
+#### 配置数据库
+
+https://docs.gitea.io/en-us/database-prep/
+
+```
+    pacman -S mariadb
+```
+
+修改 `bind-address` ，登录 root 用户下的数据库。
+
+本地安装 Gitea：
+
+```sql
+    SET old_passwords=0;
+    CREATE USER 'gitea' IDENTIFIED BY 'gitea';
+    CREATE DATABASE giteadb CHARACTER SET 'utf8mb4' COLLATE 'utf8mb4_unicode_ci';
+    GRANT ALL PRIVILEGES ON giteadb.* TO 'gitea';
+    FLUSH PRIVILEGES;
+```
+
+#### 安装 Gitea
+
+```
+    pacman -S gitea
+    gitea # 浏览器打开 http://localhost:3000 进行配置
+    sudo cp /etc/gitea/app.example.ini /etc/gitea/app.ini
+    systemctl enable --now gitea
+```
+
+无法打开 gitea 服务。无法使用，安装失败。
+
+refer:
+
+1. https://forum.hostea.org/t/howto-gitea-upgrades-a-guide-for-admins/39
+
+### Docker
+
+https://docs.gitea.io/en-us/install-with-docker-rootless/
+
+## 理解 Merge & Rebase
+
+1. https://git-scm.com/book/en/v2/Git-Branching-Basic-Branching-and-Merging
+2. https://git-scm.com/book/en/v2/Git-Tools-Advanced-Merging#_advanced_merging
+3. https://git-scm.com/book/en/v2/Git-Branching-Rebasing
+
+Merge 是起初两条 branches 后来合并为一条，与此同时保留被合并的分支；
+
+Rebase 则是合并后不保留被合并的分支。
+
+第 2 个链接中的例子还没有完全理解。
+
+> Do not rebase commits that exist outside your repository and that
+> people may have based work on.
+>
+> If you only ever rebase commits that have never left your own
+> computer, you'll be just fine. If you rebase commits that have been
+> pushed, but that no one else has based commits from, you'll also be
+> fine. If you rebase commits that have already been pushed publicly,
+> and people may have based work on those commits, then you may be in
+> for some frustrating trouble, and the scorn of your teammates.
+
+## 配置代理
+
+```
+    git config --global http.proxy http://<proxy-server>:<port>/
+    git config --global https.proxy https://<proxy-server>:<port>/
+```
+
+---
+
+参考资料：
+
+1. https://gist.github.com/coin8086/7228b177221f6db913933021ac33bb92
+2. https://cms-sw.github.io/tutorial-proxy.html
+3. https://riptutorial.com/git/example/17900/clone-using-a-proxy
+4. https://stackoverflow.com/q/128035/12539782
+
+## 对分支重命名（本地 & 远程）
+
+[How to Rename Git Local and Remote Branches](https://www.w3docs.com/snippets/git/how-to-rename-git-local-and-remote-branches.html)
+
+```
+    ## Local
+    git branch -m <old-name> <new-name>
+    ## Remote
+    # delete remote branch
+    git push origin --delete <old-name> # or git push origin :<old-name>
+    # push new remote branch
+    git push origin <new-name>
+    # To reset the upstream branch for the new-name local branch use the -u flag
+    git push origin -u <new-name>
+```
+
+## 重命名远程代号（origin）
+
+https://support.beanstalkapp.com/article/1000-how-do-i-rename-an-existing-git-remote
+
+```bash
+    git remote rename origin upstream
+```
+
+## 在历史中查找文件
+
+```bash
+    git log --all --full-history -- <FILE_PATH>
+    git log --all --full-history -- feeds.csv
+```
+
+## 设置全局 gitignore
+
+```bash
+    git config --global core.excludesfile '~/.gitignore'
+```
+
+## 子模块改变地址
+
+https://git-scm.com/docs/git-submodule#Documentation/git-submodule.txt-sync--recursive--ltpathgt82308203
+
+```bash
+    # step 1
+    # 手动改变 .gitmodules 中的 url
+    # step 2
+    git submodule sync
+```
+
+## 子模块更新
+
+https://git-scm.com/book/en/v2/Git-Tools-Submodules
+
+```bash
+    # way 1
+    git submodule init
+    git submodule update
+    # way 2
+    git submodule update --init
+    # way 3
+    git submodule update --init --recursive # 会 clone 所有子模块（也包括子模块的子模块）
+```
+
+## 与上游仓库同步
+
+```bash
+    git checkout -b new-branch main
+    git pull https://github.com/yihong0618/running_page.git upstream-branch
+    # after pulling, fix the CONFLICT
+    git checkout main
+    git merge --no-ff new-branch
+    git push origin main
+```
+
+## 使用 dura 每 5s 备份一次仓库
+
+https://github.com/tkellogg/dura
+
+### 配置
+
+```bash
+    # arch linux
+    yay -S dura-git
+    dura serve & # Run it in the background
+    cd /git/repo/
+    dura watch
+
+    ## watch all git repo under /home/user
+    find ~ -type d -name .git -prune | xargs -I= sh -c "cd =/..; dura watch" # BE CAREFUL!!! use when knowing what you are doing
+```
+
+## 不 Merge
+
+```bash
+# Since git version 1.7.4
+git merge --abort
+# prior git versions
+git reset --merge
+```
+
+## 等待整理
+
+- [Idiot proof git](https://softwaredoug.com/blog/2022/11/09/idiot-proof-git-aliases.html)
+
+## Change the author and committer name/email for multiple commits
+
+<https://stackoverflow.com/a/1320317/12539782>
+
+**NOTE: This operation will modify [SHA-1](https://git-scm.com/docs/hash-function-transition/), and commits date.**
+
+Steps:
+
+```bash
+git config --global user.name "New Author Name"
+git config --global user.email "email@address.example"
+git rebase -r --root --exec "git commit --amend --no-edit --reset-author"
+```
+
+## Add Files to A Commit Except A Single File
+
+<https://stackoverflow.com/a/4475506/12539782>
+
+```bash
+git add -u
+git reset -- file_excepted
+```
+
+## Remove Untracked Files from Working Tree
+<https://stackoverflow.com/a/64966/12539782>
+
+```bash
+# Print out the list of files and directories which will be removed (dry run)
+git clean -n -d
+# Delete the files from the repository
+git clean -f
+```
+
+## Push Two Remotes
+<https://stackoverflow.com/a/14290145>
+
+```bash
+git remote set-url --add --push origin git://original/repo.git
+git remote set-url --add --push origin git://another/repo.git
+```
+
+## Write good commits
+
+好的 commit 的作用：
+
+1. 帮助理解本次操作内容
+2. 加速和简化 code reviews
+3. 解释不能只用代码来描述的“为什么”
+4. 帮助以后的维护者，弄清楚为什么以及改变是怎样产生的，使故障排除和调试更容易
+
+```text
+feat: add hat wobble
+^--^ ^------------^
+| |
+| |-> Summary in present tense.
+|
+|------->Type: chore, docs, feat(option), fix, refactor, style, test, (!)BREAKING CHANGE, build, ci, perf, test
+```
+
+[例子](https://sparkbox.com/foundry/semantic_commit_messages)：
+
+- chore: add Oyster build script
+- docs: explain hat wobble
+- feat: add beta sequence
+- feat(lang): add polish language
+- fix: remove broken confirmation message
+- refactor: share logic between 4d3d3d3 and flarhgunnstow
+- style: convert tabs to spaces
+- test: ensure Tayne retains clothing
+
+GitHub 例子
+
+```
+    git commit -m "fix: accept current change
+    https://github.com/tianheg/blog/blob/26af0419337014dea93ada9bf4a3d8bbbcc39619/layouts/shortcodes/music.html#L1"
+
+    git commit -m "add: ...
+    close #123"
+```
+
+更多资料见[这里](https://www.conventionalcommits.org/en/v1.0.0/#summary)。
+
+## 如何从 Git 仓库中完全移除文件
+
+请注意：不要在重要仓库中尝试，可以先新建一个测试 Git
+仓库，以熟悉操作步骤（实际上只有一行命令）。
+
+能够达到我的目的的命令（[来源](https://stackoverflow.com/a/52643437)）：
+
+```
+    git filter-branch --index-filter "git rm -rf --cached --ignore-unmatch path_to_file" HEAD
+    git push -f
+```
+
+当使用 `filter-branch` 命令时，出现以下提示：
+
+```
+    WARNING: git-filter-branch has a glut of gotchas generating mangled history
+             rewrites.  Hit Ctrl-C before proceeding to abort, then use an
+             alternative filtering tool such as 'git filter-repo'
+             (https://github.com/newren/git-filter-repo/) instead.  See the
+             filter-branch manual page for more details; to squelch this warning,
+             set FILTER_BRANCH_SQUELCH_WARNING=1.
+```
+
+大意就是说，`filter-branch` 命令有大量陷阱，会把已有的历史弄乱。按
+Ctrl+C 可在未执行命令以前取消，然后使用另一个可供选择的筛选工具
+[git filter-repo](https://github.com/newren/git-filter-repo)。查看
+`filter-branch` 的手册获取更多信息，略去警告需设置
+=FILTER_BRANCH_SQUELCH_WARNING=1=。
+
+### 了解 `git filter-repo`
+
+<https://github.com/newren/git-filter-repo>
+
+`git filter-repo` 是一个用于重写 Git 仓库历史的多功能工具。它和
+`git filter-branch`
+差不多，但是没有导致性能下降的问题，它的功能更强大，而且它的设计可以扩展可用性，而不是简单的重写情况。=git
+filter-repo= 现在被 Git 项目推荐，用于代替 `git filter-branch` 。
+
+```
+    sudo pacman -S git-filter-repo # 安装
+
+    ### 演示使用方法
+    git init test_git_filter_repo && cd $_ # 新建名为 test_git_filter_repo 的 Git 仓库，并打开
+    touch test # 新建文件
+    git add test # 添加到暂存区
+    git commit -m "message" # 提交至 Git 仓库
+    git log # 检查日志
+    git filter-repo --path test --force --invert-paths # 删除包含 test 的历史
+    git log # 检查结果：无 commit 提交
+    ls -a # 没有文件 test
+```
+
+以上命令行中的演示，是使用 `git filter-repo`
+移除文件的过程，谨记：不要直接在生产环境或重要仓库使用，要先确保自己知道某个命令的执行结果。
+## 云服务器配置 Git 仓库托管并使用 Git Hooks 自动执行脚本
+
+上文见[部署 Hugo 博客到 Ubuntu 服务器](/posts/hugo-deploy-to-server/)。
+
+之前的博客更新思路是，本地提交修改至
+GitHub，再登录云服务器，手动执行脚本，达到更新博客内容的目的。但是，从
+GitHub 拉取代码较慢，于是想到可以把本地的更改同时推送到 GitHub
+和云服务器。再通过 Git Hooks
+自动执行「更新博客」的脚本，以此达到提升效率的目的。
+
+### 更新 Git 至最新版本
+
+云服务器的系统是 Ubuntu 20.04，所以可以通过以下命令安装 Git 的最新版本：
+
+```bash
+    add-apt-repository ppa:git-core/ppa
+    apt update
+    apt install git
+```
+
+### 创建 Git 用户
+
+```bash
+    adduser git # note difference with useradd
+    passwd git # add password for git user
+    sudo visudo
+```
+
+修改 `/etc/sudoers` ：
+
+```
+    root    ALL=(ALL)       ALL
+    ubuntu  ALL=(ALL:ALL) NOPASSWD: ALL
+    git  ALL=(ALL:ALL) NOPASSWD: ALL # add
+```
+
+### 配置 ssh 公钥
+
+在本地主机执行以下命令：
+
+```bash
+    ssh-keygen -t ed25519 -C "email"
+```
+
+会生成两个文件：id_ed25519 和 id_ed25519.pub。将 id_ed25519.pub
+文件里的内容复制到云服务器的 authorized_keys 文件中：
+
+```bash
+    su git
+    mkdir ~/.ssh
+    vim ~/.ssh/authorized_keys
+```
+
+然后在本地添加私钥：
+
+```bash
+    ssh-add ~/.ssh/ssh_rsa
+```
+
+如果不添加私钥，还是提示输入密码。
+
+注意： =~= 代表 `/home/git` 。只有 git 用户才能使用这个公钥。
+
+修改权限：
+
+```bash
+    cd ~
+    chmod 600 .ssh/authorized_keys
+    chmod 700 .ssh
+```
+
+本地测试 git 服务：
+
+```bash
+    ssh -v git@server-ip # Server public network IP
+```
+
+### 创建博客文件夹
+
+```bash
+    su root # switch to root user
+    mkdir /home/hugo
+    chown git:git -R /home/hugo
+```
+
+### 更改站点目录权限
+
+```bash
+    sudo chown git:git -R /var/www/hugo # for git hook
+```
+
+### 创建 bare 仓库并配置 Git Hook
+
+```bash
+    su root
+    cd /home/git
+    git init --bare blog.git
+    chown git:git -R blog.git
+    vim blog.git/hooks/post-receive
+    chmod +x blog.git/hooks/post-receive
+```
+
+新建文件 `blog.git/hooks/post-receive` ：
+
+```
+    #!/bin/sh
+    git --work-tree=/home/hugo --git-dir=/home/git/blog.git checkout -f
+    cd /var/www/hugo
+    rm -rf * # 删除文件夹下的所有文件以保持最新
+    cd /home/hugo
+    hugo --minify -d /var/www/hugo
+```
+
+### 本地配置云服务器仓库
+
+```bash
+    git remote add origin git@server-ip:/home/git/blog.git
+    git push -u origin main # first push
+```
+
+### 使用 Docker 配置 Hugo 部署
+
+```bash
+    #!/bin/sh
+
+    git --work-tree=/home/www --git-dir=/home/git/blog.git checkout -f
+    cd /home/www/public
+    sudo rm -rf * # 删除文件夹下的所有文件以保持最新 & 通过 Docker 生成文件权限为 root 需要加 sudo
+    cd /home/git/docker-blog
+    docker compose up -d
+```
+
+`/home/git/docker-blog` ：
+
+```bash
+    docker-compose.yml  nginx.conf
+```
+
+`docker-compose.yml` ：
+
+```
+    version: "3.9"
+
+    services:
+      nginx:
+        image: nginx:stable
+        volumes:
+          - $PWD/nginx.conf:/etc/nginx/nginx.conf
+          - /etc/letsencrypt:/etc/letsencrypt
+          - /home/www/public:/home/www/public
+        ports:
+          - "80:80"
+          - "443:443"
+
+      blog:
+        image: tianheg/hugo:0.98.0
+        volumes:
+          - /home/www:/home/git
+          - /home/www/public:/output
+        environment:
+          - HUGO_BASEURL=https://www.yidajiabei.xyz/
+```
+
+---
+
+参考资料
+
+1. <https://segmentfault.com/a/1190000039676421>
+2. [[https://www.saintsjd.com/2011/01/what-is-a-bare-git-repository/]
+## 只 clone 远程 Git repo 的一部分
+- https://stackoverflow.com/a/52269934/12539782
+- https://www.git-scm.com/docs/git-clone
+```bash
+git clone --depth 1 --filter=blob:none --sparse REPOSITORY_URL
+cd DIRECTORY_NAME
+git sparse-checkout init --cone
+git sparse-checkout set DIRECTORY_NAME
+```
+## 从历史commit中删除特定文件
+
+[Removing sensitive data from a repository - GitHub Docs](https://docs.github.com/en/authentication/keeping-your-account-and-data-secure/removing-sensitive-data-from-a-repository)
+
+```bash
+git filter-repo --invert-paths --path PATH-TO-YOUR-FILE-WANT-TO-DELETE
+git push origin --force --tags
+```
+## 查询commit msg
+```bash
+git log --grep="content_to_search"
+git log --grep="html5"
+```
+## [Git - Reference](https://git-scm.com/docs)
+
+### Guide - [gitcredentials[7](https://git-scm.com/docs/git#Documentation/git.txt-ahrefdocsgitcredentialsgitcredentials7a)]
+
+<https://git-scm.com/docs/gitcredentials>
+
+#### Credential 的描述
+
+Git 有时需要来自用户的凭证来执行操作；例如，为了通过 HTTP
+访问远程存储库，它可能需要请求用户名和密码。本手册描述了 Git
+用于请求这些凭据的机制，以及避免重复输入这些凭据的一些特性。
+
+#### 请求凭证
+
+在未定义凭证助手（credential helpers）的情况下，Git
+会采用一下策略得到用户名和密码：
+
+1. 如果设置了 `GIT_ASKPASS`
+   环境变量，变量指定的程序会被触发。命令行会输出一个合理的提示，提醒用户输入用户名和密码
+2. 如果设置了 `core.askPass` 配置变量，它的行为如 1 所见
+3. 如果设置了 `SSH_ASKPASS` 环境变量，它的行为如 1 所见
+4. 否则，终端会提示用户
+
+#### 避免冗杂
+
+重复输入某些凭证，令人讨厌。Git 提供了两种解决办法：
+
+1. 用于给定验证上下文的用户名的静态配置
+2. 凭据助手可以缓存或存储密码，或者与系统密码钱包或钥匙链进行交互
+
+---
+
+<https://stackoverflow.com/a/51327559>
+
+Git Credential 是为了保存用户名和密码而存在的，然而最安全的办法还是使用
+SSH 密钥，不使用用户名和密码。
+
+#### 使用 SSH 密钥
+
+创建好一个 SSH
+密钥对，私钥保存在本地，公钥存放在目标服务器。在本地添加私钥到 ssh-agent
+：
+
+```bash
+    ssh-add ~/.ssh/id_rsa
+```
+
+#### Caching
+
+```bash
+    git config --global credential.helper cache
+    # or
+    git config --global credential.helper 'cache --timeout=3600'
+```
+
+#### Store
+
+使用该选项，会将用户名和密码保存为纯文本，容易被窃取了。
+
+```bash
+    git config credential.helper store
+```

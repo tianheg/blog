@@ -1,0 +1,150 @@
+---
+title: Search
+---
+
+<link href="/pagefind/pagefind-component-ui.css" rel="stylesheet">
+<script src="/pagefind/pagefind-component-ui.js" type="module"></script>
+<style>
+  .search-tabs { display: flex; gap: 0; margin-bottom: 1.5rem; border-bottom: 1px solid #e5e7eb; }
+  .search-tab { padding: 0.5rem 1rem; font-size: 0.875rem; cursor: pointer; border: none; background: none; color: #6b7280; border-bottom: 2px solid transparent; transition: all 0.15s; }
+  .search-tab:hover { color: #374151; }
+  .search-tab.active { color: #2563eb; border-bottom-color: #2563eb; font-weight: 500; }
+  .search-panel { display: none; }
+  .search-panel.active { display: block; }
+
+  /* Semantic results */
+  .semantic-result { display: flex; align-items: baseline; gap: 0.5rem; padding: 0.5rem 0; border-bottom: 1px solid #f3f4f6; }
+  .semantic-result:last-child { border-bottom: none; }
+  .semantic-result a { text-decoration: none; color: #2563eb; font-size: 0.9375rem; }
+  .semantic-result a:hover { text-decoration: underline; }
+  .semantic-result .score { font-size: 0.75rem; color: #9ca3af; font-variant-numeric: tabular-nums; flex-shrink: 0; }
+  .semantic-empty { color: #9ca3af; font-size: 0.875rem; padding: 2rem 0; text-align: center; }
+  .semantic-loading { color: #9ca3af; font-size: 0.875rem; padding: 1rem 0; text-align: center; }
+  .semantic-error { color: #dc2626; font-size: 0.875rem; padding: 1rem 0; text-align: center; }
+
+  #semantic-input { width: 100%; padding: 0.75rem 1rem; border: 1px solid #d1d5db; border-radius: 0.375rem; font-size: 0.9375rem; outline: none; transition: border-color 0.15s; box-sizing: border-box; }
+  #semantic-input:focus { border-color: #2563eb; }
+
+  /* Dark mode — blog uses prefers-color-scheme, not data-theme */
+  @media (prefers-color-scheme: dark) {
+    .search-tabs { border-bottom-color: #374151; }
+    .search-tab { color: #9ca3af; }
+    .search-tab:hover { color: #d1d5db; }
+    .search-tab.active { color: #60a5fa; border-bottom-color: #60a5fa; font-weight: 500; }
+    .semantic-result { border-bottom-color: #1f2937; }
+    .semantic-result a { color: #60a5fa; }
+    .semantic-empty,
+    .semantic-loading { color: #6b7280; }
+    #semantic-input { background: #1f2937; border-color: #4b5563; color: #f3f4f6; }
+    #semantic-input:focus { border-color: #60a5fa; }
+
+    /* Pagefind Component UI — dark mode */
+    :root {
+      --pf-text: #d1d5db;
+      --pf-text-secondary: #9ca3af;
+      --pf-text-muted: #6b7280;
+      --pf-background: #1f2937;
+      --pf-border: #374151;
+      --pf-border-focus: #60a5fa;
+      --pf-hover: #374151;
+      --pf-mark: #fef08a;
+      --pf-skeleton: #374151;
+      --pf-skeleton-shine: #4b5563;
+      --pf-outline-focus: #60a5fa;
+      --pf-scroll-shadow: rgba(255, 255, 255, 0.1);
+      --pf-result-excerpt-color: #9ca3af;
+      --pf-result-title-color: #93c5fd;
+    }
+  }
+</style>
+
+<div class="search-tabs" role="tablist">
+  <button class="search-tab active" data-tab="keyword" role="tab">全文搜索</button>
+  <button class="search-tab" data-tab="semantic" role="tab">语义搜索</button>
+</div>
+
+<div id="keyword-panel" class="search-panel active">
+  <pagefind-input data-pagefind-ignore placeholder="输入关键词开始搜索"></pagefind-input>
+  <pagefind-results show-sub-results></pagefind-results>
+</div>
+
+<div id="semantic-panel" class="search-panel">
+  <div style="margin-bottom: 1rem">
+    <input id="semantic-input" type="search" placeholder="输入你想找的内容…（语义搜索）" autocomplete="off">
+  </div>
+  <div id="semantic-results"></div>
+</div>
+
+<script>
+(function() {
+  // --- Tab switching ---
+  var tabs = document.querySelectorAll('.search-tab');
+  tabs.forEach(function(tab) {
+    tab.addEventListener('click', function() {
+      tabs.forEach(function(t) { t.classList.remove('active'); });
+      document.querySelectorAll('.search-panel').forEach(function(p) { p.classList.remove('active'); });
+      tab.classList.add('active');
+      document.getElementById(tab.getAttribute('data-tab') + '-panel').classList.add('active');
+    });
+  });
+
+  // --- Semantic search ---
+  var input = document.getElementById('semantic-input');
+  var results = document.getElementById('semantic-results');
+  var debounceTimer = null;
+
+  input.addEventListener('input', function() {
+    clearTimeout(debounceTimer);
+    var q = input.value.trim();
+    if (!q) {
+      results.innerHTML = '<div class="semantic-empty">输入关键词开始语义搜索</div>';
+      return;
+    }
+    debounceTimer = setTimeout(function() { doSemanticSearch(q); }, 400);
+  });
+
+  // Focus input on tab switch
+  document.querySelector('[data-tab="semantic"]').addEventListener('click', function() {
+    setTimeout(function() { input.focus(); }, 100);
+  });
+
+  function doSemanticSearch(query) {
+    results.innerHTML = '<div class="semantic-loading">搜索中…</div>';
+
+    fetch('/api/semantic/search', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({ query: query })
+    })
+    .then(function(r) {
+      if (!r.ok) throw new Error('HTTP ' + r.status);
+      return r.json();
+    })
+    .then(function(data) {
+      if (!data.results || data.results.length === 0) {
+        results.innerHTML = '<div class="semantic-empty">没有找到相关结果</div>';
+        return;
+      }
+      var html = '';
+      data.results.forEach(function(r) {
+        // 只允许站内路径，且 URL 转义后进 href（防 pages.json 被注入恶意 URL）
+        if (typeof r.url !== 'string' || r.url.charAt(0) !== '/') return;
+        html += '<div class="semantic-result">'
+          + '<span class="score">' + r.score.toFixed(2) + '</span>'
+          + '<a href="' + escapeHtml(r.url) + '">' + escapeHtml(r.title) + '</a>'
+          + '</div>';
+      });
+      results.innerHTML = html;
+    })
+    .catch(function(err) {
+      results.innerHTML = '<div class="semantic-error">搜索失败：' + escapeHtml(err.message) + '</div>';
+    });
+  }
+
+  function escapeHtml(str) {
+    var div = document.createElement('div');
+    div.appendChild(document.createTextNode(str));
+    return div.innerHTML;
+  }
+})();
+</script>

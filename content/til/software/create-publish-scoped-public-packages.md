@@ -1,0 +1,21 @@
+---
+title: 'Create Publish Scoped Public Packages'
+status: draft
+date: 2025-06-15T19:22:54+08:00
+header: Web
+---
+
+- <https://docs.npmjs.com/creating-and-publishing-scoped-public-packages>
+- <https://docs.npmjs.com/creating-and-publishing-unscoped-public-packages>
+
+有用户名（[cite/t:@tianheg/package]）
+
+\`\`\`bash npm login npm init --scope=[cite/t:@tianheg] touch README.md
+
+npm install /path/to/package
+
+cd /path/to/package npm publish --access public ```
+
+无用户名（package）
+
+\`\`\`bash ... npm init ... npm publish \`\`\`

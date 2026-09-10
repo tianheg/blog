@@ -1,0 +1,15 @@
+---
+title: 'Typescript Features to Avoid'
+status: draft
+date: 2025-06-15T19:22:54+08:00
+header: Web
+---
+
+<https://www.executeprogram.com/blog/typescript-features-to-avoid>
+
+将要叙述的这些特性可能有它的使用场景，但在默认情况下，建议避免。
+
+1. 避免枚举
+2. 避免命名空间
+3. 避免装饰器（现在）
+4. `#somePrivateField` 比 `private somePrivateField` 要好

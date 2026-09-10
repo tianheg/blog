@@ -1,0 +1,13 @@
+---
+title: 'Find File at Point'
+status: draft
+date: 2025-11-06T07:43:21+08:00
+header: Tools
+---
+
+find-file-at-point 是 Emacs 一个智能命令，它能根据光标下的文本（如文件路径、URL或邮箱地址）自动预填要打开的文件或链接，让你用一次回车就能快速访问，极大提升了操作效率。
+
+其他相关命令：
+
+- file-name-at-point-functions
+- ffap-guess-file-name-at-point

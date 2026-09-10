@@ -1,0 +1,19 @@
+---
+title: 'What is a DDoS attack?'
+status: draft
+date: 2025-06-15T19:22:54+08:00
+header: DevOps
+---
+
+https://www.cloudflare.com/learning/ddos/what-is-a-ddos-attack/
+
+DDoS stand for distributed denial-of-service
+
+这种行为是恶意的，意图让目标网站失去正常提供服务的能力。DDoS通过几台被入侵的电脑作为攻击流量源（肉ji）以达到攻击效果
+
+## Network
+### 可能有用的网络工具
+- https://radar.cloudflare.com/
+- https://web-check.xyz/
+- https://speed.cloudflare.com/
+- https://isbgpsafeyet.com/
