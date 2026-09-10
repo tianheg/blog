@@ -1,6 +1,77 @@
-{{/* Render page content with external links opening in new tab.
-     Usage: {{ partial "content/render-content" .Content }}
-*/}}
+{{/* Render page content.
+
+  Usage: {{ partial "content/render-content" .Content }}
+
+  Three passes over the rendered HTML:
+  1. External links open in a new tab (existing behaviour).
+  2. Wikilinks — [[Note name]] / [[Note name|Label]] / [[Note name#anchor]] —
+     are resolved against the site-wide wikilink map and become normal links.
+     Unresolved wikilinks stay as literal text and emit a build warning, so a
+     typo surfaces at build time instead of published as dead bracket soup.
+     Code blocks and inline code are masked first so examples like
+     `[[array]]` in a code sample are never rewritten.
+  3. Masks are restored.
+
+  Wikilinks are a Markdown-only feature here: Org content never had them, and
+  Hugo has no native support (issue #13533), so this is the content-layer
+  workaround the Hugo community converged on (Discourse 2025 experiment,
+  Invisible Parade, hugo-smartlink). */}}
 {{- $content := . -}}
 {{- $content = $content | replaceRE `<a href="(https?://[^"]+)"` `<a href="$1" target="_blank" rel="noreferrer"` -}}
+
+{{- if strings.Contains $content "[[" -}}
+  {{- $map := partialCached "functions/wikilink-map" "wikilink-map-key" -}}
+
+  {{/* --- 1. mask code so [[…]] inside examples is left alone --- */}}
+  {{- $masks := slice -}}
+  {{- range $b := findRE `(?s)<pre\b.*?</pre>` $content -}}
+    {{- $masks = $masks | append $b -}}
+    {{- $content = replace $content $b "@@WL_MASK@@" -}}
+  {{- end -}}
+  {{- range $b := findRE `(?s)<code\b[^>]*>.*?</code>` $content -}}
+    {{- $masks = $masks | append $b -}}
+    {{- $content = replace $content $b "@@WL_MASK@@" -}}
+  {{- end -}}
+
+  {{/* --- 2. resolve wikilinks --- */}}
+  {{- range $m := findRE `\[\[[^\]\[]+\]\]` $content -}}
+    {{- $inner := strings.TrimPrefix "[[" (strings.TrimSuffix "]]" $m) -}}
+    {{- $target := $inner -}}
+    {{- $label := "" -}}
+    {{- if strings.Contains $inner "|" -}}
+      {{- $bits := split $inner "|" -}}
+      {{- $target = index $bits 0 -}}
+      {{- $label = delimit (after 1 $bits) "|" -}}
+    {{- end -}}
+    {{- $anchor := "" -}}
+    {{- if strings.Contains $target "#" -}}
+      {{- $tb := split $target "#" -}}
+      {{- $target = index $tb 0 -}}
+      {{- $anchor = printf "#%s" (index $tb 1) -}}
+    {{- end -}}
+    {{- $target = trim $target " " -}}
+    {{- $label = trim $label " " -}}
+
+    {{- $href := index $map (lower $target) -}}
+    {{- if not $href -}}
+      {{- $href = index $map (lower (replace $target " " "-")) -}}
+    {{- end -}}
+
+    {{- if $href -}}
+      {{- $text := cond (ne $label "") $label $target -}}
+      {{- /* 不加 title：原生 tooltip 会和悬浮预览卡片打架，预览卡片负责展示目标 */ -}}
+      {{- $content = replace $content $m (printf `<a href="%s%s" class="wikilink">%s</a>` $href $anchor ($text | htmlEscape)) -}}
+    {{- else -}}
+      {{- warnf "wikilink: unresolved [[%s]] — 站内没有匹配的笔记（check-links 会拦住发布）" $inner -}}
+      {{- $text := cond (ne $label "") $label $target -}}
+      {{- $content = replace $content $m (printf `<a href="/search/?q=%s" class="underline decoration-dotted decoration-gray-400 opacity-70 hover:opacity-100" title="站内暂无《%s》，点这里搜索">%s</a>` ($target | urlquery) ($target | htmlEscape) ($text | htmlEscape)) -}}
+    {{- end -}}
+  {{- end -}}
+
+  {{/* --- 3. restore masked code --- */}}
+  {{- range $masks -}}
+    {{- $content = replace $content "@@WL_MASK@@" . 1 -}}
+  {{- end -}}
+{{- end -}}
+
 {{- $content | safeHTML -}}

@@ -13,7 +13,10 @@
     {{/* === ROOT /til/ page === */}}
     <div class="mb-6">
       <h1 class="text-2xl font-bold text-gray-900 dark:text-gray-100">TIL</h1>
-      <div class="mt-3">
+      <p class="mt-2 text-sm text-gray-500 dark:text-gray-400 leading-relaxed">
+        公开的笔记园：按主题分畦，靠搜索直达，允许半成品。笔记不是文章——长出来的才另写成 <a href="/posts/" class="text-emerald-600 dark:text-emerald-400 hover:underline">posts</a>。
+      </p>
+      <div class="mt-3 flex items-center gap-3">
         <a href="#" onclick="randomTIL(); return false;"
            class="inline-flex items-center gap-1.5 px-3 py-1.5 text-xs rounded-md border border-gray-200 dark:border-gray-800
                   text-gray-500 dark:text-gray-400 hover:text-emerald-600 dark:hover:text-emerald-400
@@ -21,8 +24,36 @@
           <svg class="w-3.5 h-3.5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 4v5h.582m15.356 2A8.001 8.001 0 004.582 9m0 0H9m11 11v-5h-.581m0 0a8.003 8.003 0 01-15.357-2m15.357 2H15"/></svg>
           随机一篇
         </a>
+        <a href="#garden-guide" onclick="var d=document.getElementById('garden-guide'); d.open=true; d.scrollIntoView({behavior:'smooth'}); return false;"
+           class="text-xs text-gray-400 dark:text-gray-500 hover:text-emerald-600 dark:hover:text-emerald-400 transition-colors">怎么逛？</a>
       </div>
     </div>
+
+    {{/* --- Garden guide (导览层) --- */}}
+    <details id="garden-guide" class="mb-8 rounded-lg border border-gray-200 dark:border-gray-800">
+      <summary class="cursor-pointer px-4 py-3 text-sm font-medium text-gray-700 dark:text-gray-300 select-none">这座笔记园怎么逛</summary>
+      <div class="px-4 pb-4 space-y-3 text-sm text-gray-600 dark:text-gray-400 leading-relaxed">
+        <p>
+          这里放的是还在长的笔记，不是成品文章。分类是畦，检索是主路——
+          <a href="/search/" class="text-emerald-600 dark:text-emerald-400 hover:underline">搜索</a>（关键词 + 语义）比翻侧栏快。
+        </p>
+        <p>
+          <span class="inline-block align-baseline text-[10px] font-semibold uppercase tracking-wide px-1.5 py-[1px] rounded bg-amber-100 text-amber-700 dark:bg-amber-900/30 dark:text-amber-300 mr-1">draft</span>
+          = 探索层。AI 辅助整理或我随手记下的，扩视野用，<strong class="font-medium">未必消化过、可能有误</strong>。
+        </p>
+        <p>
+          <span class="inline-block align-baseline text-[10px] font-semibold uppercase tracking-wide px-1.5 py-[1px] rounded bg-emerald-100 text-emerald-700 dark:bg-emerald-900/30 dark:text-emerald-300 mr-1">reviewed</span>
+          = 沉淀层。我亲手复核过、能用自己的话复述的，可信度高。
+        </p>
+        <p>
+          每篇底部的 <strong class="font-medium">Links</strong> 区，列出它引用的和被引用的笔记——顺着链接横向走，是这座园子真正的读法。
+        </p>
+        <p class="text-xs text-gray-400 dark:text-gray-500">
+          背后方法论：
+          <a href="/til/learning/knowledge-management-methodology/" class="text-emerald-600 dark:text-emerald-400 hover:underline">知识管理系统的方法论结论</a>
+        </p>
+      </div>
+    </details>
 
     {{ partial "til/dashboard.html" . }}
 

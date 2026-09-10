@@ -192,6 +192,44 @@ header: Linux      # 可选，子分类
 - 在 `posts/` 中使用 front matter `tags: [a, b]` 添加
 - `til/` 不推荐使用标签，文件夹分类已足够
 
+### 内部链接与反链（2026-09-11 起）
+
+正文引用其他笔记，两种写法都支持：
+
+- 标准 Markdown：`[显示文字](/til/software/git-rebase/)`
+- **Wikilink**：`[[git-rebase]]`、`[[git-rebase|显示文字]]`、`[[笔记本保养#小节]]`
+
+wikilink 依次按 **文件名 → 完整标题 → 标题主名（`——`/`：`/`|` 之前那截）→ front matter aliases** 解析（`layouts/_partials/functions/wikilink-map.html`）。代码块与行内代码里的 `[[…]]` 被屏蔽，不会误解析。
+
+**写错名字也不会产生死链**（三层保证，2026-09-11 起）：
+
+1. **渲染兜底** — 解析不到时渲染成「站内搜索」链接（虚线下划线 + 悬停提示），读者看不到 `[[…]]` 原文，也点不到 404
+2. **构建告警** — 构建时 `WARN`，日志里能看到是哪个名字
+3. **发布闸门** — `npm run check-links` 汇总「未解析的 wikilink」+「失效内链」并返回退出码 1（`--warn-only` 只报告），且指出是哪个文件/哪一页写错了。判定逻辑复用 Hugo 构建结果，不另写一套解析规则
+
+**写法约定（兼顾 Obsidian）**：
+
+- 站内引用用 `[[文件名]]` —— Obsidian 的 wikilink 只按**文件名**解析，不认标题，所以这是两边都通的写法
+- 要中文显示：`[[laptop-maintenance|笔记本保养]]`（两边都通）
+- 想让 Obsidian 里也能用中文引用：给 frontmatter 加 `aliases: ["笔记本保养"]`（本站的 wikilink-map 也认 `.Aliases`）
+- 指小节、站外链接、静态文件仍用 Markdown 链接
+
+每篇笔记底部自动渲染 **引用这篇的** 区（反链，见 `layouts/_partials/content/backlinks.html`）：
+
+- 只做 incoming（谁引用了这篇）。出链在正文里本来就有，汇总一遍不增加信息，互链时还会在同一页出现两次
+- 数据来自构建时全站扫描一次的关系索引（`layouts/_partials/functions/backlink-index.html`，partialCached），不是每页扫全站（网上常见的 Hugo backlink partial 是 O(n²)）
+- 每条附上引用它的那句话（linked mention），超过 6 条自动折叠
+- 链接腐烂在构建时暴露：`layouts/_markup/render-link.html` 校验内链，未解析即 WARN
+
+### 链接悬浮预览（2026-09-11 起）
+
+鼠标悬停站内链接弹出预览卡片（状态徽章 / 标题 / 分类 · header · 日期 / 开头摘录，**整卡可点进入**）——gwern.net 的 semantic zoom 做法：先读够再决定要不要跳。
+
+- 数据由 `layouts/previews/list.json.json` 在构建时生成（`/previews/index.json`，约 1540 条 / 580KB，gzip ~150KB）
+- 客户端 `assets/ts/components/PagePreview.ts`：懒加载 + 内存缓存 + 空闲预取，不为单个链接发请求；220ms 延迟防误触；视口内智能定位；Esc / 滚动 / 点击即收
+- 只在真实鼠标指针出现时启用（判 `pointerType === "mouse"`，不依赖 `hover: hover` 媒体查询），触摸设备完全不受影响
+- 想给某个链接关掉预览：在 `<a>` 上加 `data-no-preview`
+
 ### TIL 引用来源格式
 
 TIL 的信息源链接统一放在文件末尾：

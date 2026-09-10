@@ -5,7 +5,8 @@
     "build": "hugo --gc --minify --buildFuture",
     "pagefind": "pagefind --site public",
     "dev": "hugo serve --buildFuture",
-    "all": "npm run build && npm run pagefind",
+    "all": "npm run check-links && npm run build && npm run pagefind",
+    "check-links": "node scripts/check-links.mjs",
     "embed": "node scripts/generate-embeddings.mjs"
   },
   "devDependencies": {

@@ -1,0 +1,49 @@
+{{/* Wikilink resolution map — built once per site build (partialCached).
+
+  Maps lowercased keys to page permalinks so that [[Note name]] style links can
+  be resolved without knowing the section (til/…, posts/…) or the URL.
+
+  Keys per page, in priority order (first writer wins):
+    1. file base name          git-rebase      → /til/software/…
+    2. full page title         笔记本保养——如何…  → /til/life/…
+    3. short title             the part before —— ： : ｜ | in the title,
+                               so [[笔记本保养]] resolves the long note title
+    4. front matter aliases
+
+  Built with newScratch.SetInMap so the map is mutated in place — merging 1580
+  dicts in a loop would be O(n²) (the pitfall noted in scripter.co's backlink
+  partial and in Grdn's theme). */}}
+{{- $s := newScratch -}}
+{{- range partialCached "functions/linkable-pages" "linkable-pages-key" -}}
+  {{- $link := .RelPermalink -}}
+  {{- $m := $s.Get "m" -}}
+
+  {{- with .File -}}
+    {{- $s.SetInMap "m" (lower .BaseFileName) $link -}}
+    {{- /* 路径形式，用于重名时精确指定：[[til/software/git-rebase]]、[[posts/javascript]] */ -}}
+    {{- $s.SetInMap "m" (lower (strings.TrimSuffix ".md" .Path)) $link -}}
+  {{- end -}}
+
+  {{- $title := .Title | plainify | chomp -}}
+  {{- $s.SetInMap "m" (lower $title) $link -}}
+
+  {{- $short := $title -}}
+  {{- range $sep := slice "——" "：" ":" "｜" "|" " – " -}}
+    {{- $short = index (split $short $sep) 0 -}}
+  {{- end -}}
+  {{- $short = trim $short " " -}}
+  {{- if ne $short $title -}}
+    {{- $k := lower $short -}}
+    {{- if not (isset ($s.Get "m") $k) -}}
+      {{- $s.SetInMap "m" $k $link -}}
+    {{- end -}}
+  {{- end -}}
+
+  {{- range .Aliases -}}
+    {{- $k := lower . -}}
+    {{- if not (isset ($s.Get "m") $k) -}}
+      {{- $s.SetInMap "m" $k $link -}}
+    {{- end -}}
+  {{- end -}}
+{{- end -}}
+{{- return ($s.Get "m") -}}

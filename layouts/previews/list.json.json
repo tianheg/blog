@@ -1,0 +1,29 @@
+{{/* Link preview index — feeds the hover preview card (assets/ts/components/PagePreview.ts).
+
+  One entry per linkable page (posts + til), keyed by permalink:
+
+    { "t": title, "s": status, "h": header, "k": section, "d": date, "x": excerpt }
+
+  Kept as a single lazily-fetched file rather than per-page HTML fetches: one
+  request serves every preview on the site, and the client caches it in memory.
+
+  Deliberately separate from /graph/index.json — that one is loaded by the graph
+  page only, and adding excerpts there would make it heavier than the preview
+  card needs. Built with newScratch (in-place map mutation) instead of merging
+  1500+ dicts in a loop. */}}
+{{- $s := newScratch -}}
+{{- range where site.RegularPages "Section" "in" (slice "posts" "til") -}}
+  {{- $excerpt := .Summary | plainify | htmlUnescape | chomp -}}
+  {{- if not $excerpt -}}
+    {{- $excerpt = .Plain | plainify | htmlUnescape | chomp -}}
+  {{- end -}}
+  {{- $s.SetInMap "m" .RelPermalink (dict
+      "t" (partial "functions/get-title" (dict "page" .) | plainify | htmlUnescape | chomp)
+      "s" (.Params.status | default "")
+      "h" (.Params.header | default "")
+      "k" .Section
+      "d" (.Date.Format "2006-01-02")
+      "x" ($excerpt | truncate 200)
+  ) -}}
+{{- end -}}
+{{- jsonify ($s.Get "m") -}}

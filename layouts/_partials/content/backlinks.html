@@ -1,5 +1,60 @@
-{{/* Backlinks component - placeholder container only */}}
-{{/* JS logic moved to assets/ts/components/Backlinks.ts, loaded via main.js */}}
-{{/* Link relationships are pre-computed at build time in /graph/index.json */}}
+{{/* Backlinks — 引用这篇的笔记（反向链接）。
 
-<div id="backlinks-container" data-page-permalink="{{ .RelPermalink }}"></div>
+  只做 incoming。出链（这篇引用了谁）正文里本来就有，底部再汇总一遍不增加信息，
+  而且互链（A↔B）时同一篇会在一个页面上出现两次——2026-09-11 据此去掉 Outgoing。
+  gwern.net、Grdn、scripter.co 的 backlink 实现也都只做 incoming。
+
+  数据来自 functions/backlink-index.html：构建时全站扫描一次（partialCached），
+  不是每渲染一页扫一次全站（网上常见的 Hugo partial 是 O(n²)）。
+  每条附上引用它的那句话（linked mention），超过 6 条折叠。 */}}
+{{- $cur := .RelPermalink -}}
+{{- $idx := partialCached "functions/backlink-index" "backlink-index-key" -}}
+{{- $seen := newScratch -}}
+{{- $incoming := slice -}}
+
+{{- range $idx -}}
+  {{- $s := .s -}}
+  {{- $t := .t -}}
+  {{- $c := .c -}}
+  {{- if eq $t $cur -}}
+    {{- if not ($seen.Get $s) -}}
+      {{- $seen.Set $s true -}}
+      {{- with site.GetPage $s -}}
+        {{- $incoming = $incoming | append (dict "page" . "ctx" $c "date" .Date) -}}
+      {{- end -}}
+    {{- end -}}
+  {{- end -}}
+{{- end -}}
+{{- $incoming = sort $incoming "date" "desc" -}}
+
+{{- if $incoming }}
+<section class="backlinks mt-8 pt-6 border-t border-gray-200 dark:border-gray-700" data-pagefind-ignore>
+  {{- $list := "" -}}
+  {{- range $incoming -}}
+    {{- $list = printf `%s<li class="leading-snug"><a href="%s" class="text-blue-600 dark:text-blue-400 hover:underline">%s</a>%s</li>`
+        $list .page.RelPermalink (partial "functions/get-title" (dict "page" .page))
+        (cond (ne .ctx "") (printf `<div class="mt-0.5 mb-2 text-xs text-gray-400 dark:text-gray-500">%s</div>` (.ctx | htmlEscape)) "") -}}
+  {{- end -}}
+  <div>
+    {{- if gt (len $incoming) 6 }}
+    <details>
+      <summary class="text-sm font-medium text-gray-600 dark:text-gray-400 mb-2 cursor-pointer flex items-center space-x-1 select-none">
+        <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 14l-7 7m0 0l-7-7m7 7V3" />
+        </svg>
+        <span>引用这篇的 ({{ len $incoming }})</span>
+      </summary>
+      <ul class="space-y-1.5 ml-5 mt-2">{{ $list | safeHTML }}</ul>
+    </details>
+    {{- else }}
+    <h2 class="text-sm font-medium text-gray-600 dark:text-gray-400 mb-3 flex items-center space-x-1">
+      <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 14l-7 7m0 0l-7-7m7 7V3" />
+      </svg>
+      <span>引用这篇的 ({{ len $incoming }})</span>
+    </h2>
+    <ul class="space-y-1.5 ml-5">{{ $list | safeHTML }}</ul>
+    {{- end }}
+  </div>
+</section>
+{{- end }}

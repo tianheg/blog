@@ -1,3 +1,3 @@
-import { initBacklinks } from "./components/Backlinks";
+import { initPagePreview } from "./components/PagePreview";
 
-window.addEventListener("DOMContentLoaded", initBacklinks, { once: true });
+window.addEventListener("DOMContentLoaded", initPagePreview, { once: true });
