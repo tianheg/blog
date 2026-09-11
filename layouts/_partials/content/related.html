@@ -1,0 +1,26 @@
+{{/* 语义相关笔记 — 数据来自 data/related.json（scripts/generate-related.py 预生成）。
+
+  与「引用这篇的」互补：
+    · 反链 = 显式链接，作者的判断，稀疏（全站 119 条）
+    · 相关 = 语义相似，机器的发现，稠密（全站 5112 条）
+  用来撞见自己没想到的关联，不是用来当权威引用。
+
+  服务端渲染，无客户端请求；data 缺失时整块不渲染。 */}}
+{{- $related := index hugo.Data.related .RelPermalink -}}
+{{- if $related }}
+<section class="related mt-8 pt-6 border-t border-gray-200 dark:border-gray-700" data-pagefind-ignore>
+  <h2 class="text-sm font-medium text-gray-600 dark:text-gray-400 mb-3 flex items-center space-x-1.5">
+    <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+      <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 7h12m0 0l-4-4m4 4l-4 4m0 6H4m0 0l4 4m-4-4l4-4" />
+    </svg>
+    <span>相关笔记（语义相似）</span>
+  </h2>
+  <ul class="space-y-1.5 ml-5">
+    {{- range $related }}
+    {{- with site.GetPage . }}
+    <li><a href="{{ .RelPermalink }}" class="text-blue-600 dark:text-blue-400 hover:underline">{{ partial "functions/get-title" (dict "page" .) }}</a></li>
+    {{- end }}
+    {{- end }}
+  </ul>
+</section>
+{{- end }}

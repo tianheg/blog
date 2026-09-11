@@ -7,7 +7,8 @@
     "dev": "hugo serve --buildFuture",
     "all": "npm run check-links && npm run build && npm run pagefind",
     "check-links": "node scripts/check-links.mjs",
-    "embed": "node scripts/generate-embeddings.mjs"
+    "related": "python3 scripts/generate-related.py",
+    "embed": "node scripts/generate-embeddings.mjs && python3 scripts/generate-related.py"
   },
   "devDependencies": {
     "@tailwindcss/cli": "^4.3.0",
