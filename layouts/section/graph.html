@@ -54,23 +54,24 @@
       - class: "h-96" - Set graph height to 24rem (384px)
     */}}
     <section class="mt-12">
-      <h2>Graph Visualization (Zoom required, please wait)</h2>
+      <h2>图谱</h2>
+      <p class="text-sm opacity-80 mb-4">滚轮缩放 · 拖动平移 · 点节点跳转</p>
       {{ partial "components/graph" ( dict "scaleNodes" true "class" "h-96" ) }}
     </section>
 
     {{/* Linked articles statistics */}}
     <section class="mt-8">
-      <h2>Articles with Network Links</h2>
-      <p class="text-sm opacity-80 mb-4">Found {{ len $linkedArticles }} articles with link relationships</p>
+      <h2>有链接关系的页面</h2>
+      <p class="text-sm opacity-80 mb-4">共 {{ len $linkedArticles }} 篇</p>
 
       <div class="overflow-x-auto">
         <table class="w-full text-sm">
           <thead>
             <tr class="border-b border-gray-300 dark:border-gray-700">
-              <th class="text-left py-2 px-2">Article Title</th>
-              <th class="text-center py-2 px-2">Inlinks</th>
-              <th class="text-center py-2 px-2">Outlinks</th>
-              <th class="text-center py-2 px-2">Total</th>
+              <th class="text-left py-2 px-2">页面</th>
+              <th class="text-center py-2 px-2">入链</th>
+              <th class="text-center py-2 px-2">出链</th>
+              <th class="text-center py-2 px-2">合计</th>
             </tr>
           </thead>
           <tbody>
