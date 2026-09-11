@@ -1,19 +1,21 @@
 {{/*
   Graph page layout template
   ==========================
-  Purpose: Provides a dedicated layout for the /graph/ path to display the blog content relationship graph
+  Purpose: /graph/ 页 —— 站内链接关系图 + 有链接关系页面的统计表
 
   Related files:
   ---------
-  1. content/graph/_index.org - Page content source file, defines title and description
-  2. layouts/_partials/components/graph.html - Graph component partial template
-  3. layouts/graph/list.json.json - Template that generates JSON data required for the graph
-  4. assets/ts/components/ContentNetworkGraph.ts - content-network-graph Web Component
+  1. content/graph/_index.md                      — 页面说明（frontmatter outputs: [HTML, JSON]）
+  2. layouts/_partials/components/graph.html      — <content-network-graph> 组件
+  3. layouts/graph/list.json.json                 — 生成 graph/index.json
+  4. layouts/_partials/functions/graph-data.html  — 数据来源：节点 + 边
+                                                    （复用 backlink-index，同时认 wikilink 与 Markdown 链接）
+  5. assets/ts/components/ContentNetworkGraph.ts  — Web Component（vis-network 按需加载）
 
   How it works:
   ---------
-  This template calls the "graph" partial to render the <content-network-graph> Web Component,
-  which fetches data from graph/index.json and visualizes the link relationships between content.
+  组件 fetch graph/index.json 渲染。数据在构建时算一次（partialCached），
+  与每篇底部「引用这篇的」反链同源，所以不会出现图里有边、反链里没有的情况。
 */}}
 
 {{ define "main" }}
