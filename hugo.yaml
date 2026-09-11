@@ -27,6 +27,13 @@ build:
     - source: "assets/css/.*"
       target: css
 
+# content/ 同时是 Obsidian vault：产物不进仓库（.gitignore），也不参与构建/发布。
+# 双保险——即使文件已存在于工作区（比如 Windows 侧同步过来），也不会出现在 public/。
+ignoreFiles:
+  - '\.canvas$'
+  - '\.obsidian/'
+  - '(^|/)\.trash/'
+
 frontmatter:
   date:
     - date
