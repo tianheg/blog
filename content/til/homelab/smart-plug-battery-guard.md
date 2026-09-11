@@ -76,13 +76,17 @@ C:\Windows\Microsoft.NET\Framework64\v4.0.30319\csc.exe /nologo /target:winexe /
 # 5. 注册开机自启
 reg add "HKCU\Software\Microsoft\Windows\CurrentVersion\Run" /v BatterySocketGuard /t REG_SZ /d "\"C:\path\guard.exe\"" /f
 
-# 6. 电源配套——S0 待机防耗干（关键！）
+# 6. 电源配套——S0 待机策略（2026-09-11 修订，原 3h 定时休眠已废弃）
 powercfg /h on
-# S0 现代待机 3 小时后自动转休眠（0 耗电），防止长时间待机把停靠 80% 的电池放干
-powercfg /setacvalueindex SCHEME_CURRENT SUB_SLEEP 9d7815a6-7ee4-497e-8888-515a05f02364 10800
-powercfg /setdcvalueindex SCHEME_CURRENT SUB_SLEEP 9d7815a6-7ee4-497e-8888-515a05f02364 10800
-powercfg /S SCHEME_CURRENT
+# 定时休眠设 0：S4 下键盘鼠标都不在唤醒列表，只能按电源键，与"晚上用几小时"的节奏冲突
+powercfg /setacvalueindex SCHEME_CURRENT SUB_SLEEP 9d7815a6-7ee4-497e-8888-515a05f02364 0
+powercfg /setdcvalueindex SCHEME_CURRENT SUB_SLEEP 9d7815a6-7ee4-497e-8888-515a05f02364 0
+# 待机电池预算放宽到 40%（默认 5%，几小时待机就耗穿 → 自动转 S4）
+powercfg /setdcvalueindex SCHEME_CURRENT SUB_PRESENCE STANDBYBUDGETPERCENT 40
+powercfg /setactive SCHEME_CURRENT
 ```
+
+关闭定时休眠只解决了一半问题：`HIBERNATEIDLE` 和待机电池预算（`SUB_PRESENCE`）是两套独立触发器，后者默认 5%、几小时待机就耗穿。完整的机制与排查方法见 [[windows-modern-standby-adaptive-hibernate|Windows 现代待机的两套自动休眠触发器]]。
 
 守护必须在**桌面会话**运行（SSH 会话无托盘，NotifyIcon 会崩）。手动开关插座、开机自启勾选都在托盘右键菜单。
 

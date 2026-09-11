@@ -35,7 +35,7 @@ header: Tools
 - **显示文件扩展名与隐藏文件：** 文件资源管理器→查看→勾选"文件扩展名""隐藏项目"
 - **电源计划：** 控制面板→电源选项→笔记本选"平衡"，台式机选"高性能"。还可开启"卓越性能模式"（管理员CMD: `powercfg -duplicatescheme e9a42b02-d5df-448d-aa00-03f14749eb61`）
 - **关闭虚拟化安全性（提升游戏帧数）：** 管理员CMD: `bcdedit /set hypervisorlaunchtype off` → 重启（不影响虚拟机使用）
-- **关闭休眠释放C盘：** 管理员CMD: `powercfg -h off`（释放与内存等大的空间）
+- **关闭休眠释放C盘：** 管理员CMD: `powercfg -h off`（释放与内存等大的空间）。注意这会同时废掉低电量兜底（临界动作退化成关机），取舍见 [[windows-modern-standby-adaptive-hibernate|现代待机的两套休眠触发器]]
 
 ### 四、驱动与存储
 
