@@ -41,3 +41,6 @@ yarn v2-> yarn config set npmRegistryServer https://registry.npmmirror.com
 
 ### 一些资源
 - <https://github.com/eryajf/Thanks-Mirror>
+
+
+相关：[[linux-ubuntu-find-best-apt-repository-mirror|linux-ubuntu-find-best-apt-repository-mirror]]

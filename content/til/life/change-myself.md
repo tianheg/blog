@@ -29,3 +29,5 @@ header: Lifestyle
 相关：[[what-is-ego|what-is-ego]]
 
 相关：[[tombkeeper-personal-development|tombkeeper-personal-development]]
+
+相关：[[yu-guangzhong-improve-chinese|yu-guangzhong-improve-chinese]]

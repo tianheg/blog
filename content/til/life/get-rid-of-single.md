@@ -143,3 +143,6 @@ SOLO 还是直接坦白了吧，否则一聊天就会露馅。
 
 8. 永远第一时间表示喜爱和感谢：向对方表示感谢是最好展示真诚和尊重的方式。他看到我的照片会夸今天的我好看，很可爱；会谢谢我给他买的礼物、会说他很喜欢，会谢谢我给他倒水、递水；如果他需要我帮忙的事情，会先问我可不可以帮他做
    XX，如果我同意了他也会说如果实在不行也没有关系不要有压力。我答应帮忙之后会给我说谢谢。
+
+
+相关：[[sex-stuff-you-probably-wont-learn-from-fanfiction-and-porn|sex-stuff-you-probably-wont-learn-from-fanfiction-and-porn]]

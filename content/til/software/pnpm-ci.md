@@ -37,3 +37,6 @@ jobs: build: runs-on: ubuntu-latest concurrency: group: ${{ github.workflow }}-$
 - name: Deploy to GitHub Pages uses: peaceiris/actions-gh-pages@v3 if: ${{ github.ref == 'refs/heads/main' }} with: github<sub>token</sub>: ${{ secrets.GITHUB<sub>TOKEN</sub> }} publish<sub>dir</sub>: ./dist force<sub>orphan</sub>: true
 
 \`\`\`
+
+
+相关：[[osmosfeed-feed-site|osmosfeed-feed-site]]

@@ -8,3 +8,6 @@ header: Linux
 ```bash
 apt update && apt autoremove snapd --purge -y && apt upgrade -y && reboot
 ```
+
+
+相关：[[linux-ubuntu22-04-remove-snap|linux-ubuntu22-04-remove-snap]]

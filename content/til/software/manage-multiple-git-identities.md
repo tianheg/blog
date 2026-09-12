@@ -31,3 +31,6 @@ If the repository is located inside the ~*work directory, a file named ~*.gitcon
 [commit]
     gpgsign = true
 ```
+
+
+相关：[[git-add-multiple-github-accounts|git-add-multiple-github-accounts]]

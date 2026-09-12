@@ -8,3 +8,6 @@ header: Web
 ## 学习路径
 
 1. <https://www.typescriptlang.org/docs/handbook/intro.html>
+
+
+相关：[[map-of-js|map-of-js]]

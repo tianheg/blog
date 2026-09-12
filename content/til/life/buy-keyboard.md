@@ -13,3 +13,6 @@ header: Consumption
 
 ## 参考
 - [机械键盘自行选购指南：从只买一把到直入深坑 - 少数派](https://sspai.com/post/64972)
+
+
+相关：[[how-to-buy-an-electronic-blood-pressure-monitor|how-to-buy-an-electronic-blood-pressure-monitor]]

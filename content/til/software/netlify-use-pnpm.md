@@ -12,3 +12,10 @@ netlify.toml:
 \`\`\`toml [build.environment] NODE<sub>VERSION</sub> = "16" NPM<sub>FLAGS</sub> = "--version"
 
 [build] publish = "dist" command = "npx pnpm install --store=node<sub>modules<*sub>*.pnpm-store && npx pnpm build" ```
+
+
+相关：[[create-publish-scoped-public-packages|create-publish-scoped-public-packages]]
+
+相关：[[pnpm-ci|pnpm-ci]]
+
+相关：[[use-slidev-make-ppt|use-slidev-make-ppt]]

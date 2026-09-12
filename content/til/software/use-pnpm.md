@@ -8,3 +8,6 @@ header: Web
 <https://pnpm.io/>
 
 安装 [gatsby-plugin-pnpm](https://github.com/Js-Brecht/gatsby-plugin-pnpm) 解决 gatsby 与 pnpm 无法兼容问题。最后，无法解决。
+
+
+相关：[[netlify-use-pnpm|netlify-use-pnpm]]

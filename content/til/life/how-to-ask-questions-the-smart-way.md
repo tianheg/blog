@@ -475,3 +475,6 @@ Evelyn Mitchel 贡献了一些愚蠢问题例子并启发了编写「如何更�
 - [How To Ask Questions The Smart Way](http://www.catb.org/~esr/faqs/smart-questions.html)
 - [提问的智慧 (中文翻译)](https://github.com/ryanhanwu/How-To-Ask-Questions-The-Smart-Way/blob/main/README-zh_CN.md)
 - [Wikipedia: Stack Exchange](https://en.wikipedia.org/wiki/Stack_Exchange)
+
+
+相关：[[privacy|privacy]]

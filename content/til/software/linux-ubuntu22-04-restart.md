@@ -19,3 +19,5 @@ init 0 ```
 相关：[[linux-change-user-s-default-shell|linux-change-user-s-default-shell]]
 
 相关：[[linux-autoenable-bluetooth-linux|linux-autoenable-bluetooth-linux]]
+
+相关：[[ubuntu-initial-setup|ubuntu-initial-setup]]

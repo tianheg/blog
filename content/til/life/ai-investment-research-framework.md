@@ -39,3 +39,6 @@ header: 'AI 投资'
 - 工具链（financial_rigor.py 等）零依赖纯 stdlib，质量不错，可长期用
 
 来源: [GitHub: xbtlin/ai-berkshire](https://github.com/xbtlin/ai-berkshire)
+
+
+相关：[[change-myself|change-myself]]

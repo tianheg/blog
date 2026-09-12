@@ -36,3 +36,8 @@ header: Linux
 ## dog/dig {#dog-dig}
 
 <https://mp.weixin.qq.com/s/gkPbQTyhAHwYrpzJjftJVQ>
+
+
+相关：[[tools|tools]]
+
+相关：[[cli-tcpdump|cli-tcpdump]]

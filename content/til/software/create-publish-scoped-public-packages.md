@@ -19,3 +19,6 @@ cd /path/to/package npm publish --access public ```
 无用户名（package）
 
 \`\`\`bash ... npm init ... npm publish \`\`\`
+
+
+相关：[[gulpjs|gulpjs]]

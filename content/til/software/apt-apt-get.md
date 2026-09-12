@@ -24,3 +24,6 @@ header: Linux
 - [Wikipedia: APT (software)](https://en.wikipedia.org/wiki/APT_(software)) — 1997 Deity 项目始, `apt` / `apt-get` / `apt-cache` 三者并列
 - [Debian Wiki: AptCLI](https://wiki.debian.org/AptCLI) — "apt: good for manual install, apt-get: good for scripts"
 - [apt(8) — Differences to apt-get(8)](https://man7.org/linux/man-pages/man8/apt.8.html)
+
+
+相关：[[debian-arch-philosophy|debian-arch-philosophy]]

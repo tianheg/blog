@@ -11,3 +11,6 @@ Here are some tools I used:
 
 - <https://github.com/dylanaraps/neofetch>
 - <https://github.com/tabrindle/envinfo>
+
+
+相关：[[what-will-happen-with-dotnew|what-will-happen-with-dotnew]]

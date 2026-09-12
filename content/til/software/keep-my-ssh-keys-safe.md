@@ -12,3 +12,6 @@ Use this command
 ```bash
 ssh-keygen -t ed25519 -a 256 -C "xxx@xxx"
 ```
+
+
+相关：[[git-ssh-signing-key|git-ssh-signing-key]]

@@ -13,3 +13,5 @@ https://manateelazycat.github.io/2025/10/22/learn-python/
 
 
 相关：[[python-dict-last-key|python-dict-last-key]]
+
+相关：[[implement-gpt-with-x|implement-gpt-with-x]]

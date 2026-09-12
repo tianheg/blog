@@ -186,3 +186,5 @@ Dunning--Kruger effect------关于自我能力的判断的认知偏差。
 相关：[[ai-treadmill-fomo|ai-treadmill-fomo]]
 
 相关：[[life-philosophy|life-philosophy]]
+
+相关：[[persian-messenger-syndrome|persian-messenger-syndrome]]

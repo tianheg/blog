@@ -44,3 +44,6 @@ console.log(process.env.NEXT_PUBLIC_URL);
 // Output preview: https://random-url.vercel.app
 // Output production: https://your-website.com
 ```
+
+
+相关：[[cannot-use-ejs|cannot-use-ejs]]

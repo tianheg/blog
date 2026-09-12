@@ -13,3 +13,8 @@ TIL (Today I Learned) 关于跨境资金流动的一个关键门槛：
 ## 参考
 - [反洗钱 - 维基百科](https://zh.wikipedia.org/wiki/%E5%8F%8D%E6%B4%97%E9%92%B1)
 - [大额交易和可疑交易报告 - 维基百科](https://zh.wikipedia.org/wiki/%E5%A4%A7%E9%A2%9D%E5%8F%AF%E7%96%91%E4%BA%A4%E6%98%93%E6%8A%A5%E5%91%8A)
+
+
+相关：[[go-abroad-from-china|go-abroad-from-china]]
+
+相关：[[icbc-money-exchange|icbc-money-exchange]]

@@ -13,3 +13,6 @@ BIND (Berkeley Internet Name Domain) is an implementation of the Domain Name Sys
 2. [BIND - ArchWiki](https://wiki.archlinux.org/title/BIND)
 3. [Two-in-one DNS server with BIND9](https://www.howtoforge.com/two_in_one_dns_bind9_views)
 4. <https://web.archive.org/web/20081227005143/http://gnudip2.sourceforge.net/gnudip-www/latest/gnudip/html/owndomain.html>
+
+
+相关：[[dns|dns]]

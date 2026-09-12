@@ -67,3 +67,6 @@ Routing 指一个应用如何响应客户端对特定端点的请求，这个端
 在一个 Cookie 中进行计数操作
 
 [<sup>1</sup>]: <https://stackoverflow.com/a/54114725/12539782> [<sup>2</sup>]: <https://en.wikipedia.org/wiki/Middleware> [<sup>3</sup>]: <https://web.archive.org/web/20050507151935/http://middleware.objectweb.org/>
+
+
+相关：[[middleware|middleware]]

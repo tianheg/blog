@@ -767,3 +767,5 @@ eval 的别名调用
 相关：[[js-oop|js-oop]]
 
 相关：[[js-ternary-operator|js-ternary-operator]]
+
+相关：[[javascript|javascript]]

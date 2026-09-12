@@ -26,3 +26,6 @@ header: Linux
 ## `adduser`
 
 `adduser` provides a high level interface for adding new users, and `useradd` provides a low level interface.
+
+
+相关：[[db-mysql-reset-or-change-root-passwd|db-mysql-reset-or-change-root-passwd]]

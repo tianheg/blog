@@ -8,3 +8,8 @@ header: Society
 这真是太糟糕了
 
 [Exposed: China’s growing hidden camera porn industry - BBC World Service Documentaries - YouTube](https://www.youtube.com/watch?v=yYhwEYnvdIo)
+
+
+相关：[[those-companies|those-companies]]
+
+相关：[[sexual-abuse|sexual-abuse]]

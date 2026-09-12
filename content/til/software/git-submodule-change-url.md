@@ -13,3 +13,5 @@ git submodule sync ```
 
 
 相关：[[git-sync-with-upstream|git-sync-with-upstream]]
+
+相关：[[git-edit-specific-commit-message|git-edit-specific-commit-message]]

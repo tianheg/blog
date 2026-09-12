@@ -8,3 +8,6 @@ header: Tools
 <https://stackoverflow.com/a/16556534/12539782>
 
 \`\`\`sh > ALTER USER 'root'@'localhost' IDENTIFIED BY 'YOURNEWPASSWORD'; \`\`\`
+
+
+相关：[[mariadb-change-user-root-pass|mariadb-change-user-root-pass]]

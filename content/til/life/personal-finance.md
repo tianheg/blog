@@ -31,3 +31,5 @@ header: Finance
 
 
 相关：[[money|money]]
+
+相关：[[financial-freedom-vs-wealth-freedom|financial-freedom-vs-wealth-freedom]]

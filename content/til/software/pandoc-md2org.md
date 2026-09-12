@@ -8,3 +8,6 @@ header: Tools
 ```bash
 pandoc input.md -f markdown -t org | sed -e '/^:PROPERTIES:/,/^:END:/d' > output.org
 ```
+
+
+相关：[[emacs-find-file-at-point|emacs-find-file-at-point]]

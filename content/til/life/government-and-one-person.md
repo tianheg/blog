@@ -26,3 +26,6 @@ https://caminodetexas.substack.com/p/ae3
 有人对“北京共识”总结出五条：一是渐进改革，二是实验创新，三是出口拉动增长，四是国家资本主义，五是威权政治。这大致是以倡导自由市场资本主义的所谓“华盛顿共识”的对立面。 Someone has summarized the "Beijing Consensus" into five points: gradual reform, experimental innovation, export-driven growth, state capitalism, and authoritarian politics. This is roughly the opposite of the so-called "Washington Consensus" that advocates for free-market capitalism.
 
 国内的教育是个阉割常识的过程，加上社会氛围刺激人性中的贪婪，让很多心智并不太低的国人养成一种“缺少常识的贪婪”性格。一个简单的例子，李嘉诚大面积撤资的时候，很多人还在中国房子上押宝下注，而且嘲笑李错过了国内后面几次不动产涨价的机会。 Domestic education is a process that castrates common sense, coupled with a social atmosphere that stimulates greed in human nature, causing many intellectually capable Chinese people to develop a character of "greed without common sense." A simple example is when Li Ka-shing withdrew a large amount of investment, many people were still betting on Chinese real estate and even mocked Li for missing several opportunities for property price increases in China.
+
+
+相关：[[interview-with-xiang-biao-the-war-between-russia-and-ukraine-and-its-daily-significance|interview-with-xiang-biao-the-war-between-russia-and-ukraine-and-its-daily-significance]]

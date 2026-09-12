@@ -64,3 +64,6 @@ Rust
 AssemblyScript
 
 <https://www.assemblyscript.org/>
+
+
+相关：[[simple-tutorial-about-wasm|simple-tutorial-about-wasm]]

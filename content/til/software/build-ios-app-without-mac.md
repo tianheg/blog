@@ -15,3 +15,6 @@ https://www.iphonedevelopers.co.uk/2023/08/the-complete-guide-to-build-ios-app-o
 ---
 
 - https://www.youtube.com/watch?v=NRuW223LY58 ( https://codemagic.io/start/ )
+
+
+相关：[[ipad9|ipad9]]

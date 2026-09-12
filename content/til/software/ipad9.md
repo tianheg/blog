@@ -22,3 +22,6 @@ http://ipadwallpapergallery.com/ https://wallpapercave.com/4k-ipad-wallpapers
 Code https://www.textasticapp.com/ https://blink.sh/ https://koderapp.com/ http://omz-software.com/pythonista/ https://workingcopyapp.com/ https://holzschu.github.io/a-Shell_iOS/ Carnets - Jupyter (with scipy) Pyto - Python 3
 
 Emacs with iPad https://andyleejordan.com/posts/emacs-on-an-ipad/
+
+
+相关：[[shortcuts|shortcuts]]

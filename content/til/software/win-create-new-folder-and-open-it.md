@@ -27,3 +27,6 @@ if exist "%desktop%\%foldername%" (
 timeout /t 2 >nul
 exit
 ```
+
+
+相关：[[win-swap-caps-lock-and-left-ctrl|win-swap-caps-lock-and-left-ctrl]]

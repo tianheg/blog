@@ -317,3 +317,10 @@ Sinclair 也对比了一些上个世纪失败的研究，比如通过抗氧化�
 展望一下 longevity 研究的未来，还是挺激动人心的。现代科学每一年能让我们的平均寿命延长 1/4 年，如果每一年能让我们的平均寿命延长超过 1 年，则达到了*寿命”逃逸速度”*（类比以 1000 英里每小时的速度往西飞行，太阳永远不会落下），实现了”永生”。著名的未来学家 Ray Kurzweil 预测，大约 12 年后（2034 年）就能实现，让我们拭目以待。
 
 除了这集 podcast，也必须附上吴承霖大佬的万星项目 [程序员延寿指南](https://github.com/geekan/HowToLiveLonger)。
+
+
+相关：[[laptop-maintenance|laptop-maintenance]]
+
+相关：[[run|run]]
+
+相关：[[cocoa|cocoa]]

@@ -161,3 +161,6 @@ header: Lifestyle
 今天就把上表打印出来，一项项打钩，把人生从“串联”改成“并联”——
 
 哪怕只拔掉一个雷，你就在概率上先活过了一批人。
+
+
+相关：[[amazon-bill-problem|amazon-bill-problem]]

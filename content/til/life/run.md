@@ -131,3 +131,8 @@ https://www.douban.com/group/topic/258858314/?_i=9816887NYOt6Da
 跑步时单腿触地和离地时（会有两次冲击），脚最大的垂直地面作用力（Peak Vertical Ground Response Force）可以达到体重的 2.5 到 3 倍。https://twitter.com/Svwang1/status/1657100374996836352
 
 推荐书籍：[The Run-Walk-Run Method by Jeff Galloway | Goodreads](https://www.goodreads.com/en/book/show/16256632)
+
+
+相关：[[marathon-terms|marathon-terms]]
+
+相关：[[buy-clothes-dressing|buy-clothes-dressing]]

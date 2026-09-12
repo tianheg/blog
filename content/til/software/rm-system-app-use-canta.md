@@ -9,3 +9,6 @@ header: Tools
 2. Install Canta
 
 Other resource https://github.com/timschneeb/awesome-shizuku
+
+
+相关：[[android-install-latest-google-play-store-apk|android-install-latest-google-play-store-apk]]

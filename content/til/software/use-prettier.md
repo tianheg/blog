@@ -52,3 +52,8 @@ header: Web
 ## API
 
 <https://prettier.io/docs/en/api.html>
+
+
+相关：[[okonet-lint-staged|okonet-lint-staged]]
+
+相关：[[use-pnpm|use-pnpm]]
