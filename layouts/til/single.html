@@ -6,7 +6,7 @@
 
   {{/* --- Title --- */}}
   <h1 class="text-2xl font-bold text-gray-900 dark:text-gray-100 mb-2">
-    {{ partial "til/status" . }}{{ partial "functions/get-title" (dict "page" .) }}
+    {{ partial "functions/get-title" (dict "page" .) }}
   </h1>
 
   {{/* --- Header badge --- */}}
@@ -28,11 +28,11 @@
     {{ partial "content/render-content" .Content }}
   </div>
 
-  {{/* --- Backlinks (server-side, from functions/backlink-index.html) --- */}}
-  {{ partial "content/backlinks.html" . }}
-
-  {{/* --- 语义相关笔记（data/related.json，构建前预生成） --- */}}
-  {{ partial "content/related.html" . }}
+  {{/* --- 关系区：宽屏在右栏（边读边见），窄屏留在正文底部 --- */}}
+  <div class="xl:hidden">
+    {{ partial "content/backlinks.html" . }}
+    {{ partial "content/related.html" . }}
+  </div>
 </article>
 
 {{ end }}
@@ -46,4 +46,10 @@
     {{ .TableOfContents }}
   </nav>
   {{ end }}
+
+  {{/* 关系区（宽屏专用，窄屏的同名区块在正文底部） */}}
+  <div class="til-aside">
+    {{ partial "content/backlinks.html" . }}
+    {{ partial "content/related.html" . }}
+  </div>
 {{ end }}

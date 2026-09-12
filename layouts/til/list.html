@@ -36,10 +36,8 @@
       <summary class="cursor-pointer px-4 py-3 text-sm font-medium text-gray-700 dark:text-gray-300 select-none">状态与维护</summary>
       <div class="px-4 pb-4 space-y-3 text-sm text-gray-600 dark:text-gray-400 leading-relaxed">
         <p>
-          <span class="inline-block align-baseline text-[11px] font-medium px-1.5 py-[1px] rounded bg-amber-50 text-amber-700 dark:bg-amber-900/25 dark:text-amber-300 mr-1">draft</span>
-          AI 整理或随手记的，未复核。
-          <span class="inline-block align-baseline text-[11px] font-medium px-1.5 py-[1px] rounded bg-emerald-50 text-emerald-700 dark:bg-emerald-900/25 dark:text-emerald-300 mx-1">reviewed</span>
-          我亲手过、能用自己的话复述的。
+          <code class="text-xs">draft</code> = AI 整理或随手记的，未复核；<code class="text-xs">reviewed</code> = 我亲手过、能用自己的话复述的。
+          <span class="text-gray-500 dark:text-gray-400">状态不显示在页面上，只用于本地统计与转正队列。</span>
         </p>
         <p>
           <strong class="font-medium">转正</strong>：复核一篇 draft → 改 <code class="text-xs">status</code>，并补一句与已有笔记的关系（<code class="text-xs">[[文件名|显示文字]]</code>，比写路径抗改名）。
@@ -97,7 +95,7 @@
         <a href="{{ .RelPermalink }}"
            class="group flex items-baseline justify-between gap-4 py-2 px-3 -mx-3 rounded-md transition-colors hover:bg-gray-50 dark:hover:bg-gray-800/40">
           <span class="text-[15px] text-gray-800 dark:text-gray-200 group-hover:text-emerald-600 dark:group-hover:text-emerald-400 transition-colors">
-            {{- partial "til/status" . -}}{{ partial "functions/get-title" (dict "page" .) }}
+            {{ partial "functions/get-title" (dict "page" .) }}
           </span>
           {{ if not .Date.IsZero }}
           <span class="text-xs text-gray-400 dark:text-gray-500 shrink-0 tabular-nums">{{ .Date.Format "2006-01-02" }}</span>
@@ -123,7 +121,7 @@
         <a href="{{ .RelPermalink }}"
            class="group flex items-baseline justify-between gap-4 py-2 px-3 -mx-3 rounded-md transition-colors hover:bg-gray-50 dark:hover:bg-gray-800/40">
           <span class="text-[15px] text-gray-800 dark:text-gray-200 group-hover:text-emerald-600 dark:group-hover:text-emerald-400 transition-colors">
-            {{- partial "til/status" . -}}{{ partial "functions/get-title" (dict "page" .) }}
+            {{ partial "functions/get-title" (dict "page" .) }}
           </span>
           {{ if not .Date.IsZero }}
           <span class="text-xs text-gray-400 dark:text-gray-500 shrink-0 tabular-nums">{{ .Date.Format "2006-01-02" }}</span>
@@ -162,7 +160,7 @@
       <a href="{{ .RelPermalink }}"
          class="group flex items-baseline justify-between gap-4 py-2 px-3 -mx-3 rounded-md transition-colors hover:bg-gray-50 dark:hover:bg-gray-800/40">
         <span class="text-[15px] text-gray-800 dark:text-gray-200 group-hover:text-emerald-600 dark:group-hover:text-emerald-400 transition-colors">
-          {{- partial "til/status" . -}}{{ partial "functions/get-title" (dict "page" .) }}
+          {{ partial "functions/get-title" (dict "page" .) }}
         </span>
         {{ if not .Date.IsZero }}
         <span class="text-xs text-gray-400 dark:text-gray-500 shrink-0 tabular-nums">{{ .Date.Format "2006-01-02" }}</span>

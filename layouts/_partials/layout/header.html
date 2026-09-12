@@ -4,6 +4,14 @@
     {{ .Site.Title }}
   </a>
 
+  <div class="flex items-center gap-4">
+  {{/* 命令面板入口（⌘K） */}}
+  <button type="button" data-cmdk-open
+    class="p-1.5 rounded-md text-gray-400 dark:text-gray-500 hover:text-gray-900 dark:hover:text-gray-100 transition-colors cursor-pointer"
+    aria-label="搜索与跳转（⌘K）" title="搜索与跳转（⌘K）">
+    <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="11" cy="11" r="8"/><path d="m21 21-4.3-4.3"/></svg>
+  </button>
+
   {{/* Desktop navigation — always visible above sm breakpoint */}}
   <nav class="hidden sm:flex items-center gap-6">
     {{ range .Site.Menus.main }}
@@ -19,7 +27,7 @@
 
   {{/* Mobile hamburger button — hidden above sm */}}
   <button id="menu-btn"
-    class="sm:hidden ml-auto p-2 rounded-md focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-blue-500"
+    class="sm:hidden p-2 rounded-md focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-blue-500"
     aria-label="Menu" aria-expanded="false">
     <svg class="w-6 h-6 text-gray-700 dark:text-gray-300" fill="none" stroke="currentColor" viewBox="0 0 24 24">
       {{/* Three horizontal lines — visible when collapsed */}}
@@ -31,6 +39,7 @@
       <path class="menu-x hidden" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 6l12 12"/>
     </svg>
   </button>
+  </div>
 </div>
 
 {{/* Mobile menu panel — shown below header when hamburger is toggled */}}

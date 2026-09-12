@@ -109,6 +109,7 @@
 
   <!-- Scripts (exclude 404 page) -->
   {{ if ne .Kind "404" }}
+    {{- partialCached "components/command-palette.html" . "cmdk" -}}
     {{- partial "head/scripts.html" . -}}
 
     <!-- Inlined: mobile menu + back-to-top (was TS components) -->
