@@ -65,7 +65,19 @@
 html {
   scroll-behavior: smooth;
   overflow-x: hidden;
+  /* CJK 排版三件套（2026 Baseline）：中英文自动间距 + 标点收紧。
+     需要 <html lang="zh"> 配合（本站已有），否则部分规则不生效。 */
+  text-autospace: normal;
+  text-spacing-trim: trim-start;
 }
+
+/* Safari 26 / Firefox 尚无 text-spacing-trim，用 OpenType 半宽变体兜底 */
+@supports not (text-spacing-trim: trim-start) {
+  body { font-feature-settings: "halt" 1; }
+}
+
+/* 代码块里关掉自动间距，否则等宽字体被撑开 */
+pre, code, kbd, samp { text-autospace: no-autospace; }
 
 @media (prefers-reduced-motion: reduce) {
   html { scroll-behavior: auto; }
@@ -78,7 +90,11 @@ html {
 }
 
 body {
-  font-family: "Satoshi", -apple-system, system-ui, BlinkMacSystemFont, "Noto Serif SC", Arial, "Hiragino Sans GB", "Microsoft Yahei", "ST Heiti", sans-serif;
+  /* 拉丁走 Satoshi，中文显式指定黑体（原栈里 system-ui 会先命中，
+     且 "Noto Serif SC" 排在 Arial 之后基本不会生效，中文字形不可控） */
+  font-family: "Satoshi", -apple-system, BlinkMacSystemFont, "PingFang SC",
+    "Hiragino Sans GB", "Noto Sans SC", "Source Han Sans SC", "Microsoft YaHei",
+    "WenQuanYi Micro Hei", Arial, sans-serif;
   overflow-wrap: break-word;
   background-color: var(--color-base-100);
   color: var(--color-base-content);
