@@ -23,3 +23,5 @@ header: Lifestyle
 
 
 相关：[[get-rid-of-single|get-rid-of-single]]
+
+相关：[[avoid-being-hit-by-car|avoid-being-hit-by-car]]

@@ -49,3 +49,6 @@ date: 2026-07-19T10:51:38+08:00
 - Carta S, et al. (2026) PLoS Biol 24(7): e3003876
 - [原文](https://journals.plos.org/plosbiology/article?id=10.1371/journal.pbio.3003876)
 - [数据和代码](https://zenodo.org/records/20569817)
+
+
+相关：[[uncertainty-certainty-science|uncertainty-certainty-science]]

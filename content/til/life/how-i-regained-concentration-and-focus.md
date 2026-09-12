@@ -68,3 +68,6 @@ header: Lifestyle
 ---
 
 作者从别人那里得到 <https://unhook.app/> （Remove YouTube Recommended Videos）
+
+
+相关：[[disease|disease]]

@@ -182,3 +182,7 @@ Dunning--Kruger effect------关于自我能力的判断的认知偏差。
 
 
 相关：[[how-i-regained-concentration-and-focus|how-i-regained-concentration-and-focus]]
+
+相关：[[ai-treadmill-fomo|ai-treadmill-fomo]]
+
+相关：[[life-philosophy|life-philosophy]]

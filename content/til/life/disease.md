@@ -26,3 +26,6 @@ header: Lifestyle
 懒惰→肾上腺素→高强度短暂运动
 
 拖延症→多巴胺→设定小目标并立即行动
+
+
+相关：[[life-stay-active|life-stay-active]]

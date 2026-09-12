@@ -62,3 +62,6 @@ In the past, people spoke as if they were writing formally; now, people write as
 不打扰是最大的温柔，不打扰别人正在进行的谈话，不打扰别人正在做的事情。不打扰是一种自律，是一种处事方式。
 
 我好为人师（贬义）。
+
+
+相关：[[innovation-environment|innovation-environment]]

@@ -69,3 +69,6 @@ date: 2026-07-24T16:34:37+08:00
 - [Hogg (2007). Uncertainty-identity theory. Advances in Experimental Social Psychology.](https://psycnet.apa.org/record/2007-19539-002)
 - [Kruglanski: Need for Closure Scale (NFCS)](https://www.kruglanskiarie.com/need-for-closure)
 - [Compensatory Control Theory and Meritocracy. JSPP.](https://jspp.psychopen.eu/index.php/jspp/article/download/4795/4795.html)
+
+
+相关：[[brain-signal-proteins-evolved-before-animals-did|brain-signal-proteins-evolved-before-animals-did]]

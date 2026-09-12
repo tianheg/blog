@@ -238,3 +238,6 @@ RTX5060
 - [Linux Hardware Database](https://linux-hardware.org/)
 - [图吧工具箱](https://www.tbtool.cn/)
 - [CPU Benchmark: Single Compare](https://www.cpubenchmark.net/singleCompare.php)
+
+
+相关：[[how-to-buy-u-disk|how-to-buy-u-disk]]

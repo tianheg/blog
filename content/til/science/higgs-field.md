@@ -55,3 +55,10 @@ date: 2026-06-08T01:16:43+08:00
 ## 参考
 - [CERN: The Higgs boson](https://home.cern/science/physics/higgs-boson/what)
 - [Wikipedia: Higgs boson](https://en.wikipedia.org/wiki/Higgs_boson)
+
+
+相关：[[einstein-rosen-bridge|einstein-rosen-bridge]]
+
+相关：[[magnetar|magnetar]]
+
+相关：[[hallucinogen|hallucinogen]]

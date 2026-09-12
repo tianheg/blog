@@ -16,3 +16,6 @@ Wealth freedom, however, is a more expansive and sophisticated concept. It exten
 Significant Assets: Owning a substantial amount of assets that go beyond daily necessities. Diversified Income Streams: Having a diverse range of income sources, including but not limited to investments and business ownership. Quality of Life: Being capable of sustaining a high standard of living and having ample resources for societal contributions.
 
 In essence, financial freedom is more focused on having "enough" money, while wealth freedom is about living a life of "freedom." For most individuals, achieving financial freedom is the stepping stone to pursuing wealth freedom.
+
+
+相关：[[beancount|beancount]]

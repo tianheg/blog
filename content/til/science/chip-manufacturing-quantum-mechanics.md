@@ -33,3 +33,8 @@ date: 2026-06-04T15:32:30+08:00
 - 共振隧穿二极管（RTD）：某些新型器件利用共振隧穿做高频开关
 
 **所以：** 量子力学的隧穿效应，既是让先进制程举步维艰的"物理之墙"，也是让NAND闪存能存住数据的"魔法之手"。这不是未来的科学——它就在你口袋里，每天发生几亿亿次。
+
+
+相关：[[quantum-computer|quantum-computer]]
+
+相关：[[solid-state-battery-technology-breakthrough|solid-state-battery-technology-breakthrough]]

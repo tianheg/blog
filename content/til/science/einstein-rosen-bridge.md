@@ -35,3 +35,6 @@ date: 2026-06-17T08:18:18+08:00
 - 1970年代 John Wheeler 推广了"wormhole"这个名字
 - 1988年 Kip Thorne 团队才找到可穿越虫洞的数学解，但需要奇异物质
 - 所有虫洞目前都是科幻素材，没有天文观测证据
+
+
+相关：[[chip-manufacturing-quantum-mechanics|chip-manufacturing-quantum-mechanics]]

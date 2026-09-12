@@ -14,3 +14,6 @@ date: 2026-03-23T07:57:53+08:00
 目前，许多厂商会把兼顾VR沉浸感与MR交互能力的产品称为MR（混合现实）头显，而主打信息提示、外形接近普通眼镜的产品则称为AR眼镜。
 
 从融合程度排序：VR < AR < MR。
+
+
+相关：[[auditory-attention-switching-dual-stream|auditory-attention-switching-dual-stream]]

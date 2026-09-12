@@ -78,3 +78,5 @@ header: Lifestyle
 相关：[[stories|stories]]
 
 相关：[[how-to-improve-aesthetics|how-to-improve-aesthetics]]
+
+相关：[[personal-finance|personal-finance]]

@@ -27,3 +27,6 @@ GRAVITY+ 合作组用 ESO 甚大望远镜干涉仪（VLTI）的 GRAVITY 仪器�
 ## 参考
 - [Nature: Discovery of a star sensitive to the spin of Sagittarius A*](https://www.nature.com/articles/s41586-026-10894-w)
 - [科学网：银河系运行速度最快的恒星发现](https://news.sciencenet.cn/htmlnews/2026/8/570129.shtm)
+
+
+相关：[[bortle-scale|bortle-scale]]

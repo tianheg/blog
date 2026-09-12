@@ -97,3 +97,8 @@ objects）。抽象对象并不依赖于时间和空间而存在，因此既非�
 4. [古希腊哲学 - 维基百科，自由的百科全书](https://zh.wikipedia.org/wiki/%E5%8F%A4%E5%B8%8C%E8%85%8A%E5%93%B2%E5%AD%A6)
 5. [柏拉图主义 - 维基百科，自由的百科全书](https://zh.wikipedia.org/wiki/%E6%9F%8F%E6%8B%89%E5%9B%BE%E4%B8%BB%E4%B9%89)
 6. [亚里士多德主义 - 维基百科，自由的百科全书](https://zh.wikipedia.org/wiki/%E4%BA%9E%E9%87%8C%E6%96%AF%E5%A4%9A%E5%BE%B7%E4%B8%BB%E7%BE%A9)
+
+
+相关：[[shanyi-shuo-women-and-cinema|shanyi-shuo-women-and-cinema]]
+
+相关：[[celtic-mythology|celtic-mythology]]

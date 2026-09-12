@@ -116,3 +116,5 @@ N 个思想钢印。
 相关：[[thirteen-talks-luo-zhenyu|thirteen-talks-luo-zhenyu]]
 
 相关：[[talk-about-independent-thinking|talk-about-independent-thinking]]
+
+相关：[[three-layer-needs-model|three-layer-needs-model]]
