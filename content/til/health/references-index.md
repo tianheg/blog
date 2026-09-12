@@ -15,6 +15,10 @@ date: 2026-07-08T20:33:17+08:00
 | **万方医学网** | 中文医学期刊、学位论文、临床指南一站式检索平台。 | [med.wanfangdata.com.cn](https://med.wanfangdata.com.cn/) |
 | **中华医学期刊网** | 中华医学会杂志社官方平台，汇聚国内优质医学期刊。 | [medjournals.cn](https://www.medjournals.cn/index.do) |
 | **医脉通** | 医生学术助手，提供疾病诊疗知识、病例讨论、医学文献检索。 | [medlive.cn](https://medlive.cn/) |
+| **Cochrane Library** | 系统综述与循证医学的金标准数据库，独立、高质量的证据汇总，用于指导临床决策。 | [cochranelibrary.com](https://www.cochranelibrary.com/) |
+| **Trip Medical Database** | 循证医学搜索引擎，直接命中系统综述、临床指南与同行评审文献，比通用搜索更精准。 | [tripdatabase.com](https://tripdatabase.com/) |
+| **Drugs.com** | 收录 24,000+ 处方药、非处方药与天然药物的信息库，经同行评审、来源可溯。 | [drugs.com](https://www.drugs.com/) |
+| **MediSearch** | 医疗 AI 搜索，用自然语言提医学问题，答案附文献引用。适合快速定位证据，不能替代临床判断。 | [medisearch.io](https://medisearch.io/) |
 
 ### 顶级医学期刊
 
@@ -32,13 +36,23 @@ date: 2026-07-08T20:33:17+08:00
 | **Figure 1** | 全球医疗专业人士的医学影像分享与病例讨论平台。 | [figure1.com](https://www.figure1.com/) |
 | **Radiopaedia** | 非营利性协作放射学资源库，涵盖数万病例和诊断指南。 | [radiopaedia.org](https://radiopaedia.org/) |
 | **epocrates** | 移动临床决策支持平台，提供即时药物信息查询（剂量、副作用、相互作用）。 | [epocrates.com](https://www.epocrates.com/) |
-| **MDCalc** | 医学计算器集合（BMI、肾功能、心血管风险评分等）。 | [mdcalc.com](https://www.mdcalc.com/) |
+| **MDCalc** | 医学计算器集合（BMI、肾功能、心血管风险评分等）。 | [www.mdcalc.com](https://www.mdcalc.com/) |
+| **Osmosis** | 3–10 分钟短视频讲透医学机制，讲解质量高，适合建立直觉。 | [osmosis.org](https://www.osmosis.org/) |
 
 ### 医学研究资讯
 
 | 来源 | 简介 | 链接 |
 | --- | --- | --- |
 | **StudyFinds** | 汇总最新同行评审研究的通俗解读，附原文链接。每周追踪 JAMA、NEJM、Nature 等期刊。 | [studyfinds.com](https://studyfinds.com/) |
+| **MedPage Today** | 医学会议实时快讯（ACC / ASH / ADA 等）+ 专家视频访谈，全部免费。 | [medpagetoday.com](https://www.medpagetoday.com/) |
+
+### 健康数据与支持
+
+| 来源 | 简介 | 链接 |
+| --- | --- | --- |
+| **Intervals.icu** | 运动数据分析平台，可接入 Strava / Garmin / Wahoo 等，做训练负荷与恢复分析。 | [intervals.icu](https://intervals.icu/) |
+| **Befrienders Worldwide** | 全球自杀预防与情绪支持热线索引，按地区查找可拨打的中心。 | [befrienders.org](https://befrienders.org/) |
+| **The Art of Manliness** | 实用导向的男性生活与自我提升内容，少废话。 | [artofmanliness.com](https://www.artofmanliness.com/) |
 
 ### 来自 Linkding 的精选文章
 
@@ -89,9 +103,10 @@ Mass General 研究（JAMA Network Open, 2026），AI 算法分析 58 家医院 
 
 **脑部扫描显示抑郁症可分为短期和长期两种类型**
 
-巴西圣保罗大学与牛津大学联合研究（2026）：
-- 46 名抑郁症患者的脑功能网络扫描发现
-- 长期抑郁（> 2 年）与短期抑郁的脑网络通信模式呈相反规律
+巴西圣保罗大学与牛津大学联合研究（2026），46 名抑郁症患者的脑功能网络扫描：
+- **长期抑郁（> 2 年）与短期抑郁在大脑网络通信模式上呈现相反规律**
+- 短期患者症状越重，CEN（中央执行网络）与 DMN（默认模式网络）之间的通信**越弱**
+- 慢性患者则相反：症状越重，两者通信**越强**
 - 为个体化治疗提供了影像学依据
 
 **来源** ：[studyfinds.com](https://studyfinds.com/depression-short-long-term/)
