@@ -31,3 +31,8 @@ git merge --abort
 【警告】会丢弃已解决的冲突修改，谨慎使用
 
 【提示】如果合并已经完成（已提交），需要使用 `git reset` 回退
+
+
+相关：[[git-merge-rebase|git-merge-rebase]]
+
+相关：[[git-delete-submodule|git-delete-submodule]]

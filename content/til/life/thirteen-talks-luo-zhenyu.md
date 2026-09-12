@@ -30,3 +30,6 @@ header: Lifestyle
 ---
 
 这个时代不允许你去体察那么深的情感。因为情感其实是对世界分崩离析的依依不舍。任何情感本质都是，是在对世界分化过程当中产生的一种东西。
+
+
+相关：[[talk-with-people|talk-with-people]]

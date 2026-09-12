@@ -189,3 +189,6 @@ bird.fly() plane.fly() ```
 使用 IIFE 创建模块
 
 \`\`\`js let funModule = (function () { return { isCuteMixin: function (obj) { obj.isCute = function () { return true } }, singMixin: function (obj) { obj.sing = function () { console.log('Singing to an awesome tune') } }, } })() \`\`\`
+
+
+相关：[[js-factory-function|js-factory-function]]

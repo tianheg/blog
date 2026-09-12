@@ -8,3 +8,8 @@ header: Linux
 \`\`\`bash echo $PATH | tr ':' '\n' \`\`\`
 
 让环境变量按行显示。
+
+
+相关：[[linux-orders|linux-orders]]
+
+相关：[[linux-driver|linux-driver]]

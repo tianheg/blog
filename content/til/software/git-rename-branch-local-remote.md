@@ -14,3 +14,6 @@ git push origin --delete <old-name> # or git push origin :<old-name>
 git push origin <new-name>
 
 git push origin -u <new-name> ```
+
+
+相关：[[git-delete-branch-locally-remotely|git-delete-branch-locally-remotely]]

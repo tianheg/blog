@@ -10,3 +10,6 @@ header: Git
 \`\`\`bash
 
 git submodule sync ```
+
+
+相关：[[git-sync-with-upstream|git-sync-with-upstream]]

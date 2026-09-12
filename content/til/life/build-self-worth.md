@@ -57,3 +57,6 @@ header: Lifestyle
 [^1]: <https://opentextbc.ca/socialpsychology/chapter/the-cognitive-self-the-self-concept/>
 
 [^2]: <https://blogs.scientificamerican.com/scicurious-brain/the-superiority-illusion-where-everyone-is-above-average/>
+
+
+相关：[[upward-growth|upward-growth]]

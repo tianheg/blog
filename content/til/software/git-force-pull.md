@@ -10,3 +10,6 @@ header: Git
 \`\`\`bash git remote -v
 
 git reset --hard upstream/master ```
+
+
+相关：[[git-rename-origin|git-rename-origin]]

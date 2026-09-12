@@ -14,3 +14,6 @@ header: Household
   - 底部防潮：衣柜底部放置防水垫或垫高
 - 天然吸湿剂：干茶叶（如绿茶）用纱布或报纸包好，或放置晒干的橘子皮，放在衣柜角落，吸湿除味
 - 表面防护：定期为木制衣柜打蜡或涂抹专用精油。漆面破损可重新刷防霉清漆
+
+
+相关：[[amazfit-watch-cleaning-and-care-instructions|amazfit-watch-cleaning-and-care-instructions]]

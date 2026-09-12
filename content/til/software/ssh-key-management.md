@@ -87,3 +87,6 @@ The `keychain` utility manages `ssh-agent` and persists keys across sessions:
 ---
 
 By understanding these scenarios, you can streamline SSH key usage and reduce the need for manual `ssh-add` commands.
+
+
+相关：[[ssh-tips-and-tricks|ssh-tips-and-tricks]]

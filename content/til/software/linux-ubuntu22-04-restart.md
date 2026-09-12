@@ -12,3 +12,10 @@ header: Linux
 sudo shutdown -r
 
 init 0 ```
+
+
+相关：[[linux-ubuntu22-04-remove-snap|linux-ubuntu22-04-remove-snap]]
+
+相关：[[linux-change-user-s-default-shell|linux-change-user-s-default-shell]]
+
+相关：[[linux-autoenable-bluetooth-linux|linux-autoenable-bluetooth-linux]]

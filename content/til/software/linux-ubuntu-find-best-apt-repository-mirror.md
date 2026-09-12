@@ -15,3 +15,6 @@ header: Linux
 通过以下命令可以得到自己当前 IP 的 Ubuntu 镜像地址：
 
 \`\`\`sh wget -qO - mirrors.ubuntu.com/mirrors.txt \`\`\`
+
+
+相关：[[linux-ubuntu22-04-install-lamp-and-https|linux-ubuntu22-04-install-lamp-and-https]]

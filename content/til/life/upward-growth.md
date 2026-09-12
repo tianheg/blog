@@ -216,3 +216,10 @@ header: Lifestyle
 9. [时间管理，从折磨到享受](https://mp.weixin.qq.com/s/Zba7jkjOssfCYYIWhpSJ-g)
 10. [谈谈消费升级](https://mp.weixin.qq.com/s/5cZe28qp22XG21WGaGRHNw)
 11. [人人都有认知障](https://mp.weixin.qq.com/s/eO7mVliAl8CwYnGV1FwtJg)
+
+
+相关：[[opinion|opinion]]
+
+相关：[[where-does-tolerance-come-from|where-does-tolerance-come-from]]
+
+相关：[[greats|greats]]

@@ -119,3 +119,6 @@ JavaScript 中，正则对象上的函数是有状态的，这使得这些方法
 1. Object destructuring syntax
 
 解构赋值时给变量起别名的语法有点让人费解，虽然这并不能算作是设计失误（毕竟很多其他语言也这么做），但毕竟不算直观。
+
+
+相关：[[js-basics|js-basics]]

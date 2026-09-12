@@ -26,3 +26,10 @@ $ echo "$0" bash ```
 /bin/sh /bin/bash /usr/bin/bash /bin/rbash /usr/bin/rbash /usr/bin/sh /bin/dash /usr/bin/dash /usr/bin/tmux /usr/bin/screen ```
 
 通过 `type -a bash` 找到 bash 的所有位置。
+
+
+相关：[[linux-user|linux-user]]
+
+相关：[[linux-useful-command|linux-useful-command]]
+
+相关：[[linux-scp-cmd-cp-permission|linux-scp-cmd-cp-permission]]

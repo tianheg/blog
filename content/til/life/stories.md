@@ -84,3 +84,12 @@ maya 的故事，让我记忆深刻 <https://www.xiaoyuzhoufm.com/episode/612576
 ---
 
 [入职帆软一个半月有感](https://treecat.cn/%E5%85%A5%E8%81%8C%E5%B8%86%E8%BD%AF%E4%B8%80%E4%B8%AA%E5%8D%8A%E6%9C%88%E6%9C%89%E6%84%9F/)
+
+
+相关：[[how-learn|how-learn]]
+
+相关：[[kevin-kelly|kevin-kelly]]
+
+相关：[[guiding-principles-after-20-years-of-programming|guiding-principles-after-20-years-of-programming]]
+
+相关：[[life-words-from-freiheityu|life-words-from-freiheityu]]

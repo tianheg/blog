@@ -95,3 +95,6 @@ Edge（Chromium 内核没有 about:config，用启动参数）：右键快捷方
 
 ## 参考
 - [王志勇：流畅的系统和火狐浏览器](http://www.auiou.com/relevant/00002185.jsp)
+
+
+相关：[[buy-laptop|buy-laptop]]

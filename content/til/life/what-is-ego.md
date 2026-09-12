@@ -109,3 +109,10 @@ N 个思想钢印。
 3、如果还有精力和时间，保持运动的习惯。人生是马拉松，身体是革命的本钱。
 
 以上建议，不保你得到最好，更帮你做得更好。
+
+
+相关：[[build-self-worth|build-self-worth]]
+
+相关：[[thirteen-talks-luo-zhenyu|thirteen-talks-luo-zhenyu]]
+
+相关：[[talk-about-independent-thinking|talk-about-independent-thinking]]

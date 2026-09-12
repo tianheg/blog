@@ -7,3 +7,6 @@ header: Tools
 
 1. 从这里下载apkm压缩包， https://www.apkmirror.com/apk/google-inc/google-play-store/
 2. 通过ApkMirror Installer 安装
+
+
+相关：[[android11-use-private-dns|android11-use-private-dns]]

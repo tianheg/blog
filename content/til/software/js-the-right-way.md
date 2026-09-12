@@ -131,3 +131,12 @@ MV\* Patterns：
 ## Frameworks
 
 见[[til/software/coding|这里]]
+
+
+相关：[[js-design-error|js-design-error]]
+
+相关：[[js-functional-programming|js-functional-programming]]
+
+相关：[[js-containers|js-containers]]
+
+相关：[[js-async-sync|js-async-sync]]

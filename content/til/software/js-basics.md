@@ -760,3 +760,10 @@ eval 的别名调用
 79. Tiffany Brown, [An Introduction to IndexedDB](https://dev.opera.com/articles/introduction-to-indexeddb/)
 80. David Fahlander, [Breaking the Borders of IndexedDB](https://hacks.mozilla.org/2014/06/breaking-the-borders-of-indexeddb/)
 81. [HTML5 - IndexedDB](https://web.archive.org/web/20150716002214/http://www.tutorialspoint.com/html5/html5_indexeddb.htm)
+
+
+相关：[[js-debugging|js-debugging]]
+
+相关：[[js-oop|js-oop]]
+
+相关：[[js-ternary-operator|js-ternary-operator]]

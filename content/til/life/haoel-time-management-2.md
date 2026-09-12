@@ -117,3 +117,12 @@ hack
 - **"有得选 vs 没得选"** ：最怕的不是没退路，是"有得选但想不清楚"。想清楚的人，时间安排有方向感。
 - **全力以赴 ≠ 孤注一掷** ：尝试新领域时，用"学费"的心态去试错，而不是"赌身家"。这决定了你愿意为探索分配多少时间。
 - **连续成功的公式** ：时代红利 + 个人努力与方法论 + 勤奋。其中"方法论的实践"就需要时间管理来落地。
+
+
+相关：[[haoel-time-management-1|haoel-time-management-1]]
+
+相关：[[todo-list-not-good|todo-list-not-good]]
+
+相关：[[avoid-single-point-of-failure|avoid-single-point-of-failure]]
+
+相关：[[how-to-ask-questions-the-smart-way|how-to-ask-questions-the-smart-way]]

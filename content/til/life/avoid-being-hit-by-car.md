@@ -66,3 +66,6 @@ header: Lifestyle
 以及，看完这些建议之后你或许也意识到了接受一定的急救技能训练是非常有必要的，否则的话在施救和自救过程中会有很多错误操作。所以你可以专门花些时间寻找相关培训课程，具备一些上手操作的经验。
 
 最后，希望每个人都永远用不到这些知识，但也希望你能直面对危险的探讨与研究，因为这才是维护安全最有效的选择。还是那句话，意外无法被预测，但是安防意识和习惯可以减少伤害，带来生死之差。
+
+
+相关：[[protecting-yourself-against-unexpected-violence|protecting-yourself-against-unexpected-violence]]

@@ -20,3 +20,6 @@ header: Lifestyle
 六，不要屈服于外人没有事先支付合适代价，就想给你强加的压力，不管是显性的还是隐性的。一笔交易中，更着急的那一方必须要付出更多的代价。而不等对方付出代价就随便被外人的指挥棒引导，势必导致各方面资源的错配，自己的事业迟早会有重大损失。
 
 ——from [Twitter @Svwang1](https://twitter.com/Svwang1/status/1622008248659501057)
+
+
+相关：[[get-rid-of-single|get-rid-of-single]]

@@ -14,3 +14,6 @@ git submodule init git submodule update
 git submodule update --init
 
 git submodule update --init --recursive # 会 clone 所有子模块（也包括子模块的子模块） ```
+
+
+相关：[[git-submodule-change-url|git-submodule-change-url]]

@@ -24,3 +24,8 @@ header: Lifestyle
 引申之后，来自作者之前谈过的结论：决策的准确率被高估、容错率被低估。构建一个高容错率的决策系统，提高自己能承受的失误数量，在一个长期的生存游戏里至关重要。
 
 这是一个可以让自己更好 **自我演化** 的顶层设计。
+
+
+相关：[[what-is-ego|what-is-ego]]
+
+相关：[[tombkeeper-personal-development|tombkeeper-personal-development]]

@@ -155,3 +155,6 @@ sudo certbot --apache
 sudo systemctl status certbot.timer # active
 
 sudo certbot renew --dry-run ```
+
+
+相关：[[linux-ubuntu22-04-restart|linux-ubuntu22-04-restart]]

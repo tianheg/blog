@@ -34,3 +34,6 @@ header: Finance
 - 港卡：国安法后跨境资金数据极易被查，不推荐大额长期存放（「国际金融中心遗址」）
 
 来源: [经济衰退时代，我的资金出海避险方案 - r0k1s#i](https://weblog.contained.love/posts/its-my-money/)
+
+
+相关：[[cross-border-finance|cross-border-finance]]

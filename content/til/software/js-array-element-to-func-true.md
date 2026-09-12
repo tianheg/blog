@@ -41,3 +41,6 @@ console.log(findElement([1, 2, 3, 4], (num) => num % 2 === 0)) ```
 \`\`\`js function findElement(arr, func) { return arr.length && !func(arr[0]) ? findElement(arr.slice(1), func) : arr[0] }
 
 console.log(findElement([1, 2, 3, 4], (num) => num % 2 === 2)) ```
+
+
+相关：[[js|js]]

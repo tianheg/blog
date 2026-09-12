@@ -71,3 +71,10 @@ header: Lifestyle
 - 多和同事交流，别人说一个工具的名字可能让你节约数小时
 - 咖啡可以提高思维效率，而且合法
 - 无论怎么提高效率，要成为专家，都需要大量的时间投入
+
+
+相关：[[haoel-time-management-2|haoel-time-management-2]]
+
+相关：[[stories|stories]]
+
+相关：[[how-to-improve-aesthetics|how-to-improve-aesthetics]]

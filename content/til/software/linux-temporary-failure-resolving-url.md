@@ -14,3 +14,6 @@ header: Linux
 \`\`\`bash echo "nameserver 8.8.8.8" | sudo tee /etc/resolv.conf > /dev/null \`\`\`
 
 解决。
+
+
+相关：[[linux-ubuntu-find-best-apt-repository-mirror|linux-ubuntu-find-best-apt-repository-mirror]]
