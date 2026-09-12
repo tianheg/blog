@@ -3,8 +3,6 @@ title: 'What If You Could Get The Benefits Of Sleep Without Actually Sleeping?'
 status: draft
 date: 2026-07-08T20:33:17+08:00
 header: Labs
-aliases:
-  - /til/health/ref-what-if-you-could-get-the-benefits-of-sleep-without-actually/
 ---
 Cirelli lab (UW-Madison) 用光遗传学在小鼠清醒时模拟深度睡眠脑波，部分复现了睡眠的记忆巩固和分子修复效果。Nature Neuroscience 2026。机理验证，非人类应用。
 

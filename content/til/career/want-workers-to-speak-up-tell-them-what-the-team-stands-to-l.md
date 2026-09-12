@@ -2,8 +2,6 @@
 title: 'Want Workers To Speak Up? Tell Them What The Team Stands To Lose'
 status: draft
 date: 2026-07-08T20:33:17+08:00
-aliases:
-  - /til/career/ref-want-workers-to-speak-up-tell-them-what-the-team-stands-to-l/
 ---
 Framing workplace problems as losses for the whole team, not personal wins, is one of the simplest ways to get employees to speak up.
 

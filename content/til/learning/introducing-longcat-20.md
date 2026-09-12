@@ -2,8 +2,6 @@
 title: 'Introducing LongCat-2.0'
 status: draft
 date: 2026-07-08T20:33:17+08:00
-aliases:
-  - /til/learning/ref-introducing-longcat-20/
 ---
 美团发布 LongCat-2.0，1.6 万亿参数 MoE 大模型（激活 48B/token），全程 AI ASIC 国产芯片训练，35+ 万亿 tokens，引入 LongCat Sparse Attention 支持 1M 上下文。开源。
 

@@ -3,8 +3,6 @@ title: 'The Hum Mystery: Scientists May Have Solved It'
 status: draft
 date: 2026-07-08T20:33:17+08:00
 header: Labs
-aliases:
-  - /til/health/ref-the-hum-mystery-scientists-may-have-solved-it/
 ---
 世界范围内 2-4% 的人持续听到一种低频嗡嗡声（The Hum），来源数十年无解。2026年 PLOS ONE 研究招募了28位"听嗡者"，排除了两种主流假说："超级听觉"（听力异常敏感）和"内耳自发发声"。89% 的听阈在正常范围，内耳也未检测到低频声音。研究认为最可能的解释是低频耳鸣——大脑听觉系统自产的幻听，而非外部声源。不过对少数个案，外部源仍不能完全排除。
 
