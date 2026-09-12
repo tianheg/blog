@@ -91,10 +91,14 @@ pre, code, kbd, samp { text-autospace: no-autospace; }
 
 body {
   /* 拉丁走 Satoshi，中文显式指定黑体（原栈里 system-ui 会先命中，
-     且 "Noto Serif SC" 排在 Arial 之后基本不会生效，中文字形不可控） */
+     且 "Noto Serif SC" 排在 Arial 之后基本不会生效，中文字形不可控）。
+     注意 "Noto Sans SC"（Google Fonts 的 webfont 名）与
+     "Noto Sans CJK SC"（Debian/Ubuntu 字体包、Android 系统的 family 名）
+     是两个不同的名字，都要列。 */
   font-family: "Satoshi", -apple-system, BlinkMacSystemFont, "PingFang SC",
-    "Hiragino Sans GB", "Noto Sans SC", "Source Han Sans SC", "Microsoft YaHei",
-    "WenQuanYi Micro Hei", Arial, sans-serif;
+    "Hiragino Sans GB", "Noto Sans SC", "Noto Sans CJK SC", "Source Han Sans SC",
+    "Source Han Sans CN", "Microsoft YaHei", "WenQuanYi Micro Hei",
+    "WenQuanYi Zen Hei", Arial, sans-serif;
   overflow-wrap: break-word;
   background-color: var(--color-base-100);
   color: var(--color-base-content);
