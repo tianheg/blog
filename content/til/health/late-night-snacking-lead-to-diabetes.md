@@ -78,3 +78,6 @@ date: 2025-11-07T23:50:11+08:00
 [3] Allada R , Bass J . Circadian Mechanisms in Medicine[J]. New England Journal of Medicine, 2021, 384(6):550-561.
 
 [4] Chellappa SL, Qian J, Vujovic N, et al. Daytime eating prevents internal circadian misalignment and glucose intolerance in night work. Sci Adv. 2021;7(49):eabg9910.
+
+
+相关：[[blood-glucose-diabetes|blood-glucose-diabetes]]

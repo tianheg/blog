@@ -54,3 +54,6 @@ https://mp.weixin.qq.com/s/aCUIdDfgisasmE6kIBv5gw
 第六步：建立模型（方法论）
 
 第七步：更新旧节点、知识间的联系
+
+
+相关：[[grasp-a-concept|grasp-a-concept]]

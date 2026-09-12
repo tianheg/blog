@@ -58,3 +58,6 @@ date: 2022-11-12T15:57:46+08:00
 参考资料
 
 1. [科技爱好者周刊（第 202 期）：三个有启发的学习方法 - 阮一峰的网络日志](https://www.ruanyifeng.com/blog/2022/04/weekly-issue-202.html)
+
+
+相关：[[how-to-code|how-to-code]]

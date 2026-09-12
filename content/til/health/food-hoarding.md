@@ -65,3 +65,6 @@ date: 2025-11-07T22:09:31+08:00
 - 合理规划储存空间（可考虑购买冷柜）
 - 物资标注日期，避免过期浪费
 - 以“备而无患”为目的，保持冷静心态
+
+
+相关：[[food-storage-guidelines-for-fruits-and-egetables|food-storage-guidelines-for-fruits-and-egetables]]

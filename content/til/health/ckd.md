@@ -53,3 +53,6 @@ header: Pathology
 - 脱水
 - 心衰
 - 同时使用其他肾毒性药物（ACEI/ARB、利尿剂）
+
+
+相关：[[renal-anemia|renal-anemia]]

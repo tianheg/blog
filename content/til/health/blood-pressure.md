@@ -112,3 +112,6 @@ header: Labs
 - 默沙东诊疗手册（大众版），低血压章节
 - WHO. Global Report on Hypertension, 2023
 - SPRINT Research Group. N Engl J Med, 2015. A Randomized Trial of Intensive versus Standard Blood-Pressure Control
+
+
+相关：[[fever|fever]]

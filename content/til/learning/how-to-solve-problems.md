@@ -47,3 +47,6 @@ date: 2024-02-25T16:53:02+08:00
 
 1. <https://github.com/lencx/z/discussions/79>
 2. <https://lencx.github.io/book/thinking/what_is_the_tech.html>
+
+
+相关：[[how-to-know-my-thought|how-to-know-my-thought]]

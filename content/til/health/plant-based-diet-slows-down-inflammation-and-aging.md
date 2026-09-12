@@ -7,3 +7,8 @@ date: 2026-05-01T12:49:59+08:00
 <https://studyfinds.com/plant-food-slows-inflammation-aging/>
 
 英国华威大学通过荟萃分析541人参与的7项随机对照试验发现，坚持植物性饮食，能有效降低血液中炎症标志物CRP水平，单纯饮食干预可降0.94mg/L，搭配运动抗炎效果更佳，能有效缓解与衰老、心血管疾病相关的慢性低度炎症，助力延缓衰老、降低慢病风险。
+
+
+相关：[[multilingualism-against-aging|multilingualism-against-aging]]
+
+相关：[[chronic-inflammation-heart-attack-prevention|chronic-inflammation-heart-attack-prevention]]

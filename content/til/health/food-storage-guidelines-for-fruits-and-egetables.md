@@ -151,3 +151,6 @@ date: 2025-11-07T22:09:31+08:00
 - 内部分区应有3½英寸厚的玻璃纤维绝缘材料
 - 通过开关外部窗户控制温度
 - 通过在地板上倒水或保持湿麻袋等材料来保持高湿度
+
+
+相关：[[food-freezing-fruits-vegetables|food-freezing-fruits-vegetables]]

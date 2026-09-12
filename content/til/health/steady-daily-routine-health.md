@@ -29,3 +29,6 @@ date: 2026-08-09T11:04:36+08:00
 样本小、单站点、横断面设计——只能说明关联，不能证明因果。也可能是疼痛/体重/抑郁让人更难维持规律作息，或人格特质同时驱动两者。疼痛测量用的是简略量表，结论属初步。
 
 来源: [Steady Daily Routines Linked To Better Health, Regardless Of Poor Sleep](https://studyfinds.com/steady-daily-routine-better-health/)
+
+
+相关：[[sleep-insomnia|sleep-insomnia]]

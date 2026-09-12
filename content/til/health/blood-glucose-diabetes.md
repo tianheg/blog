@@ -111,3 +111,8 @@ header: Labs
 - 中国2型糖尿病防治指南（2020年版）
 - Gong Q, et al. Morbidity and mortality after lifestyle intervention for people with impaired glucose tolerance: 30-year results of the Da Qing Diabetes Prevention Outcome Study. Lancet Diabetes Endocrinol, 2019
 - American Diabetes Association. Standards of Care in Diabetes—2024
+
+
+相关：[[lab-tests|lab-tests]]
+
+相关：[[healthy-diet-by-who|healthy-diet-by-who]]

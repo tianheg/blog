@@ -20,3 +20,6 @@ date: 2022-11-05T15:43:40+08:00
 > 有些人可能认为他们可以通过大量运动来抵消不良饮食的影响，或者用高质量饮食来抵消缺乏运动的后果，但数据显示，事实并非如此。
 
 因此，运动和饮食质量都是促进健康和长寿的重要因素，两者缺一不可。
+
+
+相关：[[plant-based-diet-slows-down-inflammation-and-aging|plant-based-diet-slows-down-inflammation-and-aging]]

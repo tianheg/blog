@@ -70,3 +70,12 @@ Syndrome（不懂）。你可能觉得身边的每个人知道的都比你多，
    [source](https://www.verywellmind.com/imposter-syndrome-and-social-anxiety-disorder-4156469)
 
 5. [Lydia Hallie - Linkedin](https://www.linkedin.com/in/lydia-hallie/)
+
+
+相关：[[how-to-solve-problems|how-to-solve-problems]]
+
+相关：[[tech-learn-way-how-to-self-learning-cs-zilongshanren|tech-learn-way-how-to-self-learning-cs-zilongshanren]]
+
+相关：[[tech-learn-way-intro-to-prog|tech-learn-way-intro-to-prog]]
+
+相关：[[tech-learn-way-sentences|tech-learn-way-sentences]]

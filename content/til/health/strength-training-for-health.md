@@ -52,3 +52,6 @@ WHO 2020 身体活动指南（强推荐，中等确定性证据）：
 - [ACSM 2026 抗阻训练处方立场声明解读（梅斯医学）](https://news.qq.com/rain/a/20260510A024TU00)
 - [CDC: Adult Activity Guidelines](https://www.cdc.gov/physical-activity-basics/guidelines/adults.html)
 - [NHS: Physical activity guidelines for adults](https://www.nhs.uk/live-well/exercise/physical-activity-guidelines-for-adults-aged-19-to-64)
+
+
+相关：[[exercise-each-day-builds-muscle|exercise-each-day-builds-muscle]]

@@ -55,3 +55,6 @@ header: Pharma
 - Murray TG. *American Journal of Kidney Diseases*, 2004 — 镇痛剂肾病回顾
 - Eschbach JW, et al. *New England Journal of Medicine*, 1987 — 肾性贫血与 EPO 不足
 - Zhang L, et al. *BMC Nephrology*, 2018 — NSAIDs 长期使用者 CKD 发生率 25.3%，肾性贫血比例 41.2%
+
+
+相关：[[nsaids|nsaids]]

@@ -36,3 +36,8 @@ When using the new concpet is repeated over time, in various contexts and ways, 
 大脑中的知识并不以书本、文章的形式存储，而是一个一个的知识点。
 
 在构建知识体系时，着重理解每个新概念。
+
+
+相关：[[develop-cognition|develop-cognition]]
+
+相关：[[how-to-make-good-notes|how-to-make-good-notes]]
