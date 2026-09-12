@@ -12,7 +12,7 @@
   {{ if $isRoot }}
     {{/* === ROOT /til/ page === */}}
     <div class="mb-6">
-      <h1 class="text-2xl font-bold text-gray-900 dark:text-gray-100">数字花园 | TIL</h1>
+      <h1 class="text-[28px] font-bold tracking-tight text-gray-900 dark:text-gray-100">数字花园 | TIL</h1>
       <div class="mt-3 flex items-center gap-3">
         <a href="#" onclick="randomTIL(); return false;"
            class="inline-flex items-center gap-1.5 px-3 py-1.5 text-xs rounded-md border border-gray-200 dark:border-gray-800
@@ -28,8 +28,6 @@
           <svg class="w-3.5 h-3.5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8.684 13.342C8.886 12.938 9 12.482 9 12c0-.482-.114-.938-.316-1.342m0 2.684a3 3 0 110-2.684m0 2.684l6.632 3.316m-6.632-6l6.632-3.316m0 0a3 3 0 105.367-2.684 3 3 0 00-5.367 2.684zm0 9.316a3 3 0 105.368 2.684 3 3 0 00-5.368-2.684z"/></svg>
           关系图谱
         </a>
-        <a href="#garden-guide" onclick="var d=document.getElementById('garden-guide'); d.open=true; d.scrollIntoView({behavior:'smooth'}); return false;"
-           class="text-xs text-gray-400 dark:text-gray-500 hover:text-emerald-600 dark:hover:text-emerald-400 transition-colors">状态与维护</a>
       </div>
     </div>
 
@@ -38,9 +36,9 @@
       <summary class="cursor-pointer px-4 py-3 text-sm font-medium text-gray-700 dark:text-gray-300 select-none">状态与维护</summary>
       <div class="px-4 pb-4 space-y-3 text-sm text-gray-600 dark:text-gray-400 leading-relaxed">
         <p>
-          <span class="inline-block align-baseline text-[10px] font-semibold uppercase tracking-wide px-1.5 py-[1px] rounded bg-amber-100 text-amber-700 dark:bg-amber-900/30 dark:text-amber-300 mr-1">draft</span>
+          <span class="inline-block align-baseline text-[11px] font-medium px-1.5 py-[1px] rounded bg-amber-50 text-amber-700 dark:bg-amber-900/25 dark:text-amber-300 mr-1">draft</span>
           AI 整理或随手记的，未复核。
-          <span class="inline-block align-baseline text-[10px] font-semibold uppercase tracking-wide px-1.5 py-[1px] rounded bg-emerald-100 text-emerald-700 dark:bg-emerald-900/30 dark:text-emerald-300 mx-1">reviewed</span>
+          <span class="inline-block align-baseline text-[11px] font-medium px-1.5 py-[1px] rounded bg-emerald-50 text-emerald-700 dark:bg-emerald-900/25 dark:text-emerald-300 mx-1">reviewed</span>
           我亲手过、能用自己的话复述的。
         </p>
         <p>
@@ -67,7 +65,7 @@
     {{ partial "content/breadcrumb.html" . }}
 
     {{/* Category title */}}
-    <h1 class="text-2xl font-bold text-gray-900 dark:text-gray-100 mb-6">{{ .Title }}</h1>
+    <h1 class="text-2xl font-bold tracking-tight text-gray-900 dark:text-gray-100 mb-10">{{ .Title }}</h1>
 
     {{/* Mobile header filter (visible below xl breakpoint) */}}
     {{ $grouped := $pages.GroupByParam "header" }}
@@ -89,20 +87,21 @@
     </div>
 
     {{ range $grouped }}
-    <section class="mb-8" data-header="{{ .Key }}">
-      <div class="flex items-baseline gap-2 mb-1">
-        <h2 class="text-sm font-semibold text-gray-900 dark:text-gray-100 uppercase tracking-wide">
-          {{ .Key }}
-        </h2>
+    <section class="mb-10 max-w-[46rem]" data-header="{{ .Key }}">
+      <div class="flex items-baseline gap-2.5 mb-2">
+        <h2 class="text-base font-semibold text-gray-900 dark:text-gray-100">{{ .Key }}</h2>
+        <span class="text-xs text-gray-400 dark:text-gray-500 tabular-nums">{{ len .Pages }}</span>
       </div>
-      <div class="h-px bg-gray-200 dark:bg-gray-800 mb-3"></div>
-      <div class="space-y-0.5">
+      <div class="space-y-px">
         {{ range .Pages.ByTitle }}
         <a href="{{ .RelPermalink }}"
-           class="group flex items-center justify-between py-1.5 px-2 -mx-2 rounded-md transition-colors hover:bg-gray-50 dark:hover:bg-gray-800/40">
-          <span class="text-sm text-gray-700 dark:text-gray-300 group-hover:text-emerald-600 dark:group-hover:text-emerald-400 transition-colors">
+           class="group flex items-baseline justify-between gap-4 py-2 px-3 -mx-3 rounded-md transition-colors hover:bg-gray-50 dark:hover:bg-gray-800/40">
+          <span class="text-[15px] text-gray-800 dark:text-gray-200 group-hover:text-emerald-600 dark:group-hover:text-emerald-400 transition-colors">
             {{- partial "til/status" . -}}{{ partial "functions/get-title" (dict "page" .) }}
           </span>
+          {{ if not .Date.IsZero }}
+          <span class="text-xs text-gray-400 dark:text-gray-500 shrink-0 tabular-nums">{{ .Date.Format "2006-01-02" }}</span>
+          {{ end }}
         </a>
         {{ end }}
       </div>
@@ -112,21 +111,23 @@
     {{/* No-header pages (flat list) — for categories with mixed headers & flat files */}}
     {{ $noHeader := where $pages "Params.header" nil }}
     {{ if $noHeader }}
-    <section class="mb-8" data-header="">
+    <section class="mb-10 max-w-[46rem]" data-header="">
       <details class="group">
-      <summary class="flex items-baseline gap-2 mb-1 cursor-pointer list-none">
-        <h2 class="text-sm font-semibold text-gray-900 dark:text-gray-100 uppercase tracking-wide">其他</h2>
-        <span class="text-xs text-gray-400 dark:text-gray-500 group-open:hidden">{{ len $noHeader }} items</span>
-        <svg class="w-3 h-3 text-gray-400 ml-1 transition-transform group-open:rotate-90" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"/></svg>
+      <summary class="flex items-baseline gap-2.5 mb-2 cursor-pointer list-none">
+        <h2 class="text-base font-semibold text-gray-900 dark:text-gray-100">其他</h2>
+        <span class="text-xs text-gray-400 dark:text-gray-500 tabular-nums group-open:hidden">{{ len $noHeader }} 篇</span>
+        <svg class="w-3 h-3 text-gray-400 ml-0.5 transition-transform group-open:rotate-90" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"/></svg>
       </summary>
-      <div class="h-px bg-gray-200 dark:bg-gray-800 mb-3 mt-2"></div>
-      <div class="space-y-0.5">
+      <div class="space-y-px mt-2">
         {{ range $noHeader.ByTitle }}
         <a href="{{ .RelPermalink }}"
-           class="group flex items-center justify-between py-1.5 px-2 -mx-2 rounded-md transition-colors hover:bg-gray-50 dark:hover:bg-gray-800/40">
-          <span class="text-sm text-gray-700 dark:text-gray-300 group-hover:text-emerald-600 dark:group-hover:text-emerald-400 transition-colors">
+           class="group flex items-baseline justify-between gap-4 py-2 px-3 -mx-3 rounded-md transition-colors hover:bg-gray-50 dark:hover:bg-gray-800/40">
+          <span class="text-[15px] text-gray-800 dark:text-gray-200 group-hover:text-emerald-600 dark:group-hover:text-emerald-400 transition-colors">
             {{- partial "til/status" . -}}{{ partial "functions/get-title" (dict "page" .) }}
           </span>
+          {{ if not .Date.IsZero }}
+          <span class="text-xs text-gray-400 dark:text-gray-500 shrink-0 tabular-nums">{{ .Date.Format "2006-01-02" }}</span>
+          {{ end }}
         </a>
         {{ end }}
       </div>
@@ -140,29 +141,32 @@
 
     {{ partial "content/breadcrumb.html" . }}
 
-    <h1 class="text-2xl font-bold text-gray-900 dark:text-gray-100 mb-6">{{ .Title }}</h1>
+    <h1 class="text-2xl font-bold tracking-tight text-gray-900 dark:text-gray-100 mb-10">{{ .Title }}</h1>
 
     {{ if $sections }}
-    <div class="grid gap-4 sm:grid-cols-2 mb-8">
+    <div class="grid gap-3 sm:grid-cols-2 mb-10">
     {{ range $sections.ByTitle }}
       {{ $subPages := .RegularPages }}
       <a href="{{ .RelPermalink }}"
-         class="block p-4 rounded-lg border border-gray-200 dark:border-gray-800 hover:border-emerald-300 dark:hover:border-emerald-700 transition-colors">
-        <h2 class="text-sm font-semibold text-gray-900 dark:text-gray-100 mb-1">{{ .Title }}</h2>
-        <p class="text-xs text-gray-400 dark:text-gray-500">{{ len $subPages }} notes</p>
+         class="group flex items-baseline justify-between gap-3 py-2 px-3 -mx-3 rounded-md transition-colors hover:bg-gray-50 dark:hover:bg-gray-800/40">
+        <h2 class="text-[15px] font-medium text-gray-800 dark:text-gray-200 group-hover:text-emerald-600 dark:group-hover:text-emerald-400 transition-colors">{{ .Title }}</h2>
+        <p class="text-xs text-gray-400 dark:text-gray-500 shrink-0 tabular-nums">{{ len $subPages }} 篇</p>
       </a>
     {{ end }}
     </div>
     {{ end }}
 
     {{ if $pages }}
-    <div class="space-y-0.5">
+    <div class="space-y-px max-w-[46rem]">
       {{ range $pages.ByTitle }}
       <a href="{{ .RelPermalink }}"
-         class="group flex items-center justify-between py-1.5 px-2 -mx-2 rounded-md transition-colors hover:bg-gray-50 dark:hover:bg-gray-800/40">
-        <span class="text-sm text-gray-700 dark:text-gray-300 group-hover:text-emerald-600 dark:group-hover:text-emerald-400 transition-colors">
+         class="group flex items-baseline justify-between gap-4 py-2 px-3 -mx-3 rounded-md transition-colors hover:bg-gray-50 dark:hover:bg-gray-800/40">
+        <span class="text-[15px] text-gray-800 dark:text-gray-200 group-hover:text-emerald-600 dark:group-hover:text-emerald-400 transition-colors">
           {{- partial "til/status" . -}}{{ partial "functions/get-title" (dict "page" .) }}
         </span>
+        {{ if not .Date.IsZero }}
+        <span class="text-xs text-gray-400 dark:text-gray-500 shrink-0 tabular-nums">{{ .Date.Format "2006-01-02" }}</span>
+        {{ end }}
       </a>
       {{ end }}
     </div>
@@ -182,8 +186,8 @@
   {{ end }}
 
   {{ if $hasHeaders }}
-    <div class="text-xs font-medium text-gray-400 dark:text-gray-500 uppercase tracking-wider mb-3 px-3">
-      子分类
+    <div class="text-[13px] font-medium text-gray-900 dark:text-gray-100 mb-3 px-3">
+      本页分组
     </div>
     <nav id="header-nav" class="space-y-1">
       {{ $grouped := $pages.GroupByParam "header" }}

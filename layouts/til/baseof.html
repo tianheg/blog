@@ -22,23 +22,22 @@
   <meta property="og:site_name" content="{{ .Site.Title }}"/>
   <style>
   /* TOC sidebar styling */
-  #TableOfContents ul { list-style: none; padding: 0; margin: 0; }
-  #TableOfContents ul ul { padding-left: 1rem; }
+  #TableOfContents ul { list-style: none; padding: 0; margin: 0; border-left: 1px solid #e5e7eb; }
+  #TableOfContents ul ul { padding-left: 0.875rem; border-left: 0; }
   #TableOfContents li { margin: 0; }
   #TableOfContents a {
     display: block;
-    padding: 2px 0;
-    font-size: 0.875rem;
-    line-height: 1.5;
+    padding: 3px 0 3px 0.75rem;
+    margin-left: -1px;
+    font-size: 0.8125rem;
+    line-height: 1.6;
+    border-left: 1px solid transparent;
     color: #6b7280;
     text-decoration: none;
-    transition: color 0.15s;
+    transition: color 0.15s, border-color 0.15s;
   }
   #TableOfContents a:hover { color: #059669; }
-  .dark #TableOfContents a { color: #9ca3af; }
-  .dark #TableOfContents a:hover { color: #34d399; }
-  #TableOfContents .active a { color: #059669; font-weight: 500; }
-  .dark #TableOfContents .active a { color: #34d399; }
+  #TableOfContents .active a { color: #059669; font-weight: 500; border-left-color: #059669; }
 
   /* Collapsible header filter */
   .header-btn.active {
@@ -46,9 +45,17 @@
     color: rgb(5 150 105);
     font-weight: 500;
   }
-  .dark .header-btn.active {
-    background-color: rgb(6 78 59 / 0.2);
-    color: rgb(52 211 153);
+
+  /* 站点用 prefers-color-scheme 切换主题（无 .dark 类，Tailwind v4 默认行为） */
+  @media (prefers-color-scheme: dark) {
+    #TableOfContents ul { border-left-color: #374151; }
+    #TableOfContents a { color: #9ca3af; }
+    #TableOfContents a:hover { color: #34d399; }
+    #TableOfContents .active a { color: #34d399; border-left-color: #34d399; }
+    .header-btn.active {
+      background-color: rgb(6 78 59 / 0.2);
+      color: rgb(52 211 153);
+    }
   }
   </style>
 </head>
@@ -130,22 +137,37 @@
   <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
     <div class="flex gap-8">
       <!-- Left sidebar -->
-      <aside class="hidden lg:block w-56 shrink-0 pt-8">
-        <nav class="sticky top-20 space-y-1">
-          <div class="text-xs font-medium text-gray-400 dark:text-gray-500 uppercase tracking-wider mb-3 px-3">
-            Categories
-          </div>
+      <aside class="hidden lg:block w-56 shrink-0 pt-10">
+        <nav class="sticky top-20">
+          <div class="text-[13px] font-medium text-gray-900 dark:text-gray-100 mb-4 px-3">分类</div>
+          {{/* 分组规则：改这一处即可。未列出的分类自动落到「其他」组。 */}}
+          {{ $groups := slice
+            (dict "name" "技术" "cats" (slice "software" "hardware" "homelab" "backup"))
+            (dict "name" "知识" "cats" (slice "learning" "science" "courses" "history"))
+            (dict "name" "生活" "cats" (slice "life" "health" "career" "media" "music" "writing")) }}
+          {{ $known := slice }}
+          {{ range $groups }}{{ $known = union $known .cats }}{{ end }}
+          {{ $rest := slice }}
           {{ range $allSections }}
-            {{ $sectionSlug := index (split (strings.TrimPrefix "/til/" .RelPermalink) "/") 0 }}
-            <a href="{{ .RelPermalink }}"
-               class="block px-3 py-1.5 text-sm rounded-md transition-colors
-                      {{ if eq $catSlug $sectionSlug }}
-                        bg-emerald-50 dark:bg-emerald-900/20 text-emerald-700 dark:text-emerald-300 font-medium
-                      {{ else }}
-                        text-gray-600 dark:text-gray-400 hover:text-gray-900 dark:hover:text-gray-100 hover:bg-gray-50 dark:hover:bg-gray-800
-                      {{ end }}">
-              {{ .Title }}
-            </a>
+            {{ $s := index (split (strings.TrimPrefix "/til/" .RelPermalink) "/") 0 }}
+            {{ if not (in $known $s) }}{{ $rest = $rest | append $s }}{{ end }}
+          {{ end }}
+          {{ if $rest }}{{ $groups = $groups | append (dict "name" "其他" "cats" $rest) }}{{ end }}
+
+          {{ range $gi, $group := $groups }}
+          <div class="text-[11px] font-medium text-gray-400 dark:text-gray-500 px-3 mb-1.5 {{ if eq $gi 0 }}mt-0{{ else }}mt-5{{ end }}">{{ $group.name }}</div>
+          {{ range $group.cats }}
+          {{ $sp := site.GetPage (printf "/til/%s" .) }}
+          {{ with $sp }}
+          {{ $active := eq $catSlug (index (split (strings.TrimPrefix "/til/" .RelPermalink) "/") 0) }}
+          <a href="{{ .RelPermalink }}"
+             class="flex items-center justify-between gap-2 pl-2.5 pr-3 py-1.5 text-sm border-l-2 transition-colors
+                    {{ if $active }}border-emerald-500 bg-emerald-50 dark:bg-emerald-900/25 text-emerald-700 dark:text-emerald-300 font-medium{{ else }}border-transparent text-gray-600 dark:text-gray-400 hover:text-gray-900 dark:hover:text-gray-100 hover:border-gray-300 dark:hover:border-gray-600{{ end }}">
+            <span class="truncate">{{ .Title }}</span>
+            <span class="text-xs tabular-nums shrink-0 {{ if $active }}text-emerald-600 dark:text-emerald-400{{ else }}text-gray-500 dark:text-gray-400{{ end }}">{{ len .RegularPages }}</span>
+          </a>
+          {{ end }}
+          {{ end }}
           {{ end }}
         </nav>
       </aside>
@@ -208,6 +230,35 @@
         e.preventDefault();
         window.scrollTo({top: 0, behavior: 'smooth'});
       });
+    }
+
+    // TOC 滚动高亮（#TableOfContents .active a 的样式一直存在，此前没有 JS 写这个类）
+    var tocLinks = document.querySelectorAll('#TableOfContents a');
+    if (tocLinks.length) {
+      var targets = [];
+      Array.prototype.forEach.call(tocLinks, function(a){
+        var href = a.getAttribute('href') || '';
+        if (href.charAt(0) !== '#') return;
+        var id = href.slice(1);
+        try { id = decodeURIComponent(id); } catch (e) {}
+        var el = document.getElementById(id);
+        if (el) targets.push({ link: a, el: el });
+      });
+      if (targets.length) {
+        var setActive = function(){
+          var y = window.scrollY + 140;
+          var current = targets[0];
+          for (var i = 0; i < targets.length; i++) {
+            if (targets[i].el.offsetTop <= y) current = targets[i];
+          }
+          Array.prototype.forEach.call(tocLinks, function(a){
+            if (a.parentElement) a.parentElement.classList.remove('active');
+          });
+          if (current && current.link.parentElement) current.link.parentElement.classList.add('active');
+        };
+        setActive();
+        window.addEventListener('scroll', setActive, {passive:true});
+      }
     }
   })();
   </script>

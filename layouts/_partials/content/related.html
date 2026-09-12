@@ -18,7 +18,7 @@
   <ul class="space-y-1.5 ml-5">
     {{- range $related }}
     {{- with site.GetPage . }}
-    <li><a href="{{ .RelPermalink }}" class="text-blue-600 dark:text-blue-400 hover:underline">{{ partial "functions/get-title" (dict "page" .) }}</a></li>
+    <li><a href="{{ .RelPermalink }}" class="text-emerald-600 dark:text-emerald-400 hover:underline">{{ partial "functions/get-title" (dict "page" .) }}</a></li>
     {{- end }}
     {{- end }}
   </ul>

@@ -31,7 +31,7 @@
 <section class="backlinks mt-8 pt-6 border-t border-gray-200 dark:border-gray-700" data-pagefind-ignore>
   {{- $list := "" -}}
   {{- range $incoming -}}
-    {{- $list = printf `%s<li class="leading-snug"><a href="%s" class="text-blue-600 dark:text-blue-400 hover:underline">%s</a>%s</li>`
+    {{- $list = printf `%s<li class="leading-snug"><a href="%s" class="text-emerald-600 dark:text-emerald-400 hover:underline">%s</a>%s</li>`
         $list .page.RelPermalink (partial "functions/get-title" (dict "page" .page))
         (cond (ne .ctx "") (printf `<div class="mt-0.5 mb-2 text-xs text-gray-400 dark:text-gray-500">%s</div>` (.ctx | htmlEscape)) "") -}}
   {{- end -}}
