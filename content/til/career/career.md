@@ -4,6 +4,8 @@ status: draft
 date: 2022-11-05T15:44:02+08:00
 ---
 
+相关笔记：面试误区见 [[job-interview-misunderstandings|面试沟通误区]]；产品方向见 [[product|产品笔记]]。
+
 ## 面试经历
 
 - 第一次视频面试

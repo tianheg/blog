@@ -10,6 +10,8 @@ You have to be aware that each file is saved exactly once. Should a file be dama
 
 important data need backup many places(two remote one local)
 
+本站日常跑的增量备份管线（StorageBox + R2 + Forgejo 三路）见 [[hermes-backup|Hermes 每日备份管线]]；方法论层面见 [[3-2-1|3-2-1 备份方法]]。
+
 Storage service providers(1TB = 1000GB):
 
 - [Rsync(special Borg-only backup product)](https://www.rsync.net/signup/order.html?code=experts) $96/TB/year

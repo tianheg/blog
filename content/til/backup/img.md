@@ -6,6 +6,8 @@ date: 2025-10-24T21:46:26+08:00
 
 目前需要备份的图片有两类：照片、网络图片。只有照片需要备份，网图丢了也可以找到。
 
+照片落地的和 [[hermes-backup|Hermes 备份管线]]是同一套存储（Hetzner StorageBox），手机端由 FolderSync 直推，不经 VPS 中转。
+
 ### 照片的备份
 
 手机/相机拍摄的照片重命名（YYYYMMDD_Location-City_Num）后，原图（小于10MiB，超过就要先压缩）先存到Hetzner StorageBox，两种途径：

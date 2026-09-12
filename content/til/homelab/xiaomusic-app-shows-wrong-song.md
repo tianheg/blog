@@ -4,6 +4,8 @@ status: draft
 date: 2026-08-01T10:32:50+08:00
 ---
 
+这是 xiaomusic 推送链路与音箱内部状态层的问题，和语音链路的 [[xiaomi-speaker-llm-open-xiaoai|小爱音箱接入自托管 LLM]] 是两套彼此独立的系统。
+
 ## 现象
 音箱实际播放的是来自 `xiaomusic` 推送的歌曲 A（声音正常）。
 小米音箱 App 界面却显示正在播放另一首歌曲 B，且音箱并未发出 B 的声音。

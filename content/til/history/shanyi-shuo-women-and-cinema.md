@@ -6,6 +6,8 @@ date: 2025-06-15T19:22:54+08:00
 
 <https://www.bilibili.com/video/BV1AU4y1A7yk>
 
+同一时期（90 年代前后）的历史背景见 [[history|历史笔记]]；另一个对话类视频见 [[president-clinton-speaks-at-peking-1998|克林顿总统在北京大学演讲]]。
+
 - 赛博格宣言
 - 当我用了机械物体，我就不是人了吗
 - 19 世纪-20 世纪之交，隐含着 21 世纪的巨大变化已经开始

@@ -4,7 +4,7 @@ status: draft
 date: 2025-09-08T07:38:31+08:00
 ---
 
-当前状态：调研中
+当前状态：调研中。个人护城河构建见 [[build-my-personal-career-moat|构建个人职业护城河]]；简历策略见 [[resume-awareness|工作里区分成长和消耗]]；数据分析岗位调研见 [[data-analytics|数据分析]]；
 
 ### 关于职业选择问自己的几个问题
 

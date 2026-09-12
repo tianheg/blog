@@ -9,6 +9,8 @@ header: PVE
 
 背景：MiGPT（云端 MIoT 接口，免刷机）项目已停维护，open-xiaoai 系是活跃继任方案。
 
+这条语音链路是 Hermes 之外的一条独立入口 —— 它挂掉时 Hermes 仍能正常工作，反之亦然。这正是 [[homelab-ai-independent|homelab 的 AI 独立性]]所要求的：关键路径不要寄生在单一 AI 服务上。
+
 ## 架构
 
 ```text

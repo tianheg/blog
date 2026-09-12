@@ -48,6 +48,10 @@ Anki 数据：
 
 StorageBox 连接信息保存在 .env 中，SSH 公钥需提前添加到 StorageBox。
 
+### 与 Borg 的分工
+
+这条管线备份的是 Hermes 自身的数据（配置、skills、PG dump）。通用的增量备份工具选型见 [[borg|Borg]]，图片类数据见 [[img|图片备份]]。
+
 ### 手机照片备份
 
 Android 照片不走 VPS 中转，通过 [FolderSync App](https://play.google.com/store/apps/details?id=dk.tacit.android.foldersync.lite) 以 SFTP 协议直推 Hetzner StorageBox，定时自动同步 DCIM/Camera 目录。
