@@ -15,3 +15,5 @@ WebDriver 是一个远程控制接口，能够自我检查、控制用户代理�
 
 
 相关：[[coding|coding]]
+
+相关：[[version-100-in-chrome-and-firefox|version-100-in-chrome-and-firefox]]

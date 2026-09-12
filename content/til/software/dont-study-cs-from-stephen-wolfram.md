@@ -15,3 +15,5 @@ CS 主要研究关于Computer的更深层次的东西。
 
 
 相关：[[coding|coding]]
+
+相关：[[software-engineering-soft-parts|software-engineering-soft-parts]]

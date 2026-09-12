@@ -107,3 +107,6 @@ EIA 标准阻值序列 E24/E48/E96、常用电容耐压等级等。
 - 多用图片 — 示波器截图、原理图片段、datasheet 截图直接贴在卡片里
 - 正面提问要具体，反面回答要简洁
 - 标注来源 tag — 如 #datasheet_XL6019，方便复习时回查
+
+
+相关：[[i2c-bus-protocol|i2c-bus-protocol]]

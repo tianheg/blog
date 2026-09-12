@@ -13,3 +13,6 @@ Boss 直聘、智联招聘之类的招聘平台存在着不允许企业下架招
 所以真相就是，现在根本就是没有那么多的岗位。
 
 https://www.vergilisme.com/index.php/2024/05/07/2348.html
+
+
+相关：[[career-development|career-development]]

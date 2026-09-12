@@ -45,3 +45,6 @@ Those relationships were integral to the second, and most controversial, step in
 For decades, China has maintained scientific and commercial ties to leading Western companies, universities, and labs---especially U.S. ones.
 
 These have ranged from professors at American universities collaborating with Chinese peers on public AI research to Chinese venture capitalists investing in Silicon Valley startups.
+
+
+相关：[[product-thinking-2022-06-13|product-thinking-2022-06-13]]

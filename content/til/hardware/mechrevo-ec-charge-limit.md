@@ -53,3 +53,6 @@ WinRing0 源码在 OpenHardwareMonitor repo，编译时必须定义 `_PHYSICAL_M
 ## 参考
 - [w568w: MECHREVO Wujie 14XA battery charging limit fix](https://gist.github.com/w568w/957976b59906e0ce5d6c13ad342e1593)
 - [OpenHardwareMonitor (含 WinRing0 源码)](https://github.com/OpenHardwareMonitor/OpenHardwareMonitor)
+
+
+相关：[[bms-power-design|bms-power-design]]

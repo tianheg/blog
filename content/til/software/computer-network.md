@@ -13,3 +13,5 @@ computer network
 
 
 相关：[[coding|coding]]
+
+相关：[[dont-study-cs-from-stephen-wolfram|dont-study-cs-from-stephen-wolfram]]

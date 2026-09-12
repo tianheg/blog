@@ -35,3 +35,6 @@ N32G45X 系列调试接口引脚映射（来自硬件设计指南）：
 | JNTRST | PB4 |
 
 来源: [N32G45X/N32G4FR 系列硬件设计指南](https://www.nationstech.com/uploads/%E9%80%9A%E7%94%A8MCU/N32G4FR/%E8%8A%AF%E7%89%87%E6%96%87%E6%A1%A3/%E4%BD%BF%E7%94%A8%E6%8C%87%E5%8D%97/UG_N32G45X&N32G4FR%E7%B3%BB%E5%88%97%E7%A1%AC%E4%BB%B6%E8%AE%BE%E8%AE%A1%E6%8C%87%E5%8D%97.pdf)
+
+
+相关：[[i2c-bus-protocol|i2c-bus-protocol]]

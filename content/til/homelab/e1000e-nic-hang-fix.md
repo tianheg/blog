@@ -65,3 +65,6 @@ cat /proc/cmdline | grep e1000e
 ```
 
 来源: [Arch Wiki: Network configuration](https://wiki.archlinux.org/title/Network_configuration#Link_lost_after_network_traffic)
+
+
+相关：[[pve-dual-nvme-storage-migration|pve-dual-nvme-storage-migration]]

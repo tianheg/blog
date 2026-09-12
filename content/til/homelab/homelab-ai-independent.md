@@ -45,3 +45,6 @@ Hermes 进程环境里有 http_proxy 走代理，但系统 crontab 是干净环�
 - VM 有 vzdump 定期快照（PVE 原生，应用层之上的兜底）
 - 恢复脚本可 curl | bash 手动执行，文档人可读
 - 所有外网调用显式走代理，失败不静默
+
+
+相关：[[pve-dual-nvme-storage-migration|pve-dual-nvme-storage-migration]]

@@ -53,3 +53,6 @@ date: 2026-07-08T20:17:25+08:00
 - 孤立铜无网络链接 → 板厂 CAM 工程师需确认 → 浪费沟通成本
 
 Source: https://mp.weixin.qq.com/s/Gu_HiqzJk-V1QMZ6y-LJGw
+
+
+相关：[[ethernet-transformer|ethernet-transformer]]

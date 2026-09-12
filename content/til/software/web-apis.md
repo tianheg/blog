@@ -23,3 +23,5 @@ Payment Request API 提供了支付的优化流程。
 
 
 相关：[[coding|coding]]
+
+相关：[[how-many-types-of-api|how-many-types-of-api]]

@@ -19,3 +19,5 @@ header: Tools
 
 
 相关：[[coding|coding]]
+
+相关：[[howto-enable-e-ink-style-on-ios|howto-enable-e-ink-style-on-ios]]

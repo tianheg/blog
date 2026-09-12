@@ -384,3 +384,6 @@ date: 2026-08-28T00:00:00+08:00
 - [IICIE 国际集成电路创新博览会 9 月深圳举办（微信公众号）](https://mp.weixin.qq.com/s/AGlSkQmosriy0qHHD_ImSQ)
 - [IICIE 官网：特色展区](https://www.iicieexpo.com/ThemePavilion.html)
 - 各公司年报/业绩公告（巨潮资讯、上交所/深交所披露）及财联社、证券时报、日经中文网等公开报道（检索时间 2026-08）
+
+
+相关：[[cell-balancing|cell-balancing]]

@@ -9,3 +9,6 @@ date: 2025-06-15T19:22:54+08:00
 解决办法
 
 \`\`\`bash sudo chown -R [mongodb:mongodb](mongodb:mongodb) /var/lib/mongodb sudo chown [mongodb:mongodb](mongodb:mongodb) /tmp/mongodb-27017.sock sudo systemctl restart mongodb \`\`\`
+
+
+相关：[[pve-upgrade|pve-upgrade]]

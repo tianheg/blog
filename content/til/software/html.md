@@ -15,3 +15,5 @@ Why &lt;h1&gt; should be one per page?
 
 
 相关：[[coding|coding]]
+
+相关：[[how-to-think-like-a-front-end-developer|how-to-think-like-a-front-end-developer]]
