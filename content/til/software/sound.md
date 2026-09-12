@@ -12,3 +12,6 @@ header: Tools
 wireplumber[739]: The decibel volume range for element 'Mic' (-5200 dB - -200 dB) has negative maximum. Disabling the decibel range.
 
 用的是闪克的USB麦克风，有的时候能录音，有的时候不能
+
+
+相关：[[command-line-tools|command-line-tools]]

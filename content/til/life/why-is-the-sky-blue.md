@@ -16,3 +16,6 @@ header: Lifestyle
 参考资料
 
 1. [天空为什么是蓝色的？](https://baijiahao.baidu.com/s?id=1644163036704375031)
+
+
+相关：[[aurora|aurora]]

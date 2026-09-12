@@ -15,3 +15,6 @@ date: 2025-06-15T19:22:54+08:00
 找到原始信息很重要，获取最真实的知识
 
 https://en.wikipedia.org/wiki/DIKW_pyramid
+
+
+相关：[[develop-cognition|develop-cognition]]

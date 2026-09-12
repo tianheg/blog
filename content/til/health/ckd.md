@@ -56,3 +56,5 @@ header: Pathology
 
 
 相关：[[renal-anemia|renal-anemia]]
+
+相关：[[lab-tests|lab-tests]]

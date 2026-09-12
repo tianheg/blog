@@ -63,3 +63,6 @@ Spread syntax(`...`), `Array.prototype.concat()`, `Array.prototype.slice()`,`Arr
 2. [Deep copy - MDN Web Docs Glossary: Definitions of Web-related terms | MDN](https://developer.mozilla.org/en-US/docs/Glossary/Deep_copy)
 3. [JavaScript 专题之深浅拷贝 · Issue #32 · mqyqingfeng/Blog](https://github.com/mqyqingfeng/Blog/issues/32)
 4. <https://stackoverflow.com/q/122102/12539782>
+
+
+相关：[[js-oop|js-oop]]

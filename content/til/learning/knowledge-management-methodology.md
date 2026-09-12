@@ -55,3 +55,6 @@ date: 2026-09-10T12:52:29+08:00
 - [dabing（Jiang）的数字花园](https://notes.dabing.one/)
 - [oldwinter 知识花园](https://garden.oldwinter.top/)
 - [产品沉思录](https://pmthinking.com/)
+
+
+相关：[[how-to-know-my-thought|how-to-know-my-thought]]

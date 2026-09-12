@@ -12,3 +12,6 @@ This major bug occurs when running under Wayland. A workaround is to set `QT<sub
 在命令行使用 KDE Font Viewer：
 
 \`\`\`sh QT<sub>QPAPLATFORM</sub>=xcb kfontview \`\`\`
+
+
+相关：[[use-pnpm|use-pnpm]]

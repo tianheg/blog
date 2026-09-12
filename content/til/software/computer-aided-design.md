@@ -10,3 +10,6 @@ header: Programming
 CAD技术主要分为2D制图和3D建模。3D建模是其核心，包括能体现“设计意图”、通过修改参数自动更新的参数化建模，以及更灵活、可直接编辑几何体的直接建模。此外，还有用于组合多个零件的装配体建模和专门处理复杂曲面的自由造型建模。
 
 如今，CAD已成为现代制造业与工程设计的基石，并与计算机辅助制造（CAM）、计算机辅助工程（CAE）共同构成完整的数字化产品开发流程。该领域由Autodesk（AutoCAD, Fusion 360）、Dassault Systèmes (SOLIDWORKS, CATIA）和Siemens (NX, Solid Edge）等公司的商业软件主导，同时也存在FreeCAD这样的开源替代方案。
+
+
+相关：[[software-program-application|software-program-application]]

@@ -26,3 +26,6 @@ header: Web
 10. **Practice Modular Design**: Break your UI into modular components and leverage Tailwind CSS to style each component independently. This approach promotes code reusability and maintainability.
 
 By adhering to these best practices, you can effectively utilize Tailwind CSS to create efficient, maintainable, and visually appealing user interfaces.
+
+
+相关：[[coding|coding]]

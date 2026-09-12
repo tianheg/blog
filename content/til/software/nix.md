@@ -28,3 +28,6 @@ If you installed Nix from the official repositories, you must add the `~/.nix-pr
 ```bash sudo pacman -Rs nix rm -r ~/.nix-channels ~/.nix-defexpr ~/.nix-profile sudo rm -r /nix
 
 ````
+
+
+相关：[[use-prettier|use-prettier]]

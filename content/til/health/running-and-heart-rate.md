@@ -40,3 +40,6 @@ date: 2025-06-15T19:22:54+08:00
 
 1. [折返点 2134 ｜跑步动力不足怎么半？](https://conge.github.io/2021/08/29/ReturnPoint-not-motivated/)
 2. [如何计算跑步时的最大心率 | Polar  中国](https://www.polar.com/zh-hans/running-academy/calculate-maximum-heart-rate-running)
+
+
+相关：[[blood-pressure|blood-pressure]]

@@ -11,3 +11,6 @@ date: 2025-06-15T19:22:54+08:00
 - Most women with gonorrhoea do not have symptoms, and when they do, vaginal discharge is common, while most men present with discharge from their penis.
 - If left untreated, gonorrhoea can lead to infertility in both men and women and other sexual and reproductive health complications. It also increases the risk of HIV infection.
 - Antimicrobial resistance to gonorrhoea is a serious and growing problem, rendering many classes of antibiotics as ineffective with the risk of becoming untreatable.
+
+
+相关：[[fever|fever]]

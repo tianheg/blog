@@ -24,3 +24,6 @@ header: Tools
 ;; Optional
 (setq use-package-always-ensure t)
 ```
+
+
+相关：[[use-prettier|use-prettier]]

@@ -23,3 +23,6 @@ date: 2026-08-14T12:52:32+08:00
 - 固定时间与地点：睡前床上、通勤路上皆可，配合屏蔽干扰，让习惯自动发生
 
 来源: [Ness Labs: The Reading Mind: Surprising Science-Based Benefits of Reading Everyday](https://nesslabs.com/benefits-of-reading)
+
+
+相关：[[how-to-study|how-to-study]]

@@ -10,3 +10,6 @@ Move all .*(folders or files) to current location
 ```bash
 mv folder/.[^.]* .
 ```
+
+
+相关：[[command-line-tools|command-line-tools]]

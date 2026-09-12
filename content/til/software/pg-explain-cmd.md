@@ -92,3 +92,6 @@ SELECT ...
 EXPLAIN (COSTS, VERBOSE) 
 SELECT ...
 ```
+
+
+相关：[[command-line-tools|command-line-tools]]

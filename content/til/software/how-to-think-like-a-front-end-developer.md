@@ -11,3 +11,5 @@ header: Web
 
 
 相关：[[how-to|how-to]]
+
+相关：[[use-typescript|use-typescript]]

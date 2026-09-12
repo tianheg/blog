@@ -10,3 +10,6 @@ header: Programming
 - https://github.com/keyvank/femtoGPT
 - https://github.com/karpathy/minGPT
 - https://github.com/jaymody/picoGPT
+
+
+相关：[[write-a-good-prompt|write-a-good-prompt]]

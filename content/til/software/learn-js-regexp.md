@@ -93,3 +93,6 @@ let hello = ' Hello, World! ' let wsRegex = /^\s+|\s+$/g // Change this line let
 
 1. <https://ihateregex.io/>
 2. [Regex Vis](https://regex-vis.com/)
+
+
+相关：[[js-basics|js-basics]]

@@ -14,3 +14,6 @@ KB (Kilobyte): - KB stands for Kilobyte, which is a decimal unit of digital info
 The main difference between KiB and KB is the base used for the measurement. KiB uses the binary base of 1,024, while KB uses the decimal base of 1,000. This difference can lead to slight variations in the actual size of the units, especially when dealing with large amounts of data.
 
 In summary, KiB is the binary unit of digital information, while KB is the decimal unit of digital information. It's important to be aware of the distinction when working with digital storage and data measurements to ensure accurate calculations and understanding.
+
+
+相关：[[software-program-application|software-program-application]]

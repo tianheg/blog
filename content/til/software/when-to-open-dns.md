@@ -23,3 +23,6 @@ allow-recursion {192.168.2.0/24;}; ```
 ````
 
 allow-query {192.168.2.0/24;}; ```
+
+
+相关：[[android11-use-private-dns|android11-use-private-dns]]

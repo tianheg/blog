@@ -140,3 +140,6 @@ CommonJS 模块系统，则是内建于 Node.js。在 Node.js 引入 ES 模块�
 对于新的 Node.js 项目来说，ES 模块是 CommonJS 之外的另一个选择。ES 模块格式的确提供了一种更简单的路由来写同构的 JS ，这些代码能够在浏览器和服务器端运行。
 
 一句话概括：ECMAScript 模块是 JS 的未来。
+
+
+相关：[[js-containers|js-containers]]

@@ -53,3 +53,6 @@ header: Web
 1. 有些展示内容被覆盖了
 
 但是，这个仓库 <https://github.com/cedric25/prisma-talk> 的内容 <https://prisma-talk.netlify.app/4> 没有覆盖。
+
+
+相关：[[use-pnpm|use-pnpm]]

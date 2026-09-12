@@ -713,3 +713,6 @@ When upsert is set to false and the query predicate returns an empty cursor then
 | 775 | rwx  | rwx   | r-x    |
 | 776 | rwx  | rwx   | rw-    |
 | 777 | rwx  | rwx   | rwx    |
+
+
+相关：[[js-oop|js-oop]]

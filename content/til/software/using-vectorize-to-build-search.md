@@ -8,3 +8,6 @@ header: Tools
 https://blog.partykit.io/posts/using-vectorize-to-build-search/
 
 not work
+
+
+相关：[[use-typescript|use-typescript]]

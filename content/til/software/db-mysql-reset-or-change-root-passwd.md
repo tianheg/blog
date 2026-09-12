@@ -11,3 +11,5 @@ header: Tools
 
 
 相关：[[mariadb-change-user-root-pass|mariadb-change-user-root-pass]]
+
+相关：[[git-rename-origin|git-rename-origin]]

@@ -37,3 +37,6 @@ Nature Aging 2026 年研究（Cole et al.，费城 Wistar 研究所）首次证�
 ## 参考
 - [The chemotherapy-induced senescence-associated secretome promotes cell detachment and metastatic dissemination through metabolic reprogramming (Nature Aging, 2026)](https://www.nature.com/articles/s43587-026-01172-5)
 - [ScienceAlert 报道](https://www.sciencealert.com/common-sugar-appears-to-loosen-cancer-cells-and-help-them-spread)
+
+
+相关：[[late-night-snacking-lead-to-diabetes|late-night-snacking-lead-to-diabetes]]

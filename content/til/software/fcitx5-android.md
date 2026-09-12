@@ -76,3 +76,6 @@ fcitx5-android 是桌面 fcitx5 的 Android 移植版，拼音/双拼/Rime/五�
 - [Fcitx5 for Android 官方文档](https://fcitx5-android.github.io/)
 - [官方文档：安装](https://fcitx5-android.github.io/installation/)
 - [官方文档：常见问题](https://fcitx5-android.github.io/faq/)
+
+
+相关：[[use-prettier|use-prettier]]

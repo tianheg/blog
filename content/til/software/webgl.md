@@ -68,3 +68,6 @@ Varyings 是一种将数据从顶点着色器传递给片段着色器的方式�
 WebGL Hello World:
 
 WebGL只关心两件事：clip space coordinates and colors. 其中，前者由顶点着色器提供，后者由片段着色器提供。
+
+
+相关：[[coding|coding]]

@@ -19,3 +19,6 @@ Breathe, and enjoy each moment of this life. They're too fleeting and
 few to waste.
 
 <https://zenhabits.net/more/>
+
+
+相关：[[blood-pressure|blood-pressure]]

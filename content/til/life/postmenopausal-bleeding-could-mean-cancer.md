@@ -13,3 +13,6 @@ header: Lifestyle
 3. **早发现=高治愈率** ：文中患者因及时检查、手术和放疗，现已痊愈。
 
 需要提供来源依据
+
+
+相关：[[finger-disease|finger-disease]]

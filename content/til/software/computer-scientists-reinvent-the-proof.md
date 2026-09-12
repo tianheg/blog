@@ -8,3 +8,6 @@ header: Programming
 [How Computer Scientists Learned to Reinvent the Proof | Quanta Magazine](https://www.quantamagazine.org/how-computer-scientists-learned-to-reinvent-the-proof-20220523/)
 
 这篇文章有一个缩略词引起了我的注意：NP，在算法中遇到过。
+
+
+相关：[[coding|coding]]

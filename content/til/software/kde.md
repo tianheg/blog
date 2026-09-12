@@ -20,3 +20,6 @@ Settings >> Edit Current Profile >> Appearance tab
 Click the "Edit" button on the right and there is an option to add a background image on that.
 
 https://forum.kde.org/viewtopic.php%3Ff=227&t=174018.html#p452684
+
+
+相关：[[appimage-launcher|appimage-launcher]]

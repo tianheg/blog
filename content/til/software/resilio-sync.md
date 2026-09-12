@@ -44,3 +44,6 @@ systemctl --user enable rslsync # 为了开机自动启动
 ### Key
 
 - 神Key（22年停更） `BCWHZRSLANR64CGPTXRE54ENNSIUE5SMO`
+
+
+相关：[[use-prettier|use-prettier]]

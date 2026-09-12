@@ -46,3 +46,6 @@ https://github.com/ChartsCSS/charts.css
 
 </table>
 ```
+
+
+相关：[[use-typescript|use-typescript]]

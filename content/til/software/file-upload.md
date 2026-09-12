@@ -32,3 +32,6 @@ header: Tools
 [Three.js 展示GLB文件 - 掘金](https://juejin.cn/post/7099353608092663822)
 
 关于 glb 文件的导入处理 <https://stackoverflow.com/a/64540108> ， <https://threejs.org/editor/>
+
+
+相关：[[js-containers|js-containers]]

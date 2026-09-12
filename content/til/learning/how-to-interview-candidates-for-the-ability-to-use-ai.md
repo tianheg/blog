@@ -35,3 +35,6 @@ date: 2025-10-19T21:36:09+08:00
 8、判断对方对AI效果的验收
 
 针对AI的作业，如何评价AI的产出，有哪些构建回收标准的方法或者思路
+
+
+相关：[[develop-cognition|develop-cognition]]

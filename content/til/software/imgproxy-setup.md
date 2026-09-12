@@ -122,3 +122,6 @@ IMGPROXY_READY_CHECK_PATH=/ready     # 就绪探针
 IMGPROXY_LOG_LEVEL=warn              # 生产环境用 warn 或 error
 IMGPROXY_LOG_FORMAT=json             # 便于日志收集系统解析
 ```
+
+
+相关：[[use-prettier|use-prettier]]

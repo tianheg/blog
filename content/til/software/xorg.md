@@ -44,3 +44,6 @@ Xorg的运行机制可以简单地描述为以下几个步骤：
 ## 参考
 - [Wikipedia: X Window System](https://en.m.wikipedia.org/wiki/X_Window_System)
 - [Wikipedia: Wayland](https://en.m.wikipedia.org/wiki/Wayland_(protocol))
+
+
+相关：[[coding|coding]]

@@ -16,3 +16,6 @@ header: Tools
 | WebP   | 2010     | 有损/无损    | 全能，压缩效率高               | 替代JPEG/PNG/GIF           |
 | HEIC   | 2015     | 有损/无损    | 效率极高，功能多               | Apple生态系统               |
 | AVIF   | 2019     | 有损/无损    | 效率顶级，开源免费             | 未来网络图像主力候选        |
+
+
+相关：[[command-line-tools|command-line-tools]]

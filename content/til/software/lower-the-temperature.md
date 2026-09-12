@@ -8,3 +8,6 @@ header: Tools
 - https://wiki.archlinux.org/title/Lm_sensors
 - https://github.com/Sepero/temp-throttle/
 - https://wiki.archlinux.org/title/CPU_frequency_scaling#thermald
+
+
+相关：[[command-line-tools|command-line-tools]]

@@ -14,3 +14,6 @@ header: Linux
 \`\`\`sh killall pulseaudio \`\`\`
 
 来源: <https://unix.stackexchange.com/a/171925>
+
+
+相关：[[rm-system-app-use-canta|rm-system-app-use-canta]]

@@ -160,3 +160,6 @@ header: Labs
 - 中国居民膳食营养素参考摄入量（2023版）
 - WHO. Guideline: Sodium intake for adults and children, 2012
 - 《中国高血压防治指南（2024年修订版）》
+
+
+相关：[[healthy-diet-by-who|healthy-diet-by-who]]

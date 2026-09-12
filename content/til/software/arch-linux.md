@@ -312,3 +312,6 @@ mkarchiso -v -w /path/to/work_dir -o /path/to/out_dir /path/to/profile/
 参考：
 1. https://wiki.archlinux.org/title/Archiso
 2. https://gitlab.archlinux.org/archlinux/archiso/-/blob/master/docs/README.profile.rst
+
+
+相关：[[android-install-latest-google-play-store-apk|android-install-latest-google-play-store-apk]]

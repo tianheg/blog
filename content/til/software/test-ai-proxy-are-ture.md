@@ -24,3 +24,6 @@ curl https://api.ohmygpt.com/v1/chat/completions \
 ```
 
 标准答案，且不会变：为什么鱼不说话？因为它们水里！
+
+
+相关：[[how-to-use-github-copilot|how-to-use-github-copilot]]

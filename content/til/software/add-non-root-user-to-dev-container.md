@@ -67,3 +67,6 @@ RUN groupmod --gid $USER_GID $USERNAME \
 参考资料
 
 - [Add non-root user to a container](https://code.visualstudio.com/remote/advancedcontainers/add-nonroot-user)
+
+
+相关：[[git-gitea|git-gitea]]

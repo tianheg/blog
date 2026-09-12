@@ -14,3 +14,6 @@ date: 2023-06-07T08:33:43+08:00
 参考资料
 
 - 心肌梗死 [Myocardial infarction - Wikipedia](https://en.wikipedia.org/wiki/Myocardial_infarction)
+
+
+相关：[[late-night-snacking-lead-to-diabetes|late-night-snacking-lead-to-diabetes]]

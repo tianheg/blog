@@ -8,3 +8,6 @@ header: Tools
 Way 1: Settings -> Accessibility -> Display & Text Size -> Color Filters -> Grayscale
 
 Way 2: Settings -> Search "Color Filters"
+
+
+相关：[[ipad9|ipad9]]

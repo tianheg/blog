@@ -1276,3 +1276,6 @@ header: Web
 
 #### SSR: basic, nuxt, quasar, vite-ssr
 Hydration([wikipedia](https://en.wikipedia.org/wiki/Hydration_(web_development))):In web development, hydration or rehydration is a technique in which client-side JavaScript converts a static HTML web page, delivered either through static hosting or server-side rendering, into a dynamic web page by attaching event handlers to the HTML elements.
+
+
+相关：[[js-basics|js-basics]]

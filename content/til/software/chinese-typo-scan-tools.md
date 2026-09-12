@@ -50,3 +50,6 @@ date: 2026-08-02T01:32:43+08:00
 ## 参考
 
 [shibing624/pycorrector - GitHub](https://github.com/shibing624/pycorrector)
+
+
+相关：[[use-prettier|use-prettier]]

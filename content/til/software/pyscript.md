@@ -20,3 +20,6 @@ header: Programming
 &lt;body&gt; Hello world! &lt;br&gt; This is the current date and time, as computed by Python: <py-script> from datetime import datetime now = datetime.now() now.strftime("%m/%d/%Y, %H:%M:%S") </py-script> </body>
 
 </html> ```
+
+
+相关：[[write-a-good-prompt|write-a-good-prompt]]

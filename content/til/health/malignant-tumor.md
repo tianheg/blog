@@ -19,3 +19,6 @@ date: 2025-11-05T12:56:05+08:00
 ### 意义
 
 本研究提供了临床数据，提示与胰岛素相比，GLP-1RA 可能降低特定 OAC 的风险。
+
+
+相关：[[blood-glucose-diabetes|blood-glucose-diabetes]]

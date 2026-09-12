@@ -68,3 +68,6 @@ pacman -S --noconfirm pulseaudio pulseaudio-alsa
 \`\`\`bash #!/usr/bin/env bash
 
 pacman -Sc --noconfirm cd /var/cache/pacman/pkg tar -czvf /vagrant/pkg.tgz * ```
+
+
+相关：[[use-prettier|use-prettier]]

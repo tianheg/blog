@@ -74,3 +74,6 @@ header: Tools
 - 不要用 XX 管家/大师——本身就是最大的广告源
 - 不要盲目精简系统，保持安全更新
 - Edge 自带 Chrome 内核，可使用 Chrome 插件，适合国人的微软账户同步
+
+
+相关：[[use-prettier|use-prettier]]

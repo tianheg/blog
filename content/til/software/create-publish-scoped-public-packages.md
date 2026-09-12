@@ -22,3 +22,5 @@ cd /path/to/package npm publish --access public ```
 
 
 相关：[[gulpjs|gulpjs]]
+
+相关：[[use-pnpm|use-pnpm]]

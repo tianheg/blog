@@ -98,3 +98,6 @@ Do Not Fetch an API Route from `getStaticProps` or `getStaticPaths`
 
 1. [Adding Search with Algolia | Gatsby](https://www.gatsbyjs.com/docs/adding-search-with-algolia/)
 2. [Getting started with React InstantSearch | Algolia](https://www.algolia.com/doc/guides/building-search-ui/getting-started/react/)
+
+
+相关：[[coding|coding]]

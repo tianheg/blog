@@ -51,3 +51,6 @@ When deploying applications on Vercel, especially those using templating engines
 4. **Debugging and Logs:** Utilize Vercel's deployment logs to identify and troubleshoot issues related to file paths or configuration problems. Adjustments based on the logs can often resolve issues with templating engines.
 
 By understanding these limitations and configuring your deployment appropriately, you can effectively use templating engines like Handlebars and EJS on Vercel. It's crucial to adapt your application's architecture and deployment strategy to fit the serverless model that Vercel supports.
+
+
+相关：[[js-expressjs|js-expressjs]]

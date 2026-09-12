@@ -37,3 +37,6 @@ date: 2026-08-21T12:54:05+08:00
 - [看呼吸（张奕医生专访）：车内开空调睡觉导致一氧化碳中毒死亡](https://www.huxijie.com/kanhuxi/documents/2336)
 - [CDC: Carbon Monoxide Poisoning Basics](https://www.cdc.gov/carbon-monoxide/about/index.html)
 - [妙佑医疗国际：一氧化碳中毒](https://www.mayoclinic.org/zh-hans/diseases-conditions/carbon-monoxide/symptoms-causes/syc-20370642)
+
+
+相关：[[late-night-snacking-lead-to-diabetes|late-night-snacking-lead-to-diabetes]]

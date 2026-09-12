@@ -76,3 +76,6 @@ if (fflush(stdout) != 0 || ferror(stdout) != 0) { return EXIT<sub>FAILURE</sub>;
 return EXIT<sub>SUCCESS</sub>; } ```
 
 \`\`\`bash ./hello2 > /dev/full # 无错误提示 \`\`\`
+
+
+相关：[[coding|coding]]

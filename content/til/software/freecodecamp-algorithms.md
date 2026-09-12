@@ -800,3 +800,6 @@ function telephoneCheck(str) {
 }
 telephoneCheck('555-555-5555')
 ```
+
+
+相关：[[js-array-element-to-func-true|js-array-element-to-func-true]]

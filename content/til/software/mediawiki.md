@@ -79,3 +79,6 @@ Ensure that the mediawiki native hostname does not equal to the domain the wiki 
 请检查下列的主机、用户名和密码设置后重试。若使用"localhost"作为数据库主机，请尝试"127.0.0.1"（反之亦然）。
 
 把 Database host 改为 `database`。refer <https://stackoverflow.com/a/57312266/12539782>
+
+
+相关：[[mitmproxy|mitmproxy]]

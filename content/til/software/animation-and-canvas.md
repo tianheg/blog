@@ -77,3 +77,6 @@ measureText 辅助确定文本大小。
 <https://developer.mozilla.org/en-US/docs/Glossary/Canvas>
 
 `&lt;canvas&gt;` 并不具备语义特征，可能不那么适用 a11y。
+
+
+相关：[[coding|coding]]

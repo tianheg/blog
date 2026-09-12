@@ -175,3 +175,6 @@ https://a16z.com/2020/10/15/emerging-architectures-for-modern-data-infrastructur
 2. 角色扮演
 3. 无限逼问AI，指出AI的错误，让其输出重点
 4. 自己筛选一遍AI的输出
+
+
+相关：[[how-to-use-github-copilot|how-to-use-github-copilot]]

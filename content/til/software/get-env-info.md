@@ -14,3 +14,5 @@ Here are some tools I used:
 
 
 相关：[[what-will-happen-with-dotnew|what-will-happen-with-dotnew]]
+
+相关：[[shell|shell]]

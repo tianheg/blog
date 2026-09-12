@@ -24,3 +24,6 @@ https://voussoir.net/writing/css_for_printing
 https://github.com/weitblick/epub
 
 https://discourse.gohugo.io/t/generate-hugo-website-as-e-book-epub/29559
+
+
+相关：[[write-a-good-prompt|write-a-good-prompt]]

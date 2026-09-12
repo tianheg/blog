@@ -29,3 +29,6 @@ git stash pop
 ```
 
 Think of it as “pause & bookmark” for your uncommitted edits.
+
+
+相关：[[git-abort-merge|git-abort-merge]]

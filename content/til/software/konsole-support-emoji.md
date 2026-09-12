@@ -20,3 +20,6 @@ header: Linux
 \`\`\`text <?xml version="1.0" encoding="UTF-8"?> <!DOCTYPE fontconfig SYSTEM "fonts.dtd">
 
 &lt;fontconfig&gt; &lt;match&gt; &lt;test name="family"&gt;&lt;string&gt;IBM Plex Mono</string></test> &lt;edit name="family" mode="prepend" binding="strong"&gt; &lt;string&gt;Noto Color Emoji</string> </edit> </match> </fontconfig> ```
+
+
+相关：[[use-prettier|use-prettier]]

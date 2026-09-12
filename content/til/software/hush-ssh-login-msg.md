@@ -6,3 +6,6 @@ header: Linux
 ---
 
 touch ~/.hushlogin
+
+
+相关：[[keep-my-ssh-keys-safe|keep-my-ssh-keys-safe]]

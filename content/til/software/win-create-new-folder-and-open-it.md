@@ -30,3 +30,5 @@ exit
 
 
 相关：[[win-swap-caps-lock-and-left-ctrl|win-swap-caps-lock-and-left-ctrl]]
+
+相关：[[command-line-tools|command-line-tools]]

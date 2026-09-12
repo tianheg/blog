@@ -27,3 +27,5 @@ header: Consumption
 
 
 相关：[[edible-oil-standard-code|edible-oil-standard-code]]
+
+相关：[[how-to-buy-an-electronic-blood-pressure-monitor|how-to-buy-an-electronic-blood-pressure-monitor]]

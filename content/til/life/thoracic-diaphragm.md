@@ -17,3 +17,6 @@ header: Lifestyle
 Diaphragm 所指的部位即为横隔膜。
 
 来源: [Wikipedia: Thoracic diaphragm](https://en.wikipedia.org/wiki/Thoracic_diaphragm)
+
+
+相关：[[scientific-names-of-male-genitalia|scientific-names-of-male-genitalia]]

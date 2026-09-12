@@ -13,3 +13,6 @@ header: Web
 2. 避免命名空间
 3. 避免装饰器（现在）
 4. `#somePrivateField` 比 `private somePrivateField` 要好
+
+
+相关：[[use-typescript|use-typescript]]

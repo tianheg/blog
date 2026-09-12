@@ -24,3 +24,6 @@ Anki的核心功能就是间隔重复，所以Anki只使用这一个功能就足
 2. 种类使用第一、二种
 3. 关键特性使用第一、三种
 4. 应用方法使用第二种
+
+
+相关：[[how-to-make-good-notes|how-to-make-good-notes]]

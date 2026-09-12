@@ -12,3 +12,6 @@ OneDrive
 <https://foxlesbiao.github.io/p/onedrive-linux/> <https://archlinux.org/packages/community/x86_64/rclone/> <https://rclone.org/onedrive/> <https://github.com/kapitainsky/RcloneBrowser>
 
 坚果云
+
+
+相关：[[appimage-launcher|appimage-launcher]]

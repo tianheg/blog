@@ -11,3 +11,6 @@ find-file-at-point 是 Emacs 一个智能命令，它能根据光标下的文本
 
 - file-name-at-point-functions
 - ffap-guess-file-name-at-point
+
+
+相关：[[command-line-tools|command-line-tools]]

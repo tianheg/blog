@@ -70,3 +70,6 @@ dorsolateral PFC 负责冲动抑制和长远决策。持续的高多巴胺水平
 - 3 个月左右：受体敏感性有明显恢复，前额叶对边缘系统的抑制力逐步重建
 - 条件反射不会完全消失（extinction ≠ erasure），但会变弱。需要数百次新行为覆盖旧回路
 - 偶尔 relapse 不会 reset 全部进度，真正危险的是 relapse 后的"破罐子破摔"效应
+
+
+相关：[[late-night-snacking-lead-to-diabetes|late-night-snacking-lead-to-diabetes]]

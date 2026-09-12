@@ -79,3 +79,6 @@ C 级（Gloria Mark 实操建议）：
 - [Attention Restoration Theory](https://en.wikipedia.org/wiki/Attention_restoration_theory)
 - [冥想训练 RCT（Frontiers in Aging 2024）](https://pmc.ncbi.nlm.nih.gov/articles/PMC10940317/)
 - [Nature Sci Rep 2021：睡眠剥夺损害持续注意力](https://www.nature.com/articles/s41598-021-00188-8)
+
+
+相关：[[how-to-study|how-to-study]]

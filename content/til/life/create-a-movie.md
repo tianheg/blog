@@ -20,3 +20,6 @@ Creating a movie involves numerous steps and typically requires the involvement 
 6. **Exhibition**: The final step is the exhibition of the movie, where it is shown in theaters, on streaming platforms, or through other distribution channels. Companies involved include movie theaters, streaming platforms, and digital distribution platforms.
 
 Throughout these stages, various other companies and professionals may also be involved, such as financiers, insurance companies, legal teams, and more. The number of companies involved can vary depending on the scale and budget of the movie.
+
+
+相关：[[what-a-professional-movie-review-looks-like|what-a-professional-movie-review-looks-like]]

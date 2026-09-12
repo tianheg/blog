@@ -10,3 +10,6 @@ header: Tools
 [X-Content-Type-Options - HTTP | MDN](https://developer.mozilla.org/en-US/docs/Web/HTTP/Headers/X-Content-Type-Options)
 
 当 `X-Content-Type-Options` 的值为 nosniff 时，如果一个样式文件的 `Content-Type` 不是 `text/css`，或者一个脚本文件的 `Content-Type` 不是 [`text/javascript`](https://mimesniff.spec.whatwg.org/#javascript-mime-type)，那么加载当前文件的请求就会被阻挡，当前文件也就无法发挥作用。
+
+
+相关：[[use-pnpm|use-pnpm]]

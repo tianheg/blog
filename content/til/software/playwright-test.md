@@ -41,3 +41,6 @@ npx playwright install # 这一步会安装所有支持的浏览器 ```
 /* Configure projects for major browsers */ projects: [ { name: 'firefox', use: { ...devices['Desktop Firefox'], }, }, ], }
 
 module.exports = config ```
+
+
+相关：[[use-prettier|use-prettier]]

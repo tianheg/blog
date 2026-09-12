@@ -52,3 +52,6 @@ date: 2026-07-19T10:37:46+08:00
 - Greta Thunberg 公开称其为 "superpower"
 
 来源: [Wikipedia: Asperger syndrome](https://en.wikipedia.org/wiki/Asperger_syndrome)
+
+
+相关：[[blood-pressure|blood-pressure]]

@@ -90,3 +90,6 @@ header: Programming
 | SQL vs NoSQL | SQL像分 aisle 购物；NoSQL像按食谱一页存放所有信息 |
 
 来源: [40 Key Computer Science Concepts Explained Simply](https://carlcheo.com/compsci)
+
+
+相关：[[coding|coding]]

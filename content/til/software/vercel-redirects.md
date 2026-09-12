@@ -8,3 +8,6 @@ header: DevOps
 vercel.json:
 
 \`\`\`json { "redirects": [ { "source": "/life", "destination": "*life*" }, { "source": "/tech", "destination": "*tech*" } ] } \`\`\`
+
+
+相关：[[js|js]]

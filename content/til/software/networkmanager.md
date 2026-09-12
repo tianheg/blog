@@ -20,3 +20,6 @@ pcieport 0000:00:1c.5: AER: Multiple Corrected error received: 0000:03:00.0 rtw_
 https://bbs.archlinux.org/viewtopic.php?id=257233 wlp3s0: CTRL-EVENT-REGDOM-CHANGE init=BEACON_HINT type=UNKNOWN
 
 https://networkmanager.dev/docs/
+
+
+相关：[[android11-use-private-dns|android11-use-private-dns]]

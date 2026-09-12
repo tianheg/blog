@@ -25,3 +25,6 @@ yt-dlp <playlist_url>
 ## 使用浏览器 Cookie（用于观看年龄限制视频）
 yt-dlp --cookies-from-browser chrome <URL>
 ```
+
+
+相关：[[use-pnpm|use-pnpm]]

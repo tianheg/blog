@@ -13,3 +13,6 @@ header: Consumption
 ---
 
 来源: [Wes Bos: Uses](https://wesbos.com/uses#desk-setup)
+
+
+相关：[[buy-laptop|buy-laptop]]

@@ -9,3 +9,6 @@ header: Web
 <script src="https://cdn.jsdelivr.net/npm/iconify-icon/dist/iconify-icon.min.js"></script>
 <iconify-icon icon="fa6-brands:github"></iconify-icon>
 ```
+
+
+相关：[[use-typescript|use-typescript]]

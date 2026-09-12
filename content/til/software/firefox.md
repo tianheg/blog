@@ -138,3 +138,6 @@ https://scottpaterson.ca/firefox-dark-mode-pdf/
 https://developer.mozilla.org/en-US/docs/Web/API/Element/setHTML
 
 在 about:config 中设置 `dom.security.sanitizer.enabled = true`，重启 Firefox。
+
+
+相关：[[js-expressjs|js-expressjs]]

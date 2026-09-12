@@ -38,3 +38,6 @@ act -v ```
 在 GitHub 上运行 Actions 时，`GITHUB<sub>TOKEN</sub>` 是自动生成的，本地运行则需要添加：
 
 \`\`\`bash act -s GITHUB<sub>TOKEN</sub>=[insert token or leave blank for secure input] \`\`\`
+
+
+相关：[[git-use-dura|git-use-dura]]

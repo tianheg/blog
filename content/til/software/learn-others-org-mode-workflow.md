@@ -18,3 +18,6 @@ header: Tools
 ## Lean to use Clock
 
 <https://writequit.org/denver-emacs/presentations/2017-04-11-time-clocking-with-org.html>
+
+
+相关：[[use-typescript|use-typescript]]

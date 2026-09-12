@@ -12,3 +12,6 @@ In Chrome, there are some ways to do that:
 1. Ctrl + left click
 2. Press mouse scroll wheel
 3. Right-Click Menu -> open link in new tab
+
+
+相关：[[use-typescript|use-typescript]]

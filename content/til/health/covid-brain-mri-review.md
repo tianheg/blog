@@ -29,3 +29,6 @@ date: 2026-08-10T12:55:11+08:00
 ## 参考
 - [Cerebral Cortex: Widespread structural and functional brain alterations in COVID-19 — a systematic review of MRI studies](https://doi.org/10.1093/cercor/bhag022)
 - [PsyPost: Brain scans reveal widespread structural and functional changes in patients following COVID-19 infection](https://www.psypost.org/brain-scans-reveal-widespread-structural-and-functional-changes-in-patients-foll/)
+
+
+相关：[[lab-tests|lab-tests]]

@@ -57,3 +57,6 @@ header: Programming
 「使用 Clojure records」那个问题需要更多解释：对于一些不可变的概念，比如 uri、date、connection，通过设计良好的 records 表示它们能够让实现细节隐藏在合适的一层。这些不可变的概念倾向于拥有相关操作的固定集合，这能够通过 `Protocol` 建模。
 
 我发现解释或者提出问题能够让我在编程方面更有效率。它们帮助我训练我的潜意识思维，我使用的分析性思维越多，我得到的发散性思维就越好。
+
+
+相关：[[how-to-use-github-copilot|how-to-use-github-copilot]]

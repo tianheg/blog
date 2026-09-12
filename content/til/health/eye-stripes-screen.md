@@ -16,3 +16,6 @@ date: 2025-11-07T00:03:14+08:00
 可能视网膜、玻璃体、偏头痛先兆，立即眼科查眼底+OCT。
 
 先调刷新率和亮度，一步排除 90% 的“屏幕条纹”。
+
+
+相关：[[late-night-snacking-lead-to-diabetes|late-night-snacking-lead-to-diabetes]]

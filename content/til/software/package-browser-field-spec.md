@@ -40,3 +40,6 @@ header: Web
 When a javascript module is prepared for use on a client there are two major concerns: certain features are already provided by the client, and certain features are not available. Features provided by a client can include http requests, websockets, dom manipulation. Features not available would include tcp sockets, system disk IO.
 
 The browser field is where the module author can hint to the bundler which elements (other modules or source files) need to be replaced when packaging.
+
+
+相关：[[js-containers|js-containers]]

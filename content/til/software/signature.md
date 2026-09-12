@@ -22,3 +22,6 @@ Friend me, baby: https://www.facebook.com/mayadanube
 尽量使内容简短。邮件越短，得到回复的可能性越大。要直截了当。五句话为宜。如果邮件太长，他们可能会拖延，最终不回复。
 
 使用短段落。留有足够的空白。在屏幕上阅读与在书本上阅读不同。
+
+
+相关：[[git-ssh-signing-key|git-ssh-signing-key]]

@@ -27,3 +27,5 @@ header: Linux
 
 
 相关：[[debian-arch-philosophy|debian-arch-philosophy]]
+
+相关：[[software-program-application|software-program-application]]

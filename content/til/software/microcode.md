@@ -9,3 +9,6 @@ header: Programming
 - <https://wiki.archlinux.org/title/Microcode>
 
 有些微码是附在内核中，有些则需要单独安装一个软件包，这在Arch Linux中就是intel-ucode/amd-ucode。
+
+
+相关：[[use-prettier|use-prettier]]

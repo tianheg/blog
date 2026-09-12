@@ -57,3 +57,6 @@ Write a commit is to comunicate, is to get work done and tell people about it.
 1. Make atomic commits.
 2. Write good commit messages.
 3. Revise your development history before sharing
+
+
+相关：[[git-edit-specific-commit-message|git-edit-specific-commit-message]]

@@ -16,3 +16,6 @@ header: Tools
 搜索内容就变成了：`(from:dotey) min_faves:20 until:2024-05-08 since:2024-05-01`
 
 https://twitter.com/leeoxiang/status/1788024003325812970
+
+
+相关：[[use-typescript|use-typescript]]

@@ -24,3 +24,6 @@ T 细胞分两类：辅助性 T 细胞（CD4）协调免疫反应，杀伤性 T 
 - [Cell Reports 论文](https://doi.org/10.1016/j.celrep.2026.117728)
 - [ScienceAlert 报道](https://www.sciencealert.com/people-who-live-past-100-may-be-protected-by-rare-cancer-killing-immune-cells)
 - [科学网报道](https://news.sciencenet.cn/htmlnews/2026/8/570138.shtm)
+
+
+相关：[[lab-tests|lab-tests]]

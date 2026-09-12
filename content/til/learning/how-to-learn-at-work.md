@@ -100,3 +100,6 @@ X不一定擅长解决某些问题，但是他就是能够通过别人的帮助�
 更多：
 
 - [三个故事 | plantegg](https://plantegg.github.io/2022/01/01/三个故事/)
+
+
+相关：[[how-to-solve-problems|how-to-solve-problems]]

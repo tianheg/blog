@@ -40,3 +40,6 @@ ddgr hello -w/--site SITE
 ddgr hello -x/--expand
 # show complete url in search results
 ```
+
+
+相关：[[command-line-tools|command-line-tools]]

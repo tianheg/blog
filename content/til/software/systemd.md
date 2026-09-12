@@ -14,3 +14,6 @@ header: Linux
 https://systemd.io/
 
 https://systemd-by-example.com/
+
+
+相关：[[shell|shell]]

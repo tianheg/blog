@@ -13,3 +13,6 @@ Error: spawn pip3.9 ENOENT
 ```
 
 Change Node.js version from v20 to v18 can fix it.
+
+
+相关：[[okonet-lint-staged|okonet-lint-staged]]

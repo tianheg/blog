@@ -61,3 +61,6 @@ header: Finance
 社保能不断缴就尽量不要断缴，以保障各项权益的连续性。
 
 来源: [深圳社保断缴是不是算白缴了？卡里的钱会清零吗？](https://mp.weixin.qq.com/s/ZvgD6Dm4tEUPoH_V2-leqg)
+
+
+相关：[[avoid-single-point-of-failure|avoid-single-point-of-failure]]
