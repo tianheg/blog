@@ -1,0 +1,61 @@
+/* ── prose 内元素的全站修正 ─────────────────────────────────────────
+   放独立文件的原因同 table.css：Tailwind v4 的 css.TailwindCSS 管线
+   会丢弃未包在 @layer 里的 raw CSS（blog-project-analysis Pitfall #37）。
+
+   这里修的是 @tailwindcss/typography 的两个默认值：
+
+   1) 代码块配色割裂 + 浅字浅底
+      typography 默认 --tw-prose-pre-bg 是深色、--tw-prose-pre-code 是浅色。
+      模板里只覆盖了背景（prose-pre:bg-gray-50），文字颜色仍走默认的浅色，
+      于是「没有语言标注」的代码块 = 浅底浅字，几乎读不出来（实测确认）。
+      同时「有语言标注」的代码块由 Chroma 输出 dracula 内联样式（#282a36 深底），
+      同页面上两种风格的代码块并存。
+      → 统一成 dracula 那套（深底浅字），与行内代码区分开。
+
+   2) 表格里的代码块继承 prose-pre 的横向留白，在窄单元格里溢出
+      （表格侧的处理在 table.css） */
+
+.prose :where(pre) {
+  background-color: #282a36 !important; /* 与 Chroma dracula 一致，消除两种风格 */
+  color: #f8f8f2 !important;
+  border: 1px solid #383a4a !important;
+  border-radius: 0.5rem;
+  padding: 0.875rem 1rem;
+  font-size: 0.875rem;
+  line-height: 1.65;
+  overflow-x: auto;
+  -webkit-overflow-scrolling: touch;
+}
+
+.prose :where(pre) :where(code) {
+  background: none;
+  border: 0;
+  padding: 0;
+  color: inherit;
+  font-size: inherit;
+  font-weight: 400;
+}
+
+/* typography 会在行内代码前后插入反引号，中文排版里显得啰嗦 */
+.prose :where(code):not(:where(pre code))::before,
+.prose :where(code):not(:where(pre code))::after {
+  content: none;
+}
+
+/* 行内代码：浅底 + 深字，与代码块（深底）明确区分 */
+.prose :where(code):not(:where(pre code)) {
+  background-color: var(--color-base-200);
+  color: var(--color-base-content);
+  padding: 0.1em 0.375em;
+  border-radius: 0.25rem;
+  font-size: 0.875em;
+  font-weight: 400;
+}
+
+/* 暗色模式下页面本身已深，代码块再深一档以保持层次 */
+@media (prefers-color-scheme: dark) {
+  .prose :where(pre) {
+    background-color: #21222c !important;
+    border-color: #343746 !important;
+  }
+}

@@ -21,6 +21,17 @@
   {{ end }}
 {{ end }}
 
+{{/* prose 元素修正（代码块配色/行内代码） */}}
+{{ with resources.Get "css/prose.css" | resources.Minify }}
+  {{ if hugo.IsDevelopment }}
+    <link rel="stylesheet" href="{{ .RelPermalink }}">
+  {{ else }}
+    {{ with . | fingerprint }}
+      <link rel="stylesheet" href="{{ .RelPermalink }}" integrity="{{ .Data.Integrity }}" crossorigin="anonymous">
+    {{ end }}
+  {{ end }}
+{{ end }}
+
 {{/* TIL 专属 + 命令面板样式（独立文件，绕过 Tailwind 管线，见 Pitfall #37） */}}
 {{ with resources.Get "css/til.css" | resources.Minify }}
   {{ if hugo.IsDevelopment }}
