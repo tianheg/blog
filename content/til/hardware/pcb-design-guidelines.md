@@ -6,6 +6,8 @@ date: 2026-03-16T13:44:39+08:00
 
 来源：西安电子科技大学PPT（2018年）
 
+铺铜的具体做法另有专篇：[[pcb-copper-pour|PCB 铺铜设计要点]]。板子做完之后的存放见 [[pcb-storage-box|电路板与元器件存放箱材质选择]]，焊接环节的助焊剂原理与防护见 [[soldering-flux-principle-toxicity|助焊剂工作原理与毒性]]。
+
 其他资料：
 - [PCB设计学习 by 嘉立创](https://wiki.lceda.cn/zh-hans/contest/e-contests/basic-training/pcb-design.html)
 - [PCB设计与应用 by 中国大学MOOC](https://www.icourse163.org/course/NJCIT-1206691852?tid=1476747486)

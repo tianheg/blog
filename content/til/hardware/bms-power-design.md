@@ -15,7 +15,9 @@ BMS (Battery Management System) 的电源设计面临独特挑战：需要从 7.
   - **Flyback 反激变换器（最常见）：** 反激变压器产生"浮动"电源岛，简单、低成本、易做多路隔离输出。
   - **Stacked Supply / Bootstrap（电荷泵）：** 通过电容逐级向上传递能量，形成菊花链浮动电源。常见于 ADI/LTC 和 TI 的高压 BMIC。
 
-**隔离通信屏障：** 即使电源做了隔离，高侧 AFE 和低侧 MCU 之间的 SPI/I2C/UART 也需要数字隔离器，EV 应用中需耐受 2.5kV-5kV。
+**隔离通信屏障：** 即使电源做了隔离，高侧 AFE 和低侧 MCU 之间的 SPI/I2C/UART 也需要数字隔离器，EV 应用中需耐受 2.5kV-5kV。隔离与共模的具体设计见 [[can485-isolation-common-mode|CAN 与 485 隔离设计]]。
+
+**与均衡的分工：** 电源设计保证各电压域的 IC 活着，[[cell-balancing|电池均衡]]解决电芯一致性 —— 两者合起来才是完整的 BMS。包内少线通信（HDQ / 1-Wire）见 [[single-wire-bus-principles|一线通电路原理]]；大功率密度场景的供电标准演进可参考 [[m-crps-server-psu|M-CRPS 服务器电源]]。
 
 **关键知识域：**
 

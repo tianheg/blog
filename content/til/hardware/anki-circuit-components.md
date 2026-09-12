@@ -6,6 +6,8 @@ date: 2026-05-21T18:11:49+08:00
 
 高效记忆元器件参数、选型规则、失效模式的 Anki 使用框架。
 
+配套的理论学习路径见 [[circuit-analysis-plan|电路分析进阶学习计划]] —— 那边按五个阶段推进，Anki 负责复习侧。
+
 - 目标人群：硬件工程师（开关电源 / MCU 周边 / 信号链方向）
 - 建议工具：Anki Desktop + AnkiMobile / AnkiDroid
 - 插件推荐：Image Occlusion Enhanced、AnkiConnect、Review Heatmap
