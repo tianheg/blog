@@ -23,10 +23,8 @@
   {{ partial "content/post-tags.html" . }}
 </article>
 
-
-{{/* --- Backlinks (server-side, from functions/backlink-index.html) --- */}}
-{{ partial "content/backlinks.html" . }}
-
+{{/* 根级页面不展示「引用这篇的」——search、about、now、uses 等 20 个页面
+     是功能页/索引页，不是笔记，被谁引用对读者没有意义。 */}}
 
 {{/* --- Footer and comments --- */}}
 {{ partial "components/email-reply.html" . }}
