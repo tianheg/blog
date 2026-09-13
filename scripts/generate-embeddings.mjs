@@ -74,9 +74,38 @@ function findHtmlFiles(dir, rootDir) {
   return files;
 }
 
+/**
+ * Decode the HTML entities Hugo writes into <title> / body text.
+ * Without this the index stores markup instead of text: a title like
+ * `Pagefind &#43; Hugo` gets embedded (and displayed) verbatim, and the
+ * 2026-09-13 template change that started escaping titles silently changed
+ * every vector. Called on both title and body so upstream escaping can't
+ * leak into the index.
+ */
+const NAMED_ENTITIES = {
+  amp: '&', lt: '<', gt: '>', quot: '"', apos: "'", nbsp: ' ',
+  hellip: '…', mdash: '—', ndash: '–', middot: '·', times: '×',
+  laquo: '«', raquo: '»', copy: '©', reg: '®', trade: '™',
+};
+
+function decodeEntities(s) {
+  return s
+    .replace(/&#x([0-9a-f]+);/gi, (m, h) => {
+      const cp = parseInt(h, 16);
+      return cp <= 0x10ffff ? String.fromCodePoint(cp) : m;
+    })
+    .replace(/&#(\d+);/g, (m, d) => {
+      const cp = Number(d);
+      return cp <= 0x10ffff ? String.fromCodePoint(cp) : m;
+    })
+    .replace(/&([a-z]+);/gi, (m, name) => NAMED_ENTITIES[name.toLowerCase()] ?? m);
+}
+
 function extractPageContent(html) {
   const titleMatch = html.match(/<title>([^<]+)<\/title>/i);
-  const title = titleMatch ? titleMatch[1].replace(/\s*\|\s*Tianhe Gao$/, '').trim() : '';
+  const title = titleMatch
+    ? decodeEntities(titleMatch[1].replace(/\s*\|\s*Tianhe Gao$/, '')).trim()
+    : '';
 
   const bodyMatch = html.match(/<article[^>]*data-pagefind-body[^>]*>([\s\S]*?)<\/article>/i);
   if (!bodyMatch) return null;
@@ -88,7 +117,7 @@ function extractPageContent(html) {
     .replace(/<header[\s\S]*?<\/header>/gi, '')
     .replace(/<footer[\s\S]*?<\/footer>/gi, '')
     .replace(/<[^>]+>/g, ' ')
-    .replace(/&[a-z]+;/gi, ' ')
+    .replace(/&(?:[a-z]+|#\d+|#x[0-9a-f]+);/gi, (m) => decodeEntities(m))
     .replace(/\s+/g, ' ')
     .trim();
 
