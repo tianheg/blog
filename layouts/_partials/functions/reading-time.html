@@ -51,6 +51,6 @@
 {{- $mins := div (add $words 199) 200 -}}
 {{- if lt $mins 1 -}}{{- $mins = 1 -}}{{- end -}}
 
-<span class="text-sm text-gray-400 dark:text-gray-500">
+<span class="text-sm text-gray-600 dark:text-gray-400">
   <span id="reading-time">{{ $mins }} min read</span> · <span id="word-count">{{ $words }} words</span>
 </span>

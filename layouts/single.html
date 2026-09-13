@@ -9,7 +9,7 @@
   {{/* --- Date for pages that have it --- */}}
   {{ if .Date }}
   <div class="not-prose mb-8 pb-6 border-b border-gray-200 dark:border-gray-800">
-    <time class="text-sm text-gray-400 dark:text-gray-500" datetime='{{ .Date.Format "2006-01-02" }}'>
+    <time class="text-sm text-gray-600 dark:text-gray-400" datetime='{{ .Date.Format "2006-01-02" }}'>
       {{ .Date.Format (default "02 Jan, 2006" .Site.Params.dateFormat) }}
     </time>
   </div>

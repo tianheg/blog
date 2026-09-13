@@ -48,7 +48,7 @@
         <p>
           <strong class="font-medium">看关系</strong>：每篇底部「引用这篇的」带引用原文；<a href="/graph/" class="text-emerald-600 dark:text-emerald-400 hover:underline">/graph/</a> 是全站关系俯视图；悬停站内链接出预览。
         </p>
-        <p class="text-xs text-gray-400 dark:text-gray-500">
+        <p class="text-xs text-gray-600 dark:text-gray-400">
           方法论：
           <a href="/til/learning/knowledge-management-methodology/" class="text-emerald-600 dark:text-emerald-400 hover:underline">知识管理系统的方法论结论</a>
         </p>
@@ -74,7 +74,7 @@
                      text-gray-600 dark:text-gray-400 hover:text-gray-900 dark:hover:text-gray-100
                      hover:bg-gray-50 dark:hover:bg-gray-800 transition-colors whitespace-nowrap"
               data-header-btn="{{ .Key }}">
-        {{ .Key }} <span class="text-gray-400 dark:text-gray-500">{{ len .Pages }}</span>
+        {{ .Key }} <span class="text-gray-600 dark:text-gray-400">{{ len .Pages }}</span>
       </button>
       {{ end }}
       <button onclick="showAllHeaders()"
@@ -88,7 +88,7 @@
     <section class="mb-10 max-w-[46rem]" data-header="{{ .Key }}">
       <div class="flex items-baseline gap-2.5 mb-2">
         <h2 class="text-base font-semibold text-gray-900 dark:text-gray-100">{{ .Key }}</h2>
-        <span class="text-xs text-gray-400 dark:text-gray-500 tabular-nums">{{ len .Pages }}</span>
+        <span class="text-xs text-gray-600 dark:text-gray-400 tabular-nums">{{ len .Pages }}</span>
       </div>
       <div class="space-y-px">
         {{ range .Pages.ByTitle }}
@@ -98,7 +98,7 @@
             {{ partial "functions/get-title" (dict "page" .) }}
           </span>
           {{ if not .Date.IsZero }}
-          <span class="text-xs text-gray-400 dark:text-gray-500 shrink-0 tabular-nums">{{ .Date.Format "2006-01-02" }}</span>
+          <span class="text-xs text-gray-600 dark:text-gray-400 shrink-0 tabular-nums">{{ .Date.Format "2006-01-02" }}</span>
           {{ end }}
         </a>
         {{ end }}
@@ -113,8 +113,8 @@
       <details class="group">
       <summary class="flex items-baseline gap-2.5 mb-2 cursor-pointer list-none">
         <h2 class="text-base font-semibold text-gray-900 dark:text-gray-100">其他</h2>
-        <span class="text-xs text-gray-400 dark:text-gray-500 tabular-nums group-open:hidden">{{ len $noHeader }} 篇</span>
-        <svg class="w-3 h-3 text-gray-400 ml-0.5 transition-transform group-open:rotate-90" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"/></svg>
+        <span class="text-xs text-gray-600 dark:text-gray-400 tabular-nums group-open:hidden">{{ len $noHeader }} 篇</span>
+        <svg class="w-3 h-3 text-gray-500 dark:text-gray-400 ml-0.5 transition-transform group-open:rotate-90" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"/></svg>
       </summary>
       <div class="space-y-px mt-2">
         {{ range $noHeader.ByTitle }}
@@ -124,7 +124,7 @@
             {{ partial "functions/get-title" (dict "page" .) }}
           </span>
           {{ if not .Date.IsZero }}
-          <span class="text-xs text-gray-400 dark:text-gray-500 shrink-0 tabular-nums">{{ .Date.Format "2006-01-02" }}</span>
+          <span class="text-xs text-gray-600 dark:text-gray-400 shrink-0 tabular-nums">{{ .Date.Format "2006-01-02" }}</span>
           {{ end }}
         </a>
         {{ end }}
@@ -148,7 +148,7 @@
       <a href="{{ .RelPermalink }}"
          class="group flex items-baseline justify-between gap-3 py-2 px-3 -mx-3 rounded-md transition-colors hover:bg-gray-50 dark:hover:bg-gray-800/40">
         <h2 class="text-[15px] font-medium text-gray-800 dark:text-gray-200 group-hover:text-emerald-600 dark:group-hover:text-emerald-400 transition-colors">{{ .Title }}</h2>
-        <p class="text-xs text-gray-400 dark:text-gray-500 shrink-0 tabular-nums">{{ len $subPages }} 篇</p>
+        <p class="text-xs text-gray-600 dark:text-gray-400 shrink-0 tabular-nums">{{ len $subPages }} 篇</p>
       </a>
     {{ end }}
     </div>
@@ -163,7 +163,7 @@
           {{ partial "functions/get-title" (dict "page" .) }}
         </span>
         {{ if not .Date.IsZero }}
-        <span class="text-xs text-gray-400 dark:text-gray-500 shrink-0 tabular-nums">{{ .Date.Format "2006-01-02" }}</span>
+        <span class="text-xs text-gray-600 dark:text-gray-400 shrink-0 tabular-nums">{{ .Date.Format "2006-01-02" }}</span>
         {{ end }}
       </a>
       {{ end }}
@@ -195,7 +195,7 @@
                      text-gray-600 dark:text-gray-400 hover:text-gray-900 dark:hover:text-gray-100 hover:bg-gray-50 dark:hover:bg-gray-800"
               data-header-btn="{{ .Key }}">
         {{ .Key }}
-        <span class="text-xs text-gray-400 dark:text-gray-500 ml-1">{{ len .Pages }}</span>
+        <span class="text-xs text-gray-600 dark:text-gray-400 ml-1">{{ len .Pages }}</span>
       </button>
       {{ end }}
       <button onclick="showAllHeaders()"
