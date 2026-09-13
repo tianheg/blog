@@ -14,7 +14,10 @@
     {{- end -}}
   {{- end -}}
 {{- end -}}
-<table class="md-table"
+{{- $cards := and (ge (len $heads) 3) (le (len .TBody) 40) -}}
+{{- $long := gt (len .TBody) 40 -}}
+{{- $longGrid := and $long (ge (len $heads) 4) -}}
+<table class="md-table{{ if $cards }} md-cards{{ end }}{{ if $long }} md-long{{ end }}{{ if $longGrid }} md-long-grid{{ end }}"
   {{- range $k, $v := .Attributes }}
     {{- if $v }}
       {{- printf " %s=%q" $k $v | safeHTMLAttr }}

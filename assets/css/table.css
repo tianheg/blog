@@ -94,8 +94,10 @@
      · 3 列 70 个：列宽被压到 ~119px，「红细胞计数 (RBC)」这类单元格都折行；
        单元格长度长尾明显（34% 有 >30 字符的格子）→ 卡片形态（整行宽 + 字段名）更好读，
        代价是高度 +36%（实测 lab-tests 表格 393 → 534px）
-   结论：≤2 列保持表格本体；≥3 列转卡片，并在每行前置字段名
-        （data-label 由 layouts/_markup/render-table.html 注入）。
+   结论：≤2 列保持表格本体；≥3 列且 ≤40 行转卡片，并在每行前置字段名
+        （data-label 由 layouts/_markup/render-table.html 注入）；
+        >40 行的数据表（如 /watch/ 的 1009 行观影表）也保持表格 —— 卡片化那里
+        会变成 1009 张卡、16 万 px 的页面。
    手写 HTML 表格没有 .md-table（不走 render hook），没有列名可显示 → 不进卡片分支。 */
 @media (max-width: 640px) {
   /* 表格形态：只收紧内边距（3 列表格实测超宽 12px，收内边距即回到视口内） */
@@ -109,6 +111,48 @@
     font-size: 0.8125rem;
   }
 
+  /* 长数据表（>40 行，保表格形态）：表头允许折行 + 收紧行距。
+     ① 桌面规则 th{white-space:nowrap} 会让 "Release Year" 独占 ~110px，
+        把内容列（电影名）挤到折行；
+     ② 收紧上下内边距，每行省 ~27px。
+     /watch/ 实测：卡片 146px/条、页面 164,534px → 表格 57px/行、66,868px。
+     ⚠️ 别给长表设 width:max-content 或放开 max-width：Review 这类稀疏列的
+     单元格里有 460 字符的长文本，表格会膨胀到 1,000,000px 宽（实测踩过）。 */
+  .prose :where(table.md-long) :where(thead th) {
+    white-space: normal;
+  }
+
+  .prose :where(table.md-long) :where(thead th),
+  .prose :where(table.md-long) :where(tbody td) {
+    padding-top: 0.35rem;
+    padding-bottom: 0.35rem;
+    font-size: 0.875rem;
+  }
+
+  /* 长数据表用固定布局按列分配宽度，让「内容列」（第 2 列）拿到最大份额。
+     否则 auto layout 按最长内容分配：/watch/ 的 Review 只有 8% 的行有内容，
+     却因为那几行有 460 字符的长文本而拿到 139px，把电影名列挤到 113px、
+     Type 列挤到 48px（「电视剧」折成两行）。
+     fixed 后实测：Type 58 / Name 139 / Review 102 / Year 66，
+     行高中位 35px、表格 60,273px（auto 时为 64,527px）。
+     这套列宽假设是「首列短键 + 第 2 列名称 + 第 3 列长文本 + 末列年份」，
+     只对 ≥4 列的长表启用（render hook 的 md-long-grid；本站只有 /watch/ 命中），
+     避免把 1–3 列的长表首列压成 3.6em。 */
+  .prose :where(table.md-long-grid) {
+    table-layout: fixed;
+    width: 100%;
+    max-width: 100%;
+  }
+
+  .prose :where(table.md-long-grid) :where(thead th:nth-child(1)) { width: 3.6em; }
+  .prose :where(table.md-long-grid) :where(thead th:nth-child(3)) { width: 28%; }
+  .prose :where(table.md-long-grid) :where(thead th:nth-child(4)) { width: 3.4em; }
+
+  .prose :where(table.md-long-grid) :where(thead th:first-child),
+  .prose :where(table.md-long-grid) :where(tbody td:first-child) {
+    white-space: nowrap;
+  }
+
   .prose :where(thead th:last-child),
   .prose :where(tbody td:last-child) {
     padding-right: 0.5rem;
@@ -118,18 +162,18 @@
     font-size: 0.75rem;
   }
 
-  /* 卡片形态：仅 ≥3 列的 markdown 表格 */
-  .prose :where(table.md-table):has(tbody td:nth-child(3)) {
+  /* 卡片形态：≥3 列且 ≤40 行的 markdown 表格（长数据表见上「长数据表」一节） */
+  .prose :where(table.md-cards) {
     display: block;
     width: 100%;
     overflow: visible;
   }
 
-  .prose :where(table.md-table):has(tbody td:nth-child(3)) :where(thead) {
+  .prose :where(table.md-cards) :where(thead) {
     display: none;
   }
 
-  .prose :where(table.md-table):has(tbody td:nth-child(3)) :where(tbody tr) {
+  .prose :where(table.md-cards) :where(tbody tr) {
     display: block;
     padding: 0.75rem 0.875rem;
     margin-bottom: 0.625rem;
@@ -138,11 +182,11 @@
     background-color: var(--color-base-100);
   }
 
-  .prose :where(table.md-table):has(tbody td:nth-child(3)) :where(tbody tr:hover) {
+  .prose :where(table.md-cards) :where(tbody tr:hover) {
     background-color: var(--color-base-200);
   }
 
-  .prose :where(table.md-table):has(tbody td:nth-child(3)) :where(tbody td) {
+  .prose :where(table.md-cards) :where(tbody td) {
     display: block;
     padding: 0.1875rem 0;
     border: none;
@@ -150,20 +194,20 @@
   }
 
   /* 首列作为该卡的标题 */
-  .prose :where(table.md-table):has(tbody td:nth-child(3)) :where(tbody td:first-child) {
+  .prose :where(table.md-cards) :where(tbody td:first-child) {
     padding-left: 0;
     margin-bottom: 0.3125rem;
     font-weight: 600;
   }
 
-  .prose :where(table.md-table):has(tbody td:nth-child(3)) :where(tbody td + td) {
+  .prose :where(table.md-cards) :where(tbody td + td) {
     color: var(--color-base-content);
     opacity: 0.88;
     font-size: 0.875rem;
   }
 
   /* 字段名（原来这里是写死的 "· "，读者不知道那一列是什么） */
-  .prose :where(table.md-table):has(tbody td:nth-child(3)) :where(tbody td + td)::before {
+  .prose :where(table.md-cards) :where(tbody td + td)::before {
     content: attr(data-label) " ";
     opacity: 0.5;
     font-size: 0.8125rem;
