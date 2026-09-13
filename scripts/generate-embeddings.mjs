@@ -14,9 +14,15 @@
  * The Worker at runtime fetches embeddings.bin + pages.json from ASSETS and
  * only embeds the query — no KV, no cold-start re-embedding of all pages.
  *
- * Requires a Cloudflare API token with Workers AI access:
+ * Requires a Cloudflare API token with Workers AI access
+ * (permission: Account → Workers AI → Read; account ACCOUNT_ID below):
  *   - env CF_API_TOKEN, or
- *   - the MCP OAuth token in ~/.hermes/config.yaml (mcp_servers.cloudflare)
+ *   - CF_API_TOKEN in the self-hosted Infisical vault, read via
+ *     ~/.hermes/scripts/infisical-helper.sh
+ *
+ * Do NOT reintroduce a "scrape a Bearer token out of ~/.hermes/config.yaml"
+ * fallback. It picks up some *other* MCP server's token and fails with a
+ * misleading 401 (2026-09-13 incident: it grabbed the context7 header).
  *
  * Run (after `npm run build`): node scripts/generate-embeddings.mjs
  */
@@ -27,6 +33,7 @@ import {
 } from 'node:fs';
 import { join, relative } from 'node:path';
 import { createHash } from 'node:crypto';
+import { execFileSync } from 'node:child_process';
 
 const PUBLIC_DIR = join(import.meta.dirname, '..', 'public');
 const OUT_DIR = join(import.meta.dirname, '..', 'static', 'pagefind-semantic');
@@ -90,16 +97,35 @@ function extractPageContent(html) {
   return { title, text };
 }
 
+const INFISICAL_HELPER = join(process.env.HOME || '/root', '.hermes', 'scripts', 'infisical-helper.sh');
+
 async function getApiToken() {
   if (process.env.CF_API_TOKEN) return process.env.CF_API_TOKEN;
-  // Fallback: MCP OAuth token in ~/.hermes/config.yaml
-  const configPath = join(process.env.HOME || '/root', '.hermes', 'config.yaml');
-  try {
-    const raw = readFileSync(configPath, 'utf-8');
-    const m = raw.match(/Authorization:\s*Bearer\s+(\S+)/);
-    if (m) return m[1];
-  } catch { /* fall through */ }
-  throw new Error('No Cloudflare API token found. Set CF_API_TOKEN env var.');
+
+  // Fallback: CF_API_TOKEN in the self-hosted Infisical vault, read through the
+  // shared helper (universal auth, proxy bypass baked in). Never scrape
+  // ~/.hermes/config.yaml for a Bearer token — see the header comment.
+  if (existsSync(INFISICAL_HELPER)) {
+    try {
+      const out = execFileSync(INFISICAL_HELPER, { encoding: 'utf-8', timeout: 20000 });
+      for (const line of out.split('\n')) {
+        const m = line.match(/^\s*CF_API_TOKEN\s*=\s*(.*)$/);
+        if (!m) continue;
+        // `infisical export --format=dotenv` wraps every value in single quotes
+        const value = m[1].trim().replace(/^'(.*)'$/, '$1');
+        if (value) return value;
+      }
+    } catch { /* fall through to the error below */ }
+  }
+
+  throw new Error(
+    'No Cloudflare API token with Workers AI access found. Fix one of:\n' +
+    '  a) store it in Infisical (recommended — picked up automatically):\n' +
+    '       infisical secrets set CF_API_TOKEN=<token> --env=dev --projectId=559e7fc2 \\\n' +
+    '         --domain=http://192.168.8.12:8090/api\n' +
+    '     token needs: Account → Workers AI → Read  (account ' + ACCOUNT_ID + ')\n' +
+    '  b) one-off run:  CF_API_TOKEN=<token> npm run embed'
+  );
 }
 
 async function embedBatch(token, texts) {
