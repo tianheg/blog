@@ -43,7 +43,7 @@ powercfg /qh SCHEME_CURRENT SUB_PRESENCE
 | Standby Reset Percentage | 75% | 电量回到此值以上时重置计数 |
 | Standby Reserve Time | 1200 秒（20min） | 唤醒后保证的亮屏时间 |
 
-读法：进入待机后开始计耗电，只要在刷新窗口内没耗穿预算就允许继续待机，耗穿了就转休眠；宽限期保证不会一进待机就立刻转。
+读法：进入待机后开始计耗电，只要在刷新窗口内没耗穿预算就允许继续待机；耗穿了会**退出待机做降级处理**（Austerity / Restricted Standby：停维护、断网）再进待机——**并不必然转休眠**。宽限期保证不会一进待机就立刻触发。（2026-09-13 实测修正，见下文「预算超限只做降级」）
 
 ## powercfg 输出里的 AC 与 DC
 
@@ -83,7 +83,44 @@ powercfg /setactive SCHEME_CURRENT
 
 `powercfg /devicequery wake_armed` 在 S4 下往往只列出少数几项（如 USB4 Root Router），键盘鼠标不在其中——于是只能按电源键。而 S0 下动一下鼠标就醒。如果机器的工作节奏是"每天用几小时 + 其余时间待机"，那么频繁转入 S4 是纯粹的体验退化，省下的电远不如"电池掉到 5% 需要几十小时"的余量值钱。
 
-相关：[[smart-plug-battery-guard|米家智能插座实现笔记本电池 80% 保持充电]]、[[laptop-maintenance|笔记本保养]]、[[win11-new-pc-optimization|Win11 新机优化]]（那篇里的"关闭休眠释放 C 盘"要结合本文的取舍看）
+## 2026-09-13 实测修正：预算超限只做降级，不做兜底
+
+上面「耗穿预算就转休眠」的表述被实测推翻。链路（本地时间，翼龙 15 Pro，插座断充后电池供电）：
+
+- `13:40:53` 智能插座断充（80%）→ 转电池供电；`13:41:54` 进 Modern Standby
+- `13:44:31–15:00:46` 这一次睡眠会话 99.5% 时间在低功耗，只掉 991 mWh（≈0.78 W）——完全正常
+- `15:00:46` Kernel-Power 507/506：`Austerity Battery Drain Budget Exceeded`。**这不是休眠**，而是退出待机去套用 austerity（受限待机：停维护、断网）后再次进待机
+- `15:00:46 → 20:18`：System / Application 日志双双全空（16–19 点整点各 0 条），sleepstudy 里没有对应会话记录，`SUB_BATTERY` 的 5% 临界休眠也没执行——**但电量从 77,276 mWh 掉到 1,981 mWh**（5h21m，≈12 W，健康待机 0.6 W 的 19 倍）
+- `20:18:09` Event 41：电池耗尽硬断电（开机后靠 3 次 TrustedInstaller 重启，把当天 `08:19` 起就在装的累积更新装完）
+
+结论：**adaptive hibernate 假定系统仍在正常跑自己的电源状态机**。一旦 S0 没真正进低功耗、电源管理停摆，预算判定与临界休眠都不会执行——它救不了场。此时还靠得住的兜底是**定时休眠**：由内核定时器 + 固件路径触发，不依赖预算模型。
+
+### 兜底配置：只用 DC 一栏的定时休眠
+
+```bash
+# HIBERNATEIDLE：AC 0（插电不打扰）/ DC 7200（电池待机满 2h → S4）
+powercfg /setacvalueindex SCHEME_CURRENT SUB_SLEEP 9d7815a6-7ee4-497e-8888-515a05f02364 0
+powercfg /setdcvalueindex SCHEME_CURRENT SUB_SLEEP 9d7815a6-7ee4-497e-8888-515a05f02364 7200
+powercfg /setactive SCHEME_CURRENT
+```
+
+效果：插电行为完全不变，只在「电池 + 待机超 2h」时写 S4。本例会在约 16:40 截停，电量停在 ~78%。
+
+### 掉电取证清单
+
+| 查什么 | 命令 / 位置 |
+|--------|-------------|
+| 当前电量与电源 | `(Get-CimInstance Win32_Battery).EstimatedChargeRemaining` / `.BatteryStatus`（2=AC，1=电池） |
+| 电量时间线 | `powercfg /batteryreport`（看 Recent usage 表；`Suspended` 行的下一行时间差 = 记录断档区） |
+| 待机会话细节 | `powercfg /sleepstudy /xml /output x.xml` —— **XML 干净可用；HTML 里嵌的 JSON 被转义损坏，别 parse HTML** |
+| 待机进出原因 | System 日志 `Microsoft-Windows-Kernel-Power` 的 506（进）/ 507（出），Reason 字段即 `Idle Timeout` / `Austerity…Budget Exceeded` / `Input Keyboard` |
+| 耗电速率判据 | 健康待机 ≈0.6 W（≤1%/h）；本次 ≈12 W |
+
+⚠️ 一个反直觉点：**健康待机时每小时同样是 0 条事件**（对照 09-13 凌晨 03–06 点，事件数同样全空）。所以"日志没有记录"不能当卡死证据，判断要落在**耗电速率**上。
+
+## 相关
+
+[[smart-plug-battery-guard|米家智能插座实现笔记本电池 80% 保持充电]]、[[laptop-maintenance|笔记本保养]]、[[win11-new-pc-optimization|Win11 新机优化]]（那篇里的"关闭休眠释放 C 盘"要结合本文的取舍看）
 
 ## 参考
 

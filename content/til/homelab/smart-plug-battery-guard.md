@@ -76,17 +76,18 @@ C:\Windows\Microsoft.NET\Framework64\v4.0.30319\csc.exe /nologo /target:winexe /
 # 5. 注册开机自启
 reg add "HKCU\Software\Microsoft\Windows\CurrentVersion\Run" /v BatterySocketGuard /t REG_SZ /d "\"C:\path\guard.exe\"" /f
 
-# 6. 电源配套——S0 待机策略（2026-09-11 修订，原 3h 定时休眠已废弃）
+# 6. 电源配套——S0 待机策略（2026-09-13 修订：DC 加休眠兜底）
 powercfg /h on
-# 定时休眠设 0：S4 下键盘鼠标都不在唤醒列表，只能按电源键，与"晚上用几小时"的节奏冲突
+# 定时休眠：AC 0（插电不打扰）/ DC 7200（电池待机满 2h → S4）
+# 2026-09-13 掉电事件后加的兜底，见文末说明
 powercfg /setacvalueindex SCHEME_CURRENT SUB_SLEEP 9d7815a6-7ee4-497e-8888-515a05f02364 0
-powercfg /setdcvalueindex SCHEME_CURRENT SUB_SLEEP 9d7815a6-7ee4-497e-8888-515a05f02364 0
-# 待机电池预算放宽到 40%（默认 5%，几小时待机就耗穿 → 自动转 S4）
+powercfg /setdcvalueindex SCHEME_CURRENT SUB_SLEEP 9d7815a6-7ee4-497e-8888-515a05f02364 7200
+# 待机电池预算放宽到 40%（默认 5%，几小时待机就耗穿 → 退出待机降级）
 powercfg /setdcvalueindex SCHEME_CURRENT SUB_PRESENCE STANDBYBUDGETPERCENT 40
 powercfg /setactive SCHEME_CURRENT
 ```
 
-关闭定时休眠只解决了一半问题：`HIBERNATEIDLE` 和待机电池预算（`SUB_PRESENCE`）是两套独立触发器，后者默认 5%、几小时待机就耗穿。完整的机制与排查方法见 [[windows-modern-standby-adaptive-hibernate|Windows 现代待机的两套自动休眠触发器]]。
+两个触发器的作用不同，别只配一个：`HIBERNATEIDLE` 是定时休眠（本次加的兜底）；`SUB_PRESENCE` 的待机电池预算默认 5%、几小时待机就耗穿，但**它超限只做降级（受限待机），不保证转休眠**。完整机制、2026-09-13 的 78% → 0 掉电实测与取证清单见 [[windows-modern-standby-adaptive-hibernate|Windows 现代待机的两套自动休眠触发器]]。
 
 守护必须在**桌面会话**运行（SSH 会话无托盘，NotifyIcon 会崩）。手动开关插座、开机自启勾选都在托盘右键菜单。
 
@@ -98,7 +99,9 @@ powercfg /setactive SCHEME_CURRENT
 evaluate: pct=100 ac=1 → send off → evaluate: pct=100 ac=0 → verify OK: ac=0
 ```
 
-睡眠中不会补电（guard 挂起），唤醒后自动评估——电量低于 75% 才补，这是特性不是缺陷。初始若从 100% 满电开始，断充后靠日常放电 2-3 天自然收敛到 80 停靠区间。
+睡眠中不会补电（guard 挂起），唤醒后自动评估——电量低于 75% 才补，这是特性不是缺陷。
+
+但**"睡眠中掉电"这件事 guard 管不了**：断充后如果系统进了问题待机（没真正进低功耗），guard 被 DAM 冻结、Windows 的预算/临界休眠又都不执行，电池会一路放到 0（2026-09-13 实测，78% → 0 用了 5.3 小时）。真正的兜底是电源策略侧的 DC 定时休眠，见 [[windows-modern-standby-adaptive-hibernate|Windows 现代待机的两套自动休眠触发器]]。初始若从 100% 满电开始，断充后靠日常放电 2-3 天自然收敛到 80 停靠区间。
 
 ## 参考
 
