@@ -1,0 +1,56 @@
+{{- /* Markdown 表格渲染钩子（Hugo v0.134+，本站 v0.165）。
+     复刻 Goldmark 默认输出，另做两件事：
+       1. 给 <table> 打 class="md-table" —— 移动端据此区分「markdown 表格」与「内容里手写的 HTML 表格」
+          （手写表格不走这个钩子，没有列名可注入，因此永远保持表格形态）；
+       2. 给每个 <td> 附 data-label="列名" —— 移动端卡片模式用它显示字段名。
+          以前卡片里只有 `· 值`，读者不知道那一列是什么字段。
+     列名取表头第一行的 PlainText（纯文本，避免属性值里混入标签）。
+     改动本文件后：构建产物里应出现 data-label，见 assets/css/table.css 的移动端分型规则。 */ -}}
+{{- $heads := slice -}}
+{{- range $i, $row := .THead -}}
+  {{- if eq $i 0 -}}
+    {{- range $row -}}
+      {{- $heads = $heads | append (.Text | plainify | htmlUnescape) -}}
+    {{- end -}}
+  {{- end -}}
+{{- end -}}
+<table class="md-table"
+  {{- range $k, $v := .Attributes }}
+    {{- if $v }}
+      {{- printf " %s=%q" $k $v | safeHTMLAttr }}
+    {{- end }}
+  {{- end }}>
+  <thead>
+    {{- range .THead }}
+      <tr>
+        {{- range . }}
+          <th
+            {{- with .Alignment }}
+              {{- printf " style=%q" (printf "text-align: %s" .) | safeHTMLAttr }}
+            {{- end -}}
+          >
+            {{- .Text -}}
+          </th>
+        {{- end }}
+      </tr>
+    {{- end }}
+  </thead>
+  <tbody>
+    {{- range .TBody }}
+      <tr>
+        {{- range $i, $cell := . }}
+          <td
+            {{- with $cell.Alignment }}
+              {{- printf " style=%q" (printf "text-align: %s" .) | safeHTMLAttr }}
+            {{- end }}
+            {{- if lt $i (len $heads) }}
+              {{- printf " data-label=%q" (index $heads $i) | safeHTMLAttr }}
+            {{- end -}}
+          >
+            {{- $cell.Text -}}
+          </td>
+        {{- end }}
+      </tr>
+    {{- end }}
+  </tbody>
+</table>
