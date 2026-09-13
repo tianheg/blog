@@ -56,10 +56,59 @@ MCT 出的盘也可能没做好 —— MCT 不是免检。
 
 **「隐藏与此计算机硬件不兼容的驱动程序」默认是勾上的。** 它会把正确驱动藏起来、让驱动列表永远空白。真要手动加载驱动，先把勾取消掉。
 
+## 装完之后：C 盘会被 BitLocker 自动加密
+
+全新安装 24H2 之后，C 盘会在**用户没有任何操作的情况下**被加密 —— DiskGenius 里显示成「本地磁盘(BitLocker加密)(C:)」，而用户并没有主动开过 BitLocker。
+
+这是 24H2 起的自动设备加密（Auto-DE）默认行为。微软取消了原先的 Modern Standby / HSTI 验证与不受信任 DMA 总线检查，门槛降到两条，而这两条恰好是装这类老机器时的常规操作：
+
+- 设备存在 TPM（1.2 或 2.0），例如开了 Intel PTT
+- UEFI Secure Boot 已启用
+
+只作用于**全新安装与重置**；从 Windows Update 升级到 24H2 的机器不会自动加密。
+
+### 加密不等于已受保护
+
+- 加密流程在 **OOBE 期间就启动**，所以磁盘上会出现 BitLocker 标记
+- 但**保护（armed）只在用微软账户登录后才生效**；用本地账户时保护是**挂起（suspended）**的，数据实际未受保护，开机也不需要密钥
+
+查状态（管理员）：
+
+```
+manage-bde -status C:
+manage-bde -protectors -get C: -type RecoveryPassword
+```
+
+| `Protection Status` | 含义 | 恢复密钥在哪 |
+|---------------------|------|--------------|
+| `On` | 加密已生效 | 登录过微软账户 → `account.microsoft.com/devices/recoverykey`；本地账户 → 无云端托管，必须自己导出 |
+| `Off` / `Suspended` | 保护挂起，数据未受保护 | —— |
+
+### 有 CMOS 前科的机器建议直接关掉
+
+刚动过 Secure Boot 密钥、TPM、清过 CMOS 的机器，BitLocker 是定时炸弹：**固件状态一变就要求恢复密钥，没有密钥就进恢复界面，而且没有后门**。
+
+关掉：`设置 → 隐私和安全性 → 设备加密` 关滑块，或在管理员命令行执行
+
+```
+manage-bde -off C:
+```
+
+解密要跑几十分钟，期间别断电。代价是拆盘后数据明文可读。
+
+要保留加密则必须做到三件：导出密钥并存两处（密码库 + 纸质/U 盘）；固件更新前先 `manage-bde -protectors -disable C: -rebootcount 1`；以及记住**删掉微软账户 = 密钥一起丢**。
+
+### 下次安装直接跳过
+
+1. OOBE 阶段 `Shift+F10` → `regedit` → `HKLM\SYSTEM\CurrentControlSet\Control\BitLocker` → 新建 DWORD `PreventDeviceEncryption` = 1
+2. Rufus 做盘时勾「关闭 BitLocker 自动设备加密」—— 本质是往 `sources\$OEM$` 放一个含 `PreventDeviceEncryption` 的 `unattend.xml`
+
 装完之后的新机清理与优化见 [[win11-new-pc-optimization|Win11 新机优化]]。
 
 ## 参考
 
+- [OEM 的 Windows 11 中的 BitLocker 驱动器加密 — Microsoft Learn](https://learn.microsoft.com/zh-cn/windows-hardware/design/device-experiences/oem-bitlocker)
+- [Microsoft is enabling BitLocker device encryption by default on Windows 11 — The Verge](https://www.theverge.com/2024/8/14/24220138/microsoft-bitlocker-device-encryption-windows-11-default)
 - [Download Windows 11（MediaCreationTool）](https://www.microsoft.com/software-download/windows11)
 - [Windows 11 Home install from USB immediately asks for a driver — Microsoft Q&A](https://learn.microsoft.com/en-us/answers/questions/5601509/windows-11-home-install-from-usb-immediately-asks)
 - [Fix Missing Storage Driver and No Drives Found in Windows Setup](https://umatechnology.org/how-to-fix-missing-storage-driver-and-no-drives-found-in-windows-setup/)
