@@ -24,11 +24,12 @@
 
   {{/* --- 1. mask code so [[…]] inside examples is left alone --- */}}
   {{- $masks := slice -}}
-  {{- range $b := findRE `(?s)<pre\b.*?</pre>` $content -}}
-    {{- $masks = $masks | append $b -}}
-    {{- $content = replace $content $b "@@WL_MASK@@" -}}
-  {{- end -}}
-  {{- range $b := findRE `(?s)<code\b[^>]*>.*?</code>` $content -}}
+  {{- /* Find ALL maskable elements in document order: <pre> blocks first, then <code> in
+          their natural positions. Using two separate passes would put all <pre> before all
+          <code> in $masks, but the @@@WL_MASK@@@ placeholders in $content are in DOCUMENT
+          order — inline <code> comes before <pre> blocks. Restoring would misalign them.
+          A single findRE with alternation preserves document position. */ -}}
+  {{- range $b := findRE `(?s)<(?:pre\b.*?</pre>|code\b[^>]*>.*?</code>)` $content -}}
     {{- $masks = $masks | append $b -}}
     {{- $content = replace $content $b "@@WL_MASK@@" -}}
   {{- end -}}
