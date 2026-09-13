@@ -4,6 +4,7 @@ title: Search
 
 <link href="/pagefind/pagefind-component-ui.css" rel="stylesheet">
 <script src="/pagefind/pagefind-component-ui.js" type="module"></script>
+
 <style>
   .search-tabs { display: flex; gap: 0; margin-bottom: 1.5rem; border-bottom: 1px solid #e5e7eb; }
   .search-tab { padding: 0.5rem 1rem; font-size: 0.875rem; cursor: pointer; border: none; background: none; color: #6b7280; border-bottom: 2px solid transparent; transition: all 0.15s; }

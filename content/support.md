@@ -10,6 +10,7 @@ title: 'Support me & I support people'
     <img src="/images/wechatpay.webp" alt="微信赞赏码">
   </div>
 </div>
+
 <style>
 .b {
   display: flex;
