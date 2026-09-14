@@ -56,4 +56,4 @@ Citations:
 [^12]: <https://www.zhihu.com/question/36446285>
 
 
-相关：[[common-sense|common-sense]]
+相关：[[common-sense|common-sense]]、[[ear-fold-odor|耳后沟异味]]
