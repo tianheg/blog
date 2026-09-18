@@ -92,6 +92,14 @@ outputFormats:
   SectionsRSS:
     baseName: index
     mediaType: "application/rss+xml"
+  # 纯文本源文：页面 URL 后加 .md 即得（/posts/foo/ → /posts/foo.md）
+  # ugly: true 让文件落在 /posts/foo.md 而不是 /posts/foo/index.md（Hugo 内置
+  # markdown format 的 baseName 默认是 index，会多一层目录）
+  markdown:
+    mediaType: text/markdown
+    baseName: index
+    isPlainText: true
+    ugly: true
 
 outputs:
   home:
@@ -99,6 +107,7 @@ outputs:
     - SectionsRSS
   page:
     - HTML
+    - Markdown
   section:
     - HTML
     - JSON

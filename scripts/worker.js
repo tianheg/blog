@@ -210,6 +210,11 @@ export default {
     }
     // Add CORS for /pagefind-semantic/ assets (used by client-side JS)
     const resp = new Response(asset.body, asset);
+    // 纯文本源文（页面 URL + .md，Hugo markdown output format）：强制 text/plain
+    // 而不是 text/markdown —— 后者在部分浏览器上会触发下载而非内联显示。
+    if (url.pathname.endsWith('.md')) {
+      resp.headers.set('Content-Type', 'text/plain; charset=utf-8');
+    }
     if (url.pathname.startsWith('/pagefind-semantic/')) {
       const cors = corsFor(request);
       if (cors) {

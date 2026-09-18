@@ -311,10 +311,20 @@ npm run embed
 | 页面类型 | 输出 | 说明 |
 |----------|------|------|
 | **首页** | HTML + SectionsRSS | SectionsRSS 是按分类（section）分组的 RSS |
-| **单页** | HTML | 文章、TIL、独立页面 |
+| **单页** | HTML + Markdown | 文章、TIL、独立页面；Markdown 为纯文本源文，见下节 |
 | **分类页** | HTML + JSON | JSON 用于知识图谱可视化（vis-network） |
 | **标签页** | HTML | 标签聚合列表 |
 | **标签详情** | HTML | 单个标签下的内容列表 |
+
+### 纯文本源文（页面 URL + `.md`）
+
+任意单页 URL 后加 `.md` 即得该页纯文本源文：`/posts/2019/` → `/posts/2019.md`，`/til/software/a11y/` → `/til/software/a11y.md`。
+
+- 由 Hugo 内置 `markdown` output format 生成（`hugo.yaml` 的 `outputFormats.markdown` 开 `ugly: true` —— 文件落在 `posts/2019.md`，而不是默认的 `posts/2019/index.md`）
+- 模板 `layouts/_default/single.md.md` 输出 `# 标题` + `.RawContent`（源文件正文）：不含 front matter，wikilink 保持 `[[…]]` 原样，短代码不展开
+- 页面 `<head>` 带 `<link rel="alternate" type="text/markdown">`，便于阅读器/爬虫/LLM 发现（`_partials/head/markdown-link.html`）
+- `scripts/worker.js` 把 `*.md` 的 Content-Type 改写成 `text/plain; charset=utf-8`，保证浏览器内联显示而不是触发下载
+- 只对 `kind=page` 生效（`outputs.page`）；首页、列表页、图谱页等非 md 生成的页面没有
 
 ### 搜索索引
 

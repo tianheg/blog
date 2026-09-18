@@ -1,0 +1,5 @@
+{{- /* 声明本页的 Markdown 源文（当前 URL + .md）——便于阅读器 / 爬虫 / LLM 发现。
+  只有开了 Markdown 输出格式的页面（kind=page，见 hugo.yaml outputs）才渲染。 */ -}}
+{{- with .OutputFormats.Get "markdown" -}}
+  <link rel="alternate" type="{{ .MediaType.Type }}" href="{{ .Permalink }}" title="{{ $.Title }} — plain text"/>
+{{ end -}}
