@@ -1,0 +1,82 @@
+{{/* ── 文章热力图（GitHub 贡献图样式，构建时生成 SVG，零 JS） ──
+     参数：year（字符串年份）、pages（该年文章集合）
+     布局：左列星期标签（窄屏隐藏）+ 顶部月份标签 + SVG 网格
+     颜色：站点 posts 蓝（blue 系），暗色模式走 Tailwind dark: 变体
+     悬停：<title> 原生 tooltip，显示日期 / 当天篇数 / 标题列表 */}}
+{{- $year := .year -}}
+{{- $pages := .pages -}}
+{{- $y := int $year -}}
+
+{{/* 按天聚合：篇数 + 标题列表 */}}
+{{- $dayCount := dict -}}
+{{- $dayTitles := dict -}}
+{{- range $pages.GroupByDate "2006-01-02" -}}
+  {{- $titles := slice -}}
+  {{- range .Pages -}}{{- $titles = $titles | append .LinkTitle -}}{{- end -}}
+  {{- $dayCount = merge $dayCount (dict .Key (len .Pages)) -}}
+  {{- $dayTitles = merge $dayTitles (dict .Key $titles) -}}
+{{- end -}}
+
+{{/* 网格几何：列 = 周（周日起始），行 = 星期 */}}
+{{- $jan1 := time.AsTime (printf "%d-01-01" $y) -}}
+{{- $days := 365 -}}
+{{- if eq ($jan1.AddDate 0 0 365).Year $y }}{{ $days = 366 }}{{ end -}}
+{{- $offset := int $jan1.Weekday -}}
+{{- $cols := add (div (add (sub $days 1) $offset) 7) 1 -}}
+{{- $w := sub (mul $cols 13) 2 -}}
+{{- $h := 89 -}}
+
+<div class="grid grid-cols-[0_minmax(0,1fr)] sm:grid-cols-[2rem_minmax(0,1fr)] text-[0.65rem] leading-none mt-3 mb-5 text-gray-600 dark:text-gray-400">
+
+  {{/* 月份标签：按每月 1 日所在列定位 */}}
+  <div class="col-start-2 h-[1.3em] relative">
+    {{- $names := slice "Jan" "Feb" "Mar" "Apr" "May" "Jun" "Jul" "Aug" "Sep" "Oct" "Nov" "Dec" -}}
+    {{- range $i, $name := $names -}}
+      {{- $first := $jan1.AddDate 0 $i 0 -}}
+      {{- $doy := int (div (sub $first.Unix $jan1.Unix) 86400) -}}
+      {{- $col := div (add $doy $offset) 7 -}}
+      {{- $cls := "absolute opacity-60 whitespace-nowrap" -}}
+      {{- if not (in (slice "Jan" "Apr" "Jul" "Oct") $name) }}{{ $cls = printf "%s hidden sm:block" $cls }}{{ end -}}
+      <span class="{{ $cls }}" style="left:{{ printf "%.3f" (div (mul $col 100.0) $cols) }}%">{{ $name }}</span>
+    {{- end -}}
+  </div>
+
+  {{/* 星期标签：周中三天，垂直居中于对应行（窄屏隐藏，避免压住网格） */}}
+  <div class="relative hidden sm:block">
+    {{- $rows := slice (dict "label" "Mon" "row" 1) (dict "label" "Wed" "row" 3) (dict "label" "Fri" "row" 5) -}}
+    {{- range $rows -}}
+      <span class="absolute opacity-60 whitespace-nowrap -translate-y-1/2" style="top:{{ printf "%.1f" (div (mul (add (mul .row 13) 5.5) 100.0) $h) }}%">{{ .label }}</span>
+    {{- end -}}
+  </div>
+
+  <svg viewBox="0 0 {{ $w }} {{ $h }}" class="col-start-2 w-full h-auto block" role="img"
+       aria-label="{{ $year }} 年发文热力图，共 {{ len $pages }} 篇">
+    {{/* 空格用 pattern 铺底，只渲染有文章的格子 —— 体积从 ~200B/格 降到每格仅颜色档 */}}
+    <defs>
+      <pattern id="heat-{{ $year }}" width="13" height="13" patternUnits="userSpaceOnUse">
+        <rect width="11" height="11" rx="2" class="fill-gray-200 dark:fill-gray-700"/>
+      </pattern>
+    </defs>
+    <rect width="{{ $w }}" height="{{ $h }}" fill="url(#heat-{{ $year }})"/>
+    {{- range $i := seq 0 366 -}}
+      {{- $d := $jan1.AddDate 0 0 $i -}}
+      {{- if eq ($d.Format "2006") $year -}}
+        {{- $key := $d.Format "2006-01-02" -}}
+        {{- $n := index $dayCount $key | default 0 -}}
+        {{- if gt $n 0 -}}
+          {{- $cls := "fill-blue-200 dark:fill-blue-800" -}}
+          {{- if and (ge $n 2) (le $n 3) -}}
+            {{- $cls = "fill-blue-400 dark:fill-blue-600" -}}
+          {{- else if and (ge $n 4) (le $n 9) -}}
+            {{- $cls = "fill-blue-600 dark:fill-blue-400" -}}
+          {{- else if ge $n 10 -}}
+            {{- $cls = "fill-blue-800 dark:fill-blue-200" -}}
+          {{- end -}}
+          <rect x="{{ mul (div (add $i $offset) 7) 13 }}" y="{{ mul (int $d.Weekday) 13 }}" width="11" height="11" rx="2"
+                class="{{ $cls }} hover:stroke-gray-500 dark:hover:stroke-gray-300 hover:stroke-1"
+                aria-label="{{ $key }}：{{ $n }} 篇"><title>{{ $key }}：{{ $n }} 篇{{ with index $dayTitles $key }}{{ printf "\n" }}{{ delimit . "\n" }}{{ end }}</title></rect>
+        {{- end -}}
+      {{- end -}}
+    {{- end -}}
+  </svg>
+</div>
