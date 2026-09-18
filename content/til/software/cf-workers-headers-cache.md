@@ -70,4 +70,4 @@ cd ~/projects/blog && git worktree remove --force /tmp/blog-old
 - **固定名资源一律不能长缓存**：字体（`/fonts/Satoshi-Variable.woff2`）、Pagefind 输出（`/pagefind/pagefind.js`、`pagefind-ui.css`）、`static/` 里直接复制的手写 JS 和 CSS —— 升级后文件名不变，长缓存等于让老用户拿一年旧文件
 - **别在外部系统里硬引用带 hash 的 URL**（RSS 模板、别的站点嵌你的 CSS、邮件模板）—— 下次部署必 404
 
-相关：[[cloudflare]]
+相关：[[til/software/cloudflare|Cloudflare 笔记]]
