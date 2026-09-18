@@ -3,13 +3,24 @@
   X-Content-Type-Options: nosniff
   Content-Security-Policy: object-src 'none'; base-uri 'none'; frame-ancestors 'none';
 
-/*.(css|js|woff2)
-  Cache-Control: public, max-age=31536000, immutable
-
 # 纯文本源文（页面 URL + .md）：CF 对 .md 扩展名默认发 text/markdown 且不带 charset，
 # 浏览器按 latin-1 解码 → 中文乱码。这里强制 text/plain + charset。
 /*.md
   Content-Type: text/plain; charset=utf-8
+
+# 故意不给 /css/*、/js/*、/fonts/* 设长缓存（2026-09-18 移除原 `/*.(css|js|woff2)` 规则）：
+#
+# 1) 原写法 `/*.(css|js|woff2)` 本来就无效 —— CF 的 _headers 只支持 `*` 通配和
+#    `:placeholder`，不支持 `(a|b)` 分组。它匹配不到任何 URL，静默失效。
+# 2) 就算改写成 `/css/*` 也**不要**加长缓存：CF Workers 每次部署只保留当前版本的
+#    资产，旧 hash 文件立刻 404（返回 404.html，content-type: text/html）。而
+#    _headers 按路径匹配、不看状态码 —— 那条 404 会被一并打上 immutable，
+#    被 CF 边缘和浏览器缓存一年，一次"部署瞬间的版本错配"就能把用户锁死一年。
+# 3) 现状 `public, max-age=0, must-revalidate` + etag 是 Workers 静态资产的默认值：
+#    边缘 HIT + 304，省的那点往返很小，且与"部署即删旧资产"天然契合。
+# 要给 hash 文件长缓存，前提是先解决旧版本资产保留（Workers 不提供），再来动这里。
+#
+# 另：不要在任何外部系统（RSS 模板、其他站点、邮件）里硬引用带 hash 的 URL，下次部署必 404。
 
 /weread/api/*
   Access-Control-Allow-Origin: *
