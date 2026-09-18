@@ -6,6 +6,11 @@
 /*.(css|js|woff2)
   Cache-Control: public, max-age=31536000, immutable
 
+# 纯文本源文（页面 URL + .md）：CF 对 .md 扩展名默认发 text/markdown 且不带 charset，
+# 浏览器按 latin-1 解码 → 中文乱码。这里强制 text/plain + charset。
+/*.md
+  Content-Type: text/plain; charset=utf-8
+
 /weread/api/*
   Access-Control-Allow-Origin: *
   Cache-Control: public, max-age=3600

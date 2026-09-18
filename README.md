@@ -323,7 +323,7 @@ npm run embed
 - 由 Hugo 内置 `markdown` output format 生成（`hugo.yaml` 的 `outputFormats.markdown` 开 `ugly: true` —— 文件落在 `posts/2019.md`，而不是默认的 `posts/2019/index.md`）
 - 模板 `layouts/_default/single.md.md` 输出 `# 标题` + `.RawContent`（源文件正文）：不含 front matter，wikilink 保持 `[[…]]` 原样，短代码不展开
 - 页面 `<head>` 带 `<link rel="alternate" type="text/markdown">`，便于阅读器/爬虫/LLM 发现（`_partials/head/markdown-link.html`）
-- `scripts/worker.js` 把 `*.md` 的 Content-Type 改写成 `text/plain; charset=utf-8`，保证浏览器内联显示而不是触发下载
+- `static/_headers` 把 `*.md` 的 Content-Type 覆盖为 `text/plain; charset=utf-8`：CF 对 `.md` 默认发 `text/markdown` 且**不带 charset**，浏览器会按 latin-1 解码 → 中文乱码。（注意：CF 静态资产是 **assets-first**，Worker 脚本收不到资产请求，改不了这些响应头，必须走 `_headers`）
 - 只对 `kind=page` 生效（`outputs.page`）；首页、列表页、图谱页等非 md 生成的页面没有
 
 ### 搜索索引
