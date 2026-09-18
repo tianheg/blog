@@ -161,7 +161,14 @@ const WEREAD_MIME = {
 
 async function serveWeread(url, env, ctx) {
   let key = url.pathname.replace(/^\/weread\/?/, '');
-  if (key === '' || key.endsWith('/')) key += 'index.html';
+  if (key === '') {
+    key = 'index.html';
+  } else if (key === 'api' || key === 'api/') {
+    // API 目录无 index.html —— 目录访问回落到聚合数据
+    key = 'api/index.json';
+  } else if (key.endsWith('/')) {
+    key += 'index.html';
+  }
   const isApi = key.startsWith('api/');
 
   const cache = caches.default;
