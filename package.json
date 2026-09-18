@@ -5,8 +5,10 @@
     "build": "hugo --gc --minify --buildFuture",
     "pagefind": "pagefind --site public",
     "dev": "hugo serve --buildFuture",
-    "all": "npm run check-links && npm run build && npm run pagefind",
+    "all": "npm run check-unicode && npm run check-links && npm run build && npm run pagefind",
     "check-links": "node scripts/check-links.mjs",
+    "check-unicode": "node scripts/check-unicode.mjs",
+    "test-unicode": "bash scripts/test-check-unicode.sh",
     "related": "python3 scripts/generate-related.py",
     "embed": "node scripts/generate-embeddings.mjs && python3 scripts/generate-related.py"
   },
