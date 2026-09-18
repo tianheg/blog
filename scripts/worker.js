@@ -143,6 +143,53 @@ async function handleSearch(request, env) {
   return Response.json({ results: top });
 }
 
+/** WeRead 阅读数据面板 — 静态文件托管在 R2（bucket: weread）
+ * 数据每日由 PVE 上的 cron 覆盖上传，不经 git（避免污染 blog 仓库历史）
+ * /weread/           → index.html
+ * /weread/api/*.json → api/*.json（带 CORS，供跨域消费）
+ */
+const WEREAD_MIME = {
+  html: 'text/html; charset=utf-8',
+  json: 'application/json; charset=utf-8',
+  css: 'text/css; charset=utf-8',
+  js: 'application/javascript; charset=utf-8',
+  svg: 'image/svg+xml',
+  png: 'image/png',
+  ico: 'image/x-icon',
+  txt: 'text/plain; charset=utf-8',
+};
+
+async function serveWeread(url, env, ctx) {
+  let key = url.pathname.replace(/^\/weread\/?/, '');
+  if (key === '' || key.endsWith('/')) key += 'index.html';
+  const isApi = key.startsWith('api/');
+
+  const cache = caches.default;
+  const cacheKey = new Request(`https://weread-cache.invalid/${key}`, { method: 'GET' });
+  const hit = await cache.match(cacheKey);
+  if (hit) return hit;
+
+  const obj = await env.WEREAD.get(key);
+  if (!obj) {
+    return new Response('Not Found', {
+      status: 404,
+      headers: { 'Content-Type': 'text/plain; charset=utf-8' },
+    });
+  }
+
+  const ext = key.split('.').pop().toLowerCase();
+  const headers = {
+    'Content-Type': WEREAD_MIME[ext] || 'application/octet-stream',
+    'ETag': obj.httpEtag,
+    'Cache-Control': isApi ? 'public, max-age=3600' : 'public, max-age=300',
+  };
+  if (isApi) headers['Access-Control-Allow-Origin'] = '*';
+
+  const resp = new Response(obj.body, { headers });
+  ctx.waitUntil(cache.put(cacheKey, resp.clone()));
+  return resp;
+}
+
 export default {
   async fetch(request, env, ctx) {
     const url = new URL(request.url);
@@ -194,6 +241,11 @@ export default {
     // Artalk static assets proxy (same-origin)
     if (url.pathname.startsWith('/dist/Artalk.')) {
       return proxyArtalkAsset(request, url);
+    }
+
+    // WeRead 数据面板 — R2 托管，不走 ASSETS（数据不经 git，每日 cron 上传）
+    if (url.pathname === '/weread' || url.pathname.startsWith('/weread/')) {
+      return serveWeread(url, env, ctx);
     }
 
     // Fall through to static assets
