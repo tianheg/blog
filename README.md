@@ -207,11 +207,11 @@ wikilink 依次按 **文件名 → 完整标题 → 标题主名（`——`/`：
 2. **构建告警** — 构建时 `WARN`，日志里能看到是哪个名字
 3. **发布闸门** — `npm run check-links` 汇总「未解析的 wikilink」+「失效内链」并返回退出码 1（`--warn-only` 只报告），且指出是哪个文件/哪一页写错了。判定逻辑复用 Hugo 构建结果，不另写一套解析规则
 
-**写法约定（兼顾 Obsidian）**：
+**写法约定**：
 
-- 站内引用用 `[[文件名]]` —— Obsidian 的 wikilink 只按**文件名**解析，不认标题，所以这是两边都通的写法
-- 要中文显示：`[[laptop-maintenance|笔记本保养]]`（两边都通）
-- 想让 Obsidian 里也能用中文引用：给 frontmatter 加 `aliases: ["笔记本保养"]`（本站的 wikilink-map 也认 `.Aliases`）
+- 站内引用用 `[[文件名]]` —— 文件名是唯一稳定的标识（标题会改、文件名不改），解析也最不容易歧义
+- 要中文显示：`[[laptop-maintenance|笔记本保养]]`
+- 也可给 frontmatter 加 `aliases: ["笔记本保养"]`，让中文名直接可解析（wikilink-map 认 `.Aliases`）
 - 指小节、站外链接、静态文件仍用 Markdown 链接
 
 每篇笔记底部自动渲染 **引用这篇的** 区（反链，见 `layouts/_partials/content/backlinks.html`）：
