@@ -1,6 +1,6 @@
 {{/*
   Get page title with unified fallback chain:
-  .Title → first Org-mode heading (* ) → .Params.title → fallback (default: BaseFileName)
+  .Title → first Markdown heading (## ) → .Params.title → fallback (default: BaseFileName)
 
   Usage:
     {{ partial "functions/get-title" (dict "page" .) }}
@@ -15,8 +15,8 @@
   {{- with $page.RawContent -}}
     {{- $lines := split . "\n" -}}
     {{- range $lines -}}
-      {{- if and (not $title) (hasPrefix . "* ") -}}
-        {{- $title = trim (strings.TrimPrefix "* " .) " " -}}
+      {{- if and (not $title) (hasPrefix . "## ") -}}
+        {{- $title = trim (strings.TrimPrefix "## " .) " " -}}
       {{- end -}}
     {{- end -}}
   {{- end -}}
