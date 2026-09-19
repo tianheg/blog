@@ -44,7 +44,7 @@ blog/
 │   │   └── history/     # 历史
 │   └── *.md             # 独立页面（about, now, projects 等）
 ├── layouts/             # Hugo 模板
-│   ├── _default/        # 基础模板（section.json.json）
+│   ├── _default/        # 基础模板（single.md.md）
 │   ├── _partials/       # 可复用组件（head, components）
 │   ├── posts/           # 文章专用模板（single.html）
 │   ├── til/             # TIL 专用模板（baseof, list, single）
@@ -262,7 +262,6 @@ TIL 的信息源链接统一放在文件末尾：
 | `posts/single.html` | 博客文章详情页 |
 | `til/single.html` | TIL 笔记详情页 |
 | `section.html` | 分类列表页（Posts, TIL 索引等） |
-| `_default/section.json.json` | 默认分类 JSON 输出 |
 | `graph/list.json.json` | 知识图谱 JSON 数据 |
 | `_shortcodes/` | 自定义 Hugo 短代码 |
 
@@ -312,7 +311,7 @@ npm run embed
 |----------|------|------|
 | **首页** | HTML + SectionsRSS | SectionsRSS 是按分类（section）分组的 RSS |
 | **单页** | HTML + Markdown | 文章、TIL、独立页面；Markdown 为纯文本源文，见下节 |
-| **分类页** | HTML + JSON | JSON 用于知识图谱可视化（vis-network） |
+| **分类页** | HTML | 知识图谱数据另走 `/graph/index.json`（见下） |
 | **标签页** | HTML | 标签聚合列表 |
 | **标签详情** | HTML | 单个标签下的内容列表 |
 
