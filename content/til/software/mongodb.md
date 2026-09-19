@@ -64,21 +64,7 @@ MongoDB 数据类型：Null, Boolean, Number, String, Date, Regular Expression, 
 
 数据表格式：
 
-<figure>
-<img src="img/sql-nosql.jpg" alt="img/sql-nosql.jpg">
-<figcaption>
-数据表格式
-</figcaption>
-</figure>
-
 关键词：
-
-<figure>
-<img src="img/sql-nosql-2.png" alt="img/sql-nosql-2.png">
-<figcaption>
-关键词
-</figcaption>
-</figure>
 
 ------SQL terms and NoSQL terms by [Victoria Malaya](https://www.blogger.com/profile/18437865869379626284)
 
@@ -713,6 +699,5 @@ When upsert is set to false and the query predicate returns an empty cursor then
 | 775 | rwx  | rwx   | r-x    |
 | 776 | rwx  | rwx   | rw-    |
 | 777 | rwx  | rwx   | rwx    |
-
 
 相关：[[js-oop|js-oop]]

@@ -22,8 +22,6 @@ AFF（Affiliate Marketing）联盟营销，通常指网络联盟营销。是一�
 
 ## 如何进一步学习？
 
-![/learn-sem-0.png](/learn-sem-0.png)
-
 ## 学习资料
 
 - [新人培训入门ppt](https://fzsg2exxal.feishu.cn/file/boxcnyuKu6ULXe9EcLyWp5PXhnc)

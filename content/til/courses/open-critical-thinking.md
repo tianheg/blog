@@ -20,8 +20,6 @@ date: 2025-06-15T19:22:54+08:00
 
 批判的三个要素：对象，标准，目的
 
-![critical-thinking-0-pipan.png](img/critical-thinking-0-pipan.png)
-
 批判的基本原则：
 
 1. 对象：宽容原则
@@ -359,8 +357,6 @@ _*讨论：孔乙己是什么样的人？*_
 
   （3）理性：分析、比较、概括、判断、推理、论证等等。
 
-![critical-thinking-1-yuwang.png](img/critical-thinking-1-yuwang.png)
-
 人的行为受三种要素支配，欲望是第一动力。
 
 假如人完全按理智行事，那人就成了机器人了；
@@ -530,8 +526,6 @@ _*讨论：孔乙己是什么样的人？*_
 
 以上九个思维任务的总结：
 
-![评估、论证](img/critical-thinking-2-pinggulunzheng.png '评估、论证')
-
 ### 总结与回顾
 
 训练批判性思维不仅要有批判精神和好的思维品质，还要有熟练运用批判性思维方法的技能。训练思维技能，如同训练弹琴和开车等其它技能一样，掌握正确的方法，再加上勤奋苦练。
@@ -608,15 +602,13 @@ _*讨论：孔乙己是什么样的人？*_
 
 分析论证的结构：树状图解（I 型、T 型、V 型）
 
-![critical-thinking-3-tree-diagram.png](img/critical-thinking-3-tree-diagram.png '树状图解（I 型、T 型、V 型）') ## 拷问论证
+ ## 拷问论证
 
 - 理由是真的吗？
 
   确认数据/事实。
 
 - 从理由得出结论需要某种假设吗？
-
-![critical-thinking-3-assumption1-2.png](img/critical-thinking-3-assumption1-2.png '假设一二')
 
 - 这些假设合理吗？
 
@@ -650,11 +642,7 @@ _*讨论：孔乙己是什么样的人？*_
 
 - 限定（Qualifiers）：考虑到可能出现的反例，对结论的范围和强度进行限定。
 
-![critical-thinking-3-example-argument.png](img/critical-thinking-3-example-argument.png '举例论证') ![critical-thinking-3-example-argument-2.png](img/critical-thinking-3-example-argument-2.png '举例论证 2') ![critical-thinking-3-example-argument-3.png](img/critical-thinking-3-example-argument-3.png '举例论证 3')
-
 图尔明提供的论证模型更接近真实的论证。
-
-![critical-thinking-3-toulmin-model.png](img/critical-thinking-3-toulmin-model.png '图尔明模型') ![critical-thinking-3-usage-toulmin-model.png](img/critical-thinking-3-usage-toulmin-model.png '使用图尔明模型')
 
 ### 图尔明模型的特点和优点
 

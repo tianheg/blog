@@ -29,5 +29,3 @@ Nobody care about my feelings.
 What's wrong with the society? What's wrong with the people?
 
 Pressure inside my body is driving me crazy.
-
-![/images/photo/2022-05-07.jpg](/images/photo/2022-05-07.jpg)

@@ -21,8 +21,6 @@ sudo tcpdump -n -v -i any port 8000 and host 1.2.3.4
 
 CheatSheet(from <https://www.comparitech.com/net-admin/tcpdump-cheat-sheet/> )：
 
-![./img/tcpdump-cheat-sheet.webp](./img/tcpdump-cheat-sheet.webp)
-
 参考资料：
 
 1. <https://jvns.ca/tcpdump-zine.pdf>

@@ -7,8 +7,6 @@ header: Lifestyle
 
 欢迎加入曹大的知识星球 [《caoz 的小密圈》](https://t.zsxq.com/bAe6iei)，扫码也可：
 
-![](/images/caoz.webp)
-
 ## 高度不同，看到的角度不同
 
 ### 努力不一定获得成功
@@ -216,7 +214,6 @@ header: Lifestyle
 9. [时间管理，从折磨到享受](https://mp.weixin.qq.com/s/Zba7jkjOssfCYYIWhpSJ-g)
 10. [谈谈消费升级](https://mp.weixin.qq.com/s/5cZe28qp22XG21WGaGRHNw)
 11. [人人都有认知障](https://mp.weixin.qq.com/s/eO7mVliAl8CwYnGV1FwtJg)
-
 
 相关：[[opinion|opinion]]
 

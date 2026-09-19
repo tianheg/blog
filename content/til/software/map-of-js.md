@@ -7,9 +7,6 @@ header: Web
 
 <https://github.com/mechaniac/Map-of-Javascript>
 
-![/images/front-end-cheatsheet.jpg](/images/front-end-cheatsheet.jpg)
-
-
 相关：[[codehike-v1|codehike-v1]]
 
 相关：[[js|js]]

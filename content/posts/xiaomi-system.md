@@ -425,8 +425,6 @@ Vue: MVVM 框架，数据直接绑定，数据驱动视图。
 
 Vue 模型：
 
-![/images/vue-mvvm.svg](/images/vue-mvvm.svg)
-
 ```
     <div id="app">
       <li v-for="type in mi_type">
@@ -579,8 +577,6 @@ Project 结构：
 
 `src/main/java/yidajiabei.xyz/util/ResultBean.java` 的图形示意：
 
-![/images/java-resultbean.svg](/images/java-resultbean.svg)
-
 ```java
     // src/main/java/yidajiabei.xyz/domain/UrlBean.java
     package yidajiabei.xyz.domain;
@@ -645,8 +641,6 @@ Project 结构：
 ```
 
 axios 的图形示意：
-
-![/images/axios.svg](/images/axios.svg)
 
 ```
     <!-- src/main/resources/static/index.html -->
@@ -754,8 +748,6 @@ urlPageBean，urlPageBeanMapper 文件，之后前端从后端调用数据。
 ```
 
 #### 第七天 {#第七天}
-
-![/images/front-back-end-mysql-framework.svg](/images/front-back-end-mysql-framework.svg)
 
 图示为项目架构：
 

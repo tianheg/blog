@@ -28,8 +28,6 @@ tags: ['随笔']
 理解层次」，也就是逻辑层次[^1]。进一步研究，可阅读罗伯特·迪尔茨《语言的魔力：谈话转变信念之
 NLP 技巧》。
 
-![/images/understand-problem-from-multi-level.jpg](/images/understand-problem-from-multi-level.jpg)
-
 ### 第一层，环境 {#第一层-环境}
 
 为什么生活中遇到的一些人，遇到问题只会抱怨却不知道如何解决？

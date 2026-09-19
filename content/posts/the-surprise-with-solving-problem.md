@@ -31,10 +31,6 @@ Analytics！而且 track ID 和我在 Console 里看到的一样。这个 App
 的文件路径，可以清楚地看到 cdn-cgi（这是 Cloudflare
 存放各种文件的虚拟路径）下的 App 里的 Google Analytics。
 
-![/images/cf-ga-0.png](/images/cf-ga-0.png)
-
-![/images/cf-ga-1.png](/images/cf-ga-1.png)
-
 ref:
 
 1. [Added cdn-cgi script on my pages](https://community.cloudflare.com/t/added-cdn-cgi-script-on-my-pages/3342)

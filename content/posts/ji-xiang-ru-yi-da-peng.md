@@ -36,13 +36,6 @@ tags: ['随笔', '电影']
 
 姥姥走了，「三舅由谁来照顾」这个问题使大家一起讨论，要说明的是：二舅和妻子已经照顾了三舅二十年，从三舅发病的时候开始。
 
-<figure>
-<img src="/ji-xiang-ru-yi-da-peng.jpeg" alt="/ji-xiang-ru-yi-da-peng.jpeg">
-<figcaption>
-ji-xiang-ru-yi-da-peng.jpeg
-</figcaption>
-</figure>
-
   <center>
 
 只照了一张姥姥过世时，大鹏送的花圈

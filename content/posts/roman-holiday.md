@@ -18,5 +18,3 @@ Roman Holiday - 1953 - 美国
 她的美，世间难寻
 
 奥黛丽·赫本------女神！
-
-![/images/audrey-hepburn.png](/images/audrey-hepburn.png)

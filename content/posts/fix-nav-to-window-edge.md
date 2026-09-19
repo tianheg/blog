@@ -46,12 +46,8 @@ Ctrl + Page Up，但还是不方便。于是，今天我开始实现这个想法
 
 来让我们对比一下：
 
-![](/fix-nav-to-window-edge-0.png) ![](/fix-nav-to-window-edge-1.png)
-
 两张照片的区别在于，后者的 `z-index` ，`background-color`
 都被注释掉。显而易见导航栏和正文内容交叠在一起，看起来不够简洁。
-
-![](/fix-nav-to-window-edge-2.png) ![](/fix-nav-to-window-edge-3.png)
 
 你看，如果不把 `top: 2rem;`
 注释掉，就会像后面这个图，正文的内容（=z-index:
@@ -64,8 +60,6 @@ Ctrl + Page Up，但还是不方便。于是，今天我开始实现这个想法
       margin-top: 6.4rem; // 原来是 1.6rem
     }
 ```
-
-![](/fix-nav-to-window-edge-4.png) ![](/fix-nav-to-window-edge-5.png)
 
 - `margin-top` ：它作用是改变盒子外边距
 

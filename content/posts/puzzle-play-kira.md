@@ -6,8 +6,6 @@ tags: ['随笔']
 
 拼图链接：<https://vlad.studio/puzzle/kira>
 
-![/images/puzzles-kira.png](/images/puzzles-kira.png)
-
 拼图的过程中，我感到内心的平静。
 
 但当我想到拼图后的完整图像所表达的情感与内容时，我无法平静。

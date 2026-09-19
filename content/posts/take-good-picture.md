@@ -18,8 +18,6 @@ tags: ['备忘']
 
 @莫梦醒 x（bilibil）推荐的电影摄影师和电影导演（仅供参考）：
 
-![/images/cinematographer-and-film-director.png](/images/cinematographer-and-film-director.png)
-
 可以建立两个相册------「摄影审美」、「电影截图」，保存来自各处的我自己认可的摄影作品。
 
 ---

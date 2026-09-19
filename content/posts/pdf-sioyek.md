@@ -18,9 +18,6 @@ Linux 桌面环境），所以使用的是 Gnome 社区开发的 PDF
 两三个月以前，我知道了
 Sioyek，最初因为它宣传的是针对论文阅读，当然还有技术书籍，但我没太在意。带着这种淡淡的好奇，我安装使用。
 
-![](/images/pdf-sioyek-0.png) ![](/images/pdf-sioyek-1.png)
-![/images/pdf-sioyek-2.png](/images/pdf-sioyek-2.png)
-
 在使用一段时间后，我觉得使用它作为我的 PDF 阅读器。
 
 下面介绍使用方法。

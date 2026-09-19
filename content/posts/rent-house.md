@@ -26,12 +26,7 @@ tags: ['备忘']
 
 离开后的拍照：
 
-![](/images/rent-house-1.jpg) ![](/images/rent-house-2.jpg)
-![/images/rent-house-3.jpg](/images/rent-house-3.jpg)
-
 ### 关于租房的一些建议 {#关于租房的一些建议}
-
-![/images/rent-house-0.jpg](/images/rent-house-0.jpg)
 
 #### 一、租房的几种形式： {#一-租房的几种形式}
 

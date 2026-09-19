@@ -4,8 +4,6 @@ date: 2021-04-29
 tags: ['电影']
 ---
 
-![/films/la-la-land.png](/films/la-la-land.png)
-
 > 致那些有梦想的人
 >
 > 尽管看起来有些愚蠢

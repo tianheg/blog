@@ -90,21 +90,7 @@ Expression, Array, Embeded Document, Object ID
 
 数据表格式：
 
-<figure>
-<img src="img/sql-nosql.jpg" alt="img/sql-nosql.jpg">
-<figcaption>
-数据表格式
-</figcaption>
-</figure>
-
 关键词：
-
-<figure>
-<img src="img/sql-nosql-2.png" alt="img/sql-nosql-2.png">
-<figcaption>
-关键词
-</figcaption>
-</figure>
 
 ------SQL terms and NoSQL terms by
 [Victoria Malaya](https://www.blogger.com/profile/18437865869379626284)

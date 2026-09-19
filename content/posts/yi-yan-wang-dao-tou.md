@@ -4,8 +4,6 @@ date: 2020-09-26
 tags: ['诗作']
 ---
 
-![/images/poetry-yiyanwangdaotou.webp](/images/poetry-yiyanwangdaotou.webp)
-
 路，一眼望到头
 
 踱着步子，丈量着

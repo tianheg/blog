@@ -147,13 +147,6 @@ Bmp 文件：存储图片。
 
 高效编码------Huffman Tree：概率
 
-<figure>
-<img src="/images/huffman-tree.png" alt="/images/huffman-tree.png">
-<figcaption>
-Huffman Tree
-</figcaption>
-</figure>
-
 有损压缩：压缩音频、图像压缩，比如，mp3、jpeg
 
 无损压缩格式：音频：wav、flac；图像：png、gif、pdf、zip
@@ -253,23 +246,9 @@ LAN -> WAN(ISP)
 
 IP 负责把数据包送到正确的计算机，UDP 负责把数据包送到正确的程序
 
-<figure>
-<img src="/images/udp.png" alt="/images/udp.png">
-<figcaption>
-UDP
-</figcaption>
-</figure>
-
 UDP 不关心数据包是否完整到达
 
 如果想要知道数据包是否完整到达目的地，就要采用"传输控制协议（TCP）"
-
-<figure>
-<img src="/images/tcp.png" alt="/images/tcp.png">
-<figcaption>
-TCP
-</figcaption>
-</figure>
 
 TCP 的重要功能：
 
@@ -278,13 +257,6 @@ TCP 的重要功能：
    要求接收方的电脑收到数据包并且"校验和"检查无误后（数据没有损坏）给发送方发一个确认码（ACK），代表收到了。得知上一个数据包成功到达后，发送方会发下一个数据包。
 
 Domain Name Service DNS
-
-<figure>
-<img src="/images/osi.png" alt="/images/osi.png">
-<figcaption>
-OSI 七层协议
-</figcaption>
-</figure>
 
 ### The World Wide Web {#the-world-wide-web}
 
