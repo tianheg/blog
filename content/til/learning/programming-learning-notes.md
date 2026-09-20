@@ -1,5 +1,7 @@
 ---
-title: 'My programming learning notes'
+title: '编程学习笔记'
+status: reviewed
+date: 2022-11-26T08:58:42+08:00
 ---
 
 > 由兴趣和危机意识驱动的学习，通过计算机获取认识世界的一个角度。
