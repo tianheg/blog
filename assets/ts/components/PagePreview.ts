@@ -145,14 +145,14 @@ function buildCard(entry: PreviewEntry, depth: number, href: string): HTMLElemen
       <div class="text-sm font-semibold text-gray-900 dark:text-gray-100 leading-snug">
         ${statusBadge(entry.s)}${escapeHtml(entry.t || "")}
       </div>
-      ${meta ? `<div class="mt-1 text-[11px] text-gray-400 dark:text-gray-500 tracking-wide">${escapeHtml(meta)}</div>` : ""}
+      ${meta ? `<div class="mt-1 text-[11px] text-gray-600 dark:text-gray-400 tracking-wide">${escapeHtml(meta)}</div>` : ""}
     </div>
     ${
       entry.x
         ? `<p class="px-3.5 py-2.5 text-[13px] leading-relaxed text-gray-600 dark:text-gray-400 max-h-56 overflow-hidden">${escapeHtml(entry.x)}</p>`
         : ""
     }
-    <div class="px-3.5 pb-2.5 text-[11px] text-gray-400 dark:text-gray-500">点击进入 →</div>
+    <div class="px-3.5 pb-2.5 text-[11px] text-gray-600 dark:text-gray-400">点击进入 →</div>
   `;
 
   el.addEventListener("mouseenter", () => {

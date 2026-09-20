@@ -312,7 +312,7 @@ export default class ContentNetworkGraph extends HTMLElement {
    * Displays the loading spinner with a message.
    */
   private showLoading(): void {
-    this.showMessage(`${SPINNER_SVG} <span>loading graph…</span>`);
+    this.showMessage(`${SPINNER_SVG} <span>loading graph…</span>`, 'text-gray-700');
   }
 
   /**
@@ -402,6 +402,7 @@ export default class ContentNetworkGraph extends HTMLElement {
     const btn = document.createElement('button');
     btn.classList.add(
       'bg-white',
+      'text-gray-700',
       'border',
       'rounded-sm',
       'p-1',

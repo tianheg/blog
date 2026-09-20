@@ -17,12 +17,12 @@
   {{ $isPosts := eq .Section "posts" }}
 
   {{ if $isPosts }}
-    <h1 class="text-[28px] font-bold tracking-tight">文章<span class="text-sm font-normal text-gray-500 dark:text-gray-400"> · {{ len $pages }} 篇</span></h1>
+    <h1 class="text-[28px] font-bold tracking-tight">文章<span class="text-sm font-normal text-gray-600 dark:text-gray-400"> · {{ len $pages }} 篇</span></h1>
   {{ end }}
 
   {{/* Default section listing: group by year */}}
   {{ range $pages.GroupByDate "2006" }}
-    <h2 class="text-xl font-semibold mt-10 mb-4">{{ .Key }}{{ if $isPosts }}<span class="text-sm font-normal text-gray-500 dark:text-gray-400"> · {{ len .Pages }} 篇</span>{{ end }}</h2>
+    <h2 class="text-xl font-semibold mt-10 mb-4">{{ .Key }}{{ if $isPosts }}<span class="text-sm font-normal text-gray-600 dark:text-gray-400"> · {{ len .Pages }} 篇</span>{{ end }}</h2>
     {{ if $isPosts }}
       {{ partial "posts/year-heatmap.html" (dict "year" .Key "pages" .Pages) }}
     {{ end }}

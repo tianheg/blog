@@ -33,7 +33,7 @@
     font-size: 0.8125rem;
     line-height: 1.6;
     border-left: 1px solid transparent;
-    color: #6b7280;
+    color: #4a5565;
     text-decoration: none;
     transition: color 0.15s, border-color 0.15s;
   }
@@ -75,7 +75,7 @@
         </a>
         <div class="flex items-center gap-4">
           <button type="button" data-cmdk-open
-            class="p-1.5 text-gray-500 dark:text-gray-400 hover:text-gray-900 dark:hover:text-gray-100 transition-colors cursor-pointer"
+            class="p-1.5 text-muted dark:text-gray-400 hover:text-gray-900 dark:hover:text-gray-100 transition-colors cursor-pointer"
             aria-label="搜索与跳转（⌘K）" title="搜索与跳转（⌘K）">
             <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="11" cy="11" r="8"/><path d="m21 21-4.3-4.3"/></svg>
           </button>
@@ -83,7 +83,7 @@
           <nav class="hidden sm:flex items-center gap-6">
           {{ range .Site.Menus.main }}
           <a href="{{ .URL }}"
-             class="text-sm no-underline text-gray-500 dark:text-gray-400 hover:text-gray-900 dark:hover:text-gray-100 transition-colors">
+             class="text-sm no-underline text-muted dark:text-gray-400 hover:text-gray-900 dark:hover:text-gray-100 transition-colors">
             {{ .Name }}
           </a>
           {{ end }}
@@ -159,7 +159,7 @@
           {{ if $rest }}{{ $groups = $groups | append (dict "name" "其他" "cats" $rest) }}{{ end }}
 
           {{ range $gi, $group := $groups }}
-          <div class="text-[11px] font-medium text-gray-500 dark:text-gray-400 px-3 mb-1.5 {{ if eq $gi 0 }}mt-0{{ else }}mt-5{{ end }}">{{ $group.name }}</div>
+          <div class="text-[11px] font-medium text-gray-600 dark:text-gray-400 px-3 mb-1.5 {{ if eq $gi 0 }}mt-0{{ else }}mt-5{{ end }}">{{ $group.name }}</div>
           {{ range $group.cats }}
           {{ $sp := site.GetPage (printf "/til/%s" .) }}
           {{ with $sp }}
@@ -168,7 +168,7 @@
              class="flex items-center justify-between gap-2 pl-2.5 pr-3 py-1.5 text-sm border-l-2 transition-colors
                     {{ if $active }}border-ink-500 bg-ink-100 dark:bg-ink-900/60 text-ink-700 dark:text-ink-300 font-medium{{ else }}border-transparent text-gray-600 dark:text-gray-400 hover:text-gray-900 dark:hover:text-gray-100 hover:border-gray-300 dark:hover:border-gray-600{{ end }}">
             <span class="truncate">{{ .Title }}</span>
-            <span class="text-xs tabular-nums shrink-0 {{ if $active }}text-ink-600 dark:text-ink-400{{ else }}text-gray-500 dark:text-gray-400{{ end }}">{{ len .RegularPages }}</span>
+            <span class="text-xs tabular-nums shrink-0 {{ if $active }}text-ink-600 dark:text-ink-400{{ else }}text-gray-600 dark:text-gray-400{{ end }}">{{ len .RegularPages }}</span>
           </a>
           {{ end }}
           {{ end }}

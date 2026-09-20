@@ -7,7 +7,7 @@ title: Search
 
 <style>
   .search-tabs { display: flex; gap: 0; margin-bottom: 1.5rem; border-bottom: 1px solid #e5e7eb; }
-  .search-tab { padding: 0.5rem 1rem; font-size: 0.875rem; cursor: pointer; border: none; background: none; color: #6b7280; border-bottom: 2px solid transparent; transition: all 0.15s; }
+  .search-tab { padding: 0.5rem 1rem; font-size: 0.875rem; cursor: pointer; border: none; background: none; color: #4a5565; border-bottom: 2px solid transparent; transition: all 0.15s; }
   .search-tab:hover { color: #374151; }
   .search-tab.active { color: #3d5b7a; border-bottom-color: #3d5b7a; font-weight: 500; }
   .search-panel { display: none; }
@@ -35,7 +35,7 @@ title: Search
     .semantic-result { border-bottom-color: #1f2937; }
     .semantic-result a { color: #88a1bc; }
     .semantic-empty,
-    .semantic-loading { color: #6b7280; }
+    .semantic-loading { color: #9ca3af; }
     #semantic-input { background: #1f2937; border-color: #4b5563; color: #f3f4f6; }
     #semantic-input:focus { border-color: #88a1bc; }
 
@@ -43,7 +43,7 @@ title: Search
     :root {
       --pf-text: #d1d5db;
       --pf-text-secondary: #9ca3af;
-      --pf-text-muted: #6b7280;
+      --pf-text-muted: #9ca3af;
       --pf-background: #1f2937;
       --pf-border: #374151;
       --pf-border-focus: #88a1bc;

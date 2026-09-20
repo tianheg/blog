@@ -21,7 +21,7 @@
 <section class="mb-16">
   <div class="flex items-center justify-between mb-6">
     <h2 class="text-lg font-semibold">Recent Posts</h2>
-    <a href="/posts" class="text-sm text-gray-500 dark:text-gray-400 hover:text-gray-900 dark:hover:text-gray-100 transition-colors">View all →</a>
+    <a href="/posts" class="text-sm text-gray-600 dark:text-gray-400 hover:text-gray-900 dark:hover:text-gray-100 transition-colors">View all →</a>
   </div>
 
   {{ $posts := where .Site.RegularPages "Section" "posts" }}
@@ -31,7 +31,7 @@
     <div class="space-y-1">
       {{ range $recentPosts }}
         <div class="flex items-baseline gap-4 py-2">
-          <time class="text-sm text-gray-500 dark:text-gray-400 shrink-0 w-10 tabular-nums whitespace-nowrap" datetime="{{ .Date.Format "2006-01-02" }}">
+          <time class="text-sm text-gray-600 dark:text-gray-400 shrink-0 w-10 tabular-nums whitespace-nowrap" datetime="{{ .Date.Format "2006-01-02" }}">
             {{ .Date.Format "01/02" }}
           </time>
           <a href="{{ .RelPermalink }}" class="text-base">
@@ -49,7 +49,7 @@
 <section class="mb-16">
   <div class="flex items-center justify-between mb-6">
     <h2 class="text-lg font-semibold">Random TIL</h2>
-    <a href="/til" class="text-sm text-gray-500 dark:text-gray-400 hover:text-gray-900 dark:hover:text-gray-100 transition-colors">View all →</a>
+    <a href="/til" class="text-sm text-gray-600 dark:text-gray-400 hover:text-gray-900 dark:hover:text-gray-100 transition-colors">View all →</a>
   </div>
 
   {{ $til := where .Site.RegularPages "Section" "til" }}

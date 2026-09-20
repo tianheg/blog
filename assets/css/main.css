@@ -28,6 +28,12 @@
   --color-ink-800: #263a4e;
   --color-ink-900: #1a2a3b;
   --color-ink-950: #101c28;
+
+  /* 次级文字（浅色侧）：Tailwind gray-500 #6a7282 在暖纸上只有 4.45:1 —— 差 0.05 不到 AA；
+     直接跳到 gray-600 (#4a5565, 6.95:1) 会让 16px 页头导航明显变重，
+     所以用 gray-500 压暗 2.1% 的 #646c7c（4.85:1）。深色侧仍用 gray-400。
+     用途：页头/栏头导航链接、⌘K 图标、TIL 列表页的两个按钮。 */
+  --color-muted: #646c7c;
 }
 
 /* ── Color tokens (daisyUI silk/sunset, merged via light-dark()) ──
