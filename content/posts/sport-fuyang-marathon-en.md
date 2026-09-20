@@ -1,7 +1,7 @@
 ---
 title: 'Fuyang Marathon Experience'
 date: 2024-04-21T09:00:00+08:00
-tags: ['随笔', English]
+tags: ['随笔', English, '运动记']
 location: '阜阳 Fuyang'
 ---
 

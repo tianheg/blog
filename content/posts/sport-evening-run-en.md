@@ -1,7 +1,7 @@
 ---
 title: 'Evening Run'
 date: 2026-05-23T21:10:00+08:00
-tags: ['随笔', English]
+tags: ['随笔', English, '运动记']
 ---
 
 I got off work at 5:30, went home, changed into a sleeveless shirt, shorts, and running shoes, and headed out for a run on Phoenix Mountain across the street. Walking there, I couldn't help but think about what lies ahead. When you stay in a not-so-great environment for too long, your mindset turns negative, your behavior slowly becomes undisciplined, your body and mind weaken, and self-destructive habits start creeping in one after another. It's a vicious cycle. If you don't break it in time, you'll regret it when it's too late.

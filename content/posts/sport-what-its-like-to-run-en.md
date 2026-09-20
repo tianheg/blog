@@ -1,7 +1,7 @@
 ---
 title: 'What it''s like to run'
 date: 2024-04-17T21:06:00+08:00
-tags: ['随笔', English]
+tags: ['随笔', English, '运动记']
 ---
 
 I'm talking about my latest two times running. As the time of order, first time was feeling bad, I coundn't run 5km,

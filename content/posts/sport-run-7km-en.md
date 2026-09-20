@@ -1,7 +1,7 @@
 ---
 title: 'Run 7 kilometers, Jupiter at opposition'
 date: 2026-01-11T14:10:00+08:00
-tags: [English, '随笔', '天文']
+tags: [English, '随笔', '天文', '运动记']
 ---
 
 I worked eight hours of overtime yesterday, and didn't want to work any more in the evening because I felt unwell, so I went home and slept from 6 pm to 9 pm. Seeing photos of the starry sky on my WeChat Moments reminded me that I could observe the "Jupiter opposition" phenomenon. So, I put on warm clothes, went downstairs, walked to an open area in a nearby park, lay down on the ground, and held up my binoculars. At first, I couldn't find Jupiter, so I opened a star chart app and found that Jupiter was roughly in the northeast at that time. Through the binoculars, Jupiter appeared as a very bright dot, but because the magnification of the binoculars wasn't high, Jupiter's rings weren't very clear.

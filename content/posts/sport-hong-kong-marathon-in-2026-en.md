@@ -1,7 +1,7 @@
 ---
 title: 'Hong Kong Marathon in 2026'
 date: 2026-01-18T22:03:00+08:00
-tags: [English, '随笔']
+tags: [English, '随笔', '运动记']
 location: '香港 Hongkong'
 ---
 

@@ -26,9 +26,9 @@ title: '从这里开始'
 
 ## 跑步与观星
 
-- [[evening-run|傍晚跑步]]
-- [[hong-kong-marathon-in-2026|参加26年香港马拉松]]
-- [[run-7km|跑步七公里，木星冲日]]
+- [[sport-evening-run|傍晚跑步]]
+- [[sport-hong-kong-marathon-in-2026|参加26年香港马拉松]]
+- [[sport-run-7km|跑步七公里，木星冲日]]
 - [[stargazing-diary-251105|观星记-251105]]
 
 ## 音乐剧与演出
