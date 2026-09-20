@@ -4,15 +4,14 @@ title: Uses
 
 ## Programming
 
-- [Railway](https://railway.app?referralCode=jHrmpR) & Cloudflare
-  - Railway: Use my link for a $20 credit for you, and 15% cash back for me after your first payment. Now I put all my important projects on Railway.
-  - Cloudflare: If CF can deploy one project for free, I'll use it instead of Railway.
+- [Cloudflare](https://www.cloudflare.com/)
+  - Cloudflare: I put all my important projects on Cloudflare.
 - [Hetzner Cloud](https://www.hetzner.com/)
   - Hetzner: I use their StorageBox to store my important files and photos.
 - Emacs for writing & VS Code for coding
   - Emacs is the editor I love using the most.
-- Firefox developer edition
-  - I don't know the future of Firefox, but I'm sticking with it for now.
+- Microsoft Edge
+- MECHREVO laptop with Windows 11
 - HP laptop with Arch Linux(KDE)
   - The laptop stay with me since 2019, I still can continue use it.
 - [27" Asus TUF Gaming VG27AQL3A](https://www.displayspecifications.com/en/model/863934de)
