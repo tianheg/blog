@@ -177,7 +177,7 @@ header: Linux      # 可选，子分类
 - 日期语义是**首次入库时间**：新建 TIL 用当天时间；历史文件取 git 首次提交时间（`git log --diff-filter=A --follow`），无 git 历史时回退文件 mtime。2026-09-10 已全库补齐 574 篇
 - 日期驱动 `/til/` 的「最近新增」排序（此前 fallback 到文件 mtime，克隆/检出后无意义）
 - AI 代写一律 `draft`；用户用自己的话复核/补充后改为 `reviewed`
-- 页面标题开头显示状态小字（draft=amber，reviewed=emerald，见 `layouts/partials/til/status.html`）
+- 状态色只出现在「悬停预览卡片」与 `assets/ts/components/PagePreview.ts` 的 `statusBadge()`：draft=amber（未复核信号）、reviewed=中性灰（2026-09-20 起；此前是 emerald，随全站去绿统一）。页面上不显示状态小字
 
 ### Posts vs TIL 选择标准
 
@@ -273,6 +273,19 @@ TIL 的信息源链接统一放在文件末尾：
 | `section.html` | 分类列表页（Posts, TIL 索引等） |
 | `graph/list.json.json` | 知识图谱 JSON 数据 |
 | `_shortcodes/` | 自定义 Hugo 短代码 |
+
+### 配色约定（2026-09-20 起）
+
+全站只有**一套强调色**：`ink` 墨蓝，定义在 `assets/css/main.css` 的 `@theme`（`--color-ink-50..950`）。
+正文链接一律 `prose-a:text-ink-600 dark:prose-a:text-ink-400`（静态无下划线、hover 加下划线），
+TIL 与文章页同一套；TIL 此前的 emerald 系（`#059669` 在暖纸底上仅 3.46:1，未达 AA）已全站退役。
+标识类 UI（站名、header 徽章、返回顶部、`reviewed` 徽章）用中性灰，强调色只给链接与交互态。
+改配色只动这一处 token，改完跑下面这行确认没有残留：
+
+```bash
+grep -rn 'emerald-\|text-blue-\|bg-blue-\|fill-blue-\|outline-blue-' layouts/ assets/ content/ \
+  --include='*.html' --include='*.ts' --include='*.css' --include='*.md'   # 期望 0 命中
+```
 
 ## 常用命令
 
