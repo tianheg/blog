@@ -31,10 +31,10 @@
     <div class="space-y-1">
       {{ range $recentPosts }}
         <div class="flex items-baseline gap-4 py-2">
-          <time class="text-sm text-gray-600 dark:text-gray-400 shrink-0 w-10 tabular-nums whitespace-nowrap" datetime="{{ .Date.Format "2006-01-02" }}">
+          <time class="text-[13px] text-gray-600 dark:text-gray-400 shrink-0 w-10 tabular-nums whitespace-nowrap" datetime="{{ .Date.Format "2006-01-02" }}">
             {{ .Date.Format "01/02" }}
           </time>
-          <a href="{{ .RelPermalink }}" class="text-base">
+          <a href="{{ .RelPermalink }}" class="text-[15px]">
             {{ partial "functions/get-title" (dict "page" .) }}
           </a>
         </div>
@@ -61,13 +61,13 @@
       {{ range $recentTil }}
         {{ if ne .Title "Tils" }}
         <div class="flex items-baseline gap-4 py-2">
-          <a href="{{ .RelPermalink }}" class="text-base">
+          <a href="{{ .RelPermalink }}" class="text-[15px]">
             {{ partial "functions/get-title" (dict "page" .) }}
           </a>
           {{ $dirPath := .File.Dir | strings.TrimPrefix "til/" | strings.TrimSuffix "/" }}
           {{ $category := index (split $dirPath "/") 0 }}
           {{ if $category }}
-          <span class="ml-auto text-xs px-2 py-0.5 rounded-full bg-gray-100 dark:bg-gray-800 text-gray-600 dark:text-gray-400 shrink-0">
+          <span class="ml-auto text-[13px] px-2 py-0.5 rounded-full bg-gray-100 dark:bg-gray-800 text-gray-600 dark:text-gray-400 shrink-0">
             {{ $category }}
           </span>
           {{ end }}

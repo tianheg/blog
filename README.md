@@ -303,6 +303,26 @@ hover = 实色 `currentColor`。此前是「静止无下划线、只在 `prose-a
 写全站 `.prose` 会把导航、按钮、标签 chip 一起卷进来；标记类链接用 `:not(.no-underline)` 排除。
 列表页标题**不在此范围**（排版上是条目名，不是正文里的指向）。
 
+### 字号阶梯（2026-09-20 定案：正文 16 / 列表条目 15 / 元信息 13）
+
+**移动端与桌面同一套，不做任何 `@media` 分档。**
+
+| 用途 | 值 | 落点 |
+|---|---|---|
+| 正文（文章 / TIL / 独立页） | `prose-p:text-[16px] prose-p:leading-[1.85]`（`li` 同） | `posts/single.html`、`single.html`、`til/single.html` 三处容器 |
+| 列表页条目 | `text-[15px]` | `post-list-item.html`、`home.html`、`taxonomy.html`、`til/list.html`、`partials/til/dashboard.html` |
+| 元信息（日期 / 篇数计数） | `text-[13px] tabular-nums text-gray-600 dark:text-gray-400` | 同上 |
+| 表格 / 代码块 | 15px（移动端 14）/ 14px | `assets/css/table.css` / `prose.css` |
+| 页面 H1 / H2 | 由 prose 的 em 比例决定（16px 基准 → h1 36 / h2 24） | 模板只定 h1 的 `text-[28px]`（`/posts/`、`/til/`）等少数几处 |
+| UI 层（TIL 侧栏、TOC 13px、反链/相关 14px、⌘K 14px、页头导航） | 不参与上面两档 | 界面不是内容，别跟着正文一起涨 |
+
+两个坑（2026-09-20 踩过）：
+
+1. `layouts/baseof.html` 的 `<body>` 上曾有 `lg:prose-sm` —— ≥1024px 把 prose 基准从 16px 压到 **14px**，
+   于是**桌面比手机还小**，且中文一行 52 字（舒适区 25–35）。动字号先查这一行
+2. prose 的标题是 **em** 换算：改基准会连带动 h1/h2（14 → 16 时桌面 h1 30 → 36、h2 20 → 24）。
+   只想动正文就在容器上显式写 `prose-h1:text-[30px]`，别指望标题不动
+
 次要文本另有两个 token（2026-09-20 加）：小字一律 `text-gray-600 dark:text-gray-400`（6.95:1）；
 页头/栏头导航与 ⌘K 图标用 `text-muted`（`#646c7c`，暖纸 4.85:1）。旧的 `text-gray-500` 已全站停用 ——
 它在暖纸底上只有 4.45:1，差 0.05 不到 AA（脚本实测，非目测）。
