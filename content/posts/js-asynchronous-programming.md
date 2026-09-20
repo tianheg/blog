@@ -2,7 +2,6 @@
 title: 'JavaScript 异步编程'
 date: 2023-01-10T08:02:00+08:00
 tags: ['技术']
-draft: true
 ---
 
 - 什么是 promise state machine
