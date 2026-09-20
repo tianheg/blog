@@ -1,7 +1,7 @@
 ---
 title: 'CSS Day 2'
 date: 2022-07-29
-tags: ['技术', CSS]
+tags: ['技术']
 ---
 
 今天主要用了动画 animation。想法来自 Twitter 上 @shuding_

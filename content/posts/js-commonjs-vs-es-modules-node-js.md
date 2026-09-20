@@ -1,7 +1,7 @@
 ---
 title: 'CommonJS vs. ES modules in Node.js'
 date: 2022-11-06T15:27:00+08:00
-tags: ['技术', JavaScript]
+tags: ['技术']
 ---
 
 <https://blog.logrocket.com/commonjs-vs-es-modules-node-js/>

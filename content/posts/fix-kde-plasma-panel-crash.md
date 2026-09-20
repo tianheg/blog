@@ -1,7 +1,7 @@
 ---
 title: '修复 KDE Plasma panel 崩溃问题'
 date: 2022-02-04
-tags: ['技术', Arch-Linux]
+tags: ['技术']
 ---
 
 <https://www.addictivetips.com/ubuntu-linux-tips/fix-kde-plasma-panel-crash/>

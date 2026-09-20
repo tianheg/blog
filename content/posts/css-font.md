@@ -1,7 +1,7 @@
 ---
 title: 'CSS font'
 date: 2022-11-07T15:09:00+08:00
-tags: ['技术', CSS]
+tags: ['技术']
 ---
 
 <https://www.cssfontstack.com/>

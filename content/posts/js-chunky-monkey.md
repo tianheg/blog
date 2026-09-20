@@ -1,7 +1,7 @@
 ---
 title: 'Chunky Monkey'
 date: 2022-11-06T14:09:00+08:00
-tags: ['技术', Algorithm]
+tags: ['技术']
 ---
 
 1. [Basic Algorithm Scripting: Chunky Monkey | freeCodeCamp.org](https://www.freecodecamp.org/learn/javascript-algorithms-and-data-structures/basic-algorithm-scripting/chunky-monkey)

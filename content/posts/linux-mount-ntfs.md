@@ -1,7 +1,7 @@
 ---
 title: 'Linux Mount NTFS'
 date: 2022-09-01
-tags: ['技术', Linux]
+tags: ['技术']
 ---
 
 <https://wiki.archlinux.org/title/NTFS>

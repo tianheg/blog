@@ -1,7 +1,7 @@
 ---
 title: 'HTML Tables Structuring Planet Data'
 date: 2021-11-09
-tags: ['技术', HTML]
+tags: ['技术']
 ---
 
 <https://developer.mozilla.org/en-US/docs/Learn/HTML/Tables/Structuring_planet_data>

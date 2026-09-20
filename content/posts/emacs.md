@@ -1,7 +1,7 @@
 ---
 title: Emacs
 date: 2022-02-11
-tags: ['技术', Emacs]
+tags: ['技术']
 ---
 
 ## Compile

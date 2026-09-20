@@ -1,7 +1,7 @@
 ---
 title: 'Emacs 未指定 ispell-hunspell-dict-paths-alist 报错'
 date: 2021-10-28
-tags: ['技术', Emacs]
+tags: ['技术']
 ---
 
 今天在使用过程中，出现错误：

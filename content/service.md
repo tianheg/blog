@@ -5,7 +5,7 @@ title: 'Consulting services'
 Based on the knowledge I currently possess, I can provide clarification and answers to the following topics:
 
 - Experience and Insights on Writing
-- Arch Linux Installation and Basic Software (Desktop Environment) Configuration ([Arch Linux Related Articles](/tags/arch-linux))
+- Arch Linux Installation and Basic Software (Desktop Environment) Configuration ([Arch Linux Related Articles](/tags/技术))
 - How to build a personal website like mine in this style
 - Learning gains from web development
 

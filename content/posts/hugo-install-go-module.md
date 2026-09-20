@@ -1,7 +1,7 @@
 ---
 title: 'Hugo 安装 Go 模块'
 date: 2023-05-31T07:51:00+08:00
-tags: ['技术', Hugo]
+tags: ['技术']
 ---
 
 梳理如何为 Hugo 安装 Go 模块

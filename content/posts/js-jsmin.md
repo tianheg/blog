@@ -1,7 +1,7 @@
 ---
 title: '使用 JSMin 压缩 JavaScript'
 date: 2021-12-15
-tags: ['技术', JavaScript]
+tags: ['技术']
 ---
 
 从 GitHub 仓库：[douglascrockford/JSMin](https://github.com/douglascrockford/JSMin) 得到源代码 `jsmin.c` ，然后执行以下命令：

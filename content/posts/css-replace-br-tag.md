@@ -1,7 +1,7 @@
 ---
 title: 'CSS 取代 br'
 date: 2022-05-22
-tags: ['技术', CSS, Hugo, HTML]
+tags: ['技术']
 ---
 
 在 Hugo 中添加一个 shortcode：

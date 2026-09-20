@@ -1,7 +1,7 @@
 ---
 title: 'How to Read the ECMAScript Specification(2020)'
 date: 2023-02-17T13:35:00+08:00
-tags: ['技术', JavaScript]
+tags: ['技术']
 ---
 
 本篇原文作于 2020 年，作者一直没有更新，但是文中介绍的方法值得学习。如果有和最新规范不一致的地方，以最新规范为准。

@@ -1,7 +1,7 @@
 ---
 title: 'JavaScript. The Core.(2nd)'
 date: 2023-02-10T16:44:00+08:00
-tags: ['技术', JavaScript]
+tags: ['技术']
 ---
 
 [JavaScript. The Core: 2nd Edition – Dmitry Soshnikov](http://dmitrysoshnikov.com/ecmascript/javascript-the-core-2nd-edition/)

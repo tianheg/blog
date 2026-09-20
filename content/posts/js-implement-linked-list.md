@@ -1,7 +1,7 @@
 ---
 title: 'JavaScript 实现链表'
 date: 2022-02-12
-tags: [JavaScript, '技术']
+tags: ['技术']
 ---
 
 <https://www.freecodecamp.org/news/implementing-a-linked-list-in-javascript/>

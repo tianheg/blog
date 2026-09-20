@@ -1,7 +1,7 @@
 ---
 title: '使用 scrcpy 在 Linux 桌面端控制 Android11 设备'
 date: 2023-06-22T08:38:00+08:00
-tags: ['技术', Android]
+tags: ['技术']
 ---
 
 记录使用 scrcpy 控制 Android 设备的初步内容。

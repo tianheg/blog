@@ -1,7 +1,7 @@
 ---
 title: 'CSS 设置 100% 宽度'
 date: 2022-11-07T14:33:00+08:00
-tags: ['技术', CSS]
+tags: ['技术']
 ---
 
 [Creating a CSS Curtain Opening Effect | CSS-Tricks](https://css-tricks.com/creating-css-sliding-door-effect/#aa-the-css-layout)

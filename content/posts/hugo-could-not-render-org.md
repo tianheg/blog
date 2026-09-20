@@ -1,7 +1,7 @@
 ---
 title: 'Hugo Could not render org'
 date: 2023-02-14T00:04:00+08:00
-tags: ['技术', Hugo]
+tags: ['技术']
 ---
 
 问题得到解决。Hugo 依赖的 go-org 库作者进行了完善，他的 [commit 信息](https://github.com/niklasfasching/go-org/commit/5464ab3/)：

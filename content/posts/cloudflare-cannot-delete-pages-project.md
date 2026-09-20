@@ -1,7 +1,7 @@
 ---
 title: 'Cloudflare Pages 无法删除某项目'
 date: 2023-01-20T01:49:00+08:00
-tags: ['技术', Cloudflare]
+tags: ['技术']
 ---
 
 部署在 Cloudflare Pages 的某个项目不需要了，想删除，点击删除后出现：

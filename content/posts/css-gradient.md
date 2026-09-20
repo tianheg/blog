@@ -1,7 +1,7 @@
 ---
 title: 'CSS 渐变'
 date: 2022-11-07T15:10:00+08:00
-tags: ['技术', CSS]
+tags: ['技术']
 ---
 
 <https://developer.mozilla.org/en-US/docs/Web/CSS/gradient/linear-gradient>

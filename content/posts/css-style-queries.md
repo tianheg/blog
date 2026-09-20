@@ -1,7 +1,7 @@
 ---
 title: 'CSS Style Queries'
 date: 2022-11-08T14:06:00+08:00
-tags: ['技术', CSS]
+tags: ['技术']
 ---
 
 <https://una.im/style-queries/>

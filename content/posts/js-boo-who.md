@@ -1,7 +1,7 @@
 ---
 title: 'Boo who'
 date: 2022-11-05T21:41:00+08:00
-tags: ['技术', Algorithm]
+tags: ['技术']
 ---
 
 1. [Basic Algorithm Scripting: Boo who | freeCodeCamp.org](https://www.freecodecamp.org/learn/javascript-algorithms-and-data-structures/basic-algorithm-scripting/boo-who)

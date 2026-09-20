@@ -1,7 +1,7 @@
 ---
 title: '如何理解 JS 中的 (e)'
 date: 2021-12-01
-tags: ['技术', JavaScript]
+tags: ['技术']
 ---
 
 `e` 是将传递给事件处理程序的 `event` 对象的短 var 引用。

@@ -1,7 +1,7 @@
 ---
 title: 'CSS Day 3'
 date: 2022-08-10
-tags: ['技术', CSS]
+tags: ['技术']
 ---
 
 最近几天练习 MDN-CSS Guide-CSS first steps overview 下的

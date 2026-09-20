@@ -1,7 +1,7 @@
 ---
 title: 'CSS 隐藏 Chrome 的滚动条'
 date: 2022-11-07T15:03:00+08:00
-tags: ['技术', CSS]
+tags: ['技术']
 ---
 
 <https://www.w3schools.com/howto/howto_css_hide_scrollbars.asp>

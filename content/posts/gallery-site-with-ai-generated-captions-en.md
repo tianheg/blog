@@ -1,7 +1,7 @@
 ---
 title: 'Gallery site with AI-generated image captions'
 date: 2024-05-15T16:20:00+08:00
-tags: ['技术', Cloudflare, img, English]
+tags: ['技术', English]
 ---
 
 As someone who occasionally takes photos, I've accumulated quite a few over the years with my phone. I've wanted to have an online photo album for a long time but was never quite sure which tools to use for building one. Recently, I came across this repository [petrovicz/astro-photoswipe](https://github.com/petrovicz/astro-photoswipe) in a newsletter, which I quite liked, and decided to give it a try along with [Astro](https://astro.build/), which was new to me. As for [PhotoSwipe](https://photoswipe.com/), it's an old friend; I used it for a while but then shifted my focus elsewhere.

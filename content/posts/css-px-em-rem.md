@@ -1,7 +1,7 @@
 ---
 title: 'CSS 中使用 px，em，rem'
 date: 2022-02-10
-tags: ['技术', CSS]
+tags: ['技术']
 ---
 
 目前还不理解它们的应用场景，暂时倾向于使用 em,rem 少用 px 。

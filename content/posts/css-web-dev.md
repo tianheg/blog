@@ -1,7 +1,7 @@
 ---
 title: 'CSS web.dev 网站学习'
 date: 2022-11-08T14:16:00+08:00
-tags: ['技术', CSS]
+tags: ['技术']
 ---
 
 <https://web.dev/learn/css/>

@@ -1,7 +1,7 @@
 ---
 title: '通过 Nginx 让网站支持 HTTP/2'
 date: 2021-10-27
-tags: ['技术', Nginx]
+tags: ['技术']
 ---
 
 https://www.nginx.com/blog/http2-module-nginx/

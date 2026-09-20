@@ -1,7 +1,7 @@
 ---
 title: 'Nginx 初次使用'
 date: 2021-09-19
-tags: ['技术', Nginx]
+tags: ['技术']
 ---
 
 ## 下载

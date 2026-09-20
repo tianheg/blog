@@ -1,7 +1,7 @@
 ---
 title: 'Bold in Org-mode'
 date: 2021-11-25
-tags: [Org-mode, '技术']
+tags: ['技术']
 ---
 
 以下是对 Emacs 下的 Orgmode 的文本加粗测试。

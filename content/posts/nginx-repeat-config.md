@@ -1,7 +1,7 @@
 ---
 title: 'Nginx 重复配置 Server Block'
 date: 2021-10-22
-tags: ['技术', Nginx]
+tags: ['技术']
 ---
 
 曾经在执行一些 Nginx 命令时总会出现如下警告：

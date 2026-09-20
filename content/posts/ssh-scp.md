@@ -1,7 +1,7 @@
 ---
 title: 'scp - OpenSSH secure file copy'
 date: 2021-12-03
-tags: ['技术', SSH]
+tags: ['技术']
 ---
 
 <https://www.techrepublic.com/article/how-to-use-secure-copy-with-ssh-key-authentication/>

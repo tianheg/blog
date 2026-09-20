@@ -1,7 +1,7 @@
 ---
 title: '使用 JS 提取 Pdf 指定范围页面'
 date: 2023-01-06T14:29:00+08:00
-tags: ['技术', JavaScript]
+tags: ['技术']
 ---
 
 [How to Extract Pages from a PDF and Render Them with JavaScript](https://www.freecodecamp.org/news/extract-pdf-pages-render-with-javascript/)

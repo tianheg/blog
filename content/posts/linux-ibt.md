@@ -1,7 +1,7 @@
 ---
 title: 'Linux IBT(Indirect Branch Tracking)'
 date: 2022-08-24
-tags: ['技术', Linux]
+tags: ['技术']
 ---
 
 ### 什么是 IBT {#什么是-ibt}

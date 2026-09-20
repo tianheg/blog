@@ -1,7 +1,7 @@
 ---
 title: 'JS Promise.all()'
 date: 2023-01-27T14:45:00+08:00
-tags: ['技术', JavaScript]
+tags: ['技术']
 ---
 
 `Promise.all()` 静态方法，输入一系列可迭代期约，输出一个期约。

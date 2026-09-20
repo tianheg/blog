@@ -1,7 +1,7 @@
 ---
 title: 'CSS 总结'
 date: 2022-11-08T14:17:00+08:00
-tags: ['技术', CSS]
+tags: ['技术']
 ---
 
 > Every browser understands that zero means no change.

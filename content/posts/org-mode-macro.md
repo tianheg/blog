@@ -1,7 +1,7 @@
 ---
 title: '使用 Org-mode 为文本添加高亮'
 date: 2021-12-10
-tags: [Org-mode, '技术']
+tags: ['技术']
 ---
 
 <https://github.com/fniessen/org-macros/blob/master/README.org#color>

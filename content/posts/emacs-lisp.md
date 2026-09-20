@@ -1,7 +1,7 @@
 ---
 title: 'Emacs Lisp(Elisp)'
 date: 2022-11-09T15:28:00+08:00
-tags: ['技术', Emacs]
+tags: ['技术']
 ---
 
 ## Docs

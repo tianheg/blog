@@ -1,7 +1,7 @@
 ---
 title: 'CSS Day 7'
 date: 2022-11-21T14:54:00+08:00
-tags: [CSS, '技术']
+tags: ['技术']
 ---
 
 今天用 CSS 画了一个圆。[练习 Demo](https://csszengarden.tianheg.xyz/days/first-30-days/7/)。

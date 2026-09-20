@@ -1,7 +1,7 @@
 ---
 title: 'Nginx 中在 80 端口添加 HTTP/2 出现问题'
 date: 2021-11-03
-tags: ['技术', Nginx]
+tags: ['技术']
 ---
 
 承接上篇文章[[nginx-http2|通过 Nginx 让网站支持 HTTP/2]]，当我完成文章中的操作时，有一次我好奇网站 HTTP 是否能够自动跳转到 HTTPS，于是我输入 `http://blog.yidajiabei.xyz/` ，意外发生了——没有跳转到 HTTPS，还下载了一个名字为 `download` 且文件类型为 `application/octet-stream` 。

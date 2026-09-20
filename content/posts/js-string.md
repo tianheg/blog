@@ -1,7 +1,7 @@
 ---
 title: 'JS 字符串'
 date: 2021-11-09
-tags: ['技术', JavaScript]
+tags: ['技术']
 ---
 
 `includes()` 方法能够在字符串中查找特定字符，而且它是大小写敏感的。

@@ -1,7 +1,7 @@
 ---
 title: 'Emacs Howto Custom Theme'
 date: 2021-11-24
-tags: ['技术', Emacs]
+tags: ['技术']
 ---
 
 在 =~/.emacs.d/init.el= 中添加：

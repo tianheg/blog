@@ -1,7 +1,7 @@
 ---
 title: 'Linux 软链接跨磁盘问题'
 date: 2022-09-04
-tags: ['技术', Linux]
+tags: ['技术']
 ---
 
 ```bash

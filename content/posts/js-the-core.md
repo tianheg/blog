@@ -1,7 +1,7 @@
 ---
 title: 'JavaScript. The Core.'
 date: 2023-02-06T21:44:00+08:00
-tags: [JavaScript, '技术']
+tags: ['技术']
 ---
 
 [JavaScript. The Core.](http://dmitrysoshnikov.com/ecmascript/javascript-the-core/)

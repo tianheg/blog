@@ -1,7 +1,7 @@
 ---
 title: '展开、收缩 details 标签'
 date: 2022-05-25
-tags: ['技术', CSS, HTML, JavaScript]
+tags: ['技术']
 ---
 
 我的信息源网站，用到了

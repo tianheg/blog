@@ -1,7 +1,7 @@
 ---
 title: '使用 Cloudflare Tunnel 将本地网页暴露在公网中'
 date: 2023-05-17T10:14:00+08:00
-tags: ['技术', Cloudflare]
+tags: ['技术']
 ---
 
 记录自己的配置过程。参考文章：[Setting up a Cloudflare Tunnel on the Raspberry Pi - Pi My Life Up](https://pimylifeup.com/raspberry-pi-cloudflare-tunnel/)

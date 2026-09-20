@@ -1,7 +1,7 @@
 ---
 title: 'ECMA-262-3 in detail'
 date: 2023-02-15T08:43:00+08:00
-tags: ['技术', JavaScript]
+tags: ['技术']
 ---
 
 - [ECMA-262-3 in detail. Chapter 1. Execution Contexts. - Dmitry Soshnikov](http://dmitrysoshnikov.com/ecmascript/chapter-1-execution-contexts/)

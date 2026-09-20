@@ -1,7 +1,7 @@
 ---
 title: '使用 Org Mode 写博客'
 date: 2021-12-08
-tags: [Org-mode, '技术']
+tags: ['技术']
 ---
 
 1. <https://github.com/dirtysalt/dirtysalt.github.io>

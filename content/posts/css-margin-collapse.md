@@ -1,7 +1,7 @@
 ---
 title: 'CSS 外边距(margin)折叠'
 date: 2023-03-20T08:51:00+08:00
-tags: ['技术', CSS]
+tags: ['技术']
 ---
 
 https://www.w3schools.com/Css/css_margin_collapse.asp

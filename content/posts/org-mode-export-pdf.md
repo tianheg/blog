@@ -1,7 +1,7 @@
 ---
 title: 'Emacs 下将 Org 导出为 pdf'
 date: 2021-12-27
-tags: [Org-mode, '技术']
+tags: ['技术']
 ---
 
 使用系统：Arch Linux

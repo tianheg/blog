@@ -1,7 +1,7 @@
 ---
 title: 'Hugo Add . Keyboard Shortcut'
 date: 2024-04-26T07:40:00+08:00
-tags: [Hugo, '技术']
+tags: ['技术']
 ---
 
 I read a [post](https://garrit.xyz/posts/2022-10-05-simple-guestbook), like the idea of press `.` then take me to the edit page. I made

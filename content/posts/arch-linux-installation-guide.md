@@ -1,7 +1,7 @@
 ---
 title: 'Arch Linux 安装指南'
 date: 2021-08-20
-tags: ['技术', Arch-Linux]
+tags: ['技术']
 ---
 
 ## 准备安装

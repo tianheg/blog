@@ -1,7 +1,7 @@
 ---
 title: 'Orgmode 加载文件夹下的所有 Org 文件到 Agenda'
 date: 2022-02-12
-tags: [Org-mode, '技术']
+tags: ['技术']
 ---
 
 1. <https://www.emacswiki.org/emacs/OrgMode>

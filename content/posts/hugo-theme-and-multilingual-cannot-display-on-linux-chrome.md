@@ -1,7 +1,7 @@
 ---
 title: 'Hugo 主题及多语言图标不能在 Linux Chrome 中正常显示'
 date: 2020-05-17
-tags: ['技术', Hugo]
+tags: ['技术']
 ---
 
 这个问题，我给正在使用的主题：Meme，提了

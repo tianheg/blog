@@ -1,7 +1,7 @@
 ---
 title: 'ssh Could not open a connection to your authentication agent.'
 date: 2021-12-03
-tags: ['技术', SSH]
+tags: ['技术']
 ---
 
 如何解决，运行以下代码即可：

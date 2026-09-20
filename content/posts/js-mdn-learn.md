@@ -1,7 +1,7 @@
 ---
 title: '(DONE) JS MDN Learn'
 date: 2022-10-25T21:59:00+08:00
-tags: ['技术', JavaScript]
+tags: ['技术']
 ---
 
 系统学习 JavaScript 第一步——MDN 的 [Learn](https://developer.mozilla.org/en-US/docs/Learn/JavaScript) 部分，相当于基础入门。

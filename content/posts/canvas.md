@@ -1,7 +1,7 @@
 ---
 title: '了解使用 HTML5 标签 &lt;canvas&gt;'
 date: 2022-11-05T15:19:00+08:00
-tags: ['技术', HTML]
+tags: ['技术']
 ---
 
 `&lt;canvas&gt;` 元素是 HTML5 的一部分，支持动态的、可编写脚本的 2D 形状和位图图像渲染。这是一个更新位图的低级程序模型，HTML5 Canvas 也有助于制作 2D 游戏。虽然 HTML5 canvas 提供了自己的 2D 绘图 API，但它也支持 WebGL API，允许使用 OpenGL ES 进行 3D 呈现。

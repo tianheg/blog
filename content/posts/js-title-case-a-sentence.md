@@ -1,7 +1,7 @@
 ---
 title: 'Title Case a Sentence'
 date: 2022-11-05T21:36:00+08:00
-tags: ['技术', Algorithm]
+tags: ['技术']
 ---
 
 [Basic Algorithm Scripting: Title Case a Sentence | freeCodeCamp.org](https://www.freecodecamp.org/learn/javascript-algorithms-and-data-structures/basic-algorithm-scripting/title-case-a-sentence)

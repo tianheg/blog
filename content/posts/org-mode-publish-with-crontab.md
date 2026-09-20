@@ -1,7 +1,7 @@
 ---
 title: '自动发布 Org Mode'
 date: 2022-01-08
-tags: [Org-mode, '技术']
+tags: ['技术']
 ---
 
 使用了 crontab。

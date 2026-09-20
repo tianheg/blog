@@ -1,7 +1,7 @@
 ---
 title: 'WARNING: UNPROTECTED PRIVATE KEY FILE! 警告怎样解释'
 date: 2021-12-26
-tags: ['技术', SSH]
+tags: ['技术']
 ---
 
 - <https://chmodcommand.com/>

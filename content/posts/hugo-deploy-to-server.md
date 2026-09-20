@@ -1,7 +1,7 @@
 ---
 title: '部署 Hugo 博客到 Ubuntu 服务器'
 date: 2021-09-21
-tags: ['技术', Hugo]
+tags: ['技术']
 ---
 
 ### 安装 Hugo {#安装-hugo}

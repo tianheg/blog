@@ -1,7 +1,7 @@
 ---
 title: 'JS 从回调函数中获取数据'
 date: 2023-01-16T14:18:00+08:00
-tags: ['技术', JavaScript]
+tags: ['技术']
 ---
 
 最终 Node.js 代码：

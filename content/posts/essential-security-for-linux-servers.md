@@ -1,7 +1,7 @@
 ---
 title: '为 Linux 服务器设置的重要安全措施'
 date: 2023-01-17T21:29:00+08:00
-tags: ['技术', Linux]
+tags: ['技术']
 ---
 
 [My First 5 Minutes On A Server; Or, Essential Security for Linux Servers – Sol Love](https://sollove.com/2013/03/03/my-first-5-minutes-on-a-server-or-essential-security-for-linux-servers/)

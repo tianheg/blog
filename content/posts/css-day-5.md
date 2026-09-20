@@ -1,7 +1,7 @@
 ---
 title: 'CSS Day 5'
 date: 2022-08-15
-tags: ['技术', CSS]
+tags: ['技术']
 ---
 
 这一次练习 CSS 的基础概念------The

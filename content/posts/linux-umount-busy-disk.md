@@ -1,7 +1,7 @@
 ---
 title: 'Linux Umount busy disk'
 date: 2022-09-01
-tags: ['技术', Linux]
+tags: ['技术']
 ---
 
 <https://www.positioniseverything.net/umount-target-is-busy>

@@ -1,7 +1,7 @@
 ---
 title: 'Emacs 常用快捷键总结'
 date: 2021-10-29
-tags: ['技术', Emacs]
+tags: ['技术']
 ---
 
 | Keyboard shortcuts         | Effects                                  |

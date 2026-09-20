@@ -1,7 +1,7 @@
 ---
 title: 'Hugo 修复水平溢出'
 date: 2022-10-24T22:34:00+08:00
-tags: ['技术', Hugo]
+tags: ['技术']
 ---
 
 有一个样式问题困扰了我很久——当博客处于移动版，访问归档页面，手指向左滑，会发现右边有一段空白。我不知道原因是什么，直到前天读到《[小技巧 debug 网页 css overflow ，避免出现底部滚动条](https://www.xianmin.org/post/2022/05-debug-css-x-overflow/)》，猜测可能是某个元素溢出了可视窗口（viewport）导致。

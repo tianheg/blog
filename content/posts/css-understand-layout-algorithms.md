@@ -1,7 +1,7 @@
 ---
 title: 'CSS 理解布局算法'
 date: 2022-11-08T14:13:00+08:00
-tags: ['技术', CSS]
+tags: ['技术']
 ---
 
 [Understanding Layout Algorithms](https://www.joshwcomeau.com/css/understanding-layout-algorithms/)

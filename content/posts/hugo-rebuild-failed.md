@@ -1,7 +1,7 @@
 ---
 title: 'Hugo Rebuild failed'
 date: 2022-12-18T15:21:00+08:00
-tags: ['技术', Hugo]
+tags: ['技术']
 ---
 
 ```bash

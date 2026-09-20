@@ -1,7 +1,7 @@
 ---
 title: 'CSS Day 4'
 date: 2022-08-11
-tags: ['技术', CSS]
+tags: ['技术']
 ---
 
 这一次主要完成

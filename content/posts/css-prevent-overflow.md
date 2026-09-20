@@ -1,7 +1,7 @@
 ---
 title: 'CSS：阻止元素溢出'
 date: 2022-02-19
-tags: ['技术', CSS]
+tags: ['技术']
 ---
 
 演示地址：<https://lab.yidajiabei.xyz/static/simplewhale/>

@@ -1,7 +1,7 @@
 ---
 title: '为图片网站添加 AI 生成的说明'
 date: 2024-05-15T16:20:00+08:00
-tags: ['技术', Cloudflare, img]
+tags: ['技术']
 ---
 
 作为一个偶尔拍照的人，拥有手机这么多年，手头也是积攒了很多照片的。想有一个在线相册很久了，一直不太确定使用哪些工具构建。最近在一封 newsletter 中遇到了这个代码库 [petrovicz/astro-photoswipe](https://github.com/petrovicz/astro-photoswipe)，我挺喜欢的，顺便尝试一下以前没接触过的 [Astro](https://astro.build/)。至于 [PhotoSwipe](https://photoswipe.com/)，它可是老朋友了，曾经用过一段时间，后来精力放在其他地方就没再使用。

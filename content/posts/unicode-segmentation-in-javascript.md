@@ -1,7 +1,7 @@
 ---
 title: 'Unicode Segmentation in JavaScript'
 date: 2021-12-18
-tags: ['技术', JavaScript]
+tags: ['技术']
 ---
 
 <https://h3manth.com/posts/unicode-segmentation-in-javascript/>

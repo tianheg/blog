@@ -1,7 +1,7 @@
 ---
 title: 'KDE 开机自启 ssh agent，加载密钥'
 date: 2021-12-26
-tags: ['技术', SSH]
+tags: ['技术']
 ---
 
 1. [Using the KDE Wallet to store ssh key passphrases](https://wiki.archlinux.org/title/KDE_Wallet#Using_the_KDE_Wallet_to_store_ssh_key_passphrases)

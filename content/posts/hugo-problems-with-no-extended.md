@@ -1,7 +1,7 @@
 ---
 title: 'Hugo 没有安装扩展版产生的问题'
 date: 2020-05-10
-tags: ['技术', Hugo]
+tags: ['技术']
 ---
 
 如果没有安装 Hugo 扩展版，在执行 `hugo server` 命令时，会报如下错误：

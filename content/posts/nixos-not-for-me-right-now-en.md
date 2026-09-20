@@ -1,7 +1,7 @@
 ---
 title: 'NixOS Is Not for Me Right Now'
 date: 2026-09-20T16:10:00+08:00
-tags: ['技术', '随笔', NixOS, English]
+tags: ['技术', '随笔', English]
 ---
 
 Over the past few days I tried NixOS, and yesterday I realized it's not for me.

@@ -1,7 +1,7 @@
 ---
 title: '如何在 Next.js 项目下将 Org-mode 多级文档转换成网页中的树状结构'
 date: 2023-03-06T13:26:00+08:00
-tags: ['技术', Org-mode]
+tags: ['技术']
 ---
 
 去年 12 月份的一天，我遇到网站 `blackglory.me` ，读到了其中一篇文章《[将博客改造成数字花园](https://blackglory.me/posts/from-blog-to-digital-garden)》，并看到了作者的一个笔记页面——<https://blackglory.me/notes/node.js>。觉得这样的样式以前从未见过，好奇它的实现细节。像往常一样，在 GitHub 上寻找网站的源代码，不过没有找到。于是，我就暂时放弃了对实现细节的探寻。

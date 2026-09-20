@@ -1,7 +1,7 @@
 ---
 title: 'Hugo 安装 dart-sass-embedded'
 date: 2023-05-30T09:02:00+08:00
-tags: ['技术', Hugo]
+tags: ['技术']
 ---
 
 记录现在我知道的安装 dart-sass-embedded 的方法。

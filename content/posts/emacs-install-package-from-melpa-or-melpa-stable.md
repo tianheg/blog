@@ -1,7 +1,7 @@
 ---
 title: '选择从 MELPA 或者 MELPA-stable 安装某个包'
 date: 2022-02-14
-tags: [Emacs, '技术']
+tags: ['技术']
 ---
 
 <https://stackoverflow.com/a/38648126>

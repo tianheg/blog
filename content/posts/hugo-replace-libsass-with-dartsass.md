@@ -1,7 +1,7 @@
 ---
 title: 'Hugo 用 Dartsass 替换 Libsass'
 date: 2023-02-13T13:58:00+08:00
-tags: ['技术', Hugo]
+tags: ['技术']
 ---
 
 Hugo 默认使用 Libsass 编译 *.scss 文件，Libsass 已经不再维护了，Sass 官方推荐使用 Dartsass。我的仓库中用到 npm 包，所以通过这一方式安装相关依赖。

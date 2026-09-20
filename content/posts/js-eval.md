@@ -1,7 +1,7 @@
 ---
 title: 'JS 下的 eval() 函数'
 date: 2023-02-06T22:08:00+08:00
-tags: ['技术', JavaScript]
+tags: ['技术']
 ---
 
 <https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/eval>

@@ -1,7 +1,7 @@
 ---
 title: 'CSS 设置页面宽高'
 date: 2022-11-07T15:22:00+08:00
-tags: ['技术', CSS]
+tags: ['技术']
 ---
 
 [HTML vs Body: How to Set Width and Height for Full Page Size](https://www.freecodecamp.org/news/html-page-width-height/)

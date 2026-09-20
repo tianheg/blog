@@ -1,7 +1,7 @@
 ---
 title: ssh-agent
 date: 2021-12-03
-tags: ['技术', SSH]
+tags: ['技术']
 ---
 
 <https://www.ssh.com/academy/ssh/agent>

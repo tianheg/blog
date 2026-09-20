@@ -1,7 +1,7 @@
 ---
 title: '使用 ox-hugo 构建 Hugo blog 工作流'
 date: 2022-02-25
-tags: ['技术', Hugo, Org-mode]
+tags: ['技术']
 ---
 
 ### 必备条件 {#必备条件}

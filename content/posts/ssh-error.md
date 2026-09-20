@@ -1,7 +1,7 @@
 ---
 title: 'SSH 相关问题'
 date: 2022-02-08
-tags: ['技术', SSH]
+tags: ['技术']
 ---
 
 1. ssh: Could not resolve hostname + cron job

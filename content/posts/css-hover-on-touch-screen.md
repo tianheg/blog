@@ -1,7 +1,7 @@
 ---
 title: 'CSS 触屏上的 hover 问题'
 date: 2022-08-04
-tags: ['技术', CSS]
+tags: ['技术']
 ---
 
 触屏上的 CSS hover 问题。（Chrome Android）点击一下会选中可 hover

@@ -1,7 +1,7 @@
 ---
 title: 'Hugo 置顶博客'
 date: 2021-02-21
-tags: ['技术', Hugo]
+tags: ['技术']
 ---
 
 简单得令我怀疑，只需要在 `Front-matter` 内添加如下片段即可：

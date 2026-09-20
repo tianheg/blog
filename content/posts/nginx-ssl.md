@@ -1,7 +1,7 @@
 ---
 title: '在 Ubuntu20.04 配合 Nginx 使用 Let''s Encrypt 证书'
 date: 2021-10-22
-tags: ['技术', Nginx]
+tags: ['技术']
 ---
 
 进行以下步骤的前提：
