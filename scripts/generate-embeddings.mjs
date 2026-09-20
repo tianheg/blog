@@ -40,6 +40,12 @@ const OUT_DIR = join(import.meta.dirname, '..', 'static', 'pagefind-semantic');
 
 const MODEL = '@cf/baai/bge-m3';
 const DIM = 1024;
+// Long pages are split into chunks of this many characters, embedded
+// separately, then mean-pooled into one vector per page — so no page is
+// truncated. 3000 chars keeps a Chinese chunk comfortably inside BGE-M3's
+// 8192-token window (the previous hard `slice(0, 3000)` dropped the whole tail
+// of 185/1526 pages; /posts/javascript/ lost 96% of its text).
+const CHUNK_SIZE = 3000;
 const BATCH_SIZE = 16;
 const CONCURRENCY = 4;
 const ACCOUNT_ID = 'b0dda00db555f237f277259bed93134b';
@@ -121,6 +127,42 @@ function extractPageContent(html) {
   if (!text) return null;
 
   return { title, text };
+}
+
+/**
+ * Split page text into CHUNK_SIZE pieces, preferring sentence boundaries so a
+ * chunk never starts mid-sentence. Falls back to a hard cut when the trailing
+ * half of the window contains no terminator (e.g. a long code block).
+ */
+function splitIntoChunks(text, limit) {
+  if (text.length <= limit) return [text];
+
+  const chunks = [];
+  let pos = 0;
+  while (pos < text.length) {
+    let end = Math.min(pos + limit, text.length);
+    if (end < text.length) {
+      const from = pos + Math.floor(limit / 2);
+      let cut = -1;
+      for (const m of text.slice(from, end).matchAll(/[。！？；;.!?…]+[\s"”’)]*/g)) {
+        cut = from + m.index + m[0].length;
+      }
+      if (cut > pos) end = cut;
+    }
+    const chunk = text.slice(pos, end).trim();
+    if (chunk) chunks.push(chunk);
+    pos = end;
+  }
+
+  // Fold a stub tail (a few chars left after a hard cut) into the previous
+  // chunk instead of spending a whole API call on it. Worst case a chunk grows
+  // to CHUNK_SIZE + 1 + TAIL_FOLD chars, still far below BGE-M3's token window.
+  const TAIL_FOLD = 200;
+  if (chunks.length > 1 && chunks[chunks.length - 1].length < TAIL_FOLD) {
+    chunks[chunks.length - 2] += ' ' + chunks.pop();
+  }
+
+  return chunks;
 }
 
 const INFISICAL_HELPER = join(process.env.HOME || '/root', '.hermes', 'scripts', 'infisical-helper.sh');
@@ -253,7 +295,7 @@ async function main() {
     pages.push({
       url,
       title: page.title,
-      text: page.text.slice(0, 3000),
+      text: page.text,
     });
   }
 
@@ -275,10 +317,43 @@ async function main() {
   // Remove the old runtime-embedding source — the Worker no longer needs it
   rmSync(join(OUT_DIR, 'pages-content.json'), { force: true });
 
-  // Generate embeddings via Workers AI (build-time, ~1-2 min for ~1400 pages)
+  // Flatten every page into embedding-sized chunks, remembering which page
+  // each chunk came from so the vectors can be mean-pooled back together.
+  const chunkTexts = [];
+  const pageOfChunk = [];
+  for (let pi = 0; pi < pages.length; pi++) {
+    for (const chunk of splitIntoChunks(pages[pi].text, CHUNK_SIZE)) {
+      chunkTexts.push(chunk);
+      pageOfChunk.push(pi);
+    }
+  }
+
+  const chunkCounts = new Uint32Array(pages.length);
+  for (const pi of pageOfChunk) chunkCounts[pi]++;
+  let longest = 0;
+  for (const n of chunkCounts) if (n > longest) longest = n;
+
+  // Generate embeddings via Workers AI (build-time, ~1-2 min)
   const token = await getApiToken();
   console.log('Generating embeddings via Workers AI (BGE-M3)...');
-  const embeddings = await generateEmbeddings(token, pages.map(p => p.text));
+  console.log(
+    `  chunks: ${chunkTexts.length} from ${pages.length} pages ` +
+    `(mean ${(chunkTexts.length / pages.length).toFixed(2)}/page, max ${longest}/page)`
+  );
+  const chunkVectors = await generateEmbeddings(token, chunkTexts);
+
+  // Mean-pool each page's chunk vectors, then L2-normalize the page vector.
+  const embeddings = new Float32Array(pages.length * DIM);
+  for (let ci = 0; ci < chunkTexts.length; ci++) {
+    const pageOffset = pageOfChunk[ci] * DIM;
+    const chunkOffset = ci * DIM;
+    for (let j = 0; j < DIM; j++) embeddings[pageOffset + j] += chunkVectors[chunkOffset + j];
+  }
+  for (let pi = 0; pi < pages.length; pi++) {
+    const n = chunkCounts[pi] || 1;
+    const offset = pi * DIM;
+    for (let j = 0; j < DIM; j++) embeddings[offset + j] /= n;
+  }
   normalize(embeddings);
 
   const binPath = join(OUT_DIR, 'embeddings.bin');
@@ -296,6 +371,8 @@ async function main() {
     contentHash,
     model: MODEL,
     dim: DIM,
+    chunkSize: CHUNK_SIZE,
+    pooling: 'mean',
   };
   writeFileSync(join(OUT_DIR, 'manifest.json'), JSON.stringify(manifest));
   console.log(`  manifest.json: count=${manifest.count}, hash=${manifest.contentHash}`);
