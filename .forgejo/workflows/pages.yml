@@ -1,0 +1,53 @@
+name: Deploy to Forgejo Pages
+
+# 把 blog 的静态产物发布到 https://pages.tianheg.co/
+#
+# 与 Cloudflare Workers 那条线无关：CF 走 scripts/build.sh（wrangler），
+# 这条只在 Forgejo 侧产出静态镜像，互不干扰。
+#
+# 认证：git-pages 侧的 [[wildcard]] 配了 authorization = "forgejo"，
+# 所以 ${{ forgejo.token }}（Actions 自动注入）即可，无需额外 secret。
+# 前置：仓库必须启用 Actions 单元（本实例 DEFAULT_REPO_UNITS = repo.code）。
+
+on:
+  push:
+    branches: [main]
+  workflow_dispatch:
+
+jobs:
+  pages:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 0          # Hugo 的 .GitInfo / Lastmod 需要完整历史
+
+      - name: Install deps
+        run: npm ci
+
+      - name: Install Hugo
+        run: |
+          HUGO_VERSION=0.166.0
+          curl -fsSL -o /tmp/hugo.tar.gz \
+            "https://github.com/gohugoio/hugo/releases/download/v${HUGO_VERSION}/hugo_${HUGO_VERSION}_linux-amd64.tar.gz"
+          tar -xzf /tmp/hugo.tar.gz -C /tmp hugo
+          install -m 0755 /tmp/hugo /usr/local/bin/hugo
+          hugo version
+
+      - name: Build
+        # baseURL 覆盖 hugo.yaml，让站内绝对链接指向 pages 域名
+        run: |
+          hugo --gc --minify --buildFuture --baseURL https://pages.tianheg.co/
+          npx pagefind --site public
+          echo "--- 产物规模 ---"
+          du -sh public
+          find public -name index.html | wc -l
+
+      - name: Deploy to git-pages
+        uses: https://codeberg.org/git-pages/action@v2
+        with:
+          site: https://pages.tianheg.co/
+          server: pages.tianheg.co
+          token: ${{ forgejo.token }}
+          source: public/
