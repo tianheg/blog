@@ -48,7 +48,10 @@ jobs:
       - name: Deploy to git-pages
         uses: https://codeberg.org/git-pages/action@v2
         with:
-          site: https://pages.tianheg.co/blog/
+          # site 必须是「域名根」——DNS allowlist 只授权 index site；
+          # 内容靠 path=blog 落到 /blog/ 下（action 的 path 参数）
+          site: https://pages.tianheg.co/
+          path: blog
           server: pages.tianheg.co
           token: ${{ forgejo.token }}
           source: public/
