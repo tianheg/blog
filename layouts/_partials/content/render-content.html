@@ -17,7 +17,15 @@
   workaround the Hugo community converged on (Discourse 2025 experiment,
   Invisible Parade, hugo-smartlink). */}}
 {{- $content := . -}}
-{{- $content = $content | replaceRE `<a href="(https?://[^"]+)"` `<a href="$1" target="_blank" rel="noreferrer"` -}}
+{{- /* 外链兜底：Markdown 链接已经由 _markup/render-link.html 加过
+       target/rel，这里只补 render hook 不经过的内联 raw HTML 链接
+       （<a href="https://…">，unsafe: true 放行的那些）。跳过已带
+       target 的标签，否则同一个 <a> 会被加上两遍属性。 */ -}}
+{{- range $a := findRE `<a href="https?://[^"]+"[^>]*>` $content -}}
+  {{- if not (strings.Contains $a "target=") -}}
+    {{- $content = replace $content $a (replaceRE `^<a href="(https?://[^"]+)"` `<a href="$1" target="_blank" rel="noreferrer"` $a) -}}
+  {{- end -}}
+{{- end -}}
 
 {{- if strings.Contains $content "[[" -}}
   {{- $map := partialCached "functions/wikilink-map" "wikilink-map-key" -}}
