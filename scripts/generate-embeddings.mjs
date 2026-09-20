@@ -47,7 +47,7 @@ const ACCOUNT_ID = 'b0dda00db555f237f277259bed93134b';
 // Only include real content paths
 const CONTENT_PREFIXES = ['posts', 'til', 'about', 'now', 'projects', 'important-now', 'code'];
 
-const SKIP_DIRS = ['pagefind', 'tags', 'categories', 'changelog', 'feeds', 'links', 'music', 'musical', 'politics', 'search', 'sentences', 'service', 'support', 'uses', 'watch'];
+const SKIP_DIRS = ['pagefind', 'tags', 'categories', 'feeds', 'links', 'music', 'musical', 'politics', 'search', 'sentences', 'service', 'support', 'uses', 'watch'];
 
 function shouldInclude(relPath) {
   for (const prefix of SKIP_DIRS) {
