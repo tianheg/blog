@@ -7,3 +7,4 @@ title: Projects
 - 一生日历 [|life-calendar|](/projects/life-calendar/)
 - 熬夜日历 [|overnight-calendar|](/projects/overnight-calendar/)
 - 练琴记录 [|piano-practice|](/projects/piano-practice/)
+- Forgejo 文件树侧边栏 [|forgejo-sidetree|](https://git.tianheg.co/tianheg/forgejo-sidetree)
