@@ -42,7 +42,6 @@ Go to [the search page](/search) to use to search for any word or phrase.
 - [Photos I shot & Images I like from internet](https://img.tianheg.org)
 - [My footprints](/footprints)
 - CV: [English](/resume.pdf), [中文](/resume-zh_CN.pdf)
-- [AI policy](/ai-policy)
 - Data pages:
   - [我看的电视剧、电影、动漫、音乐剧](/watch)
   - [我听的](/listen)
