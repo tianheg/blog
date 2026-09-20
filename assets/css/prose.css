@@ -59,3 +59,37 @@
     border-color: #343746 !important;
   }
 }
+
+/* ── 正文链接：常驻淡下划线 + hover 加浓（2026-09-20）─────────────────
+
+   起因：原先下划线只存在于 `@media (hover:hover)` 内的 prose-a:hover:underline。
+   触屏设备（手机/平板）该条件永不匹配 → 链接只剩颜色可辨；而 ink 是低彩度色
+   （设计上就不抢注意力），手机上几乎看不出哪些字是可点的。
+   → 改为常驻下划线：静止为**链接色 45% alpha**（只作指向提示，不干扰阅读），
+     指针 hover 时变 currentColor（实心）。手机与桌面因此行为一致。
+
+   作用域是 `.prose-links`（挂在文章 <article> 与 TIL 正文容器上），
+   不是全站 `.prose` —— body 上也有 prose 类，那条会把导航、按钮一起卷进来。
+   标记类链接（导航、标签 chip、中英互链）用 :not(.no-underline) 排除。
+
+   特异性说明（不要改成更低的选择器）：`.prose-links :where(a[href]):not(.no-underline)`
+   = (0,2,0)，高于 body 上 `prose-a:no-underline` 生成的 (0,1,0)；
+   且本文件在 main.css **之后**加载（head/styles.html），源顺序也站在这一侧。
+   */
+.prose-links :where(a[href]):not(.no-underline) {
+  text-decoration-line: underline;
+  text-decoration-color: color-mix(in oklab, currentColor 45%, transparent);
+  text-decoration-thickness: 1px;
+  text-underline-offset: 0.24em;
+  transition: text-decoration-color 0.15s ease;
+}
+
+.prose-links :where(a[href]):not(.no-underline):hover {
+  text-decoration-color: currentColor;
+}
+
+/* 未解析 wikilink 的搜索兜底链接（render-content.html 内联 decoration-dotted）
+   保持虚线形态，只把颜色并进同一套：虚线 + 淡色 = 「这不是正常笔记」 */
+.prose-links :where(a[href]):not(.no-underline)[class~="decoration-dotted"] {
+  text-decoration-color: color-mix(in oklab, currentColor 45%, transparent);
+}

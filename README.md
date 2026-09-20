@@ -277,9 +277,18 @@ TIL 的信息源链接统一放在文件末尾：
 ### 配色约定（2026-09-20 起）
 
 全站只有**一套强调色**：`ink` 墨蓝，定义在 `assets/css/main.css` 的 `@theme`（`--color-ink-50..950`）。
-正文链接一律 `prose-a:text-ink-600 dark:prose-a:text-ink-400`（静态无下划线、hover 加下划线），
+正文链接一律 `prose-a:text-ink-600 dark:prose-a:text-ink-400`，
 TIL 与文章页同一套；TIL 此前的 emerald 系（`#059669` 在暖纸底上仅 3.46:1，未达 AA）已全站退役。
 标识类 UI（站名、header 徽章、返回顶部、`reviewed` 徽章）用中性灰，强调色只给链接与交互态。
+
+**正文链接的下划线（2026-09-20 改）：常驻淡下划线，hover 加浓。**
+规则在 `assets/css/prose.css`（作用域 `.prose-links`，挂在 `posts/single.html`、`single.html`、
+`til/single.html` 三处正文容器上）：静止 = `currentColor` 45% alpha、1px、`text-underline-offset: .24em`；
+hover = 实色 `currentColor`。此前是「静止无下划线、只在 `prose-a:hover:underline` 时出现」——
+那条规则包在 `@media (hover:hover)` 里，**触屏设备的媒体查询永不匹配**，手机上链接只剩颜色可辨，
+而 ink 是低彩度色，等于没有链接提示。作用域必须限定在正文容器：`<body>` 上也带 `prose` 类，
+写全站 `.prose` 会把导航、按钮、标签 chip 一起卷进来；标记类链接用 `:not(.no-underline)` 排除。
+列表页标题**不在此范围**（排版上是条目名，不是正文里的指向）。
 
 次要文本另有两个 token（2026-09-20 加）：小字一律 `text-gray-600 dark:text-gray-400`（6.95:1）；
 页头/栏头导航与 ⌘K 图标用 `text-muted`（`#646c7c`，暖纸 4.85:1）。旧的 `text-gray-500` 已全站停用 ——
