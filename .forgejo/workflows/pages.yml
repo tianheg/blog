@@ -45,13 +45,15 @@ jobs:
           du -sh public
           find public -name index.html | wc -l
 
-      - name: Deploy to git-pages
-        uses: https://codeberg.org/git-pages/action@v2
-        with:
-          # site 必须是「域名根」——DNS allowlist 只授权 index site；
-          # 内容靠 path=blog 落到 /blog/ 下（action 的 path 参数）
-          site: https://pages.tianheg.co/
-          path: blog
-          server: pages.tianheg.co
-          token: ${{ forgejo.token }}
-          source: public/
+      - name: Deploy to pages.tianheg.co
+        env:
+          SSH_KEY: ${{ secrets.DEPLOY_SSH_KEY }}
+        run: |
+          mkdir -p ~/.ssh
+          printf '%s\n' "$SSH_KEY" > ~/.ssh/deploy_key
+          chmod 600 ~/.ssh/deploy_key
+          command -v rsync >/dev/null 2>&1 || { apt-get update -qq && apt-get install -y -qq rsync; }
+          rsync -az --delete \
+            -e "ssh -i ~/.ssh/deploy_key -o StrictHostKeyChecking=accept-new -o LogLevel=ERROR" \
+            public/ deployer@46.225.142.120:/var/www/pages/blog/
+          rm -f ~/.ssh/deploy_key
