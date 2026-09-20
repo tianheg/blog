@@ -12,8 +12,6 @@ title: Uses
   - Emacs is the editor I love using the most.
 - Microsoft Edge
 - MECHREVO laptop with Windows 11
-- HP laptop with Arch Linux(KDE)
-  - The laptop stay with me since 2019, I still can continue use it.
 - [27" Asus TUF Gaming VG27AQL3A](https://www.displayspecifications.com/en/model/863934de)
 - NIZ plum keyboard
 
