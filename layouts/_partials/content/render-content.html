@@ -2,30 +2,27 @@
 
   Usage: {{ partial "content/render-content" .Content }}
 
-  Three passes over the rendered HTML:
-  1. External links open in a new tab (existing behaviour).
-  2. Wikilinks — [[Note name]] / [[Note name|Label]] / [[Note name#anchor]] —
+  Two passes over the rendered HTML (wikilink resolution only):
+  1. Wikilinks — [[Note name]] / [[Note name|Label]] / [[Note name#anchor]] —
      are resolved against the site-wide wikilink map and become normal links.
      Unresolved wikilinks stay as literal text and emit a build warning, so a
      typo surfaces at build time instead of published as dead bracket soup.
      Code blocks and inline code are masked first so examples like
      `[[array]]` in a code sample are never rewritten.
-  3. Masks are restored.
+  2. Masks are restored.
+
+  External links are NOT handled here: the target/rel attributes come from the
+  layouts/_markup/render-link.html render hook (Markdown links). A second
+  replaceRE layer used to patch raw-HTML links, removed 2026-09 — it matched
+  nothing that wasn't already handled (raw HTML external links only exist
+  inside code fences, which are escaped, and in page JS strings that carry
+  their own target) and stacked duplicate attributes on every Markdown link.
 
   Wikilinks are a Markdown-only feature here: Org content never had them, and
   Hugo has no native support (issue #13533), so this is the content-layer
   workaround the Hugo community converged on (Discourse 2025 experiment,
   Invisible Parade, hugo-smartlink). */}}
 {{- $content := . -}}
-{{- /* 外链兜底：Markdown 链接已经由 _markup/render-link.html 加过
-       target/rel，这里只补 render hook 不经过的内联 raw HTML 链接
-       （<a href="https://…">，unsafe: true 放行的那些）。跳过已带
-       target 的标签，否则同一个 <a> 会被加上两遍属性。 */ -}}
-{{- range $a := findRE `<a href="https?://[^"]+"[^>]*>` $content -}}
-  {{- if not (strings.Contains $a "target=") -}}
-    {{- $content = replace $content $a (replaceRE `^<a href="(https?://[^"]+)"` `<a href="$1" target="_blank" rel="noreferrer"` $a) -}}
-  {{- end -}}
-{{- end -}}
 
 {{- if strings.Contains $content "[[" -}}
   {{- $map := partialCached "functions/wikilink-map" "wikilink-map-key" -}}
