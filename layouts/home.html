@@ -1,4 +1,8 @@
 {{/* Home page layout - shows recent posts and TIL */}}
+
+{{/* 首页 <title> 直接用站名，避免 baseof 的 "标题 | 站名" 逻辑重复一次 */}}
+{{ define "title" }}{{ .Site.Title }}{{ end }}
+
 {{ define "main" }}
 
 <div class="mb-16">
