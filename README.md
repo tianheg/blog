@@ -427,9 +427,70 @@ npm run embed
 
 ## 站点变更记录
 
-站点结构、域名与工具链的编年史（2021–2024）。原为站点独立页面 `/changelog`，2026-09 该页移除后并入本文件。
+站点结构、域名与工具链的编年史（2021–2026）。原为站点独立页面 `/changelog`，2026-09 该页移除后并入本文件；2024-02 之后的部分由 git 历史回溯补齐。
 
+### 2026
+
+- 2026-09-20 全站强调色统一为低饱和墨蓝 `ink`，TIL 绿色系退役；小字对比度补齐 AA 缺口（1362 处）
+- 2026-09-20 正文链接改常驻淡下划线（触屏设备此前完全看不到链接）；标签规范定为栏目级分类，移除工具/语言关键词标签
+- 2026-09-18 单页支持纯文本源文输出（URL 后加 `.md`）；weread 面板改由 R2 托管；构建加伪 ASCII 检查闸门；posts 页加年度发文热力图
+- 2026-09-13 语义索引解码 HTML 实体（Hugo 转义不再进索引）；移动端长表格不再卡片化；小字元信息对比度提到 AA
+- 2026-09-12 数字花园 UI 改造（Editorial Garden 方向）；加命令面板（⌘K）与笔记页关系侧栏；中文排版基础设施（CJK 三件套 + 中文字体栈）；表格与代码块重做
+- 2026-09-11 **Org Mode → Markdown 全量迁移（1581 篇）**；建立站内链接体系 —— wikilink、反链、链接悬浮预览、`check-links` 发布闸门；笔记底部加「相关笔记（语义相似）」
+- 2026-09-03 TIL 全库加 draft / reviewed 双状态标记；确定 TIL 笔记边界纪律（对照 blackglory 的树形笔记，保持扁平结构、不建深目录）
+- 2026-09-01 加返回顶部按钮
+- 2026-08-29 weread 页面改为 API dashboard（笔记增量更新 1m42s → 15s）
+- 2026-08-20 用 `light-dark()` / `color-mix()` 重构颜色 token
+- 2026-08-07 收紧 Worker API 访问控制，修 8 项安全项
+- 2026-08-06 新增 Start Here 精选页、首页分类入口、中英文章互链、footer RSS
+- 2026-08-03 新增钢琴练习记录页；语义索引镜像进 `public/`（此前 CI 生成的索引到不了线上）
+- 2026-07-31 新增熬夜记录日历页
+- 2026-07-28 评论系统落地 —— 自托管 Go 服务起步，随即换成 Artalk（`comments.tianheg.co`），由 Worker 同源代理
+- 2026-07-25 简谱项目重构为 `music`（VexFlow 五线谱、Web Audio 试听、pushState 路由）
+- 2026-07-22 把 watch / music / musical / sentences / feeds 的 API 数据落地为本地文件
+- 2026-07-19 TIL 结构扁平化（子目录 → header 分组）；加汉堡菜单、前后篇导航；移除 daisyUI、Service Worker 与死脚本
+- 2026-07-08 医学知识库并入 `til/health`；TIL 搜索改造（自定义 modal + Ctrl+K）；足迹地图自动关联文章
+- 2026-07-05 移动端汉堡菜单（触摸目标 ≥48px）；7 项 a11y 修复（对比度 / 焦点环 / skip-link / reduced-motion）
+- 2026-06-20 全站 Editorial UI 重构
+- 2026-05-30 加 OG 标签 / Twitter Card / 动态 lang 属性 / 页脚导航；图谱性能与死代码清理
+- 2026-05-20 TIL 分类重组（清空 `misc/`）；包管理器 npm/bun → pnpm
+- 2026-05-18 layouts 性能优化与构建缓存
+- 2026-04-07 改用标准版 Hugo，不再依赖 extended 版
+- 2026-03-29 知识图谱与反链可视化（迁到 TypeScript）；首页改版（最近文章 + 最近 TIL）；导航加 Graph
+- 2026-03-12 新增简谱项目 `music-jianpu` 与 `/projects` 菜单
+- 2026-01-14 Pagefind 支持多语言搜索
+
+### 2025
+
+- 2025-11-08 加 TOC（含移动端）
+- 2025-10-20 加「编辑」链接
+- 2025-10-05 til2blog 独立仓库并入 blog
+- 2025-09-08 `.` 快捷键编辑内容；开启 Pagefind playground
+- 2025-06-15 独立 TIL 仓库并入 `content/til`；加 backlinks 函数（因性能问题当月移除，2026-03 重做）
+- 2025-06-08 **从 Cloudflare Pages 迁到 Cloudflare Workers**；启用 Hugo v0.146 新模板系统；英文启用 Satoshi 字体；引入 biome / daisyUI
+- 2025-05-25 移除 read 菜单
+- 2025-02-14 新增 gotosocial 根页面与 API（08-17 移除）
+- 2025-02-09 `hugo.yaml` 改成 YAML 配置风格
+- 2025-01-18 社交展示从 Telegram 换成 Mastodon
+- 2025-01-05 **从 Netlify 迁到 Cloudflare**
+
+### 2024
+
+- 2024-11-24 升级 TailwindCSS
+- 2024-10-22 首页重新设计；移除 about 菜单
+- 2024-09-20 移除 post-nav / related-posts
+- 2024-08-13 整体 Hugo 结构重构；08-04 启用 TailwindCSS
+- 2024-06-07 生成 posts.json 供向量搜索使用
+- 2024-05-31 短暂接入 Chatwoot 客服组件（06-04 移除）
+- 2024-04-26 加 `.` 键盘快捷键；修 Pagefind 索引语言
+- 2024-03-03 调整亮色主题背景色
+- 2024-02-25 写 Markdown → Org 转换脚本；加 `.editorconfig`
+- 2024-02-20 升级 Hugo 到 0.123.0
+- 2024-02-17 把 `themes/tianheg` 的文件移到仓库根路径（主题与站点合并）
 - 2024-02-14 把单个页面的书影音数据导入 [NeoDB](https://neodb.social)
+
+### 2021–2023
+
 - 2023-09-24 【现在】页的更新，通过 [Memos](https://github.com/usememos/memos) API 实现，公开 Memo 作为自己现在在做什么的状态更新（已弃用）
 - 2023-09-22 使用域名邮箱作为永久联系邮箱，之后可通过 Cloudflare Email Routing 配置邮件转发
 - 2023-09-03 移除文章中使用的所有图片，博客将只使用文字表达
