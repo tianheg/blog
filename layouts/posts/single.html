@@ -1,6 +1,6 @@
 {{ define "main" }}
 
-<article data-pagefind-body class="prose-a:text-blue-600 dark:prose-a:text-blue-400 prose-a:hover:underline">
+<article data-pagefind-body class="prose-a:text-ink-600 dark:prose-a:text-ink-400 prose-a:hover:underline">
 
   {{/* --- Article title --- */}}
   <h1>{{ partial "functions/get-title" (dict "page" .) }}</h1>
@@ -27,7 +27,7 @@
       {{ .Date.Format (default "02 Jan, 2006" .Site.Params.dateFormat) }}
     </time>
     {{ with $pair }}
-    <a href="{{ .RelPermalink }}" class="text-sm text-blue-600 dark:text-blue-400 hover:underline no-underline">{{ $pairLabel }} →</a>
+    <a href="{{ .RelPermalink }}" class="text-sm text-ink-600 dark:text-ink-400 hover:underline no-underline">{{ $pairLabel }} →</a>
     {{ end }}
   </div>
 

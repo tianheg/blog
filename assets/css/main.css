@@ -1,6 +1,35 @@
 @import "tailwindcss";
 @plugin "@tailwindcss/typography";
 
+/* ── 站点强调色：ink（低饱和墨蓝）─────────────────────────────
+   2026-09-20 全站统一。此前有两套：文章/全局 blue-600，TIL 专用 emerald-600。
+   问题：① 同一个站两种链接色，TIL 与文章视觉语言不一致；
+        ② emerald-600 (#059669) 在暖纸底 #f7f5f3 上只有 3.46:1，**未达 AA**（文章蓝 4.75:1 擦边过）；
+        ③ 两者都是高彩度色（emerald C≈0.145 / blue C≈0.245），正文里跳眼、干扰阅读。
+   ink 是同一色相（H=250）的低彩度阶（正文链接档 C≈0.06），
+   链接靠「色相 + 亮度」与正文区分，不再靠饱和度抢注意力。
+   Tailwind v4 @theme：`--color-ink-N` 自动生成 text-ink-N / bg-ink-N/20 / border-ink-N 等工具类。
+
+   实测对比度（2026-09-20，oklch→sRGB 换算，非目测）：
+                       暖纸 #f7f5f3  白 #fff  暗底 #121c22  灰黑 #030712
+     ink-600 #3d5b7a      6.49       7.06      2.45         2.85   ← 浅色正文链接
+     ink-400 #88a1bc      2.45       2.67      6.48         7.55   ← 暗色正文链接
+     ink-500 #6783a1      3.62       3.93      4.39         5.12   ← 焦点圈/非文本（≥3:1）
+   正文 prose 色 gray-700 #364153 在暖纸上 9.48:1 —— 链接比正文轻且偏蓝，两者可分辨。 */
+@theme {
+  --color-ink-50: #f0f6fc;
+  --color-ink-100: #dfe9f4;
+  --color-ink-200: #c3d3e4;
+  --color-ink-300: #a8bdd4;
+  --color-ink-400: #88a1bc;
+  --color-ink-500: #6783a1;
+  --color-ink-600: #3d5b7a;
+  --color-ink-700: #304a64;
+  --color-ink-800: #263a4e;
+  --color-ink-900: #1a2a3b;
+  --color-ink-950: #101c28;
+}
+
 /* ── Color tokens (daisyUI silk/sunset, merged via light-dark()) ──
    MDN: light-dark() selects color by active color-scheme, no
    prefers-color-scheme media query needed.
@@ -117,7 +146,7 @@ header {
 }
 
 :focus-visible {
-  outline: 2px solid oklch(0.546 0.245 262.881);
+  outline: 2px solid #6783a1; /* ink-500：非文本对比 3.62:1 on 暖纸，满足 3:1 门槛 */
   outline-offset: 2px;
 }
 

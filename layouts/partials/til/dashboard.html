@@ -48,10 +48,10 @@
     {{ range $sortedCats }}
     <a href="{{ .url }}"
        class="group flex items-center gap-3 rounded-md -mx-2 px-2 py-1 transition-colors hover:bg-gray-50 dark:hover:bg-gray-800/40">
-      <span class="text-xs text-gray-600 dark:text-gray-400 w-28 shrink-0 truncate group-hover:text-emerald-600 dark:group-hover:text-emerald-400 transition-colors" title="{{ .name }}">{{ .name }}</span>
+      <span class="text-xs text-gray-600 dark:text-gray-400 w-28 shrink-0 truncate group-hover:text-ink-600 dark:group-hover:text-ink-400 transition-colors" title="{{ .name }}">{{ .name }}</span>
       <div class="flex-1 h-1.5 bg-gray-100 dark:bg-gray-800 rounded-full overflow-hidden">
         {{ $pct := 0 }}{{ if gt $maxCount 0 }}{{ $pct = div (mul .count 100) $maxCount }}{{ end }}
-        <div class="h-full bg-emerald-500/60 dark:bg-emerald-500/50 rounded-full" style="width: {{ $pct }}%"></div>
+        <div class="h-full bg-ink-500/50 dark:bg-ink-400/40 rounded-full" style="width: {{ $pct }}%"></div>
       </div>
       <span class="text-xs text-gray-500 dark:text-gray-400 w-8 text-right shrink-0 tabular-nums">{{ .count }}</span>
     </a>
@@ -69,7 +69,7 @@
     {{ range $recent }}
     <a href="{{ .RelPermalink }}"
        class="group flex items-baseline justify-between gap-4 py-1.5 px-2 -mx-2 rounded-md transition-colors hover:bg-gray-50 dark:hover:bg-gray-800/40">
-      <span class="text-[13px] text-gray-700 dark:text-gray-300 truncate group-hover:text-emerald-600 dark:group-hover:text-emerald-400 transition-colors">
+      <span class="text-[13px] text-gray-700 dark:text-gray-300 truncate group-hover:text-ink-600 dark:group-hover:text-ink-400 transition-colors">
         {{ partial "functions/get-title" (dict "page" .) }}
       </span>
       <span class="text-xs text-gray-600 dark:text-gray-400 shrink-0 tabular-nums">

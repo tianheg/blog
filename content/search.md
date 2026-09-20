@@ -9,14 +9,14 @@ title: Search
   .search-tabs { display: flex; gap: 0; margin-bottom: 1.5rem; border-bottom: 1px solid #e5e7eb; }
   .search-tab { padding: 0.5rem 1rem; font-size: 0.875rem; cursor: pointer; border: none; background: none; color: #6b7280; border-bottom: 2px solid transparent; transition: all 0.15s; }
   .search-tab:hover { color: #374151; }
-  .search-tab.active { color: #2563eb; border-bottom-color: #2563eb; font-weight: 500; }
+  .search-tab.active { color: #3d5b7a; border-bottom-color: #3d5b7a; font-weight: 500; }
   .search-panel { display: none; }
   .search-panel.active { display: block; }
 
   /* Semantic results */
   .semantic-result { display: flex; align-items: baseline; gap: 0.5rem; padding: 0.5rem 0; border-bottom: 1px solid #f3f4f6; }
   .semantic-result:last-child { border-bottom: none; }
-  .semantic-result a { text-decoration: none; color: #2563eb; font-size: 0.9375rem; }
+  .semantic-result a { text-decoration: none; color: #3d5b7a; font-size: 0.9375rem; }
   .semantic-result a:hover { text-decoration: underline; }
   .semantic-result .score { font-size: 0.75rem; color: #9ca3af; font-variant-numeric: tabular-nums; flex-shrink: 0; }
   .semantic-empty { color: #9ca3af; font-size: 0.875rem; padding: 2rem 0; text-align: center; }
@@ -24,20 +24,20 @@ title: Search
   .semantic-error { color: #dc2626; font-size: 0.875rem; padding: 1rem 0; text-align: center; }
 
   #semantic-input { width: 100%; padding: 0.75rem 1rem; border: 1px solid #d1d5db; border-radius: 0.375rem; font-size: 0.9375rem; outline: none; transition: border-color 0.15s; box-sizing: border-box; }
-  #semantic-input:focus { border-color: #2563eb; }
+  #semantic-input:focus { border-color: #3d5b7a; }
 
   /* Dark mode — blog uses prefers-color-scheme, not data-theme */
   @media (prefers-color-scheme: dark) {
     .search-tabs { border-bottom-color: #374151; }
     .search-tab { color: #9ca3af; }
     .search-tab:hover { color: #d1d5db; }
-    .search-tab.active { color: #60a5fa; border-bottom-color: #60a5fa; font-weight: 500; }
+    .search-tab.active { color: #88a1bc; border-bottom-color: #88a1bc; font-weight: 500; }
     .semantic-result { border-bottom-color: #1f2937; }
-    .semantic-result a { color: #60a5fa; }
+    .semantic-result a { color: #88a1bc; }
     .semantic-empty,
     .semantic-loading { color: #6b7280; }
     #semantic-input { background: #1f2937; border-color: #4b5563; color: #f3f4f6; }
-    #semantic-input:focus { border-color: #60a5fa; }
+    #semantic-input:focus { border-color: #88a1bc; }
 
     /* Pagefind Component UI — dark mode */
     :root {
@@ -46,15 +46,15 @@ title: Search
       --pf-text-muted: #6b7280;
       --pf-background: #1f2937;
       --pf-border: #374151;
-      --pf-border-focus: #60a5fa;
+      --pf-border-focus: #88a1bc;
       --pf-hover: #374151;
       --pf-mark: #fef08a;
       --pf-skeleton: #374151;
       --pf-skeleton-shine: #4b5563;
-      --pf-outline-focus: #60a5fa;
+      --pf-outline-focus: #88a1bc;
       --pf-scroll-shadow: rgba(255, 255, 255, 0.1);
       --pf-result-excerpt-color: #9ca3af;
-      --pf-result-title-color: #93c5fd;
+      --pf-result-title-color: #88a1bc;
     }
   }
 </style>

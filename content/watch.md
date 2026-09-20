@@ -62,12 +62,12 @@ title: '我看的电视剧、电影、动漫、音乐剧'
 <style>
 .watch-filters { display: flex; gap: 0.5rem; margin-bottom: 1rem; flex-wrap: wrap; }
 .watch-filter { padding: 0.25rem 0.75rem; font-size: 0.8rem; border: 1px solid #d1d5db; border-radius: 999px; cursor: pointer; background: none; color: #4b5563; transition: all 0.15s; }
-.watch-filter:hover { border-color: #2563eb; color: #2563eb; }
-.watch-filter.active { background: #2563eb; border-color: #2563eb; color: white; }
+.watch-filter:hover { border-color: #3d5b7a; color: #3d5b7a; }
+.watch-filter.active { background: #3d5b7a; border-color: #3d5b7a; color: white; }
 @media (prefers-color-scheme: dark) {
   .watch-filter { border-color: #4b5563; color: #9ca3af; }
-  .watch-filter:hover { border-color: #60a5fa; color: #60a5fa; }
-  .watch-filter.active { background: #60a5fa; border-color: #60a5fa; color: #1f2937; }
+  .watch-filter:hover { border-color: #88a1bc; color: #88a1bc; }
+  .watch-filter.active { background: #88a1bc; border-color: #88a1bc; color: #1f2937; }
 }
 </style>
 <div class="watch-filters" id="watch-filters">

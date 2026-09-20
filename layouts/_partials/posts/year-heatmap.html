@@ -64,13 +64,13 @@
         {{- $key := $d.Format "2006-01-02" -}}
         {{- $n := index $dayCount $key | default 0 -}}
         {{- if gt $n 0 -}}
-          {{- $cls := "fill-blue-200 dark:fill-blue-800" -}}
+          {{- $cls := "fill-ink-200 dark:fill-ink-800" -}}
           {{- if and (ge $n 2) (le $n 3) -}}
-            {{- $cls = "fill-blue-400 dark:fill-blue-600" -}}
+            {{- $cls = "fill-ink-400 dark:fill-ink-600" -}}
           {{- else if and (ge $n 4) (le $n 9) -}}
-            {{- $cls = "fill-blue-600 dark:fill-blue-400" -}}
+            {{- $cls = "fill-ink-600 dark:fill-ink-400" -}}
           {{- else if ge $n 10 -}}
-            {{- $cls = "fill-blue-800 dark:fill-blue-200" -}}
+            {{- $cls = "fill-ink-800 dark:fill-ink-200" -}}
           {{- end -}}
           <rect x="{{ mul (div (add $i $offset) 7) 13 }}" y="{{ mul (int $d.Weekday) 13 }}" width="11" height="11" rx="2"
                 class="{{ $cls }} hover:stroke-gray-500 dark:hover:stroke-gray-300 hover:stroke-1"

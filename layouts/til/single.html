@@ -12,7 +12,8 @@
   {{/* --- Header badge --- */}}
   {{ with .Params.header }}
   <div class="flex items-center gap-2 mb-6">
-    <span class="px-2 py-0.5 text-xs font-medium rounded-full bg-emerald-50 dark:bg-emerald-900/20 text-emerald-700 dark:text-emerald-300">{{ . }}</span>
+    {{/* header 徽章是元信息不是强调，用中性灰；强调色只给链接 */}}
+    <span class="px-2 py-0.5 text-xs font-medium rounded-full bg-gray-100 dark:bg-gray-800 text-gray-600 dark:text-gray-300">{{ . }}</span>
   </div>
   {{ end }}
 
@@ -22,7 +23,7 @@
               prose-li:text-[17px] prose-li:leading-[1.85]
               prose-h2:text-xl prose-h2:mt-12 prose-h2:mb-4
               prose-h3:text-lg
-              prose-a:text-emerald-600 dark:prose-a:text-emerald-400 prose-a:no-underline prose-a:hover:underline
+              prose-a:text-ink-600 dark:prose-a:text-ink-400 prose-a:no-underline prose-a:hover:underline
               prose-headings:font-semibold prose-headings:text-gray-900 dark:prose-headings:text-gray-100
               prose-code:text-sm prose-pre:bg-gray-50 dark:prose-pre:bg-gray-900 prose-pre:border prose-pre:border-gray-200 dark:prose-pre:border-gray-800">
     {{ partial "content/render-content" .Content }}

@@ -17,7 +17,7 @@ const NETWORK_OPTIONS: Options = {
       border: '#404040',
       hover: {
         background: '#3b82f6',
-        border: '#2563eb'
+        border: '#3d5b7a'
       }
     },
     font: {

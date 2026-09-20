@@ -124,7 +124,7 @@ function statusBadge(status: string | undefined): string {
     return '<span class="inline-block align-baseline text-[10px] font-semibold uppercase tracking-wide px-1.5 py-[1px] rounded bg-amber-100 text-amber-700 dark:bg-amber-900/30 dark:text-amber-300 mr-1.5">draft</span>';
   }
   if (status === "reviewed") {
-    return '<span class="inline-block align-baseline text-[10px] font-semibold uppercase tracking-wide px-1.5 py-[1px] rounded bg-emerald-100 text-emerald-700 dark:bg-emerald-900/30 dark:text-emerald-300 mr-1.5">reviewed</span>';
+    return '<span class="inline-block align-baseline text-[10px] font-semibold uppercase tracking-wide px-1.5 py-[1px] rounded bg-gray-100 text-gray-600 dark:bg-gray-800 dark:text-gray-300 mr-1.5">reviewed</span>';
   }
   return "";
 }
