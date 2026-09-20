@@ -280,7 +280,12 @@ TIL 的信息源链接统一放在文件末尾：
 正文链接一律 `prose-a:text-ink-600 dark:prose-a:text-ink-400`（静态无下划线、hover 加下划线），
 TIL 与文章页同一套；TIL 此前的 emerald 系（`#059669` 在暖纸底上仅 3.46:1，未达 AA）已全站退役。
 标识类 UI（站名、header 徽章、返回顶部、`reviewed` 徽章）用中性灰，强调色只给链接与交互态。
-改配色只动这一处 token，改完跑下面这行确认没有残留：
+
+次要文本另有两个 token（2026-09-20 加）：小字一律 `text-gray-600 dark:text-gray-400`（6.95:1）；
+页头/栏头导航与 ⌘K 图标用 `text-muted`（`#646c7c`，暖纸 4.85:1）。旧的 `text-gray-500` 已全站停用 ——
+它在暖纸底上只有 4.45:1，差 0.05 不到 AA（脚本实测，非目测）。
+
+改配色只动 token，改完跑下面这行确认没有残留：
 
 ```bash
 grep -rn 'emerald-\|text-blue-\|bg-blue-\|fill-blue-\|outline-blue-' layouts/ assets/ content/ \
