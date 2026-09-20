@@ -877,3 +877,122 @@ the secret. Everything else — the image, the job cache — is reproducible. Lo
 file and you register a new runner with a new secret against the same instance; no
 Forgejo data is affected.
 
+## Static sites: skip git-pages, serve a directory
+
+Forgejo has no built-in Pages feature. The obvious candidate is
+[git-pages](https://codeberg.org/git-pages/git-pages) — the Go server running Codeberg
+Pages, designed to sit behind Caddy. It fits Codeberg's shape (`<user>.codeberg.page`),
+not several projects under one domain, each on its own path. Three walls:
+
+1. Its DNS authorization covers only the **index** site of a domain. A publish aimed at
+   `/blog/` is refused with `DNS repository allowlist only authorizes index site` — a
+   TXT record cannot express "this repository may publish at `/blog/`".
+2. Its wildcard mode expects sites shaped `<owner>.<domain>/<repo>/`: subdomain and path
+   are mapped back to a repository, so a path under the bare domain resolves to nothing.
+3. Every publish re-queries that TXT record, and the lookup fails intermittently on a
+   record that plainly exists.
+
+So drop the extra service and let Caddy serve a directory. The runner from the previous
+section does the build.
+
+### 1. A deploy user that can write exactly one directory
+
+Do not give the runner root. A runner executes arbitrary code; it should not hold the
+keys to the host.
+
+```bash
+sudo adduser --disabled-password --gecos '' deployer
+sudo mkdir -p /var/www/pages/blog
+sudo chown -R deployer:deployer /var/www/pages
+```
+
+Create a key pair for the deploy, append the public half to
+`/home/deployer/.ssh/authorized_keys`, and keep the private half as a repository secret
+named `DEPLOY_SSH_KEY` (`/{owner}/{repo}/settings/actions/secrets`).
+
+### 2. Build in Actions, publish with rsync
+
+```yaml
+name: Deploy to Pages
+on:
+  push:
+    branches: [main]
+
+jobs:
+  pages:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+
+      - run: npm ci
+
+      - name: Install Hugo
+        run: |
+          HUGO_VERSION=0.166.0
+          curl -fsSL -o /tmp/hugo.tar.gz \
+            "https://github.com/gohugoio/hugo/releases/download/v${HUGO_VERSION}/hugo_${HUGO_VERSION}_linux-amd64.tar.gz"
+          tar -xzf /tmp/hugo.tar.gz -C /tmp hugo
+          install -m 0755 /tmp/hugo /usr/local/bin/hugo
+
+      - name: Build
+        run: hugo --gc --minify --baseURL https://pages.example.com/blog/
+
+      - name: Deploy
+        env:
+          SSH_KEY: ${{ secrets.DEPLOY_SSH_KEY }}
+        run: |
+          mkdir -p ~/.ssh
+          printf '%s\n' "$SSH_KEY" > ~/.ssh/deploy_key
+          chmod 600 ~/.ssh/deploy_key
+          command -v rsync >/dev/null 2>&1 || { apt-get update -qq && apt-get install -y -qq rsync; }
+          rsync -az --delete \
+            -e "ssh -i ~/.ssh/deploy_key -o StrictHostKeyChecking=accept-new -o LogLevel=ERROR" \
+            public/ deployer@server:/var/www/pages/blog/
+          rm -f ~/.ssh/deploy_key
+```
+
+`--delete` makes the directory mirror the build exactly. Keep the trailing slash and the
+full path — a typo there deletes a different directory.
+
+### 3. Serve the directory
+
+```caddy
+pages.example.com {
+    encode gzip zstd
+    header X-Robots-Tag "noindex"      # a mirror, keep it out of search results
+
+    @notblog not path /blog /blog/*
+    rewrite @notblog /blog{uri}        # optional: /posts/x/ works as well
+
+    root * /var/www/pages
+    file_server
+}
+```
+
+If Caddy runs in Docker, **mount the directory**:
+
+```yaml
+    volumes:
+      - ./Caddyfile:/Caddyfile:ro
+      - /var/www/pages:/var/www/pages:ro
+```
+
+The container cannot see the host filesystem. Until the mount exists every request
+returns 404, which looks exactly like a broken build.
+
+### Things that cost time
+
+- **The job image has no `rsync`.** `node:22-bookworm` does not ship it; install it in
+  the step or the deploy dies with exit 127.
+- **Hardcoded absolute paths in templates ignore a `baseURL` sub-path.** A template with
+  `href="/til"` still points at the domain root when the site lives under `/blog/`.
+  Serving from the domain root, or rewriting at the proxy as above, avoids editing every
+  template.
+- **A mirror competes with the original.** The same `rel=canonical` and the same content
+  on two hostnames is duplicate content. `X-Robots-Tag: noindex` on the mirror is the
+  one-line fix.
+- **git-pages' DNS failures are not your misconfiguration.** Restarting the container
+  clears them — until the next publish.
+
