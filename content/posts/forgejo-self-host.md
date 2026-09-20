@@ -125,7 +125,7 @@ Create `docker-compose.yml`:
 ```yaml
 services:
   forgejo:
-    image: codeberg.org/forgejo/forgejo:14-rootless
+    image: codeberg.org/forgejo/forgejo:15-rootless
     container_name: forgejo
     user: 108:110
     environment:
@@ -295,13 +295,14 @@ fi
 echo "[$(date '+%Y-%m-%d %H:%M:%S')] === Backup process finished ==="
 ```
 
-Third, make it backup repeatly.
+Third, make it backup repeatly. The script needs root — it runs `docker compose`
+and reads `/etc/ssh/sshd_config` — so add the entry to root's crontab:
 
 ```bash
-crontab -e
+sudo crontab -e
 ## add below line to edit area
-# 0 2 * * * /home/git/backup.sh >> /home/git/backup.log 2>&1
-crontab -l
+0 2 * * * /home/git/backup.sh >> /home/git/backup.log 2>&1
+sudo crontab -l
 ```
 
 ## Restore Forgejo
@@ -505,3 +506,73 @@ The script handles the full restore automatically:
 
 After the script finishes, two SSH config steps are left for you to do manually
 (because they need root), but the script tells you exactly what to run.
+
+## Upgrade Forgejo
+
+The compose file pins a rolling tag (`15-rootless`), so an upgrade is a pull plus
+a container recreate — Forgejo runs the database migration on start. Patch
+releases land every few weeks, and security fixes ship in them, so it is worth
+doing this regularly.
+
+### 1. Back up first
+
+An upgrade is only reversible if you have a snapshot. The backup script from the
+previous section produces a stop-consistent one:
+
+```bash
+sudo /home/git/backup.sh
+```
+
+It stops the stack, archives `forgejo/` + `conf/` + the compose/Caddy/SSH files,
+uploads the archive to the StorageBox, and starts the stack again.
+
+### 2. Flush the queues
+
+Queues hold serialized data that Forgejo does not guarantee to be compatible
+across versions, so drain them before switching images:
+
+```bash
+cd /home/git
+docker exec forgejo forgejo manager flush-queues
+```
+
+### 3. Pull the new image and recreate
+
+```bash
+cd /home/git
+docker compose pull forgejo
+docker compose up -d forgejo
+```
+
+Because the tag is rolling, `pull` fetches the newest release of that series
+(`15.0.2` → `15.0.9`). Only `forgejo` is recreated — Caddy and Anubis keep
+running, and the health endpoint answers again within seconds.
+
+### 4. Verify
+
+```bash
+docker exec forgejo forgejo --version            # forgejo version 15.0.9+...
+curl -sf http://127.0.0.1:3000/api/healthz       # "status": "pass"
+docker exec forgejo forgejo doctor check --all   # All done (checks: 28)
+```
+
+Then exercise the real entry points: open the web UI, push a commit, and run
+`ssh -T git@git.example.com` from a machine with a registered key. `doctor check`
+is cheap and catches most of what a migration can leave behind — run it before
+you walk away.
+
+### 5. Read the release notes for the versions you skipped
+
+Each release page has a "things to know when upgrading" list. Patch releases are
+usually uneventful, but minor and major ones are not: the 16.0 series, for
+instance, centralizes the per-repository Git hooks and lets you delete the old
+generated `hooks/` directories. Check the notes for every version between the old
+and the new one before pulling.
+
+### Rolling back
+
+Restore the backup instead of downgrading the image. Forgejo stores the database
+version inside the database and refuses to start when it is downgraded, so
+changing the tag back to `15.0.2-rootless` will not save you once the migration
+has run — you get an `Unexpected database version` error. Use the archive from
+step 1 and follow the "Restore Forgejo" section above.
