@@ -215,7 +215,7 @@ Second, run below script.
 STORAGE_USER="u000000"
 STORAGE_HOST="u000000.your-storagebox.de"
 STORAGE_PORT="23"
-REMOTE_DIR="forgejo_backup"
+REMOTE_DIR="."
 LOCAL_BACKUP_DIR="/tmp"
 
 echo "[$(date '+%Y-%m-%d %H:%M:%S')] === Starting Forgejo backup process ==="
@@ -294,6 +294,22 @@ fi
 
 echo "[$(date '+%Y-%m-%d %H:%M:%S')] === Backup process finished ==="
 ```
+
+Two details in the config are easy to get wrong:
+
+- **`REMOTE_DIR` must not be empty.** With `REMOTE_DIR=""` the rsync target becomes
+  `user@host:/` — the StorageBox root, which is read-only — and the upload fails with
+  `rsync: mkstemp "/.forgejo-backup-….tar.gz.XXXXXX" failed: Read-only file system (30)`.
+  Keep it at `.` (or a real subdirectory).
+- **Keep the collected SSH files at the archive root.** `sudo cp /etc/ssh/sshd_config
+  /tmp/sshd_config.backup` would land as `tmp/sshd_config.backup` inside the archive
+  (`tar` strips the leading `/`) and you would have to dig it out during a restore.
+  Copying to `./sshd_config.backup` keeps it at the top level, which is where the
+  restore script looks for it.
+
+Because the archive is a single file, rsync's `--delete` does not prune the remote
+directory, so older backups survive. The StorageBox root does accumulate over months
+— keep an eye on the quota.
 
 Third, make it backup repeatly. The script needs root — it runs `docker compose`
 and reads `/etc/ssh/sshd_config` — so add the entry to root's crontab:
@@ -576,3 +592,288 @@ version inside the database and refuses to start when it is downgraded, so
 changing the tag back to `15.0.2-rootless` will not save you once the migration
 has run — you get an `Unexpected database version` error. Use the archive from
 step 1 and follow the "Restore Forgejo" section above.
+
+## Forgejo Actions runner
+
+Forgejo **does not run workflows itself**. Actions is enabled by default, but a job
+sits in the queue forever until a separate **Forgejo Runner** process — a small daemon
+that polls the instance, starts job containers with Docker, and streams logs back —
+picks it up. The runner has its own release line, independent from the Forgejo
+version: Forgejo 15.0.9 works fine with runner 13.2.0.
+
+Run it on a **separate machine**. The runner needs `/var/run/docker.sock` in order to
+start job containers, which is equivalent to root on whatever host it runs on, and CI
+jobs are bursty: one job that allocates all the memory will take the web server and the
+database down with it if they share a box. A 2 vCPU / 4 GB instance is plenty.
+
+### 1. Register the runner
+
+Registration uses a shared secret rather than a Web UI token. Generate one and register
+it against a scope — prefer your user over the whole instance, so the runner cannot
+pick up jobs belonging to other owners:
+
+```bash
+SECRET=$(openssl rand -hex 20)
+docker exec forgejo forgejo forgejo-cli actions register \
+  --name forgejo-runner-helsinki \
+  --scope youruser \
+  --secret "$SECRET" \
+  -w /var/lib/gitea
+```
+
+- `-w /var/lib/gitea` is the work path of the rootless image. Without it the command
+  cannot find `app.ini` and exits.
+- The command prints a UUID. You need that UUID plus `$SECRET` in the next step.
+- The first 16 hex characters of the secret are the runner identifier, so when you
+  rotate the secret, keep those 16 and change only the remaining 24.
+
+### 2. Runner host: the project directory
+
+Put the runner in `/opt/forgejo-runner`, **not** in `/root`:
+
+```bash
+mkdir -p /opt/forgejo-runner/data
+cd /opt/forgejo-runner
+```
+
+`/root` is mode 700. The container has to read `/data/config.yml`, and any user that
+cannot traverse `/root` fails with
+`Error: invalid configuration: cannot open config file "/data/config.yml": permission denied`.
+`/opt` sidesteps the whole question.
+
+### 3. Docker Compose and the runner config
+
+`docker-compose.yml`:
+
+```yaml
+services:
+  runner:
+    image: code.forgejo.org/forgejo/runner:13
+    container_name: forgejo-runner
+    user: "0:0"
+    restart: unless-stopped
+    environment:
+      - DOCKER_HOST=unix:///var/run/docker.sock
+    volumes:
+      - ./data:/data
+      - /var/run/docker.sock:/var/run/docker.sock
+    command: sh -c "forgejo-runner daemon --config /data/config.yml"
+```
+
+`user: "0:0"` is needed because the daemon writes to `/data` and drives the Docker
+socket. Mounting the socket already gives the container effective root on the host, so
+running it as root adds no new exposure.
+
+`data/config.yml`:
+
+```yaml
+runner:
+  capacity: 1
+  timeout: 1h
+  fetch_interval: 3s
+  labels:
+    - "ubuntu-latest:docker://data.forgejo.org/oci/node:22-bookworm"
+    - "ubuntu-24.04:docker://data.forgejo.org/oci/node:22-bookworm"
+    - "python-3.13:docker://docker.io/library/python:3.13-bookworm"
+
+server:
+  connections:
+    forgejo:
+      url: https://git.example.com/
+      uuid: <uuid from step 1>
+      token: <secret from step 1>
+
+container:
+  options: "--memory=2g --cpus=1"
+  privileged: false
+
+cache:
+  enabled: true
+  dir: "/data/cache"
+```
+
+Four things in here matter more than they look:
+
+- **`capacity: 1`** — one job at a time. Jobs cannot starve each other, and you get
+  predictable resource use on a small machine.
+- **`container.options`** is the only place resource limits can be set. Without it a
+  job may allocate everything the host has. `--memory` is officially supported (runner
+  ≥ 11.2.0); `--cpus` is not documented but works.
+- **Label names cannot contain a colon.** `python:3.13:docker://…` is parsed as label
+  `python` with scheme `3.13`, and the container crash-loops with
+  `label "python" uses unknown scheme "3.13": expected a built-in scheme (host, docker, lxc)`.
+  Write `python-3.13` instead — hyphens are fine, as `ubuntu-24.04` shows.
+- **Never use the `host` scheme for `runs-on`.** Jobs in host mode run directly on the
+  runner machine with no isolation and no resource limits at all.
+
+### 4. Start it and read the log
+
+```bash
+docker compose up -d
+docker logs forgejo-runner | tail -3
+```
+
+Expected:
+
+```
+runner: forgejo-runner-helsinki, with version: v13.2.0, with labels: [ubuntu-latest ubuntu-24.04 python-3.13], ephemeral: false, declared successfully
+[poller] launched
+```
+
+### 5. Enable Actions on a repository
+
+A minimal instance usually sets `DEFAULT_REPO_UNITS = repo.code`, so a new repository
+has **no Actions unit**. Pushing a workflow file then does nothing at all — no error,
+no run, and the runner log only shows poller activity. Enable it per repository:
+
+```bash
+curl -X PATCH https://git.example.com/api/v1/repos/youruser/yourrepo \
+  -H "Authorization: token $TOKEN" \
+  -H "Content-Type: application/json" \
+  -d '{"has_actions": true}'
+```
+
+Changing `DEFAULT_REPO_UNITS` only affects repositories created afterwards, so existing
+ones have to be switched on individually.
+
+### 6. Verify end to end
+
+Push a workflow to a repository that has Actions enabled:
+
+```yaml
+# .forgejo/workflows/smoke.yml
+name: smoke
+on: [push, workflow_dispatch]
+
+jobs:
+  hello:
+    runs-on: ubuntu-latest
+    steps:
+      - name: show environment
+        run: |
+          echo "=== runner works ==="
+          uname -a
+          nproc
+          free -m | head -2
+```
+
+Then check both sides — the runner log for pickup, the API for the result:
+
+```bash
+docker logs forgejo-runner | tail -3
+# task 2 repo is youruser/yourrepo https://data.forgejo.org https://git.example.com/
+# Cleaning up network for job hello, and network name is: WORKFLOW-…
+
+curl -s -H "Authorization: token $TOKEN" \
+  "https://git.example.com/api/v1/repos/youruser/yourrepo/actions/tasks" \
+  | grep -o '"status":"[a-z]*"' | head -1
+# "status":"success"
+```
+
+Job logs live on the **Forgejo** host, not on the runner, at
+`/home/git/forgejo/actions_log/{owner}/{repo}/{run_index:02d}/{run_id}.log.zst`.
+They are zstd-compressed, so read them with `zstd -dc`.
+
+### 7. Harden the runner host
+
+A fresh cloud image is permissive: `PermitRootLogin yes`, `PasswordAuthentication yes`,
+no firewall, no swap. This host accepts SSH from the internet, so close that first.
+Check what is actually in effect rather than what you think you configured:
+
+```bash
+sshd -T | grep -Ei 'permitrootlogin|passwordauthentication'
+```
+
+```bash
+# Firewall — allow SSH before enabling, or you cut your own session
+ufw allow 22/tcp
+ufw default deny incoming
+ufw default allow outgoing
+ufw --force enable
+
+# fail2ban
+apt-get install -y fail2ban python3-systemd
+# /etc/fail2ban/jail.local:
+#   [DEFAULT]  backend = systemd / bantime = 1h / findtime = 10m / maxretry = 5
+#   [sshd]     enabled = true / mode = aggressive / port = 22
+#              journalmatch = _SYSTEMD_UNIT=ssh.service
+fail2ban-client -t && systemctl restart fail2ban
+
+# SSH
+# /etc/ssh/sshd_config.d/99-hardening.conf:
+#   PasswordAuthentication no
+#   KbdInteractiveAuthentication no
+#   PermitRootLogin prohibit-password
+#   PubkeyAuthentication yes
+sshd -t && systemctl reload ssh
+
+# Swap — without it the OOM killer takes the runner and its containers out together
+fallocate -l 1G /swapfile
+chmod 600 /swapfile
+mkswap /swapfile && swapon /swapfile
+grep -q '^/swapfile' /etc/fstab || echo "/swapfile none swap sw 0 0" >> /etc/fstab
+```
+
+Three of these need more than the command:
+
+**fail2ban is installed but not working by default on Ubuntu 24.04.** Two problems
+stack up. The SSH daemon logs `Failed password` as `sshd-session`, not `sshd`, so a
+match on `_COMM=sshd` finds nothing. On top of that, Debian's
+`/etc/fail2ban/jail.d/defaults-debian.conf` overrides the — correct — match from the
+filter file with `_SYSTEMD_UNIT=ssh.service + _COMM=sshd`, and **fail2ban treats `+`
+as AND**, unlike journalctl where it means OR. You end up with a jail that reports
+`Total failed: 0` while the log fills with brute-force attempts. Match on the unit
+alone and let the filter's `_daemon = sshd(?:-session)?` regex do the discriminating:
+
+```ini
+[sshd]
+journalmatch = _SYSTEMD_UNIT=ssh.service
+```
+
+Do not trust `systemctl is-active` for this — prove it bans. Six failed logins from
+another host (maxretry is 5) should put that IP in the banned list:
+
+```bash
+ssh -o BatchMode=yes -o PubkeyAuthentication=no \
+  -o PreferredAuthentications=password nobody@runner.example.com exit
+fail2ban-client status sshd
+fail2ban-client set sshd unbanip <that-ip>
+```
+
+**Drop-in files: the first value read wins.** OpenSSH reads
+`/etc/ssh/sshd_config.d/*.conf` in glob order and keeps the **first** value it sees for
+each parameter — a later file does not override an earlier one. So `99-hardening.conf`
+wins over `99-pw.conf` no matter which one you meant. If you are unsure whether
+hardening took effect, read the effective configuration instead of reasoning about
+filenames:
+
+```bash
+sshd -T | grep -Ei 'permitrootlogin|passwordauthentication'
+```
+
+Delete the leftover temporary file anyway. A stale config that no longer does anything
+is a trap for whoever debugs this next.
+
+**Verify the firewall did not break CI.** UFW's default `deny (routed)` policy, mixed
+with Docker's own forwarding rules, is a classic way to silently cut job containers off
+from the network. Docker usually wins that ordering, but "usually" is not evidence —
+put a network check in the smoke workflow and let it fail loudly:
+
+```yaml
+      - name: egress check
+        run: |
+          curl -sS -o /dev/null -w "forgejo:  %{http_code}\n" https://git.example.com/api/v1/version
+          curl -sS -o /dev/null -w "registry: %{http_code}\n" https://registry-1.docker.io/v2/
+```
+
+No `|| true`: a job that reports `success` then proves the containers can still reach
+the network. A `401` from the Docker registry is the expected answer — reachable, but
+unauthenticated.
+
+### What to back up on the runner host
+
+Almost nothing, but do copy `data/config.yml` somewhere safe: it holds the UUID and
+the secret. Everything else — the image, the job cache — is reproducible. Lose the
+file and you register a new runner with a new secret against the same instance; no
+Forgejo data is affected.
+
