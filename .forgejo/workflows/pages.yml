@@ -36,9 +36,10 @@ jobs:
           hugo version
 
       - name: Build
-        # baseURL 覆盖 hugo.yaml，让站内绝对链接指向 pages 域名
+        # baseURL 覆盖 hugo.yaml：站点放在 /blog/ 子路径下。
+        # 站内硬编码的绝对路径由 Caddy 的 rewrite 兜底（见 pages.tianheg.co 站点块）。
         run: |
-          hugo --gc --minify --buildFuture --baseURL https://pages.tianheg.co/
+          hugo --gc --minify --buildFuture --baseURL https://pages.tianheg.co/blog/
           npx pagefind --site public
           echo "--- 产物规模 ---"
           du -sh public
@@ -47,7 +48,7 @@ jobs:
       - name: Deploy to git-pages
         uses: https://codeberg.org/git-pages/action@v2
         with:
-          site: https://pages.tianheg.co/
+          site: https://pages.tianheg.co/blog/
           server: pages.tianheg.co
           token: ${{ forgejo.token }}
           source: public/
