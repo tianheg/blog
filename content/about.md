@@ -39,7 +39,6 @@ Go to [the search page](/search) to use to search for any word or phrase.
 - [Blogroll](/links)
 - [Support me & I support people](/support)
 - [Uses](/uses)
-- [Photos I shot & Images I like from internet](https://img.tianheg.org)
 - [My footprints](/footprints)
 - CV: [English](/resume.pdf), [中文](/resume-zh_CN.pdf)
 - Data pages:
