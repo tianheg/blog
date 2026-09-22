@@ -17,7 +17,7 @@ BMS (Battery Management System) 的电源设计面临独特挑战：需要从 7.
 
 **隔离通信屏障：** 即使电源做了隔离，高侧 AFE 和低侧 MCU 之间的 SPI/I2C/UART 也需要数字隔离器，EV 应用中需耐受 2.5kV-5kV。隔离与共模的具体设计见 [[can485-isolation-common-mode|CAN 与 485 隔离设计]]。
 
-**与均衡的分工：** 电源设计保证各电压域的 IC 活着，[[cell-balancing|电池均衡]]解决电芯一致性 —— 两者合起来才是完整的 BMS。包内少线通信（HDQ / 1-Wire）见 [[single-wire-bus-principles|一线通电路原理]]；大功率密度场景的供电标准演进可参考 [[m-crps-server-psu|M-CRPS 服务器电源]]。
+**与均衡的分工：** 电源设计保证各电压域的 IC 活着，[[cell-balancing|电池均衡]]解决电芯一致性 —— 两者合起来才是完整的 BMS。包内少线通信（HDQ / 1-Wire）见 [[single-wire-bus-principles|一线通电路原理]]；大功率密度场景的供电标准演进可参考 [[m-crps-server-psu|M-CRPS 服务器电源]]；电流采样若走霍尔变送器，端子与接地的语义见 [[hall-current-sensor-terminals|四线制霍尔电流传感器]]。
 
 **关键知识域：**
 

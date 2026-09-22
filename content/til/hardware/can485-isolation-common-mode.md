@@ -48,6 +48,8 @@ BMS 中用 FS 精度是因为过流保护门槛需要绝对准确性，而非相
 
 隔离后万用表量 CAN_GND 与 485_GND：开路（MΩ 级）。偶尔串 1MΩ~10MΩ 电阻 + 1nF 电容（iso-ground），给浮地弱参考路径防静电积累，但不形成地环路。
 
+同一套隔离逻辑落到工业变送器上，就是四线端子的 `+ - M G` —— 那里的 `G` 是副边参考地，不是大地：[[hall-current-sensor-terminals|四线制霍尔电流传感器：端子定义与「地」的语义]]。
+
 ## 参考
 - [TI: CAN Transceivers Application Report (SLLA337)](https://www.ti.com/lit/an/slla337/slla337.pdf)
 - [ADI: RS-485 Grounding and Isolation](https://www.analog.com/en/resources/technical-articles/rs485-grounding-and-isolation.html)
