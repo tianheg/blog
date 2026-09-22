@@ -57,4 +57,4 @@ date: 2026-09-10T12:52:29+08:00
 - [产品沉思录](https://pmthinking.com/)
 
 
-相关：[[how-to-know-my-thought|how-to-know-my-thought]]
+相关：[[how-to-know-my-thought|how-to-know-my-thought]]、[[rules-of-information|信息的七条法则]]

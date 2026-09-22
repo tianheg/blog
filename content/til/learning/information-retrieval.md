@@ -239,4 +239,4 @@ Google 等搜索引擎有专门的高级搜索页面
 - https://blog.zjuyk.site/posts/how-to-search/
 
 
-相关：[[how-to-learn|how-to-learn]]
+相关：[[how-to-learn|how-to-learn]]、[[rules-of-information|信息的七条法则]]
