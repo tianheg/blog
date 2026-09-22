@@ -1,0 +1,60 @@
+{{ define "main" }}
+
+<article data-pagefind-body class="prose-links prose-p:text-[16px] prose-p:leading-[1.85] prose-li:text-[16px] prose-li:leading-[1.85] prose-a:text-ink-600 dark:prose-a:text-ink-400 prose-a:hover:underline">
+
+  {{/* --- Article title --- */}}
+  <h1>{{ partial "functions/get-title" (dict "page" .) }}</h1>
+
+  {{/* --- Publication date + language counterpart link --- */}}
+  {{ $pair := false }}
+  {{ $pairLabel := "" }}
+  {{ if .File }}
+    {{ if strings.HasSuffix .File.BaseFileName "-en" }}
+      {{ with .Site.GetPage (printf "/posts/%s" (strings.TrimSuffix "-en" .File.BaseFileName)) }}
+        {{ $pair = . }}
+        {{ $pairLabel = "中文版" }}
+      {{ end }}
+    {{ else }}
+      {{ with .Site.GetPage (printf "/posts/%s-en" .File.BaseFileName) }}
+        {{ $pair = . }}
+        {{ $pairLabel = "Read in English" }}
+      {{ end }}
+    {{ end }}
+  {{ end }}
+
+  <div class="not-prose mb-8 pb-6 border-b border-gray-200 dark:border-gray-800 flex items-center justify-between">
+    <time class="text-sm text-gray-600 dark:text-gray-400" datetime='{{ .Date.Format "2006-01-02" }}'>
+      {{ .Date.Format (default "02 Jan, 2006" .Site.Params.dateFormat) }}
+    </time>
+    {{ with $pair }}
+    <a href="{{ .RelPermalink }}" class="text-sm text-ink-600 dark:text-ink-400 hover:underline no-underline">{{ $pairLabel }} →</a>
+    {{ end }}
+  </div>
+
+  {{/* --- Main content --- */}}
+  <div>
+    {{ partial "content/render-content" .Content }}
+  </div>
+
+  <hr>
+
+  {{ partial "content/post-tags.html" . }}
+</article>
+
+
+{{/* ============================================
+     Related components
+     ============================================ */}}
+
+{{/* --- Backlinks (server-side, from functions/backlink-index.html) --- */}}
+{{ partial "content/backlinks.html" . }}
+
+{{/* --- 语义相关笔记（data/related.json，构建前预生成） --- */}}
+{{ partial "content/related.html" . }}
+
+
+{{/* --- Footer and comments --- */}}
+{{/* --- Comment section (includes email reply + Artalk) --- */}}
+{{ partial "comments.html" . }}
+
+{{ end }}

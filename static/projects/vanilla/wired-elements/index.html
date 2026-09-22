@@ -1,0 +1,130 @@
+<!DOCTYPE html>
+<html lang="en-US">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="This hand drawn UI looks so interesting!">
+  <title>Wired Elements</title>
+  <style>
+    wired-listbox {
+      margin: 5px;
+      --wired-item-selected-bg: darkblue;
+    }
+  </style>
+</head>
+
+<body>
+  <wired-input placeholder="Enter name"></wired-input>
+  <wired-button>Click Me</wired-button>
+  <wired-calendar selected="Jun 4, 2024">
+  </wired-calendar>
+  <wired-card>
+    <p>Elevation: 1</p>
+  </wired-card>
+
+  <wired-card elevation="3">
+    <p>Elevation: 3</p>
+  </wired-card>
+  <wired-checkbox>Checkbox One</wired-checkbox>
+  <wired-checkbox checked>Checkbox Two</wired-checkbox>
+  <wired-checkbox disabled>Disabled checkbox</wired-checkbox>
+
+  <wired-combo id="combo" selected="two">
+    <wired-item value="one">Number One</wired-item>
+    <wired-item value="two">Number Two</wired-item>
+    <wired-item value="three">Number Three</wired-item>
+  </wired-combo>
+
+  <p>
+    <wired-button id="openDialog">Show dialog</wired-button>
+  </p>
+  <wired-dialog>
+    <p>
+      This is a dialog.
+    </p>
+    <div style="text-align: right; padding: 30px 16px 16px;">
+      <wired-button id="closeDialog">Close dialog</wired-button>
+    </div>
+  </wired-dialog>
+
+  <wired-image src="./sample.jpg"></wired-image>
+
+  <wired-link href="/more.html">Learn more</wired-link>
+
+  <wired-listbox id="combo" selected="two">
+    <wired-item value="one">Number One</wired-item>
+    <wired-item value="two">Number Two</wired-item>
+    <wired-item value="three">Number Three</wired-item>
+  </wired-listbox>
+
+  <wired-progress-ring value="10" min="5" max="15"></wired-progress-ring>
+  <wired-progress value="25"></wired-progress>
+  <wired-radio-group selected="two">
+    <wired-radio name="one">One</wired-radio>
+    <wired-radio name="two">Two</wired-radio>
+    <wired-radio name="three">Three</wired-radio>
+    <wired-radio name="four">Four</wired-radio>
+  </wired-radio-group>
+
+  <wired-radio>Radio One</wired-radio>
+  <wired-radio checked>Radio Two</wired-radio>
+  <wired-radio disabled>Disabled Radio</wired-radio>
+
+  <wired-search-input></wired-search-input>
+  <wired-search-input placeholder="Search here"></wired-search-input>
+
+  <wired-slider></wired-slider>
+  <wired-slider disabled></wired-slider>
+  <wired-slider value="10" min="5" max="15"></wired-slider>
+
+  <wired-spinner id="sp"></wired-spinner>
+  <wired-spinner spinning duration="1000"></wired-spinner>
+
+  <wired-tabs selected="Two">
+    <wired-tab name="One">
+      <h4>Card 1</h4>
+      <p>
+        Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore
+        magna aliqua.
+        Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.
+      </p>
+    </wired-tab>
+    <wired-tab name="Two">
+      <h4>Card 2</h4>
+      <p>
+        Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore
+        magna aliqua.
+        Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.
+      </p>
+    </wired-tab>
+    <wired-tab name="Three">
+      <h4>Card 3</h4>
+      <p>
+        Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore
+        magna aliqua.
+        Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.
+      </p>
+    </wired-tab>
+  </wired-tabs>
+
+  <wired-textarea placeholder="Enter text" rows="6"></wired-textarea>
+
+  <wired-toggle></wired-toggle>
+  <wired-toggle checked></wired-toggle>
+
+  <wired-video autoplay muted loop src="video.mp4"></wired-video>
+
+  <script type="module" src="https://unpkg.com/wired-elements?module"></script>
+  <script type="module" src="https://unpkg.com/wired-elements/lib/wired-calendar.js?module"></script>
+  <script>
+    document.getElementById('openDialog').addEventListener('click', () => {
+      document.querySelector('wired-dialog').open = true;
+    });
+    document.getElementById('closeDialog').addEventListener('click', () => {
+      document.querySelector('wired-dialog').open = false;
+    });
+  </script>
+</body>
+
+</html>

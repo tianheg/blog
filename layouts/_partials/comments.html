@@ -1,0 +1,30 @@
+{{/* Artalk comment system */}}
+{{ if not .Params.nocomment }}
+<section id="comments" class="my-12">
+  <h2 class="text-xl font-semibold mb-6 flex flex-row items-center space-x-2">
+    {{ partial "svg/message-circle" }}
+    <span>Comments</span>
+  </h2>
+
+  <p class="mb-6 text-center">
+    <a href="mailto:i@tianheg.co?subject=[tianheg.co] Re: {{ .Title }}" class="text-sm text-gray-600 dark:text-gray-400 hover:text-gray-700 dark:hover:text-gray-200 underline">
+      ✍️ Reply by email
+    </a>
+  </p>
+
+  <div id="Comments"></div>
+</section>
+
+<link href="/dist/Artalk.css" rel="stylesheet">
+<script src="/dist/Artalk.js"></script>
+<script>
+  Artalk.init({
+    el: '#Comments',
+    pageKey: '{{ .Permalink }}',
+    pageTitle: '{{ .Title }}',
+    server: 'https://comments.tianheg.co',
+    site: 'Tianhe Gao',
+    darkMode: 'auto',
+  })
+</script>
+{{ end }}

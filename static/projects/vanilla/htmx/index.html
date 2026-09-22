@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="htmx 练习">
+  <title>htmx</title>
+  <script src="https://unpkg.com/htmx.org@1.9.12"
+    integrity="sha384-ujb1lZYygJmzgSwoxRggbCHcjc0rB2XoQrxeTUQyRjrOnlCoYta87iKBWq3EsdM2"
+    crossorigin="anonymous"></script>
+</head>
+
+<body>
+  <button hx-get="https://api.tianheg.org/words" hx-trigger="click" hx-target="#temp" hx-swap="none">Load Words</button>
+  <div id="wordList">
+    <ul id="wordsUl">
+    </ul>
+  </div>
+  <div id="temp" style="display: none;"></div>
+  <script>
+    document.addEventListener('htmx:afterRequest', function (event) {
+      var words = event.detail.xhr.responseText;
+      var data = JSON.parse(words).data;
+      console.log(data)
+
+      var list = document.querySelector('#wordsUl');
+      if(!list) return;
+      
+      list.innerHTML = ''; // Clear existing list items
+
+      data.forEach(function (word) {
+        var listItem = document.createElement('li');
+        listItem.textContent = word.content;
+        list.appendChild(listItem);
+      });
+    });
+  </script>
+</body>
+
+</html>

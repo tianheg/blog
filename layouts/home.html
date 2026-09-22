@@ -1,0 +1,81 @@
+{{/* Home page layout - shows recent posts and TIL */}}
+
+{{/* 首页 <title> 直接用站名，避免 baseof 的 "标题 | 站名" 逻辑重复一次 */}}
+{{ define "title" }}{{ .Site.Title }}{{ end }}
+
+{{ define "main" }}
+
+<div class="mb-16">
+  <h1 class="text-3xl font-bold mb-6">Welcome</h1>
+  <p class="text-lg mb-4 text-gray-700 dark:text-gray-300">Hi, I'm tianheg. I write this blog in both Chinese and English to share my life experiences.</p>
+  <p class="text-lg text-gray-700 dark:text-gray-300">I hope you enjoy reading it!</p>
+  <a href="/start/"
+     class="mt-8 inline-flex items-center gap-2 px-5 py-2.5 rounded-md border border-ink-600 dark:border-ink-400 text-ink-600 dark:text-ink-400 text-sm font-medium no-underline transition-colors hover:bg-ink-600 hover:text-white dark:hover:bg-ink-400 dark:hover:text-gray-950">
+    Start here <span aria-hidden="true">→</span>
+  </a>
+</div>
+
+<!-- Recent Posts Section -->
+<section class="mb-16">
+  <div class="flex items-center justify-between mb-6">
+    <h2 class="text-lg font-semibold">Recent Posts</h2>
+    <a href="/posts" class="text-sm text-gray-600 dark:text-gray-400 hover:text-gray-900 dark:hover:text-gray-100 transition-colors">View all →</a>
+  </div>
+
+  {{ $posts := where .Site.RegularPages "Section" "posts" }}
+  {{ $recentPosts := first 5 $posts }}
+
+  {{ if $recentPosts }}
+    <div class="space-y-1">
+      {{ range $recentPosts }}
+        <div class="flex items-baseline gap-4 py-2">
+          <time class="text-[13px] text-gray-600 dark:text-gray-400 shrink-0 w-10 tabular-nums whitespace-nowrap" datetime="{{ .Date.Format "2006-01-02" }}">
+            {{ .Date.Format "01/02" }}
+          </time>
+          <a href="{{ .RelPermalink }}" class="text-[15px]">
+            {{ partial "functions/get-title" (dict "page" .) }}
+          </a>
+        </div>
+      {{ end }}
+    </div>
+  {{ else }}
+    <p class="text-gray-600 dark:text-gray-400">No posts yet.</p>
+  {{ end }}
+</section>
+
+<!-- Random TIL Section -->
+<section class="mb-16">
+  <div class="flex items-center justify-between mb-6">
+    <h2 class="text-lg font-semibold">Random TIL</h2>
+    <a href="/til" class="text-sm text-gray-600 dark:text-gray-400 hover:text-gray-900 dark:hover:text-gray-100 transition-colors">View all →</a>
+  </div>
+
+  {{ $til := where .Site.RegularPages "Section" "til" }}
+  {{ $shuffledTil := shuffle $til }}
+  {{ $recentTil := first 5 $shuffledTil }}
+
+  {{ if $recentTil }}
+    <div class="space-y-1">
+      {{ range $recentTil }}
+        {{ if ne .Title "Tils" }}
+        <div class="flex items-baseline gap-4 py-2">
+          <a href="{{ .RelPermalink }}" class="text-[15px]">
+            {{ partial "functions/get-title" (dict "page" .) }}
+          </a>
+          {{ $dirPath := .File.Dir | strings.TrimPrefix "til/" | strings.TrimSuffix "/" }}
+          {{ $category := index (split $dirPath "/") 0 }}
+          {{ if $category }}
+          <span class="ml-auto text-[13px] px-2 py-0.5 rounded-full bg-gray-100 dark:bg-gray-800 text-gray-600 dark:text-gray-400 shrink-0">
+            {{ $category }}
+          </span>
+          {{ end }}
+        </div>
+        {{ end }}
+      {{ end }}
+    </div>
+  {{ else }}
+    <p class="text-gray-600 dark:text-gray-400">No TIL entries yet.</p>
+  {{ end }}
+</section>
+
+{{ end }}

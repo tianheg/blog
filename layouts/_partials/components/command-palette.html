@@ -1,0 +1,52 @@
+{{/* 命令面板（⌘K）。全站引入，页面无关，可用 partialCached。
+     逻辑在 assets/ts/components/CommandPalette.ts，样式在 assets/css/til.css。 */}}
+<div id="cmdk" data-open="false" role="dialog" aria-modal="true" aria-label="搜索与跳转">
+  <div class="cmdk-backdrop" data-cmdk-close></div>
+  <div class="cmdk-panel">
+    <div class="cmdk-inputwrap">
+      <svg class="cmdk-searchicon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="11" cy="11" r="8"/><path d="m21 21-4.3-4.3"/></svg>
+      <input id="cmdk-input" class="cmdk-input" type="text" autocomplete="off" spellcheck="false"
+             placeholder="搜索笔记、文章…">
+    </div>
+    <div id="cmdk-empty" class="cmdk-empty" hidden></div>
+    <ul id="cmdk-actions" class="cmdk-list">
+      <li class="cmdk-item" data-cmdk-random="true">
+        <span class="cmdk-title">随便看一篇</span>
+        <span class="cmdk-meta">随机</span>
+      </li>
+      <li class="cmdk-item" data-url="/graph/">
+        <span class="cmdk-title">关系图谱</span>
+        <span class="cmdk-meta">全站</span>
+      </li>
+      <li class="cmdk-item" data-url="/search/">
+        <span class="cmdk-title">搜索页（含语义检索）</span>
+        <span class="cmdk-meta">/search/</span>
+      </li>
+      <li class="cmdk-section">最近新增</li>
+      {{ range first 6 (where .Site.RegularPages "Section" "til").ByDate.Reverse }}
+      <li class="cmdk-item" data-url="{{ .RelPermalink }}">
+        <span class="cmdk-title">{{ partial "functions/get-title" (dict "page" .) }}</span>
+        <span class="cmdk-meta">{{ if not .Date.IsZero }}{{ .Date.Format "01-02" }}{{ end }}</span>
+      </li>
+      {{ end }}
+    </ul>
+    <ul id="cmdk-results" class="cmdk-list" hidden></ul>
+    {{/* slug → 中文分类名，供结果显示（面板不显示英文 slug） */}}
+    {{ $sections := dict }}
+    {{ with .Site.GetPage "/til" }}
+      {{ range .Sections }}
+        {{ $slug := index (split (strings.TrimPrefix "/til/" .RelPermalink) "/") 0 }}
+        {{ $sections = merge $sections (dict $slug .Title) }}
+      {{ end }}
+    {{ end }}
+    {{/* 必须 safeJS：html/template 把 <script> 内容按 JS 字符串转义，不加会得到 \" 包裹的畸形 JSON */}}
+    <script type="application/json" id="cmdk-sections">{{ $sections | jsonify | safeJS }}</script>
+    <div class="cmdk-foot">
+      <span><kbd>↑</kbd><kbd>↓</kbd> 选择</span>
+      <span><kbd>Enter</kbd> 打开</span>
+      <span><kbd>Esc</kbd> 关闭</span>
+      <span id="cmdk-count" class="cmdk-count"></span>
+      <span class="cmdk-hint"><kbd>⌘K</kbd> / <kbd>Ctrl</kbd>+<kbd>K</kbd> 随时唤出</span>
+    </div>
+  </div>
+</div>

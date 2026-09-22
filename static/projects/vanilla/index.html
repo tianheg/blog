@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>HTML,CSS,JS | Vanilla</title>
+  <style>
+    #head>.shiki {
+      padding: 10px 20px;
+    }
+  </style>
+</head>
+
+<body>
+  <h1>HTML,CSS,JS | Vanilla</h1>
+  <p>需要的 &lt;head&gt; 内容：</p>
+  <div id="head"></div>
+  <hr>
+  <dl>
+<dt><a href="./agents-example/">Agents example</a></dt>
+  <dd>来自 <a href='http://dmitrysoshnikov.com/ecmascript/javascript-the-core-2nd-edition/#agent'  target='_blank'>JavaScript. The Core: 2nd Edition</a></dd>
+
+<dt><a href="./audio-js-libs/">audio JS libs</a></dt>
+  <dd>尝试audio相关的JS库</dd>
+
+<dt><a href="./chatgpt-plus/">ChatGPT Plus poster picture</a></dt>
+  <dd>使用 CSS doodle 画出来</dd>
+
+<dt><a href="./contact-info/">Contact info</a></dt>
+  <dd>在学习 MDN 时的练习</dd>
+
+<dt><a href="./css/">Day3 in CSS</a></dt>
+  <dd>尝试使用 CSS 的各种能力</dd>
+
+<dt><a href="./css-doodle/"><css-doodle /></a></dt>
+  <dd>这些花纹真的太好看了</dd>
+
+<dt><a href="./extract-pdf/">PDF Modification: Extract PDF pages render with javascript</a></dt>
+  <dd>能够保存上传的 PDF 文件的指定页码</dd>
+
+<dt><a href="./float/">float</a></dt>
+  <dd>float 练习</dd>
+
+<dt><a href="./fogg-behavior-model/">Fogg Behavior Model by tianheg</a></dt>
+  <dd>读了一本书《福格行为模型》，书中有这个图，就想着能不能通过 Web 实现一下</dd>
+
+<dt><a href="./glowing-text/">Glowing Text</a></dt>
+  <dd>A text with glowing effect</dd>
+
+<dt><a href="./half-blur-circle/">Half Blur Circle</a></dt>
+  <dd>一半模糊，一半彩色的圆</dd>
+
+<dt><a href="./html/">HTML demo</a></dt>
+  <dd>尝试使用 HTML 的各种能力</dd>
+
+<dt><a href="./htmx/">htmx</a></dt>
+  <dd>htmx 练习</dd>
+
+<dt><a href="./mandala/">MandalaMandala</a></dt>
+  <dd>在 MDN 的网站上找到的，很好看</dd>
+
+<dt><a href="./prefers-reduced-motion/">prefers-reduced-motion</a></dt>
+  <dd>实验 prefers-reduced-motion</dd>
+
+<dt><a href="./printing-music/">Printing Music</a></dt>
+  <dd>Music notation should be as accessible and as fluid as text is, on the web; that it is not, yet, is something of an afront to my sensibilities. Let us fix this pressing problem.</dd>
+
+<dt><a href="./selectors/">Selectors</a></dt>
+  <dd>在学习 MDN 时的练习</dd>
+
+<dt><a href="./selfhosted-openstreetmaps-widgets-with-protomaps/">Protomaps Simple Map Example</a></dt>
+  <dd>自定义地球上的任意区域</dd>
+
+<dt><a href="./time-cal/">Time Calculator</a></dt>
+  <dd>送外卖的时候，要在线八小时，已在线时间的格式X时X分钟，想知道还剩多长时间：X时X分钟</dd>
+
+<dt><a href="./wired-elements/">Wired Elements</a></dt>
+  <dd>This hand drawn UI looks so interesting!</dd>
+
+<dt><a href="./year-progress/">Year Progress</a></dt>
+  <dd>Year Progress</dd>
+
+</dl>
+
+
+  <script type="module">
+    // be sure to specify the exact version
+    import { codeToHtml } from 'https://esm.sh/shiki'
+
+    const head = document.getElementById('head')
+    head.innerHTML = await codeToHtml('<meta charset="UTF-8">\n<meta name="viewport" content="width=device-width, initial-scale=1.0">\n<title></title>', {
+      lang: 'html',
+      theme: 'andromeeda'
+    })
+  </script>
+</body>
+
+</html>

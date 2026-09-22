@@ -1,0 +1,30 @@
+{{/* Link render hook (Markdown only — Org never had render hooks).
+
+  Two jobs:
+  1. External links get the security attributes (noopener/noreferrer) and open
+     in a new tab.
+  2. Internal links are validated at build time: a link that resolves neither
+     to a real page nor to a bundled static file emits a warning, so the
+     garden's link rot surfaces during the build instead of silently rotting.
+
+  Static assets (static/resume.pdf, static/projects/<name>/, …) are not pages,
+  so they are checked on the filesystem. Everything else renders as before. */}}
+{{- $dest := .Destination -}}
+{{- $isExternal := or (hasPrefix $dest "http://") (hasPrefix $dest "https://") -}}
+{{- $attrs := "" -}}
+{{- with .Title -}}{{- $attrs = printf " title=%q" . -}}{{- end -}}
+
+{{- if $isExternal -}}
+<a href="{{ $dest }}"{{ $attrs | safeHTMLAttr }} target="_blank" rel="noopener noreferrer">{{ .Text }}</a>
+{{- else -}}
+  {{- if hasPrefix $dest "/" -}}
+    {{- $path := $dest -}}
+    {{- if in $path "#" -}}{{- $path = index (split $path "#") 0 -}}{{- end -}}
+    {{- $rel := strings.TrimPrefix "/" $path -}}
+    {{- $onDisk := or (fileExists (printf "static/%s" $rel)) (fileExists (printf "static/%sindex.html" $rel)) -}}
+    {{- if and (not $onDisk) (not (site.GetPage $path)) -}}
+      {{- warnf "link: unresolved internal link %q on %s" $dest .Page.RelPermalink -}}
+    {{- end -}}
+  {{- end -}}
+<a href="{{ $dest }}"{{ $attrs | safeHTMLAttr }}>{{ .Text }}</a>
+{{- end -}}

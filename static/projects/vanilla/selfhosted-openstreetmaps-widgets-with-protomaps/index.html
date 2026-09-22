@@ -1,0 +1,118 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="description" content="自定义地球上的任意区域" />
+  <title>Protomaps Simple Map Example</title>
+  <link rel="stylesheet" href="assets/css/maplibre-gl.css" />
+  <style>
+    /* Make the map container take all available space on the page */
+    #my_map {
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100svw;
+      height: 100svh;
+    }
+  </style>
+</head>
+
+<body>
+<!-- https://snorpey.codes/en/articles/selfhosted-openstreetmaps-widgets-with-protomaps -->
+
+  <div id="my_map"></div>
+  <script src="assets/js/maplibre-gl.js"></script>
+  <script src="assets/js/pmtiles.js"></script>
+  <script type="module">
+    // add the PMTiles plugin to the maplibregl global.
+    const protocol = new pmtiles.Protocol();
+    maplibregl.addProtocol('pmtiles', (request) => {
+      return new Promise((resolve, reject) => {
+        const callback = (err, data) => {
+          if (err) {
+            reject(err);
+          } else {
+            resolve({ data });
+          }
+        };
+
+        protocol.tile(request, callback);
+      });
+    });
+
+    // the location of our pmtiles file
+    const PMTILES_URL = './assets/mapdata.pmtiles';
+
+    // create a new PmTiles instance
+    const pmtilesInstance = new pmtiles.PMTiles(PMTILES_URL);
+
+    // this is so we share one instance across the JS code and the map renderer
+    protocol.add(pmtilesInstance);
+
+    // we first fetch the header so we can get the center lon, lat of the map.
+    const mapMetaData = await pmtilesInstance.getHeader();
+
+    const map = new maplibregl.Map({
+      // sets the element we want to add our map to
+      container: document.querySelector('#my_map'),
+
+      // set the initial center of the map to the center
+      // of the map data
+      center: [mapMetaData.centerLon, mapMetaData.centerLat],
+
+      // sets the initial zoom of the map according to the
+      // map zoom
+      zoom: mapMetaData.maxZoom - 2,
+
+      style: {
+        version: 8,
+
+        // ading protomaps as the data source for our map
+        sources: {
+          'protomaps': {
+            type: 'vector',
+            url: `pmtiles://${PMTILES_URL}`,
+            attribution: '© <a href="https://openstreetmap.org">OpenStreetMap</a>'
+          }
+        },
+
+        // simple map layer definitions
+        // for more information about structure see
+        // https://maplibre.org/maplibre-style-spec/layers/
+        layers: [
+          {
+            'id': 'buildings',
+            'source': 'protomaps',
+            'source-layer': 'landuse',
+            'type': 'fill',
+            'paint': {
+              'fill-color': '#0066ff'
+            }
+          },
+          {
+            'id': 'roads',
+            'source': 'protomaps',
+            'source-layer': 'roads',
+            'type': 'line',
+            'paint': {
+              'line-color': 'black'
+            }
+          },
+          {
+            'id': 'mask',
+            'source': 'protomaps',
+            'source-layer': 'mask',
+            'type': 'fill',
+            'paint': {
+              'fill-color': 'white'
+            }
+          }
+        ]
+      }
+    });
+  </script>
+</body>
+
+</html>

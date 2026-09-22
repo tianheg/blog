@@ -1,0 +1,10 @@
+---
+title: 'scp cmd copy permission to remote server(fixed)'
+status: draft
+date: 2026-03-31T23:56:10+08:00
+header: Linux
+---
+
+[Disable Your SSH Access With This One Simple Trick](https://sny.sh/hypha/blog/scp)
+
+如果本地的目录权限是777，即使远程目录权限是700，在使用过scp把本地目录push到远端后，远端的目录权限就变成了777。在某些情况下，会导致无法登录SSH。

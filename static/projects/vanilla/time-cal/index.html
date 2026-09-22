@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="送外卖的时候，要在线八小时，已在线时间的格式X时X分钟，想知道还剩多长时间：X时X分钟">
+  <title>Time Calculator</title>
+</head>
+
+<body>
+  <h1>Time Calculator</h1>
+  <p>I have a time calculator.</p>
+  <p>Sum is <input type="number" id="sum" value="8"> hours. <input type="number" id="a"> hours past, question: <input
+      type="number" id="b"> hours left?</p>
+
+  <p><input type="number" id="hour" required> hours <input type="number" id="min" required> minutes is <input
+      type="number" id="sum2" placeholder="x.x"> hours.</p>
+  <script>
+    const sum = document.querySelector("#sum")
+    const a = document.querySelector("#a")
+    const b = document.querySelector("#b")
+
+    const sum2 = document.querySelector("#sum2")
+    const hour = document.querySelector("#hour")
+    const min = document.querySelector("#min")
+
+    a.addEventListener("change", () => {
+      if (a.value.split('.').length === 1) {
+        b.value = sum.value - a.value
+      } else {
+        b.value = ((sum.value * 60 - a.value * 60) / 60)
+      }
+    })
+
+    min.addEventListener("change", () => {
+      sum2.value = Number(hour.value) + Number(min.value) / 60
+    })
+  </script>
+</body>
+
+</html>

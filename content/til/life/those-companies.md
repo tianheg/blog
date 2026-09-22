@@ -1,0 +1,22 @@
+---
+title: 'Those companies'
+status: draft
+date: 2025-06-15T19:22:54+08:00
+header: Society
+---
+
+中国沃尔玛：沃尔玛超市+山姆会员超市
+
+Walmart China: Walmart Supercenter + Sam's Club
+
+房地美和房利美
+
+https://en.wikipedia.org/wiki/Freddie_Mac
+
+https://en.wikipedia.org/wiki/Fannie_Mae
+
+美国标准石油公司
+
+https://zh.wikipedia.org/wiki/%E6%A0%87%E5%87%86%E7%9F%B3%E6%B2%B9
+
+https://en.wikipedia.org/wiki/Standard_Oil

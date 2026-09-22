@@ -1,0 +1,32 @@
+{{/* Generic single page layout - fallback for content types without specific templates */}}
+{{ define "main" }}
+
+<article data-pagefind-body class="prose-links prose-p:text-[16px] prose-p:leading-[1.85] prose-li:text-[16px] prose-li:leading-[1.85] prose-a:text-ink-600 dark:prose-a:text-ink-400 prose-a:hover:underline">
+
+  {{/* --- Article title --- */}}
+  <h1>{{ partial "functions/get-title" (dict "page" .) }}</h1>
+
+  {{/* --- Date for pages that have it --- */}}
+  {{ if .Date }}
+  <div class="not-prose mb-8 pb-6 border-b border-gray-200 dark:border-gray-800">
+    <time class="text-sm text-gray-600 dark:text-gray-400" datetime='{{ .Date.Format "2006-01-02" }}'>
+      {{ .Date.Format (default "02 Jan, 2006" .Site.Params.dateFormat) }}
+    </time>
+  </div>
+  {{ end }}
+
+  {{/* --- Main content --- */}}
+  <div>
+    {{ partial "content/render-content" .Content }}
+  </div>
+
+  {{ partial "content/post-tags.html" . }}
+</article>
+
+{{/* 根级页面不展示「引用这篇的」——search、about、now、uses 等 20 个页面
+     是功能页/索引页，不是笔记，被谁引用对读者没有意义。 */}}
+
+{{/* --- Footer and comments --- */}}
+{{ partial "components/email-reply.html" . }}
+
+{{ end }}

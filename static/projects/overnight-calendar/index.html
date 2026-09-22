@@ -1,0 +1,396 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>熬夜日历 · Overnight Calendar</title>
+  <style>
+    :root {
+      --bg: #0b0b14;
+      --surface: #141421;
+      --surface2: #1c1c2e;
+      --border: #2a2a3e;
+      --text: #e2e0e8;
+      --text2: #8a86a0;
+      --text3: #5e5a78;
+      --accent: #f0b429;
+      --tag-coding: #f05454;
+      --tag-reading: #4ecdc4;
+      --tag-writing: #f0b429;
+      --tag-work: #7c8cf0;
+      --tag-thinking: #e89a5e;
+      --tag-other: #6e6a86;
+    }
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+    body {
+      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", "Noto Sans SC", system-ui, sans-serif;
+      background:
+        radial-gradient(1000px 700px at 80% -8%, rgba(120, 140, 255, 0.12), transparent 60%),
+        linear-gradient(180deg, #05050e 0%, var(--bg) 55%, #0d0d18 100%);
+      color: var(--text);
+      -webkit-font-smoothing: antialiased;
+      min-height: 100vh;
+      background-attachment: fixed;
+    }
+    /* 月亮 */
+    #moon {
+      position: fixed;
+      top: 36px; right: 9%;
+      width: 88px; height: 88px;
+      z-index: 0;
+      pointer-events: none;
+      filter: drop-shadow(0 0 18px rgba(240,200,120,0.28)) drop-shadow(0 0 60px rgba(150,145,255,0.08));
+    }
+    #moon svg { width: 100%; height: 100%; display: block; }
+    /* 星星 */
+    body::after {
+      content: '';
+      position: fixed; inset: 0;
+      z-index: 0;
+      pointer-events: none;
+      background:
+        radial-gradient(1.5px 1.5px at 12% 12%, rgba(255,255,255,0.8), transparent 60%),
+        radial-gradient(1px 1px at 24% 6%, rgba(255,255,255,0.5), transparent 60%),
+        radial-gradient(1px 1px at 33% 18%, rgba(255,255,255,0.6), transparent 60%),
+        radial-gradient(1.5px 1.5px at 47% 9%, rgba(255,255,255,0.45), transparent 60%),
+        radial-gradient(1px 1px at 61% 15%, rgba(255,255,255,0.7), transparent 60%),
+        radial-gradient(1px 1px at 72% 7%, rgba(255,255,255,0.4), transparent 60%),
+        radial-gradient(1.5px 1.5px at 92% 22%, rgba(255,255,255,0.55), transparent 60%),
+        radial-gradient(1px 1px at 8% 30%, rgba(255,255,255,0.35), transparent 60%),
+        radial-gradient(1px 1px at 55% 26%, rgba(255,255,255,0.4), transparent 60%);
+    }
+    .page {
+      position: relative;
+      z-index: 1;
+      max-width: 800px;
+      margin: 0 auto;
+      padding: 1.5rem 1rem;
+    }
+    @media (max-width: 480px) {
+      .page { padding: 1rem 0.5rem; }
+    }
+
+    /* Header */
+    .hd { margin-bottom: 1.5rem; display: flex; justify-content: space-between; align-items: flex-start; flex-wrap: wrap; gap: 0.5rem; }
+    .hd h1 { font-size: 1.2rem; font-weight: 600; }
+    .hd h1 span { font-weight: 400; font-size: 0.75rem; color: var(--text2); margin-left: 0.3rem; }
+    .stats { display: flex; gap: 0.75rem; font-size: 0.75rem; color: var(--text2); }
+    .stats strong { color: var(--text); font-weight: 600; }
+
+    /* Nav */
+    .nav { display: flex; justify-content: space-between; align-items: center; margin-bottom: 0.75rem; }
+    .nav-label { font-size: 0.95rem; font-weight: 500; }
+    .nav-group { display: flex; gap: 0.15rem; }
+    .nav-btn {
+      background: transparent; border: 1px solid var(--border); color: var(--text2);
+      padding: 0.25rem 0.55rem; border-radius: 5px; cursor: pointer;
+      font-size: 0.75rem; font-family: inherit; transition: all 0.1s;
+    }
+    .nav-btn:hover { border-color: var(--text3); color: var(--text); }
+    .nav-btn.today { font-size: 0.65rem; padding: 0.25rem 0.45rem; }
+
+    /* Weekdays */
+    .wd { display: grid; grid-template-columns: repeat(7, 1fr); gap: 2px; margin-bottom: 2px; }
+    .wd span { text-align: center; font-size: 0.65rem; color: var(--text3); padding: 0.25rem 0; font-weight: 500; }
+
+    /* Grid */
+    .cal { display: grid; grid-template-columns: repeat(7, 1fr); gap: 2px; width: 100%; }
+
+    .cell {
+      background: var(--surface); border-radius: 6px; padding: 4px;
+      min-height: 44px; min-width: 0; display: flex; flex-direction: column; align-items: center;
+      justify-content: center; cursor: pointer; border: 1px solid transparent;
+      transition: background 0.1s; position: relative;
+    }
+    .cell:active { background: var(--surface2); }
+    .cell.other { opacity: 0.2; pointer-events: none; }
+    .cell.today { border-color: var(--accent); }
+    .cell .num { font-size: 0.8rem; font-weight: 500; line-height: 1.2; }
+    .cell .tag { font-size: 0.48rem; color: var(--text3); max-width: 95%; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; text-align: center; line-height: 1.1; margin-top: 1px; }
+
+    .cell.marked { position: relative; }
+    .cell.marked::before {
+      content: ''; position: absolute; top: -1px; left: 25%; right: 25%;
+      height: 2px; border-radius: 2px; background: var(--accent);
+    }
+    .cell.marked.t-coding::before { background: var(--tag-coding); }
+    .cell.marked.t-reading::before { background: var(--tag-reading); }
+    .cell.marked.t-writing::before { background: var(--tag-writing); }
+    .cell.marked.t-work::before { background: var(--tag-work); }
+    .cell.marked.t-thinking::before { background: var(--tag-thinking); }
+    .cell.marked.t-other::before { background: var(--tag-other); }
+
+    @media (max-width: 480px) {
+      .cell { min-height: 38px; padding: 2px; border-radius: 4px; }
+      .cell .num { font-size: 0.7rem; }
+      .cell .tag { font-size: 0.4rem; }
+      .cell.marked::before { left: 30%; right: 30%; height: 2px; }
+      .wd span { font-size: 0.58rem; padding: 0.2rem 0; }
+    }
+    @media (max-width: 360px) {
+      .cell { min-height: 34px; }
+      .cell .num { font-size: 0.62rem; }
+      .cell .tag { font-size: 0.38rem; }
+    }
+
+    /* Legend */
+    .legend { display: flex; flex-wrap: wrap; gap: 0.4rem 0.75rem; margin-top: 0.75rem; font-size: 0.68rem; color: var(--text2); }
+    .legend-item { display: flex; align-items: center; gap: 0.25rem; }
+    .legend-bar { display: block; width: 10px; height: 2px; border-radius: 2px; }
+
+    /* Data bar */
+    .bar { margin-top: 0.75rem; display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 0.5rem; padding: 0.4rem 0.7rem; background: var(--surface); border-radius: 6px; border: 1px solid var(--border); }
+    .bar-info { font-size: 0.68rem; color: var(--text2); display: flex; align-items: center; gap: 0.3rem; }
+    .bar-info code { font-family: "SF Mono", "Cascadia Code", monospace; font-size: 0.62rem; color: var(--text); background: var(--surface2); padding: 0.1rem 0.3rem; border-radius: 3px; }
+    .btn-dl { background: var(--surface2); border: 1px solid var(--border); color: var(--text2); padding: 0.3rem 0.7rem; border-radius: 5px; cursor: pointer; font-size: 0.68rem; font-family: inherit; }
+    .btn-dl:active { background: var(--border); }
+    @media (max-width: 480px) { .bar { flex-direction: column; align-items: stretch; } .bar-info { justify-content: center; } .btn-dl { width: 100%; text-align: center; } }
+
+    /* Modal */
+    .overlay { display: none; position: fixed; inset: 0; background: rgba(0,0,0,0.6); z-index: 100; justify-content: center; align-items: center; padding: 1rem; }
+    .overlay.show { display: flex; }
+    .modal { background: var(--surface); border-radius: 10px; padding: 1.2rem; width: 100%; max-width: 360px; box-shadow: 0 8px 30px rgba(0,0,0,0.3); border: 1px solid var(--border); }
+    .modal h2 { font-size: 0.9rem; font-weight: 600; margin-bottom: 1rem; color: var(--text); }
+    .modal textarea { width: 100%; background: var(--surface2); border: 1px solid var(--border); border-radius: 6px; color: var(--text); padding: 0.55rem; font-size: 0.82rem; resize: vertical; min-height: 60px; font-family: inherit; line-height: 1.5; }
+    .modal textarea:focus { outline: none; border-color: #3a3a52; }
+    .tags { display: flex; flex-wrap: wrap; gap: 0.3rem; margin: 0.6rem 0; }
+    .tag { padding: 0.2rem 0.5rem; border-radius: 4px; border: 1px solid var(--border); background: transparent; color: var(--text2); font-size: 0.68rem; cursor: pointer; font-family: inherit; }
+    .tag.active { color: #fff; border-color: transparent; }
+    .tag[data-tag="coding"].active { background: var(--tag-coding); }
+    .tag[data-tag="reading"].active { background: var(--tag-reading); }
+    .tag[data-tag="writing"].active { background: var(--tag-writing); }
+    .tag[data-tag="work"].active { background: var(--tag-work); }
+    .tag[data-tag="thinking"].active { background: var(--tag-thinking); }
+    .tag[data-tag="other"].active { background: var(--tag-other); }
+    .acts { display: flex; gap: 0.4rem; justify-content: flex-end; margin-top: 0.75rem; }
+    .acts button { padding: 0.3rem 0.85rem; border-radius: 5px; border: none; cursor: pointer; font-size: 0.75rem; font-family: inherit; }
+    .btn-save { background: var(--accent); color: #0b0b14; font-weight: 500; }
+    .btn-del { background: transparent; color: var(--text2); border: 1px solid var(--border) !important; }
+    .btn-cancel { background: transparent; color: var(--text2); }
+    @media (max-width: 480px) { .modal { padding: 1rem; } }
+  </style>
+</head>
+<body>
+<div id="moon" title="">
+  <svg viewBox="-50 -50 100 100" aria-hidden="true">
+    <defs>
+      <radialGradient id="moonDark" cx="38%" cy="34%" r="80%">
+        <stop offset="0%" stop-color="#232034"/>
+        <stop offset="100%" stop-color="#0c0b18"/>
+      </radialGradient>
+      <radialGradient id="moonLight" cx="36%" cy="34%" r="90%">
+        <stop offset="0%" stop-color="#fff7dc"/>
+        <stop offset="55%" stop-color="#f3dfa8"/>
+        <stop offset="100%" stop-color="#d9c088"/>
+      </radialGradient>
+    </defs>
+    <circle r="48" fill="url(#moonDark)"/>
+    <path id="moonFace" fill="url(#moonLight)"/>
+  </svg>
+</div>
+<div class="page">
+  <div class="hd">
+    <h1>熬夜日历 <span>Overnight Calendar</span></h1>
+    <div class="stats">
+      <span>本月 <strong id="mcnt">0</strong></span>
+      <span>连续 <strong id="streak">0</strong> 天</span>
+      <span>总计 <strong id="tcnt">0</strong></span>
+    </div>
+  </div>
+
+  <div class="nav">
+    <button class="nav-btn" id="prev">‹ 上月</button>
+    <span class="nav-label" id="label"></span>
+    <div class="nav-group">
+      <button class="nav-btn today" id="today">今天</button>
+      <button class="nav-btn" id="next">下月 ›</button>
+    </div>
+  </div>
+
+  <div class="wd"><span>日</span><span>一</span><span>二</span><span>三</span><span>四</span><span>五</span><span>六</span></div>
+  <div class="cal" id="grid"></div>
+
+  <div class="legend">
+    <span class="legend-item"><span class="legend-bar" style="background:var(--tag-coding)"></span>编码</span>
+    <span class="legend-item"><span class="legend-bar" style="background:var(--tag-reading)"></span>阅读</span>
+    <span class="legend-item"><span class="legend-bar" style="background:var(--tag-writing)"></span>写作</span>
+    <span class="legend-item"><span class="legend-bar" style="background:var(--tag-work)"></span>工作</span>
+    <span class="legend-item"><span class="legend-bar" style="background:var(--tag-thinking)"></span>胡思乱想</span>
+    <span class="legend-item"><span class="legend-bar" style="background:var(--tag-other)"></span>其他</span>
+  </div>
+
+  <div class="bar">
+    <div class="bar-info">
+      <span>📄 <code>overnight-calendar-data.json</code></span>
+      <span id="sync"></span>
+    </div>
+    <button class="btn-dl" id="dl">💾 下载</button>
+  </div>
+</div>
+
+<div class="overlay" id="modal">
+  <div class="modal">
+    <h2 id="mtitle">记录</h2>
+    <textarea id="mnote" placeholder="熬到几点？做了什么？"></textarea>
+    <div class="tags">
+      <button class="tag" data-tag="coding">💻 编码</button>
+      <button class="tag" data-tag="reading">📖 阅读</button>
+      <button class="tag" data-tag="writing">✍️ 写作</button>
+      <button class="tag" data-tag="work">⚙️ 工作</button>
+      <button class="tag" data-tag="thinking">🤔 胡思乱想</button>
+      <button class="tag" data-tag="other">📌 其他</button>
+    </div>
+    <div class="acts">
+      <button class="btn-cancel" id="cancel">取消</button>
+      <button class="btn-del" id="del" style="display:none">删除</button>
+      <button class="btn-save" id="save">保存</button>
+    </div>
+  </div>
+</div>
+
+<script>
+(function() {
+  const KEY = 'overnight_calendar';
+  let data = {}, cy, cm;
+  const TC = { coding:'#f05454', reading:'#4ecdc4', writing:'#f0b429', work:'#7c8cf0', thinking:'#e89a5e', other:'#6e6a86' };
+  const TL = { coding:'编码', reading:'阅读', writing:'写作', work:'工作', thinking:'胡思乱想', other:'其他' };
+
+  /* 实时月相（纯前端计算，朔望月近似） */
+  const MOON_NAMES = ['新月','蛾眉月','上弦月','盈凸月','满月','亏凸月','下弦月','残月'];
+  function moonPhase(date) {
+    const jd = date.getTime() / 86400000 + 2440587.5;
+    const l = (jd - 2451550.09766) / 29.530588853;
+    return l - Math.floor(l);
+  }
+  function moonPath(p) {
+    const R = 48, M = 2 * Math.PI * p;
+    if (p < 0.015 || p > 0.985) return '';
+    const a = R * Math.abs(Math.cos(M));
+    const sweep = p < 0.5 ? (M <= Math.PI / 2 ? 1 : 0) : (M < 3 * Math.PI / 2 ? 1 : 0);
+    const outer = p < 0.5 ? `A ${R},${R} 0 0 1 0,${R}` : `A ${R},${R} 0 0 0 0,${R}`;
+    return `M 0,${-R} ${outer} A ${a},${R} 0 0 ${sweep} 0,${-R} Z`;
+  }
+  function updateMoon() {
+    const el = document.getElementById('moon'), f = document.getElementById('moonFace');
+    if (!el || !f) return;
+    const p = moonPhase(new Date());
+    const illum = Math.round((1 - Math.cos(2 * Math.PI * p)) / 2 * 100);
+    const idx = Math.round(p * 8) % 8;
+    f.setAttribute('d', moonPath(p));
+    el.title = `${MOON_NAMES[idx]} · 照亮 ${illum}%`;
+  }
+
+  function k(y,m,d) { return `${y}-${String(m+1).padStart(2,'0')}-${String(d).padStart(2,'0')}`; }
+  function g(y,m,d) { return data[k(y,m,d)] || null; }
+  function persist() { localStorage.setItem(KEY, JSON.stringify(data)); }
+
+  function set(y,m,d,e) {
+    const kk = k(y,m,d);
+    if (e) data[kk] = e; else delete data[kk];
+    persist(); stats(); render();
+  }
+
+  function local() { try { const r = localStorage.getItem(KEY); if (r) return JSON.parse(r); } catch {} return null; }
+
+  function merge(l,r) {
+    const m = {}, ks = new Set([...Object.keys(l||{}), ...Object.keys(r||{})]);
+    for (const kk of ks) { const a=l?.[kk], b=r?.[kk]; if (!b) m[kk]=a; else if (!a) m[kk]=b; else m[kk]=(a.timestamp||0)>=(b.timestamp||0)?a:b; }
+    return m;
+  }
+
+  async function sync() {
+    const l = local(); let r = null;
+    try { const res = await fetch('data.json?'+Date.now()); if (res.ok) r = await res.json(); } catch {}
+    const s = document.getElementById('sync');
+    if (l && r) { const m = merge(l,r); const c = Object.keys(m).filter(kk=>l[kk]&&r[kk]&&l[kk].timestamp!==r[kk].timestamp); data=m; s.textContent=c.length?`合并 ${c.length} 条冲突`:'已同步'; }
+    else if (r) { data=r; s.textContent='已同步'; }
+    else if (l) { data=l; s.textContent='本地'; }
+    else { data={}; s.textContent='暂无数据'; }
+    persist(); stats();
+  }
+
+  function stats() {
+    const n = new Date(); let mc=0, tc=0, st=0;
+    for (let d=1;d<=31;d++){if(g(n.getFullYear(),n.getMonth(),d))mc++;}
+    for (const kk in data) tc++;
+    for (let i=0;i<365;i++){const d=new Date(n);d.setDate(d.getDate()-i);if(g(d.getFullYear(),d.getMonth(),d.getDate()))st++;else if(i>0)break;}
+    document.getElementById('mcnt').textContent=mc;
+    document.getElementById('tcnt').textContent=tc;
+    document.getElementById('streak').textContent=st;
+  }
+
+  function render() {
+    const grid = document.getElementById('grid'); grid.innerHTML = '';
+    const fd = new Date(cy,cm,1).getDay(), dim = new Date(cy,cm+1,0).getDate(), dip = new Date(cy,cm,0).getDate();
+    document.getElementById('label').textContent = `${cy} 年 ${cm+1} 月`;
+    for (let i=fd-1;i>=0;i--) grid.appendChild(cell(cy,cm-1,dip-i,true));
+    const t = new Date();
+    for (let d=1;d<=dim;d++) grid.appendChild(cell(cy,cm,d,false,cy===t.getFullYear()&&cm===t.getMonth()&&d===t.getDate()));
+    const rem = (7-(fd+dim)%7)%7;
+    for (let d=1;d<=rem;d++) grid.appendChild(cell(cy,cm+1,d,true));
+  }
+
+  function cell(y,m,d,oth,tod) {
+    const div = document.createElement('div');
+    div.className = 'cell'+(oth?' other':'')+(tod?' today':'');
+    const e = g(y,m,d);
+    if (e) {
+      div.classList.add('marked','t-'+e.tag);
+      const tag = document.createElement('span'); tag.className='tag';
+      const txt = e.note ? e.note.slice(0,10)+(e.note.length>10?'..':'') : TL[e.tag]||'';
+      tag.textContent = txt; div.appendChild(tag);
+    }
+    const num = document.createElement('span'); num.className='num'; num.textContent=d; div.prepend(num);
+    div.dataset.y=y; div.dataset.m=m; div.dataset.d=d;
+    div.addEventListener('click',()=>open(y,m,d));
+    return div;
+  }
+
+  function open(y,m,d) {
+    const o=document.getElementById('modal'), e=g(y,m,d);
+    document.getElementById('mtitle').textContent=`${y} 年 ${m+1} 月 ${d} 日`;
+    document.getElementById('mnote').value=e?(e.note||''):'';
+    document.getElementById('del').style.display=e?'inline-block':'none';
+    document.querySelectorAll('.tag').forEach(b=>b.classList.remove('active'));
+    if(e&&e.tag) document.querySelectorAll('.tag').forEach(b=>{if(b.dataset.tag===e.tag)b.classList.add('active');});
+    o.classList.add('show'); o.dataset.y=y; o.dataset.m=m; o.dataset.d=d;
+    document.getElementById('mnote').focus();
+  }
+  function closeModal() { document.getElementById('modal').classList.remove('show'); }
+  function saveModal() {
+    const o=document.getElementById('modal');
+    const y=parseInt(o.dataset.y),m=parseInt(o.dataset.m),d=parseInt(o.dataset.d);
+    const note=document.getElementById('mnote').value.trim(), at=document.querySelector('.tag.active');
+    if(!note&&!at){set(y,m,d,null);}else{set(y,m,d,{note:note||'',tag:at?at.dataset.tag:'other',timestamp:Date.now()});}
+    closeModal();
+  }
+  function delEntry() {
+    const o=document.getElementById('modal'); set(parseInt(o.dataset.y),parseInt(o.dataset.m),parseInt(o.dataset.d),null); closeModal();
+  }
+  function dl() {
+    const s={}; Object.keys(data).sort().forEach(k=>{s[k]=data[k];});
+    const b=new Blob([JSON.stringify(s,null,2)+'\n'],{type:'application/json'}), u=URL.createObjectURL(b), a=document.createElement('a');
+    a.href=u;a.download='overnight-calendar-data.json';document.body.appendChild(a);a.click();document.body.removeChild(a);URL.revokeObjectURL(u);
+  }
+
+  function bind() {
+    document.getElementById('prev').addEventListener('click',()=>{if(--cm<0){cm=11;cy--;}render();});
+    document.getElementById('next').addEventListener('click',()=>{if(++cm>11){cm=0;cy++;}render();});
+    document.getElementById('today').addEventListener('click',()=>{const n=new Date();cy=n.getFullYear();cm=n.getMonth();render();});
+    document.getElementById('cancel').addEventListener('click',closeModal);
+    document.getElementById('save').addEventListener('click',saveModal);
+    document.getElementById('del').addEventListener('click',delEntry);
+    document.querySelectorAll('.tag').forEach(b=>{b.addEventListener('click',()=>{document.querySelectorAll('.tag').forEach(x=>x.classList.remove('active'));b.classList.add('active');});});
+    document.getElementById('dl').addEventListener('click',dl);
+    document.addEventListener('keydown',e=>{if(e.key==='Escape')closeModal();if((e.metaKey||e.ctrlKey)&&e.key==='Enter'&&document.getElementById('modal').classList.contains('show'))saveModal();});
+    document.getElementById('modal').addEventListener('click',e=>{if(e.target===e.currentTarget)closeModal();});
+  }
+
+  (async function init() {
+    const n = new Date(); cy=n.getFullYear(); cm=n.getMonth();
+    updateMoon(); await sync(); render(); bind();
+  })();
+})();
+</script>
+</body>
+</html>

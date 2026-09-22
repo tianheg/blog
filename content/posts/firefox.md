@@ -1,0 +1,163 @@
+---
+title: Firefox
+date: 2022-11-09T15:44:00+08:00
+tags: ['技术']
+---
+
+## 扩展
+### Manifest v3
+
+- https://extensionworkshop.com/documentation/develop/manifest-v3-migration-guide/
+- https://developer.mozilla.org/en-US/docs/Mozilla/Add-ons/WebExtensions/user_interface/Browser_styles#manifest_v3_migration
+
+### Build
+
+#### 如何打开一个新标签
+
+<https://github.com/tianheg/all-my-sites>
+
+[refer](https://github.com/mdn/webextensions-examples/blob/69ae7494bb96825a7310d4900dbd67544b2985e0/open-my-page-button/manifest.json)
+
+```
+    {
+      "background": {
+        "scripts": ["background.js"]
+      },
+      "browser_action": {
+        "default_icon": "48.png"
+      }
+    }
+```
+
+从 Firefox 56 以后，扩展会自动获得自己 origin 的权限，所以不需要 tabs 权限。（[src](https://developer.mozilla.org/en-US/docs/Mozilla/Add-ons/WebExtensions/manifest.json/permissions#host_permissions)）
+
+refer
+
+1. [Browser Extensions - Mozilla | MDN](https://developer.mozilla.org/en-US/docs/Mozilla/Add-ons/WebExtensions)
+2. [Getting started with web-ext | Firefox Extension Workshop](https://extensionworkshop.com/documentation/develop/getting-started-with-web-ext/#installation-section)
+
+### I used
+
+- (not familar) https://github.com/onemen/TabMixPlus
+- automaticDark - Time-Based Theme Changer
+- Cookie AutoDelete
+- Decentraleyes
+- Display #Anchors
+- Gesturefy
+- Github Repo Size
+- Hoppscotch Browser Extension
+- Immersive Translate  - 沉浸式翻译 - 双语对照网页翻译（[GitHub](https://github.com/immersive-translate/immersive-translate/releases/) 下载）
+- OneTab
+- Open in Chrome Browser
+- Plasma Integration
+- Print Friendly & PDF
+- Privacy Badger
+- Proxy SwitchyOmega
+- randomMDN（自行构建）
+- React Developer Tools
+- Refined GitHub
+- Right Links WE
+- RSSHub Radar
+- [Saladict](https://github.com/tianheg/ext-saladict) - Pop-up Dictionary and Page Translator
+- Shortkeys (Custom Keyboard Shortcuts)
+- [Side View](https://github.com/tianheg/side-view)
+- Smart TOC
+- Stylus
+- Support context
+- Swift Selection Search
+- Tampermonkey
+- uBlock Origin
+- Video Speed Controller
+- Vue.js devtools
+- Wappalyzer - Technology profiler
+- Wayback Machine
+- Zoom Page WE
+- DuckDuckGo Privacy Essentials
+- Emoji
+- Extension Inspector
+- Take Webpage Screenshots Entirely - FireShot
+
+## 配置
+
+### 关闭 Reader View
+
+在地址栏输入 `about:config` ，搜索 reader.parse-on-load.enabled ，将其值设为 false。
+
+### 修改扩展是否开启的限制页面列表
+
+https://u.sb/firefox-no-webextensions/
+
+打开 `about:config` ，输入 extensions.webextensions.restrictedDomains，限制域名清单：
+
+```text
+accounts-static.cdn.mozilla.net,accounts.firefox.com,addons.cdn.mozilla.net,addons.mozilla.org,api.accounts.firefox.com,content.cdn.mozilla.net,discovery.addons.mozilla.org,install.mozilla.org,oauth.accounts.firefox.com,profile.accounts.firefox.com,support.mozilla.org,sync.services.mozilla.com
+```
+
+需要添加，在后面加 `,example.com` 即可。
+
+### VPN 配置出错
+
+为 Firefox 的 Proxy SwitchyOmega 扩展加了 gfw list，结果导致
+`PR_END_OF_FILE_ERROR` 错误。属于 VPN 配置问题。
+
+Refers:
+
+- [PR_END_OF_FILE_ERROR: 3 Ways to Fix It](https://www.hostinger.com/tutorials/pr_end_of_file_error)
+- [PR_END_OF_FILE_ERROR | Firefox Support Forum | Mozilla Support](https://support.mozilla.org/en-US/questions/1315880)
+
+### 支持 Wayland
+
+- https://wiki.archlinux.org/title/Firefox#Wayland
+- https://wiki.archlinux.org/title/Environment_variables#Wayland_environment
+
+为 Firefox 添加环境变量： `MOZ_ENABLE_WAYLAND=1` 。
+
+=~/.config/environment.d/envvars.conf= ：
+
+```text
+MOZ_ENABLE_WAYLAND=1
+```
+
+### about:config
+- http://kb.mozillazine.org/About:config_entries
+- https://github.com/arkenfox/user.js
+
+- 允许本地安装未认证扩展文件 set `xpinstall.signatures.required` to false [ref](https://support.mozilla.org/en-US/kb/add-on-signing-in-firefox)
+
+## Firefox v111.1.0 可以打开pdf链接而不是询问是否下载
+## Devtools
+
+用户文档：<https://developer.mozilla.org/en-US/docs/Web#developer_tools_documentation>
+
+工具站：<https://www.canidev.tools/> <https://devtoolstips.org/> <https://css-tricks.com/tag/devtools/> <https://umaar.com/dev-tips/>
+
+- [Some Cross-Browser DevTools Features You Might Not Know | CSS-Tricks - CSS-Tricks](https://css-tricks.com/some-cross-browser-devtools-features-you-might-not-know/)
+
+搜索 DOM 树中的节点：Inspector 下的搜索框，然后 Scroll Into View 跳到对应节点（the node within the viewport）
+
+从 console 访问节点：$0 选中的 DOM 节点；临时变量 Right click -> "Use in Console"
+
+使用徽章可视化元素（[Ffdocs](https://firefox-source-docs.mozilla.org/devtools-user/page_inspector/how_to/examine_and_edit_html/index.html#html-tree)）
+
+给 DOM Node 截图；在响应式模式下截图
+
+Chrome Tip：Inspect the top layer
+
+Firefox Tip: Click label's for attribute, jump to id
+
+## 像Edge一样侧边栏打开网站，让我能始终看到「[现在](*now*)」页，始终提醒我该做什么
+参考资料
+
+- https://github.com/mozilla/side-view
+- https://stackoverflow.com/questions/71551493/how-can-i-open-a-sidebar-link-in-the-same-tab
+- https://stackoverflow.com/questions/1891738/how-to-modify-current-url-location-in-chrome-via-extensions
+- https://github.com/zluca/Sidebar
+- https://github.com/sftblw/Webpage-Sidebar
+
+## Make Firefox fast again
+https://gist.github.com/RubenKelevra/fd66c2f856d703260ecdf0379c4f59db
+
+## Others
+
+- 为了不让Firefox因为未来可能停止开发影响我的使用，想了解Firefox各部分的开发
+- 想找到Firefox浏览器与Chrome相比的不足在哪里，掌握浏览器相关的渲染逻辑，处理逻辑

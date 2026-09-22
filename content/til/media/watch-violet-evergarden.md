@@ -1,0 +1,11 @@
+---
+title: 'Watch Violet Evergarden'
+status: draft
+date: 2022-11-15T15:18:00+08:00
+---
+
+- 番剧：懂得爱的真谛
+- 外传
+- 剧场版
+
+我也不太懂爱，不懂人情世故。圆滑

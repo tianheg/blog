@@ -1,0 +1,10 @@
+{{/* Individual taxonomy term page (e.g., a specific tag) */}}
+{{ define "main" }}
+<div>
+  <h1 class="text-2xl font-bold mb-8">{{ .Title }}</h1>
+  {{ range .Pages.GroupByDate "2006" }}
+    <h2 class="text-xl font-semibold mt-10 mb-4">{{ .Key }}</h2>
+    {{ partial "content/post-list-item.html" (dict "$" .) }}
+  {{ end }}
+</div>
+{{ end }}

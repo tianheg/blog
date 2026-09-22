@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <title>Life Calendar</title>
+  <link rel="stylesheet" href="base.css">
+  <script src="voodoo.js" defer></script>
+</head>
+
+<body>
+  <main class="flex flex-wrap justify-around p-2">
+    <noscript>
+      Sorry pal, but this won't work without JavaScript. You are probably doing that for privacy reasons, and I do
+      respect that. You can download this website, inspect the source code, and run it locally. Or, you can whitelist it
+      in your browser/script blocker. I don't have any third-party trackers on this website, and the code is
+      open-sourced, so there's not much to be worried about.
+    </noscript>
+    <section class="grid-container"></section>
+    <section class="text-container">
+      <h1 class="border-b-3 mb-0">Life Calendar</h1>
+      <p>There are 2,080 rectangles.</p>
+      <p>Each rectangle represents 1 week of a 40-year lifespan.</p>
+
+      <div class="year-input">
+        <label for="birth-year">Enter your birth year:</label>
+        <input type="number" id="birth-year" min="1900" max="2025">
+        <button id="update-grid">Update</button>
+      </div>
+
+      <div class="flex flex-wrap items-center">
+        <div class="grid-item bg-time-passed m-1" style="width: 1.5rem; height: 1.5rem;"></div>
+        <p>Weeks that have already passed</p>
+      </div>
+      <div class="flex flex-wrap items-center">
+        <div class="legend-current-week bg-time-passed m-1"
+          style="width: 1.5rem; height: 1.5rem; background-color: var(--current-week); border: .15rem solid #d63636; border-radius: 0.2rem;">
+        </div>
+        <p>Current week</p>
+      </div>
+      <div class="flex flex-wrap items-center">
+        <div class="grid-item m-1"
+          style="width: 1.5rem; height: 1.5rem; border: .15rem solid var(--gray); background-color: transparent;"></div>
+        <p>Weeks you have left (assuming a 40-year lifespan)</p>
+      </div>
+
+      <section class="text-center p-1 mt-1">
+        <a href="?full_screen=true" title="Toggle full screen (Cmd/Ctrl + E)" class="m-1">
+          Full screen
+        </a>
+        &#x25AA;
+        <a href="./day/" title="View day calendar" class="m-1">
+          Day View
+        </a>
+        &#x25AA;
+        <button id="print-button" class="print-btn m-1" title="Save as PDF (Cmd/Ctrl + P)">
+          Save as PDF
+        </button>
+      </section>
+    </section>
+  </main>
+</body>
+
+</html>

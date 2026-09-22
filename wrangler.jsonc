@@ -1,0 +1,22 @@
+{
+  "name": "blog",
+  "compatibility_date": "2025-06-08",
+  "main": "./scripts/worker.js",
+  "build": {
+    "command": "./scripts/build.sh"
+  },
+  "assets": {
+    "directory": "./public",
+    "not_found_handling": "404-page",
+    "binding": "ASSETS"
+  },
+  "ai": {
+    "binding": "AI"
+  },
+  "r2_buckets": [
+    {
+      "binding": "WEREAD",
+      "bucket_name": "weread"
+    }
+  ]
+}

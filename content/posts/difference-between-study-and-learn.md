@@ -1,0 +1,26 @@
+---
+title: 'study和learn的区别'
+date: 2023-02-01T09:21:00+08:00
+tags: ['英文用词']
+---
+
+study英语意为to read, memorize facts, attend school, etc。learn英语意为to gain knowledge or skill by studying。
+
+当我们study某事物时，还没有learned（学习过）。当我们studying某事物时，会读书或文章，这些内容我们还不知道；或者用速记卡片记忆事实；或者在课堂上听老师讲课；再或者可以看视频。
+
+当我们learn某事物时，是要把它变成自己的熟知的事情的一部分。当我们很熟悉某个主题，或者对某些知识的积累很丰富时，我们可以说出：我已经learned它们。
+
+> Learning is gaining knowledge by studying, and studying is done to learn things.
+
+一些例子：
+
+- He learned about computers by reading a book.
+- He studied computer science in college.
+- He is learning a lot about patient care in his nursing classes.
+- She spent an hour every night studying her new vocabulary words.
+- Study the definitions of these words to learn them.
+- She learned how to do her job very quickly.
+- Some people learn best by reading books and others learn best by listening to lectures in class.
+- The children learned several facts about cows in class this week.
+
+来自：<https://www.britannica.com/dictionary/eb/qa/How-to-Use-Learn-and-Study->
