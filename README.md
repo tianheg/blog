@@ -51,7 +51,6 @@ blog/
 │   ├── posts/           # 文章专用模板（single.html）
 │   ├── til/             # TIL 专用模板（baseof, list, single）
 │   ├── footprints/      # 足迹地图（single.html）
-│   ├── important-now/   # 当前重点（single.html）
 │   ├── graph/           # 知识图谱（list.json.json）
 │   ├── section/         # 分类页（graph.html）
 │   ├── baseof.html      # 所有页面基础框架

@@ -1,7 +1,6 @@
 ---
 title: '目前最重要'
 description: 'Personal mission, goals, and learning roadmap'
-type: important-now
 ---
 
 上次更新：260617（追加：深圳新能源硬件求职岗位表 + 12题自测）
