@@ -45,17 +45,16 @@ blog/
 │   │   ├── science/     # 科学
 │   │   └── history/     # 历史
 │   └── *.md             # 独立页面（about, now, projects 等）
-├── layouts/             # Hugo 模板
-│   ├── _default/        # 基础模板（single.md.md）
-│   ├── _partials/       # 可复用组件（head, components）
+├── layouts/             # Hugo 模板（0.146+ 新结构：无 _default，标识写在文件名里）
+│   ├── _partials/       # 可复用组件（head, components, functions）
 │   ├── posts/           # 文章专用模板（single.html）
 │   ├── til/             # TIL 专用模板（baseof, list, single）
 │   ├── footprints/      # 足迹地图（single.html）
-│   ├── graph/           # 知识图谱（list.json.json）
-│   ├── section/         # 分类页（graph.html）
+│   ├── graph/           # 知识图谱页（list.html + list.json.json）
 │   ├── baseof.html      # 所有页面基础框架
 │   ├── home.html        # 首页
 │   ├── single.html      # 独立单页（About, Now 等）
+│   ├── single.markdown.md  # 纯文本源文输出（URL 后加 .md）
 │   ├── section.html     # 分类列表页
 │   ├── taxonomy.html    # 标签聚合
 │   ├── term.html        # 单标签详情
@@ -309,7 +308,7 @@ hover = 实色 `currentColor`。此前是「静止无下划线、只在 `prose-a
 | 用途 | 值 | 落点 |
 |---|---|---|
 | 正文（文章 / TIL / 独立页） | `prose-p:text-[16px] prose-p:leading-[1.85]`（`li` 同） | `posts/single.html`、`single.html`、`til/single.html` 三处容器 |
-| 列表页条目 | `text-[15px]` | `post-list-item.html`、`home.html`、`taxonomy.html`、`til/list.html`、`partials/til/dashboard.html` |
+| 列表页条目 | `text-[15px]` | `post-list-item.html`、`home.html`、`taxonomy.html`、`til/list.html`、`_partials/til/dashboard.html` |
 | 元信息（日期 / 篇数计数） | `text-[13px] tabular-nums text-gray-600 dark:text-gray-400` | 同上 |
 | 表格 / 代码块 | 15px（移动端 14）/ 14px | `assets/css/table.css` / `prose.css` |
 | 页面 H1 / H2 | 由 prose 的 em 比例决定（16px 基准 → h1 36 / h2 24） | 模板只定 h1 的 `text-[28px]`（`/posts/`、`/til/`）等少数几处 |
@@ -388,7 +387,7 @@ npm run embed
 任意单页 URL 后加 `.md` 即得该页纯文本源文：`/posts/2019/` → `/posts/2019.md`，`/til/software/a11y/` → `/til/software/a11y.md`。
 
 - 由 Hugo 内置 `markdown` output format 生成（`hugo.yaml` 的 `outputFormats.markdown` 开 `ugly: true` —— 文件落在 `posts/2019.md`，而不是默认的 `posts/2019/index.md`）
-- 模板 `layouts/_default/single.md.md` 输出 `# 标题` + `.RawContent`（源文件正文）：不含 front matter，wikilink 保持 `[[…]]` 原样，短代码不展开
+- 模板 `layouts/single.markdown.md` 输出 `# 标题` + `.RawContent`（源文件正文）：不含 front matter，wikilink 保持 `[[…]]` 原样，短代码不展开
 - 页面 `<head>` 带 `<link rel="alternate" type="text/markdown">`，便于阅读器/爬虫/LLM 发现（`_partials/head/markdown-link.html`）
 - `static/_headers` 把 `*.md` 的 Content-Type 覆盖为 `text/plain; charset=utf-8`：CF 对 `.md` 默认发 `text/markdown` 且**不带 charset**，浏览器会按 latin-1 解码 → 中文乱码。（注意：CF 静态资产是 **assets-first**，Worker 脚本收不到资产请求，改不了这些响应头，必须走 `_headers`）
 - 只对 `kind=page` 生效（`outputs.page`）；首页、列表页、图谱页等非 md 生成的页面没有
@@ -430,6 +429,7 @@ npm run embed
 
 ### 2026
 
+- 2026-09-24 layouts 全量迁到 Hugo v0.146+ 新模板结构：删除 `_default/`、`partials/`、`section/` 三个兼容目录，改为 `single.markdown.md`（纯文本源文）、`_partials/til/dashboard.html`、`graph/list.html`（图谱页）——构建产物逐字节不变
 - 2026-09-20 全站强调色统一为低饱和墨蓝 `ink`，TIL 绿色系退役；小字对比度补齐 AA 缺口（1362 处）
 - 2026-09-20 正文链接改常驻淡下划线（触屏设备此前完全看不到链接）；标签规范定为栏目级分类，移除工具/语言关键词标签
 - 2026-09-18 单页支持纯文本源文输出（URL 后加 `.md`）；weread 面板改由 R2 托管；构建加伪 ASCII 检查闸门；posts 页加年度发文热力图

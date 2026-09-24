@@ -6,7 +6,7 @@
 
   发布路径由 hugo.yaml 的 outputFormats.markdown（ugly: true）决定：
   /posts/foo/ → /posts/foo.md（而不是 /posts/foo/index.md）。
-  模板查找名：single.md.md（suffix=md，output format=markdown）。 */ -}}
+  模板查找名：single.markdown.md（layout=single，output format=markdown，suffix=md）。 */ -}}
 # {{ .Title }}
 
 {{ .RawContent | strings.TrimSpace }}
