@@ -29,8 +29,9 @@
     {{ partial "content/render-content" .Content }}
   </div>
 
-  {{/* --- 关系区：宽屏在右栏（边读边见），窄屏留在正文底部 --- */}}
-  <div class="xl:hidden">
+  {{/* --- 关系区：宽屏在右栏（边读边见），窄屏留在正文底部。
+       断点必须与右栏的显示阈值一致（min-[1400px]）：不一致时 1280–1399 会两边都不显示 --- */}}
+  <div class="min-[1400px]:hidden">
     {{ partial "content/backlinks.html" . }}
     {{ partial "content/related.html" . }}
   </div>
