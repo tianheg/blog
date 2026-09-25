@@ -5,62 +5,124 @@ import { SPINNER_SVG, ERROR_SVG, EXPAND_SVG, SHRINK_SVG } from '../lib/icons';
 
 // ============== Configuration Constants ==============
 
+// ============== Theme ==============
+
+type ThemeName = 'light' | 'dark';
+
+/**
+ * Canvas 配色：vis-network 画在 <canvas> 上，Tailwind 的 dark: 变体管不到，
+ * 必须两套色表 + matchMedia 监听自己切。
+ *
+ * 暗色档取站点 ink 阶（#88a1bc = ink-400，在暗底 #121c22 上 6.48:1），
+ * 不用蓝色 hover（#3b82f6）——它在暗底上跳到正文前面。
+ * 亮色档保持 2026-09 原样，不动已上线的观感。
+ */
+interface GraphPalette {
+  nodeBg: string;
+  nodeBorder: string;
+  nodeHoverBg: string;
+  nodeHoverBorder: string;
+  label: string;
+  edge: string;
+  edgeHover: string;
+  faded: string;
+}
+
+const GRAPH_PALETTES: Record<ThemeName, GraphPalette> = {
+  light: {
+    nodeBg: '#404040',
+    nodeBorder: '#404040',
+    nodeHoverBg: '#3b82f6',
+    nodeHoverBorder: '#3d5b7a',
+    label: '#0f172a',
+    edge: '#d4d4d4',
+    edgeHover: '#3b82f6',
+    faded: '#d4d4d4'
+  },
+  dark: {
+    nodeBg: '#88a1bc',
+    nodeBorder: '#88a1bc',
+    nodeHoverBg: '#dfe9f4',
+    nodeHoverBorder: '#a8bdd4',
+    label: '#cbd5e1',
+    edge: '#374151',
+    edgeHover: '#88a1bc',
+    faded: '#39424d'
+  }
+};
+
+const DARK_MODE_QUERY = '(prefers-color-scheme: dark)';
+
+/**
+ * 站点没有手动主题开关，靠 `color-scheme: light dark` + 系统偏好，
+ * 所以这里直接读 matchMedia，不查 DOM class。
+ */
+function detectTheme(): ThemeName {
+  return window.matchMedia(DARK_MODE_QUERY).matches ? 'dark' : 'light';
+}
+
 /**
  * Default network visualization options for vis-network.
  * Defines the appearance and behavior of nodes, edges, and interactions.
  */
-const NETWORK_OPTIONS: Options = {
-  nodes: {
-    shape: 'dot',
-    color: {
-      background: '#404040',
-      border: '#404040',
-      hover: {
-        background: '#3b82f6',
-        border: '#3d5b7a'
+function networkOptions(theme: ThemeName): Options {
+  const p = GRAPH_PALETTES[theme];
+  return {
+    nodes: {
+      shape: 'dot',
+      color: {
+        background: p.nodeBg,
+        border: p.nodeBorder,
+        hover: {
+          background: p.nodeHoverBg,
+          border: p.nodeHoverBorder
+        }
+      },
+      font: {
+        face: "'LatoLatinWeb', sans-serif",
+        color: p.label,
+        size: 11
+      },
+      scaling: {
+        min: 4,
+        max: 30
       }
     },
-    font: {
-      face: "'LatoLatinWeb', sans-serif",
-      color: '#0f172a',
-      size: 11
+    edges: {
+      color: {
+        color: p.edge,
+        hover: p.edgeHover
+      },
+      hoverWidth: 0,
+      smooth: false
     },
-    scaling: {
-      min: 4,
-      max: 30
+    groups: {
+      useDefaultGroups: false,
+      posts: {},
+      notes: {}
+    },
+    interaction: {
+      hover: true
     }
-  },
-  edges: {
-    color: {
-      color: '#d4d4d4',
-      hover: '#3b82f6'
-    },
-    hoverWidth: 0,
-    smooth: false
-  },
-  groups: {
-    useDefaultGroups: false,
-    posts: {},
-    notes: {}
-  },
-  interaction: {
-    hover: true
-  }
-};
+  };
+}
 
 /**
  * Visual styling options for nodes that are not directly connected to the hovered node.
  * These nodes are faded out to emphasize the connection path.
  */
-const FADED_NODE_OPTIONS: NodeOptions = {
-  color: {
-    background: '#d4d4d4',
-    border: '#d4d4d4'
-  },
-  font: {
-    color: '#d4d4d4'
-  }
-};
+function fadedNodeOptions(theme: ThemeName): NodeOptions {
+  const faded = GRAPH_PALETTES[theme].faded;
+  return {
+    color: {
+      background: faded,
+      border: faded
+    },
+    font: {
+      color: faded
+    }
+  };
+}
 
 /**
  * Configuration for the Intersection Observer used to implement lazy loading.
@@ -104,15 +166,18 @@ export default class ContentNetworkGraph extends HTMLElement {
   private _messageEl: HTMLDivElement;
   private _actionsEl: HTMLUListElement;
   private _network: Network | null = null;
+  private _nodes: ReturnType<Graph['data']>['nodes'] | null = null;
   private _observer: IntersectionObserver | null = null;
   private _heightClass: string;
   private _expanded: boolean = false;
+  private _theme: ThemeName = detectTheme();
 
   constructor() {
     super();
     this._heightClass = this.extractHeightClass();
     this.setupBaseStyles();
     this.createElements();
+    this.setupThemeListener();
     this.observe();
   }
 
@@ -143,10 +208,27 @@ export default class ContentNetworkGraph extends HTMLElement {
       'relative',
       'border',
       'border-neutral-200',
+      'dark:border-gray-800',
       'rounded-sm',
       'block',
-      'bg-white'
+      'bg-white',
+      'dark:bg-gray-900'
     );
+  }
+
+  /**
+   * Keeps the canvas in sync when the OS theme flips.
+   *
+   * Tailwind 的 dark: 变体只覆盖 DOM，canvas 里的节点/连线/标签色得自己重设，
+   * 所以监听 matchMedia 并对已建好的 network 调 setOptions。
+   * 节点若在 hover 中被单独改过色（faded），blur 时用的是当前主题的色表，无需额外处理。
+   */
+  private setupThemeListener(): void {
+    window.matchMedia(DARK_MODE_QUERY).addEventListener('change', () => {
+      this._theme = detectTheme();
+      this.paintNodes();
+      this._network?.setOptions(networkOptions(this._theme));
+    });
   }
 
   /**
@@ -226,7 +308,37 @@ export default class ContentNetworkGraph extends HTMLElement {
    */
   private renderNetwork(data: ReturnType<Graph['data']>): void {
     this._networkEl.classList.add('absolute', 'h-full', 'w-full', 'z-40');
-    this._network = new Network(this._networkEl, data, NETWORK_OPTIONS);
+    this._nodes = data.nodes;
+    this._network = new Network(this._networkEl, data, networkOptions(this._theme));
+    // 构造后再刷一次：vis 建网络时会拿组默认色盖掉节点自带色，
+    // 构造前写的数据集色不生效（热切换后走 update 路径才生效，实测）。
+    this.paintNodes();
+  }
+
+  /**
+   * Writes the current theme's color onto every node.
+   *
+   * 只靠 networkOptions 的全局 `nodes.color` 没用：节点带 `group`（Graph.ts 用 page.section 当组名），
+   * vis 会拿组默认色 #97C2FC 盖掉全局设置 —— 实测改色表前后节点一直是 vis 默认浅蓝。
+   * 逐节点写入与 hover 淡出用的是同一套机制，可靠（1549 个节点，量级与 hover 一致）。
+   */
+  private paintNodes(): void {
+    const nodes = this._nodes;
+    if (!nodes) return;
+    const p = GRAPH_PALETTES[this._theme];
+    nodes.forEach((node) => {
+      nodes.update({
+        id: node.id,
+        color: {
+          background: p.nodeBg,
+          border: p.nodeBorder,
+          hover: {
+            background: p.nodeHoverBg,
+            border: p.nodeHoverBorder
+          }
+        }
+      });
+    });
   }
 
   /**
@@ -265,7 +377,7 @@ export default class ContentNetworkGraph extends HTMLElement {
 
       data.nodes.forEach((node) => {
         if (node.id && !connectedNodes.includes(node.id)) {
-          data.nodes.update({ id: node.id, ...FADED_NODE_OPTIONS });
+          data.nodes.update({ id: node.id, ...fadedNodeOptions(this._theme) });
         }
       });
     });
@@ -273,7 +385,7 @@ export default class ContentNetworkGraph extends HTMLElement {
     // Restore all nodes to their original appearance when no longer hovering
     this._network!.on('blurNode', () => {
       data.nodes.forEach((node) => {
-        data.nodes.update({ id: node.id, ...NETWORK_OPTIONS.nodes });
+        data.nodes.update({ id: node.id, ...networkOptions(this._theme).nodes });
       });
     });
   }
@@ -335,6 +447,7 @@ export default class ContentNetworkGraph extends HTMLElement {
       'items-center',
       'absolute',
       'bg-white',
+      'dark:bg-gray-900',
       'w-full',
       'h-full',
       'text-lg',
@@ -402,8 +515,11 @@ export default class ContentNetworkGraph extends HTMLElement {
     const btn = document.createElement('button');
     btn.classList.add(
       'bg-white',
+      'dark:bg-gray-800',
       'text-gray-700',
+      'dark:text-gray-200',
       'border',
+      'dark:border-gray-700',
       'rounded-sm',
       'p-1',
       'opacity-60',
