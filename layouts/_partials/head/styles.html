@@ -42,3 +42,16 @@
     {{ end }}
   {{ end }}
 {{ end }}
+
+{{/* /footprints/ 的 Leaflet 地图暗色适配。
+     全局加载是有意的：本 partial 走 partialCached（单 key），写按页判断会拿到第一页的缓存；
+     而规则只匹配 .leaflet-* 选择器，只有 /footprints/ 命中，其他页面零开销。 */}}
+{{ with resources.Get "css/map.css" | resources.Minify }}
+  {{ if hugo.IsDevelopment }}
+    <link rel="stylesheet" href="{{ .RelPermalink }}?v={{ now.Unix }}">
+  {{ else }}
+    {{ with . | fingerprint }}
+      <link rel="stylesheet" href="{{ .RelPermalink }}" integrity="{{ .Data.Integrity }}" crossorigin="anonymous">
+    {{ end }}
+  {{ end }}
+{{ end }}

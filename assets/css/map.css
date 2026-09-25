@@ -1,0 +1,64 @@
+/* /footprints/ 的 Leaflet 地图：暗色适配（2026-09-26）
+   ─────────────────────────────────────────────────────────────────────
+   为什么在 CSS 层而不是改模板/内容：
+   leaflet.css 是 content/footprints.md 里从 unpkg 引入的（正文内 <link>），
+   内容 append-only 不动；它加载晚于本文件 → 覆盖选择器必须**抬特异性**
+   （`body` 前缀 / 补上 `.leaflet-container` 层），靠源顺序会输。
+
+   为什么全站加载：head/styles.html 是 `partialCached`（单 key），
+   在里面写按页判断会拿到第一页的缓存。规则只匹配 `.leaflet-*`，
+   全站只有 /footprints/ 会命中，其他页面零影响。
+
+   亮色模式一行都不动 —— 全部包在 @media (prefers-color-scheme: dark) 里。 */
+
+@media (prefers-color-scheme: dark) {
+  /* 容器底色：瓦片之间的缝隙不该露默认的 #ddd */
+  body .leaflet-container {
+    background: #121c22;
+  }
+
+  /* 瓦片反色成暗色地图。OSM 只有栅格图、没有官方暗色样式，只能滤镜近似：
+     海陆/国界/地名仍可读，代价是海洋偏青蓝（2026-09-26 截图确认过） */
+  body .leaflet-container .leaflet-tile {
+    filter: invert(1) hue-rotate(180deg) brightness(0.82) contrast(0.92) saturate(0.75);
+  }
+
+  /* 缩放控件（leaflet 默认白底深字） */
+  body .leaflet-bar a {
+    background-color: #1f2937;
+    color: #d1d5db;
+    border-bottom-color: #374151;
+  }
+  body .leaflet-bar a:hover {
+    background-color: #374151;
+    color: #e5e7eb;
+  }
+  body .leaflet-bar a.leaflet-disabled {
+    background-color: #111827;
+    color: #4b5563;
+  }
+
+  /* 版权条：OSM 要求保留署名，只换配色、不改可见性。
+     注意 leaflet 自己的规则是 `.leaflet-container .leaflet-control-attribution`（0,2,0），
+     只写 `body .leaflet-control-attribution`（0,1,1）压不住 —— 实测仍是白的 */
+  body .leaflet-container .leaflet-control-attribution {
+    background: rgba(18, 28, 34, 0.85);
+    color: #9ca3af;
+  }
+  body .leaflet-container .leaflet-control-attribution a {
+    color: #88a1bc;
+  }
+
+  /* 点位弹窗 */
+  body .leaflet-popup-content-wrapper,
+  body .leaflet-popup-tip {
+    background: #1f2937;
+    color: #e5e7eb;
+  }
+  body .leaflet-popup-content a {
+    color: #88a1bc;
+  }
+  body .leaflet-container a.leaflet-popup-close-button {
+    color: #9ca3af;
+  }
+}
