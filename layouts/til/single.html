@@ -17,6 +17,17 @@
   </div>
   {{ end }}
 
+  {{/* --- 窄屏目录：右栏要 ≥1400px 才出现（内容列 790 居中、侧栏悬挂，1280–1399 放不下）
+       不加这个的话那一段宽度里 272/567 篇带目录的笔记会完全没有目录 --- */}}
+  {{ if gt (len .TableOfContents) 50 }}
+  <details class="min-[1400px]:hidden mb-8 rounded-lg border border-gray-200 dark:border-gray-800">
+    <summary class="cursor-pointer px-4 py-3 text-sm font-medium text-gray-700 dark:text-gray-300 select-none">本页内容</summary>
+    <div class="til-toc px-4 pb-4">
+      {{ .TableOfContents }}
+    </div>
+  </details>
+  {{ end }}
+
   {{/* --- Content --- */}}
   <div class="prose-links prose prose-gray dark:prose-invert 
               prose-p:text-[16px] prose-p:leading-[1.85]
