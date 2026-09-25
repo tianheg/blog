@@ -20,13 +20,30 @@
     <h1 class="text-[28px] font-bold tracking-tight">文章<span class="text-[13px] font-normal text-gray-600 dark:text-gray-400"> · {{ len $pages }} 篇</span></h1>
   {{ end }}
 
-  {{/* Default section listing: group by year */}}
+  {{/* Default section listing: group by year。
+       /posts/ 是 4 万像素的长页（960 篇），默认只展开「当年」——其余年份收进 <details>，
+       点一下就地展开看，不用一路滚。其他 section 保持原样（无折叠）。 */}}
+  {{ $currentYear := now.Format "2006" }}
   {{ range $pages.GroupByDate "2006" }}
-    <h2 class="text-xl font-semibold mt-10 mb-4">{{ .Key }}{{ if $isPosts }}<span class="text-[13px] font-normal text-gray-600 dark:text-gray-400"> · {{ len .Pages }} 篇</span>{{ end }}</h2>
     {{ if $isPosts }}
-      {{ partial "posts/year-heatmap.html" (dict "year" .Key "pages" .Pages) }}
-    {{ end }}
+    {{ $isOpen := eq .Key $currentYear }}
+    <details class="group border-t border-gray-200 dark:border-gray-800" {{ if $isOpen }}open{{ end }}>
+      <summary class="flex items-baseline gap-2.5 cursor-pointer list-none py-4 select-none rounded-sm focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-ink-500">
+        <svg class="w-3 h-3 shrink-0 self-center text-gray-600 dark:text-gray-400 transition-transform group-open:rotate-90"
+             fill="none" stroke="currentColor" viewBox="0 0 24 24" aria-hidden="true">
+          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M9 5l7 7-7 7"/>
+        </svg>
+        <h2 class="text-xl font-semibold">{{ .Key }}<span class="text-[13px] font-normal text-gray-600 dark:text-gray-400"> · {{ len .Pages }} 篇</span></h2>
+      </summary>
+      <div class="pb-6">
+        {{ partial "posts/year-heatmap.html" (dict "year" .Key "pages" .Pages) }}
+        {{ partial "content/post-list-item.html" (dict "$" .) }}
+      </div>
+    </details>
+    {{ else }}
+    <h2 class="text-xl font-semibold mt-10 mb-4">{{ .Key }}</h2>
     {{ partial "content/post-list-item.html" (dict "$" .) }}
+    {{ end }}
   {{ end }}
 </div>
 

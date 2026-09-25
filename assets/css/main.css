@@ -151,6 +151,48 @@ header {
   -webkit-backdrop-filter: blur(8px);
 }
 
+/* ── 统一内容列（2026-09-25 P0）────────────────────────────────────
+   全站唯一的内容列定义：790px = 文本 750 + 两侧各 20 padding。
+   header / main / footer / TIL 的 main 都用这一个类，改宽度只改这里。
+   注意：这条是未包 @layer 的原生 CSS，优先级高于 Tailwind 工具类 —— 这是刻意的
+   （与 body/header 的规则同理），改类上的 max-w-* 不会有效果，要改就改这里。 */
+.page-col {
+  max-width: 790px;     /* 文本 750 + 两侧各 20 padding（按目标值直接写 px，避免 rem 换算歧义） */
+  margin-inline: auto;
+  padding-inline: 1.25rem;
+}
+
+/* Tailwind Typography 的 .prose 自带 max-width:65ch（16px 下 ≈710px），会把 TIL 笔记正文
+   卡得比全站内容列窄。这里用未分层的原生规则覆盖回整列（未分层 > @layer utilities，确定性生效）。 */
+.prose.prose-links {
+  max-width: none;
+}
+
+/* ── 移动端菜单面板：实心底色 ──────────────────────────────────────
+   用户明确要求「盖住正文」，不要透明/毛玻璃。先给纯色兜底，支持
+   light-dark() 的浏览器再换成主题 token（不支持时上面的兜底值仍然有效）。 */
+#mobile-menu {
+  background-color: #f7f5f3;  /* 浅色主题暖纸 */
+}
+
+@supports (background-color: light-dark(#fff, #000)) {
+  #mobile-menu {
+    background-color: var(--color-base-100);
+  }
+}
+
+@media (prefers-color-scheme: dark) {
+  #mobile-menu {
+    background-color: #121c22;  /* 暗色主题底色 */
+  }
+
+  @supports (background-color: light-dark(#fff, #000)) {
+    #mobile-menu {
+      background-color: var(--color-base-100);
+    }
+  }
+}
+
 :focus-visible {
   outline: 2px solid #6783a1; /* ink-500：非文本对比 3.62:1 on 暖纸，满足 3:1 门槛 */
   outline-offset: 2px;
@@ -160,10 +202,8 @@ header {
 
 @media (max-width: 640px) {
   nav a { font-size: 1rem; }
-  header .max-w-3xl,
-  main.max-w-3xl {
-    padding-left: 0.75rem;
-    padding-right: 0.75rem;
+  .page-col {
+    padding-inline: 0.75rem;
   }
 }
 

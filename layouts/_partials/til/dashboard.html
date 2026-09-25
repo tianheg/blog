@@ -8,25 +8,8 @@
   {{ $totalMin = add $totalMin .ReadingTime }}
 {{ end }}
 
-{{/* Category distribution (by file count) */}}
-{{ $catAgg := dict }}
-{{ range $tilPages }}
-  {{ $sec := .CurrentSection }}
-  {{ $t := $sec.Title }}
-  {{ $cur := index $catAgg $t | default (dict "count" 0 "url" "") }}
-  {{ $catAgg = merge $catAgg (dict $t (dict "count" (add $cur.count 1) "url" $sec.RelPermalink)) }}
-{{ end }}
-
-{{ $sortedCats := slice }}
-{{ range $t, $v := $catAgg }}
-  {{ $sortedCats = $sortedCats | append (dict "name" $t "count" $v.count "url" $v.url) }}
-{{ end }}
-{{ $sortedCats = sort $sortedCats "count" "desc" }}
-
-{{ $maxCount := 0 }}
-{{ range $sortedCats }}
-  {{ if gt .count $maxCount }}{{ $maxCount = .count }}{{ end }}
-{{ end }}
+{{/* Category distribution chart 已移除（2026-09-25）：与左栏分类树是同一份数据的两种画法，
+     比例感改为折进左栏分类项的细条（见 layouts/til/baseof.html）。 */}}
 
 {{/* Stats — 无框大字号，不用卡片容器 */}}
 <div class="flex items-baseline gap-10 mb-10">
@@ -39,26 +22,6 @@
     <div class="text-[13px] text-gray-600 dark:text-gray-400 mt-1.5">累计阅读</div>
   </div>
 </div>
-
-{{/* Category bar chart — bar width = file count */}}
-{{ if $sortedCats }}
-<div class="mb-10">
-  <h3 class="text-[13px] font-medium text-gray-900 dark:text-gray-100 mb-3">分类分布</h3>
-  <div class="space-y-1.5">
-    {{ range $sortedCats }}
-    <a href="{{ .url }}"
-       class="group flex items-center gap-3 rounded-md -mx-2 px-2 py-1 transition-colors hover:bg-gray-50 dark:hover:bg-gray-800/40">
-      <span class="text-[15px] text-gray-600 dark:text-gray-400 w-28 shrink-0 truncate group-hover:text-ink-600 dark:group-hover:text-ink-400 transition-colors" title="{{ .name }}">{{ .name }}</span>
-      <div class="flex-1 h-1.5 bg-gray-100 dark:bg-gray-800 rounded-full overflow-hidden">
-        {{ $pct := 0 }}{{ if gt $maxCount 0 }}{{ $pct = div (mul .count 100) $maxCount }}{{ end }}
-        <div class="h-full bg-ink-500/50 dark:bg-ink-400/40 rounded-full" style="width: {{ $pct }}%"></div>
-      </div>
-      <span class="text-[13px] text-gray-600 dark:text-gray-400 w-8 text-right shrink-0 tabular-nums">{{ .count }}</span>
-    </a>
-    {{ end }}
-  </div>
-</div>
-{{ end }}
 
 {{/* Recent additions — by creation date */}}
 {{ $recent := sort $tilPages "Date" "desc" | first 10 }}
