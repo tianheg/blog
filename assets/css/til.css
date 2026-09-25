@@ -227,3 +227,31 @@
     background: #111827;
   }
 }
+
+/* ── 窄屏目录（<1400px 时替代右栏，见 til/single.html 的 details）
+   Hugo 生成的 TableOfContents 是 <nav id="TableOfContents"><ul><li><a>，
+   在未包 @layer 的这里给紧凑排版；选择器带类名，稳赢 typography 的 :where() 规则。 */
+.til-toc nav > ul,
+.til-toc ul {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+}
+.til-toc ul ul {
+  margin: 0.25rem 0 0.25rem 0.9rem;
+}
+.til-toc li {
+  margin: 0.3rem 0;
+}
+.til-toc a {
+  font-size: 0.875rem;
+  line-height: 1.5;
+  color: #364153;
+  text-decoration: none;
+}
+.til-toc a:hover {
+  text-decoration: underline;
+}
+@media (prefers-color-scheme: dark) {
+  .til-toc a { color: #c3ccd9; }
+}
