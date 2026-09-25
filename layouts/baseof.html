@@ -80,19 +80,15 @@
 
   {{- if and .Page.File (eq .Page.File.Path "about.md") }}<div id="page-content">{{ end }}
 
-  <div class="border-b border-gray-200 dark:border-gray-800">
-  <header class="sticky py-0 top-0 z-1">
-    <div class="max-w-3xl mx-auto px-5">
-    {{- partial "layout/header.html" . -}}
-    </div>
-  </header>
-  </div>
-  <main id="main-content" class="max-w-3xl mx-auto px-5 mt-10">
+  {{/* 站点 header —— 唯一实现，两个 baseof 共用（见 _partials/layout/site-header.html） */}}
+  {{- partial "layout/site-header.html" . -}}
+
+  <main id="main-content" class="page-col mt-10">
     {{- block "main" . }}{{- end }}
   </main>
 
   {{ if .IsHome }}
-  <footer class="max-w-3xl mx-auto px-5 mt-16 pb-8 text-sm text-gray-600 dark:text-gray-400">
+  <footer class="page-col mt-16 pb-8 text-sm text-gray-600 dark:text-gray-400">
     <p>© 2018–{{ now.Format "2006" }} tianhe · <a href="/index.xml" class="hover:text-gray-900 dark:hover:text-gray-100 transition-colors" title="RSS">RSS</a></p>
   </footer>
   {{ end }}
@@ -116,12 +112,24 @@
     <!-- Inlined: mobile menu + back-to-top (was TS components) -->
     <script defer>
     (function(){
-      // Mobile menu
+      // Mobile menu（与 TIL baseof 同一份实现：含 hamburger ↔ X 图标切换）
       var btn = document.getElementById('menu-btn');
       var menu = document.getElementById('mobile-menu');
       if (btn && menu) {
-        var open = function(){ btn.setAttribute('aria-expanded','true'); menu.classList.remove('hidden'); };
-        var close = function(){ btn.setAttribute('aria-expanded','false'); menu.classList.add('hidden'); };
+        var lines = btn.querySelectorAll('.menu-line');
+        var xs = btn.querySelectorAll('.menu-x');
+        var open = function(){
+          btn.setAttribute('aria-expanded','true');
+          menu.classList.remove('hidden');
+          lines.forEach(function(l){ l.classList.add('hidden'); });
+          xs.forEach(function(x){ x.classList.remove('hidden'); });
+        };
+        var close = function(){
+          btn.setAttribute('aria-expanded','false');
+          menu.classList.add('hidden');
+          lines.forEach(function(l){ l.classList.remove('hidden'); });
+          xs.forEach(function(x){ x.classList.add('hidden'); });
+        };
         btn.addEventListener('click', function(){
           btn.getAttribute('aria-expanded') === 'true' ? close() : open();
         });
