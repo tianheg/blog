@@ -145,10 +145,39 @@ body {
 h1, h2, h3, h4 { text-wrap: balance; }
 p { text-wrap: pretty; }
 
-header {
-  background-color: inherit;
-  backdrop-filter: blur(8px);
-  -webkit-backdrop-filter: blur(8px);
+/* header 背景：以前这里是 `header { background-color: inherit }` —— 它继承的是**父 div**，
+   而父 div 自己没背景色，所以算出来是 transparent，header 一直是透明的一层。
+   此前没暴露是因为主站吸顶本来就坏（header 随页面滚走，不会压住正文）；
+   2026-09-25 修好 sticky 之后，正文就直接穿过 header 了。背景改给 sticky 外框（.site-header）。
+   （另外 `backdrop-filter` 会被 css minifier 丢掉，产物里只剩 -webkit- 版本，别拿 blur 当兜底。） */
+
+/* ── 移动端菜单面板 + 吸顶 header：实心底色 ──────────────────────
+   用户明确要求「盖住正文」，不要透明/毛玻璃。先给纯色兜底，支持
+   light-dark() 的浏览器再换成主题 token（不支持时上面的兜底值仍然有效）。 */
+.site-header,
+#mobile-menu {
+  background-color: #f7f5f3;  /* 浅色主题暖纸 */
+}
+
+@supports (background-color: light-dark(#fff, #000)) {
+  .site-header,
+  #mobile-menu {
+    background-color: var(--color-base-100);
+  }
+}
+
+@media (prefers-color-scheme: dark) {
+  .site-header,
+  #mobile-menu {
+    background-color: #121c22;  /* 暗色主题底色 */
+  }
+
+  @supports (background-color: light-dark(#fff, #000)) {
+    .site-header,
+    #mobile-menu {
+      background-color: var(--color-base-100);
+    }
+  }
 }
 
 /* ── 统一内容列（2026-09-25 P0）────────────────────────────────────
@@ -176,30 +205,7 @@ header {
   margin-block: 0;
 }
 
-/* ── 移动端菜单面板：实心底色 ──────────────────────────────────────
-   用户明确要求「盖住正文」，不要透明/毛玻璃。先给纯色兜底，支持
-   light-dark() 的浏览器再换成主题 token（不支持时上面的兜底值仍然有效）。 */
-#mobile-menu {
-  background-color: #f7f5f3;  /* 浅色主题暖纸 */
-}
-
-@supports (background-color: light-dark(#fff, #000)) {
-  #mobile-menu {
-    background-color: var(--color-base-100);
-  }
-}
-
-@media (prefers-color-scheme: dark) {
-  #mobile-menu {
-    background-color: #121c22;  /* 暗色主题底色 */
-  }
-
-  @supports (background-color: light-dark(#fff, #000)) {
-    #mobile-menu {
-      background-color: var(--color-base-100);
-    }
-  }
-}
+/* ── 移动端菜单面板背景见上方 .site-header 段落（合并成一条规则） ── */
 
 :focus-visible {
   outline: 2px solid #6783a1; /* ink-500：非文本对比 3.62:1 on 暖纸，满足 3:1 门槛 */
