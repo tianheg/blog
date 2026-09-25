@@ -28,12 +28,12 @@
     {{ if $isPosts }}
     {{ $isOpen := eq .Key $currentYear }}
     <details class="group border-t border-gray-200 dark:border-gray-800" {{ if $isOpen }}open{{ end }}>
-      <summary class="flex items-baseline gap-2.5 cursor-pointer list-none py-4 select-none rounded-sm focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-ink-500">
-        <svg class="w-3 h-3 shrink-0 self-center text-gray-600 dark:text-gray-400 transition-transform group-open:rotate-90"
+      <summary class="flex items-center gap-2.5 cursor-pointer list-none py-4 select-none rounded-sm focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-ink-500">
+        <svg class="w-3 h-3 shrink-0 text-gray-600 dark:text-gray-400 transition-transform group-open:rotate-90"
              fill="none" stroke="currentColor" viewBox="0 0 24 24" aria-hidden="true">
           <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M9 5l7 7-7 7"/>
         </svg>
-        <h2 class="text-xl font-semibold">{{ .Key }}<span class="text-[13px] font-normal text-gray-600 dark:text-gray-400"> · {{ len .Pages }} 篇</span></h2>
+        <h2 class="text-xl font-semibold year-fold">{{ .Key }}<span class="text-[13px] font-normal text-gray-600 dark:text-gray-400"> · {{ len .Pages }} 篇</span></h2>
       </summary>
       <div class="pb-6">
         {{ partial "posts/year-heatmap.html" (dict "year" .Key "pages" .Pages) }}
