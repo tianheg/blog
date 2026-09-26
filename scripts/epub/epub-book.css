@@ -1,0 +1,474 @@
+@charset "utf-8";
+@namespace epub "http://www.idpf.org/2007/ops";
+
+/* ==========================================================================
+   tianheg.co 文章选辑 —— 纸质书排版
+   配色沿用站上 token（暖纸 / 深色主题），排版按中文纸书惯例重做：
+   · 宋体正文 + 黑体标题
+   · 首行缩进 2 字符、段间不留空
+   · 章标题居中 + 装饰短线
+   · 场景分隔用花饰而非横线
+   ========================================================================== */
+
+:root {
+	--paper: #f7f5f3;        /* base-100 暖纸 */
+	--paper-2: #f3ede9;      /* base-200 */
+	--paper-3: #e2ddd9;      /* base-300 分隔线 */
+	--ink: #2f2b28;          /* 正文墨色（比站上 base-content 更沉，纸质书对比更强） */
+	--ink-soft: #4b4743;
+	--muted: #6e6863;
+	--link: #3d5b7a;         /* ink-600 */
+	--rule: #cfc8c2;
+
+	--code-bg: #282a36;      /* dracula（站上 prose.css 定稿值） */
+	--code-fg: #f8f8f2;
+	--code-border: #383a4a;
+
+	--font-serif: "Noto Serif CJK SC", "Source Han Serif SC", "Songti SC", "STSong",
+		"SimSun", "Songti TC", "Noto Serif SC", Georgia, serif;
+	--font-sans: "Satoshi", -apple-system, BlinkMacSystemFont, "PingFang SC",
+		"Noto Sans SC", "Noto Sans CJK SC", "Source Han Sans SC", "Microsoft YaHei",
+		Arial, sans-serif;
+	--mono: ui-monospace, SFMono-Regular, Menlo, Consolas, "Sarasa Mono SC",
+		"Noto Sans Mono CJK SC", monospace;
+}
+
+@media (prefers-color-scheme: dark) {
+	:root {
+		--paper: #121c22;
+		--paper-2: #0e171e;
+		--paper-3: #091319;
+		--ink: #9fb9d0;
+		--ink-soft: #8fa8bf;
+		--muted: #7f8f9e;
+		--link: #88a1bc;
+		--rule: #26323b;
+
+		--code-bg: #21222c;
+		--code-border: #343746;
+	}
+}
+
+/* ---------- 页面 ---------- */
+
+html {
+	font-size: 100%;
+	text-autospace: normal;
+	text-spacing-trim: trim-start;
+}
+
+body {
+	font-family: var(--font-serif);
+	font-size: 1em;
+	line-height: 1.8;
+	background-color: var(--paper);
+	color: var(--ink);
+	text-align: justify;
+	text-justify: inter-ideograph;
+	padding: 0 3%;
+	widows: 2;
+	orphans: 2;
+	hyphens: none;
+	-webkit-hyphens: none;
+	-epub-hyphens: none;
+}
+
+/* ---------- 正文：纸书的段落规则 ---------- */
+
+p {
+	margin: 0;                 /* 段间不留空 */
+	text-indent: 2em;          /* 首行缩进两字 */
+}
+
+/* 不缩进的情形 */
+h1 + p, h2 + p, h3 + p, h4 + p,
+blockquote p, li p, td p,
+figcaption, .no-indent {
+	text-indent: 0;
+}
+
+/* ---------- 章首（每篇文章） ---------- */
+
+h1 {
+	font-family: var(--font-sans);
+	font-size: 1.45em;
+	font-weight: 600;
+	line-height: 1.45;
+	letter-spacing: 0.04em;
+	text-align: center;
+	text-indent: 0;
+	margin: 1.2em 0 0.2em;
+	break-after: avoid;
+	page-break-after: avoid;
+}
+
+/* 标题下的短装饰线 */
+h1::after {
+	content: "";
+	display: block;
+	width: 2.6em;
+	margin: 0.7em auto 0;
+	border-bottom: 1px solid var(--rule);
+}
+
+/* 元信息：居中、小字、灰色 */
+.meta {
+	display: block;
+	font-family: var(--font-sans);
+	font-size: 0.75em;
+	line-height: 1.6;
+	letter-spacing: 0.12em;
+	color: var(--muted);
+	text-align: center;
+	text-indent: 0;
+	margin: 0 0 2.4em;
+}
+
+/* ---------- 小标题 ---------- */
+
+h2, h3, h4, h5, h6 {
+	font-family: var(--font-sans);
+	line-height: 1.4;
+	text-align: left;
+	text-indent: 0;
+	break-after: avoid;
+	page-break-after: avoid;
+	hyphens: none;
+	-webkit-hyphens: none;
+	-epub-hyphens: none;
+}
+
+h2 {
+	font-size: 1.15em;
+	font-weight: 600;
+	margin: 2.2em 0 0.9em;
+}
+
+h3 {
+	font-size: 1.05em;
+	font-weight: 600;
+	margin: 1.8em 0 0.7em;
+}
+
+h4, h5, h6 {
+	font-size: 1em;
+	font-weight: 600;
+	margin: 1.5em 0 0.6em;
+}
+
+/* ---------- 链接 ---------- */
+
+a {
+	color: var(--link);
+	text-decoration-line: underline;
+	text-decoration-color: rgba(61, 91, 122, 0.4);
+	text-decoration-thickness: 1px;
+	text-underline-offset: 0.2em;
+}
+
+@media (prefers-color-scheme: dark) {
+	a {
+		text-decoration-color: rgba(136, 161, 188, 0.4);
+	}
+}
+
+strong, b { font-weight: 700; }
+em, i { font-style: italic; }
+
+sub, sup {
+	font-size: 0.72em;
+	line-height: 0;
+	position: relative;
+	vertical-align: baseline;
+}
+
+sup { top: -0.5em; }
+sub { bottom: -0.25em; }
+
+mark {
+	background: rgba(255, 214, 102, 0.45);
+	color: inherit;
+}
+
+/* 读书记文末的计数行 */
+.dushuji-count {
+	color: #8b0000;
+}
+
+@media (prefers-color-scheme: dark) {
+	.dushuji-count {
+		color: #f87171;
+	}
+}
+
+/* ---------- 代码（技术书必需，保留站上 dracula） ---------- */
+
+code, kbd, samp {
+	font-family: var(--mono);
+	font-size: 0.85em;
+	background-color: var(--paper-2);
+	color: var(--ink-soft);
+	padding: 0.1em 0.35em;
+	border-radius: 0.2rem;
+	text-autospace: no-autospace;
+}
+
+pre {
+	font-family: var(--mono);
+	font-size: 0.78em;
+	line-height: 1.6;
+	background-color: var(--code-bg);
+	color: var(--code-fg);
+	border: 1px solid var(--code-border);
+	border-radius: 0.35rem;
+	padding: 0.85em 1em;
+	margin: 1.4em 0;
+	white-space: pre-wrap;
+	word-wrap: break-word;
+	overflow-wrap: break-word;
+	break-inside: avoid;
+	page-break-inside: avoid;
+	text-autospace: no-autospace;
+}
+
+pre code {
+	background: none;
+	border: 0;
+	padding: 0;
+	color: inherit;
+	font-size: 1em;
+}
+
+/* ---------- 引用：纸书里的缩进引文 ---------- */
+
+blockquote {
+	font-size: 0.95em;
+	line-height: 1.8;
+	margin: 1.4em 2em;
+	color: var(--ink-soft);
+	font-style: normal;
+}
+
+blockquote p {
+	margin: 0.5em 0;
+	text-indent: 0;
+}
+
+blockquote cite {
+	display: block;
+	font-family: var(--font-sans);
+	font-size: 0.85em;
+	text-align: right;
+	color: var(--muted);
+}
+
+/* ---------- 列表 ---------- */
+
+ul, ol {
+	margin: 1.1em 0;
+	padding-left: 1.8em;
+}
+
+li {
+	margin: 0.35em 0;
+}
+
+li.task-list-item {
+	list-style: none;
+	margin-left: -1.3em;
+}
+
+input[type="checkbox"] {
+	margin-right: 0.4em;
+}
+
+/* ---------- 表格：站上 table.css 的编辑式 ---------- */
+
+table {
+	border-collapse: collapse;
+	margin: 1.5em 0;
+	font-size: 0.88em;
+	line-height: 1.6;
+	max-width: 100%;
+}
+
+thead th {
+	text-align: left;
+	font-family: var(--font-sans);
+	font-weight: 600;
+	font-size: 0.9em;
+	background-color: var(--paper-2);
+	border-bottom: 1px solid var(--paper-3);
+	padding: 0.5em 0.8em 0.5em 0.5em;
+}
+
+tbody td {
+	padding: 0.6em 0.8em 0.6em 0.5em;
+	border-bottom: 1px solid var(--paper-3);
+	vertical-align: top;
+	text-indent: 0;
+}
+
+tbody td:first-child { font-weight: 500; }
+tbody tr:last-child td { border-bottom: 0; }
+
+td pre {
+	margin: 0;
+	padding: 0.45em 0.6em;
+	font-size: 0.8em;
+	line-height: 1.5;
+}
+
+/* ---------- 场景分隔：花饰（纸书里不用通栏横线） ---------- */
+
+hr {
+	border: 0;
+	margin: 2.4em 0;
+	text-align: center;
+	height: auto;
+}
+
+hr::after {
+	content: "· · ·";
+	display: block;
+	font-family: var(--font-sans);
+	font-size: 0.9em;
+	letter-spacing: 0.2em;
+	color: var(--muted);
+}
+
+/* ---------- 图片 ---------- */
+
+img {
+	max-width: 100%;
+	height: auto;
+}
+
+figure {
+	margin: 1.6em auto;
+	text-align: center;
+	break-inside: avoid;
+}
+
+figcaption {
+	font-family: var(--font-sans);
+	font-size: 0.8em;
+	line-height: 1.6;
+	color: var(--muted);
+	margin-top: 0.6em;
+	text-align: center;
+}
+
+/* ---------- 脚注 ---------- */
+
+a[role~="doc-noteref"] {
+	font-size: 0.7em;
+	line-height: 0;
+	vertical-align: super;
+	text-decoration: none;
+	padding: 0 0.1em;
+}
+
+section[role~="doc-endnotes"],
+.footnotes,
+section[epub|type~="endnotes"],
+section[epub|type~="footnotes"] {
+	font-size: 0.85em;
+	line-height: 1.75;
+	margin-top: 2.4em;
+	padding-top: 1em;
+	border-top: 1px solid var(--rule);
+}
+
+.footnotes ol { padding-left: 1.4em; }
+.footnotes li { margin: 0.6em 0; }
+
+a[role~="doc-backlink"] {
+	text-decoration: none;
+	opacity: 0.6;
+	margin-left: 0.3em;
+}
+
+/* ---------- 目录 ---------- */
+
+nav[epub|type~="toc"] {
+	margin-top: 1em;
+}
+
+nav[epub|type~="toc"] ol {
+	list-style: none;
+	padding-left: 0;
+	margin: 0;
+}
+
+nav[epub|type~="toc"] li {
+	margin: 0.45em 0;
+	line-height: 1.65;
+	font-size: 0.92em;
+}
+
+nav[epub|type~="toc"] a {
+	color: inherit;
+	text-decoration: none;
+}
+
+nav[epub|type~="toc"] > h1,
+#toc-title {
+	font-family: var(--font-sans);
+	font-size: 1.3em;
+	letter-spacing: 0.3em;
+	text-align: center;
+	margin-bottom: 1.6em;
+}
+
+/* ---------- 扉页（pandoc 生成的 titlepage） ---------- */
+
+section[epub|type~="titlepage"],
+#title-page {
+	text-align: center;
+	margin-top: 22vh;
+}
+
+section[epub|type~="titlepage"] h1.title,
+#title-page h1 {
+	font-family: var(--font-serif);
+	font-size: 2.1em;
+	font-weight: 700;
+	letter-spacing: 0.06em;
+	line-height: 1.4;
+	margin: 0 0 0.6em;
+}
+
+section[epub|type~="titlepage"] p,
+#title-page p {
+	font-family: var(--font-sans);
+	text-indent: 0;
+	color: var(--muted);
+	font-size: 0.9em;
+	margin: 0.4em 0;
+}
+
+/* ---------- 版权页 / 书末说明 ---------- */
+
+.colophon {
+	margin-top: 2em;
+	text-align: center;
+	font-size: 0.88em;
+	line-height: 2;
+	color: var(--muted);
+}
+
+.colophon p {
+	text-indent: 0;
+	margin: 0.6em 0;
+}
+
+.colophon a {
+	color: inherit;
+}
+
+.colophon .rule {
+	width: 2.6em;
+	margin: 1.6em auto;
+	border-bottom: 1px solid var(--rule);
+}
