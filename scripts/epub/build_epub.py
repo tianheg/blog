@@ -178,7 +178,7 @@ def patch_opf(epub, subtitle=None, author_sort=None, a11y_summary=None):
             for href, title in items:
                 if re.search(r"year-\d{4}|year-undated", href):
                     nav_years += 1
-                    cur = {"label": title.strip(), "kids": []}
+                    cur = {"href": href, "label": title.strip(), "kids": []}
                     blocks.append(cur)
                 elif cur is not None and "colophon" not in href:
                     cur["kids"].append((href, title))
@@ -194,7 +194,7 @@ def patch_opf(epub, subtitle=None, author_sort=None, a11y_summary=None):
                 if isinstance(b, tuple):
                     out.append(_li(b[1], b[2], "  "))
                 else:
-                    out.append(f'  <li><span>{b["label"]}</span>\n    <ol>\n')
+                    out.append(f'  <li><a href="{b["href"]}">{b["label"]}</a>\n    <ol>\n')
                     for h, t in b["kids"]:
                         out.append(_li(h, t, "      "))
                     out.append("    </ol>\n  </li>\n")
