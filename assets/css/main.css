@@ -73,6 +73,14 @@
    (dark trio shares chroma/hue, only lightness differs). */
 /* 手动切换：给 color-scheme 一个可覆盖的出口（light-dark() 认它，不认类）。
    没有存过选择时由内联脚本按系统偏好写类，所以 .dark/.light 总有一个在 html 上。 */
+/* 内容里带并排图片的容器（如 /support/ 的收款码：内容内联 <style> 写了 img{width:50%;margin-inline:20px}）。
+   flex item 的 min-width 默认 auto = 图片的固有宽度 → 缩不到 50% 以下，
+   两图合计比容器宽（桌面 +80px、小屏也溢出）→ 这里只放开 min-width，不改内容里的写法。 */
+.support-img img {
+  min-width: 0;
+  height: auto;
+}
+
 /* /about/ 的玻璃拟态画布（原来写在内联 style 上） */
 .glass-output {
   position: fixed;

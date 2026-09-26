@@ -15,11 +15,16 @@
   </a>
 </div>
 
-<!-- Recent Posts + Random TIL：桌面双栏并排，手机堆叠（只改布局，文案与区块不变） -->
-<div class="grid gap-12 sm:grid-cols-2 mb-16">
+<!-- Recent Posts + Random TIL：桌面双栏并排，手机堆叠（只改布局，文案与区块不变）
+
+     小屏必须显式 grid-cols-1：只有 `sm:grid-cols-2` 时，<640px 走的是**隐式**轨道
+     （auto 尺寸），而 grid item 的 min-width 默认 auto → 轨道被内容的最小宽度顶开。
+     本次实测：390 视口下 section 被撑到 406px，右边日期与 View all 直接出屏、页面横向滚动。
+     minmax(0,1fr)（= grid-cols-1 的产物）才是能收缩的列；两个 section 另加 min-w-0 兜底。 -->
+<div class="grid grid-cols-1 gap-12 sm:grid-cols-2 mb-16">
 
 <!-- Recent Posts Section -->
-<section>
+<section class="min-w-0">
   {{/* 标题行：h2 与 View all 用 items-baseline 对齐基线。
        别用 items-center —— h2 被全局 .prose 撑成 24px + 48/24px 外边距，
        容器高 104px，居中的 View all 会浮在上面，基线差 14.5px（2026-09-26 实测） */}}
@@ -53,7 +58,7 @@
 </section>
 
 <!-- Random TIL Section -->
-<section>
+<section class="min-w-0">
   <div class="flex items-baseline justify-between mb-6">
     <h2 class="text-lg md:text-2xl font-semibold mt-9 md:mt-12 mb-4.5 md:mb-6 text-gray-900 dark:text-gray-100">Random TIL</h2>
     <a href="/til" class="text-sm text-gray-600 dark:text-gray-400 hover:text-gray-900 dark:hover:text-gray-100 transition-colors">View all →</a>
