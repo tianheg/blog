@@ -1893,10 +1893,10 @@ NoSQL 数据库的一些经验型的文章，供你参考。
 ##### 时序数据库 Time-Series Database
 - [What is Time-Series Data & Why We Need a Time-Series Database](https://blog.timescale.com/blog/what-the-heck-is-time-series-data-and-why-do-i-need-a-time-series-database-dcf3b1b18563/)
 - [Time Series Data: Why and How to Use a Relational Database instead of NoSQL](https://blog.timescale.com/blog/time-series-data-why-and-how-to-use-a-relational-database-instead-of-nosql-d0cd6975e87c/)
-- [Beringei: High-performance Time Series Storage Engine [cite/t:@Facebook](https://engineering.fb.com/2017/02/03/core-data/beringei-a-high-performance-time-series-storage-engine/)]
-- [Introducing Atlas: Netflix's Primary Telemetry Platform [cite/t:@Netflix](https://netflixtechblog.com/introducing-atlas-netflixs-primary-telemetry-platform-bd31f4d8ed9a)]
+- [Beringei: High-performance Time Series Storage Engine](https://engineering.fb.com/2017/02/03/core-data/beringei-a-high-performance-time-series-storage-engine/)
+- [Introducing Atlas: Netflix's Primary Telemetry Platform](https://netflixtechblog.com/introducing-atlas-netflixs-primary-telemetry-platform-bd31f4d8ed9a)
 - [Building a Scalable Time Series Database on PostgreSQL](https://blog.timescale.com/blog/when-boring-is-awesome-building-a-scalable-time-series-database-on-postgresql-2900ea453ee2/)
-- [Scaling Time Series Data Storage - Part I [cite/t:@Netflix](https://netflixtechblog.com/scaling-time-series-data-storage-part-i-ec2b6d44ba39)]
+- [Scaling Time Series Data Storage - Part I](https://netflixtechblog.com/scaling-time-series-data-storage-part-i-ec2b6d44ba39)
 - [Design of a Cost Efficient Time Series Store for Big Data](https://leventov.medium.com/design-of-a-cost-efficient-time-series-store-for-big-data-88c5dc41af8e)
 - [GitHub: Awesome Time-Series Database](https://github.com/xephonhq/awesome-time-series-database)
 

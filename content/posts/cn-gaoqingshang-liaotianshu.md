@@ -50,4 +50,4 @@ tags: ['读书记']
 
 作者举了许多具体的例子，多是应用在职场情境的人际交往中。此种“术”的书，不能只读不练，必须有意识的练习，反思，融合到日常中去。否则白读，几天后就忘干净了。<-说的就是我。
 
-&lt;span style="color:var(--dushuji-count-color)"&gt;2025年读完的第7本，总阅读量第7本</span>
+<span style="color:var(--dushuji-count-color)">2025年读完的第7本，总阅读量第7本</span>

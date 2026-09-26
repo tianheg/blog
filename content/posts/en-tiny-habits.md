@@ -78,4 +78,4 @@ tags: ['读书记']
 
 ◆ 珍珠习惯
 
-&lt;span style="color:var(--dushuji-count-color)"&gt;2025年读完的第84本，总阅读量第84本</span>
+<span style="color:var(--dushuji-count-color)">2025年读完的第84本，总阅读量第84本</span>

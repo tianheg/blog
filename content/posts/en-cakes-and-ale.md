@@ -36,4 +36,4 @@ tags: ['读书记']
 
 幽默
 
-&lt;span style="color:var(--dushuji-count-color)"&gt;2025年读完的第34本，总阅读量第34本</span>
+<span style="color:var(--dushuji-count-color)">2025年读完的第34本，总阅读量第34本</span>

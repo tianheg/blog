@@ -58,4 +58,4 @@ tags: ['读书记']
 
 也许，透过书信呼应的方式，加上声音，我们人和人之间，所竖立起来的高墙，能够成为透明的。或说，不必那么晶莹剔透，或而有些光线照亮一霎间幽暗的心灵，带来一丝欣慰，然后再不打扰，各自安静存活。
 
-&lt;span style="color:var(--dushuji-count-color)"&gt;2025年读完的第17本，总阅读量第17本</span>
+<span style="color:var(--dushuji-count-color)">2025年读完的第17本，总阅读量第17本</span>

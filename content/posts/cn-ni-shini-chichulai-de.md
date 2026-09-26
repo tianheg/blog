@@ -36,4 +36,4 @@ tags: ['读书记']
 
 当一个人吃含碘的食物和蛋白质类食物不足时，甲状腺细胞合成T3、T4的原料减少，上级领导一道一道的命令下达，不仅促进甲状腺激素的合成，还会促进甲状腺细胞的恶性增生。此时做B超的话会显示出甲状腺多发结节，化验检查T3、T4正常，而TSH增加。
 
-&lt;span style="color:var(--dushuji-count-color)"&gt;2025年读完的第16本，总阅读量第16本</span>
+<span style="color:var(--dushuji-count-color)">2025年读完的第16本，总阅读量第16本</span>

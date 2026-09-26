@@ -381,8 +381,8 @@ This is [an example] [id](http://example.com/) reference-style link.
 
 #### 强调 {#强调}
 Markdown 使用 `*` 和 `_` 表示强调。由一个 `*` 或 `_` 包裹的文本，在 HTML
-中变成 `&lt;em&gt;</em>` ；由两个 `*` 或 `_` 包裹的文本，在 HTML 中变成
-`&lt;strong&gt;</strong>` 。例子，输入：
+中变成 `<em></em>` ；由两个 `*` 或 `_` 包裹的文本，在 HTML 中变成
+`<strong></strong>` 。例子，输入：
 
 ```
   *single asterisks*

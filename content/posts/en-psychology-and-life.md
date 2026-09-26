@@ -65,4 +65,4 @@ data）是关于机体的行为以及行为发生条件的观察报告。
 2. 心理学家的四个目标是什么？
 3. 为什么解释行为和预测行为总是紧密相联？
 
-&lt;span style="color:var(--dushuji-count-color)"&gt;2025年读完的第63本，总阅读量第63本</span>
+<span style="color:var(--dushuji-count-color)">2025年读完的第63本，总阅读量第63本</span>

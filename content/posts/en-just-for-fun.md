@@ -112,4 +112,4 @@ Linux 标志来源说法之一。
 
 人类的需求和兴趣，决定了技术的发展方向。
 
-&lt;span style="color:var(--dushuji-count-color)"&gt;2025年读完的第48本，总阅读量第48本</span>
+<span style="color:var(--dushuji-count-color)">2025年读完的第48本，总阅读量第48本</span>

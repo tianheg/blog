@@ -122,4 +122,4 @@ tags: ['读书记']
 
 能否过上理想中的爱情生活，需要我认真寻找—— **在人海中寻找那个灵魂伴侣** 。
 
-&lt;span style="color:var(--dushuji-count-color)"&gt;2025年读完的第2本，总阅读量第2本</span>
+<span style="color:var(--dushuji-count-color)">2025年读完的第2本，总阅读量第2本</span>

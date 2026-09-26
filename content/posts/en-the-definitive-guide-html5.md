@@ -44,4 +44,4 @@ TOC:
   6. Using Web Storage
   7. Creating Offline Web Applications
 
-&lt;span style="color:var(--dushuji-count-color)"&gt;2025年读完的第75本，总阅读量第75本</span>
+<span style="color:var(--dushuji-count-color)">2025年读完的第75本，总阅读量第75本</span>

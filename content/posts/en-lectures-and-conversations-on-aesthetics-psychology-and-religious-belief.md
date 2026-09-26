@@ -10,4 +10,4 @@ tags: ['读书记']
 
 这个比喻非常巧妙
 
-&lt;span style="color:var(--dushuji-count-color)"&gt;2025年读完的第51本，总阅读量第51本</span>
+<span style="color:var(--dushuji-count-color)">2025年读完的第51本，总阅读量第51本</span>

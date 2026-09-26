@@ -46,7 +46,7 @@ header: Web
 - 支持录屏
 - 演示模式 Presenter Mode
 - 支持绘图和注释
-- 通过[扩展](<https://marketplace.visualstudio.com/items?itemName=antfu.slidev)方便地在> VS Code 中查看（需要全局安装 `[cite/t:@slidev/cli]`）
+- 通过[扩展](https://marketplace.visualstudio.com/items?itemName=antfu.slidev)方便地在 VS Code 中查看（需要全局安装 `@slidev/cli`）
 
 ## 问题
 

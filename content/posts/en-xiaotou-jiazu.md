@@ -27,4 +27,4 @@ tags: ['读书记']
 
 > 这种关系和血脉相连相反，有时你会忽然发现，以为过去早已结束的感情，只是藏在内心深处的某个角落了。
 
-&lt;span style="color:var(--dushuji-count-color)"&gt;2025年读完的第91本，总阅读量第91本</span>
+<span style="color:var(--dushuji-count-color)">2025年读完的第91本，总阅读量第91本</span>

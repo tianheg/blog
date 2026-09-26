@@ -10,4 +10,4 @@ tags: ['读书记']
 
 我们缺少思辨理性。
 
-&lt;span style="color:var(--dushuji-count-color)"&gt;2025年读完的第6本，总阅读量第6本</span>
+<span style="color:var(--dushuji-count-color)">2025年读完的第6本，总阅读量第6本</span>

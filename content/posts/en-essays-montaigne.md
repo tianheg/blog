@@ -139,4 +139,4 @@ tags: ['读书记']
 #### 附录 蒙田生平年表
 ### 注释
 
-&lt;span style="color:var(--dushuji-count-color)"&gt;2025年读完的第41本，总阅读量第41本</span>
+<span style="color:var(--dushuji-count-color)">2025年读完的第41本，总阅读量第41本</span>

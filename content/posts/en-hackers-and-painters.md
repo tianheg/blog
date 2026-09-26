@@ -69,4 +69,4 @@ tags: ['读书记']
 
 阅读更多 http://paulgraham.com/articles.html
 
-&lt;span style="color:var(--dushuji-count-color)"&gt;2025年读完的第43本，总阅读量第43本</span>
+<span style="color:var(--dushuji-count-color)">2025年读完的第43本，总阅读量第43本</span>

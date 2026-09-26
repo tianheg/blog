@@ -51,4 +51,4 @@ tags: ['读书记']
 
 当外界不断改变，而“我”却分辨不清是自己变了还别人在变时，我把自己封闭起来，铸造一个只有“我”不变的世界。
 
-&lt;span style="color:var(--dushuji-count-color)"&gt;2025年读完的第92本，总阅读量第92本</span>
+<span style="color:var(--dushuji-count-color)">2025年读完的第92本，总阅读量第92本</span>

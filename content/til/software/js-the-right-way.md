@@ -75,7 +75,7 @@ ECMAScript 5 版本引入的严格模式是一种进入 JS 受限制变种的方
 
 一个立即调用的函数表达式是一种模式，它能够制造一个使用 JS 的函数作用域的词法作用域。立即调用的函数表达式能够用于避免块级作用域下的变量提升，防止污染全局环境，同时允许对方法的公开访问，同时还保留了函数中定义变量的私密性。
 
-_这种模式被称为自动执行的匿名函数，but [cite/t:@cowboy](cite/t:@cowboy)(<http://twitter.com/cowboy>) (Ben Alman) introduced the term IIFE as a more semantically accurate term for the pattern._
+_这种模式被称为自动执行的匿名函数，but @cowboy (<http://twitter.com/cowboy>) (Ben Alman) introduced the term IIFE as a more semantically accurate term for the pattern._
 
 进一步了解见 [这里](https://benalman.com/news/2010/11/immediately-invoked-function-expression/)。
 

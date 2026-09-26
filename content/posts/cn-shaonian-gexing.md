@@ -6,4 +6,4 @@ tags: ['读书记']
 
 醉酒当歌，少年英雄。
 
-&lt;span style="color:var(--dushuji-count-color)"&gt;2025年读完的第18本，总阅读量第18本</span>
+<span style="color:var(--dushuji-count-color)">2025年读完的第18本，总阅读量第18本</span>

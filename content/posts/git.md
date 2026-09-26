@@ -649,7 +649,7 @@ GitHub 拉取代码较慢，于是想到可以把本地的更改同时推送到 
 参考资料
 
 1. <https://segmentfault.com/a/1190000039676421>
-2. [[https://www.saintsjd.com/2011/01/what-is-a-bare-git-repository/]
+2. <https://www.saintsjd.com/2011/01/what-is-a-bare-git-repository/>
 ## 只 clone 远程 Git repo 的一部分
 - https://stackoverflow.com/a/52269934/12539782
 - https://www.git-scm.com/docs/git-clone

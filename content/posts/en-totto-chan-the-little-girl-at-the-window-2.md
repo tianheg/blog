@@ -46,4 +46,4 @@ Totto-chan: The Little Girl at the Window 2
 
 看来小豆豆没有结婚，也没有小孩。
 
-&lt;span style="color:var(--dushuji-count-color)"&gt;2025年读完的第86本，总阅读量第86本</span>
+<span style="color:var(--dushuji-count-color)">2025年读完的第86本，总阅读量第86本</span>

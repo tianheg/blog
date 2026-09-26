@@ -173,4 +173,4 @@ tags: ['读书记']
 ### 信客
 一头是没有了家的男人，一头是没有了男人的家。两头都踮着脚，怎么也看不到对方，我是帮他们跑跑腿。p23
 
-&lt;span style="color:var(--dushuji-count-color)"&gt;2025年读完的第23本，总阅读量第23本</span>
+<span style="color:var(--dushuji-count-color)">2025年读完的第23本，总阅读量第23本</span>

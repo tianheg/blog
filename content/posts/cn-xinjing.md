@@ -8,4 +8,4 @@ tags: ['读书记']
 
 ——玄奘法师译，般若（bō rě）波罗蜜多心经
 
-&lt;span style="color:var(--dushuji-count-color)"&gt;2025年读完的第25本，总阅读量第25本</span>
+<span style="color:var(--dushuji-count-color)">2025年读完的第25本，总阅读量第25本</span>

@@ -570,7 +570,7 @@ Lesson 7.3: COMPLETION `:set nocp` -> `:!ls` -> `:e` -> CTRL-D
 1. Download our [basic vimrc](https://missing.csail.mit.edu/2020/files/vimrc) and save it to =~/.vimrc=. Read through the well-commented file (using Vim!), and observe how Vim looks and behaves slightly differently with the new config.
 2. Install and configure a plugin: [ctrlp.vim](https://github.com/ctrlpvim/ctrlp.vim).
   1. Create the plugins directory with `mkdir -p ~/.vim/pack/vendor/start`
-  2. Download the plugin: `cd ~/.vim/pack/vendor/start; git clone [[https://github.com/ctrlpvim/ctrlp.vim]]`
+  2. Download the plugin: `cd ~/.vim/pack/vendor/start; git clone https://github.com/ctrlpvim/ctrlp.vim`
   3. Read the [documentation](https://github.com/ctrlpvim/ctrlp.vim/blob/master/readme.md) for the plugin. Try using CtrlP to locate a file by navigating to a project directory, opening Vim, and using the Vim command-line to start `:CtrlP`.
   4. Customize CtrlP by adding [configuration](https://github.com/ctrlpvim/ctrlp.vim/blob/master/readme.md#basic-options) to your =~/.vimrc= to open CtrlP by pressing Ctrl-P.
 3. To practice using Vim, re-do the [Demo](https://missing.csail.mit.edu/2020/editors/#demo) from lecture on your own machine.

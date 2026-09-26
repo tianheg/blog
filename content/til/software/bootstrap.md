@@ -118,13 +118,13 @@ RFS 是 Bootstrap 的小项目，是一个调整单位大小的引擎，最初�
 
 如何使用？
 
-RFS 机制包含在 Bootstrap 的 SCSS 文件中；也可以在[这里](<https://github.com/twbs/rfs#installation)找到安装方法>。
+RFS 机制包含在 Bootstrap 的 SCSS 文件中；也可以在[这里](https://github.com/twbs/rfs#installation)找到安装方法。
 
 扩展文档在[这里](https://github.com/twbs/rfs/tree/v9.0.6)
 
 ### RTL
 
-RTL(Right to Left)。Bootstrap 基于[RTLCSS](<https://rtlcss.com/)实现> RTL。
+RTL(Right to Left)。Bootstrap 基于[RTLCSS](https://rtlcss.com/)实现 RTL。
 
 需要设置 HTML：
 

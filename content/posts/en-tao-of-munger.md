@@ -18,4 +18,4 @@ tags: ['读书记']
 
 应该关注具有划时代意义的科技进步——AI
 
-&lt;span style="color:var(--dushuji-count-color)"&gt;2025年读完的第71本，总阅读量第71本</span>
+<span style="color:var(--dushuji-count-color)">2025年读完的第71本，总阅读量第71本</span>

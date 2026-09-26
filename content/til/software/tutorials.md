@@ -7,7 +7,7 @@ header: Tools
 
 [动手学大模型应用开发](https://datawhalechina.github.io/llm-universe/)
 
-[[https://x.com/dotey/status/1810084451659219275][宝玉 ([cite/t:@dotey]) on X]]
+[宝玉 (@dotey) on X](https://x.com/dotey/status/1810084451659219275)
 
 GPT-4o 的提示技巧,“升级到 GPT-4o 后使用提示词的五项调整
 

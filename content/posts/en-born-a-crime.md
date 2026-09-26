@@ -109,4 +109,4 @@ tags: ['读书记']
 
 幽默是生活的调味剂。
 
-&lt;span style="color:var(--dushuji-count-color)"&gt;2025年读完的第33本，总阅读量第33本</span>
+<span style="color:var(--dushuji-count-color)">2025年读完的第33本，总阅读量第33本</span>

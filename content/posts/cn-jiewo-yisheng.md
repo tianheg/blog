@@ -204,4 +204,4 @@ yōng sè
 
 1. 借我一生，余秋雨，2020 年 10 月第 1 版
 
-&lt;span style="color:var(--dushuji-count-color)"&gt;2025年读完的第9本，总阅读量第9本</span>
+<span style="color:var(--dushuji-count-color)">2025年读完的第9本，总阅读量第9本</span>

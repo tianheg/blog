@@ -160,4 +160,4 @@ Totto-Chan: The Little Girl at the Window
 
 > 当她看到奇怪的事情、有趣的事情时，为了满足自己的好奇心，经常做出让老师们大吃一惊的事来
 
-&lt;span style="color:var(--dushuji-count-color)"&gt;2025年读完的第87本，总阅读量第87本</span>
+<span style="color:var(--dushuji-count-color)">2025年读完的第87本，总阅读量第87本</span>

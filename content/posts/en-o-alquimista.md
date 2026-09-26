@@ -128,4 +128,4 @@ tags: ['读书记']
 
 从自然事物上，学到东西
 
-&lt;span style="color:var(--dushuji-count-color)"&gt;2025年读完的第56本，总阅读量第56本</span>
+<span style="color:var(--dushuji-count-color)">2025年读完的第56本，总阅读量第56本</span>

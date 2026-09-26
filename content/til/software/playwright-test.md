@@ -15,7 +15,7 @@ npx playwright install # 这一步会安装所有支持的浏览器 ```
 
 `playwright.config.js`：
 
-\`\`\`js // @ts-check const { devices } = require('[cite/t:@playwright/test]')
+\`\`\`js // @ts-check const { devices } = require('@playwright/test')
 
 /**
 
@@ -27,7 +27,7 @@ npx playwright install # 这一步会安装所有支持的浏览器 ```
 /**
 
 - @see <https://playwright.dev/docs/test-configuration>
-- @type {import('[cite/t:@playwright/test]').PlaywrightTestConfig}
+- @type {import('@playwright/test').PlaywrightTestConfig}
 
 **/ const config = { testDir: './tests', /** Maximum time one test can run for. */ timeout: 30 * 1000, expect: { /**
 
