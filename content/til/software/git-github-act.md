@@ -36,7 +36,7 @@ act -n
 act -v
 ```
 
-在 GitHub 上运行 Actions 时，`GITHUB<sub>TOKEN</sub>` 是自动生成的，本地运行则需要添加：
+在 GitHub 上运行 Actions 时，`GITHUB_TOKEN` 是自动生成的，本地运行则需要添加：
 
 ```bash
 act -s GITHUB_TOKEN=[insert token or leave blank for secure input]

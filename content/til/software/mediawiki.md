@@ -9,31 +9,28 @@ header: DevOps
 
 `docker-compose.yml`:
 
-````yaml
-
-version: '3' services: mediawiki: image: mediawiki restart: always ports:
-
-- 8080:80
-
-links:
-
-- database
-
-volumes:
-
-- /var/www/html/images
-
-database: image: mariadb restart: always environment:
-
-MYSQL_{DATABASE}: my_{wiki} MYSQL_{USER}: wikiuser MYSQL_{PASSWORD}: example ```
+```yaml
+version: '3'
+services:
+  mediawiki:
+    image: mediawiki
+    restart: always
+    ports:
+      - 8080:80
+    links:
+      - database
+    volumes:
+      - /var/www/html/images
+  database:
+    image: mariadb
+    restart: always
+    environment:
+      MYSQL_DATABASE: my_wiki
+      MYSQL_USER: wikiuser
+      MYSQL_PASSWORD: example
+```
 
 执行完初始化安装后，会生成 LocalSettings.php，把这个文件放到根目录。
-
-```txt
-
-- 
-
-````
 
 refer
 
@@ -85,7 +82,7 @@ Ensure that the mediawiki native hostname does not equal to the domain the wiki 
 
 目前不设置可视化编辑。
 
-### Cannot access the database: :real<sub>connect</sub>(): (HY000/2002): No such file or directory。
+### Cannot access the database: :real_connect(): (HY000/2002): No such file or directory。
 
 请检查下列的主机、用户名和密码设置后重试。若使用"localhost"作为数据库主机，请尝试"127.0.0.1"（反之亦然）。
 

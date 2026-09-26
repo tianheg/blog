@@ -74,7 +74,7 @@ sudo chown -R $USER:$USER /var/www/your_domain
 sudo nano /etc/apache2/sites-available/your_domain.conf
 ```
 
-`your<sub>domain</sub>.conf` 文件内容：
+`your_domain.conf` 文件内容：
 
 ```conf
 <VirtualHost *:80>
@@ -127,7 +127,7 @@ vim /var/www/your_domain/info.php
 <?php phpinfo();
 ```
 
-访问 `http://server<sub>domainorIP</sub>/info.php`，会出现一个页面描述 php 的配置信息。
+访问 `http://server_domainorIP/info.php`，会出现一个页面描述 php 的配置信息。
 
 ```sh
 sudo rm /var/www/your_domain/info.php
@@ -175,7 +175,7 @@ mysql> exit
 vim /var/www/your_domain/todo_list.php
 ```
 
-`todo<sub>list</sub>.php`：
+`todo_list.php`：
 
 ```php
 <?php
@@ -197,7 +197,7 @@ die();
 }
 ```
 
-访问 `http://your<sub>domainorIP</sub>/todo<sub>list</sub>.php`。
+访问 `http://your_domainorIP/todo_list.php`。
 
 ---
 

@@ -17,17 +17,25 @@ header: Tools
 
 安装：
 
-````bash
-
-sudo pacman -S nix nix-channel --add [[https://nixos.org/channels/nixpkgs-unstable]] nix-channel --update nix-env -u source /etc/profile.d/nix{,-daemon}.sh sudo systemctl enable nix-daemon.service sudo usermod -aG nix-users archie ```
+```bash
+sudo pacman -S nix
+nix-channel --add https://nixos.org/channels/nixpkgs-unstable
+nix-channel --update
+nix-env -u
+source /etc/profile.d/nix{,-daemon}.sh
+sudo systemctl enable nix-daemon.service
+sudo usermod -aG nix-users archie
+```
 
 If you installed Nix from the official repositories, you must add the `~/.nix-profile/bin` directory to your PATH manually.
 
 卸载：
 
-```bash sudo pacman -Rs nix rm -r ~/.nix-channels ~/.nix-defexpr ~/.nix-profile sudo rm -r /nix
-
-````
+```bash
+sudo pacman -Rs nix
+rm -r ~/.nix-channels ~/.nix-defexpr ~/.nix-profile
+sudo rm -r /nix
+```
 
 
 相关：[[use-prettier|use-prettier]]

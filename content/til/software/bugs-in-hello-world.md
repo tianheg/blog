@@ -52,15 +52,15 @@ echo "Hello World" > /dev/full
 echo $?
 ```
 
-````text
-
+```text
 但是对 Hello World 程序来说，并无以上特征
+```
 
-```bash gcc -Wall hello.c -o hello ./hello > /dev/full
-
+```bash
+gcc -Wall hello.c -o hello
+./hello > /dev/full
 echo $?
-
-````
+```
 
 0 说明 `hello` 程序被认为执行成功了，但并非如此。
 

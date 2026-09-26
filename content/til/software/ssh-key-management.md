@@ -10,7 +10,7 @@ The need to manually run `ssh-add` to load your SSH keys into the agent typicall
 ---
 
 #### **1. SSH Key Management Basics**
-- **Default Behavior**: When you attempt an SSH connection, the client checks for keys in `~*.ssh*` (e.g., `id_rsa`, `id_ed25519`). If no keys are loaded into `ssh-agent`, SSH will look for keys in these default locations.
+- **Default Behavior**: When you attempt an SSH connection, the client checks for keys in `~/.ssh/` (e.g., `id_rsa`, `id_ed25519`). If no keys are loaded into `ssh-agent`, SSH will look for keys in these default locations.
 - **Non-Default Key Names**: If your key has a non-standard name (e.g., `my_custom_key` instead of `id_rsa`), SSH won't automatically detect it. You must either:
   - **Specify it explicitly** with `ssh -i /path/to/key user@host`, or
   - **Load it into `ssh-agent`** with `ssh-add /path/to/key`.
@@ -27,7 +27,7 @@ The need to manually run `ssh-add` to load your SSH keys into the agent typicall
 - **Fix**: Run `ssh-add /path/to/key` once per session to cache the decrypted key.
 
 ##### **C. Key Not in Default Location**
-- If your key is stored outside ``` /.ssh/` (e.g., ` ``/.config/ssh/my_key`), SSH won't find it automatically.
+- If your key is stored outside `~/.ssh/` (e.g., `~/.config/ssh/my_key`), SSH won't find it automatically.
 - **Fix**:
 ```bash
   ssh-add ~/.config/ssh/my_key  # Load it manually
@@ -53,7 +53,7 @@ Host myserver
 SSH will automatically use this key for `myserver`.
 
 ##### **B. Auto-Load Keys on Startup**
-Add the following to your shell profile (e.g., ``` /.bashrc`, ` ``/.zshrc`) to load keys on login:
+Add the following to your shell profile (e.g., `~/.bashrc`, `~/.zshrc`) to load keys on login:
 ```bash
 # Start ssh-agent if not running
 if [ -z "$SSH_AUTH_SOCK" ]; then

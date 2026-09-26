@@ -183,11 +183,11 @@ root = true
 
 [*]
 charset = utf-8
-end_ofline = lf
+end_of_line = lf
 indent_size = 2
 indent_style = space
-insert_finalnewline = true
-trim_trailingwhitespace = true
+insert_final_newline = true
+trim_trailing_whitespace = true
 ```
 
 ## CSS

@@ -17,7 +17,7 @@ header: Git
 
 根据提示，我应该把全局 `user.name` 和 `user.email` 改为我要提交的 GitHub 的账号信息。但是，这是不行的。因为我使用了两个 GitHub 账号，如果设置了全局的信息。本该是 A 账号的提交却变成 B 账号，此时 GitHub 的 commits 统计就不会显示非当前账号用户的提交，另外，如果你从别人的仓库 fork 到你自己的仓库，在本地提交给你自己的 forked 的仓库，也是无法显示 commits 提交的。
 
-对于多个 GitHub 账号，网络中大多是在路径： `~*.ssh*` 下新建文件名为 `config` 。并在其中写入以下下内容：
+对于多个 GitHub 账号，网络中大多是在路径： `~/.ssh/` 下新建文件名为 `config` 。并在其中写入以下下内容：
 
 ```bash
 # Personal account, - the default config

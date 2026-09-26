@@ -351,7 +351,7 @@ counter = counter + 1
 counter += 1
 ```
 
-Other: `-`` `, `* ```.
+Other: `-=`, `*=.
 
 For `counter += 1`, shorter version `counter++`.
 

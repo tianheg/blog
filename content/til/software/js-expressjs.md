@@ -48,12 +48,12 @@ Routing 指一个应用如何响应客户端对特定端点的请求，这个端
 
 提供静态文件：`express.static(root, [options])`
 
-- root 的文件路径是相对于 express 服务的运行路径的，如果为了避免路径错误，可以使用 `const path = require("path"); app.use("/static", express.static(path.join(_<sub>dirname</sub>, "public")))`
+- root 的文件路径是相对于 express 服务的运行路径的，如果为了避免路径错误，可以使用 `const path = require("path"); app.use("/static", express.static(path.join(__dirname, "public")))`
 
 ### auth 例子
 
 ```js
-const hash = require('pbkdf2-password')() // 代码写完，始终不能登录，检查了几遍才发现，这句的最后还需要 \`()\`
+const hash = require('pbkdf2-password')() // 代码写完，始终不能登录，检查了几遍才发现，这句的最后还需要 `()`
 ```
 
 `!module.parent` 已弃用，如何升级？
@@ -68,7 +68,11 @@ const hash = require('pbkdf2-password')() // 代码写完，始终不能登录�
 
 在一个 Cookie 中进行计数操作
 
-[<sup>1</sup>]: <https://stackoverflow.com/a/54114725/12539782> [<sup>2</sup>]: <https://en.wikipedia.org/wiki/Middleware> [<sup>3</sup>]: <https://web.archive.org/web/20050507151935/http://middleware.objectweb.org/>
+## 参考
+
+1. [Stack Overflow: res/req 命名](https://stackoverflow.com/a/54114725/12539782)
+2. [Wikipedia: Middleware](https://en.wikipedia.org/wiki/Middleware)
+3. [Middleware Resource Center（存档）](https://web.archive.org/web/20050507151935/http://middleware.objectweb.org/)
 
 
 相关：[[middleware|middleware]]

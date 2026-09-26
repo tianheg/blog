@@ -25,7 +25,7 @@ header: Web
 
 ### JS 插件
 
-可以分开使用 `js/dist/**.js`，也可以使用所有插件合并的 `bootstrap.min.js`；使用 bundler (Webpack, Rollup...)的话，使用 `/js/dist/**.js`，已经 UMD 完备。
+可以分开使用 `js/dist/*.js`，也可以使用所有插件合并的 `bootstrap.min.js`；使用 bundler (Webpack, Rollup...)的话，使用 `/js/dist/*.js`，已经 UMD 完备。
 
 > UMD 是 JS 模块的通用模块定义方式。这些模块可以在任何地方工作，无论是客户端、服务器还是其他地方。 > > -- <http://jargon.js.org/_glossary/UMD.md>
 
@@ -78,7 +78,7 @@ import { Tooltip, Toast, Popover } from 'bootstrap'
 
 方式一：导入预编译的 Sass
 
-先创建 `<sub>custom</sub>.scss`，覆盖[默认设置](https://getbootstrap.com/docs/5.1/customize/sass/)，然后在 `main.scss` 中导入：
+先创建 `_custom.scss`，覆盖[默认设置](https://getbootstrap.com/docs/5.1/customize/sass/)，然后在 `main.scss` 中导入：
 
 ```scss
 @import 'custom';
@@ -89,7 +89,7 @@ import { Tooltip, Toast, Popover } from 'bootstrap'
 
 ```json
 // ... {
-test: *\.(scss)$*,
+test: /\.(scss)$/,
 use: [{
 // inject CSS to page
 loader: 'style-loader'
@@ -134,7 +134,7 @@ import 'bootstrap/dist/css/bootstrap.min.css'
 module: {
 rules: [
 {
-test: *\.css$*,
+test: /\.css$/,
 use: [
 'style-loader',
 'css-loader'

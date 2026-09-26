@@ -43,7 +43,7 @@ ChatGPT 刚刚通过免费获取 GPT-4o 进行了一次重大升级。自从新�
 
 原始视频：https://www.youtube.com/watch?v=9Ge30rVJVmE
 
-整理CO-STAR,“``` [我如何夺冠新加坡首届 GPT-4 提示工程大赛 [译](https://baoyu.io/translations/prompt-engineering/how-i-won-singapores-gpt-4-prompt-engineering-competition)] # CONTEXT（上下文） # 我想推广公司的新产品。我的公司名为 Alpha，新产品名为 Beta，是一款新型超快速吹风机。
+整理CO-STAR,“[我如何夺冠新加坡首届 GPT-4 提示工程大赛 [译](https://baoyu.io/translations/prompt-engineering/how-i-won-singapores-gpt-4-prompt-engineering-competition)] # CONTEXT（上下文） # 我想推广公司的新产品。我的公司名为 Alpha，新产品名为 Beta，是一款新型超快速吹风机。
 
 ## OBJECTIVE（目标）
 帮我创建一条 Facebook 帖子，目的是吸引人们点击产品链接进行购买。
@@ -58,7 +58,7 @@ ChatGPT 刚刚通过免费获取 GPT-4o 进行了一次重大升级。自从新�
 我们公司在 Facebook 上的主要受众是老年人。请针对这一群体在选择护发产品时的典型关注点来定制帖子。
 
 ## RESPONSE（响应）
-保持 Facebook 帖子简洁而深具影响力。 ```
+保持 Facebook 帖子简洁而深具影响力。
 
 ## CONTEXT（上下文）
 我是一名JavaScript初学者，已经了解了JS的变量、函数等基础内容。

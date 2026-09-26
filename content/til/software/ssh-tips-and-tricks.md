@@ -29,7 +29,7 @@ ssh-add -L
 ```sh
 #!/bin/bash
 if test "$SSH_AUTHSOCK" ; then
-ln -sf $SSH_AUTHSOCK ~*.ssh/ssh_authsock
+ln -sf $SSH_AUTHSOCK ~/.ssh/ssh_authsock
 fi
 ```
 
@@ -40,7 +40,7 @@ fi
 ```conf
 Host example.org
 ControlMaster auto
-ControlPath ~*.ssh*%r@%h:%p.sock
+ControlPath ~/.ssh/%r@%h:%p.sock
 ControlPersist yes
 ```
 
@@ -57,9 +57,9 @@ User foo
 Port 2223
 ```
 
-## Do not add testing stuff to `~/.ssh/known<sub>hosts</sub>`
+## Do not add testing stuff to `~/.ssh/known_hosts`
 
-如果在本地调试 SSH 程序，会弄乱 `~/.ssh/known<sub>hosts</sub>`，也会导致密钥检查失败。
+如果在本地调试 SSH 程序，会弄乱 `~/.ssh/known_hosts`，也会导致密钥检查失败。
 
 通过关闭密匙检查解决问题`~/.ssh/config`：
 

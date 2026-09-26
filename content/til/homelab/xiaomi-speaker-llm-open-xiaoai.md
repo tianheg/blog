@@ -83,7 +83,7 @@ docker compose up -d
 
 ### 接入 Hermes Agent API Server（联网方案，2026-08 实战）
 
-- Hermes gateway 启用 api_server 平台：环境变量 `API_SERVER_ENABLED=1` + `API_SERVER_KEY=<key>`（ **无 key 拒绝启动** ）+ `API_SERVER_HOST=0.0.0.0`（跨主机访问），写入 ~*.hermes*.env 后重启 gateway
+- Hermes gateway 启用 api_server 平台：环境变量 `API_SERVER_ENABLED=1` + `API_SERVER_KEY=<key>`（ **无 key 拒绝启动** ）+ `API_SERVER_HOST=0.0.0.0`（跨主机访问），写入 ~/.hermes/.env 后重启 gateway
 - ⚠️ gateway 进程内不能自杀：`systemctl restart hermes-gateway` 会被 Hermes 拦截，需外部 shell 执行，或写脚本 + `systemd-run --on-active=3s <script>` 绕过
 - 端点：`POST /v1/chat/completions`（OpenAI 兼容，默认端口 8642），认证 `Authorization: Bearer $API_SERVER_KEY`
 - bridge config.py openai 段：`base_url: http://<PVE host IP>:8642/v1`、`api_key: <API_SERVER_KEY>`、`model: hermes-agent`
