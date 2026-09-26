@@ -22,7 +22,9 @@ header: Tools
 
 ## EPUB 3.3 规范里与做书直接相关的部分
 
-EPUB 3.3 是 W3C Recommendation（2025-03-27 发布），也是 EPUB 系列**第一个 W3C 正式推荐标准** —— EPUB 早先由 IDPF 维护，IDPF 2017 年并入 W3C，现在由 Publishing Maintenance WG 在 `w3c/epub-specs` 上开源维护。它**向后兼容 3.2**：任何合法的 3.2 出版物就是合法的 3.3，工作流不用改。
+EPUB 3.3 于 **2023-05-25** 成为 W3C Recommendation，是 EPUB 系列**第一个 W3C 正式推荐标准**（EPUB 早先由 IDPF 维护，IDPF 2017 年并入 W3C，现由 Publishing Maintenance WG 在 `w3c/epub-specs` 上开源维护）。此后出过四次例行更新版（2024-10-17、2025-01-07、2025-03-27、**2026-01-13**，最新一版），每次只做小幅澄清、兼容性不变。它**向后兼容 3.2**：任何合法的 3.2 出版物就是合法的 3.3，工作流不用改。
+
+**做这本书时的时点状态**：EPUB **3.4** 已在路上 —— 2025-03-27 首个公开工作草案，2026-07-21 升到 Candidate Recommendation Snapshot（三份配套一起走：EPUB 3.4 / Reading Systems 3.4 / Accessibility 1.2），官方声明**不早于 2026-10-19** 才可能升 Recommendation。所以现行标准仍是 3.3，但换代不远。
 
 EPUB 3 由三份规范组成：**EPUB 3.3**（创作端，出版物要满足什么）、**Reading Systems 3.3**（消费端，阅读器要满足什么）、**Accessibility 1.1**（无障碍）。另有 informative 的 Notes，其中 Structural Semantics Vocabulary 1.1 是 `epub:type` 的取值全集。
 
@@ -40,8 +42,8 @@ EPUB 3 由三份规范组成：**EPUB 3.3**（创作端，出版物要满足什�
 三条直接影响做书的约束：
 
 - XHTML profile **只认 5 个内建命名实体**（`&lt;` `&gt;` `&amp;` `&quot;` `&apos;`）。Hugo 输出的 `&mdash;` `&ldquo;` `&nbsp;` 全都不合法，必须转成数字实体
-- 内容文档**不能随意引用远程脚本/样式**，所以站点的交互页（搜索、足迹地图）必须排除在书外
-- Reading Systems 规范明说阅读器**可以覆盖字体、颜色、对齐** —— 样式要用相对单位、不能写死颜色，否则用户调不了
+- **远程资源只放开四类**：audio、video、font、script 可以放在容器外（`remote resources`），**其余一律必须存容器内** —— CSS 和图片都不例外。远程引用要在 manifest 的 `item` 上标 `properties="remote-resources"`，规范 RECOMMENDED 走 `https`（`http` 的阅读器可能直接不加载）；而阅读器对远程资源只是 SHOULD 支持，不能依赖 → 站点的交互页（远程脚本 + 外部样式）必须排除在书外
+- Reading Systems 规范的原话是：阅读器 **SHOULD NOT override** 作者样式表，但需要时应通过 UA stylesheet 覆盖并保持层叠；同时"**MAY override parts of the EPUB creator's style sheet because of user interaction**" —— 用户能改字体、主题、字号就是靠这条。所以样式要用相对单位、别写死颜色和对齐
 
 ## 落地管线
 
@@ -92,6 +94,7 @@ EPUB 3 由三份规范组成：**EPUB 3.3**（创作端，出版物要满足什�
 - [weitblick/epub](https://github.com/weitblick/epub) —— 唯一一个公开的 Hugo epub 主题，但最后提交停在 2021-02，模板是 Hugo 0.146 之前的结构、目录里德语硬编码、`ops:type` 拼错，只能当机制参考
 - [Hugo 论坛：generate Hugo website as e-book](https://discourse.gohugo.io/t/generate-hugo-website-as-e-book-epub/29559)
 - [EPUB 3.3](https://www.w3.org/TR/epub-33/) 与 [EPUB 3.3 总览页](https://www.w3.org/publishing/epub33/)
+- [EPUB 3.4](https://www.w3.org/TR/epub-34/) —— Candidate Recommendation 阶段（CR Snapshot 2026-07-21，不早于 2026-10-19 升 REC）
 - [EPUB 3 Structural Semantics Vocabulary](https://www.w3.org/TR/epub-ssv-11/)
 
 相关：[[write-a-good-prompt|write-a-good-prompt]]
