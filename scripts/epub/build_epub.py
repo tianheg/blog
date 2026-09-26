@@ -9,7 +9,7 @@
   * 不改 content/：源里的历史损坏一律在本脚本里修，修完报告，由作者决定是否改源。
 
 用法:
-  build_epub.py -o ~/book.epub --title "天河的博客：文章选辑"
+  build_epub.py -o ~/book.epub --title "天河的博客" --subtitle "文章选辑"
   build_epub.py -o /tmp/full.epub --title "全站" --style site --limit 50
   build_epub.py -o /tmp/x.epub --title "试" --keep-build      # 保留中间产物便于排查
 
@@ -23,10 +23,17 @@ import shutil
 import subprocess
 import sys
 import tempfile
+import uuid
+import zipfile
+from collections import Counter
 
 HERE = pathlib.Path(__file__).resolve().parent          # scripts/epub
 REPO = HERE.parents[1]                                  # 博客仓库根
 SITE = "https://tianheg.co"
+
+# 站点描述：layouts/baseof.html 里 `$description` 的默认值（站点没写 description 时就用它）。
+# 书的 dc:description 用这个——阅读器书库的简介栏读的就是它。
+SITE_DESCRIPTION = "Knowing oneself, grasp the world"
 
 # 要收进书里的目录范围：这里列的是**排除**项。只收 posts 就排掉其余全部。
 EXCLUDE_LIST = [
@@ -87,10 +94,92 @@ def find_pandoc(explicit):
     sys.exit("找不到 pandoc：装到 PATH，或用 PANDOC=... / --pandoc 指定")
 
 
+def collect_subjects(limit=8):
+    """从 content/posts 的 front matter 聚合 tags/categories，写进 dc:subject。
+
+    作用：阅读器书库能按主题筛这本书；不写的话 subject 栏是空的。
+    """
+    import yaml                                   # pyyaml；缺失时本次不做 subject
+    counter = Counter()
+    for f in (REPO / "content/posts").rglob("*.md"):
+        try:
+            txt = f.read_text(encoding="utf-8", errors="ignore")
+            m = re.match(r"^---\n(.*?)\n---", txt, re.S)
+            if not m:
+                continue
+            fm = yaml.safe_load(m.group(1)) or {}
+        except Exception:
+            continue
+        if not isinstance(fm, dict):
+            continue
+        for key in ("tags", "categories"):
+            vals = fm.get(key) or []
+            if isinstance(vals, str):
+                vals = [vals]
+            for v in vals:
+                counter[str(v).strip()] += 1
+    return [t for t, _ in counter.most_common(limit) if t]
+
+
+def patch_opf(epub, subtitle=None, author_sort=None, a11y_summary=None):
+    """补 pandoc 写不出的 OPF 元数据，再原样重打包。
+
+    pandoc 的 EPUB writer 只处理它认识的字段，`title-type` / `file-as` /
+    `accessibilitySummary` 这类 refines 元数据必须自己写 OPF
+    （实测 `--metadata subtitle` 只进标题页，OPF 里没有 subtitle 标记）。
+    重打包时 mimetype 必须仍是第一个条目且不压缩（OCF 要求），否则书直接打不开。
+    返回实际写入的项，供构建日志核对。
+    """
+    src = zipfile.ZipFile(epub)
+    infos = src.infolist()
+    payload = {i.filename: src.read(i.filename) for i in infos}
+    src.close()
+
+    opf_name = "EPUB/content.opf"
+    opf = payload[opf_name].decode("utf-8")
+
+    def esc(s):
+        return s.replace("&", "&amp;").replace("<", "&lt;").replace(">", "&gt;")
+
+    # 书名标 main / subtitle：书库里才分得清主副标题
+    m = re.search(r'<dc:title id="(epub-title-\d+)">(.*?)</dc:title>', opf)
+    if m:
+        tid = m.group(1)
+        block = f'<meta refines="#{tid}" property="title-type">main</meta>'
+        if subtitle:
+            block += (f'\n    <dc:title id="epub-title-2">{esc(subtitle)}</dc:title>'
+                      f'\n    <meta refines="#epub-title-2" property="title-type">subtitle</meta>')
+        opf = opf.replace(m.group(0), m.group(0) + "\n    " + block)
+
+    if author_sort:
+        opf = re.sub(
+            r'(<meta refines="#epub-creator-1" property="role" scheme="marc:relators">aut</meta>)',
+            lambda mo: mo.group(1) + f'\n    <meta refines="#epub-creator-1" property="file-as">'
+                                      f'{esc(author_sort)}</meta>',
+            opf)
+
+    if a11y_summary:
+        opf = opf.replace(
+            "</metadata>",
+            f'    <meta property="schema:accessibilitySummary">{esc(a11y_summary)}</meta>\n  </metadata>')
+
+    payload[opf_name] = opf.encode("utf-8")
+
+    with zipfile.ZipFile(epub, "w") as out:
+        for info in infos:                        # 保持原有顺序
+            if info.filename == "mimetype":
+                info.compress_type = zipfile.ZIP_STORED
+                out.writestr(info, b"application/epub+zip")
+            else:
+                out.writestr(info, payload[info.filename])
+    return [t for t in ("title-type", "file-as", "accessibilitySummary") if t in opf]
+
+
 def main():
     ap = argparse.ArgumentParser()
     ap.add_argument("-o", "--out", required=True, help="输出的 .epub 路径")
     ap.add_argument("--title", required=True, help="书名")
+    ap.add_argument("--subtitle", help="副标题（可选；给了会在 OPF 里标成 subtitle）")
     ap.add_argument("--author", default="tianhe")
     ap.add_argument("--style", choices=["book", "site"], default="book",
                     help="book=纸质书排版（默认）；site=站点 token 版")
@@ -242,13 +331,16 @@ outputs:
     # ---------- 书末版权页 ----------
     today = datetime.date.today().isoformat()
     first_d, last_d = date_of(pages[0]), date_of(pages[-1])
+    subjects = collect_subjects()
+    char_count = len(re.sub(r"\s", "", re.sub(r"<[^>]+>", "", "".join(parts))))
+    subject_line = f"<p>主题：{'、'.join(subjects)}</p>\n" if subjects else ""
     colophon = f"""
 <section id="colophon-sec">
 <h1 id="colophon">关于本书</h1>
 <div class="colophon">
 <p>本文集收录 <a href="{SITE}/posts/">{SITE.replace('https://', '')}/posts</a> 上的 {len(pages)} 篇文章，<br/>
-写作时间从 {first_d} 到 {last_d}。</p>
-<div class="rule"></div>
+写作时间从 {first_d} 到 {last_d}，正文约 {char_count // 10000} 万字。</p>
+{subject_line}<div class="rule"></div>
 <p>© 2018–{today[:4]} tianhe</p>
 <p>文中链接指向原文，可在联网设备上直接打开。</p>
 <p>电子版生成于 {today}</p>
@@ -273,14 +365,25 @@ outputs:
     combined = proj / "combined.html"
     combined.write_text(html, encoding="utf-8")
     print(f"S3 合并文档 {len(html) // 1024} KB | 内链 {stats['internal']} 站外 {stats['external']} "
-          f"去图 {stats['img']} 计数行还原 {stats['dushuji']}")
+          f"去图 {stats['img']} 计数行还原 {stats['dushuji']} | 正文约 {char_count // 10000} 万字")
 
     # ---------- S4 pandoc 打包 ----------
+    # identifier 必须固定：pandoc 默认每次生成随机 UUID，阅读器会把重新构建的同一本书
+    # 当成新书（重复导入、进度丢失）。用 UUIDv5 从站点 URL 派生，永远稳定。
+    book_id = uuid.uuid5(uuid.NAMESPACE_URL, f"{SITE}/posts")
     cmd = [str(pandoc), str(combined), "-f", "html", "-t", "epub3", "--toc", "--toc-depth=1",
            "--split-level=1", "--css", str(css),
            "--metadata", f"title={a.title}", "--metadata", f"author={a.author}",
            "--metadata", "lang=zh", "--metadata", f"date={today}",
+           "--metadata", f"identifier=urn:uuid:{book_id}",
+           "--metadata", "publisher=tianheg.co",
+           "--metadata", f"description={SITE_DESCRIPTION}",
+           "--metadata", f"source={SITE}/posts/",
            "--metadata", f"rights=© 2018–{today[:4]} tianhe"]
+    if a.subtitle:
+        cmd += ["--metadata", f"subtitle={a.subtitle}"]
+    for s in subjects:
+        cmd += ["--metadata", f"subject={s}"]
     if cover.exists():
         cmd += ["--epub-cover-image", str(cover)]
     cmd += ["-o", a.out]
@@ -293,7 +396,13 @@ outputs:
     print("S4 pandoc 警告:", len(errs))
     for l in errs[:5]:
         print("    ", l[:140])
-    print("S4 输出:", a.out, pathlib.Path(a.out).stat().st_size // 1024, "KB")
+
+    added = patch_opf(
+        a.out, subtitle=a.subtitle, author_sort=a.author,
+        a11y_summary=f"{len(pages)} 篇中文博客文章，含完整目录与章节结构；正文为纯文本，未嵌入字体。")
+    print("S4 OPF 补充:", ", ".join(added) if added else "（无）")
+    print("S4 输出:", a.out, pathlib.Path(a.out).stat().st_size // 1024, "KB", "| identifier:", book_id)
+    print("S4 dc:subject:", "、".join(subjects) if subjects else "（无）")
 
     if not a.keep_build:
         shutil.rmtree(proj, ignore_errors=True)
