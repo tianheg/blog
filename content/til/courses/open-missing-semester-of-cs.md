@@ -258,7 +258,7 @@ Vim 有几种模式：
 - Screen: `H` (top of screen), `M` (middle of screen), `L` (bottom of screen)
 - Scroll: `Ctrl-u` (up), `Ctrl-d` (down)
 - File: `gg` (beginning of file), `G` (end of file)
-- Line numbers: `:{number}&lt;CR&gt;` or `{number}G` (line {number})
+- Line numbers: `:{number}<CR>` or `{number}G` (line {number})
 - Misc: `%` (corresponding item)
 - Find: `f{character}`, `t{character}`, `F{character}`, `T{character}`
 - find/to forward/backward {character} on the current line
@@ -295,7 +295,7 @@ Can use movement keys to make selection.
 - `u` to undo, `<C-r>` to redo
 - `y` to copy / "yank" (some other commands like `d` also copy)
 - `p` to paste
-- Lots more to learn: e.g. =~= flips the case of a character
+- Lots more to learn: e.g. `~` flips the case of a character
 ### 计数
 
 - `3w` move 3 words forward
@@ -462,19 +462,19 @@ inoremap <Down> <ESC>:echoe "Use j"<CR>
 - Use a Python program?
 - Use sed / regexes
   - `g/people/d`
-  - `%s/&lt;person&gt;/{/g`
-  - `%s/&lt;name&gt;\(.*\)<\/name>/"name": "\1",/g`
+  - `%s/<person>/{/g`
+  - `%s/<name>\(.*\)<\/name>/"name": "\1",/g`
   - ...
 - Vim commands / macros
   - `Gdd`, `ggdd` delete first and last lines
   - Macro to format a single element (register `e`)
-    - Go to line with `&lt;name&gt;`
-    - `qe^{r}"f>s": "&lt;ESC&gt;f<C"&lt;ESC&gt;q`
+    - Go to line with `<name>`
+    - `qe^{r}"f>s": "<ESC>f<C"<ESC>q`
   - Macro to format a person
-    - Go to line with `&lt;person&gt;`
-    - `qpS{&lt;ESC&gt;j@eA,&lt;ESC&gt;j@ejS},&lt;ESC&gt;q`
+    - Go to line with `<person>`
+    - `qpS{<ESC>j@eA,<ESC>j@ejS},<ESC>q`
   - Macro to format a person and go to the next person
-    - Go to line with `&lt;person&gt;`
+    - Go to line with `<person>`
     - `qq@pjq`
   - Execute macro until end of file
     - `999@q`
@@ -561,22 +561,22 @@ Lesson 6.4: COPY AND PASTE TEXT `v` -> 选择待复制文本 -> `y` -> 移动光
 
 Lesson 6.5: SET OPTION `/ignore` 搜索 ignore `:set ic` 'ic'(Ignore case) `:set hls is` 'hlsearch' 'incsearch' `:set noic` 关闭 Ignore case `:nohlsearch` `/ignore` 仅一次 Ignore case
 
-Lesson 7.1: GETTING HELP `&lt;HELP&gt;` ，`&lt;F1&gt;` 按键，`:help` CTRL-W CTRL-W 跳到另一个窗口 `:q` 退出当前窗口
+Lesson 7.1: GETTING HELP `<HELP>` ，`<F1>` 按键，`:help` CTRL-W CTRL-W 跳到另一个窗口 `:q` 退出当前窗口
 
 Lesson 7.2: CREATE A STARTUP SCRIPT `:e ~/.vimrc` -> `:r $VIMRUNTIME/vimrc_{example}.vim` -> `:w`
 
 Lesson 7.3: COMPLETION `:set nocp` -> `:!ls` -> `:e` -> CTRL-D
 
-1. Download our [basic vimrc](https://missing.csail.mit.edu/2020/files/vimrc) and save it to =~/.vimrc=. Read through the well-commented file (using Vim!), and observe how Vim looks and behaves slightly differently with the new config.
+1. Download our [basic vimrc](https://missing.csail.mit.edu/2020/files/vimrc) and save it to `~/.vimrc`. Read through the well-commented file (using Vim!), and observe how Vim looks and behaves slightly differently with the new config.
 2. Install and configure a plugin: [ctrlp.vim](https://github.com/ctrlpvim/ctrlp.vim).
   1. Create the plugins directory with `mkdir -p ~/.vim/pack/vendor/start`
   2. Download the plugin: `cd ~/.vim/pack/vendor/start; git clone https://github.com/ctrlpvim/ctrlp.vim`
   3. Read the [documentation](https://github.com/ctrlpvim/ctrlp.vim/blob/master/readme.md) for the plugin. Try using CtrlP to locate a file by navigating to a project directory, opening Vim, and using the Vim command-line to start `:CtrlP`.
-  4. Customize CtrlP by adding [configuration](https://github.com/ctrlpvim/ctrlp.vim/blob/master/readme.md#basic-options) to your =~/.vimrc= to open CtrlP by pressing Ctrl-P.
+  4. Customize CtrlP by adding [configuration](https://github.com/ctrlpvim/ctrlp.vim/blob/master/readme.md#basic-options) to your `~/.vimrc` to open CtrlP by pressing Ctrl-P.
 3. To practice using Vim, re-do the [Demo](https://missing.csail.mit.edu/2020/editors/#demo) from lecture on your own machine.
 4. Use Vim for **all** your text editing for the next month. Whenever something seems inefficient, or when you think "there must be a better way", try Googling it, there probably is. If you get stuck, come to office hours or send us an email.
 5. Configure your other tools to use Vim bindings (see instructions above).
-6. Further customize your =~/.vimrc= and install more plugins.
+6. Further customize your `~/.vimrc` and install more plugins.
 7. (Advanced) Convert XML to JSON ([example file](https://missing.csail.mit.edu/2020/files/example-data.xml)) using Vim macros. Try to do this on your own, but you can look at the [macros](https://missing.csail.mit.edu/2020/editors/#macros) section above if you get stuck.
 
 ## Data Wrangling

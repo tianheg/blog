@@ -14,7 +14,7 @@ vim ~/.ssh/allowed_signers
 git config --global gpg.ssh.allowedSignersFile ~/.ssh/allowed_signers
 ```
 
-=~/.ssh/allowed_signers='s content:
+`~/.ssh/allowed_signers`'s content:
 
 ```text
 your_email@example.com ssh-ed25519 AAAAC3...(public key content)

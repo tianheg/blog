@@ -133,7 +133,7 @@ definition"。在那里可以找到当前属性是否可继承。
     }
 ```
 
-color 是可继承的。所以 `&lt;li&gt;` 继承了 .main 的样式；.special
+color 是可继承的。所以 `<li>` 继承了 .main 的样式；.special
 的子元素变成了黑色。
 
 width、margin、padding、border 不可继承。

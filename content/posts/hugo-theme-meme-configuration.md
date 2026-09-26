@@ -6,7 +6,7 @@ tags: ['技术']
 
 ### 卡片风格 {#卡片风格}
 
-在文件 =~/assets/scss/custom/_custom.scss= 中 或者
+在文件 `~/assets/scss/custom/_custom.scss` 中 或者
 在某个需要使用卡片风格的文章中 添加以下样式：
 
 ```css
@@ -87,7 +87,7 @@ tags: ['技术']
 
 ### 文字渐变色 {#文字渐变色}
 
-在文件 =~/assets/scss/custom/_custom.scss= 中添加 *渐变* 样式：
+在文件 `~/assets/scss/custom/_custom.scss` 中添加 *渐变* 样式：
 
 ```css
     .colorfulfont {
@@ -109,7 +109,7 @@ tags: ['技术']
 
 ### 添加博客已运行时间 {#添加博客已运行时间}
 
-在文件 =~/asserts/js/custom.js= 中添加以下内容：
+在文件 `~/asserts/js/custom.js` 中添加以下内容：
 
 ```javascript
     //计算博客运行时间（2020.06.03添加）
@@ -145,7 +145,7 @@ tags: ['技术']
         siteTime()
 ```
 
-其中 =var t1 = Date.UTC(2019, 11, 26, 19, 06, 00)=
+其中 `var t1 = Date.UTC(2019, 11, 26, 19, 06, 00)`
 设置为需要计算的起始日期，如时间是：2020 年 01 月 01 日 00 时 00 分 00
 秒则设置为：
 

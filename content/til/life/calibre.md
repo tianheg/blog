@@ -7,7 +7,13 @@ header: Consumption
 
 ## Calibre web
 
-\`\`\`yml version: "2.1" services: calibre-web: image: linuxserver/calibre-web:latest container<sub>name</sub>: calibre-web environment:
+```yml
+version: "2.1"
+services:
+calibre-web:
+image: linuxserver/calibre-web:latest
+container_name: calibre-web
+environment:
 
 - PUID=1000
 - PGID=1000
@@ -22,7 +28,8 @@ ports:
 
 - 8083:8083
 
-restart: unless-stopped ```
+restart: unless-stopped
+```
 
 在添加数据库的时候遇到问题：总是无法添加。`DB Location is not Valid, Please Enter Correct Path`。上面的配置是修改后的正确配置。
 

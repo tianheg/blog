@@ -127,7 +127,7 @@ https://braydie.gitbooks.io/how-to-be-a-programmer/content/en/
 
 ---
 
-\**一、引言\**
+**一、引言**
 
 > 做一个好的程序员，困难而高尚。
 
@@ -139,7 +139,7 @@ https://braydie.gitbooks.io/how-to-be-a-programmer/content/en/
 这句话，吸引了我的注意力
 
 > 在读这篇文章之前，或者就是现在，你当然也应该读一读 Paul Graham\
-> \[PGSite\] 和 Eric Raymond \[Hacker\] 的文章。
+> [PGSite] 和 Eric Raymond [Hacker] 的文章。
 
 Paul Graham 和 Eric Raymond 都是编程领域最值得我学习的人
 
@@ -255,7 +255,7 @@ Paul Graham 和 Eric Raymond 都是编程领域最值得我学习的人
 > I/O，还有其他与处理器不太接近的硬件使用。所以构建一个快速的系统通常是提高\
 > I/O，而非在紧凑的循环里优化代码或优化算法的问题。
 >
-> \**有两种基本的技术来优化 I/O：caching 和 representation\**。
+> **有两种基本的技术来优化 I/O：caching 和 representation**。
 >
 > 缓存是通过本地存储数据的副本，再次获取数据时就不需要再执行\
 > I/O，以此来避免\
@@ -288,6 +288,6 @@ Paul Graham 和 Eric Raymond 都是编程领域最值得我学习的人
 - 读一些关于最新设计技术的书\
 - 动手设计一个小的工程（最后完成时思考：为什么设计成功或失败；怎样偏离最初的设想）\
 - 着手一个大工程\
-- 发展出自己的风格是自然而有用的（记住：\**设计是一种艺术，而不是一种技术\**）不要武断对待特定的设计风格
+- 发展出自己的风格是自然而有用的（记住：**设计是一种艺术，而不是一种技术**）不要武断对待特定的设计风格
 
 <span style="color:var(--dushuji-count-color)">2025年读完的第45本，总阅读量第45本</span>

@@ -307,7 +307,7 @@ JavaScript 沙盒可能是未来一种更高级别的容器。它通过 Wasm 执
 不过数组里的 "holes" 就非常难以理解了。
 
 产生 holes
-的方法有两种：一是定义数组字面量时写两个连续的逗号：=var a = [1, , 2]=；二是使用
+的方法有两种：一是定义数组字面量时写两个连续的逗号：`var a = [1, , 2]`；二是使用
 `Array` 对象的构造器，`new Array(3)`。
 
 数组的各种方法对于 holes
@@ -456,7 +456,7 @@ Express 能干什么：
 #### helloworld 例子
 
 学习到如何开启
-Express：=const express = require("express"); const app = express()=
+Express：`const express = require("express"); const app = express()`
 
 如何设置根路由：=app.get("/", (req, res) `> { res.send("Hello World")})`，[在 Node.js 中 req(request) 和 res(response) 是相同功能的对象](https://expressjs.com/en/starter/hello-world.html#running-locally)，因此在不使用 Express 的情况下，可以调用
 `req.pipe().req.on("date", callback)` 。Node 中的 res 和 req
@@ -498,7 +498,7 @@ URI/路径 和 一个指定的 HTTP 请求方式（GET、POST、等等）。
 
 - root 的文件路径是相对于 express
    服务的运行路径的，如果为了避免路径错误，可以使用
-   =const path = require("path"); app.use("/static", express.static(path.join(__dirname, "public")))=
+   `const path = require("path"); app.use("/static", express.static(path.join(__dirname, "public")))`
 
 #### auth 例子
 
@@ -1695,7 +1695,7 @@ unrelated objects `bird` and `plane`.
 ```
 
 为什么上述代码片段，返回 `undefined` ？因为
-=str.substring(str.length - target.length) == target= 中有未定义的部分。
+`str.substring(str.length - target.length) == target` 中有未定义的部分。
 
 三元操作符的原始结构：
 
@@ -1705,7 +1705,7 @@ unrelated objects `bird` and `plane`.
 
 参数 `condition` 必须是一个表达式。
 
-=str.substring(str.length - target.length) == target=
+`str.substring(str.length - target.length) == target`
 应该是表达式，它满足表达式的一个要求：一段能够返回结果的代码。但并不完全。表达式的所有类型：
 
 1. 算术表达式：计算结果为数字的（通常使用[算术操作符](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Guide/Expressions_and_Operators#arithmetic_operators)）
@@ -2203,7 +2203,7 @@ import { reactive } from 'vue'
 const state = reactive({ count: 0 )}
 ```
 
-******* 使用 `&lt;script setup&gt;` 与否的对比
+#### 使用 `<script setup>` 与否的对比
 
 ```html
 <!--- 不使用 --->
@@ -2243,7 +2243,7 @@ function increment() {
 </template>
 ```
 
-******* DOM Update Timing
+#### DOM Update Timing
 
 ```html
 <script setup>
@@ -2268,7 +2268,7 @@ function increment() {
 </template>
 ```
 
-******* Deep Reactivity
+#### Deep Reactivity
 
 In Vue, state is deeply reactive by default.
 
@@ -2285,7 +2285,7 @@ function mutateDeeply() {
 }
 ```
 
-******* Reactive Proxy vs. Original
+#### Reactive Proxy vs. Original
 
 ```javascript
 import { reactive } from 'vue'
@@ -2303,7 +2303,7 @@ proxy.nested = raw
 console.log(proxy.nested === raw)
 ```
 
-******* `reactive()` 的限制
+#### `reactive()` 的限制
 
 1. 数据类型仅限于对象
 2. 无法替换响应式（代理）对象，一旦替换原来的响应式对象会失去连接
@@ -2354,7 +2354,7 @@ callSomeFunction(obj.foo)
 const { foo, bar } = obj
 ```
 
-******* ref 在模板中的解包
+#### ref 在模板中的解包
 ```html
 <script setup>
 import { ref } from 'vue'
@@ -2408,7 +2408,7 @@ const { foo } = object
 </template>
 ```
 
-******* ref 在响应式对象中的解包
+#### ref 在响应式对象中的解包
 ```javascript
 import { ref, reactive } from 'vue'
 const count = ref(0)
@@ -2535,7 +2535,7 @@ console.log(fullName.value)
 ###### Class and Style Bindings
 数据绑定的常见应用就是操作元素的类列表和行内样式。但是，在处理比较复杂的绑定时，通过拼接生成字符串是麻烦且易出错的。因此，Vue 专门为 `class` 和 `style` 的 `v-bind`  用法提供了特殊的功能增强。除了字符串外，表达式的值也可以是对象或数组。
 ####### Binding HTML Classes
-******* Binding to Objects
+#### Binding to Objects
 ```html
 <div :class="{ active: isActive }"></div>
 ```
@@ -2590,7 +2590,7 @@ const classObject = computed(() => ({
 </template>
 ```
 
-******* Binding to Arrays
+#### Binding to Arrays
 
 ```html
 <script setup>
@@ -2607,7 +2607,7 @@ const errorClass = ref('text-danger')
 <div :class="[{ active: isActive }, errorClass]"></div>
 ```
 
-******* With Components
+#### With Components
 
 组件内部对一个元素添加 class，使用组件时又添加一次，两次的 class 会合并。可以用 `$attrs.class` 只应用“使用组件”时的 class。
 
@@ -2656,7 +2656,7 @@ const styleObject = reactive({
 
 v-else 必须和 v-if/v-else-if 搭配使用
 
-v-show 所在元素会被渲染成 DOM 树；v-show 只是在切换 CSS display 属性；不支持用在 `&lt;template&gt;` ，也不和 v-else 搭配使用。
+v-show 所在元素会被渲染成 DOM 树；v-show 只是在切换 CSS display 属性；不支持用在 `<template>` ，也不和 v-else 搭配使用。
 
 ```html
 <button @click="awe = !awe">Toggle</button>
@@ -2750,7 +2750,7 @@ const myObject = reactive({
 </template>
 ```
 
-4. v-for on `&lt;template&gt;`
+4. v-for on `<template>`
 
 ```html
 <script setup>
@@ -2810,7 +2810,7 @@ const items = ref([{ msg: 'hello'}, {msg: 'hell'}, {msg: 'hel'}, {msg: 'he'}, {m
 </template>
 ```
 
-当使用 `&lt;template v-for&gt;` 时，key 应位于 `&lt;template&gt;` 容器。
+当使用 `<template v-for>` 时，key 应位于 `<template>` 容器。
 
 ```html
 <template v-for="todo in todos" :key="todo.name">
@@ -3407,10 +3407,10 @@ deep copy 是截然相反的。进行 deep copy
 
 在数组对象名为 copy 的浅拷贝中，`copy[0]` 的值为
 `{"list":["butter","flour"]}` ，之后进行操作
-=copy[0].list = ["a", "b"]=，然后源对象中相应的元素也会改变。因为你选择性地改变了一个对象属性，这一属性由源对象和它的浅拷贝共享。
+`copy[0].list = ["a", "b"]`，然后源对象中相应的元素也会改变。因为你选择性地改变了一个对象属性，这一属性由源对象和它的浅拷贝共享。
 
 然而，如果你进行操作
-=copy[0] = {"list":["a", "b"]}=，源对象相应元素则*不会改变* 。因为在这种情况下，并不是选择性改变一个数组的已存在元素（与浅拷贝共享），而是仅仅在浅拷贝数组上给
+`copy[0] = {"list":["a", "b"]}`，源对象相应元素则*不会改变* 。因为在这种情况下，并不是选择性改变一个数组的已存在元素（与浅拷贝共享），而是仅仅在浅拷贝数组上给
 `copy[0]` 数组元素赋予了一个全新的值。
 
 一个对 JS 对象进行深层拷贝的方式：先用 `JSON.stringify()` 将对象转化为

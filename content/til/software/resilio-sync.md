@@ -24,13 +24,13 @@ sudo chown archie:wheel rslsync.conf
 
 修改如下设置：
 
-- storage<sub>path</sub>
-- pid<sub>file</sub>
+- storage_path
+- pid_file
 - webui.listen
 - webui.login
 - webui.password
 
-确保 `storage<sub>path</sub>` 和 `pid<sub>file</sub>` 路径的文件夹都已经新建完毕。
+确保 `storage_path` 和 `pid_file` 路径的文件夹都已经新建完毕。
 
 然后执行：
 

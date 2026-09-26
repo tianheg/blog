@@ -25,13 +25,20 @@ header: Web
 
 例如，这里的 CommonJS 模块导出了两个函数：
 
-\`\`\`js // util.js module.exports.add = function (a, b) { return a + b } module.exports.subtract = function (a, b) { return a - b } \`\`\`
+```js
+// util.js
+module.exports.add = function (a, b) { return a + b }
+module.exports.subtract = function (a, b) { return a - b }
+```
 
 我们还可以用`require()`将这两个公共函数导入另一个 Node.js 脚本：
 
-\`\`\`js const { add, subtract } = require('./util')
+```js
+const { add, subtract } = require('./util')
 
-console.log(add(5, 5)) console.log(subtract(5, 5)) ```
+console.log(add(5, 5))
+console.log(subtract(5, 5))
+```
 
 深入学习 CommonJS 模块，见 [这里](https://blog.logrocket.com/es-modules-in-node-today/#commonjsmodulesystem)。
 
@@ -39,17 +46,32 @@ console.log(add(5, 5)) console.log(subtract(5, 5)) ```
 
 例如，以下是一个简单的 ES 模块（扩展名是 `.mjs`），导出两个函数供大家使用。
 
-\`\`\`js // util.mjs export function add(a, b) { return a + b } export function subtract(a, b) { return a - b } \`\`\`
+```js
+// util.mjs
+export function add(a, b) { return a + b }
+export function subtract(a, b) { return a - b }
+```
 
 然后，使用 `import` 语句导入两个函数：
 
-\`\`\`js // app.mjs import { add, subtract } from './util.mjs'
+```js
+// app.mjs
+import { add, subtract } from './util.mjs'
 
-console.log(add(5, 5)) console.log(subtract(5, 5)) ```
+console.log(add(5, 5))
+console.log(subtract(5, 5))
+```
 
 另一种开启 ES 模块的方式：在包的根目录下的 `package.json` 文件中，加入 `"type: module"`：
 
-\`\`\`js { "name": "my-library", "version": "1.0.0", "type": "module", // ... } \`\`\`
+```js
+{
+"name": "my-library",
+"version": "1.0.0",
+"type": "module",
+// ...
+}
+```
 
 有了它，该包下的所有 js 文件都被视为 ES 模块文件，不需要 mjs 扩展名。了解更多 ES 模块信息，见 [这里](https://blog.logrocket.com/how-to-use-ecmascript-modules-with-node-js/)。
 
@@ -81,19 +103,54 @@ CommonJS 模块系统，则是内建于 Node.js。在 Node.js 引入 ES 模块�
 
 考虑以下库：
 
-\`\`\`text my-node-library ├── lib/ │ ├── browser-lib.js (iife format) │ ├── module-a.js (commonjs format) │ ├── module-a.mjs (es6 module format) │ └── private/ │ ├── module-b.js │ └── module-b.mjs ├── package.json └── ... \`\`\`
+```text
+ my-node-library
+├── lib/
+│ ├── browser-lib.js (iife format)
+│ ├── module-a.js (commonjs format)
+│ ├── module-a.mjs (es6 module format)
+│ └── private/
+│ ├── module-b.js
+│ └── module-b.mjs
+├── package.json
+└── ...
+```
 
 在 `package.json` 文件中的 `exports` 位置，用两种格式导出公共模块（`module-a`），限制对私有模块（`module-b`）的访问。
 
-\`\`\`json // package.json { "name": "my-library", "exports": { ".": { "browser": { "default": "./lib/browser-module.js" } }, "module-a": { "import": "./lib/module-a.mjs" "require": "./lib/module-a.js" } } } \`\`\`
+```json
+// package.json
+{
+"name": "my-library",
+"exports": {
+".": {
+"browser": {
+"default": "./lib/browser-module.js"
+}
+},
+"module-a": {
+"import": "./lib/module-a.mjs"
+"require": "./lib/module-a.js"
+}
+}
+}
+```
 
 通过提供以下关于 `my-library` 的信息，我们可以在任何支持它的地方使用它：
 
-\`\`\`js // For CommonJS const moduleA = require('my-library/module-a')
+```js
+// For CommonJS
+const moduleA = require('my-library/module-a')
 
-// For ES6 Module import moduleA from 'my-library/module-a'
+// For ES6 Module
+import moduleA from 'my-library/module-a'
 
-// This will not work const moduleA = require('my-library/lib/module-a') import moduleA from 'my-awesome-lib/lib/public-module-a' const moduleB = require('my-library/private/module-b') import moduleB from 'my-library/private/module-b' ```
+// This will not work
+const moduleA = require('my-library/lib/module-a')
+import moduleA from 'my-awesome-lib/lib/public-module-a'
+const moduleB = require('my-library/private/module-b')
+import moduleB from 'my-library/private/module-b'
+```
 
 因为 `exports` 的路径，我们可以导入（和 `require()`）我们的公共模块，而不需要指定绝对路径。通过导入 js 和 mjs 后缀的文件，我们可以解决不兼容的问题；我们可以将软件包映射到不同的环境，如浏览器和 Node.js，同时限制访问私有模块。
 
@@ -111,13 +168,20 @@ CommonJS 模块系统，则是内建于 Node.js。在 Node.js 引入 ES 模块�
 
 另一方面，`require()` 函数在运行时解析。因此，`require()` 可以在任何地方调用。
 
-\`\`\`text 运行时解析，是否意味着编写代码时，是不需要关心 require 的包的内容的？ \`\`\`
+```text
+ 运行时解析，是否意味着编写代码时，是不需要关心 require 的包的内容的？
+```
 
 你可以将它用于各种情况下加载模块，比如 `if` 引导的条件句、条件循环语句、和函数等。
 
 例如，在条件语句中调用 `require()`：
 
-\`\`\`js if (user.length > 0) { const userDetails = require('./userDetails.js') // Do something... } \`\`\`
+```js
+if (user.length > 0) {
+const userDetails = require('./userDetails.js')
+// Do something...
+}
+```
 
 只有至少一个用户存在时，我们才能调用 `userDetails` 模块。
 

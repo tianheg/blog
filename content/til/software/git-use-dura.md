@@ -9,11 +9,16 @@ header: Git
 
 ## 配置
 
-\`\`\`bash
+```bash
 
-yay -S dura-git dura serve & # Run it in the background cd /git/repo/ dura watch
+yay -S dura-git
+dura serve & # Run it in the background
+cd /git/repo/
+dura watch
 
-## watch all git repo under /home/user find ~ -type d -name .git -prune | xargs -I= sh -c "cd =/..; dura watch" # BE CAREFUL!!! use when knowing what you are doing ```
+## watch all git repo under /home/user
+find ~ -type d -name .git -prune | xargs -I= sh -c "cd =/..; dura watch" # BE CAREFUL!!! use when knowing what you are doing
+```
 
 
 相关：[[git-proxy|git-proxy]]

@@ -23,7 +23,7 @@ export https_proxy_pass=pass
 ```
 
 #### pip
-=~/.config/pip/pip.conf=
+`~/.config/pip/pip.conf`
 
 ```
 [global]
@@ -37,7 +37,7 @@ refer <https://pip.pypa.io/en/stable/user_guide/#using-a-proxy-server>
 #### Git
 1. Clone with ssh
 
-   在文件 =~/.ssh/config= 后添加下面两行：
+   在文件 `~/.ssh/config` 后添加下面两行：
 
 ```bash
    Host github.com
@@ -107,12 +107,12 @@ refer <https://askubuntu.com/a/349765/883355>
 socks5 = "127.0.0.1:1080"
 ```
 
-add to =~/.curlrc=
+add to `~/.curlrc`
 
 refer <https://www.zhihu.com/question/31360766>
 
 #### Gradle
-=~/.gradle/gradle.properties= ：
+`~/.gradle/gradle.properties` ：
 
 ```
 systemProp.http.proxyHost=127.0.0.1
@@ -196,7 +196,7 @@ export https_proxy=http://127.0.0.1:1080
 ```
 
 #### gem
-=~/.gemrc= ：
+`~/.gemrc` ：
 
 ```
 ---
@@ -210,7 +210,7 @@ ALL_PROXY=socks5://localhost:1080 brew ...
 ```
 
 #### wget
-=~/.wgetrc= ：
+`~/.wgetrc` ：
 
 ```
 use_proxy=yes

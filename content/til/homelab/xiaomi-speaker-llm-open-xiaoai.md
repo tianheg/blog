@@ -83,10 +83,10 @@ docker compose up -d
 
 ### 接入 Hermes Agent API Server（联网方案，2026-08 实战）
 
-- Hermes gateway 启用 api_server 平台：环境变量 `API_SERVER_ENABLED=1` + `API_SERVER_KEY=&lt;key&gt;`（ **无 key 拒绝启动** ）+ `API_SERVER_HOST=0.0.0.0`（跨主机访问），写入 ~*.hermes*.env 后重启 gateway
-- ⚠️ gateway 进程内不能自杀：`systemctl restart hermes-gateway` 会被 Hermes 拦截，需外部 shell 执行，或写脚本 + `systemd-run --on-active=3s &lt;script&gt;` 绕过
+- Hermes gateway 启用 api_server 平台：环境变量 `API_SERVER_ENABLED=1` + `API_SERVER_KEY=<key>`（ **无 key 拒绝启动** ）+ `API_SERVER_HOST=0.0.0.0`（跨主机访问），写入 ~*.hermes*.env 后重启 gateway
+- ⚠️ gateway 进程内不能自杀：`systemctl restart hermes-gateway` 会被 Hermes 拦截，需外部 shell 执行，或写脚本 + `systemd-run --on-active=3s <script>` 绕过
 - 端点：`POST /v1/chat/completions`（OpenAI 兼容，默认端口 8642），认证 `Authorization: Bearer $API_SERVER_KEY`
-- bridge config.py openai 段：`base_url: http://&lt;PVE host IP&gt;:8642/v1`、`api_key: <API_SERVER_KEY>`、`model: hermes-agent`
+- bridge config.py openai 段：`base_url: http://<PVE host IP>:8642/v1`、`api_key: <API_SERVER_KEY>`、`model: hermes-agent`
 - 效果：音箱问话走 Hermes agent（联网搜索/工具/记忆）；max_tokens 512 也够用（实测联网正常）；agent 响应慢属正常（工具循环）
 
 ## 排障（实战踩坑）
@@ -99,7 +99,7 @@ docker compose up -d
 6. 容器内调试用 `*app*.venv/bin/python`（默认 python3 缺 aiohttp），backend 类名是 OpenAIManager。
 7. **两个超时别搞混** ：连续对话静默退出 = `wakeup.timeout`（默认 20 秒，改 120 即 2 分钟不说话才"再见"）；等 LLM 回复 = openai 段 `response_timeout`（120→300 给 agent 工具循环留时间）。
 8. **xiaomusic 共存** ：音箱双通道下 xiaomusic 可能"自动播放"——列表续播（`continue_play=True`）是设计；搜歌请求看来源 IP（iWebPlayer 网页 vs 音箱语音劫持 `get_ask_by_mina`/`enable_pull_ask`）。
-9. **bridge 僵尸态（2026-08 实测，watchdog 盲区）** ：容器活着、4399/9092 LISTEN、TCP 握手正常，但 bridge 只回 TCP 层 ACK、无任何应用层响应（无 `101 Switching Protocols`、无 `已连接` 日志），事件循环不再处理新连接。判定法：bridge 日志从最后一次活动后**完全空白**（无断开/无重连/无 No response——原 watchdog 找 No response 所以失灵）+ 音箱侧 `tcpdump -i wlan0 -n 'tcp port 4399'` 抓到握手后无数据流。修法：`docker compose restart`。**音箱侧 client 进程活着但 0 packets = 同款僵尸**：先 `kill &lt;pid&gt;` + `sh /data/init.sh >/dev/null 2>&1 &` 重启 client，无效则僵尸在 bridge 侧。
+9. **bridge 僵尸态（2026-08 实测，watchdog 盲区）** ：容器活着、4399/9092 LISTEN、TCP 握手正常，但 bridge 只回 TCP 层 ACK、无任何应用层响应（无 `101 Switching Protocols`、无 `已连接` 日志），事件循环不再处理新连接。判定法：bridge 日志从最后一次活动后**完全空白**（无断开/无重连/无 No response——原 watchdog 找 No response 所以失灵）+ 音箱侧 `tcpdump -i wlan0 -n 'tcp port 4399'` 抓到握手后无数据流。修法：`docker compose restart`。**音箱侧 client 进程活着但 0 packets = 同款僵尸**：先 `kill <pid>` + `sh /data/init.sh >/dev/null 2>&1 &` 重启 client，无效则僵尸在 bridge 侧。
 10. **唤醒词选词（sherpa-onnx KWS 实测）** ：只有"你好小X"四字模式识别稳定（"你好小智"4 次全中）；"小智小智"（重复音节、卷舌音"智"音素边界被吞）和"小智同学"都匹配不上，keywords_score 加到 4.0 也救不回来；且"小智同学"会误触发原生"小爱同学"抢答（发音太像，日志见 `[XiaoAI] 触发唤醒: 小爱同学` + `returned: None`）。换词要同步改 config.py 三处：keywords 列表、before_wakeup 路由判断（`if "小明" in text`）、提示语/退出语文案。
 11. **距离 1 米唤醒失效 = 增益问题** ：50cm 能唤醒、1m 不行，但"小爱同学"1m 正常——原生唤醒是硬件 DSP+波束成形，本地 KWS 靠 client 裸音频流。修法：config.py `audio_input.gain` 1.0→**4.0**（上限 8.0，`core/xiaoai.py` 处理，作用于 VAD/KWS/ASR 全链路）。放音乐时本地唤醒失败同理（mic 采到外放+人声，信噪比差），排查先暂停音乐。
 12. **"音乐自动播放"溯源链** ：说"播放音乐"→ Hermes agent 工具调用**已执行**（curl xiaomusic 播歌）→ 但 LLM 回复超时（response_timeout 120 太短）→ 用户听到"抱歉，我没有收到回复"以为 AI 没理 → 歌单已起来 + `continue_play=True` 续播 → 音乐盖住后续唤醒测试，形成"AI 听不见"假象。停播：`POST :8090/cmd` 必须带 `did`（否则 422）。

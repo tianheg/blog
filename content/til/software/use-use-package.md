@@ -1,5 +1,5 @@
 ---
-title: 'Use =use-package='
+title: 'Use use-package'
 status: draft
 date: 2025-06-15T19:22:54+08:00
 header: Tools

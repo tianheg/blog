@@ -11,15 +11,28 @@ header: Web
 
 ### 使用模板
 
-\`\`\`bash pnpm create slidev \`\`\`
+```bash
+ pnpm create slidev
+```
 
 ### 手动安装
 
-\`\`\`bash pnpm add @slidev/cli @slidev/theme-default echo 'shamefully-hoist=true' >> .npmrc touch slides.md npx slidev -h \`\`\`
+```bash
+pnpm add @slidev/cli @slidev/theme-default
+echo 'shamefully-hoist=true' >> .npmrc
+touch slides.md
+npx slidev -h
+```
 
 ### Docker
 
-\`\`\`bash docker run --name slidev --rm -it \ --user node \ -v ${PWD}:/slidev \ -p 3030:3030 \ tangramor/slidev:latest \`\`\`
+```bash
+docker run --name slidev --rm -it \
+--user node \
+-v ${PWD}:/slidev \
+-p 3030:3030 \
+tangramor/slidev:latest
+```
 
 ## 特性支持
 

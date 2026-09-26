@@ -7,7 +7,10 @@ header: Tools
 
 <https://gulpjs.com/>
 
-\`\`\`sh pnpm install --save-dev gulp touch gulpfile.js \`\`\`
+```sh
+pnpm install --save-dev gulp
+touch gulpfile.js
+```
 
 `gulpfile.js`:
 
@@ -17,7 +20,9 @@ header: Tools
 
 ## Sass
 
-\`\`\`sh pnpm install --save-dev sass gulp-sass \`\`\`
+```sh
+pnpm install --save-dev sass gulp-sass
+```
 
 
 相关：[[eslint|eslint]]

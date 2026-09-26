@@ -9,11 +9,20 @@ header: Web
 
 用 [Mochajs](https://mochajs.org/)。
 
-\`\`\`bash pnpm init -y pnpm install --save-dev mocha mkdir test code test/test.js \`\`\`
+```bash
+pnpm init -y
+pnpm install --save-dev mocha
+mkdir test
+code test/test.js
+```
 
 `package.json`:
 
-\`\`\`json "scripts": { "test": "mocha" } \`\`\`
+```json
+"scripts": {
+"test": "mocha"
+}
+```
 
 \`\`\`bash pnpm test \`\`\`
 

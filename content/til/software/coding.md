@@ -1153,7 +1153,7 @@ AI-Assisted Isomorphic Application Engine
 - [Smashing Magazine](https://www.smashingmagazine.com/)
 - [Designer News](https://www.designernews.co/)
 - [Web Designer News](https://www.webdesignernews.com/)
-- [r/web<sub>design</sub>](https://www.reddit.com/r/web_design/)
+- [r/web_design](https://www.reddit.com/r/web_design/)
 - [Marvel Blog](https://marvelapp.com/blog/)
 - [Medium.design](https://medium.com/design)
 - [Design & UX](https://www.sitepoint.com/design-ux/)
@@ -1457,7 +1457,7 @@ AI-Assisted Isomorphic Application Engine
 - 非阻塞 I/O
 - I/O 的多路复用（select 和 poll）
 - 信号驱动的 I/O（SIGIO）
-- 异步 I/O（POSIX 的 aio<sub>functions</sub>）
+- 异步 I/O（POSIX 的 aio_functions）
 
 Java 相关的 I/O 模型的文章：[Thousands of Threads and Blocking I/O](https://www.slideshare.net/e456/tyma-paulmultithreaded1)
 

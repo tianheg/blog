@@ -16,7 +16,7 @@ GitHub Action
 ### 一、 {#一}
 
 新建一个名字任意的仓库，新建文件名为 `ci.yml` 路径为
-=~/.github/workflows/ci.yml= ，并存放以下内容：
+`~/.github/workflows/ci.yml` ，并存放以下内容：
 
 ```
     name: update stars # GitHub Action 的名字

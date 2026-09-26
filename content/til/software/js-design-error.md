@@ -114,7 +114,7 @@ JavaScript 中，正则对象上的函数是有状态的，这使得这些方法
 
 而对象真正意义上的原型，在 ES5 引入 Object.getPrototypeOf() 方法之前，我们并没有常规的方法可以获取。
 
-不过很多浏览器都实现了非标准的 _<sub>proto</sub>__（IE 除外），在 ES2015 中，这一扩展属性也得以标准化了。
+不过很多浏览器都实现了非标准的 __proto__（IE 除外），在 ES2015 中，这一扩展属性也得以标准化了。
 
 1. Object destructuring syntax
 

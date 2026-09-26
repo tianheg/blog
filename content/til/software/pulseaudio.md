@@ -11,7 +11,9 @@ header: Linux
 
 解决办法：
 
-\`\`\`sh killall pulseaudio \`\`\`
+```sh
+killall pulseaudio
+```
 
 来源: <https://unix.stackexchange.com/a/171925>
 

@@ -9,17 +9,34 @@ header: Programming
 
 <https://github.com/pyscript/pyscript>
 
-\`\`\`html hl<sub>lines</sub>`"2 3" <!DOCTYPE html> &lt;html lang`"en"&gt;
+```html
+hl_lines`"2 3"
+<!DOCTYPE html>
+<html lang`"en">
 
-&lt;head&gt; &lt;meta charset="utf-8" /&gt; &lt;meta name="viewport" content="width=device-width,initial-scale=1" /&gt;
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width,initial-scale=1" />
 
-&lt;title&gt;PyScript Hello World</title>
+<title>PyScript Hello World</title>
 
-&lt;link rel="stylesheet" href="<https://pyscript.net/alpha/pyscript.css>" /&gt; &lt;script defer src="<https://pyscript.net/alpha/pyscript.js>"&gt;</script> </head>
+<link rel="stylesheet" href="<https://pyscript.net/alpha/pyscript.css>" />
+<script defer src="<https://pyscript.net/alpha/pyscript.js>"></script>
+</head>
 
-&lt;body&gt; Hello world! &lt;br&gt; This is the current date and time, as computed by Python: <py-script> from datetime import datetime now = datetime.now() now.strftime("%m/%d/%Y, %H:%M:%S") </py-script> </body>
+<body>
+Hello world!
+<br>
+This is the current date and time, as computed by Python:
+<py-script>
+from datetime import datetime
+now = datetime.now()
+now.strftime("%m/%d/%Y, %H:%M:%S")
+</py-script>
+</body>
 
-</html> ```
+</html>
+```
 
 
 相关：[[write-a-good-prompt|write-a-good-prompt]]

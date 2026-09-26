@@ -8,10 +8,14 @@ header: Web
 ### --- title: "JS ReferenceError -- Assignment to undeclared variable"
 错误代码：
 
-\`\`\`js index = game.initialisingPlayers.indexOf(data.id) \`\`\`
+```js
+index = game.initialisingPlayers.indexOf(data.id)
+```
 
 正确代码：
 
-\`\`\`js let index = game.initialisingPlayers.indexOf(data.id) \`\`\`
+```js
+let index = game.initialisingPlayers.indexOf(data.id)
+```
 
 或者使用 const。

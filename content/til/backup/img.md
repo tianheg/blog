@@ -18,7 +18,7 @@ date: 2025-10-24T21:46:26+08:00
 
 基础配置很简单，复杂起来也挺头痛。
 
-=~/.config/rclone/rclone.conf= ：
+`~/.config/rclone/rclone.conf` ：
 
 ```
 [storagebox]

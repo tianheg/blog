@@ -7,11 +7,14 @@ header: Linux
 
 <https://linuxhint.com/restart-ubuntu-server/>
 
-\`\`\`sh sudo reboot sudo systemctl reboot
+```sh
+sudo reboot
+sudo systemctl reboot
 
 sudo shutdown -r
 
-init 0 ```
+init 0
+```
 
 
 相关：[[linux-ubuntu22-04-remove-snap|linux-ubuntu22-04-remove-snap]]

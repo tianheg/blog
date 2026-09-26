@@ -188,7 +188,7 @@ export GTK_IM_MODULE="fcitx5"
 export QT_IM_MODULE="fcitx5"
 ```
 
-Rime 配置（ =~/.local/share/fcitx5/rime/default.custom.yaml= ）：
+Rime 配置（ `~/.local/share/fcitx5/rime/default.custom.yaml` ）：
 
 ```yaml
 patch:
@@ -455,7 +455,7 @@ echo url=https://github.com | git credential fill # complete the authentication 
 
 ## GPG
 
-修改 =~*.gnupg*= 权限：
+修改 `~*.gnupg*` 权限：
 
 ```bash
 # https://superuser.com/a/954536 ; https://superuser.com/a/954639
@@ -469,7 +469,7 @@ chmod 600 ~/.gnupg/*
 
 这几条命令解决 `gpg: WARNING: unsafe permissions on homedir '/home/user/.gnupg'` 。
 
-**把 =~/.gnupg= 文件夹保存在安全的地方** ，然后导入 GitHub(user + web-flow)公钥：
+**把 `~/.gnupg` 文件夹保存在安全的地方** ，然后导入 GitHub(user + web-flow)公钥：
 
 ```bash
 wget -O tianheg-pubkeys.txt https://github.com/tianheg.gpg
@@ -478,7 +478,7 @@ gpg --import tianheg-pubkeys.txt
 gpg --import github-web-flow.txt
 ```
 
-安装 seahorse 以防止每次 git commit 都要输入密码（不必麻烦，通过设置 =~/.gnupg/gpg-agent.conf= 可以延长密码时效）。
+安装 seahorse 以防止每次 git commit 都要输入密码（不必麻烦，通过设置 `~/.gnupg/gpg-agent.conf` 可以延长密码时效）。
 
 ```ini
 default-cache-ttl 28800
@@ -518,7 +518,7 @@ pulseaudio -k
 
 在 KDE 的音量设置界面，先设置成其他声卡输出，然后再设置成 Analog Stereo Duplex。可能有效果。
 
-=~/.config/pulse/default.pa= ：
+`~/.config/pulse/default.pa` ：
 
 ```pa
 .include /etc/pulse/default.pa
@@ -740,7 +740,7 @@ pacman -S bat bat-extras
 pacman -S tldr
 ```
 
-在 =~/.zshrc= 中加入以下内容：
+在 `~/.zshrc` 中加入以下内容：
 
 ```ini
 export TLDR_CACHE_ENABLED=1

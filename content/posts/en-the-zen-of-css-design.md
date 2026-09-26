@@ -25,14 +25,14 @@ Chapter 1. View Source
 > realized\
 > that the people who should be using it weren't.
 
-> **What's the difference between a `&lt;p&gt;` tag and a p element, anyway?**
+> **What's the difference between a `<p>` tag and a p element, anyway?**
 >
 > In some senses they refer to the same thing, but there's a subtle\
-> distinction. A tag is simply the actual HTML delimiter; `&lt;p&gt;`,\
-> `&lt;div&gt;`, and `</body>` are all tags. An element is made up of a pair\
+> distinction. A tag is simply the actual HTML delimiter; `<p>`,\
+> `<div>`, and `</body>` are all tags. An element is made up of a pair\
 > of opening and closing tags, which presumably contain content of
 > some\
-> sorta notable exception being the `&lt;br&gt;` tag which opens and closes\
+> sorta notable exception being the `<br>` tag which opens and closes\
 > itself, without content.
 >
 > Basically, an element is a specific piece of structure, while a tag
@@ -58,7 +58,7 @@ HTML 中相同的部分：
 
 #### Avoid div-itis
 
-避免使用太多 `&lt;div&gt;`。
+避免使用太多 `<div>`。
 
 But that doesn't mean they should be avoided. A few `divs` in logical\
 spots throughout your document will provide extra styling control and\
@@ -100,7 +100,7 @@ id 是只能在一个页面上使用一次的唯一属性。
     </body>
 ```
 
-用 `&lt;img&gt;` 在那时似乎有些问题。后来不需要 span 了。
+用 `<img>` 在那时似乎有些问题。后来不需要 span 了。
 
 #### 学习到了
 
@@ -122,7 +122,7 @@ id 是只能在一个页面上使用一次的唯一属性。
 >
 > --Frequently Asked Questions\
 >
-> [http://bobby.watchfire.com/bobby/html/en/faq.jsp\#faq\\_onetool](http://bobby.watchfire.com/bobby/html/en/faq.jsp#faq_onetool)
+> [http://bobby.watchfire.com/bobby/html/en/faq.jsp#faq_onetool](http://bobby.watchfire.com/bobby/html/en/faq.jsp#faq_onetool)
 
 #### 文本可伸缩性 Text Scalability
 
@@ -324,7 +324,7 @@ palettes.
 1. Color Options in CSS
 
 - 颜色名\
-- 16进制 \#223331\
+- 16进制 #223331
 - rgb、rgba\
 - hsl、hsla
 
@@ -418,9 +418,9 @@ Closing Thoughts
 
 #### Understand the Problem
 
-\*Perhaps the most important piece of advice we can pass on is that\
+*Perhaps the most important piece of advice we can pass on is that
 understanding why a problem exists is the key to fixing it. This can\
-only come from experience and time spent working with the code.\*
+only come from experience and time spent working with the code.*
 
 #### CSS Design Web Sites
 

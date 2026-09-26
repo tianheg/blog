@@ -284,7 +284,7 @@ linear-gradient(0deg, blue, green 40%, red)
 linear-gradient(.25turn, red, 10%, blue)
 ```
 
-注意：`linear-gradient()` 属于 `&lt;image&gt;` 类型，无法在 `background-color` 上使用，只能在 `background` 使用。
+注意：`linear-gradient()` 属于 `<image>` 类型，无法在 `background-color` 上使用，只能在 `background` 使用。
 
 有趣例子：
 - https://projects.verou.me/css3patterns/

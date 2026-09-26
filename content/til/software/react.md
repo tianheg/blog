@@ -50,7 +50,7 @@ The [`Link`](https://nextjs.org/docs/api-reference/next/link) component enables 
 
 Client-side navigation means that the page transition happens **using JavaScript**, which is faster than the default navigation done by the browser.
 
-**Note:** If you need to link to an **external** page outside the Next.js app, just use an `&lt;a&gt;` tag without `Link`.
+**Note:** If you need to link to an **external** page outside the Next.js app, just use an `<a>` tag without `Link`.
 
 If you need to add attributes like, for example, `className`, add it to the `a` tag, **not** to the `Link` tag.
 

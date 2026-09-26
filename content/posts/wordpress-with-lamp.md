@@ -66,7 +66,7 @@ Write php file to test:
     phpinfo();
 ```
 
-Save to `test.php` , then access `http://&lt;ip&gt;/test.php` , will see the
+Save to `test.php` , then access `http://<ip>/test.php` , will see the
 phpinfo.
 
 After execute `sudo mysql_secure_installation` :

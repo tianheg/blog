@@ -10,7 +10,7 @@ tags: ['技术']
 sudo pacman -S ruby base-devel
 ```
 
-在 =~/.zshrc= 中加入：
+在 `~/.zshrc` 中加入：
 
 ```ini
 # Install Ruby Gems to default location

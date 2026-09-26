@@ -5,7 +5,7 @@ date: 2025-06-15T19:22:54+08:00
 header: Tools
 ---
 
-1. `The resource from "http://localhost:1237/<sub>assets</sub>/js/prism/prism-sh.min.js" was blocked due to MIME type ("text/plain") mismatch (X-Content-Type-Options: nosniff).`
+1. `The resource from "http://localhost:1237/_assets/js/prism/prism-sh.min.js" was blocked due to MIME type ("text/plain") mismatch (X-Content-Type-Options: nosniff).`
 
 [X-Content-Type-Options - HTTP | MDN](https://developer.mozilla.org/en-US/docs/Web/HTTP/Headers/X-Content-Type-Options)
 

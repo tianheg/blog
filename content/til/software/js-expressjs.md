@@ -52,7 +52,9 @@ Routing 指一个应用如何响应客户端对特定端点的请求，这个端
 
 ### auth 例子
 
-\`\`\`js const hash = require('pbkdf2-password')() // 代码写完，始终不能登录，检查了几遍才发现，这句的最后还需要 \`()\` \`\`\`
+```js
+const hash = require('pbkdf2-password')() // 代码写完，始终不能登录，检查了几遍才发现，这句的最后还需要 \`()\`
+```
 
 `!module.parent` 已弃用，如何升级？
 

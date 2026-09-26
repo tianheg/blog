@@ -7,6 +7,8 @@ header: Programming
 
 ## 初步配置
 
-\`\`\`sh pnpm add --save-dev eslint pnpm create @eslint/config
+```sh
+pnpm add --save-dev eslint
+pnpm create @eslint/config
 
-\`\`\`
+```

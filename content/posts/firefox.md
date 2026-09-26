@@ -112,7 +112,7 @@ Refers:
 
 为 Firefox 添加环境变量： `MOZ_ENABLE_WAYLAND=1` 。
 
-=~/.config/environment.d/envvars.conf= ：
+`~/.config/environment.d/envvars.conf` ：
 
 ```text
 MOZ_ENABLE_WAYLAND=1

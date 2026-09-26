@@ -7,9 +7,10 @@ header: Git
 
 <https://git-scm.com/docs/git-submodule#Documentation/git-submodule.txt-sync--recursive--ltpathgt82308203>
 
-\`\`\`bash
+```bash
 
-git submodule sync ```
+git submodule sync
+```
 
 
 相关：[[git-sync-with-upstream|git-sync-with-upstream]]

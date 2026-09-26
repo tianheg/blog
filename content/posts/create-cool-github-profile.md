@@ -171,7 +171,7 @@ WSL2-Ubuntu20.04。我已经安装了最新版本的 pip，直接安装 pipenv �
 
 我想让 GitHub Actions 帮我完成这两件事。我需要怎么做呢？
 
-首先，新建文件 =~/.github/workflows/main.yml= ，并添加以下内容：
+首先，新建文件 `~/.github/workflows/main.yml` ，并添加以下内容：
 
 ```
     name: update tianheg profile

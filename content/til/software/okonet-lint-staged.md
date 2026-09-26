@@ -11,10 +11,20 @@ header: Web
 
 ## 配置
 
-\`\`\`bash npm install --save-dev husky lint-staged npx husky install npm set-script prepare "husky install" npx husky add .husky/pre-commit "npx lint-staged"
+```bash
+npm install --save-dev husky lint-staged
+npx husky install
+npm set-script prepare "husky install"
+npx husky add .husky/pre-commit "npx lint-staged"
 
-\`\`\`
+```
 
 在 `package.json` 中添加：
 
-\`\`\`json { "lint-staged": { "**/*.{js,md,scss}": "prettier --write" } } \`\`\`
+```json
+{
+"lint-staged": {
+"**/*.{js,md,scss}": "prettier --write"
+}
+}
+```

@@ -10,15 +10,25 @@ header: Web
 
 有用户名（@tianheg/package）
 
-\`\`\`bash npm login npm init --scope=@tianheg touch README.md
+```bash
+npm login
+npm init --scope=@tianheg
+touch README.md
 
 npm install /path/to/package
 
-cd /path/to/package npm publish --access public ```
+cd /path/to/package
+npm publish --access public
+```
 
 无用户名（package）
 
-\`\`\`bash ... npm init ... npm publish \`\`\`
+```bash
+...
+npm init
+...
+npm publish
+```
 
 
 相关：[[gulpjs|gulpjs]]

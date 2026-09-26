@@ -16,13 +16,21 @@ header: Git
 
 <https://docs.gitea.io/en-us/database-prep/>
 
-\`\`\`bash pacman -S mariadb \`\`\`
+```bash
+pacman -S mariadb
+```
 
 修改 `bind-address`，登录 root 用户下的数据库。
 
 本地安装 Gitea：
 
-\`\`\`sql SET old<sub>passwords</sub>=0; CREATE USER 'gitea' IDENTIFIED BY 'gitea'; CREATE DATABASE giteadb CHARACTER SET 'utf8mb4' COLLATE 'utf8mb4<sub>unicodeci</sub>'; GRANT ALL PRIVILEGES ON giteadb.* TO 'gitea'; FLUSH PRIVILEGES; \`\`\`
+```sql
+SET old_passwords=0;
+CREATE USER 'gitea' IDENTIFIED BY 'gitea';
+CREATE DATABASE giteadb CHARACTER SET 'utf8mb4' COLLATE 'utf8mb4_unicodeci';
+GRANT ALL PRIVILEGES ON giteadb.* TO 'gitea';
+FLUSH PRIVILEGES;
+```
 
 ### 安装 Gitea
 
