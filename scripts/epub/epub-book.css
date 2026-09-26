@@ -63,8 +63,9 @@ body {
 	line-height: 1.8;
 	background-color: var(--paper);
 	color: var(--ink);
-	text-align: justify;
-	text-justify: inter-ideograph;
+	/* 不用两端对齐：EPUB 是回流格式，行宽由用户的阅读器决定，
+	   justify 叠加中文标点压缩会把行尾标点挤到与下一个字重叠（实测反馈） */
+	text-align: left;
 	padding: 0 3%;
 	widows: 2;
 	orphans: 2;
@@ -74,6 +75,12 @@ body {
 }
 
 /* ---------- 正文：纸书的段落规则 ---------- */
+
+/* 禁用中文标点压缩：部分阅读器会把行尾标点压到与下一个字重叠。
+   （不支持的阅读器会忽略这条，无副作用） */
+p, li, blockquote, dd, td, th {
+	text-spacing-trim: space-all;
+}
 
 p {
 	margin: 0;                 /* 段间不留空 */

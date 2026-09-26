@@ -211,6 +211,14 @@ outputs:
 
         body = re.sub(r'href="([^"]+)"', fix_href, body)
 
+        # 标题里残留的属性语法：源里有 ### 01 {#01} {#section} 这种两个属性块叠加
+        # （org 迁移残留），goldmark 只认最后一个，{#01} 就留在了标题文字里。
+        # 站上同样显示成字面量，这里清掉让书里干净（只在标题内动，代码块不受影响）。
+        body = re.sub(
+            r"(<h[2-6][^>]*>)(.*?)(</h[2-6]>)",
+            lambda m: m.group(1) + re.sub(r"\s*\{#[^}]*\}", "", m.group(2)) + m.group(3),
+            body, flags=re.S)
+
         # 读书记计数行：源里 HTML 被转义，且 typographer 已把 -- 变成 &ndash;、引号变成 &quot;
         new_body, n = re.subn(
             r'&lt;span style="color:var\((?:&ndash;|--)[^)]*dushuji-count-color\)&quot;&gt;([^<]*)(?:</span>)?',
