@@ -83,16 +83,31 @@ EPUB 3 由三份规范组成：**EPUB 3.3**（创作端，出版物要满足什�
 
 ## 参考
 
-- [Standard Ebooks: Producing an ebook step by step](https://standardebooks.org/contribute/producing-an-ebook-step-by-step)
-- [darktable dtdocs](https://github.com/darktable-org/dtdocs)
-- [EpubPressX](https://github.com/sunxen/EpubPressX)
-- [hugoio/hugo issue 6332](https://github.com/gohugoio/hugo/issues/6332)
-- [website2pdf](https://github.com/jgazeau/website2pdf)
-- [print-css.com](https://print-css.com/)
-- [print-css.rocks](https://print-css.rocks/)
-- [CSS for printing](https://voussoir.net/writing/css_for_printing)
-- [weitblick/epub](https://github.com/weitblick/epub) —— 唯一一个公开的 Hugo epub 主题，但最后提交停在 2021-02，模板是 Hugo 0.146 之前的结构、目录里德语硬编码、`ops:type` 拼错，只能当机制参考
-- [Hugo 论坛：generate Hugo website as e-book](https://discourse.gohugo.io/t/generate-hugo-website-as-e-book-epub/29559)
+这 10 条是 2025-06 调研时攒下的，2026-09-26 逐条复核过一遍，**没有比本文做法更好的方案**。分三类：
+
+**PDF / 打印路线** —— 目标是纸张分页，与 EPUB 的回流排版不通用，只有 `break-*` 断行控制思路可借鉴：
+
+- [CSS for printing to paper](https://voussoir.net/writing/css_for_printing) —— 讲 `@page`、多页文档、页码
+- [print-css.com](https://print-css.com/) —— CSS Paged Media 商业咨询与实现
+- [print-css.rocks](https://print-css.rocks/) —— CSS Paged Media 教程与七种工具横评（PrinceXML / PDFreactor / AntennaHouse / WeasyPrint / Vivliostyle 等）；**站方已公告 2026-07-01 下线，属遗留资料**
+- [website2pdf](https://github.com/jgazeau/website2pdf) —— Node + Puppeteer，按 sitemap 抓站出 PDF，30★
+- [darktable dtdocs](https://github.com/darktable-org/dtdocs) —— Hugo 文档站，PDF 走 `config-pdf.yaml` + weasyprint；ePub 走 Hugo 主题路线
+
+**Hugo 主题路线** —— 等于本文的 B 路线，两个都已失效：
+
+- [weitblick/epub](https://github.com/weitblick/epub) —— 唯一公开的 Hugo epub 主题：2021-02-03 创建、**2021-02-10 最后一次提交，只活了 7 天**；模板是 Hugo 0.146 之前的老结构、目录里德语硬编码、`ops:type` 拼错
+- [Hugo 论坛发布帖](https://discourse.gohugo.io/t/generate-hugo-website-as-e-book-epub/29559) —— 上面主题的发布帖。有价值的一条：darktable 作者反馈多语言下 `OEBPS`/`mimetype`/`META-INF` 没法复制进各语言目录，除了事后拷贝没别的办法
+
+**有用信息**：
+
+- [hugoio/hugo issue 6332](https://github.com/gohugoio/hugo/issues/6332) —— 「把 PDF 做成输出格式」2019 年提出，**2025-11 被 bot 以 Stale/Outdated 关闭**。评论里唯一被讨论的实现路径就是 pandoc 与 CSS Paged Media → **Hugo 官方不做这件事，外挂管线是唯一路**
+- [EpubPressX](https://github.com/sunxen/EpubPressX) —— 256★ Chrome 扩展，抓渲染后的网页 → 本地打包 epub（支持微信读书）。思路与本文同源（先渲染再打包），但只能手工选集、无批量、无跨章内链
+- [Standard Ebooks 制作流程](https://standardebooks.org/contribute/producing-an-ebook-step-by-step) —— 专业**单本**生产流水线（XHTML 源 + `se` 工具 + 校对 + `se build --check` 门禁）。它的「脚注转尾注」惯例不如 EPUB 3 原生弹窗脚注（`epub:type="noteref"`），这点我们已在它前面
+
+唯一被推荐的工程经验（论坛帖里的 `--cleanDestinationDir`，防旧产物混进书里）查过脚本：`build_c3.py` 每次 `shutil.rmtree` 重建项目、又带 `hugo --cleanDestinationDir`，已经做了且更彻底。
+
+**规范原文**：
+
 - [EPUB 3.3](https://www.w3.org/TR/epub-33/) 与 [EPUB 3.3 总览页](https://www.w3.org/publishing/epub33/)
 - [EPUB 3.4](https://www.w3.org/TR/epub-34/) —— Candidate Recommendation 阶段（CR Snapshot 2026-07-21，不早于 2026-10-19 升 REC）
 - [EPUB 3 Structural Semantics Vocabulary](https://www.w3.org/TR/epub-ssv-11/)
