@@ -7,7 +7,7 @@ header: Lifestyle
 
 - https://en.wikipedia.org/wiki/Epipremnum_aureum
 - https://www.huabaike.com/tbzw/661.html
-- 栽种指南 https://mrec.ifas.ufl.edu/Foliage/folnotes/pothos.htm
+- 栽种指南 http://web.archive.org/web/20250813183258/https://mrec.ifas.ufl.edu/Foliage/folnotes/pothos.htm
 
 ### 🔍 绿萝的基本特点
 
