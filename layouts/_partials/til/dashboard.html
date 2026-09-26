@@ -23,6 +23,11 @@
   </div>
 </div>
 
+{{/* 小屏（<1280px 无左栏）在「最近新增」上方内联分类树 —— 桌面端由 til/baseof.html 的左栏承担 */}}
+<div class="min-[1280px]:hidden mb-10">
+  {{ partial "til/category-tree.html" (dict "ctx" . "cols" 2) }}
+</div>
+
 {{/* Recent additions — by creation date */}}
 {{ $recent := sort $tilPages "Date" "desc" | first 10 }}
 {{ if $recent }}
