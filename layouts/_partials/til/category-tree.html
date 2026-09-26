@@ -1,0 +1,66 @@
+{{- /* TIL 分类树（唯一实现）
+    桌面端：<1280px 隐藏的左栏（til/baseof.html 的 aside > nav.sticky）里
+    小屏：/til/ 根页「最近新增」上方内联一份（til/dashboard.html，用 min-[1280px]:hidden 包住）
+    分组规则只改这里。未列出的分类自动落到「其他」组。
+
+    用法：{{ partial "til/category-tree.html" . }}                          → 单列（桌面 208px 左栏）
+          {{ partial "til/category-tree.html" (dict "ctx" . "cols" 2) }}   → 多列网格（小屏，列宽≈左栏） */ -}}
+{{ $cols := 1 }}
+{{ with .cols }}{{ $cols = . }}{{ end }}
+{{ $ctx := .ctx }}
+{{ $wrap := "" }}{{ $head := "" }}
+{{ if gt $cols 1 }}
+  {{/* 多列：分组标题横跨整行，条目回到≈左栏宽度（进度条与数字的观感和桌面一致） */}}
+  {{ $wrap = "grid grid-cols-2 sm:grid-cols-3 gap-x-4" }}
+  {{ $head = "col-span-2 sm:col-span-3" }}
+{{ end }}
+{{ $tilSection := $ctx.Site.GetPage "/til" }}
+{{ $allSections := slice }}
+{{ if $tilSection }}{{ $allSections = $tilSection.Sections }}{{ end }}
+
+{{/* 当前分类 slug（用于高亮） */}}
+{{ $catSlug := "" }}
+{{ $parts := split (strings.TrimPrefix "/til/" $ctx.RelPermalink) "/" }}
+{{ if gt (len (index $parts 0)) 0 }}{{ $catSlug = index $parts 0 }}{{ end }}
+
+<div class="text-meta font-medium text-gray-900 dark:text-gray-100 mb-4 px-3">分类</div>
+{{ if $wrap }}<div class="{{ $wrap }}">{{ end }}
+{{ $groups := slice
+  (dict "name" "技术" "cats" (slice "software" "hardware" "homelab" "backup"))
+  (dict "name" "知识" "cats" (slice "learning" "science" "courses" "history"))
+  (dict "name" "生活" "cats" (slice "life" "health" "career" "media" "music" "writing")) }}
+{{ $known := slice }}
+{{ range $groups }}{{ $known = union $known .cats }}{{ end }}
+{{ $rest := slice }}
+{{ range $allSections }}
+  {{ $s := index (split (strings.TrimPrefix "/til/" .RelPermalink) "/") 0 }}
+  {{ if not (in $known $s) }}{{ $rest = $rest | append $s }}{{ end }}
+{{ end }}
+{{ if $rest }}{{ $groups = $groups | append (dict "name" "其他" "cats" $rest) }}{{ end }}
+
+{{/* 分类篇数最大值 —— 左栏细条（替代原中间的「分类分布」条形图）的相对长度基准 */}}
+{{ $maxCount := 1 }}
+{{ range $allSections }}{{ if gt (len .RegularPages) $maxCount }}{{ $maxCount = len .RegularPages }}{{ end }}{{ end }}
+
+{{ range $gi, $group := $groups }}
+<div class="text-[11px] font-medium text-gray-600 dark:text-gray-400 px-3 mb-1.5 {{ $head }} {{ if eq $gi 0 }}mt-0{{ else }}mt-5{{ end }}">{{ $group.name }}</div>
+{{ range $group.cats }}
+{{ $sp := site.GetPage (printf "/til/%s" .) }}
+{{ with $sp }}
+{{ $active := eq $catSlug (index (split (strings.TrimPrefix "/til/" .RelPermalink) "/") 0) }}
+{{ $pct := div (mul (len .RegularPages) 100) $maxCount }}
+<a href="{{ .RelPermalink }}"
+   class="block pl-2.5 pr-3 py-1.5 text-sm border-l-2 transition-colors
+          {{ if $active }}border-ink-500 bg-ink-100 dark:bg-ink-900/60 text-ink-700 dark:text-ink-300 font-medium{{ else }}border-transparent text-gray-600 dark:text-gray-400 hover:text-gray-900 dark:hover:text-gray-100 hover:border-gray-300 dark:hover:border-gray-600{{ end }}">
+  <span class="flex items-center justify-between gap-2">
+    <span class="truncate">{{ .Title }}</span>
+    <span class="text-xs tabular-nums shrink-0 {{ if $active }}text-ink-600 dark:text-ink-400{{ else }}text-gray-600 dark:text-gray-400{{ end }}">{{ len .RegularPages }}</span>
+  </span>
+  <span class="block h-[2px] w-full rounded-full mt-1.5 bg-gray-200 dark:bg-gray-800">
+    <span class="block h-full rounded-full bg-ink-400/50 dark:bg-ink-400/40" style="width: {{ $pct }}%"></span>
+  </span>
+</a>
+{{ end }}
+{{ end }}
+{{ end }}
+{{ if $wrap }}</div>{{ end }}
