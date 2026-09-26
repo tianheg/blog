@@ -15,6 +15,7 @@
     </svg>
     <span>相关笔记（语义相似）</span>
   </h2>
+  {{/* ml-5 + pl-[1.625em]：缩进原来是 typography 的 ul padding-left 给的，prose 下移后需显式写回；mb-5 同理 */}}
   <ul class="space-y-1.5 ml-5">
     {{- range $related }}
     {{- with site.GetPage . }}

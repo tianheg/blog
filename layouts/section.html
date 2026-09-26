@@ -17,7 +17,7 @@
   {{ $isPosts := eq .Section "posts" }}
 
   {{ if $isPosts }}
-    <h1 class="text-[28px] font-bold tracking-tight">文章<span class="text-[13px] font-normal text-gray-600 dark:text-gray-400"> · {{ len $pages }} 篇</span></h1>
+    <h1 class="text-doc-title md:text-4xl font-bold tracking-tight mb-6 md:mb-8 text-gray-900 dark:text-gray-100">文章<span class="text-meta font-normal text-gray-600 dark:text-gray-400"> · {{ len $pages }} 篇</span></h1>
   {{ end }}
 
   {{/* Default section listing: group by year。
@@ -33,7 +33,7 @@
              fill="none" stroke="currentColor" viewBox="0 0 24 24" aria-hidden="true">
           <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M9 5l7 7-7 7"/>
         </svg>
-        <h2 class="text-xl font-semibold year-fold">{{ .Key }}<span class="text-[13px] font-normal text-gray-600 dark:text-gray-400"> · {{ len .Pages }} 篇</span></h2>
+        <h2 class="text-xl md:text-2xl font-semibold text-gray-900 dark:text-gray-100">{{ .Key }}<span class="text-meta font-normal text-gray-600 dark:text-gray-400"> · {{ len .Pages }} 篇</span></h2>
       </summary>
       <div class="pb-6">
         {{ partial "posts/year-heatmap.html" (dict "year" .Key "pages" .Pages) }}
@@ -41,7 +41,7 @@
       </div>
     </details>
     {{ else }}
-    <h2 class="text-xl font-semibold mt-10 mb-4">{{ .Key }}</h2>
+    <h2 class="text-xl md:text-2xl font-semibold mt-10 md:mt-12 mb-4 md:mb-6">{{ .Key }}</h2>
     {{ partial "content/post-list-item.html" (dict "$" .) }}
     {{ end }}
   {{ end }}

@@ -1,14 +1,14 @@
 {{/* Generic single page layout - fallback for content types without specific templates */}}
 {{ define "main" }}
 
-<article data-pagefind-body class="prose-links prose-p:text-[16px] prose-p:leading-[1.85] prose-li:text-[16px] prose-li:leading-[1.85] prose-a:text-ink-600 dark:prose-a:text-ink-400 prose-a:hover:underline">
+<article data-pagefind-body>
 
   {{/* --- Article title --- */}}
-  <h1>{{ partial "functions/get-title" (dict "page" .) }}</h1>
+  <h1 class="text-4xl font-extrabold mb-8 text-gray-900 dark:text-gray-100">{{ partial "functions/get-title" (dict "page" .) }}</h1>
 
   {{/* --- Date for pages that have it --- */}}
   {{ if .Date }}
-  <div class="not-prose mb-8 pb-6 border-b border-gray-200 dark:border-gray-800">
+  <div class="mb-8 pb-6 border-b border-gray-200 dark:border-gray-800">
     <time class="text-sm text-gray-600 dark:text-gray-400" datetime='{{ .Date.Format "2006-01-02" }}'>
       {{ .Date.Format (default "02 Jan, 2006" .Site.Params.dateFormat) }}
     </time>
@@ -16,7 +16,7 @@
   {{ end }}
 
   {{/* --- Main content --- */}}
-  <div>
+  <div class="{{ partial "content/prose-class" . }} prose-site">
     {{ partial "content/render-content" .Content }}
   </div>
 

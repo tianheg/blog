@@ -40,10 +40,10 @@
   {{- end -}}
   {{- $sortedArticles := sort $linkedArticles "total" "desc" -}}
 
-  <article class="main">
+  <article class="main prose prose-site md:prose-base max-w-none prose-a:no-underline dark:prose-invert">
     {{/* Page title area */}}
     <header>
-      <h1 class="!mb-1">{{ .Title | title }}</h1>
+      <h1 class="text-4xl font-extrabold !mb-1">{{ .Title | title }}</h1>
     </header>
 
     {{/* Render page description content from content/graph/_index.org */}}
@@ -56,14 +56,14 @@
       - class: "h-96" - Set graph height to 24rem (384px)
     */}}
     <section class="mt-12">
-      <h2>图谱</h2>
+      <h2 class="text-2xl font-bold mt-12 mb-6">图谱</h2>
       <p class="text-sm opacity-80 mb-4">滚轮缩放 · 拖动平移 · 点节点跳转</p>
       {{ partial "components/graph" ( dict "scaleNodes" true "class" "h-96" ) }}
     </section>
 
     {{/* Linked articles statistics */}}
     <section class="mt-8">
-      <h2>有链接关系的页面</h2>
+      <h2 class="text-2xl font-bold mt-12 mb-6">有链接关系的页面</h2>
       <p class="text-sm opacity-80 mb-4">共 {{ len $linkedArticles }} 篇</p>
 
       <div class="overflow-x-auto">

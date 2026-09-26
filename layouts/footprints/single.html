@@ -11,7 +11,12 @@
   {{ end }}
 {{ end }}
 
+{{/* 正文容器：prose 类名清单唯一来源见 _partials/content/prose-class.html */}}
+{{/* 该页正文（地图说明 + leaflet 注入）重构前只受 <body class="prose"> 影响，没有 prose-p/prose-li 的字号修饰，
+     所以直接用当年 body 的那套类名，保证零变化 */}}
+<div class="prose md:prose-base max-w-none prose-a:no-underline dark:prose-invert prose-site">
 {{ .Content }}
+</div>
 
 <script>
 // Inject post lists into existing Leaflet markers.
