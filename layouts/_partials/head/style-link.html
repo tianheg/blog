@@ -1,0 +1,11 @@
+{{/* 单个样式文件的 <link>（dev 加时间戳防缓存，prod 加指纹 + SRI）。
+     参数：assets 下的路径，如 "css/table.css"。 */}}
+{{ with resources.Get . | resources.Minify }}
+  {{ if hugo.IsDevelopment }}
+    <link rel="stylesheet" href="{{ .RelPermalink }}?v={{ now.Unix }}">
+  {{ else }}
+    {{ with . | fingerprint }}
+      <link rel="stylesheet" href="{{ .RelPermalink }}" integrity="{{ .Data.Integrity }}" crossorigin="anonymous">
+    {{ end }}
+  {{ end }}
+{{ end }}

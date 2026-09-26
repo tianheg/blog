@@ -1,0 +1,11 @@
+{{/* 只有真正用到的页面才下载的样式。
+     ⚠️ 不能 partialCached —— 里面按页判断，缓存会拿到第一页的结果。 */}}
+{{/* 表格样式：绝大多数表格来自正文（.Content）；/graph/ 的表格写在 layouts/graph/list.html 里，
+     不在 .Content 中，所以按 type 补一条 —— 漏了它 graph 页的表格会掉移动端卡片布局。 */}}
+{{ if or (findRE "<table" .Content 1) (eq .Type "graph") }}
+  {{ partial "head/style-link.html" "css/table.css" }}
+{{ end }}
+{{/* /footprints/ 的 Leaflet 暗色适配（内容里引 leaflet，据此判断，不依赖 type/layout） */}}
+{{ if or (findRE "leaflet" .Content 1) (eq .Layout "footprints") }}
+  {{ partial "head/style-link.html" "css/map.css" }}
+{{ end }}

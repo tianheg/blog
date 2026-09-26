@@ -1,6 +1,12 @@
 @import "tailwindcss";
 @plugin "@tailwindcss/typography";
 
+/* 独立样式并入主入口（2026-09-26）：这两份是全站都要用的。
+   原先拆成独立 <link> 是为了「绕过 Tailwind 管线」，但那个前提（管线会丢原生 CSS）
+   2026-08 已实测证伪（css-modernization skill），拆出去只是多两个请求。 */
+@import "./prose.css";
+@import "./til.css";
+
 /* ⚠️ Tailwind 会扫描 .md —— 文档里**不要连着写类名**：
    README 曾引用 `lg:prose-sm`，于是产物里真生成了 55 个 `.lg\:prose-sm` 选择器（约 6.5KB），
    而模板里一处都没用（2026-09-26 实测；改写成「lg: 前缀 + prose 的 small 变体」后消失）。

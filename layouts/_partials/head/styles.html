@@ -1,3 +1,8 @@
+{{/* 全站样式：只剩一个入口。
+     prose.css / til.css 已于 2026-09-26 并入 main.css（@import），
+     原先「独立文件绕过 Tailwind 管线」的理由已证伪 —— Hugo 的 css.TailwindCSS
+     并不会丢未包 @layer 的原生 CSS（见 css-modernization skill 的实测）。
+     按页才需要的样式（表格、地图）见 head/styles-page.html。 */}}
 {{ with resources.Get "css/main.css" }}
   {{ $opts := dict "minify" (not hugo.IsDevelopment) }}
   {{ with . | css.TailwindCSS $opts }}
@@ -7,51 +12,6 @@
       {{ with . | fingerprint }}
         <link rel="stylesheet" href="{{ .RelPermalink }}" integrity="{{ .Data.Integrity }}" crossorigin="anonymous">
       {{ end }}
-    {{ end }}
-  {{ end }}
-{{ end }}
-
-{{ with resources.Get "css/table.css" | resources.Minify }}
-  {{ if hugo.IsDevelopment }}
-    <link rel="stylesheet" href="{{ .RelPermalink }}?v={{ now.Unix }}">
-  {{ else }}
-    {{ with . | fingerprint }}
-      <link rel="stylesheet" href="{{ .RelPermalink }}" integrity="{{ .Data.Integrity }}" crossorigin="anonymous">
-    {{ end }}
-  {{ end }}
-{{ end }}
-
-{{/* prose 元素修正（代码块配色/行内代码） */}}
-{{ with resources.Get "css/prose.css" | resources.Minify }}
-  {{ if hugo.IsDevelopment }}
-    <link rel="stylesheet" href="{{ .RelPermalink }}?v={{ now.Unix }}">
-  {{ else }}
-    {{ with . | fingerprint }}
-      <link rel="stylesheet" href="{{ .RelPermalink }}" integrity="{{ .Data.Integrity }}" crossorigin="anonymous">
-    {{ end }}
-  {{ end }}
-{{ end }}
-
-{{/* TIL 专属 + 命令面板样式（独立文件，绕过 Tailwind 管线，见 Pitfall #37） */}}
-{{ with resources.Get "css/til.css" | resources.Minify }}
-  {{ if hugo.IsDevelopment }}
-    <link rel="stylesheet" href="{{ .RelPermalink }}?v={{ now.Unix }}">
-  {{ else }}
-    {{ with . | fingerprint }}
-      <link rel="stylesheet" href="{{ .RelPermalink }}" integrity="{{ .Data.Integrity }}" crossorigin="anonymous">
-    {{ end }}
-  {{ end }}
-{{ end }}
-
-{{/* /footprints/ 的 Leaflet 地图暗色适配。
-     全局加载是有意的：本 partial 走 partialCached（单 key），写按页判断会拿到第一页的缓存；
-     而规则只匹配 .leaflet-* 选择器，只有 /footprints/ 命中，其他页面零开销。 */}}
-{{ with resources.Get "css/map.css" | resources.Minify }}
-  {{ if hugo.IsDevelopment }}
-    <link rel="stylesheet" href="{{ .RelPermalink }}?v={{ now.Unix }}">
-  {{ else }}
-    {{ with . | fingerprint }}
-      <link rel="stylesheet" href="{{ .RelPermalink }}" integrity="{{ .Data.Integrity }}" crossorigin="anonymous">
     {{ end }}
   {{ end }}
 {{ end }}
