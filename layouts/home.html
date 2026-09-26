@@ -31,10 +31,11 @@
   {{ if $recentPosts }}
     <div class="space-y-1">
       {{ range $recentPosts }}
-        {{/* 行结构统一为「标题靠左 / meta 靠右」：与下方 Random TIL 一致，
-             每条的左端贴列左边缘、右端贴列右边缘（2026-09-26） */}}
-        <div class="flex items-baseline gap-4 py-2">
-          <a href="{{ .RelPermalink }}" class="text-[15px] min-w-0 flex-1">
+        {{/* 行结构统一为「标题靠左 / meta 靠右」，且**行高固定 h-11**：
+             标题单行截断（truncate）→ 两列各 5 行总高严格相同、行与行横向对齐。
+             别改回换行：长标题会把行撑成 69px，两列总高就错开了（2026-09-26） */}}
+        <div class="flex h-11 items-center gap-4">
+          <a href="{{ .RelPermalink }}" class="text-[15px] min-w-0 flex-1 truncate">
             {{ partial "functions/get-title" (dict "page" .) }}
           </a>
           <time class="text-[13px] text-gray-600 dark:text-gray-400 shrink-0 tabular-nums whitespace-nowrap" datetime="{{ .Date.Format "2006-01-02" }}">
@@ -63,8 +64,8 @@
     <div class="space-y-1">
       {{ range $recentTil }}
         {{ if ne .Title "Tils" }}
-        <div class="flex items-baseline gap-4 py-2">
-          <a href="{{ .RelPermalink }}" class="text-[15px] min-w-0 flex-1">
+        <div class="flex h-11 items-center gap-4">
+          <a href="{{ .RelPermalink }}" class="text-[15px] min-w-0 flex-1 truncate">
             {{ partial "functions/get-title" (dict "page" .) }}
           </a>
           {{ $dirPath := .File.Dir | strings.TrimPrefix "til/" | strings.TrimSuffix "/" }}
