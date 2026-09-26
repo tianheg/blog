@@ -1,13 +1,15 @@
-# 博客导出 EPUB——C 方案 SOP
+# 博客导出 EPUB SOP
 
 把 tianheg.co 的文章导成一本 EPUB。**不改 `content/`**，产物不进仓库。
-知识背景与三条路线对比见 TIL：[为 Hugo 博客制作 epub 格式电子书](/til/software/hugo-epub/)。
+知识背景见 TIL：[为 Hugo 博客制作 epub 格式电子书](/til/software/hugo-epub/)。
 
-## 为什么是 C 方案
+## 为什么这样做
 
-- **A** pandoc 直读 markdown：wikilink 得自己复刻站点解析规则，实测少 30 条内链
-- **B** 纯 Hugo `outputFormats` + zip：XHTML/OPF/NCX 模板、命名实体转换、CSS、打包四样都得自己写
-- **C**（本方案）Hugo 渲染 XHTML → 合并单文档 → pandoc 打包：渲染走站点真身规则，规范结构交给 pandoc
+对比过三种做法，最后落在最后一种：
+
+- **pandoc 直读 markdown**：wikilink 得自己复刻站点解析规则，实测少 30 条内链
+- **纯 Hugo `outputFormats` + zip**：XHTML/OPF/NCX 模板、命名实体转换、CSS、打包四样都得自己写
+- **本流程**：Hugo 渲染 XHTML → 合并单文档 → pandoc 打包。渲染走站点真身规则，规范结构交给 pandoc
 
 关键约束：**pandoc 不解析 HTML 输入的跨文件链接**，所以必须先把所有页面合并成一个文档、内部链接写成 `#锚点`，`--split-level` 分章时它才会把内链映射到正确的章节文件。
 

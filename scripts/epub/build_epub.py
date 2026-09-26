@@ -1,8 +1,8 @@
 #!/usr/bin/env python3
 """
-博客导出 EPUB（C 方案）：Hugo 渲染 XHTML -> 合并单文档 -> pandoc 打包。
+博客导出 EPUB：Hugo 渲染 XHTML -> 合并单文档 -> pandoc 打包。
 
-为什么是这个路线（详见 content/til/software/hugo-epub.md）：
+为什么这样做（详见 content/til/software/hugo-epub.md）：
   * 复用站点自己的 layouts（wikilink / 短代码 / 脚注规则），渲染结果与网页一致；
     自己复刻一套规则会漏 aliases 与短标题形式（实测 612 vs 642 条内链）。
   * EPUB 的规范结构（nav / OPF / spine / 脚注语义）交给 pandoc，不自己写模板。
