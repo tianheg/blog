@@ -1,4 +1,4 @@
-/* /footprints/ 的 Leaflet 地图：暗色适配（2026-09-26）
+/* /footprints/ 的 Leaflet 地图：暗色适配（2026-09-26；2026-09-26 晚改为随手动切换）
    ─────────────────────────────────────────────────────────────────────
    为什么在 CSS 层而不是改模板/内容：
    leaflet.css 是 content/footprints.md 里从 unpkg 引入的（正文内 <link>），
@@ -9,56 +9,69 @@
    在里面写按页判断会拿到第一页的缓存。规则只匹配 `.leaflet-*`，
    全站只有 /footprints/ 会命中，其他页面零影响。
 
-   亮色模式一行都不动 —— 全部包在 @media (prefers-color-scheme: dark) 里。 */
+   暗色怎么跟随主题（2026-09-26）：
+   颜色一律 `light-dark(亮, 暗)` —— 它认 color-scheme，而 color-scheme 由 <html> 的
+   .dark/.light 给出，所以手动切换自动生效，不需要媒体查询。
+   亮色档取的正是 leaflet 自己的默认值（#ddd/#fff/black/#ccc/#f4f4f4/#bbb/
+   rgba(255,255,255,.8)/#333/#0078A8/#757575），亮色下视觉与之前完全一致。
+   `filter` 不是颜色，light-dark() 管不了 → 用一个只在暗色生效的变量。 */
 
+/* 瓦片反色成暗色地图。OSM 只有栅格图、没有官方暗色样式，只能滤镜近似：
+   海陆/国界/地名仍可读，代价是海洋偏青蓝（2026-09-26 截图确认过）。
+   变量有两个入口：手选/脚本的 .dark 类；无 JS 时的系统偏好（手选亮色则 :not(.light) 放行）。 */
+html.dark {
+  --map-tile-filter: invert(1) hue-rotate(180deg) brightness(0.82) contrast(0.92) saturate(0.75);
+}
 @media (prefers-color-scheme: dark) {
-  /* 容器底色：瓦片之间的缝隙不该露默认的 #ddd */
-  body .leaflet-container {
-    background: #121c22;
+  :root:not(.light) {
+    --map-tile-filter: invert(1) hue-rotate(180deg) brightness(0.82) contrast(0.92) saturate(0.75);
   }
+}
 
-  /* 瓦片反色成暗色地图。OSM 只有栅格图、没有官方暗色样式，只能滤镜近似：
-     海陆/国界/地名仍可读，代价是海洋偏青蓝（2026-09-26 截图确认过） */
-  body .leaflet-container .leaflet-tile {
-    filter: invert(1) hue-rotate(180deg) brightness(0.82) contrast(0.92) saturate(0.75);
-  }
+/* 容器底色：瓦片之间的缝隙不该露默认的 #ddd */
+body .leaflet-container {
+  background: light-dark(#ddd, #121c22);
+}
 
-  /* 缩放控件（leaflet 默认白底深字） */
-  body .leaflet-bar a {
-    background-color: #1f2937;
-    color: #d1d5db;
-    border-bottom-color: #374151;
-  }
-  body .leaflet-bar a:hover {
-    background-color: #374151;
-    color: #e5e7eb;
-  }
-  body .leaflet-bar a.leaflet-disabled {
-    background-color: #111827;
-    color: #4b5563;
-  }
+body .leaflet-container .leaflet-tile {
+  filter: var(--map-tile-filter, none);
+}
 
-  /* 版权条：OSM 要求保留署名，只换配色、不改可见性。
-     注意 leaflet 自己的规则是 `.leaflet-container .leaflet-control-attribution`（0,2,0），
-     只写 `body .leaflet-control-attribution`（0,1,1）压不住 —— 实测仍是白的 */
-  body .leaflet-container .leaflet-control-attribution {
-    background: rgba(18, 28, 34, 0.85);
-    color: #9ca3af;
-  }
-  body .leaflet-container .leaflet-control-attribution a {
-    color: #88a1bc;
-  }
+/* 缩放控件（leaflet 默认白底深字） */
+body .leaflet-bar a {
+  background-color: light-dark(#fff, #1f2937);
+  color: light-dark(#000, #d1d5db);
+  border-bottom-color: light-dark(#ccc, #374151);
+}
+body .leaflet-bar a:hover {
+  background-color: light-dark(#f4f4f4, #374151);
+  color: light-dark(#000, #e5e7eb);
+}
+body .leaflet-bar a.leaflet-disabled {
+  background-color: light-dark(#f4f4f4, #111827);
+  color: light-dark(#bbb, #4b5563);
+}
 
-  /* 点位弹窗 */
-  body .leaflet-popup-content-wrapper,
-  body .leaflet-popup-tip {
-    background: #1f2937;
-    color: #e5e7eb;
-  }
-  body .leaflet-popup-content a {
-    color: #88a1bc;
-  }
-  body .leaflet-container a.leaflet-popup-close-button {
-    color: #9ca3af;
-  }
+/* 版权条：OSM 要求保留署名，只换配色、不改可见性。
+   注意 leaflet 自己的规则是 `.leaflet-container .leaflet-control-attribution`（0,2,0），
+   只写 `body .leaflet-control-attribution`（0,1,1）压不住 —— 实测仍是白的 */
+body .leaflet-container .leaflet-control-attribution {
+  background: light-dark(rgba(255, 255, 255, 0.8), rgba(18, 28, 34, 0.85));
+  color: light-dark(#333, #9ca3af);
+}
+body .leaflet-container .leaflet-control-attribution a {
+  color: light-dark(#0078a8, #88a1bc);
+}
+
+/* 点位弹窗 */
+body .leaflet-popup-content-wrapper,
+body .leaflet-popup-tip {
+  background: light-dark(#fff, #1f2937);
+  color: light-dark(#333, #e5e7eb);
+}
+body .leaflet-popup-content a {
+  color: light-dark(#0078a8, #88a1bc);
+}
+body .leaflet-container a.leaflet-popup-close-button {
+  color: light-dark(#757575, #9ca3af);
 }

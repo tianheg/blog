@@ -1,6 +1,24 @@
 @import "tailwindcss";
 @plugin "@tailwindcss/typography";
 
+/* ⚠️ Tailwind 会扫描 .md —— 文档里**不要连着写类名**：
+   README 曾引用 `lg:prose-sm`，于是产物里真生成了 55 个 `.lg\:prose-sm` 选择器（约 6.5KB），
+   而模板里一处都没用（2026-09-26 实测；改写成「lg: 前缀 + prose 的 small 变体」后消失）。
+   文档不是源码，写类名时拆开写。 */
+
+/* 主题切换（2026-09-26）：`dark:` 变体从「只认系统偏好」改为「认 .dark 类」。
+   默认仍是系统偏好 —— head 里的内联脚本在首帧前就把 html 标成 .dark/.light（未存选择时
+   读 matchMedia，并在系统变化时跟随）。light-dark() 那套 token 由 color-scheme 驱动，
+   所以两套机制必须一起切：见下面的 html.dark / html.light。 */
+@custom-variant dark {
+  /* 系统偏好（无 JS 或从未手选）—— 手选过亮色时 :not(.light) 直接放行 */
+  @media (prefers-color-scheme: dark) {
+    &:where(:root:not(.light), :root:not(.light) *) { @slot; }
+  }
+  /* 手选/脚本设置（localStorage 或跟随系统的内联脚本） */
+  &:where(.dark, .dark *) { @slot; }
+}
+
 /* ── 站点强调色：ink（低饱和墨蓝）─────────────────────────────
    2026-09-20 全站统一。此前有两套：文章/全局 blue-600，TIL 专用 emerald-600。
    问题：① 同一个站两种链接色，TIL 与文章视觉语言不一致；
@@ -46,8 +64,6 @@
   --text-prose--line-height: 1.85;       /* 正文行高，一次给全（避免 text-* 与 leading-* 顺序歧义） */
   --text-meta: 0.8125rem;                /* 13px：元信息（日期/篇数/侧栏标签）—— 不写 lh，行高继续继承 */
   --text-list: 0.9375rem;                /* 15px：列表项标题 —— 同上，只定字号 */
-  --text-meta: 0.8125rem;                /* 13px：元信息（日期/篇数/侧栏标签）—— 不写 lh，行高继续继承 */
-  --text-list: 0.9375rem;                /* 15px：列表项标题 —— 同上，只定字号 */
 }
 
 /* ── Color tokens (daisyUI silk/sunset, merged via light-dark()) ──
@@ -55,6 +71,21 @@
    prefers-color-scheme media query needed.
    color-mix(): dark base-200 derived exactly from base-100/base-300
    (dark trio shares chroma/hue, only lightness differs). */
+/* 手动切换：给 color-scheme 一个可覆盖的出口（light-dark() 认它，不认类）。
+   没有存过选择时由内联脚本按系统偏好写类，所以 .dark/.light 总有一个在 html 上。 */
+/* /about/ 的玻璃拟态画布（原来写在内联 style 上） */
+.glass-output {
+  position: fixed;
+  inset: 0;
+  width: 100vw;
+  height: 100vh;
+  pointer-events: none;
+  z-index: 9999;
+}
+
+html.dark { color-scheme: dark; }
+html.light { color-scheme: light; }
+
 :root {
   color-scheme: light dark;
   --color-base-100: light-dark(oklch(97% 0.0035 67.78), oklch(22% 0.019 237.69));
@@ -180,19 +211,7 @@ p { text-wrap: pretty; }
   }
 }
 
-@media (prefers-color-scheme: dark) {
-  .site-header,
-  #mobile-menu {
-    background-color: #121c22;  /* 暗色主题底色 */
-  }
-
-  @supports (background-color: light-dark(#fff, #000)) {
-    .site-header,
-    #mobile-menu {
-      background-color: var(--color-base-100);
-    }
-  }
-}
+/* 暗色值由 light-dark() 接管（上面的 @supports 分支），不需要专门的暗色媒体查询 */
 
 /* ── 统一内容列（2026-09-25 P0）────────────────────────────────────
    全站唯一的内容列定义：790px = 文本 750 + 两侧各 20 padding。
