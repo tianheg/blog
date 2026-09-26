@@ -71,9 +71,13 @@ pacman -S --noconfirm pulseaudio pulseaudio-alsa
 
 `bootstrap3.sh`
 
-\`\`\`bash #!/usr/bin/env bash
+```bash
+#!/usr/bin/env bash
 
-pacman -Sc --noconfirm cd /var/cache/pacman/pkg tar -czvf /vagrant/pkg.tgz * ```
+pacman -Sc --noconfirm
+cd /var/cache/pacman/pkg
+tar -czvf /vagrant/pkg.tgz *
+```
 
 
 相关：[[use-prettier|use-prettier]]

@@ -33,7 +33,11 @@ public
 
 ## 安装配置
 
-\`\`\`bash pnpm install --save-dev prettier echo {}> .prettierrc touch .prettierignore \`\`\`
+```bash
+pnpm install --save-dev prettier
+echo {}> .prettierrc
+touch .prettierignore
+```
 
 使用 Visual Studio Code 作为代码编辑器，安装 `Prettier - Code formatter` 扩展。
 
@@ -41,11 +45,22 @@ public
 
 <https://prettier.io/docs/en/precommit.html>
 
-\`\`\`bash pnpm install --save-dev husky lint-staged pnpx husky install npm pkg set scripts.prepare="husky install" pnpx husky add .husky/pre-commit "pnpx lint-staged" \`\`\`
+```bash
+pnpm install --save-dev husky lint-staged
+pnpx husky install
+npm pkg set scripts.prepare="husky install"
+pnpx husky add .husky/pre-commit "pnpx lint-staged"
+```
 
 在 package.json 中加入：
 
-\`\`\`json { "lint-staged": { "**/*.{js,jsx,ts,tsx,json,md,scss}": "prettier --write" } } \`\`\`
+```json
+{
+"lint-staged": {
+"**/*.{js,jsx,ts,tsx,json,md,scss}": "prettier --write"
+}
+}
+```
 
 ## Ignore Code
 

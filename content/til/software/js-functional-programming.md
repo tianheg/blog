@@ -47,11 +47,17 @@ the outcome caussed by changing or altering things
 
 在函数中传递参数以避免外部依赖
 
-\`\`\`js // The global variable let fixedValue = 4
+```js
+// The global variable
+let fixedValue = 4
 
-// Only change code below this line function incrementer(param) { return param + 1 // Only change code above this line }
+// Only change code below this line
+function incrementer(param) {
+return param + 1
+// Only change code above this line }
 
-console.log(incrementer(fixedValue)) ```
+console.log(incrementer(fixedValue))
+```
 
 ## 使用 `map` 从数组中提取数据
 
@@ -59,7 +65,9 @@ console.log(incrementer(fixedValue)) ```
 
 最终还是做出来了
 
-\`\`\`js // The global variable const watchList = [ { Title: 'Inception', Year: '2010', Rated: 'PG-13', Released: '16 Jul 2010', Runtime: '148 min', Genre: 'Action, Adventure, Crime', Director: 'Christopher Nolan', Writer: 'Christopher Nolan', Actors: 'Leonardo DiCaprio, Joseph Gordon-Levitt, Elliot Page, Tom Hardy', Plot: 'A thief, who steals corporate secrets through use of dream-sharing technology, is given the inverse task of planting an idea into the mind of a CEO.', Language: 'English, Japanese, French', Country: 'USA, UK', Awards: 'Won 4 Oscars. Another 143 wins & 198 nominations.', Poster: '![](http://ia.media-imdb.com/images/M/MV5BMjAxMzY3NjcxNF5BMl5BanBnXkFtZTcwNTI5OTM0Mw@@._V1_SX300.jpg)', Metascore: '74', imdbRating: '8.8', imdbVotes: '1,446,708', imdbID: 'tt1375666', Type: 'movie', Response: 'True', }, { Title: 'Interstellar', Year: '2014', Rated: 'PG-13', Released: '07 Nov 2014', Runtime: '169 min', Genre: 'Adventure, Drama, Sci-Fi', Director: 'Christopher Nolan', Writer: 'Jonathan Nolan, Christopher Nolan', Actors: 'Ellen Burstyn, Matthew McConaughey, Mackenzie Foy, John Lithgow', Plot: "A team of explorers travel through a wormhole in space in an attempt to ensure humanity's survival.", Language: 'English', Country: 'USA, UK', Awards: 'Won 1 Oscar. Another 39 wins & 132 nominations.', Poster: '![](http://ia.media-imdb.com/images/M/MV5BMjIxNTU4MzY4MF5BMl5BanBnXkFtZTgwMzM4ODI3MjE@._V1_SX300.jpg)', Metascore: '74', imdbRating: '8.6', imdbVotes: '910,366', imdbID: 'tt0816692', Type: 'movie', Response: 'True', }, { Title: 'The Dark Knight', Year: '2008', Rated: 'PG-13', Released: '18 Jul 2008', Runtime: '152 min', Genre: 'Action, Adventure, Crime', Director: 'Christopher Nolan', Writer: 'Jonathan Nolan (screenplay), Christopher Nolan (screenplay), Christopher Nolan (story), David S. Goyer (story), Bob Kane (characters)', Actors: 'Christian Bale, Heath Ledger, Aaron Eckhart, Michael Caine', Plot: 'When the menace known as the Joker wreaks havoc and chaos on the people of Gotham, the caped crusader must come to terms with one of the greatest psychological tests of his ability to fight injustice.', Language: 'English, Mandarin', Country: 'USA, UK', Awards: 'Won 2 Oscars. Another 146 wins & 142 nominations.', Poster: '![](http://ia.media-imdb.com/images/M/MV5BMTMxNTMwODM0NF5BMl5BanBnXkFtZTcwODAyMTk2Mw@@._V1_SX300.jpg)', Metascore: '82', imdbRating: '9.0', imdbVotes: '1,652,832', imdbID: 'tt0468569', Type: 'movie', Response: 'True', }, { Title: 'Batman Begins', Year: '2005', Rated: 'PG-13', Released: '15 Jun 2005', Runtime: '140 min', Genre: 'Action, Adventure', Director: 'Christopher Nolan', Writer: 'Bob Kane (characters), David S. Goyer (story), Christopher Nolan (screenplay), David S. Goyer (screenplay)', Actors: 'Christian Bale, Michael Caine, Liam Neeson, Katie Holmes', Plot: 'After training with his mentor, Batman begins his fight to free crime-ridden Gotham City from the corruption that Scarecrow and the League of Shadows have cast upon it.', Language: 'English, Urdu, Mandarin', Country: 'USA, UK', Awards: 'Nominated for 1 Oscar. Another 15 wins & 66 nominations.', Poster: '![](http://ia.media-imdb.com/images/M/MV5BNTM3OTc0MzM2OV5BMl5BanBnXkFtZTYwNzUwMTI3._V1_SX300.jpg)', Metascore: '70', imdbRating: '8.3', imdbVotes: '972,584', imdbID: 'tt0372784', Type: 'movie', Response: 'True', }, { Title: 'Avatar', Year: '2009', Rated: 'PG-13', Released: '18 Dec 2009', Runtime: '162 min', Genre: 'Action, Adventure, Fantasy', Director: 'James Cameron', Writer: 'James Cameron', Actors: 'Sam Worthington, Zoe Saldana, Sigourney Weaver, Stephen Lang', Plot: 'A paraplegic marine dispatched to the moon Pandora on a unique mission becomes torn between following his orders and protecting the world he feels is his home.', Language: 'English, Spanish', Country: 'USA, UK', Awards: 'Won 3 Oscars. Another 80 wins & 121 nominations.', Poster: '![](http://ia.media-imdb.com/images/M/MV5BMTYwOTEwNjAzMl5BMl5BanBnXkFtZTcwODc5MTUwMw@@._V1_SX300.jpg)', Metascore: '83', imdbRating: '7.9', imdbVotes: '876,575', imdbID: 'tt0499549', Type: 'movie', Response: 'True', }, ]
+```js
+// The global variable
+const watchList = [ { Title: 'Inception', Year: '2010', Rated: 'PG-13', Released: '16 Jul 2010', Runtime: '148 min', Genre: 'Action, Adventure, Crime', Director: 'Christopher Nolan', Writer: 'Christopher Nolan', Actors: 'Leonardo DiCaprio, Joseph Gordon-Levitt, Elliot Page, Tom Hardy', Plot: 'A thief, who steals corporate secrets through use of dream-sharing technology, is given the inverse task of planting an idea into the mind of a CEO.', Language: 'English, Japanese, French', Country: 'USA, UK', Awards: 'Won 4 Oscars. Another 143 wins & 198 nominations.', Poster: '![](http://ia.media-imdb.com/images/M/MV5BMjAxMzY3NjcxNF5BMl5BanBnXkFtZTcwNTI5OTM0Mw@@._V1_SX300.jpg)', Metascore: '74', imdbRating: '8.8', imdbVotes: '1,446,708', imdbID: 'tt1375666', Type: 'movie', Response: 'True', }, { Title: 'Interstellar', Year: '2014', Rated: 'PG-13', Released: '07 Nov 2014', Runtime: '169 min', Genre: 'Adventure, Drama, Sci-Fi', Director: 'Christopher Nolan', Writer: 'Jonathan Nolan, Christopher Nolan', Actors: 'Ellen Burstyn, Matthew McConaughey, Mackenzie Foy, John Lithgow', Plot: "A team of explorers travel through a wormhole in space in an attempt to ensure humanity's survival.", Language: 'English', Country: 'USA, UK', Awards: 'Won 1 Oscar. Another 39 wins & 132 nominations.', Poster: '![](http://ia.media-imdb.com/images/M/MV5BMjIxNTU4MzY4MF5BMl5BanBnXkFtZTgwMzM4ODI3MjE@._V1_SX300.jpg)', Metascore: '74', imdbRating: '8.6', imdbVotes: '910,366', imdbID: 'tt0816692', Type: 'movie', Response: 'True', }, { Title: 'The Dark Knight', Year: '2008', Rated: 'PG-13', Released: '18 Jul 2008', Runtime: '152 min', Genre: 'Action, Adventure, Crime', Director: 'Christopher Nolan', Writer: 'Jonathan Nolan (screenplay), Christopher Nolan (screenplay), Christopher Nolan (story), David S. Goyer (story), Bob Kane (characters)', Actors: 'Christian Bale, Heath Ledger, Aaron Eckhart, Michael Caine', Plot: 'When the menace known as the Joker wreaks havoc and chaos on the people of Gotham, the caped crusader must come to terms with one of the greatest psychological tests of his ability to fight injustice.', Language: 'English, Mandarin', Country: 'USA, UK', Awards: 'Won 2 Oscars. Another 146 wins & 142 nominations.', Poster: '![](http://ia.media-imdb.com/images/M/MV5BMTMxNTMwODM0NF5BMl5BanBnXkFtZTcwODAyMTk2Mw@@._V1_SX300.jpg)', Metascore: '82', imdbRating: '9.0', imdbVotes: '1,652,832', imdbID: 'tt0468569', Type: 'movie', Response: 'True', }, { Title: 'Batman Begins', Year: '2005', Rated: 'PG-13', Released: '15 Jun 2005', Runtime: '140 min', Genre: 'Action, Adventure', Director: 'Christopher Nolan', Writer: 'Bob Kane (characters), David S. Goyer (story), Christopher Nolan (screenplay), David S. Goyer (screenplay)', Actors: 'Christian Bale, Michael Caine, Liam Neeson, Katie Holmes', Plot: 'After training with his mentor, Batman begins his fight to free crime-ridden Gotham City from the corruption that Scarecrow and the League of Shadows have cast upon it.', Language: 'English, Urdu, Mandarin', Country: 'USA, UK', Awards: 'Nominated for 1 Oscar. Another 15 wins & 66 nominations.', Poster: '![](http://ia.media-imdb.com/images/M/MV5BNTM3OTc0MzM2OV5BMl5BanBnXkFtZTYwNzUwMTI3._V1_SX300.jpg)', Metascore: '70', imdbRating: '8.3', imdbVotes: '972,584', imdbID: 'tt0372784', Type: 'movie', Response: 'True', }, { Title: 'Avatar', Year: '2009', Rated: 'PG-13', Released: '18 Dec 2009', Runtime: '162 min', Genre: 'Action, Adventure, Fantasy', Director: 'James Cameron', Writer: 'James Cameron', Actors: 'Sam Worthington, Zoe Saldana, Sigourney Weaver, Stephen Lang', Plot: 'A paraplegic marine dispatched to the moon Pandora on a unique mission becomes torn between following his orders and protecting the world he feels is his home.', Language: 'English, Spanish', Country: 'USA, UK', Awards: 'Won 3 Oscars. Another 80 wins & 121 nominations.', Poster: '![](http://ia.media-imdb.com/images/M/MV5BMTYwOTEwNjAzMl5BMl5BanBnXkFtZTcwODc5MTUwMw@@._V1_SX300.jpg)', Metascore: '83', imdbRating: '7.9', imdbVotes: '876,575', imdbID: 'tt0499549', Type: 'movie', Response: 'True', }, ]
 
 // Only change code below this line
 
@@ -67,35 +75,56 @@ const ratings = watchList.map((key) => ({ title: key.Title, rating: key.imdbRati
 
 // Only change code above this line
 
-console.log(JSON.stringify(ratings)) ```
+console.log(JSON.stringify(ratings))
+```
 
 ## 在原型上实现 `map`
 
-\`\`\`js // the global Array let s = [23, 65, 98, 5]
+```js
+// the global Array
+let s = [23, 65, 98, 5]
 
-Array.prototype.myMap = function (callback) { var newArray = [] // Add your code below this line this.forEach((a) => newArray.push(callback(a))) // Add your code above this line return newArray }
+Array.prototype.myMap = function (callback) {
+var newArray = []
+// Add your code below this line
+this.forEach((a) => newArray.push(callback(a)))
+// Add your code above this line
+return newArray }
 
-let new<sub>s</sub> = s.myMap(function (item) { return item * 2 }) ```
+let new_s = s.myMap(function (item) { return item * 2 })
+```
 
 ## 使用 `filter` 从数组中提取数据
 
-\`\`\`js // The global variable const watchList = [ { Title: 'Inception', Year: '2010', Rated: 'PG-13', Released: '16 Jul 2010', Runtime: '148 min', Genre: 'Action, Adventure, Crime', Director: 'Christopher Nolan', Writer: 'Christopher Nolan', Actors: 'Leonardo DiCaprio, Joseph Gordon-Levitt, Elliot Page, Tom Hardy', Plot: 'A thief, who steals corporate secrets through use of dream-sharing technology, is given the inverse task of planting an idea into the mind of a CEO.', Language: 'English, Japanese, French', Country: 'USA, UK', Awards: 'Won 4 Oscars. Another 143 wins & 198 nominations.', Poster: '![](http://ia.media-imdb.com/images/M/MV5BMjAxMzY3NjcxNF5BMl5BanBnXkFtZTcwNTI5OTM0Mw@@._V1_SX300.jpg)', Metascore: '74', imdbRating: '8.8', imdbVotes: '1,446,708', imdbID: 'tt1375666', Type: 'movie', Response: 'True', }, { Title: 'Interstellar', Year: '2014', Rated: 'PG-13', Released: '07 Nov 2014', Runtime: '169 min', Genre: 'Adventure, Drama, Sci-Fi', Director: 'Christopher Nolan', Writer: 'Jonathan Nolan, Christopher Nolan', Actors: 'Ellen Burstyn, Matthew McConaughey, Mackenzie Foy, John Lithgow', Plot: "A team of explorers travel through a wormhole in space in an attempt to ensure humanity's survival.", Language: 'English', Country: 'USA, UK', Awards: 'Won 1 Oscar. Another 39 wins & 132 nominations.', Poster: '![](http://ia.media-imdb.com/images/M/MV5BMjIxNTU4MzY4MF5BMl5BanBnXkFtZTgwMzM4ODI3MjE@._V1_SX300.jpg)', Metascore: '74', imdbRating: '8.6', imdbVotes: '910,366', imdbID: 'tt0816692', Type: 'movie', Response: 'True', }, { Title: 'The Dark Knight', Year: '2008', Rated: 'PG-13', Released: '18 Jul 2008', Runtime: '152 min', Genre: 'Action, Adventure, Crime', Director: 'Christopher Nolan', Writer: 'Jonathan Nolan (screenplay), Christopher Nolan (screenplay), Christopher Nolan (story), David S. Goyer (story), Bob Kane (characters)', Actors: 'Christian Bale, Heath Ledger, Aaron Eckhart, Michael Caine', Plot: 'When the menace known as the Joker wreaks havoc and chaos on the people of Gotham, the caped crusader must come to terms with one of the greatest psychological tests of his ability to fight injustice.', Language: 'English, Mandarin', Country: 'USA, UK', Awards: 'Won 2 Oscars. Another 146 wins & 142 nominations.', Poster: '![](http://ia.media-imdb.com/images/M/MV5BMTMxNTMwODM0NF5BMl5BanBnXkFtZTcwODAyMTk2Mw@@._V1_SX300.jpg)', Metascore: '82', imdbRating: '9.0', imdbVotes: '1,652,832', imdbID: 'tt0468569', Type: 'movie', Response: 'True', }, { Title: 'Batman Begins', Year: '2005', Rated: 'PG-13', Released: '15 Jun 2005', Runtime: '140 min', Genre: 'Action, Adventure', Director: 'Christopher Nolan', Writer: 'Bob Kane (characters), David S. Goyer (story), Christopher Nolan (screenplay), David S. Goyer (screenplay)', Actors: 'Christian Bale, Michael Caine, Liam Neeson, Katie Holmes', Plot: 'After training with his mentor, Batman begins his fight to free crime-ridden Gotham City from the corruption that Scarecrow and the League of Shadows have cast upon it.', Language: 'English, Urdu, Mandarin', Country: 'USA, UK', Awards: 'Nominated for 1 Oscar. Another 15 wins & 66 nominations.', Poster: '![](http://ia.media-imdb.com/images/M/MV5BNTM3OTc0MzM2OV5BMl5BanBnXkFtZTYwNzUwMTI3._V1_SX300.jpg)', Metascore: '70', imdbRating: '8.3', imdbVotes: '972,584', imdbID: 'tt0372784', Type: 'movie', Response: 'True', }, { Title: 'Avatar', Year: '2009', Rated: 'PG-13', Released: '18 Dec 2009', Runtime: '162 min', Genre: 'Action, Adventure, Fantasy', Director: 'James Cameron', Writer: 'James Cameron', Actors: 'Sam Worthington, Zoe Saldana, Sigourney Weaver, Stephen Lang', Plot: 'A paraplegic marine dispatched to the moon Pandora on a unique mission becomes torn between following his orders and protecting the world he feels is his home.', Language: 'English, Spanish', Country: 'USA, UK', Awards: 'Won 3 Oscars. Another 80 wins & 121 nominations.', Poster: '![](http://ia.media-imdb.com/images/M/MV5BMTYwOTEwNjAzMl5BMl5BanBnXkFtZTcwODc5MTUwMw@@._V1_SX300.jpg)', Metascore: '83', imdbRating: '7.9', imdbVotes: '876,575', imdbID: 'tt0499549', Type: 'movie', Response: 'True', }, ]
+```js
+// The global variable
+const watchList = [ { Title: 'Inception', Year: '2010', Rated: 'PG-13', Released: '16 Jul 2010', Runtime: '148 min', Genre: 'Action, Adventure, Crime', Director: 'Christopher Nolan', Writer: 'Christopher Nolan', Actors: 'Leonardo DiCaprio, Joseph Gordon-Levitt, Elliot Page, Tom Hardy', Plot: 'A thief, who steals corporate secrets through use of dream-sharing technology, is given the inverse task of planting an idea into the mind of a CEO.', Language: 'English, Japanese, French', Country: 'USA, UK', Awards: 'Won 4 Oscars. Another 143 wins & 198 nominations.', Poster: '![](http://ia.media-imdb.com/images/M/MV5BMjAxMzY3NjcxNF5BMl5BanBnXkFtZTcwNTI5OTM0Mw@@._V1_SX300.jpg)', Metascore: '74', imdbRating: '8.8', imdbVotes: '1,446,708', imdbID: 'tt1375666', Type: 'movie', Response: 'True', }, { Title: 'Interstellar', Year: '2014', Rated: 'PG-13', Released: '07 Nov 2014', Runtime: '169 min', Genre: 'Adventure, Drama, Sci-Fi', Director: 'Christopher Nolan', Writer: 'Jonathan Nolan, Christopher Nolan', Actors: 'Ellen Burstyn, Matthew McConaughey, Mackenzie Foy, John Lithgow', Plot: "A team of explorers travel through a wormhole in space in an attempt to ensure humanity's survival.", Language: 'English', Country: 'USA, UK', Awards: 'Won 1 Oscar. Another 39 wins & 132 nominations.', Poster: '![](http://ia.media-imdb.com/images/M/MV5BMjIxNTU4MzY4MF5BMl5BanBnXkFtZTgwMzM4ODI3MjE@._V1_SX300.jpg)', Metascore: '74', imdbRating: '8.6', imdbVotes: '910,366', imdbID: 'tt0816692', Type: 'movie', Response: 'True', }, { Title: 'The Dark Knight', Year: '2008', Rated: 'PG-13', Released: '18 Jul 2008', Runtime: '152 min', Genre: 'Action, Adventure, Crime', Director: 'Christopher Nolan', Writer: 'Jonathan Nolan (screenplay), Christopher Nolan (screenplay), Christopher Nolan (story), David S. Goyer (story), Bob Kane (characters)', Actors: 'Christian Bale, Heath Ledger, Aaron Eckhart, Michael Caine', Plot: 'When the menace known as the Joker wreaks havoc and chaos on the people of Gotham, the caped crusader must come to terms with one of the greatest psychological tests of his ability to fight injustice.', Language: 'English, Mandarin', Country: 'USA, UK', Awards: 'Won 2 Oscars. Another 146 wins & 142 nominations.', Poster: '![](http://ia.media-imdb.com/images/M/MV5BMTMxNTMwODM0NF5BMl5BanBnXkFtZTcwODAyMTk2Mw@@._V1_SX300.jpg)', Metascore: '82', imdbRating: '9.0', imdbVotes: '1,652,832', imdbID: 'tt0468569', Type: 'movie', Response: 'True', }, { Title: 'Batman Begins', Year: '2005', Rated: 'PG-13', Released: '15 Jun 2005', Runtime: '140 min', Genre: 'Action, Adventure', Director: 'Christopher Nolan', Writer: 'Bob Kane (characters), David S. Goyer (story), Christopher Nolan (screenplay), David S. Goyer (screenplay)', Actors: 'Christian Bale, Michael Caine, Liam Neeson, Katie Holmes', Plot: 'After training with his mentor, Batman begins his fight to free crime-ridden Gotham City from the corruption that Scarecrow and the League of Shadows have cast upon it.', Language: 'English, Urdu, Mandarin', Country: 'USA, UK', Awards: 'Nominated for 1 Oscar. Another 15 wins & 66 nominations.', Poster: '![](http://ia.media-imdb.com/images/M/MV5BNTM3OTc0MzM2OV5BMl5BanBnXkFtZTYwNzUwMTI3._V1_SX300.jpg)', Metascore: '70', imdbRating: '8.3', imdbVotes: '972,584', imdbID: 'tt0372784', Type: 'movie', Response: 'True', }, { Title: 'Avatar', Year: '2009', Rated: 'PG-13', Released: '18 Dec 2009', Runtime: '162 min', Genre: 'Action, Adventure, Fantasy', Director: 'James Cameron', Writer: 'James Cameron', Actors: 'Sam Worthington, Zoe Saldana, Sigourney Weaver, Stephen Lang', Plot: 'A paraplegic marine dispatched to the moon Pandora on a unique mission becomes torn between following his orders and protecting the world he feels is his home.', Language: 'English, Spanish', Country: 'USA, UK', Awards: 'Won 3 Oscars. Another 80 wins & 121 nominations.', Poster: '![](http://ia.media-imdb.com/images/M/MV5BMTYwOTEwNjAzMl5BMl5BanBnXkFtZTcwODc5MTUwMw@@._V1_SX300.jpg)', Metascore: '83', imdbRating: '7.9', imdbVotes: '876,575', imdbID: 'tt0499549', Type: 'movie', Response: 'True', }, ]
 
 // Only change code below this line
 
-const newWatchList = watchList.map((key) => ({ title: key.Title, rating: key.imdbRating, })) const filteredList = newWatchList.filter((key) `> key.rating >` 8.0)
+const newWatchList = watchList.map((key) => ({ title: key.Title, rating: key.imdbRating, }))
+const filteredList = newWatchList.filter((key) `> key.rating >` 8.0)
 
 // Only change code above this line
 
-console.log(filteredList) ```
+console.log(filteredList)
+```
 
 ## 在原型上实现 `filter`
 
-\`\`\`js // The global variable const s = [23, 65, 98, 5]
+```js
+// The global variable
+const s = [23, 65, 98, 5]
 
-Array.prototype.myFilter = function (callback) { // Only change code below this line let newArray = [] this.forEach(function (a) { if (callback(a) == true) { newArray.push(a) } }) // Only change code above this line return newArray }
+Array.prototype.myFilter = function (callback) {
+// Only change code below this line
+let newArray = []
+this.forEach(function (a) { if (callback(a) == true) { newArray.push(a) } })
+// Only change code above this line
+return newArray }
 
-const new<sub>s</sub> = s.myFilter(function (item) { return item % 2 === 1 }) ```
+const new_s = s.myFilter(function (item) { return item % 2 === 1 })
+```
 
 ## 使用 `slice` 返回部分字符串、移除元素
 
@@ -105,29 +134,47 @@ const new<sub>s</sub> = s.myFilter(function (item) { return item % 2 === 1 }) ``
 
 这段代码中的解答没看答案，在前面几个练习的帮助下完成。
 
-\`\`\`js // The global variable const watchList = [ { Title: 'Inception', Year: '2010', Rated: 'PG-13', Released: '16 Jul 2010', Runtime: '148 min', Genre: 'Action, Adventure, Crime', Director: 'Christopher Nolan', Writer: 'Christopher Nolan', Actors: 'Leonardo DiCaprio, Joseph Gordon-Levitt, Elliot Page, Tom Hardy', Plot: 'A thief, who steals corporate secrets through use of dream-sharing technology, is given the inverse task of planting an idea into the mind of a CEO.', Language: 'English, Japanese, French', Country: 'USA, UK', Awards: 'Won 4 Oscars. Another 143 wins & 198 nominations.', Poster: '![](http://ia.media-imdb.com/images/M/MV5BMjAxMzY3NjcxNF5BMl5BanBnXkFtZTcwNTI5OTM0Mw@@._V1_SX300.jpg)', Metascore: '74', imdbRating: '8.8', imdbVotes: '1,446,708', imdbID: 'tt1375666', Type: 'movie', Response: 'True', }, { Title: 'Interstellar', Year: '2014', Rated: 'PG-13', Released: '07 Nov 2014', Runtime: '169 min', Genre: 'Adventure, Drama, Sci-Fi', Director: 'Christopher Nolan', Writer: 'Jonathan Nolan, Christopher Nolan', Actors: 'Ellen Burstyn, Matthew McConaughey, Mackenzie Foy, John Lithgow', Plot: "A team of explorers travel through a wormhole in space in an attempt to ensure humanity's survival.", Language: 'English', Country: 'USA, UK', Awards: 'Won 1 Oscar. Another 39 wins & 132 nominations.', Poster: '![](http://ia.media-imdb.com/images/M/MV5BMjIxNTU4MzY4MF5BMl5BanBnXkFtZTgwMzM4ODI3MjE@._V1_SX300.jpg)', Metascore: '74', imdbRating: '8.6', imdbVotes: '910,366', imdbID: 'tt0816692', Type: 'movie', Response: 'True', }, { Title: 'The Dark Knight', Year: '2008', Rated: 'PG-13', Released: '18 Jul 2008', Runtime: '152 min', Genre: 'Action, Adventure, Crime', Director: 'Christopher Nolan', Writer: 'Jonathan Nolan (screenplay), Christopher Nolan (screenplay), Christopher Nolan (story), David S. Goyer (story), Bob Kane (characters)', Actors: 'Christian Bale, Heath Ledger, Aaron Eckhart, Michael Caine', Plot: 'When the menace known as the Joker wreaks havoc and chaos on the people of Gotham, the caped crusader must come to terms with one of the greatest psychological tests of his ability to fight injustice.', Language: 'English, Mandarin', Country: 'USA, UK', Awards: 'Won 2 Oscars. Another 146 wins & 142 nominations.', Poster: '![](http://ia.media-imdb.com/images/M/MV5BMTMxNTMwODM0NF5BMl5BanBnXkFtZTcwODAyMTk2Mw@@._V1_SX300.jpg)', Metascore: '82', imdbRating: '9.0', imdbVotes: '1,652,832', imdbID: 'tt0468569', Type: 'movie', Response: 'True', }, { Title: 'Batman Begins', Year: '2005', Rated: 'PG-13', Released: '15 Jun 2005', Runtime: '140 min', Genre: 'Action, Adventure', Director: 'Christopher Nolan', Writer: 'Bob Kane (characters), David S. Goyer (story), Christopher Nolan (screenplay), David S. Goyer (screenplay)', Actors: 'Christian Bale, Michael Caine, Liam Neeson, Katie Holmes', Plot: 'After training with his mentor, Batman begins his fight to free crime-ridden Gotham City from the corruption that Scarecrow and the League of Shadows have cast upon it.', Language: 'English, Urdu, Mandarin', Country: 'USA, UK', Awards: 'Nominated for 1 Oscar. Another 15 wins & 66 nominations.', Poster: '![](http://ia.media-imdb.com/images/M/MV5BNTM3OTc0MzM2OV5BMl5BanBnXkFtZTYwNzUwMTI3._V1_SX300.jpg)', Metascore: '70', imdbRating: '8.3', imdbVotes: '972,584', imdbID: 'tt0372784', Type: 'movie', Response: 'True', }, { Title: 'Avatar', Year: '2009', Rated: 'PG-13', Released: '18 Dec 2009', Runtime: '162 min', Genre: 'Action, Adventure, Fantasy', Director: 'James Cameron', Writer: 'James Cameron', Actors: 'Sam Worthington, Zoe Saldana, Sigourney Weaver, Stephen Lang', Plot: 'A paraplegic marine dispatched to the moon Pandora on a unique mission becomes torn between following his orders and protecting the world he feels is his home.', Language: 'English, Spanish', Country: 'USA, UK', Awards: 'Won 3 Oscars. Another 80 wins & 121 nominations.', Poster: '![](http://ia.media-imdb.com/images/M/MV5BMTYwOTEwNjAzMl5BMl5BanBnXkFtZTcwODc5MTUwMw@@._V1_SX300.jpg)', Metascore: '83', imdbRating: '7.9', imdbVotes: '876,575', imdbID: 'tt0499549', Type: 'movie', Response: 'True', }, ]
+```js
+// The global variable
+const watchList = [ { Title: 'Inception', Year: '2010', Rated: 'PG-13', Released: '16 Jul 2010', Runtime: '148 min', Genre: 'Action, Adventure, Crime', Director: 'Christopher Nolan', Writer: 'Christopher Nolan', Actors: 'Leonardo DiCaprio, Joseph Gordon-Levitt, Elliot Page, Tom Hardy', Plot: 'A thief, who steals corporate secrets through use of dream-sharing technology, is given the inverse task of planting an idea into the mind of a CEO.', Language: 'English, Japanese, French', Country: 'USA, UK', Awards: 'Won 4 Oscars. Another 143 wins & 198 nominations.', Poster: '![](http://ia.media-imdb.com/images/M/MV5BMjAxMzY3NjcxNF5BMl5BanBnXkFtZTcwNTI5OTM0Mw@@._V1_SX300.jpg)', Metascore: '74', imdbRating: '8.8', imdbVotes: '1,446,708', imdbID: 'tt1375666', Type: 'movie', Response: 'True', }, { Title: 'Interstellar', Year: '2014', Rated: 'PG-13', Released: '07 Nov 2014', Runtime: '169 min', Genre: 'Adventure, Drama, Sci-Fi', Director: 'Christopher Nolan', Writer: 'Jonathan Nolan, Christopher Nolan', Actors: 'Ellen Burstyn, Matthew McConaughey, Mackenzie Foy, John Lithgow', Plot: "A team of explorers travel through a wormhole in space in an attempt to ensure humanity's survival.", Language: 'English', Country: 'USA, UK', Awards: 'Won 1 Oscar. Another 39 wins & 132 nominations.', Poster: '![](http://ia.media-imdb.com/images/M/MV5BMjIxNTU4MzY4MF5BMl5BanBnXkFtZTgwMzM4ODI3MjE@._V1_SX300.jpg)', Metascore: '74', imdbRating: '8.6', imdbVotes: '910,366', imdbID: 'tt0816692', Type: 'movie', Response: 'True', }, { Title: 'The Dark Knight', Year: '2008', Rated: 'PG-13', Released: '18 Jul 2008', Runtime: '152 min', Genre: 'Action, Adventure, Crime', Director: 'Christopher Nolan', Writer: 'Jonathan Nolan (screenplay), Christopher Nolan (screenplay), Christopher Nolan (story), David S. Goyer (story), Bob Kane (characters)', Actors: 'Christian Bale, Heath Ledger, Aaron Eckhart, Michael Caine', Plot: 'When the menace known as the Joker wreaks havoc and chaos on the people of Gotham, the caped crusader must come to terms with one of the greatest psychological tests of his ability to fight injustice.', Language: 'English, Mandarin', Country: 'USA, UK', Awards: 'Won 2 Oscars. Another 146 wins & 142 nominations.', Poster: '![](http://ia.media-imdb.com/images/M/MV5BMTMxNTMwODM0NF5BMl5BanBnXkFtZTcwODAyMTk2Mw@@._V1_SX300.jpg)', Metascore: '82', imdbRating: '9.0', imdbVotes: '1,652,832', imdbID: 'tt0468569', Type: 'movie', Response: 'True', }, { Title: 'Batman Begins', Year: '2005', Rated: 'PG-13', Released: '15 Jun 2005', Runtime: '140 min', Genre: 'Action, Adventure', Director: 'Christopher Nolan', Writer: 'Bob Kane (characters), David S. Goyer (story), Christopher Nolan (screenplay), David S. Goyer (screenplay)', Actors: 'Christian Bale, Michael Caine, Liam Neeson, Katie Holmes', Plot: 'After training with his mentor, Batman begins his fight to free crime-ridden Gotham City from the corruption that Scarecrow and the League of Shadows have cast upon it.', Language: 'English, Urdu, Mandarin', Country: 'USA, UK', Awards: 'Nominated for 1 Oscar. Another 15 wins & 66 nominations.', Poster: '![](http://ia.media-imdb.com/images/M/MV5BNTM3OTc0MzM2OV5BMl5BanBnXkFtZTYwNzUwMTI3._V1_SX300.jpg)', Metascore: '70', imdbRating: '8.3', imdbVotes: '972,584', imdbID: 'tt0372784', Type: 'movie', Response: 'True', }, { Title: 'Avatar', Year: '2009', Rated: 'PG-13', Released: '18 Dec 2009', Runtime: '162 min', Genre: 'Action, Adventure, Fantasy', Director: 'James Cameron', Writer: 'James Cameron', Actors: 'Sam Worthington, Zoe Saldana, Sigourney Weaver, Stephen Lang', Plot: 'A paraplegic marine dispatched to the moon Pandora on a unique mission becomes torn between following his orders and protecting the world he feels is his home.', Language: 'English, Spanish', Country: 'USA, UK', Awards: 'Won 3 Oscars. Another 80 wins & 121 nominations.', Poster: '![](http://ia.media-imdb.com/images/M/MV5BMTYwOTEwNjAzMl5BMl5BanBnXkFtZTcwODc5MTUwMw@@._V1_SX300.jpg)', Metascore: '83', imdbRating: '7.9', imdbVotes: '876,575', imdbID: 'tt0499549', Type: 'movie', Response: 'True', }, ]
 
-function getRating(watchList) { // Only change code below this line
+function getRating(watchList) {
+// Only change code below this line
 
-const new1WatchList = watchList.map((key) => ({ title: key.Title, Director: key.Director, rating: key.imdbRating, })) const new2WatchList = new1WatchList.filter(function (key) { if (key.Director == 'Christopher Nolan') { return key } })
+const new1WatchList = watchList.map((key) => ({ title: key.Title, Director: key.Director, rating: key.imdbRating, }))
+const new2WatchList = new1WatchList.filter(function (key) { if (key.Director == 'Christopher Nolan') { return key } })
 
-const sumRating = new2WatchList.reduce( (sum, key) => Number(sum) + Number(key.rating), 0, ) const averageRating = sumRating / new2WatchList.length
+const sumRating = new2WatchList.reduce( (sum, key) => Number(sum) + Number(key.rating), 0, )
+const averageRating = sumRating / new2WatchList.length
 
-// Only change code above this line return averageRating }
+// Only change code above this line
+return averageRating }
 
-console.log(getRating(watchList)) ```
+console.log(getRating(watchList))
+```
 
 ## 用 `map`、`filter`、`reduce` 解决实际问题
 
-\`\`\`js const squareList = (arr) => { // Only change code below this line return arr .filter((elem) => elem > 0)     .filter((elem) => Number.parseInt(elem) == elem) .map((elem) => elem * elem) // Only change code above this line }
+```js
+const squareList = (arr) => {
+// Only change code below this line
+return arr .filter((elem) => elem > 0)     .filter((elem) => Number.parseInt(elem) == elem) .map((elem) => elem * elem)
+// Only change code above this line }
 
-const squaredIntegers = squareList([4, 5.6, -9.8, 3.14, 42, 6, 8.34, -2]) console.log(squaredIntegers) ```
+const squaredIntegers = squareList([4, 5.6, -9.8, 3.14, 42, 6, 8.34, -2])
+console.log(squaredIntegers)
+```
 
 ## `sort` 为数组按字母顺序排列
 
-\`\`\`js function alphabeticalOrder(arr) { // Only change code below this line return arr.sort(function (a, b) { return a === b ? 0 : a > b ? 1 : -1 }) // Only change code above this line }
+```js
+function alphabeticalOrder(arr) {
+// Only change code below this line
+return arr.sort(function (a, b) { return a === b ? 0 : a > b ? 1 : -1 })
+// Only change code above this line }
 
-console.log(alphabeticalOrder(['a', 'd', 'c', 'a', 'z', 'g'])) ```
+console.log(alphabeticalOrder(['a', 'd', 'c', 'a', 'z', 'g']))
+```
 
 ## `split`
 
@@ -137,26 +184,52 @@ console.log(alphabeticalOrder(['a', 'd', 'c', 'a', 'z', 'g'])) ```
 
 我的做法（没有问题，也能输出正确答案）：
 
-\`\`\`js // Only change code below this line function urlSlug(title) { return title .trim() .split(' ') .reduce(function (prev, next) { return prev + '-' + next }) .toLowerCase() } // Only change code above this line console.log(urlSlug(' Winter Is Coming')) \`\`\`
+```js
+// Only change code below this line
+function urlSlug(title) {
+return title .trim() .split(' ') .reduce(function (prev, next) { return prev + '-' + next }) .toLowerCase() }
+// Only change code above this line
+console.log(urlSlug(' Winter Is Coming'))
+```
 
 参考答案：
 
-\`\`\`js function urlSlug(title) { return title.toLowerCase().trim().split(*\s+*).join('-') } \`\`\`
+```js
+function urlSlug(title) {
+return title.toLowerCase().trim().split(*\s+*).join('-') }
+```
 
-\`\`\`js function urlSlug(title) { return title .split(' ') .filter((substr) => substr !== '') .join('-') .toLowerCase() } \`\`\`
+```js
+function urlSlug(title) {
+return title .split(' ') .filter((substr) => substr !== '') .join('-') .toLowerCase() }
+```
 
 ## `every` 和 `some`
 
-\`\`\`js function checkPositive(arr) { return arr.every((currentValue) => currentValue > 0) }
+```js
+function checkPositive(arr) {
+return arr.every((currentValue) => currentValue > 0) }
 
-checkPositive([1, 2, 3, -4, 5]) ```
+checkPositive([1, 2, 3, -4, 5])
+```
 
 ## 局部套用和部分应用 Currying and Partial Application
 
 <https://www.freecodecamp.org/learn/javascript-algorithms-and-data-structures/functional-programming/introduction-to-currying-and-partial-application>
 
-\`\`\`js function add(x) { // Only change code below this line return function (y) { return function (z) { return x + y + z } } // Only change code above this line }
+```js
+function add(x) {
+// Only change code below this line
+return function (y) {
+return function (z) {
+return x + y + z }
+}
+// Only change code above this line }
 
-add(10)(20)(30) ```
+add(10)(20)(30)
+```
 
-\`\`\`js function add(x) { return (y) => (z) => x + y + z } \`\`\`
+```js
+function add(x) {
+return (y) => (z) => x + y + z }
+```

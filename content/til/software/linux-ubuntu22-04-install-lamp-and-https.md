@@ -51,7 +51,7 @@ Apache (v6) ALLOW Anywhere (v6)
 找服务器的公网 IP 地址：
 
 ```sh
- ip addr show ens3 | grep inet | awk '{ print $2; }' | sed 's/\/.*$//'
+ip addr show ens3 | grep inet | awk '{ print $2; }' | sed 's/\/.*$//'
 ```
 
 如果有域名绑定到这个 IP 上，也可以用域名 `http://example.com:80`。
@@ -116,7 +116,7 @@ DirectoryIndex index.php index.html index.cgi index.pl index.xhtml index.htm
 ```
 
 ```sh
- sudo systemctl reload apache2
+sudo systemctl reload apache2
 
 vim /var/www/your_domain/info.php
 ```
@@ -170,7 +170,7 @@ mysql> SELECT * FROM example_database.todo_list;
 ```
 
 ```sh
- mysql> exit
+mysql> exit
 
 vim /var/www/your_domain/todo_list.php
 ```

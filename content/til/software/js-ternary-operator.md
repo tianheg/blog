@@ -7,15 +7,19 @@ header: Web
 
 问题：判断 target 是否是 str 的最后几位字符，如果是返回 `true`，否则返回 `false`。
 
-\`\`\`js function confirmEnding(str, target) { str.substring(str.length - target.length) == target ? true : false }
+```js
+function confirmEnding(str, target) { str.substring(str.length - target.length) == target ? true : false }
 
-console.log(confirmEnding('Bastian', 'n')) ```
+console.log(confirmEnding('Bastian', 'n'))
+```
 
 为什么上述代码片段，返回 `undefined`？因为 `str.substring(str.length - target.length) == target` 中有未定义的部分。
 
 三元操作符的原始结构：
 
-\`\`\`js condition ? exprIfTrue : exprIfFalse \`\`\`
+```js
+condition ? exprIfTrue : exprIfFalse
+```
 
 参数 `condition` 必须是一个表达式。
 
@@ -31,9 +35,13 @@ console.log(confirmEnding('Bastian', 'n')) ```
   1. `new`
   2. super
 
-\`\`\`js function confirmEnding(str, target) { ;(str.substring(str.length - target.length) == target ? true : false) ?? 'not undefined' }
+```js
+function confirmEnding(str, target) {
+;(str.substring(str.length - target.length) == target ? true : false) ?? 'not undefined'
+}
 
-console.log(confirmEnding('Bastian', 'n')) ```
+console.log(confirmEnding('Bastian', 'n'))
+```
 
 我使用了空值合并操作符，发现 `str.substring(str.length - target.length) == target ? true : false` 的结果是 `undefined`。
 

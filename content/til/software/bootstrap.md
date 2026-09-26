@@ -13,7 +13,11 @@ header: Web
 
 - 使用 HTML5 类型声明
 
-\`\`\`html <!DOCTYPE html> &lt;html lang="en"&gt;</html> \`\`\`
+```html
+<!DOCTYPE html>
+<html lang="en">
+</html>
+```
 
 - 响应式元标签 `&lt;meta name="viewport" content="width=device-width, initial-scale=1.0"&gt;`
 - Box-sizing `border-box`，确保 `padding` 不会影响对元素宽度的计算
@@ -49,17 +53,26 @@ Sanitizer 是 Bootstrap 插件的净化器名词。
 
 1. 安装 bootstrap
 
-\`\`\`bash pnpm install bootstrap @popperjs/core \`\`\`
+```bash
+pnpm install bootstrap @popperjs/core
+```
 
 1. 导入 JS
 
-\`\`\`js // app.js // 导入全部 import 'bootstrap'
+```js
+// app.js
+// 导入全部
+import 'bootstrap'
 
-// or get all of the named exports for further usage import * as bootstrap from 'bootstrap'
+// or get all of the named exports for further usage
+import * as bootstrap from 'bootstrap'
 
-// 仅导入使用的插件 import Alert from 'bootstrap/js/dist/alert'
+// 仅导入使用的插件
+import Alert from 'bootstrap/js/dist/alert'
 
-// or, specify which plugins you need: import { Tooltip, Toast, Popover } from 'bootstrap' ```
+// or, specify which plugins you need:
+import { Tooltip, Toast, Popover } from 'bootstrap'
+```
 
 1. 导入样式
 
@@ -67,44 +80,121 @@ Sanitizer 是 Bootstrap 插件的净化器名词。
 
 先创建 `<sub>custom</sub>.scss`，覆盖[默认设置](https://getbootstrap.com/docs/5.1/customize/sass/)，然后在 `main.scss` 中导入：
 
-\`\`\`scss @import 'custom'; @import '~bootstrap/scss/bootstrap'; \`\`\`
+```scss
+@import 'custom';
+@import '~bootstrap/scss/bootstrap';
+```
 
 为了编译 Bootstrap，确保安装并使用了相应的加载器：[sass-loader](https://github.com/webpack-contrib/sass-loader)、[postcss-loader](https://github.com/webpack-contrib/postcss-loader) + [Autoprefixer](https://github.com/postcss/autoprefixer#webpack)。Webpack 配置参考：
 
-\`\`\`json // ... { test: *\.(scss)$*, use: [{ // inject CSS to page loader: 'style-loader' }, { // translates CSS into CommonJS modules loader: 'css-loader' }, { // Run postcss actions loader: 'postcss-loader', options: { // \`postcssOptions\` is needed for postcss 8.x; // if you use postcss 7.x skip the key postcssOptions: { // postcss plugins, can be exported to postcss.config.js plugins: function () { return [ require('autoprefixer') ]; } } } }, { // compiles Sass to CSS loader: 'sass-loader' }] } // ... \`\`\`
+```json
+// ... {
+test: *\.(scss)$*,
+use: [{
+// inject CSS to page
+loader: 'style-loader'
+}, {
+// translates CSS into CommonJS modules
+loader: 'css-loader'
+}, {
+// Run postcss actions
+loader: 'postcss-loader',
+options: {
+// `postcssOptions` is needed for postcss 8.x;
+// if you use postcss 7.x skip the key
+postcssOptions: {
+// postcss plugins, can be exported to postcss.config.js
+plugins: function () {
+return [
+require('autoprefixer')
+];
+}
+}
+}
+}, {
+// compiles Sass to CSS
+loader: 'sass-loader'
+}]
+}
+// ...
+```
 
 方式二：导入编译好的 CSS
 
 直接导入 CSS 文件：
 
-\`\`\`js import 'bootstrap/dist/css/bootstrap.min.css' \`\`\`
+```js
+import 'bootstrap/dist/css/bootstrap.min.css'
+```
 
 之后只需要改动一下 Webpack 的配置即可：
 
-\`\`\`json // ... module: { rules: [ { test: *\.css$*, use: [ 'style-loader', 'css-loader' ] } ] } // ... \`\`\`
+```json
+// ...
+module: {
+rules: [
+{
+test: *\.css$*,
+use: [
+'style-loader',
+'css-loader'
+]
+}
+]
+}
+// ...
+```
 
 ### Parcel
 
 1. 安装 Parcel
 
-\`\`\`bash pnpm install --save-dev parcel \`\`\`
+```bash
+pnpm install --save-dev parcel
+```
 
 1. 安装 Bootstrap
 
 项目结构：
 
-\`\`\`text project-name/ ├── build/ ├── node<sub>modules<*sub>* │ └── bootstrap/ │ └── popper.js/ ├── scss/ │ └── custom.scss ├── src/ │ └── index.html │ └── index.js └── package.json \`\`\`
+```text
+project-name/
+├── build/
+├── node_modules/
+│
+└── bootstrap/
+│
+└── popper.js/
+├── scss/
+│
+└── custom.scss
+├── src/
+│
+└── index.html
+│
+└── index.js
+└── package.json
+```
 
 1. 导入 JS
 2. 导入 CSS
 3. 在 HTML 中加入 `index.js`
 4. 修改 `package.json`
 
-\`\`\`json "scripts": { "dev": "parcel ./src/index.html", "prebuild": "npx rimraf build", "build": "parcel build --public-url ./ ./src/index.html --experimental-scope-hoisting --out-dir build" } \`\`\`
+```json
+"scripts": {
+"dev": "parcel ./src/index.html",
+"prebuild": "npx rimraf build",
+"build": "parcel build --public-url ./ ./src/index.html --experimental-scope-hoisting --out-dir build"
+}
+```
 
 1. 运行命令
 
-\`\`\`bash pnpm run dev pnpm run build \`\`\`
+```bash
+pnpm run dev
+pnpm run build
+```
 
 ### 可访问性
 
