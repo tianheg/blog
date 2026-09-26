@@ -351,6 +351,36 @@ npm run pagefind
 
 # 生成语义搜索索引（调 Cloudflare Workers AI，需先 build；改动内容后发布前必跑）
 npm run embed
+
+# 站内链接检查（wikilink 解析 + 内链，发布闸门）
+npm run check-links
+
+# 站外链接死链扫描（默认走缓存，结果分 ok/dead/blocked/unreachable/error 五类）
+npm run check-external-links
+```
+
+### 站外链接死链扫描（`scripts/check-external-links.mjs`）
+
+扫 `content/` 里所有外链（Markdown 链接 + 裸 URL，跳过代码块），并发探测后分类报告。
+只有 **404/410** 算死链；5xx、代理到不了、401/403/429、DNS/超时都不算死，分开列。
+
+- 请求带真实 Chrome（Windows）指纹（UA + Sec-CH-UA + Sec-Fetch-* + Referer），避免被 WAF 当爬虫；
+  HEAD 先行，HEAD 不干净或结果为 4xx 时用 GET 复核，405/406/412 这类反爬响应再换朴素 Accept 重试一次
+- 传输层用 **curl** 而不是 Node 内置 fetch —— 本机（PVE + Tailscale MagicDNS + CGNAT）跑 undici 会大批
+  `UND_ERR_CONNECT_TIMEOUT`，同一批 URL curl 秒开。别改回 undici
+- 本机出口走 mihomo（`http_proxy=192.168.8.11:7892`），代理到不了上游时会直接吐 502 —— 那是网关的锅，
+  跟源站死活无关，脚本会再试直连，仍不通归入「到不了」，不判死
+- **已确认非死链账本** `scripts/external-links-verified.txt`：探测到 2xx 即自动记一行 `YYYY-MM-DD <URL>`，
+  之后默认跳过探测，报告末尾单列「✅ 已确认非死链」区；超 90 天自动复核，复核发现已死的撤下账本并照常报警
+- 已知被 WAF 挡死 / 有意保留的历史链接写进 `scripts/external-link-ignore.txt`（一行一条，子串匹配）
+- 缓存与进度在 `.hermes/external-links/cache.json`（不进版本控制）；死链会顺带查 Wayback 存档
+
+```bash
+npm run check-external-links                  # 全量（首次约 30min，之后走缓存 20s 级）
+npm run check-external-links -- --limit 50    # 试水
+npm run check-external-links -- --host github.com
+npm run check-external-links -- --json /tmp/ext.json
+npm run check-external-links -- --refresh-dead --recheck-verified   # 强制重探
 ```
 
 ### 新建内容工作流程
