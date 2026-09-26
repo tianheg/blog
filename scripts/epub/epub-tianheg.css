@@ -1,0 +1,424 @@
+@charset "utf-8";
+@namespace epub "http://www.idpf.org/2007/ops";
+
+/* ==========================================================================
+   tianheg.co 电子书样式 —— 站上视觉语言的移植（不是另起一套设计）
+
+   数据来源：assets/css/main.css / prose.css / table.css
+   1. 颜色全部是站上 token 的十六进制换算值（oklch() 阅读器支持太差，
+      用 Python 做 oklch -> sRGB 精确转换，与站点渲染值一致）
+   2. 浅色 = 站上暖纸主题；暗色 = 站上深色主题。用 prefers-color-scheme 切换，
+      等价于站上 CSS 里的 light-dark()
+   3. 段落不缩进、用行距分段 —— 与站上一致
+   4. 代码块 dracula 深底浅字（含 Chroma 内联高亮），行内代码浅底深字
+   ========================================================================== */
+
+:root {
+	/* 站上 token 的 sRGB 值 */
+	--bg: #f7f5f3;            /* base-100 暖纸 */
+	--bg-sub: #f3ede9;        /* base-200 行内代码底 / 表头底 */
+	--bg-sub-strong: #e2ddd9; /* base-300 分隔线 */
+	--fg: #4b4743;            /* base-content 暖灰正文 */
+	--muted: #646c7c;         /* --color-muted 元信息 */
+	--link: #3d5b7a;          /* ink-600 正文链接 */
+	--rule: #e2ddd9;          /* 发丝线 */
+	--dushuji-count-color: #8b0000;   /* 站上 --dushuji-count-color 的浅色值 */
+
+	--code-bg: #282a36;       /* dracula 代码块底（prose.css 定稿值） */
+	--code-fg: #f8f8f2;
+	--code-border: #383a4a;
+	--inline-code-bg: #f3ede9;
+	--inline-code-fg: #4b4743;
+
+	--font: "Satoshi", -apple-system, BlinkMacSystemFont, "PingFang SC",
+		"Hiragino Sans GB", "Noto Sans SC", "Noto Sans CJK SC", "Source Han Sans SC",
+		"Source Han Sans CN", "Microsoft YaHei", "WenQuanYi Micro Hei",
+		"WenQuanYi Zen Hei", Arial, sans-serif;
+	--mono: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono",
+		"Courier New", "Sarasa Mono SC", "Noto Sans Mono CJK SC", monospace;
+}
+
+@media (prefers-color-scheme: dark) {
+	:root {
+		--bg: #121c22;
+		--bg-sub: #0e171e;
+		--bg-sub-strong: #091319;
+		--fg: #9fb9d0;
+		--muted: #8b98a6;
+		--link: #88a1bc;       /* ink-400 */
+		--rule: #1e2a33;
+		--dushuji-count-color: #f87171;   /* 站上暗色值 */
+
+		--code-bg: #21222c;
+		--code-fg: #f8f8f2;
+		--code-border: #343746;
+		--inline-code-bg: #0e171e;
+		--inline-code-fg: #9fb9d0;
+	}
+}
+
+/* ---------- 页面 ---------- */
+
+html {
+	font-size: 100%;
+	/* CJK 排版三件套（与站上一致；不支持的阅读器忽略） */
+	text-autospace: normal;
+	text-spacing-trim: trim-start;
+}
+
+body {
+	font-family: var(--font);
+	font-size: 1em;
+	line-height: 1.85;          /* --text-prose--line-height */
+	background-color: var(--bg);
+	color: var(--fg);
+	text-align: initial;
+	overflow-wrap: break-word;
+	widows: 2;
+	orphans: 2;
+	hyphens: none;
+	-webkit-hyphens: none;
+	-epub-hyphens: none;
+}
+
+/* ---------- 标题（站上 h1 1.75rem / typography 的 h2~h4 比例） ---------- */
+
+h1, h2, h3, h4, h5, h6 {
+	font-family: var(--font);
+	font-weight: 600;
+	text-align: initial;
+	text-wrap: balance;
+	break-after: avoid;
+	page-break-after: avoid;
+	hyphens: none;
+	-webkit-hyphens: none;
+	-epub-hyphens: none;
+}
+
+h1 {
+	font-size: 1.75em;
+	line-height: 1.2;
+	margin: 0 0 0.35em;
+}
+
+h2 {
+	font-size: 1.4em;
+	line-height: 1.3;
+	margin: 2em 0 0.8em;
+}
+
+h3 {
+	font-size: 1.2em;
+	line-height: 1.35;
+	margin: 1.6em 0 0.6em;
+}
+
+h4, h5, h6 {
+	font-size: 1.05em;
+	margin: 1.4em 0 0.5em;
+}
+
+/* ---------- 正文 ---------- */
+
+p {
+	margin: 0 0 1.25em;         /* typography 的段落间距 */
+	text-indent: 0;
+	text-wrap: pretty;
+}
+
+/* 元信息行（日期 / 分类）：站上 --text-meta 0.8125rem + --color-muted
+   模板输出的是 <p><span class="meta"> —— pandoc 会丢掉 <p class="x"> 的 class */
+.meta {
+	display: block;
+	font-size: 0.8125em;
+	line-height: 1.6;
+	color: var(--muted);
+	letter-spacing: 0.01em;
+	margin: 0 0 2.2em;
+	text-indent: 0;
+}
+
+/* 读书记文末的「读完第 N 本」计数行（浅色深红 / 暗色亮红，同站上 token） */
+.dushuji-count {
+	color: var(--dushuji-count-color);
+}
+
+/* ---------- 链接：站上 .prose-links 的常驻淡下划线 ---------- */
+
+a {
+	color: var(--link);
+	font-weight: 500;
+	text-decoration-line: underline;
+	text-decoration-color: rgba(61, 91, 122, 0.45);   /* ink-600 @45% */
+	text-decoration-thickness: 1px;
+	text-underline-offset: 0.24em;
+}
+
+@media (prefers-color-scheme: dark) {
+	a {
+		text-decoration-color: rgba(136, 161, 188, 0.45);   /* ink-400 @45% */
+	}
+}
+
+/* ---------- 行内元素 ---------- */
+
+strong, b { font-weight: 700; }
+em, i { font-style: italic; }
+
+/* 上下标：line-height:0 + relative，避免撑坏行高 */
+sub, sup {
+	font-size: 0.72em;
+	line-height: 0;
+	position: relative;
+	vertical-align: baseline;
+}
+
+sup { top: -0.5em; }
+sub { bottom: -0.25em; }
+
+mark {
+	background: rgba(255, 214, 102, 0.45);
+	color: inherit;
+}
+
+/* ---------- 代码 ---------- */
+
+/* 行内代码：浅底 + 深字，与代码块（深底）明确区分 —— prose.css 的定稿 */
+code, kbd, samp {
+	font-family: var(--mono);
+	font-size: 0.875em;
+	font-weight: 400;
+	background-color: var(--inline-code-bg);
+	color: var(--inline-code-fg);
+	padding: 0.1em 0.375em;
+	border-radius: 0.25rem;
+	text-autospace: no-autospace;
+}
+
+/* 代码块：dracula 深底浅字（与站上一致；语言标注的代码带 Chroma 内联配色） */
+pre {
+	font-family: var(--mono);
+	font-size: 0.875em;
+	line-height: 1.65;
+	background-color: var(--code-bg);
+	color: var(--code-fg);
+	border: 1px solid var(--code-border);
+	border-radius: 0.5rem;
+	padding: 0.875em 1em;
+	margin: 1.5em 0;
+	white-space: pre-wrap;      /* 阅读器窄屏不横向滚动 */
+	word-wrap: break-word;
+	overflow-wrap: break-word;
+	break-inside: avoid;
+	page-break-inside: avoid;
+	text-autospace: no-autospace;
+}
+
+pre code {
+	background: none;
+	border: 0;
+	padding: 0;
+	color: inherit;
+	font-size: 1em;
+	font-weight: 400;
+}
+
+/* ---------- 引用 ---------- */
+
+blockquote {
+	margin: 1.6em 0;
+	padding: 0 0 0 1em;
+	border-left: 0.25rem solid var(--bg-sub-strong);
+	font-style: normal;         /* 中文合成斜体难看，站上的 italic 只对拉丁有意义 */
+	color: inherit;
+}
+
+blockquote p {
+	margin: 0.6em 0;
+	text-indent: 0;
+}
+
+blockquote cite {
+	display: block;
+	font-size: 0.875em;
+	text-align: right;
+	color: var(--muted);
+}
+
+/* ---------- 列表 ---------- */
+
+ul, ol {
+	margin: 1.25em 0;
+	padding-left: 1.625em;
+}
+
+li {
+	margin: 0.5em 0;
+	padding-left: 0.375em;
+}
+
+li > p {
+	margin: 0.5em 0;
+}
+
+li.task-list-item {
+	list-style: none;
+	margin-left: -1.25em;
+}
+
+input[type="checkbox"] {
+	margin-right: 0.45em;
+}
+
+/* ---------- 表格：站上的编辑式（表头淡底 + 实线，数据行发丝线，无斑马纹） ---------- */
+
+table {
+	border-collapse: collapse;
+	margin: 1.75em 0;
+	font-size: 0.9375em;
+	line-height: 1.6;
+	max-width: 100%;
+}
+
+thead th {
+	text-align: left;
+	font-weight: 600;
+	font-size: 0.875em;
+	letter-spacing: 0.01em;
+	background-color: var(--bg-sub);
+	border-bottom: 1px solid var(--bg-sub-strong);
+	padding: 0.5em 1em 0.5em 0.625em;
+}
+
+tbody td {
+	padding: 0.6875em 1em 0.6875em 0.625em;
+	border-bottom: 1px solid var(--bg-sub-strong);
+	vertical-align: top;
+}
+
+tbody td:first-child {
+	font-weight: 500;
+}
+
+tbody tr:last-child td {
+	border-bottom: 0;
+}
+
+/* 单元格里的代码块 */
+td pre {
+	margin: 0;
+	padding: 0.5em 0.625em;
+	font-size: 0.8125em;
+	line-height: 1.55;
+	border-radius: 0.375rem;
+}
+
+td code {
+	font-size: 0.8125em;
+}
+
+/* ---------- 分隔线（站上 prose hr 是全宽细线） ---------- */
+
+hr {
+	border: 0;
+	border-top: 1px solid var(--rule);
+	margin: 3em 0;
+}
+
+/* ---------- 图片 ---------- */
+
+img {
+	max-width: 100%;
+	height: auto;
+}
+
+figure {
+	margin: 1.75em auto;
+	text-align: center;
+	break-inside: avoid;
+}
+
+figcaption {
+	font-size: 0.875em;
+	line-height: 1.6;
+	color: var(--muted);
+	margin-top: 0.6em;
+	text-align: center;
+}
+
+/* ---------- 脚注 / 尾注 ---------- */
+
+a[role~="doc-noteref"] {
+	font-size: 0.72em;
+	line-height: 0;
+	vertical-align: super;
+	text-decoration: none;
+	padding: 0 0.1em;
+}
+
+section[role~="doc-endnotes"],
+.footnotes,
+section[epub|type~="endnotes"],
+section[epub|type~="footnotes"] {
+	font-size: 0.9em;
+	line-height: 1.75;
+	margin-top: 2.5em;
+	padding-top: 1em;
+	border-top: 1px solid var(--rule);
+}
+
+.footnotes ol,
+section[role~="doc-endnotes"] ol {
+	padding-left: 1.4em;
+}
+
+.footnotes li,
+section[role~="doc-endnotes"] li {
+	margin: 0.7em 0;
+}
+
+a[role~="doc-backlink"] {
+	text-decoration: none;
+	opacity: 0.6;
+	margin-left: 0.35em;
+}
+
+/* ---------- 目录 ---------- */
+
+nav[epub|type~="toc"] ol {
+	list-style: none;
+	padding-left: 0;
+	margin: 0;
+}
+
+nav[epub|type~="toc"] li {
+	margin: 0.55em 0;
+	line-height: 1.7;
+	font-size: 0.9375em;
+}
+
+nav[epub|type~="toc"] a {
+	color: inherit;
+	text-decoration: none;
+	font-weight: 400;
+}
+
+/* ---------- 扉页 ---------- */
+
+section[epub|type~="titlepage"],
+#title-page {
+	text-align: center;
+	margin-top: 18vh;
+}
+
+section[epub|type~="titlepage"] h1,
+#title-page h1 {
+	font-size: 2em;
+	margin-bottom: 0.3em;
+}
+
+section[epub|type~="titlepage"] p,
+#title-page p {
+	text-indent: 0;
+	color: var(--muted);
+}
