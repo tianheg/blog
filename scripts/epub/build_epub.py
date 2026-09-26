@@ -165,6 +165,42 @@ def patch_opf(epub, subtitle=None, author_sort=None, a11y_summary=None):
 
     payload[opf_name] = opf.encode("utf-8")
 
+    # 目录按年分层：年份扉页在合并阶段插入，pandoc 把它当普通 h1 平铺进 nav。
+    # 这里把「年份条目 + 其后的同年文章条目」重排成嵌套 <ol>，得到两级目录。
+    nav_name = "EPUB/nav.xhtml"
+    nav_years = 0
+    if nav_name in payload:
+        nav = payload[nav_name].decode("utf-8")
+        toc = re.search(r'<ol class="toc">(.*?)</ol>', nav, re.S)
+        if toc:
+            items = re.findall(r'<li[^>]*><a href="([^"]+)"[^>]*>(.*?)</a></li>', toc.group(1), re.S)
+            blocks, cur = [], None
+            for href, title in items:
+                if re.search(r"year-\d{4}|year-undated", href):
+                    nav_years += 1
+                    cur = {"label": title.strip(), "kids": []}
+                    blocks.append(cur)
+                elif cur is not None and "colophon" not in href:
+                    cur["kids"].append((href, title))
+                else:                        # 标题页 / 版权页：平铺
+                    cur = None
+                    blocks.append(("flat", href, title))
+
+            def _li(h, t, ind):
+                return f'{ind}<li><a href="{h}">{t}</a></li>\n'
+
+            out = ['<ol class="toc">\n']
+            for b in blocks:
+                if isinstance(b, tuple):
+                    out.append(_li(b[1], b[2], "  "))
+                else:
+                    out.append(f'  <li><span>{b["label"]}</span>\n    <ol>\n')
+                    for h, t in b["kids"]:
+                        out.append(_li(h, t, "      "))
+                    out.append("    </ol>\n  </li>\n")
+            out.append("</ol>")
+            payload[nav_name] = (nav[:toc.start()] + "".join(out) + nav[toc.end():]).encode("utf-8")
+
     with zipfile.ZipFile(epub, "w") as out:
         for info in infos:                        # 保持原有顺序
             if info.filename == "mimetype":
@@ -172,7 +208,7 @@ def patch_opf(epub, subtitle=None, author_sort=None, a11y_summary=None):
                 out.writestr(info, b"application/epub+zip")
             else:
                 out.writestr(info, payload[info.filename])
-    return [t for t in ("title-type", "file-as", "accessibilitySummary") if t in opf]
+    return ([t for t in ("title-type", "file-as", "accessibilitySummary") if t in opf], nav_years)
 
 
 def main():
@@ -277,9 +313,24 @@ outputs:
     flat = {"/" + str(p.relative_to(pub)): anchor_of(str(p.relative_to(pub))) for p in pages}
 
     # ---------- S3 合并成单个 HTML 文档（pandoc 只在单文档模式下把 #anchor 映射成分章内链） ----------
-    parts, stats = [], {"internal": 0, "external": 0, "img": 0, "dushuji": 0}
+    parts, stats = [], {"internal": 0, "external": 0, "img": 0, "dushuji": 0, "years": 0}
+    year_counts = Counter(date_of(p)[:4] for p in pages)
+    cur_year = None
     for p in pages:
         rel = str(p.relative_to(pub))
+
+        # 每年第一篇之前插一个年份扉页：正文里按年分部，同时成为目录里的二级分组标题
+        y = date_of(p)[:4]
+        if y != cur_year:
+            cur_year = y
+            y_label = f"{y} 年" if y != "0000" else "未纪年"
+            y_slug = y if y != "0000" else "undated"
+            stats["years"] += 1
+            parts.append(
+                f'\n<section id="year-{y_slug}-sec">\n'
+                f'<h1 class="year-title" id="year-{y_slug}">{y_label}</h1>\n'
+                f'<div class="year-meta">{year_counts[y]} 篇</div>\n'
+                f'</section>\n')
         m = re.search(r"<body>(.*)</body>", p.read_text(encoding="utf-8"), re.S)
         if not m:
             sys.exit(f"渲染输出里找不到 <body>（模板变了？）: {p}")
@@ -365,7 +416,8 @@ outputs:
     combined = proj / "combined.html"
     combined.write_text(html, encoding="utf-8")
     print(f"S3 合并文档 {len(html) // 1024} KB | 内链 {stats['internal']} 站外 {stats['external']} "
-          f"去图 {stats['img']} 计数行还原 {stats['dushuji']} | 正文约 {char_count // 10000} 万字")
+          f"去图 {stats['img']} 计数行还原 {stats['dushuji']} 年份扉页 {stats['years']} "
+          f"| 正文约 {char_count // 10000} 万字")
 
     # ---------- S4 pandoc 打包 ----------
     # identifier 必须固定：pandoc 默认每次生成随机 UUID，阅读器会把重新构建的同一本书
@@ -397,10 +449,10 @@ outputs:
     for l in errs[:5]:
         print("    ", l[:140])
 
-    added = patch_opf(
+    added, nav_years = patch_opf(
         a.out, subtitle=a.subtitle, author_sort=a.author,
         a11y_summary=f"{len(pages)} 篇中文博客文章，含完整目录与章节结构；正文为纯文本，未嵌入字体。")
-    print("S4 OPF 补充:", ", ".join(added) if added else "（无）")
+    print("S4 OPF 补充:", ", ".join(added) if added else "（无）", "| 目录年份分组:", nav_years)
     print("S4 输出:", a.out, pathlib.Path(a.out).stat().st_size // 1024, "KB", "| identifier:", book_id)
     print("S4 dc:subject:", "、".join(subjects) if subjects else "（无）")
 

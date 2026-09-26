@@ -79,6 +79,26 @@ body {
 	-epub-hyphens: none;
 }
 
+/* ---------- 年份扉页（按年分部）---------- */
+
+h1.year-title {
+	margin: 26% 0 0.35em;
+	font-size: 1.9em;
+	font-weight: 600;
+	letter-spacing: 0.16em;
+	text-align: center;
+	break-before: page;          /* 年份扉页总是另起一页 */
+}
+
+.year-meta {
+	margin: 0;
+	text-indent: 0;
+	text-align: center;
+	color: var(--muted);
+	font-size: 0.88em;
+	letter-spacing: 0.12em;
+}
+
 /* ---------- 正文：纸书的段落规则 ---------- */
 
 /* 禁用中文标点压缩：部分阅读器会把行尾标点压到与下一个字重叠。
