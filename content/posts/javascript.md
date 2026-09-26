@@ -225,14 +225,14 @@ for (const value of [1,2,3,4,5,6]) {
 参考资料
 
 1. [Asynchronous JavaScript - Learn web development | MDN](https://developer.mozilla.org/en-US/docs/Learn/JavaScript/Asynchronous)
-2. [Async functions - making promises friendly  |  Web Fundamentals  |  Google Developers](https://developers.google.com/web/fundamentals/primers/async-functions)
+2. [Async functions - making promises friendly  |  Web Fundamentals  |  Google Developers](http://web.archive.org/web/20220318085158/https://developers.google.com/web/fundamentals/primers/async-functions)
 3. JavaScript 高级程序设计-第 4 版-第 11 章
 
 ## JavaScript Containers
 
 ## JavaScript Containers
 
-[JavaScript Containers](https://tinyclouds.org/javascript_containers)
+[JavaScript Containers](http://web.archive.org/web/20250711072616/https://tinyclouds.org/javascript_containers)
 
 Node.js、Deno 作者提出一种 JavaScript Containers 的概念。
 
@@ -317,8 +317,8 @@ JavaScript 中最大的坑之一，不看文档很难自己理清楚。
 
 具体可以参考这两篇文章：
 
-- [Array iteration and holes in JavaScript](http://www.2ality.com/2013/07/array-iteration-holes.html)
-- [ECMAScript 6: holes in Arrays](http://www.2ality.com/2015/09/holes-arrays-es6.html)
+- Array iteration and holes in JavaScript
+- [ECMAScript 6: holes in Arrays](http://web.archive.org/web/20260319000133/https://2ality.com/2015/09/holes-arrays-es6.html)
 
 9. Array-like objects
 
@@ -1913,7 +1913,7 @@ developers are coming from a background of strongly typed languages,
 such as C# or Java, and are unfamiliar with both the freedom and the
 potential pitfalls involved in working with loosely typed variables.
 Source:
-[Understanding Loose Typing in JavaScript](http://blog.jeremymartin.name/2008/03/understanding-loose-typing-in.html)
+[Understanding Loose Typing in JavaScript](http://web.archive.org/web/20260314184815/http://blog.jeremymartin.name/2008/03/understanding-loose-typing-in.html)
 
 #### 作用域和（变量）提升 Scoping and Hoisting
 
@@ -1999,39 +1999,39 @@ IIFE as a more semantically accurate term for the pattern./
 虽然 JS
 包含很多独属于自己的设计模式，但也能实现很多经典设计模式。学习资源是
 Addy Osmani 的开源书籍
-[Learning JavaScript Design Patterns](https://www.patterns.dev/posts/classic-design-patterns/)
+[Learning JavaScript Design Patterns](http://web.archive.org/web/20230224014858/https://www.patterns.dev/posts/classic-design-patterns/)
 
 创建型设计模式 Creational Design Patterns：
 
-- [工厂模式 Factory](https://www.patterns.dev/posts/classic-design-patterns/#factorypatternjavascript)
-- [原型 Prototype](https://www.patterns.dev/posts/classic-design-patterns/#prototypepatternjavascript)
-- [混合 Mixin](https://www.patterns.dev/posts/classic-design-patterns/#mixinpatternjavascript)
-- [单例 Singleton](https://www.patterns.dev/posts/classic-design-patterns/#singletonpatternjavascript)
+- [工厂模式 Factory](http://web.archive.org/web/20230224014858/https://www.patterns.dev/posts/classic-design-patterns/)
+- [原型 Prototype](http://web.archive.org/web/20230224014858/https://www.patterns.dev/posts/classic-design-patterns/)
+- [混合 Mixin](http://web.archive.org/web/20230224014858/https://www.patterns.dev/posts/classic-design-patterns/)
+- [单例 Singleton](http://web.archive.org/web/20230224014858/https://www.patterns.dev/posts/classic-design-patterns/)
 
 结构型设计模式 Structural Design Patterns：
 
-- [Adapter](https://www.patterns.dev/posts/classic-design-patterns/#wrapperpatternjquery)
+- [Adapter](http://web.archive.org/web/20230224014858/https://www.patterns.dev/posts/classic-design-patterns/)
 - [Bridge](https://www.joezimjs.com/javascript/javascript-design-patterns-bridge/)
-- [Composite](https://www.patterns.dev/posts/classic-design-patterns/#compositepatternjquery)，https://www.joezimjs.com/javascript/javascript-design-patterns-composite/
-- [Decorator](https://www.patterns.dev/posts/classic-design-patterns/#decoratorpatternjavascript)
-- [Facade](https://www.patterns.dev/posts/classic-design-patterns/#facadepatternjavascript)
-- [Flyweight](https://www.patterns.dev/posts/classic-design-patterns/#detailflyweight)
-- [Module](https://www.patterns.dev/posts/classic-design-patterns/#modulepatternjavascript)
-- [Proxy](https://www.patterns.dev/posts/classic-design-patterns/#proxypatternjquery)，https://www.joezimjs.com/javascript/javascript-design-patterns-proxy/
-- [Revealing Module](https://www.patterns.dev/posts/classic-design-patterns/#revealingmodulepatternjavascript)
+- [Composite](http://web.archive.org/web/20230224014858/https://www.patterns.dev/posts/classic-design-patterns/)，https://www.joezimjs.com/javascript/javascript-design-patterns-composite/
+- [Decorator](http://web.archive.org/web/20230224014858/https://www.patterns.dev/posts/classic-design-patterns/)
+- [Facade](http://web.archive.org/web/20230224014858/https://www.patterns.dev/posts/classic-design-patterns/)
+- [Flyweight](http://web.archive.org/web/20230224014858/https://www.patterns.dev/posts/classic-design-patterns/)
+- [Module](http://web.archive.org/web/20230224014858/https://www.patterns.dev/posts/classic-design-patterns/)
+- Proxy，https://www.joezimjs.com/javascript/javascript-design-patterns-proxy/
+- [Revealing Module](http://web.archive.org/web/20230224014858/https://www.patterns.dev/posts/classic-design-patterns/)
 
 行为设计模式 Behavioral Design Patterns：
 
 - [Chain of Responsibility](https://www.joezimjs.com/javascript/javascript-design-patterns-chain-of-responsibility/)
-- [Command](https://www.patterns.dev/posts/classic-design-patterns/#commandpatternjavascript)
-- [Mediator](https://www.patterns.dev/posts/classic-design-patterns/#mediatorpatternjavascript)
-- [Observer](https://www.patterns.dev/posts/classic-design-patterns/#observerpatternjavascript)
+- [Command](http://web.archive.org/web/20230224014858/https://www.patterns.dev/posts/classic-design-patterns/)
+- [Mediator](http://web.archive.org/web/20230224014858/https://www.patterns.dev/posts/classic-design-patterns/)
+- [Observer](http://web.archive.org/web/20230224014858/https://www.patterns.dev/posts/classic-design-patterns/)
 
 MV* Patterns：
 
-- [MVC Pattern](https://www.patterns.dev/posts/classic-design-patterns/#detailmvc)
-- [MVP Pattern](https://www.patterns.dev/posts/classic-design-patterns/#detailmvp)
-- [MVVM Pattern](https://www.patterns.dev/posts/classic-design-patterns/#detailmvvm)
+- MVC Pattern
+- [MVP Pattern](http://web.archive.org/web/20230224014858/https://www.patterns.dev/posts/classic-design-patterns/)
+- [MVVM Pattern](http://web.archive.org/web/20230224014858/https://www.patterns.dev/posts/classic-design-patterns/)
 
 ### Testing Tools
 
@@ -2159,7 +2159,7 @@ const objectOfAttrs = {
 <div v-bind="objectOfAttrs"></div>
 ```
 
-JS 表达式（支持数据绑定的 JS 表达式，可用于文本插值、属性绑定，只能键入表达式，可以调用组件中暴漏的函数，此处的表达式可使用的[“全局对象”](https://github.com/vuejs/core/blob/main/packages/shared/src/globalsWhitelist.ts)[但是，可以通过 `app.config.globalProperties` 显示添加]）。
+JS 表达式（支持数据绑定的 JS 表达式，可用于文本插值、属性绑定，只能键入表达式，可以调用组件中暴漏的函数，此处的表达式可使用的“全局对象”[但是，可以通过 `app.config.globalProperties` 显示添加]）。
 
 ```html
 {{ number + 1 }}

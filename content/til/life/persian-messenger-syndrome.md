@@ -7,7 +7,7 @@ header: Lifestyle
 
 波斯信使综合征
 
-https://thefreedomendeavour.com/persian-messenger-syndrome/
+http://web.archive.org/web/20240624094010/https://thefreedomendeavour.com/persian-messenger-syndrome/
 
 The Persian Messenger Syndrome is a metaphor used to describe a psychological phenomenon where people tend to blame the bearer of bad news rather than addressing the content of the message itself. This concept originates from an ancient story about a Persian king who would punish or kill the messenger who brought him bad news, rather than dealing with the actual issue. As a result, his messengers began to only report good news to avoid punishment, leading the king to be unaware of the true situation.
 

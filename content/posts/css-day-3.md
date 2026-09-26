@@ -9,7 +9,7 @@ tags: ['技术']
 部分。
 
 练习 Demo
-在「[这里](https://csszengarden.tianheg.xyz/days/first-30-days/3/)」。在
+在「[这里](http://web.archive.org/web/20221107065700/https://csszengarden.tianheg.xyz/days/first-30-days/3/)」。在
 Demo 最后可以看到我的 [scss](https://sass-lang.com/) 样式文件。
 
 对 `:root` 设置 font-size 为 62.5%。然后对 body 的 font-size 设置为

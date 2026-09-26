@@ -6,7 +6,7 @@ tags: ['技术']
 
 练习：
 
-- [tianheg/wtfjs](https://github.com/tianheg/wtfjs)
+- [tianheg/wtfjs](http://web.archive.org/web/20230331082057/https://github.com/tianheg/wtfjs)
 
 参考资料
 

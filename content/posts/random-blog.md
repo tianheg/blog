@@ -19,5 +19,5 @@ Vue 的用法而放弃。
 ，它能生成不大于 data 对象长度的整数。接下来便是，把每一个 JSON
 对象，通过 DOM 传入对应的 HTML 元素。
 
-页面在这里：[随机文章](https://tianheg.github.io/random-blog/)；GitHub
-仓库在这里：[tianheg/random-blog](https://github.com/tianheg/random-blog)。
+页面在这里：[随机文章](http://web.archive.org/web/20230515014052/https://tianheg.github.io/random-blog/)；GitHub
+仓库在这里：[tianheg/random-blog](http://web.archive.org/web/20230917104937/https://github.com/tianheg/random-blog)。

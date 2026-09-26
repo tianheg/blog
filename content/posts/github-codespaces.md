@@ -7,7 +7,7 @@ tags: ['技术']
 我想在 Codespace 里用 ohmyzsh，于是在 GitHub
 寻找办法。我真的找到[一个](https://github.com/codespaces-examples/base)，但是直接拿过来用不了，初始化环境时很多错误。经过我多次修改能够使用了，预装了
 ohmyzsh 和 nvm，如果你想尝试可以使用我的新仓库模板
-[tianheg/new-repo-template](https://github.com/tianheg/new-repo-template)。
+tianheg/new-repo-template。
 
 文件结构：
 

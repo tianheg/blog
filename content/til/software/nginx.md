@@ -128,8 +128,8 @@ docker compose up -d
 
 #### Fix Hugo Public Directory Permission
 两次修复：
-- https://github.com/tianheg/docker-hugo/commit/f802d38
-- https://github.com/tianheg/docker-hugo/commit/d238bc7
+- http://web.archive.org/web/20240917152659/https://github.com/tianheg/docker-hugo/commit/f802d38
+- http://web.archive.org/web/20240917152659/https://github.com/tianheg/docker-hugo/commit/d238bc7
 
 只要 public 文件夹本身权限和当前用户相同，内部文件为 root 时，Nginx 也能正常工作，不会返回 404。
 

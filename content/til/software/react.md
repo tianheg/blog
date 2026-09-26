@@ -44,7 +44,7 @@ State
 
 `{' '}` adds an empty space, which is used to divide text over multiple lines.
 
-from <https://nextjs.org/learn/basics/navigate-between-pages/link-component>
+from <http://web.archive.org/web/20231023003848/https://nextjs.org/learn/basics/navigate-between-pages/link-component>
 
 The [`Link`](https://nextjs.org/docs/api-reference/next/link) component enables **client-side navigation** between two pages in the same Next.js app.
 
@@ -54,7 +54,7 @@ Client-side navigation means that the page transition happens **using JavaScript
 
 If you need to add attributes like, for example, `className`, add it to the `a` tag, **not** to the `Link` tag.
 
-from <https://nextjs.org/learn/basics/navigate-between-pages/client-side>
+from <http://web.archive.org/web/20231023070808/https://nextjs.org/learn/basics/navigate-between-pages/client-side>
 
 Why are CSS Modules useful? They scope styles at the component level.
 

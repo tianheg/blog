@@ -7,4 +7,4 @@ date: 2026-07-08T20:33:17+08:00
 
 ---
 
-**来源** ：[原文](https://meanwhiling.com/blog/2026-06-03-im-not-choosing-european-tech/)
+**来源** ：[原文](http://web.archive.org/web/20260606000959/https://meanwhiling.com/blog/2026-06-03-im-not-choosing-european-tech/)

@@ -13,7 +13,7 @@ tags: ['学习']
 
 参考资料
 
-- [What is the Feynman Method of Learning?](https://practicalmechanic.com/2022/12/22/what-is-the-feynman-method-of-learning/)
+- [What is the Feynman Method of Learning?](http://web.archive.org/web/20230529190417/https://practicalmechanic.com/2022/12/22/what-is-the-feynman-method-of-learning/)
 - [Feynman Technique: A Complete Beginner’s Guide - E-Student](https://e-student.org/feynman-technique/)
 - [The Feynman Technique: How to Learn Anything Quickly](https://blog.doist.com/feynman-technique/)
 - [The Feynman Technique - The Best Learning Method You’ve Never Heard of Before - Computer Systems Institute](https://www.csinow.edu/career-tips/the-feynman-technique-the-best-learning-method-youve-never-heard-of-before/)

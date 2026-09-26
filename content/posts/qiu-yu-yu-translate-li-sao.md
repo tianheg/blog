@@ -169,4 +169,4 @@ tags: ['古文']
 
 ---
 
-1. [屈原《离骚》](https://www.shicimingju.com/chaxun/list/7405.html)
+1. [屈原《离骚》](http://web.archive.org/web/20250521011937/https://www.shicimingju.com/chaxun/list/7405.html)

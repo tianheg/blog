@@ -5,7 +5,7 @@ date: 2025-06-15T19:22:54+08:00
 header: Lifestyle
 ---
 
-<https://open.leancloud.cn/improve-chinese/>
+<http://web.archive.org/web/20240317234942/https://open.leancloud.cn/improve-chinese/>
 
 余光中关于中文变得字多的吐槽
 

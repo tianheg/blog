@@ -26,9 +26,9 @@ Later thought:
 
 A condition is needed: if the text generation fails, do not upload. If this is not done, there will be a problem: if the text generation for the same image is successful the first time and fails this time, it will cause the original text to be removed. When implementing, I encountered a BUG - the execution of the code could not be stopped.
 
-- First modification ([40b7a92](https://github.com/tianheg/img/commit/40b7a929a5b9a3803819115da10b6bb78d464f94)): Used `data.result.description` for filtering, but later found through logs that `data.success` is more concise.
-- Second modification ([2d62d50](https://github.com/tianheg/img/commit/2d62d5057876720b8fe369b627ff5de73711d5c5)): A lot of content was modified this time, and this modification caused the code execution to fall into an infinite loop. After troubleshooting, it was found that it was caused by the inability to stop the scheduling during image processing.
-- Third modification ([0184d83](https://github.com/tianheg/img/commit/0184d83fef579adc6c7e472004553250e85efbf8)): In this step, the `processImagesConcurrently` function was adjusted.
+- First modification ([40b7a92](http://web.archive.org/web/20240516083403/https://github.com/tianheg/img/commit/40b7a929a5b9a3803819115da10b6bb78d464f94)): Used `data.result.description` for filtering, but later found through logs that `data.success` is more concise.
+- Second modification ([2d62d50](http://web.archive.org/web/20240516083417/https://github.com/tianheg/img/commit/2d62d5057876720b8fe369b627ff5de73711d5c5)): A lot of content was modified this time, and this modification caused the code execution to fall into an infinite loop. After troubleshooting, it was found that it was caused by the inability to stop the scheduling during image processing.
+- Third modification ([0184d83](http://web.archive.org/web/20240516083159/https://github.com/tianheg/img/commit/0184d83fef579adc6c7e472004553250e85efbf8)): In this step, the `processImagesConcurrently` function was adjusted.
 
 Another implementation method is to use [xenova/transformers.js](https://github.com/xenova/transformers.js):
 
@@ -52,4 +52,4 @@ Two days later, I noticed an issue: the photos were all taken with a phone, and 
 
 ---
 
-The code repository is at [GitHub](https://github.com/tianheg/img). The website address is also there.
+The code repository is at [GitHub](http://web.archive.org/web/20250706142130/https://github.com/tianheg/img). The website address is also there.

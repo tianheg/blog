@@ -6,7 +6,7 @@ header: DevOps
 ---
 
 ### 背景
-个人 RSS 聚合站 [feed-tianheg.pages.dev](https://feed-tianheg.pages.dev)，基于 osmosfeed（[GitHub](https://github.com/osmoscraft/osmosfeed)）的 fork [@tianheg/osmosfeed](https://www.npmjs.com/package/@tianheg/osmosfeed) 构建。上游 2023-10 后停更，fork 自维护。
+个人 RSS 聚合站 [feed-tianheg.pages.dev](http://web.archive.org/web/20251224045746/https://feed-tianheg.pages.dev/)，基于 osmosfeed（[GitHub](https://github.com/osmoscraft/osmosfeed)）的 fork [@tianheg/osmosfeed](https://www.npmjs.com/package/@tianheg/osmosfeed) 构建。上游 2023-10 后停更，fork 自维护。
 
 #### 架构
 ```text

@@ -46,7 +46,7 @@ more》[^3]可以将和动画有关的样式放到一个 CSS 文件 `animations.
     <link rel="stylesheet" href="animations.css" media="(prefers-reduced-motion: no-preference)">
 ```
 
-一个 Demo： <https://prefers-reduced-motion.glitch.me/>
+一个 Demo： <http://web.archive.org/web/20250522075042/https://prefers-reduced-motion.glitch.me/>
 
 如果想强制关闭动画，可以通过 [Stylus](https://add0n.com/stylus.html)
 这样的插件扩展为所有网站插入以下样式，但 **风险自负** ！

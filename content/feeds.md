@@ -59,7 +59,7 @@ title: '我订阅的'
 | [阳志平的网志](https://yangzhiping.com/) | 认知科学 |
 | [Paul Graham](https://www.paulgraham.com/) | 《黑客与画家》作者 |
 | [Living an awesome life](https://sachachua.com/blog/) | Emacs |
-| [An Amateur Programmer's Blogs](https://dirtysalt.github.io/html/blogs.html) | Orgmode 博客已关，但留念 |
+| [An Amateur Programmer's Blogs](http://web.archive.org/web/20251009103626/https://dirtysalt.github.io/html/blogs.html) | Orgmode 博客已关，但留念 |
 | [陈斌（Emacs）](https://redguardtoo.github.io/) | Emacs |
 | [银色子弹](https://silverrainz.me/) | 辞职为学画; Sphinx笔记系统 |
 | [Conge](https://conge.livingwithfcs.org/) | 生活 |

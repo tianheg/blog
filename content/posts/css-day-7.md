@@ -4,7 +4,7 @@ date: 2022-11-21T14:54:00+08:00
 tags: ['技术']
 ---
 
-今天用 CSS 画了一个圆。[练习 Demo](https://csszengarden.tianheg.xyz/days/first-30-days/7/)。
+今天用 CSS 画了一个圆。[练习 Demo](http://web.archive.org/web/20221121075110/https://csszengarden.tianheg.xyz/days/first-30-days/7/)。
 
 主要复习了 position 的用法，在圆的中心（从左向右看，从上向下看）画了一个红色的圆点。
 

@@ -25,39 +25,39 @@ Comparing RISC-V, ARM, and x86 microprocessors involves examining their instruct
   - **Type**: Reduced Instruction Set Computing (RISC)
   - **Open-source**: Yes
   - **Key Features**: Modular, allows custom extensions, simplicity
-  - **Customization**: High; organizations can freely modify the ISA[1](https://www.notion.so/tianheg/1)[4](https://www.notion.so/tianheg/4).
+  - **Customization**: High; organizations can freely modify the ISA14.
 - **ARM**
   - **Type**: Reduced Instruction Set Computing (RISC)
   - **Open-source**: No, but licensable
   - **Key Features**: Energy efficiency, compact designs
-  - **Customization**: Limited by the licensing agreement with ARM[3](https://www.notion.so/tianheg/3)[4](https://www.notion.so/tianheg/4).
+  - **Customization**: Limited by the licensing agreement with ARM34.
 - **x86**
   - **Type**: Complex Instruction Set Computing (CISC)
   - **Open-source**: No, proprietary by Intel and AMD
   - **Key Features**: Performance, wide range of instructions, complexity
-  - **Customization**: Very limited due to proprietary nature[2](https://www.notion.so/tianheg/2)[3](https://www.notion.so/tianheg/3)[5](https://www.notion.so/tianheg/5).
+  - **Customization**: Very limited due to proprietary nature235.
 
 #### Performance and Efficiency
 - **RISC-V**
   - **Performance**: Currently lower compared to ARM and x86, but has potential due to flexibility and evolving ecosystem
-  - **Efficiency**: Moderate; benefits from RISC principles but lacks the extensive optimization seen in ARM[16](https://www.notion.so/tianheg/16)[20](https://www.notion.so/tianheg/20).
+  - **Efficiency**: Moderate; benefits from RISC principles but lacks the extensive optimization seen in ARM1620.
 - **ARM**
   - **Performance**: Very good for mobile and embedded applications; newer designs also compete in the server market
-  - **Efficiency**: High; optimized for low power consumption, ideal for battery-powered devices[3](https://www.notion.so/tianheg/3)[6](https://www.notion.so/tianheg/6)[13](https://www.notion.so/tianheg/13).
+  - **Efficiency**: High; optimized for low power consumption, ideal for battery-powered devices3613.
 - **x86**
   - **Performance**: Highest, traditionally optimized for peak performance
-  - **Efficiency**: Lower than ARM; higher power consumption due to complex instruction decoding[6](https://www.notion.so/tianheg/6)[12](https://www.notion.so/tianheg/12)[19](https://www.notion.so/tianheg/19).
+  - **Efficiency**: Lower than ARM; higher power consumption due to complex instruction decoding61219.
 
 #### Use Cases and Applications
 - **RISC-V**
   - **Applications**: Research, custom embedded systems, IoT devices
-  - **Advantages**: Customizability, cost-effective, innovation-friendly[1](https://www.notion.so/tianheg/1)[4](https://www.notion.so/tianheg/4).
+  - **Advantages**: Customizability, cost-effective, innovation-friendly14.
 - **ARM**
   - **Applications**: Mobile devices, embedded systems, some servers, IoT
-  - **Advantages**: Energy efficiency, widespread adoption, reliable performance[6](https://www.notion.so/tianheg/6)[13](https://www.notion.so/tianheg/13)[21](https://www.notion.so/tianheg/21).
+  - **Advantages**: Energy efficiency, widespread adoption, reliable performance61321.
 - **x86**
   - **Applications**: Personal computers, laptops, servers, high-performance computing
-  - **Advantages**: High performance, extensive software support, established market presence[2](https://www.notion.so/tianheg/2)[5](https://www.notion.so/tianheg/5)[13](https://www.notion.so/tianheg/13).
+  - **Advantages**: High performance, extensive software support, established market presence2513.
 
 #### Summary
 The choice between RISC-V, ARM, and x86 depends on the specific needs of the application:

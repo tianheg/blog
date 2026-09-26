@@ -5,7 +5,7 @@ tags: ['技术']
 ---
 
 今天在修补
-[tianheg/coding-interview-university](https://github.com/tianheg/coding-interview-university)
+[tianheg/coding-interview-university](http://web.archive.org/web/20230917105342/https://github.com/tianheg/coding-interview-university)
 仓库的 Action 时，遇到一个问题：想把一个文件的内容输出到 issue
 中，但是因为文件字符长度超过 65536 而报错。
 

@@ -87,7 +87,7 @@ vercel.json 文件是 Express 能够在 Vercel 运行的原因。它的内容如
     }
 ```
 
-完整代码在「[这里](https://github.com/tianheg/demo-proxy-server)」。
+完整代码在「这里」。
 
 一些文档：
 

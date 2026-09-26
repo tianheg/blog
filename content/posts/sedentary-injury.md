@@ -25,7 +25,7 @@ tags: ['健康']
 折腾我的博客了。hexo
 框架（我也不知道它是个什么称呼，都用了那么长时间了，暂时称为框架吧）用了挺长时间了，感觉还不错，在本地写作，本地修改调试，部署到
 Github Pages 上。然后就可以通过网址
-<https://gaotianhe.github.io/>（已失效，新博客地址：<https://www.yidajiabei.xyz>）
+<http://web.archive.org/web/20200311140418/https://gaotianhe.github.io/>（已失效，新博客地址：<https://www.yidajiabei.xyz>）
 访问了。
 
 但是，它有弊端：随着文章数目的增多，它渲染的时间会变长。我想缩短时间，所以我下一步打算使用

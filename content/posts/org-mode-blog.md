@@ -4,7 +4,7 @@ date: 2021-12-08
 tags: ['技术']
 ---
 
-1. <https://github.com/dirtysalt/dirtysalt.github.io>
+1. <http://web.archive.org/web/20240814150205/https://github.com/dirtysalt/dirtysalt.github.io>
 2. <https://www.zhangjiee.com/blog/2019/build-site-with-org-mode.html>
 3. <https://waychan.cn/blog/2019/blogging-with-orgmode>
 4. [使用 Org-Mode 生成博客](https://www.shellcodes.org/Emacs/%E4%BD%BF%E7%94%A8Org-Mode%E7%94%9F%E6%88%90%E5%8D%9A%E5%AE%A2.html)

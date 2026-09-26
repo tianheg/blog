@@ -8,7 +8,7 @@ tags: ['技术']
 
 ---
 
-最终页面：[tianheg.org](https://tianheg.org/)，代码：[tianheg/cloudflare-domain-cname](https://github.com/tianheg/cloudflare-domain-cname)
+最终页面：[tianheg.org](https://tianheg.org/)，代码：tianheg/cloudflare-domain-cname
 
 我前后进行了几次发布（publish），其中有一次我发现自己把通过 API 获得的全部信息都暴露到网页的 &lt;script&gt; 标签下，这样做不安全。错误代码：
 

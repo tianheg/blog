@@ -33,7 +33,7 @@ sudo systemctl restart docker
 ### Git
 #### Gitea
 https://github.com/go-gitea/gitea
-https://gitea.io/en-us/
+http://web.archive.org/web/20230618104144/https://gitea.io/en-us/
 
 ### 科学上网
 
@@ -99,7 +99,7 @@ from https://github.com/tldr-pages/tldr/blob/main/pages/common/awk.md
 https://github.com/screego/server - 实时代码分享
 
 ### Misc
-- [Google Webfonts Helper](https://google-webfonts-helper.herokuapp.com/fonts)
+- [Google Webfonts Helper](http://web.archive.org/web/20221122185851/https://google-webfonts-helper.herokuapp.com/fonts)
 - [Prepaid SIM card wiki](https://prepaid-data-sim-card.fandom.com/wiki/Prepaid_SIM_with_data)
 
 

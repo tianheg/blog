@@ -62,8 +62,8 @@ var x = 3;setTimeout(() => x = x + 4, 1000)
 8. <https://web.dev/async-functions/>
 9. <https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Statements/async_function>
 10. <https://web.dev/promises/>
-11. <https://exploringjs.com/es6/ch_async.html>
-12. <https://exploringjs.com/es6/ch_promises.html>
+11. <http://web.archive.org/web/20260130074555/https://exploringjs.com/es6/ch_async.html>
+12. <http://web.archive.org/web/20260512124404/https://exploringjs.com/es6/ch_promises.html>
 13. <https://wangdoc.com/es6/promise>
 14. <https://www.xiabingbao.com/post/promise/promise-concurrency-limit-rg10kz.html>
 15. <https://github.com/mqyqingfeng/Blog/issues/98>

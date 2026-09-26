@@ -51,7 +51,7 @@ Web 应用能够可以控制 Web
 
 C/C++
 
-Tools: https://wasdk.github.io/WasmFiddle/
+Tools: http://web.archive.org/web/20230920064932/https://wasdk.github.io/WasmFiddle/
 ，https://emscripten.org/docs/getting_started/downloads.html
 (`sudo pacman -S emscripten` (Arch))
 

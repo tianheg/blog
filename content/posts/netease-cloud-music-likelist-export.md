@@ -24,7 +24,7 @@ id 后的数字是歌单的 id。在浏览器输入 `https://music.163.com` ，�
 我打算，每隔一段时间，手动获取一次列表。
 ## 二、生成 content/listen.org
 
-我通过 [phind](https://phind.com/)（为开发者服务的 AI 搜索引擎），知道可以用 [ejs](https://ejs.co/) 这样的模板语言，将类 JSON 数据转为 HTML 网页。
+我通过 phind（为开发者服务的 AI 搜索引擎），知道可以用 [ejs](https://ejs.co/) 这样的模板语言，将类 JSON 数据转为 HTML 网页。
 
 实现代码：
 

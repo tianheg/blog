@@ -4,7 +4,7 @@ date: 2025-12-22T12:00:00+08:00
 tags: ['读书记']
 ---
 
-一个可以生成B=MAP图的小工具：[这里](https://fogg-behavior-model-tianheg.vercel.app/)
+一个可以生成B=MAP图的小工具：这里
 
 ### 适合我的执行方案
 

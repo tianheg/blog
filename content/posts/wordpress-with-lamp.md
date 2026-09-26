@@ -111,7 +111,7 @@ Then:
 ```
 
 I like <https://zenhabits.net/>'s theme, I
-[download it](https://zenhabits.net/theme/), install it.
+[download it](http://web.archive.org/web/20250728125511/https://zenhabits.net/theme/), install it.
 
 ### Install WordPress Theme {#install-wordpress-theme}
 

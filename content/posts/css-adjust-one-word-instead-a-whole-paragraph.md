@@ -6,7 +6,7 @@ tags: ['技术']
 
 当鼠标悬浮在链接上时，只改变该链接的文本的字体大小，而不影响链接文本所在段落的行高。
 
-[Demo](https://github.com/tianheg/csszengarden/blob/568fe4b0153f8a1257d4bda8508953cd83d598bc/days/first-30-days/3/index.html)
+[Demo](http://web.archive.org/web/20230101013946/https://github.com/tianheg/csszengarden/blob/568fe4b0153f8a1257d4bda8508953cd83d598bc/days/first-30-days/3/index.html)
 
 从我的博客的标签页，可以找到一种设计：
 

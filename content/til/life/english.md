@@ -46,7 +46,7 @@ B -> V
 - 坚持用英文词典 <https://dictionary.cambridge.org/> <https://www.dictionary.com/>
 - 使用英文教材学习英语 <https://www.bbc.co.uk/learningenglish/> <https://www.rong-chang.com/>
 - <https://github.com/xiaolai/everyone-can-use-english>
-- <https://www.leyafo.com/el/2021-04-20-my-english-learning-experiences/>
+- <http://web.archive.org/web/20221130133622/https://www.leyafo.com/el/2021-04-20-my-english-learning-experiences/>
 - <https://web.archive.org/web/20210502130613/https://www.leyafo.com/el/2021-05-02-my-english-learning-experiences-full/>
 - <https://preply.com/en/learn/english/test-your-vocab> 测试单词量
 

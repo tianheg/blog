@@ -17,5 +17,5 @@ header: Web
 参考资料
 
 1. [Asynchronous JavaScript - Learn web development | MDN](https://developer.mozilla.org/en-US/docs/Learn/JavaScript/Asynchronous)
-2. [Async functions - making promises friendly  |  Web Fundamentals  |  Google Developers](https://developers.google.com/web/fundamentals/primers/async-functions)
+2. [Async functions - making promises friendly  |  Web Fundamentals  |  Google Developers](http://web.archive.org/web/20220318085158/https://developers.google.com/web/fundamentals/primers/async-functions)
 3. JavaScript 高级程序设计-第 4 版-第 11 章

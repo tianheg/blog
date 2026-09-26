@@ -4,7 +4,7 @@ date: 2022-04-17
 tags: ['技术']
 ---
 
-[源文件地址](https://github.com/tianheg/docker-hugo/blob/de93b960f0e472ee4a7a8cacb9449bdfb2b57764/.github/workflows/check-release.yml)
+源文件地址
 
 关键修改之前：
 

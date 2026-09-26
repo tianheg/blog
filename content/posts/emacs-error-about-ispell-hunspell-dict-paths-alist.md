@@ -36,4 +36,4 @@ tags: ['技术']
 
 [^1]: <https://github.com/redguardtoo/emacs.d/blob/8ad48855ff/lisp/init-spelling.el#L61-L83>
 
-[^2]: <https://github.com/tianheg/emacs.d/commit/32fa8b8>
+[^2]: <http://web.archive.org/web/20251115013546/https://github.com/tianheg/emacs.d/commit/32fa8b8>

@@ -5,7 +5,7 @@ tags: ['技术']
 ---
 
 代码在
-[tianheg/cloudflare/r2](https://github.com/tianheg/cloudflare/tree/main/r2)
+[tianheg/cloudflare/r2](http://web.archive.org/web/20220818064639/https://github.com/tianheg/cloudflare/tree/main/r2)
 。文档 [R2 get started guide](https://developers.cloudflare.com/r2/get-started/) 。
 
 `wrangler.toml` ：

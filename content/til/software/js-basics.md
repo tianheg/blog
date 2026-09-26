@@ -17,7 +17,9 @@ header: Web
 
 以行（line）为单位执行语句（statement）。
 
-\`\`\`js var a = 1 + 4 \`\`\`
+```js
+var a = 1 + 4
+```
 
 使用 `var` 命令声明变量 `a` ，然后将 `1 + 4` 的运算结果赋值给变量 `a` 。
 
@@ -31,7 +33,9 @@ header: Web
 
 变量是对值（字符串、数字等）的引用。
 
-\`\`\`js var a = 1 \`\`\`
+```js
+var a = 1
+```
 
 上述代码的运行流程：
 
@@ -48,7 +52,10 @@ header: Web
 
 JS 是动态类型语言，变量声明为一种数据类型后，可以被轻易改变为其他数据类型：
 
-\`\`\`js var a = 1 a = 'hello' \`\`\`
+```js
+var a = 1
+a = 'hello'
+```
 
 对已声明变量的二次声明，如果没有赋值则二次声明无效；若赋值则变量的值得到更新。
 
@@ -75,7 +82,11 @@ JS 引擎的工作方式是，先解析代码，获取所有被声明的变量�
 
 历史原因 JS 兼容 HTML 注释：
 
-\`\`\`js x = 1; <!-- x = 2; --> x = 3; \`\`\`
+```js
+x = 1;
+<!-- x = 2; -->
+x = 3;
+```
 
 以上只有 `x = 1` 有意义， `-->` 只有在行首才会被识别为单行注释。
 
@@ -97,7 +108,13 @@ JS 提供 `if` 结构和 `switch` 结构，完成条件判断，即只有满足�
 
 错误代码：
 
-\`\`\`js var x = 1 var y = 2 if ((x = y)) { console.log(x) } \`\`\`
+```js
+var x = 1
+var y = 2
+if ((x = y)) {
+console.log(x)
+}
+```
 
 优先使用 `===` 。
 
@@ -109,11 +126,17 @@ JS 提供 `if` 结构和 `switch` 结构，完成条件判断，即只有满足�
 
 代码示例：
 
-\`\`\`js switch (fruit) { case 'banana': //... break case 'appple': //... break default: //... } \`\`\`
+```js
+switch (fruit) {
+case 'banana': //... break case 'appple': //... break default: //...
+}
+```
 
 #### 三元运算符 ?:
 
-\`\`\`js (条件) ? 表达式 1 : 表达式 2 \`\`\`
+```js
+(条件) ? 表达式 1 : 表达式 2
+```
 
 它可以是 `if...else...` 的简写。
 
@@ -123,13 +146,17 @@ JS 提供 `if` 结构和 `switch` 结构，完成条件判断，即只有满足�
 
 #### while 循环
 
-\`\`\`js while (条件) 语句
+```js
+while (条件) 语句
 
-// 或者 while (条件) 语句 ```
+// 或者 while (条件) 语句
+```
 
 #### for 循环
 
-\`\`\`js for (初始化表达式; 条件; 递增表达式) { 语句 } \`\`\`
+```js
+for (初始化表达式; 条件; 递增表达式) { 语句 }
+```
 
 - 初始化表达式（initialize）：确定循环变量的初始值，只在循环开始时执行一次
 - 条件表达式（test）：每轮循环开始时，都要执行这个条件表达式，只有值为真，才继续进行循环
@@ -141,7 +168,10 @@ for 循环在 JS 引擎级别是如何实现的？
 
 与 `while` 的区别在于先运行一次循环体，然后判断循环条件。
 
-\`\`\`js do { 语句 } while (条件) \`\`\`
+```js
+do { 语句 }
+while (条件)
+```
 
 不论是 `i++` 还是 `++i` i 都是加 1，区别在于前一个表达式的结果是 i，后一个表达式的结果是 i+1。
 
@@ -155,7 +185,9 @@ for 循环在 JS 引擎级别是如何实现的？
 
 JS 语言允许，语句的前面有标签（label），相当于定位符，用于跳转到程序的任意位置，标签格式如下：
 
-\`\`\`js label: 语句 \`\`\`
+```js
+label: 语句
+```
 
 标签可以是任意标识符，但不能是保留字，语句部分可以是任意语句。
 
@@ -209,11 +241,13 @@ JS 有三种方法，可以确定一个值到底是什么类型。
 
 `undefined` 表示”未定义”，典型场景：
 
-\`\`\`js // 变量声明了，但没有赋值 var i console.log(i) // undefined
+```js
+// 变量声明了，但没有赋值 var i console.log(i) // undefined
 
 // 调用函数时，应该提供的参数没有提供，该参数等于 undefined function f(x) { return x } console.log(f()) // undefined
 
-// 对象没有赋值的属性 var o = new Object() console.log(o.p) // undefined ```
+// 对象没有赋值的属性 var o = new Object() console.log(o.p) // undefined
+```
 
 布尔值代表”真”（ `true` ）和”假”（ `false` ）两个状态。
 
@@ -238,15 +272,19 @@ JS 会将结果是布尔值但不是布尔值的位置，自动转换为布尔�
 
 JS 内部，所有数字都是以 64 位浮点数形式储存，即使整数也是如此。
 
-\`\`\`js 1 === 1.0 // true \`\`\`
+```js
+1 === 1.0 // true
+```
 
 这也说明：JS 语言的底层没有整数，所有数字都是小数（64 位浮点数）。容易造成混淆的是 **某些运算只有整数才能完成，此时 JS 会自动把 64 位浮点数，转成 32 整数，然后再进行运算。**
 
 浮点数不是精确的值，所以会出现以下情况：
 
-\`\`\`js 0.1 + 0.2 === 0.3 // false
+```js
+0.1 + 0.2 === 0.3 // false
 
-0.3 / 0.1 // 2.9999999999999996 ```
+0.3 / 0.1 // 2.9999999999999996
+```
 
 #### 数值精度
 
@@ -260,13 +298,16 @@ JS 内部，所有数字都是以 64 位浮点数形式储存，即使整数也�
 
 指数部分一共有 11 个二进制位，因此大小范围就是 0 到 2047。IEEE754 规定，如果指数部分的值在 0 到 2047 之间（不含两个端点），那么有效数字的第一位默认总是 1，不保存在 64 位浮点数中。也就是说，有效数字这时总是 `1.xx...xx` 形式，其中 `xx...xx` 的部分保存在 64 位浮点数中，最长可能为 52 位。因此 JS 提供的有效数字最长为 53 个二进制位。
 
-\`\`\`js (-1)<sup>符号位</sup> * 1.xx...xx * 2<sup>指数部分</sup> \`\`\`
+```js
+(-1)<sup>符号位</sup> * 1.xx...xx * 2<sup>指数部分</sup>
+```
 
 上面公式是正常情况下（指数部分在 0 到 2047 之间），一个数在 JS 内部实际的表示形式。
 
 精度最多只能到 53 个二进制位，这意味着，绝对值小于 2 的 53 次方的整数，即 \$-2<sup>53</sup>$ 到 \$2<sup>53</sup>$ ，都可以精确表示。
 
-\`\`\`js Math.pow(2, 53) // 9007199254740992
+```js
+Math.pow(2, 53) // 9007199254740992
 
 Math.pow(2, 53) + 1 // 9007199254740992
 
@@ -274,7 +315,8 @@ Math.pow(2, 53) + 2 // 9007199254740994
 
 Math.pow(2, 53) + 3 // 9007199254740996
 
-Math.pow(2, 53) + 4 // 9007199254740996 ```
+Math.pow(2, 53) + 4 // 9007199254740996
+```
 
 由于 \$2<sup>53</sup>$ 是一个 16 位的十进制数值，所以简单来说，JS 对 15 位的十进制数都可以精确处理。
 
@@ -286,7 +328,9 @@ Math.pow(2, 53) + 4 // 9007199254740996 ```
 
 JavaScript 提供 `Number` 对象的 `MAX<sub>VALUE</sub>` 和 `MIN<sub>VALUE</sub>` 属性，返回可以表示的具体的最大值和最小值。
 
-\`\`\`js Number.MAX<sub>VALUE</sub> // 1.7976931348623157e+308 Number.MIN<sub>VALUE</sub> // 5e-324 \`\`\`
+```js
+Number.MAX_VALUE // 1.7976931348623157e+308 Number.MIN_VALUE // 5e-324
+```
 
 #### 数值表示法
 
@@ -325,21 +369,29 @@ JS 自动将数值转为科学记数法的两种情况：
 
 `NaN` 是 JS 的特殊值，表示非数字（Not a Number）。主要出现在将字符串解析成数字出错的场合。
 
-\`\`\`js 2 - 'x' // NaN \`\`\`
+```js
+2 - 'x' // NaN
+```
 
 上述代码运行时，会自动将字符串 `x` 转为数值，但是由于 `x` 不是数值，所以最后得到结果 `NaN` 。
 
 另外，一些数学函数的运算结果会出现 `NaN` 。
 
-\`\`\`js Math.acos(2) // NaN Math.log(-1) // NaN Math.sqrt(-1) // NaN \`\`\`
+```js
+Math.acos(2) // NaN Math.log(-1) // NaN Math.sqrt(-1) // NaN
+```
 
 还有
 
-\`\`\`js 0 / 0 // NaN \`\`\`
+```js
+0 / 0 // NaN
+```
 
 需要注意的是， `NaN` 不是独立的数据类型，而是一个特殊数值，它的数据类型依然属于 `Number` ，使用 `typeof` 运算符可以看得很清楚。
 
-\`\`\`js typeof NaN // "number" \`\`\`
+```js
+typeof NaN // "number"
+```
 
 NaN 的运算规则
 
@@ -359,11 +411,17 @@ NaN 的运算规则
 
 `Infinity` 的运算规则
 
-\`\`\`js 5 * Infinity // Infinity 5 - Infinity // -Infinity Infinity / 5 // Infinity 5 / Infinity // 0 \`\`\`
+```js
+5 * Infinity // Infinity 5 - Infinity // -Infinity Infinity / 5 // Infinity 5 / Infinity // 0
+```
 
-\`\`\`js 0 * Infinity // NaN 0 / Infinity // 0 Infinity / 0 // Infinity \`\`\`
+```js
+0 * Infinity // NaN 0 / Infinity // 0 Infinity / 0 // Infinity
+```
 
-\`\`\`js Infinity - Infinity // NaN \`\`\`
+```js
+Infinity - Infinity // NaN
+```
 
 Infinity 与 null 计算时，null 会转成 0，等同于与 0 的计算。
 
@@ -388,11 +446,19 @@ parseFloat 会把空字符串转为 NaN。与 Number 函数有所不同。
 
 isNaN 为 true 时，可能是字符串 / NaN。出于同样的原因，对象和数组，isNaN 也返回 true。但，空数组和只有一个数值元素的数组，isNaN 返回 false。原因是这些数组能够被 Number 函数转成数值。因此，使用 isNaN 之前要判断数据类型：
 
-\`\`\`js function myIsNaN(value) { return typeof value === 'number' && isNaN(value) } myIsNaN() \`\`\`
+```js
+function myIsNaN(value) {
+return typeof value === 'number' && isNaN(value)
+}
+myIsNaN()
+```
 
 判断 NaN 更可靠的方法，利用 NaN 是唯一不等于自身的值的这个特点：
 
-\`\`\`js function myIsNaN(value) { return value !== value } myIsNaN(NaN) \`\`\`
+```js
+function myIsNaN(value) { return value !== value }
+myIsNaN(NaN)
+```
 
 > 除了 Infinity、-Infinity、NaN 和 undefined 这几个值会返回 false，isFinite 对于其他的数值都会返回 true。
 
@@ -406,7 +472,9 @@ isNaN 为 true 时，可能是字符串 / NaN。出于同样的原因，对象�
 
 如果想输出多行字符串，有一种利用多行注释的变通方法：
 
-\`\`\`js ;(function () { /* line 1 line 2 line 3 */ } .toString() .split('\n') .slice(1, -1) .join('\n')) \`\`\`
+```js
+;(function () { /* line 1 line 2 line 3 */ } .toString() .split('\n') .slice(1, -1) .join('\n'))
+```
 
 #### 转义
 
@@ -482,7 +550,12 @@ JS 原生提供两个 Base64 相关的方法。
 
 要将非 ASCII 码字符转为 Base64 编码，必须中间插入一个转码环节，在使用这个方法。
 
-\`\`\`js function b64Encode(str) { return btoa(encodeURIComponent(str)) } b64Encode('你好，世界') function b64Decode(str) { return decodeURIComponent(atob(str)) } b64Decode('JUU0JUJEJUEwJUU1JUE1JUJEJUVGJUJDJThDJUU0JUI4JTk2JUU3JTk1JThD') \`\`\`
+```js
+function b64Encode(str) { return btoa(encodeURIComponent(str)) }
+b64Encode('你好，世界')
+function b64Decode(str) { return decodeURIComponent(atob(str)) }
+b64Decode('JUU0JUJEJUEwJUU1JUE1JUJEJUVGJUJDJThDJUU0JUI4JTk2JUU3JTk1JThD')
+```
 
 ### 对象
 
@@ -500,11 +573,15 @@ JS 原生提供两个 Base64 相关的方法。
 
 #### 表达式还是语句？
 
-\`\`\`js { foo: 123 } \`\`\`
+```js
+{ foo: 123 }
+```
 
 JS 引擎认为所有开头有大括号的语句都是代码块。如果想表示对象，需要这样：
 
-\`\`\`js ;({ foo: 123 }) \`\`\`
+```js
+;({ foo: 123 })
+```
 
 #### 属性的操作
 
@@ -550,9 +627,17 @@ with 语句会产生全局变量，最好不用。
 
 如果同一个函数被多次声明，后面的声明就会覆盖前面的声明。
 
-\`\`\`js function f() { console.log(1) } f() // 2
+```js
+function f() {
+console.log(1)
+}
+f() // 2
 
-function f() { console.log(2) } f() // 2 ```
+function f() {
+console.log(2)
+}
+f() // 2
+```
 
 函数名提升
 
@@ -564,9 +649,13 @@ function f() { console.log(2) } f() // 2 ```
 
 凡是能使用值的地方，都能使用函数。
 
-\`\`\`js function add(x, y) { return x + y } var op = add
+```js
+function add(x, y) { return x + y }
+var op = add
 
-function a(op) { return op } a(op)(1, 1) ```
+function a(op) { return op }
+a(op)(1, 1)
+```
 
 最后一行为什么这样写也可以？正常写法不应该是 `a(op(1,1))` 吗？
 
@@ -592,9 +681,15 @@ JavaScript 引擎将函数名视同变量名，所以采用 function 命令声�
 
 函数内部的注释也会返回。可以利用这一点实现多行字符串。
 
-\`\`\`js var multiline = function (fn) { var arr = fn.toString().split('\n') return arr.slice(1, arr.length - 1).join('\n') }
+```js
+var multiline = function (fn) {
+var arr = fn.toString().split('\n')
+return arr.slice(1, arr.length - 1).join('\n')
+}
 
-function f() { /* 这是一个 多行注释*/ } multiline(f) ```
+function f() { /* 这是一个 多行注释*/ }
+multiline(f)
+```
 
 #### 函数作用域
 
@@ -623,17 +718,32 @@ arguments 对象可以读取函数传入的参数。需要注意的是，虽然 
 
 #### 闭包
 
-\`\`\`js function f1() { var n = 999 function f2() { console.log(n) } return f2 }
+```js
+function f1() {
+var n = 999
+function f2() {
+console.log(n)
+}
+return f2
+}
 
-var result = f1() result() // 999 ```
+var result = f1()
+result() // 999
+```
 
 上面代码中，函数 f2 就在函数 f1 内部，这时 f1 内部的所有局部变量，对 f2 都是可见的。但是反过来就不行，f2 内部的局部变量，对 f1 就是不可见的。这就是 JavaScript 语言特有的"链式作用域"结构（chain scope），子对象会一级一级地向上寻找所有父对象的变量。所以，父对象的所有变量，对子对象都是可见的，反之则不成立。
 
 闭包就是函数 f2，即能够读取其他函数内部变量的函数。
 
-\`\`\`js function createIncrementor(start) { return function () { return start++ } }
+```js
+function createIncrementor(start) {
+return function () { return start++ }
+}
 
-var inc = createIncrementor(4) inc() inc() ```
+var inc = createIncrementor(4)
+inc()
+inc()
+```
 
 为什么闭包能够返回外层函数的内部变量？原因是闭包（上例的 inc）用到了外层变量（start），导致外层函数（createIncrementor）不能从内存释放。只要闭包没有被垃圾回收机制清除，外层函数提供的运行环境也不会被清除，它的内部变量就始终保存着当前值，供闭包读取。
 
@@ -641,9 +751,19 @@ var inc = createIncrementor(4) inc() inc() ```
 
 闭包的另一个用处，是封装对象的私有属性和私有方法。
 
-\`\`\`js function Person(name) { var <sub>age</sub> function setAge(n) { <sub>age</sub> = n } function getAge() { return <sub>age</sub> } return { name: name, getAge: getAge, setAge: setAge, } }
+```js
+function Person(name) {
+var _age
+function setAge(n) { _age = n }
+function getAge() { return _age }
+return { name: name, getAge: getAge, setAge: setAge, }
+}
 
-var p1 = Person('Jim') p1.setAge(23) p1.getAge() p1 ```
+var p1 = Person('Jim')
+p1.setAge(23)
+p1.getAge()
+p1
+```
 
 注意，外层函数每次运行，都会生成一个新的闭包，而这个闭包又会保留外层函数的内部变量，所以内存消耗很大。因此不能滥用闭包，否则会造成网页的性能问题。
 
@@ -651,11 +771,15 @@ var p1 = Person('Jim') p1.setAge(23) p1.getAge() p1 ```
 
 Immediately-Invoked Function Expression
 
-\`\`\`js var f = (function () { return 1 })() // 或者这样写 (function f() {return 1}) 或者 (function f() {return 1}()) 或者 (function f() {return 1})() f \`\`\`
+```js
+var f = (function () { return 1 })() // 或者这样写 (function f() {return 1}) 或者 (function f() {return 1}()) 或者 (function f() {return 1})() f
+```
 
 通常情况下，只对匿名函数使用这种”立即执行的函数表达式”。它的目的有两个：一是不必为函数命名，避免了污染全局变量；二是 IIFE 内部形成了一个单独的作用域，可以封装一些外部无法读取的私有变量。
 
-\`\`\`js // 写法1 var tmp = newData processData(tmp) storeData(tmp)( // 写法2 (function () { var tmp = newData processData(tmp) storeData(tmp) })(), ) \`\`\`
+```js
+// 写法1 var tmp = newData processData(tmp) storeData(tmp)( // 写法2 (function () { var tmp = newData processData(tmp) storeData(tmp) })(), )
+```
 
 上面代码中，写法二比写法一更好，因为完全避免了污染全局变量。
 
@@ -671,7 +795,10 @@ eval 没有自己的作用域，都在当前作用域内执行，因此可能会
 
 eval 的别名调用
 
-\`\`\`js var m = eval m('var x = 1') x \`\`\`
+```js
+var m = eval m('var x = 1')
+x
+```
 
 为了保证 eval 的别名不影响代码优化，JavaScript 的标准规定，凡是使用别名执行 eval，eval 内部一律是全局作用域。
 
@@ -681,7 +808,7 @@ eval 的别名调用
 
 1. John Dalziel, [The race for speed part 4: The future for JavaScript](http://creativejs.com/2013/06/the-race-for-speed-part-4-the-future-for-javascript/) | [The race for speed part 2: How JavaScript compilers work](http://creativejs.com/2013/06/the-race-for-speed-part-2-how-javascript-compilers-work/)
 2. <http://kangax.github.io/compat-table/es6/> JS 标准兼容性表
-3. Dr. Axel Rauschmayer, [Basic JavaScript for the impatient programmer](https://2ality.com/2013/06/basic-javascript.html) | [Basic JavaScript for the impatient programmer](https://2ality.com/2013/06/basic-javascript.html) | [Improving the JavaScript typeof operator](https://2ality.com/2011/11/improving-typeof.html) | [Categorizing values in JavaScript](https://2ality.com/2013/01/categorizing-values.html) | [How numbers are encoded in JavaScript](https://2ality.com/2012/04/number-encoding.html) | [Object properties in JavaScript](https://2ality.com/2012/10/javascript-properties.html) | [JavaScript's with statement and why it's deprecated](https://2ality.com/2011/06/with-statement.html) | [Evaluating JavaScript code via eval() and new Function()](https://2ality.com/2014/01/eval.html) | [Arrays in JavaScript](https://2ality.com/2012/12/arrays.html) | [JavaScript: sparse arrays vs. dense arrays](https://2ality.com/2012/06/dense-arrays.html) | [What is {} + {} in JavaScript?](https://2ality.com/2012/01/object-plus-object.html) | [JavaScript quirk 1: implicit conversion of values](https://2ality.com/2013/04/quirk-implicit-conversion.html) | [A meta style guide for JavaScript](https://2ality.com/2013/07/meta-style-guide.html) | [Automatic semicolon insertion in JavaScript](https://2ality.com/2011/05/semicolon-insertion.html) | [What JavaScript would be like with significant newlines](https://2ality.com/2011/11/significant-newlines.html) | [The JavaScript console API](https://2ality.com/2013/10/console-api.html) | [Protecting objects in JavaScript](https://2ality.com/2013/08/protecting-objects.html) | [JavaScript: an overview of the regular expression API](https://2ality.com/2011/04/javascript-overview-of-regular.html) | [The flag /g of JavaScript's regular expressions](https://2ality.com/2013/08/regexp-g.html) | [JavaScript's JSON API](https://2ality.com/2011/08/json-api.html) | [JavaScript's this: how it works, where it can trip you up](https://2ality.com/2014/05/this.html) | [JavaScript properties: inheritance and enumerability](https://2ality.com/2011/07/js-properties.html) | [JavaScript: Why the hatred for strict mode?](https://2ality.com/2011/10/strict-mode-hatred.html) | [JavaScript's strict mode: a summary](https://2ality.com/2011/01/javascripts-strict-mode-summary.html) | [ECMAScript 6 promises (1/2): foundations](https://2ality.com/2014/09/es6-promises-foundations.html) | [Speaking JavaScript](http://speakingjs.com/es5/index.html)（ES5） | [Exploring JS: JavaScript books for programmers](https://exploringjs.com/)（ES6 and other versions）: The Past, Present, and Future of JavaScript
+3. Dr. Axel Rauschmayer, Basic JavaScript for the impatient programmer | Basic JavaScript for the impatient programmer | [Improving the JavaScript typeof operator](http://web.archive.org/web/20260421202605/https://2ality.com/2011/11/improving-typeof.html) | [Categorizing values in JavaScript](http://web.archive.org/web/20260312092241/https://2ality.com/2013/01/categorizing-values.html) | [How numbers are encoded in JavaScript](http://web.archive.org/web/20260416054844/https://2ality.com/2012/04/number-encoding.html) | Object properties in JavaScript | JavaScript's with statement and why it's deprecated | [Evaluating JavaScript code via eval() and new Function()](http://web.archive.org/web/20260218182656/https://2ality.com/2014/01/eval.html) | [Arrays in JavaScript](http://web.archive.org/web/20260302033153/https://2ality.com/2012/12/arrays.html) | [JavaScript: sparse arrays vs. dense arrays](http://web.archive.org/web/20260415013614/https://2ality.com/2012/06/dense-arrays.html) | [What is {} + {} in JavaScript?](http://web.archive.org/web/20260312021856/https://2ality.com/2012/01/object-plus-object.html) | [JavaScript quirk 1: implicit conversion of values](http://web.archive.org/web/20260505014818/https://2ality.com/2013/04/quirk-implicit-conversion.html) | [A meta style guide for JavaScript](http://web.archive.org/web/20260219103720/https://2ality.com/2013/07/meta-style-guide.html) | [Automatic semicolon insertion in JavaScript](http://web.archive.org/web/20260502220230/https://2ality.com/2011/05/semicolon-insertion.html) | [What JavaScript would be like with significant newlines](http://web.archive.org/web/20260421201212/https://2ality.com/2011/11/significant-newlines.html) | [The JavaScript console API](http://web.archive.org/web/20260219072012/https://2ality.com/2013/10/console-api.html) | [Protecting objects in JavaScript](http://web.archive.org/web/20260314221044/https://2ality.com/2013/08/protecting-objects.html) | [JavaScript: an overview of the regular expression API](http://web.archive.org/web/20260218175359/https://2ality.com/2011/04/javascript-overview-of-regular.html) | [The flag /g of JavaScript's regular expressions](http://web.archive.org/web/20260302033203/https://2ality.com/2013/08/regexp-g.html) | [JavaScript's JSON API](http://web.archive.org/web/20260316222032/https://2ality.com/2011/08/json-api.html) | JavaScript's this: how it works, where it can trip you up | JavaScript properties: inheritance and enumerability | JavaScript: Why the hatred for strict mode? | JavaScript's strict mode: a summary | [ECMAScript 6 promises (1/2): foundations](http://web.archive.org/web/20260215153924/https://2ality.com/2014/09/es6-promises-foundations.html) | [Speaking JavaScript](http://speakingjs.com/es5/index.html)（ES5） | [Exploring JS: JavaScript books for programmers](https://exploringjs.com/)（ES6 and other versions）: The Past, Present, and Future of JavaScript
 4. [Happy 18th Birthday JavaScript! A look at an unlikely past and bright future.](https://www.balena.io/blog/happy-18th-birthday-javascript/)
 5. Humphry, [JavaScript 中 Number 的一些表示上/下限](https://segmentfault.com/a/1190000000407658)
 6. Mathias Bynens, [JavaScript's internal character encoding: UCS-2 or UTF-16?](https://mathiasbynens.be/notes/javascript-encoding) | [JavaScript has a Unicode problem](https://mathiasbynens.be/notes/javascript-unicode)
@@ -705,7 +832,7 @@ eval 的别名调用
 24. Jon Bretman, [Type Checking in JavaScript](https://web.archive.org/web/20201112014755/https://badoo.com/techblog/blog/2013/11/01/type-checking-in-javascript/)
 25. Cody Lindley, [Thinking About ECMAScript 5 Parts](https://web.archive.org/web/20150424141701/http://tech.pro:80/tutorial/1671/thinking-about-ecmascript-5-parts)
 26. Bjorn Tipling, [Advanced objects in JavaScript](https://web.archive.org/web/20140828092110/http://bjorn.tipling.com/advanced-objects-in-javascript)
-27. Javier Márquez, [Javascript properties are enumerable, writable and configurable](http://arqex.com/967/javascript-properties-enumerable-writable-configurable)
+27. Javier Márquez, [Javascript properties are enumerable, writable and configurable](http://web.archive.org/web/20230604083837/http://arqex.com/967/javascript-properties-enumerable-writable-configurable)
 28. Sella Rafaeli, [Native JavaScript Data-Binding](https://www.sellarafaeli.com/blog/native_javascript_data_binding)
 29. Lea Verou, [Copying object properties, the robust way](https://lea.verou.me/2015/08/copying-properties-the-robust-way/)
 30. Nicolas Bevacqua, [Fun with JavaScript Native Array Functions](https://web.archive.org/web/20131130130119/http://flippinawesome.org/2013/11/25/fun-with-javascript-native-array-functions/)
