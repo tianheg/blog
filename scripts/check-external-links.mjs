@@ -79,6 +79,9 @@ const NO_WRITE_VERIFIED = flag("--no-write-verified");
 let verifiedChanged = false;
 const REFRESH_DEAD = flag("--refresh-dead");
 const LIST_ONLY = flag("--list");
+// --urls-file <path>：不扫 content/，改扫一份外部 URL 清单（每行 `url` 或 `url\t标签`）
+// 用途：拿同一套探测逻辑查别处的链接（Linkding 书签等）
+const URLS_FILE = opt("--urls-file", null);
 
 const OK_TTL = 30 * 24 * 3600 * 1000;
 const BAD_TTL = 3 * 24 * 3600 * 1000;
@@ -152,13 +155,25 @@ function collect(file) {
   }
 }
 
-(function walk(dir) {
-  for (const e of readdirSync(dir, { withFileTypes: true })) {
-    const p = join(dir, e.name);
-    if (e.isDirectory()) walk(p);
-    else if (e.name.endsWith(".md")) collect(p);
+if (URLS_FILE) {
+  // 外部 URL 清单模式：每行 `url` 或 `url\t标签`
+  for (const line of readFileSync(URLS_FILE, "utf8").split("\n")) {
+    const t = line.trim();
+    if (!t || t.startsWith("#")) continue;
+    const [u, ...rest] = t.split("\t");
+    if (!/^https?:\/\//.test(u)) continue;
+    if (!urlFiles.has(u)) urlFiles.set(u, new Set());
+    urlFiles.get(u).add(rest[0] || "list");
   }
-})(CONTENT);
+} else {
+  (function walk(dir) {
+    for (const e of readdirSync(dir, { withFileTypes: true })) {
+      const p = join(dir, e.name);
+      if (e.isDirectory()) walk(p);
+      else if (e.name.endsWith(".md")) collect(p);
+    }
+  })(CONTENT);
+}
 
 // 忽略名单：已知被 WAF 挡死 / 有意保留的历史链接
 const ignored = [];
@@ -178,7 +193,8 @@ const isIgnored = (u) => ignored.some((pat) => u.includes(pat));
 const VERIFIED_TTL_DAYS = Number(opt("--verified-ttl-days", "90"));
 const REVERIFY = flag("--recheck-verified");
 const verified = new Map(); // url -> 'YYYY-MM-DD'
-if (existsSync(VERIFIED_FILE)) {
+// --urls-file 模式（查外部清单）不碰 blog 的账本：既不读也不写
+if (!URLS_FILE && existsSync(VERIFIED_FILE)) {
   for (const line of readFileSync(VERIFIED_FILE, "utf8").split("\n")) {
     const t = line.trim();
     if (!t || t.startsWith("#")) continue;
@@ -403,7 +419,7 @@ const VERIFIED_HEADER = existsSync(VERIFIED_FILE)
     ].join("\n");
 
 function saveVerified(force = false) {
-  if (NO_WRITE_VERIFIED) return;
+  if (NO_WRITE_VERIFIED || URLS_FILE) return;
   if (!force && !verifiedChanged) return;
   const entries = [...verified.entries()].sort((a, b) => a[0].localeCompare(b[0]));
   writeFileSync(
