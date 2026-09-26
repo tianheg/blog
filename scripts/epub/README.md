@@ -49,8 +49,8 @@ python3 scripts/epub/build_epub.py -o ~/book.epub --title "天河的博客" --su
 |----|--------|------|
 | S1 | 建临时 Hugo 项目挂载 `content/`，只渲染 `EXCLUDE_LIST` 之外的页 | `S1 hugo exit: 0 \| wikilink 未解析警告: 0` |
 | S2 | 收集 `.xhtml`，按渲染出的日期编年排序 | `S2 章节数: 962 \| 时间跨度: 2018-12-23 -> 2026-09-20` |
-| S3 | 合并单文档：内链改 `#锚点`、`id` 加页面前缀、去图、修历史损坏 | `S3 合并文档 N KB \| 内链 X 站外 Y 去图 Z 计数行还原 W` |
-| S4 | pandoc 打包 + `patch_opf()` 补元数据 | `S4 pandoc 警告: 0` + `S4 OPF 补充: …` + `S4 输出: … KB` |
+| S3 | 合并单文档：内链改 `#锚点`、`id` 加页面前缀、插年份扉页、去图、修历史损坏 | `S3 合并文档 N KB \| 内链 X 站外 Y 去图 Z 计数行还原 W 年份扉页 V` |
+| S4 | pandoc 打包 + `patch_opf()` 补元数据、nav 按年分层 | `S4 pandoc 警告: 0` + `S4 OPF 补充: … \| 目录年份分组: 9` |
 | S5 | 运行 `validate_epub.py` | `0 error / 0 warning`，退出码 0 |
 
 ## 元信息（阅读器书库看到的东西）
@@ -70,13 +70,26 @@ python3 scripts/epub/build_epub.py -o ~/book.epub --title "天河的博客" --su
 
 **为什么需要 `patch_opf()`**：pandoc 的 EPUB writer 只写它认识的字段，`title-type` / `file-as` / `accessibilitySummary` 这类 `refines` 元数据写不进去（实测 `--metadata subtitle` 只进标题页，OPF 里没有 subtitle 标记），只能在构建后改写 OPF 再重打包。**重打包时 mimetype 必须仍是第一个条目且不压缩**（OCF 要求），否则书直接打不开——改这个函数后务必重跑 `validate_epub.py`。
 
-## 验收标准（DoD，5 条全过才算完成）
+## 按年分部（正文 + 目录两级）
+
+每年第一篇之前插一个**年份扉页**（`<h1 class="year-title">2018 年</h1>` + 篇数），pandoc 把它当普通 h1 分成独立章节；
+`patch_opf()` 在打包后再把 nav 里「年份条目 + 其后的同年文章」重排成嵌套 `<ol>`，得到两级目录。
+
+为什么在 nav 上自己排：pandoc 的 `--toc-depth` 只能按标题层级嵌套，而书里所有文章标题都是 h1（平级），年份这一层它无从得知。
+
+- 年份扉页在 spine 里独立成章（`break-before: page` 另起一页，阅读器翻页可见）
+- 目录里年份是分组标题（`<span>`，不可点），文章列在下一层
+- 年份扉页的 id 形如 `year-2018`（无日期文章归 `year-undated`），nav 重排靠 `year-\d{4}` 识别分组边界
+- 实测：9 个年份分组（2018–2026），最大嵌套深度 2，961 篇文章各归其年
+
+## 验收标准（DoD，6 条全过才算完成）
 
 1. 校验器 **0 error**
 2. 章节数 = `content/posts/*.md` 文件数 − 1（实测 963 → 962）
 3. 内链数 > 0，随机抽 3 条在阅读器里能跳
 4. spine 首项是封面、末项是「关于本书」
 5. 体积与内容量匹配（≈960 篇 → 2.3 MB）
+6. 目录是两级：年份分组数 = 有文章的年数（实测 9），nav 最大嵌套深度 2
 
 ## 手工抽查
 
@@ -86,6 +99,7 @@ unzip -p book.epub EPUB/content.opf | grep -c itemref         # spine 条目数
 unzip -p book.epub EPUB/nav.xhtml | head -40                  # 目录（应有 epub:type="toc"）
 unzip -p book.epub EPUB/content.opf | grep -o 'properties="nav"'   # 导航文档标记
 unzip -p book.epub EPUB/content.opf | sed -n '/<metadata/,/<\/metadata>/p'   # 元信息
+unzip -p book.epub EPUB/nav.xhtml | grep -c '<li><span>'      # 年份分组条目数
 ```
 
 ## 排障
@@ -102,11 +116,15 @@ unzip -p book.epub EPUB/content.opf | sed -n '/<metadata/,/<\/metadata>/p'   # �
 | 书里多了旧文章 | 渲染目录残留 | 脚本每次 `rmtree` + `hugo --cleanDestinationDir`，已覆盖 |
 | 书打不开（OPF 错误） | `patch_opf()` 重打包时 mimetype 被压缩或挪位 | mimetype 必须是第一个条目且 `ZIP_STORED`；跑 `validate_epub.py` 确认 |
 | 阅读器里出现重复的书 | identifier 变成了随机值 | 确认有传 `--metadata identifier=`（`book_id` 那段） |
+| 目录没有年份层级 | pandoc 改了 nav 结构 | 重排依赖 `<ol class="toc">` 这个 class，变了就同步改 `patch_opf()` 里的正则 |
+| 年份扉页的篇数没有样式 | pandoc 丢了 `<p class="x">` 的 class | 用 `<div class="…">` 包（脚本已这么做） |
+| 暗色主题不生效 | 阅读器不传 `prefers-color-scheme` | 样式表侧已尽力（两套 token + `color-scheme: light dark`）；换支持该偏好的阅读器，或去掉写死的底色 |
 
 ## 改什么
 
 - **收录范围** → `build_epub.py` 顶部的 `EXCLUDE_LIST`（列的是排除项）
-- **排版** → `epub-book.css`（纸质书：首行缩进、章首装饰线、`· · ·` 花饰）/ `epub-tianheg.css`（站点 token）
+- **分部方式** → 年份扉页那段（S3 循环里的 `year_counts` / `cur_year`）；nav 分层在 `patch_opf()` 里
+- **排版** → `epub-book.css`（纸质书：首行缩进、章首装饰线、年份扉页、`· · ·` 花饰）/ `epub-tianheg.css`（站点 token）
 - **元信息** → `SITE_DESCRIPTION`（站点描述）、`collect_subjects()`（主题）、`patch_opf()`（OPF 补充项）
 - **封面** → `python3 scripts/epub/make_cover.py --title "…" --subtitle "…" --author tianhe`
 
@@ -115,7 +133,7 @@ unzip -p book.epub EPUB/content.opf | sed -n '/<metadata/,/<\/metadata>/p'   # �
 1. **必须合并单文档**：多文件模式（含 `--file-scope`）下跨文件链接会原样保留 → 657 条死链
 2. **所有 `id` 加页面前缀**：跨篇重名会被 pandoc 重命名，脚注引用随之失配
 3. **`id` 前缀要用双连字符**：单连字符会和 h1 的 anchor 撞名（文章里手写 `{#flexbox}` 时实测撞过一次）
-4. **pandoc 丢弃 `<p class="x">` 的 class**：标记要用 `<span>` 或 `<div>` 包
+4. **pandoc 丢弃 `<p class="x">` 的 class**：标记要用 `<span>` 或 `<div>` 包。年份扉页的篇数行就这么踩过——写成 `<p class="year-meta">` 时样式完全不生效（`getComputedStyle` 拿不到颜色），改 `<div>` 后正常
 5. **typographer 改写 + XHTML 转义**：源里 `--` 已变 `&ndash;`、引号已变 `&quot;`，正则要放宽
 6. **命名实体**：XHTML 只认 5 个内建实体，`&mdash;` 之类必须先转成数字实体
 7. **wikilink 用站点自己的 partial**：自己复刻会漏 aliases 与短标题（612 vs 642）
@@ -123,3 +141,4 @@ unzip -p book.epub EPUB/content.opf | sed -n '/<metadata/,/<\/metadata>/p'   # �
 9. **历史损坏在书里修、不改源**：转义的读书记计数行有还原逻辑（`计数行还原 N`）。源里仍是转义状态时 N>0；源修好后 N=0 属正常。样式表必须定义 `--dushuji-count-color`（浅色 `#8b0000` / 深色 `#f87171`），否则这些行掉色
 10. **不要用两端对齐**：`text-align: justify` 叠加中文标点压缩会让行尾标点与下一个字重叠（实测反馈），正文用 `left` + `text-spacing-trim: space-all`
 11. **书名里的 `{#…}` 残留**：源里有 `### 01 {#01} {#section}` 这种双属性块叠加时 goldmark 只认最后一个，`{#01}` 会留在标题文字里——脚本在合并阶段清掉
+12. **改 nav 结构要动正则**：重排依赖 `<ol class="toc">` 这个 class 与 `<li><a href="…">标题</a></li>` 的朴素形态；pandoc 换版本后先 `unzip -p book.epub EPUB/nav.xhtml | head -20` 看一眼再改
