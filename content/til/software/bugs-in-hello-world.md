@@ -11,25 +11,34 @@ header: Programming
 
 维基百科
 
-\`\`\`c #include <stdio.h>
+```c
+#include <stdio.h>
 
-int main() { printf("Hello, World!\n"); return 0; } ```
+int main() { printf("Hello, World!\n"); return 0; }
+```
 
 hello world in the K&R book
 
-\`\`\`c #include <stdio.h>
+```c
+#include <stdio.h>
 
-main() { printf("hello, world\n") } ```
+main() { printf("hello, world\n") }
+```
 
 the oldest known C hello world program from 1974
 
-\`\`\`c main() { printf("hello, world"); } \`\`\`
+```c
+main() { printf("hello, world"); }
+```
 
 另一种，ANSI C 样式的
 
-\`\`\`c #include <stdio.h> #include <stdlib.h>
+```c
+#include <stdio.h>
+#include <stdlib.h>
 
-int main(void) { puts("Hello World!"); return EXIT<sub>SUCCESS</sub>; } ```
+int main(void) { puts("Hello World!"); return EXIT_SUCCESS; }
+```
 
 以上所有程序都有 bug
 
@@ -37,9 +46,11 @@ int main(void) { puts("Hello World!"); return EXIT<sub>SUCCESS</sub>; } ```
 
 Linux 上有一个位置 `/dev/full`，想起写入数据会失败，所以可用来验证一些程序的输出。
 
-\`\`\`bash echo "Hello World" > /dev/full
+```bash
+echo "Hello World" > /dev/full
 
 echo $?
+```
 
 ````text
 
@@ -55,9 +66,10 @@ echo $?
 
 使用 strace（`pacman -S strace`）查看原因
 
-\`\`\`bash strace -etrace=write ./hello > /dev/full
+```bash
+strace -etrace=write ./hello > /dev/full
 
-\`\`\`
+```
 
 系统报告了 `No space` 错误，但程序却默认一切正常了，**这就是 bug**！
 
@@ -67,15 +79,20 @@ For example, consider a program that prints a yaml file to standard output. If s
 
 ## How to Fix
 
-\`\`\`c #include <stdio.h> #include <stdlib.h>
+```c
+#include <stdio.h>
+#include <stdlib.h>
 
 int main(void) { printf("Hello, World!\n");
 
-if (fflush(stdout) != 0 || ferror(stdout) != 0) { return EXIT<sub>FAILURE</sub>; }
+if (fflush(stdout) != 0 || ferror(stdout) != 0) { return EXIT_FAILURE; }
 
-return EXIT<sub>SUCCESS</sub>; } ```
+return EXIT_SUCCESS; }
+```
 
-\`\`\`bash ./hello2 > /dev/full # 无错误提示 \`\`\`
+```bash
+./hello2 > /dev/full # 无错误提示
+```
 
 
 相关：[[coding|coding]]

@@ -17,13 +17,26 @@ header: Programming
 
 一个对 JS 对象进行深层拷贝的方式：先用 `JSON.stringify()` 将对象转化为 JSON 字符串，然后使用 `JSON.parse()` 把字符串转换成一个全新的 JS 对象。
 
-\`\`\`js let list = ['noodles', { list: ['eggs', 'flour', 'water'] }] let list<sub>deepcopy</sub> = JSON.parse(JSON.stringify(list)) console.log(list<sub>deepcopy</sub>) // Array [ "noodles", {...} ] list<sub>deepcopy</sub>[1].list = ['rice flour', 'water'] console.log(list[1].list) // Array(3) [ "eggs", "flour", "water" ] \`\`\`
+```js
+let list = ['noodles', { list: ['eggs', 'flour', 'water'] }]
+let list_deepcopy = JSON.parse(JSON.stringify(list))
+console.log(list_deepcopy)
+// Array [ "noodles", {...} ]
+list_deepcopy[1].list = ['rice flour', 'water']
+console.log(list[1].list)
+// Array(3) [ "eggs", "flour", "water" ]
+```
 
 上面的数组足够简单，可以序列化，但有些 JS 对象无法被序列化，如闭包函数、Symbols、在 HTML DOM API 中表示 HTML 元素的对象、递归数据和很多其他情况。所以无法对这些对象进行深拷贝。
 
 对于可以序列化的对象，还有一个可用的属性方法是 `structuredClone()`，`structuredClone()` has the advantage of allowing [transferable objects](https://developer.mozilla.org/en-US/docs/Glossary/Transferable_objects) in the source to be _transferred_ to the new copy。记住，`structuredClone()` 并非 JS 语言的特性，而是一种浏览器和其他 JS 运行时（实现了像 `window` 这样的全局对象）的特性。
 
-\`\`\`js let list = ['noodles', { list: ['eggs', 'flour', 'water'] }] let list<sub>deepcopy</sub> = structuredClone(list) console.log(list<sub>deepcopy</sub>) // Array [ "noodles", {...} ] \`\`\`
+```js
+let list = ['noodles', { list: ['eggs', 'flour', 'water'] }]
+let list_deepcopy = structuredClone(list)
+console.log(list_deepcopy)
+// Array [ "noodles", {...} ]
+```
 
 深拷贝使用递归，与浅递归相比更耗时间。
 
@@ -35,21 +48,59 @@ Spread syntax(`...`), `Array.prototype.concat()`, `Array.prototype.slice()`,`Arr
 
 ## 练习
 
-\`\`\`js let list = ['noodles', { list: ['eggs', 'flour', 'water'] }] let list<sub>copy</sub> = Array.from(list) console.log(JSON.stringify(list<sub>copy</sub>)) // ["noodles",{"list":["eggs","flour","water"]}] list<sub>copy</sub>[1].list = ['rice flour', 'water'] console.log(list[1].list) // Array [ "rice flour", "water" ] console.log(JSON.stringify(list)) // ["noodles",{"list":["rice flour","water"]}] list<sub>copy</sub>[0] = ['rice noodles'] console.log(list[0]) // noodles console.log(JSON.stringify(list<sub>copy</sub>)) // [["rice noodles"],{"list":["rice flour","water"]}] console.log(JSON.stringify(list)) // ["noodles",{"list":["rice flour","water"]}] \`\`\`
+```js
+let list = ['noodles', { list: ['eggs', 'flour', 'water'] }]
+let list_copy = Array.from(list)
+console.log(JSON.stringify(list_copy))
+// ["noodles",{"list":["eggs","flour","water"]}]
+list_copy[1].list = ['rice flour', 'water']
+console.log(list[1].list)
+// Array [ "rice flour", "water" ]
+console.log(JSON.stringify(list))
+// ["noodles",{"list":["rice flour","water"]}]
+list_copy[0] = ['rice noodles']
+console.log(list[0])
+// noodles
+console.log(JSON.stringify(list_copy))
+// [["rice noodles"],{"list":["rice flour","water"]}]
+console.log(JSON.stringify(list))
+// ["noodles",{"list":["rice flour","water"]}]
+```
 
 ## 实现浅拷贝
 
-\`\`\`js let shallowCopy = function (obj) { if (typeof obj !== 'object') return let newObj = obj instanceof Array ? [] : {} for (let key in obj) { if (obj.hasOwnProperty(key)) { newObj[key] = obj[key] } } return newObj } \`\`\`
+```js
+let shallowCopy = function (obj) {
+if (typeof obj !== 'object') return
+let newObj = obj instanceof Array ? [] : {}
+for (let key in obj) {
+if (obj.hasOwnProperty(key)) {
+newObj[key] = obj[key] }
+}
+return newObj }
+```
 
 ## 实现深拷贝
 
-\`\`\`js let deepCopy = function (obj) { if (typeof obj !== 'object') return let newObj = obj instanceof Array ? [] : {} for (let key in obj) { if (obj.hasOwnProperty(key)) { newObj[key] = typeof obj[key] === 'object' ? deepCopy(obj[key]) : obj[key] } } return newObj } \`\`\`
+```js
+let deepCopy = function (obj) {
+if (typeof obj !== 'object') return
+let newObj = obj instanceof Array ? [] : {}
+for (let key in obj) {
+if (obj.hasOwnProperty(key)) {
+newObj[key] = typeof obj[key] === 'object' ? deepCopy(obj[key]) : obj[key] }
+}
+return newObj }
+```
 
 ## jQuery 中 extend 实现浅深拷贝
 
 使用方法：
 
-\`\`\`js jQuery.extend(target, object1[, objectN]) jQuery.extend([deep], target, object1[, objectN]) \`\`\`
+```js
+jQuery.extend(target, object1[, objectN])
+jQuery.extend([deep], target, object1[, objectN])
+```
 
 ## `What is the most efficient way to deep clone an object in JavaScript?`
 

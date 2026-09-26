@@ -12,7 +12,7 @@ header: Web
 ### 使用模板
 
 ```bash
- pnpm create slidev
+pnpm create slidev
 ```
 
 ### 手动安装

@@ -24,7 +24,9 @@ code test/test.js
 }
 ```
 
-\`\`\`bash pnpm test \`\`\`
+```bash
+pnpm test
+```
 
 ---
 

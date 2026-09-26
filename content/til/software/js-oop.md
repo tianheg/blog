@@ -30,7 +30,9 @@ JS 中除少数例外，其他对象都有原型，而且对象的原型也是�
 
 ## 继承
 
-\`\`\`js ChildObject.prototype = Object.create(ParentObject.prototype) \`\`\`
+```js
+ChildObject.prototype = Object.create(ParentObject.prototype)
+```
 
 ## Mixin
 
@@ -42,153 +44,258 @@ In JavaScript, a function always has access to the context in which it was creat
 
 创建模块。The advantage of the module pattern is that all of the motion behaviors can be packaged into a single object that can then be used by other parts of your code. Here is an example using it:
 
-\`\`\`js let motionModule = (function () { return { glideMixin: function (obj) { obj.glide = function () { console.log('Gliding on the water') } }, flyMixin: function (obj) { obj.fly = function () { console.log('Flying, wooosh!') } }, } })()
+```js
+let motionModule = (function () { return { glideMixin: function (obj) { obj.glide = function () { console.log('Gliding on the water') } }, flyMixin: function (obj) { obj.fly = function () { console.log('Flying, wooosh!') } }, } })()
 
-motionModule.glideMixin(duck) duck.glide() ```
+motionModule.glideMixin(duck)
+duck.glide()
+```
 
 ## 示例代码
 
 对象内部的函数调用
 
-\`\`\`js let dog = { name: 'Spot', numLegs: 4, sayLegs() { return 'This dog has ' + this.numLegs + ' legs.' }, }
+```js
+let dog = {
+name: 'Spot', numLegs: 4,
+sayLegs() {
+return 'This dog has ' + this.numLegs + ' legs.' }, }
 
-dog.sayLegs() ```
+dog.sayLegs()
+```
 
 创建构造器、通过构造器新建对象
 
-\`\`\`js function Dog() { this.name = 'Dogy' this.color = 'black' this.numLegs = 4 } let blackDog = new Dog() \`\`\`
+```js
+function Dog() {
+this.name = 'Dogy' this.color = 'black' this.numLegs = 4 }
+let blackDog = new Dog()
+```
 
 让构造器能够接收参数
 
-\`\`\`js function Dog(name, color) { this.name = name this.color = color this.numLegs = 4 } let terrier = new Dog('Dogy', 'black') \`\`\`
+```js
+function Dog(name, color) {
+this.name = name
+this.color = color
+this.numLegs = 4 }
+let terrier = new Dog('Dogy', 'black')
+```
 
 验证是否为构造函数的实例
 
-\`\`\`js function House(numBedrooms) { this.numBedrooms = numBedrooms }
+```js
+function House(numBedrooms) {
+this.numBedrooms = numBedrooms }
 
-// Only change code below this line let myHouse = new House(3) console.log(myHouse instanceof House) ```
+// Only change code below this line
+let myHouse = new House(3)
+console.log(myHouse instanceof House)
+```
 
 确定是否为自有属性（`hasOwnProperty()`）
 
-\`\`\`js function Bird(name) { this.name = name this.numLegs = 2 }
+```js
+function Bird(name) {
+this.name = name
+this.numLegs = 2 }
 
-let canary = new Bird('Tweety') let ownProps = [] // Only change code below this line for (let property in canary) { if (canary.hasOwnProperty(property)) { ownProps.push(property) } }
+let canary = new Bird('Tweety')
+let ownProps = []
+// Only change code below this line
+for (let property in canary) {
+if (canary.hasOwnProperty(property)) {
+ownProps.push(property) }
+}
 
-console.log(ownProps) ```
+console.log(ownProps)
+```
 
 原型属性定义
 
-\`\`\`js function Dog(name) { this.name = name }
+```js
+function Dog(name) {
+this.name = name }
 
 Dog.prototype.numLegs = 4
 
-let beagle = new Dog('Snoopy') ```
+let beagle = new Dog('Snoopy')
+```
 
 输出自有属性和原型属性
 
-\`\`\`js function Dog(name) { this.name = name }
+```js
+function Dog(name) {
+this.name = name }
 
 Dog.prototype.numLegs = 4
 
 let beagle = new Dog('Snoopy')
 
-let ownProps = [] let prototypeProps = []
+let ownProps = []
+let prototypeProps = []
 
-// Only change code below this line for (let property in beagle) { if (beagle.hasOwnProperty(property)) { ownProps.push(property) } else { prototypeProps.push(property) } }
+// Only change code below this line
+for (let property in beagle) {
+if (beagle.hasOwnProperty(property)) {
+ownProps.push(property) }
+else {
+prototypeProps.push(property) }
+}
 
-console.log(ownProps) console.log(prototypeProps) ```
+console.log(ownProps)
+console.log(prototypeProps)
+```
 
 通过对象定义原型、设置构造器属性
 
-\`\`\`js function Dog(name) { this.name = name }
+```js
+function Dog(name) {
+this.name = name }
 
-Dog.prototype = { constructor: Dog, numLegs: 4, eat() { console.log('nom nom nom') }, describe() { console.log('My name is ' + this.name) }, } ```
+Dog.prototype = {
+constructor: Dog, numLegs: 4,
+eat() {
+console.log('nom nom nom') },
+describe() {
+console.log('My name is ' + this.name) }, }
+```
 
 理解对象的原型从构造函数那里来
 
-\`\`\`js function Dog(name) { this.name = name }
+```js
+function Dog(name) {
+this.name = name }
 
-let beagle = new Dog('Snoopy') console.log(Dog.prototype.isPrototypeOf(beagle)) ```
+let beagle = new Dog('Snoopy')
+console.log(Dog.prototype.isPrototypeOf(beagle))
+```
 
 子对象的原型设置为父对象的实例
 
-\`\`\`js function Animal() {}
+```js
+function Animal() {}
 
-Animal.prototype = { constructor: Animal, eat: function () { console.log('nom nom nom') }, }
+Animal.prototype = {
+constructor: Animal, eat: function () {
+console.log('nom nom nom') }, }
 
 function Dog() {}
 
 Dog.prototype = Object.create(Animal.prototype)
 
-let beagle = new Dog() ```
+let beagle = new Dog()
+```
 
 纠正继承的构造器属性
 
-\`\`\`js function Animal() {} function Bird() {} function Dog() {}
+```js
+function Animal() {}
+function Bird() {}
+function Dog() {}
 
-Bird.prototype = Object.create(Animal.prototype) Dog.prototype = Object.create(Animal.prototype)
+Bird.prototype = Object.create(Animal.prototype)
+Dog.prototype = Object.create(Animal.prototype)
 
-Bird.prototype.constructor = Bird Dog.prototype.constructor = Dog
+Bird.prototype.constructor = Bird
+Dog.prototype.constructor = Dog
 
-let duck = new Bird() let beagle = new Dog()
+let duck = new Bird()
+let beagle = new Dog()
 
-console.log(duck.constructor) console.log(beagle.constructor) ```
+console.log(duck.constructor)
+console.log(beagle.constructor)
+```
 
 继承后，为构造器单独添加方法
 
-\`\`\`js function Animal() {} Animal.prototype.eat = function () { console.log('nom nom nom') }
+```js
+function Animal() {}
+Animal.prototype.eat = function () {
+console.log('nom nom nom') }
 
 function Dog() {}
 
 // Only change code below this line
 
-Dog.prototype = Object.create(Animal.prototype) Dog.prototype.constructor = Dog Dog.prototype.bark = function () { console.log('Woof!') }
+Dog.prototype = Object.create(Animal.prototype)
+Dog.prototype.constructor = Dog
+Dog.prototype.bark = function () {
+console.log('Woof!') }
 
 // Only change code above this line
 
-let beagle = new Dog() ```
+let beagle = new Dog()
+```
 
 覆盖已继承方法
 
-\`\`\`js function Bird() {}
+```js
+function Bird() {}
 
-Bird.prototype.fly = function () { return 'I am flying!' }
+Bird.prototype.fly = function () {
+return 'I am flying!' }
 
-function Penguin() {} Penguin.prototype = Object.create(Bird.prototype) Penguin.prototype.constructor = Penguin
+function Penguin() {}
+Penguin.prototype = Object.create(Bird.prototype)
+Penguin.prototype.constructor = Penguin
 
 // Only change code below this line
 
-Penguin.prototype.fly = function () { return 'Alas, this is a flightless bird.' }
+Penguin.prototype.fly = function () {
+return 'Alas, this is a flightless bird.' }
 
 // Only change code above this line
 
-let penguin = new Penguin() console.log(penguin.fly()) ```
+let penguin = new Penguin()
+console.log(penguin.fly())
+```
 
 The `flyMixin` takes any object and gives it the `fly` method.
 
 Note how the mixin allows for the same `fly` method to be reused by unrelated objects `bird` and `plane`.
 
-\`\`\`js let flyMixin = function (obj) { obj.fly = function () { console.log('Flying, wooosh!') } }
+```js
+let flyMixin = function (obj) {
+obj.fly = function () {
+console.log('Flying, wooosh!') }
+}
 
-let bird = { name: 'Donald', numLegs: 2, }
+let bird = {
+name: 'Donald', numLegs: 2, }
 
-let plane = { name: '777', numPassengers: 524, }
+let plane = {
+name: '777', numPassengers: 524, }
 
-flyMixin(bird) flyMixin(plane)
+flyMixin(bird)
+flyMixin(plane)
 
-bird.fly() plane.fly() ```
+bird.fly()
+plane.fly()
+```
 
 用闭包保护私有变量
 
-\`\`\`js function Bird() { let weight = 15 this.getWeight = function () { return weight } } \`\`\`
+```js
+function Bird() {
+let weight = 15
+this.getWeight = function () {
+return weight }
+}
+```
 
 立即调用函数表达式
 
-\`\`\`js ;(function () { console.log('Chirp, chirp!') })() \`\`\`
+```js
+;
+(function () { console.log('Chirp, chirp!') })()
+```
 
 使用 IIFE 创建模块
 
-\`\`\`js let funModule = (function () { return { isCuteMixin: function (obj) { obj.isCute = function () { return true } }, singMixin: function (obj) { obj.sing = function () { console.log('Singing to an awesome tune') } }, } })() \`\`\`
+```js
+let funModule = (function () { return { isCuteMixin: function (obj) { obj.isCute = function () { return true } }, singMixin: function (obj) { obj.sing = function () { console.log('Singing to an awesome tune') } }, } })()
+```
 
 
 相关：[[js-factory-function|js-factory-function]]

@@ -34,19 +34,67 @@ touch vercel.json
 
 `my-proxy/api/index.js`
 
-\`\`\`js // In Vercel, any file inside the "api" directory is exposed on an "/api" endpoint. // For an API route to work, you need to export a function as default (a.k.a request handler), // which then receives the following parameters: // - req: The request object. // - res: The response object. // See <https://vercel.com/docs/serverless-functions/supported-languages#node.js> for details. export default async function handler(req, res) { res.status(200).send(\`Hello world!\`) } \`\`\`
+```js
+// In Vercel, any file inside the "api" directory is exposed on an "/api" endpoint.
+// For an API route to work, you need to export a function as default (a.k.a request handler),
+// which then receives the following parameters:
+// - req: The request object.
+// - res: The response object.
+// See <https://vercel.com/docs/serverless-functions/supported-languages#node.js> for details.
+export default async function handler(req, res) {
+res.status(200).send(\`Hello world!\`)
+}
+```
 
 `my-proxy/vercel.json`
 
-\`\`\`json { "rewrites": [{ "source": "*api*(.*)", "destination": "/api" }] } \`\`\`
+```json
+{
+"rewrites": [
+{ "source": "*api*(.*)", "destination": "/api" }
+]
+}
+```
 
 ## 代理逻辑设置
 
-\`\`\`bash npm i http-proxy-middleware \`\`\`
+```bash
+npm i http-proxy-middleware
+```
 
 修改 `my-proxy/api/index.js`
 
-\`\`\`js // Create a proxy to redirect requests of the "*api***" path to "<https://example.org>". // // Examples: // GET /api/hello → GET <https://example.org/hello> // POST /api/test?color=red → POST <https://example.org/test?color=red> // // Additionally, the proxy will: // - Add an "x-added" header // - Remove the "x-removed" header // From the proxied response. // // You can/should update the proxy to suit your needs. // See <https://github.com/chimurai/http-proxy-middleware> for more details. const { createProxyMiddleware } = require('http-proxy-middleware') const apiProxy = createProxyMiddleware({ target: '<https://example.org>', changeOrigin: true, pathRewrite: { '^/api': '', // strip "/api" from the URL }, onProxyRes(proxyRes) { proxyRes.headers['x-added'] = 'foobar' // add new header to response delete proxyRes.headers['x-removed'] // remove header from response }, }) // Expose the proxy on the "*api***" endpoint. export default function (req, res) { return apiProxy(req, res) } \`\`\`
+```js
+// Create a proxy to redirect requests of the "*api***" path to "<https://example.org>".
+//
+// Examples:
+// GET /api/hello → GET <https://example.org/hello>
+// POST /api/test?color=red → POST <https://example.org/test?color=red>
+//
+// Additionally, the proxy will:
+// - Add an "x-added" header
+// - Remove the "x-removed" header
+// From the proxied response.
+//
+// You can/should update the proxy to suit your needs.
+// See <https://github.com/chimurai/http-proxy-middleware> for more details.
+const { createProxyMiddleware } = require('http-proxy-middleware')
+const apiProxy = createProxyMiddleware({
+target: '<https://example.org>',
+changeOrigin: true,
+pathRewrite: {
+'^/api': '', // strip "/api" from the URL
+},
+onProxyRes(proxyRes) {
+proxyRes.headers['x-added'] = 'foobar' // add new header to response
+delete proxyRes.headers['x-removed'] // remove header from response
+},
+})
+// Expose the proxy on the "*api***" endpoint.
+export default function (req, res) {
+return apiProxy(req, res)
+}
+```
 
 
 相关：[[js-expressjs|js-expressjs]]

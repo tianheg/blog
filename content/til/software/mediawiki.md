@@ -43,7 +43,7 @@ refer
 ### 无法使用可视化编辑
 
 ```
- Error contacting the Parsoid/RESTBase server: (curl error: 7) Couldn't connect to server
+Error contacting the Parsoid/RESTBase server: (curl error: 7) Couldn't connect to server
 
 Error contacting the Parsoid/RESTBase server: (curl error: 6) Couldn't resolve host name
 
@@ -76,7 +76,7 @@ $wgDefaultUserOptions['visualeditor-editor'] = "visualeditor";
 在[这里](https://www.mediawiki.org/wiki/Extension:VisualEditor#Troubleshooting)找到相关错误解释。
 
 ```
- Error contacting the Parsoid/RESTBase server (curl error: 7) Couldn't connect to server
+Error contacting the Parsoid/RESTBase server (curl error: 7) Couldn't connect to server
 
 Ensure that the mediawiki native hostname does not equal to the domain the wiki is running on. If both names are equal, the api will try to connect to the domain the wiki is running on, but will have difficulty resolving the domain.
 ```

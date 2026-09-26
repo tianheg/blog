@@ -26,13 +26,23 @@ ssh-add -L
 
 ~/.ssh/rc
 
-\`\`\`sh #!/bin/bash if test "$SSH<sub>AUTHSOCK</sub>" ; then ln -sf $SSH<sub>AUTHSOCK<*sub> ~*.ssh/ssh<sub>authsock</sub> fi \`\`\`
+```sh
+#!/bin/bash
+if test "$SSH_AUTHSOCK" ; then
+ln -sf $SSH_AUTHSOCK ~*.ssh/ssh_authsock
+fi
+```
 
 ## Reuse connections
 
 ~/.ssh/config
 
-\`\`\`conf Host example.org ControlMaster auto ControlPath ~*.ssh*%r@%h:%p.sock ControlPersist yes \`\`\`
+```conf
+Host example.org
+ControlMaster auto
+ControlPath ~*.ssh*%r@%h:%p.sock
+ControlPersist yes
+```
 
 这样会创建一个 Unix Socket ~/.ssh/user@host:port.sock
 
@@ -40,7 +50,12 @@ ssh-add -L
 
 ~/.ssh/config
 
-\`\`\`conf Host ex HostName example.org User foo Port 2223 \`\`\`
+```conf
+Host ex
+HostName example.org
+User foo
+Port 2223
+```
 
 ## Do not add testing stuff to `~/.ssh/known<sub>hosts</sub>`
 
@@ -48,7 +63,11 @@ ssh-add -L
 
 通过关闭密匙检查解决问题`~/.ssh/config`：
 
-\`\`\`conf Host localhost UserKnownHostsFile /dev/null StrictHostKeyChecking no \`\`\`
+```conf
+Host localhost
+UserKnownHostsFile /dev/null
+StrictHostKeyChecking no
+```
 
 ## 让连接持续更长时间
 
@@ -56,18 +75,27 @@ ssh-add -L
 
 也可以这样`~/.ssh/config`：
 
-\`\`\`conf Host * ServerAliveInterval 60
+```conf
+Host *
+ServerAliveInterval 60
 
-\`\`\`
+```
 
 ## 规范化主机名
 
 如果想接入在同一个 TLD（Top-level domain）下的多台机器，，可能要开启主机名规范化设置`~/.ssh/config`：
 
-\`\`\`conf Host * CanonicalizeHostName yes CanonicalizeFallbackLocal yes CanonicalDomains mytld.foo.bar \`\`\`
+```conf
+Host *
+CanonicalizeHostName yes
+CanonicalizeFallbackLocal yes
+CanonicalDomains mytld.foo.bar
+```
 
 这样登录 `host1.mytld.foo.bar` 可以直接输入：
 
-\`\`\`sh ssh host1 \`\`\`
+```sh
+ssh host1
+```
 
 这样对本地网络中的主机是友好的。

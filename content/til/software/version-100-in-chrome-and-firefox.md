@@ -28,31 +28,43 @@ User-Agent: Mozilla/5.0 (<system-information>) <platform> (<platform-details>) <
 
 ### Chrome
 
-\`\`\`text Mozilla/5.0 (X11; Linux x86<sub>64</sub>) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/51.0.2704.103 Safari/537.36 \`\`\`
+```text
+Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/51.0.2704.103 Safari/537.36
+```
 
 ### Opera
 
-\`\`\`text Mozilla/5.0 (X11; Linux x86<sub>64</sub>) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/51.0.2704.106 Safari/537.36 OPR/38.0.2220.41 \`\`\`
+```text
+Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/51.0.2704.106 Safari/537.36 OPR/38.0.2220.41
+```
 
 ### Microsoft Edge
 
-\`\`\`text Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/91.0.4472.124 Safari/537.36 Edg/91.0.864.59 \`\`\`
+```text
+Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/91.0.4472.124 Safari/537.36 Edg/91.0.864.59
+```
 
 ### Safari
 
-\`\`\`text Mozilla/5.0 (iPhone; CPU iPhone OS 13<sub>51</sub> like Mac OS X) AppleWebKit/605.1.15 (KHTML, like Gecko) Version/13.1.1 Mobile/15E148 Safari/604.1 \`\`\`
+```text
+Mozilla/5.0 (iPhone; CPU iPhone OS 13_51 like Mac OS X) AppleWebKit/605.1.15 (KHTML, like Gecko) Version/13.1.1 Mobile/15E148 Safari/604.1
+```
 
 ### Crawler and bot
 
-\`\`\`text Mozilla/5.0 (compatible; Googlebot/2.1; +<http://www.google.com/bot.html>)
+```text
+Mozilla/5.0 (compatible; Googlebot/2.1; +<http://www.google.com/bot.html>)
 
-Mozilla/5.0 (compatible; YandexAccessibilityBot/3.0; +<http://yandex.com/bots>) ```
+Mozilla/5.0 (compatible; YandexAccessibilityBot/3.0; +<http://yandex.com/bots>)
+```
 
 ### Library and net tool
 
-\`\`\`text curl/7.64.1
+```text
+curl/7.64.1
 
-PostmanRuntime/7.26.5 ```
+PostmanRuntime/7.26.5
+```
 
 ## Major version 100---three-digit version number
 

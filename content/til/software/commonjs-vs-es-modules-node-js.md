@@ -104,7 +104,7 @@ CommonJS 模块系统，则是内建于 Node.js。在 Node.js 引入 ES 模块�
 考虑以下库：
 
 ```text
- my-node-library
+my-node-library
 ├── lib/
 │ ├── browser-lib.js (iife format)
 │ ├── module-a.js (commonjs format)
@@ -169,7 +169,7 @@ import moduleB from 'my-library/private/module-b'
 另一方面，`require()` 函数在运行时解析。因此，`require()` 可以在任何地方调用。
 
 ```text
- 运行时解析，是否意味着编写代码时，是不需要关心 require 的包的内容的？
+运行时解析，是否意味着编写代码时，是不需要关心 require 的包的内容的？
 ```
 
 你可以将它用于各种情况下加载模块，比如 `if` 引导的条件句、条件循环语句、和函数等。
