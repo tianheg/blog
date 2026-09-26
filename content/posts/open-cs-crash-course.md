@@ -189,7 +189,7 @@ IBM 的肮脏 12 人，引起了一系列创新。
 >
 > Engelbart
 
-### 3D Graphics {#3d-graphics} {#d-graphics-3d-graphics}
+### 3D Graphics {#d-graphics-3d-graphics}
 
 3D 投影
 
