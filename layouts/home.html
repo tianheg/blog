@@ -20,7 +20,10 @@
 
 <!-- Recent Posts Section -->
 <section>
-  <div class="flex items-center justify-between mb-6">
+  {{/* 标题行：h2 与 View all 用 items-baseline 对齐基线。
+       别用 items-center —— h2 被全局 .prose 撑成 24px + 48/24px 外边距，
+       容器高 104px，居中的 View all 会浮在上面，基线差 14.5px（2026-09-26 实测） */}}
+  <div class="flex items-baseline justify-between mb-6">
     <h2 class="text-lg font-semibold">Recent Posts</h2>
     <a href="/posts" class="text-sm text-gray-600 dark:text-gray-400 hover:text-gray-900 dark:hover:text-gray-100 transition-colors">View all →</a>
   </div>
@@ -51,7 +54,7 @@
 
 <!-- Random TIL Section -->
 <section>
-  <div class="flex items-center justify-between mb-6">
+  <div class="flex items-baseline justify-between mb-6">
     <h2 class="text-lg font-semibold">Random TIL</h2>
     <a href="/til" class="text-sm text-gray-600 dark:text-gray-400 hover:text-gray-900 dark:hover:text-gray-100 transition-colors">View all →</a>
   </div>
