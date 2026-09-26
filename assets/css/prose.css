@@ -1,6 +1,7 @@
 /* ── prose 内元素的全站修正 ─────────────────────────────────────────
    放独立文件的原因同 table.css：Tailwind v4 的 css.TailwindCSS 管线
-   会丢弃未包在 @layer 里的 raw CSS（blog-project-analysis Pitfall #37）。
+   会丢弃未包在 @layer 里的 raw CSS（Pitfall #37）—— 该说法 2026-08 实测证伪，
+   2026-09-26 本文件已 @import 进 main.css，不再是独立 <link>。
 
    这里修的是 @tailwindcss/typography 的两个默认值：
 
