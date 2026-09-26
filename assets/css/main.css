@@ -34,6 +34,20 @@
      所以用 gray-500 压暗 2.1% 的 #646c7c（4.85:1）。深色侧仍用 gray-400。
      用途：页头/栏头导航链接、⌘K 图标、TIL 列表页的两个按钮。 */
   --color-muted: #646c7c;
+
+  /* ── 排版 token（2026-09-26）──────────────────────────────────────
+     Tailwind v4 的 `@theme --text-*` 会同时生成 CSS 变量和 text-* 工具类，
+     所以重复出现的字号不要写 arbitrary 值（`text-[28px]`），写进这里一次。
+     取值 = 重构前实测渲染值，保证「机制统一、观感不变」。 */
+  --text-doc-title: 1.75rem;             /* 28px：/posts/ 与 /til/ 的列表页标题 */
+  --text-doc-title--line-height: 1.1111; /* 31.11px，与正文标题的 1.111 比例一致 */
+  --leading-body: 1.75;                  /* 页面级继承行高（原 <body class="prose"> 提供的值，仅 baseof 系） */
+  --text-prose: 1rem;                    /* 16px：正文段落/列表项字号 */
+  --text-prose--line-height: 1.85;       /* 正文行高，一次给全（避免 text-* 与 leading-* 顺序歧义） */
+  --text-meta: 0.8125rem;                /* 13px：元信息（日期/篇数/侧栏标签）—— 不写 lh，行高继续继承 */
+  --text-list: 0.9375rem;                /* 15px：列表项标题 —— 同上，只定字号 */
+  --text-meta: 0.8125rem;                /* 13px：元信息（日期/篇数/侧栏标签）—— 不写 lh，行高继续继承 */
+  --text-list: 0.9375rem;                /* 15px：列表项标题 —— 同上，只定字号 */
 }
 
 /* ── Color tokens (daisyUI silk/sunset, merged via light-dark()) ──
@@ -192,18 +206,59 @@ p { text-wrap: pretty; }
 }
 
 /* Tailwind Typography 的 .prose 自带 max-width:65ch（16px 下 ≈710px），会把 TIL 笔记正文
-   卡得比全站内容列窄。这里用未分层的原生规则覆盖回整列（未分层 > @layer utilities，确定性生效）。 */
+   卡得比全站内容列窄。这里用未分层的原生规则覆盖回整列
+   （prose 的规则本身是未分层的，utility 压不住它，所以必须用同级的未分层规则）。 */
 .prose.prose-links {
   max-width: none;
 }
 
-/* /posts/ 年份折叠的标题。主站 <body> 上挂着全局 .prose，typography 给所有 h2 塞了
-   2em/1em 外边距 —— 那会把 <summary> 撑到 136px 高，箭头落在容器几何中心、年份文字却
-   还带着上边距，两者对不齐。间距交给 summary 自己的 py-4，这里把外边距清零。
-   注意用未分层的原生规则：写在元素上的 m-0/mt-10 这类工具类斗不过 prose 的 :where(h2) 规则。 */
-.year-fold {
-  margin-block: 0;
+/* 正文文字颜色 —— 两套历史值，**不要统一**：
+   · 博客/独立页（baseof 系）：站点 --color-base-content 暖灰（原 body.prose 的效果）
+   · TIL 笔记：typography 插件默认的冷灰 gray-700
+   prose 的 color 规则未分层、压过 utility，所以只能用同级未分层规则覆盖变量。 */
+/* ── baseof 页族的历史 prose 遗留（2026-09-26）─────────────────────────
+   重构前 <body class="prose"> 把 typography 的正文规则连带作用到页头/页脚/标签链接/侧栏，
+   而 TIL 页族（til/baseof）历史上没有这层 prose —— 两族观感本来就不同，这里按页族显式钉住，
+   不再依赖 body 级 prose。取值 = 重构前实测渲染值（probe.js 对拍）。 */
+/* 字重：重构前 prose 的 `a{font-weight:500}` 在第 (0,1,0) 层，带 font-* 工具类的链接压得住它
+   —— 这里复现同样的优先级关系（排除带 font-* 的链接）。 */
+.prose-era :where(a:not([class*="font-"])) { font-weight: 500; }
+.prose-era header .site-title { color: light-dark(var(--color-gray-900), var(--color-gray-100)); }
+.prose-era footer.page-col :where(p) { margin-block: 1.25em; }
+.prose-era footer.page-col :where(a) { color: light-dark(var(--color-gray-900), var(--color-gray-100)); }
+.prose-era footer.post-tags :where(a) { color: light-dark(var(--color-ink-600), var(--color-ink-400)); text-decoration: underline; }
+.prose-era :where(.related, .backlinks) :where(h2) { margin-top: 2em; }
+.prose-era :where(.related, .backlinks) :where(ul) { padding-left: 1.625em; margin-bottom: 1.25em; }
+.prose-era :where(.related, .backlinks) :where(li) { margin-block: .5em; padding-left: .375em; }
+.prose-era :where(.related, .backlinks) :where(a) { font-weight: 500; }
+/* 评论区那段居中提示（comments.html 里唯一一个 p.mb-6）：重构前它的下边距是 prose 的 1.25em(=20px)，
+   重构后只剩 mb-6(24px)。TIL 页族当年没有这层 prose，保持 24px 不动。 */
+.prose-era p.mb-6 { margin-bottom: 1.25em; }
+@media (min-width: 768px) {
+  .prose-era :where(.related, .backlinks) :where(h2) { font-size: 1.5rem; line-height: 2rem; margin-top: 3rem; margin-bottom: 1.5rem; }
 }
+
+.prose.prose-site {
+  --tw-prose-body: var(--color-base-content);
+}
+
+/* 内容容器首/末子元素的留白。
+   重构前 prose 挂 <body>，markdown 的首段/末段从不是 body 的 :first-child/:last-child，
+   所以 typography 的边界清零规则打不到它们；现在 prose 挂在正文容器上，边界段落会被清零。
+   这里按插件自己的数值放回（p/ul/ol 1.25em、blockquote 1.6em、h2 2em/1em、h3 1.6em/.6em），
+   观感与重构前一致。权重 (0,2,0) 压过插件的 (0,1,0)+:where()。 */
+.prose-site > :first-child:where(p, ul, ol) { margin-top: 1.25em; }
+.prose-site > :first-child:where(blockquote) { margin-top: 1.6em; }
+.prose-site > :first-child:where(h2) { margin-top: 2em; }
+.prose-site > :first-child:where(h3) { margin-top: 1.6em; }
+.prose-site > :last-child:where(p, ul, ol) { margin-bottom: 1.25em; }
+.prose-site > :last-child:where(blockquote) { margin-bottom: 1.6em; }
+.prose-site > :last-child:where(h2) { margin-bottom: 1em; }
+.prose-site > :last-child:where(h3) { margin-bottom: .6em; }
+
+/* 注：原 `.year-fold { margin-block: 0 }` 已在 2026-09-26 删除。
+   它当年是为了对抗 <body> 上全局 .prose 给 h2 塞的 2em/1em 外边距；
+   prose 现在只挂正文容器，preflight 已把 h2 外边距清零，这条不再需要。 */
 
 /* ── 移动端菜单面板背景见上方 .site-header 段落（合并成一条规则） ── */
 

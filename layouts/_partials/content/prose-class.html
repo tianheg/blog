@@ -1,0 +1,16 @@
+{{/* 正文排版的类名清单（唯一来源）
+
+   用法：把 partial 的输出放进**正文容器**的 class 属性：
+     <div class="{{ partial "content/prose-class" . }}">{{ partial "content/render-content" .Content }}</div>
+
+   为什么集中在一处：
+   Tailwind Typography 的 .prose 设计用途是「你控制不了的 HTML」（Markdown 渲染结果），
+   所以只挂正文容器，不再挂 <body> —— 挂在 body 会让模板级标题也被 typography 接管
+   （它的规则未分层，能压过 utility，导致 `text-lg` 写着却是 24px）。
+
+   为什么 `.prose` 这个字面类名必须留在容器上（不能只靠 @apply 内联声明）：
+   prose-p:/prose-a:/prose-h2: 这些修饰符生成的选择器是 `.prose :where(p)` 形式，
+   靠内联声明拿不到字面类名，修饰符就全部失效。
+
+   字号/行高走 @theme token（--text-prose），不要在模板里写 text-[16px] 这类 arbitrary 值。 */}}
+prose prose-base md:prose-base max-w-none dark:prose-invert prose-links prose-p:text-prose prose-li:text-prose prose-a:no-underline prose-a:text-ink-600 dark:prose-a:text-ink-400 prose-a:hover:underline

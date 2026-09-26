@@ -2,6 +2,6 @@
 {{/* Displays a "Reply by email" link for posts in main sections */}}
 <div class="comments">
   {{ if or (in .Site.Params.mainSections .Section) }}
-  <a href="mailto:i@tianheg.co?subject=[tianheg.co] Re: {{ .Title }}">✍️ Reply by email</a>
+  <a class="no-underline font-medium" href="mailto:i@tianheg.co?subject=[tianheg.co] Re: {{ .Title }}">✍️ Reply by email</a>
   {{ end }}
 </div>

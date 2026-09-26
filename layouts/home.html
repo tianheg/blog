@@ -6,9 +6,9 @@
 {{ define "main" }}
 
 <div class="mb-16">
-  <h1 class="text-3xl font-bold mb-6">Welcome</h1>
-  <p class="text-lg text-gray-700 dark:text-gray-300">Hi, I'm tianheg. I write this blog in both Chinese and English to share my life experiences.</p>
-  <p class="text-lg text-gray-700 dark:text-gray-300">I hope you enjoy reading it!</p>
+  <h1 class="text-3xl md:text-4xl font-bold mb-6 md:mb-8 text-gray-900 dark:text-gray-100">Welcome</h1>
+  <p class="text-lg text-gray-700 dark:text-gray-300 my-[1.25em]">Hi, I'm tianheg. I write this blog in both Chinese and English to share my life experiences.</p>
+  <p class="text-lg text-gray-700 dark:text-gray-300 my-[1.25em]">I hope you enjoy reading it!</p>
   <a href="/start/"
      class="mt-8 inline-flex items-center gap-2 px-5 py-2.5 rounded-md border border-ink-600 dark:border-ink-400 text-ink-600 dark:text-ink-400 text-sm font-medium no-underline transition-colors hover:bg-ink-600 hover:text-white dark:hover:bg-ink-400 dark:hover:text-gray-950">
     Start here <span aria-hidden="true">→</span>
@@ -24,7 +24,7 @@
        别用 items-center —— h2 被全局 .prose 撑成 24px + 48/24px 外边距，
        容器高 104px，居中的 View all 会浮在上面，基线差 14.5px（2026-09-26 实测） */}}
   <div class="flex items-baseline justify-between mb-6">
-    <h2 class="text-lg font-semibold">Recent Posts</h2>
+    <h2 class="text-lg md:text-2xl font-semibold mt-9 md:mt-12 mb-4.5 md:mb-6 text-gray-900 dark:text-gray-100">Recent Posts</h2>
     <a href="/posts" class="text-sm text-gray-600 dark:text-gray-400 hover:text-gray-900 dark:hover:text-gray-100 transition-colors">View all →</a>
   </div>
 
@@ -38,10 +38,10 @@
              标题单行截断（truncate）→ 两列各 5 行总高严格相同、行与行横向对齐。
              别改回换行：长标题会把行撑成 69px，两列总高就错开了（2026-09-26） */}}
         <div class="flex h-11 items-center gap-4">
-          <a href="{{ .RelPermalink }}" class="text-[15px] min-w-0 flex-1 truncate">
+          <a href="{{ .RelPermalink }}" class="text-list min-w-0 flex-1 truncate text-gray-900 dark:text-gray-100">
             {{ partial "functions/get-title" (dict "page" .) }}
           </a>
-          <time class="text-[13px] text-gray-600 dark:text-gray-400 shrink-0 tabular-nums whitespace-nowrap" datetime="{{ .Date.Format "2006-01-02" }}">
+          <time class="text-meta text-gray-600 dark:text-gray-400 shrink-0 tabular-nums whitespace-nowrap" datetime="{{ .Date.Format "2006-01-02" }}">
             {{ .Date.Format "01/02" }}
           </time>
         </div>
@@ -55,7 +55,7 @@
 <!-- Random TIL Section -->
 <section>
   <div class="flex items-baseline justify-between mb-6">
-    <h2 class="text-lg font-semibold">Random TIL</h2>
+    <h2 class="text-lg md:text-2xl font-semibold mt-9 md:mt-12 mb-4.5 md:mb-6 text-gray-900 dark:text-gray-100">Random TIL</h2>
     <a href="/til" class="text-sm text-gray-600 dark:text-gray-400 hover:text-gray-900 dark:hover:text-gray-100 transition-colors">View all →</a>
   </div>
 
@@ -68,13 +68,13 @@
       {{ range $recentTil }}
         {{ if ne .Title "Tils" }}
         <div class="flex h-11 items-center gap-4">
-          <a href="{{ .RelPermalink }}" class="text-[15px] min-w-0 flex-1 truncate">
+          <a href="{{ .RelPermalink }}" class="text-list min-w-0 flex-1 truncate text-gray-900 dark:text-gray-100">
             {{ partial "functions/get-title" (dict "page" .) }}
           </a>
           {{ $dirPath := .File.Dir | strings.TrimPrefix "til/" | strings.TrimSuffix "/" }}
           {{ $category := index (split $dirPath "/") 0 }}
           {{ if $category }}
-          <span class="text-[13px] px-2 py-0.5 rounded-full bg-gray-100 dark:bg-gray-800 text-gray-600 dark:text-gray-400 shrink-0">
+          <span class="text-meta px-2 py-0.5 rounded-full bg-gray-100 dark:bg-gray-800 text-gray-600 dark:text-gray-400 shrink-0">
             {{ $category }}
           </span>
           {{ end }}

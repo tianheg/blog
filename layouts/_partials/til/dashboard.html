@@ -15,11 +15,11 @@
 <div class="flex items-baseline gap-10 mb-10">
   <div>
     <div class="text-2xl font-semibold text-gray-900 dark:text-gray-100 tabular-nums leading-none">{{ $total }}</div>
-    <div class="text-[13px] text-gray-600 dark:text-gray-400 mt-1.5">篇笔记</div>
+    <div class="text-meta text-gray-600 dark:text-gray-400 mt-1.5">篇笔记</div>
   </div>
   <div>
     <div class="text-2xl font-semibold text-gray-900 dark:text-gray-100 tabular-nums leading-none">{{ div $totalMin 60 }}<span class="text-sm font-normal text-gray-600 dark:text-gray-400 ml-0.5">h</span></div>
-    <div class="text-[13px] text-gray-600 dark:text-gray-400 mt-1.5">累计阅读</div>
+    <div class="text-meta text-gray-600 dark:text-gray-400 mt-1.5">累计阅读</div>
   </div>
 </div>
 
@@ -27,15 +27,15 @@
 {{ $recent := sort $tilPages "Date" "desc" | first 10 }}
 {{ if $recent }}
 <div class="mb-10">
-  <h3 class="text-[13px] font-medium text-gray-900 dark:text-gray-100 mb-3">最近新增</h3>
+  <h3 class="text-meta font-medium text-gray-900 dark:text-gray-100 mb-3">最近新增</h3>
   <div class="space-y-px">
     {{ range $recent }}
     <a href="{{ .RelPermalink }}"
        class="group flex items-baseline justify-between gap-4 py-1.5 px-2 -mx-2 rounded-md transition-colors hover:bg-gray-50 dark:hover:bg-gray-800/40">
-      <span class="text-[15px] text-gray-700 dark:text-gray-300 truncate group-hover:text-ink-600 dark:group-hover:text-ink-400 transition-colors">
+      <span class="text-list text-gray-700 dark:text-gray-300 truncate group-hover:text-ink-600 dark:group-hover:text-ink-400 transition-colors">
         {{ partial "functions/get-title" (dict "page" .) }}
       </span>
-      <span class="text-[13px] text-gray-600 dark:text-gray-400 shrink-0 tabular-nums">
+      <span class="text-meta text-gray-600 dark:text-gray-400 shrink-0 tabular-nums">
         {{ if not .Date.IsZero }}{{ .Date.Format "01-02" }}{{ end }}
       </span>
     </a>
