@@ -64,7 +64,7 @@ state=of-mind 精神状态
 
 ### Start at the Top not the Beginning
 
-对于那些超过一页的文章，可以采取从上到下的方式写作，准备好一个大纲。一个大纲的大概内容：一个列表以及粗略的笔记。参考资料 Writing for Engineers 的[第一版大纲](https://github.com/HeinrichHartmann/HeinrichHartmann.github.io/commit/46be4c95faeda16996baf6799eca8a551b282565)。
+对于那些超过一页的文章，可以采取从上到下的方式写作，准备好一个大纲。一个大纲的大概内容：一个列表以及粗略的笔记。参考资料 Writing for Engineers 的[第一版大纲](http://web.archive.org/web/20240917165751/https://github.com/HeinrichHartmann/HeinrichHartmann.github.io/commit/46be4c95faeda16996baf6799eca8a551b282565)。
 
 分区的标题不仅仅是分割文章，而且是整个文章的总结。
 

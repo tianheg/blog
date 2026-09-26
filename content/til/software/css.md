@@ -223,8 +223,8 @@ Style Queries 能力：
 进一步了解：
 - [MDN Docs on Container Queries](https://developer.mozilla.org/en-US/docs/Web/CSS/CSS_Container_Queries)
 - [Next Gen CSS: @container](https://css-tricks.com/next-gen-css-container/)
-- [Container Queries & the future of CSS](https://www.miriamsuzanne.com/speaking/responsive-components/)
-- https://web.dev/patterns/layout/
+- Container Queries & the future of CSS
+- http://web.archive.org/web/20260121183548/https://web.dev/patterns/layout
 
 ### Decoration
 #### Background
@@ -492,7 +492,7 @@ https://developer.mozilla.org/en-US/docs/Web/CSS/text-underline-offset
 #### One Word Adjust
 当鼠标悬浮在链接上时，只改变该链接的文本的字体大小，而不影响链接文本所在段落的行高。
 
-Demo: https://github.com/tianheg/csszengarden/blob/main/days/first-30-days/3/index.html
+Demo: http://web.archive.org/web/20221107065455/https://github.com/tianheg/csszengarden/blob/main/days/first-30-days/3/index.html
 
 #### CSS Skills & Tips
 Refers:
@@ -622,7 +622,7 @@ CSS 来源优先级（从低到高）：User agent base styles < Local user styl
 2. https://flukeout.github.io/
 3. User agent stylesheets: [Chromium](https://chromium.googlesource.com/chromium/blink/+/master/Source/core/css/html.css), [Firefox](https://searchfox.org/mozilla-central/source/layout/style/res/html.css), [Webkit](https://trac.webkit.org/browser/trunk/Source/WebCore/css/html.css)
 4. [Selectors Explained](https://kittygiraudel.github.io/selectors-explained/)
-5. [The CSS Cascade](https://wattenberger.com/blog/css-cascade)
+5. [The CSS Cascade](http://web.archive.org/web/20230427004132/https://wattenberger.com/blog/css-cascade)
 
 #### Practice
 CSS Diner: https://flukeout.github.io/

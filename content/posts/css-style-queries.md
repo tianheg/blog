@@ -34,6 +34,6 @@ demo: <https://codepen.io/tianheg/pen/zYWZQQw>
 - [MDN Docs on Container Queries](https://developer.mozilla.org/en-US/docs/Web/CSS/CSS_Container_Queries)
 - [Designing in the Browser: Container Queries](https://web.dev/shows/designing-in-the-browser/gCNMyYr7F6w/)
 - [Designing in the Browser: Macro & Micro Layouts](https://web.dev/shows/designing-in-the-browser/sdjT0K4sR4k/)
-- [Container Queries & the future of CSS](https://www.miriamsuzanne.com/speaking/responsive-components/)
+- Container Queries & the future of CSS
 - [Next Gen CSS: @container](https://css-tricks.com/next-gen-css-container/)
-- <https://web.dev/patterns/layout/>
+- <http://web.archive.org/web/20260121183548/https://web.dev/patterns/layout>

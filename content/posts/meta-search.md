@@ -5,7 +5,7 @@ tags: ['技术']
 ---
 
 1. https://news.ycombinator.com/item?id=29392702
-2. https://github.com/rbew/duckduckbang
+2. http://web.archive.org/web/20221121075432/https://github.com/rbew/duckduckbang
 
 主流搜索引擎逐渐向利益低头，仅通过搜索查不到自己想要的内容，所以建立元搜索引擎就显得尤其重要。
 

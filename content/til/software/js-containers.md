@@ -5,7 +5,7 @@ date: 2025-06-15T19:22:54+08:00
 header: Web
 ---
 
-[JavaScript Containers](https://tinyclouds.org/javascript_containers)
+[JavaScript Containers](http://web.archive.org/web/20250711072616/https://tinyclouds.org/javascript_containers)
 
 Node.js、Deno 作者提出一种 JavaScript Containers 的概念。
 

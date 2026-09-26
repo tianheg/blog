@@ -33,5 +33,5 @@ command = """\
 
 参考资料
 
-- https://gohugo.io/hugo-pipes/scss-sass/
+- http://web.archive.org/web/20230315170001/https://gohugo.io/hugo-pipes/scss-sass/
 - https://discourse.gohugo.io/t/using-the-dart-sass-transpiler/41878

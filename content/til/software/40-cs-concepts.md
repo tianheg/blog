@@ -89,7 +89,7 @@ header: Programming
 | 什么是API | 餐厅菜单：点菜→上菜，无需了解后厨 |
 | SQL vs NoSQL | SQL像分 aisle 购物；NoSQL像按食谱一页存放所有信息 |
 
-来源: [40 Key Computer Science Concepts Explained Simply](https://carlcheo.com/compsci)
+来源: [40 Key Computer Science Concepts Explained Simply](http://web.archive.org/web/20260324072327/https://carlcheo.com/compsci)
 
 
 相关：[[coding|coding]]

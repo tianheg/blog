@@ -102,7 +102,7 @@ tags: ['电影']
 
 你保护世界，我保护你。 只有你赢了，我才不算输。
 
-------来自豆瓣用户：[凌睿](https://www.douban.com/people/lingrui1995/)
+------来自豆瓣用户：[凌睿](http://web.archive.org/web/20260130103010/https://www.douban.com/people/lingrui1995/)
 
 ---
 

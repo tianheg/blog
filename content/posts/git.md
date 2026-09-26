@@ -167,7 +167,7 @@ https://stackoverflow.com/q/70710729/12539782
 
 #### 配置数据库
 
-https://docs.gitea.io/en-us/database-prep/
+http://web.archive.org/web/20260517032400/https://docs.gitea.io/en-us/database-prep/
 
 ```
     pacman -S mariadb
@@ -198,11 +198,11 @@ https://docs.gitea.io/en-us/database-prep/
 
 refer:
 
-1. https://forum.hostea.org/t/howto-gitea-upgrades-a-guide-for-admins/39
+1. http://web.archive.org/web/20220817123050/https://forum.hostea.org/t/howto-gitea-upgrades-a-guide-for-admins/39
 
 ### Docker
 
-https://docs.gitea.io/en-us/install-with-docker-rootless/
+http://web.archive.org/web/20260202200353/https://docs.gitea.io/en-us/install-with-docker-rootless/
 
 ## 理解 Merge & Rebase
 

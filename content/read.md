@@ -169,7 +169,7 @@ title: '我读的'
 
 ## 论文检索
 
-1. Sci-Hub <https://sci-hub.wf/> <https://sci-hub.ren/> <https://sci-hub.se/>
+1. Sci-Hub <https://sci-hub.wf/> <https://sci-hub.ren/> <http://web.archive.org/web/20260111204342/https://sci-hub.se/>
 2. <https://arxiv.org/archive/cs>
 
 ## 读书工具

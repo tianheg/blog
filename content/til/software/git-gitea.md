@@ -14,7 +14,7 @@ header: Git
 
 ### 配置数据库
 
-<https://docs.gitea.io/en-us/database-prep/>
+<http://web.archive.org/web/20260517032400/https://docs.gitea.io/en-us/database-prep/>
 
 ```bash
 pacman -S mariadb
@@ -34,14 +34,19 @@ FLUSH PRIVILEGES;
 
 ### 安装 Gitea
 
-\`\`\`bash pacman -S gitea gitea # 浏览器打开 <http://localhost:3000> 进行配置 sudo cp /etc/gitea/app.example.ini /etc/gitea/app.ini systemctl enable --now gitea \`\`\`
+```bash
+pacman -S gitea gitea
+# 浏览器打开 <http://localhost:3000> 进行配置
+sudo cp /etc/gitea/app.example.ini /etc/gitea/app.ini
+systemctl enable --now gitea
+```
 
 无法打开 gitea 服务。无法使用，安装失败。
 
 refer:
 
-1. <https://forum.hostea.org/t/howto-gitea-upgrades-a-guide-for-admins/39>
+1. <http://web.archive.org/web/20220817123050/https://forum.hostea.org/t/howto-gitea-upgrades-a-guide-for-admins/39>
 
 ## Docker
 
-<https://docs.gitea.io/en-us/install-with-docker-rootless/>
+<http://web.archive.org/web/20260202200353/https://docs.gitea.io/en-us/install-with-docker-rootless/>

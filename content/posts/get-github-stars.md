@@ -5,7 +5,7 @@ tags: ['技术']
 ---
 
 一直有一个想法：把 GitHub
-上加星的仓库做成一个列表或者其他便于浏览查找的形式。今天，我就发现了这种工具。趁着午休，把它用上了，展示仓库：[tianheg/stars](https://github.com/tianheg/stars)。
+上加星的仓库做成一个列表或者其他便于浏览查找的形式。今天，我就发现了这种工具。趁着午休，把它用上了，展示仓库：[tianheg/stars](http://web.archive.org/web/20250530173544/https://github.com/tianheg/stars)。
 
 该仓库中包含的这个列表是基于一个名为 `starred` 的 pip 包生成的，再通过
 GitHub Action

@@ -28,8 +28,8 @@ tags: ['技术', '安全']
 
 ## 修复混合内容
 
-- [Passive mixed content](https://passive-mixed-content.glitch.me/)
-- [Active mixed content](https://active-mixed-content.glitch.me/)
+- [Passive mixed content](http://web.archive.org/web/20250704225445/https://passive-mixed-content.glitch.me/)
+- [Active mixed content](http://web.archive.org/web/20250102113041/http://active-mixed-content.glitch.me/)
 
 参考链接：
 

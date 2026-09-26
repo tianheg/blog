@@ -31,4 +31,4 @@ vivo Y73t 的系统提供了一个功能——原子隐私，可以把一些不�
 
 参考资料：
 
-1. [快充VS闪充！两种充电方式有什么区别？总算弄清楚了-面包板社区](https://www.eet-china.com/mp/a101725.html)
+1. [快充VS闪充！两种充电方式有什么区别？总算弄清楚了-面包板社区](http://web.archive.org/web/20221116071239/https://www.eet-china.com/mp/a101725.html)

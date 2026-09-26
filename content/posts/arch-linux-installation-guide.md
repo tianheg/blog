@@ -794,7 +794,7 @@ pacman -S trash-cli
 pacman -S stow
 ```
 
-<https://github.com/tianheg/dotfiles>
+<http://web.archive.org/web/20260221051319/https://github.com/tianheg/dotfiles>
 
 @farseerfc 邮件跟我说过，还可以试试 [chezmoi](https://www.chezmoi.io/)，系统级别的配置和同步可以用 [Ansible](https://www.ansible.com/)。
 

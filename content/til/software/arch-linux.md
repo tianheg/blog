@@ -182,7 +182,7 @@ Bluetooth 在使用一段时间后停止工作。
 Arch Linux 在连接 WiFi 后系统冻结。
 
 来源：
-1. https://github.com/tianheg/blog/issues/147
+1. http://web.archive.org/web/20220518143021/https://github.com/tianheg/blog/issues/147
 2. https://github.com/lwfinger/rtw88/issues/72
 3. https://github.com/tomaspinho/rtl8821ce/issues/142
 
@@ -211,7 +211,7 @@ pacman -S ttf-roboto noto-fonts noto-fonts-cjk adobe-source-han-sans-cn-fonts ad
 yay -S ttf-ms-win11-auto-zh_cn
 ```
 
-https://wiki.archlinux.org/title/Font_Configuration/Chinese
+http://web.archive.org/web/20260724062514/https://wiki.archlinux.org/title/Font_configuration/Chinese
 
 ### Desktop & Applications
 #### Wayland Setup
@@ -307,7 +307,7 @@ profile/
 mkarchiso -v -w /path/to/work_dir -o /path/to/out_dir /path/to/profile/
 ```
 
-我的 profile 在 https://github.com/tianheg/archlive
+我的 profile 在 http://web.archive.org/web/20240917162453/https://github.com/tianheg/archlive
 
 参考：
 1. https://wiki.archlinux.org/title/Archiso

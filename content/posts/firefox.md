@@ -58,9 +58,9 @@ refer
 - Refined GitHub
 - Right Links WE
 - RSSHub Radar
-- [Saladict](https://github.com/tianheg/ext-saladict) - Pop-up Dictionary and Page Translator
+- [Saladict](http://web.archive.org/web/20230930033046/https://github.com/tianheg/ext-saladict) - Pop-up Dictionary and Page Translator
 - Shortkeys (Custom Keyboard Shortcuts)
-- [Side View](https://github.com/tianheg/side-view)
+- [Side View](http://web.archive.org/web/20240517063520/https://github.com/tianheg/side-view)
 - Smart TOC
 - Stylus
 - Support context
@@ -102,7 +102,7 @@ accounts-static.cdn.mozilla.net,accounts.firefox.com,addons.cdn.mozilla.net,addo
 
 Refers:
 
-- [PR_END_OF_FILE_ERROR: 3 Ways to Fix It](https://www.hostinger.com/tutorials/pr_end_of_file_error)
+- PR_END_OF_FILE_ERROR: 3 Ways to Fix It
 - [PR_END_OF_FILE_ERROR | Firefox Support Forum | Mozilla Support](https://support.mozilla.org/en-US/questions/1315880)
 
 ### 支持 Wayland

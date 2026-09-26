@@ -4,4 +4,4 @@ date: 2022-08-16
 tags: ['技术']
 ---
 
-今天学习了 CSS 选择器内容。[练习 Demo](https://csszengarden.tianheg.xyz/days/first-30-days/6/)。
+今天学习了 CSS 选择器内容。[练习 Demo](http://web.archive.org/web/20221121073103/https://csszengarden.tianheg.xyz/days/first-30-days/6/)。

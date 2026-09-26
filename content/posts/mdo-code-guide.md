@@ -399,7 +399,7 @@ MDN 的[一篇文章](https://developer.mozilla.org/en-US/docs/Web/CSS/Shorthand
 }
 ```
 
-[阅读更多](https://markdotto.com/2015/07/20/css-nesting/)
+[阅读更多](http://web.archive.org/web/20240225023012/https://markdotto.com/2015/07/20/css-nesting/)
 
 ### 预处理器中的操作符
 
@@ -469,8 +469,8 @@ MDN 的[一篇文章](https://developer.mozilla.org/en-US/docs/Web/CSS/Shorthand
 
 阅读更多：
 
-- [Scope CSS classes with prefixes | @mdo](https://markdotto.com/2012/02/16/scope-css-classes-with-prefixes/)
-- [Stop the cascade | @mdo](https://markdotto.com/2012/03/02/stop-the-cascade/)
+- Scope CSS classes with prefixes | @mdo
+- [Stop the cascade | @mdo](http://web.archive.org/web/20240716040748/https://markdotto.com/2012/03/02/stop-the-cascade/)
 
 ```scss
 // Bad example

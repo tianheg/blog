@@ -4,7 +4,7 @@ date: 2023-03-06T13:26:00+08:00
 tags: ['技术']
 ---
 
-去年 12 月份的一天，我遇到网站 `blackglory.me` ，读到了其中一篇文章《[将博客改造成数字花园](https://blackglory.me/posts/from-blog-to-digital-garden)》，并看到了作者的一个笔记页面——<https://blackglory.me/notes/node.js>。觉得这样的样式以前从未见过，好奇它的实现细节。像往常一样，在 GitHub 上寻找网站的源代码，不过没有找到。于是，我就暂时放弃了对实现细节的探寻。
+去年 12 月份的一天，我遇到网站 `blackglory.me` ，读到了其中一篇文章《[将博客改造成数字花园](http://web.archive.org/web/20230601032331/https://blackglory.me/posts/from-blog-to-digital-garden)》，并看到了作者的一个笔记页面——<https://blackglory.me/notes/node.js>。觉得这样的样式以前从未见过，好奇它的实现细节。像往常一样，在 GitHub 上寻找网站的源代码，不过没有找到。于是，我就暂时放弃了对实现细节的探寻。
 
 过去的几个月，我时不时会想到这种树状结构，有过几次想要继续查找解决办法的行动，但都没有结果。
 
@@ -23,7 +23,7 @@ tags: ['技术']
 > 1. Org-mode 文本 => ASTs（抽象语法树，作为编译器实现中的一个名词出现）
 > 2. 在 Next.js 项目中编写组件，将 ASTs 转换为 HTML 界面
 >
-> 第一步，有一个库——[orgajs](https://github.com/orgapp/orgajs)，可以用，而它恰好提供了一个关于 Next.js 的[示例项目](https://github.com/orgapp/orgajs/tree/main/examples/next)。
+> 第一步，有一个库——[orgajs](https://github.com/orgapp/orgajs)，可以用，而它恰好提供了一个关于 Next.js 的[示例项目](http://web.archive.org/web/20250421173749/https://github.com/orgapp/orgajs/tree/main/examples/next)。
 >
 > 但是 orgajs 没有预先定义 AST 结构，导致 AST 结构总是在变化。作者自己基于 orgajs 定义了 AST 结构，写了一个库——[romast](https://github.com/BlackGlory/romast)。
 >
@@ -33,7 +33,7 @@ tags: ['技术']
 >
 > 现在问题只剩下怎么把 ROMAST 转换成 React 组件，这是一个很具体的问题，我没时间手把手教你怎么做，但这个难度本身不高，主要是体力活，所以交给你自己摸索。
 
-我用那个示例项目建起了项目的基本骨架，目前是在 `pages/` 文件夹下编写 Org-mode 文件。两个链接：[网站](https://lt.tianheg.org/)，[GitHub（c369d5e）源代码](https://github.com/tianheg/learning-tree/tree/c369d5e7f938a8c5d60ca19156562431bd26c775)。
+我用那个示例项目建起了项目的基本骨架，目前是在 `pages/` 文件夹下编写 Org-mode 文件。两个链接：[网站](https://lt.tianheg.org/)，GitHub（c369d5e）源代码。
 
 在作者网站的源码中，我看到 `__NEXT_DATA__` id 对应的 script 元素内部，有些很关键的信息。 `pageProps` 的一部分值是 Org-mode 文本的 ASTs。并且，通过开发者工具的 Debugger 标签，我看到了 Next.js 生成的 JS 文件中，有 `pages/notes/[slug]-1179e5ff8f505607.js` 这样的一个文件，再结合其他 JS 文件，可以推测出作者的项目结构：
 

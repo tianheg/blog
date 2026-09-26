@@ -29,13 +29,26 @@ header: Programming
 - 不要在自闭和标签上加反斜线（`/`）------[HTML5 标准](https://html.spec.whatwg.org/multipage/syntax.html#start-tags)说这是可选项。
 - 不要省略可选的闭合标签（比如，`</li>` 或 `</body>`）。
 
-\`\`\`html <!doctype html> &lt;html&gt; &lt;head&gt; &lt;title&gt;Page Title</title> </head> &lt;body&gt; &lt;img src="images/logo.png" alt="logo"&gt; &lt;h1 class="hello-world"&gt;Hello, World!</h1> </body> </html> \`\`\`
+```html
+<!doctype html>
+<html>
+<head>
+<title>Page Title</title>
+</head>
+<body>
+<img src="images/logo.png" alt="logo">
+<h1 class="hello-world">Hello, World!</h1>
+</body>
+</html>
+```
 
 ### HTML5 文档类型
 
 强化[标准模式](https://developer.mozilla.org/en-US/docs/Web/HTML/Quirks_Mode_and_Standards_Mode)并尽可能在每个浏览器呈现一致的内容。保持小写。
 
-\`\`\`html <!doctype html> ... \`\`\`
+```html
+<!doctype html> ...
+```
 
 ### 语言属性
 
@@ -45,13 +58,19 @@ header: Programming
 
 可在[标准](https://html.spec.whatwg.org/multipage/semantics.html#the-html-element)中读到更多关于 `lang` 的内容。在 <abbr title="Internet Assigned Numbers Authority">IANA</abbr> 可以看到[语言代码列表](https://www.iana.org/assignments/language-subtag-registry/language-subtag-registry)。
 
-\`\`\`html &lt;html lang="en"&gt; </html> \`\`\`
+```html
+<html lang="en">
+</html>
+```
 
 ### IE 兼容模式
 
 随着 Internet Explorer 的日渐衰退，不再需要添加 `&lt;meta&gt;` 以维持对 IE 的兼容，除非需要兼容 IE10 及其以前的版本。这个标签在 IE11 中弃用，不再在 Microsoft Edge 中使用（除非在传统浏览器中）。
 
-\`\`\`html <!-- IE10 and below only --> &lt;meta http-equiv="x-ua-compatible" content="ie=edge"&gt; \`\`\`
+```html
+<!-- IE10 and below only -->
+<meta http-equiv="x-ua-compatible" content="ie=edge">
+```
 
 ### 字符编码
 
@@ -59,7 +78,13 @@ header: Programming
 
 对于一些保留的 XML 符号，仍需使用 HTML 实体。
 
-\`\`\`html &lt;head&gt; &lt;meta charset="utf-8"&gt; </head> &lt;body&gt; </body> \`\`\`
+```html
+<head>
+<meta charset="utf-8">
+</head>
+<body>
+</body>
+```
 
 ### 包含 CSS 和 JS
 
@@ -69,19 +94,26 @@ HTML 标准：
 - [`style`](https://html.spec.whatwg.org/multipage/semantics.html#the-style-element)
 - [`script`](https://html.spec.whatwg.org/multipage/scripting.html#the-script-element)
 
-\`\`\`html &lt;link rel="stylesheet" href="style.css"&gt;
+```html
+<link rel="stylesheet" href="style.css">
 
-&lt;style&gt; </style>
+<style>
+</style>
 
-&lt;script src="script.js"&gt;</script> ```
+<script src="script.js"></script>
+```
 
 ### Practicality over purity
 
 Strive to maintain HTML standards and semantics, but not at the expense of practicality. Use the least amount of markup with the fewest intricacies whenever possible.
 
-\`\`\`html <!-- Good --> &lt;button&gt;...</button>
+```html
+<!-- Good -->
+<button>...</button>
 
-<!-- Not good --> &lt;div class="btn" onClick="..."&gt;...</div> ```
+<!-- Not good -->
+<div class="btn" onClick="...">...</div>
+```
 
 ### 属性顺序
 
@@ -100,29 +132,41 @@ HTML 属性的大致较容易记忆的顺序：
 
 识别元素的属性 --> 确定元素唯一性 --> 可访问性、样式相关属性
 
-\`\`\`html &lt;a class="..." id="..." data-toggle="modal" herf="#"&gt;Example link</a>
+```html
+<a class="..." id="..." data-toggle="modal" herf="#">Example link</a>
 
-&lt;input class="form-control" type="text"&gt;
+<input class="form-control" type="text">
 
-&lt;img src="..." alt="..."&gt; ```
+<img src="..." alt="...">
+```
 
 ### 布尔属性
 
 布尔属性不需要一般的值。在 XHTML 中还需要声明值，在 HTML5 中完全不需要。
 
-\`\`\`html &lt;input type="text" disabled&gt;
+```html
+<input type="text" disabled>
 
-&lt;input type="checkbox" value="1" checked&gt;
+<input type="checkbox" value="1" checked>
 
-&lt;select&gt; &lt;option value="1" selected&gt;1</option> </select> ```
+<select>
+<option value="1" selected>1</option>
+</select>
+```
 
 ### 降低标签数量
 
 无论何时都不写多余的 HTML 标签。很多情况下，这需要多次迭代和重构，但是值得这样做，因为它会减少 HTML 的标签数量。
 
-\`\`\`html <!-- Not so great --> &lt;span class="avatar"&gt; &lt;img src="..."&gt; </span>
+```html
+<!-- Not so great -->
+<span class="avatar">
+<img src="...">
+</span>
 
-<!-- Better --> &lt;img class="avatar" src="..."&gt; ```
+<!-- Better -->
+<img class="avatar" src="...">
+```
 
 ### 配置好编辑器
 
@@ -133,11 +177,18 @@ HTML 属性的大致较容易记忆的顺序：
 
 考虑维护一个 `.editorconfig`。
 
-\`\`\`editorconfig
+```editorconfig
 
 root = true
 
-[*] charset = utf-8 end<sub>ofline</sub> = lf indent<sub>size</sub> = 2 indent<sub>style</sub> = space insert<sub>finalnewline</sub> = true trim<sub>trailingwhitespace</sub> = true ```
+[*]
+charset = utf-8
+end_ofline = lf
+indent_size = 2
+indent_style = space
+insert_finalnewline = true
+trim_trailingwhitespace = true
+```
 
 ## CSS
 
@@ -158,9 +209,22 @@ root = true
 - 为选择器中的属性值添加引号，`input[type="text"]`。[只在特定情况下可省略引号](https://mathiasbynens.be/notes/unquoted-attribute-values#css)
 - 避免为 0 指定单位，使用 `margin: 0;` 而不是 `margin: 0px;`
 
-\`\`\`scss // Bad CSS .selector, .selector-secondary, .selector[type=text]{ padding:15px; margin: 0px 0px 15px; background-color: rgba(0, 0, 0, 0.5); box-shadow: 0px 1px 2px #CCC,inset 0 1px 0 #FFFFFF}
+```scss
+// Bad CSS
+.selector, .selector-secondary, .selector[type=text]{
+padding:15px;
+margin: 0px 0px 15px;
+background-color: rgba(0, 0, 0, 0.5);
+box-shadow: 0px 1px 2px #CCC,inset 0 1px 0 #FFFFFF}
 
-// Good one .selector, .selector-secondary, .selector[type="text"] { padding: 15px; margin-bottom: 15px; background-color: rgb(0 0 0 / .5); box-shadow: 0 1px 2px #ccc, inset 0 1px 0 #fff; } ```
+// Good one
+.selector, .selector-secondary, .selector[type="text"] {
+padding: 15px;
+margin-bottom: 15px;
+background-color: rgb(0 0 0 / .5);
+box-shadow: 0 1px 2px #ccc, inset 0 1px 0 #fff;
+}
+```
 
 ### 声明顺序
 
@@ -172,15 +236,40 @@ root = true
 - 视觉
 - 其余杂项
 
-\`\`\`scss .declaration-order { // Positioning position: absolute; top: 0; right: 0; bottom: 0; left: 0; z-index: 100;
+```scss
+.declaration-order {
+// Positioning
+position: absolute;
+top: 0;
+right: 0;
+bottom: 0;
+left: 0;
+z-index: 100;
 
-// Box model display: flex; flex-direction: column; justify-content: center; align-items: center; width: 100px; height: 100px;
+// Box model
+display: flex;
+flex-direction: column;
+justify-content: center;
+align-items: center;
+width: 100px;
+height: 100px;
 
-// Typography font: normal 14px "Helvetica Neue", sans-serif; line-height: 1.5; color: #333; text-align: center; text-decoration: underline;
+// Typography
+font: normal 14px "Helvetica Neue", sans-serif;
+line-height: 1.5;
+color: #333;
+text-align: center;
+text-decoration: underline;
 
-// Visual background-color: #f5f5f5; border: 1px solid #e5e5e5; border-radius: 3px;
+// Visual
+background-color: #f5f5f5;
+border: 1px solid #e5e5e5;
+border-radius: 3px;
 
-// Misc opacity: 1; } ```
+// Misc
+opacity: 1;
+}
+```
 
 ### 逻辑属性
 
@@ -190,9 +279,21 @@ root = true
 
 逻辑属性帮助我们为重新排列文本后的文本加入样式。
 
-\`\`\`scss // Without logical properties .element { margin-right: auto; margin-left: auto; border-top: 1px solid #eee; border-bottom: 1px solid #eee; }
+```scss
+// Without logical properties
+.element {
+margin-right: auto;
+margin-left: auto;
+border-top: 1px solid #eee;
+border-bottom: 1px solid #eee;
+}
 
-// With logical properties .element { margin-inline: auto; border-block: 1px solid #eee; } ```
+// With logical properties
+.element {
+margin-inline: auto;
+border-block: 1px solid #eee;
+}
+```
 
 ### 颜色
 
@@ -200,7 +301,12 @@ root = true
 - 使用 `rgba(255 255 255 / .5)` 而非 `rgba(255, 255, 255, .5)`
 - 确保网页中的颜色满足[对比度](https://webaim.org/articles/contrast/)
 
-\`\`\`scss .element { color: rgba(255 255 255 / .65); background-color: rgba(0 0 0 / .95); } \`\`\`
+```scss
+.element {
+color: rgba(255 255 255 / .65);
+background-color: rgba(0 0 0 / .95);
+}
+```
 
 ### 避免使用 `@import`
 
@@ -212,27 +318,52 @@ root = true
 
 [阅读更多](https://web.archive.org/web/20150403124529/http://www.stevesouders.com/blog/2009/04/09/dont-use-import)
 
-\`\`\`html <!-- Use link elements --> &lt;link rel="stylesheet" href="core.css"&gt;
+```html
+<!-- Use link elements -->
+<link rel="stylesheet" href="core.css">
 
-<!-- Avoid @imports --> &lt;style&gt; @import url("more.css") </style> ```
+<!-- Avoid @imports -->
+<style>
+@import url("more.css")
+</style>
+```
 
 ### Media query 位置
 
 尽可能将其放在靠近所设置的元素的近处。不要将它们放在一个文件里或文档的结束。
 
-\`\`\`scss .element {...} .element-avatar {...} .element-selected {...}
+```scss
+.element {...}
+.element-avatar {...}
+.element-selected {...}
 
-@media (min-width: 35em) { .element {...} .element-avatar {...} .element-selected {...} } ```
+@media (min-width: 35em) {
+.element {...}
+.element-avatar {...}
+.element-selected {...}
+}
+```
 
 ### 单个声明
 
 单个声明的 CSS block 放在一行。
 
-\`\`\`scss .span1 { width: 5rem; } .span2 { width: 5rem; } .span3 { width: 5rem; } \`\`\`
+```scss
+.span1 { width: 5rem; }
+.span2 { width: 5rem; }
+.span3 { width: 5rem; }
+```
 
 多个声明的 CSS block 分行
 
-\`\`\`scss .sprite { display: inline-block; width: 16px; height: 15px; background-image: url("./img/sprite.png"); } \`\`\`
+```scss
+.sprite {
+display: inline-block;
+width: 16px;
+height: 15px;
+background-image: url("./img/sprite.png");
+}
+```
 
 ### 速记标识
 
@@ -253,19 +384,35 @@ MDN 的[一篇文章](https://developer.mozilla.org/en-US/docs/Web/CSS/Shorthand
 
 尽可能避免任何不必要的嵌套------保持 CSS 的简单和避免反向嵌套。只有当你确实需要将样式范围限定在某个选择器上并且有多个元素嵌套在一起。
 
-\`\`\`scss // Without nesting .table > thead > tr > th {...} .table > thead > tr > th {...}
+```scss
+// Without nesting
+.table > thead > tr > th {...}
+.table > thead > tr > th {...}
 
-// With nesting .table > thead > tr { > th {...} > td {...} } ```
+// With nesting
+.table > thead > tr {
+> th {...}
+> td {...}
+}
+```
 
-[阅读更多](https://markdotto.com/2015/07/20/css-nesting/)
+[阅读更多](http://web.archive.org/web/20240225023012/https://markdotto.com/2015/07/20/css-nesting/)
 
 ### 预处理器中的操作符
 
 为了可读性，用小括号包裹数学运算符，并在数值、变量和运算符间添加空格。
 
-\`\`\`scss // Bad example .elem { margin: 10px 0 @variable*2 10px; }
+```scss
+// Bad example
+.elem {
+margin: 10px 0 @variable*2 10px;
+}
 
-// Good example .elem { margin: 10px 0 (@variable * 2) 10px; } ```
+// Good example
+.elem {
+margin: 10px 0 (@variable * 2) 10px;
+}
+```
 
 ### 注释
 
@@ -273,9 +420,19 @@ MDN 的[一篇文章](https://developer.mozilla.org/en-US/docs/Web/CSS/Shorthand
 
 写大段评论时，句子要写完整。用简洁的短语进行一般注解。
 
-\`\`\`scss // Bad example // Modal header .modal-header { ... }
+```scss
+// Bad example
+// Modal header
+.modal-header {
+...
+}
 
-// Good example // Wrapping element for .modal-title nad .modal-close .modal-header { ... } ```
+// Good example
+// Wrapping element for .modal-title nad .modal-close
+.modal-header {
+...
+}
+```
 
 ### 类名
 
@@ -288,9 +445,17 @@ MDN 的[一篇文章](https://developer.mozilla.org/en-US/docs/Web/CSS/Shorthand
 
 以上规则也适用于创建自定义属性和预处理器变量名。
 
-\`\`\`scss // Bad example .t {...} .red {...} .header {...}
+```scss
+// Bad example
+.t {...}
+.red {...}
+.header {...}
 
-// Good example .tweet {...} .important {...} .tweet-header {...} ```
+// Good example
+.tweet {...}
+.important {...}
+.tweet-header {...}
+```
 
 ### 选择器
 
@@ -301,18 +466,31 @@ MDN 的[一篇文章](https://developer.mozilla.org/en-US/docs/Web/CSS/Shorthand
 
 阅读更多：
 
-1. [Scope CSS classes with prefixes | @mdo](https://markdotto.com/2012/02/16/scope-css-classes-with-prefixes/)
-2. [Stop the cascade | @mdo](https://markdotto.com/2012/03/02/stop-the-cascade/)
+1. Scope CSS classes with prefixes | @mdo
+2. [Stop the cascade | @mdo](http://web.archive.org/web/20240716040748/https://markdotto.com/2012/03/02/stop-the-cascade/)
 
-\`\`\`scss // Bad example span {...} .page-container #stream .stream-item .tweet .tweet-header .username {...} .avatar {...}
+```scss
+// Bad example
+span {...}
+.page-container #stream .stream-item .tweet .tweet-header .username {...}
+.avatar {...}
 
-// Good example .avatar {...} .tweet-header .usrname {...} .tweet .avatar {...} ```
+// Good example
+.avatar {...}
+.tweet-header .usrname {...}
+.tweet .avatar {...}
+```
 
 ### 子选择符和后代选择器
 
 使用 `>` 能够将样式限制在嵌套的最接近的子元素。
 
-\`\`\`scss .custom-table > tbody > tr > td, .custom-table > tbody > tr > th { /* ... */ } \`\`\`
+```scss
+.custom-table > tbody > tr > td,
+.custom-table > tbody > tr > th {
+/* ... */
+}
+```
 
 ### 组织
 
@@ -321,15 +499,24 @@ MDN 的[一篇文章](https://developer.mozilla.org/en-US/docs/Web/CSS/Shorthand
 - 分割组件时，在彼此之间留下一致的空白符比较好
 - 使用多个 CSS 文件时，将它们按组件划分而非页面，页面需要被重新布局，而组件只需要移动即可
 
-\`\`\`scss // // Component section heading //
+```scss
+//
+// Component section heading
+//
 
 .element { ... }
 
-// // Component section heading // // Sometimes you need to include optional context for the entire component. Do that up here if it's important enough. //
+//
+// Component section heading
+//
+// Sometimes you need to include optional context for the entire component. Do that up here if it's important enough.
+//
 
 .element { ... }
 
-// Contextual sub-component or modifer .element-heading { ... } ```
+// Contextual sub-component or modifer
+.element-heading { ... }
+```
 
 
 相关：[[coding|coding]]

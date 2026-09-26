@@ -4,7 +4,7 @@ date: 2022-05-31
 tags: ['剧集']
 ---
 
-前几年听过这部剧集，当时没有看，最近听播客《卧房撸歌》的一期[吉巴罗后劲上头！闲扯被索尼开除的爱死机导演Alberto Mielgo](https://www.xiaoyuzhoufm.com/episode/628b7c7657aed8d82297308e)。
+前几年听过这部剧集，当时没有看，最近听播客《卧房撸歌》的一期[吉巴罗后劲上头！闲扯被索尼开除的爱死机导演Alberto Mielgo](http://web.archive.org/web/20250120053839/https://www.xiaoyuzhoufm.com/episode/628b7c7657aed8d82297308e)。
 
 《冰河时代》令人惊奇，从冰箱里看世界。
 

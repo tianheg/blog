@@ -23,5 +23,5 @@ tags: ['技术']
 4. [Numbers, lengths, and percentages - MDN](https://developer.mozilla.org/en-US/docs/Learn/CSS/Building_blocks/Values_and_units#numbers_lengths_and_percentages)
 5. [REM vs EM -- The Great Debate](https://zellwk.com/blog/rem-vs-em/)
 6. <https://web.dev/learn/css/sizing/>
-7. [What does 100% mean in CSS?](https://wattenberger.com/blog/css-percents)
+7. [What does 100% mean in CSS?](http://web.archive.org/web/20230323112918/https://wattenberger.com/blog/css-percents)
 8. <https://www.w3.org/TR/css-values-4/#px>

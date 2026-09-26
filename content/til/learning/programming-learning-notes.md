@@ -88,8 +88,8 @@ Network
 
 ### 学习方法
 
-- [用Webpack4配置 React + Express + Less 开发环境](https://manateelazycat.github.io/web/2018/12/09/webpack-and-react.html)
-- [谈研发人员的进步](https://manateelazycat.github.io/think/2023/05/08/developer-better.html)
+- 用Webpack4配置 React + Express + Less 开发环境
+- [谈研发人员的进步](http://web.archive.org/web/20230605224318/https://manateelazycat.github.io/think/2023/05/08/developer-better.html)
 - 程序员练级攻略
 - 编程入门指南
 - [左耳听风](https://time.geekbang.org/column/intro/100002201) by 陈皓
@@ -115,7 +115,7 @@ Network
 - https://github.com/trekhleb/javascript-algorithms
 - https://v8.dev/blog/tags/understanding-ecmascript
 - https://timothygu.me/es-howto/
-- https://www.patterns.dev/posts/
+- http://web.archive.org/web/20231022213745/https://www.patterns.dev/posts
 - [学习JavaScript数据结构和算法 代码库](https://github.com/PacktPublishing/Learning-JavaScript-Data-Structures-and-Algorithms-Third-Edition)
 - [Frontend Masters](https://frontendmasters.com/)
 - https://www.freecodecamp.org/learn

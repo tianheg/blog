@@ -160,4 +160,4 @@ Investing substantial time in refining the code underscored valuable insights:
 
 How to find where the bug is?
 
-[more info](https://github.com/tianheg/img?tab=readme-ov-file#cloudflare-pages-deploy-failure-locally-build-success)
+[more info](http://web.archive.org/web/20240626012713/https://github.com/tianheg/img?tab=readme-ov-file)

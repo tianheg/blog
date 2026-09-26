@@ -35,8 +35,8 @@ header: Tools
 参考：
 - https://github.com/arkenfox/user.js
 - https://kb.mozillazine.org/About:config_entries
-- https://wiki.archlinux.org/title/Firefox/
-- https://wiki.archlinux.org/title/Firefox/Tweaks
+- http://web.archive.org/web/20260917122656/https://wiki.archlinux.org/title/Firefox
+- http://web.archive.org/web/20260917122656/https://wiki.archlinux.org/title/FirefoxTweaks
 
 #### Wayland Support
 为 Firefox 添加环境变量：`MOZ_ENABLE_WAYLAND=1`。

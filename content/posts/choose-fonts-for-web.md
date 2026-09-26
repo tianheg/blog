@@ -13,7 +13,7 @@ tags: ['技术']
 ### 英文 {#英文}
 
 <https://ridiqulous.com/chinese-webfont-guide/>
-<https://jacobruan.com/the-font-selection-and-development-guide-in-chinese-web-pages/>
+<http://web.archive.org/web/20230528190141/https://www.jacobruan.com/the-font-selection-and-development-guide-in-chinese-web-pages/>
 <https://blog.mutoo.im/2020/02/fonts-for-my-blog-theme/>
 <https://en.wikipedia.org/wiki/List_of_CJK_fonts>
 <https://www.runoob.com/w3cnote/web-font-family.html>

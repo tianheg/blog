@@ -52,7 +52,7 @@ x 高度指英文小写字母 x 的高度，它决定了整套字体小写字母
 old-style figures 的数字拥有大小写字母一样的升部和降部，适合大小写字母协调；Lining 则高度统一，和中文字体配合更加和谐，Old-style figures 拥有升部和降部的特点更能配合英文字体的美感。不过 Old-style figures 同时阅读起来也相对慢一些，在讲究阅读效率的场景下（比如数据表格），Lining figures 更合适一些。
 
 #### 进一步阅读
-由 Typography Deconstructed 制作的 英文字体结构表（[点击下载](https://typedecon.com/collections/frontpage/products/digital-download-free)）。
+由 Typography Deconstructed 制作的 英文字体结构表（[点击下载](http://web.archive.org/web/20231003034828/https://typedecon.com/collections/frontpage/products/digital-download-free)）。
 
 如果你想深度了解西文字体，可以阅读这本《西文字体：字体的背景知识和使用方法》。
 
@@ -220,7 +220,7 @@ font [网页中文字体加载速度优化 - 字体分包](https://www.hehehai.c
 - <https://github.com/tmcw/systemfontstack>
 - <https://bitsofco.de/the-new-system-font-stack/#thefontstack>
 - <https://markdotto.com/2018/02/07/github-system-fonts/>
-- <https://www.client9.com/css-system-font-stack-monospace-v1/>
+- <http://web.archive.org/web/20240408170018/https://www.client9.com/css-system-font-stack-monospace-v1/>
 - <https://booking.design/implementing-system-fonts-on-booking-com-a-lesson-learned-bdc984df627f>
 - <https://css-tricks.com/snippets/css/system-font-stack/>
 - [Never, ever use system-ui as the value of font-family --- Not ready yet](https://infinnie.github.io/blog/2017/systemui.html)

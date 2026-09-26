@@ -50,7 +50,7 @@ Randy 的编程经历 <https://lutaonan.com/blog/my-coding-road/>
 
 ---
 
-maya 的故事，让我记忆深刻 <https://www.xiaoyuzhoufm.com/episode/61257677cc5f215c6e0b868a?s=eyJ1IjoiNjA1NGU4NjFlMGY1ZTcyM2JiMjRjMzQ4In0%3D%0A>
+maya 的故事，让我记忆深刻 <http://web.archive.org/web/20230910094529/https://www.xiaoyuzhoufm.com/episode/61257677cc5f215c6e0b868a?s=eyJ1IjoiNjA1NGU4NjFlMGY1ZTcyM2JiMjRjMzQ4In0%3D%0A>
 
 - 如何理解自己和父母的关系
 
@@ -77,13 +77,13 @@ maya 的故事，让我记忆深刻 <https://www.xiaoyuzhoufm.com/episode/612576
 
 ---
 
-[Steve 说 212 期 - 杜素娟 - 文学是人生的后悔药](https://www.xiaoyuzhoufm.com/episode/5fca27e0dee9c1e16d0eb010)
+[Steve 说 212 期 - 杜素娟 - 文学是人生的后悔药](http://web.archive.org/web/20240224031827/https://www.xiaoyuzhoufm.com/episode/5fca27e0dee9c1e16d0eb010)
 
 - 建立多元价值体系，相信自己
 
 ---
 
-[入职帆软一个半月有感](https://treecat.cn/%E5%85%A5%E8%81%8C%E5%B8%86%E8%BD%AF%E4%B8%80%E4%B8%AA%E5%8D%8A%E6%9C%88%E6%9C%89%E6%84%9F/)
+入职帆软一个半月有感
 
 
 相关：[[how-learn|how-learn]]

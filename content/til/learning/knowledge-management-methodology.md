@@ -49,7 +49,7 @@ date: 2026-09-10T12:52:29+08:00
 - [sspai：我对 PARA 的理解与实践](https://sspai.com/post/78349)
 - [BlackGlory：最后一个笔记系统](https://blackglory.me/posts/the-final-note-taking-system)
 - [BlackGlory：如何解决信息过载](https://blackglory.me/posts/how-to-solve-information-overload)
-- [BlackGlory：效率思维及其未来](https://blackglory.me/posts/efficiency-mindset-and-its-future)
+- BlackGlory：效率思维及其未来
 - [Caulfield：The Garden and the Stream](https://hapgood.us/2015/10/17/the-garden-and-the-stream-a-technopastoral/)
 - [swyx：Learn In Public](https://swyx.io/learn-in-public)
 - [dabing（Jiang）的数字花园](https://notes.dabing.one/)

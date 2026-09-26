@@ -20,18 +20,18 @@ date: 2025-06-15T19:22:54+08:00
 - 一个网页-展示已经灭绝的动植物
   - <https://en.wikipedia.org/wiki/Lists_of_extinct_species>
 
-1. 将辰东的《完美世界》、《遮天》、《圣墟》三本小说，做成一个在线阅读版本(类似 <https://weiyinfu.cn/Reader/index.html#/> )
+1. 将辰东的《完美世界》、《遮天》、《圣墟》三本小说，做成一个在线阅读版本(类似 <http://web.archive.org/web/20220717135605/https://weiyinfu.cn/Reader/index.html> )
 2. 展示自己看过的音乐剧 HTML,CSS,JS
 3. 杭州地图
 4. 在线音乐播放器
 5. IMDB 电影列表
 6. 你难道就不好奇，日常上网所使用的种种高阶功能，背后的原理吗？
-7. 为什么它（canvas）保存下来是个空白？（[src](https://github.com/tianheg/whatamesh/blob/eb89aedc65b66add699456ecc49b4ce56111b756/src/components/editor.vue)）https://whatamesh-tianheg.vercel.app/
+7. 为什么它（canvas）保存下来是个空白？（src）http://web.archive.org/web/20220715123409/https://whatamesh-tianheg.vercel.app/
 
 - clone popular websites with HTML, CSS || like Youtube, Google, Twitter, [Apple](https://web.archive.org/web/20220805144541/https://www.apple.com/)
 - 阅读英文文章时，注意力一发散就忘记读到哪里了，希望有一个CSS效果，可以把已读过的部分的字体的颜色变淡，突出显示已读过和未读过边界的字体的颜色。 通过光标点击，确定锚点（已读和未读的分界）的位置。
 - HackerNews
-  - <https://github.com/rbew/hacker-news-vue3>
+  - <http://web.archive.org/web/20221121075606/https://github.com/rbew/hacker-news-vue3>
   - <https://hackernews-pwa.netlify.app/> || <https://github.com/bahdcoder/hacker-news-pwa>
   - <https://hn.nuxtjs.org> || <https://github.com/nuxt/hackernews>
 - 用 CSS 画《机器人总动员》里的 Wall-e 和 Eva

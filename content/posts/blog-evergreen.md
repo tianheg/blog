@@ -12,4 +12,4 @@ tags: ['博客']
 
 每一篇博客都有其意义所在，每一篇博客都代表着那一时刻，我的变化。
 
-数日前，读过《[将博客改造成数字花园 -BlackGlory](https://blackglory.me/posts/from-blog-to-digital-garden)》，深受启发，我会继续思考该如何记录、如何表达。
+数日前，读过《[将博客改造成数字花园 -BlackGlory](http://web.archive.org/web/20230601032331/https://blackglory.me/posts/from-blog-to-digital-garden)》，深受启发，我会继续思考该如何记录、如何表达。

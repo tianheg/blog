@@ -183,7 +183,7 @@ eim list / select / remove / fix / shell / run
 ## 参考
 
 - [Installation of ESP-IDF and Tools on Windows](https://docs.espressif.com/projects/esp-idf/en/stable/esp32s3/get-started/windows-setup.html)
-- [ESP32-S3-DevKitC-1 v1.1 用户指南](https://docs.espressif.com/projects/esp-idf/en/stable/esp32s3/hw-reference/esp32s3/user-guide-devkitc-1.html)
+- [ESP32-S3-DevKitC-1 v1.1 用户指南](http://web.archive.org/web/20241121065509/https://docs.espressif.com/projects/esp-idf/en/stable/esp32s3/hw-reference/esp32s3/user-guide-devkitc-1.html)
 - [ESP-IDF Extension for VS Code 安装文档](https://docs.espressif.com/projects/vscode-esp-idf-extension/en/latest/installation.html)
 - [ESP-IDF Installation Manager 文档](https://docs.espressif.com/projects/idf-im-ui/en/latest/general_info.html)
 - [USB-Serial-JTAG Peripheral Introduction](https://docs.espressif.com/projects/esp-iot-solution/en/latest/usb/usb_overview/usb_serial_jtag.html)

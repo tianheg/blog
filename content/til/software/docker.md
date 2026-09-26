@@ -48,7 +48,7 @@ header: DevOps
 
    参考资料
 
-1. [Compose V2 | Docker Documentation](https://docs.docker.com/compose/cli-command/#install-on-linux)
+1. [Compose V2 | Docker Documentation](http://web.archive.org/web/20220713183653/https://docs.docker.com/compose/cli-command/)
 2. [https://github.com/docker/docker-ce-packaging/pull/553#issuecomment-906294789](https://github.com/docker/docker-ce-packaging/pull/553#issuecomment-906294789)[[master] add docker-compose-plugin package (deb, rpm) by thaJeztah · Pull Request #553 · docker/docker-ce-packaging]]
 
 ### 配置
@@ -384,7 +384,7 @@ Learn more: 1. [Docker -- Removing Dangling and Unused Images - Baeldung](https:
 
 [^8]: <https://www.aquasec.com/cloud-native-academy/container-security/container-images/>
 
-[^9]: <https://diogomonica.com/2017/03/27/why-you-shouldnt-use-env-variables-for-secret-data/>
+[^9]: <http://web.archive.org/web/20260516004624/https://diogomonica.com/2017/03/27/why-you-shouldnt-use-env-variables-for-secret-data/>
 
 
 相关：[[use-prettier|use-prettier]]

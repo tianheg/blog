@@ -21,7 +21,7 @@ date: 2022-11-05T15:44:02+08:00
 ## 工作经历
 
 一、前端工程师，杭州瞄鲸网络科技有限公司，2022.06 - 2022.07
-https://www.bananacasting.net/
+http://web.archive.org/web/20240524112849/https://www.bananacasting.net/
 - 多玩家在线交互系统。技术栈：Expressjs、MongoDB、Socker.IO
 
 ## 文章
@@ -44,7 +44,7 @@ https://www.damingsoft.com/default.aspx
 
 二、凯棉科技
 
-https://www.keymantech.cn/index.html
+http://web.archive.org/web/20240226110843/https://www.keymantech.cn/index.html
 
 工业化设备
 
@@ -214,7 +214,7 @@ from 红忠哥耿律师（帅张知识星球）
 | CodeSandbox                                                           | 国外   | CodeSandbox                                  |
 | 新小科技                                                              | 苏州   | 一起记                                       |
 | ODD LAB（苏州怪奇信息科技有限公司）                                   | 苏州   | Cubox                                        |
-| [正常工厂](https://normal.works/)                                   |        | 初创公司                                     |
+| [正常工厂](http://web.archive.org/web/20250522223030/http://normal.works/)                                   |        | 初创公司                                     |
 | [巡天科技](https://www.xtspace.cn/)                                 |        |                                              |
 | [Duolingo](https://careers.duolingo.com/)                           |        |                                              |
 | [七牛云 - 国内领先的企业级云服务商](https://www.qiniu.com/)         |        |

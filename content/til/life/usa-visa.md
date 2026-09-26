@@ -9,7 +9,7 @@ header: Lifestyle
 
 Official website: https://www.ustraveldocs.com/cn/en/nonimmigrant-visa
 
-Can apply this type visa: [Business/Tourist visa](https://www.ustraveldocs.com/cn/en/business-visa)
+Can apply this type visa: Business/Tourist visa
 
 Steps:
 

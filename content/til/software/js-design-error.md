@@ -31,8 +31,8 @@ header: Web
 
 具体可以参考这两篇文章：
 
-## [Array iteration and holes in JavaScript](http://www.2ality.com/2013/07/array-iteration-holes.html)
-## [ECMAScript 6: holes in Arrays](http://www.2ality.com/2015/09/holes-arrays-es6.html)
+## Array iteration and holes in JavaScript
+## [ECMAScript 6: holes in Arrays](http://web.archive.org/web/20260319000133/https://2ality.com/2015/09/holes-arrays-es6.html)
 1. Array-like objects
 
 JavaScript 中，类数组但不是数组的对象不少，这类对象往往有 length 属性、可以被遍历，但缺乏一些数组原型上的方法，用起来非常不便。

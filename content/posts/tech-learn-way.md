@@ -127,7 +127,7 @@ import, import {}, export, export default
 - I told the knowledge of DSA is very important and, can be learned by only practicing.
 - I suggested starting with simple data structures and, algorithms.
 
-[Practice 75+ Algorithms](https://twitter.com/swapnakpanda/status/1538869285522505728)
+[Practice 75+ Algorithms](http://web.archive.org/web/20221115001204/https://twitter.com/swapnakpanda/status/1538869285522505728)
 
 14, Back-End with Node.js & Express
 

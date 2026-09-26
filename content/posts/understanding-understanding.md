@@ -4,7 +4,7 @@ date: 2021-12-24
 tags: ['随笔']
 ---
 
-1. <https://sites.google.com/view/efratfurst/understanding-understanding>
+1. <http://web.archive.org/web/20240915164310/https://sites.google.com/view/efratfurst/understanding-understanding>
 2. <https://www.notion.so/Understanding-Understanding-0df94037df1d43fd92c67572f56c8bcc>
 
 在学习经历之后，将形成对新概念的新表述，以及与现有信息的新联系。

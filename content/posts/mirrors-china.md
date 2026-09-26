@@ -290,7 +290,7 @@ onMounted(() => {
 
 相关链接：
 
-- [tianheg/mirrors-china](https://github.com/tianheg/mirrors-china)
+- [tianheg/mirrors-china](http://web.archive.org/web/20251114151136/https://github.com/tianheg/mirrors-china)
 - [Vite | Next Generation Frontend Tooling](https://vitejs.dev/)
 - [Vue Router | The official Router for Vue.js](https://router.vuejs.org/)
 - [Pinia | The intuitive store for Vue.js](https://pinia.vuejs.org/)

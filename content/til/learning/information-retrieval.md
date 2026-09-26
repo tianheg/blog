@@ -234,7 +234,7 @@ Google 等搜索引擎有专门的高级搜索页面
 - https://en.wikipedia.org/wiki/Sci-Hub
 - https://www.nypl.org/
 - https://www.ala.org/
-- https://www.ala.org/rusa/awards/etsbestindex
+- http://web.archive.org/web/20230325062510/https://www.ala.org/rusa/awards/etsbestindex
 - https://search.chongbuluo.com/
 - https://blog.zjuyk.site/posts/how-to-search/
 

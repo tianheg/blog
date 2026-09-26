@@ -29,4 +29,4 @@ tags: ['技术']
 
 参考资料
 
-1. [Assign Weight - Taxonomy Templates](https://gohugo.io/templates/taxonomy-templates/#assign-weight)
+1. [Assign Weight - Taxonomy Templates](http://web.archive.org/web/20240610050705/https://gohugo.io/templates/taxonomy-templates/)

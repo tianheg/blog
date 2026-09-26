@@ -187,7 +187,7 @@ AI-Assisted Isomorphic Application Engine
 - 代码压缩 (HTML,JS,CSS)
   - [JSMin](https://github.com/douglascrockford/JSMin)
   - [UglifyJS 3](https://github.com/mishoo/UglifyJS)
-  - [Closure Compiler](https://closure-compiler.appspot.com/home)
+  - [Closure Compiler](http://web.archive.org/web/20250223104326/https://closure-compiler.appspot.com/home)
   - [HTMLMinifier](https://github.com/kangax/html-minifier)
   - [cssnano](https://github.com/cssnano/cssnano)
   - [csso](https://github.com/css/csso)
@@ -414,7 +414,7 @@ AI-Assisted Isomorphic Application Engine
 
 1. 编程技能
 
-   [The Key To Accelerating Your Coding Skills](https://blog.thefirehoseproject.com/posts/learn-to-code-and-be-self-reliant/):
+   [The Key To Accelerating Your Coding Skills](http://web.archive.org/web/20231225173044/http://blog.thefirehoseproject.com/posts/learn-to-code-and-be-self-reliant/):
 
 1. 找到自己的 inflection point of coding，不再别人手把手教我
 2. 对于初学者来说，最重要的就是对细节的关注度，代码的每个错误都会反映在输出结果的错误消息上
@@ -562,7 +562,7 @@ AI-Assisted Isomorphic Application Engine
 1. [JUnit 5 User Guide](https://junit.org/junit5/docs/current/user-guide/)
 2. [You Still Don't Know How to Do Unit Testing](https://stackify.com/unit-testing-basics-best-practices/)
 3. [Unit Testing Best Practices: JUnit Reference Guide](https://dzone.com/articles/unit-testing-best-practices)
-4. [JUnit Best Practices](https://www.kyleblaney.com/junit-best-practices/)
+4. [JUnit Best Practices](http://web.archive.org/web/20220628195631/http://www.kyleblaney.com/junit-best-practices/)
 
 3. 安全防范
 
@@ -826,7 +826,7 @@ AI-Assisted Isomorphic Application Engine
   - [Clean Architecture](https://blog.cleancoder.com/uncle-bob/2012/08/13/the-clean-architecture.html)
   - [The Twelve-Factor App](https://12factor.net/) [中文版](https://12factor.net/zh_cn/)
   - [Avoid Over Engineering](https://medium.com/@rdsubhas/10-modern-software-engineering-mistakes-bc67fbef4fc8)
-  - [Instagram Engineering's 3 rules to a scalable cloud application architecture](https://datastax.medium.com/instagram-engineerings-3-rules-to-a-scalable-cloud-application-architecture-c44afed31406)
+  - [Instagram Engineering's 3 rules to a scalable cloud application architecture](http://web.archive.org/web/20250423021433/https://datastax.medium.com/instagram-engineerings-3-rules-to-a-scalable-cloud-application-architecture-c44afed31406)
   - [How to Design a Good API & Why it Matters](https://www.infoq.com/presentations/effective-api-design/)
   - 关于 Restful API 的设计，你可以学习并借鉴一下下面这些文章
     - [Best Practices for Designing a Pragmatic RESTful API](https://www.vinaysahni.com/best-practices-for-a-pragmatic-restful-api)
@@ -885,7 +885,7 @@ AI-Assisted Isomorphic Application Engine
    几个公司的 CSS 实践：
 
 - [CodePen's CSS](https://codepen.io/chriscoyier/post/codepens-css)
-- [GitHub's CSS](https://markdotto.com/2014/07/23/githubs-css/)
+- [GitHub's CSS](http://web.archive.org/web/20240929034711/https://markdotto.com/2014/07/23/githubs-css/)
 - [Medium's CSS is actually pretty f***ing good.](https://medium.com/@fat/mediums-css-is-actually-pretty-fucking-good-b8e2a6c78b06)
 - [CSS at BBC Sport](https://medium.com/bbc-design-engineering/css-at-bbc-sport-part-1-bab546184e66)
 - [Refining The Way We Structure Our CSS At Trello](https://blog.trello.com/refining-the-way-we-structure-our-css-at-trello)
@@ -998,7 +998,7 @@ AI-Assisted Isomorphic Application Engine
 
    其他：
 
-- [Forget Google and Use These Hosted JavaScript Libraries in China](https://chineseseoshifu.com/blog/china-hosted-javascript-libraries-jquery-dojo-boostrap.html)
+- [Forget Google and Use These Hosted JavaScript Libraries in China](http://web.archive.org/web/20210926194555/https://chineseseoshifu.com/blog/china-hosted-javascript-libraries-jquery-dojo-boostrap.html)
 
 4. 前端框架
 
@@ -1061,7 +1061,7 @@ AI-Assisted Isomorphic Application Engine
 - [Why 43% of Front-End Developers want to learn Vue.js](https://medium.com/vue-mastery/why-43-of-front-end-developers-want-to-learn-vue-js-7f23348bc5be)
 - [Replacing jQuery With Vue.js: No Build Step Necessary](https://www.smashingmagazine.com/2018/02/jquery-vue-javascript/)
 - [10 things I love about Vue](https://medium.com/@dalaidunc/10-things-i-love-about-vue-505886ddaff2)
-- [Vue on 2018 --- Interview with Evan You, author of the Vue.js framework](https://blog.hackages.io/https-blog-hackages-io-evanyoubhack2017-cc5559806157)
+- [Vue on 2018 --- Interview with Evan You, author of the Vue.js framework](http://web.archive.org/web/20200428130140/https://blog.hackages.io/https-blog-hackages-io-evanyoubhack2017-cc5559806157)
 
    1）入门
 
@@ -1081,7 +1081,7 @@ AI-Assisted Isomorphic Application Engine
 
 5. UI/UX 设计
 
-  - [7 steps to become a UI/UX designer](https://blog.nicolesaidy.com/7-steps-to-become-a-ui-ux-designer-8beed7639a95)
+  - 7 steps to become a UI/UX designer
   - Don't Make Me Think
   - Simple and Usable Web,Mobile,and Interaction Design
   - Designing with the Mind in Mind: Simple Guide to Understanding User Interface Design Rules
@@ -1120,7 +1120,7 @@ AI-Assisted Isomorphic Application Engine
    2）[Material Design](https://material.io/)
 
 - Material Design 于 2014 年的 [Google I/O 大会](https://www.youtube.com/watch?v=97SWYiRtF0Y) 上发布
-- [Comparison of Material Design implementations](https://en.wikipedia.org/wiki/Comparison_of_Material_Design_implementations)
+- Comparison of Material Design implementations
 - 可供使用的 Material UI 的工程实现
   - [Material Design Lite](https://getmdl.io/)
   - [Materialize](https://materializecss.com/)
@@ -1141,7 +1141,7 @@ AI-Assisted Isomorphic Application Engine
 - 动画设计指南和相关文章
   - [6 Animation Guidelines for UX Design](https://blog.prototypr.io/6-animation-guidelines-for-ux-design-74c90eb5e47a)
   - [Designing Interface Animation](https://alistapart.com/article/designing-interface-animation/)
-  - [Animation principles in motion design](https://www.freepik.com/blog/animation-principles-in-motion-design/)
+  - Animation principles in motion design
   - [Creating Usability with Motion: The UX in Motion Manifesto](https://medium.com/ux-in-motion/creating-usability-with-motion-the-ux-in-motion-manifesto-a87a4584ddc)
   - [Integrating Animation into a Design System](https://alistapart.com/article/integrating-animation-into-a-design-system/)
   - Great UI/UX Animations 是设计师丹尼尔（Daniel）收集的一些很不错的动画
@@ -1170,7 +1170,7 @@ AI-Assisted Isomorphic Application Engine
 ### 论文
 #### 如何读
 - [How to Read an Academic Article](https://organizationsandmarkets.com/2010/08/31/how-to-read-an-academic-article/)
-- [Advice on Reading Academic Papers](https://www.cc.gatech.edu/~akmassey/posts/2012-02-15-advice-on-reading-academic-papers.html)
+- [Advice on Reading Academic Papers](http://web.archive.org/web/20190607193338/https://www.cc.gatech.edu/~akmassey/posts/2012-02-15-advice-on-reading-academic-papers.html)
 - [How to read and understand a scientific paper: a guide for non-scientists](https://violentmetaphors.com/2013/08/25/how-to-read-and-understand-a-scientific-paper-2/)
 - [Should I read papers?](https://michaelrbernste.in/2014/10/21/should-i-read-papers.html)
 - [The Refreshingly Rewarding Realm of Research Papers](https://www.youtube.com/watch?v=8eRx5Wo3xYA)
@@ -1209,7 +1209,7 @@ AI-Assisted Isomorphic Application Engine
 
 1. C 语言
 
-  - [NASA C Style](https://mechatronics.me.wisc.edu/labresources/DataSheets/NASA-GSFC_C_Programming_Styles-94-003.pdf)
+  - [NASA C Style](http://web.archive.org/web/20230607090224/https://mechatronics.me.wisc.edu/labresources/DataSheets/NASA-GSFC_C_Programming_Styles-94-003.pdf)
   - [C Coding Standard](https://users.ece.cmu.edu/~eno/coding/CCodingStandard.html)
   - [C Programming/Structure and style](https://en.wikibooks.org/wiki/C_Programming/Structure_and_style)
   - [Linux kernel coding style](https://www.kernel.org/doc/html/latest/process/coding-style.html)
@@ -1263,7 +1263,7 @@ AI-Assisted Isomorphic Application Engine
 9. Rust 语言
 
   - [Rust Style Guidelines](https://doc.rust-lang.org/1.0.0/style/)
-  - [Rust Style Guide](https://github.com/rust-dev-tools/fmt-rfcs/blob/master/guide/guide.md)
+  - [Rust Style Guide](http://web.archive.org/web/20221018134053/https://github.com/rust-dev-tools/fmt-rfcs/blob/master/guide/guide.md)
 
 10. Scala 语言
 
@@ -1336,7 +1336,7 @@ AI-Assisted Isomorphic Application Engine
 
 2. JSON
 
-  - [Google JSON Style Guide](https://google.github.io/styleguide/jsoncstyleguide.xml)
+  - [Google JSON Style Guide](http://web.archive.org/web/20260809115400/https://google.github.io/styleguide/jsoncstyleguide.xml)
   - [JSON Style Guide](https://web.archive.org/web/20170806104701/http://www.w3resource.com:80/slides/json-style-guide.php)
 
 3. Git 相关
@@ -1351,7 +1351,7 @@ AI-Assisted Isomorphic Application Engine
 
 ### Linux 系统、内存和网络
 #### Linux 系统相关
-- [Product Documentation for Red Hat Enterprise Linux 9.0 Beta](https://access.redhat.com/documentation/en-us/red_hat_enterprise_linux/9-beta)
+- [Product Documentation for Red Hat Enterprise Linux 9.0 Beta](http://web.archive.org/web/20221106082001/https://access.redhat.com/documentation/en-us/red_hat_enterprise_linux/9-beta)
 - [linux-insides](https://github.com/0xAX/linux-insides)
 - [Kernel index](https://lwn.net/Kernel/Index/)
 - [Learn Linux Kernel from Android Perspective](https://learnlinuxconcepts.blogspot.com/2014/10/this-blog-is-to-help-those-students-and.html)
@@ -1525,7 +1525,7 @@ Lock-Free - 无锁技术越来越被开发人员重视，因为锁对于性能�
 #### 其他：
 - [All about 64-bit programming in one place](https://www.variadic.xyz/2011/08/15/all-about-64-bit-programming-in-one-place/)
 - [What Scalable Programs Need from Transactional Memory](https://dl.acm.org/doi/10.1145/3093336.3037750)
-- [Improving OpenSSL Performance](https://www.intel.com/content/dam/develop/external/us/en/documents/open-ssl-performance-paper-393156.pdf)
+- [Improving OpenSSL Performance](http://web.archive.org/web/20221106081949/https://www.intel.com/content/dam/develop/external/us/en/documents/open-ssl-performance-paper-393156.pdf)
 - 关于压缩的内容
   - [How eBay's Shopping Cart used compression techniques to solve network I/O bottlenecks](https://tech.ebayinc.com/engineering/how-ebays-shopping-cart-used-compression-techniques-to-solve-network-io-bottlenecks/)
   - [Boosting Site Speed Using Brotli Compression](https://engineering.linkedin.com/blog/2017/05/boosting-site-speed-using-brotli-compression)，LinkedIn 在 2017 年早些时候开始使用 Brotli 来替换 gzip，以此带来更快的访问，这篇文章讲述了什么是 [Brotli](https://en.wikipedia.org/wiki/Brotli) 以及与其它压缩程序的比较和所带来的性能提升
@@ -1599,9 +1599,9 @@ NoSQL 数据库千奇百怪，其主要是解决了关系型数据库中的各�
 - [MySQL 索引背后的数据结构及算法原理](https://blog.codinglabs.org/articles/theory-of-mysql-index.html)
 - [Some study on database storage internals](https://kousiknath.medium.com/data-structures-database-storage-internals-1f5ed3619d43)
 - [Sharding Pinterest: How we scaled our MySQL fleet](https://medium.com/pinterest-engineering/sharding-pinterest-how-we-scaled-our-mysql-fleet-3f341e96ca6f)
-- [Guide to MySQL High Availability](https://www.mysql.com/why-mysql/white-papers/mysql-guide-to-high-availability-solutions/)
+- Guide to MySQL High Availability
 - [Choosing MySQL High Availability Solutions](https://dzone.com/articles/choosing-mysql-high-availability-solutions)
-- [MARIADB ENTERPRISE: HIGH AVAILABILITY GUIDE](https://mariadb.com/wp-content/uploads/2019/04/mariadb-platform-high-availability-guide_whitepaper_1001.pdf)
+- [MARIADB ENTERPRISE: HIGH AVAILABILITY GUIDE](http://web.archive.org/web/20240304103049/https://mariadb.com/wp-content/uploads/2019/04/mariadb-platform-high-availability-guide_whitepaper_1001.pdf)
 - [Awesome MySQL](https://shlomi-noach.github.io/awesome-mysql/)
 
 MySQL 有两个比较有名的分支，一个是 Percona，另一个是 MariaDB，其官网上的 Resources 页面中有很多不错的资源和文档，可以经常看看。[Percona Resources](https://www.percona.com/resources)、[MariaDB Resources](https://mariadb.com/resources/)，以及它们的开发博客中也有很多不错的文章，分别为 [Percona Blog](https://www.percona.com/blog/) 和 [MariaDB Blog](https://mariadb.com/resources/blog/)。
@@ -1610,7 +1610,7 @@ MySQL 有两个比较有名的分支，一个是 Percona，另一个是 MariaDB�
 
 - [Booking.com: Evolution of MySQL System Design](https://silo.tips/download/bookingcom-evolution-of-mysql-system-design-nicolai-plum)，Booking.com 的 MySQL 数据库使用的演化，其中有很多不错的经验分享，我相信也是很多公司会遇到的的问题
 - [Tracking the Money - Scaling Financial Reporting at Airbnb](https://medium.com/airbnb-engineering/tracking-the-money-scaling-financial-reporting-at-airbnb-6d742b80f040)，Airbnb 的数据库扩展的经验分享
-- [Why Uber Engineering Switched from Postgres to MySQL](https://eng.uber.com/postgres-to-mysql-migration/)，无意比较两个数据库谁好谁不好，推荐这篇 Uber 的长文，主要是想让你从中学习到一些经验和技术细节，这是一篇很不错的文章
+- Why Uber Engineering Switched from Postgres to MySQL，无意比较两个数据库谁好谁不好，推荐这篇 Uber 的长文，主要是想让你从中学习到一些经验和技术细节，这是一篇很不错的文章
 
 关于 MySQL 的集群复制，下面有这些文章供你学习一下，都是很不错的实践性比较强的文章。
 
@@ -1633,7 +1633,7 @@ MySQL 有两个比较有名的分支，一个是 Percona，另一个是 MariaDB�
 然后，再看看各个公司做 MySQL Sharding 的一些经验分享。
 
 - MailChimp: Using Shards to Accommodate Millions of Users
-- [Uber: Code Migration in Production: Rewriting the Sharding Layer of Uber's Schemaless Datastore](https://eng.uber.com/schemaless-rewrite/)
+- [Uber: Code Migration in Production: Rewriting the Sharding Layer of Uber's Schemaless Datastore](http://web.archive.org/web/20220721034256/https://eng.uber.com/schemaless-rewrite/)
 - [Sharding & IDs at Instagram](https://instagram-engineering.com/sharding-ids-at-instagram-1cf5a71e5a5c)
 - [Airbnb: How We Partitioned Airbnb's Main Database in Two Weeks](https://medium.com/airbnb-engineering/how-we-partitioned-airbnb-s-main-database-in-two-weeks-55f7e006ff21)
 
@@ -1681,7 +1681,7 @@ MySQL 有两个比较有名的分支，一个是 Percona，另一个是 MariaDB�
 - 当然，你也可以看看官方的 [The Apache HBase™ Reference Guide](https://hbase.apache.org/book.html)
 - 另外两个列数据库：
   - [ClickHouse - fast open-source OLAP DBMS](https://clickhouse.com/)
-  - [Scaling Redshift without Scaling Costs at GIPHY](https://engineering.giphy.com/scaling-redshift-without-scaling-costs/)
+  - Scaling Redshift without Scaling Costs at GIPHY
 
 2. 文档数据库 Document Database - MongoDB, SimpleDB, CouchDB
 
@@ -1790,7 +1790,7 @@ Docker 有下面几种网络解决方案：[Calico](https://www.tigera.io/blog/d
 
 - [Best Practices for Dockerfile](https://docs.docker.com/develop/develop-images/dockerfile_best-practices/)，Docker 官方文档里的 Dockerfile 的最佳实践。
 - [Docker Best Practices](https://github.com/FuriKuri/docker-best-practices)，这里收集汇总了存在于各个地方的使用 Docker 的建议和实践。
-- [Container Best Practices](http://docs.projectatomic.io/container-best-practices/)，来自 Atomic 项目，是一个介绍容器化应用程序的架构、创建和管理的协作型文档项目。
+- [Container Best Practices](http://web.archive.org/web/20230822224237/http://docs.projectatomic.io/container-best-practices/)，来自 Atomic 项目，是一个介绍容器化应用程序的架构、创建和管理的协作型文档项目。
 - [Eight Docker Development Patterns](https://hokstad.com/docker/patterns)，八个 Docker 的开发模式：共享基础容器、共享同一个卷的多个开发容器、开发工具专用容器、测试环境容器、编译构建容器、防手误的安装容器、默认服务容器、胶黏容器（如英文链接不能访问，可阅读 [中文版本](https://www.infoq.cn/article/2014/10/seven-docker-develop-pattern)）。
 
 #### Kubernetes
@@ -1812,7 +1812,7 @@ Kubernetes 发展非常迅速，已经成为容器编排领域的领导者。
 
 学习 Kubernetes，有两个免费的开源电子书。
 
-- 《[Kubernetes Handbook](https://jimmysong.io/kubernetes-handbook/)》，这本书记录了作者从零开始学习和使用 Kubernetes 的心路历程，着重于经验分享和总结，同时也会有相关的概念解析。希望能够帮助你少踩坑，少走弯路，还会指引你关注 kubernetes 生态周边，如微服务构建、DevOps、大数据应用、Service Mesh、Cloud Native 等领域。
+- 《[Kubernetes Handbook](http://web.archive.org/web/20240324140926/https://jimmysong.io/kubernetes-handbook/)》，这本书记录了作者从零开始学习和使用 Kubernetes 的心路历程，着重于经验分享和总结，同时也会有相关的概念解析。希望能够帮助你少踩坑，少走弯路，还会指引你关注 kubernetes 生态周边，如微服务构建、DevOps、大数据应用、Service Mesh、Cloud Native 等领域。
 - 《[Kubernetes 指南](https://kubernetes.feisky.xyz/)》，这本书旨在整理平时在开发和使用 Kubernetes 时的参考指南和实践总结，形成一个系统化的参考指南以方便查阅。
 
 这两本电子书都不错，前者更像是一本学习教程，而且面明显广一些，还包括 Cloud Natvie、Service Mesh 以及微服务相关的东西。而后者聚焦于 Kubernetes 本身，更像一本参考书。
@@ -1825,7 +1825,7 @@ Kubernetes 发展非常迅速，已经成为容器编排领域的领导者。
 
 一些交互式教程
 
-- [Katacoda](https://www.katacoda.com/courses/kubernetes)
+- [Katacoda](http://web.archive.org/web/20220604053258/https://katacoda.com/courses/kubernetes)
 - [Kubernetes Bootcamp](https://kubernetesbootcamp.github.io/kubernetes-bootcamp/)
 
 一些文章
@@ -1854,7 +1854,7 @@ Kubernetes 发展非常迅速，已经成为容器编排领域的领导者。
 CI/CD 相关的文章
 
 - [Automated Image Builds with Jenkins, Packer, and Kubernetes](https://cloud.google.com/architecture/automated-build-images-with-jenkins-kubernetes#kubernetes_architecture)
-- [Jenkins setups for Kubernetes and Docker Workflow](http://iocanel.com/2015/09/jenkins-setups-for-kubernetes-and-docker-workflow/)
+- [Jenkins setups for Kubernetes and Docker Workflow](http://web.archive.org/web/20200414140654/http://iocanel.com/2015/09/jenkins-setups-for-kubernetes-and-docker-workflow/)
 - [Lab: Build a Continuous Deployment Pipeline with Jenkins and Kubernetes](https://github.com/GoogleCloudPlatform/continuous-deployment-on-kubernetes)
 
 1. 最佳实践

@@ -88,5 +88,5 @@ CSS 属性的重要性优先级（从普通到最重要）：
   - [Webkit](https://trac.webkit.org/browser/trunk/Source/WebCore/css/html.css)
 
 4. Selectors Explained <https://kittygiraudel.github.io/selectors-explained/>
-5. [The CSS Cascade](https://wattenberger.com/blog/css-cascade)
+5. [The CSS Cascade](http://web.archive.org/web/20230427004132/https://wattenberger.com/blog/css-cascade)
 6. [Cascade and inheritance - Learn web development | MDN](https://developer.mozilla.org/en-US/docs/Learn/CSS/Building_blocks/Cascade_and_inheritance)

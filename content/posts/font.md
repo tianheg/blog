@@ -76,7 +76,7 @@ old-style figures
 figures 更合适一些。
 
 ### 进一步阅读
-由 Typography Deconstructed 制作的 英文字体结构表（[点击下载](https://typedecon.com/collections/frontpage/products/digital-download-free)）。
+由 Typography Deconstructed 制作的 英文字体结构表（[点击下载](http://web.archive.org/web/20231003034828/https://typedecon.com/collections/frontpage/products/digital-download-free)）。
 
 如果你想深度了解西文字体，可以阅读这本《西文字体：字体的背景知识和使用方法》。
 

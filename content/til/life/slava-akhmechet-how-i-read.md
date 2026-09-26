@@ -5,7 +5,7 @@ date: 2025-06-15T19:22:54+08:00
 header: Lifestyle
 ---
 
-<https://www.spakhm.com/p/how-i-read>
+<http://web.archive.org/web/20231129024857/https://www.spakhm.com/p/how-i-read>
 
 每天阅读 40 页，一年就能阅读 20 本书。
 

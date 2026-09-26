@@ -11,7 +11,7 @@ tags: ['技术']
 
 refer
 
-- [Essential Go - a free Go programming book](https://www.programming-books.io/essential/go/)
+- [Essential Go - a free Go programming book](http://web.archive.org/web/20260728175316/https://www.programming-books.io/essential/go/)
 - [The Little Go Book](https://www.openmymind.net/The-Little-Go-Book/)
 - https://github.com/quii/learn-go-with-tests
 - [The Go Programming Language](https://go.dev/)

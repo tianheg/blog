@@ -16,6 +16,6 @@ tags: ['技术']
 后两项设置使得 1.6rem 相当于 16px。
 
 Demo
-在[这里](https://csszengarden.tianheg.xyz/days/first-30-days/4/)。
+在[这里](http://web.archive.org/web/20220816140551/https://csszengarden.tianheg.xyz/days/first-30-days/4/)。
 
 这一次很简单，想让自己放松些，前一次的内容很多，有点消化不完。

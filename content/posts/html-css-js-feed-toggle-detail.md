@@ -6,7 +6,7 @@ tags: ['技术']
 
 我的信息源网站，用到了
 [&lt;details&gt;](https://developer.mozilla.org/en-US/docs/Web/HTML/Element/details)
-标签，当文章很多的时候，一个一个点击展开收缩很费劲，所以设计了一个按钮，来简化这个过程。（[源码](https://github.com/tianheg/feed)）
+标签，当文章很多的时候，一个一个点击展开收缩很费劲，所以设计了一个按钮，来简化这个过程。（[源码](http://web.archive.org/web/20260319193637/https://github.com/tianheg/feed)）
 
 用到 @antfu 提供的图标网站 [Icones](https://icones.js.org/)，关于 DOM
 操作和位置样式布局的一些知识。

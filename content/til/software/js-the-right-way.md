@@ -39,7 +39,7 @@ Functions in JavaScript are first class objects. This means that JavaScript func
 
 ### 松散类型 Loose Typing
 
-For many front-end developers, JavaScript was their first taste of a scripting and/or interpretive language. To these developers, the concept and implications of loosely typed variables may be second nature. However, the explosive growth in demand for modern web applications has resulted in a growing number of back-end developers that have had to dip their feet into the pool of client-side technologies. Many of these developers are coming from a background of strongly typed languages, such as C# or Java, and are unfamiliar with both the freedom and the potential pitfalls involved in working with loosely typed variables. Source: [Understanding Loose Typing in JavaScript](http://blog.jeremymartin.name/2008/03/understanding-loose-typing-in.html)
+For many front-end developers, JavaScript was their first taste of a scripting and/or interpretive language. To these developers, the concept and implications of loosely typed variables may be second nature. However, the explosive growth in demand for modern web applications has resulted in a growing number of back-end developers that have had to dip their feet into the pool of client-side technologies. Many of these developers are coming from a background of strongly typed languages, such as C# or Java, and are unfamiliar with both the freedom and the potential pitfalls involved in working with loosely typed variables. Source: [Understanding Loose Typing in JavaScript](http://web.archive.org/web/20260314184815/http://blog.jeremymartin.name/2008/03/understanding-loose-typing-in.html)
 
 ### 作用域和（变量）提升 Scoping and Hoisting
 
@@ -90,39 +90,39 @@ _这种模式被称为自动执行的匿名函数，but @cowboy (<http://twitter
 
 ## Design Patterns
 
-虽然 JS 包含很多独属于自己的设计模式，但也能实现很多经典设计模式。学习资源是 Addy Osmani 的开源书籍 [Learning JavaScript Design Patterns](https://www.patterns.dev/posts/classic-design-patterns/)
+虽然 JS 包含很多独属于自己的设计模式，但也能实现很多经典设计模式。学习资源是 Addy Osmani 的开源书籍 [Learning JavaScript Design Patterns](http://web.archive.org/web/20230224014858/https://www.patterns.dev/posts/classic-design-patterns/)
 
 创建型设计模式 Creational Design Patterns：
 
-- [工厂模式 Factory](https://www.patterns.dev/posts/classic-design-patterns/#factorypatternjavascript)
-- [原型 Prototype](https://www.patterns.dev/posts/classic-design-patterns/#prototypepatternjavascript)
-- [混合 Mixin](https://www.patterns.dev/posts/classic-design-patterns/#mixinpatternjavascript)
-- [单例 Singleton](https://www.patterns.dev/posts/classic-design-patterns/#singletonpatternjavascript)
+- [工厂模式 Factory](http://web.archive.org/web/20230224014858/https://www.patterns.dev/posts/classic-design-patterns/)
+- [原型 Prototype](http://web.archive.org/web/20230224014858/https://www.patterns.dev/posts/classic-design-patterns/)
+- [混合 Mixin](http://web.archive.org/web/20230224014858/https://www.patterns.dev/posts/classic-design-patterns/)
+- [单例 Singleton](http://web.archive.org/web/20230224014858/https://www.patterns.dev/posts/classic-design-patterns/)
 
 结构型设计模式 Structural Design Patterns：
 
-- [Adapter](https://www.patterns.dev/posts/classic-design-patterns/#wrapperpatternjquery)
+- [Adapter](http://web.archive.org/web/20230224014858/https://www.patterns.dev/posts/classic-design-patterns/)
 - [Bridge](https://www.joezimjs.com/javascript/javascript-design-patterns-bridge/)
-- [Composite](https://www.patterns.dev/posts/classic-design-patterns/#compositepatternjquery)，https://www.joezimjs.com/javascript/javascript-design-patterns-composite/
-- [Decorator](https://www.patterns.dev/posts/classic-design-patterns/#decoratorpatternjavascript)
-- [Facade](https://www.patterns.dev/posts/classic-design-patterns/#facadepatternjavascript)
-- [Flyweight](https://www.patterns.dev/posts/classic-design-patterns/#detailflyweight)
-- [Module](https://www.patterns.dev/posts/classic-design-patterns/#modulepatternjavascript)
-- [Proxy](https://www.patterns.dev/posts/classic-design-patterns/#proxypatternjquery)，https://www.joezimjs.com/javascript/javascript-design-patterns-proxy/
-- [Revealing Module](https://www.patterns.dev/posts/classic-design-patterns/#revealingmodulepatternjavascript)
+- [Composite](http://web.archive.org/web/20230224014858/https://www.patterns.dev/posts/classic-design-patterns/)，https://www.joezimjs.com/javascript/javascript-design-patterns-composite/
+- [Decorator](http://web.archive.org/web/20230224014858/https://www.patterns.dev/posts/classic-design-patterns/)
+- [Facade](http://web.archive.org/web/20230224014858/https://www.patterns.dev/posts/classic-design-patterns/)
+- [Flyweight](http://web.archive.org/web/20230224014858/https://www.patterns.dev/posts/classic-design-patterns/)
+- [Module](http://web.archive.org/web/20230224014858/https://www.patterns.dev/posts/classic-design-patterns/)
+- Proxy，https://www.joezimjs.com/javascript/javascript-design-patterns-proxy/
+- [Revealing Module](http://web.archive.org/web/20230224014858/https://www.patterns.dev/posts/classic-design-patterns/)
 
 行为设计模式 Behavioral Design Patterns：
 
 - [Chain of Responsibility](https://www.joezimjs.com/javascript/javascript-design-patterns-chain-of-responsibility/)
-- [Command](https://www.patterns.dev/posts/classic-design-patterns/#commandpatternjavascript)
-- [Mediator](https://www.patterns.dev/posts/classic-design-patterns/#mediatorpatternjavascript)
-- [Observer](https://www.patterns.dev/posts/classic-design-patterns/#observerpatternjavascript)
+- [Command](http://web.archive.org/web/20230224014858/https://www.patterns.dev/posts/classic-design-patterns/)
+- [Mediator](http://web.archive.org/web/20230224014858/https://www.patterns.dev/posts/classic-design-patterns/)
+- [Observer](http://web.archive.org/web/20230224014858/https://www.patterns.dev/posts/classic-design-patterns/)
 
 MV\* Patterns：
 
-- [MVC Pattern](https://www.patterns.dev/posts/classic-design-patterns/#detailmvc)
-- [MVP Pattern](https://www.patterns.dev/posts/classic-design-patterns/#detailmvp)
-- [MVVM Pattern](https://www.patterns.dev/posts/classic-design-patterns/#detailmvvm)
+- MVC Pattern
+- [MVP Pattern](http://web.archive.org/web/20230224014858/https://www.patterns.dev/posts/classic-design-patterns/)
+- [MVVM Pattern](http://web.archive.org/web/20230224014858/https://www.patterns.dev/posts/classic-design-patterns/)
 
 ## Testing Tools
 

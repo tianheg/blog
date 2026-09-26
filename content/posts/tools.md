@@ -39,7 +39,7 @@ sudo systemctl restart docker
 ### Git
 #### Gitea
 https://github.com/go-gitea/gitea
-https://gitea.io/en-us/
+http://web.archive.org/web/20230618104144/https://gitea.io/en-us/
 ##### 安装
 
 ### 科学上网
@@ -64,7 +64,7 @@ magick convert input.png -transparent white -background white -flatten output.sv
 ### 文件的压缩与解压缩
 https://wiki.archlinux.org/title/Archiving_and_compression
 ### Misc
-- [google webfonts helper](https://google-webfonts-helper.herokuapp.com/fonts)
+- [google webfonts helper](http://web.archive.org/web/20221122185851/https://google-webfonts-helper.herokuapp.com/fonts)
 - 为去不同的国家准备 SIM 卡 https://prepaid-data-sim-card.fandom.com/wiki/Prepaid_SIM_with_data
 ## 音乐
 - https://github.com/navidrome/navidrome

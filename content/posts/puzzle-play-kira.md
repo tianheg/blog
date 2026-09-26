@@ -4,7 +4,7 @@ date: 2022-05-01
 tags: ['随笔']
 ---
 
-拼图链接：<https://vlad.studio/puzzle/kira>
+拼图链接：<http://web.archive.org/web/20260320032231/https://vlad.studio/puzzle/kira>
 
 拼图的过程中，我感到内心的平静。
 

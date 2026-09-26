@@ -5,7 +5,7 @@ date: 2022-02-09T20:38:02+08:00
 ---
 
 1. https://mp.weixin.qq.com/s/PcvVYxerhO4DAlrnDNzsOQ
-2. https://sites.google.com/view/efratfurst/learning-in-the-brain
+2. http://web.archive.org/web/20240917021810/https://sites.google.com/view/efratfurst/learning-in-the-brain
 
 真正的知识体系在脑海中。
 

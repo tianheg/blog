@@ -5,7 +5,7 @@ date: 2025-06-15T19:22:54+08:00
 header: Finance
 ---
 
-https://caminodetexas.substack.com/p/ae3
+http://web.archive.org/web/20240219035515/https://caminodetexas.substack.com/p/ae3
 
 "The greed of ignorance will destroy the wealth accumulated by this generation of Chinese people."
 

@@ -9,7 +9,7 @@ header: DevOps
 
 OneDrive
 
-<https://foxlesbiao.github.io/p/onedrive-linux/> <https://archlinux.org/packages/community/x86_64/rclone/> <https://rclone.org/onedrive/> <https://github.com/kapitainsky/RcloneBrowser>
+<https://foxlesbiao.github.io/p/onedrive-linux/> <http://web.archive.org/web/20230222035318/https://archlinux.org/packages/community/x86_64/rclone/> <https://rclone.org/onedrive/> <https://github.com/kapitainsky/RcloneBrowser>
 
 坚果云
 

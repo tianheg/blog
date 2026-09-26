@@ -26,9 +26,9 @@ tags: ['技术']
 
 需要一个限定条件：如果生成文本失败就不上传了。如果不这样做会出现一个问题：如果同一张图片前一次生成成功、这一次生成失败，会使得原有的文本被移除。在实现的时候遇到一个 BUG——执行代码无法停止。
 
-- 第一次修改（[40b7a92](https://github.com/tianheg/img/commit/40b7a929a5b9a3803819115da10b6bb78d464f94)）：使用了 `data.result.description` 进行过滤，后来通过日志发现 `data.success` 更简洁。
-- 第二次修改（[2d62d50](https://github.com/tianheg/img/commit/2d62d5057876720b8fe369b627ff5de73711d5c5)）：这次修改了很多内容，这一步的修改导致了代码执行陷入死循环，经过排查发现是在处理图片时期约无法停止造成的。
-- 第三次修改（[0184d83](https://github.com/tianheg/img/commit/0184d83fef579adc6c7e472004553250e85efbf8)）：在这一步里对 `processImagesConcurrently` 函数进行了调整。
+- 第一次修改（[40b7a92](http://web.archive.org/web/20240516083403/https://github.com/tianheg/img/commit/40b7a929a5b9a3803819115da10b6bb78d464f94)）：使用了 `data.result.description` 进行过滤，后来通过日志发现 `data.success` 更简洁。
+- 第二次修改（[2d62d50](http://web.archive.org/web/20240516083417/https://github.com/tianheg/img/commit/2d62d5057876720b8fe369b627ff5de73711d5c5)）：这次修改了很多内容，这一步的修改导致了代码执行陷入死循环，经过排查发现是在处理图片时期约无法停止造成的。
+- 第三次修改（[0184d83](http://web.archive.org/web/20240516083159/https://github.com/tianheg/img/commit/0184d83fef579adc6c7e472004553250e85efbf8)）：在这一步里对 `processImagesConcurrently` 函数进行了调整。
 
 另一个实现方法，使用 [xenova/transformers.js](https://github.com/xenova/transformers.js)：
 
@@ -52,4 +52,4 @@ console.log(output);
 
 ---
 
-代码仓库在[GitHub](https://github.com/tianheg/img)。网址也在那里。
+代码仓库在[GitHub](http://web.archive.org/web/20250706142130/https://github.com/tianheg/img)。网址也在那里。
