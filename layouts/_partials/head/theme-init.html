@@ -1,0 +1,15 @@
+{{/* 主题初始化 —— 必须在首帧前执行，所以放在 <head> 靠前处（不能等 main.ts）。
+     默认跟随系统偏好；用户手选后写 localStorage，之后不再看系统。
+     只做一件事：给 <html> 打 .dark/.light —— `dark:` 变体与 color-scheme
+     （进而 light-dark() 那套 token）都认它，两套机制才能一起切。 */}}
+<script>
+  (function () {
+    var r = document.documentElement;
+    var stored = null;
+    try { stored = localStorage.getItem("theme"); } catch (e) {}
+    var dark = stored ? stored === "dark" : window.matchMedia("(prefers-color-scheme: dark)").matches;
+    r.classList.toggle("dark", dark);
+    r.classList.toggle("light", !dark);
+    r.dataset.theme = dark ? "dark" : "light";
+  })();
+</script>

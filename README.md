@@ -316,7 +316,9 @@ hover = 实色 `currentColor`。此前是「静止无下划线、只在 `prose-a
 
 两个坑（2026-09-20 踩过）：
 
-1. `layouts/baseof.html` 的 `<body>` 上曾有 `lg:prose-sm` —— ≥1024px 把 prose 基准从 16px 压到 **14px**，
+1. `layouts/baseof.html` 的 `<body>` 上曾挂过 typography 的大屏小号档（`lg:` 前缀 + `prose` 的 small 变体，
+   写法上不要连着写类名 —— Tailwind 会扫描 .md，把文档里出现的类名当成候选类真去生成 CSS）——
+   ≥1024px 把 prose 基准从 16px 压到 **14px**，
    于是**桌面比手机还小**，且中文一行 52 字（舒适区 25–35）。动字号先查这一行
 2. prose 的标题是 **em** 换算：改基准会连带动 h1/h2（14 → 16 时桌面 h1 30 → 36、h2 20 → 24）。
    只想动正文就在容器上显式写 `prose-h1:text-[30px]`，别指望标题不动

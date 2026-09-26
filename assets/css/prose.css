@@ -15,10 +15,13 @@
    2) 表格里的代码块继承 prose-pre 的横向留白，在窄单元格里溢出
       （表格侧的处理在 table.css） */
 
+/* 不需要 !important：typography 的 `.prose :where(pre):not(:where([class~=not-prose]…))`
+   里那个 :not(:where()) 特异性为 0，与本规则同为 (0,1,0)，而本文件在 main.css 之后加载
+   → 源顺序胜出（2026-09-26 实测：浅色 #282a36 / 暗色 #21222c 都正确） */
 .prose :where(pre) {
-  background-color: #282a36 !important; /* 与 Chroma dracula 一致，消除两种风格 */
-  color: #f8f8f2 !important;
-  border: 1px solid #383a4a !important;
+  background-color: light-dark(#282a36, #21222c); /* 与 Chroma dracula 一致；暗色再深一档保持层次 */
+  color: #f8f8f2;
+  border: 1px solid light-dark(#383a4a, #343746);
   border-radius: 0.5rem;
   padding: 0.875rem 1rem;
   font-size: 0.875rem;
@@ -50,14 +53,6 @@
   border-radius: 0.25rem;
   font-size: 0.875em;
   font-weight: 400;
-}
-
-/* 暗色模式下页面本身已深，代码块再深一档以保持层次 */
-@media (prefers-color-scheme: dark) {
-  .prose :where(pre) {
-    background-color: #21222c !important;
-    border-color: #343746 !important;
-  }
 }
 
 /* ── 正文链接：常驻淡下划线 + hover 加浓（2026-09-20）─────────────────

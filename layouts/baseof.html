@@ -15,6 +15,7 @@
   <!-- Color scheme support for light/dark mode -->
   <!-- https://web.dev/color-scheme/ -->
   <meta name="color-scheme" content="light dark">
+  {{- partial "head/theme-init.html" . -}}
   <!-- Responsive Web Design -->
   <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover"/>
   <!-- Avoid Automatic Format Detection -->
@@ -41,7 +42,6 @@
   <link rel="manifest" href="/manifest.webmanifest"/>
   <!-- Preload fonts to reduce FOUT (flash of unstyled text) -->
   <link rel="preload" href="/fonts/Satoshi-Variable.woff2" as="font" type="font/woff2" crossorigin="anonymous">
-  <link rel="preload" href="/fonts/Satoshi-VariableItalic.woff2" as="font" type="font/woff2" crossorigin="anonymous">
   {{ with .OutputFormats.Get "SectionsRSS" -}}
     <link rel="{{ .Rel }}" type="{{ .MediaType }}" href="{{ .Permalink }}" title="{{ $.Site.Title }}"/>
   {{ end }}
@@ -103,7 +103,7 @@
   {{- if and .Page.File (eq .Page.File.Path "about.md") }}</div>{{ end }}
 
   {{- if and .Page.File (eq .Page.File.Path "about.md") }}
-  <canvas id="glass-output" aria-hidden="true" style="position: fixed; inset: 0; width: 100vw; height: 100vh; pointer-events: none; z-index: 9999;"></canvas>
+  <canvas id="glass-output" aria-hidden="true" class="glass-output"></canvas>
   {{- end }}
 
   <!-- Scripts (exclude 404 page) -->
