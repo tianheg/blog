@@ -82,6 +82,19 @@ python3 scripts/epub/build_epub.py -o ~/book.epub --title "天河的博客" --su
 - 年份扉页的 id 形如 `year-2018`（无日期文章归 `year-undated`），nav 重排靠 `year-\d{4}` 识别分组边界
 - 实测：9 个年份分组（2018–2026），最大嵌套深度 2，961 篇文章各归其年
 
+## 链接标识
+
+目录与正文里的链接都用同一套标识：**链接色 + 常驻淡下划线**（1px，`text-underline-offset` 0.18–0.2em）。
+
+| 位置 | 线色 | 说明 |
+|------|------|------|
+| 正文链接 | `rgba(ink, 0.4)` | 常驻，不依赖 hover |
+| 目录：文章条目 | `rgba(ink, 0.28)` | 目录条目密，淡一点不噪 |
+| 目录：年份条目 | `rgba(ink, 0.5)` + `font-weight: 600` | 顺带做层级区分 |
+
+理由同站点（`prose.css` 的常驻下划线）：低彩度配色下只看颜色认不出链接，触屏设备更没有 hover 提示。
+脚注引用（`role="doc-noteref"`）与回跳（`role="doc-backlink"`）显式关掉下划线 —— 那是注标，不是正文链接。
+
 ## 验收标准（DoD，6 条全过才算完成）
 
 1. 校验器 **0 error**
@@ -99,7 +112,7 @@ unzip -p book.epub EPUB/content.opf | grep -c itemref         # spine 条目数
 unzip -p book.epub EPUB/nav.xhtml | head -40                  # 目录（应有 epub:type="toc"）
 unzip -p book.epub EPUB/content.opf | grep -o 'properties="nav"'   # 导航文档标记
 unzip -p book.epub EPUB/content.opf | sed -n '/<metadata/,/<\/metadata>/p'   # 元信息
-unzip -p book.epub EPUB/nav.xhtml | grep -c '<li><span>'      # 年份分组条目数
+unzip -p book.epub EPUB/nav.xhtml | grep -c 'year-[0-9]*</a>'  # 年份链接条目数（= 有文章的年数）
 ```
 
 ## 排障
@@ -142,3 +155,4 @@ unzip -p book.epub EPUB/nav.xhtml | grep -c '<li><span>'      # 年份分组条�
 10. **不要用两端对齐**：`text-align: justify` 叠加中文标点压缩会让行尾标点与下一个字重叠（实测反馈），正文用 `left` + `text-spacing-trim: space-all`
 11. **书名里的 `{#…}` 残留**：源里有 `### 01 {#01} {#section}` 这种双属性块叠加时 goldmark 只认最后一个，`{#01}` 会留在标题文字里——脚本在合并阶段清掉
 12. **改 nav 结构要动正则**：重排依赖 `<ol class="toc">` 这个 class 与 `<li><a href="…">标题</a></li>` 的朴素形态；pandoc 换版本后先 `unzip -p book.epub EPUB/nav.xhtml | head -20` 看一眼再改
+13. **CSS 里暗色覆盖必须写在浅色规则之后**：同特异性时后写的赢。目录链接的暗色线色一开始加在文件上部（第 200 行左右），被 400 多行的浅色规则盖掉——实测 `textDecorationColor` 仍是浅色值。改样式后用 `getComputedStyle` 在明暗两种 `prefers-color-scheme` 下各验一遍

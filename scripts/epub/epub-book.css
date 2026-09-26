@@ -72,8 +72,8 @@ body {
 	   justify 叠加中文标点压缩会把行尾标点挤到与下一个字重叠（实测反馈） */
 	text-align: left;
 	padding: 0 3%;
-	widows: 2;
-	orphans: 2;
+	widows: 3;
+	orphans: 3;
 	hyphens: none;
 	-webkit-hyphens: none;
 	-epub-hyphens: none;
@@ -439,9 +439,35 @@ nav[epub|type~="toc"] li {
 	font-size: 0.92em;
 }
 
+/* 目录里的链接也要认得出可点：常驻淡下划线 + 链接色（与正文链接同一套做法） */
 nav[epub|type~="toc"] a {
-	color: inherit;
-	text-decoration: none;
+	color: var(--link);
+	text-decoration-line: underline;
+	text-decoration-color: rgba(61, 91, 122, 0.28);
+	text-decoration-thickness: 1px;
+	text-underline-offset: 0.18em;
+}
+
+/* 第一层是年份：加粗 + 稍浓的下划线，与下一层的文章条目区分开 */
+nav[epub|type~="toc"] > ol > li {
+	margin-top: 0.9em;
+	font-size: 1em;
+}
+
+nav[epub|type~="toc"] > ol > li > a {
+	font-weight: 600;
+	letter-spacing: 0.05em;
+	text-decoration-color: rgba(61, 91, 122, 0.5);
+}
+
+/* 暗色覆盖必须写在这几条之后：同特异性时后写的赢，写前面会被浅色规则盖掉 */
+@media (prefers-color-scheme: dark) {
+	nav[epub|type~="toc"] a {
+		text-decoration-color: rgba(136, 161, 188, 0.28);
+	}
+	nav[epub|type~="toc"] > ol > li > a {
+		text-decoration-color: rgba(136, 161, 188, 0.5);
+	}
 }
 
 nav[epub|type~="toc"] > h1,
