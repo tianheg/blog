@@ -16,7 +16,7 @@ tags: ['技术']
 我需要设置单个 `VIRTUALHOST`
 网站的配置，选择通过文件而不是环境变量设置，后者不够自由，可设置的选项有限。
 
-#### 1 修改 nginx-proxy compose 文件 {#1-修改-nginx-proxy-compose-文件} {#修改-nginx-proxy-compose-文件-1-修改-nginx-proxy-compose-文件}
+#### 1 修改 nginx-proxy compose 文件 {#修改-nginx-proxy-compose-文件-1-修改-nginx-proxy-compose-文件}
 
 =~/nginx-proxy/docker-compose.yml=
 
@@ -28,7 +28,7 @@ tags: ['技术']
     -  vhost:
 ```
 
-#### 2 写入配置 {#2-写入配置} {#写入配置-2-写入配置}
+#### 2 写入配置 {#写入配置-2-写入配置}
 
 ```bash
     sudo mkdir /etc/nginx/vhost.d

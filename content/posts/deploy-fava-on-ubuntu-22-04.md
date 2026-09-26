@@ -9,14 +9,14 @@ tags: ['技术']
 [fava](https://github.com/beancount/fava) 本质是一个 Flask
 应用，所以可以按照 Flask 应用的部署方式来。
 
-### 1. 更新系统环境，并安装依赖 {#1-dot-更新系统环境-并安装依赖} {#更新系统环境并安装依赖-1-dot-更新系统环境-并安装依赖}
+### 1. 更新系统环境，并安装依赖 {#更新系统环境并安装依赖-1-dot-更新系统环境-并安装依赖}
 
 ```bash
     sudo apt update
     sudo apt install python3-pip python3-dev build-essential libssl-dev libffi-dev python3-setuptools python3-venv
 ```
 
-### 2. 创建虚拟环境 {#2-dot-创建虚拟环境} {#创建虚拟环境-2-dot-创建虚拟环境}
+### 2. 创建虚拟环境 {#创建虚拟环境-2-dot-创建虚拟环境}
 
 ```bash
     mkdir ~/fava-site && cd $_
@@ -24,14 +24,14 @@ tags: ['技术']
     . venv/bin/activate
 ```
 
-### 3. 安装 Python 依赖 {#3-dot-安装-python-依赖} {#安装-python-依赖-3-dot-安装-python-依赖}
+### 3. 安装 Python 依赖 {#安装-python-依赖-3-dot-安装-python-依赖}
 
 ```bash
     pip install wheel
     pip install gunicorn fava
 ```
 
-### 4. 配置 fava {#4-dot-配置-fava} {#配置-fava-4-dot-配置-fava}
+### 4. 配置 fava {#配置-fava-4-dot-配置-fava}
 
 ```bash
     vim app.py
@@ -73,7 +73,7 @@ tags: ['技术']
     WantedBy=multi-user.target
 ```
 
-### 5. Nginx 配置反向代理 {#5-dot-nginx-配置反向代理} {#nginx-配置反向代理-5-dot-nginx-配置反向代理}
+### 5. Nginx 配置反向代理 {#nginx-配置反向代理-5-dot-nginx-配置反向代理}
 
 ```bash
     sudo apt update
@@ -115,7 +115,7 @@ socket 文件位于家目录，确保家目录的权限号码至少为
     }
 ```
 
-### 6. 支持 HTTPS {#6-dot-支持-https} {#支持-https-6-dot-支持-https}
+### 6. 支持 HTTPS {#支持-https-6-dot-支持-https}
 
 ```bash
     sudo apt install python3-certbot-nginx

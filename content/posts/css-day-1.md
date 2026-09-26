@@ -159,7 +159,7 @@ keyframe 的名称，一个周期 1.5s，线性变化，时长是无穷。
    能够设置图片大小，寻找半天解决方案，没有合适方便的；想到可以调整图片大小，之后发现这是最佳方案。」
 2. 移动端并不居中，在 meida query 中的 ul 加了 `padding: 0;` 才解决。
 
-#### 1 {#1} {#section}
+#### 1 {#section}
 
 为 checkbox 添加以下样式[^6]。
 
@@ -176,7 +176,7 @@ Android、Safari on iOS，不支持 Firefox for
 Android[^7]，也没必要支持，因为在 Firefox
 桌面端开启手机视图进行触摸测试，没有蓝色方框。
 
-#### 2 {#2} {#section-1}
+#### 2 {#section-1}
 
 发现 Chrome 的 user agent stylesheet 关于 ul 元素有个默认样式：
 `padding-inline-start: 40px;` ，所以才需要 `padding: 0;` 重置一下。
