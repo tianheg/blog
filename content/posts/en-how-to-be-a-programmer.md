@@ -290,4 +290,4 @@ Paul Graham 和 Eric Raymond 都是编程领域最值得我学习的人
 - 着手一个大工程\
 - 发展出自己的风格是自然而有用的（记住：\**设计是一种艺术，而不是一种技术\**）不要武断对待特定的设计风格
 
-&lt;span style="color:var(--dushuji-count-color)"&gt;2025年读完的第45本，总阅读量第45本</span>
+<span style="color:var(--dushuji-count-color)">2025年读完的第45本，总阅读量第45本</span>

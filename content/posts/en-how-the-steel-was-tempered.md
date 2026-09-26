@@ -142,4 +142,4 @@ tags: ['读书记']
 
 音乐的变化，保尔的成长
 
-&lt;span style="color:var(--dushuji-count-color)"&gt;2025年读完的第44本，总阅读量第44本</span>
+<span style="color:var(--dushuji-count-color)">2025年读完的第44本，总阅读量第44本</span>

@@ -112,4 +112,4 @@ tags: ['读书记']
 
 > 中国的哭和拜，什么时候才完呢？
 
-&lt;span style="color:var(--dushuji-count-color)"&gt;2025年读完的第30本，总阅读量第30本</span>
+<span style="color:var(--dushuji-count-color)">2025年读完的第30本，总阅读量第30本</span>

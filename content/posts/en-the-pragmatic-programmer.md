@@ -213,4 +213,4 @@ First, Do No Harm.
 6. 不要在网上侮辱别人\
 7. 在点发送前，检查一下收件人列表
 
-&lt;span style="color:var(--dushuji-count-color)"&gt;2025年读完的第78本，总阅读量第78本</span>
+<span style="color:var(--dushuji-count-color)">2025年读完的第78本，总阅读量第78本</span>

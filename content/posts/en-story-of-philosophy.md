@@ -100,4 +100,4 @@ tags: ['读书记']
 
 哲学最初起源于对于物理世界的好奇，为了探究万物的构成，这种思考方式的终点是德谟克利特的唯物论。
 
-&lt;span style="color:var(--dushuji-count-color)"&gt;2025年读完的第70本，总阅读量第70本</span>
+<span style="color:var(--dushuji-count-color)">2025年读完的第70本，总阅读量第70本</span>

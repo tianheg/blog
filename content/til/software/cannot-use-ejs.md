@@ -1,5 +1,5 @@
 ---
-title: 'Want to use ejs with [cite/t:@fastify/view] on Vercel, always get error: no such file or directory, open ''/var/task/views/index.ejs'''
+title: 'Want to use ejs with fastify/view on Vercel, always get error: no such file or directory, open ''/var/task/views/index.ejs'''
 status: draft
 date: 2025-06-15T19:22:54+08:00
 header: Web

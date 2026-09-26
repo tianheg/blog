@@ -22,4 +22,4 @@ https://www.ruanyifeng.com/blog/2024/06/weekly-issue-303.html
 
 在此时的我看来，需要具体情况具体分析。对于中国来说，目前不太可能实现，以后如果国家主导推动这方面的话，或许会有成效，只依靠大公司的自觉不太可能实现。我感觉这在欧盟的环境下有实现的可能，因为欧盟不怕互联网巨头，互联网巨头需要欧盟的市场，自然受制于它。
 
-&lt;span style="color:var(--dushuji-count-color)"&gt;2025年读完的第72本，总阅读量第72本</span>
+<span style="color:var(--dushuji-count-color)">2025年读完的第72本，总阅读量第72本</span>

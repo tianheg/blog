@@ -22,18 +22,18 @@ header: Programming
 
 ### 语法
 
-- 不要大写标签，包括 doctype（&lt;mark&gt;为什么？</mark>）。
+- 不要大写标签，包括 doctype（<mark>为什么？</mark>）。
 - 使用两个空格的软制表符------这样能保证代码在任何环境下格式都一致。
 - 嵌套元素彼此应缩进一次（两个空格）。
 - 总是在属性上使用双引号。
-- 不要在自闭和标签上加反斜线（`/`）------[HTML5 标准](<https://html.spec.whatwg.org/multipage/syntax.html#start-tags)说这是可选项>。
+- 不要在自闭和标签上加反斜线（`/`）------[HTML5 标准](https://html.spec.whatwg.org/multipage/syntax.html#start-tags)说这是可选项。
 - 不要省略可选的闭合标签（比如，`</li>` 或 `</body>`）。
 
 \`\`\`html <!doctype html> &lt;html&gt; &lt;head&gt; &lt;title&gt;Page Title</title> </head> &lt;body&gt; &lt;img src="images/logo.png" alt="logo"&gt; &lt;h1 class="hello-world"&gt;Hello, World!</h1> </body> </html> \`\`\`
 
 ### HTML5 文档类型
 
-强化[标准模式](<https://developer.mozilla.org/en-US/docs/Web/HTML/Quirks_Mode_and_Standards_Mode)并尽可能在每个浏览器呈现一致的内容。保持小写>。
+强化[标准模式](https://developer.mozilla.org/en-US/docs/Web/HTML/Quirks_Mode_and_Standards_Mode)并尽可能在每个浏览器呈现一致的内容。保持小写。
 
 \`\`\`html <!doctype html> ... \`\`\`
 
@@ -43,7 +43,7 @@ header: Programming
 
 > 网页作者被鼓励添加语言属性，赋予文档语言。这可以帮助语音合成工具选择正确的发音，翻译工具选择正确的语言等等。
 
-可在[标准](<https://html.spec.whatwg.org/multipage/semantics.html#the-html-element)中读到更多关于> `lang` 的内容。在 &lt;abbr title="Internet Assigned Numbers Authority"&gt;IANA</abbr> 可以看到[语言代码列表](https://www.iana.org/assignments/language-subtag-registry/language-subtag-registry)。
+可在[标准](https://html.spec.whatwg.org/multipage/semantics.html#the-html-element)中读到更多关于 `lang` 的内容。在 <abbr title="Internet Assigned Numbers Authority">IANA</abbr> 可以看到[语言代码列表](https://www.iana.org/assignments/language-subtag-registry/language-subtag-registry)。
 
 \`\`\`html &lt;html lang="en"&gt; </html> \`\`\`
 
@@ -202,9 +202,9 @@ root = true
 
 \`\`\`scss .element { color: rgba(255 255 255 / .65); background-color: rgba(0 0 0 / .95); } \`\`\`
 
-### 避免使用 `[cite/t:@import]`
+### 避免使用 `@import`
 
-与 `&lt;link&gt;` 相比，`[cite/t:@import]` 更慢。会增加多余的请求，导致一些意料之外的问题。解决方法：
+与 `<link>` 相比，`@import` 更慢。会增加多余的请求，导致一些意料之外的问题。解决方法：
 
 - 使用 `&lt;link&gt;` 元素
 - 使用 Sass 或 Less 将 CSS 放入一个文件里
@@ -247,7 +247,7 @@ root = true
 
 不应过度使用速记属性。
 
-MDN 的[一篇文章](<https://developer.mozilla.org/en-US/docs/Web/CSS/Shorthand_properties)介绍里使用速记属性可能出现的问题>。
+MDN 的[一篇文章](https://developer.mozilla.org/en-US/docs/Web/CSS/Shorthand_properties)介绍里使用速记属性可能出现的问题。
 
 ### 预处理器中的嵌套
 
@@ -265,7 +265,7 @@ MDN 的[一篇文章](<https://developer.mozilla.org/en-US/docs/Web/CSS/Shorthan
 
 \`\`\`scss // Bad example .elem { margin: 10px 0 @variable*2 10px; }
 
-// Good example .elem { margin: 10px 0 ([cite/t:@variable] * 2) 10px; } ```
+// Good example .elem { margin: 10px 0 (@variable * 2) 10px; } ```
 
 ### 注释
 

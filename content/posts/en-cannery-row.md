@@ -20,4 +20,4 @@ tags: ['读书记']
 
 交界与审视
 
-&lt;span style="color:var(--dushuji-count-color)"&gt;2025年读完的第36本，总阅读量第36本</span>
+<span style="color:var(--dushuji-count-color)">2025年读完的第36本，总阅读量第36本</span>

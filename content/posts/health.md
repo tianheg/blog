@@ -86,8 +86,7 @@ https://uxplanet.org/5-habits-to-become-a-better-ui-ux-designer-2e250e296885
 充足的睡眠能够让大脑充满活力，进而让人更加富有创造力。
 
 > High-Quality Work = Time Spent x Level of focus. --
-> [[https://www.goodreads.com/book/show/25744928-deep-work?ac=1&from_search=true&qid=P3dBIXI75u&rank=1][Deep
-> Work]] by [Cal Newport](https://www.calnewport.com/)
+> [Deep Work](https://www.goodreads.com/book/show/25744928-deep-work?ac=1&from_search=true&qid=P3dBIXI75u&rank=1) by [Cal Newport](https://www.calnewport.com/)
 
 ### 睡眠
 

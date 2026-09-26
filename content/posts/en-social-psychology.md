@@ -39,4 +39,4 @@ tags: ['读书记']
 
 当我们发现某人与我们的态度不一致时，我们就会倾向于减少对这个人的喜欢。
 
-&lt;span style="color:var(--dushuji-count-color)"&gt;2025年读完的第67本，总阅读量第67本</span>
+<span style="color:var(--dushuji-count-color)">2025年读完的第67本，总阅读量第67本</span>

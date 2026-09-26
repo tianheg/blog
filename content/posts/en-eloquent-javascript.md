@@ -690,4 +690,4 @@ console.log(twice(5))
 
 > A useful principle is to refrain from adding cleverness unless you are absolutely sure you’re going to need it. It can be tempting to write general “frameworks” for every bit of functionality you come across. Resist that urge. You won’t get any real work done—you’ll be too busy writing code that you never use.
 
-&lt;span style="color:var(--dushuji-count-color)"&gt;2025年读完的第40本，总阅读量第40本</span>
+<span style="color:var(--dushuji-count-color)">2025年读完的第40本，总阅读量第40本</span>

@@ -42,4 +42,4 @@ tags: ['读书记']
 
 - 《谈美》朱光潜，2011-7，漓江出版社，ISBN：9787540752095
 
-&lt;span style="color:var(--dushuji-count-color)"&gt;2025年读完的第21本，总阅读量第21本</span>
+<span style="color:var(--dushuji-count-color)">2025年读完的第21本，总阅读量第21本</span>

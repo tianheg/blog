@@ -3030,7 +3030,7 @@ const txt = ref('')
 </template>
 ```
 
-别用 `&lt;textarea&gt;{{ txt }}</textarea>`
+别用 `<textarea>{{ txt }}</textarea>`
 
 1.3 Checkbox
 

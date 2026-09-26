@@ -250,4 +250,4 @@ https://www.acquired.fm/episodes/charlie-munger
 ### 查理·芒格推荐书目
 ### 查理·芒格年谱
 
-&lt;span style="color:var(--dushuji-count-color)"&gt;2025年读完的第61本，总阅读量第61本</span>
+<span style="color:var(--dushuji-count-color)">2025年读完的第61本，总阅读量第61本</span>

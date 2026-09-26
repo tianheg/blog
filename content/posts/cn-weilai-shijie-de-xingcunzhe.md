@@ -52,4 +52,4 @@ tags: ['读书记']
 #### 对年轻人的建议
 你要主动接触和学习，那些自己感兴趣的东西。
 
-&lt;span style="color:var(--dushuji-count-color)"&gt;2025年读完的第22本，总阅读量第22本</span>
+<span style="color:var(--dushuji-count-color)">2025年读完的第22本，总阅读量第22本</span>

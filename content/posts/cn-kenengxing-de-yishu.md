@@ -86,4 +86,4 @@ who is nobody, to become somebody, join the evil game
 
 > 恰恰是知识的不确定性，让我们需要在每一个时代、每一个情境中不断重返基本的道德问题和历史经验，用我们自己的头脑思考，并以这种思考成就人之为人的尊严。
 
-&lt;span style="color:var(--dushuji-count-color)"&gt;2025年读完的第12本，总阅读量第12本</span>
+<span style="color:var(--dushuji-count-color)">2025年读完的第12本，总阅读量第12本</span>

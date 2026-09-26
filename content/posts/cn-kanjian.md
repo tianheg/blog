@@ -96,4 +96,4 @@ tags: ['读书记']
 
 最近一直在看《看见》，很震撼，很喜爱，很沉醉。这是一本讲事实的书，记录了柴静的成长经历，语句优美朴实，每一句都蕴含着深刻的道理。
 
-&lt;span style="color:var(--dushuji-count-color)"&gt;2025年读完的第11本，总阅读量第11本</span>
+<span style="color:var(--dushuji-count-color)">2025年读完的第11本，总阅读量第11本</span>

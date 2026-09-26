@@ -27,4 +27,4 @@ tags: ['读书记']
 
 > 那时候我已在内心找到了力量，使我能目睹不幸而漠然处之，克制自己的感情，那时候我已开始懂得目睹破坏和不幸的景象有多么美。
 
-&lt;span style="color:var(--dushuji-count-color)"&gt;2025年读完的第85本，总阅读量第85本</span>
+<span style="color:var(--dushuji-count-color)">2025年读完的第85本，总阅读量第85本</span>

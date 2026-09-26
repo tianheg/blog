@@ -19,4 +19,4 @@ man.
 
 如果不能和你谈星星和月亮，那只能和你谈股票和女人。
 
-&lt;span style="color:var(--dushuji-count-color)"&gt;2025年读完的第77本，总阅读量第77本</span>
+<span style="color:var(--dushuji-count-color)">2025年读完的第77本，总阅读量第77本</span>

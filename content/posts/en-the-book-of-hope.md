@@ -78,4 +78,4 @@ tags: ['读书记']
 
 ◆ 我们应该感恩自然惊人的韧性。我们也可以去帮助大自然恢复，不仅仅是通过大型生态修复项目，我们个人所选择的生活方式和对环境足迹的考量，都是让大自然得以恢复的强大力量
 
-&lt;span style="color:var(--dushuji-count-color)"&gt;2025年读完的第74本，总阅读量第74本</span>
+<span style="color:var(--dushuji-count-color)">2025年读完的第74本，总阅读量第74本</span>

@@ -119,4 +119,4 @@ tags: ['读书记']
 
 她的时间无限漫长，他渐渐老去，彼此永远不能在一起。
 
-&lt;span style="color:var(--dushuji-count-color)"&gt;2025年读完的第49本，总阅读量第49本</span>
+<span style="color:var(--dushuji-count-color)">2025年读完的第49本，总阅读量第49本</span>

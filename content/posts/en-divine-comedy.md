@@ -251,4 +251,4 @@ zhuàng zhí
 
 -- 来自微信读书
 
-&lt;span style="color:var(--dushuji-count-color)"&gt;2025年读完的第38本，总阅读量第38本</span>
+<span style="color:var(--dushuji-count-color)">2025年读完的第38本，总阅读量第38本</span>

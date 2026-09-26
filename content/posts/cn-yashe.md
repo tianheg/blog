@@ -18,4 +18,4 @@ tags: ['读书记']
 >
 > ——哑舍Ⅲ·后记
 
-&lt;span style="color:var(--dushuji-count-color)"&gt;2025年读完的第27本，总阅读量第27本</span>
+<span style="color:var(--dushuji-count-color)">2025年读完的第27本，总阅读量第27本</span>

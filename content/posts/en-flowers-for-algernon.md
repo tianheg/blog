@@ -20,4 +20,4 @@ tags: ['读书记']
 
 希冀自己被社会吞噬后还能保持自我，还能 **思考** ，还能 **向往** 。
 
-&lt;span style="color:var(--dushuji-count-color)"&gt;2025年读完的第42本，总阅读量第42本</span>
+<span style="color:var(--dushuji-count-color)">2025年读完的第42本，总阅读量第42本</span>

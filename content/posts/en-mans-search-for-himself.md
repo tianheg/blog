@@ -23,4 +23,4 @@ tags: ['读书记']
 #### 第七章 勇气，成熟的美德
 #### 第八章 人，时间的超越者
 
-&lt;span style="color:var(--dushuji-count-color)"&gt;2025年读完的第54本，总阅读量第54本</span>
+<span style="color:var(--dushuji-count-color)">2025年读完的第54本，总阅读量第54本</span>

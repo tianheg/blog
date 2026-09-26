@@ -117,4 +117,4 @@ Jean Piaget 将儿童0~18个月的发展界定为感觉运动期。此时期语�
 
 总而言之，Piaget 通过末章总结指出：儿童心智成长不是简单的线性累积，而是通过三个相对稳定的阶段不断重构与超越；理解这些阶段及其转换机制，是教育与心理评估的关键。
 
-&lt;span style="color:var(--dushuji-count-color)"&gt;2025年读完的第79本，总阅读量第79本</span>
+<span style="color:var(--dushuji-count-color)">2025年读完的第79本，总阅读量第79本</span>

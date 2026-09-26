@@ -46,4 +46,4 @@ tags: ['读书记']
 
 - [Ode à l'Oubli](https://www.moma.org/s/lb/collection_lb/objbytag/objbytag_tag-vo98440_sov.html) by Louise Bourgeois
 
-&lt;span style="color:var(--dushuji-count-color)"&gt;2025年读完的第8本，总阅读量第8本</span>
+<span style="color:var(--dushuji-count-color)">2025年读完的第8本，总阅读量第8本</span>

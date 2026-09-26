@@ -7,7 +7,7 @@ header: Tools
 
 想搜：
 
-1、[cite/t:@dotey老师内容]
+1、@dotey 老师内容
 
 2、点赞超过 20 的
 

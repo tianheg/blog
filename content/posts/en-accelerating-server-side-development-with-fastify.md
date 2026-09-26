@@ -63,4 +63,4 @@ app.initialConfig
 
 ### Type-Safe Fastify
 
-&lt;span style="color:var(--dushuji-count-color)"&gt;2025年读完的第31本，总阅读量第31本</span>
+<span style="color:var(--dushuji-count-color)">2025年读完的第31本，总阅读量第31本</span>

@@ -51,4 +51,4 @@ tags: ['读书记']
 
 文后记：记不得上一次因为看书而振奋是什么时候了，心中一直有某种期待，渴望那种颤动我灵魂的书籍。所以，我遇到了。
 
-&lt;span style="color:var(--dushuji-count-color)"&gt;2025年读完的第26本，总阅读量第26本</span>
+<span style="color:var(--dushuji-count-color)">2025年读完的第26本，总阅读量第26本</span>

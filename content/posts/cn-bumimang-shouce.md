@@ -180,4 +180,4 @@ tags: ['读书记']
 
 **谁的青春不迷茫，其实我们都一样。**
 
-&lt;span style="color:var(--dushuji-count-color)"&gt;2025年读完的第3本，总阅读量第3本</span>
+<span style="color:var(--dushuji-count-color)">2025年读完的第3本，总阅读量第3本</span>

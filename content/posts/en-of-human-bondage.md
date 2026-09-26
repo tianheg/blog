@@ -18,4 +18,4 @@ tags: ['读书记']
 
 如菲利普所说，读过的书里很多都是无价值、无意义的，但是只要有一点对自己有启发，这本书对我来说就是有用的。
 
-&lt;span style="color:var(--dushuji-count-color)"&gt;2025年读完的第57本，总阅读量第57本</span>
+<span style="color:var(--dushuji-count-color)">2025年读完的第57本，总阅读量第57本</span>

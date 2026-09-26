@@ -45,4 +45,4 @@ tags: ['读书记']
 1. [《高效能人士的七个习惯》------微信阅读](https://weread.qq.com/web/reader/56d325907203e8a856def7fkc81322c012c81e728d9d180)
 2. <https://lightcss.com/gtd-personal-productivity-and-7-habits/>
 
-&lt;span style="color:var(--dushuji-count-color)"&gt;2025年读完的第73本，总阅读量第73本</span>
+<span style="color:var(--dushuji-count-color)">2025年读完的第73本，总阅读量第73本</span>

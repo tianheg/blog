@@ -104,4 +104,4 @@ tags: ['读书记']
 
 寡欲
 
-&lt;span style="color:var(--dushuji-count-color)"&gt;2025年读完的第24本，总阅读量第24本</span>
+<span style="color:var(--dushuji-count-color)">2025年读完的第24本，总阅读量第24本</span>

@@ -39,4 +39,4 @@ int main(int argc, char *argv[])
 }
 ```
 
-&lt;span style="color:var(--dushuji-count-color)"&gt;2025年读完的第59本，总阅读量第59本</span>
+<span style="color:var(--dushuji-count-color)">2025年读完的第59本，总阅读量第59本</span>

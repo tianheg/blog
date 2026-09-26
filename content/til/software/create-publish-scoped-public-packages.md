@@ -8,9 +8,9 @@ header: Web
 - <https://docs.npmjs.com/creating-and-publishing-scoped-public-packages>
 - <https://docs.npmjs.com/creating-and-publishing-unscoped-public-packages>
 
-有用户名（[cite/t:@tianheg/package]）
+有用户名（@tianheg/package）
 
-\`\`\`bash npm login npm init --scope=[cite/t:@tianheg] touch README.md
+\`\`\`bash npm login npm init --scope=@tianheg touch README.md
 
 npm install /path/to/package
 

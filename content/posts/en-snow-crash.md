@@ -76,4 +76,4 @@ tags: ['读书记']
 
 这句话太有趣了
 
-&lt;span style="color:var(--dushuji-count-color)"&gt;2025年读完的第66本，总阅读量第66本</span>
+<span style="color:var(--dushuji-count-color)">2025年读完的第66本，总阅读量第66本</span>

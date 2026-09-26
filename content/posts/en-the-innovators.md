@@ -14,4 +14,4 @@ https://en.wikipedia.org/wiki/The_Innovators_(book)
 
 让思想碰撞出令人惊艳的火花
 
-&lt;span style="color:var(--dushuji-count-color)"&gt;2025年读完的第76本，总阅读量第76本</span>
+<span style="color:var(--dushuji-count-color)">2025年读完的第76本，总阅读量第76本</span>

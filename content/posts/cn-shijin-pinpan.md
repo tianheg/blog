@@ -21,4 +21,4 @@ tags: ['读书记']
 
 这句写普陀宗乘之庙，庙的山门像城楼一样巍峨耸立，走进山门里的景色也格外壮观，感觉康乾时期的中国真是国富力强。
 
-&lt;span style="color:var(--dushuji-count-color)"&gt;2025年读完的第20本，总阅读量第20本</span>
+<span style="color:var(--dushuji-count-color)">2025年读完的第20本，总阅读量第20本</span>

@@ -133,4 +133,4 @@ tags: ['读书记']
 
 我愿意把自己看成什么身份呢
 
-&lt;span style="color:var(--dushuji-count-color)"&gt;2025年读完的第28本，总阅读量第28本</span>
+<span style="color:var(--dushuji-count-color)">2025年读完的第28本，总阅读量第28本</span>

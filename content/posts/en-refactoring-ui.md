@@ -91,4 +91,4 @@ Similarly, two font weights are usually enough for UI work:
 
 但这样并不是我们想要的。我们只需要Amy，不需要Name，这造成了重复。需要通过一定的设计规避掉。
 
-&lt;span style="color:var(--dushuji-count-color)"&gt;2025年读完的第64本，总阅读量第64本</span>
+<span style="color:var(--dushuji-count-color)">2025年读完的第64本，总阅读量第64本</span>

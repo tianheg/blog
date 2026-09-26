@@ -64,7 +64,7 @@ $wgDefaultUserOptions['visualeditor-editor'] = "visualeditor"; ```
 
 把 `127.0.0.1` 改成 `localhost` 也不行。
 
-在[这里](<https://www.mediawiki.org/wiki/Extension:VisualEditor#Troubleshooting)找到相关错误解释>。
+在[这里](https://www.mediawiki.org/wiki/Extension:VisualEditor#Troubleshooting)找到相关错误解释。
 
 \`\`\` Error contacting the Parsoid/RESTBase server (curl error: 7) Couldn't connect to server
 

@@ -6,4 +6,4 @@ tags: ['读书记']
 
 在读中。
 
-&lt;span style="color:var(--dushuji-count-color)"&gt;2025年读完的第1本，总阅读量第1本</span>
+<span style="color:var(--dushuji-count-color)">2025年读完的第1本，总阅读量第1本</span>

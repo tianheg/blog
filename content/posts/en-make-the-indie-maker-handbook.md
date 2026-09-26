@@ -58,4 +58,4 @@ https://readmake.com/
 
   讲道德。
 
-&lt;span style="color:var(--dushuji-count-color)"&gt;2025年读完的第52本，总阅读量第52本</span>
+<span style="color:var(--dushuji-count-color)">2025年读完的第52本，总阅读量第52本</span>

@@ -141,4 +141,4 @@ tags: ['读书记']
 
 人是最复杂的动物，，他们的心里最难揣摩，并不是仅凭一本书就能够解决的。不过，阅读这本书让我了解到一些心理学上的研究，对以后的深入有帮助。
 
-&lt;span style="color:var(--dushuji-count-color)"&gt;2025年读完的第53本，总阅读量第53本</span>
+<span style="color:var(--dushuji-count-color)">2025年读完的第53本，总阅读量第53本</span>

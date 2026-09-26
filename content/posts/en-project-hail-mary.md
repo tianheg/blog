@@ -30,4 +30,4 @@ tags: ['读书记']
 
 相信不久的将来会被搬上银幕。
 
-&lt;span style="color:var(--dushuji-count-color)"&gt;2025年读完的第62本，总阅读量第62本</span>
+<span style="color:var(--dushuji-count-color)">2025年读完的第62本，总阅读量第62本</span>

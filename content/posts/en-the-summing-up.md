@@ -100,4 +100,4 @@ tags: ['读书记']
 
 这也是我一直在寻找的东西。
 
-&lt;span style="color:var(--dushuji-count-color)"&gt;2025年读完的第81本，总阅读量第81本</span>
+<span style="color:var(--dushuji-count-color)">2025年读完的第81本，总阅读量第81本</span>

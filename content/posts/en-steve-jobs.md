@@ -257,4 +257,4 @@ tags: ['读书记']
 > details）和“少即是多”（Less is
 > more）。正如埃奇勒的房屋一样，艺术性和大规模生产的能力结合到了一起。
 
-&lt;span style="color:var(--dushuji-count-color)"&gt;2025年读完的第69本，总阅读量第69本</span>
+<span style="color:var(--dushuji-count-color)">2025年读完的第69本，总阅读量第69本</span>

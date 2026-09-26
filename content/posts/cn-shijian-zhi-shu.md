@@ -53,4 +53,4 @@ tags: ['读书记']
 
 这句话让我感觉到恶心，这民族自豪感也太强烈了些吧！
 
-&lt;span style="color:var(--dushuji-count-color)"&gt;2025年读完的第19本，总阅读量第19本</span>
+<span style="color:var(--dushuji-count-color)">2025年读完的第19本，总阅读量第19本</span>

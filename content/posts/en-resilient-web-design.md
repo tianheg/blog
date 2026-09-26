@@ -458,4 +458,4 @@ Web 不是一个平台，是多平台的，是跨平台的。
 >
 > The future, like the web, will be written by you.
 
-&lt;span style="color:var(--dushuji-count-color)"&gt;2025年读完的第65本，总阅读量第65本</span>
+<span style="color:var(--dushuji-count-color)">2025年读完的第65本，总阅读量第65本</span>
