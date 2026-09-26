@@ -9,11 +9,16 @@ header: Linux
 
 更改当前用户 Shell
 
-\`\`\`bash chsh -s /bin/zsh echo $SHELL \`\`\`
+```bash
+chsh -s /bin/zsh
+echo $SHELL
+```
 
 列出所有 Shell
 
-\`\`\`bash chsh -l \`\`\`
+```bash
+chsh -l
+```
 
 ## `useradd`
 
@@ -21,7 +26,10 @@ header: Linux
 
 来源: [ArchWiki: Users and groups](https://wiki.archlinux.org/title/Users_and_groups)
 
-\`\`\`bash useradd -m example passwd example \`\`\`
+```bash
+useradd -m example
+passwd example
+```
 
 ## `adduser`
 

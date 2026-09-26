@@ -79,7 +79,10 @@ Perl 具有浓烈的文档文化，我们鼓励你早日养成此习惯。你将
 
 ### 引号与（非）内插字符串
 
-\`\`\`perl print 'You may have won $1,000,000'; print "You may have won \$1,000,000"; \`\`\`
+```perl
+print 'You may have won $1,000,000';
+print "You may have won \$1,000,000";
+```
 
 ### 在字符串中使用 Email 地址要小心
 

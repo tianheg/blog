@@ -17,27 +17,30 @@ yay -S act act
 
 ## 使用
 
-\`\`\`bash
+```bash
 
-act [&lt;event&gt;] [options] If no event name passed, will default to "on: push"
+act [<event>] [options] If no event name passed, will default to "on: push"
 
 act -l
 
-act workflow<sub>dispatch</sub> -l
+act workflow_dispatch -l
 
 act
 
-act pull<sub>request</sub>
+act pull_request
 
 act -j test
 
 act -n
 
-act -v ```
+act -v
+```
 
 在 GitHub 上运行 Actions 时，`GITHUB<sub>TOKEN</sub>` 是自动生成的，本地运行则需要添加：
 
-\`\`\`bash act -s GITHUB<sub>TOKEN</sub>=[insert token or leave blank for secure input] \`\`\`
+```bash
+act -s GITHUB_TOKEN=[insert token or leave blank for secure input]
+```
 
 
 相关：[[git-use-dura|git-use-dura]]

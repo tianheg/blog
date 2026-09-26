@@ -22,7 +22,7 @@ tags: ['技术']
    脚本，要确保脚本可执行（ `chmod +x ~/org/publish.sh` ）
 2. 日志输出到 `/home/$USER/cron.log`
 
-=~/org/publish.sh= 内容：
+`~/org/publish.sh` 内容：
 
 ```bash
     #!/bin/bash

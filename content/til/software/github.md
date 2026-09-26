@@ -32,15 +32,15 @@ To import a GPG public key and set permissions, you can follow these steps:
 
 4. Import the GPG public key by running the following command:
 
-`gpg --import &lt;keyfile&gt;`
+`gpg --import <keyfile>`
 
-Replace `&lt;keyfile&gt;` with the name of the GPG public key file you obtained. This command will import the key into your GPG keyring.
+Replace `<keyfile>` with the name of the GPG public key file you obtained. This command will import the key into your GPG keyring.
 
 1. Set the appropriate permissions for the imported key by running the following command:
 
-`gpg --edit-key &lt;keyID&gt;`
+`gpg --edit-key <keyID>`
 
-Replace `&lt;keyID&gt;` with the ID or email associated with the imported key. This command will open the GPG key editor.
+Replace `<keyID>` with the ID or email associated with the imported key. This command will open the GPG key editor.
 
 1. In the GPG key editor, enter the command `trust` to change the trust level of the key.
 

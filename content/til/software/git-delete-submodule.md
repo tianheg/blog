@@ -9,7 +9,12 @@ header: Git
 
 仓库中只有一个子模块：
 
-\`\`\`bash git rm <path-to-submodule> rm .gitmodules rm -rf .git/modules git config --remove-section submodule.<path-to-submodule> \`\`\`
+```bash
+git rm <path-to-submodule>
+rm .gitmodules
+rm -rf .git/modules
+git config --remove-section submodule.<path-to-submodule>
+```
 
 
 相关：[[git-submodule-update|git-submodule-update]]

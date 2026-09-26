@@ -156,7 +156,7 @@ header: Web
          const state = reactive({ count: 0 )}
 ```
 
-1. 使用 `&lt;script setup&gt;` 与否的对比
+1. 使用 `<script setup>` 与否的对比
 
 ```html
             <!--- 不使用 --->
@@ -632,7 +632,7 @@ header: Web
 
       v-else 必须和 v-if/v-else-if 搭配使用
 
-      v-show 所在元素会被渲染成 DOM 树；v-show 只是在切换 CSS display 属性；不支持用在 `&lt;template&gt;` ，也不和 v-else 搭配使用。
+      v-show 所在元素会被渲染成 DOM 树；v-show 只是在切换 CSS display 属性；不支持用在 `<template>` ，也不和 v-else 搭配使用。
 
 ```html
       <button @click="awe = !awe">Toggle</button>
@@ -729,7 +729,7 @@ header: Web
       </template>
 ```
 
-1. v-for on `&lt;template&gt;`
+1. v-for on `<template>`
 
 ```html
       <script setup>
@@ -791,7 +791,7 @@ header: Web
       </template>
 ```
 
-      当使用 `&lt;template v-for&gt;` 时，key 应位于 `&lt;template&gt;` 容器。
+      当使用 `<template v-for>` 时，key 应位于 `<template>` 容器。
 
 ```html
       <template v-for="todo in todos" :key="todo.name">

@@ -140,17 +140,17 @@ button {
 
 ## 笔记
 
-`&lt;iframe&gt;`
+`<iframe>`
 
 frameborder 属性已被弃用，用 CSS 属性 border 替代；
 
 cellspacing 属性已被弃用，用 CSS 属性 border-spacing 替代。
 
-`&lt;input type="file"&gt;`
+`<input type="file">`
 
 通过 accept 属性，指定可接受的文件类型，格式 `accept=".pdf"` 。
 
-`&lt;script src="" type="module"&gt;`
+`<script src="" type="module">`
 
 使用 module 类型的 JS 语法。
 

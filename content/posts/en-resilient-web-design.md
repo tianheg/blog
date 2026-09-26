@@ -88,7 +88,7 @@ HTML 是基于 SGML 的。
 
 大多数 HTML 标签是有着语义含义的。A 标签有着最了不起的超能力——连接网页。
 
-早期的 HTML 标签有很多样式标签，在语义上没什么含义，比如 `&lt;big&gt;`, `&lt;small&gt;`。
+早期的 HTML 标签有很多样式标签，在语义上没什么含义，比如 `<big>`, `<small>`。
 
 #### matter of style
 
@@ -99,7 +99,7 @@ Håkon Wium Lie 提出了 Cascading Style Sheets。
 一些人没等到 CSS 出现，转而使用另外的方法实现样式：
 
 - 长宽都是 1px 的透明 GIF 图片
-- `&lt;table&gt;`
+- `<table>`
 
 #### browser wars
 
@@ -364,7 +364,7 @@ Web 不是一个平台，是多平台的，是跨平台的。
 
 第二步，确定如何实现核心功能。
 
-分享通过 URL 就能做到。写作和编辑，可以通过 HTML 元素 `&lt;textarea&gt;`。
+分享通过 URL 就能做到。写作和编辑，可以通过 HTML 元素 `<textarea>`。
 
 第三步，增强。
 

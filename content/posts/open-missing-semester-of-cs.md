@@ -289,7 +289,7 @@ Vim 有几种模式：
    screen)
 - Scroll: `Ctrl-u` (up), `Ctrl-d` (down)
 - File: `gg` (beginning of file), `G` (end of file)
-- Line numbers: `:{number}&lt;CR&gt;` or `{number}G` (line {number})
+- Line numbers: `:{number}<CR>` or `{number}G` (line {number})
 - Misc: `%` (corresponding item)
 - Find: `f{character}`, `t{character}`, `F{character}`, `T{character}`
 
@@ -335,7 +335,7 @@ Can use movement keys to make selection.
 - `u` to undo, `<C-r>` to redo
 - `y` to copy / “yank” (some other commands like `d` also copy)
 - `p` to paste
-- Lots more to learn: e.g. =~= flips the case of a character
+- Lots more to learn: e.g. `~` flips the case of a character
 
 #### 计数
 
@@ -521,8 +521,8 @@ are `i`, which means “inner” or “inside”, and `a`, which means “around
 - Use sed / regexes
 
   - `g/people/d`
-  - `%s/&lt;person&gt;/{/g`
-  - `%s/&lt;name&gt;\(.*\)<\/name>/"name": "\1",/g`
+  - `%s/<person>/{/g`
+  - `%s/<name>\(.*\)<\/name>/"name": "\1",/g`
   - ...
 
 - Vim commands / macros
@@ -530,17 +530,17 @@ are `i`, which means “inner” or “inside”, and `a`, which means “around
   - `Gdd`, `ggdd` delete first and last lines
   - Macro to format a single element (register `e`)
 
-    - Go to line with `&lt;name&gt;`
-    - `qe^r"f>s": "&lt;ESC&gt;f<C"&lt;ESC&gt;q`
+    - Go to line with `<name>`
+    - `qe^r"f>s": "<ESC>f<C"<ESC>q`
 
   - Macro to format a person
 
-    - Go to line with `&lt;person&gt;`
-    - `qpS{&lt;ESC&gt;j@eA,&lt;ESC&gt;j@ejS},&lt;ESC&gt;q`
+    - Go to line with `<person>`
+    - `qpS{<ESC>j@eA,<ESC>j@ejS},<ESC>q`
 
   - Macro to format a person and go to the next person
 
-    - Go to line with `&lt;person&gt;`
+    - Go to line with `<person>`
     - `qq@pjq`
 
   - Execute macro until end of file
@@ -652,7 +652,7 @@ Lesson 6.5: SET OPTION `/ignore` 搜索 ignore `:set ic` 'ic'(Ignore case)
 `:set hls is` 'hlsearch' 'incsearch' `:set noic` 关闭 Ignore case
 `:nohlsearch` `/ignore\c` 仅一次 Ignore case
 
-Lesson 7.1: GETTING HELP `&lt;HELP&gt;` ，`&lt;F1&gt;` 按键，`:help` CTRL-W CTRL-W
+Lesson 7.1: GETTING HELP `<HELP>` ，`<F1>` 按键，`:help` CTRL-W CTRL-W
 跳到另一个窗口 `:q` 退出当前窗口
 
 Lesson 7.2: CREATE A STARTUP SCRIPT `:e ~/.vimrc` ->
@@ -660,7 +660,7 @@ Lesson 7.2: CREATE A STARTUP SCRIPT `:e ~/.vimrc` ->
 
 Lesson 7.3: COMPLETION `:set nocp` -> `:!ls` -> `:e` -> CTRL-D
 
-2. Download our [basic vimrc](https://missing.csail.mit.edu/2020/files/vimrc) and save it to =~/.vimrc=. Read through the well-commented
+2. Download our [basic vimrc](https://missing.csail.mit.edu/2020/files/vimrc) and save it to `~/.vimrc`. Read through the well-commented
    file (using Vim!), and observe how Vim looks and behaves slightly
    differently with the new config.
 3. Install and configure a plugin:
@@ -677,7 +677,7 @@ Lesson 7.3: COMPLETION `:set nocp` -> `:!ls` -> `:e` -> CTRL-D
       to start `:CtrlP`.
 4. Customize CtrlP by adding
       [configuration](https://github.com/ctrlpvim/ctrlp.vim/blob/master/readme.md#basic-options)
-      to your =~/.vimrc= to open CtrlP by pressing Ctrl-P.
+      to your `~/.vimrc` to open CtrlP by pressing Ctrl-P.
 
 4. To practice using Vim, re-do the
    [Demo](https://missing.csail.mit.edu/2020/editors/#demo) from
@@ -688,7 +688,7 @@ Lesson 7.3: COMPLETION `:set nocp` -> `:!ls` -> `:e` -> CTRL-D
    come to office hours or send us an email.
 6. Configure your other tools to use Vim bindings (see instructions
    above).
-7. Further customize your =~/.vimrc= and install more plugins.
+7. Further customize your `~/.vimrc` and install more plugins.
 8. (Advanced) Convert XML to JSON
    ([example file](https://missing.csail.mit.edu/2020/files/example-data.xml)) using Vim macros. Try to do this on your own, but you can
    look at the

@@ -11,11 +11,25 @@ header: Web
 
 .prettierrc:
 
-\`\`\`text { "$schema": "<https://json.schemastore.org/prettierrc>", "tabWidth": 2, "semi": false, "singleQuote": true, "trailingComma": "all", "endOfLine": "lf" } \`\`\`
+```text
+{
+"$schema": "<https://json.schemastore.org/prettierrc>",
+"tabWidth": 2,
+"semi": false,
+"singleQuote": true,
+"trailingComma": "all",
+"endOfLine": "lf"
+}
+```
 
 .prettierignore:
 
-\`\`\`text .cache package.json package-lock.json public \`\`\`
+```text
+.cache
+package.json
+package-lock.json
+public
+```
 
 ## 安装配置
 

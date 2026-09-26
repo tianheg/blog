@@ -7,4 +7,7 @@ header: Linux
 
 ## *.gz
 
-\`\`\`bash gzip file # 压缩 gzip -d file.gz # 解压缩 \`\`\`
+```bash
+gzip file # 压缩
+gzip -d file.gz # 解压缩
+```

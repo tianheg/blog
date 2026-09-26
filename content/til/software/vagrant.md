@@ -7,13 +7,19 @@ header: DevOps
 
 ## 安装
 
-\`\`\`bash pacman -S vagrant \`\`\`
+```bash
+pacman -S vagrant
+```
 
 ## 两个 Vagrantfile 文件
 
 ### Pure cli archlinux
 
-\`\`\`text Vagrant.configure("2") do |config| config.vm.box = "archlinux/archlinux" end \`\`\`
+```text
+Vagrant.configure("2") do |config|
+config.vm.box = "archlinux/archlinux"
+end
+```
 
 ### Archlinux with GUI
 

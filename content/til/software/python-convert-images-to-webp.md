@@ -9,25 +9,43 @@ header: Programming
 - <https://stackoverflow.com/a/47655463>
 - <https://stackoverflow.com/a/57158589>
 
-\`\`\`bash mkdir pytowebp && cd $_ python -m venv venv --upgrade-deps . venv/env/activate (venv) pip install Pillow (venv) emacs main.py \`\`\`
+```bash
+mkdir pytowebp && cd $_
+python -m venv venv --upgrade-deps
+. venv/env/activate
+(venv) pip install Pillow
+(venv) emacs main.py
+```
 
 main.py:
 
-\`\`\`py from pathlib import Path from PIL import Image
+```py
+from pathlib import Path
+from PIL import Image
 
-def convert<sub>towebp</sub>(source): """Convert image to webp.
+def convert_towebp(source):
+"""Convert image to webp.
 
 Args: source (pathlib.Path): Path to source image
 
-Returns: pathlib.Path: path to new image """ destination = source.with<sub>suffix</sub>(".webp")
+Returns: pathlib.Path: path to new image
+"""
+destination = source.with_suffix(".webp")
 
-image = Image.open(source) # Open image image.save(destination, format="webp") # Convert image to webp
+image = Image.open(source) # Open image
+image.save(destination, format="webp") # Convert image to webp
 
 return destination
 
-def main(): all<sub>filespath<*sub> = Path(".").glob(r"****") for single<sub>file</sub> in all<sub>filespath</sub>: if single<sub>file</sub>.suffix in {".png", ".jpg", ".jpeg"}: # PurePath.suffix 查询文件扩展名 webp<sub>path</sub> = convert<sub>towebp</sub>(single<sub>file</sub>) print(webp<sub>path</sub>)
+def main():
+all_filespath = Path(".").glob(r"****")
+for single_file in all_filespath:
+if single_file.suffix in {".png", ".jpg", ".jpeg"}: # PurePath.suffix 查询文件扩展名
+webp_path = convert_towebp(single_file)
+print(webp_path)
 
-main() ```
+main()
+```
 
 最难的部分是同时找到包含 `{".png", ".jpg", ".jpeg"}` 三种后缀的文件。
 

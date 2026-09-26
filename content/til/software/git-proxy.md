@@ -5,7 +5,10 @@ date: 2025-06-15T19:22:54+08:00
 header: Git
 ---
 
-\`\`\`bash git config --global http.proxy <http://><proxy-server>:&lt;port&gt;/ git config --global https.proxy <https://><proxy-server>:&lt;port&gt;/ \`\`\`
+```bash
+git config --global http.proxy <http://><proxy-server>:<port>/
+git config --global https.proxy <https://><proxy-server>:<port>/
+```
 
 ---
 

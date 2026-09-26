@@ -7,13 +7,17 @@ header: Git
 
 [How to Rename Git Local and Remote Branches](https://www.w3docs.com/snippets/git/how-to-rename-git-local-and-remote-branches.html)
 
-\`\`\`bash ## Local git branch -m <old-name> <new-name> ## Remote
+```bash
+## Local
+git branch -m <old-name> <new-name>
+## Remote
 
 git push origin --delete <old-name> # or git push origin :<old-name>
 
 git push origin <new-name>
 
-git push origin -u <new-name> ```
+git push origin -u <new-name>
+```
 
 
 相关：[[git-delete-branch-locally-remotely|git-delete-branch-locally-remotely]]

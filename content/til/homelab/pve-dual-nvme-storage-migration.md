@@ -97,7 +97,7 @@ pvesm remove local-lvm       # 清理 storage.cfg 死条目
 Logical volume pve/vm-102-cloudinit in use.
 ```
 
-原因：运行中的 QEMU 进程持有旧卷 fd，move-disk 不热释放。**必须重启 VM**（`qm reboot &lt;vmid&gt;`）后 open 标志才消失（`lvs` 属性从 `aotz` → `a-tz`），此时才能 `lvremove` 清理残留，否则整个旧池删不掉。
+原因：运行中的 QEMU 进程持有旧卷 fd，move-disk 不热释放。**必须重启 VM**（`qm reboot <vmid>`）后 open 标志才消失（`lvs` 属性从 `aotz` → `a-tz`），此时才能 `lvremove` 清理残留，否则整个旧池删不掉。
 
 ## 验证
 

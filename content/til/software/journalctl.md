@@ -9,7 +9,7 @@ header: Linux
 
 ### `Unable to get Hands-Free Voice gateway SDP record: Host is down`
 
-### `Hands-Free Voice gateway: rfcomm<sub>bind</sub>: Address already in`
+### `Hands-Free Voice gateway: rfcomm_bind: Address already in`
 
 
 相关：[[android11-use-private-dns|android11-use-private-dns]]

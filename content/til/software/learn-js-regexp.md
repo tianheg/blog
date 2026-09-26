@@ -73,7 +73,7 @@ header: Programming
 
 [freeCodeCamp Challenge Guide: Reuse Patterns Using Capture Groups - Guide - The freeCodeCamp Forum](https://forum.freecodecamp.org/t/freecodecamp-challenge-guide-reuse-patterns-using-capture-groups/301364)
 
-`<sup>(+̣)</sup>\s\1\s\1$`
+`(+̣)\s\1\s\1$`
 
 ## [Use Capture Groups to Search and Replace](https://www.freecodecamp.org/learn/javascript-algorithms-and-data-structures/regular-expressions/use-capture-groups-to-search-and-replace)
 

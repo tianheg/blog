@@ -317,7 +317,7 @@ docker run -v "$(pwd):/container/path" image_name # 将主机所在的当前路�
 
 2. for Prod
 
-  - Leverage the Docker Restart Policy(update<sub>config</sub>: true)
+  - Leverage the Docker Restart Policy(update_config: true)
   - Correct Cleanup Order of Docker Images(Do not use docker rm -f as it may destroy useful images. Always run docker rm -f --remove-orphans.)
   - Setting Your Containers' CPU and Memory Limits
 

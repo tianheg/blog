@@ -5,7 +5,7 @@ tags: ['技术']
 ---
 
 ### 一、 {#一}
-更新单个本地包版本：使用 `npm update &lt;package&gt;`
+更新单个本地包版本：使用 `npm update <package>`
 
 更新全部本地安装的包：
 
@@ -16,7 +16,7 @@ tags: ['技术']
 执行以下操作，需要 npm 版本大于等于
 2.6.1，具体细节请访问：<https://www.npmjs.cn/getting-started/updating-global-packages/>
 
-更新全局安装的包：`npm update -g &lt;package&gt;`
+更新全局安装的包：`npm update -g <package>`
 
 找到需要更新的全局安装包：=npm outdated -g --depth=0=
 
@@ -376,4 +376,4 @@ tags: ['技术']
 9. `npm uninstall -g vue` 全局卸载 vue 包
 
 > 通过这一系列下载 vue 框架的操作，我明白了全局安装
-> `npm install -g &lt;package&gt;` 和安装 `npm install &lt;packeage&gt;` 的区别。
+> `npm install -g <package>` 和安装 `npm install <packeage>` 的区别。

@@ -36,7 +36,7 @@ tags: ['技术']
 ### 特性支持
 
 - Markdown 语法
-- [Windi CSS](https://windicss.org/) 样式支持，可直接用 `&lt;style&gt;`
+- [Windi CSS](https://windicss.org/) 样式支持，可直接用 `<style>`
    覆盖样式
 - 不同的
    [layout](https://github.com/slidevjs/slidev/tree/main/packages/client/layouts)：cover,center

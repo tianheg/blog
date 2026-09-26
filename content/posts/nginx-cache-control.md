@@ -18,7 +18,7 @@ tags: ['技术']
 
 #### 1 修改 nginx-proxy compose 文件 {#修改-nginx-proxy-compose-文件-1-修改-nginx-proxy-compose-文件}
 
-=~/nginx-proxy/docker-compose.yml=
+`~/nginx-proxy/docker-compose.yml`
 
 ```
     - vhost:/etc/nginx/vhost.d

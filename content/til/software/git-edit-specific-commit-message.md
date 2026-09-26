@@ -9,6 +9,8 @@ header: Git
 
 想修改 `bbc643cd` 的信息
 
-\`\`\`bash git rebase --interactive 'bbc643cd^' \`\`\`
+```bash
+git rebase --interactive 'bbc643cd^'
+```
 
 在默认编辑器打开后，将 pick 改为 r/reword 后保存，然后就可以修改 commit 信息了。

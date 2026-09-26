@@ -287,11 +287,11 @@ VO(functionContext) === AO
 
 > 在进入函数上下文时创建活动对象，同时由值为 Arguments 对象的属性 `arguments` 进行初始化：
 >
-> #+BEGIN_SRC js
+> ```js
 > AO = {
-> arguments: &lt;Arg0&gt;
+>   arguments: <Arg0>
 > }
-> #+END_SRC
+> ```
 
 Arguments 对象是活动对象的属性。Arguments 对象包含以下属性：
 
@@ -446,9 +446,9 @@ alert(b) // undefined, but not "b is not defined"
 >
 > 像这样：
 >
-> #+BEGIN_SRC js
+> ```js
 > a = 10
-> #+END_SRC
+> ```
 
 只需创建全局对象的新属性（而不是变量）。“非变量”并不是指它不能被更改，而是指ECMAScript中 `not the variable` 的概念（由于 VO（globalContext）=== global，因此变量也成为全局对象的属性）。
 

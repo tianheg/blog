@@ -7,7 +7,11 @@ header: Finance
 
 我是结合 Org-mode 进行使用的。用 Docker 在本地预览，我的 compose 文件：
 
-\`\`\`yml services: fava: image: yegle/fava ports:
+```yml
+services:
+fava:
+image: yegle/fava
+ports:
 
 - 5000:5000
 
@@ -17,21 +21,33 @@ volumes:
 
 environment:
 
-- BEANCOUNT<sub>FILE</sub>=/bean/index.org
+- BEANCOUNT_FILE=/bean/index.org
 
-\`\`\`
+```
 
 实例文档格式 index.org：
 
-\`\`\`org ;; -**- mode: beancount; coding: utf-8; fill-column: 400; -**-
+```org
+;; -**- mode: beancount; coding: utf-8; fill-column: 400; -**-
 
 ## Options
-option "title" "My Personal Ledger" option "operating<sub>currency</sub>" "CNY" option "operating<sub>currency</sub>" "USD" 2022-01-01 open Assets:Checking 2022-01-01 open Expenses:Books 2022-01-04 open Expenses:Food 2022-06-30 open Assets:Bank:AoC ;; AoC 中国农业银行 2022-06-30 open Income:Salary 2022-06-30 open Expenses:Rent 2022-06-30 open Expenses:Entertainment 2022-06-30 open Expenses:Tech
+option "title" "My Personal Ledger"
+option "operating_currency" "CNY"
+option "operating_currency" "USD"
+2022-01-01 open Assets:Checking
+2022-01-01 open Expenses:Books
+2022-01-04 open Expenses:Food
+2022-06-30 open Assets:Bank:AoC ;; AoC 中国农业银行
+2022-06-30 open Income:Salary
+2022-06-30 open Expenses:Rent
+2022-06-30 open Expenses:Entertainment
+2022-06-30 open Expenses:Tech
 
 ## Daily expenses
 2022-01-01 * "购买《JavaScript 语言精粹》" Expenses:Books 40.5 CNY Assets:Checking
 
-2022-01-04 * "午饭：土豆牛肉盖浇面，豆泡，丸子" Expenses:Food 15 CNY Assets:Checking ```
+2022-01-04 * "午饭：土豆牛肉盖浇面，豆泡，丸子" Expenses:Food 15 CNY Assets:Checking
+```
 
 ## BYVoid-复式记账
 

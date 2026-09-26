@@ -139,7 +139,7 @@ Markdown 支持有序和无序列表。
   Suspendisse id sem consectetuer libero luctus adipiscing.
 ```
 
-如果列表之间有空行，转为 HTML 时会插入 `&lt;p&gt;` 。例如，这个输入：
+如果列表之间有空行，转为 HTML 时会插入 `<p>` 。例如，这个输入：
 
 ```
   *   Bird
@@ -261,7 +261,7 @@ Markdown 支持有序和无序列表。
 
 #### 分割线 {#分割线}
 在 Markdown
-中添加分割线（`&lt;hr /&gt;`）的方法：在同一行使用至少三个或多个星号
+中添加分割线（`<hr />`）的方法：在同一行使用至少三个或多个星号
 `*` 、连字符 `-` 、下划线 `_` ：
 
 ```
@@ -467,7 +467,7 @@ Markdown 使用一种类似于链接语法的图像语法，允许两种样式�
   [id]: url/to/image  "Optional title attribute"
 ```
 
-Markdown 没有指定图像尺寸的语法，可以使用 HTML 的图片标签 `&lt;img&gt;` 。
+Markdown 没有指定图像尺寸的语法，可以使用 HTML 的图片标签 `<img>` 。
 
 ### 杂项 {#杂项}
 #### 反斜线转义 {#反斜线转义}
@@ -551,7 +551,7 @@ HTML 输出：
 在 markdown 中，无法多次按 Enter 键，并不能形成多个空行，需要使用 HTML
 语法
 
-使用 `&lt;br/&gt;` 形成空行
+使用 `<br/>` 形成空行
 
 ---
 

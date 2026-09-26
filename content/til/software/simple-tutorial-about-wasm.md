@@ -75,7 +75,7 @@ module github.com/golangbot/webassembly
 go 1.22.0
 ```
 
-Create `main.go` with the following contents inside =~/Documents/webassembly/cmd/wasm=:
+Create `main.go` with the following contents inside `~/Documents/webassembly/cmd/wasm`:
 
 ```go
 package main
@@ -166,7 +166,7 @@ Documents/
         └── go.mod
 ```
 
-Copy the following code to =~/Documents/webassembly/cmd/server/main.go=.
+Copy the following code to `~/Documents/webassembly/cmd/server/main.go`.
 
 ```go
 package main
@@ -195,7 +195,7 @@ go run main.go
 Now we can see the output(`Go Web Assembly`) in the `http://localhost:9090/` page's console.
 
 ### Coding the JSON formatter
-Add the following function to =~/Documents/webassembly/cmd/wasm/main.go=.
+Add the following function to `~/Documents/webassembly/cmd/wasm/main.go`.
 
 ```go
 func prettyJson(input string) (string, error) {
@@ -220,7 +220,7 @@ Go provides the [syscall/js](https://pkg.go.dev/syscall/js) package which helps 
 
 The first step in exposing a function from `Go` to `JavaScript` is to create a [Func](https://pkg.go.dev/syscall/js#Func) type. Func is a wrapped Go function that can be called by JavaScript. The [FuncOf](https://pkg.go.dev/syscall/js#FuncOf) function can be used to create a `Func` type.
 
-Add the following function to =~/Documents/webassembly/cmd/wasm/main.go=.
+Add the following function to `~/Documents/webassembly/cmd/wasm/main.go`.
 
 ```go
 func jsonWrapper() js.Func {
@@ -319,7 +319,7 @@ Output:
 ```
 
 ### Creating the UI and calling the wasm function
-Let's modify the existing =~/Documents/webassembly/assets/index.html= in the `assets` folder to include the UI.
+Let's modify the existing `~/Documents/webassembly/assets/index.html` in the `assets` folder to include the UI.
 
 ```html
 <!doctype html>
@@ -387,7 +387,7 @@ There is one more way to achieve the same output. Instead of passing the formatt
 
 Let's see how this is done.
 
-We need to modify the `jsonWrapper` function in =~/Documents/webassembly/cmd/wasm/main.go= to achieve this.
+We need to modify the `jsonWrapper` function in `~/Documents/webassembly/cmd/wasm/main.go` to achieve this.
 
 ```go
 func jsonWrapper() js.Func {

@@ -49,7 +49,7 @@ box-sizing: border-box;
 
 ### 位置
 
-If you have a `&lt;link&gt;` that includes CSS at the top of your HTML page, then another `&lt;link&gt;` that includes CSS at the bottom of your page: the bottom `&lt;link&gt;` will have the most specificity.
+If you have a `<link>` that includes CSS at the top of your HTML page, then another `<link>` that includes CSS at the bottom of your page: the bottom `<link>` will have the most specificity.
 
 ### 特指/专一性
 

@@ -24,6 +24,6 @@ tags: ['技术']
         sed -i 's/${{ steps.local_version.outputs.VERSION }}/${{ steps.hugo_version.outputs.VERSION }}/' Dockerfile
 ```
 
-由此可见，是多余的 =HUGO_VERSIONN==
+由此可见，是多余的 `HUGO_VERSIONN`=
 ，当我仔细看这段代码，才发现多打了一个字母
-N，难怪测试了那么多次都不行，把前面的 =HUGO_VERSION== 删掉就可以了。
+N，难怪测试了那么多次都不行，把前面的 `HUGO_VERSION`= 删掉就可以了。

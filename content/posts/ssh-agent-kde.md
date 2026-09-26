@@ -18,7 +18,7 @@ tags: ['技术']
 
 确保安装了 [Ksshaskpass](https://github.com/KDE/ksshaskpass)。
 
-新建文件 =~/.config/plasma-workspace/env/ssh-agent-startup.sh= ：
+新建文件 `~/.config/plasma-workspace/env/ssh-agent-startup.sh` ：
 
 ```bash
     #!/bin/sh
@@ -28,7 +28,7 @@ tags: ['技术']
 
 通过 KDE 的系统设置中 Autostart 设置， `Add Login Script`
 。添加新建的这个文件，之后会自动生成文件
-=~/.config/autostart/ssh-agent-startup.sh.desktop= 。
+`~/.config/autostart/ssh-agent-startup.sh.desktop` 。
 
 不要忘记让 Shell 文件可执行：
 
@@ -38,7 +38,7 @@ tags: ['技术']
 
 ### 开机添加 ssh 密钥 {#开机添加-ssh-密钥}
 
-新建文件 =~/.config/autostart/ssh-add.desktop= ：
+新建文件 `~/.config/autostart/ssh-add.desktop` ：
 
 ```
     [Desktop Entry]

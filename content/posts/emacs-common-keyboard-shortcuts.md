@@ -39,15 +39,15 @@ tags: ['技术']
 
 | Keyboard shortcuts                                        | Effects                                                        |
 | --- | --- |
-| `&lt;DEL&gt;` `BackSpace`                                         | delete character before current cursor                         |
-| `M-&lt;DEL&gt;`                                                 | kill word before cursor                                        |
+| `<DEL>` `BackSpace`                                         | delete character before current cursor                         |
+| `M-<DEL>`                                                 | kill word before cursor                                        |
 | `C-d`                                                     | delete next character after cursor                             |
 | `M-d`                                                     | kill next word after cursor                                    |
 | `C-k`                                                     | kill from cursor to end of line                                |
 | `M-k`                                                     | kill from cursor to end of current sentence                    |
 | `C-e`                                                     | move to end of line                                            |
 | `M-e`                                                     | move forward to end of sentence                                |
-| `C-&lt;SPC&gt;(&lt;SPC&gt;=space) move-cursor-to-somewhere C-w C-y`   | kill random text, then yank to somewhere(like cut and paste)   |
+| `C-<SPC>(<SPC>=space) move-cursor-to-somewhere C-w C-y`   | kill random text, then yank to somewhere(like cut and paste)   |
 
 `killing` 和 `deleting` 的区别：
 
@@ -83,7 +83,7 @@ Emacs stores each file's text inside an object called a "buffer".
 | Keyboard shortcuts      | Effects            |
 | --- | --- |
 | `C-x C-b`               | List buffers       |
-| `C-x b &lt;BUFFER NAME&gt;`   | switch buffer      |
+| `C-x b <BUFFER NAME>`   | switch buffer      |
 | `C-x b Messages`        | see the messages   |
 
 ### Extending the command set {#extending-the-command-set}
@@ -92,8 +92,8 @@ Emacs stores each file's text inside an object called a "buffer".
 
 | Keyboard shortcuts                  | Effects                    |
 | --- | --- |
-| `C-x &lt;one character&gt;`               | Character eXtend           |
-| `M-x &lt;a long name&gt;`                 | Named command eXtend       |
+| `C-x <one character>`               | Character eXtend           |
+| `M-x <a long name>`                 | Named command eXtend       |
 | `C-z`                               | exit Emacs **temporarily**   |
 | `fg` or `%emacs=(exec in console)`   | recover from `C-z`         |
 
@@ -146,6 +146,6 @@ Minor mode
 | --- | --- |
 | `C-h c C-p`               | oneline explanation             |
 | `C-h k C-p`               | explanation with more details   |
-| `C-h f &lt;function name&gt;`   | describe a function             |
-| `C-h v &lt;variable name&gt;`   | describe a variable             |
+| `C-h f <function name>`   | describe a function             |
+| `C-h v <variable name>`   | describe a variable             |
 | `C-h r`                   | read manual                     |

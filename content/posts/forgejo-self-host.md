@@ -14,7 +14,7 @@ Use a Hetzner server(Ubuntu 24.04 LTS) deploy Forgejo. Donot forget to add SSH k
 
 ### 1. Ubuntu initial setup
 
-Edit local =~/.ssh/config=:
+Edit local `~/.ssh/config`:
 
 ```ini
 Host forgejo
@@ -196,7 +196,7 @@ cat ~/.ssh/hetzner_storagebox.pub | ssh -p23 u000000@u000000.your-storagebox.de 
 # type passwd
 ```
 
-Note, if the key name is not id_ed25519, need add config in =~/.ssh/config=:
+Note, if the key name is not id_ed25519, need add config in `~/.ssh/config`:
 
 ```ini
 Host storagebox

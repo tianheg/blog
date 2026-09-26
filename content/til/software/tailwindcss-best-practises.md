@@ -17,7 +17,7 @@ header: Web
 
 6. **Compose Utility Classes**: Tailwind CSS supports the `@apply` directive, allowing you to compose utility classes into reusable components. This promotes consistency and reduces repetition in your codebase.
 
-7. **Keep HTML Semantically Meaningful**: Although Tailwind CSS primarily focuses on utility classes, strive to maintain semantic HTML structure. Use appropriate HTML tags (`&lt;header&gt;`, `&lt;nav&gt;`, `&lt;section&gt;`, etc.) for better accessibility and SEO.
+7. **Keep HTML Semantically Meaningful**: Although Tailwind CSS primarily focuses on utility classes, strive to maintain semantic HTML structure. Use appropriate HTML tags (`<header>`, `<nav>`, `<section>`, etc.) for better accessibility and SEO.
 
 8. **Stay Updated**: Tailwind CSS regularly releases updates with new features, optimizations, and bug fixes. Keep your project up-to-date with the latest version to benefit from these improvements.
 

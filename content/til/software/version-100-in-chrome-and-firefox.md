@@ -14,13 +14,17 @@ header: Tools
 
 它也可以通过 JS 使用 [navigator.userAgent](https://developer.mozilla.org/en-US/docs/Web/API/Navigator/userAgent) 获得。
 
-\`\`\`text browserName/majorVersion.minorVersion \`\`\`
+```text
+browserName/majorVersion.minorVersion
+```
 
 ### Firefox
 
-\`\`\`text User-Agent: Mozilla/5.0 (<system-information>) &lt;platform&gt; (<platform-details>) &lt;extensions&gt;
+```text
+User-Agent: Mozilla/5.0 (<system-information>) <platform> (<platform-details>) <extensions>
 
-"Mozilla/5.0 (X11; Linux x86<sub>64</sub>; rv:99.0) Gecko/20100101 Firefox/99.0" ```
+"Mozilla/5.0 (X11; Linux x86_64; rv:99.0) Gecko/20100101 Firefox/99.0"
+```
 
 ### Chrome
 

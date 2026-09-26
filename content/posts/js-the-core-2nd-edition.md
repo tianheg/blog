@@ -149,7 +149,7 @@ console.log(
 
 注意：“类”只是理论上的抽象。从技术上讲，它可以用 Java 或 C++ 中的静态分派来实现，也可以用 JavaScript、Python、Ruby 等中的动态分派（委托）来实现。
 
-从技术上讲，“类”表示为“构造函数+原型”对。因此，构造函数创建对象，并自动为其新创建的实例设置原型。此原型存储在 `&lt;ConstructorFunction&gt;.prototype` 属性中。
+从技术上讲，“类”表示为“构造函数+原型”对。因此，构造函数创建对象，并自动为其新创建的实例设置原型。此原型存储在 `<ConstructorFunction>.prototype` 属性中。
 
 > 定义6：
 >

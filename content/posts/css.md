@@ -126,7 +126,7 @@ https://alistapart.com/article/responsive-web-design/
 <link rel="stylesheet" type="text/css" href="*.css" media="screen and (max-device-width: 480px)" />
 ```
 
-而且，不仅在 `&lt;link&gt;` 标签中写，还可以在 CSS 样式文件中写。
+而且，不仅在 `<link>` 标签中写，还可以在 CSS 样式文件中写。
 
 ```css
 @media screen and (max-device-width: 480px) {

@@ -227,20 +227,21 @@ ECMAScript 规范中的每个运行时语义都显式或隐式地返回一个报
 >
 > 其中之一是，设置 Array 对象的 length 属性可以从对象中删除属性，但 length 属性似乎只是一个普通的数据属性。与此相反， `new Map().size` 只是在 `Map.prototype` 上定义的 getter 函数，并没有 length 属性。
 >
-> #+BEGIN_SRC js
+> ```js
 > const arr = [0, 1, 2, 3]
 > arr.length = 1
 > console.log(arr)
 > console.log(Object.getOwnPropertyDescriptor([], "length"))
 > console.log(Object.getOwnPropertyDescriptor(new Map(), "size"))
 > console.log(Object.getOwnPropertyDescriptor(Map.prototype, "size"))
-> #+END_SRC
+> ```
 >
-> #+RESULTS:
-> : [0]
-> : { value: 0, writable: true, enumerable: false, configurable: false }
-> : undefined
-> : { get: size(), set: undefined, enumerable: false, configurable: true }
+> ```
+> [0]
+> { value: 0, writable: true, enumerable: false, configurable: false }
+> undefined
+> { get: size(), set: undefined, enumerable: false, configurable: true }
+> ```
 >
 > 这一行为通过覆盖 `[[DefineOwnProperty]]` 内部属性实现，进一步阅读：[Array Exotic Objects](https://tc39.es/ecma262/#sec-array-exotic-objects)。
 
@@ -264,9 +265,9 @@ JavaScript 对象还可以具有定义为包含某些类型的值的内部槽。
 
 > 不执行代码，下面的代码片段返回什么？the given code fragment throws a TypeError exception
 >
-> #+BEGIN_SRC js
+> ```js
 > String.prototype.substring.call(undefined, 2, 4)
-> #+END_SRC
+> ```
 
 有两种可能结果：
 

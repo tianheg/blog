@@ -9,15 +9,26 @@ header: DevOps
 
 ## 项目设置
 
-\`\`\`bash mkdir my-proxy && cd my-proxy npm init npm install -D vercel mkdir api && touch api/index.js touch vercel.json \`\`\`
+```bash
+mkdir my-proxy && cd my-proxy
+npm init
+npm install -D vercel
+mkdir api && touch api/index.js
+touch vercel.json
+```
 
 `my-proxy/package.json`
 
-\`\`\`json { "name": "my-proxy", "version": "1.0.0", "scripts": {
+```json
+{
+"name": "my-proxy",
+"version": "1.0.0",
+"scripts": {
 
 - "start": "vercel dev" },
 
-\`\`\`
+}
+```
 
 > Vercel serverless functions use a [file\-system\-based convention](https://vercel.com/docs/concepts/functions/serverless-functions). So the `api/index.js` file you just created will automatically handle all requests of the `/api` endpoint:
 

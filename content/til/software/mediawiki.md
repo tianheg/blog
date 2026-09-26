@@ -42,11 +42,14 @@ refer
 
 ### 无法使用可视化编辑
 
-\`\`\` Error contacting the Parsoid/RESTBase server: (curl error: 7) Couldn't connect to server
+```
+ Error contacting the Parsoid/RESTBase server: (curl error: 7) Couldn't connect to server
 
 Error contacting the Parsoid/RESTBase server: (curl error: 6) Couldn't resolve host name
 
-Error contacting the Parsoid/RESTBase server (HTTP 404) # (这个错误只出现一次) ```
+Error contacting the Parsoid/RESTBase server (HTTP 404)
+# (这个错误只出现一次)
+```
 
 refer
 
@@ -58,17 +61,25 @@ refer
 
 尝试过在 LocalSettings.php 最末尾添加：
 
-\`\`\`php if ( isset( $<sub>SERVER</sub>['REMOTE<sub>ADDR</sub>'] ) && in<sub>array</sub>( $<sub>SERVER</sub>['REMOTE<sub>ADDR</sub>'], [ $<sub>SERVER</sub>['SERVER<sub>ADDR</sub>'], '127.0.0.1' ] ) ) { $wgGroupPermissions['**']['read'] = true; $wgGroupPermissions['**']['edit'] = true; $wgGroupPermissions['*']['writeapi'] = true; }
+```php
+if ( isset( $_SERVER['REMOTE_ADDR'] ) && in_array( $_SERVER['REMOTE_ADDR'], [ $_SERVER['SERVER_ADDR'], '127.0.0.1' ] ) ) {
+$wgGroupPermissions['**']['read'] = true;
+$wgGroupPermissions['**']['edit'] = true;
+$wgGroupPermissions['*']['writeapi'] = true;
+}
 
-$wgDefaultUserOptions['visualeditor-editor'] = "visualeditor"; ```
+$wgDefaultUserOptions['visualeditor-editor'] = "visualeditor";
+```
 
 把 `127.0.0.1` 改成 `localhost` 也不行。
 
 在[这里](https://www.mediawiki.org/wiki/Extension:VisualEditor#Troubleshooting)找到相关错误解释。
 
-\`\`\` Error contacting the Parsoid/RESTBase server (curl error: 7) Couldn't connect to server
+```
+ Error contacting the Parsoid/RESTBase server (curl error: 7) Couldn't connect to server
 
-Ensure that the mediawiki native hostname does not equal to the domain the wiki is running on. If both names are equal, the api will try to connect to the domain the wiki is running on, but will have difficulty resolving the domain. ```
+Ensure that the mediawiki native hostname does not equal to the domain the wiki is running on. If both names are equal, the api will try to connect to the domain the wiki is running on, but will have difficulty resolving the domain.
+```
 
 目前不理解。
 

@@ -66,7 +66,7 @@ tags: ['技术']
 
 ### IE 兼容模式
 
-随着 Internet Explorer 的日渐衰退，不再需要添加 `&lt;meta&gt;` 以维持对 IE 的兼容，除非需要兼容 IE10 及其以前的版本。这个标签在 IE11 中弃用，不再在 Microsoft Edge 中使用（除非在传统浏览器中）。
+随着 Internet Explorer 的日渐衰退，不再需要添加 `<meta>` 以维持对 IE 的兼容，除非需要兼容 IE10 及其以前的版本。这个标签在 IE11 中弃用，不再在 Microsoft Edge 中使用（除非在传统浏览器中）。
 
 ```html
 <!-- IE10 and below only -->
@@ -313,9 +313,9 @@ trim_trailing_whitespace = true
 
 ### 避免使用 `@import`
 
-与 `&lt;link&gt;` 相比， `@import` 更慢,会增加多余的请求，导致一些意料之外的问题。解决方法：
+与 `<link>` 相比， `@import` 更慢,会增加多余的请求，导致一些意料之外的问题。解决方法：
 
-- 使用 `&lt;link&gt;` 元素
+- 使用 `<link>` 元素
 - 使用 Sass 或 Less 将 CSS 放入一个文件里
 - 利用环境提供的可利用的部分简化 CSS
 

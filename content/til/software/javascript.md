@@ -166,7 +166,7 @@ b()
 alert(a)
 ```
 
-这代码里， `function a() {}` 这样写产生了怎样的影响？它和 =a = 10= 的关系是什么？
+这代码里， `function a() {}` 这样写产生了怎样的影响？它和 `a = 10` 的关系是什么？
 
 ```javascript
 // function hoisting

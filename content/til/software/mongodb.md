@@ -289,7 +289,7 @@ Chapter 3: Creating and Manipulating Documents
 
 1. How does the value of `_id` get assigned to a document?
 
-> When a document is inserted a random field is picked to serve as the <sub>id</sub> field.
+> When a document is inserted a random field is picked to serve as the _id field.
 >
 
 这句话错误，我选择了它。
@@ -298,17 +298,17 @@ It is automatically generated as an ObjectId type value.
 
 MongoDB generates a value, so that there is one just in case. You can definitely change the default value to a different value or data type, as long as they are unique to this collection and not an array data type.
 
-MongoDB adds an <sub>id</sub> field to any inserted document if it doesn't have one, and it does not utilize other fields for this purpose.
+MongoDB adds an _id field to any inserted document if it doesn't have one, and it does not utilize other fields for this purpose.
 
-You can assign the <sub>id</sub> field values to be sequential integer values, but it is not the default behavior, nor is it best practice.
+You can assign the _id field values to be sequential integer values, but it is not the default behavior, nor is it best practice.
 
 db.collection.findOne() 用来查看当前 Collection 的 Schema。
 
 2.  Select all true statements from the following list:
 
-If a document is inserted without a provided <sub>id</sub> value, then the <sub>id</sub> field and value will be automatically generated for the inserted document before insertion.
+If a document is inserted without a provided _id value, then the _id field and value will be automatically generated for the inserted document before insertion.
 
-MongoDB can store duplicate documents in the same collection, as long as their <sub>id</sub> values are different.
+MongoDB can store duplicate documents in the same collection, as long as their _id values are different.
 
 可以在 MongoDB 网页端进行数据的增删改查（CRUD）。
 
@@ -518,7 +518,7 @@ Array Operators and Projection
 
 projection 就是可以让属性显示或隐藏的设置区间。
 
-0 表示隐藏某属性，1 表示显示某属性。一般情况下，1 和 0 不能同时出现，但是有例外，当属性为 <sub>id</sub> 时。
+0 表示隐藏某属性，1 表示显示某属性。一般情况下，1 和 0 不能同时出现，但是有例外，当属性为 _id 时。
 
 ```javascript
 db.listingsAndReviews

@@ -31,7 +31,7 @@ content-box，如果设置元素宽度为固定值，border、padding
 的宽度会加入到元素宽度中；如果设置
 border-box，则元素宽度即为给定值，border、padding 宽度不影响元素宽度。
 
-整个 `&lt;body&gt;` 用到了 `rgba(128, 128, 128, 0.9)`
+整个 `<body>` 用到了 `rgba(128, 128, 128, 0.9)`
 颜色，整个呈现一种暗灰色调。
 
 .flexbox 用到了 flex 布局，它能够很方便地对元素进行一维排序。为其添加了
@@ -191,11 +191,11 @@ word-wrap[^12] 或者 overflow-wrap[^13]
 解决。最开始，发现怎么改样式都没变，只有仔细看看样式代码，发现本应该用
 `#scssFile` 选中对应元素的，却少写了 `#` 。
 
-给 `&lt;code&gt;` 应用了 `overflow-wrap: anywhere;` 后还是不行，后来还发现
+给 `<code>` 应用了 `overflow-wrap: anywhere;` 后还是不行，后来还发现
 word-wrap 是 overflow-wrap 的别名，也就是说它们俩是一样的。而
 word-break[^14] 的所有属性都无法让文本产生样式变化。
 
-直到读了这页内容[^15]，才发现 `&lt;pre&gt;`
+直到读了这页内容[^15]，才发现 `<pre>`
 包裹的内容的样式是默认无法被改变的。pre 已弃用的 wrap
 属性介绍中，给了一种实现 pre 中换行的 CSS
 方式：white-space[^16]。终于，只通过 `white-space: pre-wrap;` 我便让

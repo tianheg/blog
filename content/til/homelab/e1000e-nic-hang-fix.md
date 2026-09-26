@@ -43,7 +43,7 @@ systemctl enable --now ethtool-fix
 
 ### 内核参数（需重启）：关 EEE + CRCStrip
 
-在 {{{/etc/default/grub}}} 的 {{{GRUB_CMDLINE_LINUX_DEFAULT}}} 追加参数：
+在 `/etc/default/grub` 的 `GRUB_CMDLINE_LINUX_DEFAULT` 追加参数：
 
 ```bash
 GRUB_CMDLINE_LINUX_DEFAULT="quiet e1000e.EEE=0 e1000e.CRCStrip=0"
@@ -58,7 +58,7 @@ update-grub
 ethtool -k eno1 | grep -E "tso|gso|gro"
 ```
 
-所有应为 {{{off}}。重启后可检查内核参数生效：
+所有应为 `off`。重启后可检查内核参数生效：
 
 ```bash
 cat /proc/cmdline | grep e1000e

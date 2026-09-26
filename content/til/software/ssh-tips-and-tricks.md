@@ -13,11 +13,16 @@ To manage the agent, I strongly recommend [yubikey\-agent](https://github.com/Fi
 
 ~/.ssh/config
 
-\`\`\`config Host example.org ForwardAgent true \`\`\`
+```config
+Host example.org
+ForwardAgent true
+```
 
 查看是否工作
 
-\`\`\`sh ssh-add -L \`\`\`
+```sh
+ssh-add -L
+```
 
 ~/.ssh/rc
 

@@ -23,7 +23,7 @@ tags: ['技术']
 
 在这里[^1]学会配置 Hunspell 环境，然后进行了修改[^2]，问题解决。
 
-对 =~/.emacs.d/lisp/init-spelling.el= 进行的修改：
+对 `~/.emacs.d/lisp/init-spelling.el` 进行的修改：
 
 ```
     +    (setq ispell-hunspell-dict-paths-alist

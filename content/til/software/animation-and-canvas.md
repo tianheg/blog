@@ -32,15 +32,22 @@ Mozilla 的 Robert O' Callahan 创造了一个 mozRequestAnimationFrame() 的新
 
 canvas 标签要设置 id、width、height，还有当 canvas 不被支持的说明文字。
 
-\`\`\`html &lt;canvas id="canvas" width="250" height="200"&gt;Sorry, your browser don't support canvas tag yet.</canvas> \`\`\`
+```html
+<canvas id="canvas" width="250" height="200">Sorry, your browser don't support canvas tag yet.</canvas>
+```
 
 ### 2D
 
 在画布上绘图前，要先获得绘图上下文：
 
-\`\`\`js const drawing = document.getElementById('canvas')
+```js
+const drawing = document.getElementById('canvas')
 
-if (drawing.getContext) { const context = drawing.getContext('2d') // context 可以简写为 ctx ... } ```
+if (drawing.getContext) {
+const context = drawing.getContext('2d') // context 可以简写为 ctx
+...
+}
+```
 
 在使用时，先确定绘图上下文是存在的。有些浏览器对 HTML 规范中没有的元素会创建默认 HTML 元素对象。这样表示：即使 drawing 包含一个有效的元素引用，getContext() 方法也未必存在。
 
