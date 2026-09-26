@@ -21,7 +21,7 @@ global config file, ~/.gitconfig
     path = ~/.gitconfig-personal
 ```
 
-If the repository is located inside the ~*work directory, a file named ~*.gitconfig-work is included. This is just another gitconfig file. This is what that looks like in my case:
+If the repository is located inside the ~/work directory, a file named ~/.gitconfig-work is included. This is just another gitconfig file. This is what that looks like in my case:
 
 ```
 [user]

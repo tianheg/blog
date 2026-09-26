@@ -1,5 +1,5 @@
 ---
-title: '了解使用 HTML5 标签 &lt;canvas&gt;'
+title: '了解使用 HTML5 标签 <canvas>'
 date: 2022-11-05T15:19:00+08:00
 tags: ['技术']
 ---

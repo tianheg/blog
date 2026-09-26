@@ -54,7 +54,7 @@ tags: ['技术', English]
 
 ## Phase 8: Hermes Desktop Remote Access
 
-[Hermes Desktop](https://hermes-agent.nousresearch.com/desktop) is an Electron GUI for Hermes Agent. Shares the same `~*.hermes*` config, sessions, skills, and memory as the CLI. Runs on macOS, Windows, Linux.
+[Hermes Desktop](https://hermes-agent.nousresearch.com/desktop) is an Electron GUI for Hermes Agent. Shares the same `~/.hermes/` config, sessions, skills, and memory as the CLI. Runs on macOS, Windows, Linux.
 
 Desktop defaults to local mode (starts a local `hermes dashboard` backend). Remote mode turns Desktop into a thin client — agent runs on VPS, Desktop renders UI via WebSocket.
 

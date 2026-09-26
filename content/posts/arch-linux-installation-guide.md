@@ -455,7 +455,7 @@ echo url=https://github.com | git credential fill # complete the authentication 
 
 ## GPG
 
-修改 `~*.gnupg*` 权限：
+修改 `~/.gnupg/` 权限：
 
 ```bash
 # https://superuser.com/a/954536 ; https://superuser.com/a/954639

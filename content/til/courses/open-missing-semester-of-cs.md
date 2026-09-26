@@ -563,7 +563,7 @@ Lesson 6.5: SET OPTION `/ignore` 搜索 ignore `:set ic` 'ic'(Ignore case) `:set
 
 Lesson 7.1: GETTING HELP `<HELP>` ，`<F1>` 按键，`:help` CTRL-W CTRL-W 跳到另一个窗口 `:q` 退出当前窗口
 
-Lesson 7.2: CREATE A STARTUP SCRIPT `:e ~/.vimrc` -> `:r $VIMRUNTIME/vimrc_{example}.vim` -> `:w`
+Lesson 7.2: CREATE A STARTUP SCRIPT `:e ~/.vimrc` -> `:r $VIMRUNTIME/vimrc_example.vim` -> `:w`
 
 Lesson 7.3: COMPLETION `:set nocp` -> `:!ls` -> `:e` -> CTRL-D
 

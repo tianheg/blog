@@ -46,7 +46,7 @@ Web 平台分成两部分：一个运行 Web 应用代码的虚拟机，一系�
 
 C/C++
 
-Tools: <http://web.archive.org/web/20230920064932/https://wasdk.github.io/WasmFiddle/> ，https://emscripten.org/docs/getting<sub>started</sub>/downloads.html (`sudo pacman -S emscripten`(Arch))
+Tools: <http://web.archive.org/web/20230920064932/https://wasdk.github.io/WasmFiddle/> ，https://emscripten.org/docs/getting_started/downloads/s.html (`sudo pacman -S emscripten`(Arch))
 
 Write WebAssembly
 

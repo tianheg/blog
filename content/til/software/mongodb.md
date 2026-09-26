@@ -336,7 +336,7 @@ MongoDB can store duplicate documents in the same collection, as long as their _
 
 某属性 改变数目：`db.zips.updateMany({ city: "HUDSON" }, { "$set": { "pop": 12345}})`
 
-添加新项目：`db.grades.updateOne({ "student_{id}": 151, "class_{id}": 339 }, { "$push": { scores: { type: "extra credit", score: 100}}})`
+添加新项目：`db.grades.updateOne({ "student_id": 151, "class_id": 339 }, { "$push": { scores: { type: "extra credit", score: 100}}})`
 
 删除操作
 

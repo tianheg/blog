@@ -42,7 +42,7 @@ touch vercel.json
 // - res: The response object.
 // See <https://vercel.com/docs/serverless-functions/supported-languages#node.js> for details.
 export default async function handler(req, res) {
-res.status(200).send(\`Hello world!\`)
+res.status(200).send(`Hello world!`)
 }
 ```
 

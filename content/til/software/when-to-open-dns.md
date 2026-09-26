@@ -14,15 +14,15 @@ If your DNS does not need to be available to the world i.e. you are not an ISP 
 1. Inhibit incoming DNS (port 53) queries for caching or forwarding only DNS servers using a firewall
 2. If you run master or slave domains limit the scope of recursion by adding the following statement to the global options clause:
 
-````text
-
-allow-recursion {192.168.2.0/24;}; ```
+```text
+allow-recursion {192.168.2.0/24;};
+```
 
 1. If you run only a caching or forwarding DNS then limit the scope of all queries by adding the following statement to the global options clause:
 
-````
-
-allow-query {192.168.2.0/24;}; ```
+```text
+allow-query {192.168.2.0/24;};
+```
 
 
 相关：[[android11-use-private-dns|android11-use-private-dns]]

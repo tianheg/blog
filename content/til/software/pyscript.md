@@ -10,9 +10,9 @@ header: Programming
 <https://github.com/pyscript/pyscript>
 
 ```html
-hl_lines`"2 3"
+hl_lines="2 3"
 <!DOCTYPE html>
-<html lang`"en">
+<html lang="en">
 
 <head>
 <meta charset="utf-8" />
@@ -20,8 +20,8 @@ hl_lines`"2 3"
 
 <title>PyScript Hello World</title>
 
-<link rel="stylesheet" href="<https://pyscript.net/alpha/pyscript.css>" />
-<script defer src="<https://pyscript.net/alpha/pyscript.js>"></script>
+<link rel="stylesheet" href="https://pyscript.net/alpha/pyscript.css" />
+<script defer src="https://pyscript.net/alpha/pyscript.js"></script>
 </head>
 
 <body>
