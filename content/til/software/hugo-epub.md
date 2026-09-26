@@ -5,20 +5,20 @@ date: 2025-06-15T19:22:54+08:00
 header: Tools
 ---
 
-## 三条路线，选第三条
+## 为什么这样做
 
-把一个 Hugo 站点变成一本 EPUB，实测下来有三条路（基准：962 篇 posts，2018-12 到 2026-09，产出 2.3 MB）：
+把一个 Hugo 站点变成一本 EPUB，对比过三种做法（基准：962 篇 posts，2018-12 到 2026-09，产出 2.3 MB）：
 
-| 路线 | 做法 | 代价 |
-|------|------|------|
-| A | pandoc 直接读 `content/*.md` | 不动仓库，但 wikilink 得按站点规则自己复刻 —— 自己实现解析出 612 条，走站点规则出 642 条 |
-| B | 纯 Hugo `outputFormats` → zip | 渲染 100% 复用，但 XHTML/OPF/NCX 模板、命名实体转换、CSS、打包四样都得自己写 |
-| C | Hugo 渲染 XHTML → 合并单文档 → pandoc 打包 | 渲染走站点规则，规范结构交给 pandoc |
+| 做法 | 代价 |
+|------|------|
+| pandoc 直接读 `content/*.md` | 不动仓库，但 wikilink 得按站点规则自己复刻 —— 自己实现解析出 612 条，走站点规则出 642 条 |
+| 纯 Hugo `outputFormats` → zip | 渲染 100% 复用，但 XHTML/OPF/NCX 模板、命名实体转换、CSS、打包四样都得自己写 |
+| **Hugo 渲染 XHTML → 合并单文档 → pandoc 打包**（采用） | 渲染走站点规则，规范结构交给 pandoc |
 
-**选 C 的两个理由：**
+**两个理由：**
 
-1. **EPUB 规范语义由 pandoc 负责。** 实测产出里带着 `nav.xhtml` 的 `epub:type="toc"` 与 OPF 里的 `properties="nav"`、`<body epub:type="bodymatter">`、脚注的 `epub:type="noteref" role="doc-noteref"` 加 `epub:type="footnotes"`（**这是阅读器弹窗脚注的开关**）、以及必填的 `dcterms:modified`。走 B 要这些，就得自己在 Hugo 模板里写 —— 而 Hugo 的 markdown 渲染根本不知道 `epub:type`，它的脚注只是普通 `<a href="#fn:1">`。
-2. **书不是站点的镜像。** 收哪些篇、按什么顺序、分不分卷、要不要版权页、剔除交互页，这些都是"编辑"动作。C 把它们放在中间脚本里，`content/` 一行不用改。
+1. **EPUB 规范语义由 pandoc 负责。** 实测产出里带着 `nav.xhtml` 的 `epub:type="toc"` 与 OPF 里的 `properties="nav"`、`<body epub:type="bodymatter">`、脚注的 `epub:type="noteref" role="doc-noteref"` 加 `epub:type="footnotes"`（**这是阅读器弹窗脚注的开关**）、以及必填的 `dcterms:modified`。自己写这些就得在 Hugo 模板里手动生成 —— 而 Hugo 的 markdown 渲染根本不知道 `epub:type`，它的脚注只是普通 `<a href="#fn:1">`。
+2. **书不是站点的镜像。** 收哪些篇、按什么顺序、分不分卷、要不要版权页、剔除交互页，这些都是"编辑"动作。本流程把它们放在中间脚本里，`content/` 一行不用改。
 
 ## EPUB 3.3 规范里与做书直接相关的部分
 
@@ -93,7 +93,7 @@ EPUB 3 由三份规范组成：**EPUB 3.3**（创作端，出版物要满足什�
 - [website2pdf](https://github.com/jgazeau/website2pdf) —— Node + Puppeteer，按 sitemap 抓站出 PDF，30★
 - [darktable dtdocs](https://github.com/darktable-org/dtdocs) —— Hugo 文档站，PDF 走 `config-pdf.yaml` + weasyprint；ePub 走 Hugo 主题路线
 
-**Hugo 主题路线** —— 等于本文的 B 路线，两个都已失效：
+**Hugo 主题做法** —— 都已失效：
 
 - [weitblick/epub](https://github.com/weitblick/epub) —— 唯一公开的 Hugo epub 主题：2021-02-03 创建、**2021-02-10 最后一次提交，只活了 7 天**；模板是 Hugo 0.146 之前的老结构、目录里德语硬编码、`ops:type` 拼错
 - [Hugo 论坛发布帖](https://discourse.gohugo.io/t/generate-hugo-website-as-e-book-epub/29559) —— 上面主题的发布帖。有价值的一条：darktable 作者反馈多语言下 `OEBPS`/`mimetype`/`META-INF` 没法复制进各语言目录，除了事后拷贝没别的办法
