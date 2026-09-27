@@ -50,6 +50,7 @@ const weightData = [
     { date: '2026-07-08', weight: 72 },
     { date: '2026-08-09', weight: 74.2 },
     { date: '2026-09-02', weight: 73.85 },
+    { date: '2026-09-27', weight: 74.35 },
   ];
 
   const ctx = document.getElementById('weightChart');
