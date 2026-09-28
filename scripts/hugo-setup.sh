@@ -3,7 +3,7 @@ set -eu
 
 # 本地安装 hugo（CI 用 scripts/build.sh）
 # 版本与 scripts/build.sh 保持一致
-HUGO_VERSION="0.166.0"
+HUGO_VERSION="0.167.0"
 HUGO_ID="hugo_${HUGO_VERSION}"
 TARBALL="${HUGO_ID}_linux-amd64.tar.gz"
 CHECKSUMS="hugo_${HUGO_VERSION}_checksums.txt"
