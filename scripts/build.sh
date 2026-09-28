@@ -3,7 +3,7 @@ set -euo pipefail
 
 main() {
 
-  HUGO_VERSION=0.166.0
+  HUGO_VERSION=0.167.0
 
   export TZ=Asia/Hong_Kong
 
