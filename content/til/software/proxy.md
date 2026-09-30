@@ -312,6 +312,59 @@ fake-ip-filter:
 
 必要时在 TUN 配置中排除 Tailscale 网段，避免 Clash 接管对应路由。
 
+##### TUN 下 git over SSH 被拒：直连规则要按 IP 写，并限定端口
+
+**Source:** 个人故障排查经验
+**Reflection:** 规则引擎只能匹配它**看得到**的字段 —— SSH 连接里没有域名，只有 IP，所以再正确的域名规则在这条路径上也是空转
+
+开着 TUN 时，`git clone` / `git push` 走 SSH 会失败：
+
+```text
+Connection closed by <服务器 IP> port 22
+fatal: Could not read from remote repository.
+```
+
+`ssh -vv` 能走到 `Connection established.`，紧接着就是 `kex_exchange_identification: Connection closed by remote host` —— TCP 建得起来，SSH 版本号交换被掐断；同一台服务器的 HTTPS 却完全正常。
+
+三个叠加的原因：
+
+1. **规则表里没有这台服务器的直连规则** —— 流量落到兜底 `MATCH`，交给代理节点
+2. **代理节点不放行 22 端口** —— 经代理端口对任意主机打 `:22` 都返回 `502 Bad Gateway`，`:443` 正常 200。所以「让 SSH 走代理节点」这条路本身不存在
+3. **域名规则对 SSH 无效** —— SSH 先解析再按 IP 连接，代理内核只看到 IP，`DOMAIN-SUFFIX` 永远匹配不到
+
+### 正确写法
+
+```yaml
+rules:
+  - AND,((IP-CIDR,<服务器 IP>/32,no-resolve),(DST-PORT,22)),DIRECT
+```
+
+`AND` / `OR` / `NOT` 逻辑规则 mihomo 1.14+ 支持，嵌套条件用括号包住，整条当普通规则放在规则表最前面（先于订阅规则与兜底 `MATCH`）。官方文档：<https://wiki.metacubex.one/config/rules/#and-or-not>。
+
+**必须限定 `DST-PORT,22`。** 只写 `IP-CIDR,<服务器 IP>/32,DIRECT` 会把同一个 IP 上的 443 一起拖成直连 —— 实测同一个 6.9M 的仓库：直连 111s（≈62KB/s），走代理节点 3s（≈2.3MB/s），差 36 倍。SSH 只能直连（节点不放行 22），HTTPS 不必陪着一起慢。改完的收益是「SSH 从不可用变为可用」，不是变快 —— SSH 的耗时由那条直连线路决定。
+
+### 两条容易踩的组合
+
+- **`fake-ip-filter` 与域名规则互斥**：把某个域名豁免出 fake-IP（DNS 直接返回真实 IP）之后，代理内核就只看得到 IP，针对它的 `DOMAIN-SUFFIX` 规则永远不生效；反过来，只有域名仍走 fake-IP（内核能把假地址反查回域名）时，域名规则才好用。两者二选一，别一口气都写上。
+- **扩展脚本里规则写错位置会静默失效**：规则字符串落在上一行注释的末尾（`// …… 'DOMAIN-SUFFIX,example.com,DIRECT'` 后面接 `const prependRules = [];`），数组永远是空的，规则一条都没进规则表，而且没有任何报错 —— 表面看「配置都写了」，实际什么都没生效。
+
+### 怎么验
+
+只看运行时的生成产物，不看源文件（Clash Verge 的配置目录里 100KB+ 的 `clash-verge.yaml` 才是真规则表）：
+
+```bash
+# 规则表首条
+awk '/^rules:/{f=1;next} f&&/^- /{print; exit}' clash-verge.yaml
+# SSH 通路
+git ls-remote git@<你的域名>:<owner>/<repo>.git
+# HTTPS 通路没被误伤（计时应仍是秒级）
+time git clone --depth=1 https://<你的域名>/<owner>/<repo>.git /tmp/x
+```
+
+`git clone` 计时必须配落盘校验（`du -sh /tmp/x`）：被 `timeout` 收掉的挂死连接也会返回 0（那是管道末端的退出码，不是 git 的），只有目录真的落地才算通过。
+
+改配置文件的写法对照见 [[git-proxy|git-proxy]]。
+
 #### v2ray-core
 #### ssrlocal, sslocal
 ### 一些资源
