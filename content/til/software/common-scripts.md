@@ -55,4 +55,3 @@ ls -la /etc/sudoers.d/    # 列出所有配置文件
 来源: [How to Configure Sudo Access Without a Password on Ubuntu](https://oneuptime.com/blog/post/2026-03-02-how-to-configure-sudo-access-without-a-password-on-ubuntu/view)
 
 
-相关：[[keep-my-ssh-keys-safe|keep-my-ssh-keys-safe]]

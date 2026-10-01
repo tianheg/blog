@@ -89,4 +89,3 @@ Ensure that the mediawiki native hostname does not equal to the domain the wiki 
 把 Database host 改为 `database`。refer <https://stackoverflow.com/a/57312266/12539782>
 
 
-相关：[[mitmproxy|mitmproxy]]

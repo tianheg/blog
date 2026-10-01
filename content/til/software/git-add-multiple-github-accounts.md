@@ -64,4 +64,3 @@ git config --local user.email ""
 - <https://www.freecodecamp.org/news/manage-multiple-github-accounts-the-ssh-way-2dadc30ccaca/>(理解更清晰)
 
 
-相关：[[git-proxy|git-proxy]]

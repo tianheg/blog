@@ -26,4 +26,3 @@ header: Linux
 > If you boot fine, Ignore it because it is basically a garbage error. The Ubuntu kernel developers, in their great wisdom, decided to print level4 errors at bootup. If the bios manufacturer didn't implement ACPI the way the kernel expects, and it prints the errors on the screen. There is a way to stop the kernel from printing level4 but it probably isn't worth the trouble. > > Edit: My brain said level4 but my fingers insisted on level 3, so I edited appropriately > > from <https://forums.linuxmint.com/viewtopic.php?p=2163183&sid=b70de791fc21b0f17b4560e38e989188#p2163183>
 
 
-相关：[[linux-temporary-failure-resolving-url|linux-temporary-failure-resolving-url]]

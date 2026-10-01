@@ -9,7 +9,6 @@ header: Tools
 2. 通过ApkMirror Installer 安装
 
 
-相关：[[android11-use-private-dns|android11-use-private-dns]]
 
 相关：[[mirror|mirror]]
 
