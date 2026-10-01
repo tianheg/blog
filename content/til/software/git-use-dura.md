@@ -21,6 +21,5 @@ find ~ -type d -name .git -prune | xargs -I= sh -c "cd =/..; dura watch" # BE CA
 ```
 
 
-相关：[[git-proxy|git-proxy]]
 
 相关：[[git-gitea|git-gitea]]

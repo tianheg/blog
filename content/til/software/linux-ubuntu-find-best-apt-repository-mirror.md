@@ -19,4 +19,3 @@ wget -qO - mirrors.ubuntu.com/mirrors.txt
 ```
 
 
-相关：[[linux-ubuntu22-04-install-lamp-and-https|linux-ubuntu22-04-install-lamp-and-https]]

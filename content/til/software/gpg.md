@@ -121,4 +121,3 @@ Above came from git commit -m "", when signing with GPG
 Fix it with `gpgconf --kill gpg-agent`
 
 
-相关：[[keep-my-ssh-keys-safe|keep-my-ssh-keys-safe]]

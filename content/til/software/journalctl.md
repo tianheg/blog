@@ -12,4 +12,3 @@ header: Linux
 ### `Hands-Free Voice gateway: rfcomm_bind: Address already in`
 
 
-相关：[[android11-use-private-dns|android11-use-private-dns]]
