@@ -335,7 +335,7 @@ https://aur.archlinux.org/packages/firefox-extension-arch-search
 点击 Sources 的 *.xpi 文件即可安装。
 
 
-相关：[[js-expressjs|js-expressjs]]
+相关：[[js-expressjs|js-expressjs]]、[[firefox-android-secret-settings|Firefox for Android 的 Secret Settings]]
 
 ## 参考
 - [Web Apps in Firefox — Firefox Source Docs](https://firefox-source-docs.mozilla.org/browser/components/taskbartabs/docs/index.html)
