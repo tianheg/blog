@@ -47,6 +47,53 @@ header: Tools
 - 设置 `network.trr.default_provider_uri = https://mozilla.cloudflare-dns.com/dns-query`
 - 重启电脑后会出现 Cloudflare、NextDNS 等备选项
 
+### 地址栏：内网域名直连（不当作搜索词）
+在地址栏敲 `nas.lan` 这类内网域名，如果后缀既不在 Public Suffix List 里、又没被显式放行，Firefox 会把它当关键词丢给搜索引擎——内网机器名再多也搜不出来。这是地址栏的域名修复（fixup）逻辑，**不需要装扩展**（AMO 上搜不到做这件事的扩展，命中的都是别的用途），两条 pref 就够。
+
+放行一个后缀：
+
+```text
+browser.fixup.domainsuffixwhitelist.lan = true
+```
+
+- 这**不是**已存在的 pref，要在 `about:config` 点右侧 **+** 新建，类型选 **Boolean**，值 `true`；不需要重启，立即生效
+- pref 名是动态的：`browser.fixup.domainsuffixwhitelist.<后缀>`，`<后缀>` 不带前导的点。多一个内网后缀就再建一条
+- 覆盖该后缀及其所有子域（`router.lan`、`nas.lan`、`a.b.lan` 全部直连）
+
+默认已放行的后缀（`all.js` 里写死的）：`.test`、`.example`、`.invalid`、`.localhost`、`.internal`（2025-03 加）、`.local`。**`.lan` 不在里面**，必须自己加。
+
+精确放行单个域名（只放一个名字，不涉及后缀）：
+
+```text
+browser.fixup.domainwhitelist.<完整域名> = true
+```
+
+单标签主机名（直接敲 `nas`、`router` 这种没有点的）：
+
+```text
+browser.fixup.dns_first_for_single_words = true
+```
+
+默认 `false`——单标签词一律先搜索；改成 `true` 后先试 DNS。
+
+兜底提示（万一还是被搜了）：
+
+```text
+browser.urlbar.dnsResolveSingleWordsAfterSearch = 1
+```
+
+默认 `0`。设为 `1` 后，单标签搜索前先做一次 DNS 探测，内网能应答就弹「是否改为访问 xxx」；点 yes 会自动把对应的 `browser.fixup.domainwhitelist.*` 写上。代价是每次单词搜索都多一次 DNS 查询。
+
+一刀切（地址栏永不搜索，输入什么都按 URL 处理）：
+
+```text
+keyword.enabled = false
+```
+
+不建议——打错一个字母就只剩报错页，不给自己留退路。
+
+消费端在 `docshell/base/URIFixup.sys.mjs`，读 `browser.fixup.domainwhitelist.` 与 `browser.fixup.domainsuffixwhitelist.` 两个 pref 分支；早年那套 C++ 实现所在的 `docshell/base/nsDefaultURIFixup.cpp` 在当前版本已经不存在（逻辑整体迁到 JS 侧）。以上 pref 于 2026-10 在源码 tag `FIREFOX_158_0b2_RELEASE`（即 Dev Edition 158.0b2）逐条核对过，默认值同 `all.js` / `firefox.js`。
+
 ### Privacy & Security
 #### Disable WebRTC
 https://mullvad.net/en/help/webrtc
@@ -458,3 +505,6 @@ https://aur.archlinux.org/packages/firefox-extension-arch-search
 - [Add-on signing in Firefox（xpinstall.signatures.required）](https://support.mozilla.org/en-US/kb/add-on-signing-in-firefox)
 - [RubenKelevra: Firefox tweaks gist](https://gist.github.com/RubenKelevra/fd66c2f856d703260ecdf0379c4f59db)
 - [Firefox performance tweaks（另一份清单）](https://xn--ime-zza.eu/3)
+- [GoToIntranetSiteForSingleWordEntryInAddressBar — Firefox administrator reference（domainwhitelist / domainsuffixwhitelist 的官方说明）](https://firefox-admin-docs.mozilla.org/reference/policies/gotointranetsiteforsinglewordentryinaddressbar/)
+- [De-crappifying Firefox's automatic address mangling — cameratim](https://www.cameratim.com/computing/decrapping-firefox)
+- [docshell/base/URIFixup.sys.mjs — 读取 fixup 白名单 pref 的实现](https://github.com/mozilla-firefox/firefox/blob/main/docshell/base/URIFixup.sys.mjs)
