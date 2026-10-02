@@ -337,6 +337,81 @@ https://scottpaterson.ca/firefox-dark-mode-pdf/
 #### RSS File Open Loop
 有的网站访问 RSS 页面时是下载 *.rss 文件。如果用 Firefox 打开，Firefox 可能不停地打开这个文件。删除本地文件即可停止。
 
+### 从源码构建 Developer Edition（Windows）
+
+Developer Edition 不是独立仓库，就是 **`beta` 分支 + aurora branding**：
+
+- `browser/config/mozconfigs/*/devedition` 里只有三件事：`MOZ_REQUIRE_SIGNING=`（免签名要求）、`--with-branding=browser/branding/aurora`、source 一份 `common-opt`
+- `browser/branding/aurora/configure.sh` 定义 `MOZ_APP_DISPLAYNAME="Firefox Developer Edition"` 和 `MOZ_DEV_EDITION=1`，后者是浏览器工具箱等 devtools 特性的开关
+- 更新通道由构建时的 `MOZ_UPDATE_CHANNEL=aurora` 注入
+
+#### 前置 toolchain
+
+- **MozillaBuild** —— Windows 上的构建 shell，官方唯一入口 `https://ftp.mozilla.org/pub/mozilla/libraries/win32/MozillaBuildSetup-Latest.exe`（NSIS 安装器，`/S` 可静默），装到默认 `C:\mozilla-build`
+- **Visual Studio 2022 Build Tools + Windows SDK** —— `winget install --id Microsoft.VisualStudio.2022.BuildTools --override "--quiet --wait --add Microsoft.VisualStudio.Workload.VCTools --includeRecommended"`
+
+两个容易误判的点：
+
+- **`mach bootstrap` 在 Windows 上直接抛 `NotImplementedError`**（`python/mozboot/mozboot/windows.py` 里写死让你改用 MozillaBuild），所以 Linux 那套 `bootstrap.py` 流程在 Windows 上不存在
+- **artifact 模式在 Windows 上照样需要 VS + Windows SDK**。`toolchain.configure` 里 `include("windows-toolchain.configure", when=is_windows)` 没有 `compile_environment` 门控：即使 `--disable-compile-environment`，只要 host/target 是 `msvc` 就会做 SDK 检测，缺失即 `FatalCheckError: Cannot find a Windows SDK for version >= 0x...`。这 ~10GB 省不掉
+
+#### 构建
+
+```bash
+git clone --branch beta https://github.com/mozilla-firefox/firefox
+cd firefox
+```
+
+`mozconfig`：
+
+```text
+ac_add_options --enable-artifact-builds
+ac_add_options --with-branding=browser/branding/aurora
+export MOZ_UPDATE_CHANNEL=aurora
+ac_add_options --enable-update-channel=aurora
+MOZ_REQUIRE_SIGNING=
+ac_add_options --disable-tests
+ac_add_options --enable-bootstrap
+mk_add_options MOZ_OBJDIR=@TOPSRCDIR@/obj-dev-edition
+```
+
+- **不要照抄官方 `browser/config/mozconfigs/*/devedition`**：它 source 的 `common-opt` 硬编码了 `/builds/gls-gapi.data` 这类只在 CI worker 上存在的 keyfile 路径，本地 configure 必挂
+- `--enable-bootstrap` 让 mach 从 Taskcluster 自己拉缺失的 toolchain。`node.configure` 里的 `bootstrap_search_path("node", ...)` 会拉 node（顺带 7z / upx / mozmake）进 `~/.mozbuild`，**机器上根本没装 Node 也能构建**。这个开关对 beta/非 nightly 默认关闭，必须手写；已经装了 VS + SDK 时不会重复拉 vs 工具链
+
+然后：
+
+```bash
+./mach build
+./mach run
+```
+
+artifact 模式只下载预编译二进制 + 构建前端资源，磁盘 ~20GB，8 核以上机器通常 1–3 分钟；增量 `./mach build` 约 30–60 秒，`./mach build faster` 只重建本地 JS/CSS/资源。**改 C/C++/Rust 就必须切全量构建**（去掉 `--enable-artifact-builds`，磁盘 30GB+、时间几十分钟起）。
+
+artifact 能不能用不必担心 git clone：每个 push 都同时注册了 hg changeset 和 git sha 两条 Taskcluster revision 路由，`gecko.v2.mozilla-beta.shippable.revision.<git-sha>.firefox.win64-opt` 直接命中——官方文档里「git artifact build 需要 git-cinnabar」那句已经过期。注意 opt 在 `.shippable` 命名空间下，直接查 `linux64-opt` 会 404。
+
+#### 在脚本 / SSH 里非交互驱动 MozillaBuild
+
+```powershell
+$env:USE_MINTTY = '0'   # 否则走 mintty GUI，无头会话直接卡住
+$env:MSYS = 'enable_pcon'
+& C:\mozilla-build\start-shell.bat -mingw64 -c "cd /c/mozilla-source/firefox && export MSYSTEM=MINGW64 && ./mach build"
+```
+
+**`export MSYSTEM=MINGW64` 不能省**：非交互起 shell 时 `MSYSTEM` 是空的，mozmake 递归调用的那层 mach 会在 `python/mach/mach/site.py` 的 `sys_path_stdlib()`（`assert stdlib.returncode == 0`）崩掉，报错停在 `recurse_artifact ... Error 1` —— 看着像 artifact 下载失败，其实是 shell 环境不对。
+
+#### 验证产物是不是真的 Developer Edition
+
+- `obj-*/modules/AppConstants.sys.mjs` → `MOZ_DEV_EDITION: true`、`MOZ_APP_DISPLAYNAME_DO_NOT_USE: "Firefox Developer Edition"`、`MOZ_UPDATE_CHANNEL: "aurora"`
+- `dist/bin/firefox.exe --version` → `Mozilla Firefox <版本>b<N>`
+- `dist/bin/application.ini` → `RemotingName=firefox-dev`、`CodeName=Firefox Developer Edition`
+- `dist/bin/browser/defaults/preferences/firefox-branding.js` → aurora 的 `app.update.interval` 与 `/firefox/aurora/` 更新 URL
+
+#### 两个坑
+
+**改 update channel 之后 `channel-prefs.js` 不会自动重新生成。** `browser/app/moz.build` 里的 `GeneratedFile("channel-prefs.js", script="generate_channel_prefs.py")` 只跟踪脚本和模板的 mtime，**不跟踪 configure 的 substs**：先构建出 `app.update.channel = "default"` 之后，再加 `--enable-update-channel=aurora` 重建，文件内容不会变。而且 `dist/bin/defaults/pref/channel-prefs.js` 是指向 objdir 里 `browser/app/channel-prefs.js` 的**符号链接** —— 只删 dist 那份没用；删 objdir 目标会让构建报 `Symlink target path does not exist`，而 make 也不会因此重新触发那条生成规则。可行做法：读模板 `browser/app/profile/channel-prefs.js`，把 `@MOZ_UPDATE_CHANNEL@` 换成 `buildconfig.substs["MOZ_UPDATE_CHANNEL"]` 的当前值（`./mach python` 里可查），按 LF 写回 objdir 那份，再 `./mach build`，dist 的符号链接就会指到新内容。
+
+**Defender 排除项得手动加。** 正常流程里 `bootstrap.py` 会自动把构建目录加进排除列表，走 MozillaBuild 就没有这一步。不加的话，测试用例里被当作样本的文件会被实时防护隔离，症状是构建报「missing file」这类莫名其妙的错。要排除三处：`C:\mozilla-build`、源码目录、`%USERPROFILE%\.mozbuild`。
+
 ### Firefox for Android
 
 Android 端（源码名 Fenix）与桌面版是两套代码，这一节只记 Android 专属的内容。
@@ -453,6 +528,12 @@ https://developer.mozilla.org/en-US/docs/Web/API/Element/setHTML
 ### Linux 专属
 只在 Linux 上才有意义的内容集中放在这里，Windows 端不用管。
 
+#### 从源码构建 Developer Edition
+
+Linux 走官方 `bootstrap.py`（`python3 bootstrap.py`，交互里选 Firefox for Desktop 或 Artifact Mode），然后 `git checkout beta`，用与 Windows 同一份 mozconfig——`--enable-bootstrap` 同样要写，同样是为了让 mach 自己拉 node。
+
+一个只属于这里的硬约束：**源码不能放在 `/mnt/c`**。官方文档明确说在 NTFS / 网络盘上构建会「静默且难以诊断地失败」，必须放在 WSL 自己的 ext4 里。
+
 #### Wayland
 为 Firefox 添加环境变量 `MOZ_ENABLE_WAYLAND=1`。
 
@@ -508,3 +589,10 @@ https://aur.archlinux.org/packages/firefox-extension-arch-search
 - [GoToIntranetSiteForSingleWordEntryInAddressBar — Firefox administrator reference（domainwhitelist / domainsuffixwhitelist 的官方说明）](https://firefox-admin-docs.mozilla.org/reference/policies/gotointranetsiteforsinglewordentryinaddressbar/)
 - [De-crappifying Firefox's automatic address mangling — cameratim](https://www.cameratim.com/computing/decrapping-firefox)
 - [docshell/base/URIFixup.sys.mjs — 读取 fixup 白名单 pref 的实现](https://github.com/mozilla-firefox/firefox/blob/main/docshell/base/URIFixup.sys.mjs)
+- [Building Firefox On Windows — Firefox Source Docs](https://firefox-source-docs.mozilla.org/setup/windows_build.html)
+- [Understanding Artifact Builds — Firefox Source Docs](https://firefox-source-docs.mozilla.org/contributing/build/artifact_builds.html)
+- [Configuring Build Options — Firefox Source Docs](https://firefox-source-docs.mozilla.org/setup/configuring_build_options.html)
+- [Firefox Branding（official / aurora / nightly 的对应关系）— Firefox Source Docs](https://firefox-source-docs.mozilla.org/browser/branding/docs/index.html)
+- [Using Mach on Windows Outside MozillaBuild — Firefox Source Docs](https://firefox-source-docs.mozilla.org/mach/windows-usage-outside-mozillabuild.html)
+- [browser/config/mozconfigs/linux64/devedition](https://github.com/mozilla-firefox/firefox/blob/beta/browser/config/mozconfigs/linux64/devedition)
+- [browser/app/generate_channel_prefs.py（channel-prefs.js 的生成器）](https://github.com/mozilla-firefox/firefox/blob/beta/browser/app/generate_channel_prefs.py)
