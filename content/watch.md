@@ -104,6 +104,7 @@ function filterWatch(type) {
 
 | Type | Name | Review | Release Year |
 | --- | --- | --- | --- |
+| 电影 | Minions & Monsters 小黄人与大怪兽 |  | 2026 |
 | 电影 | Star Wars: The Mandalorian and Grogu 星球大战：曼达洛人与古古 | 古古挺可爱的，不错的娱乐片 | 2026 |
 | 电影 | The Odyssey 奥德赛 | [[odyssey-movie\|影评]] | 2026 |
 | 电影 | 功夫女足 | 不好看，有点尬 | 2026 |
