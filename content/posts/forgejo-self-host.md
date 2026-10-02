@@ -217,6 +217,48 @@ ENABLED = false          # no workflow parsing, no run queue
 ENABLED = false          # the default value, written down
 ```
 
+A second batch covers the parts a single-user instance has no use for. Each of these is
+off-by-default in a way you have to check rather than assume:
+
+```ini
+[api]
+ENABLE_SWAGGER = false                  # /api/swagger and /api/v1/swagger are published by default
+
+[admin]
+DISABLE_REGULAR_ORG_CREATION = true
+
+[webhook]
+DISABLE_WEBHOOKS = true                 # with no webhooks configured
+
+[service.explore]
+DISABLE_USERS_PAGE = true               # /explore/users lists every account
+
+[ui]
+SHOW_USER_EMAIL = false                 # that listing shows the address
+THEMES = forgejo-auto,forgejo-light,forgejo-dark     # twelve themes ship by default
+CUSTOM_EMOJIS = forgejo                 # the default set carries gitea/github/gitlab logos
+
+[other]
+ENABLE_SITEMAP = false
+ENABLE_FEED = false                     # a git host has no reason to be in a search index
+
+[repository]
+DISABLE_FORKS = true
+DEFAULT_MIRROR_REPO_UNITS = repo.code   # migrated mirrors otherwise get issues/wiki/projects/packages
+
+[server]
+LFS_START_SERVER = false                # only once you know nothing ever stored an LFS object
+
+[cron.update_checker]
+ENABLED = false                         # the update checker cannot help an offline instance
+```
+
+Two of these deserve a check before you copy them. `LFS_START_SERVER = false` breaks
+clones of any repository that has LFS objects, so confirm first — the object table
+(`SELECT count(*) FROM lfs_meta_object`) is the honest answer, not the `git/lfs`
+directory size. And `THEMES` must keep whatever `DEFAULT_THEME` points at, which is
+`forgejo-auto`.
+
 The distinction matters: `DISABLED_REPO_UNITS` removes the packages *unit* from
 repositories, `[packages] ENABLED = false` turns off the registry itself, and the same
 split applies to Actions — the unit hides it per repository, while the global key stops
@@ -240,6 +282,8 @@ curl -s -o /dev/null -w "%{http_code}\n" https://git.example.com/-/actions    # 
 curl -s -o /dev/null -w "%{http_code}\n" \
   "https://git.example.com/.well-known/webfinger?resource=acct:youruser@git.example.com"  # 404
 curl -s -o /dev/null -w "%{http_code}\n" https://git.example.com/api/v1/nodeinfo          # 404
+curl -s -o /dev/null -w "%{http_code}\n" https://git.example.com/api/swagger              # 404
+curl -s -o /dev/null -w "%{http_code}\n" https://git.example.com/sitemap.xml              # 404
 ```
 
 And per repository:
@@ -249,6 +293,63 @@ curl -s https://git.example.com/api/v1/repos/youruser/yourrepo \
   | python3 -c "import json,sys;d=json.load(sys.stdin);print({k:d[k] for k in d if k.startswith('has_')})"
 # {'has_issues': False, 'has_pull_requests': False, 'has_wiki': False,
 #  'has_projects': False, 'has_packages': False, 'has_actions': False}
+```
+
+### Bind the published ports to loopback
+
+The compose file above publishes two ports on every interface: Forgejo on `3000` and
+Anubis on `3001`. Neither needs to be reachable from outside the host — Caddy runs with
+`network_mode: host`, so it talks to Anubis on the loopback address, and Anubis reaches
+Forgejo over the compose network. Bind them to loopback:
+
+```yaml
+    ports:
+      - "127.0.0.1:3000:3000"     # forgejo
+      - "127.0.0.1:3001:3000"     # anubis
+```
+
+A firewall in front of them is one control; not listening is a second one. Recreate, do
+not restart — a changed port binding needs the container recreated:
+
+```bash
+docker compose config >/dev/null && docker compose up -d forgejo anubis
+ss -lntp | grep -E ':3000|:3001'      # both should read 127.0.0.1, not 0.0.0.0
+```
+
+### Scope the trusted proxy list
+
+The installed configuration ships `PROXY_TRUSTED_PROXIES = *` and
+`REVERSE_PROXY_TRUSTED_PROXIES = *`, which means any `X-Forwarded-For` header is
+believed. Nothing can reach those ports from outside the host, so this is not an
+escalation — but it does make the client address in Forgejo's log advisory rather than
+factual, and that address is what any future rate limiting or audit would key on. Name
+the two sources that actually proxy:
+
+```ini
+[server]
+PROXY_TRUSTED_PROXIES = 127.0.0.1,172.18.0.0/16
+
+[security]
+REVERSE_PROXY_TRUSTED_PROXIES = 127.0.0.1,172.18.0.0/16
+```
+
+Get the subnet from `docker network inspect <compose-network>`, and confirm the chain
+still resolves real clients instead of collapsing to the proxy address:
+
+```bash
+curl -s -o /dev/null https://git.example.com/api/v1/version
+docker logs --since 30s forgejo | grep -oE "completed GET /api/v1/version for [0-9a-f.:]+" | tail -1
+# the address should be your client's, not the Anubis container's
+```
+
+While you are here: Anubis sits in front of every request, and the image is referenced
+as `:latest`, a rolling tag with no rollback anchor — if an upstream push breaks it, the
+whole instance is down and there is no version to fall back to. Pin the digest you have
+tested:
+
+```bash
+docker inspect --format '{{index .RepoDigests 0}}' ghcr.io/techarohq/anubis:latest
+# image: ghcr.io/techarohq/anubis@sha256:…
 ```
 
 Nothing is deleted. Issues and pull requests already in the database survive; only the
