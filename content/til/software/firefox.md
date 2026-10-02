@@ -432,6 +432,31 @@ $env:MSYS = 'enable_pcon'
 - `autoconfig`：能改默认值、能锁定，代价是写安装目录
 - 有些东西**不在 pref 里**（默认键盘快捷键就是一例）：要么改 UI 代码，要么走自建构建。后者更干净——改源码重构建是分钟级，改 `omni.ja` 要经历「解包 → 改 → `zip -qr9XD` 重打包 → 清缓存」，而且每次 Firefox 升级都要重做一遍
 
+#### 企业策略层（policies.json）的三个状态
+
+`about:policies` 显示什么，完全由策略引擎的 status 决定（`toolkit/components/enterprisepolicies/EnterprisePoliciesParent.sys.mjs` 的 `_initialize()`）：
+
+- **`ACTIVE`** —— 读到策略并应用，页面渲染策略表
+- **`INACTIVE`** —— 所有来源里一条策略都没找到，页面显示 `The Enterprise Policies service is inactive.`。**这是「从没配过策略」的默认状态，不是故障。**另一个特例：唯一的策略是 `Certificates.ImportEnterpriseRoots` 时也算 INACTIVE（防杀毒软件拿它当跳板）
+- **`FAILED`** —— provider 出错或 JSON 解析失败，页面出现 Errors 段。**这才是真故障**
+
+读取来源：install dir 下的 `distribution/policies.json`（Windows / macOS）、`/etc/firefox/policies`（Linux），外加 Windows 的 GPO 通道（注册表 `HKLM` / `HKCU`，machine 覆盖 user）。`browser.policies.loglevel` 能打开引擎日志，看到它实际读了哪个路径。
+
+**两个网上流传、但普通版用不了的 pref**（核过生效条件）：
+
+- `browser.policies.alternatePath` —— 条件里有 `Cu.isInAutomation || AppConstants.NIGHTLY_BUILD`，且要求 install dir 里没有 policies.json。Dev Edition / Release 上不生效
+- `toolkit.policies.perUserDir` —— 条件里有 `Cu.isInAutomation`，普通使用同样不生效
+
+#### 两个安装不能共用一份策略（更新方向相反）
+
+官方安装版**必须保留自动更新**（安全更新），而自建版要**关掉更新**——自建版 branding 与 `app.update.channel` 都是官方通道（aurora），不关就可能顺着官方通道把自己更新成官方版，把自建成果覆盖掉。两者诉求正好相反，所以「日常一份、实验一份」才是对的。
+
+做法：一个真源目录放 `common.json`（共用项）+ 每个安装的增量 json，用脚本合并后写进各自的 `distribution/`。合并写文件时用**无 BOM 的 UTF-8**：带 BOM 的 JSON 会让 `JSON.parse` 直接抛错，策略引擎转 `FAILED`，而且这个坑只看文件内容发现不了。
+
+**改策略不需要重新构建**：policies 在启动时读取，`distribution/` 里的文件不会被新版构建清掉。但自建构建有个坑——`browser/app/distribution/` 里的源文件**不会**被本地 `./mach build` 打包进 `dist/bin`（那条路是官方安装包的 installer 才走），要手动拷一份。
+
+另有一个语义陷阱：`SupportMenu` 名字像「去掉帮助菜单」，实际是**添加**一个帮助菜单项。127 个 policy（`policies-schema.json` 顶层属性）里这类名字误导的不止一个，用前翻 schema 的 `description`。
+
 #### 五道逃生门（Firefox 自带）
 
 1. **`firefox --safe-mode`（Troubleshoot Mode）** —— 停用扩展与主题、关硬件加速、重置工具栏，**并跳过 `userChrome.css` / `userContent.css`**，不删任何数据。任何 CSS/pref 定制都能靠它照常上网
@@ -654,3 +679,6 @@ https://aur.archlinux.org/packages/firefox-extension-arch-search
 - [Firefox Changes Breaking userChrome.css](https://www.userchrome.org/firefox-changes-userchrome-css.html)
 - [arkenfox/user.js — Apply & Update & Maintain（overrides + 更新脚本 + prefsCleaner）](https://github.com/arkenfox/user.js/wiki/3.4-Apply-&-Update-&-Maintain)
 - [MrOtherGuy/firefox-csshacks（样式用 git 管理、@import 引入）](https://github.com/MrOtherGuy/firefox-csshacks)
+- [policies-schema.json — 127 个 policy 的字段定义](https://github.com/mozilla-firefox/firefox/blob/beta/browser/components/enterprisepolicies/schemas/policies-schema.json)
+- [EnterprisePoliciesParent.sys.mjs — 策略引擎的 ACTIVE / INACTIVE / FAILED 判定与来源顺序](https://github.com/mozilla-firefox/firefox/blob/beta/toolkit/components/enterprisepolicies/EnterprisePoliciesParent.sys.mjs)
+- [aboutPolicies.js — about:policies 页面如何按 status 决定渲染](https://github.com/mozilla-firefox/firefox/blob/beta/browser/components/enterprisepolicies/content/aboutPolicies.js)
