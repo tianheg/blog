@@ -412,6 +412,57 @@ $env:MSYS = 'enable_pcon'
 
 **Defender 排除项得手动加。** 正常流程里 `bootstrap.py` 会自动把构建目录加进排除列表，走 MozillaBuild 就没有这一步。不加的话，测试用例里被当作样本的文件会被实时防护隔离，症状是构建报「missing file」这类莫名其妙的错。要排除三处：`C:\mozilla-build`、源码目录、`%USERPROFILE%\.mozbuild`。
 
+### 定制分层与「改不坏」的边界
+
+目标：定制自由度尽量大，同时保证**日常那个浏览器永远能起来**。判断标准不是「改得爽」，而是「改坏了多久能回到可用状态」。
+
+#### 七个定制方向（按回滚难度递增）
+
+1. **GUI 层** —— 工具栏自定义、主题、扩展、容器、`about:config` 里手点。全在 profile 内，零风险
+2. **pref 层（`about:config` / `user.js`）** —— 改错了 reset 就回来。唯一坑：`user.js` 每次启动强制写回，`prefs.js` 改不动它，所以偏好要写在独立的 overrides 文件里
+3. **`policies.json`（官方策略层）** —— 官方支持的定制通道，能设任意 pref 并加锁，重启后在 `about:policies` 可视化验证。Windows 放 exe 同级的 `distribution/`，Linux 可放 `/etc/firefox/policies`。**优先级应高于 autoconfig**：不必碰安装目录里的其它文件，行为有文档和 schema 保证
+4. **`userChrome.css` / `userContent.css`** —— 只影响外观。CSS **无法新增 UI 元素**，只能改已有元素；失效症状是「丑」（标签栏错位、图标消失）而不是「打不开」。**Troubleshoot Mode 会直接跳过这两个文件**。风险在于选择器随 UI 重构崩塌：FF68 的 Quantumbar、FF69 起 stylesheets pref 默认关闭、FF133 一次没写进 changelog 的改动，都让一批样式一夜失效
+5. **autoconfig（`mozilla.cfg` + `defaults/pref/` 下的 js）** —— 启动早期执行 JS 设 pref，能 `defaultPref` 改默认值、能 `lockPref` 锁住。要写安装目录。两个硬性坑：cfg **首行必须被忽略**（写注释），`general.config.obscure_value` 默认 13 意味着文件要 ROT13 编码，官方建议设成 0
+6. **自建构建** —— branding、更新通道、默认 pref、`distribution/policies.json` 可以烘进产物。好处是 install dir 属于你自己的 objdir，改它不污染系统安装
+7. **最危险区：在浏览器特权上下文加载自定义 JS** —— 需要在安装根目录放 `config.js` 和 `defaults/pref/` 下的 prefs 文件那类方案，能力最强也最容易让浏览器起不来。新 profile **首次运行完成之前不要装**脚本
+
+#### pref 三层方式的边界
+
+- `about:config` / `user.js`：改的是**当前值**，改不了**默认值**，也**不能锁定**（第三方扩展可覆盖）
+- `autoconfig`：能改默认值、能锁定，代价是写安装目录
+- 有些东西**不在 pref 里**（默认键盘快捷键就是一例）：要么改 UI 代码，要么走自建构建。后者更干净——改源码重构建是分钟级，改 `omni.ja` 要经历「解包 → 改 → `zip -qr9XD` 重打包 → 清缓存」，而且每次 Firefox 升级都要重做一遍
+
+#### 五道逃生门（Firefox 自带）
+
+1. **`firefox --safe-mode`（Troubleshoot Mode）** —— 停用扩展与主题、关硬件加速、重置工具栏，**并跳过 `userChrome.css` / `userContent.css`**，不删任何数据。任何 CSS/pref 定制都能靠它照常上网
+2. **`about:config` 把 `toolkit.legacyUserProfileCustomizations.stylesheets` 改回 false** —— 一键停用全部 CSS 定制，下次启动生效
+3. **`about:profiles` 新建干净 profile** —— 做对照（问题消失 = 出在扩展/pref 里），也是二分定位的载体
+4. **`about:support` → Refresh Firefox** —— 重置到出厂但保留书签、密码、历史；代价是扩展及其数据被移除
+5. **换掉 / 改名 profile 目录** —— Firefox 会当新用户重新初始化，旧目录还在，等于回滚
+
+#### Dev Edition 的 profile 名冲突（源码确认）
+
+`toolkit/profile/nsToolkitProfileService.cpp` 里写死了 `DEV_EDITION_NAME "dev-edition-default"`：Dev Edition 会优先认领名为 `dev-edition-default` 的 profile。于是**官方安装的 Dev Edition 与自建 Dev Edition 会抢同一个 profile**——自建版跑起来升级了 profile schema，官方版再打开就要面对版本不匹配。官方构建另有 `MOZ_BLOCK_PROFILE_DOWNGRADE` 保护（对应 `--allow-downgrade`，**别用来绕过**，那正是丢数据的入口）。
+
+做法：自建版做一个专属快捷方式，固定带 `-profile` 指向独立目录 + `-no-remote`，永远不让它碰日常 profile。
+
+#### 社区做法里值得抄的纪律
+
+- **偏好不写进 `user.js` 本体**，放独立的 overrides 文件，更新脚本负责备份 + 追加；更新后清理已失效的 pref
+- **升级前备份整个 profile 目录**（关掉 Firefox 再复制）。只备份 `prefs.js` 不够——它是运行时文件，覆盖不了 `user.js` 能改的东西
+- **出问题先建 TEST profile 做二分**：一半 section 一半 section 加，最后逐项在 `about:config` 里 toggle；同时看 Browser Console 有没有 pref 解析报错
+- **样式集用 git 管理**：仓库 clone 到 profile 的 `chrome/` 目录，样式用 `@import` 逐个引入（**必须放在文件最前面**，`@namespace` 只在文件级生效），自己的规则写在 `userChrome.css` 尾部——`git pull` 更新样式集不会覆盖
+- 只把 `policies.json`、`user.js`、overrides、`chrome/` 这些**小文件**版本化进 dotfiles，整个 profile 目录别进 git
+
+#### 哪些老教程的说法已经失效（实测核对）
+
+- `general.warnOnAboutConfig` 这个 pref **已不存在**（全库零命中）。看到「改它去掉 about:config 警告」的老教程，直接跳过
+- `@-moz-document` **仍然支持**（style system 里仍有实现），`userContent.css` 做站点级样式（严格匹配 / `domain()` / `url-prefix()` / 正则）今天还能写
+- 官方安装版有**两个** `omni.ja`（toolkit 一个 + `browser/` 一个）；但 **artifact 自建版的 `dist/bin` 里没有 `omni.ja`**，前端资源是解包的散文件。要折腾先分清自己面对的是哪种布局
+- `omni.ja` 内的 UI 入口文件早已从 `browser.xul` 改名为 `browser.xhtml`
+- autoconfig 现在**默认跑在沙箱里**：`extensions/pref/autoconfig/src/nsReadConfig.cpp` 里 `sandboxEnabled = (channel 是 beta 或 release)`，可用 `general.config.sandbox_enabled` 覆盖，另有一份文件名黑名单。beta 通道的构建默认吃沙箱
+- 老一批「装扩展改 UA / 屏蔽 canvas 指纹」的方案要重新评估：其中不少扩展已停更或功能被原生取代，而装扩展改 UA 反而更容易被识别
+
 ### Firefox for Android
 
 Android 端（源码名 Fenix）与桌面版是两套代码，这一节只记 Android 专属的内容。
@@ -596,3 +647,10 @@ https://aur.archlinux.org/packages/firefox-extension-arch-search
 - [Using Mach on Windows Outside MozillaBuild — Firefox Source Docs](https://firefox-source-docs.mozilla.org/mach/windows-usage-outside-mozillabuild.html)
 - [browser/config/mozconfigs/linux64/devedition](https://github.com/mozilla-firefox/firefox/blob/beta/browser/config/mozconfigs/linux64/devedition)
 - [browser/app/generate_channel_prefs.py（channel-prefs.js 的生成器）](https://github.com/mozilla-firefox/firefox/blob/beta/browser/app/generate_channel_prefs.py)
+- [Configuring policies（policies.json 的位置与用法）— Firefox 管理员文档](https://firefox-admin-docs.mozilla.org/guides/policies-configuration/)
+- [Preferences 策略（用 policies.json 设 / 锁任意 pref）— Firefox 管理员文档](https://firefox-admin-docs.mozilla.org/reference/policies/preferences/)
+- [Diagnose Firefox issues using Troubleshoot Mode — Mozilla Support](https://support.mozilla.org/en-US/kb/diagnose-firefox-issues-using-troubleshoot-mode)
+- [Bug 333808 —— 让 Safe Mode 跳过 userChrome.css / userContent.css](https://bugzilla.mozilla.org/show_bug.cgi?id=333808)
+- [Firefox Changes Breaking userChrome.css](https://www.userchrome.org/firefox-changes-userchrome-css.html)
+- [arkenfox/user.js — Apply & Update & Maintain（overrides + 更新脚本 + prefsCleaner）](https://github.com/arkenfox/user.js/wiki/3.4-Apply-&-Update-&-Maintain)
+- [MrOtherGuy/firefox-csshacks（样式用 git 管理、@import 引入）](https://github.com/MrOtherGuy/firefox-csshacks)
