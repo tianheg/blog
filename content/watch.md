@@ -1113,5 +1113,6 @@ function filterWatch(type) {
 | 电影 | 蜘蛛侠：崭新之日 | 有时与众不同确实会被人另眼相待。但是生活是自己和我爱的人的。其他人如何看待没多大关系也不重要 | 2026 |
 | 电影 | 功夫女足 | 不好看，有点尬 | 2026 |
 | 电影 | The Odyssey 奥德赛 | [[odyssey-movie\|影评]] | 2026 |
+| 电影 | Star Wars: The Mandalorian and Grogu 星球大战：曼达洛人与古古 | 古古挺可爱的，不错的娱乐片 | 2026 |
 
 </div>
