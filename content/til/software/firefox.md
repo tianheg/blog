@@ -13,8 +13,8 @@ header: Tools
 - `xpinstall.signatures.required = false` - 允许本地安装未认证扩展文件
 - `network.captive-portal-service.enabled = false` - 不尝试寻找 captive portals
 - `network.notify.checkForProxies = false` - 不尝试寻找代理
-- `browser.cache.disk.capacity = 8192000` - 增加磁盘缓存到 8GB
-- `browser.cache.memory.capacity = 2097152` - 固定最大 2GB 内存缓存
+- `browser.cache.disk.capacity = 8192000` - 增加磁盘缓存到 8GB（遗留写法：2026-10-02 核实，现代版本对磁盘缓存有 smart size 与上限逻辑，8GB 不会被照单接受）
+- `browser.cache.memory.capacity = 2097152` - 固定最大 2GB 内存缓存（同上，2GB 内存缓存对浏览器是白占，别照抄；要调先关 `browser.cache.disk.smart_size.enabled` 才有意义）
 - `browser.quitShortcut.disabled = true` - 防止意外关闭
 - `browser.search.region = US`
 - `doh-rollout.home-region = US`
@@ -262,19 +262,23 @@ media.memory_caches_combined_limit_kb = 3145728
 ```
 `gfx.webrender.software.opengl` 和 `layers.acceleration.force-enabled` 属于前 WebRender 时代的遗留项，Windows 上别去动——它们的历史背景见文末「Linux 专属」。
 
-#### 预测式网络操作
+#### 预测式网络操作（2026-10-02 核实：predictor 那一批已作废）
 ```text
 network.dns.disablePrefetchFromHTTPS = false
 network.dnsCacheExpirationGracePeriod = 240
-network.predictor.enable-hover-on-ssl = true
-network.predictor.enable-prefetch = true
-network.predictor.preconnect-min-confidence = 20
-network.predictor.prefetch-force-valid-for = 3600
-network.predictor.prefetch-min-confidence = 30
-network.predictor.prefetch-rolling-load-count = 120
-network.predictor.preresolve-min-confidence = 10
+network.predictor.enable-hover-on-ssl = true        # 孤儿项：StaticPrefList 里还在，但无实现
+network.predictor.enable-prefetch = true            # ✗ 已移除
+network.predictor.preconnect-min-confidence = 20    # ✗ 已移除
+network.predictor.prefetch-force-valid-for = 3600   # ✗ 已移除
+network.predictor.prefetch-min-confidence = 30      # ✗ 已移除
+network.predictor.prefetch-rolling-load-count = 120 # ✗ 已移除
+network.predictor.preresolve-min-confidence = 10    # ✗ 已移除
 ```
 信心阈值调低 = 更早去解析 / 预连 / 预取，用带宽换点击后的等待时间。
+
+**为什么作废**：`netwerk/base/Predictor.cpp` 已从源码树消失，整个 `netwerk/` 目录里搜不到任何 `network.predictor.*` 的实现，`StaticPrefList.yaml` 只剩 `enable-hover-on-ssl` 一个没有对应代码的孤儿。Necko 的 predictor 被整体移除，这批信心阈值改什么都不会生效。
+
+另外，前两条（`disablePrefetchFromHTTPS` / `dnsCacheExpirationGracePeriod`）仍然有效，但语义是**允许从 HTTPS 页面预取 DNS**——与「预取全关」的取向相反，两者别同时设。
 
 #### 少进程、少隔离（省内存）
 ```text
@@ -284,6 +288,8 @@ dom.ipc.processCount = 1
 dom.ipc.processCount.webIsolated = 1
 ```
 理由：Firefox 默认按 CPU 核数开内容进程，内存开销远超必要；而且切标签时不只是把内容换回内存，还要重复换入库等库的副本。代价是站间隔离变弱——这是「省内存」和「隔离强度」之间的取舍，两台机器口径不必一致。
+
+2026-10-02 逐条核实后的判定：**这一节整体建议不动**。`privacy.partition.network_state` 已从源码中移除（全库只剩 `.connection_with_proxy` 子 pref），写 false 无效；`fission.autostart = false` 在现代 Firefox 里 fission 是强制的，写 false 很可能不被采纳、真被采纳则是明显降级隔离强度；`dom.ipc.processCount` 两条仍然有效，但单内容进程意味着一个页面崩全崩、切标签要重复换入库副本——“省内存”的账要拿稳定性来换。
 
 #### 收尾（做完 pref 再跑）
 1. 重启 Firefox
@@ -487,6 +493,9 @@ $env:MSYS = 'enable_pcon'
 - `omni.ja` 内的 UI 入口文件早已从 `browser.xul` 改名为 `browser.xhtml`
 - autoconfig 现在**默认跑在沙箱里**：`extensions/pref/autoconfig/src/nsReadConfig.cpp` 里 `sandboxEnabled = (channel 是 beta 或 release)`，可用 `general.config.sandbox_enabled` 覆盖，另有一份文件名黑名单。beta 通道的构建默认吃沙箱
 - 老一批「装扩展改 UA / 屏蔽 canvas 指纹」的方案要重新评估：其中不少扩展已停更或功能被原生取代，而装扩展改 UA 反而更容易被识别
+- **Necko 的 predictor 已被整体移除**（2026-10-02 核实）：网上所有 `network.predictor.*` 调优清单（预取/预连/预解析信心阈值）现在都是死配置，`netwerk/base/Predictor.cpp` 已不存在
+- **`privacy.partition.network_state` 已移除**（同日核实）：网络状态分区不再提供关闭开关，只留下 `.connection_with_proxy` 这类子 pref
+- **`browser.cache.disk.capacity` / `browser.cache.memory.capacity` 是前 smart size 时代的写法**：现代版本对磁盘缓存有伸缩与上限逻辑，照抄大数值没有意义
 
 ### Firefox for Android
 
