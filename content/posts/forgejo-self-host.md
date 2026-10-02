@@ -184,6 +184,85 @@ volumes:
   caddy_data:
   caddy_config:
 ```
+
+## Turn off the features you do not use
+
+Forgejo enables issues, pull requests, wikis, projects, packages, and Actions out of
+the box, and an instance that only hosts git pays for all of it: pages, API routes and
+settings nobody opens. Four keys remove the parts you do not want.
+
+The blunt one is `DISABLED_REPO_UNITS`, which disables repository units globally —
+including on repositories that already exist:
+
+```ini
+[repository]
+DISABLED_REPO_UNITS = repo.issues,repo.ext_issues,repo.pulls,repo.wiki,repo.ext_wiki,repo.projects,repo.packages,repo.actions
+```
+
+Two limits are worth knowing before reaching for it. **`repo.code` and `repo.releases`
+cannot be disabled** — the documentation lists them as always on, so the releases page
+stays. And do not append a second `[repository]` section to `app.ini`; put the key
+inside the section that is already there.
+
+Three more switches are independent of that list:
+
+```ini
+[packages]
+ENABLED = false          # the package registry: /-/packages and its API
+
+[actions]
+ENABLED = false          # no workflow parsing, no run queue
+
+[federation]
+ENABLED = false          # the default value, written down
+```
+
+The distinction matters: `DISABLED_REPO_UNITS` removes the packages *unit* from
+repositories, `[packages] ENABLED = false` turns off the registry itself, and the same
+split applies to Actions — the unit hides it per repository, while the global key stops
+Forgejo from reading `.forgejo/workflows/` at all.
+
+Federation defaults to `false`, and that default is worth pinning rather than assuming.
+Enabling it is close to irreversible: Forgejo warns that it **can permanently burn the
+domain**, because federation components may change in ways that are not backwards
+compatible without notice, after which that hostname can never federate again — with any
+software. Do not switch it on just to look at the interface.
+
+Restart and verify. A misnamed key is silently ignored, so a healthy version endpoint
+proves nothing about the switches — probe the routes:
+
+```bash
+cd /home/git
+docker compose restart forgejo        # a config change, no image pull needed
+
+curl -s -o /dev/null -w "%{http_code}\n" https://git.example.com/-/packages   # 404
+curl -s -o /dev/null -w "%{http_code}\n" https://git.example.com/-/actions    # 404
+curl -s -o /dev/null -w "%{http_code}\n" \
+  "https://git.example.com/.well-known/webfinger?resource=acct:youruser@git.example.com"  # 404
+curl -s -o /dev/null -w "%{http_code}\n" https://git.example.com/api/v1/nodeinfo          # 404
+```
+
+And per repository:
+
+```bash
+curl -s https://git.example.com/api/v1/repos/youruser/yourrepo \
+  | python3 -c "import json,sys;d=json.load(sys.stdin);print({k:d[k] for k in d if k.startswith('has_')})"
+# {'has_issues': False, 'has_pull_requests': False, 'has_wiki': False,
+#  'has_projects': False, 'has_packages': False, 'has_actions': False}
+```
+
+Nothing is deleted. Issues and pull requests already in the database survive; only the
+routes disappear. Delete the lines, restart, and the entry points are back — these
+switches are safe to try.
+
+**Do not turn on `DISABLE_HTTP_GIT`.** It disables clone and push over HTTPS, which is
+the more reliable path for large repositories. Reaching for it under the heading "turn
+off what I do not use" means you are about to break your own tooling.
+
+The compose file above sets the same keys as environment variables
+(`FORGEJO__repository__DEFAULT_REPO_UNITS=repo.code`), which is the tidier place for
+values you would otherwise re-enter from scratch. Either way they end up in `app.ini`.
+
 ## Backup Forgejo
 
 I backup data to Hetzner Storagebox.
