@@ -497,6 +497,59 @@ $env:MSYS = 'enable_pcon'
 - **`privacy.partition.network_state` 已移除**（同日核实）：网络状态分区不再提供关闭开关，只留下 `.connection_with_proxy` 这类子 pref
 - **`browser.cache.disk.capacity` / `browser.cache.memory.capacity` 是前 smart size 时代的写法**：现代版本对磁盘缓存有伸缩与上限逻辑，照抄大数值没有意义
 
+#### 策略 `Preferences` 的白名单：白名单外只能走 user.js
+
+策略层不是「什么 pref 都能写」。`Preferences` 只接受一份**前缀白名单**（`browser/components/enterprisepolicies/Policies.sys.mjs` 的 `Preferences.onBeforeAddons`）：
+
+- `allowedPrefixes`：约 42 条 —— `browser.` `dom.` `media.` `network.` `privacy.userContext.*` `toolkit.legacyUserProfileCustomizations.stylesheets` `ui.` `widget.` …；**`image.` 和 `reader.` 都不在其中**
+- `allowedSecurityPrefs`：`security.*` 另有一份独立白名单
+- `blockedPrefs`：`app.update.channel` 之类绝对禁止
+
+不匹配就直接报错，例如：
+
+```text
+Unable to set preference image.cache.size. Preference not allowed for stability reasons.
+```
+
+这条限制在策略层无解，别反复试。**按 pref 前缀分流**：
+
+| pref | 放哪 | 理由 |
+| --- | --- | --- |
+| 前缀在白名单内 | `distribution/policies.json` 的 `Preferences` | 可审计、可锁定、丢了能重建 |
+| 白名单外（`image.*` `reader.*` `nimbus.*`） | profile 目录的 `user.js` | 不受白名单约束，每次启动落地，语义等同 `Status: "user"` |
+
+实测落到 user.js 的例子：`image.cache.size`、`image.mem.decode_bytes_at_a_time`、`image.mem.shared.unmap.min_expiration_ms`、`reader.parse-on-load.enabled`、`nimbus.rollouts.enabled`。
+
+#### 怎么确认策略有没有被拒
+
+策略失败信息**只活在内存里**（`PoliciesHelpers.sys.mjs` 的 `_failures` Map），没有任何 pref 可读，截图 `about:policies` 也不可靠。两步足够：
+
+1. **静态核对**：把 `Preferences` 的每个 key 对着源码里那三份清单比一遍
+2. **落地实测**：临时 profile 跑一次 headless（`--headless --screenshot` 才会自己退出），然后读该 profile 的 `prefs.js`——`Status: "user"` 的项会以 `user_pref(...)` 出现，`browser.policies.applied = true` 表示引擎确实读到了策略
+
+#### 核实 pref 是否还活着：声明文件之外还有「代码里读的」
+
+声明只在三个文件：`modules/libpref/init/StaticPrefList.yaml`、`modules/libpref/init/all.js`、`browser/app/profile/firefox.js`。但用 `Services.prefs.getBoolPref()` 直接读的 pref **不会出现在声明文件里**，例如：
+
+- `extensions.getAddons.showPane` —— 定义在 `toolkit/mozapps/extensions/content/aboutaddons-utils.mjs` 的 `PREF_DISCOVER_ENABLED`
+- `nimbus.rollouts.enabled` —— 在 `toolkit/components/nimbus/ExperimentAPI.sys.mjs` 的 `ROLLOUTS_ENABLED`
+
+所以三个文件搜不到 ≠ pref 已死，还得去对应组件目录再搜一次。反过来也有：`browser.urlbar.quicksuggest.enabled` 在 `browser/components/urlbar` 里**只剩测试代码引用**，说明它已降级为测试专用，不该再写。
+
+另外，**搜索脚本本身会骗人**：曾有一版脚本对 9 个 pref 全报 MISS，连确定存在的都报。跑之前先拿一个已知存在的字符串当阳性对照（如 `ai\.control` 在 `all.js` 有 8 处），对照也为 0 就说明是搜索坏了，不是 pref 不存在。
+
+#### 第三方 user.js（Betterfox）怎么用
+
+[Betterfox](https://github.com/yokoffing/Betterfox) 是维护最活跃的 user.js 项目之一，但它的方向与策略层**相反**：假设你没有策略层，于是把隐私与去冗余全塞进 user.js。已有策略层时应该把它**当参考清单**，比出净增项再逐条取舍——直接整体套用会和策略层抢同一个 pref（策略的 `locked` 压不住已存在的 user 值，而 user.js 又会压住策略想锁的东西）。
+
+核对时要剔除三类：
+
+- 与策略重复的：normandy、telemetry、newtabpage 赞助内容、crash report
+- 与策略冲突的：`browser.contentblocking.category = "strict"` 会和 `EnableTrackingProtection` 抢
+- 降安全的：`security.OCSP.enabled = 0`、`full-screen-api.warning.timeout = 0`、`extensions.enabledScopes = 5`
+
+净增项里值得加的：`network.IDN_show_punycode`（防同形字假域名）、`network.http.referer.XOriginTrimmingPolicy`（跨站 Referer 只留 origin）、`privacy.globalprivacycontrol.enabled`、`browser.ml.enable`。
+
 ### Firefox for Android
 
 Android 端（源码名 Fenix）与桌面版是两套代码，这一节只记 Android 专属的内容。
