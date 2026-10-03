@@ -477,6 +477,48 @@ $env:MSYS = 'enable_pcon'
 
 做法：自建版做一个专属快捷方式，固定带 `-profile` 指向独立目录 + `-no-remote`，永远不让它碰日常 profile。
 
+**补充（2026-10-03 源码 + 实测）**：这条硬编码比「优先认领」更硬 —— `MOZ_DEV_EDITION` 的构建里，**只有名字等于 `dev-edition-default` 的 profile 能被设为该安装的默认**，其它 profile 直接被拒：
+
+```cpp
+if (mUseDevEditionProfile && profile != mDevEditionDefault) {
+  // The separate profile is hardcoded.
+  return NS_ERROR_FAILURE;
+}
+```
+
+名字匹配发生在加载 ini 时（`name.EqualsLiteral(DEV_EDITION_NAME)` → `mDevEditionDefault`），所以**同时装官方 Dev Edition 与自建 Dev Edition 时，两边会把同一个 profile 认成「自己的那个」**。
+
+上游留了开关：在 `%APPDATA%\Mozilla\Firefox\` 放一个**空的** `ignore-dev-edition-profile` 文件，`mUseDevEditionProfile` 立刻变 false，整条硬编码失效 —— 两个安装都回到「按 install 映射取 profile」的正常逻辑，各自仍用自己的映射。
+
+#### `about:profiles` 里「我的 profile 不存在」：先查 `profiles.ini` 编号连不连续
+
+症状：`about:profiles` 只列出**别的** profile、当前 profile 根本不出现（或「当前 profile」的路径指到别人身上，看着像「两个 profile 是同一个」）；但用 `-profile <路径>` 启动时数据、锁、扩展全都正常。
+
+根因：`profiles.ini` 的 `[ProfileN]` 编号**必须连续**。加载循环从 `Profile0` 递增，取不到该编号就 `break`：
+
+```cpp
+unsigned int c = 0;
+for (c = 0; true; ++c) {
+  profileID = "Profile" + c;
+  rv = mProfileDB.GetString(profileID, "IsRelative", buffer);
+  if (NS_FAILED(rv)) break;      // 缺号 = 后面所有 profile 都不存在
+}
+```
+
+于是 `[Profile0] [Profile1] [Profile3]`（缺 `[Profile2]`）这种 ini 里，`[Profile3]` 从来没被读进来。`about:profiles` 枚举的正是 `nsIToolkitProfileService.profiles`（全量 ini，见 `toolkit/content/aboutProfiles.js`），所以页面里没有它；而 `-profile <路径>` 走的是路径分支、不受影响 —— 这正是它误导人的地方：数据看着是对的，页面看着是错的。
+
+修法：备份 ini，把 `[ProfileN]` 重排成连续编号（重启生效）。**删掉任何 profile 段之后也必须重排**，否则当场制造同一个 bug。
+
+#### install → profile 的映射：同一个 profile 被两个安装抢
+
+`profiles.ini` 的 `[Install<hash>] Default=…` 与 `installs.ini` 的 `[<hash>] Default=…` 决定「这个安装用哪个 profile」。hash 由**安装路径**派生，所以官方安装、每个自建 objdir 各有各的 hash；映射写错对象，那个安装的默认 profile 就落到别人身上（页面显示与默认选择一起错）。
+
+诊断法：`firefox -headless -no-remote about:blank`（**不带** `-profile`）跑十几秒，看哪个 profile 目录的 `parent.lock` / `prefs.js` mtime 变了 —— 那就是该安装实际认领的 profile。改的时候用 ini 里的相对描述符（`Profiles/xxx`），别写绝对路径。
+
+#### `Profile Groups\<id>.sqlite`：空表是正常的
+
+新 profile 体系的 store 层（`<profile>/prefs.js` 的 `toolkit.profiles.storeID` + `Profile Groups/<id>.sqlite` 的 `Profiles` 表）里，**`Profiles` 表 0 行是正常状态**。手工往 store 补行、给 ini 补 `StoreID`、改 pref 里的 store id，都不会让 `about:profiles` 多出那一条 —— 别在这上面耗时间；真正需要时 Firefox 会自己建 store。读这些 DB 要连 `-wal`/`-shm` 一起拷出来再读，否则会漏掉未 checkpoint 的行。
+
 #### 社区做法里值得抄的纪律
 
 - **偏好不写进 `user.js` 本体**，放独立的 overrides 文件，更新脚本负责备份 + 追加；更新后清理已失效的 pref
@@ -724,6 +766,9 @@ https://aur.archlinux.org/packages/firefox-extension-arch-search
 - [Add-on signing in Firefox（xpinstall.signatures.required）](https://support.mozilla.org/en-US/kb/add-on-signing-in-firefox)
 - [RubenKelevra: Firefox tweaks gist](https://gist.github.com/RubenKelevra/fd66c2f856d703260ecdf0379c4f59db)
 - [Firefox performance tweaks（另一份清单）](https://xn--ime-zza.eu/3)
+- [nsToolkitProfileService.cpp — profile 选择与 `[ProfileN]` 加载循环](https://github.com/mozilla-firefox/firefox/blob/main/toolkit/profile/nsToolkitProfileService.cpp)
+- [nsIToolkitProfileService.idl — `profiles` / `currentProfile` / `defaultProfile` 的定义](https://github.com/mozilla-firefox/firefox/blob/main/toolkit/profile/nsIToolkitProfileService.idl)
+- [toolkit/content/aboutProfiles.js — `about:profiles` 页面如何枚举 profile](https://github.com/mozilla-firefox/firefox/blob/main/toolkit/content/aboutProfiles.js)
 - [GoToIntranetSiteForSingleWordEntryInAddressBar — Firefox administrator reference（domainwhitelist / domainsuffixwhitelist 的官方说明）](https://firefox-admin-docs.mozilla.org/reference/policies/gotointranetsiteforsinglewordentryinaddressbar/)
 - [De-crappifying Firefox's automatic address mangling — cameratim](https://www.cameratim.com/computing/decrapping-firefox)
 - [docshell/base/URIFixup.sys.mjs — 读取 fixup 白名单 pref 的实现](https://github.com/mozilla-firefox/firefox/blob/main/docshell/base/URIFixup.sys.mjs)
