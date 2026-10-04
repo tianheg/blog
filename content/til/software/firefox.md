@@ -17,7 +17,7 @@ header: Tools
 - `browser.cache.memory.capacity = 2097152` - 固定最大 2GB 内存缓存（同上，2GB 内存缓存对浏览器是白占，别照抄；要调先关 `browser.cache.disk.smart_size.enabled` 才有意义）
 - `browser.quitShortcut.disabled = true` - 防止意外关闭
 - `browser.search.region = US`
-- `doh-rollout.home-region = US`
+- `doh-rollout.home-region = US` —— **2026-10-04 更正**：本机实际值是 **`HK`**，不是 `US`。而且它不是「设置项」而是 DoH 控制器的**地区记录**（拼出 `doh-rollout.<地区小写>` 分支去查 provider 映射表），由 Firefox 的地区检测自动写入。详见下节
 - `gfx.webrender.all = true` - 启用 WebRender
 - `layers.gpu-process.enabled = true` - GPU 进程加速
 - `media.hardware-video-decoding.force-enabled = true` - 强制硬件解码
@@ -42,10 +42,28 @@ header: Tools
 - http://web.archive.org/web/20260917122656/https://wiki.archlinux.org/title/FirefoxTweaks
 
 #### DNS over HTTPS (DoH)
-如果在 DoH 选择提供者的时候只有一个 custom，没有默认备选，可以尝试：
-- 通过 UI 界面修改无线网的 DNS 为 `8.8.8.8,8.8.4.4`
-- 设置 `network.trr.default_provider_uri = https://mozilla.cloudflare-dns.com/dns-query`
-- 重启电脑后会出现 Cloudflare、NextDNS 等备选项
+
+**2026-10-04 决策：浏览器侧的 DoH 关掉（`network.trr.mode = 5`），加密 DNS 交给代理层做**（本机 mihomo 已在用国内 DoH：`doh.pub` / `dns.alidns.com`）。三条理由，**速度排第一**：
+
+| 解析路径 | Win11 实测（每项 3 次） |
+|---|---|
+| 明文 UDP → `223.5.5.5` / `119.29.29.29` / `1.1.1.1` | 17–39 ms |
+| DoH → `https://1.1.1.1/dns-query` | 76 / 98 / 250 ms |
+| DoH → `https://mozilla.cloudflare-dns.com/dns-query` | 115 / 98 / **8020** ms |
+
+1. **DoH 慢 3–10 倍**，且出现过 8 秒长尾。
+2. **它绕过本机 mihomo，毁掉 fake-ip**。正常路径是 浏览器 → 系统 DNS → TUN → 本地 mihomo 回假 IP 并记下域名；浏览器自己做 DoH 就跳过了这一步 → **840 条 `DomainSuffix` / `Domain` 规则全部失效**，只剩 IP / geoip 兜底。一条本该直连的国内站被送出香港，代价是几百毫秒到几秒，比 DNS 那几十毫秒贵一个量级。
+3. **`mode = 3`（TRR only）没有回退**：Cloudflare 端点长尾到 8020 ms 时不是「变慢」，是**整个浏览器上不了网**。
+
+`network.trr.mode` 的取值（`netwerk/dns/nsIDNSService.idl`）：`0` / `1` / `5` = 关（`5` 是显式关，且阻止 rollout 再打开）；`2` = `TRRFIRST`（DoH 失败退回原生，不断网）；`3` = `TRRONLY`（不回退）；`4` = 保留值。
+
+**注意 `2` 治不了 fake-ip**：`2` 和 `3` 在破坏域名分流上几乎无差别（DoH 成功时都不经过 mihomo 的 DNS）；而 `2` 的回退那一路会被 TUN 的 DNS 劫持接管、拿到假 IP，域名映射反而「恢复」→ 解析路径来回抖，比 `3` 更难排障。
+
+**`doh-rollout.home-region` 不是开关**：它只决定「选哪家 DoH 配置」+ `about:preferences` 里列哪些服务商，由地区检测（locale + geo）自动写入。`doh-rollout.home-region-changed = true` 是官方用来强制重检测的开关。要手动设：`about:config` → `doh-rollout.home-region` → 大写地区码。
+
+**FF158 换实现位置了**：`browser/extensions/doh-rollout` 这个扩展在这一版**已不存在**，逻辑搬进树内 `toolkit/components/doh/`（`DoHController.sys.mjs` / `DoHHeuristics.sys.mjs` / `DoHConfig.sys.mjs`）。所以旧教程里「装/禁 doh-rollout 扩展」那套做法已经失效。
+
+**一个反直觉事实**：`about:preferences#privacy` 显示「DNS over HTTPS is off」，**不代表真的没开** —— 策略层施加的 pref（`Status: "user"` / `"locked"`）**不落盘到 `prefs.js`**，只看 profile 文件会误判。要读运行时真值只能用 `Services.prefs.*`（Marionette）或 `about:config`。
 
 ### 地址栏：内网域名直连（不当作搜索词）
 在地址栏敲 `nas.lan` 这类内网域名，如果后缀既不在 Public Suffix List 里、又没被显式放行，Firefox 会把它当关键词丢给搜索引擎——内网机器名再多也搜不出来。这是地址栏的域名修复（fixup）逻辑，**不需要装扩展**（AMO 上搜不到做这件事的扩展，命中的都是别的用途），两条 pref 就够。
