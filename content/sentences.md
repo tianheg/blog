@@ -2,7 +2,7 @@
 title: '句子收藏'
 ---
 
-<p class="sent-act"><button type="button" class="sent-draw-btn" id="sent-draw-btn" hidden>换一条</button></p>
+<p class="sent-act"><button type="button" class="sent-draw-btn" id="sent-draw-btn" hidden><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><polyline points="16 3 21 3 21 8"/><line x1="4" y1="20" x2="21" y2="3"/><polyline points="21 16 21 21 16 21"/><line x1="15" y1="15" x2="21" y2="21"/><line x1="4" y1="4" x2="9" y2="9"/></svg>换一条</button></p>
 
 <div class="sent-draw" id="sent-draw" hidden>
   <p class="sent-draw-text" id="sent-draw-text"></p>
@@ -117,6 +117,9 @@ title: '句子收藏'
 }
 .sent-draw-text { margin: 0; }
 .sent-draw-btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.3rem;
   padding: 0;
   border: 0;
   background: none;
@@ -127,6 +130,9 @@ title: '句子收藏'
   text-underline-offset: 0.2em;
   text-decoration-color: rgba(75, 85, 99, 0.4);
 }
+/* 上面那条 display 会盖掉 [hidden]，必须补回来：无 JS 时按钮不能露出来 */
+.sent-draw-btn[hidden] { display: none; }
+.sent-draw-btn svg { width: 1em; height: 1em; flex: none; }
 .sent-draw-btn:hover { color: #3d5b7a; text-decoration-color: currentColor; }
 .sent-all { margin-top: 0.5rem; }
 .sent-all > summary { cursor: pointer; font-size: 0.875rem; color: #4b5563; }
