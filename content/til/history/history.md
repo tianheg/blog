@@ -4,7 +4,7 @@ status: draft
 date: 2025-06-15T19:22:54+08:00
 ---
 
-历史资源索引见 [[great-history-websites|历史网站收藏]]；商周时代的记载见 [[chaoge|朝歌]]。
+历史资源索引见 [[great-history-websites|历史网站收藏]]；商周时代的记载见 [[chaoge|朝歌]]；印巴分治与七十年对峙见 [[india-pakistan|巴基斯坦与印度]]。
 
 ### 古罗马
 #### 庞贝古城
