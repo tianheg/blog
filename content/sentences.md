@@ -2,9 +2,10 @@
 title: '句子收藏'
 ---
 
+<p class="sent-act"><button type="button" class="sent-draw-btn" id="sent-draw-btn" hidden>换一条</button></p>
+
 <div class="sent-draw" id="sent-draw" hidden>
   <p class="sent-draw-text" id="sent-draw-text"></p>
-  <p class="sent-draw-act"><button type="button" class="sent-draw-btn" id="sent-draw-btn">换一条</button></p>
 </div>
 
 <details class="sent-all" id="sent-all">
@@ -108,31 +109,32 @@ title: '句子收藏'
 <style>
 /* 句子收藏开头的那一句：每次加载随机抽一条，全部列表收在 <details> 里。
    列表项本身就是完整 HTML 由脚本搬运，所以这里只管外观，不管内容。 */
+.sent-act { margin: 0 0 0.75rem; }
 .sent-draw {
   margin: 0 0 2.5rem;
   padding: 0.125rem 0 0.125rem 1.25rem;
   border-left: 3px solid #3d5b7a;
 }
 .sent-draw-text { margin: 0; }
-.sent-draw-act { margin: 1rem 0 0; }
 .sent-draw-btn {
-  padding: 0.25rem 0.75rem;
-  font-size: 0.8rem;
-  border: 1px solid #d1d5db;
-  border-radius: 999px;
-  cursor: pointer;
+  padding: 0;
+  border: 0;
   background: none;
+  font-size: 0.8rem;
   color: #4b5563;
-  transition: all 0.15s;
+  cursor: pointer;
+  text-decoration: underline;
+  text-underline-offset: 0.2em;
+  text-decoration-color: rgba(75, 85, 99, 0.4);
 }
-.sent-draw-btn:hover { border-color: #3d5b7a; color: #3d5b7a; }
+.sent-draw-btn:hover { color: #3d5b7a; text-decoration-color: currentColor; }
 .sent-all { margin-top: 0.5rem; }
 .sent-all > summary { cursor: pointer; font-size: 0.875rem; color: #4b5563; }
 .sent-all > summary:hover { color: #3d5b7a; }
 @media (prefers-color-scheme: dark) {
   .sent-draw { border-left-color: #88a1bc; }
-  .sent-draw-btn { border-color: #4b5563; color: #9ca3af; }
-  .sent-draw-btn:hover { border-color: #88a1bc; color: #88a1bc; }
+  .sent-draw-btn { color: #9ca3af; text-decoration-color: rgba(156, 163, 175, 0.4); }
+  .sent-draw-btn:hover { color: #88a1bc; text-decoration-color: currentColor; }
   .sent-all > summary { color: #9ca3af; }
   .sent-all > summary:hover { color: #88a1bc; }
 }
@@ -163,6 +165,7 @@ title: '句子收藏'
   }
   show(Math.floor(Math.random() * items.length));
   box.hidden = false;
+  btn.hidden = false;
   btn.addEventListener('click', draw);
 })();
 </script>
