@@ -46,6 +46,8 @@ Go to [the search page](/search) to use to search for any word or phrase.
   - [我听的](/listen)
   - [我读的](/read)
   - [我订阅的](/feeds)
+  - [我摘抄的](/sentences)
+
 ## 5. Leave a comment & RSS
 
 Email `i@tianheg.co`
