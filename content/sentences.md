@@ -2,6 +2,14 @@
 title: '句子收藏'
 ---
 
+<div class="sent-draw" id="sent-draw" hidden>
+  <p class="sent-draw-text" id="sent-draw-text"></p>
+  <p class="sent-draw-act"><button type="button" class="sent-draw-btn" id="sent-draw-btn">换一条</button></p>
+</div>
+
+<details class="sent-all" id="sent-all">
+<summary>全部句子</summary>
+
 - I went to the woods because I wished to live deliberately, to front only the essential facts of life, and see if I could not learn what it had to teach, and not, when I came to die, discover that I had not lived. I did not wish to live what was not life, living is so dear; nor did I wish to practise resignation, unless it was quite necessary. I wanted to live deep and suck out all the marrow of life, to live so sturdily and Spartan-like as to put to rout all that was not life, to cut a broad swath and shave close, to drive life into a corner, and reduce it to its lowest terms, and, if it proved to be mean, why then to get the whole and genuine meanness of it, and publish its meanness to the world; or if it were sublime, to know it by experience, and be able to give a true account of it in my next excursion. <https://en.wikisource.org/wiki/Walden_(1854)_Thoreau/Where_I_Lived,_and_What_I_Lived_for>
 - "There's no thought crimes and no thought heroisms" is honestly such a good piece of life advice. You could be having the most fucked up problematic thoughts 24/7 but if you treat people with kindness, the good you do is the only thing that matters. But if you have only the purest thoughts and all the correct beliefs, it doesn't matter one bit if you spend most of your time being an asshole to people. 对别人来说，你做的事情远比你想的更重要
 - In the end, it's about what you want to be, not what you want to have. When you sign up to run a marathon, you don't want a taxi to take you to the finish line.
@@ -94,3 +102,67 @@ title: '句子收藏'
 - There is no people on Earth who would not prefer their own bad government to the good government of an alien power. 这世上没有任何一个民族，会宁愿接受外来强权的"好政府"，而不是自己的"坏政府"。——《甘地传》(Gandhi, 1982)
 - I am a Muslim and a Hindu and a Christian and a Jew and so are all of you. 我是穆斯林，是印度教徒，是基督徒，也是犹太人——你们所有人都是。——《甘地传》(Gandhi, 1982)
 - Nahari: 我要下地狱！我杀了一个孩子！我把他的头往墙上砸！ Gandhi: I know a way out of Hell. Find a child, a child whose mother and father were killed and raise him as your own. Only be sure that he is a Muslim and that you raise him as one. 我知道一条走出地狱的路。去找一个孩子——一个父母都被杀死了的孩子——把他当成自己的孩子养大。只要确保他是穆斯林，并且按穆斯林把他养大。——《甘地传》(Gandhi, 1982)
+
+</details>
+
+<style>
+/* 句子收藏开头的那一句：每次加载随机抽一条，全部列表收在 <details> 里。
+   列表项本身就是完整 HTML 由脚本搬运，所以这里只管外观，不管内容。 */
+.sent-draw {
+  margin: 0 0 2.5rem;
+  padding: 0.125rem 0 0.125rem 1.25rem;
+  border-left: 3px solid #3d5b7a;
+}
+.sent-draw-text { margin: 0; }
+.sent-draw-act { margin: 1rem 0 0; }
+.sent-draw-btn {
+  padding: 0.25rem 0.75rem;
+  font-size: 0.8rem;
+  border: 1px solid #d1d5db;
+  border-radius: 999px;
+  cursor: pointer;
+  background: none;
+  color: #4b5563;
+  transition: all 0.15s;
+}
+.sent-draw-btn:hover { border-color: #3d5b7a; color: #3d5b7a; }
+.sent-all { margin-top: 0.5rem; }
+.sent-all > summary { cursor: pointer; font-size: 0.875rem; color: #4b5563; }
+.sent-all > summary:hover { color: #3d5b7a; }
+@media (prefers-color-scheme: dark) {
+  .sent-draw { border-left-color: #88a1bc; }
+  .sent-draw-btn { border-color: #4b5563; color: #9ca3af; }
+  .sent-draw-btn:hover { border-color: #88a1bc; color: #88a1bc; }
+  .sent-all > summary { color: #9ca3af; }
+  .sent-all > summary:hover { color: #88a1bc; }
+}
+</style>
+
+<script>
+(function () {
+  var all = document.getElementById('sent-all');
+  var box = document.getElementById('sent-draw');
+  var out = document.getElementById('sent-draw-text');
+  var btn = document.getElementById('sent-draw-btn');
+  if (!all || !box || !out || !btn) return;
+  var items = Array.prototype.slice.call(all.querySelectorAll('li'));
+  if (items.length < 2) return;
+  var sum = all.querySelector('summary');
+  if (sum) sum.textContent = '全部 ' + items.length + ' 条';
+  var last = -1;
+  function show(n) {
+    var src = items[n].cloneNode(true);
+    out.textContent = '';
+    while (src.firstChild) out.appendChild(src.firstChild);
+    last = n;
+  }
+  function draw() {
+    var n = last;
+    while (n === last) n = Math.floor(Math.random() * items.length);
+    show(n);
+  }
+  show(Math.floor(Math.random() * items.length));
+  box.hidden = false;
+  btn.addEventListener('click', draw);
+})();
+</script>
