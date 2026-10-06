@@ -131,7 +131,7 @@ document.addEventListener('DOMContentLoaded', function initWatchCounts() {
 | 电影 | 第二次握手 | 两个人的爱情，苏冠兰、丁洁琼。命运让他们度过短暂的幸福时光，之后便以分离和苦痛作为主旋律。 当琼姐回到中国，来到那个等了 28 年的人的面前，得知他已成家，这该是怎样的打击与痛苦。 当爱情历经时间锤炼，最后剩下的究竟是什么？ | 1980 |
 | 动漫 | 紫罗兰永恒花园 Violet Evergarden | 番剧：懂得爱的真谛 外传 剧场版 我也不太懂爱，不懂人情世故。圆滑 | 2018 |
 | 电影 | Gandhi 甘地传 | 甘地回国了，另一边是英国总督上任。以扰乱治安治罪，但却无罪释放。甘地是怎样变成圣雄甘地的？一个普通人，竟有通过自身绝食行为感召人民的力量，这就是有信仰的人才能做的事情。人人平等，没有种族、没有颜色差异的人人平等。幸福来自工作以及工作带来的尊严。影片中一个重复出现的场景：甘地在纺织 | 1982 |
-| 电影 | The Grapes of Wrath 愤怒的葡萄 | 俄基佬，侮辱性很强。到加利福尼亚以为会有工作，但却在流民营。到了另一处，没做几天被压低工价，从5美分到2.5美分，活不下去了只能走了。Joad无意间杀了一个治安官。在一处政府运营的安置区，警察想要搅合这里的安宁，故意找人捣乱，不过被Joad他们打乱了。政府、警察、佃农、地主，矛盾冲突。讲述的是1930年代美国Oklahoma乡村的农名因过度耕作导致土地沙化严重无法种地不得不四处迁徙打零工的故事。 | 1940|
+| 电影 | The Grapes of Wrath 愤怒的葡萄 | 俄基佬，侮辱性很强。到加利福尼亚以为会有工作，但却在流民营。到了另一处，没做几天被压低工价，从5美分到2.5美分，活不下去了只能走了。Joad无意间杀了一个治安官。在一处政府运营的安置区，警察想要搅合这里的安宁，故意找人捣乱，不过被Joad他们打乱了。政府、警察、佃农、地主，矛盾冲突。讲述的是1930年代美国Oklahoma乡村的农名因过度耕作导致土地沙化严重无法种地不得不四处迁徙打零工的故事。 | 1940 |
 | 电影 | Minions & Monsters 小黄人与大怪兽 | 图一乐的儿童电影 | 2026 |
 | 电影 | Star Wars: The Mandalorian and Grogu 星球大战：曼达洛人与古古 | 古古挺可爱的，不错的娱乐片 | 2026 |
 | 电影 | The Odyssey 奥德赛 | [[odyssey-movie\|影评]] | 2026 |
@@ -153,55 +153,55 @@ document.addEventListener('DOMContentLoaded', function initWatchCounts() {
 | 音乐剧 | Cats 猫 |  | 1981 |
 | 音乐剧 | Hamilton 汉密尔顿 | 工业立国，美国现代化初级阶段 | 2015 |
 | 动漫 | エロマンガ先生 埃罗芒阿老师 Eromanga Sensei | 没有血缘关系的"兄妹"，彼此喜欢，互相支持，你写小说我为你画色情插图 | 2017 |
-| 动漫 | 龙的牙医 | 听奇特的故事，战争中的龙的牙医  | 2017 |
-| 动漫 | 星空清理者 | 星空清理者前面看着还行，后面看着就有些无聊了。看到最后，还可以，感觉有些升华了  | 2003 |
-| 电视剧 | 暗黑第一-三季 | 起源世界衍生出了两个镜像世界，两个世界的人彼此纠缠，量子纠缠  | 2017 |
+| 动漫 | 龙的牙医 | 听奇特的故事，战争中的龙的牙医 | 2017 |
+| 动漫 | 星空清理者 | 星空清理者前面看着还行，后面看着就有些无聊了。看到最后，还可以，感觉有些升华了 | 2003 |
+| 电视剧 | 暗黑第一-三季 | 起源世界衍生出了两个镜像世界，两个世界的人彼此纠缠，量子纠缠 | 2017 |
 | 电影 | The Gray Man 灰衣人 | 打斗场面不错 | 2022 |
-| 电影 | 侵略机器 War Machine | 看着确实挺爽刺激  | 2026 |
-| 电影 | In the Blink of an Eye 眨眼之间 | 3段跨越了历史长河的故事，讲述了人类繁衍生息的故事、传承的故事  | 2026 |
-| 电影 | 塞涅卡 Seneca | 不好看，有血腥场面  | 2023 |
-| 电影 | 穿普拉达的女王2 | 剧中的种种时尚和我没关系，只是觉得偶尔瞥见不一样的生活是件很有意思的事情，除此之外只是觉得这是别人的生活，和我一点关系都没有。  | 2026 |
-| 电影 | Dead Poets Society 死亡诗社 | 青春年少时，最应该有的朝气在日复一日的讨生活中消耗殆尽。精神日渐麻木，对周遭的新鲜事物不再感到触动，这是一种危险信号，如果不能尽快从这种状态摆脱，大好的时光都被浪费掉了。人是能够做成事的，只要自己能专注地往一个地方使劲儿。即使被其他事情影响，也能很快地再次投入。这种做法，是我所推崇的。为了自己，想想自己要做什么，做什么能使自己快乐又有意义。教育的意义在于教会学生不要盲从。而校长说：教育意味着服从和纪律让他们考上大学。1959年美国艾森豪威尔总统时期，冷战与保守主义并行，所以大部分人更看重传统纪律荣誉卓越，与Keating的自由主义思想形成冲击。典型代表：Neil的父亲| 1989 |
-| 动漫 | 时光流逝，饭菜依旧美味 日々は過ぎれど飯うまし | 还行吧，看起来有食戟之灵的感觉  | 2025 |
-| 电影 | Cannery Row 罐头厂街 | 美国上个世纪的女演员都是很美的，这一部的女主同样很美。那场派对真是名副其实的灾难；Hazel为了让Susie去看望医生，竟然用棒球棒把医生的胳膊打骨折了，真是令人惊讶而又觉得此人幼稚得可爱  | 1982 |
-| 动漫 | 悠哉日常大王 のんのんびより | 很棒的动画，莲华很可爱。所谓日常，大概就是这样的生活点滴  | 2013 |
+| 电影 | 侵略机器 War Machine | 看着确实挺爽刺激 | 2026 |
+| 电影 | In the Blink of an Eye 眨眼之间 | 3段跨越了历史长河的故事，讲述了人类繁衍生息的故事、传承的故事 | 2026 |
+| 电影 | 塞涅卡 Seneca | 不好看，有血腥场面 | 2023 |
+| 电影 | 穿普拉达的女王2 | 剧中的种种时尚和我没关系，只是觉得偶尔瞥见不一样的生活是件很有意思的事情，除此之外只是觉得这是别人的生活，和我一点关系都没有。 | 2026 |
+| 电影 | Dead Poets Society 死亡诗社 | 青春年少时，最应该有的朝气在日复一日的讨生活中消耗殆尽。精神日渐麻木，对周遭的新鲜事物不再感到触动，这是一种危险信号，如果不能尽快从这种状态摆脱，大好的时光都被浪费掉了。人是能够做成事的，只要自己能专注地往一个地方使劲儿。即使被其他事情影响，也能很快地再次投入。这种做法，是我所推崇的。为了自己，想想自己要做什么，做什么能使自己快乐又有意义。教育的意义在于教会学生不要盲从。而校长说：教育意味着服从和纪律让他们考上大学。1959年美国艾森豪威尔总统时期，冷战与保守主义并行，所以大部分人更看重传统纪律荣誉卓越，与Keating的自由主义思想形成冲击。典型代表：Neil的父亲 | 1989 |
+| 动漫 | 时光流逝，饭菜依旧美味 日々は過ぎれど飯うまし | 还行吧，看起来有食戟之灵的感觉 | 2025 |
+| 电影 | Cannery Row 罐头厂街 | 美国上个世纪的女演员都是很美的，这一部的女主同样很美。那场派对真是名副其实的灾难；Hazel为了让Susie去看望医生，竟然用棒球棒把医生的胳膊打骨折了，真是令人惊讶而又觉得此人幼稚得可爱 | 1982 |
+| 动漫 | 悠哉日常大王 のんのんびより | 很棒的动画，莲华很可爱。所谓日常，大概就是这样的生活点滴 | 2013 |
 | 电视剧 | The Flash 闪电侠 | 当英雄与做人，科幻色彩。第二次看，一共九季 | 2014 |
-| 动漫 | 超时空辉夜姬 | 八千年的等待，只为见到当时的朋友。彩叶与辉夜  | 2026 |
-| 电影 | 周处除三害 | 一个想要出名的杀人犯，先后杀了两个通缉犯，杀人与被杀界限在哪里？死了没人记得也挺好，不然死了都不安生:)  | 2023 |
-| 电影 | 风雨双流星 | 武打动作很精彩，不错  | 1976 |
-| 电影 | 加勒比海盗3：世界的尽头  |  | 2007 |
-| 动漫 | 花开伊吕波剧集+剧场版 | 哇，故事讲得不错，我喜欢。有点被女主小女孩在面对外界压力时的应对表现吸引。活着的真实感。冷静认真地注视对方的眼睛  | 2025 |
-| 电影 | 阿凡达3 | 怎么说呢，一个人的信仰会在关键时刻救自己  | 2025 |
-| 电影 | 时空乱流 | 不错的科幻  | 2025 |
-| 动漫 | 小林家的龙女仆 小林さんちのメイドラゴン | 二次元浓度过高，偶然间中午吃饭打发时间看的  | 2017 |
-| 动漫 | 小淘气 The Little Rascals | 很是有趣，一群小孩子演帮派。小男孩和小女孩的爱情故事  | 1994 |
-| 电影 | Man vs Baby | 蛮有趣的，和Man vs Bee有些像。最后前面遇到的人都在这个陌生的地方吃圣诞晚餐。  | 2025 |
-| 电影 | 加勒比海盗1：黑珍珠号的诅咒 | 特纳和Jack的斗剑戏很精彩；整体电影节奏紧张，让我看得很是投入  | 2003 |
-| 电影 | 狄仁杰之通天帝国 | 之前看过一次，今天无聊看了一次  | 2010 |
+| 动漫 | 超时空辉夜姬 | 八千年的等待，只为见到当时的朋友。彩叶与辉夜 | 2026 |
+| 电影 | 周处除三害 | 一个想要出名的杀人犯，先后杀了两个通缉犯，杀人与被杀界限在哪里？死了没人记得也挺好，不然死了都不安生:) | 2023 |
+| 电影 | 风雨双流星 | 武打动作很精彩，不错 | 1976 |
+| 电影 | 加勒比海盗3：世界的尽头 |  | 2007 |
+| 动漫 | 花开伊吕波剧集+剧场版 | 哇，故事讲得不错，我喜欢。有点被女主小女孩在面对外界压力时的应对表现吸引。活着的真实感。冷静认真地注视对方的眼睛 | 2025 |
+| 电影 | 阿凡达3 | 怎么说呢，一个人的信仰会在关键时刻救自己 | 2025 |
+| 电影 | 时空乱流 | 不错的科幻 | 2025 |
+| 动漫 | 小林家的龙女仆 小林さんちのメイドラゴン | 二次元浓度过高，偶然间中午吃饭打发时间看的 | 2017 |
+| 动漫 | 小淘气 The Little Rascals | 很是有趣，一群小孩子演帮派。小男孩和小女孩的爱情故事 | 1994 |
+| 电影 | Man vs Baby | 蛮有趣的，和Man vs Bee有些像。最后前面遇到的人都在这个陌生的地方吃圣诞晚餐。 | 2025 |
+| 电影 | 加勒比海盗1：黑珍珠号的诅咒 | 特纳和Jack的斗剑戏很精彩；整体电影节奏紧张，让我看得很是投入 | 2003 |
+| 电影 | 狄仁杰之通天帝国 | 之前看过一次，今天无聊看了一次 | 2010 |
 | 电影 | 菊次郎的夏天 | 北野武游个泳竟然还要游泳圈，而且游到最后竟然头在水里，脚在空中。笑死我了。\n\n扎车胎这个事儿要笑死我。\n\n妈妈再嫁了 | 1999 |
 | 电影 | 荒野机器人 The Wild Robot | 不错的动画电影，很温馨 | 2024 |
 | 电影 | 西西里的美丽传说 | 从始至终，雷纳多没变，一直都在玛莲娜身边，注视着她 | 2000 |
 | 动漫 | 行骗天下KR | 韩版女主挺可爱的，喜欢看。豆瓣上评论说没有日语原版好看，我觉得两个版本都很好看。韩版笑点更多。剧情演得夸张，夸张过了头，就是一种讽刺了 | 2025 |
 | 电影 | 钢甲铁拳 Real Steel | 看起来蛮激动的，垃圾场里的机器人击败了世界冠军 | 2011 |
-| 动漫 | 帕丁顿熊3 | 不错的合家欢喜剧 | 2024 |
+| 电影 | 帕丁顿熊3 | 不错的合家欢喜剧 | 2024 |
 | 动漫 | 小城日常 | 这种动漫的风格和以前不同，语言好像小孩子过家家一样，是一种趋向弱智化的动漫吗？目前还想不通 | 2025 |
 | 电影 | John Wick 疾速追杀1-4&芭蕾杀姬 Ballerina | 打杀，动作戏看多了就厌倦了。以后大概率不会再看了 | 2014 |
 | 电视剧 | 鱿鱼游戏全3季 | 大恐怖，人性之恶。想起了大逃杀电影。S3E2老太的儿子想杀刚生孩子的女孩，但被老太杀掉了。S3E5成没杀，队长杀了。最后，222的孩子活下来了，主角死了。人性的贪婪，显露无遗。圆圈、正方形、三角形意象，让我想起了爱、死亡、机器人。看剧的当晚果不其然地做梦了，梦记不起来了，但是那种糟糕的感觉一直伴随着我到我起床。韩国真是个奇怪的国家，在《可能性的艺术》里刘瑜老师拿韩国的民主化进程举例，他们在经历了几场悲剧之后才艰难走上民主进程。而看到剧中那些人叫嚣着民主投票让某个人去死时，觉得民主居然可以这样用，真是荒诞啊\n\n鱿鱼游戏的剧情设定，让我想到了黑镜。不过，与黑镜相比，前者明显更为血腥暴力残酷。\n\n研究型问题：鱿鱼游戏的创作思路是怎样的？\n第一个小问题：为什么想调研这个问题？\n- 对作者的创作思路和灵感来源感兴趣\n- 为什么韩国有很多政治杰出的电影出现，而中国就很少\n- 结合自己最近在读的可能性的艺术韩国篇，思考观念为何在韩国的民主化进程中起到这么大作用\n- 想看下可能性的艺术中提及的四部韩国电影 | 2021 |
-| 动漫 | 琉璃的宝石 瑠璃の宝石 2025 | 讲矿物的动漫，一开始看的时候不太感兴趣。看着看着，自己心里突然涌起一种情绪——以后一定要过得更丰富体会更多东西 | 2025 |
+| 动漫 | 琉璃的宝石 瑠璃の宝石 | 讲矿物的动漫，一开始看的时候不太感兴趣。看着看着，自己心里突然涌起一种情绪——以后一定要过得更丰富体会更多东西 | 2025 |
 | 动漫 | 碧蓝之海1&2 ぐらんぶる GRAND BLUE | 还行吧，突然转变的画风不太习惯 | 2018 |
 | 动漫 | 行骗天下JP | 日语原版也好看，以后说不定还会再看。劫富济贫是很好的题材 | 2018 |
 | 电影 | 一部未完成的电影 | 娄烨导演的讲述疫情的电影。剥夺一个人自由是中共做过的最残酷的事情之一 | 2024 |
 | 动漫 | 启示录酒店 アポカリプスホテル | 轻松愉快的末日漫 | 2025 |
 | 电影 | 机械师1&2 | 2025年5月花了两天时间来看这个系列，打戏很精彩、杀手很专业，很喜欢 | 2011 |
 | 电影 | 黑色四叶草 | 暴牛团长和白夜的魔眼的战斗好精彩很好看。\n在恶魔信徒离开四叶草王国时，那种对于不公命运的反叛与抗争，仿佛隐喻着现实社会中的种种不公。要为自己争取权利、争取到力量，这恐怕就是信徒的想法\n亚斯塔和漆黑的三极性但丁打，打不过呀。\n不过看到最后，没有结局啊 | 2023 |
-| 电视剧 | 彩香最爱弘子前辈 彩香ちゃんは弘子先輩に恋してる 2024 | 好可爱呀，女性喜欢女性的剧还挺有趣的 | 2024 |
-| 电影 | 碟中谍8：最终清算 Mission: Impossible - The Final Reckoning (2025) | 太刺激了，画面闪动太剧烈，对我的眼睛不好。有点俗套 | 2025 |
-| 电影 | Totto-Chan: The Little Girl at the Window (film)（2023） 窗边的小豆豆的动画版，画得人物好丑，描绘得不入我的眼 |  |
-| 电影 | F1：狂飙飞车 F1: The Movie (2025) | 看起来很沉浸，完全沉浸其中。刺激得很有节奏，是会再次观看的好电影 | 2025 |
+| 电视剧 | 彩香最爱弘子前辈 彩香ちゃんは弘子先輩に恋してる | 好可爱呀，女性喜欢女性的剧还挺有趣的 | 2024 |
+| 电影 | 碟中谍8：最终清算 Mission: Impossible - The Final Reckoning | 太刺激了，画面闪动太剧烈，对我的眼睛不好。有点俗套 | 2025 |
+| 电影 | Totto-Chan: The Little Girl at the Window (film) | 窗边的小豆豆的动画版，画得人物好丑，描绘得不入我的眼 | 2023 |
+| 电影 | F1：狂飙飞车 F1: The Movie | 看起来很沉浸，完全沉浸其中。刺激得很有节奏，是会再次观看的好电影 | 2025 |
 | 动漫 | 摇滚乃是淑女的爱好 ロックは淑女の嗜みでして | 开始看喽，哈哈很有趣，画面色彩很丰富，这种演奏完大汗淋漓的场面，好色情 | 2025 |
 | 电影 | 机动战士高达GQuuuuuuX | 很经典的IP了，以前好像看过忘记了，现在开始看风格还不错挺喜欢的。这种科幻色彩的动漫，我还是很上瘾的。 | 2025 |
 | 动漫 | 悲喜渔生 ネガポジアングラー | 现实中不钓鱼的我总爱看这种生活类的番剧呢！从钓鱼中找寻生活的意义，为什么钓鱼？因为鱼就在那里！\n阿宏的生活遭遇一个又一个低谷，本以为跌落到谷底，但最后遇到一群伙伴，拯救了他，改变了他悲观看待自己后面生活的看法。 | 2024 |
-| 电影 | 醉拳 | 黄飞鸿青年不好学，受辱后奋发，向苏乞儿学武，感其心诚，教其醉拳  | 1978 |
+| 电影 | 醉拳 | 黄飞鸿青年不好学，受辱后奋发，向苏乞儿学武，感其心诚，教其醉拳 | 1978 |
 | 动漫 | TARI TARI | 和奏这个名字取得这好呀。一首母亲和孩子共同创作的歌曲。纱羽听到父亲在和马术学校的人理论，要求同意女儿入学。最后那首合唱曲真令我感动啊 | 2012 |
 | 动漫 | けいおん! 轻音少女 第一，二季 K-On! | 25年4月底第n次看，还是一样感动和喜欢呢！ | 2009 |
 | 动漫 | 香格里拉·开拓异境～粪作猎手挑战神作～ シャングリラ・フロンティア `クソゲーハンター、神ゲーに挑まんとす` | VR的时代在可见的未来应该会普及。不过，短期内恐怕还很贵 | 2023 |
@@ -212,7 +212,7 @@ document.addEventListener('DOMContentLoaded', function initWatchCounts() {
 | 动漫 | 工作细胞 はたらく細胞 S1&S2 | 形象地介绍了人体的各种细胞层面的活动，很有教育意义 | 2018 |
 | 动漫 | 工作细胞BLACK はたらく細胞BLACK | 生动描绘了人的恶习在细胞层面的影响 | 2021 |
 | 动漫 | 家庭教師ヒットマン | 超燃的动漫，看完这两百多集费了我不断的时间 | 2006 |
-| 电视剧 | The Mandalorian 曼达洛人 S1&S2&S3 星球大战相关的剧集，很喜欢 |  |
+| 电视剧 | The Mandalorian 曼达洛人 S1&S2&S3 | 星球大战相关的剧集，很喜欢 |  |
 | 电视剧 | 三体（Netflix）S1 | 改变很多，依旧喜欢 | 2024 |
 | 电影 | 妖精森林的小不点 | 很惬意的精灵故事 | 2018 |
 | 电影 | 飞翔的魔女 | 魔幻小故事 | 2016 |
@@ -348,7 +348,6 @@ document.addEventListener('DOMContentLoaded', function initWatchCounts() {
 | 电影 | 大话西游之月光宝盒 |  | 1995 |
 | 电影 | 疯狂原始人 |  | 2013 |
 | 电影 | 飞鹰艾迪 |  | 2016 |
-| 电影 | 2012 |  | 2009 |
 | 电影 | 恐龙 |  | 2000 |
 | 电影 | 百变星君 |  | 1995 |
 | 电影 | 天地大冲撞 |  | 1998 |
@@ -594,9 +593,9 @@ document.addEventListener('DOMContentLoaded', function initWatchCounts() {
 | 电视剧 | 奇葩说 第五季 |  | 2014 |
 | 电影 | 敢死队 3 |  | 2014 |
 | 电影 | 发条橙 |  | 1971 |
-| 动漫 | 帕丁顿熊 |  | 2014 |
+| 电影 | 帕丁顿熊 |  | 2014 |
 | 电影 | 狮子王 |  | 1994 |
-| 动漫 | 神偷奶爸 |  | 2010 |
+| 电影 | 神偷奶爸 |  | 2010 |
 | 电影 | 蜘蛛侠 2 |  | 2004 |
 | 电影 | 美丽人生 |  | 1997 |
 | 电影 | 玩具总动员 |  | 1995 |
@@ -608,25 +607,21 @@ document.addEventListener('DOMContentLoaded', function initWatchCounts() {
 | 电影 | 碟中谍 5：神秘国度 |  | 2015 |
 | 电影 | 蜘蛛侠：英雄远征 |  | 2019 |
 | 电影 | 魁拔 3 战神崛起 |  | 2014 |
-| 电影 | 2008 |  |  |
 | 电影 | 恶作剧之吻 |  | 2019 |
-| 电影 | 2013 |  | 2013 |
 | 电影 | 左耳 |  | 2015 |
-| 电影 | 2016 |  |  |
 | 电影 | 老炮儿 |  | 2015 |
 | 电影 | Avengers: Infinity War 复仇者联盟 3：无限战争 |  | 2018 |
 | 电影 | Avatar 阿凡达 |  | 2009 |
 | 电影 | 洛杉矶捣蛋计划 |  | 2016 |
 | 电影 | 集结号 |  | 2007 |
-| 电影 | 2018 |  | 2023 |
 | 电影 | 悲伤逆流成河 |  | 2018 |
-| 电影 | The Shawshank Redemption 肖申克的救赎 |  |
+| 电影 | The Shawshank Redemption 肖申克的救赎 |  |  |
 | 电影 | Zootopia 疯狂动物城 |  | 2016 |
 | 电影 | Coco 寻梦环游记 |  | 2017 |
-| 电影 | Titanic 泰坦尼克号 |  |
+| 电影 | Titanic 泰坦尼克号 |  |  |
 | 电影 | Roman Holiday 罗马假日 |  | 1953 |
 | 电影 | Edward Scissorhands 剪刀手爱德华 |  | 1990 |
-| 电影 | The Last Emperor 末代皇帝 |  |
+| 电影 | The Last Emperor 末代皇帝 |  |  |
 | 电影 | Mr. Bean's Holiday 憨豆的黄金周 |  | 2007 |
 | 电影 | 西虹市首富 |  | 2018 |
 | 电影 | Searching 网络谜踪 |  | 2018 |
@@ -638,20 +633,20 @@ document.addEventListener('DOMContentLoaded', function initWatchCounts() {
 | 电影 | Iron Man 钢铁侠 |  | 2008 |
 | 电影 | Iron Man 2 钢铁侠 2 |  | 2010 |
 | 电影 | Iron Man 3 钢铁侠 3 |  | 2013 |
-| 电影 | The Avengers 复仇者联盟 |  |
+| 电影 | The Avengers 复仇者联盟 |  |  |
 | 电影 | Avengers: Age of Ultron 复仇者联盟 2：奥创纪元 |  | 2015 |
-| 电影 | Thor 雷神 |  |
-| 电影 | Thor: The Dark World 雷神 2：黑暗世界 |  |
-| 电影 | Thor: Ragnarok 雷神 3：诸神黄昏 |  |
+| 电影 | Thor 雷神 |  |  |
+| 电影 | Thor: The Dark World 雷神 2：黑暗世界 |  |  |
+| 电影 | Thor: Ragnarok 雷神 3：诸神黄昏 |  |  |
 | 电影 | Black Panther 黑豹 |  | 2018 |
 | 电影 | In Time 时间规划局 |  | 2011 |
 | 电影 | Ant-Man 蚁人 |  | 2015 |
 | 电影 | Captain America: The First Avenger 美国队长 |  | 2011 |
 | 电影 | Captain America: The Winter Soldier 美国队长 2 |  | 2014 |
 | 电影 | Captain America: Civil War 美国队长 3 |  | 2016 |
-| 电影 | The Incredible Hulk 无敌浩克 |  |
-| 电影 | The Amazing Spider-Man 超凡蜘蛛侠 |  |
-| 电影 | The Amazing Spider-Man 2 超凡蜘蛛侠 2 |  |
+| 电影 | The Incredible Hulk 无敌浩克 |  |  |
+| 电影 | The Amazing Spider-Man 超凡蜘蛛侠 |  |  |
+| 电影 | The Amazing Spider-Man 2 超凡蜘蛛侠 2 |  |  |
 | 电影 | Guardians of the Galaxy: Inferno 银河护卫队：地狱 |  | 2017 |
 | 电影 | La leggenda del pianista sull'oceano 海上钢琴师 |  | 1998 |
 | 电影 | Avengers: Endgame 复仇者联盟 4：终局之战 |  | 2019 |
@@ -676,8 +671,8 @@ document.addEventListener('DOMContentLoaded', function initWatchCounts() {
 | 电影 | Resident Evil: Retribution 生化危机 5：惩罚 |  | 2012 |
 | 电影 | 李茶的姑妈 |  | 2018 |
 | 电影 | Resident Evil: The Final Chapter 生化危机：终章 |  | 2016 |
-| 电影 | The Pursuit of Happyness 当幸福来敲门 |  |
-| 电影 | The Great Gatsby 了不起的盖茨比 |  |
+| 电影 | The Pursuit of Happyness 当幸福来敲门 |  |  |
+| 电影 | The Great Gatsby 了不起的盖茨比 |  |  |
 | 电影 | 流浪地球 |  | 2019 |
 | 电影 | 绿皮书 |  | 2018 |
 | 电影 | X-Men2 X 战警 2 |  | 2003 |
@@ -694,7 +689,7 @@ document.addEventListener('DOMContentLoaded', function initWatchCounts() {
 | 电影 | 非诚勿扰 |  | 2010 |
 | 电影 | 一九四二 |  | 2012 |
 | 电影 | 大灌篮 |  | 2008 |
-| 电影 | The Truman Show 楚门的世界 |  |
+| 电影 | The Truman Show 楚门的世界 |  |  |
 | 电影 | Jurassic World: Fallen Kingdom 侏罗纪世界 2 |  | 2018 |
 | 电影 | Oblivion 遗落战境 |  | 2013 |
 | 电影 | I. Robot 我，机器人 |  | 2004 |
@@ -704,7 +699,7 @@ document.addEventListener('DOMContentLoaded', function initWatchCounts() {
 | 电影 | Arrival 降临 |  | 2016 |
 | 电影 | Alien: Covenant 异形：契约 |  | 2017 |
 | 电影 | Jurassic World 侏罗纪世界 |  | 2015 |
-| 电影 | The Maze Runner 移动迷宫 |  |
+| 电影 | The Maze Runner 移动迷宫 |  |  |
 | 电影 | Maze Runner: The Scorch Trials 移动迷宫 2 |  | 2015 |
 | 电影 | 无人区 |  | 2013 |
 | 电影 | Maze Runner: The Death Cure 移动迷宫 3：死亡解药 |  | 2018 |
@@ -712,9 +707,9 @@ document.addEventListener('DOMContentLoaded', function initWatchCounts() {
 | 电影 | 英雄本色 |  | 1986 |
 | 电影 | Death Race 死亡飞车 |  | 2008 |
 | 电影 | Star Trek Beyond 星际迷航 3：超越星辰 |  | 2016 |
-| 电影 | Total Recall 全面回忆 |  |
+| 电影 | Total Recall 全面回忆 |  |  |
 | 电影 | Venom 毒液：致命守护者 |  | 2018 |
-| 电影 | The Terminal 幸福终点站 |  |
+| 电影 | The Terminal 幸福终点站 |  |  |
 | 电影 | Ant-Man and the Wasp 蚁人 2：黄蜂女现身 |  | 2018 |
 | 电影 | Moon 月球 |  | 2009 |
 | 动漫 | 千と千尋の神隠し 千与千寻 |  | 2001 |
@@ -749,10 +744,10 @@ document.addEventListener('DOMContentLoaded', function initWatchCounts() {
 | 电视剧 | 夏目友人帐 第六季 特别篇 梦幻的碎片 |  | 2017 |
 | 电视剧 | 夏目友人帐 第六季 特别篇 铃响的残株 |  | 2017 |
 | 电视剧 | 夏目友人帐 第五季 特别篇 一夜酒杯 |  | 2017 |
-| 电视剧 | The End of the F***ing World Season 1 去他*的世界 第一季 |  |
+| 电视剧 | The End of the F***ing World Season 1 去他*的世界 第一季 |  |  |
 | 动漫 | あの夏、いちばん静かな海。 那年夏天，宁静的海 |  | 1991 |
 | 电影 | War of the Worlds 世界之战 |  | 2005 |
-| 电影 | The Core 地心抢险记 |  |
+| 电影 | The Core 地心抢险记 |  |  |
 | 动漫 | キッズ・リターン 坏孩子的天空 |  | 1996 |
 | 电影 | Jurassic Park: The Lost World 侏罗纪公园 2：失落的世界 |  | 1997 |
 | 电影 | Jurassic Park III 侏罗纪公园 3 |  | 2001 |
@@ -763,16 +758,15 @@ document.addEventListener('DOMContentLoaded', function initWatchCounts() {
 | 电影 | Alien 异形 |  | 1979 |
 | 电影 | 喜剧之王 |  | 1999 |
 | 电影 | Whiplash 爆裂鼓手 |  | 2014 |
-| 电影 | The Lord of the Rings: The Fellowship of the Ring 指环王 1：魔戒再现 |  |
-| 电影 | The Lord of the Rings: The Two Towers 指环王 2：双塔奇兵 |  |
-| 电影 | The Lord of the Rings: The Return of the King 指环王 3：王者无敌 |  |
-| 电视剧 | The End of the F***ing World Season 2 去他*的世界 第二季 |  |
+| 电影 | The Lord of the Rings: The Fellowship of the Ring 指环王 1：魔戒再现 |  |  |
+| 电影 | The Lord of the Rings: The Two Towers 指环王 2：双塔奇兵 |  |  |
+| 电影 | The Lord of the Rings: The Return of the King 指环王 3：王者无敌 |  |  |
+| 电视剧 | The End of the F***ing World Season 2 去他*的世界 第二季 |  |  |
 | 电影 | 부산행 釜山行 |  | 2016 |
 | 电影 | Ready Player One 头号玩家 |  | 2018 |
 | 动漫 | 君の名は。 你的名字。 |  | 2016 |
 | 电影 | Alita: Battle Angel 阿丽塔战斗天使 |  | 2019 |
 | 电影 | 中国机长 |  | 2019 |
-| 电影 | 2019 |  | 2019 |
 | 电影 | 써니 阳光姐妹淘 |  | 2011 |
 | 电影 | Forrest Gump 阿甘正传 |  | 1994 |
 | 电影 | bilibili 晚会二零一九最美的夜 |  | 2019 |
@@ -786,16 +780,16 @@ document.addEventListener('DOMContentLoaded', function initWatchCounts() {
 | 电影 | Alien: Resurrection 异形 4 |  | 1997 |
 | 动漫 | 借りぐらしのアリエッティ 借东西的小人阿莉埃蒂 |  | 2010 |
 | 电影 | 烈日灼心 |  | 2015 |
-| 电影 | The Prestige 致命魔术 |  |
+| 电影 | The Prestige 致命魔术 |  |  |
 | 电影 | 七月与安生 |  | 2016 |
 | 电影 | Metropolis 大都会 |  | 1927 |
 | 电影 | Annihilation 湮灭 |  | 2018 |
 | 电视剧 | Sex Education S1 & S2 性爱自修室 |  | 2019 |
 | 电影 | 长江七号 |  | 2008 |
-| 电影 | Taylor Swift: Miss Americana 美利坚女士 |  |
+| 电影 | Taylor Swift: Miss Americana 美利坚女士 |  |  |
 | 电影 | 3 Idiots 三傻大闹宝莱坞 |  | 2009 |
 | 电视剧 | Never Have I Ever S1 好想做一次 |  | 2020 |
-| 电影 | The Half of It 真心半解 |  |
+| 电影 | The Half of It 真心半解 |  |  |
 | 电影 | 少年的你 |  | 2019 |
 | 电视剧 | Formula 1: Drive to Survive S1 & S2 一级方程式：疾速争胜 |  | 2019 |
 | 电影 | Catch Me If You Can 猫鼠游戏 |  | 2002 |
@@ -805,21 +799,21 @@ document.addEventListener('DOMContentLoaded', function initWatchCounts() {
 | 电视剧 | Space Force 太空部队 |  | 2020 |
 | 电视剧 | Upload 上载新生 |  | 2020 |
 | 电影 | 你会在 20 岁时死去 |  | 2019 |
-| 电影 | Tiché doteky 某种寂静 |  |
+| 电影 | Tiché doteky 某种寂静 |  |  |
 | 电影 | Begin Again 再次出发之纽约遇见你 |  | 2013 |
 | 电影 | Like Sunday Like Rain 如晴天，似雨天 |  | 2014 |
 | 电影 | 追凶者也 |  | 2016 |
-| 电影 | Tais-toi! 你丫闭嘴！ |  |
+| 电影 | Tais-toi! 你丫闭嘴！ |  |  |
 | 电影 | 我在故宫修文物 |  | 2016 |
 | 电影 | 黄金大劫案 |  | 2012 |
 | 电影 | 蛋炒饭 |  | 2011 |
 | 电影 | Sully 萨利机长 |  | 2016 |
 | 动漫 | ウサビッチ 越狱兔第一季 |  | 2006 |
-| 电视剧 | Tales from the Loop 环形物语 |  |
+| 电视剧 | Tales from the Loop 环形物语 |  |  |
 | 动漫 | 姜子牙 |  | 2020 |
 | 电影 | 驴得水 |  | 2016 |
 | 电影 | 射雕英雄传之东成西就 |  | 1993 |
-| 电影 | Tenet 信条 |  |
+| 电影 | Tenet 信条 |  |  |
 | 电影 | 我不是王毛 |  | 2014 |
 | 电影 | 钢的琴 |  | 2010 |
 | 动漫 | リラックマとカオルさん 轻松小熊和小薰 第一季 |  | 2019 |
@@ -831,7 +825,7 @@ document.addEventListener('DOMContentLoaded', function initWatchCounts() {
 | 电影 | Synchronicity 同步 |  | 2015 |
 | 电影 | 大佛普拉斯 |  | 2017 |
 | 电影 | Front of the Class 叫我第一名 |  | 2008 |
-| 电影 | Treasure Island 金银岛 |  |
+| 电影 | Treasure Island 金银岛 |  |  |
 | 动漫 | ブランカとギター弾き 布兰卡和弹吉他的人 |  | 2015 |
 | 电影 | RoboCop 机器战警 |  | 1987 |
 | 电影 | Robocop 2 机器战警 2 |  | 1990 |
@@ -842,26 +836,26 @@ document.addEventListener('DOMContentLoaded', function initWatchCounts() {
 | 电影 | 开心鬼撞鬼 |  | 1986 |
 | 动漫 | 夏目友人帳 うつせみに結ぶ 剧场版结缘空蝉 |  | 2018 |
 | 动漫 | 未来のミライ 未来的未来 |  | 2018 |
-| 电影 | The King's Speech 国王的演讲 |  |
-| 电影 | The Croods: A New Age 疯狂原始人 2 |  |
-| 电影 | Twilight Zone: The Movie 阴阳魔界 |  |
+| 电影 | The King's Speech 国王的演讲 |  |  |
+| 电影 | The Croods: A New Age 疯狂原始人 2 |  |  |
+| 电影 | Twilight Zone: The Movie 阴阳魔界 |  |  |
 | 电影 | Assassin's Creed 刺客信条 |  | 2016 |
 | 电影 | Constantine 康斯坦丁 |  | 2005 |
 | 电影 | Bill & Ted's Excellent Adventure 比尔和泰德历险记 |  | 1989 |
 | 电影 | 你好，李焕英 |  | 2021 |
 | 动漫 | 海よりもまだ深く 比海更深 |  | 2016 |
 | 动漫 | ReLIFE 完結編 重生计划完结篇 |  | 2018 |
-| 电影 | The Curious Case of Benjamin Button 本杰明·巴顿奇事 |  |
-| 电影 | To Be or Not to Be 你逃我也逃 |  |
+| 电影 | The Curious Case of Benjamin Button 本杰明·巴顿奇事 |  |  |
+| 电影 | To Be or Not to Be 你逃我也逃 |  |  |
 | 动漫 | 呪術廻戦 咒术回战 |  | 2020 |
 | 电影 | 邪不压正 |  | 2018 |
-| 电影 | The Conjuring 招魂 |  |
+| 电影 | The Conjuring 招魂 |  |  |
 | 电影 | Soul 心灵奇旅 |  | 2020 |
 | 动漫 | はたらく細胞 工作细胞 |  | 2018 |
 | 电影 | Shaun of the Dead 僵尸肖恩 |  | 2004 |
 | 动漫 | はたらく細胞!! 工作细胞 第二季 |  | 2018 |
 | 动漫 | 猫の恩返し 猫的报恩 |  | 2002 |
-| 电影 | The Great Train Robbery 火车大劫案 |  |
+| 电影 | The Great Train Robbery 火车大劫案 |  |  |
 | 动漫 | 夏目友人帳 ニャンコ先生とはじめてのおつかい 猫咪老师与初次跑腿 |  | 2013 |
 | 动漫 | 夏目友人帳 いつかゆきのひに 曾几何时下雪之日 |  | 2014 |
 | 电影 | Fantastic Beasts and Where to Find Them |  | 2016 |
@@ -900,7 +894,7 @@ document.addEventListener('DOMContentLoaded', function initWatchCounts() {
 | 电影 | 头文字 D |  | 2005 |
 | 电影 | 84 Charing Cross Road 查令十字街 84 号 |  | 1987 |
 | 电影 | 生生 |  | 2017 |
-| 电影 | The Shining 闪灵 |  |
+| 电影 | The Shining 闪灵 |  |  |
 | 电影 | Dr. Strangelove 奇爱博士 |  | 1964 |
 | 电影 | Fantastic Beasts: The Crimes of Grindelwald 神奇动物：格林德沃之罪 |  | 2018 |
 | 电影 | Jerry Seinfeld: 23 Hours to Kill 杰里·宋飞：23 小时找乐子 |  | 2020 |
@@ -910,17 +904,17 @@ document.addEventListener('DOMContentLoaded', function initWatchCounts() {
 | 电影 | 大腕 |  | 2001 |
 | 电影 | Divergent 分歧者：异类觉醒 |  | 2014 |
 | 电影 | Insurgent 分歧者 2：绝地反击 |  | 2015 |
-| 电影 | The Divergent Series: Allegiant 分歧者 3：忠诚世界 |  |
+| 电影 | The Divergent Series: Allegiant 分歧者 3：忠诚世界 |  |  |
 | 动漫 | 夏目友人帳 石起こしと怪しき来訪者 夏目友人帐：唤石者与怪异的访客 |  | 2021 |
-| 电影 | The Island 逃出克隆岛 |  |
+| 电影 | The Island 逃出克隆岛 |  |  |
 | 电影 | 海角七号 | 出场的几个人各有联系：\n摔琴的男子、模特们的助手女子（友子）、无视别人自己正在拍照的老头、被女子坐的巴车吓到的送信的茂伯。\n男子接替茂伯送信。老头是男子的父亲。\n友子是哪个女孩？我以为此「友子」是彼「友子」，后来发现不是。\n暖场乐团第二首，刚听的那一刻浑身发麻。 | 2008 |
 | 动漫 | 名探偵コナン 瞳の中の暗殺者 名侦探柯南：瞳孔中的暗杀者 |  | 2000 |
 | 动漫 | 夜明け告げるルーのうた 宣告黎明的露之歌 |  | 2017 |
 | 动漫 | 魁拔之大战元泱界 2 |  | 2013 |
-| 电影 | Tout en haut du monde 漫漫北寻路 |  |
+| 电影 | Tout en haut du monde 漫漫北寻路 |  |  |
 | 电影 | 太阳照常升起 |  | 2007 |
 | 动漫 | Wonder Woman 神奇女侠 |  | 1975 |
-| 电影 | Tom and Jerry: The Movie 猫和老鼠 1992 电影版 |  |
+| 电影 | Tom and Jerry: The Movie 猫和老鼠 1992 电影版 |  |  |
 | 动漫 | ノラガミ ARAGOTO 野良神第 2 季 |  | 2014 |
 | 动漫 | ノラガミ 野良神 |  | 2014 |
 | 电影 | 赌神 |  | 1989 |
@@ -962,13 +956,12 @@ document.addEventListener('DOMContentLoaded', function initWatchCounts() {
 | 电影 | 疯狂的麦克斯 3 Mad Max Beyond Thunderdome |  | 1985 |
 | 动漫 | 崖上的波妞 崖の上のポニョ |  | 2008 |
 | 电影 | 穿条纹睡衣的男孩 The Boy in the Striped Pajamas |  | 2008 |
-| 电影 | 2021 |  | 2021 |
 | 动漫 | 钢之炼金术师 |  | 2003 |
 | 电影 | 动物园看守 Zookeeper |  | 2011 |
 | 动漫 | 挪威的森林 ノルウェイの森（音乐的戛然而止） |  | 2010 |
 | 电影 | 半个喜剧 |  | 2019 |
-| 电影 | 四海（很一般） |  | 2022 |
-| 电影 | 007：无暇赴死 No Time to Die（爽片就是如此，这届 007 该退休了） |  | 2021 |
+| 电影 | 四海 | 很一般 | 2022 |
+| 电影 | 007：无暇赴死 No Time to Die | 爽片就是如此，这届 007 该退休了 | 2021 |
 | 电影 | 亚当斯一家 The Addams Family |  | 1991 |
 | 电影 | 失控玩家 |  | 2021 |
 | 电影 | 贱女孩 Mean Girls |  | 2004 |
@@ -994,7 +987,7 @@ document.addEventListener('DOMContentLoaded', function initWatchCounts() {
 | 动漫 | 烟花（日本动漫） |  | 2017 |
 | 动漫 | 灵笼第一季 |  | 2019 |
 | 电影 | 无人看护 |  | 2014 |
-| 电影 | Bordertown 女性被男性强奸，杀害，华尔兹 |  | 2006 |
+| 电影 | Bordertown | 女性被男性强奸，杀害，华尔兹 | 2006 |
 | 动漫 | 穿靴子的猫 |  | 2011 |
 | 电影 | 最后的城堡 |  | 2001 |
 | 电视剧 | 神秘博士第十一季 |  | 2005 |
@@ -1030,11 +1023,11 @@ document.addEventListener('DOMContentLoaded', function initWatchCounts() {
 | 动漫 | 机动战士高达 THE ORIGIN Ⅳ 命运前夜 機動戦士ガンダム THE ORIGIN Ⅳ 運命の前夜 |  | 2016 |
 | 动漫 | 机动战士高达 THE ORIGIN Ⅴ 激战 鲁姆会战 機動戦士ガンダム THE ORIGIN Ⅴ 激突 ルウム会戦 |  | 2017 |
 | 动漫 | 机动战士高达 THE ORIGIN Ⅵ 赤色彗星诞生 機動戦士ガンダム THE ORIGIN Ⅵ 誕生 赤い彗星 |  | 2018 |
-| 电影 | 冲向天外天 Explorers 很不错，激发孩子关于宇宙的想象力 |  | 1985 |
+| 电影 | 冲向天外天 Explorers | 很不错，激发孩子关于宇宙的想象力 | 1985 |
 | 电视剧 | 爱，死亡和机器人第一季 冰河时代不错（时间、战争） |  | 2019 |
 | 动漫 | 爱，死亡和机器人第二季 |  | 2019 |
 | 电视剧 | 爱，死亡和机器人第三季 吉巴罗血水震撼 |  | 2019 |
-| 电影 | 海滩游侠 挺好的娱乐电影，剧情简单 |  | 2017 |
+| 电影 | 海滩游侠 | 挺好的娱乐电影，剧情简单 | 2017 |
 | 动漫 | 西游记之大圣归来 |  | 2015 |
 | 电影 | 像素大战 |  | 2015 |
 | 电视剧 | 伞学院 第一季 |  | 2019 |
@@ -1056,7 +1049,7 @@ document.addEventListener('DOMContentLoaded', function initWatchCounts() {
 | 电视剧 | 曼达洛人 第二季 |  | 2019 |
 | 电视剧 | 黑袍纠察队 第一季 |  | 2023 |
 | 电视剧 | 黑袍纠察队 第二季 |  | 2023 |
-| 电影 | 预见未来 Next at 2007 | 有意思的设定，没想到最后竟然揭示：可以预测那么长时间 | 2007 |
+| 电影 | 预见未来 Next | 有意思的设定，没想到最后竟然揭示：可以预测那么长时间 | 2007 |
 | 电影 | 地心历险记 |  | 2008 |
 | 电影 | 楼上的外星人 |  | 2009 |
 | 电影 | 天气预报员 The Weather Man | 电影台词 To get anything of value, you have to sacrifice. Nothing that has meaning is easy. Easy doesn't enter into grown-up life. Your hand okay? It's okay. You certain? Don't worry. You always worry about your kids no matter how old. There's always looking after. I remember once imagining what my life would be like, what I'd be like. I pictured having all these qualities. Strong, positive qualities that people could pick up on from across a room. But as time passed, few ever became any qualities I actually had. And all the possibilities I faced, and sorts of people I could be all of them got reduced every year to fewer and fewer until finally they got reduced to one to who I am. And that's who I am. 想法 电影中多次提到，男主因为没带够现金，而不能给父亲买报纸、热咖啡。而且 ，都是因为买了其他东西而导致钱没够。从这些细节能看出什么？ 他把解决问题（和妻子重归于好）的希望放在《你好，美国》节目的试镜上。 男主不能控制好情绪，容易变得冷漠，对女儿是如此。认为妻子的新丈夫不该像亲生父亲那样，陪自己的儿子。 男主、女儿都喜欢问”为什么”，刨根问底式地问。 他删除了自己写了四年的小说《转折点》。 生前葬礼（Living Funeral）------听起来很荒诞。 本来是为了女儿，才接触射箭。男主为了教女儿学习，自己先学会了。后来，和女儿沟通才发现：她根本不喜欢，她之所以说要学习射箭，是因为想打猎，射杀动物。 片头和第 76 分钟时都出现了它------湖面上的破碎的冰。 不断地被人扔东西。这些东西都是快餐------人们宁愿扔掉，也不愿吃下去的垃圾。男主意识到------自己就是快餐。当他父亲在街上叫他”Weatherman”时，他的头猛一缩，像是在躲避别人砸来的东西。 因为儿子 Mike 被人猥亵，男主教训了那个人。 | 2005 |
@@ -1064,9 +1057,9 @@ document.addEventListener('DOMContentLoaded', function initWatchCounts() {
 | 电视剧 | 黑袍纠察队 第三季 | 前三季完结，已看完。 人体被破坏的场面异常血腥。 表面的正义，暗里的黑暗 超人小队能够做到：绝大多数人，想做但不愿意做的事。 所谓的拯救世界，只不过是真人秀。 超人小队，就是恐怖分子。 "母亲不在身边长大的实验对象会变得暴戾、有攻击性、充满仇恨。" | 2023 |
 | 电影 | 海兽猎人 The Sea Beast |  | 2022 |
 | 电影 | 侏罗纪世界3 Jurassic World: Dominion |  | 2022 |
-| 电影 | 食戟之灵 第 1,2,3,4,5 季 + OAD | 虽然有点黄，但还是很好看的  | 2015 |
-| 电影 | Waterworld 未来水世界 | 拍得不错，男女主生活在帆船上竟然有种《猩球崛起》的感觉。这种水淹没陆地的幻想，在刘慈欣的小说《超新星爆发》里见过  | 1995 |
-| 电影 | Jack Reacher 侠探杰克 | 挺喜欢这种破解谜题的，不过看的是新鲜感，如果反复看就没有乐趣了  | 2012 |
+| 电影 | 食戟之灵 第 1,2,3,4,5 季 + OAD | 虽然有点黄，但还是很好看的 | 2015 |
+| 电影 | Waterworld 未来水世界 | 拍得不错，男女主生活在帆船上竟然有种《猩球崛起》的感觉。这种水淹没陆地的幻想，在刘慈欣的小说《超新星爆发》里见过 | 1995 |
+| 电影 | Jack Reacher 侠探杰克 | 挺喜欢这种破解谜题的，不过看的是新鲜感，如果反复看就没有乐趣了 | 2012 |
 | 电影 | 芬奇 Finch | <https://movie.douban.com/subject/26897885/> 讲述一个关于信任的故事。 电影时刻： 1:00:54 无法控制的事情会发生在我们身上，我会有原始的情绪。在这种时候，我如何应对、采取何种行动，将定义我是谁。 每个人都会遇到（无法控制的事情），无论我们是否希望如此。 饥饿让人变成了杀人犯。 芬奇在晒太阳，之后他死了，之后机器人杰夫和小狗到了旧金山金门大桥。 | 2021 |
 | 电影 | 拯救大兵瑞恩 Saving Private Ryan |  | 1998 |
 | 电影 | 幸福终点站 The Terminal |  | 2004 |
@@ -1078,23 +1071,23 @@ document.addEventListener('DOMContentLoaded', function initWatchCounts() {
 | 电影 | 圆圈 The Circle |  | 2017 |
 | 电影 | 特别响，非常近 Extremely Loud and Incredibly Close | 911事件 我希望那天死的是你，而不是他。 父爱。 | 2011 |
 | 电影 | 菲利普船长 Captain Phillips |  | 2013 |
-| 电影 | 极地特快 The Polar Express 圣诞老人的故事！ |  | 2004 |
+| 电影 | 极地特快 The Polar Express | 圣诞老人的故事！ | 2004 |
 | 电影 | 拉瑞·克劳 Larry Crowne |  | 2011 |
 | 电视剧 | 神盾局特工 第二季 |  | 2013 |
 | 电视剧 | 神盾局特工 第三季 |  | 2013 |
 | 电视剧 | 神盾局特工 第四季 |  | 2013 |
 | 电视剧 | 神盾局特工 第五季 |  | 2013 |
-| 电视剧 | 神盾局特工 第六七季(未看视频，仅读文字简介) |  | 2013 |
+| 电视剧 | 神盾局特工 第六七季 | 未看视频，仅读文字简介 | 2013 |
 | 电影 | RRR (Rise Roar Revolt) |  | 2022 |
 | 电影 | A Son(Original title: Bik Eneich: Un fils | <https://www.themoviedb.org/movie/618224-bik-eneich> 他们的地方不太平，有人在打仗。父亲带着母亲和儿子路过一处土路，前面爆发枪战，一颗子弹射穿了儿子的腹部。 为保住性命，医生切除了八成肝脏。 父亲不是生父，所以不能捐肝。 利比亚------北非国家，他国法律规定：婚前不能有性行为。 | 2020 |
 | 电影 | Jungle 丛林 |  | 2017 |
-| 电影 | 假偶天成 电影版 เพราะเราคู่กัน 第一次看的时候立刻劝退，第二次终于看完，惊讶于父母对儿子喜欢同性的平淡 |  | 2021 |
+| 电影 | 假偶天成 电影版 เพราะเราคู่กัน | 第一次看的时候立刻劝退，第二次终于看完，惊讶于父母对儿子喜欢同性的平淡 | 2021 |
 | 电影 | 北好莱坞 North Hollywood |  | 2021 |
 | 动漫 | 圣刃＋全开者 超级英雄战记 セイバー＋ゼンカイジャー スーパーヒーロー戦記 |  | 2021 |
 | 电影 | 扬名立万 |  | 2021 |
-| 电影 | 千王之王2000 电影不好看，“初恋”挺漂亮 |  | 1999 |
+| 电影 | 千王之王2000 | 电影不好看，“初恋”挺漂亮 | 1999 |
 | 电影 | 摩登如来神掌 王祖贤很美 |  | 1990 |
-| 电影 | 神奇侠侣 小时候看过，挺不错 |  | 2011 |
+| 电影 | 神奇侠侣 | 小时候看过，挺不错 | 2011 |
 | 电视剧 | 希尔达 第一季 Hilda Season 1 |  | 2018 |
 | 电视剧 | 希尔达 第二季 Hilda Season 2 |  | 2018 |
 | 电影 | 轻松小熊和小薰 电影 |  | 2019 |
@@ -1102,15 +1095,13 @@ document.addEventListener('DOMContentLoaded', function initWatchCounts() {
 | 动漫 | 心理测量者 PSYCHO-PASS サイコパス 第一季 | 系列： 第一季 2012 笔记 《一九八四》 《论人类不平等的起源》卢梭 | 2012 |
 | 电视剧 | 西部世界 第四季 Westworld Season 4 |  | 2016 |
 | 电影 | 天才不能承受之重 The Unbearable Weight of Massive Talent |  | 2022 |
-| 电影 | Top Gun |  |
-| 电影 | 2022 |  | 2022 |
+| 电影 | Top Gun |  |  |
 | 动漫 | 深海动画 |  | 2023 |
-| 电视剧 | The Last of Us |  |
+| 电视剧 | The Last of Us |  |  |
 | 电影 | Puss in Boots: The Last Wish 穿靴子的猫2：最后的愿望 |  | 2022 |
 | 电影 | Black Panther: Wakanda Forever 黑豹2：瓦坎达永存 |  | 2022 |
 | 动漫 | ブラッシュアップライフ 重启人生 Brush Up Life |  | 2023 |
 | 电影 | Avatar: The Way of Water 阿凡达2：水之道 |  | 2010 |
-| 电影 | 2020 |  | 1982 |
 | 电视剧 | Sherlock Season 1 |  | 2010 |
 | 电视剧 | Sherlock Season 2 |  | 2010 |
 | 电视剧 | Sherlock Season 3 |  | 2010 |
@@ -1120,14 +1111,14 @@ document.addEventListener('DOMContentLoaded', function initWatchCounts() {
 | 动漫 | 家庭教师 家庭教師ヒットマンREBORN! |  | 2006 |
 | 电视剧 | Sense8 Season 1(12 episodes) |  | 2015 |
 | 电视剧 | Sense8 Season 2(10 episodes) |  | 2015 |
-| 电影 | The Hitchhiker's Guide to the Galaxy |  |
+| 电影 | The Hitchhiker's Guide to the Galaxy |  |  |
 | 电影 | Ice Age 冰川时代1 |  | 2002 |
 | 电影 | Ice Age: The Meltdown 冰川时代2：融冰之灾 |  | 2006 |
 | 电影 | Ice Age: Dawn of the Dinosaurs 冰川时代3：恐龙的黎明 |  | 2009 |
 | 电影 | Ice Age: Continental Drift 冰川时代4：大陆漂移 |  | 2012 |
 | 电影 | Ice Age: Collision Course 冰川时代5：星际碰撞 |  | 2016 |
 | 动漫 | アンナチュラル 非自然死亡 |  | 2018 |
-| 动漫 | 波よ聞いてくれ 听我的电波吧2023    很棒的电视剧，这个主角很有意思，发现自己喜欢上了这种说话速度很快的日剧 |  | 2023 |
+| 电视剧 | 波よ聞いてくれ 听我的电波吧 | 很棒的电视剧，这个主角很有意思，发现自己喜欢上了这种说话速度很快的日剧 | 2023 |
 | 电影 | 다음 소희 下一个素熙 |  | 2022 |
 | 电影 | 八角笼中 |  | 2023 |
 | 动漫 | 俺の話は長い 我的事说来话长 |  | 2019 |
