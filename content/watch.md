@@ -114,9 +114,10 @@ document.addEventListener('DOMContentLoaded', function initWatchCounts() {
   var total = 0;
   Object.keys(counts).forEach(function(k) { total += counts[k]; });
   document.querySelectorAll('#watch-filters .watch-filter').forEach(function(b) {
-    var m = (b.getAttribute('onclick') || "").match(/'([^']+)'/);
+    // onclick 属性经 smartypants 渲染后可能是双引号或单引号包 type，两者都兼容
+    var m = (b.getAttribute('onclick') || '').match(/filterWatch\((['"])(.*?)\1\)/);
     if (!m) return;
-    var n = m[1] === 'all' ? total : counts[m[1]];
+    var n = m[2] === 'all' ? total : counts[m[2]];
     if (n == null) return;
     b.textContent = b.textContent.replace(/\s*\(\d+\)$/, '') + ' (' + n + ')';
   });
