@@ -765,7 +765,7 @@ https://aur.archlinux.org/packages/firefox-extension-arch-search
 点击 Sources 的 *.xpi 文件即可安装。
 
 
-相关：[[js-expressjs|js-expressjs]]
+相关：[[js-expressjs|js-expressjs]]、[[firefox-sec-error-bad-signature-dual-root|电子证书 SEC_ERROR_BAD_SIGNATURE 排查]]
 
 ## 参考
 - [Web Apps in Firefox — Firefox Source Docs](https://firefox-source-docs.mozilla.org/browser/components/taskbartabs/docs/index.html)
