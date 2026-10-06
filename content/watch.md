@@ -1137,5 +1137,6 @@ document.addEventListener('DOMContentLoaded', function initWatchCounts() {
 | 电影 | Con Air 空中监狱 by Nicolas Cage |  | 1997 |
 | 电影 | “炼”爱 |  | 2021 |
 | 电影 | the help 相助 | 黑人与白人，种族的隔阂，白人为黑人的权利抗争，黑人自己为自己的权利抗争 | 2011 |
+| 电影 | Groundhog Day 土拨鼠之日 | 困在一天里出不来，一开始想做什么就做什么，后来想摆脱又摆脱不了。爱过、肆意妄为过、自暴自弃过。为了救老人尝试了几次，都不行。到最后，他改做好事了 | 1993 |
 
 </div>
