@@ -98,6 +98,29 @@ function filterWatch(type) {
     if (first) first.style.display = hideType ? 'none' : '';
   });
 }
+// 类别计数：页面加载时统计表格行数，填进筛选按钮（动态计算，加行/删行无需维护）
+(function initWatchCounts() {
+  var tbl = document.querySelector('#watch-content table');
+  if (!tbl) return;
+  var counts = {};
+  var rows = tbl.querySelectorAll('tbody tr');
+  if (!rows.length) rows = tbl.querySelectorAll('tr:not(:first-child)');
+  rows.forEach(function(row) {
+    var c = row.querySelector('td:first-child');
+    if (!c) return;
+    var t = c.textContent.trim();
+    if (t) counts[t] = (counts[t] || 0) + 1;
+  });
+  var total = 0;
+  Object.keys(counts).forEach(function(k) { total += counts[k]; });
+  document.querySelectorAll('#watch-filters .watch-filter').forEach(function(b) {
+    var m = (b.getAttribute('onclick') || "").match(/'([^']+)'/);
+    if (!m) return;
+    var n = m[1] === 'all' ? total : counts[m[1]];
+    if (n == null) return;
+    b.textContent = b.textContent.replace(/\s*\(\d+\)$/, '') + ' (' + n + ')';
+  });
+})();
 </script>
 
 <div id="watch-content">
@@ -1119,5 +1142,6 @@ function filterWatch(type) {
 | 电影 | Oliver Twist 雾都孤儿 |  | 2005 |
 | 电影 | Con Air 空中监狱 by Nicolas Cage |  | 1997 |
 | 电影 | “炼”爱 |  | 2021 |
+| 电影 | the help 相助 | 黑人与白人，种族的隔阂，白人为黑人的权利抗争，黑人自己为自己的权利抗争 | 2011 |
 
 </div>
