@@ -104,6 +104,8 @@ function filterWatch(type) {
 
 | Type | Name | Review | Release Year |
 | --- | --- | --- | --- |
+| 电影 | 第二次握手 | 两个人的爱情，苏冠兰、丁洁琼。命运让他们度过短暂的幸福时光，之后便以分离和苦痛作为主旋律。 当琼姐回到中国，来到那个等了 28 年的人的面前，得知他已成家，这该是怎样的打击与痛苦。 当爱情历经时间锤炼，最后剩下的究竟是什么？ |  |
+| 动漫 | 紫罗兰永恒花园 Violet Evergarden | 番剧：懂得爱的真谛 外传 剧场版 我也不太懂爱，不懂人情世故。圆滑 |  |
 | 电影 | Gandhi 甘地传 | 甘地回国了，另一边是英国总督上任。以扰乱治安治罪，但却无罪释放。甘地是怎样变成圣雄甘地的？一个普通人，竟有通过自身绝食行为感召人民的力量，这就是有信仰的人才能做的事情。人人平等，没有种族、没有颜色差异的人人平等。幸福来自工作以及工作带来的尊严。影片中一个重复出现的场景：甘地在纺织 | 1982 |
 | 电影 | The Grapes of Wrath 愤怒的葡萄 | 俄基佬，侮辱性很强。到加利福尼亚以为会有工作，但却在流民营。到了另一处，没做几天被压低工价，从5美分到2.5美分，活不下去了只能走了。Joad无意间杀了一个治安官。在一处政府运营的安置区，警察想要搅合这里的安宁，故意找人捣乱，不过被Joad他们打乱了。政府、警察、佃农、地主，矛盾冲突。讲述的是1930年代美国Oklahoma乡村的农名因过度耕作导致土地沙化严重无法种地不得不四处迁徙打零工的故事。 | 1940|
 | 电影 | Minions & Monsters 小黄人与大怪兽 | 图一乐的儿童电影 | 2026 |
@@ -1026,31 +1028,31 @@ function filterWatch(type) {
 | 电影 | 互联网之子：亚伦·斯沃兹的故事 |  |  |
 | 电影 | 初恋这件小事 |  |  |
 | 电视剧 | 星际迷航：奇异新世界 |  |  |
-| 电视剧 | 人生切割术 第一季 |  |  |
+| 电视剧 | 人生切割术 第一季 | 让自己接受某种强迫性的意愿 在休息室，强迫说着「自我忏悔」的话 不让员工阅读 在各个部门间制造隔阂 我需要工作，但工作更需要我 |  |
 | 电视剧 | 曼达洛人 第二季 |  |  |
 | 电视剧 | 黑袍纠察队 第一季 |  |  |
 | 电视剧 | 黑袍纠察队 第二季 |  |  |
 | 电影 | 预见未来 Next at 2007 | 有意思的设定，没想到最后竟然揭示：可以预测那么长时间 |  |
 | 电影 | 地心历险记 |  |  |
 | 电影 | 楼上的外星人 |  |  |
-| 电影 | 天气预报员 The Weather Man |  |  |
+| 电影 | 天气预报员 The Weather Man | 电影台词 To get anything of value, you have to sacrifice. Nothing that has meaning is easy. Easy doesn't enter into grown-up life. Your hand okay? It's okay. You certain? Don't worry. You always worry about your kids no matter how old. There's always looking after. I remember once imagining what my life would be like, what I'd be like. I pictured having all these qualities. Strong, positive qualities that people could pick up on from across a room. But as time passed, few ever became any qualities I actually had. And all the possibilities I faced, and sorts of people I could be all of them got reduced every year to fewer and fewer until finally they got reduced to one to who I am. And that's who I am. 想法 电影中多次提到，男主因为没带够现金，而不能给父亲买报纸、热咖啡。而且 ，都是因为买了其他东西而导致钱没够。从这些细节能看出什么？ 他把解决问题（和妻子重归于好）的希望放在《你好，美国》节目的试镜上。 男主不能控制好情绪，容易变得冷漠，对女儿是如此。认为妻子的新丈夫不该像亲生父亲那样，陪自己的儿子。 男主、女儿都喜欢问”为什么”，刨根问底式地问。 他删除了自己写了四年的小说《转折点》。 生前葬礼（Living Funeral）------听起来很荒诞。 本来是为了女儿，才接触射箭。男主为了教女儿学习，自己先学会了。后来，和女儿沟通才发现：她根本不喜欢，她之所以说要学习射箭，是因为想打猎，射杀动物。 片头和第 76 分钟时都出现了它------湖面上的破碎的冰。 不断地被人扔东西。这些东西都是快餐------人们宁愿扔掉，也不愿吃下去的垃圾。男主意识到------自己就是快餐。当他父亲在街上叫他”Weatherman”时，他的头猛一缩，像是在躲避别人砸来的东西。 因为儿子 Mike 被人猥亵，男主教训了那个人。 |  |
 | 电影 | 奇奇与蒂蒂：救援突击队 Chip 'n' Dale: Rescue Rangers |  |  |
-| 电视剧 | 黑袍纠察队 第三季 |  |  |
+| 电视剧 | 黑袍纠察队 第三季 | 前三季完结，已看完。 人体被破坏的场面异常血腥。 表面的正义，暗里的黑暗 超人小队能够做到：绝大多数人，想做但不愿意做的事。 所谓的拯救世界，只不过是真人秀。 超人小队，就是恐怖分子。 "母亲不在身边长大的实验对象会变得暴戾、有攻击性、充满仇恨。" |  |
 | 电影 | 海兽猎人 The Sea Beast |  |  |
 | 电影 | 侏罗纪世界3 Jurassic World: Dominion |  |  |
 | 电影 | 食戟之灵 第 1,2,3,4,5 季 + OAD | 虽然有点黄，但还是很好看的  | 2015 |
 | 电影 | Waterworld 未来水世界 | 拍得不错，男女主生活在帆船上竟然有种《猩球崛起》的感觉。这种水淹没陆地的幻想，在刘慈欣的小说《超新星爆发》里见过  | 1995 |
 | 电影 | Jack Reacher 侠探杰克 | 挺喜欢这种破解谜题的，不过看的是新鲜感，如果反复看就没有乐趣了  | 2012 |
-| 电影 | 芬奇 Finch |  |  |
+| 电影 | 芬奇 Finch | <https://movie.douban.com/subject/26897885/> 讲述一个关于信任的故事。 电影时刻： 1:00:54 无法控制的事情会发生在我们身上，我会有原始的情绪。在这种时候，我如何应对、采取何种行动，将定义我是谁。 每个人都会遇到（无法控制的事情），无论我们是否希望如此。 饥饿让人变成了杀人犯。 芬奇在晒太阳，之后他死了，之后机器人杰夫和小狗到了旧金山金门大桥。 |  |
 | 电影 | 拯救大兵瑞恩 Saving Private Ryan |  |  |
 | 电影 | 幸福终点站 The Terminal |  |  |
-| 电影 | 荒岛余生 Cast Away |  |  |
-| 电影 | 达·芬奇密码 The Da Vinci Code |  |  |
+| 电影 | 荒岛余生 Cast Away | 一个人在岛上生活了四年。 在他刚回到文明社会时，他没办法适应。 他的女朋友凯莉以为他死了，然后她和其他人结婚了。 站在田野间的十字路口，不知所措。 |  |
+| 电影 | 达·芬奇密码 The Da Vinci Code | 第二遍看，依旧好看，有些内容还有些印象。 网络中免费资源挺难找的，这是一个 <https://www.nunuyy1.org/dianying/14352.html> |  |
 | 动漫 | 轻音少女 剧场版 | 25年4月底第n次看，还是一样感动和喜欢呢！ |  |
 | 电视剧 | Sherlock Season 4   Amanda Abbington 饰演的华生妻子Mary令我印象深刻 | this is the rev |  |
 | 电影 | 天使与魔鬼 Angels & Demons |  |  |
 | 电影 | 圆圈 The Circle |  |  |
-| 电影 | 特别响，非常近 Extremely Loud and Incredibly Close |  |  |
+| 电影 | 特别响，非常近 Extremely Loud and Incredibly Close | 911事件 我希望那天死的是你，而不是他。 父爱。 |  |
 | 电影 | 菲利普船长 Captain Phillips |  |  |
 | 电影 | 极地特快 The Polar Express 圣诞老人的故事！ |  |  |
 | 电影 | 拉瑞·克劳 Larry Crowne |  |  |
@@ -1060,7 +1062,7 @@ function filterWatch(type) {
 | 电视剧 | 神盾局特工 第五季 |  |  |
 | 电视剧 | 神盾局特工 第六七季(未看视频，仅读文字简介) |  |  |
 | 电影 | RRR (Rise Roar Revolt) |  |  |
-| 电影 | A Son(Original title: Bik Eneich: Un fils |  |  |
+| 电影 | A Son(Original title: Bik Eneich: Un fils | <https://www.themoviedb.org/movie/618224-bik-eneich> 他们的地方不太平，有人在打仗。父亲带着母亲和儿子路过一处土路，前面爆发枪战，一颗子弹射穿了儿子的腹部。 为保住性命，医生切除了八成肝脏。 父亲不是生父，所以不能捐肝。 利比亚------北非国家，他国法律规定：婚前不能有性行为。 |  |
 | 电影 | Jungle 丛林 |  |  |
 | 电影 | 假偶天成 电影版 เพราะเราคู่กัน 第一次看的时候立刻劝退，第二次终于看完，惊讶于父母对儿子喜欢同性的平淡 |  |  |
 | 电影 | 北好莱坞 North Hollywood |  |  |
@@ -1072,8 +1074,8 @@ function filterWatch(type) {
 | 电视剧 | 希尔达 第一季 Hilda Season 1 |  |  |
 | 电视剧 | 希尔达 第二季 Hilda Season 2 |  |  |
 | 电影 | 轻松小熊和小薰 电影 |  |  |
-| 电影 | Cloud Atlas 云图 |  |  |
-| 动漫 | 心理测量者 PSYCHO-PASS サイコパス 第一季 |  |  |
+| 电影 | Cloud Atlas 云图 | All boundaries are conventions, waiting to be transcended. One may transcend any convention, if only one can first conceive of doing so. 如果没有一颗让自己变好的心，如果没有每天点滴的努力，何时才能汇聚知识的海洋？ |  |
+| 动漫 | 心理测量者 PSYCHO-PASS サイコパス 第一季 | 系列： 第一季 2012 笔记 《一九八四》 《论人类不平等的起源》卢梭 |  |
 | 电视剧 | 西部世界 第四季 Westworld Season 4 |  |  |
 | 电影 | 天才不能承受之重 The Unbearable Weight of Massive Talent |  |  |
 | 电影 | Top Gun |  |
