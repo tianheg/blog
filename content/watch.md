@@ -98,8 +98,8 @@ function filterWatch(type) {
     if (first) first.style.display = hideType ? 'none' : '';
   });
 }
-// 类别计数：页面加载时统计表格行数，填进筛选按钮（动态计算，加行/删行无需维护）
-(function initWatchCounts() {
+// 类别计数：DOMContentLoaded 后统计表格行数，填进筛选按钮（动态计算，加删行无需维护）
+document.addEventListener('DOMContentLoaded', function initWatchCounts() {
   var tbl = document.querySelector('#watch-content table');
   if (!tbl) return;
   var counts = {};
@@ -120,7 +120,7 @@ function filterWatch(type) {
     if (n == null) return;
     b.textContent = b.textContent.replace(/\s*\(\d+\)$/, '') + ' (' + n + ')';
   });
-})();
+});
 </script>
 
 <div id="watch-content">
