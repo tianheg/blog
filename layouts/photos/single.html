@@ -1,0 +1,28 @@
+{{/* 相册子页 content/photos/<合集名>.md → /photos/<合集名>/。
+     照片从 data/photos-list.yaml 按 front matter 的 album 键取（键对不上 / 无照片 → errorf 防漂移）。
+     正文 = h1 标题 + 图片网格，其他一律不放。
+     图源前缀按环境切：dev 走 static/_photos 镜像（hugo serve 无法执行 Worker），prod 走同源 /photos/（Worker 逐 key 白名单）。 */}}
+{{ define "main" }}
+{{- $yml := index hugo.Data "photos" | default dict -}}  {{/* 派生的 photos.json（带 w/h/v 字典）；数据真源仍是 data/photos-list.yaml，这里读派生层 */}}
+{{- $series := index $yml "series" | default slice -}}
+{{- $key := .Params.series | default .Title -}}
+{{- $found := first 1 (where $series "name" $key) -}}
+{{- $photos := slice -}}
+{{- with $found }}{{ $photos = index . 0 "photos" | default slice }}{{ end -}}
+{{- $base := "/photos/" -}}
+{{- if hugo.IsDevelopment -}}{{- $base = "/_photos/" -}}{{- end -}}
+
+<article data-pagefind-body class="pb-16">  {{/* 底部留白（用户同上） */}}
+  <h1 class="text-[28px] font-extrabold text-gray-900 dark:text-gray-100">{{ .Title }}</h1>
+
+  {{ if $photos }}
+    {{ partial "photos-grid" (dict "list" $photos "base" $base) }}
+  {{ else }}
+  {{/* yaml 没条目 = 名单没点过 / 系列清空了：报错并给空态，页面绝不自己造图 */}}
+  {{ errorf "系列 %q 在 data/photos-list.yaml 里没有照片（series 键对不上或被清空）: %s" $key .Path }}
+  <p class="mt-8 text-[15px] text-gray-600 dark:text-gray-400">这个系列还没有照片。</p>
+  {{ end }}
+</article>
+
+{{ partial "photos-lightbox" dict }}
+{{ end }}

@@ -1,0 +1,19 @@
+{{/* 相册网格（瀑布流）：params = dict "list" [...条目] "base" <URL前缀>
+     横竖混排不留空洞、保持原比例不裁切；每格 aspect 用清单里的真实宽高，零布局抖动 */}}
+<div class="mt-6 columns-2 gap-3 sm:columns-3 lg:columns-4" data-lb-set>
+  {{- range .list }}
+  <a class="group relative mb-3 block overflow-hidden rounded-sm break-inside-avoid bg-gray-100 dark:bg-gray-800"
+     style="aspect-ratio: {{ .w }} / {{ .h }}"
+     href="{{ $.base }}h/{{ .k }}?v={{ .v }}"
+     data-lb
+     data-full="{{ $.base }}h/{{ .k }}?v={{ .v }}"
+     data-caption="{{ .title }}"
+     target="_blank" rel="noopener">
+    <img src="{{ $.base }}t/{{ .k }}?v={{ .v }}"
+         alt="{{ .title }}"
+         width="{{ .w }}" height="{{ .h }}"
+         loading="lazy" decoding="async"
+         class="h-full w-full object-cover transition-opacity duration-200 group-hover:opacity-85">
+  </a>
+  {{- end }}
+</div>

@@ -1,0 +1,48 @@
+{{/* 相册首页正文 /photos/：散片直出网格（如有）+ 合集卡片（封面 → 子页）。
+     数据真源 = data/photos-list.yaml（只渲染点名放行的）；活合集 = albums 里至少一张图。
+     空合集不出卡片（与子页空合集不渲染的规则一致）。 */}}
+{{- $yml := index hugo.Data "photos" | default dict -}}  {{/* 派生的 photos.json（带 w/h/v 字典）；photos-list.yaml 是文件名清单，不进模板 */}}
+{{- $singles := index $yml "photos" | default slice -}}
+{{- $series := index $yml "series" | default slice -}}  {{/* 按 no 编号排序（gen 已排） */}}
+{{- $live := slice -}}
+{{- range $series }}{{ if .photos }}{{ $live = $live | append . }}{{ end }}{{ end -}}
+{{- $base := "/photos/" -}}
+{{- if hugo.IsDevelopment -}}{{- $base = "/_photos/" -}}{{- end -}}
+
+<article data-pagefind-body class="pb-16">  {{/* 底部留白（用户 2026-10-07）：图块贴到 footer 太挤 */}}
+  <h1 class="text-[28px] font-extrabold text-gray-900 dark:text-gray-100">Photos</h1>
+
+  {{ if or (gt (len $singles) 0) (gt (len $live) 0) }}
+  {{- with $singles }}
+    {{ partial "photos-grid" (dict "list" . "base" $base) }}
+  {{- end }}
+
+  <div class="mt-6 grid grid-cols-2 gap-x-4 gap-y-7">
+  {{- range $live }}
+  {{- $a := . -}}
+  {{/* URL = 编号：/photos/<num>/，文件 content/photos/<num>.md（JSON 数字是 float64，format 用 %v）
+       GetPage 查编号路径不可靠，改用 RegularPages + 文件名校验（gen 保证文件存在，这里兜底） */}}
+  {{- $stem := printf "%v" $a.num }}
+  {{- $exists := false -}}
+  {{- range site.RegularPages }}{{ if and (eq .Section "photos") (eq .File.ContentBaseName $stem) }}{{ $exists = true }}{{ end }}{{ end -}}
+  {{- if not $exists }}{{ errorf "系列 no.%s %q 没有内容页 content/photos/%s.md（gen 应自动补，是不是手工删过？）" $stem $a.name $stem }}{{ end }}
+  <a class="group block" href="/photos/{{ $stem }}/">
+    <div class="overflow-hidden rounded-sm bg-gray-100 aspect-[4/3] dark:bg-gray-800">
+      {{- with index $a.photos 0 }}
+      <img src="{{ $base }}t/{{ .k }}?v={{ .v }}"
+           alt="{{ $a.name }}"
+           width="{{ .w }}" height="{{ .h }}"
+           loading="lazy" decoding="async"
+           class="h-full w-full object-cover transition-transform duration-300 group-hover:scale-[1.02]">
+      {{- end }}
+    </div>
+    <h2 class="mt-2 text-[17px] font-semibold text-gray-900 group-hover:text-blue-700 dark:text-gray-100 dark:group-hover:text-blue-300">{{ $a.name }}</h2>
+    </a>
+  {{- end }}
+  </div>
+  {{ else }}
+  <p class="mt-8 text-[15px] text-gray-600 dark:text-gray-400">还没有公开的照片。</p>
+  {{ end }}
+</article>
+
+{{ partial "photos-lightbox" dict }}

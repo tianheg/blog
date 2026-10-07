@@ -1,0 +1,31 @@
+{{/* 灯箱（纯本地，无外链）：markup 在 HTML 里保证 Tailwind 能扫到类名，photos.ts 只管状态。
+     各照片页引入；集合内翻页由 [data-lb-set] 网格切分。 */}}
+<div id="ph-lb" hidden aria-modal="true" role="dialog" tabindex="-1"
+     class="fixed inset-0 z-[70] flex-col items-center justify-center bg-black/95 p-4 select-none">
+  <button id="ph-lb-close" type="button" aria-label="关闭"
+          class="absolute top-3 right-3 z-10 flex h-11 w-11 items-center justify-center rounded-full text-2xl text-white/80 hover:text-white focus:outline-2 focus:outline-offset-2 focus:outline-white/70">✕</button>
+  <button id="ph-lb-prev" type="button" aria-label="上一张"
+          class="absolute left-2 z-10 flex h-11 w-11 items-center justify-center rounded-full text-3xl text-white/70 hover:text-white focus:outline-2 focus:outline-offset-2 focus:outline-white/70">‹</button>
+  <button id="ph-lb-next" type="button" aria-label="下一张"
+          class="absolute right-2 z-10 flex h-11 w-11 items-center justify-center rounded-full text-3xl text-white/70 hover:text-white focus:outline-2 focus:outline-offset-2 focus:outline-white/70">›</button>
+  <img id="ph-lb-img" alt="" class="max-h-[82vh] max-w-[94vw] object-contain shadow-2xl">
+  <div class="mt-3 flex max-w-[94vw] items-center gap-3 text-[13px] text-white/75">
+    <span id="ph-lb-cap" class="truncate"></span>
+    <span id="ph-lb-count" class="tabular-nums text-white/55"></span>
+  </div>
+</div>
+
+{{/* 灯箱脚本按页加载（同 components/graph.html 的 js.Build 模式） */}}
+{{- with resources.Get "ts/photos.ts" }}
+  {{- $opts := dict "targetPath" "js/photos.js" "format" "esm" -}}
+  {{- if hugo.IsDevelopment }}
+    {{- with . | js.Build $opts }}
+      <script type="module" src="{{ .RelPermalink }}" defer></script>
+    {{- end }}
+  {{- else }}
+    {{- $opts = merge $opts (dict "minify" true) -}}
+    {{- with . | js.Build $opts | fingerprint }}
+      <script type="module" src="{{ .RelPermalink }}" integrity="{{ .Data.Integrity }}" crossorigin="anonymous" defer></script>
+    {{- end }}
+  {{- end }}
+{{- end }}

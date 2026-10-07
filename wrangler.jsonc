@@ -8,8 +8,17 @@
   "assets": {
     "directory": "./public",
     "not_found_handling": "404-page",
-    "binding": "ASSETS"
+    "binding": "ASSETS",
+    // /photos/* 资产目录里没有（走 R2 binding），显式 Worker 优先，
+    // 不依赖「非 navigate 请求才轮到 Worker」的隐式路由。其余保持 assets-first。
+    "run_worker_first": ["/photos/*"]
   },
+  "r2_buckets": [
+    {
+      "binding": "IMG_R2",
+      "bucket_name": "img"
+    }
+  ],
   "ai": {
     "binding": "AI"
   }
