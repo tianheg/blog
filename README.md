@@ -61,8 +61,10 @@ blog/
 │   └── 404.html         # 404 页面
 ├── scripts/             # 构建和工具脚本
 │   ├── build.sh         # CI 构建脚本（Cloudflare Workers）
-│   ├── worker.js        # Cloudflare Worker（静态托管 + 语义搜索 API）
+│   ├── worker.js        # Cloudflare Worker（静态托管 + 语义搜索 API + 评论同域反代）
 │   ├── generate-embeddings.mjs  # 语义搜索嵌入生成
+│   ├── check-links.mjs / check-unicode.mjs  # 构建闸门（npm run all 内）
+│   ├── epub/            # EPUB 导出管线（SOP 见 epub/README.md）
 ├── static/              # 静态文件（直接复制到 public/）
 │   ├── images/          # 图片资源
 │   ├── fonts/           # 字体文件
@@ -73,6 +75,7 @@ blog/
 ├── wrangler.jsonc       # Cloudflare Workers 配置
 └── AGENTS.md            # AI agent 上下文（symlink → README）
 ```
+> 2026-10-07 一次性工具清理：13 个迁移/修复/建议类脚本移出仓库（fetch-photos-dev pick-photos fill-watch-year merge-media-watch migrate-to-wikilink fix-deadlinks fix-title-attributes suggest-links suggest-merges suggest-bridges prune-dead-links warm-wayback-cache neodb-year-lookup），`hugo-setup.sh`（版本 pin 工具，2026-09-22 曾恢复）与 `neodb-name-lookup.py`（在改）保留。技能文档里提到的这些脚本仍可捞回：`git log -1 --diff-filter=D --format=%h -- scripts/<file>` 找删除提交 `<SHA>` → `git show <SHA>^:scripts/<file>`。
 
 ## 技术栈
 
