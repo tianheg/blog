@@ -75,7 +75,7 @@ blog/
 ├── wrangler.jsonc       # Cloudflare Workers 配置
 └── AGENTS.md            # AI agent 上下文（symlink → README）
 ```
-> 2026-10-07 一次性工具清理：13 个迁移/修复/建议类脚本移出仓库（fetch-photos-dev pick-photos fill-watch-year merge-media-watch migrate-to-wikilink fix-deadlinks fix-title-attributes suggest-links suggest-merges suggest-bridges prune-dead-links warm-wayback-cache neodb-year-lookup），`hugo-setup.sh`（版本 pin 工具，2026-09-22 曾恢复）与 `neodb-name-lookup.py`（在改）保留。技能文档里提到的这些脚本仍可捞回：`git log -1 --diff-filter=D --format=%h -- scripts/<file>` 找删除提交 `<SHA>` → `git show <SHA>^:scripts/<file>`。
+> 2026-10-07 一次性工具清理：13 个迁移/修复/建议类脚本移出仓库（fetch-photos-dev pick-photos fill-watch-year merge-media-watch migrate-to-wikilink fix-deadlinks fix-title-attributes suggest-links suggest-merges suggest-bridges prune-dead-links warm-wayback-cache neodb-year-lookup），`hugo-setup.sh`（版本 pin 工具，2026-09-22 曾恢复）保留；`neodb-name-lookup.py` 已迁 `~/.hermes/scripts/`（适配准则是用户级工具出仓、内容仓只留构建链）。技能文档里提到的这些脚本仍可捞回：`git log -1 --diff-filter=D --format=%h -- scripts/<file>` 找删除提交 `<SHA>` → `git show <SHA>^:scripts/<file>`。
 
 ## 技术栈
 
