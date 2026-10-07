@@ -327,10 +327,10 @@ the two sources that actually proxy:
 
 ```ini
 [server]
-PROXY_TRUSTED_PROXIES = 127.0.0.1,172.18.0.0/16
+PROXY_TRUSTED_PROXIES = 127.0.0.1,172.17.0.0/16
 
 [security]
-REVERSE_PROXY_TRUSTED_PROXIES = 127.0.0.1,172.18.0.0/16
+REVERSE_PROXY_TRUSTED_PROXIES = 127.0.0.1,172.17.0.0/16
 ```
 
 Get the subnet from `docker network inspect <compose-network>`, and confirm the chain

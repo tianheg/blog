@@ -7,7 +7,7 @@ tags: ['技术', English]
 ## Phase 1: Server Initialization & Base Setup
 
 1. Purchase a VPS, deploy Ubuntu 24.04 LTS
-2. Create system user `tianhe`, add to sudo group
+2. Create system user `<your-user>`, add to sudo group
 3. Go to [https://hermes-agent.nousresearch.com/](https://hermes-agent.nousresearch.com/), run the install script to complete setup
 
 ## Phase 2: Data Migration (from old Railway deployment)
@@ -19,7 +19,7 @@ tags: ['技术', English]
 
 ## Phase 3: R2 Backup Script Adaptation
 
-1. Update `backup-to-r2.py` paths from old user home to `/home/tianhe`
+1. Update `backup-to-r2.py` paths from old user home to `/home/<your-user>`
 2. Set up cron: daily at 03:00 UTC, keep 14 most recent backups
 3. Optimize backup: exclude venv/node_modules (119 MB → 27.5 MB)
 

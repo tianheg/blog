@@ -73,7 +73,7 @@ reboot    # 开机自启
 ## 服务端部署
 
 ```bash
-mkdir -p /root/docker/open-xiaoai-bridge/models
+mkdir -p /opt/open-xiaoai-bridge/models
 # 模型: release vad-kws-asr-models（~470MB）；zip 解压后是嵌套 models/models/，须移出来删 __MACOSX
 curl -O https://raw.githubusercontent.com/coderzc/open-xiaoai-bridge/main/config.py
 curl -O https://raw.githubusercontent.com/coderzc/open-xiaoai-bridge/main/docker-compose.yml
