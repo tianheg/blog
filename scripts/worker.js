@@ -281,22 +281,22 @@ function photoContentType(key) {
 
 /**
  * 相册图片路由：GET|HEAD /photos/[t/|h/]<key>
- * 放行判据 = 逐 key 白名单（resolvePhotoKey），任何清单外 key 一律 404，
- * 不做「像年份就放行」的兜底 —— 用户硬约束：只公开他点名的那批。
+ * 放行判据 = 逐 key 白名单（resolvePhotoKey），清单外 key 绝不碰桶 ——
+ * 用户硬约束：只公开他点名的那批。不做「像年份就放行」的兜底。
+ *
+ * run_worker_first: ["/photos/*"] 会把同前缀的 HTML 页面（/photos/、/photos/1/）
+ * 也送进来，所以「不是放行图片」的分支一律转交 env.ASSETS：页面照常由静态层吐；
+ * 越权图片路径在资产目录里不存在 → ASSETS 返回 404，放行语义不变
+ * （scripts/test-photo-guard.mjs 盖过章的越权路径仍全拒）。
  */
 async function servePhoto(request, env, url) {
-  const deny = () =>
-    new Response('Not found', {
-      status: 404,
-      headers: { 'Content-Type': 'text/plain; charset=utf-8' },
-    });
   if (request.method !== 'GET' && request.method !== 'HEAD') {
     return new Response(null, { status: 405, headers: { Allow: 'GET, HEAD' } });
   }
   const key = resolvePhotoKey(url.pathname, PHOTO_ALLOW);
-  if (!key) return deny();
+  if (!key) return env.ASSETS.fetch(request); // 页面/目录/越权图 → 静态资产层
   const obj = await env.IMG_R2.get(key);
-  if (!obj) return deny();
+  if (!obj) return env.ASSETS.fetch(request); // 白名单 key 但桶里没有 → 静态层 404
 
   const headers = new Headers();
   obj.writeHttpMetadata(headers);
