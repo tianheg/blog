@@ -50,6 +50,23 @@ for (const p of outside) {
 }
 console.log(`ok: ${outside.length} 条越权路径全拒`);
 
+// 4b. 编码/归一化层 —— 审计后补的向量（2026-10-07线��全审计）：
+//     resolvePhotoKey 拿到的是 WHATWG 归一化后的 pathname，但这里故意喂
+//     未归一化/编码过的形态，验证 guard 自身的防御深度（不依赖归一化）。
+const encoded = [
+  `/photos/t/2026/%2e%2e/2026/${sample.split('/')[1]}`,          // 编码穿越：decode 后含 ../，regex 拒
+  `/photos/t/2026/${sample.split('/')[1]}`.replace(/\.webp$/, '.WEBP'), // 大小写变体：Set 精确匹配拒
+  `/photos/t/${sample}%00.jpg`,                    // NUL 拖挂：Set 精确匹配拒
+  `/photos/t/${sample}%20`,                        // 空格拖挂：regex 结尾拒
+  `/photos//${sample}`,                            // 双斜杠：rest 以 / 开头拒（线上靠归一化归到正牌）
+  '/photos/t/%2e%2e%2f%2e%2e%2fwrangler.jsonc',     // 嵌套解码穿越
+  '/photos/%252e%252e%252fetc%252fpasswd',          // 双重编码（只解一次，不猜测）
+];
+for (const p of encoded) {
+  assert.equal(resolvePhotoKey(p, allow), null, `编码变体应拒绝: ${p}`);
+}
+console.log(`ok: ${encoded.length} 条编码/归一化变体全拒`);
+
 // 5. key 形态守卫
 assert.ok(PHOTO_KEY_RE.test('2026/20261005_Shenzhen_1.webp'));
 assert.ok(!PHOTO_KEY_RE.test('2026/nested/20261005.webp')); // 不许子目录
