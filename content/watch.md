@@ -2,10 +2,71 @@
 title: '我看的剧集、电影、动漫、音乐剧'
 ---
 
-## Stand-up comedians
+## 喜欢的作品
 
-- George Carlin
-- Hannah Gadsby
+- 电影
+  <details class="wfav">
+  <summary>查看</summary>
+
+  - 相助
+
+  </details>
+- 歌舞片
+  <details class="wfav">
+  <summary>查看</summary>
+
+  - 绿野仙踪
+  - 音乐之声
+
+  </details>
+- 剧集
+  <details class="wfav">
+  <summary>查看</summary>
+
+  - 老友记
+  - 神秘博士
+
+  </details>
+- 日剧
+  <details class="wfav">
+  <summary>查看</summary>
+
+  - 我的事说来话长
+  - 重启人生
+  - 法律至上
+  - 西瓜
+  - 住宅区的两人
+
+  </details>
+- 动漫
+  <details class="wfav">
+  <summary>查看</summary>
+
+  - 音乐
+    - 轻音少女
+    - 四月是你的谎言
+    - 孤独摇滚！
+  - 摇曳露营△
+  - 夏目友人帐
+  - 攻壳机动队
+  - 心理测量者
+  - 钢之炼金术师
+
+  </details>
+
+<script>
+// 喜欢的作品折叠计数：运行时统计各自 details 里的作品数（子分组标题不计），写进 <summary>
+document.addEventListener('DOMContentLoaded', function initFavCounts() {
+  document.querySelectorAll('details.wfav').forEach(function (d) {
+    var n = 0;
+    d.querySelectorAll('li').forEach(function (li) {
+      if (!li.querySelector('ul')) n++;
+    });
+    var s = d.querySelector('summary');
+    if (s && n) s.insertAdjacentText('beforeend', '（' + n + ' 部）');
+  });
+});
+</script>
 
 ## 喜欢的演员
 
@@ -27,38 +88,8 @@ title: '我看的剧集、电影、动漫、音乐剧'
   - 李米的猜想
   - 新喜剧之王
   - 唐人街探案系列
-
-## 喜欢的电影
-
-- The Help 相助 (2011)
-
-## 喜欢的歌舞片
-
-- The Wizard of Oz 绿野仙踪 (1939)
-- The Sound of Music 音乐之声 (1965)
-
-## 喜欢的剧集
-
-- 老友记 (1994–2004)
-- 日剧
-  - 我的事说来话长 (2019)
-  - 重启人生 (2023)
-  - 法律至上1&2 (2012, 2013)
-  - 西瓜 (2003)
-  - 住宅区的两人 (2024)
-- 神秘博士 (2005–)
-
-## 喜欢日漫
-
-- 音乐
-  - 轻音少女
-  - 四月是你的谎言
-  - 孤独摇滚！
-- 摇曳露营△
-- 夏目友人账
-- 攻壳机动队
-- 心理测量者
-- 钢之炼金术士
+- George Carlin
+- Hannah Gadsby
 
 ## 查电影
 
@@ -137,6 +168,11 @@ document.addEventListener('DOMContentLoaded', function initWatchCounts() {
 
 | Type | Name | Review | Release Year |
 | --- | --- | --- | --- |
+| 电影 | The Sound of Music 音乐之声 |  | 1965 |
+| 剧集 | Legal High 法律至上全2季 |  | 2012 |
+| 剧集 | 西瓜 |  | 2003 |
+| 剧集 | 住宅区的两人 |  | 2024 |
+| 动漫 | 鋼の錬金術師 钢之炼金术师 Fullmetal Alchemist |  | 2003 |
 | 电影 | Les Diaboliques 恶魔 | 男人虐待妻子，妻子和情人（男人的）一起合谋杀死他，但最后的结局却出人意料 | 1955 |
 | 电影 | The Wizard of Oz 绿野仙踪 | 一个美好的童话故事，现实中的尘土色与仙境中的明亮颜色有着鲜明的对比，坏女巫为什么怕水呢？这个设定蛮有趣的。最后 There's no place like home. | 1939 |
 | 电影 | Groundhog Day 土拨鼠之日 | 困在一天里出不来，一开始想做什么就做什么，后来想摆脱又摆脱不了。爱过、肆意妄为过、自暴自弃过。为了救老人尝试了几次，都不行。到最后，他改做好事了 | 1993 |
@@ -427,7 +463,7 @@ document.addEventListener('DOMContentLoaded', function initWatchCounts() {
 | 电影 | 玩命快递 3 |  | 2008 |
 | 电影 | 灵笼：研发记录 |  | 2019 |
 | 电影 | 倩女幽魂 |  | 1987 |
-| 剧集 | 神盾局特工 第一季 |  | 2013 |
+| 剧集 | 神盾局特工全7季 | 未看视频，仅读文字简介 | 2013 |
 | 电影 | 终结者 2018 |  | 2009 |
 | 电影 | 红海行动 |  | 2018 |
 | 电影 | 飞向太空 |  | 1972 |
@@ -745,16 +781,12 @@ document.addEventListener('DOMContentLoaded', function initWatchCounts() {
 | 动漫 | クレヨンしんちゃん 嵐を呼ぶ モーレツ!オトナ帝国の逆襲 蜡笔小新：呼风唤雨！猛烈！大人帝国的反击 |  | 2001 |
 | 剧集 | 夏目友人帐 第五季 特别篇 游戏盛宴 |  | 2017 |
 | 电影 | 夏目友人帐 |  | 2008 |
-| 剧集 | 夏目友人帐 第二季 |  | 2008 |
-| 剧集 | 夏目友人帐 第四季 |  | 2008 |
-| 剧集 | 夏目友人帐 第三季 |  | 2008 |
+| 剧集 | 夏目友人帐第二-六季 |  | 2008 |
 | 电影 | Identity 致命 ID |  | 2003 |
-| 剧集 | 夏目友人帐 第六季 |  | 2008 |
-| 剧集 | 夏目友人帐 第五季 |  | 2008 |
 | 剧集 | 夏目友人帐 第六季 特别篇 梦幻的碎片 |  | 2017 |
 | 剧集 | 夏目友人帐 第六季 特别篇 铃响的残株 |  | 2017 |
 | 剧集 | 夏目友人帐 第五季 特别篇 一夜酒杯 |  | 2017 |
-| 剧集 | The End of the F***ing World Season 1 去他*的世界 第一季 |  |  |
+| 剧集 | The End of the F***ing World 去他*的世界 S1&S2 |  |  |
 | 动漫 | あの夏、いちばん静かな海。 那年夏天，宁静的海 |  | 1991 |
 | 电影 | War of the Worlds 世界之战 |  | 2005 |
 | 电影 | The Core 地心抢险记 |  |  |
@@ -771,7 +803,6 @@ document.addEventListener('DOMContentLoaded', function initWatchCounts() {
 | 电影 | The Lord of the Rings: The Fellowship of the Ring 指环王 1：魔戒再现 |  |  |
 | 电影 | The Lord of the Rings: The Two Towers 指环王 2：双塔奇兵 |  |  |
 | 电影 | The Lord of the Rings: The Return of the King 指环王 3：王者无敌 |  |  |
-| 剧集 | The End of the F***ing World Season 2 去他*的世界 第二季 |  |  |
 | 电影 | 부산행 釜山行 |  | 2016 |
 | 电影 | Ready Player One 头号玩家 |  | 2018 |
 | 动漫 | 君の名は。 你的名字。 |  | 2016 |
@@ -895,9 +926,7 @@ document.addEventListener('DOMContentLoaded', function initWatchCounts() {
 | 电影 | 扫黑·决战 |  | 2021 |
 | 电影 | Shortwave 短波 |  | 2016 |
 | 电影 | 拆弹专家 2 |  | 2020 |
-| 剧集 | Westworld Season 1 |  | 2016 |
-| 剧集 | Westworld Season 2 |  | 2016 |
-| 剧集 | Westworld Season 3 |  | 2016 |
+| 剧集 | Westworld S1&S2&S3 |  | 2016 |
 | 电影 | 李米的猜想 |  | 2008 |
 | 电影 | Apollo 11 阿波罗 11 号 |  | 2019 |
 | 电影 | Chef Flynn 少年厨神 |  | 2018 |
@@ -982,7 +1011,7 @@ document.addEventListener('DOMContentLoaded', function initWatchCounts() {
 | 电影 | 黄金三镖客 |  | 1966 |
 | 电影 | 黄昏双镖客 |  | 1965 |
 | 电影 | 西部往事 |  | 1968 |
-| 剧集 | 老友记 第一季 |  | 1994 |
+| 剧集 | 老友记全10季 |  | 1994 |
 | 电影 | 扎克·施奈德版正义联盟 |  | 2021 |
 | 电影 | 三个老枪手 |  | 2017 |
 | 电影 | 时空急转弯 |  | 1993 |
@@ -1000,23 +1029,13 @@ document.addEventListener('DOMContentLoaded', function initWatchCounts() {
 | 电影 | Bordertown | 女性被男性强奸，杀害，华尔兹 | 2006 |
 | 动漫 | 穿靴子的猫 |  | 2011 |
 | 电影 | 最后的城堡 |  | 2001 |
-| 剧集 | 神秘博士第十一季 |  | 2005 |
+| 剧集 | 神秘博士 S11&S12 |  | 2005 |
 | 剧集 | 神秘博士元旦特辑：戴立克的革命 |  | 2019 |
 | 剧集 | 神秘博士：戴立克的前夜 |  | 2022 |
-| 剧集 | 神秘博士第十二季 |  | 2005 |
 | 电影 | 潘神的迷宫 El laberinto del fauno |  | 2006 |
 | 电影 | 蒂凡尼的早餐 Breakfast at Tiffany's |  | 1961 |
 | 电影 | 帝国的毁灭 |  | 2004 |
-| 剧集 | 老友记 第二季 |  | 1994 |
 | 电影 | 黑客帝国 4：矩阵重启 |  | 2021 |
-| 剧集 | 老友记 第三季 |  | 1994 |
-| 剧集 | 老友记 第四季 |  | 1994 |
-| 剧集 | 老友记 第五季 |  | 1994 |
-| 剧集 | 老友记 第六季 |  | 1994 |
-| 剧集 | 老友记 第七季 |  | 1994 |
-| 剧集 | 老友记 第八季 |  | 1994 |
-| 剧集 | 老友记 第九季 |  | 1994 |
-| 剧集 | 老友记 第十季 |  | 1994 |
 | 剧集 | 老友记重聚特辑 |  | 2021 |
 | 电影 | 猫（音乐剧） |  | 2019 |
 | 电影 | 美少女特工队 |  | 2011 |
@@ -1040,31 +1059,24 @@ document.addEventListener('DOMContentLoaded', function initWatchCounts() {
 | 电影 | 海滩游侠 | 挺好的娱乐电影，剧情简单 | 2017 |
 | 动漫 | 西游记之大圣归来 |  | 2015 |
 | 电影 | 像素大战 |  | 2015 |
-| 剧集 | 伞学院 第一季 |  | 2019 |
-| 剧集 | 伞学院 第二季 |  | 2019 |
+| 剧集 | 伞学院全2季 |  | 2019 |
 | 电影 | Hello！树先生 |  | 2011 |
 | 电影 | 替身演员 The Valet |  | 2006 |
 | 电影 | 命硬仔西罗 The Immortal |  | 2019 |
 | 电影 | 快餐车 |  | 1984 |
-| 剧集 | 瑞克和莫蒂 第一季 |  | 2026 |
-| 剧集 | 瑞克和莫蒂 第二季 |  | 2026 |
-| 剧集 | 瑞克和莫蒂 第三季 |  | 2026 |
-| 剧集 | 瑞克和莫蒂 第四季 |  | 2026 |
-| 剧集 | 瑞克和莫蒂 第五季 |  | 2026 |
+| 剧集 | 瑞克和莫蒂全5季 |  | 2026 |
 | 电影 | 操作系统革命 |  | 2002 |
 | 电影 | 互联网之子：亚伦·斯沃兹的故事 |  | 2014 |
 | 电影 | 初恋这件小事 |  | 2010 |
 | 剧集 | 星际迷航：奇异新世界 |  | 2022 |
 | 剧集 | 人生切割术 第一季 | 让自己接受某种强迫性的意愿 在休息室，强迫说着「自我忏悔」的话 不让员工阅读 在各个部门间制造隔阂 我需要工作，但工作更需要我 | 2022 |
 | 剧集 | 曼达洛人 第二季 |  | 2019 |
-| 剧集 | 黑袍纠察队 第一季 |  | 2023 |
-| 剧集 | 黑袍纠察队 第二季 |  | 2023 |
+| 剧集 | 黑袍纠察队全3季 | 前三季完结，已看完。 人体被破坏的场面异常血腥。 表面的正义，暗里的黑暗 超人小队能够做到：绝大多数人，想做但不愿意做的事。 所谓的拯救世界，只不过是真人秀。 超人小队，就是恐怖分子。 "母亲不在身边长大的实验对象会变得暴戾、有攻击性、充满仇恨。" | 2023 |
 | 电影 | 预见未来 Next | 有意思的设定，没想到最后竟然揭示：可以预测那么长时间 | 2007 |
 | 电影 | 地心历险记 |  | 2008 |
 | 电影 | 楼上的外星人 |  | 2009 |
 | 电影 | 天气预报员 The Weather Man | 电影台词 To get anything of value, you have to sacrifice. Nothing that has meaning is easy. Easy doesn't enter into grown-up life. Your hand okay? It's okay. You certain? Don't worry. You always worry about your kids no matter how old. There's always looking after. I remember once imagining what my life would be like, what I'd be like. I pictured having all these qualities. Strong, positive qualities that people could pick up on from across a room. But as time passed, few ever became any qualities I actually had. And all the possibilities I faced, and sorts of people I could be all of them got reduced every year to fewer and fewer until finally they got reduced to one to who I am. And that's who I am. 想法 电影中多次提到，男主因为没带够现金，而不能给父亲买报纸、热咖啡。而且 ，都是因为买了其他东西而导致钱没够。从这些细节能看出什么？ 他把解决问题（和妻子重归于好）的希望放在《你好，美国》节目的试镜上。 男主不能控制好情绪，容易变得冷漠，对女儿是如此。认为妻子的新丈夫不该像亲生父亲那样，陪自己的儿子。 男主、女儿都喜欢问”为什么”，刨根问底式地问。 他删除了自己写了四年的小说《转折点》。 生前葬礼（Living Funeral）------听起来很荒诞。 本来是为了女儿，才接触射箭。男主为了教女儿学习，自己先学会了。后来，和女儿沟通才发现：她根本不喜欢，她之所以说要学习射箭，是因为想打猎，射杀动物。 片头和第 76 分钟时都出现了它------湖面上的破碎的冰。 不断地被人扔东西。这些东西都是快餐------人们宁愿扔掉，也不愿吃下去的垃圾。男主意识到------自己就是快餐。当他父亲在街上叫他”Weatherman”时，他的头猛一缩，像是在躲避别人砸来的东西。 因为儿子 Mike 被人猥亵，男主教训了那个人。 | 2005 |
 | 电影 | 奇奇与蒂蒂：救援突击队 Chip 'n' Dale: Rescue Rangers |  | 2022 |
-| 剧集 | 黑袍纠察队 第三季 | 前三季完结，已看完。 人体被破坏的场面异常血腥。 表面的正义，暗里的黑暗 超人小队能够做到：绝大多数人，想做但不愿意做的事。 所谓的拯救世界，只不过是真人秀。 超人小队，就是恐怖分子。 "母亲不在身边长大的实验对象会变得暴戾、有攻击性、充满仇恨。" | 2023 |
 | 电影 | 海兽猎人 The Sea Beast |  | 2022 |
 | 电影 | 侏罗纪世界3 Jurassic World: Dominion |  | 2022 |
 | 电影 | 食戟之灵 第 1,2,3,4,5 季 + OAD | 虽然有点黄，但还是很好看的 | 2015 |
@@ -1083,11 +1095,6 @@ document.addEventListener('DOMContentLoaded', function initWatchCounts() {
 | 电影 | 菲利普船长 Captain Phillips |  | 2013 |
 | 电影 | 极地特快 The Polar Express | 圣诞老人的故事！ | 2004 |
 | 电影 | 拉瑞·克劳 Larry Crowne |  | 2011 |
-| 剧集 | 神盾局特工 第二季 |  | 2013 |
-| 剧集 | 神盾局特工 第三季 |  | 2013 |
-| 剧集 | 神盾局特工 第四季 |  | 2013 |
-| 剧集 | 神盾局特工 第五季 |  | 2013 |
-| 剧集 | 神盾局特工 第六七季 | 未看视频，仅读文字简介 | 2013 |
 | 电影 | RRR (Rise Roar Revolt) |  | 2022 |
 | 电影 | A Son(Original title: Bik Eneich: Un fils | <https://www.themoviedb.org/movie/618224-bik-eneich> 他们的地方不太平，有人在打仗。父亲带着母亲和儿子路过一处土路，前面爆发枪战，一颗子弹射穿了儿子的腹部。 为保住性命，医生切除了八成肝脏。 父亲不是生父，所以不能捐肝。 利比亚------北非国家，他国法律规定：婚前不能有性行为。 | 2020 |
 | 电影 | Jungle 丛林 |  | 2017 |
@@ -1098,8 +1105,7 @@ document.addEventListener('DOMContentLoaded', function initWatchCounts() {
 | 电影 | 千王之王2000 | 电影不好看，“初恋”挺漂亮 | 1999 |
 | 电影 | 摩登如来神掌 王祖贤很美 |  | 1990 |
 | 电影 | 神奇侠侣 | 小时候看过，挺不错 | 2011 |
-| 剧集 | 希尔达 第一季 Hilda Season 1 |  | 2018 |
-| 剧集 | 希尔达 第二季 Hilda Season 2 |  | 2018 |
+| 剧集 | 希尔达全2季 |  | 2018 |
 | 电影 | 轻松小熊和小薰 电影 |  | 2019 |
 | 电影 | Cloud Atlas 云图 | All boundaries are conventions, waiting to be transcended. One may transcend any convention, if only one can first conceive of doing so. 如果没有一颗让自己变好的心，如果没有每天点滴的努力，何时才能汇聚知识的海洋？ | 2012 |
 | 动漫 | 心理测量者 PSYCHO-PASS サイコパス 第一季 | 系列： 第一季 2012 笔记 《一九八四》 《论人类不平等的起源》卢梭 | 2012 |
@@ -1112,15 +1118,12 @@ document.addEventListener('DOMContentLoaded', function initWatchCounts() {
 | 电影 | Black Panther: Wakanda Forever 黑豹2：瓦坎达永存 |  | 2022 |
 | 动漫 | ブラッシュアップライフ 重启人生 Brush Up Life |  | 2023 |
 | 电影 | Avatar: The Way of Water 阿凡达2：水之道 |  | 2010 |
-| 剧集 | Sherlock Season 1 |  | 2010 |
-| 剧集 | Sherlock Season 2 |  | 2010 |
-| 剧集 | Sherlock Season 3 |  | 2010 |
+| 剧集 | Sherlock S1&S2&S3 |  | 2010 |
 | 剧集 | Star Wars: The Mandalorian 3 曼达洛人第三季 |  | 2019 |
 | 剧集 | Star Trek: Picard 3 |  | 2020 |
 | 电影 | Ant-Man and the Wasp: Quantumania |  | 2023 |
 | 动漫 | 家庭教师 家庭教師ヒットマンREBORN! |  | 2006 |
-| 剧集 | Sense8 Season 1(12 episodes) |  | 2015 |
-| 剧集 | Sense8 Season 2(10 episodes) |  | 2015 |
+| 剧集 | Sense8 S1&S2 |  | 2015 |
 | 电影 | The Hitchhiker's Guide to the Galaxy |  |  |
 | 电影 | Ice Age 冰川时代1 |  | 2002 |
 | 电影 | Ice Age: The Meltdown 冰川时代2：融冰之灾 |  | 2006 |
