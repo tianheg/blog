@@ -2,7 +2,7 @@
   "name": "blog",
   "private": true,
   "scripts": {
-    "build": "hugo --gc --minify --buildFuture",
+    "build": "hugo --gc --minify --buildFuture --cleanDestinationDir",
     "pagefind": "pagefind --site public",
     "dev": "hugo serve --buildFuture",
     "all": "npm run check-unicode && npm run check-links && node scripts/test-photo-guard.mjs && npm run build && npm run pagefind",
