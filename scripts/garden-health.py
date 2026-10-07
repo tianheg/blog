@@ -6,7 +6,7 @@
   2. 583 篇 draft 里，哪些该先动？ → --promote（该复核的）/ --prune（该清理的）
 
 数据来源是 Hugo 自己的构建产物（graph/index.json + 每页 frontmatter），
-不在 Python 里重写解析规则 —— 与 check-links.mjs 同一个原则：判定只有一份。
+不在 Python 里重写解析规则 —— 与 node scripts/check.mjs links 同一个原则：判定只有一份。
 
 用法：
   python3 scripts/garden-health.py            # 健康度摘要

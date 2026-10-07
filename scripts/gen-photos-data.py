@@ -10,7 +10,7 @@
     data/photos.json               Hugo 渲染用：
                                      {"singles": [...], "series": [{"num", "name", "photos": [...]}]}
                                    每条 {k,v,w,h,date,place,title}
-    scripts/photos-allowlist.json  Worker 放行用（扁平后的全部 key）
+    scripts/data/photos-allowlist.json  Worker 放行用（扁平后的全部 key）
 
 解析规则：裸文件名在 img 清单里必须唯一匹配（文件名含日期即含年份）；
 撞名给带年份 `2026/xxx.webp`；解析不到 / 一张照片出现在两处 → 报错退出，绝不猜。
@@ -167,7 +167,7 @@ def main():
     with open(os.path.join(BLOG, "data", "photos.json"), "w", encoding="utf-8") as f:
         json.dump({"singles": singles, "series": series}, f, ensure_ascii=False, indent=1)
         f.write("\n")
-    with open(os.path.join(BLOG, "scripts", "photos-allowlist.json"), "w", encoding="utf-8") as f:
+    with open(os.path.join(BLOG, "scripts", "data", "photos-allowlist.json"), "w", encoding="utf-8") as f:
         json.dump(all_keys, f, ensure_ascii=False, indent=1)
         f.write("\n")
 

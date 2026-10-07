@@ -14,7 +14,7 @@
  *   - static/pagefind-semantic/{embeddings.bin,pages.json} deployed under ASSETS
  */
 
-import photosAllowlist from './photos-allowlist.json';
+import photosAllowlist from './data/photos-allowlist.json';
 import { resolvePhotoKey } from './photo-guard.js';
 
 /* 相册放行清单：scripts/gen-photos-data.py 生成（与 data/photos.json 同源同批），
@@ -292,7 +292,7 @@ function photoContentType(key) {
  * run_worker_first: ["/photos/*"] 会把同前缀的 HTML 页面（/photos/、/photos/1/）
  * 也送进来，所以「不是放行图片」的分支一律转交 env.ASSETS：页面照常由静态层吐；
  * 越权图片路径在资产目录里不存在 → ASSETS 返回 404，放行语义不变
- * （scripts/test-photo-guard.mjs 盖过章的越权路径仍全拒）。
+ * （`node scripts/check.mjs photos` 盖过章的越权路径仍全拒）。
  */
 async function servePhoto(request, env, url) {
   if (request.method !== 'GET' && request.method !== 'HEAD') {
