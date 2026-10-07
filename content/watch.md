@@ -280,7 +280,7 @@ document.addEventListener('DOMContentLoaded', function initWatchCounts() {
 | 电影 | Transformers: The Last Knight 变形金刚 5：最后的骑士 |  | 2017 |
 | 动漫 | Zootopia 疯狂动物城 |  | 2016 |
 | 动漫 | ハウルの動く城 哈尔的移动城堡 |  | 2004 |
-| 动漫 | 天空の城ラピュタ 天空之城 |  | 1986 |
+| 动漫 | 天空の城ラピュタ 天空之城 | 充满想象力的天空之城哦，剥离了科技的外表，留下了绿意的新生，你越升越高，远离世俗人们的欲望的侵扰 | 1986 |
 | 电影 | 杀生 |  | 2012 |
 | 电影 | Transporter 2 玩命快递 2 |  | 2005 |
 | 电影 | 乘风破浪 |  | 2017 |
