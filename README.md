@@ -63,7 +63,8 @@ blog/
 │   ├── build.sh         # CI 构建脚本（Cloudflare Workers）
 │   ├── worker.js        # Cloudflare Worker（静态托管 + 语义搜索 API + 评论同域反代）
 │   ├── generate-embeddings.mjs  # 语义搜索嵌入生成
-│   ├── check-links.mjs / check-unicode.mjs  # 构建闸门（npm run all 内）
+│   ├── check.mjs         # 闸门模块（links/unicode/selftest/photos/external 子命令）
+│   ├── data/            # 数据账本（外链账本 ×2 + 相片白名单，worker 同源读取）
 │   ├── epub/            # EPUB 导出管线（SOP 见 epub/README.md）
 ├── static/              # 静态文件（直接复制到 public/）
 │   ├── images/          # 图片资源
@@ -362,7 +363,7 @@ npm run check-links
 npm run check-external-links
 ```
 
-### 站外链接死链扫描（`scripts/check-external-links.mjs`）
+### 站外链接死链扫描（`node scripts/check.mjs external`）
 
 扫 `content/` 里所有外链（Markdown 链接 + 裸 URL，跳过代码块），并发探测后分类报告。
 只有 **404/410** 算死链；5xx、代理到不了、401/403/429、DNS/超时都不算死，分开列。
@@ -373,9 +374,9 @@ npm run check-external-links
   `UND_ERR_CONNECT_TIMEOUT`，同一批 URL curl 秒开。别改回 undici
 - 本机出口走 mihomo（`http_proxy=192.168.8.11:7892`），代理到不了上游时会直接吐 502 —— 那是网关的锅，
   跟源站死活无关，脚本会再试直连，仍不通归入「到不了」，不判死
-- **已确认非死链账本** `scripts/external-links-verified.txt`：探测到 2xx 即自动记一行 `YYYY-MM-DD <URL>`，
+- **已确认非死链账本** `scripts/data/external-links-verified.txt`：探测到 2xx 即自动记一行 `YYYY-MM-DD <URL>`，
   之后默认跳过探测，报告末尾单列「✅ 已确认非死链」区；超 90 天自动复核，复核发现已死的撤下账本并照常报警
-- 已知被 WAF 挡死 / 有意保留的历史链接写进 `scripts/external-link-ignore.txt`（一行一条，子串匹配）
+- 已知被 WAF 挡死 / 有意保留的历史链接写进 `scripts/data/external-link-ignore.txt`（一行一条，子串匹配）
 - 缓存与进度在 `.hermes/external-links/cache.json`（不进版本控制）；死链会顺带查 Wayback 存档
 
 ```bash
