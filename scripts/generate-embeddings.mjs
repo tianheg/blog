@@ -17,8 +17,8 @@
  * Requires a Cloudflare API token with Workers AI access
  * (permission: Account → Workers AI → Read; account ACCOUNT_ID below):
  *   - env CF_API_TOKEN, or
- *   - CF_API_TOKEN in the self-hosted Infisical vault, read via
- *     ~/.hermes/scripts/infisical-helper.sh
+ *   - CF_API_TOKEN in the local secrets store (/root/.hermes/secrets/pve.env),
+ *     read via ~/.hermes/scripts/secrets-helper.sh (Infisical retired 2026-09-30)
  *
  * Do NOT reintroduce a "scrape a Bearer token out of ~/.hermes/config.yaml"
  * fallback. It picks up some *other* MCP server's token and fails with a
@@ -165,22 +165,22 @@ function splitIntoChunks(text, limit) {
   return chunks;
 }
 
-const INFISICAL_HELPER = join(process.env.HOME || '/root', '.hermes', 'scripts', 'infisical-helper.sh');
+const SECRETS_HELPER = join(process.env.HOME || '/root', '.hermes', 'scripts', 'secrets-helper.sh');
 
 async function getApiToken() {
   if (process.env.CF_API_TOKEN) return process.env.CF_API_TOKEN;
 
-  // Fallback: CF_API_TOKEN in the self-hosted Infisical vault, read through the
-  // shared helper (universal auth, proxy bypass baked in). Never scrape
-  // ~/.hermes/config.yaml for a Bearer token — see the header comment.
-  if (existsSync(INFISICAL_HELPER)) {
+  // Fallback: CF_API_TOKEN from the local secrets store (/root/.hermes/secrets/
+  // pve.env), read through the shared helper (default output = all keys as
+  // KEY=value lines; only the CF_API_TOKEN line is used, never logged).
+  // Never scrape ~/.hermes/config.yaml for a Bearer token — see the header.
+  if (existsSync(SECRETS_HELPER)) {
     try {
-      const out = execFileSync(INFISICAL_HELPER, { encoding: 'utf-8', timeout: 20000 });
+      const out = execFileSync(SECRETS_HELPER, { encoding: 'utf-8', timeout: 20000 });
       for (const line of out.split('\n')) {
-        const m = line.match(/^\s*CF_API_TOKEN\s*=\s*(.*)$/);
+        const m = line.match(/^\s*(?:export\s+)?CF_API_TOKEN\s*=\s*(.*)$/);
         if (!m) continue;
-        // `infisical export --format=dotenv` wraps every value in single quotes
-        const value = m[1].trim().replace(/^'(.*)'$/, '$1');
+        const value = m[1].trim().replace(/^'(.*)'$/, '$1').replace(/^\s*"(.*)"\s*$/, '$1');
         if (value) return value;
       }
     } catch { /* fall through to the error below */ }
@@ -188,11 +188,12 @@ async function getApiToken() {
 
   throw new Error(
     'No Cloudflare API token with Workers AI access found. Fix one of:\n' +
-    '  a) store it in Infisical (recommended — picked up automatically):\n' +
-    '       infisical secrets set CF_API_TOKEN=<token> --env=dev --projectId=559e7fc2 \\\n' +
-    '         --domain=http://192.168.8.12:8090/api\n' +
+    '  a) put it in the local secrets store (picked up automatically next run):\n' +
+    '       /root/.hermes/secrets/pve.env  →  CF_API_TOKEN=<token>   (mode 600)\n' +
     '     token needs: Account → Workers AI → Read  (account ' + ACCOUNT_ID + ')\n' +
-    '  b) one-off run:  CF_API_TOKEN=<token> npm run embed'
+    '  b) one-off run:  CF_API_TOKEN=<token> npm run embed\n' +
+    '(note: Infisical was retired 2026-09-30 — the store is pve.env now,\n' +
+    ' read through ~/.hermes/scripts/secrets-helper.sh)'
   );
 }
 
