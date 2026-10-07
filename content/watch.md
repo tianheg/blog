@@ -266,7 +266,7 @@ document.addEventListener('DOMContentLoaded', function initWatchCounts() {
 | 电影 | 妖精森林的小不点 | 很惬意的精灵故事 | 2018 |
 | 电影 | 飞翔的魔女 | 魔幻小故事 | 2016 |
 | 电影 | 比宇宙更远的地方 | 三人成团挑战去南极 | 2018 |
-| 剧集 | Doctor Who S8E7 | Clara 哭着告诉doctor，她差点就没能够拯救这个月球生命，哭着和doctor说再见，让她这样害怕，害怕自己做出错误的决定。这或许就是作为doctor伙伴的坏处之一：你有机会见识到人类命运转折的时刻，小人物看那些英雄力挽狂澜拯救人类命运于水火之中，觉得很羡慕，如果自己设身处地又会怎样勇敢。但如果一个普通人，真的被放在那样一个位置，恐怕也会和Clara一样惊慌失措ba | 2014 |
+| 剧集 | Doctor Who 神秘博士全季 | Clara 哭着告诉doctor，她差点就没能够拯救这个月球生命，哭着和doctor说再见，让她这样害怕，害怕自己做出错误的决定。这或许就是作为doctor伙伴的坏处之一：你有机会见识到人类命运转折的时刻，小人物看那些英雄力挽狂澜拯救人类命运于水火之中，觉得很羡慕，如果自己设身处地又会怎样勇敢。但如果一个普通人，真的被放在那样一个位置，恐怕也会和Clara一样惊慌失措ba | 2005 |
 | 动漫 | 響け！ユーフォニアム 吹响吧！上低音号1&2&3 | 喜欢听黄前的上低音号，佩服黄前从高一到高三，经过那么多事情，终于一步步达成大家当初的目标——全国大赛金奖。久石奏刚登场的时候我好讨厌她，心机那么重，后来经过她的挣扎，终于发现了隐情，也为这部番剧增加了更复杂的感情而高兴。剧场版3高一生的表现，很讨厌啊。S3E12：本以为黄前会被选中作为上低音号独奏，没想到还是黑江被选上了。为了真正的正确，黄前说了那番话，之后和丽奈在山上的痛苦不甘。人的情感变化曲折 | 2014 |
 | 电影 | 唐探1900 | 让中国变成世界上最强大的国家，这是一个伟大的魔术。\n这句话可以正面理解，也可以理解成是一种讽刺 | 2025 |
 | 电影 | 双狼 | 那个年轻人跑路，被车撞那一段，竟然腿没废哈哈。可能吸毒吸嗨了，那么能跑啊。young man穿上女式衣服竟然还可以。审讯的时候有趣，竟然炫耀行李架包尸体的方法。 | 2024 |
@@ -337,8 +337,6 @@ document.addEventListener('DOMContentLoaded', function initWatchCounts() {
 | 电影 | 辛普森一家 |  | 2007 |
 | 电影 | 港囧 |  | 2015 |
 | 电影 | 马达加斯加的企鹅 |  | 2014 |
-| 电影 | 神秘博士：火星之水 |  | 2009 |
-| 电影 | 神秘博士：圣诞入侵 |  | 2005 |
 | 电影 | 龙虎门 |  | 2006 |
 | 电影 | 萤火之森 |  | 2011 |
 | 电影 | 猩球崛起 3：终极之战 |  | 2017 |
@@ -351,7 +349,6 @@ document.addEventListener('DOMContentLoaded', function initWatchCounts() {
 | 电影 | 末代皇帝 |  | 1987 |
 | 电影 | 金刚狼 3：殊死一战 |  | 2017 |
 | 电影 | 玩命快递 |  | 2002 |
-| 电影 | 神秘博士：下一位博士 |  | 2008 |
 | 电影 | 最强囍事 |  | 2011 |
 | 电影 | 十二生肖 |  | 2012 |
 | 电影 | 超人归来 |  | 2006 |
@@ -363,7 +360,6 @@ document.addEventListener('DOMContentLoaded', function initWatchCounts() {
 | 电影 | 异星觉醒 |  | 2017 |
 | 电影 | 蝙蝠侠：黑暗骑士崛起 |  | 2012 |
 | 电影 | 蝴蝶效应 |  | 2004 |
-| 电影 | 神秘博士：圣诞颂歌 |  | 2010 |
 | 电影 | 时间机器 |  | 2002 |
 | 电影 | 忍者神龟 2：破影而出 |  | 2016 |
 | 电影 | 狼图腾 |  | 2015 |
@@ -458,7 +454,6 @@ document.addEventListener('DOMContentLoaded', function initWatchCounts() {
 | 电影 | 钢铁巨人 |  | 1999 |
 | 电影 | 猩球崛起 |  | 2011 |
 | 电影 | 哥斯拉 |  | 2014 |
-| 电影 | 神秘博士：逃跑新娘 |  | 2006 |
 | 电影 | 马达加斯加 |  | 2005 |
 | 动漫 | 新世纪福音战士剧场版：死与新生 |  | 1997 |
 | 电影 | 玩命快递 3 |  | 2008 |
@@ -532,7 +527,6 @@ document.addEventListener('DOMContentLoaded', function initWatchCounts() {
 | 电影 | 流浪地球 |  | 2019 |
 | 电影 | 好莱坞往事 |  | 2019 |
 | 电影 | 银河守卫队 |  | 2016 |
-| 电影 | 神秘博士：最后的圣诞 |  | 2014 |
 | 电影 | 人再囧途之泰囧 |  | 2012 |
 | 电影 | 地心引力 |  | 2013 |
 | 电影 | 审死官 |  | 1992 |
@@ -558,7 +552,6 @@ document.addEventListener('DOMContentLoaded', function initWatchCounts() {
 | 电影 | 宇宙的构造 |  | 2012 |
 | 电影 | 湮灭 |  | 2018 |
 | 电影 | 唐伯虎点秋香 |  | 1993 |
-| 电影 | 神秘博士特别篇：时间尽头(上) |  | 2009 |
 | 电影 | 鼠来宝 3 |  | 2011 |
 | 动漫 | 新世纪福音战士剧场版：复兴 |  | 1998 |
 | 电影 | 黑客帝国 2：重装上阵 |  | 2003 |
@@ -586,7 +579,6 @@ document.addEventListener('DOMContentLoaded', function initWatchCounts() {
 | 电影 | 大内密探零零发 |  | 1996 |
 | 电影 | 头号玩家 |  | 2018 |
 | 电影 | 冰川时代 |  | 2002 |
-| 电影 | 神秘博士：瑞芙·桑恩的丈夫们 |  | 2015 |
 | 电影 | 天兆 |  | 2002 |
 | 电影 | 美国工厂 |  | 2019 |
 | 电影 | 蝙蝠侠：侠影之谜 |  | 2005 |
@@ -602,7 +594,6 @@ document.addEventListener('DOMContentLoaded', function initWatchCounts() {
 | 电影 | 钢铁侠 3 |  | 2013 |
 | 电影 | 金刚狼 |  | 2009 |
 | 电影 | 特种部队 2：全面反击 |  | 2013 |
-| 电影 | 神秘博士：博士之时 |  | 2013 |
 | 动漫 | 侧耳倾听 |  | 1995 |
 | 电影 | 攻壳机动队 2：无罪 |  | 2004 |
 | 电影 | 阿凡达 |  | 2009 |
@@ -616,7 +607,6 @@ document.addEventListener('DOMContentLoaded', function initWatchCounts() {
 | 电影 | 西游记 |  | 1960 |
 | 电影 | 憨豆特工 2 |  | 2011 |
 | 电影 | 愤怒的小鸟 |  | 2016 |
-| 电影 | 神秘博士特别篇：时间尽头(下) |  | 2010 |
 | 电影 | 我是谁 |  | 1998 |
 | 电影 | 终结者 |  | 1984 |
 | 电影 | 垫底辣妹 |  | 2015 |
@@ -624,7 +614,6 @@ document.addEventListener('DOMContentLoaded', function initWatchCounts() {
 | 电影 | 心灵捕手 |  | 1997 |
 | 电影 | 新世纪福音战士 第 0:0 话 诞生之始 |  | 1995 |
 | 电影 | 哆啦 A 梦：大雄的月球探险记 |  | 2019 |
-| 电影 | 神秘博士：诅咒之旅 |  | 2007 |
 | 电影 | 蝙蝠侠：黑暗骑士 |  | 2008 |
 | 电影 | 猩球崛起 2：黎明之战 |  | 2014 |
 | 电影 | 冰川时代 2：融冰之灾 |  | 2006 |
@@ -651,7 +640,6 @@ document.addEventListener('DOMContentLoaded', function initWatchCounts() {
 | 电影 | 澳门风云 3 |  | 2016 |
 | 电影 | 美国丽人 |  | 1999 |
 | 电影 | 博物馆奇妙夜 3 |  | 2014 |
-| 电影 | 神秘博士：博士、寡妇和衣橱 |  | 2011 |
 | 电影 | 碟中谍 5：神秘国度 |  | 2015 |
 | 电影 | 蜘蛛侠：英雄远征 |  | 2019 |
 | 电影 | 魁拔 3 战神崛起 |  | 2014 |
@@ -782,7 +770,7 @@ document.addEventListener('DOMContentLoaded', function initWatchCounts() {
 | 动漫 | クレヨンしんちゃん 嵐を呼ぶ モーレツ!オトナ帝国の逆襲 蜡笔小新：呼风唤雨！猛烈！大人帝国的反击 |  | 2001 |
 | 剧集 | 夏目友人帐 第五季 特别篇 游戏盛宴 |  | 2017 |
 | 电影 | 夏目友人帐 |  | 2008 |
-| 剧集 | 夏目友人帐第二-六季 |  | 2008 |
+| 剧集 | 夏目友人帐全6季 |  | 2008 |
 | 电影 | Identity 致命 ID |  | 2003 |
 | 剧集 | 夏目友人帐 第六季 特别篇 梦幻的碎片 |  | 2017 |
 | 剧集 | 夏目友人帐 第六季 特别篇 铃响的残株 |  | 2017 |
@@ -794,7 +782,6 @@ document.addEventListener('DOMContentLoaded', function initWatchCounts() {
 | 动漫 | キッズ・リターン 坏孩子的天空 |  | 1996 |
 | 电影 | Jurassic Park: The Lost World 侏罗纪公园 2：失落的世界 |  | 1997 |
 | 电影 | Jurassic Park III 侏罗纪公园 3 |  | 2001 |
-| 电影 | Doctor Who: Planet of the Dead 神秘博士：死亡星球 |  | 2009 |
 | 电影 | Sense8 Finale Special 超感猎杀：完结特别篇 |  | 2018 |
 | 电影 | Blade Runner 银翼杀手 |  | 1982 |
 | 动漫 | 新世紀エヴァンゲリオン劇場版 Air-まごころを、君に 新世纪福音战士剧场版：Air-真心为你 |  | 1997 |
@@ -927,7 +914,7 @@ document.addEventListener('DOMContentLoaded', function initWatchCounts() {
 | 电影 | 扫黑·决战 |  | 2021 |
 | 电影 | Shortwave 短波 |  | 2016 |
 | 电影 | 拆弹专家 2 |  | 2020 |
-| 剧集 | Westworld S1&S2&S3 |  | 2016 |
+| 剧集 | Westworld 全4季 |  | 2016 |
 | 电影 | 李米的猜想 |  | 2008 |
 | 电影 | Apollo 11 阿波罗 11 号 |  | 2019 |
 | 电影 | Chef Flynn 少年厨神 |  | 2018 |
@@ -1012,7 +999,7 @@ document.addEventListener('DOMContentLoaded', function initWatchCounts() {
 | 电影 | 黄金三镖客 |  | 1966 |
 | 电影 | 黄昏双镖客 |  | 1965 |
 | 电影 | 西部往事 |  | 1968 |
-| 剧集 | 老友记全10季 |  | 1994 |
+| 剧集 | Friends 老友记全10季 |  | 1994 |
 | 电影 | 扎克·施奈德版正义联盟 |  | 2021 |
 | 电影 | 三个老枪手 |  | 2017 |
 | 电影 | 时空急转弯 |  | 1993 |
@@ -1030,9 +1017,6 @@ document.addEventListener('DOMContentLoaded', function initWatchCounts() {
 | 电影 | Bordertown | 女性被男性强奸，杀害，华尔兹 | 2006 |
 | 动漫 | 穿靴子的猫 |  | 2011 |
 | 电影 | 最后的城堡 |  | 2001 |
-| 剧集 | 神秘博士 S11&S12 |  | 2005 |
-| 剧集 | 神秘博士元旦特辑：戴立克的革命 |  | 2019 |
-| 剧集 | 神秘博士：戴立克的前夜 |  | 2022 |
 | 电影 | 潘神的迷宫 El laberinto del fauno |  | 2006 |
 | 电影 | 蒂凡尼的早餐 Breakfast at Tiffany's |  | 1961 |
 | 电影 | 帝国的毁灭 |  | 2004 |
@@ -1110,7 +1094,6 @@ document.addEventListener('DOMContentLoaded', function initWatchCounts() {
 | 电影 | 轻松小熊和小薰 电影 |  | 2019 |
 | 电影 | Cloud Atlas 云图 | All boundaries are conventions, waiting to be transcended. One may transcend any convention, if only one can first conceive of doing so. 如果没有一颗让自己变好的心，如果没有每天点滴的努力，何时才能汇聚知识的海洋？ | 2012 |
 | 动漫 | 心理测量者 PSYCHO-PASS サイコパス 第一季 | 系列： 第一季 2012 笔记 《一九八四》 《论人类不平等的起源》卢梭 | 2012 |
-| 剧集 | 西部世界 第四季 Westworld Season 4 |  | 2016 |
 | 电影 | 天才不能承受之重 The Unbearable Weight of Massive Talent |  | 2022 |
 | 电影 | Top Gun |  |  |
 | 动漫 | 深海动画 |  | 2023 |
