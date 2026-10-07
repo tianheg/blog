@@ -137,6 +137,7 @@ document.addEventListener('DOMContentLoaded', function initWatchCounts() {
 
 | Type | Name | Review | Release Year |
 | --- | --- | --- | --- |
+| 电影 | Les Diaboliques 恶魔 |  | 1955 |
 | 电影 | The Wizard of Oz 绿野仙踪 | 一个美好的童话故事，现实中的尘土色与仙境中的明亮颜色有着鲜明的对比，坏女巫为什么怕水呢？这个设定蛮有趣的。最后 There's no place like home. | 1939 |
 | 电影 | Groundhog Day 土拨鼠之日 | 困在一天里出不来，一开始想做什么就做什么，后来想摆脱又摆脱不了。爱过、肆意妄为过、自暴自弃过。为了救老人尝试了几次，都不行。到最后，他改做好事了 | 1993 |
 | 电影 | 第二次握手 | 两个人的爱情，苏冠兰、丁洁琼。命运让他们度过短暂的幸福时光，之后便以分离和苦痛作为主旋律。 当琼姐回到中国，来到那个等了 28 年的人的面前，得知他已成家，这该是怎样的打击与痛苦。 当爱情历经时间锤炼，最后剩下的究竟是什么？ | 1980 |
