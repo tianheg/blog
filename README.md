@@ -62,7 +62,7 @@ blog/
 ├── scripts/             # 构建和工具脚本
 │   ├── build.sh         # CI 构建脚本（Cloudflare Workers）
 │   ├── worker.js        # Cloudflare Worker（静态托管 + 语义搜索 API + 评论同域反代）
-│   ├── generate-embeddings.mjs  # 语义搜索嵌入生成
+│   ├── embed.mjs          # 语义索引模块（嵌入 + 关联笔记，npm run embed/related）
 │   ├── check.mjs         # 闸门模块（links/unicode/selftest/photos/external 子命令）
 │   ├── data/            # 数据账本（外链账本 ×2 + 相片白名单，worker 同源读取）
 │   ├── epub/            # EPUB 导出管线（SOP 见 epub/README.md）

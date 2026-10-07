@@ -10,8 +10,8 @@
     "check-external-links": "node scripts/check.mjs external",
     "check-unicode": "node scripts/check.mjs unicode",
     "test-unicode": "node scripts/check.mjs unicode-selftest",
-    "related": "python3 scripts/generate-related.py",
-    "embed": "node scripts/generate-embeddings.mjs && python3 scripts/generate-related.py"
+    "related": "node scripts/embed.mjs related",
+    "embed": "node scripts/embed.mjs"
   },
   "devDependencies": {
     "@tailwindcss/cli": "^4.3.0",
