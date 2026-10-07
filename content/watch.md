@@ -515,7 +515,7 @@ document.addEventListener('DOMContentLoaded', function initWatchCounts() {
 | 电影 | Escape Plan 金蝉脱壳 |  | 2013 |
 | 电影 | Chappie 超能查派 |  | 2015 |
 | 电影 | The Penguins of Madagascar: Operation 马达加斯加企鹅：行动 |  | 2010 |
-| 电影 | 爱在三部曲 Before Sunrise、Before Sunset、Before Midnight | 黄昏日落时：当你接触到的媒体很少时，你只能去看真实的世界，去写，去想过程和结果，哪个更重要。接受一切，但不会执着于唯一一种信仰系统。男人对那次做爱体验记得很清楚，女人却好像忘记了。为什么那么着急想找男人，寻找爱不再相信爱？女主的声音听起来像 Megan Otnes（Youtuber、模特）。午夜降临前：最精彩的部分就是他们最后的吵架。女主说我不再爱你了，男主一个劲地表示我爱全部的你，不论你怎样发脾气，我永远都陪在你身边。但是如果你继续这样一直继续的话，我也没法一直忍受。 | 1995 |
+| 电影 | 爱在三部曲 Before Sunrise、Before Sunset、Before Midnight | 黄昏日落时：当你接触到的媒体很少时，你只能去看真实的世界，去写，去想过程和结果，哪个更重要。接受一切，但不会执着于唯一一种信仰系统。男人对那次做爱体验记得很清楚，女人却好像忘记了。为什么那么着急想找男人，寻找爱不再相信爱？女主的声音听起来像 Megan Otnes（Youtuber、模特）。午夜降临前：最精彩的部分就是他们最后的吵架。女主说我不再爱你了，男主一个劲地表示我爱全部的你，不论你怎样发脾气，我永远都陪在你身边。但是如果你继续这样一直继续的话，我也没法一直忍受。影片后半部他们吵架，有一段女主裸身露乳，感觉不适应。如果是男性裸露上半身觉得没什么，是女性就觉得大惊小怪。观念影响。 | 1995 |
 | 电影 | The Transporter Refueled 玩命速递：重启之战 |  | 2015 |
 | 电影 | Borat: Cultural Learnings of America for Make Benefit Glorious Nation of Kazakhstan 波拉特 |  | 2006 |
 | 电影 | District 9 第九区 |  | 2009 |
