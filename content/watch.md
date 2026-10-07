@@ -168,6 +168,7 @@ document.addEventListener('DOMContentLoaded', function initWatchCounts() {
 
 | Type | Name | Review | Release Year |
 | --- | --- | --- | --- |
+| 电影 | Jaws 大白鲨 | 紧张刺激，想再看一次的电影 | 1975 |
 | 电影 | The Sound of Music 音乐之声 |  | 1965 |
 | 剧集 | Legal High 法律至上全2季 |  | 2012 |
 | 剧集 | 西瓜 |  | 2003 |
