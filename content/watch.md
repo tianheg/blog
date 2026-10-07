@@ -164,6 +164,8 @@ document.addEventListener('DOMContentLoaded', function initWatchCounts() {
 
 | Type | Name | Review | Release Year |
 | --- | --- | --- | --- |
+| 电影 | Before Sunset 爱在黄昏日落时 | 当你接触到的媒体很少时，你只能去看真实的世界，去写，去想过程和结果，哪个更重要。接受一切，但不会执着于唯一一种信仰系统。男人对那次做爱体验记得很清楚，女人却好像忘记了。为什么那么着急想找男人，寻找爱不再相信爱？女主的声音听起来像 Megan Otnes（Youtuber、模特） | 2004 |
+| 电影 | Before Midnight 爱在午夜降临前 | 最精彩的部分就是他们最后的吵架。女主说我不再爱你了，男主一个劲地表示我爱全部的你，不论你怎样发脾气，我永远都陪在你身边。但是如果你继续这样一直继续的话，我也没法一直忍受。 | 2013 |
 | 电影 | Jaws 大白鲨 | 紧张刺激，想再看一次的电影 | 1975 |
 | 电影 | The Sound of Music 音乐之声 |  | 1965 |
 | 剧集 | Legal High 法律至上全2季 |  | 2012 |
