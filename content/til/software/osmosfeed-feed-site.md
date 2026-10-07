@@ -24,7 +24,7 @@ header: DevOps
 ```bash
 cd ~/projects/feed
 # 注意：走代理（PVE 直连部分源 3-12s 超时，代理 0.7-2.4s）
-export http_proxy=http://192.168.8.6:7892 https_proxy=http://192.168.8.6:7892
+export http_proxy=http://<代理主机>:7892 https_proxy=http://<代理主机>:7892
 npm run build
 ```
 
