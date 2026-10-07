@@ -219,6 +219,7 @@ Firefox 内置的 PWA 支持，源码里叫 Taskbar Tabs。地址栏右侧的「
 
 零散技巧：
 - **搜索 DOM 树中的节点**：Inspector 下的搜索框，然后 Scroll Into View 跳到对应节点（the node within the viewport）
+- **自建版一开 DevTools 就崩、报 `builtin-modules.js is not found`**：是启动入口没带 `MOZ_DEVELOPER_*` 环境变量（沙箱不放行源码 symlink），不是构建坏了——见文末「自建版 DevTools 崩溃」一节
 - **从 console 访问节点**：`$0` 是当前选中的 DOM 节点；临时变量用右键 → Use in Console
 - **用徽章可视化元素**：badge 显示元素类型，见 [Ffdocs](https://firefox-source-docs.mozilla.org/devtools-user/page_inspector/how_to/examine_and_edit_html/index.html#html-tree)
 - 给 DOM Node 截图；在响应式模式下截图
@@ -435,6 +436,28 @@ $env:MSYS = 'enable_pcon'
 **改 update channel 之后 `channel-prefs.js` 不会自动重新生成。** `browser/app/moz.build` 里的 `GeneratedFile("channel-prefs.js", script="generate_channel_prefs.py")` 只跟踪脚本和模板的 mtime，**不跟踪 configure 的 substs**：先构建出 `app.update.channel = "default"` 之后，再加 `--enable-update-channel=aurora` 重建，文件内容不会变。而且 `dist/bin/defaults/pref/channel-prefs.js` 是指向 objdir 里 `browser/app/channel-prefs.js` 的**符号链接** —— 只删 dist 那份没用；删 objdir 目标会让构建报 `Symlink target path does not exist`，而 make 也不会因此重新触发那条生成规则。可行做法：读模板 `browser/app/profile/channel-prefs.js`，把 `@MOZ_UPDATE_CHANNEL@` 换成 `buildconfig.substs["MOZ_UPDATE_CHANNEL"]` 的当前值（`./mach python` 里可查），按 LF 写回 objdir 那份，再 `./mach build`，dist 的符号链接就会指到新内容。
 
 **Defender 排除项得手动加。** 正常流程里 `bootstrap.py` 会自动把构建目录加进排除列表，走 MozillaBuild 就没有这一步。不加的话，测试用例里被当作样本的文件会被实时防护隔离，症状是构建报「missing file」这类莫名其妙的错。要排除三处：`C:\mozilla-build`、源码目录、`%USERPROFILE%\.mozbuild`。
+
+#### 自建版 DevTools 崩溃：入口没带 `MOZ_DEVELOPER_*` 环境变量（2026-10-07 实测）
+
+症状：打开开发者工具，面板弹 crashed，报 `Module resource://devtools/shared/loader/builtin-modules.js is not found at …`。
+
+**根因是入口，不是构建**：非 packaged 构建的 `dist/bin/**/*.js`、`*.sys.mjs`（含 `browser/chrome/devtools/…`）都是**指向源码树的符号链接**，而 Windows 内容进程沙箱只在这两个**进程环境变量**存在时才给源码目录放行（`security/sandbox/win/src/sandboxbroker/sandboxBroker.cpp` 的 `AddDeveloperRepoDirToConfig`，读的是进程环境块）：
+
+- `MOZ_DEVELOPER_REPO_DIR` = 源码树根目录
+- `MOZ_DEVELOPER_OBJ_DIR` = objdir
+
+`./mach run` 会自动设（`python/mozbuild/mozbuild/mach_commands.py` 的 `extra_env`）；从快捷方式、开始菜单、任务栏直接起 `firefox.exe` 不设 → 沙箱拒绝访问 symlink 的目标 → devtools 模块读不到。Bug 1916286（FF132）修的只是同一机制下 `\??\MountPointManager` 那一半，不是这里。
+
+**排查先排除构建**：读 `objdir\dist\bin\browser\chrome\devtools\modules\devtools\shared\loader\builtin-modules.js` 的 `LinkType` / `Target`，symlink 有效且源码文件在 → 构建健康，纯入口问题。
+
+**修法**（两条，重度依赖任务栏的人只能用第二条）：
+
+1. `launcher.cmd`：`set` 那两条变量 + `cd /d` 到 `dist\bin` + `start "" firefox.exe -profile <独立目录> -no-remote`；桌面/开始菜单的 `.lnk` Target 指向它（`Arguments` 清空、`WindowStyle=7` 免闪黑窗），改前备份。开始菜单的 `Firefox Developer Edition Private Browsing.lnk` 是同款炸点（直指 `private_browsing.exe`、无 env），同样要改指 launcher。
+2. **用户级环境变量**（本机实证，2026-10-07）：往 `HKCU\Environment` 写 `MOZ_DEVELOPER_REPO_DIR` / `MOZ_DEVELOPER_OBJ_DIR`（`[Environment]::SetEnvironmentVariable(name, value, 'User')`，REG_SZ）。这条路**修不到任务栏**的部分是关键：Win11 不给 `.cmd`「固定到任务栏」的选项，而从运行中窗口固定的 pin 永远 `Target=<objdir>\dist\bin\firefox.exe`、无参数 —— 提到用户级之后，固定这个 exe 反而是对的，任何入口（任务栏、资源管理器双击、私密入口）都自带 env。
+
+**坑中坑：写进注册表 ≠ Explorer 已刷新。** Explorer 拿新值要收到 `WM_SETTINGCHANGE` 广播，而 ssh 之类 session 0 的进程发的广播够不到用户桌面 session —— 确定生效要**注销重登**（或重启）。判断 Explorer 刷新没有，只能用一条从资源管理器双击的 `echo %MOZ_DEVELOPER_REPO_DIR% > out` 的 `.cmd` 看输出；ssh / headless 侧任何探针读到的都是探针进程自己的环境，测不到 Explorer 的环境块（同理，这个故障也别用 headless 复现，会得到假阴性）。
+
+代价记账：这两个路径字符串会进所有新进程的环境（没有其它读取方，风险≈0）；**源码或 objdir 搬家要同步改这两个值**。launcher 仍然要留着 —— `-profile <独立目录> -no-remote` 靠它，用户级变量只负责沙箱放行。
 
 ### 定制分层与「改不坏」的边界
 
@@ -807,3 +830,5 @@ https://aur.archlinux.org/packages/firefox-extension-arch-search
 - [policies-schema.json — 127 个 policy 的字段定义](https://github.com/mozilla-firefox/firefox/blob/beta/browser/components/enterprisepolicies/schemas/policies-schema.json)
 - [EnterprisePoliciesParent.sys.mjs — 策略引擎的 ACTIVE / INACTIVE / FAILED 判定与来源顺序](https://github.com/mozilla-firefox/firefox/blob/beta/toolkit/components/enterprisepolicies/EnterprisePoliciesParent.sys.mjs)
 - [aboutPolicies.js — about:policies 页面如何按 status 决定渲染](https://github.com/mozilla-firefox/firefox/blob/beta/browser/components/enterprisepolicies/content/aboutPolicies.js)
+- [Bug 1916286 — MountPointManager 那一半的 sandbox crash（FF132 已修，不是 builtin-modules 这半）](https://bugzilla.mozilla.org/show_bug.cgi?id=1916286)
+- [sandboxBroker.cpp — `AddDeveloperRepoDirToConfig` 如何按进程环境放行源码目录](https://github.com/mozilla-firefox/firefox/blob/main/security/sandbox/win/src/sandboxbroker/sandboxBroker.cpp)
