@@ -11,7 +11,9 @@
     "binding": "ASSETS",
     // /photos/* 资产目录里没有（走 R2 binding），显式 Worker 优先，
     // 不依赖「非 navigate 请求才轮到 Worker」的隐式路由。其余保持 assets-first。
-    "run_worker_first": ["/photos/*"]
+    // 评论反代的三个前缀必须 Worker 先接管：assets-first + not_found_handling=404-page
+    // 会让「资产目录里不存在的 GET」直接吃 404，Worker 的代理路由永远轮不到（实测 /dist/Artalk.js 404）
+    "run_worker_first": ["/photos/*", "/api/*", "/dist/*", "/comments/*"]
   },
   "r2_buckets": [
     {

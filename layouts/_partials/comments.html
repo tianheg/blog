@@ -22,7 +22,9 @@
     el: '#Comments',
     pageKey: '{{ .Permalink }}',
     pageTitle: '{{ .Title }}',
-    server: 'https://comments.tianheg.co',
+    // 生产走同域反代（'' → /api/v2/*、/dist/* 由 blog Worker 转发），
+    // 页面源码不再出现 comments.tianheg.co；hugo serve 开发时 Worker 不可达，退回直连
+    server: '{{ cond hugo.IsDevelopment "https://comments.tianheg.co" "" }}',
     site: 'Tianhe Gao',
     darkMode: 'auto',
   })

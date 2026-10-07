@@ -194,7 +194,8 @@ export default {
     }
 
     // Comments API proxy — same-origin, no CORS needed
-    if (url.pathname === '/api/comment' && request.method === 'POST') {
+    // Artalk 实际用的是 `${server}/api/v2/*`（baseURL 见 bundle），旧的 /api/comment 留作兼容
+    if (url.pathname.startsWith('/api/v2/') || url.pathname === '/api/comment') {
       return proxyComments(request, url);
     }
     if (url.pathname.startsWith('/comments/')) {
