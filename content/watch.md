@@ -93,6 +93,7 @@ document.addEventListener('DOMContentLoaded', function initFavCounts() {
 
 ## 查电影
 
+- <https://neodb.social/>
 - <https://www.themoviedb.org/>
 - <https://www.imdb.com/>
 - https://movie.douban.com/
