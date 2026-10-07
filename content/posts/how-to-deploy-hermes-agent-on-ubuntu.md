@@ -35,7 +35,7 @@ tags: ['技术', English]
 
 1. Build Web UI: npm install → npm run build
 2. Create `systemd` service for hermes-dashboard on `127.0.0.1:9119`
-3. Configure Caddy reverse proxy: `herma.tianheg.co:443` → localhost:9119
+3. Configure Caddy reverse proxy: `<自己的子域名>:443` → localhost:9119
 4. Host Header issue: Dashboard's built-in DNS rebinding protection rejects the forwarded hostname. Bind `0.0.0.0` with `--insecure` flag
 5. Integrate Cloudflare: SSL mode `Full`, Cloudflare Access auth layer
 

@@ -41,8 +41,8 @@ UI 设计摘自谢益辉（[示例](https://yihui.org/cn/2021/07/existence/)）�
 架构很简单：
 
 - Go 单二进制 + SQLite
-- Docker 容器跑在 PVE 下的 VM 102
-- 通过 CF Tunnel 暴露到 comments.tianheg.co
+- Docker 容器跑在本地一台虚拟机上
+- 通过 CF Tunnel 暴露为博客域名下的一个子域（地址不公开）
 - Hugo 模板通过 blog Worker 同域代理加载前端资源
 
 替换了之前的 Disqus 和 Giscus。数据全部在自己手里。
