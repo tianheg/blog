@@ -6,14 +6,14 @@ title: '我看的剧集、电影、动漫、音乐剧'
 
 - 电影
   <details class="wfav">
-  <summary>查看</summary>
+  <summary></summary>
 
   - 相助
 
   </details>
 - 歌舞片
   <details class="wfav">
-  <summary>查看</summary>
+  <summary></summary>
 
   - 绿野仙踪
   - 音乐之声
@@ -21,7 +21,7 @@ title: '我看的剧集、电影、动漫、音乐剧'
   </details>
 - 剧集
   <details class="wfav">
-  <summary>查看</summary>
+  <summary></summary>
 
   - 老友记
   - 神秘博士
@@ -29,7 +29,7 @@ title: '我看的剧集、电影、动漫、音乐剧'
   </details>
 - 日剧
   <details class="wfav">
-  <summary>查看</summary>
+  <summary></summary>
 
   - 我的事说来话长
   - 重启人生
@@ -40,7 +40,7 @@ title: '我看的剧集、电影、动漫、音乐剧'
   </details>
 - 动漫
   <details class="wfav">
-  <summary>查看</summary>
+  <summary></summary>
 
   - 音乐
     - 轻音少女
