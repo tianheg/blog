@@ -27,7 +27,7 @@ const EMBEDDING_MODEL = '@cf/baai/bge-m3';
 const EMBEDDING_DIM = 1024;
 const MAX_RESULTS = 10;
 const COMMENTS_BACKEND = 'https://comments.tianheg.co';
-// 允许通过 worker 访问 API 的来源（同站 + 本地开发）；白名单是 allow-list，无 Origin 一律拒绝
+// 允许通过 worker 访问 API 的来源（同站 + 本地开发）；有 Origin 走白名单，无 Origin 用 Sec-Fetch-Site 挡跨站（见 originAllowed）
 const ALLOWED_ORIGINS = [
   'https://tianheg.co',
   'https://www.tianheg.co',
@@ -37,7 +37,11 @@ const ALLOWED_ORIGINS = [
 
 function originAllowed(request) {
   const origin = request.headers.get('Origin');
-  return ALLOWED_ORIGINS.includes(origin);
+  if (origin) return ALLOWED_ORIGINS.includes(origin);
+  // 同域 GET fetch 不带 Origin —— 评论同域反代上线后 Artalk 的 GET /api/v2/conf 被 403 挡死、
+  // 「Failed to load comments」的根因。浏览器每次请求都发 Sec-Fetch-Site：同域=same-origin、
+  // 同站=same-site，跨站抓取=cross-site —— 拿它当闸，挡住跨站滥用，放行同域常规请求。
+  return request.headers.get('Sec-Fetch-Site') !== 'cross-site';
 }
 
 // 按来源回显 CORS 头；非白名单来源不加 CORS（浏览器跨站调用拿不到响应）
