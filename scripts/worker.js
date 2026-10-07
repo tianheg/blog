@@ -14,6 +14,15 @@
  *   - static/pagefind-semantic/{embeddings.bin,pages.json} deployed under ASSETS
  */
 
+import photosAllowlist from './photos-allowlist.json';
+import { resolvePhotoKey } from './photo-guard.js';
+
+/* 相册放行清单：scripts/gen-photos-data.py 生成（与 data/photos.json 同源同批），
+   逐 key 精确匹配，绝无前缀放行 —— 见 scripts/photo-guard.js。 */
+const PHOTO_ALLOW = new Set(photosAllowlist);
+const PHOTO_CACHE_IMMUTABLE = 'public, max-age=31536000, immutable';
+const PHOTO_CACHE = 'public, max-age=86400, stale-while-revalidate=604800';
+
 const EMBEDDING_MODEL = '@cf/baai/bge-m3';
 const EMBEDDING_DIM = 1024;
 const MAX_RESULTS = 10;
@@ -196,6 +205,11 @@ export default {
       return proxyArtalkAsset(request, url);
     }
 
+    // 相册图片（逐 key 白名单、只读）—— 走 R2 binding，资产目录里没有这些文件
+    if (url.pathname.startsWith('/photos/')) {
+      return servePhoto(request, env, url);
+    }
+
     // Fall through to static assets
     const asset = await env.ASSETS.fetch(request);
     // SPA fallback: 如果 /projects/music/* 返回 404，serve index.html
@@ -254,6 +268,51 @@ async function proxyComments(request, url) {
     proxyResp.headers.set('Vary', 'Origin');
   }
   return proxyResp;
+}
+
+/** 按扩展名补 Content-Type（对象元数据缺 contentType 时兜底） */
+function photoContentType(key) {
+  const ext = key.slice(key.lastIndexOf('.') + 1).toLowerCase();
+  if (ext === 'webp') return 'image/webp';
+  if (ext === 'png') return 'image/png';
+  if (ext === 'jpg' || ext === 'jpeg') return 'image/jpeg';
+  return 'application/octet-stream';
+}
+
+/**
+ * 相册图片路由：GET|HEAD /photos/[t/|h/]<key>
+ * 放行判据 = 逐 key 白名单（resolvePhotoKey），任何清单外 key 一律 404，
+ * 不做「像年份就放行」的兜底 —— 用户硬约束：只公开他点名的那批。
+ */
+async function servePhoto(request, env, url) {
+  const deny = () =>
+    new Response('Not found', {
+      status: 404,
+      headers: { 'Content-Type': 'text/plain; charset=utf-8' },
+    });
+  if (request.method !== 'GET' && request.method !== 'HEAD') {
+    return new Response(null, { status: 405, headers: { Allow: 'GET, HEAD' } });
+  }
+  const key = resolvePhotoKey(url.pathname, PHOTO_ALLOW);
+  if (!key) return deny();
+  const obj = await env.IMG_R2.get(key);
+  if (!obj) return deny();
+
+  const headers = new Headers();
+  obj.writeHttpMetadata(headers);
+  if (!headers.get('Content-Type')) headers.set('Content-Type', photoContentType(key));
+  headers.set('ETag', obj.httpEtag);
+  headers.set('X-Content-Type-Options', 'nosniff');
+  // 带内容指纹 = immutable（v 变则 URL 变）；手拼/不带的 URL 走 1 天 + SWR 兜底
+  headers.set(
+    'Cache-Control',
+    url.searchParams.has('v') ? PHOTO_CACHE_IMMUTABLE : PHOTO_CACHE,
+  );
+  if (request.headers.get('If-None-Match') === obj.httpEtag) {
+    return new Response(null, { status: 304, headers });
+  }
+  if (request.method === 'HEAD') return new Response(null, { status: 200, headers });
+  return new Response(obj.body, { status: 200, headers });
 }
 
 /** Proxy Artalk static assets (JS/CSS) */
