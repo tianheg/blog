@@ -18,15 +18,30 @@
 <link href="/dist/Artalk.css" rel="stylesheet">
 <script src="/dist/Artalk.js"></script>
 <script>
-  Artalk.init({
-    el: '#Comments',
-    pageKey: '{{ .Permalink }}',
-    pageTitle: '{{ .Title }}',
-    // 生产走同域反代（'' → /api/v2/*、/dist/* 由 blog Worker 转发），
-    // 页面源码不再出现 comments.tianheg.co；hugo serve 开发时 Worker 不可达，退回直连
-    server: '{{ cond hugo.IsDevelopment "https://comments.tianheg.co" "" }}',
-    site: 'Tianhe Gao',
-    darkMode: 'auto',
-  })
+  (function () {
+    var root = document.documentElement;
+    // darkMode 不能用 'auto'：那只认 prefers-color-scheme，站内主题（ThemeToggle：
+    // html.dark/.light + localStorage）可与系统偏好背离 → Artalk 字色与页面底色同侧，
+    // 评论正文对比度掉到 1.1:1（实测）。唯一真相 = html 的类，初始化即取它。
+    var artalk = Artalk.init({
+      el: '#Comments',
+      pageKey: '{{ .Permalink }}',
+      pageTitle: '{{ .Title }}',
+      // 生产走同域反代（'' → /api/v2/*、/dist/* 由 blog Worker 转发），
+      // 页面源码不再出现 comments.tianheg.co；hugo serve 开发时 Worker 不可达，退回直连
+      server: '{{ cond hugo.IsDevelopment "https://comments.tianheg.co" "" }}',
+      site: 'Tianhe Gao',
+      darkMode: root.classList.contains('dark'),
+    });
+    // 主题一切就同步：手动切换与「跟随系统」两条路径 ThemeToggle 都只改 html 的类，
+    // setDarkMode 走 Artalk 内部 watchConf，同时撤掉它自带的 media 监听。
+    var last = root.classList.contains('dark');
+    new MutationObserver(function () {
+      var dark = root.classList.contains('dark');
+      if (dark === last) return;
+      last = dark;
+      artalk.setDarkMode(dark);
+    }).observe(root, { attributes: true, attributeFilter: ['class'] });
+  })();
 </script>
 {{ end }}
