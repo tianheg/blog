@@ -35,12 +35,17 @@
     });
     // 主题一切就同步：手动切换与「跟随系统」两条路径 ThemeToggle 都只改 html 的类，
     // setDarkMode 走 Artalk 内部 watchConf，同时撤掉它自带的 media 监听。
+    var sync = function () { artalk.setDarkMode(root.classList.contains('dark')); };
     var last = root.classList.contains('dark');
+    // 加载后 ~460ms 服务端 /api/v2/conf 合并会把 darkMode 重置回 init 旧值：
+    // 此前点开关会被覆盖、created 再按旧值摘类（实测 1.26:1 字底反相）。
+    // mounted 是合并之后的第一个事件，在此重新断言；conf 合并完成后点开关由下面 observer 兜。
+    artalk.on('mounted', sync);
     new MutationObserver(function () {
       var dark = root.classList.contains('dark');
       if (dark === last) return;
       last = dark;
-      artalk.setDarkMode(dark);
+      sync();
     }).observe(root, { attributes: true, attributeFilter: ['class'] });
   })();
 </script>
