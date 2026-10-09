@@ -338,6 +338,36 @@ grep -rn 'emerald-\|text-blue-\|bg-blue-\|fill-blue-\|outline-blue-' layouts/ as
   --include='*.html' --include='*.ts' --include='*.css' --include='*.md'   # 期望 0 命中
 ```
 
+### 中文字体（2026-10-09 起：内容层用霞鹜文楷 Screen）
+
+**内容层（正文 + 内容标题）走自托管的霞鹜文楷 Screen；UI 层（导航、按钮、meta 日期/计数、
+侧栏 TOC/反链、标签 chip、代码）继续走系统黑体栈。** 拉丁字符两处都由自托管 Satoshi 提供。
+
+| 项 | 值 |
+|---|---|
+| 字体文件 | `static/fonts/LXGWWenKaiScreen-subset.woff2`（~1.2MB，进 git） |
+| 上游 | [lxgw/LxgwWenKai-Screen](https://github.com/lxgw/LxgwWenKai-Screen) v1.522，SIL OFL 1.1（可自托管） |
+| 重新生成 | `bash ~/.hermes/scripts/fonts/subset-blog-cjk-font.sh`（**脚本不进仓库**，见下方第 3 点） |
+| 落点 | `assets/css/main.css` 的 `@font-face` + `.font-wenkai` 类；类挂在正文容器与内容标题上 |
+| 字重 | 只声明 400 一档 → 标题粗体由浏览器**合成**（楷体没有真粗体字面） |
+
+为什么是子集而不是整包：全量 TTF **24MB**，直接托管不现实；官方 npm 包的分片方案实测更差
+（一篇文章要拉 18–52 片 = 1.0–2.7MB，中文页面命中太散）。子集裁到「`content/` + `layouts/` 用到的
+字符」= 5176 字符 → **1.23MB 一个文件**，加载后长期缓存。
+
+三个必须知道的事：
+
+1. **新增冷僻字不会自动进字体** —— 页面上该字回退到系统黑体（不会变豆腐块，但字形会跳）。
+   出现这种情况就重跑 `~/.hermes/scripts/fonts/subset-blog-cjk-font.sh` 并提交产物
+2. **字体工具链不能放在仓库里** —— Tailwind v4 会递归扫描项目目录，仓库内的 venv 符号链接
+   （`bin/python` → `/usr/bin/python3`）会让构建直接失败（Node 权限模型：symlink target outside
+   allowed paths）。脚本因此把 venv 与上游 TTF 缓存放在 `~/.cache/blog-fonttools/`
+3. **仓库只放字体产物（`static/fonts/*.woff2`），不放生成脚本** —— 生成脚本住在
+   `~/.hermes/scripts/fonts/subset-blog-cjk-font.sh`，用 `npm run` 也调不到（仓库不引它）。
+
+字体文件没有指纹、走 CF 资产默认的 `must-revalidate` + etag（与 Satoshi 一致），改子集后靠 etag 失效；
+`font-display: swap`：首次访问先显示系统黑体再换成文楷（会有一点点重排）。
+
 ## 常用命令
 
 ```bash

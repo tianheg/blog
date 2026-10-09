@@ -43,7 +43,7 @@
              标题单行截断（truncate）→ 两列各 5 行总高严格相同、行与行横向对齐。
              别改回换行：长标题会把行撑成 69px，两列总高就错开了（2026-09-26） */}}
         <div class="flex h-11 items-center gap-4">
-          <a href="{{ .RelPermalink }}" class="text-list min-w-0 flex-1 truncate text-gray-900 dark:text-gray-100">
+          <a href="{{ .RelPermalink }}" class="text-list min-w-0 flex-1 truncate text-gray-900 dark:text-gray-100 font-wenkai">
             {{ partial "functions/get-title" (dict "page" .) }}
           </a>
           <time class="text-meta text-gray-600 dark:text-gray-400 shrink-0 tabular-nums whitespace-nowrap" datetime="{{ .Date.Format "2006-01-02" }}">
@@ -73,7 +73,7 @@
       {{ range $recentTil }}
         {{ if ne .Title "Tils" }}
         <div class="flex h-11 items-center gap-4">
-          <a href="{{ .RelPermalink }}" class="text-list min-w-0 flex-1 truncate text-gray-900 dark:text-gray-100">
+          <a href="{{ .RelPermalink }}" class="text-list min-w-0 flex-1 truncate text-gray-900 dark:text-gray-100 font-wenkai">
             {{ partial "functions/get-title" (dict "page" .) }}
           </a>
           {{ $dirPath := .File.Dir | strings.TrimPrefix "til/" | strings.TrimSuffix "/" }}

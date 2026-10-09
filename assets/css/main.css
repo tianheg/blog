@@ -156,6 +156,28 @@ html.light { color-scheme: light; }
   font-style: italic;
 }
 
+/* 中文内容字体：霞鹜文楷 Screen（LXGW WenKai Screen，SIL OFL 1.1）。
+   自托管子集 —— 只含 content/ + layouts/ 用到的字符（~1.2MB，scripts/subset-font.sh 生成）；
+   全量 TTF 24MB，不能直接托管。子集里没有的新字会回退到下面栈里的系统黑体。
+   只声明 400 一档：粗体（标题）由浏览器合成 —— 楷体没有真粗体字面。 */
+@font-face {
+  font-family: "LXGW WenKai Screen";
+  src: url("/fonts/LXGWWenKaiScreen-subset.woff2") format("woff2");
+  font-weight: 400;
+  font-display: swap;
+  font-style: normal;
+}
+
+/* 内容层（正文 + 内容标题）专用字体栈：拉丁仍走 Satoshi，中文命中文楷子集。
+   UI 层（导航/按钮/meta/代码/侧栏）不挂这个类，继续走 body 的系统黑体栈。
+   用法见 README「中文字体」。 */
+.font-wenkai {
+  font-family: "Satoshi", "LXGW WenKai Screen", -apple-system, BlinkMacSystemFont,
+    "PingFang SC", "Hiragino Sans GB", "Noto Sans SC", "Noto Sans CJK SC",
+    "Source Han Sans SC", "Source Han Sans CN", "Microsoft YaHei",
+    "WenQuanYi Micro Hei", "WenQuanYi Zen Hei", Arial, sans-serif;
+}
+
 html {
   scroll-behavior: smooth;
   overflow-x: hidden;
