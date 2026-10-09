@@ -6,6 +6,17 @@
   {{/* --- Article title --- */}}
   <h1 class="text-4xl font-extrabold mb-8 text-gray-900 dark:text-gray-100">{{ partial "functions/get-title" (dict "page" .) }}</h1>
 
+  {{/* --- 页级目录：只列 h2/h3 章节锚点。至少 3 项才挂——search/now/feeds/uses 这类
+       短页或无标题页不出现目录，避免两行目录的死 UI --- */}}
+  {{ if ge (strings.Count "<li>" .TableOfContents) 3 }}
+  <details class="mb-8 rounded-lg border border-gray-200 dark:border-gray-800">
+    <summary class="cursor-pointer px-4 py-3 text-sm font-medium text-gray-700 dark:text-gray-300 select-none">本页内容</summary>
+    <div class="til-toc px-4 pb-4">
+      {{ .TableOfContents }}
+    </div>
+  </details>
+  {{ end }}
+
   {{/* --- Date for pages that have it --- */}}
   {{ if .Date }}
   <div class="mb-8 pb-6 border-b border-gray-200 dark:border-gray-800">
