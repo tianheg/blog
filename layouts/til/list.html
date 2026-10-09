@@ -13,7 +13,7 @@
     {{/* === ROOT /til/ page === */}}
     <div class="mb-6">
       <div class="flex items-center justify-between gap-4 flex-wrap">
-        <h1 class="text-doc-title leading-normal font-bold tracking-tight text-gray-900 dark:text-gray-100">数字花园 | TIL</h1>
+        <h1 class="text-doc-title leading-normal font-bold tracking-tight text-gray-900 dark:text-gray-100 font-wenkai">数字花园 | TIL</h1>
         <div class="flex items-center gap-3">
         <a href="#" onclick="randomTIL(); return false;"
           class="inline-flex items-center gap-1.5 px-3 py-1.5 text-xs rounded-md border border-gray-200 dark:border-gray-800
@@ -65,7 +65,7 @@
     {{ partial "content/breadcrumb.html" . }}
 
     {{/* Category title */}}
-    <h1 class="text-2xl font-bold tracking-tight text-gray-900 dark:text-gray-100 mb-10">{{ .Title }}</h1>
+    <h1 class="text-2xl font-bold tracking-tight text-gray-900 dark:text-gray-100 mb-10 font-wenkai">{{ .Title }}</h1>
 
     {{/* Mobile header filter (visible below xl breakpoint) */}}
     {{ $grouped := $pages.GroupByParam "header" }}
@@ -96,7 +96,7 @@
         {{ range .Pages.ByTitle }}
         <a href="{{ .RelPermalink }}"
           class="group flex items-baseline justify-between gap-4 py-2 px-3 -mx-3 rounded-md transition-colors hover:bg-gray-50 dark:hover:bg-gray-800/40">
-          <span class="text-list text-gray-800 dark:text-gray-200 group-hover:text-ink-600 dark:group-hover:text-ink-400 transition-colors">
+          <span class="text-list text-gray-800 dark:text-gray-200 group-hover:text-ink-600 dark:group-hover:text-ink-400 transition-colors font-wenkai">
             {{ partial "functions/get-title" (dict "page" .) }}
           </span>
           {{ if not .Date.IsZero }}
@@ -122,7 +122,7 @@
         {{ range $noHeader.ByTitle }}
         <a href="{{ .RelPermalink }}"
           class="group flex items-baseline justify-between gap-4 py-2 px-3 -mx-3 rounded-md transition-colors hover:bg-gray-50 dark:hover:bg-gray-800/40">
-          <span class="text-list text-gray-800 dark:text-gray-200 group-hover:text-ink-600 dark:group-hover:text-ink-400 transition-colors">
+          <span class="text-list text-gray-800 dark:text-gray-200 group-hover:text-ink-600 dark:group-hover:text-ink-400 transition-colors font-wenkai">
             {{ partial "functions/get-title" (dict "page" .) }}
           </span>
           {{ if not .Date.IsZero }}
@@ -141,7 +141,7 @@
 
     {{ partial "content/breadcrumb.html" . }}
 
-    <h1 class="text-2xl font-bold tracking-tight text-gray-900 dark:text-gray-100 mb-10">{{ .Title }}</h1>
+    <h1 class="text-2xl font-bold tracking-tight text-gray-900 dark:text-gray-100 mb-10 font-wenkai">{{ .Title }}</h1>
 
     {{ if $sections }}
     <div class="grid gap-3 sm:grid-cols-2 mb-10">
@@ -149,7 +149,7 @@
       {{ $subPages := .RegularPages }}
       <a href="{{ .RelPermalink }}"
         class="group flex items-baseline justify-between gap-3 py-2 px-3 -mx-3 rounded-md transition-colors hover:bg-gray-50 dark:hover:bg-gray-800/40">
-        <h2 class="text-list font-medium text-gray-800 dark:text-gray-200 group-hover:text-ink-600 dark:group-hover:text-ink-400 transition-colors">{{ .Title }}</h2>
+        <h2 class="text-list font-medium text-gray-800 dark:text-gray-200 group-hover:text-ink-600 dark:group-hover:text-ink-400 transition-colors font-wenkai">{{ .Title }}</h2>
         <p class="text-meta text-gray-600 dark:text-gray-400 shrink-0 tabular-nums">{{ len $subPages }} 篇</p>
       </a>
     {{ end }}
@@ -161,7 +161,7 @@
       {{ range $pages.ByTitle }}
       <a href="{{ .RelPermalink }}"
         class="group flex items-baseline justify-between gap-4 py-2 px-3 -mx-3 rounded-md transition-colors hover:bg-gray-50 dark:hover:bg-gray-800/40">
-        <span class="text-list text-gray-800 dark:text-gray-200 group-hover:text-ink-600 dark:group-hover:text-ink-400 transition-colors">
+        <span class="text-list text-gray-800 dark:text-gray-200 group-hover:text-ink-600 dark:group-hover:text-ink-400 transition-colors font-wenkai">
           {{ partial "functions/get-title" (dict "page" .) }}
         </span>
         {{ if not .Date.IsZero }}
