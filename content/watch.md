@@ -164,6 +164,7 @@ document.addEventListener('DOMContentLoaded', function initWatchCounts() {
 
 | Type | Name | Review | Release Year |
 | --- | --- | --- | --- |
+| 动漫 | Beauty and the Beast 美女与野兽 | 王子因轻视丑陋的女巫而被惩罚变成野兽的外形，内在仍是人类的心，自己也拥有了丑陋的面庞，才不会抱有轻视他人外表的心。 | 1991 |
 | 电影 | Paris, Texas 巴黎，德州 | 男人虐待妻子，妻子逃跑了（概括得很片面）。四年过去了，他在一片沙漠行走然后被弟弟接走，然后看到自己的儿子，然后和儿子一起寻找妻子。值得看第二次的片子。那个站在天桥对来往车辆不断咆哮劝诫的人。推动剧情的几次亮而响的音调，让我觉得这部影片很特别，有种西部世界的牛仔风。Can I tell you something? Sure. Anything you like. It's kind of long. I got plenty of time. 男人将儿子托付给了妻子 | 1984 |
 | 电影 | Jaws 大白鲨 | 紧张刺激，想再看一次的电影 | 1975 |
 | 电影 | The Sound of Music 音乐之声 |  | 1965 |
