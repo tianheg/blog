@@ -383,7 +383,10 @@ npm run all
 # 仅生成搜索索引（需先构建）
 npm run pagefind
 
-# 生成语义搜索索引（调 Cloudflare Workers AI，需先 build；改动内容后发布前必跑）
+# 生成语义搜索索引（调 Cloudflare Workers AI，需先 build）
+# ⚠️ 2026-10-10 起改内容**不再**随发布跑这条 —— 由每周一 04:00 的 cron
+#    （~/.hermes/scripts/blog-semantic-index-weekly.sh）全量重建并提交；
+#    只有需要「语义搜索马上命中」时才手工跑
 npm run embed
 
 # 站内链接检查（wikilink 解析 + 内链，发布闸门）
@@ -422,8 +425,8 @@ npm run check-external-links -- --refresh-dead --recheck-verified   # 强制重�
 1. 根据内容类型选择 `content/posts/` 或 `content/til/` 下的正确分类
 2. 按命名规范创建 `.md` 文件，填写 YAML frontmatter
 3. 运行 `npm run dev` 本地预览
-4. 内容完成后运行 `npm run all && npm run embed` 构建并更新搜索索引（关键词 + 语义）
-5. 提交变更
+4. 内容完成后运行 `npm run all` 构建（关键词索引由 CI 每次部署重建）；语义索引不随本次提交重建，由每周一 04:00 的 cron 周期全量重建（见「语义搜索索引」节）
+5. 提交变更（不带 `static/pagefind-semantic/*` 与 `data/related.json`）
 
 ## 资源存放
 
@@ -470,7 +473,7 @@ npm run check-external-links -- --refresh-dead --recheck-verified   # 强制重�
 - 语义搜索（`/search` 的 AI tab）由 **构建时预生成的 embeddings** 驱动
 - `npm run embed` 调 Cloudflare Workers AI（BGE-M3）生成全部页面向量 → `static/pagefind-semantic/embeddings.bin`（L2 归一化，提交 git）
 - Worker 运行时只嵌入 query + dot product，**无冷启动、无 KV 缓存**
-- ⚠️ 改内容后必须重新 `npm run embed` 并提交，否则语义搜索结果缺新内容
+- ⚠️ **2026-10-10 起：改内容不再随发布重跑 `npm run embed`**。语义索引与 `data/related.json` 由 cron `~/.hermes/scripts/blog-semantic-index-weekly.sh`（每周一 04:00，no_agent）全量重建、单独提交并 push。代价：新内容进语义搜索/相关笔记最多滞后一周（关键词 Pagefind 不受影响，CI 每次部署重建）。无内容变更时 cron 静默跳过；重建成功投一行简报，失败投报错。可手动 `bash ~/.hermes/scripts/blog-semantic-index-weekly.sh --dry-run --force` 预演。
 
 ### 知识图谱
 
