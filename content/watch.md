@@ -1140,7 +1140,6 @@ document.addEventListener('DOMContentLoaded', function initWatchCounts() {
 <details>
 <summary>没看过的和看过没写 Review 的</summary>
 
-- 肖申克的救赎（1994） [看过未评]
 - 霸王别姬（1993） [看过未评]
 - 泰坦尼克号（1997） [看过未评]
 - 阿甘正传（1994） [看过未评]
