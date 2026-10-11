@@ -651,7 +651,7 @@ document.addEventListener('DOMContentLoaded', function initWatchCounts() {
 | 电影 | 洛杉矶捣蛋计划 |  | 2016 |
 | 电影 | 集结号 |  | 2007 |
 | 电影 | 悲伤逆流成河 |  | 2018 |
-| 电影 | The Shawshank Redemption 肖申克的救赎 |  |  |
+| 电影 | The Shawshank Redemption 肖申克的救赎 | man like chess, lets get some rocks. 有些东西完全属于我，无法被他人夺走。 | 1994 |
 | 电影 | Zootopia 疯狂动物城 |  | 2016 |
 | 电影 | Coco 寻梦环游记 |  | 2017 |
 | 电影 | Titanic 泰坦尼克号 |  |  |
