@@ -1383,3 +1383,16 @@ document.addEventListener('DOMContentLoaded', function initWatchCounts() {
 - 谍影重重（2002） [未看]
 
 </details>
+
+## 待看
+
+来自 [偶然时刻 · 第三周刊 No.60](https://www.joeytoday.com/blog/2026/weekly-60/) 的剧集推荐。
+
+<details>
+<summary>剧集（3）</summary>
+
+- 戴洛奇小镇 Deadloch（2023） [未看]
+- 力量 The Power（2023） [未看]
+- 道格拉斯被取消了 Douglas Is Cancelled（2024） [未看]
+
+</details>
