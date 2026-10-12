@@ -1386,7 +1386,7 @@ document.addEventListener('DOMContentLoaded', function initWatchCounts() {
 
 ## 待看
 
-来自 [偶然时刻 · 第三周刊 No.60](https://www.joeytoday.com/blog/2026/weekly-60/) 的剧集推荐。
+来自 [偶然时刻 · 第三周刊 No.60](https://www.joeytoday.com/blog/2026/weekly-60/) 的电影与剧集推荐。
 
 <details>
 <summary>剧集（3）</summary>
@@ -1394,5 +1394,15 @@ document.addEventListener('DOMContentLoaded', function initWatchCounts() {
 - 戴洛奇小镇 Deadloch（2023） [未看]
 - 力量 The Power（2023） [未看]
 - 道格拉斯被取消了 Douglas Is Cancelled（2024） [未看]
+
+</details>
+<details>
+<summary>电影（5）</summary>
+
+- 妇女参政论者 Suffragette（2015） [未看]
+- 还有明天 C'è ancora domani（2023） [未看]
+- 隐藏人物 Hidden Figures（2016） [未看]
+- 沉默的问题 A Question of Silence（1982） [未看]
+- 世界上最糟糕的人 The Worst Person in the World（2021） [未看]
 
 </details>
