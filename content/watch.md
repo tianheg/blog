@@ -164,6 +164,7 @@ document.addEventListener('DOMContentLoaded', function initWatchCounts() {
 
 | Type | Name | Review | Release Year |
 | --- | --- | --- | --- |
+| 电影 | The Exorcist 驱魔人 | 最近看的第一部恐怖片，确实挺吓人的，下一次看恐怖片不知道什么时候了 | 1973 |
 | 电影 | 大红灯笼高高挂 | 颜色的冲击的确很明显，三太太确实打扮得挺美，男权社会对女性的倾轧 | 1991 |
 | 动漫 | Beauty and the Beast: The Enchanted Christmas 美女与野兽之贝儿的心愿 | 不喜欢风管；太纯真不适合我。 | 1997 |
 | 电影 | La Belle et la Bête 美女与野兽 | 真人的贝儿，就是很美的。野兽也是真实的。只是最后王子的样子竟是贝儿弟弟的朋友，这一点让我有点失望 | 1946 |
