@@ -164,6 +164,7 @@ document.addEventListener('DOMContentLoaded', function initWatchCounts() {
 
 | Type | Name | Review | Release Year |
 | --- | --- | --- | --- |
+| 电影 | Drishyam 误杀瞒天记 | 很不错的电影，看电影原来还能救自己的家人，结局是好的，真不错 | 2015 |
 | 动漫 | AKIRA 阿基拉 | 没啥感觉，人物没有现在的细腻，看起来很丑 | 1988 |
 | 电影 | The Exorcist 驱魔人 | 最近看的第一部恐怖片，确实挺吓人的，下一次看恐怖片不知道什么时候了 | 1973 |
 | 电影 | 大红灯笼高高挂 | 颜色的冲击的确很明显，三太太确实打扮得挺美，男权社会对女性的倾轧 | 1991 |
