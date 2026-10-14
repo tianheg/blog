@@ -1,6 +1,9 @@
 {
   "name": "blog",
   "private": true,
+  "engines": {
+    "node": ">=22"
+  },
   "scripts": {
     "build": "hugo --gc --minify --buildFuture --cleanDestinationDir",
     "pagefind": "pagefind --site public",
@@ -17,9 +20,7 @@
     "@tailwindcss/cli": "^4.3.0",
     "@tailwindcss/typography": "^0.5.19",
     "pagefind": "^1.5.2",
-    "tailwindcss": "^4.3.0"
-  },
-  "dependencies": {
+    "tailwindcss": "^4.3.0",
     "vis-network": "^10.0.3"
   }
 }
