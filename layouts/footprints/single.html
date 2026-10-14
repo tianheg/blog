@@ -20,7 +20,7 @@
 
 <script>
 // Inject post lists into existing Leaflet markers.
-// Matches markers to locations via the leafletLoc global array (defined in .org content).
+// Matches markers to locations via the leafletLoc global array (defined in .md content).
 const locationPosts = {
   {{ range $loc, $_ := dict
     "太和 Taihe" ""
@@ -73,7 +73,7 @@ function augmentMarkers() {
   });
 }
 
-// Run after map init (inline script in .org runs during parse, this runs after)
+// Run after map init (inline script in .md runs during parse, this runs after)
 if (document.readyState === 'loading') {
   document.addEventListener('DOMContentLoaded', function() { setTimeout(augmentMarkers, 300); });
 } else {
