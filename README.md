@@ -25,7 +25,7 @@
 ```
 blog/
 ├── assets/              # 构建时处理的资源
-│   ├── css/             # Tailwind CSS 入口（`main.css`）+ 独立样式（`table.css`）
+│   ├── css/             # `main.css`（入口，@import `prose.css`/`til.css`）+ 按页加载的 `table.css`/`map.css`
 │   └── ts/              # TypeScript 组件（`main.ts`, `graph.ts`）
 ├── content/             # 网站内容
 │   ├── posts/           # 博客文章（长文、随笔、年度总结）
@@ -60,10 +60,13 @@ blog/
 │   ├── term.html        # 单标签详情
 │   └── 404.html         # 404 页面
 ├── scripts/             # 构建和工具脚本
-│   ├── build.sh         # CI 构建脚本（Cloudflare Workers）
+│   ├── build.sh         # CI 构建脚本（Cloudflare Workers）；`setup` 子命令本地装 Hugo
 │   ├── worker.js        # Cloudflare Worker（静态托管 + 语义搜索 API + 评论同域反代）
+│   ├── photo-guard.js   # 相册放行闸（纯函数，worker 与 `check.mjs photos` 单测共用）
 │   ├── embed.mjs          # 语义索引模块（嵌入 + 关联笔记，npm run embed/related）
 │   ├── check.mjs         # 闸门模块（links/unicode/selftest/photos/external 子命令）
+│   ├── gen-photos-data.py  # 相册派生管线（data/photos-list.yaml → 机器产物；手动跑）
+│   ├── garden-health.py  # 数字花园健康度与存量处置（手动跑）
 │   ├── data/            # 数据账本（外链账本 ×2 + 相片白名单，worker 同源读取）
 │   ├── epub/            # EPUB 导出管线（SOP 见 epub/README.md）
 ├── static/              # 静态文件（直接复制到 public/）
@@ -76,13 +79,13 @@ blog/
 ├── wrangler.jsonc       # Cloudflare Workers 配置
 └── AGENTS.md            # AI agent 上下文（symlink → README）
 ```
-> 2026-10-07 一次性工具清理：13 个迁移/修复/建议类脚本移出仓库（fetch-photos-dev pick-photos fill-watch-year merge-media-watch migrate-to-wikilink fix-deadlinks fix-title-attributes suggest-links suggest-merges suggest-bridges prune-dead-links warm-wayback-cache neodb-year-lookup），`hugo-setup.sh`（版本 pin 工具，2026-09-22 曾恢复）保留；`neodb-name-lookup.py` 已迁 `~/.hermes/scripts/`（适配准则是用户级工具出仓、内容仓只留构建链）。技能文档里提到的这些脚本仍可捞回：`git log -1 --diff-filter=D --format=%h -- scripts/<file>` 找删除提交 `<SHA>` → `git show <SHA>^:scripts/<file>`。
+> 2026-10-07 一次性工具清理：13 个迁移/修复/建议类脚本移出仓库（fetch-photos-dev pick-photos fill-watch-year merge-media-watch migrate-to-wikilink fix-deadlinks fix-title-attributes suggest-links suggest-merges suggest-bridges prune-dead-links warm-wayback-cache neodb-year-lookup），`hugo-setup.sh` 已于 2026-10-07 并入 `build.sh setup` 子命令，不再单列；`neodb-name-lookup.py` 已迁 `~/.hermes/scripts/`（适配准则是用户级工具出仓、内容仓只留构建链）。技能文档里提到的这些脚本仍可捞回：`git log -1 --diff-filter=D --format=%h -- scripts/<file>` 找删除提交 `<SHA>` → `git show <SHA>^:scripts/<file>`。
 
 ## 技术栈
 
 | 类别 | 技术 | 说明 |
 |------|------|------|
-| 静态生成 | Hugo | 标准版，支持 PostCSS/Tailwind |
+| 静态生成 | Hugo | 标准版（Standard，非 Extended）；CSS 由外部 `@tailwindcss/cli` 处理，不走 Hugo 的 PostCSS/Tailwind 管线 |
 | 样式 | Tailwind CSS v4 | 通过 `@tailwindcss/cli` 构建 |
 | 搜索 | Pagefind | 静态搜索索引，基于构建后的 `public/` |
 | 图谱可视化 | vis-network | 分类页 JSON 数据驱动 |
@@ -92,8 +95,8 @@ blog/
 
 | 依赖 | 版本 | 说明 |
 |------|------|------|
-| Hugo | ≥ v0.140 | 标准版即可，Tailwind v4 需要 |
-| Node.js | ≥ 18 | npm 管理依赖（`npm install`） |
+| Hugo | 0.167.0（CI 固定） | 版本 pin 只在 `scripts/build.sh` 的 `HUGO_VERSION`；本地跑 `bash scripts/build.sh setup` 装同版本 |
+| Node.js | ≥ 22（CI 默认 24.18.0） | npm 管理依赖（`npm install`）；`.nvmrc` 锁定 CI 主版本 |
 
 首次克隆后执行：
 
@@ -121,7 +124,7 @@ npm install
 | `content/` 及根目录独立页面 | Markdown (`.md`) | Hugo 原生渲染（Goldmark），2026-09 由 Org Mode 迁移 |
 | `content/til/` | Markdown (`.md`) | 笔记类内容，按分类文件夹组织，子分类用 front matter `header` 标记 |
 
-> 2026-09-10 完成 `.org` → `.md` 迁移：1581 篇内容 + 模板（graph-data 链接解析、`about.md` / `-en.md` 判断）+ hugo.yaml（`parser.attribute.block`、typographer 对齐 go-org、脚注 backlinkHTML、TOC endLevel）。转换脚本见 `scripts/org2md.py`。
+> 2026-09-10 完成 `.org` → `.md` 迁移：1581 篇内容 + 模板（graph-data 链接解析、`about.md` / `-en.md` 判断）+ hugo.yaml（`parser.attribute.block`、typographer 对齐 go-org、脚注 backlinkHTML、TOC endLevel）。转换脚本 `org2md.py` 已移出仓库（副本在 `~/.hermes/scripts/.archive/`，历史保留在 git）。
 
 ### 文件命名规则
 
