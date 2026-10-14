@@ -37,7 +37,10 @@ setup_local() {
 }
 
 ci_build() {
-  export TZ=Asia/Hong_Kong
+  # 与 hugo.yaml 的 timeZone: Asia/Shanghai 保持一致（原为 Asia/Hong_Kong）。
+  # 实测：两者都是 +0800，对产物无实质影响（pubDate 由 frontmatter + hugo.yaml
+  # 的 timeZone 决定，环境 TZ 只影响 lastBuildDate 的时区表示）；统一只为消除不一致。
+  export TZ=Asia/Shanghai
 
   # Install Hugo — 下载 + sha256 校验（防 tampered release 被静默执行）
   echo "Installing Hugo v${HUGO_VERSION}..."
