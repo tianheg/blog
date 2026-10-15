@@ -8,7 +8,7 @@
 # 本地与 CI 用同一个 HUGO_VERSION 常量 —— 合并前两处 pin 曾各写各的（cf-workers-patterns 记过这个坑）。
 set -euo pipefail
 
-HUGO_VERSION=0.167.0
+HUGO_VERSION=0.168.0
 
 usage() {
   cat <<EOF
