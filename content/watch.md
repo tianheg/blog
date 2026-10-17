@@ -753,7 +753,7 @@ document.addEventListener('DOMContentLoaded', function initWatchCounts() {
 | 电影 | Ant-Man and the Wasp 蚁人 2：黄蜂女现身 |  | 2018 |
 | 电影 | Moon 月球 |  | 2009 |
 | 动漫 | 千と千尋の神隠し 千与千寻 |  | 2001 |
-| 电影 | Léon 这个杀手不太冷 |  | 1994 |
+| 电影 | Léon 这个杀手不太冷 | 喜欢看他们之间的互动。Léon是爱Mathilda的，只是这不是男女之爱，更可能的只是一种保护欲 | 1994 |
 | 电影 | 飞驰人生 |  | 2019 |
 | 电影 | Harry Potter and the Sorcerer's Stone 哈利·波特与魔法石 |  | 2001 |
 | 电影 | Harry Potter and the Chamber of Secrets 哈利·波特与密室 |  | 2002 |
@@ -1151,7 +1151,6 @@ document.addEventListener('DOMContentLoaded', function initWatchCounts() {
 - 千与千寻（2001） [看过未评]
 - 星际穿越（2014） [看过未评]
 - 美丽人生（1997） [看过未评]
-- 这个杀手不太冷（1994） [看过未评]
 - 盗梦空间（2010） [看过未评]
 - 楚门的世界（1998） [看过未评]
 - 辛德勒的名单（1993） [未看]
