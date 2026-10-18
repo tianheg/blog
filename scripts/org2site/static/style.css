@@ -1,0 +1,1134 @@
+/* ============================================================================
+   tianheg.co —— org2site 样式表（全局 CSS + 标签/属性选择器，零 class）
+   ----------------------------------------------------------------------------
+   契约：不给元素加语义 class。站点级结构用 data 属性（[data-site-header] /
+   [data-home-columns] / [data-tag-cloud] / [data-lb-set] / [data-photo-series]），
+   内容级靠标签选择器。id 与 data-* 保留（PageFind、评论锚点、灯箱要用）。
+
+   数值来源：原站（Hugo + Tailwind）产物在 1280 / 390 宽度、浅色与深色下的
+   计算样式实测值，不是估的。色值由原站 oklch 精确转 sRGB。
+
+   维护要点（踩过的坑）：
+   - 站点级 header/footer 必须用 [data-site-header] 这类属性选择器。裸 `header`
+     会命中内容里的小标题栏（首页 section 里也有 <header>），把它也变成 sticky
+     并盖住菜单。
+   - 不要用 `main > div` 这类位置选择器定位特定页面（标签页的标签云也是 main > div）。
+   ========================================================================== */
+
+/* --- 设计 token ---------------------------------------------------------- */
+:root {
+  /* 双主题用 light-dark() 表达：主题按钮 = 切 color-scheme，不必维护两套 token
+     （原站也是这个模式）。html 上的 .light/.dark 由 head 内联脚本 + site.js 维护。 */
+  color-scheme: light dark;
+
+  --bg: light-dark(#f7f5f3, #121c22);          /* 暖纸 / 暗底 */
+  --fg: light-dark(#4b4743, #9fb9d0);          /* 正文（暖灰 / 蓝灰） */
+  --heading: light-dark(#101828, #f3f4f6);     /* 标题（比正文重） */
+  --muted: light-dark(#646c7c, #99a1af);       /* 次要文字 / 导航 */
+  --meta: light-dark(#4a5565, #99a1af);        /* 列表里的日期/分类（比 muted 略深） */
+  --toc: light-dark(#364153, #d1d5db);         /* 「本页内容」目录的字色（gray-700/300） */
+  --border: light-dark(#e5e7eb, #1e2939);      /* header 下边线 */
+  --rule: light-dark(#e5e7eb, #364153);        /* hr、引用块左线 */
+  --surface: light-dark(#f3ede9, #1c262d);     /* 行内代码底、表头底 */
+  --table-line: light-dark(#e2ddd9, #091319);  /* 表格行线 */
+  --accent: light-dark(#3d5b7a, #88a1bc);      /* 链接（ink-600 / ink-400） */
+  --code-bg: light-dark(#282a36, #21222c);     /* 代码块底（Dracula） */
+  --code-fg: #f8f8f2;
+  --code-border: light-dark(#383a4a, #343746);
+
+  /* TIL 左栏「当前分类」高亮（原站 border-ink-500 / bg-ink-100 / text-ink-700，
+     深色 bg-ink-900/60 / text-ink-300；border 两主题同色） */
+  --cat-active-border: #6783a1;
+  --cat-active-bg: light-dark(#dfe9f4, rgb(26 42 59 / 0.6));
+  --cat-active-fg: light-dark(#304a64, #a8bdd4);
+  --cat-active-count: light-dark(#3d5b7a, #88a1bc);
+  --cat-bar: light-dark(rgb(136 161 188 / 0.5), rgb(136 161 188 / 0.4));  /* ink-400/50 · /40 */
+
+  /* 分类页（/til/<cat>/） */
+  --crumb-sep: light-dark(#d1d5dc, #364153);      /* gray-300 / gray-700 */
+  --list-title: light-dark(#1e2939, #e5e7eb);     /* gray-800 / gray-200 */
+  --row-hover: light-dark(#f9fafb, rgb(30 41 57 / 0.4));   /* gray-50 / gray-800-40% */
+  --chip-active-bg: light-dark(#dfe9f4, rgb(61 91 122 / 0.25));  /* ink-100 / ink-600-25% */
+  --chip-active-fg: light-dark(#304a64, #34d399);  /* ink-700 / 原站的 emerald-400 */
+  --ink-200-border: light-dark(#c3d3e4, #263a4e);
+
+  /* 发文热力图五档（原站 ink 色阶；深色模式反向：篇数越多越亮） */
+  --heat-1: light-dark(#c3d3e4, #263a4e);
+  --heat-2: light-dark(#88a1bc, #3d5b7a);
+  --heat-3: light-dark(#3d5b7a, #88a1bc);
+  --heat-4: light-dark(#263a4e, #c3d3e4);
+}
+:root.light { color-scheme: light; }
+:root.dark { color-scheme: dark; }
+
+/* --- 基础 ---------------------------------------------------------------- */
+* { box-sizing: border-box; }
+
+html { -webkit-text-size-adjust: 100%; }
+
+body {
+  margin: 0;
+  background: var(--bg);
+  color: var(--fg);
+  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", "Noto Sans CJK SC",
+               "PingFang SC", "Hiragino Sans GB", "Microsoft YaHei", sans-serif;
+  font-size: 16px;
+  line-height: 1.85;              /* 原站正文 29.6/16 */
+  -webkit-font-smoothing: antialiased;
+}
+
+/* 内容列宽：原站 .page-col 790px + 左右 20px 内边距 */
+main, [data-header-bar], [data-site-footer] > p {
+  max-width: 790px;
+  margin-inline: auto;
+  padding-inline: 1.25rem;
+}
+/* 顶部间距也照原站：非 til 页是 .page-col.mt-10（40px），
+   /til/ 下是 .page-col.pt-8.pb-16（32 / 64）—— 底部的 64 由 article 的 padding-bottom 出，
+   别在这里再加，否则翻倍。 */
+body > main { margin-top: 2.5rem; }
+
+/* --- 站点 header / footer ------------------------------------------------ */
+/* 站点头尾固定用 data 属性选，别用裸 `header` / `footer`（内容里也会出现） */
+[data-site-header] {
+  position: sticky;
+  top: 0;
+  z-index: 10;
+  background: var(--bg);
+  border-bottom: 1px solid var(--border);
+}
+[data-header-bar] {
+  min-height: 3.5rem;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 1rem;
+}
+[data-header-bar] > a {
+  font-weight: 600;
+  color: var(--heading);
+  text-decoration: none;
+  white-space: nowrap;
+}
+
+/* 工具区：主题 / 搜索 / 汉堡 + 桌面导航（对齐原站 flex items-center gap-4） */
+[data-header-tools] { display: flex; align-items: center; gap: 0.75rem; }
+[data-header-tools] > button,
+[data-header-tools] > a[data-icon-link] {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  /* 40px：比原站（30px）大一圈，稳妥满足触屏点击面积；header 高 3.5rem 放得下 */
+  min-width: 2.5rem;
+  min-height: 2.5rem;
+  padding: 0;
+  border: 0;
+  border-radius: 6px;
+  background: none;
+  color: var(--muted);
+  cursor: pointer;
+  text-decoration: none;
+}
+[data-header-tools] > button:hover,
+[data-header-tools] > a[data-icon-link]:hover { color: var(--heading); }
+
+/* 主题图标：显示"当前主题"的图标（浅色=太阳，深色=月亮）。
+   这里绝不能加 [data-header-tools] svg{display:block} 这类通用规则 ——
+   它的特异性会压过下面的显隐规则，导致两个图标一起冒出来（踩过）。
+   未手动选择时（html 上没有 class）跟随系统偏好。 */
+[data-theme-toggle] svg { display: none; }
+:root.light [data-theme-toggle] svg[data-icon="sun"],
+:root.dark [data-theme-toggle] svg[data-icon="moon"] { display: block; }
+@media (prefers-color-scheme: light) {
+  :root:not(.dark) [data-theme-toggle] svg[data-icon="sun"] { display: block; }
+}
+@media (prefers-color-scheme: dark) {
+  :root:not(.light) [data-theme-toggle] svg[data-icon="moon"] { display: block; }
+}
+
+/* 触摸设备再放大一档（≥44px） */
+@media (pointer: coarse) {
+  [data-header-tools] > button,
+  [data-header-tools] > a[data-icon-link] { min-width: 2.75rem; min-height: 2.75rem; }
+}
+
+/* 桌面导航在 40rem 以上才出现；以下收进汉堡菜单（与原站 sm 断点一致）。
+   注意选择器要写成 [data-header-tools] > [data-menu-toggle]：上面那条
+   [data-header-tools] > button 的 display:flex 特异性更高，压不住就直接显形。 */
+[data-menu-toggle] { display: flex; }
+[data-site-nav] { display: none; }
+@media (min-width: 40rem) {
+  [data-header-tools] > [data-menu-toggle] { display: none; }
+  [data-site-nav] { display: flex; align-items: center; gap: 1.5rem; }
+}
+
+[data-site-nav] a,
+#mobile-menu a {
+  color: var(--muted);
+  font-weight: 500;
+  font-size: 1rem;
+  text-decoration: none;
+  border-radius: 4px;
+}
+[data-site-nav] a:hover,
+#mobile-menu a:hover { color: var(--heading); }
+
+/* 移动端展开菜单 */
+#mobile-menu {
+  border-top: 1px solid var(--border);
+  background: var(--bg);
+}
+#mobile-menu[hidden] { display: none; }
+#mobile-menu nav {
+  max-width: 790px;
+  margin-inline: auto;
+  padding: 0.35rem 1.25rem 0.85rem;
+  display: flex;
+  flex-direction: column;
+}
+#mobile-menu a { padding: 0.7rem 0; }
+
+[data-site-footer] p {
+  margin: 0;
+  padding-block: 2.5rem 2rem;
+  color: var(--muted);
+  font-size: 0.875rem;
+}
+
+/* --- 正文排版 ------------------------------------------------------------ */
+article { padding-bottom: 4rem; }
+
+h1, h2, h3, h4, h5, h6 { color: var(--heading); line-height: 1.25; }
+h1 { font-size: 2.25rem; font-weight: 800; line-height: 2.5rem; margin: 0 0 2rem; }
+h2 { font-size: 1.5rem;  font-weight: 700; line-height: 2rem;   margin: 3rem 0 1.5rem; }
+h3 { font-size: 1.25rem; font-weight: 600; line-height: 2rem;   margin: 2rem 0 0.75rem; }
+h4 { font-size: 1rem;    font-weight: 600; line-height: 1.5rem; margin: 1.5rem 0 0.5rem; }
+
+p { margin-block: 1.25em; }
+
+/* 文章内链接：下划线 + 强调色（原站实测就是 underline，不是 hover 才出现） */
+a { color: var(--accent); font-weight: 500; }
+a:hover { text-decoration-thickness: 2px; }
+
+strong, b { font-weight: 600; color: var(--heading); }
+em, i { font-style: italic; }
+del { text-decoration: line-through; opacity: 0.75; }
+sup, sub { font-size: 0.75em; line-height: 0; }
+abbr[title] { text-decoration: underline dotted; cursor: help; }
+mark { background: color-mix(in srgb, var(--accent) 18%, transparent); color: inherit; }
+
+ul, ol { margin-block: 1.25em; padding-inline-start: 1.625rem; }
+ul { list-style: disc; }
+ol { list-style: decimal; }
+li { margin-block: 0.5em; padding-inline-start: 0.375rem; }
+li > ul, li > ol { margin-block: 0.5em; }
+
+blockquote {
+  margin: 1.6em 0;
+  padding-inline-start: 1em;
+  border-inline-start: 4px solid var(--rule);
+  font-style: italic;
+  font-weight: 500;
+  color: var(--heading);
+}
+blockquote p { margin-block: 1.25em; font-style: inherit; font-weight: inherit; }
+
+hr { margin-block: 3rem; border: 0; border-top: 1px solid var(--fg); }
+/* 注：正文里的 <hr> 用的是正文色（原站实测 light #4b4743 / dark #9fb9d0），
+   不是 --rule 那条更浅的线 —— 这里踩过，别改回 --rule。 */
+
+img, svg, video { max-width: 100%; height: auto; }
+figure { margin: 1.75em 0; }
+figcaption { margin-top: 0.5em; color: var(--muted); font-size: 0.875rem; text-align: center; }
+
+dl { margin-block: 1.25em; }
+dt { font-weight: 600; color: var(--heading); margin-top: 1em; }
+dd { margin-inline-start: 1.5rem; }
+
+details {
+  margin-block: 1.25em;
+  padding: 0.75rem 1rem;
+  border: 1px solid var(--border);
+  border-radius: 6px;
+}
+summary { cursor: pointer; font-weight: 600; color: var(--heading); }
+
+/* 代码：行内与块级 */
+code, kbd, samp, pre {
+  font-family: ui-monospace, SFMono-Regular, Menlo, Consolas, "Liberation Mono", monospace;
+}
+code {
+  background: var(--surface);
+  padding: 0.1em 0.375em;          /* 原站实测 1.4px / 5.25px（14px 字号） */
+  border-radius: 4px;
+  font-size: 0.875em;
+}
+pre {
+  margin-block: 1.5rem;
+  padding: 0.875rem 1rem;
+  background: var(--code-bg);
+  color: var(--code-fg);
+  border: 1px solid var(--code-border);
+  border-radius: 8px;
+  font-size: 0.875rem;
+  line-height: 1.65;
+  overflow-x: auto;
+}
+pre code { background: none; padding: 0; border-radius: 0; font-size: inherit; color: inherit; }
+
+/* 表格（窄屏整体缩一档） */
+table {
+  width: 100%;
+  margin-block: 1.75rem;
+  border-collapse: collapse;
+  font-size: 0.9375rem;
+  line-height: 1.5;
+}
+th, td { text-align: left; vertical-align: top; padding: 0.6875rem 0.625rem; border-bottom: 1px solid var(--table-line); }
+th { font-size: 0.875rem; font-weight: 600; background: var(--surface); padding-block: 0.5rem; }
+td { font-weight: 500; }
+@media (max-width: 40rem) {
+  table { font-size: 0.875rem; }
+  th, td { font-size: 0.8125rem; padding: 0.35rem 0.5rem; }
+}
+
+/* 脚注（org 导出为 #footnotes > #text-footnotes > div） */
+#footnotes { margin-top: 3rem; }
+#text-footnotes { font-size: 0.9375rem; }
+#text-footnotes > div {
+  display: flex;
+  gap: 0.5rem;
+  margin-block: 0.75rem;
+  padding-top: 0.75rem;
+  border-top: 1px solid var(--border);
+}
+#text-footnotes > div > div { flex: 1; min-width: 0; }
+#text-footnotes p { margin: 0; }
+#text-footnotes sup { font-size: 0.75em; }
+
+/* --- 首页 ---------------------------------------------------------------- */
+/* 双栏用 [data-home-columns]，不要用 main > div（标签云也是 main > div） */
+[data-home-columns] {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr);
+  gap: 2rem;
+  margin-top: 2rem;
+}
+@media (min-width: 40rem) {
+  [data-home-columns] { grid-template-columns: minmax(0, 1fr) minmax(0, 1fr); }
+}
+[data-home-columns] section { min-width: 0; }
+
+/* 区块标题栏：h2 + "View all →"（原站 flex items-baseline justify-between）
+   h2 移动 18px / md 24px；上间距 36px → 48px */
+[data-home-columns] section > header {
+  display: flex;
+  align-items: baseline;
+  justify-content: space-between;
+  gap: 1rem;
+  margin-bottom: 1.125rem;
+}
+[data-home-columns] section > header h2 {
+  margin: 2.25rem 0 0;
+  font-size: 1.125rem;
+  font-weight: 600;
+  line-height: 1.4;
+}
+[data-home-columns] section > header a {
+  font-size: 0.875rem;
+  color: var(--meta);
+  text-decoration: none;
+  white-space: nowrap;
+}
+[data-home-columns] section > header a:hover { color: var(--heading); }
+@media (min-width: 48rem) {
+  [data-home-columns] section > header h2 { margin-top: 3rem; font-size: 1.5rem; }
+}
+
+/* 列表行：标题与日期同一行、日期靠右（原站 flex h-11 items-center gap-4，
+   行高 44px；标题 15px 用标题色且无下划线，长标题省略号截断） */
+[data-home-columns] ul { list-style: none; margin: 0; padding: 0; }
+[data-home-columns] li {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+  min-height: 2.75rem;
+  margin: 0;
+  padding: 0;
+}
+[data-home-columns] li > a {
+  flex: 1 1 0%;
+  min-width: 0;
+  font-size: 0.9375rem;
+  font-weight: 400;
+  color: var(--heading);
+  text-decoration: none;
+  overflow: hidden;
+  white-space: nowrap;
+  text-overflow: ellipsis;
+}
+[data-home-columns] li > a:hover { text-decoration: underline; }
+[data-home-columns] li > time,
+[data-home-columns] li > span {
+  flex: 0 0 auto;
+  font-size: 0.8125rem;
+  color: var(--meta);
+  font-variant-numeric: tabular-nums;
+}
+
+a[data-cta] {
+  display: inline-block;
+  padding: 0.5rem 1.1rem;
+  border: 1px solid var(--accent);
+  border-radius: 999px;
+  text-decoration: none;
+  font-weight: 500;
+}
+a[data-cta]:hover { background: color-mix(in srgb, var(--accent) 10%, transparent); }
+
+/* --- 归档页（/posts/）：年份分组 + 发文热力图 ----------------------------- */
+/* 计数后缀（h1 与年份标题共用） */
+.archive-count {
+  color: var(--meta);
+  font-weight: 400;
+  font-size: 0.72em;
+}
+
+details.archive-year { border-top: 1px solid var(--border); }
+details.archive-year > summary {
+  display: flex;
+  align-items: center;
+  gap: 0.625rem;
+  padding: 1rem 0;
+  cursor: pointer;
+  list-style: none;
+  user-select: none;
+}
+details.archive-year > summary::-webkit-details-marker { display: none; }
+details.archive-year > summary h2 {
+  margin: 0;
+  font-size: 1.25rem;
+  font-weight: 600;
+}
+@media (min-width: 48rem) {
+  details.archive-year > summary h2 { font-size: 1.5rem; }
+}
+.archive-year .chev {
+  flex-shrink: 0;
+  color: var(--meta);
+  transition: transform 0.15s ease;
+}
+.archive-year[open] .chev { transform: rotate(90deg); }
+.archive-body { padding-bottom: 1.5rem; }
+
+/* 热力图：viewBox 687×89 = 53 周 × 7 天（步长 13、格子 11×11 rx2） */
+.heat-months {
+  position: relative;
+  height: 1.3em;
+  margin: 0.75rem 0 0.4rem;
+  font-size: 0.65rem;
+  line-height: 1;
+  color: var(--meta);
+}
+.heat-months span { position: absolute; opacity: 0.6; white-space: nowrap; }
+/* 窄屏只留季度月（原站 hidden sm:block 的效果） */
+@media (max-width: 39.99rem) {
+  .heat-months span[data-hide-sm] { display: none; }
+}
+.heat-body { position: relative; }
+@media (min-width: 40rem) {
+  .heat-body { padding-left: 2rem; }   /* 给星期标签列腾位 */
+}
+.heat-weekdays {
+  position: absolute;
+  left: 0;
+  top: 0;
+  bottom: 0;
+  width: 2rem;
+  font-size: 0.65rem;
+  line-height: 1;
+  color: var(--meta);
+  display: none;
+}
+@media (min-width: 40rem) {
+  .heat-weekdays { display: block; }
+}
+.heat-weekdays span { position: absolute; left: 0; opacity: 0.6; }
+svg.heat-grid { display: block; width: 100%; height: auto; }
+.heat-empty { fill: var(--rule); }
+.heat-cell:hover { stroke: var(--muted); stroke-width: 1; }
+.heat-l1 { fill: var(--heat-1); }
+.heat-l2 { fill: var(--heat-2); }
+.heat-l3 { fill: var(--heat-3); }
+.heat-l4 { fill: var(--heat-4); }
+
+/* 年份内的条目：时间在左、标题在右（注意与首页相反，对齐原站） */
+.archive-entries { margin-top: 1.25rem; }
+.archive-entry {
+  display: flex;
+  align-items: baseline;
+  gap: 1rem;
+  padding-block: 0.375rem;
+}
+.archive-entry time {
+  flex-shrink: 0;
+  width: 2.5rem;
+  color: var(--meta);
+  font-size: 0.8125rem;
+  font-variant-numeric: tabular-nums;
+  white-space: nowrap;
+}
+.archive-entry a { color: var(--heading); text-decoration: none; }
+.archive-entry a:hover { text-decoration: underline; }
+
+/* --- 数字花园（/til/）---------------------------------------------------- */
+.garden-stats {
+  display: flex;
+  align-items: flex-start;
+  gap: 2.5rem;
+  margin-bottom: 2.5rem;
+}
+.garden-stats > div { display: flex; flex-direction: column; }
+.garden-stat-num {
+  font-size: 1.5rem;
+  font-weight: 600;
+  line-height: 1;
+  color: var(--heading);
+  font-variant-numeric: tabular-nums;
+}
+.garden-stat-unit { margin-left: 0.125rem; font-size: 0.875rem; font-weight: 400; color: var(--meta); }
+.garden-stat-label { margin-top: 0.375rem; font-size: 0.8125rem; color: var(--meta); }
+
+.garden-cats { margin-bottom: 2.5rem; }
+/* 三个小标题字号同（text-meta = 13px/lh1.5），但间距不同：分类 mb-4、最近新增 mb-3。
+   行高必须显式给 1.5 —— 继承 body 的 1.85 会把每行撑高 5-6px（实测差：条目 46 vs 40）。 */
+.garden-cats-head {
+  margin-bottom: 1rem;
+  padding-inline: 0.75rem;
+  font-size: 0.8125rem;
+  line-height: 1.5;
+  font-weight: 500;
+  color: var(--heading);
+}
+.garden-recent-head {
+  margin-bottom: 0.75rem;
+  font-size: 0.8125rem;
+  line-height: 1.5;
+  font-weight: 500;
+  color: var(--heading);
+}
+.garden-cats-grid {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  column-gap: 1rem;
+}
+@media (min-width: 40rem) {
+  .garden-cats-grid { grid-template-columns: repeat(3, minmax(0, 1fr)); }
+}
+.garden-cat-group {
+  grid-column: 1 / -1;              /* 分组标签跨整行（原站 col-span-2 sm:col-span-3） */
+  margin: 1.25rem 0 0.375rem;       /* 组间 mt-5 / mb-1.5 */
+  padding-inline: 0.75rem;          /* px-3 */
+  font-size: 11px;
+  line-height: 1.5;
+  font-weight: 500;
+  color: var(--meta);
+}
+/* 首组没有上边距（原站 mt-0）：桌面左栏是 nav 里第 2 个孩子，小屏是网格首元素 */
+.garden-cat-group:first-child,
+.garden-cats-head + .garden-cat-group { margin-top: 0; }
+.garden-cat {
+  display: block;
+  padding: 0.375rem 0.75rem 0.375rem 0.625rem;
+  border-inline-start: 2px solid transparent;
+  line-height: 1.25rem;             /* 原站 text-sm 的 14/20，别继承 body 的 1.85 */
+  text-decoration: none;
+}
+.garden-cat:hover { border-inline-start-color: var(--rule); }
+.garden-cat-row { display: flex; align-items: center; justify-content: space-between; gap: 0.5rem; }
+.garden-cat-name {
+  font-size: 0.875rem;
+  line-height: 1.25rem;
+  color: var(--meta);
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+.garden-cat:hover .garden-cat-name { color: var(--heading); }
+.garden-cat-count {
+  flex-shrink: 0;
+  font-size: 0.75rem;
+  line-height: 1rem;                /* text-xs 的 12/16 */
+  color: var(--meta);
+  font-variant-numeric: tabular-nums;
+}
+.garden-cat-bar {
+  display: block;
+  width: 100%;
+  height: 2px;
+  margin-top: 0.375rem;
+  border-radius: 999px;
+  background: var(--border);
+}
+/* 细条填充固定用 ink-400（与 --accent 无关）：原站 bg-ink-400/50，深色 /40 */
+.garden-cat-bar > span {
+  display: block;
+  height: 100%;
+  border-radius: 999px;
+  background: var(--cat-bar);
+}
+
+/* 当前分类（分类页里的那一项）——原站 border-ink-500 + bg-ink-100 + font-medium */
+.garden-cat.is-active {
+  border-inline-start-color: var(--cat-active-border);
+  background: var(--cat-active-bg);
+}
+.garden-cat.is-active .garden-cat-name { color: var(--cat-active-fg); font-weight: 500; }
+.garden-cat.is-active .garden-cat-count { color: var(--cat-active-count); }
+
+/* --- TIL 三栏 shell（/til/ 下所有页面）----------------------------------- */
+/* 原站：min-[1280px]:grid grid-cols-[1fr_790px_1fr] —— 内容列固定 790 居中，
+   左栏（w-52 = 13rem）悬挂在左侧 1fr 轨道里。放在轨道里（而不是让内容列让位）
+   是为了让列表页/分类页/笔记页的正文左边缘完全一致。 */
+@media (min-width: 80rem) {
+  [data-til-shell] {
+    display: grid;
+    grid-template-columns: minmax(0, 1fr) 790px minmax(0, 1fr);
+  }
+  /* 必须 width:100%：grid item 上带 margin-inline:auto 会退化成 fit-content，
+     根页（内容窄）会缩到 634px。原站是 w-full。（实测踩过） */
+  [data-til-shell] > main { grid-column: 2; width: 100%; }
+  [data-til-side] { grid-column: 1; justify-self: end; }
+}
+/* pt-8 不是响应式的：所有宽度都要（放在媒体查询里会让 <1280px 少 32px） */
+[data-til-shell] > main { padding-top: 2rem; }
+/* 左栏只在列表页/分类页渲染（笔记页传 nil，压根没有这个元素）；<1280px 一律隐藏 */
+[data-til-side] { display: none; }
+@media (min-width: 80rem) {
+  [data-til-side] {
+    display: block;
+    width: 13rem;                 /* w-52 */
+    margin-inline-end: 1.5rem;    /* mr-6 */
+    padding-top: 2rem;            /* pt-8 */
+  }
+}
+[data-til-tree] { position: sticky; top: 5rem; }   /* sticky top-20 */
+
+/* 小屏内联分类树：≥1280px 交给左栏，别重复显示一份 */
+@media (min-width: 80rem) {
+  [data-til-inline] { display: none; }
+}
+
+/* --- 分类页 /til/<cat>/ ------------------------------------------------- */
+/* 对齐原站 layouts/til/list.html：面包屑 + 2xl 标题 + （有 #+HEADER 时）筛选
+   chips / 分组小节 /「其他」折叠块。数值全部来自原站 computed style 实测。 */
+.til-crumb {
+  margin-bottom: 1.5rem;
+  font-size: 0.875rem;
+  line-height: 1.25rem;
+  color: var(--meta);
+}
+.til-crumb a { color: inherit; text-decoration: none; }
+.til-crumb a:hover { color: var(--heading); }
+.til-crumb-sep { margin-inline: 0.375rem; color: var(--crumb-sep); }
+.til-crumb-cur { color: var(--heading); font-weight: 500; }
+
+.til-cat-title {
+  margin: 0 0 2.5rem;
+  font-size: 1.5rem;                /* text-2xl，不是全站 36px */
+  font-weight: 700;
+  line-height: 2rem;
+  letter-spacing: -0.6px;
+  color: var(--heading);
+}
+
+/* 顶部筛选条：原站 min-[1400px]:hidden —— 宽屏改由右栏承担 */
+.til-cat-chips {
+  display: flex;
+  gap: 0.5rem;
+  margin-bottom: 1rem;
+  padding-bottom: 0.75rem;
+  overflow-x: auto;
+  scrollbar-width: none;
+}
+.til-cat-chips::-webkit-scrollbar { display: none; }
+@media (min-width: 87.5rem) {
+  .til-cat-chips { display: none; }
+}
+.til-chip {
+  flex-shrink: 0;
+  padding: 0.25rem 0.75rem;
+  font-family: inherit;
+  font-size: 0.75rem;
+  line-height: 1rem;
+  color: var(--meta);
+  background: none;
+  border: 1px solid var(--border);
+  border-radius: 999px;
+  white-space: nowrap;
+  cursor: pointer;
+  transition: color 0.15s, background-color 0.15s;
+}
+.til-chip:hover { color: var(--heading); background: var(--row-hover); }
+.til-chip-n { color: var(--meta); }
+.til-chip-all { color: var(--accent); border-color: var(--ink-200-border); }
+.til-chip.is-active {
+  background: var(--chip-active-bg);
+  color: var(--chip-active-fg);
+  font-weight: 500;
+}
+
+.til-cat-sec { margin-bottom: 2.5rem; }
+.til-cat-sec-head {
+  display: flex;
+  align-items: baseline;
+  gap: 0.625rem;
+  margin-bottom: 0.5rem;
+}
+.til-cat-sec-head h2 { margin: 0; font-size: 1rem; font-weight: 600; color: var(--heading); }
+.til-cat-sec-n { font-size: 0.8125rem; color: var(--meta); font-variant-numeric: tabular-nums; }
+
+/* 条目列表：原站 space-y-px（相邻 1px） */
+.til-cat-sub > * + * { margin-top: 1px; }
+.til-entry {
+  display: flex;
+  align-items: baseline;
+  justify-content: space-between;
+  gap: 1rem;
+  padding: 0.5rem 0.75rem;
+  margin-inline: -0.75rem;
+  border-radius: 6px;
+  text-decoration: none;
+}
+.til-entry:hover { background: var(--row-hover); }
+.til-entry-t {
+  font-size: 0.9375rem;             /* 15px */
+  line-height: 1.40625rem;          /* 22.5px */
+  color: var(--list-title);
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+.til-entry:hover .til-entry-t { color: var(--accent); }
+.til-entry-d {
+  flex-shrink: 0;
+  font-size: 0.8125rem;             /* 13px */
+  line-height: 1.21875rem;          /* 19.5px */
+  color: var(--meta);
+  font-variant-numeric: tabular-nums;
+}
+
+/* 「其他」折叠块（原站 details.group + summary list-none） */
+.til-others > summary {
+  display: flex;
+  align-items: baseline;
+  gap: 0.625rem;
+  margin-bottom: 0.5rem;
+  cursor: pointer;
+  list-style: none;
+}
+.til-others > summary::-webkit-details-marker { display: none; }
+.til-others > summary h2 { margin: 0; font-size: 1rem; font-weight: 600; color: var(--heading); }
+.til-others-n { font-size: 0.8125rem; color: var(--meta); font-variant-numeric: tabular-nums; }
+.til-others[open] .til-others-n { display: none; }
+.til-others > summary svg {
+  width: 0.75rem;
+  height: 0.75rem;
+  margin-left: 0.125rem;
+  color: var(--meta);
+  transition: transform 0.15s;
+}
+.til-others[open] > summary svg { transform: rotate(90deg); }
+.til-others[open] > .til-cat-sub { margin-top: 0.5rem; }
+
+/* 右栏「本页分组」（≥1400px；原站 w-64 ml-6 pt-8 + 内层 sticky top-20） */
+[data-til-right] { display: none; }
+@media (min-width: 87.5rem) {
+  [data-til-right] {
+    display: block;
+    grid-column: 3;
+    justify-self: start;
+    width: 16rem;
+    margin-inline-start: 1.5rem;
+    padding-top: 2rem;
+  }
+}
+[data-til-right] > div { position: sticky; top: 5rem; }
+.til-cat-navhead {
+  margin-bottom: 0.75rem;
+  padding-inline: 0.75rem;
+  font-size: 0.8125rem;
+  line-height: 1.5;
+  font-weight: 500;
+  color: var(--heading);
+}
+.til-cat-nav { display: flex; flex-direction: column; gap: 0.25rem; }
+.til-cat-navbtn {
+  display: block;
+  width: 100%;
+  padding: 0.375rem 0.75rem;
+  font-family: inherit;
+  font-size: 0.875rem;
+  text-align: left;
+  color: var(--meta);
+  background: none;
+  border: 0;
+  border-radius: 6px;
+  cursor: pointer;
+  transition: color 0.15s, background-color 0.15s;
+}
+.til-cat-navbtn:hover { color: var(--heading); background: var(--row-hover); }
+.til-cat-navn { margin-left: 0.25rem; font-size: 0.75rem; color: var(--meta); }
+.til-cat-navbtn.is-active {
+  background: var(--chip-active-bg);
+  color: var(--chip-active-fg);
+  font-weight: 500;
+}
+.til-cat-navall {
+  margin-top: 0.5rem;
+  padding: 0.375rem 0.75rem;
+  font-family: inherit;
+  font-size: 0.875rem;
+  text-align: left;
+  color: var(--accent);
+  background: none;
+  border: 0;
+  border-radius: 6px;
+  cursor: pointer;
+}
+.til-cat-navall:hover { background: var(--row-hover); }
+
+.garden-recent { display: flex; flex-direction: column; }
+.garden-entry {
+  display: flex;
+  align-items: baseline;
+  justify-content: space-between;
+  gap: 1rem;
+  padding: 0.375rem 0.5rem;
+  margin-inline: -0.5rem;
+  border-radius: 6px;
+  line-height: 1.5;                 /* 原站 15/22.5、13/19.5；继承 body 1.85 会撑高（实测 34.5 → 更高） */
+  text-decoration: none;
+}
+.garden-entry:hover { background: color-mix(in srgb, var(--fg) 7%, transparent); }
+.garden-entry > span:first-child {
+  font-size: 0.9375rem;
+  color: var(--fg);
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+.garden-entry:hover > span:first-child { color: var(--accent); }
+.garden-entry > span:last-child {
+  flex-shrink: 0;
+  font-size: 0.8125rem;
+  color: var(--meta);
+  font-variant-numeric: tabular-nums;
+}
+
+/* --- 目录（「本页内容」，TIL 页与部分根页面）------------------------------ */
+details.page-toc {
+  margin-bottom: 2rem;
+  border: 1px solid var(--border);
+  border-radius: 8px;
+}
+details.page-toc > summary {
+  padding: 0.75rem 1rem;
+  font-size: 0.875rem;
+  font-weight: 500;
+  color: var(--toc);
+  cursor: pointer;
+  user-select: none;
+}
+.til-toc { padding: 0 1rem 1rem; }
+.til-toc ul { list-style: none; margin: 0; padding: 0; }
+.til-toc li { margin-block: 0.3rem; }
+.til-toc ul ul { padding-inline-start: 1em; }
+.til-toc a {
+  font-size: 0.875rem;
+  line-height: 1.5;
+  font-weight: 500;
+  color: var(--toc);
+  text-decoration: none;
+}
+.til-toc a:hover { color: var(--accent); text-decoration: underline; }
+
+.garden-actions { margin-bottom: 2rem; }
+.garden-actions button {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.375rem;
+  padding: 0.375rem 0.75rem;
+  font-size: 0.8125rem;
+  font-weight: 500;
+  color: var(--meta);
+  background: none;
+  border: 1px solid var(--border);
+  border-radius: 999px;
+  cursor: pointer;
+}
+.garden-actions button:hover { color: var(--heading); border-color: var(--rule); }
+
+/* 计划列表（只在有 SCHEDULED/DEADLINE 时出现） */
+[data-plan-list] { list-style: none; margin: 0 0 2.5rem; padding: 0; }
+[data-plan-list] li { display: flex; align-items: baseline; gap: 0.7rem; padding-block: 0.3rem; }
+[data-plan-list] time { flex-shrink: 0; color: var(--meta); font-size: 0.8125rem; font-variant-numeric: tabular-nums; }
+[data-plan-list] .plan-kind {
+  flex-shrink: 0;
+  padding: 0.05rem 0.4rem;
+  font-size: 0.6875rem;
+  color: var(--meta);
+  border: 1px solid var(--border);
+  border-radius: 999px;
+}
+[data-plan-list] a { color: var(--heading); text-decoration: none; }
+[data-plan-list] a:hover { text-decoration: underline; }
+
+/* --- 列表页（/posts/ /til/ /til/<cat>/）--------------------------------- */
+main > ul {
+  list-style: none;
+  margin: 2rem 0 0;
+  padding: 0;
+}
+main > ul > li {
+  display: flex;
+  align-items: baseline;
+  gap: 1rem;
+  margin: 0;
+  padding: 0.4rem 0;
+  border-bottom: 1px solid var(--border);
+}
+main > ul > li > a { text-decoration: none; }
+main > ul > li > a:hover { text-decoration: underline; }
+main > ul > li > time,
+main > ul > li > span {
+  margin-inline-start: auto;
+  color: var(--muted);
+  font-size: 0.8125rem;
+  flex-shrink: 0;
+  font-variant-numeric: tabular-nums;
+}
+
+/* --- 标签页 -------------------------------------------------------------- */
+[data-tag-cloud] { display: flex; flex-wrap: wrap; gap: 0.7rem; margin-top: 1.5rem; }
+[data-tag-cloud] a {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.4rem;
+  padding: 0.3rem 0.85rem;
+  border: 1px solid var(--border);
+  border-radius: 999px;
+  font-size: 0.875rem;
+  text-decoration: none;
+}
+[data-tag-cloud] a:hover { border-color: var(--accent); }
+[data-tag-cloud] span { color: var(--muted); font-size: 0.8125rem; font-variant-numeric: tabular-nums; }
+
+[data-tag-entries] { list-style: none; padding: 0; margin: 0.5rem 0 0; }
+[data-tag-entries] li {
+  display: flex;
+  align-items: baseline;
+  gap: 1.1rem;
+  margin: 0;
+  padding: 0.3rem 0;
+}
+[data-tag-entries] time { color: var(--muted); font-size: 0.8125rem; flex-shrink: 0; font-variant-numeric: tabular-nums; }
+[data-tag-entries] a { text-decoration: none; }
+[data-tag-entries] a:hover { text-decoration: underline; }
+
+/* --- 相册 ---------------------------------------------------------------- */
+[data-photo-series] {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 1rem 1.5rem;
+  margin-top: 1.5rem;
+}
+[data-photo-series] a { display: block; text-decoration: none; }
+[data-photo-series] img {
+  width: 100%;
+  height: auto;
+  display: block;
+  border-radius: 2px;
+  background: var(--surface);
+  transition: transform 0.3s ease, opacity 0.2s ease;
+}
+[data-photo-series] a:hover img { transform: scale(1.02); }
+[data-photo-series] span { display: block; margin-top: 0.55rem; font-size: 1.0625rem; font-weight: 600; }
+
+/* 多列 masonry（对齐原站 columns-2 / sm:3 / lg:4）。
+   不写内联 style：img 的 width/height 属性 + height:auto 已能占位防跳动。 */
+[data-lb-set] { columns: 2; column-gap: 0.75rem; }
+@media (min-width: 40rem) { [data-lb-set] { columns: 3; } }
+@media (min-width: 64rem) { [data-lb-set] { columns: 4; } }
+[data-lb-set] > a {
+  display: block;
+  margin-bottom: 0.75rem;
+  break-inside: avoid;
+  overflow: hidden;
+  border-radius: 2px;
+  background: var(--surface);
+}
+[data-lb-set] img { width: 100%; height: auto; display: block; transition: opacity 0.2s ease; }
+[data-lb-set] > a:hover img { opacity: 0.85; }
+
+/* 灯箱：[hidden] 由 static/photos.js 切换，零 class */
+#ph-lb {
+  position: fixed;
+  inset: 0;
+  z-index: 70;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  padding: 1rem;
+  background: rgba(0, 0, 0, 0.95);
+  user-select: none;
+  -webkit-user-select: none;
+}
+#ph-lb[hidden] { display: none; }
+#ph-lb > button {
+  position: absolute;
+  z-index: 10;
+  width: 2.75rem;
+  height: 2.75rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border: 0;
+  border-radius: 999px;
+  background: transparent;
+  color: rgba(255, 255, 255, 0.8);
+  cursor: pointer;
+}
+#ph-lb > button:hover { color: #fff; }
+#ph-lb-close { top: 0.75rem; right: 0.75rem; }
+#ph-lb-prev { left: 0.5rem; top: 50%; transform: translateY(-50%); font-size: 1.875rem; color: rgba(255, 255, 255, 0.7); }
+#ph-lb-next { right: 0.5rem; top: 50%; transform: translateY(-50%); font-size: 1.875rem; color: rgba(255, 255, 255, 0.7); }
+#ph-lb-img { max-height: 82vh; max-width: 94vw; object-fit: contain; }
+#ph-lb-meta {
+  margin-top: 0.75rem;
+  max-width: 94vw;
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+  font-size: 0.8125rem;
+  color: rgba(255, 255, 255, 0.75);
+}
+#ph-lb-cap { overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
+#ph-lb-count { font-variant-numeric: tabular-nums; color: rgba(255, 255, 255, 0.55); }
+
+/* --- 无障碍：跳转到内容 --------------------------------------------------- */
+[data-skip-link] {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  padding: 0;
+  margin: -1px;
+  overflow: hidden;
+  clip: rect(0, 0, 0, 0);
+  white-space: nowrap;
+  border: 0;
+}
+[data-skip-link]:focus,
+[data-skip-link]:active {
+  position: fixed;
+  top: 0.5rem;
+  left: 0.5rem;
+  z-index: 60;
+  width: auto;
+  height: auto;
+  margin: 0;
+  padding: 0.5rem 1rem;
+  overflow: visible;
+  clip: auto;
+  background: var(--bg);
+  border: 1px solid var(--border);
+  border-radius: 6px;
+  color: var(--heading);
+}
+
+/* --- 移动端 -------------------------------------------------------------- */
+/* 长 URL / 长英文串不撑破屏幕（正文里贴链接很常见） */
+article, main { overflow-wrap: break-word; }
+
+/* 表格：内容长就换行，绝不横向溢出（对比原站这里会溢出） */
+th, td { overflow-wrap: anywhere; }
+
+@media (pointer: coarse) {
+  /* 触摸设备：列表项与标签条目给到接近 44px 的行高 */
+  main > ul > li { padding-block: 0.7rem; }
+  [data-tag-entries] li { padding-block: 0.55rem; }
+  [data-site-header] nav a { padding-block: 0.35rem; }
+}
+
+/* iOS 上输入框字号 <16px 会触发自动放大 */
+@media (max-width: 40rem) {
+  input, select, textarea, button { font-size: 1rem; }
+}
+
+/* 低动效偏好 */
+@media (prefers-reduced-motion: reduce) {
+  *, *::before, *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
+  }
+}
+
+/* --- 文章页：日期条 / 分割线 / 标签 / 评论区 ----------------------------- */
+/* 数值全部取自原站 posts 页的 computed style */
+.post-meta {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 2rem;              /* mb-8 */
+  padding-bottom: 1.5rem;           /* pb-6 */
+  border-bottom: 1px solid var(--border);
+}
+.post-meta time { font-size: 0.875rem; line-height: 1.25rem; color: var(--meta); }
+
+.post-tags a {
+  font-size: 1rem;
+  font-weight: 400;
+  color: var(--accent);
+  text-decoration: underline;
+}
+.post-comments { margin: 3rem 0; }
+.post-comments-head {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  margin: 3rem 0 1.5rem;
+  font-size: 1.5rem;
+  font-weight: 600;
+  color: var(--heading);
+}
+.post-comments-head svg { width: 1rem; height: 1rem; flex-shrink: 0; }
+.post-reply { margin-bottom: 1.25rem; text-align: center; }
+.post-reply a {
+  font-size: 0.875rem;
+  font-weight: 400;
+  color: var(--meta);
+  text-decoration: underline;
+}
+
+/* 404 页（原站 text-center py-16 + 按钮） */
+.notfound { padding-block: 4rem; text-align: center; }
+.notfound h1 { font-weight: 700; }
+.notfound p { margin: 1.25rem 0; color: var(--meta); }
+.notfound-btn {
+  display: inline-block;
+  padding: 0.5rem 1rem;
+  font-weight: 400;
+  color: var(--toc);
+  text-decoration: none;
+  border: 1px solid var(--border);
+  border-radius: 6px;
+}
+.notfound-btn:hover { background: var(--row-hover); }
+
+/* --- 存量内容里的少量 class 兜底 ----------------------------------------- */
+/* 内容是既成事实：早期文章里用过个别 Tailwind 类名。这不是要引入 class 体系，
+  只是不让这些类名完全失效。 */
+[class~="text-center"] { text-align: center; }
+[class~="text-2xl"] { font-size: 1.5rem; line-height: 1.35; }
