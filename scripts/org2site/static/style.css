@@ -231,7 +231,19 @@ table {
   line-height: 1.5;
 }
 th, td { text-align: left; vertical-align: top; padding: 0.6875rem var(--space-4); border-bottom: 1px solid var(--table-line); }
-th { font-size: var(--text-base); font-weight: 600; background: var(--surface); padding-block: var(--space-3); }
+th {
+  font-size: var(--text-base);
+  font-weight: 600;
+  background: var(--surface);
+  padding-block: var(--space-3);
+  /* 表头不拆词：窄列的 "Release Year" 会被上面的 overflow-wrap:anywhere 拆成 R/el/ea/se…
+     十几行，把表头行撑到 227px（实测 watch 页）。改成表头一律不换行。 */
+  white-space: nowrap;
+  overflow-wrap: normal;
+}
+/* 首列与末列（Type / Release Year 这类短列）收缩到内容宽，余量让给长文本列。
+   不写死 px：内容变长仍自适应。 */
+th:first-child, th:last-child { width: 1%; }
 td { font-weight: 500; }
 /* 窄屏：代码块/文本块换行，别让长命令、长注释在手机上横向拖（宽屏保持原样，代码观感不变） */
 @media (max-width: 40rem) {
@@ -1220,6 +1232,23 @@ svg.heat-grid { display: block; width: 100%; height: auto; }
 }
 
 /* --- 移动端 -------------------------------------------------------------- */
+/* 窄屏表头允许换行（层序要在 components 之上，否则被 th{white-space:nowrap} 压掉）——
+   但不许拆词：overflow-wrap: normal。桌面 nowrap 是安全的（100 页全扫无溢出）；
+   窄屏下 nowrap 会让 "Total specificity" / 5 列中文表头超出 372px 容器把整页顶宽。 */
+@media (max-width: 40rem) {
+  /* 用 table th（0,0,0,2）而不是 th（0,0,0,1）：同层里还有一条
+     `th, td { overflow-wrap: anywhere }`，同特异性下按源码顺序会把它压回来
+     → 表头继续被拆成 R/el/ea/se… 十几行、整行 226px。提高特异性才稳。
+     最终形态：anywhere + min-width: 3.5rem。
+     - 用 anywhere 而不是 break-word：break-word 不参与 min-content 计算，遇到
+       "Use cases/notes/competitive…" 这种超长单词，列的最小宽度就是那个词（≈173px），
+       四列合计把表撑到 518px 顶出屏幕。
+     - 加 min-width 抵消 anywhere 的副作用：否则列会被压到 1 个字符宽，
+       "Release Year" 拆成十几行，整行表头 226px（就是最初要修的毛病）。
+     56px × 6 列 = 336px ≤ 手机 372px 容器，足够窄的列也不会溢出。 */
+  table th { white-space: normal; overflow-wrap: anywhere; min-width: 3.5rem; }
+}
+
 /* 长 URL / 长英文串不撑破屏幕（正文里贴链接很常见） */
 article, main { overflow-wrap: break-word; }
 
