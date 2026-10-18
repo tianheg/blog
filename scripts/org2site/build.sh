@@ -162,7 +162,10 @@ ensure_org
 emacs_run -Q --batch -L "$ORG_DIR" --eval "(progn (require 'org) (princ (format \"toolchain: emacs %s / org %s (%s)\\n\" emacs-version (org-version) (locate-library \"org\"))))"
 # org/ 就是内容真源（2026-10 迁移完成，content/ 已下线）：直接改 org/*.org，构建读的就是它。
 # content/ 与转换期脚本（md2org.py / migrate.py）留在 git 历史里，工作区不再有。
-emacs_run -Q --batch -L "$ORG_DIR" -l scripts/org2site/build.el org "$OUT" </dev/null
+emacs_run -Q --batch -L "$ORG_DIR" -l scripts/org2site/build.el org "$OUT" </dev/null || {
+  echo "org2site 导出失败（上面有 FAIL / backtrace）；中止，避免把残缺产物当成构建成功" >&2
+  exit 1
+}
 
 echo "== 2/3 PageFind 搜索索引"
 ensure_pagefind

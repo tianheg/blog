@@ -49,8 +49,13 @@
       "")))
 
 (defun org2site--day (date)
-  "取日期部分（前 10 字符）。"
-  (substring date 0 (min 10 (length date))))
+  "取日期部分（前 10 字符）。空/非法日期返回哨兵 \"0000-01-01\"：排序自然落到最后、
+归档里归入「无日期」分组。必须对任何输入都返回合法字符串 —— 一个缺 #+DATE: 的草稿
+曾让归档页 substring(\"\" 0 4) 直接 args-out-of-range，把整站构建打断。"
+  (let ((d (or date "")))
+    (if (string-match "\\([0-9]\\{4\\}-[0-9]\\{2\\}-[0-9]\\{2\\}\\)" d)
+        (match-string 1 d)
+      "0000-01-01")))
 
 (defun org2site-iso8601 (date)
   "2026-10-15 22:24:47 → 2026-10-15T22:24:47+08:00（sitemap 用）。
@@ -119,21 +124,28 @@
     items "")
    "</channel>\n</rss>\n"))
 
+(defun org2site--lastmod-tag (date)
+  "有真实日期才输出 <lastmod>。页面文件（uses/links/watch/search…）本来没有日期，
+大列表里硬塞 1970-01-01 / 0000-01-01 属于非法或误导值 —— sitemap 里 lastmod 本就可选。"
+  (let ((d (org2site--day date)))
+    (if (equal d "0000-01-01") ""
+      (format "<lastmod>%s</lastmod>" (org2site-iso8601 d)))))
+
 (defun org2site-sitemap-xml (pages)
   (concat
    "<?xml version=\"1.0\" encoding=\"utf-8\"?>\n"
    "<urlset xmlns=\"http://www.sitemaps.org/schemas/sitemap/0.9\">\n"
    (concat
-    (format "<url><loc>%s/</loc><lastmod>%s</lastmod></url>\n"
+    (format "<url><loc>%s/</loc>%s</url>\n"
             org2site-base-url
-            (org2site-iso8601 (if pages (nth 2 (car pages)) "")))
+            (org2site--lastmod-tag (if pages (nth 2 (car pages)) "")))
     (format "<url><loc>%s/posts/</loc></url>\n" org2site-base-url)
     (format "<url><loc>%s/til/</loc></url>\n" org2site-base-url)
     (format "<url><loc>%s/photos/</loc></url>\n" org2site-base-url))
    (mapconcat
     (lambda (p)
-      (format "<url><loc>%s%s</loc><lastmod>%s</lastmod></url>\n"
-              org2site-base-url (nth 0 p) (org2site-iso8601 (nth 2 p))))
+      (format "<url><loc>%s%s</loc>%s</url>\n"
+              org2site-base-url (nth 0 p) (org2site--lastmod-tag (nth 2 p))))
     pages "")
    "</urlset>\n"))
 
@@ -149,6 +161,9 @@
   "文件头有 #+NOEXPORT: t 就不发布（agenda 等内部文件用）。"
   (equal "t" (org2site--kw file "NOEXPORT")))
 
+(defvar org2site--no-date-files nil
+  "缺可解析 #+DATE:、被跳过不构建的内容页（rel . 原始值）；构建结束时点名列出来。")
+
 (defun org2site-scan (org-root)
   "扫描 org，返回 ((url title date section rel tags) ...)，按日期倒序。
 _index.org 是 Hugo 语义里的 section 索引，不是页面 —— 跳过，标题另用
@@ -159,14 +174,22 @@ org2site--index-title 取；#+NOEXPORT: t 的文件也不发布。"
                   (org2site--noexport-p f))
         (let* ((rel (file-relative-name f org-root))
                (noext (file-name-sans-extension rel))
-               (section (car (split-string noext "/"))))
-          (push (list (concat "/" noext "/")
-                      (or (org2site--typo-string (org2site--kw f "TITLE")) noext)
-                      (org2site--date (or (org2site--kw f "DATE") ""))
-                      section rel
-                      (org2site--tags f)
-                      (org2site--kw f "HEADER"))
-                out))))
+               (section (car (split-string noext "/")))
+               (raw-date (or (org2site--kw f "DATE") ""))
+               (date (org2site--date raw-date)))
+          ;; 规则（2026-10-19 用户定）：posts/ 与 til/ 下的内容页必须有可解析的 #+DATE:；
+          ;; 没有的**直接跳过不构建**（不进归档/RSS/sitemap），只在构建日志里点名。
+          ;; 页面文件（uses/links/watch/search…）本来就没有日期，照常构建。
+          (if (and (member section '("posts" "til"))
+                   (not (string-match "[0-9]\\{4\\}-[0-9]\\{2\\}-[0-9]\\{2\\}" date)))
+              (push (cons rel raw-date) org2site--no-date-files)
+            (push (list (concat "/" noext "/")
+                        (or (org2site--typo-string (org2site--kw f "TITLE")) noext)
+                        date
+                        section rel
+                        (org2site--tags f)
+                        (org2site--kw f "HEADER"))
+                  out)))))
     (sort out (lambda (a b) (string> (nth 2 a) (nth 2 b))))))
 
 (defun org2site-write (out-root url html)
@@ -494,18 +517,23 @@ org2site--index-title 取；#+NOEXPORT: t 的文件也不发布。"
           "\n</div>\n"))
 
 (defun org2site-year-html (year pages &optional open)
-  (let ((days (org2site--group-by (lambda (p) (org2site--day (nth 2 p))) pages)))
+  (let* ((no-date (string= year "0000"))
+         (label (if no-date "无日期" year))
+         (days (org2site--group-by (lambda (p) (org2site--day (nth 2 p))) pages)))
     (concat
      ;; 只有最新那年展开，历史年份折叠（对齐原站：Hugo 产物里第一个 details 带 open，其余都没有）
      (format "<details class=\"archive-year\"%s>\n<summary>\n" (if open " open" ""))
      "<svg class=\"chev\" viewBox=\"0 0 24 24\" width=\"12\" height=\"12\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"2.5\" stroke-linecap=\"round\" stroke-linejoin=\"round\" aria-hidden=\"true\"><path d=\"M9 5l7 7-7 7\"/></svg>\n"
-     (format "<h2>%s<span class=\"archive-count\"> · %d 篇</span></h2>\n" year (length pages))
-     "</summary>\n<div class=\"archive-body\">\n<div class=\"heat-main\">\n"
-     (org2site-heat-months-html year)
-     "<div class=\"heat-body\">\n"
-     "<div class=\"heat-weekdays\"><span style=\"top:20.8%\">Mon</span><span style=\"top:50%\">Wed</span><span style=\"top:79.2%\">Fri</span></div>\n"
-     (org2site-heatmap-svg year days)
-     "</div>\n</div>\n"
+     (format "<h2>%s<span class=\"archive-count\"> · %d 篇</span></h2>\n" label (length pages))
+     "</summary>\n<div class=\"archive-body\">\n"
+     ;; 无日期分组（year=0000）没有可画的热力图，跳过整块 heat 结构
+     (unless no-date
+       (concat "<div class=\"heat-main\">\n"
+               (org2site-heat-months-html year)
+               "<div class=\"heat-body\">\n"
+               "<div class=\"heat-weekdays\"><span style=\"top:20.8%\">Mon</span><span style=\"top:50%\">Wed</span><span style=\"top:79.2%\">Fri</span></div>\n"
+               (org2site-heatmap-svg year days)
+               "</div>\n</div>\n"))
      (org2site-archive-entries-html pages)
      "</div>\n</details>\n")))
 
@@ -1156,6 +1184,11 @@ stroke-linecap=\"round\" stroke-linejoin=\"round\" aria-hidden=\"true\">\
       (princ (format "wikilink 未解析（已退成纯文本）：%d 处%s\n"
                      (length un)
                      (if un (format "；样例 %s" (mapconcat #'identity (seq-take un 5) " | ")) ""))))
+  (when org2site--no-date-files
+    (princ (format "WARN %d file(s) under posts/ or til/ have no usable #+DATE: -> SKIPPED (not built)\n"
+                   (length org2site--no-date-files)))
+    (dolist (ndf (nreverse org2site--no-date-files))
+      (princ (format "      %s   (DATE=%S)\n" (car ndf) (cdr ndf)))))
     (princ (format "文章 %d 篇 OK / %d FAIL（共 %d）；index.xml / sitemap.xml / 404.html\n"
                    ok fail (length pages)))
     (dolist (e (seq-take (nreverse errs) 30))
