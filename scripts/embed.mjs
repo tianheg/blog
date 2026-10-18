@@ -48,7 +48,7 @@ process.argv = [process.argv[0], process.argv[1], ...argvAll.slice(1)];
 function relatedMain() {
   const SEM = join(BLOG_ROOT, "static", "pagefind-semantic");
   const OUTF = join(BLOG_ROOT, "data", "related.json");
-  const CONTENT = join(BLOG_ROOT, "content");
+  const ORG = join(BLOG_ROOT, "org");
   const TOP_N = 5, MIN_SCORE = 0.62;
 
   const pages = JSON.parse(readFileSync(join(SEM, "pages.json"), "utf-8"));
@@ -79,13 +79,18 @@ function relatedMain() {
     const out = new Set();
     const rel = permalink.replace(/^\/+|\/+$/g, "");
     let text = "";
-    try { text = readFileSync(join(CONTENT, rel + ".md"), "utf-8"); } catch { /* 区段页无 md → 空集 */ }
+    try { text = readFileSync(join(ORG, rel + ".org"), "utf-8"); } catch { /* 区段页无源文件 → 空集 */ }
     if (text) {
+      // 站内绝对路径：markdown 形态 ](/x/)（历史遗留）与 org 形态 [[/x][desc]]
       for (const m of text.matchAll(/\]\((\/[^\)\s#]+)\)/g)) {
         out.add(m[1].endsWith("/") ? m[1] : m[1] + "/");
       }
-      for (const m of text.matchAll(/\[\[([^\]\[]+)\]\]/g)) {
-        const name = m[1].split("|")[0].split("#")[0].trim().toLowerCase();
+      for (const m of text.matchAll(/\[\[(\/[^\]\s]+?)(?:\]\[[^\]]*\])?\]\]/g)) {
+        out.add(m[1].endsWith("/") ? m[1] : m[1] + "/");
+      }
+      // wikilink：[[slug]] / [[slug][desc]] / [[slug|desc]] → 用 slug 索引换正式 URL
+      for (const m of text.matchAll(/\[\[([^\]\s/]+?)(?:\|[^\]]*|\]\[[^\]]*\])?\]\]/g)) {
+        const name = m[1].split("#")[0].trim().toLowerCase();
         if (idx.has(name)) out.add(idx.get(name));
       }
     }

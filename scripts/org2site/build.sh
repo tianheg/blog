@@ -90,15 +90,8 @@ mkdir -p "$OUT"
 
 echo "== 1/3 org2site 导出 → $OUT"
 ensure_emacs
-# content/ 是内容真源，org/ 是从它转换来的构建输入（且 CLOCK/agenda 这类数据只活在 org/ 里）。
-# 常见坑：改了 content/ 忘了跑 migrate.py → 上线旧内容。比「最新 content mtime vs 最新 org mtime」。
-newest_content=$(find content -name '*.md' -printf '%T@\n' 2>/dev/null | sort -n | tail -1)
-newest_org=$(find org -name '*.org' -printf '%T@\n' 2>/dev/null | sort -n | tail -1)
-if [ -n "$newest_content" ] && [ -n "$newest_org" ] \
-   && awk "BEGIN{exit !($newest_content > $newest_org)}"; then
-  echo "⚠️  content/ 里有比 org/ 新的文件 —— 改过内容就先跑："
-  echo "     python3 scripts/org2site/migrate.py content org"
-fi
+# org/ 就是内容真源（2026-10 迁移完成，content/ 已下线）：直接改 org/*.org，构建读的就是它。
+# content/ 与转换期脚本（md2org.py / migrate.py）留在 git 历史里，工作区不再有。
 "$EMACS" -Q --batch -l scripts/org2site/build.el org "$OUT" </dev/null
 
 echo "== 2/3 PageFind 搜索索引"

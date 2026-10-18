@@ -123,9 +123,9 @@ const contentFiles = [];
   for (const entry of readdirSync(dir, { withFileTypes: true })) {
     const p = join(dir, entry.name);
     if (entry.isDirectory()) walk(p);
-    else if (entry.name.endsWith(".md")) contentFiles.push(p);
+    else if (entry.name.endsWith(".org")) contentFiles.push(p);
   }
-})(join(ROOT, "content"));
+})(join(ROOT, "org"));
 
 function usagesOf(target) {
   const base = target.split("|")[0].split("#")[0].trim();
@@ -195,7 +195,7 @@ process.exit(1);
  *                              --strict 时 WARN 也算失败
  *
  * 用法：
- *   node scripts/check.mjs unicode                 # 检 content/，ERROR 失败 WARN 提示
+ *   node scripts/check.mjs unicode                 # 检 org/，ERROR 失败 WARN 提示
  *   npm run check-unicode -- --list       # WARN 也打全部明细
  *   npm run check-unicode -- --strict     # WARN 也当失败（CI 上更严）
  *   npm run check-unicode -- --content /path/to/dir
@@ -215,7 +215,7 @@ const optOf = (f, d) => {
 };
 
 const ROOT = process.cwd();
-const CONTENT = resolve(ROOT, optOf("--content", "content"));
+const CONTENT = resolve(ROOT, optOf("--content", "org"));
 const LIST = has("--list");
 const STRICT = has("--strict");
 
@@ -273,14 +273,14 @@ try {
   EMOJI = /[\u{1F300}-\u{1FAFF}\u{2600}-\u{27BF}]/u; // 老 node 兜底
 }
 
-// ── 遍历 content/ ────────────────────────────────────────────────
+// ── 遍历 org/ ────────────────────────────────────────────────
 const files = [];
 (function walk(dir) {
   for (const e of readdirSync(dir, { withFileTypes: true })) {
     if (e.name.startsWith(".") || e.name === "node_modules") continue;
     const p = join(dir, e.name);
     if (e.isDirectory()) walk(p);
-    else if (e.name.endsWith(".md")) files.push(p);
+    else if (e.name.endsWith(".org")) files.push(p);
   }
 })(CONTENT);
 
@@ -484,10 +484,10 @@ process.exit(0);
     else pass("\u597d\u6837\u672c 0 ERROR");
     /^\s*\u2713/m.test(good.out) ? pass("\u597d\u6837\u672c\u8f93\u51fa\u901a\u8fc7\u6807\u8bb0") : nope("\u597d\u6837\u672c\u6ca1\u8f93\u51fa\u901a\u8fc7\u6807\u8bb0");
 
-    // 3. 真实 content/：必须 0 ERROR（WARN 不阻断）
+    // 3. 真实 org/：必须 0 ERROR（WARN 不阻断）
     const real = run([]);
-    if (real.code === 0) pass("\u771f\u5b9e content/ \u9000\u51fa\u7801 0\uff08\u65e0 ERROR\uff09");
-    else { nope(`\u771f\u5b9e content/ \u9000\u51fa\u7801 ${real.code}`); console.log(real.out.split("\n").filter(l => l.includes("ERROR")).slice(0, 8).join("\n")); }
+    if (real.code === 0) pass("\u771f\u5b9e org/ \u9000\u51fa\u7801 0\uff08\u65e0 ERROR\uff09");
+    else { nope(`\u771f\u5b9e org/ \u9000\u51fa\u7801 ${real.code}`); console.log(real.out.split("\n").filter(l => l.includes("ERROR")).slice(0, 8).join("\n")); }
 
     console.log("");
     console.log(fail === 0 ? "\u5168\u90e8\u901a\u8fc7\u3002" : "\u6709\u65ad\u8a00\u5931\u8d25\u3002");
@@ -623,7 +623,7 @@ console.log('photo-guard: all passed');
  */
 
 const ROOT = process.cwd();
-const CONTENT = join(ROOT, "content");
+const CONTENT = join(ROOT, "org");
 const CACHE_FILE = join(ROOT, ".hermes/external-links/cache.json");
 const IGNORE_FILE = join(ROOT, "scripts/data/external-link-ignore.txt");
 const VERIFIED_FILE = join(ROOT, "scripts/data/external-links-verified.txt");
@@ -738,7 +738,7 @@ if (URLS_FILE) {
     for (const e of readdirSync(dir, { withFileTypes: true })) {
       const p = join(dir, e.name);
       if (e.isDirectory()) walk(p);
-      else if (e.name.endsWith(".md")) collect(p);
+      else if (e.name.endsWith(".org")) collect(p);
     }
   })(CONTENT);
 }

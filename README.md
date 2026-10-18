@@ -30,85 +30,63 @@
 
 ```
 blog/
-├── assets/              # 构建时处理的资源
-│   ├── css/             # `main.css`（入口，@import `prose.css`/`til.css`）+ 按页加载的 `table.css`/`map.css`
-│   └── ts/              # TypeScript 组件（`main.ts`, `graph.ts`）
-├── content/             # 网站内容
+├── org/                 # **内容真源**（org-mode，2026-10 起 content/*.md 已下线）
 │   ├── posts/           # 博客文章（长文、随笔、年度总结）
-│   ├── til/             # Today I Learned 笔记（知识点、操作步骤）
-│   │   ├── software/    # 软件/工具/编程类（flat files, header-based grouping）
-│   │   ├── life/        # 生活经验与技巧
-│   │   ├── health/      # 健康与医学
-│   │   ├── learning/    # 学习方法与思维模型
-│   │   ├── career/      # 职业发展与思考
-│   │   ├── hardware/    # 硬件设计与工程
-│   │   ├── homelab/     # 家庭实验室
-│   │   ├── backup/      # 备份方案与策略
-│   │   ├── writing/     # 写作
-│   │   ├── music/       # 音乐
-│   │   ├── media/       # 媒体与内容
-│   │   ├── courses/     # 课程笔记
-│   │   ├── science/     # 科学
-│   │   └── history/     # 历史
-│   └── *.md             # 独立页面（about, now, projects 等）
-├── layouts/             # Hugo 模板（0.146+ 新结构：无 _default，标识写在文件名里）
-│   ├── _partials/       # 可复用组件（head, components, functions）
-│   ├── posts/           # 文章专用模板（single.html）
-│   ├── til/             # TIL 专用模板（baseof, list, single）
-│   ├── footprints/      # 足迹地图（single.html）
-│   ├── graph/           # 知识图谱页（list.html + list.json.json）
-│   ├── baseof.html      # 所有页面基础框架
-│   ├── home.html        # 首页
-│   ├── single.html      # 独立单页（About, Now 等）
-│   ├── single.markdown.md  # 纯文本源文输出（URL 后加 .md）
-│   ├── section.html     # 分类列表页
-│   ├── taxonomy.html    # 标签聚合
-│   ├── term.html        # 单标签详情
-│   └── 404.html         # 404 页面
-├── scripts/             # 构建和工具脚本
-│   ├── build.sh         # CI 构建脚本（Cloudflare Workers）；`setup` 子命令本地装 Hugo
+│   ├── til/             # Today I Learned 笔记
+│   │   ├── software/ life/ health/ learning/ career/ hardware/
+│   │   └── homelab/ backup/ writing/ music/ media/ courses/ science/ history/
+│   │                    # 子分类用 `#+HEADER:` 标记（原 front matter `header`）
+│   ├── online-reading/  # linkding 同步产物（cron 每日追加）
+│   ├── photos/          # 相册合集子页（gen-photos-data.py 生成）
+│   ├── agenda.org       # 转正队列（status-agenda.py 生成）
+│   └── *.org            # 独立页面（about / now / links / watch / read …）
+├── scripts/
+│   ├── org2site/        # 站点管线（单入口 build.sh）
+│   │   ├── build.sh     # ① emacs 导出 → ② PageFind 索引 → ③ verify.py 体检
+│   │   ├── build.el     # 全站构建（文章 / 归档 / 花园 / 分类页 / RSS / sitemap / 404 / 静态拷贝）
+│   │   ├── export.el    # 单页导出层（骨架、TIL 三栏 shell、wikilink 解析、排印规范化）
+│   │   ├── static/      # style.css / site.js / photos.js / favicon / fonts
+│   │   └── verify.py    # 输出体检（每页一个 h1 / UTF-8 / shell 位置 / 锚点与站内死链）
 │   ├── worker.js        # Cloudflare Worker（静态托管 + 语义搜索 API + 评论同域反代）
-│   ├── photo-guard.js   # 相册放行闸（纯函数，worker 与 `check.mjs photos` 单测共用）
-│   ├── embed.mjs          # 语义索引模块（嵌入 + 关联笔记，npm run embed/related）
-│   ├── check.mjs         # 闸门模块（links/unicode/selftest/photos/external 子命令）
-│   ├── gen-photos-data.py  # 相册派生管线（data/photos-list.yaml → 机器产物；手动跑）
-│   ├── garden-health.py  # 数字花园健康度与存量处置（手动跑）
-│   ├── data/            # 数据账本（外链账本 ×2 + 相片白名单，worker 同源读取）
-│   ├── epub/            # EPUB 导出管线（SOP 见 epub/README.md）
-├── static/              # 静态文件（直接复制到 public/）
-│   ├── images/          # 图片资源
-│   ├── fonts/           # 字体文件
-│   ├── projects/        # 项目展示相关文件
-│   └── pagefind-semantic/  # 语义搜索原始文本数据
-├── hugo.yaml            # Hugo 配置
-├── package.json         # npm 依赖和脚本
-├── wrangler.jsonc       # Cloudflare Workers 配置
+│   ├── photo-guard.js   # 相册放行闸（worker 与 `check.mjs photos` 共用）
+│   ├── embed.mjs        # 语义索引（嵌入 + 关联笔记）
+│   ├── check.mjs        # 闸门（links / unicode / selftest / photos / external）
+│   ├── gen-photos-data.py   # 相册派生管线（data/photos-list.yaml → 机器产物，手动跑）
+│   ├── garden-health.py     # 数字花园健康度（手动跑）
+│   ├── data/            # 数据账本（外链账本 ×2 + 相片白名单）
+│   └── epub/            # EPUB 导出管线（SOP 见 epub/README.md）
+├── static/              # 静态文件（整树拷进产物）
+├── data/                # photos-list.yaml（人工真源）+ related.json
+├── wrangler.jsonc       # Cloudflare Workers 配置（build.command = bash scripts/org2site/build.sh public）
 └── AGENTS.md            # AI agent 上下文（symlink → README）
 ```
+
+> **管线（2026-10 起）**：`org/*.org` ──emacs batch（`build.el`）──▶ 静态 HTML ──PageFind──▶ `public/`。
+> Hugo 管线已整体下线 —— `layouts/`、`assets/`、`content/`、`hugo.yaml`、`package.json` 全部移除，
+> 转换期脚本 `md2org.py` / `migrate.py` 一并删除（历史留在 git）。
+> 直接改 `org/` 就是改内容，**构建前不需要任何中间转换**。
+>
+> 本节以下按 Hugo 时代写的模板 / 资源 / Tailwind 章节属**历史记录**，仅供考古。
 > 2026-10-07 一次性工具清理：13 个迁移/修复/建议类脚本移出仓库（fetch-photos-dev pick-photos fill-watch-year merge-media-watch migrate-to-wikilink fix-deadlinks fix-title-attributes suggest-links suggest-merges suggest-bridges prune-dead-links warm-wayback-cache neodb-year-lookup），`hugo-setup.sh` 已于 2026-10-07 并入 `build.sh setup` 子命令，不再单列；`neodb-name-lookup.py` 已迁 `~/.hermes/scripts/`（适配准则是用户级工具出仓、内容仓只留构建链）。技能文档里提到的这些脚本仍可捞回：`git log -1 --diff-filter=D --format=%h -- scripts/<file>` 找删除提交 `<SHA>` → `git show <SHA>^:scripts/<file>`。
 
 ## 技术栈
 
 | 类别 | 技术 | 说明 |
 |------|------|------|
-| 静态生成 | Hugo | 标准版（Standard，非 Extended）；CSS 由外部 `@tailwindcss/cli` 处理，不走 Hugo 的 PostCSS/Tailwind 管线 |
-| 样式 | Tailwind CSS v4 | 通过 `@tailwindcss/cli` 构建 |
-| 搜索 | Pagefind | 静态搜索索引，基于构建后的 `public/` |
-| 图谱可视化 | vis-network | 分类页 JSON 数据驱动 |
-| 部署 | Cloudflare Workers | 参考 hosting-cloudflare-worker |
+| 静态生成 | Emacs batch（自写导出器） | `scripts/org2site/`：org → HTML，无 Hugo |
+| 样式 | 手写 CSS（light-dark + 自定义属性） | `scripts/org2site/static/style.css`，无构建步骤 |
+| 搜索 | PageFind（extended 版，CJK 分词） | 基于构建后的产物建索引，版本与 sha256 在 `build.sh` 里 pin |
+| 语义搜索 | 自建嵌入索引 + Worker API | `scripts/embed.mjs`，每周一 04:00 cron 重建 |
+| 部署 | Cloudflare Workers | `wrangler.jsonc` 的 `build.command` 调 `build.sh`；只走 CF Workers Builds，本地不跑 wrangler |
 
 ## 环境要求
 
 | 依赖 | 版本 | 说明 |
 |------|------|------|
-| Hugo | 0.167.0（CI 固定） | 版本 pin 只在 `scripts/build.sh` 的 `HUGO_VERSION`；本地跑 `bash scripts/build.sh setup` 装同版本 |
-| Node.js | ≥ 22（CI 默认 24.18.0） | npm 管理依赖（`npm install`）；`.nvmrc` 锁定 CI 主版本 |
+| Emacs | 30.1 | `build.sh` 自己提供（micronamba + conda-forge 装到 `~/.cache/org2site/`，不依赖系统包）—— CI 镜像里没有 emacs，本机是 Debian 的 emacs-nox |
+| PageFind | 1.5.2（extended） | 同上，`build.sh` 下载 + 校验 sha256 后缓存到 `~/.cache/org2site/` |
 
-首次克隆后执行：
-
-```bash
-npm install
-```
+**首次克隆后什么都不用装**，直接跑构建即可（node 只在语义索引那条独立链路里用）。
 
 ## 站点理念与内容策略
 
@@ -127,8 +105,8 @@ npm install
 
 | 目录 | 格式 | 原因 |
 |------|------|------|
-| `content/` 及根目录独立页面 | Markdown (`.md`) | Hugo 原生渲染（Goldmark），2026-09 由 Org Mode 迁移 |
-| `content/til/` | Markdown (`.md`) | 笔记类内容，按分类文件夹组织，子分类用 front matter `header` 标记 |
+| `org/` 及根目录独立页面 | Org Mode (`.org`) | 唯一内容真源；2026-10 由 Markdown 迁回 org（Hugo 时代的那批 `.md` 已随 `content/` 一起下线） |
+| `org/til/` | Org Mode (`.org`) | 笔记类内容，按分类文件夹组织，子分类用 `#+HEADER:` 标记 |
 
 > 2026-09-10 完成 `.org` → `.md` 迁移：1581 篇内容 + 模板（graph-data 链接解析、`about.md` / `-en.md` 判断）+ hugo.yaml（`parser.attribute.block`、typographer 对齐 go-org、脚注 backlinkHTML、TOC endLevel）。转换脚本 `org2md.py` 已移出仓库（副本在 `~/.hermes/scripts/.archive/`，历史保留在 git）。
 
@@ -223,7 +201,7 @@ header: Linux      # 可选，子分类
 - 格式：中文标签用单引号、英文裸写，单行数组 → `tags: ['技术', English]`
 - `English` 与栏目正交，标记英文文章（英文原创 + 英文版），不与中文栏目混用
 - `til/` 不使用标签，文件夹分类 + `header` 已足够
-- 删标签等于 URL 消失（`/tags/<slug>/` 直接 404）——改完跑 `npm run check-links` 兜底
+- 删标签等于 URL 消失（`/tags/<slug>/` 直接 404）——改完跑 `node scripts/check.mjs links` 兜底
 
 ### 内部链接与反链（2026-09-11 起）
 
@@ -238,7 +216,7 @@ wikilink 依次按 **文件名 → 完整标题 → 标题主名（`——`/`：
 
 1. **渲染兜底** — 解析不到时渲染成「站内搜索」链接（虚线下划线 + 悬停提示），读者看不到 `[[…]]` 原文，也点不到 404
 2. **构建告警** — 构建时 `WARN`，日志里能看到是哪个名字
-3. **发布闸门** — `npm run check-links` 汇总「未解析的 wikilink」+「失效内链」并返回退出码 1（`--warn-only` 只报告），且指出是哪个文件/哪一页写错了。判定逻辑复用 Hugo 构建结果，不另写一套解析规则
+3. **发布闸门** — `node scripts/check.mjs links` 汇总「未解析的 wikilink」+「失效内链」并返回退出码 1（`--warn-only` 只报告），且指出是哪个文件/哪一页写错了。判定逻辑复用 Hugo 构建结果，不另写一套解析规则
 
 **写法约定**：
 
@@ -392,8 +370,6 @@ python3 scripts/org2site/verify.py public
 # 本地预览（禁缓存 + 相册图片占位路由）
 python3 scripts/org2site/preview-server.py public 8099
 
-# 内容源改动后重生成 org/（org/ 是转换产物；改内容改 content/）
-python3 scripts/org2site/migrate.py content org
 
 # 转正队列（全库 draft → org/agenda.org，Emacs 打开 + M-x org-agenda）
 python3 scripts/org2site/status-agenda.py
@@ -410,7 +386,7 @@ node scripts/embed.mjs
 
 ### 站外链接死链扫描（`node scripts/check.mjs external`）
 
-扫 `content/` 里所有外链（Markdown 链接 + 裸 URL，跳过代码块），并发探测后分类报告。
+扫 `org/` 里所有外链（org 链接 + 裸 URL，跳过代码块），并发探测后分类报告。
 只有 **404/410** 算死链；5xx、代理到不了、401/403/429、DNS/超时都不算死，分开列。
 
 - 请求带真实 Chrome（Windows）指纹（UA + Sec-CH-UA + Sec-Fetch-* + Referer），避免被 WAF 当爬虫；
@@ -434,10 +410,10 @@ npm run check-external-links -- --refresh-dead --recheck-verified   # 强制重�
 
 ### 新建内容工作流程
 
-1. 根据内容类型选择 `content/posts/` 或 `content/til/` 下的正确分类
-2. 按命名规范创建 `.md` 文件，填写 YAML frontmatter
-3. 运行 `npm run dev` 本地预览
-4. 内容完成后运行 `npm run all` 构建（关键词索引由 CI 每次部署重建）；语义索引不随本次提交重建，由每周一 04:00 的 cron 周期全量重建（见「语义搜索索引」节）
+1. 根据内容类型选择 `org/posts/` 或 `org/til/` 下的正确分类
+2. 按命名规范创建 `.org` 文件，写 `#+TITLE:` / `#+DATE:` 等关键字（子分类用 `#+HEADER:`）
+3. 本地预览：`bash scripts/org2site/build.sh /tmp/out` 后用 `python3 scripts/org2site/preview-server.py /tmp/out 8099`
+4. 内容完成后提交即可 —— CF Workers Builds 会跑同一条 `build.sh`（关键词索引每次部署重建；语义索引由每周一 04:00 的 cron 独立重建，见「语义搜索索引」节）
 5. 提交变更（不带 `static/pagefind-semantic/*` 与 `data/related.json`）
 
 ## 资源存放

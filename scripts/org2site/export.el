@@ -324,6 +324,125 @@ TARGET 可为：纯 slug（coding）、多段路径（til/software/coding、../h
       (and (re-search-backward "^[ \t]*#\\+begin_src\\|^[ \t]*#\\+end_src" nil t)
            (looking-at-p "^[ \t]*#\\+begin_src")))))
 
+(defun org2site--in-link-target-p (pos)
+  "POS 是否落在 `[[target][desc]]' 的 target 段里（target 绝不能做排印替换）。"
+  (save-excursion
+    (goto-char pos)
+    (let ((open (save-match-data (re-search-backward "\\[\\[" (line-beginning-position) t))))
+      (when open
+        (let ((close (save-match-data (search-forward "]" (line-end-position) t))))
+          (and close (< pos close)))))))
+
+(defvar-local org2site--typo-protected nil
+  "本 buffer 里不该做排印替换的区间列表 (BEG . END)，惰性计算见
+`org2site--typo-protected-ranges'。")
+
+(defun org2site--typo-protected-ranges ()
+  "整篇解析一次，收集 verbatim / code / src / example / export / fixed-width 的区间。
+
+为什么不用 org-element-context：batch（-Q）下它对点位置只解析到 `paragraph'，
+落在 `=command: install --dev=' 里也返回 paragraph，判据形同虚设（实测漏掉十几处，
+`<code>` 里的 `--` 全被转成 `–`）。整篇 parse 一次拿真实对象区间才准。"
+  (or org2site--typo-protected
+      (setq org2site--typo-protected
+            (let (ranges)
+              (org-element-map
+                  (org-element-parse-buffer)
+                  '(verbatim code src-block inline-src-block example-block export-block fixed-width)
+                (lambda (el)
+                  (let ((b (org-element-property :begin el))
+                        (e (org-element-property :end el)))
+                    (when (and b e) (push (cons b e) ranges)))))
+              ranges))))
+
+(defun org2site--in-inline-code-near-p (pos)
+  "POS 是否落在「最近的一对 verbatim 标记」之间（就近配对，不看整行奇偶）。
+
+整行计数会被行内其它标记字符干扰：`=--toc --split-level=1 --css=' 里 `--css' 前面有两个
+`='（一个开头、一个在 `--split-level=1' 尾）→ 偶数 → 判成正文，`--css' 就被转成了 `–css'。
+就近配对（往前找最近的 `=' / `~'，看它后面还有没有同类闭合标记）才稳。"
+  (save-excursion
+    (goto-char pos)
+    (let ((open (save-match-data (re-search-backward "[=~]" (line-beginning-position) t))))
+      (when open
+        (let ((closer (buffer-substring-no-properties open (1+ open)))
+              (close (save-match-data
+                       (save-excursion
+                         (goto-char (1+ open))
+                         (search-forward (buffer-substring-no-properties open (1+ open))
+                                         (line-end-position) t)))))
+          (and close (<= pos (1- close))))))))
+
+(defun org2site--in-verbatim-p (pos)
+  "POS 是否落在 verbatim / code / src / example 这类「非正文文本」里。
+
+两个判据取**并集**，缺一不可（都被实测漏过）：
+- `org-element-parse-buffer' 的区间：准，但 org 自己的解析器会被 `--' 弄断 ——
+  实测 `=rclone check --checksum=' 解析出来的 verbatim 只有 `=rclone check='，
+  `--checksum' 掉在区间外。
+- 就近配对（见 `org2site--in-inline-code-near-p'）：兜住上一种。
+- 再加「紧贴标记」一条（`=--toc=` 开头那种，`--' 的左边就是标记）。
+宁可少转换（保留 ASCII 原样）也不要误改代码里的开关。"
+  (or (cl-some (lambda (r) (and (>= pos (car r)) (< pos (cdr r))))
+               (org2site--typo-protected-ranges))
+      (org2site--in-inline-code-near-p pos)))
+
+(defun org2site--normalize-skip-p (beg end)
+  "BEG..END 这个待替换区间是否该跳过：结构线、链接目标、verbatim/代码。
+
+对照 md2org.py 的 `_typo' —— 它只作用于「纯文本」：
+- 结构线（`-----` 分隔线、`|---+---|` 表格线）是块级语法，改了会把 <hr> 崩成 <p>
+- URL / 行内代码 / 代码块一律保护（`<code>--flag</code>` 里的 `--` 不是排印）
+- **标记紧贴**：`=--toc --split-level=1 --css=` 这种，`--' 的首尾直接挨着 verbatim 标记 ——
+  计数法看不到（标记在 `--' 之前，prefix 里是 0 个），org 的解析也断在这儿，
+  所以再补一条「前一个/后一个字符就是标记」的判据
+- 注意 `#+TITLE:` 这类关键字行**不在**跳过之列：用户明确要求标题里的
+  `日常随想------进步` 要出 `日常随想——进步`（原站留字面横线是历史遗留，不照抄）"
+  (save-excursion
+    (goto-char beg)
+    (let ((line (buffer-substring-no-properties (line-beginning-position)
+                                                (line-end-position))))
+      (or
+       (save-match-data
+         (or (string-match "\\`[ \t]*-\\{5,\\}[ \t]*\\'" line)
+             (string-match "\\`[ \t]*|[-+|: \t]+|[ \t]*\\'" line)))
+       ;; 紧贴 verbatim 标记
+       (memq (and (> beg (point-min)) (char-before beg)) '(?= ?~))
+       (memq (and (< end (point-max)) (char-after end)) '(?= ?~))
+       (org2site--in-link-target-p beg)
+       (org2site--in-verbatim-p beg)))))
+
+(defun org2site-normalize-typography ()
+  "把手写的 ASCII 排印转成正式字符：... → …，--- → —，-- → –。
+
+以前这步在 md2org.py 里做（content/*.md → org/ 的转换期）；现在 org/ 就是内容真源、
+没有转换期了，所以挪到导出前对 buffer 统一做一遍 —— 手写的 `...` 依然出 `…`，
+标题里的 `日常随想------进步` 也照样出 `——`。
+
+两个必须守住的细节：
+1. **优先级**：`...` 先于 `---` 先于 `--`；`---` 命中的区间要能压住里面那个 `--`，
+   否则 `---` 会被 `--` 先吃掉一半。
+2. **先收集、再反向替换**：保护区间（verbatim/src）是在原始坐标里算的，替换会挪位置 ——
+   倒着改（从后往前）就不会让前面尚未使用的坐标失效。不要在这里边搜边改。
+跳过的位置见 `org2site--normalize-skip-p'（结构线 / 链接目标 / verbatim 代码）。"
+  (setq org2site--typo-protected nil)   ; 每次导出重新算，不跨调用复用
+  (let ((hits nil))                      ; (BEG END 替换字)，已按优先级筛过
+    (dolist (pair '(("\\.\\.\\."  . "…")
+                    ("---"       . "—")
+                    ("--"        . "–")))
+      (goto-char (point-min))
+      (while (re-search-forward (car pair) nil t)
+        (let ((beg (match-beginning 0))
+              (end (match-end 0)))
+          (unless (or (org2site--normalize-skip-p beg end)
+                      ;; 已被更高优先级模式覆盖（如 `---' 里的 `--'）
+                      (cl-some (lambda (h) (and (>= beg (nth 0 h)) (< beg (nth 1 h)))) hits))
+            (push (list beg end (cdr pair)) hits)))))
+    (dolist (h hits)
+      (goto-char (nth 0 h))
+      (delete-region (nth 0 h) (nth 1 h))
+      (insert (nth 2 h)))))
+
 (defun org2site-zwsp-wrap ()
   "CJK 边界标记两侧插 ZWSP：强调（*/_+）与 verbatim（=~）。
 org-element 把这些边界硬编码成 ASCII，配置变量管不着；导出后统一过滤掉。"
@@ -425,6 +544,7 @@ Invalid use of \\ in replacement text 并中止整篇导出（踩过）。"
 片段顶部补 `<h1>`：原站每页都有 h1（来自页面标题）。
 REL 是文件相对 org 根的路径，供 wikilink 解析相对路径用（见 org2site-rewrite-wikilinks）。"
   (with-current-buffer (find-file-noselect infile)
+    (org2site-normalize-typography)
     (org2site-rewrite-wikilinks rel)
     (org2site-zwsp-wrap)
     (let* ((out (org-export-as 'org2site nil nil t))
@@ -436,6 +556,7 @@ REL 是文件相对 org 根的路径，供 wikilink 解析相对路径用（见 
 (defun org2site-export-file (infile outfile)
   "导出单篇 org 到 outfile（正文片段，外包 <article>）。"
   (with-current-buffer (find-file-noselect infile)
+    (org2site-normalize-typography)
     (org2site-rewrite-wikilinks)
     (org2site-zwsp-wrap)
     (let ((out (org-export-as 'org2site nil nil nil))
