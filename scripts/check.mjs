@@ -574,10 +574,10 @@ console.log('photo-guard: all passed');
  * check-external-links.mjs — 站外链接死链扫描
  *
  * 与 check-links.mjs 正交：那个管站内链接和未解析的 wikilink（发布闸门，
- * 读 Hugo 构建日志），这个管 content/ 里指向站外的 http(s) 链接。
+ * 读 Hugo 构建日志），这个管 org/ 里指向站外的 http(s) 链接。
  *
  * 做法：
- *   1. 扫 content/ 下所有 .md，抽出外链（Markdown 链接 + 裸 URL），
+ *   1. 扫 org/ 下所有 .org，抽出外链（org 链接 + 裸 URL），
  *      跳过 fenced code block、缩进代码块、inline code、HTML 注释
  *   2. 去重后并发探测（默认 10 并发，同域名最多 2 个并发，别把人家当爬虫打）
  *   3. HEAD 先行；HEAD 不干净或结果为 4xx 时再用 GET 复核。不少服务器对
@@ -1139,7 +1139,7 @@ for (const [title, list] of [
 const orphanVerified = [...verified.keys()].filter((u) => !urlFiles.has(u));
 if (orphanVerified.length) {
   console.log(
-    `\nℹ 账本里 ${orphanVerified.length} 条 URL 已不在 content/ 中出现（内容改过或删了），可手工清理：`
+    `\nℹ 账本里 ${orphanVerified.length} 条 URL 已不在 org/ 中出现（内容改过或删了），可手工清理：`
   );
   for (const u of orphanVerified.slice(0, 20)) console.log(`  · ${u}`);
   if (orphanVerified.length > 20) console.log(`  …… 另有 ${orphanVerified.length - 20} 条`);
