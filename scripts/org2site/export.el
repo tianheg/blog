@@ -412,6 +412,18 @@ TARGET 可为：纯 slug（coding）、多段路径（til/software/coding、../h
        (org2site--in-link-target-p beg)
        (org2site--in-verbatim-p beg)))))
 
+(defun org2site--typo-string (s)
+  "对**标题这类纯文本**做排印规范化（不做 verbatim 判据，标题里不会有代码）。
+
+为什么需要单独一份：页面骨架的 `<title>` 与 RSS/Atom 标题走的是**扫描阶段**从文件里
+直接读到的 `#+TITLE:`，那条路径没有导出前的 buffer 规范化 —— 不补这一下就会不一致：
+`<h1>` 是 `日常随想——进步`，浏览器标签页和 RSS 里却还是 `日常随想------进步`（实测）。"
+  (when s
+    (let ((out (replace-regexp-in-string "\\.\\.\\." "…" s)))
+      (setq out (replace-regexp-in-string "---" "—" out))
+      (setq out (replace-regexp-in-string "--" "–" out))
+      out)))
+
 (defun org2site-normalize-typography ()
   "把手写的 ASCII 排印转成正式字符：... → …，--- → —，-- → –。
 

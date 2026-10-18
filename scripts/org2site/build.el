@@ -160,7 +160,7 @@ org2site--index-title 取；#+NOEXPORT: t 的文件也不发布。"
                (noext (file-name-sans-extension rel))
                (section (car (split-string noext "/"))))
           (push (list (concat "/" noext "/")
-                      (or (org2site--kw f "TITLE") noext)
+                      (or (org2site--typo-string (org2site--kw f "TITLE")) noext)
                       (org2site--date (or (org2site--kw f "DATE") ""))
                       section rel
                       (org2site--tags f)
@@ -318,7 +318,7 @@ org2site--index-title 取；#+NOEXPORT: t 的文件也不发布。"
   "读 org/<rel-dir>/_index.org 的 TITLE（没有则 nil）。"
   (let ((f (expand-file-name (concat rel-dir "/_index.org")
                              (expand-file-name "org" repo))))
-    (when (file-exists-p f) (org2site--kw f "TITLE"))))
+    (when (file-exists-p f) (org2site--typo-string (org2site--kw f "TITLE")))))
 
 (defun org2site--subdirs (dir)
   (when (file-directory-p dir)
