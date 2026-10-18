@@ -256,7 +256,16 @@ TARGET 可为：纯 slug（coding）、多段路径（til/software/coding、../h
                                 (and (not abs)
                                      (gethash (file-name-nondirectory tgt) org2site-url-map)))))
              (url (car cands)))
-        (when url (concat url frag))))))
+        (cond
+         (url (concat url frag))
+         ;; 显式站内绝对路径（作者写了 /xxx）→ 原样采用，**不查表**：
+         ;; 表里只收「唯一 basename」，sentences（重名）、resume.pdf（静态文件）
+         ;; 这类天然不在表内，一查不到就退成纯文本 —— 实测 about 页的「我摘抄的」
+         ;; 和两个简历链接就是这么丢的（原站产物里它们是 <a>）。
+         ;; 路径写错有 verify.py 的「站内死链 0」兜住，不会静默造出坏链接。
+         (abs (concat "/" bare
+                      (if (string-match-p "\\.[a-zA-Z0-9]\\{1,5\\}\\'" bare) "" "/")
+                      frag)))))))
 
 (defun org2site--join-path (dir rel)
   "把相对路径 REL 按 DIR 归一化（处理 ./ 与 ../），返回不带前导斜杠的路径。"
