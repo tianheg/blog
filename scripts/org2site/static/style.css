@@ -46,6 +46,7 @@
 
   /* 分类页（/til/<cat>/） */
   --crumb-sep: light-dark(#d1d5dc, #364153);      /* gray-300 / gray-700 */
+  --toc-rule: light-dark(#d1d5db, #4b5563);       /* 目录左竖线（原站 baseof 内联样式里的值） */
   --list-title: light-dark(#1e2939, #e5e7eb);     /* gray-800 / gray-200 */
   --row-hover: light-dark(#f9fafb, rgb(30 41 57 / 0.4));   /* gray-50 / gray-800-40% */
   --chip-active-bg: light-dark(#dfe9f4, rgb(61 91 122 / 0.25));  /* ink-100 / ink-600-25% */
@@ -826,31 +827,69 @@ svg.heat-grid { display: block; width: 100%; height: auto; }
 }
 
 /* --- 目录（「本页内容」，TIL 页与部分根页面）------------------------------ */
+/* 注意：全局 `details` 规则（服务正文里内容自带的 <details>）会给页面级组件的
+   <details> 也套上 padding / border / margin —— 三处组件各自要清零，
+   否则观感是「框里文字离边框太远」「不该有框的地方冒出个框」（用户实测反馈过）。 */
 details.page-toc {
-  margin-bottom: 2rem;
+  margin: 0 0 2rem;         /* 原站只有 mb-8，没有上边距 */
+  padding: 0;               /* 全局规则那份 0.75rem/1rem 会和 summary 叠加 */
   border: 1px solid var(--border);
   border-radius: 8px;
+}
+details.archive-year {
+  margin: 0;
+  padding: 0;
+  border: 0;
+  border-top: 1px solid var(--border);   /* 原站只有上边线，没有框 */
+  border-radius: 0;
+}
+details.til-others {
+  margin: 0;
+  padding: 0;
+  border: 0;
+  border-radius: 0;
 }
 details.page-toc > summary {
   padding: 0.75rem 1rem;
   font-size: 0.875rem;
+  line-height: 1.25rem;     /* 原站 text-sm 的 20px；不写会继承 body 的 1.85，行高多 6px */
   font-weight: 500;
   color: var(--toc);
   cursor: pointer;
   user-select: none;
 }
 .til-toc { padding: 0 1rem 1rem; }
-.til-toc ul { list-style: none; margin: 0; padding: 0; }
-.til-toc li { margin-block: 0.3rem; }
-.til-toc ul ul { padding-inline-start: 1em; }
-.til-toc a {
-  font-size: 0.875rem;
-  line-height: 1.5;
-  font-weight: 500;
-  color: var(--toc);
-  text-decoration: none;
+
+/* 目录列表 —— 照抄原站 baseof.html 里的 #TableOfContents 内联样式：
+   左边一条细竖线，条目左缩进 12px，13px/1.6，hover 只变色不下划线，
+   当前项（.active 加在 li 上）变色 + 加粗 + 竖线高亮。 */
+#TableOfContents ul {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  border-left: 1px solid var(--toc-rule);
 }
-.til-toc a:hover { color: var(--accent); text-decoration: underline; }
+#TableOfContents ul ul { padding-left: 0.875rem; border-left: 0; }
+#TableOfContents li { margin: 0; }
+#TableOfContents a {
+  display: block;
+  padding: 3px 0 3px 0.75rem;
+  margin-left: -1px;
+  font-size: 0.8125rem;
+  line-height: 1.6;
+  font-weight: 400;
+  color: var(--meta);
+  text-decoration: none;
+  border-left: 1px solid transparent;
+  transition: color 0.15s, border-color 0.15s;
+}
+#TableOfContents a:hover { color: var(--accent); }
+#TableOfContents li.active > a {
+  color: var(--accent);
+  font-weight: 500;
+  border-left-color: var(--accent);
+}
+.til-toc { padding: 0 1rem 1rem; }
 
 .garden-actions { margin-bottom: 2rem; }
 .garden-actions button {
