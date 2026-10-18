@@ -128,14 +128,10 @@ document.addEventListener('DOMContentLoaded', function initFavCounts() {
 #+BEGIN_EXPORT html
 <style>
 .watch-filters { display: flex; gap: 0.5rem; margin-bottom: 1rem; flex-wrap: wrap; }
-.watch-filter { padding: 0.25rem 0.75rem; font-size: 0.8rem; border: 1px solid #d1d5db; border-radius: 999px; cursor: pointer; background: none; color: #4b5563; transition: all 0.15s; }
-.watch-filter:hover { border-color: #3d5b7a; color: #3d5b7a; }
-.watch-filter.active { background: #3d5b7a; border-color: #3d5b7a; color: white; }
-@media (prefers-color-scheme: dark) {
-  .watch-filter { border-color: #4b5563; color: #9ca3af; }
-  .watch-filter:hover { border-color: #88a1bc; color: #88a1bc; }
-  .watch-filter.active { background: #88a1bc; border-color: #88a1bc; color: #1f2937; }
-}
+/* 主题跟随站点切换（light-dark 随 color-scheme 解析），不用 @media prefers-color-scheme */
+.watch-filter { padding: 0.25rem 0.75rem; font-size: 0.8rem; border: 1px solid light-dark(#d1d5db, #4b5563); border-radius: 999px; cursor: pointer; background: none; color: light-dark(#4b5563, #9ca3af); transition: all 0.15s; }
+.watch-filter:hover { border-color: light-dark(#3d5b7a, #88a1bc); color: light-dark(#3d5b7a, #88a1bc); }
+.watch-filter.active { background: light-dark(#3d5b7a, #88a1bc); border-color: light-dark(#3d5b7a, #88a1bc); color: light-dark(#fff, #1f2937); }
 </style>
 #+END_EXPORT
 #+BEGIN_EXPORT html
