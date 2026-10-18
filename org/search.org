@@ -29,24 +29,56 @@
   #semantic-input { width: 100%; padding: 0.75rem 1rem; border: 1px solid light-dark(#d1d5db, #4b5563); border-radius: 0.375rem; font-size: 0.9375rem; outline: none; transition: border-color 0.15s; box-sizing: border-box; background: light-dark(#fff, #1f2937); color: light-dark(#1a1a1a, #f3f4f6); }
   #semantic-input:focus { border-color: light-dark(#3d5b7a, #88a1bc); }
 
-  /* 主题跟随站点切换（.light/.dark 改的是 color-scheme，light-dark() 随之解析）。
-     不要用 @media (prefers-color-scheme: dark)：那是跟**系统**走，站点显式切主题时会错配 ——
-     实测「系统深色 + 站点切亮色」时搜索框仍是暗底（用户报的 bug）。
-     变量名以 PageFind 自己的 :root 为基准；--pf-result-* 那两个 PageFind 根本不消费，删了。 */
-  :root {
-    --pf-text: light-dark(#1a1a1a, #d1d5db);
-    --pf-text-secondary: light-dark(#666, #9ca3af);
-    --pf-text-muted: light-dark(#767676, #9ca3af);
-    --pf-background: light-dark(#fff, #1f2937);
-    --pf-border: light-dark(#e0e0e0, #374151);
-    --pf-border-focus: light-dark(#999, #88a1bc);
-    --pf-hover: light-dark(#f5f5f5, #374151);
-    --pf-mark: light-dark(#1a1a1a, #fef08a);
-    --pf-skeleton: light-dark(#eee, #374151);
-    --pf-skeleton-shine: light-dark(#f5f5f5, #4b5563);
-    --pf-outline-focus: light-dark(#3d5b7a, #88a1bc);
-    --pf-scroll-shadow: light-dark(rgba(0, 0, 0, 0.08), rgba(255, 255, 255, 0.1));
+/* PageFind 组件的 --pf-* 不能用 light-dark()：它给内部元素带了 `color-scheme: normal`，
+   而在 normal 下 light-dark() 会**按系统偏好**解析 —— 实测「系统深色 + 站点切亮色」时
+   输入框仍是暗底 #1f2937（组件自身 color-scheme 也是 normal，普通声明改不动它，
+   只有 !important 有效 —— 不值得为了它跟第三方样式打架）。
+   改成按站点状态直接给值：显式切换用类，自动模式用带 :not() 护栏的媒体查询
+   （与主样式表里主题图标那两块的写法一致）。 */
+:root.light {
+  --pf-text: #1a1a1a;
+  --pf-text-secondary: #666;
+  --pf-text-muted: #767676;
+  --pf-background: #fff;
+  --pf-border: #e0e0e0;
+  --pf-border-focus: #999;
+  --pf-hover: #f5f5f5;
+  --pf-mark: #1a1a1a;
+  --pf-skeleton: #eee;
+  --pf-skeleton-shine: #f5f5f5;
+  --pf-outline-focus: #3d5b7a;
+  --pf-scroll-shadow: rgba(0, 0, 0, 0.08);
+}
+:root.dark {
+  --pf-text: #d1d5db;
+  --pf-text-secondary: #9ca3af;
+  --pf-text-muted: #9ca3af;
+  --pf-background: #1f2937;
+  --pf-border: #374151;
+  --pf-border-focus: #88a1bc;
+  --pf-hover: #374151;
+  --pf-mark: #fef08a;
+  --pf-skeleton: #374151;
+  --pf-skeleton-shine: #4b5563;
+  --pf-outline-focus: #88a1bc;
+  --pf-scroll-shadow: rgba(255, 255, 255, 0.1);
+}
+@media (prefers-color-scheme: dark) {
+  :root:not(.light):not(.dark) {
+    --pf-text: #d1d5db;
+    --pf-text-secondary: #9ca3af;
+    --pf-text-muted: #9ca3af;
+    --pf-background: #1f2937;
+    --pf-border: #374151;
+    --pf-border-focus: #88a1bc;
+    --pf-hover: #374151;
+    --pf-mark: #fef08a;
+    --pf-skeleton: #374151;
+    --pf-skeleton-shine: #4b5563;
+    --pf-outline-focus: #88a1bc;
+    --pf-scroll-shadow: rgba(255, 255, 255, 0.1);
   }
+}
 </style>
 #+END_EXPORT
 
