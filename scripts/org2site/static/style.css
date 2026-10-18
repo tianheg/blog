@@ -1,4 +1,10 @@
 @charset "utf-8";
+/* CSS 层序（@layer）：tokens → base → layout → components → pages → utilities
+   同一层内按源码顺序 + 特异性竞争；层与层之间后者胜（与特异性无关），
+   所以层的划分决定了跨层的优先级。改层序 = 改全局优先级，务必跑指纹回归。 */
+@layer tokens, base, layout, components, pages, utilities;
+
+@layer tokens {
 /* ============================================================================
    tianheg.co —— org2site 样式表（全局 CSS + 标签/属性选择器，零 class）
    ----------------------------------------------------------------------------
@@ -15,7 +21,9 @@
      并盖住菜单。
    - 不要用 `main > div` 这类位置选择器定位特定页面（标签页的标签云也是 main > div）。
    ========================================================================== */
+}
 
+@layer tokens {
 /* --- 设计 token ---------------------------------------------------------- */
 :root {
   /* 双主题用 light-dark() 表达：主题按钮 = 切 color-scheme，不必维护两套 token
@@ -98,7 +106,9 @@
 }
 :root.light { color-scheme: light; }
 :root.dark { color-scheme: dark; }
+}
 
+@layer base {
 /* --- 基础 ---------------------------------------------------------------- */
 * { box-sizing: border-box; }
 
@@ -125,117 +135,6 @@ main, [data-header-bar], [data-site-footer] > p {
    /til/ 下是 .page-col.pt-8.pb-16（32 / 64）—— 底部的 64 由 article 的 padding-bottom 出，
    别在这里再加，否则翻倍。 */
 body > main { margin-top: var(--space-10); }
-
-/* --- 站点 header / footer ------------------------------------------------ */
-/* 站点头尾固定用 data 属性选，别用裸 `header` / `footer`（内容里也会出现） */
-[data-site-header] {
-  position: sticky;
-  top: 0;
-  z-index: 10;
-  background: var(--bg);
-  border-bottom: 1px solid var(--border);
-}
-[data-header-bar] {
-  min-height: 3.5rem;
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  gap: var(--space-6);
-}
-[data-header-bar] > a {
-  font-weight: 600;
-  color: var(--heading);
-  text-decoration: none;
-  white-space: nowrap;
-}
-
-/* 工具区：主题 / 搜索 / 汉堡 + 桌面导航（对齐原站 flex items-center gap-4） */
-[data-header-tools] { display: flex; align-items: center; gap: var(--space-5); }
-[data-header-tools] > button,
-[data-header-tools] > a[data-icon-link] {
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  /* 40px：比原站（30px）大一圈，稳妥满足触屏点击面积；header 高 3.5rem 放得下 */
-  min-width: 2.75rem;
-  min-height: 2.75rem;
-  padding: 0;
-  border: 0;
-  border-radius: var(--radius-md);
-  background: none;
-  color: var(--muted);
-  cursor: pointer;
-  text-decoration: none;
-}
-[data-header-tools] > button:hover,
-[data-header-tools] > a[data-icon-link]:hover { color: var(--heading); }
-
-/* 主题图标：显示"当前主题"的图标（浅色=太阳，深色=月亮）。
-   这里绝不能加 [data-header-tools] svg{display:block} 这类通用规则 ——
-   它的特异性会压过下面的显隐规则，导致两个图标一起冒出来（踩过）。
-   未手动选择时（html 上没有 class）跟随系统偏好。 */
-[data-theme-toggle] svg { display: none; }
-:root.light [data-theme-toggle] svg[data-icon="sun"],
-:root.dark [data-theme-toggle] svg[data-icon="moon"] { display: block; }
-@media (prefers-color-scheme: light) {
-  :root:not(.dark) [data-theme-toggle] svg[data-icon="sun"] { display: block; }
-}
-@media (prefers-color-scheme: dark) {
-  :root:not(.light) [data-theme-toggle] svg[data-icon="moon"] { display: block; }
-}
-
-/* 触摸设备再放大一档（≥44px） */
-@media (pointer: coarse) {
-  [data-header-tools] > button,
-  [data-header-tools] > a[data-icon-link] { min-width: 2.75rem; min-height: 2.75rem; }
-}
-
-/* 桌面导航在 40rem 以上才出现；以下收进汉堡菜单（与原站 sm 断点一致）。
-   注意选择器要写成 [data-header-tools] > [data-menu-toggle]：上面那条
-   [data-header-tools] > button 的 display:flex 特异性更高，压不住就直接显形。 */
-[data-menu-toggle] { display: flex; }
-[data-site-nav] { display: none; }
-@media (min-width: 40rem) {
-  [data-header-tools] > [data-menu-toggle] { display: none; }
-  [data-site-nav] { display: flex; align-items: center; gap: var(--space-8); }
-}
-
-[data-site-nav] a,
-#mobile-menu a {
-  color: var(--muted);
-  font-weight: 500;
-  font-size: var(--text-lg);
-  text-decoration: none;
-  border-radius: var(--radius-sm);
-}
-[data-site-nav] a:hover,
-#mobile-menu a:hover { color: var(--heading); }
-
-/* 移动端展开菜单 */
-#mobile-menu {
-  border-top: 1px solid var(--border);
-  background: var(--bg);
-}
-#mobile-menu[hidden] { display: none; }
-#mobile-menu nav {
-  max-width: 790px;
-  margin-inline: auto;
-  padding: 0.35rem var(--space-7) 0.85rem;
-  display: flex;
-  flex-direction: column;
-}
-#mobile-menu a { padding: 0.7rem 0; }
-
-[data-site-footer] p {
-  /* 只能清纵向：横向那份 margin-inline: auto（见上方 790px 列规则）是列居中的关键，
-     写 `margin: 0` 会把它一起覆盖掉 —— 实测 footer 会贴到左边缘、文字中心 395 vs 视口 640 ✗ */
-  margin-block: 0;
-  /* 上方留白靠 article 的 padding-bottom（首页实测 ≈ 原站 73px），这里不再加 */
-  padding-block: 0 var(--space-9);
-  color: var(--meta);          /* 原站 text-gray-600 = --meta（原来用 --muted 偏浅） */
-  font-size: var(--text-base);
-  text-align: center;          /* 用户要求居中（原站是左对齐，这是主动偏离） */
-}
 
 /* --- 正文排版 ------------------------------------------------------------ */
 article { padding-bottom: var(--space-12); }
@@ -350,6 +249,350 @@ td { font-weight: 500; }
 #text-footnotes p { margin: 0; }
 #text-footnotes sup { font-size: 0.75em; }
 
+/* iOS 上输入控件字号 <16px 会触发自动缩放。放 base 层（低于组件层）→
+   组件自己声明的字号仍然优先，与分层前的实际胜负关系一致。 */
+/* iOS 上输入框字号 <16px 会触发自动放大 */
+@media (max-width: 40rem) {
+  input, select, textarea, button { font-size: var(--text-lg); }
+}
+}
+
+@layer layout {
+/* --- TIL 三栏 shell（/til/ 下所有页面）----------------------------------- */
+/* 原站：min-[1280px]:grid grid-cols-[1fr_790px_1fr] —— 内容列固定 790 居中，
+   左栏（w-52 = 13rem）悬挂在左侧 1fr 轨道里。放在轨道里（而不是让内容列让位）
+   是为了让列表页/分类页/笔记页的正文左边缘完全一致。 */
+@media (min-width: 80rem) {
+  [data-til-shell] {
+    display: grid;
+    grid-template-columns: minmax(0, 1fr) 790px minmax(0, 1fr);
+  }
+  /* 必须 width:100%：grid item 上带 margin-inline:auto 会退化成 fit-content，
+     根页（内容窄）会缩到 634px。原站是 w-full。（实测踩过） */
+  [data-til-shell] > main { grid-column: 2; width: 100%; }
+  [data-til-side] { grid-column: 1; justify-self: end; }
+}
+/* pt-8 不是响应式的：所有宽度都要（放在媒体查询里会让 <1280px 少 32px） */
+[data-til-shell] > main { padding-top: var(--space-9); }
+/* 左栏只在列表页/分类页渲染（笔记页传 nil，压根没有这个元素）；<1280px 一律隐藏 */
+[data-til-side] { display: none; }
+@media (min-width: 80rem) {
+  [data-til-side] {
+    display: block;
+    width: 13rem;                 /* w-52 */
+    margin-inline-end: 1.5rem;    /* mr-6 */
+    padding-top: var(--space-9);            /* pt-8 */
+  }
+}
+[data-til-tree] { position: sticky; top: 5rem; }   /* sticky top-20 */
+
+/* 小屏内联分类树：≥1280px 交给左栏，别重复显示一份 */
+@media (min-width: 80rem) {
+  [data-til-inline] { display: none; }
+}
+}
+
+@layer components {
+/* --- 站点 header / footer ------------------------------------------------ */
+/* 站点头尾固定用 data 属性选，别用裸 `header` / `footer`（内容里也会出现） */
+[data-site-header] {
+  position: sticky;
+  top: 0;
+  z-index: 10;
+  background: var(--bg);
+  border-bottom: 1px solid var(--border);
+
+/* ---------- 正文里的链接：靠下划线区分，不只靠颜色 ---------- */
+/* 实测正文色 #4b4743 与链接色 #3d5b7a 亮度几乎相同（L* 34.3 / 35.9），
+   仅靠饱和度差异在 CJK 长文里等于「看不出是链接」→ 正文范围内加下划线 */
+main p a, main li a, main blockquote a, main td a, main dd a {
+  text-decoration: underline;
+  text-decoration-thickness: 1px;
+  text-underline-offset: 0.2em;
+  text-decoration-color: color-mix(in oklab, var(--accent) 60%, transparent);
+}
+main p a:hover, main li a:hover, main blockquote a:hover, main td a:hover, main dd a:hover {
+  text-decoration-color: var(--accent);
+}
+
+}
+[data-header-bar] {
+  min-height: 3.5rem;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: var(--space-6);
+}
+[data-header-bar] > a {
+  font-weight: 600;
+  color: var(--heading);
+  text-decoration: none;
+  white-space: nowrap;
+}
+
+/* 工具区：主题 / 搜索 / 汉堡 + 桌面导航（对齐原站 flex items-center gap-4） */
+[data-header-tools] { display: flex; align-items: center; gap: var(--space-5); }
+[data-header-tools] > button,
+[data-header-tools] > a[data-icon-link] {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  /* 40px：比原站（30px）大一圈，稳妥满足触屏点击面积；header 高 3.5rem 放得下 */
+  min-width: 2.75rem;
+  min-height: 2.75rem;
+  padding: 0;
+  border: 0;
+  border-radius: var(--radius-md);
+  background: none;
+  color: var(--muted);
+  cursor: pointer;
+  text-decoration: none;
+}
+[data-header-tools] > button:hover,
+[data-header-tools] > a[data-icon-link]:hover { color: var(--heading); }
+
+/* 主题图标：显示"当前主题"的图标（浅色=太阳，深色=月亮）。
+   这里绝不能加 [data-header-tools] svg{display:block} 这类通用规则 ——
+   它的特异性会压过下面的显隐规则，导致两个图标一起冒出来（踩过）。
+   未手动选择时（html 上没有 class）跟随系统偏好。 */
+[data-theme-toggle] svg { display: none; }
+:root.light [data-theme-toggle] svg[data-icon="sun"],
+:root.dark [data-theme-toggle] svg[data-icon="moon"] { display: block; }
+@media (prefers-color-scheme: light) {
+  :root:not(.dark) [data-theme-toggle] svg[data-icon="sun"] { display: block; }
+}
+@media (prefers-color-scheme: dark) {
+  :root:not(.light) [data-theme-toggle] svg[data-icon="moon"] { display: block; }
+}
+
+/* 触摸设备再放大一档（≥44px） */
+@media (pointer: coarse) {
+  [data-header-tools] > button,
+  [data-header-tools] > a[data-icon-link] { min-width: 2.75rem; min-height: 2.75rem; }
+}
+
+/* 桌面导航在 40rem 以上才出现；以下收进汉堡菜单（与原站 sm 断点一致）。
+   注意选择器要写成 [data-header-tools] > [data-menu-toggle]：上面那条
+   [data-header-tools] > button 的 display:flex 特异性更高，压不住就直接显形。 */
+[data-menu-toggle] { display: flex; }
+[data-site-nav] { display: none; }
+@media (min-width: 40rem) {
+  [data-header-tools] > [data-menu-toggle] { display: none; }
+  [data-site-nav] { display: flex; align-items: center; gap: var(--space-8); }
+}
+
+[data-site-nav] a,
+#mobile-menu a {
+  color: var(--muted);
+  font-weight: 500;
+  font-size: var(--text-lg);
+  text-decoration: none;
+  border-radius: var(--radius-sm);
+}
+[data-site-nav] a:hover,
+#mobile-menu a:hover { color: var(--heading); }
+
+/* 移动端展开菜单 */
+#mobile-menu {
+  border-top: 1px solid var(--border);
+  background: var(--bg);
+}
+#mobile-menu[hidden] { display: none; }
+#mobile-menu nav {
+  max-width: 790px;
+  margin-inline: auto;
+  padding: 0.35rem var(--space-7) 0.85rem;
+  display: flex;
+  flex-direction: column;
+}
+#mobile-menu a { padding: 0.7rem 0; }
+
+[data-site-footer] p {
+  /* 只能清纵向：横向那份 margin-inline: auto（见上方 790px 列规则）是列居中的关键，
+     写 `margin: 0` 会把它一起覆盖掉 —— 实测 footer 会贴到左边缘、文字中心 395 vs 视口 640 ✗ */
+  margin-block: 0;
+  /* 上方留白靠 article 的 padding-bottom（首页实测 ≈ 原站 73px），这里不再加 */
+  padding-block: 0 var(--space-9);
+  color: var(--meta);          /* 原站 text-gray-600 = --meta（原来用 --muted 偏浅） */
+  font-size: var(--text-base);
+  text-align: center;          /* 用户要求居中（原站是左对齐，这是主动偏离） */
+}
+
+/* --- 目录（「本页内容」，TIL 页与部分根页面）------------------------------ */
+/* 注意：全局 `details` 规则（服务正文里内容自带的 <details>）会给页面级组件的
+   <details> 也套上 padding / border / margin —— 三处组件各自要清零，
+   否则观感是「框里文字离边框太远」「不该有框的地方冒出个框」（用户实测反馈过）。 */
+details.page-toc {
+  margin: 0 0 var(--space-9);         /* 原站只有 mb-8，没有上边距 */
+  padding: 0;               /* 全局规则那份 0.75rem/1rem 会和 summary 叠加 */
+  border: 1px solid var(--border);
+  border-radius: var(--radius-lg);
+}
+details.archive-year {
+  margin: 0;
+  padding: 0;
+  border: 0;
+  border-top: 1px solid var(--border);   /* 原站只有上边线，没有框 */
+  border-radius: 0;
+}
+details.til-others {
+  margin: 0;
+  padding: 0;
+  border: 0;
+  border-radius: 0;
+}
+details.page-toc > summary {
+  padding: var(--space-5) var(--space-6);
+  font-size: var(--text-base);
+  line-height: 1.25rem;     /* 原站 text-sm 的 20px；不写会继承 body 的 1.85，行高多 6px */
+  font-weight: 500;
+  color: var(--toc);
+  cursor: pointer;
+  user-select: none;
+}
+.til-toc { padding: 0 var(--space-6) var(--space-6); }
+
+/* 目录列表 —— 照抄原站 baseof.html 里的 #TableOfContents 内联样式：
+   左边一条细竖线，条目左缩进 12px，13px/1.6，hover 只变色不下划线，
+   当前项（.active 加在 li 上）变色 + 加粗 + 竖线高亮。 */
+#TableOfContents ul {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  border-left: 1px solid var(--toc-rule);
+}
+#TableOfContents ul ul { padding-left: 0.875rem; border-left: 0; }
+#TableOfContents li { margin: 0; }
+#TableOfContents a {
+  display: block;
+  padding: 3px 0 3px var(--space-5);
+  margin-left: -1px;
+  font-size: var(--text-sm);
+  line-height: 1.6;
+  font-weight: 400;
+  color: var(--meta);
+  text-decoration: none;
+  border-left: 1px solid transparent;
+  transition: color 0.15s, border-color 0.15s;
+}
+#TableOfContents a:hover { color: var(--accent); }
+#TableOfContents li.active > a {
+  color: var(--accent);
+  font-weight: 500;
+  border-left-color: var(--accent);
+}
+.til-toc { padding: 0 var(--space-6) var(--space-6); }
+
+.garden-actions { margin-bottom: var(--space-9); }
+.garden-actions button {
+  display: inline-flex;
+  align-items: center;
+  gap: var(--space-2);
+  padding: var(--space-2) var(--space-5);
+  font-size: var(--text-sm);
+  font-weight: 500;
+  color: var(--meta);
+  background: none;
+  border: 1px solid var(--border);
+  border-radius: var(--radius-full);
+  cursor: pointer;
+}
+.garden-actions button:hover { color: var(--heading); border-color: var(--rule); }
+
+/* 计划列表（只在有 SCHEDULED/DEADLINE 时出现） */
+[data-plan-list] { list-style: none; margin: 0 0 var(--space-10); padding: 0; }
+[data-plan-list] li { display: flex; align-items: baseline; gap: 0.7rem; padding-block: 0.3rem; }
+[data-plan-list] time { flex-shrink: 0; color: var(--meta); font-size: var(--text-sm); font-variant-numeric: tabular-nums; }
+[data-plan-list] .plan-kind {
+  flex-shrink: 0;
+  padding: 0.05rem 0.4rem;
+  font-size: var(--text-2xs);
+  color: var(--meta);
+  border: 1px solid var(--border);
+  border-radius: var(--radius-full);
+}
+[data-plan-list] a { color: var(--heading); text-decoration: none; }
+[data-plan-list] a:hover { text-decoration: underline; }
+
+/* --- 列表页（/posts/ /til/ /til/<cat>/）--------------------------------- */
+main > ul {
+  list-style: none;
+  margin: var(--space-9) 0 0;
+  padding: 0;
+}
+main > ul > li {
+  display: flex;
+  align-items: baseline;
+  gap: var(--space-6);
+  margin: 0;
+  padding: 0.4rem 0;
+  border-bottom: 1px solid var(--border);
+}
+main > ul > li > a { text-decoration: none; }
+main > ul > li > a:hover { text-decoration: underline; }
+main > ul > li > time,
+main > ul > li > span {
+  margin-inline-start: auto;
+  color: var(--muted);
+  font-size: var(--text-sm);
+  flex-shrink: 0;
+  font-variant-numeric: tabular-nums;
+}
+
+/* --- 文章页：日期条 / 分割线 / 标签 / 评论区 ----------------------------- */
+/* 数值全部取自原站 posts 页的 computed style */
+.post-meta {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: var(--space-9);              /* mb-8 */
+  padding-bottom: var(--space-8);           /* pb-6 */
+  border-bottom: 1px solid var(--border);
+}
+.post-meta time { font-size: var(--text-base); line-height: 1.25rem; color: var(--meta); }
+
+.post-tags a {
+  font-size: var(--text-lg);
+  font-weight: 400;
+  color: var(--accent);
+  text-decoration: underline;
+}
+.post-comments { margin: var(--space-11) 0; }
+.post-comments-head {
+  display: flex;
+  align-items: center;
+  gap: var(--space-3);
+  margin: var(--space-11) 0 var(--space-8);
+  font-size: var(--text-4xl);
+  font-weight: 600;
+  color: var(--heading);
+}
+.post-comments-head svg { width: 1rem; height: 1rem; flex-shrink: 0; }
+.post-reply { margin-bottom: var(--space-7); text-align: center; }
+.post-reply a {
+  font-size: var(--text-base);
+  font-weight: 400;
+  color: var(--meta);
+  text-decoration: underline;
+}
+
+/* 404 页（原站 text-center py-16 + 按钮） */
+.notfound { padding-block: var(--space-12); text-align: center; }
+.notfound h1 { font-weight: 700; }
+.notfound p { margin: var(--space-7) 0; color: var(--meta); }
+.notfound-btn {
+  display: inline-block;
+  padding: var(--space-3) var(--space-6);
+  font-weight: 400;
+  color: var(--toc);
+  text-decoration: none;
+  border: 1px solid var(--border);
+  border-radius: var(--radius-md);
+}
+.notfound-btn:hover { background: var(--row-hover); }
+}
+
+@layer pages {
 /* --- 首页 ---------------------------------------------------------------- */
 /* 双栏用 [data-home-columns]，不要用 main > div（标签云也是 main > div） */
 [data-home-columns] {
@@ -630,39 +873,6 @@ svg.heat-grid { display: block; width: 100%; height: auto; }
 .garden-cat.is-active .garden-cat-name { color: var(--cat-active-fg); font-weight: 500; }
 .garden-cat.is-active .garden-cat-count { color: var(--cat-active-count); }
 
-/* --- TIL 三栏 shell（/til/ 下所有页面）----------------------------------- */
-/* 原站：min-[1280px]:grid grid-cols-[1fr_790px_1fr] —— 内容列固定 790 居中，
-   左栏（w-52 = 13rem）悬挂在左侧 1fr 轨道里。放在轨道里（而不是让内容列让位）
-   是为了让列表页/分类页/笔记页的正文左边缘完全一致。 */
-@media (min-width: 80rem) {
-  [data-til-shell] {
-    display: grid;
-    grid-template-columns: minmax(0, 1fr) 790px minmax(0, 1fr);
-  }
-  /* 必须 width:100%：grid item 上带 margin-inline:auto 会退化成 fit-content，
-     根页（内容窄）会缩到 634px。原站是 w-full。（实测踩过） */
-  [data-til-shell] > main { grid-column: 2; width: 100%; }
-  [data-til-side] { grid-column: 1; justify-self: end; }
-}
-/* pt-8 不是响应式的：所有宽度都要（放在媒体查询里会让 <1280px 少 32px） */
-[data-til-shell] > main { padding-top: var(--space-9); }
-/* 左栏只在列表页/分类页渲染（笔记页传 nil，压根没有这个元素）；<1280px 一律隐藏 */
-[data-til-side] { display: none; }
-@media (min-width: 80rem) {
-  [data-til-side] {
-    display: block;
-    width: 13rem;                 /* w-52 */
-    margin-inline-end: 1.5rem;    /* mr-6 */
-    padding-top: var(--space-9);            /* pt-8 */
-  }
-}
-[data-til-tree] { position: sticky; top: 5rem; }   /* sticky top-20 */
-
-/* 小屏内联分类树：≥1280px 交给左栏，别重复显示一份 */
-@media (min-width: 80rem) {
-  [data-til-inline] { display: none; }
-}
-
 /* --- 分类页 /til/<cat>/ ------------------------------------------------- */
 /* 对齐原站 layouts/til/list.html：面包屑 + 2xl 标题 + （有 #+HEADER 时）筛选
    chips / 分组小节 /「其他」折叠块。数值全部来自原站 computed style 实测。 */
@@ -869,127 +1079,6 @@ svg.heat-grid { display: block; width: 100%; height: auto; }
   font-variant-numeric: tabular-nums;
 }
 
-/* --- 目录（「本页内容」，TIL 页与部分根页面）------------------------------ */
-/* 注意：全局 `details` 规则（服务正文里内容自带的 <details>）会给页面级组件的
-   <details> 也套上 padding / border / margin —— 三处组件各自要清零，
-   否则观感是「框里文字离边框太远」「不该有框的地方冒出个框」（用户实测反馈过）。 */
-details.page-toc {
-  margin: 0 0 var(--space-9);         /* 原站只有 mb-8，没有上边距 */
-  padding: 0;               /* 全局规则那份 0.75rem/1rem 会和 summary 叠加 */
-  border: 1px solid var(--border);
-  border-radius: var(--radius-lg);
-}
-details.archive-year {
-  margin: 0;
-  padding: 0;
-  border: 0;
-  border-top: 1px solid var(--border);   /* 原站只有上边线，没有框 */
-  border-radius: 0;
-}
-details.til-others {
-  margin: 0;
-  padding: 0;
-  border: 0;
-  border-radius: 0;
-}
-details.page-toc > summary {
-  padding: var(--space-5) var(--space-6);
-  font-size: var(--text-base);
-  line-height: 1.25rem;     /* 原站 text-sm 的 20px；不写会继承 body 的 1.85，行高多 6px */
-  font-weight: 500;
-  color: var(--toc);
-  cursor: pointer;
-  user-select: none;
-}
-.til-toc { padding: 0 var(--space-6) var(--space-6); }
-
-/* 目录列表 —— 照抄原站 baseof.html 里的 #TableOfContents 内联样式：
-   左边一条细竖线，条目左缩进 12px，13px/1.6，hover 只变色不下划线，
-   当前项（.active 加在 li 上）变色 + 加粗 + 竖线高亮。 */
-#TableOfContents ul {
-  list-style: none;
-  margin: 0;
-  padding: 0;
-  border-left: 1px solid var(--toc-rule);
-}
-#TableOfContents ul ul { padding-left: 0.875rem; border-left: 0; }
-#TableOfContents li { margin: 0; }
-#TableOfContents a {
-  display: block;
-  padding: 3px 0 3px var(--space-5);
-  margin-left: -1px;
-  font-size: var(--text-sm);
-  line-height: 1.6;
-  font-weight: 400;
-  color: var(--meta);
-  text-decoration: none;
-  border-left: 1px solid transparent;
-  transition: color 0.15s, border-color 0.15s;
-}
-#TableOfContents a:hover { color: var(--accent); }
-#TableOfContents li.active > a {
-  color: var(--accent);
-  font-weight: 500;
-  border-left-color: var(--accent);
-}
-.til-toc { padding: 0 var(--space-6) var(--space-6); }
-
-.garden-actions { margin-bottom: var(--space-9); }
-.garden-actions button {
-  display: inline-flex;
-  align-items: center;
-  gap: var(--space-2);
-  padding: var(--space-2) var(--space-5);
-  font-size: var(--text-sm);
-  font-weight: 500;
-  color: var(--meta);
-  background: none;
-  border: 1px solid var(--border);
-  border-radius: var(--radius-full);
-  cursor: pointer;
-}
-.garden-actions button:hover { color: var(--heading); border-color: var(--rule); }
-
-/* 计划列表（只在有 SCHEDULED/DEADLINE 时出现） */
-[data-plan-list] { list-style: none; margin: 0 0 var(--space-10); padding: 0; }
-[data-plan-list] li { display: flex; align-items: baseline; gap: 0.7rem; padding-block: 0.3rem; }
-[data-plan-list] time { flex-shrink: 0; color: var(--meta); font-size: var(--text-sm); font-variant-numeric: tabular-nums; }
-[data-plan-list] .plan-kind {
-  flex-shrink: 0;
-  padding: 0.05rem 0.4rem;
-  font-size: var(--text-2xs);
-  color: var(--meta);
-  border: 1px solid var(--border);
-  border-radius: var(--radius-full);
-}
-[data-plan-list] a { color: var(--heading); text-decoration: none; }
-[data-plan-list] a:hover { text-decoration: underline; }
-
-/* --- 列表页（/posts/ /til/ /til/<cat>/）--------------------------------- */
-main > ul {
-  list-style: none;
-  margin: var(--space-9) 0 0;
-  padding: 0;
-}
-main > ul > li {
-  display: flex;
-  align-items: baseline;
-  gap: var(--space-6);
-  margin: 0;
-  padding: 0.4rem 0;
-  border-bottom: 1px solid var(--border);
-}
-main > ul > li > a { text-decoration: none; }
-main > ul > li > a:hover { text-decoration: underline; }
-main > ul > li > time,
-main > ul > li > span {
-  margin-inline-start: auto;
-  color: var(--muted);
-  font-size: var(--text-sm);
-  flex-shrink: 0;
-  font-variant-numeric: tabular-nums;
-}
-
 /* --- 标签页 -------------------------------------------------------------- */
 [data-tag-cloud] { display: flex; flex-wrap: wrap; gap: 0.7rem; margin-top: var(--space-8); }
 [data-tag-cloud] a {
@@ -1097,7 +1186,9 @@ main > ul > li > span {
 }
 #ph-lb-cap { overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
 #ph-lb-count { font-variant-numeric: tabular-nums; color: rgba(255, 255, 255, 0.55); }
+}
 
+@layer utilities {
 /* --- 无障碍：跳转到内容 --------------------------------------------------- */
 [data-skip-link] {
   position: absolute;
@@ -1142,10 +1233,6 @@ th, td { overflow-wrap: anywhere; }
   [data-site-header] nav a { padding-block: 0.35rem; }
 }
 
-/* iOS 上输入框字号 <16px 会触发自动放大 */
-@media (max-width: 40rem) {
-  input, select, textarea, button { font-size: var(--text-lg); }
-}
 
 /* 低动效偏好 */
 @media (prefers-reduced-motion: reduce) {
@@ -1156,58 +1243,6 @@ th, td { overflow-wrap: anywhere; }
     scroll-behavior: auto !important;
   }
 }
-
-/* --- 文章页：日期条 / 分割线 / 标签 / 评论区 ----------------------------- */
-/* 数值全部取自原站 posts 页的 computed style */
-.post-meta {
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  margin-bottom: var(--space-9);              /* mb-8 */
-  padding-bottom: var(--space-8);           /* pb-6 */
-  border-bottom: 1px solid var(--border);
-}
-.post-meta time { font-size: var(--text-base); line-height: 1.25rem; color: var(--meta); }
-
-.post-tags a {
-  font-size: var(--text-lg);
-  font-weight: 400;
-  color: var(--accent);
-  text-decoration: underline;
-}
-.post-comments { margin: var(--space-11) 0; }
-.post-comments-head {
-  display: flex;
-  align-items: center;
-  gap: var(--space-3);
-  margin: var(--space-11) 0 var(--space-8);
-  font-size: var(--text-4xl);
-  font-weight: 600;
-  color: var(--heading);
-}
-.post-comments-head svg { width: 1rem; height: 1rem; flex-shrink: 0; }
-.post-reply { margin-bottom: var(--space-7); text-align: center; }
-.post-reply a {
-  font-size: var(--text-base);
-  font-weight: 400;
-  color: var(--meta);
-  text-decoration: underline;
-}
-
-/* 404 页（原站 text-center py-16 + 按钮） */
-.notfound { padding-block: var(--space-12); text-align: center; }
-.notfound h1 { font-weight: 700; }
-.notfound p { margin: var(--space-7) 0; color: var(--meta); }
-.notfound-btn {
-  display: inline-block;
-  padding: var(--space-3) var(--space-6);
-  font-weight: 400;
-  color: var(--toc);
-  text-decoration: none;
-  border: 1px solid var(--border);
-  border-radius: var(--radius-md);
-}
-.notfound-btn:hover { background: var(--row-hover); }
 
 /* --- 存量内容里的少量 class 兜底 ----------------------------------------- */
 /* 内容是既成事实：早期文章里用过个别 Tailwind 类名。这不是要引入 class 体系，
@@ -1226,22 +1261,10 @@ th, td { overflow-wrap: anywhere; }
 /* 鼠标点击不显示环（键盘 Tab 才显示） */
 :focus:not(:focus-visible) { outline: none; }
 
-/* ---------- 正文里的链接：靠下划线区分，不只靠颜色 ---------- */
-/* 实测正文色 #4b4743 与链接色 #3d5b7a 亮度几乎相同（L* 34.3 / 35.9），
-   仅靠饱和度差异在 CJK 长文里等于「看不出是链接」→ 正文范围内加下划线 */
-main p a, main li a, main blockquote a, main td a, main dd a {
-  text-decoration: underline;
-  text-decoration-thickness: 1px;
-  text-underline-offset: 0.2em;
-  text-decoration-color: color-mix(in oklab, var(--accent) 60%, transparent);
-}
-main p a:hover, main li a:hover, main blockquote a:hover, main td a:hover, main dd a:hover {
-  text-decoration-color: var(--accent);
-}
-
 /* ---------- 触屏：顶部导航点击区补到 44px ---------- */
 [data-site-nav] a {
   display: inline-flex;
   align-items: center;
   min-height: 2.75rem;
+}
 }
