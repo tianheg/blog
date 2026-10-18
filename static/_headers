@@ -8,6 +8,17 @@
 /*.md
   Content-Type: text/plain; charset=utf-8
 
+# 样式表与脚本里也有中文（style.css 的注释、site.js 的界面文案），CF 默认发不带 charset
+# 的 Content-Type + `X-Content-Type-Options: nosniff` → 浏览器不猜编码、按 latin-1 解：
+# view-source 里一片乱码，site.js 的 '切换到浅色' / '关闭菜单' 是真会坏掉的字符串。
+# 这里强制带上 charset（CSS 另外在文件首行写了 @charset，双保险）。
+/*.css
+  Content-Type: text/css; charset=utf-8
+/*.js
+  Content-Type: text/javascript; charset=utf-8
+/js/*
+  Content-Type: text/javascript; charset=utf-8
+
 # 故意不给 /css/*、/js/*、/fonts/* 设长缓存（2026-09-18 移除原 `/*.(css|js|woff2)` 规则）：
 #
 # 1) 原写法 `/*.(css|js|woff2)` 本来就无效 —— CF 的 _headers 只支持 `*` 通配和
