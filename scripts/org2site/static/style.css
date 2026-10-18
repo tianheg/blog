@@ -191,9 +191,11 @@ body > main { margin-top: 2.5rem; }
 
 [data-site-footer] p {
   margin: 0;
-  padding-block: 2.5rem 2rem;
-  color: var(--muted);
+  /* 上方留白靠 article 的 padding-bottom（首页实测 ≈ 原站 73px），这里不再加 */
+  padding-block: 0 2rem;
+  color: var(--meta);          /* 原站 text-gray-600 = --meta（原来用 --muted 偏浅） */
   font-size: 0.875rem;
+  text-align: center;          /* 用户要求居中（原站是左对齐，这是主动偏离） */
 }
 
 /* --- 正文排版 ------------------------------------------------------------ */
