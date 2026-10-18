@@ -146,13 +146,13 @@
 .sent-all { margin-top: 0.5rem; }
 .sent-all > summary { cursor: pointer; font-size: 0.875rem; color: #4b5563; }
 .sent-all > summary:hover { color: #3d5b7a; }
-@media (prefers-color-scheme: dark) {
-  .sent-draw { border-left-color: #88a1bc; }
-  .sent-draw-btn { color: #9ca3af; text-decoration-color: rgba(156, 163, 175, 0.4); }
-  .sent-draw-btn:hover { color: #88a1bc; text-decoration-color: currentColor; }
-  .sent-all > summary { color: #9ca3af; }
-  .sent-all > summary:hover { color: #88a1bc; }
-}
+/* 主题跟随站点切换（.light/.dark 改 color-scheme，light-dark() 随之解析）。
+   不要用 @media (prefers-color-scheme: dark)：那是跟系统走，站点显式切主题时会错配。 */
+.sent-draw { border-left-color: light-dark(#3d5b7a, #88a1bc); }
+.sent-draw-btn { color: light-dark(#4b5563, #9ca3af); text-decoration-color: light-dark(rgba(75, 85, 99, 0.4), rgba(156, 163, 175, 0.4)); }
+.sent-draw-btn:hover { color: light-dark(#3d5b7a, #88a1bc); text-decoration-color: currentColor; }
+.sent-all > summary { color: light-dark(#4b5563, #9ca3af); }
+.sent-all > summary:hover { color: light-dark(#3d5b7a, #88a1bc); }
 </style>
 #+END_EXPORT
 
