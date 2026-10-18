@@ -1,10 +1,16 @@
 # blog
 
-[![Generator is Hugo](https://img.shields.io/badge/Generator%20is-Hugo-ff4088?&logo=hugo)](https://github.com/gohugoio/hugo)
+[![Generator is org+Emacs](https://img.shields.io/badge/Generator-org%20%2B%20Emacs-1f6feb)](#常用命令)
 [![Source on GitHub](https://img.shields.io/badge/Source%20on-Forgejo-181717?&logo=forgejo)](https://git.tianheg.co/tianheg/blog)
 [![Built with Cloudflare Workers](https://img.shields.io/badge/Built%20with-Cloudflare_Workers-orange?&logo=cloudflare)](https://workers.cloudflare.com/)
 
 个人博客站点 - [tianheg.co](https://tianheg.co/)
+
+> **2026-10-18：已换成 org + Emacs 管线，Hugo 下线。**
+> 构建：`bash scripts/org2site/build.sh [输出目录]`（自装 emacs 30.1 与 PageFind，**不依赖 node**）；
+> 自检：`python3 scripts/org2site/verify.py <输出目录>`；部署仍是 push → CF Workers Builds。
+> 本文里 `layouts/`、`hugo.yaml`、`npm run *`、Tailwind/TS 那些描述的是**旧管线**（文件已删），
+> 只作历史参考 —— 管线的完整知识在技能 `blog-org2site`（含坑清单与验收方法）。
 
 ## 目录
 
@@ -374,30 +380,33 @@ grep -rn 'emerald-\|text-blue-\|bg-blue-\|fill-blue-\|outline-blue-' layouts/ as
 ## 常用命令
 
 ```bash
-# 开发服务器（含热重载）
-npm run dev
+# 全量构建（导出 + PageFind 搜索索引 + 体检）→ public/
+bash scripts/org2site/build.sh
 
-# 构建站点
-npm run build
+# 只导出（不跑 pagefind/体检，约 50s）
+emacs -Q --batch -l scripts/org2site/build.el org public </dev/null
 
-# 构建 + 生成搜索索引（完整发布流程）
-npm run all
+# 输出体检：每页一个 h1 / 合法 UTF-8 / shell 覆盖 / 页内锚点 / 站内死链 / 文件名规范
+python3 scripts/org2site/verify.py public
 
-# 仅生成搜索索引（需先构建）
-npm run pagefind
+# 本地预览（禁缓存 + 相册图片占位路由）
+python3 scripts/org2site/preview-server.py public 8099
 
-# 生成语义搜索索引（调 Cloudflare Workers AI，需先 build）
-# ⚠️ 2026-10-10 起改内容**不再**随发布跑这条 —— 由每周一 04:00 的 cron
-#    （~/.hermes/scripts/blog-semantic-index-weekly.sh）全量重建并提交；
-#    只有需要「语义搜索马上命中」时才手工跑
-npm run embed
+# 内容源改动后重生成 org/（org/ 是转换产物；改内容改 content/）
+python3 scripts/org2site/migrate.py content org
 
-# 站内链接检查（wikilink 解析 + 内链，发布闸门）
-npm run check-links
+# 转正队列（全库 draft → org/agenda.org，Emacs 打开 + M-x org-agenda）
+python3 scripts/org2site/status-agenda.py
 
-# 站外链接死链扫描（默认走缓存，结果分 ok/dead/blocked/unreachable/error 五类）
-npm run check-external-links
+# 站外链接死链扫描（仍在用；只依赖 node 内置模块）
+node scripts/check.mjs external
+
+# 语义搜索索引（周一 04:00 cron 自动跑；需要立即命中时手工跑）
+node scripts/embed.mjs
 ```
+
+> `npm run *` 那套随 Hugo 一起删了（`package.json` 已不存在）。`scripts/check.mjs` 只保留还能用的子命令：
+> `external`（站外死链）、`unicode`（伪 ASCII / 全角标点）；`links`（读 Hugo 构建日志）、`photos` 不再适用。
 
 ### 站外链接死链扫描（`node scripts/check.mjs external`）
 
