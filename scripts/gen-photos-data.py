@@ -23,8 +23,8 @@ import sys
 BLOG = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 MANIFEST = os.path.join(BLOG, "data", "photos-list.yaml")  # 与派生 photos.json 不能同基名（Hugo 合并会炸）
 INDEX = "/root/projects/img/source/.index.json"
-STUB_DIR = os.path.join(BLOG, "content", "photos")  # 合集子页（content/photos/<名字>.md）
-STUB_TMPL = "---\ntitle: {name}\nseries: {name}\ndescription: 系列\n---\n\n"
+STUB_DIR = os.path.join(BLOG, "org", "photos")  # 合集子页（org/photos/<编号>.org，content/ 已下线）
+STUB_TMPL = "#+TITLE: {name}\n#+SERIES: {name}\n#+DESCRIPTION: 系列\n\n"
 
 NAME_RE = re.compile(r"^(\d{4})(\d{2})(\d{2})_([^_]*)_(\d+)(?:_edit)?\.webp$")
 PLACE_ZH = {"Shenzhen": "深圳", "Guangzhou": "广州", "Taihe": "泰和", "Unknown": ""}
@@ -128,22 +128,22 @@ def sync_content_stubs(series):
     os.makedirs(STUB_DIR, exist_ok=True)
     by_name = {a["name"]: a["num"] for a in series}
     for a in series:
-        path = os.path.join(STUB_DIR, f"{a['num']}.md")
+        path = os.path.join(STUB_DIR, f"{a['num']}.org")
         if not os.path.exists(path):
             with open(path, "w", encoding="utf-8") as f:
                 f.write(STUB_TMPL.format(name=a["name"]))
-            print(f"  + 新建内容页 content/photos/{a['num']}.md → /photos/{a['num']}/")
+            print(f"  + 新建内容页 org/photos/{a['num']}.org → /photos/{a['num']}/")
     for fn in sorted(os.listdir(STUB_DIR)):
-        if fn.startswith("_") or not fn.endswith(".md"):
+        if fn.startswith("_") or not fn.endswith(".org"):
             continue
         text = open(os.path.join(STUB_DIR, fn), encoding="utf-8").read()
-        m = re.search(r"^(?:album|series):\s*(.+?)\s*$", text, re.M)
+        m = re.search(r"^#\+(?:SERIES|ALBUM):\s*(.+?)\s*$", text, re.M)
         name = m.group(1).strip("\\'\"") if m else ""
         if name not in by_name:
-            sys.exit(f"僵尸系列页 content/photos/{fn}：yaml 无此系列「{name}」（补进 photos-list.yaml 或删页）")
+            sys.exit(f"僵尸系列页 org/photos/{fn}：yaml 无此系列「{name}」（补进 photos-list.yaml 或删页）")
         stem = fn[:-3]
         if stem.isdigit() and int(stem) != by_name[name]:
-            sys.exit(f"编号错位 content/photos/{fn}：系列「{name}」在 yaml 里是 no.{by_name[name]}")
+            sys.exit(f"编号错位 org/photos/{fn}：系列「{name}」在 yaml 里是 no.{by_name[name]}")
 
 
 def main():
