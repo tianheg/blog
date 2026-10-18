@@ -492,10 +492,11 @@ org2site--index-title 取；#+NOEXPORT: t 的文件也不发布。"
            pages "\n")
           "\n</div>\n"))
 
-(defun org2site-year-html (year pages)
+(defun org2site-year-html (year pages &optional open)
   (let ((days (org2site--group-by (lambda (p) (org2site--day (nth 2 p))) pages)))
     (concat
-     "<details class=\"archive-year\" open>\n<summary>\n"
+     ;; 只有最新那年展开，历史年份折叠（对齐原站：Hugo 产物里第一个 details 带 open，其余都没有）
+     (format "<details class=\"archive-year\"%s>\n<summary>\n" (if open " open" ""))
      "<svg class=\"chev\" viewBox=\"0 0 24 24\" width=\"12\" height=\"12\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"2.5\" stroke-linecap=\"round\" stroke-linejoin=\"round\" aria-hidden=\"true\"><path d=\"M9 5l7 7-7 7\"/></svg>\n"
      (format "<h2>%s<span class=\"archive-count\"> · %d 篇</span></h2>\n" year (length pages))
      "</summary>\n<div class=\"archive-body\">\n<div class=\"heat-main\">\n"
@@ -510,9 +511,13 @@ org2site--index-title 取；#+NOEXPORT: t 的文件也不发布。"
 (defun org2site-archive-html (label pages)
   (concat
    (format "<h1>%s<span class=\"archive-count\"> · %d 篇</span></h1>\n" label (length pages))
-   (mapconcat (lambda (yg) (org2site-year-html (car yg) (cdr yg)))
-              (org2site--group-by (lambda (p) (substring (org2site--day (nth 2 p)) 0 4)) pages)
-              "\n")))
+   (let ((groups (org2site--group-by (lambda (p) (substring (org2site--day (nth 2 p)) 0 4)) pages))
+         (i 0))
+     (mapconcat (lambda (yg)
+                  (prog1 (org2site-year-html (car yg) (cdr yg) (= i 0))
+                    (setq i (1+ i))))
+                groups
+                "\n"))))
 
 ;; ------------------------------------------------- 数字花园（/til/ 落地页）
 ;;
@@ -621,18 +626,22 @@ ACTIVE 是当前分类 slug：分类页高亮自己，/til/ 根页与笔记页�
 (defun org2site--title-key (title)
   "标题排序键：复现原站 Hugo .ByTitle（CLDR：大小写不敏感，标点/符号先于数字字母）。
 每个字符换成两字符 —— 类权重（私用区 #xE000 标点 / #xE001 其它）+ 折叠后的字符，
-按字符串比较即等价于按 (类, 折叠字符) 序列比较。实测 30 个分组 462 条零差异。"
-  (let* ((n (length title))
-         (out (make-string (* 2 n) #xe001))
-         (i 0))
+按字符串比较即等价于按 (类, 折叠字符) 序列比较。实测 30 个分组 462 条零差异。
+
+**不要用 `make-string` + `aset` 拼这个键**：`(make-string n ?a)` 之类会得到 unibyte 串，
+往里 `aset` 私用区码位在 emacs 31 直接报
+`Attempt to store non-ASCII char into multibyte string`（30.1 只是静默截断，所以一直没暴露）。
+`concat` 会正确处理多字节。"
+  (let ((parts nil)
+        (n (length title))
+        (i 0))
     (while (< i n)
-      (let* ((s (char-to-string (aref title i)))
-             (fold (downcase s)))
-        (aset out (* 2 i)
-              (if (org2site--punct-or-symbol-p (aref title i)) #xe000 #xe001))
-        (aset out (1+ (* 2 i)) (aref fold 0)))
+      (let* ((ch (aref title i))
+             (fold (downcase (char-to-string ch))))
+        (push (concat (if (org2site--punct-or-symbol-p ch) "\uE000" "\uE001") fold)
+              parts))
       (setq i (1+ i)))
-    out))
+    (apply #'concat (nreverse parts))))
 
 (defun org2site--by-title (pages)
   "按标题排序（对齐原站 .ByTitle）。"

@@ -190,7 +190,9 @@ body > main { margin-top: 2.5rem; }
 #mobile-menu a { padding: 0.7rem 0; }
 
 [data-site-footer] p {
-  margin: 0;
+  /* 只能清纵向：横向那份 margin-inline: auto（见上方 790px 列规则）是列居中的关键，
+     写 `margin: 0` 会把它一起覆盖掉 —— 实测 footer 会贴到左边缘、文字中心 395 vs 视口 640 ✗ */
+  margin-block: 0;
   /* 上方留白靠 article 的 padding-bottom（首页实测 ≈ 原站 73px），这里不再加 */
   padding-block: 0 2rem;
   color: var(--meta);          /* 原站 text-gray-600 = --meta（原来用 --muted 偏浅） */
