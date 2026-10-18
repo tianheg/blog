@@ -17,6 +17,11 @@
 /*.js
   Content-Type: text/javascript; charset=utf-8
 
+# RSS / sitemap 同理会发 application/xml（不带 charset）。XML 自身有 `<?xml … encoding="utf-8"?>`
+# 声明，解析器按声明走，所以实际没坏；但补上更正确、零风险（订阅源里全是中文）。
+/*.xml
+  Content-Type: application/xml; charset=utf-8
+
 # 故意不给 /css/*、/js/*、/fonts/* 设长缓存（2026-09-18 移除原 `/*.(css|js|woff2)` 规则）：
 #
 # 1) 原写法 `/*.(css|js|woff2)` 本来就无效 —— CF 的 _headers 只支持 `*` 通配和
