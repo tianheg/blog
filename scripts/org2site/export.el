@@ -560,6 +560,33 @@ Invalid use of \\ in replacement text 并中止整篇导出（踩过）。"
                               (if (= n 0) base (format "%s-%d" base n)) inner tag))))))
       (buffer-string))))
 
+(defun org2site-stabilize-org-ids (html)
+  "把 org-export 每次运行都会变的随机内部 id（`org############`）换成稳定编号。
+
+org 给 section 的 div 生成 `outline-container-org1a2b3c4` / `text-org1a2b3c4` 这类 id，
+**每次导出都不一样** → 「输入相同、产物却不同」：每次部署 2000+ 文件被判定成新资产重传，
+PageFind 的分片名也跟着全换，浏览器缓存白刷（CF 构建日志里 `Found 2111 new or modified
+static assets` 就是这个）。
+
+这些 id **没有任何东西引用**（目录指向 h2 的 slug 锚点，不是它们），所以按出现顺序
+重编号是安全的。同一个旧 id 的所有出现（一对 div）映射到同一个新 id。
+照旧：判完不要 replace-match（辅助函数会冲掉 match data），显式区域替换。"
+  (let ((map (make-hash-table :test 'equal))
+        (n 0))
+    (with-temp-buffer
+      (insert html)
+      (goto-char (point-min))
+      (while (re-search-forward "org[0-9a-f]\\{7\\}" nil t)
+        (let* ((beg (match-beginning 0))
+               (end (match-end 0))
+               (old (match-string 0))
+               (new (or (gethash old map)
+                        (puthash old (format "orgsec%d" (setq n (1+ n))) map))))
+          (goto-char beg)
+          (delete-region beg end)
+          (insert new)))
+      (buffer-string))))
+
 (defun org2site-export-string (infile &optional rel)
   "导出单篇为**正文片段**字符串（骨架由调用方用 org2site-page 包）。
 片段顶部补 `<h1>`：原站每页都有 h1（来自页面标题）。
@@ -572,6 +599,7 @@ REL 是文件相对 org 根的路径，供 wikilink 解析相对路径用（见 
            (body (if (bufferp out) (with-current-buffer out (buffer-string)) out))
            (title (org2site--title-of infile)))
       (setq body (org2site-fix-heading-ids body))
+      (setq body (org2site-stabilize-org-ids body))
       (if title (concat (format "<h1>%s</h1>\n" title) body) body))))
 
 (defun org2site-export-file (infile outfile)
