@@ -1026,13 +1026,20 @@ stroke-linecap=\"round\" stroke-linejoin=\"round\" aria-hidden=\"true\">\
           (when (file-exists-p src)
             (make-directory (file-name-directory dst) t)
             (copy-file src dst t))))
-      ;; 资源版本号跟随源文件 mtime：改样式后重跑即自动失效浏览器缓存
+      ;; 资源版本号取 **内容的 sha256 前 12 位**，不要取 mtime：
+      ;; CI 每次 checkout 都把 mtime 设成当前时间 → 版本每次都变 → 所有 HTML 的 `?v=` 都变
+      ;; → PageFind 的输入跟着变（分片名全换）→ 每次部署 2000+ 文件被当成新资产重传、
+      ;; 浏览器缓存全失效（CF 构建日志里的 `Found 2111 new or modified static assets`）。
+      ;; 内容没改就该是同一个版本 —— 这也是「输入没变 → 产物逐字节相同」的前提之一。
       (let ((css (expand-file-name "style.css" static)))
         (when (file-exists-p css)
           (setq org2site-asset-version
-                (format-time-string "%Y%m%d%H%M%S"
-                                    (file-attribute-modification-time
-                                     (file-attributes css))))))
+                (substring
+                 (secure-hash 'sha256
+                              (with-temp-buffer
+                                (insert-file-contents css)
+                                (buffer-string)))
+                 0 12))))
       ;; 仓库 static/（原站由 Hugo 整目录拷过来）：favicon / icon-* / manifest /
       ;; robots.txt / _headers / images/ / fonts/ / js/ / projects/ / resume*.pdf /
       ;; pagefind-semantic/（语义检索索引，脚本 worker.js 从 ASSETS 读）。
