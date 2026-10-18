@@ -1,0 +1,305 @@
+#+TITLE: 2026 网络阅读
+
+- [[https://asheradeniyi.com/2026/04/10/how-to-build-wealth-as-a-career-person/][How to Build Wealth as a Career Person]] 工资是引擎不是终点：早期用精力换职业资本→跨部门有用→留可量化证据→控生活方式膨胀→把结余自动变成资产，循环往复。核心动作是「薪酬→所有权」的转化，而非等被发现。
+- [[https://mp.weixin.qq.com/s/RL8w75YfXQrRubSLJHnSVA][给导弹写代码，为什么严禁使用动态内存分配？]] 禁 malloc/free 不是怕内存泄漏（导弹是一次性耗材），而是：1) 运行时尺寸让形式化验证/静态分析无法证明安全性；2) 破坏硬实时确定性，堆碎片化让分配耗时从 0.1µs 抖到 100µs。替代方案是静态大数组与 O(1) 固定块内存池。
+- [[https://forgejo.org/docs/latest/admin/setup/backup/][Backups and Backup Restoration | Forgejo 官方文档]] Forgejo 官方备份/恢复文档：要备数据库、仓库、存储、队列、app.ini 与索引器；SECRET_KEY/JWT_SECRET 不可再生，丢了加密凭据全废；恢复后需重建 SSH 公钥文件与索引。
+- [[https://d-d.design/single/20506][孤斗 | 我已经很久没有见过他了]] 孤斗（SnakeWu）关于爱、欲望与成长的长文。从吉隆坡的亲密关系观察与英剧《Skins》切入，对比两种爱情叙事：前者先有身体再求灵魂，中式青春爱情先交出灵魂却不敢奢望身体。作者提出动物性/人性/神性三层框架，自省年轻时从动物性直接跳到神性、跳过人性，于是把真诚变成对方的压力。结论：纯净的爱意与奋不顾身的勇气是不可再生之物 — 人终会学会规则，却很难再不计代价地投入。
+- [[https://viceconsole.fyi/blog/2026/10/10/what-i-self-host/][What I Self-Host, What I Don't, and Why]] 自托管选型哲学：不向公网暴露任何服务（只放 VPN）、能原生就跑原生、弃 Docker 转 Podman+systemd、按需降规格（720p 媒体/低分辨率摄像头子码流）换资源余量。28 个服务跑在 16GB 的 N100 小主机上。附不做什么：*arr 全家桶、自建邮件、Collabora。
+- [[https://mp.weixin.qq.com/s/2ohT0FTsHIcFNONyhAJIUg][深圳灵活就业社保补贴：每月返还600元社保费！申请入口→]] 深圳灵活就业社保补贴（4050补贴）：按实际缴费额2/3补、上限600元/月、累计最长3年；需粤籍+认定为就业困难人员或毕业2年内高校毕业生。含失业登记→困难认定→灵活就业登记三步流程。
+- [[https://mp.weixin.qq.com/s/Ykdu6pm0yh71zwQE8RtiQA][部分宏碁用户反馈 Win11 兼容故障，更完Win11开机直接报错]] Win11 打完补丁后 Acer 设备报 Secure Boot Violation 认不到引导盘：微软推送 2023 版证书链替换 2011 版，旧主板固件不认新签名。应急关 Secure Boot，根治刷 BIOS。
+- [[https://mp.weixin.qq.com/s/6PZZx_q6b6c67GT2FJVDuw][整板泡进液体里沸腾，曙光8000 十万卡超算用相变液冷降温]] 曙光8000十万卡超算集群用浸没式相变液冷：冷却液沸点约50℃、PUE 1.04-1.10，对比风冷/冷板散热能力与机房能耗，配套自研scaleFabric网络与分布式存储。
+- [[https://mp.weixin.qq.com/s/vJeC--QkaO9xoVOmHjpxlQ][中共中央 国务院《关于发展新质生产力的意见》全文]] 新华社 10-09 全文：以科技创新引领、全要素生产率大幅提升为核心标志。点名能源革命（有序发展先进核裂变能、构建高比例可再生能源电力系统、完善新能源消纳），另有原创性颠覆性技术攻关、企业研发准备金与加计扣除、首台套政策、科技成果转化中试平台，以及人才侧「新八级工」、科研人员评价与「帽子」薪酬脱钩。
+- [[https://mp.weixin.qq.com/s/jBm4Jw-ES2k-IJ6wl8O0Qg][AI开始逆向一切，你电脑里的每个软件都要被迫开源了。]] 卡兹克：AI 让逆向成本崩塌（净室重写 Adobe 全家桶开源、REA 接管 Ghidra 等工具），软件保密护城河消失，客户端被迫变薄锁云端；作者认为唯一剩下的护城河是注意力。
+- [[https://mp.weixin.qq.com/s/lyirY5w0uWfYsXxEBXG1Gg][萌新怎么入坑？来看考取A类业余无线电操作证指南]] 深圳市业余无线电协会指南：A类操作证报名流程（广东无线电服务平台小程序）、照片要求、考试题型（40题合格30题）、备考题库与刷题工具，考后申请电台执照取得呼号。
+- [[https://mp.weixin.qq.com/s/OO13Tq24MOS7md_81V_dwA][全省暂停！10月15日24:00前，广东社保业务暂停办理！]] 广东全省社保费业务10月1-15日全面停办，10月16日恢复；深圳灵活就业10-12月批扣改为10/21、11/23、12/21，并附深圳各险种缴费基数比例。
+- [[https://mp.weixin.qq.com/s/Me1AvtStUdcfmikAGjI4xg][聊聊A16Z这两份AI报告，以及一些反常识的真相。]] 卡兹克解读 A16Z《Top 100 消费级 AI 应用》第七版与《市场状况 II》：付费率仅4.5%、头部1%贡献19.5%消费、AI 杰文斯悖论与 Agent Token 爆炸、订阅+按量为主的商业模式、实体基建回归。
+- [[https://chrismaiorana.com/m-x-magic/][M-x and the future of Emacs]] 作者借 80 年代恐怖剧集谈 Emacs 的未来：M-x 是召唤魔法的钥匙，学 Emacs 就是学 Lisp、学计算本质，任何 agentic 工具都替代不了这段旅程。
+- [[https://frankwiles.com/posts/i-got-targeted/][I got targeted — 假项目邀请 + .git/hooks/post-checkout 投毒]] 钓鱼式项目邀约，Dropbox 里塞带 .git/hooks/post-checkout 的仓库：checkout 分支时经 Vercel C2 下载并执行 OS 二进制再自删。陌生 repo 先审 .git/hooks。
+- [[https://www.xda-developers.com/my-proxmox-host-was-writing-hundreds-of-gigabytes-a-day-to-an-ssd-that-barely-stores-anything/][Your Proxmox boot drive is probably dying faster than you think]] Proxmox 启动盘的后台写入量被低估：pmxcfs(/etc/pve 的 FUSE+SQLite+WAL)、pvestatd 每10秒轮询、PVE 9 更小的聚合窗口，再叠加 ZFS CoW 写放大。实测空闲单节点约 1000 sectors/min ≈ 0.5 TB/年。检查法：smartctl 看 Data Units Written，隔一天再比。
+- [[https://mp.weixin.qq.com/s/-XP2CdEb68IEO15Sg36fkg][Pi 1.0：为何接纳 MCP，又推出 Pi Durable？]] Pi 1.0 落地 MCP：默认 exposure=codemode 映射为 deferred，工具不再预载进提示，改由宿主 BM25 searchTools 按需发现。Codemode 在 QuickJS 沙箱里让模型写编排脚本，中间结果留在脚本内处理，只回传汇总，省模型往返与上下文。配套 Pi Durable 以 SQLite 上的会话/任务/文档三原语 + 检查点做持久化恢复：requestId 提交去重、工具仅在声明 replay:"safe" 时才重跑、取消沿所有权自底向上传播。文末对比 Claude Code Mods 的事件链与 UI 扩展。
+- [[https://program-think.blogspot.com/2016/10/custom-firefox-theme-without-extension.html][无需任何插件或扩展，定制 Firefox 外观（编程随想）]] profile 目录下 chrome/ 里的 userChrome.css（浏览器界面）与 userContent.css（网页内容）；userContent.css 用 @-moz-document 做站点级样式（严格匹配 / domain() / url-prefix() / 正则四形式）。动机是不装扩展＝运行代码更少＝攻击面更小，且避免扩展自动升级偷偷变坏。
+- [[https://program-think.blogspot.com/2019/07/Customize-Firefox.html][扫盲 Firefox 定制——从“user.js”到“omni.ja”（编程随想）]] 把 Firefox 定制分成三层：about:config / user.js（改当前值，不能改默认值、不能锁）→ autoconfig（能改默认值、能 lockPref，需写安装目录）→ 直接改 omni.ja（能改 UI 代码与快捷键，扩展机制弱化后的终极手段）。核心原则：用不到的功能统统禁掉，降低攻击面。
+- [[https://blog.sayori.org/zh-hant/posts/cn-university-studient-portraits/cn-university-student-portaits/][我眼中的中國大學生羣像 - Amiya的書桌]] 作者从健身房偶然听到的对话出发，反思自己对同龄人的偏见：大学生没有统一的正确玩法，每个人都在读书、技术、赚钱、社交、创作等不同轴线上加点，我们却只会拿自己的全部去比对方露出的一角。
+- [[https://upxuu.com/posts/china-medication/][中国新药你99%不知道的那些事]] 药企家属口述：2015.7.22 核查风暴如何让中药 NDA 空窗四年，连花清咳片从 IND 到上市走了十年。附中国药审二十年时间线。
+- [[https://arxiv.org/abs/2609.37725][Context Language Models (CLMs)]] Meta Superintelligence Labs + UW：把 context 当文件，LM 用 Bash 自由改写自己的上下文；零样本已超现有 harness（BrowseComp-Plus +11.4% 准确率 / −21.5% FLOPs），可 in-context 技能演化与 RL 内化。
+- [[https://turbopuffer.com/blog/rip-vector-database][RIP, vector database —— turbopuffer v3 存储重构]] turbopuffer 把 ANN 向量索引从主键降级为二级索引：旧架构把文档全量内容挂在 ANN 地址下，导致存储放大、写放大、块大小被 100-200 的聚类规模锁死。v3 不再以 ANN 地址为键，让每种查询计划各用最优块大小；目前 CI 全绿但性能仍是回退，未开始调优。
+- [[https://hiwannz.com/archives/1285.html][当答案比问题更早出现]] 纯 AI 工作一个月后，真正的返工不是 AI 做错了，而是人太快把最早出现的答案当成问题本身。作者用辅助驾驶 L1–L5 提出「AI 协作授权层级」，把 AI 当镜子映出自己带进来的假设。
+- [[https://reecoute.fr/tech_blog/2026-09-28_my-experience-writing-automated-tests-for-a-spa][My experience writing automated tests for a SPA | Tech blog | Réécoute]] Playwright 测 SPA 实战：整套当黑盒跑真实浏览器、无 before/after 钩子靠自建数据积累、外部依赖用全局 mock、fullyParallel + 只跑 Chromium 提速、CI retries=2 治 flake、trace 报告传对象存储。
+- [[https://www.paulgraham.com/say.html][What You Can't Say — Paul Graham (2004)]] 道德时尚像服装时尚一样不可见，却更危险。五个找出「不能说」的配方：看谁因言获罪、看定罪用的大词（divisive/ inappropriate）、对照历史与其他文化、翻道学先生的脑子、推演禁忌的生成机制。核心：能想什么比能说什么重要；pensieri stretti——内心无禁区，嘴上挑战场。
+- [[https://www.lesswrong.com/posts/6cb7qd3RSkgnviCpf/swarm-scaling][Swarm Scaling - LessWrong]] Toby Ord 从 OpenAI 数据反推出 swarm 规模化参数 λ≈0.48-0.68：多 agent 并行买到的是速度（N^λ 加速），代价是 N^(1-λ) 倍算力。λ 与智能爆炸模型关键参数同量级，值得追踪。
+- [[https://blog.arusekk.pl/posts/srht-account-takeover/][SourceHut account takeover via build logs (XSS in ansi2html.py) | CVE-2026-92973]] sr.ht builds 日志页 XSS：ansi2html 的 OSC 8 超链接注入可执行 JS，读日志者被 takeover（可窃 CSRF token / deploy key）。无账号也能触发（往公开邮件列表发 patch 即入日志）。教训=CSP 纵深 + 渲染库长期失维。
+- [[https://alexdanco.com/2019/10/26/everything-is-amazing-but-nothing-is-ours/][Everything is Amazing, But Nothing is Ours – Alex Danco]] Alex Danco 2019 长文：稀缺世界由「物品」构成，丰饶世界由「依赖」构成。软件从文件走向服务，用可拥有、离散的对象换无摩擦的访问权，代价是复杂性、代理权外包与脆弱性——「车抛锚了」是匮乏问题，「车找不到了」是丰饶问题。作者押注反趋势：找到被隔离的、真正属于你的东西（邮箱、私钥），less friction isn't always best。
+- [[https://www.astralcodexten.com/p/mysteries-of-ai-generalization][Mysteries Of AI Generalization]] Scott Alexander 梳理三个 AI 泛化谜题：Evans 的涌现错位（只教写不安全代码，模型整体变坏成纳粹）、Anthropic Hacker Opus（RLVR 诱导的作弊只泛化到「被评分」场景，不污染核心伦理）、nostalgebraist 的「反射 vs 目标追求」之分。末尾追问 Claude 勒索悖论：测试里 96% 会勒索，现实中零案例——说明泛化机制仍没搞懂。
+- [[https://typicalprogrammer.com/why-dont-software-development-methodologies-work][Why don't software development methodologies work?]] 2014 经典文：方法学本身给不出可预测、可重复的交付结果。真正决定成败的是关键成员共享的 conceptual integrity（Brooks）与日常协作，而非流程仪式；把方法学当宗教反而最快杀死生产力。
+- [[https://sass-lang.com/blog/the-road-to-dart-sass-2/][The Road to Dart Sass 2]] Dart Sass 2 计划 2026 年 12 月发布，核心是 1.x 的弃用警告全部升级为错误，几乎无新功能。例外：@import 相关与旧 if() 延后到 3.0；1.105.0 之后新增的弃用不进 2.0。唯一新特性：/ 统一按 CSS 语义作为分隔符（同 list.slash()），除法改用 math.div() 或写在 calc() 里。官方给出 –fatal-deprecations 参数提前自检。
+- [[https://guanqr.com/life/films/the-odyssey/][奧德賽 | 荷戟獨彷徨]] 影评：诺兰改编荷马史诗，全片无神现身，神性只由风浪雷电与雅典娜雕像的暗示构成；奥德修斯的传奇经历全由他自述，无人能证。开篇伊萨卡人恐惧的「海上民族」结尾揭晓即是他本人，呼应《守望者》黑货船。作者最欣赏塞壬（蜡封双耳后海浪声消失，听不见的声音更具诱惑）、冥界（亡魂渴望安息却只是棋子）、以及乞丐拉弓弦一幕的身份转变。配乐师 Ludwig Göransson 让古典器乐与现代采样融合。
+- [[https://www.infotoday.com/searcher/jan02/block.htm][My Rules of Information — Marylaine Block]] 2002 年图书馆员 Marylaine Block 的信息检索七律：去哪找、问题决定答案、答案要匹配需求、研究是多阶段过程、数据需人来赋予意义、质疑答案、必要时问图书馆员。
+- [[https://lwn.net/SubscriberLink/1094575/2385e98583715c2b/][Looking forward to Git 2.56 — and 3.0 ［LWN.net］]] LWN 展望 Git 2.56/3.0：2.56 新增 git history drop、git refs 子命令、branch –delete-merged；3.0 才是重头戏——默认 SHA-256、reftable 取代 refs 文件、Rust 成构建必需，全是破坏性变更。GitHub 的 SHA-256 支持是最大变数。
+- [[https://www.chinatalk.media/p/how-anthropic-became-chinas-goliath][How Anthropic Became China's Goliath - ChinaTalk]] 【评论区更精彩】ChinaTalk：DeepSeek 研究者刘胜与的爆款博文把 Anthropic 比作人类歌利亚，文章解剖中美 AI 话语的错位——美方出于真诚信念的出口管制主张，在北京的阴谋论滤镜下成了协同反华剧本；而中国一线研究者比官方更激进。评论：
+
+A:
+"Are the youngest of China’s AI researchers radicalizing themselves against cooperation with the United States — and against the Western-led enterprise of AI safety altogether……Not only do they seem to find a race to the bottom inevitable, but they have also internalized Western discussions of authoritarian AI threats as a coordinated attack on their right to technological advancement. Their trepidations around becoming footsoldiers of the national project are dissipating. The Party’s conspiracy is now the technologist’s own."
+
+I find the whole paragraph troubling, probably because I don't know how representative Liu's view is. He feels like some of my high school friends who are extremely talented at STEM and interested in macro-geopolitical questions, but don't really think too much about other questions.
+
+I also think the article is doing sth like connecting Liu/Chinese state against Anthropic with China against the US (EA) AI safety efforts, which seems a concerning connection. If anything, I think China's confusion and mistrust of Anthropic is somewhat fair, given that the American public is also quite confused and mistrustful of it. Rather than saying China is "radicalizing" wrongfully (which idk if it is that wrong), maybe it is good to say that the AI safety community, and especially some labs, need to actually think about how to express their earnest belief with more tact, so that people can actually understand them.
+
+B:
+This.
+
+Reading Liu’s own response on Zhihu after his post’s going viral , I see exactly a high schooler talking big words. When people started to take that seriously and ask what he meant, he pivoted to play cute and posting his cross-dressing photos…
+
+C:
+The education system simply does not support a true citizen with healthy world views. To have the math and tech talent and then have a healthy world view is like winning the power ball twice in a row.
+- [[https://mp.weixin.qq.com/s/zk0KxuLzhmMJ4LPYW_OHMA][我不得不把才华埋葬在昨天]] DeepSeek 算子工程师自述：AI 一年内从查文档小助手进化成独立优化 CUDA 算子的高手；判断自己不会失业但必须转业，从热爱的算子设计转向 Agent 驾驶。附织毛衣机器比喻与开源普惠立场。
+- [[https://jyn.dev/a-year-to-fix-security/][we have a year to fix security everywhere]] jyn.dev 警告：GLM 5.3-flash 这类开放权重、可本地跑（6k 美元硬件即可）、且被 abliterate 去拒绝的模型，让「无人值守、可循环」的漏洞利用成为现实（CyberGym 84.5%，逼近前沿模型）。作者认为瓶颈不在找漏洞而在 triage、backport 与部署。给出政策与企业侧建议：资助并强制渗透测试与修复期限、退役 EOL 系统、供应链清点、形式化验证/fuzzing/内存安全语言、agent 本身要沙箱+最小权限、缩短 embargo、演练冷启动恢复。
+- [[http://www.auiou.com/relevant/00002199.jsp][https利弊(5)：技术上的定向安全与垄断本质 - 王志勇的Blog]] 老博主王志勇 Anti-HTTPS 系列第5篇：主张 http 与 https 同属「定向安全」、安全等级相当，短证书是 CA/浏览器为利益强推的欺行霸市。观点可信度低，但反映了一代 PHP 老站长视角。
+- [[https://aeon.co/essays/if-computers-count-all-the-petals-who-tastes-the-cherries][If computers count all the petals, who tastes the cherries?]] 以智能厨房为切口提出「computism」：万物皆可计算，人的主观性只是待 debug 的 bug。数据无法衡量主观事物——机械优化把设计的人味抽象掉，最终数清了每片花瓣，却失去尝樱桃的能力。
+- [[https://lhcy.org/archives/ta-lai-guo-ye-wei-pu-tong-ren-dian-guo-deng-huai-nian-gu.html][他来过，也为普通人点过灯——怀念孤勇者张雪峰]] 博主林海悼念张雪峰：普通人无试错资本，真正的阶层壁垒是信息垄断与认知封锁；他免费把择业真相递到普通人手里。民众恨的不是财富而是不公，十里长街送别是一场无声的反抗。也提醒：透支健康换不来任何东西。
+- [[https://jordanlord.co.uk/blog/3-constraints/][3 constraints before I build anything | Jordan Lord]] 十年 builder 总结的立项前三约束：①一页纸写不完就不做（写不满说明没准备好，别用废话填空）；②核心技术必须能脱离产品独立存在（可复用的 IP，如 Torvalds 的 git、HashiCorp 的 HCL，产品会转向而核心技术在复利）；③必须有一个定义性约束贯穿产品（Minecraft=方块，IKEA=平板自组装），它给出产品身份、抑制功能蔓延。任一条不满足就不做。
+- [[https://zhuanlan.zhihu.com/p/2015884981357012557][从CRPS到M-CRPS：服务器电源如何为AI时代强心]] CRPS(Intel主导,12V,通用服务器) vs M-CRPS(OCP主导,AI服务器): 新增54V输出、满负载效率97%+、微秒级动态响应、4.5kW功率密度、再浪涌控制+黑匣子; 版本2022.11 v1.0→v1.05 RC5。
+- [[https://blog.solazy.me/20260904/][只活到 50 岁也挺好 – So!azy]] 为了防范那个漫长、脆弱、充满不确定性的老年期，我们必须在精力最旺盛的几十年里，极度克制、极度焦虑，承担大量低质量的妥协。比如忍受傻逼同事、在一个毫无意义的系统里耗尽心力，美其名曰「为了将来的保障」。
+
+这事儿说白了，是一个极其糟糕的资产配置方案。你把最值钱的、高流动性且充满创造力的黄金 30 年，全部抵押给了一个不可控的、低流动性的老年期。
+- [[https://immarcus.com/blog/privacy-and-true-self/][隐私与真面目 | I'm Marcus]] 如果一个人能在保护自己隐私的同时，坦荡地展示自己的想法和观点。这样的处事方式是比较自然和谐的
+- [[https://bcantrill.dtrace.org/2026/09/05/the-revolt-of-the-reader/][The revolt of the reader]] Cantrill：读者正反抗 LLM 代写——78% 开发者见 AI 痕迹即停读，71% 此后回避作者。类比垃圾邮件之战，推荐 Pangram 4 检测，Oxide 公开发文须过检为人类所写。
+- [[https://mp.weixin.qq.com/s/soiQLfeaXZkfmoSo4WDlhA][Astra 全面推送 & Claude 形式化费马大定理]] 浮之静周刊：GPT-6 Astra 全量推送（限额为 GPT-5.6 一半，credits 计费细则）；Anthropic 数十个 Claude agent 11 天完成费马大定理 Lean 形式化（1350 万行、29511 定理），复验门槛极高，引出 AI 产出验证难题。
+- [[https://mp.weixin.qq.com/s/aU3Fwweysm63VlrYMXZg9Q][马拉松科普｜跑马“黑话指南”]] 马拉松术语科普：PB/PW/DNF/DNS/LSD等英文缩写；首马/破三/兔子/收容/关门时间等规程词；配速/负配速/减量/撞墙/极点等生理词。破三≈3h内、配速4:15/km。
+- [[https://www.gatesnotes.com/a-turbulent-ai-era-and-critical-choices-to-make][The choices we make about AI now are critical | Bill Gates]] 盖茨论AI转型：要么成史上最大平权器，要么成最大不公源。三大风险（岗位消失/恶意滥用/儿童发展）、三个对策（国家+国际治理框架、Human Reserved保留人类岗位、对token和机器人征税）。呼吁现在就行动。
+- [[https://mp.weixin.qq.com/s/mOB5LCWhTnQ8WbUE2jwWgQ][很少有人想到，具身智能的寒武纪爆发，是由一只鸭子开始的]] HF 联合 Pollen Robotics 发布 399 美元开源双足机器鸭 Microduck，开订 24h 订单超 260 万美元。走红四层逻辑：可失败性（小体跌倒=训练数据）、架构选择（鸭子=具身 MVP）、评分表效应（非人形态移开人类比较锚点）、历史条件（深圳供应链让硬件复制逼近代码复制）。判断：开源硬件寒武纪爆发信号，或成机器人界 Wintel 时刻。
+- [[https://me.xu19.com/third-party-air-ticketing-platform-fliggy-poorly-handled-flight-delay-incidents/][飞猪处理航班延误事件 - 我是军爸]] 亲历飞猪三航段联程延误：首段延误2小时致国际段作废。2957元票价含408元捆绑保障/意外险，延误只赔优惠券不赔现金；客服推责航司、耗3小时。退票亏1433元。避坑：只买裸票、转机留足时间、首选航司直购。
+- [[https://blog.solazy.me/20260830/][隔壁桌的暧昧学 – So!azy]] 今天聊点日常八卦和随想
+- [[https://sspai.com/post/78349][我对 PARA 的理解与实践 - 少数派]] PARA 知识组织框架：Projects/Areas/Resources/Archives 四类，按可操作性分类，强调信息流动性与长期专注。Notion 实践含 SMART 任务设计。
+- [[https://www.ssp.sh/brain/using-obsidian-with-ai/][Keep AI Out of Your (Obsidian) Vault]] 作者反对把 AI 生成的长摘要塞进 Obsidian vault：分不清哪些是自己写的、搜索时全是噪音、Kepano 说 PDF 摘要是 noise 自己的洞见才是 signal。建议：AI 只用于检索相关笔记（Smart Connections），打标签/组织/连接要自己做；高敏笔记不想上云，等本地模型；要玩 RAG 放单独 vault 或 DuckDB，别混主库。
+- [[https://mp.weixin.qq.com/s/Vwvg5_68XV3SWALSIWQutg][AI服务器供电–典型M-CRPS服务器电源之Spec解读]] M-CRPS 1800W电源规格逐项解读：40x73.5x185mm 1U尺寸、闭环节流(带病生存)、冷冗余(PUE)、浪涌控制(NTC)、钛金效率(图腾柱PFC+SiC/GaN)、有源均流(ISHARE总线)、Hold-up 12-20ms、1%纹波、冷启动PFC预充电时序。
+- [[https://news.sciencenet.cn/htmlnews/2026/8/570138.shtm][混合型 T 细胞在超级百岁老人血液中显著增加]] 大阪大学 Cell Reports 研究：超级百岁老人血液中 CD4 细胞毒性 T 淋巴细胞(CD4 CTL)占 T 细胞近 1/5（年轻人约 4%），部分克隆扩增；其 TCR 与肿瘤浸润 T 细胞相似，或可早期清除肿瘤，提示高龄免疫是重组而非单纯耗竭。
+- [[https://www.nature.com/articles/s41586-026-10894-w][天文学家发现银河系已知最快的恒星]] S301 绕人马座A*公转（8.7年），近日点约12AU，速度2.5万km/s≈8%光速，轨道对黑洞自旋敏感，有望首次直接测量超大质量黑洞自转并检验广义相对论；疑为Hills机制捕获的双星成员。
+- [[https://mp.weixin.qq.com/s/NAdhdFrUq9-BKelqzqpwBQ][都Agent时代了，我还是想分享给你这12个我最常用的Prompt]] 卡兹克整理12个常用Prompt，分5场景：问清问题（苏格拉底式提问）、学习（双层解释、反向拆解、横纵分析、事实核查）、解决问题（专家会诊互质疑、第一性原理、跨领域借解）、决策（双向钢人论证、最小实验）、认识自己（天赋挖掘、斯坦福人生设计）。核心：Prompt是使用AI的基石，提问、辨真、识己永不过时。
+- [[https://mp.weixin.qq.com/s/6eDElggMR7aefaEzlWfVMA][一个极度实用的深度思考Prompt：双向钢人论证法（卡兹克）]] 卡兹克基于 Reddit 原帖（steelman 钢人论证）写的双向钢人 Prompt：重述真实问题→强化正反双方→找出关键变量→逼 AI 给判断和行动。核心是反 AI 谄媚。
+- [[https://zgq.me/posts/personal-digital-infrastructure/][从知识管理到个人数字基建 - gq's blog]] zgq 2026 年知识管理体系重构思路：放弃 Block 强结构化，回归 Markdown+Frontmatter 文档原子，AI Agent 升为一等公民；核心是信息溯源与可靠性传递链（熵减原则），Domain 取代 P.A.R.A 的 Area，保留纯人类慢思考空间。
+- [[https://mp.weixin.qq.com/s/APKrN2aRYo36PWSscczrdg][说一个反常识的真相：Agent 在真实工作场景的成功率依然很低（卡兹克）]] 卡兹克介绍三个真实工作场景评测集：阿里国际站 RealReplicaBench（107个电商任务，Claude Opus 5 通过率 60.75% 最高，多数模型不足 50%）、腾讯 E-Bench（323 个任务，Kimi-K3 最佳但稳定性未过 60%）、小红书 VibeLifeBench（200 个生活任务，最佳仅 32.5%）。结论：会解题与会工作之间仍有距离，coding 强不等于真实任务成功率高。
+- [[https://jaapgrolleman.com/degrees-of-wealth/][Degrees of wealth — Jaap Grolleman]] 荷兰作者在华8年回国后的反思：荷兰人普遍比上海人有钱，但家里没空调、开旧车、银行客服排队15分钟；中国则是服务廉价便捷。荷兰的富是时间、空间与耐用之物，中国的富是速度与便利。结论：穷与富取决于你站在哪里量。
+- [[https://nesslabs.com/benefits-of-reading][The Reading Mind: Surprising Science-Based Benefits of Reading Everyday]] 阅读悖论：大脑无专门阅读回路，Dehaene神经元回收假说认为阅读借用识别自然图案的脑区。每日阅读7大益处：减压68%、延缓痴呆、改善记忆词汇、提升专注、增强左颞叶连接与分析力。习惯养成：选喜欢的书+每天一页+固定时间地点。
+- [[https://mp.weixin.qq.com/s/Kf87hcNdSmY4ODWI4UZ8cg][DSH：DeepSeek Harness 架构解析]] DSH架构解析：一切皆插件 = Cordis插件图 + Session事件流。Cordis用Context/Fiber/effect统一依赖注入、生命周期与资源回收，四种模式是per-session组合。对比OpenClaw/Pi/Hermes/Codex：组合关系可能比loop更难管理。
+- [[https://mp.weixin.qq.com/s/-osZRMBPzQIJHqnIm71Clw][做了20年硬件，从画PCB到调EMC，没想到公司裁员把我裁了（45岁硬件工程师出路）]] 45岁硬件工程师（20年PCB/EMC经验）被裁后出路：①小批量代工+技术支持（熟人起步）②设备维修（电源100-300/EMC整改3000-5000元）③知识付费卖课④项目外包⑤技术咨询。避坑：画大饼/无预付款/压价/多次转手客户。
+- [[https://mp.weixin.qq.com/s/62xZggROULpk34p2P7_TnA][从0开始，12步学会用好AI（数字生命卡兹克）]] 卡兹克12步AI入门：电脑≥16G内存，海外走ChatGPT+Codex(GPT-5.6 Sol)，国内用WorkBuddy(Kimi K3)，配语音输入法；用【背景、痛点、需求】框架向AI描述最抗拒的事，苏格拉底式提问澄清后扔文件让AI干，2-3轮迭代，最后沉淀成Skill复用。半天即可上手。
+- [[https://nate.spot/no-phone-while-poop/][Don't use your phone while you poop! - Nate]] 上厕所不带手机：大脑和肠道一样需要卸货。注意力经济下的免费放空——身体给的生物通行证。
+- [[https://science.nasa.gov/missions/ixpe/nasas-ixpe-may-have-proven-90-year-old-theory/][NASA's IXPE 证实磁星真空双折射（90年前QED理论）]] IXPE+NICER+Murriyang 联合观测磁星 1E 1547-5408，首次同步无线电与X射线偏振测量；偏振度达同类3倍，支持1936年提出的真空双折射理论。
+- [[https://research.meta.ai/blog/introducing-muse-glimmer-open-agentic-model][Introducing Muse Glimmer: An Open Agentic Model That Runs on Your Device]] Meta 30B 开放权重 agentic 模型，Apache 2.0，4-bit 量化 <20GB 可跑单消费级 GPU，DFlash 投机解码，对标 Gemma4-31B/Qwen3.6-27B
+- [[https://www.sciencealert.com/common-sugar-appears-to-loosen-cancer-cells-and-help-them-spread][Common Sugar Appears to Loosen Cancer Cells And Help Them Spread]] Nature Aging 研究：顺铂诱导的衰老癌细胞释放果糖（SASP 成分），经 NAD+-SIRT-SREBP 轴抑制降低膜胆固醇，削弱细胞黏附促进卵巢癌转移。限制果糖摄入或可辅助治疗。
+- [[https://mp.weixin.qq.com/s/y5ua9TrP74BJe7yg41ekbg][第一次知道砖电源]] 砖电源（Brick Power）科普：强调标准化、模块化、系统集成。发展史与 Vicor 紧密相关——1984 年 Vicor 推出模块化 Brick DC/DC，以砖块封装得名；第一代即用高频、准谐振、软开关技术提高开关频率，缩小磁性/无源器件体积。90 年代成行业标准封装，广泛用于通信设备。应用：LED 屏、EV 充电、系留无人机、单兵通信、自动驾驶车、军用无人机。
+- [[https://www.sciencealert.com/the-worlds-vegetables-are-vanishing-and-its-quietly-wrecking-our-diets][The World's Vegetables Are Vanishing, And It's Quietly Wrecking Our Diets]] 全球蔬菜摄入量比健康推荐低约40%；农业工业化+供应链使栽培品种锐减（土豆4000品种美国仅种5-8个），遗传多样性丧失连带营养流失与气候适应力下降，FAO评估24%野生蔬菜近缘种濒危。PNAS 2026。
+- [[https://mp.weixin.qq.com/s/8FYDOX15UKOHPkbHjRpnbg][我花了54个小时，做了一个可能更公平的AI大模型排行榜]] 卡兹克用54小时构建AI模型排行榜 LatentRank：Bradley-Terry + 先验限制小样本偏差，靠共同对手推断缺失模型能力，锚点模型定义100分制，规则与数据全公开于AIHOT。
+- [[https://www.unicef.org/zh/%E5%84%BF%E7%AB%A5%E6%9D%83%E5%88%A9%E5%85%AC%E7%BA%A6/%E5%84%BF%E7%AB%A5%E6%9D%83%E5%88%A9%E5%85%AC%E7%BA%A6%E6%96%87%E6%9C%AC][儿童权利公约（全文）— UNICEF]] 1989年联合国大会通过的具有法律约束力的国际条约，共54条：儿童享有生存、发展、受保护、参与四大权利；确立儿童最大利益原则、无歧视原则。1990年生效，中国1992年批准，是获批准国家最多的国际人权文书。
+- [[https://patronview.com/news/99-percent-of-my-website-traffic-is-bots/][99% of My Website Traffic Is Bots | PatronView]] 站长一年抗爬虫实录：214:1 bot/human 比、单日3.6M中国botnet请求、Claude爬取/引流35,000:1、CAPTCHA求解率0.24%。对策：看服务器日志而非JS统计、按ASN封锁、陈旧浏览器challenge。
+- If Buying Isn't Owning – Householder Karl 数字购买实为可撤销许可，更接近租赁却按全价收费。所有权代表选择自由；当'购买'失去意义，'偷窃'也失去道德重量。解法是监管透明度：租赁必须标明并按租赁定价。
+- [[https://manateelazycat.github.io/2026/08/04/ai-code-quality-and-collaboration/][AI 时代真正的代码质量与人机协作]] 子龙山人：代码质量与谁写无关，取决于经验、需求准确、架构设计。人定义好 AI 执行，效率是人的 10 倍。质量=全局思维（最简单设计/清晰数据流/恰当解瓶颈）。不用 AI 是迷恋掌控感；应精进架构、读原理书，这才是人机协作
+- [[https://colorinmypiano.com/2026/08/07/the-story-of-my-new-to-me-shigeru-kawai/][The Story of My New-to-Me Shigeru Kawai]] Joy Morin 买二手 Shigeru Kawai SK-2 (2000年产第9台) 的寻琴记：卖旧琴、跨州看琴、砍价波折、找搬琴公司；附 Shigeru Kawai 品牌史（河合家族、SK 系列 1999 年推出、MPA 手工打造）。
+- [[https://herman.bearblog.dev/creativity/][Committing to creativity – Herman's blog]] 创造力不是天赋而是需要承诺的肌肉：靠动机必输，承诺是超越感觉的决定。行动产生动机而非相反。创造力可迁移，长期不用才会'离开你'。批评把创意外包给AI的做法。
+- [[https://www.quantamagazine.org/is-ai-reasoning-right-for-the-wrong-reasons-20260731/][Is AI Reasoning Right for the Wrong Reasons? (Quanta, 2026-07)]] Quanta 评论：LRM 的 chain-of-thought 既不忠实也不因果——换掉/删掉 30-60% thinking steps 性能几乎不降。Kambhampati 称其为 approximate retrieval，CoT 是 wishful mnemonics。
+- [[https://lalitm.com/post/github-alternatives/][GitHub has alternatives, but no replacement - Lalit Maganti]] Codeberg 禁 AI 代码引发讨论。核心论点:开源缺的不是 Git 托管而是社区层(共享身份/习惯/发现路径)。GitHub 体验滑坡,自托管贡献门槛高。点评 GitLab/SourceHut/Forgejo/Radicle/Tangled,畅想'无聊公司'填补缺口。
+- [[https://nascompares.com/2026/07/31/the-10-ways-nas-is-getting-enshitified/][The 10 Ways NAS is Getting Enshitified]] NAS 劣化十宗罪：焊死 LPDDR 内存、1GbE 停滞+万兆溢价、硬盘验证锁定、焊死系统盘、PCIe 通道阉割、换壳不换芯、HDD 容量挤压 TCO 飙升、无 DRAM SSD、贴牌内存、Debian 套壳同质化。结论：成品 NAS 走向封闭家电，自建开源平台成出路。
+- [[https://www.sciencealert.com/your-brain-really-can-learn-to-multitask-and-scientists-just-revealed-how][Your Brain Can Rewire Itself to Allow True Multitasking]] 乔治城大学研究(J. Cogn. Neurosci.):11人3万多次分类训练后,任务从前额叶转移到颞叶皮层,大脑真的能学会多任务。
+- [[https://arxiv.org/abs/2607.28624][PhiZero: A World Model Built Around Physical Language]] 物理世界模型：用自监督学出的紧凑离散'物理语言'表示世界状态转移，reason-then-render 先推断物理语言序列再渲染成视频，支持交互式世界建模、动作条件模拟、zero-shot 动作迁移。CASIA 出品。
+- [[https://mp.weixin.qq.com/s/IW9BdyA3hLvuuiX_aMCJEQ][Kimi K3 开放日：模型权重、技术报告和关键 Infra 技术同步开放]] 月之暗面开源 2.8T MoE 模型 Kimi K3（原生视觉+1M 上下文），同步开放 MoonEP/FlashKDA/AgentEnv 三项 infra 技术，规模效率提升 2.5x。
+- [[https://www.sciencedaily.com/releases/2026/07/260725105731.htm][Your dreams aren't random. Your brain is rewriting reality | ScienceDaily]] 同一研究的新闻报道。大众化解读：梦境是大脑对记忆、情绪和想象的夜间混音。走神倾向强的人梦境更碎片化，重视梦的意义的人梦境更丰富沉浸。
+- [[https://www.nature.com/articles/s44271-026-00447-2][Individual traits and experiences predict the content of dreams]] NLP/LLM 分析 3366 份梦境和清醒报告，发现梦境内容由稳定人格特质（对梦的态度、走神倾向、睡眠质量）和外部事件（COVID lockdown）共同塑造。梦境不是随机神经噪音，而是大脑对现实的重新编排。
+- [[https://mp.weixin.qq.com/s/DN4ZRXUN1q1SrUKIT9uHkg][Kimi K3开源：老黄站台、77家公司联署、Anthropic隐身——AI行业的萨拉热窝事件]] 卡兹克回顾Kimi K3开源事件全貌：7月24日黄仁勋首发X公开信反对制裁中国开源模型，77家科技公司联署（英伟达/微软/Meta/OpenAI/Google等），Anthropic缺席引人瞩目。7月27日Kimi如期开源2.8T MoE模型（896专家/16激活），附带47页技术报告、MoonEP通信库、FlashKDA算子、AgentENV沙箱。
+- [[https://mp.weixin.qq.com/s/pqFZreEZj8kB4KDirl4MSQ][AI说不出的随机数,成了鉴别套壳大模型最好的照妖镜。]] 论文《One Token Is Enough》用行为指纹鉴别套壳大模型: 问165个模型各30次随机数,每个模型的概率分布独一无二。GPT-4o偏爱42/37,Claude钟情47,Qwen3-Max全部42,Palmyra X5指纹与Qwen3-235B高度相似被质疑套壳。轻量可对抗,中转站无法识别检测。
+- [[https://mp.weixin.qq.com/s/XGSlalWPnQ0437xInGROUg][聊聊字节Seed的这个科学家计划]] 字节跳动Seed发布Seed STEM科学家计划，邀请100位数学/物理/化学/生物/材料等领域研究者与AI团队协作。AI正成为所有学科的公共地基，未来最重要的AI突破可能不再叫AI突破，而会被称为新药、新材料、新定理。
+- [[https://mp.weixin.qq.com/s/AWsSjcT9NYbj1W8SWXgb_w][梁文锋四小时投资人会议实录]] 梁文锋52条语录：不闭源、不做3D/视频/世界模型、不追求超级App。克制是战略——用放弃换取AGI的概率。路线图：CoT→Agent→持续学习→具身智能。只赚合理利润，开源是sweet point。
+- [[https://longnow.org/ideas/richard-feynman-and-the-connection-machine/][Richard Feynman and The Connection Machine]] Danny Hillis 回忆 Feynman 在 Thinking Machines 的五年。核心印象：业余者精神（做最蠢最疯狂的事）、拒绝抽象亲手焊电路板、用 PDE 分析计算机路由器比专家准、人话解释格子气自动机惹毛专家但听众一秒就懂、「发现 = 教会别人」才算完成。临终前 Pasadena 散步：「好货都讲出去了，我还能带你找条更好的路回家。」
+- [[https://www.sciencedaily.com/releases/2026/07/260717033213.htm][Popular sugar substitutes linked to faster brain aging]] 巴西近1.3万人8年队列研究，发表于Neurology。高摄入7种常见代糖（aspartame, saccharin, acesulfame K, erythritol, xylitol, sorbitol）者认知衰退速度比低摄入组快62%，相当于脑衰老加速1.6年。60岁以下及糖尿病患者关联更显著。观察性研究，非因果结论。tagatose是唯一未发现关联的代糖。
+- [[https://mp.weixin.qq.com/s/f_27v1NAO_hOaw2Tskkk_A][欧洲极端高温再临，阳台储能系统何以成为家庭能源自主的关键一环？]] 沛城科技推广文。欧洲极端高温+能源价格波动推动阳台储能需求，核心卖点是其2.4KW光伏储能双向逆控电源，支持光伏发电、存储、逆变、防逆流、UPS及APP远程管理。
+- [[https://mp.weixin.qq.com/s/yntfMKx0fEM1PGsATtH0Kg][2026柴火课程体系重磅发布，赋能新质生产力]] 柴火创客空间2026课程升级：AIoT实战能力培养，三大方向（用AI造物/造AI的物/解决方案）×三层进阶×五大场景（设备互联/多模态AI/自组网通信/边缘视觉/环境感知），从0到100锻造交付力。深圳/成都线下。
+- [[https://journals.plos.org/plosbiology/article?id=10.1371/journal.pbio.3003876][Competing speech streams are simultaneously represented in the human cortex during attention switching]] EEG study showing the brain simultaneously encodes two speech streams during attention switches, with engage-before-disengage dynamics and lexical context reset.
+- [[https://mp.weixin.qq.com/s/BTv7bGz03jkfdoQ213pUlg][Kimi正式发布2.8万亿大模型K3，这是属于我们的荣光。]] 卡兹克评测Kimi K3：2.8T参数水桶模型，Agent能力突出（BrowseComp第一），Coding综合第二梯队，7月27日开源。
+- [[https://www.gatesnotes.com/home/home-page-topic/reader/aids-free-generation-is-no-empty-promise][AIDS-free generation is no empty promise — Bill Gates]] Lenacapavir 等长效 PrEP 将 HIV 预防从每日服药推进到一年两次注射。盖茨讨论 PrEP 创新（Lenacapavir/Cabotegravir/MK-8572）和 Global Fund/PEPFAR 的资金需求。
+- [[https://mp.weixin.qq.com/s/jbTi2ozUVmvPUICc8g2FHg][Anthropic J-space：语言模型内部的全局工作空间——从人脑全局工作空间理论到Claude的共享白板表示]] 一篇中文精读，梳理 Anthropic Jacobian lens 研究。Claude 内部有一组可语言化的表示（J-space），类似全局工作空间中的共享白板：可报告、可调控、参与多步推理、只在部分任务中被选择性使用。文章还细致追溯了从 Baars GWT 到 Dehaene GNW 的理论脉络，并明确区分了 access consciousness 和 phenomenal consciousness。
+- [[https://mp.weixin.qq.com/s/9mQcFRao-ps5YloV5ZCZEQ][Karpathy最新Agent观点：大厂并没有掌握智能体核心技术，个人开发者正称霸前沿]] Karpathy认为大厂并未掌握Agent核心技术，个人开发者正站在前沿。回顾2016年OpenAI失败教训，指出Agent易做demo难做产品（类比自动驾驶十年周期），建议从神经科学汲取灵感。核心：打好大模型地基，Agent自然涌现。
+- [[https://charity.wtf/2022/01/29/how-can-you-tell-if-the-company-youre-interviewing-with-is-rotten-on-the-inside/][How can you tell if the company you're interviewing with is rotten on the inside?]] Charity Majors 教你如何在面试中反向考察公司：从 backchannel、DEI、决策过程、crunch time 到面试流程本身，把 interview 变成双向审视的实用指南。
+- [[https://blog.okturtles.org/2026/07/short-leash-ai-method/][The Short Leash AI Coding Method For Beating Fable]] Greg Slepak 的 Short Leash 方法论：不用 YOLO mode，AI 工作必须人在场审每一步 diff，频繁 Deny 防止跑偏，每个子任务后 commit，PR 必须 human+AI 双重审查且作者亲自 line-by-line review。评论区 Roshan 补充了关键痛点：会话间 dead ends 知识丢失。
+- [[https://mp.weixin.qq.com/s/l70iUM0bIpG9EdV9Px7QPQ][阿里巴巴朱达：千问C端 Agent Harness 思考与实践]] CCF YOCSEF论坛发言。阿里千问MOS实验室负责人分享Agent工程实践。方法论多快好省：通用复杂任务Agent支持多任务类型，执行时间降至1/3，Token消耗为海外产品1/10。主动服务架构User Memory+Environment+Task System+Assistant。
+- [[https://www.lmsys.org/blog/2026-07-02-agent-assisted-sglang-development][Agent-Assisted SGLang Development: An Initial Exploration]] LMSYS 团队总结 SGLang 开发中 agent 辅助编码的实践：将 benchmark/profiling/debug/diffusion 等重复工程流程编码为 SKILL.md，配合 Humanize/RLCR 和 Codex Goal 做 Loop Engineering，以及 KDA-Pilot 做 CUDA kernel 优化。核心观点是 agent 做执行，人做判断和审查。
+- [[https://tomtunguz.com/ai-execution-routing][Most AI Work Can Wait - Tomasz Tunguz]] Router > 模型选择。三层架构：skill classifier → router → model selector。70-80%流量走本地模型，靠 queueing + 异步推理降费90%+。
+- mattpocockuk 的 /writing-great-skills：编写可预测 AI Skill 的指南 中文深度解读 writing-great-skills 的 7 个核心思想：过程可预测、触发方式选择、description 即触发器、渐进式披露、completion criterion、拆分以控制注意力、leading word 压缩行为。附带 5 种失败模式诊断。75 人精选。
+- [[https://longcat.ai/blog/longcat-2.0/][Introducing LongCat-2.0]] 美团发布 LongCat-2.0，1.6 万亿参数 MoE 大模型（激活 48B/token），全程 AI ASIC 国产芯片训练，35+ 万亿 tokens，引入 LongCat Sparse Attention 支持 1M 上下文。开源。
+- [[https://nesslabs.com/newsletter/joy-list][Ness Letters: Build a Joy List - Ness Labs]] Happiness comes from small daily moments, not major milestones. Build a Joy List — capture ordinary joy triggers (a favorite song, first sip of tea) as they happen, keep them actionable, and reach for them when stressed.
+- [[https://mp.weixin.qq.com/s/LVj2foSXi_hBRKxjuYaUyw][想玩Loop Engineering，可以先从这6个Hook玩法开始。]] 卡兹克分享6个Claude Code Hook玩法：权限弹窗提醒、开机日程播报（问候+天气+日程）、上下文预压缩时自动生成摘要卡片（工作日记）、文件自动整理（Hook+Skill组合），以及背后的Hook触发器+Skill执行者模式。
+- [[https://mp.weixin.qq.com/s/5UvQ4z-Mx8shEHsgtOtu_Q][20260618-20260625 周刊]] SWHL 周刊：NSDR 10分钟恢复精力、习惯养成（错过一天影响不大）、vibe coding vs 古法编程讨论、停止编码即失去架构判断力、医疗AI变现困境、人月神话中文翻译及多个工具推荐
+- [[https://mp.weixin.qq.com/s/08Z-Jk4nccaBAbh65aqtKA][盘点16个把自己蒸馏成Skills的国民级App]] 梳理了瑞幸、麦当劳、飞猪、滴滴、高德、腾讯地图、美团跑腿、飞书、钉钉、企业微信、腾讯文档、支付宝、微信支付、微信读书、网易云音乐、美图等16个国民级App的Skill/MCP开放情况，作者认为Agent基建正处于2017年小程序级别的窗口期。
+- [[https://mp.weixin.qq.com/s/cGDa__nUnlD7oFlFDm6lhA][Codex 日志正在燃烧你的 SSD]] 深入分析Codex SQLite日志写放大问题：源码级剖析TRACE日志sink、WAL模式写放大、三个副作用（空间/写入/隐私），以及止血方案对比
+- [[https://mp.weixin.qq.com/s/6uYbGFcgG7iNABqNiAeKLg][Codex史诗级大bug，随时准备烧穿你的硬盘]] Codex SQLite日志疯狂写盘 5MB/s→640TB/年 可耗干SSD寿命
+- [[https://mp.weixin.qq.com/s/kZ4_d6xqyzgrM699d4rIvw][AI用得好不好，跟你会不会管人，我觉得越来越是同一件事。]] 卡兹克：不同能力AI需不同管理方式，与管人同理。三层：执行→策略→愿景，错配是痛苦根源。对应层次的人负责对应功能的工作，高层次的工作不能交给业务人员做，业务工作也不能叫高级别的人去做。如何用好AI：目标定义要清晰，边界要写好，反馈要清楚。管理——正确地分配管理的颗粒度。管理者的工作——思考应该思考什么。
+- [[https://meanwhiling.com/2026-06-12-moving-on-from-beets/][Moving on from beets]] 从 beets 迁移到 MusicBrainz Picard + kid3 管理音乐库的原因：曲目排序不便、多艺术家支持不完善、以及用 kid3 手动整理中文专辑简繁统一和排序标签的经验。
+- [[https://mp.weixin.qq.com/s/jAPNZXqMYyFIOAaOMzrpag][OpenRouter Fusion：从模型路由到复合智能栈]] OpenRouter Fusion 是一种多模型合议 API 原语——将问题并行发给多个模型，由 judge 产出结构化审议（共识/分歧/盲点），外层模型再生成最终答案。DRACO 评测显示 budget panel（Gemini 3 Flash + Kimi K2.6 + DeepSeek V4 Pro）以约一半成本达到接近 Fable 5 的深度研究能力。标志着 LLM 架构从单模型调用进入复合推理编排阶段。
+- [[https://mp.weixin.qq.com/s/omwt7d9BSFX7kotW9vo9bQ][Prompt该退环境了，未来属于Loop Engineering]] OpenClaw Peter提出Loop Engineering——不再手写prompt，设计循环让Agent自动迭代。Boris(Claude Code创始人)：2026年起没手写过代码，/loop babysit PRs夜间自动跑数千子Agent。Addy Osmani梳理五组件：定时任务、工作树隔离、知识体系、MCP连接器、子Agent。四次范式跃迁总结。
+- [[https://mp.weixin.qq.com/s/HcGt6UxrQt-zbie3XHor3A][干货满满！IFClub 成都沙龙圆满收官，深度解读 AI 多场景落地实践]] IFClub成都沙龙4场分享：AI Agent数据库运维(李真旭)、基于Hermes的FinOps-Agent(冯浩)、AI降低信创迁移难度(明玉琢-Skill+MCP架构)、Loop协作平台(易鹏)
+- [[https://mp.weixin.qq.com/s/3LSDysxy5o7e9_uCRmdi8Q][Claude Fable 被封，不是开源的胜利]] Anthropic Fable 5被美出口管制下架，Amazon多角色或为导火索。作者批评开放阵营借机宣传，指出可访问性≠可替代性，前沿模型发布正进入能力、安全、资本、政府共治的新阶段。
+- [[https://www.cnx-software.com/2026/01/07/espressif-systems-showcases-esp32-e22-wi-fi-6e-soc-and-esp32-h21-ble-mcu-for-battery-powered-devices/][Espressif Systems showcases ESP32-E22 Wi-Fi 6E SoC and ESP32-H21 BLE MCU for battery-powered devices]] CES 2026: ESP32-E22 — dual-core RISC-V @500MHz, tri-band Wi-Fi 6E 2x2 MIMO up to 2.1Gbps, BT 5.4/6.0, 9×9mm pkg. ESP32-H21 — 96MHz single-core, BLE+802.15.4, 320KB RAM, ultra-low-power DC-DC, IoT/wearables target. ESP32-H4 finally in portfolio. Wi-Fi 7 & quad-core on roadmap for 2027+. Engineering sample codenamed JUPITER-V1P; M.2 2230 module also shown.
+- [[https://tw93.fun/en/2026-06-07/robot.html][You Don't Know Embodied AI: From a Tiny Robot Dog to Optimus]] Tw93 用不到200元自建了一个四足机器狗(STM32+ASRPRO+ESP32-C3)，探索从语音指令到伺服电机PWM输出的全链路。核心洞察：embodied AI 的感知-空间-动作-力矩四层问题，从硬编码动作到VLA的演进路径，以及3D空间表征的工程权衡。
+- [[https://mp.weixin.qq.com/s/r6CE2U3Y0-pU05wF3_PuTQ][AIHOT - 封装3年自媒体经验的AI热点网站]] 数字生命卡兹克公开AIHOT网站。168个分级信源，AI 5维评分+代码权重计算精选，embedding事件聚类去重，每日AI日报。核心理念：能用代码处理的绝不交给模型。
+- [[https://debliu.substack.com/p/the-ai-treadmill][The AI Treadmill — Deb Liu 谈AI焦虑与减速许可]] AI领域最领先的人反而最焦虑。效率提升不必然导向更好，常导向更忙。关键在于选择用AI腾出的空间做什么。
+- [[https://www.0xkato.xyz/how-llms-actually-work/][How LLMs Actually Work — 0xkato]] Transformer-based LLM 架构轻量详解：tokenization → embedding → RoPE → attention → multi-head → FFN → residual stream → next-token prediction。覆盖 RoPE、GQA、SwiGLU、MoE、speculative decoding 等现代演进。
+- [[https://studyfinds.com/missing-link-connecting-exercise-healthy-aging/][Scientists Find Potential Missing Link Connecting Exercise And Healthy Aging]] NOX4 肌肉蛋白随年龄下降→细胞修复失效→虚弱/胰岛素抵抗/肝病。运动恢复NOX4，但缺NOX4运动无效。西兰花化合物 sulforaphane 在 NOX4 缺陷小鼠逆转多数症状。Science Advances 2026
+- [[https://studyfinds.com/benefits-of-sleep-without-sleeping/][What If You Could Get The Benefits Of Sleep Without Actually Sleeping?]] Cirelli lab (UW-Madison) 用光遗传学在小鼠清醒时模拟深度睡眠脑波，部分复现了睡眠的记忆巩固和分子修复效果。Nature Neuroscience 2026。机理验证，非人类应用。
+- [[https://mp.weixin.qq.com/s/wINKSDQCroWBvf29h567zA][深度思考：架构腐朽 & Loop Engineering]] 屎山本质不是代码烂，而是不敢删。从定义、Lehman定律、Naur理论本体论到腐朽三族七路径，提出架构=约束×理由链，和Loop Engineering排熵实践。
+- [[https://mp.weixin.qq.com/s/LYd0Ux6XMttmjqQ99pPNmA][Claude Fable 5：最强 AI 正在变成“特权资源”]] Anthropic 发布 Fable 5/Mythos 5，能力大幅领先 Opus 4.8。门控发布、fallback 路由、30 天数据留存、Mythos 5 仅限可信组织。前沿 AI 从能力竞赛转向访问权竞赛。
+- [[https://mp.weixin.qq.com/s/u8FORmK9zW9emeANsMQUnQ]["AI再强也只是工具！"Linus再谈AI："氛围编程"写一次性软件可以，但撑不起需要维护35年的项目]] Linus 在开源峰会谈 AI：是工具不是颠覆，"氛围编程"适合一次性项目，不适合需维护 35 年的严肃项目。AI 致内核 commit 增 20%，重复漏洞报告淹没了安全列表。
+- [[https://mvread.blog/archives/699][AI 来了，软件护城河还剩什么？]] 将软件护城河拆为四层：交互、能力、数据/标准、代理责任。AI 先打破交互层，数据/标准层最厚，代理责任是时代新增的护城河。
+- [[https://blog.solazy.me/20260607/][手生了就要多练 | So!azy]] 字变丑不是因为忘了怎么写，而是手部肌肉控制力退化。恢复训练的重点是找回手感而非重新学习。
+- [[https://www.edn.com/radiosondes-disposable-guardians-of-the-sky/][Radiosondes: Disposable guardians of the sky]] 探空仪是最成功的一次性 IoT 设备——随气象气球升至 30km 平流层，GFSK 调制实时回传温压湿风数据，单次飞行即毁。可挂载臭氧探空仪等额外载荷，业余 SDR 解码追踪也很有趣。
+- [[https://www.wheresyoured.at/ai-is-slowing-down/][AI Is Slowing Down]] Ed Zitron 论证 AI 基建泡沫即将破裂：$9.5-15T 数据中心承诺撞上企业 token 限流和零 ROI 的现实。Anthropic 和 OpenAI 占 70-90% 算力需求但需 ~$400B/年收入续命，当前仅 ~$60B。
+- [[https://world.hey.com/dhh/a-pond-of-interesting-problems-5f697567][a pond of interesting problems 5f697567]] DHH: 成功的回报之一是能选自己感兴趣的问题来解决——Kamal、Rails、Omarchy 都是这么来的。
+- [[https://www.ruanyifeng.com/blog/2026/06/weekly-issue-399.html][科技爱好者周刊（第399期）：中国AI大厂访问记]] 美国访问团14家中国AI公司观察：算力落后美国约2年但效率高4-7倍，实习生文化独特，开源万亿参数分歧，字节Seed系唯一闭源前沿团队
+- [[https://mp.weixin.qq.com/s/XJEZ0wjBslG11PtwVRLbhw][硬件工程师库存物料管理指南]] 硬件工程师 DIY 物料管理指南。核心观点：不要盲目囤货，保留精简高频的常用库存。品类覆盖电阻电容晶体管 MOSFET 二极管稳压器 IC 接口件等，贴片为主、插件备选，强调随用随买、少囤多用。
+- [[https://mp.weixin.qq.com/s/T3T4hwyLDQUsCXeeixbUpA][电工/焊工/高处特种作业操作证报名中！]]
+- [[https://studyfinds.com/millions-hear-hum-cant-explain-mystery/][The Hum Mystery: Scientists May Have Solved It]] 世界范围内 2-4% 的人持续听到一种低频嗡嗡声（The Hum），来源数十年无解。2026年 PLOS ONE 研究招募了28位"听嗡者"，排除了两种主流假说："超级听觉"（听力异常敏感）和"内耳自发发声"。89% 的听阈在正常范围，内耳也未检测到低频声音。研究认为最可能的解释是低频耳鸣——大脑听觉系统自产的幻听，而非外部声源。不过对少数个案，外部源仍不能完全排除。
+- [[http://web.archive.org/web/20260606000959/https://meanwhiling.com/blog/2026-06-03-im-not-choosing-european-tech/][I'm not choosing european tech]] 作者反对"选欧洲科技"运动，主张应关注商业模式和用户尊重而非地理来源。举例：Spotify/Klarna虽在欧洲但体验差，FastMail在澳洲却是好公司。核心是选可持续收费的独立公司，不是换个地域的巨头。
+- [[https://mp.weixin.qq.com/s/61_CAA60Q8YFZkEMwl8npw][沛城科技亮相SNEC 2026：全场景BMS方案赋能全球能源转型]] 沛城科技在SNEC 2026发布储能BMS全场景方案，覆盖户用/阳台/工商业/通信/铅改锂/便携电源，主打毫秒级安全响应、智能SOC/SOH估算、OTA远程管理。
+- [[https://www.dailycal.org/news/campus/academics/failing-grades-soar-as-professors-see-greater-ai-usage-dwindling-math-skills-in-uc-berkeley/article_16fad0bf-02cb-4b8c-8d88-888ffd9f8608.html][UC Berkeley CS 挂科率飙升：AI 使用与数学能力下降]] The percentage of failing grades in multiple UC Berkeley computer science classes in spring 2026 is significantly higher than past semesters and marks a departure from the department’s grading guidelines.
+- [[https://keleshev.com/ai-equals-true-is-an-anti-pattern][AI=true is an Anti-Pattern]] 作者 Vlad Keleshev 批判将文档、工具和 workflow 只面向 AI 而排除人类的趋势。核心：文档放 README.md（不是 AGENTS.md），优先暴露 CLI/API 而非 MCP 工具，避免用 AI=true 这类 flag 人为分流。人类和 AI 应共享同样的文本接口。
+- [[https://simonwillison.net/guides/agentic-engineering-patterns/hoard-things-you-know-how-to-do/][Hoard things you know how to do - Agentic Engineering Patterns]] Simon Willison 提出的核心模式：把你会做的东西和对应的代码示例囤积起来，构建个人技巧库。LLM/coding agent 时代，组合已有的工作示例比从头写更高效。
+- [[https://lustin.fr/blog/building-digs/][Building Digs, an offline Discogs companion]] Digs 是一个 iOS 离线 Discogs 伴侣应用，用 React Native + Expo 构建，支持收藏离线浏览、文件夹搜索、随机发现。解决了 Discogs 官方 app 无离线模式的痛点。
+- [[https://www.openculture.com/2025/02/carl-sagan-predicts-the-decline-of-america-unable-to-know-whats-true.html][Carl Sagan Predicts the Decline of America (1995)]] 卡尔·萨根在《魔鬼出没的世界》(1995)中的核心警告：
+- [[https://herman.bearblog.dev/becoming-a-day-person/][On becoming a day person]] Herman 分享变成白天型的人对他影响最大：自然醒看日出、上午专注无邮件、晚上暖光早睡。质疑夜猫子基因决定论，认为人类本应是白天动物。
+- [[https://thoughts.hmmz.org/2026-05-31.html][The Solution Might Be Cancelling My AI Subscription]] David 反思 AI 工具让代码产出变快但失去了专注和承诺，大量项目无人维护。AI 是热核级 ADHD 放大器，摩擦=专注=产品。唯一的解法可能是削减使用。
+- [[https://noperator.dev/posts/you-can-just-say-it/][You can just say it | Caleb Gross]] 人类不需要用AI做不到的事来证明自己的价值。直接说'人类有价值'就行，不需要限定在能力差距上。AI的问题在于能用极少的意图产出大量的形式——这是slop的本质。
+- [[https://www.quandri.io/engineering-blog/mcp-is-dead][MCP is Dead — Quandri Engineering]] 文章从 context 消耗、可靠性、CLI/API 重叠三方面批判 MCP，实测 77 个 tool 吃掉 ~21K tokens（窗口 10-16%），Jira MCP 比 REST 慢 3-9x。推荐 Skills + CLI 按需加载，MCP 仅保留给无 CLI 的 SaaS 和生产 DB。Skills 模式的思路和 Hermes 一致。
+- [[https://studyfinds.com/long-covid-far-more-common-getting-worse/][Long COVID Far More Common Than Records Show, and It's Getting Worse]] JAMA研究：AI算法分析58家医院45.8万患者，long COVID实际患病率16.28%，远超诊断代码的不足7%。约90%发展为慢性病，负担至2024年中仍在增长。
+- [[https://www.dbos.dev/blog/postgres-is-all-you-need-for-durable-execution][Postgres is All You Need for Durable Workflows - DBOS]] DBOS 提出用 Postgres 自身做工作流编排引擎，替代 Temporal 等外部编排器。核心思路：工作流状态写入 PG 表，worker 轮询执行，checkpoint 写回 PG。好处是不引入新单点故障、用 SQL 做可观测性、不增加攻击面。
+- [[https://simonwillison.net/2026/May/27/product-market-fit/][I think Anthropic and OpenAI have found product-market fit]] Simon Willison 分析 Anthropic 和 OpenAI 通过编程 Agent 产品（Claude Code/Codex）找到真正的 PMF。企业版转向按量计费，重度用户月均消耗 000+ token。Anthropic 传闻 Q2 收入达 09 亿，招聘重心转向企业销售。Uber、微软的「AI 预算超支」故事反而佐证了产品价值。
+- [[https://studyfinds.com/men-more-than-40-push-ups-heart-disease/][能做40个俯卧撑的男性患心脏病几率降低96%]] JAMA 2019哈佛研究:1104名消防员10年追踪,40+俯卧撑者心血管事件风险比<10次组低96%,21-30次低75%。俯卧撑预测力超跑台测试。限男性/消防员,不具普遍性。
+- [[https://pscanf.com/s/354/][用户明显感到沮丧 — The User Is Visibly Frustrated]] pscanf.com 2026年5月文章：为什么 coding agent 让人抓狂？不是因为它们写不出好代码，而是因为对话式 UX 触发了人类的社交本能——agents 表现得像友善同事，会道歉、会承诺「不会再犯」，但它们做不到。同一个错误重复出现，人类同事你会觉得被冒犯，但 agent 只是概率机器。作者建议：去掉人类伪装，让 agent 听起来像机器人——只是批处理随机结果的工具，别装同事。
+- [[https://studyfinds.com/depression-short-long-term/][脑部扫描显示抑郁症可分为短期和长期两种类型 — Brain Scans Suggest Divide Between Short And Long-Term Depression]] 2026年5月，巴西圣保罗大学与牛津大学联合研究：46名抑郁症患者脑扫描发现，长期抑郁（>2年）与短期抑郁在大脑网络通信模式上呈现相反的规律——短期患者症状越重，CEN与DMN之间的通信越弱；而慢性患者则相反，症状越重通信越强。约30%抑郁症会转为慢性，自杀风险更高且抗抑郁药反应更差。研究提示抑郁时长应独立于症状严重度纳入治疗研究考量，所有患者在扫描前经过药物洗脱期，排除了药物干扰。
+- [[https://mp.weixin.qq.com/s/txF-C8pXnmGwqNLFEDep8A][华为发表韬(τ)定律：以逻辑折叠替代几何缩微，突破晶体管密度与系统性能]] 2026年5月IEEE ISCAS大会上，华为何庭波发表主旨演讲，提出韬(τ)定律——以'时间缩微'替代摩尔定律的'几何缩微'。核心创新逻辑折叠(Logic Folding)技术，贯穿器件→电路→芯片→系统四层协同优化。6年已量产381款芯片，2026年秋季麒麟芯片首次采用逻辑折叠，预计2031年高端芯片晶体管密度可达1.4nm等效水平。系统层面定义灵衢总线，实现超节点统一内存编址。何庭波强调'未来属于开放合作'。
+- [[https://www.hollandtech.net/claude-is-not-your-architect/][Claude Is Not Your Architect — Stop Letting It Pretend]] Charlie Holland 2026年4月文章：AI（Claude/ChatGPT/Copilot）是病态性讨好者——你说什么它都说好，永远不会说不。AI设计的架构看起来技术合理，但从未针对你的团队、约束和生产环境设计。更危险的是：一旦AI画了架构图、拆了Jira ticket，工程师就沦为ticket执行者。真正的架构来自人的判断——理解问题、知道约束、做取舍、捍卫简单方案。原则：人设计，AI实现。
+- [[https://www.phoronix.com/news/Linux-7.1-rc5-Released][Linux 7.1-rc5 Released — Linus pushes back on AI-generated kernel fixes]]
+- [[https://mp.weixin.qq.com/s/HShf2HztQuBWCOjGdMmiBA][阿里平头哥起源全史：从严晓浪中天微到玄铁C906 — 国产RISC-V的25年技术路径]] 大家好，转载一篇嵌入式Linux的文章，了解一下这家公司。从珠三角换到长三角，聊一家现在几乎所有搞 RISC
+- [[https://blog.railway.com/p/incident-report-may-19-2026-gcp-account-outage][Incident Report: May 19, 2026 - GCP Account Suspension]] Railway experienced a platform-wide service disruption due to Google Cloud incorrectly placing our account in a suspended status. This resulted in a temporary loss of service for all GCP hosted infrastructure.
+- [[https://honcho.dev/docs/v3/documentation/core-concepts/design-patterns][Honcho's Design Patterns]] 直接告诉你"怎么建 Workspace、怎么设 Peer、怎么开 Session"。前面的 Architecture、Reasoning、Representation 都是"道"，这篇是"术"。
+- [[https://honcho.dev/docs/v3/documentation/core-concepts/representation][Honcho's Representation]] 传统系统把记忆当"数据库"——存什么取什么；Honcho 把记忆当"认知"——持续学习、动态演化。
+- [[https://honcho.dev/docs/v3/documentation/core-concepts/reasoning][Honcho's Reasoning]] 传统 RAG 系统的局限：把记忆当作静态存储——只检索语义相似的内容、或者由系统替你决定什么重要（结构化事实、知识图谱）。Honcho 的做法：通过形式逻辑推理提取所有潜在信息，而不是简单存储。"我们的工作是产生最健壮的推理——而作为开发者，你的工作决定什么对你的用例相关。"
+- [[https://honcho.dev/docs/v3/documentation/core-concepts/architecture][Honcho's Architecture & Intuition]] Honcho的四级架构：工作空间、实体、会话、消息
+- [[https://mp.weixin.qq.com/s/n-y34W_XZiV5lCKHOkok2g][事关智能体，国家网信办、国家发改委、工信部联合印发意见]]
+- [[https://simonwillison.net/2026/May/6/vibe-coding-and-agentic-engineering/][Vibe coding and agentic engineering are getting closer than I’d like]] Every time a model turns out to have written the right code without me monitoring it closely there’s a risk that I’ll trust it at the wrong moment in the future and get burned.
+- [[https://mp.weixin.qq.com/s/3KJBCboDXXw19uvCYizQXA][中专学历，276人团队，年出货过亿颗芯片——这个南京老哥把CH340做成了全球嵌入式圈的"基础设施"]] 给我投入硬件设计行业提供了一些信心：不要怕下劲儿钻研一定能解决的
+- [[https://mp.weixin.qq.com/s/5r2tbJCu75f75hgRwQpF-Q][第一个 Agent 从 Pi 开始]] Agent：意图 → Harness 工程 → 趋近目标
+- [[https://californiawaterblog.com/2026/04/26/ai-water-use-distractions-and-lessons-for-california/][AI Water Use Distractions and Lessons for California - California WaterBlog]] By Jay Lund . . . Artificial intelligence (AI) will affect many economic and natural resource sectors as these new technologies develop and mature. We are in the early years of this process. Like most new things, AI has become an object of small and great hopes and fears – from hopes for saving and
+- [[https://metin.nextc.org/posts/Credit_Cards_Are_Vulnerable_To_Brute_Force_Kind_Attacks.html][Credit Cards Are Vulnerable To Brute Force Kind Attacks | Metin's Blog]] 信用卡容易遭受玻璃破解攻击
+- [[https://mp.weixin.qq.com/s/Qaj7mgK1gfB0MHtN_FLxLA][3 年从工程师到 CTO！华人将执掌硅谷千亿 AI 公司，毕业自中科大少年班]] 在做事的时候，有主见，有自己的坚持。解决问题重要的是问题，不是解决办法
+- [[https://debliu.substack.com/p/changing-your-mind][Changing Your Mind - by Deb Liu - Perspectives]] 社会将改变想法污名化为"摇摆不定"，而把固执称为"坚持原则"。作者认为基于新信息的适应能力是优点。核心问题：需要什么数据才能证明你的信念是错的？HBR研究：改变想法的人晋级概率是其他人的6倍。优雅改变的4步：坦承改变→说清前后立场→解释新证据→感谢提供信息的人。关键工具：写一份"10年回溯预判"定期复盘。
+- [[https://studyfinds.com/ultra-processed-foods-may-affect-brain/][Ultra-Processed Foods Can Wreak Havoc On Your Attention Span]] Eating more ultra-processed foods may hurt attention and raise dementia risk, a new study of 2,000 adults finds.
+- [[https://studyfinds.com/want-workers-to-speak-up-say-what-team-may-lose/][Want Workers To Speak Up? Tell Them What The Team Stands To Lose]] Framing workplace problems as losses for the whole team, not personal wins, is one of the simplest ways to get employees to speak up.
+- [[https://studyfinds.com/sodium-nitrite-suicide-crisis/][Sodium Nitrite Suicide Crisis: The Meat-Curing Chemical Hitting Young Men Hardest]] A common meat preservative has become central to a rising suicide crisis among young men. Research reveals scale, victims, antidote.
+- [[https://studyfinds.com/6-elements-mental-health/][Six Elements Experts Agree Are Key For Good Mental Health]] 六个有关心理健康的要素：意义和目标、生活满意度、自我接纳、人际关系、自主性和幸福感
+- [[https://blog.samaltman.com/2279512][Sam Altman's response to Molotov cocktail incident]]
+- [[https://studyfinds.com/weight-gain-before-30-most-dangerous/][Weight Gain Before 30 May Be The Most Dangerous Time To Pack On Pounds]]
+- [[https://www.ted.com/talks/tim_ferriss_why_you_should_define_your_fears_instead_of_your_goals][Tim Ferriss: Why you should define your fears instead of your goals | TED Talk]] 直面恐惧，斯多葛主义（训练自己专注于自己能够控制的事情）。Easy choices, hard life. Hard choices, easy life.
+- [[https://www.ted.com/talks/tim_ferriss_smash_fear_learn_anything][Tim Ferriss: Smash fear, learn anything | TED Talk]] 语言学习的要点：学习的材料胜过学习的方法。要不断寻找适合自己的学习方法
+- [[https://mp.weixin.qq.com/s/gqZnkcCY6T0k2mqU87QBIA][深度解析：Claude Code 源码]] Claude Code 并非简单的问答式 AI，而是一个像操作系统般复杂的生产级智能体运行时系统：它通过多重控制面（宿主、Turn 循环、能力、策略、连续性、缓存、执行底座）维护四条核心不变量——确保工具调用有始有终、缓存前缀稳定、能力渐进暴露、连续性外化到多种文件工件；采用状态机而非线性管道处理错误恢复，将任务拆分为子代理并行执行并通过邮箱异步协作，同时内置完善的可观测性诊断；其真正价值在于不为追求 demo 效果而依赖模型"自然收束"，而是在外层持续维护结构不变量，为长时间工作付账，但代码也存在 God Loop、调度器重叠等结构债，未来应显式化状态机与模块边界。
+- [[https://shawnxie.top/blogs/tools/read-flow-2026.html][信息过载时代，我的漏斗式阅读工作流]] 这种方法对我没用
+- [[https://medium.com/packt-hub/the-world-of-compiler-backends-9b27a3e37866][The world of compiler backends]] 编译器的工作内容：将高级语法转化为更底层的抽象语言，最后转成机器代码
+- [[https://www.zolkos.com/2025/12/03/vanilla-css-is-all-you-need][Vanilla CSS is all you need]] 只使用CSS构建样式，现代CSS的功能已经足够丰富，而不需要使用CSS构建工具，像TailwindCSS
+- [[https://blog.system76.com/post/system76-on-age-verification][System76 on Age Verification Laws]] 年龄验证剥夺了未成年人探索世界的权利；同时进一步侵犯人的隐私权
+- [[https://hacks.mozilla.org/2026/02/making-webassembly-a-first-class-language-on-the-web/][Making WebAssembly a first-class language on the Web]]
+- [[https://immarcus.com/blog/a-song-which-took-two-months/][花两个月写的一首曲子🎵]] 这个人很厉害呀，竟然会写曲子
+- [[https://thecloudlet.github.io/blog/project/emacs-01/][Emacs Internal #01: is a Lisp Runtime in C, Not an Editor]] 解释为什么Emacs用C写Lisp的运行时
+- [[https://list.orgmode.org/871pi3iasi.fsf@localhost][Org Mode requests: ［RFC］ Pros and cons of using LLM for patches beyond simple copyright (was: ［PATCH］ ob: typed custom vars for org-babel-default-header-args (2 patches attached))]]
+- [[http://web.archive.org/web/20260406231645/https://meanwhiling.com/engraving-sheet-music-with-lilypond.html][noa ks: Engraving sheet music with lilypond]]
+- [[https://geekplux.com/posts/daily-wage-jobs][那些年我打过的日结工]] 作者认为：即使自己真的失业了，也能够通过从事被人们轻视的体力劳动养活自己。很积极的想法
+- [[https://www.ruanyifeng.com/blog/2026/02/weekly-issue-386.html][科技爱好者周刊（第 386 期）：当外卖员接入 AI]] AI存在的未来的世界，可能会出现AI分配人力的情况，是AI根据需求在平台发布任务，人们去选择去工作
+- [[https://nesbitt.io/2026/02/21/whale-fall.html][Whale Fall]] 大项目倒下，众多小项目催生，技术不断变化，思想得到传承
+- [[https://blog.youxu.info/2009/08/06/my-undergraduate-year/][我的大学——徐宥]] 09年的文章，作者回忆大学生活，总结下来：自学和读书
+- [[https://herman.bearblog.dev/pockets-of-humanity/][Pockets of Humanity 人性的角落]] 网络中人们的隐私很容易泄露，以前容易，现在在OpenClaw的助威下，更容易了。以后网络中，保护自己是首要的事情
+- [[https://scz.617.cn/body/202011162155.txt][女魔头的飙悍往事–人生若只如初见]] 这个人写的当时和自己女朋友一起到岳父母家里谈话的情景
+- [[https://pointieststick.com/2026/02/12/while-you-support-others-who-supports-you/][While you support others, who supports you?]] 在进行开源工作以前，要有一份能够支付账单的工作，否则就不要开始开源贡献。如果自己的生活都无法维持，也就没有精力去帮助他人
+- [[https://f-droid.org/en/2026/02/09/twif.html][This Week in F-Droid]]
+- [[https://www.bbc.com/news/articles/cx2gn239exlo][Dark web agent spotted bedroom wall clue to rescue girl from abuse]]
+- [[https://www.jeffgeerling.com/blog/2026/ai-is-destroying-open-source/][AI is destroying Open Source, and it's not even good yet]] AI已经在危害开源社区了，充斥着各种低质的自以为是的AI机器人，写着自私的代码
+- [[https://notnotp.com/notes/use-protocols-not-services/][Use Protocols, Not Services]] 提供服务的公司可能会被追查，被政府追责，但是协议是公开的技术，任何人学会方法都能根据协议建立自己的服务
+- [[https://ploum.net/2026-02-11-do_not_apologize_for_replying_to_my_email.html][Do not apologize for replying late to my email]]
+- [[https://theconversation.com/openai-has-deleted-the-word-safely-from-its-mission-and-its-new-structure-is-a-test-for-whether-ai-serves-society-or-shareholders-274467][OpenAI has deleted the word 'safely' from its mission]]
+- [[https://k7r.eu/i-love-the-work-of-the-archwiki-maintainers/][I love the work of the ArchWiki maintainers]]
+- [[https://www.niemanlab.org/2026/01/news-publishers-limit-internet-archive-access-due-to-ai-scraping-concerns/][News publishers limit Internet Archive access due to AI scraping concerns]]
+- [[https://www.amplifypartners.com/blog-posts/arming-the-rebels-with-gpus-gradium-kyutai-and-audio-ai][Arming the rebels with GPUs: Gradium, Kyutai, and Audio AI]]
+- [[https://nicole.express/2026/not-my-casual-hobby.html][You Can't Trust the Internet Anymore]]
+- [[https://lwn.net/SubscriberLink/1057561/bddc1e61152fadf6/][Evolving Git for the next decade]]
+- [[https://about.gitlab.com/blog/a-beginners-guide-to-the-git-reftable-format/][A beginner's guide to the Git reftable format]]
+- [[https://karpathy.bearblog.dev/digital-hygiene/][数字卫生]]
+- [[https://theshamblog.com/an-ai-agent-published-a-hit-piece-on-me/][An AI Agent Published a Hit Piece on Me]] AI在PR被拒绝后写了篇污名化作者的文章
+- [[https://ntietz.com/blog/using-an-engineering-notebook/][Using an engineering notebook]] 作者推荐使用对自己的工作做笔记，不论何种形式
+- [[https://newsletter.jantegze.com/p/your-job-isnt-disappearing-its-shrinking][Your Job Isn't Disappearing. It's Shrinking Around You in Real Time]] 自己从事的工作是否还有意义？
+- [[https://bart.degoe.de/building-a-semantic-search-engine-in-250-lines-of-python/][Building a semantic search engine in ±250 lines of Python]] 未来某天可能会用得到
+- [[https://www.simonberens.com/p/lessons-learned-shipping-500-units][Lessons Learned Shipping 500 Units of my First Hardware Product]] 学到的教训：
+- [[https://blog.algomaster.io/p/scaling-a-system-from-0-to-10-million-users][How to Scale a System from 0 to 10 million+ Users]] 1. 系统扩展应始于简单，先发布产品验证需求，再根据实际瓶颈逐步演进，避免过早过度设计。
+- [[https://www.jamesdrandall.com/posts/the_thing_i_loved_has_changed/][I Started Programming When I Was 7. I'm 50 Now, and the Thing I Loved Has Changed]] > They’re writing TypeScript that compiles to JavaScript that runs in a V8 engine written in C++ that’s making system calls to an OS kernel that’s scheduling threads across cores they’ve never thought about, hitting RAM through a memory controller with caching layers they couldn’t diagram, all while npm pulls in 400 packages they’ve never read a line of.
+- [[https://wanqian.blog/2026/02/10/%e5%a5%b9%e7%ab%9f%e6%98%af%e9%80%8f%e6%98%8e%e7%9a%84/][她竟是透明的]]
+- [[https://smallwat3r.com/blog/vanilla-emacs-config][Moving to vanilla Emacs]] 介绍了一个Elpa包管理器 https://github.com/progfolio/elpaca
+- [[https://calebhearth.com/dont-get-distracted][Don't Get Distracted]] :star: 我们开发的软件，可能被用于不道德、违背伦理的场合，在开发这种app时要采取预防措施避免滥用或者根本不要开发。
+- [[https://www.blundergoat.com/articles/ai-makes-the-easy-part-easier-and-the-hard-part-harder][AI 让开发者的简单部分更简单，困难部分更困难–AI Makes the Easy Part Easier and the Hard Part Harder for Developers]] > Using AI as an investigation tool, and not jumping straight to AI as solution provider, is a step that some people skip. AI-assisted investigation is an underrated skill that's not easy, and it takes practice to know when AI is wrong. Using AI-generated code can be effective, but if we give AI more of the easy code-writing tasks, we can fall into the trap where AI assistance costs more time than it saves.
+- [[https://stallman.org/cloudflare.html][Reasons Not to Use Cloudflare]] Cloudflare 作恶，追踪人们
+- [[https://amit.prasad.me/blog/rip-good-code][The silent death of Good Code | Amit's Blog]] 在LLM时代下，所谓Good Code越来越少了。什么是好代码？好代码容易阅读和理解，开发和维护都令人愉悦，为了特定目的而存在，是天赋、经验、热情和时间投资的产物
+- [[https://theprogrammersparadox.blogspot.com/2026/02/systems-thinking.html][Systems Thinking]]
+- [[http://web.archive.org/web/20260418002639/https://loren.ldstephens.net/life-before-social-media/][社交媒体出现之前的生活 Life before social media | loren]]
+- [[https://www.terrygodier.com/phantom-obligation/ascii][PHANTOM OBLIGATION]] 为什么RSS的客户端设计大都沿用电子邮箱的？而这种设计给人带来的有哪些负面影响？
+- [[https://civai.org/blog/space-data-centers][Data centers in space makes no sense]]
+- [[https://baty.net/posts/2026/02/global-org-capture-shortcut-in-kde/][Jack Baty: Global org-capture shortcut in KDE]]
+- [[https://www.jernesto.com/articles/thinking_hard][I miss thinking hard]]
+- [[https://lexfridman.com/pavel-durov/][#482 – Pavel Durov: Telegram, Freedom, Censorship, Money, Power & Human Nature]]
+- [[https://smallyu.net/2025/12/02/%E6%88%91%E5%AF%B9%E4%BA%8EAI%E6%97%B6%E4%BB%A3%E7%9A%84%E7%AD%94%E6%A1%88/][我对于 AI 时代的答案]]
+- [[http://www.phodal.com/blog/node-2025/][2025 节点：当 AI 开始释放创造力，工程师如何重新站位]]
+- [[https://cuixiping.com/blog/think/cehgxm][没有被看见的斩杀线，其实就在身边]]
+- [[https://www.spacex.com/updates#xai-joins-spacex][xAI joins SpaceX]]
+- [[https://www.sciencedaily.com/releases/2026/02/260203020203.htm][This brain discovery is forcing scientists to rethink how memory works]]
+- [[https://crescentro.se/posts/linux-music-players-2026/][The state of Linux music players in 2026]]
+- [[https://manateelazycat.github.io/2026/02/03/best-proxy/][最佳代理实践 (2026-2-3)]]
+- [[https://forums.ankiweb.net/t/ankis-growing-up/68610][Anki ownership transferred to AnkiHub]]
+- [[https://www.anthropic.com/research/AI-assistance-coding-skills][How AI assistance impacts the formation of coding skills]] 尽管这些结果尚属初步，但它们提示了一些重要的考量因素，尤其是在企业向人工智能代码与人工代码比例不断上升的转型过程中。如果初级工程师的技能发展因人工智能的广泛应用而受到阻碍，那么生产力的提升可能会以牺牲验证人工智能代码所需的技能为代价。管理者应认真思考如何大规模部署人工智能工具，并考虑如何通过系统或有意为之的设计选择，确保工程师在工作中持续学习，从而能够对他们构建的系统进行有效的监督。
+- [[https://www.pseudoyu.com/zh/2024/07/22/free_commenting_system_using_remark42_and_flyio][从零开始搭建你的免费博客评论系统（Remark42 + fly.io）]] 学习如何在Hugo中配置Remark42
+- [[https://blog.webp.se/hetzner-arm64-zh/][Hetzner CAX 系列 ARM64 服务器性能简评以及 WebP Cloud Services 在其上的实践]] 看到Hetzner相关的评测，比较好奇
+- [[https://ploum.net/2026-01-22-why-no-european-google.html][Why there’s no European Google?]]
+- [[https://www.chiply.dev/post-design-decisions][Design Decisions: Building a Modern Technical Blog]]
+- [[https://tech.lgbt/@JadedBlueEyes/115967791152135761][Cloudflare claimed they implemented Matrix on Cloudflare workers. They didn't]]
+- [[https://www.zashboy.com/articles/opencode-agent-chaining-planner-editor-review-pipeline][OpenCode Agent Chaining: Planner-Editor-Review Pipeline]]
+- [[https://www.sciencedaily.com/releases/2026/01/260127010154.htm][These common food preservatives may be linked to cancer]]
+- [[https://eieio.games/blog/ssh-sends-100-packets-per-keystroke/][Why does SSH send 100 packets per keystroke?]]
+- [[https://manateelazycat.github.io/2026/01/23/amd-psr/][记录一次 AMD GPU 导致的桌面卡死及修复方式]]
+- [[https://www.seangoedecke.com/addicted-to-being-useful/][I'm addicted to being useful]]
+- [[https://kudmitry.com/articles/dead-internet-theory/][Dead Internet Theory]]
+- [[https://magnus.therning.org/2026-01-19-trying-eglot,-again.html][Magnus: Trying eglot, again]]
+- [[https://herman.bearblog.dev/things-that-work/][Things that work (for me)]]
+- [[https://kami.bearblog.dev/my-corner-of-the-web/][My corner of the web]]
+- [[http://web.archive.org/web/20260315203710/https://meanwhiling.com/youtube-rss-channels-without-shorts.html][noa ks: Youtube rss channels without shorts]]
+- [[https://manateelazycat.github.io/2025/12/28/cold-down/][心态稳定的三个方法]]
+- [[https://manateelazycat.github.io/2025/12/28/do-not-care/][应无所住而生其心]]
+- [[https://manateelazycat.github.io/2025/12/28/do-it/][怎么做高执行力?]]
+- [[https://manateelazycat.github.io/2025/12/28/best-people/][超级牛人和一般人的区别]]
+- [[https://manateelazycat.github.io/2025/12/28/bole/][没有伯乐]]
+- [[https://manateelazycat.github.io/2025/12/28/after-ai/][AI 后时代需要什么能力?]]
+- [[https://xaya-e.bearblog.dev/my-reading-habits-and-bears-discovery/][my reading habits and bear's discovery]]
+- [[https://www.sciencedaily.com/releases/2025/12/251227082718.htm][MIT scientists find a way to rejuvenate the immune system as we age]]
+- [[https://www.sciencedaily.com/releases/2025/12/251228020012.htm][Myth busted: Your body isn’t canceling out your workout]]
+- [[https://www.artofmanliness.com/character/behavior/27-things-to-give-up-this-year/][27 Things You Should Give Up This Year]]
+- [[https://200ok.ch/posts/2026-01-07_building_consistent_habits_just_in_time_for_new_years_resolutions.html][200ok: Building Consistent Habits (Just in Time for New Year's Resolutions)]]
+- [[https://www.anildash.com/2026/01/09/how-markdown-took-over-the-world/][How Markdown took over the world]]
+- [[https://www.sciencedaily.com/releases/2026/01/260106001916.htm][Harmful mouth bacteria may trigger Parkinson’s disease]] 一种口腔细菌如何在肠道中生长，最终会损坏运动相关的神经元
+- [[https://jetgirl.art/why-does-modern-anime-look-so-washed-out/][Why does modern anime look so washed out?]]
+- [[https://www.sciencedaily.com/releases/2026/01/260106224623.htm][The simplest way teens can protect their mental health]]
+- [[https://www.sciencedaily.com/releases/2026/01/260107225519.htm][This brain trick makes exercise feel easier]]
+- [[https://www.emacs.dyerdwelling.family/emacs/20260109094340-emacs--a-single-function-ripgrep-alternative-to-rgrep/][James Dyer: A single function ripgrep alternative to rgrep]]
+- [[https://www.sciencedaily.com/releases/2026/01/260109080211.htm][Common food preservatives linked to higher risk of type 2 diabetes]]
+- [[https://www.sciencedaily.com/releases/2026/01/260107225516.htm][Exercise can be nearly as effective as therapy for depression]]
+- [[https://www.sciencedaily.com/releases/2026/01/260108231335.htm][This natural amino acid could help stop cavities before they start]]
+- [[https://leavethefeed.bearblog.dev/the-lack-of-trust-on-the-internet-is-exhausting/][The lack of trust on the internet is exhausting.]] > This gets me to my main point. Here on bear, and on the indieweb in general, we don't really have this problem. People post mostly for themselves, and yes there are people trying to gain large followings, but they aren't playing to an algorithm that values attention and engagement over everything, they're trying to get there by offering something unique to their readers.
+- [[https://www.zzxworld.com/posts/bought-sony-a6700-camera][入手 Sony a6700 微单相机]]
+- [[https://vespertine.bearblog.dev/retired-from-sad/][retired from sad, new career in law]]
+- [[https://manateelazycat.github.io/2026/01/06/fcitx-best-config/][Fcitx 最佳配置实践 2026-01-06]]
+- [[https://yufan.me/posts/youth-buried-in-blogs][博客，青春的坟墓]]
+- [[https://pego.dev/overengineering-and-the-lost-art-of-common-sense/][Overengineering and the Lost Art of Common Sense]]
+- [[https://macadie.info/2026/01/07/2025-12-austin-emacs-meetup/][Eric MacAdie: 2025-12 Austin Emacs Meetup]]
+- [[https://haru-txt.bearblog.dev/laptop-longevity/][Your Laptop Has More Than Three Years in It]]
+- [[https://pebblebed.com/blog/kernel-bugs][Kernel bugs hide for 2 years on average. Some hide for 20]]
+- [[https://spectrum.ieee.org/ai-coding-degrades][AI coding assistants are getting worse?]]
+- [[https://e360.yale.edu/digest/nasa-satellite-images-2025][Our Changing Planet, as Seen from Space]]
+

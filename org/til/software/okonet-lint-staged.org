@@ -1,0 +1,29 @@
+#+TITLE: Okonet Lint Staged
+#+DATE: <2025-06-15 19:22:54>
+#+STATUS: draft
+#+HEADER: Web
+
+<https://github.com/okonet/lint-staged>
+
+终于明白了：这个包只会检查暂存区内的文件是否符合 lint 规则。
+
+** 配置
+
+#+BEGIN_SRC bash
+npm install --save-dev husky lint-staged
+npx husky install
+npm set-script prepare "husky install"
+npx husky add .husky/pre-commit "npx lint-staged"
+
+#+END_SRC
+
+在 =package.json= 中添加：
+
+#+BEGIN_SRC json
+{
+"lint-staged": {
+"**/*.{js,md,scss}": "prettier --write"
+}
+}
+#+END_SRC
+

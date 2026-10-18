@@ -1,0 +1,21 @@
+#+TITLE: Git Add two push remote
+#+DATE: <2026-02-14 15:30:40>
+#+STATUS: draft
+#+HEADER: Git
+
+#+BEGIN_SRC bash
+git remote add origin git@github.com:xxx/a.git
+git remote -v
+#origin git@github.com:xxx/a.git (fetch)
+#origin git@github.com:xxx/a.git (push)
+git remote set-url --add --push origin git@codeberg.org:xxx/a.git
+git remote -v
+#origin git@github.com:xxx/a.git (fetch)
+#origin git@codeberg.org:xxx/a.git (push)
+git remote set-url --add --push origin git@codeberg.org:xxx/b.git
+git remote -v
+#origin git@github.com:xxx/a.git (fetch)
+#origin git@codeberg.org:xxx/a.git (push)
+#origin git@codeberg.org:xxx/b.git (push)
+#+END_SRC
+

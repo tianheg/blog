@@ -1,0 +1,15 @@
+#+TITLE: Git Edit Specific Commit Message
+#+DATE: <2025-06-15 19:22:54>
+#+STATUS: draft
+#+HEADER: Git
+
+<https://stackoverflow.com/a/1186549/12539782>
+
+想修改 =bbc643cd= 的信息
+
+#+BEGIN_SRC bash
+git rebase --interactive 'bbc643cd^'
+#+END_SRC
+
+在默认编辑器打开后，将 pick 改为 r/reword 后保存，然后就可以修改 commit 信息了。
+

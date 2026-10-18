@@ -1,0 +1,38 @@
+#+TITLE: Linux User
+#+DATE: <2025-06-15 19:22:54>
+#+STATUS: draft
+#+HEADER: Linux
+
+** =chsh=
+
+更改当前用户 Shell
+
+#+BEGIN_SRC bash
+chsh -s /bin/zsh
+echo $SHELL
+#+END_SRC
+
+列出所有 Shell
+
+#+BEGIN_SRC bash
+chsh -l
+#+END_SRC
+
+** =useradd=
+
+新建用户（有家目录）
+
+来源: [[https://wiki.archlinux.org/title/Users_and_groups][ArchWiki: Users and groups]]
+
+#+BEGIN_SRC bash
+useradd -m example
+passwd example
+#+END_SRC
+
+** =adduser=
+
+=adduser= provides a high level interface for adding new users, and =useradd= provides a low level interface.
+
+
+相关：[[db-mysql-reset-or-change-root-passwd][db-mysql-reset-or-change-root-passwd]]
+

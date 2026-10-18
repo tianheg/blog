@@ -1,0 +1,14 @@
+#+TITLE: Git Delete Branch Locally Remotely
+#+DATE: <2025-06-15 19:22:54>
+#+STATUS: draft
+#+HEADER: Git
+
+#+BEGIN_SRC bash
+## local
+git branch -d BRANCH
+git branch -D BRANCH # force delete
+## Remote
+git push origin --delete BRANCH
+git remote prune origin
+#+END_SRC
+

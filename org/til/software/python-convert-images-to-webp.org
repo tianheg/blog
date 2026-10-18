@@ -1,0 +1,60 @@
+#+TITLE: Python Convert Images to Webp
+#+DATE: <2025-06-15 19:22:54>
+#+STATUS: draft
+#+HEADER: Programming
+
+- [[https://fedingo.com/how-to-convert-images-to-webp-in-python/][How to Convert Images to Webp in Python - Fedingo]]
+- <https://stackoverflow.com/a/47655463>
+- <https://stackoverflow.com/a/57158589>
+
+#+BEGIN_SRC bash
+mkdir pytowebp && cd $_
+python -m venv venv --upgrade-deps
+. venv/env/activate
+(venv) pip install Pillow
+(venv) emacs main.py
+#+END_SRC
+
+main.py:
+
+#+BEGIN_SRC py
+from pathlib import Path
+from PIL import Image
+
+def convert_towebp(source):
+"""Convert image to webp.
+
+Args: source (pathlib.Path): Path to source image
+
+Returns: pathlib.Path: path to new image
+"""
+destination = source.with_suffix(".webp")
+
+image = Image.open(source) # Open image
+image.save(destination, format="webp") # Convert image to webp
+
+return destination
+
+def main():
+all_filespath = Path(".").glob(r"****")
+for single_file in all_filespath:
+if single_file.suffix in {".png", ".jpg", ".jpeg"}: # PurePath.suffix 查询文件扩展名
+webp_path = convert_towebp(single_file)
+print(webp_path)
+
+main()
+#+END_SRC
+
+最难的部分是同时找到包含 ={".png", ".jpg", ".jpeg"}= 三种后缀的文件。
+
+-----
+
+
+参考资料
+
+1. [[https://neptune.ai/blog/image-processing-python][Image Processing in Python: Algorithms, Tools, and Methods You Should Know - neptune.ai]]
+2. [[https://neptune.ai/blog/pil-image-tutorial-for-machine-learning][Essential Pil (Pillow) Image Tutorial (For Machine Learning People) - neptune.ai]]
+
+
+相关：[[python][python]]
+
