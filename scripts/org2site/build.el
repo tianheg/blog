@@ -1180,10 +1180,12 @@ stroke-linecap=\"round\" stroke-linejoin=\"round\" aria-hidden=\"true\">\
                              "<a class=\"notfound-btn\" href=\"/\">Take me home</a>\n"
                              "</div>\n")))
 
+    ;; 0 处时静默：这行以前每次构建都打、永远是 0 处，纯噪音（2026-10-19 用户要求）
     (let ((un (nreverse org2site-unresolved-wikilinks)))
-      (princ (format "wikilink 未解析（已退成纯文本）：%d 处%s\n"
-                     (length un)
-                     (if un (format "；样例 %s" (mapconcat #'identity (seq-take un 5) " | ")) ""))))
+      (when un
+        (princ (format "wikilink 未解析（已退成纯文本）：%d 处；样例 %s\n"
+                       (length un)
+                       (mapconcat #'identity (seq-take un 5) " | ")))))
   (when org2site--no-date-files
     (princ (format "WARN %d file(s) under posts/ or til/ have no usable #+DATE: -> SKIPPED (not built)\n"
                    (length org2site--no-date-files)))
