@@ -489,7 +489,7 @@ org-element 把这些边界硬编码成 ASCII，配置变量管不着；导出�
 (defun org2site--title-of (infile)
   "读 #+TITLE 并做 HTML 转义，供 body-only 导出补 <h1> 用。
 body-only 导出不经过模板（org2site-template 不会跑），标题得在这里自己加。"
-  (when-let ((title (with-current-buffer (find-file-noselect infile)
+  (when-let* ((title (with-current-buffer (find-file-noselect infile)
                       (save-excursion
                         (goto-char (point-min))
                         (when (re-search-forward "^#\\+TITLE:\\s-*\\(.*\\)$" nil t)

@@ -69,16 +69,34 @@ ensure_emacs() {
   tar -C "$EMACS_ENV" -xzf "$CACHE/$EMACS_TARBALL"
   rm -f "$CACHE/$EMACS_TARBALL"
   EMACS="$EMACS_ENV/bin/emacs"
-  echo "emacs: $EMACS（$EMACS_VERSION，本仓库发布）"
+
+  # 让 emacs 找到自己的「架构相关数据目录」（libexec/…，emacs-<hash>.pdmp 就在里面）。
+  # tarball 的编译前缀是**构建机**的临时目录，解到别处就找不到 → 后果不是报错，而是
+  # 每次启动都从 .el 源码引导（构建日志上百行 "Loading …"、慢），外加一行
+  # "Warning: arch-dependent data dir …: No such file or directory"。
+  # 做法：从二进制里读出那个烧死的路径，在原位补一个软链指向我们树里的 libexec。
+  # CI 的 /tmp 可写；失败也不致命，只是回到慢路径。
+  local baked real
+  baked=$(strings "$EMACS" 2>/dev/null | grep -m1 "/libexec/emacs/${EMACS_VERSION}/" || true)
+  real=$(ls -d "$EMACS_ENV"/libexec/emacs/"${EMACS_VERSION}"/* 2>/dev/null | head -1)
+  if [ -n "$baked" ] && [ -n "$real" ] && [ ! -d "$baked" ]; then
+    mkdir -p "$(dirname "$baked")" 2>/dev/null && ln -sfn "$real" "$baked" 2>/dev/null || true
+  fi
+  # 兜底：显式指定转储文件（不依赖上面那个软链是否成功）
+  EMACS_DUMP=$(ls "$EMACS_ENV"/libexec/emacs/*/*/emacs-*.pdmp 2>/dev/null | head -1 || true)
+  echo "emacs: $EMACS（$EMACS_VERSION，本仓库发布；dump ${EMACS_DUMP:+已找到}${EMACS_DUMP:-缺失}）"
 }
 
 # 便携 emacs 必须显式告诉它 lisp / etc 在哪（打包时的 prefix 已经作废）——
 # 这三个变量就是「可搬运」的关键，少了会在 getenv 阶段就报 "Cannot open load file"。
+# --dump-file 一并给出：万一下面那个 libexec 软链没建成，也能直接用上转储而不是源码引导。
 emacs_run() {
+  local dump_args=()
+  [ -n "${EMACS_DUMP:-}" ] && dump_args=(--dump-file "$EMACS_DUMP")
   EMACSLOADPATH="$EMACS_ENV/share/emacs/${EMACS_VERSION}/lisp:$EMACS_ENV/share/emacs/site-lisp" \
   EMACSDATA="$EMACS_ENV/share/emacs/${EMACS_VERSION}/etc" \
   EMACSDOC="$EMACS_ENV/share/emacs/${EMACS_VERSION}/etc" \
-  "$EMACS" "$@"
+  "$EMACS" "${dump_args[@]}" "$@"
 }
 
 ensure_pagefind() {
@@ -141,7 +159,7 @@ ensure_emacs
 ensure_org
 # 关键：-L "$ORG_DIR" 让 load-path 里 ELPA 的 org 优先于 emacs 自带的那个。
 # 打印实际用的版本，构建日志里能追溯「这一版是用哪套 emacs/org 出的」。
-emacs_run -Q --batch -L "$ORG_DIR" --eval "(progn (require 'org) (princ (format \"用 emacs %s / org %s（%s）\n\" emacs-version (org-version) (locate-library \"org\"))))"
+emacs_run -Q --batch -L "$ORG_DIR" --eval "(progn (require 'org) (princ (format \"toolchain: emacs %s / org %s (%s)\\n\" emacs-version (org-version) (locate-library \"org\"))))"
 # org/ 就是内容真源（2026-10 迁移完成，content/ 已下线）：直接改 org/*.org，构建读的就是它。
 # content/ 与转换期脚本（md2org.py / migrate.py）留在 git 历史里，工作区不再有。
 emacs_run -Q --batch -L "$ORG_DIR" -l scripts/org2site/build.el org "$OUT" </dev/null

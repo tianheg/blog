@@ -1,3 +1,4 @@
+;; -*- lexical-binding: t; -*-
 ;;; build.el --- 批量导出 + 站点级页面生成
 ;;;
 ;;; 用法：emacs -Q --batch -l build.el <org根目录> <输出根目录>
