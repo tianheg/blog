@@ -1,0 +1,17 @@
+#+TITLE: Mongodb Archlinux Systemd Status 14
+#+DATE: <2025-06-15 19:22:54>
+#+STATUS: draft
+
+<https://stackoverflow.com/a/66107451/12539782>
+
+解决办法
+
+#+BEGIN_SRC bash
+sudo chown -R [mongodb:mongodb](mongodb:mongodb) /var/lib/mongodb
+sudo chown [mongodb:mongodb](mongodb:mongodb) /tmp/mongodb-27017.sock
+sudo systemctl restart mongodb
+#+END_SRC
+
+
+相关：[[pve-upgrade][pve-upgrade]]
+

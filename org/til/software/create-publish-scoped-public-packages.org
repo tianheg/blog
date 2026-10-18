@@ -1,0 +1,35 @@
+#+TITLE: Create Publish Scoped Public Packages
+#+DATE: <2025-06-15 19:22:54>
+#+STATUS: draft
+#+HEADER: Web
+
+- <https://docs.npmjs.com/creating-and-publishing-scoped-public-packages>
+- <https://docs.npmjs.com/creating-and-publishing-unscoped-public-packages>
+
+有用户名（@tianheg/package）
+
+#+BEGIN_SRC bash
+npm login
+npm init --scope=@tianheg
+touch README.md
+
+npm install /path/to/package
+
+cd /path/to/package
+npm publish --access public
+#+END_SRC
+
+无用户名（package）
+
+#+BEGIN_SRC bash
+...
+npm init
+...
+npm publish
+#+END_SRC
+
+
+相关：[[gulpjs][gulpjs]]
+
+相关：[[use-pnpm][use-pnpm]]
+

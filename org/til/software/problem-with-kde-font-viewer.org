@@ -1,0 +1,18 @@
+#+TITLE: Problem with KDE Font Viewer
+#+DATE: <2025-06-15 19:22:54>
+#+STATUS: draft
+#+HEADER: Linux
+
+<https://ask.fedoraproject.org/t/problem-with-kde-font-viewer/13932>
+
+This major bug occurs when running under Wayland. A workaround is to set =QT_QPA_PLATFORM=xcb= before starting kfontview so that it runs under X11/XWayland, see [[https://bugs.kde.org/show_bug.cgi?id=439470][KDE bug 439470]].
+
+在命令行使用 KDE Font Viewer：
+
+#+BEGIN_SRC sh
+QT_QPAPLATFORM=xcb kfontview
+#+END_SRC
+
+
+相关：[[use-pnpm][use-pnpm]]
+

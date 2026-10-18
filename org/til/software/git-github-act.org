@@ -1,0 +1,45 @@
+#+TITLE: Git Github Act
+#+DATE: <2025-06-15 19:22:54>
+#+STATUS: draft
+#+HEADER: Git
+
+[[https://github.com/nektos/act][nektos/act: Run your GitHub Actions locally 🚀]]
+
+** 配置
+
+#+BEGIN_SRC bash
+
+yay -S act act
+
+#+END_SRC
+
+** 使用
+
+#+BEGIN_SRC bash
+
+act [<event>] [options] If no event name passed, will default to "on: push"
+
+act -l
+
+act workflow_dispatch -l
+
+act
+
+act pull_request
+
+act -j test
+
+act -n
+
+act -v
+#+END_SRC
+
+在 GitHub 上运行 Actions 时，=GITHUB_TOKEN= 是自动生成的，本地运行则需要添加：
+
+#+BEGIN_SRC bash
+act -s GITHUB_TOKEN=[insert token or leave blank for secure input]
+#+END_SRC
+
+
+相关：[[git-use-dura][git-use-dura]]
+

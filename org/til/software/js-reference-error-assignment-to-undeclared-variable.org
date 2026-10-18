@@ -1,0 +1,20 @@
+#+TITLE: JS Reference Error Assignment to Undeclared Variable
+#+DATE: <2025-06-15 19:22:54>
+#+STATUS: draft
+#+HEADER: Web
+
+*** — title: "JS ReferenceError – Assignment to undeclared variable"
+错误代码：
+
+#+BEGIN_SRC js
+index = game.initialisingPlayers.indexOf(data.id)
+#+END_SRC
+
+正确代码：
+
+#+BEGIN_SRC js
+let index = game.initialisingPlayers.indexOf(data.id)
+#+END_SRC
+
+或者使用 const。
+

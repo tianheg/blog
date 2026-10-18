@@ -1,0 +1,17 @@
+#+TITLE: Error: spawn pip3.9 ENOENT
+#+DATE: <2025-06-15 19:22:54>
+#+STATUS: draft
+#+HEADER: Tools
+
+When deploying Datasette using Vercel, recently always come with this error:
+
+#+BEGIN_SRC bash
+Failed to run "pip3.9 install --disable-pip-version-check --target . werkzeug==1.0.1"
+Error: spawn pip3.9 ENOENT
+#+END_SRC
+
+Change Node.js version from v20 to v18 can fix it.
+
+
+相关：[[okonet-lint-staged][okonet-lint-staged]]
+

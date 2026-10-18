@@ -1,0 +1,12 @@
+#+TITLE: Pandoc md2org
+#+DATE: <2025-06-15 19:22:54>
+#+STATUS: draft
+#+HEADER: Tools
+
+#+BEGIN_SRC bash
+pandoc input.md -f markdown -t org | sed -e '/^:PROPERTIES:/,/^:END:/d' > output.org
+#+END_SRC
+
+
+相关：[[emacs-find-file-at-point][emacs-find-file-at-point]]
+

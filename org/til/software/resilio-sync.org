@@ -1,0 +1,48 @@
+#+TITLE: How to Use Resilio Sync
+#+DATE: <2026-03-01 09:34:24>
+#+STATUS: draft
+#+HEADER: DevOps
+
+*** 安装
+
+#+BEGIN_SRC bash
+yay -S rslsync
+#+END_SRC
+
+*** 配置
+
+初始化配置文件：
+
+#+BEGIN_SRC bash
+mkdir -p ~/.config/rslsync
+sudp cp /etc/rslsync.conf ~/.config/rslsync/rslsync.conf
+cd ~/.config/rslsync
+sudo chown archie:wheel rslsync.conf
+#+END_SRC
+
+修改如下设置：
+
+- storage_path
+- pid_file
+- webui.listen
+- webui.login
+- webui.password
+
+确保 =storage_path= 和 =pid_file= 路径的文件夹都已经新建完毕。
+
+然后执行：
+
+#+BEGIN_SRC bash
+systemctl --user daemon-reload
+systemctl --user start rslsync
+systemctl --user status rslsync
+systemctl --user enable rslsync # 为了开机自动启动
+#+END_SRC
+
+*** Key
+
+- 神Key（22年停更） =BCWHZRSLANR64CGPTXRE54ENNSIUE5SMO=
+
+
+相关：[[use-prettier][use-prettier]]
+

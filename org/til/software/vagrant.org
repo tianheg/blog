@@ -1,0 +1,92 @@
+#+TITLE: Vagrant
+#+DATE: <2025-06-15 19:22:54>
+#+STATUS: draft
+#+HEADER: DevOps
+
+** 安装
+
+#+BEGIN_SRC bash
+pacman -S vagrant
+#+END_SRC
+
+** 两个 Vagrantfile 文件
+
+*** Pure cli archlinux
+
+#+BEGIN_SRC text
+Vagrant.configure("2") do |config|
+config.vm.box = "archlinux/archlinux"
+end
+#+END_SRC
+
+*** Archlinux with GUI
+
+#+BEGIN_SRC text
+Vagrant.configure("2") do |config|
+config.vm.box = "archlinux/archlinux"
+config.vm.box_check_update = false
+config.vm.provider "virtualbox" do |vb|
+vb.gui = true
+vb.memory = "4096"
+end
+config.vm.provision "shell", path: "bootstrap1.sh"
+config.vm.provision "shell", path: "bootstrap2.sh"
+config.vm.provision "shell", path: "bootstrap3.sh"
+end
+#+END_SRC
+
+=bootstrap1.sh=
+
+#+BEGIN_SRC bash
+#!/usr/bin/env bash
+ln -sf /usr/share/zoneinfo/Asia/Shanghai /etc/localtime
+mv /etc/locale.gen /etc/locale.gen.old
+echo -e "en_US.UTF-8 UTF-8" > /etc/locale.gen
+echo "LANG=en_US.UTF-8" > /etc/locale.conf
+locale-gen
+
+if [ -e /vagrant/pkg.tgz ]
+then
+cd /var/cache/pacman/pkg
+tar -xzvf /vagrant/pkg.tgz
+cd
+fi
+
+pacman -Syu --noconfirm
+#+END_SRC
+
+=bootstrap2.sh=
+
+#+BEGIN_SRC bash
+#!/usr/bin/env bash
+pacman -S --noconfirm xorg-server gnome alsa-utils lightdm lightdm-gtk-greeter
+
+pacman -S --noconfirm ttf-liberation
+
+pacman -S --noconfirm firefox firefox-adblock-plus
+
+pacman -Rns --noconfirm virtualbox-guest-utils-nox
+pacman -S --noconfirm virtualbox-guest-utils
+
+amixer sset Master 100%+ unmute
+alsactl store
+
+systemctl disable gdm
+systemctl enable lightdm
+
+pacman -S --noconfirm pulseaudio pulseaudio-alsa
+#+END_SRC
+
+=bootstrap3.sh=
+
+#+BEGIN_SRC bash
+#!/usr/bin/env bash
+
+pacman -Sc --noconfirm
+cd /var/cache/pacman/pkg
+tar -czvf /vagrant/pkg.tgz *
+#+END_SRC
+
+
+相关：[[use-prettier][use-prettier]]
+

@@ -1,0 +1,12 @@
+#+TITLE: PVE: Upgrade
+#+DATE: <2025-06-22 18:17:50>
+#+STATUS: draft
+
+#+BEGIN_SRC bash
+pveversion
+apt-get update && apt-get upgrade
+# make sure use a mirror repo at /etc/apt/sources.list.d/pve-enterprise.list
+apt-get dist-upgrade
+reboot
+#+END_SRC
+

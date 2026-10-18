@@ -1,0 +1,24 @@
+#+TITLE: Git Use Dura
+#+DATE: <2025-06-15 19:22:54>
+#+STATUS: draft
+#+HEADER: Git
+
+<https://github.com/tkellogg/dura>
+
+** 配置
+
+#+BEGIN_SRC bash
+
+yay -S dura-git
+dura serve & # Run it in the background
+cd /git/repo/
+dura watch
+
+## watch all git repo under /home/user
+find ~ -type d -name .git -prune | xargs -I= sh -c "cd =/..; dura watch" # BE CAREFUL!!! use when knowing what you are doing
+#+END_SRC
+
+
+
+相关：[[git-gitea][git-gitea]]
+
