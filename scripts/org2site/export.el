@@ -136,6 +136,10 @@
 (defvar org2site-asset-version (format-time-string "%Y%m%d%H%M")
   "静态资源版本号：写进 CSS 的查询串，避免浏览器启发式缓存导致改样式看不到效果。")
 
+(defvar org2site-show-footer nil
+  "是否输出站点 footer。原站**只有首页**有 footer（posts / about / til 都没有），
+所以默认 nil，只有写首页时由 build.el 绑成 t。")
+
 (defun org2site--main-html (body &optional shell side right)
   "main 区。SHELL 非 nil 时包进 TIL 三栏 shell（1fr / 790px / 1fr）：
 内容列固定 790 居中，侧栏悬挂在外侧 1fr 轨道里 —— 这样 /til/ 下所有页面
@@ -171,15 +175,15 @@ SHELL/SIDE/RIGHT 见 `org2site--main-html'。"
 </head>
 <body>
 <a data-skip-link href=\"#main-content\">Skip to content</a>
-%s%s<footer data-site-footer>
-<p>© 2018–2026 tianhe · <a href=\"/index.xml\">RSS</a></p>
-</footer>
-<script src=\"/js/site.js?v=%s\" defer></script>
+%s%s%s<script src=\"/js/site.js?v=%s\" defer></script>
 </body>
 </html>
 " (if (string= title org2site-site-title) title (format "%s | %s" title org2site-site-title))
   org2site-theme-init-js org2site-asset-version (org2site-header-html)
   (org2site--main-html body shell side right)
+  (if org2site-show-footer
+      "<footer data-site-footer>\n<p>© 2018–2026 tianhe · <a href=\"/index.xml\">RSS</a></p>\n</footer>\n"
+    "")
   org2site-asset-version))
 
 (defun org2site-template (contents info)

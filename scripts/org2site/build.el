@@ -1085,8 +1085,10 @@ stroke-linecap=\"round\" stroke-linejoin=\"round\" aria-hidden=\"true\">\
                               (org2site-page label (car page) t
                                              (org2site-til-tree-html repo til-counts cat)
                                              (cdr page))))))))
-    ;; 3) 根页
-    (org2site-write out-root "/" (org2site-page org2site-site-title (org2site-home-html pages)))
+    ;; 3) 根页（footer 只有首页有，见 export.el 的 org2site-show-footer）
+    (let ((org2site-show-footer t))
+      (org2site-write out-root "/"
+                      (org2site-page org2site-site-title (org2site-home-html pages))))
 
     ;; 3.5) 标签页：/tags/ 索引 + /tags/<tag>/（中文直接做目录名，与原站一致）
     (let* ((counts (org2site-tag-counts pages))
