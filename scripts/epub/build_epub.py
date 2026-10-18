@@ -95,29 +95,24 @@ def find_pandoc(explicit):
 
 
 def collect_subjects(limit=8):
-    """从 content/posts 的 front matter 聚合 tags/categories，写进 dc:subject。
+    """从 org/posts 的 #+TAGS[]/#+CATEGORIES[] 聚合，写进 dc:subject。
 
     作用：阅读器书库能按主题筛这本书；不写的话 subject 栏是空的。
+    语义与 scripts/org2site/build.el 的 org2site--tags 一致：按逗号切。
+    （2026-10-18: 内容真源 content/posts/*.md 已下线，改为 org/posts/*.org）
     """
-    import yaml                                   # pyyaml；缺失时本次不做 subject
     counter = Counter()
-    for f in (REPO / "content/posts").rglob("*.md"):
+    pat = re.compile(r"^#\+(?:TAGS|CATEGORIES|KEYWORDS)\[\]:\s*(.+?)\s*$", re.M)
+    for f in (REPO / "org/posts").rglob("*.org"):
         try:
             txt = f.read_text(encoding="utf-8", errors="ignore")
-            m = re.match(r"^---\n(.*?)\n---", txt, re.S)
-            if not m:
-                continue
-            fm = yaml.safe_load(m.group(1)) or {}
         except Exception:
             continue
-        if not isinstance(fm, dict):
-            continue
-        for key in ("tags", "categories"):
-            vals = fm.get(key) or []
-            if isinstance(vals, str):
-                vals = [vals]
-            for v in vals:
-                counter[str(v).strip()] += 1
+        for raw in pat.findall(txt):
+            for v in re.split(r"[,，]", raw):
+                v = v.strip()
+                if v:
+                    counter[v] += 1
     return [t for t, _ in counter.most_common(limit) if t]
 
 
@@ -304,7 +299,7 @@ outputs:
     if a.limit:
         pages = pages[:a.limit]
     if not pages:
-        sys.exit("没有可打包的页面：检查 EXCLUDE_LIST 与 content/posts/")
+        sys.exit("没有可打包的页面：检查 EXCLUDE_LIST 与构建产物 public/posts/")
     print("S2 章节数:", len(pages), "| 时间跨度:", date_of(pages[0]), "->", date_of(pages[-1]))
 
     def anchor_of(rel):

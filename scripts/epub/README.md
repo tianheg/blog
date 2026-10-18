@@ -61,7 +61,7 @@ python3 scripts/epub/build_epub.py -o ~/book.epub --title "天河的博客" --su
 | `dc:title` + `title-type` | 书名 main / 副标题 subtitle | `--title` `--subtitle` + OPF 补 |
 | `dc:creator` + `role` `file-as` | tianhe，角色 aut | pandoc + OPF 补 |
 | `dc:description` | 站点描述 = `layouts/baseof.html` 里 `$description` 的默认值 | 脚本（`SITE_DESCRIPTION`） |
-| `dc:subject` | 从 `content/posts` 的 tags/categories 聚合 top 8 | 脚本（`collect_subjects()`） |
+| `dc:subject` | 从 `org/posts` 的 `#+TAGS[]`/`#+CATEGORIES[]` 聚合 top 8 | 脚本（`collect_subjects()`） |
 | `dc:publisher` / `dc:source` | tianheg.co / 站点 posts 地址 | 脚本 |
 | `dc:date` / `dcterms:modified` | 构建日期 / 构建时间 | 脚本 / pandoc |
 | 无障碍 7 条 + `accessibilitySummary` | textual、结构导航、无危险内容… | pandoc + OPF 补 |
@@ -98,7 +98,7 @@ python3 scripts/epub/build_epub.py -o ~/book.epub --title "天河的博客" --su
 ## 验收标准（DoD，6 条全过才算完成）
 
 1. 校验器 **0 error**
-2. 章节数 = `content/posts/*.md` 文件数 − 1（实测 963 → 962）
+2. 章节数 = `org/posts/*.org` 文件数 − 1（实测 966 → 965）
 3. 内链数 > 0，随机抽 3 条在阅读器里能跳
 4. spine 首项是封面、末项是「关于本书」
 5. 体积与内容量匹配（≈960 篇 → 2.3 MB）
