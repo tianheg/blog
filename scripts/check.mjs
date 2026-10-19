@@ -464,7 +464,8 @@ console.log('photo-guard: all passed');
  *
  * 做法：
  *   1. 扫 org/ 下所有 .org，抽出外链（org 链接 + 裸 URL），
- *      跳过 fenced code block、缩进代码块、inline code、HTML 注释
+ *      跳过 org 字面量块（#+BEGIN_SRC/EXAMPLE/VERSE/EXPORT）、Markdown 围栏、
+ *      缩进代码块、inline code、HTML 注释（QUOTE 块不跳：里面的链接是页面上真有的）
  *   2. 去重后并发探测（默认 10 并发，同域名最多 2 个并发，别把人家当爬虫打）
  *   3. HEAD 先行；HEAD 不干净或结果为 4xx 时再用 GET 复核。不少服务器对
  *      HEAD 直接甩 404/403/405/501，只用 HEAD 判死会大面积误报
@@ -575,7 +576,10 @@ function headerArgs(plain = false) {
 // 引号/反引号/尖括号/方括号/空白 —— 放开这些会把正文文字和中文标点吞进 URL，
 // 凭空造出几百条假死链（踩过）
 const MD_LINK = /(?<!!)\[[^\]\n]*\]\(\s*(https?:\/\/(?:[^\s<>()"'`\]]|\([^()\s]*\))+)/g;
-const BARE_URL = /(?<![("\'>=])\b(https?:\/\/(?:[^\s<>()"'`\]]|\([^()\s]*\))+)/g;
+// 裸 URL。⚠️ 2026-10-19 修：原字符集允许 `,` 与中文，会把 URL 后面的正文一起吞进来
+// （实测：`…/index.php,,TODO,工作-Linux驱动开发` 整体被当成一条 URL → 必然 404 的假阳性）。
+// 真 URL 里的中文/逗号应当百分号编码，所以把 `,` 与 CJK/全角区段排除在 URL 体之外。
+const BARE_URL = /(?<![("\'>=])\b(https?:\/\/(?:[^\s<>()"'`\],\u3000-\u303f\u4e00-\u9fff\uff00-\uffef]|\([^()\s]*\))+)/g;
 // 已经是存档链接的内层原始 URL 不算独立链接：
 // https://web.archive.org/web/20130311215851/http://bens.me.uk/xxx → 别再抽一层出来
 const ARCHIVE_INNER = /https?:\/\/web\.archive\.org\/web\/\d+\/$/;
@@ -584,8 +588,16 @@ const urlFiles = new Map(); // url -> Set(相对路径)
 
 function collect(file) {
   let text = readFileSync(file, "utf8");
-  // 去掉代码（示例里的 URL 不是真链接）
+  // 去掉代码（示例里的 URL 不是真链接）。
+  // ⚠️ 2026-10-19 修：内容 2026-10 已迁回 org，**光认 Markdown 的 ``` / ~~~ 围栏不够** ——
+  //    org 的字面量块是 `#+BEGIN_SRC … #+END_SRC`（还有 EXAMPLE / VERSE / EXPORT），
+  //    Markdown 围栏在 org/ 里基本不出现，于是代码示例里的 URL 全被当成真外链去探测。
+  //    实测：全量扫描报 40 条「死链」，其中 **18 条**是这种假阳性（含 example.org/hello、
+  //    $DART_SASS_VERSION 这类根本不可能存在的模板 URL）。
+  //    QUOTE 块**不挖**：引用块里的链接是页面上真实呈现、可点的，必须查。
+  //    （仍未处理：org 的行内 verbatim `=…=` / `~…~`。改动面大，先不动。）
   text = text
+    .replace(/^[ \t]*#\+BEGIN_(?:SRC|EXAMPLE|VERSE|EXPORT)\b[\s\S]*?^[ \t]*#\+END_\w+/gim, "")
     .replace(/```[\s\S]*?```/g, "")
     .replace(/~~~[\s\S]*?~~~/g, "")
     .replace(/^(?: {4,}|\t).*$/gm, "")
@@ -602,7 +614,9 @@ function collect(file) {
     }
   }
   for (let u of hits) {
-    u = u.replace(/[.,;:!?。，、；：！？）】》”’]+$/, ""); // 句末标点（含中文）不算 URL 的一部分
+    // 句末标点（含中文）不算 URL 的一部分；`=` / `~` 是 org 行内 verbatim 的收尾标记
+    // （`=…=` / `~…~` 包住的 URL，收尾符会被吞进 URL —— 实测 `…ctrlp.vim=` 就是这么来的）
+    u = u.replace(/[.,;:!?。，、；：！？）】》”’=~]+$/, "");
     try {
       const parsed = new URL(u);
       if (parsed.hostname === "tianheg.co" || parsed.hostname.endsWith(".tianheg.co")) continue;
