@@ -3,12 +3,19 @@
 #
 #   bash scripts/org2site/build.sh [输出目录]     默认 public/
 #
-# 三步：
+# 四步：
+#   0) 预检（只读，不碰 $OUT）：node scripts/check.mjs unicode 的 ERROR 级 —— 全角括号
+#      落在链接语法位会静默吞掉链接（2026-09 线上丢过一条）。基线 0 ERROR 才敢设成硬失败。
 #   1) emacs -Q --batch 导出全部 org → HTML（含静态资源整树拷贝、RSS/sitemap/404）
 #   2) PageFind 独立二进制生成搜索索引（关键词 tab 用；中文分词必须 extended 版）
-#   3) 跑体检 scripts/org2site/verify.py
+#   3) 输出体检 scripts/org2site/verify.py（每页一个 h1 / UTF-8 / TIL shell / 页内锚点 / 站内链接 0 死链）
 #
-# 依赖自带安装（都不需要 root、不依赖 node）：
+# 环境变量：
+#   ORG2SITE_STRICT=1         未解析 wikilink、无日期被跳过的页面 → 构建失败（CI 里开）
+#   ORG2SITE_SKIP_PRECHECK=1  跳过第 0 步预检（离线排查用）
+#   ORG2SITE_CACHE            依赖缓存目录，默认 ~/.cache/org2site
+#
+# 依赖自带安装（都不需要 root；第 0 步预检需要 node，其余步骤不需要）：
 #   - emacs 30.1：CI 的 Ubuntu 24.04 镜像里没有 emacs，系统自带的是 29.3（org 9.6），
 #     而 org 9.6 与 9.7 的 EXAMPLE 块 HTML 与空白**输出不同** → 版本必须钉住。
 #     这里用 micromamba（单文件静态二进制）装 conda-forge 的 emacs=30.1
@@ -44,7 +51,7 @@ PF_BIN="$CACHE/pagefind_extended"
 EMACS_ENV="$CACHE/emacs-${EMACS_VERSION}"
 ORG_DIR="$CACHE/org-${ORG_VERSION}"
 
-usage() { sed -n '2,20p' "${BASH_SOURCE[0]}" | sed 's/^# \{0,1\}//'; }
+usage() { sed -n '2,/^set -euo pipefail/p' "${BASH_SOURCE[0]}" | sed '$d' | sed 's/^# \{0,1\}//'; }
 
 emacs_version_of() { "$1" --version 2>/dev/null | head -1 | awk '{print $NF}'; }
 
@@ -77,14 +84,23 @@ ensure_emacs() {
   # 做法：从二进制里读出那个烧死的路径，在原位补一个软链指向我们树里的 libexec。
   # CI 的 /tmp 可写；失败也不致命，只是回到慢路径。
   local baked real
+  command -v strings >/dev/null 2>&1 || \
+    echo "WARN 没有 strings 命令 —— 读不出烧死的 libexec 路径，只能靠下面的 --dump-file 兜底" >&2
   baked=$(strings "$EMACS" 2>/dev/null | grep -m1 "/libexec/emacs/${EMACS_VERSION}/" || true)
   real=$(ls -d "$EMACS_ENV"/libexec/emacs/"${EMACS_VERSION}"/* 2>/dev/null | head -1)
   if [ -n "$baked" ] && [ -n "$real" ] && [ ! -d "$baked" ]; then
-    mkdir -p "$(dirname "$baked")" 2>/dev/null && ln -sfn "$real" "$baked" 2>/dev/null || true
+    if ! { mkdir -p "$(dirname "$baked")" 2>/dev/null && ln -sfn "$real" "$baked" 2>/dev/null; }; then
+      echo "WARN emacs libexec 软链没建成（$baked）—— 回落到 --dump-file 或源码引导，构建会变慢" >&2
+    fi
+  elif [ -z "$real" ]; then
+    echo "WARN 没在 $EMACS_ENV/libexec 下找到架构相关数据目录 —— 只能靠 --dump-file 兜底" >&2
   fi
   # 兜底：显式指定转储文件（不依赖上面那个软链是否成功）
   EMACS_DUMP=$(ls "$EMACS_ENV"/libexec/emacs/*/*/emacs-*.pdmp 2>/dev/null | head -1 || true)
   echo "emacs: $EMACS（$EMACS_VERSION，本仓库发布；dump ${EMACS_DUMP:+已找到}${EMACS_DUMP:-缺失}）"
+  # 降级要出声：以前这里静默吞掉，只有当构建莫名变慢、日志里又什么都没有时才看得出来。
+  [ -n "${EMACS_DUMP:-}" ] || \
+    echo "WARN 没找到 emacs 转储文件（emacs-*.pdmp）—— 每次启动都会从 .el 源码引导，构建明显变慢" >&2
 }
 
 # 便携 emacs 必须显式告诉它 lisp / etc 在哪（打包时的 prefix 已经作废）——
@@ -132,9 +148,12 @@ ensure_org() {
     fi
     tar -xf "$ORG_TARBALL"
     rm -f "$ORG_TARBALL"
-    # ELPA 只发源码：在缓存里字节编译一次，之后每次构建加载都快得多
-    emacs_run -Q --batch -L "$ORG_DIR" \
-      --eval "(byte-recompile-directory \"$ORG_DIR\" 0 t)" >/dev/null 2>&1 || true
+    # ELPA 只发源码：在缓存里字节编译一次，之后每次构建加载都快得多。
+    # 失败不致命（回落到解释执行，只是慢），但**必须出声**：以前是 `|| true` 静默吞掉。
+    if ! emacs_run -Q --batch -L "$ORG_DIR" \
+           --eval "(byte-recompile-directory \"$ORG_DIR\" 0 t)" >/dev/null 2>&1; then
+      echo "WARN org ${ORG_VERSION} 字节编译失败 —— 本次构建回落到解释执行（更慢）" >&2
+    fi
   )
 }
 
@@ -154,7 +173,21 @@ if [ -d "$OUT" ]; then
 fi
 mkdir -p "$OUT"
 
-echo "== 1/3 org2site 导出 → $OUT"
+# ── 0) 预检（只读，不碰 $OUT）──────────────────────────────────────────────
+# 闸门的价值在于「自动跑」——靠人记得跑就等于没有。unicode 的 ERROR 级基线为 0
+# （2026-10-19 实测：0 ERROR / 387 WARN），所以设成硬失败是安全的；WARN 不接。
+if [ -n "${ORG2SITE_SKIP_PRECHECK:-}" ]; then
+  echo "== 0/4 预检：已跳过（ORG2SITE_SKIP_PRECHECK）"
+else
+  echo "== 0/4 预检（只读）"
+  command -v node >/dev/null 2>&1 || {
+    echo "预检需要 node，但 PATH 里没有；离线排查可设 ORG2SITE_SKIP_PRECHECK=1 跳过" >&2
+    exit 1
+  }
+  node scripts/check.mjs unicode
+fi
+
+echo "== 1/4 org2site 导出 → $OUT"
 ensure_emacs
 ensure_org
 # 关键：-L "$ORG_DIR" 让 load-path 里 ELPA 的 org 优先于 emacs 自带的那个。
@@ -162,16 +195,39 @@ ensure_org
 emacs_run -Q --batch -L "$ORG_DIR" --eval "(progn (require 'org) (princ (format \"toolchain: emacs %s / org %s (%s)\\n\" emacs-version (org-version) (locate-library \"org\"))))"
 # org/ 就是内容真源（2026-10 迁移完成，content/ 已下线）：直接改 org/*.org，构建读的就是它。
 # content/ 与转换期脚本（md2org.py / migrate.py）留在 git 历史里，工作区不再有。
-emacs_run -Q --batch -L "$ORG_DIR" -l scripts/org2site/build.el org "$OUT" </dev/null || {
+# 导出日志同时落盘：下面的严格模式要按日志里的具体信号判定，不能靠重跑或猜。
+BUILD_LOG=$(mktemp)
+trap 'rm -f "$BUILD_LOG"' EXIT
+set +e
+emacs_run -Q --batch -L "$ORG_DIR" -l scripts/org2site/build.el org "$OUT" </dev/null 2>&1 | tee "$BUILD_LOG"
+EXPORT_RC=${PIPESTATUS[0]}
+set -e
+if [ "$EXPORT_RC" -ne 0 ]; then
   echo "org2site 导出失败（上面有 FAIL / backtrace）；中止，避免把残缺产物当成构建成功" >&2
   exit 1
-}
+fi
 
-echo "== 2/3 PageFind 搜索索引"
+# ── 严格模式（CI 里开 ORG2SITE_STRICT=1）──────────────────────────────────
+# 这两类问题以前只在日志里打一行字，构建照样绿：一篇文章静默不上线（无日期 → 跳过）、
+# 一个写错的站内引用静默退成纯文本，没人盯日志就永远发现不了。基线都是 0，开了不会卡住现状。
+if [ -n "${ORG2SITE_STRICT:-}" ]; then
+  strict_hit=0
+  if grep -q "wikilink 未解析" "$BUILD_LOG"; then
+    echo "严格模式：有未解析的 wikilink（样例见上），构建失败" >&2
+    strict_hit=1
+  fi
+  if grep -q "have no usable #+DATE" "$BUILD_LOG"; then
+    echo "严格模式：有无日期被跳过的页面（清单见上），构建失败 —— 这类页面不会上线" >&2
+    strict_hit=1
+  fi
+  [ "$strict_hit" -eq 0 ] || exit 1
+fi
+
+echo "== 2/4 PageFind 搜索索引"
 ensure_pagefind
 "$PF_BIN" --site "$OUT"
 
-echo "== 3/3 输出体检"
+echo "== 3/4 输出体检"
 python3 scripts/org2site/verify.py "$OUT"
 
 echo "完成：$OUT"
