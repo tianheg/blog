@@ -2,16 +2,15 @@
 /**
  * embed.mjs — 语义索引模块（2026-10-07 由 generate-embeddings.mjs + generate-related.py 合并）
  *
- *   node scripts/embed.mjs           全量：抽取 → Workers AI 嵌入 → 关联笔记（= npm run embed）
- *   node scripts/embed.mjs related   只重算 data/related.json（= npm run related）
+ *   node scripts/embed.mjs           全量：抽取 → Workers AI 嵌入
  *   node scripts/embed.mjs --help
  *
  * 产物:
  *   static/pagefind-semantic/{pages.json,embeddings.bin,manifest.json} + public/ 镜像
- *   data/related.json —— cosine ≥0.62 Top5，排除自链与正文已显式链接（Hugo 构建时渲染）
  *
- * related 是 python(numpy) 版的 node 零依赖移植：f32 向量逐行点积、
- * 排序键 (score desc, index asc)、输出与原 json.dump 分隔符/键序逐字节同构。
+ * 2026-10-19：原来的 `related` 子命令与 data/related.json 已删除 —— 那份
+ * 「相关笔记（语义相似）」数据没有任何消费者（build.el / worker.js 都不读，
+ * 页面也不渲染），却每周被重算并 commit 一次。要恢复见 git 历史。
  *
  * 凭据：CF_API_TOKEN env，或 /root/.hermes/secrets/pve.env（secrets-helper.sh 读取）。
  */
@@ -28,112 +27,21 @@ const BLOG_ROOT = join(import.meta.dirname, "..");
 const argvAll = process.argv.slice(2);
 const SUB = argvAll[0] || "embed";
 const HELP = `embed.mjs — 语义索引模块
-用法: node scripts/embed.mjs [embed|related]
+用法: node scripts/embed.mjs [embed]
 
-  embed（默认）  全量管线：文本抽取 → Workers AI 嵌入(BGE-M3) → 重算关联笔记
-  related        只重算 data/related.json（读 static/pagefind-semantic/embeddings.bin）
+  embed（默认）  全量管线：文本抽取 → Workers AI 嵌入(BGE-M3)
   -h, --help     显示本帮助
-
-npm 名字未变: npm run embed / npm run related`;
+`;
 
 if (["-h", "--help", "help"].includes(SUB)) { console.log(HELP); process.exit(0); }
-if (!["embed", "related"].includes(SUB)) {
+if (SUB !== "embed") {
   console.error(`✗ 未知子命令: ${SUB}\n`);
   console.log(HELP);
   process.exit(2);
 }
 process.argv = [process.argv[0], process.argv[1], ...argvAll.slice(1)];
 
-/** generate-related.py 的 node 移植（数据源/规则/输出格式与原版一致） */
-function relatedMain() {
-  const SEM = join(BLOG_ROOT, "static", "pagefind-semantic");
-  const OUTF = join(BLOG_ROOT, "data", "related.json");
-  const ORG = join(BLOG_ROOT, "org");
-  const TOP_N = 5, MIN_SCORE = 0.62;
-
-  const pages = JSON.parse(readFileSync(join(SEM, "pages.json"), "utf-8"));
-  const manifest = JSON.parse(readFileSync(join(SEM, "manifest.json"), "utf-8"));
-  const dim = manifest.dim ?? 1024;
-  const raw = readFileSync(join(SEM, "embeddings.bin"));
-  if (raw.byteLength !== pages.length * dim * 4) {
-    console.error(`ERROR: embeddings 与 pages.json 不匹配（${raw.byteLength / 4} != ${pages.length}×${dim}），先跑 node scripts/embed.mjs embed`);
-    process.exit(2);
-  }
-  const vec = new Float32Array(raw.buffer, raw.byteOffset, pages.length * dim);
-
-  // 文件名/标题 → permalink（先到先得，与原版 setdefault 一致）
-  const idx = new Map();
-  for (const p of pages) {
-    const base = p.url.replace(/^\/+|\/+$/g, "").split("/").pop().toLowerCase();
-    if (!idx.has(base)) idx.set(base, p.url);
-    if (p.title) {
-      const t = p.title.trim().toLowerCase();
-      if (!idx.has(t)) idx.set(t, p.url);
-    }
-  }
-
-  // 正文里已经显式指向的页面（Markdown 内链 + wikilink）→ 不进 top-N
-  const cache = new Map();
-  function explicitLinks(permalink) {
-    if (cache.has(permalink)) return cache.get(permalink);
-    const out = new Set();
-    const rel = permalink.replace(/^\/+|\/+$/g, "");
-    let text = "";
-    try { text = readFileSync(join(ORG, rel + ".org"), "utf-8"); } catch { /* 区段页无源文件 → 空集 */ }
-    if (text) {
-      // 站内绝对路径：markdown 形态 ](/x/)（历史遗留）与 org 形态 [[/x][desc]]
-      for (const m of text.matchAll(/\]\((\/[^\)\s#]+)\)/g)) {
-        out.add(m[1].endsWith("/") ? m[1] : m[1] + "/");
-      }
-      for (const m of text.matchAll(/\[\[(\/[^\]\s]+?)(?:\]\[[^\]]*\])?\]\]/g)) {
-        out.add(m[1].endsWith("/") ? m[1] : m[1] + "/");
-      }
-      // wikilink：[[slug]] / [[slug][desc]] / [[slug|desc]] → 用 slug 索引换正式 URL
-      for (const m of text.matchAll(/\[\[([^\]\s/]+?)(?:\|[^\]]*|\]\[[^\]]*\])?\]\]/g)) {
-        const name = m[1].split("#")[0].trim().toLowerCase();
-        if (idx.has(name)) out.add(idx.get(name));
-      }
-    }
-    cache.set(permalink, out);
-    return out;
-  }
-
-  const related = {};
-  const scores = new Float64Array(pages.length);
-  for (let i = 0; i < pages.length; i++) {
-    const off = i * dim;
-    for (let j = 0; j < pages.length; j++) {
-      const oj = j * dim;
-      let s = 0;
-      for (let k = 0; k < dim; k++) s += vec[off + k] * vec[oj + k];
-      scores[j] = s;
-    }
-    const order = Array.from({ length: pages.length }, (_, j) => j)
-      .sort((a, b) => (scores[b] - scores[a]) || (a - b));
-    const skip = explicitLinks(pages[i].url);
-    const picks = [];
-    for (const j of order) {
-      if (j === i) continue;
-      if (skip.has(pages[j].url)) continue;
-      if (scores[j] < MIN_SCORE) break;
-      picks.push(pages[j].url);
-      if (picks.length >= TOP_N) break;
-    }
-    if (picks.length) related[pages[i].url] = picks;
-  }
-
-  writeFileSync(OUTF, JSON.stringify(related));
-  const vals = Object.values(related);
-  const total = vals.reduce((a, v) => a + v.length, 0);
-  console.log(`data/related.json: ${vals.length} 篇有相关笔记（平均 ${(total / vals.length).toFixed(1)} 条，共 ${total} 条关系）`);
-  console.log(`  ${(statSync(OUTF).size / 1024).toFixed(0)} KB，阈值 ${MIN_SCORE} / Top ${TOP_N}`);
-  return 0;
-}
-
 switch (SUB) {
-  case "related": {
-    process.exit(relatedMain());
-  }
   case "embed": {
 /**
  * generate-embeddings.mjs
@@ -528,7 +436,6 @@ try {
   process.exit(1);
 }
 
-    relatedMain();
     process.exit(0);
   }
 }

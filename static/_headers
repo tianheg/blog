@@ -3,10 +3,13 @@
   X-Content-Type-Options: nosniff
   Content-Security-Policy: object-src 'none'; base-uri 'none'; frame-ancestors 'none';
 
-# 纯文本源文（页面 URL + .org）：CF 对 .org 扩展名默认按 latin-1 解码 → 中文乱码。
-# 这里强制 text/plain + charset。（历史上是 /*.md，2026-10-19 改成 .org 源文。）
+# 纯文本源文（页面 URL + .org）：CF 对 .org 扩展名默认按 latin-1 解码 → 中文乱码，必须显式发。
+# 用 text/org —— IANA 正式注册的媒体类型（2025-09-25，text/x-org 是废弃别名）：
+#   https://www.iana.org/assignments/media-types/text/org
+# 比 text/plain 多一层「这是 org-mode 文档」的自描述（阅读器 / 爬虫 / LLM 可据此识别），
+# 而浏览器对任何未识别的 text/* 一律按纯文本渲染，用户可见行为与 text/plain 相同。
 /*.org
-  Content-Type: text/plain; charset=utf-8
+  Content-Type: text/org; charset=utf-8
 
 # 样式表与脚本里也有中文（style.css 的注释、site.js 的界面文案），CF 默认发不带 charset
 # 的 Content-Type + `X-Content-Type-Options: nosniff` → 浏览器不猜编码、按 latin-1 解：
