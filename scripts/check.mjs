@@ -17,14 +17,16 @@
  * 退出码：0 通过；1 检出问题（卡发布）；2 用法/执行错误。
  * 入口：node scripts/check.mjs <子命令>（package.json 已随 Hugo 下线，没有 npm 包装）。
  *
- * 数据账本（2026-10-07 迁 scripts/data/）：external-link-ignore.txt、
- * external-links-verified.txt、photos-allowlist.json（worker 同源读取同一份）。
+ * 数据账本：scripts/data/external-link-ignore.txt（人工维护的忽略名单）、
+ * scripts/data/photos-allowlist.json（worker 同源读取同一份）。
+ * 已确认非死链账本 2026-10-19 移出仓库 → ~/.cache/blog-external-links/verified.txt
+ * （机器维护 + 每次扫描都改写，放仓库里只会产生 commit 噪声）。
  */
 
 import { PHOTO_KEY_RE, resolvePhotoKey } from './photo-guard.js';
 import { spawnSync, execFile, execFileSync } from 'node:child_process';
 import { readdirSync, readFileSync, writeFileSync, mkdirSync, existsSync, mkdtempSync, rmSync } from 'node:fs';
-import { tmpdir } from 'node:os';
+import { tmpdir, homedir } from 'node:os';
 import { join, relative, resolve, dirname } from 'node:path';
 import assert from 'node:assert/strict';
 
@@ -486,7 +488,7 @@ console.log('photo-guard: all passed');
  *   node scripts/check.mjs external --no-wayback     # 跳过 Wayback 存档查询
  *   node scripts/check.mjs external --recheck-verified  # 连账本里的也重探
  *
- * 已确认非死链账本：scripts/data/external-links-verified.txt
+ * 已确认非死链账本：~/.cache/blog-external-links/verified.txt（不在仓库里，见上）
  *   探测到 2xx 即自动记账（一行 `YYYY-MM-DD <URL>`），之后默认不再重复探测，
  *   报告末尾单列「✅ 已确认非死链」区。超过 --verified-ttl-days（默认 90 天）
  *   会自动复核并刷新日期；复核发现已死的会从账本里撤掉并照常报警。
@@ -510,7 +512,13 @@ const ROOT = process.cwd();
 const CONTENT = join(ROOT, "org");
 const CACHE_FILE = join(ROOT, ".hermes/external-links/cache.json");
 const IGNORE_FILE = join(ROOT, "scripts/data/external-link-ignore.txt");
-const VERIFIED_FILE = join(ROOT, "scripts/data/external-links-verified.txt");
+// 已确认非死链账本：**不进仓库**。它由机器维护、每次扫描都可能改写（4300+ 行），
+// 放仓库里等于每次跑都产生一条 commit 噪声，且和「数据页不进 repo」的既有约定相反
+// （历史位置 scripts/data/external-links-verified.txt，2026-10-19 迁出）。
+// 放用户级缓存；`BLOG_EXTERNAL_LEDGER` 可覆盖（cron / 多机同步时用）。
+const VERIFIED_FILE =
+  process.env.BLOG_EXTERNAL_LEDGER ||
+  join(homedir(), ".cache", "blog-external-links", "verified.txt");
 
 const argv = process.argv.slice(2);
 const flag = (name) => argv.includes(name);
@@ -638,7 +646,7 @@ if (existsSync(IGNORE_FILE)) {
 const isIgnored = (u) => ignored.some((pat) => u.includes(pat));
 
 // ── 已确认非死链账本 ────────────────────────────────────────────────
-// scripts/data/external-links-verified.txt：一行一条 `YYYY-MM-DD <URL>`，
+// ~/.cache/blog-external-links/verified.txt：一行一条 `YYYY-MM-DD <URL>`，
 // 2xx 探测成功即自动记账（机器判定），之后默认不再重复探测。
 // 账本超期（默认 90 天）或 --recheck-verified 会重新探一次并刷新日期，
 // 免得一条链接在这里躺着、实际早就死了。
@@ -861,9 +869,10 @@ const VERIFIED_HEADER = existsSync(VERIFIED_FILE)
       .filter((l) => l.trim().startsWith("#") || l.trim() === "")
       .join("\n")
       .trim() ||
-    `# 已确认非死链账本 — 由 scripts/check-external-links.mjs 自动维护`
+    `# 已确认非死链账本 — 由 node scripts/check.mjs external 自动维护（不在仓库里）`
   : [
-      "# 已确认非死链账本 — 由 scripts/check-external-links.mjs 自动维护",
+      "# 已确认非死链账本 — 由 node scripts/check.mjs external 自动维护（不在仓库里）",
+      "# 位置：~/.cache/blog-external-links/verified.txt（BLOG_EXTERNAL_LEDGER 可覆盖）",
       "# 格式：YYYY-MM-DD <URL>，日期 = 最后一次探测到 2xx 的日期",
       "# 2xx 即自动记账（机器判定）；已记账的默认不再重复探测，",
       "# 超过 --verified-ttl-days（默认 90 天）自动复核并刷新日期。",
@@ -874,6 +883,8 @@ function saveVerified(force = false) {
   if (NO_WRITE_VERIFIED || URLS_FILE) return;
   if (!force && !verifiedChanged) return;
   const entries = [...verified.entries()].sort((a, b) => a[0].localeCompare(b[0]));
+  // 账本在仓库外（用户级缓存），首次跑要自己建目录 —— 与 saveCache 一样
+  mkdirSync(dirname(VERIFIED_FILE), { recursive: true });
   writeFileSync(
     VERIFIED_FILE,
     `${VERIFIED_HEADER}\n\n${entries.map(([u, d]) => `${d}\t${u}`).join("\n")}\n`
@@ -1056,6 +1067,11 @@ if (JSON_OUT) {
 }
 
 if (dead.length && !WARN_ONLY) process.exit(1);
+
+// 没死链（或 --warn-only）就是通过，必须**显式** exit 0：不然会掉到文件末尾那句
+// 「✗ 子命令未显式退出」并以 2 结束 —— 成功看起来像失败（2026-10-19 实测抓到，
+// 当时用 --limit 3 跑，输出全绿却 exit=2）。文档写的契约是 0=没有死链。
+process.exit(0);
 
     break;
   }
