@@ -201,7 +201,7 @@ header: Linux      # 可选，子分类
 - 格式：中文标签用单引号、英文裸写，单行数组 → `tags: ['技术', English]`
 - `English` 与栏目正交，标记英文文章（英文原创 + 英文版），不与中文栏目混用
 - `til/` 不使用标签，文件夹分类 + `header` 已足够
-- 删标签等于 URL 消失（`/tags/<slug>/` 直接 404）——改完跑 `node scripts/check.mjs links` 兜底
+- 删标签等于 URL 消失（`/tags/<slug>/` 直接 404）——改完跑一次构建（`bash scripts/org2site/build.sh public`）兜底：构建末尾会报未解析的 wikilink，`verify.py` 会拦住失效内链
 
 ### 内部链接与反链（2026-09-11 起）
 
@@ -216,7 +216,7 @@ wikilink 依次按 **文件名 → 完整标题 → 标题主名（`——`/`：
 
 1. **渲染兜底** — 解析不到时渲染成「站内搜索」链接（虚线下划线 + 悬停提示），读者看不到 `[[…]]` 原文，也点不到 404
 2. **构建告警** — 构建时 `WARN`，日志里能看到是哪个名字
-3. **发布闸门** — `node scripts/check.mjs links` 汇总「未解析的 wikilink」+「失效内链」并返回退出码 1（`--warn-only` 只报告），且指出是哪个文件/哪一页写错了。判定逻辑复用 Hugo 构建结果，不另写一套解析规则
+3. **构建即闸门** — 构建末尾打印未解析 wikilink 的处数与样例（`scripts/org2site/build.el`，0 处时静默）；失效内链由 `scripts/org2site/verify.py` 第 5 项拦住 —— 它跑在 `build.sh` 末尾且受 `set -e` 约束，有死链就中止构建
 
 **写法约定**：
 
