@@ -576,10 +576,12 @@ function headerArgs(plain = false) {
 // 引号/反引号/尖括号/方括号/空白 —— 放开这些会把正文文字和中文标点吞进 URL，
 // 凭空造出几百条假死链（踩过）
 const MD_LINK = /(?<!!)\[[^\]\n]*\]\(\s*(https?:\/\/(?:[^\s<>()"'`\]]|\([^()\s]*\))+)/g;
-// 裸 URL。⚠️ 2026-10-19 修：原字符集允许 `,` 与中文，会把 URL 后面的正文一起吞进来
-// （实测：`…/index.php,,TODO,工作-Linux驱动开发` 整体被当成一条 URL → 必然 404 的假阳性）。
-// 真 URL 里的中文/逗号应当百分号编码，所以把 `,` 与 CJK/全角区段排除在 URL 体之外。
-const BARE_URL = /(?<![("\'>=])\b(https?:\/\/(?:[^\s<>()"'`\],\u3000-\u303f\u4e00-\u9fff\uff00-\uffef]|\([^()\s]*\))+)/g;
+// 裸 URL。字符集与 MD_LINK 一致（不含空白/引号/反引号/尖括号/方括号/圆括号）。
+// ⚠️ 2026-10-19：曾试过把 `,` 与 CJK 排除出字符集来治「吞正文」，结果**把含逗号或中文
+// 的真 URL 截断了**（`…trying-eglot,-again.html` → `…trying-eglot`、
+// `…/23/如何在工作中学习/` → `…/23/`，都变成 404 假阳性）。改用**事后再截**：
+// 只在出现连续逗号时切断（见下面 cleanup 里的 `,,` 规则）。
+const BARE_URL = /(?<![("\'>=])\b(https?:\/\/(?:[^\s<>()"'`\]]|\([^()\s]*\))+)/g;
 // 已经是存档链接的内层原始 URL 不算独立链接：
 // https://web.archive.org/web/20130311215851/http://bens.me.uk/xxx → 别再抽一层出来
 const ARCHIVE_INNER = /https?:\/\/web\.archive\.org\/web\/\d+\/$/;
@@ -614,8 +616,12 @@ function collect(file) {
     }
   }
   for (let u of hits) {
+    // 连续逗号是「URL 后面的正文被吞进来」的典型痕迹：`…/index.php,,TODO,工作-Linux驱动开发`
+    // （CSV/笔记粘连）。真 URL 里几乎不出现 `,,`，从这个位置切断最稳 ——
+    // 比把 `,` 排除出字符集安全：那样会截断 `…-trying-eglot,-again.html` 这种含逗号的真 URL。
+    u = u.replace(/,,.*$/, "");
     // 句末标点（含中文）不算 URL 的一部分；`=` / `~` 是 org 行内 verbatim 的收尾标记
-    // （`=…=` / `~…~` 包住的 URL，收尾符会被吞进 URL —— 实测 `…ctrlp.vim=` 就是这么来的）
+    // （`=…ctrlp.vim=` 包住的 URL，收尾符会被吞进 URL —— 实测就是这么来的）
     u = u.replace(/[.,;:!?。，、；：！？）】》”’=~]+$/, "");
     try {
       const parsed = new URL(u);
