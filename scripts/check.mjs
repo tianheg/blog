@@ -61,7 +61,7 @@ switch (SUB) {
 /**
  * check-unicode.mjs — 伪 ASCII / 全角标点检查 / 发布闸门
  *
- * 背景：content/ 里混入「看着像 ASCII、码位却不是」的字符。最狠的一类是
+ * 背景：org/ 里混入「看着像 ASCII、码位却不是」的字符。最狠的一类是
  * 全角括号落在 Markdown 的**语法位置**上 —— Goldmark 只按 ASCII `[` `]` `(` `)`
  * 认链接，全角括号它当普通文字，于是链接静默失效，而且失败方式是**吞并相邻链接**：
  *
@@ -78,9 +78,9 @@ switch (SUB) {
  *
  * 用法：
  *   node scripts/check.mjs unicode                 # 检 org/，ERROR 失败 WARN 提示
- *   npm run check-unicode -- --list       # WARN 也打全部明细
- *   npm run check-unicode -- --strict     # WARN 也当失败（CI 上更严）
- *   npm run check-unicode -- --content /path/to/dir
+ *   node scripts/check.mjs unicode --list         # WARN 也打全部明细
+ *   node scripts/check.mjs unicode --strict       # WARN 也当失败（CI 上更严）
+ *   node scripts/check.mjs unicode --content /path/to/dir
  *
  * 跳过：围栏代码块（``` / ~~~）与 <script>/<style> 块 —— 里面是字面量，不参与
  * Markdown 解析。行内代码 `` `x` `` 对 WARN 视而不见（文档页会故意写这些符号）。
@@ -316,8 +316,10 @@ process.exit(0);
     mkdirSync(OK, { recursive: true });
 
     // 坏的：复刻 2026-09 线上真实故障（content/online-reading/2025.md:9）的字面形态
-    writeFileSync(join(BAD, "broken.md"),
-      "---\ntitle: bad\n---\n\n" +
+    // 注意扩展名必须是 .org —— unicode 闸门只扫 .org（2026-10-19 修：fixture 曾是
+    // .md，被扩展名过滤掉，于是"坏样本退出码 0 / E1–E4 全漏报"的自测假红）
+    writeFileSync(join(BAD, "broken.org"),
+      "#+TITLE: bad\n#+STATUS: draft\n#+DATE: <2026-01-01 Thu>\n\n" +
       "- [The Alchemy of Generative Questions\uff3d(https://nesslabs.com/x) :star: 说明 \uff3bAsking Better Questions](https://tandf.example/y)\n" +
       "- [\u53e6\u4e00\u6761\uff3d(https://example.com/a)\n" +
       "- ![\u56fe\uff3d(/images/x.png)\n" +
@@ -325,8 +327,8 @@ process.exit(0);
       "emoji 👨‍🌾 不该报。\n");
 
     // 好的：中文标点、～｜・、①、上下标、NBSP、围栏里的全角括号、行内代码、行内开关
-    writeFileSync(join(OK, "good.md"),
-      "---\ntitle: good\n---\n\n" +
+    writeFileSync(join(OK, "good.org"),
+      "#+TITLE: good\n#+STATUS: reviewed\n#+DATE: <2026-01-01 Thu>\n\n" +
       "\u4e2d\u6587\uff0c\u6807\u70b9\u3002\u5e94\u5f53\uff1a\u5168\u89d2\u3010\u6b63\u5e38\u3011\u300c\u5f15\u53f7\u300d\uff5e\u8303\u56f4\u300c \uff5c \u5206\u9694 \u00b7 \u95f4\u9694 \u2460\u5e8f\u53f7 E=mc\u00b2 \u00d710\u00b9\u00b2 \u03bc\u00b1\u00b0\u00e9\n" +
       "\u6b63\u5e38\u94fe\u63a5\uff08[\u53c2\u8003](https://example.com/x)\uff09\u4e0d\u8b66\u544a\n" +
       "emoji 👨‍🌾 👨‍🎓 不警告\n" +
@@ -353,10 +355,10 @@ process.exit(0);
     const bad = run(["--content", BAD]);
     bad.code === 1 ? pass("\u574f\u6837\u672c\u9000\u51fa\u7801 1") : nope(`\u574f\u6837\u672c\u9000\u51fa\u7801 ${bad.code}\uff08\u5e94\u4e3a 1\uff09`);
     for (const c of ["E1", "E2", "E3", "E4"]) {
-      new RegExp(`\\[${c}\\].*broken\\.md`, "m").test(bad.out) ? pass(`\u6293\u5230 ${c}`) : nope(`\u6f0f\u62a5 ${c}`);
+      new RegExp(`\\[${c}\\].*broken\\.org`, "m").test(bad.out) ? pass(`抓到 ${c}`) : nope(`漏报 ${c}`);
     }
     /ZWNJ|U\+200C/.test(bad.out) ? pass("\u96f6\u5bbd\u5b57\u7b26\u88ab\u70b9\u51fa\u7801\u4f4d") : nope("\u96f6\u5bbd\u5b57\u7b26\u6ca1\u70b9\u51fa\u7801\u4f4d");
-    /broken\.md:6.*ZWJ/.test(bad.out) ? nope("emoji \u91cc\u7684 ZWJ \u88ab\u8bef\u62a5") : pass("emoji \u91cc\u7684 ZWJ \u6ca1\u8bef\u62a5");
+    /broken\.org:9.*ZWJ/.test(bad.out) ? nope("emoji \u91cc\u7684 ZWJ \u88ab\u8bef\u62a5") : pass("emoji \u91cc\u7684 ZWJ \u6ca1\u8bef\u62a5");
 
     // 2. 好样本：干净 + 退出码 0，且 --strict 下也干净
     const good = run(["--content", OK, "--strict"]);
