@@ -6,7 +6,7 @@
  *   node scripts/embed.mjs --help
  *
  * 产物:
- *   static/pagefind-semantic/{pages.json,embeddings.bin,manifest.json} + public/ 镜像
+ *   static/pagefind-semantic/{pages.json,embeddings.bin,manifest.json}
  *
  * 2026-10-19：原来的 `related` 子命令与 data/related.json 已删除 —— 那份
  * 「相关笔记（语义相似）」数据没有任何消费者（build.el / worker.js 都不读，
@@ -16,7 +16,7 @@
  */
 import {
   readFileSync, writeFileSync, mkdirSync, existsSync,
-  readdirSync, statSync, copyFileSync, rmSync,
+  readdirSync, statSync, rmSync,
 } from 'node:fs';
 import { join, relative } from 'node:path';
 import { createHash } from 'node:crypto';
@@ -46,7 +46,7 @@ switch (SUB) {
 /**
  * generate-embeddings.mjs
  *
- * Crawls public/ HTML files after Hugo build + PageFind, extracts page text,
+ * Crawls public/ HTML files after the org2site build (emacs export + PageFind), extracts page text,
  * generates BGE-M3 embeddings via Cloudflare Workers AI REST API (build-time,
  * not runtime — this is what kills the old cold-start stall), and writes:
  *
@@ -415,18 +415,12 @@ async function main() {
   writeFileSync(join(OUT_DIR, 'manifest.json'), JSON.stringify(manifest));
   console.log(`  manifest.json: count=${manifest.count}, hash=${manifest.contentHash}`);
 
-  // Mirror to public/ — wrangler.jsonc serves ./public as ASSETS, so the
-  // deployed semantic index must live there. static/ copy stays in git as
-  // the canonical source.
-  const publicSemDir = join(PUBLIC_DIR, 'pagefind-semantic');
-  if (existsSync(PUBLIC_DIR)) {
-    mkdirSync(publicSemDir, { recursive: true });
-    rmSync(join(publicSemDir, 'pages-content.json'), { force: true });
-    for (const f of ['pages.json', 'embeddings.bin', 'manifest.json']) {
-      copyFileSync(join(OUT_DIR, f), join(publicSemDir, f));
-    }
-    console.log(`Mirrored 3 files to ${publicSemDir}/`);
-  }
+  // 2026-10-19：**去掉了原来往 public/pagefind-semantic/ 镜像这一步**。
+  // 它引自 2026-08 的一个 workaround（当时索引由 CI 生成、不在版本里，所以要往
+  // 产物目录抄一份）；2026-10-10 起索引改由周任务重建并**提交进仓库**，而
+  // build.sh → build.el 本来就会把仓库 static/ 整树（含 pagefind-semantic/）拷进
+  // public/，所以镜像在 CI 里完全是死代码，只是让「一次非构建步骤写了产物目录」。
+  // 代价：本机跑完 embed 想立刻预览，要先再跑一次 build.sh（它会把 static/ 拷过去）。
 }
 
 try {

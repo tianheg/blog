@@ -306,6 +306,11 @@ node scripts/embed.mjs
 #+end_quote
 
 *** 站外链接死链扫描（=node scripts/check.mjs external=）
+
+> *每周一 05:00 由 cron 自动跑*（job =e58bcb517f3d=，no_agent，脚本
+> =~/.hermes/scripts/blog-external-links-weekly.sh=）：有真死链（404/410）就投出死链段
+> 与修法，没有就投一行打卡简报。下面的命令仍可手动跑。
+
 扫 =org/= 里所有外链（org 链接 + 裸 URL，跳过代码块），并发探测后分类报告。 只有 *404/410* 算死链；5xx、代理到不了、401/403/429、DNS/超时都不算死，分开列。
 
 - 请求带真实 Chrome（Windows）指纹（UA + Sec-CH-UA + Sec-Fetch-* + Referer），避免被 WAF 当爬虫； HEAD 先行，HEAD 不干净或结果为 4xx 时用 GET 复核，405/406/412 这类反爬响应再换朴素 Accept 重试一次
