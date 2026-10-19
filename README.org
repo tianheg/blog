@@ -1,0 +1,396 @@
+* blog
+[[#常用命令][[[https://img.shields.io/badge/Generator-org%20%2B%20Emacs-1f6feb]]]] [[https://git.tianheg.co/tianheg/blog][[[https://img.shields.io/badge/Source%20on-Forgejo-181717?&logo=forgejo]]]] [[https://workers.cloudflare.com/][[[https://img.shields.io/badge/Built%20with-Cloudflare_Workers-orange?&logo=cloudflare]]]]
+
+个人博客站点 - [[https://tianheg.co/][tianheg.co]]
+
+#+begin_quote
+*2026-10-18：已换成 org + Emacs 管线，Hugo 下线。* 构建 =bash scripts/org2site/build.sh [输出目录]= 四步：预检（=node scripts/check.mjs unicode=）→ emacs 导出 → PageFind 索引 → =verify.py= 体检；emacs 30.1 与 PageFind 由 build.sh 自装，只有预检那一步需要 node。部署仍是 push → CF Workers Builds。
+
+Hugo 时代的模板 / 配色 / 字号旧记录 / 链路悬浮预览 / 站点变更记录已移到 =docs/HISTORY.org=；管线的完整知识（含坑清单与验收方法）在技能 =blog-org2site=。
+#+end_quote
+
+** 项目架构
+#+begin_example
+blog/
+├── org/                 # **内容真源**（org-mode，2026-10 起 content/*.md 已下线）
+│   ├── posts/           # 博客文章（长文、随笔、年度总结）
+│   ├── til/             # Today I Learned 笔记
+│   │   ├── software/ life/ health/ learning/ career/ hardware/
+│   │   └── homelab/ backup/ writing/ music/ media/ courses/ science/ history/
+│   │                    # 子分类用 `#+HEADER:` 标记（原 front matter `header`）
+│   ├── online-reading/  # linkding 同步产物（cron 每日追加）
+│   ├── photos/          # 相册合集子页（gen-photos-data.py 生成）
+│   ├── agenda.org       # 转正队列（status-agenda.py 生成）
+│   └── *.org            # 独立页面（about / now / links / watch / read …）
+├── scripts/
+│   ├── org2site/        # 站点管线（单入口 build.sh）
+│   │   ├── build.sh     # ① emacs 导出 → ② PageFind 索引 → ③ verify.py 体检
+│   │   ├── build.el     # 全站构建（文章 / 归档 / 花园 / 分类页 / RSS / sitemap / 404 / 静态拷贝）
+│   │   ├── export.el    # 单页导出层（骨架、TIL 三栏 shell、wikilink 解析、排印规范化）
+│   │   ├── static/      # style.css / site.js / photos.js / favicon / fonts
+│   │   └── verify.py    # 输出体检（每页一个 h1 / UTF-8 / shell 位置 / 锚点与站内死链）
+│   ├── worker.js        # Cloudflare Worker（静态托管 + 语义搜索 API + 评论同域反代）
+│   ├── photo-guard.js   # 相册放行闸（worker 与 `check.mjs photos` 共用）
+│   ├── embed.mjs        # 语义索引（嵌入 + 关联笔记）
+│   ├── check.mjs        # 闸门（links / unicode / selftest / photos / external）
+│   ├── gen-photos-data.py   # 相册派生管线（data/photos-list.yaml → 机器产物，手动跑）
+│   ├── garden-health.py     # 数字花园健康度（手动跑）
+│   ├── data/            # 数据账本（外链账本 ×2 + 相片白名单）
+│   └── epub/            # EPUB 导出管线（SOP 见 epub/README.md）
+├── static/              # 静态文件（整树拷进产物）
+├── data/                # photos-list.yaml（人工真源）+ related.json
+├── wrangler.jsonc       # Cloudflare Workers 配置（build.command = bash scripts/org2site/build.sh public）
+└── AGENTS.md            # AI agent 上下文（symlink → README）
+#+end_example
+
+#+begin_quote
+*管线（2026-10 起）*：=org/*.org= ──emacs batch（=build.el=）──▶ 静态 HTML ──PageFind──▶ =public/=。 Hugo 管线已整体下线 ------ =layouts/=、=assets/=、=content/=、=hugo.yaml=、=package.json= 全部移除， 转换期脚本 =md2org.py= / =migrate.py= 一并删除（历史留在 git）。 直接改 =org/= 就是改内容，*构建前不需要任何中间转换*。
+
+本节以下按 Hugo 时代写的模板 / 资源 / Tailwind 章节属*历史记录*，仅供考古。 2026-10-07 一次性工具清理：13 个迁移/修复/建议类脚本移出仓库（fetch-photos-dev pick-photos fill-watch-year merge-media-watch migrate-to-wikilink fix-deadlinks fix-title-attributes suggest-links suggest-merges suggest-bridges prune-dead-links warm-wayback-cache neodb-year-lookup），=hugo-setup.sh= 已于 2026-10-07 并入 =build.sh setup= 子命令，不再单列；=neodb-name-lookup.py= 已迁 =~/.hermes/scripts/=（适配准则是用户级工具出仓、内容仓只留构建链）。技能文档里提到的这些脚本仍可捞回：=git log -1 --diff-filter=D --format=%h -- scripts/<file>= 找删除提交 =<SHA>= → =git show <SHA>^:scripts/<file>=。
+#+end_quote
+
+** 技术栈
+| 类别     | 技术                                | 说明                                                                                         |
+|----------+-------------------------------------+----------------------------------------------------------------------------------------------|
+| 静态生成 | Emacs batch（自写导出器）           | =scripts/org2site/=：org → HTML，无 Hugo                                                     |
+| 样式     | 手写 CSS（light-dark + 自定义属性） | =scripts/org2site/static/style.css=，无构建步骤                                              |
+| 搜索     | PageFind（extended 版，CJK 分词）   | 基于构建后的产物建索引，版本与 sha256 在 =build.sh= 里 pin                                   |
+| 语义搜索 | 自建嵌入索引 + Worker API           | =scripts/embed.mjs=，每周一 04:00 cron 重建                                                  |
+| 部署     | Cloudflare Workers                  | =wrangler.jsonc= 的 =build.command= 调 =build.sh=；只走 CF Workers Builds，本地不跑 wrangler |
+
+** 环境要求
+| 依赖     | 版本              | 说明                                                                                                                                          |
+|----------+-------------------+-----------------------------------------------------------------------------------------------------------------------------------------------|
+| Emacs    | 30.1              | =build.sh= 自己提供（micronamba + conda-forge 装到 =~/.cache/org2site/=，不依赖系统包）------ CI 镜像里没有 emacs，本机是 Debian 的 emacs-nox |
+| PageFind | 1.5.2（extended） | 同上，=build.sh= 下载 + 校验 sha256 后缓存到 =~/.cache/org2site/=                                                                             |
+
+*首次克隆后什么都不用装*，直接跑构建即可（预检与语义索引这两步要用 node，其余步骤不需要）。
+
+** 站点理念与内容策略
+几条决定内容怎么增删改的原则，动内容前先读：
+
+- *链接会变，不做重定向。* 技术类、时效性强的文章会随时间推移、我理解程度的加深而改链接，或与其他文章合并、简化。如果你发现文章链接 404 了，最好在博客上找找。我不做重定向------维护重定向列表不是一件能坚持很久的事。博客的此时此刻，代表了我此时的状态；内容的改变反映了我状态的改变。
+- *内容是活的。* 站上的内容不会静态不变，它永远在变化，永远反映我思维方式的改变、我情绪的变化。它是旺盛生命力的代表------没有它，我只是一个人；有了它，我能冲破现实的枷锁，和无尽的想象力相伴，让自己不断探索生命的奥义。
+- *不配图。* 有时候一图胜万语，但我的博客不需要。
+- *整理是长期的。* 合并同类文章、删除无价值文章、简化标签分类------自 2022-11-15 起持续在做。
+- *写作人称。* 文章中的「他」不单指男性，也包括女性；写作中作者退居二线，多以「你」称呼。
+- *内容定位。* 主要是随时学习的记录与生活感想；外语电影首选外语作标题，中文放在文中。
+
+** 内容规范
+*** 内容格式
+| 目录                    | 格式              | 原因                                                                                         |
+|-------------------------+-------------------+----------------------------------------------------------------------------------------------|
+| =org/= 及根目录独立页面 | Org Mode (=.org=) | 唯一内容真源；2026-10 由 Markdown 迁回 org（Hugo 时代的那批 =.md= 已随 =content/= 一起下线） |
+| =org/til/=              | Org Mode (=.org=) | 笔记类内容，按分类文件夹组织，子分类用 =#+HEADER:= 标记                                      |
+
+#+begin_quote
+2026-09-10 完成 =.org= → =.md= 迁移：1581 篇内容 + 模板（graph-data 链接解析、=about.md= / =-en.md= 判断）+ hugo.yaml（=parser.attribute.block=、typographer 对齐 go-org、脚注 backlinkHTML、TOC endLevel）。转换脚本 =org2md.py= 已移出仓库（副本在 =~/.hermes/scripts/.archive/=，历史保留在 git）。
+#+end_quote
+
+*** 文件命名规则
+| 目录            | 推荐格式           | 示例                                           |
+|-----------------+--------------------+------------------------------------------------|
+| =posts/=        | ={主题词}.org=      | =2025.org=, =a-dream.org=, =about-good-posts.org= |
+| =til/软件/=     | ={前缀}-{描述}.org= | =git-rebase.org=, =css-flexbox.org=              |
+| =til/其他分类/= | ={描述}.org=        | =sleep.org=, =iptables.org=                      |
+
+*** TIL header 标记
+扁平化结构下，子分类用 =#+HEADER= 标记，不建立子目录：
+
+#+begin_src org
+,#+TITLE: Git merge 与 rebase
+,#+HEADER: Git
+#+end_src
+
+分类页按 header 分组展示，右侧边栏可折叠筛选。支持多 header（空格分隔）。
+
+*通用约束：*
+
+- ❌ 不能有大写字母
+- ❌ 不能有空格
+- ❌ 不能有中文标点
+- ❌ 避免无意义编号（=001.org=, =note1.org=）
+
+*** TIL 笔记边界纪律（2026-09 对照 blackglory.me 树形笔记结论）
+Blackglory 的笔记 = 每主题单页深层可折叠概念树（如 Linux 页 199 节点、最深 6 层、700KB）。对照后确认：*TIL 的分类 + #+HEADER 扁平结构是正确设计，不重建深目录树，不把主题合并成巨页*。理由：定位靠检索（Pagefind + 语义搜索），不靠层级导航；扁平结构 URL 稳定、git/STATUS 粒度清晰；巨页移动端不可读。
+
+三条边界纪律：
+
+1. *边界后置、就地生长* --- 同主题碎片别急着开新文件或建目录，优先合进现有文件做 =*= 小节。只有文件内部层级到 4 层以上、且各小节需要独立引用时，才拆成新文件。
+2. *检索宽容* --- 一条内容同属多个 header 时随手放任意一处即可，不纠结归属（Pagefind 兜底）。多 header 参数支持真实多归属，但默认不为此花时间。
+3. *深链可用* --- Goldmark 按标题文本生成锚点（=#标题文本=，CJK 原样保留；重复标题自动加 =-1= 后缀），文件内小节可被 URL 直达。需要固定锚点时用 ={#custom-id}= 属性。
+
+触发阈值（动边界的信号）：
+
+- header 组 > ~60 篇且成员互相引用频繁 → 合小为大，内部 =*= 树结构化
+- 单文件 > ~6 个平级 =*= 小节且语义独立 → 拆文件
+
+*** 内容头字段（org 关键字）
+
+文章（=org/posts/=）：
+
+#+begin_src org
+,#+TITLE: 编程技术一览，程序员练级攻略
+,#+DATE: <2022-11-06 15:02:00>
+,#+TAGS[]: 技术
+#+end_src
+
+独立页面（如 =about.org=）通常只需要 =#+TITLE:=。
+
+TIL（=org/til/=）必带整理状态与日期（状态 2026-09-01 起 / 日期 2026-09-10 起，全库强制）：
+
+#+begin_src org
+,#+TITLE: 40个计算机科学核心概念（通俗解释）
+,#+DATE: <2026-04-06 17:39:49>
+,#+STATUS: draft
+,#+HEADER: Programming
+#+end_src
+
+- =#+STATUS:= 取值 =draft=（AI 生成/代写，未经人工整理）或 =reviewed=（人工复核过）
+- =#+DATE:= 语义是*首次入库时间*：新建用当天时间；历史文件取 git 首次提交时间
+  （=git log --diff-filter=A --follow=），无 git 历史时回退文件 mtime。2026-09-10 已全库补齐
+- 日期驱动 =/til/= 的「最近新增」排序；posts/til 下缺 =#+DATE:= 的页面会被*跳过不构建*
+  （严格模式下直接让构建失败，见「部署」）
+- AI 代写一律 =draft=；用自己的话复核/补充后改 =reviewed=
+- =#+HEADER:= 是 TIL 的子分类标记（见上节）
+
+*** Posts vs TIL 选择标准
+| 类型    | 适合内容                                         | 示例                             |
+|---------+--------------------------------------------------+----------------------------------|
+| *Posts* | 长文、年度总结、随笔、书评、需要深度思考的内容   | 年终总结、音乐剧观后感、技术长文 |
+| *TIL*   | 技术知识点、操作步骤、命令备忘、可快速检索的笔记 | Git 命令、CSS 技巧、配置方法     |
+
+*** 标签（Tags）
+- =tags= 是唯一的 taxonomy，*语义是栏目级分类*（这篇属于哪个栏目），不是技术关键词（用了哪个工具）
+
+- *不给文章打工具/语言关键词标签*。这类标签已于 2026-09-20 全站移除：=CSS=、=Hugo=、=JavaScript=、=Org-mode=、=Nginx=、=HTML=、=Emacs=、=Linux=、=SSH=、=Cloudflare=、=Algorithm=、=NixOS=、=Arch-Linux=、=img=、=Android=（15 个标签 / 115 篇 / 122 处），技术文章统一收敛到 =技术=
+
+- 当前 28 个标签即分类导航（=/tags/=）：
+
+  随笔 · 技术 · 电影 · 读书记 · 诗作 · 音乐 · English · 健康 · 备忘 · 梦境 · 博客 · 公开课 · 音乐剧 · 年终总结 · 父母 · 剧集 · 纪录片 · 艺术 · 食 · 古文 · 动漫 · 天文 · 给自己的信 · 学习 · 摄影 · 英文用词 · 写作 · 安全
+
+- 新增标签前先确认现有分类覆盖不了；能覆盖就别加
+
+- 一篇文章可以有多个标签（=#+TAGS[]:= 里空格分隔，如 =#+TAGS[]: 电影 随笔=），但不要为同一维度堆同义词
+
+- 格式：=#+TAGS[]: 技术 English= —— org 关键字、裸写、空格分隔
+
+- =English= 与栏目正交，标记英文文章（英文原创 + 英文版），不与中文栏目混用
+
+- =til/= 不使用标签，文件夹分类 + =#+HEADER:= 已足够
+
+- 删标签等于 URL 消失（=/tags/<slug>/= 直接 404）------改完跑一次构建（=bash scripts/org2site/build.sh public=）兜底：构建末尾会报未解析的 wikilink，=verify.py= 会拦住失效内链
+
+*** 内部链接与 wikilink
+
+正文引用其他笔记，两种写法都支持：
+
+- *Wikilink*：=[[git-rebase]]=、=[[git-rebase|显示文字]]=、=[[笔记本保养#小节]]=
+- org 链接：=[[/til/software/git-rebase/][显示文字]]=
+
+wikilink 依次按 *文件名 → 完整标题 → 标题主名（=——=/=：=/=|= 之前那截）* 解析
+（=scripts/org2site/export.el=）。代码块与行内代码里的 =[[…]]= 不会误解析。
+
+*写错名字也不会产生死链*（三层保证）：
+
+1. *渲染兜底* —— 解析不到时渲染成「站内搜索」链接（虚线下划线 + 悬停提示），
+   读者看不到 =[[…]]= 原文，也点不到 404
+2. *构建告警* —— 构建末尾打印未解析 wikilink 的处数与样例（=build.el=，0 处时静默）
+3. *构建即闸门* —— 站内死链由 =scripts/org2site/verify.py= 第 5 项拦住，
+   它跑在 =build.sh= 末尾且受 =set -e= 约束；CI 另开 =ORG2SITE_STRICT=1=，
+   未解析的 wikilink 直接让构建失败
+
+*写法约定*：
+
+- 站内引用用 =[[文件名]]= —— 文件名是唯一稳定的标识（标题会改、文件名不改），解析也最不容易歧义
+- 要中文显示：=[[laptop-maintenance|笔记本保养]]=
+- 指小节、站外链接、静态文件仍用 org 链接或裸 URL
+
+*2026-10-18 重写后不再有*：笔记底部的「引用这篇的」反链区、链接悬浮预览卡片
+（=PagePreview.ts= / =backlink-index.html= 已随 Hugo 管线删除，线上 =/graph/= 亦已 404）。
+
+*** TIL 引用来源格式
+TIL 的信息源链接统一放在文件末尾：
+
+- *单一来源* → =来源: [[URL][描述文字]]=
+- *多个来源* → =** 参考= 小节，org 链接列表（全库 59 篇这样写）
+
+#+begin_src org
+,# 单一来源
+来源: [[https://en.wikipedia.org/wiki/Asperger_syndrome][Wikipedia: Asperger syndrome]]
+
+,# 多个来源
+** 参考
+- [[https://en.wikipedia.org/wiki/Information_retrieval][Wikipedia: Information retrieval]]
+- [[https://scholar.google.com/intl/en/scholar/help.html][Google Scholar Search Tips]]
+#+end_src
+
+注意：
+
+- 内联引用（正文中随文出现的链接）不受此约束
+- 推荐阅读/延伸资源不属于「信息源」，不用加到 =** 参考=，用 =*** 推荐资源= 或其他合适的小节标题
+
+** 样式体系
+
+样式真源 =scripts/org2site/static/style.css=（单文件、零 class）。Hugo/Tailwind 时代的
+=layouts/=、=assets/=、=@theme= 全量已删，相关历史决策见 =docs/HISTORY.org=。
+
+字号约定（2026-09-20 定案，仍是现行）：**正文 16px / 列表条目 15px / 元信息 13px**；
+手机与桌面同一套，不用媒体查询分档。Tailwind 当时的具体落点清单已移入 HISTORY。
+
+*** 分层与尺度（2026-10-18）
+样式表 =scripts/org2site/static/style.css= 仍是单文件、零 class（契约见文件头注释）。
+
+*层序（=@layer=）*：=tokens → base → layout → components → pages → utilities=
+
+- 同层内按源码顺序 + 特异性竞争；*跨层后者胜，且与特异性无关* → 改层归属 = 改全局优先级。
+- 只有「必须无视特异性、一定要赢」的规则才放 =utilities=（焦点环、触屏点击区、存量 class 兜底）。 本次踩过两次：正文链接下划线压过目录的 =#TableOfContents a=；iOS 防缩放规则把 =/til/= 筛选按钮从 13px 顶到 16px（页面高 5px）。两处都靠指纹回归抓出来并归位。
+
+*尺度*：=--text-*=（12 档）/ =--space-*=（12 档）/ =--radius-*=（4 档），全部是*纯别名*（值与原字面量逐字节相同）。
+
+- 尺度表按「现状台账」命名，不是「理想档位」：实际用到的字号仍有 11 档 （12/13/14/15/16/17/18/20/24/30/36px），与上面「字号阶梯（正文 16 / 条目 15 / 元信息 13）」 的约定存在漂移；要不要归一属于后续独立决定，本次重构不动视觉。
+
+*零视觉变化的验证手法*：=scripts/org2site/style-fingerprint.js=
+
+- 逐元素取 35 个 computed 属性 + 几何 + 树路径，对 6 页 × 2 视口（1280×900 / 412×915）× 2 配色（light/dark）= 24 组算哈希；重构前后 24 组一致即视为渲染等价。
+- 本次 S1（尺度）与 S2（分层）都以它验证：S1 24/24 一致；S2 修完两处层归属后 23/24 稳定一致， 余 1 组为「视口切换时滚动条瞬时出现」的测量假象（=scrollHeight= 两侧相同）。
+- 踩过的注意点：字体未加载完会影响行高（等 =wait_for_load= 后再 0.7s）；切配色后再等 0.4s； 视口切换可能滞后一帧导致 =clientWidth= 差 15px；=text-underline-offset= 在无下划线的元素上是噪声，不作判据。
+
+*** 字体（2026-10-19 核对）
+
+现行 =style.css= 里只有一条系统字体栈：
+= -apple-system, BlinkMacSystemFont, "Segoe UI", "Noto Sans CJK SC", …= ——
+**没有 =@font-face=、没有自托管 webfont**。
+
+=static/fonts/= 里仍留着三个 woff2（=LXGWWenKaiScreen-subset.woff2= 1.2M、
+=Satoshi-Variable.woff2= / =-Italic.woff2= 各 30K），但**产物里没有任何引用** ——
+2026-10-18 的 org2site 重写把自托管字体丢了。恢复与否待定；在那之前它们只是
+每次部署多拷 1.26M 的死重量（见 =docs/HISTORY.org= 里 2026-10-09 那条记录）。
+
+** 常用命令
+#+begin_src sh
+# 全量构建（导出 + PageFind 搜索索引 + 体检）→ public/
+bash scripts/org2site/build.sh
+
+# 只导出（不跑 pagefind/体检，约 50s）
+emacs -Q --batch -l scripts/org2site/build.el org public </dev/null
+
+# 输出体检：每页一个 h1 / 合法 UTF-8 / shell 覆盖 / 页内锚点 / 站内死链 / 文件名规范
+python3 scripts/org2site/verify.py public
+
+# 本地预览（禁缓存 + 相册图片占位路由）
+python3 scripts/org2site/preview-server.py public 8099
+
+
+# 转正队列（全库 draft → org/agenda.org，Emacs 打开 + M-x org-agenda）
+python3 scripts/org2site/status-agenda.py
+
+# 站外链接死链扫描（仍在用；只依赖 node 内置模块）
+node scripts/check.mjs external
+
+# 语义搜索索引（周一 04:00 cron 自动跑；需要立即命中时手工跑）
+node scripts/embed.mjs
+#+end_src
+
+#+begin_quote
+=npm run *= 那套随 Hugo 一起删了（=package.json= 已不存在），直接用 =node scripts/check.mjs <子命令>=。当前可用：=unicode=（伪 ASCII / 全角标点，已接进 =build.sh= 第 0 步预检）、=unicode-selftest=、=photos=（相册放行闸单测）、=external=（站外死链）；=links= 已于 2026-10-19 删除（它读的是 Hugo 构建日志，必然失败），内链闸门改由构建承担。
+#+end_quote
+
+*** 站外链接死链扫描（=node scripts/check.mjs external=）
+扫 =org/= 里所有外链（org 链接 + 裸 URL，跳过代码块），并发探测后分类报告。 只有 *404/410* 算死链；5xx、代理到不了、401/403/429、DNS/超时都不算死，分开列。
+
+- 请求带真实 Chrome（Windows）指纹（UA + Sec-CH-UA + Sec-Fetch-* + Referer），避免被 WAF 当爬虫； HEAD 先行，HEAD 不干净或结果为 4xx 时用 GET 复核，405/406/412 这类反爬响应再换朴素 Accept 重试一次
+- 传输层用 *curl* 而不是 Node 内置 fetch ------ 本机（PVE + Tailscale MagicDNS + CGNAT）跑 undici 会大批 =UND_ERR_CONNECT_TIMEOUT=，同一批 URL curl 秒开。别改回 undici
+- 本机出口走 mihomo（=http_proxy=192.168.8.11:7892=），代理到不了上游时会直接吐 502 ------ 那是网关的锅， 跟源站死活无关，脚本会再试直连，仍不通归入「到不了」，不判死
+- *已确认非死链账本* =scripts/data/external-links-verified.txt=：探测到 2xx 即自动记一行 =YYYY-MM-DD <URL>=， 之后默认跳过探测，报告末尾单列「✅ 已确认非死链」区；超 90 天自动复核，复核发现已死的撤下账本并照常报警
+- 已知被 WAF 挡死 / 有意保留的历史链接写进 =scripts/data/external-link-ignore.txt=（一行一条，子串匹配）
+- 缓存与进度在 =.hermes/external-links/cache.json=（不进版本控制）；死链会顺带查 Wayback 存档
+
+#+begin_src sh
+node scripts/check.mjs external                  # 全量（首次约 30min，之后走缓存 20s 级）
+node scripts/check.mjs external --limit 50    # 试水
+node scripts/check.mjs external --host github.com
+node scripts/check.mjs external --json /tmp/ext.json
+node scripts/check.mjs external --refresh-dead --recheck-verified   # 强制重探
+#+end_src
+
+*** 新建内容工作流程
+1. 根据内容类型选择 =org/posts/= 或 =org/til/= 下的正确分类
+2. 按命名规范创建 =.org= 文件，写 =#+TITLE:= / =#+DATE:= 等关键字（子分类用 =#+HEADER:=）
+3. 本地预览：=bash scripts/org2site/build.sh /tmp/out= 后用 =python3 scripts/org2site/preview-server.py /tmp/out 8099=
+4. 内容完成后提交即可 ------ CF Workers Builds 会跑同一条 =build.sh=（关键词索引每次部署重建；语义索引由每周一 04:00 的 cron 独立重建，见「语义搜索索引」节）
+5. 提交变更（不带 =static/pagefind-semantic/*= 与 =data/related.json=）
+
+** 资源存放
+
+| 资源类型     | 存放位置                 | 说明                                                   |
+|--------------+--------------------------+--------------------------------------------------------|
+| 图片         | =static/images/=         | 整树拷进产物（=build.el= 拷贝 =static/=，跳过 =_photos/=） |
+| 字体         | =static/fonts/=          | 同上拷进产物，但**当前 CSS 里没有任何引用**（见「样式体系」） |
+| 项目展示文件 | =static/projects/=       | 同上                                                   |
+| 图标 / 清单  | =static/=                | =favicon=、=apple-touch-icon=、=manifest.webmanifest=、=_headers=、=robots.txt= |
+| 样式 / 脚本  | =scripts/org2site/static/= | =style.css= / =site.js= / =photos.js=（拷进产物的 =/*.css=、=/*.js=） |
+| 照片原图     | 不进仓库                  | Cloudflare R2 桶 =img=，Worker 按白名单放行            |
+
+*注意：* =public/= 是构建输出目录（=build.sh= 每次会先清空重建），
+属于生成产物，**不要手动改里面的文件**。
+
+** 输出格式
+
+| 产物       | 路径                              | 说明                                          |
+|------------+-----------------------------------+-----------------------------------------------|
+| HTML       | =public/**=                       | 全站页面（=build.el= 生成，含 RSS / sitemap / 404） |
+| 关键词索引 | =public/pagefind/=                | PageFind 索引，**每次构建重建**               |
+| 语义索引   | =static/pagefind-semantic/=       | =embeddings.bin=，周一 04:00 cron 重建，进 git |
+| RSS        | =public/index.xml=                | 全站 feed（最近 20 条）                       |
+| sitemap    | =public/sitemap.xml=              | 全站 URL 清单                                 |
+
+*2026-10-18 重写后不再有*（对应实现已随 Hugo 管线删除，线上实测 404）：
+按分类分的 SectionsRSS（=/posts/index.xml=）、单页纯文本源文（=/posts/<slug>.md=）、
+=graph/index.json=。=/search/= 的语义搜索不受影响。
+
+*** 关键词搜索（PageFind）
+
+- 由 =build.sh= 第 2 步调 =pagefind_extended --site <输出目录>= 生成，每次部署重建
+- 只有带 =data-pagefind-body= 的页面进索引；列表页带 =data-pagefind-ignore=
+- 中文没有 stemming（PageFind 的限制），搜索命中靠字面匹配
+
+*** 语义搜索索引
+
+- =/search/= 的 AI tab 由构建时预生成的 embeddings 驱动
+- =node scripts/embed.mjs= 调 Cloudflare Workers AI（BGE-M3）生成全站页面向量 →
+  =static/pagefind-semantic/embeddings.bin=（L2 归一化，提交 git）
+- Worker 运行时只嵌入 query + dot product，无冷启动、无 KV 缓存
+- *2026-10-10 起：改内容不再随发布重跑 embed*。语义索引与 =data/related.json= 由 cron
+  =~/.hermes/scripts/blog-semantic-index-weekly.sh=（每周一 04:00，no_agent）全量重建、
+  单独提交并 push。代价：新内容进语义搜索最多滞后一周（关键词索引不受影响）。
+  无内容变更时静默跳过；可手动 =bash ~/.hermes/scripts/blog-semantic-index-weekly.sh --dry-run --force= 预演。
+
+** 部署
+
+- *平台*：Cloudflare Workers（=wrangler.jsonc=）
+- *构建命令*：=ORG2SITE_STRICT=1 bash scripts/org2site/build.sh public=
+- *输出目录*：=public/=
+- *链路*：=git push= → Forgejo → GitHub 镜像（自动）→ **CF Workers Builds 自动构建部署**，
+  约 2–4 分钟。*本地绝不跑 wrangler*（=wrangler dev/deploy= 一律不用）
+- *严格模式*：CI 里 =ORG2SITE_STRICT=1= 让两类问题**卡住构建** —— 未解析的 wikilink、
+  缺 =#+DATE:= 被跳过的页面（后者意味着文章静默不上线）。本地不加该变量则不拦
+- *预检*：=build.sh= 第 0 步跑 =node scripts/check.mjs unicode= 的 ERROR 级
+  （全角括号落在链接语法位会静默吞链接），离线排查可 =ORG2SITE_SKIP_PRECHECK=1= 跳过
+- 验收：=curl -s https://tianheg.co/ | head= 看新内容，或查 =public/= 产物。
+  **别只凭 push 成功就报「已上线」**
+
+** 与 Hugo 时代的差异（2026-10-18 重写之后）
+
+| 项            | 现在                                        | Hugo 时代（已删）                  |
+|---------------+---------------------------------------------+------------------------------------|
+| 内容真源      | =org/*.org=（1546 个）                      | =content/*.md=                     |
+| 生成器        | =emacs -Q --batch= + =scripts/org2site/=    | Hugo + =layouts/= + Tailwind       |
+| 样式          | 手写 =style.css=（@layer 分层 + 尺度 token） | =assets/css/= + daisyUI/typography |
+| 包管理        | 无（=package.json= 已删）                   | npm / pnpm / bun                   |
+| 闸门          | 构建内：unicode 预检 + 严格模式 + =verify.py= | =npm run check-links= 等独立脚本   |
+| 反链 / 悬浮预览 | 无                                          | 有                                 |
+| 知识图谱页    | 无（=/graph/= 404）                         | 有（vis-network）                  |
+
+历史（模板体系、配色与字号旧记录、悬浮预览实现、2021–2026 站点变更记录）→ =docs/HISTORY.org=。
+Hugo 时代的 README 全文在 git 历史里（=git show <2026-10-18 之前的提交>:README.md=）。
