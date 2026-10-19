@@ -21,7 +21,7 @@
 - [[https://program-think.blogspot.com/2016/10/custom-firefox-theme-without-extension.html][无需任何插件或扩展，定制 Firefox 外观（编程随想）]] profile 目录下 chrome/ 里的 userChrome.css（浏览器界面）与 userContent.css（网页内容）；userContent.css 用 @-moz-document 做站点级样式（严格匹配 / domain() / url-prefix() / 正则四形式）。动机是不装扩展＝运行代码更少＝攻击面更小，且避免扩展自动升级偷偷变坏。
 - [[https://program-think.blogspot.com/2019/07/Customize-Firefox.html][扫盲 Firefox 定制——从“user.js”到“omni.ja”（编程随想）]] 把 Firefox 定制分成三层：about:config / user.js（改当前值，不能改默认值、不能锁）→ autoconfig（能改默认值、能 lockPref，需写安装目录）→ 直接改 omni.ja（能改 UI 代码与快捷键，扩展机制弱化后的终极手段）。核心原则：用不到的功能统统禁掉，降低攻击面。
 - [[https://blog.sayori.org/zh-hant/posts/cn-university-studient-portraits/cn-university-student-portaits/][我眼中的中國大學生羣像 - Amiya的書桌]] 作者从健身房偶然听到的对话出发，反思自己对同龄人的偏见：大学生没有统一的正确玩法，每个人都在读书、技术、赚钱、社交、创作等不同轴线上加点，我们却只会拿自己的全部去比对方露出的一角。
-- [[https://upxuu.com/posts/china-medication/][中国新药你99%不知道的那些事]] 药企家属口述：2015.7.22 核查风暴如何让中药 NDA 空窗四年，连花清咳片从 IND 到上市走了十年。附中国药审二十年时间线。
+- 中国新药你99%不知道的那些事 药企家属口述：2015.7.22 核查风暴如何让中药 NDA 空窗四年，连花清咳片从 IND 到上市走了十年。附中国药审二十年时间线。
 - [[https://arxiv.org/abs/2609.37725][Context Language Models (CLMs)]] Meta Superintelligence Labs + UW：把 context 当文件，LM 用 Bash 自由改写自己的上下文；零样本已超现有 harness（BrowseComp-Plus +11.4% 准确率 / −21.5% FLOPs），可 in-context 技能演化与 RL 内化。
 - [[https://turbopuffer.com/blog/rip-vector-database][RIP, vector database —— turbopuffer v3 存储重构]] turbopuffer 把 ANN 向量索引从主键降级为二级索引：旧架构把文档全量内容挂在 ANN 地址下，导致存储放大、写放大、块大小被 100-200 的聚类规模锁死。v3 不再以 ANN 地址为键，让每种查询计划各用最优块大小；目前 CI 全绿但性能仍是回退，未开始调优。
 - [[https://hiwannz.com/archives/1285.html][当答案比问题更早出现]] 纯 AI 工作一个月后，真正的返工不是 AI 做错了，而是人太快把最早出现的答案当成问题本身。作者用辅助驾驶 L1–L5 提出「AI 协作授权层级」，把 AI 当镜子映出自己带进来的假设。
