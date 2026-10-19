@@ -38,7 +38,7 @@ blog/
 │   ├── data/            # 数据账本（外链账本 ×2 + 相片白名单）
 │   └── epub/            # EPUB 导出管线（SOP 见 epub/README.md）
 ├── static/              # 静态文件（整树拷进产物）
-├── data/                # photos-list.yaml（人工真源）+ related.json
+├── data/                # photos-list.yaml（人工真源）
 ├── wrangler.jsonc       # Cloudflare Workers 配置（build.command = bash scripts/org2site/build.sh public）
 └── AGENTS.md            # AI agent 上下文（symlink → README）
 #+end_example
@@ -328,7 +328,7 @@ node scripts/check.mjs external --refresh-dead --recheck-verified   # 强制重�
 2. 按命名规范创建 =.org= 文件，写 =#+TITLE:= / =#+DATE:= 等关键字（子分类用 =#+HEADER:=）
 3. 本地预览：=bash scripts/org2site/build.sh /tmp/out= 后用 =python3 scripts/org2site/preview-server.py /tmp/out 8099=
 4. 内容完成后提交即可 ------ CF Workers Builds 会跑同一条 =build.sh=（关键词索引每次部署重建；语义索引由每周一 04:00 的 cron 独立重建，见「语义搜索索引」节）
-5. 提交变更（不带 =static/pagefind-semantic/*= 与 =data/related.json=）
+5. 提交变更（不带 =static/pagefind-semantic/*=）
 
 ** 资源存放
 
@@ -374,7 +374,7 @@ CF 会按 latin-1 解码，中文全乱码。用途是给阅读器 / 爬虫 / LL
 - =node scripts/embed.mjs= 调 Cloudflare Workers AI（BGE-M3）生成全站页面向量 →
   =static/pagefind-semantic/embeddings.bin=（L2 归一化，提交 git）
 - Worker 运行时只嵌入 query + dot product，无冷启动、无 KV 缓存
-- *2026-10-10 起：改内容不再随发布重跑 embed*。语义索引与 =data/related.json= 由 cron
+- *2026-10-10 起：改内容不再随发布重跑 embed*。语义索引由 cron
   =~/.hermes/scripts/blog-semantic-index-weekly.sh=（每周一 04:00，no_agent）全量重建、
   单独提交并 push。代价：新内容进语义搜索最多滞后一周（关键词索引不受影响）。
   无内容变更时静默跳过；可手动 =bash ~/.hermes/scripts/blog-semantic-index-weekly.sh --dry-run --force= 预演。
