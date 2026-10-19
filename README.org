@@ -206,8 +206,12 @@ wikilink 依次按 *文件名 → 完整标题 → 标题主名（=——=/=：=
 - 要中文显示：=[[laptop-maintenance|笔记本保养]]=
 - 指小节、站外链接、静态文件仍用 org 链接或裸 URL
 
-*2026-10-18 重写后不再有*：笔记底部的「引用这篇的」反链区、链接悬浮预览卡片
-（=PagePreview.ts= / =backlink-index.html= 已随 Hugo 管线删除，线上 =/graph/= 亦已 404）。
+*反链*：每篇末尾自动渲染「引用这篇的」（=build.el= 的 =org2site--backlink-index=）。
+构建时全站扫一遍建索引（O(n)，**不是每页扫全站**），只做 incoming；每条附上引用它的
+那句话（linked mention），超过 6 条折叠。解析直接复用导出层的 =org2site--wikilink-url=，
+所以反链与页面里真实渲染出来的链接永远一致。
+
+*仍然没有*：链接悬浮预览（=PagePreview.ts= 已随 Hugo 管线删除）、=/graph/= 图谱页（线上 404）。
 
 *** TIL 引用来源格式
 TIL 的信息源链接统一放在文件末尾：
@@ -256,16 +260,21 @@ TIL 的信息源链接统一放在文件末尾：
 - 本次 S1（尺度）与 S2（分层）都以它验证：S1 24/24 一致；S2 修完两处层归属后 23/24 稳定一致， 余 1 组为「视口切换时滚动条瞬时出现」的测量假象（=scrollHeight= 两侧相同）。
 - 踩过的注意点：字体未加载完会影响行高（等 =wait_for_load= 后再 0.7s）；切配色后再等 0.4s； 视口切换可能滞后一帧导致 =clientWidth= 差 15px；=text-underline-offset= 在无下划线的元素上是噪声，不作判据。
 
-*** 字体（2026-10-19 核对）
+*** 字体（2026-10-19 恢复自托管）
 
-现行 =style.css= 里只有一条系统字体栈：
-= -apple-system, BlinkMacSystemFont, "Segoe UI", "Noto Sans CJK SC", …= ——
-**没有 =@font-face=、没有自托管 webfont**。
+内容层（正文 + 内容标题 + 列表条目名）走**自托管字体**：
 
-=static/fonts/= 里仍留着三个 woff2（=LXGWWenKaiScreen-subset.woff2= 1.2M、
-=Satoshi-Variable.woff2= / =-Italic.woff2= 各 30K），但**产物里没有任何引用** ——
-2026-10-18 的 org2site 重写把自托管字体丢了。恢复与否待定；在那之前它们只是
-每次部署多拷 1.26M 的死重量（见 =docs/HISTORY.org= 里 2026-10-09 那条记录）。
+| 字体 | 文件 | 用途 |
+|------+------+------|
+| Satoshi | =static/fonts/Satoshi-Variable.woff2= / =-VariableItalic.woff2= | 拉丁 |
+| 霞鹜文楷 Screen | =static/fonts/LXGWWenKaiScreen-subset.woff2=（1.2M，自托管子集） | 中文 |
+
+- 三个 =@font-face= 声明在 =style.css= 顶部；字体栈是 token =--font-content=，
+  挂在 =article= 上（正文 / 内容标题 / 列表条目名都在 =<article>= 里）
+- UI 层（导航、按钮、meta、侧栏、代码）继续走 =body= 的系统黑体栈，不挂
+- =--font-content= 末尾保留完整系统中文栈兜底：**子集里没有的冷僻字会回退系统黑体**
+  （不会豆腐块，但字形会跳）。遇到就重跑子集脚本并提交产物
+- 2026-10-18 换管线时这套整个丢了（=fonts/= 里三个文件成了死重量），2026-10-19 恢复
 
 ** 常用命令
 #+begin_src sh
@@ -326,7 +335,7 @@ node scripts/check.mjs external --refresh-dead --recheck-verified   # 强制重�
 | 资源类型     | 存放位置                 | 说明                                                   |
 |--------------+--------------------------+--------------------------------------------------------|
 | 图片         | =static/images/=         | 整树拷进产物（=build.el= 拷贝 =static/=，跳过 =_photos/=） |
-| 字体         | =static/fonts/=          | 同上拷进产物，但**当前 CSS 里没有任何引用**（见「样式体系」） |
+| 字体         | =static/fonts/=          | 同上拷进产物；=style.css= 的 =@font-face= 引用的就是这三个 woff2 |
 | 项目展示文件 | =static/projects/=       | 同上                                                   |
 | 图标 / 清单  | =static/=                | =favicon=、=apple-touch-icon=、=manifest.webmanifest=、=_headers=、=robots.txt= |
 | 样式 / 脚本  | =scripts/org2site/static/= | =style.css= / =site.js= / =photos.js=（拷进产物的 =/*.css=、=/*.js=） |
@@ -344,10 +353,14 @@ node scripts/check.mjs external --refresh-dead --recheck-verified   # 强制重�
 | 语义索引   | =static/pagefind-semantic/=       | =embeddings.bin=，周一 04:00 cron 重建，进 git |
 | RSS        | =public/index.xml=                | 全站 feed（最近 20 条）                       |
 | sitemap    | =public/sitemap.xml=              | 全站 URL 清单                                 |
+| 纯文本源文 | =public/<页面路径>.org=           | 每页的 org 原文（照搬，不改字节）；页面末尾有链接 |
 
-*2026-10-18 重写后不再有*（对应实现已随 Hugo 管线删除，线上实测 404）：
-按分类分的 SectionsRSS（=/posts/index.xml=）、单页纯文本源文（=/posts/<slug>.md=）、
-=graph/index.json=。=/search/= 的语义搜索不受影响。
+*纯文本源文*：=/posts/2019/= → =/posts/2019.org=，1546 页各一份。Content-Type 由
+=static/_headers= 的 =/*.org= 规则强制 =text/plain; charset=utf-8= —— 不强制的话
+CF 会按 latin-1 解码，中文全乱码。用途是给阅读器 / 爬虫 / LLM 直接读原文。
+
+*2026-10-18 重写后不再有*（实现已随 Hugo 管线删除，线上实测 404）：
+按分类分的 SectionsRSS（=/posts/index.xml=）、=graph/index.json=。=/search/= 的语义搜索不受影响。
 
 *** 关键词搜索（PageFind）
 
@@ -389,7 +402,9 @@ node scripts/check.mjs external --refresh-dead --recheck-verified   # 强制重�
 | 样式          | 手写 =style.css=（@layer 分层 + 尺度 token） | =assets/css/= + daisyUI/typography |
 | 包管理        | 无（=package.json= 已删）                   | npm / pnpm / bun                   |
 | 闸门          | 构建内：unicode 预检 + 严格模式 + =verify.py= | =npm run check-links= 等独立脚本   |
-| 反链 / 悬浮预览 | 无                                          | 有                                 |
+| 反链          | 有（构建时全站索引）                        | 有（partialCached 全站索引）       |
+| 链接悬浮预览  | 无                                          | 有                                 |
+| 纯文本源文    | =.org=（源文件照搬）                        | =.md=（Hugo output format 另生成） |
 | 知识图谱页    | 无（=/graph/= 404）                         | 有（vis-network）                  |
 
 历史（模板体系、配色与字号旧记录、悬浮预览实现、2021–2026 站点变更记录）→ =docs/HISTORY.org=。

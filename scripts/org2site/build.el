@@ -202,6 +202,24 @@ org2site--index-title 取；#+NOEXPORT: t 的文件也不发布。"
           (select-safe-coding-system-accept-default-p t))
       (with-temp-file path (insert html)))))
 
+(defun org2site-write-source (out-root url src-file)
+  "纯文本源文：URL \"/posts/foo/\" → <out-root>/posts/foo.org（原文照搬，不改一个字节）。
+
+为什么是 .org 而不是原来的 .md：内容真源已经是 org，再导一份 Markdown 等于维护
+第二份文本；.org 直接就是源文件本身，给阅读器 / 爬虫 / LLM 用。
+响应头（charset）在 static/_headers 里强制，否则 CF 会按 latin-1 解码出乱码。"
+  (let* ((rel (concat (directory-file-name (string-remove-prefix "/" url)) ".org"))
+         (path (expand-file-name rel out-root)))
+    (make-directory (file-name-directory path) t)
+    (let ((coding-system-for-write 'utf-8-unix)
+          (select-safe-coding-system-accept-default-p t))
+      (copy-file src-file path t))))
+
+(defun org2site-source-link-html (url)
+  "文章页末尾指向自己源文的链接（URL \"/posts/foo/\" → \"/posts/foo.org\"）。"
+  (format "<p class=\"src-link\"><a href=\"%s.org\">源文（.org）</a></p>\n"
+          (directory-file-name url)))
+
 ;; ------------------------------------------------------------ 站点级页面
 
 (defun org2site-entries-html (pages)
@@ -941,6 +959,133 @@ org 自己会把时长写在 => 后面（如 `=>  1:30`），直接读它比再�
              seen)
     h))
 
+;; ── 反链（「引用这篇的」）───────────────────────────────────────────────────
+;; 构建时全站扫一遍（O(n)），不是每页扫全站 —— 网上常见的 Hugo backlink partial 是
+;; 每渲染一页扫一次全站（O(n²)）。只收站内引用，两类写法都认：
+;;   wikilink  [[名字]] / [[名字|显示]] / [[名字#小节]]
+;;   org 链接  [[/posts/foo/][显示]]
+;; 字面量块（#+BEGIN_SRC / EXAMPLE / VERSE / EXPORT）里的不算引用，跳过。
+;; 索引在 `org2site-build' 开头建好（与 org2site-url-map 同时机），两个全局量承接。
+
+(defvar org2site--backlink-idx nil
+  "URL → ((来源URL 上下文上下文) ...)。由 `org2site-build' 填充。")
+(defvar org2site--backlink-pages nil
+  "URL → (标题 日期)。由 `org2site-build' 填充。")
+
+(defun org2site--internal-targets (line)
+  "从一行里取出所有引用的原始目标（未解析的写法，原样返回）。"
+  (let (out)
+    (dolist (re (list "\\[\\[\\([^][]*\\)\\]\\[[^]]*\\]\\]"    ; [[target][desc]]
+                      "\\[\\[\\([^][]*\\)\\]\\]"))            ; [[target]]
+      (let ((start 0))
+        (while (string-match re line start)
+          (push (match-string 1 line) out)
+          (setq start (match-end 0)))))
+    (nreverse out)))
+
+(defun org2site--resolve-target (target rel urls)
+  "引用目标 → 站内页面 URL；不是站内引用就返回 nil。
+用导出层同一个解析器 `org2site--wikilink-url'（REL 是引用方文件相对 org 根），
+保证反链与页面里**真实渲染出来的链接**完全一致 —— 各写一套规则的话，反链会指向
+页面根本没链过去的东西，或者漏掉真链。最后再用 URLS 过滤，只留真实存在的页面
+（`org2site--wikilink-url' 对站内绝对路径不查表，会原样返回 /resume.pdf 这种）。"
+  (let ((tgt (string-trim target)))
+    (cond
+     ((string= tgt "") nil)
+     ;; 带协议头的一律不是站内（http: https: mailto: file: …）
+     ((string-match-p "\\`[[:alpha:]][[:alnum:]+.-]*:" tgt) nil)
+     ((string-prefix-p "#" tgt) nil)
+     (t (let ((url (org2site--wikilink-url tgt rel)))
+          (when url
+            (let ((u (car (split-string url "#"))))
+              (when (gethash u urls) u))))))))
+
+(defun org2site--backlink-context (line)
+  "引用所在行的可读上下文：剥掉链接与行内标记，压掉空白，截 140 字。"
+  (let ((s line))
+    (setq s (replace-regexp-in-string "\\[\\[\\([^][]*\\)\\]\\[[^]]*\\]\\]" "\\1" s))
+    (setq s (replace-regexp-in-string "\\[\\[\\([^][]*?\\)|\\([^][]*\\)\\]\\]" "\\2" s))
+    (setq s (replace-regexp-in-string "\\[\\[\\([^][]*\\)\\]\\]" "\\1" s))
+    (setq s (replace-regexp-in-string "=\\([^=\n]+\\)=" "\\1" s))
+    (setq s (replace-regexp-in-string "\\*+" "" s))
+    (setq s (replace-regexp-in-string "[[:space:]]+" " " s))
+    (setq s (string-trim s))
+    (if (> (length s) 140) (concat (substring s 0 139) "…") s)))
+
+(defun org2site--backlink-index (pages org-root)
+  "返回 (反链表 . 页面表)：反链表是 URL → ((来源URL 上下文) ...)，页面表是 URL → (标题 日期)。"
+  (let ((idx (make-hash-table :test 'equal))
+        (urls (make-hash-table :test 'equal))
+        (pages-h (make-hash-table :test 'equal)))
+    (dolist (p pages)
+      (puthash (nth 0 p) t urls)
+      (puthash (nth 0 p) (list (nth 1 p) (nth 2 p)) pages-h))
+    (dolist (p pages)
+      (let ((src (nth 0 p))
+            (rel (nth 4 p))
+            (file (expand-file-name (nth 4 p) org-root)))
+        (when (file-readable-p file)
+          (with-temp-buffer
+            (insert-file-contents file)
+            (goto-char (point-min))
+            (let ((in-literal nil))
+              (while (not (eobp))
+                (let ((line (buffer-substring-no-properties
+                             (line-beginning-position) (line-end-position))))
+                  (cond
+                   ((string-match-p
+                     "\\`[[:space:]]*#\\+[Bb][Ee][Gg][Ii][Nn]_\\(SRC\\|EXAMPLE\\|VERSE\\|EXPORT\\)" line)
+                    (setq in-literal t))
+                   ((string-match-p "\\`[[:space:]]*#\\+[Ee][Nn][Dd]_" line)
+                    (setq in-literal nil))
+                   (in-literal nil)
+                   (t
+                    (let ((ctx (org2site--backlink-context line)))
+                      (dolist (target (org2site--internal-targets line))
+                        (let ((url (org2site--resolve-target target rel urls)))
+                          (when (and url (not (string= url src)))
+                            (puthash url (cons (list src ctx) (gethash url idx)) idx))))))))
+                (forward-line 1)))))))
+    (cons idx pages-h)))
+
+(defun org2site--backlink-li (entry pages-h)
+  "ENTRY 是 (来源URL 上下文)。"
+  (let* ((src (car entry))
+         (info (gethash src pages-h))
+         (title (or (car info) src))
+         (ctx (cadr entry)))
+    (concat (format "<li><a href=\"%s\">%s</a>" src (org2site-xml-escape title))
+            (if (string= ctx "") ""
+              (format "<div class=\"backlink-ctx\">%s</div>" (org2site-xml-escape ctx)))
+            "</li>")))
+
+(defun org2site-backlinks-html (url idx pages-h)
+  "URL 是本页；IDX 是全站反链表（URL → ((来源 上下文)...)）；PAGES-H 是 URL → (标题 日期)。
+每条按来源日期倒序，超过 6 条折叠。"
+  (let ((raw (gethash url idx))
+        (seen (make-hash-table :test 'equal))
+        out)
+    (dolist (e raw)
+      (unless (gethash (car e) seen)
+        (puthash (car e) t seen)
+        (push e out)))
+    (when out
+      (setq out (sort out (lambda (a b)
+                            (string> (or (cadr (gethash (car a) pages-h)) "")
+                                     (or (cadr (gethash (car b) pages-h)) "")))))
+      (let* ((n (length out))
+             (head (seq-take out 6))
+             (rest (seq-drop out 6)))
+        (concat
+         "<section class=\"backlinks\" data-pagefind-ignore>\n<h2>引用这篇的</h2>\n<ul>\n"
+         (mapconcat (lambda (e) (org2site--backlink-li e pages-h)) head "\n")
+         "\n</ul>\n"
+         (if (null rest) ""
+           (concat (format "<details><summary>还有 %d 篇…</summary>\n<ul>\n" (length rest))
+                   (mapconcat (lambda (e) (org2site--backlink-li e pages-h)) rest "\n")
+                   "\n</ul>\n</details>\n"))
+         "</section>\n")))))
+
 (defun org2site-long-date (day)
   "2022-02-10 → 10 Feb, 2022（对齐原站 Go 的 \"02 Jan, 2006\" 布局）。"
   (if (not (string-match-p "\\`[0-9]\\{4\\}-[0-9]\\{2\\}-[0-9]\\{2\\}\\'" day))
@@ -1041,6 +1186,10 @@ stroke-linecap=\"round\" stroke-linejoin=\"round\" aria-hidden=\"true\">\
     (org2site--report-bad-slugs pages)
     ;; wikilink 解析表：必须在导出任何一篇之前建好（export.el 里按它把 [[slug]] 还原成真链接）
     (setq org2site-url-map (org2site--build-url-map pages))
+    ;; 反链索引：同样必须在导出任何一页之前建好（全站扫一遍，O(n)）
+    (let ((bk (org2site--backlink-index pages org-root)))
+      (setq org2site--backlink-idx (car bk)
+            org2site--backlink-pages (cdr bk)))
     ;; 0) 静态资源：仓库 scripts/org2site/static/ → 输出。
     ;;    样式表与灯箱 JS 都是随仓库走的冻结产物，不需要 node 构建。
     ;;    以前把 style.css 只放在输出目录，清空输出就丢了 —— 现在以仓库为准。
@@ -1087,10 +1236,18 @@ stroke-linecap=\"round\" stroke-linejoin=\"round\" aria-hidden=\"true\">\
             (let* ((file (expand-file-name rel org-root))
                    (body (org2site-export-string file rel))
                    (body (if (org2site-toc-page-p p) (org2site-toc-insert body) body))
+                   ;; 反链：引用这篇的（构建时全站索引，见 org2site--backlink-index）
+                   (body (concat body (org2site-backlinks-html
+                                       url org2site--backlink-idx
+                                       org2site--backlink-pages)))
+                   ;; 每篇正文末尾指向自己的 .org 源文（文件同批写进产物，见下）
+                   (body (concat body (org2site-source-link-html url)))
                    ;; 文章页补日期条 + 尾部标签/评论（原站有；til 页没有这两块）
                    (body (if (string= (nth 3 p) "posts") (org2site-post-augment p body) body)))
               (org2site-write out-root url
                               (org2site-page title body (string= (nth 3 p) "til")))
+              ;; 纯文本源文：/posts/foo/ → /posts/foo.org（Content-Type 见 static/_headers）
+              (org2site-write-source out-root url file)
               ;; RSS 只收 posts：原站 index.xml 不含 til（逐条对比 URL 实测确认）
               (when (string= (nth 3 p) "posts")
                 (push (list url title (nth 2 p) (org2site-summary body)) rss-items))

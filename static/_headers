@@ -3,9 +3,9 @@
   X-Content-Type-Options: nosniff
   Content-Security-Policy: object-src 'none'; base-uri 'none'; frame-ancestors 'none';
 
-# 纯文本源文（页面 URL + .md）：CF 对 .md 扩展名默认发 text/markdown 且不带 charset，
-# 浏览器按 latin-1 解码 → 中文乱码。这里强制 text/plain + charset。
-/*.md
+# 纯文本源文（页面 URL + .org）：CF 对 .org 扩展名默认按 latin-1 解码 → 中文乱码。
+# 这里强制 text/plain + charset。（历史上是 /*.md，2026-10-19 改成 .org 源文。）
+/*.org
   Content-Type: text/plain; charset=utf-8
 
 # 样式表与脚本里也有中文（style.css 的注释、site.js 的界面文案），CF 默认发不带 charset

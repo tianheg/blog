@@ -4,6 +4,35 @@
    所以层的划分决定了跨层的优先级。改层序 = 改全局优先级，务必跑指纹回归。 */
 @layer tokens, base, layout, components, pages, utilities;
 
+/* ── 自托管字体（2026-10-19 恢复：2026-10-18 换管线时 @font-face 整个丢了，
+      fonts/ 里三个 woff2 变成死重量）────────────────────────────────────────
+   内容层（正文 + 内容标题 + 列表条目名）＝ Satoshi（拉丁）+ 霞鹜文楷 Screen（中文子集）；
+   UI 层（导航 / 按钮 / meta / 侧栏 / 代码）继续走 body 的系统黑体栈。
+   子集只含 org/ 用到的字符（~1.2MB）；新增冷僻字会回退系统黑体（不会豆腐块，
+   但字形会跳）—— 那时要重跑子集脚本并提交产物。 */
+@font-face {
+  font-family: "Satoshi";
+  src: url("/fonts/Satoshi-Variable.woff2") format("woff2");
+  font-weight: 400 700;
+  font-style: normal;
+  font-display: swap;
+}
+@font-face {
+  font-family: "Satoshi";
+  src: url("/fonts/Satoshi-VariableItalic.woff2") format("woff2");
+  font-weight: 400 700;
+  font-style: italic;
+  font-display: swap;
+}
+/* 只声明 400 一档：标题粗体由浏览器合成（楷体没有真粗体字面） */
+@font-face {
+  font-family: "LXGW WenKai Screen";
+  src: url("/fonts/LXGWWenKaiScreen-subset.woff2") format("woff2");
+  font-weight: 400;
+  font-style: normal;
+  font-display: swap;
+}
+
 @layer tokens {
 /* ============================================================================
    tianheg.co —— org2site 样式表（全局 CSS + 标签/属性选择器，零 class）
@@ -44,6 +73,13 @@
   --code-bg: light-dark(#282a36, #21222c);     /* 代码块底（Dracula） */
   --code-fg: #f8f8f2;
   --code-border: light-dark(#383a4a, #343746);
+
+  /* 内容层字体栈（正文 / 内容标题 / 列表条目名）。@font-face 在文件顶部；
+     拉丁走自托管 Satoshi，中文命自托管文楷子集，缺字回退后面的系统黑体。 */
+  --font-content: "Satoshi", "LXGW WenKai Screen", -apple-system, BlinkMacSystemFont,
+    "PingFang SC", "Hiragino Sans GB", "Noto Sans SC", "Noto Sans CJK SC",
+    "Source Han Sans SC", "Source Han Sans CN", "Microsoft YaHei",
+    "WenQuanYi Micro Hei", "WenQuanYi Zen Hei", Arial, sans-serif;
 
   /* TIL 左栏「当前分类」高亮（原站 border-ink-500 / bg-ink-100 / text-ink-700，
      深色 bg-ink-900/60 / text-ink-300；border 两主题同色） */
@@ -124,6 +160,11 @@ body {
   line-height: 1.85;              /* 原站正文 29.6/16 */
   -webkit-font-smoothing: antialiased;
 }
+
+/* 内容层挂自托管字体栈：正文 / 内容标题 / 列表条目名都在 <article> 里；
+   侧栏、导航、按钮、meta 在 article 之外，继续走 body 的系统黑体栈。
+   与 2026-10-09～10-18 的 `.font-wenkai` 是同一分层，只是这里用元素选择器。 */
+article { font-family: var(--font-content); }
 
 /* 内容列宽：原站 .page-col 790px + 左右 20px 内边距 */
 main, [data-header-bar], [data-site-footer] > p {
@@ -537,6 +578,45 @@ main > ul > li > span {
 
 /* --- 文章页：日期条 / 分割线 / 标签 / 评论区 ----------------------------- */
 /* 数值全部取自原站 posts 页的 computed style */
+/* 源文链接（每篇正文末尾那个 .org 源文） */
+.src-link {
+  margin-top: var(--space-10);
+  font-size: var(--text-sm);
+  color: var(--muted);
+}
+.src-link a { color: var(--muted); text-decoration-color: currentColor; }
+.src-link a:hover { color: var(--accent); }
+
+/* 反链（「引用这篇的」）—— 与尾部区块同一套细线语言 */
+.backlinks {
+  margin-top: var(--space-10);
+  padding-top: var(--space-9);
+  border-top: 1px solid var(--border);
+}
+.backlinks > h2 {
+  font-size: var(--text-base);
+  font-weight: 600;
+  color: var(--meta);
+  margin: 0 0 var(--space-5);
+  line-height: 1.5rem;
+}
+.backlinks ul { list-style: none; margin: 0; padding: 0; }
+.backlinks li { margin-bottom: var(--space-5); }
+.backlinks li > a { color: var(--accent); }
+.backlink-ctx {
+  margin-top: 2px;
+  font-size: var(--text-sm);
+  line-height: 1.5rem;
+  color: var(--meta);
+}
+.backlinks details > summary {
+  cursor: pointer;
+  font-size: var(--text-sm);
+  color: var(--accent);
+  list-style: none;
+}
+.backlinks details > summary::-webkit-details-marker { display: none; }
+
 .post-meta {
   display: flex;
   align-items: center;
