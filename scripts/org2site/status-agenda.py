@@ -25,7 +25,6 @@ import sys
 
 ROOT = pathlib.Path(__file__).resolve().parents[2]
 ORG = ROOT / "org"
-CONTENT = ROOT / "content"
 AGENDA = ORG / "agenda.org"
 
 STATUS_RE = re.compile(r"^#\+STATUS:\s*(\S+)\s*$", re.M)
@@ -85,19 +84,14 @@ def sync_back() -> int:
     n = 0
     for rel in done:
         org_p = ORG / rel
-        # 同时改源文件（content 才是真源）和转换产物，避免下次 migrate 覆盖回去
-        targets = [org_p, CONTENT / rel.replace(".org", ".md")]
-        for t in targets:
-            if not t.exists():
-                continue
-            text = t.read_text(encoding="utf-8", errors="replace")
-            if t.suffix == ".md":
-                new, k = re.subn(r"^status:\s*\S+\s*$", "status: reviewed", text, flags=re.M)
-            else:
-                new, k = re.subn(r"^#\+STATUS:\s*\S+\s*$", "#+STATUS: reviewed", text, flags=re.M)
-            if k:
-                t.write_text(new, encoding="utf-8")
-                n += k
+        # org/ 是唯一真源（content/ 已于 2026-10-18 随 Markdown 迁移产物一起删除）
+        if not org_p.exists():
+            continue
+        text = org_p.read_text(encoding="utf-8", errors="replace")
+        new, k = re.subn(r"^#\+STATUS:\s*\S+\s*$", "#+STATUS: reviewed", text, flags=re.M)
+        if k:
+            org_p.write_text(new, encoding="utf-8")
+            n += k
     print(f"写回 {len(done)} 条：{n} 处 status 改为 reviewed")
     return n
 
