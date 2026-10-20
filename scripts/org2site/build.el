@@ -1236,10 +1236,16 @@ stroke-linecap=\"round\" stroke-linejoin=\"round\" aria-hidden=\"true\">\
             (let* ((file (expand-file-name rel org-root))
                    (body (org2site-export-string file rel))
                    (body (if (org2site-toc-page-p p) (org2site-toc-insert body) body))
-                   ;; 反链：引用这篇的（构建时全站索引，见 org2site--backlink-index）
-                   (body (concat body (org2site-backlinks-html
-                                       url org2site--backlink-idx
-                                       org2site--backlink-pages)))
+                   ;; 反链：引用这篇的 —— **只加在内容页（posts / til）**。
+                   ;; 根页面（about / search / watch / links …）是站点功能性页面，底部挂一串
+                   ;; 「引用这篇的」是噪声（用户 2026-10-19 定）。
+                   ;; 注意：**索引里照旧收录根页面作为来源** —— 它们引用别的内容时，
+                   ;; 那条引用要出现在被引页的反链里，只是它们自己页面上不显示这一区。
+                   (body (concat body (if (member (nth 3 p) '("posts" "til"))
+                                          (org2site-backlinks-html
+                                           url org2site--backlink-idx
+                                           org2site--backlink-pages)
+                                        "")))
                    ;; 每篇正文末尾指向自己的 .org 源文（文件同批写进产物，见下）
                    (body (concat body (org2site-source-link-html url)))
                    ;; 文章页补日期条 + 尾部标签/评论（原站有；til 页没有这两块）
