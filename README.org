@@ -206,9 +206,11 @@ wikilink 依次按 *文件名 → 完整标题 → 标题主名（=——=/=：=
 - 要中文显示：=[[laptop-maintenance|笔记本保养]]=
 - 指小节、站外链接、静态文件仍用 org 链接或裸 URL
 
-*反链*：每篇末尾自动渲染「引用这篇的」（=build.el= 的 =org2site--backlink-index=）。
-构建时全站扫一遍建索引（O(n)，**不是每页扫全站**），只做 incoming；每条附上引用它的
-那句话（linked mention），超过 6 条折叠。解析直接复用导出层的 =org2site--wikilink-url=，
+*反链*：**内容页（posts / til）** 末尾自动渲染「引用这篇的」（=build.el= 的 =org2site--backlink-index=）。
+根页面（about / search / watch / links…）是站点功能性页面，**不加**这一区 —— 底部挂一串
+「引用这篇的」是噪声。但索引照旧收录根页面作为**来源**：它们引用内容时，那条引用会出现在
+被引页的反链里。构建时全站扫一遍建索引（O(n)，**不是每页扫全站**），只做 incoming；每条附上
+引用它的那句话（linked mention），超过 6 条折叠。解析直接复用导出层的 =org2site--wikilink-url=，
 所以反链与页面里真实渲染出来的链接永远一致。
 
 *仍然没有*：链接悬浮预览（=PagePreview.ts= 已随 Hugo 管线删除）、=/graph/= 图谱页（线上 404）。
