@@ -1,0 +1,92 @@
+#+TITLE: 自建 OnlyOffice 时踩到的五个静默失败
+#+DATE: <2026-10-22 Thu 17:08>
+#+STATUS: draft
+#+HEADER: DevOps
+
+OnlyOffice Document Server 是一个「只渲染、不存储」的编辑器引擎：它拿到一份文档的 URL 去转换、在浏览器里编辑，用户保存时再回调你的服务取回新文件。所有集成成本都在这个「你的服务」上，而它的失败方式几乎全是静默的——不报错、不写日志、界面只是不动。下面五条都是实测踩出来、且看代码看不出来的。
+
+** 先理清数据流，再谈坑
+
+一次编辑涉及三方：
+
+1. 浏览器从文档服务器加载编辑器外壳（=api.js= 注入 iframe），配置里带 JWT 签名；
+2. 文档服务器按配置里的 =document.url= 去取原始文件，转成内部格式；
+3. 用户关闭文档或强制保存时，文档服务器把新文件放到自己临时目录，POST 回调（=callbackUrl=）告诉你 =status= 和下载地址，你负责取回并落盘。
+
+所以「文件服务」必须同时能被浏览器（相对 URL）和文档服务器（绝对 URL）访问到，而回调里给的下载地址是文档服务器自己的地址——不是你的。
+
+** 坑一：JWT 必须和 config 同层
+
+开 JWT 后，签名要包住整份配置，并且放在配置对象同一层：
+
+#+BEGIN_SRC js
+new DocsAPI.DocEditor("placeholder", { ...config, token: jwt })
+#+END_SRC
+
+写成 ={ config, token }=（多套一层 =config=）不会报错。症状是编辑器照常打开，但退化成默认状态：文档类型判错（表格被当成文字文档）、界面语言回退英文、内容区永远停在骨架屏。这一层退化极难从日志看出来——文档服务器压根没收到请求。
+
+判据：看 iframe 的 URL。正常的表格编辑是 =spreadsheeteditor=，退化的会变成 =documenteditor=。
+
+** 坑二：首次启动会去外网拉插件清单
+
+镜像的启动脚本里有一句插件管理器，会去厂商 CDN 取插件列表。网络受限（或没给容器代理）时它不会失败退出，而是卡在那里空转：CPU 打满、nginx 永远不启动、端口一直 =000=。
+
+处置：不装插件就设 =PLUGINS_ENABLED=false= 跳过；需要插件就先把容器出网打通，别指望它自己超时放弃。
+
+** 坑三：以 .xlsx 结尾的路径会被 CDN 当静态文件缓存
+
+前端页面如果设计成 =/edit/<文件名>.xlsx=，CDN 会按扩展名套用静态资源缓存策略，把整页 HTML 缓存几个小时。于是代码改了、构建也过了，浏览器拿到的还是旧页面——旧配置里的那个退化 bug 会一直复现。
+
+两层修：
+
+- 所有动态响应显式加 =Cache-Control: no-store=；
+- 页面里的链接带版本参数（=?v=<mtime>=），改一次就换一个 URL。
+
+同源的另一个陷阱：搭建早期隧道没通时请求过某个静态资源、CDN 缓存了那次 404，之后资源上线了仍然 404——脚本引用加个查询参数即可绕过，除非你有 cache purge 权限。
+
+** 坑四：占位 div 会被换成默认 150px 高的 iframe
+
+=DocsAPI.DocEditor(id, cfg)= 会把占位元素整个替换成自己的 iframe，配置里的 =height: "100%"= 不生效，iframe 默认高度 150px。
+
+后果不只是「显示小」：用自动化点格子时坐标全落在父页面上，看起来就是「编辑器点不动」。做法是等 iframe 出来后按视口重新设尺寸（轮询几次 + 监听 =resize=），而不是相信配置。
+
+** 坑五：保存回调的两个细节
+
+=status= 的语义要分清：=1= 是「正在编辑」（会反复回调，直接忽略）、=2= 是关闭文档待保存、=6= 是强制保存（Ctrl+S，需要配置里开 =forcesave=）、=3/7= 是保存出错。
+
+只处理 =2/6= 才不会把中间状态写进文件。取文件时还有两个坑：
+
+- 回调里给的地址属于文档服务器自己（=/cache/files/...=），对你的服务不一定可达；改成内网服务名去取，别绕公网走一圈；
+- 刚触发保存的那一瞬间取，可能拿到 403（临时目录还没就绪），要重试几次再判失败。
+
+** 部署形态的两条边界
+
+- 文档服务器要用独立域名：=api.js= 是跨域资源，和前端同域会带来一堆 CORS 与 cookie 问题。但正因为它必须能被跨域加载，给这个域加访问认证（如 Cloudflare Access）会让 =api.js= 被 302 到登录页，编辑器直接白屏。要保护就保护前端那个域。
+- 文档服务器是重进程（常驻 1–2 GB），单容器里自带 PostgreSQL / RabbitMQ / Redis。小机器上要设内存上限，否则它会和同宿主的其他服务抢内存。
+
+** 升级前先验镜像内容
+
+不要默认「官方 tag 就是自洽的」。实测遇到过一个版本的 =index.html= 引用了 =sdkjs/vendor/string.js=，而镜像里根本没有这个文件（换一个版本就正常）。升级前先起一个临时容器验证关键文件存在，再动生产：
+
+#+BEGIN_SRC sh
+docker run --rm --entrypoint sh onlyoffice/documentserver:<tag> \
+  -c 'ls /var/www/onlyoffice/documentserver/sdkjs/vendor | head'
+#+END_SRC
+
+** 验收清单
+
+只看「容器 Up」不算完，缺一条都可能是静默坏的：
+
+1. 容器 =healthy=，且 =/healthcheck= 返回 200（不能只测端口开没开）；
+2. 公网能拿到 =api.js= 且不是缓存的 404；
+3. 未登录访问编辑页拿到的是登录表单，文件接口无凭据返回 403；
+4. 真浏览器改一个格子 + Ctrl+S，服务日志出现保存记录、文件 mtime 变化；
+5. 解开 xlsx 在 =sharedStrings.xml= / =sheet1.xml= 里能搜到刚写的那串字——写入成功与否以文件内容为准，不以「弹窗没报错」为准。
+
+相关：[[cf-workers-headers-cache][Cloudflare Workers 的 _headers 缓存规则边界]]、[[docker][Docker]]
+
+** 参考
+
+- [[https://api.onlyoffice.com/docs/docs-api/get-started/how-it-works/][How it works - ONLYOFFICE Docs API]]
+- [[https://api.onlyoffice.com/docs/docs-api/additional-api/signature/][Signature (JWT) - ONLYOFFICE Docs API]]
+- [[https://api.onlyoffice.com/docs/docs-api/usage-api/callback-handler/][Callback handler - ONLYOFFICE Docs API]]
