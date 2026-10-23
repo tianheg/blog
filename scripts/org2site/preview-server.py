@@ -58,7 +58,10 @@ def main(argv):
     handler = functools.partial(Handler, directory=root)
     with socketserver.TCPServer(("0.0.0.0", port), handler) as httpd:
         print(f"preview: http://0.0.0.0:{port}/  root={root}", flush=True)
-        httpd.serve_forever()
+        try:
+            httpd.serve_forever()
+        except KeyboardInterrupt:   # Ctrl-C 是正常退出，别甩 traceback
+            print("\npreview stopped", flush=True)
 
 
 if __name__ == "__main__":
