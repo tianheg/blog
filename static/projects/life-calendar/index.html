@@ -1,65 +1,656 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="zh-CN">
 
 <head>
-  <meta charset="utf-8">
-  <meta name="viewport" content="width=device-width,initial-scale=1">
-  <title>Life Calendar</title>
-  <link rel="stylesheet" href="base.css">
-  <script src="voodoo.js" defer></script>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>人生日历</title>
+<meta name="description" content="把一生切成 2080 个方格，每个方格是一周。">
+<style>
+  :root {
+    --bg: #f7f5f3;
+    --fg: #364153;
+    --muted: #646c7c;
+    --line: #e2ddd6;
+    --passed: #3d5b7a;
+    --empty: #d8d2cb;
+    --now: #c4622d;
+    --hover: rgba(61, 91, 122, .4);
+  }
+
+  @media (prefers-color-scheme: dark) {
+    :root {
+      --bg: #121c22;
+      --fg: #c8d2dc;
+      --muted: #8b98a5;
+      --line: #243441;
+      --passed: #88a1bc;
+      --empty: #2a3a47;
+      --now: #e08050;
+      --hover: rgba(136, 161, 188, .4);
+    }
+  }
+
+  * { box-sizing: border-box; }
+
+  html { -webkit-text-size-adjust: 100%; }
+
+  body {
+    margin: 0;
+    padding: 2.5rem 1rem 4rem;
+    background: var(--bg);
+    color: var(--fg);
+    font-family: "PingFang SC", "Hiragino Sans GB", "Noto Sans CJK SC",
+      "Source Han Sans SC", "Microsoft YaHei", system-ui, sans-serif;
+    font-size: 16px;
+    line-height: 1.7;
+  }
+
+  main {
+    width: min(100%, 860px);
+    margin: 0 auto;
+  }
+
+  h1 {
+    margin: 0;
+    font-size: 1.75rem;
+    font-weight: 600;
+    letter-spacing: -.01em;
+  }
+
+  .lede {
+    margin: .35rem 0 0;
+    color: var(--muted);
+    font-size: .875rem;
+  }
+
+  .controls {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: baseline;
+    gap: .5rem .75rem;
+    margin-top: 1.75rem;
+  }
+
+  .controls label { font-size: .875rem; color: var(--muted); }
+
+  #birth {
+    width: 7.5rem;
+    padding: .35rem .5rem;
+    font: inherit;
+    font-size: .9375rem;
+    color: var(--fg);
+    background: transparent;
+    border: 1px solid var(--line);
+    border-radius: 3px;
+    font-variant-numeric: tabular-nums;
+  }
+
+  #birth:focus-visible,
+  #apply:focus-visible,
+  .links a:focus-visible,
+  .links button:focus-visible {
+    outline: 2px solid var(--passed);
+    outline-offset: 2px;
+  }
+
+  #apply {
+    padding: .35rem .9rem;
+    font: inherit;
+    font-size: .9375rem;
+    color: var(--bg);
+    background: var(--passed);
+    border: 1px solid transparent;
+    border-radius: 3px;
+    cursor: pointer;
+  }
+
+  #apply:hover { opacity: .88; }
+
+  .hint {
+    flex-basis: 100%;
+    margin: 0;
+    min-height: 1.2em;
+    font-size: .8125rem;
+    color: var(--now);
+  }
+
+  .hint.info { color: var(--muted); }
+
+  .summary {
+    margin: 1rem 0 .25rem;
+    font-size: .875rem;
+    color: var(--muted);
+    font-variant-numeric: tabular-nums;
+  }
+
+  .summary strong { color: var(--fg); font-weight: 600; }
+
+  .peek {
+    margin: .45rem 0 0;
+    min-height: 1.5em;
+    font-size: .8125rem;
+    color: var(--muted);
+    font-variant-numeric: tabular-nums;
+  }
+
+  .peek b { color: var(--fg); font-weight: 600; }
+
+  /* 桌面：每行 52 格 = 一年，40 行 = 40 年 */
+  .board {
+    position: relative;
+    margin: 1.25rem 0 1.75rem;
+    padding-left: 2rem;
+    padding-top: 1.15rem;
+  }
+
+  .axis-x,
+  .axis-y {
+    position: absolute;
+    font-size: .625rem;
+    line-height: 1;
+    color: var(--muted);
+    font-variant-numeric: tabular-nums;
+  }
+
+  .axis-x {
+    left: 2rem;
+    right: 0;
+    top: 0;
+    height: 1.15rem;
+  }
+
+  .axis-x span {
+    position: absolute;
+    top: 0;
+    transform: translateX(-50%);
+    white-space: nowrap;
+  }
+
+  .axis-y {
+    left: 0;
+    top: 1.15rem;
+    bottom: 0;
+    width: 2rem;
+  }
+
+  .axis-y span {
+    position: absolute;
+    right: .3rem;
+    transform: translateY(-50%);
+    white-space: nowrap;
+  }
+
+  .grid {
+    display: grid;
+    grid-auto-flow: row;
+    grid-template-columns: repeat(52, minmax(0, 1fr));
+    gap: 2px;
+  }
+
+  .cell {
+    aspect-ratio: 1;
+    border-radius: 1px;
+    background: var(--empty);
+    transition: background-color .35s ease;
+  }
+
+  .cell.passed { background: var(--passed); }
+  .cell.now { background: var(--now); }
+
+  .cell.selected {
+    outline: 1.5px solid var(--fg);
+    outline-offset: 1px;
+    z-index: 1;
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    .cell { transition: none; }
+  }
+
+  .grid.has-hover .cell.hl:not(.now) { background: var(--hover); }
+
+  .legend {
+    display: flex;
+    flex-wrap: wrap;
+    gap: .4rem 1.25rem;
+    margin: 0;
+    padding: 0;
+    list-style: none;
+    font-size: .8125rem;
+    color: var(--muted);
+  }
+
+  .legend li { display: flex; align-items: center; gap: .45rem; }
+
+  .swatch {
+    flex: none;
+    width: .75rem;
+    height: .75rem;
+    border-radius: 1px;
+  }
+
+  .swatch.passed { background: var(--passed); }
+  .swatch.empty { background: var(--empty); }
+  .swatch.now { background: var(--now); }
+
+  .links {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    gap: .5rem .75rem;
+    margin-top: 2rem;
+    font-size: .875rem;
+  }
+
+  .links a,
+  .links button {
+    padding: 0;
+    font: inherit;
+    color: var(--passed);
+    background: none;
+    border: 0;
+    cursor: pointer;
+    text-decoration: underline;
+    text-decoration-thickness: 1px;
+    text-underline-offset: .22em;
+  }
+
+  .links .sep { color: var(--line); }
+
+  /* 手机：转置 —— 每列 52 格 = 一年，40 列 = 40 年 */
+  @media (max-width: 640px) {
+    body { padding: 1.75rem .625rem 3rem; }
+
+    h1 { font-size: 1.5rem; }
+
+    .board { padding-left: 1.4rem; padding-top: 1.05rem; }
+
+    .axis-x { left: 1.4rem; height: 1.05rem; }
+    .axis-y { top: 1.05rem; width: 1.4rem; }
+
+    .grid {
+      grid-auto-flow: column;
+      grid-template-columns: repeat(40, minmax(0, 1fr));
+      grid-template-rows: repeat(52, auto);
+      gap: 1px;
+    }
+  }
+
+  /* 打印：只留标题、摘要和网格 */
+  @media print {
+    @page { margin: 14mm; }
+
+    :root {
+      --bg: #fff;
+      --fg: #000;
+      --muted: #444;
+      --passed: #3d5b7a;
+      --empty: #e8e4de;
+      --now: #c4622d;
+    }
+
+    body { padding: 0; font-size: 11pt; }
+
+    .controls, .links, .legend, .hint { display: none !important; }
+
+    main { width: 100%; }
+
+    .grid {
+      gap: 1.5px;
+      page-break-inside: avoid;
+      break-inside: avoid;
+    }
+
+    .cell {
+      -webkit-print-color-adjust: exact;
+      print-color-adjust: exact;
+    }
+  }
+</style>
 </head>
 
 <body>
-  <main class="flex flex-wrap justify-around p-2">
-    <noscript>
-      Sorry pal, but this won't work without JavaScript. You are probably doing that for privacy reasons, and I do
-      respect that. You can download this website, inspect the source code, and run it locally. Or, you can whitelist it
-      in your browser/script blocker. I don't have any third-party trackers on this website, and the code is
-      open-sourced, so there's not much to be worried about.
-    </noscript>
-    <section class="grid-container"></section>
-    <section class="text-container">
-      <h1 class="border-b-3 mb-0">Life Calendar</h1>
-      <p>There are 2,080 rectangles.</p>
-      <p>Each rectangle represents 1 week of a 40-year lifespan.</p>
+<main>
+  <header>
+    <h1>人生日历</h1>
+    <p class="lede">每个小方格是一周。40 年，2080 格。</p>
+  </header>
 
-      <div class="year-input">
-        <label for="birth-year">Enter your birth year:</label>
-        <input type="number" id="birth-year" min="1900" max="2025">
-        <button id="update-grid">Update</button>
-      </div>
+  <section class="controls">
+    <label for="birth">出生年份</label>
+    <input type="number" id="birth" inputmode="numeric" min="1900" step="1" autocomplete="off">
+    <button id="apply" type="button">更新</button>
+    <p class="hint" id="hint" role="status" aria-live="polite"></p>
+  </section>
 
-      <div class="flex flex-wrap items-center">
-        <div class="grid-item bg-time-passed m-1" style="width: 1.5rem; height: 1.5rem;"></div>
-        <p>Weeks that have already passed</p>
-      </div>
-      <div class="flex flex-wrap items-center">
-        <div class="legend-current-week bg-time-passed m-1"
-          style="width: 1.5rem; height: 1.5rem; background-color: var(--current-week); border: .15rem solid #d63636; border-radius: 0.2rem;">
-        </div>
-        <p>Current week</p>
-      </div>
-      <div class="flex flex-wrap items-center">
-        <div class="grid-item m-1"
-          style="width: 1.5rem; height: 1.5rem; border: .15rem solid var(--gray); background-color: transparent;"></div>
-        <p>Weeks you have left (assuming a 40-year lifespan)</p>
-      </div>
+  <p class="summary" id="summary"></p>
+  <p class="peek" id="peek" role="status" aria-live="polite"></p>
 
-      <section class="text-center p-1 mt-1">
-        <a href="?full_screen=true" title="Toggle full screen (Cmd/Ctrl + E)" class="m-1">
-          Full screen
-        </a>
-        &#x25AA;
-        <a href="./day/" title="View day calendar" class="m-1">
-          Day View
-        </a>
-        &#x25AA;
-        <button id="print-button" class="print-btn m-1" title="Save as PDF (Cmd/Ctrl + P)">
-          Save as PDF
-        </button>
-      </section>
-    </section>
-  </main>
+  <div class="board">
+    <div class="axis-x" id="axisX" aria-hidden="true"></div>
+    <div class="axis-y" id="axisY" aria-hidden="true"></div>
+    <div class="grid" id="grid" aria-hidden="true"></div>
+  </div>
+
+  <ul class="legend">
+    <li><span class="swatch passed"></span>已经过去的周</li>
+    <li><span class="swatch now"></span>本周</li>
+    <li><span class="swatch empty"></span>剩下的周</li>
+  </ul>
+
+  <nav class="links">
+    <a href="?full_screen=true" title="全屏（Ctrl/⌘ + E）">全屏</a>
+    <span class="sep">·</span>
+    <a href="./day/">日视图</a>
+    <span class="sep">·</span>
+    <button id="print" type="button">存为 PDF</button>
+  </nav>
+
+  <noscript>
+    <p style="margin-top:2rem;color:#646c7c">这个页面靠 JavaScript 画格子。开启脚本后刷新即可；页面没有任何第三方追踪。</p>
+  </noscript>
+</main>
+
+<script>
+(() => {
+  'use strict';
+
+  const YEARS = 40;
+  const WEEKS = 52;
+  const TOTAL = YEARS * WEEKS;              // 2080
+  const STORE_KEY = 'lifeCalendarBirthYear';
+  const LEGACY_KEY = 'birthYear';           // 旧版本用的 key，读的时候兼容
+
+  const gridEl = document.getElementById('grid');
+  const axisXEl = document.getElementById('axisX');
+  const axisYEl = document.getElementById('axisY');
+  const birthEl = document.getElementById('birth');
+  const applyEl = document.getElementById('apply');
+  const hintEl = document.getElementById('hint');
+  const summaryEl = document.getElementById('summary');
+  const peekEl = document.getElementById('peek');
+
+  const PEEK_HINT = '点任意一格，看它是第几年、第几周。';
+
+  let currentBirth = 2000;
+  let selectedEl = null;
+
+  const thisYear = new Date().getFullYear();
+
+  let cells = [];        // 年优先平铺
+  let byYear = [];       // byYear[y] = [cell...]
+  let byWeek = [];       // byWeek[w] = [cell...]
+  let hoverAt = null;
+
+  // ---- 建格 ----
+
+  function build() {
+    const frag = document.createDocumentFragment();
+    cells = new Array(TOTAL);
+    byYear = Array.from({ length: YEARS }, () => []);
+    byWeek = Array.from({ length: WEEKS }, () => []);
+
+    for (let y = 0; y < YEARS; y++) {
+      for (let w = 0; w < WEEKS; w++) {
+        const i = y * WEEKS + w;
+        const el = document.createElement('div');
+        el.className = 'cell';
+        el.dataset.y = y;
+        el.dataset.w = w;
+        frag.appendChild(el);
+        cells[i] = el;
+        byYear[y].push(el);
+        byWeek[w].push(el);
+      }
+    }
+    gridEl.appendChild(frag);
+  }
+
+  // ---- 刻度：桌面横轴是周、纵轴是年；手机转置后横轴是年、纵轴是周 ----
+
+  const mqNarrow = window.matchMedia('(max-width: 640px)');
+
+  function buildAxis() {
+    const narrow = mqNarrow.matches;
+    const nx = narrow ? YEARS : WEEKS;     // 横向格子数
+    const ny = narrow ? WEEKS : YEARS;     // 纵向格子数
+    const xStep = 5;                       // 横轴每 5 格一个数字
+    const yStep = narrow ? 10 : 5;         // 手机纵向是 52 周，标得稀一点
+
+    axisXEl.textContent = '';
+    axisYEl.textContent = '';
+
+    for (let i = xStep; i <= nx; i += xStep) {
+      const s = document.createElement('span');
+      s.textContent = String(i);
+      s.style.left = ((i - 0.5) / nx * 100) + '%';
+      axisXEl.appendChild(s);
+    }
+    for (let i = yStep; i <= ny; i += yStep) {
+      const s = document.createElement('span');
+      s.textContent = String(i);
+      s.style.top = ((i - 0.5) / ny * 100) + '%';
+      axisYEl.appendChild(s);
+    }
+  }
+
+  // ---- 每格给一句「第几年第几周」，桌面悬停可见 ----
+
+  function setTitles(birthYear) {
+    for (let y = 0; y < YEARS; y++) {
+      for (let w = 0; w < WEEKS; w++) {
+        const d = new Date(Date.UTC(birthYear + y, 0, 1 + w * 7));
+        const iso = d.toISOString().slice(0, 10);
+        cells[y * WEEKS + w].title = `第 ${y + 1} 年 · 第 ${w + 1} 周 · ${iso}`;
+      }
+    }
+  }
+
+  // ---- 周数：复刻旧版公式 (age - 1) * 52 + ISO 周数 ----
+  // 旧版把 currentYearIndex 取成 age - 1，只填满 age-1 行，比真实值少一整年。
+  // 这是刻意的：数字要与旧页面对得上。改这里前先确认要的是哪种口径。
+
+  function isoWeek(d) {
+    const t = new Date(Date.UTC(d.getFullYear(), d.getMonth(), d.getDate()));
+    const day = t.getUTCDay() || 7;
+    t.setUTCDate(t.getUTCDate() + 4 - day);
+    const yearStart = new Date(Date.UTC(t.getUTCFullYear(), 0, 1));
+    return Math.ceil((((t - yearStart) / 86400000) + 1) / 7);   // 1..53
+  }
+
+  function weeksLived(birthYear) {
+    const age = new Date().getFullYear() - birthYear;
+    const n = (age - 1) * WEEKS + isoWeek(new Date());
+    return Math.max(0, Math.min(n, TOTAL));
+  }
+
+  // ---- 上色 ----
+
+  function paint(birthYear) {
+    currentBirth = birthYear;
+    const lived = weeksLived(birthYear);
+
+    for (let i = 0; i < TOTAL; i++) {
+      cells[i].className = i < lived ? 'cell passed' : 'cell';
+    }
+    // 旧版的本周就是最后一个已过的格子（两个类叠在一起，橙色盖住墨蓝）
+    if (lived > 0 && lived <= TOTAL) cells[lived - 1].className = 'cell passed now';
+
+    selectedEl = null;
+
+    setTitles(birthYear);
+
+    const left = TOTAL - lived;
+    const pct = (lived / TOTAL * 100).toFixed(1);
+    summaryEl.innerHTML = lived >= TOTAL
+      ? '40 年走完了。剩下的日子，不在这张纸上。'
+      : `已度过 <strong>${lived.toLocaleString('zh-CN')}</strong> 周（${pct}%），还剩 <strong>${left.toLocaleString('zh-CN')}</strong> 周。`;
+
+    peekEl.textContent = PEEK_HINT;
+  }
+
+  // ---- 点一格看它是哪一周 ----
+
+  function selectCell(el) {
+    if (selectedEl === el) {
+      el.classList.remove('selected');
+      selectedEl = null;
+      peekEl.textContent = PEEK_HINT;
+      return;
+    }
+    if (selectedEl) selectedEl.classList.remove('selected');
+
+    selectedEl = el;
+    el.classList.add('selected');
+
+    const y = +el.dataset.y;
+    const w = +el.dataset.w;
+    const idx = y * WEEKS + w;
+    const lived = weeksLived(currentBirth);
+    const d = new Date(Date.UTC(currentBirth + y, 0, 1 + w * 7));
+    const iso = d.toISOString().slice(0, 10);
+    const state = idx === lived - 1 ? '本周' : (idx < lived ? '已经过去' : '还没到');
+
+    peekEl.innerHTML = `第 <b>${y + 1}</b> 年 · 第 <b>${w + 1}</b> 周 · ${iso} · ${state}`;
+  }
+
+  // ---- 十字高亮：只对有指针的设备启用，单监听 + 只在跨格时改 DOM ----
+
+  function setupHover() {
+    if (!window.matchMedia('(hover: hover) and (pointer: fine)').matches) return;
+
+    gridEl.classList.add('has-hover');
+
+    const clear = () => {
+      if (!hoverAt) return;
+      const [y, w] = hoverAt;
+      for (const el of byYear[y]) el.classList.remove('hl');
+      for (const el of byWeek[w]) el.classList.remove('hl');
+      hoverAt = null;
+    };
+
+    gridEl.addEventListener('pointerover', (e) => {
+      const cell = e.target.closest('.cell');
+      if (!cell) return;
+
+      const y = +cell.dataset.y;
+      const w = +cell.dataset.w;
+      if (hoverAt && hoverAt[0] === y && hoverAt[1] === w) return;
+
+      clear();
+      for (const el of byYear[y]) el.classList.add('hl');
+      for (const el of byWeek[w]) el.classList.add('hl');
+      hoverAt = [y, w];
+    });
+
+    gridEl.addEventListener('pointerleave', clear);
+  }
+
+  // ---- 输入 ----
+
+  function readInput() {
+    const raw = birthEl.value.trim();
+    const year = Number(raw);
+
+    hintEl.className = 'hint';
+
+    if (!raw || !Number.isInteger(year)) {
+      hintEl.textContent = '填一个四位年份，比如 1988。';
+      return null;
+    }
+    if (year < 1900 || year > thisYear) {
+      hintEl.textContent = `年份要在 1900 到 ${thisYear} 之间。`;
+      return null;
+    }
+    hintEl.textContent = '';
+    return year;
+  }
+
+  function apply() {
+    const year = readInput();
+    if (year === null) return;
+    try { localStorage.setItem(STORE_KEY, String(year)); } catch (_) {}
+    paint(year);
+  }
+
+  // ---- 启动 ----
+
+  function init() {
+    birthEl.max = String(thisYear);
+    birthEl.value = '2000';
+
+    let savedOk = false;
+    try {
+      const saved = localStorage.getItem(STORE_KEY) || localStorage.getItem(LEGACY_KEY);
+      if (saved && /^\d{4}$/.test(saved) && +saved >= 1900 && +saved <= thisYear) {
+        birthEl.value = saved;
+        savedOk = true;
+      }
+    } catch (_) {}
+
+    build();
+    setupHover();
+    buildAxis();
+    paint(+birthEl.value);
+
+    mqNarrow.addEventListener('change', buildAxis);
+
+    // 点/触摸格子看具体是哪一周
+    gridEl.addEventListener('click', (e) => {
+      const cell = e.target.closest('.cell');
+      if (cell) selectCell(cell);
+    });
+
+    // 第一次来：提示改年份，桌面直接把输入框内容选中
+    if (!savedOk) {
+      hintEl.className = 'hint info';
+      hintEl.textContent = '默认 2000 年，改成你自己的。';
+      if (window.matchMedia('(hover: hover) and (pointer: fine)').matches) {
+        birthEl.focus();
+        birthEl.select();
+      }
+    }
+
+    // 输满四位就自动更新，不必点按钮
+    let typing = null;
+    birthEl.addEventListener('input', () => {
+      clearTimeout(typing);
+      typing = setTimeout(() => {
+        if (/^\d{4}$/.test(birthEl.value.trim())) apply();
+      }, 550);
+    });
+
+    applyEl.addEventListener('click', apply);
+    birthEl.addEventListener('keydown', (e) => {
+      if (e.key === 'Enter') apply();
+    });
+
+    document.getElementById('print').addEventListener('click', () => window.print());
+
+    const params = new URLSearchParams(location.search);
+    if (params.get('full_screen') === 'true') {
+      for (const sel of ['header', '.controls', '.summary', '.peek', '.legend', '.links']) {
+        const el = document.querySelector(sel);
+        if (el) el.hidden = true;
+      }
+    }
+
+    window.addEventListener('keydown', (e) => {
+      if ((e.metaKey || e.ctrlKey) && (e.key === 'e' || e.key === 'E')) {
+        params.set('full_screen', 'true');
+        location.search = params.toString();
+      }
+    });
+  }
+
+  if (document.readyState === 'loading') {
+    document.addEventListener('DOMContentLoaded', init);
+  } else {
+    init();
+  }
+})();
+</script>
 </body>
 
 </html>
