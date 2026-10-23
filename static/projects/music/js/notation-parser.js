@@ -50,6 +50,9 @@ function parseNotation(source) {
       continue;
     }
 
+    // 段标记行 {1} {2} …：只用于分谱行，不进 token 流
+    if (/^\{[^}]*\}$/.test(line)) continue;
+
     // 谱行
     const tokens = line.split(/\s+/);
     const parsed = [];
