@@ -72,6 +72,9 @@ RendererAdapter.register('simple-notation', {
 
 function renderSN(container, score) {
   try {
+    // 懒加载时容器里会有「加载简谱引擎…」文本，SN 只 append 不清理 → 必须先清掉
+    container.replaceChildren();
+
     const sn = new SN.SimpleNotation(container, {
       resize: true,
       debug: false,
@@ -95,6 +98,18 @@ function renderSN(container, score) {
       lyric: ''
     });
 
+    // SN 用 time 当每小节拍数（不能对调），但拍号文案显示成 beat/time，这里改回 time/beat。
+    // 渲染是异步的，等两帧再改。
+    const wrong = `${score.beat}/${score.time}`;
+    const right = `${score.time}/${score.beat}`;
+    if (wrong !== right) {
+      requestAnimationFrame(() => requestAnimationFrame(() => {
+        container.querySelectorAll('svg text').forEach(t => {
+          if (t.textContent === wrong) t.textContent = right;
+        });
+      }));
+    }
+
     return container;
   } catch (e) {
     container.textContent = '渲染错误: ' + e.message;
@@ -103,6 +118,9 @@ function renderSN(container, score) {
 }
 
 // 通用 score data → simple-notation 文本格式
+// SN 语法约束（实测 2026-10-23）：
+//   时值修饰必须写在八度符号之前 —— `4/8'` 对，`4'/8` 会被判错（整小节变红）
+//   `-` 不是后缀，要当成独立元素用逗号分隔 —— `3,-` = 3 延长一拍
 function buildSNScoreString(staves) {
   return staves.map((stave, i) => {
     const measures = stave.measures.map(m =>
@@ -113,17 +131,17 @@ function buildSNScoreString(staves) {
 }
 
 function noteToSN(n) {
+  const dur = n.beamed === 1 ? '/8' : n.beamed === 2 ? '/16' : '';
+  const ext = n.durationExt > 0 ? ',-'.repeat(n.durationExt) : '';
+
   if (n.type === 'note') {
-    let s = '' + n.pitch;
+    let s = '' + n.pitch + dur;
     if (n.octave > 0) s += "'".repeat(n.octave);
-    else if (n.octave < 0) s += ",".repeat(Math.abs(n.octave));
+    else if (n.octave < 0) s += ','.repeat(Math.abs(n.octave));
     if (n.dotted) s += '.';
-    if (n.beamed === 1) s += '/8';
-    else if (n.beamed === 2) s += '/16';
-    if (n.durationExt > 0) s += '-'.repeat(n.durationExt);
-    return s;
+    return s + ext;
   }
-  if (n.type === 'rest') return '0';
+  if (n.type === 'rest') return '0' + dur + ext;
   if (n.type === 'tie') return '-';
   return '';
 }

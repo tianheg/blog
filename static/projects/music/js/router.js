@@ -44,6 +44,9 @@ function navigate(view, params = {}) {
       break;
   }
 
+  // 宽度按视图分档：列表页保持窄列，详情页才需要铺开乐谱
+  document.body.dataset.view = view;
+
   content.scrollIntoView({ behavior: 'smooth', block: 'start' });
   updateTitle(view, params);
 
