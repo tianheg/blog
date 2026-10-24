@@ -220,6 +220,13 @@ org2site--index-title 取；#+NOEXPORT: t 的文件也不发布。"
   (format "<p class=\"src-link\"><a href=\"%s.org\">源文（.org）</a></p>\n"
           (directory-file-name url)))
 
+(defun org2site-source-link-page-p (page)
+  "这篇页面是否该在末尾挂「源文（.org）」链接。
+只挂 posts / til 下的页面。根页面（about / search / watch / links …）是站点功能性页面，
+挂源文对读者没意义。注意 /posts/2019/ 这类年份页是用户自己写的年度流水，**要挂**
+（用户 2026-10-24 定）。"
+  (member (nth 3 page) '("posts" "til")))
+
 ;; ------------------------------------------------------------ 站点级页面
 
 (defun org2site-entries-html (pages)
@@ -1246,14 +1253,21 @@ stroke-linecap=\"round\" stroke-linejoin=\"round\" aria-hidden=\"true\">\
                                            url org2site--backlink-idx
                                            org2site--backlink-pages)
                                         "")))
-                   ;; 每篇正文末尾指向自己的 .org 源文（文件同批写进产物，见下）
-                   (body (concat body (org2site-source-link-html url)))
+                   ;; 每篇正文末尾指向自己的 .org 源文（文件同批写进产物，见下）。
+                   ;; **只挂内容单页（posts / til 正文）** —— 判定见
+                   ;; org2site-source-link-page-p：根页面与年份归档页都不挂（用户 2026-10-24 定）。
+                   (body (concat body (if (org2site-source-link-page-p p)
+                                          (org2site-source-link-html url)
+                                        "")))
                    ;; 文章页补日期条 + 尾部标签/评论（原站有；til 页没有这两块）
                    (body (if (string= (nth 3 p) "posts") (org2site-post-augment p body) body)))
               (org2site-write out-root url
                               (org2site-page title body (string= (nth 3 p) "til")))
-              ;; 纯文本源文：/posts/foo/ → /posts/foo.org（Content-Type 见 static/_headers）
-              (org2site-write-source out-root url file)
+              ;; 纯文本源文：/posts/foo/ → /posts/foo.org（Content-Type 见 static/_headers）。
+              ;; **只给挂链接的页面写**（posts / til）—— 根页面不挂源文也就没镜像可写，
+              ;; 否则产物里躺着一堆没人引用的孤儿 .org（用户 2026-10-24 定）。
+              (when (org2site-source-link-page-p p)
+                (org2site-write-source out-root url file))
               ;; RSS 只收 posts：原站 index.xml 不含 til（逐条对比 URL 实测确认）
               (when (string= (nth 3 p) "posts")
                 (push (list url title (nth 2 p) (org2site-summary body)) rss-items))
