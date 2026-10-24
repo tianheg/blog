@@ -1,0 +1,86 @@
+#+TITLE: emacs-rime 第一次空格不上屏：commit 丢失与补发
+#+DATE: <2026-10-24 22:42:30>
+#+STATUS: draft
+#+HEADER: Tools
+
+终端 Emacs（~emacs -nw~）里用 emacs-rime 打中文，拼音敲完候选正常显示，但第一次空格不上屏 —— 候选消失了、buffer 仍是空的，要按第二次才出字，而且常常顺带多一个空格。
+
+* 症状容易误导人
+
+第一反应是「屏幕没重绘」，因为观感就是按一下字没了。截屏看候选行确实消失、buffer 也确实是空的。所以不是渲染问题，是字真的没进去。
+
+* 取证：两处证据就能钉死
+
+** recent-keys 里有两个空格
+
+#+BEGIN_SRC emacs-lisp
+(recent-keys)
+;; => ... "n" "i" "h" "a" "o" " " " " "你" ...
+;;                        ↑   ↑
+;;                     空格1 空格2
+#+END_SRC
+
+两个空格都到了 Emacs，说明不是终端层（ConPTY 或系统输入法）吞键。
+
+** 分时点读 librime 状态
+
+打完、第一次空格后、第二次空格后各查一次：
+
+#+BEGIN_SRC emacs-lisp
+(list :input (rime-lib-get-input)
+      :commit (rime-lib-get-commit)
+      :has-comp (rime--has-composition (rime-lib-get-context)))
+#+END_SRC
+
+| 时点       | input   | commit | has-comp | buffer |
+|------------+---------+--------+----------+--------|
+| 打完 nihao | "nihao" | nil    | t        | 空     |
+| 第一次空格 | ""      | nil    | nil      | 空     |
+| 第二次空格 | ""      | nil    | nil      | 你好   |
+
+第一次空格把 composition 清空了，但 commit 仍是 nil —— 字被丢弃。第二次按键时才把 commit 交出来。
+
+* 根因
+
+~rime-input-method~ 的返回值决定插入什么：只有 ~(rime-lib-get-commit)~ 非空时才返回文本，否则走空分支。librime 在这次调用里没给出 commit，Emacs 就什么都不插。
+
+* 修法：空格补发
+
+around advice 挂 ~rime-input-method~：空格且有 composition 时自己 process-key 并取 commit；拿到就用，拿不到立刻补发一次（等于把用户那第二次空格内置掉）。c1 有值时不补发，不会重复提交。
+
+#+BEGIN_SRC emacs-lisp
+(defun my/rime-space-commit-fix (orig key)
+  (if (not (and (equal key 32)
+                (bound-and-true-p rime--lib-loaded)
+                (ignore-errors (rime--has-composition (rime-lib-get-context)))))
+      (funcall orig key)
+    (rime-lib-process-key 32 0)
+    (let ((c1 (ignore-errors (rime-lib-get-commit))))
+      (cond
+       (c1 (rime--clear-overlay) (mapcar #'identity c1))
+       (t
+        (rime-lib-process-key 32 0)
+        (let ((c2 (ignore-errors (rime-lib-get-commit))))
+          (if c2
+              (progn (rime--clear-overlay) (mapcar #'identity c2))
+            (list key))))))))
+
+(advice-add 'rime-input-method :around #'my/rime-space-commit-fix)
+#+END_SRC
+
+* 走错的两条路
+
+- 把空格加进 ~rime-translate-keybindings~ ，让它走 ~rime-send-keybinding~ ：没用，那条路径同样是 process-key 之后立刻取 commit。
+- 判断成「字已进 buffer 只是没重绘」而去加 ~redisplay~ ：错，字根本没进去。
+
+* 测试方法本身的两个坑
+
+- ~tmux send-keys~ 逐字符发键的时序会让 rime 丢 preedit，容易得出「某个配置导致上屏失败」的假结论。造真 pty（~script -qec~ 或 python ~pty.fork~）才准。
+- 不要在 ~emacsclient --eval~ 里跑 ~execute-kbd-macro~ ：它需要命令循环，和 server 的同步请求死锁，会把正在用的 Emacs 卡死。
+
+* 同一轮顺带修掉的两个显示问题
+
+- 候选显示用 ~minibuffer~ 时，候选串一长就撑高 minibuffer，终端里看着像「两层状态栏」。改 ~rime-show-candidate~ 为 ~message~ 走 echo area 单行。
+- zenburn 主题的 ~region~ 背景是 ~#2B2B2B~，默认背景 ~#3F3F3F~，只差一档 —— 终端里选中文本几乎看不出来。TTY 下覆盖成 ~#5F5F5F~ / ~#FFFFEF~ 即可。
+
+来源: [emacs-rime](https://github.com/doglooksgood/emacs-rime)
