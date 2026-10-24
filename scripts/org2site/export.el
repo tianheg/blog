@@ -201,8 +201,31 @@ SHELL/SIDE/RIGHT 见 `org2site--main-html'。"
 ;; 结果 TIL 页里 4/5 级标题整段消失（TOC 和锚点也跟着少 9 个）。
 (setq org-export-headline-levels 6)
 
+;; ---------------------------------------------------------------- 外链新标签页
+
+(defvar org2site-site-hosts '("tianheg.co" "www.tianheg.co")
+  "站内主机名：指向这些域名的绝对链接仍算站内，不新开标签页。")
+
+(defun org2site--external-url-p (url)
+  "URL 是否站外：带 http(s) scheme 且主机不在 `org2site-site-hosts' 里。
+相对路径、锚点、mailto: 一律 false。"
+  (when (string-match "\\`https?://\\([^/?#]+\\)" (or url ""))
+    (not (member (downcase (match-string 1 url)) org2site-site-hosts))))
+
+(defun org2site-link (link desc info)
+  "站外链接一律 target=\"_blank\" + rel=\"noopener noreferrer\"，站内链接原样输出。
+判据用 :raw-link 的主机名（不是导出后的描述文字）；coding 里手写的 HTML 片段
+不经过这里，属已知边界。"
+  (let ((html (org-html-link link desc info)))
+    (if (and (string-match-p "\\`<a " html)
+             (org2site--external-url-p (org-element-property :raw-link link)))
+        (replace-regexp-in-string
+         "\\`<a " "<a target=\"_blank\" rel=\"noopener noreferrer\" " html t t)
+      html)))
+
 (org-export-define-derived-backend 'org2site 'html
   :translate-alist '((plain-text . org2site-plain-text)
+                     (link . org2site-link)
                      (template . org2site-template)
                      (timestamp . org2site-timestamp)))
 
