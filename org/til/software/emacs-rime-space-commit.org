@@ -78,6 +78,30 @@ around advice 挂 ~rime-input-method~：空格且有 composition 时自己 proce
 - ~tmux send-keys~ 逐字符发键的时序会让 rime 丢 preedit，容易得出「某个配置导致上屏失败」的假结论。造真 pty（~script -qec~ 或 python ~pty.fork~）才准。
 - 不要在 ~emacsclient --eval~ 里跑 ~execute-kbd-macro~ ：它需要命令循环，和 server 的同步请求死锁，会把正在用的 Emacs 卡死。
 
+* 补充：真正丢字的那条路径（诊断配置引入）
+
+排查到最后确认了一个丢字机制，值得单独记 —— 它是我为了「绕开两次空格」做的实验，结果自己造成了稳定复现的丢字。
+
+~rime-send-keybinding~ 的代码：
+
+#+BEGIN_SRC emacs-lisp
+(rime-lib-process-key key mask)
+;; 只在 input 已空时才去取 commit
+(when (string-blank-p (rime-lib-get-input))
+  (-some-> (rime-lib-get-commit) (insert)))
+(rime--redisplay)
+#+END_SRC
+
+空格选字后 librime 的 ~get_input~ 并不立刻变空，于是 ~string-blank-p~ 为假，整个取 commit 的分支被跳过 —— 字就丢了。第二次按键时 input 才空，这时才取到值上屏。
+
+所以把空格加进 ~rime-translate-keybindings~ 不但没修好，反而让「按两次」变成稳定可复现。
+
+* 调查边界
+
+把配置原样还原到最初那版（~minibuffer~ 候选、默认 preedit、摘掉补发 advice）后，实测一次空格就上屏 —— 最初那次的触发条件已经无法回溯：当时没留日志，而且同一时刻有两个 Emacs 实例在跑（配置刚改过）。
+
+剩下的推测是「配置已改、进程没重载」这类时间窗，但没有证据，不写进结论。若再出现，先用 ~emacsclient~ 读 ~rime-lib-get-commit~ 的返回值再判断，不要先怀疑显示层。
+
 * 同一轮顺带修掉的两个显示问题
 
 - 候选显示用 ~minibuffer~ 时，候选串一长就撑高 minibuffer，终端里看着像「两层状态栏」。改 ~rime-show-candidate~ 为 ~message~ 走 echo area 单行。
