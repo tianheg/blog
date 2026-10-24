@@ -213,6 +213,11 @@ wikilink 依次按 *文件名 → 完整标题 → 标题主名（=——=/=：=
 引用它的那句话（linked mention），超过 6 条折叠。解析直接复用导出层的 =org2site--wikilink-url=，
 所以反链与页面里真实渲染出来的链接永远一致。
 
+*外链*：正文里的站外链接（=http(s)://= 且主机不在 =tianheg.co=）一律
+=target="_blank" rel="noopener noreferrer"=，在新标签页打开；站内链接（相对路径、锚点、
+=mailto:=、指向本站域名的绝对链接）保持原样。判定在导出层 =org2site-link=，按链接元素的
+=:raw-link= 主机名判断，不改内容。代码块里手写的 =<a>= 与 =static/= 下的手写 HTML 页面不经过这里。
+
 *仍然没有*：链接悬浮预览（=PagePreview.ts= 已随 Hugo 管线删除）、=/graph/= 图谱页（线上 404）。
 
 *** TIL 引用来源格式
@@ -360,9 +365,11 @@ node scripts/check.mjs external --refresh-dead --recheck-verified   # 强制重�
 | 语义索引   | =static/pagefind-semantic/=       | =embeddings.bin=，周一 04:00 cron 重建，进 git |
 | RSS        | =public/index.xml=                | 全站 feed（最近 20 条）                       |
 | sitemap    | =public/sitemap.xml=              | 全站 URL 清单                                 |
-| 纯文本源文 | =public/<页面路径>.org=           | 每页的 org 原文（照搬，不改字节）；页面末尾有链接 |
+| 纯文本源文 | =public/{posts,til}/**=          | =posts= / =til= 页的 org 原文（照搬，不改字节）；页面末尾有链接 |
 
-*纯文本源文*：=/posts/2019/= → =/posts/2019.org=，1546 页各一份。Content-Type 由
+*纯文本源文*：=/posts/2019/= → =/posts/2019.org=，=posts= / =til= 共 1511 页各一份。
+只给这两类页面出（判定 =org2site-source-link-page-p=）：根页面（about / search / watch…）
+是站点功能性页面，不挂源文链接、也不写镜像。Content-Type 由
 =static/_headers= 的 =/*.org= 规则强制 =text/plain; charset=utf-8= —— 不强制的话
 CF 会按 latin-1 解码，中文全乱码。用途是给阅读器 / 爬虫 / LLM 直接读原文。
 
