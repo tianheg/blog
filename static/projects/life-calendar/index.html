@@ -436,11 +436,24 @@
   }
 
   // ---- 每格给一句「第几年第几周」，桌面悬停可见 ----
+  // 第 N 格 = 满 N 岁那一年：y=0 是 1 岁，对应 birthYear + 1
+  // 日期取该 ISO 周的周一（本年第 w+1 周的星期一）
+
+  function isoWeekMonday(year, week) {
+    // ISO 第 1 周 = 含 1 月 4 日的那一周
+    const jan4 = new Date(Date.UTC(year, 0, 4));
+    const day = jan4.getUTCDay() || 7;                 // 周一=1 … 周日=7
+    const week1 = new Date(jan4);
+    week1.setUTCDate(jan4.getUTCDate() - (day - 1));   // 第 1 周的周一
+    const d = new Date(week1);
+    d.setUTCDate(week1.getUTCDate() + (week - 1) * 7);
+    return d;
+  }
 
   function setTitles(birthYear) {
     for (let y = 0; y < YEARS; y++) {
       for (let w = 0; w < WEEKS; w++) {
-        const d = new Date(Date.UTC(birthYear + y, 0, 1 + w * 7));
+        const d = isoWeekMonday(birthYear + y + 1, w + 1);
         const iso = d.toISOString().slice(0, 10);
         cells[y * WEEKS + w].title = `第 ${y + 1} 年 · 第 ${w + 1} 周 · ${iso}`;
       }
@@ -508,7 +521,7 @@
     const w = +el.dataset.w;
     const idx = y * WEEKS + w;
     const lived = weeksLived(currentBirth);
-    const d = new Date(Date.UTC(currentBirth + y, 0, 1 + w * 7));
+    const d = isoWeekMonday(currentBirth + y + 1, w + 1);
     const iso = d.toISOString().slice(0, 10);
     const state = idx === lived - 1 ? '本周' : (idx < lived ? '已经过去' : '还没到');
 
