@@ -7,8 +7,8 @@
 
 ** 闭着的 details 照样占位（Chrome 26x 实测）
 
-给 `<details>` 的 `summary` 加了自定义样式（flex 布局、伪元素箭头）之后，折叠状态下的子元素仍然参与
-布局：`details.open === false`，但里面一个按钮的 `getBoundingClientRect()` 返回 122×44，和展开时一样。
+给 ~<details>~ 的 ~summary~ 加了自定义样式（flex 布局、伪元素箭头）之后，折叠状态下的子元素仍然参与
+布局：~details.open~ 仍是 ~false~，但里面一个按钮的 ~getBoundingClientRect()~ 返回 122×44，和展开时一样。
 表现是「其它操作」里的按钮全部露在外面，折叠等于没做。
 
 修法是一行 CSS，别指望浏览器的默认样式兜住：
@@ -17,19 +17,19 @@
 details:not([open]) > .body{display:none}
 #+END_SRC
 
-教训是验收方法：**别只读 `d.open`**，要量子元素尺寸——`getBoundingClientRect().height > 0` 才算真隐藏。
+教训是验收方法：**别只读 ~d.open~**，要量子元素尺寸——~getBoundingClientRect().height > 0~ 才算真隐藏。
 
 ** 媒体查询里的选择器权重比主规则低，就静默不生效
 
-桌面规则写 `ul.h li{grid-template-columns:92px 51px 1fr auto}`（权重 0,1,2），
-媒体查询里写 `.h li{grid-template-columns:1fr auto}`（权重 0,1,1）。后者被前者压掉，
+桌面规则写 ~ul.h li{grid-template-columns:92px 51px 1fr auto}~（权重 0,1,2），
+媒体查询里写 ~.h li{grid-template-columns:1fr auto}~（权重 0,1,1）。后者被前者压掉，
 手机上仍然套四列网格，列表被挤成两三行：实测行高 96–117px 参差不齐，而正确应为统一的 78px。
 
-同类症状还有一个更隐蔽的版本：`auto` 那一列在子元素被挤到换行后算出 0px，四列变成
-`92px 51px 147px 0px`，操作按钮跑到第二行最左边，一眼看去像「随机错位」。
+同类症状还有一个更隐蔽的版本：~auto~ 那一列在子元素被挤到换行后算出 0px，四列变成
+~92px 51px 147px 0px~，操作按钮跑到第二行最左边，一眼看去像「随机错位」。
 
-判据一样是量出来：`getComputedStyle(li).gridTemplateColumns` 应该等于你期望的轨道数，
-媒体查询里把选择器写成和主规则同权重（`ul.h li`）即可。
+判据一样是量出来：~getComputedStyle(li).gridTemplateColumns~ 应该等于你期望的轨道数，
+媒体查询里把选择器写成和主规则同权重（~ul.h li~）即可。
 
 ** 一条通用纪律
 
