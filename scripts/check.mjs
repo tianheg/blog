@@ -761,7 +761,7 @@ function curlProbe(url, method, { noproxy = false, plain = false } = {}) {
   });
 }
 
-// 502/503 是网关层报错：本机出口走 mihomo（192.168.8.11:7892），代理到不了
+// 502/503 是网关层报错：本机出口走 mihomo（内网代理地址，不公开），代理到不了
 // 上游时会直接吐 502，跟源站死活无关 —— 这类不能判死，只能算「到不了」
 const GATEWAY_STATUS = new Set([502, 503]);
 // 反爬专门用 405/406/412 打发非浏览器客户端（doi.org、searchfox 都这样）——
