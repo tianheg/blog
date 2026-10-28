@@ -322,7 +322,7 @@ node scripts/embed.mjs
 
 - 请求带真实 Chrome（Windows）指纹（UA + Sec-CH-UA + Sec-Fetch-* + Referer），避免被 WAF 当爬虫； HEAD 先行，HEAD 不干净或结果为 4xx 时用 GET 复核，405/406/412 这类反爬响应再换朴素 Accept 重试一次
 - 传输层用 *curl* 而不是 Node 内置 fetch ------ 本机（PVE + Tailscale MagicDNS + CGNAT）跑 undici 会大批 =UND_ERR_CONNECT_TIMEOUT=，同一批 URL curl 秒开。别改回 undici
-- 本机出口走 mihomo（=http_proxy=192.168.8.11:7892=），代理到不了上游时会直接吐 502 ------ 那是网关的锅， 跟源站死活无关，脚本会再试直连，仍不通归入「到不了」，不判死
+- 本机出口走 mihomo（=http_proxy=<内网代理地址>:7892=），代理到不了上游时会直接吐 502 ------ 那是网关的锅， 跟源站死活无关，脚本会再试直连，仍不通归入「到不了」，不判死
 - *已确认非死链账本* =~/.cache/blog-external-links/verified.txt= —— **不在仓库里**（2026-10-19 迁出）：探测到 2xx 即自动记一行 =YYYY-MM-DD <URL>=，之后默认跳过探测，报告末尾单列「✅ 已确认非死链」区；超 90 天自动复核，复核发现已死的撤下账本并照常报警。机器维护 + 每次扫描都可能改写（4300+ 行），放仓库里只会产生 commit 噪声；=BLOG_EXTERNAL_LEDGER= 可覆盖路径
 - 已知被 WAF 挡死 / 有意保留的历史链接写进 =scripts/data/external-link-ignore.txt=（一行一条，子串匹配）
 - 缓存与进度在 =.hermes/external-links/cache.json=（不进版本控制）；死链会顺带查 Wayback 存档

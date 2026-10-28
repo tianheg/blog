@@ -12,7 +12,7 @@
  * 「相关笔记（语义相似）」数据没有任何消费者（build.el / worker.js 都不读，
  * 页面也不渲染），却每周被重算并 commit 一次。要恢复见 git 历史。
  *
- * 凭据：CF_API_TOKEN env，或 /root/.hermes/secrets/pve.env（secrets-helper.sh 读取）。
+ * 凭据：CF_API_TOKEN env，或 ~/.hermes/secrets/<env 文件>（secrets-helper.sh 读取）。
  */
 import {
   readFileSync, writeFileSync, mkdirSync, existsSync,
@@ -61,7 +61,7 @@ switch (SUB) {
  * Requires a Cloudflare API token with Workers AI access
  * (permission: Account → Workers AI → Read; account ACCOUNT_ID below):
  *   - env CF_API_TOKEN, or
- *   - CF_API_TOKEN in the local secrets store (/root/.hermes/secrets/pve.env),
+ *   - CF_API_TOKEN in the local secrets store (~/.hermes/secrets/<env file>),
  *     read via ~/.hermes/scripts/secrets-helper.sh (Infisical retired 2026-09-30)
  *
  * Do NOT reintroduce a "scrape a Bearer token out of ~/.hermes/config.yaml"
@@ -207,7 +207,7 @@ const SECRETS_HELPER = join(process.env.HOME || '/root', '.hermes', 'scripts', '
 async function getApiToken() {
   if (process.env.CF_API_TOKEN) return process.env.CF_API_TOKEN;
 
-  // Fallback: CF_API_TOKEN from the local secrets store (/root/.hermes/secrets/
+  // Fallback: CF_API_TOKEN from the local secrets store (~/.hermes/secrets/
   // pve.env), read through the shared helper (default output = all keys as
   // KEY=value lines; only the CF_API_TOKEN line is used, never logged).
   // Never scrape ~/.hermes/config.yaml for a Bearer token — see the header.
@@ -226,7 +226,7 @@ async function getApiToken() {
   throw new Error(
     'No Cloudflare API token with Workers AI access found. Fix one of:\n' +
     '  a) put it in the local secrets store (picked up automatically next run):\n' +
-    '       /root/.hermes/secrets/pve.env  →  CF_API_TOKEN=<token>   (mode 600)\n' +
+    '       ~/.hermes/secrets/<env file>  →  CF_API_TOKEN=<token>   (mode 600)\n' +
     '     token needs: Account → Workers AI → Read  (account ' + ACCOUNT_ID + ')\n' +
     '  b) one-off run:  CF_API_TOKEN=<token> npm run embed\n' +
     '(note: Infisical was retired 2026-09-30 — the store is pve.env now,\n' +

@@ -22,7 +22,7 @@ import sys
 
 BLOG = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 MANIFEST = os.path.join(BLOG, "data", "photos-list.yaml")  # 与派生 photos.json 不能同基名（Hugo 合并会炸）
-INDEX = "/root/projects/img/source/.index.json"
+INDEX = os.path.expanduser("~/projects/img/source/.index.json")
 STUB_DIR = os.path.join(BLOG, "org", "photos")  # 合集子页（org/photos/<编号>.org，content/ 已下线）
 STUB_TMPL = "#+TITLE: {name}\n#+SERIES: {name}\n#+DESCRIPTION: 系列\n\n"
 
