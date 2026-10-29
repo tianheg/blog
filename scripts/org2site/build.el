@@ -1132,27 +1132,15 @@ org 自己会把时长写在 => 后面（如 `=>  1:30`），直接读它比再�
           (format "[tianheg.co] Re: %s" (org2site--uri-encode title))))
 
 (defun org2site--comments-html (p)
-  "评论区（原站用自托管 Artalk，脚本与样式由 Worker 反代 /dist/*）。"
-  (let ((url (format "https://tianheg.co%s" (nth 0 p))))
-    (concat "<section id=\"comments\" class=\"post-comments\">\n"
-            "<h2 class=\"post-comments-head\">"
-            "<svg viewBox=\"0 0 24 24\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"2\" \
+  "评论区外壳 —— Artalk 已下线（2026-10-29 起 comments.tianheg.co 不再对外），只留邮件回复。"
+  (concat "<section id=\"comments\" class=\"post-comments\">\n"
+          "<h2 class=\"post-comments-head\">"
+          "<svg viewBox=\"0 0 24 24\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"2\" \
 stroke-linecap=\"round\" stroke-linejoin=\"round\" aria-hidden=\"true\">\
 <path d=\"M7.9 20A9 9 0 104 16.1L2 22z\"/></svg>"
-            "<span>Comments</span></h2>\n"
-            (org2site--mailto-reply-html (nth 1 p))
-            "<div id=\"Comments\"></div>\n</section>\n"
-            "<link rel=\"stylesheet\" href=\"/dist/Artalk.css\">\n"
-            "<script src=\"/dist/Artalk.js\"></script>\n"
-            "<script>\n(function(){var e=document.documentElement,t=Artalk.init({el:\"#Comments\","
-            "pageKey:" (concat "\"" url "\"") ",pageTitle:"
-            (let ((json (json-encode (nth 1 p)))) json)
-            ",server:\"\",site:\"Tianhe Gao\",darkMode:e.classList.contains(\"dark\")}),"
-            "n=function(){t.setDarkMode(e.classList.contains(\"dark\"))},"
-            "s=e.classList.contains(\"dark\");t.on(\"mounted\",n),"
-            "new MutationObserver(function(){var t=e.classList.contains(\"dark\");"
-            "if(t===s)return;s=t,n()}).observe(e,{attributes:!0,attributeFilter:[\"class\"]})})()\n"
-            "</script>\n")))
+          "<span>Comments</span></h2>\n"
+          (org2site--mailto-reply-html (nth 1 p))
+          "</section>\n"))
 
 (defun org2site-post-augment (p body)
   "文章页补两处（原站有、我们原来没有）：h1 下方的日期条 + 尾部的分割线/标签/评论区。"

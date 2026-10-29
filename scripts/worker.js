@@ -26,23 +26,13 @@ const PHOTO_CACHE = 'public, max-age=86400, stale-while-revalidate=604800';
 const EMBEDDING_MODEL = '@cf/baai/bge-m3';
 const EMBEDDING_DIM = 1024;
 const MAX_RESULTS = 10;
-const COMMENTS_BACKEND = 'https://comments.tianheg.co';
-// 允许通过 worker 访问 API 的来源（同站 + 本地开发）；有 Origin 走白名单，无 Origin 用 Sec-Fetch-Site 挡跨站（见 originAllowed）
+// 允许通过 worker 访问 API 的来源（同站 + 本地开发）；只有白名单来源回显 CORS 头
 const ALLOWED_ORIGINS = [
   'https://tianheg.co',
   'https://www.tianheg.co',
   'http://localhost:1313',
   'http://127.0.0.1:1313',
 ];
-
-function originAllowed(request) {
-  const origin = request.headers.get('Origin');
-  if (origin) return ALLOWED_ORIGINS.includes(origin);
-  // 同域 GET fetch 不带 Origin —— 评论同域反代上线后 Artalk 的 GET /api/v2/conf 被 403 挡死、
-  // 「Failed to load comments」的根因。浏览器每次请求都发 Sec-Fetch-Site：同域=same-origin、
-  // 同站=same-site，跨站抓取=cross-site —— 拿它当闸，挡住跨站滥用，放行同域常规请求。
-  return request.headers.get('Sec-Fetch-Site') !== 'cross-site';
-}
 
 // 按来源回显 CORS 头；非白名单来源不加 CORS（浏览器跨站调用拿不到响应）
 function corsFor(request) {
@@ -197,19 +187,6 @@ export default {
       }
     }
 
-    // Comments API proxy — same-origin, no CORS needed
-    // Artalk 实际用的是 `${server}/api/v2/*`（baseURL 见 bundle），旧的 /api/comment 留作兼容
-    if (url.pathname.startsWith('/api/v2/') || url.pathname === '/api/comment') {
-      return proxyComments(request, url);
-    }
-    if (url.pathname.startsWith('/comments/')) {
-      return proxyComments(request, url);
-    }
-    // Artalk static assets proxy (same-origin)
-    if (url.pathname.startsWith('/dist/Artalk.')) {
-      return proxyArtalkAsset(request, url);
-    }
-
     // 相册图片（逐 key 白名单、只读）—— 走 R2 binding，资产目录里没有这些文件
     if (url.pathname.startsWith('/photos/')) {
       return servePhoto(request, env, url);
@@ -244,37 +221,6 @@ export default {
 };
 
 /** Proxy comment API requests to the backend server */
-async function proxyComments(request, url) {
-  // 只允许白名单来源（同站 + 本地开发）访问评论代理，防跨站滥用
-  if (!originAllowed(request)) {
-    return Response.json({ error: 'Forbidden origin' }, { status: 403 });
-  }
-
-  const backend = COMMENTS_BACKEND + url.pathname + url.search;
-  const headers = new Headers(request.headers);
-  // 清除客户端可控的敏感头，防止伪造转发到后端
-  headers.delete('X-Forwarded-For');
-  headers.delete('Authorization');
-  headers.delete('Cookie');
-  headers.set('X-Forwarded-Host', url.hostname);
-  headers.set('X-Forwarded-Proto', url.protocol);
-
-  const resp = await fetch(backend, {
-    method: request.method,
-    headers,
-    body: request.method === 'POST' ? request.body : undefined,
-  });
-
-  // Copy response and add CORS only for allowed origins (not wildcard)
-  const proxyResp = new Response(resp.body, resp);
-  const cors = corsFor(request);
-  if (cors) {
-    proxyResp.headers.set('Access-Control-Allow-Origin', cors['Access-Control-Allow-Origin']);
-    proxyResp.headers.set('Vary', 'Origin');
-  }
-  return proxyResp;
-}
-
 /** 按扩展名补 Content-Type（对象元数据缺 contentType 时兜底） */
 function photoContentType(key) {
   const ext = key.slice(key.lastIndexOf('.') + 1).toLowerCase();
@@ -320,12 +266,4 @@ async function servePhoto(request, env, url) {
   return new Response(obj.body, { status: 200, headers });
 }
 
-/** Proxy Artalk static assets (JS/CSS) */
-async function proxyArtalkAsset(request, url) {
-  const backend = COMMENTS_BACKEND + url.pathname + url.search;
-  const resp = await fetch(backend);
-  const proxyResp = new Response(resp.body, resp);
-  // Cache for 1 year on CDN
-  proxyResp.headers.set('Cache-Control', 'public, max-age=31536000, immutable');
-  return proxyResp;
-}
+/* Artalk 反代已于 2026-10-29 移除（comments.tianheg.co 下线） */
