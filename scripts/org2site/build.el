@@ -170,7 +170,11 @@ _index.org 是 Hugo 语义里的 section 索引，不是页面 —— 跳过，�
 org2site--index-title 取；#+NOEXPORT: t 的文件也不发布。"
   (let (out)
     (dolist (f (directory-files-recursively org-root "\\.org\\'" nil))
-      (unless (or (string= (file-name-nondirectory f) "_index.org")
+      ;; Emacs 的锁文件（.#foo.org -> user@host.pid）与自动保存（#foo.org#）不是内容页。
+      ;; 上一轮构建被中断时会留下 .# 锁，下一轮若把它当页面读，会以 file-missing 直接崩掉整站构建。
+      (unless (or (string-prefix-p ".#" (file-name-nondirectory f))
+                  (string-prefix-p "#" (file-name-nondirectory f))
+                  (string= (file-name-nondirectory f) "_index.org")
                   (org2site--noexport-p f))
         (let* ((rel (file-relative-name f org-root))
                (noext (file-name-sans-extension rel))
