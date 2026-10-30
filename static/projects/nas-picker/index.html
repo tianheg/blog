@@ -1,0 +1,1090 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<title>NAS / 虚拟化主机选型</title>
+<meta name="description" content="按需求筛平台，按实际价算总账。NAS 与虚拟化主机的选型工具。">
+<style>
+  :root {
+    --bg: #f7f5f3;
+    --fg: #364153;
+    --muted: #646c7c;
+    --line: #e2ddd6;
+    --card: #fff;
+    --accent: #c4622d;
+    --ok: #3d6b4f;
+    --warn: #a8553a;
+    --field: #f1efec;
+  }
+
+  @media (prefers-color-scheme: dark) {
+    :root {
+      --bg: #121c22;
+      --fg: #c8d2dc;
+      --muted: #8b98a5;
+      --line: #243441;
+      --card: #17242c;
+      --accent: #e08050;
+      --ok: #6fa987;
+      --warn: #d98a6a;
+      --field: #1d2c35;
+    }
+  }
+
+  * { box-sizing: border-box; }
+  html { -webkit-text-size-adjust: 100%; }
+
+  body {
+    margin: 0;
+    padding: 0 0 3rem;
+    background: var(--bg);
+    color: var(--fg);
+    font-family: "PingFang SC", "Hiragino Sans GB", "Noto Sans CJK SC",
+      "Source Han Sans SC", "Microsoft YaHei", system-ui, sans-serif;
+    font-size: 16px;
+    line-height: 1.7;
+  }
+
+  .wrap {
+    width: 100%;
+    max-width: 1080px;
+    margin: 0 auto;
+    padding: 0 clamp(0px, 2.5vw, 28px);
+  }
+
+  .num { font-variant-numeric: tabular-nums; }
+
+  header {
+    padding: 2.2rem 0 1.2rem;
+  }
+  h1 {
+    font-size: clamp(1.35rem, 4.5vw, 1.7rem);
+    font-weight: 600;
+    margin: 0 0 .35rem;
+    letter-spacing: -.01em;
+  }
+  .lede {
+    color: var(--muted);
+    font-size: .92rem;
+    margin: 0;
+    max-width: 44em;
+  }
+
+  /* ── 筛选器 ── */
+  .quiz {
+    display: grid;
+    gap: 1px;
+    background: var(--line);
+    border: 1px solid var(--line);
+    margin: 1.6rem 0 2rem;
+  }
+  @media (min-width: 640px) {
+    .quiz { grid-template-columns: 1fr 1fr; }
+  }
+  .q {
+    background: var(--card);
+    padding: .9rem 1rem;
+  }
+  .q > span {
+    display: block;
+    font-size: .78rem;
+    color: var(--muted);
+    margin-bottom: .45rem;
+    letter-spacing: .02em;
+  }
+  .opts { display: flex; flex-wrap: wrap; gap: .4rem; }
+  .opts button {
+    border: 1px solid var(--line);
+    background: transparent;
+    color: var(--fg);
+    font: inherit;
+    font-size: .82rem;
+    padding: .32rem .7rem;
+    border-radius: 3px;
+    cursor: pointer;
+    transition: background .12s, color .12s, border-color .12s;
+  }
+  .opts button:hover { border-color: var(--muted); }
+  .opts button.on {
+    background: var(--accent);
+    border-color: var(--accent);
+    color: #fff;
+  }
+
+  /* ── 平台卡片 ── */
+  .list { display: grid; gap: 1.1rem; }
+
+  .card {
+    background: var(--card);
+    border: 1px solid var(--line);
+    border-radius: 4px;
+    overflow: hidden;
+  }
+  .card.best { border-color: var(--accent); }
+
+  .chead {
+    display: flex;
+    align-items: flex-start;
+    justify-content: space-between;
+    gap: 1rem;
+    padding: 1rem 1rem .7rem;
+  }
+  .ctitle { min-width: 0; }
+  .cname {
+    font-size: 1.02rem;
+    font-weight: 600;
+    margin: 0;
+    display: flex;
+    align-items: center;
+    gap: .5rem;
+    flex-wrap: wrap;
+  }
+  .badge {
+    font-size: .68rem;
+    font-weight: 500;
+    padding: .1rem .42rem;
+    border-radius: 2px;
+    background: var(--accent);
+    color: #fff;
+    letter-spacing: .03em;
+  }
+  .csub {
+    font-size: .82rem;
+    color: var(--muted);
+    margin: .15rem 0 0;
+  }
+  .cprice {
+    text-align: right;
+    flex: 0 0 auto;
+  }
+  .cprice b {
+    display: block;
+    font-size: 1.16rem;
+    font-weight: 600;
+    font-variant-numeric: tabular-nums;
+  }
+  .cprice span {
+    font-size: .7rem;
+    color: var(--muted);
+  }
+
+  .stats {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(84px, 1fr));
+    gap: 1px;
+    background: var(--line);
+    border-top: 1px solid var(--line);
+    border-bottom: 1px solid var(--line);
+  }
+  .stat {
+    background: var(--card);
+    padding: .5rem .6rem;
+  }
+  .stat dt {
+    font-size: .68rem;
+    color: var(--muted);
+    margin: 0;
+    letter-spacing: .02em;
+  }
+  .stat dd {
+    margin: .05rem 0 0;
+    font-size: .84rem;
+    font-weight: 500;
+    font-variant-numeric: tabular-nums;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+  }
+  .stat dd.no { color: var(--warn); }
+  .stat dd.yes { color: var(--ok); }
+
+  .pros {
+    padding: .8rem 1rem .2rem;
+    display: grid;
+    gap: .2rem;
+  }
+  @media (min-width: 720px) {
+    .pros { grid-template-columns: 1fr 1fr; gap: 0 1.2rem; }
+  }
+  .pros ul {
+    margin: 0;
+    padding: 0;
+    list-style: none;
+    font-size: .82rem;
+  }
+  .pros li {
+    padding-left: .95rem;
+    position: relative;
+    margin-bottom: .18rem;
+    color: var(--fg);
+  }
+  .pros li::before {
+    position: absolute;
+    left: 0;
+    color: var(--muted);
+  }
+  .pros .good li::before { content: "+"; color: var(--ok); }
+  .pros .bad li::before { content: "−"; color: var(--warn); }
+  .pros .bad li { color: var(--muted); }
+
+  details.parts {
+    border-top: 1px solid var(--line);
+    margin-top: .7rem;
+  }
+  details.parts > summary {
+    padding: .7rem 1rem;
+    font-size: .82rem;
+    color: var(--muted);
+    cursor: pointer;
+    list-style: none;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+  }
+  details.parts > summary::-webkit-details-marker { display: none; }
+  details.parts > summary::after {
+    content: "+";
+    font-size: 1rem;
+  }
+  details.parts[open] > summary::after { content: "−"; }
+  details.parts > summary:hover { color: var(--fg); }
+
+  .items { border-top: 1px solid var(--line); }
+  .it {
+    display: grid;
+    grid-template-columns: 1fr auto;
+    gap: .1rem .7rem;
+    padding: .55rem 1rem;
+    border-bottom: 1px solid var(--line);
+    align-items: center;
+  }
+  .it:last-child { border-bottom: 0; }
+  .it .n { font-size: .84rem; }
+  .it .s { grid-column: 1; font-size: .72rem; color: var(--muted); }
+  .it .c { grid-column: 2; grid-row: 1/span 2; display: flex; align-items: center; gap: .35rem; }
+  .it input {
+    width: 70px;
+    padding: .3rem .4rem;
+    border: 0;
+    border-radius: 2px;
+    background: var(--field);
+    color: var(--fg);
+    font: inherit;
+    font-size: .8rem;
+    text-align: right;
+    font-variant-numeric: tabular-nums;
+  }
+  .it input:focus { outline: 1.5px solid var(--accent); outline-offset: -1px; }
+  .it input.q { width: 38px; text-align: center; }
+  .it .x { color: var(--muted); font-size: .72rem; }
+
+  .cfoot {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: .7rem 1rem;
+    border-top: 1px solid var(--line);
+    font-size: .82rem;
+  }
+  .cfoot .tb { color: var(--muted); }
+  .cfoot button {
+    border: 1px solid var(--line);
+    background: transparent;
+    color: var(--fg);
+    font: inherit;
+    font-size: .76rem;
+    padding: .3rem .7rem;
+    border-radius: 3px;
+    cursor: pointer;
+  }
+  .cfoot button:hover { border-color: var(--muted); }
+
+  /* ── 参考 ── */
+  .refs { margin-top: 3rem; }
+  .refs h2 {
+    font-size: .95rem;
+    font-weight: 600;
+    margin: 0 0 .8rem;
+    color: var(--muted);
+    letter-spacing: .04em;
+    text-transform: uppercase;
+  }
+  .refs details {
+    border-top: 1px solid var(--line);
+  }
+  .refs details:last-child { border-bottom: 1px solid var(--line); }
+  .refs summary {
+    padding: .8rem 0;
+    cursor: pointer;
+    list-style: none;
+    font-size: .9rem;
+    display: flex;
+    justify-content: space-between;
+  }
+  .refs summary::-webkit-details-marker { display: none; }
+  .refs summary::after { content: "+"; color: var(--muted); }
+  .refs details[open] summary::after { content: "−"; }
+  .refs .body {
+    padding: 0 0 1rem;
+    font-size: .86rem;
+    color: var(--muted);
+    max-width: 62em;
+  }
+  .refs .body p { margin: 0 0 .6rem; }
+  .refs .body strong { color: var(--fg); font-weight: 600; }
+  .refs .body code {
+    font-family: ui-monospace, SFMono-Regular, Menlo, monospace;
+    font-size: .88em;
+    background: var(--field);
+    padding: .05rem .3rem;
+    border-radius: 2px;
+  }
+
+  footer.note {
+    margin-top: 2.4rem;
+    font-size: .76rem;
+    color: var(--muted);
+    border-top: 1px solid var(--line);
+    padding-top: 1rem;
+    max-width: 62em;
+  }
+</style>
+</head>
+
+<body>
+<div class="wrap">
+
+<header>
+  <h1>NAS / 虚拟化主机选型</h1>
+  <p class="lede">先按需求筛平台，再按你查到的实际价算总账。默认价是 2026-10 的二手行情中位价，全部可改。</p>
+</header>
+
+<section class="quiz" id="quiz"></section>
+
+<section class="list" id="list"></section>
+
+<section class="refs">
+  <h2>选型判据</h2>
+
+  <details>
+    <summary>芯片组 ≠ 主板规格</summary>
+    <div class="body">
+      <p>网口数、SATA 数、M.2 数全由板厂决定，芯片组只规定上限。同一颗 B365，一块 ITX 板可能是 4 SATA + 单千兆，另一块 mATX 能给 6 SATA + 双 M.2。看到「某芯片组有双 2.5G」先确认型号。</p>
+    </div>
+  </details>
+
+  <details>
+    <summary>LGA1151 分两代，插槽相同不代表兼容</summary>
+    <div class="body">
+      <p><strong>100/200 系</strong>（H110、B150、Z170、B250、Z270、H270）只支持 6/7 代；<strong>300 系</strong>（H310、B360、B365、H370、Q370、Z370、Z390、C246）支持 8/9 代。物理插槽一样、针脚定义不同。二手 B250 便宜但点不亮 8 代。</p>
+    </div>
+  </details>
+
+  <details>
+    <summary>核显硬解按代际分档，不按 CPU 型号</summary>
+    <div class="body">
+      <p><strong>Gen 9.5</strong>（7 代起）：HEVC 8/10bit 编解码、VP9 解码。<br>
+      <strong>Gen 12</strong>（11 代起 UHD 770 / Iris Xe）：加 AV1 解码。<br>
+      <strong>Gen 12.5</strong>（Arc A 系列独显）：AV1 编解码，双 MFX 引擎。<br>
+      <strong>Gen 12.7</strong>（14 代移动 / Core Ultra）：核显才有 AV1 编码。</p>
+      <p>8/9 代的 i3/i5/i7 全是 UHD 630，硬解能力完全相同——挑 CPU 时不要为「硬解更好」加钱。</p>
+    </div>
+  </details>
+
+  <details>
+    <summary>内存类型的价差会改写平台选择</summary>
+    <div class="body">
+      <p>DDR4 有两种 ECC：<strong>ECC UDIMM</strong>（工作站条，C246/AM4 用）和 <strong>REG ECC RDIMM</strong>（服务器条，X99/EPYC 用），电气不兼容。</p>
+      <p>停产后 ECC UDIMM 存量少、单位容量成本明显高于 REG ECC——后者是服务器拆机的主力货源。要 ECC + 大内存时，E5/EPYC 每 GB 成本远低于 C246 路线。这一项常比 CPU 与主板的差价更影响总预算。</p>
+    </div>
+  </details>
+
+  <details>
+    <summary>PVE 与大小核</summary>
+    <div class="body">
+      <p>12/13 代混合架构在 PVE 自定义内核上有过「开 E 核直接启动失败」的报告，换发行版内核就正常。可用方案是 PVE 7.3+ 的核心绑定，把 VM 钉在 P 核或 E 核，但要写脚本维护。</p>
+      <p>纯大核平台（Xeon E、E5、EPYC）没有这些问题。追求「装完不想动」时，这一条比多两个核更有价值。</p>
+    </div>
+  </details>
+
+  <details>
+    <summary>虚拟化的四个硬指标</summary>
+    <div class="body">
+      <p><strong>线程数比核心数重要。</strong>6C6T 意味着最多 6 个 vCPU 不超卖；K8s 最小集群 3 master + 3 worker 每台 2 核 = 12 vCPU，6 线程平台必须超卖两倍。</p>
+      <p><strong>PCIe lane 决定扩展上限。</strong>消费级与 Xeon E 都是 16 条，E5 单路 40 条，EPYC 128 条。</p>
+      <p><strong>IOMMU 分组决定能不能直通。</strong>Intel 通常比 AMD 干净，AMD 常有「一个组里塞多个设备」，要靠 ACS override 补丁。</p>
+      <p><strong>IPMI 是折腾虚拟化时性价比最高的功能</strong>——远程装系统、改 BIOS、调风扇全靠它。</p>
+    </div>
+  </details>
+
+  <details>
+    <summary>机箱 → 盘位 → 板型的倒推顺序</summary>
+    <div class="body">
+      <p>先定要几个盘位，再按盘位挑机箱，然后看机箱支持什么板型，最后定主板。ITX 170×170、mATX 244×244、ATX 305×244。</p>
+      <p>NAS 小机箱（10–20L）基本只吃 ITX/mATX，换 ATX 板就要跳到 40L 级。反过来先定主板，经常发现盘位和尺寸对不上。</p>
+    </div>
+  </details>
+
+  <details>
+    <summary>二手件验货要点</summary>
+    <div class="body">
+      <p><strong>CPU</strong>：核对 SSPEC；LGA 底面是平的镀金焊盘，没有针脚（针在主板插槽）；绿斑或裸铜色＝镀金层已破，不可逆。</p>
+      <p><strong>主板</strong>：先看插槽针（歪一根可能丢一路内存通道）；再数 SATA 口卡扣；再查电容鼓包、CMOS 电池电压、I/O 挡板是否原配；二手服务器板务必确认 BIOS 版本和 IPMI 能登录。</p>
+      <p><strong>内存</strong>：X99/EPYC 只吃 REG ECC RDIMM，C246 吃 ECC UDIMM，两者插不上。买同型号同批次。</p>
+      <p><strong>硬盘</strong>：二手必须 CMR（避开 SMR）、企业盘、通电 &lt; 20000 小时，且 SMART 五项关键指标（5/187/197/198/199）全为 0。</p>
+    </div>
+  </details>
+</section>
+
+<footer class="note">
+  价格默认值来自 2026-10 的二手行情抓取，仅作参考；修改后会存在本机浏览器里。平台参数取自 Intel/AMD/超微官方规格页。
+</footer>
+
+</div>
+
+<script>
+(function () {
+  "use strict";
+
+  var KEY = "nas-picker-v1";
+
+  /* ─────────── 平台数据 ─────────── */
+  var PLATFORMS = [
+    {
+      id: "e5",
+      name: "E5 v4 平台",
+      tag: "多核最便宜",
+      sub: "LGA2011-3 · C612 · 二手洋垃圾",
+      cpu: "E5-2690 v4",
+      cpuNote: "14C28T · 135W · 无核显",
+      mb: "超微 X10SRL-F",
+      mbNote: "ATX · 10×SATA · 40 lane · IPMI",
+      stats: {
+        cores: "14C / 28T",
+        tdp: "135W",
+        igpu: "无",
+        av1: "无",
+        ecc: "REG ECC",
+        lane: "40",
+        size: "40L",
+        ipmi: "有"
+      },
+      flags: { igpu: false, av1: false, ecc: "reg", ipmi: true, small: false, threads: 28, tdp: 135, needGpu: true },
+      good: [
+        "40 条 PCIe：HBA、万兆、硬解卡可以同时插",
+        "REG ECC 内存单位容量成本最低（128G 是四条 32G）",
+        "CPU 加主板不到 ¥700，整机预算能压到内存和硬盘上"
+      ],
+      bad: [
+        "没有核显，影音硬解必须加独立显卡",
+        "135W TDP，整机待机 50–60W",
+        "平台 2022 年停更，微码不再更新；主板几乎全是退役拆机件"
+      ],
+      items: [
+        { n: "CPU", s: "E5-2690 v4 · 14C28T · 135W", p: 55, q: 1 },
+        { n: "主板", s: "超微 X10SRL-F · 10×SATA · IPMI", p: 630, q: 1 },
+        { n: "内存", s: "DDR4-2400 REG ECC 32G", p: 499, q: 4 },
+        { n: "显卡", s: "Arc A380 · AV1 编解码", p: 729, q: 1 },
+        { n: "机箱", s: "银欣 CS380 · 8 盘热插拔", p: 385, q: 1 },
+        { n: "电源", s: "650W 80PLUS 金牌 ATX", p: 142, q: 1 },
+        { n: "散热器", s: "LGA2011-3 塔式", p: 45, q: 1 },
+        { n: "硬盘", s: "4T 3.5\" CMR", p: 435, q: 4, tb: 4 },
+        { n: "PCIe 转 M.2", s: "主板无 M.2 槽", p: 80, q: 2 },
+        { n: "SATA 线", s: "侧弯头", p: 5, q: 4 }
+      ]
+    },
+    {
+      id: "e246",
+      name: "Xeon E + C246",
+      tag: "一体化甜点",
+      sub: "LGA1151 · C246 · 8/9 代 Core + Xeon E",
+      cpu: "Xeon E-2278G",
+      cpuNote: "8C16T · 80W · UHD P630",
+      mb: "华硕 WS C246M PRO",
+      mbNote: "mATX · 8×SATA · 支持 i5 与 Xeon E",
+      stats: {
+        cores: "8C / 16T",
+        tdp: "80W",
+        igpu: "UHD P630",
+        av1: "无",
+        ecc: "UDIMM",
+        lane: "16",
+        size: "20L",
+        ipmi: "无"
+      },
+      flags: { igpu: true, av1: false, ecc: "udimm", ipmi: false, small: true, threads: 16, tdp: 80, needGpu: false },
+      good: [
+        "自带核显，HEVC 8/10bit 硬解，不用另买显卡",
+        "支持 ECC UDIMM，8 核 16 线程够跑十几个 VM",
+        "mATX 能进 20L 机箱，80W 待机 25–30W"
+      ],
+      bad: [
+        "ECC UDIMM 是 DDR4 里最贵的一类",
+        "只有 16 条 PCIe，插了网卡就没槽扩 HBA",
+        "8 核封顶，没有 9 代以后的路"
+      ],
+      items: [
+        { n: "CPU", s: "Xeon E-2278G · 8C16T · 80W", p: 1550, q: 1 },
+        { n: "主板", s: "华硕 WS C246M PRO · 8×SATA", p: 800, q: 1 },
+        { n: "内存", s: "DDR4-3200 32G 普通条", p: 1180, q: 4 },
+        { n: "显卡", s: "核显 UHD P630（HEVC 硬解）", p: 0, q: 1 },
+        { n: "机箱", s: "乔思伯 N4 · 6+2 盘", p: 650, q: 1 },
+        { n: "电源", s: "350W SFX 金牌", p: 280, q: 1 },
+        { n: "散热器", s: "AXP90-X47 · ≤70mm", p: 100, q: 1 },
+        { n: "硬盘", s: "4T 3.5\" CMR", p: 435, q: 4, tb: 4 },
+        { n: "SATA 线", s: "侧弯头", p: 5, q: 4 }
+      ]
+    },
+    {
+      id: "epyc",
+      name: "EPYC 单路",
+      tag: "大内存多 VM",
+      sub: "SP3 · 7002/7003 · 8 通道内存",
+      cpu: "EPYC 7302P",
+      cpuNote: "16C32T · 155W · 无核显",
+      mb: "超微 H12SSL-i",
+      mbNote: "ATX · 8 通道 · 128 lane · IPMI",
+      stats: {
+        cores: "16C / 32T",
+        tdp: "155W",
+        igpu: "无",
+        av1: "无",
+        ecc: "REG ECC",
+        lane: "128",
+        size: "40L",
+        ipmi: "有"
+      },
+      flags: { igpu: false, av1: false, ecc: "reg", ipmi: true, small: false, threads: 32, tdp: 155, needGpu: true },
+      good: [
+        "8 通道内存 + 128 条 PCIe，扩展天花板最高",
+        "16 核起，能跑 K8s 集群和大量并发 VM",
+        "REG ECC 便宜，单机 256G 不是难事"
+      ],
+      bad: [
+        "没有核显，硬解要另配显卡",
+        "主板贵，平台整体成本明显高于 E5",
+        "待机功耗比 Intel 平台高一截"
+      ],
+      items: [
+        { n: "CPU", s: "EPYC 7302P · 16C32T · 155W", p: 900, q: 1 },
+        { n: "主板", s: "超微 H12SSL-i · 8 通道 · IPMI", p: 2200, q: 1 },
+        { n: "内存", s: "DDR4-3200 REG ECC 32G", p: 700, q: 8 },
+        { n: "显卡", s: "Arc A380 · AV1 编解码", p: 729, q: 1 },
+        { n: "机箱", s: "银欣 CS380 · 8 盘热插拔", p: 385, q: 1 },
+        { n: "电源", s: "650W 80PLUS 金牌 ATX", p: 142, q: 1 },
+        { n: "散热器", s: "SP3 塔式", p: 220, q: 1 },
+        { n: "硬盘", s: "4T 3.5\" CMR", p: 435, q: 4, tb: 4 },
+        { n: "SATA 线", s: "侧弯头", p: 5, q: 4 }
+      ]
+    },
+    {
+      id: "ryzen",
+      name: "Ryzen APU",
+      tag: "便宜好上手",
+      sub: "AM4 · B550 · 单核强",
+      cpu: "Ryzen 7 5700G",
+      cpuNote: "8C16T · 65W · Vega 8",
+      mb: "B550 mATX",
+      mbNote: "AM4 · 6×SATA · 部分板支持 ECC",
+      stats: {
+        cores: "8C / 16T",
+        tdp: "65W",
+        igpu: "Vega 8",
+        av1: "无",
+        ecc: "看主板",
+        lane: "24",
+        size: "20L",
+        ipmi: "无"
+      },
+      flags: { igpu: true, av1: false, ecc: "maybe", ipmi: false, small: true, threads: 16, tdp: 65, needGpu: false },
+      good: [
+        "8C16T + 核显，价格比同档 Intel 低",
+        "65W，整机功耗和噪音都好控制",
+        "AM4 主板和内存选择多，二手好找"
+      ],
+      bad: [
+        "Vega 核显硬解质量不如 Intel QSV，没有 AV1",
+        "IOMMU 分组碎，PCIe 直通要打 ACS 补丁",
+        "只有 24 条 PCIe，扩展有限"
+      ],
+      items: [
+        { n: "CPU", s: "Ryzen 7 5700G · 8C16T · 65W", p: 800, q: 1 },
+        { n: "主板", s: "B550 mATX · 6×SATA", p: 500, q: 1 },
+        { n: "内存", s: "DDR4-3200 32G 普通条", p: 1180, q: 4 },
+        { n: "显卡", s: "核显 Vega 8", p: 0, q: 1 },
+        { n: "机箱", s: "乔思伯 N4 · 6+2 盘", p: 650, q: 1 },
+        { n: "电源", s: "350W SFX 金牌", p: 280, q: 1 },
+        { n: "散热器", s: "下压式 ≤70mm", p: 90, q: 1 },
+        { n: "硬盘", s: "4T 3.5\" CMR", p: 435, q: 4, tb: 4 },
+        { n: "SATA 线", s: "侧弯头", p: 5, q: 4 }
+      ]
+    },
+    {
+      id: "lga1700",
+      name: "Intel 12/13 代",
+      tag: "单核与 AV1",
+      sub: "LGA1700 · B760 · 大小核",
+      cpu: "i5-13500",
+      cpuNote: "14C20T (6P+8E) · 65W · UHD 770",
+      mb: "B760 mATX",
+      mbNote: "6×SATA · 2×M.2 · 无 ECC",
+      stats: {
+        cores: "14C / 20T",
+        tdp: "65W",
+        igpu: "UHD 770",
+        av1: "解码",
+        ecc: "不支持",
+        lane: "20",
+        size: "20L",
+        ipmi: "无"
+      },
+      flags: { igpu: true, av1: "decode", ecc: "no", ipmi: false, small: true, threads: 20, tdp: 65, needGpu: false },
+      good: [
+        "单核性能同价位最强，UHD 770 支持 AV1 解码",
+        "14 核 20 线程，比 8 核平台多出一截",
+        "新平台，主板和内存都好买，有保修"
+      ],
+      bad: [
+        "大小核在 PVE 上有启动失败报告，要核心绑定绕过",
+        "完全不支持 ECC",
+        "AV1 只能解码，编码仍需 Arc 独显"
+      ],
+      items: [
+        { n: "CPU", s: "i5-13500 · 14C20T · 65W", p: 1400, q: 1 },
+        { n: "主板", s: "B760 mATX · 6×SATA", p: 700, q: 1 },
+        { n: "内存", s: "DDR4-3200 32G 普通条", p: 1180, q: 4 },
+        { n: "显卡", s: "核显 UHD 770", p: 0, q: 1 },
+        { n: "机箱", s: "乔思伯 N4 · 6+2 盘", p: 650, q: 1 },
+        { n: "电源", s: "350W SFX 金牌", p: 280, q: 1 },
+        { n: "散热器", s: "下压式 ≤70mm", p: 90, q: 1 },
+        { n: "硬盘", s: "4T 3.5\" CMR", p: 435, q: 4, tb: 4 },
+        { n: "SATA 线", s: "侧弯头", p: 5, q: 4 }
+      ]
+    }
+  ];
+
+  /* ─────────── 筛选问题 ─────────── */
+  var QUESTIONS = [
+    {
+      key: "decode",
+      label: "影音硬解需求",
+      opts: [
+        { v: "none", t: "不需要" },
+        { v: "hevc", t: "HEVC / 4K" },
+        { v: "av1", t: "要 AV1" }
+      ]
+    },
+    {
+      key: "ecc",
+      label: "是否需要 ECC 内存",
+      opts: [
+        { v: "no", t: "不需要" },
+        { v: "nice", t: "有更好" },
+        { v: "must", t: "必需" }
+      ]
+    },
+    {
+      key: "vm",
+      label: "虚拟化规模",
+      opts: [
+        { v: "few", t: "十几个容器" },
+        { v: "mid", t: "5–10 个 VM" },
+        { v: "many", t: "K8s / 20+ VM" }
+      ]
+    },
+    {
+      key: "size",
+      label: "体积偏好",
+      opts: [
+        { v: "small", t: "越小越好" },
+        { v: "any", t: "放得下就行" }
+      ]
+    }
+  ];
+
+  var answers = loadAnswers();
+
+  function loadAnswers() {
+    try {
+      var a = JSON.parse(localStorage.getItem(KEY + ":ans"));
+      if (a) return a;
+    } catch (e) {}
+    return { decode: "hevc", ecc: "nice", vm: "mid", size: "any" };
+  }
+
+  function saveAnswers() {
+    try { localStorage.setItem(KEY + ":ans", JSON.stringify(answers)); } catch (e) {}
+  }
+
+  function loadPrices() {
+    try {
+      var p = JSON.parse(localStorage.getItem(KEY + ":prices"));
+      if (p) return p;
+    } catch (e) {}
+    return {};
+  }
+
+  function savePrices(p) {
+    try { localStorage.setItem(KEY + ":prices", JSON.stringify(p)); } catch (e) {}
+  }
+
+  var priceOverride = loadPrices();
+  var qtyOverride = loadQty();
+
+  function loadQty() {
+    try { var q = JSON.parse(localStorage.getItem(KEY + ":qty")); if (q) return q; } catch (e) {}
+    return {};
+  }
+  function saveQty(q) {
+    try { localStorage.setItem(KEY + ":qty", JSON.stringify(q)); } catch (e) {}
+  }
+
+  function priceOf(pid, idx, fallback) {
+    var k = pid + ":" + idx;
+    return (k in priceOverride) ? priceOverride[k] : fallback;
+  }
+
+  function qtyOf(pid, idx, fallback) {
+    var k = pid + ":" + idx;
+    return (k in qtyOverride) ? qtyOverride[k] : fallback;
+  }
+
+  function money(n) {
+    return "¥" + Math.round(n).toLocaleString("zh-CN");
+  }
+
+  function totalOf(p) {
+    var t = 0;
+    p.items.forEach(function (it, i) { t += priceOf(p.id, i, it.p) * it.q; });
+    return t;
+  }
+
+  /* ─────────── 打分 ─────────── */
+  function score(p) {
+    var s = 0, f = p.flags;
+
+    // 硬解
+    if (answers.decode === "av1") {
+      if (f.av1 === true) s += 5;
+      else if (f.av1 === "decode") s += 2;
+      else if (f.igpu) s += 0;
+      else s -= 1;                      // 无核显但可插卡
+    } else if (answers.decode === "hevc") {
+      if (f.igpu) s += 3;
+      else s -= 1;                      // 要另外买卡
+    } else {
+      if (f.igpu) s += 1;
+    }
+
+    // ECC
+    if (answers.ecc === "must") {
+      if (f.ecc === "reg") s += 3;
+      else if (f.ecc === "udimm") s += 2;
+      else if (f.ecc === "maybe") s += 1;
+      else s -= 5;
+    } else if (answers.ecc === "nice") {
+      if (f.ecc === "reg") s += 2;
+      else if (f.ecc === "udimm") s += 1;
+      else if (f.ecc === "maybe") s += 1;
+    }
+
+    // 虚拟化规模
+    if (answers.vm === "many") {
+      if (f.threads >= 28) s += 4;
+      else if (f.threads >= 20) s += 2;
+      else s -= 2;
+    } else if (answers.vm === "mid") {
+      if (f.threads >= 16) s += 3;
+      else if (f.threads >= 12) s += 1;
+      else s -= 2;
+    } else {
+      if (f.tdp <= 80) s += 2;
+      if (f.threads >= 24) s -= 1;      // 过剩
+    }
+
+    // 体积
+    if (answers.size === "small") {
+      if (f.small) s += 2;
+      else s -= 2;
+    }
+
+    return s;
+  }
+
+  /* ─────────── 渲染 ─────────── */
+  function renderQuiz() {
+    var box = document.getElementById("quiz");
+    box.innerHTML = "";
+    QUESTIONS.forEach(function (q) {
+      var d = document.createElement("div");
+      d.className = "q";
+      var lab = document.createElement("span");
+      lab.textContent = q.label;
+      var opts = document.createElement("div");
+      opts.className = "opts";
+      q.opts.forEach(function (o) {
+        var b = document.createElement("button");
+        b.type = "button";
+        b.textContent = o.t;
+        if (answers[q.key] === o.v) b.className = "on";
+        b.onclick = function () {
+          answers[q.key] = o.v;
+          saveAnswers();
+          renderQuiz();
+          renderList();
+        };
+        opts.appendChild(b);
+      });
+      d.appendChild(lab);
+      d.appendChild(opts);
+      box.appendChild(d);
+    });
+  }
+
+  function renderList() {
+    var list = document.getElementById("list");
+    list.innerHTML = "";
+
+    var scored = PLATFORMS.map(function (p) {
+      return { p: p, s: score(p) };
+    }).sort(function (a, b) { return b.s - a.s; });
+
+    var top = scored[0].s;
+    var topMarked = false;
+
+    scored.forEach(function (row) {
+      var p = row.p;
+      var total = totalOf(p);
+
+      var card = document.createElement("article");
+      card.className = "card" + (row.s === top ? " best" : "");
+
+      // 头部
+      var head = document.createElement("div");
+      head.className = "chead";
+
+      var titleWrap = document.createElement("div");
+      titleWrap.className = "ctitle";
+      var h = document.createElement("h2");
+      h.className = "cname";
+      h.textContent = p.name;
+      if (row.s === top && !topMarked) {
+        topMarked = true;
+        var bdg = document.createElement("span");
+        bdg.className = "badge";
+        bdg.textContent = "最匹配";
+        h.appendChild(bdg);
+      }
+      var sub = document.createElement("p");
+      sub.className = "csub";
+      sub.textContent = p.sub + " · " + p.cpu;
+      titleWrap.appendChild(h);
+      titleWrap.appendChild(sub);
+
+      var priceWrap = document.createElement("div");
+      priceWrap.className = "cprice";
+      var b = document.createElement("b");
+      b.className = "num";
+      b.textContent = money(total);
+      var sp = document.createElement("span");
+      sp.textContent = "含 4 块硬盘";
+      priceWrap.appendChild(b);
+      priceWrap.appendChild(sp);
+
+      head.appendChild(titleWrap);
+      head.appendChild(priceWrap);
+
+      // 参数格
+      var stats = document.createElement("dl");
+      stats.className = "stats";
+      [["核心", p.stats.cores], ["TDP", p.stats.tdp], ["核显", p.stats.igpu],
+       ["AV1", p.stats.av1], ["ECC", p.stats.ecc], ["PCIe", p.stats.lane],
+       ["体积", p.stats.size], ["IPMI", p.stats.ipmi]].forEach(function (kv) {
+        var d = document.createElement("div");
+        d.className = "stat";
+        var dt = document.createElement("dt");
+        dt.textContent = kv[0];
+        var dd = document.createElement("dd");
+        dd.textContent = kv[1];
+        if (kv[1] === "无" || kv[1] === "不支持") dd.className = "no";
+        else if (kv[1] === "有" || kv[1].indexOf("ECC") === 0) dd.className = "yes";
+        d.appendChild(dt);
+        d.appendChild(dd);
+        stats.appendChild(d);
+      });
+
+      // 优劣
+      var pros = document.createElement("div");
+      pros.className = "pros";
+      var good = document.createElement("ul");
+      good.className = "good";
+      p.good.forEach(function (t) {
+        var li = document.createElement("li"); li.textContent = t; good.appendChild(li);
+      });
+      var bad = document.createElement("ul");
+      bad.className = "bad";
+      p.bad.forEach(function (t) {
+        var li = document.createElement("li"); li.textContent = t; bad.appendChild(li);
+      });
+      pros.appendChild(good);
+      pros.appendChild(bad);
+
+      // 明细
+      var det = document.createElement("details");
+      det.className = "parts";
+      var sum = document.createElement("summary");
+      sum.textContent = "配置清单 · 点数字可改价";
+      det.appendChild(sum);
+
+      var items = document.createElement("div");
+      items.className = "items";
+      p.items.forEach(function (it, i) {
+        var rowEl = document.createElement("div");
+        rowEl.className = "it";
+
+        var n = document.createElement("div");
+        n.className = "n";
+        n.textContent = it.n;
+
+        var s = document.createElement("div");
+        s.className = "s";
+        s.textContent = it.s;
+
+        var c = document.createElement("div");
+        c.className = "c";
+
+        var inp = document.createElement("input");
+        inp.type = "number";
+        inp.min = "0";
+        inp.step = "1";
+        inp.inputMode = "numeric";
+        inp.value = priceOf(p.id, i, it.p);
+        inp.oninput = function () {
+          var v = Math.max(0, Number(inp.value) || 0);
+          priceOverride[p.id + ":" + i] = v;
+          savePrices(priceOverride);
+          var bEl = card.querySelector(".cprice b");
+          bEl.textContent = money(totalOf(p));
+          updateFooter(card, p);
+        };
+
+        var x = document.createElement("span");
+        x.className = "x";
+        x.textContent = "×";
+
+        var q = document.createElement("input");
+        q.type = "number";
+        q.className = "q";
+        q.min = "0";
+        q.step = "1";
+        q.inputMode = "numeric";
+        q.value = qtyOf(p.id, i, it.q);
+        q.oninput = function () {
+          it.q = Math.max(0, Math.floor(Number(q.value) || 0));
+          qtyOverride[p.id + ":" + i] = it.q;
+          saveQty(qtyOverride);
+          var bEl = card.querySelector(".cprice b");
+          bEl.textContent = money(totalOf(p));
+          updateFooter(card, p);
+        };
+
+        c.appendChild(inp);
+        c.appendChild(x);
+        c.appendChild(q);
+
+        rowEl.appendChild(n);
+        rowEl.appendChild(s);
+        rowEl.appendChild(c);
+        items.appendChild(rowEl);
+      });
+
+      var foot = document.createElement("div");
+      foot.className = "cfoot";
+      var tbSpan = document.createElement("span");
+      tbSpan.className = "tb";
+      var btn = document.createElement("button");
+      btn.type = "button";
+      btn.textContent = "复制清单";
+      btn.onclick = function () {
+        copyParts(p, btn);
+      };
+      foot.appendChild(tbSpan);
+      foot.appendChild(btn);
+
+      det.appendChild(items);
+      det.appendChild(foot);
+
+      card.appendChild(head);
+      card.appendChild(stats);
+      card.appendChild(pros);
+      card.appendChild(det);
+
+      updateFooter(card, p);
+      list.appendChild(card);
+    });
+  }
+
+  function updateFooter(card, p) {
+    var tbSpan = card.querySelector(".cfoot .tb");
+    if (!tbSpan) return;
+    var tb = 0, cost = 0;
+    p.items.forEach(function (it, i) {
+      if (it.tb) {
+        var qq = qtyOf(p.id, i, it.q);
+        tb += it.tb * qq;
+        cost += priceOf(p.id, i, it.p) * qq;
+      }
+    });
+    tbSpan.textContent = tb > 0
+      ? "硬盘 " + tb + "T · 每 TB " + money(cost / tb)
+      : "—";
+  }
+
+  function copyParts(p, btn) {
+    var lines = [p.name + "（" + p.cpu + "）", ""];
+    var t = 0;
+    p.items.forEach(function (it, i) {
+      var qq = qtyOf(p.id, i, it.q);
+      if (qq === 0) return;
+      var up = priceOf(p.id, i, it.p);
+      var sub = up * qq;
+      t += sub;
+      lines.push("- " + it.n + "：" + it.s + " — ¥" + up + " × " + qq + " = ¥" + sub);
+    });
+    lines.push("", "合计：¥" + t);
+    var txt = lines.join("\n");
+
+    var done = function () {
+      var old = btn.textContent;
+      btn.textContent = "已复制";
+      setTimeout(function () { btn.textContent = old; }, 1200);
+    };
+
+    if (navigator.clipboard && navigator.clipboard.writeText) {
+      navigator.clipboard.writeText(txt).then(done, function () { fallback(); });
+    } else {
+      fallback();
+    }
+
+    function fallback() {
+      var ta = document.createElement("textarea");
+      ta.value = txt;
+      ta.style.position = "fixed";
+      ta.style.opacity = "0";
+      document.body.appendChild(ta);
+      ta.select();
+      try { document.execCommand("copy"); } catch (e) {}
+      document.body.removeChild(ta);
+      done();
+    }
+  }
+
+  renderQuiz();
+  renderList();
+})();
+</script>
+</body>
+
+</html>
