@@ -308,6 +308,48 @@
     max-width: 60em;
   }
 
+  /* ── 后续可加 ── */
+  .optional {
+    background: var(--card);
+    border: 1px solid var(--line);
+    border-radius: 4px;
+    overflow: hidden;
+  }
+  .optional > p {
+    margin: 0;
+    padding: .85rem 1.1rem;
+    font-size: .84rem;
+    color: var(--muted);
+    border-bottom: 1px solid var(--line);
+  }
+  .opt {
+    padding: .8rem 1.1rem;
+    border-bottom: 1px solid var(--line);
+  }
+  .opt:last-child { border-bottom: 0; }
+  .opt h3 {
+    margin: 0 0 .2rem;
+    font-size: .9rem;
+    font-weight: 600;
+    display: flex;
+    justify-content: space-between;
+    align-items: baseline;
+    gap: .8rem;
+  }
+  .opt h3 span {
+    font-size: .78rem;
+    font-weight: 500;
+    color: var(--muted);
+    font-variant-numeric: tabular-nums;
+    white-space: nowrap;
+  }
+  .opt p {
+    margin: 0;
+    font-size: .82rem;
+    color: var(--muted);
+  }
+  .opt p b { color: var(--fg); font-weight: 600; }
+
   /* ── 步骤 ── */
   ol.steps {
     counter-reset: s;
@@ -368,8 +410,8 @@
   <p class="eyebrow">Self-built NAS · Hypervisor</p>
   <h1>E5-2690 v4 虚拟化主机</h1>
   <p class="lede">
-    14 核 28 线程、128G 寄存器 ECC、10 个原生 SATA、40 条 PCIe 通道，另配一张 Arc A380 负责影音硬解。
-    定位是跑 Proxmox VE：上面开虚拟机和容器，同时承担 NAS 存储。价格按 2026-10 二手行情，可自行修改。
+    14 核 28 线程、128G 寄存器 ECC、10 个原生 SATA、40 条 PCIe 通道。定位是跑 Proxmox VE：上面开虚拟机和容器，同时承担 NAS 存储。
+    当前配置不含独立显卡——E5 没有核显，但主板自带 BMC 能开机装机；影音硬解可以以后按需补。价格按 2026-10 二手行情，可自行修改。
   </p>
 </header>
 
@@ -378,7 +420,24 @@
 <div class="sect"><h2>组件</h2><div class="rule"></div></div>
 <div id="parts"></div>
 
-<div class="sect"><h2>硬解能力</h2><div class="rule"></div></div>
+<div class="sect"><h2>后续可加</h2><div class="rule"></div></div>
+<div class="optional">
+  <p>主板上有 7 个 PCIe 槽、8 个内存槽，现在只用掉 2 个槽和 4 条内存。下面几项都可以以后补，不影响现在开工。</p>
+  <div class="opt">
+    <h3>Arc A380 硬解卡 <span>约 ¥729</span></h3>
+    <p>只有<strong>视频转码</strong>时才需要它。局域网用 App 直接播放时服务器不转码，显卡全程闲着；触发转码的情况是浏览器播放、老设备不支持 HEVC、外网带宽不够要降码率、PGS 字幕烧录。加装后支持 AV1 编解码。</p>
+  </div>
+  <div class="opt">
+    <h3>补两条 16G 内存 <span>约 ¥500</span></h3>
+    <p>如果先上 32G 起步，可以再加两条凑 64G。四通道板的最优是每通道一条（4 条）或每通道两条（8 条）。</p>
+  </div>
+  <div class="opt">
+    <h3>硬盘扩到 8 块 <span>按盘价</span></h3>
+    <p>主板的 10 个 SATA 现在用掉 4 个，机箱有 8 个热插拔位。不需要加 HBA 卡。</p>
+  </div>
+</div>
+
+<div class="sect"><h2>加装 A380 后的硬解能力</h2><div class="rule"></div></div>
 <table class="codecs">
   <thead>
     <tr><th>编码格式</th><th class="c">解码</th><th class="c">编码</th><th>备注</th></tr>
@@ -392,8 +451,8 @@
   </tbody>
 </table>
 <p class="codecs-note">
-  E5-2690 v4 没有核显，硬解全部由 Arc A380 承担。它有两个 MFX 媒体引擎，可以同时跑多路转码；
-  HEVC 10bit 解码能力也让 HDR→SDR 的色调映射能硬件加速。AV1 编解码是这张卡相对核显方案的主要增量。
+  这张表是<strong>加装 Arc A380 之后</strong>的能力。当前配置没有显卡，转码只能靠 CPU 软解：1080p 占 2–4 核够用，4K 和多路并发会吃力。
+  A380 有两个 MFX 媒体引擎，可以同时跑多路转码；HEVC 10bit 解码也让 HDR→SDR 的色调映射能硬件加速。
 </p>
 
 <div class="sect"><h2>装机顺序</h2><div class="rule"></div></div>
@@ -402,17 +461,17 @@
   <li><b>主板在机箱外装好 CPU、内存、散热器。</b>LGA2011-3 是方形窄 ILM 扣具，散热器螺丝对角线交替拧，别一次拧到底。</li>
   <li><b>主板入箱，先接 24pin 和 8pin。</b>8pin 供电口在散热器旁边，装上大散热器之后就够不到了，顺序不能反。</li>
   <li><b>接硬盘背板供电和 SATA。</b>背板一般需要两个大 4pin；数据线用侧弯头，直头会顶到侧板。</li>
-  <li><b>插显卡和网卡。</b>A380 插最上面的 x16 槽，2.5G 网卡插 x4 槽。注意两个 x4 槽是共享的：用一个 x8 设备时另一个会失效。</li>
-  <li><b>最小配置点亮。</b>只留 CPU、一条内存、显卡输出，进 BIOS 确认核心数、内存容量和通道模式，再装硬盘。</li>
+  <li><b>插扩展卡。</b>两块 M.2 转接卡分别插到不同的 x4 槽（这两个槽共享，用一个 x8 设备时另一个失效）；2.5G 网卡插剩下的槽。</li>
+  <li><b>最小配置点亮。</b>只留 CPU、一条内存，用 IPMI 的 KVM 或主板 VGA 口看画面，进 BIOS 确认核心数、内存容量和通道模式，再装硬盘。</li>
 </ol>
 
 <div class="sect"><h2>到货验收</h2><div class="rule"></div></div>
 <ol class="steps">
   <li><b>主板 BIOS 版本 ≥ 2.0。</b>低于这个版本不认 v4 CPU，而手上没有 v3 的 U 来刷——这是最容易卡死的一步。</li>
-  <li><b>IPMI 能登录。</b>要卖家的 IP 和账号，连上去看传感器读数和 SEL 日志，有硬件报错直接退。</li>
+  <li><b>IPMI 能登录。</b>要卖家的 IP 和账号，连上去看传感器读数和 SEL 日志，有硬件报错直接退。没有独显时，IPMI 的 KVM 就是唯一的画面来源。</li>
   <li><b>10 个 SATA 口逐个认盘。</b>分属 6 个 AHCI 和 4 个 sSATA 两组控制器，RAID 不能跨组（用 ZFS 则不受影响）。</li>
   <li><b>8 个内存槽逐个过。</b>只插 4 条也要每个槽都试一遍，二手服务器板最常见的问题是内存槽虚焊。</li>
-  <li><b>显卡驱动绑定。</b>A380 在 Linux 上默认可能被 <code>xe</code> 驱动抢走，需要钉到 <code>i915</code>，否则转码管线会崩。</li>
+  <li><b>（以后加显卡时）驱动绑定。</b>A380 在 Linux 上默认可能被 <code>xe</code> 驱动抢走，需要钉到 <code>i915</code>，否则转码管线会崩。</li>
   <li><b>CPU 底面检查。</b>LGA 封装没有针脚，看镀金焊盘有无氧化发黑、发绿（铜绿意味着镀金层已穿孔，不可逆）。</li>
 </ol>
 
@@ -427,7 +486,7 @@
 (function () {
   "use strict";
 
-  var KEY = "nas-build-single-v1";
+  var KEY = "nas-build-single-v2";
 
   var PARTS = [
     {
@@ -447,7 +506,7 @@
         ["核显", "无"]
       ],
       good: "40 条 PCIe 是这套方案的地基——HBA 卡、万兆网卡、硬解卡可以同时插，不用二选一。",
-      bad: "没有核显，影音硬解必须靠独立显卡；135W TDP，整机待机 50–60W。",
+      bad: "没有核显，影音硬解要靠独立显卡（可以以后再加）；135W TDP，整机待机 40–50W。",
       more: [
         "14 核在 E5 v4 里属于中等偏上。同代还有 18 核的 2695 v4、22 核的 2699 v4，但它们的全核睿频更低（2695 v4 只有 2.5GHz），多核跑分和 2690 v4 基本打平——多出来的核心被频率抵消了。",
         "所以 <strong>2690 v4 是这一代里单核最强、多核不输的型号</strong>，价格又最低。真要更高的多核应该看 2697A v4（16C，2.6–3.6GHz），而不是继续堆核心数。",
@@ -502,32 +561,8 @@
         "为什么强调 <strong>REG</strong>：DDR4 有两种 ECC，ECC UDIMM（无缓冲，C246/AM4 用）和 REG ECC RDIMM（带寄存器，X99/EPYC 用），电气不兼容。停产之后 ECC UDIMM 存量少、价格被推得很高，而 REG ECC 因为服务器拆机量大反而便宜。",
         "四通道板的最优插法是<strong>每通道一条（4 条）</strong>或每通道两条（8 条）。插 6 条这种配置容量上去了，但有两个通道被迫 2DPC，而 Intel 内存控制器要求全通道同频——整个系统会按最保守的档位降频。",
         "<strong>Rank 数也影响频率</strong>：Quad Rank（4DRx4）的条子在 2DPC 时通常要降到 1866 或 2133。如果买到 4R 型号，只插四条（1DPC）才能跑满 2400。",
-        "E5 v4 的原生上限是 DDR4-2400。买 2666 或 3200 的条子会降频运行，没必要多花钱。"
-      ]
-    },
-    {
-      role: "硬解",
-      model: "Intel Arc A380",
-      note: "DG2 · 6GB GDDR6 · 双 MFX 引擎",
-      price: 729,
-      qty: 1,
-      specs: [
-        ["架构", "Gen 12.5 XeHPG"],
-        ["显存", "6 GB GDDR6"],
-        ["TBP", "75–92 W"],
-        ["槽位", "双槽"],
-        ["供电", "部分型号需 8pin"],
-        ["AV1 编码", "支持"],
-        ["AV1 解码", "支持"],
-        ["MFX 引擎", "2 个"]
-      ],
-      good: "支持 AV1 编解码，这是 UHD 630 做不到的；两个 MFX 引擎意味着可以同时跑多路转码，多客户端并发时压得住。",
-      bad: "双槽会占掉相邻 PCIe 位；蓝戟等非公版需要 8pin 外接供电；Linux 驱动要手动钉到 i915。",
-      more: [
-        "为什么不用核显：<strong>E5 没有核显</strong>。想要硬解只能加卡。对比来看，Arc A380 比 Tesla P4 多一个 AV1 编码能力，价格差不多，是更完整的选择。",
-        "<strong>驱动绑定是必做步骤</strong>。内核 6.8 之后 <code>i915</code> 默认接管 DG2 设备，但用户态 VA-API 驱动叠在 <code>xe</code> 上会出问题（QSV 与 VAAPI 之间的 hwmap roundtrip 会段错误）。做法是在 guest 的 grub 里钉住：<code>i915.force_probe=56a5 xe.force_probe=!56a5</code>，再 blacklist <code>xe</code>。",
-        "如果同时有核显和这张卡，Jellyfin 会默认用第一个 Intel 设备。E5 平台没有核显，反而避开这个坑——这是意外的好处。",
-        "二手风险：Intel 显卡没有挖矿生态，基本不存在矿卡，比同价位的 N 卡安全。"
+        "E5 v4 的原生上限是 DDR4-2400。买 2666 或 3200 的条子会降频运行，没必要多花钱。",
+        "<strong>预算紧可以先插两条（32G，双通道）</strong>，别只插一条——单条是单通道，带宽掉到四分之一，而且 16G 容量对 PVE 加多个 VM 太紧。"
       ]
     },
     {
@@ -540,15 +575,16 @@
         ["板型", "ATX"],
         ["3.5\" 盘位", "8"],
         ["热插拔", "背板支持"],
-        ["显卡", "长卡可用"],
+        ["显卡", "长卡可用（暂不装）"],
         ["电源", "ATX"],
         ["体积", "约 40 L"]
       ],
-      good: "8 个热插拔盘位配合主板的 10 个 SATA，以后换盘不用开箱；ATX 空间足够装下双槽显卡和塔式散热。",
+      good: "8 个热插拔盘位配合主板的 10 个 SATA，以后换盘不用开箱；ATX 空间足够以后加双槽显卡和塔式散热。",
       bad: "40L 体积和硬盘声是硬伤，只能放储物间或机柜，不适合放卧室。",
       more: [
         "选它的逻辑是<strong>盘位倒推</strong>：先定要几个盘位（4 起步，留扩展），再找支持这个盘位的机箱，然后看机箱支持什么板型，最后定主板。反过来先定主板，经常会发现盘位和尺寸对不上。",
         "ITX/mATX 的小 NAS 机箱（10–20L）基本装不下 ATX 主板，也塞不进双槽显卡。这套平台注定是 40L 级别。",
+        "选大机箱还有个好处：现在不装显卡，但空间留着。以后想加 A380 或 HBA 卡，不用换箱。",
         "二手要确认：硬盘背板完好、8 个托架齐全、SATA 线和大 4pin 供电线都在。"
       ]
     },
@@ -561,15 +597,15 @@
       specs: [
         ["额定", "650 W"],
         ["认证", "80PLUS 金牌"],
-        ["峰值负载", "约 290 W"],
-        ["余量", "约 2.2 倍"],
-        ["必需接口", "8pin + 2×大4pin"]
+        ["当前峰值", "约 200 W"],
+        ["加显卡后", "约 290 W"],
+        ["必需接口", "2 × 大 4pin"]
       ],
-      good: "峰值核算下来 CPU 135W + 显卡 92W + 四块硬盘 20W + 主板内存风扇 40W 约 290W，650W 留了两倍余量，长期跑在效率甜点区。",
-      bad: "二手电源要看使用年限和电容状态；必须确认带 8pin PCIe 线（给显卡）和两个大 4pin（给硬盘背板）。",
+      good: "当前峰值约 200W（CPU 135 + 四盘 20 + 主板内存风扇 40），650W 留了三倍余量；以后加 A380（92W）也只到 290W。",
+      bad: "二手电源要看使用年限和电容状态；两个大 4pin 是给硬盘背板的，必须确认有。8pin PCIe 线等加显卡时再核对。",
       more: [
-        "别按「CPU+显卡 TDP 之和」选电源。实际峰值还要算硬盘启动电流（每块 3.5 寸盘启动瞬间 12V 约 1.5–2A）、主板供电损耗、风扇，以及电源自身的转换效率损失。",
-        "纸面 290W 用 450W 也够，但电源在 <strong>30–50% 负载区间效率最高</strong>，低负载下电压也更稳。650W 让整机长期跑在 45% 左右。",
+        "别按「CPU 加显卡 TDP 之和」选电源。实际峰值还要算硬盘启动电流（每块 3.5 寸盘启动瞬间 12V 约 1.5–2A）、主板供电损耗、风扇，以及电源自身的转换效率损失。",
+        "纸面 200W 用 450W 也够，但电源在 <strong>30–50% 负载区间效率最高</strong>，低负载下电压也更稳。650W 让整机长期跑在 30% 左右，以后加显卡也不用换。",
         "全模组不是必须，但非模组的多余线材在 NAS 机箱里很难收纳，也会挡硬盘笼风道。"
       ]
     },
@@ -614,7 +650,8 @@
         "<strong>SMR 是最大的坑</strong>。叠瓦盘在 ZFS/RAID 重建时写入性能会崩到几 MB/s，甚至因超时被判掉盘——等于重建过程中再坏一块，数据全没。二手 4T 里混着大量 SMR 型号，必须按型号逐个确认。",
         "SMART 要看的五项：<code>5</code> 重映射扇区、<code>187</code> 报告的不可纠正错误、<code>197</code> 待映射扇区、<code>198</code> 脱机不可纠正、<code>199</code> 接口 CRC 错误。任何一项非零都别买。",
         "到手先跑 <code>badblocks -wsv</code> 全盘写入（4T 约十小时），把所有坏道逼出来再存数据。跳过这步等于赌运气。",
-        "如果数据重要，新盘和二手盘的差价（四块约一千）不值得省。影视库这类可重建的数据才适合用二手。"
+        "如果数据重要，新盘和二手盘的差价（四块约一千）不值得省。影视库这类可重建的数据才适合用二手。",
+        "预算紧可以先上两块（8T），机箱和主板都留着扩展位。"
       ]
     },
     {
@@ -633,7 +670,7 @@
       more: [
         "X10SRL-F 没有 M.2 插槽，所有 NVMe 都要走 PCIe 转接。选卡看两点：<strong>是否支持 PCIe 3.0 x4</strong>，以及<strong>有没有散热片</strong>——NVMe 在机箱里温度容易上 70 度。",
         "不需要买带 PLX 芯片的多盘卡。两块盘用两张单盘转接卡分别插在不同槽位，比一张双盘卡更灵活，也不受 PCIe 分叉支持的限制。",
-        "主板那两个 x4 槽是共享的：插一个 x8 设备时另一个失效。所以显卡之外的两张转接卡，要分别插到不同的 x4 槽。"
+        "主板那两个 x4 槽是共享的：插一个 x8 设备时另一个失效。所以两张转接卡要分别插到不同的 x4 槽。"
       ]
     },
     {
@@ -662,8 +699,8 @@
     ["内存", "128 GB", "REG ECC"],
     ["盘位", "8 盘", "用 4 留 4"],
     ["PCIe", "40 条", "7 个槽"],
-    ["硬解", "AV1 编解码", "Arc A380"],
-    ["功耗", "135 W", "待机 50–60W"]
+    ["空槽", "5 个", "可加显卡 / HBA"],
+    ["功耗", "135 W", "待机 40–50W"]
   ];
 
   var priceOverride = load("prices");
