@@ -117,6 +117,18 @@ const AudioPlayer = {
     return this._fetching;
   },
 
+
+  // ── ABC 音符序列播放（abc-score.js 解析出的 {midi,start,dur}）─────
+  playNotes(notes, bpm, opts = {}) {
+    this.stop();
+    if (!notes || !notes.length) return 0;
+    const beatSec = 60 / (bpm || 100);
+    const events = notes.map((n, i) => ({ beat: n.start, dur: n.dur, index: i, midi: n.midi }));
+    const total = notes.reduce((m, n) => Math.max(m, n.start + n.dur), 0);
+    this._schedule(events, beatSec, opts, total, ev => [ev.midi]);
+    return total;
+  },
+
   // 统一调度：事件按 beat 排布，到点发声并回调
   _schedule(events, beatSec, opts, totalBeats, midiOf) {
     this.playing = true;

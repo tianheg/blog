@@ -1,5 +1,5 @@
 // 律谱 — 视图渲染
-// 依赖全局: navigate(), state, escapeHtml(), RendererAdapter, AudioPlayer
+// 依赖全局: navigate(), state, escapeHtml(), AbcScore, AudioPlayer
 
 // 首页：曲谱列表
 function renderHome() {
@@ -91,13 +91,8 @@ function renderScoreDetail(scoreId) {
   fragment.appendChild(header);
 
   // 乐谱渲染：三种来源 —— 打印谱(scribe) / DSL 简谱 / 图片
-  if (score.renderer === 'scribe' && score.scribeData) {
-    fragment.appendChild(buildScribeScore(score));
-  } else if (score.notation) {
-    const parsed = parseNotation(score.notation);
-    if (parsed && parsed.notation.length > 0) {
-      fragment.appendChild(buildScoreWithMode(parsed, score));
-    }
+  if (score.abcData) {
+    fragment.appendChild(buildAbcScore(score));
   } else if (score.pages && score.pages.length > 0) {
     fragment.appendChild(buildImageViewer(score));
   }
@@ -149,311 +144,100 @@ function buildScoreList(scores) {
   return list;
 }
 
-// ── DSL 曲目：简谱 / 五线谱 + 播放（带音符高亮跟随）──────────────
-function buildScoreWithMode(parsed, score) {
-  const section = document.createElement('div');
-
-  const modeBar = document.createElement('div');
-  modeBar.className = 'mode-bar';
-  modeBar.innerHTML = `
-    <button class="mode-btn active" data-mode="simple-notation">简谱</button>
-    <button class="mode-btn" data-mode="vexflow">五线谱</button>
-    <button class="play-btn" id="play-btn">▶ 播放</button>
-    <button class="print-btn" id="thermal-btn" title="导出 72mm 宽 PDF（热敏打印机满宽）">PDF</button>
-  `;
-
-  const container = document.createElement('div');
-  container.className = 'score-container';
-
-  const scoreData = parseScoreData(parsed);
-  const playBtn = modeBar.querySelector('#play-btn');
-
-  let playing = false;
-  let noteEls = [];
-
-  // SN 是异步渲染的（懒加载 + loadData），轮询到 SVG 出来为止
-  function collectNotes(retry = 0) {
-    noteEls = [...container.querySelectorAll('svg text')]
-      .filter(t => t.getAttribute('font-size') === '18' && t.textContent.trim() !== '');
-    if (!noteEls.length && retry < 40) setTimeout(() => collectNotes(retry + 1), 100);
-  }
-
-  function clearHighlight() {
-    noteEls.forEach(t => t.classList.remove('hl'));
-  }
-
-  function renderMode() {
-    container.innerHTML = '';
-    const el = buildScore(parsed);
-    container.appendChild(el);
-    collectNotes();
-  }
-  renderMode();
-
-  modeBar.querySelectorAll('.mode-btn').forEach(btn => {
-    btn.addEventListener('click', () => {
-      if (AudioPlayer.playing) stopPlayback();
-      modeBar.querySelectorAll('.mode-btn').forEach(b => b.classList.remove('active'));
-      btn.classList.add('active');
-      RendererAdapter.use(btn.dataset.mode);
-      renderMode();
-    });
-  });
-
-  function stopPlayback() {
-    AudioPlayer.stop();
-    playing = false;
-    clearHighlight();
-    playBtn.textContent = '▶ 播放';
-  }
-
-  playBtn.addEventListener('click', () => {
-    if (playing) { stopPlayback(); return; }
-
-    clearHighlight();
-    AudioPlayer.play(scoreData, {
-      onNote(index) {
-        const el = noteEls[index];
-        if (!el) return;
-        noteEls.forEach(t => t.classList.remove('hl'));
-        el.classList.add('hl');
-        // 播到屏幕外时跟一下
-        const box = el.getBoundingClientRect();
-        if (box.top < 80 || box.bottom > window.innerHeight - 40) {
-          el.scrollIntoView({ behavior: 'smooth', block: 'center' });
-        }
-      },
-      onEnd() {
-        playing = false;
-        clearHighlight();
-        playBtn.textContent = '▶ 播放';
-      }
-    });
-
-    playing = true;
-    playBtn.textContent = '⏹ 停止';
-  });
-
-  // 热敏导出：重排成 576 dots（A160M 打印宽度）宽、每行 2 小节，二值化成 1-bit PNG
-  const thermalBtn = modeBar.querySelector('#thermal-btn');
-  thermalBtn.addEventListener('click', async () => {
-    if (thermalBtn.disabled) return;
-    thermalBtn.disabled = true;
-    const label = thermalBtn.textContent;
-    thermalBtn.textContent = '生成中…';
-    if (AudioPlayer.playing) stopPlayback();
-    try {
-      const { cm } = await exportScorePdf(parsed, scoreData, (score && score.title) || 'score', () => {
-        container.replaceChildren();
-        container.appendChild(buildScore(parsed));
-      });
-      thermalBtn.textContent = `已导出 ${cm} cm`;
-      setTimeout(() => { thermalBtn.textContent = label; thermalBtn.disabled = false; }, 2500);
-    } catch (err) {
-      thermalBtn.textContent = '导出失败';
-      console.error('[thermal] 导出失败', err);
-      setTimeout(() => { thermalBtn.textContent = label; thermalBtn.disabled = false; }, 2500);
-    }
-  });
-
-  section.appendChild(modeBar);
-  section.appendChild(container);
-  return section;
-}
-
-// 576 dots = A160M 打印宽度；SN 是全局单例，所以离屏渲染完必须把原谱重画回来
-async function exportThermal(parsed, scoreData, onRestore) {
-  const WIDTH = 576;
-
-  const holder = document.createElement('div');
-  holder.style.cssText = `position:fixed;left:-10000px;top:0;width:${WIDTH}px;background:#fff;`;
-  document.body.appendChild(holder);
-
-  try {
-    await RendererAdapter.backends['simple-notation'].renderWith(holder, scoreData, 2);
-    const svg = await waitForSvg(holder, 10000);
-    // renderSN 里的拍号文案修正在两帧之后，导出前必须等它跑完
-    await new Promise(r => requestAnimationFrame(() => requestAnimationFrame(r)));
-    const { blob, height } = await svgToThermalPng(svg, WIDTH);
-    return { blob, height };
-  } finally {
-    holder.remove();
-    // SN 是全局单例，离屏渲染把原来的实例顶掉了，所以要重画当前视图
-    if (onRestore) onRestore();
-  }
-}
-
-// 72mm = A160M 打印头有效宽度（576 dots @203dpi），PDF 页宽按这个出
-async function exportScorePdf(parsed, scoreData, title, onRestore) {
-  await loadPdfLib();
-  const { blob, height } = await exportThermal(parsed, scoreData, onRestore);
-  const pngBytes = await blob.arrayBuffer();
-  const pdf = await PDFLib.PDFDocument.create();
-  const png = await pdf.embedPng(pngBytes);
-
-  const pageW = (72 / 25.4) * 72;        // 72mm → pt
-  const scale = pageW / png.width;
-  const pageH = png.height * scale;
-
-  const page = pdf.addPage([pageW, pageH]);
-  page.drawImage(png, { x: 0, y: 0, width: pageW, height: pageH });
-
-  const bytes = await pdf.save();
-  downloadBlob(new Blob([bytes], { type: 'application/pdf' }), `${title}-72mm.pdf`);
-  return { dots: height, cm: Math.round(height / 203 * 25.4 / 10), pt: [Math.round(pageW), Math.round(pageH)] };
-}
-
-function loadPdfLib() {
-  if (window.PDFLib) return Promise.resolve();
-  return new Promise((resolve, reject) => {
-    const s = document.createElement('script');
-    s.src = `${ROOT}vendor/pdf-lib.min.js`;
-    s.onload = () => resolve();
-    s.onerror = () => reject(new Error('pdf-lib 加载失败'));
-    document.head.appendChild(s);
-  });
-}
-
-function downloadBlob(blob, name) {
-  const url = URL.createObjectURL(blob);
-  const a = document.createElement('a');
-  a.href = url;
-  a.download = name;
-  document.body.appendChild(a);
-  a.click();
-  a.remove();
-  setTimeout(() => URL.revokeObjectURL(url), 60000);
-}
-
-function waitForSvg(holder, timeout) {
-  return new Promise((resolve, reject) => {
-    const t0 = Date.now();
-    const tick = () => {
-      const svg = holder.querySelector('svg');
-      if (svg && svg.getBoundingClientRect().height > 20) { resolve(svg); return; }
-      if (Date.now() - t0 > timeout) { reject(new Error('简谱渲染超时')); return; }
-      requestAnimationFrame(tick);
-    };
-    tick();
-  });
-}
-
-function svgToThermalPng(svg, targetWidth) {
-  return new Promise((resolve, reject) => {
-    // SN 画的 SVG 比内容宽（四周留白），按内容 bbox 裁一刀再缩放，才能真正铺满纸宽
-    const bb = svg.getBBox();
-    const pad = 4;
-    const w = Math.round(bb.width + pad * 2);
-    const h = Math.round(bb.height + pad * 2);
-    if (!w || !h) { reject(new Error('SVG 尺寸为 0')); return; }
-
-    const clone = svg.cloneNode(true);
-    clone.setAttribute('viewBox', `${Math.round(bb.x - pad)} ${Math.round(bb.y - pad)} ${w} ${h}`);
-    clone.setAttribute('width', w);
-    clone.setAttribute('height', h);
-    const bg = document.createElementNS('http://www.w3.org/2000/svg', 'rect');
-    // 白底矩形要落在 viewBox 坐标系里（起点是 bbox.x - pad，不是 0）
-    bg.setAttribute('x', String(Math.round(bb.x - pad)));
-    bg.setAttribute('y', String(Math.round(bb.y - pad)));
-    bg.setAttribute('width', String(w)); bg.setAttribute('height', String(h));
-    bg.setAttribute('fill', '#fff');
-    clone.insertBefore(bg, clone.firstChild);
-    // 阴影里的样式不会被序列化，白色底只保证透明处不变黑
-    const xml = new XMLSerializer().serializeToString(clone);
-    const img = new Image();
-    img.onload = () => {
-      const scale = targetWidth / w;
-      const canvas = document.createElement('canvas');
-      canvas.width = targetWidth;
-      canvas.height = Math.max(1, Math.round(h * scale));
-      const ctx = canvas.getContext('2d');
-      ctx.fillStyle = '#fff';
-      ctx.fillRect(0, 0, canvas.width, canvas.height);
-      ctx.drawImage(img, 0, 0, canvas.width, canvas.height);
-
-      // 二值化：热敏只有黑白，灰阶会打成麻点
-      const data = ctx.getImageData(0, 0, canvas.width, canvas.height);
-      const px = data.data;
-      for (let i = 0; i < px.length; i += 4) {
-        const lum = px[i] * 0.299 + px[i + 1] * 0.587 + px[i + 2] * 0.114;
-        const v = lum < 120 ? 0 : 255;
-        px[i] = px[i + 1] = px[i + 2] = v;
-        px[i + 3] = 255;
-      }
-      ctx.putImageData(data, 0, 0);
-      canvas.toBlob(b => resolve({ blob: b, height: canvas.height }), 'image/png');
-    };
-    img.onerror = () => reject(new Error('SVG 转位图失败'));
-    img.src = 'data:image/svg+xml;charset=utf-8,' + encodeURIComponent(xml);
-  });
-}
-
-// ── 打印谱：Scribe 渲染 + 播放 + 打印 ───────────────────────────
-function buildScribeScore(score) {
+// ── 五线谱：ABC 真源 → abcjs 渲染 + 播放 + 72mm PDF ──────────────
+function buildAbcScore(score) {
   const section = document.createElement('div');
 
   const bar = document.createElement('div');
   bar.className = 'mode-bar';
-  // 有简谱源数据才给热敏导出（Scribe 是 closed shadow DOM，截不到图）
-  const canThermal = !!score.notation;
   bar.innerHTML = `
-    <span class="mode-tag">打印谱 · Scribe</span>
-    <button class="play-btn" id="play-btn">▶ 播放</button>
-    ${canThermal ? '<button class="print-btn" id="thermal-btn" title="导出 72mm 宽 PDF（用简谱数据排版）">PDF</button>' : ''}
+    <button class="play-btn" id="play-btn" disabled>▶ 播放</button>
+    <button class="print-btn" id="pdf-btn" title="导出 72mm 宽 PDF（热敏打印机满宽）" disabled>PDF</button>
     <button class="print-btn" id="print-btn">打印</button>
   `;
 
   const container = document.createElement('div');
-  container.className = 'score-container scribe-container';
-  RendererAdapter.backends.scribe.render(container, { src: score.scribeData, clef: 'treble' });
-
-  const playBtn = bar.querySelector('#play-btn');
-  const printBtn = bar.querySelector('#print-btn');
-  let playing = false;
-
-  playBtn.addEventListener('click', () => {
-    if (playing) {
-      AudioPlayer.stop();
-      playing = false;
-      playBtn.textContent = '▶ 播放';
-      return;
-    }
-    AudioPlayer.playStream(`${ROOT}${score.scribeData}`, {
-      onEnd() {
-        playing = false;
-        playBtn.textContent = '▶ 播放';
-      }
-    });
-    playing = true;
-    playBtn.textContent = '⏹ 停止';
-  });
-
-  printBtn.addEventListener('click', () => window.print());
-
-  if (canThermal) {
-    const parsed = parseNotation(score.notation);
-    const scoreData = parseScoreData(parsed);
-    const thermalBtn = bar.querySelector('#thermal-btn');
-    thermalBtn.addEventListener('click', async () => {
-      if (thermalBtn.disabled) return;
-      thermalBtn.disabled = true;
-      const label = thermalBtn.textContent;
-      thermalBtn.textContent = '生成中…';
-      if (playing) { AudioPlayer.stop(); playing = false; playBtn.textContent = '▶ 播放'; }
-      try {
-        const { cm } = await exportScorePdf(parsed, scoreData, score.title, null);
-        thermalBtn.textContent = `已导出 ${cm} cm`;
-        setTimeout(() => { thermalBtn.textContent = label; thermalBtn.disabled = false; }, 2500);
-      } catch (err) {
-        console.error('[thermal]', err);
-        thermalBtn.textContent = '导出失败';
-        setTimeout(() => { thermalBtn.textContent = label; thermalBtn.disabled = false; }, 2500);
-      }
-    });
-  }
+  container.className = 'score-container abc-container';
 
   section.appendChild(bar);
   section.appendChild(container);
+
+  const playBtn = bar.querySelector('#play-btn');
+  const pdfBtn = bar.querySelector('#pdf-btn');
+  const printBtn = bar.querySelector('#print-btn');
+  let playing = false;
+  let abcText = '';
+
+  printBtn.addEventListener('click', () => window.print());
+
+  (async () => {
+    try {
+      const url = new URL(score.abcData, document.baseURI).href;
+      abcText = await (await fetch(url)).text();
+      // 页面已有标题和作曲家，ABC 里的 T:/C: 再画一遍就重复了
+      const forRender = abcText.split('\n').filter(l => !/^[TC]:/.test(l)).join('\n');
+      await AbcScore.render(container, forRender, { responsive: 'resize', staffwidth: 900 });
+      playBtn.disabled = false;
+      pdfBtn.disabled = false;
+
+      const { notes, bpm } = AbcScore.toNotes(abcText);
+      const noteEls = [...container.querySelectorAll('.abcjs-note, g.abcjs-note')];
+
+      const clearHl = () => noteEls.forEach(el => el.classList.remove('hl'));
+
+      playBtn.addEventListener('click', () => {
+        if (playing) {
+          AudioPlayer.stop();
+          playing = false;
+          clearHl();
+          playBtn.textContent = '▶ 播放';
+          return;
+        }
+        clearHl();
+        AudioPlayer.playNotes(notes, bpm, {
+          onNote(index) {
+            noteEls.forEach(el => el.classList.remove('hl'));
+            const el = noteEls[index];
+            if (el) {
+              el.classList.add('hl');
+              const box = el.getBoundingClientRect();
+              if (box.top < 80 || box.bottom > window.innerHeight - 40) {
+                el.scrollIntoView({ behavior: 'smooth', block: 'center' });
+              }
+            }
+          },
+          onEnd() {
+            playing = false;
+            clearHl();
+            playBtn.textContent = '▶ 播放';
+          },
+        });
+        playing = true;
+        playBtn.textContent = '⏹ 停止';
+      });
+
+      pdfBtn.addEventListener('click', async () => {
+        if (pdfBtn.disabled) return;
+        pdfBtn.disabled = true;
+        const label = pdfBtn.textContent;
+        pdfBtn.textContent = '生成中…';
+        if (playing) { AudioPlayer.stop(); playing = false; clearHl(); playBtn.textContent = '▶ 播放'; }
+        try {
+          const { cm } = await AbcScore.exportThermalPdf(abcText, score.title);
+          pdfBtn.textContent = `已导出 ${cm} cm`;
+          setTimeout(() => { pdfBtn.textContent = label; pdfBtn.disabled = false; }, 2500);
+        } catch (err) {
+          console.error('[pdf]', err);
+          pdfBtn.textContent = '导出失败';
+          setTimeout(() => { pdfBtn.textContent = label; pdfBtn.disabled = false; }, 2500);
+        }
+      });
+    } catch (err) {
+      console.error('[abc]', err);
+      container.textContent = '乐谱加载失败：' + (err && err.message ? err.message : err);
+    }
+  })();
+
   return section;
 }
 

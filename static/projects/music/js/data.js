@@ -21,8 +21,7 @@ const SCORES = [
     tags: ['交响曲', '合唱', '经典'],
     notes: '《第九交响曲》第四乐章，根据席勒的诗创作，是贝多芬最著名的作品之一，也是古典音乐史上最著名的合唱作品。',
     cover: 'img/欢乐颂.png',
-    renderer: 'scribe',
-    scribeData: 'data/huanlesong.json',
+    abcData: 'data/huanlesong.abc',
     notation: `@key C
 @time 4/4
 @tempo 120
@@ -41,8 +40,7 @@ const SCORES = [
     period: '巴洛克',
     tags: ['巴洛克', '古典', '钢琴'],
     notes: '源自《安娜·玛格达莱娜·巴赫笔记簿》，原作曲者为克里斯蒂安·佩措尔德（Christian Petzold），曾长期被误认为巴赫作品。',
-    renderer: 'scribe',
-    scribeData: 'data/minuet-g.json',
+    abcData: 'data/minuet-g.abc',
     notation: `@key G
 @time 3/4
 @tempo 100
@@ -65,7 +63,6 @@ const SCORES = [
     period: '爵士',
     tags: ['爵士', 'lead sheet', '打印谱'],
     notes: '收录在《Maiden Voyage》(1965) 里的标准曲，38 小节的调式和声进行。谱面用 Scribe 排版，浏览器里可以直接打印。',
-    renderer: 'scribe',
-    scribeData: 'data/dolphin-dance.json'
+    abcData: 'data/dolphin-dance.abc'
   }
 ];

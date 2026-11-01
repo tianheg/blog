@@ -478,6 +478,27 @@ body[data-view="score"] .content { max-width: 1000px; }
   font-weight: 700;
 }
 
+/* ABC 五线谱容器 */
+.abc-container {
+  padding: 1rem 0.75rem;
+  background: var(--surface);
+  overflow-x: auto;
+}
+
+.abc-container svg {
+  display: block;
+  max-width: 100%;
+  height: auto;
+}
+
+/* 播放中的音符高亮（abcjs 的符头是 path/ellipse） */
+.abc-container .hl path,
+.abc-container .hl ellipse,
+.abc-container .hl polygon {
+  fill: var(--accent) !important;
+  stroke: var(--accent) !important;
+}
+
 /* Scribe 打印谱容器：按内容宽度排版，窄屏横向滚动 */
 .scribe-container {
   overflow-x: auto;
