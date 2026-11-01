@@ -62,5 +62,16 @@ const SCORES = [
     tags: ['爵士', 'lead sheet', '打印谱'],
     notes: '收录在《Maiden Voyage》(1965) 里的标准曲，38 小节的调式和声进行。谱面用 Scribe 排版，浏览器里可以直接打印。',
     abcData: 'data/dolphin-dance.abc'
+  },
+  {
+    id: '5',
+    title: 'Melody in C',
+    composer: 'Thomas F. Dunhill',
+    opus: 'First Year Pieces No.1',
+    difficulty: '初级',
+    period: '现代',
+    tags: ['钢琴', '练习曲', '入门'],
+    notes: '选自 Dunhill《First Year Pieces》，16 小节的 C 大调入门小品。谱面从 IMSLP 公版 PDF 转录：homr（TrOMR）做 OMR，再用人工锚点校准第一个音，修掉两处左右手混淆的小节。',
+    abcData: 'data/melody-in-c.abc'
   }
 ];
