@@ -144,7 +144,7 @@ function buildScoreList(scores) {
   return list;
 }
 
-// ── 五线谱：ABC 真源 → abcjs 渲染 + 播放 + 72mm PDF ──────────────
+// ── 五线谱：ABC 真源 → abcjs 渲染 + 播放（可调速/标注）+ 热敏打印 ──
 function buildAbcScore(score) {
   const section = document.createElement('div');
 
@@ -152,33 +152,75 @@ function buildAbcScore(score) {
   bar.className = 'mode-bar';
   bar.innerHTML = `
     <button class="play-btn" id="play-btn" disabled>▶ 播放</button>
+    <label class="ctl">速度
+      <input type="range" id="bpm" min="40" max="180" value="100" step="1">
+      <span class="ctl-num" id="bpm-num">100</span>
+    </label>
+    <label class="ctl">标注
+      <select id="annot">
+        <option value="none">无</option>
+        <option value="note">音名</option>
+        <option value="solf">唱名</option>
+      </select>
+    </label>
     <button class="print-btn" id="print-btn" title="导出 72mm 热敏版式 PDF">热敏打印</button>
   `;
 
   const container = document.createElement('div');
   container.className = 'score-container abc-container';
 
+  const statusBar = document.createElement('div');
+  statusBar.className = 'status-bar';
+  statusBar.innerHTML = `<span id="status">点击播放开始</span><div class="progress"><div id="prog"></div></div>`;
+
   section.appendChild(bar);
   section.appendChild(container);
+  section.appendChild(statusBar);
 
   const playBtn = bar.querySelector('#play-btn');
   const printBtn = bar.querySelector('#print-btn');
+  const bpmInput = bar.querySelector('#bpm');
+  const bpmNum = bar.querySelector('#bpm-num');
+  const annotSel = bar.querySelector('#annot');
+  const statusEl = statusBar.querySelector('#status');
+  const progEl = statusBar.querySelector('#prog');
+
   let playing = false;
   let abcText = '';
+  let forRender = '';
+  let notes = [];
+  let meta = { beatsPerBar: 4, tempo: 100 };
+  let noteEls = [];
+
+  const LETTERS = { C: 0, D: 2, E: 4, F: 5, G: 7, A: 9, B: 11 };
+  const NAMES = ['C', 'C#', 'D', 'D#', 'E', 'F', 'F#', 'G', 'G#', 'A', 'A#', 'B'];
+
+  bpmInput.addEventListener('input', () => {
+    bpmNum.textContent = bpmInput.value;
+  });
+
+  const clearHl = () => noteEls.forEach(el => el.classList.remove('hl'));
+
+  async function render(withAnnotations) {
+    const text = AbcScore.annotate(forRender, withAnnotations);
+    await AbcScore.render(container, text, { responsive: 'resize', staffwidth: 900 });
+    noteEls = [...container.querySelectorAll('.abcjs-note, g.abcjs-note')];
+  }
 
   (async () => {
     try {
       const url = new URL(score.abcData, document.baseURI).href;
       abcText = await (await fetch(url)).text();
-      // 页面已有标题和作曲家，ABC 里的 T:/C: 再画一遍就重复了
-      const forRender = abcText.split('\n').filter(l => !/^[TC]:/.test(l)).join('\n');
-      await AbcScore.render(container, forRender, { responsive: 'resize', staffwidth: 900 });
+      forRender = abcText.split('\n').filter(l => !/^[TC]:/.test(l)).join('\n');
+      meta = AbcScore.meta(abcText);
+
+      const parsed = AbcScore.toNotes(abcText);
+      notes = parsed.notes;
+      bpmInput.value = String(parsed.bpm || meta.tempo || 100);
+      bpmNum.textContent = bpmInput.value;
+
+      await render('none');
       playBtn.disabled = false;
-
-      const { notes, bpm } = AbcScore.toNotes(abcText);
-      const noteEls = [...container.querySelectorAll('.abcjs-note, g.abcjs-note')];
-
-      const clearHl = () => noteEls.forEach(el => el.classList.remove('hl'));
 
       playBtn.addEventListener('click', () => {
         if (playing) {
@@ -186,11 +228,13 @@ function buildAbcScore(score) {
           playing = false;
           clearHl();
           playBtn.textContent = '▶ 播放';
+          progEl.style.width = '0%';
           return;
         }
         clearHl();
-        AudioPlayer.playNotes(notes, bpm, {
-          onNote(index) {
+        AudioPlayer.playSequence(notes, {
+          getBpm: () => Number(bpmInput.value) || 100,
+          onNote(index, note) {
             noteEls.forEach(el => el.classList.remove('hl'));
             const el = noteEls[index];
             if (el) {
@@ -200,18 +244,36 @@ function buildAbcScore(score) {
                 el.scrollIntoView({ behavior: 'smooth', block: 'center' });
               }
             }
+            const barNo = Math.floor(note.start / meta.beatsPerBar) + 1;
+            const name = NAMES[note.midi % 12];
+            const oct = Math.floor(note.midi / 12) - 1;
+            statusEl.textContent = `第 ${barNo} 小节 · ${name}${oct}`;
+            progEl.style.width = ((index / notes.length) * 100).toFixed(1) + '%';
           },
           onEnd() {
             playing = false;
             clearHl();
             playBtn.textContent = '▶ 播放';
+            progEl.style.width = '100%';
+            statusEl.textContent = '演奏完毕';
           },
         });
         playing = true;
         playBtn.textContent = '⏹ 停止';
       });
 
-      // 打印：直接出 72mm（热敏打印机满宽）单页 PDF，尺寸精确、不依赖系统打印设置
+      annotSel.addEventListener('change', async () => {
+        if (playing) {
+          AudioPlayer.stop();
+          playing = false;
+          clearHl();
+          playBtn.textContent = '▶ 播放';
+          progEl.style.width = '0%';
+          statusEl.textContent = '点击播放开始';
+        }
+        await render(annotSel.value);
+      });
+
       printBtn.addEventListener('click', async () => {
         if (printBtn.disabled) return;
         printBtn.disabled = true;
@@ -228,7 +290,6 @@ function buildAbcScore(score) {
           setTimeout(() => { printBtn.textContent = label; printBtn.disabled = false; }, 2500);
         }
       });
-
     } catch (err) {
       console.error('[abc]', err);
       container.textContent = '乐谱加载失败：' + (err && err.message ? err.message : err);

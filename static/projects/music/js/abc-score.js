@@ -57,6 +57,64 @@ const AbcScore = {
     return { tunes, svg: paper.querySelector('svg') };
   },
 
+  // 给每个音符加注解：「音名」(C D E) 或「唱名」(do re mi，按调号算相对音级)
+  annotate(abc, mode) {
+    if (!mode || mode === 'none') return abc;
+    const LETTERS = { C: 0, D: 2, E: 4, F: 5, G: 7, A: 9, B: 11 };
+    const NAME = ['C', 'C#', 'D', 'D#', 'E', 'F', 'F#', 'G', 'G#', 'A', 'A#', 'B'];
+    const SOLFA = ['do', 're', 'mi', 'fa', 'sol', 'la', 'si'];
+
+    const lines = abc.split('\n');
+    let inBody = false;
+    let tonic = 0;
+
+    return lines.map(line => {
+      const keyM = /^K:\s*([A-G])([#b]?)/.exec(line);
+      if (keyM) {
+        inBody = true;
+        tonic = (LETTERS[keyM[1]] + (keyM[2] === '#' ? 1 : keyM[2] === 'b' ? -1 : 0) + 12) % 12;
+        return line;
+      }
+      if (!inBody || /^w:/.test(line) || /^[A-Za-z]:/.test(line)) return line;
+
+      return line.replace(/(^|[\s|])([_^=]?)([A-Ga-g])([,']*)(\d*(?:\/\d+)?)?/g,
+        (m, pre, acc, letter, octMark, dur) => {
+          const upper = letter.toUpperCase();
+          let pc = LETTERS[upper];
+          for (const ch of acc) pc += ch === '^' ? 1 : ch === '_' ? -1 : 0;
+          pc = ((pc % 12) + 12) % 12;
+
+          let label;
+          if (mode === 'note') {
+            label = NAME[pc];
+          } else {
+            const deg = ((pc - tonic) % 12 + 12) % 12;
+            const MAJOR = [0, 2, 4, 5, 7, 9, 11];
+            const idx = MAJOR.indexOf(deg);
+            if (idx >= 0) {
+              label = SOLFA[idx];
+            } else {
+              let lo = 0;
+              for (let k = 0; k < MAJOR.length; k++) if (MAJOR[k] < deg) lo = k;
+              label = SOLFA[lo] + '#';
+            }
+          }
+          return `${pre}"${label}"${acc}${letter}${octMark}${dur || ''}`;
+        });
+    }).join('\n');
+  },
+
+  // ABC 头里的拍号与速度（状态栏、小节号用）
+  meta(abc) {
+    const m = /^M:\s*(\d+)\s*\/\s*(\d+)/m.exec(abc);
+    const q = /^Q:\s*1\s*\/\s*(\d+)\s*=\s*(\d+)/m.exec(abc);
+    return {
+      beatsPerBar: m ? Number(m[1]) : 4,
+      beatUnit: m ? Number(m[2]) : 4,
+      tempo: q ? Number(q[2]) : 100,
+    };
+  },
+
   // ABC → [{ midi, start(拍), dur(拍) }]，供 Web Audio 播放
   toNotes(abcText) {
     const lines = abcText.split('\n');
