@@ -57,6 +57,65 @@ const AbcScore = {
     return { tunes, svg: paper.querySelector('svg') };
   },
 
+  // 用 abcjs 返回的 visualObj 建立「播放进度比例 → SVG 元素」映射。
+  // 每个 note 自带 abselem.elemset（就是它的 g 元素），比按 ABC 行号/序号猜可靠得多
+  // —— abcjs 会按 staffwidth 重排，渲染行数不一定等于 ABC 的行数（踩过）
+  buildElemMap(tunes) {
+    const tune = tunes && tunes[0];
+    const map = new Map();
+    if (!tune || !tune.lines) return { map, totalUnits: 1 };
+
+    let t0 = 0;
+    const rows = [];
+    tune.lines.forEach(line => {
+      const v0 = (line.staff[0] && line.staff[0].voices[0]) || [];
+      const lineDur = v0.reduce((s, n) => s + (n.duration || 0), 0);
+      rows.push({ line, t0 });
+      t0 += lineDur;
+    });
+    const totalUnits = t0 || 1;
+
+    rows.forEach(({ line, t0: start }) => {
+      line.staff.forEach(staff => {
+        (staff.voices || []).forEach(notes => {
+          let t = start;
+          notes.forEach(note => {
+            const el = note.abselem && note.abselem.elemset && note.abselem.elemset[0];
+            if (el) {
+              const k = (t / totalUnits).toFixed(4);
+              if (!map.has(k)) map.set(k, []);
+              map.get(k).push(el);
+            }
+            t += note.duration || 0;
+          });
+        });
+      });
+    });
+
+    // 排好序，供单调查找
+    const list = [...map.entries()]
+      .map(([k, els]) => ({ k: Number(k), els }))
+      .sort((a, b) => a.k - b.k);
+
+    return { map, list, totalUnits };
+  },
+
+  // 按播放进度比例取元素。播放是顺序的，查找也必须单调往前推进，
+  // 否则两套时值算法的微小误差会让高亮偶尔跳回前一个音符（看起来像"往回放"）
+  elemAt(elemMap, ratio, hint) {
+    if (!elemMap || !elemMap.list || !elemMap.list.length) return [];
+    const list = elemMap.list;
+    const start = Math.max(0, (hint || 0) - 1);
+    let best = null;
+    for (let i = start; i < list.length && i <= start + 6; i++) {
+      const d = Math.abs(list[i].k - ratio);
+      if (!best || d < best.d) best = { i, d, els: list[i].els };
+    }
+    if (!best) return [];
+    elemMap.lastHint = best.i;
+    return best.els;
+  },
+
   // 给每个音符加注解：「音名」(C D E) 或「唱名」(do re mi，按调号算相对音级)
   annotate(abc, mode) {
     if (!mode || mode === 'none') return abc;
