@@ -1,3 +1,41 @@
+/* PDF 提取 — 视觉语言与 tianheg.co 主站一致（token 同 scripts/org2site/static/style.css） */
+@font-face {
+  font-family: "Satoshi";
+  src: url("/fonts/Satoshi-Variable.woff2") format("woff2");
+  font-weight: 400 700;
+  font-style: normal;
+  font-display: swap;
+}
+@font-face {
+  font-family: "LXGW WenKai Screen";
+  src: url("/fonts/LXGWWenKaiScreen-subset.woff2") format("woff2");
+  font-weight: 400;
+  font-style: normal;
+  font-display: swap;
+}
+
+:root {
+  color-scheme: light dark;
+
+  --bg: light-dark(#f7f5f3, #121c22);
+  --surface: light-dark(#f3ede9, #1c262d);
+  --text: light-dark(#4b4743, #9fb9d0);
+  --heading: light-dark(#101828, #f3f4f6);
+  --muted: light-dark(#646c7c, #99a1af);
+  --border: light-dark(#e5e7eb, #1e2939);
+  --accent: light-dark(#3d5b7a, #88a1bc);
+  --danger: light-dark(#a33b3b, #d98a8a);
+
+  --radius: 8px;
+  --radius-sm: 6px;
+
+  --font-content: "Satoshi", "LXGW WenKai Screen", -apple-system, BlinkMacSystemFont,
+    "PingFang SC", "Hiragino Sans GB", "Noto Sans SC", "Noto Sans CJK SC",
+    "Source Han Sans SC", "Microsoft YaHei", Arial, sans-serif;
+  --font-ui: -apple-system, BlinkMacSystemFont, "PingFang SC", "Noto Sans SC",
+    "Segoe UI", system-ui, sans-serif;
+}
+
 *,
 *::before,
 *::after {
@@ -6,29 +44,206 @@
   box-sizing: border-box;
 }
 
-.inputarea {
-  margin: 5rem 0 3rem 0;
-  width: 100%;
+body {
+  margin: 0 auto;
+  max-width: 38rem;
+  padding: 2rem 1.25rem calc(3rem + env(safe-area-inset-bottom));
+  background: var(--bg);
+  color: var(--text);
+  font-family: var(--font-content);
+  font-size: 1rem;
+  line-height: 1.6;
+  -webkit-font-smoothing: antialiased;
+  -webkit-text-size-adjust: 100%;
+}
+
+a { color: var(--accent); }
+
+.back {
+  display: inline-block;
+  margin-bottom: 1.5rem;
+  font-family: var(--font-ui);
+  font-size: 0.8125rem;
+  color: var(--muted);
+  text-decoration: none;
+}
+.back:hover { color: var(--accent); }
+
+h1 {
+  margin: 0 0 0.5rem;
+  font-size: clamp(1.75rem, 5vw, 2.25rem);
+  font-weight: 700;
+  line-height: 1.2;
+  letter-spacing: -0.01em;
+  color: var(--heading);
+}
+
+.intro {
+  margin: 0 0 1.75rem;
+  font-size: 0.9375rem;
+  color: var(--muted);
+}
+
+/* ── 拖放区：整块都是可点区域，移动端触控高度够 ─────────────── */
+.drop {
   display: flex;
+  flex-direction: column;
+  align-items: center;
   justify-content: center;
-  position: relative;
+  gap: 0.5rem;
+  min-height: 9.5rem;
+  padding: 1.5rem 1rem;
+  border: 1px dashed var(--border);
+  border-radius: var(--radius);
+  background: var(--surface);
+  text-align: center;
+  cursor: pointer;
+  transition: border-color 0.15s ease, background-color 0.15s ease;
+}
+
+.drop:hover,
+.drop:focus-within,
+.drop.is-over {
+  border-color: var(--accent);
+  background: var(--bg);
+}
+
+.drop.is-over { border-style: solid; }
+
+.drop-mark {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 3rem;
+  height: 2rem;
+  border: 1px solid var(--border);
+  border-radius: var(--radius-sm);
+  font-family: var(--font-ui);
+  font-size: 0.6875rem;
+  font-weight: 600;
+  letter-spacing: 0.08em;
+  color: var(--muted);
+  background: var(--bg);
+}
+
+.drop-text {
+  font-size: 0.9375rem;
+  color: var(--muted);
+  word-break: break-all;
+}
+
+.drop.has-file .drop-text { color: var(--heading); }
+
+/* ── 文件信息 ─────────────────────────────────────────────── */
+.file-info {
+  margin: 0.75rem 0 0;
+  font-family: var(--font-ui);
+  font-size: 0.8125rem;
+  color: var(--muted);
+  word-break: break-all;
+}
+
+.file-info strong { color: var(--heading); font-weight: 600; }
+
+/* ── 页码输入 ─────────────────────────────────────────────── */
+.field {
+  margin-top: 1.5rem;
+}
+
+.field > label {
+  display: block;
+  margin-bottom: 0.375rem;
+  font-family: var(--font-ui);
+  font-size: 0.8125rem;
+  font-weight: 500;
+  color: var(--muted);
+}
+
+.field-row {
+  display: flex;
+  gap: 0.5rem;
 }
 
 #rangeSelector {
-  margin-left: 2rem;
+  flex: 1;
+  min-width: 0;
+  height: 2.75rem;
+  padding: 0 0.75rem;
+  border: 1px solid var(--border);
+  border-radius: var(--radius-sm);
+  background: var(--surface);
+  color: var(--text);
+  font-family: var(--font-ui);
+  font-size: 1rem;          /* iOS 上 <16px 会触发聚焦缩放 */
+  outline: none;
+  transition: border-color 0.15s ease, background-color 0.15s ease;
 }
 
-#pdfFrame {
-  border-style: none;
-  border-spacing: 0;
-  width: 50%;
-  height: 80vh;
-  position: absolute;
-  top: 50%;
-  left: 50%;
-  transform: translate(-50%, -40%);
+#rangeSelector:focus {
+  border-color: var(--accent);
+  background: var(--bg);
 }
 
-button {
-  margin: 0 0 0 0.5rem;
+#rangeSelector::placeholder { color: var(--muted); opacity: 0.7; }
+
+.primary {
+  flex-shrink: 0;
+  min-width: 6rem;
+  height: 2.75rem;
+  padding: 0 1rem;
+  border: none;
+  border-radius: var(--radius-sm);
+  background: var(--accent);
+  color: var(--bg);
+  font-family: var(--font-ui);
+  font-size: 0.9375rem;
+  font-weight: 600;
+  cursor: pointer;
+  transition: opacity 0.15s ease;
+}
+
+.primary:hover:not(:disabled) { opacity: 0.88; }
+
+.primary:disabled {
+  opacity: 0.4;
+  cursor: not-allowed;
+}
+
+.hint {
+  margin: 0.5rem 0 0;
+  font-size: 0.8125rem;
+  color: var(--muted);
+}
+
+.hint code {
+  padding: 0.05rem 0.3rem;
+  border-radius: 4px;
+  background: var(--surface);
+  font-family: ui-monospace, SFMono-Regular, Menlo, monospace;
+  font-size: 0.75rem;
+}
+
+/* ── 状态行 ───────────────────────────────────────────────── */
+.status {
+  margin-top: 1rem;
+  min-height: 1.5rem;
+  font-family: var(--font-ui);
+  font-size: 0.875rem;
+  color: var(--muted);
+}
+
+.status.is-error { color: var(--danger); }
+.status.is-done { color: var(--accent); }
+
+/* ── 窄屏：按钮单独一行，别把输入框挤没 ───────────────────── */
+@media (max-width: 26rem) {
+  .field-row {
+    flex-wrap: wrap;
+  }
+  #rangeSelector { flex: 1 1 100%; }
+  .primary { flex: 1 1 100%; }
+}
+
+@media print {
+  .back, .drop, .field, .status, .file-info { display: none; }
 }
