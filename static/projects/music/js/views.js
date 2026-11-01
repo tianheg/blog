@@ -203,7 +203,9 @@ function buildAbcScore(score) {
 
   async function render(withAnnotations) {
     const text = AbcScore.annotate(forRender, withAnnotations);
-    await AbcScore.render(container, text, { responsive: 'resize', staffwidth: 900 });
+    // 谱面宽度跟着容器走：固定 900 在手机上会被压成一条，双谱表 8 行挤在 250px 里
+    const avail = Math.max(300, (window.innerWidth || 390) - 40);
+    await AbcScore.render(container, text, { responsive: 'resize', staffwidth: Math.min(900, avail) });
     noteEls = [...container.querySelectorAll('.abcjs-note, g.abcjs-note')];
   }
 
