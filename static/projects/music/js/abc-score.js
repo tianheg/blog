@@ -271,9 +271,11 @@ const AbcScore = {
 
         const data = ctx.getImageData(0, 0, canvas.width, canvas.height);
         const px = data.data;
+        // 阈值放宽到 205：abcjs 的谱线只有 0.5px 宽，缩放后抗锯齿成浅灰（≈180），
+        // 用 140 过滤会把五线谱的线整条吃掉，纸上就少一条线
         for (let i = 0; i < px.length; i += 4) {
           const lum = px[i] * 0.299 + px[i + 1] * 0.587 + px[i + 2] * 0.114;
-          const v = lum < 140 ? 0 : 255;
+          const v = lum < 205 ? 0 : 255;
           px[i] = px[i + 1] = px[i + 2] = v;
           px[i + 3] = 255;
         }
