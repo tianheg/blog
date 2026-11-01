@@ -99,18 +99,17 @@ body {
 
 /* 主内容 */
 .content {
-  max-width: 640px;
+  max-width: 1000px;
   margin: 0 auto;
   padding: 1.25rem 1rem 3rem;
 }
 
-/* 桌面：详情页把乐谱铺开，列表页仍是窄列（宽卡片会显得空） */
 @media (min-width: 900px) {
-  body[data-view="score"] .content {
-    max-width: 1000px;
-    padding: 2rem 1.5rem 4rem;
-  }
+  .content { padding: 2rem 1.5rem 4rem; }
 }
+
+/* 打印谱按真实宽度排版，窄屏允许横向滚动 */
+body[data-view="score"] .content { max-width: 1000px; }
 
 /* 列表页标题 */
 .page-header {
@@ -128,28 +127,49 @@ body {
   color: var(--text-dim);
 }
 
-/* 曲谱列表 */
+/* 曲谱列表：卡片网格，桌面 3 列 */
 .score-list {
-  display: flex;
-  flex-direction: column;
-  gap: 0.5rem;
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(13rem, 1fr));
+  gap: 0.875rem;
 }
 
 .score-item {
-  display: block;
-  padding: 1rem;
+  display: flex;
+  flex-direction: column;
+  overflow: hidden;
   background: var(--surface);
   border: 1px solid var(--border);
   border-radius: var(--radius);
   text-decoration: none;
   color: inherit;
   cursor: pointer;
-  transition: border-color 0.15s;
+  transition: border-color 0.15s, transform 0.15s;
 }
 
-.score-item:hover {
-  border-color: var(--accent);
+.score-item:hover { border-color: var(--accent); }
+
+/* 封面：有图用图，没有就一个色块放首字 */
+.score-item .cover {
+  display: block;
+  width: 100%;
+  aspect-ratio: 16 / 9;
+  object-fit: cover;
+  background: var(--bg);
+  border-bottom: 1px solid var(--border);
 }
+
+.score-item .cover-empty {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 1.5rem;
+  font-weight: 600;
+  color: var(--accent);
+  letter-spacing: 0.1em;
+}
+
+.score-item .info { padding: 0.75rem 0.875rem 0.875rem; }
 
 .score-item:active {
   background: #fafafa;
@@ -379,8 +399,65 @@ body {
   display: none;
 }
 
+/* 打印谱：模式标签与打印按钮 */
+.mode-tag {
+  padding: 0.375rem 0.875rem;
+  font-size: 0.8125rem;
+  color: var(--text-dim);
+  font-weight: 500;
+}
+
+.print-btn {
+  padding: 0.375rem 0.875rem;
+  border: 1px solid var(--border);
+  border-radius: 999px;
+  background: var(--surface);
+  color: var(--text);
+  font-size: 0.8125rem;
+  cursor: pointer;
+  white-space: nowrap;
+}
+
+.print-btn:hover { border-color: var(--accent); }
+
+/* 小节号：SN 默认 14px 灰字，提亮加粗 */
+.score-container svg text.bar-no {
+  fill: var(--text-dim) !important;
+  font-weight: 600;
+}
+
+/* 播放中的音符高亮（SN 渲染的 SVG text） */
+.score-container svg text.hl {
+  fill: var(--accent) !important;
+  font-weight: 700;
+}
+
+/* Scribe 打印谱容器：按内容宽度排版，窄屏横向滚动 */
+.scribe-container {
+  overflow-x: auto;
+  padding: 1rem;
+  background: var(--surface);
+  color: #111;
+}
+
+/* 不要改 display —— Scribe 自己用 flex 排版系统行，改成 block 会让每行只剩 1 小节 */
+.scribe-container scribe-music {
+  font-size: 15px;
+  line-height: 1.45;
+}
+
+body:not([data-view="score"]) .scribe-container { display: none; }
+
+.scribe-hint {
+  padding: 2rem;
+  text-align: center;
+  color: var(--text-dim);
+  font-size: 0.875rem;
+}
+
 /* 打印 */
 @media print {
+  .print-btn { display: none !important; }
   .top-bar, .back-btn, .mode-bar, .breadcrumb { display: none !important; }
   .content { max-width: none; padding: 0; }
 }
