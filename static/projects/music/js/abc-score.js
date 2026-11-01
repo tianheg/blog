@@ -130,6 +130,46 @@ const AbcScore = {
       const arr = voices[voice] || (voices[voice] = []);
       for (const tk of tokens) {
         if (tk === '|' || tk === '') continue;
+
+        // 和弦 [FAc] / [E2B2]：方括号里的音同时发声，时值取括号后的后缀
+        const chordM = /^\[(.+)\](\d*)(?:\/(\d*))?$/.exec(tk);
+        if (chordM) {
+          const inner = chordM[1];
+          const sufNum = chordM[2];
+          const sufDen = chordM[3];
+
+          let mult = 1;
+          if (sufNum) mult = Number(sufNum);
+          if (sufDen !== undefined) mult /= sufDen === '' ? 2 : Number(sufDen);
+
+          const midis = [];
+          let innerDur = null;
+          const re = /([_^=]*)([A-Ga-gzx])([,']*)(\d*)(?:\/(\d*))?/g;
+          let im;
+          while ((im = re.exec(inner))) {
+            const [, a2, l2, o2, n2, d2] = im;
+            if (l2 === 'z' || l2 === 'x') continue;
+            const up = l2.toUpperCase();
+            let mi = LETTERS[up];
+            let oc = l2 === up ? 4 : 5;
+            for (const ch of o2) oc += ch === "'" ? 1 : -1;
+            mi += (oc + 1) * 12;
+            for (const ch of a2) mi += ch === '^' ? 1 : ch === '_' ? -1 : 0;
+            midis.push(mi);
+            // 各音自己的时值（没写就用统一的）
+            let mm = 1;
+            if (n2) mm = Number(n2);
+            if (d2 !== undefined) mm /= d2 === '' ? 2 : Number(d2);
+            if (innerDur === null) innerDur = mm * unit;
+          }
+          if (!midis.length) continue;
+
+          const dur = (sufNum || sufDen !== undefined ? mult * unit : innerDur) || 1;
+          arr.push({ midis, start: cursorRef.beat, dur });
+          cursorRef.beat += dur;
+          continue;
+        }
+
         const m = /^([_^=]*)([A-Ga-gzx])([,']*)(\d*)(?:\/(\d*))?$/.exec(tk);
         if (!m) continue;
         const [, acc, letter, octMark, numStr, denStr] = m;
@@ -148,7 +188,7 @@ const AbcScore = {
         midi += (oct + 1) * 12;
         for (const ch of acc) midi += ch === '^' ? 1 : ch === '_' ? -1 : 0;
 
-        arr.push({ midi, start: cursorRef.beat, dur });
+        arr.push({ midis: [midi], start: cursorRef.beat, dur });
         cursorRef.beat += dur;
       }
     };
@@ -187,11 +227,11 @@ const AbcScore = {
         const k = n.start.toFixed(3);
         const cur = byStart.get(k);
         if (cur) {
-          cur.midis.push(n.midi);
+          n.midis.forEach(m => { if (!cur.midis.includes(m)) cur.midis.push(m); });
           cur.dur = Math.max(cur.dur, n.dur);
           if (v === '1') cur.hasMelody = true;
         } else {
-          byStart.set(k, { start: n.start, dur: n.dur, midis: [n.midi], hasMelody: v === '1' });
+          byStart.set(k, { start: n.start, dur: n.dur, midis: [...n.midis], hasMelody: v === '1' });
         }
       });
     });
