@@ -73,5 +73,16 @@ const SCORES = [
     tags: ['钢琴', '练习曲', '入门'],
     notes: '选自 Dunhill《First Year Pieces》，16 小节的 C 大调入门小品。谱面从 IMSLP 公版 PDF 转录：homr（TrOMR）做 OMR，再用人工锚点校准第一个音，修掉两处左右手混淆的小节。',
     abcData: 'data/melody-in-c.abc'
+  },
+  {
+    id: '6',
+    title: 'Joys of Fraude',
+    composer: 'Marc Harvey Rivas',
+    opus: 'Joys of Beethoven',
+    difficulty: '高级',
+    period: '现代',
+    tags: ['钢琴', '改编', '双谱表'],
+    notes: '从 MusicXML（.mxl）直接转换：解压后解析 part/staff，双谱表 6/4 拍、E 大调、56 小节，左右手都是和弦织体。',
+    abcData: 'data/joys-of-fraude.abc'
   }
 ];
