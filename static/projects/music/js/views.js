@@ -199,14 +199,18 @@ function buildAbcScore(score) {
     bpmNum.textContent = bpmInput.value;
   });
 
-  const clearHl = () => noteEls.forEach(el => el.classList.remove('hl'));
+  let elemMap = null;
+  // 按 class 全量清理：elemMap 返回的元素不一定都在 noteEls 里（延音线、装饰音），
+  // 用 noteEls 清会漏，高亮越积越多
+  const clearHl = () => container.querySelectorAll('.hl').forEach(el => el.classList.remove('hl'));
 
   async function render(withAnnotations) {
     const text = AbcScore.annotate(forRender, withAnnotations);
     // 谱面宽度跟着容器走：固定 900 在手机上会被压成一条，双谱表 8 行挤在 250px 里
     const avail = Math.max(300, (window.innerWidth || 390) - 40);
-    await AbcScore.render(container, text, { responsive: 'resize', staffwidth: Math.min(900, avail) });
+    const out = await AbcScore.render(container, text, { responsive: 'resize', staffwidth: Math.min(900, avail) });
     noteEls = [...container.querySelectorAll('.abcjs-note, g.abcjs-note')];
+    elemMap = AbcScore.buildElemMap(out.tunes);
   }
 
   (async () => {
@@ -235,27 +239,31 @@ function buildAbcScore(score) {
       function startPlay(fromIndex) {
         if (playing) AudioPlayer.stop();
         clearHl();
+        // 从中间开始播时，把查找游标放到大致位置，否则单调推进找不到后面的音符
+        if (elemMap && elemMap.list) {
+          const from = Math.max(0, Math.min(notes.length - 1, fromIndex || 0));
+          elemMap.lastHint = Math.floor((from / Math.max(1, notes.length)) * elemMap.list.length);
+        }
         const start = Math.max(0, Math.min(notes.length - 1, fromIndex || 0));
         AudioPlayer.playSequence(notes, {
           startIndex: start,
           getBpm: () => Number(bpmInput.value) || 100,
           onNote(index, note) {
-            noteEls.forEach(el => el.classList.remove('hl'));
+            container.querySelectorAll('.hl').forEach(el => el.classList.remove('hl'));
             // 按 abcjs 的 abcjs-v{声部} / abcjs-n{声部内序号} 精确找元素：
             // 双谱表要上下同时亮，用合并事件的索引是找不到对的元素的
-            const targets = [];
-            (note.parts || []).forEach(pt => {
-              const e = container.querySelector(
-                '.abcjs-l' + pt.line + '.abcjs-v' + pt.v + '.abcjs-n' + pt.nIn);
-              if (e && !targets.includes(e)) targets.push(e);
-            });
+            const total = notes.length ? notes[notes.length - 1].start + notes[notes.length - 1].dur : 1;
+            const targets = (AbcScore.elemAt(elemMap, note.start / total, elemMap && elemMap.lastHint) || []).slice();
             if (!targets.length && noteEls[index]) targets.push(noteEls[index]);
             targets.forEach(t => t.classList.add('hl'));
 
-            const el = targets[0];
-            if (el) {
+            // 滚动锚点用最靠上的那个（高音谱表），否则两个声部轮流当 targets[0]
+            // 会让页面上下抽搐，看起来像"乐谱往回放"
+            if (targets.length) {
+              const el = targets.reduce((a, b) =>
+                a.getBoundingClientRect().top <= b.getBoundingClientRect().top ? a : b);
               const box = el.getBoundingClientRect();
-              if (box.top < 80 || box.bottom > window.innerHeight - 40) {
+              if (box.top < 60 || box.bottom > window.innerHeight - 40) {
                 el.scrollIntoView({ behavior: 'smooth', block: 'center' });
               }
             }
