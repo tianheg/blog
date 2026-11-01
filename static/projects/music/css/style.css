@@ -551,13 +551,16 @@ body[data-view="score"] .content { max-width: 1000px; }
   height: auto;
 }
 
-/* 播放中的音符高亮：必须用跟黑符头对比强烈的暖橙，
-   用 accent 墨蓝跟黑音符几乎分不出来（踩过） */
+/* 播放中的音符高亮：玫红在黑白谱上对比最强；符头(fill)、符干/符杠(stroke)
+   都要覆盖，否则只亮"豆瓣"不亮竖线 */
 .abc-container .hl path,
-.abc-container .hl ellipse,
-.abc-container .hl polygon {
-  fill: light-dark(#c2410c, #fb923c) !important;
-  stroke: light-dark(#c2410c, #fb923c) !important;
+.abc-container .hl rect,
+.abc-container .hl line,
+.abc-container .hl polyline,
+.abc-container .hl polygon,
+.abc-container .hl ellipse {
+  fill: light-dark(#e11d48, #fb7185) !important;
+  stroke: light-dark(#e11d48, #fb7185) !important;
 }
 
 /* 高亮时整体放大一点点，扫一眼就能找到当前音 */
