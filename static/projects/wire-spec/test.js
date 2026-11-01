@@ -116,6 +116,27 @@ const parCuAl = W.sizeParallel([
 ck('铜铝混接告警', parCuAl.warns.some(w => w.includes('铜铝')), true);
 ck('铝支路分得更少（ρ 大）', parCuAl.rows[1].current < parCuAl.rows[0].current, true);
 
+console.log('— 短时脉冲工况 —');
+ck('RMS 150A 5s/10s', Math.round(W.rmsCurrent(150, 5, 10) * 10) / 10, 86.6, 0.05);
+ck('RMS 占空比 100% 退化为峰值', W.rmsCurrent(150, 5, 0), 150);
+ck('单脉冲温升 16mm² 150A/5s', Math.round(W.pulseRise(16, 150, 5, 'cu') * 100) / 100, 2.21, 0.01);
+ck('单脉冲温升 10mm² 150A/5s', Math.round(W.pulseRise(10, 150, 5, 'cu') * 100) / 100, 5.67, 0.01);
+ck('铝比铜热 2.3 倍', Math.round(W.pulseRise(16, 150, 5, 'al') / W.pulseRise(16, 150, 5, 'cu') * 10) / 10, 2.3, 0.05);
+
+const pbase = { system: 'dc', volt: 60, length: 1, allowPct: 5, material: 'cu', insul: 'xlpe',
+  method: 'C', ambient: 30, circuits: 1, groupStyle: 'bunched', soilRho: 2.5, cosphi: 1 };
+const p1 = W.sizeOne({ ...pbase, current: 150, pulse: { ton: 5, toff: 10 } });
+ck('150A/5s-10s 推荐 16mm²', p1.rec.size, 16);
+ck('  断路器按 RMS 取 100A', p1.breaker, 100);
+ck('  RMS 记录在结果里', Math.round(p1.pulse.rms), 87);
+ck('  单脉冲温升', Math.round(p1.rec.dT * 10) / 10, 2.2, 0.05);
+const p2 = W.sizeOne({ ...pbase, current: 150, pulse: { ton: 5, toff: 5 } });
+ck('占空比升高 → 25mm²', p2.rec.size, 25);
+const c150 = W.sizeOne({ ...pbase, current: 150 });
+ck('连续工况比脉冲大一档以上', c150.rec.size > p1.rec.size, true);
+ck('脉冲模式下超限档被判 pulseOk=false',
+  W.sizeOne({ ...pbase, current: 400, pulse: { ton: 5, toff: 60 } }).rows.find(r => r.size === 16).ok, false);
+
 console.log('— 辅助 —');
 ck('AWG 1.5mm²', W.awgOf(1.5), 15);
 ck('AWG 25mm²', W.awgOf(25), 3);

@@ -97,6 +97,11 @@ input[type=number]:focus,select:focus{outline:none;border-color:var(--accent);bo
   padding:8px 6px;border-radius:7px;cursor:pointer;min-height:34px}
 .seg button[aria-pressed="true"]{background:var(--panel);color:var(--ink);font-weight:600;box-shadow:var(--shadow)}
 
+.calc{font-size:13px;color:var(--ink2);font-variant-numeric:tabular-nums;background:var(--panel2);
+  border:1px solid var(--line2);border-radius:9px;padding:9px 10px;min-height:42px;
+  display:block;line-height:1.6}
+.calc b{color:var(--ink);font-weight:650}
+
 .chips{display:flex;flex-wrap:wrap;gap:6px}
 .chips button{border:1px solid var(--line2);background:var(--panel2);color:var(--ink2);font:inherit;
   font-size:12.5px;padding:6px 11px;border-radius:999px;cursor:pointer;min-height:34px}
@@ -268,6 +273,28 @@ footer b{color:var(--ink2);font-weight:600}
                 <button data-mode="power" aria-pressed="false">按功率</button>
               </div>
             </div>
+          </div>
+          <div class="row">
+            <div class="f">
+              <label>负载性质</label>
+              <div class="seg" id="loadKind">
+                <button data-kind="cont" aria-pressed="true">连续</button>
+                <button data-kind="pulse" aria-pressed="false">短时脉冲</button>
+              </div>
+            </div>
+          </div>
+          <div class="row c2 hidden" id="pulseRow">
+            <div class="f unit">
+              <label for="ton">单次脉宽</label>
+              <input type="number" id="ton" value="5" min="0.1" max="600" step="0.5"><span>s</span>
+            </div>
+            <div class="f unit">
+              <label for="toff">脉冲间隔</label>
+              <input type="number" id="toff" value="10" min="0.1" max="3600" step="0.5"><span>s</span>
+            </div>
+          </div>
+          <div class="row hidden" id="dutyRow">
+            <div class="f"><label>等效工况</label><div class="calc" id="dutyOut">—</div></div>
           </div>
           <div class="row c2">
             <div class="f unit">
@@ -651,15 +678,34 @@ footer b{color:var(--ink2);font-weight:600}
     return size * length * runs * density / 1000;    // kg
   }
 
+  var HEAT = { cu: { d: 8.89, c: 0.385 }, al: { d: 2.70, c: 0.897 } };
+
+  /* 短时负载：占空比等效（稳态）电流 */
+  function rmsCurrent(ipk, ton, toff) {
+    var T = (ton || 0) + (toff || 0);
+    if (!(ton > 0) || !(T > 0)) return ipk;
+    return ipk * Math.sqrt(ton / T);
+  }
+
+  /* 单次脉冲绝热温升 K：ΔT = ρ₂₀·I²·t / (S²·d·c)  （铜 d=8.89 g/cm³, c=0.385 J/gK） */
+  function pulseRise(size, ipk, ton, material) {
+    var m = material === 'al' ? 'al' : 'cu';
+    var h = HEAT[m];
+    return RHO20[m] * ipk * ipk * ton / (size * size * h.d * h.c);
+  }
+
   function sizeOne(opt) {
     var system = opt.system || '1ph';
     var volt = opt.volt;
     var cos = opt.cosphi == null ? 1 : opt.cosphi;
-    var ib = opt.current;
+    var ipk = opt.current;                       // 脉冲模式下这是峰值
+    var pulse = opt.pulse && opt.pulse.ton > 0 ? opt.pulse : null;
+    var ib = pulse ? rmsCurrent(ipk, pulse.ton, pulse.toff) : ipk;   // 稳态等效电流
     var loaded = system === '3ph' ? 3 : 2;
     var inMin = breakerAtLeast(ib);
     var limit = tempLimit(opt.insul, opt.method);
     var overTemp = opt.ambient > limit;
+    var tmax = TMAX[opt.insul];
 
     var rows = SIZES.map(function (size) {
       var a = ampacity(size, {
@@ -668,18 +714,30 @@ footer b{color:var(--ink2);font-weight:600}
         groupStyle: opt.groupStyle, soilRho: opt.soilRho
       });
       var r = resistancePerM(size, opt.material, opt.insul);
-      var dv = dropVolts(ib, opt.length, r, system, cos);
+      // 压降按峰值算：脉冲期间的瞬时压降才是测量误差来源
+      var dv = dropVolts(ipk, opt.length, r, system, cos);
       var dvPct = dv / volt * 100;
       var loadOk = a.iz >= ib;
       var breakerOk = inMin == null ? true : a.iz >= inMin;
       var dropOk = dvPct <= opt.allowPct;
+
+      var dT = 0, budget = 0, pulseOk = true;
+      if (pulse) {
+        dT = pulseRise(size, ipk, pulse.ton, opt.material);
+        // 稳态时导体已经运行在某个温度上，脉冲只能吃掉剩余的温升额度
+        var baseFrac = a.iz > 0 ? Math.min(1, ib / a.iz) : 1;
+        budget = (tmax - opt.ambient) * (1 - baseFrac * baseFrac);
+        pulseOk = a.iz > 0 && dT <= budget;
+      }
+
       return {
         size: size, exists: a.exists, base: a.base, iz: a.iz, kTotal: a.kTotal,
         rPerM: r, vd: dv, vdPct: dvPct,
-        lmax: maxLength(ib, r, system, volt, opt.allowPct, cos),
+        lmax: maxLength(ipk, r, system, volt, opt.allowPct, cos),
         util: a.iz > 0 ? ib / a.iz : Infinity,
-        loadOk: loadOk, breakerOk: breakerOk, dropOk: dropOk,
-        ok: a.exists && loadOk && breakerOk && dropOk,
+        loadOk: loadOk, breakerOk: breakerOk, dropOk: dropOk, pulseOk: pulseOk,
+        dT: dT, dTbudget: budget,
+        ok: a.exists && loadOk && breakerOk && dropOk && pulseOk,
         loss: ib * ib * r * opt.length * (system === '3ph' ? 3 : 2)
       };
     });
@@ -691,12 +749,19 @@ footer b{color:var(--ink2);font-weight:600}
     }
     if (rec && rec.util > 0.92) tight = true;
 
+    var brk = rec ? pickBreaker(ib, rec.iz) : null;
     return {
       rows: rows, rec: rec, tight: tight, overTemp: overTemp, tempLimit: limit,
-      ib: ib, inMin: inMin, volt: volt, system: system,
+      ib: ib, ipk: ipk, inMin: inMin, volt: volt, system: system,
+      pulse: pulse ? {
+        ton: pulse.ton, toff: pulse.toff, ipk: ipk, rms: ib,
+        duty: pulse.ton / (pulse.ton + pulse.toff)
+      } : null,
+      // 脉冲负载的瞬动校验：C 曲线磁脱扣约 5~10 In，峰值远超则可能在脉冲期间误跳
+      peakTripWarn: !!(pulse && brk && ipk > 7 * brk),
       material: opt.material, insul: opt.insul, method: opt.method,
       modelName: modelName(opt.material, opt.insul),
-      breaker: rec ? pickBreaker(ib, rec.iz) : null,
+      breaker: brk,
       massKg: rec ? conductorMass(rec.size, opt.length, opt.material, system) : 0
     };
   }
@@ -820,7 +885,8 @@ footer b{color:var(--ink2);font-weight:600}
     resistancePerM: resistancePerM, dropVolts: dropVolts,
     maxLength: maxLength, pickBreaker: pickBreaker, breakerAtLeast: breakerAtLeast,
     vdCoeff: vdCoeff, sizeOne: sizeOne, sizeSeries: sizeSeries, sizeParallel: sizeParallel,
-    conductorMass: conductorMass, awgOf: awgOf
+    conductorMass: conductorMass, awgOf: awgOf,
+    rmsCurrent: rmsCurrent, pulseRise: pulseRise, HEAT: HEAT
   };
 });
 </script>
@@ -837,7 +903,7 @@ footer b{color:var(--ink2);font-weight:600}
   };
 
   /* ---------------- 全局状态 ---------------- */
-  var ui = { system: 'ac', tab: 'one', combo: 'series', inputMode: 'current' };
+  var ui = { system: 'ac', tab: 'one', combo: 'series', inputMode: 'current', kind: 'cont' };
   var refMat = 'cu';
 
   /* ---------------- 预设 ---------------- */
@@ -857,7 +923,10 @@ footer b{color:var(--ink2);font-weight:600}
     { name: '光伏组串 DC', v: { sys:'dc', mode:'current', loadVal:15, volt:600, cosphi:1, len:60, allow:2,
         material:'cu', insul:'xlpe', method:'D1', ambient:35, circuits:1, groupStyle:'bunched' } },
     { name: '电池包测试台 200A', v: { sys:'dc', mode:'current', loadVal:200, volt:60, cosphi:1, len:3, allow:2,
-        material:'cu', insul:'xlpe', method:'C', ambient:30, circuits:2, groupStyle:'bunched' } }
+        material:'cu', insul:'xlpe', method:'C', ambient:30, circuits:2, groupStyle:'bunched' } },
+    { name: '保护板复核 150A/5s', v: { sys:'dc', mode:'current', loadVal:150, volt:60, cosphi:1, len:1, allow:5,
+        kind:'pulse', ton:5, toff:10,
+        material:'cu', insul:'xlpe', method:'C', ambient:30, circuits:1, groupStyle:'bunched' } }
   ];
   $('presets').innerHTML = PRESETS.map(function(p, i){
     return '<button data-p="' + i + '">' + p.name + '</button>';
@@ -880,6 +949,9 @@ footer b{color:var(--ink2);font-weight:600}
     $('ambient').value = v.ambient;
     $('circuits').value = v.circuits;
     setPressed($('groupStyle'), 'g', v.groupStyle);
+    setKind(v.kind || 'cont');
+    if (v.ton != null) $('ton').value = v.ton;
+    if (v.toff != null) $('toff').value = v.toff;
     var r = document.querySelector('#methods input[value="' + v.method + '"]');
     if (r) r.checked = true;
     syncSystemUi();
@@ -948,12 +1020,32 @@ footer b{color:var(--ink2);font-weight:600}
     ui.inputMode = mode;
     setPressed($('inputMode'), 'mode', mode);
     $('loadUnit').textContent = mode === 'power' ? 'kW' : 'A';
-    $('loadVal').previousElementSibling.textContent = mode === 'power' ? '功率' : '电流';
+    $('loadVal').previousElementSibling.textContent =
+      mode === 'power' ? '功率' : (ui.kind === 'pulse' ? '峰值电流' : '电流');
   }
   $('inputMode').addEventListener('click', function(e){
     var b = e.target.closest('button'); if (!b) return;
     setInputMode(b.dataset.mode);
     renderOne();
+  });
+
+  function setKind(kind){
+    ui.kind = kind;
+    setPressed($('loadKind'), 'kind', kind);
+    var pulse = kind === 'pulse';
+    $('pulseRow').classList.toggle('hidden', !pulse);
+    $('dutyRow').classList.toggle('hidden', !pulse);
+    $('loadVal').previousElementSibling.textContent =
+      (ui.inputMode === 'power' ? '功率' : (pulse ? '峰值电流' : '电流'));
+  }
+  $('loadKind').addEventListener('click', function(e){
+    var b = e.target.closest('button'); if (!b) return;
+    setKind(b.dataset.kind);
+    renderOne();
+  });
+  ['ton','toff'].forEach(function(id){
+    $(id).addEventListener('input', renderOne);
+    $(id).addEventListener('change', renderOne);
   });
 
   $('groupStyle').addEventListener('click', function(e){
@@ -986,8 +1078,12 @@ footer b{color:var(--ink2);font-weight:600}
       current = sys === '3ph' ? P / (Math.sqrt(3) * volt * cos) : P / (volt * cos);
     } else current = raw;
     var methodEl = document.querySelector('#methods input:checked');
+    var pulse = ui.kind === 'pulse'
+      ? { ton: Math.max(0.1, +$('ton').value || 0), toff: Math.max(0, +$('toff').value || 0) }
+      : null;
     return {
       system: sys, volt: volt, cosphi: cos, current: current,
+      pulse: pulse,
       length: +$('len').value || 0,
       allowPct: +$('allow').value || 0,
       material: $('material').value,
@@ -1064,6 +1160,14 @@ footer b{color:var(--ink2);font-weight:600}
       out.innerHTML = '<div class="note-block err">电流无效，请检查输入。</div>'; return;
     }
     var rec = res.rec;
+    if (res.pulse){
+      $('dutyOut').innerHTML =
+        '峰值 <b>' + fmt(res.pulse.ipk, 1) + ' A</b>' +
+        ' · 脉宽 <b>' + fmt(res.pulse.ton, 1) + ' s</b>' +
+        ' · 间隔 <b>' + fmt(res.pulse.toff, 1) + ' s</b>' +
+        ' · 占空比 <b>' + fmt(res.pulse.duty * 100, 1) + '%</b>' +
+        ' → 等效 RMS <b>' + fmt(res.pulse.rms, 1) + ' A</b>';
+    }
     if (res.overTemp){
       out.innerHTML = '<div class="note-block err"><b>环境温度 ' + opt.ambient + '℃ 超出该绝缘的允许范围</b><br>' +
         (opt.insul === 'pvc' ? 'PVC 绝缘导体最高工作温度 70℃，温度修正表到 ' + res.tempLimit + '℃ 为止' : 'XLPE 绝缘导体最高工作温度 90℃，温度修正表到 ' + res.tempLimit + '℃ 为止') +
@@ -1075,11 +1179,11 @@ footer b{color:var(--ink2);font-weight:600}
     var head;
     if (rec){
       head = '<div class="verdict ' + cls + '">' +
-        '<div><div class="lab">推荐截面</div>' +
+        '<div><div class="lab">' + (res.pulse ? '推荐截面（按占空比等效）' : '推荐截面') + '</div>' +
           '<div class="main"><span class="big mono">' + sz(rec.size) + '</span><span class="u">mm²</span></div>' +
           '<div class="tag">' + res.modelName + (opt.material === 'al' ? ' · 铝芯' : ' · 铜芯') + ' · 折算 AWG ' + W.awgOf(rec.size) + '</div>' +
         '</div>' +
-        '<div class="side"><div class="lab">可用长度（不超 ' + opt.allowPct + '% 压降）</div>' +
+        '<div class="side"><div class="lab">最长可用长度（峰值电流下不超 ' + opt.allowPct + '% 压降）</div>' +
           '<div class="main"><span class="big mono">' + fmt(rec.lmax, 1) + '</span><span class="u">m</span></div>' +
           '<div class="tag">你现在填的是 ' + fmt(opt.length, 1) + ' m</div>' +
         '</div>' +
@@ -1088,18 +1192,23 @@ footer b{color:var(--ink2);font-weight:600}
       head = '<div class="verdict bad">' +
         '<div><div class="lab">无标准规格可用</div>' +
         '<div class="main"><span class="big mono">—</span></div>' +
-        '<div class="tag">最大 240mm² 仍不满足，需要提高电压等级、缩短线路或降低压降要求（如就地变压/双拼并联）</div></div>' +
+        '<div class="tag">最大 300mm² 仍不满足，需要提高电压等级、缩短线路或降低压降要求（如就地变压/双拼并联）</div></div>' +
       '</div>';
     }
 
     var mets = '';
     if (rec){
+      var rms = res.pulse ? res.pulse.rms : opt.current;
       mets = '<div class="metrics">' +
-        metric('修正后载流量 Iz', fmt(rec.iz, 1), 'A', '综合系数 ×' + fmt(rec.kTotal, 2)) +
-        metric('实际压降', fmt(rec.vdPct, 2), '%', fmt(rec.vd, 2) + ' V') +
-        metric('建议断路器', res.breaker ? res.breaker : '—', res.breaker ? 'A' : '', res.breaker ? 'Ib(' + fmt(opt.current, 1) + ') ≤ In ≤ Iz(' + fmt(rec.iz, 1) + ')' : '该截面无法配合标准断路器') +
-        metric('载流量利用率', fmt(rec.util * 100, 0), '%', rec.util > 0.92 ? '裕度偏小' : '裕度充足') +
-        metric('线损（满负荷）', fmt(rec.loss, 1), 'W', opt.system === '3ph' ? '三相合计' : '往返合计') +
+        metric('修正后载流量 Iz', fmt(rec.iz, 1), 'A', '按等效 RMS ' + fmt(rms, 1) + ' A 校核') +
+        metric(res.pulse ? '峰值压降' : '实际压降', fmt(rec.vdPct, 2), '%', fmt(rec.vd, 2) + ' V @ ' + fmt(opt.current, 1) + 'A') +
+        metric('建议断路器', res.breaker ? res.breaker : '—', res.breaker ? 'A' : '',
+          res.breaker ? 'Ib(' + fmt(rms, 1) + ') ≤ In ≤ Iz(' + fmt(rec.iz, 1) + ')' : '该截面无法配合标准断路器') +
+        (res.pulse
+          ? metric('单脉冲温升', fmt(rec.dT, 1), 'K',
+              '可用额度 ' + fmt(rec.dTbudget, 1) + ' K（' + (opt.insul === 'pvc' ? 'PVC' : 'XLPE') + ' ' + W.TMAX[opt.insul] + '℃ − ' + opt.ambient + '℃）')
+          : metric('载流量利用率', fmt(rec.util * 100, 0), '%', rec.util > 0.92 ? '裕度偏小' : '裕度充足')) +
+        metric('线损（等效 RMS）', fmt(rec.loss, 1), 'W', opt.system === '3ph' ? '三相合计' : '往返合计') +
         metric('导体用量', fmt(res.massKg, 2), 'kg', (opt.system === '3ph' ? 3 : 2) + ' 根 ' + fmt(opt.length, 0) + 'm') +
       '</div>';
     }
@@ -1114,25 +1223,34 @@ footer b{color:var(--ink2);font-weight:600}
       '综合修正 ' + fmt(rec ? rec.kTotal : 0, 2) + ' 倍（温度 × 成组 × 土壤）' +
       '，基准载流量 ' + (rec ? fmt(rec.base, 1) + ' A' : '—') + '。' +
       (rec && rec.loadOk && rec.dropOk ? '载流量与压降双条件同时满足。' : '') +
+      (res.pulse
+        ? '<br><b>短时工况口径</b>：稳态按占空比等效 RMS（' + fmt(res.pulse.rms, 1) + ' A）查载流量表；' +
+          '单次脉冲按绝热温升 ΔT = ρ₂₀·I²·t/(S²·d·c) 与剩余温升额度比较；压降按峰值算（脉冲期间瞬时压降才是测量误差来源）。' +
+          '模型适用于直流或工频脉冲；带高频纹波（开关电源、逆变器输出）时导体附加损耗会更高，需另按纹波有效值核算。'
+        : '') +
       (res.tight ? '<br><b>提醒</b>：能通过校核的最小规格已顶到载流量上限（利用率 > 92%），没留裕度。现场温度更高、有谐波或需要长期满载时，直接上大一档。' : '') +
       '</div>';
 
     var tbl = '<div class="card" style="margin-top:14px"><div class="card-h"><h2>逐档校核</h2>' +
-      '<span class="hint">载流量 · 断路器配合（In ≤ Iz）· 压降 三重校核</span></div><div class="card-b" style="padding-top:6px">' +
+      '<span class="hint">' + (res.pulse ? 'RMS 载流量 · 断路器配合 · 单脉冲温升 · 峰值压降 四重校核' : '载流量 · 断路器配合（In ≤ Iz）· 压降 三重校核') + '</span></div><div class="card-b" style="padding-top:6px">' +
       '<div class="tbl-wrap"><table><thead><tr>' +
-      '<th>截面 mm²</th><th>基准 A</th><th>修正后 Iz</th><th>利用率</th><th>压降 %</th><th>最长 m</th><th>结论</th>' +
+      '<th>截面 mm²</th><th>基准 A</th><th>修正后 Iz</th><th>' + (res.pulse ? 'RMS 利用率' : '利用率') + '</th>' +
+      (res.pulse ? '<th>单脉冲 ΔT</th>' : '') +
+      '<th>' + (res.pulse ? '峰值压降 %' : '压降 %') + '</th><th>最长 m</th><th>结论</th>' +
       '</tr></thead><tbody>' +
       res.rows.map(function(r){
         var c = r.ok ? '<span class="chip ok">可用</span>' :
           !r.exists ? '<span class="chip warn">无此规格</span>' :
           !r.loadOk ? '<span class="chip err">载流量不足</span>' :
           !r.breakerOk ? '<span class="chip err">断路器无法配合</span>' :
+          !r.pulseOk ? '<span class="chip err">脉冲温升超限</span>' :
           '<span class="chip warn">压降超限</span>';
         return '<tr class="' + (r === rec ? 'pick' : (r.ok ? '' : 'dim')) + '">' +
           '<td><b>' + sz(r.size) + '</b></td>' +
           '<td>' + fmt(r.base, 1) + '</td>' +
           '<td>' + fmt(r.iz, 1) + '</td>' +
           '<td>' + bar(r.util) + ' ' + fmt(r.util * 100, 0) + '%</td>' +
+          (res.pulse ? '<td>' + fmt(r.dT, 2) + ' K</td>' : '') +
           '<td>' + fmt(r.vdPct, 2) + '</td>' +
           '<td>' + (isFinite(r.lmax) ? fmt(r.lmax, 1) : '—') + '</td>' +
           '<td>' + c + '</td></tr>';
@@ -1149,9 +1267,11 @@ footer b{color:var(--ink2);font-weight:600}
 
     $('miniOut').innerHTML = rec
       ? '<span><i>推荐</i> <b>' + sz(rec.size) + ' mm²</b></span>' +
-        '<span><i>压降</i> ' + fmt(rec.vdPct, 2) + '% / ' + opt.allowPct + '%</span>' +
+        '<span><i>' + (res.pulse ? 'ΔT' : '压降') + '</i> ' +
+          (res.pulse ? fmt(rec.dT, 1) + ' K' : fmt(rec.vdPct, 2) + '% / ' + opt.allowPct + '%') + '</span>' +
         '<span><i>可用</i> ' + fmt(rec.lmax, 0) + ' m</span>' +
-        '<span><i>Iz</i> ' + fmt(rec.iz, 0) + ' A</span>'
+        '<span><i>' + (res.pulse ? 'RMS' : 'Iz') + '</i> ' + fmt(res.pulse ? res.pulse.rms : rec.iz, 0) + ' A</span>' +
+        (res.pulse ? '<span><i>Iz</i> ' + fmt(rec.iz, 0) + ' A</span>' : '')
       : '<span><b class="bad">无可用规格</b></span>';
   }
 
@@ -1496,6 +1616,12 @@ footer b{color:var(--ink2);font-weight:600}
       '<div class="formula">G<em>i</em> = A<em>i</em> / (ρ · L<em>i</em>)      I<em>i</em> = I · G<em>i</em> / ΣG       R<em>eq</em> = 1 / ΣG\nA<em>等效</em> = ρ₂₀ · Σ(1 / r<em>i</em>)   （20℃ 标称电阻反推）</div>' +
       '<p class="prose" style="margin-bottom:4px"><b>7. 保护配合</b></p>' +
       '<div class="formula">Ib ≤ In ≤ Iz         In 取标准值：6 10 16 20 25 32 40 50 63 80 100 …</div>' +
+      '<p class="prose" style="margin-bottom:4px"><b>8. 短时脉冲负载</b></p>' +
+      '<div class="formula">I<em>rms</em> = I<em>pk</em> · √( t<em>on</em> / (t<em>on</em> + t<em>off</em>) )        （稳态按等效 RMS 查载流量表）\n' +
+      'ΔT<em>脉冲</em> = ρ₂₀ · I<em>pk</em>² · t<em>on</em> / (S² · d · c)      Cu: d=8.89 g/cm³, c=0.385 J/(g·K)\n' +
+      '判据：Iz ≥ I<em>rms</em>，且 ΔT<em>脉冲</em> ≤ (T<em>max</em> − T<em>环境</em>) · [1 − (I<em>rms</em>/Iz)²]</div>' +
+      '<p class="prose" style="margin-top:6px;font-size:12.5px">脉冲模型假设绝热（热量来不及散出），对 5s 级脉冲偏保守；' +
+      '压降仍按峰值计算，因为脉冲期间的瞬时压降才是测量误差来源。</p>' +
       '<p class="prose" style="margin-top:14px;font-size:12.5px">本工具不校核：短路热稳定 k²S² ≥ I²t、上下级选择性、谐波引起的中性线电流、电动机启动压降。' +
       '这三项在有变频器、软起、长电缆或消防回路时必须单独算。</p>' +
       '</div></div>';
