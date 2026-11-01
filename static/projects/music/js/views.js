@@ -152,8 +152,7 @@ function buildAbcScore(score) {
   bar.className = 'mode-bar';
   bar.innerHTML = `
     <button class="play-btn" id="play-btn" disabled>▶ 播放</button>
-    <button class="print-btn" id="pdf-btn" title="导出 72mm 宽 PDF（热敏打印机满宽）" disabled>PDF</button>
-    <button class="print-btn" id="print-btn">打印</button>
+    <button class="print-btn" id="print-btn" title="导出 72mm 热敏版式 PDF">热敏打印</button>
   `;
 
   const container = document.createElement('div');
@@ -163,12 +162,9 @@ function buildAbcScore(score) {
   section.appendChild(container);
 
   const playBtn = bar.querySelector('#play-btn');
-  const pdfBtn = bar.querySelector('#pdf-btn');
   const printBtn = bar.querySelector('#print-btn');
   let playing = false;
   let abcText = '';
-
-  printBtn.addEventListener('click', () => window.print());
 
   (async () => {
     try {
@@ -178,7 +174,6 @@ function buildAbcScore(score) {
       const forRender = abcText.split('\n').filter(l => !/^[TC]:/.test(l)).join('\n');
       await AbcScore.render(container, forRender, { responsive: 'resize', staffwidth: 900 });
       playBtn.disabled = false;
-      pdfBtn.disabled = false;
 
       const { notes, bpm } = AbcScore.toNotes(abcText);
       const noteEls = [...container.querySelectorAll('.abcjs-note, g.abcjs-note')];
@@ -216,22 +211,24 @@ function buildAbcScore(score) {
         playBtn.textContent = '⏹ 停止';
       });
 
-      pdfBtn.addEventListener('click', async () => {
-        if (pdfBtn.disabled) return;
-        pdfBtn.disabled = true;
-        const label = pdfBtn.textContent;
-        pdfBtn.textContent = '生成中…';
+      // 打印：直接出 72mm（热敏打印机满宽）单页 PDF，尺寸精确、不依赖系统打印设置
+      printBtn.addEventListener('click', async () => {
+        if (printBtn.disabled) return;
+        printBtn.disabled = true;
+        const label = printBtn.textContent;
+        printBtn.textContent = '生成中…';
         if (playing) { AudioPlayer.stop(); playing = false; clearHl(); playBtn.textContent = '▶ 播放'; }
         try {
           const { cm } = await AbcScore.exportThermalPdf(abcText, score.title);
-          pdfBtn.textContent = `已导出 ${cm} cm`;
-          setTimeout(() => { pdfBtn.textContent = label; pdfBtn.disabled = false; }, 2500);
+          printBtn.textContent = `已导出 ${cm} cm`;
+          setTimeout(() => { printBtn.textContent = label; printBtn.disabled = false; }, 2500);
         } catch (err) {
-          console.error('[pdf]', err);
-          pdfBtn.textContent = '导出失败';
-          setTimeout(() => { pdfBtn.textContent = label; pdfBtn.disabled = false; }, 2500);
+          console.error('[print]', err);
+          printBtn.textContent = '导出失败';
+          setTimeout(() => { printBtn.textContent = label; printBtn.disabled = false; }, 2500);
         }
       });
+
     } catch (err) {
       console.error('[abc]', err);
       container.textContent = '乐谱加载失败：' + (err && err.message ? err.message : err);
