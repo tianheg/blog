@@ -21,7 +21,8 @@ const SCORES = [
     tags: ['交响曲', '合唱', '经典'],
     notes: '《第九交响曲》第四乐章，根据席勒的诗创作，是贝多芬最著名的作品之一，也是古典音乐史上最著名的合唱作品。',
     cover: 'img/欢乐颂.png',
-    pages: ['img/欢乐颂.png'],
+    renderer: 'scribe',
+    scribeData: 'data/huanlesong.json',
     notation: `@key C
 @time 4/4
 @tempo 120
@@ -40,6 +41,8 @@ const SCORES = [
     period: '巴洛克',
     tags: ['巴洛克', '古典', '钢琴'],
     notes: '源自《安娜·玛格达莱娜·巴赫笔记簿》，原作曲者为克里斯蒂安·佩措尔德（Christian Petzold），曾长期被误认为巴赫作品。',
+    renderer: 'scribe',
+    scribeData: 'data/minuet-g.json',
     notation: `@key G
 @time 3/4
 @tempo 100
