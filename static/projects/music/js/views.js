@@ -241,9 +241,19 @@ function buildAbcScore(score) {
           getBpm: () => Number(bpmInput.value) || 100,
           onNote(index, note) {
             noteEls.forEach(el => el.classList.remove('hl'));
-            const el = noteEls[index];
+            // 按 abcjs 的 abcjs-v{声部} / abcjs-n{声部内序号} 精确找元素：
+            // 双谱表要上下同时亮，用合并事件的索引是找不到对的元素的
+            const targets = [];
+            (note.parts || []).forEach(pt => {
+              const e = container.querySelector(
+                '.abcjs-l' + pt.line + '.abcjs-v' + pt.v + '.abcjs-n' + pt.nIn);
+              if (e && !targets.includes(e)) targets.push(e);
+            });
+            if (!targets.length && noteEls[index]) targets.push(noteEls[index]);
+            targets.forEach(t => t.classList.add('hl'));
+
+            const el = targets[0];
             if (el) {
-              el.classList.add('hl');
               const box = el.getBoundingClientRect();
               if (box.top < 80 || box.bottom > window.innerHeight - 40) {
                 el.scrollIntoView({ behavior: 'smooth', block: 'center' });

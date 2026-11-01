@@ -126,8 +126,9 @@ const AbcScore = {
     let curVoice = '1';
     const voices = {};
 
-    const flush = (voice, tokens, cursorRef) => {
+    const flush = (voice, tokens, cursorRef, lineNo) => {
       const arr = voices[voice] || (voices[voice] = []);
+      let nIn = 0;
       for (const tk of tokens) {
         if (tk === '|' || tk === '') continue;
 
@@ -165,7 +166,7 @@ const AbcScore = {
           if (!midis.length) continue;
 
           const dur = (sufNum || sufDen !== undefined ? mult * unit : innerDur) || 1;
-          arr.push({ midis, start: cursorRef.beat, dur });
+          arr.push({ midis, start: cursorRef.beat, dur, line: lineNo, nIn: nIn++ });
           cursorRef.beat += dur;
           continue;
         }
@@ -179,7 +180,11 @@ const AbcScore = {
         if (denStr !== undefined) mult /= denStr === '' ? 2 : Number(denStr);
         const dur = (mult * unit) || 1;
 
-        if (letter === 'z' || letter === 'x') { cursorRef.beat += dur; continue; }
+        if (letter === 'z' || letter === 'x') {
+          arr.push({ rest: true, midis: [], start: cursorRef.beat, dur, line: lineNo, nIn: nIn++ });
+          cursorRef.beat += dur;
+          continue;
+        }
 
         const upper = letter.toUpperCase();
         let midi = LETTERS[upper];
@@ -188,12 +193,13 @@ const AbcScore = {
         midi += (oct + 1) * 12;
         for (const ch of acc) midi += ch === '^' ? 1 : ch === '_' ? -1 : 0;
 
-        arr.push({ midis: [midi], start: cursorRef.beat, dur });
+        arr.push({ midis: [midi], start: cursorRef.beat, dur, line: lineNo, nIn: nIn++ });
         cursorRef.beat += dur;
       }
     };
 
     const cursors = {};
+    const lineNos = {};
     for (const raw of lines) {
       const line = raw.trim();
       const vh = /^V:\s*(\S+)/.exec(line);
@@ -209,6 +215,7 @@ const AbcScore = {
       if (!line || /^[A-Za-z]:/.test(line)) continue;
 
       if (!cursors[curVoice]) cursors[curVoice] = { beat: 0 };
+      if (lineNos[curVoice] === undefined) lineNos[curVoice] = 0;
       const tokens = line
         .replace(/"[^"]*"/g, ' ')
         .replace(/![^!]*!/g, ' ')
@@ -217,21 +224,27 @@ const AbcScore = {
         .replace(/\|:/g, ' | ')
         .split(/\s+/)
         .filter(Boolean);
-      flush(curVoice, tokens, cursors[curVoice]);
+      flush(curVoice, tokens, cursors[curVoice], lineNos[curVoice]++);
     }
 
     // 合并：同一 start 的所有音 → 一个和弦事件；单声部时就是单音
     const byStart = new Map();
     Object.keys(voices).forEach(v => {
       voices[v].forEach(n => {
+        if (n.rest) return;          // 休止符不发声，只占 DOM 序号
         const k = n.start.toFixed(3);
         const cur = byStart.get(k);
+        // abcjs 给每个元素打 abcjs-l{行} / abcjs-v{声部} / abcjs-n{行内序号}，
+        // 三元组才能唯一定位（n 是每行重置的）
+        const part = { v: v === '1' ? 0 : 1, line: n.line, nIn: n.nIn };
         if (cur) {
           n.midis.forEach(m => { if (!cur.midis.includes(m)) cur.midis.push(m); });
           cur.dur = Math.max(cur.dur, n.dur);
           if (v === '1') cur.hasMelody = true;
+          cur.parts.push(part);
         } else {
-          byStart.set(k, { start: n.start, dur: n.dur, midis: [...n.midis], hasMelody: v === '1' });
+          byStart.set(k, { start: n.start, dur: n.dur, midis: [...n.midis],
+                           hasMelody: v === '1', parts: [part] });
         }
       });
     });
