@@ -96,7 +96,7 @@ function renderScoreDetail(scoreId) {
   } else if (score.notation) {
     const parsed = parseNotation(score.notation);
     if (parsed && parsed.notation.length > 0) {
-      fragment.appendChild(buildScoreWithMode(parsed));
+      fragment.appendChild(buildScoreWithMode(parsed, score));
     }
   } else if (score.pages && score.pages.length > 0) {
     fragment.appendChild(buildImageViewer(score));
@@ -150,7 +150,7 @@ function buildScoreList(scores) {
 }
 
 // ── DSL 曲目：简谱 / 五线谱 + 播放（带音符高亮跟随）──────────────
-function buildScoreWithMode(parsed) {
+function buildScoreWithMode(parsed, score) {
   const section = document.createElement('div');
 
   const modeBar = document.createElement('div');
@@ -159,6 +159,7 @@ function buildScoreWithMode(parsed) {
     <button class="mode-btn active" data-mode="simple-notation">简谱</button>
     <button class="mode-btn" data-mode="vexflow">五线谱</button>
     <button class="play-btn" id="play-btn">▶ 播放</button>
+    <button class="print-btn" id="thermal-btn" title="导出 576 dots 单色图，用芯烨 App 打">热敏</button>
   `;
 
   const container = document.createElement('div');
@@ -233,9 +234,120 @@ function buildScoreWithMode(parsed) {
     playBtn.textContent = '⏹ 停止';
   });
 
+  // 热敏导出：重排成 576 dots（A160M 打印宽度）宽、每行 2 小节，二值化成 1-bit PNG
+  const thermalBtn = modeBar.querySelector('#thermal-btn');
+  thermalBtn.addEventListener('click', async () => {
+    if (thermalBtn.disabled) return;
+    thermalBtn.disabled = true;
+    const label = thermalBtn.textContent;
+    thermalBtn.textContent = '生成中…';
+    if (AudioPlayer.playing) stopPlayback();
+    try {
+      const { blob, height } = await exportThermal(parsed, scoreData);
+      const url = URL.createObjectURL(blob);
+      const a = document.createElement('a');
+      a.href = url;
+      a.download = `${(score && score.title) || 'score'}-热敏.png`;
+      document.body.appendChild(a);
+      a.click();
+      a.remove();
+      setTimeout(() => URL.revokeObjectURL(url), 10000);
+      thermalBtn.textContent = `已导出 ${Math.round(height / 203 * 25.4 / 10)} cm`;
+      setTimeout(() => { thermalBtn.textContent = label; thermalBtn.disabled = false; }, 2500);
+    } catch (err) {
+      thermalBtn.textContent = '导出失败';
+      console.error('[thermal] 导出失败', err);
+      setTimeout(() => { thermalBtn.textContent = label; thermalBtn.disabled = false; }, 2500);
+    }
+  });
+
   section.appendChild(modeBar);
   section.appendChild(container);
   return section;
+}
+
+// 576 dots = A160M 打印宽度；SN 是全局单例，所以离屏渲染完必须把原谱重画回来
+async function exportThermal(parsed, scoreData) {
+  const WIDTH = 576;
+
+  const holder = document.createElement('div');
+  holder.style.cssText = `position:fixed;left:-10000px;top:0;width:${WIDTH}px;background:#fff;`;
+  document.body.appendChild(holder);
+
+  try {
+    RendererAdapter.backends['simple-notation'].renderWith(holder, scoreData, 2);
+    const svg = await waitForSvg(holder, 6000);
+    // renderSN 里的拍号文案修正在两帧之后，导出前必须等它跑完
+    await new Promise(r => requestAnimationFrame(() => requestAnimationFrame(r)));
+    const { blob, height } = await svgToThermalPng(svg, WIDTH);
+    return { blob, height };
+  } finally {
+    holder.remove();
+    // SN 实例被换掉了，把当前视图重画一遍，否则播放高亮和尺寸都会错
+    const container = document.querySelector('.score-container');
+    if (container) {
+      container.replaceChildren();
+      container.appendChild(buildScore(parsed));
+    }
+  }
+}
+
+function waitForSvg(holder, timeout) {
+  return new Promise((resolve, reject) => {
+    const t0 = Date.now();
+    const tick = () => {
+      const svg = holder.querySelector('svg');
+      if (svg && svg.getBoundingClientRect().height > 20) { resolve(svg); return; }
+      if (Date.now() - t0 > timeout) { reject(new Error('简谱渲染超时')); return; }
+      requestAnimationFrame(tick);
+    };
+    tick();
+  });
+}
+
+function svgToThermalPng(svg, targetWidth) {
+  return new Promise((resolve, reject) => {
+    const box = svg.getBoundingClientRect();
+    const w = Math.round(box.width) || targetWidth;
+    const h = Math.round(box.height);
+    if (!h) { reject(new Error('SVG 尺寸为 0')); return; }
+
+    const clone = svg.cloneNode(true);
+    clone.setAttribute('width', w);
+    clone.setAttribute('height', h);
+    const bg = document.createElementNS('http://www.w3.org/2000/svg', 'rect');
+    bg.setAttribute('x', '0'); bg.setAttribute('y', '0');
+    bg.setAttribute('width', String(w)); bg.setAttribute('height', String(h));
+    bg.setAttribute('fill', '#fff');
+    clone.insertBefore(bg, clone.firstChild);
+    // 阴影里的样式不会被序列化，白色底只保证透明处不变黑
+    const xml = new XMLSerializer().serializeToString(clone);
+    const img = new Image();
+    img.onload = () => {
+      const scale = targetWidth / w;
+      const canvas = document.createElement('canvas');
+      canvas.width = targetWidth;
+      canvas.height = Math.max(1, Math.round(h * scale));
+      const ctx = canvas.getContext('2d');
+      ctx.fillStyle = '#fff';
+      ctx.fillRect(0, 0, canvas.width, canvas.height);
+      ctx.drawImage(img, 0, 0, canvas.width, canvas.height);
+
+      // 二值化：热敏只有黑白，灰阶会打成麻点
+      const data = ctx.getImageData(0, 0, canvas.width, canvas.height);
+      const px = data.data;
+      for (let i = 0; i < px.length; i += 4) {
+        const lum = px[i] * 0.299 + px[i + 1] * 0.587 + px[i + 2] * 0.114;
+        const v = lum < 120 ? 0 : 255;
+        px[i] = px[i + 1] = px[i + 2] = v;
+        px[i + 3] = 255;
+      }
+      ctx.putImageData(data, 0, 0);
+      canvas.toBlob(b => resolve({ blob: b, height: canvas.height }), 'image/png');
+    };
+    img.onerror = () => reject(new Error('SVG 转位图失败'));
+    img.src = 'data:image/svg+xml;charset=utf-8,' + encodeURIComponent(xml);
+  });
 }
 
 // ── 打印谱：Scribe 渲染 + 播放 + 打印 ───────────────────────────
