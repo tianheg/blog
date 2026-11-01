@@ -222,17 +222,20 @@ function buildAbcScore(score) {
       await render('none');
       playBtn.disabled = false;
 
-      playBtn.addEventListener('click', () => {
-        if (playing) {
-          AudioPlayer.stop();
-          playing = false;
-          clearHl();
-          playBtn.textContent = '▶ 播放';
-          progEl.style.width = '0%';
-          return;
-        }
+      function stopPlay() {
+        AudioPlayer.stop();
+        playing = false;
         clearHl();
+        playBtn.textContent = '▶ 播放';
+        progEl.style.width = '0%';
+      }
+
+      function startPlay(fromIndex) {
+        if (playing) AudioPlayer.stop();
+        clearHl();
+        const start = Math.max(0, Math.min(notes.length - 1, fromIndex || 0));
         AudioPlayer.playSequence(notes, {
+          startIndex: start,
           getBpm: () => Number(bpmInput.value) || 100,
           onNote(index, note) {
             noteEls.forEach(el => el.classList.remove('hl'));
@@ -260,7 +263,35 @@ function buildAbcScore(score) {
         });
         playing = true;
         playBtn.textContent = '⏹ 停止';
+        progEl.style.width = ((start / notes.length) * 100).toFixed(1) + '%';
+      }
+
+      playBtn.addEventListener('click', () => {
+        if (playing) { stopPlay(); return; }
+        startPlay(0);
       });
+
+      // 点谱面上的任意音符，从那里开始演奏（练琴时反复抠一句）
+      container.addEventListener('click', e => {
+        if (!noteEls.length) return;
+        let el = e.target;
+        while (el && el !== container) {
+          const i = noteEls.indexOf(el);
+          if (i >= 0) { startPlay(i); return; }
+          el = el.parentNode;
+        }
+      });
+
+      // 空格键播放 / 停止；交给 router 的 cleanupKeyboard 在切页时移除
+      if (state.keyboardHandler) document.removeEventListener('keydown', state.keyboardHandler);
+      state.keyboardHandler = e => {
+        if (e.code !== 'Space') return;
+        const tag = (e.target.tagName || '').toLowerCase();
+        if (tag === 'input' || tag === 'select' || tag === 'button' || tag === 'textarea') return;
+        e.preventDefault();
+        playBtn.click();
+      };
+      document.addEventListener('keydown', state.keyboardHandler);
 
       annotSel.addEventListener('change', async () => {
         if (playing) {

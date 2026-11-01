@@ -8,7 +8,6 @@ const SCORES = [
     period: '民谣',
     tags: ['民谣', '华语', '独立音乐'],
     notes: '尧十三的代表作之一，以其独特的叙事风格和情感表达深受听众喜爱。谱面为完整原谱（含前奏、副歌、间奏转调、尾奏）。',
-    cover: 'img/北方女王.png',
     pages: ['img/北方女王.png']
   },
   {
@@ -20,7 +19,6 @@ const SCORES = [
     period: '古典主义',
     tags: ['交响曲', '合唱', '经典'],
     notes: '《第九交响曲》第四乐章，根据席勒的诗创作，是贝多芬最著名的作品之一，也是古典音乐史上最著名的合唱作品。',
-    cover: 'img/欢乐颂.png',
     abcData: 'data/huanlesong.abc',
     notation: `@key C
 @time 4/4
