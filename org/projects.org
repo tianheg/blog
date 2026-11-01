@@ -1,8 +1,63 @@
 #+TITLE: Projects
 
-- 主机选型 [[/projects/nas-picker/][|nas-picker|]]
-- 音乐简谱 [[/projects/music/][|music|]]
-- 线径计算 [[/projects/wire-spec/][|wire-spec|]]
-- 一生日历 [[/projects/life-calendar/][|life-calendar|]]
-- Forgejo 文件树侧边栏 [[https://git.tianheg.co/tianheg/forgejo-sidetree][|forgejo-sidetree|]]
+自己每天在用的东西，顺手放出来。带链接的都能直接点开，不用装、不用注册。
 
+* 网页工具
+
+#+BEGIN_EXPORT html
+<div data-proj-grid="wide">
+<a href="/projects/wire-spec/"><strong>线径计算</strong><small>wire-spec</small><span>输入电流，算导线截面与可用长度</span></a>
+<a href="/projects/life-calendar/"><strong>人生日历</strong><small>life-calendar</small><span>一生 4000 周网格，看时间过了多少</span></a>
+<a href="/projects/nas-picker/"><strong>主机选型</strong><small>nas-picker</small><span>NAS / 虚拟化主机配置与价格对比</span></a>
+<a href="/projects/music/"><strong>律谱</strong><small>music</small><span>简谱在线渲染与播放</span></a>
+<a href="/projects/beancount-formatter/"><strong>AI 记账</strong><small>beancount-formatter</small><span>自然语言转 beancount 账目</span></a>
+<a href="/projects/overnight-calendar/"><strong>熬夜日历</strong><small>overnight-calendar</small><span>记熬夜，看一年熬了多少天</span></a>
+<a href="/projects/piano-practice/"><strong>练琴记录</strong><small>piano-practice</small><span>练琴时长与曲目记录</span></a>
+<a href="/projects/extract-pdf/"><strong>PDF 提取</strong><small>extract-pdf</small><span>在浏览器里把 PDF 的指定页抽出来，文件不上传</span></a>
+<a href="/projects/time-cal/"><strong>时间计算器</strong><small>time-cal</small><span>算还剩多少小时，或者几个时间加起来</span></a>
+<a href="/projects/year-progress/"><strong>年度进度</strong><small>year-progress</small><span>今年过去了百分之多少</span></a>
+<a href="/projects/printing-music/"><strong>打印乐谱</strong><small>printing-music</small><span>用 scribe 渲染可打印的乐谱</span></a>
+<a href="/projects/demo/"><strong>小 demo</strong><small>demo</small><span>17 个 CSS / JS 试验，随手玩的</span></a>
+</div>
+#+END_EXPORT
+
+
+* 站点
+
+#+BEGIN_EXPORT html
+<div data-proj-grid="wide">
+<a href="https://tianheg.co" target="_blank" rel="noopener noreferrer"><strong>博客</strong><small>tianheg.co</small><span>文章与 TIL 笔记，org 写到静态站的全流程</span></a>
+<a href="https://kunzhi.me" target="_blank" rel="noopener noreferrer"><strong>品牌站</strong><small>kunzhi.me</small><span>另一个身份的门面站</span></a>
+</div>
+#+END_EXPORT
+
+* 公开仓库
+
+源码都能读，大部分是自托管服务的部署配置和自己写的小工具。
+
+#+BEGIN_EXPORT html
+<div data-proj-grid>
+<a href="https://git.tianheg.co/tianheg/forgejo-sidetree" target="_blank" rel="noopener noreferrer"><strong>Forgejo 侧边栏</strong><small>forgejo-sidetree</small><span>给 Forgejo 加文件树侧边栏</span></a>
+<a href="https://git.tianheg.co/tianheg/daily-trace" target="_blank" rel="noopener noreferrer"><strong>时间追踪</strong><small>daily-trace</small><span>Worker 应用，记每天时间花在哪</span></a>
+<a href="https://git.tianheg.co/tianheg/elec-hot" target="_blank" rel="noopener noreferrer"><strong>电子热点</strong><small>elec-hot</small><span>电子技术资讯聚合站</span></a>
+<a href="https://git.tianheg.co/tianheg/llm-cost-proxy" target="_blank" rel="noopener noreferrer"><strong>LLM 用量代理</strong><small>llm-cost-proxy</small><span>把各家 LLM 调用记成一张账单</span></a>
+<a href="https://git.tianheg.co/tianheg/caption-img" target="_blank" rel="noopener noreferrer"><strong>图片描述服务</strong><small>caption-img</small><span>给图片写 XMP 描述的 Web 服务</span></a>
+<a href="https://git.tianheg.co/tianheg/caption-img-android" target="_blank" rel="noopener noreferrer"><strong>图片描述 App</strong><small>caption-img-android</small><span>Android 端 XMP Description 编辑器</span></a>
+<a href="https://git.tianheg.co/tianheg/img-preprocessing-android" target="_blank" rel="noopener noreferrer"><strong>照片预处理</strong><small>img-preprocessing-android</small><span>按 YYYYMMDD_PLACE_Num 批量重命名归档</span></a>
+<a href="https://git.tianheg.co/tianheg/hermes-android" target="_blank" rel="noopener noreferrer"><strong>Hermes 手机端</strong><small>hermes-android</small><span>让 agent 远程操作 Android 设备</span></a>
+<a href="https://git.tianheg.co/tianheg/firefox-addon-starter" target="_blank" rel="noopener noreferrer"><strong>扩展模板</strong><small>firefox-addon-starter</small><span>Manifest V3 最小骨架，lint 干净</span></a>
+<a href="https://git.tianheg.co/tianheg/right-links" target="_blank" rel="noopener noreferrer"><strong>左右键开链接</strong><small>right-links</small><span>浏览器扩展，触控板左右键开链接</span></a>
+<a href="https://git.tianheg.co/tianheg/org-protocol-for-firefox" target="_blank" rel="noopener noreferrer"><strong>org-protocol</strong><small>org-protocol-for-firefox</small><span>Firefox 里一键 capture 到 Emacs</span></a>
+<a href="https://git.tianheg.co/tianheg/atuin-on-railway" target="_blank" rel="noopener noreferrer"><strong>Atuin 部署</strong><small>atuin-on-railway</small><span>Railway 上跑 shell 历史同步</span></a>
+<a href="https://git.tianheg.co/tianheg/linkding-on-railway" target="_blank" rel="noopener noreferrer"><strong>Linkding 部署</strong><small>linkding-on-railway</small><span>Railway 上跑书签服务</span></a>
+<a href="https://git.tianheg.co/tianheg/openlist-on-railway" target="_blank" rel="noopener noreferrer"><strong>OpenList 部署</strong><small>openlist-on-railway</small><span>Railway 上跑网盘聚合</span></a>
+<a href="https://git.tianheg.co/tianheg/send-mail" target="_blank" rel="noopener noreferrer"><strong>邮件测试</strong><small>send-mail</small><span>检查能不能给我发邮件</span></a>
+<a href="https://git.tianheg.co/tianheg/osmosfeed" target="_blank" rel="noopener noreferrer"><strong>feed 构建器</strong><small>osmosfeed</small><span>生成 RSS 聚合站的 fork</span></a>
+<a href="https://git.tianheg.co/tianheg/feed" target="_blank" rel="noopener noreferrer"><strong>RSS 聚合站</strong><small>feed</small><span>我的订阅源打成一张网页</span></a>
+<a href="https://git.tianheg.co/tianheg/archlive" target="_blank" rel="noopener noreferrer"><strong>Arch 安装盘</strong><small>archlive</small><span>自建 Arch ISO 的构建配置</span></a>
+<a href="https://git.tianheg.co/tianheg/nix-config" target="_blank" rel="noopener noreferrer"><strong>Nix 配置</strong><small>nix-config</small><span>已弃用 Nix，纯历史存档</span></a>
+<a href="https://git.tianheg.co/tianheg/logo-design" target="_blank" rel="noopener noreferrer"><strong>logo 设计</strong><small>logo-design</small><span>自己 logo 的迭代过程</span></a>
+<a href="https://git.tianheg.co/tianheg/tasks" target="_blank" rel="noopener noreferrer"><strong>任务清单</strong><small>tasks</small><span>Vue3 + Pinia 的练习项目</span></a>
+<a href="https://git.tianheg.co/tianheg/cookbook" target="_blank" rel="noopener noreferrer"><strong>菜谱</strong><small>cookbook</small><span>做菜记录，待并入博客</span></a>
+</div>
+#+END_EXPORT
