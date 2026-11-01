@@ -536,10 +536,12 @@ body[data-view="score"] .content { max-width: 1000px; }
   transition: width 0.15s linear;
 }
 
-/* ABC 五线谱容器 */
+/* ABC 五线谱容器：乐谱是"纸"，永远白底黑字，不跟随暗色主题
+   （跟随暗色时 abcjs 用 currentColor 画符头，浅色音符在深底上糊成一片） */
 .abc-container {
   padding: 1rem 0.75rem;
-  background: var(--surface);
+  background: #fff;
+  color: #000;
   overflow-x: auto;
 }
 
