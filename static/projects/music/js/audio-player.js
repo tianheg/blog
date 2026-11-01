@@ -140,7 +140,7 @@ const AudioPlayer = {
     this.totalBeats = total;
 
     const getBpm = opts.getBpm || (() => 100);
-    let i = 0;
+    let i = Math.max(0, Math.min(notes.length - 1, opts.startIndex || 0));
     let nextAt = performance.now();
 
     const step = () => {
@@ -222,6 +222,7 @@ const AudioPlayer = {
     freqs.forEach(freq => this._playTone(freq, dur, amp));
   },
 
+  // 钢琴式音色：基频三角波 + 2/3/4 倍泛音，低通 3.2kHz，包络先衰到 7% 再消失
   _playTone(freq, dur, amp = 1) {
     try {
       const ctx = this.getCtx();
@@ -230,27 +231,28 @@ const AudioPlayer = {
 
       const gain = ctx.createGain();
       gain.gain.setValueAtTime(0.0001, now);
-      gain.gain.linearRampToValueAtTime(0.24 * amp, now + 0.015);   // 起音
-      gain.gain.exponentialRampToValueAtTime(0.0001, now + d);
-      gain.connect(ctx.destination);
+      gain.gain.linearRampToValueAtTime(0.24 * amp, now + 0.008);          // 起音
+      gain.gain.exponentialRampToValueAtTime(0.07 * amp, now + d * 0.55);  // 主衰减
+      gain.gain.exponentialRampToValueAtTime(0.0001, now + d);             // 收尾
 
-      // 三角波给主体，正弦倍频加亮度，听起来没那么"电子"
-      const o1 = ctx.createOscillator();
-      o1.type = 'triangle';
-      o1.frequency.value = freq;
-      o1.connect(gain);
-      o1.start(now);
-      o1.stop(now + d + 0.05);
+      const lp = ctx.createBiquadFilter();
+      lp.type = 'lowpass';
+      lp.frequency.value = 3200;
+      gain.connect(lp);
+      lp.connect(ctx.destination);
 
-      const o2 = ctx.createOscillator();
-      o2.type = 'sine';
-      o2.frequency.value = freq * 2;
-      const g2 = ctx.createGain();
-      g2.gain.value = 0.35;
-      o2.connect(g2);
-      g2.connect(gain);
-      o2.start(now);
-      o2.stop(now + d + 0.05);
+      [[1, 'triangle', 1], [2, 'sine', 0.5], [3, 'sine', 0.18], [4, 'sine', 0.06]]
+        .forEach(([mult, type, g]) => {
+          const o = ctx.createOscillator();
+          const og = ctx.createGain();
+          o.type = type;
+          o.frequency.value = freq * mult;
+          og.gain.value = g;
+          o.connect(og);
+          og.connect(gain);
+          o.start(now);
+          o.stop(now + d + 0.05);
+        });
     } catch (e) {
       // 播放失败静默处理
     }
