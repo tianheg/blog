@@ -40,8 +40,6 @@ const SCORES = [
     period: '巴洛克',
     tags: ['巴洛克', '古典', '钢琴'],
     notes: '源自《安娜·玛格达莱娜·巴赫笔记簿》，原作曲者为克里斯蒂安·佩措尔德（Christian Petzold），曾长期被误认为巴赫作品。',
-    cover: 'img/G大调小步舞曲.png',
-    pages: ['img/G大调小步舞曲.png'],
     notation: `@key G
 @time 3/4
 @tempo 100
@@ -54,5 +52,17 @@ const SCORES = [
 5' _1_ _2_ _3_ _4'_ | 5' _1_ _0_ _1_ _0_ | 6' _4'_ _5'_ _6'_ _7'_ | 1' _1_ _0_ _1_ _0_ |
 {4}
 4' _5'_ _4'_ _3_ _2_ | 3 _4'_ _3_ _2_ _1_ | 2 _3_ _2_ _1_ _7,_ | 1-- ||`
+  },
+  {
+    id: '4',
+    title: 'Dolphin Dance',
+    composer: 'Herbie Hancock',
+    opus: '',
+    difficulty: '高级',
+    period: '爵士',
+    tags: ['爵士', 'lead sheet', '打印谱'],
+    notes: '收录在《Maiden Voyage》(1965) 里的标准曲，38 小节的调式和声进行。谱面用 Scribe 排版，浏览器里可以直接打印。',
+    renderer: 'scribe',
+    scribeData: 'data/dolphin-dance.json'
   }
 ];

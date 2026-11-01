@@ -1,5 +1,5 @@
-// 律谱 — 视图渲染（极简版）
-// 依赖全局: navigate(), state, escapeHtml()
+// 律谱 — 视图渲染
+// 依赖全局: navigate(), state, escapeHtml(), RendererAdapter, AudioPlayer
 
 // 首页：曲谱列表
 function renderHome() {
@@ -90,8 +90,10 @@ function renderScoreDetail(scoreId) {
   `;
   fragment.appendChild(header);
 
-  // 乐谱渲染
-  if (score.notation) {
+  // 乐谱渲染：三种来源 —— 打印谱(scribe) / DSL 简谱 / 图片
+  if (score.renderer === 'scribe' && score.scribeData) {
+    fragment.appendChild(buildScribeScore(score));
+  } else if (score.notation) {
     const parsed = parseNotation(score.notation);
     if (parsed && parsed.notation.length > 0) {
       fragment.appendChild(buildScoreWithMode(parsed));
@@ -111,7 +113,7 @@ function renderScoreDetail(scoreId) {
   return fragment;
 }
 
-// 构建曲谱列表
+// 构建曲谱列表（网格卡片 + 封面）
 function buildScoreList(scores) {
   const list = document.createElement('div');
   list.className = 'score-list';
@@ -124,12 +126,20 @@ function buildScoreList(scores) {
   scores.forEach(score => {
     const item = document.createElement('div');
     item.className = 'score-item';
+
+    const cover = score.cover
+      ? `<img class="cover" src="${escapeHtml(score.cover)}" alt="" loading="lazy">`
+      : `<div class="cover cover-empty">${escapeHtml(score.title.slice(0, 2))}</div>`;
+
     item.innerHTML = `
-      <div class="title">${escapeHtml(score.title)}</div>
-      <div class="composer">${escapeHtml(score.composer)}</div>
-      <div class="meta">
-        <span class="badge badge-${difficultyClass(score.difficulty)}">${escapeHtml(score.difficulty)}</span>
-        <span class="badge badge-tag">${escapeHtml(score.period)}</span>
+      ${cover}
+      <div class="info">
+        <div class="title">${escapeHtml(score.title)}</div>
+        <div class="composer">${escapeHtml(score.composer)}</div>
+        <div class="meta">
+          <span class="badge badge-${difficultyClass(score.difficulty)}">${escapeHtml(score.difficulty)}</span>
+          <span class="badge badge-tag">${escapeHtml(score.period)}</span>
+        </div>
       </div>
     `;
     item.addEventListener('click', () => navigate('score', { scoreId: score.id }));
@@ -139,7 +149,7 @@ function buildScoreList(scores) {
   return list;
 }
 
-// DSL 渲染 + 模式切换 + 播放
+// ── DSL 曲目：简谱 / 五线谱 + 播放（带音符高亮跟随）──────────────
 function buildScoreWithMode(parsed) {
   const section = document.createElement('div');
 
@@ -155,16 +165,33 @@ function buildScoreWithMode(parsed) {
   container.className = 'score-container';
 
   const scoreData = parseScoreData(parsed);
+  const playBtn = modeBar.querySelector('#play-btn');
+
+  let playing = false;
+  let noteEls = [];
+
+  // SN 是异步渲染的（懒加载 + loadData），轮询到 SVG 出来为止
+  function collectNotes(retry = 0) {
+    noteEls = [...container.querySelectorAll('svg text')]
+      .filter(t => t.getAttribute('font-size') === '18' && t.textContent.trim() !== '');
+    if (!noteEls.length && retry < 40) setTimeout(() => collectNotes(retry + 1), 100);
+  }
+
+  function clearHighlight() {
+    noteEls.forEach(t => t.classList.remove('hl'));
+  }
 
   function renderMode() {
     container.innerHTML = '';
     const el = buildScore(parsed);
     container.appendChild(el);
+    collectNotes();
   }
   renderMode();
 
   modeBar.querySelectorAll('.mode-btn').forEach(btn => {
     btn.addEventListener('click', () => {
+      if (AudioPlayer.playing) stopPlayback();
       modeBar.querySelectorAll('.mode-btn').forEach(b => b.classList.remove('active'));
       btn.classList.add('active');
       RendererAdapter.use(btn.dataset.mode);
@@ -172,24 +199,85 @@ function buildScoreWithMode(parsed) {
     });
   });
 
-  // 播放按钮
-  const playBtn = modeBar.querySelector('#play-btn');
+  function stopPlayback() {
+    AudioPlayer.stop();
+    playing = false;
+    clearHighlight();
+    playBtn.textContent = '▶ 播放';
+  }
+
   playBtn.addEventListener('click', () => {
-    if (playBtn.textContent === '⏹ 停止') {
-      AudioPlayer.stop();
-      playBtn.textContent = '▶ 播放';
-      return;
-    }
-    AudioPlayer.play(scoreData);
+    if (playing) { stopPlayback(); return; }
+
+    clearHighlight();
+    AudioPlayer.play(scoreData, {
+      onNote(index) {
+        const el = noteEls[index];
+        if (!el) return;
+        noteEls.forEach(t => t.classList.remove('hl'));
+        el.classList.add('hl');
+        // 播到屏幕外时跟一下
+        const box = el.getBoundingClientRect();
+        if (box.top < 80 || box.bottom > window.innerHeight - 40) {
+          el.scrollIntoView({ behavior: 'smooth', block: 'center' });
+        }
+      },
+      onEnd() {
+        playing = false;
+        clearHighlight();
+        playBtn.textContent = '▶ 播放';
+      }
+    });
+
+    playing = true;
     playBtn.textContent = '⏹ 停止';
-    // 播放结束后自动恢复按钮文字
-    const duration = scoreData.staves.reduce((t, s) =>
-      t + s.measures.reduce((m, me) =>
-        m + me.notes.reduce((n, no) => n + (no.duration || 0), 0), 0), 0) * (60000 / scoreData.tempo);
-    setTimeout(() => { playBtn.textContent = '▶ 播放'; }, duration + 500);
   });
 
   section.appendChild(modeBar);
+  section.appendChild(container);
+  return section;
+}
+
+// ── 打印谱：Scribe 渲染 + 播放 + 打印 ───────────────────────────
+function buildScribeScore(score) {
+  const section = document.createElement('div');
+
+  const bar = document.createElement('div');
+  bar.className = 'mode-bar';
+  bar.innerHTML = `
+    <span class="mode-tag">打印谱 · Scribe</span>
+    <button class="play-btn" id="play-btn">▶ 播放</button>
+    <button class="print-btn" id="print-btn">打印</button>
+  `;
+
+  const container = document.createElement('div');
+  container.className = 'score-container scribe-container';
+  RendererAdapter.backends.scribe.render(container, { src: score.scribeData, clef: 'treble' });
+
+  const playBtn = bar.querySelector('#play-btn');
+  const printBtn = bar.querySelector('#print-btn');
+  let playing = false;
+
+  playBtn.addEventListener('click', () => {
+    if (playing) {
+      AudioPlayer.stop();
+      playing = false;
+      playBtn.textContent = '▶ 播放';
+      return;
+    }
+    AudioPlayer.playStream(`${ROOT}${score.scribeData}`, {
+      onEnd() {
+        playing = false;
+        playBtn.textContent = '▶ 播放';
+      }
+    });
+    playing = true;
+    playBtn.textContent = '⏹ 停止';
+  });
+
+  printBtn.addEventListener('click', () => window.print());
+
+  section.appendChild(bar);
   section.appendChild(container);
   return section;
 }
@@ -202,7 +290,6 @@ function buildImageViewer(score) {
   viewer.innerHTML = `
     <img src="${escapeHtml(score.pages[0])}" alt="${escapeHtml(score.title)} 谱" class="viewer-image">
   `;
-  // 简单图片展示，多页翻页根据需求可加
   return viewer;
 }
 
@@ -214,6 +301,6 @@ function difficultyClass(d) {
 
 function escapeHtml(text) {
   const div = document.createElement('div');
-  div.textContent = text;
+  div.textContent = text == null ? '' : text;
   return div.innerHTML;
 }

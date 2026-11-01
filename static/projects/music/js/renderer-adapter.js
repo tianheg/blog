@@ -94,21 +94,24 @@ function renderSN(container, score) {
         tempo: String(score.tempo),
         key: score.key
       },
-      score: buildSNScoreString(score.staves),
+      score: buildSNScoreString(score.staves, window.innerWidth < 560 ? 2 : 4),
       lyric: ''
     });
 
-    // SN 用 time 当每小节拍数（不能对调），但拍号文案显示成 beat/time，这里改回 time/beat。
-    // 渲染是异步的，等两帧再改。
+    // 渲染是异步的，等两帧再收拾文本
     const wrong = `${score.beat}/${score.time}`;
     const right = `${score.time}/${score.beat}`;
-    if (wrong !== right) {
-      requestAnimationFrame(() => requestAnimationFrame(() => {
-        container.querySelectorAll('svg text').forEach(t => {
-          if (t.textContent === wrong) t.textContent = right;
-        });
-      }));
-    }
+    requestAnimationFrame(() => requestAnimationFrame(() => {
+      container.querySelectorAll('svg text').forEach(t => {
+        // SN 用 time 当每小节拍数（不能对调），但文案按 beat/time 渲染，改回 time/beat
+        if (wrong !== right && t.textContent === wrong) t.textContent = right;
+        // 小节号：SN 用 14px 灰字，太小，单独加类提亮
+        const txt = t.textContent.trim();
+        if (t.getAttribute('font-size') === '14' && /^\d+$/.test(txt) && txt !== right) {
+          t.classList.add('bar-no');
+        }
+      });
+    }));
 
     return container;
   } catch (e) {
@@ -121,14 +124,62 @@ function renderSN(container, score) {
 // SN 语法约束（实测 2026-10-23）：
 //   时值修饰必须写在八度符号之前 —— `4/8'` 对，`4'/8` 会被判错（整小节变红）
 //   `-` 不是后缀，要当成独立元素用逗号分隔 —— `3,-` = 3 延长一拍
-function buildSNScoreString(staves) {
-  return staves.map((stave, i) => {
-    const measures = stave.measures.map(m =>
-      m.notes.map(noteToSN).join(',')
-    );
-    return `{${i + 1}}${measures.join('|')}`;
+function buildSNScoreString(staves, perStave = 4) {
+  // 拍到一条时间轴上，再按每行小节数重新分组 —— 窄屏一行少放几小节，
+  // 音符和减时线才不会被挤在一起
+  const all = staves.flatMap(s => s.measures);
+  const rows = [];
+  for (let i = 0; i < all.length; i += perStave) rows.push(all.slice(i, i + perStave));
+
+  return rows.map((measures, i) => {
+    const body = measures.map(m => m.notes.map(noteToSN).join(',')).join('|');
+    return `{${i + 1}}${body}`;
   }).join('\n');
 }
+
+// === 后端: scribe（打印谱，CSS 排版；自托管内核在 vendor/）===
+// 与简谱不同，这个后端吃的是 Scribe 的 sequence JSON，不是 scoreData。
+RendererAdapter.register('scribe', {
+  _ready: null,
+
+  ensureLoaded() {
+    if (this._ready) return this._ready;
+    this._ready = new Promise((resolve, reject) => {
+      if (customElements.get('scribe-music')) { resolve(); return; }
+      const link = document.createElement('link');
+      link.rel = 'stylesheet';
+      link.href = `${ROOT}vendor/element.css`;
+      document.head.appendChild(link);
+      const s = document.createElement('script');
+      s.type = 'module';
+      s.src = `${ROOT}vendor/element.js`;
+      s.onload = () => resolve();
+      s.onerror = () => reject(new Error('element.js 加载失败'));
+      document.head.appendChild(s);
+    });
+    return this._ready;
+  },
+
+  render(container, opts) {
+    container.replaceChildren();
+    const hint = document.createElement('div');
+    hint.className = 'scribe-hint';
+    hint.textContent = '加载打印谱引擎…';
+    container.appendChild(hint);
+
+    this.ensureLoaded().then(() => {
+      container.replaceChildren();
+      const m = document.createElement('scribe-music');
+      m.setAttribute('clef', opts.clef || 'treble');
+      m.setAttribute('src', `${ROOT}${opts.src}`);
+      container.appendChild(m);
+    }).catch(err => {
+      container.textContent = '打印谱渲染失败：' + err.message;
+    });
+
+    return container;
+  }
+});
 
 function noteToSN(n) {
   const dur = n.beamed === 1 ? '/8' : n.beamed === 2 ? '/16' : '';
