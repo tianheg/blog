@@ -159,7 +159,7 @@ function buildScoreWithMode(parsed, score) {
     <button class="mode-btn active" data-mode="simple-notation">简谱</button>
     <button class="mode-btn" data-mode="vexflow">五线谱</button>
     <button class="play-btn" id="play-btn">▶ 播放</button>
-    <button class="print-btn" id="thermal-btn" title="导出 576 dots 单色图，用芯烨 App 打">热敏</button>
+    <button class="print-btn" id="thermal-btn" title="导出 72mm 宽 PDF（热敏打印机满宽）">PDF</button>
   `;
 
   const container = document.createElement('div');
@@ -243,16 +243,11 @@ function buildScoreWithMode(parsed, score) {
     thermalBtn.textContent = '生成中…';
     if (AudioPlayer.playing) stopPlayback();
     try {
-      const { blob, height } = await exportThermal(parsed, scoreData);
-      const url = URL.createObjectURL(blob);
-      const a = document.createElement('a');
-      a.href = url;
-      a.download = `${(score && score.title) || 'score'}-热敏.png`;
-      document.body.appendChild(a);
-      a.click();
-      a.remove();
-      setTimeout(() => URL.revokeObjectURL(url), 10000);
-      thermalBtn.textContent = `已导出 ${Math.round(height / 203 * 25.4 / 10)} cm`;
+      const { cm } = await exportScorePdf(parsed, scoreData, (score && score.title) || 'score', () => {
+        container.replaceChildren();
+        container.appendChild(buildScore(parsed));
+      });
+      thermalBtn.textContent = `已导出 ${cm} cm`;
       setTimeout(() => { thermalBtn.textContent = label; thermalBtn.disabled = false; }, 2500);
     } catch (err) {
       thermalBtn.textContent = '导出失败';
@@ -267,7 +262,7 @@ function buildScoreWithMode(parsed, score) {
 }
 
 // 576 dots = A160M 打印宽度；SN 是全局单例，所以离屏渲染完必须把原谱重画回来
-async function exportThermal(parsed, scoreData) {
+async function exportThermal(parsed, scoreData, onRestore) {
   const WIDTH = 576;
 
   const holder = document.createElement('div');
@@ -275,21 +270,59 @@ async function exportThermal(parsed, scoreData) {
   document.body.appendChild(holder);
 
   try {
-    RendererAdapter.backends['simple-notation'].renderWith(holder, scoreData, 2);
-    const svg = await waitForSvg(holder, 6000);
+    await RendererAdapter.backends['simple-notation'].renderWith(holder, scoreData, 2);
+    const svg = await waitForSvg(holder, 10000);
     // renderSN 里的拍号文案修正在两帧之后，导出前必须等它跑完
     await new Promise(r => requestAnimationFrame(() => requestAnimationFrame(r)));
     const { blob, height } = await svgToThermalPng(svg, WIDTH);
     return { blob, height };
   } finally {
     holder.remove();
-    // SN 实例被换掉了，把当前视图重画一遍，否则播放高亮和尺寸都会错
-    const container = document.querySelector('.score-container');
-    if (container) {
-      container.replaceChildren();
-      container.appendChild(buildScore(parsed));
-    }
+    // SN 是全局单例，离屏渲染把原来的实例顶掉了，所以要重画当前视图
+    if (onRestore) onRestore();
   }
+}
+
+// 72mm = A160M 打印头有效宽度（576 dots @203dpi），PDF 页宽按这个出
+async function exportScorePdf(parsed, scoreData, title, onRestore) {
+  await loadPdfLib();
+  const { blob, height } = await exportThermal(parsed, scoreData, onRestore);
+  const pngBytes = await blob.arrayBuffer();
+  const pdf = await PDFLib.PDFDocument.create();
+  const png = await pdf.embedPng(pngBytes);
+
+  const pageW = (72 / 25.4) * 72;        // 72mm → pt
+  const scale = pageW / png.width;
+  const pageH = png.height * scale;
+
+  const page = pdf.addPage([pageW, pageH]);
+  page.drawImage(png, { x: 0, y: 0, width: pageW, height: pageH });
+
+  const bytes = await pdf.save();
+  downloadBlob(new Blob([bytes], { type: 'application/pdf' }), `${title}-72mm.pdf`);
+  return { dots: height, cm: Math.round(height / 203 * 25.4 / 10), pt: [Math.round(pageW), Math.round(pageH)] };
+}
+
+function loadPdfLib() {
+  if (window.PDFLib) return Promise.resolve();
+  return new Promise((resolve, reject) => {
+    const s = document.createElement('script');
+    s.src = `${ROOT}vendor/pdf-lib.min.js`;
+    s.onload = () => resolve();
+    s.onerror = () => reject(new Error('pdf-lib 加载失败'));
+    document.head.appendChild(s);
+  });
+}
+
+function downloadBlob(blob, name) {
+  const url = URL.createObjectURL(blob);
+  const a = document.createElement('a');
+  a.href = url;
+  a.download = name;
+  document.body.appendChild(a);
+  a.click();
+  a.remove();
+  setTimeout(() => URL.revokeObjectURL(url), 60000);
 }
 
 function waitForSvg(holder, timeout) {
@@ -307,16 +340,21 @@ function waitForSvg(holder, timeout) {
 
 function svgToThermalPng(svg, targetWidth) {
   return new Promise((resolve, reject) => {
-    const box = svg.getBoundingClientRect();
-    const w = Math.round(box.width) || targetWidth;
-    const h = Math.round(box.height);
-    if (!h) { reject(new Error('SVG 尺寸为 0')); return; }
+    // SN 画的 SVG 比内容宽（四周留白），按内容 bbox 裁一刀再缩放，才能真正铺满纸宽
+    const bb = svg.getBBox();
+    const pad = 4;
+    const w = Math.round(bb.width + pad * 2);
+    const h = Math.round(bb.height + pad * 2);
+    if (!w || !h) { reject(new Error('SVG 尺寸为 0')); return; }
 
     const clone = svg.cloneNode(true);
+    clone.setAttribute('viewBox', `${Math.round(bb.x - pad)} ${Math.round(bb.y - pad)} ${w} ${h}`);
     clone.setAttribute('width', w);
     clone.setAttribute('height', h);
     const bg = document.createElementNS('http://www.w3.org/2000/svg', 'rect');
-    bg.setAttribute('x', '0'); bg.setAttribute('y', '0');
+    // 白底矩形要落在 viewBox 坐标系里（起点是 bbox.x - pad，不是 0）
+    bg.setAttribute('x', String(Math.round(bb.x - pad)));
+    bg.setAttribute('y', String(Math.round(bb.y - pad)));
     bg.setAttribute('width', String(w)); bg.setAttribute('height', String(h));
     bg.setAttribute('fill', '#fff');
     clone.insertBefore(bg, clone.firstChild);
@@ -356,9 +394,12 @@ function buildScribeScore(score) {
 
   const bar = document.createElement('div');
   bar.className = 'mode-bar';
+  // 有简谱源数据才给热敏导出（Scribe 是 closed shadow DOM，截不到图）
+  const canThermal = !!score.notation;
   bar.innerHTML = `
     <span class="mode-tag">打印谱 · Scribe</span>
     <button class="play-btn" id="play-btn">▶ 播放</button>
+    ${canThermal ? '<button class="print-btn" id="thermal-btn" title="导出 72mm 宽 PDF（用简谱数据排版）">PDF</button>' : ''}
     <button class="print-btn" id="print-btn">打印</button>
   `;
 
@@ -388,6 +429,28 @@ function buildScribeScore(score) {
   });
 
   printBtn.addEventListener('click', () => window.print());
+
+  if (canThermal) {
+    const parsed = parseNotation(score.notation);
+    const scoreData = parseScoreData(parsed);
+    const thermalBtn = bar.querySelector('#thermal-btn');
+    thermalBtn.addEventListener('click', async () => {
+      if (thermalBtn.disabled) return;
+      thermalBtn.disabled = true;
+      const label = thermalBtn.textContent;
+      thermalBtn.textContent = '生成中…';
+      if (playing) { AudioPlayer.stop(); playing = false; playBtn.textContent = '▶ 播放'; }
+      try {
+        const { cm } = await exportScorePdf(parsed, scoreData, score.title, null);
+        thermalBtn.textContent = `已导出 ${cm} cm`;
+        setTimeout(() => { thermalBtn.textContent = label; thermalBtn.disabled = false; }, 2500);
+      } catch (err) {
+        console.error('[thermal]', err);
+        thermalBtn.textContent = '导出失败';
+        setTimeout(() => { thermalBtn.textContent = label; thermalBtn.disabled = false; }, 2500);
+      }
+    });
+  }
 
   section.appendChild(bar);
   section.appendChild(container);

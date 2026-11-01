@@ -69,11 +69,28 @@ RendererAdapter.register('simple-notation', {
     return container;
   },
 
-  // 指定每行小节数直接渲染（热敏导出用，不走懒加载队列）
-  renderWith(container, score, perStave) {
+  // 指定每行小节数直接渲染（PDF/热敏导出用）。Scribe 曲目不会触发懒加载，
+  // 所以这里必须自己等 SN 加载完再画。
+  async renderWith(container, score, perStave) {
+    await ensureSN();
     return renderSN(container, score, perStave);
   }
 });
+
+// 简谱引擎按需加载，导出路径要能 await 它
+function ensureSN() {
+  if (typeof SN !== 'undefined' && SN.SimpleNotation) return Promise.resolve();
+  if (!window.__snPromise) {
+    window.__snPromise = new Promise((resolve, reject) => {
+      const s = document.createElement('script');
+      s.src = `${ROOT}js/simple-notation.js`;
+      s.onload = () => resolve();
+      s.onerror = () => reject(new Error('简谱引擎加载失败'));
+      document.body.appendChild(s);
+    });
+  }
+  return window.__snPromise;
+}
 
 function renderSN(container, score, perStave) {
   try {
