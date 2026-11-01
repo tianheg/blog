@@ -6,6 +6,14 @@
 <meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
 <title>NAS / 虚拟化主机配置 · E5-2690 v4</title>
 <meta name="description" content="一台 14 核 128G 的 NAS 兼虚拟化主机的完整配置、规格与选型依据。">
+<link rel="canonical" href="https://tianheg.co/projects/nas-picker/">
+<meta property="og:type" content="article">
+<meta property="og:title" content="NAS / 虚拟化主机配置 · E5-2690 v4">
+<meta property="og:description" content="14 核 28 线程、128G REG ECC、10 个原生 SATA、40 条 PCIe 通道。每个组件附规格、选型依据与踩坑说明。">
+<meta property="og:url" content="https://tianheg.co/projects/nas-picker/">
+<meta name="twitter:card" content="summary">
+<meta name="theme-color" content="#f7f5f3" media="(prefers-color-scheme: light)">
+<meta name="theme-color" content="#121c22" media="(prefers-color-scheme: dark)">
 <style>
   :root {
     --bg: #f7f5f3;
@@ -39,7 +47,7 @@
 
   body {
     margin: 0;
-    padding: 0 0 4rem;
+    padding: 0 0 5.5rem;
     background: var(--bg);
     color: var(--fg);
     font-family: "PingFang SC", "Hiragino Sans GB", "Noto Sans CJK SC",
@@ -90,7 +98,7 @@
   }
   .fact { background: var(--card); padding: .7rem .8rem; }
   .fact dt {
-    font-size: .66rem;
+    font-size: .75rem;
     color: var(--muted);
     margin: 0;
     letter-spacing: .04em;
@@ -105,7 +113,7 @@
   .fact dd small {
     display: block;
     font-weight: 400;
-    font-size: .68em;
+    font-size: .75em;
     color: var(--muted);
     margin-top: .1em;
   }
@@ -144,7 +152,7 @@
     align-items: start;
   }
   .prole {
-    font-size: .66rem;
+    font-size: .75rem;
     letter-spacing: .12em;
     color: var(--accent);
     margin: 0;
@@ -209,7 +217,7 @@
   }
   .sp { background: var(--card); padding: .5rem .7rem; }
   .sp dt {
-    font-size: .64rem;
+    font-size: .75rem;
     color: var(--muted);
     margin: 0;
     letter-spacing: .03em;
@@ -233,7 +241,7 @@
     gap: .55rem;
   }
   .why .tag {
-    font-size: .74em;
+    font-size: .78em;
     padding-top: .12em;
     letter-spacing: .05em;
     color: var(--muted);
@@ -290,7 +298,7 @@
     border-bottom: 1px solid var(--line);
   }
   .codecs thead th {
-    font-size: .66rem;
+    font-size: .75rem;
     letter-spacing: .06em;
     text-transform: uppercase;
     color: var(--muted);
@@ -349,6 +357,78 @@
     color: var(--muted);
   }
   .opt p b { color: var(--fg); font-weight: 600; }
+
+  /* ── 锚点导航 ── */
+  .toc {
+    display: flex;
+    gap: .35rem;
+    overflow-x: auto;
+    padding: .2rem 0 .8rem;
+    margin-bottom: .4rem;
+    border-bottom: 1px solid var(--line);
+    scrollbar-width: none;
+  }
+  .toc::-webkit-scrollbar { display: none; }
+  .toc a {
+    flex: 0 0 auto;
+    font-size: .76rem;
+    color: var(--muted);
+    text-decoration: none;
+    padding: .28rem .62rem;
+    border: 1px solid var(--line);
+    border-radius: 3px;
+    white-space: nowrap;
+    transition: color .12s, border-color .12s;
+  }
+  .toc a:hover, .toc a:focus-visible { color: var(--fg); border-color: var(--muted); }
+
+  /* ── 底部总价条 ── */
+  .grand {
+    position: fixed;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    z-index: 20;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: 1rem;
+    padding: .75rem clamp(0px, 2.5vw, 28px) calc(.75rem + env(safe-area-inset-bottom));
+    background: var(--bg);
+    border-top: 1px solid var(--line);
+  }
+  .grand .g-left {
+    display: flex;
+    align-items: baseline;
+    gap: .5rem;
+    min-width: 0;
+  }
+  .grand .g-label {
+    font-size: .72rem;
+    letter-spacing: .1em;
+    text-transform: uppercase;
+    color: var(--muted);
+  }
+  .grand .g-count {
+    font-size: .76rem;
+    color: var(--muted);
+    font-variant-numeric: tabular-nums;
+  }
+  .grand .g-val {
+    font-size: 1.35rem;
+    font-weight: 600;
+    font-variant-numeric: tabular-nums;
+    letter-spacing: -.01em;
+  }
+
+  /* ── 硬解表横向滚动 ── */
+  .codecs-wrap {
+    overflow-x: auto;
+    -webkit-overflow-scrolling: touch;
+    border: 1px solid var(--line);
+    background: var(--card);
+  }
+  .codecs-wrap .codecs { border: 0; min-width: 400px; }
 
   /* ── 步骤 ── */
   ol.steps {
@@ -410,10 +490,12 @@
   <p class="eyebrow">Self-built NAS · Hypervisor</p>
   <h1>E5-2690 v4 虚拟化主机</h1>
   <p class="lede">
-    14 核 28 线程、128G 寄存器 ECC、10 个原生 SATA、40 条 PCIe 通道。定位是跑 Proxmox VE：上面开虚拟机和容器，同时承担 NAS 存储。
+    14 核 28 线程、128G REG ECC（RDIMM）、10 个原生 SATA、40 条 PCIe 通道。定位是跑 Proxmox VE：上面开虚拟机和容器，同时承担 NAS 存储。
     当前配置不含独立显卡，硬盘也先上一块——E5 没有核显但主板自带 BMC 能开机装机，单盘虽无冗余但能先跑起来。影音硬解和扩容都可以以后按需补。价格按 2026-10 二手行情，可自行修改。
   </p>
 </header>
+
+<nav class="toc" id="toc" aria-label="组件导航"></nav>
 
 <dl class="facts" id="facts"></dl>
 
@@ -433,11 +515,12 @@
   </div>
   <div class="opt">
     <h3>硬盘扩到 8 块 <span>按盘价</span></h3>
-    <p>主板的 10 个 SATA 现在用掉 4 个，机箱有 8 个热插拔位。不需要加 HBA 卡。</p>
+    <p>主板的 10 个 SATA 现在只用掉 1 个，机箱有 8 个热插拔位。不需要加 HBA 卡。</p>
   </div>
 </div>
 
 <div class="sect"><h2>加装 A380 后的硬解能力</h2><div class="rule"></div></div>
+<div class="codecs-wrap">
 <table class="codecs">
   <thead>
     <tr><th>编码格式</th><th class="c">解码</th><th class="c">编码</th><th>备注</th></tr>
@@ -450,6 +533,7 @@
     <tr><td>AV1 8/10-bit</td><td class="c yes">✓</td><td class="c yes">✓</td><td class="dim">UHD 630 做不到，靠 A380</td></tr>
   </tbody>
 </table>
+</div>
 <p class="codecs-note">
   这张表是<strong>加装 Arc A380 之后</strong>的能力。当前配置没有显卡，转码只能靠 CPU 软解：1080p 占 2–4 核够用，4K 和多路并发会吃力。
   A380 有两个 MFX 媒体引擎，可以同时跑多路转码；HEVC 10bit 解码也让 HDR→SDR 的色调映射能硬件加速。
@@ -458,7 +542,7 @@
 <div class="sect"><h2>装机顺序</h2><div class="rule"></div></div>
 <ol class="steps">
   <li><b>先装电源和硬盘笼。</b>ATX 板加 8 盘位机箱通常是分仓结构，电源和硬盘笼在同一个区域，先固定好再上主板。</li>
-  <li><b>主板在机箱外装好 CPU、内存、散热器。</b>LGA2011-3 是方形窄 ILM 扣具，散热器螺丝对角线交替拧，别一次拧到底。</li>
+  <li><b>主板在机箱外装好 CPU、内存、散热器。</b>LGA2011-3 是 Narrow ILM 扣具（孔距 56×94mm 长方形），散热器螺丝对角线交替拧，别一次拧到底。</li>
   <li><b>主板入箱，先接 24pin 和 8pin。</b>8pin 供电口在散热器旁边，装上大散热器之后就够不到了，顺序不能反。</li>
   <li><b>接硬盘背板供电和 SATA。</b>背板一般需要两个大 4pin；数据线用侧弯头，直头会顶到侧板。</li>
   <li><b>插扩展卡。</b>两块 M.2 转接卡分别插到不同的 x4 槽（这两个槽共享，用一个 x8 设备时另一个失效）；2.5G 网卡插剩下的槽。</li>
@@ -480,6 +564,14 @@
   该平台已于 2022 年停止微码更新，不建议用于直接对外暴露的服务。
 </footer>
 
+</div>
+
+<div class="grand" id="grandbar">
+  <div class="g-left">
+    <span class="g-label">合计</span>
+    <span class="g-count" id="gcount">—</span>
+  </div>
+  <b class="g-val num" id="grand">¥0</b>
 </div>
 
 <script>
@@ -531,7 +623,7 @@
         ["显示输出", "仅 VGA"],
         ["风扇", "6 × 4-pin"]
       ],
-      good: "10 个原生 SATA 是选它的第一理由——4 盘起步还剩 6 个，以后换 8 盘机箱不用加 HBA 卡。",
+      good: "10 个原生 SATA 是选它的第一理由——现在只用 1 个，以后换 8 盘机箱也不用加 HBA 卡。",
       bad: "没有 M.2 插槽，系统盘要走 PCIe 转接卡；只吃 RDIMM/LRDIMM，普通内存和 ECC UDIMM 都插不上。",
       more: [
         "PCIe 槽分配要注意：<strong>两个 x4 槽是共享的</strong>，插一个 x8 设备时另一个会变成 x0（不可用）。所以两块 M.2 转接卡要分别插到不同的槽位，不能指望从一个 x8 槽拆成两路。",
@@ -615,20 +707,22 @@
     {
       role: "散热",
       model: "LGA2011-3 塔式散热器",
-      note: "4–6 热管 · 方形窄 ILM",
+      note: "4–6 热管 · Narrow ILM",
       price: 45,
       qty: 1,
       specs: [
         ["接口", "LGA2011-3"],
-        ["扣具", "方形窄 ILM"],
+        ["扣具", "Narrow ILM"],
+        ["孔距", "56 × 94 mm"],
         ["热管", "4–6 根"],
         ["解热", "≥ 150 W"],
         ["高度", "不受限（CS380）"]
       ],
-      good: "135W 的 E5 需要 4 热管以上的塔式，而 LGA2011-3 的扣具和 LGA1151 完全不通用，必须买对接口。",
+      good: "135W 的 E5 需要 4 热管以上的塔式；LGA2011-3 的扣具孔距是 56×94 长方形，和消费级完全不同，必须买对规格。",
       bad: "二手散热器要确认扣具齐全（方形背板 + 螺丝），缺件基本没法补。",
       more: [
-        "LGA2011-3 是<strong>窄 ILM（Narrow ILM）</strong>，方形金属背板，孔距和 LGA1151 的方形扣具不同。买的时候认准「支持 LGA2011」，不能用「支持 115x」的型号凑。",
+        "Intel 在 LGA2011 上规定了<strong>两种互斥的扣具规格</strong>：Square ILM 孔距 <strong>80×80mm 正方形</strong>，Narrow ILM 孔距 <strong>56×94mm 长方形</strong>。超微官方 FAQ 明确写「our X10 motherboards are using Narrow ILM」，所以 X10SRL-F 是 <strong>Narrow ILM</strong>。",
+        "买散热器必须认准标注 <strong>「LGA2011 Narrow ILM」</strong>的型号（超微原厂配套是 SNK-P0047PS）。利民 AK120 这类给 LGA115x 做的方形扣具<strong>物理装不上</strong>，「方形窄 ILM」这种说法本身就是矛盾的，市面上不存在。",
         "E5 的顶盖面积比消费级 CPU 大，散热器底座要能覆盖住。小尺寸下压式（比如给 ITX 用的 47mm）压 135W 会很吃力。",
         "如果机箱空间有限，也可以选 2U 服务器用的被动式散热器加机箱风道，但噪音和温度都不如塔式。"
       ]
@@ -647,7 +741,7 @@
         ["接口", "SATA 6Gb/s"],
         ["每 TB 成本", "—"]
       ],
-      good: "4T 每 TB 成本比 2T 低约 10%。先上一块起步，机箱还剩 7 个盘位、主板还剩 6 个 SATA。",
+      good: "4T 每 TB 成本比 2T 低约 10%。先上一块起步，机箱还剩 7 个盘位、主板还剩 9 个 SATA。",
       bad: "单盘没有冗余——盘坏数据全没。重要数据必须有异地备份，或者等二等盘到位再组镜像。",
       more: [
         "<strong>SMR 是最大的坑</strong>。叠瓦盘在 ZFS/RAID 重建时写入性能会崩到几 MB/s，甚至因超时被判掉盘——等于重建过程中再坏一块，数据全没。二手 4T 里混着大量 SMR 型号，必须按型号逐个确认。",
@@ -679,6 +773,25 @@
       ]
     },
     {
+      role: "杂项",
+      model: "硅脂 + 扎带",
+      note: "二手散热器常缺件",
+      price: 15,
+      qty: 1,
+      specs: [
+        ["硅脂", "1 支"],
+        ["扎带", "1 包"],
+        ["用途", "装配 + 理线"]
+      ],
+      good: "二手散热器经常不带硅脂，扎带用来固定硬盘笼和背板的走线。",
+      bad: "加起来不到二十块，但少了会卡装机。",
+      more: [
+        "硅脂涂一层薄薄的就够，中间挤黄豆大一颗，靠散热器压力摊开。<strong>不要抹满整个顶盖</strong>——多余的会溢到主板和插槽里。",
+        "扎带用尼龙自锁的，固定硬盘背板的 SATA 线和供电线，避免线材垂到硬盘笼里被扇叶打到。",
+        "如果以后要用物理显示器装机，还需要一个 <strong>VGA 转 HDMI 主动转换器</strong>（约 ¥30，必须带转换芯片，被动线不行）。"
+      ]
+    },
+    {
       role: "线材",
       model: "SATA 数据线 × 2",
       note: "侧弯头 · 6Gb/s · 留一根备用",
@@ -701,7 +814,7 @@
 
   var FACTS = [
     ["核心", "14C / 28T", "E5-2690 v4"],
-    ["内存", "128 GB", "REG ECC"],
+    ["内存", "128 GB", "REG ECC（RDIMM）"],
     ["盘位", "8 盘", "用 1 留 7"],
     ["PCIe", "40 条", "7 个槽"],
     ["空槽", "5 个", "可加显卡 / HBA"],
@@ -757,6 +870,7 @@
     PARTS.forEach(function (p, i) {
       var art = document.createElement("article");
       art.className = "part";
+      art.id = "p" + i;
 
       var head = document.createElement("div");
       head.className = "phead";
@@ -782,6 +896,7 @@
       inp.step = "1";
       inp.inputMode = "numeric";
       inp.value = priceOf(i);
+      inp.setAttribute("aria-label", p.model + " 单价（元）");
       inp.oninput = function () {
         priceOverride[i] = Math.max(0, Number(inp.value) || 0);
         save("prices", priceOverride);
@@ -799,6 +914,7 @@
       q.step = "1";
       q.inputMode = "numeric";
       q.value = qtyOf(i);
+      q.setAttribute("aria-label", p.model + " 数量");
       q.oninput = function () {
         qtyOverride[i] = Math.max(0, Math.floor(Number(q.value) || 0));
         save("qty", qtyOverride);
@@ -890,6 +1006,17 @@
     if (!cards[i]) return;
     var el = cards[i].querySelector(".pprice .sub");
     if (el) el.textContent = money(priceOf(i) * qtyOf(i));
+    updateGrand();
+  }
+
+  /* 更新底部总价条 */
+  function updateGrand() {
+    var t = 0, n = 0;
+    PARTS.forEach(function (p, i) { t += priceOf(i) * qtyOf(i); n += qtyOf(i); });
+    var g = document.getElementById("grand");
+    var c = document.getElementById("gcount");
+    if (g) g.textContent = money(t);
+    if (c) c.textContent = n + " 件";
   }
 
   /* 更新存储块的总容量与每 TB 成本 */
@@ -911,7 +1038,18 @@
     if (dds[4]) dds[4].textContent = totalT > 0 ? money(cost / totalT) + " /TB" : "—";
   }
 
+  function renderToc() {
+    var box = document.getElementById("toc");
+    PARTS.forEach(function (p, i) {
+      var a = document.createElement("a");
+      a.href = "#p" + i;
+      a.textContent = p.role;
+      box.appendChild(a);
+    });
+  }
+
   renderFacts();
+  renderToc();
   renderParts();
 })();
 </script>
