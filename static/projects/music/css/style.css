@@ -1,15 +1,40 @@
-/* 律谱 — 极简风格，移动端优先 */
+/* 律谱 — 视觉语言与 tianheg.co 主站对齐（详见主站 scripts/org2site/static/style.css）
+   色值全部来自主站 token：暖纸底 / 墨蓝 accent / light-dark 双主题 / 8px 圆角 / 无阴影。 */
+@font-face {
+  font-family: "Satoshi";
+  src: url("/fonts/Satoshi-Variable.woff2") format("woff2");
+  font-weight: 400 700;
+  font-style: normal;
+  font-display: swap;
+}
+@font-face {
+  font-family: "LXGW WenKai Screen";
+  src: url("/fonts/LXGWWenKaiScreen-subset.woff2") format("woff2");
+  font-weight: 400;
+  font-style: normal;
+  font-display: swap;
+}
+
 :root {
-  --bg: #f5f5f5;
-  --surface: #ffffff;
-  --text: #111;
-  --text-dim: #999;
-  --text-muted: #ccc;
-  --border: #eee;
-  --accent: #14b8a6;
-  --accent-dim: #0d9488;
+  color-scheme: light dark;
+
+  --bg: light-dark(#f7f5f3, #121c22);          /* 暖纸 / 暗底 */
+  --surface: light-dark(#f3ede9, #1c262d);     /* 卡片、行内代码底 */
+  --text: light-dark(#4b4743, #9fb9d0);        /* 正文 */
+  --heading: light-dark(#101828, #f3f4f6);     /* 标题 */
+  --text-dim: light-dark(#646c7c, #99a1af);    /* 次要文字 */
+  --meta: light-dark(#4a5565, #99a1af);        /* 元信息 */
+  --border: light-dark(#e5e7eb, #1e2939);
+  --rule: light-dark(#e5e7eb, #364153);
+  --accent: light-dark(#3d5b7a, #88a1bc);
   --radius: 8px;
-  --font: -apple-system, BlinkMacSystemFont, "Segoe UI", system-ui, sans-serif;
+  --radius-sm: 6px;
+
+  --font-content: "Satoshi", "LXGW WenKai Screen", -apple-system, BlinkMacSystemFont,
+    "PingFang SC", "Hiragino Sans GB", "Noto Sans SC", "Noto Sans CJK SC",
+    "Source Han Sans SC", "Source Han Sans CN", "Microsoft YaHei", Arial, sans-serif;
+  --font: -apple-system, BlinkMacSystemFont, "PingFang SC", "Noto Sans SC",
+    "Segoe UI", system-ui, sans-serif;
 }
 
 * { margin: 0; padding: 0; box-sizing: border-box; }
@@ -17,12 +42,13 @@
 html { font-size: 16px; -webkit-text-size-adjust: 100%; }
 
 body {
-  font-family: var(--font);
+  font-family: var(--font-content);
   background: var(--bg);
   color: var(--text);
   line-height: 1.6;
   min-height: 100vh;
   overflow-x: hidden;
+  -webkit-font-smoothing: antialiased;
 }
 
 /* 顶栏 */
@@ -30,19 +56,22 @@ body {
   position: sticky;
   top: 0;
   z-index: 50;
-  background: var(--surface);
+  background: var(--bg);
   border-bottom: 1px solid var(--border);
-  padding: 0.75rem 1rem;
+  min-height: 3.5rem;
+  padding: 0.5rem 1rem;
   display: flex;
   align-items: center;
   gap: 0.75rem;
 }
 
 .top-bar .logo {
-  font-size: 1.125rem;
+  font-family: var(--font-content);
+  font-size: 1.0625rem;
   font-weight: 600;
-  color: var(--accent);
+  color: var(--heading);
   white-space: nowrap;
+  letter-spacing: 0.02em;
 }
 
 .top-bar .search-box {
@@ -56,17 +85,18 @@ body {
   height: 36px;
   padding: 0 0.75rem 0 2rem;
   border: 1px solid var(--border);
-  border-radius: 999px;
-  background: var(--bg);
+  border-radius: var(--radius-sm);
+  background: var(--surface);
+  font-family: var(--font);
   font-size: 0.875rem;
   color: var(--text);
   outline: none;
-  transition: border-color 0.15s;
+  transition: border-color 0.15s, background-color 0.15s;
 }
 
 .top-bar .search-box input:focus {
   border-color: var(--accent);
-  background: var(--surface);
+  background: var(--bg);
 }
 
 .top-bar .search-box .search-icon {
@@ -95,7 +125,7 @@ body {
   flex-shrink: 0;
 }
 
-.back-btn:hover { background: var(--bg); }
+.back-btn:hover { background: var(--surface); }
 
 /* 主内容 */
 .content {
@@ -117,9 +147,11 @@ body[data-view="score"] .content { max-width: 1000px; }
 }
 
 .page-header h1 {
-  font-size: 1.25rem;
+  font-size: 1.375rem;
   font-weight: 600;
   margin-bottom: 0.25rem;
+  color: var(--heading);
+  letter-spacing: -0.01em;
 }
 
 .page-header .sub {
@@ -144,7 +176,7 @@ body[data-view="score"] .content { max-width: 1000px; }
   text-decoration: none;
   color: inherit;
   cursor: pointer;
-  transition: border-color 0.15s, transform 0.15s;
+  transition: border-color 0.15s, background-color 0.15s;
 }
 
 .score-item:hover { border-color: var(--accent); }
@@ -172,13 +204,15 @@ body[data-view="score"] .content { max-width: 1000px; }
 .score-item .info { padding: 0.75rem 0.875rem 0.875rem; }
 
 .score-item:active {
-  background: #fafafa;
+  background: var(--bg);
 }
 
 .score-item .title {
   font-size: 1rem;
-  font-weight: 500;
+  font-weight: 600;
   margin-bottom: 0.25rem;
+  color: var(--heading);
+  line-height: 1.35;
 }
 
 .score-item .composer {
@@ -200,13 +234,15 @@ body[data-view="score"] .content { max-width: 1000px; }
   font-weight: 500;
 }
 
-.badge-easy { background: #e8f5e9; color: #2e7d32; }
-.badge-medium { background: #e3f2fd; color: #1565c0; }
-.badge-hard { background: #fce4ec; color: #c62828; }
-
+/* 难度 / 分类统一成描边标签：主站没有彩色徽章，颜色会抢标题的层级 */
+.badge-easy,
+.badge-medium,
+.badge-hard,
 .badge-tag {
-  background: var(--bg);
-  color: var(--text-dim);
+  border: 1px solid var(--border);
+  background: transparent;
+  color: var(--meta);
+  font-weight: 500;
 }
 
 /* 空状态 */
@@ -239,9 +275,10 @@ body[data-view="score"] .content { max-width: 1000px; }
 }
 
 .category-meta h1 {
-  font-size: 1.25rem;
+  font-size: 1.375rem;
   font-weight: 600;
   margin-bottom: 0.25rem;
+  color: var(--heading);
 }
 
 .category-meta .count {
@@ -272,10 +309,12 @@ body[data-view="score"] .content { max-width: 1000px; }
 }
 
 .detail-header h1 {
-  font-size: 1.375rem;
+  font-size: 1.5rem;
   font-weight: 600;
   margin-bottom: 0.25rem;
   line-height: 1.3;
+  color: var(--heading);
+  letter-spacing: -0.01em;
 }
 
 .detail-header .composer {
@@ -293,40 +332,45 @@ body[data-view="score"] .content { max-width: 1000px; }
 /* 渲染模式切换 */
 .mode-bar {
   display: flex;
+  align-items: center;
   gap: 0.25rem;
   margin-bottom: 0.75rem;
   padding: 0.25rem;
-  background: var(--bg);
-  border-radius: 999px;
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: var(--radius-sm);
   width: fit-content;
+  max-width: 100%;
 }
 
 .mode-btn {
-  padding: 0.375rem 0.875rem;
+  padding: 0.3125rem 0.75rem;
   border: none;
-  border-radius: 999px;
+  border-radius: var(--radius-sm);
   background: transparent;
   color: var(--text-dim);
+  font-family: var(--font);
   font-size: 0.8125rem;
   cursor: pointer;
-  transition: all 0.15s;
+  transition: background-color 0.15s, color 0.15s;
 }
 
 .mode-btn.active {
-  background: var(--surface);
-  color: var(--text);
-  font-weight: 500;
-  box-shadow: 0 1px 2px rgba(0,0,0,0.06);
+  background: var(--bg);
+  color: var(--heading);
+  font-weight: 600;
 }
 
 .play-btn {
   margin-left: auto;
-  padding: 0.375rem 0.875rem;
+  padding: 0.3125rem 0.75rem;
   border: none;
-  border-radius: 999px;
+  border-radius: var(--radius-sm);
   background: var(--accent);
-  color: #fff;
+  color: var(--bg);
+  font-family: var(--font);
   font-size: 0.8125rem;
+  font-weight: 500;
   cursor: pointer;
   transition: opacity 0.15s;
   white-space: nowrap;
@@ -408,14 +452,16 @@ body[data-view="score"] .content { max-width: 1000px; }
 }
 
 .print-btn {
-  padding: 0.375rem 0.875rem;
+  padding: 0.3125rem 0.75rem;
   border: 1px solid var(--border);
-  border-radius: 999px;
-  background: var(--surface);
+  border-radius: var(--radius-sm);
+  background: transparent;
   color: var(--text);
+  font-family: var(--font);
   font-size: 0.8125rem;
   cursor: pointer;
   white-space: nowrap;
+  transition: border-color 0.15s, color 0.15s;
 }
 
 .print-btn:hover { border-color: var(--accent); }
@@ -453,6 +499,22 @@ body:not([data-view="score"]) .scribe-container { display: none; }
   text-align: center;
   color: var(--text-dim);
   font-size: 0.875rem;
+}
+
+/* 手机上四个按钮挤在一行会矮到 30px 以下，放宽并允许换行 */
+@media (max-width: 32rem) {
+  .mode-bar {
+    width: 100%;
+    flex-wrap: wrap;
+    row-gap: 0.25rem;
+  }
+  .mode-btn,
+  .play-btn,
+  .print-btn {
+    padding: 0.5rem 0.8125rem;
+    font-size: 0.8125rem;
+  }
+  .play-btn { margin-left: 0; }
 }
 
 /* 打印 */

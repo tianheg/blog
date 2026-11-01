@@ -67,10 +67,15 @@ RendererAdapter.register('simple-notation', {
 
     this._queue.push({ container, score });
     return container;
+  },
+
+  // 指定每行小节数直接渲染（热敏导出用，不走懒加载队列）
+  renderWith(container, score, perStave) {
+    return renderSN(container, score, perStave);
   }
 });
 
-function renderSN(container, score) {
+function renderSN(container, score, perStave) {
   try {
     // 懒加载时容器里会有「加载简谱引擎…」文本，SN 只 append 不清理 → 必须先清掉
     container.replaceChildren();
@@ -94,7 +99,7 @@ function renderSN(container, score) {
         tempo: String(score.tempo),
         key: score.key
       },
-      score: buildSNScoreString(score.staves, window.innerWidth < 560 ? 2 : 4),
+      score: buildSNScoreString(score.staves, perStave || (window.innerWidth < 560 ? 2 : 4)),
       lyric: ''
     });
 
