@@ -1278,6 +1278,58 @@ svg.heat-grid { display: block; width: 100%; height: auto; }
 }
 #ph-lb-cap { overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
 #ph-lb-count { font-variant-numeric: tabular-nums; color: rgba(255, 255, 255, 0.55); }
+
+/* --- /projects/ 工具墙 ----------------------------------------------------
+   一个页面的卡片网格：[data-proj-grid] 下每个 <a> 是一张卡。
+   三层内容靠标签选择器（契约：不加语义 class）：
+   strong = 名称 / small = slug / span = 一句话用途。
+   列宽数学：内容列 790px - 40px 内边距 = 750px；13rem(208px)+16px 间距
+   → 桌面 3 列，390px 手机单列。 */
+[data-proj-grid] {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(13rem, 1fr));
+  gap: var(--space-4);
+  margin-top: var(--space-8);
+}
+/* 网页工具区用宽卡（2 列）：这 10 个是主菜，卡片大一点、一行字更舒展 */
+[data-proj-grid="wide"] { grid-template-columns: repeat(auto-fill, minmax(20rem, 1fr)); }
+[data-proj-grid] > a {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-1);
+  padding: var(--space-4) var(--space-6);
+  border: 1px solid var(--border);
+  border-radius: var(--radius-lg);
+  background: var(--surface);
+  text-decoration: none;
+  transition: border-color 0.15s ease, background-color 0.15s ease;
+}
+[data-proj-grid] > a:hover,
+[data-proj-grid] > a:focus-visible {
+  border-color: var(--accent);
+  background: var(--bg);
+}
+[data-proj-grid] > a > strong {
+  font-size: var(--text-md);
+  font-weight: 600;
+  line-height: 1.4;
+  color: var(--heading);
+}
+[data-proj-grid] > a:hover > strong,
+[data-proj-grid] > a:focus-visible > strong { color: var(--accent); }
+[data-proj-grid] > a > small {
+  font-family: ui-monospace, SFMono-Regular, Menlo, monospace;
+  font-size: var(--text-2xs);
+  line-height: 1.4;
+  color: var(--muted);
+}
+[data-proj-grid] > a > span {
+  margin-top: var(--space-2);
+  min-height: 3em;                  /* 固定两行高：单行描述也占两行，整页卡片等高 */
+  font-size: var(--text-sm);
+  line-height: 1.5;
+  color: var(--meta);
+}
 }
 
 @layer utilities {

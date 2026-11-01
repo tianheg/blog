@@ -1,0 +1,132 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+  <meta name="color-scheme" content="light dark">
+  <title>小 demo | Tianhe Gao</title>
+  <style>
+    :root {
+      color-scheme: light dark;
+      --bg: light-dark(#f7f5f3, #121c22);
+      --fg: light-dark(#4b4743, #9fb9d0);
+      --heading: light-dark(#101828, #f3f4f6);
+      --muted: light-dark(#646c7c, #99a1af);
+      --surface: light-dark(#f3ede9, #1c262d);
+      --border: light-dark(#e5e7eb, #1e2939);
+      --accent: light-dark(#3d5b7a, #88a1bc);
+    }
+
+    * { box-sizing: border-box; }
+
+    body {
+      margin: 0 auto;
+      max-width: 62rem;
+      padding: 2rem 1.25rem 4rem;
+      background: var(--bg);
+      color: var(--fg);
+      font-family: -apple-system, BlinkMacSystemFont, "PingFang SC", "Noto Sans SC", "Segoe UI", sans-serif;
+      font-size: 15px;
+      line-height: 1.6;
+      -webkit-text-size-adjust: 100%;
+    }
+
+    a { color: var(--accent); }
+
+    .back {
+      display: inline-block;
+      margin-bottom: 1.5rem;
+      font-size: 0.8125rem;
+      color: var(--muted);
+      text-decoration: none;
+    }
+
+    .back:hover { color: var(--accent); }
+
+    h1 {
+      margin: 0 0 0.5rem;
+      font-size: clamp(1.75rem, 5vw, 2.25rem);
+      line-height: 1.2;
+      color: var(--heading);
+      letter-spacing: -0.01em;
+    }
+
+    .intro {
+      margin: 0 0 2rem;
+      max-width: 34rem;
+      color: var(--muted);
+      font-size: 0.9375rem;
+    }
+
+    .grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(16rem, 1fr));
+      gap: 0.75rem;
+    }
+
+    .grid > a {
+      display: flex;
+      flex-direction: column;
+      gap: 0.25rem;
+      padding: 0.875rem 1rem;
+      border: 1px solid var(--border);
+      border-radius: 8px;
+      background: var(--surface);
+      text-decoration: none;
+      transition: border-color 0.15s ease, background-color 0.15s ease;
+    }
+
+    .grid > a:hover,
+    .grid > a:focus-visible {
+      border-color: var(--accent);
+      background: var(--bg);
+    }
+
+    .name {
+      font-weight: 600;
+      color: var(--heading);
+      font-size: 0.9375rem;
+    }
+
+    .grid > a:hover .name,
+    .grid > a:focus-visible .name { color: var(--accent); }
+
+    .desc {
+      font-size: 0.8125rem;
+      line-height: 1.5;
+      color: var(--muted);
+    }
+
+  </style>
+</head>
+
+<body>
+  <a class="back" href="/projects/">← 全部项目</a>
+
+  <h1>小 demo</h1>
+  <p class="intro">写东西时顺手做的试验，多半是某个 CSS / JS 特性想亲手摸一遍。没有实际用途，点了看看就好。</p>
+
+  <div class="grid">
+
+    <a href="./agents-example/"><span class="name">Agent 示例</span><span class="desc">来自《JavaScript. The Core》的 agent 演示</span></a>
+    <a href="./audio-js-libs/"><span class="name">JS 音频库</span><span class="desc">howler / tone / wavesurfer 三家试听对比</span></a>
+    <a href="./chatgpt-plus/"><span class="name">ChatGPT Plus 海报</span><span class="desc">用 CSS doodle 画出来的</span></a>
+    <a href="./contact-info/"><span class="name">联系人卡片</span><span class="desc">学 MDN 时的练习</span></a>
+    <a href="./css/"><span class="name">CSS 练习</span><span class="desc">Day3 in CSS，花纹真的好看</span></a>
+    <a href="./css-doodle/"><span class="name">CSS Doodle 花纹</span><span class="desc">生成式图形，每次刷新都不一样</span></a>
+    <a href="./float/"><span class="name">float 练习</span><span class="desc">浮动布局的老手艺</span></a>
+    <a href="./fogg-behavior-model/"><span class="name">福格行为模型</span><span class="desc">把书里的那张图用网页画了一遍</span></a>
+    <a href="./glowing-text/"><span class="name">发光文字</span><span class="desc">纯 CSS 的文字辉光</span></a>
+    <a href="./half-blur-circle/"><span class="name">半模糊圆</span><span class="desc">一半模糊一半彩色的圆</span></a>
+    <a href="./html/"><span class="name">HTML 练习</span><span class="desc">把 HTML 各种元素都摸一遍</span></a>
+    <a href="./htmx/"><span class="name">htmx 练习</span><span class="desc">不写 JS 做局部刷新</span></a>
+    <a href="./mandala/"><span class="name">曼陀罗</span><span class="desc">MDN 上看到的，很好看</span></a>
+    <a href="./prefers-reduced-motion/"><span class="name">减少动效</span><span class="desc">实验 prefers-reduced-motion 媒体查询</span></a>
+    <a href="./selectors/"><span class="name">选择器练习</span><span class="desc">学 MDN 时的练习</span></a>
+    <a href="./selfhosted-openstreetmaps-widgets-with-protomaps/"><span class="name">自定义地图</span><span class="desc">Protomaps，自己切地球上的任意区域</span></a>
+    <a href="./wired-elements/"><span class="name">手绘 UI</span><span class="desc">wired-elements，手绘风的表单控件</span></a>
+  </div>
+</body>
+
+</html>
