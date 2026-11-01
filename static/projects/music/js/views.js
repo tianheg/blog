@@ -248,8 +248,9 @@ function buildAbcScore(score) {
               }
             }
             const barNo = Math.floor(note.start / meta.beatsPerBar) + 1;
-            const name = NAMES[note.midi % 12];
-            const oct = Math.floor(note.midi / 12) - 1;
+            const top = Array.isArray(note.midis) ? Math.max(...note.midis) : note.midi;
+            const name = NAMES[top % 12];
+            const oct = Math.floor(top / 12) - 1;
             statusEl.textContent = `第 ${barNo} 小节 · ${name}${oct}`;
             progEl.style.width = ((index / notes.length) * 100).toFixed(1) + '%';
           },
