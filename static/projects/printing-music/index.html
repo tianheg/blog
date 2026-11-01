@@ -1,15 +1,100 @@
 <!DOCTYPE html>
-<html>
-  <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta name="description" content="Music notation should be as accessible and as fluid as text is, on the web; that it is not, yet, is something of an afront to my sensibilities. Let us fix this pressing problem.">
-    <title>Printing Music</title>
-    <link rel="stylesheet" href="https://stephen.band/scribe/build/scribe-music/module.css" />
-<script type="module" src="https://stephen.band/scribe/build/scribe-music/module.js"></script>
-  </head>
-  <body>
-    <p>Source code: https://github.com/stephband/scribe/</p>
-    <scribe-music type="application/json" src="dolphin-dance.json"></scribe-music>
-  </body>
+<html lang="zh-CN">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+  <meta name="color-scheme" content="light dark">
+  <meta name="description" content="用 Scribe 在网页上渲染可打印的和弦谱">
+  <title>打印乐谱 | Tianhe Gao</title>
+
+  <!-- Scribe 渲染内核与字体已自托管在 ./vendor/（原站 stephen.band 的 module.js 路径已 404） -->
+  <link rel="stylesheet" href="./vendor/element.css">
+  <script type="module" src="./vendor/element.js"></script>
+
+  <style>
+    :root {
+      color-scheme: light dark;
+      --bg: light-dark(#f7f5f3, #121c22);
+      --fg: light-dark(#4b4743, #9fb9d0);
+      --heading: light-dark(#101828, #f3f4f6);
+      --muted: light-dark(#646c7c, #99a1af);
+      --surface: light-dark(#f3ede9, #1c262d);
+      --border: light-dark(#e5e7eb, #1e2939);
+      --accent: light-dark(#3d5b7a, #88a1bc);
+    }
+
+    * { box-sizing: border-box; }
+
+    body {
+      margin: 0 auto;
+      max-width: 62rem;
+      padding: 2rem 1.25rem 4rem;
+      background: var(--bg);
+      color: var(--fg);
+      font-family: -apple-system, BlinkMacSystemFont, "PingFang SC", "Noto Sans SC", "Segoe UI", sans-serif;
+      font-size: 15px;
+      line-height: 1.6;
+      -webkit-text-size-adjust: 100%;
+    }
+
+    a { color: var(--accent); }
+
+    .back {
+      display: inline-block;
+      margin-bottom: 1.5rem;
+      font-size: 0.8125rem;
+      color: var(--muted);
+      text-decoration: none;
+    }
+
+    .back:hover { color: var(--accent); }
+
+    h1 {
+      margin: 0 0 0.5rem;
+      font-size: clamp(1.75rem, 5vw, 2.25rem);
+      line-height: 1.2;
+      color: var(--heading);
+      letter-spacing: -0.01em;
+    }
+
+    .intro {
+      margin: 0 0 1.75rem;
+      max-width: 34rem;
+      color: var(--muted);
+      font-size: 0.9375rem;
+    }
+
+    .score {
+      padding: 1.25rem 1rem;
+      border: 1px solid var(--border);
+      border-radius: 8px;
+      background: var(--surface);
+      overflow-x: auto;
+      color: var(--heading);
+    }
+
+    /* Scribe 本身响应式：按容器宽度自动断行加系统，窄屏也不横向滚动 */
+
+    .source {
+      margin-top: 1.5rem;
+      font-size: 0.8125rem;
+      color: var(--muted);
+    }
+  </style>
+</head>
+
+<body>
+  <a class="back" href="/projects/">← 全部项目</a>
+
+  <h1>打印乐谱</h1>
+  <p class="intro">用 <a href="https://github.com/stephband/scribe" target="_blank" rel="noopener noreferrer">Scribe</a> 在网页上排出来的和弦谱，浏览器里直接能打印。曲目是 Herbie Hancock 的 Dolphin Dance。</p>
+
+  <div class="score">
+    <scribe-music clef="treble" src="./dolphin-dance.json"></scribe-music>
+  </div>
+
+  <p class="source">渲染内核与 Jazz 字体自托管在 <code>./vendor/</code>，不依赖第三方 CDN。</p>
+</body>
+
 </html>
