@@ -538,9 +538,46 @@ body:not([data-view="score"]) .scribe-container { display: none; }
   .play-btn { margin-left: 0; }
 }
 
-/* 打印 */
+/* 打印：页面尺寸按 A160M 的打印头宽度（72mm），内容由 JS 重排成窄版后出纸 */
+@page {
+  size: 72mm 297mm;
+  margin: 0;
+}
+
 @media print {
   .print-btn { display: none !important; }
-  .top-bar, .back-btn, .mode-bar, .breadcrumb { display: none !important; }
-  .content { max-width: none; padding: 0; }
+  .top-bar,
+  .back-btn,
+  .mode-bar,
+  .breadcrumb,
+  .detail-header,
+  .detail-notes { display: none !important; }
+
+  body {
+    max-width: none;
+    margin: 0;
+    padding: 0;
+    background: #fff;
+    color: #000;
+  }
+
+  .content {
+    max-width: none;
+    padding: 0;
+    margin: 0;
+  }
+
+  .abc-container {
+    width: 72mm !important;
+    padding: 0 !important;
+    border: none !important;
+    background: #fff !important;
+    overflow: visible !important;
+  }
+
+  .abc-container svg {
+    width: 100% !important;
+    height: auto !important;
+    display: block;
+  }
 }
