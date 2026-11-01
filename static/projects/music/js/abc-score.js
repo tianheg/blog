@@ -116,15 +116,48 @@ const AbcScore = {
   },
 
   // ABC → [{ midi, start(拍), dur(拍) }]，供 Web Audio 播放
+  // ABC → 音符事件。支持 V:1 / V:2 双声部：各声部独立计时，同一时刻的音合并成和弦
   toNotes(abcText) {
+    const LETTERS = { C: 0, D: 2, E: 4, F: 5, G: 7, A: 9, B: 11 };
     const lines = abcText.split('\n');
-    const body = [];
     let inHeader = true;
-    let unit = 1;                 // L: 一行音符的时值（拍，四分=1）
+    let unit = 1;
     let bpm = 100;
+    let curVoice = '1';
+    const voices = {};
 
+    const flush = (voice, tokens, cursorRef) => {
+      const arr = voices[voice] || (voices[voice] = []);
+      for (const tk of tokens) {
+        if (tk === '|' || tk === '') continue;
+        const m = /^([_^=]*)([A-Ga-gzx])([,']*)(\d*)(?:\/(\d*))?$/.exec(tk);
+        if (!m) continue;
+        const [, acc, letter, octMark, numStr, denStr] = m;
+
+        let mult = 1;
+        if (numStr) mult = Number(numStr);
+        if (denStr !== undefined) mult /= denStr === '' ? 2 : Number(denStr);
+        const dur = (mult * unit) || 1;
+
+        if (letter === 'z' || letter === 'x') { cursorRef.beat += dur; continue; }
+
+        const upper = letter.toUpperCase();
+        let midi = LETTERS[upper];
+        let oct = letter === upper ? 4 : 5;
+        for (const ch of octMark) oct += ch === "'" ? 1 : -1;
+        midi += (oct + 1) * 12;
+        for (const ch of acc) midi += ch === '^' ? 1 : ch === '_' ? -1 : 0;
+
+        arr.push({ midi, start: cursorRef.beat, dur });
+        cursorRef.beat += dur;
+      }
+    };
+
+    const cursors = {};
     for (const raw of lines) {
       const line = raw.trim();
+      const vh = /^V:\s*(\S+)/.exec(line);
+      if (vh) { curVoice = vh[1]; inHeader = false; continue; }
       if (inHeader) {
         const m = /^L:\s*(\d+)\s*\/\s*(\d+)/.exec(line);
         if (m) unit = (Number(m[1]) / Number(m[2])) * 4;
@@ -133,48 +166,39 @@ const AbcScore = {
         if (/^K:/.test(line)) inHeader = false;
         continue;
       }
-      body.push(line);
+      if (!line || /^[A-Za-z]:/.test(line)) continue;
+
+      if (!cursors[curVoice]) cursors[curVoice] = { beat: 0 };
+      const tokens = line
+        .replace(/"[^"]*"/g, ' ')
+        .replace(/![^!]*!/g, ' ')
+        .replace(/\{([^}]*)\}/g, '$1')
+        .replace(/\|\]?/g, ' | ')
+        .replace(/\|:/g, ' | ')
+        .split(/\s+/)
+        .filter(Boolean);
+      flush(curVoice, tokens, cursors[curVoice]);
     }
 
-    const text = body.join(' ');
-    const tokens = text
-      .replace(/"[^"]*"/g, ' ')                 // 和弦标记
-      .replace(/![^!]*!/g, ' ')                 // 装饰
-      .replace(/\{([^}]*)\}/g, '$1')            // grace note 保留音符
-      .replace(/\|[\]:]?/g, ' | ')
-      .split(/\s+/)
-      .filter(Boolean);
+    // 合并：同一 start 的所有音 → 一个和弦事件；单声部时就是单音
+    const byStart = new Map();
+    Object.keys(voices).forEach(v => {
+      voices[v].forEach(n => {
+        const k = n.start.toFixed(3);
+        const cur = byStart.get(k);
+        if (cur) {
+          cur.midis.push(n.midi);
+          cur.dur = Math.max(cur.dur, n.dur);
+          if (v === '1') cur.hasMelody = true;
+        } else {
+          byStart.set(k, { start: n.start, dur: n.dur, midis: [n.midi], hasMelody: v === '1' });
+        }
+      });
+    });
 
-    const notes = [];
-    let beat = 0;
-    for (const tk of tokens) {
-      if (tk === '|') continue;
-      const m = /^([_^=]*)([A-Ga-gzx])([,']*)(\d*)(?:\/(\d*))?$/.exec(tk);
-      if (!m) continue;
-
-      const [, acc, letter, octMark, numStr, denStr] = m;
-      // 时值：num/den × L
-      let mult = 1;
-      if (numStr) mult = Number(numStr);
-      if (denStr !== undefined) mult /= denStr === '' ? 2 : Number(denStr);
-      const dur = mult * unit || 1;
-
-      if (letter === 'z' || letter === 'x') { beat += dur; continue; }
-
-      const LETTERS = { C: 0, D: 2, E: 4, F: 5, G: 7, A: 9, B: 11 };
-      const upper = letter.toUpperCase();
-      let midi = LETTERS[upper];
-      let oct = letter === upper ? 4 : 5;
-      for (const ch of octMark) oct += ch === "'" ? 1 : -1;
-      midi += (oct + 1) * 12;
-
-      for (const ch of acc) midi += ch === '^' ? 1 : ch === '_' ? -1 : 0;
-
-      notes.push({ midi, start: beat, dur });
-      beat += dur;
-    }
-
-    return { notes, bpm, totalBeats: beat };
+    const notes = [...byStart.values()].sort((a, b) => a.start - b.start);
+    const totalBeats = notes.reduce((m, n) => Math.max(m, n.start + n.dur), 0);
+    return { notes, bpm, totalBeats };
   },
 
   // 导出 72mm 宽（203dpi 下 576 dots）单页 PDF

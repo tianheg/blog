@@ -154,7 +154,10 @@ const AudioPlayer = {
       const beatSec = 60 / getBpm();
       const durMs = n.dur * beatSec * 1000;
 
-      this._playTone(this._midiToFreq(n.midi), durMs / 1000 * 0.92, 1);
+      // 单声部时 midis 只有一个元素；双声部同一时刻是多音和弦
+      const midis = Array.isArray(n.midis) ? n.midis : [n.midi];
+      const amp = 0.85 / Math.max(1, midis.length);
+      midis.forEach(m => this._playTone(this._midiToFreq(m), durMs / 1000 * 0.92, amp));
       if (opts.onNote) opts.onNote(i, n);
 
       i += 1;
