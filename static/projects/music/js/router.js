@@ -50,14 +50,24 @@ function navigate(view, params = {}) {
   content.scrollIntoView({ behavior: 'smooth', block: 'start' });
   updateTitle(view, params);
 
-  // 更新 URL（pushState 保持无 # 历史记录，使用固定 ROOT）
-  const url = view === 'home' ? ROOT : view === 'score' ? `${ROOT}${params.scoreId}` : `${ROOT}${view}/${encodeURIComponent(params.filter || '')}`;
-  history.pushState({ view, params }, '', url);
+  // 用 hash 记状态：纯静态托管，深链接刷新不会 404（不需要 Worker 做 fallback）
+  const hash = view === 'home'
+    ? ''
+    : view === 'score'
+      ? `#/${params.scoreId}`
+      : `#/${view}/${encodeURIComponent(params.filter || '')}`;
+  history.pushState({ view, params }, '', ROOT + hash);
 }
 
-function handlePopState(e) {
-  const path = location.pathname.replace(ROOT, '');
-  resolvePath(path);
+function handlePopState() {
+  resolvePath(currentPath());
+}
+
+// 状态在 hash 里；顺便兼容旧链接（/projects/music/3 这种没有 # 的路径）
+function currentPath() {
+  const hash = location.hash.replace(/^#\/?/, '');
+  if (hash) return hash;
+  return location.pathname.replace(ROOT, '').replace(/\/$/, '');
 }
 
 function resolvePath(path) {
