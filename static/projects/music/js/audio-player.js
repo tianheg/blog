@@ -129,6 +129,47 @@ const AudioPlayer = {
     return total;
   },
 
+  // ── 可调速顺序播放：每次只排下一个音符，所以拖动 BPM 立刻生效 ──
+  // 用「理论时间 + 实测时间」补偿漂移，避免 setTimeout 累积误差
+  playSequence(notes, opts = {}) {
+    this.stop();
+    if (!notes || !notes.length) return;
+    this.playing = true;
+
+    const total = notes.reduce((m, n) => Math.max(m, n.start + n.dur), 0);
+    this.totalBeats = total;
+
+    const getBpm = opts.getBpm || (() => 100);
+    let i = 0;
+    let nextAt = performance.now();
+
+    const step = () => {
+      if (!this.playing) return;
+      if (i >= notes.length) {
+        this.playing = false;
+        if (opts.onEnd) opts.onEnd();
+        return;
+      }
+      const n = notes[i];
+      const beatSec = 60 / getBpm();
+      const durMs = n.dur * beatSec * 1000;
+
+      this._playTone(this._midiToFreq(n.midi), durMs / 1000 * 0.92, 1);
+      if (opts.onNote) opts.onNote(i, n);
+
+      i += 1;
+      nextAt += durMs;
+      const delay = Math.max(0, nextAt - performance.now());
+      this._seqTimer = setTimeout(step, delay);
+    };
+
+    step();
+  },
+
+  _midiToFreq(midi) {
+    return 440 * Math.pow(2, (midi - 69) / 12);
+  },
+
   // 统一调度：事件按 beat 排布，到点发声并回调
   _schedule(events, beatSec, opts, totalBeats, midiOf) {
     this.playing = true;
@@ -171,6 +212,7 @@ const AudioPlayer = {
   stop() {
     this._timeouts.forEach(clearTimeout);
     this._timeouts = [];
+    if (this._seqTimer) { clearTimeout(this._seqTimer); this._seqTimer = null; }
     this.playing = false;
   },
 
@@ -183,18 +225,32 @@ const AudioPlayer = {
   _playTone(freq, dur, amp = 1) {
     try {
       const ctx = this.getCtx();
-      const osc = ctx.createOscillator();
-      const gain = ctx.createGain();
-      osc.type = 'triangle';
-      osc.frequency.value = freq;
       const now = ctx.currentTime;
       const d = Math.max(dur, 0.08);
-      gain.gain.setValueAtTime(0.3 * amp, now);
-      gain.gain.exponentialRampToValueAtTime(0.001, now + d);
-      osc.connect(gain);
+
+      const gain = ctx.createGain();
+      gain.gain.setValueAtTime(0.0001, now);
+      gain.gain.linearRampToValueAtTime(0.24 * amp, now + 0.015);   // 起音
+      gain.gain.exponentialRampToValueAtTime(0.0001, now + d);
       gain.connect(ctx.destination);
-      osc.start(now);
-      osc.stop(now + d);
+
+      // 三角波给主体，正弦倍频加亮度，听起来没那么"电子"
+      const o1 = ctx.createOscillator();
+      o1.type = 'triangle';
+      o1.frequency.value = freq;
+      o1.connect(gain);
+      o1.start(now);
+      o1.stop(now + d + 0.05);
+
+      const o2 = ctx.createOscillator();
+      o2.type = 'sine';
+      o2.frequency.value = freq * 2;
+      const g2 = ctx.createGain();
+      g2.gain.value = 0.35;
+      o2.connect(g2);
+      g2.connect(gain);
+      o2.start(now);
+      o2.stop(now + d + 0.05);
     } catch (e) {
       // 播放失败静默处理
     }
