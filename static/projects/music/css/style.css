@@ -549,12 +549,20 @@ body[data-view="score"] .content { max-width: 1000px; }
   height: auto;
 }
 
-/* 播放中的音符高亮（abcjs 的符头是 path/ellipse） */
+/* 播放中的音符高亮：必须用跟黑符头对比强烈的暖橙，
+   用 accent 墨蓝跟黑音符几乎分不出来（踩过） */
 .abc-container .hl path,
 .abc-container .hl ellipse,
 .abc-container .hl polygon {
-  fill: var(--accent) !important;
-  stroke: var(--accent) !important;
+  fill: light-dark(#c2410c, #fb923c) !important;
+  stroke: light-dark(#c2410c, #fb923c) !important;
+}
+
+/* 高亮时整体放大一点点，扫一眼就能找到当前音 */
+.abc-container .hl {
+  transform-box: fill-box;
+  transform-origin: center;
+  transform: scale(1.35);
 }
 
 /* Scribe 打印谱容器：按内容宽度排版，窄屏横向滚动 */
