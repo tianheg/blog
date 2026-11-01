@@ -48,9 +48,9 @@ window.addEventListener('popstate', handlePopState);
 if (document.readyState === 'loading') {
   document.addEventListener('DOMContentLoaded', () => {
     init();
-    resolvePath(location.pathname.replace(ROOT, ''));
+    resolvePath(currentPath());
   });
 } else {
   init();
-  resolvePath(location.pathname.replace(ROOT, ''));
+  resolvePath(currentPath());
 }
