@@ -542,12 +542,14 @@ body[data-view="score"] .content { max-width: 1000px; }
   padding: 1rem 0.75rem;
   background: #fff;
   color: #000;
-  overflow-x: auto;
+  overflow: visible;
 }
 
+/* 谱面必须完整落在容器宽度内：只要横向溢出，overflow 容器就会截走手机的上下滑动 */
 .abc-container svg {
   display: block;
   max-width: 100%;
+  width: auto;
   height: auto;
 }
 

@@ -200,6 +200,10 @@ function buildAbcScore(score) {
   });
 
   let elemMap = null;
+  // 用户手一碰谱面就暂停自动滚动 1.5 秒，否则播放中的 scrollIntoView 会一直把页面抢回去
+  let userTouchedAt = 0;
+  container.addEventListener('touchstart', () => { userTouchedAt = Date.now(); }, { passive: true });
+  container.addEventListener('wheel', () => { userTouchedAt = Date.now(); }, { passive: true });
   let tunes = null;
   let charMap = null;
   let timing = null;
@@ -220,7 +224,7 @@ function buildAbcScore(score) {
       // 窄屏不能用 responsive:'resize' —— 它把整个 SVG 缩进容器宽度，
       // 56 小节挤成 330px 宽后音符小到看不清。改用固定 scale，靠 staffwidth 控制每行放几小节
       // 显式关掉 responsive，否则 render 的默认值 'resize' 会继续把 SVG 缩进容器
-      opts = { staffwidth: 260, scale: 1.1, responsive: false };
+      opts = { staffwidth: 250, scale: 1.02, responsive: false };
     } else {
       opts = { responsive: 'resize', staffwidth: Math.min(900, vw - 40) };
     }
@@ -291,7 +295,7 @@ function buildAbcScore(score) {
               }));
               targets.forEach(el => el.classList.add('hl'));
 
-              if (targets.length) {
+              if (targets.length && Date.now() - userTouchedAt > 5000) {
                 const el = targets.reduce((a, b) =>
                   a.getBoundingClientRect().top <= b.getBoundingClientRect().top ? a : b);
                 const box = el.getBoundingClientRect();

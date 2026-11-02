@@ -25,9 +25,9 @@
 # 版本只此一处 pin（沿用 scripts/build.sh 的做法：下载 + 校验，防篡改 release 被静默执行）。
 set -euo pipefail
 
-PAGEFIND_VERSION=1.5.2
+PAGEFIND_VERSION=1.6.0
 PAGEFIND_TARBALL="pagefind_extended-v${PAGEFIND_VERSION}-x86_64-unknown-linux-musl.tar.gz"
-PAGEFIND_SHA256="aeb135927856e7a49816cf2c9c2e53167f87afa1f61f7288b7d66c234a950d38"
+PAGEFIND_SHA256="20a992fd64af2ee4fbf39b99245a1135303b6813f79af7ac72a5e27247919b07"
 EMACS_VERSION=31.1
 # emacs 从 GNU 官方**源码**构建（官方只发源码，没有 Linux 二进制），构建产出的 tarball
 # 由本仓库发布到 R2（公开 URL，构建时匿名下载，CI 里不需要任何凭据）。
