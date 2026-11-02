@@ -163,6 +163,8 @@ function buildAbcScore(score) {
         <option value="solf">唱名</option>
       </select>
     </label>
+    <a class="print-btn" id="netease-btn" target="_blank" rel="noopener noreferrer"
+       title="在网易云音乐听这首曲子">网易云</a>
     <button class="print-btn" id="print-btn" title="导出 72mm 热敏版式 PDF">热敏打印</button>
   `;
 
@@ -176,6 +178,12 @@ function buildAbcScore(score) {
   section.appendChild(bar);
   section.appendChild(container);
   section.appendChild(statusBar);
+
+  const neteaseBtn = bar.querySelector('#netease-btn');
+  // 有具体歌曲 ID 就用直链，否则退化成搜索页（改编曲在网易云未必收录）
+  const nq = [score.title, score.composer].filter(Boolean).join(' ');
+  neteaseBtn.href = score.netease
+    || `https://music.163.com/#/search/m/?s=${encodeURIComponent(nq)}&type=1`;
 
   const playBtn = bar.querySelector('#play-btn');
   const printBtn = bar.querySelector('#print-btn');
@@ -202,8 +210,8 @@ function buildAbcScore(score) {
   let elemMap = null;
   // 用户手一碰谱面就暂停自动滚动 1.5 秒，否则播放中的 scrollIntoView 会一直把页面抢回去
   let userTouchedAt = 0;
-  container.addEventListener('touchstart', () => { userTouchedAt = Date.now(); }, { passive: true });
-  container.addEventListener('wheel', () => { userTouchedAt = Date.now(); }, { passive: true });
+  window.addEventListener('touchstart', () => { userTouchedAt = Date.now(); }, { passive: true });
+  window.addEventListener('wheel', () => { userTouchedAt = Date.now(); }, { passive: true });
   let tunes = null;
   let charMap = null;
   let timing = null;
