@@ -177,7 +177,9 @@ function buildAbcScore(score) {
       // 窄屏按每行 1-2 小节重排：不动换行的话，56 小节压进 330px 后音符只有 3px 高
       const vw = window.innerWidth || 390;
       const narrow = vw < 480;
-      const base = narrow ? AbcScore.reflowAbc(abcText, 1) : abcText;
+      const reflowed = narrow ? AbcScore.reflowAbc(abcText, 1) : abcText;
+      // 默认标注唱名（do re mi，按调号算相对音级）
+      const base = AbcScore.annotate(reflowed, 'solf');
       const opts = narrow
         ? { staffwidth: 250, scale: 1.02, responsive: false }
         : { responsive: 'resize', staffwidth: Math.min(900, vw - 40) };
