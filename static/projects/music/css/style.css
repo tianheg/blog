@@ -563,12 +563,7 @@ body[data-view="score"] .content { max-width: 1000px; }
   stroke: light-dark(#e11d48, #fb7185) !important;
 }
 
-/* 高亮时整体放大一点点，扫一眼就能找到当前音 */
-.abc-container .hl {
-  transform-box: fill-box;
-  transform-origin: center;
-  transform: scale(1.35);
-}
+/* 不加放大：音符放大后会挤到邻音，密集谱面看起来像糊成一团 */
 
 /* Scribe 打印谱容器：按内容宽度排版，窄屏横向滚动 */
 .scribe-container {
