@@ -200,6 +200,9 @@ function buildAbcScore(score) {
   });
 
   let elemMap = null;
+  let tunes = null;
+  let charMap = null;
+  let timing = null;
   // 按 class 全量清理：elemMap 返回的元素不一定都在 noteEls 里（延音线、装饰音），
   // 用 noteEls 清会漏，高亮越积越多
   const clearHl = () => container.querySelectorAll('.hl').forEach(el => el.classList.remove('hl'));
@@ -210,7 +213,8 @@ function buildAbcScore(score) {
     const avail = Math.max(300, (window.innerWidth || 390) - 40);
     const out = await AbcScore.render(container, text, { responsive: 'resize', staffwidth: Math.min(900, avail) });
     noteEls = [...container.querySelectorAll('.abcjs-note, g.abcjs-note')];
-    elemMap = AbcScore.buildElemMap(out.tunes);
+    tunes = out.tunes;
+    charMap = AbcScore.buildCharMap(tunes);
   }
 
   (async () => {
@@ -220,16 +224,19 @@ function buildAbcScore(score) {
       forRender = abcText.split('\n').filter(l => !/^[TC]:/.test(l)).join('\n');
       meta = AbcScore.meta(abcText);
 
-      const parsed = AbcScore.toNotes(abcText);
-      notes = parsed.notes;
-      bpmInput.value = String(parsed.bpm || meta.tempo || 100);
+      bpmInput.value = String(meta.tempo || 100);
       bpmNum.textContent = bpmInput.value;
 
       await render('none');
+
+      // 播放数据从 abcjs 导出的 MIDI 取（音高精确），不再自己解析 ABC 文本
+      const pb = AbcScore.buildPlayback(tunes);
+      notes = pb.notes;
       playBtn.disabled = false;
 
       function stopPlay() {
         AudioPlayer.stop();
+        if (timing) { try { timing.stop(); } catch (e) {} timing = null; }
         playing = false;
         clearHl();
         playBtn.textContent = '▶ 播放';
@@ -238,50 +245,53 @@ function buildAbcScore(score) {
 
       function startPlay(fromIndex) {
         if (playing) AudioPlayer.stop();
+        if (timing) { try { timing.stop(); } catch (e) {} timing = null; }
         clearHl();
-        // 从中间开始播时，把查找游标放到大致位置，否则单调推进找不到后面的音符
-        if (elemMap && elemMap.list) {
-          const from = Math.max(0, Math.min(notes.length - 1, fromIndex || 0));
-          elemMap.lastHint = Math.floor((from / Math.max(1, notes.length)) * elemMap.list.length);
-        }
+
         const start = Math.max(0, Math.min(notes.length - 1, fromIndex || 0));
+        const bpm = Number(bpmInput.value) || 100;
+
+        // 声音：MIDI 出来的精确音高序列
         AudioPlayer.playSequence(notes, {
           startIndex: start,
           getBpm: () => Number(bpmInput.value) || 100,
           onNote(index, note) {
-            container.querySelectorAll('.hl').forEach(el => el.classList.remove('hl'));
-            // 按 abcjs 的 abcjs-v{声部} / abcjs-n{声部内序号} 精确找元素：
-            // 双谱表要上下同时亮，用合并事件的索引是找不到对的元素的
-            const total = notes.length ? notes[notes.length - 1].start + notes[notes.length - 1].dur : 1;
-            const targets = (AbcScore.elemAt(elemMap, note.start / total, elemMap && elemMap.lastHint) || []).slice();
-            if (!targets.length && noteEls[index]) targets.push(noteEls[index]);
-            targets.forEach(t => t.classList.add('hl'));
-
-            // 滚动锚点用最靠上的那个（高音谱表），否则两个声部轮流当 targets[0]
-            // 会让页面上下抽搐，看起来像"乐谱往回放"
-            if (targets.length) {
-              const el = targets.reduce((a, b) =>
-                a.getBoundingClientRect().top <= b.getBoundingClientRect().top ? a : b);
-              const box = el.getBoundingClientRect();
-              if (box.top < 60 || box.bottom > window.innerHeight - 40) {
-                el.scrollIntoView({ behavior: 'smooth', block: 'center' });
-              }
-            }
             const barNo = Math.floor(note.start / meta.beatsPerBar) + 1;
-            const top = Array.isArray(note.midis) ? Math.max(...note.midis) : note.midi;
-            const name = NAMES[top % 12];
-            const oct = Math.floor(top / 12) - 1;
-            statusEl.textContent = `第 ${barNo} 小节 · ${name}${oct}`;
+            const top = Math.max(...note.midis);
+            statusEl.textContent = `第 ${barNo} 小节 · ${NAMES[top % 12]}${Math.floor(top / 12) - 1}`;
             progEl.style.width = ((index / notes.length) * 100).toFixed(1) + '%';
           },
-          onEnd() {
-            playing = false;
-            clearHl();
-            playBtn.textContent = '▶ 播放';
-            progEl.style.width = '100%';
-            statusEl.textContent = '演奏完毕';
-          },
+          onEnd() { stopPlay(); statusEl.textContent = '演奏完毕'; },
         });
+
+        // 高亮：交给 abcjs 的 TimingCallbacks，它给的 startCharArray 覆盖所有声部，
+        // 一次就能点亮上下两个谱表，且时间基准与谱面完全一致
+        if (tunes && tunes[0] && charMap) {
+          timing = new ABCJS.TimingCallbacks(tunes[0], {
+            qpm: bpm,
+            eventCallback(ev) {
+              clearHl();
+              const chars = ev.startCharArray || (ev.startChar !== undefined ? [ev.startChar] : []);
+              const targets = [];
+              chars.forEach(c => (charMap.get(c) || []).forEach(el => {
+                if (!targets.includes(el)) targets.push(el);
+              }));
+              targets.forEach(el => el.classList.add('hl'));
+
+              if (targets.length) {
+                const el = targets.reduce((a, b) =>
+                  a.getBoundingClientRect().top <= b.getBoundingClientRect().top ? a : b);
+                const box = el.getBoundingClientRect();
+                if (box.top < 60 || box.bottom > window.innerHeight - 40) {
+                  el.scrollIntoView({ behavior: 'smooth', block: 'center' });
+                }
+              }
+            },
+          });
+          const offsetMs = ((notes[start] ? notes[start].start : 0) / bpm) * 60000;
+          timing.start(offsetMs);
+        }
+
         playing = true;
         playBtn.textContent = '⏹ 停止';
         progEl.style.width = ((start / notes.length) * 100).toFixed(1) + '%';

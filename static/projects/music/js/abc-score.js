@@ -57,6 +57,122 @@ const AbcScore = {
     return { tunes, svg: paper.querySelector('svg') };
   },
 
+
+  // 从 abcjs 导出的 MIDI 里取精确音符：调号、还原记号、和弦、连音线全由 abcjs 处理，
+  // 自己解析 ABC 文本在这些地方一定会错（音高错乱的根源）
+  parseMidi(u8) {
+    let p = 0;
+    const rd = (n) => { let v = 0; for (let i = 0; i < n; i++) v = (v << 8) | u8[p++]; return v; };
+    const rv = () => { let v = 0, b; do { b = u8[p++]; v = (v << 7) | (b & 0x7f); } while (b & 0x80); return v; };
+
+    if (String.fromCharCode(...u8.slice(0, 4)) !== 'MThd') return [];
+    p = 4; rd(4); rd(2);
+    const ntrk = rd(2);
+    const div = rd(2) || 480;
+    const out = [];
+
+    for (let t = 0; t < ntrk; t++) {
+      if (p + 4 > u8.length) break;
+      if (String.fromCharCode(...u8.slice(p, p + 4)) !== 'MTrk') break;
+      p += 4;
+      const len = rd(4);
+      const end = p + len;
+      let ticks = 0;
+      let running = 0;
+      const active = new Map();   // midi → [startTicks...]
+
+      while (p < end) {
+        ticks += rv();
+        let status = u8[p];
+        if (status < 0x80) { status = running; }
+        else { p++; running = status; }
+        const type = status & 0xf0;
+
+        if (type === 0x90) {
+          const note = u8[p++];
+          const vel = u8[p++];
+          if (vel > 0) {
+            if (!active.has(note)) active.set(note, []);
+            active.get(note).push(ticks);
+          } else {
+            const st = active.get(note);
+            if (st && st.length) {
+              const s = st.shift();
+              out.push({ midi: note, start: s / div, dur: (ticks - s) / div });
+            }
+          }
+        } else if (type === 0x80) {
+          const note = u8[p++]; p++;
+          const st = active.get(note);
+          if (st && st.length) {
+            const s = st.shift();
+            out.push({ midi: note, start: s / div, dur: (ticks - s) / div });
+          }
+        } else if (type === 0xa0 || type === 0xb0 || type === 0xe0) {
+          p += 2;
+        } else if (type === 0xc0 || type === 0xd0) {
+          p += 1;
+        } else if (status === 0xff) {
+          p++; const ln = rv(); p += ln;
+        } else if (status === 0xf0 || status === 0xf7) {
+          const ln = rv(); p += ln;
+        } else {
+          break;
+        }
+      }
+      p = end;
+    }
+    return out;
+  },
+
+  // 播放序列：MIDI 音符按起始拍合并成和弦事件
+  buildPlayback(tunes) {
+    const tune = tunes && tunes[0];
+    const notes = [];
+    if (!tune) return { notes, totalBeats: 0 };
+
+    let raw = [];
+    try {
+      const bin = ABCJS.synth.getMidiFile(tune, { midiOutputType: 'binary' });
+      const u8 = bin instanceof Uint8Array ? bin : new Uint8Array(bin);
+      raw = this.parseMidi(u8);
+    } catch (e) {
+      console.warn('MIDI 导出失败', e);
+      return { notes, totalBeats: 0 };
+    }
+
+    const byStart = new Map();
+    raw.forEach(n => {
+      const k = n.start.toFixed(3);
+      const cur = byStart.get(k);
+      if (cur) {
+        if (!cur.midis.includes(n.midi)) cur.midis.push(n.midi);
+        cur.dur = Math.max(cur.dur, n.dur);
+      } else {
+        byStart.set(k, { start: n.start, dur: n.dur, midis: [n.midi] });
+      }
+    });
+
+    notes.push(...[...byStart.values()].sort((a, b) => a.start - b.start));
+    const totalBeats = notes.reduce((m, n) => Math.max(m, n.start + n.dur), 0);
+    return { notes, totalBeats };
+  },
+
+  // startChar → SVG 元素：abcjs 的 TimingCallbacks 给的就是 startChar，一一对得上
+  buildCharMap(tunes) {
+    const tune = tunes && tunes[0];
+    const map = new Map();
+    if (!tune || !tune.lines) return map;
+    tune.lines.forEach(line => line.staff.forEach(staff => (staff.voices || []).forEach((ns) => ns.forEach(n => {
+      const el = n.abselem && n.abselem.elemset && n.abselem.elemset[0];
+      if (el && n.startChar !== undefined) {
+        if (!map.has(n.startChar)) map.set(n.startChar, []);
+        map.get(n.startChar).push(el);
+      }
+    }))));
+    return map;
+  },
+
   // 用 abcjs 返回的 visualObj 建立「播放进度比例 → SVG 元素」映射。
   // 每个 note 自带 abselem.elemset（就是它的 g 元素），比按 ABC 行号/序号猜可靠得多
   // —— abcjs 会按 staffwidth 重排，渲染行数不一定等于 ABC 的行数（踩过）
