@@ -57,6 +57,62 @@ const AbcScore = {
     return { tunes, svg: paper.querySelector('svg') };
   },
 
+  // 按拍自动连符杠：abcjs 默认把八分/十六分音符各自画成带旗的单符尾，
+  // 而正式谱面（原版 PDF）是把同一拍内的短音符连成符杠。ABC 的括号 ( ) 就是强制连符杠
+  applyBeaming(abc) {
+    const durOf = (tok) => {
+      // 去掉注解 "..." 和装饰 { }
+      const t = tok.replace(/"[^"]*"/g, '').replace(/\{[^}]*\}/g, '');
+      const m = /^([_^=]*)([A-Ga-gzx])([,']*)(\d*)(?:\/(\d*))?$/.exec(t);
+      if (!m) return null;
+      const [, , , , num, den] = m;
+      let mult = num ? Number(num) : 1;
+      if (den !== undefined) mult /= den === '' ? 2 : Number(den);
+      return mult;
+    };
+
+    const L = /^L:\s*(\d+)\s*\/\s*(\d+)/m.exec(abc);
+    const unit = L ? (Number(L[1]) / Number(L[2])) * 4 : 1;   // 每 token 的基准拍数
+
+    return abc.split('\n').map(line => {
+      if (!line.trim() || /^[A-Za-z]:/.test(line)) return line;
+      if (/\(/.test(line)) return line;        // 已有括号就不动
+
+      return line.split('|').map(bar => {
+        const toks = bar.trim().split(/\s+/).filter(Boolean);
+        if (!toks.length) return bar;
+
+        const out = [];
+        let group = [];
+        let groupBeats = 0;
+
+        const flush = () => {
+          // 括号内必须无空格：abcjs 只认 (D/2C/2)，(D/2 C/2) 照样画成两个单独符尾
+          if (group.length >= 2) out.push('(' + group.map(t => t.replace(/\s+/g, '')).join('') + ')');
+          else out.push(...group);
+          group = [];
+          groupBeats = 0;
+        };
+
+        toks.forEach(t => {
+          const beats = durOf(t);
+          if (beats === null) { flush(); out.push(t); return; }
+          const rel = beats * unit;      // 相对四分音符的拍数
+          if (rel < 1 - 1e-9) {          // 短于一拍 → 参与符杠
+            group.push(t);
+            groupBeats += rel;
+            if (groupBeats >= 1 - 1e-9) flush();
+          } else {
+            flush();
+            out.push(t);
+          }
+        });
+        flush();
+        return ' ' + out.join(' ') + ' ';
+      }).join('|');
+    }).join('\n');
+  },
+
   // 按每行 N 个小节重新分行。abcjs 严格按 ABC 的换行排版，
   // 手机上想「一行铺满屏」就得先改 ABC 的换行（密集谱 2 小节一行根本塞不进 390px）
   reflowAbc(abc, perLine) {
