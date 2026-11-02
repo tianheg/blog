@@ -178,8 +178,9 @@ function buildAbcScore(score) {
       const vw = window.innerWidth || 390;
       const narrow = vw < 480;
       const reflowed = narrow ? AbcScore.reflowAbc(abcText, 1) : abcText;
-      // 默认标注唱名（do re mi，按调号算相对音级）
-      const base = AbcScore.annotate(reflowed, 'solf');
+      // 先连符杠再标唱名：唱名会给每个 token 加 "do" 前缀，顺序反了括号就对不上
+      const beamed = AbcScore.applyBeaming(reflowed);
+      const base = AbcScore.annotate(beamed, 'solf');
       const opts = narrow
         ? { staffwidth: 250, scale: 1.02, responsive: false }
         : { responsive: 'resize', staffwidth: Math.min(900, vw - 40) };
