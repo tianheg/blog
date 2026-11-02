@@ -232,6 +232,43 @@ const AbcScore = {
     return best.els;
   },
 
+  // 按每行 N 个小节重新分行。abcjs 严格按 ABC 的换行排版，
+  // 手机上想「一行铺满屏」就得先改 ABC 的换行（密集谱 2 小节一行根本塞不进 390px）
+  reflowAbc(abc, perLine) {
+    const lines = abc.split('\n');
+    const head = [];
+    const voices = [];
+    let cur = null;
+
+    lines.forEach(raw => {
+      const line = raw.trim();
+      if (!line) return;
+      if (/^V:/.test(line)) {
+        cur = { header: line, bars: [] };
+        voices.push(cur);
+        return;
+      }
+      if (/^[A-Za-z]:/.test(line) && !cur) { head.push(line); return; }
+      if (!cur) return;
+      line.split('|').forEach(seg => {
+        const s = seg.trim();
+        if (s) cur.bars.push(s);
+      });
+    });
+
+    if (!voices.length) return abc;
+
+    const out = [...head];
+    voices.forEach(v => {
+      out.push(v.header);
+      for (let i = 0; i < v.bars.length; i += perLine) {
+        const chunk = v.bars.slice(i, i + perLine).map(b => b + ' |').join(' ');
+        out.push(chunk);
+      }
+    });
+    return out.join('\n');
+  },
+
   // 给每个音符加注解：「音名」(C D E) 或「唱名」(do re mi，按调号算相对音级)
   annotate(abc, mode) {
     if (!mode || mode === 'none') return abc;

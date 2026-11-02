@@ -208,10 +208,23 @@ function buildAbcScore(score) {
   const clearHl = () => container.querySelectorAll('.hl').forEach(el => el.classList.remove('hl'));
 
   async function render(withAnnotations) {
-    const text = AbcScore.annotate(forRender, withAnnotations);
-    // 谱面宽度跟着容器走：固定 900 在手机上会被压成一条，双谱表 8 行挤在 250px 里
-    const avail = Math.max(300, (window.innerWidth || 390) - 40);
-    const out = await AbcScore.render(container, text, { responsive: 'resize', staffwidth: Math.min(900, avail) });
+    const vw0 = window.innerWidth || 390;
+    const narrow0 = vw0 < 480;
+    const base = narrow0 ? AbcScore.reflowAbc(forRender, 1) : forRender;
+    const text = AbcScore.annotate(base, withAnnotations);
+    // 谱面宽度跟着容器走，窄屏还要再收窄：abcjs 是「在给定宽度内尽量塞」，
+    // staffwidth 越小换行越多、音符越大，手机上才不会缩成一团
+    const vw = window.innerWidth || 390;
+    let opts;
+    if (vw < 480) {
+      // 窄屏不能用 responsive:'resize' —— 它把整个 SVG 缩进容器宽度，
+      // 56 小节挤成 330px 宽后音符小到看不清。改用固定 scale，靠 staffwidth 控制每行放几小节
+      // 显式关掉 responsive，否则 render 的默认值 'resize' 会继续把 SVG 缩进容器
+      opts = { staffwidth: 260, scale: 1.1, responsive: false };
+    } else {
+      opts = { responsive: 'resize', staffwidth: Math.min(900, vw - 40) };
+    }
+    const out = await AbcScore.render(container, text, opts);
     noteEls = [...container.querySelectorAll('.abcjs-note, g.abcjs-note')];
     tunes = out.tunes;
     charMap = AbcScore.buildCharMap(tunes);
