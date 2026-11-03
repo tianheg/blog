@@ -1,0 +1,37 @@
+#+TITLE: 防火墙与内网机器用不同内核能否降低 0day 风险
+#+DATE: <2026-11-03 16:47:59>
+#+STATUS: draft
+#+HEADER: DevOps
+
+* 论点
+
+本质是单一栽培（monoculture）风险：如果整个网络跑同一套网络栈，一个栈漏洞就能横穿全网。Level1Techs 上有人用这套架构十几年：
+
+#+BEGIN_SRC
+Internet → BSD 盒子（pf）→ Linux 机器（netfilter）
+#+END_SRC
+
+* 支持这一方的理由
+
+- 攻击者要为一个入口准备两套 exploit，针对 Linux 的 0day 在 BSD 层不起作用
+- 硬件加速卸载（flow offload）承接了部分转发职责时，也算多了一层实现
+- 两套规则语义不同：pf 是最后匹配生效，nftables 是最先匹配生效。要写出「意外过于宽松」的规则，得同时把两边都搞错
+- 企业里也这么做：边缘防火墙与内部防火墙用不同品牌、不同型号，理由是同一个 exploit 不能通吃两层
+
+* 反对的理由
+
+- 攻击面乘二：同时暴露在 Linux 和 BSD 的漏洞里，而多数人没有精力把两套系统都维护到同等水平
+- 增加复杂度本身就是风险，配置错误的概率上升，收益未必抵得过
+- 真实的风险重心在客户端设备与横向移动，多样性在那里收益更大
+- 边缘防火墙一旦被 root 且未被察觉，DMZ 和 LAN 一起沦陷，异构只在「打不穿两层」这个意义上成立
+- 2026 年的边缘防火墙不该兼任任何服务：不做反向代理、不做 VPN 终结、不开管理接口，它应该是一个黑盒
+
+* 结论
+
+方向成立，但收益常被高估。它挡住的是「同一个 0day 同时打穿两层」，不等于「更安全」；代价是配置复杂度与补丁面都翻倍。
+
+对 homelab 更有价值的一课不是「该不该上 BSD 防火墙」，而是边缘与内部分层：如果 VPN hub、反向代理和 hypervisor 跑在同一台机器上，那台机器被拿下时，后面所有虚拟机一起完。这一条比换什么内核重要得多。
+
+真要做异构，FreeBSD/OPNsense 比再上一台 Linux 有意义 —— 理由是漏洞集与规则语义都不同。
+
+来源: [[https://forum.level1techs.com/t/theory-your-firewall-being-a-different-kernel-to-the-machines-behind-it-reduces-0day-risk/259905][Level1Techs: Theory: Your firewall being a different kernel to the machines behind it reduces 0day risk]]
