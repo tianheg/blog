@@ -1,5 +1,8 @@
 #+TITLE: 2026 网络阅读
 
+- [[https://mp.weixin.qq.com/s/PXgKxpvMJSX4gJXPXp_D3w][7→8 那一下：网卡名悄悄变了，集群就失联了]] PVE 跨大版本升级实测复盘：Debian 底座换代后 systemd 网卡命名规则变了，eno1 写死在 /etc/network/interfaces 的桥接全线失效、首台机器失联。官方文档早有 pve-network-interface-pinning（升级前固化网卡名）+ pveXtoY --full 零 FAIL + 带外管理准备。附 AI 代跑升级的边界讨论。
+- [[https://mp.weixin.qq.com/s/crkqx2JOvZDsf_nlqPs5ng][深度对比 | ZSvirt 还是 Proxmox？（2026 版）]] ZSvirt（GPL 3.0，ZStack 开源）vs PVE 9.2：ZSvirt 强在 ISO 集中库/OVF-OVA/模板双向/回收站/运行中改 IP/vNUMA 向导/内置备份；PVE 强在 LXC/Ceph/休眠/生态。homelab 仍选 PVE。厂商自撰，慎读。
+- [[https://mp.weixin.qq.com/s/T9_acg247gxzUNL4j5zrCw][开源我这折腾了1年的「Agent自动化系统」，愿所有人都能感受Agent的魅力。]] 卡兹克开源 agent-autoloop：1600 行无依赖内核只做四件事（收事件、按规则分活、派活、记账），事件/Agent/通道/CI 全拆成插件。四个机制：挂起零消耗、事件溯源、指令数据分离、跳数熔断（8 层）。GitHub: KKKKhazix/agent-autoloop
 - [[https://mp.weixin.qq.com/s/WdfzirI9wmbT3Qc6VbSLdA][不到 3000，组装了一台家用服务器！！]] 超微 X10DRL-i 双路 + 2×E5-2680 v4（28C56T）+ 4×32G DDR4 ECC REG + 1T NVMe，总价 2971.6 元。三个踩坑：服务器主板 VGA 优先于独显、二手板无说明书致机箱接线靠猜、PVE 装完需从 Legacy 改 UEFI 才能引导。价格系 2025-07 行情。
 - [[https://mp.weixin.qq.com/s/KtD6yTOCBlp8TZ5ggvkaJA][卖马桶的TOTO砸600亿日元做芯片零件！新厂专做吸住晶圆的静电吸盘]] TOTO 投约 600 亿日元在福冈丰前建厂，做半导体设备陶瓷件：静电吸盘（刻电路时吸住晶圆）与 AD 部材（等离子体防护陶瓷镀层），2029 上半财年投产；另投 110 亿日元扩产中津 AD 部材。陶瓷事业本财年 674 亿日元。
 - [[https://mp.weixin.qq.com/s/2R9xtPdgYr3kF6L-LGr8aA][折腾了整整1年，毫无保留地分享一下我这套Agent自动化系统。]] 卡兹克自建 Agent 自动化系统的完整拆解：事件驱动取代人盯会话（定时+Webhook），自建中台统一收事件、按 rules.json 路由到不同模型，本地 Mac 接单程序轮询取活；CI 中台五步（Codex 只读审查→隔离 VM 检查→自动合并→发布→线上核实）；只有删数据/停服/花钱等决策推飞书卡片批红。
