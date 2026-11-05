@@ -264,8 +264,10 @@ pre {
 pre code { background: none; padding: 0; border-radius: 0; font-size: inherit; color: inherit; }
 
 /* 表格（窄屏整体缩一档）
-   width 用 auto 而不是 100%：列少、单元格内容短的表（如「维度/ext4/btrfs/ZFS」这种对比表）
-   撑满容器会让短列平分出一大片空白。auto 让宽度贴合内容，长表格仍由 max-width 兜住。 */
+   width 用 max-content 而不是 100%：列少、单元格内容短的表（如「维度/ext4/btrfs/ZFS」这种对比表）
+   撑满容器会让短列平分出一大片空白。max-content 让宽度贴合内容，长表格由 max-width 兜住。
+   注意：width:auto 与 width:fit-content 在 Chromium 的 table 上都不收缩（实测仍取可用宽度），
+   只有 max-content 真正生效。 */
 table {
   width: max-content;
   max-width: 100%;
