@@ -529,6 +529,38 @@
   没有 CUDA 需求时优先 Intel（AV1 编解码是这一代的独有优势）；要跑语言模型则看显存，16G 起步。
 </p>
 
+<div class="sect"><h2>最小验机配置</h2><div class="rule"></div></div>
+<p class="codecs-note">
+  整机配齐之前，先用下面六件把<strong>主板、CPU、内存插槽、SATA 口</strong>验一遍。二手板最常见的暗病（内存槽虚焊、SATA 口失效、BIOS 版本过低）都能在这一步暴露，坏了直接退，不必等装完才发现。
+</p>
+<div class="codecs-wrap">
+<table class="codecs">
+  <thead>
+    <tr><th>件</th><th>要求</th><th>备注</th></tr>
+  </thead>
+  <tbody>
+    <tr><td><b>主板</b></td><td>X10SRA-F，BIOS ≥ 2.0</td><td class="dim">下单前让卖家确认版本</td></tr>
+    <tr><td><b>CPU</b></td><td>E5-2690 v4</td><td class="dim">14C/28T，135W</td></tr>
+    <tr><td><b>散热器</b></td><td>AS120 V2（支持 2011 版）</td><td class="dim">Square ILM 扣具</td></tr>
+    <tr><td><b>内存</b></td><td>1 × 32G DDR4-2400 REG ECC</td><td class="dim">单条即可 POST</td></tr>
+    <tr><td><b>电源</b></td><td>ATX，24pin + EPS 8pin</td><td class="dim">有线就能点亮</td></tr>
+    <tr><td><b>网线</b></td><td>普通千兆线</td><td class="dim">接 IPMI 口远程看画面</td></tr>
+  </tbody>
+</table>
+</div>
+<p class="codecs-note">
+  <strong>这四样先别买：</strong>机箱（裸板放绝缘垫上就能点亮）、硬盘（验机只看 BIOS 认不认 SATA）、显卡（主板有 VGA + IPMI，装机不需要独显）、多余内存（1 条够验，4 条是配置阶段的事）。
+</p>
+<ol class="steps">
+  <li><b>裸板点亮。</b>主板 + CPU + 1 条内存 + 电源，主板放在纸板或防静电袋上（<strong>不要直接放金属桌面</strong>，短路烧板）。接 24pin + 8pin，显示器接 VGA 或网线接 IPMI。</li>
+  <li><b>进 BIOS 只看三样。</b>CPU 型号与核心数（应是 14C/28T）、内存容量、<strong>BIOS 版本</strong>。三条有一项不对就停手，别继续装。</li>
+  <li><b>8 个内存槽逐个插。</b>只插 1 条，每个槽都试一遍，能 POST 才算过。二手板最常见的问题就是内存槽虚焊。</li>
+  <li><b>10 个 SATA 口逐个认盘。</b>6 个 I-SATA + 4 个 S-SATA；sSATA 那几个在部分 BIOS 版本里默认关闭，只认到 6 个盘时先去 BIOS 打开。</li>
+</ol>
+<p class="codecs-note">
+  四步全过再去买机箱、硬盘和剩余内存条，把机器装起来。
+</p>
+
 <div class="sect"><h2>装机顺序</h2><div class="rule"></div></div>
 <ol class="steps">
   <li><b>先装电源和硬盘笼。</b>ATX 板加 8 盘位机箱通常是分仓结构，电源和硬盘笼在同一个区域，先固定好再上主板。</li>
@@ -660,7 +692,7 @@
         ["电源", "ATX"],
         ["体积", "约 57 L"]
       ],
-      good: "消费级静音塔式：厚静音棉、散热限高 180mm（利民 PA120 SE 这类大双塔都装得下）、显卡限长充裕。",
+      good: "消费级静音塔式：厚静音棉、散热限高 180mm（155mm 的双塔也装得下，单塔更宽松）、显卡限长充裕。",
       bad: "没有热插拔——换盘要关机拆侧板。8 个盘位只用 4 个，体积偏大。",
       more: [
         "这台只规划 4 盘位，所以不需要 NAS 专用热插拔机箱。消费级中塔的好处是：散热器限高 180mm（服务器机箱通常只有 146mm）、显卡限长充裕、静音棉厚、二手/全新都好买。",
@@ -694,24 +726,24 @@
     },
     {
       role: "散热",
-      model: "利民 PA120 SE（或同类消费级塔式）",
-      note: "6 热管双塔 · Square ILM",
+      model: "利民 AS120 V2（支持 LGA2011 版）",
+      note: "4 热管单塔 · Square ILM",
       qty: 1,
       specs: [
         ["接口", "LGA2011-3"],
         ["扣具", "Square ILM"],
         ["孔距", "80 × 80 mm"],
-        ["热管", "6 根"],
-        ["解热", "≥ 200 W"],
+        ["热管", "4 根"],
+        ["解热", "≥ 180 W"],
         ["高度", "155 mm"]
       ],
-      good: "选 Square ILM 主板的核心收益：散热器回到消费级市场，好买、便宜、性能强。PA120 SE 压 135W 绰绰有余。",
-      bad: "双塔体积大，会压到靠近 CPU 的内存槽；机箱必须支持 155mm 以上散热限高。",
+      good: "单塔宽度只有约 60mm，完全不挡 CPU 两侧的内存槽——这是它比双塔更合适的原因。4 热管压 135W 有余。",
+      bad: "解热上限不如双塔（180W vs 245W），但 135W 的 E5 用不到那么高；155mm 高，机箱限高要 ≥155mm。",
       more: [
         "LGA2011 有两种互斥扣具：<strong>Square ILM 80×80mm</strong>（方形，消费级通用）和 <strong>Narrow ILM 56×94mm</strong>（长方形，服务器板常用）。X10SRA-F 是<strong>工作站板，用 Square ILM</strong>——这就是换它换来的最大便利。",
-        "买方形的就行：利民、九州风神、猫头鹰的 LGA2011 扣具都是 80×80。之前如果看到「Narrow ILM 专用」的超微 SNK-P0050AP4 / SNK-P0048AP4，那是给服务器板的，这块板用不上。",
+        "买方形的就行：利民、九州风神、猫头鹰的 LGA2011 扣具都是 80×80。下单时认准标题带<strong>「支持 2011」</strong>的 SKU——同一款散热器会按平台分版本，普通版只带 1700/AM4 扣具。",
         "E5 的顶盖面积比消费级 CPU 大，散热器底座要能覆盖住。小尺寸下压式（比如给 ITX 用的 47mm）压 135W 会很吃力。",
-        "换到 180mm 限高的消费级机箱之后，155mm 的双塔（PA120 SE）才装得下。选机箱时第一件事就是看散热限高，其次才是盘位。",
+        "AS120 V2 高 155mm，Define R5 限高 180mm，余量充足。选机箱时第一件事看散热限高，其次才是盘位。",
         "如果机箱空间有限，也可以选 2U 服务器用的被动式散热器加机箱风道，但噪音和温度都不如塔式。"
       ]
     },
