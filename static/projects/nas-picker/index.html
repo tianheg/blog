@@ -383,44 +383,6 @@
   .toc a:hover, .toc a:focus-visible { color: var(--fg); border-color: var(--muted); }
 
   /* ── 底部总价条 ── */
-  .grand {
-    position: fixed;
-    left: 0;
-    right: 0;
-    bottom: 0;
-    z-index: 20;
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    gap: 1rem;
-    padding: .75rem clamp(0px, 2.5vw, 28px) calc(.75rem + env(safe-area-inset-bottom));
-    background: var(--bg);
-    border-top: 1px solid var(--line);
-  }
-  .grand .g-left {
-    display: flex;
-    align-items: baseline;
-    gap: .5rem;
-    min-width: 0;
-  }
-  .grand .g-label {
-    font-size: .72rem;
-    letter-spacing: .1em;
-    text-transform: uppercase;
-    color: var(--muted);
-  }
-  .grand .g-count {
-    font-size: .76rem;
-    color: var(--muted);
-    font-variant-numeric: tabular-nums;
-  }
-  .grand .g-val {
-    font-size: 1.35rem;
-    font-weight: 600;
-    font-variant-numeric: tabular-nums;
-    letter-spacing: -.01em;
-  }
-
   /* ── 硬解表横向滚动 ── */
   .codecs-wrap {
     overflow-x: auto;
@@ -495,7 +457,7 @@
   <h1>E5-2690 v4 虚拟化主机</h1>
   <p class="lede">
     14 核 28 线程、32G REG ECC（RDIMM）起步、10 个原生 SATA、4 个 PCIe 3.0 x16 槽。定位是跑 Proxmox VE：上面开虚拟机和容器，同时承担 NAS 存储。
-    主板选的是工作站板（Square ILM 扣具），所以散热器和机箱都用消费级产品，不用买服务器配件。当前配置不含独立显卡，硬盘先上一块——E5 没有核显但主板的 BMC 提供 VGA 与 IPMI，装机不需要独显。价格按 2026-10 二手行情，可自行修改。
+    主板选的是工作站板（Square ILM 扣具），所以散热器和机箱都用消费级产品，不用买服务器配件。当前配置不含独立显卡，硬盘先上一块——E5 没有核显但主板的 BMC 提供 VGA 与 IPMI，装机不需要独显。规格取自各家官方文档，数量可自行调整。
   </p>
 </header>
 
@@ -510,15 +472,15 @@
 <div class="optional">
   <p>主板上有 4 个 PCIe 3.0 x16 槽、8 个内存槽，现在只用掉 1 个槽和 1 条内存。下面几项都可以以后补，不影响现在开工。</p>
   <div class="opt">
-    <h3>Arc A380 硬解卡 <span>约 ¥729</span></h3>
+    <h3>Arc A380 硬解卡</h3>
     <p>只有<strong>视频转码</strong>时才需要它。局域网用 App 直接播放时服务器不转码，显卡全程闲着；触发转码的情况是浏览器播放、老设备不支持 HEVC、外网带宽不够要降码率、PGS 字幕烧录。加装后支持 AV1 编解码。同价位与更高价位的其他候选、以及本板带不动哪些卡，见下一节对照表。</p>
   </div>
   <div class="opt">
-    <h3>加第二条 32G 内存 <span>约 ¥240</span></h3>
+    <h3>加第二条 32G 内存</h3>
     <p>单条 32G 起步，加第二条就升双通道（64G），加到四条是四通道满载（128G）。四通道板的最优是每通道一条或每通道两条。</p>
   </div>
   <div class="opt">
-    <h3>硬盘扩到 4 块 <span>按盘价</span></h3>
+    <h3>硬盘扩到 4 块</h3>
     <p>规划上限 4 盘位，主板的 10 个 SATA 现在只用掉 1 个，机箱有 8 个内置盘位。不需要加 HBA 卡。</p>
   </div>
 </div>
@@ -547,23 +509,23 @@
 <div class="codecs-wrap">
 <table class="codecs gpu">
   <thead>
-    <tr><th>型号</th><th class="c">显存</th><th class="c">功耗</th><th class="c">供电</th><th class="c">参考价</th><th>转码</th><th>跑模型</th></tr>
+    <tr><th>型号</th><th class="c">显存</th><th class="c">功耗</th><th class="c">供电</th><th>转码</th><th>跑模型</th></tr>
   </thead>
   <tbody>
-    <tr><td><b>Arc A380</b></td><td class="c">6G</td><td class="c">75W</td><td class="c">6pin</td><td class="c">¥700–800</td><td><span class="yes">AV1 编解码，双媒体引擎</span></td><td class="dim">不行（6G 太小）</td></tr>
-    <tr><td>Arc A310</td><td class="c">4G</td><td class="c">30W</td><td class="c">槽供电</td><td class="c">¥550–750</td><td>AV1，单媒体引擎</td><td class="dim">—</td></tr>
-    <tr><td>Tesla P4</td><td class="c">8G</td><td class="c">75W</td><td class="c">槽供电</td><td class="c">¥300–500</td><td>无 AV1，Pascal NVENC</td><td class="dim">勉强 7B 量化</td></tr>
-    <tr><td>Tesla T4</td><td class="c">16G</td><td class="c">70W</td><td class="c">槽供电</td><td class="c">¥1500–2200</td><td>无 AV1，Turing NVENC</td><td class="dim">8B–14B 量化</td></tr>
-    <tr><td>Tesla P40</td><td class="c">24G</td><td class="c">250W</td><td class="c">8pin×2</td><td class="c">¥1000–1500</td><td>无 AV1，被动散热</td><td class="dim">大模型推理，性价比高</td></tr>
-    <tr><td>RTX 3060</td><td class="c">12G</td><td class="c">170W</td><td class="c">8pin</td><td class="c">¥1200–1600</td><td>无 AV1，主动散热</td><td class="dim">7B–13B</td></tr>
-    <tr><td>RTX 4060 Ti</td><td class="c">16G</td><td class="c">165W</td><td class="c">8pin</td><td class="c">¥2800–3500</td><td><span class="yes">AV1 编解码 + NVENC</span></td><td class="dim">14B 量化，转码与模型通吃</td></tr>
-    <tr class="off"><td>Arc B580</td><td class="c">12G</td><td class="c">190W</td><td class="c">8pin</td><td class="c">¥1600–1900</td><td><span class="no">需 PCIe 4.0 + ReBAR</span></td><td class="dim">本板不满足</td></tr>
-    <tr class="off"><td>Arc Pro B50</td><td class="c">16G</td><td class="c">70W</td><td class="c">槽供电</td><td class="c">¥2000–2500</td><td><span class="no">同上（Battlemage）</span></td><td class="dim">本板不满足</td></tr>
+    <tr><td><b>Arc A380</b></td><td class="c">6G</td><td class="c">75W</td><td class="c">6pin</td><td><span class="yes">AV1 编解码，双媒体引擎</span></td><td class="dim">不行（6G 太小）</td></tr>
+    <tr><td>Arc A310</td><td class="c">4G</td><td class="c">30W</td><td class="c">槽供电</td><td>AV1，单媒体引擎</td><td class="dim">—</td></tr>
+    <tr><td>Tesla P4</td><td class="c">8G</td><td class="c">75W</td><td class="c">槽供电</td><td>无 AV1，Pascal NVENC</td><td class="dim">勉强 7B 量化</td></tr>
+    <tr><td>Tesla T4</td><td class="c">16G</td><td class="c">70W</td><td class="c">槽供电</td><td>无 AV1，Turing NVENC</td><td class="dim">8B–14B 量化</td></tr>
+    <tr><td>Tesla P40</td><td class="c">24G</td><td class="c">250W</td><td class="c">8pin×2</td><td>无 AV1，被动散热</td><td class="dim">大模型推理，性价比高</td></tr>
+    <tr><td>RTX 3060</td><td class="c">12G</td><td class="c">170W</td><td class="c">8pin</td><td>无 AV1，主动散热</td><td class="dim">7B–13B</td></tr>
+    <tr><td>RTX 4060 Ti</td><td class="c">16G</td><td class="c">165W</td><td class="c">8pin</td><td><span class="yes">AV1 编解码 + NVENC</span></td><td class="dim">14B 量化，转码与模型通吃</td></tr>
+    <tr class="off"><td>Arc B580</td><td class="c">12G</td><td class="c">190W</td><td class="c">8pin</td><td><span class="no">需 PCIe 4.0 + ReBAR</span></td><td class="dim">本板不满足</td></tr>
+    <tr class="off"><td>Arc Pro B50</td><td class="c">16G</td><td class="c">70W</td><td class="c">槽供电</td><td><span class="no">同上（Battlemage）</span></td><td class="dim">本板不满足</td></tr>
   </tbody>
 </table>
 </div>
 <p class="codecs-note">
-  价格按 2026-11 二手行情。<strong>本板的硬约束是 PCIe 3.0 x8、BIOS 无 Resizable BAR</strong>：Alchemist 架构（A380 / A310）在这种平台上转码正常，已有同代服务器平台（Dell PowerEdge T440）的实测案例；Battlemage（B580 / Pro B50）官方要求 PCIe 4.0 + ReBAR，本板两项都不满足，不要为了显存踩这个坑。
+  二手行情波动大，采购前自行核对。<strong>本板的硬约束是 PCIe 3.0 x8、BIOS 无 Resizable BAR</strong>：Alchemist 架构（A380 / A310）在这种平台上转码正常，已有同代服务器平台（Dell PowerEdge T440）的实测案例；Battlemage（B580 / Pro B50）官方要求 PCIe 4.0 + ReBAR，本板两项都不满足，不要为了显存踩这个坑。
   没有 CUDA 需求时优先 Intel（AV1 编解码是这一代的独有优势）；要跑语言模型则看显存，16G 起步。
 </p>
 
@@ -591,18 +553,10 @@
 </ol>
 
 <footer class="note">
-  价格默认值沿用 2026-11 的行情抓取，但型号已更新（主板、机箱、散热器、内存），<strong>采购前请逐项复核价格</strong>。规格取自 Intel、超微、Fractal Design、利民官方文档。
+  规格取自 Intel、超微、Fractal Design、利民、JEDEC 官方文档。数量可自行调整，总容量与存储容量会跟着变。
   该平台已于 2022 年停止微码更新，不建议用于直接对外暴露的服务。
 </footer>
 
-</div>
-
-<div class="grand" id="grandbar">
-  <div class="g-left">
-    <span class="g-label">合计</span>
-    <span class="g-count" id="gcount">—</span>
-  </div>
-  <b class="g-val num" id="grand">¥0</b>
 </div>
 
 <script>
@@ -616,7 +570,6 @@
       role: "CPU",
       model: "Xeon E5-2690 v4",
       note: "Broadwell-EP · LGA2011-3 · 2016 Q1",
-      price: 55,
       qty: 1,
       specs: [
         ["核心", "14C / 28T"],
@@ -641,7 +594,6 @@
       role: "主板",
       model: "超微 X10SRA-F",
       note: "C612 · ATX 305×244 · 单路 · Square ILM",
-      price: 630,
       qty: 1,
       specs: [
         ["内存槽", "8 × DIMM"],
@@ -673,7 +625,6 @@
       role: "内存",
       model: "DDR4-2400 REG ECC 32G × 1",
       note: "单条起步 · 后续按需加",
-      price: 240,
       qty: 1,
       specs: [
         ["总容量", "32 GB"],
@@ -699,7 +650,6 @@
       role: "机箱",
       model: "Fractal Design Define R5",
       note: "ATX · 8 盘位内置 · 静音棉",
-      price: 400,
       qty: 1,
       specs: [
         ["板型", "ATX"],
@@ -726,7 +676,6 @@
       role: "电源",
       model: "650W 80PLUS 金牌",
       note: "ATX · 全模组优先",
-      price: 142,
       qty: 1,
       specs: [
         ["额定", "650 W"],
@@ -747,7 +696,6 @@
       role: "散热",
       model: "利民 PA120 SE（或同类消费级塔式）",
       note: "6 热管双塔 · Square ILM",
-      price: 140,
       qty: 1,
       specs: [
         ["接口", "LGA2011-3"],
@@ -771,17 +719,15 @@
       role: "存储",
       model: "4T 3.5\" CMR × 1",
       note: "先上一块 · 无冗余",
-      price: 435,
       qty: 1,
       tb: 4,
       specs: [
         ["单盘容量", "4 TB"],
         ["总容量", "4 TB"],
         ["记录方式", "CMR"],
-        ["接口", "SATA 6Gb/s"],
-        ["每 TB 成本", "—"]
+        ["接口", "SATA 6Gb/s"]
       ],
-      good: "4T 每 TB 成本比 2T 低约 10%。先上一块起步，机箱还剩 7 个盘位、主板还剩 9 个 SATA 口。",
+      good: "4T 的每 TB 成本比 2T 更低。先上一块起步，机箱还剩 7 个盘位、主板还剩 9 个 SATA 口。",
       bad: "单盘没有冗余——盘坏数据全没。重要数据必须有异地备份，或者等二等盘到位再组镜像。",
       more: [
         "<strong>SMR 是最大的坑</strong>。叠瓦盘在 ZFS/RAID 重建时写入性能会崩到几 MB/s，甚至因超时被判掉盘——等于重建过程中再坏一块，数据全没。二手 4T 里混着大量 SMR 型号，必须按型号逐个确认。",
@@ -797,7 +743,6 @@
       role: "转接",
       model: "PCIe 转 M.2 × 2",
       note: "主板无原生 M.2",
-      price: 80,
       qty: 2,
       specs: [
         ["接口", "PCIe 3.0 x4"],
@@ -816,7 +761,6 @@
       role: "杂项",
       model: "硅脂 + 扎带",
       note: "二手散热器常缺件",
-      price: 15,
       qty: 1,
       specs: [
         ["硅脂", "1 支"],
@@ -828,14 +772,13 @@
       more: [
         "硅脂涂一层薄薄的就够，中间挤黄豆大一颗，靠散热器压力摊开。<strong>不要抹满整个顶盖</strong>——多余的会溢到主板和插槽里。",
         "扎带用尼龙自锁的，固定硬盘背板的 SATA 线和供电线，避免线材垂到硬盘笼里被扇叶打到。",
-        "如果以后要用物理显示器装机，还需要一个 <strong>VGA 转 HDMI 主动转换器</strong>（约 ¥30，必须带转换芯片，被动线不行）。"
+        "如果以后要用物理显示器装机，还需要一个 <strong>VGA 转 HDMI 主动转换器</strong>（必须带转换芯片，被动线不行）。"
       ]
     },
     {
       role: "线材",
       model: "SATA 数据线 × 2",
       note: "侧弯头 · 6Gb/s · 留一根备用",
-      price: 5,
       qty: 2,
       specs: [
         ["接口", "SATA 7-pin"],
@@ -861,7 +804,6 @@
     ["功耗", "135 W", "待机 60–85W"]
   ];
 
-  var priceOverride = load("prices");
   var qtyOverride = load("qty");
 
   function load(k) {
@@ -875,14 +817,8 @@
     try { localStorage.setItem(KEY + ":" + k, JSON.stringify(v)); } catch (e) {}
   }
 
-  function priceOf(i) {
-    return (i in priceOverride) ? priceOverride[i] : PARTS[i].price;
-  }
   function qtyOf(i) {
     return (i in qtyOverride) ? qtyOverride[i] : PARTS[i].qty;
-  }
-  function money(n) {
-    return "¥" + Math.round(n).toLocaleString("zh-CN");
   }
 
   function renderFacts() {
@@ -930,19 +866,6 @@
       var pw = document.createElement("div");
       pw.className = "pprice";
 
-      var inp = document.createElement("input");
-      inp.type = "number";
-      inp.min = "0";
-      inp.step = "1";
-      inp.inputMode = "numeric";
-      inp.value = priceOf(i);
-      inp.setAttribute("aria-label", p.model + " 单价（元）");
-      inp.oninput = function () {
-        priceOverride[i] = Math.max(0, Number(inp.value) || 0);
-        save("prices", priceOverride);
-        updateSub(i);
-      };
-
       var x = document.createElement("span");
       x.className = "x";
       x.textContent = "×";
@@ -958,16 +881,11 @@
       q.oninput = function () {
         qtyOverride[i] = Math.max(0, Math.floor(Number(q.value) || 0));
         save("qty", qtyOverride);
-        updateSub(i);
         if (p.tb) updateStorage();
       };
 
-      var sub = document.createElement("div");
-      sub.className = "sub num";
-      pw.appendChild(inp);
       pw.appendChild(x);
       pw.appendChild(q);
-      pw.appendChild(sub);
 
       head.appendChild(role);
       head.appendChild(model);
@@ -1036,30 +954,10 @@
       box.appendChild(art);
     });
 
-    PARTS.forEach(function (p, i) { updateSub(i); });
     updateStorage();
   }
 
-  /* 更新单条组件的小计 */
-  function updateSub(i) {
-    var cards = document.querySelectorAll(".part");
-    if (!cards[i]) return;
-    var el = cards[i].querySelector(".pprice .sub");
-    if (el) el.textContent = money(priceOf(i) * qtyOf(i));
-    updateGrand();
-  }
-
-  /* 更新底部总价条 */
-  function updateGrand() {
-    var t = 0, n = 0;
-    PARTS.forEach(function (p, i) { t += priceOf(i) * qtyOf(i); n += qtyOf(i); });
-    var g = document.getElementById("grand");
-    var c = document.getElementById("gcount");
-    if (g) g.textContent = money(t);
-    if (c) c.textContent = n + " 件";
-  }
-
-  /* 更新存储块的总容量与每 TB 成本 */
+  /* 更新存储块的总容量 */
   function updateStorage() {
     var idx = -1;
     PARTS.forEach(function (p, i) { if (p.tb) idx = i; });
@@ -1070,12 +968,8 @@
     if (!card) return;
 
     var dds = card.querySelectorAll(".specs .sp dd");
-    var q = qtyOf(idx);
-    var totalT = PARTS[idx].tb * q;
-    var cost = priceOf(idx) * q;
-
+    var totalT = PARTS[idx].tb * qtyOf(idx);
     if (dds[1]) dds[1].textContent = totalT + " TB";
-    if (dds[4]) dds[4].textContent = totalT > 0 ? money(cost / totalT) + " /TB" : "—";
   }
 
   function renderToc() {
