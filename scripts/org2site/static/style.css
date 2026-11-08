@@ -107,7 +107,7 @@
   /* --- 尺度（S1：纯别名，值与替换前逐字节相同；命名让实际档位显式化）---------
      类型：真实用到 11 档（含 0.6875/1.0625/1.125 等长尾）。这里是"现状台账"，
      不是"应该有的档位"；要不要归一成 6 档是后续独立决定，不在本次重构范围内。 */
-  --text-2xs: 0.6875rem;   /* 11px  —— 仅 .garden-cat-group 之外的长尾 */
+  --text-2xs: 0.6875rem;   /* 11px  —— 长尾 */
   --text-xs:  0.75rem;     /* 12px */
   --text-sm:  0.8125rem;   /* 13px  —— 元信息主力（18 处） */
   --text-base: 0.875rem;   /* 14px  —— 正文小号主力（18 处） */
@@ -320,32 +320,16 @@ td { font-weight: 500; }
    左栏（w-52 = 13rem）悬挂在左侧 1fr 轨道里。放在轨道里（而不是让内容列让位）
    是为了让列表页/分类页/笔记页的正文左边缘完全一致。 */
 @media (min-width: 80rem) {
-  [data-til-shell] {
-    display: grid;
-    grid-template-columns: minmax(0, 1fr) 790px minmax(0, 1fr);
-  }
   /* 必须 width:100%：grid item 上带 margin-inline:auto 会退化成 fit-content，
      根页（内容窄）会缩到 634px。原站是 w-full。（实测踩过） */
-  [data-til-shell] > main { grid-column: 2; width: 100%; }
-  [data-til-side] { grid-column: 1; justify-self: end; }
 }
 /* pt-8 不是响应式的：所有宽度都要（放在媒体查询里会让 <1280px 少 32px） */
-[data-til-shell] > main { padding-top: var(--space-9); }
 /* 左栏只在列表页/分类页渲染（笔记页传 nil，压根没有这个元素）；<1280px 一律隐藏 */
-[data-til-side] { display: none; }
 @media (min-width: 80rem) {
-  [data-til-side] {
-    display: block;
-    width: 13rem;                 /* w-52 */
-    margin-inline-end: 1.5rem;    /* mr-6 */
-    padding-top: var(--space-9);            /* pt-8 */
-  }
 }
-[data-til-tree] { position: sticky; top: 5rem; }   /* sticky top-20 */
 
 /* 小屏内联分类树：≥1280px 交给左栏，别重复显示一份 */
 @media (min-width: 80rem) {
-  [data-til-inline] { display: none; }
 }
 }
 
@@ -478,12 +462,6 @@ details.archive-year {
   border-top: 1px solid var(--border);   /* 原站只有上边线，没有框 */
   border-radius: 0;
 }
-details.til-others {
-  margin: 0;
-  padding: 0;
-  border: 0;
-  border-radius: 0;
-}
 details.page-toc > summary {
   padding: var(--space-5) var(--space-6);
   font-size: var(--text-base);
@@ -493,7 +471,7 @@ details.page-toc > summary {
   cursor: pointer;
   user-select: none;
 }
-.til-toc { padding: 0 var(--space-6) var(--space-6); }
+.page-toc-list { padding: 0 var(--space-6) var(--space-6); }
 
 /* 目录列表 —— 照抄原站 baseof.html 里的 #TableOfContents 内联样式：
    左边一条细竖线，条目左缩进 12px，13px/1.6，hover 只变色不下划线，
@@ -524,23 +502,7 @@ details.page-toc > summary {
   font-weight: 500;
   border-left-color: var(--accent);
 }
-.til-toc { padding: 0 var(--space-6) var(--space-6); }
-
-.garden-actions { margin-bottom: var(--space-9); }
-.garden-actions button {
-  display: inline-flex;
-  align-items: center;
-  gap: var(--space-2);
-  padding: var(--space-2) var(--space-5);
-  font-size: var(--text-sm);
-  font-weight: 500;
-  color: var(--meta);
-  background: none;
-  border: 1px solid var(--border);
-  border-radius: var(--radius-full);
-  cursor: pointer;
-}
-.garden-actions button:hover { color: var(--heading); border-color: var(--rule); }
+.page-toc-list { padding: 0 var(--space-6) var(--space-6); }
 
 /* 计划列表（只在有 SCHEDULED/DEADLINE 时出现） */
 [data-plan-list] { list-style: none; margin: 0 0 var(--space-10); padding: 0; }
@@ -866,317 +828,6 @@ svg.heat-grid { display: block; width: 100%; height: auto; }
 .archive-entry a { color: var(--heading); text-decoration: none; }
 .archive-entry a:hover { text-decoration: underline; }
 
-/* --- 数字花园（/til/）---------------------------------------------------- */
-.garden-stats {
-  display: flex;
-  align-items: flex-start;
-  gap: var(--space-10);
-  margin-bottom: var(--space-10);
-}
-.garden-stats > div { display: flex; flex-direction: column; }
-.garden-stat-num {
-  font-size: var(--text-4xl);
-  font-weight: 600;
-  line-height: 1;
-  color: var(--heading);
-  font-variant-numeric: tabular-nums;
-}
-.garden-stat-unit { margin-left: 0.125rem; font-size: var(--text-base); font-weight: 400; color: var(--meta); }
-.garden-stat-label { margin-top: var(--space-2); font-size: var(--text-sm); color: var(--meta); }
-
-.garden-cats { margin-bottom: var(--space-10); }
-/* 三个小标题字号同（text-meta = 13px/lh1.5），但间距不同：分类 mb-4、最近新增 mb-3。
-   行高必须显式给 1.5 —— 继承 body 的 1.85 会把每行撑高 5-6px（实测差：条目 46 vs 40）。 */
-.garden-cats-head {
-  margin-bottom: var(--space-6);
-  padding-inline: var(--space-5);
-  font-size: var(--text-sm);
-  line-height: 1.5;
-  font-weight: 500;
-  color: var(--heading);
-}
-.garden-recent-head {
-  margin-bottom: var(--space-5);
-  font-size: var(--text-sm);
-  line-height: 1.5;
-  font-weight: 500;
-  color: var(--heading);
-}
-.garden-cats-grid {
-  display: grid;
-  grid-template-columns: repeat(2, minmax(0, 1fr));
-  column-gap: var(--space-6);
-}
-@media (min-width: 40rem) {
-  .garden-cats-grid { grid-template-columns: repeat(3, minmax(0, 1fr)); }
-}
-.garden-cat-group {
-  grid-column: 1 / -1;              /* 分组标签跨整行（原站 col-span-2 sm:col-span-3） */
-  margin: var(--space-7) 0 var(--space-2);       /* 组间 mt-5 / mb-1.5 */
-  padding-inline: var(--space-5);          /* px-3 */
-  font-size: var(--text-xs);
-  line-height: 1.5;
-  font-weight: 500;
-  color: var(--meta);
-}
-/* 首组没有上边距（原站 mt-0）：桌面左栏是 nav 里第 2 个孩子，小屏是网格首元素 */
-.garden-cat-group:first-child,
-.garden-cats-head + .garden-cat-group { margin-top: 0; }
-.garden-cat {
-  display: block;
-  padding: var(--space-2) var(--space-5) var(--space-2) var(--space-4);
-  border-inline-start: 2px solid transparent;
-  line-height: 1.25rem;             /* 原站 text-sm 的 14/20，别继承 body 的 1.85 */
-  text-decoration: none;
-}
-.garden-cat:hover { border-inline-start-color: var(--rule); }
-.garden-cat-row { display: flex; align-items: center; justify-content: space-between; gap: var(--space-3); }
-.garden-cat-name {
-  font-size: var(--text-base);
-  line-height: 1.25rem;
-  color: var(--meta);
-  overflow: hidden;
-  text-overflow: ellipsis;
-  white-space: nowrap;
-}
-.garden-cat:hover .garden-cat-name { color: var(--heading); }
-.garden-cat-count {
-  flex-shrink: 0;
-  font-size: var(--text-xs);
-  line-height: 1rem;                /* text-xs 的 12/16 */
-  color: var(--meta);
-  font-variant-numeric: tabular-nums;
-}
-.garden-cat-bar {
-  display: block;
-  width: 100%;
-  height: 2px;
-  margin-top: var(--space-2);
-  border-radius: var(--radius-full);
-  background: var(--border);
-}
-/* 细条填充固定用 ink-400（与 --accent 无关）：原站 bg-ink-400/50，深色 /40 */
-.garden-cat-bar > span {
-  display: block;
-  height: 100%;
-  border-radius: var(--radius-full);
-  background: var(--cat-bar);
-}
-
-/* 当前分类（分类页里的那一项）——原站 border-ink-500 + bg-ink-100 + font-medium */
-.garden-cat.is-active {
-  border-inline-start-color: var(--cat-active-border);
-  background: var(--cat-active-bg);
-}
-.garden-cat.is-active .garden-cat-name { color: var(--cat-active-fg); font-weight: 500; }
-.garden-cat.is-active .garden-cat-count { color: var(--cat-active-count); }
-
-/* --- 分类页 /til/<cat>/ ------------------------------------------------- */
-/* 对齐原站 layouts/til/list.html：面包屑 + 2xl 标题 + （有 #+HEADER 时）筛选
-   chips / 分组小节 /「其他」折叠块。数值全部来自原站 computed style 实测。 */
-.til-crumb {
-  margin-bottom: var(--space-8);
-  font-size: var(--text-base);
-  line-height: 1.25rem;
-  color: var(--meta);
-}
-.til-crumb a { color: inherit; text-decoration: none; }
-.til-crumb a:hover { color: var(--heading); }
-.til-crumb-sep { margin-inline: var(--space-2); color: var(--crumb-sep); }
-.til-crumb-cur { color: var(--heading); font-weight: 500; }
-
-.til-cat-title {
-  margin: 0 0 var(--space-10);
-  font-size: var(--text-4xl);                /* text-2xl，不是全站 36px */
-  font-weight: 700;
-  line-height: 2rem;
-  letter-spacing: -0.6px;
-  color: var(--heading);
-}
-
-/* 顶部筛选条：原站 min-[1400px]:hidden —— 宽屏改由右栏承担 */
-.til-cat-chips {
-  display: flex;
-  gap: var(--space-3);
-  margin-bottom: var(--space-6);
-  padding-bottom: var(--space-5);
-  overflow-x: auto;
-  scrollbar-width: none;
-}
-.til-cat-chips::-webkit-scrollbar { display: none; }
-@media (min-width: 87.5rem) {
-  .til-cat-chips { display: none; }
-}
-.til-chip {
-  flex-shrink: 0;
-  padding: var(--space-1) var(--space-5);
-  font-family: inherit;
-  font-size: var(--text-xs);
-  line-height: 1rem;
-  color: var(--meta);
-  background: none;
-  border: 1px solid var(--border);
-  border-radius: var(--radius-full);
-  white-space: nowrap;
-  cursor: pointer;
-  transition: color 0.15s, background-color 0.15s;
-}
-.til-chip:hover { color: var(--heading); background: var(--row-hover); }
-.til-chip-n { color: var(--meta); }
-.til-chip-all { color: var(--accent); border-color: var(--ink-200-border); }
-.til-chip.is-active {
-  background: var(--chip-active-bg);
-  color: var(--chip-active-fg);
-  font-weight: 500;
-}
-
-.til-cat-sec { margin-bottom: var(--space-10); }
-.til-cat-sec-head {
-  display: flex;
-  align-items: baseline;
-  gap: var(--space-4);
-  margin-bottom: var(--space-3);
-}
-.til-cat-sec-head h2 { margin: 0; font-size: var(--text-lg); font-weight: 600; color: var(--heading); }
-.til-cat-sec-n { font-size: var(--text-sm); color: var(--meta); font-variant-numeric: tabular-nums; }
-
-/* 条目列表：原站 space-y-px（相邻 1px） */
-.til-cat-sub > * + * { margin-top: 1px; }
-.til-entry {
-  display: flex;
-  align-items: baseline;
-  justify-content: space-between;
-  gap: var(--space-6);
-  padding: var(--space-3) var(--space-5);
-  margin-inline: -0.75rem;
-  border-radius: var(--radius-md);
-  text-decoration: none;
-}
-.til-entry:hover { background: var(--row-hover); }
-.til-entry-t {
-  font-size: var(--text-base);             /* 15px */
-  line-height: 1.40625rem;          /* 22.5px */
-  color: var(--list-title);
-  overflow: hidden;
-  text-overflow: ellipsis;
-}
-.til-entry:hover .til-entry-t { color: var(--accent); }
-.til-entry-d {
-  flex-shrink: 0;
-  font-size: var(--text-sm);             /* 13px */
-  line-height: 1.21875rem;          /* 19.5px */
-  color: var(--meta);
-  font-variant-numeric: tabular-nums;
-}
-
-/* 「其他」折叠块（原站 details.group + summary list-none） */
-.til-others > summary {
-  display: flex;
-  align-items: baseline;
-  gap: var(--space-4);
-  margin-bottom: var(--space-3);
-  cursor: pointer;
-  list-style: none;
-}
-.til-others > summary::-webkit-details-marker { display: none; }
-.til-others > summary h2 { margin: 0; font-size: var(--text-lg); font-weight: 600; color: var(--heading); }
-.til-others-n { font-size: var(--text-sm); color: var(--meta); font-variant-numeric: tabular-nums; }
-.til-others[open] .til-others-n { display: none; }
-.til-others > summary svg {
-  width: 0.75rem;
-  height: 0.75rem;
-  margin-left: 0.125rem;
-  color: var(--meta);
-  transition: transform 0.15s;
-}
-.til-others[open] > summary svg { transform: rotate(90deg); }
-.til-others[open] > .til-cat-sub { margin-top: var(--space-3); }
-
-/* 右栏「本页分组」（≥1400px；原站 w-64 ml-6 pt-8 + 内层 sticky top-20） */
-[data-til-right] { display: none; }
-@media (min-width: 87.5rem) {
-  [data-til-right] {
-    display: block;
-    grid-column: 3;
-    justify-self: start;
-    width: 16rem;
-    margin-inline-start: 1.5rem;
-    padding-top: var(--space-9);
-  }
-}
-[data-til-right] > div { position: sticky; top: 5rem; }
-.til-cat-navhead {
-  margin-bottom: var(--space-5);
-  padding-inline: var(--space-5);
-  font-size: var(--text-sm);
-  line-height: 1.5;
-  font-weight: 500;
-  color: var(--heading);
-}
-.til-cat-nav { display: flex; flex-direction: column; gap: var(--space-1); }
-.til-cat-navbtn {
-  display: block;
-  width: 100%;
-  padding: var(--space-2) var(--space-5);
-  font-family: inherit;
-  font-size: var(--text-base);
-  text-align: left;
-  color: var(--meta);
-  background: none;
-  border: 0;
-  border-radius: var(--radius-md);
-  cursor: pointer;
-  transition: color 0.15s, background-color 0.15s;
-}
-.til-cat-navbtn:hover { color: var(--heading); background: var(--row-hover); }
-.til-cat-navn { margin-left: var(--space-1); font-size: var(--text-xs); color: var(--meta); }
-.til-cat-navbtn.is-active {
-  background: var(--chip-active-bg);
-  color: var(--chip-active-fg);
-  font-weight: 500;
-}
-.til-cat-navall {
-  margin-top: var(--space-3);
-  padding: var(--space-2) var(--space-5);
-  font-family: inherit;
-  font-size: var(--text-base);
-  text-align: left;
-  color: var(--accent);
-  background: none;
-  border: 0;
-  border-radius: var(--radius-md);
-  cursor: pointer;
-}
-.til-cat-navall:hover { background: var(--row-hover); }
-
-.garden-recent { display: flex; flex-direction: column; }
-.garden-entry {
-  display: flex;
-  align-items: baseline;
-  justify-content: space-between;
-  gap: var(--space-6);
-  padding: var(--space-2) var(--space-3);
-  margin-inline: -0.5rem;
-  border-radius: var(--radius-md);
-  line-height: 1.5;                 /* 原站 15/22.5、13/19.5；继承 body 1.85 会撑高（实测 34.5 → 更高） */
-  text-decoration: none;
-}
-.garden-entry:hover { background: color-mix(in srgb, var(--fg) 7%, transparent); }
-.garden-entry > span:first-child {
-  font-size: var(--text-base);
-  color: var(--fg);
-  overflow: hidden;
-  text-overflow: ellipsis;
-  white-space: nowrap;
-}
-.garden-entry:hover > span:first-child { color: var(--accent); }
-.garden-entry > span:last-child {
-  flex-shrink: 0;
-  font-size: var(--text-sm);
-  color: var(--meta);
-  font-variant-numeric: tabular-nums;
-}
-
 /* --- 标签页 -------------------------------------------------------------- */
 [data-tag-cloud] { display: flex; flex-wrap: wrap; gap: 0.7rem; margin-top: var(--space-8); }
 [data-tag-cloud] a {
@@ -1399,7 +1050,6 @@ th, td { overflow-wrap: anywhere; }
   [data-tag-entries] li { padding-block: 0.55rem; }
   [data-site-header] nav a { padding-block: 0.35rem; }
 }
-
 
 /* 低动效偏好 */
 @media (prefers-reduced-motion: reduce) {

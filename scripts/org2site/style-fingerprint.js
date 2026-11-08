@@ -3,7 +3,7 @@
  * 用法：在任意浏览器/CDP 环境里对每个 (页面 × 视口 × 配色) 组合执行本脚本，
  *       取返回值里的 hash 比对。全部组合的 hash 一致 = 渲染等价。
  *
- * 覆盖：/ /posts/ /til/ /search/ /about/ /tags/
+ * 覆盖：/ /posts/ /search/ /about/ /tags/
  *       1280×900 与 412×915（手机）两个视口 × light/dark 两套配色
  *
  * 注意：

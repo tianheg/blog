@@ -14,7 +14,6 @@ Hugo 时代的模板 / 配色 / 字号旧记录 / 链路悬浮预览 / 站点变
 blog/
 ├── org/                 # **内容真源**（org-mode，2026-10 起 content/*.md 已下线）
 │   ├── posts/           # 博客文章（长文、随笔、年度总结）
-│   ├── til/             # Today I Learned 笔记
 │   │   ├── software/ life/ health/ learning/ career/ hardware/
 │   │   └── homelab/ backup/ writing/ music/ media/ courses/ science/ history/
 │   │                    # 子分类用 `#+HEADER:` 标记（原 front matter `header`）
@@ -26,7 +25,7 @@ blog/
 │   ├── org2site/        # 站点管线（单入口 build.sh）
 │   │   ├── build.sh     # ① emacs 导出 → ② PageFind 索引 → ③ verify.py 体检
 │   │   ├── build.el     # 全站构建（文章 / 归档 / 花园 / 分类页 / RSS / sitemap / 404 / 静态拷贝）
-│   │   ├── export.el    # 单页导出层（骨架、TIL 三栏 shell、wikilink 解析、排印规范化）
+│   │   ├── export.el    # 单页导出层（骨架、wikilink 解析、排印规范化）
 │   │   ├── static/      # style.css / site.js / photos.js / favicon / fonts
 │   │   └── verify.py    # 输出体检（每页一个 h1 / UTF-8 / shell 位置 / 锚点与站内死链）
 │   ├── worker.js        # Cloudflare Worker（静态托管 + 语义搜索 API + 评论同域反代）
@@ -77,11 +76,17 @@ blog/
 - *内容定位。* 主要是随时学习的记录与生活感想；外语电影首选外语作标题，中文放在文中。
 
 ** 内容规范
+#+begin_quote
+*2026-11-08：TIL 整体迁出。* 575 个文件（581 页内容，含提交历史）已移到私有仓库 =kb=（=git subtree split= 迁出），
+本仓库的 =/til/= 版块与全部构建逻辑一并下线，旧 URL 返回 404。笔记的写作规范（=#+STATUS:= / =#+HEADER:= /
+边界纪律 / 引用来源格式）随内容一起搬到了 =kb/AGENTS.md=，不再在本 README 维护。
+本站现在只有 =org/posts/= 与 =org/*.org= 独立页面。
+#+end_quote
+
 *** 内容格式
 | 目录                    | 格式              | 原因                                                                                         |
 |-------------------------+-------------------+----------------------------------------------------------------------------------------------|
 | =org/= 及根目录独立页面 | Org Mode (=.org=) | 唯一内容真源；2026-10 由 Markdown 迁回 org（Hugo 时代的那批 =.md= 已随 =content/= 一起下线） |
-| =org/til/=              | Org Mode (=.org=) | 笔记类内容，按分类文件夹组织，子分类用 =#+HEADER:= 标记                                      |
 
 #+begin_quote
 2026-09-10 完成 =.org= → =.md= 迁移：1581 篇内容 + 模板（graph-data 链接解析、=about.md= / =-en.md= 判断）+ hugo.yaml（=parser.attribute.block=、typographer 对齐 go-org、脚注 backlinkHTML、TOC endLevel）。转换脚本 =org2md.py= 已移出仓库（副本在 =~/.hermes/scripts/.archive/=，历史保留在 git）。
@@ -91,18 +96,6 @@ blog/
 | 目录            | 推荐格式           | 示例                                           |
 |-----------------+--------------------+------------------------------------------------|
 | =posts/=        | ={主题词}.org=      | =2025.org=, =a-dream.org=, =about-good-posts.org= |
-| =til/软件/=     | ={前缀}-{描述}.org= | =git-rebase.org=, =css-flexbox.org=              |
-| =til/其他分类/= | ={描述}.org=        | =sleep.org=, =iptables.org=                      |
-
-*** TIL header 标记
-扁平化结构下，子分类用 =#+HEADER= 标记，不建立子目录：
-
-#+begin_src org
-,#+TITLE: Git merge 与 rebase
-,#+HEADER: Git
-#+end_src
-
-分类页按 header 分组展示，右侧边栏可折叠筛选。支持多 header（空格分隔）。
 
 *通用约束：*
 
@@ -110,20 +103,6 @@ blog/
 - ❌ 不能有空格
 - ❌ 不能有中文标点
 - ❌ 避免无意义编号（=001.org=, =note1.org=）
-
-*** TIL 笔记边界纪律（2026-09 对照 blackglory.me 树形笔记结论）
-Blackglory 的笔记 = 每主题单页深层可折叠概念树（如 Linux 页 199 节点、最深 6 层、700KB）。对照后确认：*TIL 的分类 + #+HEADER 扁平结构是正确设计，不重建深目录树，不把主题合并成巨页*。理由：定位靠检索（Pagefind + 语义搜索），不靠层级导航；扁平结构 URL 稳定、git/STATUS 粒度清晰；巨页移动端不可读。
-
-三条边界纪律：
-
-1. *边界后置、就地生长* --- 同主题碎片别急着开新文件或建目录，优先合进现有文件做 =*= 小节。只有文件内部层级到 4 层以上、且各小节需要独立引用时，才拆成新文件。
-2. *检索宽容* --- 一条内容同属多个 header 时随手放任意一处即可，不纠结归属（Pagefind 兜底）。多 header 参数支持真实多归属，但默认不为此花时间。
-3. *深链可用* --- Goldmark 按标题文本生成锚点（=#标题文本=，CJK 原样保留；重复标题自动加 =-1= 后缀），文件内小节可被 URL 直达。需要固定锚点时用 ={#custom-id}= 属性。
-
-触发阈值（动边界的信号）：
-
-- header 组 > ~60 篇且成员互相引用频繁 → 合小为大，内部 =*= 树结构化
-- 单文件 > ~6 个平级 =*= 小节且语义独立 → 拆文件
 
 *** 内容头字段（org 关键字）
 
@@ -137,28 +116,9 @@ Blackglory 的笔记 = 每主题单页深层可折叠概念树（如 Linux 页 1
 
 独立页面（如 =about.org=）通常只需要 =#+TITLE:=。
 
-TIL（=org/til/=）必带整理状态与日期（状态 2026-09-01 起 / 日期 2026-09-10 起，全库强制）：
-
-#+begin_src org
-,#+TITLE: 40个计算机科学核心概念（通俗解释）
-,#+DATE: <2026-04-06 17:39:49>
-,#+STATUS: draft
-,#+HEADER: Programming
-#+end_src
-
-- =#+STATUS:= 取值 =draft=（AI 生成/代写，未经人工整理）或 =reviewed=（人工复核过）
-- =#+DATE:= 语义是*首次入库时间*：新建用当天时间；历史文件取 git 首次提交时间
-  （=git log --diff-filter=A --follow=），无 git 历史时回退文件 mtime。2026-09-10 已全库补齐
-- 日期驱动 =/til/= 的「最近新增」排序；posts/til 下缺 =#+DATE:= 的页面会被*跳过不构建*
-  （严格模式下直接让构建失败，见「部署」）
-- AI 代写一律 =draft=；用自己的话复核/补充后改 =reviewed=
-- =#+HEADER:= 是 TIL 的子分类标记（见上节）
-
-*** Posts vs TIL 选择标准
-| 类型    | 适合内容                                         | 示例                             |
-|---------+--------------------------------------------------+----------------------------------|
-| *Posts* | 长文、年度总结、随笔、书评、需要深度思考的内容   | 年终总结、音乐剧观后感、技术长文 |
-| *TIL*   | 技术知识点、操作步骤、命令备忘、可快速检索的笔记 | Git 命令、CSS 技巧、配置方法     |
+=#+DATE:= 是内容页必填项（=posts/= 下缺它的页面会被*跳过不构建*，严格模式下直接让构建失败，
+见「部署」）。语义是*首次入库时间*：新建用当天时间；历史文件取 git 首次提交时间
+（=git log --diff-filter=A --follow=），无 git 历史时回退文件 mtime。
 
 *** 标签（Tags）
 - =tags= 是唯一的 taxonomy，*语义是栏目级分类*（这篇属于哪个栏目），不是技术关键词（用了哪个工具）
@@ -177,7 +137,7 @@ TIL（=org/til/=）必带整理状态与日期（状态 2026-09-01 起 / 日期 
 
 - =English= 与栏目正交，标记英文文章（英文原创 + 英文版），不与中文栏目混用
 
-- =til/= 不使用标签，文件夹分类 + =#+HEADER:= 已足够
+- =posts/= 之外的内容（笔记）在私有仓库 =kb=，不使用本仓库的标签体系
 
 - 删标签等于 URL 消失（=/tags/<slug>/= 直接 404）------改完跑一次构建（=bash scripts/org2site/build.sh public=）兜底：构建末尾会报未解析的 wikilink，=verify.py= 会拦住失效内链
 
@@ -186,7 +146,7 @@ TIL（=org/til/=）必带整理状态与日期（状态 2026-09-01 起 / 日期 
 正文引用其他笔记，两种写法都支持：
 
 - *Wikilink*：=[[git-rebase]]=、=[[git-rebase|显示文字]]=、=[[笔记本保养#小节]]=
-- org 链接：=[[/til/software/git-rebase/][显示文字]]=
+- org 链接：=[[/posts/2025/][显示文字]]=
 
 wikilink 依次按 *文件名 → 完整标题 → 标题主名（=——=/=：=/=|= 之前那截）* 解析
 （=scripts/org2site/export.el=）。代码块与行内代码里的 =[[…]]= 不会误解析。
@@ -206,7 +166,7 @@ wikilink 依次按 *文件名 → 完整标题 → 标题主名（=——=/=：=
 - 要中文显示：=[[laptop-maintenance|笔记本保养]]=
 - 指小节、站外链接、静态文件仍用 org 链接或裸 URL
 
-*反链*：**内容页（posts / til）** 末尾自动渲染「引用这篇的」（=build.el= 的 =org2site--backlink-index=）。
+*反链*：**posts 内容页** 末尾自动渲染「引用这篇的」（=build.el= 的 =org2site--backlink-index=）。
 根页面（about / search / watch / links…）是站点功能性页面，**不加**这一区 —— 底部挂一串
 「引用这篇的」是噪声。但索引照旧收录根页面作为**来源**：它们引用内容时，那条引用会出现在
 被引页的反链里。构建时全站扫一遍建索引（O(n)，**不是每页扫全站**），只做 incoming；每条附上
@@ -219,27 +179,6 @@ wikilink 依次按 *文件名 → 完整标题 → 标题主名（=——=/=：=
 =:raw-link= 主机名判断，不改内容。代码块里手写的 =<a>= 与 =static/= 下的手写 HTML 页面不经过这里。
 
 *仍然没有*：链接悬浮预览（=PagePreview.ts= 已随 Hugo 管线删除）、=/graph/= 图谱页（线上 404）。
-
-*** TIL 引用来源格式
-TIL 的信息源链接统一放在文件末尾：
-
-- *单一来源* → =来源: [[URL][描述文字]]=
-- *多个来源* → =** 参考= 小节，org 链接列表（全库 59 篇这样写）
-
-#+begin_src org
-,# 单一来源
-来源: [[https://en.wikipedia.org/wiki/Asperger_syndrome][Wikipedia: Asperger syndrome]]
-
-,# 多个来源
-** 参考
-- [[https://en.wikipedia.org/wiki/Information_retrieval][Wikipedia: Information retrieval]]
-- [[https://scholar.google.com/intl/en/scholar/help.html][Google Scholar Search Tips]]
-#+end_src
-
-注意：
-
-- 内联引用（正文中随文出现的链接）不受此约束
-- 推荐阅读/延伸资源不属于「信息源」，不用加到 =** 参考=，用 =*** 推荐资源= 或其他合适的小节标题
 
 ** 样式体系
 
@@ -255,7 +194,7 @@ TIL 的信息源链接统一放在文件末尾：
 *层序（=@layer=）*：=tokens → base → layout → components → pages → utilities=
 
 - 同层内按源码顺序 + 特异性竞争；*跨层后者胜，且与特异性无关* → 改层归属 = 改全局优先级。
-- 只有「必须无视特异性、一定要赢」的规则才放 =utilities=（焦点环、触屏点击区、存量 class 兜底）。 本次踩过两次：正文链接下划线压过目录的 =#TableOfContents a=；iOS 防缩放规则把 =/til/= 筛选按钮从 13px 顶到 16px（页面高 5px）。两处都靠指纹回归抓出来并归位。
+- 只有「必须无视特异性、一定要赢」的规则才放 =utilities=（焦点环、触屏点击区、存量 class 兜底）。 本次踩过两次：正文链接下划线压过目录的 =#TableOfContents a=；iOS 防缩放规则把 TIL 筛选按钮从 13px 顶到 16px（页面高 5px；该按钮 2026-11-08 随 TIL 下线）。两处都靠指纹回归抓出来并归位。
 
 *尺度*：=--text-*=（12 档）/ =--space-*=（12 档）/ =--radius-*=（4 档），全部是*纯别名*（值与原字面量逐字节相同）。
 
@@ -336,7 +275,7 @@ node scripts/check.mjs external --refresh-dead --recheck-verified   # 强制重�
 #+end_src
 
 *** 新建内容工作流程
-1. 根据内容类型选择 =org/posts/= 或 =org/til/= 下的正确分类
+1. 内容写进 =org/posts/= 下的正确位置（笔记不写在本仓库，见 =kb=）
 2. 按命名规范创建 =.org= 文件，写 =#+TITLE:= / =#+DATE:= 等关键字（子分类用 =#+HEADER:=）
 3. 本地预览：=bash scripts/org2site/build.sh /tmp/out= 后用 =python3 scripts/org2site/preview-server.py /tmp/out 8099=
 4. 内容完成后提交即可 ------ CF Workers Builds 会跑同一条 =build.sh=（关键词索引每次部署重建；语义索引由每周一 04:00 的 cron 独立重建，见「语义搜索索引」节）
@@ -365,9 +304,9 @@ node scripts/check.mjs external --refresh-dead --recheck-verified   # 强制重�
 | 语义索引   | =static/pagefind-semantic/=       | =embeddings.bin=，周一 04:00 cron 重建，进 git |
 | RSS        | =public/index.xml=                | 全站 feed（最近 20 条）                       |
 | sitemap    | =public/sitemap.xml=              | 全站 URL 清单                                 |
-| 纯文本源文 | =public/{posts,til}/**=          | =posts= / =til= 页的 org 原文（照搬，不改字节）；页面末尾有链接 |
+| 纯文本源文 | =public/posts/**=               | =posts= 页的 org 原文（照搬，不改字节）；页面末尾有链接 |
 
-*纯文本源文*：=/posts/2019/= → =/posts/2019.org=，=posts= / =til= 共 1511 页各一份。
+*纯文本源文*：=/posts/2019/= → =/posts/2019.org=，每篇 posts 一份。
 只给这两类页面出（判定 =org2site-source-link-page-p=）：根页面（about / search / watch…）
 是站点功能性页面，不挂源文链接、也不写镜像。Content-Type 由
 =static/_headers= 的 =/*.org= 规则强制 =text/plain; charset=utf-8= —— 不强制的话

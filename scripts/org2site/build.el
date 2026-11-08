@@ -5,8 +5,7 @@
 ;;;
 ;;; 输出结构（URL 目录化，不带 .html 后缀）：
 ;;;   org/posts/foo.org        → <out>/posts/foo/index.html         → /posts/foo/
-;;;   org/til/software/bar.org → <out>/til/software/bar/index.html  → /til/software/bar/
-;;;   另有 /posts/ /til/ 列表页与根页 /
+;;;   另有 /posts/ 列表页与根页 /
 
 (require 'json)
 (require 'url-util)
@@ -140,7 +139,6 @@
             org2site-base-url
             (org2site--lastmod-tag (if pages (nth 2 (car pages)) "")))
     (format "<url><loc>%s/posts/</loc></url>\n" org2site-base-url)
-    (format "<url><loc>%s/til/</loc></url>\n" org2site-base-url)
     (format "<url><loc>%s/photos/</loc></url>\n" org2site-base-url))
    (mapconcat
     (lambda (p)
@@ -181,10 +179,10 @@ org2site--index-title 取；#+NOEXPORT: t 的文件也不发布。"
                (section (car (split-string noext "/")))
                (raw-date (or (org2site--kw f "DATE") ""))
                (date (org2site--date raw-date)))
-          ;; 规则（2026-10-19 用户定）：posts/ 与 til/ 下的内容页必须有可解析的 #+DATE:；
+          ;; 规则（2026-10-19 用户定）：posts/ 下的内容页必须有可解析的 #+DATE:；
           ;; 没有的**直接跳过不构建**（不进归档/RSS/sitemap），只在构建日志里点名。
           ;; 页面文件（uses/links/watch/search…）本来就没有日期，照常构建。
-          (if (and (member section '("posts" "til"))
+          (if (and (string= section "posts")
                    (not (string-match "[0-9]\\{4\\}-[0-9]\\{2\\}-[0-9]\\{2\\}" date)))
               (push (cons rel raw-date) org2site--no-date-files)
             (push (list (concat "/" noext "/")
@@ -226,10 +224,10 @@ org2site--index-title 取；#+NOEXPORT: t 的文件也不发布。"
 
 (defun org2site-source-link-page-p (page)
   "这篇页面是否该在末尾挂「源文（.org）」链接。
-只挂 posts / til 下的页面。根页面（about / search / watch / links …）是站点功能性页面，
+只挂 posts 下的页面。根页面（about / search / watch / links …）是站点功能性页面，
 挂源文对读者没意义。注意 /posts/2019/ 这类年份页是用户自己写的年度流水，**要挂**
 （用户 2026-10-24 定）。"
-  (member (nth 3 page) '("posts" "til")))
+  (string= (nth 3 page) "posts"))
 
 ;; ------------------------------------------------------------ 站点级页面
 
@@ -249,43 +247,22 @@ org2site--index-title 取；#+NOEXPORT: t 的文件也不发布。"
       (concat (substring d 5 7) "/" (substring d 8 10))
     d))
 
-(defun org2site--til-cat (rel)
-  "til/software/vue.org → software"
-  (let ((parts (split-string rel "/")))
-    (if (and (>= (length parts) 3) (string= (car parts) "til"))
-        (nth 1 parts)
-      "")))
-
-(defun org2site-shuffle (lst)
-  "固定种子的洗牌：保留「Random TIL」语义，同时让构建可重现。"
-  (let ((l (copy-sequence lst)))
-    (random "org2site-til-seed")
-    (dotimes (i (length l) l)
-      (let ((j (random (length l))))
-        (cl-rotatef (nth i l) (nth j l))))))
-
-(defun org2site-home-section (title url items as-til)
+(defun org2site-home-section (title url items)
   (concat
    (format "<section>\n<header><h2>%s</h2><a href=\"%s\">View all →</a></header>\n<ul>\n"
            title url)
    (mapconcat
     (lambda (p)
-      (format "<li><a href=\"%s\">%s</a>%s</li>"
+      (format "<li><a href=\"%s\">%s</a><time datetime=\"%s\">%s</time></li>"
               (nth 0 p) (nth 1 p)
-              (if as-til
-                  (let ((cat (org2site--til-cat (nth 4 p))))
-                    (if cat (format "<span>%s</span>" cat) ""))
-                (format "<time datetime=\"%s\">%s</time>"
-                        (nth 2 p) (org2site--short-date (nth 2 p))))))
+              (nth 2 p) (org2site--short-date (nth 2 p))))
     items "\n")
    "\n</ul>\n</section>\n"))
 
 (defun org2site-home-html (pages)
-  "与原站 layouts/home.html 对齐：Welcome + Recent Posts + Random TIL 双栏。"
+  "首页：Welcome + Recent Posts。"
   (let* ((posts (seq-filter (lambda (p) (string= (nth 3 p) "posts")) pages))
-         (tils (seq-filter (lambda (p) (string= (nth 3 p) "til")) pages))
-         (recent (seq-take posts 5))
-         (rand (seq-take (org2site-shuffle tils) 5)))
+         (recent (seq-take posts 5)))
     (concat
      "<h1>Welcome</h1>\n"
      "<p>Hi, I'm tianheg. I write this blog in both Chinese and English "
@@ -293,8 +270,7 @@ org2site--index-title 取；#+NOEXPORT: t 的文件也不发布。"
      "<p>I hope you enjoy reading it!</p>\n"
      "<p><a data-cta href=\"/start/\">Start here <span aria-hidden=\"true\">→</span></a></p>\n"
      "<div data-home-columns>\n"
-     (org2site-home-section "Recent Posts" "/posts/" recent nil)
-     (org2site-home-section "Random TIL" "/til/" rand t)
+     (org2site-home-section "Recent Posts" "/posts/" recent)
      "</div>\n")))
 
 (defun org2site-list-html (label pages)
@@ -364,7 +340,7 @@ org2site--index-title 取；#+NOEXPORT: t 的文件也不发布。"
       (json-parse-buffer :object-type 'alist :array-type 'list))))
 
 (defvar org2site-section-labels
-  '(("posts" . "文章") ("til" . "数字花园 | TIL"))
+  '(("posts" . "文章"))
   "section 落地页的显示名（对齐原站 h1）。_index.org 的 TITLE 次之。")
 
 (defun org2site--index-title (repo rel-dir)
@@ -577,98 +553,6 @@ org2site--index-title 取；#+NOEXPORT: t 的文件也不发布。"
                 groups
                 "\n"))))
 
-;; ------------------------------------------------- 数字花园（/til/ 落地页）
-;;
-;; 对齐原站 til/dashboard.html：大字号统计 + 分类树（三组、带占比细条）+ 最近新增 10 条。
-;; 原站在 ≥1280px 把分类树放进左侧 sticky 侧栏（三栏 shell 1fr/790px/1fr），窄屏内联；
-;; 这里先做内联版（窄屏行为完全一致），桌面侧栏另说。
-
-(defvar org2site-garden-groups
-  '(("技术" . ("software" "hardware" "homelab" "backup"))
-    ("知识" . ("learning" "science" "courses" "history"))
-    ("生活" . ("life" "health" "career" "media" "music" "writing")))
-  "分类分组与顺序（对齐原站分类树）。")
-
-(defvar org2site-reading-wpm 213
-  "阅读速度（字/分）。Hugo 用 213。
-注意：原站的「累计阅读」来自 Hugo 的 .ReadingTime，其 WordCount 口径无法完全复现，
-所以这个数字与原站页面上的值不一定相同（实测偏大）。")
-
-(defun org2site--cjk-chars (s)
-  "统计 CJK 字符数（逐字符，避开正则范围的坑）。"
-  (let ((n 0) (i 0) (len (length s)))
-    (while (< i len)
-      (let ((c (aref s i)))
-        (when (and (>= c #x4e00) (<= c #x9fff)) (setq n (1+ n))))
-      (setq i (1+ i)))
-    n))
-
-(defun org2site--reading-minutes (file)
-  "单篇阅读分钟数：CJK 字符 + 拉丁词，去掉 front matter / 代码块 / URL 后按 wpm 取整。"
-  (with-temp-buffer
-    (insert-file-contents file)
-    (let ((s (buffer-string)))
-      (setq s (replace-regexp-in-string "^#\\+[A-Z_\\[\\]]+:.*$" "" s t t))
-      (let ((case-fold-search t))
-        (setq s (replace-regexp-in-string "#\\+BEGIN_SRC\\(.\\|\n\\)*?#\\+END_SRC" "" s t t)))
-      (setq s (replace-regexp-in-string "https?://[^ \t\n]+" "" s t t))
-      (max 1 (ceiling (/ (float (+ (org2site--cjk-chars s)
-                                   (length (split-string s "[^A-Za-z0-9]+" t))))
-                         org2site-reading-wpm))))))
-
-(defun org2site--til-category-counts (pages)
-  "按分类目录统计篇数 → ((cat . n) ...)。"
-  (let (out)
-    (dolist (p pages)
-      (let* ((parts (split-string (nth 4 p) "/"))
-             (cat (and (= (length parts) 3) (nth 1 parts))))
-        (when cat
-          (let ((cell (assoc cat out)))
-            (if cell (setcdr cell (1+ (cdr cell))) (push (cons cat 1) out))))))
-    out))
-
-(defun org2site-garden-cats-html (repo counts &optional active grid)
-  "分类树内容（不含外层容器）：标题 + 三组 + 条目。
-ACTIVE 是当前分类 slug（命中则高亮）；GRID 非 nil 时用多列网格（小屏内联版），
-nil 时单列（桌面左栏）。占比细条宽度按最大值取整百分比（对齐原站）。"
-  (let* ((maxn (let ((m 1)) (dolist (c counts) (setq m (max m (cdr c)))) m))
-         (cell (lambda (cat)
-                 (let ((n (or (cdr (assoc cat counts)) 0)))
-                   (if (<= n 0)
-                       ""
-                     (format (concat "<a class=\"garden-cat%s\" href=\"/til/%s/\">"
-                                     "<span class=\"garden-cat-row\">"
-                                     "<span class=\"garden-cat-name\">%s</span>"
-                                     "<span class=\"garden-cat-count\">%d</span></span>"
-                                     "<span class=\"garden-cat-bar\"><span style=\"width:%d%%\"></span></span>"
-                                     "</a>")
-                             (if (and active (string= active cat)) " is-active" "")
-                             cat
-                             (or (org2site--index-title repo (concat "til/" cat)) cat)
-                             n
-                             (floor (* 100 (/ (float n) maxn)))))))))
-    (concat "<div class=\"garden-cats-head\">分类</div>\n"
-            (if grid "<div class=\"garden-cats-grid\">\n" "")
-            (mapconcat
-             (lambda (g)
-               (concat (format "<div class=\"garden-cat-group\">%s</div>\n" (car g))
-                       (mapconcat (lambda (c) (funcall cell c)) (cdr g) "\n")))
-             org2site-garden-groups "\n")
-            (if grid "\n</div>\n" "\n"))))
-
-(defun org2site-til-tree-html (repo counts active)
-  "桌面左栏的分类树（≥1280px 显示，<1280px 由 CSS 隐藏）。
-ACTIVE 是当前分类 slug：分类页高亮自己，/til/ 根页与笔记页传空串。"
-  (format "<nav data-til-tree>\n%s\n</nav>\n"
-          (org2site-garden-cats-html repo counts active nil)))
-
-;; ---------------------------------------------------------------- 分类页
-;;
-;; 原站 layouts/til/list.html 两套模板：
-;;   有 #+HEADER 的分类 → 面包屑 + 顶部筛选 chips + 按 header 分组的小节 +「其他」折叠块
-;;   没有的            → 面包屑 + 扁平列表
-;; 两边都**按标题排序**（Hugo .ByTitle），日期只显示到天。
-
 (defun org2site--punct-or-symbol-p (c)
   "标点 / 符号 / 空白 → t。原站 collator（CLDR）把这些排在数字与字母之前。"
   (or (<= c #x2f)                          ; ASCII control/空格/数字前标点符号
@@ -708,198 +592,16 @@ ACTIVE 是当前分类 slug：分类页高亮自己，/til/ 根页与笔记页�
           (string< (org2site--title-key (nth 1 a))
                    (org2site--title-key (nth 1 b))))))
 
-(defun org2site--cat-entry-html (p)
-  "分类页一行：标题左、日期右。日期只到天（原站 `2006-01-02`），没有日期就不渲染。"
-  (let ((day (org2site--day (nth 2 p))))
-    (concat (format "<a class=\"til-entry\" href=\"%s\">" (nth 0 p))
-            (format "<span class=\"til-entry-t\">%s</span>"
-                    (org2site-xml-escape (nth 1 p)))
-            (if (string-match-p "\\`[0-9]\\{4\\}-[0-9]\\{2\\}-[0-9]\\{2\\}\\'" day)
-                (format "<span class=\"til-entry-d\">%s</span>" day)
-              "")
-            "</a>\n")))
-
-(defun org2site--cat-groups (items)
-  "按 #+HEADER 分组 → ((key . pages) ...) 按 key 排序；其余页单列。
-返回 (groups . others)，两者内部都按标题排序。"
-  (let ((tm (make-hash-table :test 'equal)) (others nil) keys)
-    (dolist (p items)
-      (let ((h (nth 6 p)))
-        (if (and h (not (string-empty-p h)))
-            (progn
-              (unless (gethash h tm) (push h keys))
-              (puthash h (append (gethash h tm) (list p)) tm))
-          (push p others))))
-    (cons (mapcar (lambda (k) (cons k (org2site--by-title (gethash k tm))))
-                  (sort keys (lambda (a b)
-                               (string< (org2site--title-key a)
-                                        (org2site--title-key b)))))
-          (org2site--by-title (nreverse others)))))
-
-(defun org2site--cat-sub-html (pages)
-  (format "<div class=\"til-cat-sub\">\n%s</div>\n"
-          (mapconcat #'org2site--cat-entry-html pages "")))
-
-(defun org2site--cat-sec-html (key pages)
-  (format (concat "<section class=\"til-cat-sec\" data-header=\"%s\">\n"
-                  "<div class=\"til-cat-sec-head\"><h2>%s</h2>"
-                  "<span class=\"til-cat-sec-n\">%d</span></div>\n%s</section>\n")
-          (org2site-xml-escape key) (org2site-xml-escape key) (length pages)
-          (org2site--cat-sub-html pages)))
-
-(defun org2site--cat-others-html (others)
-  "没有 #+HEADER 的页 → 折叠的「其他」小节（原站 details.group）。
-data-header 留空：点了任一 chip 时它也会被过滤掉，与原站行为一致。"
-  (format (concat "<section class=\"til-cat-sec\" data-header=\"\">\n"
-                  "<details class=\"til-others\">\n"
-                  "<summary><h2>其他</h2>"
-                  "<span class=\"til-others-n\">%d 篇</span>%s</summary>\n%s</details>\n</section>\n")
-          (length others)
-          "<svg viewBox=\"0 0 24 24\" fill=\"none\" stroke=\"currentColor\" aria-hidden=\"true\">\
-<path stroke-linecap=\"round\" stroke-linejoin=\"round\" stroke-width=\"2\" d=\"M9 5l7 7-7 7\"/></svg>"
-          (org2site--cat-sub-html others)))
-
-(defun org2site--cat-chips-html (groups)
-  "小屏（<1400px）顶部的分组筛选条；≥1400px 由右栏承担（CSS 隐藏这里）。"
-  (concat "<div class=\"til-cat-chips\">\n"
-          (mapconcat
-           (lambda (g)
-             (format (concat "<button type=\"button\" class=\"til-chip\" data-header-btn=\"%s\">"
-                             "%s <span class=\"til-chip-n\">%d</span></button>\n")
-                     (org2site-xml-escape (car g)) (org2site-xml-escape (car g))
-                     (length (cdr g))))
-           groups "")
-          "<button type=\"button\" class=\"til-chip til-chip-all\" data-headers-all>全部</button>\n"
-          "</div>\n"))
-
-(defun org2site--cat-right-html (groups)
-  "≥1400px 右栏「本页分组」；没有分组时返回 nil（右栏不渲染）。"
-  (when groups
-    (concat "<div class=\"til-cat-navhead\">本页分组</div>\n"
-            "<nav id=\"header-nav\" class=\"til-cat-nav\">\n"
-            (mapconcat
-             (lambda (g)
-               (format (concat "<button type=\"button\" class=\"til-cat-navbtn\" data-header-btn=\"%s\">"
-                               "%s <span class=\"til-cat-navn\">%d</span></button>\n")
-                       (org2site-xml-escape (car g)) (org2site-xml-escape (car g))
-                       (length (cdr g))))
-             groups "")
-            "<button type=\"button\" class=\"til-cat-navall\" data-headers-all>全部显示</button>\n"
-            "</nav>\n")))
-
-(defun org2site-cat-html (label items)
-  "分类页正文 + 右栏 HTML → (body . right-html)。"
-  (let* ((gr (org2site--cat-groups items))
-         (groups (car gr))
-         (others (cdr gr))
-         (crumb (format (concat "<nav class=\"til-crumb\" aria-label=\"breadcrumb\">"
-                                "<a href=\"/til/\">数字花园</a>"
-                                "<span class=\"til-crumb-sep\">/</span>"
-                                "<span class=\"til-crumb-cur\">%s</span></nav>\n")
-                        (org2site-xml-escape label)))
-         (title (format "<h1 class=\"til-cat-title\">%s</h1>\n" (org2site-xml-escape label))))
-    (cons (concat "<div data-pagefind-ignore>\n" crumb title
-                  (if groups
-                      (concat (org2site--cat-chips-html groups)
-                              (mapconcat (lambda (g) (org2site--cat-sec-html (car g) (cdr g)))
-                                         groups "")
-                              (if others (org2site--cat-others-html others) ""))
-                    (org2site--cat-sub-html (org2site--by-title items)))
-                  "</div>\n")
-          (org2site--cat-right-html groups))))
-
-(defun org2site--clock-minutes (file)
-  "读文件里的 CLOCK 行，累计分钟数。
-org 自己会把时长写在 => 后面（如 `=>  1:30`），直接读它比再算时间差稳。
-全库没有 CLOCK 时返回 0 —— 这就是为什么统计要做成「有数据才显示」。
-（原站的「累计阅读」来自 Hugo 的 .ReadingTime，口径无法复现，已换成这个自洽的指标。）"
-  (with-temp-buffer
-    (insert-file-contents file)
-    (let ((n 0))
-      (goto-char (point-min))
-      (while (re-search-forward "^[ \t]*CLOCK:.*=>[ \t]*\\([0-9]+\\):\\([0-9]+\\)" nil t)
-        (setq n (+ n (* 60 (string-to-number (match-string 1)))
-                   (string-to-number (match-string 2)))))
-      n)))
-
-(defun org2site--planning (file)
-  "抽文件里的 SCHEDULED / DEADLINE → ((kind ymd) ...)，kind 是 \"计划\"/\"截止\"。"
-  (with-temp-buffer
-    (insert-file-contents file)
-    (goto-char (point-min))
-    (let (out)
-      (while (re-search-forward "\\(SCHEDULED\\|DEADLINE\\):[ \t]*<\\([0-9]\\{4\\}-[0-9]\\{2\\}-[0-9]\\{2\\}\\)" nil t)
-        (push (list (if (string= (match-string 1) "DEADLINE") "截止" "计划")
-                    (match-string 2))
-              out))
-      (nreverse out))))
-
-(defun org2site-planned-html (repo pages org-root)
-  "有 SCHEDULED/DEADLINE 的条目渲染成「计划」小节；没有就返回空串。
-这些日期不进页面正文（org 默认会把 SCHEDULED 渲染成文字），只在这里聚合成一张表。"
-  (let (rows)
-    (dolist (p pages)
-      (dolist (pl (org2site--planning (expand-file-name (nth 4 p) org-root)))
-        (push (list (nth 1 pl) (nth 0 pl) (nth 0 p) (nth 1 p)) rows)))
-    (if (null rows)
-        ""
-      (setq rows (sort rows (lambda (a b) (string< (car a) (car b)))))
-      (concat "<div class=\"garden-cats-head\">计划</div>\n<ul data-plan-list>\n"
-              (mapconcat
-               (lambda (r)
-                 (format "<li><time datetime=\"%s\">%s</time><span class=\"plan-kind\">%s</span><a href=\"%s\">%s</a></li>"
-                         (nth 0 r) (nth 0 r) (nth 1 r) (nth 2 r)
-                         (org2site-xml-escape (nth 3 r))))
-               rows "\n")
-              "\n</ul>\n"))))
-
-(defun org2site-garden-html (repo label pages org-root)
-  (let* ((counts (org2site--til-category-counts pages))
-         (minutes (let ((m 0))
-                    (dolist (p pages)
-                      (setq m (+ m (org2site--clock-minutes
-                                    (expand-file-name (nth 4 p) org-root)))))
-                    m))
-         (recent (seq-take pages 10)))
-    (concat
-     (format "<h1>%s</h1>\n" label)
-     "<div class=\"garden-stats\">\n"
-     (format "<div><span class=\"garden-stat-num\">%d</span><span class=\"garden-stat-label\">篇笔记</span></div>\n"
-             (length pages))
-     ;; 只有真的记过 CLOCK 才显示投入时间；没有就不挂个 0h 出来
-     (if (> minutes 0)
-         (format "<div><span class=\"garden-stat-num\">%d<span class=\"garden-stat-unit\">h</span></span><span class=\"garden-stat-label\">累计投入</span></div>\n"
-                 (/ minutes 60))
-       "")
-     "</div>\n"
-     ;; 分类树：桌面端（≥1280px）由左栏承担，这里是小屏内联那份
-     (format "<div class=\"garden-cats\" data-til-inline>\n%s</div>\n"
-             (org2site-garden-cats-html repo counts nil t))
-     (org2site-planned-html repo pages org-root)
-     ;; 「随机一篇」：URL 列表由服务端生成，点击由 site.js 处理（无 JS 时按钮不显示）
-     (format "<div class=\"garden-actions\"><button type=\"button\" data-random-til hidden>随机一篇</button></div>\n<script id=\"til-urls\" type=\"application/json\">[%s]</script>\n"
-             (mapconcat (lambda (p) (format "\"%s\"" (nth 0 p))) pages ","))
-     "<div class=\"garden-recent-head\">最近新增</div>\n<div class=\"garden-recent\">\n"
-     (mapconcat
-      (lambda (p)
-        (format "<a class=\"garden-entry\" href=\"%s\"><span>%s</span><span>%s</span></a>"
-                (nth 0 p)
-                (org2site-xml-escape (nth 1 p))
-                (substring (org2site--day (nth 2 p)) 5 10)))
-      recent "\n")
-     "\n</div>\n")))
-
 ;; ---------------------------------------------------------------- 目录（本页内容）
 ;;
-;; 原站只有 TIL 页（有标题的那些）与 5 个根页面带「本页内容」目录，
-;; /posts/ 文章一律没有。锚点用 GitHub 风格 slug（见 export.el 的 org2site-slug）。
+;; 只有 5 个根页面带「本页内容」目录，/posts/ 文章一律没有。
+;; 锚点用 GitHub 风格 slug（见 export.el 的 org2site-slug）。
 
 (defvar org2site-toc-root-pages '("about" "start" "read" "watch" "important-now")
   "除 TIL 外，原站带目录的根页面（文件基名，不含扩展名）。")
 
 (defun org2site-toc-page-p (page)
-  (or (string= (nth 3 page) "til")
-      (member (file-name-base (nth 4 page)) org2site-toc-root-pages)))
+  (member (file-name-base (nth 4 page)) org2site-toc-root-pages))
 
 (defun org2site-toc-items (body)
   "按顺序抽出正文里的 (层级 slug 标题)。"
@@ -937,7 +639,7 @@ org 自己会把时长写在 => 后面（如 `=>  1:30`），直接读它比再�
     (if (null items)
         body
       (let ((toc (concat "<details class=\"page-toc\">\n<summary>本页内容</summary>\n"
-                         "<div class=\"til-toc\">\n<nav id=\"TableOfContents\">\n"
+                         "<div class=\"page-toc-list\">\n<nav id=\"TableOfContents\">\n"
                          (car (org2site-toc-list items 2))
                          "\n</nav>\n</div>\n</details>\n")))
         (if (string-match "\\`<h1[^>]*>[^<]*</h1>\n" body)
@@ -1235,32 +937,32 @@ stroke-linecap=\"round\" stroke-linejoin=\"round\" aria-hidden=\"true\">\
             (let* ((file (expand-file-name rel org-root))
                    (body (org2site-export-string file rel))
                    (body (if (org2site-toc-page-p p) (org2site-toc-insert body) body))
-                   ;; 反链：引用这篇的 —— **只加在内容页（posts / til）**。
+                   ;; 反链：引用这篇的 —— **只加在 posts 内容页**。
                    ;; 根页面（about / search / watch / links …）是站点功能性页面，底部挂一串
                    ;; 「引用这篇的」是噪声（用户 2026-10-19 定）。
                    ;; 注意：**索引里照旧收录根页面作为来源** —— 它们引用别的内容时，
                    ;; 那条引用要出现在被引页的反链里，只是它们自己页面上不显示这一区。
-                   (body (concat body (if (member (nth 3 p) '("posts" "til"))
+                   (body (concat body (if (string= (nth 3 p) "posts")
                                           (org2site-backlinks-html
                                            url org2site--backlink-idx
                                            org2site--backlink-pages)
                                         "")))
                    ;; 每篇正文末尾指向自己的 .org 源文（文件同批写进产物，见下）。
-                   ;; **只挂内容单页（posts / til 正文）** —— 判定见
+                   ;; **只挂 posts 内容页** —— 判定见
                    ;; org2site-source-link-page-p：根页面与年份归档页都不挂（用户 2026-10-24 定）。
                    (body (concat body (if (org2site-source-link-page-p p)
                                           (org2site-source-link-html url)
                                         "")))
-                   ;; 文章页补日期条 + 尾部标签/评论（原站有；til 页没有这两块）
-                   (body (if (string= (nth 3 p) "posts") (org2site-post-augment p body) body)))
+                   ;; 文章页补日期条 + 尾部标签/评论
+                   (body (org2site-post-augment p body)))
               (org2site-write out-root url
-                              (org2site-page title body (string= (nth 3 p) "til")))
+                              (org2site-page title body))
               ;; 纯文本源文：/posts/foo/ → /posts/foo.org（Content-Type 见 static/_headers）。
-              ;; **只给挂链接的页面写**（posts / til）—— 根页面不挂源文也就没镜像可写，
+              ;; **只给挂链接的页面写**（posts）—— 根页面不挂源文也就没镜像可写，
               ;; 否则产物里躺着一堆没人引用的孤儿 .org（用户 2026-10-24 定）。
               (when (org2site-source-link-page-p p)
                 (org2site-write-source out-root url file))
-              ;; RSS 只收 posts：原站 index.xml 不含 til（逐条对比 URL 实测确认）
+              ;; RSS 只收 posts
               (when (string= (nth 3 p) "posts")
                 (push (list url title (nth 2 p) (org2site-summary body)) rss-items))
               (setq ok (1+ ok)))
@@ -1268,37 +970,14 @@ stroke-linecap=\"round\" stroke-linejoin=\"round\" aria-hidden=\"true\">\
                  (push (cons rel (error-message-string err)) errs)))
         (let ((b (get-file-buffer (expand-file-name rel org-root))))
           (when b (kill-buffer b)))))
-    ;; 2) section 列表页（相册不在此列：/photos/ 是相册索引，见 3.6）
+    ;; 2) /posts/ 列表页（年份归档 + 热力图）
     (let* ((repo (org2site--repo-root org-root))
-           ;; 左栏分类树用的是全库 til 计数（分类页也要显示完整树，不是只有自己那栏）
-           (til-counts (org2site--til-category-counts
-                        (seq-filter (lambda (p) (string= (nth 3 p) "til")) pages))))
-      (dolist (sec '("posts" "til"))
-        (let* ((items (seq-filter (lambda (p) (string= (nth 3 p) sec)) pages))
-               (label (or (cdr (assoc sec org2site-section-labels))
-                          (org2site--index-title repo sec) sec))
-               ;; posts 走年份归档 + 热力图；til 走数字花园落地页（对齐原站）
-               (body (cond ((string= sec "posts") (org2site-archive-html label items))
-                           ((string= sec "til") (org2site-garden-html repo label items org-root))
-                           (t (org2site-list-html label items)))))
-          (when items
-            (org2site-write out-root (concat "/" sec "/")
-                            (org2site-page label body (string= sec "til")
-                                           (when (string= sec "til")
-                                             (org2site-til-tree-html repo til-counts "")))))))
-      ;; 2.5) TIL 分类页 /til/<cat>/（原站有这一层 URL；标题取该目录的 _index.org）
-      (dolist (d (org2site--subdirs (expand-file-name "org/til" repo)))
-        (let* ((cat (file-name-nondirectory d))
-               (items (seq-filter (lambda (p)
-                                    (string-prefix-p (concat "til/" cat "/") (nth 4 p)))
-                                  pages))
-               (label (or (org2site--index-title repo (concat "til/" cat)) cat)))
-          (when items
-            (let ((page (org2site-cat-html label items)))
-              (org2site-write out-root (concat "/til/" cat "/")
-                              (org2site-page label (car page) t
-                                             (org2site-til-tree-html repo til-counts cat)
-                                             (cdr page))))))))
+           (items (seq-filter (lambda (p) (string= (nth 3 p) "posts")) pages))
+           (label (or (cdr (assoc "posts" org2site-section-labels))
+                      (org2site--index-title repo "posts") "Posts")))
+      (when items
+        (org2site-write out-root "/posts/"
+                        (org2site-page label (org2site-archive-html label items)))))
     ;; 3) 根页（footer 只有首页有，见 export.el 的 org2site-show-footer）
     (let ((org2site-show-footer t))
       (org2site-write out-root "/"
@@ -1356,7 +1035,7 @@ stroke-linecap=\"round\" stroke-linejoin=\"round\" aria-hidden=\"true\">\
                        (length un)
                        (mapconcat #'identity (seq-take un 5) " | ")))))
   (when org2site--no-date-files
-    (princ (format "WARN %d file(s) under posts/ or til/ have no usable #+DATE: -> SKIPPED (not built)\n"
+    (princ (format "WARN %d file(s) under posts/ have no usable #+DATE: -> SKIPPED (not built)\n"
                    (length org2site--no-date-files)))
     (dolist (ndf (nreverse org2site--no-date-files))
       (princ (format "      %s   (DATE=%S)\n" (car ndf) (cdr ndf)))))

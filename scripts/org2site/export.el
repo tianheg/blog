@@ -94,7 +94,7 @@
 (defvar org2site-site-title "Tianhe Gao")
 (defvar org2site-menu
   '(("Home" . "/") ("About" . "/about/") ("Posts" . "/posts/")
-    ("Photos" . "/photos/") ("TIL" . "/til/") ("Projects" . "/projects/"))
+    ("Photos" . "/photos/") ("Projects" . "/projects/"))
   "站点导航，与原 Hugo 站的 menu.main 一致。")
 
 (defun org2site-nav-links ()
@@ -137,29 +137,16 @@
   "静态资源版本号：写进 CSS 的查询串，避免浏览器启发式缓存导致改样式看不到效果。")
 
 (defvar org2site-show-footer nil
-  "是否输出站点 footer。原站**只有首页**有 footer（posts / about / til 都没有），
+  "是否输出站点 footer。原站**只有首页**有 footer（posts / about 都没有），
 所以默认 nil，只有写首页时由 build.el 绑成 t。")
 
-(defun org2site--main-html (body &optional shell side right)
-  "main 区。SHELL 非 nil 时包进 TIL 三栏 shell（1fr / 790px / 1fr）：
-内容列固定 790 居中，侧栏悬挂在外侧 1fr 轨道里 —— 这样 /til/ 下所有页面
-（列表页、分类页、笔记页）的正文左边缘完全一致，不随侧栏出现/消失而位移。
-SIDE 是左栏 HTML（已含 <nav data-til-tree>）；笔记页只要 shell 不要左栏。
-RIGHT 是右栏 HTML（原站只用在 ≥1400px 的分类页「本页分组」）。"
-  (if shell
-      (concat "<div data-til-shell>\n"
-              (if side (format "<aside data-til-side>\n%s\n</aside>\n" side) "")
-              "<main id=\"main-content\">\n"
-              "<article data-pagefind-body>\n"
-              body "\n</article>\n</main>\n"
-              (if right (format "<aside data-til-right>\n<div>\n%s</div>\n</aside>\n" right) "")
-              "</div>\n")
-    (concat "<main id=\"main-content\">\n<article data-pagefind-body>\n"
-            body "\n</article>\n</main>\n")))
+(defun org2site--main-html (body)
+  "main 区：单栏正文。"
+  (concat "<main id=\"main-content\">\n<article data-pagefind-body>\n"
+          body "\n</article>\n</main>\n"))
 
-(defun org2site-page (title body &optional shell side right)
-  "完整页面：head（charset/主题预置）+ header + main + footer。
-SHELL/SIDE/RIGHT 见 `org2site--main-html'。"
+(defun org2site-page (title body)
+  "完整页面：head（charset/主题预置）+ header + main + footer。"
   (format "<!DOCTYPE html>
 <html lang=\"zh-CN\">
 <head>
@@ -180,7 +167,7 @@ SHELL/SIDE/RIGHT 见 `org2site--main-html'。"
 </html>
 " (if (string= title org2site-site-title) title (format "%s | %s" title org2site-site-title))
   org2site-theme-init-js org2site-asset-version (org2site-header-html)
-  (org2site--main-html body shell side right)
+  (org2site--main-html body)
   (if org2site-show-footer
       "<footer data-site-footer>\n<p>© 2018–2026 tianhe · <a href=\"/index.xml\">RSS</a></p>\n</footer>\n"
     "")

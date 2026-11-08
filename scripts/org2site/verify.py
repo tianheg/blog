@@ -6,7 +6,7 @@
 检查项（都是实测踩过的坑，别删）：
   1. 每页恰好一个 <h1>          —— 改导出骨架后必查（曾整站缺 h1）
   2. 全部输出是合法 UTF-8        —— 转义还原规则曾产出非法字节
-  3. TIL 三栏 shell 覆盖         —— /til/ 下每页都有 shell；左栏只在列表/分类页
+  3. TIL 已下线：产物里不得有 /til/ 目录或 data-til-* 残留（2026-11-08 起）
   4. 页内锚点 0 死链             —— 目录里每个 #id 都要能解析到真实 id
   5. 站内链接 0 死链             —— URL 解码后比对；/dist/* 与 ?query 跳过
   6. 文件名规范（全小写 ASCII）  —— 中文名要翻译成英文，见 SKILL.md 硬规则 7
@@ -40,11 +40,13 @@ def main(argv: list[str]) -> int:
              if not rel_posix(p, root).startswith(SKIP_DIRS)]
     fail: list[str] = []
 
-    h1_bad, utf8_bad, shell_bad, anchor_bad = [], [], [], []
-    shell = side = inline = 0
-    til_pages = 0
+    h1_bad, utf8_bad, til_bad, anchor_bad = [], [], [], []
     links = collections.Counter()
     link_src: dict[str, str] = {}
+
+    # TIL 整条支线已从站点摘除：产物里出现 /til/ 目录就说明有残留代码在生成它
+    if (root / "til").exists():
+        til_bad.append("til/ 目录仍然存在")
 
     for p in pages:
         rel = rel_posix(p, root)
@@ -57,17 +59,8 @@ def main(argv: list[str]) -> int:
         n = len(re.findall(r"<h1[ >]", t))
         if n != 1:
             h1_bad.append((rel, n))
-        is_til = rel.startswith("til/")
-        if "data-til-shell" in t:
-            shell += 1
-            if not is_til:
-                shell_bad.append(rel)
-        if "data-til-side" in t:
-            side += 1
-        if "data-til-inline" in t:
-            inline += 1
-        if is_til:
-            til_pages += 1
+        if "data-til-shell" in t or "data-til-tree" in t:
+            til_bad.append(rel)
         ids = set(re.findall(r'\sid="([^"]+)"', t))
         for href in re.findall(r'href="#([^"]+)"', t):
             if href not in ids:
@@ -90,19 +83,14 @@ def main(argv: list[str]) -> int:
         dead[url] = count
 
     print(f"页面 {len(pages)}（跳过静态拷贝目录 {SKIP_DIRS}）")
-    print(f"  TIL: 页 {til_pages} / shell {shell} / 左栏 {side} / 小屏内联 {inline}")
     print(f"  1) 每页恰好一个 h1 : {'OK' if not h1_bad else 'FAIL ' + str(h1_bad[:5])}")
     print(f"  2) 合法 UTF-8      : {'OK' if not utf8_bad else 'FAIL ' + str(utf8_bad[:5])}")
-    print(f"  3) shell 只在 til/ : {'OK' if not shell_bad else 'FAIL ' + str(shell_bad[:5])}")
+    print(f"  3) TIL 无残留      : {'OK' if not til_bad else 'FAIL ' + str(til_bad[:5])}")
     print(f"  4) 页内锚点 0 死链 : {'OK' if not anchor_bad else 'FAIL ' + str(anchor_bad[:5])}")
     print(f"  5) 站内链接死链    : {'OK（0）' if not dead else f'FAIL {len(dead)} 个目标 / {sum(dead.values())} 处'}")
     for url, count in sorted(dead.items(), key=lambda x: -x[1])[:10]:
         print(f"       {count:4}× {url}  ← {link_src[url]}")
-    if shell != til_pages:
-        print(f"  ! shell 页数 {shell} ≠ til 页数 {til_pages}")
-    fail += h1_bad or utf8_bad or shell_bad or anchor_bad or dead
-    if shell != til_pages:
-        fail.append("shell-coverage")
+    fail += h1_bad or utf8_bad or til_bad or anchor_bad or dead
     print("结果：", "全部通过 ✓" if not fail else "有 FAIL")
     return 1 if fail else 0
 
