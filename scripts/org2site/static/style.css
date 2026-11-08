@@ -622,9 +622,23 @@ main p a:hover, main li a:hover, main blockquote a:hover, main td a:hover, main 
   margin-top: var(--space-9);
 }
 @media (min-width: 40rem) {
-  [data-home-columns] { grid-template-columns: minmax(0, 1fr) minmax(0, 1fr); }
+  /* auto-fit 而不是写死两列：TIL 板块移除后首页只剩一个 section，
+     写死 1fr 1fr 会让它占左半边、右边整块留白。auto-fit 会折叠空轨道，
+     一个 section 时铺满，将来加回第二个时自动并排。 */
+  [data-home-columns] { grid-template-columns: repeat(auto-fit, minmax(min(100%, 20rem), 1fr)); }
 }
 [data-home-columns] section { min-width: 0; }
+
+/* 只有一个 section 时，铺满的列表若仍是单行 flex，标题与日期之间会隔开
+   400px 空白（li > a 是 flex:1）。这里让列表自己分两栏，回到 5 行 × 2 列
+   的密度；两个 section 并排时（将来）不触发。 */
+@media (min-width: 40rem) {
+  [data-home-columns]:not(:has(section + section)) > section > ul {
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    column-gap: var(--space-9);
+  }
+}
 
 /* 区块标题栏：h2 + "View all →"（原站 flex items-baseline justify-between）
    h2 移动 18px / md 24px；上间距 36px → 48px */

@@ -260,9 +260,12 @@ org2site--index-title 取；#+NOEXPORT: t 的文件也不发布。"
    "\n</ul>\n</section>\n"))
 
 (defun org2site-home-html (pages)
-  "首页：Welcome + Recent Posts。"
+  "首页：Welcome + Recent Posts。
+TIL 板块移除后只剩一个 section，所以取 10 条 —— 宽屏下这个列表被
+拆成两栏（见 style.css 的 [data-home-columns]:not(:has(...)) 规则），
+两栏 5 行与原「5 条单栏」的视觉密度一致。"
   (let* ((posts (seq-filter (lambda (p) (string= (nth 3 p) "posts")) pages))
-         (recent (seq-take posts 5)))
+         (recent (seq-take posts 10)))
     (concat
      "<h1>Welcome</h1>\n"
      "<p>Hi, I'm tianheg. I write this blog in both Chinese and English "
