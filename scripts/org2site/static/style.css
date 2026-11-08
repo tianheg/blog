@@ -81,15 +81,7 @@
     "Source Han Sans SC", "Source Han Sans CN", "Microsoft YaHei",
     "WenQuanYi Micro Hei", "WenQuanYi Zen Hei", Arial, sans-serif;
 
-  /* TIL 左栏「当前分类」高亮（原站 border-ink-500 / bg-ink-100 / text-ink-700，
-     深色 bg-ink-900/60 / text-ink-300；border 两主题同色） */
-  --cat-active-border: #6783a1;
-  --cat-active-bg: light-dark(#dfe9f4, rgb(26 42 59 / 0.6));
-  --cat-active-fg: light-dark(#304a64, #a8bdd4);
-  --cat-active-count: light-dark(#3d5b7a, #88a1bc);
-  --cat-bar: light-dark(rgb(136 161 188 / 0.5), rgb(136 161 188 / 0.4));  /* ink-400/50 · /40 */
-
-  /* 分类页（/til/<cat>/） */
+  /* 列表页（/posts/） */
   --crumb-sep: light-dark(#d1d5dc, #364153);      /* gray-300 / gray-700 */
   --toc-rule: light-dark(#d1d5db, #4b5563);       /* 目录左竖线（原站 baseof 内联样式里的值） */
   --list-title: light-dark(#1e2939, #e5e7eb);     /* gray-800 / gray-200 */
@@ -173,7 +165,7 @@ main, [data-header-bar], [data-site-footer] > p {
   padding-inline: var(--space-7);
 }
 /* 顶部间距也照原站：非 til 页是 .page-col.mt-10（40px），
-   /til/ 下是 .page-col.pt-8.pb-16（32 / 64）—— 底部的 64 由 article 的 padding-bottom 出，
+   /posts/ 下是 .page-col.pt-8.pb-16（32 / 64）—— 底部的 64 由 article 的 padding-bottom 出，
    别在这里再加，否则翻倍。 */
 body > main { margin-top: var(--space-10); }
 
@@ -312,25 +304,6 @@ td { font-weight: 500; }
 #text-footnotes > div > div { flex: 1; min-width: 0; }
 #text-footnotes p { margin: 0; }
 #text-footnotes sup { font-size: 0.75em; }
-}
-
-@layer layout {
-/* --- TIL 三栏 shell（/til/ 下所有页面）----------------------------------- */
-/* 原站：min-[1280px]:grid grid-cols-[1fr_790px_1fr] —— 内容列固定 790 居中，
-   左栏（w-52 = 13rem）悬挂在左侧 1fr 轨道里。放在轨道里（而不是让内容列让位）
-   是为了让列表页/分类页/笔记页的正文左边缘完全一致。 */
-@media (min-width: 80rem) {
-  /* 必须 width:100%：grid item 上带 margin-inline:auto 会退化成 fit-content，
-     根页（内容窄）会缩到 634px。原站是 w-full。（实测踩过） */
-}
-/* pt-8 不是响应式的：所有宽度都要（放在媒体查询里会让 <1280px 少 32px） */
-/* 左栏只在列表页/分类页渲染（笔记页传 nil，压根没有这个元素）；<1280px 一律隐藏 */
-@media (min-width: 80rem) {
-}
-
-/* 小屏内联分类树：≥1280px 交给左栏，别重复显示一份 */
-@media (min-width: 80rem) {
-}
 }
 
 @layer components {
@@ -505,21 +478,8 @@ details.page-toc > summary {
 .page-toc-list { padding: 0 var(--space-6) var(--space-6); }
 
 /* 计划列表（只在有 SCHEDULED/DEADLINE 时出现） */
-[data-plan-list] { list-style: none; margin: 0 0 var(--space-10); padding: 0; }
-[data-plan-list] li { display: flex; align-items: baseline; gap: 0.7rem; padding-block: 0.3rem; }
-[data-plan-list] time { flex-shrink: 0; color: var(--meta); font-size: var(--text-sm); font-variant-numeric: tabular-nums; }
-[data-plan-list] .plan-kind {
-  flex-shrink: 0;
-  padding: 0.05rem 0.4rem;
-  font-size: var(--text-2xs);
-  color: var(--meta);
-  border: 1px solid var(--border);
-  border-radius: var(--radius-full);
-}
-[data-plan-list] a { color: var(--heading); text-decoration: none; }
-[data-plan-list] a:hover { text-decoration: underline; }
 
-/* --- 列表页（/posts/ /til/ /til/<cat>/）--------------------------------- */
+/* --- 列表页（/posts/）------------------------------------------------ */
 main > ul {
   list-style: none;
   margin: var(--space-9) 0 0;

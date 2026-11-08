@@ -652,7 +652,7 @@ org2site--index-title 取；#+NOEXPORT: t 的文件也不发布。"
   (string-match-p "[^a-z0-9/._%-]" url))
 
 (defun org2site--build-url-map (pages)
-  "wikilink 解析表：路径（til/software/coding）与**不重名**的 basename（coding）→ URL。
+  "wikilink 解析表：路径（posts/javascript）与**不重名**的 basename（javascript）→ URL。
 重名的 basename 一律不进表（projects / sentences / now / 2024 这类两个目录下都有），
 免得把链接指到错误的一篇。"
   (let ((h (make-hash-table :test 'equal))

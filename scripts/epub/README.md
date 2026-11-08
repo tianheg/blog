@@ -1,7 +1,7 @@
 # 博客导出 EPUB SOP
 
 把 tianheg.co 的文章导成一本 EPUB。**不改 `content/`**，产物不进仓库。
-知识背景见 TIL：[为 Hugo 博客制作 epub 格式电子书](/til/software/hugo-epub/)。
+知识背景见私有知识库 `kb` 的 `wiki/software/hugo-epub.org`（原公开 TIL 链接已随 2026-11-08 迁出下线）。
 
 ## 为什么这样做
 

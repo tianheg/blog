@@ -233,7 +233,7 @@
     n))
 
 (defvar org2site-url-map nil
-  "wikilink 解析表：路径（til/software/coding）与不重名的 basename → 站点 URL。
+  "wikilink 解析表：路径（posts/javascript）与不重名的 basename → 站点 URL。
 由 build.el 扫描后填充（见 `org2site--build-url-map'）；单文件导出时为 nil，
 此时只有带 scheme 或站内绝对路径的链接能解析。")
 
@@ -242,7 +242,7 @@
 
 (defun org2site--wikilink-url (target rel)
   "把 wikilink 的 TARGET 解析成站点 URL；解析不了返回 nil。
-TARGET 可为：纯 slug（coding）、多段路径（til/software/coding、../hardware/x.md）、
+TARGET 可为：纯 slug（javascript）、多段路径（posts/javascript、../about.org）、
 站内绝对路径（/about/）；可带 #锚点 与 .md/.org 扩展名。REL 是当前文件相对 org 根。
 用 map 查不到就返回 nil —— **宁可退成纯文本，也不要生成假链接**（正文里的 [[Prototype]]
 这种本来就不是链接，原来一律改写成 /posts/Prototype/ 造出一堆死链）。"
@@ -327,7 +327,7 @@ TARGET 可为：纯 slug（coding）、多段路径（til/software/coding、../h
             (delete-region beg end)
             (if url
                 ;; 走注册过的 wiki: scheme（`org-link-set-parameters "wiki"' 的 :export 会
-                ;; 输出干净 href）；直接写 `[[/til/x/][desc]]' 会被 org 当 file: 链接加前缀。
+                ;; 输出干净 href）；直接写 `[[/posts/x/][desc]]' 会被 org 当 file: 链接加前缀。
                 (insert (format "[[wiki:%s][%s]]" url desc))
               ;; 解析不了 → 退成纯文本。不能留着 [[...]]：org 会当模糊链接，
               ;; 严重时直接报 Unable to resolve link 中止整篇导出。
