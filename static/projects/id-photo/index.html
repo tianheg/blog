@@ -522,7 +522,7 @@ input[type="range"] {
 
   /* 人像模型的二值 mask → 前景 alpha（0..1）。
      shrink 先把边界向内收（躲开混了背景色的边缘像素），feather 再羽化 */
-  function maskAlpha(maskData, imageData, W, H, shrink, feather) {
+  function maskAlpha(maskData, imageData, W, H, shrink, feather, aa) {
     var N = W * H, p;
     var raw = new Float32Array(N);
     for (p = 0; p < N; p++) raw[p] = maskData.data[p * 4] / 255;
@@ -535,11 +535,11 @@ input[type="range"] {
 
     var out = new Float32Array(N);
     for (p = 0; p < N; p++) {
-      var t = (q[p] - 0.42) / 0.16;
+      var t = (q[p] - 0.46) / 0.22;
       out[p] = t < 0 ? 0 : t > 1 ? 1 : t;
     }
-    /* 半像素级收边：纯硬阶跃在 390px 输出上会有锯齿 */
-    return blurMask(out, W, H, 1);
+    /* 抗锯齿：过渡带按「输出像素」给够，否则 390px 上一律是硬阶梯 */
+    return blurMask(out, W, H, Math.max(1, aa || 1));
   }
 
   /* 估原背景色：alpha 近似 0 的像素的中位数，用于边缘去污染 */
@@ -986,7 +986,9 @@ input[type="range"] {
     var md = mctx.getImageData(0, 0, W, H);
     setStatus("细化边缘…");
     return IdPhoto.maskAlpha(md, imageData, W, H,
-      modelShrink() * (W / OW), Math.max(0.6, S.soft * (W / OW)));
+      modelShrink() * (W / OW),
+      Math.max(1, S.soft * (W / OW)),
+      Math.max(1, Math.round(W / OW) * 1.2));
   }
 
   /* ---------- 导出 ---------- */
