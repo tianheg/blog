@@ -362,8 +362,8 @@ input[type="range"] {
 
     <p class="note">
       抠图用 MODNet（端到端 alpha matting）在浏览器本地跑：模型 6.6MB + 推理引擎 11MB，
-      首次打开要点下载时间，之后走浏览器缓存，照片不出机器。「边缘收紧」往右去掉边缘残留的原背景色，
-      「去污染半径」控制边缘取色的范围，一般不用动。
+      首次打开要等下载，之后走浏览器缓存，照片不出机器。上传后自动抠一次，之后切底色、
+      拖拽缩放都是即时的。「边缘收紧」往右去掉边缘残留的原背景色，「去污染半径」一般不用动。
       导出的是 300dpi 的 JPG，含真实 DPI 元数据，冲印店按 33×48mm 输出即为大一寸。
     </p>
 
@@ -642,6 +642,10 @@ input[type="range"] {
   var pointers = new Map();
   var pinchStart = null;
 
+  /* 抠图结果（透明前景，工作分辨率）。缓存起来，拖动/缩放/切底色都不用重算 */
+  var fgCanvas = null;
+  var matteTimer = null, matteBusy = false, matteAgain = false, matteKey = "";
+
   /* ---------- 绘制预览 ---------- */
 
   function resizeCanvas() {
@@ -661,7 +665,16 @@ input[type="range"] {
     var k = W / OW;
     ctx.setTransform(k, 0, 0, k, 0, 0);
     ctx.imageSmoothingQuality = "high";
-    ctx.drawImage(S.bmp, S.ox, S.oy, S.iw * S.scale, S.ih * S.scale);
+
+    var fg = (S.bgMode !== "original") ? fgCanvas : null;
+    if (!fg) {
+      ctx.drawImage(S.bmp, S.ox, S.oy, S.iw * S.scale, S.ih * S.scale);
+      return;
+    }
+    /* 底色 + 已抠好的透明前景，拖动缩放只做一次 transform */
+    ctx.fillStyle = S.bgMode;
+    ctx.fillRect(0, 0, OW, OH);
+    ctx.drawImage(fg, S.ox, S.oy, S.iw * S.scale, S.ih * S.scale);
   }
 
   function clampOffsets() {
@@ -689,9 +702,22 @@ input[type="range"] {
       try { bmp = await createImageBitmap(file); }
       catch (e2) { setStatus("这张图读不出来，换一张试试", true); return; }
     }
+    /* 工作分辨率：长边不超过 1600，抠图和预览都用它，避免手机大图吃内存 */
+    var maxDim = Math.max(bmp.width, bmp.height);
+    var wScale = Math.min(1, 1600 / maxDim);
+    var ww = Math.round(bmp.width * wScale), wh = Math.round(bmp.height * wScale);
+    if (wScale < 1) {
+      var wc0 = document.createElement("canvas");
+      wc0.width = ww; wc0.height = wh;
+      var wct = wc0.getContext("2d");
+      wct.imageSmoothingQuality = "high";
+      wct.drawImage(bmp, 0, 0, ww, wh);
+      bmp = await createImageBitmap(wc0);
+    }
     S.bmp = bmp;
-    S.iw = bmp.width;
-    S.ih = bmp.height;
+    S.iw = ww;
+    S.ih = wh;
+    fgCanvas = null;
     S.scale = minScaleFor();
     S.minScale = S.scale;
     S.maxScale = Math.max(S.scale * 3, S.scale + 1);
@@ -704,9 +730,7 @@ input[type="range"] {
     syncZoomSlider();
     resizeCanvas();
     setStatus("原图 " + S.iw + "×" + S.ih + " · 铺满画框后可拖动缩放");
-    if (S.bgMode !== "original" && !segBroken) {
-      setTimeout(function () { loadModel().catch(function () {}); }, 600);
-    }
+    scheduleMatte();
   }
 
   function syncZoomSlider() {
@@ -838,6 +862,7 @@ input[type="range"] {
   tolEl.addEventListener("input", function () {
     S.tol = Number(tolEl.value);
     tolVal.textContent = fmtOffset(S.tol);
+    scheduleMatte();
   });
 
   function fmtOffset(v) { return String(Math.round(v)); }
@@ -848,6 +873,7 @@ input[type="range"] {
   softEl.addEventListener("input", function () {
     S.soft = Number(softEl.value);
     softVal.textContent = Math.round(S.soft) + " px";
+    scheduleMatte();
   });
 
   document.getElementById("reset").addEventListener("click", function () {
@@ -873,6 +899,13 @@ input[type="range"] {
     Array.prototype.forEach.call(swatches.children, function (b) {
       b.setAttribute("aria-pressed", String(b === btn));
     });
+    paint();
+    if (S.bgMode === "original") {
+      setStatus("原图模式，不做抠图");
+    } else {
+      if (!fgCanvas) setStatus("抠图中…");
+      scheduleMatte();
+    }
   });
 
   /* ---------- 人像抠图：MODNet (q8) + onnxruntime-web，全部自托管 ---------- */
@@ -964,6 +997,71 @@ input[type="range"] {
     return alpha;
   }
 
+  /* 参数或图片变了才重算；拖动缩放不触发 */
+  function matteSignature() {
+    return [S.tol, S.soft, S.iw, S.ih, segBroken ? "f" : "m"].join("|");
+  }
+
+  function scheduleMatte() {
+    if (!S.bmp || S.bgMode === "original") return;
+    clearTimeout(matteTimer);
+    matteTimer = setTimeout(runMatte, 350);
+  }
+
+  async function runMatte() {
+    if (matteBusy) { matteAgain = true; return; }
+    if (!S.bmp) return;
+    var sig = matteSignature();
+    if (fgCanvas && sig === matteKey) return;
+
+    matteBusy = true;
+    try {
+      var work = document.createElement("canvas");
+      work.width = S.iw; work.height = S.ih;
+      var wctx = work.getContext("2d", { willReadFrequently: true });
+      wctx.drawImage(S.bmp, 0, 0);
+
+      var id = wctx.getImageData(0, 0, S.iw, S.ih);
+      var alpha = null, how = "model";
+
+      if (!segBroken) {
+        try {
+          alpha = await buildAlpha(work, S.iw, S.ih);
+        } catch (e) {
+          segBroken = true;
+          console.warn("MODNet 不可用，回退色差抠图：", e);
+        }
+      }
+      if (!alpha) {
+        how = "fallback";
+        var mask = IdPhoto.backgroundMask(id, fallbackTolerance());
+        var blurred = IdPhoto.blurMask(mask, S.iw, S.ih, Math.max(1, S.soft));
+        alpha = new Float32Array(S.iw * S.ih);
+        for (var p = 0; p < alpha.length; p++) alpha[p] = 1 - blurred[p];
+      }
+
+      setStatus("合成中…");
+      var fg = IdPhoto.foregroundFromAlpha(id, alpha, {
+        radius: Math.max(2, Math.round(S.soft))
+      });
+      var out = document.createElement("canvas");
+      out.width = S.iw; out.height = S.ih;
+      out.getContext("2d").putImageData(new ImageData(fg.data, S.iw, S.ih), 0, 0);
+
+      fgCanvas = out;
+      matteKey = sig;
+      window.__lastCutMethod = how;
+      paint();
+      setStatus("抠图就绪 · 改底色、拖拽、缩放都即时生效");
+    } catch (e) {
+      console.error(e);
+      setStatus("抠图失败：" + (e && e.message ? e.message : e), true);
+    } finally {
+      matteBusy = false;
+      if (matteAgain) { matteAgain = false; scheduleMatte(); }
+    }
+  }
+
   /* ---------- 导出 ---------- */
 
   function setStatus(msg, bad) {
@@ -1002,71 +1100,30 @@ input[type="range"] {
   });
 
   async function renderJpeg() {
+    var final = document.createElement("canvas");
+    final.width = OW; final.height = OH;
+    var fc = final.getContext("2d");
+    fc.imageSmoothingQuality = "high";
+
     var sx = -S.ox / S.scale;
     var sy = -S.oy / S.scale;
     var sw = OW / S.scale;
     var sh = OH / S.scale;
 
-    /* 工作分辨率：最多 2× 输出，避免无谓的像素搬运 */
-    var k = Math.max(1, Math.min(2, sw / OW));
-    var WW = Math.round(OW * k), WH = Math.round(OH * k);
-
-    var work = document.createElement("canvas");
-    work.width = WW; work.height = WH;
-    var wc = work.getContext("2d", { willReadFrequently: true });
-    wc.imageSmoothingQuality = "high";
-    wc.fillStyle = "#ffffff";
-    wc.fillRect(0, 0, WW, WH);
-    wc.drawImage(S.bmp, sx, sy, sw, sh, 0, 0, WW, WH);
-
-    var source = work;
-
-    if (S.bgMode !== "original") {
-      var id = wc.getImageData(0, 0, WW, WH);
-      var alpha = null, how = "model";
-
-      if (!segBroken) {
-        try {
-          alpha = await buildAlpha(work, WW, WH);
-        } catch (e) {
-          segBroken = true;
-          console.warn("MODNet 不可用，回退色差抠图：", e);
-        }
+    if (S.bgMode === "original") {
+      fc.fillStyle = "#ffffff";
+      fc.fillRect(0, 0, OW, OH);
+      fc.drawImage(S.bmp, sx, sy, sw, sh, 0, 0, OW, OH);
+    } else {
+      if (!fgCanvas) {
+        /* 还没抠完就点导出：当场跑一次 */
+        await runMatte();
       }
-
-      if (!alpha) {
-        how = "fallback";
-        var mask = IdPhoto.backgroundMask(id, fallbackTolerance());
-        var blurred = IdPhoto.blurMask(mask, WW, WH, Math.max(1, S.soft * k));
-        alpha = new Float32Array(WW * WH);
-        for (var p = 0; p < alpha.length; p++) alpha[p] = 1 - blurred[p];
-      }
-
-      setStatus("合成中…");
-      var fg = IdPhoto.foregroundFromAlpha(id, alpha, {
-        radius: Math.max(2, Math.round(S.soft * k))
-      });
-
-      var out = document.createElement("canvas");
-      out.width = WW; out.height = WH;
-      var octx = out.getContext("2d");
-      octx.fillStyle = S.bgMode;
-      octx.fillRect(0, 0, WW, WH);
-      var fgc = document.createElement("canvas");
-      fgc.width = WW; fgc.height = WH;
-      fgc.getContext("2d").putImageData(new ImageData(fg.data, WW, WH), 0, 0);
-      octx.drawImage(fgc, 0, 0);
-      source = out;
-      window.__lastCutMethod = how;
+      if (!fgCanvas) throw new Error("抠图未完成，稍等再试");
+      fc.fillStyle = S.bgMode;
+      fc.fillRect(0, 0, OW, OH);
+      fc.drawImage(fgCanvas, sx, sy, sw, sh, 0, 0, OW, OH);
     }
-
-    var final = document.createElement("canvas");
-    final.width = OW; final.height = OH;
-    var fc = final.getContext("2d");
-    fc.imageSmoothingQuality = "high";
-    fc.fillStyle = "#ffffff";
-    fc.fillRect(0, 0, OW, OH);
-    fc.drawImage(source, 0, 0, OW, OH);
 
     var raw = await new Promise(function (resolve, reject) {
       final.toBlob(function (b) {
