@@ -70,6 +70,59 @@ const fgGot = N - bgCount;
 ok("前景面积接近椭圆理论值", Math.abs(fgGot - fgExpect) / fgExpect < 0.06,
   `got ${fgGot}, expect ≈ ${Math.round(fgExpect)}`);
 
+console.log("\n[引导滤波 / maskAlpha]");
+// 100x140：灰背景 + 深色方块；mask 只有方块是前景
+const w2 = 100, h2 = 140, n2 = w2 * h2;
+const img2 = new Uint8ClampedArray(n2 * 4);
+const md2 = new Uint8ClampedArray(n2 * 4);
+for (let y = 0; y < h2; y++) {
+  for (let x = 0; x < w2; x++) {
+    const o = (y * w2 + x) * 4;
+    // 方块边缘 4px 渐变，模拟真实照片的软过渡
+    const d = Math.min(x - 30, 69 - x, y - 40, 109 - y);
+    const t = Math.max(0, Math.min(1, d / 4 + 0.5));
+    const c = Math.round(205 + (30 - 205) * t);
+    img2[o] = img2[o+1] = img2[o+2] = c; img2[o+3] = 255;
+    const m = d > 0 ? 255 : 0;                 // mask 仍是硬边，靠 guided filter 塑形
+    md2[o] = md2[o+1] = md2[o+2] = m; md2[o+3] = 255;
+  }
+}
+const idata2 = { data: img2, width: w2, height: h2 };
+const mdata2 = { data: md2, width: w2, height: h2 };
+
+const a0 = IP.maskAlpha(mdata2, idata2, w2, h2, 0, 1);
+ok("maskAlpha 前景=1", a0[70 * w2 + 50] > 0.95, a0[70 * w2 + 50]);
+ok("maskAlpha 背景=0", a0[10 * w2 + 10] < 0.05, a0[10 * w2 + 10]);
+let bandPx = 0;
+for (let p = 0; p < n2; p++) if (a0[p] > 0.1 && a0[p] < 0.9) bandPx++;
+ok("maskAlpha 有过渡带", bandPx > 50, "过渡像素 " + bandPx);
+
+const a3 = IP.maskAlpha(mdata2, idata2, w2, h2, 3, 1);
+ok("收缩后略小于原 mask", a3[45 * w2 + 50] < a0[45 * w2 + 50] + 0.001);
+
+const gq = IP.guidedFilter(a0, idata2, w2, h2, 4, 0.0006);
+ok("guidedFilter 前景保持", gq[70 * w2 + 50] > 0.9, gq[70 * w2 + 50]);
+ok("guidedFilter 背景保持", gq[10 * w2 + 10] < 0.1, gq[10 * w2 + 10]);
+
+const er = IP.erodeMask(a0, w2, h2, 2);
+ok("腐蚀 2px 吃掉 2 行边界", er[42 * w2 + 50] < 0.5 && er[43 * w2 + 50] > 0.5);
+
+console.log("\n[去污染]");
+const c1 = { data: new Uint8ClampedArray([100, 100, 100, 255]), width: 1, height: 1 };
+const al1 = new Float32Array([0.5]);
+IP.decontaminate(c1, al1, [200, 200, 200]);
+ok("反解 C=0.5F+0.5B 得 F", Math.abs(c1.data[0]) < 3, c1.data[0]);
+
+const c2 = { data: new Uint8ClampedArray([250, 250, 250, 255]), width: 1, height: 1 };
+const al2 = new Float32Array([1.0]);
+IP.decontaminate(c2, al2, [200, 200, 200]);
+ok("alpha=1 不改动", c2.data[0] === 250);
+
+const bgImg = { data: new Uint8ClampedArray(n2 * 4), width: w2, height: h2 };
+for (let p = 0; p < n2; p++) { const o = p*4; bgImg.data[o]=150; bgImg.data[o+1]=160; bgImg.data[o+2]=170; bgImg.data[o+3]=255; }
+const est = IP.estimateBackgroundColor(bgImg, a0);
+ok("背景色估计", est && est[0] === 150 && est[1] === 160 && est[2] === 170, JSON.stringify(est));
+
 console.log("\n[羽化]");
 const r0 = IP.blurMask(mask, W, H, 0);
 ok("半径 0 保持原值", r0[0] === 1 && r0[140 * W + 100] === 0);

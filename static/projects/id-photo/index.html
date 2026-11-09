@@ -333,10 +333,10 @@ input[type="range"] {
 
     <div class="group">
       <div class="row">
-        <label for="tol">抠图容差</label>
-        <span class="val" id="tolVal">40</span>
+        <label for="tol">边缘收紧</label>
+        <span class="val" id="tolVal">1.5 px</span>
       </div>
-      <input type="range" id="tol" min="8" max="90" step="1" value="40">
+      <input type="range" id="tol" min="0" max="100" step="1" value="50">
       <div class="row">
         <label for="soft">边缘羽化</label>
         <span class="val" id="softVal">1.2 px</span>
@@ -361,7 +361,8 @@ input[type="range"] {
     <p class="status" id="status" role="status" aria-live="polite"></p>
 
     <p class="note">
-      抠图按背景色连通区域判断：纯色墙面前景最准，复杂背景建议选「原图」只做裁剪。
+      人像分割在浏览器本地跑（MediaPipe 自托管模型，首次约 6MB，之后走缓存），照片不出机器。
+      「边缘偏移」往左收紧、往右放宽；头发边缘不干净时先把羽化拉大再微调偏移。
       导出的是 300dpi 的 JPG，含真实 DPI 元数据，冲印店按 33×48mm 输出即为大一寸。
     </p>
 
@@ -438,7 +439,7 @@ input[type="range"] {
   function blurMask(mask, W, H, radius) {
     var N = W * H, src, dst, tmp, x, y, sum, row, win, lo, hi;
     var out = new Float32Array(N);
-    for (var p = 0; p < N; p++) out[p] = mask[p] ? 1 : 0;
+    for (var p = 0; p < N; p++) out[p] = mask[p];
     var r = Math.round(radius);
     if (r <= 0) return out;
 
@@ -467,6 +468,121 @@ input[type="range"] {
       }
     }
     return dst;
+  }
+
+  /* 腐蚀二值 mask r 像素（4 邻域 min 迭代） */
+  function erodeMask(mask, W, H, r) {
+    var cur = mask, it, x, y, p, v;
+    for (it = 0; it < r; it++) {
+      var next = new Float32Array(W * H);
+      for (y = 0; y < H; y++) {
+        for (x = 0; x < W; x++) {
+          p = y * W + x;
+          v = cur[p];
+          if (x > 0 && cur[p - 1] < v) v = cur[p - 1];
+          if (x < W - 1 && cur[p + 1] < v) v = cur[p + 1];
+          if (y > 0 && cur[p - W] < v) v = cur[p - W];
+          if (y < H - 1 && cur[p + W] < v) v = cur[p + W];
+          next[p] = v;
+        }
+      }
+      cur = next;
+    }
+    return cur;
+  }
+
+  /* 引导滤波：用原图的边缘给 mask 塑形，得到贴合头发/衣服的软 alpha。
+     p 是粗 mask（0..1），I 取原图灰度。eps 越小越贴原图边缘 */
+  function guidedFilter(p, imageData, W, H, r, eps) {
+    var N = W * H, i, d = imageData.data;
+    var I = new Float32Array(N);
+    for (i = 0; i < N; i++) {
+      I[i] = (0.299 * d[i * 4] + 0.587 * d[i * 4 + 1] + 0.114 * d[i * 4 + 2]) / 255;
+    }
+    var meanI = blurMask(I, W, H, r);
+    var meanP = blurMask(p, W, H, r);
+    var II = new Float32Array(N), IP = new Float32Array(N);
+    for (i = 0; i < N; i++) { II[i] = I[i] * I[i]; IP[i] = I[i] * p[i]; }
+    var meanII = blurMask(II, W, H, r);
+    var meanIP = blurMask(IP, W, H, r);
+
+    var a = new Float32Array(N), b = new Float32Array(N);
+    for (i = 0; i < N; i++) {
+      var varI = meanII[i] - meanI[i] * meanI[i];
+      var cov = meanIP[i] - meanI[i] * meanP[i];
+      a[i] = cov / (varI + eps);
+      b[i] = meanP[i] - a[i] * meanI[i];
+    }
+    var meanA = blurMask(a, W, H, r);
+    var meanB = blurMask(b, W, H, r);
+    var q = new Float32Array(N);
+    for (i = 0; i < N; i++) q[i] = meanA[i] * I[i] + meanB[i];
+    return q;
+  }
+
+  /* 人像模型的二值 mask → 前景 alpha（0..1）。
+     shrink 先把边界向内收（躲开混了背景色的边缘像素），feather 再羽化 */
+  function maskAlpha(maskData, imageData, W, H, shrink, feather) {
+    var N = W * H, p;
+    var raw = new Float32Array(N);
+    for (p = 0; p < N; p++) raw[p] = maskData.data[p * 4] / 255;
+    var e = shrink > 0 ? erodeMask(raw, W, H, Math.round(shrink)) : raw;
+
+    /* 先用小半径模糊得到过渡带，再用引导滤波把边缘吸到原图的纹理上 */
+    var soft = blurMask(e, W, H, Math.max(1.5, feather * 0.6));
+    var r = Math.max(3, Math.round(feather * 2.5));
+    var q = guidedFilter(soft, imageData, W, H, r, 0.0006);
+
+    var out = new Float32Array(N);
+    for (p = 0; p < N; p++) {
+      var t = (q[p] - 0.42) / 0.16;
+      out[p] = t < 0 ? 0 : t > 1 ? 1 : t;
+    }
+    /* 半像素级收边：纯硬阶跃在 390px 输出上会有锯齿 */
+    return blurMask(out, W, H, 1);
+  }
+
+  /* 估原背景色：alpha 近似 0 的像素的中位数，用于边缘去污染 */
+  function estimateBackgroundColor(imageData, alpha) {
+    var d = imageData.data, N = alpha.length, p;
+    var rs = [], gs = [], bs = [];
+    var step = Math.max(1, Math.floor(N / 20000));
+    for (p = 0; p < N; p += step) {
+      if (alpha[p] > 0.02) continue;
+      rs.push(d[p * 4]); gs.push(d[p * 4 + 1]); bs.push(d[p * 4 + 2]);
+    }
+    if (!rs.length) return null;
+    var mid = function (arr) { arr.sort(function (a, b) { return a - b; }); return arr[arr.length >> 1]; };
+    return [mid(rs), mid(gs), mid(bs)];
+  }
+
+  /* 边缘去污染：C = a*F + (1-a)*B 反解出 F，消掉背景色光晕 */
+  function decontaminate(imageData, alpha, bgColor) {
+    if (!bgColor) return imageData;
+    var d = imageData.data, N = alpha.length, p;
+    for (p = 0; p < N; p++) {
+      var a = alpha[p];
+      if (a <= 0.03 || a >= 0.97) continue;
+      var o = p * 4, inv = 1 - a;
+      for (var c = 0; c < 3; c++) {
+        var v = (d[o + c] - inv * bgColor[c]) / a;
+        d[o + c] = v < 0 ? 0 : v > 255 ? 255 : v;
+      }
+    }
+    return imageData;
+  }
+
+  /* 把前景按 alpha 合成到纯色背景，就地改 imageData */
+  function compositeOnAlpha(imageData, alpha, color) {
+    var d = imageData.data, N = alpha.length;
+    for (var p = 0, o = 0; p < N; p++, o += 4) {
+      var a = alpha[p];
+      if (a >= 0.999) continue;
+      d[o] = d[o] * a + color[0] * (1 - a);
+      d[o + 1] = d[o + 1] * a + color[1] * (1 - a);
+      d[o + 2] = d[o + 2] * a + color[2] * (1 - a);
+    }
+    return imageData;
   }
 
   /* 把前景画到纯色背景上，就地改 imageData */
@@ -530,6 +646,12 @@ input[type="range"] {
     sampleBackground: sampleBackground,
     backgroundMask: backgroundMask,
     blurMask: blurMask,
+    maskAlpha: maskAlpha,
+    guidedFilter: guidedFilter,
+    erodeMask: erodeMask,
+    estimateBackgroundColor: estimateBackgroundColor,
+    decontaminate: decontaminate,
+    compositeOnAlpha: compositeOnAlpha,
     compositeOnColor: compositeOnColor,
     hexToRgb: hexToRgb,
     patchJpegDpi: patchJpegDpi
@@ -571,7 +693,7 @@ input[type="range"] {
     scale: 1, minScale: 1, maxScale: 4,
     ox: 0, oy: 0,
     bgMode: "#ffffff",
-    tol: 40, soft: 1.2,
+    tol: 50, soft: 1.2,
     guide: true
   };
 
@@ -640,6 +762,9 @@ input[type="range"] {
     syncZoomSlider();
     resizeCanvas();
     setStatus("原图 " + S.iw + "×" + S.ih + " · 铺满画框后可拖动缩放");
+    if (S.bgMode !== "original" && !segBroken) {
+      setTimeout(function () { loadSegmenter().catch(function () {}); }, 600);
+    }
   }
 
   function syncZoomSlider() {
@@ -770,8 +895,15 @@ input[type="range"] {
 
   tolEl.addEventListener("input", function () {
     S.tol = Number(tolEl.value);
-    tolVal.textContent = String(S.tol);
+    tolVal.textContent = fmtOffset(S.tol);
   });
+
+  function fmtOffset(v) { return (v / 100 * 3).toFixed(1) + " px"; }
+
+  /* 滑块 0..100 → 边界内收 0..3 px */
+  function modelShrink() { return (S.tol / 100) * 3; }
+  /* 回退算法：内收越多等价于颜色容差越大 */
+  function fallbackTolerance() { return 140 - (S.tol / 100) * 120; }
 
   softEl.addEventListener("input", function () {
     S.soft = Number(softEl.value);
@@ -802,6 +934,60 @@ input[type="range"] {
       b.setAttribute("aria-pressed", String(b === btn));
     });
   });
+
+  /* ---------- 人像分割模型（懒加载，自托管） ---------- */
+
+  var segModel = null, segReady = null, segPending = null, segBroken = false;
+
+  function loadSegmenter() {
+    if (segReady) return segReady;
+    segReady = new Promise(function (resolve, reject) {
+      var el = document.createElement("script");
+      el.src = "vendor/selfie/selfie_segmentation.js";
+      el.async = true;
+      el.onload = function () {
+        try {
+          var ss = new SelfieSegmentation({ locateFile: function (f) { return "vendor/selfie/" + f; } });
+          ss.setOptions({ modelSelection: 0 });
+          ss.onResults(function (r) {
+            if (segPending) { var fn = segPending; segPending = null; fn(r); }
+          });
+          segModel = ss;
+          resolve(ss);
+        } catch (e) {
+          reject(e);
+        }
+      };
+      el.onerror = function () { reject(new Error("模型脚本加载失败")); };
+      document.head.appendChild(el);
+    });
+    return segReady;
+  }
+
+  async function modelAlpha(canvasEl, imageData, W, H) {
+    setStatus(segModel ? "识别人像…" : "加载人像模型（首次约 6MB）…");
+    await loadSegmenter();
+    var r = await new Promise(function (resolve, reject) {
+      var timer = setTimeout(function () {
+        segPending = null;
+        reject(new Error("模型推理超时"));
+      }, 20000);
+      segPending = function (res) { clearTimeout(timer); resolve(res); };
+      var p = segModel.send({ image: canvasEl });
+      if (p && p.catch) {
+        p.catch(function (e) { clearTimeout(timer); segPending = null; reject(e); });
+      }
+    });
+    var m = r.segmentationMask;
+    var mc = document.createElement("canvas");
+    mc.width = W; mc.height = H;
+    var mctx = mc.getContext("2d", { willReadFrequently: true });
+    mctx.drawImage(m, 0, 0, W, H);
+    var md = mctx.getImageData(0, 0, W, H);
+    setStatus("细化边缘…");
+    return IdPhoto.maskAlpha(md, imageData, W, H,
+      modelShrink() * (W / OW), Math.max(0.6, S.soft * (W / OW)));
+  }
 
   /* ---------- 导出 ---------- */
 
@@ -862,14 +1048,35 @@ input[type="range"] {
 
     if (S.bgMode !== "original") {
       var id = wc.getImageData(0, 0, WW, WH);
-      var mask = IdPhoto.backgroundMask(id, S.tol);
-      var bgFactor = IdPhoto.blurMask(mask, WW, WH, S.soft * k);
-      IdPhoto.compositeOnColor(id, bgFactor, IdPhoto.hexToRgb(S.bgMode));
+      var alpha = null, how = "model";
+
+      if (!segBroken) {
+        try {
+          alpha = await modelAlpha(work, id, WW, WH);
+        } catch (e) {
+          segBroken = true;
+          console.warn("人像模型不可用，回退色差抠图：", e);
+        }
+      }
+
+      if (!alpha) {
+        how = "fallback";
+        var mask = IdPhoto.backgroundMask(id, fallbackTolerance());
+        var blurred = IdPhoto.blurMask(mask, WW, WH, S.soft * k);
+        alpha = new Float32Array(WW * WH);
+        for (var p = 0; p < alpha.length; p++) alpha[p] = 1 - blurred[p];
+      }
+
+      setStatus("合成中…");
+      var oldBg = IdPhoto.estimateBackgroundColor(id, alpha);
+      IdPhoto.decontaminate(id, alpha, oldBg);
+      IdPhoto.compositeOnAlpha(id, alpha, IdPhoto.hexToRgb(S.bgMode));
 
       var out = document.createElement("canvas");
       out.width = WW; out.height = WH;
       out.getContext("2d").putImageData(id, 0, 0);
       source = out;
+      window.__lastCutMethod = how;
     }
 
     var final = document.createElement("canvas");
