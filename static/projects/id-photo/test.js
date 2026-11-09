@@ -77,6 +77,23 @@ ok("低于下界压成 0", st[0] === 0 && st[1] === 0 && st[2] < 1e-6, st.slice(
 ok("中点线性映射", Math.abs(st[3] - (0.5 - 0.1) / 0.85) < 1e-6, st[3]);
 eq("上界以上压成 1", [st[4], st[5]], [1, 1]);
 
+console.log("\n[头部定位 headBox]");
+// 100 宽 x 120 高：头在 y20-60 / x40-60，肩在 y60-120 / x20-80
+const hbW = 100, hbH = 120;
+const hbA = new Float32Array(hbW * hbH);
+for (let y = 20; y < 120; y++) {
+  for (let x = 0; x < hbW; x++) {
+    const inHead = y < 60 && x >= 40 && x <= 60;
+    const inBody = y >= 60 && x >= 20 && x <= 80;
+    if (inHead || inBody) hbA[y * hbW + x] = 1;
+  }
+}
+const box = IP.headBox(hbA, hbW, hbH);
+ok("头顶行 = 20", box && box.top === 20, box && box.top);
+ok("头宽 = 21（量在头部不是肩膀）", box && box.headW === 21, box && box.headW);
+ok("头部中线 = 50", box && Math.abs(box.headCx - 50) < 0.6, box && box.headCx);
+ok("空 alpha 返回 null", IP.headBox(new Float32Array(hbW * hbH), hbW, hbH) === null);
+
 console.log("\n[前景去污染]");
 // 20x20：背景 (200,200,200)，中间 8x8 方块 (30,60,90)
 const w2 = 20, h2 = 20, n2 = w2 * h2;

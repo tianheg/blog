@@ -353,7 +353,7 @@ input[type="range"] {
     </div>
 
     <div class="group">
-      <button class="btn small" id="reset">重置位置</button>
+      <button class="btn small" id="reset">自动对齐</button>
       <button class="btn small" id="toggleGuide">隐藏参考线</button>
     </div>
 
@@ -531,6 +531,40 @@ input[type="range"] {
     return { data: out, width: W, height: H };
   }
 
+  /* 从 alpha 估头部定位参数：头顶行、头部中线、头宽。
+     头宽在「头顶往下 15%」处量，那个高度还没到肩膀。 */
+  function headBox(alpha, W, H) {
+    var N = W * H, x, y, p;
+    var top = -1, bottom = -1;
+    for (y = 0; y < H; y++) {
+      var rowHas = false;
+      for (x = 0; x < W; x++) { if (alpha[y * W + x] > 0.5) { rowHas = true; break; } }
+      if (rowHas) { if (top < 0) top = y; bottom = y; }
+    }
+    if (top < 0) return null;
+
+    var probe = Math.min(H - 1, Math.round(top + (bottom - top) * 0.15));
+    var l = W, r = -1;
+    for (x = 0; x < W; x++) {
+      if (alpha[probe * W + x] > 0.5) { if (x < l) l = x; if (x > r) r = x; }
+    }
+    /* probe 行落空时逐行往下找 */
+    while (r < 0 && probe < H - 1) {
+      probe++;
+      for (x = 0; x < W; x++) {
+        if (alpha[probe * W + x] > 0.5) { if (x < l) l = x; if (x > r) r = x; }
+      }
+    }
+    if (r < 0 || r <= l) return null;
+
+    return {
+      top: top,
+      bottom: bottom,
+      headW: r - l + 1,
+      headCx: (l + r) / 2
+    };
+  }
+
   /* 把前景画到纯色背景上，就地改 imageData */
   function compositeOnColor(imageData, bgFactor, color) {
     var data = imageData.data, N = imageData.width * imageData.height;
@@ -593,6 +627,7 @@ input[type="range"] {
     backgroundMask: backgroundMask,
     blurMask: blurMask,
     stretchAlpha: stretchAlpha,
+    headBox: headBox,
     foregroundFromAlpha: foregroundFromAlpha,
     compositeOnColor: compositeOnColor,
     hexToRgb: hexToRgb,
@@ -636,7 +671,8 @@ input[type="range"] {
     ox: 0, oy: 0,
     bgMode: "#ffffff",
     tol: 50, soft: 8,
-    guide: true
+    guide: true,
+    aligned: false
   };
 
   var pointers = new Map();
@@ -645,6 +681,7 @@ input[type="range"] {
   /* 抠图结果（透明前景，工作分辨率）。缓存起来，拖动/缩放/切底色都不用重算 */
   var fgCanvas = null;
   var matteTimer = null, matteBusy = false, matteAgain = false, matteKey = "";
+  var lastBox = null;
 
   /* ---------- 绘制预览 ---------- */
 
@@ -718,6 +755,8 @@ input[type="range"] {
     S.iw = ww;
     S.ih = wh;
     fgCanvas = null;
+    lastBox = null;
+    S.aligned = false;
     S.scale = minScaleFor();
     S.minScale = S.scale;
     S.maxScale = Math.max(S.scale * 3, S.scale + 1);
@@ -878,11 +917,16 @@ input[type="range"] {
 
   document.getElementById("reset").addEventListener("click", function () {
     if (!S.bmp) return;
+    if (lastBox && applyHeadBox(lastBox)) {
+      setStatus("已重新按人脸位置对齐");
+      return;
+    }
     S.scale = S.minScale;
     S.ox = (OW - S.iw * S.scale) / 2;
     S.oy = (OH - S.ih * S.scale) / 2;
     syncZoomSlider();
     paint();
+    setStatus("还没有抠图结果，先铺满画框");
   });
 
   document.getElementById("toggleGuide").addEventListener("click", function (ev) {
@@ -997,6 +1041,21 @@ input[type="range"] {
     return alpha;
   }
 
+  /* 按证件照构图规范把头部摆到位：头宽占画面 62%，头顶距上边 8.5% */
+  function applyHeadBox(box) {
+    if (!box) return false;
+    var targetHeadW = OW * 0.62;
+    var scale = targetHeadW / box.headW;
+    scale = Math.max(S.minScale, Math.min(S.maxScale, scale));
+    S.scale = scale;
+    S.ox = OW / 2 - box.headCx * scale;
+    S.oy = OH * 0.085 - box.top * scale;
+    clampOffsets();
+    syncZoomSlider();
+    paint();
+    return true;
+  }
+
   /* 参数或图片变了才重算；拖动缩放不触发 */
   function matteSignature() {
     return [S.tol, S.soft, S.iw, S.ih, segBroken ? "f" : "m"].join("|");
@@ -1051,8 +1110,17 @@ input[type="range"] {
       fgCanvas = out;
       matteKey = sig;
       window.__lastCutMethod = how;
+      lastBox = IdPhoto.headBox(alpha, S.iw, S.ih);
+
+      var aligned = false;
+      if (!S.aligned) {
+        aligned = applyHeadBox(lastBox);
+        S.aligned = true;
+      }
       paint();
-      setStatus("抠图就绪 · 改底色、拖拽、缩放都即时生效");
+      setStatus(aligned
+        ? "已按证件照构图自动对齐 · 可拖动微调"
+        : "抠图就绪 · 改底色、拖拽、缩放都即时生效");
     } catch (e) {
       console.error(e);
       setStatus("抠图失败：" + (e && e.message ? e.message : e), true);
