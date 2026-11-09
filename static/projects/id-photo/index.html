@@ -334,14 +334,14 @@ input[type="range"] {
     <div class="group">
       <div class="row">
         <label for="tol">边缘收紧</label>
-        <span class="val" id="tolVal">1.5 px</span>
+        <span class="val" id="tolVal">50</span>
       </div>
       <input type="range" id="tol" min="0" max="100" step="1" value="50">
       <div class="row">
-        <label for="soft">边缘羽化</label>
-        <span class="val" id="softVal">1.2 px</span>
+        <label for="soft">去污染半径</label>
+        <span class="val" id="softVal">8 px</span>
       </div>
-      <input type="range" id="soft" min="0" max="3" step="0.2" value="1.2">
+      <input type="range" id="soft" min="1" max="10" step="1" value="8">
     </div>
 
     <div class="group">
@@ -361,8 +361,9 @@ input[type="range"] {
     <p class="status" id="status" role="status" aria-live="polite"></p>
 
     <p class="note">
-      人像分割在浏览器本地跑（MediaPipe 自托管模型，首次约 6MB，之后走缓存），照片不出机器。
-      「边缘偏移」往左收紧、往右放宽；头发边缘不干净时先把羽化拉大再微调偏移。
+      抠图用 MODNet（端到端 alpha matting）在浏览器本地跑：模型 6.6MB + 推理引擎 11MB，
+      首次打开要点下载时间，之后走浏览器缓存，照片不出机器。「边缘收紧」往右去掉边缘残留的原背景色，
+      「去污染半径」控制边缘取色的范围，一般不用动。
       导出的是 300dpi 的 JPG，含真实 DPI 元数据，冲印店按 33×48mm 输出即为大一寸。
     </p>
 
@@ -470,119 +471,64 @@ input[type="range"] {
     return dst;
   }
 
-  /* 腐蚀二值 mask r 像素（4 邻域 min 迭代） */
-  function erodeMask(mask, W, H, r) {
-    var cur = mask, it, x, y, p, v;
-    for (it = 0; it < r; it++) {
-      var next = new Float32Array(W * H);
-      for (y = 0; y < H; y++) {
-        for (x = 0; x < W; x++) {
-          p = y * W + x;
-          v = cur[p];
-          if (x > 0 && cur[p - 1] < v) v = cur[p - 1];
-          if (x < W - 1 && cur[p + 1] < v) v = cur[p + 1];
-          if (y > 0 && cur[p - W] < v) v = cur[p - W];
-          if (y < H - 1 && cur[p + W] < v) v = cur[p + W];
-          next[p] = v;
+  /* alpha 对比拉伸：压掉模型在低值区的一片灰雾 */
+  function stretchAlpha(raw, lo, range) {
+    var out = new Float32Array(raw.length);
+    for (var i = 0; i < raw.length; i++) {
+      var v = (raw[i] - lo) / range;
+      out[i] = v <= 0 ? 0 : v >= 1 ? 1 : v;
+    }
+    return out;
+  }
+
+  /* 由 alpha 生成「已去污染」的前景 RGBA。
+     边缘像素是 C = a*F + (1-a)*B 的混合，直接拿原图混合会留下原背景彩边。
+     做法：只保留 a >= solid 的实心像素、其余置 0，按预乘 alpha 模糊，
+     结果即 sum(RGB*a)/sum(a) = 该处纯前景本色的加权平均。 */
+  function foregroundFromAlpha(imageData, alpha, opts) {
+    opts = opts || {};
+    var solid = opts.solid == null ? 0.9 : opts.solid;
+    var clean = opts.clean == null ? 0.98 : opts.clean;
+    var drop = opts.drop == null ? 0.004 : opts.drop;
+    var radius = opts.radius == null ? 4 : opts.radius;
+
+    var W = imageData.width, H = imageData.height, n = W * H;
+    var src = imageData.data;
+    var pr = new Float32Array(n), pg = new Float32Array(n),
+        pb = new Float32Array(n), pa = new Float32Array(n);
+    var i, p, solidV;
+    for (i = 0, p = 0; i < n; i++, p += 4) {
+      solidV = alpha[i] >= solid ? 1 : 0;
+      pa[i] = solidV;
+      pr[i] = src[p] * solidV;
+      pg[i] = src[p + 1] * solidV;
+      pb[i] = src[p + 2] * solidV;
+    }
+    var br = blurMask(pr, W, H, radius);
+    var bg = blurMask(pg, W, H, radius);
+    var bb = blurMask(pb, W, H, radius);
+    var ba = blurMask(pa, W, H, radius);
+
+    var out = new Uint8ClampedArray(n * 4);
+    for (i = 0, p = 0; i < n; i++, p += 4) {
+      var a = alpha[i];
+      if (a >= clean) {
+        out[p] = src[p]; out[p + 1] = src[p + 1]; out[p + 2] = src[p + 2];
+      } else if (a > drop) {
+        if (ba[i] > 1e-6) {
+          out[p] = br[i] / ba[i];
+          out[p + 1] = bg[i] / ba[i];
+          out[p + 2] = bb[i] / ba[i];
+        } else {
+          out[p] = src[p]; out[p + 1] = src[p + 1]; out[p + 2] = src[p + 2];
         }
+      } else {
+        a = 0;
+        out[p] = out[p + 1] = out[p + 2] = 0;
       }
-      cur = next;
+      out[p + 3] = (a * 255 + 0.5) | 0;
     }
-    return cur;
-  }
-
-  /* 引导滤波：用原图的边缘给 mask 塑形，得到贴合头发/衣服的软 alpha。
-     p 是粗 mask（0..1），I 取原图灰度。eps 越小越贴原图边缘 */
-  function guidedFilter(p, imageData, W, H, r, eps) {
-    var N = W * H, i, d = imageData.data;
-    var I = new Float32Array(N);
-    for (i = 0; i < N; i++) {
-      I[i] = (0.299 * d[i * 4] + 0.587 * d[i * 4 + 1] + 0.114 * d[i * 4 + 2]) / 255;
-    }
-    var meanI = blurMask(I, W, H, r);
-    var meanP = blurMask(p, W, H, r);
-    var II = new Float32Array(N), IP = new Float32Array(N);
-    for (i = 0; i < N; i++) { II[i] = I[i] * I[i]; IP[i] = I[i] * p[i]; }
-    var meanII = blurMask(II, W, H, r);
-    var meanIP = blurMask(IP, W, H, r);
-
-    var a = new Float32Array(N), b = new Float32Array(N);
-    for (i = 0; i < N; i++) {
-      var varI = meanII[i] - meanI[i] * meanI[i];
-      var cov = meanIP[i] - meanI[i] * meanP[i];
-      a[i] = cov / (varI + eps);
-      b[i] = meanP[i] - a[i] * meanI[i];
-    }
-    var meanA = blurMask(a, W, H, r);
-    var meanB = blurMask(b, W, H, r);
-    var q = new Float32Array(N);
-    for (i = 0; i < N; i++) q[i] = meanA[i] * I[i] + meanB[i];
-    return q;
-  }
-
-  /* 人像模型的二值 mask → 前景 alpha（0..1）。
-     shrink 先把边界向内收（躲开混了背景色的边缘像素），feather 再羽化 */
-  function maskAlpha(maskData, imageData, W, H, shrink, feather, aa) {
-    var N = W * H, p;
-    var raw = new Float32Array(N);
-    for (p = 0; p < N; p++) raw[p] = maskData.data[p * 4] / 255;
-    var e = shrink > 0 ? erodeMask(raw, W, H, Math.round(shrink)) : raw;
-
-    /* 先用小半径模糊得到过渡带，再用引导滤波把边缘吸到原图的纹理上 */
-    var soft = blurMask(e, W, H, Math.max(1.5, feather * 0.6));
-    var r = Math.max(3, Math.round(feather * 2.5));
-    var q = guidedFilter(soft, imageData, W, H, r, 0.0006);
-
-    var out = new Float32Array(N);
-    for (p = 0; p < N; p++) {
-      var t = (q[p] - 0.46) / 0.22;
-      out[p] = t < 0 ? 0 : t > 1 ? 1 : t;
-    }
-    /* 抗锯齿：过渡带按「输出像素」给够，否则 390px 上一律是硬阶梯 */
-    return blurMask(out, W, H, Math.max(1, aa || 1));
-  }
-
-  /* 估原背景色：alpha 近似 0 的像素的中位数，用于边缘去污染 */
-  function estimateBackgroundColor(imageData, alpha) {
-    var d = imageData.data, N = alpha.length, p;
-    var rs = [], gs = [], bs = [];
-    var step = Math.max(1, Math.floor(N / 20000));
-    for (p = 0; p < N; p += step) {
-      if (alpha[p] > 0.02) continue;
-      rs.push(d[p * 4]); gs.push(d[p * 4 + 1]); bs.push(d[p * 4 + 2]);
-    }
-    if (!rs.length) return null;
-    var mid = function (arr) { arr.sort(function (a, b) { return a - b; }); return arr[arr.length >> 1]; };
-    return [mid(rs), mid(gs), mid(bs)];
-  }
-
-  /* 边缘去污染：C = a*F + (1-a)*B 反解出 F，消掉背景色光晕 */
-  function decontaminate(imageData, alpha, bgColor) {
-    if (!bgColor) return imageData;
-    var d = imageData.data, N = alpha.length, p;
-    for (p = 0; p < N; p++) {
-      var a = alpha[p];
-      if (a <= 0.03 || a >= 0.97) continue;
-      var o = p * 4, inv = 1 - a;
-      for (var c = 0; c < 3; c++) {
-        var v = (d[o + c] - inv * bgColor[c]) / a;
-        d[o + c] = v < 0 ? 0 : v > 255 ? 255 : v;
-      }
-    }
-    return imageData;
-  }
-
-  /* 把前景按 alpha 合成到纯色背景，就地改 imageData */
-  function compositeOnAlpha(imageData, alpha, color) {
-    var d = imageData.data, N = alpha.length;
-    for (var p = 0, o = 0; p < N; p++, o += 4) {
-      var a = alpha[p];
-      if (a >= 0.999) continue;
-      d[o] = d[o] * a + color[0] * (1 - a);
-      d[o + 1] = d[o + 1] * a + color[1] * (1 - a);
-      d[o + 2] = d[o + 2] * a + color[2] * (1 - a);
-    }
-    return imageData;
+    return { data: out, width: W, height: H };
   }
 
   /* 把前景画到纯色背景上，就地改 imageData */
@@ -646,12 +592,8 @@ input[type="range"] {
     sampleBackground: sampleBackground,
     backgroundMask: backgroundMask,
     blurMask: blurMask,
-    maskAlpha: maskAlpha,
-    guidedFilter: guidedFilter,
-    erodeMask: erodeMask,
-    estimateBackgroundColor: estimateBackgroundColor,
-    decontaminate: decontaminate,
-    compositeOnAlpha: compositeOnAlpha,
+    stretchAlpha: stretchAlpha,
+    foregroundFromAlpha: foregroundFromAlpha,
     compositeOnColor: compositeOnColor,
     hexToRgb: hexToRgb,
     patchJpegDpi: patchJpegDpi
@@ -693,7 +635,7 @@ input[type="range"] {
     scale: 1, minScale: 1, maxScale: 4,
     ox: 0, oy: 0,
     bgMode: "#ffffff",
-    tol: 50, soft: 1.2,
+    tol: 50, soft: 8,
     guide: true
   };
 
@@ -763,7 +705,7 @@ input[type="range"] {
     resizeCanvas();
     setStatus("原图 " + S.iw + "×" + S.ih + " · 铺满画框后可拖动缩放");
     if (S.bgMode !== "original" && !segBroken) {
-      setTimeout(function () { loadSegmenter().catch(function () {}); }, 600);
+      setTimeout(function () { loadModel().catch(function () {}); }, 600);
     }
   }
 
@@ -898,16 +840,14 @@ input[type="range"] {
     tolVal.textContent = fmtOffset(S.tol);
   });
 
-  function fmtOffset(v) { return (v / 100 * 3).toFixed(1) + " px"; }
+  function fmtOffset(v) { return String(Math.round(v)); }
 
-  /* 滑块 0..100 → 边界内收 0..3 px */
-  function modelShrink() { return (S.tol / 100) * 3; }
-  /* 回退算法：内收越多等价于颜色容差越大 */
+  /* 回退算法：滑块越大容差越小 */
   function fallbackTolerance() { return 140 - (S.tol / 100) * 120; }
 
   softEl.addEventListener("input", function () {
     S.soft = Number(softEl.value);
-    softVal.textContent = S.soft.toFixed(1) + " px";
+    softVal.textContent = Math.round(S.soft) + " px";
   });
 
   document.getElementById("reset").addEventListener("click", function () {
@@ -935,60 +875,93 @@ input[type="range"] {
     });
   });
 
-  /* ---------- 人像分割模型（懒加载，自托管） ---------- */
+  /* ---------- 人像抠图：MODNet (q8) + onnxruntime-web，全部自托管 ---------- */
 
-  var segModel = null, segReady = null, segPending = null, segBroken = false;
+  var ortReady = null, sess = null, segBroken = false;
 
-  function loadSegmenter() {
-    if (segReady) return segReady;
-    segReady = new Promise(function (resolve, reject) {
+  function loadScript(src) {
+    return new Promise(function (resolve, reject) {
       var el = document.createElement("script");
-      el.src = "vendor/selfie/selfie_segmentation.js";
+      el.src = src;
       el.async = true;
-      el.onload = function () {
-        try {
-          var ss = new SelfieSegmentation({ locateFile: function (f) { return "vendor/selfie/" + f; } });
-          ss.setOptions({ modelSelection: 0 });
-          ss.onResults(function (r) {
-            if (segPending) { var fn = segPending; segPending = null; fn(r); }
-          });
-          segModel = ss;
-          resolve(ss);
-        } catch (e) {
-          reject(e);
-        }
-      };
-      el.onerror = function () { reject(new Error("模型脚本加载失败")); };
+      el.onload = resolve;
+      el.onerror = function () { reject(new Error("加载失败：" + src)); };
       document.head.appendChild(el);
     });
-    return segReady;
   }
 
-  async function modelAlpha(canvasEl, imageData, W, H) {
-    setStatus(segModel ? "识别人像…" : "加载人像模型（首次约 6MB）…");
-    await loadSegmenter();
-    var r = await new Promise(function (resolve, reject) {
-      var timer = setTimeout(function () {
-        segPending = null;
-        reject(new Error("模型推理超时"));
-      }, 20000);
-      segPending = function (res) { clearTimeout(timer); resolve(res); };
-      var p = segModel.send({ image: canvasEl });
-      if (p && p.catch) {
-        p.catch(function (e) { clearTimeout(timer); segPending = null; reject(e); });
-      }
+  function loadModel() {
+    if (ortReady) return ortReady;
+    ortReady = (async function () {
+      setStatus("加载推理引擎…");
+      await loadScript("vendor/ort/ort.wasm.min.js");
+      /* wasm 必须指向本站，否则 ORT 会去 jsDelivr 拉 22MB 的 asyncify 版本 */
+      ort.env.wasm.wasmPaths = new URL("vendor/ort/", location.href).href;
+      ort.env.wasm.numThreads = 1;
+      setStatus("加载抠图模型（首次约 18MB，之后走缓存）…");
+      sess = await ort.InferenceSession.create("vendor/modnet/modnet-q8.onnx", {
+        executionProviders: ["wasm"],
+        graphOptimizationLevel: "all"
+      });
+      return sess;
+    })();
+    ortReady.catch(function () { ortReady = null; });
+    return ortReady;
+  }
+
+  /* 把工作画布缩到 512×512 喂给 MODNet，返回 0..1 的 alpha（工作尺寸） */
+  async function buildAlpha(workCanvas, W, H) {
+    await loadModel();
+    setStatus("识别人像…");
+
+    var N = 512;
+    var small = document.createElement("canvas");
+    small.width = N; small.height = N;
+    var sctx = small.getContext("2d", { willReadFrequently: true });
+    sctx.imageSmoothingQuality = "high";
+    sctx.drawImage(workCanvas, 0, 0, N, N);
+    var px = sctx.getImageData(0, 0, N, N).data;
+
+    var feed = new Float32Array(3 * N * N);
+    for (var i = 0, p = 0; i < N * N; i++, p += 4) {
+      feed[i] = (px[p] / 255 - 0.5) / 0.5;
+      feed[N * N + i] = (px[p + 1] / 255 - 0.5) / 0.5;
+      feed[2 * N * N + i] = (px[p + 2] / 255 - 0.5) / 0.5;
+    }
+
+    var res = await sess.run({
+      [sess.inputNames[0]]: new ort.Tensor("float32", feed, [1, 3, N, N])
     });
-    var m = r.segmentationMask;
-    var mc = document.createElement("canvas");
-    mc.width = W; mc.height = H;
-    var mctx = mc.getContext("2d", { willReadFrequently: true });
-    mctx.drawImage(m, 0, 0, W, H);
-    var md = mctx.getImageData(0, 0, W, H);
-    setStatus("细化边缘…");
-    return IdPhoto.maskAlpha(md, imageData, W, H,
-      modelShrink() * (W / OW),
-      Math.max(1, S.soft * (W / OW)),
-      Math.max(1, Math.round(W / OW) * 1.2));
+    var raw = res[sess.outputNames[0]].data;
+
+    /* 写回灰度画布再放大，交给浏览器做双线性插值 */
+    var ac = document.createElement("canvas");
+    ac.width = N; ac.height = N;
+    var actx = ac.getContext("2d", { willReadFrequently: true });
+    var id = actx.createImageData(N, N);
+    var lo = 0.02 + (S.tol / 100) * 0.26, range = 0.85;
+    for (var j = 0; j < N * N; j++) {
+      var v = (raw[j] - lo) / range;
+      v = v <= 0 ? 0 : v >= 1 ? 1 : v;
+      var b = Math.round(v * 255);
+      id.data[j * 4] = id.data[j * 4 + 1] = id.data[j * 4 + 2] = b;
+      id.data[j * 4 + 3] = 255;
+    }
+    actx.putImageData(id, 0, 0);
+
+    var up = document.createElement("canvas");
+    up.width = W; up.height = H;
+    var uctx = up.getContext("2d", { willReadFrequently: true });
+    uctx.imageSmoothingQuality = "high";
+    uctx.drawImage(ac, 0, 0, W, H);
+    var ad = uctx.getImageData(0, 0, W, H).data;
+
+    var alpha = new Float32Array(W * H);
+    for (var k = 0, q = 0; k < alpha.length; k++, q += 4) {
+      var t = (ad[q] / 255 - lo) / range;
+      alpha[k] = t <= 0 ? 0 : t >= 1 ? 1 : t;
+    }
+    return alpha;
   }
 
   /* ---------- 导出 ---------- */
@@ -1054,29 +1027,35 @@ input[type="range"] {
 
       if (!segBroken) {
         try {
-          alpha = await modelAlpha(work, id, WW, WH);
+          alpha = await buildAlpha(work, WW, WH);
         } catch (e) {
           segBroken = true;
-          console.warn("人像模型不可用，回退色差抠图：", e);
+          console.warn("MODNet 不可用，回退色差抠图：", e);
         }
       }
 
       if (!alpha) {
         how = "fallback";
         var mask = IdPhoto.backgroundMask(id, fallbackTolerance());
-        var blurred = IdPhoto.blurMask(mask, WW, WH, S.soft * k);
+        var blurred = IdPhoto.blurMask(mask, WW, WH, Math.max(1, S.soft * k));
         alpha = new Float32Array(WW * WH);
         for (var p = 0; p < alpha.length; p++) alpha[p] = 1 - blurred[p];
       }
 
       setStatus("合成中…");
-      var oldBg = IdPhoto.estimateBackgroundColor(id, alpha);
-      IdPhoto.decontaminate(id, alpha, oldBg);
-      IdPhoto.compositeOnAlpha(id, alpha, IdPhoto.hexToRgb(S.bgMode));
+      var fg = IdPhoto.foregroundFromAlpha(id, alpha, {
+        radius: Math.max(2, Math.round(S.soft * k))
+      });
 
       var out = document.createElement("canvas");
       out.width = WW; out.height = WH;
-      out.getContext("2d").putImageData(id, 0, 0);
+      var octx = out.getContext("2d");
+      octx.fillStyle = S.bgMode;
+      octx.fillRect(0, 0, WW, WH);
+      var fgc = document.createElement("canvas");
+      fgc.width = WW; fgc.height = WH;
+      fgc.getContext("2d").putImageData(new ImageData(fg.data, WW, WH), 0, 0);
+      octx.drawImage(fgc, 0, 0);
       source = out;
       window.__lastCutMethod = how;
     }
