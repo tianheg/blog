@@ -391,6 +391,7 @@
     background: var(--card);
   }
   .codecs-wrap .codecs { border: 0; min-width: 400px; }
+  .codecs-wrap .codecs.dpc { min-width: 0; }
   .codecs.gpu { min-width: 720px; }
   .codecs.gpu td { white-space: nowrap; }
   .codecs.gpu td:first-child { white-space: normal; }
@@ -476,14 +477,43 @@
     <p>只有<strong>视频转码</strong>时才需要它。局域网用 App 直接播放时服务器不转码，显卡全程闲着；触发转码的情况是浏览器播放、老设备不支持 HEVC、外网带宽不够要降码率、PGS 字幕烧录。加装后支持 AV1 编解码。同价位与更高价位的其他候选、以及本板带不动哪些卡，见下一节对照表。</p>
   </div>
   <div class="opt">
-    <h3>加第二条 32G 内存</h3>
-    <p>单条 32G 起步，加第二条就升双通道（64G），加到四条是四通道满载（128G）。四通道板的最优是每通道一条或每通道两条。</p>
+    <h3>加第二、第三、第四条 32G 内存</h3>
+    <p>单条 32G 起步，加第二条升双通道（64G），加到四条是四通道 <strong>1DPC 满载（128G），频率满速 2400</strong>。再往上加到 8 条是 256G，但变成 2DPC，频率自动降一档——见下一节的表。</p>
   </div>
   <div class="opt">
     <h3>硬盘扩到 4 块</h3>
     <p>规划上限 4 盘位，主板的 10 个 SATA 现在只用掉 1 个。SETA D1 有 6 个通用盘位加 4 个 5.25 英寸位（可转硬盘或加热插拔抽取盒），不需要加 HBA 卡。</p>
   </div>
 </div>
+
+<div class="sect"><h2>内存插法与频率 · 1DPC / 2DPC</h2><div class="rule"></div></div>
+<div class="codecs-wrap">
+<table class="codecs dpc">
+  <thead>
+    <tr><th>插法</th><th class="c">条数</th><th class="c">E5 v4</th><th class="c">E5 v3</th><th>容量 / 结果</th></tr>
+  </thead>
+  <tbody>
+    <tr><td><b>1DPC</b></td><td class="c">4</td><td class="c yes">2400</td><td class="c">2133</td><td><b>满速</b> · 128G</td></tr>
+    <tr><td><b>2DPC</b></td><td class="c">8</td><td class="c">2133</td><td class="c">1866</td><td>降一档 · 256G</td></tr>
+    <tr><td>不对称</td><td class="c">5–7</td><td class="c no">2133</td><td class="c no">1866</td><td class="dim">按最低档跑</td></tr>
+  </tbody>
+</table>
+</div>
+<p class="codecs-note">
+  <strong>DPC = DIMM Per Channel，每通道插几条。</strong>这块板 8 个槽分成 4 个通道（每通道 A/B 两条），所以每通道最多 2 条——<strong>2DPC 就是它的天花板</strong>，不存在 3DPC 的降频档。
+  表里的数字取自超微 X10SRA 手册的内存表，条件是 <code>RDIMM 2Rx4 32GB</code>（即 DRx4，8Gb 颗粒）。
+</p>
+<p class="codecs-note">
+  <strong>为什么会降频</strong>：每通道挂的条数越多，内存控制器的负载电容越大，信号完整性变差，只能降频保稳。这是 Intel 内存控制器的硬限制，不是主板供电问题，换更好的电源或散热都没用。
+  从 2400 降到 2133 大约是 <strong>11% 带宽损失</strong>，四条 DDR4-2400 四通道是 76.8 GB/s，八条 2DPC 跑 2133 是 68.3 GB/s。
+</p>
+<p class="codecs-note">
+  <strong>三条铁律</strong>：① 全系统同频——任一通道被迫 2DPC，或任何一条速率/型号不同，全体按最低那档跑；② 插 6 条这种不对称配置不划算，容量多一半、频率却一样掉；③ 插槽顺序是每个通道的<strong>蓝色槽先</strong>（DIMM_A1 → B1 → C1 → D1），再插黑色槽（A2 → B2 → C2 → D2）。
+</p>
+<p class="codecs-note">
+  <strong>怎么选</strong>：NAS 文件服务的瓶颈是千兆网（125 MB/s），2133 和 2400 完全看不出差别，<strong>容量优先，直接上 8 条 256G</strong>。只有跑 TB 级模型推理或大规模编译、吃内存带宽时才值得为 1DPC 砍掉一半容量。
+  想 8 条同时满 2400 只有一条路：换 <code>LRDIMM</code>（QRx4），它在 2DPC 不掉频——但 LRDIMM 二手价高、货源少，这条板子上限 512G～1TB，Ultra 级价位。
+</p>
 
 <div class="sect"><h2>加装 A380 后的硬解能力</h2><div class="rule"></div></div>
 <div class="codecs-wrap">
@@ -663,7 +693,7 @@
         ["类型", "RDIMM"],
         ["频率", "2400 MT/s"],
         ["通道", "单通道（1 条）"],
-        ["扩容", "加到 2/4 条升双/四通道"],
+        ["满速插法", "4 条（1DPC）"],
         ["ECC", "支持"],
         ["频率上限", "2400（CPU 原生）"]
       ],
@@ -673,6 +703,7 @@
         "为什么强调 <strong>REG</strong>：DDR4 有两种 ECC，ECC UDIMM（无缓冲，C246/AM4 用）和 REG ECC RDIMM（带寄存器，X99/EPYC 用），电气不兼容。停产之后 ECC UDIMM 存量少、价格被推得很高，而 REG ECC 因为服务器拆机量大反而便宜。",
         "四通道板的最优插法是<strong>每通道一条（4 条）</strong>或每通道两条（8 条）。插 6 条这种配置容量上去了，但有两个通道被迫 2DPC，而 Intel 内存控制器要求全通道同频——整个系统会按最保守的档位降频。",
         "<strong>Rank 数也影响频率</strong>：Quad Rank（4DRx4）的条子在 2DPC 时通常要降到 1866 或 2133。如果买到 4R 型号，只插四条（1DPC）才能跑满 2400。",
+        "<strong>1DPC 与 2DPC 的量化差别见下方《内存插法与频率》表</strong>：4 条跑满 2400（76.8 GB/s），8 条降到 2133（68.3 GB/s），带宽差约 11%。NAS 场景察觉不到，直接按容量堆。",
         "E5 v4 的原生上限是 DDR4-2400。买 2666 或 3200 的条子会降频运行，没必要多花钱。",
         "<strong>也不要买 2133 的。</strong>便宜一点，但整机会按 2133 跑——E5 v4 支持 2400，两者价差不大时没有理由主动降频。理想是四条同型号 DDR4-2400 2Rx4，1DPC 满速。",
         "单条起步的现实取舍：带宽掉到 1/4，但 NAS 的 SMB 传输上限是千兆网（125 MB/s），单通道绰绰有余；PVE 跑几个容器和 VM 也是容量优先于带宽。<strong>等开始跑 Immich 或 Jellyfin 多容器时再加第二条</strong>，那时自动升双通道。",
