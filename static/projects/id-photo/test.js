@@ -35,6 +35,14 @@ console.log("\n[规格]");
 eq("33mm @300dpi = 390px", IP.mmToPx(33, 300), 390);
 eq("48mm @300dpi = 567px", IP.mmToPx(48, 300), 567);
 eq("SIZES.big1.px", IP.SIZES.big1.px, [390, 567]);
+// 权威像素表（300dpi），mm 换算必须逐项对上，抄错一个数用户拿去冲印就是废片
+const AUTH = {
+  small1: [260, 378], one: [295, 413], big1: [390, 567], small2: [413, 531], two: [413, 579]
+};
+IP.SIZE_ORDER.forEach(id => {
+  eq(id + " 像素", IP.SIZES[id].px, AUTH[id]);
+});
+eq("规格数量", IP.SIZE_ORDER.length, 5);
 
 console.log("\n[背景采样 + 抠图]");
 // 合成一张 200x280 的图：浅灰背景 rgb(238,238,235)，中间一个深色竖椭圆当人

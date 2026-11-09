@@ -4,8 +4,8 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width,initial-scale=1">
-<title>证件照 · 大一寸</title>
-<meta name="description" content="在浏览器里裁出大一寸证件照：33×48mm、390×567 像素、300dpi，可换白蓝红底，导出 JPG。照片不上传。">
+<title>证件照生成 · 一寸 / 二寸</title>
+<meta name="description" content="在浏览器里做证件照：一寸/大一寸/二寸等五种规格，AI 抠图换白蓝红底，导出 300dpi 的 JPG。照片不上传。">
 <meta name="color-scheme" content="light dark">
 <style>
 @font-face {
@@ -82,7 +82,7 @@ h1 {
 @media (max-width: 760px) {
   .wrap { grid-template-columns: minmax(0, 1fr); }
   /* 手机上预览矮一点，让控件更早进首屏 */
-  .frame { width: min(100%, calc(min(52vh, 430px) * 390 / 567)); }
+  .frame { width: min(100%, calc(min(52vh, 430px) * var(--ar-num, 0.688))); }
 }
 
 /* ---------- 预览 ---------- */
@@ -91,8 +91,8 @@ h1 {
 
 .frame {
   position: relative;
-  width: min(100%, calc(min(74vh, 720px) * 390 / 567));
-  aspect-ratio: 390 / 567;
+  width: min(100%, calc(min(74vh, 720px) * var(--ar-num, 0.688)));
+  aspect-ratio: var(--ar, 390 / 567);
   border-radius: var(--radius);
   overflow: hidden;
   border: 1px solid var(--border);
@@ -214,6 +214,35 @@ h1 {
 
 .swatches { display: grid; grid-template-columns: repeat(5, 1fr); gap: 6px; }
 
+.sizes { display: grid; grid-template-columns: repeat(3, 1fr); gap: 6px; }
+
+.sizes button {
+  appearance: none;
+  min-height: 2.25rem;
+  padding: 4px 2px;
+  border-radius: var(--radius-sm);
+  border: 1px solid var(--border);
+  background: var(--surface);
+  color: var(--text);
+  font: inherit;
+  font-size: 0.78rem;
+  line-height: 1.25;
+  cursor: pointer;
+  display: grid;
+  gap: 1px;
+  place-items: center;
+  transition: background .15s, border-color .15s;
+}
+
+.sizes button small { font-size: 0.62rem; color: var(--muted); font-variant-numeric: tabular-nums; }
+.sizes button:hover { border-color: var(--accent); }
+.sizes button[aria-pressed="true"] {
+  border-color: var(--accent);
+  background: var(--accent);
+  color: light-dark(#fff, #0b1116);
+}
+.sizes button[aria-pressed="true"] small { color: inherit; opacity: .8; }
+
 .sw {
   appearance: none;
   aspect-ratio: 1;
@@ -295,11 +324,11 @@ input[type="range"] {
   <div class="stage">
     <div class="frame empty" id="frame">
       <canvas id="preview" width="390" height="567"></canvas>
-      <svg class="guide" viewBox="0 0 390 567" aria-hidden="true">
-        <line x1="0" y1="51" x2="390" y2="51"></line>
-        <line x1="0" y1="425" x2="390" y2="425"></line>
-        <ellipse cx="195" cy="238" rx="132" ry="187"></ellipse>
-        <line class="mid" x1="195" y1="0" x2="195" y2="567"></line>
+      <svg class="guide" id="guide" viewBox="0 0 390 567" aria-hidden="true">
+        <line id="g-top" x1="0" y1="51" x2="390" y2="51"></line>
+        <line id="g-chin" x1="0" y1="425" x2="390" y2="425"></line>
+        <ellipse id="g-head" cx="195" cy="238" rx="132" ry="187"></ellipse>
+        <line class="mid" id="g-mid" x1="195" y1="0" x2="195" y2="567"></line>
       </svg>
       <label class="drop" id="drop" for="file">
         <span class="inner">
@@ -319,6 +348,11 @@ input[type="range"] {
   <div class="panel">
 
     <input type="file" id="file" accept="image/*" hidden>
+
+    <div class="group">
+      <span class="label">规格</span>
+      <div class="sizes" id="sizes" role="group" aria-label="证件照规格"></div>
+    </div>
 
     <div class="group">
       <span class="label">背景</span>
@@ -378,11 +412,24 @@ input[type="range"] {
 (function (root) {
   "use strict";
 
-  var SIZES = {
-    big1: { id: "big1", label: "大一寸", mm: [33, 48], px: [390, 567], dpi: 300 }
-  };
-
   function mmToPx(mm, dpi) { return Math.round(mm / 25.4 * dpi); }
+
+  /* 国内常用规格。px 一律由 mm 换算，别手抄 —— 抄错一个数用户拿去冲印就是废片 */
+  var SIZE_DEFS = [
+    { id: "small1", label: "小一寸", mm: [22, 32], note: "驾驶证" },
+    { id: "one",    label: "一寸",   mm: [25, 35], note: "教师/医保" },
+    { id: "big1",   label: "大一寸", mm: [33, 48], note: "护照/四六级" },
+    { id: "small2", label: "小二寸", mm: [35, 45], note: "公务员" },
+    { id: "two",    label: "二寸",   mm: [35, 49], note: "简历/资格证" }
+  ];
+  var SIZES = {};
+  SIZE_DEFS.forEach(function (d) {
+    SIZES[d.id] = {
+      id: d.id, label: d.label, note: d.note, mm: d.mm, dpi: 300,
+      px: [mmToPx(d.mm[0], 300), mmToPx(d.mm[1], 300)]
+    };
+  });
+  var SIZE_ORDER = SIZE_DEFS.map(function (d) { return d.id; });
 
   /* 从边缘采样主背景色（量化直方图取众数桶的均值） */
   function sampleBackground(data, W, H) {
@@ -622,6 +669,7 @@ input[type="range"] {
 
   var api = {
     SIZES: SIZES,
+    SIZE_ORDER: SIZE_ORDER,
     mmToPx: mmToPx,
     sampleBackground: sampleBackground,
     backgroundMask: backgroundMask,
@@ -646,8 +694,11 @@ input[type="range"] {
 (function () {
   "use strict";
 
-  var SPEC = IdPhoto.SIZES.big1;
-  var OW = SPEC.px[0], OH = SPEC.px[1], ODPI = SPEC.dpi;
+  var SIZES = IdPhoto.SIZES, SIZE_ORDER = IdPhoto.SIZE_ORDER;
+  var specId = "big1";
+  var OW = SIZES[specId].px[0], OH = SIZES[specId].px[1], ODPI = SIZES[specId].dpi;
+  var titleEl = document.querySelector("h1");
+  var specEl = document.querySelector(".spec");
 
   var frame = document.getElementById("frame");
   var drop = document.getElementById("drop");
@@ -664,6 +715,7 @@ input[type="range"] {
   var softVal = document.getElementById("softVal");
   var guideSvg = frame.querySelector(".guide");
   var hintEl = document.getElementById("hint");
+  var sizesEl = document.getElementById("sizes");
 
   var S = {
     bmp: null, iw: 0, ih: 0,
@@ -674,6 +726,60 @@ input[type="range"] {
     guide: true,
     aligned: false
   };
+
+  /* ---- 规格切换 ---- */
+
+  function fmtSpec(d) {
+    return d.mm[0] + " × " + d.mm[1] + " mm · " + d.px[0] + " × " + d.px[1] + " px · " + d.dpi + " dpi · JPG";
+  }
+
+  function paintGuide() {
+    var svg = document.getElementById("guide");
+    svg.setAttribute("viewBox", "0 0 " + OW + " " + OH);
+    var topY = OH * 0.09, chinY = OH * 0.75;
+    var cy = (topY + chinY) / 2, ry = (chinY - topY) / 2;
+    var set = function (id, attrs) {
+      var el = document.getElementById(id);
+      Object.keys(attrs).forEach(function (k) { el.setAttribute(k, attrs[k]); });
+    };
+    set("g-top", { x1: 0, y1: topY.toFixed(1), x2: OW, y2: topY.toFixed(1) });
+    set("g-chin", { x1: 0, y1: chinY.toFixed(1), x2: OW, y2: chinY.toFixed(1) });
+    set("g-head", { cx: (OW / 2).toFixed(1), cy: cy.toFixed(1), rx: (ry * 0.72).toFixed(1), ry: ry.toFixed(1) });
+    set("g-mid", { x1: (OW / 2).toFixed(1), y1: 0, x2: (OW / 2).toFixed(1), y2: OH });
+  }
+
+  function setSize(id) {
+    if (!SIZES[id] || id === specId) return;
+    specId = id;
+    var d = SIZES[id];
+    OW = d.px[0]; OH = d.px[1]; ODPI = d.dpi;
+
+    frame.style.setProperty("--ar", OW + " / " + OH);
+    frame.style.setProperty("--ar-num", (OW / OH).toFixed(4));
+    titleEl.textContent = "证件照 · " + d.label;
+    specEl.textContent = fmtSpec(d);
+    paintGuide();
+
+    Array.prototype.forEach.call(sizesEl.children, function (b) {
+      b.setAttribute("aria-pressed", String(b.dataset.id === id));
+    });
+
+    if (S.bmp) {
+      if (lastBox && applyHeadBox(lastBox)) {
+        /* 构图按新规格重算 */
+      } else {
+        S.minScale = minScaleFor();
+        S.maxScale = Math.max(S.minScale * 3, S.minScale + 1);
+        S.scale = S.minScale;
+        S.ox = (OW - S.iw * S.scale) / 2;
+        S.oy = (OH - S.ih * S.scale) / 2;
+        clampOffsets();
+        syncZoomSlider();
+      }
+    }
+    resizeCanvas();
+    setStatus(d.label + " · " + d.px[0] + "×" + d.px[1] + " · " + d.dpi + "dpi");
+  }
 
   var pointers = new Map();
   var pinchStart = null;
@@ -935,6 +1041,21 @@ input[type="range"] {
     ev.currentTarget.textContent = S.guide ? "隐藏参考线" : "显示参考线";
   });
 
+  /* ---- 规格按钮 ---- */
+  SIZE_ORDER.forEach(function (id) {
+    var d = SIZES[id];
+    var b = document.createElement("button");
+    b.type = "button";
+    b.dataset.id = id;
+    b.setAttribute("aria-pressed", String(id === specId));
+    b.innerHTML = "<span>" + d.label + "</span><small>" + d.mm[0] + "×" + d.mm[1] + "</small>";
+    sizesEl.appendChild(b);
+  });
+  sizesEl.addEventListener("click", function (ev) {
+    var b = ev.target.closest("button");
+    if (b) setSize(b.dataset.id);
+  });
+
   var swatches = document.getElementById("swatches");
   swatches.addEventListener("click", function (ev) {
     var btn = ev.target.closest(".sw");
@@ -1152,7 +1273,8 @@ input[type="range"] {
       var url = URL.createObjectURL(blob);
       var a = document.createElement("a");
       a.href = url;
-      a.download = "大一寸-33x48mm-" + OW + "x" + OH + ".jpg";
+      var sd = SIZES[specId];
+      a.download = sd.label + "-" + sd.mm[0] + "x" + sd.mm[1] + "mm-" + OW + "x" + OH + ".jpg";
       document.body.appendChild(a);
       a.click();
       document.body.removeChild(a);
@@ -1213,8 +1335,12 @@ input[type="range"] {
   window.addEventListener("orientationchange", function () {
     setTimeout(resizeCanvas, 120);
   });
+  frame.style.setProperty("--ar", OW + " / " + OH);
+  frame.style.setProperty("--ar-num", (OW / OH).toFixed(4));
+  titleEl.textContent = "证件照 · " + SIZES[specId].label;
+  specEl.textContent = fmtSpec(SIZES[specId]);
+  paintGuide();
   resizeCanvas();
-  hintEl.textContent = "拖拽调整位置，滚轮或双指缩放。虚线是头部参考位置，可关。";
 })();
 </script>
 
