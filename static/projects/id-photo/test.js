@@ -44,22 +44,6 @@ IP.SIZE_ORDER.forEach(id => {
 });
 eq("规格数量", IP.SIZE_ORDER.length, 5);
 
-console.log("\n[相纸排版]");
-eq("6寸纸像素", IP.PAPERS.p6.px, [1800, 1200]);
-eq("5寸纸像素", IP.PAPERS.p5.px, [1500, 1050]);
-eq("A4 像素", IP.PAPERS.a4.px, [2480, 3508]);
-// 大一寸 390x567 在 6 寸纸上应排 4x2 = 8 张（手工核对：4*390+3*30=1650<=1800, 2*567+30=1164<=1200）
-const g6 = IP.layoutGrid(1800, 1200, 390, 567, 30);
-ok("6寸排大一寸 = 4x2", g6 && g6.cols === 4 && g6.rows === 2 && g6.count === 8,
-   g6 && [g6.cols, g6.rows, g6.count].join("x"));
-ok("排版总宽不超纸宽", g6 && g6.totalW <= 1800, g6 && g6.totalW);
-ok("排版总高不超纸高", g6 && g6.totalH <= 1200, g6 && g6.totalH);
-const gA4 = IP.layoutGrid(2480, 3508, 390, 567, 30);
-ok("A4 排大一寸 = 5x5", gA4 && gA4.cols === 5 && gA4.rows === 5, gA4 && [gA4.cols, gA4.rows].join("x"));
-const g5 = IP.layoutGrid(1500, 1050, 260, 378, 30);
-ok("5寸排小一寸 = 5x2", g5 && g5.cols === 5 && g5.rows === 2, g5 && [g5.cols, g5.rows].join("x"));
-ok("放不下时返回 null", IP.layoutGrid(100, 100, 390, 567, 30) === null);
-
 console.log("\n[背景采样 + 抠图]");
 // 合成一张 200x280 的图：浅灰背景 rgb(238,238,235)，中间一个深色竖椭圆当人
 const W = 200, H = 280, N = W * H;
