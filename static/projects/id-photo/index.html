@@ -391,6 +391,12 @@ input[type="range"] {
       <button class="btn small" id="toggleGuide">隐藏参考线</button>
     </div>
 
+    <div class="group">
+      <span class="label">相纸排版</span>
+      <div class="sizes" id="papers" role="group" aria-label="相纸尺寸"></div>
+      <button class="btn small" id="exportLayout" disabled>导出排版图</button>
+    </div>
+
     <button class="btn primary" id="export" disabled>导出 JPG</button>
     <p class="status" id="status" role="status" aria-live="polite"></p>
 
@@ -430,6 +436,25 @@ input[type="range"] {
     };
   });
   var SIZE_ORDER = SIZE_DEFS.map(function (d) { return d.id; });
+
+  /* 相纸尺寸（300dpi 下的像素）。5/6 寸是英寸定义，A4 是毫米定义 */
+  var PAPERS = {
+    p5: { id: "p5", label: "5寸", px: [1500, 1050] },
+    p6: { id: "p6", label: "6寸", px: [1800, 1200] },
+    a4: { id: "a4", label: "A4", px: [mmToPx(210, 300), mmToPx(297, 300)] }
+  };
+
+  /* N 张需要 N*w + (N-1)*gap <= P，反解得 N <= (P+gap)/(w+gap) */
+  function layoutGrid(paperW, paperH, photoW, photoH, gap) {
+    var cols = Math.floor((paperW + gap) / (photoW + gap));
+    var rows = Math.floor((paperH + gap) / (photoH + gap));
+    if (cols < 1 || rows < 1) return null;
+    return {
+      cols: cols, rows: rows, count: cols * rows, gap: gap,
+      totalW: cols * photoW + (cols - 1) * gap,
+      totalH: rows * photoH + (rows - 1) * gap
+    };
+  }
 
   /* 从边缘采样主背景色（量化直方图取众数桶的均值） */
   function sampleBackground(data, W, H) {
@@ -670,6 +695,8 @@ input[type="range"] {
   var api = {
     SIZES: SIZES,
     SIZE_ORDER: SIZE_ORDER,
+    PAPERS: PAPERS,
+    layoutGrid: layoutGrid,
     mmToPx: mmToPx,
     sampleBackground: sampleBackground,
     backgroundMask: backgroundMask,
@@ -716,6 +743,11 @@ input[type="range"] {
   var guideSvg = frame.querySelector(".guide");
   var hintEl = document.getElementById("hint");
   var sizesEl = document.getElementById("sizes");
+  var papersEl = document.getElementById("papers");
+  var exportLayoutBtn = document.getElementById("exportLayout");
+  var PAPERS = IdPhoto.PAPERS;
+  var paperId = "p6";
+  var GAP = 30;              /* 照片间距 2.5mm @300dpi，留出裁剪余量 */
 
   var S = {
     bmp: null, iw: 0, ih: 0,
@@ -778,6 +810,7 @@ input[type="range"] {
       }
     }
     resizeCanvas();
+    updateLayoutHint();
     setStatus(d.label + " · " + d.px[0] + "×" + d.px[1] + " · " + d.dpi + "dpi");
   }
 
@@ -871,6 +904,8 @@ input[type="range"] {
     frame.classList.remove("empty");
     drop.style.display = "none";
     exportBtn.disabled = false;
+    exportLayoutBtn.disabled = false;
+    updateLayoutHint();
     zoomEl.max = "100";
     syncZoomSlider();
     resizeCanvas();
@@ -1055,6 +1090,32 @@ input[type="range"] {
     var b = ev.target.closest("button");
     if (b) setSize(b.dataset.id);
   });
+
+  /* ---- 相纸按钮 ---- */
+  Object.keys(PAPERS).forEach(function (id) {
+    var d = PAPERS[id];
+    var b = document.createElement("button");
+    b.type = "button";
+    b.dataset.id = id;
+    b.setAttribute("aria-pressed", String(id === paperId));
+    b.innerHTML = "<span>" + d.label + "</span>";
+    papersEl.appendChild(b);
+  });
+  papersEl.addEventListener("click", function (ev) {
+    var b = ev.target.closest("button");
+    if (!b || b.dataset.id === paperId) return;
+    paperId = b.dataset.id;
+    Array.prototype.forEach.call(papersEl.children, function (x) {
+      x.setAttribute("aria-pressed", String(x.dataset.id === paperId));
+    });
+    updateLayoutHint();
+  });
+
+  function updateLayoutHint() {
+    var g = IdPhoto.layoutGrid(PAPERS[paperId].px[0], PAPERS[paperId].px[1], OW, OH, GAP);
+    exportLayoutBtn.textContent = g ? "导出排版图（" + g.count + " 张）" : "这张纸放不下该规格";
+    exportLayoutBtn.disabled = !g || !S.bmp;
+  }
 
   var swatches = document.getElementById("swatches");
   swatches.addEventListener("click", function (ev) {
@@ -1262,6 +1323,36 @@ input[type="range"] {
     return bytes < 1024 ? bytes + " B" : (bytes / 1024).toFixed(0) + " KB";
   }
 
+  function saveBlob(blob, name) {
+    var url = URL.createObjectURL(blob);
+    var a = document.createElement("a");
+    a.href = url;
+    a.download = name;
+    document.body.appendChild(a);
+    a.click();
+    document.body.removeChild(a);
+    setTimeout(function () { URL.revokeObjectURL(url); }, 60000);
+  }
+
+  exportLayoutBtn.addEventListener("click", async function () {
+    if (!S.bmp) return;
+    exportLayoutBtn.disabled = true;
+    setStatus("排版中…");
+    await new Promise(function (r) { setTimeout(r, 20); });
+    try {
+      var res = await renderLayout();
+      var sd = SIZES[specId], pd = PAPERS[paperId];
+      saveBlob(res.blob, "排版-" + pd.label + "-" + sd.label + "-" + res.grid.count + "张.jpg");
+      setStatus("已导出排版图 · " + pd.label + "纸 " + res.grid.count + " 张 · " +
+        res.grid.cols + "×" + res.grid.rows + " · " + fmtKB(res.blob.size));
+    } catch (e) {
+      console.error(e);
+      setStatus("排版失败：" + (e && e.message ? e.message : e), true);
+    } finally {
+      exportLayoutBtn.disabled = false;
+    }
+  });
+
   exportBtn.addEventListener("click", async function () {
     if (!S.bmp) return;
     exportBtn.disabled = true;
@@ -1288,6 +1379,66 @@ input[type="range"] {
       exportBtn.disabled = false;
     }
   });
+
+  async function renderLayout() {
+    var paper = PAPERS[paperId];
+    var PW = paper.px[0], PH = paper.px[1];
+    var g = IdPhoto.layoutGrid(PW, PH, OW, OH, GAP);
+    if (!g) throw new Error("这张相纸放不下当前规格");
+    if (S.bgMode !== "original" && !fgCanvas) await runMatte();
+    var src = (S.bgMode === "original") ? S.bmp : fgCanvas;
+    if (!src) throw new Error("抠图未完成");
+
+    var cv = document.createElement("canvas");
+    cv.width = PW; cv.height = PH;
+    var c = cv.getContext("2d");
+    c.imageSmoothingQuality = "high";
+    c.fillStyle = "#ffffff";
+    c.fillRect(0, 0, PW, PH);
+
+    var ox = Math.round((PW - g.totalW) / 2);
+    var oy = Math.round((PH - g.totalH) / 2);
+    var sx = -S.ox / S.scale, sy = -S.oy / S.scale;
+    var sw = OW / S.scale, sh = OH / S.scale;
+
+    for (var r = 0; r < g.rows; r++) {
+      for (var col = 0; col < g.cols; col++) {
+        var x = ox + col * (OW + GAP);
+        var y = oy + r * (OH + GAP);
+        if (S.bgMode !== "original") {
+          c.fillStyle = S.bgMode;
+          c.fillRect(x, y, OW, OH);
+        }
+        c.drawImage(src, sx, sy, sw, sh, x, y, OW, OH);
+      }
+    }
+
+    /* 裁切线：画在照片之间的空隙正中 */
+    c.save();
+    c.strokeStyle = "rgba(0,0,0,0.32)";
+    c.lineWidth = 1;
+    c.setLineDash([7, 7]);
+    var y0 = oy - GAP / 2, y1 = oy + g.totalH + GAP / 2;
+    var x0 = ox - GAP / 2, x1 = ox + g.totalW + GAP / 2;
+    for (var i = 1; i < g.cols; i++) {
+      var lx = ox + i * (OW + GAP) - GAP / 2;
+      c.beginPath(); c.moveTo(lx, y0); c.lineTo(lx, y1); c.stroke();
+    }
+    for (var j = 1; j < g.rows; j++) {
+      var ly = oy + j * (OH + GAP) - GAP / 2;
+      c.beginPath(); c.moveTo(x0, ly); c.lineTo(x1, ly); c.stroke();
+    }
+    c.restore();
+
+    var raw = await new Promise(function (resolve, reject) {
+      cv.toBlob(function (b) {
+        if (b) resolve(b); else reject(new Error("浏览器没能生成 JPG"));
+      }, "image/jpeg", 0.93);
+    });
+    var buf = await raw.arrayBuffer();
+    var patched = IdPhoto.patchJpegDpi(buf, ODPI);
+    return { blob: new Blob([patched], { type: "image/jpeg" }), grid: g };
+  }
 
   async function renderJpeg() {
     var final = document.createElement("canvas");
@@ -1340,6 +1491,7 @@ input[type="range"] {
   titleEl.textContent = "证件照 · " + SIZES[specId].label;
   specEl.textContent = fmtSpec(SIZES[specId]);
   paintGuide();
+  updateLayoutHint();
   resizeCanvas();
 })();
 </script>
