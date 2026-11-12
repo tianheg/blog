@@ -854,7 +854,13 @@ stroke-linecap=\"round\" stroke-linejoin=\"round\" aria-hidden=\"true\">\
 (defun org2site-post-augment (p body)
   "文章页补两处（原站有、我们原来没有）：h1 下方的日期条 + 尾部的分割线/标签/评论区。"
   (let* ((day (org2site--day (nth 2 p)))
-         (meta (if (string-match-p "\\`[0-9]\\{4\\}-[0-9]\\{2\\}-[0-9]\\{2\\}\\'" day)
+         ;; org2site--day 用 "0000-01-01" 当哨兵（排序落尾、归档归「无日期」组），
+         ;; 那是内部约定，不该出现在页面上 —— 它匹配 YYYY-MM-DD 正则，会渲染成
+         ;; 「01 Jan, 0000」。没有真实日期的页面（start/feeds/projects 这类静态页）
+         ;; 直接不输出日期条。
+         (has-date (and (string-match-p "\\`[0-9]\\{4\\}-[0-9]\\{2\\}-[0-9]\\{2\\}\\'" day)
+                        (not (string= day "0000-01-01"))))
+         (meta (if has-date
                    (format "<div class=\"post-meta\"><time datetime=\"%s\">%s</time></div>\n"
                            day (org2site-long-date day))
                  ""))
