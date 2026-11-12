@@ -610,6 +610,18 @@ main p a:hover, main li a:hover, main blockquote a:hover, main td a:hover, main 
   text-decoration-color: var(--accent);
   text-decoration-thickness: 2px;
 }
+
+/* 老页面（>1 年未更新）的外链被冻成不可点文本：保留锚文本保证可读，
+   用虚线下划线暗示「这里原本是链接」，读者不会误以为正文缺了东西。
+   下划线参数与正文链接一致（thickness/offset 同 source），只换成虚线 + 弱色。 */
+.ext-frozen {
+  color: inherit;
+  text-decoration: underline dashed;
+  text-decoration-thickness: 1px;
+  text-underline-offset: 0.06em;
+  text-decoration-color: color-mix(in oklab, var(--meta) 60%, transparent);
+  cursor: text;
+}
 }
 
 @layer pages {

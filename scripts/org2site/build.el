@@ -851,6 +851,63 @@ stroke-linecap=\"round\" stroke-linejoin=\"round\" aria-hidden=\"true\">\
           (org2site--mailto-reply-html (nth 1 p))
           "</section>\n"))
 
+;; ---------------------------------------------------------------- 老页面外链冻结
+;; 需求（2026-11-11）：超过一年没更新的 posts 与所有根页/静态页，正文里的外链一律
+;; 转成不可点的文本 —— 老文章里的站点十年后多半已经变质或易主，读者不该被带进去。
+;;
+;; 判定用 #+DATE 而不是 git 最后提交时间：这个仓库的 org/posts 是整批迁入的，
+;; 968 个文件里 git log --name-only -- org/posts 只认得出 34 个的提交记录
+;; （历史被打包进了少数几次提交，--no-merges / -m 都救不回来），按 git 算几乎
+;; 所有文件都会 fallback 回 #+DATE，等于绕一大圈回到同一个答案。
+;; #+DATE 的语义也正好是「这篇内容是什么时候写的」。
+
+(defun org2site--stale-cutoff ()
+  "一年前的日期字符串（YYYY-MM-DD）。"
+  (format-time-string "%Y-%m-%d"
+                      (time-subtract (current-time) (days-to-time 365))))
+
+(defun org2site-page-stale-p (p)
+  "页面是否超过一年没更新。
+posts：看 #+DATE；没有日期的算老。
+其他页面（根页/静态页）没有「更新」这个概念，一律算老。"
+  (let ((section (nth 3 p))
+        (date (nth 2 p)))
+    (if (string= section "posts")
+        (let ((day (org2site--day date)))
+          (or (string= day "0000-01-01")
+              (string< day (org2site--stale-cutoff))))
+      t)))
+
+(defun org2site--internal-url-p (url)
+  "是否本站链接（相对路径或 tianheg.co 域下）。"
+  (or (not (string-match-p "\\`https?://" url))
+      (string-match-p "\\`https?://\\([a-z0-9-]+\\.\\)*tianheg\\.co\\([:/?#]\\|\\'\\)" url)))
+
+(defun org2site-freeze-external-links (html)
+  "把外链的 <a> 换成不可点的 <span class=\"ext-frozen\">，保留锚文本与内部标记。
+只处理 <a> 标签本身（<a> 不嵌套，所以下一个 </a> 就是它的闭合），
+正文里的 <code>/<strong> 等原样留在 span 内。"
+  (with-temp-buffer
+    (insert html)
+    (goto-char (point-min))
+    (while (re-search-forward "<a\\s-+[^>]*\\bhref=\"\\(https?://[^\"]+\\)\"[^>]*>" nil t)
+      (let ((url (match-string-no-properties 1))
+            (beg (copy-marker (match-beginning 0)))
+            (end (copy-marker (match-end 0))))
+        (unless (org2site--internal-url-p url)
+          (save-excursion
+            (goto-char end)
+            (when (search-forward "</a>" nil t)
+              (let ((label (buffer-substring-no-properties end (match-beginning 0)))
+                    (close-end (copy-marker (match-end 0))))
+                (delete-region beg close-end)
+                (goto-char beg)
+                (insert (format "<span class=\"ext-frozen\">%s</span>" label))
+                (set-marker close-end nil)))))
+        (set-marker beg nil)
+        (set-marker end nil)))
+    (buffer-string)))
+
 (defun org2site-post-augment (p body)
   "文章页补两处（原站有、我们原来没有）：h1 下方的日期条 + 尾部的分割线/标签/评论区。"
   (let* ((day (org2site--day (nth 2 p)))
@@ -962,8 +1019,12 @@ stroke-linecap=\"round\" stroke-linejoin=\"round\" aria-hidden=\"true\">\
                    (body (concat body (if (org2site-source-link-page-p p)
                                           (org2site-source-link-html url)
                                         "")))
-                   ;; 文章页补日期条 + 尾部标签/评论
-                   (body (org2site-post-augment p body)))
+                   ;; 文章页补日期条 + 尾部标签/评论。
+                   ;; 一年没更新过（按 git 最后提交）的页面，先把正文外链冻成不可点文本。
+                   (body (org2site-post-augment
+                          p (if (org2site-page-stale-p p)
+                                (org2site-freeze-external-links body)
+                              body))))
               (org2site-write out-root url
                               (org2site-page title body))
               ;; 纯文本源文：/posts/foo/ → /posts/foo.org（Content-Type 见 static/_headers）。
