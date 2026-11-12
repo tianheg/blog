@@ -622,6 +622,18 @@ main p a:hover, main li a:hover, main blockquote a:hover, main td a:hover, main 
   text-decoration-color: color-mix(in oklab, var(--meta) 60%, transparent);
   cursor: text;
 }
+
+/* 冻结链接旁边补的原始 URL：读者要能手动选中复制、自己粘到地址栏。
+   user-select:all 让单击一次就整条选中（长 URL 不必拖选）。
+   括号写在 HTML 里而不是 ::before/::after —— 伪元素内容选不中，复制会丢。 */
+.ext-frozen-url {
+  margin-left: 0.35em;
+  font-size: 0.84em;
+  color: var(--meta);
+  word-break: break-all;
+  user-select: all;
+  -webkit-user-select: all;
+}
 }
 
 @layer pages {

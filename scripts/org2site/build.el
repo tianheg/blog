@@ -884,28 +884,27 @@ posts：看 #+DATE；没有日期的算老。
       (string-match-p "\\`https?://\\([a-z0-9-]+\\.\\)*tianheg\\.co\\([:/?#]\\|\\'\\)" url)))
 
 (defun org2site-freeze-external-links (html)
-  "把外链的 <a> 换成不可点的 <span class=\"ext-frozen\">，保留锚文本与内部标记。
-只处理 <a> 标签本身（<a> 不嵌套，所以下一个 </a> 就是它的闭合），
-正文里的 <code>/<strong> 等原样留在 span 内。"
+  "把外链的 <a> 换成不可点的 <span class=\"ext-frozen\">，并在后面补一个可复制的 URL。
+一次正则吃掉整个 <a ...>内容</a>。label 只允许纯文本（不含任何标签）：
+  - 分两步（先找开标签、再找 </a>）遇到不闭合的 <a> 会删过头，把 h1 一起吃掉；
+  - 放行 `[^>]+` 这种任意标签，会跨过 </a> 一路吃到下一个段落。
+两种都实测把正文吞掉过。含 <code> 锚文本的链接这里直接跳过 —— 宁可漏冻一条，
+不能错吃正文；那些条目仍保留原样可点的 <a>。"
   (with-temp-buffer
     (insert html)
     (goto-char (point-min))
-    (while (re-search-forward "<a\\s-+[^>]*\\bhref=\"\\(https?://[^\"]+\\)\"[^>]*>" nil t)
+    (while (re-search-forward
+            "<a\\s-+[^>]*\\bhref=\"\\(https?://[^\"]+\\)\"[^>]*>\\([^<]*\\)</a>"
+            nil t)
       (let ((url (match-string-no-properties 1))
-            (beg (copy-marker (match-beginning 0)))
-            (end (copy-marker (match-end 0))))
+            (label (match-string-no-properties 2)))
         (unless (org2site--internal-url-p url)
-          (save-excursion
-            (goto-char end)
-            (when (search-forward "</a>" nil t)
-              (let ((label (buffer-substring-no-properties end (match-beginning 0)))
-                    (close-end (copy-marker (match-end 0))))
-                (delete-region beg close-end)
-                (goto-char beg)
-                (insert (format "<span class=\"ext-frozen\">%s</span>" label))
-                (set-marker close-end nil)))))
-        (set-marker beg nil)
-        (set-marker end nil)))
+          (let ((suffix (if (string-match-p "\\`https?://" (string-trim label))
+                            ""
+                          (format "<span class=\"ext-frozen-url\">%s</span>"
+                                  (replace-regexp-in-string "&" "&amp;" url)))))
+            (replace-match (concat "<span class=\"ext-frozen\">" label "</span>" suffix)
+                           t t)))))
     (buffer-string)))
 
 (defun org2site-post-augment (p body)
