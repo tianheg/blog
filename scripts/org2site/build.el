@@ -907,6 +907,14 @@ posts：看 #+DATE；没有日期的算老。
                            t t)))))
     (buffer-string)))
 
+(defvar org2site--org-root nil
+  "当前构建的 org 根目录 —— post-augment 读页面头部关键字（#+NOCOMMENTS）要用。")
+
+(defun org2site--page-kw (p key)
+  "读页面 p 头部 #+KEY 的值（p 的 rel 是 nth 4）。"
+  (when (and org2site--org-root (nth 4 p))
+    (org2site--kw (expand-file-name (nth 4 p) org2site--org-root) key)))
+
 (defun org2site-post-augment (p body)
   "文章页补两处（原站有、我们原来没有）：h1 下方的日期条 + 尾部的分割线/标签/评论区。"
   (let* ((day (org2site--day (nth 2 p)))
@@ -920,16 +928,18 @@ posts：看 #+DATE；没有日期的算老。
                    (format "<div class=\"post-meta\"><time datetime=\"%s\">%s</time></div>\n"
                            day (org2site-long-date day))
                  ""))
-         (tags (nth 5 p)))
+         (tags (nth 5 p))
+         ;; 功能性页面可以 #+NOCOMMENTS: t 关掉尾部评论区（连同那条分隔线）。
+         (no-comments (equal "t" (org2site--page-kw p "NOCOMMENTS"))))
     (concat (if (string-match "\\`<h1[^>]*>[^<]*</h1>\n" body)
                 (concat (match-string 0 body) meta (substring body (match-end 0)))
               (concat meta body))
-            "<hr class=\"post-rule\">\n"
+            (unless no-comments "<hr class=\"post-rule\">\n")
             (if tags
                 (format "<footer class=\"post-tags\"><div>%s</div></footer>\n"
                         (org2site-tag-links-html tags))
               "")
-            (org2site--comments-html p))))
+            (if no-comments "" (org2site--comments-html p)))))
 
 (defun org2site--report-bad-slugs (pages)
   "文件名规范检查：一律小写英文 slug，中文名请翻译成英文（用户定的规则）。
@@ -949,6 +959,7 @@ posts：看 #+DATE；没有日期的算老。
 (defun org2site-build (org-root out-root)
   (let* ((pages (org2site-scan org-root))
          (ok 0) (fail 0) (errs nil) (rss-items nil))
+    (setq org2site--org-root org-root)
     (org2site--report-bad-slugs pages)
     ;; wikilink 解析表：必须在导出任何一篇之前建好（export.el 里按它把 [[slug]] 还原成真链接）
     (setq org2site-url-map (org2site--build-url-map pages))
