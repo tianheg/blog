@@ -5,7 +5,7 @@
 | 依赖 | 版本 | 来源 | 谁提供 |
 |---|---|---|---|
 | emacs | 31.1 | GNU 官方**源码**（官方只发源码，没有 Linux 二进制） | 本仓库构建后发布到 R2 |
-| org-mode | 9.8.10 | GNU ELPA 官方 tarball | 官方直取（`packages/org-9.8.10.tar`） |
+| org-mode | 9.8.13 | 上游 `release_9.8.13` tag（ELPA 只留当前版本，旧 tar 会 404） | 本仓库打包后发布到 R2 |
 
 ## 为什么 emacs 要自己构建
 
@@ -87,8 +87,12 @@ ELPA 只保留当前版本：`org-9.8.10.tar` 在 2026-11-27 已 404（页面只
 
 所以 org 跟 emacs 一样自托管。**升级 org 时**：
 
-1. 先拿到新版本源码（ELPA tar 还活着就直接下，否则用本地已解包的缓存目录）；
-2. 在缓存根目录重打包（**去掉 `.elc`**，`ensure_org` 之后会自己字节编译）：
+1. 先拿到新版本源码。三条路按可用性选：
+   - ELPA 当前版 tar 还活着（`packages/org-<VER>.tar`）且下得动 —— 直接用，最省事
+     （**实测 elpa.gnu.org 从 homelab 只有 ~11 KB/s**，10MB 要十几分钟，别指望它）；
+   - 本地 `~/.cache/org2site/org-<VER>/` 已解包 —— 直接重打包（见下）；
+   - 都没有 —— 从上游 tag 重组（见本节末「从 tag 重组」）。
+2. 重打包（**去掉 `.elc`**，`ensure_org` 之后会自己字节编译）：
 
 ```bash
 cd ~/.cache/org2site
@@ -104,10 +108,36 @@ rclone copyto --s3-no-check-bucket /tmp/org-<VER>.tar s3:blog-build-deps/org/org
 curl -sL "https://pub-d12ed328a9ee45b9ad7336cb78330e98.r2.dev/org/org-<VER>.tar" | sha256sum
 ```
 
-4. 更新 `build.sh` 的 `ORG_VERSION` / `ORG_SHA256`（URL 由版本号拼出来，一般不用动）；
+4. 更新 `build.sh` 的 `ORG_VERSION` / `ORG_SHA256`（URL 由版本号拼出来，一般不用动），
+   同步 `README.org` 的环境要求表与本文档顶部那张表 —— 三处一起改，别只改一处；
 5. **跨环境对比**：换一个空的 `ORG2SITE_CACHE` 跑全量构建（可先 `cp -al` 一份 emacs-31.1
-   跳过 215MB 下载），与旧缓存的产物 `diff -rq` —— 预期只有 `index.xml` 的 `lastBuildDate`
-   不同。只验「构建成功」不算验过，org 换版本会改变 EXAMPLE 块等输出。
+   跳过 215MB 下载），与旧缓存的产物 `diff -rq`。只验「构建成功」不算验过。
+   判据分两层：
+   - **`*.html` 必须 0 差异** —— 那是「站点有没有变」的唯一标准（9.8.10→9.8.13 实测 0 个 HTML 变化）；
+   - `index.xml` 只允许 `lastBuildDate` 不同；
+   - `pagefind/**` 的分片文件名会变，**这是正常现象**：pagefind 的分片按目录遍历顺序切，
+     两次构建落盘顺序不同就会换名。所以对比时要 `grep -v /pagefind/` 再看剩余差异。
+
+### 从 tag 重组（ELPA 下不动的时候）
+
+ELPA 慢或 tar 已被删时，用上游 tag 自己拼一个 ELPA 等价物（2026-11-28 实测走通）：
+
+```bash
+V=9.8.13
+curl -sL -o om.tar.gz "https://codeload.github.com/bzg/org-mode/tar.gz/refs/tags/release_$V"  # ~1.7 MB/s
+tar -xzf om.tar.gz                                     # 得到 org-mode-release_$V/
+mkdir -p stage/org-$V
+cp org-mode-release_$V/lisp/*.el stage/org-$V/          # ELPA 的 tar 是拍平的
+cp org-mode-release_$V/COPYING stage/org-$V/
+# 三个生成物要自己补（ELPA 的 tar 里有，changelog 里查不到就得手写/生成）：
+#   org-loaddefs.el —— emacs --batch 调 (loaddefs-generate "stage/org-$V" "stage/org-$V/org-loaddefs.el")
+#   org-version.el  —— 抄旧版模板，改 version 与 "<VER>-<sha 前 7 位>"
+#   org-pkg.el      —— 同上，改 version 与 :commit
+cd stage && tar -cf /tmp/org-$V.tar org-$V
+```
+
+**这台机器上没有 `make`**（PVE 宿主是极简安装），所以 `make autoloads` 这条路走不了，
+上面的 `loaddefs-generate` 是等价替代。
 
 rclone 的 S3 后端用现成的 `R2_ACCESS_KEY_ID` / `R2_SECRET_ACCESS_KEY` / `R2_ACCOUNT_ID`
 （实测对 `blog-build-deps` 有列与写权限；本文档早先写的「只授权 hermes-agent」已过期）。

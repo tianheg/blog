@@ -4,7 +4,7 @@
 个人博客站点 - [[https://tianheg.co/][tianheg.co]]
 
 #+begin_quote
-*2026-10-18：已换成 org + Emacs 管线，Hugo 下线。* 构建 =bash scripts/org2site/build.sh [输出目录]= 四步：预检（=node scripts/check.mjs unicode=）→ emacs 导出 → PageFind 索引 → =verify.py= 体检；emacs 31.1 / org 9.8.10 与 PageFind 由 build.sh 自装（都带 sha256 校验），只有预检那一步需要 node。部署仍是 push → CF Workers Builds。
+*2026-10-18：已换成 org + Emacs 管线，Hugo 下线。* 构建 =bash scripts/org2site/build.sh [输出目录]= 四步：预检（=node scripts/check.mjs unicode=）→ emacs 导出 → PageFind 索引 → =verify.py= 体检；emacs 31.1 / org 9.8.13 与 PageFind 由 build.sh 自装（都带 sha256 校验），只有预检那一步需要 node。部署仍是 push → CF Workers Builds。
 
 Hugo 时代的模板 / 配色 / 字号旧记录 / 链路悬浮预览 / 站点变更记录已移到 =docs/HISTORY.org=；管线的完整知识（含坑清单与验收方法）在技能 =blog-org2site=。
 #+end_quote
@@ -61,7 +61,7 @@ blog/
 | 依赖     | 版本              | 说明                                                                                                    |
 |----------+-------------------+---------------------------------------------------------------------------------------------------------|
 | Emacs    | 31.1              | =build.sh= 从 R2 下载本仓库自建的 tarball（源为 GNU 官方源码，pin sha256）解到 =~/.cache/org2site/= |
-| org-mode | 9.8.10            | 本仓库打包发布到 R2（*不从 ELPA 直取*：它只留当前版本，旧 tar 会 404），靠 =-L= 覆盖 emacs 自带的 9.8.7 |
+| org-mode | 9.8.13            | 本仓库打包发布到 R2（*不从 ELPA 直取*：它只留当前版本，旧 tar 会 404），靠 =-L= 覆盖 emacs 自带的 9.8.7 |
 | PageFind | 1.6.0（extended） | =build.sh= 下载 + 校验 sha256 后缓存；中文分词只在 extended 版里                                          |
 
 *首次克隆后什么都不用装*，直接跑构建即可（预检与语义索引这两步要用 node，其余步骤不需要）。

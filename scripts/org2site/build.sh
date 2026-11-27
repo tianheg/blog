@@ -20,7 +20,7 @@
 #     与 9.7+ 的 EXAMPLE 块 HTML 输出不同 → 版本必须钉住。官方只发源码（没有 Linux
 #     二进制），所以由本仓库构建成 tarball 发布到 R2，构建时匿名下载；
 #     重做/换版本的方法见 scripts/org2site/README-build-deps.md。
-#   - org 9.8.10：GNU ELPA 官方 tarball，靠 -L 覆盖 emacs 自带的 9.8.7。
+#   - org 9.8.13：本仓库打包发布到 R2（源为上游 release tag），靠 -L 覆盖 emacs 自带的 9.8.7。
 #   - pagefind_extended：Rust 单二进制，pin 版本 + sha256 校验后缓存
 #     （中文分词只在 extended 版里）。
 #   - 不引入 conda / micromamba / nix —— 用户明确不要额外依赖管理器。
@@ -44,10 +44,10 @@ EMACS_SHA256="4150945a24fab5ee7249bf376a6a4dd85f676f2217946bccfc293ed2afb6ea20"
 # ~/.cache/org2site/org-9.8.10/ 已解包，永远命不中这条路 —— 站点静默停在旧版。
 # 改为与 emacs 同一套：由本仓库把该版本源码打包发布到 R2，构建时匿名下载。
 # 打包与上传步骤见 scripts/org2site/README-build-deps.md。
-ORG_VERSION=9.8.10
+ORG_VERSION=9.8.13
 ORG_TARBALL="org-${ORG_VERSION}.tar"
 ORG_URL=${ORG2SITE_ORG_URL:-"https://pub-d12ed328a9ee45b9ad7336cb78330e98.r2.dev/org/${ORG_TARBALL}"}
-ORG_SHA256="8c05ec8b8f4f4b1d81bd1dd58e329b3400df32e76d5092cf30f619a302fb182f"
+ORG_SHA256="5801f7786e6364a88d9f927532fad4fefd8a5aa394dd3f3a88729055659fdc5e"
 
 REPO=$(cd "$(dirname "${BASH_SOURCE[0]}")/../.." && pwd)
 OUT=${1:-"$REPO/public"}
