@@ -112,6 +112,29 @@ curl -sL "https://pub-d12ed328a9ee45b9ad7336cb78330e98.r2.dev/org/org-<VER>.tar"
 rclone 的 S3 后端用现成的 `R2_ACCESS_KEY_ID` / `R2_SECRET_ACCESS_KEY` / `R2_ACCOUNT_ID`
 （实测对 `blog-build-deps` 有列与写权限；本文档早先写的「只授权 hermes-agent」已过期）。
 
+### 想要某个具体版本的源码，从哪取
+
+按可用性排序（都在 2026-11-27 实测过）：
+
+1. **GNU ELPA 当前版**：`https://elpa.gnu.org/packages/org-<VER>.tar`。**只有当前版本**，
+   下一个 patch 一发布，这个 tar 立刻 404（实测 9.8.9/10/11/12 全 404，只有 9.8.13 活着）。
+   所以它只能用来「拿最新」，不能钉版本。
+2. **savannah 官方 git 的 release tag**（版本本身永不消失）：
+   `git clone --depth 1 -b release_9.8.10 https://git.savannah.gnu.org/git/emacs/org-mode.git`
+   —— `ls-remote` 秒回，但完整浅克隆在 homelab 这条链路上要 **3 分 13 秒**（2.4MB pack），
+   超时设短了会白跑。
+3. **GitHub 镜像的 tag**：`https://codeload.github.com/bzg/org-mode/tar.gz/refs/tags/release_9.8.10`
+   → 200，2.45MB，快；内容同上，备选。
+4. ~~cgit snapshot~~：`.../cgit/emacs/org-mode.git/snapshot/...` 从 homelab **不通**（000 / 502）。
+
+两个从 git 重打包时要注意的点：
+
+- ELPA 的 tar 是**拍平**的（`lisp/*.el` 在顶层），仓里是 `lisp/` 子目录 —— 打成扁的，或者
+  解包后加 `-L` 指向 `lisp/`，`ensure_org` 按扁的写。
+- ELPA 的 tar 里多三个**生成物**：`org-loaddefs.el`、`org-pkg.el`、`org-version.el`。从 git
+  重打包要么先 `make autoloads`，要么明确接受缺它们（`org.el` 仍能加载，但 `org-version` 会退回）。
+  实测其余 **127 个 `.el` 与 tag `release_9.8.10` 逐字节相同** —— 所以「ELPA tar 与上游 tag 同源」是成立的。
+
 ## 踩过的坑
 
 - **`make-string` + `aset` 拼排序键**：`(make-string n ?a)` 会得到 unibyte 串，往里 `aset` 私用区码位在
