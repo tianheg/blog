@@ -1012,6 +1012,12 @@ posts：看 #+DATE；没有日期的算老。
         (condition-case err
             (let* ((file (expand-file-name rel org-root))
                    (body (org2site-export-string file rel))
+                   ;; meta description：优先页面头部的 #+DESCRIPTION:，否则取正文纯文本前 160 字。
+                   ;; 必须在挂反链 / 源文链接 / 日期条**之前**取 —— 否则摘要里会混进
+                   ;; 「引用这篇的」和「源文（.org）」，每篇文章的 description 都长一个样。
+                   (desc (or (let ((d (org2site--page-kw p "DESCRIPTION")))
+                               (and d (> (length d) 0) d))
+                             (org2site--plain-summary body)))
                    (body (if (org2site-toc-page-p p) (org2site-toc-insert body) body))
                    ;; 反链：引用这篇的 —— **只加在 posts 内容页**。
                    ;; 根页面（about / search / watch / links …）是站点功能性页面，底部挂一串
@@ -1035,8 +1041,11 @@ posts：看 #+DATE；没有日期的算老。
                           p (if (org2site-page-stale-p p)
                                 (org2site-freeze-external-links body)
                               body))))
-              (org2site-write out-root url
-                              (org2site-page title body))
+              (let ((org2site-page-path url)
+                    (org2site-page-description desc)
+                    (org2site-page-type (if (string= (nth 3 p) "posts") "article" "website")))
+                (org2site-write out-root url
+                                (org2site-page title body)))
               ;; 纯文本源文：/posts/foo/ → /posts/foo.org（Content-Type 见 static/_headers）。
               ;; **只给挂链接的页面写**（posts）—— 根页面不挂源文也就没镜像可写，
               ;; 否则产物里躺着一堆没人引用的孤儿 .org（用户 2026-10-24 定）。
@@ -1056,10 +1065,13 @@ posts：看 #+DATE；没有日期的算老。
            (label (or (cdr (assoc "posts" org2site-section-labels))
                       (org2site--index-title repo "posts") "Posts")))
       (when items
-        (org2site-write out-root "/posts/"
-                        (org2site-page label (org2site-archive-html label items)))))
+        (let ((org2site-page-path "/posts/")
+              (org2site-page-description "全部文章，按年份归档，含发文热力图。"))
+          (org2site-write out-root "/posts/"
+                          (org2site-page label (org2site-archive-html label items))))))
     ;; 3) 根页（footer 只有首页有，见 export.el 的 org2site-show-footer）
-    (let ((org2site-show-footer t))
+    (let ((org2site-show-footer t)
+          (org2site-page-path "/"))
       (org2site-write out-root "/"
                       (org2site-page org2site-site-title (org2site-home-html pages))))
 
@@ -1069,61 +1081,86 @@ posts：看 #+DATE；没有日期的算老。
       (dolist (p pages)  ; 用 append 保持日期降序（push 会反过来）
         (dolist (tag (nth 5 p))
           (puthash tag (append (gethash tag tm) (list p)) tm)))
-      (org2site-write out-root "/tags/" (org2site-page "Tags" (org2site-tags-index-html counts)))
+      (let ((org2site-page-path "/tags/")
+            (org2site-page-description "全部标签。"))
+        (org2site-write out-root "/tags/"
+                        (org2site-page "Tags" (org2site-tags-index-html counts))))
       (maphash
        (lambda (tag ps)
          ;; 目录名/URL 走 downcase：原站 ASCII 标签是小写 english，中文标签不变
-         (org2site-write out-root (concat "/tags/" (downcase tag) "/")
-                         (org2site-page tag (org2site-tag-page-html tag ps))))
+         (let ((org2site-page-path (concat "/tags/" (downcase tag) "/"))
+               (org2site-page-description (format "标签「%s」下的全部文章。" tag)))
+           (org2site-write out-root (concat "/tags/" (downcase tag) "/")
+                           (org2site-page tag (org2site-tag-page-html tag ps)))))
        tm))
 
     ;; 3.6) 相册：/photos/ 系列索引 + /photos/<num>/ 网格 + 灯箱
     (let* ((repo (org2site--repo-root org-root))
            (data (org2site--json-read-file (expand-file-name "data/photos.json" repo))))
       (when data
-        (org2site-write out-root "/photos/"
-                        (org2site-page "Photos" (org2site-photos-index-html data)))
+        (let ((org2site-page-path "/photos/")
+              (org2site-page-description "相册：按系列分组的照片。"))
+          (org2site-write out-root "/photos/"
+                          (org2site-page "Photos" (org2site-photos-index-html data))))
         (dolist (s (alist-get 'series data))
           (let ((photos (alist-get 'photos s))
                 (name (or (alist-get 'name s) "")))
             (when photos
-              (org2site-write
-               out-root (format "/photos/%s/" (alist-get 'num s))
-               (org2site-page name
-                              (concat (format "<h1>%s</h1>\n" (org2site-xml-escape name))
-                                      (org2site-photos-grid-html photos)
-                                      (org2site-lightbox-html)))))))))
+              (let ((org2site-page-path (format "/photos/%s/" (alist-get 'num s)))
+                    (org2site-page-description (format "相册：%s" name)))
+                (org2site-write
+                 out-root (format "/photos/%s/" (alist-get 'num s))
+                 (org2site-page name
+                                (concat (format "<h1>%s</h1>\n" (org2site-xml-escape name))
+                                        (org2site-photos-grid-html photos)
+                                        (org2site-lightbox-html))))))))))
 
     ;; 4) RSS / sitemap / 404（pages 已是日期倒序，rss-items 是 push 出来的，需 nreverse）
     (org2site-write-file out-root "index.xml"
       (org2site-rss-xml (seq-take (nreverse rss-items) org2site-rss-limit)))
     (org2site-write-file out-root "sitemap.xml" (org2site-sitemap-xml pages))
-    (org2site-write-file out-root "404.html"
-      (org2site-page "页面不存在"
-                     (concat "<div class=\"notfound\">\n"
-                             "<h1>404</h1>\n"
-                             "<p>Page not found</p>\n"
-                             "<p>The page may have been moved or deleted. Try "
-                             "<a href=\"/search\">searching</a> for what you need.</p>\n"
-                             "<a class=\"notfound-btn\" href=\"/\">Take me home</a>\n"
-                             "</div>\n")))
+    (let ((org2site-page-noindex t))
+      (org2site-write-file out-root "404.html"
+        (org2site-page "页面不存在"
+                       (concat "<div class=\"notfound\">\n"
+                               "<h1>404</h1>\n"
+                               "<p>Page not found</p>\n"
+                               "<p>The page may have been moved or deleted. Try "
+                               "<a href=\"/search\">searching</a> for what you need.</p>\n"
+                               "<a class=\"notfound-btn\" href=\"/\">Take me home</a>\n"
+                               "</div>\n"))))
 
-    ;; 0 处时静默：这行以前每次构建都打、永远是 0 处，纯噪音（2026-10-19 用户要求）
-    (let ((un (nreverse org2site-unresolved-wikilinks)))
+    ;; ── 严格模式（CI 里 ORG2SITE_STRICT=1）────────────────────────────────
+    ;; 判据与产出同源：计数就在本进程里，**退出码也在这里定**，build.sh 只信 $?。
+    ;; 不要退回「elisp 打日志 + shell grep 文案」的老写法 —— 两处副本一旦不一致，
+    ;; 闸门就静默变成装饰品（改一句措辞 = 该红的时候永远不红）。
+    ;; 拦的是两类静默降级：wikilink 未解析（链接退成纯文本）、posts 下缺 #+DATE: 的页面
+    ;; 被跳过（文章写了但不在站上、不报错）。
+    (let* ((un (nreverse org2site-unresolved-wikilinks))
+           (nodate (length org2site--no-date-files))
+           (strict (member (getenv "ORG2SITE_STRICT") '("1" "true" "yes")))
+           (strict-hit (and strict (or un (> nodate 0)))))
+      ;; 0 处时静默：这行以前每次构建都打、永远是 0 处，纯噪音（2026-10-19 用户要求）
       (when un
         (princ (format "wikilink 未解析（已退成纯文本）：%d 处；样例 %s\n"
                        (length un)
-                       (mapconcat #'identity (seq-take un 5) " | ")))))
-  (when org2site--no-date-files
-    (princ (format "WARN %d file(s) under posts/ have no usable #+DATE: -> SKIPPED (not built)\n"
-                   (length org2site--no-date-files)))
-    (dolist (ndf (nreverse org2site--no-date-files))
-      (princ (format "      %s   (DATE=%S)\n" (car ndf) (cdr ndf)))))
-    (princ (format "文章 %d 篇 OK / %d FAIL（共 %d）；index.xml / sitemap.xml / 404.html\n"
-                   ok fail (length pages)))
-    (dolist (e (seq-take (nreverse errs) 30))
-      (princ (format "  FAIL %s :: %s\n" (car e) (cdr e))))
-    (if (> fail 0) 1 0)))
+                       (mapconcat #'identity (seq-take un 5) " | "))))
+      (when org2site--no-date-files
+        (princ (format "WARN %d file(s) under posts/ have no usable #+DATE: -> SKIPPED (not built)\n"
+                       nodate))
+        (dolist (ndf (nreverse org2site--no-date-files))
+          (princ (format "      %s   (DATE=%S)\n" (car ndf) (cdr ndf)))))
+      ;; 机器可读结论行：日志里一眼看出闸门跑过没有、基线是不是 0（只在有情况时打，本地干净构建不出声）
+      (when (or strict (> (length un) 0) (> nodate 0) (> fail 0))
+        (princ (format "strict: unresolved=%d nodate=%d fail=%d enabled=%s\n"
+                       (length un) nodate fail (if strict "yes" "no"))))
+      (when strict-hit
+        (princ "严格模式：上面这些问题在 CI 里算构建失败（本地不设 ORG2SITE_STRICT 不拦）\n"))
+      (princ (format "文章 %d 篇 OK / %d FAIL（共 %d）；index.xml / sitemap.xml / 404.html\n"
+                     ok fail (length pages)))
+      (dolist (e (seq-take (nreverse errs) 30))
+        (princ (format "  FAIL %s :: %s\n" (car e) (cdr e))))
+      (if (or (> fail 0) strict-hit) 1 0))))
 
 (when (and noninteractive (>= (length command-line-args-left) 2))
   (kill-emacs (org2site-build (nth 0 command-line-args-left) (nth 1 command-line-args-left))))

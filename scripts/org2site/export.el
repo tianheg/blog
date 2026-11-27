@@ -145,9 +145,100 @@
   (concat "<main id=\"main-content\">\n<article data-pagefind-body>\n"
           body "\n</article>\n</main>\n"))
 
+(defvar org2site-site-description "Knowing oneself, grasp the world"
+  "站点级描述（与 RSS 的 <description> 同源）。
+没有 #+DESCRIPTION: 的页面、以及首页/列表页，用它兜底。")
+
+(defvar org2site-page-description nil
+  "当前页面的 meta description / og:description。
+由 build.el 在调用 `org2site-page' 前动态绑定（与 `org2site-show-footer' 同一套做法）；
+nil 或空串时回落到 `org2site-site-description'。")
+
+(defvar org2site-page-path nil
+  "当前页面的站内路径（\"/posts/foo/\"）。用来拼 canonical 与 og:url。
+nil = 不发这两个标签（404 这类没有稳定地址的页面）。")
+
+(defvar org2site-page-type "website"
+  "og:type。内容页由 build.el 绑成 \"article\"，站点级页面保持 \"website\"。")
+
+(defvar org2site-page-noindex nil
+  "非 nil 时发 <meta name=\"robots\" content=\"noindex\">，并且不发 RSS 自动发现链接。
+404 用。")
+
+(defun org2site-attr-escape (s)
+  "把 S 转义成可以安全放进 HTML 属性值的形式。"
+  (let ((s (or s "")))
+    (setq s (replace-regexp-in-string "&" "&amp;" s t t))
+    (setq s (replace-regexp-in-string "<" "&lt;" s t t))
+    (setq s (replace-regexp-in-string ">" "&gt;" s t t))
+    (replace-regexp-in-string "\"" "&quot;" s t t)))
+
+(defun org2site--plain-summary (html)
+  "从正文 HTML 取一段纯文本摘要：去标签、解实体、压空白、截到 160 字符。
+
+没有写 #+DESCRIPTION: 的文章用它当 meta description —— 比空着强，
+也避免了「每篇都要手写一句摘要」的负担。开头那行 <h1>（标题本身）先摘掉，
+否则 description 和 og:title 会重复同一句话。"
+  (let ((s (replace-regexp-in-string "\\`\\s-*<h1[^>]*>[^<]*</h1>" "" (or html ""))))
+    (setq s (replace-regexp-in-string "<[^>]*>" " " s))
+    (setq s (replace-regexp-in-string "&nbsp;" " " s t t))
+    (setq s (replace-regexp-in-string "&amp;" "&" s t t))
+    (setq s (replace-regexp-in-string "&lt;" "<" s t t))
+    (setq s (replace-regexp-in-string "&gt;" ">" s t t))
+    (setq s (replace-regexp-in-string "&quot;" "\"" s t t))
+    (setq s (replace-regexp-in-string "#[0-9]*" "" s))  ; 空锚点（#custom-id）不留痕迹
+    (setq s (string-trim (replace-regexp-in-string "[ \t\n\r]+" " " s)))
+    (if (> (length s) 160) (concat (substring s 0 160) "…") s)))
+
+(defun org2site-head-meta (title page-title)
+  "description / canonical / OpenGraph / RSS 自动发现的 <head> 片段。
+TITLE 是裸标题（不带站点后缀），给 og:title 用；PAGE-TITLE 是 <title> 里那个带后缀的。
+每行都以换行结尾，拼进 `org2site-page' 的模板里。"
+  (let* ((desc (if (and (stringp org2site-page-description)
+                        (> (length org2site-page-description) 0))
+                   org2site-page-description
+                 org2site-site-description))
+         (base (or (bound-and-true-p org2site-base-url) "https://tianheg.co"))
+         (url (when (and org2site-page-path
+                         (> (length org2site-page-path) 0))
+                (concat base org2site-page-path)))
+         (parts (list
+                 (format "<meta name=\"description\" content=\"%s\">"
+                         (org2site-attr-escape desc))
+                 (format "<meta property=\"og:type\" content=\"%s\">"
+                         (org2site-attr-escape org2site-page-type))
+                 (format "<meta property=\"og:site_name\" content=\"%s\">"
+                         (org2site-attr-escape org2site-site-title))
+                 (format "<meta property=\"og:title\" content=\"%s\">"
+                         (org2site-attr-escape title))
+                 (format "<meta property=\"og:description\" content=\"%s\">"
+                         (org2site-attr-escape desc))
+                 "<meta property=\"og:locale\" content=\"zh_CN\">"
+                 "<meta name=\"twitter:card\" content=\"summary\">")))
+    (when url
+      (setq parts (append parts
+                          (list (format "<link rel=\"canonical\" href=\"%s\">"
+                                        (org2site-attr-escape url))
+                                (format "<meta property=\"og:url\" content=\"%s\">"
+                                        (org2site-attr-escape url))))))
+    (setq parts (append parts
+                        (if org2site-page-noindex
+                            (list "<meta name=\"robots\" content=\"noindex\">")
+                          (list (format (concat "<link rel=\"alternate\" "
+                                                "type=\"application/rss+xml\" "
+                                                "title=\"%s\" href=\"/index.xml\">")
+                                        (org2site-attr-escape org2site-site-title))))))
+    (concat (mapconcat #'identity parts "\n") "\n")))
+
 (defun org2site-page (title body)
-  "完整页面：head（charset/主题预置）+ header + main + footer。"
-  (format "<!DOCTYPE html>
+  "完整页面：head（charset/主题预置/描述/OG）+ header + main + footer。
+
+`org2site-head-meta' 那一段由 `org2site-page-description' / `org2site-page-path' /
+`org2site-page-type' / `org2site-page-noindex' 四个动态变量决定，调用方按页绑定。"
+  (let ((page-title (if (string= title org2site-site-title)
+                        title
+                      (format "%s | %s" title org2site-site-title))))
+    (format "<!DOCTYPE html>
 <html lang=\"zh-CN\">
 <head>
 <meta charset=\"utf-8\">
@@ -157,7 +248,7 @@
 <meta name=\"theme-color\" content=\"#f7f5f3\" media=\"(prefers-color-scheme: light)\">
 <meta name=\"theme-color\" content=\"#121c22\" media=\"(prefers-color-scheme: dark)\">
 <title>%s</title>
-<script>%s</script>
+%s<script>%s</script>
 <link rel=\"stylesheet\" href=\"/style.css?v=%s\">
 </head>
 <body>
@@ -165,13 +256,13 @@
 %s%s%s<script src=\"/js/site.js?v=%s\" defer></script>
 </body>
 </html>
-" (if (string= title org2site-site-title) title (format "%s | %s" title org2site-site-title))
-  org2site-theme-init-js org2site-asset-version (org2site-header-html)
+" page-title (org2site-head-meta title page-title) org2site-theme-init-js org2site-asset-version
+  (org2site-header-html)
   (org2site--main-html body)
   (if org2site-show-footer
       "<footer data-site-footer>\n<p>© 2018–2026 tianhe · <a href=\"/index.xml\">RSS</a></p>\n</footer>\n"
     "")
-  org2site-asset-version))
+  org2site-asset-version)))
 
 (defun org2site-template (contents info)
   "文章页骨架：h1 = 文档标题，之后接正文。

@@ -15,14 +15,17 @@
 #   ORG2SITE_SKIP_PRECHECK=1  跳过第 0 步预检（离线排查用）
 #   ORG2SITE_CACHE            依赖缓存目录，默认 ~/.cache/org2site
 #
-# 依赖自带安装（都不需要 root；第 0 步预检需要 node，其余步骤不需要）：
-#   - emacs 30.1：CI 的 Ubuntu 24.04 镜像里没有 emacs，系统自带的是 29.3（org 9.6），
-#     而 org 9.6 与 9.7 的 EXAMPLE 块 HTML 与空白**输出不同** → 版本必须钉住。
-#     这里用 micromamba（单文件静态二进制）装 conda-forge 的 emacs=30.1
-#     —— 实测与本机 emacs 30.1 产出**逐字节一致**（1589 个文件 0 差异）。
-#   - pagefind_extended：Rust 单二进制，pin 版本 + sha256 校验后缓存。
+# 依赖自带安装（都不需要 root；第 0 步预检要 node，其余步骤不需要）：
+#   - emacs 31.1：CI 的 Ubuntu 24.04 镜像里没有 emacs，系统源那个是 29.3 / org 9.6，
+#     与 9.7+ 的 EXAMPLE 块 HTML 输出不同 → 版本必须钉住。官方只发源码（没有 Linux
+#     二进制），所以由本仓库构建成 tarball 发布到 R2，构建时匿名下载；
+#     重做/换版本的方法见 scripts/org2site/README-build-deps.md。
+#   - org 9.8.10：GNU ELPA 官方 tarball，靠 -L 覆盖 emacs 自带的 9.8.7。
+#   - pagefind_extended：Rust 单二进制，pin 版本 + sha256 校验后缓存
+#     （中文分词只在 extended 版里）。
+#   - 不引入 conda / micromamba / nix —— 用户明确不要额外依赖管理器。
 #
-# 版本只此一处 pin（沿用 scripts/build.sh 的做法：下载 + 校验，防篡改 release 被静默执行）。
+# 版本只此一处 pin（下载 + sha256 校验，校验失败即中止，不降级成「用旧的」）。
 set -euo pipefail
 
 PAGEFIND_VERSION=1.6.0
@@ -195,33 +198,22 @@ ensure_org
 emacs_run -Q --batch -L "$ORG_DIR" --eval "(progn (require 'org) (princ (format \"toolchain: emacs %s / org %s (%s)\\n\" emacs-version (org-version) (locate-library \"org\"))))"
 # org/ 就是内容真源（2026-10 迁移完成，content/ 已下线）：直接改 org/*.org，构建读的就是它。
 # content/ 与转换期脚本（md2org.py / migrate.py）留在 git 历史里，工作区不再有。
-# 导出日志同时落盘：下面的严格模式要按日志里的具体信号判定，不能靠重跑或猜。
-BUILD_LOG=$(mktemp)
-trap 'rm -f "$BUILD_LOG"' EXIT
+# 导出日志不再落盘也不用 tee：没有消费者了（严格模式改在 elisp 里判定，
+# 见下面「严格模式」那段的注释）。输出直进 CI 日志。
 set +e
-emacs_run -Q --batch -L "$ORG_DIR" -l scripts/org2site/build.el org "$OUT" </dev/null 2>&1 | tee "$BUILD_LOG"
-EXPORT_RC=${PIPESTATUS[0]}
+emacs_run -Q --batch -L "$ORG_DIR" -l scripts/org2site/build.el org "$OUT" </dev/null 2>&1
+EXPORT_RC=$?
 set -e
 if [ "$EXPORT_RC" -ne 0 ]; then
   echo "org2site 导出失败（上面有 FAIL / backtrace）；中止，避免把残缺产物当成构建成功" >&2
   exit 1
 fi
 
-# ── 严格模式（CI 里开 ORG2SITE_STRICT=1）──────────────────────────────────
-# 这两类问题以前只在日志里打一行字，构建照样绿：一篇文章静默不上线（无日期 → 跳过）、
-# 一个写错的站内引用静默退成纯文本，没人盯日志就永远发现不了。基线都是 0，开了不会卡住现状。
-if [ -n "${ORG2SITE_STRICT:-}" ]; then
-  strict_hit=0
-  if grep -q "wikilink 未解析" "$BUILD_LOG"; then
-    echo "严格模式：有未解析的 wikilink（样例见上），构建失败" >&2
-    strict_hit=1
-  fi
-  if grep -q "have no usable #+DATE" "$BUILD_LOG"; then
-    echo "严格模式：有无日期被跳过的页面（清单见上），构建失败 —— 这类页面不会上线" >&2
-    strict_hit=1
-  fi
-  [ "$strict_hit" -eq 0 ] || exit 1
-fi
+# ── 严格模式（CI 里开 ORG2SITE_STRICT=1）──────────────────────────────
+# 判定与退出码都在 build.el 里（同一个进程算完 unresolved / nodate 再决定），
+# 这里只信上面的 $EXPORT_RC。**不要**改回「grep 构建日志里的中文文案」：
+# 判据一旦和产出分处两个进程，改一句日志措辞就会让闸门静默失效 ——
+# 该红的时候永远不红，而 CI 照旧报告构建成功（2026-11-27 改）。
 
 echo "== 2/4 PageFind 搜索索引"
 ensure_pagefind

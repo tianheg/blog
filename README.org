@@ -4,7 +4,7 @@
 个人博客站点 - [[https://tianheg.co/][tianheg.co]]
 
 #+begin_quote
-*2026-10-18：已换成 org + Emacs 管线，Hugo 下线。* 构建 =bash scripts/org2site/build.sh [输出目录]= 四步：预检（=node scripts/check.mjs unicode=）→ emacs 导出 → PageFind 索引 → =verify.py= 体检；emacs 30.1 与 PageFind 由 build.sh 自装，只有预检那一步需要 node。部署仍是 push → CF Workers Builds。
+*2026-10-18：已换成 org + Emacs 管线，Hugo 下线。* 构建 =bash scripts/org2site/build.sh [输出目录]= 四步：预检（=node scripts/check.mjs unicode=）→ emacs 导出 → PageFind 索引 → =verify.py= 体检；emacs 31.1 / org 9.8.10 与 PageFind 由 build.sh 自装（都带 sha256 校验），只有预检那一步需要 node。部署仍是 push → CF Workers Builds。
 
 Hugo 时代的模板 / 配色 / 字号旧记录 / 链路悬浮预览 / 站点变更记录已移到 =docs/HISTORY.org=；管线的完整知识（含坑清单与验收方法）在技能 =blog-org2site=。
 #+end_quote
@@ -58,10 +58,11 @@ blog/
 | 部署     | Cloudflare Workers                  | =wrangler.jsonc= 的 =build.command= 调 =build.sh=；只走 CF Workers Builds，本地不跑 wrangler |
 
 ** 环境要求
-| 依赖     | 版本              | 说明                                                                                                                                          |
-|----------+-------------------+-----------------------------------------------------------------------------------------------------------------------------------------------|
-| Emacs    | 30.1              | =build.sh= 自己提供（micronamba + conda-forge 装到 =~/.cache/org2site/=，不依赖系统包）------ CI 镜像里没有 emacs，本机是 Debian 的 emacs-nox |
-| PageFind | 1.5.2（extended） | 同上，=build.sh= 下载 + 校验 sha256 后缓存到 =~/.cache/org2site/=                                                                             |
+| 依赖     | 版本              | 说明                                                                                                    |
+|----------+-------------------+---------------------------------------------------------------------------------------------------------|
+| Emacs    | 31.1              | =build.sh= 从 R2 下载本仓库自建的 tarball（源为 GNU 官方源码，pin sha256）解到 =~/.cache/org2site/= |
+| org-mode | 9.8.10            | GNU ELPA 官方 tarball，靠 =-L= 覆盖 emacs 自带的 9.8.7                                                  |
+| PageFind | 1.6.0（extended） | =build.sh= 下载 + 校验 sha256 后缓存；中文分词只在 extended 版里                                          |
 
 *首次克隆后什么都不用装*，直接跑构建即可（预检与语义索引这两步要用 node，其余步骤不需要）。
 
@@ -119,6 +120,10 @@ blog/
 =#+DATE:= 是内容页必填项（=posts/= 下缺它的页面会被*跳过不构建*，严格模式下直接让构建失败，
 见「部署」）。语义是*首次入库时间*：新建用当天时间；历史文件取 git 首次提交时间
 （=git log --diff-filter=A --follow=），无 git 历史时回退文件 mtime。
+
+=#+DESCRIPTION:= 可选：一句话摘要，进 =<meta name="description">= 与 =og:description=
+（分享到 Mastodon / Telegram 时链接预览用的就是它）。没写的页面回落到正文纯文本前 160 字，
+不会留空 —— 只是自动摘要可能截在句子中间，重要页面值得手写一句。
 
 *** 标签（Tags）
 - =tags= 是唯一的 taxonomy，*语义是栏目级分类*（这篇属于哪个栏目），不是技术关键词（用了哪个工具）
@@ -340,7 +345,9 @@ CF 会按 latin-1 解码，中文全乱码。用途是给阅读器 / 爬虫 / LL
 - *链路*：=git push= → Forgejo → GitHub 镜像（自动）→ **CF Workers Builds 自动构建部署**，
   约 2–4 分钟。*本地绝不跑 wrangler*（=wrangler dev/deploy= 一律不用）
 - *严格模式*：CI 里 =ORG2SITE_STRICT=1= 让两类问题**卡住构建** —— 未解析的 wikilink、
-  缺 =#+DATE:= 被跳过的页面（后者意味着文章静默不上线）。本地不加该变量则不拦
+  缺 =#+DATE:= 被跳过的页面（后者意味着文章静默不上线）。本地不加该变量则不拦。
+  判定与退出码都在 =build.el= 内部（日志里有 =strict: unresolved=N nodate=M= 一行），
+  =build.sh= 只信退出码 —— *不要*改回 grep 日志文案，那会让闸门在改措辞后静默失效
 - *预检*：=build.sh= 第 0 步跑 =node scripts/check.mjs unicode= 的 ERROR 级
   （全角括号落在链接语法位会静默吞链接），离线排查可 =ORG2SITE_SKIP_PRECHECK=1= 跳过
 - 验收：=curl -s https://tianheg.co/ | head= 看新内容，或查 =public/= 产物。
