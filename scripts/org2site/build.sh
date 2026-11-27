@@ -38,14 +38,16 @@ EMACS_VERSION=31.1
 EMACS_TARBALL="emacs-${EMACS_VERSION}-linux-x86_64.tar.gz"
 EMACS_URL=${ORG2SITE_EMACS_URL:-"https://pub-d12ed328a9ee45b9ad7336cb78330e98.r2.dev/emacs/${EMACS_TARBALL}"}
 EMACS_SHA256="4150945a24fab5ee7249bf376a6a4dd85f676f2217946bccfc293ed2afb6ea20"
-# org-mode 独立于 emacs 发布：31.1 自带 9.8.7，ELPA 上最新是 9.8.10。
-# 用 ELPA 的 tarball（平铺 .el）覆盖自带的 —— 保证「最新 emacs + 最新 org」，
-# 且 CI 与本地用同一份 org，不受 emacs 打包版本影响。ELPA 不发布 sha256 侧车文件，
-# 所以哈希是本仓库实测后钉住的（TOFU：能防静默变更，不防首次投毒）。
+# org-mode 独立于 emacs 发布：31.1 自带 9.8.7。
+# **不从 GNU ELPA 直取**：ELPA 只保留当前版本，2026-11-27 起 org-9.8.10.tar 已 404
+# （页面只列到 9.8.9），CI 的干净容器每次构建都挂在下载上（exitCode 22），而本地因为
+# ~/.cache/org2site/org-9.8.10/ 已解包，永远命不中这条路 —— 站点静默停在旧版。
+# 改为与 emacs 同一套：由本仓库把该版本源码打包发布到 R2，构建时匿名下载。
+# 打包与上传步骤见 scripts/org2site/README-build-deps.md。
 ORG_VERSION=9.8.10
 ORG_TARBALL="org-${ORG_VERSION}.tar"
-ORG_URL="https://elpa.gnu.org/packages/${ORG_TARBALL}"
-ORG_SHA256="890a9dd5c4f1d279f6ed0b3d10670d796aaccb7fdc71a2a665cd153bec463f1d"
+ORG_URL=${ORG2SITE_ORG_URL:-"https://pub-d12ed328a9ee45b9ad7336cb78330e98.r2.dev/org/${ORG_TARBALL}"}
+ORG_SHA256="8c05ec8b8f4f4b1d81bd1dd58e329b3400df32e76d5092cf30f619a302fb182f"
 
 REPO=$(cd "$(dirname "${BASH_SOURCE[0]}")/../.." && pwd)
 OUT=${1:-"$REPO/public"}
@@ -138,7 +140,7 @@ ensure_org() {
   if [ -f "$ORG_DIR/org.elc" ] && [ -f "$ORG_DIR/org.el" ]; then
     return
   fi
-  echo "装 org-mode ${ORG_VERSION}（GNU ELPA，覆盖 emacs 自带版本）..."
+  echo "装 org-mode ${ORG_VERSION}（本仓库发布到 R2；覆盖 emacs 自带版本）..."
   mkdir -p "$CACHE"
   rm -rf "$ORG_DIR"
   (

@@ -79,6 +79,39 @@ curl -sL "https://pub-d12ed328a9ee45b9ad7336cb78330e98.r2.dev/emacs/emacs-31.1-l
 
 最后把新的 `EMACS_VERSION` / `EMACS_SHA256`（必要时还有 URL）更新到 `build.sh` 顶部，并跑一次全量构建确认产物与升级前**逐文件对比**只有预期差异。
 
+## org-mode 的 tar（不从 ELPA 取）
+
+ELPA 只保留当前版本：`org-9.8.10.tar` 在 2026-11-27 已 404（页面只列到 9.8.9）。CI 是干净
+容器，每次构建都挂在 `装 org-mode`（`exitCode 22`）；而本地因为 `~/.cache/org2site/org-9.8.10/`
+已解包、`ensure_org` 直接 return，**永远命不中这条路** —— 站点会静默停在旧版本。
+
+所以 org 跟 emacs 一样自托管。**升级 org 时**：
+
+1. 先拿到新版本源码（ELPA tar 还活着就直接下，否则用本地已解包的缓存目录）；
+2. 在缓存根目录重打包（**去掉 `.elc`**，`ensure_org` 之后会自己字节编译）：
+
+```bash
+cd ~/.cache/org2site
+tar --exclude='*.elc' -cf /tmp/org-<VER>.tar org-<VER>
+sha256sum /tmp/org-<VER>.tar
+```
+
+3. 上传 —— `--s3-no-check-bucket` **必须有**：这个 token 没有 HeadBucket 权限，rclone 会先
+   尝试 CreateBucket 然后 403（报错信息长得像"桶不存在"，其实桶在）：
+
+```bash
+rclone copyto --s3-no-check-bucket /tmp/org-<VER>.tar s3:blog-build-deps/org/org-<VER>.tar
+curl -sL "https://pub-d12ed328a9ee45b9ad7336cb78330e98.r2.dev/org/org-<VER>.tar" | sha256sum
+```
+
+4. 更新 `build.sh` 的 `ORG_VERSION` / `ORG_SHA256`（URL 由版本号拼出来，一般不用动）；
+5. **跨环境对比**：换一个空的 `ORG2SITE_CACHE` 跑全量构建（可先 `cp -al` 一份 emacs-31.1
+   跳过 215MB 下载），与旧缓存的产物 `diff -rq` —— 预期只有 `index.xml` 的 `lastBuildDate`
+   不同。只验「构建成功」不算验过，org 换版本会改变 EXAMPLE 块等输出。
+
+rclone 的 S3 后端用现成的 `R2_ACCESS_KEY_ID` / `R2_SECRET_ACCESS_KEY` / `R2_ACCOUNT_ID`
+（实测对 `blog-build-deps` 有列与写权限；本文档早先写的「只授权 hermes-agent」已过期）。
+
 ## 踩过的坑
 
 - **`make-string` + `aset` 拼排序键**：`(make-string n ?a)` 会得到 unibyte 串，往里 `aset` 私用区码位在
